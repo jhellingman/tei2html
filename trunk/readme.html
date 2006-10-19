@@ -1,0 +1,42 @@
+<h1>tei2html.xsl</h1>
+
+<p>A Simple XSLT stylesheet to convert TEI documents to HTML.
+
+<p>This stylesheet quite strongly depends on the particular conventions used to mark-up the document, and requires a number of supplementary files.
+
+<p>Use the following commands to process a file:
+
+<p><code>saxon akbar.xml tei2html.xsl &gt; akbar.html</code>
+
+<h2>Localisation</h2>
+
+<p>The stylesheets are localised in Dutch, English, and Spanish. All localized messages are in a file <code>messages.xml</code>. The language used in the result depends on the <code>lang</code> attribute of the toplevel <code>TEI.2</code> tag. If you localise the messages in other languages, please send these to me for inclusion in this distribution.
+
+<h2>CSS Stylesheet</h2>
+
+<p>This stylesheet assumes the CSS-stylesheets <code>gutenberg.css.xml</code> and <code>artic.css.xml</code> are available in a directory <code>/style</code> below the directory where the HTML file resides. These are normal CSS-stylesheets, but are wrapped in a single XML tag, for use with XSLT. The stylesheets are required to display the results, and will, among many other things, move the page numbers and marginal notes into the margin.
+
+<h2>Illustrations</h2>
+
+<p>Illustrations are assumed to named after the <code>//figure/@id</code>, have the <code>.jpg</code> extension and assumed to be located in the <code>/images</code> directory below the directory where the HTML file resides. If this is troublesome, you can add a the string <code>file(<i>url of image</i>)</code> in the <code>rend</code> attribute of the <code>figure</code> element.
+
+<h2>Footnotes</h2>
+
+<p>Footnotes are moved to the end of the <code>div1</code> element they appear in, unless the <code>div1</code> is inside a <code>q</code> element. Footnotes that appear in a <code>div0</code> element are placed at the end of the <code>div0</code> element, but only if it contains no <code>div1</code> elements. This is buggy, and assumes that <code>div0</code> elements are normally not used.
+
+<p>Notes with the <code>place</code> attribute set to <code>margin</code> will be placed in the left margin.
+
+<h2>Calling from XML documents</h2>
+
+<p>To call this style directly from an XML document, include the following lines at the top of your document:
+
+<p><code>&lt;?xml version="1.0"?&gt;</code>
+<br><code>&lt;?xml-stylesheet type="text/xsl" href="style/tei2html.xsl"?&gt;</code>
+
+<h2>Compatibility</h2>
+
+<p>This has been tested with the Saxon XSLT processor, and also seems to work with Internet Explorer 6.0 and the latest Mozilla browsers, although IE doesn't seem to handle spaces correctly in all situations, and Mozilla has an issue with output escaping.
+
+<h2>Comments</h2>
+
+<p>Any comments and questions can be send to Jeroen Hellingman, <a href="mailto:jeroen@bohol.ph">jeroen@bohol.ph</a>.
