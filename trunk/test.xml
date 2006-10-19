@@ -3,6 +3,8 @@
 <!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [ 
 
 <!ENTITY prime "&#x2032;">
+<!ENTITY mdash "&#x2013;">
+
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
 
 ]>
@@ -11,7 +13,7 @@
       <fileDesc>
          <titleStmt>
             <title>Main Title of Work Goes Here</title>
-            <author>Author of Work (Birth-year&#x2013;Death-year)</author>
+            <author>Author of Work (Birth-year&mdash;Death-year)</author>
             <author>A. U. Thor</author>
             <author>W. Riter</author>
             <respStmt>
@@ -25,7 +27,7 @@
             <date>8 April 2004</date>
             <idno type="PGnum">123456789</idno>
             <availability>
-               <p>Details of the copyright status of the work go here. This test file itself is hereby dedicated to the Public Domain.</p>
+               <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 2.0. See <xref url="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
             </availability>
          </publicationStmt>
          <sourceDesc>
@@ -307,7 +309,14 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 <l n="5">This is a rule of verse</l>
 <l n="6" rend="indent(1)">This is another rule of verse</l>
 <l n="7">This is a rule of verse</l>
-<l n="8" rend="indent(10)">This is another rule of verse</l></lg>
+<l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a footnote, the lg element needs to be enclosed with a q element.</p>
+
+<q><text><body><div1>
+<lg type="Group" rend="font(italic)">
+<l>This is a rule of verse in italics</l>
+<l rend="indent(1)">This is another rule of verse</l>
+</lg>
+</div1></body></text></q></note></l></lg>
 
 </div1>
 </div0>

@@ -1421,6 +1421,8 @@
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
+	<!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
+
     <!--====================================================================-->
     <!-- Notes -->
 
@@ -1550,11 +1552,9 @@
         </xsl:if>
     </xsl:template>
 
-
     <xsl:template match="lb">
         <br id="{generate-id()}"/>
     </xsl:template>
-
 
     <xsl:template match="lg|sp">
         <div class="poem">
@@ -1580,7 +1580,6 @@
 
     <xsl:template match="l">
         <p class="line">
-
             <xsl:attribute name="style">
                 <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
                 <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
