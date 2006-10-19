@@ -1,0 +1,440 @@
+<stylesheet>
+<![CDATA[
+
+body
+{
+    font:100%/1.2em "Times New Roman", Times, serif;
+    margin:1.58em 16%;
+    text-align:left;
+}
+
+h1.docTitle
+{
+    font-size:1.6em;
+    line-height:2em;
+}
+
+h2.byline
+{
+    font-size:1.1em;
+    font-weight:normal;
+    line-height:1.44em;
+}
+
+span.docAuthor
+{
+    font-size:1.2em;
+    font-weight:bold;
+}
+
+h2.docImprint
+{
+    font-size:1.2em;
+    font-weight:normal;
+}
+
+.transcribernote
+{
+    background-color:#DDE;
+    border:black 1px dotted;
+    color:#000;
+    font-family:sans-serif;
+    font-size:80%;
+    margin:2em 5%;
+    padding:1em;
+}
+
+.div0
+{
+    padding-bottom:1.6em;
+}
+
+.div1
+{
+    padding-bottom:1.44em;
+}
+
+.div2
+{
+    padding-bottom:1.2em;
+}
+
+.div3,.div4,.div5
+{
+    padding-bottom:1em;
+}
+
+h1,h2,h3,h4,h5,h6
+{
+    clear:both;
+    font-style:normal;
+    text-transform:none;
+}
+
+h3
+{
+    font-size:1.2em;
+    line-height:1.2em;
+}
+
+h3.label
+{
+    font-size:1em;
+    line-height:1.2em;
+    margin-bottom:0;
+}
+
+h4
+{
+    font-size:1em;
+    line-height:1.2em;
+}
+
+h4.lghead
+{
+    margin-left:10%;
+    margin-right:10%;
+}
+
+.alignleft
+{
+    text-align:left;
+}
+
+.alignright
+{
+    text-align:right;
+}
+
+.alignblock
+{
+    text-align:justify;
+}
+
+p.poetry
+{
+    margin:0 10% 1.58em;
+}
+
+p.line
+{
+    margin:0 10%;
+}
+
+p.argument,p.note
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    text-indent:0;
+}
+
+p.argument
+{
+    margin:1.58em 10%;
+}
+
+div.epigraph
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    margin:1.58em 20% 1.58em 0;
+}
+
+.floatLeft
+{
+    float:left;
+    margin:10px 10px 10px 0;
+}
+
+.floatRight
+{
+    float:right;
+    margin:10px 0 10px 10px;
+}
+
+p.figureHead
+{
+    font-size:100%;
+    text-align:center;
+}
+
+.figure p
+{
+    font-size:80%;
+    margin-top:0;
+    text-align:center;
+}
+
+p.smallprint,li.smallprint
+{
+    color:#666666;
+    font-size:80%;
+}
+
+p.question
+{
+    margin-bottom:0;
+    text-align:left;
+}
+
+p.answer
+{
+    margin-top:0;
+    text-align:right;
+}
+
+p.explanation
+{
+    font-size:smaller;
+    margin-left:0.9em;
+    margin-right:0.9em;
+}
+
+.leftnote
+{
+    font-size:0.8em;
+    height:0;
+    left:1%;
+    line-height:1.2em;
+    position:absolute;
+    text-indent:0;
+    width:14%;
+}
+
+.pagenum
+{
+    display:inline;
+    font-size:70%;
+    font-style:normal;
+    margin:0;
+    padding:0;
+    position:absolute;
+    right:1%;
+    text-align:right;
+}
+
+a.noteref
+{
+    font-size: 80%;
+    text-decoration: none;
+    vertical-align: 0.25em;
+}
+
+div.footnotes
+{
+    margin-top: 1em;
+    padding: 0;
+}
+
+hr.fnsep
+{
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    width: 25%;
+}
+
+p.footnote
+{
+    font-size: 80%;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+p.footnote .label
+{
+    float: left;
+    text-align:left;
+    width:2em;
+}
+
+.footnotes td, .footnotes th, .footnotes .tablecaption
+{
+	font-size: 80%;
+}
+
+
+div.poem
+{
+    margin-left:5%;
+    position:relative;
+    text-align:left;
+    width:90%;
+}
+
+.poem h4
+{
+    font-weight:normal;
+    margin-left:5em;
+    text-decoration:underline;
+}
+
+.poem .linenum
+{
+    color:#777;
+    font-size:90%;
+    left:-2.5em;
+    margin:0;
+    position:absolute;
+    text-align:center;
+    text-indent:0;
+    top:auto;
+    width:1.75em;
+}
+
+.versenum
+{
+    font-weight:bold;
+}
+
+.footnotes .line
+{
+    font-size:80%;
+    margin:0 5%;
+}
+
+.poem .i0
+{
+    display:block;
+    margin-left:2em;
+}
+
+.poem .i1
+{
+    display:block;
+    margin-left:3em;
+}
+
+.poem .i2
+{
+    display:block;
+    margin-left:4em;
+}
+
+.poem .i3
+{
+    display:block;
+    margin-left:5em;
+}
+
+.poem .i4
+{
+    display:block;
+    margin-left:6em;
+}
+
+.poem .i5
+{
+    display:block;
+    margin-left:7em;
+}
+
+.poem .i6
+{
+    display:block;
+    margin-left:8em;
+}
+
+.poem .i7
+{
+    display:block;
+    margin-left:9em;
+}
+
+.poem .i8
+{
+    display:block;
+    margin-left:10em;
+}
+
+.poem .i9
+{
+    display:block;
+    margin-left:11em;
+}
+
+span.corr
+{
+    border-bottom:1px dotted red;
+}
+
+span.abbr
+{
+    border-bottom:1px dotted gray;
+}
+
+span.measure
+{
+    border-bottom:1px dotted green;
+}
+
+.letterspaced
+{
+    letter-spacing:0.2em;
+}
+
+.smallcaps
+{
+    font-variant:small-caps;
+}
+
+hr
+{
+    clear:both;
+    height:1px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1em;
+    text-align:center;
+    width:45%;
+}
+
+h2.docImprint,h1.docTitle,h2.byline,h2.docTitle,.aligncenter,div.figure
+{
+    text-align:center;
+}
+
+h1,h2
+{
+    font-size:1.44em;
+    line-height:1.5em;
+}
+
+h1.label,h2.label
+{
+    font-size:1.2em;
+    line-height:1.2em;
+    margin-bottom:0;
+}
+
+h5,h6
+{
+    font-size:1em;
+    font-style:italic;
+    line-height:1em;
+}
+
+p,p.initial
+{
+    text-indent:0;
+}
+
+p.beforeline,p.afterline,.poem .stanza
+{
+    margin-top:1em;
+}
+
+p.quote,div.blockquote,div.argument
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    margin:1.58em 5%;
+}
+
+.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden
+{
+    text-decoration:none;
+}
+
+]]>
+</stylesheet>

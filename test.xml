@@ -1,0 +1,325 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="tei2html.xsl"?>
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [ 
+
+<!ENTITY prime "&#x2032;">
+<!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
+
+]>
+<TEI.2 lang="en-US">
+   <teiHeader lang="en-us" type="text" status="new">
+      <fileDesc>
+         <titleStmt>
+            <title>Main Title of Work Goes Here</title>
+            <author>Author of Work (Birth-year&#x2013;Death-year)</author>
+            <author>A. U. Thor</author>
+            <author>W. Riter</author>
+            <respStmt>
+               <resp>Transcription</resp>
+               <name>Transcribers Name</name>
+            </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>Project Gutenberg</publisher>
+            <pubPlace>Urbana, Illinois, USA.</pubPlace>
+            <date>8 April 2004</date>
+            <idno type="PGnum">123456789</idno>
+            <availability>
+               <p>Details of the copyright status of the work go here. This test file itself is hereby dedicated to the Public Domain.</p>
+            </availability>
+         </publicationStmt>
+         <sourceDesc>
+            <bibl>
+               <author>Author of Work (as appears in source)</author>
+
+               <title>Title of Work (as appears in source)</title>
+
+               <publisher>Publisher of Source</publisher>
+
+               <pubPlace>Place</pubPlace>
+
+               <date>Year of Publication</date>
+            </bibl>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <p>Details of encoding go here. Here you can describe any special conventions used in the text, such as special tags. This is also the place to describe any editorial policy followed when preparing the text.</p>
+      </encodingDesc>
+      <profileDesc>
+         <langUsage>
+            <language id="en-us">U.S. English.</language>
+         </langUsage>
+      </profileDesc>
+      <revisionDesc>
+         <list type="simple">
+            <item>2003-09-13 Added TEI Header.</item>
+         </list>
+      </revisionDesc>
+   </teiHeader>
+<text rend="stylesheet(style/crystal.css)">
+<front>
+<titlePage>
+<docTitle><titlePart>This is a test document</titlePart></docTitle>
+
+<byline>by <docAuthor>Jeroen Hellingman</docAuthor></byline>
+</titlePage>
+
+<divGen id="toc" type="toc"/>
+
+</front>
+<body>
+
+<div0 id="bk01" n="I" type="Book" rend="label(yes)">
+<head>This is a Test Document</head>
+
+<div1 id="ch04" n="IV" type="Chapter" rend="label(yes)">
+<head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
+
+<p>This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
+<hi rend="sc">Small Caps</hi> and some <hi rend="expanded">letterspaced</hi>
+text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
+a note. We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+
+</div1>
+
+<div1 id="ch05" n="V" type="Chapter" rend="label(no)">
+<head type="label" rend="image(images/Ornament.gif)">Chapter V</head>
+<head>Another <hi>Chapter</hi>, Dealing with Tables</head>
+
+<argument><p>This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p></argument>
+
+<p>You may note the small ornament above the chapter heading, which is included using a rend attribute on the head element of this chapter.</p>
+
+<p>In this chapter we generate a table:<note place="foot" n="*">Yet another a footnote.</note></p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI)">
+	<row>
+		<cell rows="2">1 (this cell is actually spanning two rows)</cell>
+		<cell>2 (with a much wider cell, for a change, so that we can verify the result of such wide cells in the output)</cell>
+	</row>
+	<row>
+		<cell>4</cell>
+	</row>
+	<row>
+		<cell>5 (yet another wide cell, just to see how it works out in the result formatting)</cell>
+		<cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
+	</row>
+	<row>
+		<cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote actually is the same as in a cell above!)</cell>
+	</row>
+</table>
+</p>
+
+<p>
+<table>
+	<row>
+		<cell rend="width(25%)">Een Een Een Een Een Een Een Een Een Een Een Een </cell>
+		<cell rend="width(75%)">Twee Twee Twee Twee Twee Twee Twee Twee Twee Twee</cell>
+	</row>
+	<row>
+		<cell>Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie</cell>
+		<cell>Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier</cell>
+	</row>
+</table>
+</p>
+
+
+<p>
+<table rend="width(40%)">
+	<head>Head above table.</head>
+	<row>
+		<cell role="label">Name</cell>	
+		<cell role="label" rend="align(right)">Age</cell>
+	</row>
+	<row>
+		<cell></cell>	
+		<cell role="unit" rend="align(right)">Years</cell>
+	</row>
+	<row>
+		<cell>Jeroen</cell>	
+		<cell rend="align(right)">39</cell>
+	</row>
+	<row>
+		<cell>Rodelyn</cell>	
+		<cell rend="align(right)">29</cell>
+	</row>
+	<row>
+		<cell>Joshua</cell>	
+		<cell rend="align(right)">6</cell>
+	</row>
+	<row>
+		<cell>Raphael</cell>	
+		<cell rend="align(right)">6</cell>
+	</row>
+</table>
+</p>
+
+<p>
+Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.
+</p>
+
+<p>In this section we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint<note n="2" place="foot"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:
+
+</p>
+<p><table rend="width(40%)">
+	<head>Head above table.</head>
+	<row>
+		<cell role="label">Name</cell>	
+		<cell role="label" rend="align(right)">Age</cell>
+	</row>
+	<row>
+		<cell></cell>	
+		<cell role="unit" rend="align(right)">Years</cell>
+	</row>
+	<row>
+		<cell>Jeroen</cell>	
+		<cell rend="align(right)">39</cell>
+	</row>
+	<row>
+		<cell>Rodelyn</cell>	
+		<cell rend="align(right)">29</cell>
+	</row>
+	<row>
+		<cell>Joshua</cell>	
+		<cell rend="align(right)">6</cell>
+	</row>
+	<row>
+		<cell>Raphael</cell>	
+		<cell rend="align(right)">6</cell>
+	</row>
+</table>
+</p>
+</note> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<figure id="test" url="images/test.jpg" rend="">
+	<head>This is the heading</head>
+	<p>This is the description.</p>
+</figure>
+
+<figure id="test1" rend="float(left) image(images/test.jpg) link(images/test.jpg)">
+	<head>Tarsier</head>
+
+	<p>This is a somewhat longer test to verify we can limit the size of an image box.</p>
+</figure>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+<figure id="test2" url="images/test.jpg" rend="float(right) link(http://www.bohol.ph/)">
+	<head>The Philippine Tarsier</head>
+	<figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+</figure>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+<div2>
+<head type="label">Label van sectie</head>
+<head>Test level 2</head>
+
+<p>Dit is een sectie op niveau 2</p>
+
+<list>
+	<item>Een</item>
+	<item>Twee</item>
+	<item>Drie</item>
+	<item>Vier</item>
+	<item>Vijf<pb n="3"/></item>
+	<item>Zes</item>
+	<item><corr sic="Correction in list">Zeven</corr></item>
+	<item>Acht</item>
+	<item>Negen</item>
+	<item>Tien</item>
+</list>
+
+<list rend="columns(2)">
+	<item>Een</item>
+	<item>Twee</item>
+	<item>Drie</item>
+	<item>Vier</item>
+	<item>Vijf</item>
+	<item>Zes</item>
+	<item>Zeven</item>
+	<item>Acht</item>
+	<item>Negen</item>
+	<item>Tien</item>
+</list>
+
+</div2>
+
+
+<p rend="align(left)">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<milestone unit="tb"/>
+
+<p rend="align(right)">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<p rend="align(center)">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">Again Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<note place="foot">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</note>
+</p>
+
+<p>Test of entity declaration: 23&prime; is 23 minutes.</p>
+
+<p>Test of parsed entity: &nl; should look like <abbr expan="namelijk">n.l.</abbr></p>
+
+</div1>
+<pb n="23"/>
+<div1 n="II">
+<head>Tests of poetry</head>
+
+<lg type="Group">
+<l>This is a rule of verse</l>
+<l rend="indent(1)">This is another <pb n="4"/>rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(2)">This is another rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(3)">This is another rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(10)">This is another rule of verse</l></lg>
+
+
+<lg type="Group" rend="font(italic)">
+<l>This is a rule of verse in italics</l>
+<l rend="indent(1)">This is another rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(2)">This is another rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(3)">This is another rule of verse</l>
+<l>This is a rule of verse</l>
+<l rend="indent(10)">This is another rule of verse</l></lg>
+
+
+<lg type="Group" rend="font(italic)">
+<l n="1">This is a rule of verse in italics</l>
+<l n="2" rend="indent(1)">This is another rule of verse</l>
+<l n="3">This is a rule of verse</l>
+<l n="4" rend="indent(1)">This is <corr sic="Correction in verse">another</corr> rule of verse</l>
+<l n="5">This is a rule of verse</l>
+<l n="6" rend="indent(1)">This is another rule of verse</l>
+<l n="7">This is a rule of verse</l>
+<l n="8" rend="indent(10)">This is another rule of verse</l></lg>
+
+</div1>
+</div0>
+</body>
+<back>
+<div1>
+
+<divGen type="Gallery"/>
+
+<divGen type="Colophon"/>
+
+</div1>
+</back>
+</text>
+</TEI.2>
