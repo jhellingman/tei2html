@@ -14,7 +14,7 @@
 
     You can embed this style sheet in the source document with the <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction. This works with IE 6.0 or the latest Mozilla browsers.
 
-    This file is hereby dedicated to the public domain.
+    This file is made available under the GNU General Public License, version 2.0.
 
 -->
 

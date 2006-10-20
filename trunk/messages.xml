@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <?xml-stylesheet type="text/xsl" href="missing-translations.xsl"?>
 <repository  
-	xmlns:msg="http://www.gutenberg.net" 
+	xmlns="http://www.gutenberg.ph/2006/schemas/messages" 
 	version="1.0">
 
 	<messages xml:lang="en">
