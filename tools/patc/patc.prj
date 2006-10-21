@@ -1,0 +1,7 @@
+patc.ttp
+=                  ; list of modules follows...
+PCSTART.O          ; startup code
+patc.c      (pstree.h)
+pstree.c    (pstree.h)
+PCSTDLIB.LIB       ; standard library
+PCTOSLIB.LIB       ; TOS library

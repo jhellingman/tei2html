@@ -1,0 +1,111 @@
+
+patc v1.2.8 -- a little tool to find and replace multiple patterns
+               at the same time.
+
+Introduction
+------------
+patc uses a patfile, in which a set of patterns is specified,
+to chance patterns in the input to other patterns in the output, especially
+useful if you want to chance from different transcriptions.
+
+Usage
+-----
+
+   patc [options] [-p patfile] infile outfile
+
+   options
+       -v       verbose mode
+       -V       very verbose mode
+       -D       debug mode
+       -w       wait for RETURN before returning to shell
+
+   environment variables
+
+   PATCDIR      -- search path for pattern files
+
+   default search path: ".;..;\etc\patc"
+   default patfile: "patc.pat"
+   default extention for pattern files: ".pat"
+
+patc is a pattern conversion tool, that changes patterns in the input
+into other patterns in the output. It is specifically made for entering
+foreign scripts in transcriptions. patc can handle several sets of patterns
+in a file at the same time.
+
+patc scans the text from begin to end for patterns, starting with the first
+not yet used character. Whenever patc finds a pattern, it executes the
+corresponding action. This can be outputting a string, give an message,
+or switch to another set of patterns. When no pattern can be found,
+will output the first letter unchanged, and start searching again with the
+next letter, or if you want that, it will complain about it.
+
+The patterns patc can recognize are given in a patfile. A patfile consists
+of lines, that can be empty (white space or comment), contain a command, or
+a pattern with its corresponding action.
+
+Comment lines start with %, command lines with an @ and a pattern line
+with a ". Every line can end with comment.
+
+Commands:
+  @patterns #         definition of patterns in set # follows
+  @rpatterns #        definition of patterns in set # follows.
+                      if a pattern cannot be found in the input, this
+                      will generate an error message.
+  @end                end of patfile
+
+A pattern line consists of the pattern in between double quotes, an
+action op-code, and optionally a string in between codes as an argument.
+
+Actions:
+  p string            output string
+  # string            output string, use pattern set # from now on.
+  e string            give error message string, forget this pattern.
+  f                   forget this pattern (silently)
+  s                   skip until end of line (including this patten)
+  S string            skip till first char of string
+  B                   skip till closing brace, matching braces)
+  c                   copy until end of line (including this patten)
+  t                   copy a TeX command
+  T                   skip a TeX command
+
+In strings and patterns the following escape codes can be used:
+
+  \t        tab
+  \n        newline
+  \"        double quote
+  \\        backslash
+  \b        backspace
+  \xxx      character xxx octal
+  \dxxx     character xxx decimal
+  \hxx      character xx hexadecimal
+
+Do _not_ use character \000 !
+
+Warning
+-------
+Don't give patterns in alphabetic order. The algorithm used will show its
+worse case performance then.
+
+Wishes for future versions
+--------------------------
+* Include meta-characters, as to decrease the number of patterns.
+  Proposed syntax:
+  @META \C "b" "c" "d" "f" ...           consonants
+  @META \V "a" "e" "i" "o" ...           vowels
+  This is quite difficult, and requires a rethink of the underlying
+  data structures, so it will take some time. Any volunteer?
+* Make it count. (easy too)
+* More actions.
+
+Author
+------
+Jeroen Hellingman.
+'t Zand 2
+4133 TB Vianen
+The Netherlands
+
+Copyright & disclaimer
+----------------------
+This program may be used, copied, and distributed by anyone who feels the
+need, but it is copyrighted by me. This is offered free as it is, I do not
+accept any responsibility when it does not do what you want it to do.
