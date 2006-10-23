@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <?xml-stylesheet type="text/xsl" href="missing-translations.xsl"?>
 <repository  
-	xmlns:x="http://www.gutenberg.ph/2006/schemas/messages" 
+	xmlns:x="http://www.gutenberg.ph/2006/schemas/messages" 	
 	version="1.0">
 
 	<messages xml:lang="en">
@@ -327,6 +327,160 @@
 
 	</messages>
 
+	<!--==#############################################################==-->
+	<!-- French translations -->
+
+
+	<messages xml:lang="fr">
+
+		<message name="msgToc">Table des matières</message>
+		<message name="msgAppendix">Annexe</message>
+		<message name="msgAppendix.n">Annexes</message>
+		<message name="msgBook">Livre</message>
+		<message name="msgBook.n">Livres</message>
+		<message name="msgChapter">Chapitre</message>
+		<message name="msgChapter.n">Chapitres</message>
+		<message name="msgContents">Table des matières</message>
+		<message name="msgFigure">Figure</message>
+		<message name="msgFigure.n">Figures</message>
+		<message name="msgIllustration">Illustration</message>
+		<message name="msgIllustration.n">Illustrations</message>
+		<message name="msgListOfIllustrations">Liste des Illustrations</message>
+		<message name="msgNote">Note</message>
+		<message name="msgNote.n">Notes</message>
+		<message name="msgPage">Page</message>
+		<message name="msgPage.n">Pages</message>
+		<message name="msgParagraph">Paragraphe</message>
+		<message name="msgParagraph.n">Paragraphes</message>
+		<message name="msgPart">Partie</message>
+		<message name="msgPart.n">Parties</message>
+		<message name="msgPlate">Planche</message>
+		<message name="msgPlate.n">Planches</message>
+		<message name="msgSection">Section</message>
+		<message name="msgSection.n">Sections</message>
+		<message name="msgTable">Table</message>
+		<message name="msgTable.n">Tables</message>
+		<message name="msgTableOfContents">Table des matières</message>
+		<message name="msgVolume">Volume</message>
+		<message name="msgVolume.n">Volumes</message>
+		<message name="msgOrnament">Ornement</message>
+		<message name="msgOrnament.n">Ornements</message>
+		<message name="msgNotInSource">Absent de l'original</message>
+		<message name="msgDeleted">Retiré</message>
+
+		<message name="msgCorrection">Correction</message>
+		<message name="msgCorrection.n">Corrections</message>
+		<message name="msgTranscription">Transcription</message>
+		<message name="msgTranscription.n">Transcriptions</message>
+		<message name="msgSource">Original</message>
+		<message name="msgSource.n">Originaux</message>
+		<message name="msgOriginal">Original</message>
+		<message name="msgOriginal.n">Originaux</message>
+		<message name="msgAbbreviation">Abbréviation</message>
+		<message name="msgAbbreviation.n">Abbréviations</message>
+		<message name="msgLocation">Position</message>
+		<message name="msgLocation.n">Positions</message>
+		<message name="msgCorrectionsAppliedToText">Les corrections suivantes ont été effectuées:</message>
+		<message name="msgColophon">Colophon</message>
+		<message name="msgRevisionHistory">Historique des révisions</message>
+		<message name="msgAvailability">Disponibilité</message>
+		<message name="msgEncoding">Encodage</message>
+
+
+		<!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
+
+		<message name="msgColor">Couleur</message>
+
+		<!-- Days and Months -->
+
+		<message name="msgJanuary">Janvier</message>
+		<message name="msgFebruary">Février</message>
+		<message name="msgMarch">Mars</message>
+		<message name="msgApril">Avril</message>
+		<message name="msgMay">Mai</message>
+		<message name="msgJune">Juin</message>
+		<message name="msgJuly">Juillet</message>
+		<message name="msgAugust">Août</message>
+		<message name="msgSeptember">Septembre</message>
+		<message name="msgOctober">Octobre</message>
+		<message name="msgNovember">Novembre</message>
+		<message name="msgDecember">Décembre</message>
+
+		<message name="msgSunday">Dimanche</message>
+		<message name="msgMonday">Lundi</message>
+		<message name="msgTuesday">Mardi</message>
+		<message name="msgWednesday">Mercredi</message>
+		<message name="msgThursday">Jeudi</message>
+		<message name="msgFriday">Vendredi</message>
+		<message name="msgSaturday">Samedi</message>
+
+		<message name="fmtFullDate"><param name="day"/> <param name="date"/> <param name="month"/> <param name="year"/></message>
+
+
+
+		<!-- Language designations: ID's are based on the offical ISO codes -->
+
+		<!-- ISO 639 two letter codes -->
+		<message name="cn">Chinois</message>
+		<message name="de">Allemand</message>
+		<message name="el">Grec</message>
+		<message name="en">Anglais</message>
+		<message name="en-uk">Anglais (Royaume Uni)</message>
+		<message name="en-us">Anglais (États-Unis)</message>
+		<message name="es">Espagnol</message>
+		<message name="fi">Finlandais</message>
+		<message name="fr">Français</message>
+		<message name="it">Italien</message>
+		<message name="ja">Japonais</message>
+		<message name="la">Latin</message>
+		<message name="nl">Néerlandais</message>
+		<message name="pt">Portugais</message>
+		<message name="pt-br">Portugais (Brésil)</message>
+		<message name="pt-pt">Portugais (Portugal)</message>
+		<message name="tl">Tagalog</message>
+
+		<!-- ISO 639 three letter codes -->
+		<message name="ceb">Cebuano</message>
+		<message name="grc">Grec (Ancien)</message>
+
+		<!-- Private extentions -->
+		<message name="nl-1900">Néerlandais (Ancienne orthographe)</message>
+
+
+
+		<!-- Creating a list of items -->
+		<message name="msgAnd">et</message>
+		<message name="msgOr">ou</message>
+
+		<message name="msgListTwo"><param name="first"/> et <param name="second"/></message>
+		<message name="msgListThree"><param name="first"/>, <param name="second"/>, et <param name="third"/></message>
+		<message name="msgListFour"><param name="first"/>, <param name="second"/>, <param name="third"/>, et <param name="fourth"/></message>
+		<message name="msgListEtAL"><param name="first"/>, <param name="second"/>, <param name="third"/>, et al.</message>
+
+
+
+		<!-- PG header and footer stuff -->
+
+		<message name="msgPGHeader">
+			<p>Le livre électronique par le Project Gutenberg de: <i><param name="title"/></i>, par <b><param name="authors"/></b>.</p>
+			<p class="smallprint">Ce livre électronique est destiné à l'usage de tous, gratuitement
+			et pratiquement sans aucune restriction. Vous pouvez le copier, le donner ou le réutiliser
+			selon les termes de la licence du Projet Gutenberg incluse <a href="#license">dans ce livre</a>
+			ou présente en ligne sur <a href='http://www.gutenberg.net/'>www.gutenberg.net</a></p>
+			<p class="smallprint">Titre: <param name="title"/>.</p>
+			<p class="smallprint">Auteur: <param name="authors"/>.</p>
+			<p class="smallprint">Date de publication électronique: <param name="releasedate"/> [EBook Number: <param name="pgnum"/>]</p>
+			<p class="smallprint">Langue: <param name="language"/>.</p>
+			<p class="smallprint">Jeu de caractères d'encodage: UTF-8.</p>
+		</message>
+
+
+
+
+
+	</messages>
+	
+	
 	<!--==#############################################################==-->
 	<!-- German translations -->
 
