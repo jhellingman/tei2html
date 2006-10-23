@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet [
 
     <!ENTITY degrees    "&#176;">
@@ -20,7 +21,9 @@
 
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    version="1.0">
+	xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    version="1.0"
+	>
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -48,7 +51,7 @@
     <xsl:variable name="baselanguage" select="substring-before($language,'-')" />
     <xsl:variable name="defaultlanguage" select="'en'" />
 
-    <xsl:variable name="messages" select="document('messages.xml')/repository"/>
+    <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
 
     <xsl:variable name="strUnitsUsed" select="'Original'"/>
 
@@ -56,7 +59,7 @@
 
     <xsl:template name="GetMessage">
         <xsl:param name="name" select="'msgError'"/>
-        <xsl:variable name="msg" select="$messages/messages/message[@name=$name]"/>
+        <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]"/>
@@ -81,7 +84,7 @@
     <xsl:template name="FormatMessage">
         <xsl:param name="name" select="'msgError'"/>
         <xsl:param name="params"/>
-        <xsl:variable name="msg" select="$messages/messages/message[@name=$name]"/>
+        <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]" mode="formatMessage">
@@ -107,6 +110,13 @@
         </xsl:choose>
     </xsl:template>
 
+	<xsl:template match="msg:message" mode="formatMessage">
+        <xsl:param name="params"/>
+		<xsl:apply-templates mode="formatMessage">
+			<xsl:with-param name="params" select="$params"/>
+		</xsl:apply-templates>
+    </xsl:template>
+
     <xsl:template match="*" mode="formatMessage">
         <xsl:param name="params"/>
             <xsl:copy>
@@ -117,21 +127,7 @@
             </xsl:copy>
     </xsl:template>
 
-    <!--
-    <xsl:template xmlns:msxsl="urn:schemas-microsoft-com:xslt" match="param" mode="formatMessage">
-        <xsl:param name="params"/>
-        <xsl:choose>
-            <xsl:when test="msxsl:node-set($params)/params/param[@name=current()/@name]">
-                <xsl:value-of select="msxsl:node-set($params)/params/param[@name=current()/@name]"/>
-            </xsl:when>
-            <xsl:otherwise>
-                [### <xsl:value-of select="@name"/> ###]
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-    -->
-
-    <xsl:template match="param" mode="formatMessage">
+    <xsl:template match="msg:param" mode="formatMessage">
         <xsl:param name="params"/>
         <xsl:choose>
             <xsl:when test="$params/params/param[@name=current()/@name]">
@@ -142,7 +138,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
 
     <xsl:template match="space" mode="formatMessage">
         <xsl:text> </xsl:text>

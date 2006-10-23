@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
+<!DOCTYPE msg:repository [
+
+    <!ENTITY apos     "&#x2019;"> 
+    <!ENTITY rdquo    "&#x201D;">
+    <!ENTITY ldquo    "&#x201C;">
+    <!ENTITY rsquo    "&#x2019;">
+    <!ENTITY lsquo    "&#x2018;">
+    <!ENTITY mdash    "&#x2014;">
+    <!ENTITY tm       "&#x2122;">
+
+]>
 <?xml-stylesheet type="text/xsl" href="missing-translations.xsl"?>
-<repository  
-	xmlns:x="http://www.gutenberg.ph/2006/schemas/messages" 	
+<msg:repository  
+	xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
 	version="1.0">
 
-	<messages xml:lang="en">
+	<msg:messages xml:lang="en">
 
 		<!-- Localized Messages for Project Gutenberg Ebooks in XML -->
 
@@ -28,236 +39,236 @@
 
 		<!-- Names for parts of a work -->
 
-		<message name="msgToc">Contents</message>
-		<message name="msgAppendix">Appendix</message>
-		<message name="msgAppendix.n">Appendices</message>
-		<message name="msgBook">Book</message>
-		<message name="msgBook.n">Books</message>
-		<message name="msgChapter">Chapter</message>
-		<message name="msgChapter.n">Chapters</message>
-		<message name="msgContents">Contents</message>
-		<message name="msgFigure">Figure</message>
-		<message name="msgFigure.n">Figures</message>
-		<message name="msgIllustration">Illustration</message>
-		<message name="msgIllustration.n">Illustrations</message>
-		<message name="msgListOfIllustrations">List of Illustrations</message>
-		<message name="msgNote">Note</message>
-		<message name="msgNote.n">Notes</message>
-		<message name="msgPage">Page</message>
-		<message name="msgPage.n">Pages</message>
-		<message name="msgParagraph">Paragraph</message>
-		<message name="msgParagraph.n">Paragraphs</message>
-		<message name="msgPart">Part</message>
-		<message name="msgPart.n">Parts</message>
-		<message name="msgPlate">Plate</message>
-		<message name="msgPlate.n">Plates</message>
-		<message name="msgSection">Section</message>
-		<message name="msgSection.n">Sections</message>
-		<message name="msgTable">Table</message>
-		<message name="msgTable.n">Tables</message>
-		<message name="msgTableOfContents">Table of Contents</message>
-		<message name="msgVolume">Volume</message>
-		<message name="msgVolume.n">Volumes</message>
-		<message name="msgOrnament">Ornament</message>
-		<message name="msgOrnament.n">Ornaments</message>
-		<message name="msgNotInSource">Not in source</message>
-		<message name="msgDeleted">Deleted</message>
+		<msg:message name="msgToc">Contents</msg:message>
+		<msg:message name="msgAppendix">Appendix</msg:message>
+		<msg:message name="msgAppendix.n">Appendices</msg:message>
+		<msg:message name="msgBook">Book</msg:message>
+		<msg:message name="msgBook.n">Books</msg:message>
+		<msg:message name="msgChapter">Chapter</msg:message>
+		<msg:message name="msgChapter.n">Chapters</msg:message>
+		<msg:message name="msgContents">Contents</msg:message>
+		<msg:message name="msgFigure">Figure</msg:message>
+		<msg:message name="msgFigure.n">Figures</msg:message>
+		<msg:message name="msgIllustration">Illustration</msg:message>
+		<msg:message name="msgIllustration.n">Illustrations</msg:message>
+		<msg:message name="msgListOfIllustrations">List of Illustrations</msg:message>
+		<msg:message name="msgNote">Note</msg:message>
+		<msg:message name="msgNote.n">Notes</msg:message>
+		<msg:message name="msgPage">Page</msg:message>
+		<msg:message name="msgPage.n">Pages</msg:message>
+		<msg:message name="msgParagraph">Paragraph</msg:message>
+		<msg:message name="msgParagraph.n">Paragraphs</msg:message>
+		<msg:message name="msgPart">Part</msg:message>
+		<msg:message name="msgPart.n">Parts</msg:message>
+		<msg:message name="msgPlate">Plate</msg:message>
+		<msg:message name="msgPlate.n">Plates</msg:message>
+		<msg:message name="msgSection">Section</msg:message>
+		<msg:message name="msgSection.n">Sections</msg:message>
+		<msg:message name="msgTable">Table</msg:message>
+		<msg:message name="msgTable.n">Tables</msg:message>
+		<msg:message name="msgTableOfContents">Table of Contents</msg:message>
+		<msg:message name="msgVolume">Volume</msg:message>
+		<msg:message name="msgVolume.n">Volumes</msg:message>
+		<msg:message name="msgOrnament">Ornament</msg:message>
+		<msg:message name="msgOrnament.n">Ornaments</msg:message>
+		<msg:message name="msgNotInSource">Not in source</msg:message>
+		<msg:message name="msgDeleted">Deleted</msg:message>
 
-		<message name="msgCorrection">Correction</message>
-		<message name="msgCorrection.n">Corrections</message>
-		<message name="msgTranscription">Transcription</message>
-		<message name="msgTranscription.n">Transcriptions</message>
-		<message name="msgSource">Source</message>
-		<message name="msgSource.n">Sources</message>
-		<message name="msgOriginal">Original</message>
-		<message name="msgOriginal.n">Originals</message>
-		<message name="msgAbbreviation">Abbreviation</message>
-		<message name="msgAbbreviation.n">Abbreviations</message>
-		<message name="msgLocation">Location</message>
-		<message name="msgLocation.n">Locations</message>
-		<message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</message>
-		<message name="msgColophon">Colophon</message>
-		<message name="msgRevisionHistory">Revision History</message>
-		<message name="msgAvailability">Availability</message>
-		<message name="msgEncoding">Encoding</message>
+		<msg:message name="msgCorrection">Correction</msg:message>
+		<msg:message name="msgCorrection.n">Corrections</msg:message>
+		<msg:message name="msgTranscription">Transcription</msg:message>
+		<msg:message name="msgTranscription.n">Transcriptions</msg:message>
+		<msg:message name="msgSource">Source</msg:message>
+		<msg:message name="msgSource.n">Sources</msg:message>
+		<msg:message name="msgOriginal">Original</msg:message>
+		<msg:message name="msgOriginal.n">Originals</msg:message>
+		<msg:message name="msgAbbreviation">Abbreviation</msg:message>
+		<msg:message name="msgAbbreviation.n">Abbreviations</msg:message>
+		<msg:message name="msgLocation">Location</msg:message>
+		<msg:message name="msgLocation.n">Locations</msg:message>
+		<msg:message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</msg:message>
+		<msg:message name="msgColophon">Colophon</msg:message>
+		<msg:message name="msgRevisionHistory">Revision History</msg:message>
+		<msg:message name="msgAvailability">Availability</msg:message>
+		<msg:message name="msgEncoding">Encoding</msg:message>
 
 
 		<!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
 
-		<message name="msgColor">Color</message>
-		<message xml:lang="en-uk" name="msgColor">Colour</message>
+		<msg:message name="msgColor">Color</msg:message>
+		<msg:message xml:lang="en-uk" name="msgColor">Colour</msg:message>
 
 
 
 		<!-- Days and Months -->
 
-		<message name="msgJanuary">January</message>
-		<message name="msgFebruary">February</message>
-		<message name="msgMarch">March</message>
-		<message name="msgApril">April</message>
-		<message name="msgMay">May</message>
-		<message name="msgJune">June</message>
-		<message name="msgJuly">July</message>
-		<message name="msgAugust">August</message>
-		<message name="msgSeptember">September</message>
-		<message name="msgOctober">October</message>
-		<message name="msgNovember">November</message>
-		<message name="msgDecember">December</message>
+		<msg:message name="msgJanuary">January</msg:message>
+		<msg:message name="msgFebruary">February</msg:message>
+		<msg:message name="msgMarch">March</msg:message>
+		<msg:message name="msgApril">April</msg:message>
+		<msg:message name="msgMay">May</msg:message>
+		<msg:message name="msgJune">June</msg:message>
+		<msg:message name="msgJuly">July</msg:message>
+		<msg:message name="msgAugust">August</msg:message>
+		<msg:message name="msgSeptember">September</msg:message>
+		<msg:message name="msgOctober">October</msg:message>
+		<msg:message name="msgNovember">November</msg:message>
+		<msg:message name="msgDecember">December</msg:message>
 
-		<message name="msgSunday">Sunday</message>
-		<message name="msgMonday">Monday</message>
-		<message name="msgTuesday">Tuesday</message>
-		<message name="msgWednesday">Wednesday</message>
-		<message name="msgThursday">Thursday</message>
-		<message name="msgFriday">Friday</message>
-		<message name="msgSaturday">Saturday</message>
+		<msg:message name="msgSunday">Sunday</msg:message>
+		<msg:message name="msgMonday">Monday</msg:message>
+		<msg:message name="msgTuesday">Tuesday</msg:message>
+		<msg:message name="msgWednesday">Wednesday</msg:message>
+		<msg:message name="msgThursday">Thursday</msg:message>
+		<msg:message name="msgFriday">Friday</msg:message>
+		<msg:message name="msgSaturday">Saturday</msg:message>
 
-		<message name="fmtFullDate"><param name="day"/>, <param name="date"/> <param name="month"/> <param name="year"/></message>
+		<msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
 
 		<!-- Language designations: ID's are based on the offical ISO codes -->
 
 		<!-- ISO 639 two letter codes -->
-		<message name="cn">Chinese</message>
-		<message name="de">German</message>
-		<message name="el">Greek</message>
-		<message name="en">English</message>
-		<message name="en-uk">English (U.K.)</message>
-		<message name="en-us">English (U.S.)</message>
-		<message name="es">Spanish</message>
-		<message name="fi">Finnish</message>
-		<message name="fr">French</message>
-		<message name="it">Italian</message>
-		<message name="ja">Japanese</message>
-		<message name="la">Latin</message>
-		<message name="nl">Dutch</message>
-		<message name="pt">Portuguese</message>
-		<message name="pt-br">Portugese (Brazil)</message>
-		<message name="pt-pt">Portugese (Portugal)</message>
-		<message name="tl">Tagalog</message>
+		<msg:message name="cn">Chinese</msg:message>
+		<msg:message name="de">German</msg:message>
+		<msg:message name="el">Greek</msg:message>
+		<msg:message name="en">English</msg:message>
+		<msg:message name="en-uk">English (U.K.)</msg:message>
+		<msg:message name="en-us">English (U.S.)</msg:message>
+		<msg:message name="es">Spanish</msg:message>
+		<msg:message name="fi">Finnish</msg:message>
+		<msg:message name="fr">French</msg:message>
+		<msg:message name="it">Italian</msg:message>
+		<msg:message name="ja">Japanese</msg:message>
+		<msg:message name="la">Latin</msg:message>
+		<msg:message name="nl">Dutch</msg:message>
+		<msg:message name="pt">Portuguese</msg:message>
+		<msg:message name="pt-br">Portugese (Brazil)</msg:message>
+		<msg:message name="pt-pt">Portugese (Portugal)</msg:message>
+		<msg:message name="tl">Tagalog</msg:message>
 
 		<!-- ISO 639 three letter codes -->
-		<message name="ceb">Cebuano</message>
-		<message name="grc">Greek (Classical)</message>
+		<msg:message name="ceb">Cebuano</msg:message>
+		<msg:message name="grc">Greek (Classical)</msg:message>
 
 		<!-- Private extentions -->
-		<message name="nl-1900">Dutch (Old Spelling)</message>
+		<msg:message name="nl-1900">Dutch (Old Spelling)</msg:message>
 
 
 
 		<!-- Creating a list of items -->
-		<message name="msgAnd">and</message>
-		<message name="msgOr">or</message>
+		<msg:message name="msgAnd">and</msg:message>
+		<msg:message name="msgOr">or</msg:message>
 
-		<message name="msgListTwo"><param name="first"/> and <param name="second"/></message>
-		<message name="msgListThree"><param name="first"/>, <param name="second"/>, and <param name="third"/></message>
-		<message name="msgListFour"><param name="first"/>, <param name="second"/>, <param name="third"/>, and <param name="fourth"/></message>
-		<message name="msgListEtAL"><param name="first"/>, <param name="second"/>, <param name="third"/>, et al.</message>
+		<msg:message name="msgListTwo"><msg:param name="first"/> and <msg:param name="second"/></msg:message>
+		<msg:message name="msgListThree"><msg:param name="first"/>, <msg:param name="second"/>, and <msg:param name="third"/></msg:message>
+		<msg:message name="msgListFour"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, and <msg:param name="fourth"/></msg:message>
+		<msg:message name="msgListEtAL"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, et al.</msg:message>
 
 
 
 		<!-- PG header and footer stuff -->
 
-		<message name="msgPGHeader">
-			<p>The Project Gutenberg EBook of <i><param name="title"/></i>, by <b><param name="authors"/></b>.</p>
+		<msg:message name="msgPGHeader">
+			<p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
 			<p class="smallprint">This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever.  You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with <a href="#license">this eBook</a> or online at <a href='http://www.gutenberg.net/'>www.gutenberg.net</a></p>
-			<p class="smallprint">Title: <param name="title"/>.</p>
-			<p class="smallprint">Author: <param name="authors"/>.</p>
-			<p class="smallprint">Release Date: <param name="releasedate"/> [EBook Number: <param name="pgnum"/>]</p>
-			<p class="smallprint">Language: <param name="language"/>.</p>
+			<p class="smallprint">Title: <msg:param name="title"/>.</p>
+			<p class="smallprint">Author: <msg:param name="authors"/>.</p>
+			<p class="smallprint">Release Date: <msg:param name="releasedate"/> [EBook Number: <msg:param name="pgnum"/>]</p>
+			<p class="smallprint">Language: <msg:param name="language"/>.</p>
 			<p class="smallprint">Character set encoding: UTF-8.</p>
-		</message>
+		</msg:message>
 
-		<message name="msgPGFooter">
-			<p name="smallprint">End of the Project Gutenberg EBook of <i><param name="title"/></i>, by <b><param name="authors"/></b>.</p>
-			<p class="smallprint">This file should be named <param name="pgnum"/>-h.html or <param name="pgnum"/>-h.zip.</p>
+		<msg:message name="msgPGFooter">
+			<p name="smallprint">End of the Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
+			<p class="smallprint">This file should be named <msg:param name="pgnum"/>-h.html or <msg:param name="pgnum"/>-h.zip.</p>
 			<p class="smallprint">This and all associated files of various formats will be found in:</p>
-			<p class="smallprint">http://www.gutenberg.net/<param name="pgpath"/></p>
-			<p class="smallprint">Produced by <param name="transcriber"/>.</p>
+			<p class="smallprint">http://www.gutenberg.net/<msg:param name="pgpath"/></p>
+			<p class="smallprint">Produced by <msg:param name="transcriber"/>.</p>
 			<p class="smallprint">Updated editions will replace the previous one&#x2014;the old editions will be renamed.</p>
-			<p class="smallprint">Creating the works from public domain print editions means that no one owns a United States copyright in these works, so the Foundation (and you!) can copy and distribute it in the United States without permission and without paying copyright royalties. Special rules, set forth in the General Terms of Use part of this license, apply to copying and distributing Project Gutenberg&#x2122; electronic works to protect the PROJECT GUTENBERG&#x2122; concept and trademark. Project Gutenberg&#x2122; is a registered trademark, and may not be used if you charge for the eBooks, unless you receive specific permission.  If you do not charge anything for copies of this eBook, complying with the rules is very easy. You may use this eBook for nearly any purpose such as creation of derivative works, reports, performances and research.  They may be modified and printed and given away&#x2014;you may do practically ANYTHING with public domain eBooks. Redistribution is subject to the trademark license, especially commercial redistribution.<!-- Note to translators: insert following in your translation here: "For legal reasons the full license has not been translated, and follows here in English." --></p>
-		</message>
+			<p class="smallprint">Creating the works from public domain print editions means that no one owns a United States copyright in these works, so the Foundation (and you!) can copy and distribute it in the United States without permission and without paying copyright royalties. Special rules, set forth in the General Terms of Use part of this license, apply to copying and distributing Project Gutenberg&tm; electronic works to protect the PROJECT GUTENBERG&tm; concept and trademark. Project Gutenberg&tm; is a registered trademark, and may not be used if you charge for the eBooks, unless you receive specific permission.  If you do not charge anything for copies of this eBook, complying with the rules is very easy. You may use this eBook for nearly any purpose such as creation of derivative works, reports, performances and research.  They may be modified and printed and given away&#x2014;you may do practically ANYTHING with public domain eBooks. Redistribution is subject to the trademark license, especially commercial redistribution.<!-- Note to translators: insert following in your translation here: "For legal reasons the full license has not been translated, and follows here in English." --></p>
+		</msg:message>
 
 
 		<!--==#############################################################==-->
 		<!-- Do not translate the following legal text -->
-		<message name="msgPGLicense">
+		<msg:message name="msgPGLicense">
 			<h2 id="license">THE FULL PROJECT GUTENBERG LICENSE</h2>
 
 			<p class="smallprint">PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK</p>
 
-			<p class="smallprint">To protect the Project Gutenberg&#x2122; mission of promoting the free distribution of electronic works, by using or distributing this work (or any other work associated in any way with the phrase "Project Gutenberg"), you agree to comply with all the terms of the Full Project Gutenberg&#x2122; License (available with this file or online at <a href='http://gutenberg.net/license'>http://gutenberg.net/license</a>).</p>
+			<p class="smallprint">To protect the Project Gutenberg&tm; mission of promoting the free distribution of electronic works, by using or distributing this work (or any other work associated in any way with the phrase &ldquo;Project Gutenberg&rdquo;), you agree to comply with all the terms of the Full Project Gutenberg&tm; License (available with this file or online at <a href='http://gutenberg.net/license'>http://gutenberg.net/license</a>).</p>
 
-			<h3 id="s1" class="smallprint">Section 1.  General Terms of Use and Redistributing Project Gutenberg&#x2122; Electronic Works</h3>
+			<h3 id="s1" class="smallprint">Section 1.  General Terms of Use and Redistributing Project Gutenberg&tm; Electronic Works</h3>
 
-			<p id="s1A" class="smallprint">1.A.  By reading or using any part of this Project Gutenberg&#x2122; electronic work, you indicate that you have read, understand, agree to and accept all the terms of this license and intellectual property (trademark/copyright) agreement.  If you do not agree to abide by all the terms of this agreement, you must cease using and return or destroy all copies of Project Gutenberg&#x2122; electronic works in your possession. If you paid a fee for obtaining a copy of or access to a Project Gutenberg&#x2122; electronic work and you do not agree to be bound by the terms of this agreement, you may obtain a refund from the person or entity to whom you paid the fee as set forth in paragraph <a href="#s1E8">1.E.8.</a></p>
+			<p id="s1A" class="smallprint">1.A.  By reading or using any part of this Project Gutenberg&tm; electronic work, you indicate that you have read, understand, agree to and accept all the terms of this license and intellectual property (trademark/copyright) agreement.  If you do not agree to abide by all the terms of this agreement, you must cease using and return or destroy all copies of Project Gutenberg&tm; electronic works in your possession. If you paid a fee for obtaining a copy of or access to a Project Gutenberg&tm; electronic work and you do not agree to be bound by the terms of this agreement, you may obtain a refund from the person or entity to whom you paid the fee as set forth in paragraph <a href="#s1E8">1.E.8.</a></p>
 
-			<p id="s1B" class="smallprint">1.B.  "Project Gutenberg" is a registered trademark. It may only be used on or associated in any way with an electronic work by people who agree to be bound by the terms of this agreement.  There are a few things that you can do with most Project Gutenberg&#x2122; electronic works even without complying with the full terms of this agreement.  See paragraph <a href="#s1C">1.C</a> below.  There are a lot of things you can do with Project Gutenberg&#x2122; electronic works if you follow the terms of this agreement and help preserve free future access to Project Gutenberg&#x2122; electronic works.  See paragraph <a href="#s1E">1.E</a> below.</p>
+			<p id="s1B" class="smallprint">1.B.  &ldquo;Project Gutenberg&rdquo; is a registered trademark. It may only be used on or associated in any way with an electronic work by people who agree to be bound by the terms of this agreement.  There are a few things that you can do with most Project Gutenberg&tm; electronic works even without complying with the full terms of this agreement.  See paragraph <a href="#s1C">1.C</a> below.  There are a lot of things you can do with Project Gutenberg&tm; electronic works if you follow the terms of this agreement and help preserve free future access to Project Gutenberg&tm; electronic works.  See paragraph <a href="#s1E">1.E</a> below.</p>
 
-			<p id="s1C" class="smallprint">1.C.  The Project Gutenberg Literary Archive Foundation ("the Foundation" or PGLAF), owns a compilation copyright in the collection of Project Gutenberg&#x2122; electronic works.  Nearly all the individual works in the collection are in the public domain in the United States.  If an individual work is in the public domain in the United States and you are located in the United States, we do not claim a right to prevent you from copying, distributing, performing, displaying or creating derivative works based on the work as long as all references to Project Gutenberg are removed.  Of course, we hope that you will support the Project Gutenberg&#x2122; mission of promoting free access to electronic works by freely sharing Project Gutenberg&#x2122; works in compliance with the terms of this agreement for keeping the Project Gutenberg&#x2122; name associated with the work.  You can easily comply with the terms of this agreement by keeping this work in the same format with its attached full Project Gutenberg&#x2122; License when you share it without charge with others.</p>
+			<p id="s1C" class="smallprint">1.C.  The Project Gutenberg Literary Archive Foundation (&ldquo;the Foundation&rdquo; or PGLAF), owns a compilation copyright in the collection of Project Gutenberg&tm; electronic works.  Nearly all the individual works in the collection are in the public domain in the United States.  If an individual work is in the public domain in the United States and you are located in the United States, we do not claim a right to prevent you from copying, distributing, performing, displaying or creating derivative works based on the work as long as all references to Project Gutenberg are removed.  Of course, we hope that you will support the Project Gutenberg&tm; mission of promoting free access to electronic works by freely sharing Project Gutenberg&tm; works in compliance with the terms of this agreement for keeping the Project Gutenberg&tm; name associated with the work.  You can easily comply with the terms of this agreement by keeping this work in the same format with its attached full Project Gutenberg&tm; License when you share it without charge with others.</p>
 
-			<p id="s1D" class="smallprint">1.D.  The copyright laws of the place where you are located also govern what you can do with this work.  Copyright laws in most countries are in a constant state of change.  If you are outside the United States, check the laws of your country in addition to the terms of this agreement before downloading, copying, displaying, performing, distributing or creating derivative works based on this work or any other Project Gutenberg&#x2122; work.  The Foundation makes no representations concerning the copyright status of any work in any country outside the United States.</p>
+			<p id="s1D" class="smallprint">1.D.  The copyright laws of the place where you are located also govern what you can do with this work.  Copyright laws in most countries are in a constant state of change.  If you are outside the United States, check the laws of your country in addition to the terms of this agreement before downloading, copying, displaying, performing, distributing or creating derivative works based on this work or any other Project Gutenberg&tm; work.  The Foundation makes no representations concerning the copyright status of any work in any country outside the United States.</p>
 
 			<p id="s1E" class="smallprint">1.E.  Unless you have removed all references to Project Gutenberg:</p>
 
-			<p id="s1E1" class="smallprint">1.E.1.  The following sentence, with active links to, or other immediate access to, the full Project Gutenberg&#x2122; License must appear prominently whenever any copy of a Project Gutenberg&#x2122; work (any work on which the phrase "Project Gutenberg" appears, or with which the phrase "Project Gutenberg" is associated) is accessed, displayed, performed, viewed, copied or distributed:</p>
+			<p id="s1E1" class="smallprint">1.E.1.  The following sentence, with active links to, or other immediate access to, the full Project Gutenberg&tm; License must appear prominently whenever any copy of a Project Gutenberg&tm; work (any work on which the phrase &ldquo;Project Gutenberg&rdquo; appears, or with which the phrase &ldquo;Project Gutenberg&rdquo; is associated) is accessed, displayed, performed, viewed, copied or distributed:</p>
 
 			<blockquote> <p class="smallprint">This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever.  You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <a href="http://www.gutenberg.net/">www.gutenberg.net</a>.</p> </blockquote>
 
-			<p id="s1E2" class="smallprint">1.E.2.  If an individual Project Gutenberg&#x2122; electronic work is derived from the public domain (does not contain a notice indicating that it is posted with permission of the copyright holder), the work can be copied and distributed to anyone in the United States without paying any fees or charges.  If you are redistributing or providing access to a work with the phrase "Project Gutenberg" associated with or appearing on the work, you must comply either with the requirements of paragraphs 1.E.1 through 1.E.7 or obtain permission for the use of the work and the Project Gutenberg&#x2122; trademark as set forth in paragraphs 1.E.8 or 1.E.9.</p>
+			<p id="s1E2" class="smallprint">1.E.2.  If an individual Project Gutenberg&tm; electronic work is derived from the public domain (does not contain a notice indicating that it is posted with permission of the copyright holder), the work can be copied and distributed to anyone in the United States without paying any fees or charges.  If you are redistributing or providing access to a work with the phrase &ldquo;Project Gutenberg&rdquo; associated with or appearing on the work, you must comply either with the requirements of paragraphs 1.E.1 through 1.E.7 or obtain permission for the use of the work and the Project Gutenberg&tm; trademark as set forth in paragraphs 1.E.8 or 1.E.9.</p>
 
-			<p id="s1E3" class="smallprint">1.E.3.  If an individual Project Gutenberg&#x2122; electronic work is posted with the permission of the copyright holder, your use and distribution must comply with both paragraphs 1.E.1 through 1.E.7 and any additional terms imposed by the copyright holder.  Additional terms will be linked to the Project Gutenberg&#x2122; License for all works posted with the permission of the copyright holder found at the beginning of this work.</p>
+			<p id="s1E3" class="smallprint">1.E.3.  If an individual Project Gutenberg&tm; electronic work is posted with the permission of the copyright holder, your use and distribution must comply with both paragraphs 1.E.1 through 1.E.7 and any additional terms imposed by the copyright holder.  Additional terms will be linked to the Project Gutenberg&tm; License for all works posted with the permission of the copyright holder found at the beginning of this work.</p>
 
-			<p id="s1E4" class="smallprint">1.E.4.  Do not unlink or detach or remove the full Project Gutenberg&#x2122; License terms from this work, or any files containing a part of this work or any other work associated with Project Gutenberg&#x2122;.</p>
+			<p id="s1E4" class="smallprint">1.E.4.  Do not unlink or detach or remove the full Project Gutenberg&tm; License terms from this work, or any files containing a part of this work or any other work associated with Project Gutenberg&tm;.</p>
 
-			<p id="s1E5" class="smallprint">1.E.5.  Do not copy, display, perform, distribute or redistribute this electronic work, or any part of this electronic work, without prominently displaying the sentence set forth in paragraph <a href="#s1E1">1.E.1</a> with active links or immediate access to the full terms of the Project Gutenberg&#x2122; License.</p>
+			<p id="s1E5" class="smallprint">1.E.5.  Do not copy, display, perform, distribute or redistribute this electronic work, or any part of this electronic work, without prominently displaying the sentence set forth in paragraph <a href="#s1E1">1.E.1</a> with active links or immediate access to the full terms of the Project Gutenberg&tm; License.</p>
 
-			<p id="s1E6" class="smallprint">1.E.6.  You may convert to and distribute this work in any binary, compressed, marked up, nonproprietary or proprietary form, including any word processing or hypertext form.  However, if you provide access to or distribute copies of a Project Gutenberg&#x2122; work in a format other than "Plain Vanilla ASCII" or other format used in the official version posted on the official Project Gutenberg&#x2122; web site (www.gutenberg.net), you must, at no additional cost, fee or expense to the user, provide a copy, a means of exporting a copy, or a means of obtaining a copy upon request, of the work in its original "Plain Vanilla ASCII" or other form.  Any alternate format must include the full Project Gutenberg&#x2122; License as specified in paragraph <a href="#s1E1">1.E.1</a>.</p>
+			<p id="s1E6" class="smallprint">1.E.6.  You may convert to and distribute this work in any binary, compressed, marked up, nonproprietary or proprietary form, including any word processing or hypertext form.  However, if you provide access to or distribute copies of a Project Gutenberg&tm; work in a format other than &ldquo;Plain Vanilla ASCII&rdquo; or other format used in the official version posted on the official Project Gutenberg&tm; web site (www.gutenberg.net), you must, at no additional cost, fee or expense to the user, provide a copy, a means of exporting a copy, or a means of obtaining a copy upon request, of the work in its original &ldquo;Plain Vanilla ASCII&rdquo; or other form.  Any alternate format must include the full Project Gutenberg&tm; License as specified in paragraph <a href="#s1E1">1.E.1</a>.</p>
 
-			<p id="s1E7" class="smallprint">1.E.7.  Do not charge a fee for access to, viewing, displaying, performing, copying or distributing any Project Gutenberg&#x2122; works unless you comply with paragraph 1.E.8 or 1.E.9.</p>
+			<p id="s1E7" class="smallprint">1.E.7.  Do not charge a fee for access to, viewing, displaying, performing, copying or distributing any Project Gutenberg&tm; works unless you comply with paragraph 1.E.8 or 1.E.9.</p>
 
-			<p id="s1E8" class="smallprint">1.E.8.  You may charge a reasonable fee for copies of or providing access to or distributing Project Gutenberg&#x2122; electronic works provided that</p>
+			<p id="s1E8" class="smallprint">1.E.8.  You may charge a reasonable fee for copies of or providing access to or distributing Project Gutenberg&tm; electronic works provided that</p>
 
 			<ul>
-			<li class="smallprint">You pay a royalty fee of 20% of the gross profits you derive from the use of Project Gutenberg&#x2122; works calculated using the method you already use to calculate your applicable taxes.  The fee is owed to the owner of the Project Gutenberg&#x2122; trademark, but he has agreed to donate royalties under this paragraph to the Project Gutenberg Literary Archive Foundation.  Royalty payments must be paid within 60 days following each date on which you prepare (or are legally required to prepare) your periodic tax returns.  Royalty payments should be clearly marked as such and sent to the Project Gutenberg Literary Archive Foundation at the address specified in Section 4, "Information about donations to the Project Gutenberg Literary Archive Foundation."</li>
+			<li class="smallprint">You pay a royalty fee of 20% of the gross profits you derive from the use of Project Gutenberg&tm; works calculated using the method you already use to calculate your applicable taxes.  The fee is owed to the owner of the Project Gutenberg&tm; trademark, but he has agreed to donate royalties under this paragraph to the Project Gutenberg Literary Archive Foundation.  Royalty payments must be paid within 60 days following each date on which you prepare (or are legally required to prepare) your periodic tax returns.  Royalty payments should be clearly marked as such and sent to the Project Gutenberg Literary Archive Foundation at the address specified in Section 4, &ldquo;Information about donations to the Project Gutenberg Literary Archive Foundation.&rdquo;</li>
 
-			<li class="smallprint">You provide a full refund of any money paid by a user who notifies you in writing (or by e-mail) within 30 days of receipt that s/he does not agree to the terms of the full Project Gutenberg&#x2122; License.  You must require such a user to return or destroy all copies of the works possessed in a physical medium and discontinue all use of and all access to other copies of Project Gutenberg&#x2122; works.</li>
+			<li class="smallprint">You provide a full refund of any money paid by a user who notifies you in writing (or by e-mail) within 30 days of receipt that s/he does not agree to the terms of the full Project Gutenberg&tm; License.  You must require such a user to return or destroy all copies of the works possessed in a physical medium and discontinue all use of and all access to other copies of Project Gutenberg&tm; works.</li>
 
 			<li class="smallprint">You provide, in accordance with paragraph <a href="#s1F3">1.F.3</a>, a full refund of any money paid for a work or a replacement copy, if a defect in the electronic work is discovered and reported to you within 90 days of receipt of the work.</li>
 
-			<li class="smallprint">You comply with all other terms of this agreement for free distribution of Project Gutenberg&#x2122; works.</li>
+			<li class="smallprint">You comply with all other terms of this agreement for free distribution of Project Gutenberg&tm; works.</li>
 			</ul>
 
-			<p id="s1E9" class="smallprint">1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg&#x2122; electronic work or group of works on different terms than are set forth in this agreement, you must obtain permission in writing from both the Project Gutenberg Literary Archive Foundation and Michael Hart, the owner of the Project Gutenberg&#x2122; trademark.  Contact the Foundation as set forth in <a href="#s3">Section 3</a> below.</p>
+			<p id="s1E9" class="smallprint">1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg&tm; electronic work or group of works on different terms than are set forth in this agreement, you must obtain permission in writing from both the Project Gutenberg Literary Archive Foundation and Michael Hart, the owner of the Project Gutenberg&tm; trademark.  Contact the Foundation as set forth in <a href="#s3">Section 3</a> below.</p>
 
 			<p id="s1F" class="smallprint">1.F.</p>
 
-			<p id="s1F1" class="smallprint">1.F.1.  Project Gutenberg volunteers and employees expend considerable effort to identify, do copyright research on, transcribe and proofread public domain works in creating the Project Gutenberg&#x2122; collection.  Despite these efforts, Project Gutenberg&#x2122; electronic works, and the medium on which they may be stored, may contain "Defects," such as, but not limited to, incomplete, inaccurate or corrupt data, transcription errors, a copyright or other intellectual property infringement, a defective or damaged disk or other medium, a computer virus, or computer codes that damage or cannot be read by your equipment.</p>
+			<p id="s1F1" class="smallprint">1.F.1.  Project Gutenberg volunteers and employees expend considerable effort to identify, do copyright research on, transcribe and proofread public domain works in creating the Project Gutenberg&tm; collection.  Despite these efforts, Project Gutenberg&tm; electronic works, and the medium on which they may be stored, may contain &ldquo;Defects,&rdquo; such as, but not limited to, incomplete, inaccurate or corrupt data, transcription errors, a copyright or other intellectual property infringement, a defective or damaged disk or other medium, a computer virus, or computer codes that damage or cannot be read by your equipment.</p>
 
-			<p id="s1F2" class="smallprint">1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the "Right of Replacement or Refund" described in paragraph <a href="#s1F3">1.F.3</a>, the Project Gutenberg Literary Archive Foundation, the owner of the Project Gutenberg&#x2122; trademark, and any other party distributing a Project Gutenberg&#x2122; electronic work under this agreement, disclaim all liability to you for damages, costs and expenses, including legal fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE PROVIDED IN PARAGRAPH F3.  YOU AGREE THAT THE FOUNDATION, THE TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+			<p id="s1F2" class="smallprint">1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the &ldquo;Right of Replacement or Refund&rdquo; described in paragraph <a href="#s1F3">1.F.3</a>, the Project Gutenberg Literary Archive Foundation, the owner of the Project Gutenberg&tm; trademark, and any other party distributing a Project Gutenberg&tm; electronic work under this agreement, disclaim all liability to you for damages, costs and expenses, including legal fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE PROVIDED IN PARAGRAPH F3.  YOU AGREE THAT THE FOUNDATION, THE TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH DAMAGE.</p>
 
 			<p id="s1F3" class="smallprint">1.F.3.  LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a defect in this electronic work within 90 days of receiving it, you can receive a refund of the money (if any) you paid for it by sending a written explanation to the person you received the work from.  If you received the work on a physical medium, you must return the medium with your written explanation.  The person or entity that provided you with the defective work may elect to provide a replacement copy in lieu of a refund.  If you received the work electronically, the person or entity providing it to you may choose to give you a second opportunity to receive the work electronically in lieu of a refund.  If the second copy is also defective, you may demand a refund in writing without further opportunities to fix the problem.</p>
 
-			<p id="s1F4" class="smallprint">1.F.4. Except for the limited right of replacement or refund set forth in paragraph 1.F.3, this work is provided to you 'AS-IS," WITH NO OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.</p>
+			<p id="s1F4" class="smallprint">1.F.4. Except for the limited right of replacement or refund set forth in paragraph 1.F.3, this work is provided to you &ldquo;AS-IS,&rdquo; WITH NO OTHER WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.</p>
 
 			<p id="s1F5" class="smallprint">1.F.5. Some states do not allow disclaimers of certain implied warranties or the exclusion or limitation of certain types of damages. If any disclaimer or limitation set forth in this agreement violates the law of the state applicable to this agreement, the agreement shall be interpreted to make the maximum disclaimer or limitation permitted by the applicable state law.  The invalidity or unenforceability of any provision of this agreement shall not void the remaining provisions.</p>
 
-			<p id="s1F6" class="smallprint">1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the trademark owner, any agent or employee of the Foundation, anyone providing copies of Project Gutenberg&#x2122; electronic works in accordance with this agreement, and any volunteers associated with the production, promotion and distribution of Project Gutenberg&#x2122; electronic works, harmless from all liability, costs and expenses, including legal fees, that arise directly or indirectly from any of the following which you do or cause to occur: (<i>a</i>) distribution of this or any Project Gutenberg&#x2122; work, (<i>b</i>) alteration, modification, or additions or deletions to any Project Gutenberg&#x2122; work, and (<i>c</i>) any Defect you cause.</p>
+			<p id="s1F6" class="smallprint">1.F.6. INDEMNITY - You agree to indemnify and hold the Foundation, the trademark owner, any agent or employee of the Foundation, anyone providing copies of Project Gutenberg&tm; electronic works in accordance with this agreement, and any volunteers associated with the production, promotion and distribution of Project Gutenberg&tm; electronic works, harmless from all liability, costs and expenses, including legal fees, that arise directly or indirectly from any of the following which you do or cause to occur: (<i>a</i>) distribution of this or any Project Gutenberg&tm; work, (<i>b</i>) alteration, modification, or additions or deletions to any Project Gutenberg&tm; work, and (<i>c</i>) any Defect you cause.</p>
 
 
-			<h3 id="s2">Section  2.  Information about the Mission of Project Gutenberg&#x2122;</h3>
+			<h3 id="s2">Section  2.  Information about the Mission of Project Gutenberg&tm;</h3>
 
-			<p class="smallprint">Project Gutenberg&#x2122; is synonymous with the free distribution of electronic works in formats readable by the widest variety of computers including obsolete, old, middle-aged and new computers.  It exists because of the efforts of hundreds of volunteers and donations from people in all walks of life.</p>
+			<p class="smallprint">Project Gutenberg&tm; is synonymous with the free distribution of electronic works in formats readable by the widest variety of computers including obsolete, old, middle-aged and new computers.  It exists because of the efforts of hundreds of volunteers and donations from people in all walks of life.</p>
 
-			<p class="smallprint">Volunteers and financial support to provide volunteers with the assistance they need, is critical to reaching Project Gutenberg&#x2122;'s goals and ensuring that the Project Gutenberg&#x2122; collection will remain freely available for generations to come.  In 2001, the Project Gutenberg Literary Archive Foundation was created to provide a secure and permanent future for Project Gutenberg&#x2122; and future generations. To learn more about the Project Gutenberg Literary Archive Foundation and how your efforts and donations can help, see Sections 3 and 4 and the Foundation web page at <a href="http://www.pglaf.org/">http://www.pglaf.org</a>.</p>
+			<p class="smallprint">Volunteers and financial support to provide volunteers with the assistance they need, is critical to reaching Project Gutenberg&tm;&apos;s goals and ensuring that the Project Gutenberg&tm; collection will remain freely available for generations to come.  In 2001, the Project Gutenberg Literary Archive Foundation was created to provide a secure and permanent future for Project Gutenberg&tm; and future generations. To learn more about the Project Gutenberg Literary Archive Foundation and how your efforts and donations can help, see Sections 3 and 4 and the Foundation web page at <a href="http://www.pglaf.org/">http://www.pglaf.org</a>.</p>
 
 
 			<h3 id="s3">Section 3.  Information about the Project Gutenberg Literary Archive Foundation</h3>
 
-			<p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non profit 501(c)(3) educational corporation organized under the laws of the state of Mississippi and granted tax exempt status by the Internal Revenue Service.  The Foundation's EIN or federal tax identification number is 64-6221541.  Its 501(c)(3) letter is posted at <a href="http://pglaf.org/fundraising">http://pglaf.org/fundraising</a>.  Contributions to the Project Gutenberg Literary Archive Foundation are tax deductible to the full extent permitted by U.S. federal laws and your state's laws.</p>
+			<p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non profit 501(c)(3) educational corporation organized under the laws of the state of Mississippi and granted tax exempt status by the Internal Revenue Service.  The Foundation&apos;s EIN or federal tax identification number is 64-6221541.  Its 501(c)(3) letter is posted at <a href="http://pglaf.org/fundraising">http://pglaf.org/fundraising</a>.  Contributions to the Project Gutenberg Literary Archive Foundation are tax deductible to the full extent permitted by U.S. federal laws and your state&apos;s laws.</p>
 
-			<p class="smallprint">The Foundation's principal office is located at 4557 Melan Dr. S. Fairbanks, AK, 99712., but its volunteers and employees are scattered throughout numerous locations.  Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email business@pglaf.org.  Email contact links and up to date contact information can be found at the Foundation's web site and official page at <a href="http://pglaf.org/">http://pglaf.org</a>.</p>
+			<p class="smallprint">The Foundation&apos;s principal office is located at 4557 Melan Dr. S. Fairbanks, AK, 99712., but its volunteers and employees are scattered throughout numerous locations.  Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email business@pglaf.org.  Email contact links and up to date contact information can be found at the Foundation&apos;s web site and official page at <a href="http://pglaf.org/">http://pglaf.org</a>.</p>
 
 			<p class="smallprint">For additional contact information:</p>
 
@@ -269,7 +280,7 @@
 				
 			<h3 id="s4">Section 4.  Information about Donations to the Project Gutenberg Literary Archive Foundation</h3>
 
-			<p class="smallprint">Project Gutenberg&#x2122; depends upon and cannot survive without wide spread public support and donations to carry out its mission of increasing the number of public domain and licensed works that can be freely distributed in machine readable form accessible by the widest array of equipment including outdated equipment.  Many small donations ($1 to $5,000) are particularly important to maintaining tax exempt status with the IRS.</p>
+			<p class="smallprint">Project Gutenberg&tm; depends upon and cannot survive without wide spread public support and donations to carry out its mission of increasing the number of public domain and licensed works that can be freely distributed in machine readable form accessible by the widest array of equipment including outdated equipment.  Many small donations ($1 to $5,000) are particularly important to maintaining tax exempt status with the IRS.</p>
 
 			<p class="smallprint">The Foundation is committed to complying with the laws regulating charities and charitable donations in all 50 states of the United States.  Compliance requirements are not uniform and it takes a considerable effort, much paperwork and many fees to meet and keep up with these requirements.  We do not solicit donations in locations where we have not received written confirmation of compliance.  To SEND DONATIONS or determine the status of compliance for any particular state visit <a href="http://pglaf.org/">http://pglaf.org</a>.</p>
 
@@ -279,13 +290,13 @@
 
 			<p class="smallprint">Please check the Project Gutenberg Web pages for current donation methods and addresses.  Donations are accepted in a number of other ways including including checks, online payments and credit card donations.  To donate, please visit: <a href="http://pglaf.org/donate">http://pglaf.org/donate</a>.</p>
 
-			<h3 id="s5">Section 5.  General Information About Project Gutenberg&#x2122; Electronic Works.</h3>
+			<h3 id="s5">Section 5.  General Information About Project Gutenberg&tm; Electronic Works.</h3>
 
-			<p class="smallprint">Professor Michael S. Hart is the originator of the Project Gutenberg&#x2122; concept of a library of electronic works that could be freely shared with anyone.  For thirty years, he produced and distributed Project Gutenberg&#x2122; eBooks with only a loose network of volunteer support.</p>
+			<p class="smallprint">Professor Michael S. Hart is the originator of the Project Gutenberg&tm; concept of a library of electronic works that could be freely shared with anyone.  For thirty years, he produced and distributed Project Gutenberg&tm; eBooks with only a loose network of volunteer support.</p>
 
-			<p class="smallprint">Project Gutenberg&#x2122; eBooks are often created from several printed editions, all of which are confirmed as Public Domain in the U.S. unless a copyright notice is included.  Thus, we do not necessarily keep eBooks in compliance with any particular paper edition.</p>
+			<p class="smallprint">Project Gutenberg&tm; eBooks are often created from several printed editions, all of which are confirmed as Public Domain in the U.S. unless a copyright notice is included.  Thus, we do not necessarily keep eBooks in compliance with any particular paper edition.</p>
 
-			<p class="smallprint">Each eBook is in a subdirectory of the same number as the eBook's eBook number, often in several formats including plain vanilla ASCII, compressed (zipped), HTML and others.</p>
+			<p class="smallprint">Each eBook is in a subdirectory of the same number as the eBook&apos;s eBook number, often in several formats including plain vanilla ASCII, compressed (zipped), HTML and others.</p>
 
 			<p class="smallprint">Corrected EDITIONS of our eBooks replace the old file and take over the old filename and etext number.  The replaced older file is renamed. VERSIONS based on separate sources are treated as new eBooks receiving new filenames and etext numbers.</p>
 
@@ -295,7 +306,7 @@
 			<p class="smallprint"><a href="http://www.gutenberg.net/">http://www.gutenberg.net</a></p>
 			</blockquote>
 
-			<p class="smallprint">This Web site includes information about Project Gutenberg&#x2122;, including how to make donations to the Project Gutenberg Literary Archive Foundation, how to help produce our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
+			<p class="smallprint">This Web site includes information about Project Gutenberg&tm;, including how to make donations to the Project Gutenberg Literary Archive Foundation, how to help produce our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
 
 			<p class="smallprint">EBooks posted prior to November 2003, with eBook numbers BELOW #10000, are filed in directories based on their release date.  If you want to download any of these eBooks directly, rather than using the regular search system you may utilize the following addresses and just download by the etext year.</p>
 
@@ -323,415 +334,415 @@
 			<blockquote>
 			<p class="smallprint">http://www.gutenberg.net/GUTINDEX.ALL</p>
 			</blockquote>
-		</message>
+		</msg:message>
 
-	</messages>
+	</msg:messages>
 
 	<!--==#############################################################==-->
 	<!-- French translations -->
 
 
-	<messages xml:lang="fr">
+	<msg:messages xml:lang="fr">
 
-		<message name="msgToc">Table des matières</message>
-		<message name="msgAppendix">Annexe</message>
-		<message name="msgAppendix.n">Annexes</message>
-		<message name="msgBook">Livre</message>
-		<message name="msgBook.n">Livres</message>
-		<message name="msgChapter">Chapitre</message>
-		<message name="msgChapter.n">Chapitres</message>
-		<message name="msgContents">Table des matières</message>
-		<message name="msgFigure">Figure</message>
-		<message name="msgFigure.n">Figures</message>
-		<message name="msgIllustration">Illustration</message>
-		<message name="msgIllustration.n">Illustrations</message>
-		<message name="msgListOfIllustrations">Liste des Illustrations</message>
-		<message name="msgNote">Note</message>
-		<message name="msgNote.n">Notes</message>
-		<message name="msgPage">Page</message>
-		<message name="msgPage.n">Pages</message>
-		<message name="msgParagraph">Paragraphe</message>
-		<message name="msgParagraph.n">Paragraphes</message>
-		<message name="msgPart">Partie</message>
-		<message name="msgPart.n">Parties</message>
-		<message name="msgPlate">Planche</message>
-		<message name="msgPlate.n">Planches</message>
-		<message name="msgSection">Section</message>
-		<message name="msgSection.n">Sections</message>
-		<message name="msgTable">Table</message>
-		<message name="msgTable.n">Tables</message>
-		<message name="msgTableOfContents">Table des matières</message>
-		<message name="msgVolume">Volume</message>
-		<message name="msgVolume.n">Volumes</message>
-		<message name="msgOrnament">Ornement</message>
-		<message name="msgOrnament.n">Ornements</message>
-		<message name="msgNotInSource">Absent de l'original</message>
-		<message name="msgDeleted">Retiré</message>
+		<msg:message name="msgToc">Table des matières</msg:message>
+		<msg:message name="msgAppendix">Annexe</msg:message>
+		<msg:message name="msgAppendix.n">Annexes</msg:message>
+		<msg:message name="msgBook">Livre</msg:message>
+		<msg:message name="msgBook.n">Livres</msg:message>
+		<msg:message name="msgChapter">Chapitre</msg:message>
+		<msg:message name="msgChapter.n">Chapitres</msg:message>
+		<msg:message name="msgContents">Table des matières</msg:message>
+		<msg:message name="msgFigure">Figure</msg:message>
+		<msg:message name="msgFigure.n">Figures</msg:message>
+		<msg:message name="msgIllustration">Illustration</msg:message>
+		<msg:message name="msgIllustration.n">Illustrations</msg:message>
+		<msg:message name="msgListOfIllustrations">Liste des Illustrations</msg:message>
+		<msg:message name="msgNote">Note</msg:message>
+		<msg:message name="msgNote.n">Notes</msg:message>
+		<msg:message name="msgPage">Page</msg:message>
+		<msg:message name="msgPage.n">Pages</msg:message>
+		<msg:message name="msgParagraph">Paragraphe</msg:message>
+		<msg:message name="msgParagraph.n">Paragraphes</msg:message>
+		<msg:message name="msgPart">Partie</msg:message>
+		<msg:message name="msgPart.n">Parties</msg:message>
+		<msg:message name="msgPlate">Planche</msg:message>
+		<msg:message name="msgPlate.n">Planches</msg:message>
+		<msg:message name="msgSection">Section</msg:message>
+		<msg:message name="msgSection.n">Sections</msg:message>
+		<msg:message name="msgTable">Table</msg:message>
+		<msg:message name="msgTable.n">Tables</msg:message>
+		<msg:message name="msgTableOfContents">Table des matières</msg:message>
+		<msg:message name="msgVolume">Volume</msg:message>
+		<msg:message name="msgVolume.n">Volumes</msg:message>
+		<msg:message name="msgOrnament">Ornement</msg:message>
+		<msg:message name="msgOrnament.n">Ornements</msg:message>
+		<msg:message name="msgNotInSource">Absent de l&apos;original</msg:message>
+		<msg:message name="msgDeleted">Retiré</msg:message>
 
-		<message name="msgCorrection">Correction</message>
-		<message name="msgCorrection.n">Corrections</message>
-		<message name="msgTranscription">Transcription</message>
-		<message name="msgTranscription.n">Transcriptions</message>
-		<message name="msgSource">Original</message>
-		<message name="msgSource.n">Originaux</message>
-		<message name="msgOriginal">Original</message>
-		<message name="msgOriginal.n">Originaux</message>
-		<message name="msgAbbreviation">Abbréviation</message>
-		<message name="msgAbbreviation.n">Abbréviations</message>
-		<message name="msgLocation">Position</message>
-		<message name="msgLocation.n">Positions</message>
-		<message name="msgCorrectionsAppliedToText">Les corrections suivantes ont été effectuées:</message>
-		<message name="msgColophon">Colophon</message>
-		<message name="msgRevisionHistory">Historique des révisions</message>
-		<message name="msgAvailability">Disponibilité</message>
-		<message name="msgEncoding">Encodage</message>
+		<msg:message name="msgCorrection">Correction</msg:message>
+		<msg:message name="msgCorrection.n">Corrections</msg:message>
+		<msg:message name="msgTranscription">Transcription</msg:message>
+		<msg:message name="msgTranscription.n">Transcriptions</msg:message>
+		<msg:message name="msgSource">Original</msg:message>
+		<msg:message name="msgSource.n">Originaux</msg:message>
+		<msg:message name="msgOriginal">Original</msg:message>
+		<msg:message name="msgOriginal.n">Originaux</msg:message>
+		<msg:message name="msgAbbreviation">Abbréviation</msg:message>
+		<msg:message name="msgAbbreviation.n">Abbréviations</msg:message>
+		<msg:message name="msgLocation">Position</msg:message>
+		<msg:message name="msgLocation.n">Positions</msg:message>
+		<msg:message name="msgCorrectionsAppliedToText">Les corrections suivantes ont été effectuées:</msg:message>
+		<msg:message name="msgColophon">Colophon</msg:message>
+		<msg:message name="msgRevisionHistory">Historique des révisions</msg:message>
+		<msg:message name="msgAvailability">Disponibilité</msg:message>
+		<msg:message name="msgEncoding">Encodage</msg:message>
 
 
 		<!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
 
-		<message name="msgColor">Couleur</message>
+		<msg:message name="msgColor">Couleur</msg:message>
 
 		<!-- Days and Months -->
 
-		<message name="msgJanuary">Janvier</message>
-		<message name="msgFebruary">Février</message>
-		<message name="msgMarch">Mars</message>
-		<message name="msgApril">Avril</message>
-		<message name="msgMay">Mai</message>
-		<message name="msgJune">Juin</message>
-		<message name="msgJuly">Juillet</message>
-		<message name="msgAugust">Août</message>
-		<message name="msgSeptember">Septembre</message>
-		<message name="msgOctober">Octobre</message>
-		<message name="msgNovember">Novembre</message>
-		<message name="msgDecember">Décembre</message>
+		<msg:message name="msgJanuary">Janvier</msg:message>
+		<msg:message name="msgFebruary">Février</msg:message>
+		<msg:message name="msgMarch">Mars</msg:message>
+		<msg:message name="msgApril">Avril</msg:message>
+		<msg:message name="msgMay">Mai</msg:message>
+		<msg:message name="msgJune">Juin</msg:message>
+		<msg:message name="msgJuly">Juillet</msg:message>
+		<msg:message name="msgAugust">Août</msg:message>
+		<msg:message name="msgSeptember">Septembre</msg:message>
+		<msg:message name="msgOctober">Octobre</msg:message>
+		<msg:message name="msgNovember">Novembre</msg:message>
+		<msg:message name="msgDecember">Décembre</msg:message>
 
-		<message name="msgSunday">Dimanche</message>
-		<message name="msgMonday">Lundi</message>
-		<message name="msgTuesday">Mardi</message>
-		<message name="msgWednesday">Mercredi</message>
-		<message name="msgThursday">Jeudi</message>
-		<message name="msgFriday">Vendredi</message>
-		<message name="msgSaturday">Samedi</message>
+		<msg:message name="msgSunday">Dimanche</msg:message>
+		<msg:message name="msgMonday">Lundi</msg:message>
+		<msg:message name="msgTuesday">Mardi</msg:message>
+		<msg:message name="msgWednesday">Mercredi</msg:message>
+		<msg:message name="msgThursday">Jeudi</msg:message>
+		<msg:message name="msgFriday">Vendredi</msg:message>
+		<msg:message name="msgSaturday">Samedi</msg:message>
 
-		<message name="fmtFullDate"><param name="day"/> <param name="date"/> <param name="month"/> <param name="year"/></message>
+		<msg:message name="fmtFullDate"><msg:param name="day"/> <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
 
 		<!-- Language designations: ID's are based on the offical ISO codes -->
 
 		<!-- ISO 639 two letter codes -->
-		<message name="cn">Chinois</message>
-		<message name="de">Allemand</message>
-		<message name="el">Grec</message>
-		<message name="en">Anglais</message>
-		<message name="en-uk">Anglais (Royaume Uni)</message>
-		<message name="en-us">Anglais (États-Unis)</message>
-		<message name="es">Espagnol</message>
-		<message name="fi">Finlandais</message>
-		<message name="fr">Français</message>
-		<message name="it">Italien</message>
-		<message name="ja">Japonais</message>
-		<message name="la">Latin</message>
-		<message name="nl">Néerlandais</message>
-		<message name="pt">Portugais</message>
-		<message name="pt-br">Portugais (Brésil)</message>
-		<message name="pt-pt">Portugais (Portugal)</message>
-		<message name="tl">Tagalog</message>
+		<msg:message name="cn">Chinois</msg:message>
+		<msg:message name="de">Allemand</msg:message>
+		<msg:message name="el">Grec</msg:message>
+		<msg:message name="en">Anglais</msg:message>
+		<msg:message name="en-uk">Anglais (Royaume Uni)</msg:message>
+		<msg:message name="en-us">Anglais (États-Unis)</msg:message>
+		<msg:message name="es">Espagnol</msg:message>
+		<msg:message name="fi">Finlandais</msg:message>
+		<msg:message name="fr">Français</msg:message>
+		<msg:message name="it">Italien</msg:message>
+		<msg:message name="ja">Japonais</msg:message>
+		<msg:message name="la">Latin</msg:message>
+		<msg:message name="nl">Néerlandais</msg:message>
+		<msg:message name="pt">Portugais</msg:message>
+		<msg:message name="pt-br">Portugais (Brésil)</msg:message>
+		<msg:message name="pt-pt">Portugais (Portugal)</msg:message>
+		<msg:message name="tl">Tagalog</msg:message>
 
 		<!-- ISO 639 three letter codes -->
-		<message name="ceb">Cebuano</message>
-		<message name="grc">Grec (Ancien)</message>
+		<msg:message name="ceb">Cebuano</msg:message>
+		<msg:message name="grc">Grec (Ancien)</msg:message>
 
 		<!-- Private extentions -->
-		<message name="nl-1900">Néerlandais (Ancienne orthographe)</message>
+		<msg:message name="nl-1900">Néerlandais (Ancienne orthographe)</msg:message>
 
 
 
 		<!-- Creating a list of items -->
-		<message name="msgAnd">et</message>
-		<message name="msgOr">ou</message>
+		<msg:message name="msgAnd">et</msg:message>
+		<msg:message name="msgOr">ou</msg:message>
 
-		<message name="msgListTwo"><param name="first"/> et <param name="second"/></message>
-		<message name="msgListThree"><param name="first"/>, <param name="second"/>, et <param name="third"/></message>
-		<message name="msgListFour"><param name="first"/>, <param name="second"/>, <param name="third"/>, et <param name="fourth"/></message>
-		<message name="msgListEtAL"><param name="first"/>, <param name="second"/>, <param name="third"/>, et al.</message>
+		<msg:message name="msgListTwo"><msg:param name="first"/> et <msg:param name="second"/></msg:message>
+		<msg:message name="msgListThree"><msg:param name="first"/>, <msg:param name="second"/>, et <msg:param name="third"/></msg:message>
+		<msg:message name="msgListFour"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, et <msg:param name="fourth"/></msg:message>
+		<msg:message name="msgListEtAL"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, et al.</msg:message>
 
 
 
 		<!-- PG header and footer stuff -->
 
-		<message name="msgPGHeader">
-			<p>Le livre électronique par le Project Gutenberg de: <i><param name="title"/></i>, par <b><param name="authors"/></b>.</p>
-			<p class="smallprint">Ce livre électronique est destiné à l'usage de tous, gratuitement
+		<msg:message name="msgPGHeader">
+			<p>Le livre électronique par le Project Gutenberg de: <i><msg:param name="title"/></i>, par <b><msg:param name="authors"/></b>.</p>
+			<p class="smallprint">Ce livre électronique est destiné à l&apos;usage de tous, gratuitement
 			et pratiquement sans aucune restriction. Vous pouvez le copier, le donner ou le réutiliser
 			selon les termes de la licence du Projet Gutenberg incluse <a href="#license">dans ce livre</a>
 			ou présente en ligne sur <a href='http://www.gutenberg.net/'>www.gutenberg.net</a></p>
-			<p class="smallprint">Titre: <param name="title"/>.</p>
-			<p class="smallprint">Auteur: <param name="authors"/>.</p>
-			<p class="smallprint">Date de publication électronique: <param name="releasedate"/> [EBook Number: <param name="pgnum"/>]</p>
-			<p class="smallprint">Langue: <param name="language"/>.</p>
-			<p class="smallprint">Jeu de caractères d'encodage: UTF-8.</p>
-		</message>
+			<p class="smallprint">Titre: <msg:param name="title"/>.</p>
+			<p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
+			<p class="smallprint">Date de publication électronique: <msg:param name="releasedate"/> [EBook Number: <msg:param name="pgnum"/>]</p>
+			<p class="smallprint">Langue: <msg:param name="language"/>.</p>
+			<p class="smallprint">Jeu de caractères d&apos;encodage: UTF-8.</p>
+		</msg:message>
 
 
 
 
 
-	</messages>
+	</msg:messages>
 	
 	
 	<!--==#############################################################==-->
 	<!-- German translations -->
 
 
-	<messages xml:lang="de">
-		<message name="msgFigure">Tafel</message>
-		<message name="msgPart">Teil</message>
-		<message name="msgBook">Buch</message>
-		<message name="msgTableOfContents">Inhalt</message>
-		<message name="msgAppendix">Appendix</message>
-		<message name="msgPage">Seite</message>
-		<message name="msgChapter">Kapitel</message>
-		<message name="msgAnd">und</message>
-		<message name="msgListOfIllustrations">Liste der Tafeln</message>
-	</messages>
+	<msg:messages xml:lang="de">
+		<msg:message name="msgFigure">Tafel</msg:message>
+		<msg:message name="msgPart">Teil</msg:message>
+		<msg:message name="msgBook">Buch</msg:message>
+		<msg:message name="msgTableOfContents">Inhalt</msg:message>
+		<msg:message name="msgAppendix">Appendix</msg:message>
+		<msg:message name="msgPage">Seite</msg:message>
+		<msg:message name="msgChapter">Kapitel</msg:message>
+		<msg:message name="msgAnd">und</msg:message>
+		<msg:message name="msgListOfIllustrations">Liste der Tafeln</msg:message>
+	</msg:messages>
 	
 
 	<!--==#############################################################==-->
 	<!-- Dutch translation -->
 
-	<messages xml:lang="nl">
+	<msg:messages xml:lang="nl">
 
 		<!-- Names for parts of a work -->
 
-		<message name="msgToc">Inhoud</message>
-		<message name="msgAppendix">Appendix</message>
-		<message name="msgAppendix.n">Appendices</message>
-		<message name="msgBook">Boek</message>
-		<message name="msgBook.n">Boeken</message>
-		<message name="msgChapter">Hoofdstuk</message>
-		<message name="msgChapter.n">Hoofdstukken</message>
-		<message name="msgContents">Inhoud</message>
-		<message name="msgFigure">Figuur</message>
-		<message name="msgFigure.n">Figuren</message>
-		<message name="msgIllustration">Illustratie</message>
-		<message name="msgIllustration.n">Illustraties</message>
-		<message name="msgListOfIllustrations">Lijst van Illustraties</message>
-		<message name="msgNote">Noot</message>
-		<message name="msgNote.n">Noten</message>
-		<message name="msgPage">Bladzijde</message>
-		<message name="msgPage.n">Bladzijden</message>
-		<message name="msgParagraph">Alinea</message>
-		<message name="msgParagraph.n">Alineas</message>
-		<message name="msgPart">Deel</message>
-		<message name="msgPart.n">Delen</message>
-		<message name="msgPlate">Plaat</message>
-		<message name="msgPlate.n">Platen</message>
-		<message name="msgSection">Sectie</message>
-		<message name="msgSection.n">Secties</message>
-		<message name="msgTable">Tabel</message>
-		<message name="msgTable.n">Tabellen</message>
-		<message name="msgTableOfContents">Inhoudsopgave</message>
-		<message name="msgVolume">Deel</message>
-		<message name="msgVolume.n">Delen</message>
-		<message name="msgOrnament">Ornament</message>
-		<message name="msgOrnament.n">Ornamenten</message>
-		<message name="msgNotInSource">Niet in bron</message>
-		<message name="msgDeleted">Verwijderd</message>
+		<msg:message name="msgToc">Inhoud</msg:message>
+		<msg:message name="msgAppendix">Appendix</msg:message>
+		<msg:message name="msgAppendix.n">Appendices</msg:message>
+		<msg:message name="msgBook">Boek</msg:message>
+		<msg:message name="msgBook.n">Boeken</msg:message>
+		<msg:message name="msgChapter">Hoofdstuk</msg:message>
+		<msg:message name="msgChapter.n">Hoofdstukken</msg:message>
+		<msg:message name="msgContents">Inhoud</msg:message>
+		<msg:message name="msgFigure">Figuur</msg:message>
+		<msg:message name="msgFigure.n">Figuren</msg:message>
+		<msg:message name="msgIllustration">Illustratie</msg:message>
+		<msg:message name="msgIllustration.n">Illustraties</msg:message>
+		<msg:message name="msgListOfIllustrations">Lijst van Illustraties</msg:message>
+		<msg:message name="msgNote">Noot</msg:message>
+		<msg:message name="msgNote.n">Noten</msg:message>
+		<msg:message name="msgPage">Bladzijde</msg:message>
+		<msg:message name="msgPage.n">Bladzijden</msg:message>
+		<msg:message name="msgParagraph">Alinea</msg:message>
+		<msg:message name="msgParagraph.n">Alineas</msg:message>
+		<msg:message name="msgPart">Deel</msg:message>
+		<msg:message name="msgPart.n">Delen</msg:message>
+		<msg:message name="msgPlate">Plaat</msg:message>
+		<msg:message name="msgPlate.n">Platen</msg:message>
+		<msg:message name="msgSection">Sectie</msg:message>
+		<msg:message name="msgSection.n">Secties</msg:message>
+		<msg:message name="msgTable">Tabel</msg:message>
+		<msg:message name="msgTable.n">Tabellen</msg:message>
+		<msg:message name="msgTableOfContents">Inhoudsopgave</msg:message>
+		<msg:message name="msgVolume">Deel</msg:message>
+		<msg:message name="msgVolume.n">Delen</msg:message>
+		<msg:message name="msgOrnament">Ornament</msg:message>
+		<msg:message name="msgOrnament.n">Ornamenten</msg:message>
+		<msg:message name="msgNotInSource">Niet in bron</msg:message>
+		<msg:message name="msgDeleted">Verwijderd</msg:message>
 
-		<message name="msgCorrection">Verbetering</message>
-		<message name="msgCorrection.n">Verbeteringen</message>
-		<message name="msgSource">Bron</message>
-		<message name="msgSource.n">Bronnen</message>
-		<message name="msgTranscription">Transcriptie</message>
-		<message name="msgTranscription.n">Transcripties</message>
-		<message name="msgOriginal">Origineel</message>
-		<message name="msgOriginal.n">Originelen</message>
-		<message name="msgAbbreviation">Afkorting</message>
-		<message name="msgAbbreviation.n">Afkortingen</message>
-		<message name="msgLocation">Plaats</message>
-		<message name="msgLocation.n">Plaatsen</message>
-		<message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</message>
-		<message name="msgColophon">Colofon</message>
-		<message name="msgRevisionHistory">Documentgeschiedenis</message>
-		<message name="msgAvailability">Beschikbaarheid</message>
-		<message name="msgEncoding">Codering</message>
+		<msg:message name="msgCorrection">Verbetering</msg:message>
+		<msg:message name="msgCorrection.n">Verbeteringen</msg:message>
+		<msg:message name="msgSource">Bron</msg:message>
+		<msg:message name="msgSource.n">Bronnen</msg:message>
+		<msg:message name="msgTranscription">Transcriptie</msg:message>
+		<msg:message name="msgTranscription.n">Transcripties</msg:message>
+		<msg:message name="msgOriginal">Origineel</msg:message>
+		<msg:message name="msgOriginal.n">Originelen</msg:message>
+		<msg:message name="msgAbbreviation">Afkorting</msg:message>
+		<msg:message name="msgAbbreviation.n">Afkortingen</msg:message>
+		<msg:message name="msgLocation">Plaats</msg:message>
+		<msg:message name="msgLocation.n">Plaatsen</msg:message>
+		<msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
+		<msg:message name="msgColophon">Colofon</msg:message>
+		<msg:message name="msgRevisionHistory">Documentgeschiedenis</msg:message>
+		<msg:message name="msgAvailability">Beschikbaarheid</msg:message>
+		<msg:message name="msgEncoding">Codering</msg:message>
 
-		<message name="msgColor">Kleur</message>
+		<msg:message name="msgColor">Kleur</msg:message>
 
 		<!-- Days and Months -->
 
-		<message name="msgJanuary">Januari</message>
-		<message name="msgFebruary">Februari</message>
-		<message name="msgMarch">Maart</message>
-		<message name="msgApril">April</message>
-		<message name="msgMay">Mei</message>
-		<message name="msgJune">Juni</message>
-		<message name="msgJuly">Juli</message>
-		<message name="msgAugust">Augustus</message>
-		<message name="msgSeptember">September</message>
-		<message name="msgOctober">Oktober</message>
-		<message name="msgNovember">November</message>
-		<message name="msgDecember">December</message>
+		<msg:message name="msgJanuary">Januari</msg:message>
+		<msg:message name="msgFebruary">Februari</msg:message>
+		<msg:message name="msgMarch">Maart</msg:message>
+		<msg:message name="msgApril">April</msg:message>
+		<msg:message name="msgMay">Mei</msg:message>
+		<msg:message name="msgJune">Juni</msg:message>
+		<msg:message name="msgJuly">Juli</msg:message>
+		<msg:message name="msgAugust">Augustus</msg:message>
+		<msg:message name="msgSeptember">September</msg:message>
+		<msg:message name="msgOctober">Oktober</msg:message>
+		<msg:message name="msgNovember">November</msg:message>
+		<msg:message name="msgDecember">December</msg:message>
 
-		<message name="msgSunday">Zondag</message>
-		<message name="msgMonday">Maandag</message>
-		<message name="msgTuesday">Dinsdag</message>
-		<message name="msgWednesday">Woensdag</message>
-		<message name="msgThursday">Donderdag</message>
-		<message name="msgFriday">Vrijdag</message>
-		<message name="msgSaturday">Zaterdag</message>
+		<msg:message name="msgSunday">Zondag</msg:message>
+		<msg:message name="msgMonday">Maandag</msg:message>
+		<msg:message name="msgTuesday">Dinsdag</msg:message>
+		<msg:message name="msgWednesday">Woensdag</msg:message>
+		<msg:message name="msgThursday">Donderdag</msg:message>
+		<msg:message name="msgFriday">Vrijdag</msg:message>
+		<msg:message name="msgSaturday">Zaterdag</msg:message>
 
-		<message name="fmtFullDate"><param name="day"/>, <param name="date"/> <param name="month"/> <param name="year"/></message>
+		<msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 		<!-- Language designations: ID's are based on the offical ISO codes -->
 
-		<message name="cn">Chinees</message>
-		<message name="ja">Japans</message>
-		<message name="pt">Portugees</message>
-		<message name="pt-pt">Portugees (Portugal)</message>
-		<message name="pt-br">Portugees (Brazilië)</message>
-		<message name="en">Engels</message>
-		<message name="en-us">Engels (V.S.)</message>
-		<message name="en-uk">Engels (V.K.)</message>
-		<message name="nl">Nederlands</message>
-		<message name="nl-1900">Nederlands (Oude Spelling)</message>
-		<message name="es">Spaans</message>
-		<message name="fr">Frans</message>
-		<message name="it">Italiaans</message>
-		<message name="la">Latijn</message>
-		<message name="el">Grieks</message>
-		<message name="grc">Grieks (Klassiek)</message>
-		<message name="tl">Tagalog</message>
-		<message name="ceb">Cebuano</message>
-		<message name="de">Duits</message>
-		<message name="fi">Fins</message>
+		<msg:message name="cn">Chinees</msg:message>
+		<msg:message name="ja">Japans</msg:message>
+		<msg:message name="pt">Portugees</msg:message>
+		<msg:message name="pt-pt">Portugees (Portugal)</msg:message>
+		<msg:message name="pt-br">Portugees (Brazilië)</msg:message>
+		<msg:message name="en">Engels</msg:message>
+		<msg:message name="en-us">Engels (V.S.)</msg:message>
+		<msg:message name="en-uk">Engels (V.K.)</msg:message>
+		<msg:message name="nl">Nederlands</msg:message>
+		<msg:message name="nl-1900">Nederlands (Oude Spelling)</msg:message>
+		<msg:message name="es">Spaans</msg:message>
+		<msg:message name="fr">Frans</msg:message>
+		<msg:message name="it">Italiaans</msg:message>
+		<msg:message name="la">Latijn</msg:message>
+		<msg:message name="el">Grieks</msg:message>
+		<msg:message name="grc">Grieks (Klassiek)</msg:message>
+		<msg:message name="tl">Tagalog</msg:message>
+		<msg:message name="ceb">Cebuano</msg:message>
+		<msg:message name="de">Duits</msg:message>
+		<msg:message name="fi">Fins</msg:message>
 
 		<!-- Creating a list of items -->
-		<message name="msgAnd">en</message>
-		<message name="msgOr">of</message>
+		<msg:message name="msgAnd">en</msg:message>
+		<msg:message name="msgOr">of</msg:message>
 
-		<message name="msgListTwo"><param name="first"/> en <param name="second"/></message>
-		<message name="msgListThree"><param name="first"/>, <param name="second"/> en <param name="third"/></message>
-		<message name="msgListFour"><param name="first"/>, <param name="second"/>, <param name="third"/>, en <param name="fourth"/></message>
-		<message name="msgListEtAL"><param name="first"/>, <param name="second"/>, <param name="third"/>, et al.</message>
+		<msg:message name="msgListTwo"><msg:param name="first"/> en <msg:param name="second"/></msg:message>
+		<msg:message name="msgListThree"><msg:param name="first"/>, <msg:param name="second"/> en <msg:param name="third"/></msg:message>
+		<msg:message name="msgListFour"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, en <msg:param name="fourth"/></msg:message>
+		<msg:message name="msgListEtAL"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, et al.</msg:message>
 
 		<!-- PG header and footer stuff -->
 
-		<message name="msgPGHeader">
-			<p>Het Project Gutenberg EBoek <i><param name="title"/></i>, door <b><param name="authors"/></b>.</p>
+		<msg:message name="msgPGHeader">
+			<p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
 			<p class="smallprint">Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopieeren, weggeven of hergebruiken onder de voorwaarden van de Project Gutenberg Licentie <a href="#license">achterin dit eBoek</a> (Engelstalig) of on-line op <a href='http://www.gutenberg.net/'>www.gutenberg.net</a></p>
-			<p class="smallprint">Titel:  <param name="title"/>.</p>
-			<p class="smallprint">Auteur: <param name="authors"/>.</p>
-			<p class="smallprint">Uitgiftedatum: <param name="releasedate"/> [EBoek Nummer: <param name="pgnum"/>]</p>
-			<p class="smallprint">Taal: <param name="language"/>.</p>
+			<p class="smallprint">Titel:  <msg:param name="title"/>.</p>
+			<p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
+			<p class="smallprint">Uitgiftedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
+			<p class="smallprint">Taal: <msg:param name="language"/>.</p>
 			<p class="smallprint">Character set codering: UTF-8.</p>
-		</message>
+		</msg:message>
 
-		<message name="msgPGFooter">
-			<p name="smallprint">Einde van het Project Gutenberg EBoek <i><param name="title"/></i>, door <b><param name="authors"/></b>.</p>
-			<p class="smallprint">Dit bestand moet <param name="pgnum"/>-h.html of <param name="pgnum"/>-h.zip heten.</p>
+		<msg:message name="msgPGFooter">
+			<p name="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
+			<p class="smallprint">Dit bestand moet <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip heten.</p>
 			<p class="smallprint">Dit en de bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
-			<p class="smallprint">http://www.gutenberg.net/<param name="pgpath"/></p>
-			<p class="smallprint">Geproduceerd door <param name="transcriber"/>.</p>
-			<p class="smallprint">Omdat we werken produceren van gedrukte edities in het publiek domein, betekent dat dat niemand in de Verenigde Staten een auteursrecht op deze werken heeft. De Stichting (en u!) mag deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopi&#x00EB;ren en verspreiden in de Verenigde Staten. Speciale regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopi&#x00EB;ren en verspreiden van Project Gutenberg&#x2122; electronische werken om het PROJECT GUTENBERG&#x2122; concept en merkrecht te beschermen. Project Gutenberg is een geregistreerd merk, en mag niet worden gebruikt als u geld in rekening brent voor kopie&#x00EB;n van dit eBoek. Als u geen geld voor kopi&#x00EB;en van dit eBoek in rekening brengt, dan is het erg makkelijk u aan deze regels te houden. U mag dit eBoek gebruiken voor bijna elke toepassing, zoals het maken van afgeleide werken, voorstellingen, en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;U mag practisch ALLES doen met eBoeken in het publieke domein. Herdistributie, en in het bijzonder commerci&#x00EB;le herdistributie, is onderworpen aan de licentie op het merk. De volledige licentie is om juridische redenen niet vertaald, en volgt hieronder in het Engels.</p>
-		</message>
+			<p class="smallprint">http://www.gutenberg.net/<msg:param name="pgpath"/></p>
+			<p class="smallprint">Geproduceerd door <msg:param name="transcriber"/>.</p>
+			<p class="smallprint">Omdat we werken produceren van gedrukte edities in het publiek domein, betekent dat dat niemand in de Verenigde Staten een auteursrecht op deze werken heeft. De Stichting (en u!) mag deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopi&#x00EB;ren en verspreiden in de Verenigde Staten. Speciale regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopi&#x00EB;ren en verspreiden van Project Gutenberg&tm; electronische werken om het PROJECT GUTENBERG&tm; concept en merkrecht te beschermen. Project Gutenberg is een geregistreerd merk, en mag niet worden gebruikt als u geld in rekening brent voor kopie&#x00EB;n van dit eBoek. Als u geen geld voor kopi&#x00EB;en van dit eBoek in rekening brengt, dan is het erg makkelijk u aan deze regels te houden. U mag dit eBoek gebruiken voor bijna elke toepassing, zoals het maken van afgeleide werken, voorstellingen, en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;U mag practisch ALLES doen met eBoeken in het publieke domein. Herdistributie, en in het bijzonder commerci&#x00EB;le herdistributie, is onderworpen aan de licentie op het merk. De volledige licentie is om juridische redenen niet vertaald, en volgt hieronder in het Engels.</p>
+		</msg:message>
 
-	</messages>
+	</msg:messages>
 
 
 
 	<!--==#############################################################==-->
 	<!-- Spanish translation -->
 
-	<messages xml:lang="es">
+	<msg:messages xml:lang="es">
 
-		<message name="msgAppendix">Appendice</message> 
-		<message name="msgAppendix.n">Appendices</message> 
-		<message name="msgBook">Libro</message>
-		<message name="msgChapter">Capítulo</message> 
-		<message name="msgChapter.n">Capítulos</message> 
-		<message name="msgContents">Contenido</message> 
-		<message name="msgFigure">Figura</message> 
-		<message name="msgFigure.n">Figuras</message> 
-		<message name="msgIllustration">Ilustración</message> 
-		<message name="msgIllustration.n">Ilustraciones</message> 
-		<message name="msgListOfIllustrations">Lista de Ilustraciones</message> 
-		<message name="msgNote">Nota</message> 
-		<message name="msgNote.n">Notas</message> 
-		<message name="msgPage">Página</message> 
-		<message name="msgPage.n">Páginas</message> 
-		<message name="msgParagraph">Párrafo</message> 
-		<message name="msgParagraph.n">Párrafos</message> 
-		<message name="msgPart">Parte</message> 
-		<message name="msgPart.n">Partes</message> 
-		<message name="msgPlate">Lámina</message>  
-		<message name="msgPlate.n">Láminas</message> 
-		<message name="msgSection">Sección</message> 
-		<message name="msgSection.n">Secciones</message> 
-		<message name="msgTable">Tabla</message> 
-		<message name="msgTable.n">Tablas</message> 
-		<message name="msgTableOfContents">Contenido</message> 
-		<message name="msgVolume">Volúmen</message> 
-		<message name="msgVolume.n">Volúmenes</message> 
+		<msg:message name="msgAppendix">Appendice</msg:message> 
+		<msg:message name="msgAppendix.n">Appendices</msg:message> 
+		<msg:message name="msgBook">Libro</msg:message>
+		<msg:message name="msgChapter">Capítulo</msg:message> 
+		<msg:message name="msgChapter.n">Capítulos</msg:message> 
+		<msg:message name="msgContents">Contenido</msg:message> 
+		<msg:message name="msgFigure">Figura</msg:message> 
+		<msg:message name="msgFigure.n">Figuras</msg:message> 
+		<msg:message name="msgIllustration">Ilustración</msg:message> 
+		<msg:message name="msgIllustration.n">Ilustraciones</msg:message> 
+		<msg:message name="msgListOfIllustrations">Lista de Ilustraciones</msg:message> 
+		<msg:message name="msgNote">Nota</msg:message> 
+		<msg:message name="msgNote.n">Notas</msg:message> 
+		<msg:message name="msgPage">Página</msg:message> 
+		<msg:message name="msgPage.n">Páginas</msg:message> 
+		<msg:message name="msgParagraph">Párrafo</msg:message> 
+		<msg:message name="msgParagraph.n">Párrafos</msg:message> 
+		<msg:message name="msgPart">Parte</msg:message> 
+		<msg:message name="msgPart.n">Partes</msg:message> 
+		<msg:message name="msgPlate">Lámina</msg:message>  
+		<msg:message name="msgPlate.n">Láminas</msg:message> 
+		<msg:message name="msgSection">Sección</msg:message> 
+		<msg:message name="msgSection.n">Secciones</msg:message> 
+		<msg:message name="msgTable">Tabla</msg:message> 
+		<msg:message name="msgTable.n">Tablas</msg:message> 
+		<msg:message name="msgTableOfContents">Contenido</msg:message> 
+		<msg:message name="msgVolume">Volúmen</msg:message> 
+		<msg:message name="msgVolume.n">Volúmenes</msg:message> 
 
-		<message name="msgColor">Color</message> 
+		<msg:message name="msgColor">Color</msg:message> 
 
-		<message name="msgJanuary">Enero</message> 
-		<message name="msgFebruary">Febrero</message> 
-		<message name="msgMarch">Marzo</message> 
-		<message name="msgApril">Abril</message> 
-		<message name="msgMay">Mayo</message> 
-		<message name="msgJune">Junio</message> 
-		<message name="msgJuly">Julio</message> 
-		<message name="msgAugust">Agosto</message> 
-		<message name="msgSeptember">Septiembre</message> 
-		<message name="msgOctober">Octubre</message> 
-		<message name="msgNovember">Noviembre</message> 
-		<message name="msgDecember">Diciembre</message> 
+		<msg:message name="msgJanuary">Enero</msg:message> 
+		<msg:message name="msgFebruary">Febrero</msg:message> 
+		<msg:message name="msgMarch">Marzo</msg:message> 
+		<msg:message name="msgApril">Abril</msg:message> 
+		<msg:message name="msgMay">Mayo</msg:message> 
+		<msg:message name="msgJune">Junio</msg:message> 
+		<msg:message name="msgJuly">Julio</msg:message> 
+		<msg:message name="msgAugust">Agosto</msg:message> 
+		<msg:message name="msgSeptember">Septiembre</msg:message> 
+		<msg:message name="msgOctober">Octubre</msg:message> 
+		<msg:message name="msgNovember">Noviembre</msg:message> 
+		<msg:message name="msgDecember">Diciembre</msg:message> 
 
-		<message name="msgSunday">Domingo</message> 
-		<message name="msgMonday">Lunes</message> 
-		<message name="msgTuesday">Martes</message> 
-		<message name="msgWednesday">Miércoles</message> 
-		<message name="msgThursday">Jueves</message> 
-		<message name="msgFriday">Viernes</message> 
-		<message name="msgSaturday">Sabado</message> 
+		<msg:message name="msgSunday">Domingo</msg:message> 
+		<msg:message name="msgMonday">Lunes</msg:message> 
+		<msg:message name="msgTuesday">Martes</msg:message> 
+		<msg:message name="msgWednesday">Miércoles</msg:message> 
+		<msg:message name="msgThursday">Jueves</msg:message> 
+		<msg:message name="msgFriday">Viernes</msg:message> 
+		<msg:message name="msgSaturday">Sabado</msg:message> 
 
-		<message name="en">Inglés</message>
-		<message name="en-us">Inglés</message>
-		<message name="en-uk">Inglés</message> 
-		<message name="nl">Holandés</message>
-		<message name="nl-1900">Holandés (Ortografía Antigua)</message>
-		<message name="es">Español</message> 
-		<message name="fr">Francés</message> 
-		<message name="it">Italiano</message> 
-		<message name="la">Latín</message> 
-		<message name="el">Griego</message> 
-		<message name="grc">Griego (Clásico)</message> 
+		<msg:message name="en">Inglés</msg:message>
+		<msg:message name="en-us">Inglés</msg:message>
+		<msg:message name="en-uk">Inglés</msg:message> 
+		<msg:message name="nl">Holandés</msg:message>
+		<msg:message name="nl-1900">Holandés (Ortografía Antigua)</msg:message>
+		<msg:message name="es">Español</msg:message> 
+		<msg:message name="fr">Francés</msg:message> 
+		<msg:message name="it">Italiano</msg:message> 
+		<msg:message name="la">Latín</msg:message> 
+		<msg:message name="el">Griego</msg:message> 
+		<msg:message name="grc">Griego (Clásico)</msg:message> 
 
-		<message name="msgAnd">y</message>
+		<msg:message name="msgAnd">y</msg:message>
 
-		<message name="msgPGHeader">
-			<p>El texto digital del Proyecto Gutenberg <i><param name="title"/></i>, por <b><param name="authors"/></b>.</p>
+		<msg:message name="msgPGHeader">
+			<p>El texto digital del Proyecto Gutenberg <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
 			<p class="smallprint">Este libro digital es para el uso de cualquier persona en cualquier lugar sin costo y casi sin restricciones de ningún tipo. Lo puede copiar, regalar o volver a usar bajo los términos de la Licencia del Proyecto Gutenberg incluido con <a href="#license">este libro digital</a> o en línea en <a href="http://www.gutenberg.net/">www.gutenberg.net</a> </p>
-			<p class="smallprint">Título: <param name="title"/>.</p>
-			<p class="smallprint">Autor: <param name="authors"/>.</p>
-			<p class="smallprint">Fecha de publicación: <param name="releasedate"/> [Libro digital Número: <param name="pgnum"/>]</p>
-			<p class="smallprint">Idioma: <param name="language"/>.</p>
+			<p class="smallprint">Título: <msg:param name="title"/>.</p>
+			<p class="smallprint">Autor: <msg:param name="authors"/>.</p>
+			<p class="smallprint">Fecha de publicación: <msg:param name="releasedate"/> [Libro digital Número: <msg:param name="pgnum"/>]</p>
+			<p class="smallprint">Idioma: <msg:param name="language"/>.</p>
 			<p class="smallprint">Character set encoding: UTF-8.</p> 
-		</message>
+		</msg:message>
 
-		<message name="msgPGFooter">
-			<p name="smallprint">Fin del libro digital del Proyecto Gutenberg <i><param name="title"/></i>, por <b><param name="authors"/></b>.</p>
-			<p class="smallprint">Este archive debe tener el nombre <param name="pgnum"/>-h.html o <param name="pgnum"/>-h.zip.</p>
+		<msg:message name="msgPGFooter">
+			<p name="smallprint">Fin del libro digital del Proyecto Gutenberg <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
+			<p class="smallprint">Este archive debe tener el nombre <msg:param name="pgnum"/>-h.html o <msg:param name="pgnum"/>-h.zip.</p>
 			<p class="smallprint">Este y todos los archivos asociados de varios formatos se encontrarán en:</p> 
-			<p class="smallprint">http://www.gutenberg.net/<param name="pgpath"/></p>
-			<p class="smallprint">Producido por <param name="transcriber"/>.</p>
+			<p class="smallprint">http://www.gutenberg.net/<msg:param name="pgpath"/></p>
+			<p class="smallprint">Producido por <msg:param name="transcriber"/>.</p>
 			<p class="smallprint">Ediciones actualizadas reemplazarán a la edición previa-a las ediciones anteriores se les darán nombres nuevos.</p> 
-			<p class="smallprint">Creando las obras de ediciones impresas del dominio público significa que nadie es dueño del derecho de autor de estas obras en los Estados Unidos, así que la Fundación (¡y UD.!) puede copiarlas y distribuirlas en los Estados Unidos sin permiso y sin pagar derechos de autor.  Reglas especiales, establecidas en la sección de Términos de Uso Generales de esta licencia, aplican al copiado y distribución de las obras digitales del Proyecto Gutenberg&#x2122; para proteger al concepto y marca registrada del PROYECTO GUTENBERG&#x2122;.  Proyecto Gutenberg&#x2122; es una marca registrada, y no puede ser utilizada si UD. cobra por los libros digitales, al menos que reciba permiso específico. Si no cobra nada por copias de este libro digital, cumplir con las reglas es muy fácil.  Puede usar este libro digital para casi cualquier propósito, así como la creación de obras derivadas, reportes, espectáculos e investigación.  Ellos pueden ser regalados e impresos-UD. puede hacer casi CUALQUIER COSA con los libros digitales del dominio público.  La redistribución es sujeta a la licencia de la marca registrada, especialmente en el caso de redistribución comercial. Por razones legales la licencia completa no ha sido traducida, y se encuentra a continuación en Inglés.</p>
-	</message>
-</messages>
+			<p class="smallprint">Creando las obras de ediciones impresas del dominio público significa que nadie es dueño del derecho de autor de estas obras en los Estados Unidos, así que la Fundación (¡y UD.!) puede copiarlas y distribuirlas en los Estados Unidos sin permiso y sin pagar derechos de autor.  Reglas especiales, establecidas en la sección de Términos de Uso Generales de esta licencia, aplican al copiado y distribución de las obras digitales del Proyecto Gutenberg&tm; para proteger al concepto y marca registrada del PROYECTO GUTENBERG&tm;.  Proyecto Gutenberg&tm; es una marca registrada, y no puede ser utilizada si UD. cobra por los libros digitales, al menos que reciba permiso específico. Si no cobra nada por copias de este libro digital, cumplir con las reglas es muy fácil.  Puede usar este libro digital para casi cualquier propósito, así como la creación de obras derivadas, reportes, espectáculos e investigación.  Ellos pueden ser regalados e impresos-UD. puede hacer casi CUALQUIER COSA con los libros digitales del dominio público.  La redistribución es sujeta a la licencia de la marca registrada, especialmente en el caso de redistribución comercial. Por razones legales la licencia completa no ha sido traducida, y se encuentra a continuación en Inglés.</p>
+	</msg:message>
+</msg:messages>
 
-</repository>
+</msg:repository>

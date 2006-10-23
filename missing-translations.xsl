@@ -1,4 +1,5 @@
 <xsl:transform
+	xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	version="1.0"
 >
@@ -27,21 +28,21 @@
 			</style>
 		</head>
 		<body>
-			<h2>Missing Translations in <xsl:value-of select="//message[@name=$destlang and lang('en')]"/></h2>
+			<h2>Missing Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
 			<table width="100%">
-				<tr><th>Message ID</th><th>Message in <xsl:value-of select="//message[@name=$srclang and lang('en')]"/></th></tr>
-				<xsl:apply-templates select="//message" mode="verify"/>
+				<tr><th>Message ID</th><th>Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th></tr>
+				<xsl:apply-templates select="//msg:message" mode="verify"/>
 			</table>
 		</body>
 	</html>
 	</xsl:template>
 
 
-	<xsl:template match="message" mode="verify">
+	<xsl:template match="msg:message" mode="verify">
 		<xsl:if test="lang($srclang)">
 			<xsl:variable name="name" select="@name"/>
 			<xsl:variable name="value" select="."/>
-			<xsl:if test="not(//message[@name=$name and lang($destlang)])">				
+			<xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">				
 				<tr valign="top">
 					<td class="messageid"><xsl:value-of select="@name"/></td>
 					<xsl:if test="string-length($value) &lt; 2000">
@@ -63,7 +64,7 @@
 	</xsl:template>
 
 
-	<xsl:template match="param" mode="cp">
+	<xsl:template match="msg:param" mode="cp">
 		<span class="param">{<xsl:value-of select="@name"/>}</span>
 	</xsl:template>
 
