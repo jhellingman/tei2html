@@ -22,6 +22,7 @@
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
 	xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+	xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     version="1.0"
 	>
 
@@ -1248,10 +1249,10 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:variable name="width">
-            <xsl:value-of select="substring-before(document($imageInfoFile)/images/image[@path=$file]/@width, 'px')"/>
+            <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@width, 'px')"/>
         </xsl:variable>
         <xsl:variable name="height">
-            <xsl:value-of select="substring-before(document($imageInfoFile)/images/image[@path=$file]/@height, 'px')"/>
+            <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
 
         <img border="0">
@@ -1290,7 +1291,7 @@
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
-                <xsl:value-of select="document($imageInfoFile)/images/image[@path=$file]/@width"/>
+                <xsl:value-of select="document($imageInfoFile)/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
             <xsl:choose>
