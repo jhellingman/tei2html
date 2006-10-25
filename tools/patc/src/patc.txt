@@ -100,12 +100,12 @@ Wishes for future versions
 Author
 ------
 Jeroen Hellingman.
-'t Zand 2
-4133 TB Vianen
+Aletta Jacobsstraat
+3404 XD IJsselstein
 The Netherlands
 
 Copyright & disclaimer
 ----------------------
-This program may be used, copied, and distributed by anyone who feels the
-need, but it is copyrighted by me. This is offered free as it is, I do not
-accept any responsibility when it does not do what you want it to do.
+Copyright, 2006, Jeroen Hellingman
+Released under the GPL, version 2.0.
+
