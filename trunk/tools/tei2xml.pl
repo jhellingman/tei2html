@@ -1,20 +1,14 @@
 # tei2xml.pl -- process a TEI file.
 
-$toolsdir	= "L:\\eLibrary\\Tools";			# location of tools
-$xsldir		= "L:\\eLibrary\\Tools\\Tei2Html";	# location of xsl stylesheets
+$toolsdir	= "L:\\eLibrary\\tools\\tei2html\\tools";	# location of tools
+$patcdir    = "L:\\eLibrary\\tools\\tei2html\\tools\\patc\\transcriptions";	# location of patc transcription files.
+$xsldir		= "L:\\eLibrary\\tools\\tei2html";	# location of xsl stylesheets
 $tmpdir		= "C:\\Temp";						# place to drop temporary files
 $catalog	= "C:\\Bin\\pubtext\\CATALOG";		# location of SGML catalog (required for nsgmls and sx)
 
-# new structure for tools directory:
-#
-#	tools
-#	tools/
-#   tools/tei2html
-#   
-
+#==============================================================================
 
 $filename = $ARGV[0];
-
 
 if ($filename eq "")
 {
@@ -40,6 +34,7 @@ else
 
 
 
+
 sub processFile
 {
 	my $filename = shift;
@@ -62,7 +57,7 @@ sub processFile
 	if ($containsGreek == 0) 
 	{
 		print "Converting Greek transcription...\n";
-		system ("patc -p $toolsdir/greek/gr2sgml.pat $currentname tmp.a");
+		system ("patc -p $patcdir/greek/gr2sgml.pat $currentname tmp.a");
 		$currentname = "tmp.a";
 	}
 
@@ -71,7 +66,7 @@ sub processFile
 	if ($containsAssamese == 0) 
 	{
 		print "Converting Assamese transcription...\n";
-		system ("patc -p $toolsdir/indic/as2ucs.pat $currentname tmp.b");
+		system ("patc -p $patcdir/indic/as2ucs.pat $currentname tmp.b");
 		$currentname = "tmp.b";
 	}
 
@@ -80,7 +75,7 @@ sub processFile
 	if ($containsArabic == 0) 
 	{
 		print "Converting Arabic transcription...\n";
-		system ("patc -p $toolsdir/arabic/ar2sgml.pat $currentname tmp.c");
+		system ("patc -p $patcdir/arabic/ar2sgml.pat $currentname tmp.c");
 		$currentname = "tmp.c";
 	}
 
@@ -89,7 +84,7 @@ sub processFile
 	if ($containsHebrew == 0) 
 	{
 		print "Converting Hebrew transcription...\n";
-		system ("patc -p $toolsdir/hebrew/he2sgml.pat $currentname tmp.d");
+		system ("patc -p $patcdir/hebrew/he2sgml.pat $currentname tmp.d");
 		$currentname = "tmp.d";
 	}
 
@@ -98,7 +93,7 @@ sub processFile
 	if ($containsTagalog == 0) 
 	{
 		print "Converting Tagalog (Baybayin) transcription...\n";
-		system ("patc -p $toolsdir/Tagalog/Tagalog.pat $currentname tmp.e");
+		system ("patc -p $patcdir/tagalog/tagalog.pat $currentname tmp.e");
 		$currentname = "tmp.e";
 	}
 
@@ -107,7 +102,7 @@ sub processFile
 	if ($containsTagalog == 0) 
 	{
 		print "Converting Tamil transcription...\n";
-		system ("patc -p $toolsdir/Indic/tm2ucs.pat $currentname tmp.f");
+		system ("patc -p $patcdir/indic/tm2ucs.pat $currentname tmp.f");
 		$currentname = "tmp.f";
 	}
 
@@ -135,7 +130,7 @@ sub processFile
 		system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
 	}
 
-	# Since the XSLT processor cannot find files easily, we have to provide it with a full path in a parameter.
+	# Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.
 	$fileImageParam = "";
 	if (-f "imageinfo.xml") 
 	{
