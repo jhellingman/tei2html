@@ -1,0 +1,28 @@
+In the explanation (chapter 9) for Devangari script, you suggest to use U+0952 DEVANGARI STRESS SIGN ANUDATTA after to represent the Sindhi implosive consonants, written in Devanagari script with a bar below ja, ga, ba, and da. I think this usage will unnecessarily complicate and confuse text processing in Sindhi in Devanagari script. Especially sorting text and converting text from Arabic to Devanagari script (which could happen with some regularity, as Sindhi is written in both scripts) will be complicated.
+
+The reason is that Anudatta is originally conceived as a stress mark that applies to an entire syllable in Devangari script, and hence is expected to appear after a complete syllable (that is, after vowel signs, etc.), whereas the bar below in Sindhi is a modification of the base Devanagari letter, which people would expect to appear directly after the letter, much like the nukta does.
+
+My suggestion is to use (and suggest in the relevant documentation of the Unicode standard) the bar below accent from the general punctuation block for this usage instead. Similarly, ring-under accents, etc. that appear in some orthographies of Indian languages can be used in that way.
+
+
+
+AS	Assamese 
+BN	Bengali
+GU	Gujarati
+HI	Hindi  
+KN	Kannada  
+KS	Kashmiri  
+ML	Malayalam  
+MR	Marathi 
+NE	Nepali 
+OR	Oriya  
+PA	Punjabi  
+SA	Sanskrit  
+SD	Sindhi  
+TA	Tamil  
+TE	Telugu 
+UR	Urdu  
+
+
+BO	Tibetan  
+DZ	Bhutani  

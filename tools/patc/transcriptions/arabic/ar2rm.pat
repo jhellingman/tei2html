@@ -1,0 +1,131 @@
+% ar2rm.pat -- patterns to translate Yannis Haralambous' transcription of
+% Arabic, Persian, etc. to Roman Transcription. (quick and dirty hack)
+
+@patterns 0
+
+"<AR>"      1 "<AR>"
+"</AR>"     e "</AR> in Roman mode!!!"
+
+@rpatterns 1
+
+"&"     2 "&"       % copy entity.
+
+"</AR>"     0 "</AR>"
+"<AR>"      e "<AR> om Arabic mode!!!"
+
+"\n"    p "\n"
+" "     p " "
+"."     p "."
+","     p ","
+";"     p ";"
+"?"     p "?"
+
+"0"     p "0"
+"1"     p "1"
+"2"     p "2"
+"3"     p "3"
+"4"     p "4"
+"5"     p "5"
+"6"     p "6"
+"7"     p "7"
+"8"     p "8"
+"9"     p "9"
+
+"-"     f       % hyphen disambiguates encoding, should dissappear
+
+"A"     p "&amacr;"
+"'a"        p "&amacr;"
+"'i"        p "&amacr;"
+"'A"        p "&amacr;"
+"\"A"       p "&amacr;"
+"b"     p "b"
+"=b"        p "b"
+"0b"        p "b"
+"t"     p "t"
+"0t"        p "t"
+"th"        p "th"
+"0th"       p "th"
+"p"     p "p"
+"0p"        p "p"
+"j"     p "j"
+"0j"        p "j"
+"H"     p "&hdotb;"
+"kh"        p "kh"
+"0kh"       p "kh"
+"ch"        p "ch"
+"0ch"       p "ch"
+"d"     p "d"
+"dh"        p "dh"
+"0dh"       p "dh"
+"r"     p "r"
+"z"     p "z"
+"0z"        p "z"
+"zh"        p "zh"
+"0zh"       p "zh"
+"s"     p "s"
+"sh"        p "sh"
+"0sh"       p "sh"
+"*sh"       p "sh"
+"S"     p "&sdotb;"
+"*S"        P "&sdotb;"
+"D"     p "&zbar;"
+"0D"        p "&zbar;"
+"T"     p "&tdotb;"
+"Z"     p "&zdotb;"
+"0Z"        p "&zdotb;"
+"`"     p "&ayn;"
+"gh"        p "gh"
+"0gh"       p "gh"
+"f"     p "f"
+"=f"        p "f"
+"0f"        p "f"
+"*f"        p "f"
+"q"     p "q"
+"=q"        p "q"
+"0q"        p "q"
+"*q"        p "q"
+"*Q"        p "q"
+"v"     p "v"
+"k"     p "k"
+"*k"        p "k"
+"g"     p "g"
+"l"     p "g"
+"m"     p "m"
+"n"     p "n"
+"=n"        p "n"
+"0n"        p "n"
+"'n"        p "n"
+"h"     p "h"      % normally typed as -h except when initial
+"\"h"       p "t"
+"0\"h"      p "t"
+"\"t"       p "t"
+"0\"t"      p "t"
+"e"     p "e"
+"U"     p "v"
+"'u"        p "u"
+"I"     p "i"
+"y"     p "y"
+"0y"        p "y"
+"'y"        p "y"
+"||"        p ""
+
+"LLah"      p ""
+"SLh"       p ""
+
+"a"     p "a"
+"i"     p "a"
+"u"     p "a"
+"<>"        p ""
+"a|"        p "a"
+"aN"        p "an"
+"iN"        p "in"
+"uN"        p "un"
+
+@patterns 2 % copy entity in Arabic mode
+
+";"     1 ";"
+
+" "     e "space in entity!!!"
+
+@end
+
