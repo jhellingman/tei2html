@@ -884,7 +884,11 @@
             </xsl:if>
         </xsl:if>
 
-		<div class="div1" id="{generate-id(.)}">
+		<div id="{generate-id(.)}">
+			<xsl:attribute name="class">
+				div1<xsl:if test="@type='Index'"> index</xsl:if>
+			</xsl:attribute>
+
             <xsl:if test="//*[@id='toc']">
                 <!-- If we have an element with id 'toc', include a link to it -->
                 <span class="pagenum">
