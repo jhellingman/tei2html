@@ -69,6 +69,11 @@ h2.docImprint
     padding-top: 4.8em;
 }
 
+.index
+{
+	font-size: 80%;
+}
+
 .div2
 {
     padding-top: 3.6em;
@@ -85,11 +90,11 @@ h2.docImprint
 	padding: 0;
 }
 
-h1,h2,h3,h4,h5,h6
+h1, h2, h3, h4, h5, h6
 {
-    clear:both;
-    font-style:normal;
-    text-transform:none;
+    clear: both;
+    font-style: normal;
+    text-transform: none;
 }
 
 h3
