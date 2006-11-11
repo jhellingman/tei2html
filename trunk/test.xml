@@ -324,6 +324,36 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 </div0>
 </body>
 <back>
+<div1 type="Index">
+<head>Index</head>
+
+<divGen type="IndexToc"/>
+
+<div2>
+<head>A.</head>
+
+<p>A is een aapje.</p>
+
+</div2>
+<div2>
+<head>B.</head>
+
+<p>B is een Boom.</p>
+
+</div2>
+<div2>
+<head>C.</head>
+
+<p>C is een Cent.</p>
+
+</div2>
+<div2>
+<head>D.</head>
+
+<p>D is een Drommedaris.</p>
+
+</div2>
+</div1>
 <div1>
 
 <divGen type="Gallery"/>
