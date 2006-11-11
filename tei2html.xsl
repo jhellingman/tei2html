@@ -640,6 +640,29 @@
         </xsl:if>
     </xsl:template>
 
+	<!-- Special short table of contents for indexes -->
+
+	<xsl:template match="divGen[@type='IndexToc']">
+		<xsl:call-template name="genindextoc"/>
+	</xsl:template>
+
+	<xsl:template name="genindextoc">
+		<div class="transcribernote">
+			<div style="text-align: center">
+				<xsl:apply-templates select="../div2/head" mode="genindextoc"/> 
+			</div>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="head" mode="genindextoc">
+		<xsl:if test="position() != 1">
+			<xsl:text> | </xsl:text>
+		</xsl:if>
+		<a href="#{generate-id()}">
+			<xsl:value-of select="substring-before(., '.')"/>
+		</a>
+	</xsl:template>
+
 
     <!-- Suppress notes in table of contents (to avoid getting them twice) -->
 
@@ -895,6 +918,7 @@
                     [<a href="#{generate-id(//*[@id='toc'])}"><xsl:value-of select="$strToc"/></a>]
                 </span>
             </xsl:if>
+
 			<xsl:call-template name="GenerateLabel"/>
 			<xsl:apply-templates/>
 
@@ -909,7 +933,7 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
-        <h2>
+        <h2 id="{generate-id(.)}">
             <xsl:if test="@type='label'">
                 <xsl:attribute name="class">label</xsl:attribute>
             </xsl:if>
@@ -930,7 +954,7 @@
 
     <xsl:template match="div2/head">
         <xsl:call-template name="headPicture"/>
-        <h3>
+        <h3 id="{generate-id(.)}">
             <xsl:if test="@type='label'">
                 <xsl:attribute name="class">label</xsl:attribute>
             </xsl:if>
