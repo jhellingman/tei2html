@@ -24,6 +24,13 @@ h1, h2
 	font-weight: normal;
 }
 
+p.byline
+{
+	text-align: center;
+	font-style: italic;
+	margin-bottom: 2em;
+}
+
 .figureHead, .noteref, span.leftnote, p.legend, .versenum
 {
 	color: #660000;

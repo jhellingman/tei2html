@@ -695,10 +695,15 @@
 
     <xsl:template match="hi[@rend='italic']" mode="tochead">
         <i>
-            <xsl:apply-templates  mode="tochead"/>
+            <xsl:apply-templates mode="tochead"/>
         </i>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='sup']" mode="tochead">
+        <sup>
+            <xsl:apply-templates mode="tochead"/>
+        </sup>
+    </xsl:template>
 
     <!-- Generate a gallery of images in an eBook -->
 
@@ -1008,8 +1013,8 @@
     </xsl:template>
 
     <xsl:template match="byline">
-        <p align="left" class="byline">
-            <i><xsl:apply-templates/></i>
+        <p class="byline">
+            <xsl:apply-templates/>
         </p>
     </xsl:template>
 
