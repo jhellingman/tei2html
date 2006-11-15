@@ -19,6 +19,12 @@ h1,	h2,	h3,	h4,	h5,	h6
 	font-family: Verdana, Arial, Helvetica,	sans-serif;
 }
 
+p.byline
+{
+	font-style: italic;
+	margin-bottom: 2em;
+}
+
 .figureHead, .noteref, span.leftnote, p.legend, .versenum
 {
 	color: #001FA4;
