@@ -705,7 +705,11 @@
         </sup>
     </xsl:template>
 
-    <!-- Generate a gallery of images in an eBook -->
+
+    <!--====================================================================-->
+    <!-- Generated Divisions -->
+
+    <!-- Gallery of thumbnail images -->
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
@@ -758,7 +762,7 @@
     </xsl:template>
 
 
-    <!-- Generate a list of corrections in an eBook -->
+    <!-- List of Corrections -->
 
     <xsl:template match="divGen[@type='corr']">
         <h2><xsl:value-of select="$strCorrections"/></h2>
@@ -808,7 +812,7 @@
     </xsl:template>
 
 
-    <!-- Generate a colophon for the eBook -->
+    <!-- Colophon -->
 
     <xsl:template match="divGen[@type='Colophon']">
 		<div class="transcribernote">
@@ -827,6 +831,7 @@
 			<xsl:call-template name="correctionTable"/>
 		</div>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Divisions and Headings -->
@@ -941,6 +946,11 @@
         <h2 id="{generate-id(.)}">
             <xsl:if test="@type='label'">
                 <xsl:attribute name="class">label</xsl:attribute>
+            </xsl:if>
+			<xsl:if test="contains(@rend, 'align(')">
+                <xsl:attribute name="align">
+					<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+				</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </h2>
