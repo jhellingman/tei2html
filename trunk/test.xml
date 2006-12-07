@@ -5,6 +5,13 @@
 <!ENTITY prime "&#x2032;">
 <!ENTITY mdash "&#x2013;">
 
+<!ENTITY ldquo "&#x201C;">
+<!ENTITY rdquo "&#x201D;">
+<!ENTITY eacute "&#x00E9;">
+<!ENTITY apos "&#x2019;">
+
+
+
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
 
 ]>
@@ -91,6 +98,17 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 <head>Another <hi>Chapter</hi>, Dealing with Tables</head>
 
 <argument><p>This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p></argument>
+
+
+<epigraph>
+	<cit lang="fr"><q><lg type="Group"><l>&ldquo;Ils partent; et loin d&apos;eux repoussant la barri&egrave;re,</l>
+	<l>Ils fendent dans les airs les nuages mouvans,</l>
+	<l>Et de leurs pi&eacute;s ail&eacute;s ils devancent les vents.&rdquo;</l></lg></q>
+
+	<bibl>(<hi>Metamorphoses d&apos;Ovide</hi>).</bibl></cit>
+</epigraph>
+
+
 
 <p>You may note the small ornament above the chapter heading, which is included using a rend attribute on the head element of this chapter.</p>
 
