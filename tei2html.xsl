@@ -20,11 +20,11 @@
 -->
 
 <xsl:stylesheet
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-	xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-	xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     version="1.0"
-	>
+    >
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -111,11 +111,11 @@
         </xsl:choose>
     </xsl:template>
 
-	<xsl:template match="msg:message" mode="formatMessage">
+    <xsl:template match="msg:message" mode="formatMessage">
         <xsl:param name="params"/>
-		<xsl:apply-templates mode="formatMessage">
-			<xsl:with-param name="params" select="$params"/>
-		</xsl:apply-templates>
+        <xsl:apply-templates mode="formatMessage">
+            <xsl:with-param name="params" select="$params"/>
+        </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="*" mode="formatMessage">
@@ -364,9 +364,9 @@
     <!-- Title Page -->
 
     <xsl:template match="titlePage">
-		<div class="titlePage">
-	        <xsl:apply-templates mode="titlePage"/>
-		</div>
+        <div class="titlePage">
+            <xsl:apply-templates mode="titlePage"/>
+        </div>
     </xsl:template>
 
     <xsl:template match="docTitle" mode="titlePage">
@@ -422,12 +422,19 @@
 
     <xsl:template match="corr">
         <a id="{generate-id(.)}"></a>
-        <span class="corr">
-            <xsl:attribute name="title">
-                <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
+        <xsl:choose>
+            <xsl:when test="@resp='m'">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="corr">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -560,20 +567,20 @@
 
     <xsl:template match="divGen[@type='toc']">
         <div class="div1" id="{generate-id()}">
-			<h2><xsl:value-of select="$strTableOfContents"/></h2>
-			<ul>
-				<xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
-				<xsl:choose>
-					<xsl:when test="/TEI.2/text/body/div0">
-						<xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1"/>
-					</xsl:otherwise>
-				</xsl:choose>
-				<xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1"/>
-			</ul>
-		</div>
+            <h2><xsl:value-of select="$strTableOfContents"/></h2>
+            <ul>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
+                <xsl:choose>
+                    <xsl:when test="/TEI.2/text/body/div0">
+                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1"/>
+            </ul>
+        </div>
     </xsl:template>
 
     <xsl:template match="div0" mode="gentoc">
@@ -640,28 +647,28 @@
         </xsl:if>
     </xsl:template>
 
-	<!-- Special short table of contents for indexes -->
+    <!-- Special short table of contents for indexes -->
 
-	<xsl:template match="divGen[@type='IndexToc']">
-		<xsl:call-template name="genindextoc"/>
-	</xsl:template>
+    <xsl:template match="divGen[@type='IndexToc']">
+        <xsl:call-template name="genindextoc"/>
+    </xsl:template>
 
-	<xsl:template name="genindextoc">
-		<div class="transcribernote">
-			<div style="text-align: center">
-				<xsl:apply-templates select="../div2/head" mode="genindextoc"/> 
-			</div>
-		</div>
-	</xsl:template>
+    <xsl:template name="genindextoc">
+        <div class="transcribernote">
+            <div style="text-align: center">
+                <xsl:apply-templates select="../div2/head" mode="genindextoc"/>
+            </div>
+        </div>
+    </xsl:template>
 
-	<xsl:template match="head" mode="genindextoc">
-		<xsl:if test="position() != 1">
-			<xsl:text> | </xsl:text>
-		</xsl:if>
-		<a href="#{generate-id()}">
-			<xsl:value-of select="substring-before(., '.')"/>
-		</a>
-	</xsl:template>
+    <xsl:template match="head" mode="genindextoc">
+        <xsl:if test="position() != 1">
+            <xsl:text> | </xsl:text>
+        </xsl:if>
+        <a href="#{generate-id()}">
+            <xsl:value-of select="substring-before(., '.')"/>
+        </a>
+    </xsl:template>
 
 
     <!-- Suppress notes in table of contents (to avoid getting them twice) -->
@@ -713,14 +720,14 @@
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
-			<h2><xsl:value-of select="$strListOfIllustrations"/></h2>
-			<table>
-				<xsl:call-template name="splitrows">
-					<xsl:with-param name="figures" select="//figure[@id]" />
-					<xsl:with-param name="columns" select="3" />
-				</xsl:call-template>
-			</table>
-		</div>
+            <h2><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <table>
+                <xsl:call-template name="splitrows">
+                    <xsl:with-param name="figures" select="//figure[@id]" />
+                    <xsl:with-param name="columns" select="3" />
+                </xsl:call-template>
+            </table>
+        </div>
     </xsl:template>
 
 
@@ -766,7 +773,7 @@
 
     <xsl:template match="divGen[@type='corr']">
         <h2><xsl:value-of select="$strCorrections"/></h2>
-		<xsl:call-template name="correctionTable"/>
+        <xsl:call-template name="correctionTable"/>
     </xsl:template>
 
     <xsl:template name="correctionTable">
@@ -779,34 +786,36 @@
                 <th><xsl:value-of select="$strCorrection"/></th>
             </tr>
             <xsl:for-each select="//corr">
-                <tr>
-                    <td width="20%">
-                        <a href="#{generate-id(.)}">
-                            <xsl:value-of select="$strPage"/><xsl:text> </xsl:text>
-							<xsl:value-of select="preceding::pb[1]/@n"/>
-                        </a>
-                    </td>
-                    <td width="40%">
-						<xsl:choose>
-							<xsl:when test="@sic != ''">
-		                        <xsl:value-of select="@sic"/>
-							</xsl:when>
-							<xsl:otherwise>
-								[<i><xsl:value-of select="$strNotInSource"/></i>]
-							</xsl:otherwise>
-						</xsl:choose>
-                    </td>
-                    <td width="40%">
-						<xsl:choose>
-							<xsl:when test=". != ''">
-								<xsl:value-of select="."/>
-							</xsl:when>
-							<xsl:otherwise>
-								[<i><xsl:value-of select="$strDeleted"/></i>]
-							</xsl:otherwise>
-						</xsl:choose>
-                    </td>
-                </tr>
+                <xsl:if test="not(@resp) or @resp != 'm'">
+                    <tr>
+                        <td width="20%">
+                            <a href="#{generate-id(.)}">
+                                <xsl:value-of select="$strPage"/><xsl:text> </xsl:text>
+                                <xsl:value-of select="preceding::pb[1]/@n"/>
+                            </a>
+                        </td>
+                        <td width="40%">
+                            <xsl:choose>
+                                <xsl:when test="@sic != ''">
+                                    <xsl:value-of select="@sic"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    [<i><xsl:value-of select="$strNotInSource"/></i>]
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                        <td width="40%">
+                            <xsl:choose>
+                                <xsl:when test=". != ''">
+                                    <xsl:value-of select="."/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    [<i><xsl:value-of select="$strDeleted"/></i>]
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                    </tr>
+                </xsl:if>
             </xsl:for-each>
         </table>
     </xsl:template>
@@ -815,21 +824,29 @@
     <!-- Colophon -->
 
     <xsl:template match="divGen[@type='Colophon']">
-		<div class="transcribernote">
-			<h2><xsl:value-of select="$strColophon"/></h2>
+        <div class="transcribernote">
+            <h2><xsl:value-of select="$strColophon"/></h2>
 
-			<h3><xsl:value-of select="$strAvailability"/></h3>
-			<xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
+            <h3><xsl:value-of select="$strAvailability"/></h3>
+            <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
-			<h3><xsl:value-of select="$strEncoding"/></h3>
-			<xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
+            <h3><xsl:value-of select="$strEncoding"/></h3>
+            <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
 
-			<h3><xsl:value-of select="$strRevisionHistory"/></h3>
-			<xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
+            <h3><xsl:value-of select="$strRevisionHistory"/></h3>
+            <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
-			<h3><xsl:value-of select="$strCorrections"/></h3>
-			<xsl:call-template name="correctionTable"/>
-		</div>
+            <h3><xsl:value-of select="$strCorrections"/></h3>
+            <xsl:call-template name="correctionTable"/>
+        </div>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- Main parts of text -->
+
+    <xsl:template match="text">
+        <xsl:apply-templates/>
     </xsl:template>
 
 
@@ -865,32 +882,32 @@
     </xsl:template>
 
     <xsl:template name="headPicture">
-		<xsl:if test="contains(@rend, 'image(')">
-			<div class="figure">
+        <xsl:if test="contains(@rend, 'image(')">
+            <div class="figure">
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt"><xsl:value-of select="$strOrnament"/></xsl:with-param>
                 </xsl:call-template>
-			</div>
-		</xsl:if>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 
     <!-- div0 -->
 
     <xsl:template match="div0">
-		<div class="div0" id="{generate-id(.)}">
-			<xsl:call-template name="GenerateLabel"/>
-			<xsl:apply-templates/>
+        <div class="div0" id="{generate-id(.)}">
+            <xsl:call-template name="GenerateLabel"/>
+            <xsl:apply-templates/>
 
-			<!-- Include footnotes in the div0, if not done so earlier -->
+            <!-- Include footnotes in the div0, if not done so earlier -->
 
-			<xsl:if test=".//note[(@place='foot' or not(@place)) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
-				<div class="footnotes">
-					<hr class="fnsep"/>
-					<xsl:apply-templates mode="footnotes" select=".//note[(@place='foot' or not(@place)) and not(ancestor::div1)]"/>
-				</div>
-			</xsl:if>
-		</div>
+            <xsl:if test=".//note[(@place='foot' or not(@place)) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <xsl:apply-templates mode="footnotes" select=".//note[(@place='foot' or not(@place)) and not(ancestor::div1)]"/>
+                </div>
+            </xsl:if>
+        </div>
     </xsl:template>
 
     <xsl:template match="div0/head">
@@ -917,10 +934,9 @@
             </xsl:if>
         </xsl:if>
 
-		<div id="{generate-id(.)}">
-			<xsl:attribute name="class">
-				div1<xsl:if test="@type='Index'"> index</xsl:if>
-			</xsl:attribute>
+        <div id="{generate-id(.)}">
+            <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
+            </xsl:attribute>
 
             <xsl:if test="//*[@id='toc']">
                 <!-- If we have an element with id 'toc', include a link to it -->
@@ -929,16 +945,16 @@
                 </span>
             </xsl:if>
 
-			<xsl:call-template name="GenerateLabel"/>
-			<xsl:apply-templates/>
+            <xsl:call-template name="GenerateLabel"/>
+            <xsl:apply-templates/>
 
-			<xsl:if test=".//note[@place='foot' or not(@place)] and not(ancestor::q)">
-				<div class="footnotes">
-					<hr class="fnsep"/>
-					<xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or not(@place)]"/>
-				</div>
-			</xsl:if>
-		</div>
+            <xsl:if test=".//note[@place='foot' or not(@place)] and not(ancestor::q)">
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or not(@place)]"/>
+                </div>
+            </xsl:if>
+        </div>
     </xsl:template>
 
     <xsl:template match="div1/head">
@@ -947,10 +963,10 @@
             <xsl:if test="@type='label'">
                 <xsl:attribute name="class">label</xsl:attribute>
             </xsl:if>
-			<xsl:if test="contains(@rend, 'align(')">
+            <xsl:if test="contains(@rend, 'align(')">
                 <xsl:attribute name="align">
-					<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-				</xsl:attribute>
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+                </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </h2>
@@ -960,11 +976,11 @@
 
     <xsl:template match="div2">
         <div class="div2" id="{generate-id(.)}">
-			<xsl:call-template name="GenerateLabel">
-				<xsl:with-param name="headingLevel" select="'h2'"/>
-			</xsl:call-template>
-			<xsl:apply-templates/>
-		</div>
+            <xsl:call-template name="GenerateLabel">
+                <xsl:with-param name="headingLevel" select="'h2'"/>
+            </xsl:call-template>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="div2/head">
@@ -981,8 +997,8 @@
 
     <xsl:template match="div3">
         <div class="div3" id="{generate-id(.)}">
-	        <xsl:apply-templates/>
-		</div>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="div3/head">
@@ -994,8 +1010,8 @@
 
     <xsl:template match="div4">
         <div class="div4" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</div>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="div4/head">
@@ -1007,8 +1023,8 @@
 
     <xsl:template match="div5">
         <div class="div5" id="{generate-id(.)}">
-	        <xsl:apply-templates/>
-		</div>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="div5/head">
@@ -1048,43 +1064,43 @@
 
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
-		<div class="table">
-			<xsl:apply-templates select="head" mode="tablecaption"/>
+        <div class="table">
+            <xsl:apply-templates select="head" mode="tablecaption"/>
 
-			<table id="{generate-id(.)}">
+            <table id="{generate-id(.)}">
 
-				<xsl:if test="contains(@rend, 'font-size(')">
-					<xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
-				</xsl:if>
+                <xsl:if test="contains(@rend, 'font-size(')">
+                    <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
+                </xsl:if>
 
-				<xsl:if test="contains(@rend, 'width(')">
-					<xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
-				</xsl:if>
-				<xsl:if test="not(contains(@rend, 'width('))">
-					<xsl:attribute name="width">100%</xsl:attribute>
-				</xsl:if>
+                <xsl:if test="contains(@rend, 'width(')">
+                    <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
+                </xsl:if>
+                <xsl:if test="not(contains(@rend, 'width('))">
+                    <xsl:attribute name="width">100%</xsl:attribute>
+                </xsl:if>
 
-				<xsl:if test="contains(@rend, 'summary(')">
-					<xsl:attribute name="summary"><xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/></xsl:attribute>
-				</xsl:if>
+                <xsl:if test="contains(@rend, 'summary(')">
+                    <xsl:attribute name="summary"><xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/></xsl:attribute>
+                </xsl:if>
 
-				<xsl:apply-templates select="head"/>
-				<xsl:apply-templates select="row"/>
-			</table>
-		</div>
+                <xsl:apply-templates select="head"/>
+                <xsl:apply-templates select="row"/>
+            </table>
+        </div>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
 
-	<!-- HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
+    <!-- HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
 
-	<xsl:template match="head" mode="tablecaption">
-		<h4 class="tablecaption">
-			<xsl:apply-templates/>
-		</h4>
-	</xsl:template>
+    <xsl:template match="head" mode="tablecaption">
+        <h4 class="tablecaption">
+            <xsl:apply-templates/>
+        </h4>
+    </xsl:template>
 
-	<!-- headers already handled. -->
+    <!-- headers already handled. -->
     <xsl:template match="table/head"/>
 
 
@@ -1443,11 +1459,22 @@
         </div>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Epigraphs -->
+
     <xsl:template match="epigraph">
         <div class="epigraph">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+
+    <xsl:template match="bibl">
+        <div class="bibl">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Blockquotes -->
@@ -1460,7 +1487,13 @@
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
-	<!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
+    <xsl:template match="q">
+        <xsl:call-template name="closepar"/>
+        <xsl:apply-templates/>
+        <xsl:call-template name="reopenpar"/>
+    </xsl:template>
+
+    <!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
 
     <!--====================================================================-->
     <!-- Notes -->
@@ -1550,15 +1583,15 @@
     <!-- Paragraphs -->
 
     <xsl:template match="p">
-		<xsl:if test="not(contains(@rend, 'display(none)'))">
-			<p id="{generate-id()}">
-				<xsl:if test="contains(@rend, 'align(')">
-					<xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
-					<xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates/>
-			</p>
-		</xsl:if>
+        <xsl:if test="not(contains(@rend, 'display(none)'))">
+            <p id="{generate-id()}">
+                <xsl:if test="contains(@rend, 'align(')">
+                    <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
+                    <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
+                </xsl:if>
+                <xsl:apply-templates/>
+            </p>
+        </xsl:if>
     </xsl:template>
 
     <!-- Special types of Paragraphs (introduced for Filippino Riddles) -->
@@ -1628,7 +1661,7 @@
                 <span class="linenum"><xsl:value-of select="@n"/></span>
             </xsl:if>
 
-            <span id="{generate-id()}" class="poetryline">
+            <span id="{generate-id()}">
                 <xsl:apply-templates/>
             </span>
         </p>

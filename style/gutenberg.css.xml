@@ -163,8 +163,26 @@ div.epigraph
 {
     font-size:0.9em;
     line-height:1.2em;
-    margin:1.58em 20% 1.58em 0;
+	width: 60%;
+	margin-left: auto;
 }
+
+.epigraph .bibl
+{
+	text-align: right;
+}
+
+.epigraph .poem
+{
+	margin-left: 0;
+}
+
+.epigraph .line
+{
+	margin-left: 0;
+	text-indent: 0;
+}
+
 
 .floatLeft
 {
