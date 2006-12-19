@@ -552,7 +552,20 @@
 
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
-        <hr/>
+		<xsl:choose>
+			<xsl:when test="contains(@rend, 'stars')">
+				<p class="tb">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+			</xsl:when>			
+			<xsl:when test="contains(@rend, 'star')">
+				<p class="tb">*</p>
+			</xsl:when>
+			<xsl:when test="contains(@rend, 'space')">
+				<p class="tb"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<hr class="tb"/>
+			</xsl:otherwise>
+		</xsl:choose>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
@@ -560,6 +573,7 @@
     <xsl:template match="milestone">
         <a id="{generate-id()}"/>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Table of Contents -->
@@ -1708,7 +1722,7 @@
         <span class="smallcaps"><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='expanded']">
+    <xsl:template match="hi[@rend='expanded' or @rend='ex']">
         <span class="letterspaced"><xsl:apply-templates/></span>
     </xsl:template>
 

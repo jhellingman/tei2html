@@ -137,6 +137,15 @@ h4.lghead
     text-align:justify;
 }
 
+p.tb, hr.tb
+{
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
 p.poetry
 {
     margin:0 10% 1.58em;

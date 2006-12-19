@@ -203,6 +203,10 @@
 
 "&etilde;"		p "&#x1EBD;"
 
+"&triangle;"	p "&#x25B3;"	% white triangle
+"&bullet;"		p "&#x2022;"	% bullet
+
+
 % DEVANAGARI
 
 "&OM;"			p "&#x0950;"	% DEVANAGARI OM
