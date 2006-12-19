@@ -135,6 +135,7 @@ sub entities2iso88591
    
     # my additions
 
+
     $a =~ s/\&eringb;/e/g;
     $a =~ s/\&oubb;/ö/g;
     $a =~ s/\&oudb;/ö/g;
@@ -187,6 +188,9 @@ sub entities2iso88591
 	$a =~ s/\&eng;/ng/g;
 	$a =~ s/\&Rs;/Rs/g;		# Rupee sign.
     $a =~ s/\&tb;/\n\n/g;	# Thematic Break;
+
+    $a =~ s/\&triangle;/[triangle]/g;
+    $a =~ s/\&bullet;/·/g;
 
 	$a =~ s/CI\&Crev;/M/g;	# roman numeral CI reverse C -> M	
 	$a =~ s/I\&Crev;/D/g;	# roman numeral I reverse C -> D

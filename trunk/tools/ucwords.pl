@@ -1455,12 +1455,17 @@ $ent{"lb"}			= chr(0x2114);	#  L B BAR SYMBOL
 $ent{"Peso"}		= chr(0x20B1);	#  Peso sign
 $ent{"peso"}		= chr(0x20B1);	#  Peso sign
 
+$ent{"triangle"}	= chr(0x25B3);	#  White triangle
+$ent{"bullet"}		= chr(0x2022);	#  Bullet
 
 # Metrical symbols
 $ent{"metlong"}		= chr(0x2013);	# metrical long symbol (= EN DASH)
 $ent{"metbrev"}		= chr(0x23D1);	# METRICAL BREVE SYMBOL
 $ent{"metlobr"}		= chr(0x23D2);	# METRICAL LONG OVER BREVE SYMBOL
 $ent{"metbreak"}	= chr(0x201E);	# metrical break (= DOUBLE LOW-9 QUOTATION MARK)
+
+
+
 
 ###############################################################################
 # things not in Unicode (as a single character)
@@ -1548,6 +1553,8 @@ $ent{"frac3-16"}	= chr(0x200B) . "3" . chr(0x2044) . "16";	# 3/16
 $ent{"frac5-16"}	= chr(0x200B) . "5" . chr(0x2044) . "16";	# 5/16
 $ent{"frac11-16"}	= chr(0x200B) . "11" . chr(0x2044) . "16";	# 11/16
 $ent{"frac13-16"}	= chr(0x200B) . "13" . chr(0x2044) . "16";	# 13/16
+
+
 
 
 ###############################################################################
