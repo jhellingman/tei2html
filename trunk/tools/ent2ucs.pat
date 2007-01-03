@@ -205,6 +205,7 @@
 
 "&triangle;"	p "&#x25B3;"	% white triangle
 "&bullet;"		p "&#x2022;"	% bullet
+"&vardollar;"	p "$"			% variant dollar sign (with diagonal slashes)
 
 
 % DEVANAGARI
