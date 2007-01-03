@@ -1058,6 +1058,18 @@
         </p>
     </xsl:template>
 
+	<!-- trailers -->
+
+    <xsl:template match="trailer">
+		<p>
+			<xsl:attribute name="class">trailer
+				<xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
+			</xsl:attribute>
+			<xsl:apply-templates/>
+		</p>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Tables: Translate the TEI model to HTML tables. -->
 
