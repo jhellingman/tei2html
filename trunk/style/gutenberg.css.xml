@@ -192,6 +192,12 @@ div.epigraph
 	text-indent: 0;
 }
 
+.trailer
+{
+    clear: both;
+    padding-top: 2.4em;
+    padding-bottom: 1.6em;
+}
 
 .floatLeft
 {
