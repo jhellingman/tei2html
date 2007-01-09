@@ -3,6 +3,7 @@
 
     <!ENTITY degrees    "&#176;">
     <!ENTITY nbsp       "&#160;">
+    <!ENTITY mdash      "&#x2014;">
 
 ]>
 <!--
@@ -1190,6 +1191,13 @@
         <xsl:if test="contains(@rend, 'align(center)')">
             <xsl:attribute name="class">aligncenter</xsl:attribute>
         </xsl:if>
+
+		<!-- Align numeric-only cells right -->
+		<xsl:if test="not(contains(@rend, 'align('))">
+			<xsl:if test="translate(., '01234567890 ,.&mdash;', '') = ''">
+				<xsl:attribute name="class">alignright</xsl:attribute>
+			</xsl:if>
+		</xsl:if>
 
         <xsl:if test="contains(@rend, 'padding-top(') or contains(@rend, 'padding-bottom(') or @role='sum' or contains(@rend, 'font-weight(')">
             <xsl:attribute name="style">

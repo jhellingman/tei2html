@@ -32,11 +32,19 @@ $inputDir		= $ARGV[0];
 $minWordCount   = $ARGV[1];
 $minFileCount   = $ARGV[2];
 
-print STDERR "Collecting words from $inputDir\n";
+$totalWordCount = 0;
+
+print STDERR "Loading dictionary\n";
 
 load_dictionary();
+
+print STDERR "Collecting words from directory $inputDir\n";
+
 list_recursively($inputDir);
+
 report_words();
+
+print STDERR ">>> Total: $totalWordCount words.\n";
 
 exit;
 
@@ -97,6 +105,8 @@ sub handle_file
 	my $newWordCount = 0;
 	my $uniqueWordCount = 0;
 
+	my $language = "nl";
+
 	while (<INPUTFILE>)
 	{
 		$remainder = $_;
@@ -115,55 +125,58 @@ sub handle_file
 			}
 		}
 
-		# print "$language: $remainder\n";
-
-		# NOTE: we don't use \w and \W here, since it gives some unexpected results
-		my @words = split(/[^\pL\pN\pM-]+/, $remainder);
-
-		foreach $word (@words)
+		# We are interested in what is likely Dutch.
+		if ($language eq "nl" || $language eq "af") 
 		{
-			$wordCount++;
+			# NOTE: we don't use \w and \W here, since it gives some unexpected results
+			my @words = split(/[^\pL\pN\pM-]+/, $remainder);
 
-			# print "$language, $word\n";
-
-			$lcword = lc($word);
-			$tcword = dutch_titlecase($word);
-
-			if ($word !~ /^[0-9-]*$/)
+			foreach $word (@words)
 			{
-				if (exists $wordHash{$lcword} || $lcword eq $word)
-				{
-					$word = $lcword;
-					# already counted in title-case?
-					if (exists $wordHash{$tcword})
-					{
-						$wordHash{$word} += $wordHash{$tcword};
-						delete $wordHash{$tcword};
-					}
-					if (exists $wordFileHash{$tcword})
-					{
-						$wordFiles{$word} += $wordFiles{$tcword};
-						delete $wordFiles{$tcword};
-						delete $wordFileHash{$tcword};
-					}
-				}
-				else
-				{
-					$word = $tcword;
-				}
-				
-				if (!exists $wordHash{$word}) 
-				{
-					$newWordCount++;
-				}
+				$wordCount++;
+				$totalWordCount++;
 
-				$wordHash{$word}++;
+				# print "$language, $word\n";
 
-				if (!exists $wordFileHash{$word})
+				$lcword = lc($word);
+				$tcword = dutch_titlecase($word);
+
+				if ($word !~ /^[0-9-]*$/)
 				{
-					$wordFileHash{$word} = 1;
-					$wordFiles{$word}++;
-					$uniqueWordCount++;
+					if (exists $wordHash{$lcword} || $lcword eq $word)
+					{
+						$word = $lcword;
+						# already counted in title-case?
+						if (exists $wordHash{$tcword})
+						{
+							$wordHash{$word} += $wordHash{$tcword};
+							delete $wordHash{$tcword};
+						}
+						if (exists $wordFileHash{$tcword})
+						{
+							$wordFiles{$word} += $wordFiles{$tcword};
+							delete $wordFiles{$tcword};
+							delete $wordFileHash{$tcword};
+						}
+					}
+					else
+					{
+						$word = $tcword;
+					}
+					
+					if (!exists $wordHash{$word}) 
+					{
+						$newWordCount++;
+					}
+
+					$wordHash{$word}++;
+
+					if (!exists $wordFileHash{$word})
+					{
+						$wordFileHash{$word} = 1;
+						$wordFiles{$word}++;
+						$uniqueWordCount++;
+					}
 				}
 			}
 		}
@@ -196,9 +209,9 @@ sub report_words
 		$word =~ /\#/;
 		$word = $';
 
-		if (($wordHash{$word} >= $minWordCount) && ($wordFiles{$word} >= $minFileCount))
+		$modernWord = lookup_modern($word);
+		if ($modernWord || (($wordHash{$word} >= $minWordCount) && ($wordFiles{$word} >= $minFileCount)))
 		{
-			$modernWord = lookup_modern($word);
 			if ($modernWord ne $word) 
 			{
 				print "$word\t$wordHash{$word}\t$wordFiles{$word}\t$modernWord\n";
@@ -208,9 +221,6 @@ sub report_words
 }
 
 
-
-
-
 sub dutch_titlecase
 {
 	my $word = shift;
@@ -218,7 +228,6 @@ sub dutch_titlecase
 	$word =~ s/^Ij/IJ/;
 	return $word;
 }
-
 
 
 sub load_dictionary
@@ -249,11 +258,12 @@ sub load_dictionary
 }
 
 
-sub normalize_dutch_word
+sub normalize_dutch_word_all
 {
 	my $word = shift;
 	$word = strip_diacritics(lc($word));
 
+	# Very old conventions.
 	$word =~ s/ck/k/g;									# zulck -> zulk
 	$word =~ s/ae/aa/g;									# helaes -> helaas
 	$word =~ s/oi/oo/g;									# oirzaeck -> oorzaak
@@ -263,25 +273,48 @@ sub normalize_dutch_word
 	$word =~ s/ey/ei/g;									# Leyden -> Leiden
 	$word =~ s/aaije/aaie/g;							# draaijen -> draaien
 	$word =~ s/oeije/oeie/g;							# loeijen -> loeien
+	$word =~ s/uije/uie/g;								# kruijen -> kruien
 	$word =~ s/aa([bcdfghklmnprst])([aeiou])/a\1\2/g;	# klaagen -> klagen
 	$word =~ s/aau/au/g;								# praauw -> prauw
 
+	# Modernisms
 	$word =~ s/lik$/lijk/g;								# mogelik -> mogelijk
 	$word =~ s/ies$/isch/g;								# geologies -> geologisch
+	$word =~ s/ij/y/g;									# zijn -> zyn
 
+	# Spelling De Vries-Te Winkel
 	$word =~ s/oo([bcdfghklmnprst])([aeiou])/o\1\2/g;	# rooken -> roken
 	$word =~ s/ee([bcdfghklmnprst])([aeiou])/e\1\2/g;	# leenen -> lenen
 	$word =~ s/\Bsch/s/g;								# mensch -> mens
-	$word =~ s/ij/y/g;									# zijn -> zyn
 	$word =~ s/ph/f/g;									# photographie -> fotografie
 	$word =~ s/oeie/oei/g;								# moeielijk -> moeilijk
+	$word =~ s/qu/kw/g;									# questie -> kwestie
 
+	# Phonetic equivalences.
 	$word =~ s/ch/g/;
 	$word =~ s/c([iey])/s\1/g;	
 	$word =~ s/c/k/g;
 
 	return $word;
 }
+
+
+sub normalize_dutch_word
+{
+	my $word = shift;
+	$word = strip_diacritics(lc($word));
+
+	# Spelling De Vries-Te Winkel
+	$word =~ s/oo([bcdfghklmnprst])([aeiou])/o\1\2/g;	# rooken -> roken
+	$word =~ s/ee([bcdfghklmnprst])([aeiou])/e\1\2/g;	# leenen -> lenen
+	$word =~ s/\Bsch/s/g;								# mensch -> mens
+	$word =~ s/ph/f/g;									# photographie -> fotografie
+	$word =~ s/oeie/oei/g;								# moeielijk -> moeilijk
+	$word =~ s/qu/kw/g;									# questie -> kwestie
+
+	return $word;
+}
+
 
 sub lookup_modern
 {
