@@ -2,13 +2,13 @@
 <?xml-stylesheet type="text/xsl" href="tei2html.xsl"?>
 <!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [ 
 
-<!ENTITY prime "&#x2032;">
-<!ENTITY mdash "&#x2013;">
+<!ENTITY prime  "&#x2032;">
+<!ENTITY mdash  "&#x2014;">
 
-<!ENTITY ldquo "&#x201C;">
-<!ENTITY rdquo "&#x201D;">
+<!ENTITY ldquo  "&#x201C;">
+<!ENTITY rdquo  "&#x201D;">
 <!ENTITY eacute "&#x00E9;">
-<!ENTITY apos "&#x2019;">
+<!ENTITY apos   "&#x2019;">
 
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
 
@@ -170,10 +170,40 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 	</row>
 	<row>
 		<cell>Raphael</cell>	
-		<cell rend="align(right)">6</cell>
+		<cell rend="align(right)">2</cell>
 	</row>
 </table>
 </p>
+
+<p>
+<table rend="width(40%)">
+	<row>
+		<cell role="label">Name</cell>	
+		<cell role="label" rend="align(right)">Length</cell>
+	</row>
+	<row>
+		<cell></cell>	
+		<cell role="unit" rend="align(right)">Meters</cell>
+	</row>
+	<row>
+		<cell>Jeroen</cell>	
+		<cell>1.80</cell>
+	</row>
+	<row>
+		<cell>Rodelyn</cell>	
+		<cell>&mdash;</cell>
+	</row>
+	<row>
+		<cell>Joshua</cell>	
+		<cell>1.20</cell>
+	</row>
+	<row>
+		<cell>Raphael</cell>	
+		<cell>1.00</cell>
+	</row>
+</table>
+</p>
+
 
 <p>
 Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.
@@ -208,7 +238,7 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 	</row>
 	<row>
 		<cell>Raphael</cell>	
-		<cell rend="align(right)">6</cell>
+		<cell rend="align(right)">2</cell>
 	</row>
 </table>
 </p>
