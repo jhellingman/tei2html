@@ -422,13 +422,12 @@
     <!-- Corrections; abbreviations; numbers; transcriptions -->
 
     <xsl:template match="corr">
-        <a id="{generate-id(.)}"></a>
         <xsl:choose>
             <xsl:when test="@resp='m'">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <span class="corr">
+                <span id="{generate-id(.)}" class="corr">
                     <xsl:attribute name="title">
                         <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
                     </xsl:attribute>

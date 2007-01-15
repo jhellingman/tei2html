@@ -661,9 +661,11 @@
 		<msg:message name="msgAppendix">Appendice</msg:message> 
 		<msg:message name="msgAppendix.n">Appendices</msg:message> 
 		<msg:message name="msgBook">Libro</msg:message>
+		<msg:message name="msgBook.n">Libros</msg:message>
 		<msg:message name="msgChapter">Capítulo</msg:message> 
 		<msg:message name="msgChapter.n">Capítulos</msg:message> 
 		<msg:message name="msgContents">Contenido</msg:message> 
+		<msg:message name="msgToc">Contenidos</msg:message> 
 		<msg:message name="msgFigure">Figura</msg:message> 
 		<msg:message name="msgFigure.n">Figuras</msg:message> 
 		<msg:message name="msgIllustration">Ilustración</msg:message> 
@@ -686,6 +688,30 @@
 		<msg:message name="msgTableOfContents">Contenido</msg:message> 
 		<msg:message name="msgVolume">Volúmen</msg:message> 
 		<msg:message name="msgVolume.n">Volúmenes</msg:message> 
+		<msg:message name="msgOrnament">Elemento decorativo</msg:message> 
+		<msg:message name="msgOrnament.n">Elementos decorativos</msg:message> 
+		<msg:message name="msgNotInSource">No en la fuente</msg:message> 
+		<msg:message name="msgDeleted">Borrado</msg:message> 
+		<msg:message name="msgCorrection">Corrección</msg:message> 
+		<msg:message name="msgCorrection.n">Correcciones</msg:message> 
+		<msg:message name="msgTranscription">Transcripción</msg:message> 
+		<msg:message name="msgTranscription.n">Transcripciones</msg:message> 
+		<msg:message name="msgSource">Fuente</msg:message> 
+		<msg:message name="msgSource.n">Fuentes</msg:message> 
+		<msg:message name="msgOriginal">Original</msg:message> 
+		<msg:message name="msgOriginal.n">Originales</msg:message> 
+		<msg:message name="msgAbbreviation">Abreviación</msg:message> 
+		<msg:message name="msgAbbreviation.n">Abreviaciones</msg:message> 
+		<msg:message name="msgLocation">Ubicación</msg:message> 
+		<msg:message name="msgLocation.n">Ubicaciones</msg:message> 
+		<msg:message name="msgCorrectionsAppliedToText">Las siguientes correcciones han sido aplicadas al texto:</msg:message> 
+		<msg:message name="msgColophon">Colofón</msg:message> 
+		<msg:message name="msgRevisionHistory">Historial de modificaciones</msg:message> 
+		<msg:message name="msgAvailability">Disponibilidad</msg:message> 
+		<msg:message name="msgEncoding">Codificación</msg:message> 
+		<msg:message name="msgLocation.n">Ubicaciones</msg:message> 
+		<msg:message name="msgLocation.n">Ubicaciones</msg:message> 
+
 
 		<msg:message name="msgColor">Color</msg:message> 
 
@@ -710,19 +736,42 @@
 		<msg:message name="msgFriday">Viernes</msg:message> 
 		<msg:message name="msgSaturday">Sabado</msg:message> 
 
+		<msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
+
+		<!-- ISO 639 two letter codes -->
+		<msg:message name="cn">Chino</msg:message>
+		<msg:message name="de">Alemán</msg:message>
 		<msg:message name="en">Inglés</msg:message>
 		<msg:message name="en-us">Inglés</msg:message>
 		<msg:message name="en-uk">Inglés</msg:message> 
 		<msg:message name="nl">Holandés</msg:message>
 		<msg:message name="nl-1900">Holandés (Ortografía Antigua)</msg:message>
 		<msg:message name="es">Español</msg:message> 
+		<msg:message name="fi">Finlandés</msg:message>
 		<msg:message name="fr">Francés</msg:message> 
 		<msg:message name="it">Italiano</msg:message> 
+		<msg:message name="ja">Japonés</msg:message>
 		<msg:message name="la">Latín</msg:message> 
 		<msg:message name="el">Griego</msg:message> 
 		<msg:message name="grc">Griego (Clásico)</msg:message> 
+		<msg:message name="pt">Portugués</msg:message>
+		<msg:message name="pt-br">Portugués (Brasil)</msg:message>
+		<msg:message name="pt-pt">Portugués (Portugal)</msg:message>
+		<msg:message name="tl">Tagalog</msg:message>
+
+		<!-- ISO 639 three letter codes -->
+		<msg:message name="ceb">Cebuano</msg:message>
+
 
 		<msg:message name="msgAnd">y</msg:message>
+		<msg:message name="msgOr">o</msg:message>
+
+		<msg:message name="msgListTwo"><msg:param name="first"/> y <msg:param name="second"/></msg:message>
+		<msg:message name="msgListThree"><msg:param name="first"/>, <msg:param name="second"/>, y <msg:param name="third"/></msg:message>
+		<msg:message name="msgListFour"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, y <msg:param name="fourth"/></msg:message>
+		<msg:message name="msgListEtAL"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, y otros</msg:message>
+
+
 
 		<msg:message name="msgPGHeader">
 			<p>El texto digital del Proyecto Gutenberg <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
