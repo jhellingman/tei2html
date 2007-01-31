@@ -606,7 +606,7 @@
                         <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/></a>
+                <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/></a>
                 <xsl:if test="div1">
                     <ul>
                         <xsl:apply-templates select="div1" mode="gentoc"/>
@@ -628,7 +628,7 @@
                         Appendix <xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
                     </xsl:when>
                 </xsl:choose>
-                <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/></a>
+                <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/></a>
                 <xsl:if test="div2">
                     <ul>
                         <xsl:apply-templates select="div2" mode="gentoc"/>
