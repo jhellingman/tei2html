@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet [
 
-    <!ENTITY degrees    "&#176;">
+    <!ENTITY deg        "&#176;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
+    <!ENTITY prime      "&#x2032;">
+    <!ENTITY Prime      "&#x2033;">
+    <!ENTITY plusmn     "&#x00B1;">
 
 ]>
 <!--
@@ -1193,7 +1196,7 @@
 
 		<!-- Align numeric-only cells right -->
 		<xsl:if test="not(contains(@rend, 'align('))">
-			<xsl:if test="translate(., '01234567890 ,.&mdash;', '') = ''">
+			<xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;', '') = ''">
 				<xsl:attribute name="class">alignright</xsl:attribute>
 			</xsl:if>
 		</xsl:if>
@@ -1591,7 +1594,7 @@
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
         <a id="{generate-id()}src" href="#{generate-id()}" style="text-decoration:none">
-            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&degrees;
+            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;
         </a>
     </xsl:template>
 
@@ -1605,7 +1608,7 @@
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
         <p class="footnote">
             <span class="label">
-                <a id="{generate-id()}" href="#{generate-id()}src" style="text-decoration:none">&degrees;</a>
+                <a id="{generate-id()}" href="#{generate-id()}src" style="text-decoration:none">&deg;</a>
             </span>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
