@@ -729,6 +729,36 @@
         </sup>
     </xsl:template>
 
+    <!--====================================================================-->
+	<!-- SubToc (special handling for Tribes and Castes volumes) -->
+
+	<!-- A SubToc is a short table of contents at div2 level, which appears at the beginning of a div1 -->
+
+	<xsl:template match="div2[@type='SubToc']">
+		<!-- Render heading in normal fashion -->
+		<xsl:apply-templates select="head"/>
+
+		<!-- Generate the table of contents -->
+		<xsl:call-template name="SubToc"/>
+
+		<!-- Ignore original content -->
+	</xsl:template>
+
+	<xsl:template name="SubToc">
+		<ul>
+			<xsl:apply-templates select="../div2[@type != 'SubToc']" mode="gentoc"/>
+		</ul>
+	</xsl:template>
+
+	<xsl:template match="div2" mode="SubToc">
+		<li>
+			<xsl:if test="@n">
+				<xsl:value-of select="@n"/>.
+			</xsl:if>
+			<xsl:apply-templates select="head" mode="tochead"/>
+		</li>
+	</xsl:template>
+
 
     <!--====================================================================-->
     <!-- Generated Divisions -->
