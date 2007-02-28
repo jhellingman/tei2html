@@ -23,7 +23,6 @@ if ($directory eq "-s")
 	$directory = $ARGV[1];
 }
 
-
 if (!$directory) 
 {
 	$directory = ".";
