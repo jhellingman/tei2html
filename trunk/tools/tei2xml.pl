@@ -140,8 +140,21 @@ sub processFile
 		$fileImageParam = "imageInfoFile=\"file:///$pwd/imageinfo.xml\"";
 	}
 
+	# Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
+	$cssFileParam = "";
+	if (-f "custom.css.xml") 
+	{
+		print "Adding custom.css stylesheet...\n";
+
+		$pwd = `pwd`;
+		chop($pwd);
+
+		$cssFileParam = "customCssFile=\"file:///$pwd/custom.css.xml\"";
+	}
+
+
 	print "Create HTML version...\n";
-	system ("saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam > tmp.5");
+	system ("saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
 	system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
 	system ("sed \"s/^[ \t]*//g\" < tmp.5a > $basename.html");
 	system ("tidy -qe $basename.html");

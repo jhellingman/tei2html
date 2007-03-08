@@ -23,6 +23,7 @@ while (<INPUTFILE>)
 		}
     }
 }
+
 close INPUTFILE;
 
 open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
@@ -52,21 +53,19 @@ while (<INPUTFILE>)
     }
 	$output .= $remainder;
 
+	# remove useless (in HTML) namespace declarations.
+	$output =~ s/xmlns(:\w+)?=\"(.*?)\"//g;
+
 	# Remove empty anchors:
 	$output =~ s/<a><\/a>//g;
 
 	# Remove multiple spaces:
 	$output =~ s/[\t ]+/ /g;
 
-	# remove useless (in HTML) namespace declarations.
-	$output =~ s/xmlns(:\w+)?=\"(.*?)\"//g;
-
 	print $output;
 }
+
 close INPUTFILE;
-
-
-
 
 
 #

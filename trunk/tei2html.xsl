@@ -40,11 +40,12 @@
 
     <!-- imageInfoFile is an XML file that contains information on the dimensions of images. -->
     <xsl:param name="imageInfoFile"/>
+    <xsl:param name="customCssFile"/>
 
     <!--====================================================================-->
 
-    <xsl:variable name="optionExternalCSS" select="'No'" />
-    <xsl:variable name="optionPGHeaders"   select="'No'" />
+    <xsl:variable name="optionExternalCSS" select="'No'"/>
+    <xsl:variable name="optionPGHeaders" select="'No'"/>
 
     <!--====================================================================-->
 
@@ -317,10 +318,19 @@
                 <xsl:if test="$optionExternalCSS = 'No'">
                     <!-- Pull in CSS sheets. This requires them to be wrapped in a tag at toplevel, so they become valid XML -->
                     <style type="text/css">
+					    /* Including standard CSS stylesheet */
                         <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
                         <xsl:copy-of select="$stylesheet/*/node()"/>
+
+						/* Including supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
                         <xsl:variable name="stylesheet2" select="document($stylesheetname)"/>
                         <xsl:copy-of select="$stylesheet2/*/node()"/>
+
+						<xsl:if test="$customCssFile">
+						    /* Including custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
+							<xsl:variable name="stylesheet3" select="document($customCssFile)"/>
+							<xsl:copy-of select="$stylesheet3/*/node()"/>
+						</xsl:if>
                     </style>
                 </xsl:if>
 
@@ -1699,6 +1709,7 @@
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <p id="{generate-id()}">
                 <xsl:call-template name="setHtmlLangAttribute"/>
+				<xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
                 <xsl:if test="contains(@rend, 'align(')">
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
@@ -1744,6 +1755,7 @@
 
     <xsl:template match="lg|sp">
         <div class="poem">
+		    <xsl:call-template name="setHtmlLangAttribute"/>
             <div class="stanza">
                 <xsl:apply-templates/>
             </div>
@@ -1855,6 +1867,18 @@
 
     <xsl:template match="foreign">
         <span><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- CSS Class tagging -->
+
+    <xsl:template name="setCssClassAttribute">
+        <xsl:if test="contains(@rend, 'class(')">
+            <xsl:attribute name="class">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
+            </xsl:attribute>
+        </xsl:if>
     </xsl:template>
 
     <!--====================================================================-->
