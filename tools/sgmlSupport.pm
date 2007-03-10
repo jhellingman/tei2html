@@ -1502,7 +1502,7 @@ BEGIN
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
 	$ent{"1dotb"}		= "1" . chr(0x0323); # 1 with dot below
 	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
-	$ent{"odotb"}		= "o" . chr(0x0323); # o with dot below
+	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
 	$ent{"hdotb"}		= "h" . chr(0x0323); # h with dot below
 	$ent{"Hdotb"}		= "H" . chr(0x0323); # H with dot below
 	$ent{"wdotb"}		= "w" . chr(0x0323); # w with dot below
@@ -1549,6 +1549,7 @@ BEGIN
 	$ent{"imacacu"}		= chr(0x012B) . chr(0x0301); # i with macron and acute
 	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # i with macron and acute
 	$ent{"amacrdotb"}	= chr(0x0101) . chr(0x0323); # a with macron and dot below
+	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x02C6); # o with diaresis and circumflex
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
@@ -1569,11 +1570,8 @@ BEGIN
 	$ent{"frac11-16"}	= chr(0x200B) . "11" . chr(0x2044) . "16";	# 11/16
 	$ent{"frac13-16"}	= chr(0x200B) . "13" . chr(0x2044) . "16";	# 13/16
 
-
-
-
-
 }
+
 
 # Get an attribute value (if the attribute is present)
 #

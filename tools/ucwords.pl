@@ -128,7 +128,7 @@ print "<HTML>";
 print "<head><title>Word Usage Report for $infile</title>";
 print "<style>\n";
 print "body { margin-left: 30px; }\n";
-print "p	{ margin: 0px; }\n";
+print "p { margin: 0px; }\n";
 print ".cnt { color: gray; font-size: smaller; }\n";
 print ".err { color: red; font-weight: bold; }\n";
 print ".comp { color: green; font-weight: bold; }\n";
