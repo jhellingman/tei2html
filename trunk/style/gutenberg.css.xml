@@ -156,17 +156,28 @@ p.line
     margin:0 10%;
 }
 
-p.argument,p.note
+p.argument, p.note, p.tocArgument
 {
     font-size:0.9em;
     line-height:1.2em;
     text-indent:0;
 }
 
-p.argument
+p.argument, p.tocArgument
 {
     margin:1.58em 10%;
 }
+
+p.tocChapter
+{
+    margin:1.58em 0%;
+}
+
+p.tocSection
+{
+    margin:0.7em 5%;
+}
+
 
 div.epigraph
 {
@@ -230,23 +241,9 @@ p.smallprint,li.smallprint
     font-size:80%;
 }
 
-p.question
+span.parnum
 {
-    margin-bottom:0;
-    text-align:left;
-}
-
-p.answer
-{
-    margin-top:0;
-    text-align:right;
-}
-
-p.explanation
-{
-    font-size:smaller;
-    margin-left:0.9em;
-    margin-right:0.9em;
+    font-weight: bold;
 }
 
 .leftnote

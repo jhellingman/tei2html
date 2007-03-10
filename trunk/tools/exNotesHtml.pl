@@ -78,7 +78,7 @@ while (<INPUTFILE>)
 
 		if ($notePlace eq "")
 		{
-			print "WARNING: note without place indication\n";
+			# print "WARNING: note without place indication\n";
 		}
 
         print OUTPUTFILE $beforeNote;
@@ -88,7 +88,7 @@ while (<INPUTFILE>)
         {
 			$tag = $1;
             $pageNumber = getAttrVal("n", $tag);
-			print "[$pageNumber]\n";
+			# print "[$pageNumber]\n";
         }
 
 		# Find the end of the note
@@ -153,10 +153,10 @@ while (<INPUTFILE>)
     {
 		$tag = $1;
 		$pageNumber = getAttrVal("n", $tag);
-		print "[$pageNumber]\n";
+		# print "[$pageNumber]\n";
     }
 
     print OUTPUTFILE $remainder;
 }
 
-print "NOTE: this document contains $seqNumber notes and $pageNumber pages.\n"
+# print "NOTE: this document contains $seqNumber notes and $pageNumber pages.\n"

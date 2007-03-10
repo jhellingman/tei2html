@@ -1714,26 +1714,12 @@
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
                 </xsl:if>
+				<xsl:if test="@n">
+					<span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
+				</xsl:if>
                 <xsl:apply-templates/>
             </p>
         </xsl:if>
-    </xsl:template>
-
-    <!-- Special types of Paragraphs (introduced for Filippino Riddles) -->
-
-    <xsl:template match="p[@rend='Question']">
-        <xsl:if test="@n">
-            <h3 id="{generate-id()}"><xsl:value-of select="@n"/></h3>
-        </xsl:if>
-        <p class="question"><xsl:apply-templates/></p>
-    </xsl:template>
-
-    <xsl:template match="p[@rend='Answer']">
-        <p id="{generate-id()}" class="answer"><xsl:apply-templates/></p>
-    </xsl:template>
-
-    <xsl:template match="p[@rend='Explanation']">
-        <p id="{generate-id()}" class="explanation"><xsl:apply-templates/></p>
     </xsl:template>
 
     <!--====================================================================-->
