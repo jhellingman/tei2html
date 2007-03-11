@@ -108,6 +108,8 @@
 "&zumlb;"			p "z&#x0324;"
 "&Zumlb;"			p "Z&#x0324;"
 
+"&odota;"			p "o&#x0307;"
+
 "&adotb;"			p "a&#x0323;"
 "&Adotb;"			p "A&#x0323;"
 "&edotb;"			p "e&#x0323;"

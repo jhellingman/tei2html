@@ -1499,6 +1499,8 @@ BEGIN
 
 	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
 
+	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
+
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
 	$ent{"1dotb"}		= "1" . chr(0x0323); # 1 with dot below
 	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
@@ -1549,7 +1551,7 @@ BEGIN
 	$ent{"imacacu"}		= chr(0x012B) . chr(0x0301); # i with macron and acute
 	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # i with macron and acute
 	$ent{"amacrdotb"}	= chr(0x0101) . chr(0x0323); # a with macron and dot below
-	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x02C6); # o with diaresis and circumflex
+	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
