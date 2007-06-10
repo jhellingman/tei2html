@@ -318,19 +318,19 @@
                 <xsl:if test="$optionExternalCSS = 'No'">
                     <!-- Pull in CSS sheets. This requires them to be wrapped in a tag at toplevel, so they become valid XML -->
                     <style type="text/css">
-					    /* Including standard CSS stylesheet */
+                        /* Including standard CSS stylesheet */
                         <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
                         <xsl:copy-of select="$stylesheet/*/node()"/>
 
-						/* Including supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
+                        /* Including supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
                         <xsl:variable name="stylesheet2" select="document($stylesheetname)"/>
                         <xsl:copy-of select="$stylesheet2/*/node()"/>
 
-						<xsl:if test="$customCssFile">
-						    /* Including custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
-							<xsl:variable name="stylesheet3" select="document($customCssFile)"/>
-							<xsl:copy-of select="$stylesheet3/*/node()"/>
-						</xsl:if>
+                        <xsl:if test="$customCssFile">
+                            /* Including custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
+                            <xsl:variable name="stylesheet3" select="document($customCssFile)"/>
+                            <xsl:copy-of select="$stylesheet3/*/node()"/>
+                        </xsl:if>
                     </style>
                 </xsl:if>
 
@@ -351,21 +351,21 @@
 
     <xsl:template match="front">
         <div class="front">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="body">
         <div class="body">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="back">
         <div class="back">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -382,7 +382,7 @@
 
     <xsl:template match="titlePage">
         <div class="titlePage">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
@@ -393,7 +393,7 @@
 
     <xsl:template match="titlePart" mode="titlePage">
         <h1 class="docTitle">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates mode="titlePage"/>
         </h1>
     </xsl:template>
@@ -433,7 +433,7 @@
     </xsl:template>
 
     <xsl:template match="figure" mode="titlePage">
-            <xsl:apply-templates select="."/>
+        <xsl:apply-templates select="."/>
     </xsl:template>
 
     <!--====================================================================-->
@@ -459,7 +459,7 @@
     <xsl:template match="abbr">
         <a id="{generate-id(.)}"></a>
         <span class="abbr">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@expan"/>
             </xsl:attribute>
@@ -492,7 +492,7 @@
     <xsl:template match="trans">
         <a id="{generate-id(.)}"></a>
         <span class="abbr">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
             </xsl:attribute>
@@ -603,7 +603,7 @@
 
     <xsl:template match="divGen[@type='toc']">
         <div class="div1" id="{generate-id()}">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <h2><xsl:value-of select="$strTableOfContents"/></h2>
             <ul>
                 <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
@@ -1164,7 +1164,7 @@
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
 
-            <table id="{generate-id(.)}">	        
+            <table id="{generate-id(.)}">
                 <xsl:if test="contains(@rend, 'font-size(')">
                     <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
                 </xsl:if>
@@ -1709,14 +1709,14 @@
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <p id="{generate-id()}">
                 <xsl:call-template name="setHtmlLangAttribute"/>
-				<xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
+                <xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
                 <xsl:if test="contains(@rend, 'align(')">
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
                 </xsl:if>
-				<xsl:if test="@n">
-					<span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
-				</xsl:if>
+                <xsl:if test="@n">
+                    <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
+                </xsl:if>
                 <xsl:apply-templates/>
             </p>
         </xsl:if>
@@ -1741,7 +1741,7 @@
 
     <xsl:template match="lg|sp">
         <div class="poem">
-		    <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <div class="stanza">
                 <xsl:apply-templates/>
             </div>
