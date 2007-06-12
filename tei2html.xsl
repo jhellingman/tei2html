@@ -441,7 +441,7 @@
 
     <xsl:template match="corr">
         <xsl:choose>
-            <xsl:when test="@resp='m'">
+            <xsl:when test="@resp = 'm' or @resp = 'p'">
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
@@ -853,7 +853,7 @@
                 <th><xsl:value-of select="$strCorrection"/></th>
             </tr>
             <xsl:for-each select="//corr">
-                <xsl:if test="not(@resp) or @resp != 'm'">
+                <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
                         <td width="20%">
                             <a href="#{generate-id(.)}">
