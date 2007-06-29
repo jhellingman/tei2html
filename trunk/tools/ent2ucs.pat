@@ -123,6 +123,8 @@
 
 "&amacrdotb;"		p "a&#x0304;&#x0323;"	% a with macron and dot below
 
+"&mmacr;"			p "m&#x0304;"
+
 "&Adot;"			p "A&#x0307;"
 "&adot;"			p "a&#x0307;"
 "&aeacute;"			p "&#x00E6;&#x0301;"
