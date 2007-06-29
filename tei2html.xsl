@@ -1845,9 +1845,7 @@
 
     <xsl:template name="setHtmlLangAttribute">
         <xsl:if test="@lang">
-            <xsl:attribute name="lang">
-                <xsl:value-of select="@lang"/>
-            </xsl:attribute>
+            <xsl:attribute name="lang"><xsl:value-of select="@lang"/></xsl:attribute>
         </xsl:if>
     </xsl:template>
 
