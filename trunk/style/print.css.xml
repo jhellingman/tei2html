@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<stylesheet>
+<![CDATA[
+
+
+body
+{
+    color: black;
+    background: white;
+    font-size: 10pt;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+
+a:link, a:visited
+{
+    color: black;
+    background: transparent;
+    text-decoration: none;
+}
+
+
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p
+{
+    text-indent: 0;
+}
+
+
+p
+{
+    text-indent: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6
+{
+    color: black;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+
+span.corr, span.abbr, span.measure
+{
+    border-bottom: 0px;
+}
+
+.transcribernote
+{
+    background-color: transparant;
+    border: white 0pt solid;
+    font-size: 80%;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+
+.figureHead, .noteref, span.leftnote, p.legend, .versenum, .rightnote,	.pagenum, .linenum, .pagenum a
+{
+	color: black;
+}
+
+
+]]>
+</stylesheet>

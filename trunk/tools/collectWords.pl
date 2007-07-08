@@ -232,11 +232,7 @@ sub dutch_titlecase
 
 sub load_dictionary
 {
-	if (!open(DICTFILE, "C:\\bin\\dic\\nl.dic"))
-	{
-			print "Could not open C:\\bin\\dic\\nl.dic";
-			exit;
-	}
+	open(DICTFILE, "C:\\bin\\dic\\nl.dic") || die "Could not open C:\\bin\\dic\\nl.dic";
 
 	%dictHash = ();
 	while (<DICTFILE>)
