@@ -316,22 +316,28 @@
                 </xsl:variable>
 
                 <xsl:if test="$optionExternalCSS = 'No'">
-                    <!-- Pull in CSS sheets. This requires them to be wrapped in a tag at toplevel, so they become valid XML -->
+                    <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
                     <style type="text/css">
-                        /* Including standard CSS stylesheet */
+                        /* Standard CSS stylesheet */
                         <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
                         <xsl:copy-of select="$stylesheet/*/node()"/>
 
-                        /* Including supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
+                        /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
                         <xsl:variable name="stylesheet2" select="document($stylesheetname)"/>
                         <xsl:copy-of select="$stylesheet2/*/node()"/>
 
                         <xsl:if test="$customCssFile">
-                            /* Including custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
+                            /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
                             <xsl:variable name="stylesheet3" select="document($customCssFile)"/>
                             <xsl:copy-of select="$stylesheet3/*/node()"/>
                         </xsl:if>
                     </style>
+					<!-- Pull in CSS sheet for print. -->
+					<style type="text/css" media="print">
+					    /* CSS stylesheet for printing */
+                        <xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
+                        <xsl:copy-of select="$printstylesheet/*/node()"/>
+					</style>
                 </xsl:if>
 
             </head>
@@ -674,6 +680,9 @@
             </li>
         </xsl:if>
     </xsl:template>
+
+	<!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
+	<xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
 
     <xsl:template match="div3" mode="gentoc">
         <xsl:if test="head">
