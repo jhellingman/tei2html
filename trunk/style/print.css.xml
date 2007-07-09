@@ -2,6 +2,8 @@
 <stylesheet>
 <![CDATA[
 
+/* Stylesheet for printing Project Gutenberg ebooks */
+/* The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: see http://www.w3.org/TR/css3-page/ */
 
 body
 {
@@ -9,7 +11,68 @@ body
     background: white;
     font-size: 10pt;
     font-family: Georgia, "Times New Roman", Times, serif;
+
+	text-align: justify;
+	// column-count: 2;
 }
+
+
+@page 
+{
+	size: A4;
+	margin: 27mm 16mm 27mm 16mm;
+}
+
+@page :left 
+{
+	@bottom-left 
+	{
+		content: counter(page);
+	}
+}
+
+@page :right 
+{
+	@bottom-right
+	{
+		content: counter(page);
+	}
+}
+
+
+div.div1
+{
+	page-break-after: always;
+}
+
+
+h2 
+{
+	string-set: header content();
+}
+
+
+@page :right
+{
+	@top-right 
+	{
+		content: string(header, first); 
+		font-style: italic;
+	}
+}
+
+@page :left
+{
+	@top-left
+	{
+		content: string(header, first); 
+		font-style: italic;
+	}
+}
+
+
+
+
 
 
 a:link, a:visited
@@ -41,10 +104,12 @@ h1, h2, h3, h4, h5, h6
 }
 
 
-span.corr, span.abbr, span.measure
+span.corr, span.abbr, span.measure, abbr
 {
     border-bottom: 0px;
+	text-decoration: none;
 }
+
 
 .transcribernote
 {

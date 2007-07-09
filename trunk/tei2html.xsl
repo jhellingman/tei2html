@@ -551,6 +551,9 @@
     <xsl:template match="ref[@target and not(@type='noteref')]">
         <xsl:variable name="target" select="./@target"/>
         <a id="{generate-id(.)}" href="#{generate-id(//*[@id=$target])}">
+			<xsl:if test="@type='pageref'">
+				<xsl:attribute name="class">typeref</xsl:attribute>
+			</xsl:if>
             <xsl:apply-templates/>
         </a>
     </xsl:template>
