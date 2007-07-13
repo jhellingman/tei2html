@@ -2,7 +2,7 @@
 <stylesheet>
 <![CDATA[
 
-/* Stylesheet for printing Project Gutenberg ebooks */
+/* Stylesheet for printing Project Gutenberg ebooks using Prince http://www.princexml.com/ */
 /* The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: see http://www.w3.org/TR/css3-page/ */
 
 body
@@ -11,16 +11,50 @@ body
     background: white;
     font-size: 10pt;
     font-family: Georgia, "Times New Roman", Times, serif;
+    margin: 0 10%;
+
 
 	text-align: justify;
 	// column-count: 2;
 }
 
 
+@page titlepage 
+{ 
+	@top-left { content: normal }
+	@top-right { content: normal }
+	@bottom-left { content: normal }
+	@bottom-right { content: normal }
+}
+
+
+
+div.titlePage 
+{
+	page: titlepage;
+	page-break-after: always;
+
+	border: white 0px solid;
+}
+
+h1.docTitle
+{
+	string-set: doctitle content();
+}
+
+
+
 @page 
 {
 	size: A4;
 	margin: 27mm 16mm 27mm 16mm;
+
+	@footnotes 
+	{
+		border-top: solid black thin;
+		padding-top: 8pt;
+		margin: 0 10%;
+	}
 }
 
 @page :left 
@@ -28,6 +62,7 @@ body
 	@bottom-left 
 	{
 		content: counter(page);
+		margin: 0 10%;
 	}
 }
 
@@ -36,6 +71,7 @@ body
 	@bottom-right
 	{
 		content: counter(page);
+		margin: 0 10%;
 	}
 }
 
@@ -46,7 +82,7 @@ div.div1
 }
 
 
-h2 
+h2.normal
 {
 	string-set: header content();
 }
@@ -58,6 +94,7 @@ h2
 	{
 		content: string(header, first); 
 		font-style: italic;
+		margin: 0 10%;
 	}
 }
 
@@ -67,11 +104,22 @@ h2
 	{
 		content: string(header, first); 
 		font-style: italic;
+		margin: 0 10%;
 	}
 }
 
 
+.displayfootnote
+{
+	display: prince-footnote;
+	font-size: 8pt;
+}
 
+
+.noteref, div.footnotes
+{
+	display: none;
+}
 
 
 
@@ -115,7 +163,7 @@ span.corr, span.abbr, span.measure, abbr
 {
     background-color: transparant;
     border: white 0pt solid;
-    font-size: 80%;
+    font-size: 8pt;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
 
