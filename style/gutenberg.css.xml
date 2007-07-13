@@ -276,6 +276,12 @@ a.noteref
     vertical-align: 0.25em;
 }
 
+
+.displayfootnote
+{
+	display: none;
+}
+
 div.footnotes
 {
     margin-top: 1em;

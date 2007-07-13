@@ -613,7 +613,7 @@
     <xsl:template match="divGen[@type='toc']">
         <div class="div1" id="{generate-id()}">
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <h2><xsl:value-of select="$strTableOfContents"/></h2>
+            <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
             <ul>
                 <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
                 <xsl:choose>
@@ -799,7 +799,7 @@
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
-            <h2><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
                     <xsl:with-param name="figures" select="//figure[@id]" />
@@ -995,13 +995,23 @@
         </div>
     </xsl:template>
 
+	<xsl:template name="setHtmlClass">
+		<xsl:choose>
+            <xsl:when test="@type">
+                <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="class">normal</xsl:attribute>
+            </xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
         <h2>
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:if test="@type='label'">
-                <xsl:attribute name="class">label</xsl:attribute>
-            </xsl:if>
+            <xsl:call-template name="setHtmlClass"/>
             <xsl:apply-templates/>
         </h2>
     </xsl:template>
@@ -1048,9 +1058,7 @@
         <xsl:call-template name="headPicture"/>
         <h2 id="{generate-id(.)}">
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:if test="@type='label'">
-                <xsl:attribute name="class">label</xsl:attribute>
-            </xsl:if>
+            <xsl:call-template name="setHtmlClass"/>
             <xsl:if test="contains(@rend, 'align(')">
                 <xsl:attribute name="align">
                     <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
@@ -1076,9 +1084,7 @@
         <xsl:call-template name="headPicture"/>
         <h3 id="{generate-id(.)}">
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:if test="@type='label'">
-                <xsl:attribute name="class">label</xsl:attribute>
-            </xsl:if>
+            <xsl:call-template name="setHtmlClass"/>
             <xsl:apply-templates/>
         </h3>
     </xsl:template>
@@ -1094,7 +1100,10 @@
 
     <xsl:template match="div3/head">
         <xsl:call-template name="headPicture"/>
-        <h4><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></h4>
+        <h4>
+			<xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+		</h4>
     </xsl:template>
 
     <!-- div4 -->
@@ -1122,13 +1131,19 @@
 
     <xsl:template match="div5/head">
         <xsl:call-template name="headPicture"/>
-        <h6><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></h6>
+        <h6>
+			<xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+		</h6>
     </xsl:template>
 
     <!-- other headers -->
 
     <xsl:template match="head">
-        <h4><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></h4>
+        <h4>
+			<xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+		</h4>
     </xsl:template>
 
     <xsl:template match="byline">
@@ -1152,7 +1167,7 @@
 
 
     <!--====================================================================-->
-    <!-- Tables: Translate the TEI model to HTML tables. -->
+    <!-- Tables: Translate the TEI table model to HTML tables. -->
 
 
     <xsl:template name="closepar">
@@ -1626,6 +1641,50 @@
     <!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
 
     <!--====================================================================-->
+	<!-- Letters, with openers, closers, etc. -->
+
+	<!-- non-TEI shortcut for <q><text><body><div1 type="Letter"> -->
+	<xsl:template match="letter">
+        <xsl:call-template name="closepar"/>
+        <div class="blockquote letter">
+            <xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+        </div>
+        <xsl:call-template name="reopenpar"/>
+	</xsl:template>
+
+	<xsl:template match="opener">
+		<div class="opener">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="salute">
+		<div class="salute">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="closer">
+		<div class="closer">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="signed">
+		<div class="signed">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="dateline">
+		<div class="dateline">
+			<xsl:apply-templates/>
+		</div>
+	</xsl:template>
+
+
+    <!--====================================================================-->
     <!-- Notes -->
 
     <!-- Marginal notes should go to the margin -->
@@ -1637,12 +1696,16 @@
         </span>
     </xsl:template>
 
-    <!-- Move footnotes to the end of the div1 element they appear in (but not in quoted texts) -->
+    <!-- Move footnotes to the end of the div1 element they appear in (but not in quoted texts). We place the text of the footnote in-line as well, for use by the print stylesheet. In browsers it will be hidden. -->
 
     <xsl:template match="/TEI.2/text//note[@place='foot' or not(@place)]">
         <a id="{generate-id()}src" href="#{generate-id()}" class="noteref">
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
+        <span class="displayfootnote">
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
     <!-- Handle notes with paragraphs different from simple notes -->
@@ -1687,7 +1750,7 @@
     </xsl:template>
 
 
-    <!-- Notes in a critical apparatus (coded with place=apparatus) -->
+    <!-- Notes in a critical apparatus (coded with attribute place="apparatus") -->
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
         <a id="{generate-id()}src" href="#{generate-id()}" style="text-decoration:none">
@@ -1821,7 +1884,7 @@
     </xsl:template>
 
     <xsl:template match="hi[@rend='italic']">
-        <i><xsl:apply-templates/></i>
+        <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <xsl:template match="hi[@rend='bold']">
@@ -1832,7 +1895,7 @@
         <span class="smallcaps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='expanded' or @rend='ex']">
+    <xsl:template match="hi[@rend='expanded' or @rend='ex' or @rend='exp']">
         <span class="letterspaced"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
