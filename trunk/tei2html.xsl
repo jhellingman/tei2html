@@ -332,12 +332,12 @@
                             <xsl:copy-of select="$stylesheet3/*/node()"/>
                         </xsl:if>
                     </style>
-					<!-- Pull in CSS sheet for print. -->
+					<!-- Pull in CSS sheet for print.
 					<style type="text/css" media="print">
 					    /* CSS stylesheet for printing */
                         <xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
                         <xsl:copy-of select="$printstylesheet/*/node()"/>
-					</style>
+					</style>  -->
                 </xsl:if>
 
             </head>
@@ -1276,15 +1276,16 @@
     </xsl:template>
 
 
-    <xsl:template name="cell-span">
-        <xsl:if test="@cols and (@cols > 1)">
-            <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
-        </xsl:if>
-        <xsl:if test="@rows and (@rows > 1)">
-            <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
+	<xsl:template name="cell-rend">
+        <xsl:if test="contains(@rend, 'image(')">
+			<xsl:call-template name="insertimage2">
+				<xsl:with-param name="alt">
+					<xsl:value-of select="x"/>
+				</xsl:with-param>
+			</xsl:call-template>
         </xsl:if>
 
-        <xsl:if test="contains(@rend, 'width(')">
+		<xsl:if test="contains(@rend, 'width(')">
             <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
         </xsl:if>
 
@@ -1294,6 +1295,22 @@
         <xsl:if test="contains(@rend, 'align(center)')">
             <xsl:attribute name="class">aligncenter</xsl:attribute>
         </xsl:if>
+
+        <xsl:if test="contains(@rend, 'valign(middle)')">
+            <xsl:attribute name="valign">middle</xsl:attribute>
+        </xsl:if>
+	</xsl:template>
+
+
+    <xsl:template name="cell-span">
+        <xsl:if test="@cols and (@cols > 1)">
+            <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
+        </xsl:if>
+        <xsl:if test="@rows and (@rows > 1)">
+            <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
+        </xsl:if>
+
+		<xsl:call-template name="cell-rend"/>
 
         <!-- Align numeric-only cells right -->
         <xsl:if test="not(contains(@rend, 'align('))">
