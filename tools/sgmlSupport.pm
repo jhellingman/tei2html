@@ -1487,6 +1487,7 @@ BEGIN
 
 	# Requiring combining diacritics
 	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
+	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
 
 	$ent{"lumlb"}		= "l" . chr(0x0324); # l with umlaut below
 	$ent{"Lumlb"}		= "L" . chr(0x0324); # L with umlaut below

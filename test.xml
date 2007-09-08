@@ -132,6 +132,20 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 </p>
 
 <p>
+<table rend="summary(A small table to demonstrate bracket images.)">
+	<row>
+		<cell>Gadgets</cell>
+		<cell rows="2" rend="image(images/bracket3.gif)valign(middle)width(2)"></cell>
+		<cell rows="2" rend="valign(middle)">Both 1</cell>
+	</row>
+	<row>
+		<cell>Fudgets</cell>
+	</row>
+</table>
+</p>
+
+
+<p>
 <table>
 	<row>
 		<cell rend="width(25%)">Een Een Een Een Een Een Een Een Een Een Een Een </cell>
@@ -269,6 +283,30 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 </p>
 
 
+<div2>
+<head>Letters, Closers, and Openers</head>
+
+
+<q rend="block"><text><body><div1 type="Letter">
+
+<opener>
+<dateline>23 June 1893</dateline>
+<salute>Dear John:</salute>
+</opener>
+
+<p>Test of letter</p>
+
+<closer>
+<signed>Dr. May</signed>
+</closer>
+
+
+</div1></body></text></q>
+
+
+
+
+</div2>
 <div2>
 <head type="label">Label van sectie</head>
 <head>Test level 2</head>
