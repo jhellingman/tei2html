@@ -46,6 +46,7 @@
 
     <xsl:variable name="optionExternalCSS" select="'No'"/>
     <xsl:variable name="optionPGHeaders" select="'No'"/>
+    <xsl:variable name="optionPrinceMarkup" select="'No'"/>
 
     <!--====================================================================-->
 
@@ -332,12 +333,14 @@
                             <xsl:copy-of select="$stylesheet3/*/node()"/>
                         </xsl:if>
                     </style>
-					<!-- Pull in CSS sheet for print.
-					<style type="text/css" media="print">
-					    /* CSS stylesheet for printing */
-                        <xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
-                        <xsl:copy-of select="$printstylesheet/*/node()"/>
-					</style>  -->
+					<!-- Pull in CSS sheet for print (using Prince). -->
+					<xsl:if test="$optionPrinceMarkup = 'Yes'">
+						<style type="text/css" media="print">
+							/* CSS stylesheet for printing */
+							<xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
+							<xsl:copy-of select="$printstylesheet/*/node()"/>
+						</style>
+					</xsl:if>
                 </xsl:if>
 
             </head>
@@ -363,10 +366,10 @@
     </xsl:template>
 
     <xsl:template match="body">
-        <div class="body">
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:apply-templates/>
-        </div>
+		<div class="body">
+			<xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+		</div>
     </xsl:template>
 
     <xsl:template match="back">
@@ -1035,8 +1038,8 @@
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
             </xsl:attribute>
 
-            <xsl:if test="//*[@id='toc']">
-                <!-- If we have an element with id 'toc', include a link to it -->
+            <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
+                <!-- If we have an element with id 'toc', include a link to it (except in quoted material) -->
                 <span class="pagenum">
                     [<a href="#{generate-id(//*[@id='toc'])}"><xsl:value-of select="$strToc"/></a>]
                 </span>
@@ -1053,6 +1056,7 @@
             </xsl:if>
         </div>
     </xsl:template>
+
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
@@ -1719,10 +1723,12 @@
         <a id="{generate-id()}src" href="#{generate-id()}" class="noteref">
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
-        <span class="displayfootnote">
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:apply-templates/>
-        </span>
+		<xsl:if test="$optionPrinceMarkup = 'Yes'">
+			<span class="displayfootnote">
+				<xsl:call-template name="setHtmlLangAttribute"/>
+				<xsl:apply-templates/>
+			</span>
+		</xsl:if>
     </xsl:template>
 
     <!-- Handle notes with paragraphs different from simple notes -->
@@ -1809,6 +1815,10 @@
                 <xsl:if test="@n">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
+				<!-- in a few cases, we have quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
+				<xsl:if test="ancestor::note[place='foot' or not(@place)]">
+					<xsl:attribute name="class">footnote</xsl:attribute>
+				</xsl:if>
                 <xsl:apply-templates/>
             </p>
         </xsl:if>
