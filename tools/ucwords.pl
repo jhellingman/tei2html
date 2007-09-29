@@ -20,20 +20,8 @@ sub StripDiacritics
 {
 	my $str = shift;
 
-	# Taken from: http://www.ahinea.com/en/tech/accented-translate.html
-	for ($str)  # the variable we work on
+	for ($str)
 	{
-		##  convert to Unicode first
-		##  if your data comes in Latin-1, then uncomment:
-		#$_ = Encode::decode( 'iso-8859-1', $_ );
-
-		# Special cases for German and Spanish.
-		# s/\xe4/ae/g;		##  treat characters ä ñ ö ü ÿ
-		# s/\xf6/oe/g;
-		# s/\xfc/ue/g;
-		# s/\xf1/ny/g;		##  this was wrong in previous version of this doc
-		# s/\xff/yu/g;
-
 		$_ = NFD($_);		##  decompose (Unicode Normalization Form D)
 		s/\pM//g;			##  strip combining characters
 
@@ -50,8 +38,6 @@ sub StripDiacritics
 		tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/; # i??L?l
 		tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/; # ???Øø?
 		tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;                   # ÞTþt
-
-		# s/[^\0-\x80]//g;	##  clear everything else; optional
 	}
 	return $str;
 }
@@ -152,10 +138,19 @@ printSequence();
 
 print "<h1>Word Usage Report for $infile</h1>";
 
+
+open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
+
+
 $prevLang = "";
 $prevWord = "";
 $prevKey  = "";
 $prevLetter = "";
+
+$uniqWords = 0;
+$totalWords = 0;
+$unknownTotalWords = 0;
+$unknownUniqWords = 0;
 
 foreach $item (@wordList)
 {
@@ -165,11 +160,29 @@ foreach $item (@wordList)
 
 	if ($lang ne $prevLang)
 	{
+		if ($totalWords != 0) 
+		{
+			print "<h3>Statistics</h3>";
+			$percentage =  sprintf("%.2f", 100 * ($unknownTotalWords / $totalWords));
+			print "<p>Total words: $totalWords, of which unknown: $unknownTotalWords [$percentage%]";
+			$percentage =  sprintf("%.2f", 100 * ($unknownUniqWords / $uniqWords));
+			print "<p>Unique words: $uniqWords, of which unknown: $unknownUniqWords [$percentage%]";
+		}
+
+		$uniqWords = 0;
+		$totalWords = 0;
+		$unknownTotalWords = 0;
+		$unknownUniqWords = 0;
+
 		# print STDERR "DEBUG: Change of language: $item\n";
 		print "<h2>Word frequencies in " . getLanguage(lc($lang)) . "</h2>\n";
+		print OUTPUTFILE "\n\n" . getLanguage(lc($lang)) . "\n\n";
 		$prevLang = $lang;
-		loadDict($lang);
+		loadDict($lang);	
 	}
+
+	$uniqWords++;
+	$totalWords += $count;
 
 	if ($key ne $prevKey)
 	{
@@ -187,10 +200,17 @@ foreach $item (@wordList)
 	if ($known == 0) 
 	{
 		$compoundWord = compoundWord($word);
+		$unknownUniqWords++;
+		$unknownTotalWords += $count;
 	}
 
 	if ($known == 0)
 	{
+		if ($count > 2) 
+		{
+			print OUTPUTFILE "$word\n";
+		}
+
 		if ($compoundWord ne "") 
 		{
 			if ($count < 3) 
@@ -227,6 +247,16 @@ foreach $item (@wordList)
 		}
 	}
 }
+
+if ($totalWords != 0) 
+{
+	print "<h3>Statistics</h3>";
+	$percentage =  sprintf("%.2f", 100 * ($unknownTotalWords / $totalWords));
+	print "<p>Total words: $totalWords, of which unknown: $unknownTotalWords [$percentage%]";
+	$percentage =  sprintf("%.2f", 100 * ($unknownUniqWords / $uniqWords));
+	print "<p>Unique words: $uniqWords, of which unknown: $unknownUniqWords [$percentage%]";
+}
+
 
 
 sub compoundWord()
@@ -340,11 +370,8 @@ foreach $rend (@rendList)
 }
 print "</table>\n";
 
-
-
-
-
 print "</body></html>";
+
 
 
 
@@ -492,7 +519,6 @@ sub loadDict
 {
 	my $lang = shift;
 
-	# Load dictionary
 	if (!openDictionary("$lang.dic"))
 	{
 		$lang =~ /-/;
@@ -527,12 +553,16 @@ sub loadCustomDictionary
 	my $file = "custom-$lang.dic";
 	if (openDictionary($file))
 	{
+		my $count = 0;
 		while (<DICTFILE>)
 		{
 			my $dictword =  $_;
 			$dictword =~ s/\n//g;
 			$dictHash{$dictword} = 1;
+			$count++;
 		}
+		print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
+
 		close(DICTFILE);
 	}
 	else
