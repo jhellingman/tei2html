@@ -8,7 +8,6 @@ require Exporter;
 
 BEGIN
 {
-
 	%langNameHash = ();
 
 	$langNameHash{"af"}			= "Afrikaans";
@@ -32,6 +31,7 @@ BEGIN
 	$langNameHash{"fi"}			= "Finnish";
 	$langNameHash{"fr"}			= "French";
 	$langNameHash{"fy"}			= "Frisian";
+	$langNameHash{"fy-wwo"}		= "Frisian (Westerwold)";
 	$langNameHash{"gd"}			= "Scots Gaelic";
 	$langNameHash{"he"}			= "Hebrew";
 	$langNameHash{"he-latn"}	= "Hebrew (Latin transcription)";
@@ -44,14 +44,31 @@ BEGIN
 	$langNameHash{"jp-latn"}	= "Japanese (Latin transcription)";
 	$langNameHash{"la"}			= "Latin";
 	$langNameHash{"la-x-bio"}	= "Latin (Biological nomenclature)";
+	
 	$langNameHash{"nl"}			= "Dutch";
+	$langNameHash{"nl-nl"}		= "Dutch (Netherlands)";
+	$langNameHash{"nl-be"}		= "Dutch (Belgium)";
+
+	$langNameHash{"nl-1400"}	= "Dutch (15th century)";
 	$langNameHash{"nl-1500"}	= "Dutch (16th century)";
 	$langNameHash{"nl-1600"}	= "Dutch (17th century)";
 	$langNameHash{"nl-1700"}	= "Dutch (18th century)";
 	$langNameHash{"nl-1800"}	= "Dutch (19th century)";
 	$langNameHash{"nl-1900"}	= "Dutch (spelling De Vries-Te Winkel)";
+
+	$langNameHash{"nl-dia"}		= "Dutch (unspecified dialect)";
+	$langNameHash{"nl-ach"}		= "Dutch (Achterhoek)";
+	$langNameHash{"nl-gro"}		= "Dutch (Groningen)";
+	$langNameHash{"nl-lim"}		= "Dutch (Limburg)";
+	$langNameHash{"nl-obr"}		= "Dutch (Oost-Brabant)";
+	$langNameHash{"nl-ovl"}		= "Dutch (Oost-Vlaanderen)";
+	$langNameHash{"nl-wbr"}		= "Dutch (West-Brabant)";
+	$langNameHash{"nl-wvl"}		= "Dutch (West-Vlaanderen)";
+	$langNameHash{"nl-zee"}		= "Dutch (Zeeland)";
+
 	$langNameHash{"pl"}			= "Polish";
 	$langNameHash{"pt"}			= "Portuguese";
+	$langNameHash{"pt-br"}		= "Portuguese (Brazil)";
 	$langNameHash{"ro"}			= "Romanian";
 	$langNameHash{"ru"}			= "Russian";
 	$langNameHash{"ru-latn"}	= "Russian (Latin transcription)";
@@ -64,7 +81,10 @@ BEGIN
 	$langNameHash{"sr-latn"}    = "Serbian (Latin script)";
 	$langNameHash{"sy"}			= "Syriac";
 	$langNameHash{"tl"}			= "Tagalog";
-	$langNameHash{"tl-1900"}	= "Tagalog (19th and early 20th century)";
+	$langNameHash{"tl-1900"}	= "Tagalog (19th and early 20th century orthography)";
+	$langNameHash{"tl-bayb"}	= "Tagalog (in Baybayin script)";
+
+	$langNameHash{"zh"}			= "Chinese";
 	$langNameHash{"zh-latn"}	= "Chinese (Latin transcription)";
 
 	$langNameHash{"grc"}		= "Greek (classical)";
@@ -78,6 +98,7 @@ BEGIN
 	$langNameHash{"pag"}		= "Pangasin&aacute;n";
 	$langNameHash{"pam"}		= "Kapampangan";
 	$langNameHash{"war"}		= "W&aacute;ray-W&aacute;ray";
+
 	$langNameHash{"haw"}		= "Hawaiian";
 	$langNameHash{"kha"}		= "Khasi";
 
@@ -88,8 +109,6 @@ BEGIN
 	$langNameHash{"und"}		= "undetermined language";
 
 	$langNameHash{"obab"}		= "Old Babylonian (Latin transcription)";
-
-
 }
 
 
