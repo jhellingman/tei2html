@@ -83,6 +83,8 @@ BEGIN
 	$langNameHash{"tl"}			= "Tagalog";
 	$langNameHash{"tl-1900"}	= "Tagalog (19th and early 20th century orthography)";
 	$langNameHash{"tl-bayb"}	= "Tagalog (in Baybayin script)";
+	$langNameHash{"tm"}			= "Tamil";
+	$langNameHash{"tm-latn"}	= "Tamil (Latin transcription)";
 
 	$langNameHash{"zh"}			= "Chinese";
 	$langNameHash{"zh-latn"}	= "Chinese (Latin transcription)";

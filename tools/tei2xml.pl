@@ -5,6 +5,7 @@ $patcdir    = "L:\\eLibrary\\tools\\tei2html\\tools\\patc\\transcriptions"; # lo
 $xsldir     = "L:\\eLibrary\\tools\\tei2html";  # location of xsl stylesheets
 $tmpdir     = "C:\\Temp";                       # place to drop temporary files
 $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+$princedir  = "F:\\Programs\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
 
 #==============================================================================
 
@@ -159,6 +160,19 @@ sub processFile
     system ("tidy -qe $basename.html");
     system ("rm tmp.5a");
 
+	if (0 == 1) 
+	{
+		# Do the HTML transform again, but with an additional parameter to include Prince specific things.
+
+		print "Create PDF version...\n";
+		$optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
+		system ("saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
+		system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
+		system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
+		system ("tidy -qe tmp5b.html");
+		system ("$princedir/prince tmp5b.html $basename.pdf");
+		system ("rm tmp.5a tmp5b.html");
+	}
 
     print "Report on word usage...\n";
     system ("perl $toolsdir/ucwords.pl tmp.4 > tmp.4a");
