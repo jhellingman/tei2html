@@ -47,11 +47,9 @@
     <xsl:param name="imageInfoFile"/>
     <xsl:param name="customCssFile"/>
 
-    <!--====================================================================-->
-
-    <xsl:variable name="optionExternalCSS" select="'No'"/>
-    <xsl:variable name="optionPGHeaders" select="'No'"/>
-    <xsl:variable name="optionPrinceMarkup" select="'No'"/>
+    <xsl:param name="optionPrinceMarkup" select="'No'"/>
+    <xsl:param name="optionExternalCSS" select="'No'"/>
+    <xsl:param name="optionPGHeaders" select="'No'"/>
 
     <!--====================================================================-->
 

@@ -878,6 +878,15 @@ BEGIN
 	$ent{"sup1"}	    = chr(0x00B9);	#  SUPERSCRIPT ONE
 	$ent{"sup2"}	    = chr(0x00B2);	#  SUPERSCRIPT TWO
 	$ent{"sup3"}	    = chr(0x00B3);	#  SUPERSCRIPT THREE
+
+	$ent{"sup0"}	    = chr(0x2070);	#  SUPERSCRIPT ZERO
+	$ent{"sup4"}	    = chr(0x2074);	#  SUPERSCRIPT FOUR
+	$ent{"sup5"}	    = chr(0x2075);	#  SUPERSCRIPT FIVE
+	$ent{"sup6"}	    = chr(0x2076);	#  SUPERSCRIPT SIX
+	$ent{"sup7"}	    = chr(0x2077);	#  SUPERSCRIPT SEVEN
+	$ent{"sup8"}	    = chr(0x2078);	#  SUPERSCRIPT EIGHT
+	$ent{"sup9"}	    = chr(0x2079);	#  SUPERSCRIPT NINE
+
 	$ent{"supe"}	    = chr(0x2287);	#  SUPERSET OF OR EQUAL TO
 	$ent{"supE"}	    = chr(0x2287);	#  SUPERSET OF OR EQUAL TO
 	$ent{"supne"}	    = chr(0x228B);	#  SUPERSET OF WITH NOT EQUAL TO
