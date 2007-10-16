@@ -24,7 +24,7 @@ if ($filename eq "")
         if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/)
         {
             processFile($file);
-            exit;
+            #exit;
         }
     }
 }
@@ -58,8 +58,8 @@ sub processFile
     if ($containsGreek == 0)
     {
         print "Converting Greek transcription...\n";
-        system ("patc -p $patcdir/greek/gr2sgml.pat $currentname tmp.a");
-        $currentname = "tmp.a";
+        system ("patc -p $patcdir/greek/gr2sgml.pat $currentname tmp.el");
+        $currentname = "tmp.el";
     }
 
     # Check for presence of Assamese transcription
@@ -67,8 +67,17 @@ sub processFile
     if ($containsAssamese == 0)
     {
         print "Converting Assamese transcription...\n";
-        system ("patc -p $patcdir/indic/as2ucs.pat $currentname tmp.b");
-        $currentname = "tmp.b";
+        system ("patc -p $patcdir/indic/as2ucs.pat $currentname tmp.as");
+        $currentname = "tmp.as";
+    }
+
+	# Check for presence of Bengali transcription
+    my $containsAssamese = system ("grep -q \"<BN>\" $currentname");
+    if ($containsAssamese == 0)
+    {
+        print "Converting Assamese transcription...\n";
+        system ("patc -p $patcdir/indic/bn2ucs.pat $currentname tmp.bn");
+        $currentname = "tmp.bn";
     }
 
     # Check for presence of Arabic transcription
@@ -76,8 +85,8 @@ sub processFile
     if ($containsArabic == 0)
     {
         print "Converting Arabic transcription...\n";
-        system ("patc -p $patcdir/arabic/ar2sgml.pat $currentname tmp.c");
-        $currentname = "tmp.c";
+        system ("patc -p $patcdir/arabic/ar2sgml.pat $currentname tmp.ar");
+        $currentname = "tmp.ar";
     }
 
     # Check for presence of Hebrew transcription
@@ -85,8 +94,8 @@ sub processFile
     if ($containsHebrew == 0)
     {
         print "Converting Hebrew transcription...\n";
-        system ("patc -p $patcdir/hebrew/he2sgml.pat $currentname tmp.d");
-        $currentname = "tmp.d";
+        system ("patc -p $patcdir/hebrew/he2sgml.pat $currentname tmp.hb");
+        $currentname = "tmp.hb";
     }
 
     # Check for presence of Tagalog transcription
@@ -94,8 +103,8 @@ sub processFile
     if ($containsTagalog == 0)
     {
         print "Converting Tagalog (Baybayin) transcription...\n";
-        system ("patc -p $patcdir/tagalog/tagalog.pat $currentname tmp.e");
-        $currentname = "tmp.e";
+        system ("patc -p $patcdir/tagalog/tagalog.pat $currentname tmp.tl");
+        $currentname = "tmp.tl";
     }
 
     # Check for presence of Tamil transcription
@@ -103,8 +112,8 @@ sub processFile
     if ($containsTagalog == 0)
     {
         print "Converting Tamil transcription...\n";
-        system ("patc -p $patcdir/indic/tm2ucs.pat $currentname tmp.f");
-        $currentname = "tmp.f";
+        system ("patc -p $patcdir/indic/tm2ucs.pat $currentname tmp.tm");
+        $currentname = "tmp.tm";
     }
 
 
@@ -207,7 +216,7 @@ sub processFile
 
 
     print "Clean up...";
-    system ("rm tmp.? tmp.4a $filename.out $filename.notes out.txt");
+    system ("rm tmp.* tmp.4a $filename.out $filename.notes out.txt");
     print " Done!\n";
 
 

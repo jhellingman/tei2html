@@ -14,6 +14,10 @@ BEGIN
 	$langNameHash{"ar"}			= "Arabic";
 	$langNameHash{"ar-latn"}	= "Arabic (Latin transcription)";
 	$langNameHash{"as"}			= "Assamese";
+	$langNameHash{"bn"}			= "Bengali";
+	$langNameHash{"bo"}			= "Tibetan";
+	$langNameHash{"bo-latn"}	= "Tibetan (Latin transcription)";
+
 	$langNameHash{"cy"}			= "Welsh";
 	$langNameHash{"da"}			= "Danish";
 	$langNameHash{"de"}			= "German";
@@ -44,6 +48,8 @@ BEGIN
 	$langNameHash{"jp-latn"}	= "Japanese (Latin transcription)";
 	$langNameHash{"la"}			= "Latin";
 	$langNameHash{"la-x-bio"}	= "Latin (Biological nomenclature)";
+	$langNameHash{"my"}			= "Burmese";
+	$langNameHash{"my-latn"}	= "Burmese (Latin transcription)";
 	
 	$langNameHash{"nl"}			= "Dutch";
 	$langNameHash{"nl-nl"}		= "Dutch (Netherlands)";
@@ -101,9 +107,17 @@ BEGIN
 	$langNameHash{"pam"}		= "Kapampangan";
 	$langNameHash{"war"}		= "W&aacute;ray-W&aacute;ray";
 
+	$langNameHash{"sit"}		= "Sino-Tibetan (Other)";
+	$langNameHash{"sit-ao"}		= "Ao Naga, unspecified dialect";
+	$langNameHash{"sit-ao-mongsen"}	= "Ao Naga, Mongsen dialect";
+	$langNameHash{"sit-ao-chongli"}	= "Ao Naga, Chongli dialect";
+	$langNameHash{"sit-sema"}	= "Sema Naga";
+	$langNameHash{"sit-angami"}	= "Angami Naga";
+	$langNameHash{"mni"}		= "Meitei or Manipuri";
+	$langNameHash{"mni-old"}	= "Old Meitei or Old Manipuri";
+
 	$langNameHash{"haw"}		= "Hawaiian";
 	$langNameHash{"kha"}		= "Khasi";
-
 
 	$langNameHash{"gad"}		= "Gaddang";
 

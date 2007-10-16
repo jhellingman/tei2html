@@ -1,10 +1,10 @@
-% bg2usc.pat -- convert Indic script text in Extended Velthuis transliteration
+% bn2usc.pat -- convert Indic script text in Extended Velthuis transliteration
 %               to Unicode in XML entities (Bengali)
 % Copyright 2003 Jeroen Hellingman
 %
 % This file is to be used with the pattern-converter utility patc.
 %
-% patc -p bg2ucs.pat file.dn file.usc
+% patc -p bn2ucs.pat file.dn file.usc
 %
 % modes/pattern sets
 %  0 - roman text
@@ -12,11 +12,11 @@
 %  2 - Extended Velthuis transcription, secondary position
 
 @patterns 0 roman text
-"$"		1 "<foreign lang=bg>"		switch to indic script
+"$"		1 "<foreign lang=bn>"		switch to Bengali script
 
 % EVH language tags (use TEI <foreign> tags)
 
-"<BG>"		1 "<foreign lang=bg>"
+"<BN>"		1 "<foreign lang=bn>"
 
 % all others go thru unaltered
 
@@ -32,7 +32,7 @@
 "<"		0 "<"				RESYNC
 ">"		0 ">"				RESYNC
 
-"</BG>"		0 "</foreign>"
+"</BN>"		0 "</foreign>"
 
 % vowels, use full vowel, stay in primary mode
 "*"		1 "&#x0985;"			EVH silent a -- should not appear initially
@@ -180,7 +180,7 @@
 "<"		0 "<"				RESYNC
 ">"		0 ">"				RESYNC
 
-"</BG>"		0 "</foreign>"
+"</BN>"		0 "</foreign>"
 
 % vowels, use matra, go to primary mode
 
@@ -319,4 +319,4 @@
 
 @end
 
-% end of bg2usc.pat
+% end of bn2usc.pat
