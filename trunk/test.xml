@@ -10,6 +10,9 @@
 <!ENTITY eacute "&#x00E9;">
 <!ENTITY apos   "&#x2019;">
 
+<!ENTITY egrave "&#232;">
+
+
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
 
 ]>
@@ -326,7 +329,14 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 	<item>Tien</item>
 </list>
 
-<list rend="columns(2)">
+<list type="ordered">
+	<item>Een</item>
+	<item>Twee</item>
+	<item>Drie</item>
+	<item>Vier</item>
+</list>
+
+<list rend="columns(2) list-style-type(disc)">
 	<item>Een</item>
 	<item>Twee</item>
 	<item>Drie</item>
@@ -340,6 +350,38 @@ Here we have a reference to <ref target="pb002">page 2</ref>. We also have a ref
 </list>
 
 </div2>
+
+<list rend="columns(2)" type="ordered">
+	<item>Een</item>
+	<item>Twee</item>
+	<item>Drie</item>
+	<item>Vier</item>
+</list>
+
+<list rend="columns(2) list-style-type(upper-roman)" type="ordered">
+	<item n="5">Vijf</item>
+	<item>Zes</item>
+	<item n="7">Zeven</item>
+	<item>Acht</item>
+</list>
+
+<p>A list with lower case roman numerals:</p>
+
+<list rend="list-style-type(lower-roman)" type="ordered">
+	<item>Een</item>
+	<item>Twee</item>
+	<item n="48">Drie</item>
+	<item>Vier</item>
+</list>
+
+<p>A list without bullets or numbers:</p>
+
+<list type="simple">
+	<item>Een</item>
+	<item>Twee</item>
+	<item>Drie</item>
+	<item>Vier</item>
+</list>
 
 
 <p rend="align(left)">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

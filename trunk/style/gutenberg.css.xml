@@ -349,6 +349,14 @@ p.footnote .label
     font-weight:bold;
 }
 
+/* right aligned page number in table of contents */
+.tocPagenum
+{
+	position: absolute;
+	right: 16%;
+	top: auto; 
+}
+
 .footnotes .line
 {
     font-size:80%;
@@ -497,6 +505,16 @@ p.quote,div.blockquote,div.argument
 {
     text-decoration:none;
 }
+
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+ol.AL { list-style-type: lower-alpha; }
+ol.AU { list-style-type: upper-alpha; }
+ol.RU { list-style-type: upper-roman; }
+ol.RL { list-style-type: lower-roman; }
+.lsoff { list-style-type: none; }
+
 
 ]]>
 </stylesheet>

@@ -1342,18 +1342,28 @@
 
     <xsl:template match="list">
         <xsl:call-template name="closepar"/>
+
+		<xsl:variable name="listType">
+			<xsl:choose>
+				<xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+				<xsl:otherwise>ul</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+
         <xsl:choose>
             <xsl:when test="contains(@rend, 'columns(2)')">
                 <xsl:call-template name="doubleuplist"/>
             </xsl:when>
             <xsl:otherwise>
-                <ul id="{generate-id(.)}">
+				<xsl:element name="{$listType}">
+					<xsl:attribute name="id"><xsl:value-of select="generate-id(.)"/></xsl:attribute>
+					<xsl:call-template name="setListStyleType"/>
                     <xsl:call-template name="setHtmlLangAttribute"/>
-                    <xsl:call-template name="rendattrlist"/>
                     <xsl:apply-templates/>
-                </ul>
+				</xsl:element>
             </xsl:otherwise>
         </xsl:choose>
+
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
@@ -1362,27 +1372,53 @@
         <table id="{generate-id(.)}">
             <xsl:call-template name="setHtmlLangAttribute"/>
 
+			<xsl:variable name="listType">
+				<xsl:choose>
+					<xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+					<xsl:otherwise>ul</xsl:otherwise>
+				</xsl:choose>
+			</xsl:variable>
+
             <xsl:variable name="halfway" select="ceiling(count(item) div 2)"/>
             <tr valign="top">
                 <td>
-                    <ul>
-                        <xsl:call-template name="rendattrlist"/>
+                    <xsl:element name="{$listType}">
+						<xsl:call-template name="setListStyleType"/>
                         <xsl:apply-templates select="item[position() &lt; $halfway + 1]"/>
-                    </ul>
+                    </xsl:element>
                 </td>
                 <td>
-                    <ul>
-                        <xsl:call-template name="rendattrlist"/>
+                    <xsl:element name="{$listType}">
+						<xsl:call-template name="setListStyleType"/>
                         <xsl:apply-templates select="item[position() &gt; $halfway]"/>
-                    </ul>
+                    </xsl:element>
                 </td>
             </tr>
         </table>
     </xsl:template>
 
 
+    <xsl:template name="setListStyleType">
+		<xsl:if test="contains(@rend, 'list-style-type(') or @type='simple'">
+			<xsl:attribute name="class">
+				<xsl:choose>
+					<xsl:when test="@type='simple'">lsoff</xsl:when>
+					<xsl:when test="contains(@rend, 'list-style-type(none)')">lsoff</xsl:when>
+					<xsl:when test="contains(@rend, 'list-style-type(lower-alpha)')">AL</xsl:when>
+					<xsl:when test="contains(@rend, 'list-style-type(upper-alpha)')">AU</xsl:when>
+					<xsl:when test="contains(@rend, 'list-style-type(lower-roman)')">RL</xsl:when>
+					<xsl:when test="contains(@rend, 'list-style-type(upper-roman)')">RU</xsl:when>
+				</xsl:choose>
+			</xsl:attribute>
+		</xsl:if>
+	</xsl:template>
+
+
     <xsl:template match="item">
         <li id="{generate-id(.)}">
+			<xsl:if test="@n">
+				<xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
+			</xsl:if>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
@@ -1869,6 +1905,7 @@
 
     <xsl:template match="l">
         <p class="line">
+			<xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="style">
                 <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
                 <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
@@ -1887,6 +1924,12 @@
 
     <xsl:template match="ab[@type='versenum']">
         <span class="versenum">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="ab[@type='tocPagenum']">
+        <span class="tocPagenum">
             <xsl:apply-templates/>
         </span>
     </xsl:template>

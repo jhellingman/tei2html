@@ -887,6 +887,8 @@ BEGIN
 	$ent{"sup8"}	    = chr(0x2078);	#  SUPERSCRIPT EIGHT
 	$ent{"sup9"}	    = chr(0x2079);	#  SUPERSCRIPT NINE
 
+	$ent{"supmin"}		= chr(0x207B);  #  SUPERSCRIPT MINUS
+
 	$ent{"supe"}	    = chr(0x2287);	#  SUPERSET OF OR EQUAL TO
 	$ent{"supE"}	    = chr(0x2287);	#  SUPERSET OF OR EQUAL TO
 	$ent{"supne"}	    = chr(0x228B);	#  SUPERSET OF WITH NOT EQUAL TO
@@ -1490,6 +1492,8 @@ BEGIN
 
 
 
+	$ent{"Tinv"}	= chr(0x22A5);		# UP TACK (Inversed T)
+
 
 	###############################################################################
 	# things not in Unicode (as a single character)
@@ -1509,6 +1513,8 @@ BEGIN
 
 	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
 
+	$ent{"Adota"}		= "A" . chr(0x0307); # A with dot above
+	$ent{"adota"}		= "a" . chr(0x0307); # a with dot above
 	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
 
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
@@ -1565,6 +1571,14 @@ BEGIN
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
+
+	# Spaces and dots
+	$ent{"sp2"}			= "  ";
+	$ent{"sp10"}		= "          ";
+	$ent{"dots2"}		= "..";
+	$ent{"dots10"}		= "..........";
+	$ent{"dots20"}		= "....................";
+	$ent{"dotfil"}		= "..."; # Concept of filling characters not supported in Unicode.
 
 }
 
