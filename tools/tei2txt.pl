@@ -204,6 +204,8 @@ sub entities2iso88591
 	$a =~ s/\&Otilde;/Õ/g;
 	$a =~ s/\&ouml;/ö/g;
 	$a =~ s/\&Ouml;/Ö/g;
+	$a =~ s/\&oslash;/ø/g;
+	$a =~ s/\&Oslash;/Ø/g;
 
 	$a =~ s/\&uacute;/ú/g;
 	$a =~ s/\&Uacute;/Ú/g;

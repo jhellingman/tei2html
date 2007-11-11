@@ -1,4 +1,4 @@
-# ucwords.pl -- Unicode based perl script for words
+# ucwords.pl -- Unicode based perl script for collecting words from an XML file.
 
 use utf8;
 binmode(STDOUT, ":utf8");
@@ -12,15 +12,13 @@ use Roman;		# Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 use SgmlSupport qw/getAttrVal sgml2utf/;
 use LanguageNames qw/getLanguage/;
 
-
-
 ###############################################################################
 
 sub StripDiacritics
 {
-	my $str = shift;
+	my $string = shift;
 
-	for ($str)
+	for ($string)
 	{
 		$_ = NFD($_);		##  decompose (Unicode Normalization Form D)
 		s/\pM//g;			##  strip combining characters
@@ -39,7 +37,7 @@ sub StripDiacritics
 		tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/; # ???Øø?
 		tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;                   # ÞTþt
 	}
-	return $str;
+	return $string;
 }
 
 sub Normalize
@@ -56,6 +54,7 @@ $infile = $ARGV[0];
 open(INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 
 %wordHash = ();
+%numberHash = ();
 %nonWordHash = ();
 %charHash = ();
 %langHash = ();
@@ -65,8 +64,13 @@ open(INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 $pageCount = 0;
 
 
+$headerWordCount = 0;
+$headerNumberCount = 0;
+$headerCharCount = 0;
+$headerNonWordCount = 0;
 
 $wordCount = 0;
+$numberCount = 0;
 $nonWordCount = 0;
 $charCount = 0;
 $uniqCount = 0;
@@ -83,6 +87,23 @@ $tagPattern = "<(.*?)>";
 while (<INPUTFILE>)
 {
 	$remainder = $_;
+
+	if ($remainder =~ /<title>(.*?)<\/title>/) 
+	{
+		$docTitle = $1;
+	}
+	if ($remainder =~ /<author>(.*?)<\/author>/) 
+	{
+		$docAuthor = $1;
+	}
+	if ($remainder =~ /<\/teiHeader>/) 
+	{
+		$headerWordCount = $wordCount;
+		$headerNumberCount = $numberCount;
+		$headerCharCount = $charCount;
+		$headerNonWordCount = $nonWordCount;
+	}
+
 	while ($remainder =~ /$tagPattern/)
 	{
 		$fragment = $`;
@@ -111,7 +132,7 @@ foreach $word (@wordList)
 # Phase 3: Report
 
 print "<HTML>";
-print "<head><title>Word Usage Report for $infile</title>";
+print "<head><title>Word Usage Report for $docTitle ($infile)</title>";
 print "<style>\n";
 print "body { margin-left: 30px; }\n";
 print "p { margin: 0px; }\n";
@@ -136,7 +157,7 @@ printSequence();
 
 #### Report on word usage
 
-print "<h1>Word Usage Report for $infile</h1>";
+print "<h1>Word Usage Report for $docTitle ($infile)</h1>";
 
 
 open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
@@ -152,14 +173,18 @@ $totalWords = 0;
 $unknownTotalWords = 0;
 $unknownUniqWords = 0;
 
+$grandTotalWords = 0;
+$grandTotalUniqWords = 0;
+$langCount = 0;
+
 foreach $item (@wordList)
 {
 	($lang, $key, $word) = split(/!/, $item, 3);
-	$letter = lc(substr($key, 0, 1));
-	$count = $wordHash{$lang . "!" . $word};
+	$count = $wordHash{$lang . '!' . $word};
 
 	if ($lang ne $prevLang)
 	{
+		$langCount++;
 		if ($totalWords != 0) 
 		{
 			print "<h3>Statistics</h3>";
@@ -183,6 +208,8 @@ foreach $item (@wordList)
 
 	$uniqWords++;
 	$totalWords += $count;
+	$grandTotalUniqWords++;
+	$grandTotalWords += $count;
 
 	if ($key ne $prevKey)
 	{
@@ -190,6 +217,7 @@ foreach $item (@wordList)
 		$prevKey = $key;
 	}
 
+	$letter = lc(substr($key, 0, 1));
 	if ($letter ne $prevLetter)
 	{
 		print "<h3>" . uc($letter) . "</h3>\n";
@@ -259,6 +287,8 @@ if ($totalWords != 0)
 
 
 
+
+
 sub compoundWord()
 {
 	my $word = shift;
@@ -301,6 +331,7 @@ sub isKnownWord()
 print "<h2>Frequencies of Non-Words</h2>\n";
 @nonWordList = sort @nonWordList;
 
+$grandTotalNonWords = 0;
 print "<table>\n";
 print "<tr><th>Sequence<th>Length<th>Count\n";
 foreach $item (@nonWordList)
@@ -312,6 +343,7 @@ foreach $item (@nonWordList)
 		$count = $nonWordHash{$item};
 		$length = length($item);
 		$item =~ s/ /\&nbsp;/g;
+		$grandTotalNonWords += $count;
 		print "<tr><td>|$item| <td align=right><small>$length</small>&nbsp;&nbsp;&nbsp;<td align=right>$count";
 	}
 }
@@ -325,6 +357,7 @@ print "</table>\n";
 print "<h2>Character Frequencies</h2>\n";
 @charList = sort @charList;
 
+$grandTotalCharacters = 0;
 print "<table>\n";
 print "<tr><th>Character<th>Code<th>Count\n";
 foreach $char (@charList)
@@ -333,10 +366,31 @@ foreach $char (@charList)
 
 	$count = $charHash{$char};
 	$ord = ord($char);
+	$grandTotalCharacters += $count;
 	print "<tr><td>$char<td align=right><small>$ord</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
 }
 print "</table>\n";
 
+
+#### Report Number usage
+
+@numberList = keys %numberHash;
+print "<h2>Number Frequencies</h2>\n";
+@numberList = sort { $a <=> $b } @numberList;
+
+print "<p>";
+foreach $number (@numberList)
+{
+	$count = $numberHash{$number};
+	if ($count > 1) 
+	{
+		print "<b>$number</b> <span class=cnt>$count</span>;\n";
+	}
+	else
+	{
+		print "$number;\n";
+	}
+}
 
 
 #### Report tags usage
@@ -345,11 +399,13 @@ print "</table>\n";
 print "<h2>XML-Tag Frequencies</h2>\n";
 @tagList = sort { lc($a) cmp lc($b) } @tagList;
 
+$grandTotalTags = 0;
 print "<table>\n";
 print "<tr><th>Tag<th>Count\n";
 foreach $tag (@tagList)
 {
 	$count = $tagHash{$tag};
+	$grandTotalTags += $count;
 	print "<tr><td><code>$tag</code><td align=right><b>$count</b>\n";
 }
 print "</table>\n";
@@ -370,8 +426,29 @@ foreach $rend (@rendList)
 }
 print "</table>\n";
 
-print "</body></html>";
 
+#### Report Statistics
+
+$textWordCount		= $wordCount	- $headerWordCount;
+$textNonWordCount	= $nonWordCount - $headerNonWordCount;
+$textNumberCount	= $numberCount	- $headerNumberCount;
+$textCharCount		= $charCount	- $headerCharCount;
+
+$extend = $textWordCount + $textNumberCount;
+
+print "<h2>Overall Statistics</h2>";
+print "<table>";
+print "<tr><th>Items					<th>Overall				<th>TEI Header			<th>Text				<th>Notes";
+print "<tr><td>Number of words:			<td>$wordCount			<td>$headerWordCount	<td>$textWordCount		<td>$langCount languages";
+print "<tr><td>Number of non-words:		<td>$nonWordCount		<td>$headerNonWordCount	<td>$textNonWordCount	<td>";	
+print "<tr><td>Number of numbers:		<td>$numberCount		<td>$headerNumberCount	<td>$textNumberCount	<td>";
+print "<tr><td>Number of characters:	<td>$charCount			<td>$headerCharCount	<td>$textCharCount		<td>excluding characters in tags, SGML headers, or SGML comments, includes header information";
+print "<tr><td>Number of tags:			<td>$grandTotalTags		<td>					<td>					<td>excluding closing tags";
+print "<tr><td>Extend:					<td>					<td>					<td>$extend				<td>Words and numbers in text";
+print "</table>";
+
+
+print "</body></html>";
 
 
 
@@ -455,6 +532,11 @@ sub handleFragment
 			$wordHash{$lang . "!" . $word}++;
 			$wordCount++;
 		}
+		elsif ($word =~ /^[0-9]+$/)
+		{
+			$numberHash{$word}++;
+			$numberCount++;
+		}
 	}
 
 	foreach $nonWord (@nonWords)
@@ -522,7 +604,7 @@ sub loadDict
 	if (!openDictionary("$lang.dic"))
 	{
 		$lang =~ /-/;
-		$shortlang = $`;
+		my $shortlang = $`;
 		if ($shortlang eq "" || !openDictionary("$shortlang.dic"))
 		{
 			print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
