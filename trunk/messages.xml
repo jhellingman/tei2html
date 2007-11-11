@@ -497,15 +497,53 @@
 
 
 	<msg:messages xml:lang="de">
-		<msg:message name="msgFigure">Tafel</msg:message>
+		<msg:message name="msgToc">Inhalt</msg:message>
+		<msg:message name="msgPlate">Tafel</msg:message>
+		<msg:message name="msgFigure">Figur</msg:message>
 		<msg:message name="msgPart">Teil</msg:message>
 		<msg:message name="msgBook">Buch</msg:message>
 		<msg:message name="msgTableOfContents">Inhalt</msg:message>
 		<msg:message name="msgAppendix">Appendix</msg:message>
+		<msg:message name="msgAppendix.n">Appendizes</msg:message>
 		<msg:message name="msgPage">Seite</msg:message>
+		<msg:message name="msgPage.n">Seiten</msg:message>
 		<msg:message name="msgChapter">Kapitel</msg:message>
 		<msg:message name="msgAnd">und</msg:message>
 		<msg:message name="msgListOfIllustrations">Liste der Tafeln</msg:message>
+		<msg:message name="msgAvailability">Verfügbarkeit</msg:message>
+		<msg:message name="msgOrnament">Ornament</msg:message>
+		<msg:message name="msgOrnament">Ornamente</msg:message>
+		<msg:message name="msgDeleted">Weggelassen</msg:message>
+		<msg:message name="msgCorrection">Korrektur</msg:message>
+		<msg:message name="msgCorrection.n">Korrekturen</msg:message>
+		<msg:message name="msgSource">Quelle</msg:message>
+		<msg:message name="msgTranscription">Transkription</msg:message>
+		<msg:message name="msgTranscription.n">Transkriptionen</msg:message>
+		<msg:message name="msgColophon">Kolophon</msg:message>
+		<msg:message name="msgEncoding">Kodierung</msg:message>
+		<msg:message name="msgNotInSource">Nicht in der Quelle</msg:message>
+		<msg:message name="msgRevisionHistory">Überblick der Revisionen</msg:message>
+		<msg:message name="msgLocation">Position</msg:message>
+		<msg:message name="msgCorrectionsAppliedToText">Die folgenden Korrekturen sind am Text angewendet worden:</msg:message>
+
+		<msg:message name="cn">Chinesisch</msg:message>
+		<msg:message name="de">Deutsch</msg:message>
+		<msg:message name="el">Griechisch</msg:message>
+		<msg:message name="en">Englisch</msg:message>
+		<msg:message name="en-uk">Englisch (Großbritannien)</msg:message>
+		<msg:message name="en-us">Englisch (die Vereinigten Staaten)</msg:message>
+		<msg:message name="es">Spanisch</msg:message>
+		<msg:message name="fi">Finnisch</msg:message>
+		<msg:message name="fr">Französisch</msg:message>
+		<msg:message name="it">Italienisch</msg:message>
+		<msg:message name="ja">Japanisch</msg:message>
+		<msg:message name="la">Latein</msg:message>
+		<msg:message name="nl">Niederländisch</msg:message>
+		<msg:message name="pt">Portugiesisch</msg:message>
+		<msg:message name="pt-br">Portugiesisch (Brasilien)</msg:message>
+		<msg:message name="pt-pt">Portugiesisch (Portugal)</msg:message>
+		<msg:message name="tl">Tagalog</msg:message>
+
 	</msg:messages>
 	
 
