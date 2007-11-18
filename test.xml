@@ -175,40 +175,52 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 	</row>
 	<row>
 		<cell>Jeroen</cell>	
-		<cell rend="align(right)">39</cell>
+		<cell>40</cell>
 	</row>
 	<row>
 		<cell>Rodelyn</cell>	
-		<cell rend="align(right)">29</cell>
+		<cell rend="align(right)">30</cell>
 	</row>
 	<row>
 		<cell>Joshua</cell>	
-		<cell rend="align(right)">6</cell>
+		<cell rend="align(right)">7</cell>
 	</row>
 	<row>
 		<cell>Raphael</cell>	
-		<cell rend="align(right)">2</cell>
+		<cell rend="align(right)">3</cell>
 	</row>
 </table>
 </p>
 
+<p>In the following table, we use a TEI extension element column to provide rendering attributes that cover an entire column. Since the HTML colspan and col elements are not widely supported, we translate these to attributes on each cell in the column.
+</p>
+
 <p>
 <table rend="width(40%)">
-	<row>
-		<cell role="label">Name</cell>	
-		<cell role="label" rend="align(right)">Length</cell>
+	<column rend="align(left) width(40%)"/>
+	<column rend="align(right)"/>
+	<column rend="align(right)"/>
+	<column rend="align(right)"/>
+	<row role="label">
+		<cell>Name</cell>	
+		<cell>Length</cell>
+		<cell>Weight</cell>
+		<cell>Notes</cell>
 	</row>
-	<row>
+	<row role="unit">
 		<cell></cell>	
-		<cell role="unit" rend="align(right)">Meters</cell>
+		<cell>Meters</cell>
+		<cell>Kilograms</cell>
 	</row>
 	<row>
 		<cell>Jeroen</cell>	
 		<cell>1.80</cell>
+		<cell>86</cell>
 	</row>
 	<row>
 		<cell>Rodelyn</cell>	
-		<cell>&mdash;</cell>
+		<cell cols="2">&mdash;</cell>
+		<cell>No Info.</cell>
 	</row>
 	<row>
 		<cell>Joshua</cell>	
@@ -217,6 +229,10 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 	<row>
 		<cell>Raphael</cell>	
 		<cell>1.00</cell>
+	</row>
+	<row>
+		<cell><hi>Total</hi></cell>	
+		<cell role="sum">4.00</cell>
 	</row>
 </table>
 </p>
