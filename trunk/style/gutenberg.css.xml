@@ -277,6 +277,11 @@ a.noteref
 }
 
 
+.red
+{
+	color: red;
+}
+
 .displayfootnote
 {
 	display: none;
@@ -448,6 +453,13 @@ span.measure
     font-variant:small-caps;
 }
 
+
+.caps
+{
+    text-transform:uppercase;
+}
+
+
 hr
 {
     clear:both;
@@ -487,6 +499,11 @@ h5,h6
 p,p.initial
 {
     text-indent:0;
+}
+
+p.firstlinecaps:first-line
+{
+	text-transform: uppercase;
 }
 
 .poem .stanza

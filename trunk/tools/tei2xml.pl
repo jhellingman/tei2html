@@ -132,6 +132,10 @@ sub processFile
     system ("sed \"s/|xxxx|/\\&/g\" < tmp.3 > tmp.4");
     system ("perl $toolsdir/ent2ucs.pl tmp.4 > $basename.xml");
 
+	# convert from TEI P4 to TEI P5  (experimental)
+    system ("saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
+
+	# collect information about images.
     if (-d "images")
     {
         print "Collect image dimensions...\n";
@@ -216,7 +220,7 @@ sub processFile
 
 
     print "Clean up...";
-    system ("rm tmp.* tmp.4a $filename.out $filename.notes out.txt");
+    system ("rm tmp.* $filename.out $filename.notes out.txt");
     print " Done!\n";
 
 

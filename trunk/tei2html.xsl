@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet [
 
-    <!ENTITY cr			"&#x0D;">
-    <!ENTITY lf			"&#x0A;">
+    <!ENTITY tab        "&#x09;">
+    <!ENTITY lf         "&#x0A;">
+    <!ENTITY cr         "&#x0D;">
     <!ENTITY deg        "&#176;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
@@ -336,14 +337,14 @@
                             <xsl:copy-of select="$stylesheet3/*/node()"/>
                         </xsl:if>
                     </style>
-					<!-- Pull in CSS sheet for print (using Prince). -->
-					<xsl:if test="$optionPrinceMarkup = 'Yes'">
-						<style type="text/css" media="print">
-							/* CSS stylesheet for printing */
-							<xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
-							<xsl:copy-of select="$printstylesheet/*/node()"/>
-						</style>
-					</xsl:if>
+                    <!-- Pull in CSS sheet for print (using Prince). -->
+                    <xsl:if test="$optionPrinceMarkup = 'Yes'">
+                        <style type="text/css" media="print">
+                            /* CSS stylesheet for printing */
+                            <xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
+                            <xsl:copy-of select="$printstylesheet/*/node()"/>
+                        </style>
+                    </xsl:if>
                 </xsl:if>
 
             </head>
@@ -369,10 +370,10 @@
     </xsl:template>
 
     <xsl:template match="body">
-		<div class="body">
-			<xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
-		</div>
+        <div class="body">
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
     <xsl:template match="back">
@@ -557,9 +558,9 @@
     <xsl:template match="ref[@target and not(@type='noteref')]">
         <xsl:variable name="target" select="./@target"/>
         <a id="{generate-id(.)}" href="#{generate-id(//*[@id=$target])}">
-			<xsl:if test="@type='pageref'">
-				<xsl:attribute name="class">typeref</xsl:attribute>
-			</xsl:if>
+            <xsl:if test="@type='pageref'">
+                <xsl:attribute name="class">typeref</xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </a>
     </xsl:template>
@@ -690,8 +691,8 @@
         </xsl:if>
     </xsl:template>
 
-	<!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
-	<xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
+    <!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
+    <xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
 
     <xsl:template match="div3" mode="gentoc">
         <xsl:if test="head">
@@ -857,8 +858,10 @@
     <!-- List of Corrections -->
 
     <xsl:template match="divGen[@type='corr']">
-        <h2><xsl:value-of select="$strCorrections"/></h2>
-        <xsl:call-template name="correctionTable"/>
+        <xsl:if test="//corr">
+            <h2><xsl:value-of select="$strCorrections"/></h2>
+            <xsl:call-template name="correctionTable"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="correctionTable">
@@ -923,8 +926,10 @@
             <h3><xsl:value-of select="$strRevisionHistory"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
-            <h3><xsl:value-of select="$strCorrections"/></h3>
-            <xsl:call-template name="correctionTable"/>
+            <xsl:if test="//corr">
+                <h3><xsl:value-of select="$strCorrections"/></h3>
+                <xsl:call-template name="correctionTable"/>
+            </xsl:if>
         </div>
     </xsl:template>
 
@@ -1001,16 +1006,16 @@
         </div>
     </xsl:template>
 
-	<xsl:template name="setHtmlClass">
-		<xsl:choose>
+    <xsl:template name="setHtmlClass">
+        <xsl:choose>
             <xsl:when test="@type">
                 <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:attribute name="class">normal</xsl:attribute>
             </xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
+        </xsl:choose>
+    </xsl:template>
 
 
     <xsl:template match="div0/head">
@@ -1108,9 +1113,9 @@
     <xsl:template match="div3/head">
         <xsl:call-template name="headPicture"/>
         <h4>
-			<xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
-		</h4>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </h4>
     </xsl:template>
 
     <!-- div4 -->
@@ -1139,18 +1144,18 @@
     <xsl:template match="div5/head">
         <xsl:call-template name="headPicture"/>
         <h6>
-			<xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
-		</h6>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </h6>
     </xsl:template>
 
     <!-- other headers -->
 
     <xsl:template match="head">
         <h4>
-			<xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
-		</h4>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </h4>
     </xsl:template>
 
     <xsl:template match="byline">
@@ -1283,29 +1288,92 @@
     </xsl:template>
 
 
-	<xsl:template name="cell-rend">
-        <xsl:if test="contains(@rend, 'image(')">
-			<xsl:call-template name="insertimage2">
-				<xsl:with-param name="alt">
-					<xsl:value-of select="x"/>
-				</xsl:with-param>
-			</xsl:call-template>
+	<!-- concatenate all possible class things into a single attribute -->
+	<xsl:template name="cell-rend-class">
+		<xsl:param name="rend" select="''"/>
+
+		<xsl:variable name="class">
+			<xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/></xsl:if>
+
+			<xsl:if test="contains($rend, 'align(left)')">alignleft</xsl:if>
+			<xsl:if test="contains($rend, 'align(right)')">alignright</xsl:if>
+			<xsl:if test="contains($rend, 'align(center)')">aligncenter</xsl:if>
+
+			<!-- Align numeric-only cells right -->
+			<xsl:if test="not(contains($rend, 'align('))">
+				<xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">
+					alignright
+				</xsl:if>
+			</xsl:if>
+		</xsl:variable>
+
+		<xsl:if test="translate($class, ' &tab;&cr;&lf;', '') != ''">
+			<xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
+		</xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="cell-rend">
+		
+		<!-- concatenate @rend and ../../column[position()]/@rend attributes -->
+		<xsl:variable name="rend">
+			<xsl:value-of select="@rend"/>
+			<xsl:text> </xsl:text>
+			<xsl:call-template name="cell-rend-col"/>
+		</xsl:variable>
+
+        <xsl:if test="contains($rend, 'image(')">
+            <xsl:call-template name="insertimage2">
+                <xsl:with-param name="alt">
+                    <xsl:value-of select="x"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+		
+		<xsl:call-template name="cell-rend-class">
+			<xsl:with-param name="rend">
+				<xsl:value-of select="$rend"/>
+			</xsl:with-param>
+        </xsl:call-template>
+
+        <xsl:if test="contains($rend, 'width(')">
+            <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after($rend, 'width('), ')')"/></xsl:attribute>
         </xsl:if>
 
-		<xsl:if test="contains(@rend, 'width(')">
-            <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
+        <xsl:if test="contains($rend, 'valign(')">
+            <xsl:attribute name="valign"><xsl:value-of select="substring-before(substring-after($rend, 'valign('), ')')"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains(@rend, 'align(right)')">
-            <xsl:attribute name="class">alignright</xsl:attribute>
-        </xsl:if>
-        <xsl:if test="contains(@rend, 'align(center)')">
-            <xsl:attribute name="class">aligncenter</xsl:attribute>
+        <xsl:if test="contains($rend, 'padding-top(') or contains($rend, 'padding-bottom(') or @role='sum' or contains($rend, 'font-weight(')">
+            <xsl:attribute name="style">
+                <xsl:if test="@role='sum'">padding-top: 2px; border-top: solid black 1px;</xsl:if>
+                <xsl:if test="contains($rend, 'padding-top(')">padding-top:<xsl:value-of select="substring-before(substring-after($rend, 'padding-top('), ')')"/>;</xsl:if>
+                <xsl:if test="contains($rend, 'padding-bottom(')">padding-bottom:<xsl:value-of select="substring-before(substring-after($rend, 'padding-bottom('), ')')"/>;</xsl:if>
+                <xsl:if test="contains($rend, 'font-weight(')">font-weight:<xsl:value-of select="substring-before(substring-after($rend, 'font-weight('), ')')"/>;</xsl:if>
+            </xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains(@rend, 'valign(middle)')">
-            <xsl:attribute name="valign">middle</xsl:attribute>
-        </xsl:if>
+    </xsl:template>
+
+
+	<!-- Find rendering information for the current column -->
+    <xsl:template name="cell-rend-col">
+		<xsl:variable name="position">
+			<xsl:call-template name="find-column-number"/>
+		</xsl:variable>
+		<xsl:value-of select="../../column[position() = $position]/@rend"/>
+    </xsl:template>
+
+
+	<!-- Find the column number of the current cell -->
+    <xsl:template name="find-column-number">
+		<!-- The position of the current cell -->
+		<xsl:variable name="cellposition">
+			<xsl:value-of select="position()"/>
+		</xsl:variable>
+		<!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
+		<!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
+		<xsl:value-of select="sum(../cell[position() &lt; $cellposition]/@cols) + count(../cell[position() &lt; $cellposition and not(@cols)]) + 1"/>
 	</xsl:template>
 
 
@@ -1317,23 +1385,7 @@
             <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
         </xsl:if>
 
-		<xsl:call-template name="cell-rend"/>
-
-        <!-- Align numeric-only cells right -->
-        <xsl:if test="not(contains(@rend, 'align('))">
-            <xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&cr;&lf;', '') = ''">
-                <xsl:attribute name="class">alignright</xsl:attribute>
-            </xsl:if>
-        </xsl:if>
-
-        <xsl:if test="contains(@rend, 'padding-top(') or contains(@rend, 'padding-bottom(') or @role='sum' or contains(@rend, 'font-weight(')">
-            <xsl:attribute name="style">
-                <xsl:if test="@role='sum'">padding-top: 2px; border-top: solid black 1px;</xsl:if>
-                <xsl:if test="contains(@rend, 'padding-top(')">padding-top:<xsl:value-of select="substring-before(substring-after(@rend, 'padding-top('), ')')"/>;</xsl:if>
-                <xsl:if test="contains(@rend, 'padding-bottom(')">padding-bottom:<xsl:value-of select="substring-before(substring-after(@rend, 'padding-bottom('), ')')"/>;</xsl:if>
-                <xsl:if test="contains(@rend, 'font-weight(')">font-weight:<xsl:value-of select="substring-before(substring-after(@rend, 'font-weight('), ')')"/>;</xsl:if>
-            </xsl:attribute>
-        </xsl:if>
+        <xsl:call-template name="cell-rend"/>
     </xsl:template>
 
 
@@ -1343,24 +1395,24 @@
     <xsl:template match="list">
         <xsl:call-template name="closepar"/>
 
-		<xsl:variable name="listType">
-			<xsl:choose>
-				<xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
-				<xsl:otherwise>ul</xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
+        <xsl:variable name="listType">
+            <xsl:choose>
+                <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+                <xsl:otherwise>ul</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
 
         <xsl:choose>
             <xsl:when test="contains(@rend, 'columns(2)')">
                 <xsl:call-template name="doubleuplist"/>
             </xsl:when>
             <xsl:otherwise>
-				<xsl:element name="{$listType}">
-					<xsl:attribute name="id"><xsl:value-of select="generate-id(.)"/></xsl:attribute>
-					<xsl:call-template name="setListStyleType"/>
+                <xsl:element name="{$listType}">
+                    <xsl:attribute name="id"><xsl:value-of select="generate-id(.)"/></xsl:attribute>
+                    <xsl:call-template name="setListStyleType"/>
                     <xsl:call-template name="setHtmlLangAttribute"/>
                     <xsl:apply-templates/>
-				</xsl:element>
+                </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
 
@@ -1372,24 +1424,24 @@
         <table id="{generate-id(.)}">
             <xsl:call-template name="setHtmlLangAttribute"/>
 
-			<xsl:variable name="listType">
-				<xsl:choose>
-					<xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
-					<xsl:otherwise>ul</xsl:otherwise>
-				</xsl:choose>
-			</xsl:variable>
+            <xsl:variable name="listType">
+                <xsl:choose>
+                    <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+                    <xsl:otherwise>ul</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
 
             <xsl:variable name="halfway" select="ceiling(count(item) div 2)"/>
             <tr valign="top">
                 <td>
                     <xsl:element name="{$listType}">
-						<xsl:call-template name="setListStyleType"/>
+                        <xsl:call-template name="setListStyleType"/>
                         <xsl:apply-templates select="item[position() &lt; $halfway + 1]"/>
                     </xsl:element>
                 </td>
                 <td>
                     <xsl:element name="{$listType}">
-						<xsl:call-template name="setListStyleType"/>
+                        <xsl:call-template name="setListStyleType"/>
                         <xsl:apply-templates select="item[position() &gt; $halfway]"/>
                     </xsl:element>
                 </td>
@@ -1399,26 +1451,26 @@
 
 
     <xsl:template name="setListStyleType">
-		<xsl:if test="contains(@rend, 'list-style-type(') or @type='simple'">
-			<xsl:attribute name="class">
-				<xsl:choose>
-					<xsl:when test="@type='simple'">lsoff</xsl:when>
-					<xsl:when test="contains(@rend, 'list-style-type(none)')">lsoff</xsl:when>
-					<xsl:when test="contains(@rend, 'list-style-type(lower-alpha)')">AL</xsl:when>
-					<xsl:when test="contains(@rend, 'list-style-type(upper-alpha)')">AU</xsl:when>
-					<xsl:when test="contains(@rend, 'list-style-type(lower-roman)')">RL</xsl:when>
-					<xsl:when test="contains(@rend, 'list-style-type(upper-roman)')">RU</xsl:when>
-				</xsl:choose>
-			</xsl:attribute>
-		</xsl:if>
-	</xsl:template>
+        <xsl:if test="contains(@rend, 'list-style-type(') or @type='simple'">
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="@type='simple'">lsoff</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(none)')">lsoff</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(lower-alpha)')">AL</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(upper-alpha)')">AU</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(lower-roman)')">RL</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(upper-roman)')">RU</xsl:when>
+                </xsl:choose>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:template>
 
 
     <xsl:template match="item">
         <li id="{generate-id(.)}">
-			<xsl:if test="@n">
-				<xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
-			</xsl:if>
+            <xsl:if test="@n">
+                <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
@@ -1701,47 +1753,47 @@
     <!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
 
     <!--====================================================================-->
-	<!-- Letters, with openers, closers, etc. -->
+    <!-- Letters, with openers, closers, etc. -->
 
-	<!-- non-TEI shortcut for <q><text><body><div1 type="Letter"> -->
-	<xsl:template match="letter">
+    <!-- non-TEI shortcut for <q><text><body><div1 type="Letter"> -->
+    <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
         <div class="blockquote letter">
             <xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
+            <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
-	</xsl:template>
+    </xsl:template>
 
-	<xsl:template match="opener">
-		<div class="opener">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="opener">
+        <div class="opener">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
-	<xsl:template match="salute">
-		<div class="salute">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="salute">
+        <div class="salute">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
-	<xsl:template match="closer">
-		<div class="closer">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="closer">
+        <div class="closer">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
-	<xsl:template match="signed">
-		<div class="signed">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="signed">
+        <div class="signed">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
-	<xsl:template match="dateline">
-		<div class="dateline">
-			<xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="dateline">
+        <div class="dateline">
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
 
     <!--====================================================================-->
@@ -1762,12 +1814,12 @@
         <a id="{generate-id()}src" href="#{generate-id()}" class="noteref">
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
-		<xsl:if test="$optionPrinceMarkup = 'Yes'">
-			<span class="displayfootnote">
-				<xsl:call-template name="setHtmlLangAttribute"/>
-				<xsl:apply-templates/>
-			</span>
-		</xsl:if>
+        <xsl:if test="$optionPrinceMarkup = 'Yes'">
+            <span class="displayfootnote">
+                <xsl:call-template name="setHtmlLangAttribute"/>
+                <xsl:apply-templates/>
+            </span>
+        </xsl:if>
     </xsl:template>
 
     <!-- Handle notes with paragraphs different from simple notes -->
@@ -1854,10 +1906,10 @@
                 <xsl:if test="@n">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
-				<!-- in a few cases, we have quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
-				<xsl:if test="ancestor::note[place='foot' or not(@place)]">
-					<xsl:attribute name="class">footnote</xsl:attribute>
-				</xsl:if>
+                <!-- in a few cases, we have quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
+                <xsl:if test="ancestor::note[place='foot' or not(@place)]">
+                    <xsl:attribute name="class">footnote</xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates/>
             </p>
         </xsl:if>
@@ -1905,7 +1957,7 @@
 
     <xsl:template match="l">
         <p class="line">
-			<xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="style">
                 <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
                 <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
@@ -1968,6 +2020,10 @@
         <span class="smallcaps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='caps']">
+        <span class="caps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+    </xsl:template>
+
     <xsl:template match="hi[@rend='expanded' or @rend='ex' or @rend='exp']">
         <span class="letterspaced"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
@@ -1975,7 +2031,6 @@
     <xsl:template match="hi">
         <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
     </xsl:template>
-
 
 
     <!-- Use other font for Greek passages -->
