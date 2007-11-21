@@ -87,7 +87,7 @@
 <div1 id="ch04" n="IV" type="Chapter" rend="label(yes)">
 <head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
 
-<p>This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
+<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
 <hi rend="sc">Small Caps</hi> and some <hi rend="expanded">letterspaced</hi>
 text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
 a note. We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
@@ -238,15 +238,13 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 </p>
 
 
-<p>
-Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.
-</p>
+<p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.</p>
 
-<p>In this section we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
+<p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
 
-<p>Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint<note n="2" place="foot"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:
+<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint<note n="2" place="foot"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
 
-</p>
+
 <p><table rend="width(40%)">
 	<head>Head above table.</head>
 	<row>

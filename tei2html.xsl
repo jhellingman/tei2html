@@ -25,7 +25,7 @@
 
     You can embed this style sheet in the source document with the <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction. This works with IE 6.0 or the latest Mozilla browsers.
 
-    This file is made available under the GNU General Public License, version 2.0.
+    This file is made available under the GNU General Public License, version 3.0 or later.
 
 -->
 
@@ -1180,6 +1180,10 @@
 
     <!--====================================================================-->
     <!-- Tables: Translate the TEI table model to HTML tables. -->
+
+    <!-- To accommodate attributes common to all cells in a column, this code
+	     uses additional <column> elements not present in the TEI table 
+		 model. -->
 
 
     <xsl:template name="closepar">

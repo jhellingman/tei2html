@@ -40,5 +40,12 @@ a.hidden:hover,	a.noteref:hover
 	color: red;
 }
 
+p.dropcap:first-letter
+{
+	color: #001FA4;
+	font-weight: bold;
+}
+
+
 ]]>
 </stylesheet>

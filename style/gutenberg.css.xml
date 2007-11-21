@@ -506,6 +506,17 @@ p.firstlinecaps:first-line
 	text-transform: uppercase;
 }
 
+p.dropcap:first-letter
+{
+	float: left; 
+	clear: left; 
+    margin: 0em 0.05em 0 0;
+    padding: 0px;
+    line-height: 0.8em; 
+	font-size: 420%;
+	vertical-align:super; 
+}
+
 .poem .stanza
 {
     padding: .5em 0% .5em 0%;

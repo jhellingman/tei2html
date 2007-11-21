@@ -10,15 +10,26 @@ $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 while(<>)
 {
 	$line = $_;
+
 	# open quotes
 	$line =~ s/\"($wordPattern)/\&ldquo;$1/g;
-	# $line =~ s/(\s)\'($wordPattern)/$1\&lsquo;$2/g;
 
 	# close quotes
 	$line =~ s/\"/&rdquo;/g;
-	# $line =~ s/\'/&rsquo;/g;
-	# manually check these!
+
+	# fix stuff in SGML tags:  ="  ">
+
+	$remainder = $line;
+	$line = "";
+	while ($remainder =~ /(<.*?>)/) 
+	{
+		$line .= $`;
+		$tag = $1;
+		$remainder = $';
+		$tag =~ s/\&(r|l)dquo;/\"/g;
+		$line .= $tag;
+	}
+	$line .= $remainder;
 
 	print $line;
 }
-
