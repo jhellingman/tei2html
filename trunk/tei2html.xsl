@@ -799,6 +799,13 @@
     </xsl:template>
 
 
+    <xsl:template match="ab[@type='tocPagenum']">
+        <span class="tocPagenum">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Generated Divisions -->
 
@@ -1920,7 +1927,7 @@
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- Line groups -->
+    <!-- Poetry and Drama -->
 
     <xsl:template name="insertNBSpaces">
         <xsl:param name="count" select="1"/>
@@ -1932,32 +1939,11 @@
         </xsl:if>
     </xsl:template>
 
+
     <xsl:template match="lb">
         <br id="{generate-id()}"/>
     </xsl:template>
 
-    <xsl:template match="lg|sp">
-        <div class="poem">
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <div class="stanza">
-                <xsl:apply-templates/>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template match="lg/head">
-        <h4 class="lghead"><xsl:apply-templates/></h4>
-    </xsl:template>
-
-    <xsl:template match="speaker">
-        <p>
-            <b><xsl:apply-templates/></b>
-        </p>
-    </xsl:template>
-
-    <xsl:template match="stage">
-        <h4 class="lghead"><xsl:apply-templates/></h4>
-    </xsl:template>
 
     <xsl:template match="l">
         <p class="line">
@@ -1984,11 +1970,83 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="ab[@type='tocPagenum']">
-        <span class="tocPagenum">
+    <xsl:template match="ab[@type='lineNum']">
+        <span class="linenum">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
+
+
+    <xsl:template match="lg|sp">
+        <div class="poem">
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <div class="stanza">
+                <xsl:apply-templates/>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="lg/head">
+        <h4 class="lghead"><xsl:apply-templates/></h4>
+    </xsl:template>
+
+
+	<!-- Speaker -->
+
+    <xsl:template match="speaker">
+        <p>
+            <b><xsl:apply-templates/></b>
+        </p>
+    </xsl:template>
+
+
+	<!-- Stage directions -->
+
+    <xsl:template match="stage">
+        <p class="stage">
+			<xsl:apply-templates/>
+		</p>
+    </xsl:template>
+
+    <xsl:template match="stage[@type='exit']">
+        <p class="stage alignright">
+			<xsl:apply-templates/>
+		</p>
+    </xsl:template>
+
+    <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
+        <span class="stage">
+			<xsl:apply-templates/>
+		</span>
+    </xsl:template>
+
+	<!-- Cast lists -->
+
+    <xsl:template match="castList">
+        <ul class="castList">
+			<xsl:apply-templates/>
+		</ul>
+    </xsl:template>
+
+    <xsl:template match="castGroup">
+		<li>
+			<xsl:apply-templates select="head"/>
+			<ul class="castGroup">
+				<xsl:apply-templates select="castItem"/>
+			</ul>
+		</li>
+    </xsl:template>
+
+    <xsl:template match="castGroup/head">
+		<b><xsl:apply-templates/></b>
+    </xsl:template>	
+
+    <xsl:template match="castItem">
+        <li class="castItem">
+			<xsl:apply-templates/>
+		</li>
+    </xsl:template>
+
 
 
     <!--====================================================================-->
