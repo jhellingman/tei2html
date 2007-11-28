@@ -1994,7 +1994,7 @@
 	<!-- Speaker -->
 
     <xsl:template match="speaker">
-        <p>
+        <p id="{generate-id(.)}">
             <b><xsl:apply-templates/></b>
         </p>
     </xsl:template>
@@ -2003,19 +2003,19 @@
 	<!-- Stage directions -->
 
     <xsl:template match="stage">
-        <p class="stage">
+        <p class="stage" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</p>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
-        <p class="stage alignright">
+        <p class="stage alignright" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</p>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <span class="stage">
+        <span class="stage" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</span>
     </xsl:template>
@@ -2023,13 +2023,13 @@
 	<!-- Cast lists -->
 
     <xsl:template match="castList">
-        <ul class="castList">
+        <ul class="castList" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</ul>
     </xsl:template>
 
     <xsl:template match="castGroup">
-		<li>
+		<li id="{generate-id(.)}">
 			<xsl:apply-templates select="head"/>
 			<ul class="castGroup">
 				<xsl:apply-templates select="castItem"/>
@@ -2038,11 +2038,11 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head">
-		<b><xsl:apply-templates/></b>
+		<b id="{generate-id(.)}"><xsl:apply-templates/></b>
     </xsl:template>	
 
     <xsl:template match="castItem">
-        <li class="castItem">
+        <li class="castItem" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</li>
     </xsl:template>
