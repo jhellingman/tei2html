@@ -129,6 +129,45 @@ foreach $word (@wordList)
 @wordList = sort @wordList;
 
 
+# Open good_words.txt and bad_words.txt
+
+%goodWordsHash = ();
+%badWordsHash = ();
+
+if (-e "good_words.txt") 
+{
+	if (open(GOODWORDSFILE, "<:encoding(iso-8859-1)", "good_words.txt"))
+	{
+		my $count = 0;
+		while (<GOODWORDSFILE>)
+		{
+			my $dictword =  $_;
+			$dictword =~ s/\n//g;
+			$goodWordsHash{$dictword} = 1;
+			$count++;
+		}
+		print STDERR "NOTICE:  Loaded good_words.txt with $count words\n";
+		close(GOODWORDSFILE);
+	}
+}
+
+if (-e "bad_words.txt") 
+{
+	if (open(BADWORDSFILE, "<:encoding(iso-8859-1)", "bad_words.txt"))
+	{
+		my $count = 0;
+		while (<BADWORDSFILE>)
+		{
+			my $dictword =  $_;
+			$dictword =~ s/\n//g;
+			$badWordsHash{$dictword} = 1;
+			$count++;
+		}
+		print STDERR "NOTICE:  Loaded bad_words.txt with $count words\n";
+		close(BADWORDSFILE);
+	}
+}
+
 # Phase 3: Report
 
 print "<HTML>";
@@ -143,6 +182,8 @@ print ".comp3 { color: green; }\n";
 print ".unk { color: blue; font-weight: bold; }\n";
 print ".unk10 { color: blue; }\n";
 print ".freq { color: gray; }\n";
+print ".gw { background: yellow; }\n";
+print ".bw { background: red; font-size: 24px;}\n";
 print "</style>\n";
 print "<head><body>";
 
@@ -232,6 +273,8 @@ foreach $item (@wordList)
 		$unknownTotalWords += $count;
 	}
 
+	$goodOrBad = $badWordsHash{$word} == 1 ? "bw" : $goodWordsHash{$word} == 1 ? "gw" : "";
+
 	if ($known == 0)
 	{
 		if ($count > 2) 
@@ -243,35 +286,35 @@ foreach $item (@wordList)
 		{
 			if ($count < 3) 
 			{
-				print "<span class=comp>$compoundWord</span> <span class=cnt>$count</span> ";
+				print "<span class='comp $goodOrBad'>$compoundWord</span> <span class=cnt>$count</span> ";
 			}
 			else
 			{
-				print "<span class=comp3>$compoundWord</span> <span class=cnt>$count</span> ";
+				print "<span class='comp3 $goodOrBad'>$compoundWord</span> <span class=cnt>$count</span> ";
 			}
 		}
 		elsif ($count < 3)
 		{
-			print "<span class=err>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='err $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
 		}
 		elsif ($count < 6)
 		{
-			print "<span class=unk>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='unk $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
 		}
 		else
 		{
-			print "<span class=unk10>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='unk10 $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
 		}
 	}
 	else
 	{
 		if ($count < 3)
 		{
-			print "$word <span class=cnt>$count</span> ";
+			print "<span class='$goodOrBad'>$word</span> <span class=cnt>$count</span> ";
 		}
 		else
 		{
-			print "<span class=freq>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='freq $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
 		}
 	}
 }
