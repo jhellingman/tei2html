@@ -459,6 +459,10 @@ span.measure
     text-transform:uppercase;
 }
 
+.fraktur
+{
+	font-family: 'Walbaum-Fraktur';
+}
 
 hr
 {
@@ -542,6 +546,8 @@ ol.AU { list-style-type: upper-alpha; }
 ol.RU { list-style-type: upper-roman; }
 ol.RL { list-style-type: lower-roman; }
 .lsoff { list-style-type: none; }
+
+.castlist, .castitem { list-style-type: none; }
 
 
 ]]>
