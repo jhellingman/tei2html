@@ -2023,13 +2023,17 @@
 	<!-- Cast lists -->
 
     <xsl:template match="castList">
-        <ul class="castList" id="{generate-id(.)}">
+        <ul class="castlist" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</ul>
     </xsl:template>
 
+    <xsl:template match="castList/head">
+		<li id="{generate-id(.)}" class="castlist"><h4><xsl:apply-templates/></h4></li>
+    </xsl:template>	
+
     <xsl:template match="castGroup">
-		<li id="{generate-id(.)}">
+		<li id="{generate-id(.)}" class="castlist">
 			<xsl:apply-templates select="head"/>
 			<ul class="castGroup">
 				<xsl:apply-templates select="castItem"/>
@@ -2042,7 +2046,7 @@
     </xsl:template>	
 
     <xsl:template match="castItem">
-        <li class="castItem" id="{generate-id(.)}">
+        <li class="castitem" id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</li>
     </xsl:template>
@@ -2084,6 +2088,10 @@
 
     <xsl:template match="hi[@rend='caps']">
         <span class="caps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+    </xsl:template>
+
+    <xsl:template match="hi[@rend='font(fraktur)']">
+        <span class="fraktur"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='expanded' or @rend='ex' or @rend='exp']">
