@@ -1978,11 +1978,13 @@
 
 
     <xsl:template match="lg|sp">
-        <div class="poem">
+        <div>
+			<xsl:attribute name="class">
+				<xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+				poem
+			</xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <div class="stanza">
-                <xsl:apply-templates/>
-            </div>
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
 

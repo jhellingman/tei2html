@@ -120,6 +120,7 @@ h4.lghead
 {
     margin-left:10%;
     margin-right:10%;
+	
 }
 
 .alignleft
@@ -333,7 +334,6 @@ p.footnote .label
 {
     font-weight:normal;
     margin-left:5em;
-    text-decoration:underline;
 }
 
 .poem .linenum
@@ -521,7 +521,7 @@ p.dropcap:first-letter
 	vertical-align:super; 
 }
 
-.poem .stanza
+.poem
 {
     padding: .5em 0% .5em 0%;
 }
