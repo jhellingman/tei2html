@@ -1051,6 +1051,9 @@
         <div id="{generate-id(.)}">
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
+                <xsl:if test="contains(@rend, 'class(')">
+                    <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
+                </xsl:if>
             </xsl:attribute>
 
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
@@ -1189,8 +1192,8 @@
     <!-- Tables: Translate the TEI table model to HTML tables. -->
 
     <!-- To accommodate attributes common to all cells in a column, this code
-	     uses additional <column> elements not present in the TEI table 
-		 model. -->
+         uses additional <column> elements not present in the TEI table
+         model. -->
 
 
     <xsl:template name="closepar">
@@ -1299,39 +1302,39 @@
     </xsl:template>
 
 
-	<!-- concatenate all possible class things into a single attribute -->
-	<xsl:template name="cell-rend-class">
-		<xsl:param name="rend" select="''"/>
+    <!-- concatenate all possible class things into a single attribute -->
+    <xsl:template name="cell-rend-class">
+        <xsl:param name="rend" select="''"/>
 
-		<xsl:variable name="class">
-			<xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/></xsl:if>
+        <xsl:variable name="class">
+            <xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/></xsl:if>
 
-			<xsl:if test="contains($rend, 'align(left)')">alignleft</xsl:if>
-			<xsl:if test="contains($rend, 'align(right)')">alignright</xsl:if>
-			<xsl:if test="contains($rend, 'align(center)')">aligncenter</xsl:if>
+            <xsl:if test="contains($rend, 'align(left)')">alignleft</xsl:if>
+            <xsl:if test="contains($rend, 'align(right)')">alignright</xsl:if>
+            <xsl:if test="contains($rend, 'align(center)')">aligncenter</xsl:if>
 
-			<!-- Align numeric-only cells right -->
-			<xsl:if test="not(contains($rend, 'align('))">
-				<xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">
-					alignright
-				</xsl:if>
-			</xsl:if>
-		</xsl:variable>
+            <!-- Align numeric-only cells right -->
+            <xsl:if test="not(contains($rend, 'align('))">
+                <xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">
+                    alignright
+                </xsl:if>
+            </xsl:if>
+        </xsl:variable>
 
-		<xsl:if test="translate($class, ' &tab;&cr;&lf;', '') != ''">
-			<xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
-		</xsl:if>
+        <xsl:if test="translate($class, ' &tab;&cr;&lf;', '') != ''">
+            <xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
+        </xsl:if>
     </xsl:template>
 
 
     <xsl:template name="cell-rend">
-		
-		<!-- concatenate @rend and ../../column[position()]/@rend attributes -->
-		<xsl:variable name="rend">
-			<xsl:value-of select="@rend"/>
-			<xsl:text> </xsl:text>
-			<xsl:call-template name="cell-rend-col"/>
-		</xsl:variable>
+
+        <!-- concatenate @rend and ../../column[position()]/@rend attributes -->
+        <xsl:variable name="rend">
+            <xsl:value-of select="@rend"/>
+            <xsl:text> </xsl:text>
+            <xsl:call-template name="cell-rend-col"/>
+        </xsl:variable>
 
         <xsl:if test="contains($rend, 'image(')">
             <xsl:call-template name="insertimage2">
@@ -1340,11 +1343,11 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:if>
-		
-		<xsl:call-template name="cell-rend-class">
-			<xsl:with-param name="rend">
-				<xsl:value-of select="$rend"/>
-			</xsl:with-param>
+
+        <xsl:call-template name="cell-rend-class">
+            <xsl:with-param name="rend">
+                <xsl:value-of select="$rend"/>
+            </xsl:with-param>
         </xsl:call-template>
 
         <xsl:if test="contains($rend, 'width(')">
@@ -1367,25 +1370,25 @@
     </xsl:template>
 
 
-	<!-- Find rendering information for the current column -->
+    <!-- Find rendering information for the current column -->
     <xsl:template name="cell-rend-col">
-		<xsl:variable name="position">
-			<xsl:call-template name="find-column-number"/>
-		</xsl:variable>
-		<xsl:value-of select="../../column[position() = $position]/@rend"/>
+        <xsl:variable name="position">
+            <xsl:call-template name="find-column-number"/>
+        </xsl:variable>
+        <xsl:value-of select="../../column[position() = $position]/@rend"/>
     </xsl:template>
 
 
-	<!-- Find the column number of the current cell -->
+    <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
-		<!-- The position of the current cell -->
-		<xsl:variable name="cellposition">
-			<xsl:value-of select="position()"/>
-		</xsl:variable>
-		<!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
-		<!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
-		<xsl:value-of select="sum(../cell[position() &lt; $cellposition]/@cols) + count(../cell[position() &lt; $cellposition and not(@cols)]) + 1"/>
-	</xsl:template>
+        <!-- The position of the current cell -->
+        <xsl:variable name="cellposition">
+            <xsl:value-of select="position()"/>
+        </xsl:variable>
+        <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
+        <!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
+        <xsl:value-of select="sum(../cell[position() &lt; $cellposition]/@cols) + count(../cell[position() &lt; $cellposition and not(@cols)]) + 1"/>
+    </xsl:template>
 
 
     <xsl:template name="cell-span">
@@ -1979,21 +1982,27 @@
 
     <xsl:template match="lg|sp">
         <div>
-			<xsl:attribute name="class">
-				<xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
-				poem
-			</xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+                poem
+            </xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="lg/head">
-        <h4 class="lghead"><xsl:apply-templates/></h4>
+        <h4>
+            <xsl:attribute name="class">
+                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+                lghead
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </h4>
     </xsl:template>
 
 
-	<!-- Speaker -->
+    <!-- Speaker -->
 
     <xsl:template match="speaker">
         <p id="{generate-id(.)}">
@@ -2002,55 +2011,55 @@
     </xsl:template>
 
 
-	<!-- Stage directions -->
+    <!-- Stage directions -->
 
     <xsl:template match="stage">
         <p class="stage" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</p>
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
         <p class="stage alignright" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</p>
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
         <span class="stage" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</span>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
-	<!-- Cast lists -->
+    <!-- Cast lists -->
 
     <xsl:template match="castList">
         <ul class="castlist" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</ul>
+            <xsl:apply-templates/>
+        </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
-		<li id="{generate-id(.)}" class="castlist"><h4><xsl:apply-templates/></h4></li>
-    </xsl:template>	
+        <li id="{generate-id(.)}" class="castlist"><h4><xsl:apply-templates/></h4></li>
+    </xsl:template>
 
     <xsl:template match="castGroup">
-		<li id="{generate-id(.)}" class="castlist">
-			<xsl:apply-templates select="head"/>
-			<ul class="castGroup">
-				<xsl:apply-templates select="castItem"/>
-			</ul>
-		</li>
+        <li id="{generate-id(.)}" class="castlist">
+            <xsl:apply-templates select="head"/>
+            <ul class="castGroup">
+                <xsl:apply-templates select="castItem"/>
+            </ul>
+        </li>
     </xsl:template>
 
     <xsl:template match="castGroup/head">
-		<b id="{generate-id(.)}"><xsl:apply-templates/></b>
-    </xsl:template>	
+        <b id="{generate-id(.)}"><xsl:apply-templates/></b>
+    </xsl:template>
 
     <xsl:template match="castItem">
         <li class="castitem" id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</li>
+            <xsl:apply-templates/>
+        </li>
     </xsl:template>
 
 

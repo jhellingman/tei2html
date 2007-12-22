@@ -61,7 +61,7 @@ BEGIN
 	$ent{"aogon"}	    = chr(0x0105);	#  LATIN SMALL LETTER A WITH OGONEK
 	$ent{"ap"}		    = chr(0x2248);	#  ALMOST EQUAL TO
 	$ent{"ape"}		    = chr(0x224A);	#  ALMOST EQUAL OR EQUAL TO
-	$ent{"apos"}	    = chr(0x02BC);	#  MODIFIER LETTER APOSTROPHE
+	# $ent{"apos"}	    = chr(0x02BC);	#  MODIFIER LETTER APOSTROPHE
 	$ent{"Aring"}	    = chr(0x00C5);	#  LATIN CAPITAL LETTER A WITH RING ABOVE
 	$ent{"aring"}	    = chr(0x00E5);	#  LATIN SMALL LETTER A WITH RING ABOVE
 	$ent{"ast"}		    = chr(0x002A);	#  ASTERISK
@@ -1361,8 +1361,7 @@ BEGIN
 	$ent{"ckgr"}		= chr(0x387); # "&middot;"
 	$ent{"qmgr"}		= chr(0x37e); # ";"
 
-	# $ent{"apos"}		= chr(0x2bc); # "&apos;"
-	# $ent{"prime"}		= chr(0x2032); # "&prime;"
+	$ent{"apos"}		= chr(0x2019); # LEFT SINGLE QUOTATION MARK
 
 	# additional entities not in TEI
 
@@ -1439,8 +1438,6 @@ BEGIN
 	$ent{"Hbreveb"}		= chr(0x1E2A); # H with breve below
 	$ent{"hbreveb"}		= chr(0x1E2B); # h with breve below
 
-
-
 	$ent{"Ddotb"}		= chr(0x1E0C); # D with dot below
 	$ent{"ddotb"}		= chr(0x1E0D); # d with dot below
 	$ent{"Kdotb"}		= chr(0x1E32); # K with dot below
@@ -1490,10 +1487,7 @@ BEGIN
 	$ent{"metlobr"}		= chr(0x23D2);	# METRICAL LONG OVER BREVE SYMBOL
 	$ent{"metbreak"}	= chr(0x201E);	# metrical break (= DOUBLE LOW-9 QUOTATION MARK)
 
-
-
-	$ent{"Tinv"}	= chr(0x22A5);		# UP TACK (Inversed T)
-
+	$ent{"Tinv"}	    = chr(0x22A5);  # UP TACK (Inversed T)
 
 	###############################################################################
 	# things not in Unicode (as a single character)
