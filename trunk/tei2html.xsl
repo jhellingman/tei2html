@@ -858,8 +858,16 @@
 
 
     <xsl:template match="head" mode="gallery-captions">
-        <xsl:value-of select="."/>
+        <xsl:apply-templates mode="gallery-captions"/>
     </xsl:template>
+
+	<xsl:template match="hi" mode="gallery-captions">
+		<i><xsl:apply-templates mode="gallery-captions"/></i>
+	</xsl:template>
+
+	<xsl:template match="hi[@rend='ex']" mode="gallery-captions">
+		<xsl:apply-templates mode="gallery-captions"/>
+	</xsl:template>
 
 
     <!-- List of Corrections -->
@@ -2105,7 +2113,7 @@
         <span class="fraktur"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='expanded' or @rend='ex' or @rend='exp']">
+    <xsl:template match="hi[@rend='ex']">
         <span class="letterspaced"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
