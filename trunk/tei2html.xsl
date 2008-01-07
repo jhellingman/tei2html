@@ -457,6 +457,14 @@
             <xsl:when test="@resp = 'm' or @resp = 'p'">
                 <xsl:apply-templates/>
             </xsl:when>
+            <xsl:when test="not(@sic) or @sic=''">
+                <span id="{generate-id(.)}" class="corr">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="$strNotInSource"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:when>
             <xsl:otherwise>
                 <span id="{generate-id(.)}" class="corr">
                     <xsl:attribute name="title">
@@ -534,6 +542,20 @@
         </span>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Currency amounts (in future with modern PPP equivalent) -->
+
+    <xsl:template match="amount">
+        <a id="{generate-id(.)}"></a>
+        <span class="measure">
+            <xsl:attribute name="title">
+                <xsl:value-of select="./@unit"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="./@amount"/>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- Cross References -->
