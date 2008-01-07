@@ -12,6 +12,7 @@
 
 <!ENTITY egrave "&#232;">
 
+<!ENTITY availability.en "<p lang='en'>This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.</p>">
 
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
 
@@ -38,6 +39,9 @@
             <idno type="PGDPProjectID">[PGDP Project number goes here]</idno>
             <availability>
                <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 2.0. See <xref url="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
+			   <p>Typically, the following text will be used:</p>
+
+			   &availability.en;
             </availability>
          </publicationStmt>
          <sourceDesc>
