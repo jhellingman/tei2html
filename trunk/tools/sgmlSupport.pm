@@ -1575,6 +1575,14 @@ BEGIN
 	$ent{"dotfil"}		= "..."; # Concept of filling characters not supported in Unicode.
 
 
+	# Meteorological symbols (used in Scott's South Pole)
+	$ent{"snow"}		= "[snow]";				# symbol for snow
+	$ent{"storm"}		= "[storm]";			# symbol for storm
+	$ent{"mist"}		= "[mist]";				# symbol for mist
+	$ent{"aurora"}		= "[aurora]";			# symbol for aurora
+	$ent{"ringsun"}		= "[ringsun]";			# symbol for ring around the sun
+	$ent{"ringmoon"}	= "[ringmoon]";			# symbol for ring around the moon
+
 	###############################################################################
 	# Project Gutenberg boilerplate texts
 
