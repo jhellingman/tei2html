@@ -453,6 +453,14 @@
     <!-- Corrections; abbreviations; numbers; transcriptions -->
 
     <xsl:template match="corr">
+		<xsl:call-template name="do-corr"/>
+    </xsl:template>
+
+    <xsl:template match="corr" mode="titlePage">
+		<xsl:call-template name="do-corr"/>
+    </xsl:template>
+
+    <xsl:template name="do-corr">
         <xsl:choose>
             <xsl:when test="@resp = 'm' or @resp = 'p'">
                 <xsl:apply-templates/>
