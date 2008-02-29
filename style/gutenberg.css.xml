@@ -355,7 +355,7 @@ p.footnote .label
 }
 
 /* right aligned page number in table of contents */
-.tocPagenum
+.tocPagenum, .flushright
 {
 	position: absolute;
 	right: 16%;
