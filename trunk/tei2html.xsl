@@ -835,6 +835,11 @@
         </span>
     </xsl:template>
 
+    <xsl:template match="ab[@type='flushright']">
+        <span class="flushright">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- Generated Divisions -->
@@ -1954,6 +1959,9 @@
                 <xsl:if test="contains(@rend, 'align(')">
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
+                </xsl:if>
+				<xsl:if test="contains(@rend, 'indent(')">
+				            <xsl:attribute name="style">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:attribute>
                 </xsl:if>
                 <xsl:if test="@n">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
