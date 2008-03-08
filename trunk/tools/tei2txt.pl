@@ -14,7 +14,7 @@ while (<>)
     $a = $_;
 
     # remove TeiHeader
-    if($a =~ /<[Tt]ei[Hh]eader/)
+    if ($a =~ /<[Tt]ei[Hh]eader/)
     {
         $a = $';
         while($a !~ /<\/[Tt]ei[Hh]eader>/)
@@ -33,7 +33,7 @@ while (<>)
     $a =~ s/<\/note\b.*?>/[ERROR: unhandled note end tag]/g;
 
     # generate part headings
-    if($a =~ /<(div0.*?)>/)
+    if ($a =~ /<(div0.*?)>/)
     {
 		$tag = $1;
         $partNumber = getAttrVal("n", $tag);
@@ -44,7 +44,7 @@ while (<>)
     }
 
     # generate chapter headings
-    if($a =~ /<(div1.*?)>/)
+    if ($a =~ /<(div1.*?)>/)
     {
 		$tag = $1;
         $chapterNumber = getAttrVal("n", $tag);
@@ -55,7 +55,7 @@ while (<>)
     }
 
     # generate section headings
-    if($a =~ /<(div2.*?)>/)
+    if ($a =~ /<(div2.*?)>/)
     {
 		$tag = $1;
         $sectionNumber = getAttrVal("n", $tag);
@@ -115,6 +115,8 @@ while (<>)
     }
     $a .= $remainder;
 
+    # handle cell boundaries
+    $a =~ s/<cell(.*?)>/|/g;
 
     # remove any remaining tags
     $a =~ s/<.*?>//g;
@@ -260,8 +262,6 @@ sub entities2iso88591
     $a =~ s/\&lbrace;/{/g;
    
     # my additions
-
-
     $a =~ s/\&eringb;/e/g;
     $a =~ s/\&oubb;/ö/g;
     $a =~ s/\&oudb;/ö/g;

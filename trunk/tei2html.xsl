@@ -590,6 +590,9 @@
         <a id="{generate-id(.)}" href="#{generate-id(//*[@id=$target])}">
             <xsl:if test="@type='pageref'">
                 <xsl:attribute name="class">typeref</xsl:attribute>
+            </xsl:if>            
+			<xsl:if test="@type='endnoteref'">
+                <xsl:attribute name="class">noteref</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </a>
