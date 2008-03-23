@@ -4,6 +4,7 @@ $toolsdir   = "L:\\eLibrary\\tools\\tei2html\\tools";   # location of tools
 $patcdir    = "L:\\eLibrary\\tools\\tei2html\\tools\\patc\\transcriptions"; # location of patc transcription files.
 $xsldir     = "L:\\eLibrary\\tools\\tei2html";  # location of xsl stylesheets
 $tmpdir     = "C:\\Temp";                       # place to drop temporary files
+$bindir     = "C:\\Bin";
 $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
 $princedir  = "F:\\Programs\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
 
@@ -198,6 +199,7 @@ sub processFile
     system ("perl $toolsdir/tei2txt.pl tmp.6 > tmp.7");
     system ("fmt -sw72 tmp.7 > out.txt");
     system ("gutcheck out.txt > $basename.gutcheck");
+    system ("$bindir\\jeebies out.txt > $basename.jeebies");
     system ("cat out.txt > $basename.txt");
 
 

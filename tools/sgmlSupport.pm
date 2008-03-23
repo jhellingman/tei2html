@@ -1477,6 +1477,9 @@ BEGIN
 	$ent{"Peso"}		= chr(0x20B1);	#  Peso sign
 	$ent{"peso"}		= chr(0x20B1);	#  Peso sign
 
+	$ent{"Euro"}		= chr(0x20AC);	#  Euro sign
+	$ent{"euro"}		= chr(0x20AC);	#  Euro sign
+
 	$ent{"triangle"}	= chr(0x25B3);	#  White triangle
 	$ent{"bullet"}		= chr(0x2022);	#  Bullet
 	$ent{"vardollar"}	= '$';			#  Variant dollar sign (with diagonal slashes)
