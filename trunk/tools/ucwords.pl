@@ -23,6 +23,7 @@ sub main
 	open(INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 
 	%wordHash = ();
+	%pairHash = ();
 	%numberHash = ();
 	%nonWordHash = ();
 	%charHash = ();
@@ -138,6 +139,47 @@ sub sortLanguageWords
 	}
 	@wordList = sort @wordList;
 	reportWords($language);
+	reportLanguagePairs($language);
+}
+
+
+sub reportPairs
+{
+	my @languageList = keys %pairHash;
+	foreach my $language (@languageList) 
+	{
+		reportLanguagePairs($language);
+	}
+}
+
+
+sub reportLanguagePairs
+{
+	my $language = shift;	
+	my @pairList = keys %{$pairHash{$language}};
+	@pairList = sort @pairList;
+
+	print "\n\n\n<h3>Most Common Word Pairs in " . getLanguage(lc($language)) . "</h3>\n";
+
+	$max = 0;
+	foreach $pair (sort {$pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList)
+	{	
+		my $count = $pairHash{$language}{$pair};
+		if ($count < 10) 
+		{
+			last;
+		}
+
+		my ($first, $second) = split(/!/, $pair, 2);
+
+		# print STDERR "PAIR: $count $pair\n";
+		print "\n<p>$first $second <span class=cnt>$count</span>";
+		$max++;
+		if ($max > 100) 
+		{
+			last;
+		}
+	}
 }
 
 
@@ -301,36 +343,41 @@ sub reportWord()
 		{
 			if ($count < 3) 
 			{
-				print "<span class='comp $goodOrBad'>$compoundWord</span> <span class=cnt>$count</span> ";
+				print "<span class='comp $goodOrBad'>$compoundWord</span> ";
 			}
 			else
 			{
-				print "<span class='comp3 $goodOrBad'>$compoundWord</span> <span class=cnt>$count</span> ";
+				print "<span class='comp3 $goodOrBad'>$compoundWord</span> ";
 			}
 		}
 		elsif ($count < 3)
 		{
-			print "<span class='err $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='err $goodOrBad'>$word</span> ";
 		}
 		elsif ($count < 6)
 		{
-			print "<span class='unk $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='unk $goodOrBad'>$word</span> ";
 		}
 		else
 		{
-			print "<span class='unk10 $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='unk10 $goodOrBad'>$word</span> ";
 		}
 	}
 	else
 	{
 		if ($count < 3)
 		{
-			print "<span class='$goodOrBad'>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='$goodOrBad'>$word</span> ";
 		}
 		else
 		{
-			print "<span class='freq $goodOrBad'>$word</span> <span class=cnt>$count</span> ";
+			print "<span class='freq $goodOrBad'>$word</span> ";
 		}
+	}
+
+	if ($count > 1) 
+	{
+		print "<span class=cnt>$count</span> ";
 	}
 }
 
@@ -574,24 +621,37 @@ sub handleFragment
 
 	my $lang = getLang();
 
+	my $prevWord = "";
 	# NOTE: we don't use \w and \W here, since it gives some unexpected results
-	my @words = split(/[^\pL\pN\pM-]+/, $fragment);
+	my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
 	foreach my $word (@words)
 	{
-		if ($word !~ /^[0-9]+$/ && $word ne "")
+		if ($word ne "") 
 		{
-			countWord($word, $lang);
+			if ($word =~ /^[^\pL\pN\pM-]+$/)
+			{
+				countNonWord($word);
+				# reset previous word if not separated by more than just a space.
+				if ($word !~ /^[\pZ]+$/) 
+				{
+					$prevWord = "";
+				}
+			}
+			elsif ($word =~ /^[0-9]+$/)
+			{
+				countNumber($word);
+				$prevWord = "";
+			}
+			else
+			{
+				countWord($word, $lang);
+				if ($prevWord ne "") 
+				{
+					countPair($prevWord, $word, $lang);
+				}
+				$prevWord = $word;
+			}
 		}
-		elsif ($word =~ /^[0-9]+$/)
-		{
-			countNumber($word);
-		}
-	}
-
-	my @nonWords = split(/[\pL\pN\pM-]+/, $fragment);
-	foreach my $nonWord (@nonWords)
-	{
-		countNonWord($nonWord);
 	}
 
 	my @chars = split(//, $fragment);
@@ -599,6 +659,17 @@ sub handleFragment
 	{
 		countChar($char);
 	}
+}
+
+
+sub countPair
+{
+	my $firstWord = shift;
+	my $secondWord = shift;
+	my $language = shift;
+
+	$pairHash{$language}{"$firstWord!$secondWord"}++;
+	# print STDERR "PAIR: $firstWord $secondWord\n";
 }
 
 
