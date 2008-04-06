@@ -192,6 +192,10 @@ sub processFile
     system ("perl $toolsdir/ucwords.pl tmp.4 > tmp.4a");
     system ("perl $toolsdir/ent2ucs.pl tmp.4a > $basename-words.html");
 
+	# Create a text heat map.
+    print "Create text heat map...\n";
+	system ("saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+
 
     print "Create text version...\n";
     system ("perl $toolsdir/exNotesHtml.pl $filename");
