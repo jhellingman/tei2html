@@ -19,9 +19,6 @@ main();
 
 sub main
 {
-	$infile = $ARGV[0];
-	open(INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
-
 	%wordHash = ();
 	%pairHash = ();
 	%numberHash = ();
@@ -30,9 +27,9 @@ sub main
 	%langHash = ();
 	%tagHash = ();
 	%rendHash = ();
+	%dictHash = ();
 	@pageList = ();
 	$pageCount = 0;
-
 
 	$headerWordCount = 0;
 	$headerNumberCount = 0;
@@ -51,10 +48,8 @@ sub main
 
 	$tagPattern = "<(.*?)>";
 
-
 	open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
 	open (OUTPUTDATA, ">word-statistics.txt") || die("Could not create output file 'word-statistics.txt'");
-
 
 	collectWords();
 
@@ -73,11 +68,216 @@ sub main
 
 	print "\n</body></html>";
 
+
+	heatMapDocument();
+
 }
 
 
+#
+# heatMapDocument
+#
+sub heatMapDocument
+{
+	$infile = $ARGV[0];
+	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+	open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
+
+	while (<INPUTFILE>)
+	{
+		$remainder = $_;
+		while ($remainder =~ /$tagPattern/)
+		{
+			$fragment = $`;
+			$tag = $1;
+			$remainder = $';
+			heatMapFragment($fragment);
+			heatMapTag($tag);
+			print HEATMAPFILE "<" . sgml2utf($tag) . ">";
+		}
+		heatMapFragment($remainder);
+	}
+
+	close (HEATMAPFILE);
+	close (INPUTFILE);
+}
+
+
+#
+# heatMapFragment: split a text fragment into words and create a heat map
+# from it.
+#
+sub heatMapFragment
+{
+	my $fragment = shift;
+	$fragment = sgml2utf($fragment);
+
+	my $lang = getLang();
+
+	my $prevWord = "";
+	# NOTE: we don't use \w and \W here, since it gives some unexpected results
+	my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
+	foreach my $word (@words)
+	{
+		if ($word ne "") 
+		{
+			if ($word =~ /^[^\pL\pN\pM-]+$/)
+			{
+				heatMapNonWord($word);
+				# reset previous word if not separated by more than just a space.
+				if ($word !~ /^[\pZ]+$/) 
+				{
+					$prevWord = "";
+				}
+			}
+			elsif ($word =~ /^[0-9]+$/)
+			{
+				heatMapNumber($word);
+				$prevWord = "";
+			}
+			else
+			{
+				heatMapWord($word, $lang);
+				if ($prevWord ne "") 
+				{
+					heatMapPair($prevWord, $word, $lang);
+				}
+				$prevWord = $word;
+			}
+		}
+	}
+}
+
+
+#
+# heatMapTag: push/pop an XML tag on the tag-stack. (non-counting variant of handleTag)
+#
+sub heatMapTag
+{
+	my $tag = shift;
+
+	# end tag or start tag?
+	if ($tag =~ /^!/)
+	{
+		# Comment, don't care.
+	}
+	elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
+	{
+		my $element = $1;
+		popLang($element);
+	}
+	elsif ($tag =~ /\/$/)
+	{
+		# Empty element
+		$tag =~ /^([a-zA-Z0-9_.-]+)/;
+	}
+	else
+	{
+		$tag =~ /^([a-zA-Z0-9_.-]+)/;
+		my $element = $1;
+        my $lang = getAttrVal("lang", $tag);
+		if ($lang ne "")
+		{
+			pushLang($element, $lang);
+		}
+		else
+		{
+			pushLang($element, getLang());
+		}
+	}
+}
+
+
+
+sub heatMapNonWord
+{
+	my $word = shift;
+	my $xmlWord = $word;
+
+	$xmlWord =~ s/</\&lt;/g;
+	$xmlWord =~ s/>/\&gt;/g;
+	$xmlWord =~ s/\&/\&amp;/g;
+
+	if ($nonWordHash{$word} < 5) 
+	{
+		print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
+	}
+	elsif ($nonWordHash{$word} < 25) 
+	{
+		print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
+	}
+	elsif ($nonWordHash{$word} < 100) 
+	{
+		print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
+	}
+	else
+	{
+		print HEATMAPFILE $xmlWord;
+	}
+}
+
+
+sub heatMapNumber
+{
+	my $word = shift;
+
+	print HEATMAPFILE $word;
+}
+
+sub heatMapWord
+{
+	my $word = shift;
+
+	my $lang = getLang();
+	if (!isKnownWord($word, $lang))
+	{
+		if ($wordHash{$lang}{$word} < 2) 
+		{
+			print HEATMAPFILE "<ab type=\"q5\">$word</ab>";
+		}
+		elsif ($wordHash{$lang}{$word} < 5) 
+		{
+			print HEATMAPFILE "<ab type=\"q4\">$word</ab>";
+		}
+		elsif ($wordHash{$lang}{$word} < 12) 
+		{
+			print HEATMAPFILE "<ab type=\"q3\">$word</ab>";
+		}
+		elsif ($wordHash{$lang}{$word} < 25) 
+		{
+			print HEATMAPFILE "<ab type=\"q2\">$word</ab>";
+		}		
+		elsif ($wordHash{$lang}{$word} < 100) 
+		{
+			print HEATMAPFILE "<ab type=\"q1\">$word</ab>";
+		}
+		else
+		{
+			print HEATMAPFILE $word;
+		}
+	}
+	else
+	{
+		print HEATMAPFILE $word;
+	}
+}
+
+sub heatMapPair
+{
+	# my $word = shift;
+
+	# print HEATMAPFILE $word;
+}
+
+
+#
+# collectWords
+#
 sub collectWords
 {
+	$infile = $ARGV[0];
+	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+
 	while (<INPUTFILE>)
 	{
 		$remainder = $_;
@@ -108,10 +308,15 @@ sub collectWords
 		}
 		handleFragment($remainder);
 	}
+
+	close (INPUTFILE);
 }
 
 
 
+#
+# sortWords
+#
 sub sortWords
 {
 	$grandTotalWords = 0;
@@ -127,6 +332,9 @@ sub sortWords
 }
 
 
+#
+# sortLanguageWords
+#
 sub sortLanguageWords
 {
 	my $language = shift;	
@@ -143,6 +351,9 @@ sub sortLanguageWords
 }
 
 
+#
+# reportPairs
+#
 sub reportPairs
 {
 	my @languageList = keys %pairHash;
@@ -153,6 +364,9 @@ sub reportPairs
 }
 
 
+#
+# reportLanguagePairs
+#
 sub reportLanguagePairs
 {
 	my $language = shift;	
@@ -183,7 +397,9 @@ sub reportLanguagePairs
 }
 
 
-
+#
+# loadGoodBadWords
+#
 sub loadGoodBadWords
 {
 	%goodWordsHash = ();
@@ -224,6 +440,10 @@ sub loadGoodBadWords
 	}
 }
 
+
+#
+# printReportHeader
+#
 sub printReportHeader
 {
 	print "<html>";
@@ -247,6 +467,9 @@ sub printReportHeader
 }
 
 
+#
+# reportPages
+#
 sub reportPages
 {
 	print "\n<h2>Page Number Sequence</h2>";
@@ -257,6 +480,9 @@ sub reportPages
 }
 
 
+#
+# reportWordStatistics
+#
 sub reportWordStatistics
 {
 	if ($totalWords != 0) 
@@ -269,6 +495,10 @@ sub reportWordStatistics
 	}
 }
 
+
+#
+# reportWords
+#
 sub reportWords
 {
 	my $language = shift;
@@ -309,6 +539,9 @@ sub reportWords
 }
 
 
+#
+# reportWord
+#
 sub reportWord()
 {
 	my $word = shift;
@@ -322,10 +555,10 @@ sub reportWord()
 
 	print OUTPUTDATA "$lang\t$word\t$count\n";
 
-	my $known = isKnownWord($word);
+	my $known = isKnownWord($word, $language);
 	if ($known == 0) 
 	{
-		$compoundWord = compoundWord($word);
+		$compoundWord = compoundWord($word, $language);
 		$unknownUniqWords++;
 		$unknownTotalWords += $count;
 	}
@@ -382,10 +615,13 @@ sub reportWord()
 }
 
 
-
+#
+# compoundWord
+#
 sub compoundWord()
 {
 	my $word = shift;
+	my $language = shift;
 	my $start = 4;
 	my $end = length($word) - 3;
 
@@ -394,7 +630,7 @@ sub compoundWord()
 	{
 		$before = substr($word, 0, $i);
 		$after = substr($word, $i);
-		if (isKnownWord($before) == 1 && isKnownWord(ucfirst($after)) == 1)
+		if (isKnownWord($before, $language) == 1 && isKnownWord(ucfirst($after), $language) == 1)
 		{
 			# print STDERR "[$before|$after] ";
 			return "$before|$after";
@@ -404,13 +640,17 @@ sub compoundWord()
 }
 
 
+#
+# isKnownWord
+#
 sub isKnownWord()
 {
 	my $word = shift;
+	my $lang = shift;
 	
-	if ($dictHash{lc($word)} != 1)
+	if ($dictHash{$lang}{lc($word)} != 1)
 	{
-		if ($dictHash{$word} != 1)
+		if ($dictHash{$lang}{$word} != 1)
 		{
 			return 0;
 		}
@@ -419,6 +659,9 @@ sub isKnownWord()
 }
 
 
+#
+# reportNonWords
+#
 sub reportNonWords
 {
 	@nonWordList = keys %nonWordHash;
@@ -445,6 +688,9 @@ sub reportNonWords
 }
 
 
+#
+# reportChars
+#
 sub reportChars
 {
 	@charList = keys %charHash;
@@ -466,6 +712,10 @@ sub reportChars
 	print "</table>\n";
 }
 
+
+#
+# reportNumbers
+#
 sub reportNumbers
 {
 	@numberList = keys %numberHash;
@@ -488,6 +738,9 @@ sub reportNumbers
 }
 
 
+#
+# reportTags: report on the occurances of tags.
+#
 sub reportTags
 {
 	@tagList = keys %tagHash;
@@ -508,7 +761,7 @@ sub reportTags
 
 
 #
-#  reportRend: report on the occurances of the rend tag.
+# reportRend: report on the occurances of the rend tag.
 #
 sub reportRend
 {
@@ -609,6 +862,7 @@ sub handleTag
 		}
 	}
 }
+
 
 #
 # handleFragment: split a text fragment into words and insert them
@@ -760,18 +1014,16 @@ sub loadDict
 		if ($shortlang eq "" || !openDictionary("$shortlang.dic"))
 		{
 			print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
-			%dictHash = ();
 			return;
 		}
 	}
 
-	%dictHash = ();
 	my $count = 0;
 	while (<DICTFILE>)
 	{
 		my $dictword =  $_;
 		$dictword =~ s/\n//g;
-		$dictHash{$dictword} = 1;
+		$dictHash{$lang}{$dictword} = 1;
 		$count++;
 	}
 	print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
@@ -792,7 +1044,7 @@ sub loadCustomDictionary
 		{
 			my $dictword =  $_;
 			$dictword =~ s/\n//g;
-			$dictHash{$dictword} = 1;
+			$dictHash{$lang}{$dictword} = 1;
 			$count++;
 		}
 		print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
