@@ -23,6 +23,7 @@ sub main
 	%pairHash = ();
 	%numberHash = ();
 	%nonWordHash = ();
+	%scannoHash = ();
 	%charHash = ();
 	%langHash = ();
 	%tagHash = ();
@@ -50,6 +51,8 @@ sub main
 
 	open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
 	open (OUTPUTDATA, ">word-statistics.txt") || die("Could not create output file 'word-statistics.txt'");
+
+	loadScannoFile("en");
 
 	collectWords();
 
@@ -117,14 +120,18 @@ sub heatMapFragment
 	my $prevWord = "";
 	# NOTE: we don't use \w and \W here, since it gives some unexpected results
 	my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
-	foreach my $word (@words)
+
+	my $size = @words;
+	for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
 	{
+		my $word = $words[$i];
+
 		if ($word ne "") 
 		{
 			if ($word =~ /^[^\pL\pN\pM-]+$/)
 			{
 				heatMapNonWord($word);
-				# reset previous word if not separated by more than just a space.
+				# reset previous word if separated from this word by more than just a space.
 				if ($word !~ /^[\pZ]+$/) 
 				{
 					$prevWord = "";
@@ -135,13 +142,15 @@ sub heatMapFragment
 				heatMapNumber($word);
 				$prevWord = "";
 			}
-			else
+			else # we have a word.
 			{
-				heatMapWord($word, $lang);
-				if ($prevWord ne "") 
+				my $nextWord = "";
+	
+				if (exists($words[$i + 2]) && $words[$i + 1] =~ /^[\pZ]+$/ && $words[$i + 2] =~ /^[\pL\pN\pM-]+$/) 
 				{
-					heatMapPair($prevWord, $word, $lang);
+					$nextWord = $words[$i + 2];
 				}
+				heatMapWord($word, $lang, $prevWord, $nextWord);
 				$prevWord = $word;
 			}
 		}
@@ -188,7 +197,9 @@ sub heatMapTag
 }
 
 
-
+#
+# heatMapNonWord
+#
 sub heatMapNonWord
 {
 	my $word = shift;
@@ -217,6 +228,9 @@ sub heatMapNonWord
 }
 
 
+#
+# heatMapNumber
+#
 sub heatMapNumber
 {
 	my $word = shift;
@@ -224,11 +238,20 @@ sub heatMapNumber
 	print HEATMAPFILE $word;
 }
 
+
+#
+# heatMapWord
+#
 sub heatMapWord
 {
 	my $word = shift;
-
+	my $dummy = shift;
+	my $prevWord = shift;
+	my $nextWord = shift;
 	my $lang = getLang();
+
+	# print STDERR "HEATMAP: [$prevWord] $word [$nextWord]\n";
+
 	if (!isKnownWord($word, $lang))
 	{
 		if ($wordHash{$lang}{$word} < 2) 
@@ -258,9 +281,31 @@ sub heatMapWord
 	}
 	else
 	{
+		heatMapScanno($word, $prevWord, $nextWord);
+	}
+}
+
+
+#
+# heatMapScanno
+#
+sub heatMapScanno
+{
+	my $word = shift;
+	my $prevWord = shift;
+	my $nextWord = shift;
+	my $lang = getLang();
+
+	if (exists($scannoHash{":$word:"}))
+	{
+		print HEATMAPFILE "<ab type=\"h3\">$word</ab>";
+	}
+	else
+	{
 		print HEATMAPFILE $word;
 	}
 }
+
 
 sub heatMapPair
 {
@@ -268,6 +313,10 @@ sub heatMapPair
 
 	# print HEATMAPFILE $word;
 }
+
+
+
+
 
 
 #
@@ -997,6 +1046,37 @@ sub getLang
 {
 	return $stackLang[$langStackSize];
 }
+
+
+sub loadScannoFile
+{
+	my $lang = shift;
+
+	if (open(SCANNOFILE, "\\eLibrary\\Tools\\tei2html\\tools\\dictionaries\\$lang.scannos"))
+	{
+		my $count = 0;
+		while (<SCANNOFILE>)
+		{
+			my $scanno =  $_;
+			$scanno =~ /^(.*?)\|(.*?)\|(.*?)\t([0-9]+)$/;
+			my $prev = $1;
+			my $word = $2;
+			my $next = $3;
+			my $frequency = $4;
+			# print STDERR "DEBUG: $scanno ->  [$prev] $word [$next] ($frequency)\n";
+			$scannoHash{"$prev:$word:$next"} = $frequency;
+			$count++;
+		}
+		print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
+
+		close(SCANNOFILE);
+	}
+	else
+	{
+		print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
+	}
+}
+
 
 
 #==============================================================================
