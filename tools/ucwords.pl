@@ -254,23 +254,24 @@ sub heatMapWord
 
 	if (!isKnownWord($word, $lang))
 	{
-		if ($wordHash{$lang}{$word} < 2) 
+		my $count = $wordHash{$lang}{$word};
+		if ($count < 2) 
 		{
 			print HEATMAPFILE "<ab type=\"q5\">$word</ab>";
 		}
-		elsif ($wordHash{$lang}{$word} < 5) 
+		elsif ($count < 3) 
 		{
 			print HEATMAPFILE "<ab type=\"q4\">$word</ab>";
 		}
-		elsif ($wordHash{$lang}{$word} < 12) 
+		elsif ($count < 5) 
 		{
 			print HEATMAPFILE "<ab type=\"q3\">$word</ab>";
 		}
-		elsif ($wordHash{$lang}{$word} < 25) 
+		elsif ($count < 8) 
 		{
 			print HEATMAPFILE "<ab type=\"q2\">$word</ab>";
 		}		
-		elsif ($wordHash{$lang}{$word} < 100) 
+		elsif ($count < 100) 
 		{
 			print HEATMAPFILE "<ab type=\"q1\">$word</ab>";
 		}
@@ -284,6 +285,10 @@ sub heatMapWord
 		heatMapScanno($word, $prevWord, $nextWord);
 	}
 }
+
+
+
+
 
 
 #
@@ -1048,6 +1053,10 @@ sub getLang
 }
 
 
+#==============================================================================
+#
+# loadScannoFile
+#
 sub loadScannoFile
 {
 	my $lang = shift;
@@ -1113,6 +1122,9 @@ sub loadDict
 }
 
 
+#
+# loadCustomDictionary
+#
 sub loadCustomDictionary
 {
 	my $lang = shift;
@@ -1138,6 +1150,9 @@ sub loadCustomDictionary
 }
 
 
+#
+# openDictionary
+#
 sub openDictionary
 {
 	my $file = shift;
@@ -1157,7 +1172,9 @@ sub openDictionary
 
 
 #==============================================================================
-
+#
+# printSequence
+#
 sub printSequence
 {
 	my $pStart = "SENTINEL";
@@ -1214,6 +1231,9 @@ sub printSequence
 }
 
 
+#
+# isInSequence
+#
 sub isInSequence
 {
 	my $a = shift;
@@ -1233,7 +1253,9 @@ sub isInSequence
 }
 
 
-
+#
+# StripDiacritics
+#
 sub StripDiacritics
 {
 	my $string = shift;
@@ -1260,6 +1282,10 @@ sub StripDiacritics
 	return $string;
 }
 
+
+#
+# Normalize
+#
 sub Normalize
 {
 	my $string = shift;
