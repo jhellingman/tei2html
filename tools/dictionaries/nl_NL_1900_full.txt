@@ -55890,7 +55890,7 @@ luchtgaatje
 luchtgaatjes
 luchtgat
 luchtgaten
-luchtgesteldbeid
+luchtgesteldheid
 luchthart
 luchtharten
 luchthartig
@@ -119912,7 +119912,7 @@ wortelboer
 wortelboeren
 wortelde
 wortelen
-wortelgrootbeid
+wortelgrootheid
 wortelgrootheden
 wortelklinker
 wortelklinkers
