@@ -587,6 +587,11 @@
 
     <xsl:template match="ref[@target and not(@type='noteref')]">
         <xsl:variable name="target" select="./@target"/>
+		<xsl:if test="not(//*[@id=$target])">
+			<xsl:message terminate="no">
+				Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
+			</xsl:message>
+		</xsl:if>
         <a id="{generate-id(.)}" href="#{generate-id(//*[@id=$target])}">
             <xsl:if test="@type='pageref'">
                 <xsl:attribute name="class">typeref</xsl:attribute>
@@ -755,7 +760,12 @@
             <xsl:text> | </xsl:text>
         </xsl:if>
         <a href="#{generate-id()}">
-            <xsl:value-of select="substring-before(., '.')"/>
+			<xsl:if test="contains(., '.')">
+				<xsl:value-of select="substring-before(., '.')"/>
+			</xsl:if>
+			<xsl:if test="not(contains(., '.'))">
+				<xsl:value-of select="."/>
+			</xsl:if>
         </a>
     </xsl:template>
 
@@ -848,6 +858,13 @@
 	<xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
 		<span>
 			<xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
+	<!-- ab as id placeholders -->
+	<xsl:template match="ab">
+		<span id="{generate-id(.)}">
 			<xsl:apply-templates/>
 		</span>
 	</xsl:template>

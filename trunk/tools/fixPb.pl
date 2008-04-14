@@ -10,6 +10,7 @@ use Roman;			# Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 $inputFile   = $ARGV[0];
 $firstChange = $ARGV[1];
 $offset      = $ARGV[2];
+$useRoman	 = $ARGV[3];
 
 $previousPage = 0;
 $currentPage = 0;
@@ -25,8 +26,8 @@ print STDERR "Verifying $inputFile\n";
 
 while (<INPUTFILE>)
 {
-    $line = $_;
-    $remainder = $line;
+    my $line = $_;
+    my $remainder = $line;
     while ($remainder =~ m/<pb(.*?)>/)
     {
 		$before = $`;
@@ -52,7 +53,11 @@ while (<INPUTFILE>)
 
 		if ($seenFirst && isnum($currentPage)) 
 		{
-			$newCurrentPage = $currentPage + $offset;
+			my $newCurrentPage = $currentPage + $offset;
+			if ($useRoman eq "R") 
+			{
+				$newCurrentPage = uc(roman($newCurrentPage));
+			}
 			print "$before<pb n=$newCurrentPage id=pb$newCurrentPage>";
 		}
 		else

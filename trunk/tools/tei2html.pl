@@ -134,7 +134,7 @@ sub processFile
     system ("perl $toolsdir/ent2ucs.pl tmp.4 > $basename.xml");
 
 	# convert from TEI P4 to TEI P5  (experimental)
-    system ("saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
+    # system ("saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
 
 	# collect information about images.
     if (-d "images")
