@@ -2,7 +2,7 @@
 <stylesheet>
 <![CDATA[
 
-.q1 { background-color: #FFFF99; }
+.q1 { background-color: #FFFFCC; }
 .q2 { background-color: #FFFF5C; }
 .q3 { background-color: #FFDB4D; }
 .q4 { background-color: #FFB442; font-weight: bold;}

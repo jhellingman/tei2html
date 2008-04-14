@@ -52,7 +52,7 @@ sub main
 	open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
 	open (OUTPUTDATA, ">word-statistics.txt") || die("Could not create output file 'word-statistics.txt'");
 
-	loadScannoFile("en");
+	# loadScannoFile("en");
 
 	collectWords();
 
@@ -70,7 +70,6 @@ sub main
 	reportStatistics();
 
 	print "\n</body></html>";
-
 
 	heatMapDocument();
 
