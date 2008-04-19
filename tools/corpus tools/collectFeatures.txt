@@ -1,0 +1,364 @@
+
+
+Collection Algorithm:
+
+Input: 
+
+- Collection of confusion sets (first version of tool may assume pairs)
+- Large corpus of text (> 100M words)  (my Dutch corpus has 108,632,744 words in total)
+- list of word-forms with part-of-speech information (we can add the frequency information from our corpus)
+
+- k (size of proximity window) (10)
+- l (largest n-grams collected) (3)
+- n_proximity (minimum count for proximity data) (8)
+- n_pattern (minimum count for pattern data (8)
+- delta (minimum significant probability) 0.5
+
+1. Tokenize collection
+
+	- words
+	- word-separators (spaces and punctuation)
+	- drop tags, noise, things clearly in a foreign language, and formatting
+	- replace numbers in figures with written-out version if that number is in the dictionary.
+	- replace other numbers with the token [NUM]
+
+2. Run over collection
+
+	for each word count proximity pairs for all words close to it  (proximity window size = k tokens, k = 10)
+
+	for each word count sequences (n-grams) 
+
+
+	Example:
+	
+	Suppose we have the confusion set { dog, dug }
+
+	"the quick brown dog jumps over the lazy fox"
+
+	Looking at the word "dog"
+
+	The following statistics are collected 
+
+	- The proximity counts for the words 'the', 'quick', 'brown', 'jumps', 'over', 'lazy', and 'fox' are increased.
+	  (probably better discriminator for nouns and verbs)
+
+		CountProximityPair(word, word)
+
+	- The following patterns are counted as evidence for 'dog'
+	  (probably better discriminator for grammar words)
+
+	  We replace the current word with with an _ in the patterns we store
+
+		CountPattern(word, pattern)
+
+	2-grams:
+		'brown _'
+		'_ jumps'
+
+	3-grams:
+		'quick brown _'
+		'brown _ jumps'
+		'_ jumps over'
+
+	And the following more generic patterns, in which we map words to their part-of-speech:
+
+	(function: string MapPartOfSpeech(string) )
+
+		noun			N
+		pronoun			PRO
+		verb			V
+		adjective		ADJ
+		adverb			ADV
+
+	We let the following categories stand for themselves:
+
+		preposition		PP
+		conjunction		CON
+		interjection		INT
+		determiner		DET	{ de, het, een, 't, 'n }
+
+	We have the following additional classes we do apply:
+
+		punctuation		P
+		segment border		SEG  (only as first or last element of segment)
+		unknown			UNK
+		number			NUM
+
+
+		CountPattern(word, pattern)
+
+	2-grams:
+		'[ADJ] _'
+		'_ [V]'
+	
+	3-grams:
+		'[ADJ] [ADJ] _'
+		'[ADJ] _ [V]'
+		'_ [V] over'
+
+
+	if a word appears both as a verb and a noun, we count for both, weighted by the probability of each occurance. (if unknown, 50/50), so occurance
+	counts can be fractional numbers.
+
+
+3. Prune collected statistics
+
+	At the end of the running through the corpus, we have a lot of data. To work with it effectively, we need to prune it, and only keep the data
+	that will be helpful to discriminate between the words in our confusion sets.
+
+	Prune Proximity information
+
+	eliminate if count < n_proximity  (not seen often enough to be statistically significant)
+
+	let 
+		w: a word in the corpus
+		wc1: first word in the confusion set
+		wc2: second word in the confusion set
+		count(w): the number of occurances of w
+		count(*): the total number of words in the corpus
+		w|wc: w given wc.
+
+	P(w) =   count(w) / count(*)
+	P(w|wc1) = count(w|wc1) / count(wc1)
+
+	calculate P(w),  P(w|wc1), p(w|wc2)
+
+	eliminate if | P(w|wc1) - p(w|wc2) | < delta    (no discriminating value)
+	eliminate if | P(w) - p(w|wc1) | < delta	(co-occurance not significant)
+	eliminate if | P(w) - p(w|wc2) | < delta	(co-occurance not significant)
+
+
+	Prune Pattern information
+
+	eliminate if count(pat) < n_pattern
+
+	calculate P(pat1|pat) and P(pat2|pat)
+
+	eliminate if | P(pat1|pat) - P(pat2|pat) | < delta  (no discriminating value)
+
+
+
+	We now have a set of discriminating patterns.
+
+	Store the information in the given file format.
+
+	{ dog, dug }
+		*			<count>		size of learning corpus used
+		dog			<count>		count of dog in our corpus
+			<w>		<count>		for all proximity words that indicate dog
+			<pattern>	<count>		for all patterns that indicate dog.
+		dug			<count>
+			<w>		<count>		
+			<pattern>	<count>		
+
+
+
+
+
+Now we can run the context sensitive checks:
+
+
+4. Apply patterns to text to be checked.
+
+	For each word in text
+	
+		if word in confusion set:
+
+			establish features
+			check features agains discriminating features in database.
+
+			if a word occurs in the confusion set 
+				calculate probability it is correct, given the features.
+
+				(use Bayesian combination of probabilities)
+
+				color actual word based on its probability, following the following LUT
+
+				> 0.95 white
+				> 0.67 very light blue
+				> 0.5  light blue
+				> 0.33 somewhat brighter blue
+				> 0.05 bright blue
+
+				We can add a pop-up with the confused words.
+
+				<span class=brightblue title="and (.943) arid (.057)">arid<span>
+
+
+
+
+Format confusion sets
+
+common OCR errors (scannos)
+
+{ he, be }
+{ cat, eat }
+{ arid, and }
+
+common typos
+
+{ from, form }
+
+common misspellings  (near) homophones
+
+{ night, knight }
+{ their, there }
+{ peace, piece }
+{ real, reel }
+{ desert, dessert }
+
+
+http://writing2.richmond.edu/WRITING/wweb/conford.html
+
+{ accept, except }
+{ affect, effect }
+{ allusion, illusion }
+{ all ready, allready }
+{ altoghether, all together }
+{ apart, a part }
+{ ascent, assent }
+{ breath, breathe }
+{ capital, capitol }
+{ cite, sight, site }
+{ complement, compliment }
+{ conscience, conscious }
+{ council, counsel }
+{ elicit, illicit }
+{ eminent, immanent, imminent }
+{ it, it's }
+{ lead, led }
+{ lie, lay } { laying, laid }
+{ lose, loose }
+{ passed, past }
+{ precede, proceed }
+{ principal, principle }
+{ quote, quotation }
+{ stationary, stationery }
+{ supposed to, suppose }
+{ then, than }
+{ their, there, they're }
+{ through, threw, thorough, though } 
+{ to, too, two }
+{ who, which, that }
+{ who, whom }
+
+http://homepage.smc.edu/reading_lab/words_commonly_confused.htm
+
+accept, except  	
+brake, break  	
+desert, dessert  	
+its, it's  	
+presence, presents  	
+vain, vane, vein
+advice, advise 	
+breathe, breath, breadth 	
+device, devise 	
+knew, new, know, no 	
+principal, principle 	 
+affect, effect 	
+by, bye, buy 	
+faint, feint 	
+later, latter 	
+precede, proceed 	
+vociferous, voracious
+allot, a lot 	
+can, may 	
+farther, further 	
+lead, led 	
+quiet, quit, quite 	 
+all ready, already 	
+canvas, canvass 	  	
+lay, lie 	
+rain, reign, rein 	
+waist, waste
+capital, capitol 	
+fewer, less 	
+leave, let 	
+raise, rise 	
+weak, weak
+all together, altogether 	
+cite, site, sight 	
+formerly, formally 	
+loose, lose 	
+sea, see 	 
+allusion, illusion 	
+clothes, cloths 	
+forth, fourth 	
+notable, noticeable 	
+sit, set 	
+wear, were, where
+altar, alter 	
+coarse, course 	
+good, well 	
+object, subject 	
+stationary, stationery 	
+weather, whether, rather
+among, between 	
+compare, contrast 	
+hear, here 	
+passed, past 	
+statue, stature, statute 	
+whose, who's
+are, hour, our 	
+compare to, compare with 	
+hole, whole 	  	  	
+your, you're
+award, reward 	
+complement, compliment 	
+imply, infer 	
+peace, piece 	
+than, then 	 
+compare to, compare with 	
+consul, council, counsel 	
+incidence, incidents 	
+plain, plane 	
+their, there, they're 	 
+bad, badly 	
+decent, descent, dissent 	
+incite, insight 	
+pore, pour 	
+threw, through 	 
+beside, besides 	
+delusion, illusion, allusion 	
+instance, instants 	
+precedence, precedent 	
+to, too, two 	 
+
+more sources:
+
+http://www.askoxford.com/betterwriting/classicerrors/confused/
+http://www.infoplease.com/ipa/A0200807.html
+http://esl.about.com/cs/vocabulary/a/a_confused.htm
+http://iws.ohiolink.edu/~sg-ysu/confword.html
+http://academics.smcvt.edu/writingctr/CommonWords.htm
+
+
+Nederlandse voorbeelden:
+
+http://www.cnts.ua.ac.be/~walter/papers/publi.html
+http://www.cnts.ua.ac.be/~walter/papers/2007/db07.pdf
+
+
+OCR fouten:
+
+{ hij, bij }
+{ met, niet }
+
+homofonie:
+
+{ noch, nog }
+{ licht, ligt }
+{ mei, mij }
+{ wei, wij }
+{ hout, houdt }
+{ moet, moed }
+{ want, wand }
+{ weidde, weidden, weide, weiden, wijdde, wijdden, wijde, wijden }
+
+grammatica:
+
+{ gebeurt, gebeurd }
+
+betekenis:
+
+{ mits, tenzij }
