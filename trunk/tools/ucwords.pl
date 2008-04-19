@@ -254,25 +254,10 @@ sub heatMapWord
 	if (!isKnownWord($word, $lang))
 	{
 		my $count = $wordHash{$lang}{$word};
-		if ($count < 2) 
+		if ($count < 100) 
 		{
-			print HEATMAPFILE "<ab type=\"q5\">$word</ab>";
-		}
-		elsif ($count < 3) 
-		{
-			print HEATMAPFILE "<ab type=\"q4\">$word</ab>";
-		}
-		elsif ($count < 5) 
-		{
-			print HEATMAPFILE "<ab type=\"q3\">$word</ab>";
-		}
-		elsif ($count < 8) 
-		{
-			print HEATMAPFILE "<ab type=\"q2\">$word</ab>";
-		}		
-		elsif ($count < 100) 
-		{
-			print HEATMAPFILE "<ab type=\"q1\">$word</ab>";
+			my $type = lookupHeatMapClass($count);
+			print HEATMAPFILE "<ab type=\"$type\">$word</ab>";
 		}
 		else
 		{
@@ -286,6 +271,37 @@ sub heatMapWord
 }
 
 
+#
+# lookupHeatMapClass
+#
+sub lookupHeatMapClass
+{
+	my $count = shift;
+	if ($count < 2) 
+	{
+		return "q5";
+	}
+	elsif ($count < 3) 
+	{
+		return "q4";
+	}
+	elsif ($count < 5) 
+	{
+		return "q3";
+	}
+	elsif ($count < 8) 
+	{
+		return "q2";
+	}
+	elsif ($count < 100) 
+	{
+		return "q1";
+	}
+	else
+	{
+		return "";
+	}
+}
 
 
 
@@ -513,6 +529,14 @@ sub printReportHeader
 	print ".freq { color: gray; }\n";
 	print ".gw { background: yellow; }\n";
 	print ".bw { background: red; font-size: 24px;}\n";
+
+	print ".q1 { background-color: #FFFFCC; }\n";
+	print ".q2 { background-color: #FFFF5C; }\n";
+	print ".q3 { background-color: #FFDB4D; }\n";
+	print ".q4 { background-color: #FFB442; font-weight: bold;}\n";
+	print ".q5 { background-color: #FF8566; font-weight: bold;}\n";
+	print ".q6 { background-color: red; font-weight: bold;}\n";
+
 	print "</style>\n";
 	print "\n<head><body>";
 
@@ -625,28 +649,15 @@ sub reportWord()
 			print OUTPUTFILE "$word\n";
 		}
 
+		my $heatMapClass = lookupHeatMapClass($count);
+
 		if ($compoundWord ne "") 
 		{
-			if ($count < 3) 
-			{
-				print "<span class='comp $goodOrBad'>$compoundWord</span> ";
-			}
-			else
-			{
-				print "<span class='comp3 $goodOrBad'>$compoundWord</span> ";
-			}
-		}
-		elsif ($count < 3)
-		{
-			print "<span class='err $goodOrBad'>$word</span> ";
-		}
-		elsif ($count < 6)
-		{
-			print "<span class='unk $goodOrBad'>$word</span> ";
+			print "<span class='$heatMapClass comp $goodOrBad'>$compoundWord</span> ";
 		}
 		else
 		{
-			print "<span class='unk10 $goodOrBad'>$word</span> ";
+			print "<span class='$heatMapClass $goodOrBad'>$word</span> ";
 		}
 	}
 	else
