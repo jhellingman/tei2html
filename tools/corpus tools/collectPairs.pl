@@ -162,9 +162,7 @@ sub countPair
 	$pairCount++;
 	$totalPairCount++;
 
-	if ((exists $dictHash{$firstWord} && exists $scannoHash{$secondWord}) ||
-	 	(exists $scannoHash{$firstWord} && exists $dictHash{$secondWord})) 
-	# if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
+	if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
 	{
 		$scannoPairCount++;
 
