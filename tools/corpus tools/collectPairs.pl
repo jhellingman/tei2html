@@ -25,23 +25,25 @@ $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
 %wordHash = ();
 %wordFiles = ();
-%dictHash = ();
-%scannoHash = ();
-%pairHash = ();
+%dictHash = ();			# dictionary of valid words
+%confusableHash = ();	# set of confusable words
+%pairHash = ();			# proximity pairs
+%patternHash = ();		# patterns
 
-$inputDir		= $ARGV[0];
+
+$inputDir       = $ARGV[0];
 
 $totalPairCount = 0;
 
 print STDERR "Loading dictionary\n";
 
-load_dictionary();
+loadDictionary();
 
 print STDERR "Collecting words from directory $inputDir\n";
 
-list_recursively($inputDir);
+listRecursively($inputDir);
 
-report_pairs();
+reportPairs();
 
 print STDERR "$totalPairCount pairs in total\n";
 print STDERR "$scannoPairCount scanno pairs\n";
@@ -50,180 +52,292 @@ exit;
 
 
 
-# list_recursively
+# listRecursively
 #
 #   list the contents of a directory,
 #   recursively listing the contents of any subdirectories
 
-sub list_recursively 
+sub listRecursively
 {
     my ($directory) = @_;
     my @files = (  );
-    
-    unless (opendir(DIRECTORY, $directory)) 
-	{
+
+    unless (opendir(DIRECTORY, $directory))
+    {
         print "Cannot open directory $directory!\n";
         exit;
     }
-    
+
     @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
-    
+
     closedir(DIRECTORY);
-    
-    foreach my $file (@files) 
-	{
-        if (-f "$directory/$file") 
-		{
-			if ($file =~ /\.html?$/) 
-			{
-				handle_file("$directory/$file");
-			}
-        
+
+    foreach my $file (@files)
+    {
+        if (-f "$directory/$file")
+        {
+            if ($file =~ /\.html?$/)
+            {
+                handleFile("$directory/$file");
+            }
+
         }
-		elsif (-d "$directory/$file") 
-		{
-            list_recursively("$directory/$file");
+        elsif (-d "$directory/$file")
+        {
+            listRecursively("$directory/$file");
         }
     }
 }
 
 
 #
-# handle_file
+# handleFile
 #
-sub handle_file
+sub handleFile
 {
-	my $infile = shift;
-	open (INPUTFILE, $infile) || die("Could not open input file $infile");
+    my $infile = shift;
+    open (INPUTFILE, $infile) || die("Could not open input file $infile");
     binmode(INPUTFILE, ":encoding(latin-1)");
 
-	$pairCount = 0;
+    $pairCount = 0;
 
-	my $language = "nl";
-	my $prevWord = "";
-	while (<INPUTFILE>)
-	{
-		my $line = $_;
-		$line =~ s/<(.*?)>/ /g;	# Drop SGML/HTML tags
-		$line =~ s/\s+/ /g;		# normalize space
-		$line =~ s/^\s+//;
-		$line =~ s/\s+$//;
+    my $language = "nl";
+    my $prevWord = "";
+    while (<INPUTFILE>)
+    {
+        my $line = $_;
+		# $line =~ s/<(p|br|td|li|h[0-7]|div)\b(.*?)>/~~~~~~/g;	# Identify segment borders
+        $line =~ s/<(.*?)>/ /g; # Drop remaining SGML/HTML tags
+        $line =~ s/\s+/ /g;     # normalize space
+        $line =~ s/^\s+//;
+        $line =~ s/\s+$//;
 
-		$line = sgml2utf($line);
+        $line = sgml2utf($line);
 
-		# Establish language.
-		if (length($line) > 100)
-		{
-			my ($l, $p) = langof($line);
-			if ($l && $p > 0.15) 
+        # Establish language.
+        if (length($line) > 100)
+        {
+            my ($l, $p) = langof($line);
+            if ($l && $p > 0.15)
+            {
+                $language = $l;
+            }
+        }
+
+        # We are interested in what is likely Dutch.
+        if ($language eq "nl" || $language eq "af")
+        {
+            # NOTE: we don't use \w and \W here, since it gives some unexpected results
+            my @words = split(/[^\pL\pN\pM-]+/, $line);
+
+			# count words in the neighbourhood
+			my $size = @words;
+			for (my $i = 0; $i < $size; $i++)
 			{
-				$language = $l;
-			}
-		}
+				my $word = $words[$i];
 
-		# We are interested in what is likely Dutch.
-		if ($language eq "nl" || $language eq "af") 
-		{
-			# NOTE: we don't use \w and \W here, since it gives some unexpected results
-			my @words = split(/([^\pL\pN\pM-]+)/, $line);
-
-			foreach $word (@words)
-			{
-				if ($word =~ /[^\pL\pN\pM-]+/) 
+				# if word in confusion set
+				if ($word eq 'hij' || $word eq 'bij') 
 				{
-					# reset previous word if not separated by space(s).
-					if ($word !~ /^[\pZ]+$/) 
+					countWord($word);
+
+					for (my $j = -10; $j < 10; $j++) 
 					{
-						$prevWord = "";
+						my $position = $i + $j;
+						if ($position > 0 && $position < $size && $position != $i) 
+						{
+							countProximityPair($word, $words[$position]);
+						}
 					}
 				}
-				else
+			}
+
+			# Split again, but now keep word separators.
+			@words = split(/([^\pL\pN\pM-]+)/, $line);
+
+			# Prune word list to eliminate spaces (we retain punctuation)
+			my @filteredWords;
+			foreach my $word (@words) 
+			{
+				if ($word !~ /^[\pZ]+$/) 
 				{
-					countPair($prevWord, $word);
-					$prevWord = $word;
+					$word =~ s/\s+//g;
+					push (@filteredWords, $word);
 				}
 			}
-		}
-	}
-	close INPUTFILE;
+			
+			my $size = @filteredWords;
+			for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
+			{
+				my $word = $filteredWords[$i];
 
-	print STDERR "$pairCount\t$infile\n";
+				# if word in confusion set
+				if ($word eq 'hij' || $word eq 'bij') 
+				{
+					$i - 1 > 0						&& countPattern2($word, $filteredWords[$i - 1], "_");	
+					$i + 1 < $size					&& countPattern2($word, "_", $filteredWords[$i + 1]);	
+
+					$i - 2 > 0						&& countPattern3($word, $filteredWords[$i - 2], $filteredWords[$i - 1], "_");	
+					$i - 1 > 0 && $i + 1 < $size	&& countPattern3($word, $filteredWords[$i - 1], "_", $filteredWords[$i + 1]);	
+					$i + 2 < $size					&& countPattern3($word, "_", $filteredWords[$i + 1], $filteredWords[$i + 2]);
+				}
+            }
+        }
+    }
+    close INPUTFILE;
+
+    print STDERR "$pairCount\t$infile\n";
 }
 
 
 #
-# countPair
+# countWord
 #
-sub countPair
+sub countWord
 {
-	my $firstWord = shift;
-	my $secondWord = shift;
+	my $word = shift;
+}
 
-	$pairCount++;
-	$totalPairCount++;
+sub countPattern2
+{
+	my $word = shift;
+	my $w1 = shift;
+	my $w2 = shift;
 
-	if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
-	{
-		$scannoPairCount++;
-
-		$pairHash{"$firstWord $secondWord"}++;
-	}
+	my $pattern = "$word $w1 $w2";
+	# print STDERR "PATTERN: $pattern\n";
+	$patternHash{"$pattern"}++;
 }
 
 
-#
-# report_pairs
-#
-sub report_pairs
+sub countPattern3
 {
-	my @pairList = keys %pairHash;
+	my $word = shift;
+	my $w1 = shift;
+	my $w2 = shift;
+	my $w3 = shift;
 
-	@pairList = sort @pairList;
-	foreach my $pair (@pairList)
-	{
-		my $count = $pairHash{$pair};
-		print "$pair\t$count\n";
-	}
+	my $pattern = "$word $w1 $w2 $w3";
+	# print STDERR "PATTERN: $pattern\n";
+	$patternHash{"$pattern"}++;
+
+	my $p1 = mapPartOfSpeech($w1);
+	my $p2 = mapPartOfSpeech($w2);
+	my $p3 = mapPartOfSpeech($w3);
+
+	my $ppattern = "$word $p1 $p2 $p3";
+
 }
 
 
-#
-# load_dictionary: load required dictionaries.
-#
-sub load_dictionary
+sub mapPartOfSpeech
 {
-	my $dictFile = "C:\\bin\\dic\\nl_NL_1900_full.txt";
-	if (!open(DICTFILE, "<:encoding(latin1)", $dictFile))
+	my $word = shift;
+
+	if (exists $partOfSpeech{$word}) 
 	{
-			print STDERR "Could not open $dictFile";
-			exit;
+		return $partOfSpeech{$word};
 	}
-
-	%dictHash = ();
-	while (<DICTFILE>)
-	{
-		my $word =  $_;
-		$word =~ s/\n//g;
-		$dictHash{$word} = "$word";
-	}
-	close(DICTFILE);
+	return $word;
+}
 
 
-	my $scannoFile = "scanno-list.txt";
-	if (!open(DICTFILE, "<:encoding(latin1)", $scannoFile))
-	{
-			print STDERR "Could not open $scannoFile";
-			exit;
-	}
 
-	%scannoHash = ();
-	while (<DICTFILE>)
-	{
-		my $word =  $_;
-		$word =~ s/\n//g;
-		$scannoHash{$word} = "$word";		
+#
+# countProximityPair
+#
+sub countProximityPair
+{
+    my $firstWord = shift;
+    my $secondWord = shift;
+
+
+    $pairCount++;
+    $totalPairCount++;
+
+    if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
+    {
+        $scannoPairCount++;
 		
-	}
-	close(DICTFILE);
+		# print STDERR "PAIR:    $firstWord ~ $secondWord\n";
+
+        $pairHash{"$firstWord $secondWord"}++;
+    }
+}
+
+
+#
+# reportPairs
+#
+sub reportPairs
+{
+    my @pairList = keys %pairHash;
+    @pairList = sort @pairList;
+    foreach my $pair (@pairList)
+    {
+        my $count = $pairHash{$pair};
+		if ($count >= 10) 
+		{
+			print "$pair\t$count\n";
+		}
+    }
+
+    my @patternList = keys %patternHash;
+    @patternList = sort @patternList;
+    foreach my $pattern (@patternList)
+    {
+        my $count = $patternHash{$pattern};
+		if ($count >= 10) 
+		{
+			print "$pattern\t$count\n";
+		}
+    }
+}
+
+
+#
+# loadDictionary: load required dictionaries.
+#
+sub loadDictionary
+{
+    my $dictFile = "C:\\bin\\dic\\nl-1900.dic";
+    if (!open(DICTFILE, "<:utf8", $dictFile))
+    {
+            print STDERR "Could not open $dictFile";
+            exit;
+    }
+
+    %dictHash = ();
+    while (<DICTFILE>)
+    {
+        my $word =  $_;
+        $word =~ s/\n//g;
+        $dictHash{$word} = "$word";
+    }
+    close(DICTFILE);
+}
+
+
+#
+# loadConfusables: load set of confusable words.
+#
+sub loadConfusables
+{
+    my $confusableFile = "confusables.txt";
+    if (!open(CONFUSABLEFILE, "<:encoding(latin1)", $confusableFile))
+    {
+            print STDERR "Could not open $confusableFile";
+            exit;
+    }
+
+    %confusableHash = ();
+    while (<CONFUSABLEFILE>)
+    {
+        my $word =  $_;
+        $word =~ s/\n//g;
+        $confusableHash{$word} = "$word";
+    }
+
+    close(CONFUSABLEFILE);
 }
 
