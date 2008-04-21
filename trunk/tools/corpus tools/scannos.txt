@@ -191,7 +191,6 @@ hef                      310         bef                      109
 gehoorde                 309         geboorde                 9
 halt                     299         balt                     34
 belde                    294         helde                    145
-þ                        291         tb                       7
 helsch                   288         belsch                   1
 beulen                   288         heulen                   86
 bekken                   288         hekken                   139
@@ -208,7 +207,6 @@ herken                   249         berken                   82
 boerden                  248         hoerden                  93
 botte                    248         hotte                    8
 herrie                   246         berrie                   44
-hÄ                       236         bÄ                       61
 gehakt                   236         gebakt                   3
 gebot                    229         gehot                    2
 holt                     225         bolt                     21
@@ -239,7 +237,6 @@ barsch                   176         harsch                   1
 hemelhoog                174         hemelboog                34
 heên                     173         beên                     14
 huil                     172         buil                     82
-híj                      172         bíj                      18
 bul                      170         hul                      127
 baarden                  169         haarden                  20
 holletje                 169         bolletje                 113
@@ -259,7 +256,6 @@ baes                     140         haes                     119
 buig                     139         huig                     73
 bête                     137         hête                     1
 bakt                     136         hakt                     94
-baeten                   136         haeten                   120
 hunkeren                 135         bunkeren                 19
 houder                   133         bouder                   4
 Gebouwen                 133         Gehouwen                 14
@@ -321,8 +317,6 @@ botsten                  64          hotsten                  12
 hommels                  64          bommels                  5
 heertjes                 63          beertjes                 12
 host                     61          bost                     11
-hä                       61          bä                       1
-hg                       61          bg                       2
 hulk                     61          bulk                     5
 hên                      60          bên                      8
 hommel                   58          bommel                   34
@@ -346,7 +340,6 @@ bandeloos                48          handeloos                1
 haha                     48          baba                     18
 hakten                   47          bakten                   28
 Sabel                    47          Sahel                    2
-hâ                       46          bâ                       5
 herderen                 45          berderen                 33
 gehakte                  45          gebakte                  2
 bobbel                   45          hobbel                   13
@@ -359,7 +352,6 @@ behaard                  40          bebaard                  2
 gehuisd                  40          gebuisd                  4
 uitbouwen                40          uithouwen                12
 Verheiden                40          Verbeiden                7
-hà                       38          bà                       2
 huurden                  38          buurden                  2
 doorhakken               38          doorbakken               8
 haasjes                  38          baasjes                  12
@@ -374,8 +366,6 @@ broederhand              34          broederband              18
 hikte                    34          bikte                    10
 hìj                      34          bìj                      2
 hobbelen                 33          bobbelen                 17
-hoë                      33          boë                      2
-hiér                     31          biér                     1
 geboekte                 31          gehoekte                 4
 aanhoorden               31          aanboorden               1
 bengelde                 31          hengelde                 6
@@ -400,11 +390,9 @@ holler                   25          boller                   15
 bink                     25          hink                     15
 uithuilen                25          uitbuilen                1
 Verbaast                 25          Verhaast                 8
-hÅ                       24          bÅ                       12
 boertjes                 24          hoertjes                 8
 kinderboekje             24          kinderhoekje             2
 baksel                   24          haksel                   8
-hóren                    24          bóren                    2
 beien                    23          heien                    17
 verhoerde                23          verboerde                5
 beleen                   23          heleen                   1
@@ -425,27 +413,19 @@ hosten                   18          bosten                   3
 baek                     18          haek                     15
 bitsige                  18          hitsige                  13
 hobbelden                18          bobbelden                3
-bün                      17          hün                      3
 bolsters                 16          holsters                 2
-bès                      16          hès                      1
 bengelden                16          hengelden                2
 uithoren                 16          uitboren                 2
 botsend                  16          hotsend                  11
-hóf                      15          bóf                      2
 haerken                  15          baerken                  3
 Vergeetboek              15          Vergeethoek              1
 hobbelt                  15          bobbelt                  11
 gebint                   15          gehint                   14
 gehoogd                  15          geboogd                  4
-bô                       15          hô                       12
 hikt                     14          bikt                     6
 baeden                   14          haeden                   3
-bös                      14          hös                      1
-haeter                   14          baeter                   8
-haeter                   14          bæter                    1
 boost                    13          hoost                    4
 hebe                     13          hehe                     2
-hâr                      13          bâr                      2
 Gebeten                  13          Geheten                  10
 gebotst                  13          gehotst                  3
 butsen                   13          hutsen                   10
@@ -458,158 +438,74 @@ hoezen                   11          boezen                   8
 heng                     11          beng                     9
 haf                      11          baf                      8
 Gehaat                   11          Gebaat                   1
-hèl                      11          bèl                      2
 inhouwen                 11          inbouwen                 7
 geheuld                  10          gebeuld                  5
 hennetje                 10          bennetje                 7
 beiën                    10          heiën                    3
-baeffen                  10          haeffen                  2
 hauw                     10          bauw                     3
 hostel                   10          bostel                   9
 verboeren                10          verhoeren                7
 geholde                  9           gebolde                  1
 boeie                    9           hoeie                    5
 bobbeltjes               8           hobbeltjes               2
-häd                      8           bäd                      1
-héen                     8           béen                     1
 verdomboekje             8           verdomhoekje             6
 bitsigheid               8           hitsigheid               2
 hó                       8           bó                       7
 gebikt                   8           gehikt                   3
 verbakken                8           verhakken                3
 achterhand               7           achterband               5
-hèi                      7           bèi                      1
 hokt                     7           bokt                     3
 ophooren                 7           opbooren                 1
 afhad                    7           afbad                    3
 gehengeld                7           gebengeld                2
 bóek                     7           hóek                     1
 gehokt                   7           gebokt                   1
-bôk                      7           hôk                      1
 heetere                  6           beetere                  4
 voorhout                 6           voorbout                 4
 huts                     6           buts                     2
 omhouwen                 6           ombouwen                 3
-há                       6           bá                       3
-heét                     6           beét                     1
-hánd                     6           bánd                     1
 werkboek                 6           werkhoek                 3
 moederhand               6           moederband               2
 behouw                   6           bebouw                   2
-héden                    5           béden                    3
 gehobbeld                5           gebobbeld                1
 verhitter                5           verbitter                2
 ophollen                 5           opbollen                 4
-héér                     5           béér                     1
-heén                     5           beén                     1
-bûk                      5           hûk                      1
-bók                      5           hók                      4
 Hemelhoog                5           Hemelboog                4
-béide                    5           héide                    1
 heiers                   5           beiers                   3
 gebost                   5           gehost                   2
-baên                     5           haên                     4
-hêk                      4           bêk                      1
-bèk                      4           hèk                      2
 Afhaken                  4           Afbaken                  1
 heier                    4           beier                    2
-hél                      4           bél                      1
 inhouwt                  4           inbouwt                  2
 hitsiger                 4           bitsiger                 3
 afbellen                 4           afhellen                 3
-hért                     4           bért                     1
-hö                       4           bö                       2
 Gehaard                  4           Gebaard                  1
-héét                     4           béét                     1
-bár                      4           hár                      2
 Verbeid                  4           Verheid                  4
 Verheid                  4           Verbeid                  4
-hól                      4           ból                      2
-hólt                     3           bólt                     1
 afgehold                 3           afgebold                 1
-heêt                     3           beêt                     1
 bengeltje                3           hengeltje                2
-hò                       3           bò                       1
-börst                    3           hörst                    1
-höös                     3           böös                     1
-hónd                     3           bónd                     2
 afhelt                   3           afbelt                   2
 bommetje                 3           hommetje                 1
 verhakt                  3           verbakt                  1
 ophakken                 2           opbakken                 1
-haesje                   2           baesje                   2
-baesje                   2           haesje                   2
-bij?                     2           hij?                     1
-bóut                     2           hóut                     1
-hûl                      2           bûl                      1
-hóllen                   2           bóllen                   1
 hikten                   2           bikten                   1
 hoosch                   2           boosch                   1
-boôr                     2           hoôr                     1
-hêen                     2           bêen                     1
 Verhoert                 2           Verboert                 1
-hölle                    2           bölle                    1
-bèer                     2           hèer                     1
-hoê                      2           boê                      1
-báat                     2           háat                     1
-bót                      2           hót                      1
-bànd                     2           hànd                     2
-hànd                     2           bànd                     2
 uithoort                 2           uitboort                 2
 uitboort                 2           uithoort                 2
-håån                     2           båån                     1
-hôf                      2           bôf                      1
-höven                    2           böven                    1
 bommetjes                2           hommetjes                2
 hommetjes                2           bommetjes                2
-höl                      1           böl                      1
-böl                      1           höl                      1
-héren                    1           béren                    1
-béren                    1           héren                    1
-hèngel                   1           bèngel                   1
-bèngel                   1           hèngel                   1
-áánbad                   1           áánhad                   1
-áánhad                   1           áánbad                   1
 hoendertjes              1           boendertjes              1
 boendertjes              1           hoendertjes              1
-bèffen                   1           hèffen                   1
-hèffen                   1           bèffen                   1
-hàren                    1           bàren                    1
-bàren                    1           hàren                    1
-hôven                    1           bôven                    1
-bôven                    1           hôven                    1
 hoes                     1           boes                     1
 boes                     1           hoes                     1
-bôt                      1           hôt                      1
-hôt                      1           bôt                      1
-hêet                     1           bêet                     1
-bêet                     1           hêet                     1
-âh                       1           âb                       1
-âb                       1           âh                       1
-haei                     1           baei                     1
-baei                     1           haei                     1
-bòk                      1           hòk                      1
 Gebuisd                  1           Gehuisd                  1
-hòk                      1           bòk                      1
-Gehuisd                  1           Gebuisd                  1
-hógen                    1           bógen                    1
 Uitbuilen                1           Uithuilen                1
 Behouw                   1           Bebouw                   1
-Bebouw                   1           Behouw                   1
-bógen                    1           hógen                    1
 Uithuilen                1           Uitbuilen                1
 kniehoog                 1           knieboog                 1
-knieboog                 1           kniehoog                 1
-ijshal                   1           ijsbal                   1
 ijsbal                   1           ijshal                   1
-huî                      1           buî                      1
-buî                      1           huî                      1
 Uithoor                  1           Uitboor                  1
 Uitboor                  1           Uithoor                  1
-
-(606 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 de                       3877655     dc                       22
 De                       515313      Dc                       13
@@ -617,7 +513,6 @@ we                       61815       wc                       87
 e                        42915       c                        18716
 boek                     36000       bock                     119
 ic                       34291       ie                       5027
-ic                       34291       ie?                      12
 Ic                       8842        Ie                       394
 week                     6451        weck                     28
 ed                       5546        cd                       82
@@ -671,28 +566,16 @@ Kieken                   12          Kicken                   4
 Baeken                   12          Backen                   7
 poeh                     12          poch                     2
 eider                    11          cider                    7
-íet                      9           íct                      2
-ìe                       8           ìc                       1
-íe                       8           íc                       8
-íc                       8           íe                       8
 snack                    7           snaek                    3
 Weckt                    7           Weekt                    1
 Aene                     6           Acne                     3
 Snack                    5           Snaek                    1
 Geweckt                  5           Geweekt                  2
 narcist                  3           nareist                  2
-
-(70 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 C                        60217       G                        47413
 Gent                     11447       Cent                     101
-Geel                     1582        Ceel                     4
-Caesar                   1176        Gaesar                   1
 Cap                      709         Gap                      16
-CC                       383         CG                       6
-Cesar                    376         Gesar                    1
 Gast                     174         Cast                     7
 Ces                      156         Ges                      31
 Gasten                   145         Casten                   2
@@ -709,7 +592,6 @@ Geelen                   35          Ceelen                   10
 Caes                     23          Gaes                     1
 PC                       19          PG                       8
 Gis                      19          Cis                      15
-Cæsar                    11          Gaesar                   1
 Cijns                    8           Gijns                    1
 Clip                     8           Glip                     7
 BIG                      7           BIC                      2
@@ -722,14 +604,8 @@ CES                      1           GES                      1
 CIS                      1           GIS                      1
 GIS                      1           CIS                      1
 Clipper                  1           Glipper                  1
-Glipper                  1           Clipper                  1
-CELEN                    1           GELEN                    1
 GELEN                    1           CELEN                    1
 GES                      1           CES                      1
-
-(40 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 het                      1979434     hef                      310
 t                        446979      f                        8100
@@ -1259,7 +1135,6 @@ Ritten                   6           Riffen                   3
 treetje                  6           treefje                  3
 Katjes                   6           Kafjes                   1
 Wuit                     6           Wuif                     2
-kaet                     6           kaef                     3
 Bestraffen               6           Bestraften               1
 slaafjes                 5           slaatjes                 2
 Paffen                   5           Patten                   4
@@ -1273,81 +1148,39 @@ Verschoot                5           Verschoof                1
 onvergetelijker          5           onvergefelijker          3
 shuttle                  5           shuffle                  3
 Stotteren                5           Stofferen                3
-gât                      4           gâf                      2
-gàf                      4           gàt                      2
 teiltjes                 4           feiltjes                 4
 feiltjes                 4           teiltjes                 4
 Befaamde                 4           Betaamde                 2
 Nutten                   4           Nuffen                   1
 Heetten                  4           Heeften                  4
 Heeften                  4           Heetten                  4
-lêf                      4           lêt                      2
 jutten                   4           juffen                   4
 juffen                   4           jutten                   4
 Schiefer                 4           Schieter                 1
 profs                    4           prots                    3
-léef                     4           léet                     3
-liét                     4           liéf                     1
 Plotten                  3           Ploffen                  1
 Dutte                    3           Duffe                    2
 Putt                     3           Puft                     2
-Lèt                      3           Lèf                      1
-lèt                      3           lèf                      2
 Puffend                  3           Puttend                  1
 Botters                  3           Boffers                  1
-gáf                      3           gát                      3
-gát                      3           gáf                      3
 onvergeetelijke          2           onvergeefelijke          2
 onvergeefelijke          2           onvergeetelijke          2
-slááf                    2           sláát                    1
-tálen                    2           fálen                    1
 haeffen                  2           haeften                  1
 Ratelen                  2           Rafelen                  1
 instoof                  2           instoot                  1
-bót                      2           bóf                      2
-bóf                      2           bót                      2
-dót                      2           dóf                      2
-dóf                      2           dót                      2
-slót                     2           slóf                     1
 talies                   2           falies                   1
 Gepuf                    2           Geput                    1
 Bluffen                  2           Bluften                  1
 Kotten                   2           Koffen                   1
 Zitter                   2           Zifter                   1
 rutten                   2           ruften                   1
-kórt                     2           kórf                     1
-hôf                      2           hôt                      1
 patten                   2           paften                   1
 kletter                  2           kleffer                  2
 kleffer                  2           kletter                  2
-düt                      1           düf                      1
-düf                      1           düt                      1
-tút                      1           fút                      1
-tardé                    1           fardé                    1
-fardé                    1           tardé                    1
-tîn                      1           fîn                      1
-fîn                      1           tîn                      1
-snóóf                    1           snóót                    1
-snóót                    1           snóóf                    1
-fút                      1           tút                      1
-tînt                     1           fînt                     1
-fînt                     1           tînt                     1
 afgerateld               1           afgerafeld               1
 afgerafeld               1           afgerateld               1
-màf                      1           màt                      1
-màt                      1           màf                      1
-bôf                      1           bôt                      1
-bôt                      1           bôf                      1
-tîne                     1           fîne                     1
-fîne                     1           tîne                     1
-Lêf                      1           Lêt                      1
-Lêt                      1           Lêf                      1
 uitloot                  1           uitloof                  1
 uitloof                  1           uitloot                  1
-
-(613 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 Geen                     13552       Green                    229
 Groot                    7384        Goot                     50
@@ -1404,18 +1237,12 @@ Gommen                   4           Grommen                  4
 Gilling                  4           Grilling                 2
 Gisten                   4           Gristen                  3
 Gassen                   3           Grassen                  1
-Graes                    2           Gaes                     1
 Greintje                 2           Geintje                  1
 Greintjes                1           Geintjes                 1
 Geintjes                 1           Greintjes                1
-
-(59 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 het                      1979434     liet                     24524
 hen                      49206       lien                     578
-haer                     45093       liaer                    1
 lief                     14258       hef                      310
 lieden                   9609        heden                    8452
 heeren                   7959        lieeren                  1
@@ -1439,30 +1266,19 @@ hanen                    254         lianen                   107
 heg                      243         lieg                     132
 ah                       217         ali                      15
 Overheden                185         Overlieden               5
-liên                     175         hên                      60
 Verheven                 165         Verlieven                4
 hèt                      161         lièt                     2
 Verheft                  158         Verlieft                 18
 Aha                      151         Alia                     9
 alia                     134         aha                      23
-hét                      131         liét                     4
 hl                       125         lil                      10
 lies                     104         hes                      20
 Olim                     98          Ohm                      8
 Gelieven                 80          Geheven                  5
 verhef                   73          verlief                  14
-liën                     48          hën                      1
 Verhef                   41          Verlief                  1
 haef                     37          liaef                    3
 hesje                    3           liesje                   1
-hèg                      2           lièg                     2
-lièg                     2           hèg                      2
-liaer                    1           hær                      1
-hær                      1           liaer                    1
-
-(46 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 in                       1928331     m                        53735
 hem                      344529      hein                     118
@@ -1488,7 +1304,6 @@ inl                      492         ml                       17
 Rein                     434         Rem                      110
 treinen                  341         tremen                   3
 heinde                   229         hemde                    164
-mÄ                       226         inÄ                      2
 lammeren                 211         lamineren                3
 walm                     196         walin                    2
 Sem                      190         Sein                     121
@@ -1516,18 +1331,8 @@ Train                    13          Tram                     7
 Temt                     13          Teint                    8
 Walm                     11          Walin                    2
 trainde                  10          tramde                   3
-kléin                    6           klém                     1
 mèèn                     5           inèèn                    1
 tramden                  3           trainden                 1
-inéen                    2           méen                     1
-stèin                    2           stèm                     1
-staem                    2           staein                   1
-Käin                     1           Käm                      1
-Käm                      1           Käin                     1
-
-(60 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 met                      781642      niet                     761370
 niets                    54651       mets                     107
@@ -1569,16 +1374,6 @@ Temet                    15          Teniet                   1
 Mams                     11          Manis                    3
 niéts                    10          méts                     2
 nagemeten                3           nagenieten               2
-més                      3           niés                     1
-nieT                     3           meT                      2
-niêt                     2           mêt                      2
-mêt                      2           niêt                     2
-geniéten                 1           geméten                  1
-geméten                  1           geniéten                 1
-
-(46 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 stem                     15685       stern                    30
 toorn                    1874        toom                     994
@@ -1620,13 +1415,7 @@ tóóm                     7           tóórn                    6
 bóm                      6           bórn                     2
 toomden                  5           toornden                 1
 kamden                   3           karnden                  2
-Bömer                    3           Börner                   2
-tôm                      2           tôrn                     1
 Kamde                    2           Karnde                   1
-
-(43 row(s) affected)
-
-                         wordcount                            wordcount   
 ------------------------ ----------- ------------------------ ----------- 
 en                       2535449     eu                       771
 En                       212728      Eu                       34
@@ -1635,7 +1424,6 @@ zou                      148915      zon                      11893
 onder                    123690      ouder                    3736
 kon                      67178       kou                      1066
 ben                      50263       beu                      151
-aen                      43118       aeu                      8
 zouden                   33144       zonden                   3633
 houden                   30335       honden                   2573
 denken                   23430       deuken                   34
@@ -1754,7 +1542,6 @@ monter                   84          mouter                   5
 knipt                    81          kuipt                    6
 Heus                     80          Hens                     44
 ouwel                    79          onwel                    78
-ân                       77          âu                       13
 zengen                   77          zeugen                   24
 kuieren                  76          knieren                  2
 heug                     76          heng                     11
@@ -1823,13 +1610,9 @@ Heug                     9           Heng                     1
 huishond                 9           huishoud                 8
 Ouderhuis                9           Onderhuis                1
 Beugels                  9           Bengels                  6
-aeu                      8           æn                       2
-wòu                      8           wòn                      1
 Beng                     7           Beug                     1
-àn                       7           àu                       3
 beugeltje                7           bengeltje                3
 en                       7           eu                       2
-kaeut                    7           kaent                    1
 Verkouden                7           Verkonden                6
 Dreutel                  7           Drentel                  1
 dreutel                  7           drentel                  3
@@ -1846,44 +1629,22 @@ sauna                    5           sanna                    5
 Kenteren                 4           Keuteren                 3
 Mouter                   4           Monter                   3
 keuter                   4           kenter                   2
-uiër                     4           niër                     1
 wóu                      4           wón                      3
 Kouten                   4           Konten                   3
 Teugels                  3           Tengels                  1
 kreukten                 3           krenkten                 3
-krenkten                 3           kreukten                 3
 Jouen                    3           Jonen                    1
 rensch                   3           reusch                   1
-hónd                     3           hóud                     1
 Gekreukte                2           Gekrenkte                2
-Gekrenkte                2           Gekreukte                2
-Jón                      2           Jóu                      2
-Jóu                      2           Jón                      2
-wóud                     2           wónd                     1
-zôn                      2           zôu                      1
-Kreukt                   2           Krenkt                   2
 Krenkt                   2           Kreukt                   2
 gebengeld                2           gebeugeld                1
 Genten                   2           Geuten                   2
-bóut                     2           bónt                     2
-bónt                     2           bóut                     2
-hóuden                   2           hónden                   1
 Geuten                   2           Genten                   2
 Raen                     2           Raeu                     1
 jonen                    2           jouen                    1
-Outlook                  2           Ontlook                  2
 Ontlook                  2           Outlook                  2
 lensden                  2           leusden                  1
-Huishoud                 1           Huishond                 1
 Huishond                 1           Huishoud                 1
-Kuipte                   1           Knipte                   1
 Knipte                   1           Kuipte                   1
-Kreukte                  1           Krenkte                  1
 Krenkte                  1           Kreukte                  1
-Zòu                      1           Zòn                      1
-Zòn                      1           Zòu                      1
-Bontjes                  1           Boutjes                  1
 Boutjes                  1           Bontjes                  1
-
-(256 row(s) affected)
-
