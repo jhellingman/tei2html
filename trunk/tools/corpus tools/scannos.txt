@@ -1639,7 +1639,6 @@ Gekreukte                2           Gekrenkte                2
 Krenkt                   2           Kreukt                   2
 gebengeld                2           gebeugeld                1
 Genten                   2           Geuten                   2
-Geuten                   2           Genten                   2
 Raen                     2           Raeu                     1
 jonen                    2           jouen                    1
 Ontlook                  2           Outlook                  2

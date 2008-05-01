@@ -1,4 +1,5 @@
 
+
 use Image::Magick;
 use File::Basename;
 
@@ -35,8 +36,6 @@ print "<images xmlns=\"http://www.gutenberg.ph/2006/schemas/imageinfo\">";
 listRecursively($directory);
 
 print "\n</images>";
-
-
 
 
 
