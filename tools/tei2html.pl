@@ -141,7 +141,8 @@ sub processFile
     {
         print "Collect image dimensions...\n";
         # add -c to also collect contour information with this script.
-        system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
+		# Need to use older perl as this requires the image-magick integration, which lags behind Perl.
+        system ("perl5.8.8.exe $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.

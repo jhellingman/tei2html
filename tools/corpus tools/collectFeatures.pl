@@ -38,6 +38,7 @@ $totalPairCount = 0;
 print STDERR "Loading dictionary\n";
 
 loadDictionary();
+loadConfusables();
 
 print STDERR "Collecting words from directory $inputDir\n";
 
@@ -137,7 +138,7 @@ sub handleFile
 				my $word = $words[$i];
 
 				# if word in confusion set
-				if ($word eq 'hij' || $word eq 'bij') 
+				if (isConfusable($word)) 
 				{
 					countWord($word);
 
@@ -172,7 +173,7 @@ sub handleFile
 				my $word = $filteredWords[$i];
 
 				# if word in confusion set
-				if ($word eq 'hij' || $word eq 'bij') 
+				if (isConfusable($word)) 
 				{
 					$i - 1 > 0						&& countPattern2($word, $filteredWords[$i - 1], "_");	
 					$i + 1 < $size					&& countPattern2($word, "_", $filteredWords[$i + 1]);	
@@ -187,6 +188,16 @@ sub handleFile
     close INPUTFILE;
 
     print STDERR "$pairCount\t$infile\n";
+}
+
+
+#
+# isConfusable
+#
+sub isConfusable
+{
+	my $word = shift;
+	return $confusableHash{$word} == 1;
 }
 
 
@@ -276,7 +287,7 @@ sub reportPairs
     foreach my $pair (@pairList)
     {
         my $count = $pairHash{$pair};
-		if ($count >= 10) 
+		if ($count >= 1) 
 		{
 			print "$pair\t$count\n";
 		}
@@ -287,7 +298,7 @@ sub reportPairs
     foreach my $pattern (@patternList)
     {
         my $count = $patternHash{$pattern};
-		if ($count >= 10) 
+		if ($count >= 1) 
 		{
 			print "$pattern\t$count\n";
 		}
@@ -335,7 +346,8 @@ sub loadConfusables
     {
         my $word =  $_;
         $word =~ s/\n//g;
-        $confusableHash{$word} = "$word";
+        $confusableHash{$word} = 1;
+		# print STDERR "$word\n";
     }
 
     close(CONFUSABLEFILE);
