@@ -25,10 +25,11 @@ $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
 %wordHash = ();
 %wordFiles = ();
-%dictHash = ();			# dictionary of valid words
-%confusableHash = ();	# set of confusable words
-%pairHash = ();			# proximity pairs
-%patternHash = ();		# patterns
+%dictHash = ();         # dictionary of valid words
+%confusableHash = ();   # set of confusable words
+%pairHash = ();         # proximity pairs
+%patternHash = ();      # patterns
+%partsOfSpeechHash = (); # part-of-speech information 
 
 
 $inputDir       = $ARGV[0];
@@ -39,6 +40,7 @@ print STDERR "Loading dictionary\n";
 
 loadDictionary();
 loadConfusables();
+loadPartsOfSpeech();
 
 print STDERR "Collecting words from directory $inputDir\n";
 
@@ -107,7 +109,7 @@ sub handleFile
     while (<INPUTFILE>)
     {
         my $line = $_;
-		# $line =~ s/<(p|br|td|li|h[0-7]|div)\b(.*?)>/~~~~~~/g;	# Identify segment borders
+        # $line =~ s/<(p|br|td|li|h[0-7]|div)\b(.*?)>/~~~~~~/g; # Identify segment borders
         $line =~ s/<(.*?)>/ /g; # Drop remaining SGML/HTML tags
         $line =~ s/\s+/ /g;     # normalize space
         $line =~ s/^\s+//;
@@ -131,57 +133,57 @@ sub handleFile
             # NOTE: we don't use \w and \W here, since it gives some unexpected results
             my @words = split(/[^\pL\pN\pM-]+/, $line);
 
-			# count words in the neighbourhood
-			my $size = @words;
-			for (my $i = 0; $i < $size; $i++)
-			{
-				my $word = $words[$i];
+            # count words in the neighbourhood
+            my $size = @words;
+            for (my $i = 0; $i < $size; $i++)
+            {
+                my $word = $words[$i];
 
-				# if word in confusion set
-				if (isConfusable($word)) 
-				{
-					countWord($word);
+                # if word in confusion set
+                if (isConfusable($word)) 
+                {
+                    countWord($word);
 
-					for (my $j = -10; $j < 10; $j++) 
-					{
-						my $position = $i + $j;
-						if ($position > 0 && $position < $size && $position != $i) 
-						{
-							countProximityPair($word, $words[$position]);
-						}
-					}
-				}
-			}
+                    for (my $j = -10; $j < 10; $j++) 
+                    {
+                        my $position = $i + $j;
+                        if ($position > 0 && $position < $size && $position != $i) 
+                        {
+                            countProximityPair($word, $words[$position]);
+                        }
+                    }
+                }
+            }
 
-			# Split again, but now keep word separators.
-			@words = split(/([^\pL\pN\pM-]+)/, $line);
+            # Split again, but now keep word separators.
+            @words = split(/([^\pL\pN\pM-]+)/, $line);
 
-			# Prune word list to eliminate spaces (we retain punctuation)
-			my @filteredWords;
-			foreach my $word (@words) 
-			{
-				if ($word !~ /^[\pZ]+$/) 
-				{
-					$word =~ s/\s+//g;
-					push (@filteredWords, $word);
-				}
-			}
-			
-			my $size = @filteredWords;
-			for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
-			{
-				my $word = $filteredWords[$i];
+            # Prune word list to eliminate spaces (we retain punctuation)
+            my @filteredWords;
+            foreach my $word (@words) 
+            {
+                if ($word !~ /^[\pZ]+$/) 
+                {
+                    $word =~ s/\s+//g;
+                    push (@filteredWords, $word);
+                }
+            }
+            
+            my $size = @filteredWords;
+            for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
+            {
+                my $word = $filteredWords[$i];
 
-				# if word in confusion set
-				if (isConfusable($word)) 
-				{
-					$i - 1 > 0						&& countPattern2($word, $filteredWords[$i - 1], "_");	
-					$i + 1 < $size					&& countPattern2($word, "_", $filteredWords[$i + 1]);	
+                # if word in confusion set
+                if (isConfusable($word)) 
+                {
+                    $i - 1 > 0                      && countPattern2($word, $filteredWords[$i - 1], "_");   
+                    $i + 1 < $size                  && countPattern2($word, "_", $filteredWords[$i + 1]);   
 
-					$i - 2 > 0						&& countPattern3($word, $filteredWords[$i - 2], $filteredWords[$i - 1], "_");	
-					$i - 1 > 0 && $i + 1 < $size	&& countPattern3($word, $filteredWords[$i - 1], "_", $filteredWords[$i + 1]);	
-					$i + 2 < $size					&& countPattern3($word, "_", $filteredWords[$i + 1], $filteredWords[$i + 2]);
-				}
+                    $i - 2 > 0                      && countPattern3($word, $filteredWords[$i - 2], $filteredWords[$i - 1], "_");   
+                    $i - 1 > 0 && $i + 1 < $size    && countPattern3($word, $filteredWords[$i - 1], "_", $filteredWords[$i + 1]);   
+                    $i + 2 < $size                  && countPattern3($word, "_", $filteredWords[$i + 1], $filteredWords[$i + 2]);
+                }
             }
         }
     }
@@ -196,8 +198,8 @@ sub handleFile
 #
 sub isConfusable
 {
-	my $word = shift;
-	return $confusableHash{$word} == 1;
+    my $word = shift;
+    return $confusableHash{$word} == 1;
 }
 
 
@@ -206,50 +208,66 @@ sub isConfusable
 #
 sub countWord
 {
-	my $word = shift;
+    my $word = shift;
 }
 
 sub countPattern2
 {
-	my $word = shift;
-	my $w1 = shift;
-	my $w2 = shift;
+    my $word = shift;
+    my $w1 = shift;
+    my $w2 = shift;
 
-	my $pattern = "$word $w1 $w2";
-	# print STDERR "PATTERN: $pattern\n";
-	$patternHash{"$pattern"}++;
+    my $pattern = "$word $w1 $w2";
+    # print STDERR "PATTERN: $pattern\n";
+    $patternHash{"$pattern"}++;
+
+    my $p1 = mapPartOfSpeech($w1);
+    my $p2 = mapPartOfSpeech($w2);
+
+    my $ppattern = "$word $p1 $p2";
+
+	if ($pattern ne $ppattern) 
+	{
+	    $patternHash{"$ppattern"}++;
+		print STDERR "$ppattern\n";
+	}
 }
 
 
 sub countPattern3
 {
-	my $word = shift;
-	my $w1 = shift;
-	my $w2 = shift;
-	my $w3 = shift;
+    my $word = shift;
+    my $w1 = shift;
+    my $w2 = shift;
+    my $w3 = shift;
 
-	my $pattern = "$word $w1 $w2 $w3";
-	# print STDERR "PATTERN: $pattern\n";
-	$patternHash{"$pattern"}++;
+    my $pattern = "$word $w1 $w2 $w3";
+    # print STDERR "PATTERN: $pattern\n";
+    $patternHash{"$pattern"}++;
 
-	my $p1 = mapPartOfSpeech($w1);
-	my $p2 = mapPartOfSpeech($w2);
-	my $p3 = mapPartOfSpeech($w3);
+    my $p1 = mapPartOfSpeech($w1);
+    my $p2 = mapPartOfSpeech($w2);
+    my $p3 = mapPartOfSpeech($w3);
 
-	my $ppattern = "$word $p1 $p2 $p3";
-
+    my $ppattern = "$word $p1 $p2 $p3";
+	
+	if ($pattern ne $ppattern) 
+	{
+	    $patternHash{"$ppattern"}++;
+		print STDERR "$ppattern\n";
+	}
 }
 
 
 sub mapPartOfSpeech
 {
-	my $word = shift;
+    my $word = shift;
 
-	if (exists $partOfSpeech{$word}) 
-	{
-		return $partOfSpeech{$word};
-	}
-	return $word;
+    if (exists $partsOfSpeechHash{$word}) 
+    {
+        return "[" . $partsOfSpeechHash{$word} . "]";
+    }
+    return $word;
 }
 
 
@@ -269,8 +287,8 @@ sub countProximityPair
     if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
     {
         $scannoPairCount++;
-		
-		# print STDERR "PAIR:    $firstWord ~ $secondWord\n";
+        
+        # print STDERR "PAIR:    $firstWord ~ $secondWord\n";
 
         $pairHash{"$firstWord $secondWord"}++;
     }
@@ -287,10 +305,10 @@ sub reportPairs
     foreach my $pair (@pairList)
     {
         my $count = $pairHash{$pair};
-		if ($count >= 1) 
-		{
-			print "$pair\t$count\n";
-		}
+        if ($count >= 1) 
+        {
+            print "$pair\t$count\n";
+        }
     }
 
     my @patternList = keys %patternHash;
@@ -298,10 +316,10 @@ sub reportPairs
     foreach my $pattern (@patternList)
     {
         my $count = $patternHash{$pattern};
-		if ($count >= 1) 
-		{
-			print "$pattern\t$count\n";
-		}
+        if ($count >= 1) 
+        {
+            print "$pattern\t$count\n";
+        }
     }
 }
 
@@ -347,9 +365,39 @@ sub loadConfusables
         my $word =  $_;
         $word =~ s/\n//g;
         $confusableHash{$word} = 1;
-		# print STDERR "$word\n";
+        # print STDERR "$word\n";
     }
 
     close(CONFUSABLEFILE);
 }
 
+
+
+sub loadPartsOfSpeech
+{
+    my $partsOfSpeechFile = "partsofspeech.txt";
+    if (!open(PARTSOFSPEECHFILE, "<:utf8", $partsOfSpeechFile))
+    {
+            print STDERR "Could not open $partsOfSpeechFile";
+            exit;
+    }
+
+    %partsOfSpeechHash = ();
+    while (<PARTSOFSPEECHFILE>)
+    {
+        my $line =  $_;
+        $word =~ s/\n//g;
+		
+		my ($n, $tag, $rule, $word, $word2) = split("\t", $line);
+
+		if ($tag ne "XREF" && $tag ne "UNC") 
+		{
+	        $word =~ s/\n//g;
+			$partsOfSpeechHash{$word} = $tag;
+			# print STDERR "$word : $tag\n";
+		}
+    }
+
+    close(PARTSOFSPEECHFILE);
+
+}
