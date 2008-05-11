@@ -229,7 +229,7 @@ sub countPattern2
 	if ($pattern ne $ppattern) 
 	{
 	    $patternHash{"$ppattern"}++;
-		print STDERR "$ppattern\n";
+		# print STDERR "$ppattern\n";
 	}
 }
 
@@ -254,7 +254,7 @@ sub countPattern3
 	if ($pattern ne $ppattern) 
 	{
 	    $patternHash{"$ppattern"}++;
-		print STDERR "$ppattern\n";
+		# print STDERR "$ppattern\n";
 	}
 }
 
@@ -390,7 +390,7 @@ sub loadPartsOfSpeech
 		
 		my ($n, $tag, $rule, $word, $word2) = split("\t", $line);
 
-		if ($tag ne "XREF" && $tag ne "UNC") 
+		if ($tag ne "XREF") 
 		{
 	        $word =~ s/\n//g;
 			$partsOfSpeechHash{$word} = $tag;
