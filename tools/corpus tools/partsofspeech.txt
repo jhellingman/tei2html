@@ -1,4 +1,3 @@
-906	UNC	999	a
 909	NN1f	198	a
 909	NN2f	198	a’s
 911	PR	604	a
@@ -28,7 +27,8 @@
 931	NN1f	101	aal
 933	NN1n	103	aal
 933	NN2n	103	alen
-935	UNC	999	aal (visch). als voorwerpsnaam m., alen. aaltje, o., aaltjes. als stofnaam v
+935	NN1r	999	aaltje
+935	NN2r	999	aaltjes
 937	NN1f	102	aalbes
 937	NN2f	102	aalbessen
 939	NN1n	198	aalbesseblad
@@ -113,7 +113,7 @@
 1015	NN1n	102	aalsvel
 1015	NN2n	102	aalsvellen
 1017	NN1f	101	aalt
-1019	UNC	999	aalvormig
+1019	AJ	999	aalvormig
 1021	NN1n	103	aam
 1021	NN2n	103	amen
 1023	XREF	800	aambeeld	aanbeeld
@@ -131,7 +131,7 @@
 1029	AJs	301	aamborstigsten*
 1031	NN1f	101	aamborstigheid
 1033	NN1f	101	aamt
-1035	UNC	999	aamtig
+1035	AJ	999	aamtig
 1037	UNC	999	aan
 1039	VB	299	aanaarden
 1039	VB	299	aardde aan
@@ -172,7 +172,7 @@
 1067	VB	299	belandde aan
 1067	VBpp	299	aanbeland
 1069	NN1n	101	aanbelang
-1071	UNC	999	aanbelangen (wat aanbelangt)
+1071	VB	999	aanbelangen
 1073	VB	299	aanbellen
 1073	VB	299	belde aan
 1073	VBpp	299	aangebeld
@@ -667,12 +667,14 @@
 1431	VBpp	299	aangegaapt
 1433	NN1mf	101	aangebedene
 1433	NN2mf	101	aangebedenen
-1435	UNC	999	aangeboren
+1435	AJ	999	aangeboren
 1437	UNC	999	aangedaan, sterker, heviger aangedaan, het sterkst, hevigst aangedaan
 1439	NN1f	101	aangeefster
 1439	NN2f	101	aangeefsters
-1441	UNC	999	aangeërfd
-1443	UNC	999	aangehuwd
+1441	AJ	999	aangeërfd
+1441	AJ	999	aangeërfde
+1443	AJ	999	aangehuwd
+1443	AJ	999	aangehuwde
 1445	NN1mf	101	aangeklaagde
 1445	NN2mf	101	aangeklaagden
 1447	NN1mf	101	aangelande
@@ -688,18 +690,20 @@
 1449	AJs	301	aangelegensten*
 1451	NN1f	198	aangelegenheid
 1451	NN2f	198	aangelegenheden
-1453	UNC	999	aangemerkt
+1453	AJ	999	aangemerkt
+1453	AJ	999	aangemerkte
 1455	AJ	399	aangenaam
 1455	AJc	399	aangenamer
 1455	AJs	399	aangenaamst
 1457	NN1f	198	aangenaamheid
 1457	NN2f	198	aangenaamheden
-1459	UNC	999	aangenomen
+1459	AJ	999	aangenomen
 1461	VB	299	aangespen
 1461	VB	299	gespte aan
 1461	VBpp	299	aangegespt
-1463	UNC	999	aangetogen
-1465	UNC	999	aangetrouwd
+1463	AJ	999	aangetogen
+1465	AJ	999	aangetrouwd
+1465	AJ	999	aangetrouwde
 1467	VB	299	aangeven
 1467	VB	299	gaf aan
 1467	VB	299	gaven aan
@@ -760,7 +764,8 @@
 1507	VBpp	299	aangegraven
 1509	NN1f	101	aangraving
 1509	NN2f	101	aangravingen
-1511	UNC	999	aangrenzend
+1511	AJ	999	aangrenzend
+1511	AJ	999	aangrenzende
 1513	VB	299	aangrijnzen
 1513	VB	299	grijnsde aan
 1513	VBpp	299	aangegrijnsd
@@ -909,7 +914,8 @@
 1621	VB	299	aanhooren
 1621	VB	299	hoorde aan
 1621	VBpp	299	aangehoord
-1623	UNC	999	aanhoorig
+1623	AJ	999	aanhoorig
+1623	AJ	999	aanhoorige
 1625	NN1f	198	aanhoorigheid
 1625	NN2f	198	aanhoorigheden
 1627	NN1f	101	aanhoorster
@@ -919,7 +925,8 @@
 1631	VB	299	aanhouden
 1631	VB	299	hield aan
 1631	VBpp	299	aangehouden
-1633	UNC	999	aanhoudend
+1633	AJ	999	aanhoudend
+1633	AJ	999	aanhoudende
 1635	NN1f	101	aanhoudendheid
 1637	NN1m	101	aanhouder
 1637	NN2m	101	aanhouders
@@ -1011,7 +1018,7 @@
 1707	VB	299	aankleeden
 1707	VB	299	kleedde aan
 1707	VBpp	299	aangekleed
-1709	UNC	999	aankleef, m. (met den aankleve van)
+1709	NN1m	999	aankleef
 1711	VB	299	aanklemmen
 1711	VB	299	klemde aan
 1711	VBpp	299	aangeklemd
@@ -1055,8 +1062,13 @@
 1741	NN1mf	104	aankomelingen
 1741	NN1f	104	aankomelinge
 1743	NN1n	101	aankomelingschap
-1745	UNC	999	aankomen, komt aan, kwam aan, kwamen aan, is aangekomen
-1747	UNC	999	aankomend
+1745	VB	999	aankomen
+1745	VB	999	komt aan
+1745	VB	999	kwam aan
+1745	VB	999	kwamen aan
+1745	VBpp	999	aangekomen
+1747	AJ	999	aankomend
+1747	AJ	999	aankomende
 1749	NN1m	101	aankomer
 1749	NN2m	101	aankomers
 1751	NN1f	101	aankomst
@@ -1202,7 +1214,8 @@
 1861	VB	299	lag aan
 1861	VB	299	lagen aan
 1861	VBpp	299	aangelegen
-1863	UNC	999	aanliggend
+1863	AJ	999	aanliggend
+1863	AJ	999	aanliggende
 1865	VB	299	aanlijmen
 1865	VB	299	lijmde aan
 1865	VBpp	299	aangelijmd
@@ -1409,7 +1422,8 @@
 1999	VB	299	aanpakken
 1999	VB	299	pakte aan
 1999	VBpp	299	aangepakt
-2001	UNC	999	aanpalend
+2001	AJ	999	aanpalend
+2001	AJ	999	aanpalende
 2003	VB	299	aanpassen
 2003	VB	299	paste aan
 2003	VBpp	299	aangepast
@@ -1906,8 +1920,10 @@
 2383	NN2f	103	aanspraken
 2383	NN1r	103	aanspraakje
 2383	NN2r	103	aanspraakjes
-2385	UNC	999*	aansprakelijk
-2385	UNC	999	aanspraaklijk
+2385	AJ	999*	aansprakelijk
+2385	AJ	999	aanspraaklijk
+2385	AJ	999*	aansprakelijke
+2385	AJ	999	aanspraaklijke
 2387	NN1f	101	aansprakelijkheid
 2389	VB	299	aanspreken
 2389	VB	299	sprak aan
