@@ -29,6 +29,7 @@ BEGIN
 	$langNameHash{"en-1800"}	= "English (19th century)";
 	$langNameHash{"en-uk"}		= "English (United Kingdom)";
 	$langNameHash{"en-us"}		= "English (United States)";
+	$langNameHash{"eo"}			= "Esperanto";
 	$langNameHash{"es"}			= "Spanish";
 	$langNameHash{"et"}			= "Estonian";
 	$langNameHash{"fa"}			= "Persian";
