@@ -96,6 +96,9 @@
 text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
 a note. We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
+
+<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>.</p>
+
 </div1>
 
 <div1 id="ch05" n="V" type="Chapter" rend="label(no)">

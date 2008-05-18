@@ -662,7 +662,14 @@
 
     <xsl:template match="xref[@url]">
         <a>
-            <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
+			<xsl:choose>
+				<xsl:when test="substring(@url, 1, 3) = 'pg:'">
+		            <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
+				</xsl:when>
+				<xsl:otherwise>
+		            <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
+				</xsl:otherwise>
+			</xsl:choose>
             <xsl:apply-templates/>
         </a>
     </xsl:template>
