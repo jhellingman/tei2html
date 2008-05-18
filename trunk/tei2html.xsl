@@ -278,6 +278,17 @@
         </xsl:call-template>
     </xsl:variable>
 
+    <xsl:variable name="strExternalReferences">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgExternalReferences'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strExternalReferencesDisclaimer">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgExternalReferencesDisclaimer'"/>
+        </xsl:call-template>
+    </xsl:variable>
+
 
     <!--====================================================================-->
 
@@ -453,11 +464,11 @@
     <!-- Corrections; abbreviations; numbers; transcriptions -->
 
     <xsl:template match="corr">
-		<xsl:call-template name="do-corr"/>
+        <xsl:call-template name="do-corr"/>
     </xsl:template>
 
     <xsl:template match="corr" mode="titlePage">
-		<xsl:call-template name="do-corr"/>
+        <xsl:call-template name="do-corr"/>
     </xsl:template>
 
     <xsl:template name="do-corr">
@@ -466,7 +477,8 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:when test="not(@sic) or @sic=''">
-                <span id="{generate-id(.)}" class="corr">
+                <span class="corr">
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$strNotInSource"/>
                     </xsl:attribute>
@@ -474,7 +486,8 @@
                 </span>
             </xsl:when>
             <xsl:otherwise>
-                <span id="{generate-id(.)}" class="corr">
+                <span class="corr">
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
                     </xsl:attribute>
@@ -486,8 +499,8 @@
 
 
     <xsl:template match="abbr">
-        <a id="{generate-id(.)}"></a>
         <span class="abbr">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@expan"/>
@@ -503,8 +516,8 @@
 
 
     <xsl:template match="num">
-        <a id="{generate-id(.)}"></a>
         <span class="abbr">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@value"/>
             </xsl:attribute>
@@ -519,8 +532,8 @@
 
 
     <xsl:template match="trans">
-        <a id="{generate-id(.)}"></a>
         <span class="abbr">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
@@ -541,8 +554,8 @@
     <!-- Measurements with metric equivalent  -->
 
     <xsl:template match="measure">
-        <a id="{generate-id(.)}"></a>
         <span class="measure">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="./@reg"/>
             </xsl:attribute>
@@ -554,21 +567,60 @@
     <!-- Currency amounts (in future with modern PPP equivalent) -->
 
     <xsl:template match="amount">
-        <a id="{generate-id(.)}"></a>
         <span class="measure">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="./@unit"/>
-				<xsl:text> </xsl:text>
-				<xsl:value-of select="./@amount"/>
+                <xsl:text> </xsl:text>
+                <xsl:value-of select="./@amount"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- Cross References -->
+    <!-- ID Generation -->
 
-    <!-- Only use generated ID's to avoid clashes of original with generated ID's. Note that the target id generated here should also be generated on the element being referenced. We cannot use the id() function here, since we do not use a DTD. -->
+    <!-- Use original ID's when possible to keep ID's stable between versions. We use generated ID's prepended with 'x' to avoid clashes with original ID's. Note that the target id generated here should also be generated on the element being referenced. We cannot use the id() function here, since we do not use a DTD. -->
+
+    <xsl:template name="generate-anchor">
+        <a>
+            <xsl:call-template name="generate-id-attribute"/>
+        </a>
+    </xsl:template>
+
+    <xsl:template name="generate-id-attribute">
+        <xsl:attribute name="id">
+            <xsl:call-template name="generate-id"/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="generate-href-attribute">
+        <xsl:attribute name="href">#<xsl:call-template name="generate-id"/></xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="generate-href-attribute-for">
+        <xsl:param name="node"/>
+        <xsl:attribute name="href">#<xsl:call-template name="generate-id-for"><xsl:with-param name="node"/></xsl:call-template></xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="generate-id">
+        <xsl:choose>
+            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="generate-id-for">
+        <xsl:param name="node"/>
+        <xsl:choose>
+            <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
+            <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- Cross References -->
 
     <!-- Special case: reference to footnote, used when the same footnote reference mark is used multiple times -->
 
@@ -578,7 +630,8 @@
     </xsl:template>
 
     <xsl:template match="note" mode="noterefnumber">
-        <a href="#{generate-id()}" class="noteref">
+        <a class="noteref">
+            <xsl:call-template name="generate-href-attribute"/>
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
     </xsl:template>
@@ -587,16 +640,17 @@
 
     <xsl:template match="ref[@target and not(@type='noteref')]">
         <xsl:variable name="target" select="./@target"/>
-		<xsl:if test="not(//*[@id=$target])">
-			<xsl:message terminate="no">
-				Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
-			</xsl:message>
-		</xsl:if>
-        <a id="{generate-id(.)}" href="#{generate-id(//*[@id=$target])}">
+        <xsl:if test="not(//*[@id=$target])">
+            <xsl:message terminate="no">
+                Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
+            </xsl:message>
+        </xsl:if>
+        <a href="#{$target}">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:if test="@type='pageref'">
                 <xsl:attribute name="class">typeref</xsl:attribute>
             </xsl:if>            
-			<xsl:if test="@type='endnoteref'">
+            <xsl:if test="@type='endnoteref'">
                 <xsl:attribute name="class">noteref</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
@@ -617,10 +671,17 @@
     <!-- Page Breaks -->
 
     <xsl:template match="pb">
-        <a id="{generate-id()}"/>
-        <xsl:if test="@n">
-            <span class="pagenum">[<a href="#{generate-id()}"><xsl:value-of select="@n"/></a>]</span>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="@n">
+                <span class="pagenum">[<a>
+                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:value-of select="@n"/></a>]</span>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="generate-anchor"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!--====================================================================-->
@@ -647,7 +708,7 @@
 
 
     <xsl:template match="milestone">
-        <a id="{generate-id()}"/>
+        <xsl:call-template name="generate-anchor"/>
     </xsl:template>
 
 
@@ -656,7 +717,8 @@
     <!-- Take care only to generate ToC entries for divisions of the main text, not for those in quoted texts -->
 
     <xsl:template match="divGen[@type='toc']">
-        <div class="div1" id="{generate-id()}">
+        <div class="div1">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
             <ul>
@@ -677,13 +739,15 @@
     <xsl:template match="div0" mode="gentoc">
         <xsl:if test="head">
             <li>
-                <a href="#{generate-id()}">
-                <xsl:choose>
-                    <xsl:when test="@type='part'">
-                        <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/></a>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:choose>
+                        <xsl:when test="@type='part'">
+                            <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
+                </a>
                 <xsl:if test="div1">
                     <ul>
                         <xsl:apply-templates select="div1" mode="gentoc"/>
@@ -696,16 +760,18 @@
     <xsl:template match="div1" mode="gentoc">
         <xsl:if test="head">
             <li>
-                <a href="#{generate-id()}">
-                <xsl:choose>
-                    <xsl:when test="@type='chapter'">
-                        <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                    </xsl:when>
-                    <xsl:when test="@type='appendix'">
-                        Appendix <xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                    </xsl:when>
-                </xsl:choose>
-                <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/></a>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:choose>
+                        <xsl:when test="@type='chapter'">
+                            <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
+                        </xsl:when>
+                        <xsl:when test="@type='appendix'">
+                            Appendix <xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
+                        </xsl:when>
+                    </xsl:choose>
+                    <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
+                </a>
                 <xsl:if test="div2">
                     <ul>
                         <xsl:apply-templates select="div2" mode="gentoc"/>
@@ -718,8 +784,10 @@
     <xsl:template match="div2" mode="gentoc">
         <xsl:if test="head">
             <li>
-                <a href="#{generate-id()}">
-                <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/></a>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
+                </a>
                 <xsl:if test="div3">
                     <ul>
                         <xsl:apply-templates select="div3" mode="gentoc"/>
@@ -735,8 +803,10 @@
     <xsl:template match="div3" mode="gentoc">
         <xsl:if test="head">
             <li>
-                <a href="#{generate-id()}">
-                <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/></a>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
+                </a>
             </li>
         </xsl:if>
     </xsl:template>
@@ -759,13 +829,14 @@
         <xsl:if test="position() != 1">
             <xsl:text> | </xsl:text>
         </xsl:if>
-        <a href="#{generate-id()}">
-			<xsl:if test="contains(., '.')">
-				<xsl:value-of select="substring-before(., '.')"/>
-			</xsl:if>
-			<xsl:if test="not(contains(., '.'))">
-				<xsl:value-of select="."/>
-			</xsl:if>
+        <a>
+            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:if test="contains(., '.')">
+                <xsl:value-of select="substring-before(., '.')"/>
+            </xsl:if>
+            <xsl:if test="not(contains(., '.'))">
+                <xsl:value-of select="."/>
+            </xsl:if>
         </a>
     </xsl:template>
 
@@ -854,20 +925,21 @@
         </span>
     </xsl:template>
 
-	<!-- Heatmap attributes -->
-	<xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
-		<span>
-			<xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
-			<xsl:apply-templates/>
-		</span>
-	</xsl:template>
+    <!-- Heatmap attributes -->
+    <xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
+        <span>
+            <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
 
-	<!-- ab as id placeholders -->
-	<xsl:template match="ab">
-		<span id="{generate-id(.)}">
-			<xsl:apply-templates/>
-		</span>
-	</xsl:template>
+    <!-- ab as id placeholders -->
+    <xsl:template match="ab">
+        <span>
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
 
 
     <!--====================================================================-->
@@ -904,7 +976,8 @@
 
     <xsl:template match="figure" mode="gallery">
         <td align="center" valign="center">
-            <a href="#{generate-id()}">
+            <a>
+                <xsl:call-template name="generate-href-attribute"/>
                 <img border="0">
                     <xsl:attribute name="src">images/thumbs/<xsl:value-of select="@id"/>.jpg</xsl:attribute>
                     <xsl:attribute name="alt"><xsl:value-of select="head"/></xsl:attribute>
@@ -916,7 +989,10 @@
 
     <xsl:template match="figure" mode="gallery-captions">
         <td align="center" valign="top">
-            <a href="#{generate-id()}"><xsl:apply-templates select="head" mode="gallery-captions"/></a>
+            <a>
+                <xsl:call-template name="generate-href-attribute"/>
+                <xsl:apply-templates select="head" mode="gallery-captions"/>
+            </a>
         </td>
     </xsl:template>
 
@@ -925,13 +1001,13 @@
         <xsl:apply-templates mode="gallery-captions"/>
     </xsl:template>
 
-	<xsl:template match="hi" mode="gallery-captions">
-		<i><xsl:apply-templates mode="gallery-captions"/></i>
-	</xsl:template>
+    <xsl:template match="hi" mode="gallery-captions">
+        <i><xsl:apply-templates mode="gallery-captions"/></i>
+    </xsl:template>
 
-	<xsl:template match="hi[@rend='ex']" mode="gallery-captions">
-		<xsl:apply-templates mode="gallery-captions"/>
-	</xsl:template>
+    <xsl:template match="hi[@rend='ex']" mode="gallery-captions">
+        <xsl:apply-templates mode="gallery-captions"/>
+    </xsl:template>
 
 
     <!-- List of Corrections -->
@@ -956,7 +1032,8 @@
                 <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
                         <td width="20%">
-                            <a href="#{generate-id(.)}">
+                            <a>
+                                <xsl:call-template name="generate-href-attribute"/>
                                 <xsl:value-of select="$strPage"/><xsl:text> </xsl:text>
                                 <xsl:value-of select="preceding::pb[1]/@n"/>
                             </a>
@@ -987,6 +1064,25 @@
         </table>
     </xsl:template>
 
+    <!-- External References -->
+
+    <xsl:template name="externalReferences">
+        <xsl:if test="//xref">
+            <h3><xsl:value-of select="$strExternalReferences"/></h3>
+
+            <p><xsl:value-of select="$strExternalReferencesDisclaimer"/></p>
+
+            <!-- <ul>
+            <xsl:for-each select="//xref">
+            <xsl:sort select="@url"/>
+                <li>
+                    <xsl:value-of select="@url"/>
+                </li>
+            </xsl:for-each>
+            </ul> -->
+        </xsl:if>
+    </xsl:template>
+
 
     <!-- Colophon -->
 
@@ -1005,10 +1101,13 @@
             <h3><xsl:value-of select="$strRevisionHistory"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
+            <xsl:call-template name="externalReferences"/>
+
             <xsl:if test="//corr">
                 <h3><xsl:value-of select="$strCorrections"/></h3>
                 <xsl:call-template name="correctionTable"/>
             </xsl:if>
+
         </div>
     </xsl:template>
 
@@ -1069,7 +1168,8 @@
     <!-- div0 -->
 
     <xsl:template match="div0">
-        <div class="div0" id="{generate-id(.)}">
+        <div class="div0">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
@@ -1120,7 +1220,8 @@
             </xsl:if>
         </xsl:if>
 
-        <div id="{generate-id(.)}">
+        <div>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
                 <xsl:if test="contains(@rend, 'class(')">
@@ -1131,7 +1232,7 @@
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
                 <!-- If we have an element with id 'toc', include a link to it (except in quoted material) -->
                 <span class="pagenum">
-                    [<a href="#{generate-id(//*[@id='toc'])}"><xsl:value-of select="$strToc"/></a>]
+                    [<a href="#toc"><xsl:value-of select="$strToc"/></a>]
                 </span>
             </xsl:if>
 
@@ -1150,7 +1251,8 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
-        <h2 id="{generate-id(.)}">
+        <h2>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="setHtmlClass"/>
             <xsl:if test="contains(@rend, 'align(')">
@@ -1165,7 +1267,8 @@
     <!-- div2 -->
 
     <xsl:template match="div2">
-        <div class="div2" id="{generate-id(.)}">
+        <div class="div2">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="GenerateLabel">
                 <xsl:with-param name="headingLevel" select="'h2'"/>
@@ -1176,7 +1279,8 @@
 
     <xsl:template match="div2/head">
         <xsl:call-template name="headPicture"/>
-        <h3 id="{generate-id(.)}">
+        <h3>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="setHtmlClass"/>
             <xsl:apply-templates/>
@@ -1186,7 +1290,8 @@
     <!-- div3 -->
 
     <xsl:template match="div3">
-        <div class="div3" id="{generate-id(.)}">
+        <div class="div3">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -1203,7 +1308,8 @@
     <!-- div4 -->
 
     <xsl:template match="div4">
-        <div class="div4" id="{generate-id(.)}">
+        <div class="div4">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -1217,7 +1323,8 @@
     <!-- div5 -->
 
     <xsl:template match="div5">
-        <div class="div5" id="{generate-id(.)}">
+        <div class="div5">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -1289,7 +1396,8 @@
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
 
-            <table id="{generate-id(.)}">
+            <table>
+                <xsl:call-template name="generate-id-attribute"/>
                 <xsl:if test="contains(@rend, 'font-size(')">
                     <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
                 </xsl:if>
@@ -1494,7 +1602,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
-                    <xsl:attribute name="id"><xsl:value-of select="generate-id(.)"/></xsl:attribute>
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:call-template name="setListStyleType"/>
                     <xsl:call-template name="setHtmlLangAttribute"/>
                     <xsl:apply-templates/>
@@ -1507,9 +1615,9 @@
 
 
     <xsl:template name="doubleuplist">
-        <table id="{generate-id(.)}">
+        <table>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
-
             <xsl:variable name="listType">
                 <xsl:choose>
                     <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
@@ -1553,7 +1661,8 @@
 
 
     <xsl:template match="item">
-        <li id="{generate-id(.)}">
+        <li>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:if test="@n">
                 <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
             </xsl:if>
@@ -1682,7 +1791,8 @@
 
     <xsl:template match="figure">
         <xsl:call-template name="closepar"/>
-        <div id="{generate-id()}">
+        <div>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
 
             <xsl:variable name="file">
@@ -1897,7 +2007,9 @@
     <!-- Move footnotes to the end of the div1 element they appear in (but not in quoted texts). We place the text of the footnote in-line as well, for use by the print stylesheet. In browsers it will be hidden. -->
 
     <xsl:template match="/TEI.2/text//note[@place='foot' or not(@place)]">
-        <a id="{generate-id()}src" href="#{generate-id()}" class="noteref">
+        <a class="noteref">
+            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
+            <xsl:call-template name="generate-href-attribute"/>
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
@@ -1914,7 +2026,9 @@
         <p class="footnote">
             <xsl:call-template name="setHtmlLangAttribute"/>
             <span class="label">
-                <a id="{generate-id()}" href="#{generate-id()}src" class="noteref">
+                <a class="noteref">
+                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
                 </a>
             </span>
@@ -1928,7 +2042,9 @@
         <p class="footnote">
             <xsl:call-template name="setHtmlLangAttribute"/>
             <span class="label">
-                <a id="{generate-id()}" href="#{generate-id()}src" class="noteref">
+                <a class="noteref">
+                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
                 </a>
             </span>
@@ -1942,7 +2058,11 @@
     </xsl:template>
 
     <xsl:template match="p" mode="footnotes">
-        <p id="{generate-id()}" class="footnote"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></p>
+        <p class="footnote">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </p>
     </xsl:template>
 
     <xsl:template match="*" mode="footnotes">
@@ -1953,9 +2073,10 @@
     <!-- Notes in a critical apparatus (coded with attribute place="apparatus") -->
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
-        <a id="{generate-id()}src" href="#{generate-id()}" style="text-decoration:none">
-            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;
-        </a>
+        <a style="text-decoration:none">
+            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
+            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;</a>
     </xsl:template>
 
     <xsl:template match="divGen[@type='apparatus']">
@@ -1970,7 +2091,10 @@
         <p class="footnote">
             <xsl:call-template name="setHtmlLangAttribute"/>
             <span class="label">
-                <a id="{generate-id()}" href="#{generate-id()}src" style="text-decoration:none">&deg;</a>
+                <a style="text-decoration:none">
+                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
+                    <xsl:call-template name="generate-id-attribute"/>
+                    &deg;</a>
             </span>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
@@ -1982,15 +2106,16 @@
 
     <xsl:template match="p">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
-            <p id="{generate-id()}">
+            <p>
+                <xsl:call-template name="generate-id-attribute"/>
                 <xsl:call-template name="setHtmlLangAttribute"/>
                 <xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
                 <xsl:if test="contains(@rend, 'align(')">
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
                 </xsl:if>
-				<xsl:if test="contains(@rend, 'indent(')">
-				            <xsl:attribute name="style">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:attribute>
+                <xsl:if test="contains(@rend, 'indent(')">
+                            <xsl:attribute name="style">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:attribute>
                 </xsl:if>
                 <xsl:if test="@n">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
@@ -2019,7 +2144,9 @@
 
 
     <xsl:template match="lb">
-        <br id="{generate-id()}"/>
+        <br>
+            <xsl:call-template name="generate-id-attribute"/>
+        </br>
     </xsl:template>
 
 
@@ -2035,7 +2162,8 @@
                 <span class="linenum"><xsl:value-of select="@n"/></span>
             </xsl:if>
 
-            <span id="{generate-id()}">
+            <span>
+                <xsl:call-template name="generate-id-attribute"/>
                 <xsl:apply-templates/>
             </span>
         </p>
@@ -2080,7 +2208,8 @@
     <!-- Speaker -->
 
     <xsl:template match="speaker">
-        <p id="{generate-id(.)}">
+        <p>
+            <xsl:call-template name="generate-id-attribute"/>
             <b><xsl:apply-templates/></b>
         </p>
     </xsl:template>
@@ -2089,19 +2218,22 @@
     <!-- Stage directions -->
 
     <xsl:template match="stage">
-        <p class="stage" id="{generate-id(.)}">
+        <p class="stage">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
-        <p class="stage alignright" id="{generate-id(.)}">
+        <p class="stage alignright">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <span class="stage" id="{generate-id(.)}">
+        <span class="stage">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -2109,17 +2241,22 @@
     <!-- Cast lists -->
 
     <xsl:template match="castList">
-        <ul class="castlist" id="{generate-id(.)}">
+        <ul class="castlist">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
-        <li id="{generate-id(.)}" class="castlist"><h4><xsl:apply-templates/></h4></li>
+        <li class="castlist">
+            <xsl:call-template name="generate-id-attribute"/>
+            <h4><xsl:apply-templates/></h4>
+        </li>
     </xsl:template>
 
     <xsl:template match="castGroup">
-        <li id="{generate-id(.)}" class="castlist">
+        <li class="castlist">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">
                 <xsl:apply-templates select="castItem"/>
@@ -2128,11 +2265,15 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head">
-        <b id="{generate-id(.)}"><xsl:apply-templates/></b>
+        <b>
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:apply-templates/>
+        </b>
     </xsl:template>
 
     <xsl:template match="castItem">
-        <li class="castitem" id="{generate-id(.)}">
+        <li class="castitem">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
