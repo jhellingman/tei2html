@@ -1148,8 +1148,13 @@
 1791	VBi	299	aankuieren
 1791	VBp1	299	kuierde aan
 1791	VBpp	299	aangekuierd
-1793	UNC	999*	aankunnen, kan aan, kunnen aan, konde
-1793	UNC	999	kon aan, konden aan, heeft aangekund
+1793	VBi	999*	aankunnen
+1793	VBs	999*	kan aan
+1793	VB	999*	kunnen aan
+1793	VBp1	999*	konde aan
+1793	VBp1	999	kon aan
+1793	VBp2	999	konden aan
+1793	VBpp	999	aangekund
 1795	VBi	299	aankwakken
 1795	VBp1	299	kwakte aan
 1795	VBpp	299	aangekwakt
@@ -1167,7 +1172,9 @@
 1807	NN2f	101	aankweeksters
 1809	VBi	299	aanlachen
 1809	VBp1	299	lachte aan
-1809	VBpp	299	aangelachen; ook loeg aan, loegen aan
+1809	VBpp	299	aangelachen
+1809	VBp1	299	loeg aan
+1809	VBp2	299	loegen aan
 1811	VBi	299	aanlanden
 1811	VBp1	299	landde aan
 1811	VBpp	299	aangeland
@@ -1379,7 +1386,10 @@
 1949	VBp1	299	moet aan
 1949	VBp2	299	moest aan
 1949	VBpp	299	aangemoeten
-1951	UNC	999	aanmogen, mag aan, mogen aan, mocht aan
+1951	VBi	999	aanmogen
+1951	VBs	999	mag aan
+1951	VB	999	mogen aan
+1951	VBp1	999	mocht aan
 1953	NN1f	101	aanmonding
 1953	NN2f	101	aanmondingen
 1955	VBi	299	aanmonsteren
@@ -2077,7 +2087,8 @@
 2477	NN2f	198	aanstootelijkheden
 2479	VBi	299	aanstooten
 2479	VBp1	299	stiet aan
-2479	VBpp	299	aangestooten; ook stootte aan
+2479	VBp1	299	stootte aan
+2479	VBpp	299	aangestooten
 2481	UNC	999	aanstootend
 2483	NN1f	101	aanstooting
 2483	NN2f	101	aanstootingen
@@ -2647,7 +2658,8 @@
 2941	VBpp	299	aangezeuld
 2943	NN1n	101	aanzicht
 2943	NN2n	101	aanzichten
-2945	UNC	999	aanzichten, aanzichtte
+2945	VBi	999	aanzichten
+2945	VBp1	999	aanzichtte
 2947	VBi	299	aanzien
 2947	VBp1	299	zag aan
 2947	VBp2	299	zagen aan
@@ -2710,7 +2722,8 @@
 2989	NN2m	103	apen
 2989	NN1r	103	aapje
 2989	NN2r	103	aapjes
-2991	UNC	999	aapachtig
+2991	AJ	999	aapachtig
+2991	AJ	999	aapachtige
 2993	NN1f	101	aapjessnuif
 2995	NN1f	101	aapjeszeep
 2997	NN1f	103	aar
@@ -3307,7 +3320,11 @@
 3513	VBp1	299	bleef achteraan
 3513	VBp2	299	bleven achteraan
 3513	VBpp	299	achteraangebleven
-3515	UNC	999	achteraankomen, komt achteraan, kwam achteraan, kwamen achteraan, is achteraangekomen
+3515	VBi	999	achteraankomen
+3515	VBt	999	komt achteraan
+3515	VBp1	999	kwam achteraan
+3515	VBp2	999	kwamen achteraan
+3515	VBpp	999	achteraangekomen
 3517	VBi	299	achteraanloopen
 3517	VBp1	299	liep achteraan
 3517	VBpp	299	achteraangeloopen
@@ -3477,7 +3494,8 @@
 3661	VBi	299	achterloopen
 3661	VBp1	299	liep achter
 3661	VBpp	299	achtergeloopen
-3663	UNC	999	achterloopsch
+3663	AJ	999	achterloopsch
+3663	AJ	999	achterloopsche
 3665	NN1f	101	achterloopschheid
 3669	NN1n	101	achterluik
 3669	NN2n	101	achterluiken
@@ -3519,7 +3537,11 @@
 3697	VBpp	299	achteromgeloopen
 3699	NN1n	101	achteronder
 3701	UNC	999	achterop
-3703	UNC	999	achteropkomen, komt achterop, kwam achterop, kwamen achterop, is achteropgekomen
+3703	VBi	999	achteropkomen
+3703	VBt	999	komt achterop
+3703	VBp1	999	kwam achterop
+3703	VBp2	999	kwamen achterop
+3703	VBpp	999	achteropgekomen
 3705	VBi	299	achteroploopen
 3705	VBp1	299	liep achterop
 3705	VBpp	299	achteropgeloopen
@@ -3673,7 +3695,8 @@
 3833	VBp1	299	zeilde achter
 3833	VBpp	299	achtergezeild
 3835	NN1f	101	achtgeving
-3839	UNC	999	achthelmig
+3839	AJ	999	achthelmig
+3839	AJ	999	achthelmige
 3841	NN1m	101	achthoek
 3841	NN2m	101	achthoeken
 3841	NN1r	101	achthoekje
@@ -3694,13 +3717,16 @@
 3857	AJ	999	achtlettergrepig
 3857	AJ	999	achtlettergrepige
 3859	UNC	999	achtmaal
-3861	UNC	999	achtmaandsch
-3863	UNC	999	achtmannig
+3861	AJ	999	achtmaandsch
+3861	AJ	999	achtmaandsche
+3863	AJ	999	achtmannig
+3863	AJ	999	achtmannige
 3865	NN1m	101	achtponder
 3865	NN2m	101	achtponders
 3867	AJ	999	achtpootig
 3867	AJ	999	achtpootige
-3869	UNC	999	achtpuntig
+3869	AJ	999	achtpuntig
+3869	AJ	999	achtpuntige
 3871	AJ	999	achtregelig
 3871	AJ	999	achtregelige
 3873	UNC	999	achtste
@@ -55912,7 +55938,8 @@
 47712	NN2f	198	mazurka's
 47714	NN1f	101	mechanica
 47716	NN1fn	101	mechaniek
-47718	UNC	999	mechanisch
+47718	AJ	999	mechanisch
+47718	AJ	999	mechanische
 47720	NN1n	101	mechanisme
 47722	NN1f	101	medaille
 47722	NN2f	101	medailles
@@ -56152,7 +56179,8 @@
 47922	NN2r	198	medicijnfleschjes
 47924	NN1m	101	medicijnmeester
 47924	NN2m	101	medicijnmeesters
-47926	UNC	999	medicinaal
+47926	AJ	999	medicinaal
+47926	AJ	999	medicinale
 47928	VBi	299	medicineeren
 47928	VBp1	299	medicineerde
 47928	VBpp	299	gemedicineerd
@@ -56160,7 +56188,8 @@
 47930	NN2m	199	medici
 47932	NN1f	101	mediocriteit
 47932	NN2f	101	mediocriteiten
-47934	UNC	999	medisch
+47934	AJ	999	medisch
+47934	AJ	999	medische
 47936	NN1n	101	medium
 47936	NN2n	101	mediums
 47938	XREF	800	mee	mede
@@ -56265,7 +56294,8 @@
 48026	NN1n	101	meergeld
 48026	NN2n	101	meergelden
 48028	UNC	999	meergemeld
-48030	UNC	999	meergenoemd
+48030	AJ	999	meergenoemd
+48030	AJ	999	meergenoemde
 48032	NN1f	102	meerkat
 48032	NN2f	102	meerkatten
 48034	NN1m	101	meerketting
@@ -56288,14 +56318,16 @@
 48050	NN2m	101	meerringen
 48052	NN1n	101	meerschuim
 48054	AJ	603	meerschuimen
-48056	UNC	999	meerslachtig
+48056	AJ	999	meerslachtig
+48056	AJ	999	meerslachtige
 48058	NN1m	101	meerstoel
 48058	NN2m	101	meerstoelen
 48060	NN1n	101	meertouw
 48060	NN2n	101	meertouwen
 48062	NN1n	101	meervoud
 48062	NN2n	101	meervouden
-48064	UNC	999	meervoudig
+48064	AJ	999	meervoudig
+48064	AJ	999	meervoudige
 48066	NN1m	101	meervoudsvorm
 48066	NN2m	101	meervoudsvormen
 48068	NN1f	198	mees
@@ -56306,6 +56338,7 @@
 48070	VBp1	299	meesmuilde
 48070	VBpp	299	gemeesmuild
 48072	UNC	999	meest
+48072	UNC	999	meeste
 48074	UNC	999	meestal
 48076	NN1m	101	meestamper
 48076	NN2m	101	meestampers
@@ -56362,7 +56395,7 @@
 48112	NN2f	198	meestoven
 48114	UNC	999*	meesttijds
 48114	UNC	999	meestentijds
-48116	UNC	999	meet, v. (van meet aan)
+48116	NN1f	999	meet
 48118	AJ	331	meetbaar
 48118	AJ	331	meetbare
 48120	NN1m	198	meetbrief
@@ -56373,7 +56406,8 @@
 48126	NN1m	101	meetketting
 48126	NN2m	101	meetkettingen
 48128	NN1f	101	meetkunde
-48130	UNC	999	meetkundig
+48130	AJ	999	meetkundig
+48130	AJ	999	meetkundige
 48132	NN1mf	101	meetkundige
 48132	NN2mf	101	meetkundigen
 48134	NN1f	101	meetkunst
@@ -56513,7 +56547,8 @@
 48238	AJ	301	melancholieken*
 48238	AJc	301	melancholiekeren*
 48238	AJs	301	melancholieksten*
-48240	UNC	999	melancholisch
+48240	AJ	999	melancholisch
+48240	AJ	999	melancholische
 48242	NN1f	101	melasse
 48244	NN1f	101	melde
 48246	VBi	299	melden
@@ -56563,7 +56598,8 @@
 48278	NN2m	101	melkers
 48280	NN1f	101	melkerij
 48280	NN2f	101	melkerijen
-48282	UNC	999	melkgevend
+48282	AJ	999	melkgevend
+48282	AJ	999	melkgevende
 48284	NN1n	101	melkglas
 48286	AJ	603	melkglazen
 48288	NN1n	101	melkhuisje
@@ -56604,7 +56640,8 @@
 48324	UNC	999	melkwit
 48326	NN1f	198	melodie
 48326	NN2f	198	melodieën
-48328	UNC	999	melodieus, melodieuzer
+48328	AJ	999	melodieus
+48328	AJc	999	melodieuzer
 48332	NN1n	198	melodrama
 48332	NN2n	198	melodrama's
 48334	NN1m	101	meloen
@@ -56685,7 +56722,8 @@
 48398	VBi	299	meniën
 48398	VBp1	299	meniede
 48398	VBpp	299	gemenied
-48400	UNC	999	menig
+48400	AJ	999	menig
+48400	AJ	999	menige
 48402	UNC	999	menigeen
 48404	UNC	999	menigerhande
 48406	UNC	999	menigerlei
@@ -56980,7 +57018,8 @@
 48638	PR	604	met
 48640	NN1n	103	metaal
 48640	NN2n	103	metalen
-48642	UNC	999	metaalachtig
+48642	AJ	999	metaalachtig
+48642	AJ	999	metaalachtige
 48644	NN1m	101	metaalgieter
 48644	NN2m	101	metaalgieters
 48646	NN1f	101	metaalgieterij
@@ -56996,9 +57035,11 @@
 48656	VBpp	299	gemetamorphoseerd
 48658	NN1f	103	metaphoor
 48658	NN2f	103	metaphoren
-48660	UNC	999	metaphorisch
+48660	AJ	999	metaphorisch
+48660	AJ	999	metaphorische
 48662	NN1f	101	metaphysica
-48664	UNC	999	metaphysisch
+48664	AJ	999	metaphysisch
+48664	AJ	999	metaphysische
 48666	NN1f	101	metathesis
 48668	UNC	999	meteen
 48670	NN1f	101	metempsychose
@@ -57022,7 +57063,8 @@
 48690	NN1f	198	methode
 48690	NN2f	198*	methoden
 48690	NN2f	198	methodes
-48692	UNC	999	methodisch
+48692	AJ	999	methodisch
+48692	AJ	999	methodische
 48694	NN1m	101	methodist
 48694	NN2m	101	methodisten
 48696	NN1f	101	meting
@@ -57030,14 +57072,16 @@
 48698	NN1f	101	metriek
 48700	AJ	330	metriek
 48700	AJ	330	metrieke
-48702	UNC	999	metrisch
+48702	AJ	999	metrisch
+48702	AJ	999	metrische
 48704	NN1m	103	metronoom
 48704	NN2m	103	metronomen
 48706	NN1f	103	metropool
 48706	NN2f	103	metropolen
 48708	NN1m	103	metropolitaan
 48708	NN2m	103	metropolitanen
-48710	UNC	999	metrum, o., metra
+48710	NN1h	999	metrum
+48710	NN2h	999	metra
 48712	NN1m	198	metselaar
 48712	NN2m	198*	metselaren
 48712	NN2m	198	metselaars
@@ -57081,10 +57125,9 @@
 48754	VBp1	299	meubileerde
 48754	VBpp	299	gemeubileerd
 48756	NN1f	101	meubileering
-48758	UNC	999*	meug, v. (tegen heug
-48758	UNC	999	meug)
-48760	UNC	999*	meugebet, m.
-48760	UNC	999	v.; ook muggebet
+48758	NN1f	999*	meug
+48760	NN1m	999*	meugebet
+48760	NN1m	999	muggebet
 48762	NN1f	101	meuk
 48764	VBs	206	meuk*
 48764	VBt	206	meukt*
@@ -57112,7 +57155,8 @@
 48780	NN2m	101	micrometers
 48782	NN1m	103	microscoop
 48782	NN2m	103	microscopen
-48784	UNC	999	microscopisch
+48784	AJ	999	microscopisch
+48784	AJ	999	microscopische
 48786	NN1m	101	middag
 48786	NN2m	101	middagen
 48786	NN1r	101	middagje
@@ -57156,14 +57200,18 @@
 48822	NN1f	101	middeldeur
 48822	NN2f	101	middeldeuren
 48824	NN1f	101	Middeleeuwen
-48826	UNC	999	middeleeuwsch
+48826	AJ	999	middeleeuwsch
+48826	AJ	999	middeleeuwsche
 48828	VBi	299	middelen
 48828	VBp1	299	middelde
 48828	VBpp	299	gemiddeld
 48830	UNC	999	middelerwijl
-48832	UNC	999	middelevenredig
+48832	AJ	999	middelevenredig
+48832	AJ	999	middelevenredige
 48834	NN1f	101	middelhand
-48836	UNC	999	Middelhoogduitsch
+48836	NN1h	999	Middelhoogduitsch
+48836	AJ	999	Middelhoogduitsch
+48836	AJ	999	Middelhoogduitsche
 48838	AJ	603	Middellandsch
 48840	UNC	999	middellijk
 48842	NN1f	101	middellijn
@@ -57184,13 +57232,17 @@
 48850	NN2f	101	middelmooten
 48850	NN1r	101	middelmootje
 48850	NN2r	101	middelmootjes
-48852	UNC	999	Middelnederlandsch
+48852	NN1h	999	Middelnederlandsch
+48852	AJ	999	Middelnederlandsch
+48852	AJ	999	Middelnederlandsche
 48854	NN1n	101	middelperk
 48854	NN2n	101	middelperken
 48856	NN1n	101	middelpunt
 48856	NN2n	101	middelpunten
-48858	UNC	999	middelpuntvliedend
-48860	UNC	999	middelpuntzoekend
+48858	AJ	999	middelpuntvliedend
+48858	AJ	999	middelpuntvliedende
+48860	AJ	999	middelpuntzoekend
+48860	AJ	999	middelpuntzoekende
 48862	NN1n	102	middelrif
 48862	NN2n	102	middelriffen
 48864	NN1n	102	middelschot
@@ -57221,7 +57273,8 @@
 48892	NN1n	101	middending
 48892	NN2n	101	middendingen
 48894	UNC	999	middendoor
-48896	UNC	999	Middeneuropeesch
+48896	AJ	999	Middeneuropeesch
+48896	AJ	999	Middeneuropeesche
 48898	UNC	999	middenin
 48902	NN1m	102	middenman
 48902	NN2m	102	middenmannen
@@ -57460,7 +57513,8 @@
 49110	NN2f	198	minderheden
 49112	NN1f	101	mindering
 49112	NN2f	101	minderingen
-49114	UNC	999	minderjarig
+49114	AJ	999	minderjarig
+49114	AJ	999	minderjarige
 49116	NN1f	101	minderjarigheid
 49118	AJ	331	mineraal
 49118	AJ	331	minerale
@@ -57470,7 +57524,8 @@
 49126	NN1f	101	mineralogie
 49128	NN1m	103	mineraloog
 49128	NN2m	103	mineralogen
-49130	UNC	999	minerval, o., minervalia
+49130	NN1h	999	minerval
+49130	NN2h	999	minervalia
 49132	NN1m	101	mineur
 49132	NN2m	101	mineurs
 49134	NN1n	101	mingele
@@ -57479,7 +57534,8 @@
 49136	NN2f	103	miniaturen
 49138	NN1m	101	miniatuurschilder
 49138	NN2m	101	miniatuurschilders
-49140	UNC	999	minimum, o., minima
+49140	NN1h	999	minimum
+49140	NN2h	999	minima
 49142	NN1m	101	minister
 49142	NN2m	101	ministers
 49144	NN1n	198	ministerie
@@ -57588,7 +57644,8 @@
 49226	NN2n	198	minuutglazen
 49228	NN1m	101	minuutwijzer
 49228	NN2m	101	minuutwijzers
-49230	UNC	999	minvermogend
+49230	AJ	999	minvermogend
+49230	AJ	999	minvermogende
 49234	AJ	399	minzaam
 49234	AJc	399	minzamer
 49234	AJs	399	minzaamst
@@ -57632,7 +57689,8 @@
 49268	NN1m	103	misanthroop
 49268	NN2m	103	misanthropen
 49270	NN1f	101	misanthropie
-49272	UNC	999	misanthropisch
+49272	AJ	999	misanthropisch
+49272	AJ	999	misanthropische
 49274	NN1n	101	misbaar
 49276	NN1n	102	misbak
 49276	NN2n	102	misbakken
@@ -58019,7 +58077,8 @@
 49544	NN1f	103	mixtuur
 49544	NN2f	103	mixturen
 49546	NN1f	101	mnemoniek
-49548	UNC	999	mnemotechnisch
+49548	AJ	999	mnemotechnisch
+49548	AJ	999	mnemotechnische
 49550	AJ	301	mobiel
 49550	AJc	301	mobieler
 49550	AJs	301	mobielst
