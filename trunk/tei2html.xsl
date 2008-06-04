@@ -640,21 +640,26 @@
 
     <xsl:template match="ref[@target and not(@type='noteref')]">
         <xsl:variable name="target" select="./@target"/>
-        <xsl:if test="not(//*[@id=$target])">
-            <xsl:message terminate="no">
-                Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
-            </xsl:message>
-        </xsl:if>
-        <a href="#{$target}">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:if test="@type='pageref'">
-                <xsl:attribute name="class">typeref</xsl:attribute>
-            </xsl:if>            
-            <xsl:if test="@type='endnoteref'">
-                <xsl:attribute name="class">noteref</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </a>
+        <xsl:choose>
+            <xsl:when test="not(//*[@id=$target])">
+                <xsl:message terminate="no">
+                    Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
+                </xsl:message>
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <a href="#{$target}">
+                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:if test="@type='pageref'">
+                        <xsl:attribute name="class">pageref</xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="@type='endnoteref'">
+                        <xsl:attribute name="class">noteref</xsl:attribute>
+                    </xsl:if>
+                    <xsl:apply-templates/>
+                </a>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <!--====================================================================-->
@@ -662,14 +667,14 @@
 
     <xsl:template match="xref[@url]">
         <a>
-			<xsl:choose>
-				<xsl:when test="substring(@url, 1, 3) = 'pg:'">
-		            <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
-				</xsl:when>
-				<xsl:otherwise>
-		            <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
-				</xsl:otherwise>
-			</xsl:choose>
+            <xsl:choose>
+                <xsl:when test="substring(@url, 1, 3) = 'pg:'">
+                    <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:apply-templates/>
         </a>
     </xsl:template>
@@ -919,6 +924,9 @@
         </li>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Arbitrary Blocks (special hooks for rendering) -->
 
     <xsl:template match="ab[@type='tocPagenum' or @type='tocPageNum']">
         <span class="tocPagenum">

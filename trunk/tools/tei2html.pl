@@ -120,7 +120,7 @@ sub processFile
 
 
     print "Check SGML...\n";
-    my $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E500 -g -f $basename.err $currentname > $basename.nsgml");
+    my $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $basename.err $currentname > $basename.nsgml");
     system ("rm $basename.nsgml");
 
 
