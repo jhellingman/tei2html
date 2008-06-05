@@ -1423,6 +1423,9 @@ BEGIN
 
 	###############################################################################
 
+	$ent{"ymacr"}		= chr(0x0233); # y with macron
+	$ent{"Ymacr"}		= chr(0x0232); # Y with macron
+
 	$ent{"Etilde"}		= chr(0x1EBC); # E with tilde
 	$ent{"etilde"}		= chr(0x1EBD); # e with tilde
 	$ent{"Ytilde"}		= chr(0x1EF8); # Y with tilde
@@ -1491,6 +1494,14 @@ BEGIN
 	$ent{"metbreak"}	= chr(0x201E);	# metrical break (= DOUBLE LOW-9 QUOTATION MARK)
 
 	$ent{"Tinv"}	    = chr(0x22A5);  # UP TACK (Inversed T)
+
+	$ent{"digamma"}	    = chr(0x03DC);	# GREEK LETTER DIGAMMA
+
+	$ent{"ezh"}	    = chr(0x0292);	# LETTER EZH
+	$ent{"EZH"}	    = chr(0x01B7);	# LETTER EZH
+
+	$ent{"esh"}	    = chr(0x0283);	# LETTER ESH
+	$ent{"ESH"}	    = chr(0x01A9);	# LETTER ESH (looks like Greek capital sigma)
 
 	###############################################################################
 	# things not in Unicode (as a single character)
@@ -1576,7 +1587,6 @@ BEGIN
 	$ent{"dots10"}		= "..........";
 	$ent{"dots20"}		= "....................";
 	$ent{"dotfil"}		= "..."; # Concept of filling characters not supported in Unicode.
-
 
 	# Meteorological symbols (used in Scott's South Pole)
 	$ent{"snow"}		= "[snow]";				# symbol for snow
@@ -1724,19 +1734,14 @@ sub handleFraction
 sub utf2sgml
 {
 	my $string = shift;
-	my $result = "";
 
 	my @chars = split(//, $string);
-	foreach my $char (@chars) 
+	foreach (@chars)
 	{
-		if (ord($char) > 127) 
+		if (ord($_) > 127) 
 		{
-			$result .= "&#" . ord($char) . ";";
-		}
-		else
-		{
-			$result .= $char;
+			$_ = "&#" . ord($_) . ";";
 		}
 	}
-	return $result;
+	return join('', @chars);
 }
