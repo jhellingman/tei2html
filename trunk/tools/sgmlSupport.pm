@@ -1423,6 +1423,9 @@ BEGIN
 
 	###############################################################################
 
+	$ent{"jcaron"}		= chr(0x0135); # j with caron
+	$ent{"Jcaron"}		= chr(0x0134); # J with caron
+
 	$ent{"ymacr"}		= chr(0x0233); # y with macron
 	$ent{"Ymacr"}		= chr(0x0232); # Y with macron
 
@@ -1497,6 +1500,9 @@ BEGIN
 
 	$ent{"digamma"}	    = chr(0x03DC);	# GREEK LETTER DIGAMMA
 
+	$ent{"schwa"}	    = chr(0x0259);	# LETTER SCHWA
+
+
 	$ent{"ezh"}	    = chr(0x0292);	# LETTER EZH
 	$ent{"EZH"}	    = chr(0x01B7);	# LETTER EZH
 
@@ -1521,16 +1527,22 @@ BEGIN
 
 	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
 
-	$ent{"Adota"}		= "A" . chr(0x0307); # A with dot above
 	$ent{"adota"}		= "a" . chr(0x0307); # a with dot above
+	$ent{"Adota"}		= "A" . chr(0x0307); # A with dot above
+	$ent{"edota"}		= "e" . chr(0x0307); # e with dot above
+	$ent{"Edota"}		= "E" . chr(0x0307); # E with dot above
+	$ent{"mdota"}		= "m" . chr(0x0307); # m with dot above
 	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
+	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
 
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
-	$ent{"1dotb"}		= "1" . chr(0x0323); # 1 with dot below
 	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
-	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
 	$ent{"hdotb"}		= "h" . chr(0x0323); # h with dot below
 	$ent{"Hdotb"}		= "H" . chr(0x0323); # H with dot below
+	$ent{"ldotb"}		= "l" . chr(0x0323); # 1 with dot below
+	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
+	$ent{"udotb"}		= "u" . chr(0x0323); # u with dot below
+	$ent{"Udotb"}		= "U" . chr(0x0323); # U with dot below
 	$ent{"wdotb"}		= "w" . chr(0x0323); # w with dot below
 	$ent{"zdotb"}		= "z" . chr(0x0323); # z with dot below
 	$ent{"Zdotb"}		= "Z" . chr(0x0323); # Z with dot below
@@ -1546,7 +1558,14 @@ BEGIN
 	$ent{"oudb"}		= "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
 	$ent{"oubb"}		= "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
 
-	$ent{"ubowb"}		= "u" . chr(0x032F); # u with bow below
+	$ent{"ubowb"}		= "u" . chr(0x032F); # u with bow below (inverted breve)
+
+	$ent{"abreveb"}		= "a" . chr(0x032E); # a with breve below
+	$ent{"Abreveb"}		= "A" . chr(0x032E); # A with breve below
+	$ent{"ebreveb"}		= "e" . chr(0x032E); # e with breve below
+	$ent{"Ebreveb"}		= "E" . chr(0x032E); # E with breve below
+	$ent{"obreveb"}		= "o" . chr(0x032E); # o with breve below
+	$ent{"Obreveb"}		= "O" . chr(0x032E); # O with breve below
 
 	$ent{"icircb"}		= "i" . chr(0x032D); # i with circumflex below
 
@@ -1561,21 +1580,35 @@ BEGIN
 	$ent{"zbarb"}		= "z" . chr(0x0331); # z with macron below
 	$ent{"Zbarb"}		= "Z" . chr(0x0331); # Z with macron below
 
+	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
+
 	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
 
+	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
+
+	# Using stroke-through overlays:
+	$ent{"bstroke"}		= "b" . chr(0x0335) . "b"; # b with stroke through stem
+
 	# Requiring wide combining diacritics
-	$ent{"ghbarb"}		= "g" . chr(0x035F)  . "h"; # gh with double macron below
-	$ent{"Ghbarb"}		= "G" . chr(0x035F)  . "h"; # Gh with double macron below
-	$ent{"khbarb"}		= "k" . chr(0x035F)  . "h"; # Kh with double macron below
-	$ent{"Khbarb"}		= "K" . chr(0x035F)  . "h"; # Kh with double macron below
+	$ent{"ghbarb"}		= "g" . chr(0x035F) . "h"; # gh with double macron below
+	$ent{"Ghbarb"}		= "G" . chr(0x035F) . "h"; # Gh with double macron below
+	$ent{"khbarb"}		= "k" . chr(0x035F) . "h"; # Kh with double macron below
+	$ent{"Khbarb"}		= "K" . chr(0x035F) . "h"; # Kh with double macron below
 
 	$ent{"ngtilde"}		= "n" . chr(0x0360) . "g";	 # ng with double tilde
 
 	# Multiple combining diacritics
+	$ent{"amacracu"}	= chr(0x0101) . chr(0x0301); # a with macron and acute
 	$ent{"imacacu"}		= chr(0x012B) . chr(0x0301); # i with macron and acute
 	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # i with macron and acute
 	$ent{"amacrdotb"}	= chr(0x0101) . chr(0x0323); # a with macron and dot below
+
 	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
+	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
+
+	$ent{"amacrbrev"}	= chr(0x0101) . chr(0x0306); # a with macron and breve
+	$ent{"emacrbrev"}	= chr(0x0113) . chr(0x0306); # e with macron and breve
+	$ent{"imacrbrev"}	= chr(0x012B) . chr(0x0306); # i with macron and breve
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
