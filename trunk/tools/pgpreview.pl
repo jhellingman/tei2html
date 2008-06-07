@@ -1,88 +1,91 @@
 # pgpreview.pl -- Create simple HTML preview of proofed pages.
 
-
 use SgmlSupport qw/sgml2utf utf2sgml/;
 
 
-$file = $ARGV[0];
 
-open(INPUTFILE, $file) || die("Could not open input file $file");
-
-
-printHtmlHead();
-
-$needsParagraph = 1;
+main();
 
 
 
 
-while (<INPUTFILE>)
+sub main
 {
-	# Replace ampersands:
-	# $_ =~ s/\&/\&amp;/g;
+	my $file = $ARGV[0];
 
-	# Replace PGDP page-separators (preserving proofers):
-	# $_ =~ s/-*File: 0*([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
+	open(INPUTFILE, $file) || die("Could not open input file $file");
 
-	if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]+)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) 
+	printHtmlHead();
+
+	my $paragraph = "";
+
+	while (<INPUTFILE>)
 	{
-		$fileName = $1 . ".html";
-		$_ = "<hr>\n<b>File: $1.png</b>\n<hr>\n";
+		my $line = $_;
+
+		if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) 
+		{
+			print "\n\n<p>" . handleParagraph($paragraph);
+			print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
+			$paragraph = "";
+		}
+		elsif ($line ne "\n") 
+		{
+			chomp($line);
+			$paragraph .= " " . $line;
+		}
+		else
+		{
+			print "\n\n<p>" . handleParagraph($paragraph);
+			$paragraph = "";
+		}
 	}
+
+	printHtmlTail();
+}
+
+
+sub handleParagraph
+{
+	my $paragraph = shift;
+
+	$paragraph = pgdp2sgml($paragraph);
+	$paragraph = utf2sgml(sgml2utf($paragraph));
 
 	# Tag proofer remarks:
-	$_ =~ s/(\[\*.*?\])/<span class=remark>\1<\/span>/g;
+	$paragraph =~ s/(\[\*.*?\])/<span class=remark>\1<\/span>/g;
 
 	# Tag Greek sections (original)
-	$_ =~ s/(\[GR:.*?\])/<span class=greek>\1<\/span>/g;
+	$paragraph =~ s/(\[GR:.*?\])/<span class=greek>\1<\/span>/g;
 
 	# Tag Greek sections (WRONG!!!)
-	$_ =~ s/(\[Greek:?.*?\])/<span class=error>\1<\/span>/g;
+	$paragraph =~ s/(\[Greek:?.*?\])/<span class=error>\1<\/span>/g;
 
 	# Tag Greek sections (WRONG!!!)
-	$_ =~ s/(\[GR.*?\])/<span class=error>\1<\/span>/g;
-
+	$paragraph =~ s/(\[GR.*?\])/<span class=error>\1<\/span>/g;
 
 	# Tag Greek sections (after processing)
-	$_ =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
+	$paragraph =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
 
 	# Replace illustration markup:
-	$_ =~ s/\[Ill?ustration:? (.*)\]/<span class=figure>\n[Illustration: \1\n<\/span>/g;
+	$paragraph =~ s/\[Ill?ustration:? (.*)\]/<span class=figure>\n[Illustration: \1\n<\/span>/g;
 
 	# Replace dashes in number ranges by en-dashes
-	$_ =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
+	$paragraph =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
 
 	# Replace two dashes by em-dashes
-	$_ =~ s/ *---? */\&mdash;/g;
+	$paragraph =~ s/ *---? */\&mdash;/g;
 
 	# Replace footnote indicators:
-	$_ =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
+	$paragraph =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
 
 	# Replace superscripts
-	$_ =~ s/\^\{([a-zA-Z0-9]+)\}/<hi rend=sup>\1<\/hi>/g;
-	$_ =~ s/\^([a-zA-Z0-9])/<hi rend=sup>\1<\/hi>/g;
+	$paragraph =~ s/\^\{([a-zA-Z0-9]+)\}/<hi rend=sup>\1<\/hi>/g;
+	$paragraph =~ s/\^([a-zA-Z0-9])/<hi rend=sup>\1<\/hi>/g;
 
-
-	$_ = pgdp2sgml($_);
-
-	$_ = utf2sgml(sgml2utf($_));
-
-
-	if ($_ ne "\n") 
-	{
-		if ($needsParagraph == 1) 
-		{
-			print "<p>";
-		}
-		$needsParagraph = 0;
-	}
-	else
-	{
-		$needsParagraph = 1;
-	}
-
-	print;
+	return $paragraph;
 }
+
 
 #
 # Handle special letters in the coding system as used on PGDP.
@@ -114,10 +117,6 @@ sub pgdp2sgml
 }
 
 
-
-printHtmlTail();
-
-
 sub printHtmlHead
 {
 	print "<html>\n";
@@ -133,9 +132,9 @@ sub printHtmlHead
 
 }
 
+
 sub printHtmlTail
 {
 	print "</body></html>";
 }
-
 
