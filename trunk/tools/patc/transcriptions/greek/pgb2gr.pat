@@ -322,8 +322,24 @@
 
 %% special stuff
 
-"[=a]		p "\\=a"      
-"[=A]		p "\\=A"  
+"[=a]"		p "\\=a"      
+"[=A]"		p "\\=A"  
+
+%% most likely mistakes for the "circumflex"
+
+"[=e]"		p "\\=e"      
+"[=E]"		p "\\=E"  
+"[=i]"		p "\\=i"      
+"[=I]"		p "\\=I"  
+"[=h]"		p "\\=h"      
+"[=H]"		p "\\=H"  
+"[=o]"		p "\\=o"      
+"[=O]"		p "\\=O"  
+"[=u]"		p "\\=u"      
+"[=U]"		p "\\=U"  
+"[=w]"		p "\\=w"      
+"[=W]"		p "\\=W"  
+
 
 "v"		p "&digamma;"
 "[f]"		p "&digamma;"

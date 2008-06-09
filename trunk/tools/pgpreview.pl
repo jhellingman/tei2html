@@ -62,7 +62,7 @@ sub handleParagraph
 	$paragraph =~ s/(\[Greek:?.*?\])/<span class=error>\1<\/span>/g;
 
 	# Tag Greek sections (WRONG!!!)
-	$paragraph =~ s/(\[GR.*?\])/<span class=error>\1<\/span>/g;
+	$paragraph =~ s/(\[G[Rr].*?\])/<span class=error>\1<\/span>/g;
 
 	# Tag Greek sections (after processing)
 	$paragraph =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;

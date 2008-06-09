@@ -1,4 +1,4 @@
-% classical Greek in my transcription to ISO SGML entities.
+% Classical Greek in my transcription to ISO SGML entities.
 % This notation is identical to Yannis Haralambous' notation.
 
 @patterns 0
@@ -6,6 +6,8 @@
 "<GR>"      1 "<foreign lang=el>"
 
 @patterns 1
+
+"&"	    2 "&"		%% jump over SGML entities in source;
 
 "</GR>"     0 "</foreign>"
 
@@ -325,6 +327,21 @@
 ")a"        p "&abregr;"
 ")A"        p "&Abregr;"
 
+%% most likely mistakes for the "circumflex"
+
+"\\=e"   p "&emacgr;"   
+"\\=E"   p "&Emacgr;"     
+"\\=i"   p "&imacgr;"         
+"\\=I"   p "&Imacgr;"     
+"\\=h"   p "&eemacgr;"         
+"\\=H"   p "&EEmacgr;"     
+"\\=o"   p "&omacgr;"         
+"\\=O"   p "&Omacgr;"     
+"\\=u"   p "&umacgr;"         
+"\\=U"   p "&Umacgr;"     
+"\\=w"   p "&ohmacgr;"         
+"\\=W"   p "&OHmacgr;"     
+
 %% warn for illegal characters
 
 "v"         e "illegal character v"
@@ -337,5 +354,14 @@
 "`"         e "stand alone `"
 "["         e "illegal character ["
 "]"         e "illegal character ]"
+
+
+@patterns 2  %% jumping SGML entities in source
+
+";"		1 ";"			% end of entity: jump back
+"</GR>"		0 ";</foreign>"		% closing Greek early. Forgive.
+" "		1 " "			% something unexpected, also jump back.
+
+
 
 @end

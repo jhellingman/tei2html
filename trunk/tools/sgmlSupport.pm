@@ -1283,8 +1283,8 @@ BEGIN
 	$ent{"Ugragr"}		= chr(0x1fea); # "`U"
 	$ent{"uacugr"}		= chr(0x1f7b); # "'u"
 	$ent{"Uacugr"}		= chr(0x1feb); # "'U"
-	$ent{"ucirgr"}		= chr(0x1fe1); # "=u"
-	$ent{"Ucirgr"}		= chr(0x1fe9); # "=U"
+	$ent{"ucirgr"}		= chr(0x1fe6); # "=u"
+	$ent{"Ucirgr"}		= chr(0x3a5) . chr(0x342); # "=U"
 	$ent{"uragr"}		= chr(0x1f55); # "<'u"
 	$ent{"Uragr"}		= chr(0x1f5d); # "<'U"
 	$ent{"usagr"}		= chr(0x1f54); # ">'u"
@@ -1628,6 +1628,32 @@ BEGIN
 	$ent{"aurora"}		= "[aurora]";			# symbol for aurora
 	$ent{"ringsun"}		= "[ringsun]";			# symbol for ring around the sun
 	$ent{"ringmoon"}	= "[ringmoon]";			# symbol for ring around the moon
+
+	# Greek additions
+	$ent{"amacgr"}		=  chr(0x1FB1);		# Greek alpha with macron
+	$ent{"Amacgr"}		=  chr(0x1FB9);		# Greek Alpha with macron
+	$ent{"abregr"}		=  chr(0x1FB0);		# Greek alpha with breve
+	$ent{"Abregr"}		=  chr(0x1FB8);		# Greek Alpha with breve
+
+	$ent{"imacgr"}		=  chr(0x1FD1);		# Greek alpha with macron
+	$ent{"Imacgr"}		=  chr(0x1FD9);		# Greek Alpha with macron
+	$ent{"ibregr"}		=  chr(0x1FD0);		# Greek alpha with breve
+	$ent{"Ibregr"}		=  chr(0x1FD8);		# Greek Alpha with breve
+
+	$ent{"umacgr"}		=  chr(0x1FE1);		# Greek alpha with macron
+	$ent{"Umacgr"}		=  chr(0x1FE9);		# Greek Alpha with macron
+	$ent{"ubregr"}		=  chr(0x1FE0);		# Greek alpha with breve
+	$ent{"Ubregr"}		=  chr(0x1FE8);		# Greek Alpha with breve
+
+	# The following macrons are most likely mistakes for the letters with a "circumflex" (perispomeni)
+	$ent{"emacgr"}		=  chr(0x03B5) . chr(0x0304);	# Greek epsilon with macron
+	$ent{"Emacgr"}		=  chr(0x0395) . chr(0x0304);	# Greek Epsilon with macron
+	$ent{"eemacgr"}		=  chr(0x03B7) . chr(0x0304);	# Greek eta with macron
+	$ent{"EEmacgr"}		=  chr(0x0397) . chr(0x0304);	# Greek Eta with macron
+	$ent{"omacgr"}		=  chr(0x03BF) . chr(0x0304);	# Greek omicron with macron
+	$ent{"Omacgr"}		=  chr(0x039F) . chr(0x0304);	# Greek Omicron with macron
+	$ent{"ohmacgr"}		=  chr(0x03C9) . chr(0x0304);	# Greek omega with macron
+	$ent{"OHmacgr"}		=  chr(0x03A9) . chr(0x0304);	# Greek Omega with macron
 
 	###############################################################################
 	# Project Gutenberg boilerplate texts
