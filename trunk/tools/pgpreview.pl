@@ -41,7 +41,14 @@ sub main
 		}
 	}
 
+	if ($paragraph ne "") 
+	{
+		print "\n\n<p>" . handleParagraph($paragraph);
+	}
+
 	printHtmlTail();
+
+	close INPUTFILE;
 }
 
 
