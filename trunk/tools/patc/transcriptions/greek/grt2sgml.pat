@@ -83,12 +83,12 @@
 "G"         p "G"
 "gg"        p "ng"
 "gk"        p "nk"
-"gg"        p "nx"
-"gg"        p "nch"
+"gx"        p "nx"
+"gq"        p "nch"
 "Gg"        p "Ng"
 "Gk"        p "Nk"
-"Gg"        p "Nx"
-"Gg"        p "Nch"
+"Gx"        p "Nx"
+"Gq"        p "Nch"
 
 "d"         p "d"
 "D"         p "D"
@@ -569,12 +569,22 @@
 "&apos;"    p "&apos;"
 "&prime;"   p "&prime;"
 
-%% additional entities not in TEI
+%% additional entities
 
 "\\=a"       p "&amacr;"
 "\\=A"       p "&Amacr;"
 ")a"         p "&abreve;"
 ")A"         p "&Abreve;"
+
+"\\=i"       p "&imacr;"
+"\\=I"       p "&Imacr;"
+")i"         p "&ibreve;"
+")I"         p "&Ibreve;"
+
+"\\=u"       p "&umacr;"
+"\\=U"       p "&Umacr;"
+")u"         p "&ubreve;"
+")U"         p "&Ubreve;"
 
 "&digamma;"  p "w"
 "&Digamma;"  p "w"
