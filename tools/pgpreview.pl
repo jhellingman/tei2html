@@ -57,6 +57,13 @@ sub handleParagraph
 	my $paragraph = shift;
 
 	$paragraph = pgdp2sgml($paragraph);
+
+	# Replace dashes in number ranges by en-dashes
+	$paragraph =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
+
+	# Replace two dashes by em-dashes
+	$paragraph =~ s/ *---? */\&mdash;/g;
+
 	$paragraph = sgml2utf($paragraph);
 
 	# Tag proofer remarks:
@@ -77,18 +84,17 @@ sub handleParagraph
 	# Replace illustration markup:
 	$paragraph =~ s/\[Ill?ustration:? (.*)\]/<span class=figure>\n[Illustration: \1\n<\/span>/g;
 
-	# Replace dashes in number ranges by en-dashes
-	$paragraph =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
-
-	# Replace two dashes by em-dashes
-	$paragraph =~ s/ *---? */\&mdash;/g;
-
 	# Replace footnote indicators:
 	$paragraph =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
 
 	# Replace superscripts
-	$paragraph =~ s/\^\{([a-zA-Z0-9]+)\}/<hi rend=sup>\1<\/hi>/g;
-	$paragraph =~ s/\^([a-zA-Z0-9\*])/<hi rend=sup>\1<\/hi>/g;
+	$paragraph =~ s/\^\{([a-zA-Z0-9]+)\}/<sup>\1<\/sup>/g;
+	$paragraph =~ s/\^([a-zA-Z0-9\*])/<sup>\1<\/sup>/g;
+
+	# Replace other formatting
+	$paragraph =~ s/<sc>(.*?)<\/sc>/<span class=sc>\1<\/span>/g;
+	$paragraph =~ s/<g>(.*?)<\/g>/<span class=ex>\1<\/span>/g;
+
 
 	# Anything else between braces is probably wrong:
 	$paragraph =~ s/(\^?\{.*?\})/<span class=error>\1<\/span>/g;
@@ -166,11 +172,12 @@ sub printHtmlHead
 	print ".figure { background-color: #FFFF5C; }\n";
 	print ".remark { background-color: #FFB442; }\n";
 	print ".greek { background-color: #C7FFC7; font-family: Asteria, Palatino Linotype, sans serif; font-size: 16pt;}\n";
+	print ".sc { font-variant:small-caps; }\n";
+	print ".ex { letter-spacing:0.2em; }\n";
 	print ".error { background-color: #FF8566; font-weight: bold; }\n";
 	print "</style>\n";
 	print "</head>\n";
 	print "<body>\n";
-
 }
 
 
