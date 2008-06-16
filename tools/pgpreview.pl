@@ -91,10 +91,15 @@ sub handleParagraph
 	$paragraph =~ s/\^\{([a-zA-Z0-9]+)\}/<sup>\1<\/sup>/g;
 	$paragraph =~ s/\^([a-zA-Z0-9\*])/<sup>\1<\/sup>/g;
 
+	# Replace subscripts
+	$paragraph =~ s/_\{([a-zA-Z0-9]+)\}/<sub>\1<\/sub>/g;
+	$paragraph =~ s/_([a-zA-Z0-9\*])/<sub>\1<\/sub>/g;
+
 	# Replace other formatting
 	$paragraph =~ s/<sc>(.*?)<\/sc>/<span class=sc>\1<\/span>/g;
 	$paragraph =~ s/<g>(.*?)<\/g>/<span class=ex>\1<\/span>/g;
 
+	$paragraph =~ s/<tb>/<hr>/g;
 
 	# Anything else between braces is probably wrong:
 	$paragraph =~ s/(\^?\{.*?\})/<span class=error>\1<\/span>/g;
@@ -166,6 +171,7 @@ sub pgdp2sgml
 
 sub printHtmlHead
 {
+	print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
 	print "<html>\n";
 	print "<title>DP Preview</title>\n";
 	print "<style>\n";
