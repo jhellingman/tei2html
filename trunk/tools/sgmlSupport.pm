@@ -1513,6 +1513,18 @@ BEGIN
 	# things not in Unicode (as a single character)
 
 	# Requiring combining diacritics
+
+	$ent{"Acedil"}	    = "A" . chr(0x0327); # A with cedille
+	$ent{"acedil"}	    = "a" . chr(0x0327); # a with cedille
+	$ent{"Ecedil"}	    = "E" . chr(0x0327); # E with cedille
+	$ent{"ecedil"}	    = "e" . chr(0x0327); # e with cedille
+	$ent{"Icedil"}	    = "I" . chr(0x0327); # I with cedille
+	$ent{"icedil"}	    = "i" . chr(0x0327); # i with cedille
+	$ent{"Ocedil"}	    = "O" . chr(0x0327); # O with cedille
+	$ent{"ocedil"}	    = "o" . chr(0x0327); # o with cedille
+	$ent{"Ucedil"}	    = "U" . chr(0x0327); # U with cedille
+	$ent{"ucedil"}	    = "u" . chr(0x0327); # u with cedille
+
 	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
 	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
 
@@ -1524,6 +1536,7 @@ BEGIN
 	$ent{"qtilde"}		= "q" . chr(0x0303); # q with tilde
 	$ent{"rtilde"}		= "r" . chr(0x0303); # r with tilde
 	$ent{"stilde"}		= "s" . chr(0x0303); # s with tilde
+	$ent{"ltilde"}		= "l" . chr(0x0303); # s with tilde
 
 	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
 
@@ -1534,6 +1547,7 @@ BEGIN
 	$ent{"mdota"}		= "m" . chr(0x0307); # m with dot above
 	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
 	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
+	$ent{"zdota"}		= "z" . chr(0x0307); # r with dot above
 
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
 	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
@@ -1581,13 +1595,17 @@ BEGIN
 	$ent{"Zbarb"}		= "Z" . chr(0x0331); # Z with macron below
 
 	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
+	$ent{"idgrave"}		= "i" . chr(0x030F); # i with double grave
+	$ent{"udgrave"}		= "u" . chr(0x030F); # u with double grave
 
 	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
 
 	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
 
-	# Using stroke-through overlays:
-	$ent{"bstroke"}		= "b" . chr(0x0335) . "b"; # b with stroke through stem
+	# Using stroke-through overlays: (was actually not needed)
+	$ent{"bstroke"}		= chr(0x0180); # b with stroke through stem
+	$ent{"bbar"}		= chr(0x0180); # b with stroke through stem
+
 
 	# Requiring wide combining diacritics
 	$ent{"ghbarb"}		= "g" . chr(0x035F) . "h"; # gh with double macron below
@@ -1609,6 +1627,9 @@ BEGIN
 	$ent{"amacrbrev"}	= chr(0x0101) . chr(0x0306); # a with macron and breve
 	$ent{"emacrbrev"}	= chr(0x0113) . chr(0x0306); # e with macron and breve
 	$ent{"imacrbrev"}	= chr(0x012B) . chr(0x0306); # i with macron and breve
+	$ent{"omacrbrev"}	= chr(0x014D) . chr(0x0306); # o with macron and breve
+	$ent{"umacrbrev"}	= chr(0x016B) . chr(0x0306); # u with macron and breve
+	$ent{"ymacrbrev"}	= chr(0x0233) . chr(0x0306); # y with macron and breve
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
