@@ -34,59 +34,69 @@ use LanguageNames qw/getLanguage/;
 
 # Configurable parameters
 
-$maximumProximityDistance = 10;	# [10]  Size of context within which words are considered to be close to each other.
+$maximumProximityDistance = 5;	# [10]  Size of context within which words are considered to be close to each other.
 $minimumCount = 10;				# [10]  Minimum number of times a feature needs to be present to be considered significant.
 $minimumSignificance = 0.1;		# [0.1] Minimum value for | P(word) - P(word | feature) | for feature to be considered relevant.
+$version = "0.1 alpha";
 
 # End of configurable parameters
 
-
-$accLetter = "(\\&[A-Za-z](acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
-$ligLetter = "(\\&[A-Za-z]{2}lig;)";
-$specLetter = "(\\&apos;|\\&eth;|\\&ETH;|\\&thorn;|\\&THORN;|\\&alif;|\\&ayn;|\\&prime;)";
-$letter = "(\\w|$accLetter|$ligLetter|$specLetter)";
-$wordPattern = "($letter)+(([-']|&rsquo;|&apos;)($letter)+)*";
-$nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
+main();
 
 
-%wordHash = ();
-%wordFiles = ();
-%dictHash = ();         # dictionary of valid words
-%confusableHash = ();   # set of confusable words
-%pairHash = ();         # proximity pairs (co-occurance of words)
-%patternHash = ();      # patterns
-%partsOfSpeechHash = (); # part-of-speech information 
 
-%wordProbabilityHash = ();
+sub main
+{
 
-$inputDir       = $ARGV[0];
+	$accLetter = "(\\&[A-Za-z](acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
+	$ligLetter = "(\\&[A-Za-z]{2}lig;)";
+	$specLetter = "(\\&apos;|\\&eth;|\\&ETH;|\\&thorn;|\\&THORN;|\\&alif;|\\&ayn;|\\&prime;)";
+	$letter = "(\\w|$accLetter|$ligLetter|$specLetter)";
+	$wordPattern = "($letter)+(([-']|&rsquo;|&apos;)($letter)+)*";
+	$nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
-$totalPairCount = 0;
 
-print STDERR "Loading dictionary\n";
+	%wordHash = ();
+	%wordFiles = ();
+	%dictHash = ();         # dictionary of valid words
+	%confusableHash = ();   # set of confusable words
+	%pairHash = ();         # proximity pairs (co-occurance of words)
+	%patternHash = ();      # patterns
+	%partsOfSpeechHash = (); # part-of-speech information 
 
-loadDictionary();
-loadConfusables();
-loadPartsOfSpeech();
+	%wordProbabilityHash = ();
 
-print STDERR "Collecting words from directory $inputDir\n";
+	$inputDir = $ARGV[0];
+	$totalFeatureCount = 0;
 
-listRecursively($inputDir);
+	print STDERR "Loading dictionaries\n";
 
-report();
+	loadDictionary();
+	loadConfusables();
+	loadPartsOfSpeech();
 
-print STDERR "$totalPairCount pairs in total\n";
-print STDERR "$scannoPairCount scanno pairs\n";
+	print STDERR "Collecting words from directory $inputDir\n";
 
-exit;
+	listRecursively($inputDir);
 
+	printf ("S\t%s\tVersion\n", $version);
+	printf ("S\t%s\tMaximum Proximity Distance\n", $maximumProximityDistance);
+	printf ("S\t%s\tMinimum Count\n", $minimumCount);
+	printf ("S\t%s\tMinimum Significance\n", $minimumSignificance);
+
+	report();
+
+	print STDERR "$totalFeatureCount features in total\n";
+
+	printf ("X\t%s\tFeatures Counted\n", $totalFeatureCount);
+}
 
 
 # listRecursively
 #
 #   list the contents of a directory,
 #   recursively listing the contents of any subdirectories
-
+#
 sub listRecursively
 {
     my ($directory) = @_;
@@ -254,8 +264,8 @@ sub countPattern2
     my $w2 = shift;
 
     my $pattern = "$word $w1 $w2";
-    # print STDERR "PATTERN: $pattern\n";
     $patternHash{$pattern}++;
+    $totalFeatureCount++;
 
     my $p1 = mapPartOfSpeech($w1);
     my $p2 = mapPartOfSpeech($w2);
@@ -265,7 +275,6 @@ sub countPattern2
 	if ($pattern ne $ppattern) 
 	{
 	    $patternHash{$ppattern}++;
-		# print STDERR "$ppattern\n";
 	}
 }
 
@@ -283,8 +292,8 @@ sub countPattern3
     my $w3 = shift;
 
     my $pattern = "$word $w1 $w2 $w3";
-    # print STDERR "PATTERN: $pattern\n";
     $patternHash{$pattern}++;
+    $totalFeatureCount++;
 
     my $p1 = mapPartOfSpeech($w1);
     my $p2 = mapPartOfSpeech($w2);
@@ -295,7 +304,6 @@ sub countPattern3
 	if ($pattern ne $ppattern) 
 	{
 	    $patternHash{$ppattern}++;
-		# print STDERR "$ppattern\n";
 	}
 }
 
@@ -318,7 +326,6 @@ sub mapPartOfSpeech
 }
 
 
-
 #
 # countProximityPair
 #
@@ -330,14 +337,10 @@ sub countProximityPair
     my $secondWord = shift;
 
     $pairCount++;
-    $totalPairCount++;
 
     if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
     {
-        $scannoPairCount++;
-        
-        # print STDERR "PAIR:    $firstWord ~ $secondWord\n";
-
+		$totalFeatureCount++;
         $pairHash{"$firstWord $secondWord"}++;
     }
 }
@@ -350,9 +353,13 @@ sub countProximityPair
 #
 sub report
 {
+	# make STDOUT hot to enable line-based buffering.
+	select STDOUT;
+	$| = 1;
+
 	reportWords();
-	reportPairs();
 	reportPatterns();
+	reportPairs();
 }
 
 
@@ -386,7 +393,8 @@ sub reportWords
 				if (defined $count) 
 				{
 					my $fraction = $count / $total;
-					print "W:\t$_\t$count\t$total\t$fraction\n";			
+					# print "W:\t$_\t$count\t$total\t$fraction\n";	
+					printf ("W\t%s\t%s\t%.3f\t%s\n", $count, $total, $fraction, $_);
 					$wordHash{$_} = -$count; # Indicate we have reported this word.
 				}
 			}
@@ -400,7 +408,6 @@ sub reportWords
 			$wordHash{$_} = -$wordHash{$_}; # counted everything; need information later.
 		}
 	}
-
 }
 
 
@@ -447,14 +454,17 @@ sub reportPairs
 					
 					if ($significance > $minimumSignificance) 
 					{
-						print "C:\t$pair\t$count\t$total\t$fraction\t$significance\n";			
+						# print "C:\t$pair\t$count\t$total\t$fraction\t$significance\n";
+						printf ("C\t%s\t%s\t%.3f\t%.3f\t%s\n", $count, $total, $fraction, $significance, $pair);
 					}
 					$pairHash{$pair} = -$count; # Indicate we have reported this pair.
-
 				}
 			}
         }
     }
+
+	# Done with pairHash, cleanup.
+	%pairHash = ();
 }
 
 
@@ -504,13 +514,17 @@ sub reportPatterns
 					
 					if ($significance > $minimumSignificance) 
 					{ 
-						print "P:\t$pattern\t$count\t$total\t$fraction\t$significance\n";			
+						# print "P:\t$pattern\t$count\t$total\t$fraction\t$significance\n";			
+						printf ("P\t%s\t%s\t%.3f\t%.3f\t%s\n", $count, $total, $fraction, $significance, $pattern);
 					}
 					$patternHash{$pair} = -$count; # Indicate we have reported this pair.
 				}
 			}
         }
     }
+
+	# Done with patternHash, cleanup.
+	%patternHash = ();
 }
 
 
@@ -523,8 +537,8 @@ sub loadDictionary
     my $dictFile = "C:\\bin\\dic\\nl-1900.dic";
     if (!open(DICTFILE, "<:utf8", $dictFile))
     {
-            print STDERR "Could not open $dictFile";
-            exit;
+		print STDERR "Could not open $dictFile";
+		exit;
     }
 
     %dictHash = ();
@@ -550,14 +564,14 @@ sub loadDictionary
 #
 sub loadConfusables
 {
-    my $confusableFile = "confusables3.txt";
+    my $confusableFile = "confusables.txt";
     if (!open(CONFUSABLEFILE, "<:encoding(latin1)", $confusableFile))
     {
-            print STDERR "Could not open $confusableFile";
-            exit;
+		print STDERR "Could not open $confusableFile";
+		exit;
     }
 
-	%confusableSetHas = ();
+	%confusableSetHash = ();
     %confusableHash = ();
     while (<CONFUSABLEFILE>)
     {
@@ -565,18 +579,15 @@ sub loadConfusables
 		chomp($set);
 
 		my @words = split(/, */, $set);
-
 		foreach my $word (@words) 
 		{
 			$confusableHash{$word} = 1;
 			$confusableSetHash{$word} = $set; # TODO: words can be in more than one set! Handle this by appending sets, separated by ;
 		}
-        # print STDERR "$word\n";
     }
 
     close(CONFUSABLEFILE);
 }
-
 
 
 #
@@ -594,26 +605,52 @@ sub loadPartsOfSpeech
     my $partsOfSpeechFile = "partsofspeech.txt";
     if (!open(PARTSOFSPEECHFILE, "<:utf8", $partsOfSpeechFile))
     {
-            print STDERR "Could not open $partsOfSpeechFile";
-            exit;
+		print STDERR "Could not open $partsOfSpeechFile";
+		exit;
     }
 
     %partsOfSpeechHash = ();
     while (<PARTSOFSPEECHFILE>)
     {
         my $line =  $_;
-        $word =~ s/\n//g;
+        chomp($line);
 		
 		my ($n, $tag, $rule, $word, $word2) = split("\t", $line);
 
-		if ($tag ne "XREF") 
+		if ($tag ne "XREF" && $tag ne "UNC") 
 		{
-	        $word =~ s/\n//g;
+			chomp($word);
+			# just interested in first two letters of tag.
+			$tag = substr($tag, 0, 2);
 			$partsOfSpeechHash{$word} = $tag;
-			# print STDERR "$word : $tag\n";
 		}
     }
 
     close(PARTSOFSPEECHFILE);
+}
 
+
+#
+# loadFeatures: load the pre-established features database
+#
+sub loadFeatures
+{
+    my $featuresFile = "nldb.stats";
+    if (!open(FEATURESFILE, "<:encoding(latin1)", $featuresFile))
+    {
+		print STDERR "Could not open $featuresFile";
+		exit;
+    }
+
+    while (<FEATURESFILE>)
+    {
+        my $line =  $_;
+        chomp($line);
+		
+		my ($code, $count, $total, $frequency, $significance, $feature) = split("\t", $line);
+		
+		# TODO
+    }
+
+    close(FEATURESFILE);
 }
