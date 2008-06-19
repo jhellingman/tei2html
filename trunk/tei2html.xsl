@@ -2179,6 +2179,9 @@
 
             <span>
                 <xsl:call-template name="generate-id-attribute"/>
+				<xsl:if test="contains(@rend, 'hemistich(')">
+					<span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
+				</xsl:if>
                 <xsl:apply-templates/>
             </span>
         </p>
@@ -2365,7 +2368,7 @@
     </xsl:template>
 
     <xsl:template match="foreign">
-        <span><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
 
