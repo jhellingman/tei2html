@@ -152,6 +152,11 @@ p.poetry
     margin:0 10% 1.58em;
 }
 
+span.hemistich /* invisible text to achieve visual effect of hemistich indentation. */
+{
+	color: white;
+}
+
 p.line
 {
     margin:0 10%;
