@@ -4,46 +4,46 @@
 
 body
 {
-	background:	#FFFFFF;
-	font-family: "Times	New	Roman",	Times, serif;
+    background: #FFFFFF;
+    font-family: "Times New Roman", Times, serif;
 }
 
 body, a.hidden
 {
-	color: black;
+    color: black;
 }
 
-h1,	h2,	h3,	h4,	h5,	h6
+h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
 {
-	color: #001FA4;
-	font-family: Verdana, Arial, Helvetica,	sans-serif;
+    color: #001FA4;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 p.byline
 {
-	font-style: italic;
-	margin-bottom: 2em;
+    font-style: italic;
+    margin-bottom: 2em;
 }
 
 .figureHead, .noteref, span.leftnote, p.legend, .versenum, .stage
 {
-	color: #001FA4;
+    color: #001FA4;
 }
 
-.rightnote,	.pagenum, .linenum, .pagenum a
+.rightnote, .pagenum, .linenum, .pagenum a
 {
-	color: #AAAAAA;
+    color: #AAAAAA;
 }
 
-a.hidden:hover,	a.noteref:hover
+a.hidden:hover, a.noteref:hover
 {
-	color: red;
+    color: red;
 }
 
 p.dropcap:first-letter
 {
-	color: #001FA4;
-	font-weight: bold;
+    color: #001FA4;
+    font-weight: bold;
 }
 
 
