@@ -13,7 +13,7 @@
 # to be in HTML format (such as harvested from the internet).
 #
 # This tool assumes that confusion sets are already defined. Other tools will be required to construct
-# potential confusion sets, using for example the fact that certain letters or letter groups are easily confused 
+# potential confusion sets, using for example the fact that certain letters or letter groups are easily confused
 # by OCR software: {c, e}, {h, b}, {rn, m}, {ni, m}, {in, m}, etc.
 
 
@@ -34,61 +34,64 @@ use LanguageNames qw/getLanguage/;
 
 # Configurable parameters
 
-$maximumProximityDistance = 5;	# [10]  Size of context within which words are considered to be close to each other.
-$minimumCount = 10;				# [10]  Minimum number of times a feature needs to be present to be considered significant.
-$minimumSignificance = 0.1;		# [0.1] Minimum value for | P(word) - P(word | feature) | for feature to be considered relevant.
+$maximumProximityDistance = 10; # [10]  Size of context within which words are considered to be close to each other.
+$minimumCount = 10;             # [10]  Minimum number of times a feature needs to be present to be considered significant.
+$minimumSignificance = 0.1;     # [0.1] Minimum value for | P(word) - P(word | feature) | for feature to be considered relevant.
+$languagePattern = "(nl)|(af)";
+
+
 $version = "0.1 alpha";
+$confusableFile = "confusables.txt";
 
 # End of configurable parameters
 
+# test();
 main();
 
 
 
 sub main
 {
+    %dictHash = ();             # dictionary of valid words
+    %partsOfSpeechHash = ();    # part-of-speech information
 
-	$accLetter = "(\\&[A-Za-z](acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
-	$ligLetter = "(\\&[A-Za-z]{2}lig;)";
-	$specLetter = "(\\&apos;|\\&eth;|\\&ETH;|\\&thorn;|\\&THORN;|\\&alif;|\\&ayn;|\\&prime;)";
-	$letter = "(\\w|$accLetter|$ligLetter|$specLetter)";
-	$wordPattern = "($letter)+(([-']|&rsquo;|&apos;)($letter)+)*";
-	$nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
+    %confusableHash = ();       # set of confusable words
 
+    %wordHash = ();
+    %patternHoH = ();           # pattern hash of hashes
+    %pairHoH = ();              # proximity pair hash of hashes
 
-	%wordHash = ();
-	%wordFiles = ();
-	%dictHash = ();         # dictionary of valid words
-	%confusableHash = ();   # set of confusable words
-	%pairHash = ();         # proximity pairs (co-occurance of words)
-	%patternHash = ();      # patterns
-	%partsOfSpeechHash = (); # part-of-speech information 
+    my $argumentCount = 0;
+    if ($ARGV[$argumentCount] eq "-c")
+    {
+        $confusableFile = $ARGV[$argumentCount + 1];
+        $argumentCount += 2;
+    }
 
-	%wordProbabilityHash = ();
+    $inputDir = $ARGV[$argumentCount];
+    $totalFeatureCount = 0;
 
-	$inputDir = $ARGV[0];
-	$totalFeatureCount = 0;
+    print STDERR "Loading dictionaries\n";
 
-	print STDERR "Loading dictionaries\n";
+    loadDictionary();
+    loadConfusables();
+    loadPartsOfSpeech();
 
-	loadDictionary();
-	loadConfusables();
-	loadPartsOfSpeech();
+    print STDERR "Collecting words from directory $inputDir\n";
 
-	print STDERR "Collecting words from directory $inputDir\n";
+    listRecursively($inputDir);
 
-	listRecursively($inputDir);
+    printf ("VER \t%s\n", $version);
+    printf ("CONF\t%s\tMaximum Proximity Distance\n", $maximumProximityDistance);
+    printf ("CONF\t%s\tMinimum Count\n", $minimumCount);
+    printf ("CONF\t%s\tMinimum Significance\n", $minimumSignificance);
+    printf ("CONF\t%s\tLanguage Pattern\n", $languagePattern);
 
-	printf ("S\t%s\tVersion\n", $version);
-	printf ("S\t%s\tMaximum Proximity Distance\n", $maximumProximityDistance);
-	printf ("S\t%s\tMinimum Count\n", $minimumCount);
-	printf ("S\t%s\tMinimum Significance\n", $minimumSignificance);
+    report();
 
-	report();
+    print STDERR "$totalFeatureCount features in total\n";
 
-	print STDERR "$totalFeatureCount features in total\n";
-
-	printf ("X\t%s\tFeatures Counted\n", $totalFeatureCount);
+    printf ("STAT\t%s\tFeatures Counted\n", $totalFeatureCount);
 }
 
 
@@ -164,8 +167,8 @@ sub handleFile
             }
         }
 
-        # We are interested in what is likely Dutch.
-        if ($language eq "nl" || $language eq "af")
+        # We are interested in languages that match our pattern
+        if ($language =~ /$languagePattern/)
         {
             # NOTE: we don't use \w and \W here, since it gives some unexpected results
             my @words = split(/[^\pL\pN\pM-]+/, $line);
@@ -177,14 +180,14 @@ sub handleFile
                 my $word = $words[$i];
 
                 # if word in confusion set
-                if (isConfusable($word)) 
+                if (isConfusable($word))
                 {
                     countWord($word);
 
-                    for (my $j = -$maximumProximityDistance; $j < $maximumProximityDistance; $j++) 
+                    for (my $j = -$maximumProximityDistance; $j < $maximumProximityDistance; $j++)
                     {
                         my $position = $i + $j;
-                        if ($position > 0 && $position < $size && $position != $i) 
+                        if ($position > 0 && $position < $size && $position != $i)
                         {
                             countProximityPair($word, $words[$position]);
                         }
@@ -197,28 +200,28 @@ sub handleFile
 
             # Prune word list to eliminate spaces (we retain punctuation)
             my @filteredWords;
-            foreach my $word (@words) 
+            foreach my $word (@words)
             {
-                if ($word !~ /^[\pZ]+$/) 
+                if ($word !~ /^[\pZ]+$/)
                 {
                     $word =~ s/\s+//g;
                     push (@filteredWords, $word);
                 }
             }
-            
+
             my $size = @filteredWords;
             for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
             {
                 my $word = $filteredWords[$i];
 
                 # if word in confusion set
-                if (isConfusable($word)) 
+                if (isConfusable($word))
                 {
-                    $i - 1 > 0                      && countPattern2($word, $filteredWords[$i - 1], "_");   
-                    $i + 1 < $size                  && countPattern2($word, "_", $filteredWords[$i + 1]);   
+                    $i - 1 > 0                      && countPattern2($word, $filteredWords[$i - 1], "_");
+                    $i + 1 < $size                  && countPattern2($word, "_", $filteredWords[$i + 1]);
 
-                    $i - 2 > 0                      && countPattern3($word, $filteredWords[$i - 2], $filteredWords[$i - 1], "_");   
-                    $i - 1 > 0 && $i + 1 < $size    && countPattern3($word, $filteredWords[$i - 1], "_", $filteredWords[$i + 1]);   
+                    $i - 2 > 0                      && countPattern3($word, $filteredWords[$i - 2], $filteredWords[$i - 1], "_");
+                    $i - 1 > 0 && $i + 1 < $size    && countPattern3($word, $filteredWords[$i - 1], "_", $filteredWords[$i + 1]);
                     $i + 2 < $size                  && countPattern3($word, "_", $filteredWords[$i + 1], $filteredWords[$i + 2]);
                 }
             }
@@ -264,7 +267,7 @@ sub countPattern2
     my $w2 = shift;
 
     my $pattern = "$word $w1 $w2";
-    $patternHash{$pattern}++;
+    $patternHoH{$word}{"$w1 $w2"}++;
     $totalFeatureCount++;
 
     my $p1 = mapPartOfSpeech($w1);
@@ -272,10 +275,10 @@ sub countPattern2
 
     my $ppattern = "$word $p1 $p2";
 
-	if ($pattern ne $ppattern) 
-	{
-	    $patternHash{$ppattern}++;
-	}
+    if ($pattern ne $ppattern)
+    {
+        $patternHoH{$word}{"$p1 $p2"}++;
+    }
 }
 
 
@@ -293,6 +296,7 @@ sub countPattern3
 
     my $pattern = "$word $w1 $w2 $w3";
     $patternHash{$pattern}++;
+    $patternHoH{$word}{"$w1 $w2 $w3"}++;
     $totalFeatureCount++;
 
     my $p1 = mapPartOfSpeech($w1);
@@ -300,11 +304,12 @@ sub countPattern3
     my $p3 = mapPartOfSpeech($w3);
 
     my $ppattern = "$word $p1 $p2 $p3";
-	
-	if ($pattern ne $ppattern) 
-	{
-	    $patternHash{$ppattern}++;
-	}
+
+    if ($pattern ne $ppattern)
+    {
+        $patternHash{$ppattern}++;
+        $patternHoH{$word}{"$p1 $p2 $p3"}++;
+    }
 }
 
 
@@ -318,7 +323,7 @@ sub mapPartOfSpeech
 {
     my $word = shift;
 
-    if (exists $partsOfSpeechHash{$word}) 
+    if (exists $partsOfSpeechHash{$word})
     {
         return "[" . $partsOfSpeechHash{$word} . "]";
     }
@@ -340,8 +345,8 @@ sub countProximityPair
 
     if (exists $dictHash{$firstWord} && exists $dictHash{$secondWord})
     {
-		$totalFeatureCount++;
-        $pairHash{"$firstWord $secondWord"}++;
+        $totalFeatureCount++;
+        $pairHoH{$firstWord}{$secondWord}++;
     }
 }
 
@@ -353,178 +358,121 @@ sub countProximityPair
 #
 sub report
 {
-	# make STDOUT hot to enable line-based buffering.
-	select STDOUT;
-	$| = 1;
+    # make STDOUT hot to enable line-based buffering.
+    select STDOUT;
+    $| = 1;
 
-	reportWords();
-	reportPatterns();
-	reportPairs();
+    reportConfusionSets();
 }
 
 
 #
-# reportWords
+# reportConfusionSets
 #
-# Report the number of occurences and relative frequences of words in the confusion sets.
+# Report the confusion sets we have handled.
 #
-sub reportWords
+sub reportConfusionSets
 {
-    my @wordList = keys %wordHash;
-    @wordList = sort @wordList;
-    foreach my $word (@wordList)
+    my %handled = ();
+    my @confusableSetList = keys %confusableSetHash;
+    @confusableSetList = sort @confusableSetList;
+    foreach my $word (@confusableSetList)
+    {
+        if (!exists($handled{$word}))
+        {
+            my $set = $confusableSetHash{$word};
+            my $total = 0;
+
+            my @words = split(/, */, $set);
+            foreach (@words)
+            {
+                $total += exists $wordHash{$_} ? $wordHash{$_} : 0;
+            }
+
+            if ($total > $minimumCount)
+            {
+                printf ("\nSET \t%s\n", $set);
+                foreach (@words)
+                {
+                    $handled{$_} = 1;
+                    reportWord($_, $total, $set);
+                }
+            }
+        }
+    }
+}
+
+
+#
+# reportWord
+#
+sub reportWord
+{
+    my $word = shift;
+    my $total = shift;
+    my $set = shift;
+    if (exists $wordHash{$word})
     {
         my $count = $wordHash{$word};
-        if ($count >= $minimumCount) 
-        {
-			# find total for confusion set this word is in.
-			# Once we have a significant number of words of one of the set members, we are interested in all.
-			my $total = 0;
-			my $set = $confusableSetHash{$word};
-			my @words = split(/, */, $set);
-			foreach (@words) 
-			{
-				$total += $wordHash{$_};
-			}
+        my $fraction = $count / $total;
+        printf ("WORD\t%s\t%s\t%.3f\t%s\n", $count, $total, $fraction, $word);
 
-			foreach (@words) 
-			{
-				my $count = $wordHash{$_};
-				if (defined $count) 
-				{
-					my $fraction = $count / $total;
-					# print "W:\t$_\t$count\t$total\t$fraction\n";	
-					printf ("W\t%s\t%s\t%.3f\t%s\n", $count, $total, $fraction, $_);
-					$wordHash{$_} = -$count; # Indicate we have reported this word.
-				}
-			}
+        # report on patterns involving this word
+        my @words = split(/, */, $set);
+
+        my $patternHash = $patternHoH{$word};
+        my @patternList = keys %$patternHash;
+        @patternList = sort @patternList;
+        foreach my $pattern (@patternList)
+        {
+            $patternTotal = 0;
+            foreach (@words)
+            {
+                $patternTotal += exists $patternHoH{$_}{$pattern} ? $patternHoH{$_}{$pattern} : 0;
+            }
+
+            if ($patternTotal > $minimumCount)
+            {
+                if (exists $patternHoH{$word}{$pattern})
+                {
+                    my $patternCount = $patternHoH{$word}{$pattern};
+                    my $patternFraction = $patternCount / $patternTotal;
+                    my $patternSignificance = $patternFraction - $fraction;
+                    if ($patternSignificance > $minimumSignificance)
+                    {
+                        printf ("PAT \t%s\t%s\t%.3f\t%.3f\t%s\n", $patternCount, $patternTotal, $patternFraction, $patternSignificance, $pattern);
+                    }
+                }
+            }
+        }
+
+        # report on pairs involving this word
+        my $pairHash = $pairHoH{$word};
+        my @pairList = keys %$pairHash;
+        @pairList = sort @pairList;
+        foreach my $pair (@pairList)
+        {
+            $pairTotal = 0;
+            foreach (@words)
+            {
+                $pairTotal += exists $pairHoH{$_}{$pair} ? $pairHoH{$_}{$pair} : 0;
+            }
+
+            if ($pairTotal > $minimumCount)
+            {
+                if (exists $pairHoH{$word}{$pair})
+                {
+                    my $pairCount = $pairHoH{$word}{$pair};
+                    my $pairFraction = $pairCount / $pairTotal;
+                    my $pairSignificance = $pairFraction - $fraction;
+                    if ($pairSignificance > $minimumSignificance)
+                    {
+                        printf ("PAIR\t%s\t%s\t%.3f\t%.3f\t%s\n", $pairCount, $pairTotal, $pairFraction, $pairSignificance, $pair);
+                    }
+                }
+            }
         }
     }
-
-	foreach (@words) 
-	{
-		if ($wordHash{$_} < 0) 
-		{
-			$wordHash{$_} = -$wordHash{$_}; # counted everything; need information later.
-		}
-	}
-}
-
-
-#
-# reportPairs
-#
-# Report the number of occurences and relative frequences of significant proximity pairs.
-#
-sub reportPairs
-{
-    my @pairList = keys %pairHash;
-    @pairList = sort @pairList;
-    foreach my $pair (@pairList)
-    {
-        my $count = $pairHash{$pair};
-        if ($count >= $minimumCount) 
-        {
-			my ($word, $other) = split(/ /, $pair);
-			my $countWord = $wordHash{$word};
-
-			# find totals for confusion set this word is in.
-			my $total = 0;
-			my $totalWord = 0;
-			my $set = $confusableSetHash{$word};
-			my @words = split(/, */, $set);
-			foreach (@words) 
-			{
-				$total += $pairHash{$_ . " " . $other};
-				$totalWord += $wordHash{$_};
-			}
-
-			foreach (@words) 
-			{
-				my $pair = $_ . " " . $other;
-				my $count = $pairHash{$pair};
-				if (defined $count)
-				{
-					my $fraction = $count / $total;
-
-					# calculate significance of this information: | Pr($word) - Pr($word | $pair) |
-					# we are not interest in pairs that have no significance (no discriminatory ability)
-					my $wordFraction = $wordHash{$_} / ($totalWord);
-					my $significance = abs ($wordFraction - $fraction);
-					
-					if ($significance > $minimumSignificance) 
-					{
-						# print "C:\t$pair\t$count\t$total\t$fraction\t$significance\n";
-						printf ("C\t%s\t%s\t%.3f\t%.3f\t%s\n", $count, $total, $fraction, $significance, $pair);
-					}
-					$pairHash{$pair} = -$count; # Indicate we have reported this pair.
-				}
-			}
-        }
-    }
-
-	# Done with pairHash, cleanup.
-	%pairHash = ();
-}
-
-
-#
-# reportPatterns
-#
-# Report the number of occurences and relative frequences of significant patterns.
-#
-sub reportPatterns
-{
-    my @patternList = keys %patternHash;
-    @patternList = sort @patternList;
-    foreach my $pattern (@patternList)
-    {
-        my $count = $patternHash{$pattern};
-        if ($count >= $minimumCount) 
-        {
-			$pattern =~ /^(.*?) (.*)$/;
-			my $word = $1;
-			my $tail = $2;
-
-			my $countWord = $wordHash{$word};
-
-			# find totals for confusion set this word is in.
-			my $total = 0;
-			my $totalWord = 0;
-			my $set = $confusableSetHash{$word};
-			my @words = split(/, */, $set);
-			foreach (@words) 
-			{
-				$total += $patternHash{$_ . " " . $tail};
-				$totalWord += $wordHash{$_};
-			}
-
-			foreach (@words) 
-			{
-				my $pattern = $_ . " " . $tail;
-				my $count = $patternHash{$pattern};
-				if (defined $count)
-				{
-					my $fraction = $count / $total;
-
-					# calculate significance of this information: | Pr($word) - Pr($word | $pattern) |
-					# we are not interest in pairs that have no significance (no discriminatory ability)
-					my $wordFraction = $wordHash{$_} / ($totalWord);
-					my $significance = abs ($wordFraction - $fraction);
-					
-					if ($significance > $minimumSignificance) 
-					{ 
-						# print "P:\t$pattern\t$count\t$total\t$fraction\t$significance\n";			
-						printf ("P\t%s\t%s\t%.3f\t%.3f\t%s\n", $count, $total, $fraction, $significance, $pattern);
-					}
-					$patternHash{$pair} = -$count; # Indicate we have reported this pair.
-				}
-			}
-        }
-    }
-
-	# Done with patternHash, cleanup.
-	%patternHash = ();
 }
 
 
@@ -537,8 +485,8 @@ sub loadDictionary
     my $dictFile = "C:\\bin\\dic\\nl-1900.dic";
     if (!open(DICTFILE, "<:utf8", $dictFile))
     {
-		print STDERR "Could not open $dictFile";
-		exit;
+        print STDERR "Could not open $dictFile";
+        exit;
     }
 
     %dictHash = ();
@@ -554,7 +502,7 @@ sub loadDictionary
 
 #
 # loadConfusables: load set of confusable words.
-# 
+#
 # The format for this file is simple: each line contains the confusable words, separated by comma's.
 #
 # For example:
@@ -564,26 +512,25 @@ sub loadDictionary
 #
 sub loadConfusables
 {
-    my $confusableFile = "confusables.txt";
     if (!open(CONFUSABLEFILE, "<:encoding(latin1)", $confusableFile))
     {
-		print STDERR "Could not open $confusableFile";
-		exit;
+        print STDERR "Could not open $confusableFile";
+        exit;
     }
 
-	%confusableSetHash = ();
+    %confusableSetHash = ();
     %confusableHash = ();
     while (<CONFUSABLEFILE>)
     {
         my $set =  $_;
-		chomp($set);
+        chomp($set);
 
-		my @words = split(/, */, $set);
-		foreach my $word (@words) 
-		{
-			$confusableHash{$word} = 1;
-			$confusableSetHash{$word} = $set; # TODO: words can be in more than one set! Handle this by appending sets, separated by ;
-		}
+        my @words = split(/, */, $set);
+        foreach my $word (@words)
+        {
+            $confusableHash{$word} = 1;
+            $confusableSetHash{$word} = $set; # TODO: words can be in more than one set! Handle this by appending sets, separated by ;
+        }
     }
 
     close(CONFUSABLEFILE);
@@ -592,21 +539,21 @@ sub loadConfusables
 
 #
 # loadPartsOfSpeech: load the POS-database.
-# 
+#
 # The format is a tab-separated file, with the following fields
-#	line	- The line in the source database this information is based on (ignored)	
-#	tag		- The POS-tag determined for this word
-#	rule	- The rule the tagging software used to determine the POS-tag. (ignored)
-#	word	- The word-form thus tagged.
-#	word2	- Only used when the original data contained an cross reference (ignored)
+#   line    - The line in the source database this information is based on (ignored)
+#   tag     - The POS-tag determined for this word
+#   rule    - The rule the tagging software used to determine the POS-tag. (ignored)
+#   word    - The word-form thus tagged.
+#   word2   - Only used when the original data contained an cross reference (ignored)
 #
 sub loadPartsOfSpeech
 {
     my $partsOfSpeechFile = "partsofspeech.txt";
-    if (!open(PARTSOFSPEECHFILE, "<:utf8", $partsOfSpeechFile))
+    if (!open(PARTSOFSPEECHFILE, "<:encoding(latin1)", $partsOfSpeechFile))
     {
-		print STDERR "Could not open $partsOfSpeechFile";
-		exit;
+        print STDERR "Could not open $partsOfSpeechFile";
+        exit;
     }
 
     %partsOfSpeechHash = ();
@@ -614,16 +561,16 @@ sub loadPartsOfSpeech
     {
         my $line =  $_;
         chomp($line);
-		
-		my ($n, $tag, $rule, $word, $word2) = split("\t", $line);
 
-		if ($tag ne "XREF" && $tag ne "UNC") 
-		{
-			chomp($word);
-			# just interested in first two letters of tag.
-			$tag = substr($tag, 0, 2);
-			$partsOfSpeechHash{$word} = $tag;
-		}
+        my ($n, $tag, $rule, $word, $word2) = split("\t", $line);
+
+        if ($tag ne "XREF" && $tag ne "UNC")
+        {
+            chomp($word);
+            # just interested in first two letters of tag.
+            $tag = substr($tag, 0, 2);
+            $partsOfSpeechHash{$word} = $tag;
+        }
     }
 
     close(PARTSOFSPEECHFILE);
@@ -638,19 +585,52 @@ sub loadFeatures
     my $featuresFile = "nldb.stats";
     if (!open(FEATURESFILE, "<:encoding(latin1)", $featuresFile))
     {
-		print STDERR "Could not open $featuresFile";
-		exit;
+        print STDERR "Could not open $featuresFile";
+        exit;
     }
 
     while (<FEATURESFILE>)
     {
         my $line =  $_;
         chomp($line);
-		
-		my ($code, $count, $total, $frequency, $significance, $feature) = split("\t", $line);
-		
-		# TODO
+
+        my ($code, $count, $total, $frequency, $significance, $feature) = split("\t", $line);
+
+        # TODO
     }
 
     close(FEATURESFILE);
+}
+
+
+
+#
+# combineProbabilities
+#
+# combining probabilities, using:  ab / ( ab + (1-a)(1-b)), which is a very simple
+# approximation, assuming that all probabilities are independent.
+#
+sub combineProbabilities
+{
+    my $product1 = 1;
+    my $product2 = 1;
+    foreach my $probability (@_)
+    {
+        $product1 *= $probability;
+        $product2 *= (1 - $probability);
+    }
+    return $product1 / ($product1 + $product2);
+}
+
+
+sub testCombineProbabilities
+{
+    print combineProbabilities(0.333) . "\n";
+    print combineProbabilities(0.25, 0.25) . "\n";
+    print combineProbabilities(0.25, 0.25, 0.25) . "\n";
+    print combineProbabilities(0.333, 0.333) . "\n";
+    print combineProbabilities(0.5, 0.5) . "\n";
+    print combineProbabilities(0.5, 0.5, 0.5, 0.5) . "\n";
+    print combineProbabilities(0.75, 0.75) . "\n";
+    print combineProbabilities(0.9, 0.9, 0.9) . "\n";
 }

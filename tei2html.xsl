@@ -1179,7 +1179,6 @@
         </xsl:if>
     </xsl:template>
 
-
     <!-- div0 -->
 
     <xsl:template match="div0">
@@ -1223,8 +1222,13 @@
 
     <!-- div1 -->
 
-    <xsl:template match="div1">
+	<xsl:template match="div1[@type='TranscriberNote']">
+		<div class="transcribernote">
+			 <xsl:apply-templates/>
+		</div>
+	</xsl:template>
 
+    <xsl:template match="div1">
         <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
         <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
             <xsl:if test="..//note[(@place='foot' or not(@place)) and not(ancestor::div1)]">
@@ -1262,7 +1266,6 @@
             </xsl:if>
         </div>
     </xsl:template>
-
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
