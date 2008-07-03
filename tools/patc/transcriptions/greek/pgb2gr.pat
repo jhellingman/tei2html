@@ -343,7 +343,8 @@
 
 "v"		p "&digamma;"
 "[f]"		p "&digamma;"
-"[j]"		p "</GR>j<GR>";
+"[j]"		p "&jgr;";
+
 
 %% warn for illegal characters
 
