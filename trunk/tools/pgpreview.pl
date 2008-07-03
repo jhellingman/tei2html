@@ -149,6 +149,9 @@ sub pgdp2sgml
 	$string =~ s/\[``([a-zA-Z])\]/\&\1dgrave;/g;		# double grave
 
 	$string =~ s/\[\^ä\]/\&aumlcirc;/g;					# a with dieresis and circumflex (FRANCK: using ä)
+	$string =~ s/\[\^ö\]/\&oumlcirc;/g;					# o with dieresis and circumflex (FRANCK: using ö)
+	$string =~ s/\[\^ü\]/\&uumlcirc;/g;					# u with dieresis and circumflex (FRANCK: using ü)
+
 	$string =~ s/\[\=á\]/\&amacracu;/g;					# a with macron and acute (FRANCK: inverted order!)
 
 	# various odd letters: (As used in Franck's Etymologisch Woordenboek)
@@ -164,6 +167,7 @@ sub pgdp2sgml
 
 	$string =~ s/\[-b\]/\&bstroke;/g;					# b with stroke through stem
 
+	$string =~ s/\[@k\]/\&kcirc;/g;						# k with circumflex
 
 	return $string;
 }

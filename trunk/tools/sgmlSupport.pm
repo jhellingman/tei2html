@@ -1370,6 +1370,8 @@ BEGIN
 	$ent{"abregr"}		= chr(0x3b1) . chr(0x306); # ")a"
 	$ent{"Abregr"}		= chr(0x391) . chr(0x306); # ")A"
 
+	$ent{"jgr"}			= chr(0x3f3); # Greek j.
+
 	###############################################################################
 	# Hebrew
 
@@ -1514,6 +1516,12 @@ BEGIN
 
 	# Requiring combining diacritics
 
+	$ent{"Acaron"}	    = "A" . chr(0x030C); # A with caron
+	$ent{"acaron"}	    = "a" . chr(0x030C); # a with caron
+
+	$ent{"Jbreve"}	    = "J" . chr(0x0306); # J with breve
+	$ent{"jbreve"}	    = "j" . chr(0x0306); # j with breve
+
 	$ent{"Acedil"}	    = "A" . chr(0x0327); # A with cedille
 	$ent{"acedil"}	    = "a" . chr(0x0327); # a with cedille
 	$ent{"Ecedil"}	    = "E" . chr(0x0327); # E with cedille
@@ -1524,6 +1532,8 @@ BEGIN
 	$ent{"ocedil"}	    = "o" . chr(0x0327); # o with cedille
 	$ent{"Ucedil"}	    = "U" . chr(0x0327); # U with cedille
 	$ent{"ucedil"}	    = "u" . chr(0x0327); # u with cedille
+	$ent{"Zcedil"}	    = "Z" . chr(0x0327); # Z with cedille
+	$ent{"zcedil"}	    = "z" . chr(0x0327); # z with cedille
 
 	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
 	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
@@ -1547,12 +1557,16 @@ BEGIN
 	$ent{"mdota"}		= "m" . chr(0x0307); # m with dot above
 	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
 	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
-	$ent{"zdota"}		= "z" . chr(0x0307); # r with dot above
+	$ent{"zdota"}		= "z" . chr(0x0307); # z with dot above
+	$ent{"tdota"}		= "t" . chr(0x0307); # t with dot above
 
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
 	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
 	$ent{"hdotb"}		= "h" . chr(0x0323); # h with dot below
 	$ent{"Hdotb"}		= "H" . chr(0x0323); # H with dot below
+	$ent{"idotb"}		= "i" . chr(0x0323); # i with dot below
+	$ent{"Idotb"}		= "I" . chr(0x0323); # I with dot below
+	$ent{"Ldotb"}		= "L" . chr(0x0323); # L with dot below
 	$ent{"ldotb"}		= "l" . chr(0x0323); # 1 with dot below
 	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
 	$ent{"udotb"}		= "u" . chr(0x0323); # u with dot below
@@ -1599,6 +1613,12 @@ BEGIN
 	$ent{"udgrave"}		= "u" . chr(0x030F); # u with double grave
 
 	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
+
+	$ent{"Kcirc"}		= "K" . chr(0x0302); # K with circumflex
+	$ent{"kcirc"}		= "k" . chr(0x0302); # k with circumflex
+	$ent{"Rcirc"}		= "R" . chr(0x0302); # R with circumflex
+	$ent{"rcirc"}		= "r" . chr(0x0302); # r with circumflex
+
 
 	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
 
