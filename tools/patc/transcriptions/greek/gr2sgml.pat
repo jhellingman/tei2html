@@ -174,6 +174,13 @@
 ">=i"       p "&iscgr;"
 ">=I"       p "&Iscgr;"
 
+"\"i"		p "&idigr;"
+"\"I"		p "&Idigr;"
+"`\"i"		p "&igdgr;"
+"'\"i"		p "&iadgr;"
+"=\"i"		p "&icdgr;"
+
+
 "k"         p "&kgr;"
 "K"         p "&Kgr;"
 
@@ -253,6 +260,13 @@
 "<=U"       p "&Urcgr;"
 ">=u"       p "&uscgr;"
 ">=U"       p "&Uscgr;"
+
+"\"u"		p "&udigr;"
+"\"U"		p "&Udigr;"
+"`\"u"		p "&ugdgr;"
+"'\"u"		p "&uadgr;"
+"=\"u"		p "&ucdgr;"
+
 
 "f"         p "&phgr;"
 "F"         p "&PHgr;"

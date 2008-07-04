@@ -232,6 +232,12 @@
 "i)="		p ">=i"
 "I)="		p ">=I"
 
+"i+"		p "\"i"
+"I+"		p "\"I"
+"i+\\"		p "`\"i"
+"i+/"		p "'\"i"
+"i+="		p "=\"i"
+
 "k"		p "k"
 "K"		p "K"
 
@@ -311,6 +317,12 @@
 "U(="		p "<=U"
 "u)="		p ">=u"
 "U)="		p ">=U"
+
+"u+"		p "\"u"
+"U+"		p "\"U"
+"u+\\"		p "`\"u"
+"u+/"		p "'\"u"
+"u+="		p "=\"u"
 
 "f"		p "f"
 "F"		p "F"
@@ -423,15 +435,16 @@
 
 %% warn for illegal characters
 
-"V"         e "illegal character V"
-"J"         e "illegal character C"
-"["         e "illegal character ["
+"V"         p "</GR><span class=error>V</span><GR>"
+"J"         p "</GR><span class=error>C</span><GR>"
+"["         p "</GR><span class=error>[</span><GR>"
 
-"("         e "stand alone ("
-")"         e "stand alone )"
-"/"         e "stand alone /"
-"\\"        e "stand alone \\"
-"+"         e "stand alone +"
-"="         e "stand alone ="
+"("         p "</GR><span class=error>(</span><GR>"
+")"         p "</GR><span class=error>)</span><GR>"
+"/"         p "</GR><span class=error>/</span><GR>"
+"\\"        p "</GR><span class=error>\\</span><GR>"
+"+"         p "</GR><span class=error>+</span><GR>"
+"="         p "</GR><span class=error>=</span><GR>"
+
 
 @end

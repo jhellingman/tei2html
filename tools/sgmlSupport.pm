@@ -1218,6 +1218,12 @@ BEGIN
 	$ent{"iscgr"}		= chr(0x1f36); # ">=i"
 	$ent{"Iscgr"}		= chr(0x1f3e); # ">=I"
 
+	$ent{"idigr"}		= chr(0x03ca); # "\"i"
+	$ent{"Idigr"}		= chr(0x03aa); # "\"I"
+	$ent{"igdgr"}		= chr(0x1fd2); # "`\"i"
+	$ent{"iadgr"}		= chr(0x1fd3); # "'\"i"
+	$ent{"icdgr"}		= chr(0x1fd7); # "=\"i"
+	
 	$ent{"kgr"}			= chr(0x3ba); # "k"
 	$ent{"Kgr"}			= chr(0x39a); # "K"
 
@@ -1297,6 +1303,12 @@ BEGIN
 	$ent{"Urcgr"}		= chr(0x1f5f); # "<=U"
 	$ent{"uscgr"}		= chr(0x1f56); # ">=u"
 	$ent{"Uscgr"}		= chr(0x3a5) . chr(0x313) . chr(0x342); # ">=U"
+
+	$ent{"udigr"}		= chr(0x03cb); # "\"u"
+	$ent{"Udigr"}		= chr(0x03ab); # "\"U"
+	$ent{"ugdgr"}		= chr(0x1fe2); # "`\"u"
+	$ent{"uadgr"}		= chr(0x1fe3); # "'\"u"
+	$ent{"ucdgr"}		= chr(0x1fe7); # "=\"u"
 
 	$ent{"phgr"}		= chr(0x3c6); # "f"
 	$ent{"PHgr"}		= chr(0x3a6); # "F"

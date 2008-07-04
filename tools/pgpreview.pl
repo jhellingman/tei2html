@@ -36,7 +36,10 @@ sub main
 		}
 		else
 		{
-			print "\n\n<p>" . handleParagraph($paragraph);
+			if ($paragraph ne "") 
+			{
+				print "\n\n<p>" . handleParagraph($paragraph);
+			}
 			$paragraph = "";
 		}
 	}
@@ -109,6 +112,10 @@ sub handleParagraph
 
 	$paragraph = utf2sgml($paragraph);
 
+	# Trim superflous spaces
+	$paragraph =~ s/[\t ]+/ /;
+	$paragraph =~ s/^ +//;
+	$paragraph =~ s/ +$//;
 
 	return $paragraph;
 }
@@ -154,6 +161,9 @@ sub pgdp2sgml
 
 	$string =~ s/\[\=á\]/\&amacracu;/g;					# a with macron and acute (FRANCK: inverted order!)
 
+	# Guilder sign
+	$string =~ s/\[f\]/\&florin;/g;						# guilder sign.
+
 	# various odd letters: (As used in Franck's Etymologisch Woordenboek)
 	$string =~ s/\[ng\]/\&eng;/g;						# eng
 	$string =~ s/\[NG\]/\&ENG;/g;						# ENG
@@ -185,6 +195,7 @@ sub printHtmlHead
 	print ".sc { font-variant:small-caps; }\n";
 	print ".ex { letter-spacing:0.2em; }\n";
 	print ".error { background-color: #FF8566; font-weight: bold; }\n";
+	print ".xref { background-color: #FFFF8C; }\n";
 	print "</style>\n";
 	print "</head>\n";
 	print "<body>\n";
