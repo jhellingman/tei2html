@@ -167,7 +167,7 @@ sub pgdp2sgml
 
 	$string =~ s/\[-b\]/\&bstroke;/g;					# b with stroke through stem
 
-	$string =~ s/\[@k\]/\&kcirc;/g;						# k with circumflex
+	$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex
 
 	return $string;
 }
