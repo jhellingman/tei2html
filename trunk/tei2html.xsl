@@ -1412,6 +1412,17 @@
         <div class="table">
             <xsl:call-template name="setHtmlLangAttribute"/>
 
+			<xsl:attribute name="class">	
+				<xsl:choose>
+					<xsl:when test="contains(@rend, 'align(center)')">table centertable</xsl:when>
+					<xsl:otherwise>table</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+
+			<xsl:if test="contains(@rend, 'width(')">
+				<xsl:attribute name="style">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
+			</xsl:if>
+
             <xsl:apply-templates select="head" mode="tablecaption"/>
 
             <table>
@@ -1421,9 +1432,6 @@
                 </xsl:if>
 
                 <xsl:if test="contains(@rend, 'width(')">
-                    <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
-                </xsl:if>
-                <xsl:if test="not(contains(@rend, 'width('))">
                     <xsl:attribute name="width">100%</xsl:attribute>
                 </xsl:if>
 

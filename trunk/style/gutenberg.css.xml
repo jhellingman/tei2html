@@ -326,6 +326,11 @@ p.footnote .label
     font-size: 80%;
 }
 
+.centertable
+{
+	/* center the table */
+	margin: 0px auto; 
+}
 
 .poem
 {
