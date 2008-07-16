@@ -170,7 +170,7 @@ a note. We also have a reference to the <ref target="ch05">next chapter</ref>. I
 
 
 <p>
-<table rend="width(40%)">
+<table rend="width(40%) align(center)">
 	<head>Head above table.</head>
 	<row>
 		<cell role="label">Name</cell>	
