@@ -1,14 +1,28 @@
 # pgpp.pl
 
+use SgmlSupport qw/pgdp2sgml/;
+
+
 $file = $ARGV[0];
+$useExtensions = 0;
+
+if ($file eq "-x") 
+{
+	$useExtensions = 1;
+	$file = $ARGV[1];
+	print STDERR "USING EXTENSIONS FOR FRANCK!\n";
+}
+
 
 open(INPUTFILE, $file) || die("Could not open input file $file");
 
 
 while (<INPUTFILE>)
 {
-	# Replace ampersands:
-	$_ =~ s/\&/\&amp;/g;
+	# Replace ampersands (if they are not likely entities):
+	$_ =~ s/\& /\&amp; /g;
+	$_ =~ s/\&$/\&amp;/g;
+	$_ =~ s/\&c\. /\&amp;c. /g;
 
 	# Replace PGDP page-separators (preserving proofers):
 	# $_ =~ s/-*File: 0*([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
@@ -41,8 +55,8 @@ while (<INPUTFILE>)
 
 
 	# Replace special accented letters
-	$_ =~ s/\[=([aieouAIEOU])\]/\&\1macr;/g;
-
+	# $_ =~ s/\[=([aieouAIEOU])\]/\&\1macr;/g;
+	$_ = pgdp2sgml($_, $useExtensions);
 
 	print;
 }

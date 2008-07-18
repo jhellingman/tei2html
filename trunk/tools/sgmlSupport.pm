@@ -3,7 +3,7 @@ package SgmlSupport;
 
 require Exporter;
 @ISA = qw(Exporter);
-@EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml);
+@EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml pgdp2sgml);
 
 
 BEGIN
@@ -1528,11 +1528,81 @@ BEGIN
 
 	# Requiring combining diacritics
 
-	$ent{"Acaron"}	    = "A" . chr(0x030C); # A with caron
-	$ent{"acaron"}	    = "a" . chr(0x030C); # a with caron
+	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
+
+	$ent{"Kcirc"}		= "K" . chr(0x0302); # K with circumflex
+	$ent{"kcirc"}		= "k" . chr(0x0302); # k with circumflex
+	$ent{"Rcirc"}		= "R" . chr(0x0302); # R with circumflex
+	$ent{"rcirc"}		= "r" . chr(0x0302); # r with circumflex
+	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
+
+	$ent{"gtilde"}		= "g" . chr(0x0303); # g with tilde
+	$ent{"mtilde"}		= "m" . chr(0x0303); # m with tilde
+	$ent{"qtilde"}		= "q" . chr(0x0303); # q with tilde
+	$ent{"rtilde"}		= "r" . chr(0x0303); # r with tilde
+	$ent{"stilde"}		= "s" . chr(0x0303); # s with tilde
+	$ent{"ltilde"}		= "l" . chr(0x0303); # s with tilde
+
+	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
+	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
+	$ent{"nmacr"}		= "n" . chr(0x0304); # n with macron
 
 	$ent{"Jbreve"}	    = "J" . chr(0x0306); # J with breve
 	$ent{"jbreve"}	    = "j" . chr(0x0306); # j with breve
+
+	$ent{"adota"}		= "a" . chr(0x0307); # a with dot above
+	$ent{"Adota"}		= "A" . chr(0x0307); # A with dot above
+	$ent{"edota"}		= "e" . chr(0x0307); # e with dot above
+	$ent{"Edota"}		= "E" . chr(0x0307); # E with dot above
+	$ent{"mdota"}		= "m" . chr(0x0307); # m with dot above
+	$ent{"ndota"}		= "n" . chr(0x0307); # n with dot above
+	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
+	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
+	$ent{"zdota"}		= "z" . chr(0x0307); # z with dot above
+	$ent{"tdota"}		= "t" . chr(0x0307); # t with dot above
+
+	$ent{"ruml"}	    = "r" . chr(0x0308); # r with diaresis
+
+	$ent{"Acaron"}	    = "A" . chr(0x030C); # A with caron
+	$ent{"acaron"}	    = "a" . chr(0x030C); # a with caron
+
+	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
+	$ent{"idgrave"}		= "i" . chr(0x030F); # i with double grave
+	$ent{"udgrave"}		= "u" . chr(0x030F); # u with double grave
+
+	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
+	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
+	$ent{"cdotb"}		= "c" . chr(0x0323); # c with dot below
+	$ent{"hdotb"}		= "h" . chr(0x0323); # h with dot below
+	$ent{"Hdotb"}		= "H" . chr(0x0323); # H with dot below
+	$ent{"idotb"}		= "i" . chr(0x0323); # i with dot below
+	$ent{"Idotb"}		= "I" . chr(0x0323); # I with dot below
+	$ent{"Ldotb"}		= "L" . chr(0x0323); # L with dot below
+	$ent{"ldotb"}		= "l" . chr(0x0323); # 1 with dot below
+	$ent{"mdotb"}		= "m" . chr(0x0323); # m with dot below
+	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
+	$ent{"udotb"}		= "u" . chr(0x0323); # u with dot below
+	$ent{"Udotb"}		= "U" . chr(0x0323); # U with dot below
+	$ent{"wdotb"}		= "w" . chr(0x0323); # w with dot below
+	$ent{"zdotb"}		= "z" . chr(0x0323); # z with dot below
+	$ent{"Zdotb"}		= "Z" . chr(0x0323); # Z with dot below
+
+	$ent{"lumlb"}		= "l" . chr(0x0324); # l with diaresis below
+	$ent{"Lumlb"}		= "L" . chr(0x0324); # L with diaresis below
+	$ent{"oumlb"}		= "o" . chr(0x0324); # o with diaresis below
+	$ent{"uumlb"}		= "u" . chr(0x0324); # u with diaresis below
+	$ent{"tumlb"}		= "t" . chr(0x0324); # t with diaresis below
+	$ent{"Tumlb"}		= "T" . chr(0x0324); # T with diaresis below
+	$ent{"sumlb"}		= "s" . chr(0x0324); # s with diaresis below
+	$ent{"Sumlb"}		= "S" . chr(0x0324); # S with diaresis below
+	$ent{"zumlb"}		= "z" . chr(0x0324); # z with diaresis below
+
+	$ent{"oudb"}		= "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
+	$ent{"oubb"}		= "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
+
+	$ent{"eringb"}		= "e" . chr(0x0325); # e with ring below
+
+	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
 
 	$ent{"Acedil"}	    = "A" . chr(0x0327); # A with cedille
 	$ent{"acedil"}	    = "a" . chr(0x0327); # a with cedille
@@ -1547,58 +1617,7 @@ BEGIN
 	$ent{"Zcedil"}	    = "Z" . chr(0x0327); # Z with cedille
 	$ent{"zcedil"}	    = "z" . chr(0x0327); # z with cedille
 
-	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
-	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
-
-	$ent{"lumlb"}		= "l" . chr(0x0324); # l with umlaut below
-	$ent{"Lumlb"}		= "L" . chr(0x0324); # L with umlaut below
-
-	$ent{"gtilde"}		= "g" . chr(0x0303); # g with tilde
-	$ent{"mtilde"}		= "m" . chr(0x0303); # m with tilde
-	$ent{"qtilde"}		= "q" . chr(0x0303); # q with tilde
-	$ent{"rtilde"}		= "r" . chr(0x0303); # r with tilde
-	$ent{"stilde"}		= "s" . chr(0x0303); # s with tilde
-	$ent{"ltilde"}		= "l" . chr(0x0303); # s with tilde
-
-	$ent{"gcomma"}		= "g" . chr(0x0326); # g with comma below
-
-	$ent{"adota"}		= "a" . chr(0x0307); # a with dot above
-	$ent{"Adota"}		= "A" . chr(0x0307); # A with dot above
-	$ent{"edota"}		= "e" . chr(0x0307); # e with dot above
-	$ent{"Edota"}		= "E" . chr(0x0307); # E with dot above
-	$ent{"mdota"}		= "m" . chr(0x0307); # m with dot above
-	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
-	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
-	$ent{"zdota"}		= "z" . chr(0x0307); # z with dot above
-	$ent{"tdota"}		= "t" . chr(0x0307); # t with dot above
-
-	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
-	$ent{"edotb"}		= "e" . chr(0x0323); # e with dot below
-	$ent{"hdotb"}		= "h" . chr(0x0323); # h with dot below
-	$ent{"Hdotb"}		= "H" . chr(0x0323); # H with dot below
-	$ent{"idotb"}		= "i" . chr(0x0323); # i with dot below
-	$ent{"Idotb"}		= "I" . chr(0x0323); # I with dot below
-	$ent{"Ldotb"}		= "L" . chr(0x0323); # L with dot below
-	$ent{"ldotb"}		= "l" . chr(0x0323); # 1 with dot below
-	$ent{"odotb"}		= chr(0x1ECD); # o with dot below
-	$ent{"udotb"}		= "u" . chr(0x0323); # u with dot below
-	$ent{"Udotb"}		= "U" . chr(0x0323); # U with dot below
-	$ent{"wdotb"}		= "w" . chr(0x0323); # w with dot below
-	$ent{"zdotb"}		= "z" . chr(0x0323); # z with dot below
-	$ent{"Zdotb"}		= "Z" . chr(0x0323); # Z with dot below
-
-	$ent{"oumlb"}		= "o" . chr(0x0324); # o with diaresis below
-	$ent{"uumlb"}		= "u" . chr(0x0324); # u with diaresis below
-	$ent{"tumlb"}		= "t" . chr(0x0324); # t with diaresis below
-	$ent{"Tumlb"}		= "T" . chr(0x0324); # T with diaresis below
-	$ent{"sumlb"}		= "s" . chr(0x0324); # s with diaresis below
-	$ent{"Sumlb"}		= "S" . chr(0x0324); # S with diaresis below
-	$ent{"zumlb"}		= "z" . chr(0x0324); # z with diaresis below
-
-	$ent{"oudb"}		= "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
-	$ent{"oubb"}		= "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
-
-	$ent{"ubowb"}		= "u" . chr(0x032F); # u with bow below (inverted breve)
+	$ent{"ucircb"}		= "u" . chr(0x032D); # u with circumflex below
 
 	$ent{"abreveb"}		= "a" . chr(0x032E); # a with breve below
 	$ent{"Abreveb"}		= "A" . chr(0x032E); # A with breve below
@@ -1606,10 +1625,12 @@ BEGIN
 	$ent{"Ebreveb"}		= "E" . chr(0x032E); # E with breve below
 	$ent{"obreveb"}		= "o" . chr(0x032E); # o with breve below
 	$ent{"Obreveb"}		= "O" . chr(0x032E); # O with breve below
+	$ent{"ibreveb"}		= "i" . chr(0x032E); # i with breve below
+	$ent{"ubreveb"}		= "u" . chr(0x032E); # u with breve below
+
+	$ent{"ubowb"}		= "u" . chr(0x032F); # u with bow below (inverted breve)
 
 	$ent{"icircb"}		= "i" . chr(0x032D); # i with circumflex below
-
-	$ent{"eringb"}		= "e" . chr(0x0325); # e with ring below
 
 	$ent{"ptildeb"}		= "p" . chr(0x0330); # p with tilde below
 
@@ -1620,22 +1641,8 @@ BEGIN
 	$ent{"zbarb"}		= "z" . chr(0x0331); # z with macron below
 	$ent{"Zbarb"}		= "Z" . chr(0x0331); # Z with macron below
 
-	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
-	$ent{"idgrave"}		= "i" . chr(0x030F); # i with double grave
-	$ent{"udgrave"}		= "u" . chr(0x030F); # u with double grave
-
-	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
-
-	$ent{"Kcirc"}		= "K" . chr(0x0302); # K with circumflex
-	$ent{"kcirc"}		= "k" . chr(0x0302); # k with circumflex
-	$ent{"Rcirc"}		= "R" . chr(0x0302); # R with circumflex
-	$ent{"rcirc"}		= "r" . chr(0x0302); # r with circumflex
-
-
-	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
-
 	# Using stroke-through overlays: (was actually not needed)
-	$ent{"bstroke"}		= chr(0x0180); # b with stroke through stem
+	$ent{"bstrok"}		= chr(0x0180); # b with stroke through stem
 	$ent{"bbar"}		= chr(0x0180); # b with stroke through stem
 
 
@@ -1856,4 +1863,76 @@ sub utf2sgml
 		}
 	}
 	return join('', @chars);
+}
+
+
+
+
+#
+# Handle special letters in the coding system as used on PGDP.
+#
+sub pgdp2sgml
+{
+	my $string = shift;
+	my $useExtensions = shift;
+
+	# Accents above:
+	$string =~ s/\[\/([a-zA-Z])\]/\&\1acute;/g;			# acute
+	$string =~ s/\[\\([a-zA-Z])\]/\&\1grave;/g;			# grave
+	$string =~ s/\[\^([a-zA-Z])\]/\&\1circ;/g;			# circumflex
+	$string =~ s/\[\"([a-zA-Z])\]/\&\1uml;/g;			# dieresis
+	$string =~ s/\[~([a-zA-Z])\]/\&\1tilde;/g;			# tilde
+	$string =~ s/\[=([a-zA-Z])\]/\&\1macr;/g;			# macron
+	$string =~ s/\[\)([a-zA-Z])\]/\&\1breve;/g;			# breve
+	$string =~ s/\[\.([a-zA-Z])\]/\&\1dota;/g;			# dot above
+	$string =~ s/\[[>v]([a-zA-Z])\]/\&\1caron;/g;		# caron / hajek
+
+	# Accents below:
+	$string =~ s/\[([a-zA-Z])\.\]/\&\1dotb;/g;			# dot below
+	$string =~ s/\[([a-zA-Z]),\]/\&\1cedil;/g;			# cedilla
+	$string =~ s/\[([a-zA-Z])\)]/\&\1breveb;/g;			# breve below
+	$string =~ s/\[([a-zA-Z])\^]/\&\1circb;/g;			# circumflex below
+
+	# Ligatures with accents
+	$string =~ s/\[\^(ae|æ)\]/\&aecirc;/g;				# ae with circumflex (FRANCK: using æ)
+
+	# Double accents
+	$string =~ s/\[\)=([a-zA-Z])\]/\&\1macrbrev;/g;		# macron and breve
+	$string =~ s/\[\^\"([a-zA-Z])\]/\&\1umlcirc;/g;		# dieresis and circumflex
+
+	$string =~ s/\[``([a-zA-Z])\]/\&\1dgrave;/g;		# double grave
+
+	# Guilder sign
+	$string =~ s/\[f\]/\&florin;/g;						# guilder sign.
+
+	# various odd letters: (As used in Franck's Etymologisch Woordenboek)
+	$string =~ s/\[ng\]/\&eng;/g;						# eng
+	$string =~ s/\[NG\]/\&ENG;/g;						# ENG
+	$string =~ s/\[zh\]/\&ezh;/g;						# ezh
+	$string =~ s/\[ZH\]/\&EZH;/g;						# EZH
+	$string =~ s/\[sh\]/\&esh;/g;						# esh
+	$string =~ s/\[SH\]/\&ESH;/g;						# ESH
+
+	# Letters with strokes
+	$string =~ s/\[-b\]/\&bstrok;/g;					# b with stroke through stem
+	$string =~ s/\[-L\]/\&Lstrok;/g;					# L with stroke through stem
+	$string =~ s/\[-l\]/\&lstrok;/g;					# l with stroke through stem
+
+	if ($useExtensions == 1)  # Extensions used for FRANCK
+	{
+		$string =~ s/\[°([a-zA-Z])\]/\&\1ring;/g;			# ring (FRANCK: using degree sign)
+
+		$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex (FRANCK: k with flag on tail)
+
+		$string =~ s/\[x\]/\&khgr;/g;						# FRANCK: Greek chi in Latin context
+		$string =~ s/\[e\]/\&schwa;/g;						# FRANCK: schwa
+
+		$string =~ s/\[\^ä\]/\&aumlcirc;/g;					# a with dieresis and circumflex (FRANCK: using ä)
+		$string =~ s/\[\^ö\]/\&oumlcirc;/g;					# o with dieresis and circumflex (FRANCK: using ö)
+		$string =~ s/\[\^ü\]/\&uumlcirc;/g;					# u with dieresis and circumflex (FRANCK: using ü)
+
+		$string =~ s/\[\=á\]/\&amacracu;/g;					# a with macron and acute (FRANCK: inverted order!)
+	}
+
+	return $string;
 }

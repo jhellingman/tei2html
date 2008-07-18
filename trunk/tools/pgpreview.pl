@@ -1,6 +1,6 @@
 # pgpreview.pl -- Create simple HTML preview of proofed pages.
 
-use SgmlSupport qw/sgml2utf utf2sgml/;
+use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 
 
 
@@ -12,6 +12,14 @@ main();
 sub main
 {
 	my $file = $ARGV[0];
+	my $useExtensions = 0;
+
+	if ($file eq "-x") 
+	{
+		$useExtensions = 1;
+		$file = $ARGV[1];
+		print STDERR "USING EXTENSIONS FOR FRANCK!\n";
+	}
 
 	open(INPUTFILE, $file) || die("Could not open input file $file");
 
@@ -25,7 +33,7 @@ sub main
 
 		if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) 
 		{
-			print "\n\n<p>" . handleParagraph($paragraph);
+			print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
 			print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
 			$paragraph = "";
 		}
@@ -38,7 +46,7 @@ sub main
 		{
 			if ($paragraph ne "") 
 			{
-				print "\n\n<p>" . handleParagraph($paragraph);
+				print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
 			}
 			$paragraph = "";
 		}
@@ -46,7 +54,7 @@ sub main
 
 	if ($paragraph ne "") 
 	{
-		print "\n\n<p>" . handleParagraph($paragraph);
+		print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
 	}
 
 	printHtmlTail();
@@ -58,8 +66,9 @@ sub main
 sub handleParagraph
 {
 	my $paragraph = shift;
+	my $useExtensions = shift;
 
-	$paragraph = pgdp2sgml($paragraph);
+	$paragraph = pgdp2sgml($paragraph, $useExtensions);
 
 	# Replace dashes in number ranges by en-dashes
 	$paragraph =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
@@ -91,11 +100,11 @@ sub handleParagraph
 	$paragraph =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
 
 	# Replace superscripts
-	$paragraph =~ s/\^\{([a-zA-Z0-9]+)\}/<sup>\1<\/sup>/g;
+	$paragraph =~ s/\^\{(.*?)\}/<sup>\1<\/sup>/g;
 	$paragraph =~ s/\^([a-zA-Z0-9\*])/<sup>\1<\/sup>/g;
 
 	# Replace subscripts
-	$paragraph =~ s/_\{([a-zA-Z0-9]+)\}/<sub>\1<\/sub>/g;
+	$paragraph =~ s/_\{(.*?)\}/<sub>\1<\/sub>/g;
 	$paragraph =~ s/_([a-zA-Z0-9\*])/<sub>\1<\/sub>/g;
 
 	# Replace other formatting
@@ -120,67 +129,6 @@ sub handleParagraph
 	return $paragraph;
 }
 
-
-#
-# Handle special letters in the coding system as used on PGDP.
-#
-sub pgdp2sgml
-{
-	my $string = shift;
-
-	# Accents above:
-	$string =~ s/\[\/([a-zA-Z])\]/\&\1acute;/g;			# acute
-	$string =~ s/\[\\([a-zA-Z])\]/\&\1grave;/g;			# grave
-	$string =~ s/\[\^([a-zA-Z])\]/\&\1circ;/g;			# circumflex
-	$string =~ s/\[\"([a-zA-Z])\]/\&\1uml;/g;			# dieresis
-	$string =~ s/\[~([a-zA-Z])\]/\&\1tilde;/g;			# tilde
-	$string =~ s/\[=([a-zA-Z])\]/\&\1macr;/g;			# macron
-	$string =~ s/\[\)([a-zA-Z])\]/\&\1breve;/g;			# breve
-	$string =~ s/\[\.([a-zA-Z])\]/\&\1dota;/g;			# dot above
-	$string =~ s/\[[>v]([a-zA-Z])\]/\&\1caron;/g;		# caron / hajek
-
-	$string =~ s/\[°([a-zA-Z])\]/\&\1ring;/g;			# ring (FRANCK: using degree sign)
-
-	# Accents below:
-	$string =~ s/\[([a-zA-Z])\.\]/\&\1dotb;/g;			# dot below
-	$string =~ s/\[([a-zA-Z]),\]/\&\1cedil;/g;			# cedilla
-	$string =~ s/\[([a-zA-Z])\)]/\&\1breveb;/g;			# breve below
-
-	# Ligatures with accents
-	$string =~ s/\[\^(ae|æ)\]/\&aecirc;/g;				# ae with circumflex (FRANCK: using æ)
-
-	# Double accents
-	$string =~ s/\[\)=([a-zA-Z])\]/\&\1macrbrev;/g;		# macron and breve
-	$string =~ s/\[\^\"([a-zA-Z])\]/\&\1umlcirc;/g;		# dieresis and circumflex
-
-	$string =~ s/\[``([a-zA-Z])\]/\&\1dgrave;/g;		# double grave
-
-	$string =~ s/\[\^ä\]/\&aumlcirc;/g;					# a with dieresis and circumflex (FRANCK: using ä)
-	$string =~ s/\[\^ö\]/\&oumlcirc;/g;					# o with dieresis and circumflex (FRANCK: using ö)
-	$string =~ s/\[\^ü\]/\&uumlcirc;/g;					# u with dieresis and circumflex (FRANCK: using ü)
-
-	$string =~ s/\[\=á\]/\&amacracu;/g;					# a with macron and acute (FRANCK: inverted order!)
-
-	# Guilder sign
-	$string =~ s/\[f\]/\&florin;/g;						# guilder sign.
-
-	# various odd letters: (As used in Franck's Etymologisch Woordenboek)
-	$string =~ s/\[ng\]/\&eng;/g;						# eng
-	$string =~ s/\[NG\]/\&ENG;/g;						# ENG
-	$string =~ s/\[zh\]/\&ezh;/g;						# ezh
-	$string =~ s/\[ZH\]/\&EZH;/g;						# EZH
-	$string =~ s/\[sh\]/\&esh;/g;						# esh
-	$string =~ s/\[SH\]/\&ESH;/g;						# ESH
-
-	$string =~ s/\[x\]/\&khgr;/g;						# Greek chi in Latin context
-	$string =~ s/\[e\]/\&schwa;/g;						# schwa
-
-	$string =~ s/\[-b\]/\&bstroke;/g;					# b with stroke through stem
-
-	$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex
-
-	return $string;
-}
 
 
 sub printHtmlHead
