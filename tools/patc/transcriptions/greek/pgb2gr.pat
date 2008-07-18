@@ -407,31 +407,45 @@
 "w)="		p ">=w"
 "W)="		p ">=W"
 
-%% special stuff
+%% Vowels with macrons (TODO: combinations of macron with other accents, [=a])/, [=i]/, etc. Use Unicode combining accents.)
+%% sometimes mistakes for the "circumflex"
 
 "[=a]"		p "\\=a"      
 "[=A]"		p "\\=A"  
-
-%% most likely mistakes for the "circumflex"
+"[=a]/"		p "\\=a&#x301;"  
+"[=A]/"		p "\\=A&#x301;"  
+"[=a])/"	p "\\=a&#x313&#x301;"  
+"[=A])/"	p "\\=A&#x313&#x301;"  
 
 "[=e]"		p "\\=e"      
 "[=E]"		p "\\=E"  
+
 "[=i]"		p "\\=i"      
 "[=I]"		p "\\=I"  
+"[=i]/"		p "\\=i&#x301;"  
+"[=I]/"		p "\\=I&#x301;"  
+
 "[=h]"		p "\\=h"      
 "[=H]"		p "\\=H"  
+
 "[=o]"		p "\\=o"      
 "[=O]"		p "\\=O"  
+
 "[=u]"		p "\\=u"      
 "[=U]"		p "\\=U"  
+
 "[=w]"		p "\\=w"      
 "[=W]"		p "\\=W"  
 
+%% additional letters
 
 "v"		p "&digamma;"
 "[f]"		p "&digamma;"
 "[j]"		p "&jgr;";
+"[(]"		p "&lpar;";
+"[)]"		p "&rpar;";
 
+"[^*]"		p "[^*]";	%% FRANCK: raised asterisk.
 
 %% warn for illegal characters
 
@@ -445,6 +459,8 @@
 "\\"        p "</GR><span class=error>\\</span><GR>"
 "+"         p "</GR><span class=error>+</span><GR>"
 "="         p "</GR><span class=error>=</span><GR>"
+"'"         p "</GR><span class=error>'</span><GR>"
+"\""        p "</GR><span class=error>\"</span><GR>"
 
 
 @end
