@@ -122,9 +122,12 @@ sub handleParagraph
 	$paragraph = utf2sgml($paragraph);
 
 	# Trim superflous spaces
-	$paragraph =~ s/[\t ]+/ /;
+	$paragraph =~ s/[\t ]+/ /g;
 	$paragraph =~ s/^ +//;
 	$paragraph =~ s/ +$//;
+
+	# Remove TEI <corr> tags that might drop through.
+	$paragraph =~ s/<\/?corr(.*?)>/ /g;
 
 	return $paragraph;
 }
@@ -136,12 +139,12 @@ sub printHtmlHead
 	print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
 	print "<html>\n";
 	print "<title>DP Preview</title>\n";
-	print "<style>\n";
+	print "<style type='text/css'>\n";
 	print ".figure { background-color: #FFFF5C; }\n";
 	print ".remark { background-color: #FFB442; }\n";
 	print ".greek { background-color: #C7FFC7; font-family: Asteria, Palatino Linotype, sans serif; font-size: 16pt;}\n";
 	print ".sc { font-variant:small-caps; }\n";
-	print ".ex { letter-spacing:0.2em; }\n";
+	print ".ex { letter-spacing:0.2em; background-color: #FFFF80; }\n";
 	print ".error { background-color: #FF8566; font-weight: bold; }\n";
 	print ".xref { background-color: #FFFF8C; }\n";
 	print "</style>\n";

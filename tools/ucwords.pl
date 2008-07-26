@@ -29,6 +29,7 @@ sub main
 	%tagHash = ();
 	%rendHash = ();
 	%dictHash = ();
+	%countCountHash = ();
 	@pageList = ();
 	$pageCount = 0;
 
@@ -630,6 +631,9 @@ sub reportWord()
 	$grandTotalUniqWords++;
 	$grandTotalWords += $count;
 
+	# Count how many times a word with this frequency occurs:
+	$countCountHash{$count}++;
+
 	print OUTPUTDATA "$lang\t$word\t$count\n";
 
 	my $known = isKnownWord($word, $language);
@@ -867,6 +871,22 @@ sub reportStatistics
 	print "\n<tr><td>Extend:					<td>					<td>					<td>$extend				<td>Words and numbers in text";
 	print "\n</table>";
 
+	# count of counts
+
+	print "\n<h3>Count of Counts</h3>";
+
+	print "\n<table>";
+	print "\n<tr><th>Count <th>Number of words with this count <th>Total <th>Cummulative";
+	
+	my $cummulativeCount = 0;
+	foreach my $count (sort { $b <=> $a } (keys %countCountHash)) 
+	{
+		my $total = $count * $countCountHash{$count};
+		$cummulativeCount += $total;
+		print "\n<tr><td>$count <td>$countCountHash{$count} <td>$total <td>$cummulativeCount";
+	}
+	print "\n</table>";
+
 }
 
 
@@ -1036,7 +1056,7 @@ sub popLang
 	}
 	else
 	{
-		die("ERROR: XML not well-formed");
+		die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened)");
 	}
 }
 

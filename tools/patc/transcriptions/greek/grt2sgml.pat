@@ -18,6 +18,9 @@
 "<GRTA>nt"	1 "&dbarb;"
 "<GRTA>Nt"	1 "&Dbarb;"
 
+@patterns 2 % Skip over SGML entities in Greek transcriptions
+
+";"			1 ";"
 
 @patterns 1
 
@@ -25,6 +28,7 @@
 
 "</GRTA>"    0 ""
 
+"&"			2 "&"
 
 
 "a"         p "a"
