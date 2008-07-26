@@ -410,36 +410,36 @@
 %% Vowels with macrons (TODO: combinations of macron with other accents, [=a])/, [=i]/, etc. Use Unicode combining accents.)
 %% sometimes mistakes for the "circumflex"
 
-"[=a]"		p "\\=a"      
-"[=A]"		p "\\=A"  
-"[=a]/"		p "\\=a&#x301;"  
-"[=A]/"		p "\\=A&#x301;"  
-"[=a])/"	p "\\=a&#x313&#x301;"  
-"[=A])/"	p "\\=A&#x313&#x301;"  
+"[=a]"		p "\\=a"
+"[=A]"		p "\\=A"
+"[=a]/"		p "\\=a&#x301;"
+"[=A]/"		p "\\=A&#x301;"
+"[=a])/"	p "\\=a&#x313;&#x301;"
+"[=A])/"	p "\\=A&#x313;&#x301;"
 
-"[=e]"		p "\\=e"      
-"[=E]"		p "\\=E"  
+"[=e]"		p "\\=e"
+"[=E]"		p "\\=E"
 
-"[=i]"		p "\\=i"      
-"[=I]"		p "\\=I"  
-"[=i]/"		p "\\=i&#x301;"  
-"[=I]/"		p "\\=I&#x301;"  
+"[=i]"		p "\\=i"
+"[=I]"		p "\\=I"
+"[=i]/"		p "\\=i&#x301;"
+"[=I]/"		p "\\=I&#x301;"
 
-"[=h]"		p "\\=h"      
-"[=H]"		p "\\=H"  
+"[=h]"		p "\\=h"
+"[=H]"		p "\\=H"
 
-"[=o]"		p "\\=o"      
-"[=O]"		p "\\=O"  
+"[=o]"		p "\\=o"
+"[=O]"		p "\\=O"
 
-"[=u]"		p "\\=u"      
-"[=U]"		p "\\=U"  
+"[=u]"		p "\\=u"
+"[=U]"		p "\\=U"
 
-"[=w]"		p "\\=w"      
-"[=W]"		p "\\=W"  
+"[=w]"		p "\\=w"
+"[=W]"		p "\\=W"
 
 %% additional letters
 
-"v"		p "&digamma;"
+"v"			p "&digamma;"
 "[f]"		p "&digamma;"
 "[j]"		p "&jgr;";
 "[(]"		p "&lpar;";

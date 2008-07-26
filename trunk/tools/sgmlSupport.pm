@@ -1689,6 +1689,8 @@ BEGIN
 	$ent{"ringsun"}		= "[ringsun]";			# symbol for ring around the sun
 	$ent{"ringmoon"}	= "[ringmoon]";			# symbol for ring around the moon
 
+	$ent{"handptr"}		= chr(0x261E);		# White right pointing index 
+
 	# Greek additions
 	$ent{"amacgr"}		=  chr(0x1FB1);		# Greek alpha with macron
 	$ent{"Amacgr"}		=  chr(0x1FB9);		# Greek Alpha with macron
@@ -1894,7 +1896,7 @@ sub pgdp2sgml
 	$string =~ s/\[([a-zA-Z])\^]/\&\1circb;/g;			# circumflex below
 
 	# Ligatures with accents
-	$string =~ s/\[\^(ae|æ)\]/\&aecirc;/g;				# ae with circumflex (FRANCK: using æ)
+	$string =~ s/\[\^(ae|\x{00e6})\]/\&aecirc;/g;		# ae with circumflex
 
 	# Double accents
 	$string =~ s/\[\)=([a-zA-Z])\]/\&\1macrbrev;/g;		# macron and breve
@@ -1920,18 +1922,18 @@ sub pgdp2sgml
 
 	if ($useExtensions == 1)  # Extensions used for FRANCK
 	{
-		$string =~ s/\[°([a-zA-Z])\]/\&\1ring;/g;			# ring (FRANCK: using degree sign)
+		$string =~ s/\[\x{00b0}([a-zA-Z])\]/\&\1ring;/g;	# ring (FRANCK: using degree sign)
 
 		$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex (FRANCK: k with flag on tail)
 
 		$string =~ s/\[x\]/\&khgr;/g;						# FRANCK: Greek chi in Latin context
 		$string =~ s/\[e\]/\&schwa;/g;						# FRANCK: schwa
 
-		$string =~ s/\[\^ä\]/\&aumlcirc;/g;					# a with dieresis and circumflex (FRANCK: using ä)
-		$string =~ s/\[\^ö\]/\&oumlcirc;/g;					# o with dieresis and circumflex (FRANCK: using ö)
-		$string =~ s/\[\^ü\]/\&uumlcirc;/g;					# u with dieresis and circumflex (FRANCK: using ü)
+		$string =~ s/\[\^\x{00e4}\]/\&aumlcirc;/g;			# a with dieresis and circumflex (FRANCK)
+		$string =~ s/\[\^\x{00f6}\]/\&oumlcirc;/g;			# o with dieresis and circumflex (FRANCK)
+		$string =~ s/\[\^\x{00fc}\]/\&uumlcirc;/g;			# u with dieresis and circumflex (FRANCK)
 
-		$string =~ s/\[\=á\]/\&amacracu;/g;					# a with macron and acute (FRANCK: inverted order!)
+		$string =~ s/\[\=\x{00e1}\]/\&amacracu;/g;			# a with macron and acute (FRANCK: inverted order!)
 	}
 
 	return $string;
