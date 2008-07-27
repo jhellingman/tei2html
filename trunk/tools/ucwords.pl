@@ -14,6 +14,8 @@ use SgmlSupport qw/getAttrVal sgml2utf/;
 use LanguageNames qw/getLanguage/;
 
 
+
+
 main();
 
 
@@ -50,6 +52,15 @@ sub main
 
 	$tagPattern = "<(.*?)>";
 
+	$infile = $ARGV[0];
+
+	if ($infile eq "-l")
+	{
+		$defaultLang = $ARGV[1];
+		pushLang("NULL", $defaultLang);
+		$infile = $ARGV[2];
+	}
+
 	open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
 	open (OUTPUTDATA, ">word-statistics.txt") || die("Could not create output file 'word-statistics.txt'");
 
@@ -82,7 +93,6 @@ sub main
 #
 sub heatMapDocument
 {
-	$infile = $ARGV[0];
 	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 	open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
 
@@ -345,7 +355,6 @@ sub heatMapPair
 #
 sub collectWords
 {
-	$infile = $ARGV[0];
 	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 
 	while (<INPUTFILE>)
