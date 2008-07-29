@@ -1103,6 +1103,7 @@
 
     <xsl:template match="divGen[@type='Colophon']">
         <div class="transcribernote">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
 
             <h2><xsl:value-of select="$strColophon"/></h2>
@@ -1222,11 +1223,12 @@
 
     <!-- div1 -->
 
-	<xsl:template match="div1[@type='TranscriberNote']">
-		<div class="transcribernote">
-			 <xsl:apply-templates/>
-		</div>
-	</xsl:template>
+    <xsl:template match="div1[@type='TranscriberNote']">
+        <div class="transcribernote">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
 
     <xsl:template match="div1">
         <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
@@ -1412,16 +1414,16 @@
         <div class="table">
             <xsl:call-template name="setHtmlLangAttribute"/>
 
-			<xsl:attribute name="class">	
-				<xsl:choose>
-					<xsl:when test="contains(@rend, 'align(center)')">table centertable</xsl:when>
-					<xsl:otherwise>table</xsl:otherwise>
-				</xsl:choose>
-			</xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:choose>
+                    <xsl:when test="contains(@rend, 'align(center)')">table centertable</xsl:when>
+                    <xsl:otherwise>table</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
 
-			<xsl:if test="contains(@rend, 'width(')">
-				<xsl:attribute name="style">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
-			</xsl:if>
+            <xsl:if test="contains(@rend, 'width(')">
+                <xsl:attribute name="style">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
+            </xsl:if>
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
 
@@ -2190,9 +2192,9 @@
 
             <span>
                 <xsl:call-template name="generate-id-attribute"/>
-				<xsl:if test="contains(@rend, 'hemistich(')">
-					<span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
-				</xsl:if>
+                <xsl:if test="contains(@rend, 'hemistich(')">
+                    <span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
+                </xsl:if>
                 <xsl:apply-templates/>
             </span>
         </p>
