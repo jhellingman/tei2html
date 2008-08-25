@@ -8,9 +8,19 @@ $bindir     = "C:\\Bin";
 $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
 $princedir  = "F:\\Programs\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
 
+$usePrince = 0;
+
 #==============================================================================
 
+
 $filename = $ARGV[0];
+
+if ($filename eq "-p") 
+{
+	$usePrince = 1;
+	$filename = $ARGV[1];
+}
+
 
 if ($filename eq "")
 {
@@ -175,7 +185,7 @@ sub processFile
     system ("tidy -qe $basename.html");
     system ("rm tmp.5a");
 
-	if (0 == 1) 
+	if ($usePrince == 1) 
 	{
 		# Do the HTML transform again, but with an additional parameter to include Prince specific things.
 
