@@ -1482,6 +1482,9 @@ BEGIN
 	$ent{"aeacute"}		= chr(0x01FD); # ae ligature with acute
 	$ent{"cslash"}		= chr(0x023C); # c with slash
 
+	$ent{"Oogon"}		= chr(0x01EA);  # O ogonek
+	$ent{"oogon"}		= chr(0x01EB);  # o ogonek
+
 	$ent{"Esmall"}		= chr(0x1D07);  # small letter E
 
 	$ent{"longs"}		= chr(0x017F);  # long s
@@ -1558,16 +1561,22 @@ BEGIN
 	$ent{"ndota"}		= "n" . chr(0x0307); # n with dot above
 	$ent{"odota"}		= "o" . chr(0x0307); # o with dot above
 	$ent{"rdota"}		= "r" . chr(0x0307); # r with dot above
-	$ent{"zdota"}		= "z" . chr(0x0307); # z with dot above
 	$ent{"tdota"}		= "t" . chr(0x0307); # t with dot above
+	$ent{"udota"}		= "u" . chr(0x0307); # u with dot above
+	$ent{"Udota"}		= "U" . chr(0x0307); # U with dot above
+	$ent{"zdota"}		= "z" . chr(0x0307); # z with dot above
 
 	$ent{"ruml"}	    = "r" . chr(0x0308); # r with diaresis
+
+	$ent{"ering"}	    = "e" . chr(0x030A); # e with ring
+	$ent{"mring"}	    = "m" . chr(0x030A); # m with ring
 
 	$ent{"Acaron"}	    = "A" . chr(0x030C); # A with caron
 	$ent{"acaron"}	    = "a" . chr(0x030C); # a with caron
 
 	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
 	$ent{"idgrave"}		= "i" . chr(0x030F); # i with double grave
+	$ent{"odgrave"}		= "o" . chr(0x030F); # o with double grave
 	$ent{"udgrave"}		= "u" . chr(0x030F); # u with double grave
 
 	$ent{"adotb"}		= "a" . chr(0x0323); # a with dot below
@@ -1655,13 +1664,22 @@ BEGIN
 	$ent{"ngtilde"}		= "n" . chr(0x0360) . "g";	 # ng with double tilde
 
 	# Multiple combining diacritics
+	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
+	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
+	$ent{"uumlcirc"}	= chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
+
+	$ent{"uringacu"}	= chr(0x016F) . chr(0x0301); # u with ring and acute
+	$ent{"uringtil"}	= chr(0x016F) . chr(0x0303); # u with ring and tilde
+
+	$ent{"oogoncirc"}	= chr(0x01EB) . chr(0x0302); # o with ogonek and circumflex
+	$ent{"oslashcirc"}	= chr(0x00f8) . chr(0x0302); # o slash and circumflex
+
 	$ent{"amacracu"}	= chr(0x0101) . chr(0x0301); # a with macron and acute
 	$ent{"imacacu"}		= chr(0x012B) . chr(0x0301); # i with macron and acute
 	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # i with macron and acute
 	$ent{"amacrdotb"}	= chr(0x0101) . chr(0x0323); # a with macron and dot below
 
-	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
-	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
+	$ent{"rdotbcirc"}	= chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
 	$ent{"amacrbrev"}	= chr(0x0101) . chr(0x0306); # a with macron and breve
 	$ent{"emacrbrev"}	= chr(0x0113) . chr(0x0306); # e with macron and breve
@@ -1669,6 +1687,10 @@ BEGIN
 	$ent{"omacrbrev"}	= chr(0x014D) . chr(0x0306); # o with macron and breve
 	$ent{"umacrbrev"}	= chr(0x016B) . chr(0x0306); # u with macron and breve
 	$ent{"ymacrbrev"}	= chr(0x0233) . chr(0x0306); # y with macron and breve
+
+	$ent{"edotatil"}	= chr(0x0117) . chr(0x0303); # e with dot above and tilde
+	$ent{"eumltil"}		= chr(0x00eb) . chr(0x0303); # e with diaresis and tilde
+
 
 	# Special dashes
 	$ent{"longdash"}	= chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
@@ -1878,6 +1900,52 @@ sub pgdp2sgml
 	my $string = shift;
 	my $useExtensions = shift;
 
+	if ($useExtensions == 1)  # Extensions used for FRANCK
+	{
+		$string =~ s/\[\x{00b0}([a-zA-Z])\]/\&\1ring;/g;	# ring (FRANCK: using degree sign)
+
+		$string =~ s/\[o\)\]/\&oogon;/g;					# FRANCK: o with ogonek (NON-STANDARD!)
+		$string =~ s/\[O\)\]/\&Oogon;/g;					# FRANCK: O with ogonek (NON-STANDARD!)
+		$string =~ s/\[o,\]/\&oogon;/g;						# FRANCK: o with ogonek (NON-STANDARD!)
+		$string =~ s/\[O,\]/\&Oogon;/g;						# FRANCK: O with ogonek (NON-STANDARD!)
+		$string =~ s/\[a,\]/\&aogon;/g;						# FRANCK: a with ogonek (NON-STANDARD!)
+		$string =~ s/\[A,\]/\&Aogon;/g;						# FRANCK: A with ogonek (NON-STANDARD!)
+		$string =~ s/\[e,\]/\&eogon;/g;						# FRANCK: e with ogonek (NON-STANDARD!)
+		$string =~ s/\[E,\]/\&Eogon;/g;						# FRANCK: E with ogonek (NON-STANDARD!)
+
+		$string =~ s/\[\^o,\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+		$string =~ s/\[\x{00f4},\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+		$string =~ s/\[\^o\)\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+		$string =~ s/\[\x{00f4}\)\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+
+		$string =~ s/\[\^\x{00f8}\]/\&oslashcirc;/g;				# FRANCK: o-slash with circumflex (NON-STANDARD!)
+
+		$string =~ s/\[\^r\.\]/\&rdotbcirc;/g;				# FRANCK: r with dot below and circumflex
+
+		$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex (FRANCK: k with flag on tail)
+
+		$string =~ s/\[x\]/\&khgr;/g;						# FRANCK: Greek chi in Latin context
+		$string =~ s/\[e\]/\&schwa;/g;						# FRANCK: schwa
+
+		# Letters with multiple accents:
+		$string =~ s/\[\^\x{00e4}\]/\&aumlcirc;/g;			# a with dieresis and circumflex (FRANCK)
+		$string =~ s/\[\^\x{00f6}\]/\&oumlcirc;/g;			# o with dieresis and circumflex (FRANCK)
+		$string =~ s/\[\^\x{00fc}\]/\&uumlcirc;/g;			# u with dieresis and circumflex (FRANCK)
+
+		$string =~ s/\[\=\x{00e1}\]/\&amacracu;/g;			# a with macron and acute (FRANCK: inverted order!)
+
+		$string =~ s/\[~\.e\]/\&edotatil;/g;				# e with dot above and tilde (FRANCK)
+		$string =~ s/\[~\"e\]/\&eumltil;/g;					# e with dieresis and tilde (FRANCK)
+		$string =~ s/\[~\x{00eb}\]/\&eumltil;/g;			# e with diaresis and tilde (FRANCK)
+
+		$string =~ s/\[\*u\]/\&uring;/g;					# u with ring (FRANCK)
+		$string =~ s/\[~\*u\]/\&uringtil;/g;				# u with ring and tilde (FRANCK)
+		$string =~ s/\[\*\/u\]/\&uringacu;/g;				# u with ring and acute (FRANCK)
+		$string =~ s/\[\x{00b0}\/u\]/\&uringacu;/g;			# u with ring and acute (FRANCK: using degree sign)
+		$string =~ s/\[\x{00b0}\x{00fa}\]/\&uringacu;/g;	# u with ring and acute (FRANCK: using degree sign and u acute)
+
+	}
+
 	# Accents above:
 	$string =~ s/\[\/([a-zA-Z])\]/\&\1acute;/g;			# acute
 	$string =~ s/\[\\([a-zA-Z])\]/\&\1grave;/g;			# grave
@@ -1891,6 +1959,7 @@ sub pgdp2sgml
 
 	# Accents below:
 	$string =~ s/\[([a-zA-Z])\.\]/\&\1dotb;/g;			# dot below
+	$string =~ s/\[([a-zA-Z])=\]/\&\1barb;/g;			# bar (or macron) below
 	$string =~ s/\[([a-zA-Z]),\]/\&\1cedil;/g;			# cedilla
 	$string =~ s/\[([a-zA-Z])\)]/\&\1breveb;/g;			# breve below
 	$string =~ s/\[([a-zA-Z])\^]/\&\1circb;/g;			# circumflex below
@@ -1919,22 +1988,6 @@ sub pgdp2sgml
 	$string =~ s/\[-b\]/\&bstrok;/g;					# b with stroke through stem
 	$string =~ s/\[-L\]/\&Lstrok;/g;					# L with stroke through stem
 	$string =~ s/\[-l\]/\&lstrok;/g;					# l with stroke through stem
-
-	if ($useExtensions == 1)  # Extensions used for FRANCK
-	{
-		$string =~ s/\[\x{00b0}([a-zA-Z])\]/\&\1ring;/g;	# ring (FRANCK: using degree sign)
-
-		$string =~ s/\[\@k\]/\&kcirc;/g;					# k with circumflex (FRANCK: k with flag on tail)
-
-		$string =~ s/\[x\]/\&khgr;/g;						# FRANCK: Greek chi in Latin context
-		$string =~ s/\[e\]/\&schwa;/g;						# FRANCK: schwa
-
-		$string =~ s/\[\^\x{00e4}\]/\&aumlcirc;/g;			# a with dieresis and circumflex (FRANCK)
-		$string =~ s/\[\^\x{00f6}\]/\&oumlcirc;/g;			# o with dieresis and circumflex (FRANCK)
-		$string =~ s/\[\^\x{00fc}\]/\&uumlcirc;/g;			# u with dieresis and circumflex (FRANCK)
-
-		$string =~ s/\[\=\x{00e1}\]/\&amacracu;/g;			# a with macron and acute (FRANCK: inverted order!)
-	}
 
 	return $string;
 }
