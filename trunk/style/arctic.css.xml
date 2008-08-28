@@ -46,6 +46,11 @@ p.dropcap:first-letter
     font-weight: bold;
 }
 
+sub, sup 
+{ 
+	line-height: 0;
+}
+
 
 ]]>
 </stylesheet>

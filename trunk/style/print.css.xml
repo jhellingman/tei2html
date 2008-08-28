@@ -10,7 +10,7 @@ body
     color: black;
     background: white;
     font-size: 10pt;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: Gentium, Georgia, "Times New Roman", Times, serif;
     margin: 0 10%;
 
 
