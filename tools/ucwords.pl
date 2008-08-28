@@ -27,6 +27,7 @@ sub main
 	%nonWordHash = ();
 	%scannoHash = ();
 	%charHash = ();
+	%compositeCharHash = ();
 	%langHash = ();
 	%tagHash = ();
 	%rendHash = ();
@@ -75,6 +76,7 @@ sub main
 	reportNumbers();
 	reportNonWords();
 	reportChars();
+	reportCompositeChars();
 	reportTags();
 	reportRend();
 	reportPages();
@@ -791,6 +793,38 @@ sub reportChars
 
 
 #
+# reportCompositeChars
+#
+sub reportCompositeChars
+{
+	@compositeCharList = keys %compositeCharHash;
+	print "\n\n<h2>Unicode Composite Character Frequencies</h2>\n";
+	@compositeCharList = sort @compositeCharList;
+
+	$grandTotalCompositeCharacters = 0;
+	print "<table>\n";
+	print "<tr><th>Character<th>Codes<th>Count\n";
+	foreach $compositeChar (@compositeCharList)
+	{
+		$compositeChar =~ s/\0/[NULL]/g;
+
+		$count = $compositeCharHash{$compositeChar};
+		
+		my $ords = "";
+		my @chars = split(//, $compositeChar);
+		foreach my $char (@chars)
+		{
+			$ords .= " " . ord($char);
+		}
+
+		$grandTotalCompositeCharacters += $count;
+		print "<tr><td>$compositeChar<td align=right><small>$ords</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
+	}
+	print "</table>\n";
+}
+
+
+#
 # reportNumbers
 #
 sub reportNumbers
@@ -964,7 +998,7 @@ sub handleTag
 sub handleFragment
 {
 	my $fragment = shift;
-	$fragment = sgml2utf($fragment);
+	$fragment = NFC(sgml2utf($fragment));
 
 	my $lang = getLang();
 
@@ -1005,6 +1039,15 @@ sub handleFragment
 	foreach my $char (@chars)
 	{
 		countChar($char);
+	}
+
+	my @compositeChars = split(/(\pL\pM*)/, $fragment);
+	foreach my $compositeChar (@compositeChars) 
+	{
+		if ($compositeChar =~ /^\pL\pM*$/) 
+		{
+			countCompositeChar($compositeChar)
+		}
 	}
 }
 
@@ -1048,6 +1091,16 @@ sub countChar
 	my $char = shift;
 	$charHash{$char}++;
 	$charCount++;
+}
+
+sub countCompositeChar
+{
+	my $compositeChar = shift;
+	if (length($compositeChar) > 1) 
+	{
+		$compositeCharHash{$compositeChar}++;
+		$compositeChar++;
+	}
 }
 
 

@@ -119,6 +119,10 @@ sub handleParagraph
 	# Remaining non-numeric entities are wrong
 	$paragraph =~ s/(\&[^0-9]*?;)/<span class=error>\1<\/span>/g;
 
+	# Remaining short things between brackets are probably wrong
+	$paragraph =~ s/(\[[^\]]{0,4}\])/<span class=error>\1<\/span>/g;
+
+
 	$paragraph = utf2sgml($paragraph);
 
 	# Trim superflous spaces

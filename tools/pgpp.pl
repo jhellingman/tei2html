@@ -46,13 +46,16 @@ while (<INPUTFILE>)
 	$_ =~ s/ *---? */\&mdash;/g;
 
 	# Replace superscripts
-	$_ =~ s/\^\{([a-zA-Z0-9]+)\}/<hi rend=sup>\1<\/hi>/g;
-	$_ =~ s/\^([a-zA-Z0-9])/<hi rend=sup>\1<\/hi>/g;
+	$_ =~ s/\^\{(.*?)\}/<hi rend=sup>\1<\/hi>/g;
+	$_ =~ s/\^([a-zA-Z0-9\*])/<hi rend=sup>\1<\/hi>/g;
+
+	# Replace subscripts
+	$_ =~ s/_\{(.*?)\}/<hi rend=sub>\1<\/hi>/g;
+	$_ =~ s/_([a-zA-Z0-9\*])/<hi rend=sub>\1<\/hi>/g;
 
 	# Replace italics tag
 	$_ =~ s/<i>/<hi>/g;
 	$_ =~ s/<\/i>/<\/hi>/g;
-
 
 	# Replace special accented letters
 	# $_ =~ s/\[=([aieouAIEOU])\]/\&\1macr;/g;

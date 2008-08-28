@@ -2357,7 +2357,18 @@
     </xsl:template>
 
     <xsl:template match="hi">
-        <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+		<xsl:choose>
+			<xsl:when test="contains(@rend, 'font-size(')">
+				<span>
+					<xsl:call-template name="setHtmlLangAttribute"/>
+					<xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
+					<xsl:apply-templates/>
+				</span>
+			</xsl:when>
+			<xsl:otherwise>
+				<i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+			</xsl:otherwise>
+		</xsl:choose>
     </xsl:template>
 
 

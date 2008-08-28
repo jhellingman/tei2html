@@ -1663,10 +1663,15 @@ BEGIN
 
 	$ent{"ngtilde"}		= "n" . chr(0x0360) . "g";	 # ng with double tilde
 
+	$ent{"aering"}	    = chr(0x00E6) . chr(0x030A); # ae ligatures with ring
+	$ent{"aemacr"}	    = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
+
 	# Multiple combining diacritics
 	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
 	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
 	$ent{"uumlcirc"}	= chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
+
+	$ent{"oumlmacr"}	= chr(0x00F6) . chr(0x0304); # o with diaresis and macron
 
 	$ent{"uringacu"}	= chr(0x016F) . chr(0x0301); # u with ring and acute
 	$ent{"uringtil"}	= chr(0x016F) . chr(0x0303); # u with ring and tilde
@@ -1676,8 +1681,9 @@ BEGIN
 
 	$ent{"amacracu"}	= chr(0x0101) . chr(0x0301); # a with macron and acute
 	$ent{"imacacu"}		= chr(0x012B) . chr(0x0301); # i with macron and acute
-	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # i with macron and acute
+	$ent{"omacacu"}		= chr(0x014D) . chr(0x0301); # o with macron and acute
 	$ent{"amacrdotb"}	= chr(0x0101) . chr(0x0323); # a with macron and dot below
+	$ent{"umacracu"}	= chr(0x016B) . chr(0x0301); # u with macron and acute
 
 	$ent{"rdotbcirc"}	= chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
@@ -1688,6 +1694,7 @@ BEGIN
 	$ent{"umacrbrev"}	= chr(0x016B) . chr(0x0306); # u with macron and breve
 	$ent{"ymacrbrev"}	= chr(0x0233) . chr(0x0306); # y with macron and breve
 
+	$ent{"edotaac"}		= chr(0x0117) . chr(0x0301); # e with dot above and acute
 	$ent{"edotatil"}	= chr(0x0117) . chr(0x0303); # e with dot above and tilde
 	$ent{"eumltil"}		= chr(0x00eb) . chr(0x0303); # e with diaresis and tilde
 
@@ -1914,11 +1921,11 @@ sub pgdp2sgml
 		$string =~ s/\[E,\]/\&Eogon;/g;						# FRANCK: E with ogonek (NON-STANDARD!)
 
 		$string =~ s/\[\^o,\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
-		$string =~ s/\[\x{00f4},\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+		$string =~ s/\[\x{00f4},\]/\&oogoncirc;/g;			# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
 		$string =~ s/\[\^o\)\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
-		$string =~ s/\[\x{00f4}\)\]/\&oogoncirc;/g;				# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
+		$string =~ s/\[\x{00f4}\)\]/\&oogoncirc;/g;			# FRANCK: o with ogonek and circumflex (NON-STANDARD!)
 
-		$string =~ s/\[\^\x{00f8}\]/\&oslashcirc;/g;				# FRANCK: o-slash with circumflex (NON-STANDARD!)
+		$string =~ s/\[\^\x{00f8}\]/\&oslashcirc;/g;		# FRANCK: o-slash with circumflex (NON-STANDARD!)
 
 		$string =~ s/\[\^r\.\]/\&rdotbcirc;/g;				# FRANCK: r with dot below and circumflex
 
@@ -1933,10 +1940,22 @@ sub pgdp2sgml
 		$string =~ s/\[\^\x{00fc}\]/\&uumlcirc;/g;			# u with dieresis and circumflex (FRANCK)
 
 		$string =~ s/\[\=\x{00e1}\]/\&amacracu;/g;			# a with macron and acute (FRANCK: inverted order!)
+		$string =~ s/\[\=\x{00fa}\]/\&umacracu;/g;			# u with macron and acute (FRANCK: inverted order!)
+
+		$string =~ s/\[\.\x{00e9}\]/\&edotaac;/g;			# e with dot above and acute (FRANCK: actually next to each other!)
+		$string =~ s/\[\.\/e\]/\&edotaac;/g;				# e with dot above and acute (FRANCK: actually next to each other!)
+		$string =~ s/\[\/\.e\]/\&edotaac;/g;				# e with dot above and acute (FRANCK: actually next to each other!)
+
+		$string =~ s/\[=\x{00f6}\]/\&oumlmacr;/g;			# o with dieresis and macron (FRANCK: actually next to each other!)
 
 		$string =~ s/\[~\.e\]/\&edotatil;/g;				# e with dot above and tilde (FRANCK)
 		$string =~ s/\[~\"e\]/\&eumltil;/g;					# e with dieresis and tilde (FRANCK)
 		$string =~ s/\[~\x{00eb}\]/\&eumltil;/g;			# e with diaresis and tilde (FRANCK)
+
+		$string =~ s/\[\*ae\]/\&aering;/g;					# ae ligature with ring (FRANCK)
+		$string =~ s/\[\*\x{00e6}\]/\&aering;/g;			# ae ligature with ring (FRANCK)
+		$string =~ s/\[=\x{00e6}\]/\&aemacr;/g;				# ae ligature with macron (FRANCK)
+
 
 		$string =~ s/\[\*u\]/\&uring;/g;					# u with ring (FRANCK)
 		$string =~ s/\[~\*u\]/\&uringtil;/g;				# u with ring and tilde (FRANCK)
