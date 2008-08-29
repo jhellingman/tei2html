@@ -164,7 +164,7 @@ span.corr, span.abbr, span.measure, abbr
     background-color: transparant;
     border: white 0pt solid;
     font-size: 8pt;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: Gentium, Georgia, "Times New Roman", Times, serif;
 }
 
 
