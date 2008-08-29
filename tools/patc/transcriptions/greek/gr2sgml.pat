@@ -4,12 +4,15 @@
 @patterns 0
 
 "<GR>"      1 "<foreign lang=el>"
+"<GRA>"     1 ""
 
 @patterns 1
 
-"&"	    2 "&"		%% jump over SGML entities in source;
+"&"     2 "&"       %% jump over SGML entities in source;
 
 "</GR>"     0 "</foreign>"
+"</GRA>"    0 ""
+
 
 "a"         p "&agr;"
 "A"         p "&Agr;"
@@ -174,11 +177,11 @@
 ">=i"       p "&iscgr;"
 ">=I"       p "&Iscgr;"
 
-"\"i"		p "&idigr;"
-"\"I"		p "&Idigr;"
-"`\"i"		p "&igdgr;"
-"'\"i"		p "&iadgr;"
-"=\"i"		p "&icdgr;"
+"\"i"       p "&idigr;"
+"\"I"       p "&Idigr;"
+"`\"i"      p "&igdgr;"
+"'\"i"      p "&iadgr;"
+"=\"i"      p "&icdgr;"
 
 
 "k"         p "&kgr;"
@@ -261,11 +264,11 @@
 ">=u"       p "&uscgr;"
 ">=U"       p "&Uscgr;"
 
-"\"u"		p "&udigr;"
-"\"U"		p "&Udigr;"
-"`\"u"		p "&ugdgr;"
-"'\"u"		p "&uadgr;"
-"=\"u"		p "&ucdgr;"
+"\"u"       p "&udigr;"
+"\"U"       p "&Udigr;"
+"`\"u"      p "&ugdgr;"
+"'\"u"      p "&uadgr;"
+"=\"u"      p "&ucdgr;"
 
 
 "f"         p "&phgr;"
@@ -336,25 +339,25 @@
 
 %% additional entities not in TEI
 
-"\\=a"       p "&amacgr;"
-"\\=A"       p "&Amacgr;"
+"\\=a"      p "&amacgr;"
+"\\=A"      p "&Amacgr;"
 ")a"        p "&abregr;"
 ")A"        p "&Abregr;"
 
 %% most likely mistakes for the "circumflex"
 
-"\\=e"   p "&emacgr;"   
-"\\=E"   p "&Emacgr;"     
-"\\=i"   p "&imacgr;"         
-"\\=I"   p "&Imacgr;"     
-"\\=h"   p "&eemacgr;"         
-"\\=H"   p "&EEmacgr;"     
-"\\=o"   p "&omacgr;"         
-"\\=O"   p "&Omacgr;"     
-"\\=u"   p "&umacgr;"         
-"\\=U"   p "&Umacgr;"     
-"\\=w"   p "&ohmacgr;"         
-"\\=W"   p "&OHmacgr;"     
+"\\=e"      p "&emacgr;"
+"\\=E"      p "&Emacgr;"
+"\\=i"      p "&imacgr;"
+"\\=I"      p "&Imacgr;"
+"\\=h"      p "&eemacgr;"
+"\\=H"      p "&EEmacgr;"
+"\\=o"      p "&omacgr;"
+"\\=O"      p "&Omacgr;"
+"\\=u"      p "&umacgr;"
+"\\=U"      p "&Umacgr;"
+"\\=w"      p "&ohmacgr;"
+"\\=W"      p "&OHmacgr;"
 
 %% warn for illegal characters
 
@@ -372,10 +375,10 @@
 
 @patterns 2  %% jumping SGML entities in source
 
-";"		1 ";"			% end of entity: jump back
-"</GR>"		0 ";</foreign>"		% closing Greek early. Forgive.
-" "		1 " "			% something unexpected, also jump back.
-
+";"         1 ";"               % end of entity: jump back
+"</GR>"     0 ";</foreign>"     % closing Greek early. Forgive.
+"</GRA>"    0 ";"               % closing Greek early. Forgive.
+" "         1 " "               % something unexpected, also jump back.
 
 
 @end
