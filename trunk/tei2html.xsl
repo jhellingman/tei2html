@@ -247,6 +247,11 @@
             <xsl:with-param name="name" select="'msgColophon'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strApparatus">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgApparatus'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strRevisionHistory">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgRevisionHistory'"/>
@@ -2108,9 +2113,11 @@
     </xsl:template>
 
     <xsl:template match="divGen[@type='apparatus']">
-        <div class="footnotes">
+        <div class="div1">
+			<xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <hr class="fnsep"/>
+            <h2><xsl:value-of select="$strApparatus"/></h2>
+
             <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
         </div>
     </xsl:template>
