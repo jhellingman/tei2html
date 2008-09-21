@@ -1492,6 +1492,7 @@ BEGIN
 	$ent{"Crev"}		= chr(0x2183);  # Reversed C (as used in Roman numerals)
 
 	$ent{"ayin"}		= chr(0x02BF);  # modifier letter left half ring
+	$ent{"lhring"}		= chr(0x02BF);  # modifier letter left half ring
 	$ent{"commal"}		= ",";          # (comma used as letter)
 
 	$ent{"florin"}		= chr(0x0192);	#  LATIN SMALL LETTER F WITH HOOK
@@ -1670,6 +1671,8 @@ BEGIN
 	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
 	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
 	$ent{"uumlcirc"}	= chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
+
+	$ent{"rdotbcirc"}	= chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
 	$ent{"oumlmacr"}	= chr(0x00F6) . chr(0x0304); # o with diaresis and macron
 
