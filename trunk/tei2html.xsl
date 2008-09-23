@@ -2178,6 +2178,14 @@
     </xsl:template>
 
 
+	<!-- linebreaks specific to an edition are not represented in the output -->
+    <xsl:template match="lb[@ed]">
+        <a>
+            <xsl:call-template name="generate-id-attribute"/>
+        </a>
+    </xsl:template>
+
+	<!-- linebreaks not linked to an edition are to be output -->
     <xsl:template match="lb">
         <br>
             <xsl:call-template name="generate-id-attribute"/>

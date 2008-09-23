@@ -8,20 +8,21 @@
 
 @patterns 2 % skip proofer comments in Greek
 
-"]"		1 "]<GR>"
+"]"			1 "]<GR>"
 
 @patterns 1 % Greek transcription mode
 
 "[*"		2 "</GR>[*"
 
-
-"]"		0 "</GR>"
+"]"			0 "</GR>"
 "\n\n"		0 "</GR>\n\n"
 
 
-"a"		p "a"
+"'"         p "&apos;"
 
-"A"		p "A"
+"a"			p "a"
+
+"A"			p "A"
 "a|"		p "a|"
 "A|"		p "A|"
 "a(|"		p "<a|"
@@ -93,17 +94,17 @@
 "a)="		p ">=a"
 "A)="		p ">=A"
 
-"b"		p "b"
-"B"		p "B"
+"b"			p "b"
+"B"			p "B"
 
-"g"		p "g"
-"G"		p "G"
+"g"			p "g"
+"G"			p "G"
 
-"d"		p "d"
-"D"		p "D"
+"d"			p "d"
+"D"			p "D"
 
-"e"		p "e"
-"E"		p "E"
+"e"			p "e"
+"E"			p "E"
 "e("		p "<e"
 "E("		p "<E"
 "e)"		p ">e"
@@ -127,11 +128,11 @@
 "e)="		p ">=e"
 "E)="		p ">=E"
 
-"z"		p "z"
-"Z"		p "Z"
+"z"			p "z"
+"Z"			p "Z"
 
-"h"		p "h"
-"H"		p "H"
+"h"			p "h"
+"H"			p "H"
 
 "h|"		p "h|"
 "H|"		p "H|"
@@ -204,11 +205,11 @@
 "h)="		p ">=h"
 "H)="		p ">=H"
 
-"q"		p "j"
-"Q"		p "J"
+"q"			p "j"
+"Q"			p "J"
 
-"i"		p "i"
-"I"		p "I"
+"i"			p "i"
+"I"			p "I"
 "i("		p "<i"
 "I("		p "<I"
 "i)"		p ">i"
@@ -238,23 +239,23 @@
 "i+/"		p "'\"i"
 "i+="		p "=\"i"
 
-"k"		p "k"
-"K"		p "K"
+"k"			p "k"
+"K"			p "K"
 
-"l"		p "l"
-"L"		p "L"
+"l"			p "l"
+"L"			p "L"
 
-"m"		p "m"
-"M"		p "M"
+"m"			p "m"
+"M"			p "M"
 
-"n"		p "n"
-"N"		p "N"
+"n"			p "n"
+"N"			p "N"
 
-"c"		p "x"
-"C"		p "X"
+"c"			p "x"
+"C"			p "X"
 
-"o"		p "o"
-"O"		p "O"
+"o"			p "o"
+"O"			p "O"
 "o("		p "<o"
 "O("		p "<O"
 "o)"		p ">o"
@@ -278,23 +279,23 @@
 "o)="		p ">=o"
 "O)="		p ">=O"
 
-"p"		p "p"
-"P"		p "P"
+"p"			p "p"
+"P"			p "P"
 
-"r"		p "r"
-"R"		p "R"
+"r"			p "r"
+"R"			p "R"
 "r("		p "<r"
 "R("		p "<R"
 
-"s"		p "s"
-"S"		p "S"
-"j"		p "c"
+"s"			p "s"
+"S"			p "S"
+"j"			p "c"
 
-"t"		p "t"
-"T"		p "T"
+"t"			p "t"
+"T"			p "T"
 
-"u"		p "u"
-"U"		p "U"
+"u"			p "u"
+"U"			p "U"
 "u("		p "<u"
 "U("		p "<U"
 "u)"		p ">u"
@@ -324,17 +325,17 @@
 "u+/"		p "'\"u"
 "u+="		p "=\"u"
 
-"f"		p "f"
-"F"		p "F"
+"f"			p "f"
+"F"			p "F"
 
-"x"		p "q"
-"X"		p "Q"
+"x"			p "q"
+"X"			p "Q"
 
-"y"		p "y"
-"Y"		p "Y"
+"y"			p "y"
+"Y"			p "Y"
 
-"w"		p "w"
-"W"		p "W"
+"w"			p "w"
+"W"			p "W"
 
 "w|"		p "w|"
 "W|"		p "W|"
@@ -447,6 +448,7 @@
 
 "[^*]"		p "[^*]";	%% FRANCK: raised asterisk.
 
+
 %% warn for illegal characters
 
 "V"         p "</GR><span class=error>V</span><GR>"
@@ -459,7 +461,6 @@
 "\\"        p "</GR><span class=error>\\</span><GR>"
 "+"         p "</GR><span class=error>+</span><GR>"
 "="         p "</GR><span class=error>=</span><GR>"
-"'"         p "</GR><span class=error>'</span><GR>"
 "\""        p "</GR><span class=error>\"</span><GR>"
 
 
