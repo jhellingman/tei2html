@@ -945,6 +945,20 @@
         </span>
     </xsl:template>
 
+    <xsl:template match="ab[@type='versenum']">
+        <span class="versenum">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="ab[@type='lineNum']">
+		<xsl:if test="not(@rend='hide')">
+			<span class="linenum">
+				<xsl:apply-templates/>
+			</span>
+		</xsl:if>
+    </xsl:template>
+
     <!-- Heatmap attributes -->
     <xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
         <span>
@@ -2216,17 +2230,6 @@
     </xsl:template>
 
 
-    <xsl:template match="ab[@type='versenum']">
-        <span class="versenum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='lineNum']">
-        <span class="linenum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
 
 
     <xsl:template match="lg|sp">
