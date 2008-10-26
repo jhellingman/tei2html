@@ -1118,7 +1118,7 @@ sub popLang
 	}
 	else
 	{
-		die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened)");
+		die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened; remainder: $remainder)");
 	}
 }
 
