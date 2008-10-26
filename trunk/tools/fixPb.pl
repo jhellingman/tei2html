@@ -95,11 +95,11 @@ sub getAttrVal
 	my $attrs = shift;
 	my $attrVal = "";
 
-	if($attrs =~ /$attrName\s*=\s*(\w+)/i)
+	if ($attrs =~ /$attrName\s*=\s*(\w+)/i)
 	{
 		$attrVal = $1;
 	}
-	elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
+	elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
 	{
 		$attrVal = $1;
 	}

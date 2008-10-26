@@ -1696,6 +1696,7 @@
             <xsl:attribute name="class">
                 <xsl:choose>
                     <xsl:when test="@type='simple'">lsoff</xsl:when>
+                    <xsl:when test="contains(@rend, 'list-style-type(disc)')">lsdisc</xsl:when>
                     <xsl:when test="contains(@rend, 'list-style-type(none)')">lsoff</xsl:when>
                     <xsl:when test="contains(@rend, 'list-style-type(lower-alpha)')">AL</xsl:when>
                     <xsl:when test="contains(@rend, 'list-style-type(upper-alpha)')">AU</xsl:when>
