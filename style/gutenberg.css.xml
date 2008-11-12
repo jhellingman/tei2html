@@ -275,7 +275,7 @@ span.parnum
     text-align:right;
 }
 
-a.noteref
+a.noteref, a.pseudonoteref
 {
     font-size: 80%;
     text-decoration: none;

@@ -13,7 +13,7 @@ body, a.hidden
     color: black;
 }
 
-h1, h2, h3, h4, h5, h6, .noteref, span.leftnote, p.legend
+h1, h2, h3, h4, h5, h6, .noteref, .pseudonoteref, span.leftnote, p.legend
 {
     color: #880000; /* #880000; brownish red */
 }

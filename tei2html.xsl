@@ -191,6 +191,11 @@
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgPage'"/>
         </xsl:call-template>
+    </xsl:variable>    
+	<xsl:variable name="strHere">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgHere'"/>
+        </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="strChapter">
         <xsl:call-template name="GetMessage">
@@ -635,7 +640,7 @@
     </xsl:template>
 
     <xsl:template match="note" mode="noterefnumber">
-        <a class="noteref">
+        <a class="pseudonoteref">
             <xsl:call-template name="generate-href-attribute"/>
             <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
@@ -1058,7 +1063,7 @@
 
         <table width="75%">
             <tr>
-                <th><xsl:value-of select="$strLocation"/></th>
+                <th><xsl:value-of select="$strPage"/></th>
                 <th><xsl:value-of select="$strSource"/></th>
                 <th><xsl:value-of select="$strCorrection"/></th>
             </tr>
@@ -1066,11 +1071,17 @@
                 <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
                         <td width="20%">
-                            <a>
-                                <xsl:call-template name="generate-href-attribute"/>
-                                <xsl:value-of select="$strPage"/><xsl:text> </xsl:text>
-                                <xsl:value-of select="preceding::pb[1]/@n"/>
-                            </a>
+							<a class="pageref">
+								<xsl:call-template name="generate-href-attribute"/>
+								<xsl:choose>
+									<xsl:when test="preceding::pb[1]/@n = ''">
+										<xsl:value-of select="$strHere"/>
+									</xsl:when>		
+	                                <xsl:otherwise>
+										<xsl:value-of select="preceding::pb[1]/@n"/>
+									</xsl:otherwise>
+								</xsl:choose>
+							</a>
                         </td>
                         <td width="40%">
                             <xsl:choose>

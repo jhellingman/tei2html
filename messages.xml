@@ -73,6 +73,7 @@
         <msg:message name="msgOrnament.n">Ornaments</msg:message>
         <msg:message name="msgNotInSource">Not in source</msg:message>
         <msg:message name="msgDeleted">Deleted</msg:message>
+        <msg:message name="msgHere">Here</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -379,6 +380,7 @@
         <msg:message name="msgOrnament.n">Ornements</msg:message>
         <msg:message name="msgNotInSource">Absent de l&apos;original</msg:message>
         <msg:message name="msgDeleted">Retiré</msg:message>
+        <msg:message name="msgHere">Ici</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -582,6 +584,7 @@
         <msg:message name="msgOrnament.n">Ornamenten</msg:message>
         <msg:message name="msgNotInSource">Niet in bron</msg:message>
         <msg:message name="msgDeleted">Verwijderd</msg:message>
+        <msg:message name="msgHere">Hier</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>

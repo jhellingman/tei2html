@@ -187,7 +187,7 @@ sub processFile
 
 	if ($usePrince == 1) 
 	{
-		# Do the HTML transform again, but with an additional parameter to include Prince specific things.
+		# Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
 
 		print "Create PDF version...\n";
 		$optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
