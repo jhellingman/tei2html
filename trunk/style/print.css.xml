@@ -2,24 +2,40 @@
 <stylesheet>
 <![CDATA[
 
-/* Stylesheet for printing Project Gutenberg ebooks using Prince http://www.princexml.com/ */
-/* The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: see http://www.w3.org/TR/css3-page/ */
 
-body
+/* 
+
+Stylesheet for printing Project Gutenberg ebooks using Prince http://www.princexml.com/
+
+The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: 
+see http://www.w3.org/TR/css3-page/. For this reason, it should not be included in the 
+final HTML version posted to PG.
+
+*/
+
+
+@page 
 {
-    color: black;
-    background: white;
-    font-size: 10pt;
-    font-family: Gentium, Georgia, "Times New Roman", Times, serif;
-    margin: 0 10%;
+	size: demy-octavo;
+	margin: 27mm 16mm 27mm 16mm;
 
+	@footnotes 
+	{
+		padding-top: 8pt;
+		margin: 0 10%;
+	}
+}
 
-	text-align: justify;
-	// column-count: 2;
+@page coverpage
+{
+	@top-left { content: normal }
+	@top-right { content: normal }
+	@bottom-left { content: normal }
+	@bottom-right { content: normal }
 }
 
 
-@page titlepage 
+@page titlepage
 { 
 	@top-left { content: normal }
 	@top-right { content: normal }
@@ -28,6 +44,84 @@ body
 }
 
 
+@page :left 
+{
+	@bottom-left 
+	{
+		content: counter(page);
+		margin: 0 10%;
+	}
+
+	@top-left
+	{
+		content: string(header, first); 
+		font-style: italic;
+		margin: 0 10%;
+	}
+}
+
+@page :right 
+{
+	@bottom-right
+	{
+		content: counter(page);
+		margin: 0 10%;
+	}
+
+	@top-right 
+	{
+		content: string(header, first); 
+		font-style: italic;
+		margin: 0 10%;
+	}
+}
+
+
+@page frontmatter :left
+{
+	@bottom-left 
+	{
+		content: counter(page, lower-roman);
+		margin: 0 10%;
+	}
+}
+
+@page frontmatter :right
+{
+	@bottom-right
+	{
+		content: counter(page, lower-roman);
+		margin: 0 10%;
+	}
+}
+
+
+:root
+{
+    color: black;
+    background: white;
+    font-size: 10pt;
+    font-family: Georgia, serif;
+    prince-text-replace: "fi" "\fb01" "fl" "\fb02" "..." "\2026";  /* ligatures available in Georgia */
+}
+
+
+body
+{
+    margin: 0 10%;
+	text-align: justify;
+}
+
+
+div.front
+{ 
+	page: frontmatter 
+}
+
+div.body
+{
+	counter-reset: page 1;
+}
 
 div.titlePage 
 {
@@ -44,37 +138,6 @@ h1.docTitle
 
 
 
-@page 
-{
-	size: A4;
-	margin: 27mm 16mm 27mm 16mm;
-
-	@footnotes 
-	{
-		border-top: solid black thin;
-		padding-top: 8pt;
-		margin: 0 10%;
-	}
-}
-
-@page :left 
-{
-	@bottom-left 
-	{
-		content: counter(page);
-		margin: 0 10%;
-	}
-}
-
-@page :right 
-{
-	@bottom-right
-	{
-		content: counter(page);
-		margin: 0 10%;
-	}
-}
-
 
 div.div1
 {
@@ -88,26 +151,7 @@ h2.normal
 }
 
 
-@page :right
-{
-	@top-right 
-	{
-		content: string(header, first); 
-		font-style: italic;
-		margin: 0 10%;
-	}
-}
-
-@page :left
-{
-	@top-left
-	{
-		content: string(header, first); 
-		font-style: italic;
-		margin: 0 10%;
-	}
-}
-
+/* ==== FOOTNOTES ==== */
 
 .displayfootnote
 {
@@ -115,13 +159,36 @@ h2.normal
 	font-size: 8pt;
 }
 
-
-.noteref, div.footnotes
+::footnote-marker 
 {
-	display: none;
+	footnote-style-position: inside;
+	font-size: 83%;
+    vertical-align: super;
+    line-height: none;
+	padding-right: 0.5em;
 }
 
 
+div.footnotes					
+{
+	display: none;			/* Suppress the display of the generated footnote sections */
+}
+
+.noteref					
+{
+	display: none;			/* Suppress the display of the generated footnote numbers */
+}
+
+.pseudonoteref				/* render references to footnotes similar to note markers */
+{
+    content: target-counter(attr(href), footnote);		
+	font-size: 83%;
+    vertical-align: super;
+    line-height: none;
+}
+
+
+/* ==== LINKS ==== */
 
 a:link, a:visited
 {
@@ -139,7 +206,7 @@ h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p
 
 p
 {
-    text-indent: 1.5em;
+    text-indent: 1em;
     margin: 0;
     padding: 0;
 }
@@ -148,8 +215,29 @@ p
 h1, h2, h3, h4, h5, h6
 {
     color: black;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: Georgia, serif;
 }
+
+
+/* ==== PDF bookmarks ==== */
+
+h1 { prince-bookmark-level: 1 }
+h2 { prince-bookmark-level: 2 }
+h3 { prince-bookmark-level: 3 }
+h4 { prince-bookmark-level: 4 }
+h5 { prince-bookmark-level: 5 }
+h6 { prince-bookmark-level: 6 }
+
+h1.label, h2.label, h3.label, h4.label, h5.label, h6.label
+{
+	prince-bookmark-level: none;
+}
+
+div.titlePage > h2
+{
+	prince-bookmark-level: none;
+}
+
 
 
 span.corr, span.abbr, span.measure, abbr
@@ -163,8 +251,10 @@ span.corr, span.abbr, span.measure, abbr
 {
     background-color: transparant;
     border: white 0pt solid;
-    font-size: 8pt;
-    font-family: Gentium, Georgia, "Times New Roman", Times, serif;
+    font-size: 7pt;
+    line-height: 1.2em;
+    font-family: Georgia, serif;
+    margin: 0;
 }
 
 
@@ -172,6 +262,31 @@ span.corr, span.abbr, span.measure, abbr
 {
 	color: black;
 }
+
+
+hr 
+{
+  border: 0;
+  color: black;
+  background-color: black;
+  height: 1px;
+  width: 15%;
+}
+
+
+/* ==== PAGE NUMBERS ==== */
+
+
+a.pageref			/* Replace references with pagenumbers with actual pagenumbers */
+{
+    content: target-counter(attr(href), page);
+}
+
+.pagenum			/* Suppress marginal pagenumbers */
+{
+    display: none;
+}
+
 
 
 ]]>

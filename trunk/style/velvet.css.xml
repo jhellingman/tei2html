@@ -27,7 +27,7 @@ p.byline
     margin-bottom: 2em;
 }
 
-.figureHead, .noteref, span.leftnote, p.legend, .versenum
+.figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum
 {
     color: #FDF1BA;
 }
