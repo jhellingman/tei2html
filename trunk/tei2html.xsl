@@ -2386,6 +2386,10 @@
         <span class="letterspaced"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='rm']">
+        <span class="rm"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+    </xsl:template>
+
     <xsl:template match="hi">
 		<xsl:choose>
 			<xsl:when test="contains(@rend, 'font-size(')">
