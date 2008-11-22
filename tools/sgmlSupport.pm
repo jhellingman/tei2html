@@ -1672,6 +1672,8 @@ BEGIN
 	$ent{"oumlcirc"}	= chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
 	$ent{"uumlcirc"}	= chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
 
+	$ent{"eumlbrev"}	= chr(0x00eb) . chr(0x0306); # e with diaresis and breve
+
 	$ent{"rdotbcirc"}	= chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
 	$ent{"oumlmacr"}	= chr(0x00F6) . chr(0x0304); # o with diaresis and macron

@@ -474,6 +474,11 @@ span.measure
     font-family: 'Walbaum-Fraktur';
 }
 
+.rm
+{
+	font-style: normal;
+}
+
 hr
 {
     clear:both;
