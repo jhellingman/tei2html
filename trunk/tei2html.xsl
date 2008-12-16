@@ -753,7 +753,7 @@
                         <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1"/>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[@type!='Ads']"/>
             </ul>
         </div>
     </xsl:template>
@@ -1993,6 +1993,7 @@
     <xsl:template match="q[@rend='block' or @rend='display']">
         <xsl:call-template name="closepar"/>
         <div class="blockquote">
+		    <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -2001,7 +2002,11 @@
 
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
-        <xsl:apply-templates/>
+		<div class="q">
+		    <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:apply-templates/>
+		</div>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
