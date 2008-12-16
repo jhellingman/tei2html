@@ -14,13 +14,16 @@ BEGIN
 	$langNameHash{"ar"}			= "Arabic";
 	$langNameHash{"ar-latn"}	= "Arabic (Latin transcription)";
 	$langNameHash{"as"}			= "Assamese";
+	
 	$langNameHash{"bn"}			= "Bengali";
 	$langNameHash{"bo"}			= "Tibetan";
 	$langNameHash{"bo-latn"}	= "Tibetan (Latin transcription)";
 
 	$langNameHash{"cy"}			= "Welsh";
+	
 	$langNameHash{"da"}			= "Danish";
 	$langNameHash{"de"}			= "German";
+	
 	$langNameHash{"el"}			= "Greek";
 	$langNameHash{"en"}			= "English";
 	$langNameHash{"en-1500"}	= "English (16th century)";
@@ -32,23 +35,30 @@ BEGIN
 	$langNameHash{"eo"}			= "Esperanto";
 	$langNameHash{"es"}			= "Spanish";
 	$langNameHash{"et"}			= "Estonian";
+	
 	$langNameHash{"fa"}			= "Persian";
 	$langNameHash{"fi"}			= "Finnish";
 	$langNameHash{"fr"}			= "French";
 	$langNameHash{"fy"}			= "Frisian";
 	$langNameHash{"fy-wwo"}		= "Frisian (Westerwold)";
+	
 	$langNameHash{"gd"}			= "Scots Gaelic";
+	
 	$langNameHash{"he"}			= "Hebrew";
 	$langNameHash{"he-latn"}	= "Hebrew (Latin transcription)";
 	$langNameHash{"hi"}			= "Hindi";
 	$langNameHash{"hi-latn"}	= "Hindi (Latin transcription)";
 	$langNameHash{"hr"}			= "Croatian";
+	
 	$langNameHash{"it"}			= "Italian";
+	
 	$langNameHash{"jp"}			= "Japanese";
 	$langNameHash{"jp-hira"}	= "Japanese (Hiragana)";
 	$langNameHash{"jp-latn"}	= "Japanese (Latin transcription)";
+	
 	$langNameHash{"la"}			= "Latin";
 	$langNameHash{"la-x-bio"}	= "Latin (Biological nomenclature)";
+	
 	$langNameHash{"my"}			= "Burmese";
 	$langNameHash{"my-latn"}	= "Burmese (Latin transcription)";
 	
@@ -76,9 +86,11 @@ BEGIN
 	$langNameHash{"pl"}			= "Polish";
 	$langNameHash{"pt"}			= "Portuguese";
 	$langNameHash{"pt-br"}		= "Portuguese (Brazil)";
+	
 	$langNameHash{"ro"}			= "Romanian";
 	$langNameHash{"ru"}			= "Russian";
 	$langNameHash{"ru-latn"}	= "Russian (Latin transcription)";
+	
 	$langNameHash{"sa"}			= "Sanskrit";
 	$langNameHash{"sa-latn"}	= "Sanskrit (Latin transcription)";
 	$langNameHash{"sd"}			= "Sindhi";
@@ -87,11 +99,13 @@ BEGIN
 	$langNameHash{"sr"}			= "Serbian";
 	$langNameHash{"sr-latn"}    = "Serbian (Latin script)";
 	$langNameHash{"sy"}			= "Syriac";
+	
 	$langNameHash{"tl"}			= "Tagalog";
 	$langNameHash{"tl-1900"}	= "Tagalog (19th and early 20th century orthography)";
 	$langNameHash{"tl-bayb"}	= "Tagalog (in Baybayin script)";
 	$langNameHash{"tm"}			= "Tamil";
 	$langNameHash{"tm-latn"}	= "Tamil (Latin transcription)";
+	$langNameHash{"tr"}			= "Turkish";
 
 	$langNameHash{"zh"}			= "Chinese";
 	$langNameHash{"zh-latn"}	= "Chinese (Latin transcription)";

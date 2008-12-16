@@ -2,7 +2,18 @@
 
 $tagPattern = "<(.*?)>";
 
+$italicStart = "_";
+$italicEnd = "_";
+
+if (1 == 1) 
+{
+	$italicStart = "";
+	$italicEnd = "";
+}
+
 use SgmlSupport qw/getAttrVal sgml2utf/;
+
+
 
 
 #
@@ -109,7 +120,7 @@ while (<>)
 		}
 		else
 		{
-			$a .= $` . "_" . $2 . "_";
+			$a .= $` . $italicStart . $2 . $italicEnd;
 		}
         $remainder = $';
     }
