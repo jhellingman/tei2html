@@ -1572,8 +1572,14 @@ BEGIN
 	$ent{"ering"}	    = "e" . chr(0x030A); # e with ring
 	$ent{"mring"}	    = "m" . chr(0x030A); # m with ring
 
-	$ent{"Acaron"}	    = "A" . chr(0x030C); # A with caron
-	$ent{"acaron"}	    = "a" . chr(0x030C); # a with caron
+	$ent{"Acaron"}	    = chr(0x01CD); # A with caron
+	$ent{"acaron"}	    = chr(0x01CE); # a with caron
+	$ent{"Icaron"}	    = chr(0x01CF); # I with caron
+	$ent{"icaron"}	    = chr(0x01D0); # i with caron
+	$ent{"Ocaron"}	    = chr(0x01D1); # O with caron
+	$ent{"ocaron"}	    = chr(0x01D2); # o with caron
+	$ent{"Ucaron"}	    = chr(0x01D3); # U with caron
+	$ent{"ucaron"}	    = chr(0x01D4); # u with caron
 
 	$ent{"adgrave"}		= "a" . chr(0x030F); # a with double grave
 	$ent{"idgrave"}		= "i" . chr(0x030F); # i with double grave
