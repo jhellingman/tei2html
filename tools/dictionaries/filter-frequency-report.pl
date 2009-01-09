@@ -4,7 +4,7 @@
 while (<>) 
 {
 	chomp $_;
-	$_ =~ /([0-9]+) +([0-9]+) +(.*?) +(.*)/;
+	$_ =~ /([0-9]+)\s+([0-9]+)\s+(.*?)\s+(.*)/;
 
 	$wcount = $1;
 	$dcount = $2;
@@ -13,6 +13,6 @@ while (<>)
 
 	if ($oldword ne $newword) 
 	{
-		print "$wcount\t$dcount\t$oldword\t$newword\n";
+		print "$oldword\t$newword\n";
 	}
 }
