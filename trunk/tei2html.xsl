@@ -5,6 +5,7 @@
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
     <!ENTITY deg        "&#176;">
+    <!ENTITY ldquo      "&#x201C;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
@@ -1932,7 +1933,14 @@
                     text-align: right;
                     color: white;
                 </xsl:attribute>
-                <xsl:value-of select="substring(.,1,1)"/>
+				<xsl:choose>
+					<xsl:when test="substring(.,1,1) = '&ldquo;'">
+						<xsl:value-of select="substring(.,1,2)"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="substring(.,1,1)"/>
+					</xsl:otherwise>
+				</xsl:choose>
             </span>
             <xsl:apply-templates mode="eat-initial"/>
         </p>
@@ -1942,6 +1950,9 @@
 
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>
+            <xsl:when test="position()=1 and substring(.,1,1) = '&ldquo;'">
+                <xsl:value-of select="substring(.,3)"/>
+            </xsl:when>
             <xsl:when test="position()=1">
                 <xsl:value-of select="substring(.,2)"/>
             </xsl:when>
