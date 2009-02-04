@@ -1204,7 +1204,14 @@
                 <xsl:call-template name="setHtmlLangAttribute"/>
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt">
-                        <xsl:value-of select="$strOrnament"/>
+					<xsl:choose>
+						<xsl:when test="contains(@rend, 'image-alt')">
+							<xsl:value-of select="substring-before(substring-after(@rend, 'image-alt('), ')')"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="$strOrnament"/>
+						</xsl:otherwise>
+					</xsl:choose>
                     </xsl:with-param>
                 </xsl:call-template>
             </div>
@@ -1302,17 +1309,19 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
-        <h2>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:call-template name="setHtmlClass"/>
-            <xsl:if test="contains(@rend, 'align(')">
-                <xsl:attribute name="align">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </h2>
+		<xsl:if test="not(contains(@rend, 'image-only'))">
+			<h2>
+				<xsl:call-template name="generate-id-attribute"/>
+				<xsl:call-template name="setHtmlLangAttribute"/>
+				<xsl:call-template name="setHtmlClass"/>
+				<xsl:if test="contains(@rend, 'align(')">
+					<xsl:attribute name="align">
+						<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+					</xsl:attribute>
+				</xsl:if>
+				<xsl:apply-templates/>
+			</h2>
+		</xsl:if>
     </xsl:template>
 
     <!-- div2 -->
@@ -1399,8 +1408,11 @@
     </xsl:template>
 
     <xsl:template match="byline">
-        <p class="byline">
+        <p>
             <xsl:call-template name="setHtmlLangAttribute"/>
+			<xsl:attribute name="class">byline
+                <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
