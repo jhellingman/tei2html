@@ -192,8 +192,8 @@
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgPage'"/>
         </xsl:call-template>
-    </xsl:variable>    
-	<xsl:variable name="strHere">
+    </xsl:variable>
+    <xsl:variable name="strHere">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgHere'"/>
         </xsl:call-template>
@@ -958,11 +958,11 @@
     </xsl:template>
 
     <xsl:template match="ab[@type='lineNum']">
-		<xsl:if test="not(@rend='hide')">
-			<span class="linenum">
-				<xsl:apply-templates/>
-			</span>
-		</xsl:if>
+        <xsl:if test="not(@rend='hide')">
+            <span class="linenum">
+                <xsl:apply-templates/>
+            </span>
+        </xsl:if>
     </xsl:template>
 
     <!-- Heatmap attributes -->
@@ -1072,17 +1072,17 @@
                 <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
                         <td width="20%">
-							<a class="pageref">
-								<xsl:call-template name="generate-href-attribute"/>
-								<xsl:choose>
-									<xsl:when test="preceding::pb[1]/@n = ''">
-										<xsl:value-of select="$strHere"/>
-									</xsl:when>		
-	                                <xsl:otherwise>
-										<xsl:value-of select="preceding::pb[1]/@n"/>
-									</xsl:otherwise>
-								</xsl:choose>
-							</a>
+                            <a class="pageref">
+                                <xsl:call-template name="generate-href-attribute"/>
+                                <xsl:choose>
+                                    <xsl:when test="preceding::pb[1]/@n = ''">
+                                        <xsl:value-of select="$strHere"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="preceding::pb[1]/@n"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </a>
                         </td>
                         <td width="40%">
                             <xsl:choose>
@@ -1204,14 +1204,14 @@
                 <xsl:call-template name="setHtmlLangAttribute"/>
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt">
-					<xsl:choose>
-						<xsl:when test="contains(@rend, 'image-alt')">
-							<xsl:value-of select="substring-before(substring-after(@rend, 'image-alt('), ')')"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="$strOrnament"/>
-						</xsl:otherwise>
-					</xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="contains(@rend, 'image-alt')">
+                            <xsl:value-of select="substring-before(substring-after(@rend, 'image-alt('), ')')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="$strOrnament"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     </xsl:with-param>
                 </xsl:call-template>
             </div>
@@ -1309,19 +1309,19 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
-		<xsl:if test="not(contains(@rend, 'image-only'))">
-			<h2>
-				<xsl:call-template name="generate-id-attribute"/>
-				<xsl:call-template name="setHtmlLangAttribute"/>
-				<xsl:call-template name="setHtmlClass"/>
-				<xsl:if test="contains(@rend, 'align(')">
-					<xsl:attribute name="align">
-						<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-					</xsl:attribute>
-				</xsl:if>
-				<xsl:apply-templates/>
-			</h2>
-		</xsl:if>
+        <xsl:if test="not(contains(@rend, 'image-only'))">
+            <h2>
+                <xsl:call-template name="generate-id-attribute"/>
+                <xsl:call-template name="setHtmlLangAttribute"/>
+                <xsl:call-template name="setHtmlClass"/>
+                <xsl:if test="contains(@rend, 'align(')">
+                    <xsl:attribute name="align">
+                        <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:apply-templates/>
+            </h2>
+        </xsl:if>
     </xsl:template>
 
     <!-- div2 -->
@@ -1410,7 +1410,7 @@
     <xsl:template match="byline">
         <p>
             <xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:attribute name="class">byline
+            <xsl:attribute name="class">byline
                 <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
             </xsl:attribute>
             <xsl:apply-templates/>
@@ -1945,14 +1945,14 @@
                     text-align: right;
                     color: white;
                 </xsl:attribute>
-				<xsl:choose>
-					<xsl:when test="substring(.,1,1) = '&ldquo;'">
-						<xsl:value-of select="substring(.,1,2)"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="substring(.,1,1)"/>
-					</xsl:otherwise>
-				</xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="substring(.,1,1) = '&ldquo;'">
+                        <xsl:value-of select="substring(.,1,2)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="substring(.,1,1)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </span>
             <xsl:apply-templates mode="eat-initial"/>
         </p>
@@ -2016,7 +2016,7 @@
     <xsl:template match="q[@rend='block' or @rend='display']">
         <xsl:call-template name="closepar"/>
         <div class="blockquote">
-		    <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -2025,11 +2025,11 @@
 
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
-		<div class="q">
-		    <xsl:call-template name="generate-id-attribute"/>
+        <div class="q">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
-			<xsl:apply-templates/>
-		</div>
+            <xsl:apply-templates/>
+        </div>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
@@ -2168,7 +2168,7 @@
 
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
-			<xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+            <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <h2><xsl:value-of select="$strApparatus"/></h2>
 
@@ -2232,14 +2232,14 @@
     </xsl:template>
 
 
-	<!-- linebreaks specific to an edition are not represented in the output -->
+    <!-- linebreaks specific to an edition are not represented in the output -->
     <xsl:template match="lb[@ed]">
         <a>
             <xsl:call-template name="generate-id-attribute"/>
         </a>
     </xsl:template>
 
-	<!-- linebreaks not linked to an edition are to be output -->
+    <!-- linebreaks not linked to an edition are to be output -->
     <xsl:template match="lb">
         <br>
             <xsl:call-template name="generate-id-attribute"/>
@@ -2249,23 +2249,23 @@
 
     <xsl:template match="l">
         <p class="line">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:attribute name="style">
-                <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
-                <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
-            </xsl:attribute>
+            <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)') or contains(@rend, 'indent(')">
+                <xsl:attribute name="style">
+                    <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
+                    <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
+                </xsl:attribute>
+            </xsl:if>
 
             <xsl:if test="@n">
                 <span class="linenum"><xsl:value-of select="@n"/></span>
             </xsl:if>
 
-            <span>
-                <xsl:call-template name="generate-id-attribute"/>
-                <xsl:if test="contains(@rend, 'hemistich(')">
-                    <span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
-                </xsl:if>
-                <xsl:apply-templates/>
-            </span>
+            <xsl:if test="contains(@rend, 'hemistich(')">
+                <span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
+            </xsl:if>
+            <xsl:apply-templates/>
         </p>
     </xsl:template>
 
@@ -2274,10 +2274,7 @@
 
     <xsl:template match="lg|sp">
         <div>
-            <xsl:attribute name="class">
-                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
-                poem
-            </xsl:attribute>
+            <xsl:attribute name="class"><xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>poem</xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -2419,18 +2416,18 @@
     </xsl:template>
 
     <xsl:template match="hi">
-		<xsl:choose>
-			<xsl:when test="contains(@rend, 'font-size(')">
-				<span>
-					<xsl:call-template name="setHtmlLangAttribute"/>
-					<xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
-					<xsl:apply-templates/>
-				</span>
-			</xsl:when>
-			<xsl:otherwise>
-				<i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
-			</xsl:otherwise>
-		</xsl:choose>
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'font-size(')">
+                <span>
+                    <xsl:call-template name="setHtmlLangAttribute"/>
+                    <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:when>
+            <xsl:otherwise>
+                <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
