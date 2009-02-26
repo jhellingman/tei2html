@@ -62,8 +62,6 @@ sub main
 		$infile = $ARGV[2];
 	}
 
-	open (OUTPUTFILE, ">suggestions-for-dictionary.txt") || die("Could not create output file 'suggestion-for-dictionary.txt'");
-	open (OUTPUTDATA, ">word-statistics.txt") || die("Could not create output file 'word-statistics.txt'");
 
 	# loadScannoFile("en");
 
@@ -645,8 +643,6 @@ sub reportWord()
 	# Count how many times a word with this frequency occurs:
 	$countCountHash{$count}++;
 
-	print OUTPUTDATA "$lang\t$word\t$count\n";
-
 	my $known = isKnownWord($word, $language);
 	if ($known == 0) 
 	{
@@ -659,11 +655,6 @@ sub reportWord()
 
 	if ($known == 0)
 	{
-		if ($count > 2) 
-		{
-			print OUTPUTFILE "$word\n";
-		}
-
 		my $heatMapClass = lookupHeatMapClass($count);
 
 		if ($compoundWord ne "") 
@@ -712,10 +703,20 @@ sub compoundWord()
 		if (isKnownWord($before, $language) == 1 && isKnownWord(ucfirst($after), $language) == 1)
 		{
 			# print STDERR "[$before|$after] ";
-			return "$before|$after";
+			return "$word";
 		}
 	}
-	return "";
+
+	my @parts = split(/-/, $word);
+	foreach my $part (@parts)
+	{
+		if (!isKnownWord($part, $language))
+		{
+			return "";
+		}
+	}
+
+	return $word;
 }
 
 
