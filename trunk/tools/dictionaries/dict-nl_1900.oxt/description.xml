@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006"  xmlns:xlink="http://www.w3.org/1999/xlink">
     <version value="2008.07.01" />
-    <identifier value="org.openoffice.nl.hunspell.dictionaries" />
+    <identifier value="ph.gutenberg.hunspell.nl.dictionaries" />
     <display-name>
-        <name lang="en">Dutch spelling and hyphenation dictionaries</name>
+        <name lang="en">Dutch spelling dictionary, following the old De Vries-Te Winkel orthography, as used between 1865 and 1947.</name>
+        <name lang="nl">Nederlandse spellingscontrole volgens de spelling De Vries-Te Winkel zoals die gebruikt werd tussen 1865 en 1947.</name>
     </display-name>
     <platform value="all" />
     <dependencies>
