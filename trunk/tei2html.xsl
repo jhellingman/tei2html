@@ -1286,6 +1286,7 @@
                 <xsl:if test="contains(@rend, 'class(')">
                     <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
                 </xsl:if>
+				<xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
             </xsl:attribute>
 
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">

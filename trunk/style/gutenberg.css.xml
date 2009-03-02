@@ -59,6 +59,15 @@ h2.docImprint
     padding:1em;
 }
 
+.advertisment
+{
+    background-color:#FFFEE0;
+    border:black 1px dotted;
+    color:#000;
+    margin:2em 5%;
+    padding:1em;
+}
+
 .div0
 {
     padding-top: 5.6em;
