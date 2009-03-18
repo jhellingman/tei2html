@@ -1,12 +1,14 @@
 # tei2xml.pl -- process a TEI file.
 
-$toolsdir   = "L:\\eLibrary\\tools\\tei2html\\tools";   # location of tools
-$patcdir    = "L:\\eLibrary\\tools\\tei2html\\tools\\patc\\transcriptions"; # location of patc transcription files.
-$xsldir     = "L:\\eLibrary\\tools\\tei2html";  # location of xsl stylesheets
+$toolsdir   = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
+$patcdir    = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
+$xsldir     = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
 $tmpdir     = "C:\\Temp";                       # place to drop temporary files
 $bindir     = "C:\\Bin";
 $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
-$princedir  = "F:\\Programs\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
+$princedir  = "C:\\Program Files\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
+
+$saxon = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java\" -jar C:\\Bin\\saxon\\saxon.jar "; # command to run the saxon processor (see http://saxon.sourceforge.net/, using Version 6.5.5)
 
 $usePrince = 0;
 
@@ -138,13 +140,13 @@ sub processFile
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $currentname > tmp.1");
     system ("sx -c $catalog -E10000 -xlower -xcomment -xempty -xndata  tmp.1 > tmp.2");
-    system ("saxon tmp.2 $xsldir/tei2tei.xsl > tmp.3");
+    system ("$saxon tmp.2 $xsldir/tei2tei.xsl > tmp.3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < tmp.3 > tmp.4");
     system ("perl $toolsdir/ent2ucs.pl tmp.4 > $basename.xml");
 
 	# convert from TEI P4 to TEI P5  (experimental)
-    # system ("saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
+    # system ("$saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
 
 	# collect information about images.
     if (-d "images")
@@ -152,7 +154,7 @@ sub processFile
         print "Collect image dimensions...\n";
         # add -c to also collect contour information with this script.
 		# Need to use older perl as this requires the image-magick integration, which lags behind Perl.
-        system ("perl5.8.8.exe $toolsdir/imageinfo.pl images > imageinfo.xml");
+        system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.
@@ -179,7 +181,7 @@ sub processFile
 
 
     print "Create HTML version...\n";
-    system ("saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
+    system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
     system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
     system ("sed \"s/^[ \t]*//g\" < tmp.5a > $basename.html");
     system ("tidy -qe $basename.html");
@@ -191,7 +193,7 @@ sub processFile
 
 		print "Create PDF version...\n";
 		$optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
-		system ("saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
+		system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
 		system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
 		system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
 		system ("tidy -qe tmp5b.html");
@@ -205,7 +207,7 @@ sub processFile
 
 	# Create a text heat map.
     print "Create text heat map...\n";
-	system ("saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+	system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
 
 
     print "Create text version...\n";
