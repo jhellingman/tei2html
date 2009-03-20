@@ -1142,6 +1142,30 @@
             <h3><xsl:value-of select="$strAvailability"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
+	    <xsl:if test="//idno[@type='OCLC'] or //idno[@type='PGnum']">
+		<!-- <h3><xsl:value-of select="$strCatalogEntry"/></h3> -->
+
+		<xsl:if test="//idno[@type='PGnum']">
+			<p>Project Gutenberg eBook: 
+				<a>
+					<xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>				
+					<xsl:value-of select="//idno[@type='PGnum']"/>
+				</a>.
+			</p>
+		</xsl:if>
+
+		<xsl:if test="//idno[@type='OCLC']">
+			<p>OCLC: 
+				<a>
+					<xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
+					<xsl:value-of select="//idno[@type='OCLC']"/>
+				</a>.
+			</p>
+		</xsl:if>
+
+	    </xsl:if>
+
+
             <h3><xsl:value-of select="$strEncoding"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
 
