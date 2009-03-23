@@ -189,8 +189,10 @@
         </msg:message>
 
         <msg:message name="msgExternalReferences">External References</msg:message>
-
         <msg:message name="msgExternalReferencesDisclaimer">This Project Gutenberg eBook contains external references. These links may not work for you.</msg:message>
+
+        <msg:message name="msgPgCatalogEntry">Project Gutenberg catalog page</msg:message>
+        <msg:message name="msgOclcCatalogEntry">Related WorldCat catalog page</msg:message>
 
 
         <!--==#############################################################==-->
@@ -686,8 +688,10 @@
         </msg:message>
 
         <msg:message name="msgExternalReferences">Externe Referenties</msg:message>
-
         <msg:message name="msgExternalReferencesDisclaimer">Dit Project Gutenberg eBoek bevat externe referenties. Het kan zijn dat deze links voor u niet werken.</msg:message>
+
+        <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
+        <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat catalogus pagina</msg:message>
 
     </msg:messages>
 
