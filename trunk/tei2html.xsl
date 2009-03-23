@@ -299,7 +299,16 @@
             <xsl:with-param name="name" select="'msgExternalReferencesDisclaimer'"/>
         </xsl:call-template>
     </xsl:variable>
-
+    <xsl:variable name="strOclcCatalogEntry">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgOclcCatalogEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>    
+    <xsl:variable name="strPgCatalogEntry">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgPgCatalogEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>
 
     <!--====================================================================-->
 
@@ -681,6 +690,9 @@
             <xsl:choose>
                 <xsl:when test="substring(@url, 1, 3) = 'pg:'">
                     <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
+                </xsl:when>
+                <xsl:when test="substring(@url, 1, 5) = 'oclc:'">
+                    <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="substring-after(@url, 'oclc:')"/></xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
@@ -1142,29 +1154,23 @@
             <h3><xsl:value-of select="$strAvailability"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
-	    <xsl:if test="//idno[@type='OCLC'] or //idno[@type='PGnum']">
-		<!-- <h3><xsl:value-of select="$strCatalogEntry"/></h3> -->
+            <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
+                <p><xsl:value-of select="$strPgCatalogEntry"/>
+                    <a>
+                        <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>				
+                        <xsl:value-of select="//idno[@type='PGnum']"/>
+                    </a>.
+                </p>
+            </xsl:if>
 
-		<xsl:if test="//idno[@type='PGnum']">
-			<p>Project Gutenberg eBook: 
-				<a>
-					<xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>				
-					<xsl:value-of select="//idno[@type='PGnum']"/>
-				</a>.
-			</p>
-		</xsl:if>
-
-		<xsl:if test="//idno[@type='OCLC']">
-			<p>OCLC: 
-				<a>
-					<xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
-					<xsl:value-of select="//idno[@type='OCLC']"/>
-				</a>.
-			</p>
-		</xsl:if>
-
-	    </xsl:if>
-
+            <xsl:if test="//idno[@type='OCLC']">
+                <p><xsl:value-of select="$strOclcCatalogEntry"/>: 
+                    <a>
+                        <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
+                        <xsl:value-of select="//idno[@type='OCLC']"/>
+                    </a>.
+                </p>
+            </xsl:if>
 
             <h3><xsl:value-of select="$strEncoding"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
