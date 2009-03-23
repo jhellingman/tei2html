@@ -1,0 +1,24 @@
+#summary Installation instructions.
+
+= Introduction =
+
+The tei2html code has a range of dependencies on third-party software. This page lists those.
+
+= Perl =
+
+You'll need Perl, and it will have to work together with the PerlMagick extension. To make
+this work, you'll need to install matching versions of both.
+
+My advise is to download [http://www.activestate.com/activeperl/ ActivePerl]. For Windows, use [http://downloads.activestate.com/ActivePerl/Windows/5.10/ActivePerl-5.10.0.1004-MSWin32-x86-287188.msi Perl 5.10, build 1004.] (Also on Vista x64, as the x64 version of Perl is not yet compatible with ImageMagick.)
+
+After installing Perl, download [http://www.imagemagick.org/script/index.php ImageMagick]. On Windows, use [http://www.imagemagick.org/download/binaries/ImageMagick-6.5.0-5-Q16-windows-dll.exe ImageMagick 6.5.0], 16 bits dynamically linked version. Don't forget to check PerlMagick installation during the set-up.
+
+= Saxon =
+
+[http://saxon.sourceforge.net/ Saxon] is the XSLT processor to use. To use it, you need a Java Virtual Machine. Download [http://prdownloads.sourceforge.net/saxon/saxon6-5-5.zip version 6.5.5], which is the last version to support XSLT 1.0.
+
+If you already have a Java Runtime Environment, you need to locate it, and update the Perl script tei2html.pl with its proper location.
+
+= SX, NSGML =
+
+SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since the tools still support SGML, you will need those two tools. They can be downloaded from [http://www.jclark.com/ James Clark website]. For windows, get [ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip sp 1.3.4].
