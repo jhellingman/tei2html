@@ -1550,6 +1550,7 @@ BEGIN
 	$ent{"rmacr"}		= "r" . chr(0x0304); # r with macron
 	$ent{"mmacr"}		= "m" . chr(0x0304); # m with macron
 	$ent{"nmacr"}		= "n" . chr(0x0304); # n with macron
+	$ent{"aemacr"}	    = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
 
 	$ent{"Jbreve"}	    = "J" . chr(0x0306); # J with breve
 	$ent{"jbreve"}	    = "j" . chr(0x0306); # j with breve
@@ -1571,6 +1572,7 @@ BEGIN
 
 	$ent{"ering"}	    = "e" . chr(0x030A); # e with ring
 	$ent{"mring"}	    = "m" . chr(0x030A); # m with ring
+	$ent{"aering"}	    = chr(0x00E6) . chr(0x030A); # ae ligatures with ring
 
 	$ent{"Acaron"}	    = chr(0x01CD); # A with caron
 	$ent{"acaron"}	    = chr(0x01CE); # a with caron
@@ -1663,15 +1665,17 @@ BEGIN
 
 
 	# Requiring wide combining diacritics
+	$ent{"oobreve"}		= "o" . chr(0x035D) . "o"; # oo with wide breve 
+
+	$ent{"oomacr"}		= "o" . chr(0x035E) . "o"; # oo with wide macron 
+
 	$ent{"ghbarb"}		= "g" . chr(0x035F) . "h"; # gh with double macron below
 	$ent{"Ghbarb"}		= "G" . chr(0x035F) . "h"; # Gh with double macron below
 	$ent{"khbarb"}		= "k" . chr(0x035F) . "h"; # Kh with double macron below
 	$ent{"Khbarb"}		= "K" . chr(0x035F) . "h"; # Kh with double macron below
 
-	$ent{"ngtilde"}		= "n" . chr(0x0360) . "g";	 # ng with double tilde
+	$ent{"ngtilde"}		= "n" . chr(0x0360) . "g"; # ng with double tilde
 
-	$ent{"aering"}	    = chr(0x00E6) . chr(0x030A); # ae ligatures with ring
-	$ent{"aemacr"}	    = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
 
 	# Multiple combining diacritics
 	$ent{"aumlcirc"}	= chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
