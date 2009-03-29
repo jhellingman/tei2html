@@ -362,6 +362,10 @@
                         <xsl:variable name="stylesheet2" select="document($stylesheetname)"/>
                         <xsl:copy-of select="$stylesheet2/*/node()"/>
 
+                        /* Standard Aural CSS stylesheet */
+                        <xsl:variable name="stylesheet4" select="document('style/aural.css.xml')"/>
+                        <xsl:copy-of select="$stylesheet4/*/node()"/>
+
                         <xsl:if test="$customCssFile">
                             /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
                             <xsl:variable name="stylesheet3" select="document($customCssFile)"/>
