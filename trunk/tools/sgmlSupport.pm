@@ -1982,6 +1982,7 @@ sub pgdp2sgml
 
 	# Accents above:
 	$string =~ s/\[\/([a-zA-Z])\]/\&\1acute;/g;			# acute
+	$string =~ s/\[\'([a-zA-Z])\]/\&\1acute;/g;			# acute
 	$string =~ s/\[\\([a-zA-Z])\]/\&\1grave;/g;			# grave
 	$string =~ s/\[\^([a-zA-Z])\]/\&\1circ;/g;			# circumflex
 	$string =~ s/\[\"([a-zA-Z])\]/\&\1uml;/g;			# dieresis

@@ -198,6 +198,11 @@
             <xsl:with-param name="name" select="'msgHere'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strNotApplicable">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgNotApplicable'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strChapter">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgChapter'"/>
@@ -304,6 +309,11 @@
             <xsl:with-param name="name" select="'msgOclcCatalogEntry'"/>
         </xsl:call-template>
     </xsl:variable>    
+    <xsl:variable name="strOpenLibraryCatalogEntry">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgOpenLibraryCatalogEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>  
     <xsl:variable name="strPgCatalogEntry">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgPgCatalogEntry'"/>
@@ -1091,8 +1101,8 @@
                             <a class="pageref">
                                 <xsl:call-template name="generate-href-attribute"/>
                                 <xsl:choose>
-                                    <xsl:when test="preceding::pb[1]/@n = ''">
-                                        <xsl:value-of select="$strHere"/>
+                                    <xsl:when test="not(preceding::pb[1]/@n) or preceding::pb[1]/@n = ''">
+                                        <xsl:value-of select="$strNotApplicable"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="preceding::pb[1]/@n"/>
@@ -1163,6 +1173,15 @@
                     <a>
                         <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>				
                         <xsl:value-of select="//idno[@type='PGnum']"/>
+                    </a>.
+                </p>
+            </xsl:if>
+
+            <xsl:if test="//idno[@type='OLN']">
+                <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>: 
+                    <a>
+                        <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
+                        <xsl:value-of select="//idno[@type='OLN']"/>
                     </a>.
                 </p>
             </xsl:if>
