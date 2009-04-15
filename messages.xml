@@ -74,6 +74,7 @@
         <msg:message name="msgNotInSource">Not in source</msg:message>
         <msg:message name="msgDeleted">Deleted</msg:message>
         <msg:message name="msgHere">Here</msg:message>
+        <msg:message name="msgNotApplicable">N.A.</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -193,6 +194,7 @@
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalog page</msg:message>
         <msg:message name="msgOclcCatalogEntry">Related WorldCat catalog page</msg:message>
+        <msg:message name="msgOpenLibraryCatalogEntry">Related Open Library catalog page</msg:message>
 
 
         <!--==#############################################################==-->
@@ -587,6 +589,7 @@
         <msg:message name="msgNotInSource">Niet in bron</msg:message>
         <msg:message name="msgDeleted">Verwijderd</msg:message>
         <msg:message name="msgHere">Hier</msg:message>
+        <msg:message name="msgNotApplicable">n.v.t.</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>
@@ -692,6 +695,7 @@
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
         <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat catalogus pagina</msg:message>
+        <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library catalogus pagina</msg:message>
 
     </msg:messages>
 
