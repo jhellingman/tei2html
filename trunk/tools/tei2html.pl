@@ -182,10 +182,8 @@ sub processFile
 
     print "Create HTML version...\n";
     system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
-    system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
-    system ("sed \"s/^[ \t]*//g\" < tmp.5a > $basename.html");
-    system ("tidy -qe $basename.html");
-    system ("rm tmp.5a");
+    system ("perl $toolsdir/wipeids.pl tmp.5 > $basename.html");
+    system ("tidy -m -wrap 72 -f tidy.err $basename.html");
 
 	if ($usePrince == 1) 
 	{
