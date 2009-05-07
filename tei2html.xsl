@@ -308,12 +308,12 @@
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgOclcCatalogEntry'"/>
         </xsl:call-template>
-    </xsl:variable>    
+    </xsl:variable>
     <xsl:variable name="strOpenLibraryCatalogEntry">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgOpenLibraryCatalogEntry'"/>
         </xsl:call-template>
-    </xsl:variable>  
+    </xsl:variable>
     <xsl:variable name="strPgCatalogEntry">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgPgCatalogEntry'"/>
@@ -518,6 +518,11 @@
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
+            </xsl:when>
+            <xsl:when test=". = ''">
+                <a>
+                    <xsl:call-template name="generate-id-attribute"/>
+                </a>
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">
@@ -1171,14 +1176,14 @@
             <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
                 <p><xsl:value-of select="$strPgCatalogEntry"/>
                     <a>
-                        <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>				
+                        <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='PGnum']"/>
                     </a>.
                 </p>
             </xsl:if>
 
             <xsl:if test="//idno[@type='OLN']">
-                <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>: 
+                <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>:
                     <a>
                         <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OLN']"/>
@@ -1187,7 +1192,7 @@
             </xsl:if>
 
             <xsl:if test="//idno[@type='OCLC']">
-                <p><xsl:value-of select="$strOclcCatalogEntry"/>: 
+                <p><xsl:value-of select="$strOclcCatalogEntry"/>:
                     <a>
                         <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OCLC']"/>
@@ -1339,7 +1344,7 @@
                 <xsl:if test="contains(@rend, 'class(')">
                     <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
                 </xsl:if>
-				<xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
+                <xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
             </xsl:attribute>
 
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
@@ -1641,14 +1646,6 @@
             <xsl:call-template name="cell-rend-col"/>
         </xsl:variable>
 
-        <xsl:if test="contains($rend, 'image(')">
-            <xsl:call-template name="insertimage2">
-                <xsl:with-param name="alt">
-                    <xsl:value-of select="x"/>
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
-
         <xsl:call-template name="cell-rend-class">
             <xsl:with-param name="rend">
                 <xsl:value-of select="$rend"/>
@@ -1670,6 +1667,14 @@
                 <xsl:if test="contains($rend, 'padding-bottom(')">padding-bottom:<xsl:value-of select="substring-before(substring-after($rend, 'padding-bottom('), ')')"/>;</xsl:if>
                 <xsl:if test="contains($rend, 'font-weight(')">font-weight:<xsl:value-of select="substring-before(substring-after($rend, 'font-weight('), ')')"/>;</xsl:if>
             </xsl:attribute>
+        </xsl:if>
+
+        <xsl:if test="contains($rend, 'image(')">
+            <xsl:call-template name="insertimage2">
+                <xsl:with-param name="alt">
+                    <xsl:value-of select="x"/>
+                </xsl:with-param>
+            </xsl:call-template>
         </xsl:if>
 
     </xsl:template>
@@ -2442,37 +2447,38 @@
     </xsl:template>
 
     <xsl:template match="hi[@rend='italic']">
-        <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <xsl:template match="hi[@rend='bold']">
-        <b><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></b>
+        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></b>
     </xsl:template>
 
     <xsl:template match="hi[@rend='sc']">
-        <span class="smallcaps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='caps']">
-        <span class="caps"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='font(fraktur)']">
-        <span class="fraktur"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='ex']">
-        <span class="letterspaced"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="letterspaced"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='rm']">
-        <span class="rm"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi">
         <xsl:choose>
             <xsl:when test="contains(@rend, 'font-size(')">
                 <span>
+                    <xsl:call-template name="generate-id-attribute"/>
                     <xsl:call-template name="setHtmlLangAttribute"/>
                     <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
                     <xsl:apply-templates/>
