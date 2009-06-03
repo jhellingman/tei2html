@@ -253,6 +253,11 @@
             <xsl:with-param name="name" select="'msgCorrectionsAppliedToText'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strCorrectionsOverview">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgCorrectionsOverview'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strColophon">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgColophon'"/>
@@ -1094,6 +1099,7 @@
         <p><xsl:value-of select="$strCorrectionsAppliedToText"/></p>
 
         <table width="75%">
+			<xsl:attribute name="summary"><xsl:value-of select="$strCorrectionsOverview"/></xsl:attribute>
             <tr>
                 <th><xsl:value-of select="$strPage"/></th>
                 <th><xsl:value-of select="$strSource"/></th>
