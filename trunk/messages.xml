@@ -89,6 +89,7 @@
         <msg:message name="msgLocation">Location</msg:message>
         <msg:message name="msgLocation.n">Locations</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</msg:message>
+        <msg:message name="msgCorrectionsOverview">Overview of corrections applied to the text.</msg:message>
         <msg:message name="msgColophon">Colophon</msg:message>
         <msg:message name="msgApparatus">Textual Notes</msg:message>
         <msg:message name="msgRevisionHistory">Revision History</msg:message>
@@ -604,6 +605,7 @@
         <msg:message name="msgLocation">Plaats</msg:message>
         <msg:message name="msgLocation.n">Plaatsen</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgColophon">Colofon</msg:message>
         <msg:message name="msgApparatus">Tekstkritische noten</msg:message>
         <msg:message name="msgRevisionHistory">Documentgeschiedenis</msg:message>
