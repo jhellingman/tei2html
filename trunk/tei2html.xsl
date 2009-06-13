@@ -595,7 +595,20 @@
 
 
     <!--====================================================================-->
-    <!-- Measurements with metric equivalent  -->
+    <!-- Choice element (P5) -->
+
+    <xsl:template match="choice[reg/@type='trans']">
+        <span class="trans">
+			<xsl:attribute name="title">
+				<xsl:value-of select="reg"/>
+			</xsl:attribute>
+			<xsl:apply-templates select="orig"/>
+		</span>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- Measurements with metric equivalent -->
 
     <xsl:template match="measure">
         <span class="measure">

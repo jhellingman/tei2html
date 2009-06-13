@@ -249,6 +249,8 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 <p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
 
+<p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
+
 <p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign>  adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2" place="foot"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
 
 
