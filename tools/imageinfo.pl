@@ -1,4 +1,4 @@
-
+# imageinfo.pl -- Collect information about images into an XML file for processing by XSLT.
 
 use Image::Magick;
 use File::Basename;
@@ -72,7 +72,7 @@ sub handleImage
 	my $imageFile = shift;
 	my $fileFormat;
 	my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $fileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($imageFile);
-	my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = localtime($mtime);
+	my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
 	my $fileDate = sprintf "%4d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min , $sec;
 
 	my $image = Image::Magick->new;

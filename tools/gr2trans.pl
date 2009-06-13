@@ -6,6 +6,7 @@
 # Alternative output to build HTML: <span class=trans title="<GRTA>...</GRTA>"><GR>...</GR></span>
 #
 
+
 $useHtml = 1;
 
 
@@ -16,6 +17,12 @@ sub main
 {
 	my $file = $ARGV[0];
 
+	if ($file eq "-x") 
+	{
+		$useHtml = 0;
+		$file = $ARGV[1];
+	}
+
 	open(INPUTFILE, $file) || die("Could not open input file $file");
 
 	my $paragraph = "";
@@ -24,6 +31,7 @@ sub main
 	{
 		my $line = $_;
 
+		# Deal with PGDP page separators.
 		if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) 
 		{
 			print "\n\n" . handleParagraph($paragraph);
@@ -62,7 +70,7 @@ sub handleParagraph
 	}
 	else
 	{
-		$paragraph =~ s/<GR>(.*?)<\/GR>/<choice><orig><GR>\1<\/GR><\/orig><reg><GRT>\1<\/GRT><\/reg><\/choice>/g;
+		$paragraph =~ s/<GR>(.*?)<\/GR>/<choice><orig><GR>\1<\/GR><\/orig><reg type=\"trans\"><GRT>\1<\/GRT><\/reg><\/choice>/g;
 	}
 
 	return $paragraph;
