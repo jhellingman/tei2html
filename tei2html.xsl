@@ -1147,7 +1147,7 @@
                         <td width="40%">
                             <xsl:choose>
                                 <xsl:when test=". != ''">
-                                    <xsl:value-of select="."/>
+                                    <xsl:apply-templates/>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     [<i><xsl:value-of select="$strDeleted"/></i>]
