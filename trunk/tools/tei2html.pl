@@ -70,8 +70,11 @@ sub processFile
     my $containsGreek = system ("grep -q \"<GR>\" $currentname");
     if ($containsGreek == 0)
     {
-        print "Converting Greek transcription...\n";
-        system ("patc -p $patcdir/greek/gr2sgml.pat $currentname tmp.el");
+		print "Converting Greek transcription...\n";
+		print "Adding Greek transcription in choice elements...\n";
+		system ("perl $toolsdir/gr2trans.pl -x $currentname > tmp.el.1");
+        system ("patc -p $patcdir/greek/grt2sgml.pat tmp.el.1 tmp.el.2");
+        system ("patc -p $patcdir/greek/gr2sgml.pat tmp.el.2 tmp.el");
         $currentname = "tmp.el";
     }
 
