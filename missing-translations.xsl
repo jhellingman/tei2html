@@ -7,7 +7,7 @@
 	<!-- find missing translations in our messages.xml -->
 
 	<xsl:variable name="srclang" select="'en'"/>
-	<xsl:variable name="destlang" select="'es'"/>
+	<xsl:variable name="destlang" select="'fr'"/>
 
 	<xsl:strip-space elements="*"/>
 
