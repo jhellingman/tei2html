@@ -19,8 +19,8 @@ $filename = $ARGV[0];
 
 if ($filename eq "-p") 
 {
-	$usePrince = 1;
-	$filename = $ARGV[1];
+    $usePrince = 1;
+    $filename = $ARGV[1];
 }
 
 
@@ -66,13 +66,19 @@ sub processFile
     print "Processing TEI-file '$basename' version $version\n";
 
 
+    # Translate Latin-1 characters to entities
+    print "Converting Latin-1 characters to entities...\n";
+    system ("patc -p $toolsdir/win2sgml.pat $currentname tmp.asc");
+    $currentname = "tmp.asc";
+
+
     # Check for presence of Greek transcription
     my $containsGreek = system ("grep -q \"<GR>\" $currentname");
     if ($containsGreek == 0)
     {
-		print "Converting Greek transcription...\n";
-		print "Adding Greek transcription in choice elements...\n";
-		system ("perl $toolsdir/gr2trans.pl -x $currentname > tmp.el.1");
+        print "Converting Greek transcription...\n";
+        print "Adding Greek transcription in choice elements...\n";
+        system ("perl $toolsdir/gr2trans.pl -x $currentname > tmp.el.1");
         system ("patc -p $patcdir/greek/grt2sgml.pat tmp.el.1 tmp.el.2");
         system ("patc -p $patcdir/greek/gr2sgml.pat tmp.el.2 tmp.el");
         $currentname = "tmp.el";
@@ -87,7 +93,7 @@ sub processFile
         $currentname = "tmp.as";
     }
 
-	# Check for presence of Bengali transcription
+    # Check for presence of Bengali transcription
     my $containsAssamese = system ("grep -q \"<BN>\" $currentname");
     if ($containsAssamese == 0)
     {
@@ -148,15 +154,15 @@ sub processFile
     system ("sed \"s/|xxxx|/\\&/g\" < tmp.3 > tmp.4");
     system ("perl $toolsdir/ent2ucs.pl tmp.4 > $basename.xml");
 
-	# convert from TEI P4 to TEI P5  (experimental)
+    # convert from TEI P4 to TEI P5  (experimental)
     # system ("$saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
 
-	# collect information about images.
+    # collect information about images.
     if (-d "images")
     {
         print "Collect image dimensions...\n";
         # add -c to also collect contour information with this script.
-		# Need to use older perl as this requires the image-magick integration, which lags behind Perl.
+        # Need to use older perl as this requires the image-magick integration, which lags behind Perl.
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
 
@@ -188,27 +194,27 @@ sub processFile
     system ("perl $toolsdir/wipeids.pl tmp.5 > $basename.html");
     system ("tidy -m -wrap 72 -f tidy.err $basename.html");
 
-	if ($usePrince == 1) 
-	{
-		# Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
+    if ($usePrince == 1) 
+    {
+        # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
 
-		print "Create PDF version...\n";
-		$optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
-		system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
-		system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
-		system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
-		system ("tidy -qe tmp5b.html");
-		system ("$princedir/prince tmp5b.html $basename.pdf");
-		system ("rm tmp.5a tmp5b.html");
-	}
+        print "Create PDF version...\n";
+        $optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
+        system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
+        system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
+        system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
+        system ("tidy -qe tmp5b.html");
+        system ("$princedir/prince tmp5b.html $basename.pdf");
+        system ("rm tmp.5a tmp5b.html");
+    }
 
     print "Report on word usage...\n";
     system ("perl $toolsdir/ucwords.pl tmp.4 > tmp.4a");
     system ("perl $toolsdir/ent2ucs.pl tmp.4a > $basename-words.html");
 
-	# Create a text heat map.
+    # Create a text heat map.
     print "Create text heat map...\n";
-	system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+    system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
 
 
     print "Create text version...\n";
