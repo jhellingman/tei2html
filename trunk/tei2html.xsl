@@ -1585,6 +1585,7 @@
 
     <xsl:template match="row">
         <tr valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </tr>
@@ -1592,6 +1593,7 @@
 
     <xsl:template match="row[@role='label']/cell">
         <td valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
@@ -1600,6 +1602,7 @@
 
     <xsl:template match="cell[@role='label']">
         <td valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
@@ -1608,6 +1611,7 @@
 
     <xsl:template match="row[@role='unit']/cell">
         <td valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
@@ -1616,6 +1620,7 @@
 
     <xsl:template match="cell[@role='unit']">
         <td valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
@@ -1624,6 +1629,7 @@
 
     <xsl:template match="cell">
         <td valign="top">
+			<xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <xsl:apply-templates/>
