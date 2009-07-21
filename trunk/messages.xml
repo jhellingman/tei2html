@@ -200,6 +200,10 @@
         <msg:message name="msgOriginalBackCover">Original Back Cover</msg:message>
         <msg:message name="msgOriginalSpine">Original Spine</msg:message>
 
+        <msg:message name="msgLinkToPg">Link to Project Gutenberg ebook</msg:message>
+        <msg:message name="msgLinkToOpenLibrary">Link to OpenLibrary catalog page</msg:message>
+        <msg:message name="msgLinkToWorldCat">Link to WorldCat catalog page</msg:message>
+        <msg:message name="msgExternalLink">External link</msg:message>
 
         <!--==#############################################################==-->
         <!-- Do not translate the following legal text -->
@@ -711,6 +715,11 @@
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
         <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat catalogus pagina</msg:message>
         <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library catalogus pagina</msg:message>
+
+        <msg:message name="msgLinkToPg">Link naar Project Gutenberg eboek</msg:message>
+        <msg:message name="msgLinkToOpenLibrary">Link naar OpenLibrary cataloguspagina</msg:message>
+        <msg:message name="msgLinkToWorldCat">Link naar WorldCat cataloguspagina</msg:message>
+        <msg:message name="msgExternalLink">Externe link</msg:message>
 
     </msg:messages>
 

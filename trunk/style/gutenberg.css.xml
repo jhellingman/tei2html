@@ -337,8 +337,8 @@ p.footnote .label
 
 .centertable
 {
-	/* center the table */
-	margin: 0px auto; 
+    /* center the table */
+    margin: 0px auto; 
 }
 
 .poem
@@ -485,7 +485,7 @@ span.measure
 
 .rm
 {
-	font-style: normal;
+    font-style: normal;
 }
 
 hr
@@ -573,6 +573,22 @@ ol.RL { list-style-type: lower-roman; }
 .lsoff { list-style-type: none; }
 
 .castlist, .castitem { list-style-type: none; }
+
+
+.pglink
+{
+    background-color: #DCFFDC;
+}
+
+.catlink
+{
+    background-color: #FFFFDC;
+}
+
+.exlink
+{
+    background-color: #FFDCDC;
+}
 
 
 ]]>

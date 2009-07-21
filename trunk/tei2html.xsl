@@ -212,7 +212,8 @@
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgBook'"/>
         </xsl:call-template>
-    </xsl:variable> <xsl:variable name="strAnd">
+    </xsl:variable> 
+    <xsl:variable name="strAnd">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgAnd'"/>
         </xsl:call-template>
@@ -322,6 +323,26 @@
     <xsl:variable name="strPgCatalogEntry">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgPgCatalogEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToPg">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToPg'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToOpenLibrary">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToOpenLibrary'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToWorldCat">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToWorldCat'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strExternalLink">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgExternalLink'"/>
         </xsl:call-template>
     </xsl:variable>
 
@@ -599,11 +620,11 @@
 
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
-			<xsl:attribute name="title">
-				<xsl:value-of select="reg"/>
-			</xsl:attribute>
-			<xsl:apply-templates select="orig"/>
-		</span>
+            <xsl:attribute name="title">
+                <xsl:value-of select="reg"/>
+            </xsl:attribute>
+            <xsl:apply-templates select="orig"/>
+        </span>
     </xsl:template>
 
 
@@ -726,12 +747,23 @@
         <a>
             <xsl:choose>
                 <xsl:when test="substring(@url, 1, 3) = 'pg:'">
+                    <xsl:attribute name="class">pglink</xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToPg"/></xsl:attribute>
                     <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
                 </xsl:when>
                 <xsl:when test="substring(@url, 1, 5) = 'oclc:'">
+                    <xsl:attribute name="class">catlink</xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToWorldCat"/></xsl:attribute>
                     <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="substring-after(@url, 'oclc:')"/></xsl:attribute>
                 </xsl:when>
+                <xsl:when test="substring(@url, 1, 4) = 'oln:'">
+                    <xsl:attribute name="class">catlink</xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
+                    <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
+                </xsl:when>                
                 <xsl:otherwise>
+                    <xsl:attribute name="class">exlink</xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
                     <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
@@ -1112,7 +1144,7 @@
         <p><xsl:value-of select="$strCorrectionsAppliedToText"/></p>
 
         <table width="75%">
-			<xsl:attribute name="summary"><xsl:value-of select="$strCorrectionsOverview"/></xsl:attribute>
+            <xsl:attribute name="summary"><xsl:value-of select="$strCorrectionsOverview"/></xsl:attribute>
             <tr>
                 <th><xsl:value-of select="$strPage"/></th>
                 <th><xsl:value-of select="$strSource"/></th>
@@ -1194,7 +1226,7 @@
 
             <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
                 <p><xsl:value-of select="$strPgCatalogEntry"/>:
-                    <a>
+                    <a class="pglink">
                         <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='PGnum']"/>
                     </a>.
@@ -1203,7 +1235,7 @@
 
             <xsl:if test="//idno[@type='OLN']">
                 <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>:
-                    <a>
+                    <a class="catlink">
                         <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OLN']"/>
                     </a>.
@@ -1212,7 +1244,7 @@
 
             <xsl:if test="//idno[@type='OCLC']">
                 <p><xsl:value-of select="$strOclcCatalogEntry"/>:
-                    <a>
+                    <a class="catlink">
                         <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OCLC']"/>
                     </a>.
@@ -1585,7 +1617,7 @@
 
     <xsl:template match="row">
         <tr valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </tr>
@@ -1593,7 +1625,7 @@
 
     <xsl:template match="row[@role='label']/cell">
         <td valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
@@ -1602,7 +1634,7 @@
 
     <xsl:template match="cell[@role='label']">
         <td valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
@@ -1611,7 +1643,7 @@
 
     <xsl:template match="row[@role='unit']/cell">
         <td valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
@@ -1620,7 +1652,7 @@
 
     <xsl:template match="cell[@role='unit']">
         <td valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
@@ -1629,7 +1661,7 @@
 
     <xsl:template match="cell">
         <td valign="top">
-			<xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <xsl:apply-templates/>
