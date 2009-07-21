@@ -38,10 +38,10 @@
             <idno type="PGclearance">[PG Clearance code goes here]</idno>
             <idno type="PGDPProjectID">[PGDP Project number goes here]</idno>
             <availability>
-               <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 2.0. See <xref url="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
-			   <p>Typically, the following text will be used:</p>
+               <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See <xref url="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
+               <p>Typically, the following text will be used:</p>
 
-			   &availability.en;
+               &availability.en;
             </availability>
          </publicationStmt>
          <sourceDesc>
@@ -97,7 +97,7 @@ text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">ita
 a footnote. We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>.</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>.</p>
 
 </div1>
 
@@ -109,11 +109,11 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 
 <epigraph>
-	<cit lang="fr"><q><lg type="Group"><l>&ldquo;Ils partent; et loin d&apos;eux repoussant la barri&egrave;re,</l>
-	<l>Ils fendent dans les airs les nuages mouvans,</l>
-	<l>Et de leurs pi&eacute;s ail&eacute;s ils devancent les vents.&rdquo;</l></lg></q>
+    <cit lang="fr"><q><lg type="Group"><l>&ldquo;Ils partent; et loin d&apos;eux repoussant la barri&egrave;re,</l>
+    <l>Ils fendent dans les airs les nuages mouvans,</l>
+    <l>Et de leurs pi&eacute;s ail&eacute;s ils devancent les vents.&rdquo;</l></lg></q>
 
-	<bibl>(<hi>Metamorphoses d&apos;Ovide</hi>).</bibl></cit>
+    <bibl>(<hi>Metamorphoses d&apos;Ovide</hi>).</bibl></cit>
 </epigraph>
 
 
@@ -124,78 +124,78 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI)">
-	<row>
-		<cell rows="2">1 (this cell is actually spanning two rows)</cell>
-		<cell>2 (with a much wider cell, for a change, so that we can verify the result of such wide cells in the output)</cell>
-	</row>
-	<row>
-		<cell>4</cell>
-	</row>
-	<row>
-		<cell>5 (yet another wide cell, just to see how it works out in the result formatting)</cell>
-		<cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
-	</row>
-	<row>
-		<cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote actually is the same as in a cell above!)</cell>
-	</row>
+    <row>
+        <cell rows="2">1 (this cell is actually spanning two rows)</cell>
+        <cell>2 (with a much wider cell, for a change, so that we can verify the result of such wide cells in the output)</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+    </row>
+    <row>
+        <cell>5 (yet another wide cell, just to see how it works out in the result formatting)</cell>
+        <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
+    </row>
+    <row>
+        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote actually is the same as in a cell above!)</cell>
+    </row>
 </table>
 </p>
 
 <p>
 <table rend="summary(A small table to demonstrate bracket images.)">
-	<row>
-		<cell>Gadgets</cell>
-		<cell rows="2" rend="image(images/bracket3.gif)valign(middle)width(2)"></cell>
-		<cell rows="2" rend="valign(middle)">Both 1</cell>
-	</row>
-	<row>
-		<cell>Fudgets</cell>
-	</row>
+    <row>
+        <cell>Gadgets</cell>
+        <cell rows="2" rend="image(images/bracket3.gif)valign(middle)width(2)"></cell>
+        <cell rows="2" rend="valign(middle)">Both 1</cell>
+    </row>
+    <row>
+        <cell>Fudgets</cell>
+    </row>
 </table>
 </p>
 
 
 <p>
 <table>
-	<row>
-		<cell rend="width(25%)">Een Een Een Een Een Een Een Een Een Een Een Een </cell>
-		<cell rend="width(75%)">Twee Twee Twee Twee Twee Twee Twee Twee Twee Twee</cell>
-	</row>
-	<row>
-		<cell>Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie</cell>
-		<cell>Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier</cell>
-	</row>
+    <row>
+        <cell rend="width(25%)">Een Een Een Een Een Een Een Een Een Een Een Een </cell>
+        <cell rend="width(75%)">Twee Twee Twee Twee Twee Twee Twee Twee Twee Twee</cell>
+    </row>
+    <row>
+        <cell>Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie Drie</cell>
+        <cell>Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier Vier</cell>
+    </row>
 </table>
 </p>
 
 
 <p>
 <table rend="width(40%) align(center)">
-	<head>Head above table.</head>
-	<row>
-		<cell role="label">Name</cell>	
-		<cell role="label" rend="align(right)">Age</cell>
-	</row>
-	<row>
-		<cell></cell>	
-		<cell role="unit" rend="align(right)">Years</cell>
-	</row>
-	<row>
-		<cell>Jeroen</cell>	
-		<cell>40</cell>
-	</row>
-	<row>
-		<cell>Rodelyn</cell>	
-		<cell rend="align(right)">30</cell>
-	</row>
-	<row>
-		<cell>Joshua</cell>	
-		<cell rend="align(right)">7</cell>
-	</row>
-	<row>
-		<cell>Raphael</cell>	
-		<cell rend="align(right)">3</cell>
-	</row>
+    <head>Head above table.</head>
+    <row>
+        <cell role="label">Name</cell>  
+        <cell role="label" rend="align(right)">Age</cell>
+    </row>
+    <row>
+        <cell></cell>   
+        <cell role="unit" rend="align(right)">Years</cell>
+    </row>
+    <row>
+        <cell>Jeroen</cell> 
+        <cell>40</cell>
+    </row>
+    <row>
+        <cell>Rodelyn</cell>    
+        <cell rend="align(right)">30</cell>
+    </row>
+    <row>
+        <cell>Joshua</cell> 
+        <cell rend="align(right)">7</cell>
+    </row>
+    <row>
+        <cell>Raphael</cell>    
+        <cell rend="align(right)">3</cell>
+    </row>
 </table>
 </p>
 
@@ -204,43 +204,43 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 <p>
 <table rend="width(40%)">
-	<column rend="align(left) width(40%)"/>
-	<column rend="align(right)"/>
-	<column rend="align(right)"/>
-	<column rend="align(right)"/>
-	<row role="label">
-		<cell>Name</cell>	
-		<cell>Length</cell>
-		<cell>Weight</cell>
-		<cell>Notes</cell>
-	</row>
-	<row role="unit">
-		<cell></cell>	
-		<cell>Meters</cell>
-		<cell>Kilograms</cell>
-	</row>
-	<row>
-		<cell>Jeroen</cell>	
-		<cell>1.80</cell>
-		<cell>86</cell>
-	</row>
-	<row>
-		<cell>Rodelyn</cell>	
-		<cell cols="2">&mdash;</cell>
-		<cell>No Info.</cell>
-	</row>
-	<row>
-		<cell>Joshua</cell>	
-		<cell>1.20</cell>
-	</row>
-	<row>
-		<cell>Raphael</cell>	
-		<cell>1.00</cell>
-	</row>
-	<row>
-		<cell><hi>Total</hi></cell>	
-		<cell role="sum">4.00</cell>
-	</row>
+    <column rend="align(left) width(40%)"/>
+    <column rend="align(right)"/>
+    <column rend="align(right)"/>
+    <column rend="align(right)"/>
+    <row role="label">
+        <cell>Name</cell>   
+        <cell>Length</cell>
+        <cell>Weight</cell>
+        <cell>Notes</cell>
+    </row>
+    <row role="unit">
+        <cell></cell>   
+        <cell>Meters</cell>
+        <cell>Kilograms</cell>
+    </row>
+    <row>
+        <cell>Jeroen</cell> 
+        <cell>1.80</cell>
+        <cell>86</cell>
+    </row>
+    <row>
+        <cell>Rodelyn</cell>    
+        <cell cols="2">&mdash;</cell>
+        <cell>No Info.</cell>
+    </row>
+    <row>
+        <cell>Joshua</cell> 
+        <cell>1.20</cell>
+    </row>
+    <row>
+        <cell>Raphael</cell>    
+        <cell>1.00</cell>
+    </row>
+    <row>
+        <cell><hi>Total</hi></cell> 
+        <cell role="sum">4.00</cell>
+    </row>
 </table>
 </p>
 
@@ -255,45 +255,45 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 
 <p><table rend="width(40%)">
-	<head>Head above table.</head>
-	<row>
-		<cell role="label">Name</cell>	
-		<cell role="label" rend="align(right)">Age</cell>
-	</row>
-	<row>
-		<cell></cell>	
-		<cell role="unit" rend="align(right)">Years</cell>
-	</row>
-	<row>
-		<cell>Jeroen</cell>	
-		<cell rend="align(right)">39</cell>
-	</row>
-	<row>
-		<cell>Rodelyn</cell>	
-		<cell rend="align(right)">29</cell>
-	</row>
-	<row>
-		<cell>Joshua</cell>	
-		<cell rend="align(right)">6</cell>
-	</row>
-	<row>
-		<cell>Raphael</cell>	
-		<cell rend="align(right)">2</cell>
-	</row>
+    <head>Head above table.</head>
+    <row>
+        <cell role="label">Name</cell>  
+        <cell role="label" rend="align(right)">Age</cell>
+    </row>
+    <row>
+        <cell></cell>   
+        <cell role="unit" rend="align(right)">Years</cell>
+    </row>
+    <row>
+        <cell>Jeroen</cell> 
+        <cell rend="align(right)">39</cell>
+    </row>
+    <row>
+        <cell>Rodelyn</cell>    
+        <cell rend="align(right)">29</cell>
+    </row>
+    <row>
+        <cell>Joshua</cell> 
+        <cell rend="align(right)">6</cell>
+    </row>
+    <row>
+        <cell>Raphael</cell>    
+        <cell rend="align(right)">2</cell>
+    </row>
 </table>
 </p>
 </note> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
 <figure id="test" url="images/test.jpg" rend="">
-	<head>This is the heading</head>
-	<p>This is the description.</p>
+    <head>This is the heading</head>
+    <p>This is the description.</p>
 </figure>
 
-<figure id="test1" rend="float(left) image(images/test.jpg) link(images/test.jpg)">
-	<head>Tarsier</head>
+<figure id="test1" rend="width(100px) float(left) image(images/test.jpg) link(images/test.jpg)">
+    <head>Tarsier</head>
 
-	<p>This is a somewhat longer test to verify we can limit the size of an image box.</p>
+    <p>This is a somewhat longer test to verify we can limit the size of an image box.</p>
 </figure>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -301,8 +301,8 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 
 <figure id="test2" url="images/test.jpg" rend="float(right) link(http://www.bohol.ph/)">
-	<head>The <hi>Philippine</hi> Tarsier</head>
-	<figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+    <head>The <hi>Philippine</hi> Tarsier</head>
+    <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -340,70 +340,70 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 <p>Dit is een sectie op niveau 2</p>
 
 <list>
-	<item>Een</item>
-	<item>Twee</item>
-	<item>Drie</item>
-	<item>Vier</item>
-	<item>Vijf<pb n="3"/></item>
-	<item>Zes</item>
-	<item><corr sic="Correction in list">Zeven</corr></item>
-	<item>Acht</item>
-	<item>Negen</item>
-	<item>Tien</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item>Drie</item>
+    <item>Vier</item>
+    <item>Vijf<pb n="3"/></item>
+    <item>Zes</item>
+    <item><corr sic="Correction in list">Zeven</corr></item>
+    <item>Acht</item>
+    <item>Negen</item>
+    <item>Tien</item>
 </list>
 
 <list type="ordered">
-	<item>Een</item>
-	<item>Twee</item>
-	<item>Drie</item>
-	<item>Vier</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item>Drie</item>
+    <item>Vier</item>
 </list>
 
 <list rend="columns(2) list-style-type(disc)">
-	<item>Een</item>
-	<item>Twee</item>
-	<item>Drie</item>
-	<item>Vier</item>
-	<item>Vijf</item>
-	<item>Zes</item>
-	<item>Zeven</item>
-	<item>Acht</item>
-	<item>Negen</item>
-	<item>Tien</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item>Drie</item>
+    <item>Vier</item>
+    <item>Vijf</item>
+    <item>Zes</item>
+    <item>Zeven</item>
+    <item>Acht</item>
+    <item>Negen</item>
+    <item>Tien</item>
 </list>
 
 </div2>
 
 <list rend="columns(2)" type="ordered">
-	<item>Een</item>
-	<item>Twee</item>
-	<item>Drie</item>
-	<item>Vier</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item>Drie</item>
+    <item>Vier</item>
 </list>
 
 <list rend="columns(2) list-style-type(upper-roman)" type="ordered">
-	<item n="5">Vijf</item>
-	<item>Zes</item>
-	<item n="7">Zeven</item>
-	<item>Acht</item>
+    <item n="5">Vijf</item>
+    <item>Zes</item>
+    <item n="7">Zeven</item>
+    <item>Acht</item>
 </list>
 
 <p>A list with lower case roman numerals:</p>
 
 <list rend="list-style-type(lower-roman)" type="ordered">
-	<item>Een</item>
-	<item>Twee</item>
-	<item n="48">Drie</item>
-	<item>Vier</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item n="48">Drie</item>
+    <item>Vier</item>
 </list>
 
 <p>A list without bullets or numbers:</p>
 
 <list type="simple">
-	<item>Een</item>
-	<item>Twee</item>
-	<item>Drie</item>
-	<item>Vier</item>
+    <item>Een</item>
+    <item>Twee</item>
+    <item>Drie</item>
+    <item>Vier</item>
 </list>
 
 
