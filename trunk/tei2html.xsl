@@ -803,7 +803,7 @@
                         <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1"/>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[@type!='Ads']"/>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
             </ul>
         </div>
     </xsl:template>
@@ -1193,7 +1193,7 @@
             <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
             <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
-                <p><xsl:value-of select="$strPgCatalogEntry"/>
+                <p><xsl:value-of select="$strPgCatalogEntry"/>:
                     <a>
                         <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='PGnum']"/>
