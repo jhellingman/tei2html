@@ -577,19 +577,37 @@ ol.RL { list-style-type: lower-roman; }
 
 .pglink
 {
-    background-color: #DCFFDC;
+    background: url(images/book.png) center right no-repeat;
+    padding-right: 18px;
 }
 
 .catlink
 {
-    background-color: #FFFFDC;
+    background: url(images/card.png) center right no-repeat;
+    padding-right: 17px;
 }
 
 .exlink
 {
-    background-color: #FFDCDC;
+    background: url(images/external.png) center right no-repeat;
+    padding-right: 13px;
 }
 
+
+.pglink:hover
+{
+    background-color: #DCFFDC;
+}
+
+.catlink:hover
+{
+    background-color: #FFFFDC;
+}
+
+.exlink:hover
+{
+    background-color: #FFDCDC;
+}
 
 ]]>
 </stylesheet>

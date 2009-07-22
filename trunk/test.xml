@@ -88,6 +88,8 @@
 <div0 id="bk01" n="I" type="Book" rend="label(yes)">
 <head>This is a Test Document</head>
 
+<p>This is a test document, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my stylesheet (yes, I sometimes forget myself). </p>
+
 <div1 id="ch04" n="IV" type="Chapter" rend="label(yes)">
 <head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
 
