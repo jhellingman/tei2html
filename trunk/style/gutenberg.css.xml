@@ -202,8 +202,9 @@ div.epigraph
     margin-left: auto;
 }
 
-.epigraph .bibl
+div.epigraph span.bibl
 {
+	display: block;
     text-align: right;
 }
 

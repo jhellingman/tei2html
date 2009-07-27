@@ -2119,10 +2119,10 @@
     </xsl:template>
 
     <xsl:template match="bibl">
-        <div class="bibl">
+        <span class="bibl">
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
-        </div>
+        </span>
     </xsl:template>
 
 
