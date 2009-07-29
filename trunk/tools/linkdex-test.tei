@@ -1,0 +1,53 @@
+<TEI.2>
+<text>
+<body>
+<pb n=xvi>
+<div1>
+<head>Test text for index check</head>
+
+<p>De Aap en de noot.
+
+<pb n=3>
+
+<p>Mies en Teun lopen door het dorp met een zak noten.
+
+<pb n=18>
+
+<p>Mies en Teun zien daar een aap.
+
+<pb n=22 id=pb22>
+
+<p>De aap pakt een noot van Mies.
+
+<pb id=pb23 n=23>
+
+<p>De aap eet een noot. NOOT. Noot.
+
+<pb n=24>
+
+<p>Wat zegt de Aap? Hij zegt "Ik wil nog een NOOT!"
+
+<pb n=26>
+
+
+
+
+
+<div1>
+<head>Index</head>
+
+<!-- INDEX START -->
+
+<p>Aap, 3, 22, 23, 24, 81.
+
+<p>Noot, xvi, 23 noot, 24.
+
+<p>Mies, 3, 18, 22.
+
+<p>Teun, een boerenknecht, 3, 18, 22.
+
+<!-- INDEX END -->
+
+</back>
+</text>
+</TEI.2>
