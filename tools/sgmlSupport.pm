@@ -1539,6 +1539,7 @@ BEGIN
 	$ent{"Rcirc"}		= "R" . chr(0x0302); # R with circumflex
 	$ent{"rcirc"}		= "r" . chr(0x0302); # r with circumflex
 	$ent{"aecirc"}		= chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
+	$ent{"ijcirc"}		= chr(0x0133) . chr(0x0302); # ij ligature with circumflex
 
 	$ent{"gtilde"}		= "g" . chr(0x0303); # g with tilde
 	$ent{"mtilde"}		= "m" . chr(0x0303); # m with tilde
@@ -1983,7 +1984,9 @@ sub pgdp2sgml
 	# Accents above:
 	$string =~ s/\[\/([a-zA-Z])\]/\&\1acute;/g;			# acute
 	$string =~ s/\[\'([a-zA-Z])\]/\&\1acute;/g;			# acute
+	$string =~ s/\[\x{00b4}([a-zA-Z])\]/\&\1acute;/g;			# acute (wrong encoding!)
 	$string =~ s/\[\\([a-zA-Z])\]/\&\1grave;/g;			# grave
+	$string =~ s/\[`([a-zA-Z])\]/\&\1grave;/g;			# grave
 	$string =~ s/\[\^([a-zA-Z])\]/\&\1circ;/g;			# circumflex
 	$string =~ s/\[\"([a-zA-Z])\]/\&\1uml;/g;			# dieresis
 	$string =~ s/\[~([a-zA-Z])\]/\&\1tilde;/g;			# tilde
@@ -1999,8 +2002,19 @@ sub pgdp2sgml
 	$string =~ s/\[([a-zA-Z])\)]/\&\1breveb;/g;			# breve below
 	$string =~ s/\[([a-zA-Z])\^]/\&\1circb;/g;			# circumflex below
 
+	# Ligatures
+	$string =~ s/\[ae\]/\&aelig;/g;						# ae ligature
+	$string =~ s/\[AE\]/\&AElig;/g;						# AE ligature
+	$string =~ s/\[oe\]/\&oelig;/g;						# oe ligature
+	$string =~ s/\[OE\]/\&OElig;/g;						# OE ligature
+
 	# Ligatures with accents
 	$string =~ s/\[\^(ae|\x{00e6})\]/\&aecirc;/g;		# ae with circumflex
+	$string =~ s/\[\'(ae|\x{00e6})\]/\&aeacute;/g;		# ae with acute
+	$string =~ s/\[\x{00b4}(ae|\x{00e6})\]/\&aeacute;/g;		# ae with acute (wrong encoding!)
+
+	$string =~ s/\[\'oe\]/\&oeacute;/g;					# oe with acute
+	$string =~ s/\[\x{00b4}oe\]/\&oeacute;/g;					# oe with acute (wrong encoding!)
 
 	# Double accents
 	$string =~ s/\[\)=([a-zA-Z])\]/\&\1macrbrev;/g;		# macron and breve
