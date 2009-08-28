@@ -1,0 +1,6 @@
+#summary The Future Plans I have with tei2html.
+
+= Future Features =
+
+* Support for XHTML
+* Support for the ePub format
