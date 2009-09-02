@@ -7,10 +7,14 @@ I intend, when possible, to add the following to the tei2html toolset.
   * Support for XHTML
   * Support for the ePub format
 
+== Support for Prince-XML ==
+
+Currently, some support for Prince-XML is build in. This needs to be extended, such that neat paged format media can be produced as PDFs.
+
 == Support for XHTML ==
 
 Currently, the stylesheet emits normal HTML. It would be nice to be able to generate XHTML as well, but for that, some adjustments are needed to guaranty only valid XHTML is generated. Currently, the tei2html stylesheet relies on the more relaxed validation rules of HTML.
 
 == Support for ePub ==
 
-Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on devices called ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen.
+Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on devices called ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the [http://code.google.com/p/epub-tools/ epub-tools] project.
