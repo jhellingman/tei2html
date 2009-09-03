@@ -841,7 +841,7 @@
     </xsl:template>
 
     <xsl:template match="div0" mode="gentoc">
-        <xsl:if test="head">
+        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
@@ -862,7 +862,7 @@
     </xsl:template>
 
     <xsl:template match="div1" mode="gentoc">
-        <xsl:if test="head">
+        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
@@ -886,7 +886,7 @@
     </xsl:template>
 
     <xsl:template match="div2" mode="gentoc">
-        <xsl:if test="head">
+        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
@@ -1317,6 +1317,9 @@
                         <xsl:when test="contains(@rend, 'image-alt')">
                             <xsl:value-of select="substring-before(substring-after(@rend, 'image-alt('), ')')"/>
                         </xsl:when>
+                        <xsl:when test=". != ''">
+                            <xsl:value-of select="."/>
+                        </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$strOrnament"/>
                         </xsl:otherwise>
@@ -1361,11 +1364,11 @@
 
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
-        <h2>
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:call-template name="setHtmlClass"/>
-            <xsl:apply-templates/>
-        </h2>
+        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+            <h2>
+                <xsl:call-template name="headText"/>
+            </h2>
+        </xsl:if>
     </xsl:template>
 
     <!-- div1 -->
@@ -1419,20 +1422,26 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
-        <xsl:if test="not(contains(@rend, 'image-only'))">
+        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
             <h2>
-                <xsl:call-template name="generate-id-attribute"/>
-                <xsl:call-template name="setHtmlLangAttribute"/>
-                <xsl:call-template name="setHtmlClass"/>
-                <xsl:if test="contains(@rend, 'align(')">
-                    <xsl:attribute name="align">
-                        <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates/>
+                <xsl:call-template name="headText"/>
             </h2>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:template name="headText">
+        <xsl:call-template name="generate-id-attribute"/>
+        <xsl:call-template name="setHtmlLangAttribute"/>
+        <xsl:call-template name="setHtmlClass"/>
+        <xsl:if test="contains(@rend, 'align(')">
+            <xsl:attribute name="align">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:template>
+
 
     <!-- div2 -->
 
@@ -1450,10 +1459,7 @@
     <xsl:template match="div2/head">
         <xsl:call-template name="headPicture"/>
         <h3>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:call-template name="setHtmlClass"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="headText"/>
         </h3>
     </xsl:template>
 
@@ -1470,8 +1476,7 @@
     <xsl:template match="div3/head">
         <xsl:call-template name="headPicture"/>
         <h4>
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="headText"/>
         </h4>
     </xsl:template>
 
@@ -1487,7 +1492,9 @@
 
     <xsl:template match="div4/head">
         <xsl:call-template name="headPicture"/>
-        <h5><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></h5>
+        <h5>
+            <xsl:call-template name="headText"/>
+        </h5>
     </xsl:template>
 
     <!-- div5 -->
@@ -1503,8 +1510,7 @@
     <xsl:template match="div5/head">
         <xsl:call-template name="headPicture"/>
         <h6>
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="headText"/>
         </h6>
     </xsl:template>
 
@@ -1950,6 +1956,13 @@
         </xsl:variable>
 
         <img border="0">
+
+            <xsl:if test="contains(@rend, 'align(')">
+                <xsl:attribute name="align">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+                </xsl:attribute>
+            </xsl:if>
+
             <xsl:attribute name="src">
                 <xsl:value-of select="$file"/>
             </xsl:attribute>
