@@ -25,6 +25,7 @@ BEGIN
 	$langNameHash{"de"}			= "German";
 	
 	$langNameHash{"el"}			= "Greek";
+	$langNameHash{"el-latn"}	= "Greek (Latin transcription)";
 	$langNameHash{"en"}			= "English";
 	$langNameHash{"en-1500"}	= "English (16th century)";
 	$langNameHash{"en-1600"}	= "English (17th century)";
