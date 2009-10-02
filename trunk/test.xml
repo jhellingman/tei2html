@@ -7,6 +7,8 @@
 
 <!ENTITY ldquo  "&#x201C;">
 <!ENTITY rdquo  "&#x201D;">
+<!ENTITY lsquo  "&#x2018;">
+<!ENTITY rsquo  "&#x2019;">
 <!ENTITY eacute "&#x00E9;">
 <!ENTITY apos   "&#x2019;">
 
@@ -432,6 +434,11 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 <div1 n="II">
 <head>Tests of poetry</head>
 
+<p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&rsquo;s aligned. Note that the technique used to center an entire block of text does not work in IE.
+
+<lg>
+<head rend="align(center)">Three stanzas in a row</head>
+
 <lg type="Group">
 <l>This is a rule of verse</l>
 <l rend="indent(1)">This is another <pb n="4"/>rule of verse</l>
@@ -462,14 +469,16 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 <l n="5">This is a rule of verse</l>
 <l n="6" rend="indent(1)">This is another rule of verse</l>
 <l n="7">This is a rule of verse</l>
-<l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a footnote, the lg element needs to be enclosed with a q element.</p>
+<l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.</p>
 
 <q><text><body><div1>
 <lg type="Group" rend="font(italic)">
 <l>This is a rule of verse in italics</l>
 <l rend="indent(1)">This is another rule of verse</l>
 </lg>
-</div1></body></text></q></note></l></lg>
+</div1></body></text></q></note></l></lg></lg>
+
+</p>
 
 </div1>
 </div0>
