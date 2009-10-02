@@ -2348,33 +2348,30 @@
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- Poetry and Drama -->
+    <!-- Poetry -->
 
-    <xsl:template name="insertNBSpaces">
-        <xsl:param name="count" select="1"/>
-        <xsl:text>&nbsp;&nbsp;&nbsp;</xsl:text>
-        <xsl:if test="$count &gt; 1">
-            <xsl:call-template name="insertNBSpaces">
-                <xsl:with-param name="count"><xsl:value-of select="$count - 1"/></xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
+    <!-- top-level gets class=lgouter, nested get class=lg. This we use to center the entire poem on the screen, and still keep the left side of all stanzas aligned. -->
+    <xsl:template match="lg">
+        <div>
+            <xsl:attribute name="class">
+                <xsl:if test="not(parent::lg)">lgouter<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+            </xsl:attribute>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:apply-templates/>
+        </div>
     </xsl:template>
 
-
-    <!-- linebreaks specific to an edition are not represented in the output -->
-    <xsl:template match="lb[@ed]">
-        <a>
-            <xsl:call-template name="generate-id-attribute"/>
-        </a>
+    <xsl:template match="lg/head">
+        <h4>
+            <xsl:attribute name="class">
+                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="contains(@rend, 'align(center)')">aligncenter</xsl:if>
+            </xsl:attribute>
+            <xsl:apply-templates/>
+        </h4>
     </xsl:template>
-
-    <!-- linebreaks not linked to an edition are to be output -->
-    <xsl:template match="lb">
-        <br>
-            <xsl:call-template name="generate-id-attribute"/>
-        </br>
-    </xsl:template>
-
 
     <xsl:template match="l">
         <p class="line">
@@ -2398,37 +2395,41 @@
         </p>
     </xsl:template>
 
+    <!-- linebreaks specific to an edition are not represented in the output -->
+    <xsl:template match="lb[@ed]">
+        <a>
+            <xsl:call-template name="generate-id-attribute"/>
+        </a>
+    </xsl:template>
+
+    <!-- linebreaks not linked to a specific edition are to be output -->
+    <xsl:template match="lb">
+        <br>
+            <xsl:call-template name="generate-id-attribute"/>
+        </br>
+    </xsl:template>
 
 
+    <!--====================================================================-->
+    <!-- Drama -->
 
-    <xsl:template match="lg|sp">
+    <xsl:template match="sp">
         <div>
-            <xsl:attribute name="class"><xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>poem</xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>sp</xsl:attribute>
             <xsl:call-template name="setHtmlLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="lg/head">
-        <h4>
-            <xsl:attribute name="class">
-                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
-                lghead
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </h4>
-    </xsl:template>
-
-
     <!-- Speaker -->
 
     <xsl:template match="speaker">
-        <p>
+        <p class="speaker">
             <xsl:call-template name="generate-id-attribute"/>
-            <b><xsl:apply-templates/></b>
+            <xsl:apply-templates/>
         </p>
     </xsl:template>
-
 
     <!-- Stage directions -->
 
