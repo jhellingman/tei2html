@@ -1527,12 +1527,21 @@ BEGIN
 	$ent{"esh"}	    = chr(0x0283);	# LETTER ESH
 	$ent{"ESH"}	    = chr(0x01A9);	# LETTER ESH (looks like Greek capital sigma)
 
+
+	$ent{"aolig"}		= chr(0xa735);	# ao ligature with acute
+	$ent{"AOlig"}		= chr(0xa734);	# AO ligature with acute
+
+	$ent{"aoacute"}		= chr(0xa735) . chr(0x0301); # ao ligature with acute
+	$ent{"AOacute"}		= chr(0xa734) . chr(0x0301); # AO ligature with acute
+
+
 	###############################################################################
 	# things not in Unicode (as a single character)
 
 	# Requiring combining diacritics
 
 	$ent{"oeacute"}		= chr(0x0153) . chr(0x0301); # oe ligature with acute
+	$ent{"OEacute"}		= chr(0x0152) . chr(0x0301); # OE ligature with acute
 
 	$ent{"Kcirc"}		= "K" . chr(0x0302); # K with circumflex
 	$ent{"kcirc"}		= "k" . chr(0x0302); # k with circumflex
@@ -2011,10 +2020,24 @@ sub pgdp2sgml
 	# Ligatures with accents
 	$string =~ s/\[\^(ae|\x{00e6})\]/\&aecirc;/g;		# ae with circumflex
 	$string =~ s/\[\'(ae|\x{00e6})\]/\&aeacute;/g;		# ae with acute
+	$string =~ s/\[\/(ae|\x{00e6})\]/\&aeacute;/g;		# ae with acute
 	$string =~ s/\[\x{00b4}(ae|\x{00e6})\]/\&aeacute;/g;		# ae with acute (wrong encoding!)
 
 	$string =~ s/\[\'oe\]/\&oeacute;/g;					# oe with acute
-	$string =~ s/\[\x{00b4}oe\]/\&oeacute;/g;					# oe with acute (wrong encoding!)
+	$string =~ s/\[\'OE\]/\&OEacute;/g;					# OE with acute
+	$string =~ s/\[\/oe\]/\&oeacute;/g;					# oe with acute
+	$string =~ s/\[\/OE\]/\&OEacute;/g;					# OE with acute
+	$string =~ s/\[o\x{00e9}\]/\&oeacute;/g;			# oe with acute
+	$string =~ s/\[\x{00f3}e\]/\&oeacute;/g;			# oe with acute
+	$string =~ s/\[\x{00b4}oe\]/\&oeacute;/g;			# oe with acute (wrong encoding!)
+
+	# Old-Icelandic ligatures
+	$string =~ s/\[ao\]/\&aolig;/g;						# ao ligature
+	$string =~ s/\[AO\]/\&AOlig;/g;						# AO ligature
+	$string =~ s/\[\/ao\]/\&aoacute;/g;					# ao with acute
+	$string =~ s/\[a\x{00f3}\]/\&aoacute;/g;			# ao with acute
+	$string =~ s/\[\x{00e1}o\]/\&aoacute;/g;			# ao with acute
+	$string =~ s/\[\/AO\]/\&AOacute;/g;					# AO with acute
 
 	# Double accents
 	$string =~ s/\[\)=([a-zA-Z])\]/\&\1macrbrev;/g;		# macron and breve
