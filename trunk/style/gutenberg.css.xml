@@ -219,6 +219,27 @@ p.figureHead
     text-align:center;
 }
 
+.figAnnotation
+{
+	font-size:80%;
+	position:relative;
+	margin: 0 auto; /* center this */
+}
+
+.figTopLeft, .figBottomLeft
+{
+	float: left;
+}
+
+.figTop, .figBottom
+{
+}
+
+.figTopRight, .figBottomRight
+{
+	float: right;
+}
+
 .figure p
 {
     font-size:80%;
