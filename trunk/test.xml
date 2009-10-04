@@ -316,7 +316,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 </p>
 
 
-<figure id="tarsier" url="images/tarsier.jpg">
+<figure id="tarsier1" url="images/tarsier.jpg">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
 	<p type="figTopLeft">Top Left</p>
@@ -331,7 +331,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 </figure>
 
 
-<figure id="tarsier" url="images/tarsier.jpg">
+<figure id="tarsier2" url="images/tarsier.jpg">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
 	<p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>
