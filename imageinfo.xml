@@ -7,4 +7,5 @@
         <leftBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</leftBoundary>
         <rightBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</rightBoundary>
     </image>
+    <image path="images/tarsier.jpg" width="480px" height="326px"/>
 </images>

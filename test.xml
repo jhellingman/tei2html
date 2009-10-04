@@ -312,6 +312,34 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</p>
+
+
+<figure id="tarsier" url="images/tarsier.jpg">
+    <head>The <hi>Philippine</hi> Tarsier</head>
+
+	<p type="figTopLeft">Top Left</p>
+	<p type="figTop">Top</p>
+	<p type="figTopRight">Top Right</p>
+
+	<p type="figBottomLeft">Bottom Left</p>
+	<p type="figBottom">Bottom</p>
+	<p type="figBottomRight">Bottom Right</p>
+
+    <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+</figure>
+
+
+<figure id="tarsier" url="images/tarsier.jpg">
+    <head>The <hi>Philippine</hi> Tarsier</head>
+
+	<p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>
+
+	<p type="figBottomRight">A very long piece of text in the bottom right to test its behaviour.</p>
+
+    <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+</figure>
 
 <div2>
 <head>Letters, Closers, and Openers</head>

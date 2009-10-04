@@ -212,7 +212,7 @@
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgBook'"/>
         </xsl:call-template>
-    </xsl:variable> 
+    </xsl:variable>
     <xsl:variable name="strAnd">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgAnd'"/>
@@ -760,7 +760,7 @@
                     <xsl:attribute name="class">catlink</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
                     <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
-                </xsl:when>                
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="class">exlink</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
@@ -1992,7 +1992,7 @@
 
     <xsl:template match="figure">
         <xsl:call-template name="closepar"/>
-        <div>
+        <div class="figure">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setHtmlLangAttribute"/>
 
@@ -2021,9 +2021,49 @@
                 </xsl:otherwise>
             </xsl:choose>
 
+            <xsl:if test="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight']">
+                <div class="figAnnotation">
+                    <xsl:if test="$width != ''">
+                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figTopLeft']">
+                        <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figTop']">
+                        <span class="figTop"><xsl:apply-templates select="p[@type='figTop']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                    <xsl:if test="not(p[@type='figTop'])">
+                        <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figTopRight']">
+                        <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                </div>
+            </xsl:if>
+
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="alt" select="head"/>
             </xsl:call-template>
+
+            <xsl:if test="p[@type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']">
+                <div class="figAnnotation">
+                    <xsl:if test="$width != ''">
+                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figBottomLeft']">
+                        <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figBottom']">
+                        <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                    <xsl:if test="not(p[@type='figBottom'])">
+                        <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
+                    </xsl:if>
+                    <xsl:if test="p[@type='figBottomRight']">
+                        <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight']" mode="figAnnotation"/></span>
+                    </xsl:if>
+                </div>
+            </xsl:if>
 
             <xsl:apply-templates/>
         </div>
@@ -2035,6 +2075,12 @@
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
+
+    <xsl:template match="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight' or @type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']"/>
+
+    <xsl:template match="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight' or @type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']" mode="figAnnotation">
+        <xsl:apply-templates/>
+    </xsl:template>
 
     <xsl:template match="figDesc"/>
 
