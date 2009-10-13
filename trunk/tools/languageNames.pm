@@ -84,6 +84,10 @@ BEGIN
 	$langNameHash{"nl-wvl"}		= "Dutch (West-Vlaanderen)";
 	$langNameHash{"nl-zee"}		= "Dutch (Zeeland)";
 
+	$langNameHash{"no"}			= "Norwegian";
+	$langNameHash{"nn"}			= "Norwegian (Nynorsk)";
+	$langNameHash{"nb"}			= "Norwegian (Bokm&aring;l)";
+
 	$langNameHash{"pl"}			= "Polish";
 	$langNameHash{"pt"}			= "Portuguese";
 	$langNameHash{"pt-br"}		= "Portuguese (Brazil)";
