@@ -94,6 +94,12 @@ sub main
 }
 
 
+#################################################
+#
+# Heatmap related functions
+#
+
+
 #
 # heatMapDocument
 #
@@ -344,6 +350,9 @@ sub heatMapScanno($$$)
 }
 
 
+#
+# heatMapPair()
+#
 sub heatMapPair()
 {
 	# my $word = shift;
@@ -353,7 +362,10 @@ sub heatMapPair()
 
 
 
-
+####################################################
+#
+# Collecting the words from the text.
+#
 
 
 #
@@ -375,9 +387,10 @@ sub collectWords()
 		{
 			$docAuthor = $1;
 		}
-		if ($remainder =~ /<idno type=pgnum>([0-9]+)<\/idno>/)
+		if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/)
 		{
 			$idbook = $1;
+			$useDatabase = 1;
 		}
 		if ($remainder =~ /<\/teiHeader>/)
 		{
@@ -931,6 +944,7 @@ sub reportStatistics
 	print "\n</table>";
 }
 
+
 #
 # reportCountCounts()
 #
@@ -1071,6 +1085,9 @@ sub handleFragment($)
 }
 
 
+#
+# countPair()
+#
 sub countPair($$$)
 {
 	my $firstWord = shift;
@@ -1082,6 +1099,9 @@ sub countPair($$$)
 }
 
 
+#
+# countWord()
+#
 sub countWord($$)
 {
 	my $word = shift;
@@ -1455,6 +1475,9 @@ sub addWord($$$$)
 	my $word = shift;
 	my $language = shift;
 	my $count = shift;
+
+	$word = substr($word, 0, 64);
+	$language = substr($language, 0, 8);
 
 	print "$idbook, $word, $language, $count\n";
 	$sthAddWord->execute($idbook, $word, $language, $count);

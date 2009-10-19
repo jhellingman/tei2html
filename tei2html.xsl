@@ -1570,7 +1570,7 @@
 
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
-        <div class="table">
+        <div>
             <xsl:call-template name="setHtmlLangAttribute"/>
 
             <xsl:attribute name="class">
@@ -1580,8 +1580,11 @@
                 </xsl:choose>
             </xsl:attribute>
 
-            <xsl:if test="contains(@rend, 'width(')">
-                <xsl:attribute name="style">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/></xsl:attribute>
+            <xsl:if test="contains(@rend, 'width(') or contains(@rend, 'indent(')">
+                <xsl:attribute name="style">
+					<xsl:if test="contains(@rend, 'width(')">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/>;</xsl:if>
+					<xsl:if test="contains(@rend, 'indent(')">margin-left:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
+				</xsl:attribute>
             </xsl:if>
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
@@ -2379,7 +2382,7 @@
                     <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
                 </xsl:if>
                 <xsl:if test="contains(@rend, 'indent(')">
-                            <xsl:attribute name="style">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:attribute>
+                            <xsl:attribute name="style">text-indent:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:attribute>
                 </xsl:if>
                 <xsl:if test="@n">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>

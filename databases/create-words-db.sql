@@ -12,7 +12,7 @@ CREATE  TABLE IF NOT EXISTS `words`.`book` (
   `idbook` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(128) NULL ,
   `author` VARCHAR(128) NULL ,
-  `file` VARCHAR(125) NULL ,
+  `file` VARCHAR(128) NULL ,
   PRIMARY KEY (`idbook`) ,
   INDEX `title` (`title` ASC) ,
   INDEX `author` (`author` ASC) )
