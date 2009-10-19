@@ -332,6 +332,7 @@ p.footnote .label
 {
     /* center the table */
     margin: 0px auto; 
+	display:table; /* used to make the block shrink to the actual size */
 }
 
 
