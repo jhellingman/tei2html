@@ -986,6 +986,94 @@
         </sup>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- A classical table of contents with chapter labels, titles, and arguments -->
+
+    <xsl:template match="divGen[@type='toca']">
+        <div class="div1">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
+
+            <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
+            <xsl:choose>
+                <xsl:when test="/TEI.2/text/body/div0">
+                    <xsl:apply-templates mode="gentoca" select="/TEI.2/text/body/div0"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates mode="gentoca" select="/TEI.2/text/body/div1"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates mode="gentoca" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
+        </div>
+    </xsl:template>
+
+
+    <xsl:template match="div0|div1" mode="gentoca">
+        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
+            <xsl:if test="head[@type='label']">
+                <p class="tocChapter">
+                    <a>
+                        <xsl:call-template name="generate-href-attribute"/>
+                        <xsl:apply-templates select="head[@type='label']" mode="gentoca"/>
+                    </a>
+                    <xsl:if test="not(head[not(@type)])">
+                        <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+                            <span class="tocPagenum">
+                                <xsl:value-of select="preceding::pb[1]/@n"/>
+                            </span>
+                        </xsl:if>
+                    </xsl:if>
+                </p>
+            </xsl:if>
+            <xsl:if test="head[not(@type)]">
+                <p class="tocChapter">
+                    <a>
+                        <xsl:call-template name="generate-href-attribute"/>
+                        <xsl:apply-templates select="head[not(@type)]" mode="gentoca"/>
+                    </a>
+                    <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+                        <span class="tocPagenum">
+                            <xsl:value-of select="preceding::pb[1]/@n"/>
+                        </span>
+                    </xsl:if>
+                </p>
+            </xsl:if>
+            <xsl:if test="argument">
+                <p class="tocArgument">
+                    <xsl:apply-templates select="argument" mode="gentoca"/>
+                </p>
+            </xsl:if>
+        </xsl:if>
+        <xsl:if test="div1">
+            <ul>
+                <xsl:apply-templates select="div1" mode="gentoca"/>
+            </ul>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="note" mode="gentoca"/>
+
+    <xsl:template match="hi" mode="gentoca">
+        <i>
+            <xsl:apply-templates mode="gentoca"/>
+        </i>
+    </xsl:template>
+
+    <xsl:template match="hi[@rend='italic']" mode="gentoca">
+        <i>
+            <xsl:apply-templates mode="gentoca"/>
+        </i>
+    </xsl:template>
+
+    <xsl:template match="hi[@rend='sup']" mode="gentoca">
+        <sup>
+            <xsl:apply-templates mode="gentoca"/>
+        </sup>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- SubToc (special handling for Tribes and Castes volumes) -->
 
@@ -1582,9 +1670,9 @@
 
             <xsl:if test="contains(@rend, 'width(') or contains(@rend, 'indent(')">
                 <xsl:attribute name="style">
-					<xsl:if test="contains(@rend, 'width(')">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/>;</xsl:if>
-					<xsl:if test="contains(@rend, 'indent(')">margin-left:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
-				</xsl:attribute>
+                    <xsl:if test="contains(@rend, 'width(')">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/>;</xsl:if>
+                    <xsl:if test="contains(@rend, 'indent(')">margin-left:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
+                </xsl:attribute>
             </xsl:if>
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
