@@ -1439,12 +1439,9 @@ bijgeloovigheden	bijgelovigheden
 bijgeloovigheid	bijgelovigheid
 bijgeloovigst	bijgelovigst
 bijgenaamden	bijgenaamde*
-bijgepaste	~
-bijgepasten	~
-bijgerekend	~
-bijgeschaafden	~
-bijgeschikt	~
-bijgeschilderden	~
+bijgepasten	bijgepaste*
+bijgeschaafden	bijgeschaafde*
+bijgeschilderden	bijgeschilderde*
 bijgeschonken	~
 bijgeschoten	~
 bijgesleepten	~
@@ -39261,7 +39258,7 @@ zwemmerigst	~
 zwempakken	~
 zwemplaatsen	~
 zwempoot	~
-zwempooten	~
+zwempooten	zwempoten
 zwemvoet	~
 zwemvoeten	~
 zwendelaarster	~
