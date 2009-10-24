@@ -1,5 +1,7 @@
 # ucwords.pl -- Unicode based perl script for collecting words from an XML file.
 
+# use strict;
+
 use utf8;
 binmode(STDOUT, ":utf8");
 use open ':utf8';
@@ -8,88 +10,88 @@ require Encode;
 use Unicode::Normalize;
 use DBI;
 
-use Roman;		# Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 use SgmlSupport qw/getAttrVal sgml2utf/;
 use LanguageNames qw/getLanguage/;
 
 
-$useDatabase = 0;	# set to 1 to store the word statistics in a database.
+$useDatabase = 0;   # set to 1 to store the word statistics in a database.
 $idbook = 1;
 
 main();
 
 
-sub main
+sub main()
 {
-	%wordHash = ();
-	%pairHash = ();
-	%numberHash = ();
-	%nonWordHash = ();
-	%scannoHash = ();
-	%charHash = ();
-	%compositeCharHash = ();
-	%langHash = ();
-	%tagHash = ();
-	%rendHash = ();
-	%dictHash = ();
-	%countCountHash = ();
-	@pageList = ();
-	$pageCount = 0;
+    %wordHash = ();
+    %pairHash = ();
+    %numberHash = ();
+    %nonWordHash = ();
+    %scannoHash = ();
+    %charHash = ();
+    %compositeCharHash = ();
+    %langHash = ();
+    %tagHash = ();
+    %rendHash = ();
+    %dictHash = ();
+    %countCountHash = ();
+    @pageList = ();
+    $pageCount = 0;
 
-	$headerWordCount = 0;
-	$headerNumberCount = 0;
-	$headerCharCount = 0;
-	$headerNonWordCount = 0;
+    $headerWordCount = 0;
+    $headerNumberCount = 0;
+    $headerCharCount = 0;
+    $headerNonWordCount = 0;
 
-	$wordCount = 0;
-	$numberCount = 0;
-	$nonWordCount = 0;
-	$charCount = 0;
-	$uniqCount = 0;
-	$nonCount = 0;
-	$varCount = 0;
-	$langCount = 0;
-	$langStackSize = 0;
+    $wordCount = 0;
+    $numberCount = 0;
+    $nonWordCount = 0;
+    $charCount = 0;
+    $uniqCount = 0;
+    $nonCount = 0;
+    $varCount = 0;
+    $langCount = 0;
+    $langStackSize = 0;
 
-	$tagPattern = "<(.*?)>";
+    $tagPattern = "<(.*?)>";
 
-	$infile = $ARGV[0];
+    $infile = $ARGV[0];
 
-	if ($infile eq "-l")
-	{
-		$defaultLang = $ARGV[1];
-		pushLang("NULL", $defaultLang);
-		$infile = $ARGV[2];
-	}
+    if ($infile eq "-l")
+    {
+        $defaultLang = $ARGV[1];
+        pushLang("NULL", $defaultLang);
+        $infile = $ARGV[2];
+    }
 
-	# loadScannoFile("en");
+    # loadScannoFile("en");
 
-	collectWords();
+    collectWords();
 
-	loadGoodBadWords();
+    loadGoodBadWords();
 
-	if ($useDatabase)
-	{
-		initDatabase();
-		addBook($idbook, $docTitle, $docAuthor, $infile);
-	}
+    if ($useDatabase)
+    {
+        initDatabase();
+        addBook($idbook, $docTitle, $docAuthor, $infile);
+    }
 
-	printReportHeader();
-	sortWords();
-	reportNumbers();
-	reportNonWords();
-	reportChars();
-	reportCompositeChars();
-	reportTags();
-	reportRend();
-	reportPages();
+    printReportHeader();
+    sortWords();
+    reportNumbers();
+    reportNonWords();
+    reportChars();
+    reportCompositeChars();
+    reportTags();
+    reportRend();
+    reportPages();
 
-	reportStatistics();
+    reportStatistics();
 
-	print "\n</body></html>";
+    print "\n</body></html>";
 
-	# heatMapDocument();
+    # heatMapDocument();
 
 }
 
@@ -105,26 +107,26 @@ sub main
 #
 sub heatMapDocument()
 {
-	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
-	open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
+    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+    open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
 
-	while (<INPUTFILE>)
-	{
-		$remainder = $_;
-		while ($remainder =~ /$tagPattern/)
-		{
-			$fragment = $`;
-			$tag = $1;
-			$remainder = $';
-			heatMapFragment($fragment);
-			heatMapTag($tag);
-			print HEATMAPFILE "<" . sgml2utf($tag) . ">";
-		}
-		heatMapFragment($remainder);
-	}
+    while (<INPUTFILE>)
+    {
+        $remainder = $_;
+        while ($remainder =~ /$tagPattern/)
+        {
+            $fragment = $`;
+            $tag = $1;
+            $remainder = $';
+            heatMapFragment($fragment);
+            heatMapTag($tag);
+            print HEATMAPFILE "<" . sgml2utf($tag) . ">";
+        }
+        heatMapFragment($remainder);
+    }
 
-	close (HEATMAPFILE);
-	close (INPUTFILE);
+    close (HEATMAPFILE);
+    close (INPUTFILE);
 }
 
 
@@ -134,49 +136,49 @@ sub heatMapDocument()
 #
 sub heatMapFragment($)
 {
-	my $fragment = shift;
-	$fragment = sgml2utf($fragment);
+    my $fragment = shift;
+    $fragment = sgml2utf($fragment);
 
-	my $lang = getLang();
+    my $lang = getLang();
 
-	my $prevWord = "";
-	# NOTE: we don't use \w and \W here, since it gives some unexpected results
-	my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
+    my $prevWord = "";
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results
+    my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
 
-	my $size = @words;
-	for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
-	{
-		my $word = $words[$i];
+    my $size = @words;
+    for (my $i = 0; $i < $size; $i++)  # cannot use foreach, as we look ahead.
+    {
+        my $word = $words[$i];
 
-		if ($word ne "")
-		{
-			if ($word =~ /^[^\pL\pN\pM-]+$/)
-			{
-				heatMapNonWord($word);
-				# reset previous word if separated from this word by more than just a space.
-				if ($word !~ /^[\pZ]+$/)
-				{
-					$prevWord = "";
-				}
-			}
-			elsif ($word =~ /^[0-9]+$/)
-			{
-				heatMapNumber($word);
-				$prevWord = "";
-			}
-			else # we have a word.
-			{
-				my $nextWord = "";
+        if ($word ne "")
+        {
+            if ($word =~ /^[^\pL\pN\pM-]+$/)
+            {
+                heatMapNonWord($word);
+                # reset previous word if separated from this word by more than just a space.
+                if ($word !~ /^[\pZ]+$/)
+                {
+                    $prevWord = "";
+                }
+            }
+            elsif ($word =~ /^[0-9]+$/)
+            {
+                heatMapNumber($word);
+                $prevWord = "";
+            }
+            else # we have a word.
+            {
+                my $nextWord = "";
 
-				if (exists($words[$i + 2]) && $words[$i + 1] =~ /^[\pZ]+$/ && $words[$i + 2] =~ /^[\pL\pN\pM-]+$/)
-				{
-					$nextWord = $words[$i + 2];
-				}
-				heatMapWord($word, $lang, $prevWord, $nextWord);
-				$prevWord = $word;
-			}
-		}
-	}
+                if (exists($words[$i + 2]) && $words[$i + 1] =~ /^[\pZ]+$/ && $words[$i + 2] =~ /^[\pL\pN\pM-]+$/)
+                {
+                    $nextWord = $words[$i + 2];
+                }
+                heatMapWord($word, $lang, $prevWord, $nextWord);
+                $prevWord = $word;
+            }
+        }
+    }
 }
 
 
@@ -185,37 +187,37 @@ sub heatMapFragment($)
 #
 sub heatMapTag($)
 {
-	my $tag = shift;
+    my $tag = shift;
 
-	# end tag or start tag?
-	if ($tag =~ /^!/)
-	{
-		# Comment, don't care.
-	}
-	elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
-	{
-		my $element = $1;
-		popLang($element);
-	}
-	elsif ($tag =~ /\/$/)
-	{
-		# Empty element
-		$tag =~ /^([a-zA-Z0-9_.-]+)/;
-	}
-	else
-	{
-		$tag =~ /^([a-zA-Z0-9_.-]+)/;
-		my $element = $1;
+    # end tag or start tag?
+    if ($tag =~ /^!/)
+    {
+        # Comment, don't care.
+    }
+    elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
+    {
+        my $element = $1;
+        popLang($element);
+    }
+    elsif ($tag =~ /\/$/)
+    {
+        # Empty element
+        $tag =~ /^([a-zA-Z0-9_.-]+)/;
+    }
+    else
+    {
+        $tag =~ /^([a-zA-Z0-9_.-]+)/;
+        my $element = $1;
         my $lang = getAttrVal("lang", $tag);
-		if ($lang ne "")
-		{
-			pushLang($element, $lang);
-		}
-		else
-		{
-			pushLang($element, getLang());
-		}
-	}
+        if ($lang ne "")
+        {
+            pushLang($element, $lang);
+        }
+        else
+        {
+            pushLang($element, getLang());
+        }
+    }
 }
 
 
@@ -224,29 +226,29 @@ sub heatMapTag($)
 #
 sub heatMapNonWord($)
 {
-	my $word = shift;
-	my $xmlWord = $word;
+    my $word = shift;
+    my $xmlWord = $word;
 
-	$xmlWord =~ s/</\&lt;/g;
-	$xmlWord =~ s/>/\&gt;/g;
-	$xmlWord =~ s/\&/\&amp;/g;
+    $xmlWord =~ s/</\&lt;/g;
+    $xmlWord =~ s/>/\&gt;/g;
+    $xmlWord =~ s/\&/\&amp;/g;
 
-	if ($nonWordHash{$word} < 5)
-	{
-		print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
-	}
-	elsif ($nonWordHash{$word} < 25)
-	{
-		print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
-	}
-	elsif ($nonWordHash{$word} < 100)
-	{
-		print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
-	}
-	else
-	{
-		print HEATMAPFILE $xmlWord;
-	}
+    if ($nonWordHash{$word} < 5)
+    {
+        print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
+    }
+    elsif ($nonWordHash{$word} < 25)
+    {
+        print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
+    }
+    elsif ($nonWordHash{$word} < 100)
+    {
+        print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
+    }
+    else
+    {
+        print HEATMAPFILE $xmlWord;
+    }
 }
 
 
@@ -255,9 +257,9 @@ sub heatMapNonWord($)
 #
 sub heatMapNumber($)
 {
-	my $word = shift;
+    my $word = shift;
 
-	print HEATMAPFILE $word;
+    print HEATMAPFILE $word;
 }
 
 
@@ -266,31 +268,31 @@ sub heatMapNumber($)
 #
 sub heatMapWord($$$$)
 {
-	my $word = shift;
-	my $dummy = shift;
-	my $prevWord = shift;
-	my $nextWord = shift;
-	my $lang = getLang();
+    my $word = shift;
+    my $dummy = shift;
+    my $prevWord = shift;
+    my $nextWord = shift;
+    my $lang = getLang();
 
-	# print STDERR "HEATMAP: [$prevWord] $word [$nextWord]\n";
+    # print STDERR "HEATMAP: [$prevWord] $word [$nextWord]\n";
 
-	if (!isKnownWord($word, $lang))
-	{
-		my $count = $wordHash{$lang}{$word};
-		if ($count < 100)
-		{
-			my $type = lookupHeatMapClass($count);
-			print HEATMAPFILE "<ab type=\"$type\">$word</ab>";
-		}
-		else
-		{
-			print HEATMAPFILE $word;
-		}
-	}
-	else
-	{
-		heatMapScanno($word, $prevWord, $nextWord);
-	}
+    if (!isKnownWord($word, $lang))
+    {
+        my $count = $wordHash{$lang}{$word};
+        if ($count < 100)
+        {
+            my $type = lookupHeatMapClass($count);
+            print HEATMAPFILE "<ab type=\"$type\">$word</ab>";
+        }
+        else
+        {
+            print HEATMAPFILE $word;
+        }
+    }
+    else
+    {
+        heatMapScanno($word, $prevWord, $nextWord);
+    }
 }
 
 
@@ -299,31 +301,31 @@ sub heatMapWord($$$$)
 #
 sub lookupHeatMapClass($)
 {
-	my $count = shift;
-	if ($count < 2)
-	{
-		return "q5";
-	}
-	elsif ($count < 3)
-	{
-		return "q4";
-	}
-	elsif ($count < 5)
-	{
-		return "q3";
-	}
-	elsif ($count < 8)
-	{
-		return "q2";
-	}
-	elsif ($count < 100)
-	{
-		return "q1";
-	}
-	else
-	{
-		return "";
-	}
+    my $count = shift;
+    if ($count < 2)
+    {
+        return "q5";
+    }
+    elsif ($count < 3)
+    {
+        return "q4";
+    }
+    elsif ($count < 5)
+    {
+        return "q3";
+    }
+    elsif ($count < 8)
+    {
+        return "q2";
+    }
+    elsif ($count < 100)
+    {
+        return "q1";
+    }
+    else
+    {
+        return "";
+    }
 }
 
 
@@ -334,19 +336,19 @@ sub lookupHeatMapClass($)
 #
 sub heatMapScanno($$$)
 {
-	my $word = shift;
-	my $prevWord = shift;
-	my $nextWord = shift;
-	my $lang = getLang();
+    my $word = shift;
+    my $prevWord = shift;
+    my $nextWord = shift;
+    my $lang = getLang();
 
-	if (exists($scannoHash{":$word:"}))
-	{
-		print HEATMAPFILE "<ab type=\"h3\">$word</ab>";
-	}
-	else
-	{
-		print HEATMAPFILE $word;
-	}
+    if (exists($scannoHash{":$word:"}))
+    {
+        print HEATMAPFILE "<ab type=\"h3\">$word</ab>";
+    }
+    else
+    {
+        print HEATMAPFILE $word;
+    }
 }
 
 
@@ -355,9 +357,9 @@ sub heatMapScanno($$$)
 #
 sub heatMapPair()
 {
-	# my $word = shift;
+    # my $word = shift;
 
-	# print HEATMAPFILE $word;
+    # print HEATMAPFILE $word;
 }
 
 
@@ -373,45 +375,45 @@ sub heatMapPair()
 #
 sub collectWords()
 {
-	open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
 
-	while (<INPUTFILE>)
-	{
-		my $remainder = $_;
+    while (<INPUTFILE>)
+    {
+        my $remainder = $_;
 
-		if ($remainder =~ /<title>(.*?)<\/title>/)
-		{
-			$docTitle = $1;
-		}
-		if ($remainder =~ /<author>(.*?)<\/author>/)
-		{
-			$docAuthor = $1;
-		}
-		if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/)
-		{
-			$idbook = $1;
-			$useDatabase = 1;
-		}
-		if ($remainder =~ /<\/teiHeader>/)
-		{
-			$headerWordCount = $wordCount;
-			$headerNumberCount = $numberCount;
-			$headerCharCount = $charCount;
-			$headerNonWordCount = $nonWordCount;
-		}
+        if ($remainder =~ /<title>(.*?)<\/title>/)
+        {
+            $docTitle = sgml2utf($1);
+        }
+        if ($remainder =~ /<author>(.*?)<\/author>/)
+        {
+            $docAuthor = sgml2utf($1);
+        }
+        if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/)
+        {
+            $idbook = $1;
+            $useDatabase = 1;
+        }
+        if ($remainder =~ /<\/teiHeader>/)
+        {
+            $headerWordCount = $wordCount;
+            $headerNumberCount = $numberCount;
+            $headerCharCount = $charCount;
+            $headerNonWordCount = $nonWordCount;
+        }
 
-		while ($remainder =~ /$tagPattern/)
-		{
-			$fragment = $`;
-			$tag = $1;
-			$remainder = $';
-			handleFragment($fragment);
-			handleTag($tag);
-		}
-		handleFragment($remainder);
-	}
+        while ($remainder =~ /$tagPattern/)
+        {
+            $fragment = $`;
+            $tag = $1;
+            $remainder = $';
+            handleFragment($fragment);
+            handleTag($tag);
+        }
+        handleFragment($remainder);
+    }
 
-	close (INPUTFILE);
+    close (INPUTFILE);
 }
 
 
@@ -421,16 +423,16 @@ sub collectWords()
 #
 sub sortWords()
 {
-	$grandTotalWords = 0;
-	$grandTotalUniqWords = 0;
-	$langCount = 0;
+    $grandTotalWords = 0;
+    $grandTotalUniqWords = 0;
+    $langCount = 0;
 
-	my @languageList = keys %wordHash;
-	foreach my $language (@languageList)
-	{
-		$langCount++;
-		sortLanguageWords($language);
-	}
+    my @languageList = keys %wordHash;
+    foreach my $language (@languageList)
+    {
+        $langCount++;
+        sortLanguageWords($language);
+    }
 }
 
 
@@ -439,17 +441,17 @@ sub sortWords()
 #
 sub sortLanguageWords($)
 {
-	my $language = shift;
-	@wordList = keys %{$wordHash{$language}};
+    my $language = shift;
+    @wordList = keys %{$wordHash{$language}};
 
-	foreach my $word (@wordList)
-	{
-		$key = Normalize($word);
-		$word = "$key!$word";
-	}
-	@wordList = sort @wordList;
-	reportWords($language);
-	reportLanguagePairs($language);
+    foreach my $word (@wordList)
+    {
+        $key = Normalize($word);
+        $word = "$key!$word";
+    }
+    @wordList = sort @wordList;
+    reportWords($language);
+    reportLanguagePairs($language);
 }
 
 
@@ -458,11 +460,11 @@ sub sortLanguageWords($)
 #
 sub reportPairs()
 {
-	my @languageList = keys %pairHash;
-	foreach my $language (@languageList)
-	{
-		reportLanguagePairs($language);
-	}
+    my @languageList = keys %pairHash;
+    foreach my $language (@languageList)
+    {
+        reportLanguagePairs($language);
+    }
 }
 
 
@@ -471,31 +473,31 @@ sub reportPairs()
 #
 sub reportLanguagePairs($)
 {
-	my $language = shift;
-	my @pairList = keys %{$pairHash{$language}};
-	@pairList = sort @pairList;
+    my $language = shift;
+    my @pairList = keys %{$pairHash{$language}};
+    @pairList = sort @pairList;
 
-	print "\n\n\n<h3>Most Common Word Pairs in " . getLanguage(lc($language)) . "</h3>\n";
+    print "\n\n\n<h3>Most Common Word Pairs in " . getLanguage(lc($language)) . "</h3>\n";
 
-	$max = 0;
-	foreach $pair (sort {$pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList)
-	{
-		my $count = $pairHash{$language}{$pair};
-		if ($count < 10)
-		{
-			last;
-		}
+    $max = 0;
+    foreach $pair (sort {$pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList)
+    {
+        my $count = $pairHash{$language}{$pair};
+        if ($count < 10)
+        {
+            last;
+        }
 
-		my ($first, $second) = split(/!/, $pair, 2);
+        my ($first, $second) = split(/!/, $pair, 2);
 
-		# print STDERR "PAIR: $count $pair\n";
-		print "\n<p>$first $second <span class=cnt>$count</span>";
-		$max++;
-		if ($max > 100)
-		{
-			last;
-		}
-	}
+        # print STDERR "PAIR: $count $pair\n";
+        print "\n<p>$first $second <span class=cnt>$count</span>";
+        $max++;
+        if ($max > 100)
+        {
+            last;
+        }
+    }
 }
 
 
@@ -504,42 +506,42 @@ sub reportLanguagePairs($)
 #
 sub loadGoodBadWords()
 {
-	%goodWordsHash = ();
-	%badWordsHash = ();
+    %goodWordsHash = ();
+    %badWordsHash = ();
 
-	if (-e "good_words.txt")
-	{
-		if (open(GOODWORDSFILE, "<:encoding(iso-8859-1)", "good_words.txt"))
-		{
-			my $count = 0;
-			while (<GOODWORDSFILE>)
-			{
-				my $dictword =  $_;
-				$dictword =~ s/\n//g;
-				$goodWordsHash{$dictword} = 1;
-				$count++;
-			}
-			print STDERR "NOTICE:  Loaded good_words.txt with $count words\n";
-			close(GOODWORDSFILE);
-		}
-	}
+    if (-e "good_words.txt")
+    {
+        if (open(GOODWORDSFILE, "<:encoding(iso-8859-1)", "good_words.txt"))
+        {
+            my $count = 0;
+            while (<GOODWORDSFILE>)
+            {
+                my $dictword =  $_;
+                $dictword =~ s/\n//g;
+                $goodWordsHash{$dictword} = 1;
+                $count++;
+            }
+            print STDERR "NOTICE:  Loaded good_words.txt with $count words\n";
+            close(GOODWORDSFILE);
+        }
+    }
 
-	if (-e "bad_words.txt")
-	{
-		if (open(BADWORDSFILE, "<:encoding(iso-8859-1)", "bad_words.txt"))
-		{
-			my $count = 0;
-			while (<BADWORDSFILE>)
-			{
-				my $dictword =  $_;
-				$dictword =~ s/\n//g;
-				$badWordsHash{$dictword} = 1;
-				$count++;
-			}
-			print STDERR "NOTICE:  Loaded bad_words.txt with $count words\n";
-			close(BADWORDSFILE);
-		}
-	}
+    if (-e "bad_words.txt")
+    {
+        if (open(BADWORDSFILE, "<:encoding(iso-8859-1)", "bad_words.txt"))
+        {
+            my $count = 0;
+            while (<BADWORDSFILE>)
+            {
+                my $dictword =  $_;
+                $dictword =~ s/\n//g;
+                $badWordsHash{$dictword} = 1;
+                $count++;
+            }
+            print STDERR "NOTICE:  Loaded bad_words.txt with $count words\n";
+            close(BADWORDSFILE);
+        }
+    }
 }
 
 
@@ -548,32 +550,32 @@ sub loadGoodBadWords()
 #
 sub printReportHeader()
 {
-	print "<html>";
-	print "\n<head><title>Word Usage Report for $docTitle ($infile)</title>";
-	print "\n<style>\n";
-	print "body { margin-left: 30px; }\n";
-	print "p { margin: 0px; }\n";
-	print ".cnt { color: gray; font-size: smaller; }\n";
-	print ".err { color: red; font-weight: bold; }\n";
-	print ".comp { color: green; font-weight: bold; }\n";
-	print ".comp3 { color: green; }\n";
-	print ".unk { color: blue; font-weight: bold; }\n";
-	print ".unk10 { color: blue; }\n";
-	print ".freq { color: gray; }\n";
-	print ".gw { background: yellow; }\n";
-	print ".bw { background: red; font-size: 24px;}\n";
+    print "<html>";
+    print "\n<head><title>Word Usage Report for $docTitle ($infile)</title>";
+    print "\n<style>\n";
+    print "body { margin-left: 30px; }\n";
+    print "p { margin: 0px; }\n";
+    print ".cnt { color: gray; font-size: smaller; }\n";
+    print ".err { color: red; font-weight: bold; }\n";
+    print ".comp { color: green; font-weight: bold; }\n";
+    print ".comp3 { color: green; }\n";
+    print ".unk { color: blue; font-weight: bold; }\n";
+    print ".unk10 { color: blue; }\n";
+    print ".freq { color: gray; }\n";
+    print ".gw { background: yellow; }\n";
+    print ".bw { background: red; font-size: 24px;}\n";
 
-	print ".q1 { background-color: #FFFFCC; }\n";
-	print ".q2 { background-color: #FFFF5C; }\n";
-	print ".q3 { background-color: #FFDB4D; }\n";
-	print ".q4 { background-color: #FFB442; font-weight: bold;}\n";
-	print ".q5 { background-color: #FF8566; font-weight: bold;}\n";
-	print ".q6 { background-color: red; font-weight: bold;}\n";
+    print ".q1 { background-color: #FFFFCC; }\n";
+    print ".q2 { background-color: #FFFF5C; }\n";
+    print ".q3 { background-color: #FFDB4D; }\n";
+    print ".q4 { background-color: #FFB442; font-weight: bold;}\n";
+    print ".q5 { background-color: #FF8566; font-weight: bold;}\n";
+    print ".q6 { background-color: red; font-weight: bold;}\n";
 
-	print "</style>\n";
-	print "\n<head><body>";
+    print "</style>\n";
+    print "\n<head><body>";
 
-	print "\n<h1>Word Usage Report for $docTitle ($infile)</h1>";
+    print "\n<h1>Word Usage Report for $docTitle ($infile)</h1>";
 }
 
 
@@ -582,11 +584,11 @@ sub printReportHeader()
 #
 sub reportPages()
 {
-	print "\n<h2>Page Number Sequence</h2>";
-	print "\n<p>This document contains $pageCount pages.";
-	print "\n<p>Sequence: ";
+    print "\n<h2>Page Number Sequence</h2>";
+    print "\n<p>This document contains $pageCount pages.";
+    print "\n<p>Sequence: ";
 
-	printSequence();
+    printSequence();
 }
 
 
@@ -595,14 +597,14 @@ sub reportPages()
 #
 sub reportWordStatistics()
 {
-	if ($totalWords != 0)
-	{
-		print "\n\n<h3>Statistics</h3>";
-		$percentage =  sprintf("%.2f", 100 * ($unknownTotalWords / $totalWords));
-		print "\n<p>Total words: $totalWords, of which unknown: $unknownTotalWords [$percentage%]";
-		$percentage =  sprintf("%.2f", 100 * ($unknownUniqWords / $uniqWords));
-		print "\n<p>Unique words: $uniqWords, of which unknown: $unknownUniqWords [$percentage%]";
-	}
+    if ($totalWords != 0)
+    {
+        print "\n\n<h3>Statistics</h3>";
+        $percentage =  sprintf("%.2f", 100 * ($unknownTotalWords / $totalWords));
+        print "\n<p>Total words: $totalWords, of which unknown: $unknownTotalWords [$percentage%]";
+        $percentage =  sprintf("%.2f", 100 * ($unknownUniqWords / $uniqWords));
+        print "\n<p>Unique words: $uniqWords, of which unknown: $unknownUniqWords [$percentage%]";
+    }
 }
 
 
@@ -611,41 +613,41 @@ sub reportWordStatistics()
 #
 sub reportWords($)
 {
-	my $language = shift;
+    my $language = shift;
 
-	my $prevWord = "";
-	my $prevKey  = "";
-	my $prevLetter = "";
+    my $prevWord = "";
+    my $prevKey  = "";
+    my $prevLetter = "";
 
-	$uniqWords = 0;
-	$totalWords = 0;
-	$unknownTotalWords = 0;
-	$unknownUniqWords = 0;
+    $uniqWords = 0;
+    $totalWords = 0;
+    $unknownTotalWords = 0;
+    $unknownUniqWords = 0;
 
-	print "\n\n\n<h2>Word frequencies in " . getLanguage(lc($language)) . "</h2>\n";
-	loadDict($language);
+    print "\n\n\n<h2>Word frequencies in " . getLanguage(lc($language)) . "</h2>\n";
+    loadDict($language);
 
-	foreach $item (@wordList)
-	{
-		($key, $word) = split(/!/, $item, 2);
+    foreach $item (@wordList)
+    {
+        ($key, $word) = split(/!/, $item, 2);
 
-		if ($key ne $prevKey)
-		{
-			print "\n<p>";
-			$prevKey = $key;
-		}
+        if ($key ne $prevKey)
+        {
+            print "\n<p>";
+            $prevKey = $key;
+        }
 
-		$letter = lc(substr($key, 0, 1));
-		if ($letter ne $prevLetter)
-		{
-			print "\n\n<h3>" . uc($letter) . "</h3>\n";
-			$prevLetter = $letter;
-		}
+        $letter = lc(substr($key, 0, 1));
+        if ($letter ne $prevLetter)
+        {
+            print "\n\n<h3>" . uc($letter) . "</h3>\n";
+            $prevLetter = $letter;
+        }
 
-		reportWord($word, $language);
-	}
+        reportWord($word, $language);
+    }
 
-	reportWordStatistics();
+    reportWordStatistics();
 }
 
 
@@ -654,62 +656,63 @@ sub reportWords($)
 #
 sub reportWord($$)
 {
-	my $word = shift;
-	my $language = shift;
-	my $count = $wordHash{$language}{$word};
+    my $word = shift;
+    my $language = shift;
+    my $count = $wordHash{$language}{$word};
 
-	if ($useDatabase)
-	{
-		addWord($idbook, $word, $language, $count);
-	}
+    if ($useDatabase)
+    {
+        addWord($idbook, $word, $language, $count);
+    }
 
-	$uniqWords++;
-	$totalWords += $count;
-	$grandTotalUniqWords++;
-	$grandTotalWords += $count;
+    $uniqWords++;
+    $totalWords += $count;
+    $grandTotalUniqWords++;
+    $grandTotalWords += $count;
 
-	# Count how many times a word with this frequency occurs:
-	$countCountHash{$count}++;
+    # Count how many times a word with this frequency occurs:
+    $countCountHash{$count}++;
+    
+    my $compoundWord = "";
+    my $known = isKnownWord($word, $language);
+    if ($known == 0)
+    {
+        $compoundWord = compoundWord($word, $language);
+        $unknownUniqWords++;
+        $unknownTotalWords += $count;
+    }
 
-	my $known = isKnownWord($word, $language);
-	if ($known == 0)
-	{
-		$compoundWord = compoundWord($word, $language);
-		$unknownUniqWords++;
-		$unknownTotalWords += $count;
-	}
+    my $goodOrBad = $badWordsHash{$word} == 1 ? "bw" : $goodWordsHash{$word} == 1 ? "gw" : "";
 
-	my $goodOrBad = $badWordsHash{$word} == 1 ? "bw" : $goodWordsHash{$word} == 1 ? "gw" : "";
+    if ($known == 0)
+    {
+        my $heatMapClass = lookupHeatMapClass($count);
 
-	if ($known == 0)
-	{
-		my $heatMapClass = lookupHeatMapClass($count);
+        if ($compoundWord ne "")
+        {
+            print "<span class='$heatMapClass comp $goodOrBad'>$compoundWord</span> ";
+        }
+        else
+        {
+            print "<span class='$heatMapClass $goodOrBad'>$word</span> ";
+        }
+    }
+    else
+    {
+        if ($count < 3)
+        {
+            print "<span class='$goodOrBad'>$word</span> ";
+        }
+        else
+        {
+            print "<span class='freq $goodOrBad'>$word</span> ";
+        }
+    }
 
-		if ($compoundWord ne "")
-		{
-			print "<span class='$heatMapClass comp $goodOrBad'>$compoundWord</span> ";
-		}
-		else
-		{
-			print "<span class='$heatMapClass $goodOrBad'>$word</span> ";
-		}
-	}
-	else
-	{
-		if ($count < 3)
-		{
-			print "<span class='$goodOrBad'>$word</span> ";
-		}
-		else
-		{
-			print "<span class='freq $goodOrBad'>$word</span> ";
-		}
-	}
-
-	if ($count > 1)
-	{
-		print "<span class=cnt>$count</span> ";
-	}
+    if ($count > 1)
+    {
+        print "<span class=cnt>$count</span> ";
+    }
 }
 
 
@@ -718,33 +721,33 @@ sub reportWord($$)
 #
 sub compoundWord($$)
 {
-	my $word = shift;
-	my $language = shift;
-	my $start = 4;
-	my $end = length($word) - 3;
+    my $word = shift;
+    my $language = shift;
+    my $start = 4;
+    my $end = length($word) - 3;
 
-	# print STDERR "\n$word $end";
-	for (my $i = $start; $i < $end; $i++)
-	{
-		$before = substr($word, 0, $i);
-		$after = substr($word, $i);
-		if (isKnownWord($before, $language) == 1 && isKnownWord(ucfirst($after), $language) == 1)
-		{
-			# print STDERR "[$before|$after] ";
-			return "$word";
-		}
-	}
+    # print STDERR "\n$word $end";
+    for (my $i = $start; $i < $end; $i++)
+    {
+        $before = substr($word, 0, $i);
+        $after = substr($word, $i);
+        if (isKnownWord($before, $language) == 1 && isKnownWord(ucfirst($after), $language) == 1)
+        {
+            # print STDERR "[$before|$after] ";
+            return "$word";
+        }
+    }
 
-	my @parts = split(/-/, $word);
-	foreach my $part (@parts)
-	{
-		if (!isKnownWord($part, $language))
-		{
-			return "";
-		}
-	}
+    my @parts = split(/-/, $word);
+    foreach my $part (@parts)
+    {
+        if (!isKnownWord($part, $language))
+        {
+            return "";
+        }
+    }
 
-	return $word;
+    return $word;
 }
 
 
@@ -753,17 +756,17 @@ sub compoundWord($$)
 #
 sub isKnownWord($$)
 {
-	my $word = shift;
-	my $lang = shift;
+    my $word = shift;
+    my $lang = shift;
 
-	if ($dictHash{$lang}{lc($word)} != 1)
-	{
-		if ($dictHash{$lang}{$word} != 1)
-		{
-			return 0;
-		}
-	}
-	return 1;
+    if ($dictHash{$lang}{lc($word)} != 1)
+    {
+        if ($dictHash{$lang}{$word} != 1)
+        {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 
@@ -772,27 +775,27 @@ sub isKnownWord($$)
 #
 sub reportNonWords()
 {
-	@nonWordList = keys %nonWordHash;
-	print "\n\n<h2>Frequencies of Non-Words</h2>\n";
-	@nonWordList = sort @nonWordList;
+    @nonWordList = keys %nonWordHash;
+    print "\n\n<h2>Frequencies of Non-Words</h2>\n";
+    @nonWordList = sort @nonWordList;
 
-	$grandTotalNonWords = 0;
-	print "<table>\n";
-	print "<tr><th>Sequence<th>Length<th>Count\n";
-	foreach $item (@nonWordList)
-	{
-		$item =~ s/\0/[NULL]/g;
+    $grandTotalNonWords = 0;
+    print "<table>\n";
+    print "<tr><th>Sequence<th>Length<th>Count\n";
+    foreach $item (@nonWordList)
+    {
+        $item =~ s/\0/[NULL]/g;
 
-		if ($item ne "")
-		{
-			$count = $nonWordHash{$item};
-			$length = length($item);
-			$item =~ s/ /\&nbsp;/g;
-			$grandTotalNonWords += $count;
-			print "<tr><td>|$item| <td align=right><small>$length</small>&nbsp;&nbsp;&nbsp;<td align=right>$count";
-		}
-	}
-	print "</table>\n";
+        if ($item ne "")
+        {
+            $count = $nonWordHash{$item};
+            $length = length($item);
+            $item =~ s/ /\&nbsp;/g;
+            $grandTotalNonWords += $count;
+            print "<tr><td>|$item| <td align=right><small>$length</small>&nbsp;&nbsp;&nbsp;<td align=right>$count";
+        }
+    }
+    print "</table>\n";
 }
 
 
@@ -801,23 +804,23 @@ sub reportNonWords()
 #
 sub reportChars()
 {
-	@charList = keys %charHash;
-	print "\n\n<h2>Character Frequencies</h2>\n";
-	@charList = sort @charList;
+    @charList = keys %charHash;
+    print "\n\n<h2>Character Frequencies</h2>\n";
+    @charList = sort @charList;
 
-	$grandTotalCharacters = 0;
-	print "<table>\n";
-	print "<tr><th>Character<th>Code<th>Count\n";
-	foreach $char (@charList)
-	{
-		$char =~ s/\0/[NULL]/g;
+    $grandTotalCharacters = 0;
+    print "<table>\n";
+    print "<tr><th>Character<th>Code<th>Count\n";
+    foreach $char (@charList)
+    {
+        $char =~ s/\0/[NULL]/g;
 
-		$count = $charHash{$char};
-		$ord = ord($char);
-		$grandTotalCharacters += $count;
-		print "<tr><td>$char<td align=right><small>$ord</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
-	}
-	print "</table>\n";
+        $count = $charHash{$char};
+        $ord = ord($char);
+        $grandTotalCharacters += $count;
+        print "<tr><td>$char<td align=right><small>$ord</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
+    }
+    print "</table>\n";
 }
 
 
@@ -826,30 +829,30 @@ sub reportChars()
 #
 sub reportCompositeChars()
 {
-	@compositeCharList = keys %compositeCharHash;
-	print "\n\n<h2>Unicode Composite Character Frequencies</h2>\n";
-	@compositeCharList = sort @compositeCharList;
+    @compositeCharList = keys %compositeCharHash;
+    print "\n\n<h2>Unicode Composite Character Frequencies</h2>\n";
+    @compositeCharList = sort @compositeCharList;
 
-	$grandTotalCompositeCharacters = 0;
-	print "<table>\n";
-	print "<tr><th>Character<th>Codes<th>Count\n";
-	foreach $compositeChar (@compositeCharList)
-	{
-		$compositeChar =~ s/\0/[NULL]/g;
+    $grandTotalCompositeCharacters = 0;
+    print "<table>\n";
+    print "<tr><th>Character<th>Codes<th>Count\n";
+    foreach $compositeChar (@compositeCharList)
+    {
+        $compositeChar =~ s/\0/[NULL]/g;
 
-		$count = $compositeCharHash{$compositeChar};
+        $count = $compositeCharHash{$compositeChar};
 
-		my $ords = "";
-		my @chars = split(//, $compositeChar);
-		foreach my $char (@chars)
-		{
-			$ords .= " " . ord($char);
-		}
+        my $ords = "";
+        my @chars = split(//, $compositeChar);
+        foreach my $char (@chars)
+        {
+            $ords .= " " . ord($char);
+        }
 
-		$grandTotalCompositeCharacters += $count;
-		print "<tr><td>$compositeChar<td align=right><small>$ords</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
-	}
-	print "</table>\n";
+        $grandTotalCompositeCharacters += $count;
+        print "<tr><td>$compositeChar<td align=right><small>$ords</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
+    }
+    print "</table>\n";
 }
 
 
@@ -858,23 +861,23 @@ sub reportCompositeChars()
 #
 sub reportNumbers()
 {
-	@numberList = keys %numberHash;
-	print "<h2>Number Frequencies</h2>\n";
-	@numberList = sort { $a <=> $b } @numberList;
+    @numberList = keys %numberHash;
+    print "<h2>Number Frequencies</h2>\n";
+    @numberList = sort { $a <=> $b } @numberList;
 
-	print "<p>";
-	foreach $number (@numberList)
-	{
-		$count = $numberHash{$number};
-		if ($count > 1)
-		{
-			print "<b>$number</b> <span class=cnt>$count</span>;\n";
-		}
-		else
-		{
-			print "$number;\n";
-		}
-	}
+    print "<p>";
+    foreach $number (@numberList)
+    {
+        $count = $numberHash{$number};
+        if ($count > 1)
+        {
+            print "<b>$number</b> <span class=cnt>$count</span>;\n";
+        }
+        else
+        {
+            print "$number;\n";
+        }
+    }
 }
 
 
@@ -883,20 +886,20 @@ sub reportNumbers()
 #
 sub reportTags()
 {
-	@tagList = keys %tagHash;
-	print "\n\n<h2>XML-Tag Frequencies</h2>\n";
-	@tagList = sort { lc($a) cmp lc($b) } @tagList;
+    @tagList = keys %tagHash;
+    print "\n\n<h2>XML-Tag Frequencies</h2>\n";
+    @tagList = sort { lc($a) cmp lc($b) } @tagList;
 
-	$grandTotalTags = 0;
-	print "<table>\n";
-	print "<tr><th>Tag<th>Count\n";
-	foreach $tag (@tagList)
-	{
-		$count = $tagHash{$tag};
-		$grandTotalTags += $count;
-		print "<tr><td><code>$tag</code><td align=right><b>$count</b>\n";
-	}
-	print "</table>\n";
+    $grandTotalTags = 0;
+    print "<table>\n";
+    print "<tr><th>Tag<th>Count\n";
+    foreach $tag (@tagList)
+    {
+        $count = $tagHash{$tag};
+        $grandTotalTags += $count;
+        print "<tr><td><code>$tag</code><td align=right><b>$count</b>\n";
+    }
+    print "</table>\n";
 }
 
 
@@ -905,18 +908,18 @@ sub reportTags()
 #
 sub reportRend()
 {
-	@rendList = keys %rendHash;
-	print "<h2>Rendering Attribute Frequencies</h2>\n";
-	@rendList = sort { lc($a) cmp lc($b) } @rendList;
+    @rendList = keys %rendHash;
+    print "<h2>Rendering Attribute Frequencies</h2>\n";
+    @rendList = sort { lc($a) cmp lc($b) } @rendList;
 
-	print "<table>\n";
-	print "<tr><th>Rendering<th>Count\n";
-	foreach $rend (@rendList)
-	{
-		$count = $rendHash{$rend};
-		print "<tr><td><code>$rend</code><td align=right><b>$count</b>\n";
-	}
-	print "</table>\n";
+    print "<table>\n";
+    print "<tr><th>Rendering<th>Count\n";
+    foreach $rend (@rendList)
+    {
+        $count = $rendHash{$rend};
+        print "<tr><td><code>$rend</code><td align=right><b>$count</b>\n";
+    }
+    print "</table>\n";
 }
 
 
@@ -925,23 +928,23 @@ sub reportRend()
 #
 sub reportStatistics
 {
-	$textWordCount		= $wordCount	- $headerWordCount;
-	$textNonWordCount	= $nonWordCount - $headerNonWordCount;
-	$textNumberCount	= $numberCount	- $headerNumberCount;
-	$textCharCount		= $charCount	- $headerCharCount;
+    $textWordCount      = $wordCount    - $headerWordCount;
+    $textNonWordCount   = $nonWordCount - $headerNonWordCount;
+    $textNumberCount    = $numberCount  - $headerNumberCount;
+    $textCharCount      = $charCount    - $headerCharCount;
 
-	$extend = $textWordCount + $textNumberCount;
+    $extend = $textWordCount + $textNumberCount;
 
-	print "\n<h2>Overall Statistics</h2>";
-	print "\n<table>";
-	print "\n<tr><th>Items					<th>Overall				<th>TEI Header			<th>Text				<th>Notes";
-	print "\n<tr><td>Number of words:			<td>$wordCount			<td>$headerWordCount	<td>$textWordCount		<td>$langCount languages";
-	print "\n<tr><td>Number of non-words:		<td>$nonWordCount		<td>$headerNonWordCount	<td>$textNonWordCount	<td>";
-	print "\n<tr><td>Number of numbers:		<td>$numberCount		<td>$headerNumberCount	<td>$textNumberCount	<td>";
-	print "\n<tr><td>Number of characters:	<td>$charCount			<td>$headerCharCount	<td>$textCharCount		<td>excluding characters in tags, SGML headers, or SGML comments, includes header information";
-	print "\n<tr><td>Number of tags:			<td>$grandTotalTags		<td>					<td>					<td>excluding closing tags";
-	print "\n<tr><td>Extend:					<td>					<td>					<td>$extend				<td>Words and numbers in text";
-	print "\n</table>";
+    print "\n<h2>Overall Statistics</h2>";
+    print "\n<table>";
+    print "\n<tr><th>Items                  <th>Overall             <th>TEI Header          <th>Text                <th>Notes";
+    print "\n<tr><td>Number of words:           <td>$wordCount          <td>$headerWordCount    <td>$textWordCount      <td>$langCount languages";
+    print "\n<tr><td>Number of non-words:       <td>$nonWordCount       <td>$headerNonWordCount <td>$textNonWordCount   <td>";
+    print "\n<tr><td>Number of numbers:     <td>$numberCount        <td>$headerNumberCount  <td>$textNumberCount    <td>";
+    print "\n<tr><td>Number of characters:  <td>$charCount          <td>$headerCharCount    <td>$textCharCount      <td>excluding characters in tags, SGML headers, or SGML comments, includes header information";
+    print "\n<tr><td>Number of tags:            <td>$grandTotalTags     <td>                    <td>                    <td>excluding closing tags";
+    print "\n<tr><td>Extend:                    <td>                    <td>                    <td>$extend             <td>Words and numbers in text";
+    print "\n</table>";
 }
 
 
@@ -950,19 +953,19 @@ sub reportStatistics
 #
 sub reportCountCounts()
 {
-	print "\n<h3>Count of Counts</h3>";
+    print "\n<h3>Count of Counts</h3>";
 
-	print "\n<table>";
-	print "\n<tr><th>Count <th>Number of words with this count <th>Total <th>Cummulative";
+    print "\n<table>";
+    print "\n<tr><th>Count <th>Number of words with this count <th>Total <th>Cummulative";
 
-	my $cummulativeCount = 0;
-	foreach my $count (sort { $b <=> $a } (keys %countCountHash))
-	{
-		my $total = $count * $countCountHash{$count};
-		$cummulativeCount += $total;
-		print "\n<tr><td>$count <td>$countCountHash{$count} <td>$total <td>$cummulativeCount";
-	}
-	print "\n</table>";
+    my $cummulativeCount = 0;
+    foreach my $count (sort { $b <=> $a } (keys %countCountHash))
+    {
+        my $total = $count * $countCountHash{$count};
+        $cummulativeCount += $total;
+        print "\n<tr><td>$count <td>$countCountHash{$count} <td>$total <td>$cummulativeCount";
+    }
+    print "\n</table>";
 }
 
 
@@ -971,56 +974,56 @@ sub reportCountCounts()
 #
 sub handleTag($)
 {
-	my $tag = shift;
+    my $tag = shift;
 
-	# end tag or start tag?
-	if ($tag =~ /^!/)
-	{
-		# Comment, don't care.
-	}
-	elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
-	{
-		my $element = $1;
-		popLang($element);
-		$tagHash{$element}++;
-	}
-	elsif ($tag =~ /\/$/)
-	{
-		# Empty element
-		$tag =~ /^([a-zA-Z0-9_.-]+)/;
-		my $element = $1;
-		$tagHash{$element}++;
-		if ($element eq "pb")
-		{
-			my $n = getAttrVal("n", $tag);
-			push @pageList, $n;
-			$pageCount++;
-		}
-		my $rend = getAttrVal("rend", $tag);
-		if ($rend ne "")
-		{
-			$rendHash{$rend}++;
-		}
-	}
-	else
-	{
-		$tag =~ /^([a-zA-Z0-9_.-]+)/;
-		my $element = $1;
+    # end tag or start tag?
+    if ($tag =~ /^!/)
+    {
+        # Comment, don't care.
+    }
+    elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
+    {
+        my $element = $1;
+        popLang($element);
+        $tagHash{$element}++;
+    }
+    elsif ($tag =~ /\/$/)
+    {
+        # Empty element
+        $tag =~ /^([a-zA-Z0-9_.-]+)/;
+        my $element = $1;
+        $tagHash{$element}++;
+        if ($element eq "pb")
+        {
+            my $n = getAttrVal("n", $tag);
+            push @pageList, $n;
+            $pageCount++;
+        }
+        my $rend = getAttrVal("rend", $tag);
+        if ($rend ne "")
+        {
+            $rendHash{$rend}++;
+        }
+    }
+    else
+    {
+        $tag =~ /^([a-zA-Z0-9_.-]+)/;
+        my $element = $1;
         my $lang = getAttrVal("lang", $tag);
-		if ($lang ne "")
-		{
-			pushLang($element, $lang);
-		}
-		else
-		{
-			pushLang($element, getLang());
-		}
-		my $rend = getAttrVal("rend", $tag);
-		if ($rend ne "")
-		{
-			$rendHash{$rend}++;
-		}
-	}
+        if ($lang ne "")
+        {
+            pushLang($element, $lang);
+        }
+        else
+        {
+            pushLang($element, getLang());
+        }
+        my $rend = getAttrVal("rend", $tag);
+        if ($rend ne "")
+        {
+            $rendHash{$rend}++;
+        }
+    }
 }
 
 
@@ -1030,58 +1033,58 @@ sub handleTag($)
 #
 sub handleFragment($)
 {
-	my $fragment = shift;
-	$fragment = NFC(sgml2utf($fragment));
+    my $fragment = shift;
+    $fragment = NFC(sgml2utf($fragment));
 
-	my $lang = getLang();
+    my $lang = getLang();
 
-	my $prevWord = "";
-	# NOTE: we don't use \w and \W here, since it gives some unexpected results
-	my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
-	foreach my $word (@words)
-	{
-		if ($word ne "")
-		{
-			if ($word =~ /^[^\pL\pN\pM-]+$/)
-			{
-				countNonWord($word);
-				# reset previous word if not separated by more than just a space.
-				if ($word !~ /^[\pZ]+$/)
-				{
-					$prevWord = "";
-				}
-			}
-			elsif ($word =~ /^[0-9]+$/)
-			{
-				countNumber($word);
-				$prevWord = "";
-			}
-			else
-			{
-				countWord($word, $lang);
-				if ($prevWord ne "")
-				{
-					countPair($prevWord, $word, $lang);
-				}
-				$prevWord = $word;
-			}
-		}
-	}
+    my $prevWord = "";
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results
+    my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
+    foreach my $word (@words)
+    {
+        if ($word ne "")
+        {
+            if ($word =~ /^[^\pL\pN\pM-]+$/)
+            {
+                countNonWord($word);
+                # reset previous word if not separated by more than just a space.
+                if ($word !~ /^[\pZ]+$/)
+                {
+                    $prevWord = "";
+                }
+            }
+            elsif ($word =~ /^[0-9]+$/)
+            {
+                countNumber($word);
+                $prevWord = "";
+            }
+            else
+            {
+                countWord($word, $lang);
+                if ($prevWord ne "")
+                {
+                    countPair($prevWord, $word, $lang);
+                }
+                $prevWord = $word;
+            }
+        }
+    }
 
-	my @chars = split(//, $fragment);
-	foreach my $char (@chars)
-	{
-		countChar($char);
-	}
+    my @chars = split(//, $fragment);
+    foreach my $char (@chars)
+    {
+        countChar($char);
+    }
 
-	my @compositeChars = split(/(\pL\pM*)/, $fragment);
-	foreach my $compositeChar (@compositeChars)
-	{
-		if ($compositeChar =~ /^\pL\pM*$/)
-		{
-			countCompositeChar($compositeChar)
-		}
-	}
+    my @compositeChars = split(/(\pL\pM*)/, $fragment);
+    foreach my $compositeChar (@compositeChars)
+    {
+        if ($compositeChar =~ /^\pL\pM*$/)
+        {
+            countCompositeChar($compositeChar)
+        }
+    }
 }
 
 
@@ -1090,12 +1093,12 @@ sub handleFragment($)
 #
 sub countPair($$$)
 {
-	my $firstWord = shift;
-	my $secondWord = shift;
-	my $language = shift;
+    my $firstWord = shift;
+    my $secondWord = shift;
+    my $language = shift;
 
-	$pairHash{$language}{"$firstWord!$secondWord"}++;
-	# print STDERR "PAIR: $firstWord $secondWord\n";
+    $pairHash{$language}{"$firstWord!$secondWord"}++;
+    # print STDERR "PAIR: $firstWord $secondWord\n";
 }
 
 
@@ -1104,42 +1107,42 @@ sub countPair($$$)
 #
 sub countWord($$)
 {
-	my $word = shift;
-	my $lang = shift;
+    my $word = shift;
+    my $lang = shift;
 
-	$wordHash{$lang}{$word}++;
-	$wordCount++;
+    $wordHash{$lang}{$word}++;
+    $wordCount++;
 }
 
 sub countNumber($)
 {
-	my $number = shift;
-	$numberHash{$number}++;
-	$numberCount++;
+    my $number = shift;
+    $numberHash{$number}++;
+    $numberCount++;
 }
 
 sub countNonWord($)
 {
-	my $nonWord = shift;
-	$nonWordHash{$nonWord}++;
-	$nonWordCount++;
+    my $nonWord = shift;
+    $nonWordHash{$nonWord}++;
+    $nonWordCount++;
 }
 
 sub countChar($)
 {
-	my $char = shift;
-	$charHash{$char}++;
-	$charCount++;
+    my $char = shift;
+    $charHash{$char}++;
+    $charCount++;
 }
 
 sub countCompositeChar($)
 {
-	my $compositeChar = shift;
-	if (length($compositeChar) > 1)
-	{
-		$compositeCharHash{$compositeChar}++;
-		$compositeChar++;
-	}
+    my $compositeChar = shift;
+    if (length($compositeChar) > 1)
+    {
+        $compositeCharHash{$compositeChar}++;
+        $compositeChar++;
+    }
 }
 
 
@@ -1149,16 +1152,16 @@ sub countCompositeChar($)
 #
 sub popLang($)
 {
-	my $tag = shift;
+    my $tag = shift;
 
-	if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize])
-	{
-		$langStackSize--;
-	}
-	else
-	{
-		die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened; remainder: $remainder)");
-	}
+    if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize])
+    {
+        $langStackSize--;
+    }
+    else
+    {
+        die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened; remainder: $remainder)");
+    }
 }
 
 #
@@ -1166,13 +1169,13 @@ sub popLang($)
 #
 sub pushLang($$)
 {
-	my $tag = shift;
-	my $lang = shift;
+    my $tag = shift;
+    my $lang = shift;
 
-	$langHash{$lang}++;
-	$langStackSize++;
-	$stackLang[$langStackSize] = $lang;
-	$stackTag[$langStackSize] = $tag;
+    $langHash{$lang}++;
+    $langStackSize++;
+    $stackLang[$langStackSize] = $lang;
+    $stackTag[$langStackSize] = $tag;
 }
 
 #
@@ -1180,7 +1183,7 @@ sub pushLang($$)
 #
 sub getLang()
 {
-	return $stackLang[$langStackSize];
+    return $stackLang[$langStackSize];
 }
 
 
@@ -1190,31 +1193,31 @@ sub getLang()
 #
 sub loadScannoFile($)
 {
-	my $lang = shift;
+    my $lang = shift;
 
-	if (open(SCANNOFILE, "\\eLibrary\\Tools\\tei2html\\tools\\dictionaries\\$lang.scannos"))
-	{
-		my $count = 0;
-		while (<SCANNOFILE>)
-		{
-			my $scanno =  $_;
-			$scanno =~ /^(.*?)\|(.*?)\|(.*?)\t([0-9]+)$/;
-			my $prev = $1;
-			my $word = $2;
-			my $next = $3;
-			my $frequency = $4;
-			# print STDERR "DEBUG: $scanno ->  [$prev] $word [$next] ($frequency)\n";
-			$scannoHash{"$prev:$word:$next"} = $frequency;
-			$count++;
-		}
-		print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
+    if (open(SCANNOFILE, "\\eLibrary\\Tools\\tei2html\\tools\\dictionaries\\$lang.scannos"))
+    {
+        my $count = 0;
+        while (<SCANNOFILE>)
+        {
+            my $scanno =  $_;
+            $scanno =~ /^(.*?)\|(.*?)\|(.*?)\t([0-9]+)$/;
+            my $prev = $1;
+            my $word = $2;
+            my $next = $3;
+            my $frequency = $4;
+            # print STDERR "DEBUG: $scanno ->  [$prev] $word [$next] ($frequency)\n";
+            $scannoHash{"$prev:$word:$next"} = $frequency;
+            $count++;
+        }
+        print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
 
-		close(SCANNOFILE);
-	}
-	else
-	{
-		print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
-	}
+        close(SCANNOFILE);
+    }
+    else
+    {
+        print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
+    }
 }
 
 
@@ -1225,31 +1228,31 @@ sub loadScannoFile($)
 #
 sub loadDict($)
 {
-	my $lang = shift;
+    my $lang = shift;
 
-	if (!openDictionary("$lang.dic"))
-	{
-		$lang =~ /-/;
-		my $shortlang = $`;
-		if ($shortlang eq "" || !openDictionary("$shortlang.dic"))
-		{
-			print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
-			return;
-		}
-	}
+    if (!openDictionary("$lang.dic"))
+    {
+        $lang =~ /-/;
+        my $shortlang = $`;
+        if ($shortlang eq "" || !openDictionary("$shortlang.dic"))
+        {
+            print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
+            return;
+        }
+    }
 
-	my $count = 0;
-	while (<DICTFILE>)
-	{
-		my $dictword =  $_;
-		$dictword =~ s/\n//g;
-		$dictHash{$lang}{$dictword} = 1;
-		$count++;
-	}
-	print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
-	close(DICTFILE);
+    my $count = 0;
+    while (<DICTFILE>)
+    {
+        my $dictword =  $_;
+        $dictword =~ s/\n//g;
+        $dictHash{$lang}{$dictword} = 1;
+        $count++;
+    }
+    print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
+    close(DICTFILE);
 
-	loadCustomDictionary($lang);
+    loadCustomDictionary($lang);
 }
 
 
@@ -1258,26 +1261,26 @@ sub loadDict($)
 #
 sub loadCustomDictionary($)
 {
-	my $lang = shift;
-	my $file = "custom-$lang.dic";
-	if (openDictionary($file))
-	{
-		my $count = 0;
-		while (<DICTFILE>)
-		{
-			my $dictword =  $_;
-			$dictword =~ s/\n//g;
-			$dictHash{$lang}{$dictword} = 1;
-			$count++;
-		}
-		print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
+    my $lang = shift;
+    my $file = "custom-$lang.dic";
+    if (openDictionary($file))
+    {
+        my $count = 0;
+        while (<DICTFILE>)
+        {
+            my $dictword =  $_;
+            $dictword =~ s/\n//g;
+            $dictHash{$lang}{$dictword} = 1;
+            $count++;
+        }
+        print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
 
-		close(DICTFILE);
-	}
-	else
-	{
-		print STDERR "WARNING: Could not open custom dictionary $file\n";
-	}
+        close(DICTFILE);
+    }
+    else
+    {
+        print STDERR "WARNING: Could not open custom dictionary $file\n";
+    }
 }
 
 
@@ -1286,18 +1289,18 @@ sub loadCustomDictionary($)
 #
 sub openDictionary($)
 {
-	my $file = shift;
-	if (!open(DICTFILE, "$file"))
-	{
-		if (!open(DICTFILE, "..\\$file"))
-		{
-			if (!open(DICTFILE, "C:\\bin\\dic\\$file"))
-			{
-				return 0;
-			}
-		}
-	}
-	return 1;
+    my $file = shift;
+    if (!open(DICTFILE, "$file"))
+    {
+        if (!open(DICTFILE, "..\\$file"))
+        {
+            if (!open(DICTFILE, "C:\\bin\\dic\\$file"))
+            {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 
@@ -1308,57 +1311,57 @@ sub openDictionary($)
 #
 sub printSequence()
 {
-	my $pStart = "SENTINEL";
-	my $pPrevious = "SENTINEL";
-	my $comma = "";
-	foreach $pCurrent (@pageList)
-	{
-		if ($pCurrent eq "")
-		{
-			$pCurrent = "N/A";
-		}
-		if ($pCurrent =~ /n$/)
-		{
-			# ignore page-break in footnote.
-		}
-		else
-		{
-			if (!isInSequence($pPrevious, $pCurrent))
-			{
-				if ($pStart eq "SENTINEL")
-				{
-					# No range yet
-				}
-				elsif ($pStart eq $pPrevious)
-				{
-					print "$comma$pStart";
-					$comma = ", ";
-				}
-				else
-				{
-					print "$comma$pStart-$pPrevious";
-					$comma = ", ";
-				}
-				$pStart = $pCurrent;
-			}
-			$pPrevious = $pCurrent;
-		}
-	}
+    my $pStart = "SENTINEL";
+    my $pPrevious = "SENTINEL";
+    my $comma = "";
+    foreach $pCurrent (@pageList)
+    {
+        if ($pCurrent eq "")
+        {
+            $pCurrent = "N/A";
+        }
+        if ($pCurrent =~ /n$/)
+        {
+            # ignore page-break in footnote.
+        }
+        else
+        {
+            if (!isInSequence($pPrevious, $pCurrent))
+            {
+                if ($pStart eq "SENTINEL")
+                {
+                    # No range yet
+                }
+                elsif ($pStart eq $pPrevious)
+                {
+                    print "$comma$pStart";
+                    $comma = ", ";
+                }
+                else
+                {
+                    print "$comma$pStart-$pPrevious";
+                    $comma = ", ";
+                }
+                $pStart = $pCurrent;
+            }
+            $pPrevious = $pCurrent;
+        }
+    }
 
-	# last sequence:
-	if ($pStart eq "SENTINEL")
-	{
-		# No range at all
-		print "Empty Sequence."
-	}
-	elsif ($pStart eq $pPrevious)
-	{
-		print "$comma$pStart.";
-	}
-	else
-	{
-		print "$comma$pStart-$pPrevious.";
-	}
+    # last sequence:
+    if ($pStart eq "SENTINEL")
+    {
+        # No range at all
+        print "Empty Sequence."
+    }
+    elsif ($pStart eq $pPrevious)
+    {
+        print "$comma$pStart.";
+    }
+    else
+    {
+        print "$comma$pStart-$pPrevious.";
+    }
 }
 
 
@@ -1367,20 +1370,20 @@ sub printSequence()
 #
 sub isInSequence($$)
 {
-	my $a = shift;
-	my $b = shift;
-	if ($a eq "SENTINEL")
-	{
-		return 0;
-	}
-	if (isroman($a))
-	{
-		return (arabic($a) == arabic($b) - 1);
-	}
-	else
-	{
-		return $a == $b - 1;
-	}
+    my $a = shift;
+    my $b = shift;
+    if ($a eq "SENTINEL")
+    {
+        return 0;
+    }
+    if (isroman($a))
+    {
+        return (arabic($a) == arabic($b) - 1);
+    }
+    else
+    {
+        return $a == $b - 1;
+    }
 }
 
 
@@ -1389,28 +1392,28 @@ sub isInSequence($$)
 #
 sub StripDiacritics($)
 {
-	my $string = shift;
+    my $string = shift;
 
-	for ($string)
-	{
-		$_ = NFD($_);		##  decompose (Unicode Normalization Form D)
-		s/\pM//g;			##  strip combining characters
+    for ($string)
+    {
+        $_ = NFD($_);       ##  decompose (Unicode Normalization Form D)
+        s/\pM//g;           ##  strip combining characters
 
-		# additional normalizations:
-		s/\x{00df}/ss/g;	##  German eszet “ß” -> “ss”
-		s/\x{00c6}/AE/g;	##  Æ
-		s/\x{00e6}/ae/g;	##  æ
-		s/\x{0132}/IJ/g;	##  Dutch IJ
-		s/\x{0133}/ij/g;	##  Dutch ij
-		s/\x{0152}/Oe/g;	##  Œ
-		s/\x{0153}/oe/g;	##  œ
+        # additional normalizations:
+        s/\x{00df}/ss/g;    ##  German eszet “ß” -> “ss”
+        s/\x{00c6}/AE/g;    ##  Æ
+        s/\x{00e6}/ae/g;    ##  æ
+        s/\x{0132}/IJ/g;    ##  Dutch IJ
+        s/\x{0133}/ij/g;    ##  Dutch ij
+        s/\x{0152}/Oe/g;    ##  Œ
+        s/\x{0153}/oe/g;    ##  œ
 
-		tr/\x{00d0}\x{0110}\x{00f0}\x{0111}\x{0126}\x{0127}/DDddHh/; # ÐÐðdHh
-		tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/; # i??L?l
-		tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/; # ???Øø?
-		tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;                   # ÞTþt
-	}
-	return $string;
+        tr/\x{00d0}\x{0110}\x{00f0}\x{0111}\x{0126}\x{0127}/DDddHh/; # ÐÐðdHh
+        tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/; # i??L?l
+        tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/; # ???Øø?
+        tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;                   # ÞTþt
+    }
+    return $string;
 }
 
 
@@ -1419,10 +1422,10 @@ sub StripDiacritics($)
 #
 sub Normalize($)
 {
-	my $string = shift;
-	$string =~ s/-//g;
-	$string = lc(StripDiacritics($string));
-	return $string;
+    my $string = shift;
+    $string =~ s/-//g;
+    $string = lc(StripDiacritics($string));
+    return $string;
 }
 
 
@@ -1439,17 +1442,17 @@ sub Normalize($)
 #
 sub initDatabase()
 {
-	# database information
-	my $db = "words";
-	my $host = "localhost";
-	my $userid = "root";
-	my $passwd = "my49sql";
-	my $connectionInfo = "dbi:mysql:$db;$host";
+    # database information
+    my $db = "words";
+    my $host = "localhost";
+    my $userid = "root";
+    my $passwd = "my49sql";
+    my $connectionInfo = "dbi:mysql:$db;$host";
 
-	# make connection to database
-	$dbh = DBI->connect($connectionInfo, $userid, $passwd, { RaiseError => 1, AutoCommit => 1 });
+    # make connection to database
+    $dbh = DBI->connect($connectionInfo, $userid, $passwd, { RaiseError => 1, AutoCommit => 1 });
 
-	initQueries();
+    initQueries();
 }
 
 
@@ -1458,11 +1461,11 @@ sub initDatabase()
 #
 sub initQueries()
 {
-	my $queryAddWord = "INSERT INTO word (idbook, word, language, count) VALUES (?, ?, ?, ?)";
-	$sthAddWord = $dbh->prepare($queryAddWord);
+    my $queryAddWord = "INSERT INTO word (idbook, word, language, count) VALUES (?, ?, ?, ?)";
+    $sthAddWord = $dbh->prepare($queryAddWord);
 
-	my $queryGetWordCount = "SELECT sum(count) AS wordcount, count(*) AS doccount FROM word WHERE word=? AND language=?";
-	$sthGetWordCount = $dbh->prepare($queryGetWordCount);
+    my $queryGetWordCount = "SELECT sum(count) AS wordcount, count(*) AS doccount FROM word WHERE word=? AND language=?";
+    $sthGetWordCount = $dbh->prepare($queryGetWordCount);
 }
 
 
@@ -1471,16 +1474,16 @@ sub initQueries()
 #
 sub addWord($$$$)
 {
-	my $idbook = shift;
-	my $word = shift;
-	my $language = shift;
-	my $count = shift;
+    my $idbook = shift;
+    my $word = shift;
+    my $language = shift;
+    my $count = shift;
 
-	$word = substr($word, 0, 64);
-	$language = substr($language, 0, 8);
+    $word = substr($word, 0, 64);
+    $language = substr($language, 0, 8);
 
-	print "$idbook, $word, $language, $count\n";
-	$sthAddWord->execute($idbook, $word, $language, $count);
+    # print "$idbook, $word, $language, $count\n";
+    $sthAddWord->execute($idbook, $word, $language, $count);
 }
 
 
@@ -1489,23 +1492,23 @@ sub addWord($$$$)
 #
 sub getWordCount($$)
 {
-	my $word = shift;
-	my $language = shift;
-	$sthGetWordCount->execute($word, $language);
+    my $word = shift;
+    my $language = shift;
+    $sthGetWordCount->execute($word, $language);
 
-	my $wordcount;
-	my $doccount;
+    my $wordcount;
+    my $doccount;
 
-	$sthGetWordCount->bind_columns(\$wordcount, \$doccount);
+    $sthGetWordCount->bind_columns(\$wordcount, \$doccount);
 
-	if ($sthGetWordCount->fetch())
-	{
-		return ($wordcount, $doccount);
-	}
-	else
-	{
-		return (0, 0);
-	}
+    if ($sthGetWordCount->fetch())
+    {
+        return ($wordcount, $doccount);
+    }
+    else
+    {
+        return (0, 0);
+    }
 }
 
 
@@ -1514,28 +1517,28 @@ sub getWordCount($$)
 #
 sub addBook($$$)
 {
-	my $idbook = shift;
-	my $title = shift;
-	my $author = shift;
-	my $filename = shift;
+    my $idbook = shift;
+    my $title = shift;
+    my $author = shift;
+    my $filename = shift;
 
-	$title = substr($title, 0, 128);
-	$author = substr($author, 0, 128);
-	$filename = substr($filename, 0, 128);
+    $title = substr($title, 0, 128);
+    $author = substr($author, 0, 128);
+    $filename = substr($filename, 0, 128);
 
-	# Do we already have the book?
-	my $sth = $dbh->prepare("SELECT idbook FROM book WHERE idbook = ?");
-	$sth->execute($idbook);
-	$sth->bind_columns(\$idbook);
-	if ($sth->fetch())
-	{
-		# We already have this book, remove it from the database.
-		$sth = $dbh->prepare("DELETE FROM word WHERE idbook = ?");
-		$sth->execute($idbook);
-		$sth = $dbh->prepare("DELETE FROM book WHERE idbook = ?");
-		$sth->execute($idbook);
-	}
+    # Do we already have the book?
+    my $sth = $dbh->prepare("SELECT idbook FROM book WHERE idbook = ?");
+    $sth->execute($idbook);
+    $sth->bind_columns(\$idbook);
+    if ($sth->fetch())
+    {
+        # We already have this book, remove it from the database.
+        $sth = $dbh->prepare("DELETE FROM word WHERE idbook = ?");
+        $sth->execute($idbook);
+        $sth = $dbh->prepare("DELETE FROM book WHERE idbook = ?");
+        $sth->execute($idbook);
+    }
 
-	$sth = $dbh->prepare("INSERT INTO book (idbook, title, author, file) VALUES (?, ?, ?, ?)");
-	$sth->execute($idbook, $title, $author, $filename);
+    $sth = $dbh->prepare("INSERT INTO book (idbook, title, author, file) VALUES (?, ?, ?, ?)");
+    $sth->execute($idbook, $title, $author, $filename);
 }
