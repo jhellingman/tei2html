@@ -1104,6 +1104,42 @@
         </li>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- List of Illustrations -->
+
+
+    <xsl:template match="divGen[@type='loi']">
+        <div class="div1">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <ul>
+                <xsl:apply-templates mode="genloi" select="//figure[head]"/>
+            </ul>
+        </div>
+    </xsl:template>
+
+
+    <xsl:template match="figure" mode="genloi">
+        <li>
+            <xsl:call-template name="setHtmlLangAttribute"/>
+            <a>
+                <xsl:call-template name="generate-href-attribute"/>
+                <xsl:apply-templates select="head" mode="genloi"/>
+            </a>
+            <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+                <span class="tocPagenum">
+                    <xsl:value-of select="preceding::pb[1]/@n"/>
+                </span>
+            </xsl:if>
+        </li>
+    </xsl:template>
+
+
+    <xsl:template match="head" mode="genloi">
+        <xsl:apply-templates/>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Arbitrary Blocks (special hooks for rendering) -->
@@ -1704,6 +1740,9 @@
     <xsl:template match="head" mode="tablecaption">
         <h4 class="tablecaption">
             <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:attribute name="class">
+                <xsl:if test="contains(../@rend, 'align(center)')">aligncenter</xsl:if>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
