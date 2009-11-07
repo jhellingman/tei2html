@@ -169,6 +169,8 @@
 
         <!-- PG header and footer stuff -->
 
+        <msg:message name="msgNotCopyrightedUS">Not copyrighted in the United States. If you live elsewhere check the laws of your country before downloading this ebook.</msg:message>
+
         <msg:message name="msgPGHeader">
             <p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever.  You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with <a href="#license">this eBook</a> or online at <a href='http://www.gutenberg.org/'>www.gutenberg.org</a></p>
@@ -689,6 +691,8 @@
         <msg:message name="msgListEtAL"><msg:param name="first"/>, <msg:param name="second"/>, <msg:param name="third"/>, et al.</msg:message>
 
         <!-- PG header and footer stuff -->
+
+        <msg:message name="msgNotCopyrightedUS">Vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit eboek download.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>

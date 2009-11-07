@@ -57,6 +57,7 @@
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
     <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author" />
+    <xsl:variable name="publisher" select="/TEI.2/teiHeader/fileDesc/publicationStmt/publisher" />
     <xsl:variable name="pubdate" select="/TEI.2/teiHeader/fileDesc/publicationStmt/date" />
 
     <xsl:variable name="language" select="/TEI.2/@lang" />
@@ -346,11 +347,17 @@
         </xsl:call-template>
     </xsl:variable>
 
+    <xsl:variable name="strNotCopyrightedUS">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgNotCopyrightedUS'"/>
+        </xsl:call-template>
+    </xsl:variable>
+
     <!--====================================================================-->
 
     <xsl:template match="/">
         <xsl:comment>
-            <xsl:text> This HTML file has been automatically generated from an XML source, using XSLT. If you find any mistakes, please edit the XML source. </xsl:text>
+            <xsl:text> This HTML file has been automatically generated from an XML source, using the tei2html XSLT stylesheet. If you find any mistakes, please edit the XML source. </xsl:text>
         </xsl:comment>
         <xsl:text> <!-- insert extra new-line for PG -->
         </xsl:text>
@@ -360,6 +367,7 @@
                     <xsl:value-of select="$title"/>
                 </title>
 
+                <!-- Insert Dublin Core metadata -->
                 <link rel="schema.DC"     href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
 
                 <meta name="author"       content="{$author}"/>
@@ -367,6 +375,14 @@
                 <meta name="DC.Title"     content="{$title}"/>
                 <meta name="DC.Date"      content="{$pubdate}"/>
                 <meta name="DC.Language"  content="{$language}"/>
+                <meta name="DC.Format"    content="text/html"/>
+                <meta name="DC.Publisher" content="{$publisher}"/>
+                <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
+                    <meta name="DC.Rights" content="{$strNotCopyrightedUS}"/>
+                    <meta name="DC.Identifier">
+                        <xsl:attribute name="content">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
+                    </meta>
+                </xsl:if>
 
                 <xsl:if test="$optionExternalCSS = 'Yes'">
                     <link href="style/gutenberg.css"    rel="stylesheet"            type="text/css"/>
