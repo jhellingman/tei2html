@@ -166,6 +166,20 @@
         </xsl:text>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- TEI Header -->
+
+    <!-- Suppress the header in the output -->
+
+    <xsl:template match="teiHeader"/>
+
+    <!--====================================================================-->
+    <!-- Main subdivisions of work -->
+
+    <xsl:template match="text">
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template match="front">
         <div class="front">
             <xsl:call-template name="setHtmlLangAttribute"/>
@@ -186,13 +200,6 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
-
-    <!--====================================================================-->
-    <!-- TEI Header -->
-
-    <!-- Suppress the header in the output -->
-
-    <xsl:template match="teiHeader"/>
 
     <!--====================================================================-->
     <!-- Title Page -->
@@ -573,6 +580,9 @@
         </div>
     </xsl:template>
 
+
+    <!-- TOC: div0 -->
+
     <xsl:template match="div0" mode="gentoc">
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
@@ -593,6 +603,9 @@
             </li>
         </xsl:if>
     </xsl:template>
+
+
+    <!-- TOC: div1 -->
 
     <xsl:template match="div1" mode="gentoc">
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
@@ -618,6 +631,9 @@
         </xsl:if>
     </xsl:template>
 
+
+    <!-- TOC: div2 -->
+
     <xsl:template match="div2" mode="gentoc">
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
@@ -636,6 +652,9 @@
 
     <!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
     <xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
+
+
+    <!-- TOC: div3 -->
 
     <xsl:template match="div3" mode="gentoc">
         <xsl:if test="head">
@@ -837,9 +856,9 @@
         </li>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- List of Illustrations -->
-
 
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
@@ -1124,13 +1143,6 @@
         </div>
     </xsl:template>
 
-
-    <!--====================================================================-->
-    <!-- Main parts of text -->
-
-    <xsl:template match="text">
-        <xsl:apply-templates/>
-    </xsl:template>
 
 
     <!--====================================================================-->
@@ -2069,7 +2081,7 @@
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
-    <!-- Other use of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
+    <!-- Other uses of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
 
     <!--====================================================================-->
     <!-- Letters, with openers, closers, etc. -->
