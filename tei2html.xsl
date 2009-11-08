@@ -53,6 +53,8 @@
     <xsl:param name="optionExternalCSS" select="'No'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 
+    <xsl:variable name="strUnitsUsed" select="'Original'"/>
+
     <!--====================================================================-->
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
@@ -65,8 +67,6 @@
     <xsl:variable name="defaultlanguage" select="'en'" />
 
     <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
-
-    <xsl:variable name="strUnitsUsed" select="'Original'"/>
 
     <!--====================================================================-->
 
