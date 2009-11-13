@@ -12,28 +12,31 @@
 #
 # in the source file and
 #
-#   <p><a name="n23.2" href="text.html#n23.2>Page 23 note 2:</a> 
-#     <p>...    
+#   <p><a name="n23.2" href="text.html#n23.2>Page 23 note 2:</a>
+#     <p>...
 #
 # in the notes file.
 #
 # Notes in the TEI header should be ignored. (TODO)
 # This code depends on valid TEI.
 
-$inputFile = $ARGV[0];
-$outputFile = $inputFile . ".out";
-$notesFile = $inputFile . ".notes";
+use strict;
 
-# The names of the ultimate converted HTML files are required 
+my $inputFile = $ARGV[0];
+my $outputFile = $inputFile . ".out";
+my $notesFile = $inputFile . ".notes";
+
+# The names of the ultimate converted HTML files are required
 # to create the correct HREFs.
 
-$htmlBase = $ARGV[1];
-$notesHtml = $htmlBase . "-notes.html";
-$outputHtml = $htmlBase . ".html";
+my $htmlBase = $ARGV[1];
+my $notesHtml = $htmlBase . "-notes.html";
+my $outputHtml = $htmlBase . ".html";
 
-$noteNumber = 0;
-$seqNumber = 0;
-$pageNumber = 0;
+my $noteNumber = 0;
+my $seqNumber = 0;
+my $pageNumber = 0;
+
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 open(OUTPUTFILE, "> $outputFile") || die("Could not open $outputFile");
@@ -41,122 +44,124 @@ open(NOTESFILE, "> $notesFile") || die("Could not open $notesFile");
 
 print NOTESFILE "\n\nNOTES\n\n";
 
-# Get an attribute value (if the attribute is present)
-sub getAttrVal
-{
-	my $attrName = shift;
-	my $attrs = shift;
-	my $attrVal = "";
 
-	if($attrs =~ /$attrName\s*=\s*(\w+)/i)
-	{
-		$attrVal = $1;
-	}
-	elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-	{
-		$attrVal = $1;
-	}
-	return $attrVal;
-}
-
-$prevPageNumber = "";
-
+my $prevPageNumber = "";
 while (<INPUTFILE>)
 {
-    $line = $_;
-    $remainder = $line;
+    my $line = $_;
+    my $remainder = $line;
 
     while($remainder =~ m/<(note\b.*?)>/)
-	{
-        $beforeNote = $`;
-		$attributes = $1;
+    {
+        my $beforeNote = $`;
+        my $attributes = $1;
         $remainder = $';
-		$noteText = '';
+        my $noteText = '';
 
-		$noteNumber = getAttrVal("n", $attributes);
-		$notePlace = getAttrVal("place", $attributes);
+        $noteNumber = getAttrVal("n", $attributes);
+        my $notePlace = getAttrVal("place", $attributes);
 
-		if ($notePlace eq "")
-		{
-			# print "WARNING: note without place indication\n";
-		}
+        if ($notePlace eq "")
+        {
+            # print "WARNING: note without place indication\n";
+        }
 
         print OUTPUTFILE $beforeNote;
 
         # match the last <pb> tag before the note
         if ($beforeNote =~ /.*<(pb\b.*?)>/)
         {
-			$tag = $1;
+            my $tag = $1;
             $pageNumber = getAttrVal("n", $tag);
-			# print "[$pageNumber]\n";
+            # print "[$pageNumber]\n";
         }
 
-		# Find the end of the note
-		$nestingLevel = 0;
-		$endFound = 0;
-		while ($endFound == 0)
-		{
-			if ($remainder =~ m/<(\/?note)\b(.*?)>/)
-			{	
-				$beforeTag = $`;
-				$noteTag = $1;
-				$remainder = $';
+        # Find the end of the note
+        my $nestingLevel = 0;
+        my $endFound = 0;
+        while ($endFound == 0)
+        {
+            if ($remainder =~ m/<(\/?note)\b(.*?)>/)
+            {
+                my $beforeTag = $`;
+                my $noteTag = $1;
+                $remainder = $';
 
-				# print "DEBUG: $noteTag\n";
-				if ($noteTag eq "note") 
-				{
-					$nestingLevel++;
-					$noteText .= $beforeTag . " ((";
-					print "WARNING: Nested notes on page $pageNumber rendered in-line (check for '((')\n";
-				}
-				elsif ($noteTag eq "\/note")
-				{
-					# print "DEBUG: end found: $nestingLevel\n";
-					if ($nestingLevel == 0) 
-					{
-						$endFound = 1;
-						$noteText .= $beforeTag;
-					}
-					else
-					{
-						$nestingLevel--;
-						$noteText .= $beforeTag . ")) ";
-					}
-				}
-			}
-			else
-			{
-				# Get the next line
-				$remainder .= <INPUTFILE>;
-			}
-		}
+                # print "DEBUG: $noteTag\n";
+                if ($noteTag eq "note")
+                {
+                    $nestingLevel++;
+                    $noteText .= $beforeTag . " ((";
+                    print "WARNING: Nested notes on page $pageNumber rendered in-line (check for '((')\n";
+                }
+                elsif ($noteTag eq "\/note")
+                {
+                    # print "DEBUG: end found: $nestingLevel\n";
+                    if ($nestingLevel == 0)
+                    {
+                        $endFound = 1;
+                        $noteText .= $beforeTag;
+                    }
+                    else
+                    {
+                        $nestingLevel--;
+                        $noteText .= $beforeTag . ")) ";
+                    }
+                }
+            }
+            else
+            {
+                # Get the next line
+                $remainder .= <INPUTFILE>;
+            }
+        }
 
-        if($noteText =~ /^\W*$/)
+        if ($noteText =~ /^\W*$/)
         {
             print "WARNING: (almost) empty note '$noteText' on page $pageNumber (n=$noteNumber)\n";
         }
 
-		if ($notePlace ne "margin")
-		{
-	        $seqNumber++;
-			print OUTPUTFILE " [$seqNumber]";
-			print NOTESFILE "[$seqNumber] $noteText\n\n"
-		}
-		else
-		{
-			print OUTPUTFILE "[$noteText] ";
-		}
+        if ($notePlace ne "margin")
+        {
+            $seqNumber++;
+            print OUTPUTFILE " [$seqNumber]";
+            print NOTESFILE "[$seqNumber] $noteText\n\n"
+        }
+        else
+        {
+            print OUTPUTFILE "[$noteText] ";
+        }
     }
 
     # match the last <pb> tag after the note (or on the line if there is no note).
     if($remainder =~ /.*<(pb.*?)>/)
     {
-		$tag = $1;
-		$pageNumber = getAttrVal("n", $tag);
-		# print "[$pageNumber]\n";
+        my $tag = $1;
+        $pageNumber = getAttrVal("n", $tag);
+        # print "[$pageNumber]\n";
     }
 
     print OUTPUTFILE $remainder;
 }
 
 # print "NOTE: this document contains $seqNumber notes and $pageNumber pages.\n"
+
+
+
+# Get an attribute value (if the attribute is present)
+sub getAttrVal($$)
+{
+    my $attrName = shift;
+    my $attrs = shift;
+    my $attrVal = "";
+
+    if($attrs =~ /$attrName\s*=\s*(\w+)/i)
+    {
+        $attrVal = $1;
+    }
+    elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
+    {
+        $attrVal = $1;
+    }
+    return $attrVal;
+}
