@@ -105,6 +105,7 @@
                 </title>
 
                 <meta http-equiv="Content-Type" content="{$mimeType}; charset={$encoding}"/>
+                <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"/>
                 <meta name="author"             content="{$author}"/>
 
                 <!-- Insert Dublin Core metadata -->
@@ -150,7 +151,7 @@
                         <xsl:copy-of select="$stylesheet/*/node()"/>
 
                         /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
-                        <xsl:variable name="stylesheetSupplement" select="document($stylesheetname)"/>
+                        <xsl:variable name="stylesheetSupplement" select="document(normalize-space($stylesheetname))"/>
                         <xsl:copy-of select="$stylesheetSupplement/*/node()"/>
 
                         /* Standard Aural CSS stylesheet */
@@ -159,7 +160,7 @@
 
                         <xsl:if test="$customCssFile">
                             /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
-                            <xsl:variable name="stylesheetCustom" select="document($customCssFile)"/>
+                            <xsl:variable name="stylesheetCustom" select="document(normalize-space($customCssFile))"/>
                             <xsl:copy-of select="$stylesheetCustom/*/node()"/>
                         </xsl:if>
                     </style>
@@ -1840,10 +1841,10 @@
         </xsl:variable>
 
         <xsl:variable name="width">
-            <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@width, 'px')"/>
+            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width, 'px')"/>
         </xsl:variable>
         <xsl:variable name="height">
-            <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@height, 'px')"/>
+            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
 
         <img>
@@ -1884,7 +1885,7 @@
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
-                <xsl:value-of select="document($imageInfoFile)/img:images/img:image[@path=$file]/@width"/>
+                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
             <xsl:choose>
@@ -2260,19 +2261,21 @@
                 <xsl:call-template name="generate-id-attribute"/>
                 <xsl:call-template name="setLangAttribute"/>
                 <xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
-                <xsl:if test="contains(@rend, 'align(')">
-                    <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
-                    <xsl:attribute name="class">align<xsl:value-of select="$align"/></xsl:attribute>
-                </xsl:if>
-                <xsl:if test="contains(@rend, 'indent(')">
-                            <xsl:attribute name="style">text-indent:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:attribute>
-                </xsl:if>
-                <xsl:if test="@n">
-                    <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
-                </xsl:if>
-                <!-- in a few cases, we have quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
+                
+                <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
                 <xsl:if test="ancestor::note[place='foot' or not(@place)]">
                     <xsl:attribute name="class">footnote</xsl:attribute>
+                </xsl:if>
+
+                <xsl:if test="contains(@rend, 'indent(') or contains(@rend, 'align(')">
+                    <xsl:attribute name="style">
+                        <xsl:if test="contains(@rend, 'indent(')">text-indent:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
+                        <xsl:if test="contains(@rend, 'align(')">text-align:<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>;</xsl:if>
+                    </xsl:attribute>
+                </xsl:if>
+
+                <xsl:if test="@n">
+                    <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 <xsl:apply-templates/>
             </p>

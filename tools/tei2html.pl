@@ -172,8 +172,9 @@ sub processFile
     {
         $pwd = `pwd`;
         chop($pwd);
+        $pwd =~ s/\\/\//g;
 
-        $fileImageParam = "imageInfoFile=\"file:///$pwd/imageinfo.xml\"";
+        $fileImageParam = "imageInfoFile=\"file:/$pwd/imageinfo.xml\"";
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
@@ -184,8 +185,9 @@ sub processFile
 
         $pwd = `pwd`;
         chop($pwd);
+        $pwd =~ s/\\/\//g;
 
-        $cssFileParam = "customCssFile=\"file:///$pwd/custom.css.xml\"";
+        $cssFileParam = "customCssFile=\"file:/$pwd/custom.css.xml\"";
     }
 
 
@@ -215,9 +217,9 @@ sub processFile
     # Create a text heat map.
     if (-f "heatmap.xml")
     {
-		print "Create text heat map...\n";
-		system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
-	}
+        print "Create text heat map...\n";
+        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+    }
 
     print "Create text version...\n";
     system ("perl $toolsdir/exNotesHtml.pl $filename");

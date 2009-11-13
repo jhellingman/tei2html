@@ -1,19 +1,19 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
-$tagPattern = "<(.*?)>";
+use strict;
+use SgmlSupport qw/getAttrVal sgml2utf/;
 
-$italicStart = "_";
-$italicEnd = "_";
+
+my $tagPattern = "<(.*?)>";
+my $italicStart = "_";
+my $italicEnd = "_";
+
 
 if (1 == 1)
 {
     $italicStart = "";
     $italicEnd = "";
 }
-
-use SgmlSupport qw/getAttrVal sgml2utf/;
-
-
 
 
 #
@@ -22,7 +22,7 @@ use SgmlSupport qw/getAttrVal sgml2utf/;
 
 while (<>)
 {
-    $a = $_;
+    my $a = $_;
 
     # remove TeiHeader
     if ($a =~ /<[Tt]ei[Hh]eader/)
@@ -48,8 +48,8 @@ while (<>)
     # generate part headings
     if ($a =~ /<(div0.*?)>/)
     {
-        $tag = $1;
-        $partNumber = getAttrVal("n", $tag);
+        my $tag = $1;
+        my $partNumber = getAttrVal("n", $tag);
         if ($partNumber ne "")
         {
             print "\nPART $partNumber\n";
@@ -59,8 +59,8 @@ while (<>)
     # generate chapter headings
     if ($a =~ /<(div1.*?)>/)
     {
-        $tag = $1;
-        $chapterNumber = getAttrVal("n", $tag);
+        my $tag = $1;
+        my $chapterNumber = getAttrVal("n", $tag);
         if ($chapterNumber ne "")
         {
             print "\nCHAPTER $chapterNumber\n";
@@ -70,8 +70,8 @@ while (<>)
     # generate section headings
     if ($a =~ /<(div2.*?)>/)
     {
-        $tag = $1;
-        $sectionNumber = getAttrVal("n", $tag);
+        my $tag = $1;
+        my $sectionNumber = getAttrVal("n", $tag);
         if ($sectionNumber ne "")
         {
             print "\nSECTION $sectionNumber\n";
@@ -81,8 +81,8 @@ while (<>)
     # generate figure headings
     if ($a =~ /<(figure.*?)>/)
     {
-        $tag = $1;
-        $figureNumber = getAttrVal("n", $tag);
+        my $tag = $1;
+        my $figureNumber = getAttrVal("n", $tag);
         print "\n------\nFIGURE $figureNumber\n";
     }
     if ($a =~ /<\/figure>/)
@@ -106,12 +106,12 @@ while (<>)
 
 
     # handle italics (with underscores)
-    $remainder = $a;
+    my $remainder = $a;
     $a = "";
     while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/)
     {
-        $tag = $1;
-        $rend = getAttrVal("rend", $tag);
+        my $tag = $1;
+        my $rend = getAttrVal("rend", $tag);
         if ($rend eq "sup")
         {
             $a .= $` . $2;
@@ -137,7 +137,7 @@ while (<>)
     # warn for entities that slipped through.
     if ($a =~ /\&([a-zA-Z0-9._-]+);/)
     {
-        $ent = $1;
+        my $ent = $1;
         if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp"))
         {
             print "\n[ERROR: Contains unhandled entity &$ent;]\n";
@@ -165,7 +165,7 @@ while (<>)
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
 #
-sub entities2iso88591
+sub entities2iso88591($)
 {
     my $a = shift;
 
