@@ -31,20 +31,32 @@
 -->
 
 <xsl:stylesheet
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     version="1.0"
+    exclude-result-prefixes="msg img"
     >
 
     <xsl:import href="localization.xsl"/>
     <xsl:import href="messages.xsl"/>
+
+
+    <!--
+    <xsl:output
+        doctype-public="-//W3C//DTD XHTML 1.1//EN"
+        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+        method="xml"
+        encoding="UTF-8"/>
+    -->
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
         doctype-system="http://www.w3.org/TR/html4/loose.dtd"
         method="html"
         encoding="ISO-8859-1"/>
+
 
     <!--====================================================================-->
 
@@ -53,12 +65,15 @@
     <xsl:param name="customCssFile"/>
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
+    <xsl:param name="optionEPubMarkup" select="'No'"/>
     <xsl:param name="optionExternalCSS" select="'No'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 
-    <xsl:variable name="strUnitsUsed" select="'Original'"/>
 
     <!--====================================================================-->
+
+    <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
+    <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
     <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author" />
@@ -70,24 +85,31 @@
     <xsl:variable name="defaultlanguage" select="'en'" />
     <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
 
+    <xsl:variable name="unitsUsed" select="'Original'"/>
+
     <!--====================================================================-->
 
-    <xsl:template match="/">
+
+    <xsl:template match="TEI.2">
         <xsl:comment>
             <xsl:text> This HTML file has been automatically generated from an XML source, using the tei2html XSLT stylesheet. If you find any mistakes, please edit the XML source. </xsl:text>
         </xsl:comment>
         <xsl:text> <!-- insert extra new-line for PG -->
         </xsl:text>
-        <html lang="{$language}">
+        <html>
+            <xsl:call-template name="setLangAttribute"/>
+
             <head>
                 <title>
                     <xsl:value-of select="$title"/>
                 </title>
 
+                <meta http-equiv="Content-Type" content="{$mimeType}; charset={$encoding}"/>
+                <meta name="author"             content="{$author}"/>
+
                 <!-- Insert Dublin Core metadata -->
                 <link rel="schema.DC"     href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
 
-                <meta name="author"       content="{$author}"/>
                 <meta name="DC.Creator"   content="{$author}"/>
                 <meta name="DC.Title"     content="{$title}"/>
                 <meta name="DC.Date"      content="{$pubdate}"/>
@@ -128,17 +150,17 @@
                         <xsl:copy-of select="$stylesheet/*/node()"/>
 
                         /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
-                        <xsl:variable name="stylesheet2" select="document($stylesheetname)"/>
-                        <xsl:copy-of select="$stylesheet2/*/node()"/>
+                        <xsl:variable name="stylesheetSupplement" select="document($stylesheetname)"/>
+                        <xsl:copy-of select="$stylesheetSupplement/*/node()"/>
 
                         /* Standard Aural CSS stylesheet */
-                        <xsl:variable name="stylesheet4" select="document('style/aural.css.xml')"/>
-                        <xsl:copy-of select="$stylesheet4/*/node()"/>
+                        <xsl:variable name="stylesheetAural" select="document('style/aural.css.xml')"/>
+                        <xsl:copy-of select="$stylesheetAural/*/node()"/>
 
                         <xsl:if test="$customCssFile">
                             /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
-                            <xsl:variable name="stylesheet3" select="document($customCssFile)"/>
-                            <xsl:copy-of select="$stylesheet3/*/node()"/>
+                            <xsl:variable name="stylesheetCustom" select="document($customCssFile)"/>
+                            <xsl:copy-of select="$stylesheetCustom/*/node()"/>
                         </xsl:if>
                     </style>
                     <!-- Pull in CSS sheet for print (using Prince). -->
@@ -182,21 +204,21 @@
 
     <xsl:template match="front">
         <div class="front">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="body">
         <div class="body">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="back">
         <div class="back">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -206,7 +228,7 @@
 
     <xsl:template match="titlePage">
         <div class="titlePage">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
@@ -217,7 +239,7 @@
 
     <xsl:template match="titlePart" mode="titlePage">
         <h1 class="docTitle">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates mode="titlePage"/>
         </h1>
     </xsl:template>
@@ -306,7 +328,7 @@
     <xsl:template match="abbr">
         <span class="abbr">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@expan"/>
             </xsl:attribute>
@@ -339,7 +361,7 @@
     <xsl:template match="trans">
         <span class="abbr">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
             </xsl:attribute>
@@ -563,7 +585,7 @@
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
             <ul>
                 <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
@@ -745,7 +767,7 @@
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
@@ -863,7 +885,7 @@
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <ul>
                 <xsl:apply-templates mode="genloi" select="//figure[head]"/>
@@ -874,7 +896,7 @@
 
     <xsl:template match="figure" mode="genloi">
         <li>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <xsl:apply-templates select="head" mode="genloi"/>
@@ -972,10 +994,10 @@
 
 
     <xsl:template match="figure" mode="gallery">
-        <td align="center" valign="center">
+        <td align="center" valign="middle">
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
-                <img border="0">
+                <img>
                     <xsl:attribute name="src">images/thumbs/<xsl:value-of select="@id"/>.jpg</xsl:attribute>
                     <xsl:attribute name="alt"><xsl:value-of select="head"/></xsl:attribute>
                 </img>
@@ -1029,7 +1051,7 @@
             <xsl:for-each select="//corr">
                 <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
-                        <td width="20%">
+                        <td style="width: 20%">
                             <a class="pageref">
                                 <xsl:call-template name="generate-href-attribute"/>
                                 <xsl:choose>
@@ -1042,7 +1064,7 @@
                                 </xsl:choose>
                             </a>
                         </td>
-                        <td width="40%">
+                        <td style="width: 40%">
                             <xsl:choose>
                                 <xsl:when test="@sic != ''">
                                     <xsl:value-of select="@sic"/>
@@ -1052,7 +1074,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
-                        <td width="40%">
+                        <td style="width: 40%">
                             <xsl:choose>
                                 <xsl:when test=". != ''">
                                     <xsl:apply-templates/>
@@ -1093,7 +1115,7 @@
     <xsl:template match="divGen[@type='Colophon']">
         <div class="transcribernote">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
 
             <h2><xsl:value-of select="$strColophon"/></h2>
 
@@ -1179,7 +1201,7 @@
     <xsl:template name="headPicture">
         <xsl:if test="contains(@rend, 'image(')">
             <div class="figure">
-                <xsl:call-template name="setHtmlLangAttribute"/>
+                <xsl:call-template name="setLangAttribute"/>
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt">
                     <xsl:choose>
@@ -1204,7 +1226,7 @@
     <xsl:template match="div0">
         <div class="div0">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
 
@@ -1262,7 +1284,7 @@
 
         <div>
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
                 <xsl:if test="contains(@rend, 'class(')">
                     <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
@@ -1301,7 +1323,7 @@
 
     <xsl:template name="headText">
         <xsl:call-template name="generate-id-attribute"/>
-        <xsl:call-template name="setHtmlLangAttribute"/>
+        <xsl:call-template name="setLangAttribute"/>
         <xsl:call-template name="setHtmlClass"/>
         <xsl:if test="contains(@rend, 'align(')">
             <xsl:attribute name="align">
@@ -1317,7 +1339,7 @@
     <xsl:template match="div2">
         <div class="div2">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="GenerateLabel">
                 <xsl:with-param name="headingLevel" select="'h2'"/>
             </xsl:call-template>
@@ -1337,7 +1359,7 @@
     <xsl:template match="div3">
         <div class="div3">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -1354,7 +1376,7 @@
     <xsl:template match="div4">
         <div class="div4">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -1371,7 +1393,7 @@
     <xsl:template match="div5">
         <div class="div5">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -1387,14 +1409,14 @@
 
     <xsl:template match="head">
         <h4>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
 
     <xsl:template match="byline">
         <p>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:attribute name="class">byline
                 <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
             </xsl:attribute>
@@ -1406,7 +1428,7 @@
 
     <xsl:template match="trailer">
         <p>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:attribute name="class">trailer
                 <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
             </xsl:attribute>
@@ -1440,7 +1462,7 @@
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
 
             <xsl:attribute name="class">
                 <xsl:choose>
@@ -1484,10 +1506,10 @@
 
     <xsl:template match="head" mode="tablecaption">
         <h4 class="tablecaption">
-            <xsl:call-template name="setHtmlLangAttribute"/>
-            <xsl:attribute name="class">
-                <xsl:if test="contains(../@rend, 'align(center)')">aligncenter</xsl:if>
-            </xsl:attribute>
+            <xsl:call-template name="setLangAttribute"/>
+            <xsl:if test="contains(../@rend, 'align(center)')">
+                <xsl:attribute name="class">aligncenter</xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
@@ -1499,7 +1521,7 @@
     <xsl:template match="row">
         <tr valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
@@ -1507,7 +1529,7 @@
     <xsl:template match="row[@role='label']/cell">
         <td valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
         </td>
@@ -1516,7 +1538,7 @@
     <xsl:template match="cell[@role='label']">
         <td valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
         </td>
@@ -1525,7 +1547,7 @@
     <xsl:template match="row[@role='unit']/cell">
         <td valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
         </td>
@@ -1534,7 +1556,7 @@
     <xsl:template match="cell[@role='unit']">
         <td valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
         </td>
@@ -1543,7 +1565,7 @@
     <xsl:template match="cell">
         <td valign="top">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="cell-span"/>
             <xsl:apply-templates/>
         </td>
@@ -1563,9 +1585,7 @@
 
             <!-- Align numeric-only cells right -->
             <xsl:if test="not(contains($rend, 'align('))">
-                <xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">
-                    alignright
-                </xsl:if>
+                <xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">alignright</xsl:if>
             </xsl:if>
         </xsl:variable>
 
@@ -1590,16 +1610,13 @@
             </xsl:with-param>
         </xsl:call-template>
 
-        <xsl:if test="contains($rend, 'width(')">
-            <xsl:attribute name="width"><xsl:value-of select="substring-before(substring-after($rend, 'width('), ')')"/></xsl:attribute>
-        </xsl:if>
-
         <xsl:if test="contains($rend, 'valign(')">
             <xsl:attribute name="valign"><xsl:value-of select="substring-before(substring-after($rend, 'valign('), ')')"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains($rend, 'padding-top(') or contains($rend, 'padding-bottom(') or @role='sum' or contains($rend, 'font-weight(')">
+        <xsl:if test="contains($rend, 'padding-top(') or contains($rend, 'padding-bottom(') or @role='sum' or contains($rend, 'font-weight(') or contains($rend, 'width(')">
             <xsl:attribute name="style">
+                <xsl:if test="contains($rend, 'width(')">width: <xsl:value-of select="substring-before(substring-after($rend, 'width('), ')')"/>;</xsl:if>
                 <xsl:if test="@role='sum'">padding-top: 2px; border-top: solid black 1px;</xsl:if>
                 <xsl:if test="contains($rend, 'padding-top(')">padding-top:<xsl:value-of select="substring-before(substring-after($rend, 'padding-top('), ')')"/>;</xsl:if>
                 <xsl:if test="contains($rend, 'padding-bottom(')">padding-bottom:<xsl:value-of select="substring-before(substring-after($rend, 'padding-bottom('), ')')"/>;</xsl:if>
@@ -1672,7 +1689,7 @@
                 <xsl:element name="{$listType}">
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:call-template name="setListStyleType"/>
-                    <xsl:call-template name="setHtmlLangAttribute"/>
+                    <xsl:call-template name="setLangAttribute"/>
                     <xsl:apply-templates/>
                 </xsl:element>
             </xsl:otherwise>
@@ -1685,7 +1702,7 @@
     <xsl:template name="doubleuplist">
         <table>
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:variable name="listType">
                 <xsl:choose>
                     <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
@@ -1777,6 +1794,33 @@
         <xsl:param name="alt" select="''"/>
         <xsl:param name="format" select="'.jpg'"/>
 
+        <!-- Should we link to an external image? -->
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'link(')">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="substring-before(substring-after(@rend, 'link('), ')')"/>
+                    </xsl:attribute>
+                    <xsl:call-template name="insertimage2">
+                        <xsl:with-param name="alt" select="$alt"/>
+                        <xsl:with-param name="format" select="$format"/>
+                    </xsl:call-template>
+                </a>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="insertimage2">
+                    <xsl:with-param name="alt" select="$alt"/>
+                    <xsl:with-param name="format" select="$format"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="insertimage2">
+        <xsl:param name="alt" select="''"/>
+        <xsl:param name="format" select="'.jpg'"/>
+
         <!-- What is the text that should go on the img alt attribute in HTML? -->
         <xsl:variable name="alt2">
             <xsl:choose>
@@ -1789,38 +1833,12 @@
             </xsl:choose>
         </xsl:variable>
 
-        <!-- Should we link to an external image? -->
-        <xsl:choose>
-            <xsl:when test="contains(@rend, 'link(')">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="substring-before(substring-after(@rend, 'link('), ')')"/>
-                    </xsl:attribute>
-                    <xsl:call-template name="insertimage2">
-                        <xsl:with-param name="alt" select="$alt2"/>
-                        <xsl:with-param name="format" select="$format"/>
-                    </xsl:call-template>
-                </a>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:call-template name="insertimage2">
-                    <xsl:with-param name="alt" select="$alt2"/>
-                    <xsl:with-param name="format" select="$format"/>
-                </xsl:call-template>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xsl:template name="insertimage2">
-        <xsl:param name="alt" select="''"/>
-        <xsl:param name="format" select="'.jpg'"/>
-
         <xsl:variable name="file">
             <xsl:call-template name="getimagefilename">
                 <xsl:with-param name="format" select="$format"/>
             </xsl:call-template>
         </xsl:variable>
+
         <xsl:variable name="width">
             <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@width, 'px')"/>
         </xsl:variable>
@@ -1828,19 +1846,12 @@
             <xsl:value-of select="substring-before(document($imageInfoFile)/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
 
-        <img border="0">
-
-            <xsl:if test="contains(@rend, 'align(')">
-                <xsl:attribute name="align">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-                </xsl:attribute>
-            </xsl:if>
-
+        <img>
             <xsl:attribute name="src">
                 <xsl:value-of select="$file"/>
             </xsl:attribute>
             <xsl:attribute name="alt">
-                <xsl:value-of select="$alt"/>
+                <xsl:value-of select="$alt2"/>
             </xsl:attribute>
             <xsl:if test="$width != ''">
                 <xsl:attribute name="width">
@@ -1867,7 +1878,7 @@
         <xsl:call-template name="closepar"/>
         <div class="figure">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
 
             <xsl:variable name="file">
                 <xsl:call-template name="getimagefilename"/>
@@ -1955,6 +1966,7 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+
     <xsl:template match="figDesc"/>
 
 
@@ -2006,8 +2018,8 @@
         </p>
     </xsl:template>
 
-    <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
 
+    <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>
             <xsl:when test="position()=1 and substring(.,1,1) = '&ldquo;'">
@@ -2022,6 +2034,7 @@
         </xsl:choose>
     </xsl:template>
 
+
     <xsl:template match="*" mode="eat-initial">
         <xsl:if test="position()>1">
             <xsl:apply-templates select="."/>
@@ -2034,7 +2047,7 @@
 
     <xsl:template match="argument">
         <div class="argument">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -2045,14 +2058,14 @@
 
     <xsl:template match="epigraph">
         <div class="epigraph">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="bibl">
         <span class="bibl">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -2065,7 +2078,7 @@
         <xsl:call-template name="closepar"/>
         <div class="blockquote">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -2075,7 +2088,7 @@
         <xsl:call-template name="closepar"/>
         <div class="q">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -2090,7 +2103,7 @@
     <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
         <div class="blockquote letter">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -2134,7 +2147,7 @@
 
     <xsl:template match="/TEI.2/text//note[@place='margin']">
         <span class="leftnote">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -2149,7 +2162,7 @@
         </a>
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
             <span class="displayfootnote">
-                <xsl:call-template name="setHtmlLangAttribute"/>
+                <xsl:call-template name="setLangAttribute"/>
                 <xsl:apply-templates/>
             </span>
         </xsl:if>
@@ -2159,7 +2172,7 @@
 
     <xsl:template match="note[p]" mode="footnotes">
         <p class="footnote">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <span class="label">
                 <a class="noteref">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
@@ -2175,7 +2188,7 @@
 
     <xsl:template match="note" mode="footnotes">
         <p class="footnote">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <span class="label">
                 <a class="noteref">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
@@ -2195,7 +2208,7 @@
     <xsl:template match="p" mode="footnotes">
         <p class="footnote">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -2217,7 +2230,7 @@
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <h2><xsl:value-of select="$strApparatus"/></h2>
 
             <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
@@ -2226,7 +2239,7 @@
 
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
         <p class="footnote">
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <span class="label">
                 <a style="text-decoration:none">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
@@ -2245,7 +2258,7 @@
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <p>
                 <xsl:call-template name="generate-id-attribute"/>
-                <xsl:call-template name="setHtmlLangAttribute"/>
+                <xsl:call-template name="setLangAttribute"/>
                 <xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
                 <xsl:if test="contains(@rend, 'align(')">
                     <xsl:variable name="align" select="substring-before(substring-after(@rend, 'align('), ')')"/>
@@ -2271,15 +2284,17 @@
 
     <!-- top-level gets class=lgouter, nested get class=lg. This we use to center the entire poem on the screen, and still keep the left side of all stanzas aligned. -->
     <xsl:template match="lg">
+        <xsl:call-template name="closepar"/>
         <div>
             <xsl:attribute name="class">
                 <xsl:if test="not(parent::lg)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
             </xsl:attribute>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
+        <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
     <xsl:template match="lg/head">
@@ -2295,7 +2310,7 @@
     <xsl:template match="l">
         <p class="line">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)') or contains(@rend, 'indent(')">
                 <xsl:attribute name="style">
                     <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
@@ -2336,7 +2351,7 @@
         <div>
             <xsl:attribute name="class">
                 <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>sp</xsl:attribute>
-            <xsl:call-template name="setHtmlLangAttribute"/>
+            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -2437,31 +2452,31 @@
     </xsl:template>
 
     <xsl:template match="hi[@rend='italic']">
-        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <xsl:template match="hi[@rend='bold']">
-        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></b>
+        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></b>
     </xsl:template>
 
     <xsl:template match="hi[@rend='sc']">
-        <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='caps']">
-        <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='font(fraktur)']">
-        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='ex']">
-        <span class="letterspaced"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="letterspaced"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='rm']">
-        <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi">
@@ -2469,13 +2484,13 @@
             <xsl:when test="contains(@rend, 'font-size(')">
                 <span>
                     <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setHtmlLangAttribute"/>
+                    <xsl:call-template name="setLangAttribute"/>
                     <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
-                <i><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></i>
+                <i><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -2483,25 +2498,32 @@
 
     <!-- Use other font for Greek passages -->
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
-        <span class="Greek"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="Greek"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <!-- Use other font for Arabic passages -->
     <xsl:template match="foreign[@lang='ar']">
-        <span class="Arabic"><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span class="Arabic"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <!--====================================================================-->
     <!-- Language tagging -->
 
-    <xsl:template name="setHtmlLangAttribute">
+    <xsl:template name="setLangAttribute">
         <xsl:if test="@lang">
-            <xsl:attribute name="lang"><xsl:value-of select="@lang"/></xsl:attribute>
+            <xsl:choose>
+                <xsl:when test="document('')/xsl:stylesheet/xsl:output/@method = 'xml'">
+                    <xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="lang"><xsl:value-of select="@lang"/></xsl:attribute>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="foreign">
-        <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setHtmlLangAttribute"/><xsl:apply-templates/></span>
+        <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
 

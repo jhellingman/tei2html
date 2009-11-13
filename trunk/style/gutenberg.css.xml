@@ -190,7 +190,7 @@ p.tocSection
 
 .epigraph span.bibl
 {
-	display: block;
+    display: block;
     text-align: right;
 }
 
@@ -221,14 +221,14 @@ p.figureHead
 
 .figAnnotation
 {
-	font-size:80%;
-	position:relative;
-	margin: 0 auto; /* center this */
+    font-size:80%;
+    position:relative;
+    margin: 0 auto; /* center this */
 }
 
 .figTopLeft, .figBottomLeft
 {
-	float: left;
+    float: left;
 }
 
 .figTop, .figBottom
@@ -237,7 +237,7 @@ p.figureHead
 
 .figTopRight, .figBottomRight
 {
-	float: right;
+    float: right;
 }
 
 .figure p
@@ -245,6 +245,11 @@ p.figureHead
     font-size:80%;
     margin-top:0;
     text-align:center;
+}
+
+img
+{
+    border-width:0;
 }
 
 p.smallprint,li.smallprint
@@ -318,9 +323,10 @@ p.footnote
 
 p.footnote .label
 {
-    float: left;
-    text-align:left;
+    float:left;
     width:2em;
+    height:12pt;
+    display:block;
 }
 
 .footnotes td, .footnotes th, .footnotes .tablecaption
@@ -332,7 +338,7 @@ p.footnote .label
 {
     /* center the table */
     margin: 0px auto; 
-	display:table; /* used to make the block shrink to the actual size */
+    display:table; /* used to make the block shrink to the actual size */
 }
 
 
@@ -342,7 +348,7 @@ p.footnote .label
 {
     margin-left: auto;
     margin-right: auto;
-	display:table; /* used to make the block shrink to the actual size */
+    display:table; /* used to make the block shrink to the actual size */
 }
 
 .lg
@@ -389,13 +395,13 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 
 .speaker
 {
-	font-weight: bold;
-	margin-bottom: 0.4em;
+    font-weight: bold;
+    margin-bottom: 0.4em;
 }
 
 .sp .line
 {
-	margin: 0 10%;
+    margin: 0 10%;
     text-align: left;
 }
 
