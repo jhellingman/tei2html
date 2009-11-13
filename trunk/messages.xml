@@ -10,7 +10,7 @@
     <!ENTITY tm       "&#x2122;">
 
 ]>
-<?xml-stylesheet type="text/xsl" href="missing-translations.xsl"?>
+<?xml-stylesheet type="text/xsl" href="review-translations.xsl"?>
 <msg:repository  
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     version="1.0">

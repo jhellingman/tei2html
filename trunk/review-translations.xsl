@@ -2,44 +2,81 @@
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="1.0"
+    exclude-result-prefixes="msg"
 >
+
+    <xsl:output
+        doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
+        doctype-system="http://www.w3.org/TR/html4/loose.dtd"
+        method="html"
+        encoding="UTF-8"/>
 
     <!-- review translations in our messages.xml -->
 
     <xsl:variable name="srclang" select="'en'"/>
-    <xsl:variable name="destlang" select="'de'"/>
+    <xsl:variable name="destlang" select="'es'"/>
 
     <xsl:strip-space elements="*"/>
 
     <xsl:template match="/">
     <html>
         <head>
-            <title>Review Translations in Messages.xml</title>
+            <title>Review <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/> Translations in Messages.xml</title>
 
-            <style>
+            <style type="text/css">
 
                 .param { color: red; font-weight: bold; font-family: courier new; }
-
+                .missing { background-color: yellow; }
                 TH { text-align: left; }
 
             </style>
         </head>
         <body>
-            <h2>Review Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
+
+            <h2>Missing Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
             <table width="100%">
                 <tr>
-                    <th>Message ID</th>
-                    <th>Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
-                    <th>Message in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></th>
+                    <th width="20%">Message ID</th>
+                    <th width="80%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th></tr>
+                <xsl:apply-templates select="//msg:message" mode="missing"/>
+            </table>
+
+            <h2>Overview of Available Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
+            <table width="100%">
+                <tr>
+                    <th width="20%">Message ID</th>
+                    <th width="40%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
+                    <th width="40%">Message in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></th>
                 </tr>
-                <xsl:apply-templates select="//msg:message" mode="verify"/>
+                <xsl:apply-templates select="//msg:message" mode="review"/>
             </table>
         </body>
     </html>
     </xsl:template>
 
 
-    <xsl:template match="msg:message" mode="verify">
+    <xsl:template match="msg:message" mode="missing">
+        <xsl:if test="lang($srclang)">
+            <xsl:variable name="name" select="@name"/>
+            <xsl:variable name="value" select="."/>
+            <xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">
+                <tr valign="top">
+                    <td class="messageid"><xsl:value-of select="@name"/></td>
+						<xsl:choose>
+						<xsl:when test="string-length($value) &lt; 2000">
+							<td><xsl:apply-templates select="$value" mode="cp"/></td>
+						</xsl:when>
+						<xsl:otherwise>
+							<td><i class="missing">long message omitted</i></td>
+						</xsl:otherwise>
+					</xsl:choose>
+                </tr>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="msg:message" mode="review">
         <xsl:if test="lang($srclang)">
             <xsl:variable name="name" select="@name"/>
             <xsl:variable name="value" select="."/>
@@ -49,32 +86,18 @@
                     <xsl:value-of select="@name"/>
                 </td>
                 <td>
-                    <xsl:choose>
-                        <xsl:when test="string-length($value) &lt; 2000">
-                            <xsl:apply-templates select="$value" mode="cp"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            (<i>long message omitted</i>)
-                        </xsl:otherwise>
-                    </xsl:choose>
+					<xsl:apply-templates select="$value" mode="cp"/>
                 </td>
-                <td>
+				<td>
                     <xsl:choose>
-                        <xsl:when test="$translation">
-                            <xsl:choose>
-                                <xsl:when test="string-length($translation) &lt; 2000">
-                                    <xsl:apply-templates select="$translation" mode="cp"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    (<i>long message omitted</i>)
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            (<i>no translation available</i>)
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </td>
+						<xsl:when test="$translation">
+							<xsl:apply-templates select="$translation" mode="cp"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<i class="missing">no translation available</i>
+						</xsl:otherwise>
+					</xsl:choose>
+				</td>
             </tr>
         </xsl:if>
     </xsl:template>
@@ -90,5 +113,6 @@
     <xsl:template match="msg:param" mode="cp">
         <span class="param">{<xsl:value-of select="@name"/>}</span>
     </xsl:template>
+
 
 </xsl:transform>
