@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:opf="http://www.idpf.org/2007/opf"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns="http://www.idpf.org/2007/opf"
+         version="2.0"
+         unique-identifier="idbook">
+   <metadata>
+      <dc:title>Main Title of Work Goes Here</dc:title>
+      <dc:creator opf:role="aut">Author of Work (Birth-year—Death-year)</dc:creator>
+      <dc:creator opf:role="aut">A. U. Thor</dc:creator>
+      <dc:creator opf:role="aut">W. Riter</dc:creator>
+      <dc:publisher>Project Gutenberg, Urbana, Illinois, USA., 8 April 2004</dc:publisher>
+      <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
+      <dc:language>en-US</dc:language>
+      <dc:identifier id="idbook" opf:scheme="ISBN">978-0-306-40615-7</dc:identifier>
+   </metadata>
+   <manifest>
+      <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
+      <item id="ch04" href="ch04.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="ch05" href="ch05.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e477" href="xd1e477.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e618" href="xd1e618.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e689" href="xd1e689.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e697" href="xd1e697.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e721" href="xd1e721.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e125" href="images/hg2101.png" mediatype="image/png"/>
+      <item id="test" href="images/test.jpg" mediatype="image/jpeg"/>
+      <item id="test1" href="images/test.jpg" mediatype="image/jpeg"/>
+      <item id="test2" href="images/test2.jpg" mediatype="image/jpeg"/>
+      <item id="tarsier1" href="images/tarsier1.jpg" mediatype="image/jpeg"/>
+      <item id="tarsier2" href="images/tarsier2.jpg" mediatype="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref idref="ch04"/>
+      <itemref idref="ch05"/>
+      <itemref idref="xd1e477"/>
+      <itemref idref="xd1e618"/>
+      <itemref idref="xd1e689"/>
+      <itemref idref="xd1e697"/>
+      <itemref idref="xd1e721"/>
+   </spine>
+   <guide>
+      <reference/>
+   </guide>
+</package>
