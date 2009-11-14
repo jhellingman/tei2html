@@ -5,7 +5,10 @@
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         version="1.0">
 
-    <xsl:output method="xml" indent="yes"/>
+    <xsl:output 
+        method="xml" 
+        indent="yes"
+        encoding="UTF-8"/>
 
     <xsl:template match="/">
         <xsl:apply-templates/>
@@ -17,6 +20,9 @@
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
+            <xsl:if test="text/@lang">
+                <dc:language><xsl:value-of select="text/@lang"/></dc:language>
+            </xsl:if>
         </dc:dc>
     </xsl:template>
 
