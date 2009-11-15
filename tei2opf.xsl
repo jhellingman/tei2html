@@ -4,6 +4,7 @@
         xmlns="http://www.idpf.org/2007/opf"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         xmlns:opf="http://www.idpf.org/2007/opf"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         version="2.0">
 
@@ -31,16 +32,13 @@
                 <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
                 <xsl:if test="@lang">
-                    <dc:language><xsl:value-of select="@lang"/></dc:language>
+                    <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
                 </xsl:if>
                 <xsl:choose>
-                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
-                        <dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier>
-                    </xsl:when>
-                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
-                        <dc:identifier id="idbook"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier>
-                    </xsl:when>
+                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
+                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
                 </xsl:choose>
+                <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
             </metadata>
 
             <manifest>
@@ -92,8 +90,6 @@
             <xsl:value-of select="publisher"/>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="pubPlace"/>
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="date"/>
         </dc:publisher>
     </xsl:template>
 
@@ -155,7 +151,7 @@
     <!--== spine ===========================================================-->
 
     <xsl:template match="div1" mode="spine">
-        <itemref>
+        <itemref linear="yes">
             <xsl:attribute name="idref"><xsl:call-template name="generate-id"/></xsl:attribute>
         </itemref>
     </xsl:template>

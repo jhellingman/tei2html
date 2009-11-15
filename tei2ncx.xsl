@@ -31,19 +31,25 @@
                 <meta name="dbt:uid">
                     <xsl:attribute name="content">
                         <xsl:choose>
-                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
-                                <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
-                            </xsl:when>
-                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
-                                <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
-                            </xsl:when>
+                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
+                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
                         </xsl:choose>
                     </xsl:attribute>
                 </meta>
 
-                <meta name="dtb:depth" content="1"/>
+                <meta name="dtb:depth">
+                    <xsl:attribute name="content">
+                        <xsl:choose>
+                            <xsl:when test="//div2">2</xsl:when>
+                            <xsl:otherwise>1</xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </meta>
+
                 <meta name="dtb:totalPageCount" content="0"/>
                 <meta name="dtb:maxPageNumber" content="0"/> 
+                <meta name="dtb:generator" content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
+
             </head>
 
             <docTitle>
@@ -68,7 +74,7 @@
         <xsl:if test="head">
             <navPoint class="chapter">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div1"/></xsl:attribute>
+                <xsl:attribute name="playOrder"><xsl:number level="any" count="div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
@@ -76,6 +82,29 @@
                 </navLabel>
                 <content>
                     <xsl:attribute name="src"><xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                </content>
+                <xsl:if test="div2">
+                    <navMap>
+                        <xsl:apply-templates select="div2" mode="navMap"/>
+                    </navMap>
+                </xsl:if>
+            </navPoint>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="div2" mode="navMap">
+        <xsl:if test="head">
+            <navPoint class="chapter">
+                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                <xsl:attribute name="playOrder"><xsl:number level="any" count="div1|div2"/></xsl:attribute>
+                <navLabel>
+                    <text>
+                        <xsl:apply-templates select="head" mode="navLabel"/>
+                    </text>
+                </navLabel>
+                <content>
+                    <xsl:attribute name="src"><xsl:call-template name="generate-id-for"><xsl:with-param name="node" select=".."/></xsl:call-template>.xhtml#<xsl:call-template name="generate-id"/></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>
@@ -100,6 +129,13 @@
         </xsl:choose>
     </xsl:template>
 
+    <xsl:template name="generate-id-for">
+        <xsl:param name="node"/>
+        <xsl:choose>
+            <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
+            <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <!--== forget about all the rest =======================================-->
 
