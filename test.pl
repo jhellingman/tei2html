@@ -36,3 +36,4 @@ system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam
 system ("$saxon $basename.xml $xsldir/tei2dc.xsl  > test-dc.xml");
 
 system ("$saxon2 $basename.xml $xsldir/tei2opf.xsl  > test-opf.xml");
+system ("$saxon2 $basename.xml $xsldir/tei2ncx.xsl  > test-ncx.xml");

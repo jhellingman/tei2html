@@ -12,18 +12,18 @@
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA., 8 April 2004</dc:publisher>
       <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
       <dc:language>en-US</dc:language>
-      <dc:identifier id="idbook" opf:scheme="ISBN">978-0-306-40615-7</dc:identifier>
+      <dc:identifier id="idbook">123456789</dc:identifier>
    </metadata>
    <manifest>
       <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
       <item id="ch04" href="ch04.xhtml" mediatype="application/xhtml+xml"/>
       <item id="ch05" href="ch05.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e477" href="xd1e477.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e618" href="xd1e618.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e689" href="xd1e689.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e697" href="xd1e697.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e721" href="xd1e721.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd1e125" href="images/hg2101.png" mediatype="image/png"/>
+      <item id="xd1e475" href="xd1e475.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e616" href="xd1e616.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e687" href="xd1e687.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e695" href="xd1e695.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e719" href="xd1e719.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="xd1e123" href="images/hg2101.png" mediatype="image/png"/>
       <item id="test" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test1" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test2" href="images/test2.jpg" mediatype="image/jpeg"/>
@@ -33,11 +33,11 @@
    <spine toc="ncx">
       <itemref idref="ch04"/>
       <itemref idref="ch05"/>
-      <itemref idref="xd1e477"/>
-      <itemref idref="xd1e618"/>
-      <itemref idref="xd1e689"/>
-      <itemref idref="xd1e697"/>
-      <itemref idref="xd1e721"/>
+      <itemref idref="xd1e475"/>
+      <itemref idref="xd1e616"/>
+      <itemref idref="xd1e687"/>
+      <itemref idref="xd1e695"/>
+      <itemref idref="xd1e719"/>
    </spine>
    <guide>
       <reference/>
