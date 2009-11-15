@@ -3,14 +3,23 @@
 
     Stylesheet to handle the localization of messages in XSLT.
 
-    The messages are pulled from a variable $messages, that should contain a node tree, following the
-    messages.xsd schema. The importing stylesheet is responsible for filling this variable.
-
     This file is made available under the GNU General Public License, version 3.0 or later.
+
+    == Required variables ==
+
+    The importing stylesheet is responsible for filling these variables.
+
+    $messages           Node tree of document following the messages.xsd schema. 
+                        The actual messages are pulled from this structure.
+    $language           The language and specific locale to use, e.g. 'de-AT'
+    $baselanguage       The language without the locale, e.g. 'de'
+    $defaultlanguage    The default language, to be used when no message is available
+                        in the specified language.
 
 -->
 
 <xsl:stylesheet
+	xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     version="1.0"
