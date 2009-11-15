@@ -13,6 +13,9 @@
         encoding="UTF-8"/>
 
 
+    <xsl:param name="basename" select="'book'"/>
+
+
     <xsl:template match="/">
         <xsl:apply-templates/>
     </xsl:template>
