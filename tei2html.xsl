@@ -20,11 +20,17 @@
 
     Stylesheet to convert TEI to HTML
 
-    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a CSS stylesheet. Please contact me if you have problems with this stylesheet, or have improvements or bug fixes to contribute.
+    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a 
+    CSS stylesheet. Please contact me if you have problems with this stylesheet, 
+    or have improvements or bug fixes to contribute.
 
-    This stylesheet can be used with the saxon XSL processor, or with the build-in XSL processor in IE 6.0 or higher. Note that the XLS processor in Firefox will not always do the right thing.
+    This stylesheet can be used with the saxon XSL processor, or with the 
+    build-in XSL processor in IE 6.0 or higher. Note that the XLS processor 
+    in Firefox will not always do the right thing.
 
-    You can embed this style sheet in the source document with the <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction. This works with IE 6.0 or the latest Mozilla browsers.
+    You can embed this style sheet in the source document with the 
+    <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction. 
+    This works with IE 6.0 or the latest Mozilla browsers.
 
     This file is made available under the GNU General Public License, version 3.0 or later.
 
@@ -42,6 +48,7 @@
     <xsl:include href="utils.xsl"/>
     <xsl:include href="localization.xsl"/>
     <xsl:include href="messages.xsl"/>
+    <xsl:include href="inline.xsl"/>
     <xsl:include href="contents.xsl"/>
     <xsl:include href="tables.xsl"/>
     <xsl:include href="lists.xsl"/>
@@ -195,12 +202,14 @@
         </xsl:text>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- TEI Header -->
 
     <!-- Suppress the header in the output -->
 
     <xsl:template match="teiHeader"/>
+
 
     <!--====================================================================-->
     <!-- Main subdivisions of work -->
@@ -229,6 +238,7 @@
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Title Page -->
@@ -289,216 +299,6 @@
         <xsl:apply-templates select="."/>
     </xsl:template>
 
-    <!--====================================================================-->
-    <!-- Corrections; abbreviations; numbers; transcriptions -->
-
-    <xsl:template match="corr">
-        <xsl:call-template name="do-corr"/>
-    </xsl:template>
-
-    <xsl:template match="corr" mode="titlePage">
-        <xsl:call-template name="do-corr"/>
-    </xsl:template>
-
-    <xsl:template name="do-corr">
-        <xsl:choose>
-            <xsl:when test="@resp = 'm' or @resp = 'p'">
-                <xsl:apply-templates/>
-            </xsl:when>
-            <xsl:when test="not(@sic) or @sic=''">
-                <span class="corr">
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="$strNotInSource"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </span>
-            </xsl:when>
-            <xsl:when test=". = ''">
-                <a>
-                    <xsl:call-template name="generate-id-attribute"/>
-                </a>
-            </xsl:when>
-            <xsl:otherwise>
-                <span class="corr">
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </span>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xsl:template match="abbr">
-        <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="@expan"/>
-            </xsl:attribute>
-            <abbr>
-                <xsl:attribute name="title">
-                    <xsl:value-of select="@expan"/>
-                </xsl:attribute>
-                <xsl:apply-templates/>
-            </abbr>
-        </span>
-    </xsl:template>
-
-
-    <xsl:template match="num">
-        <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="@value"/>
-            </xsl:attribute>
-            <abbr>
-                <xsl:attribute name="title">
-                    <xsl:value-of select="@value"/>
-                </xsl:attribute>
-                <xsl:apply-templates/>
-            </abbr>
-        </span>
-    </xsl:template>
-
-
-    <xsl:template match="trans">
-        <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-
-    <xsl:template match="gi|tag|att">
-        <code>
-            <xsl:apply-templates/>
-        </code>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- Choice element (borrowed from P5) -->
-
-    <xsl:template match="choice[reg/@type='trans']">
-        <span class="trans">
-            <xsl:attribute name="title">
-                <xsl:value-of select="reg"/>
-            </xsl:attribute>
-            <xsl:apply-templates select="orig"/>
-        </span>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- Measurements with metric equivalent -->
-
-    <xsl:template match="measure">
-        <span class="measure">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="./@reg"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <!--====================================================================-->
-    <!-- Currency amounts (in future with modern PPP equivalent) -->
-
-    <xsl:template match="amount">
-        <span class="measure">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="./@unit"/>
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="./@amount"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- Cross References -->
-
-    <!-- Special case: reference to footnote, used when the same footnote reference mark is used multiple times -->
-
-    <xsl:template match="ref[@target and @type='noteref']">
-        <xsl:variable name="target" select="./@target"/>
-        <xsl:apply-templates select="//*[@id=$target]" mode="noterefnumber"/>
-    </xsl:template>
-
-    <xsl:template match="note" mode="noterefnumber">
-        <a class="pseudonoteref">
-            <xsl:call-template name="generate-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
-        </a>
-    </xsl:template>
-
-    <!-- Normal case -->
-
-    <xsl:template match="ref[@target and not(@type='noteref')]">
-        <xsl:variable name="target" select="./@target"/>
-        <xsl:choose>
-            <xsl:when test="not(//*[@id=$target])">
-                <xsl:message terminate="no">
-                    Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.
-                </xsl:message>
-                <xsl:apply-templates/>
-            </xsl:when>
-            <xsl:otherwise>
-                <a href="#{$target}">
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:if test="@type='pageref'">
-                        <xsl:attribute name="class">pageref</xsl:attribute>
-                    </xsl:if>
-                    <xsl:if test="@type='endnoteref'">
-                        <xsl:attribute name="class">noteref</xsl:attribute>
-                    </xsl:if>
-                    <xsl:apply-templates/>
-                </a>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <!--====================================================================-->
-    <!-- External References -->
-
-    <xsl:template match="xref[@url]">
-        <a>
-            <xsl:choose>
-                <xsl:when test="substring(@url, 1, 3) = 'pg:'">
-                    <xsl:attribute name="class">pglink</xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToPg"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
-                </xsl:when>
-                <xsl:when test="substring(@url, 1, 5) = 'oclc:'">
-                    <xsl:attribute name="class">catlink</xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToWorldCat"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="substring-after(@url, 'oclc:')"/></xsl:attribute>
-                </xsl:when>
-                <xsl:when test="substring(@url, 1, 4) = 'oln:'">
-                    <xsl:attribute name="class">catlink</xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
-                    <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="class">exlink</xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
-                    <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates/>
-        </a>
-    </xsl:template>
 
     <!--====================================================================-->
     <!-- Page Breaks -->
@@ -516,6 +316,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Thematic Breaks -->
@@ -542,52 +343,6 @@
 
     <xsl:template match="milestone">
         <xsl:call-template name="generate-anchor"/>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- Arbitrary Blocks (special hooks for rendering) -->
-
-    <xsl:template match="ab[@type='tocPagenum' or @type='tocPageNum']">
-        <span class="tocPagenum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='flushright']">
-        <span class="flushright">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='versenum']">
-        <span class="versenum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='lineNum']">
-        <xsl:if test="not(@rend='hide')">
-            <span class="linenum">
-                <xsl:apply-templates/>
-            </span>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- Heatmap attributes -->
-    <xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
-        <span>
-            <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <!-- ab as id placeholders -->
-    <xsl:template match="ab">
-        <span>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:apply-templates/>
-        </span>
     </xsl:template>
 
 
@@ -861,77 +616,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- Decorative Initials
-
-    Decorative initials are encoded with the rend attribute on the paragraph level.
-
-    To properly show an initial in HTML that may stick over the text, we need to use a number of tricks in CSS.
-
-    1. We set the initial as background picture on the paragraph.
-    2. We create a small div which we let float to the left, to give the initial the space it needs.
-    3. We set the padding-top to a value such that the initial actually appears to stick over the paragraph.
-    4. We set the initial as background picture to the float, such that if the paragraph is to small to contain the entire initial, the float will. We need to take care to adjust the background position to match the padding-top, such that the two background images will align exactly.
-    5. We need to take the first letter from the Paragraph, and render it in the float in white, such that it re-appears when no CSS is available.
-
-    -->
-
-    <xsl:template match="p[contains(@rend, 'initial-image')]">
-        <p>
-            <xsl:attribute name="style">
-                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
-                <xsl:if test="contains(@rend, 'initial-offset(')">
-                    padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-                </xsl:if>
-            </xsl:attribute>
-            <span>
-                <xsl:attribute name="style">
-                    float: left;
-                    width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
-                    height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
-                    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
-                    <xsl:if test="contains(@rend, 'initial-offset(')">
-                        background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-                    </xsl:if>
-                    text-align: right;
-                    color: white;
-                </xsl:attribute>
-                <xsl:choose>
-                    <xsl:when test="substring(.,1,1) = '&ldquo;'">
-                        <xsl:value-of select="substring(.,1,2)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="substring(.,1,1)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </span>
-            <xsl:apply-templates mode="eat-initial"/>
-        </p>
-    </xsl:template>
-
-
-    <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
-    <xsl:template match="text()" mode="eat-initial">
-        <xsl:choose>
-            <xsl:when test="position()=1 and substring(.,1,1) = '&ldquo;'">
-                <xsl:value-of select="substring(.,3)"/>
-            </xsl:when>
-            <xsl:when test="position()=1">
-                <xsl:value-of select="substring(.,2)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xsl:template match="*" mode="eat-initial">
-        <xsl:if test="position()>1">
-            <xsl:apply-templates select="."/>
-        </xsl:if>
-    </xsl:template>
-
 
     <!--====================================================================-->
     <!-- Arguments (short summary of contents at start of chapter) -->
@@ -1043,7 +727,9 @@
         </span>
     </xsl:template>
 
-    <!-- Move footnotes to the end of the div1 element they appear in (but not in quoted texts). We place the text of the footnote in-line as well, for use by the print stylesheet. In browsers it will be hidden. -->
+    <!-- Move footnotes to the end of the div1 element they appear in (but not in 
+    quoted texts). Optionally, we place the text of the footnote in-line as well, 
+    for use by the print stylesheet. In browsers it will be hidden. -->
 
     <xsl:template match="/TEI.2/text//note[@place='foot' or not(@place)]">
         <a class="noteref">
@@ -1171,6 +857,79 @@
             </p>
         </xsl:if>
     </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- Decorative Initials
+
+    Decorative initials are encoded with the rend attribute on the paragraph level.
+
+    To properly show an initial in HTML that may stick over the text, we need to use a number of tricks in CSS.
+
+    1. We set the initial as background picture on the paragraph.
+    2. We create a small div which we let float to the left, to give the initial the space it needs.
+    3. We set the padding-top to a value such that the initial actually appears to stick over the paragraph.
+    4. We set the initial as background picture to the float, such that if the paragraph is to small to contain the entire initial, the float will. We need to take care to adjust the background position to match the padding-top, such that the two background images will align exactly.
+    5. We need to take the first letter from the Paragraph, and render it in the float in white, such that it re-appears when no CSS is available.
+
+    -->
+
+    <xsl:template match="p[contains(@rend, 'initial-image')]">
+        <p>
+            <xsl:attribute name="style">
+                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
+                <xsl:if test="contains(@rend, 'initial-offset(')">
+                    padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+                </xsl:if>
+            </xsl:attribute>
+            <span>
+                <xsl:attribute name="style">
+                    float: left;
+                    width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
+                    height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
+                    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
+                    <xsl:if test="contains(@rend, 'initial-offset(')">
+                        background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+                    </xsl:if>
+                    text-align: right;
+                    color: white;
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="substring(.,1,1) = '&ldquo;'">
+                        <xsl:value-of select="substring(.,1,2)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="substring(.,1,1)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+            <xsl:apply-templates mode="eat-initial"/>
+        </p>
+    </xsl:template>
+
+
+    <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
+    <xsl:template match="text()" mode="eat-initial">
+        <xsl:choose>
+            <xsl:when test="position()=1 and substring(.,1,1) = '&ldquo;'">
+                <xsl:value-of select="substring(.,3)"/>
+            </xsl:when>
+            <xsl:when test="position()=1">
+                <xsl:value-of select="substring(.,2)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template match="*" mode="eat-initial">
+        <xsl:if test="position()>1">
+            <xsl:apply-templates select="."/>
+        </xsl:if>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Poetry -->
@@ -1319,90 +1078,6 @@
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </li>
-    </xsl:template>
-
-
-
-    <!--====================================================================-->
-    <!-- Text styles -->
-
-    <!-- TODO: line is actually too high for the intended use. -->
-    <xsl:template match="hi[@rend='overline']">
-        <span style="text-decoration: overline;"><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <!-- TODO: find way to make very wide tildes over words -->
-    <xsl:template match="hi[@rend='overtilde']">
-        <span style="text-decoration: overline;"><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sup']">
-        <sup><xsl:apply-templates/></sup>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sub']">
-        <sub><xsl:apply-templates/></sub>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='italic']">
-        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='bold']">
-        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></b>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sc']">
-        <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='caps']">
-        <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='font(fraktur)']">
-        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='ex']">
-        <span class="letterspaced"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='rm']">
-        <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi">
-        <xsl:choose>
-            <xsl:when test="contains(@rend, 'font-size(')">
-                <span>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setLangAttribute"/>
-                    <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
-                    <xsl:apply-templates/>
-                </span>
-            </xsl:when>
-            <xsl:otherwise>
-                <i><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <!-- Use other font for Greek passages -->
-    <xsl:template match="foreign[@lang='el' or @lang='grc']">
-        <span class="Greek"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <!-- Use other font for Arabic passages -->
-    <xsl:template match="foreign[@lang='ar']">
-        <span class="Arabic"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-
-
-    <xsl:template match="foreign">
-        <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
 
