@@ -19,7 +19,7 @@
 -->
 
 <xsl:stylesheet
-	xmlns="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     version="1.0"

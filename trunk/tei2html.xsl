@@ -20,16 +20,16 @@
 
     Stylesheet to convert TEI to HTML
 
-    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a 
-    CSS stylesheet. Please contact me if you have problems with this stylesheet, 
+    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a
+    CSS stylesheet. Please contact me if you have problems with this stylesheet,
     or have improvements or bug fixes to contribute.
 
-    This stylesheet can be used with the saxon XSL processor, or with the 
-    build-in XSL processor in IE 6.0 or higher. Note that the XLS processor 
+    This stylesheet can be used with the saxon XSL processor, or with the
+    build-in XSL processor in IE 6.0 or higher. Note that the XLS processor
     in Firefox will not always do the right thing.
 
-    You can embed this style sheet in the source document with the 
-    <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction. 
+    You can embed this style sheet in the source document with the
+    <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction.
     This works with IE 6.0 or the latest Mozilla browsers.
 
     This file is made available under the GNU General Public License, version 3.0 or later.
@@ -105,7 +105,7 @@
 
     <xsl:template match="TEI.2">
         <xsl:comment>
-            <xsl:text> This HTML file has been automatically generated from an XML source, using the tei2html XSLT stylesheet. If you find any mistakes, please edit the XML source. </xsl:text>
+            <xsl:text> This HTML file has been automatically generated from an XML source. </xsl:text>
         </xsl:comment>
         <xsl:text> <!-- insert extra new-line for PG -->
         </xsl:text>
@@ -377,6 +377,32 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xsl:template name="headText">
+        <xsl:call-template name="generate-id-attribute"/>
+        <xsl:call-template name="setLangAttribute"/>
+        <xsl:call-template name="setHtmlClass"/>
+        <xsl:if test="contains(@rend, 'align(')">
+            <xsl:attribute name="align">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
+            </xsl:attribute>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
+    <xsl:template name="setHtmlClass">
+        <xsl:choose>
+            <xsl:when test="@type">
+                <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="class">normal</xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
     <xsl:template name="headPicture">
         <xsl:if test="contains(@rend, 'image(')">
             <div class="figure">
@@ -400,6 +426,7 @@
         </xsl:if>
     </xsl:template>
 
+
     <!-- div0 -->
 
     <xsl:template match="div0">
@@ -420,17 +447,6 @@
         </div>
     </xsl:template>
 
-    <xsl:template name="setHtmlClass">
-        <xsl:choose>
-            <xsl:when test="@type">
-                <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:attribute name="class">normal</xsl:attribute>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
 
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
@@ -440,6 +456,7 @@
             </h2>
         </xsl:if>
     </xsl:template>
+
 
     <!-- div1 -->
 
@@ -500,19 +517,6 @@
     </xsl:template>
 
 
-    <xsl:template name="headText">
-        <xsl:call-template name="generate-id-attribute"/>
-        <xsl:call-template name="setLangAttribute"/>
-        <xsl:call-template name="setHtmlClass"/>
-        <xsl:if test="contains(@rend, 'align(')">
-            <xsl:attribute name="align">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-            </xsl:attribute>
-        </xsl:if>
-        <xsl:apply-templates/>
-    </xsl:template>
-
-
     <!-- div2 -->
 
     <xsl:template match="div2">
@@ -533,6 +537,7 @@
         </h3>
     </xsl:template>
 
+
     <!-- div3 -->
 
     <xsl:template match="div3">
@@ -549,6 +554,7 @@
             <xsl:call-template name="headText"/>
         </h4>
     </xsl:template>
+
 
     <!-- div4 -->
 
@@ -567,6 +573,7 @@
         </h5>
     </xsl:template>
 
+
     <!-- div5 -->
 
     <xsl:template match="div5">
@@ -583,6 +590,7 @@
             <xsl:call-template name="headText"/>
         </h6>
     </xsl:template>
+
 
     <!-- other headers -->
 
@@ -603,6 +611,7 @@
         </p>
     </xsl:template>
 
+
     <!-- trailers -->
 
     <xsl:template match="trailer">
@@ -614,7 +623,6 @@
             <xsl:apply-templates/>
         </p>
     </xsl:template>
-
 
 
     <!--====================================================================-->
@@ -649,7 +657,7 @@
     <!--====================================================================-->
     <!-- Blockquotes -->
 
-    <xsl:template match="q[@rend='block' or @rend='display']">
+    <xsl:template match="q[@rend='block']">
         <xsl:call-template name="closepar"/>
         <div class="blockquote">
             <xsl:call-template name="generate-id-attribute"/>
@@ -670,6 +678,7 @@
     </xsl:template>
 
     <!-- Other uses of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
+
 
     <!--====================================================================-->
     <!-- Letters, with openers, closers, etc. -->
@@ -727,8 +736,8 @@
         </span>
     </xsl:template>
 
-    <!-- Move footnotes to the end of the div1 element they appear in (but not in 
-    quoted texts). Optionally, we place the text of the footnote in-line as well, 
+    <!-- Move footnotes to the end of the div1 element they appear in (but not in
+    quoted texts). Optionally, we place the text of the footnote in-line as well,
     for use by the print stylesheet. In browsers it will be hidden. -->
 
     <xsl:template match="/TEI.2/text//note[@place='foot' or not(@place)]">
@@ -828,6 +837,7 @@
         </p>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- Paragraphs -->
 
@@ -862,15 +872,23 @@
     <!--====================================================================-->
     <!-- Decorative Initials
 
-    Decorative initials are encoded with the rend attribute on the paragraph level.
+    Decorative initials are encoded with the rend attribute on the paragraph 
+    level.
 
-    To properly show an initial in HTML that may stick over the text, we need to use a number of tricks in CSS.
+    To properly show an initial in HTML that may stick over the text, we need 
+    to use a number of tricks in CSS.
 
     1. We set the initial as background picture on the paragraph.
-    2. We create a small div which we let float to the left, to give the initial the space it needs.
-    3. We set the padding-top to a value such that the initial actually appears to stick over the paragraph.
-    4. We set the initial as background picture to the float, such that if the paragraph is to small to contain the entire initial, the float will. We need to take care to adjust the background position to match the padding-top, such that the two background images will align exactly.
-    5. We need to take the first letter from the Paragraph, and render it in the float in white, such that it re-appears when no CSS is available.
+    2. We create a small div which we let float to the left, to give the initial 
+       the space it needs.
+    3. We set the padding-top to a value such that the initial actually appears 
+       to stick over the paragraph.
+    4. We set the initial as background picture to the float, such that if the 
+       paragraph is to small to contain the entire initial, the float will. We 
+       need to take care to adjust the background position to match the 
+       padding-top, such that the two background images will align exactly.
+    5. We need to take the first letter from the Paragraph, and render it in the 
+       float in white, such that it re-appears when no CSS is available.
 
     -->
 
