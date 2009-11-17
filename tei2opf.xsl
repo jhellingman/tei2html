@@ -16,6 +16,9 @@
 
     <xsl:param name="basename" select="'book'"/>
 
+	
+	<xsl:include href="utils.xsl"/>
+
 
     <xsl:template match="/">
         <xsl:apply-templates/>
@@ -156,15 +159,6 @@
         </itemref>
     </xsl:template>
 
-
-    <!--== utils ===========================================================-->
-
-    <xsl:template name="generate-id">
-        <xsl:choose>
-            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/></xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
 
     <!--== forget about all the rest =======================================-->
 

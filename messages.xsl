@@ -14,6 +14,13 @@
     version="1.0"
     >
     
+
+    <xsl:variable name="language" select="/TEI.2/@lang" />
+    <xsl:variable name="baselanguage" select="substring-before($language,'-')" />
+    <xsl:variable name="defaultlanguage" select="'en'" />
+    <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
+
+
     <!--====================================================================-->
     <!-- Pull strings into easier to use variables -->
 

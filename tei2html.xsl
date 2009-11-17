@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
-<!DOCTYPE xsl:stylesheet [
-
-    <!ENTITY tab        "&#x09;">
-    <!ENTITY lf         "&#x0A;">
-    <!ENTITY cr         "&#x0D;">
-    <!ENTITY deg        "&#176;">
-    <!ENTITY ldquo      "&#x201C;">
-    <!ENTITY nbsp       "&#160;">
-    <!ENTITY mdash      "&#x2014;">
-    <!ENTITY prime      "&#x2032;">
-    <!ENTITY Prime      "&#x2033;">
-    <!ENTITY plusmn     "&#x00B1;">
-    <!ENTITY frac14     "&#x00BC;">
-    <!ENTITY frac12     "&#x00BD;">
-    <!ENTITY frac34     "&#x00BE;">
-
-]>
+<!DOCTYPE xsl:stylesheet>
 <!--
 
     Stylesheet to convert TEI to HTML
@@ -39,10 +23,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     version="1.0"
-    exclude-result-prefixes="msg img"
     >
 
     <xsl:include href="utils.xsl"/>
@@ -79,9 +60,6 @@
 
     <!--====================================================================-->
 
-    <!-- imageInfoFile is an XML file that contains information on the dimensions of images. -->
-    <xsl:param name="imageInfoFile"/>
-    <xsl:param name="customCssFile"/>
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
@@ -99,10 +77,8 @@
     <xsl:variable name="publisher" select="/TEI.2/teiHeader/fileDesc/publicationStmt/publisher" />
     <xsl:variable name="pubdate" select="/TEI.2/teiHeader/fileDesc/publicationStmt/date" />
 
-    <xsl:variable name="language" select="/TEI.2/@lang" />
-    <xsl:variable name="baselanguage" select="substring-before($language,'-')" />
-    <xsl:variable name="defaultlanguage" select="'en'" />
-    <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
+
+    <!--====================================================================-->
 
     <xsl:variable name="unitsUsed" select="'Original'"/>
 

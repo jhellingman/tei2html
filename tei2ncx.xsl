@@ -13,6 +13,9 @@
         encoding="UTF-8"/>
 
 
+    <xsl:include href="utils.xsl"/>
+
+
     <xsl:param name="basename" select="'book'"/>
 
 
@@ -119,23 +122,6 @@
 
     <xsl:template match="note" mode="navLabel"/>
 
-
-    <!--== utils ===========================================================-->
-
-    <xsl:template name="generate-id">
-        <xsl:choose>
-            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/></xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template name="generate-id-for">
-        <xsl:param name="node"/>
-        <xsl:choose>
-            <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
-            <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
 
     <!--== forget about all the rest =======================================-->
 
