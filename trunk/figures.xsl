@@ -34,6 +34,11 @@
     exclude-result-prefixes="img"
     >
 
+
+    <!-- imageInfoFile is an XML file that contains information on the dimensions of images. -->
+    <xsl:param name="imageInfoFile"/>
+
+
     <!-- Figures
 
     We derive the file name from the unique id, and assume that the format
