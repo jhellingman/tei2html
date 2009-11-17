@@ -15,7 +15,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
     <xsl:include href="utils.xsl"/>
@@ -27,7 +27,7 @@
     <xsl:include href="notes.xsl"/>
     <xsl:include href="drama.xsl"/>
     <xsl:include href="contents.xsl"/>
-    <xsl:include href="divisions.xsl"/>
+    <xsl:include href="epub.divisions.xsl"/>
     <xsl:include href="tables.xsl"/>
     <xsl:include href="lists.xsl"/>
     <xsl:include href="figures.xsl"/>
@@ -44,6 +44,7 @@
 
     <!--====================================================================-->
 
+    <xsl:param name="basename" select="'book'"/>
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>

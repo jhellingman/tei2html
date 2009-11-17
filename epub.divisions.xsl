@@ -1,7 +1,9 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet to format division elements, to be imported in tei2html.xsl.
+    Stylesheet to format division elements (tailored for ePub, that is
+    splitting into separate XHTML files at the div1 level, to be imported 
+    in tei2epub.xsl.
 
     Requires: 
         localization.xsl    : templates for localizing strings.
@@ -12,7 +14,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
