@@ -18,13 +18,12 @@
    </metadata>
    <manifest>
       <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
-      <item id="ch04" href="ch04.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="ch05" href="ch05.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd2e475" href="xd2e475.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd2e616" href="xd2e616.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd2e687" href="xd2e687.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd2e695" href="xd2e695.xhtml" mediatype="application/xhtml+xml"/>
-      <item id="xd2e719" href="xd2e719.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="ch04" href="test-epub-ch04.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="ch05" href="test-epub-ch05.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="ch6" href="test-epub-ch6.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="index" href="test-epub-index.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="backmatter" href="test-epub-backmatter.xhtml"
+            mediatype="application/xhtml+xml"/>
       <item id="xd2e123" href="images/hg2101.png" mediatype="image/png"/>
       <item id="test" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test1" href="images/test.jpg" mediatype="image/jpeg"/>
@@ -36,10 +35,10 @@
       <itemref linear="yes" idref="ch04"/>
       <itemref linear="yes" idref="ch05"/>
       <itemref linear="yes" idref="xd2e475"/>
-      <itemref linear="yes" idref="xd2e616"/>
+      <itemref linear="yes" idref="ch6"/>
       <itemref linear="yes" idref="xd2e687"/>
-      <itemref linear="yes" idref="xd2e695"/>
-      <itemref linear="yes" idref="xd2e719"/>
+      <itemref linear="yes" idref="index"/>
+      <itemref linear="yes" idref="backmatter"/>
    </spine>
    <guide>
       <reference/>

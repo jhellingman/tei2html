@@ -462,7 +462,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 </div1>
 <pb n="23"/>
-<div1 n="II">
+<div1 id="ch6" n="II">
 <head>Tests of poetry</head>
 
 <p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&rsquo;s aligned. Note that the technique used to center an entire block of text does not work in IE.
@@ -515,7 +515,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 </div0>
 </body>
 <back>
-<div1 type="Index">
+<div1 id="index" type="Index">
 <head>Index</head>
 
 <divGen type="IndexToc"/>
@@ -545,7 +545,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 
 </div2>
 </div1>
-<div1>
+<div1 id="backmatter">
 
 <divGen type="Gallery"/>
 
