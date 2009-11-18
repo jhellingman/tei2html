@@ -16,8 +16,8 @@
 
     <xsl:param name="basename" select="'book'"/>
 
-	
-	<xsl:include href="utils.xsl"/>
+    
+    <xsl:include href="utils.xsl"/>
 
 
     <xsl:template match="/">
@@ -107,7 +107,7 @@
 
     <!--== main divisions ==-->
 
-    <xsl:template match="div1" mode="manifest">
+    <xsl:template match="div1[not(ancestor::div1)]" mode="manifest">
         <item>
             <xsl:variable name="id">
                 <xsl:choose>
@@ -116,10 +116,15 @@
                 </xsl:choose>
             </xsl:variable>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:value-of select="$id"/>.xhtml</xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:value-of select="$id"/>.xhtml</xsl:attribute>
             <xsl:attribute name="mediatype">application/xhtml+xml</xsl:attribute>
         </item>
     </xsl:template>
+
+
+    <!-- nested div1 elements (for example in quoted texts, etc.) should be ignored -->
+    <xsl:template match="div1[ancestor::div1]" mode="manifest"/>
+
 
     <!--== figures ==-->
 

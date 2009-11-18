@@ -21,63 +21,63 @@
          <navLabel>
             <text>A Chapter Dealing with Text Styles</text>
          </navLabel>
-         <content src="ch04.xhtml"/>
+         <content src="test-epub-ch04.xhtml"/>
       </navPoint>
       <navPoint class="chapter" id="ch05" playOrder="2">
          <navLabel>
             <text>Another Chapter, Dealing with Tables</text>
          </navLabel>
-         <content src="ch05.xhtml"/>
+         <content src="test-epub-ch05.xhtml"/>
          <navMap>
             <navPoint class="chapter" id="xd2e469" playOrder="3">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="ch05.xhtml#xd2e469"/>
+               <content src="test-epub-ch05.xhtml#xd2e469"/>
             </navPoint>
             <navPoint class="chapter" id="xd2e491" playOrder="5">
                <navLabel>
                   <text>Test level 2</text>
                </navLabel>
-               <content src="ch05.xhtml#xd2e491"/>
+               <content src="test-epub-ch05.xhtml#xd2e491"/>
             </navPoint>
          </navMap>
       </navPoint>
-      <navPoint class="chapter" id="xd2e616" playOrder="6">
+      <navPoint class="chapter" id="ch6" playOrder="6">
          <navLabel>
             <text>Tests of poetry</text>
          </navLabel>
-         <content src="xd2e616.xhtml"/>
+         <content src="test-epub-ch6.xhtml"/>
       </navPoint>
-      <navPoint class="chapter" id="xd2e695" playOrder="8">
+      <navPoint class="chapter" id="index" playOrder="8">
          <navLabel>
             <text>Index</text>
          </navLabel>
-         <content src="xd2e695.xhtml"/>
+         <content src="test-epub-index.xhtml"/>
          <navMap>
             <navPoint class="chapter" id="xd2e699" playOrder="9">
                <navLabel>
                   <text>A.</text>
                </navLabel>
-               <content src="xd2e695.xhtml#xd2e699"/>
+               <content src="test-epub-index.xhtml#xd2e699"/>
             </navPoint>
             <navPoint class="chapter" id="xd2e704" playOrder="10">
                <navLabel>
                   <text>B.</text>
                </navLabel>
-               <content src="xd2e695.xhtml#xd2e704"/>
+               <content src="test-epub-index.xhtml#xd2e704"/>
             </navPoint>
             <navPoint class="chapter" id="xd2e709" playOrder="11">
                <navLabel>
                   <text>C.</text>
                </navLabel>
-               <content src="xd2e695.xhtml#xd2e709"/>
+               <content src="test-epub-index.xhtml#xd2e709"/>
             </navPoint>
             <navPoint class="chapter" id="xd2e714" playOrder="12">
                <navLabel>
                   <text>D.</text>
                </navLabel>
-               <content src="xd2e695.xhtml#xd2e714"/>
+               <content src="test-epub-index.xhtml#xd2e714"/>
             </navPoint>
          </navMap>
       </navPoint>

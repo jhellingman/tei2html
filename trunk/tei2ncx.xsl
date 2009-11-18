@@ -73,7 +73,7 @@
 
     <!--== navMap ==========================================================-->
 
-    <xsl:template match="div1" mode="navMap">
+    <xsl:template match="div1[not(ancestor::div1)]" mode="navMap">
         <xsl:if test="head">
             <navPoint class="chapter">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
@@ -84,7 +84,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                    <xsl:attribute name="src"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
                 </content>
                 <xsl:if test="div2">
                     <navMap>
@@ -94,6 +94,10 @@
             </navPoint>
         </xsl:if>
     </xsl:template>
+
+
+    <!-- nested div1 elements (for example in quoted texts, etc.) should be ignored -->
+    <xsl:template match="div1[ancestor::div1]" mode="navMap"/>
 
 
     <xsl:template match="div2" mode="navMap">
@@ -107,7 +111,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="generate-id-for"><xsl:with-param name="node" select=".."/></xsl:call-template>.xhtml#<xsl:call-template name="generate-id"/></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select=".."/></xsl:call-template>.xhtml#<xsl:call-template name="generate-id"/></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>
