@@ -63,6 +63,18 @@
     </xsl:template>
 
 
+    <xsl:template name="generate-filename">
+        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
+    </xsl:template>
+
+    <xsl:template name="generate-filename-for">
+        <xsl:param name="node"/>
+        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>.<xsl:value-of select="$extension"/>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Close and Open paragraphs 
 
