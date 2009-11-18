@@ -109,14 +109,9 @@
 
     <xsl:template match="div1[not(ancestor::div1)]" mode="manifest">
         <item>
-            <xsl:variable name="id">
-                <xsl:choose>
-                    <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-                    <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/></xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
+            <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:value-of select="$id"/>.xhtml</xsl:attribute>
+            <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
             <xsl:attribute name="mediatype">application/xhtml+xml</xsl:attribute>
         </item>
     </xsl:template>

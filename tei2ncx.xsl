@@ -13,10 +13,10 @@
         encoding="UTF-8"/>
 
 
-    <xsl:include href="utils.xsl"/>
-
-
     <xsl:param name="basename" select="'book'"/>
+
+
+    <xsl:include href="utils.xsl"/>
 
 
     <xsl:template match="/">
@@ -84,7 +84,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="generate-filename"/></xsl:attribute>
                 </content>
                 <xsl:if test="div2">
                     <navMap>
@@ -111,7 +111,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select=".."/></xsl:call-template>.xhtml#<xsl:call-template name="generate-id"/></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="generate-filename-for"><xsl:with-param name="node" select=".."/></xsl:call-template>#<xsl:call-template name="generate-id"/></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>

@@ -43,14 +43,6 @@
     <xsl:include href="gutenberg.xsl"/>
 
 
-    <!--
-    <xsl:output
-        doctype-public="-//W3C//DTD XHTML 1.1//EN"
-        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-        method="xml"
-        encoding="UTF-8"/>
-    -->
-
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
         doctype-system="http://www.w3.org/TR/html4/loose.dtd"
@@ -60,6 +52,7 @@
 
     <!--====================================================================-->
 
+    <xsl:param name="basename" select="'book'"/>
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
