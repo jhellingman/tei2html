@@ -75,7 +75,7 @@
       </revisionDesc>
    </teiHeader>
 <text rend="stylesheet(style/arctic.css)">
-<front>
+<front id="front">
 <titlePage>
 <docTitle><titlePart>This is a test document</titlePart></docTitle>
 
@@ -85,7 +85,7 @@
 <divGen id="toc" type="toc"/>
 
 </front>
-<body>
+<body id="body">
 
 <div0 id="bk01" n="I" type="Book" rend="label(yes)">
 <head>This is a Test Document</head>
@@ -514,7 +514,7 @@ a footnote. We also have a reference to the <ref target="ch05">next chapter</ref
 </div1>
 </div0>
 </body>
-<back>
+<back id="back">
 <div1 id="index" type="Index">
 <head>Index</head>
 

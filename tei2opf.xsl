@@ -6,6 +6,8 @@
         xmlns:opf="http://www.idpf.org/2007/opf"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:saxon="http://saxon.sf.net/"
+        exclude-result-prefixes="saxon"
         version="2.0">
 
     <xsl:output 
@@ -63,7 +65,7 @@
             </manifest>
 
             <spine toc="ncx">
-                <xsl:apply-templates select="//div1" mode="spine"/>
+                <xsl:apply-templates select="text" mode="spine"/>
             </spine>
 
             <guide>
@@ -152,6 +154,46 @@
 
 
     <!--== spine ===========================================================-->
+
+
+    <xsl:template match="text" mode="spine">
+        <xsl:apply-templates select="front" mode="spine"/>
+        <xsl:apply-templates select="body" mode="spine"/>
+        <xsl:apply-templates select="back" mode="spine"/>
+    </xsl:template>
+
+    <xsl:template match="body[div0]" mode="spine">
+        <xsl:apply-templates select="div0" mode="spine"/>
+    </xsl:template>
+
+    <xsl:template match="div0 | front | back | body[div1]" mode="spine">
+        <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
+            <xsl:choose>
+                <xsl:when test="current-grouping-key()">
+                    <!-- Sequence of non-div1 elements -->
+                    <xsl:call-template name="div0fragment">
+                        <xsl:with-param name="nodes" select="current-group()"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Sequence of div1 elements -->
+                    <xsl:apply-templates select="current-group()" mode="spine"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each-group>
+    </xsl:template>
+
+    <xsl:template name="div0fragment">
+        <xsl:param name="nodes"/>
+        <itemref linear="yes">
+            <xsl:attribute name="idref">
+                <xsl:call-template name="generate-id-for">
+                    <xsl:with-param name="node" select=".."/>
+                    <xsl:with-param name="position" select="position()"/>
+                </xsl:call-template>
+            </xsl:attribute>
+        </itemref>
+    </xsl:template>
 
     <xsl:template match="div1" mode="spine">
         <itemref linear="yes">

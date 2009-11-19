@@ -32,11 +32,12 @@
       <item id="tarsier2" href="images/tarsier2.jpg" mediatype="image/jpeg"/>
    </manifest>
    <spine toc="ncx">
+      <itemref linear="yes" idref="front-1"/>
+      <itemref linear="yes" idref="bk01-1"/>
       <itemref linear="yes" idref="ch04"/>
       <itemref linear="yes" idref="ch05"/>
-      <itemref linear="yes" idref="xd2e475"/>
+      <itemref linear="yes" idref="bk01-3"/>
       <itemref linear="yes" idref="ch6"/>
-      <itemref linear="yes" idref="xd2e687"/>
       <itemref linear="yes" idref="index"/>
       <itemref linear="yes" idref="backmatter"/>
    </spine>
