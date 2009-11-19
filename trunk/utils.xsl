@@ -56,10 +56,12 @@
 
     <xsl:template name="generate-id-for">
         <xsl:param name="node"/>
+        <xsl:param name="position"/>
         <xsl:choose>
             <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
             <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
         </xsl:choose>
+        <xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>
     </xsl:template>
 
 
@@ -71,7 +73,8 @@
     <xsl:template name="generate-filename-for">
         <xsl:param name="node"/>
         <xsl:param name="extension" select="'xhtml'"/>
-        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>.<xsl:value-of select="$extension"/>
+        <xsl:param name="position"/>
+        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template><xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>.<xsl:value-of select="$extension"/>
     </xsl:template>
 
 

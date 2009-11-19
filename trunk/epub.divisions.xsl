@@ -131,13 +131,55 @@
     <!-- div0 -->
 
     <xsl:template match="div0">
+        <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
+            <xsl:choose>
+                <xsl:when test="current-grouping-key()">
+                    <!-- Sequence of non-div1 elements -->
+                    <xsl:call-template name="div0fragment">
+                        <xsl:with-param name="nodes" select="current-group()"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Sequence of div1 elements -->
+                    <xsl:apply-templates select="current-group()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each-group>
+    </xsl:template>
+
+
+    <xsl:template name="div0fragment">
+        <xsl:param name="nodes"/>
+        
+        <xsl:variable name="filename">
+            <xsl:call-template name="generate-filename-for">
+                <xsl:with-param name="node" select=".."/>
+                <xsl:with-param name="position" select="position()"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:result-document href="{$filename}">
+            <html>
+                <xsl:call-template name="generate-html-header"/>
+
+                <body>
+                    <xsl:apply-templates select="$nodes"/>
+                </body>
+            </html>
+        </xsl:result-document>
+
+    </xsl:template>
+
+
+<!--
+    <xsl:template match="div0">
         <div class="div0">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
 
-            <!-- Include footnotes in the div0, if not done so earlier -->
+            <!- - Include footnotes in the div0, if not done so earlier - ->
 
             <xsl:if test=".//note[(@place='foot' or not(@place)) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
                 <div class="footnotes">
@@ -147,7 +189,7 @@
             </xsl:if>
         </div>
     </xsl:template>
-
+-->
 
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
@@ -179,7 +221,7 @@
             </xsl:if>
         </xsl:if>
 
-        <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
+        <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
 
         <xsl:result-document href="{$filename}">
             <html>
