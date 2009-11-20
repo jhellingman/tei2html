@@ -20,6 +20,7 @@
 
     
     <xsl:include href="utils.xsl"/>
+    <xsl:include href="splitter.xsl"/>
 
 
     <xsl:template match="/">
@@ -54,7 +55,7 @@
 
                 <!-- Content Parts -->
 
-                <xsl:apply-templates select="//div1" mode="manifest"/>
+                <xsl:apply-templates select="text" mode="manifest"/>
 
                 <!-- CSS Style Sheets -->
 
@@ -109,18 +110,12 @@
 
     <!--== main divisions ==-->
 
-    <xsl:template match="div1[not(ancestor::div1)]" mode="manifest">
-        <item>
-            <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
-            <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
-            <xsl:attribute name="mediatype">application/xhtml+xml</xsl:attribute>
-        </item>
+
+    <xsl:template match="text" mode="manifest">
+        <xsl:apply-templates mode="splitter">
+            <xsl:with-param name="action" select="'manifest'"/>
+        </xsl:apply-templates>
     </xsl:template>
-
-
-    <!-- nested div1 elements (for example in quoted texts, etc.) should be ignored -->
-    <xsl:template match="div1[ancestor::div1]" mode="manifest"/>
 
 
     <!--== figures ==-->
@@ -157,48 +152,9 @@
 
 
     <xsl:template match="text" mode="spine">
-        <xsl:apply-templates select="front" mode="spine"/>
-        <xsl:apply-templates select="body" mode="spine"/>
-        <xsl:apply-templates select="back" mode="spine"/>
-    </xsl:template>
-
-    <xsl:template match="body[div0]" mode="spine">
-        <xsl:apply-templates select="div0" mode="spine"/>
-    </xsl:template>
-
-    <xsl:template match="div0 | front | back | body[div1]" mode="spine">
-        <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
-            <xsl:choose>
-                <xsl:when test="current-grouping-key()">
-                    <!-- Sequence of non-div1 elements -->
-                    <xsl:call-template name="div0fragment">
-                        <xsl:with-param name="nodes" select="current-group()"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- Sequence of div1 elements -->
-                    <xsl:apply-templates select="current-group()" mode="spine"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each-group>
-    </xsl:template>
-
-    <xsl:template name="div0fragment">
-        <xsl:param name="nodes"/>
-        <itemref linear="yes">
-            <xsl:attribute name="idref">
-                <xsl:call-template name="generate-id-for">
-                    <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="position()"/>
-                </xsl:call-template>
-            </xsl:attribute>
-        </itemref>
-    </xsl:template>
-
-    <xsl:template match="div1" mode="spine">
-        <itemref linear="yes">
-            <xsl:attribute name="idref"><xsl:call-template name="generate-id"/></xsl:attribute>
-        </itemref>
+        <xsl:apply-templates mode="splitter">
+            <xsl:with-param name="action" select="'spine'"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
