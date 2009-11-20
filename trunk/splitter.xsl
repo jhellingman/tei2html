@@ -263,9 +263,54 @@
 
     <xsl:template name="content.div0fragment">
         <xsl:param name="nodes"/>
+        
+        <xsl:variable name="filename">
+            <xsl:call-template name="generate-filename-for">
+                <xsl:with-param name="node" select=".."/>
+                <xsl:with-param name="position" select="position()"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:result-document href="{$filename}">
+            <html>
+                <xsl:call-template name="generate-html-header"/>
+
+                <body>
+                    <xsl:apply-templates select="$nodes"/>
+                </body>
+            </html>
+        </xsl:result-document>
+
     </xsl:template>
 
+
     <xsl:template name="content.div1">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
+    <!-- Support functions -->
+
+    <xsl:template name="splitter-generate-filename-for">
+        <xsl:param name="node" select="."/>
+
+        <xsl:apply-templates select="/TEI.2/text" mode="splitter">
+            <xsl:with-param name="node" select="$node"/>
+            <xsl:with-param name="action" select="'filename'"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="splitter-generate-url-for">
+        <xsl:param name="node" select="."/>
+
+        <xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>#<xsl:call-template name="splitter-generate-id"/>
+    </xsl:template>
+
+    <xsl:template name="splitter-generate-id">
+        <xsl:choose>
+            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/><xsl:message terminate="no">Warning: generated ID [x<xsl:value-of select="generate-id(.)"/>] is not stable between runs of XSLT.</xsl:message></xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

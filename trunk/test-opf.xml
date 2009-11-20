@@ -27,7 +27,7 @@
       <item id="index" href="test-epub-index.xhtml" mediatype="application/xhtml+xml"/>
       <item id="backmatter" href="test-epub-backmatter.xhtml"
             mediatype="application/xhtml+xml"/>
-      <item id="xd3e123" href="images/hg2101.png" mediatype="image/png"/>
+      <item id="xd4e123" href="images/hg2101.png" mediatype="image/png"/>
       <item id="test" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test1" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test2" href="images/test2.jpg" mediatype="image/jpeg"/>
