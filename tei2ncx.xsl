@@ -17,6 +17,7 @@
 
 
     <xsl:include href="utils.xsl"/>
+    <xsl:include href="splitter.xsl"/>
 
 
     <xsl:template match="/">
@@ -43,7 +44,9 @@
                 <meta name="dtb:depth">
                     <xsl:attribute name="content">
                         <xsl:choose>
-                            <xsl:when test="//div2">2</xsl:when>
+                            <xsl:when test="//div2 and //div0">3</xsl:when>
+                            <xsl:when test="//div2 and //div1">2</xsl:when>
+                            <xsl:when test="//div1 and //div0">2</xsl:when>
                             <xsl:otherwise>1</xsl:otherwise>
                         </xsl:choose>
                     </xsl:attribute>
@@ -64,7 +67,7 @@
             </docAuthor>
 
             <navMap>
-                <xsl:apply-templates select="//div1" mode="navMap"/>
+                <xsl:apply-templates select="text" mode="navMap"/>
             </navMap>
 
         </ncx>
@@ -73,18 +76,48 @@
 
     <!--== navMap ==========================================================-->
 
-    <xsl:template match="div1[not(ancestor::div1)]" mode="navMap">
+    <xsl:template match="text" mode="navMap">
+        <xsl:apply-templates select="front | body | back" mode="navMap"/>
+    </xsl:template>
+
+    <xsl:template match="front | body | back" mode="navMap">
+        <xsl:apply-templates select="div0 | div1" mode="navMap"/>
+    </xsl:template>
+
+    <xsl:template match="div0" mode="navMap">
         <xsl:if test="head">
-            <navPoint class="chapter">
+            <navPoint class="part">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div1|div2"/></xsl:attribute>
+                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="generate-filename"/></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                </content>
+                <xsl:if test="div1">
+                    <navMap>
+                        <xsl:apply-templates select="div1" mode="navMap"/>
+                    </navMap>
+                </xsl:if>
+            </navPoint>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="div1" mode="navMap">
+        <xsl:if test="head">
+            <navPoint class="chapter">
+                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
+                <navLabel>
+                    <text>
+                        <xsl:apply-templates select="head" mode="navLabel"/>
+                    </text>
+                </navLabel>
+                <content>
+                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                 </content>
                 <xsl:if test="div2">
                     <navMap>
@@ -96,27 +129,22 @@
     </xsl:template>
 
 
-    <!-- nested div1 elements (for example in quoted texts, etc.) should be ignored -->
-    <xsl:template match="div1[ancestor::div1]" mode="navMap"/>
-
-
     <xsl:template match="div2" mode="navMap">
         <xsl:if test="head">
             <navPoint class="chapter">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div1|div2"/></xsl:attribute>
+                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="generate-filename-for"><xsl:with-param name="node" select=".."/></xsl:call-template>#<xsl:call-template name="generate-id"/></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select=".."/></xsl:call-template>#<xsl:call-template name="generate-id"/></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>
     </xsl:template>
-
 
     <xsl:template match="head[@type='label']" mode="navLabel"/>
 
@@ -125,6 +153,16 @@
     </xsl:template>
 
     <xsl:template match="note" mode="navLabel"/>
+
+
+    <xsl:template name="splitter-generate-filename-for">
+        <xsl:param name="node" select="."/>
+
+        <xsl:apply-templates select="/TEI.2/text" mode="splitter">
+            <xsl:with-param name="node" select="$node"/>
+            <xsl:with-param name="action" select="'filename'"/>
+        </xsl:apply-templates>
+    </xsl:template>
 
 
     <!--== forget about all the rest =======================================-->

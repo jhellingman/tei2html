@@ -18,13 +18,16 @@
    </metadata>
    <manifest>
       <item id="ncx" href="book.ncx" media-type="application/x-dtbncx+xml"/>
+      <item id="front-1" href="test-epub-front-1.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="bk01-1" href="test-epub-bk01-1.xhtml" mediatype="application/xhtml+xml"/>
       <item id="ch04" href="test-epub-ch04.xhtml" mediatype="application/xhtml+xml"/>
       <item id="ch05" href="test-epub-ch05.xhtml" mediatype="application/xhtml+xml"/>
+      <item id="bk01-3" href="test-epub-bk01-3.xhtml" mediatype="application/xhtml+xml"/>
       <item id="ch6" href="test-epub-ch6.xhtml" mediatype="application/xhtml+xml"/>
       <item id="index" href="test-epub-index.xhtml" mediatype="application/xhtml+xml"/>
       <item id="backmatter" href="test-epub-backmatter.xhtml"
             mediatype="application/xhtml+xml"/>
-      <item id="xd2e123" href="images/hg2101.png" mediatype="image/png"/>
+      <item id="xd3e123" href="images/hg2101.png" mediatype="image/png"/>
       <item id="test" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test1" href="images/test.jpg" mediatype="image/jpeg"/>
       <item id="test2" href="images/test2.jpg" mediatype="image/jpeg"/>
