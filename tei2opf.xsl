@@ -21,6 +21,7 @@
     
     <xsl:include href="utils.xsl"/>
     <xsl:include href="splitter.xsl"/>
+    <xsl:include href="splitter-dummies.xsl"/>
 
 
     <xsl:template match="/">

@@ -35,17 +35,17 @@
                </navLabel>
                <content src="test-epub-ch05.xhtml"/>
                <navMap>
-                  <navPoint class="chapter" id="xd3e469" playOrder="4">
+                  <navPoint class="chapter" id="xd4e469" playOrder="4">
                      <navLabel>
                         <text>Letters, Closers, and Openers</text>
                      </navLabel>
-                     <content src="test-epub-ch05.xhtml#xd3e469"/>
+                     <content src="test-epub-ch05.xhtml#xd4e469"/>
                   </navPoint>
-                  <navPoint class="chapter" id="xd3e491" playOrder="6">
+                  <navPoint class="chapter" id="xd4e491" playOrder="6">
                      <navLabel>
                         <text>Test level 2</text>
                      </navLabel>
-                     <content src="test-epub-ch05.xhtml#xd3e491"/>
+                     <content src="test-epub-ch05.xhtml#xd4e491"/>
                   </navPoint>
                </navMap>
             </navPoint>
@@ -63,29 +63,29 @@
          </navLabel>
          <content src="test-epub-index.xhtml"/>
          <navMap>
-            <navPoint class="chapter" id="xd3e699" playOrder="10">
+            <navPoint class="chapter" id="xd4e699" playOrder="10">
                <navLabel>
                   <text>A.</text>
                </navLabel>
-               <content src="test-epub-index.xhtml#xd3e699"/>
+               <content src="test-epub-index.xhtml#xd4e699"/>
             </navPoint>
-            <navPoint class="chapter" id="xd3e704" playOrder="11">
+            <navPoint class="chapter" id="xd4e704" playOrder="11">
                <navLabel>
                   <text>B.</text>
                </navLabel>
-               <content src="test-epub-index.xhtml#xd3e704"/>
+               <content src="test-epub-index.xhtml#xd4e704"/>
             </navPoint>
-            <navPoint class="chapter" id="xd3e709" playOrder="12">
+            <navPoint class="chapter" id="xd4e709" playOrder="12">
                <navLabel>
                   <text>C.</text>
                </navLabel>
-               <content src="test-epub-index.xhtml#xd3e709"/>
+               <content src="test-epub-index.xhtml#xd4e709"/>
             </navPoint>
-            <navPoint class="chapter" id="xd3e714" playOrder="13">
+            <navPoint class="chapter" id="xd4e714" playOrder="13">
                <navLabel>
                   <text>D.</text>
                </navLabel>
-               <content src="test-epub-index.xhtml#xd3e714"/>
+               <content src="test-epub-index.xhtml#xd4e714"/>
             </navPoint>
          </navMap>
       </navPoint>

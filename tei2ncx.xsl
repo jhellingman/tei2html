@@ -18,6 +18,7 @@
 
     <xsl:include href="utils.xsl"/>
     <xsl:include href="splitter.xsl"/>
+    <xsl:include href="splitter-dummies.xsl"/>
 
 
     <xsl:template match="/">
@@ -140,7 +141,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select=".."/></xsl:call-template>#<xsl:call-template name="generate-id"/></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"><xsl:with-param name="node" select=".."/></xsl:call-template></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>
@@ -153,16 +154,6 @@
     </xsl:template>
 
     <xsl:template match="note" mode="navLabel"/>
-
-
-    <xsl:template name="splitter-generate-filename-for">
-        <xsl:param name="node" select="."/>
-
-        <xsl:apply-templates select="/TEI.2/text" mode="splitter">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="action" select="'filename'"/>
-        </xsl:apply-templates>
-    </xsl:template>
 
 
     <!--== forget about all the rest =======================================-->
