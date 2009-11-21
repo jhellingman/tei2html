@@ -72,7 +72,7 @@
 
 
     <xsl:template match="/">
-    
+
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
 

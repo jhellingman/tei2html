@@ -33,14 +33,10 @@ if (-f "custom.css.xml")
     $cssFileParam = "customCssFile=\"file:/$pwd/custom.css.xml\"";
 }
 
-system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
+# system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
 
-system ("$saxon $basename.xml $xsldir/tei2dc.xsl  > test-dc.xml");
+# system ("$saxon $basename.xml $xsldir/tei2dc.xsl  > test-dc.xml");
 
 
 system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename-epub\" > test-epub.xhtml");
-
-# system ("$saxon2 $basename.xml $xsldir/tei2opf.xsl basename=\"$basename-epub\" > test-opf.xml");
-# system ("$saxon2 $basename.xml $xsldir/tei2ncx.xsl basename=\"$basename-epub\" > test-ncx.xml");
-
 

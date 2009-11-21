@@ -32,12 +32,14 @@
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]"/>
+                <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
             </xsl:when>
             <xsl:when test="$msg[lang($baselanguage)][1]">
                 <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
+                <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>.</xsl:message>
+                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
             </xsl:when>
             <xsl:otherwise>
