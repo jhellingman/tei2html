@@ -13,7 +13,7 @@
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     version="1.0"
     >
-    
+
 
     <xsl:variable name="language" select="/TEI.2/@lang" />
     <xsl:variable name="baselanguage" select="substring-before($language,'-')" />

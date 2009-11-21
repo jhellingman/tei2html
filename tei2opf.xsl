@@ -155,6 +155,6 @@
 
     <!--== forget about all the rest =======================================-->
 
-    <xsl:template match="*"/>
+    <xsl:template match="*" mode="opf"/>
 
 </xsl:stylesheet>
