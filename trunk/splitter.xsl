@@ -271,7 +271,8 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:result-document href="{$filename}">
+        <xsl:result-document href="{$path}/{$filename}">
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
             <html>
                 <xsl:call-template name="generate-html-header"/>
 
@@ -285,7 +286,20 @@
 
 
     <xsl:template name="content.div1">
-        <xsl:apply-templates/>
+
+        <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
+
+        <xsl:result-document href="{$path}/{$filename}">
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <html>
+                <xsl:call-template name="generate-html-header"/>
+
+                <body>
+                    <xsl:apply-templates select="."/>
+                </body>
+            </html>
+        </xsl:result-document>
+
     </xsl:template>
 
 
