@@ -10,71 +10,65 @@
         exclude-result-prefixes="saxon"
         version="2.0">
 
-    <xsl:output 
-        method="xml" 
-        indent="yes"
-        encoding="UTF-8"/>
 
+    <xsl:template match="TEI.2" mode="opf">
 
-    <xsl:param name="basename" select="'book'"/>
+        <xsl:result-document 
+                doctype-public=""
+                doctype-system=""
+                href="{$path}/{$basename}.opf"
+                method="xml" 
+                indent="yes"
+                encoding="UTF-8">
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
-    
-    <xsl:include href="utils.xsl"/>
-    <xsl:include href="splitter.xsl"/>
-    <xsl:include href="splitter-dummies.xsl"/>
+            <package version="2.0">
+                <xsl:attribute name="unique-identifier">idbook</xsl:attribute>
 
+                <metadata>
+                    <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
+                    <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
+                    <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
+                    <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
+                    <xsl:if test="@lang">
+                        <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
+                        <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
+                    </xsl:choose>
+                    <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+                </metadata>
 
-    <xsl:template match="/">
-        <xsl:apply-templates/>
-    </xsl:template>
+                <manifest>
+                    
+                    <item id="ncx"
+                         href="book.ncx"
+                         media-type="application/x-dtbncx+xml"/>
 
+                    <!-- Content Parts -->
 
-    <xsl:template match="TEI.2">
-        <package version="2.0">
-            <xsl:attribute name="unique-identifier">idbook</xsl:attribute>
+                    <xsl:apply-templates select="text" mode="manifest"/>
 
-            <metadata>
-                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
-                <xsl:if test="@lang">
-                    <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
-                </xsl:if>
-                <xsl:choose>
-                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
-                    <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
-                </xsl:choose>
-                <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
-            </metadata>
+                    <!-- CSS Style Sheets -->
 
-            <manifest>
-                
-                <item id="ncx"
-                     href="book.ncx"
-                     media-type="application/x-dtbncx+xml"/>
+                    <!-- Illustrations -->
 
-                <!-- Content Parts -->
+                    <xsl:apply-templates select="//figure" mode="manifest"/>
 
-                <xsl:apply-templates select="text" mode="manifest"/>
+                </manifest>
 
-                <!-- CSS Style Sheets -->
+                <spine toc="ncx">
+                    <xsl:apply-templates select="text" mode="spine"/>
+                </spine>
 
-                <!-- Illustrations -->
+                <guide>
+                    <reference />
+                </guide>
 
-                <xsl:apply-templates select="//figure" mode="manifest"/>
+            </package>
 
-            </manifest>
-
-            <spine toc="ncx">
-                <xsl:apply-templates select="text" mode="spine"/>
-            </spine>
-
-            <guide>
-                <reference />
-            </guide>
-
-        </package>
+        </xsl:result-document>
     </xsl:template>
 
 
@@ -124,12 +118,12 @@
     <xsl:template match="figure" mode="manifest">
         <item>
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:call-template name="getimagefilename"/></xsl:attribute>
-            <xsl:attribute name="mediatype"><xsl:call-template name="getimagefiletype"/></xsl:attribute>
+            <xsl:attribute name="href"><xsl:call-template name="odf.getimagefilename"/></xsl:attribute>
+            <xsl:attribute name="mediatype"><xsl:call-template name="odf.getimagefiletype"/></xsl:attribute>
         </item>
     </xsl:template>
 
-    <xsl:template name="getimagefilename">
+    <xsl:template name="odf.getimagefilename">
         <xsl:choose>
             <xsl:when test="contains(@rend, 'image(')">
                 <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
@@ -138,7 +132,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="getimagefiletype">
+    <xsl:template name="odf.getimagefiletype">
         <xsl:variable name="filename"><xsl:call-template name="getimagefilename"/></xsl:variable>
         <xsl:choose>
             <xsl:when test="contains($filename, '.jpg') or contains($filename, '.jpeg')">image/jpeg</xsl:when>

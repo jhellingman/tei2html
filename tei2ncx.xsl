@@ -5,73 +5,66 @@
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         version="2.0">
 
-    <xsl:output 
-        doctype-public="-//NISO//DTD ncx 2005-1//EN"
-        doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
-        method="xml" 
-        indent="yes"
-        encoding="UTF-8"/>
 
+    <xsl:template match="TEI.2" mode="ncx">
 
-    <xsl:param name="basename" select="'book'"/>
+        <xsl:result-document 
+                href="{$path}/{$basename}.ncx"
+                doctype-public="-//NISO//DTD ncx 2005-1//EN"
+                doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
+                method="xml" 
+                indent="yes"
+                encoding="UTF-8">
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
 
+            <ncx version="2005-1">
+                <xsl:attribute name="xml:lang">
+                    <xsl:value-of select="@lang"/>
+                </xsl:attribute>
 
-    <xsl:include href="utils.xsl"/>
-    <xsl:include href="splitter.xsl"/>
-    <xsl:include href="splitter-dummies.xsl"/>
+                <head>
+                    <meta name="dbt:uid">
+                        <xsl:attribute name="content">
+                            <xsl:choose>
+                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
+                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </meta>
 
+                    <meta name="dtb:depth">
+                        <xsl:attribute name="content">
+                            <xsl:choose>
+                                <xsl:when test="//div2 and //div0">3</xsl:when>
+                                <xsl:when test="//div2 and //div1">2</xsl:when>
+                                <xsl:when test="//div1 and //div0">2</xsl:when>
+                                <xsl:otherwise>1</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:attribute>
+                    </meta>
 
-    <xsl:template match="/">
-        <xsl:apply-templates/>
-    </xsl:template>
+                    <meta name="dtb:totalPageCount" content="0"/>
+                    <meta name="dtb:maxPageNumber" content="0"/> 
+                    <meta name="dtb:generator" content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
 
+                </head>
 
-    <xsl:template match="TEI.2">
-        <ncx version="2005-1">
-            <xsl:attribute name="xml:lang">
-                <xsl:value-of select="@lang"/>
-            </xsl:attribute>
+                <docTitle>
+                    <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/title"/></text>
+                </docTitle>
 
-            <head>
-                <meta name="dbt:uid">
-                    <xsl:attribute name="content">
-                        <xsl:choose>
-                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
-                            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:attribute>
-                </meta>
+                <docAuthor>
+                    <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/author"/></text>
+                </docAuthor>
 
-                <meta name="dtb:depth">
-                    <xsl:attribute name="content">
-                        <xsl:choose>
-                            <xsl:when test="//div2 and //div0">3</xsl:when>
-                            <xsl:when test="//div2 and //div1">2</xsl:when>
-                            <xsl:when test="//div1 and //div0">2</xsl:when>
-                            <xsl:otherwise>1</xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
-                </meta>
+                <navMap>
+                    <xsl:apply-templates select="text" mode="navMap"/>
+                </navMap>
 
-                <meta name="dtb:totalPageCount" content="0"/>
-                <meta name="dtb:maxPageNumber" content="0"/> 
-                <meta name="dtb:generator" content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
+            </ncx>
 
-            </head>
+        </xsl:result-document>
 
-            <docTitle>
-                <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/title"/></text>
-            </docTitle>
-
-            <docAuthor>
-                <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/author"/></text>
-            </docAuthor>
-
-            <navMap>
-                <xsl:apply-templates select="text" mode="navMap"/>
-            </navMap>
-
-        </ncx>
     </xsl:template>
 
 
@@ -158,6 +151,6 @@
 
     <!--== forget about all the rest =======================================-->
 
-    <xsl:template match="*"/>
+    <xsl:template match="*" mode="ncx"/>
 
 </xsl:stylesheet>

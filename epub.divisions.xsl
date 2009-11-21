@@ -24,7 +24,7 @@
     <!--====================================================================-->
     <!-- Main subdivisions of work -->
 
-    <xsl:template match="text">
+    <xsl:template match="/TEI.2/text">
         <xsl:apply-templates mode="splitter"/>
     </xsl:template>
 
@@ -131,7 +131,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="div1[not(ancestor::div1)]">
+    <xsl:template match="div1">
         <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
         <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
             <xsl:if test="..//note[(@place='foot' or not(@place)) and not(ancestor::div1)]">
@@ -142,27 +142,6 @@
             </xsl:if>
         </xsl:if>
 
-        <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
-
-        <xsl:result-document href="{$filename}">
-            <html>
-                <xsl:call-template name="generate-html-header"/>
-
-                <body>
-                    <xsl:call-template name="div1"/>
-                </body>
-            </html>
-        </xsl:result-document>
-
-    </xsl:template>
-
-
-    <xsl:template match="div1[ancestor::div1]">
-        <xsl:call-template name="div1"/>
-    </xsl:template>
-
-
-    <xsl:template name="div1">
         <div>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
@@ -189,9 +168,8 @@
                     <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or not(@place)]"/>
                 </div>
             </xsl:if>
-        </div>  
+        </div>
     </xsl:template>
-
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
