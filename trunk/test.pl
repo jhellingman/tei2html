@@ -38,5 +38,5 @@ if (-f "custom.css.xml")
 # system ("$saxon $basename.xml $xsldir/tei2dc.xsl  > test-dc.xml");
 
 
-system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename-epub\" > test-epub.xhtml");
+system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
 
