@@ -17,6 +17,8 @@ After installing Perl, install [http://www.imagemagick.org/script/index.php Imag
 
 [http://saxon.sourceforge.net/ Saxon] is the XSLT processor to use. To use it, you need a Java Virtual Machine. Download [http://prdownloads.sourceforge.net/saxon/saxon6-5-5.zip version 6.5.5], which is the last version to support XSLT 1.0.
 
+Alternatively, you can download the more recent Saxon SA product from [http://www.saxonica.com/products.html saxonica.com]. This fully supports XSLT 2.0, as required for the tei2epub style sheets that are now part of this package.
+
 If you already have a Java Runtime Environment, you need to locate it, and update the Perl script tei2html.pl with its proper location.
 
 = SX, NSGML =
