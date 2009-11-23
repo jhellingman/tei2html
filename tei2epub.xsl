@@ -19,11 +19,12 @@
     >
 
     <xsl:include href="utils.xsl"/>
+    <xsl:include href="epub.utils.xsl"/>
     <xsl:include href="localization.xsl"/>
     <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
-    <xsl:include href="epub.references.xsl"/>
+    <xsl:include href="references.xsl"/>
     <xsl:include href="block.xsl"/>
     <xsl:include href="notes.xsl"/>
     <xsl:include href="drama.xsl"/>
@@ -52,7 +53,7 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
-    <xsl:param name="optionExternalCSS" select="'No'"/>
+    <xsl:param name="optionExternalCSS" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 
 

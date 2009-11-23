@@ -190,7 +190,12 @@
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
                 <!-- If we have an element with id 'toc', include a link to it (except in quoted material) -->
                 <span class="pagenum">
-                    [<a href="#toc"><xsl:value-of select="$strToc"/></a>]
+                    [<a>
+                        <xsl:call-template name="generate-href-attribute">
+                            <xsl:with-param name="target" select="//*[@id='toc']"/>
+                        </xsl:call-template>
+                        <xsl:value-of select="$strToc"/>
+                     </a>]
                 </span>
             </xsl:if>
 

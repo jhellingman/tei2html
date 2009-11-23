@@ -27,6 +27,7 @@
     >
 
     <xsl:include href="utils.xsl"/>
+    <xsl:include href="html.utils.xsl"/>
     <xsl:include href="localization.xsl"/>
     <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
