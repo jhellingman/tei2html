@@ -166,12 +166,14 @@
         <xsl:param name="node"/>
         <xsl:param name="nodes"/>
 
+        <xsl:param name="position" select="position()"/> <!-- that is, position of context group -->
+
         <!-- Does any of the nodes contains the node sought after? -->
         <xsl:for-each select="$nodes">
             <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
                 <xsl:call-template name="generate-filename-for">
                     <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="position()"/>
+                    <xsl:with-param name="position" select="$position"/>
                 </xsl:call-template>
             </xsl:if>
         </xsl:for-each>
@@ -180,7 +182,7 @@
         <xsl:if test="(generate-id(..) = generate-id($node)) and position() = 1">
             <xsl:call-template name="generate-filename-for">
                 <xsl:with-param name="node" select=".."/>
-                <xsl:with-param name="position" select="position()"/>
+                <xsl:with-param name="position" select="$position"/>
             </xsl:call-template>
         </xsl:if>
 
@@ -210,6 +212,7 @@
 
     <xsl:template name="manifest.div0fragment">
         <xsl:param name="nodes"/>
+
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
             <xsl:attribute name="id">                
@@ -242,6 +245,7 @@
 
     <xsl:template name="spine.div0fragment">
         <xsl:param name="nodes"/>
+
         <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
             <xsl:attribute name="idref">
                 <xsl:call-template name="generate-id-for">
