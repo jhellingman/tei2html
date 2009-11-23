@@ -97,6 +97,18 @@
 
     <xsl:template match="pb">
         <xsl:choose>
+            <!-- In HTML, we do not allow a span element at the top-level. -->
+            <xsl:when test="ancestor::p">
+                <xsl:call-template name="pb"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:call-template name="pb"/></p>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="pb">
+        <xsl:choose>
             <xsl:when test="@n">
                 <span class="pagenum">[<a>
                     <xsl:call-template name="generate-id-attribute"/>

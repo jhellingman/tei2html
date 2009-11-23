@@ -92,9 +92,7 @@
                     <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                 </content>
                 <xsl:if test="div1">
-                    <navMap>
-                        <xsl:apply-templates select="div1" mode="navMap"/>
-                    </navMap>
+                    <xsl:apply-templates select="div1" mode="navMap"/>
                 </xsl:if>
             </navPoint>
         </xsl:if>
@@ -114,9 +112,7 @@
                     <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                 </content>
                 <xsl:if test="div2">
-                    <navMap>
-                        <xsl:apply-templates select="div2" mode="navMap"/>
-                    </navMap>
+                    <xsl:apply-templates select="div2" mode="navMap"/>
                 </xsl:if>
             </navPoint>
         </xsl:if>
@@ -125,7 +121,7 @@
 
     <xsl:template match="div2" mode="navMap">
         <xsl:if test="head">
-            <navPoint class="chapter">
+            <navPoint class="section">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                 <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
