@@ -43,7 +43,10 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <a href="#{$target}">
+                <a>
+                    <xsl:call-template name="generate-href-for">
+                        <xsl:with-param name="node" select="//*[@id=$target]"/>
+                    </xsl:call-template>
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
@@ -56,6 +59,27 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:template name="generate-href-for">
+        <xsl:param name="node"/>
+
+        <xsl:attribute name="href">
+            <xsl:call-template name="generate-url-for">
+                <xsl:with-param name="node" select="$node"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="generate-url-for">
+        <xsl:param name="node"/>
+
+        <!-- Determine whether the source and destination are in the same file -->
+        <xsl:variable name="sourcefile"><xsl:call-template name="splitter-generate-filename-for"/></xsl:variable>
+        <xsl:variable name="targetfile"><xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$node"/></xsl:call-template></xsl:variable>
+        <xsl:if test="$sourcefile != $targetfile"><xsl:value-of select="$targetfile"/></xsl:if>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>
+    </xsl:template>
+
 
 
     <!--====================================================================-->

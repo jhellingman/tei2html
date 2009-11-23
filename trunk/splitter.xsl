@@ -224,7 +224,7 @@
                     <xsl:with-param name="position" select="position()"/>
                 </xsl:call-template>
             </xsl:attribute>
-            <xsl:attribute name="mediatype">application/xhtml+xml</xsl:attribute>
+            <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
         </item>
     </xsl:template>
 
@@ -233,7 +233,7 @@
             <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
-            <xsl:attribute name="mediatype">application/xhtml+xml</xsl:attribute>
+            <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
         </item>
     </xsl:template>
 

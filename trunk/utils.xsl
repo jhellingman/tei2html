@@ -107,7 +107,7 @@
     <xsl:template name="setLangAttribute">
         <xsl:if test="@lang">
             <xsl:choose>
-                <xsl:when test="document('')/xsl:stylesheet/xsl:output/@method = 'xml'">
+                <xsl:when test="$outputmethod = 'xml'">
                     <xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>

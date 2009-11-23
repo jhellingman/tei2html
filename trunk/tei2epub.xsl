@@ -23,7 +23,7 @@
     <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
-    <xsl:include href="references.xsl"/>
+    <xsl:include href="epub.references.xsl"/>
     <xsl:include href="block.xsl"/>
     <xsl:include href="notes.xsl"/>
     <xsl:include href="drama.xsl"/>
@@ -45,7 +45,6 @@
         method="xml"
         encoding="UTF-8"/>
 
-
     <!--====================================================================-->
 
     <xsl:param name="basename" select="'book'"/>
@@ -61,6 +60,7 @@
 
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
+    <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
     <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author" />

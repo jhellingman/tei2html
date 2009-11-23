@@ -43,7 +43,7 @@
                 <manifest>
                     
                     <item id="ncx"
-                         href="book.ncx"
+                         href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
                     <!-- Content Parts -->
@@ -62,9 +62,11 @@
                     <xsl:apply-templates select="text" mode="spine"/>
                 </spine>
 
+                <!--
                 <guide>
                     <reference />
                 </guide>
+                -->
 
             </package>
 
@@ -119,7 +121,7 @@
         <item>
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="odf.getimagefilename"/></xsl:attribute>
-            <xsl:attribute name="mediatype"><xsl:call-template name="odf.getimagefiletype"/></xsl:attribute>
+            <xsl:attribute name="media-type"><xsl:call-template name="odf.getimagefiletype"/></xsl:attribute>
         </item>
     </xsl:template>
 
