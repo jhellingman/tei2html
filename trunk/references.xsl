@@ -43,7 +43,10 @@
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
-                <a href="#{$target}">
+                <a>
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="//*[@id=$target]"/>
+                    </xsl:call-template>
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>

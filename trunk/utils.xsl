@@ -38,15 +38,6 @@
         </xsl:attribute>
     </xsl:template>
 
-    <xsl:template name="generate-href-attribute">
-        <xsl:attribute name="href">#<xsl:call-template name="generate-id"/></xsl:attribute>
-    </xsl:template>
-
-    <xsl:template name="generate-href-attribute-for">
-        <xsl:param name="node"/>
-        <xsl:attribute name="href">#<xsl:call-template name="generate-id-for"><xsl:with-param name="node"/></xsl:call-template></xsl:attribute>
-    </xsl:template>
-
     <xsl:template name="generate-id">
         <xsl:choose>
             <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>

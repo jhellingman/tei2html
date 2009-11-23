@@ -98,7 +98,7 @@
     <xsl:template match="pb">
         <xsl:choose>
             <!-- In HTML, we do not allow a span element at the top-level. -->
-            <xsl:when test="ancestor::p">
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table">
                 <xsl:call-template name="pb"/>
             </xsl:when>
             <xsl:otherwise>
