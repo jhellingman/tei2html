@@ -47,6 +47,6 @@ system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFilePara
 
 
 system ("$sevenzip a -tzip -mx=0 $basename.epub .\\ePub\\mimetype");
-system ("$sevenzip u -tzip -mx=7 $basename.epub .\\ePub\\*");
+system ("$sevenzip a -tzip -mx=7 -x!mimetype $basename.epub .\\ePub\\*");
 
 system ("$epubcheck $basename.epub");
