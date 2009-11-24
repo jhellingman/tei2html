@@ -2,17 +2,18 @@
 
     <xsl:stylesheet
         xmlns="http://www.daisy.org/z3986/2005/ncx/"
+        xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         version="2.0">
 
 
     <xsl:template match="TEI.2" mode="ncx">
 
-        <xsl:result-document 
+        <xsl:result-document
                 href="{$path}/{$basename}.ncx"
                 doctype-public="-//NISO//DTD ncx 2005-1//EN"
                 doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
-                method="xml" 
+                method="xml"
                 indent="yes"
                 encoding="UTF-8">
             <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
@@ -44,7 +45,7 @@
                     </meta>
 
                     <meta name="dtb:totalPageCount" content="0"/>
-                    <meta name="dtb:maxPageNumber" content="0"/> 
+                    <meta name="dtb:maxPageNumber" content="0"/>
                     <meta name="dtb:generator" content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
 
                 </head>
@@ -58,7 +59,10 @@
                 </docAuthor>
 
                 <navMap>
-                    <xsl:apply-templates select="text" mode="navMap"/>
+                    <xsl:variable name="navMap">
+                        <xsl:apply-templates select="text" mode="navMap"/>
+                    </xsl:variable>
+                    <xsl:apply-templates select="$navMap" mode="playorder"/>
                 </navMap>
 
             </ncx>
@@ -82,7 +86,6 @@
         <xsl:if test="head">
             <navPoint class="part">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
@@ -102,7 +105,6 @@
         <xsl:if test="head">
             <navPoint class="chapter">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
@@ -123,7 +125,6 @@
         <xsl:if test="head">
             <navPoint class="section">
                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <xsl:attribute name="playOrder"><xsl:number level="any" count="div0|div1|div2"/></xsl:attribute>
                 <navLabel>
                     <text>
                         <xsl:apply-templates select="head" mode="navLabel"/>
@@ -143,6 +144,22 @@
     </xsl:template>
 
     <xsl:template match="note" mode="navLabel"/>
+
+
+    <!--== playorder =======================================================-->
+
+    <xsl:template match="@*|node()" mode="playorder">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="playorder"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="ncx:navPoint" mode="playorder">
+        <xsl:copy>
+            <xsl:attribute name="playOrder"><xsl:number level="any" count="ncx:navPoint"/></xsl:attribute>
+            <xsl:apply-templates select="@*|node()" mode="playorder"/>
+        </xsl:copy>
+    </xsl:template>
 
 
     <!--== forget about all the rest =======================================-->

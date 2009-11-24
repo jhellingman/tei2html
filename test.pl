@@ -45,8 +45,10 @@ system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam
 
 system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
 
-
-system ("$sevenzip a -tzip -mx=0 $basename.epub .\\ePub\\mimetype");
-system ("$sevenzip a -tzip -mx=7 -x!mimetype $basename.epub .\\ePub\\*");
+system ("del $basename.epub");
+chdir "epub";
+system ("zip -Xr9D ../$basename.epub mimetype");
+system ("zip -Xr9D ../$basename.epub * -x mimetype");
+chdir "..";
 
 system ("$epubcheck $basename.epub");
