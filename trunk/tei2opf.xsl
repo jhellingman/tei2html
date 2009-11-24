@@ -46,6 +46,10 @@
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
+                    <item id="css"
+                         href="{$basename}.css"
+                         media-type="text/css"/>
+
                     <!-- Content Parts -->
 
                     <xsl:apply-templates select="text" mode="manifest"/>

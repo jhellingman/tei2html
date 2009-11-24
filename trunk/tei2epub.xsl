@@ -78,6 +78,8 @@
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
 
+        <xsl:call-template name="copy-css"/>
+
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
         <xsl:apply-templates/>
@@ -108,6 +110,44 @@
                   <rootfile full-path="{$basename}.opf" media-type="application/oebps-package+xml"/>
                </rootfiles>
             </container>
+        </xsl:result-document>
+    </xsl:template>
+
+
+
+    <xsl:template name="copy-css">
+        <xsl:result-document 
+                href="{$path}/{$basename}.css"
+                method="text" 
+                encoding="UTF-8">
+
+            <xsl:variable name="stylesheetname">
+                <xsl:choose>
+                    <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
+                        <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
+                    </xsl:when>
+                    <xsl:otherwise>style/arctic.css</xsl:otherwise>
+                </xsl:choose>.xml
+            </xsl:variable>
+
+            /* Standard CSS stylesheet */
+            <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
+            <xsl:copy-of select="$stylesheet/*/node()"/>
+
+            /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
+            <xsl:variable name="stylesheetSupplement" select="document(normalize-space($stylesheetname))"/>
+            <xsl:copy-of select="$stylesheetSupplement/*/node()"/>
+
+            /* Standard Aural CSS stylesheet */
+            <xsl:variable name="stylesheetAural" select="document('style/aural.css.xml')"/>
+            <xsl:copy-of select="$stylesheetAural/*/node()"/>
+
+            <xsl:if test="$customCssFile">
+                /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
+                <xsl:variable name="stylesheetCustom" select="document(normalize-space($customCssFile))"/>
+                <xsl:copy-of select="$stylesheetCustom/*/node()"/>
+            </xsl:if>
+
         </xsl:result-document>
     </xsl:template>
 
