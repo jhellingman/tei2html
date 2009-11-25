@@ -281,7 +281,22 @@
                 <xsl:call-template name="generate-html-header"/>
 
                 <body>
-                    <xsl:apply-templates select="$nodes"/>
+                    <xsl:choose>
+                        <xsl:when test="parent::div0 and position() = 1">
+                            <div class="div0">
+                                <xsl:call-template name="generate-id-attribute-for">
+                                    <xsl:with-param name="node" select=".."/>
+                                </xsl:call-template>
+                                <xsl:call-template name="GenerateLabel">
+                                    <xsl:with-param name="div" select=".."/>
+                                </xsl:call-template>
+                                <xsl:apply-templates select="$nodes"/>
+                            </div>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="$nodes"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </body>
             </html>
         </xsl:result-document>

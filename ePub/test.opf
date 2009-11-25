@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.idpf.org/2007/opf"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:opf="http://www.idpf.org/2007/opf"
+         version="2.0"
+         unique-identifier="idbook">
+   <metadata>
+      <dc:title>Main Title of Work Goes Here</dc:title>
+      <dc:creator opf:role="aut">Author of Work (Birth-year—Death-year)</dc:creator>
+      <dc:creator opf:role="aut">A. U. Thor</dc:creator>
+      <dc:creator opf:role="aut">W. Riter</dc:creator>
+      <dc:publisher>Project Gutenberg, Urbana, Illinois, USA.</dc:publisher>
+      <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
+      <dc:language xsi:type="dcterms:RFC4646">en-US</dc:language>
+      <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
+      <dc:date opf:event="publication">8 April 2004</dc:date>
+   </metadata>
+   <manifest>
+      <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
+      <item id="css" href="test.css" media-type="text/css"/>
+      <item id="front-1" href="test-front-1.xhtml" media-type="application/xhtml+xml"/>
+      <item id="bk01-1" href="test-bk01-1.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch04" href="test-ch04.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch05" href="test-ch05.xhtml" media-type="application/xhtml+xml"/>
+      <item id="bk01-3" href="test-bk01-3.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
+      <item id="index" href="test-index.xhtml" media-type="application/xhtml+xml"/>
+      <item id="backmatter" href="test-backmatter.xhtml" media-type="application/xhtml+xml"/>
+      <item id="xd21e129" href="images/hg2101.png" media-type="image/png"/>
+      <item id="test" href="images/test.jpg" media-type="image/jpeg"/>
+      <item id="test1" href="images/test.jpg" media-type="image/jpeg"/>
+      <item id="test2" href="images/test2.jpg" media-type="image/jpeg"/>
+      <item id="tarsier1" href="images/tarsier1.jpg" media-type="image/jpeg"/>
+      <item id="tarsier2" href="images/tarsier2.jpg" media-type="image/jpeg"/>
+   </manifest>
+   <spine toc="ncx">
+      <itemref linear="yes" idref="front-1"/>
+      <itemref linear="yes" idref="bk01-1"/>
+      <itemref linear="yes" idref="ch04"/>
+      <itemref linear="yes" idref="ch05"/>
+      <itemref linear="yes" idref="bk01-3"/>
+      <itemref linear="yes" idref="ch6"/>
+      <itemref linear="yes" idref="index"/>
+      <itemref linear="yes" idref="backmatter"/>
+   </spine>
+</package>

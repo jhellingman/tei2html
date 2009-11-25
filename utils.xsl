@@ -38,6 +38,15 @@
         </xsl:attribute>
     </xsl:template>
 
+    <xsl:template name="generate-id-attribute-for">
+        <xsl:param name="node" select="."/>
+        <xsl:attribute name="id">
+            <xsl:call-template name="generate-id-for">
+                <xsl:with-param name="node" select="$node"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
     <xsl:template name="generate-id">
         <xsl:choose>
             <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
@@ -46,7 +55,7 @@
     </xsl:template>
 
     <xsl:template name="generate-id-for">
-        <xsl:param name="node"/>
+        <xsl:param name="node" select="."/>
         <xsl:param name="position"/>
         <xsl:choose>
             <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
