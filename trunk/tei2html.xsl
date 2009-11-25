@@ -68,6 +68,7 @@
     <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
+    <xsl:variable name="outputformat" select="'html'"/>
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
     <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author" />

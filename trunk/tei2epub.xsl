@@ -62,6 +62,7 @@
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
+    <xsl:variable name="outputformat" select="'epub'"/>
 
     <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title" />
     <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author" />
@@ -78,7 +79,7 @@
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
 
-        <xsl:call-template name="copy-css"/>
+        <xsl:call-template name="copy-stylesheets"/>
 
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
@@ -115,7 +116,7 @@
 
 
 
-    <xsl:template name="copy-css">
+    <xsl:template name="copy-stylesheets">
         <xsl:result-document 
                 href="{$path}/{$basename}.css"
                 method="text" 
@@ -131,24 +132,24 @@
             </xsl:variable>
 
             /* Standard CSS stylesheet */
-            <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
-            <xsl:copy-of select="$stylesheet/*/node()"/>
+            <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
 
-            /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
-            <xsl:variable name="stylesheetSupplement" select="document(normalize-space($stylesheetname))"/>
-            <xsl:copy-of select="$stylesheetSupplement/*/node()"/>
+            /* Supplement CSS stylesheet "<xsl:value-of select="normalize-space($stylesheetname)"/>" */
+            <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
 
             /* Standard Aural CSS stylesheet */
-            <xsl:variable name="stylesheetAural" select="document('style/aural.css.xml')"/>
-            <xsl:copy-of select="$stylesheetAural/*/node()"/>
+            <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
 
             <xsl:if test="$customCssFile">
-                /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
-                <xsl:variable name="stylesheetCustom" select="document(normalize-space($customCssFile))"/>
-                <xsl:copy-of select="$stylesheetCustom/*/node()"/>
+                /* Custom CSS stylesheet "<xsl:value-of select="normalize-space($customCssFile)"/>" */
+                <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
             </xsl:if>
+
+            /* Generated CSS for specific elements */
+            <xsl:apply-templates select="/TEI.2/text" mode="css"/>
 
         </xsl:result-document>
     </xsl:template>
+
 
 </xsl:stylesheet>
