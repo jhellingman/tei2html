@@ -1,0 +1,680 @@
+
+
+            /* Standard CSS stylesheet */
+            
+
+
+body
+{
+    font: 100%/1.2em "Times New Roman", Times, serif;
+    margin: 1.58em 16%;
+    text-align: left;
+}
+
+
+/***** Titlepage *****/
+
+.titlePage
+{
+    border: #DDDDDD 2px solid;
+    margin: 3em 0% 7em 0%;
+    padding: 5em 10% 6em 10%;
+}
+
+h1.docTitle
+{
+    font-size:1.6em;
+    line-height:2em;
+}
+
+h2.byline
+{
+    font-size:1.1em;
+    font-weight:normal;
+    line-height:1.44em;
+}
+
+span.docAuthor
+{
+    font-size:1.2em;
+    font-weight:bold;
+}
+
+h2.docImprint
+{
+    font-size:1.2em;
+    font-weight:normal;
+}
+
+
+/***** End Titlepage *****/
+
+
+.transcribernote
+{
+    background-color:#DDE;
+    border:black 1px dotted;
+    color:#000;
+    font-family:sans-serif;
+    font-size:80%;
+    margin:2em 5%;
+    padding:1em;
+}
+
+.advertisment
+{
+    background-color:#FFFEE0;
+    border:black 1px dotted;
+    color:#000;
+    margin:2em 5%;
+    padding:1em;
+}
+
+.div0
+{
+    padding-top: 5.6em;
+}
+
+.div1
+{
+    padding-top: 4.8em;
+}
+
+.index
+{
+    font-size: 80%;
+}
+
+.div2
+{
+    padding-top: 3.6em;
+}
+
+.div3, .div4, .div5
+{
+    padding-top: 2.4em;
+}
+
+.footnotes .body,
+.footnotes .div1
+{
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4
+{
+    clear: both;
+    font-style: normal;
+    text-transform: none;
+}
+
+h3, .pseudoh3
+{
+    font-size:1.2em;
+    line-height:1.2em;
+}
+
+h3.label
+{
+    font-size:1em;
+    line-height:1.2em;
+    margin-bottom:0;
+}
+
+h4, pseudoh4
+{
+    font-size:1em;
+    line-height:1.2em;
+}
+
+
+.alignleft
+{
+    text-align:left;
+}
+
+.alignright
+{
+    text-align:right;
+}
+
+.alignblock
+{
+    text-align:justify;
+}
+
+p.tb, hr.tb
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+p.argument, p.note, p.tocArgument
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    text-indent:0;
+}
+
+p.argument, p.tocArgument
+{
+    margin:1.58em 10%;
+}
+
+p.tocChapter
+{
+    margin:1.58em 0%;
+}
+
+p.tocSection
+{
+    margin:0.7em 5%;
+}
+
+
+.epigraph
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    width: 60%;
+    margin-left: auto;
+}
+
+.epigraph span.bibl
+{
+    display: block;
+    text-align: right;
+}
+
+.trailer
+{
+    clear: both;
+    padding-top: 2.4em;
+    padding-bottom: 1.6em;
+}
+
+.floatLeft
+{
+    float:left;
+    margin:10px 10px 10px 0;
+}
+
+.floatRight
+{
+    float:right;
+    margin:10px 0 10px 10px;
+}
+
+p.figureHead
+{
+    font-size:100%;
+    text-align:center;
+}
+
+.figAnnotation
+{
+    font-size:80%;
+    position:relative;
+    margin: 0 auto; /* center this */
+}
+
+.figTopLeft, .figBottomLeft
+{
+    float: left;
+}
+
+.figTop, .figBottom
+{
+}
+
+.figTopRight, .figBottomRight
+{
+    float: right;
+}
+
+.figure p
+{
+    font-size:80%;
+    margin-top:0;
+    text-align:center;
+}
+
+img
+{
+    border-width:0;
+}
+
+p.smallprint,li.smallprint
+{
+    color:#666666;
+    font-size:80%;
+}
+
+span.parnum
+{
+    font-weight: bold;
+}
+
+.leftnote
+{
+    font-size:0.8em;
+    height:0;
+    left:1%;
+    line-height:1.2em;
+    position:absolute;
+    text-indent:0;
+    width:14%;
+}
+
+.pagenum
+{
+    display:inline;
+    font-size:70%;
+    font-style:normal;
+    margin:0;
+    padding:0;
+    position:absolute;
+    right:1%;
+    text-align:right;
+}
+
+a.noteref, a.pseudonoteref
+{
+    font-size: 80%;
+    text-decoration: none;
+    vertical-align: 0.25em;
+}
+
+
+
+.displayfootnote
+{
+    display: none;
+}
+
+div.footnotes
+{
+    margin-top: 1em;
+    padding: 0;
+}
+
+hr.fnsep
+{
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    width: 25%;
+}
+
+p.footnote
+{
+    font-size: 80%;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+p.footnote .label
+{
+    float:left;
+    width:2em;
+    height:12pt;
+    display:block;
+}
+
+.footnotes td, .footnotes th, .footnotes .tablecaption
+{
+    font-size: 80%;
+}
+
+.centertable
+{
+    /* center the table */
+    margin: 0px auto; 
+    display:table; /* used to make the block shrink to the actual size */
+}
+
+
+/****** Poetry ******/
+
+.lgouter
+{
+    margin-left: auto;
+    margin-right: auto;
+    display:table; /* used to make the block shrink to the actual size */
+}
+
+.lg
+{
+    text-align: left;
+}
+
+.lg h4, .lgouter h4
+{
+    font-weight: normal;
+}
+
+.lg .linenum
+{
+    color:#777;
+    font-size:90%;
+    left:-2.5em;
+    margin:0;
+    position:absolute;
+    text-align:center;
+    text-indent:0;
+    top:auto;
+    width:1.75em;
+}
+
+p.line
+{
+    margin: 0 0% 0 0%;
+}
+
+span.hemistich /* invisible text to achieve visual effect of hemistich indentation. */
+{
+    color: white;
+}
+
+.versenum
+{
+    font-weight:bold;
+}
+
+
+/***** Drama *****/
+
+
+.speaker
+{
+    font-weight: bold;
+    margin-bottom: 0.4em;
+}
+
+.sp .line
+{
+    margin: 0 10%;
+    text-align: left;
+}
+
+
+/***** End Drama *****/
+
+
+/* right aligned page number in table of contents */
+.tocPagenum, .flushright
+{
+    position: absolute;
+    right: 16%;
+    top: auto;
+}
+
+.footnotes .line
+{
+    font-size:80%;
+}
+
+span.corr
+{
+    border-bottom:1px dotted red;
+}
+
+span.abbr
+{
+    border-bottom:1px dotted gray;
+}
+
+span.measure
+{
+    border-bottom:1px dotted green;
+}
+
+/****** Font Styles and Colors *****/
+
+.letterspaced
+{
+    letter-spacing:0.2em;
+}
+
+.smallcaps
+{
+    font-variant:small-caps;
+}
+
+.caps
+{
+    text-transform:uppercase;
+}
+
+.fraktur
+{
+    font-family: 'Walbaum-Fraktur';
+}
+
+/* overline is actually a bit too high; overtilde is approximated with overline */
+.overline, .overtilde
+{
+    text-decoration: overline;
+}
+
+.rm
+{
+    font-style: normal;
+}
+
+.red
+{
+    color: red;
+}
+
+/***** End Font Styles and Colors *****/
+
+
+hr
+{
+    clear:both;
+    height:1px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1em;
+    text-align:center;
+    width:45%;
+}
+
+h2.docImprint,h1.docTitle,h2.byline,h2.docTitle,.aligncenter,div.figure
+{
+    text-align:center;
+}
+
+h1,h2
+{
+    font-size:1.44em;
+    line-height:1.5em;
+}
+
+h1.label,h2.label
+{
+    font-size:1.2em;
+    line-height:1.2em;
+    margin-bottom:0;
+}
+
+h5,h6
+{
+    font-size:1em;
+    font-style:italic;
+    line-height:1em;
+}
+
+p,p.initial
+{
+    text-indent:0;
+}
+
+p.firstlinecaps:first-line
+{
+    text-transform: uppercase;
+}
+
+p.dropcap:first-letter
+{
+    float: left;
+    clear: left;
+    margin: 0em 0.05em 0 0;
+    padding: 0px;
+    line-height: 0.8em;
+    font-size: 420%;
+    vertical-align:super;
+}
+
+.lg
+{
+    padding: .5em 0% .5em 0%;
+}
+
+p.quote,div.blockquote,div.argument
+{
+    font-size:0.9em;
+    line-height:1.2em;
+    margin:1.58em 5%;
+}
+
+.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden
+{
+    text-decoration:none;
+}
+
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+ol.AL { list-style-type: lower-alpha; }
+ol.AU { list-style-type: upper-alpha; }
+ol.RU { list-style-type: upper-roman; }
+ol.RL { list-style-type: lower-roman; }
+.lsdisc { list-style-type: disc; }
+.lsoff { list-style-type: none; }
+
+.castlist, .castitem { list-style-type: none; }
+
+
+/***** External Links *****/
+
+.pglink
+{
+    background: url(images/book.png) center right no-repeat;
+    padding-right: 18px;
+}
+
+.catlink
+{
+    background: url(images/card.png) center right no-repeat;
+    padding-right: 17px;
+}
+
+.exlink
+{
+    background: url(images/external.png) center right no-repeat;
+    padding-right: 13px;
+}
+
+.pglink:hover
+{
+    background-color: #DCFFDC;
+}
+
+.catlink:hover
+{
+    background-color: #FFFFDC;
+}
+
+.exlink:hover
+{
+    background-color: #FFDCDC;
+}
+
+
+
+
+            /* Supplement CSS stylesheet "style/arctic.css.xml" */
+            
+
+
+body
+{
+    background: #FFFFFF;
+    font-family: "Times New Roman", Times, serif;
+}
+
+body, a.hidden
+{
+    color: black;
+}
+
+h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
+{
+    color: #001FA4;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+p.byline
+{
+    font-style: italic;
+    margin-bottom: 2em;
+}
+
+.figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum, .stage
+{
+    color: #001FA4;
+}
+
+.rightnote, .pagenum, .linenum, .pagenum a
+{
+    color: #AAAAAA;
+}
+
+a.hidden:hover, a.noteref:hover
+{
+    color: red;
+}
+
+p.dropcap:first-letter
+{
+    color: #001FA4;
+    font-weight: bold;
+}
+
+sub, sup 
+{ 
+	line-height: 0;
+}
+
+
+
+
+
+            /* Standard Aural CSS stylesheet */
+            
+
+
+.pagenum, .linenum
+{
+    speak: none;
+}
+
+
+
+
+            /* Generated CSS for specific elements */
+            
+
+                #xd21e120
+                {
+                    font-size:20pt;
+            color:red;
+            background-color:yellow;
+            
+                }
+            

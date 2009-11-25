@@ -33,28 +33,35 @@
     <!-- Divisions and Headings -->
 
     <xsl:template name="GenerateLabel">
+        <xsl:param name="div" select="."/>
         <xsl:param name="headingLevel" select="'h2'"/>
-        <xsl:if test="contains(./@rend, 'label(yes)')">
+
+        <xsl:if test="contains($div/@rend, 'label(yes)')">
             <xsl:element name="{$headingLevel}">
                 <xsl:attribute name="class">label</xsl:attribute>
-                <xsl:call-template name="TranslateType"/>
-                <xsl:value-of select="@n"/>
+                <xsl:call-template name="TranslateType">
+                    <xsl:with-param name="type" select="$div/@type"/>
+                </xsl:call-template>
+                <xsl:value-of select="$div/@n"/>
             </xsl:element>
         </xsl:if>
     </xsl:template>
 
+
     <xsl:template name="TranslateType">
+        <xsl:param name="type" select="@type"/>
+
         <xsl:choose>
-            <xsl:when test="@type='Appendix' or @type='appendix'">
+            <xsl:when test="$type='Appendix' or $type='appendix'">
                 <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="@type='Chapter' or @type='chapter'">
+            <xsl:when test="$type='Chapter' or $type='chapter'">
                 <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="@type='Part' or @type='part'">
+            <xsl:when test="$type='Part' or $type='part'">
                 <xsl:value-of select="$strPart"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="@type='Book' or @type='book'">
+            <xsl:when test="$type='Book' or $type='book'">
                 <xsl:value-of select="$strBook"/><xsl:text> </xsl:text>
             </xsl:when>
         </xsl:choose>
