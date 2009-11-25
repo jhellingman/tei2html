@@ -459,6 +459,12 @@ span.measure
     font-family: 'Walbaum-Fraktur';
 }
 
+/* overline is actually a bit too high; overtilde is approximated with overline */
+.overline, .overtilde
+{
+    text-decoration: overline;
+}
+
 .rm
 {
     font-style: normal;

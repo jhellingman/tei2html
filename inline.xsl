@@ -35,14 +35,14 @@
     <!--====================================================================-->
     <!-- Text styles -->
 
-    <!-- TODO: line is actually too high for the intended use. -->
-    <xsl:template match="hi[@rend='overline']">
-        <span style="text-decoration: overline;"><xsl:apply-templates/></span>
+
+    <!-- Mapped to HTML elements -->
+    <xsl:template match="hi[@rend='italic']">
+        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
     </xsl:template>
 
-    <!-- TODO: find way to make very wide tildes over words -->
-    <xsl:template match="hi[@rend='overtilde']">
-        <span style="text-decoration: overline;"><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='bold']">
+        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></b>
     </xsl:template>
 
     <xsl:template match="hi[@rend='sup']">
@@ -53,24 +53,14 @@
         <sub><xsl:apply-templates/></sub>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='italic']">
-        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
-    </xsl:template>
 
-    <xsl:template match="hi[@rend='bold']">
-        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></b>
-    </xsl:template>
-
+    <!-- Mapped to defined CSS classes -->
     <xsl:template match="hi[@rend='sc']">
         <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='caps']">
         <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='font(fraktur)']">
-        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='ex']">
@@ -81,13 +71,26 @@
         <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='overline']">
+        <span class="overline"><xsl:apply-templates/></span>
+    </xsl:template>
+
+    <xsl:template match="hi[@rend='overtilde']">
+        <span class="overtilde"><xsl:apply-templates/></span>
+    </xsl:template>
+
+    <xsl:template match="hi[contains(@rend, 'font(fraktur)')]">
+        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+    </xsl:template>
+
+
     <xsl:template match="hi">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'font-size(')">
+            <xsl:when test="contains(@rend, '(')">
                 <span>
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:call-template name="setLangAttribute"/>
-                    <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
+                    <!-- Actual style is put in stylesheet, rendered in CSS mode -->
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
@@ -95,6 +98,53 @@
                 <i><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template match="hi" mode="css">
+        <xsl:if test="contains(@rend, '(')">
+            <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+            <xsl:if test="normalize-space($properties) != ''">
+
+                #<xsl:call-template name="generate-id"/>
+                {
+                    <xsl:value-of select="$properties"/>
+                }
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="translate-rend-attribute">
+        <xsl:param name="rend" select="normalize-space(@rend)"/>
+
+        <!-- A rendition ladder is straighfowardly converted to CSS, by taking the 
+             characters before the ( as the css property, and the characters 
+             between ( and ) as the value. We convert an entire string
+             by simply doing the head, and then recursively the tail -->
+
+        <xsl:if test="$rend != ''">
+            <xsl:call-template name="filter-css-property">
+                <xsl:with-param name="property" select="substring-before($rend, '(')"/>
+                <xsl:with-param name="value" select="substring-before(substring-after($rend, '('), ')')"/>
+            </xsl:call-template>
+
+            <xsl:call-template name="translate-rend-attribute">
+                <xsl:with-param name="rend" select="normalize-space(substring-after($rend, ')'))"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template name="filter-css-property">
+        <xsl:param name="property"/>
+        <xsl:param name="value"/>
+
+        <xsl:choose>
+            <xsl:when test="$property='font' and $value='fraktur'"/>
+            <xsl:otherwise>
+                <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/>;
+            </xsl:otherwise>
+        </xsl:choose>
+
     </xsl:template>
 
 
@@ -108,7 +158,7 @@
         <span class="Arabic"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>
 
-
+    <!-- Foreign phrases are not styled by default, but we do set the language on them -->
     <xsl:template match="foreign">
         <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
     </xsl:template>

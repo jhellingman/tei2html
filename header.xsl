@@ -115,54 +115,62 @@
 
     <xsl:template name="include-stylesheets">
 
-        <xsl:if test="$optionExternalCSS = 'Yes'">
-            <link href="style/gutenberg.css"    rel="stylesheet"            type="text/css"/>
-            <link href="style/arctic.css"       rel="stylesheet"            type="text/css" title="Artic Blue"/>
-
-            <link href="style/amazonia.css"     rel="alternate stylesheet"  type="text/css" title="Amazonia Green"/>
-            <link href="style/borneo.css"       rel="alternate stylesheet"  type="text/css" title="Borneo Brown"/>
-
-            <link href="style/print.css"        rel="stylesheet"            type="text/css" media="print"/>
+        <xsl:if test="$outputformat = 'epub'">
+            <!-- In ePub, we collect all stylesheets into a single file -->
+            <link href="{$basename}.css"    rel="stylesheet"            type="text/css"/>
         </xsl:if>
 
-        <xsl:variable name="stylesheetname">
-            <xsl:choose>
-                <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
-                    <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
-                </xsl:when>
-                <xsl:otherwise>style/arctic.css</xsl:otherwise>
-            </xsl:choose>.xml
-        </xsl:variable>
+        <xsl:if test="$outputformat = 'html'">
+            <xsl:if test="$optionExternalCSS = 'Yes'">
+                <link href="style/gutenberg.css"    rel="stylesheet"            type="text/css"/>
+                <link href="style/arctic.css"       rel="stylesheet"            type="text/css" title="Artic Blue"/>
 
-        <xsl:if test="$optionExternalCSS = 'No'">
-            <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
-            <style type="text/css">
-                /* Standard CSS stylesheet */
-                <xsl:variable name="stylesheet" select="document('style/gutenberg.css.xml')"/>
-                <xsl:copy-of select="$stylesheet/*/node()"/>
+                <link href="style/amazonia.css"     rel="alternate stylesheet"  type="text/css" title="Amazonia Green"/>
+                <link href="style/borneo.css"       rel="alternate stylesheet"  type="text/css" title="Borneo Brown"/>
 
-                /* Supplement CSS stylesheet "<xsl:value-of select="$stylesheetname"/>" */
-                <xsl:variable name="stylesheetSupplement" select="document(normalize-space($stylesheetname))"/>
-                <xsl:copy-of select="$stylesheetSupplement/*/node()"/>
-
-                /* Standard Aural CSS stylesheet */
-                <xsl:variable name="stylesheetAural" select="document('style/aural.css.xml')"/>
-                <xsl:copy-of select="$stylesheetAural/*/node()"/>
-
-                <xsl:if test="$customCssFile">
-                    /* Custom CSS stylesheet "<xsl:value-of select="$customCssFile"/>" */
-                    <xsl:variable name="stylesheetCustom" select="document(normalize-space($customCssFile))"/>
-                    <xsl:copy-of select="$stylesheetCustom/*/node()"/>
-                </xsl:if>
-            </style>
-            <!-- Pull in CSS sheet for print (using Prince). -->
-            <xsl:if test="$optionPrinceMarkup = 'Yes'">
-                <style type="text/css" media="print">
-                    /* CSS stylesheet for printing */
-                    <xsl:variable name="printstylesheet" select="document('style/print.css.xml')"/>
-                    <xsl:copy-of select="$printstylesheet/*/node()"/>
-                </style>
+                <link href="style/print.css"        rel="stylesheet"            type="text/css" media="print"/>
             </xsl:if>
+
+            <xsl:variable name="stylesheetname">
+                <xsl:choose>
+                    <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
+                        <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
+                    </xsl:when>
+                    <xsl:otherwise>style/arctic.css</xsl:otherwise>
+                </xsl:choose>.xml
+            </xsl:variable>
+
+            <xsl:if test="$optionExternalCSS = 'No'">
+                <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
+                <style type="text/css">
+                    /* Standard CSS stylesheet */
+                    <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
+
+                    /* Supplement CSS stylesheet "<xsl:value-of select="normalize-space($stylesheetname)"/>" */
+                    <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
+
+                    /* Standard Aural CSS stylesheet */
+                    <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
+
+                    <xsl:if test="$customCssFile">
+                        /* Custom CSS stylesheet "<xsl:value-of select="normalize-space($customCssFile)"/>" */
+                        <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
+                    </xsl:if>
+                </style>
+                <!-- Pull in CSS sheet for print (using Prince). -->
+                <xsl:if test="$optionPrinceMarkup = 'Yes'">
+                    <style type="text/css" media="print">
+                        /* CSS stylesheet for printing */
+                        <xsl:copy-of select="document('style/print.css.xml')/*/node()"/>
+                    </style>
+                </xsl:if>
+            </xsl:if>
+
+             <style type="text/css">
+                /* Generated CSS for specific elements */
+                <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+            </style>
+
         </xsl:if>
 
     </xsl:template>
@@ -174,6 +182,11 @@
     <!-- Suppress the header in the output -->
 
     <xsl:template match="teiHeader"/>
+
+
+
+    <!-- Ignore content in css-mode -->
+    <xsl:template match="text()" mode="css"/>
 
 
 </xsl:stylesheet>
