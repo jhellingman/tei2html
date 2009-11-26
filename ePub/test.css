@@ -670,11 +670,35 @@ sub, sup
             /* Generated CSS for specific elements */
             
 
-                #xd21e120
-                {
-                    font-size:20pt;
+            #xd22e120
+            {
+                font-size:20pt;
             color:red;
             background-color:yellow;
             
-                }
+            }
+        
+        
+        #xd22e605
+        {
+            background: url(images/initial-A.gif) no-repeat top left;
             
+                padding-top: 45px;
+            
+        }
+
+        #xd22e605init
+        {
+            float: left;
+            width: 90px;
+            height: 95px;
+            background: url(images/initial-A.gif) no-repeat;
+            
+                background-position: 0px -45px;
+            
+            text-align: right;
+            color: white;
+            font-size: 1px;
+        }
+
+    

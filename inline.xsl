@@ -101,50 +101,15 @@
     </xsl:template>
 
 
-    <xsl:template match="hi" mode="css">
-        <xsl:if test="contains(@rend, '(')">
-            <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
-            <xsl:if test="normalize-space($properties) != ''">
+    <xsl:template match="hi[contains(@rend, '(')]" mode="css">
+        <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+        <xsl:if test="normalize-space($properties) != ''">
 
-                #<xsl:call-template name="generate-id"/>
-                {
-                    <xsl:value-of select="$properties"/>
-                }
-            </xsl:if>
+            #<xsl:call-template name="generate-id"/>
+            {
+                <xsl:value-of select="$properties"/>
+            }
         </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="translate-rend-attribute">
-        <xsl:param name="rend" select="normalize-space(@rend)"/>
-
-        <!-- A rendition ladder is straighfowardly converted to CSS, by taking the 
-             characters before the ( as the css property, and the characters 
-             between ( and ) as the value. We convert an entire string
-             by simply doing the head, and then recursively the tail -->
-
-        <xsl:if test="$rend != ''">
-            <xsl:call-template name="filter-css-property">
-                <xsl:with-param name="property" select="substring-before($rend, '(')"/>
-                <xsl:with-param name="value" select="substring-before(substring-after($rend, '('), ')')"/>
-            </xsl:call-template>
-
-            <xsl:call-template name="translate-rend-attribute">
-                <xsl:with-param name="rend" select="normalize-space(substring-after($rend, ')'))"/>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="filter-css-property">
-        <xsl:param name="property"/>
-        <xsl:param name="value"/>
-
-        <xsl:choose>
-            <xsl:when test="$property='font' and $value='fraktur'"/>
-            <xsl:otherwise>
-                <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/>;
-            </xsl:otherwise>
-        </xsl:choose>
-
     </xsl:template>
 
 

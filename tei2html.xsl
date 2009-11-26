@@ -32,6 +32,7 @@
     <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
+    <xsl:include href="css.xsl"/>
     <xsl:include href="references.xsl"/>
     <xsl:include href="block.xsl"/>
     <xsl:include href="notes.xsl"/>
