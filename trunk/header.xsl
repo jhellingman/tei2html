@@ -184,9 +184,4 @@
     <xsl:template match="teiHeader"/>
 
 
-
-    <!-- Ignore content in css-mode -->
-    <xsl:template match="text()" mode="css"/>
-
-
 </xsl:stylesheet>

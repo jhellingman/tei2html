@@ -1,25 +1,53 @@
 # wipeIds.pl -- wipe superfluous ids from an HTML document.
 
-$inputFile = $ARGV[0];
+use strict;
+
+my $inputFile = $ARGV[0];
 open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-%refHash = ();
+my %refHash = ();
 
 # Collect IDs being referenced in the file.
 while (<INPUTFILE>)
 {
-    $line = $_;
-    $remainder = $line;
+    my $line = $_;
+    my $remainder = $line;
     while ($remainder =~ m/<(.*?)>/)
     {
-        $tag = $1;
+        my $tag = $1;
         $remainder = $';
-        $href = getAttrVal("href", $tag);
+        my $href = getAttrVal("href", $tag);
 
-        if ($href =~ m/^#([a-z0-9.-]+)$/i) 
+        if ($href =~ m/^#([a-z][a-z0-9.-]+)$/i) 
         {
-            $ref = $1;
+            my $ref = $1;
             $refHash{$ref}++;
+        }
+
+        if ($tag =~ m/^style\b/i) 
+        {
+            my $css = "";
+
+            # parse CSS rules for ID selectors until </style>
+            while (<INPUTFILE>)
+            {
+                if ($_ =~ m/<\/style>/si)
+                {
+                    $css .= $`;
+                    $remainder = $';
+                    last;
+                }
+                else
+                {
+                    $css .= $_;
+                }
+            }
+
+            my @refs = $css =~ m/#([a-z][a-z0-9.-]+)/gsi;
+            foreach my $ref (@refs) 
+            {
+                $refHash{$ref}++;
+            }
         }
     }
 }
@@ -31,14 +59,14 @@ open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
 # Remove all unused IDs.
 while (<INPUTFILE>)
 {
-    $remainder = $_;
-    $output = "";
+    my $remainder = $_;
+    my $output = "";
     while ($remainder =~ m/<(.*?)>/)
     {
         $output .= $`;
-        $tag = $1;
+        my $tag = $1;
         $remainder = $';
-        $id = getAttrVal("id", $tag);
+        my $id = getAttrVal("id", $tag);
         # $href = getAttrVal("href", $tag);
 
         if ($id ne "") 
@@ -64,13 +92,16 @@ while (<INPUTFILE>)
     # Remove multiple spaces:
     $output =~ s/[\t ]+/ /g;
 
-	# Remove end-of-line spaces:
+    # Remove end-of-line spaces:
     $output =~ s/[\t ]*$//g;
 
-	if ($output !~ /^[\t ]*$/) 
-	{
-		print $output;
-	}
+    # Remove initial spaces:
+    $output =~ s/^[\t ]*//g;
+
+    if ($output !~ /^[\t ]*$/) 
+    {
+        print $output;
+    }
 }
 
 close INPUTFILE;
