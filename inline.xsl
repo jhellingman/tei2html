@@ -91,25 +91,18 @@
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:call-template name="setLangAttribute"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
+                    <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
-                <i><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
+                <i>
+                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:apply-templates/>
+                </i>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-
-
-    <xsl:template match="hi[contains(@rend, '(')]" mode="css">
-        <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
-        <xsl:if test="normalize-space($properties) != ''">
-
-            #<xsl:call-template name="generate-id"/>
-            {
-                <xsl:value-of select="$properties"/>
-            }
-        </xsl:if>
     </xsl:template>
 
 

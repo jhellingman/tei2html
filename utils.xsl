@@ -118,16 +118,4 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- CSS Class tagging -->
-
-    <xsl:template name="setCssClassAttribute">
-        <xsl:if test="contains(@rend, 'class(')">
-            <xsl:attribute name="class">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
-            </xsl:attribute>
-        </xsl:if>
-    </xsl:template>
-
-
 </xsl:stylesheet>

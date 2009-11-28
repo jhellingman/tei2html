@@ -269,18 +269,15 @@
             <p>
                 <xsl:call-template name="generate-id-attribute"/>
                 <xsl:call-template name="setLangAttribute"/>
-                <xsl:call-template name="setCssClassAttribute"/>  <!-- TODO: handle alignment differently below -->
 
-                <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
-                <xsl:if test="ancestor::note[place='foot' or not(@place)]">
-                    <xsl:attribute name="class">footnote</xsl:attribute>
-                </xsl:if>
+                <xsl:variable name="class">
+                    <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
+                    <xsl:if test="ancestor::note[place='foot' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
+                    <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                </xsl:variable>
 
-                <xsl:if test="contains(@rend, 'indent(') or contains(@rend, 'align(')">
-                    <xsl:attribute name="style">
-                        <xsl:if test="contains(@rend, 'indent(')">text-indent:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
-                        <xsl:if test="contains(@rend, 'align(')">text-align:<xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>;</xsl:if>
-                    </xsl:attribute>
+                <xsl:if test="normalize-space($class) != ''">
+                    <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
 
                 <xsl:if test="@n">
