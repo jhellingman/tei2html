@@ -315,9 +315,7 @@
     <xsl:template match="byline">
         <p>
             <xsl:call-template name="setLangAttribute"/>
-            <xsl:attribute name="class">byline
-                <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
-            </xsl:attribute>
+            <xsl:attribute name="class">byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </p>
     </xsl:template>

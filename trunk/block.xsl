@@ -185,9 +185,7 @@
     <xsl:template match="trailer">
         <p>
             <xsl:call-template name="setLangAttribute"/>
-            <xsl:attribute name="class">trailer
-                <xsl:if test="contains(@rend, 'align(center)')"><xsl:text> </xsl:text>aligncenter</xsl:if>
-            </xsl:attribute>
+            <xsl:attribute name="class">trailer <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -320,8 +318,9 @@
     <xsl:template match="p[contains(@rend, 'initial-image')]">
         <p>
             <xsl:call-template name="generate-id-attribute"/>
+            <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
-                <xsl:attribute name="id"><xsl:call-template name="generate-id"/>init</xsl:attribute>
+                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
                 <xsl:choose>
                     <xsl:when test="substring(.,1,1) = '&ldquo;'">
                         <xsl:value-of select="substring(.,1,2)"/>
@@ -337,34 +336,38 @@
 
 
     <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css">
-        <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
-        
-        #<xsl:call-template name="generate-id"/>
-        {
-            background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
-            <xsl:if test="contains(@rend, 'initial-offset(')">
-                padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-            </xsl:if>
+        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend)))">
 
-            <xsl:if test="normalize-space($properties) != ''">
-                <xsl:value-of select="$properties"/>
-            </xsl:if>
-        }
+            <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+            
+            .<xsl:call-template name="generate-rend-class-name"/>
+            {
+                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
+                <xsl:if test="contains(@rend, 'initial-offset(')">
+                    padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+                </xsl:if>
 
-        #<xsl:call-template name="generate-id"/>init
-        {
-            float: left;
-            width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
-            height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
-            background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
-            <xsl:if test="contains(@rend, 'initial-offset(')">
-                background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-            </xsl:if>
-            text-align: right;
-            color: white;
-            font-size: 1px;
-        }
+                <xsl:if test="normalize-space($properties) != ''">
+                    <xsl:value-of select="$properties"/>
+                </xsl:if>
+            }
 
+            .<xsl:call-template name="generate-rend-class-name"/>init
+            {
+                float: left;
+                width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
+                height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
+                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
+                <xsl:if test="contains(@rend, 'initial-offset(')">
+                    background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+                </xsl:if>
+                text-align: right;
+                color: white;
+                font-size: 1px;
+            }
+
+        </xsl:if>
+        <xsl:apply-templates mode="css"/>
     </xsl:template>
 
 

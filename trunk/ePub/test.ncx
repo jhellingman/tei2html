@@ -61,29 +61,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="8" class="section" id="xd22e705">
+         <navPoint playOrder="8" class="section" id="xd22e712">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e705"/>
+            <content src="test-index.xhtml#xd22e712"/>
          </navPoint>
-         <navPoint playOrder="9" class="section" id="xd22e710">
+         <navPoint playOrder="9" class="section" id="xd22e717">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e710"/>
+            <content src="test-index.xhtml#xd22e717"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd22e715">
+         <navPoint playOrder="10" class="section" id="xd22e722">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e715"/>
+            <content src="test-index.xhtml#xd22e722"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd22e720">
+         <navPoint playOrder="11" class="section" id="xd22e727">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e720"/>
+            <content src="test-index.xhtml#xd22e727"/>
          </navPoint>
       </navPoint>
    </navMap>

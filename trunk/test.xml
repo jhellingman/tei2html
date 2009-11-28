@@ -456,9 +456,17 @@ a footnote. <hi rend="font-size(20pt) color(red) background-color(yellow)">We ca
 <p rend="align(justify)">[align(justify)] Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">Again Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<note place="foot">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</note>
+</p>
+
+
 <p>Test of entity declaration: 23&prime; is 23 minutes.</p>
 
 <p>Test of parsed entity: &nl; should look like <abbr expan="namelijk">n.l.</abbr></p>
+
+
+<trailer rend="align(center)">The End</trailer>
+
 
 </div1>
 <pb n="23"/>
@@ -504,8 +512,8 @@ a footnote. <hi rend="font-size(20pt) color(red) background-color(yellow)">We ca
 
 <q><text><body><div1>
 <lg type="Group" rend="font(italic)">
-<l>This is a rule of verse in italics</l>
-<l rend="indent(1)">This is another rule of verse</l>
+<l>This is a rule of verse in italics in a footnote</l>
+<l rend="indent(1)">This is another rule of verse in a footnote</l>
 </lg>
 </div1></body></text></q></note></l></lg></lg>
 
