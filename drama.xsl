@@ -40,10 +40,11 @@
     <xsl:template match="lg">
         <xsl:call-template name="closepar"/>
         <div>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:attribute name="class">
                 <xsl:if test="not(parent::lg)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
-                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:attribute>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
@@ -53,24 +54,16 @@
 
     <xsl:template match="lg/head">
         <h4>
-            <xsl:attribute name="class">
-                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>
-                <xsl:if test="contains(@rend, 'align(center)')">aligncenter</xsl:if>
-            </xsl:attribute>
+            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
 
     <xsl:template match="l">
-        <p class="line">
+        <p>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)') or contains(@rend, 'indent(')">
-                <xsl:attribute name="style">
-                    <xsl:if test="contains(@rend, 'font(italic)') or contains(../@rend, 'font(italic)')">font-style: italic; </xsl:if>
-                    <xsl:if test="contains(@rend, 'indent(')">text-indent: <xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em; </xsl:if>
-                </xsl:attribute>
-            </xsl:if>
+            <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
 
             <xsl:if test="@n">
                 <span class="linenum"><xsl:value-of select="@n"/></span>
@@ -103,8 +96,7 @@
 
     <xsl:template match="sp">
         <div>
-            <xsl:attribute name="class">
-                <xsl:if test="contains(@rend, 'font(fraktur)')">fraktur<xsl:text> </xsl:text></xsl:if>sp</xsl:attribute>
+            <xsl:attribute name="class">sp <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
@@ -113,7 +105,8 @@
     <!-- Speaker -->
 
     <xsl:template match="speaker">
-        <p class="speaker">
+        <p>
+            <xsl:attribute name="class">speaker <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </p>
@@ -122,21 +115,24 @@
     <!-- Stage directions -->
 
     <xsl:template match="stage">
-        <p class="stage">
+        <p>
+            <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
-        <p class="stage alignright">
+        <p>
+            <xsl:attribute name="class">stage alignright <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <span class="stage">
+        <span>
+            <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </span>
@@ -145,21 +141,24 @@
     <!-- Cast lists -->
 
     <xsl:template match="castList">
-        <ul class="castlist">
+        <ul>
+            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
-        <li class="castlist">
+        <li>
+            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
 
     <xsl:template match="castGroup">
-        <li class="castlist">
+        <li>
+            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">

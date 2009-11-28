@@ -678,27 +678,177 @@ sub, sup
             
             }
         
+                
+                .xd22e213
+                {
+                    valign:middle; width:2; /* node='cell' rend='image(images/bracket3.gif)valign(middle)width(2)' count='1' */
+                }
+            
+                
+                .xd22e214
+                {
+                    valign:middle; /* node='cell' rend='valign(middle)' count='1' */
+                }
+            
+                
+                .xd22e224
+                {
+                    width:25%; /* node='cell' rend='width(25%)' count='1' */
+                }
+            
+                
+                .xd22e226
+                {
+                    width:75%; /* node='cell' rend='width(75%)' count='1' */
+                }
+            
+                
+                .xd22e236
+                {
+                    width:40%; text-align:center; /* node='table' rend='width(40%) align(center)' count='2' */
+                }
+            
+                
+                .xd22e242
+                {
+                    text-align:right; /* node='cell' rend='align(right)' count='11' */
+                }
+            
+                
+                .xd22e274
+                {
+                    width:40%; /* node='table' rend='width(40%)' count='1' */
+                }
+            
+                
+                .xd22e275
+                {
+                    text-align:left;width:40%; /* node='column' rend='align(left) width(40%)' count='1' */
+                }
+            
+                
+                .xd22e276
+                {
+                    text-align:right; /* node='column' rend='align(right)' count='3' */
+                }
+            
+                
+                .xd22e423
+                {
+                    width:100px; float:left; /* node='figure' rend='width(100px) float(left) image(images/test.jpg) link(images/test.jpg)' count='1' */
+                }
+            
+                
+                .xd22e430
+                {
+                    float:right; /* node='figure' rend='float(right) link(http://www.bohol.ph/)' count='1' */
+                }
+            
+                
+                .xd22e536
+                {
+                    list-style-type:disc; /* node='list' rend='columns(2) list-style-type(disc)' count='1' */
+                }
+            
+                
+                .xd22e566
+                {
+                    list-style-type:upper-roman; /* node='list' rend='columns(2) list-style-type(upper-roman)' count='1' */
+                }
+            
+                
+                .xd22e577
+                {
+                    list-style-type:lower-roman; /* node='list' rend='list-style-type(lower-roman)' count='1' */
+                }
+            
+                
+                .xd22e597
+                {
+                    text-align:left; /* node='p' rend='align(left)' count='1' */
+                }
+            
+                
+                .xd22e601
+                {
+                    text-align:right; /* node='p' rend='align(right)' count='1' */
+                }
+            
+                
+                .xd22e603
+                {
+                    text-align:center; /* node='p' rend='align(center)' count='1' */
+                }
+            
+            
+            .xd22e605
+            {
+                background: url(images/initial-A.gif) no-repeat top left;
+                
+                    padding-top: 45px;
+                
+            }
+
+            .xd22e605init
+            {
+                float: left;
+                width: 90px;
+                height: 95px;
+                background: url(images/initial-A.gif) no-repeat;
+                
+                    background-position: 0px -45px;
+                
+                text-align: right;
+                color: white;
+                font-size: 1px;
+            }
+
         
-        #xd22e605
-        {
-            background: url(images/initial-A.gif) no-repeat top left;
+                
+                .xd22e610
+                {
+                    text-align:justify; /* node='p' rend='align(justify)' count='1' */
+                }
             
-                padding-top: 45px;
+                
+                .xd22e626
+                {
+                    text-align:center; /* node='trailer' rend='align(center)' count='1' */
+                }
             
-        }
-
-        #xd22e605init
-        {
-            float: left;
-            width: 90px;
-            height: 95px;
-            background: url(images/initial-A.gif) no-repeat;
+                
+                .xd22e635
+                {
+                    text-align:center; /* node='head' rend='align(center)' count='1' */
+                }
             
-                background-position: 0px -45px;
+                
+                .xd22e640
+                {
+                    text-indent:1em; /* node='l' rend='indent(1)' count='6' */
+                }
             
-            text-align: right;
-            color: white;
-            font-size: 1px;
-        }
-
-    
+                
+                .xd22e646
+                {
+                    text-indent:2em; /* node='l' rend='indent(2)' count='2' */
+                }
+            
+                
+                .xd22e650
+                {
+                    text-indent:3em; /* node='l' rend='indent(3)' count='2' */
+                }
+            
+                
+                .xd22e654
+                {
+                    text-indent:10em; /* node='l' rend='indent(10)' count='3' */
+                }
+            
+                
+                .xd22e656
+                {
+                    font-style:italic; /* node='lg' rend='font(italic)' count='3' */
+                }
+            
