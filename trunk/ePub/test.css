@@ -669,119 +669,116 @@ sub, sup
 
             /* Generated CSS for specific elements */
             
-
-            #xd22e120
-            {
-                font-size:20pt;
-            color:red;
-            background-color:yellow;
-            
-            }
-        
                 
-                .xd22e213
+                .xd22e123
+                {
+                    font-size:14pt; color:red; background-color:yellow; /* node='hi' rend='font-size(14pt) color(red) background-color(yellow)' count='1' */
+                }
+            
+                
+                .xd22e216
                 {
                     valign:middle; width:2; /* node='cell' rend='image(images/bracket3.gif)valign(middle)width(2)' count='1' */
                 }
             
                 
-                .xd22e214
+                .xd22e217
                 {
                     valign:middle; /* node='cell' rend='valign(middle)' count='1' */
                 }
             
                 
-                .xd22e224
+                .xd22e227
                 {
                     width:25%; /* node='cell' rend='width(25%)' count='1' */
                 }
             
                 
-                .xd22e226
+                .xd22e229
                 {
                     width:75%; /* node='cell' rend='width(75%)' count='1' */
                 }
             
                 
-                .xd22e236
+                .xd22e239
                 {
                     width:40%; text-align:center; /* node='table' rend='width(40%) align(center)' count='2' */
                 }
             
                 
-                .xd22e242
+                .xd22e245
                 {
                     text-align:right; /* node='cell' rend='align(right)' count='11' */
                 }
             
                 
-                .xd22e274
+                .xd22e277
                 {
                     width:40%; /* node='table' rend='width(40%)' count='1' */
                 }
             
                 
-                .xd22e275
+                .xd22e278
                 {
                     text-align:left;width:40%; /* node='column' rend='align(left) width(40%)' count='1' */
                 }
             
                 
-                .xd22e276
+                .xd22e279
                 {
                     text-align:right; /* node='column' rend='align(right)' count='3' */
                 }
             
                 
-                .xd22e423
+                .xd22e426
                 {
                     width:100px; float:left; /* node='figure' rend='width(100px) float(left) image(images/test.jpg) link(images/test.jpg)' count='1' */
                 }
             
                 
-                .xd22e430
+                .xd22e433
                 {
                     float:right; /* node='figure' rend='float(right) link(http://www.bohol.ph/)' count='1' */
                 }
             
                 
-                .xd22e536
+                .xd22e539
                 {
                     list-style-type:disc; /* node='list' rend='columns(2) list-style-type(disc)' count='1' */
                 }
             
                 
-                .xd22e566
+                .xd22e569
                 {
                     list-style-type:upper-roman; /* node='list' rend='columns(2) list-style-type(upper-roman)' count='1' */
                 }
             
                 
-                .xd22e577
+                .xd22e580
                 {
                     list-style-type:lower-roman; /* node='list' rend='list-style-type(lower-roman)' count='1' */
                 }
             
                 
-                .xd22e597
+                .xd22e600
                 {
                     text-align:left; /* node='p' rend='align(left)' count='1' */
                 }
             
                 
-                .xd22e601
+                .xd22e604
                 {
                     text-align:right; /* node='p' rend='align(right)' count='1' */
                 }
             
                 
-                .xd22e603
+                .xd22e606
                 {
                     text-align:center; /* node='p' rend='align(center)' count='1' */
                 }
             
             
-            .xd22e605
+            .xd22e608
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -789,7 +786,7 @@ sub, sup
                 
             }
 
-            .xd22e605init
+            .xd22e608init
             {
                 float: left;
                 width: 90px;
@@ -805,49 +802,49 @@ sub, sup
 
         
                 
-                .xd22e610
+                .xd22e613
                 {
                     text-align:justify; /* node='p' rend='align(justify)' count='1' */
                 }
             
                 
-                .xd22e626
+                .xd22e629
                 {
                     text-align:center; /* node='trailer' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e635
+                .xd22e638
                 {
                     text-align:center; /* node='head' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e640
+                .xd22e643
                 {
                     text-indent:1em; /* node='l' rend='indent(1)' count='6' */
                 }
             
                 
-                .xd22e646
+                .xd22e649
                 {
                     text-indent:2em; /* node='l' rend='indent(2)' count='2' */
                 }
             
                 
-                .xd22e650
+                .xd22e653
                 {
                     text-indent:3em; /* node='l' rend='indent(3)' count='2' */
                 }
             
                 
-                .xd22e654
+                .xd22e657
                 {
                     text-indent:10em; /* node='l' rend='indent(10)' count='3' */
                 }
             
                 
-                .xd22e656
+                .xd22e659
                 {
                     font-style:italic; /* node='lg' rend='font(italic)' count='3' */
                 }

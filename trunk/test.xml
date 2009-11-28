@@ -96,9 +96,9 @@
 <head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
 
 <p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
-<hi rend="sc">Small Caps</hi> and some <hi rend="ex">letterspaced</hi>
+<hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi>
 text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
-a footnote. <hi rend="font-size(20pt) color(red) background-color(yellow)">We can <hi rend="caps">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="caps">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 
 <p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>.</p>

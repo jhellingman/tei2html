@@ -113,9 +113,12 @@
 
 
     <!-- We only need to insert a class name in the output, if
-         there is a matching css rule. -->
+         there is a matching css rule, or an explicit class
+         declaration in the rend attribute. -->
     <xsl:template name="generate-rend-class-name-if-needed">
         <xsl:param name="rend" select="@rend"/>
+
+        <xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/><xsl:text> </xsl:text></xsl:if>
 
         <xsl:variable name="css-properties">
             <xsl:call-template name="translate-rend-attribute">
@@ -129,6 +132,7 @@
                 <xsl:with-param name="rend" select="$rend"/>
             </xsl:call-template>
         </xsl:if>
+
     </xsl:template>
 
 
@@ -136,17 +140,14 @@
     <xsl:template name="generate-rend-class-attribute-if-needed">
         <xsl:param name="rend" select="@rend"/>
 
-        <xsl:variable name="css-properties">
-            <xsl:call-template name="translate-rend-attribute">
-                <xsl:with-param name="rend" select="normalize-space($rend)"/>
-                <xsl:with-param name="name" select="name()"/>
+        <xsl:variable name="class">
+            <xsl:call-template name="generate-rend-class-name-if-needed">
+                <xsl:with-param name="rend" select="$rend"/>
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:if test="normalize-space($css-properties) != ''">
-            <xsl:call-template name="generate-rend-class-attribute">
-                <xsl:with-param name="rend" select="$rend"/>
-            </xsl:call-template>
+        <xsl:if test="normalize-space($class) != ''">
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
         </xsl:if>
     </xsl:template>
 
