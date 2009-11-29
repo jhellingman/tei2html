@@ -79,11 +79,6 @@
         <span class="overtilde"><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[contains(@rend, 'font(fraktur)')]">
-        <span class="fraktur"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
-    </xsl:template>
-
-
     <xsl:template match="hi">
         <xsl:choose>
             <xsl:when test="contains(@rend, '(')">

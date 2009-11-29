@@ -87,25 +87,17 @@
     <xsl:template name="headText">
         <xsl:call-template name="generate-id-attribute"/>
         <xsl:call-template name="setLangAttribute"/>
-        <xsl:call-template name="setHtmlClass"/>
-        <xsl:if test="contains(@rend, 'align(')">
-            <xsl:attribute name="align">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'align('), ')')"/>
-            </xsl:attribute>
+
+        <xsl:variable name="class">
+            <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:call-template name="generate-rend-class-name-if-needed"/>
+        </xsl:variable>
+
+        <xsl:if test="normalize-space($class) != ''">
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
         </xsl:if>
+
         <xsl:apply-templates/>
-    </xsl:template>
-
-
-    <xsl:template name="setHtmlClass">
-        <xsl:choose>
-            <xsl:when test="@type">
-                <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:attribute name="class">normal</xsl:attribute>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
 

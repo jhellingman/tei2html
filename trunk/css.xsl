@@ -60,11 +60,13 @@
             <xsl:when test="$property='class'"/>
             <xsl:when test="$property='link'"/>
             <xsl:when test="$property='image'"/>
+            <xsl:when test="$property='image-alt'"/>
             <xsl:when test="$property='summary'"/>
             <xsl:when test="$property='label'"/>
             <xsl:when test="$property='columns'"/>
             <xsl:when test="$property='stylesheet'"/>
             <xsl:when test="$property='position'"/>
+            <xsl:when test="$property='label'"/>
 
             <!-- Properties used to render verse -->
             <xsl:when test="$property='hemistich'"/>
@@ -76,7 +78,7 @@
             <xsl:when test="$property='initial-height'"/>
 
             <!-- Properties related to special font usage -->
-            <xsl:when test="$property='font' and $value='fraktur'"/>
+            <xsl:when test="$property='font' and $value='fraktur'">font-family: 'Walbaum-Fraktur';</xsl:when>
             <xsl:when test="$property='font' and $value='italic'">font-style:italic;</xsl:when>
 
             <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>;</xsl:when>
