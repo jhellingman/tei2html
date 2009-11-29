@@ -8,7 +8,8 @@ my $saxon2 = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bi
 my $sevenzip = "\"C:\\Program Files\\7-Zip\\7z.exe\"";
 
 
-my $epubcheck = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar "; # command to run the saxon processor (see http://saxon.sourceforge.net/, using Version 6.5.5)
+my $epubcheck = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
+my $epubpreflight = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar "; 
 
 
 my $basename = "test";
@@ -47,8 +48,9 @@ system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFilePara
 
 system ("del $basename.epub");
 chdir "epub";
-system ("zip -Xr9D ../$basename.epub mimetype");
-system ("zip -Xr9D ../$basename.epub * -x mimetype");
+system ("zip -Xr9Dq ../$basename.epub mimetype");
+system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
 chdir "..";
 
-system ("$epubcheck $basename.epub");
+# system ("$epubcheck $basename.epub");
+# system ("$epubpreflight $basename.epub");

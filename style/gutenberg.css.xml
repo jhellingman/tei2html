@@ -454,10 +454,6 @@ span.measure
     text-transform:uppercase;
 }
 
-.fraktur
-{
-    font-family: 'Walbaum-Fraktur';
-}
 
 /* overline is actually a bit too high; overtilde is approximated with overline */
 .overline, .overtilde
