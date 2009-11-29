@@ -18,27 +18,27 @@
     version="2.0"
     >
 
-    <xsl:include href="utils.xsl"/>
-    <xsl:include href="epub.utils.xsl"/>
-    <xsl:include href="localization.xsl"/>
-    <xsl:include href="messages.xsl"/>
-    <xsl:include href="header.xsl"/>
-    <xsl:include href="inline.xsl"/>
-    <xsl:include href="css.xsl"/>
-    <xsl:include href="references.xsl"/>
-    <xsl:include href="block.xsl"/>
-    <xsl:include href="notes.xsl"/>
-    <xsl:include href="drama.xsl"/>
-    <xsl:include href="contents.xsl"/>
-    <xsl:include href="epub.divisions.xsl"/>
-    <xsl:include href="tables.xsl"/>
-    <xsl:include href="lists.xsl"/>
-    <xsl:include href="figures.xsl"/>
-    <xsl:include href="colophon.xsl"/>
-    <xsl:include href="gutenberg.xsl"/>
+    <xsl:include href="modules/utils.xsl"/>
+    <xsl:include href="modules/epub.utils.xsl"/>
+    <xsl:include href="modules/localization.xsl"/>
+    <xsl:include href="modules/messages.xsl"/>
+    <xsl:include href="modules/header.xsl"/>
+    <xsl:include href="modules/inline.xsl"/>
+    <xsl:include href="modules/css.xsl"/>
+    <xsl:include href="modules/references.xsl"/>
+    <xsl:include href="modules/block.xsl"/>
+    <xsl:include href="modules/notes.xsl"/>
+    <xsl:include href="modules/drama.xsl"/>
+    <xsl:include href="modules/contents.xsl"/>
+    <xsl:include href="modules/epub.divisions.xsl"/>
+    <xsl:include href="modules/tables.xsl"/>
+    <xsl:include href="modules/lists.xsl"/>
+    <xsl:include href="modules/figures.xsl"/>
+    <xsl:include href="modules/colophon.xsl"/>
+    <xsl:include href="modules/gutenberg.xsl"/>
 
-    <xsl:include href="tei2opf.xsl"/>
-    <xsl:include href="tei2ncx.xsl"/>
+    <xsl:include href="modules/tei2opf.xsl"/>
+    <xsl:include href="modules/tei2ncx.xsl"/>
 
 
     <xsl:output
