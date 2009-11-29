@@ -26,24 +26,24 @@
     version="1.0"
     >
 
-    <xsl:include href="modules/utils.xsl"/>
-    <xsl:include href="modules/html.utils.xsl"/>
-    <xsl:include href="modules/localization.xsl"/>
-    <xsl:include href="modules/messages.xsl"/>
-    <xsl:include href="modules/header.xsl"/>
-    <xsl:include href="modules/inline.xsl"/>
-    <xsl:include href="modules/css.xsl"/>
-    <xsl:include href="modules/references.xsl"/>
-    <xsl:include href="modules/block.xsl"/>
-    <xsl:include href="modules/notes.xsl"/>
-    <xsl:include href="modules/drama.xsl"/>
-    <xsl:include href="modules/contents.xsl"/>
-    <xsl:include href="modules/divisions.xsl"/>
-    <xsl:include href="modules/tables.xsl"/>
-    <xsl:include href="modules/lists.xsl"/>
-    <xsl:include href="modules/figures.xsl"/>
-    <xsl:include href="modules/colophon.xsl"/>
-    <xsl:include href="modules/gutenberg.xsl"/>
+    <xsl:include href="utils.xsl"/>
+    <xsl:include href="html.utils.xsl"/>
+    <xsl:include href="localization.xsl"/>
+    <xsl:include href="messages.xsl"/>
+    <xsl:include href="header.xsl"/>
+    <xsl:include href="inline.xsl"/>
+    <xsl:include href="css.xsl"/>
+    <xsl:include href="references.xsl"/>
+    <xsl:include href="block.xsl"/>
+    <xsl:include href="notes.xsl"/>
+    <xsl:include href="drama.xsl"/>
+    <xsl:include href="contents.xsl"/>
+    <xsl:include href="divisions.xsl"/>
+    <xsl:include href="tables.xsl"/>
+    <xsl:include href="lists.xsl"/>
+    <xsl:include href="figures.xsl"/>
+    <xsl:include href="colophon.xsl"/>
+    <xsl:include href="gutenberg.xsl"/>
 
 
     <xsl:output
