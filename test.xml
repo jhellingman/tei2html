@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="tei2html.xsl"?>
-<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [ 
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [
 
 <!ENTITY prime  "&#x2032;">
 <!ENTITY mdash  "&#x2014;">
@@ -177,27 +177,27 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <table rend="width(40%) align(center)">
     <head>Head above table.</head>
     <row>
-        <cell role="label">Name</cell>  
+        <cell role="label">Name</cell>
         <cell role="label" rend="align(right)">Age</cell>
     </row>
     <row>
-        <cell></cell>   
+        <cell></cell>
         <cell role="unit" rend="align(right)">Years</cell>
     </row>
     <row>
-        <cell>Jeroen</cell> 
+        <cell>Jeroen</cell>
         <cell>40</cell>
     </row>
     <row>
-        <cell>Rodelyn</cell>    
+        <cell>Rodelyn</cell>
         <cell rend="align(right)">30</cell>
     </row>
     <row>
-        <cell>Joshua</cell> 
+        <cell>Joshua</cell>
         <cell rend="align(right)">7</cell>
     </row>
     <row>
-        <cell>Raphael</cell>    
+        <cell>Raphael</cell>
         <cell rend="align(right)">3</cell>
     </row>
 </table>
@@ -213,36 +213,36 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <column rend="align(right)"/>
     <column rend="align(right)"/>
     <row role="label">
-        <cell>Name</cell>   
+        <cell>Name</cell>
         <cell>Length</cell>
         <cell>Weight</cell>
         <cell>Notes</cell>
     </row>
     <row role="unit">
-        <cell></cell>   
+        <cell></cell>
         <cell>Meters</cell>
         <cell>Kilograms</cell>
     </row>
     <row>
-        <cell>Jeroen</cell> 
+        <cell>Jeroen</cell>
         <cell>1.80</cell>
         <cell>86</cell>
     </row>
     <row>
-        <cell>Rodelyn</cell>    
+        <cell>Rodelyn</cell>
         <cell cols="2">&mdash;</cell>
         <cell>No Info.</cell>
     </row>
     <row>
-        <cell>Joshua</cell> 
+        <cell>Joshua</cell>
         <cell>1.20</cell>
     </row>
     <row>
-        <cell>Raphael</cell>    
+        <cell>Raphael</cell>
         <cell>1.00</cell>
     </row>
     <row>
-        <cell><hi>Total</hi></cell> 
+        <cell><hi>Total</hi></cell>
         <cell role="sum">4.00</cell>
     </row>
 </table>
@@ -255,33 +255,33 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
 
-<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign>  adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2" place="foot"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
+<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign>  adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
 
 
 <p><table rend="width(40%) align(center)">
     <head>Head above table.</head>
     <row>
-        <cell role="label">Name</cell>  
+        <cell role="label">Name</cell>
         <cell role="label" rend="align(right)">Age</cell>
     </row>
     <row>
-        <cell></cell>   
+        <cell></cell>
         <cell role="unit" rend="align(right)">Years</cell>
     </row>
     <row>
-        <cell>Jeroen</cell> 
+        <cell>Jeroen</cell>
         <cell rend="align(right)">39</cell>
     </row>
     <row>
-        <cell>Rodelyn</cell>    
+        <cell>Rodelyn</cell>
         <cell rend="align(right)">29</cell>
     </row>
     <row>
-        <cell>Joshua</cell> 
+        <cell>Joshua</cell>
         <cell rend="align(right)">6</cell>
     </row>
     <row>
-        <cell>Raphael</cell>    
+        <cell>Raphael</cell>
         <cell rend="align(right)">2</cell>
     </row>
 </table>
@@ -319,13 +319,13 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <figure id="tarsier1" url="images/tarsier.jpg">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
-	<p type="figTopLeft">Top Left</p>
-	<p type="figTop">Top</p>
-	<p type="figTopRight">Top Right</p>
+    <p type="figTopLeft">Top Left</p>
+    <p type="figTop">Top</p>
+    <p type="figTopRight">Top Right</p>
 
-	<p type="figBottomLeft">Bottom Left</p>
-	<p type="figBottom">Bottom</p>
-	<p type="figBottomRight">Bottom Right</p>
+    <p type="figBottomLeft">Bottom Left</p>
+    <p type="figBottom">Bottom</p>
+    <p type="figBottomRight">Bottom Right</p>
 
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
@@ -334,9 +334,9 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <figure id="tarsier2" url="images/tarsier.jpg">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
-	<p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>
+    <p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>
 
-	<p type="figBottomRight">A very long piece of text in the bottom right to test its behaviour.</p>
+    <p type="figBottomRight">A very long piece of text in the bottom right to test its behaviour.</p>
 
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
@@ -366,45 +366,50 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 </div2>
 <div2>
-<head type="label">Label van sectie</head>
-<head>Test level 2</head>
+<head type="label">Section</head>
+<head>Lists</head>
 
-<p>Dit is een sectie op niveau 2</p>
+<p>In this section, the various types of lists are demonstrated.</p>
+
+<p>First, we start with a simple, unnumbered list. List items can contain all the normal in-line elements, such as notes, corrections, etc.</p>
 
 <list>
-    <item>Een</item>
-    <item>Twee</item>
-    <item>Drie</item>
-    <item>Vier</item>
-    <item>Vijf<pb n="3"/></item>
-    <item>Zes</item>
-    <item><corr sic="Correction in list">Zeven</corr></item>
-    <item>Acht</item>
-    <item>Negen</item>
-    <item>Tien</item>
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+    <item rend="font(italic)">Four</item>
+    <item>Five<pb n="3"/></item>
+    <item>Six<note n="1">This is a footnote to list-item six.</note></item>
+    <item><corr sic="Zeven">Seven</corr></item>
+    <item>Eight</item>
+    <item>Nine</item>
+    <item>Ten</item>
 </list>
+
+<p>By specifying the type of the list as ordered, it becomes a numbered list.</p>
 
 <list type="ordered">
-    <item>Een</item>
-    <item>Twee</item>
-    <item>Drie</item>
-    <item>Vier</item>
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+    <item>Four</item>
 </list>
+
+<p>We can split a list into two columns, by putting columns(2) in the rend attribute.</p>
 
 <list rend="columns(2) list-style-type(disc)">
-    <item>Een</item>
-    <item>Twee</item>
-    <item>Drie</item>
-    <item>Vier</item>
-    <item>Vijf</item>
-    <item>Zes</item>
-    <item>Zeven</item>
-    <item>Acht</item>
-    <item>Negen</item>
-    <item>Tien</item>
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+    <item>Four</item>
+    <item>Five</item>
+    <item>Six</item>
+    <item>Seven</item>
+    <item>Eight</item>
+    <item>Nine</item>
+    <item>Ten</item>
 </list>
 
-</div2>
 
 <list rend="columns(2)" type="ordered">
     <item>Een</item>
@@ -437,6 +442,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <item>Drie</item>
     <item>Vier</item>
 </list>
+
+</div2>
 
 
 <p rend="align(left)">[align(left)] Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
