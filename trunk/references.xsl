@@ -29,7 +29,7 @@
     <xsl:template match="note" mode="noterefnumber">
         <a class="pseudonoteref">
             <xsl:call-template name="generate-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
     </xsl:template>
 

@@ -133,10 +133,10 @@
     <xsl:template match="div1">
         <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
         <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
-            <xsl:if test="..//note[(@place='foot' or not(@place)) and not(ancestor::div1)]">
+            <xsl:if test="..//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]">
                 <div class="footnotes">
                     <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select="..//note[(@place='foot' or not(@place)) and not(ancestor::div1)]"/>
+                    <xsl:apply-templates mode="footnotes" select="..//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]"/>
                 </div>
             </xsl:if>
         </xsl:if>
@@ -166,10 +166,10 @@
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
 
-            <xsl:if test=".//note[@place='foot' or not(@place)] and not(ancestor::q)">
+            <xsl:if test=".//note[not(@place) or @place='foot' or @place='unspecified'] and not(ancestor::q)">
                 <div class="footnotes">
                     <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or not(@place)]"/>
+                    <xsl:apply-templates mode="footnotes" select=".//note[not(@place) or @place='foot' or @place='unspecified']"/>
                 </div>
             </xsl:if>
         </div>

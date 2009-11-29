@@ -48,11 +48,11 @@
     quoted texts). Optionally, we place the text of the footnote in-line as well,
     for use by the print stylesheet. In browsers it will be hidden. -->
 
-    <xsl:template match="/TEI.2/text//note[@place='foot' or not(@place)]">
+    <xsl:template match="/TEI.2/text//note[@place='foot' or @place='unspecified' or not(@place)]">
         <a class="noteref">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:call-template name="generate-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
             <span class="displayfootnote">
@@ -71,7 +71,7 @@
                 <a class="noteref">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
                     <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
+                    <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
                 </a>
             </span>
             <xsl:text> </xsl:text>
@@ -87,7 +87,7 @@
                 <a class="noteref">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
                     <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:number level="any" count="note[@place='foot' or not(@place)]" from="div1[not(ancestor::q)]"/>
+                    <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
                 </a>
             </span>
             <xsl:text> </xsl:text>

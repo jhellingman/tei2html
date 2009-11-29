@@ -44,7 +44,7 @@
             </navPoint>
             <navPoint playOrder="5" class="section" id="xd22e500">
                <navLabel>
-                  <text>Test level 2</text>
+                  <text>Lists</text>
                </navLabel>
                <content src="test-ch05.xhtml#xd22e500"/>
             </navPoint>
@@ -61,29 +61,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="8" class="section" id="xd22e715">
+         <navPoint playOrder="8" class="section" id="xd22e724">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e715"/>
+            <content src="test-index.xhtml#xd22e724"/>
          </navPoint>
-         <navPoint playOrder="9" class="section" id="xd22e720">
+         <navPoint playOrder="9" class="section" id="xd22e729">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e720"/>
+            <content src="test-index.xhtml#xd22e729"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd22e725">
+         <navPoint playOrder="10" class="section" id="xd22e734">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e725"/>
+            <content src="test-index.xhtml#xd22e734"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd22e730">
+         <navPoint playOrder="11" class="section" id="xd22e739">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e730"/>
+            <content src="test-index.xhtml#xd22e739"/>
          </navPoint>
       </navPoint>
    </navMap>

@@ -23,7 +23,7 @@
 
         <xsl:variable name="listType">
             <xsl:choose>
-                <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+                <xsl:when test="@type='ordered'">ol</xsl:when>
                 <xsl:otherwise>ul</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -35,8 +35,8 @@
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
                     <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setListStyleType"/>
                     <xsl:call-template name="setLangAttribute"/>
+                    <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                     <xsl:apply-templates/>
                 </xsl:element>
             </xsl:otherwise>
@@ -52,7 +52,7 @@
             <xsl:call-template name="setLangAttribute"/>
             <xsl:variable name="listType">
                 <xsl:choose>
-                    <xsl:when test="@type='ordered' or @type='simple'">ol</xsl:when>
+                    <xsl:when test="@type='ordered'">ol</xsl:when>
                     <xsl:otherwise>ul</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
@@ -61,13 +61,13 @@
             <tr valign="top">
                 <td>
                     <xsl:element name="{$listType}">
-                        <xsl:call-template name="setListStyleType"/>
+                        <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                         <xsl:apply-templates select="item[position() &lt; $halfway + 1]"/>
                     </xsl:element>
                 </td>
                 <td>
                     <xsl:element name="{$listType}">
-                        <xsl:call-template name="setListStyleType"/>
+                        <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                         <xsl:apply-templates select="item[position() &gt; $halfway]"/>
                     </xsl:element>
                 </td>
@@ -76,26 +76,10 @@
     </xsl:template>
 
 
-    <xsl:template name="setListStyleType">
-        <xsl:if test="contains(@rend, 'list-style-type(') or @type='simple'">
-            <xsl:attribute name="class">
-                <xsl:choose>
-                    <xsl:when test="@type='simple'">lsoff</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(disc)')">lsdisc</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(none)')">lsoff</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(lower-alpha)')">AL</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(upper-alpha)')">AU</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(lower-roman)')">RL</xsl:when>
-                    <xsl:when test="contains(@rend, 'list-style-type(upper-roman)')">RU</xsl:when>
-                </xsl:choose>
-            </xsl:attribute>
-        </xsl:if>
-    </xsl:template>
-
-
     <xsl:template match="item">
         <li>
             <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
             <xsl:if test="@n">
                 <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
             </xsl:if>
