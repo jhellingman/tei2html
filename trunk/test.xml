@@ -107,7 +107,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <div1 id="ch05" n="V" type="Chapter" rend="label(no)">
 <head type="label" rend="image(images/Ornament.gif)">Chapter V</head>
-<head>Another <hi>Chapter</hi>, Dealing with Tables</head>
+<head>Formatting Tables</head>
 
 <argument><p>This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p></argument>
 
@@ -145,8 +145,10 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </table>
 </p>
 
+<p>The following table is centered:</p>
+
 <p>
-<table rend="summary(A small table to demonstrate bracket images.)">
+<table rend="summary(A small table to demonstrate bracket images.) align(center)">
     <row>
         <cell>Gadgets</cell>
         <cell rows="2" rend="image(images/bracket3.gif)valign(middle)width(2)"></cell>
@@ -158,9 +160,10 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </table>
 </p>
 
+<p>But this table is just indented 2 ems.</p>
 
 <p>
-<table>
+<table rend="indent(2)">
     <row>
         <cell rend="width(25%)">Een Een Een Een Een Een Een Een Een Een Een Een </cell>
         <cell rend="width(75%)">Twee Twee Twee Twee Twee Twee Twee Twee Twee Twee</cell>

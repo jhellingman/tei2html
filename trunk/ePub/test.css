@@ -329,13 +329,6 @@ p.footnote .label
     font-size: 80%;
 }
 
-.centertable
-{
-    /* center the table */
-    margin: 0px auto; 
-    display:table; /* used to make the block shrink to the actual size */
-}
-
 
 /****** Poetry ******/
 
@@ -671,115 +664,127 @@ sub, sup
                 }
             
                 
-                .xd22e216
+                .xd22e211
+                {
+                    margin: 0px auto; display:table; /* node='table' rend='summary(A small table to demonstrate bracket images.) align(center)' count='1' */
+                }
+            
+                
+                .xd22e215
                 {
                     valign:middle; width:2; /* node='cell' rend='image(images/bracket3.gif)valign(middle)width(2)' count='1' */
                 }
             
                 
-                .xd22e217
+                .xd22e216
                 {
                     valign:middle; /* node='cell' rend='valign(middle)' count='1' */
                 }
             
                 
-                .xd22e227
+                .xd22e226
+                {
+                    margin-left:2em; /* node='table' rend='indent(2)' count='1' */
+                }
+            
+                
+                .xd22e228
                 {
                     width:25%; /* node='cell' rend='width(25%)' count='1' */
                 }
             
                 
-                .xd22e229
+                .xd22e230
                 {
                     width:75%; /* node='cell' rend='width(75%)' count='1' */
                 }
             
                 
-                .xd22e239
+                .xd22e241
                 {
-                    width:40%; text-align:center; /* node='table' rend='width(40%) align(center)' count='2' */
+                    width:40%; margin: 0px auto; display:table; /* node='table' rend='width(40%) align(center)' count='2' */
                 }
             
                 
-                .xd22e245
+                .xd22e247
                 {
                     text-align:right; /* node='cell' rend='align(right)' count='11' */
                 }
             
                 
-                .xd22e277
+                .xd22e278
                 {
                     width:40%; /* node='table' rend='width(40%)' count='1' */
                 }
             
                 
-                .xd22e278
+                .xd22e279
                 {
                     text-align:left;width:40%; /* node='column' rend='align(left) width(40%)' count='1' */
                 }
             
                 
-                .xd22e279
+                .xd22e280
                 {
                     text-align:right; /* node='column' rend='align(right)' count='3' */
                 }
             
                 
-                .xd22e426
+                .xd22e427
                 {
                     width:100px; float:left; /* node='figure' rend='width(100px) float(left) image(images/test.jpg) link(images/test.jpg)' count='1' */
                 }
             
                 
-                .xd22e433
+                .xd22e434
                 {
                     float:right; /* node='figure' rend='float(right) link(http://www.bohol.ph/)' count='1' */
                 }
             
                 
-                .xd22e516
+                .xd22e517
                 {
                     font-style:italic; /* node='item' rend='font(italic)' count='1' */
                 }
             
                 
-                .xd22e547
+                .xd22e548
                 {
                     list-style-type:disc; /* node='list' rend='columns(2) list-style-type(disc)' count='1' */
                 }
             
                 
-                .xd22e577
+                .xd22e578
                 {
                     list-style-type:upper-roman; /* node='list' rend='columns(2) list-style-type(upper-roman)' count='1' */
                 }
             
                 
-                .xd22e589
+                .xd22e590
                 {
                     list-style-type:lower-roman; /* node='list' rend='list-style-type(lower-roman)' count='1' */
                 }
             
                 
-                .xd22e609
+                .xd22e610
                 {
                     text-align:left; /* node='p' rend='align(left)' count='1' */
                 }
             
                 
-                .xd22e612
+                .xd22e613
                 {
                     text-align:right; /* node='p' rend='align(right)' count='1' */
                 }
             
                 
-                .xd22e614
+                .xd22e615
                 {
                     text-align:center; /* node='p' rend='align(center)' count='1' */
                 }
             
             
-            .xd22e616
+            .xd22e617
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -787,7 +792,7 @@ sub, sup
                 
             }
 
-            .xd22e616init
+            .xd22e617init
             {
                 float: left;
                 width: 90px;
@@ -803,49 +808,49 @@ sub, sup
 
         
                 
-                .xd22e621
+                .xd22e623
                 {
                     text-align:justify; /* node='p' rend='align(justify)' count='1' */
                 }
             
                 
-                .xd22e638
+                .xd22e639
                 {
                     text-align:center; /* node='trailer' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e647
+                .xd22e648
                 {
                     text-align:center; /* node='head' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e652
+                .xd22e653
                 {
                     text-indent:1em; /* node='l' rend='indent(1)' count='6' */
                 }
             
                 
-                .xd22e658
+                .xd22e659
                 {
                     text-indent:2em; /* node='l' rend='indent(2)' count='2' */
                 }
             
                 
-                .xd22e662
+                .xd22e663
                 {
                     text-indent:3em; /* node='l' rend='indent(3)' count='2' */
                 }
             
                 
-                .xd22e666
+                .xd22e667
                 {
                     text-indent:10em; /* node='l' rend='indent(10)' count='3' */
                 }
             
                 
-                .xd22e668
+                .xd22e669
                 {
                     font-style:italic; /* node='lg' rend='font(italic)' count='3' */
                 }
