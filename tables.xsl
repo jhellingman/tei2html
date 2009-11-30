@@ -42,30 +42,17 @@
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
         <div>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
 
             <xsl:attribute name="class">
-                <xsl:choose>
-                    <xsl:when test="contains(@rend, 'align(center)')">table centertable</xsl:when>
-                    <xsl:otherwise>table</xsl:otherwise>
-                </xsl:choose>
+                <xsl:text>table </xsl:text> <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:attribute>
-
-            <xsl:if test="contains(@rend, 'width(') or contains(@rend, 'indent(')">
-                <xsl:attribute name="style">
-                    <xsl:if test="contains(@rend, 'width(')">width:<xsl:value-of select="substring-before(substring-after(@rend, 'width('), ')')"/>;</xsl:if>
-                    <xsl:if test="contains(@rend, 'indent(')">margin-left:<xsl:value-of select="substring-before(substring-after(@rend, 'indent('), ')')"/>em;</xsl:if>
-                </xsl:attribute>
-            </xsl:if>
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
 
             <table>
-                <xsl:call-template name="generate-id-attribute"/>
-                <xsl:if test="contains(@rend, 'font-size(')">
-                    <xsl:attribute name="style">font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'font-size('), ')')"/>;</xsl:attribute>
-                </xsl:if>
-
+                <!-- Stretch to the size of the outer div if the width is set explicitly -->
                 <xsl:if test="contains(@rend, 'width(')">
                     <xsl:attribute name="width">100%</xsl:attribute>
                 </xsl:if>

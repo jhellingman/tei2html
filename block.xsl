@@ -345,7 +345,7 @@
                 </xsl:if>
 
                 <xsl:if test="normalize-space($properties) != ''">
-                    <xsl:value-of select="$properties"/>
+                    <xsl:value-of select="normalize-space($properties)"/>
                 </xsl:if>
             }
 
