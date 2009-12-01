@@ -179,6 +179,9 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <p>
 <table rend="width(40%) align(center)">
     <head>Head above table.</head>
+    <column rend="color(red) background-color(yellow)"/>
+    <column rend="color(green) align(right)"/>
+    <column rend="color(blue) align(right)"/>
     <row>
         <cell role="label">Name</cell>
         <cell role="label" rend="align(right)">Age</cell>
@@ -193,15 +196,15 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     </row>
     <row>
         <cell>Rodelyn</cell>
-        <cell rend="align(right)">30</cell>
+        <cell>30</cell>
     </row>
     <row>
         <cell>Joshua</cell>
-        <cell rend="align(right)">7</cell>
+        <cell rend="align(center)">7</cell>
     </row>
     <row>
         <cell>Raphael</cell>
-        <cell rend="align(right)">3</cell>
+        <cell rend="align(left)">3</cell>
     </row>
 </table>
 </p>

@@ -166,9 +166,8 @@
                 </xsl:if>
             </xsl:if>
 
-             <style type="text/css">
-                /* Generated CSS for specific elements */
-                <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+            <style type="text/css">
+                <xsl:apply-templates select="/" mode="css"/>
             </style>
 
         </xsl:if>

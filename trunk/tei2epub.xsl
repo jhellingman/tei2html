@@ -146,8 +146,7 @@
                 <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
             </xsl:if>
 
-            /* Generated CSS for specific elements */
-            <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+            <xsl:apply-templates select="/" mode="css"/>
 
         </xsl:result-document>
     </xsl:template>

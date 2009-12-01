@@ -329,6 +329,13 @@ p.footnote .label
     font-size: 80%;
 }
 
+/****** Tables ******/
+
+td.sum
+{
+    padding-top: 2px; border-top: solid black 1px;
+}
+
 
 /****** Poetry ******/
 
@@ -648,8 +655,39 @@ sub, sup
 
 
 
+        /* Generated CSS for specific elements */
 
-            /* Generated CSS for specific elements */
+        
+        
+                
+                .xd22e244
+                {
+                    color:red; background-color:yellow; /* node='column' rend='color(red) background-color(yellow)' count='1' */
+                }
+            
+                
+                .xd22e245
+                {
+                    color:green; text-align:right; /* node='column' rend='color(green) align(right)' count='1' */
+                }
+            
+                
+                .xd22e246
+                {
+                    color:blue; text-align:right; /* node='column' rend='color(blue) align(right)' count='1' */
+                }
+            
+                
+                .xd22e282
+                {
+                    text-align:left;width:40%; /* node='column' rend='align(left) width(40%)' count='1' */
+                }
+            
+                
+                .xd22e283
+                {
+                    text-align:right; /* node='column' rend='align(right)' count='3' */
+                }
             
                 
                 .xd22e110
@@ -706,85 +744,85 @@ sub, sup
                 }
             
                 
-                .xd22e247
+                .xd22e250
                 {
-                    text-align:right; /* node='cell' rend='align(right)' count='11' */
+                    text-align:right; /* node='cell' rend='align(right)' count='8' */
                 }
             
                 
-                .xd22e278
+                .xd22e269
+                {
+                    text-align:center; /* node='cell' rend='align(center)' count='1' */
+                }
+            
+                
+                .xd22e274
+                {
+                    text-align:left; /* node='cell' rend='align(left)' count='1' */
+                }
+            
+                
+                .xd22e281
                 {
                     width:40%; /* node='table' rend='width(40%)' count='1' */
                 }
             
                 
-                .xd22e279
-                {
-                    text-align:left;width:40%; /* node='column' rend='align(left) width(40%)' count='1' */
-                }
-            
-                
-                .xd22e280
-                {
-                    text-align:right; /* node='column' rend='align(right)' count='3' */
-                }
-            
-                
-                .xd22e427
+                .xd22e430
                 {
                     width:100px; float:left; /* node='figure' rend='width(100px) float(left) image(images/test.jpg) link(images/test.jpg)' count='1' */
                 }
             
                 
-                .xd22e434
+                .xd22e437
                 {
                     float:right; /* node='figure' rend='float(right) link(http://www.bohol.ph/)' count='1' */
                 }
             
                 
-                .xd22e517
+                .xd22e520
                 {
                     font-style:italic; /* node='item' rend='font(italic)' count='1' */
                 }
             
                 
-                .xd22e548
+                .xd22e551
                 {
                     list-style-type:disc; /* node='list' rend='columns(2) list-style-type(disc)' count='1' */
                 }
             
                 
-                .xd22e578
+                .xd22e581
                 {
                     list-style-type:upper-roman; /* node='list' rend='columns(2) list-style-type(upper-roman)' count='1' */
                 }
             
                 
-                .xd22e590
+                .xd22e593
                 {
                     list-style-type:lower-roman; /* node='list' rend='list-style-type(lower-roman)' count='1' */
                 }
             
                 
-                .xd22e610
+                .xd22e613
                 {
                     text-align:left; /* node='p' rend='align(left)' count='1' */
                 }
             
                 
-                .xd22e613
+                .xd22e616
                 {
                     text-align:right; /* node='p' rend='align(right)' count='1' */
                 }
             
                 
-                .xd22e615
+                .xd22e618
                 {
                     text-align:center; /* node='p' rend='align(center)' count='1' */
                 }
             
             
-            .xd22e617
+            .xd22e620
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -792,7 +830,7 @@ sub, sup
                 
             }
 
-            .xd22e617init
+            .xd22e620init
             {
                 float: left;
                 width: 90px;
@@ -808,49 +846,49 @@ sub, sup
 
         
                 
-                .xd22e623
+                .xd22e626
                 {
                     text-align:justify; /* node='p' rend='align(justify)' count='1' */
                 }
             
                 
-                .xd22e639
+                .xd22e642
                 {
                     text-align:center; /* node='trailer' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e648
+                .xd22e651
                 {
                     text-align:center; /* node='head' rend='align(center)' count='1' */
                 }
             
                 
-                .xd22e653
+                .xd22e656
                 {
                     text-indent:1em; /* node='l' rend='indent(1)' count='6' */
                 }
             
                 
-                .xd22e659
+                .xd22e662
                 {
                     text-indent:2em; /* node='l' rend='indent(2)' count='2' */
                 }
             
                 
-                .xd22e663
+                .xd22e666
                 {
                     text-indent:3em; /* node='l' rend='indent(3)' count='2' */
                 }
             
                 
-                .xd22e667
+                .xd22e670
                 {
                     text-indent:10em; /* node='l' rend='indent(10)' count='3' */
                 }
             
                 
-                .xd22e669
+                .xd22e672
                 {
                     font-style:italic; /* node='lg' rend='font(italic)' count='3' */
                 }

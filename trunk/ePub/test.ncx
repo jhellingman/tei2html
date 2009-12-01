@@ -36,17 +36,17 @@
                <text>Formatting Tables</text>
             </navLabel>
             <content src="test-ch05.xhtml"/>
-            <navPoint playOrder="4" class="section" id="xd22e479">
+            <navPoint playOrder="4" class="section" id="xd22e482">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch05.xhtml#xd22e479"/>
+               <content src="test-ch05.xhtml#xd22e482"/>
             </navPoint>
-            <navPoint playOrder="5" class="section" id="xd22e501">
+            <navPoint playOrder="5" class="section" id="xd22e504">
                <navLabel>
                   <text>Lists</text>
                </navLabel>
-               <content src="test-ch05.xhtml#xd22e501"/>
+               <content src="test-ch05.xhtml#xd22e504"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="6" class="chapter" id="ch6">
@@ -61,29 +61,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="8" class="section" id="xd22e725">
+         <navPoint playOrder="8" class="section" id="xd22e728">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e725"/>
+            <content src="test-index.xhtml#xd22e728"/>
          </navPoint>
-         <navPoint playOrder="9" class="section" id="xd22e730">
+         <navPoint playOrder="9" class="section" id="xd22e733">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e730"/>
+            <content src="test-index.xhtml#xd22e733"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd22e735">
+         <navPoint playOrder="10" class="section" id="xd22e738">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e735"/>
+            <content src="test-index.xhtml#xd22e738"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd22e740">
+         <navPoint playOrder="11" class="section" id="xd22e743">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e740"/>
+            <content src="test-index.xhtml#xd22e743"/>
          </navPoint>
       </navPoint>
    </navMap>

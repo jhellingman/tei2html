@@ -32,11 +32,26 @@
     >
 
     <!--====================================================================-->
-    <!-- Tables: Translate the TEI table model to HTML tables. -->
+    <!-- Tables: Translate the TEI table model to HTML tables.
 
-    <!-- To accommodate attributes common to all cells in a column, this code
+         To accommodate attributes common to all cells in a column, this code
          uses additional <column> elements not present in the TEI table
-         model. -->
+         model.
+         
+         The formatting of a cell is derived from the rend attribute on the
+         column, and can be overriden by the rend attribute on the cell itself.
+         Both rend attributes are converted to classes, where care needs to be
+         taken that the column related classes are always defined before
+         the cell classes, as to make this work out correctly with the
+         CSS precedence rules. Note that all identical rend attributes are
+         mapped to the same class, and that those might occur in preceeding
+         tables, we thus have to generate all column related classes before
+         that related to cells.
+
+         In the cell itself, we will find at most two generated class 
+         attributes: one for the column and one for the cell itself.
+         
+    -->
 
 
     <xsl:template match="table">
@@ -46,7 +61,8 @@
             <xsl:call-template name="setLangAttribute"/>
 
             <xsl:attribute name="class">
-                <xsl:text>table </xsl:text> <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                <xsl:text>table </xsl:text>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:attribute>
 
             <xsl:apply-templates select="head" mode="tablecaption"/>
@@ -58,7 +74,9 @@
                 </xsl:if>
 
                 <xsl:if test="contains(@rend, 'summary(')">
-                    <xsl:attribute name="summary"><xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/></xsl:attribute>
+                    <xsl:attribute name="summary">
+                        <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
+                    </xsl:attribute>
                 </xsl:if>
 
                 <xsl:apply-templates select="head"/>
@@ -140,59 +158,38 @@
     </xsl:template>
 
 
-    <!-- concatenate all possible class things into a single attribute -->
-    <xsl:template name="cell-rend-class">
-        <xsl:param name="rend" select="''"/>
-
-        <xsl:variable name="class">
-            <xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/></xsl:if>
-
-            <xsl:if test="contains($rend, 'align(left)')">alignleft</xsl:if>
-            <xsl:if test="contains($rend, 'align(right)')">alignright</xsl:if>
-            <xsl:if test="contains($rend, 'align(center)')">aligncenter</xsl:if>
-
-            <!-- Align numeric-only cells right -->
-            <xsl:if test="not(contains($rend, 'align('))">
-                <xsl:if test="translate(., '01234567890 ,.&mdash;&prime;&Prime;&deg;&plusmn;&frac12;&frac14;&frac34;&tab;&cr;&lf;', '') = ''">alignright</xsl:if>
-            </xsl:if>
-        </xsl:variable>
-
-        <xsl:if test="translate($class, ' &tab;&cr;&lf;', '') != ''">
-            <xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
+    <xsl:template name="cell-span">
+        <xsl:if test="@cols and (@cols > 1)">
+            <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
         </xsl:if>
+        <xsl:if test="@rows and (@rows > 1)">
+            <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
+        </xsl:if>
+
+        <xsl:call-template name="cell-rend"/>
     </xsl:template>
 
 
+    <!-- Here we potentially need to supply two class names for rendering: 
+         one for the column-level rend attribute, and one for the cell-
+         level rend attribute. -->
     <xsl:template name="cell-rend">
 
-        <!-- concatenate @rend and ../../column[position()]/@rend attributes -->
-        <xsl:variable name="rend">
-            <xsl:value-of select="@rend"/>
-            <xsl:text> </xsl:text>
+        <xsl:variable name="class">
+            <xsl:if test="@role and not(@role = 'data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/>
         </xsl:variable>
 
-        <xsl:call-template name="cell-rend-class">
-            <xsl:with-param name="rend">
-                <xsl:value-of select="$rend"/>
-            </xsl:with-param>
-        </xsl:call-template>
-
-        <xsl:if test="contains($rend, 'valign(')">
-            <xsl:attribute name="valign"><xsl:value-of select="substring-before(substring-after($rend, 'valign('), ')')"/></xsl:attribute>
+        <xsl:if test="normalize-space($class) != ''">
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains($rend, 'padding-top(') or contains($rend, 'padding-bottom(') or @role='sum' or contains($rend, 'font-weight(') or contains($rend, 'width(')">
-            <xsl:attribute name="style">
-                <xsl:if test="contains($rend, 'width(')">width: <xsl:value-of select="substring-before(substring-after($rend, 'width('), ')')"/>;</xsl:if>
-                <xsl:if test="@role='sum'">padding-top: 2px; border-top: solid black 1px;</xsl:if>
-                <xsl:if test="contains($rend, 'padding-top(')">padding-top:<xsl:value-of select="substring-before(substring-after($rend, 'padding-top('), ')')"/>;</xsl:if>
-                <xsl:if test="contains($rend, 'padding-bottom(')">padding-bottom:<xsl:value-of select="substring-before(substring-after($rend, 'padding-bottom('), ')')"/>;</xsl:if>
-                <xsl:if test="contains($rend, 'font-weight(')">font-weight:<xsl:value-of select="substring-before(substring-after($rend, 'font-weight('), ')')"/>;</xsl:if>
-            </xsl:attribute>
+        <xsl:if test="contains(@rend, 'valign(')">
+            <xsl:attribute name="valign"><xsl:value-of select="substring-before(substring-after(@rend, 'valign('), ')')"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains($rend, 'image(')">
+        <xsl:if test="contains(@rend, 'image(')">
             <xsl:call-template name="insertimage2">
                 <xsl:with-param name="alt">
                     <xsl:value-of select="x"/>
@@ -208,31 +205,21 @@
         <xsl:variable name="position">
             <xsl:call-template name="find-column-number"/>
         </xsl:variable>
-        <xsl:value-of select="../../column[position() = $position]/@rend"/>
+        <xsl:for-each select="../../column[position() = $position]">
+            <xsl:call-template name="generate-rend-class-name-if-needed"/>
+        </xsl:for-each>
     </xsl:template>
 
 
     <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
         <!-- The position of the current cell -->
-        <xsl:variable name="cellposition">
+        <xsl:variable name="position">
             <xsl:value-of select="position()"/>
         </xsl:variable>
         <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
         <!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
-        <xsl:value-of select="sum(../cell[position() &lt; $cellposition]/@cols) + count(../cell[position() &lt; $cellposition and not(@cols)]) + 1"/>
-    </xsl:template>
-
-
-    <xsl:template name="cell-span">
-        <xsl:if test="@cols and (@cols > 1)">
-            <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
-        </xsl:if>
-        <xsl:if test="@rows and (@rows > 1)">
-            <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
-        </xsl:if>
-
-        <xsl:call-template name="cell-rend"/>
+        <xsl:value-of select="sum(../cell[position() &lt; $position]/@cols) + count(../cell[position() &lt; $position and not(@cols)])"/>
     </xsl:template>
 
 
