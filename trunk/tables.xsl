@@ -213,13 +213,9 @@
 
     <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
-        <!-- The position of the current cell -->
-        <xsl:variable name="position">
-            <xsl:value-of select="position()"/>
-        </xsl:variable>
         <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
         <!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
-        <xsl:value-of select="sum(../cell[position() &lt; $position]/@cols) + count(../cell[position() &lt; $position and not(@cols)])"/>
+        <xsl:value-of select="sum(preceding-sibling::cell[@cols]/@cols) + count(preceding-sibling::cell[not(@cols)]) + 1"/>
     </xsl:template>
 
 
