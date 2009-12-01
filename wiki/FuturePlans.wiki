@@ -18,3 +18,9 @@ Currently, the stylesheet emits normal HTML. It would be nice to be able to gene
 == Support for ePub ==
 
 Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on devices called ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the [http://code.google.com/p/epub-tools/ epub-tools] project.
+
+=== A Note on DRM ===
+
+I will never include any support for ePub related DRM schemas. Users and redistributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
+
+Also note that this code inserts parts of itself into the resulting products (similar to Bison), hence I intend to include a similar exception to the GPL for generated ePub books. However this exception will not except section 3 of the GPL.
