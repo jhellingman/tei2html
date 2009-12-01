@@ -160,10 +160,32 @@
     </xsl:template>
 
 
+    <!-- Top level rule to generate CSS from rend attributes -->
+    <xsl:template match="/" mode="css">
+        /* Generated CSS for specific elements */
+
+        <!-- We need to collect the column related rendering rules first, 
+             so they can be overriden by later cell rendering rules -->
+        <xsl:apply-templates select="TEI.2/text//column[@rend]" mode="css-column"/>
+
+        <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+    </xsl:template>
+
+
+    <xsl:template match="column[@rend]" mode="css-column">
+        <xsl:call-template name="generate-css-rule"/>
+    </xsl:template>
+
+
     <!-- Low priority default rule for generating the css rules from the 
          rend attribute in css mode -->
+    <xsl:template match="*[@rend and name() != 'column']" mode="css" priority="0">
+        <xsl:call-template name="generate-css-rule"/>
+        <xsl:apply-templates mode="css"/>
+    </xsl:template>
 
-    <xsl:template match="*[@rend]" mode="css" priority="0">
+
+    <xsl:template name="generate-css-rule">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend)))">
 
             <xsl:variable name="css-properties">
@@ -180,11 +202,8 @@
                     <xsl:value-of select="normalize-space($css-properties)"/> /* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */
                 }
             </xsl:if>
-
         </xsl:if>
-        <xsl:apply-templates mode="css"/>
     </xsl:template>
-
 
 
     <!-- Ignore content in css-mode -->

@@ -334,6 +334,13 @@ p.footnote .label
     font-size: 80%;
 }
 
+/****** Tables ******/
+
+td.sum
+{
+    padding-top: 2px; border-top: solid black 1px;
+}
+
 
 /****** Poetry ******/
 
