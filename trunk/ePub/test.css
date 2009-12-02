@@ -70,6 +70,21 @@ h2.docImprint
     padding:1em;
 }
 
+.width20
+{
+    width: 20%;
+}
+
+.width40
+{
+    width: 40%;
+}
+
+.indextoc
+{
+    text-align: center;
+}
+
 .div0
 {
     padding-top: 5.6em;
@@ -99,6 +114,11 @@ h2.docImprint
 .footnotes .div1
 {
     padding: 0;
+}
+
+.apparatusnote
+{
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4
@@ -196,6 +216,12 @@ p.tocSection
     padding-bottom: 1.6em;
 }
 
+.figure
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .floatLeft
 {
     float:left;
@@ -234,6 +260,8 @@ p.figureHead
 {
     float: right;
 }
+
+
 
 .figure p
 {
@@ -767,18 +795,43 @@ sub, sup
                     width:40%; /* node='table' rend='width(40%)' count='1' */
                 }
             
+            .xd22e425width
+            {
+                width: 80px;
+            }
+        
                 
                 .xd22e430
                 {
                     width:100px; float:left; /* node='figure' rend='width(100px) float(left) image(images/test.jpg) link(images/test.jpg)' count='1' */
                 }
             
+            .xd22e430width
+            {
+                width: 80px;
+            }
+        
                 
                 .xd22e437
                 {
                     float:right; /* node='figure' rend='float(right) link(http://www.bohol.ph/)' count='1' */
                 }
             
+            .xd22e437width
+            {
+                width: 80px;
+            }
+        
+            .xd22e450width
+            {
+                width: 480px;
+            }
+        
+            .xd22e470width
+            {
+                width: 480px;
+            }
+        
                 
                 .xd22e520
                 {

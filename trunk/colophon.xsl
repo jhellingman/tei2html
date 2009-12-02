@@ -97,7 +97,7 @@
             <xsl:for-each select="//corr">
                 <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
                     <tr>
-                        <td style="width: 20%">
+                        <td class="width20">
                             <a class="pageref">
                                 <xsl:call-template name="generate-href-attribute"/>
                                 <xsl:choose>
@@ -110,7 +110,7 @@
                                 </xsl:choose>
                             </a>
                         </td>
-                        <td style="width: 40%">
+                        <td class="width40">
                             <xsl:choose>
                                 <xsl:when test="@sic != ''">
                                     <xsl:value-of select="@sic"/>
@@ -120,7 +120,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
-                        <td style="width: 40%">
+                        <td class="width40">
                             <xsl:choose>
                                 <xsl:when test=". != ''">
                                     <xsl:apply-templates/>
@@ -144,15 +144,6 @@
             <h3><xsl:value-of select="$strExternalReferences"/></h3>
 
             <p><xsl:value-of select="$strExternalReferencesDisclaimer"/></p>
-
-            <!-- <ul>
-            <xsl:for-each select="//xref">
-            <xsl:sort select="@url"/>
-                <li>
-                    <xsl:value-of select="@url"/>
-                </li>
-            </xsl:for-each>
-            </ul> -->
         </xsl:if>
     </xsl:template>
 

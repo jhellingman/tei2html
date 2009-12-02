@@ -115,7 +115,7 @@
     <!-- Notes in a critical apparatus (coded with attribute place="apparatus") -->
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
-        <a style="text-decoration:none">
+        <a class="apparatusnote">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:call-template name="generate-href-attribute"/>
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;</a>
@@ -135,7 +135,7 @@
         <p class="footnote">
             <xsl:call-template name="setLangAttribute"/>
             <span class="label">
-                <a style="text-decoration:none">
+                <a class="apparatusnote">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
                     <xsl:call-template name="generate-id-attribute"/>
                     &deg;</a>

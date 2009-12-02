@@ -17,10 +17,10 @@
 ]>
 <!--
 
-    Stylesheet with templates to format figures, to be imported in 
+    Stylesheet with templates to format figures, to be imported in
     tei2html.xsl.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
         messages.xsl        : stores localized messages in variables.
 
@@ -149,6 +149,29 @@
     </xsl:template>
 
 
+    <xsl:template match="figure" mode="css">
+        <!-- Generate CCS class the normal way -->
+        <xsl:call-template name="generate-css-rule"/>
+
+        <!-- Create a special CSS rule for setting the width of this image -->
+        <xsl:variable name="file">
+            <xsl:call-template name="getimagefilename"/>
+        </xsl:variable>
+        <xsl:variable name="width">
+            <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+        </xsl:variable>
+
+        <xsl:if test="$width != ''">
+            .x<xsl:value-of select="generate-id()"/>width
+            {
+                width:<xsl:value-of select="$width"/>;
+            }
+        </xsl:if>
+
+        <xsl:apply-templates mode="css"/>
+    </xsl:template>
+
+
     <xsl:template match="figure">
         <xsl:call-template name="closepar"/>
         <div class="figure">
@@ -162,29 +185,22 @@
                 <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
-            <xsl:choose>
-                <xsl:when test="@rend='left' or contains(@rend, 'float(left)')">
-                    <xsl:attribute name="class">figure floatLeft</xsl:attribute>
-                    <xsl:if test="$width != ''">
-                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
-                    </xsl:if>
-                </xsl:when>
-                <xsl:when test="@rend='right' or contains(@rend, 'float(right)')">
-                    <xsl:attribute name="class">figure floatRight</xsl:attribute>
-                    <xsl:if test="$width != ''">
-                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
-                    </xsl:if>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:attribute name="class">figure</xsl:attribute>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:attribute name="class">
+                <xsl:text>figure </xsl:text>
+                <xsl:if test="contains(@rend, 'float(left)')">floatLeft </xsl:if>
+                <xsl:if test="contains(@rend, 'float(right)')">floatRight </xsl:if>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
+                <!-- Add the class that sets the width, if the width is known -->
+                <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+            </xsl:attribute>
 
             <xsl:if test="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight']">
-                <div class="figAnnotation">
-                    <xsl:if test="$width != ''">
-                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
-                    </xsl:if>
+                <div>
+                    <xsl:attribute name="class">
+                        <xsl:text>figAnnotation </xsl:text>
+                        <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                    </xsl:attribute>
+
                     <xsl:if test="p[@type='figTopLeft']">
                         <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft']" mode="figAnnotation"/></span>
                     </xsl:if>
@@ -205,10 +221,12 @@
             </xsl:call-template>
 
             <xsl:if test="p[@type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']">
-                <div class="figAnnotation">
-                    <xsl:if test="$width != ''">
-                        <xsl:attribute name="style">width: <xsl:value-of select="$width"/></xsl:attribute>
-                    </xsl:if>
+                <div>
+                    <xsl:attribute name="class">
+                        <xsl:text>figAnnotation </xsl:text>
+                        <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                    </xsl:attribute>
+
                     <xsl:if test="p[@type='figBottomLeft']">
                         <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft']" mode="figAnnotation"/></span>
                     </xsl:if>

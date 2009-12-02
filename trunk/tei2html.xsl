@@ -47,9 +47,9 @@
 
 
     <xsl:output
-        doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
-        doctype-system="http://www.w3.org/TR/html4/loose.dtd"
-        method="html"
+        doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+        doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+        method="xml"
         encoding="ISO-8859-1"/>
 
 
@@ -66,7 +66,7 @@
 
     <!--====================================================================-->
 
-    <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
+    <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputformat" select="'html'"/>
