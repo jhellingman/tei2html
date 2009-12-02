@@ -6,7 +6,7 @@
     with the content templates, to keep these together with
     the layout code.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
         messages.xsl        : stores localized messages in variables.
 
@@ -26,8 +26,8 @@
         <xsl:param name="rend" select="normalize-space(@rend)"/>
         <xsl:param name="name" select="name()"/>
 
-        <!-- A rendition ladder is straighfowardly converted to CSS, by taking the 
-             characters before the ( as the css property, and the characters 
+        <!-- A rendition ladder is straighfowardly converted to CSS, by taking the
+             characters before the ( as the css property, and the characters
              between ( and ) as the value. We convert an entire string
              by simply doing the head, and then recursively the tail -->
 
@@ -77,14 +77,17 @@
             <xsl:when test="$property='initial-width'"/>
             <xsl:when test="$property='initial-height'"/>
 
-            <!-- Table related special handling. With the rule 
-                 margin: 0px auto, the table is centered, while 
+            <!-- Figure related special handling. -->
+            <xsl:when test="name() = 'figure' and $property = 'float'"/>
+
+            <!-- Table related special handling. With the rule
+                 margin: 0px auto, the table is centered, while
                  display: table shrinks the bounding box to the content -->
-            <xsl:when test="name() = 'table' and $property = 'align' and $value = 'center'">margin: 0px auto; display:table;</xsl:when>
+            <xsl:when test="name() = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table;</xsl:when>
             <xsl:when test="name() = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="$value"/>em;</xsl:when>
 
             <!-- Properties related to special font usage -->
-            <xsl:when test="$property='font' and $value='fraktur'">font-family: 'Walbaum-Fraktur';</xsl:when>
+            <xsl:when test="$property='font' and $value='fraktur'">font-family:'Walbaum-Fraktur';</xsl:when>
             <xsl:when test="$property='font' and $value='italic'">font-style:italic;</xsl:when>
 
             <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>;</xsl:when>
@@ -99,7 +102,7 @@
     </xsl:template>
 
 
-    <!-- Generate a class name for the rend; typically we use a generated id 
+    <!-- Generate a class name for the rend; typically we use a generated id
          for the first element having this rend attribute value -->
     <xsl:template name="generate-rend-class-name">
         <xsl:param name="rend" select="@rend"/>
@@ -164,7 +167,7 @@
     <xsl:template match="/" mode="css">
         /* Generated CSS for specific elements */
 
-        <!-- We need to collect the column related rendering rules first, 
+        <!-- We need to collect the column related rendering rules first,
              so they can be overriden by later cell rendering rules -->
         <xsl:apply-templates select="TEI.2/text//column[@rend]" mode="css-column"/>
 
@@ -177,9 +180,9 @@
     </xsl:template>
 
 
-    <!-- Low priority default rule for generating the css rules from the 
+    <!-- Low priority default rule for generating the css rules from the
          rend attribute in css mode -->
-    <xsl:template match="*[@rend and name() != 'column']" mode="css" priority="0">
+    <xsl:template match="*[@rend and name() != 'column']" mode="css" priority="-1">
         <xsl:call-template name="generate-css-rule"/>
         <xsl:apply-templates mode="css"/>
     </xsl:template>
@@ -199,7 +202,8 @@
                 <!-- Use the id of the first element with this rend attribute as a class selector -->
                 .<xsl:call-template name="generate-rend-class-name"/>
                 {
-                    <xsl:value-of select="normalize-space($css-properties)"/> /* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */
+                    <xsl:value-of select="normalize-space($css-properties)"/>
+                    <xsl:if test="false()">/* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */</xsl:if>
                 }
             </xsl:if>
         </xsl:if>

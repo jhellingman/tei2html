@@ -149,10 +149,8 @@
     </xsl:template>
 
     <xsl:template name="genindextoc">
-        <div class="transcribernote">
-            <div style="text-align: center">
-                <xsl:apply-templates select="../div2/head" mode="genindextoc"/>
-            </div>
+        <div class="transcribernote indextoc">
+            <xsl:apply-templates select="../div2/head" mode="genindextoc"/>
         </div>
     </xsl:template>
 

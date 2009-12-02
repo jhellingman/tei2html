@@ -205,7 +205,7 @@ sub processFile
         system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
         system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
         system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
-        system ("tidy -qe tmp5b.html");
+        system ("tidy -qe -xml tmp5b.html");
         system ("$princedir/prince tmp5b.html $basename.pdf");
         system ("rm tmp.5a tmp5b.html");
     }
