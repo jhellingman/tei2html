@@ -40,10 +40,13 @@
         <xsl:param name="source" select="."/>
         <xsl:param name="target" select="."/>
 
-        <!-- Determine whether the source and target are in the same file -->
-        <xsl:variable name="sourcefile"><xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$source"/></xsl:call-template></xsl:variable>
-        <xsl:variable name="targetfile"><xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$target"/></xsl:call-template></xsl:variable>
-        <xsl:if test="true() or $sourcefile != $targetfile"><xsl:value-of select="$targetfile"/></xsl:if>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+        <xsl:variable name="targetfile">
+            <xsl:call-template name="splitter-generate-filename-for">
+                <xsl:with-param name="node" select="$target"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
     </xsl:template>
 
 </xsl:stylesheet>

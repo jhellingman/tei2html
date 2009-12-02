@@ -352,7 +352,7 @@
             <xsl:call-template name="setLangAttribute"/>
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
-                <xsl:apply-templates select="head" mode="genloi"/>
+                <xsl:apply-templates select="head" mode="tochead"/>
             </a>
             <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
                 <span class="tocPagenum">
@@ -360,11 +360,6 @@
                 </span>
             </xsl:if>
         </li>
-    </xsl:template>
-
-
-    <xsl:template match="head" mode="genloi">
-        <xsl:apply-templates/>
     </xsl:template>
 
 

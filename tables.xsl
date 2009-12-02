@@ -1,20 +1,4 @@
-<!DOCTYPE xsl:stylesheet [
-
-    <!ENTITY tab        "&#x09;">
-    <!ENTITY lf         "&#x0A;">
-    <!ENTITY cr         "&#x0D;">
-    <!ENTITY deg        "&#176;">
-    <!ENTITY ldquo      "&#x201C;">
-    <!ENTITY nbsp       "&#160;">
-    <!ENTITY mdash      "&#x2014;">
-    <!ENTITY prime      "&#x2032;">
-    <!ENTITY Prime      "&#x2033;">
-    <!ENTITY plusmn     "&#x00B1;">
-    <!ENTITY frac14     "&#x00BC;">
-    <!ENTITY frac12     "&#x00BD;">
-    <!ENTITY frac34     "&#x00BE;">
-
-]>
+<!DOCTYPE xsl:stylesheet>
 <!--
 
     Stylesheet to format tables, to be imported in tei2html.xsl.
