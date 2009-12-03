@@ -1,26 +1,43 @@
 # tei2xml.pl -- process a TEI file.
 
-$toolsdir   = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
-$patcdir    = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
-$xsldir     = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-$tmpdir     = "C:\\Temp";                       # place to drop temporary files
-$bindir     = "C:\\Bin";
-$catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
-$princedir  = "C:\\Program Files\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
+use strict;
 
-$saxon = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java\" -jar C:\\Bin\\saxon\\saxon.jar "; # command to run the saxon processor (see http://saxon.sourceforge.net/, using Version 6.5.5)
+my $toolsdir   = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
+my $patcdir    = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
+my $xsldir     = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
+my $tmpdir     = "C:\\Temp";                       # place to drop temporary files
+my $bindir     = "C:\\Bin";
+my $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+my $princedir  = "C:\\Program Files\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
 
-$usePrince = 0;
+my $saxon = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java\" -jar C:\\Bin\\saxon\\saxon.jar "; # command to run the saxon processor (see http://saxon.sourceforge.net/, using Version 6.5.5)
+my $saxon2 = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
+
+my $epubcheck = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
+my $epubpreflight = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
+
+
+my $usePrince = 0;
+my $makeEPub = 1;
 
 #==============================================================================
 
 
-$filename = $ARGV[0];
+my $argNumber = 0;
+my $filename = $ARGV[$argNumber];
 
-if ($filename eq "-p") 
+if ($filename eq "-p")
 {
     $usePrince = 1;
-    $filename = $ARGV[1];
+    $argNumber++;
+    $filename = $ARGV[$argNumber];
+}
+
+if ($filename eq "-e")
+{
+    $usePrince = 1;
+    $makeEPub++;
+    $filename = $ARGV[$argNumber];
 }
 
 
@@ -37,7 +54,6 @@ if ($filename eq "")
         if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/)
         {
             processFile($file);
-            #exit;
         }
     }
 }
@@ -167,10 +183,10 @@ sub processFile
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.
-    $fileImageParam = "";
+    my $fileImageParam = "";
     if (-f "imageinfo.xml")
     {
-        $pwd = `pwd`;
+        my $pwd = `pwd`;
         chop($pwd);
         $pwd =~ s/\\/\//g;
 
@@ -178,12 +194,12 @@ sub processFile
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
-    $cssFileParam = "";
+    my $cssFileParam = "";
     if (-f "custom.css.xml")
     {
         print "Adding custom.css stylesheet...\n";
 
-        $pwd = `pwd`;
+        my $pwd = `pwd`;
         chop($pwd);
         $pwd =~ s/\\/\//g;
 
@@ -196,18 +212,33 @@ sub processFile
     system ("perl $toolsdir/wipeids.pl tmp.5 > $basename.html");
     system ("tidy -m -wrap 72 -f tidy.err $basename.html");
 
-    if ($usePrince == 1) 
+    if ($usePrince == 1)
     {
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
 
         print "Create PDF version...\n";
-        $optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
+        my $optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
         system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
         system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
         system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
         system ("tidy -qe -xml tmp5b.html");
         system ("$princedir/prince tmp5b.html $basename.pdf");
         system ("rm tmp.5a tmp5b.html");
+    }
+
+    if ($makeEPub == 1)
+    {
+        print "Create ePub version...\n";
+        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
+
+        system ("del $basename.epub");
+        chdir "epub";
+        system ("zip -Xr9Dq ../$basename.epub mimetype");
+        system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
+        chdir "..";
+
+        system ("$epubcheck $basename.epub > $basename.epub.err");
+        system ("$epubpreflight $basename.epub > $basename.epub-preflight.err");
     }
 
     print "Report on word usage...\n";
