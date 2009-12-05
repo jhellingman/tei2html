@@ -51,7 +51,7 @@
     <xsl:template match="/TEI.2/text//note[@place='foot' or @place='unspecified' or not(@place)]">
         <a class="noteref">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
-            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:call-template name="generate-footnote-href-attribute"/>
             <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
         </a>
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
@@ -62,19 +62,11 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Handle notes with paragraphs different from simple notes -->
+    <!-- Handle notes that contain paragraphs different from simple notes -->
 
     <xsl:template match="note[p]" mode="footnotes">
         <p class="footnote">
-            <xsl:call-template name="setLangAttribute"/>
-            <span class="label">
-                <a class="noteref">
-                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
-                </a>
-            </span>
-            <xsl:text> </xsl:text>
+            <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
         </p>
         <xsl:apply-templates select="*[position() > 1]" mode="footnotes"/>
@@ -82,18 +74,24 @@
 
     <xsl:template match="note" mode="footnotes">
         <p class="footnote">
-            <xsl:call-template name="setLangAttribute"/>
-            <span class="label">
-                <a class="noteref">
-                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
-                </a>
-            </span>
-            <xsl:text> </xsl:text>
+            <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
+
+
+    <xsl:template name="footnote-marker">
+        <xsl:call-template name="setLangAttribute"/>
+        <span class="label">
+            <a class="noteref">
+                <xsl:call-template name="generate-id-attribute"/>
+                <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
+                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            </a>
+        </span>
+        <xsl:text> </xsl:text>
+    </xsl:template>
+
 
     <xsl:template match="*" mode="footfirst">
         <xsl:apply-templates/>

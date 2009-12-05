@@ -199,17 +199,22 @@
             </xsl:if>
 
             <xsl:call-template name="GenerateLabel"/>
-
             <xsl:apply-templates/>
+            <xsl:call-template name="insert-footnotes"/>
 
-            <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
-                <div class="footnotes">
-                    <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or @place='unspecified' or not(@place)]"/>
-                </div>
-            </xsl:if>
         </div>
     </xsl:template>
+
+
+    <xsl:template name="insert-footnotes">
+        <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
+            <div class="footnotes">
+                <hr class="fnsep"/>
+                <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+            </div>
+        </xsl:if>    
+    </xsl:template>
+
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>

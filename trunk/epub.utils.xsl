@@ -25,24 +25,64 @@
     -->
 
     <xsl:template name="generate-href-attribute">
-        <xsl:param name="source" select="."/>
         <xsl:param name="target" select="."/>
 
         <xsl:attribute name="href">
             <xsl:call-template name="generate-href">
-                <xsl:with-param name="source" select="$source"/>
                 <xsl:with-param name="target" select="$target"/>
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
 
     <xsl:template name="generate-href">
-        <xsl:param name="source" select="."/>
         <xsl:param name="target" select="."/>
 
         <xsl:variable name="targetfile">
             <xsl:call-template name="splitter-generate-filename-for">
                 <xsl:with-param name="node" select="$target"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+    </xsl:template>
+
+
+    <!-- footnote href attributes
+
+    Footnotes generate two items: a marker in the text, and the actual footnote
+    content at the end of the chapter. These two need to be linked together.
+    The marker should link to the actual note, and the note should link back
+    to the marker. The latter is handled in the standard way. For the former,
+    we need to find out in which file the footnote referred to has 
+    ended up. This is typically the same file that contains the last element 
+    of the containing div1.
+
+    The strategy is this to find first our div1 ancestor and then the last
+    element of it. We then find out in which file that has ended
+    up. Links to footnotes then can point to that file.
+
+    -->
+
+    <xsl:template name="generate-footnote-href-attribute">
+        <xsl:param name="target" select="."/>
+
+        <xsl:attribute name="href">
+            <xsl:call-template name="generate-footnote-href">
+                <xsl:with-param name="target" select="$target"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template name="generate-footnote-href">
+        <xsl:param name="target" select="."/>
+
+        <xsl:if test="not(ancestor::div1)">
+            <xsl:message terminate="no">Error: not yet implemented handling of footnotes outside div1 elements.</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="targetfile">
+            <xsl:call-template name="splitter-generate-filename-for">
+                <xsl:with-param name="node" select="$target/ancestor::div1/*[position() = last()]"/>
             </xsl:call-template>
         </xsl:variable>
 
