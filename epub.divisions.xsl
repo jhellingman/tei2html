@@ -21,13 +21,6 @@
     <xsl:include href="splitter.xsl"/>
 
 
-    <!--====================================================================-->
-    <!-- Main subdivisions of work -->
-
-    <xsl:template match="/TEI.2/text">
-        <xsl:apply-templates mode="splitter"/>
-    </xsl:template>
-
 
     <!--====================================================================-->
     <!-- Divisions and Headings -->
@@ -165,15 +158,23 @@
 
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
+            <xsl:call-template name="insert-footnotes"/>
 
-            <xsl:if test=".//note[not(@place) or @place='foot' or @place='unspecified'] and not(ancestor::q)">
-                <div class="footnotes">
-                    <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select=".//note[not(@place) or @place='foot' or @place='unspecified']"/>
-                </div>
-            </xsl:if>
         </div>
     </xsl:template>
+
+
+    <xsl:template name="insert-footnotes">
+        <xsl:param name="div" select="."/>
+
+        <xsl:if test="$div//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
+            <div class="footnotes">
+                <hr class="fnsep"/>
+                <xsl:apply-templates mode="footnotes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>

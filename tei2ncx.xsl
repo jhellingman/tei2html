@@ -131,7 +131,7 @@
                     </text>
                 </navLabel>
                 <content>
-                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"><xsl:with-param name="node" select=".."/></xsl:call-template></xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"></xsl:call-template></xsl:attribute>
                 </content>
             </navPoint>
         </xsl:if>

@@ -19,34 +19,36 @@
     <!--====================================================================-->
     <!-- Cross References -->
 
-    <!-- Special case: reference to footnote, used when the same footnote reference mark is used multiple times -->
-
-    <xsl:template match="ref[@target and @type='noteref']">
-        <xsl:variable name="target" select="./@target"/>
-        <xsl:apply-templates select="//*[@id=$target]" mode="noterefnumber"/>
-    </xsl:template>
-
-    <xsl:template match="note" mode="noterefnumber">
-        <a class="pseudonoteref">
-            <xsl:call-template name="generate-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
-        </a>
-    </xsl:template>
-
-    <!-- Normal case -->
-
-    <xsl:template match="ref[@target and not(@type='noteref')]">
-        <xsl:variable name="target" select="./@target"/>
+    <xsl:template match="ref[@target]">
+        <xsl:variable name="target" select="@target"/>
+        <xsl:variable name="targetNode" select="//*[@id=$target]"/>
         <xsl:choose>
-            <xsl:when test="not(//*[@id=$target])">
+
+            <xsl:when test="not($targetNode)">
                 <xsl:message terminate="no">Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
                 <xsl:apply-templates/>
             </xsl:when>
+            
+            <xsl:when test="@type='noteref'">
+                <!-- Special case: reference to footnote, used when the content of the reference 
+                     needs to be rendered as the footnote reference mark -->
+                <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
+            </xsl:when>
+
             <xsl:otherwise>
                 <a>
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="//*[@id=$target]"/>
-                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="name($targetNode) = 'note' and $targetNode[@place='foot' or @place='unspecified' or not(@place)]">
+                            <xsl:call-template name="generate-footnote-href-attribute">
+                                <xsl:with-param name="target" select="$targetNode"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="$targetNode"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
@@ -58,6 +60,14 @@
                 </a>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template match="note" mode="noterefnumber">
+        <a class="pseudonoteref">
+            <xsl:call-template name="generate-footnote-href-attribute"/>
+            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+        </a>
     </xsl:template>
 
 

@@ -22,7 +22,8 @@
       <item id="front-1" href="test-front-1.xhtml" media-type="application/xhtml+xml"/>
       <item id="bk01-1" href="test-bk01-1.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch04" href="test-ch04.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch05" href="test-ch05.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch05-1" href="test-ch05-1.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch05-3" href="test-ch05-3.xhtml" media-type="application/xhtml+xml"/>
       <item id="bk01-3" href="test-bk01-3.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
       <item id="index" href="test-index.xhtml" media-type="application/xhtml+xml"/>
@@ -38,7 +39,8 @@
       <itemref linear="yes" idref="front-1"/>
       <itemref linear="yes" idref="bk01-1"/>
       <itemref linear="yes" idref="ch04"/>
-      <itemref linear="yes" idref="ch05"/>
+      <itemref linear="yes" idref="ch05-1"/>
+      <itemref linear="yes" idref="ch05-3"/>
       <itemref linear="yes" idref="bk01-3"/>
       <itemref linear="yes" idref="ch6"/>
       <itemref linear="yes" idref="index"/>

@@ -37,6 +37,11 @@
     >
 
 
+    <xsl:template match="/TEI.2/text" priority="2">
+        <xsl:apply-templates mode="splitter"/>
+    </xsl:template>
+
+
     <xsl:template match="text" mode="splitter">
         <xsl:param name="action"/>
         <xsl:param name="node"/>
@@ -138,26 +143,49 @@
         <xsl:param name="node"/>
 
         <xsl:choose>
-            <xsl:when test="$action = 'filename'">
-                <xsl:call-template name="filename.div1">
-                    <xsl:with-param name="node" select="$node"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$action = 'navMap'">
-                <xsl:call-template name="navMap.div1"/>
-            </xsl:when>
-            <xsl:when test="$action = 'manifest'">
-                <xsl:call-template name="manifest.div1"/>
-            </xsl:when>
-            <xsl:when test="$action = 'spine'">
-                <xsl:call-template name="spine.div1"/>
+            <xsl:when test="processing-instruction(epub-split)">
+
+                <xsl:for-each-group select="node()" group-adjacent="not(self::processing-instruction(epub-split))">
+                    <xsl:choose>
+                        <xsl:when test="current-grouping-key()">
+                            <!-- Sequence of non-div1 elements -->
+                            <xsl:call-template name="div0fragment">
+                                <xsl:with-param name="action" select="$action"/>
+                                <xsl:with-param name="node" select="$node"/>
+                                <xsl:with-param name="nodes" select="current-group()"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:for-each-group>
+
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="content.div1"/>
+
+                <xsl:choose>
+                    <xsl:when test="$action = 'filename'">
+                        <xsl:call-template name="filename.div1">
+                            <xsl:with-param name="node" select="$node"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:when test="$action = 'navMap'">
+                        <xsl:call-template name="navMap.div1"/>
+                    </xsl:when>
+                    <xsl:when test="$action = 'manifest'">
+                        <xsl:call-template name="manifest.div1"/>
+                    </xsl:when>
+                    <xsl:when test="$action = 'spine'">
+                        <xsl:call-template name="spine.div1"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="content.div1"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+
             </xsl:otherwise>
         </xsl:choose>
 
     </xsl:template>
+
 
 
     <!-- filename -->
@@ -282,8 +310,8 @@
 
                 <body>
                     <xsl:choose>
-                        <xsl:when test="parent::div0 and position() = 1">
-                            <div class="div0">
+                        <xsl:when test="(parent::div0 or parent::div1) and position() = 1">
+                            <div class="{name(..)}">
                                 <xsl:call-template name="generate-id-attribute-for">
                                     <xsl:with-param name="node" select=".."/>
                                 </xsl:call-template>
@@ -292,6 +320,12 @@
                                 </xsl:call-template>
                                 <xsl:apply-templates select="$nodes"/>
                             </div>
+                        </xsl:when>
+                        <xsl:when test="parent::div1 and position() = last()">
+                            <xsl:apply-templates select="$nodes"/>
+                            <xsl:call-template name="insert-footnotes">
+                                <xsl:with-param name="div" select=".."/>
+                            </xsl:call-template>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:apply-templates select="$nodes"/>
