@@ -977,9 +977,9 @@ sub handleTag($)
     my $tag = shift;
 
     # end tag or start tag?
-    if ($tag =~ /^!/)
+    if ($tag =~ /^[!?]/)
     {
-        # Comment, don't care.
+        # Comment or processing instruction, don't care.
     }
     elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/)
     {
