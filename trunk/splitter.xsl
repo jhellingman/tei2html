@@ -143,9 +143,9 @@
         <xsl:param name="node"/>
 
         <xsl:choose>
-            <xsl:when test="processing-instruction(epub-split)">
+            <xsl:when test="processing-instruction(epubsplit)">
 
-                <xsl:for-each-group select="node()" group-adjacent="not(self::processing-instruction(epub-split))">
+                <xsl:for-each-group select="node()" group-adjacent="not(self::processing-instruction(epubsplit))">
                     <xsl:choose>
                         <xsl:when test="current-grouping-key()">
                             <!-- Sequence of non-div1 elements -->
