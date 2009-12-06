@@ -207,13 +207,16 @@
 
 
     <xsl:template name="insert-footnotes">
-        <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
+        <xsl:param name="div" select="."/>
+
+        <xsl:if test="$div//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
             <div class="footnotes">
                 <hr class="fnsep"/>
-                <xsl:apply-templates mode="footnotes" select=".//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+                <xsl:apply-templates mode="footnotes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
             </div>
-        </xsl:if>    
+        </xsl:if>
     </xsl:template>
+
 
 
     <xsl:template match="div1/head">

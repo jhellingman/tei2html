@@ -65,6 +65,28 @@
     </xsl:template>
 
 
+    <xsl:template name="generate-href-attribute">
+        <xsl:param name="target" select="."/>
+
+        <xsl:attribute name="href">
+            <xsl:call-template name="generate-href">
+                <xsl:with-param name="target" select="$target"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
+
+    <xsl:template name="generate-footnote-href-attribute">
+        <xsl:param name="target" select="."/>
+
+        <xsl:attribute name="href">
+            <xsl:call-template name="generate-footnote-href">
+                <xsl:with-param name="target" select="$target"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
+
+
     <xsl:template name="generate-filename">
         <xsl:param name="extension" select="'xhtml'"/>
         <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>

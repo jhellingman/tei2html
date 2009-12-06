@@ -19,7 +19,7 @@
     >
 
     <xsl:include href="utils.xsl"/>
-    <xsl:include href="epub.utils.xsl"/>
+    <xsl:include href="utils.epub.xsl"/>
     <xsl:include href="localization.xsl"/>
     <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
@@ -30,7 +30,8 @@
     <xsl:include href="notes.xsl"/>
     <xsl:include href="drama.xsl"/>
     <xsl:include href="contents.xsl"/>
-    <xsl:include href="epub.divisions.xsl"/>
+    <xsl:include href="divisions.xsl"/>
+    <xsl:include href="splitter.xsl"/>
     <xsl:include href="tables.xsl"/>
     <xsl:include href="lists.xsl"/>
     <xsl:include href="figures.xsl"/>
@@ -128,7 +129,7 @@
                     <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
                         <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
                     </xsl:when>
-                    <xsl:otherwise>style/arctic.css</xsl:otherwise>
+                    <xsl:otherwise>style/epub.css</xsl:otherwise>
                 </xsl:choose>.xml
             </xsl:variable>
 
@@ -137,9 +138,6 @@
 
             /* Supplement CSS stylesheet "<xsl:value-of select="normalize-space($stylesheetname)"/>" */
             <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
-
-            /* Standard Aural CSS stylesheet */
-            <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
 
             <xsl:if test="$customCssFile">
                 /* Custom CSS stylesheet "<xsl:value-of select="normalize-space($customCssFile)"/>" */

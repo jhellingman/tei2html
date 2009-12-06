@@ -4,7 +4,7 @@
 
 body
 {
-    background: #FFFFFF;
+    background: white;
     font-family: "Times New Roman", Times, serif;
 }
 
@@ -15,7 +15,7 @@ body, a.hidden
 
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
 {
-    color: #001FA4;
+    color: black;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -27,22 +27,17 @@ p.byline
 
 .figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum, .stage
 {
-    color: #001FA4;
+    color: black;
 }
 
 .rightnote, .pagenum, .linenum, .pagenum a
 {
-    color: #AAAAAA;
-}
-
-a.hidden:hover, a.noteref:hover
-{
-    color: red;
+    color: black;
 }
 
 p.dropcap:first-letter
 {
-    color: #001FA4;
+    color: black;
     font-weight: bold;
 }
 
@@ -50,6 +45,47 @@ sub, sup
 { 
     line-height: 0;
 }
+
+
+.lg .linenum
+{
+    color: black;
+}
+
+.pglink
+{
+    background: inherit;
+    padding-right: 0;
+}
+
+.catlink
+{
+    background: inherit;
+    padding-right: 0;
+}
+
+.exlink
+{
+    background: inherit;
+    padding-right: 0;
+}
+
+.pglink:hover
+{
+    background-color: inherit;
+}
+
+.catlink:hover
+{
+    background-color: inherit;
+}
+
+.exlink:hover
+{
+    background-color: inherit;
+}
+
+
 
 
 ]]>
