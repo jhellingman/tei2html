@@ -74,7 +74,7 @@
          </list>
       </revisionDesc>
    </teiHeader>
-<text rend="stylesheet(style/arctic.css)">
+<text>
 <front id="front">
 <titlePage>
 <docTitle><titlePart>This is a test document</titlePart></docTitle>

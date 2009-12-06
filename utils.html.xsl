@@ -25,17 +25,6 @@
     -->
 
 
-    <xsl:template name="generate-href-attribute">
-        <xsl:param name="target" select="."/>
-
-        <xsl:attribute name="href">
-            <xsl:call-template name="generate-href">
-                <xsl:with-param name="target" select="$target"/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
-
-
     <xsl:template name="generate-href">
         <xsl:param name="target" select="."/>
 
@@ -48,16 +37,6 @@
 
     <!-- footnote href attributes are the same as normal hrefs in
          single file operation -->
-
-    <xsl:template name="generate-footnote-href-attribute">
-        <xsl:param name="target" select="."/>
-
-        <xsl:attribute name="href">
-            <xsl:call-template name="generate-footnote-href">
-                <xsl:with-param name="target" select="$target"/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
 
 
     <xsl:template name="generate-footnote-href">
