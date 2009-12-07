@@ -3,7 +3,7 @@
 
     Stylesheet to format tables, to be imported in tei2html.xsl.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
         messages.xsl        : stores localized messages in variables.
 
@@ -21,7 +21,7 @@
          To accommodate attributes common to all cells in a column, this code
          uses additional <column> elements not present in the TEI table
          model.
-         
+
          The formatting of a cell is derived from the rend attribute on the
          column, and can be overriden by the rend attribute on the cell itself.
          Both rend attributes are converted to classes, where care needs to be
@@ -32,9 +32,9 @@
          tables, we thus have to generate all column related classes before
          that related to cells.
 
-         In the cell itself, we will find at most two generated class 
+         In the cell itself, we will find at most two generated class
          attributes: one for the column and one for the cell itself.
-         
+
     -->
 
 
@@ -154,7 +154,7 @@
     </xsl:template>
 
 
-    <!-- Here we potentially need to supply two class names for rendering: 
+    <!-- Here we potentially need to supply two class names for rendering:
          one for the column-level rend attribute, and one for the cell-
          level rend attribute. -->
     <xsl:template name="cell-rend">

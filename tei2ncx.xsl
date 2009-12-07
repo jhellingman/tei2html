@@ -141,6 +141,9 @@
 
     <xsl:template match="head" mode="navLabel">
         <xsl:apply-templates mode="navLabel"/>
+        <xsl:if test="following-sibling::head[not(@type='label')]">
+            <xsl:text> </xsl:text>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="note" mode="navLabel"/>
