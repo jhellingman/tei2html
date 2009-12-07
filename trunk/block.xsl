@@ -152,7 +152,7 @@
 
 
     <!--====================================================================-->
-    <!-- Arguments (short summary of contents at start of chapter) -->
+    <!-- Arguments (a short summary of contents at start of chapter) -->
 
     <xsl:template match="argument">
         <div class="argument">
