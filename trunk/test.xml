@@ -101,6 +101,12 @@ text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">ita
 a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="caps">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 
+<q rend="block"><text><body><div1><head>Section head in quoted material</head>
+
+<p>This is a paragraph in quoted material<note>This is a footnote in quoted material.</note> This paragraph contains a footnote, to verify correct handling of this convoluted situation during the transformation.</p>
+</div1></body></text></q>
+
+
 <p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>.</p>
 
 </div1>
