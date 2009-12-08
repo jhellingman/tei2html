@@ -125,6 +125,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div0 -->
 
     <xsl:template match="div0">
@@ -132,6 +133,7 @@
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:call-template name="GenerateLabel"/>
+
             <xsl:apply-templates/>
 
             <!-- Include footnotes in the div0, if not done so earlier -->
@@ -156,6 +158,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div1 -->
 
     <xsl:template match="div1[@type='TranscriberNote']">
@@ -179,6 +182,7 @@
         <div>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
+
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
                 <xsl:if test="contains(@rend, 'class(')">
                     <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
@@ -201,19 +205,21 @@
             <xsl:call-template name="GenerateLabel"/>
             <xsl:apply-templates/>
             <xsl:call-template name="insert-footnotes"/>
-
         </div>
     </xsl:template>
 
 
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="."/>
-
-        <xsl:if test="$div//note[@place='foot' or @place='unspecified' or not(@place)] and not(ancestor::q)">
-            <div class="footnotes">
-                <hr class="fnsep"/>
-                <xsl:apply-templates mode="footnotes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
-            </div>
+        <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+        
+        <xsl:if test="$div[not(ancestor::q)]">
+            <xsl:if test="$notes">
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <xsl:apply-templates mode="footnotes" select="$notes"/>
+                </div>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -229,6 +235,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div2 -->
 
     <xsl:template match="div2">
@@ -250,6 +257,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div3 -->
 
     <xsl:template match="div3">
@@ -268,6 +276,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div4 -->
 
     <xsl:template match="div4">
@@ -286,6 +295,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- div5 -->
 
     <xsl:template match="div5">
@@ -304,6 +314,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- other headers -->
 
     <xsl:template match="head">

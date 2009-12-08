@@ -198,6 +198,9 @@
 
         <!-- Does any of the nodes contains the node sought after? -->
         <xsl:for-each select="$nodes">
+            <xsl:message terminate="no">Info: locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
+            <xsl:message terminate="no">Content: <xsl:value-of select="$node"/>.</xsl:message>
+
             <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
                 <xsl:call-template name="generate-filename-for">
                     <xsl:with-param name="node" select=".."/>
@@ -357,6 +360,19 @@
 
 
     <!-- Support functions -->
+
+    <xsl:template name="generate-filename">
+        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
+    </xsl:template>
+
+    <xsl:template name="generate-filename-for">
+        <xsl:param name="node"/>
+        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:param name="position"/>
+        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template><xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>.<xsl:value-of select="$extension"/>
+    </xsl:template>
+
 
     <xsl:template name="splitter-generate-filename-for">
         <xsl:param name="node" select="."/>
