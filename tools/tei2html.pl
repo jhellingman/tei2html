@@ -208,9 +208,9 @@ sub processFile
 
 
     print "Create HTML version...\n";
-    system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
+    system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
     system ("perl $toolsdir/wipeids.pl tmp.5 > $basename.html");
-    system ("tidy -m -wrap 72 -f tidy.err $basename.html");
+    # system ("tidy -m -wrap 72 -f tidy.err -xml -latin1 $basename.html");
 
     if ($usePrince == 1)
     {

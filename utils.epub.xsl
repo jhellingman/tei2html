@@ -12,7 +12,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
@@ -26,7 +26,7 @@
 
 
     <xsl:template name="generate-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:variable name="targetfile">
             <xsl:call-template name="splitter-generate-filename-for">
@@ -56,7 +56,7 @@
 
 
     <xsl:template name="generate-footnote-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:if test="not(ancestor::div1)">
             <xsl:message terminate="no">Error: not yet implemented handling of footnotes outside div1 elements.</xsl:message>
