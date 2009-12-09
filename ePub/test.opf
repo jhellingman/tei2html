@@ -19,15 +19,26 @@
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
       <item id="css" href="test.css" media-type="text/css"/>
-      <item id="front-1" href="test-front-1.xhtml" media-type="application/xhtml+xml"/>
-      <item id="bk01-1" href="test-bk01-1.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch04" href="test-ch04.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch05-1" href="test-ch05-1.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch05-3" href="test-ch05-3.xhtml" media-type="application/xhtml+xml"/>
-      <item id="bk01-3" href="test-bk01-3.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
-      <item id="index" href="test-index.xhtml" media-type="application/xhtml+xml"/>
-      <item id="backmatter" href="test-backmatter.xhtml" media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="front-1"
+            href="test-front-1.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="bk01-1" href="test-bk01-1.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="ch04" href="test-ch04.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="ch05-1" href="test-ch05-1.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="ch05-3" href="test-ch05-3.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="bk01-3" href="test-bk01-3.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="ch6" href="test-ch6.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="index" href="test-index.xhtml"
+            media-type="application/xhtml+xml"/>
+      <item xmlns:xs="http://www.w3.org/2001/XMLSchema" id="backmatter"
+            href="test-backmatter.xhtml"
+            media-type="application/xhtml+xml"/>
       <item id="xd22e132" href="images/hg2101.png" media-type="image/png"/>
       <item id="test" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="test1" href="images/test.jpg" media-type="image/jpeg"/>
@@ -36,14 +47,14 @@
       <item id="tarsier2" href="images/tarsier2.jpg" media-type="image/jpeg"/>
    </manifest>
    <spine toc="ncx">
-      <itemref linear="yes" idref="front-1"/>
-      <itemref linear="yes" idref="bk01-1"/>
-      <itemref linear="yes" idref="ch04"/>
-      <itemref linear="yes" idref="ch05-1"/>
-      <itemref linear="yes" idref="ch05-3"/>
-      <itemref linear="yes" idref="bk01-3"/>
-      <itemref linear="yes" idref="ch6"/>
-      <itemref linear="yes" idref="index"/>
-      <itemref linear="yes" idref="backmatter"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="front-1"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="bk01-1"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="ch04"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="ch05-1"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="ch05-3"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="bk01-3"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="ch6"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="index"/>
+      <itemref xmlns:xs="http://www.w3.org/2001/XMLSchema" linear="yes" idref="backmatter"/>
    </spine>
 </package>
