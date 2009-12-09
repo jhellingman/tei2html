@@ -16,12 +16,15 @@
     >
 
 
+    <xsl:key name="id" match="*[@id]" use="@id"/>
+
+
     <!--====================================================================-->
     <!-- Cross References -->
 
     <xsl:template match="ref[@target]">
         <xsl:variable name="target" select="@target"/>
-        <xsl:variable name="targetNode" select="//*[@id=$target]"/>
+        <xsl:variable name="targetNode" select="key('id', $target)"/>
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">
@@ -46,7 +49,7 @@
                         </xsl:when>
 
                         <!-- $target is inside footnote -->
-                        <xsl:when test="$targetNode//ancestor::note[@place='foot' or @place='unspecified' or not(@place)]">
+                        <xsl:when test="$targetNode/ancestor::note[@place='foot' or @place='unspecified' or not(@place)]">
                             <xsl:call-template name="generate-footnote-href-attribute">
                                 <xsl:with-param name="target" select="$targetNode"/>
                             </xsl:call-template>

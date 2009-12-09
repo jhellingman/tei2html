@@ -23,7 +23,7 @@
                 (transformed) element represented in $node.
 
     manifest    Generate a manifest (ODF) for ePub.
-               
+
     spine       Generate the spine (ODF) for ePub.
 
 -->
@@ -33,19 +33,18 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0"
+    exclude-result-prefixes="xs"
     >
 
 
     <xsl:template match="/TEI.2/text" priority="2">
-        <xsl:apply-templates mode="splitter">
-            <xsl:with-param name="node" select="''"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates mode="splitter"/>
     </xsl:template>
 
 
     <xsl:template match="text" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" select="''"/>
+        <xsl:param name="node"/>
 
         <xsl:apply-templates select="front" mode="splitter">
             <xsl:with-param name="action" select="$action"/>
@@ -67,7 +66,7 @@
 
     <xsl:template match="body[div0]" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" select="''"/>
+        <xsl:param name="node"/>
 
         <xsl:apply-templates select="div0" mode="splitter">
             <xsl:with-param name="action" select="$action"/>
@@ -78,7 +77,7 @@
 
     <xsl:template match="div0 | front | back | body[div1]" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" select="''"/>
+        <xsl:param name="node"/>
 
         <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
             <xsl:choose>
@@ -104,8 +103,8 @@
 
     <xsl:template name="div0fragment">
         <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" select="''"/>
-        <xsl:param name="nodes" select="''"/>
+        <xsl:param name="node"/>
+        <xsl:param name="nodes"/>
 
         <xsl:choose>
             <xsl:when test="$action = 'filename'">
@@ -136,7 +135,7 @@
 
     <xsl:template match="div1" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" select="''"/>
+        <xsl:param name="node"/>
 
         <xsl:choose>
             <xsl:when test="processing-instruction(epubsplit)">
@@ -184,7 +183,7 @@
     <!-- filename -->
 
     <xsl:template name="filename.div0fragment">
-        <xsl:param name="node"/>
+        <xsl:param name="node" as="element()"/>
         <xsl:param name="nodes"/>
 
         <xsl:param name="position" select="position()"/> <!-- that is, position of context group -->
@@ -213,7 +212,7 @@
     </xsl:template>
 
     <xsl:template name="filename.div1">
-        <xsl:param name="node"/>
+        <xsl:param name="node" as="element()"/>
 
         <!-- Does this div1 contain the node sought after? -->
         <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
@@ -229,7 +228,7 @@
 
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
-            <xsl:attribute name="id">                
+            <xsl:attribute name="id">
                 <xsl:call-template name="generate-id-for">
                     <xsl:with-param name="node" select=".."/>
                     <xsl:with-param name="position" select="position()"/>
@@ -281,7 +280,7 @@
 
     <xsl:template name="content.div0fragment">
         <xsl:param name="nodes"/>
-        
+
         <xsl:variable name="filename">
             <xsl:call-template name="generate-filename-for">
                 <xsl:with-param name="node" select=".."/>
@@ -345,20 +344,20 @@
     <!-- Support functions -->
 
     <xsl:template name="generate-filename">
-        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
         <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
     </xsl:template>
 
     <xsl:template name="generate-filename-for">
         <xsl:param name="node"/>
-        <xsl:param name="extension" select="'xhtml'"/>
+        <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
         <xsl:param name="position"/>
         <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template><xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>.<xsl:value-of select="$extension"/>
     </xsl:template>
 
 
     <xsl:template name="splitter-generate-filename-for">
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:apply-templates select="/TEI.2/text" mode="splitter">
             <xsl:with-param name="node" select="$node"/>
@@ -367,7 +366,7 @@
     </xsl:template>
 
     <xsl:template name="splitter-generate-url-for">
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>#<xsl:call-template name="splitter-generate-id"/>
     </xsl:template>

@@ -265,6 +265,11 @@
     <!-- Paragraphs -->
 
     <xsl:template match="p">
+        <xsl:call-template name="handle-paragraph"/>
+    </xsl:template>
+
+
+    <xsl:template name="handle-paragraph">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <p>
                 <xsl:call-template name="generate-id-attribute"/>
@@ -307,8 +312,8 @@
        paragraph is to small to contain the entire initial, the float will. We 
        need to take care to adjust the background position to match the 
        padding-top, such that the two background images will align exactly.
-    5. We need to take the first letter from the Paragraph, and render it in the 
-       float in white, such that it re-appears when no CSS is available.
+    5. We need to remove the first letter from the Paragraph, and render it in 
+       the float in white, such that it re-appears when no CSS is available.
 
     -->
 

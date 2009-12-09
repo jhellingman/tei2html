@@ -3,10 +3,6 @@
 
     Stylesheet to format the HTML header, to be imported in tei2html.xsl.
 
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
-
 -->
 
 <xsl:stylesheet
@@ -127,24 +123,24 @@
             <xsl:if test="$optionExternalCSS = 'No'">
                 <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
                 <style type="text/css">
-                    /* Standard CSS stylesheet */
+                    <!-- Standard CSS stylesheet -->
                     <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
 
-                    /* Supplement CSS stylesheet [<xsl:value-of select="normalize-space($stylesheetname)"/>] */
+                    <!-- Supplement CSS stylesheet -->
                     <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
 
-                    /* Standard Aural CSS stylesheet */
+                    <!-- Standard Aural CSS stylesheet -->
                     <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
 
                     <xsl:if test="$customCssFile">
-                        /* Custom CSS stylesheet [<xsl:value-of select="normalize-space($customCssFile)"/>] */
+                        <!-- Custom CSS stylesheet -->
                         <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
                     </xsl:if>
                 </style>
                 <!-- Pull in CSS sheet for print (using Prince). -->
                 <xsl:if test="$optionPrinceMarkup = 'Yes'">
                     <style type="text/css" media="print">
-                        /* CSS stylesheet for printing */
+                        <!-- CSS stylesheet for printing -->
                         <xsl:copy-of select="document('style/print.css.xml')/*/node()"/>
                     </style>
                 </xsl:if>

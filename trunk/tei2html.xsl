@@ -50,7 +50,7 @@
         doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
         doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
         method="xml"
-        encoding="ISO-8859-1"/>
+        encoding="iso-8859-1"/>
 
 
     <!--====================================================================-->

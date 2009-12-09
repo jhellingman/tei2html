@@ -46,7 +46,7 @@
         doctype-public="-//W3C//DTD XHTML 1.1//EN"
         doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
         method="xml"
-        encoding="UTF-8"/>
+        encoding="utf-8"/>
 
     <!--====================================================================-->
 
@@ -117,6 +117,7 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
 
     <xsl:template name="copy-stylesheets">
         <xsl:result-document 
@@ -132,21 +133,42 @@
                     <xsl:otherwise>style/epub.css</xsl:otherwise>
                 </xsl:choose>.xml
             </xsl:variable>
-
-            /* Standard CSS stylesheet */
+            <!-- Standard CSS stylesheet -->
             <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
 
-            /* Supplement CSS stylesheet "<xsl:value-of select="normalize-space($stylesheetname)"/>" */
+            <!-- Supplement CSS stylesheet -->
             <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
 
+            <!-- Custom CSS stylesheet -->
             <xsl:if test="$customCssFile">
-                /* Custom CSS stylesheet "<xsl:value-of select="normalize-space($customCssFile)"/>" */
                 <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
             </xsl:if>
 
             <xsl:apply-templates select="/" mode="css"/>
 
         </xsl:result-document>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- ePub specific overrides -->
+
+    <!-- Only generate anchors, but no page numbers in the margin (from block.xsl) -->
+    <xsl:template match="pb" priority="2">
+        <xsl:choose>
+            <!-- In HTML, we do not allow a span element at the top-level. -->
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table">
+                <xsl:call-template name="generate-anchor"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:call-template name="generate-anchor"/></p>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <!-- Decorative Initials are ignored in ePub (from block.xsl) -->
+    <xsl:template match="p[contains(@rend, 'initial-image')]" priority="2">
+        <xsl:call-template name="handle-paragraph"/>
     </xsl:template>
 
 

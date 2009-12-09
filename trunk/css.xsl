@@ -165,7 +165,6 @@
 
     <!-- Top level rule to generate CSS from rend attributes -->
     <xsl:template match="/" mode="css">
-        /* Generated CSS for specific elements */
 
         <!-- We need to collect the column related rendering rules first,
              so they can be overriden by later cell rendering rules -->
