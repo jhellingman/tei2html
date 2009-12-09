@@ -532,13 +532,15 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.</p>
 
 <q><text><body><div1>
-<lg type="Group" rend="font(italic)">
+<lg type="Group" rend="font(italic)" id="footnoteverse">
 <l>This is a rule of verse in italics in a footnote</l>
 <l rend="indent(1)">This is another rule of verse in a footnote</l>
 </lg>
 </div1></body></text></q></note></l></lg></lg>
 
 </p>
+
+<p>Note that the footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
 </div1>
 </div0>

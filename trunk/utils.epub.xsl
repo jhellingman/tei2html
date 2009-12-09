@@ -64,7 +64,7 @@
 
         <xsl:variable name="targetfile">
             <xsl:call-template name="splitter-generate-filename-for">
-                <xsl:with-param name="node" select="$target/ancestor::div1/*[position() = last()]"/>
+                <xsl:with-param name="node" select="$target/ancestor::div1[not(ancestor::q)]/*[position() = last()]"/>
             </xsl:call-template>
         </xsl:variable>
 

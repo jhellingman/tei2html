@@ -17,7 +17,7 @@
 
     The following actions are supported:
 
-    [empty]     Generate the (named) files with the content. [TODO]
+    [empty]     Generate the (named) files with the content.
 
     filename    Generate the name of the file that contains the
                 (transformed) element represented in $node.
@@ -26,25 +26,26 @@
                
     spine       Generate the spine (ODF) for ePub.
 
-    navMap      Generate the navMap (NXC) for ePub. [TODO]
-
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     version="2.0"
     >
 
 
     <xsl:template match="/TEI.2/text" priority="2">
-        <xsl:apply-templates mode="splitter"/>
+        <xsl:apply-templates mode="splitter">
+            <xsl:with-param name="node" select="''"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
     <xsl:template match="text" mode="splitter">
-        <xsl:param name="action"/>
-        <xsl:param name="node"/>
+        <xsl:param name="action" select="''" as="xs:string"/>
+        <xsl:param name="node" select="''"/>
 
         <xsl:apply-templates select="front" mode="splitter">
             <xsl:with-param name="action" select="$action"/>
@@ -65,8 +66,8 @@
 
 
     <xsl:template match="body[div0]" mode="splitter">
-        <xsl:param name="action"/>
-        <xsl:param name="node"/>
+        <xsl:param name="action" select="''" as="xs:string"/>
+        <xsl:param name="node" select="''"/>
 
         <xsl:apply-templates select="div0" mode="splitter">
             <xsl:with-param name="action" select="$action"/>
@@ -76,8 +77,8 @@
 
 
     <xsl:template match="div0 | front | back | body[div1]" mode="splitter">
-        <xsl:param name="action"/>
-        <xsl:param name="node"/>
+        <xsl:param name="action" select="''" as="xs:string"/>
+        <xsl:param name="node" select="''"/>
 
         <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
             <xsl:choose>
@@ -102,19 +103,14 @@
 
 
     <xsl:template name="div0fragment">
-        <xsl:param name="action"/>
-        <xsl:param name="node"/>
-        <xsl:param name="nodes"/>
+        <xsl:param name="action" select="''" as="xs:string"/>
+        <xsl:param name="node" select="''"/>
+        <xsl:param name="nodes" select="''"/>
 
         <xsl:choose>
             <xsl:when test="$action = 'filename'">
                 <xsl:call-template name="filename.div0fragment">
                     <xsl:with-param name="node" select="$node"/>
-                    <xsl:with-param name="nodes" select="$nodes"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$action = 'navMap'">
-                <xsl:call-template name="navMap.div0fragment">
                     <xsl:with-param name="nodes" select="$nodes"/>
                 </xsl:call-template>
             </xsl:when>
@@ -139,8 +135,8 @@
 
 
     <xsl:template match="div1" mode="splitter">
-        <xsl:param name="action"/>
-        <xsl:param name="node"/>
+        <xsl:param name="action" select="''" as="xs:string"/>
+        <xsl:param name="node" select="''"/>
 
         <xsl:choose>
             <xsl:when test="processing-instruction(epubsplit)">
@@ -166,9 +162,6 @@
                         <xsl:call-template name="filename.div1">
                             <xsl:with-param name="node" select="$node"/>
                         </xsl:call-template>
-                    </xsl:when>
-                    <xsl:when test="$action = 'navMap'">
-                        <xsl:call-template name="navMap.div1"/>
                     </xsl:when>
                     <xsl:when test="$action = 'manifest'">
                         <xsl:call-template name="manifest.div1"/>
@@ -198,8 +191,8 @@
 
         <!-- Does any of the nodes contains the node sought after? -->
         <xsl:for-each select="$nodes">
-            <xsl:message terminate="no">Info: locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
-            <xsl:message terminate="no">Content: <xsl:value-of select="$node"/>.</xsl:message>
+            <!--<xsl:message terminate="no">Info: locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
+            <xsl:message terminate="no">Content: <xsl:value-of select="$node"/>.</xsl:message>-->
 
             <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
                 <xsl:call-template name="generate-filename-for">
@@ -226,16 +219,6 @@
         <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
             <xsl:call-template name="generate-filename"/>
         </xsl:if>
-    </xsl:template>
-
-
-    <!-- navMap -->
-
-    <xsl:template name="navMap.div0fragment">
-        <xsl:param name="nodes"/>
-    </xsl:template>
-
-    <xsl:template name="navMap.div1">
     </xsl:template>
 
 
