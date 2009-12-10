@@ -69,6 +69,16 @@
             <xsl:with-param name="name" select="'msgNotApplicable'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strNext">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgNext'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strPrevious">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgPrevious'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strChapter">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgChapter'"/>

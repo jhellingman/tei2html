@@ -178,7 +178,6 @@ sub processFile
     {
         print "Collect image dimensions...\n";
         # add -c to also collect contour information with this script.
-        # Need to use older perl as this requires the image-magick integration, which lags behind Perl.
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
 
@@ -210,6 +209,7 @@ sub processFile
     print "Create HTML version...\n";
     system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
     system ("perl $toolsdir/wipeids.pl tmp.5 > $basename.html");
+    system ("tidy -m -wrap 72 -f tidy.err $basename.html");
     # system ("tidy -m -wrap 72 -f tidy.err -xml -latin1 $basename.html");
 
     if ($usePrince == 1)

@@ -90,7 +90,7 @@
 <div0 id="bk01" n="I" type="Book" rend="label(yes)">
 <head>This is a Test Document</head>
 
-<p>This is a test document, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my stylesheet (yes, I sometimes forget myself). </p>
+<p>This is a test document<note>This is a footnote at the div0 level, for testing purposes</note>, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my stylesheet (yes, I sometimes forget myself). </p>
 
 <div1 id="ch04" n="IV" type="Chapter" rend="label(yes)">
 <head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
@@ -146,7 +146,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
         <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
     </row>
     <row>
-        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment.!)</cell>
+        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
     </row>
 </table>
 </p>

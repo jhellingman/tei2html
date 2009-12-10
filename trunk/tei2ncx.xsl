@@ -137,7 +137,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="head[@type='label']" mode="navLabel"/>
+    <xsl:template match="head[@type='label' or @type='super']" mode="navLabel"/>
 
     <xsl:template match="head" mode="navLabel">
         <xsl:apply-templates mode="navLabel"/>

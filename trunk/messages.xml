@@ -75,6 +75,8 @@
         <msg:message name="msgDeleted">Deleted</msg:message>
         <msg:message name="msgHere">Here</msg:message>
         <msg:message name="msgNotApplicable">N.A.</msg:message>
+        <msg:message name="msgNext">Next</msg:message>
+        <msg:message name="msgPrevious">Previous</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -610,6 +612,8 @@
         <msg:message name="msgDeleted">Verwijderd</msg:message>
         <msg:message name="msgHere">Hier</msg:message>
         <msg:message name="msgNotApplicable">n.v.t.</msg:message>
+        <msg:message name="msgNext">Volgende</msg:message>
+        <msg:message name="msgPrevious">Vorige</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>

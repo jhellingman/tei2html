@@ -41,15 +41,8 @@
             <xsl:otherwise>
                 <a>
                     <xsl:choose>
-                        <!-- $target is footnote -->
-                        <xsl:when test="name($targetNode) = 'note' and $targetNode[@place='foot' or @place='unspecified' or not(@place)]">
-                            <xsl:call-template name="generate-footnote-href-attribute">
-                                <xsl:with-param name="target" select="$targetNode"/>
-                            </xsl:call-template>
-                        </xsl:when>
-
-                        <!-- $target is inside footnote -->
-                        <xsl:when test="$targetNode/ancestor::note[@place='foot' or @place='unspecified' or not(@place)]">
+                        <!-- $target is footnote or inside footnote -->
+                        <xsl:when test="$targetNode/ancestor-or-self::note[@place='foot' or @place='unspecified' or not(@place)]">
                             <xsl:call-template name="generate-footnote-href-attribute">
                                 <xsl:with-param name="target" select="$targetNode"/>
                             </xsl:call-template>
@@ -78,7 +71,7 @@
     <xsl:template match="note" mode="noterefnumber">
         <a class="pseudonoteref">
             <xsl:call-template name="generate-footnote-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
 

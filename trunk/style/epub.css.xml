@@ -5,6 +5,7 @@
 body
 {
     background: white;
+    margin: 1.58em 16%;
     font-family: "Times New Roman", Times, serif;
 }
 
