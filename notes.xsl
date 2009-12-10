@@ -40,7 +40,7 @@
         <a class="noteref">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:call-template name="generate-footnote-href-attribute"/>
-            <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            <xsl:call-template name="footnote-number"/>
         </a>
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
             <span class="displayfootnote">
@@ -49,6 +49,24 @@
             </span>
         </xsl:if>
     </xsl:template>
+
+
+    <!-- Insert footnotes at the current location -->
+
+    <xsl:template name="insert-footnotes">
+        <xsl:param name="div" select="."/>
+        <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+        
+        <xsl:if test="$div[not(ancestor::q)]">
+            <xsl:if test="$notes">
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <xsl:apply-templates mode="footnotes" select="$notes"/>
+                </div>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
 
     <!-- Handle notes that contain paragraphs different from simple notes -->
 
@@ -74,10 +92,22 @@
             <a class="noteref">
                 <xsl:call-template name="generate-id-attribute"/>
                 <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
-                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+                <xsl:call-template name="footnote-number"/>
             </a>
         </span>
         <xsl:text> </xsl:text>
+    </xsl:template>
+
+
+    <xsl:template name="footnote-number">
+        <xsl:choose>
+            <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
+                <xsl:number level="any" count="note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

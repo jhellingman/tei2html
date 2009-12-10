@@ -304,6 +304,13 @@
                                     <xsl:with-param name="div" select=".."/>
                                 </xsl:call-template>
                                 <xsl:apply-templates select="$nodes"/>
+
+                                <xsl:if test="parent::div0">
+                                    <xsl:call-template name="insert-footnotes">
+                                        <xsl:with-param name="notes" select="$nodes//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+                                    </xsl:call-template>
+                                </xsl:if>
+
                             </div>
                         </xsl:when>
                         <xsl:when test="parent::div1 and position() = last()">
@@ -349,7 +356,7 @@
     </xsl:template>
 
     <xsl:template name="generate-filename-for">
-        <xsl:param name="node"/>
+        <xsl:param name="node" as="element()"/>
         <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
         <xsl:param name="position"/>
         <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template><xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>.<xsl:value-of select="$extension"/>

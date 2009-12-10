@@ -616,6 +616,7 @@ ul { list-style-type: none; }
 body
 {
     background: white;
+    margin: 1.58em 16%;
     font-family: "Times New Roman", Times, serif;
 }
 
@@ -702,188 +703,188 @@ sub, sup
 
 
                 
-                .xd22e258
+                .xd22e261
                 {
                     color:red; background-color:yellow;
                 }
             
                 
-                .xd22e259
+                .xd22e262
                 {
                     color:green; text-align:right;
                 }
             
                 
-                .xd22e260
+                .xd22e263
                 {
                     color:blue; text-align:right;
                 }
             
                 
-                .xd22e296
+                .xd22e299
                 {
                     text-align:left;width:40%;
                 }
             
                 
-                .xd22e297
+                .xd22e300
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e110
+                .xd22e113
                 {
                     font-family:'Walbaum-Fraktur';
                 }
             
                 
-                .xd22e123
+                .xd22e126
                 {
                     font-size:14pt; color:red; background-color:yellow;
                 }
             
                 
-                .xd22e225
+                .xd22e228
                 {
                     margin:0px auto; display:table;
                 }
             
                 
-                .xd22e229
+                .xd22e232
                 {
                     valign:middle; width:2;
                 }
             
                 
-                .xd22e230
+                .xd22e233
                 {
                     valign:middle;
                 }
             
                 
-                .xd22e240
+                .xd22e243
                 {
                     margin-left:2em;
                 }
             
                 
-                .xd22e242
+                .xd22e245
                 {
                     width:25%;
                 }
             
                 
-                .xd22e244
+                .xd22e247
                 {
                     width:75%;
                 }
             
                 
-                .xd22e255
+                .xd22e258
                 {
                     width:40%; margin:0px auto; display:table;
                 }
             
                 
-                .xd22e264
+                .xd22e267
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e283
+                .xd22e286
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e288
+                .xd22e291
                 {
                     text-align:left;
                 }
             
                 
-                .xd22e295
+                .xd22e298
                 {
                     width:40%;
                 }
             
-            .xd22e440width
+            .xd22e443width
             {
                 width:80px;
             }
         
                 
-                .xd22e445
+                .xd22e448
                 {
                     width:100px;
                 }
             
-            .xd22e445width
+            .xd22e448width
             {
                 width:80px;
             }
         
-            .xd22e453width
+            .xd22e456width
             {
                 width:80px;
             }
         
-            .xd22e465width
+            .xd22e468width
             {
                 width:480px;
             }
         
-            .xd22e485width
+            .xd22e488width
             {
                 width:480px;
             }
         
                 
-                .xd22e535
+                .xd22e538
                 {
                     font-style:italic;
                 }
             
                 
-                .xd22e566
+                .xd22e569
                 {
                     list-style-type:disc;
                 }
             
                 
-                .xd22e596
+                .xd22e599
                 {
                     list-style-type:upper-roman;
                 }
             
                 
-                .xd22e608
+                .xd22e611
                 {
                     list-style-type:lower-roman;
                 }
             
                 
-                .xd22e628
+                .xd22e631
                 {
                     text-align:left;
                 }
             
                 
-                .xd22e631
+                .xd22e634
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e633
+                .xd22e636
                 {
                     text-align:center;
                 }
             
             
-            .xd22e636
+            .xd22e639
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -891,7 +892,7 @@ sub, sup
                 
             }
 
-            .xd22e636init
+            .xd22e639init
             {
                 float: left;
                 width: 90px;
@@ -907,49 +908,49 @@ sub, sup
 
         
                 
-                .xd22e641
+                .xd22e644
                 {
                     text-align:justify;
                 }
             
                 
-                .xd22e657
+                .xd22e660
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e666
+                .xd22e669
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e671
+                .xd22e674
                 {
                     text-indent:1em;
                 }
             
                 
-                .xd22e677
+                .xd22e680
                 {
                     text-indent:2em;
                 }
             
                 
-                .xd22e681
+                .xd22e684
                 {
                     text-indent:3em;
                 }
             
                 
-                .xd22e685
+                .xd22e688
                 {
                     text-indent:10em;
                 }
             
                 
-                .xd22e687
+                .xd22e690
                 {
                     font-style:italic;
                 }
