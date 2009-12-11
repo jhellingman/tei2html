@@ -74,7 +74,7 @@
                     <xsl:if test="key('id', 'cover')">
                         <reference type="cover" title="{$strCoverImage}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'cover')"/>
+                                <xsl:with-param name="target" select="key('id', 'cover')[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -82,7 +82,7 @@
                     <xsl:if test="key('id', 'toc')">
                         <reference type="toc" title="{$strTableOfContents}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'toc')"/>
+                                <xsl:with-param name="target" select="key('id', 'toc')[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -90,7 +90,7 @@
                     <xsl:if test="key('id', 'loi')">
                         <reference type="loi" title="{$strListOfIllustrations}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'loi')"/>
+                                <xsl:with-param name="target" select="key('id', 'loi')[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>

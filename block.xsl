@@ -278,7 +278,7 @@
 
                 <xsl:variable name="class">
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
-                    <xsl:if test="ancestor::note[place='foot' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
+                    <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/>
                 </xsl:variable>
 

@@ -229,6 +229,7 @@ sub processFile
     if ($makeEPub == 1)
     {
         print "Create ePub version...\n";
+        # system ("$saxon2 -T $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml 2> tmp-trace.xml");
         system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
 
         system ("del $basename.epub");
