@@ -150,6 +150,7 @@
 
     <xsl:template name="genindextoc">
         <div class="transcribernote indextoc">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:apply-templates select="../div2/head" mode="genindextoc"/>
         </div>
     </xsl:template>
@@ -365,6 +366,7 @@
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
+            <xsl:call-template name="generate-id-attribute"/>
             <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <table>
                 <xsl:call-template name="splitrows">

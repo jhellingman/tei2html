@@ -37,6 +37,7 @@
 
     <xsl:template match="titlePage">
         <div class="titlePage">
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>

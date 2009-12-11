@@ -139,7 +139,7 @@
 
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+            <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
             <h2><xsl:value-of select="$strApparatus"/></h2>
 

@@ -175,6 +175,52 @@
             <xsl:with-param name="name" select="'msgDeleted'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strCoverImage">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgCoverImage'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strTitlePage">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgTitlePage'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strDedication">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgDedication'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strEpigraph">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgEpigraph'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strIndex">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgIndex'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strBibliography">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgBibliography'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strCopyrightPage">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgCopyrightPage'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strPreface">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgPreface'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strText">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgText'"/>
+        </xsl:call-template>
+    </xsl:variable>
+
 
     <xsl:variable name="strExternalReferences">
         <xsl:call-template name="GetMessage">

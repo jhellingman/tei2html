@@ -77,6 +77,12 @@
         <msg:message name="msgNotApplicable">N.A.</msg:message>
         <msg:message name="msgNext">Next</msg:message>
         <msg:message name="msgPrevious">Previous</msg:message>
+        <msg:message name="msgTitlePage">Title Page</msg:message>
+        <msg:message name="msgIndex">Index</msg:message>
+        <msg:message name="msgText">Text</msg:message>
+        <msg:message name="msgBibliography">Bibliography</msg:message>
+        <msg:message name="msgCoverImage">Cover Image</msg:message>
+        <msg:message name="msgPreface">Preface</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -614,6 +620,12 @@
         <msg:message name="msgNotApplicable">n.v.t.</msg:message>
         <msg:message name="msgNext">Volgende</msg:message>
         <msg:message name="msgPrevious">Vorige</msg:message>
+        <msg:message name="msgTitlePage">Titelpagina</msg:message>
+        <msg:message name="msgIndex">Index</msg:message>
+        <msg:message name="msgText">Tekst</msg:message>
+        <msg:message name="msgBibliography">Bibliografie</msg:message>
+        <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>
+        <msg:message name="msgPreface">Voorwoord</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>
