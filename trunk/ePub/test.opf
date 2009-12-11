@@ -52,5 +52,6 @@
       <reference type="title-page" title="Title Page" href="test-front-1.xhtml#xd22e76"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk01-1.xhtml#bk01"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd22e775"/>
    </guide>
 </package>

@@ -60,7 +60,51 @@
 
                 <navMap>
                     <xsl:variable name="navMap">
+
+                        <xsl:if test="/TEI.2/text/front/titlePage">
+                            <navPoint class="cover">
+                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                                <navLabel><text><xsl:value-of select="$strTitlePage"/></text></navLabel>
+                                <content>
+                                    <xsl:attribute name="src">
+                                        <xsl:call-template name="splitter-generate-url-for">
+                                            <xsl:with-param name="node" select="/TEI.2/text/front/titlePage[1]"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                </content>
+                            </navPoint>
+                        </xsl:if>
+
                         <xsl:apply-templates select="text" mode="navMap"/>
+
+                        <xsl:if test="//divGen[@id='toc']">
+                            <navPoint class="contents">
+                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                                <navLabel><text><xsl:value-of select="$strTableOfContents"/></text></navLabel>
+                                <content>
+                                    <xsl:attribute name="src">
+                                        <xsl:call-template name="splitter-generate-url-for">
+                                            <xsl:with-param name="node" select="//divGen[@id='toc'][1]"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                </content>
+                            </navPoint>
+                        </xsl:if>
+
+                        <xsl:if test="//divGen[@type='Colophon']">
+                            <navPoint class="colophon">
+                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                                <navLabel><text><xsl:value-of select="$strColophon"/></text></navLabel>
+                                <content>
+                                    <xsl:attribute name="src">
+                                        <xsl:call-template name="splitter-generate-url-for">
+                                            <xsl:with-param name="node" select="//divGen[@type='Colophon'][1]"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                </content>
+                            </navPoint>
+                        </xsl:if>
+
                     </xsl:variable>
                     <xsl:apply-templates select="$navMap" mode="playorder"/>
                 </navMap>
@@ -137,17 +181,16 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="head[@type='label' or @type='super']" mode="navLabel"/>
+    <xsl:template match="head[@type='super']" mode="navLabel"/>
 
     <xsl:template match="head" mode="navLabel">
         <xsl:apply-templates mode="navLabel"/>
-        <xsl:if test="following-sibling::head[not(@type='label')]">
+        <xsl:if test="following-sibling::head[not(@type='super')]">
             <xsl:text> </xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="note" mode="navLabel"/>
-
 
     <!--== playorder =======================================================-->
 

@@ -238,8 +238,8 @@ sub processFile
         system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
         chdir "..";
 
-        system ("$epubcheck $basename.epub > $basename.epub.err");
-        system ("$epubpreflight $basename.epub > $basename.epub-preflight.err");
+        # system ("$epubcheck $basename.epub");
+        system ("$epubpreflight $basename.epub");
     }
 
     print "Report on word usage...\n";
