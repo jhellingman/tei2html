@@ -159,10 +159,10 @@
                         </reference>
                     </xsl:if>
 
-                    <xsl:if test="//divgen[@type='colophon']">
+                    <xsl:if test="//divGen[@type='Colophon']">
                         <reference type="colophon" title="{$strColophon}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//divgen[@type='colophon'][1]"/>
+                                <xsl:with-param name="target" select="//divGen[@type='Colophon'][1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>

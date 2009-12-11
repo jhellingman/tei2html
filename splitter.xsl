@@ -375,13 +375,27 @@
     <xsl:template name="splitter-generate-url-for">
         <xsl:param name="node" select="." as="element()"/>
 
-        <xsl:call-template name="splitter-generate-filename-for"><xsl:with-param name="node" select="$node"/></xsl:call-template>#<xsl:call-template name="splitter-generate-id"/>
+        <xsl:call-template name="splitter-generate-filename-for">
+            <xsl:with-param name="node" select="$node"/>
+        </xsl:call-template>
+        <xsl:text>#</xsl:text>
+        <xsl:call-template name="splitter-generate-id">
+            <xsl:with-param name="node" select="$node"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template name="splitter-generate-id">
+        <xsl:param name="node" select="." as="element()"/>
+
         <xsl:choose>
-            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/><xsl:message terminate="no">Warning: generated ID [x<xsl:value-of select="generate-id(.)"/>] is not stable between runs of XSLT.</xsl:message></xsl:otherwise>
+            <xsl:when test="$node/@id">
+                <xsl:value-of select="$node/@id"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>x</xsl:text>
+                <xsl:value-of select="generate-id($node)"/>
+                <xsl:message terminate="no">Warning: generated ID [x<xsl:value-of select="generate-id($node)"/>] is not stable between runs of XSLT.</xsl:message>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 

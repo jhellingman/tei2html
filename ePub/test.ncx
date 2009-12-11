@@ -20,71 +20,89 @@
       <text>Author of Work (Birth-year—Death-year) A. U. Thor W. Riter</text>
    </docAuthor>
    <navMap>
-      <navPoint playOrder="1" class="part" id="bk01">
+      <navPoint playOrder="1" class="cover" id="xd22e2">
+         <navLabel>
+            <text>Title Page</text>
+         </navLabel>
+         <content src="test-front-1.xhtml#xd22e76"/>
+      </navPoint>
+      <navPoint playOrder="2" class="part" id="bk01">
          <navLabel>
             <text>This is a Test Document</text>
          </navLabel>
          <content src="test-bk01-1.xhtml"/>
-         <navPoint playOrder="2" class="chapter" id="ch04">
+         <navPoint playOrder="3" class="chapter" id="ch04">
             <navLabel>
                <text>A Chapter Dealing with Text Styles</text>
             </navLabel>
             <content src="test-ch04.xhtml"/>
          </navPoint>
-         <navPoint playOrder="3" class="chapter" id="ch05">
+         <navPoint playOrder="4" class="chapter" id="ch05">
             <navLabel>
-               <text>Formatting Tables</text>
+               <text>Chapter V Formatting Tables</text>
             </navLabel>
             <content src="test-ch05-1.xhtml"/>
-            <navPoint playOrder="4" class="section" id="xd22e500">
+            <navPoint playOrder="5" class="section" id="xd22e500">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
                <content src="test-ch05-3.xhtml#xd22e500"/>
             </navPoint>
-            <navPoint playOrder="5" class="section" id="xd22e522">
+            <navPoint playOrder="6" class="section" id="xd22e522">
                <navLabel>
-                  <text>Lists</text>
+                  <text>Section Lists</text>
                </navLabel>
                <content src="test-ch05-3.xhtml#xd22e522"/>
             </navPoint>
          </navPoint>
-         <navPoint playOrder="6" class="chapter" id="ch6">
+         <navPoint playOrder="7" class="chapter" id="ch6">
             <navLabel>
                <text>Tests of poetry</text>
             </navLabel>
             <content src="test-ch6.xhtml"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="7" class="chapter" id="index">
+      <navPoint playOrder="8" class="chapter" id="index">
          <navLabel>
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="8" class="section" id="xd22e751">
+         <navPoint playOrder="9" class="section" id="xd22e751">
             <navLabel>
                <text>A.</text>
             </navLabel>
             <content src="test-index.xhtml#xd22e751"/>
          </navPoint>
-         <navPoint playOrder="9" class="section" id="xd22e756">
+         <navPoint playOrder="10" class="section" id="xd22e756">
             <navLabel>
                <text>B.</text>
             </navLabel>
             <content src="test-index.xhtml#xd22e756"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd22e761">
+         <navPoint playOrder="11" class="section" id="xd22e761">
             <navLabel>
                <text>C.</text>
             </navLabel>
             <content src="test-index.xhtml#xd22e761"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd22e766">
+         <navPoint playOrder="12" class="section" id="xd22e766">
             <navLabel>
                <text>D.</text>
             </navLabel>
             <content src="test-index.xhtml#xd22e766"/>
          </navPoint>
+      </navPoint>
+      <navPoint playOrder="13" class="contents" id="xd22e2">
+         <navLabel>
+            <text>Table of Contents</text>
+         </navLabel>
+         <content src="test-front-1.xhtml#toc"/>
+      </navPoint>
+      <navPoint playOrder="14" class="colophon" id="xd22e2">
+         <navLabel>
+            <text>Colophon</text>
+         </navLabel>
+         <content src="test-backmatter.xhtml#xd22e775"/>
       </navPoint>
    </navMap>
 </ncx>
