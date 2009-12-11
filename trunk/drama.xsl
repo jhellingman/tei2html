@@ -44,6 +44,7 @@
             <xsl:attribute name="class">
                 <xsl:if test="not(parent::lg)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:attribute>
             <xsl:call-template name="setLangAttribute"/>

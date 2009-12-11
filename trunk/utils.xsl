@@ -98,13 +98,13 @@
 
     <xsl:template name="closepar">
         <!-- insert </p> to close current paragraph as tables in paragraphs are illegal in HTML -->
-        <xsl:if test="parent::p">
+        <xsl:if test="parent::p or parent::note">
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template name="reopenpar">
-        <xsl:if test="parent::p">
+        <xsl:if test="parent::p or parent::note">
             <xsl:text disable-output-escaping="yes">&lt;p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
