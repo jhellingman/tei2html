@@ -34,6 +34,7 @@
       <item id="test2" href="images/test2.jpg" media-type="image/jpeg"/>
       <item id="tarsier1" href="images/tarsier1.jpg" media-type="image/jpeg"/>
       <item id="tarsier2" href="images/tarsier2.jpg" media-type="image/jpeg"/>
+      <item id="test1link" href="images/test.jpg" media-type="image/jpeg"/>
    </manifest>
    <spine toc="ncx">
       <itemref linear="yes" idref="front-1"/>
@@ -46,4 +47,10 @@
       <itemref linear="yes" idref="index"/>
       <itemref linear="yes" idref="backmatter"/>
    </spine>
+   <guide>
+      <reference type="toc" title="Table of Contents" href="test-front-1.xhtml#toc"/>
+      <reference type="title-page" title="Title Page" href="test-front-1.xhtml#xd22e76"/>
+      <reference type="index" title="Index" href="test-index.xhtml#index"/>
+      <reference type="text" title="Text" href="test-bk01-1.xhtml#bk01"/>
+   </guide>
 </package>
