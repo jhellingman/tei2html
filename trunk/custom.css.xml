@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<stylesheet>
+<![CDATA[
+
+body
+{
+    margin: 1.58em 16%;
+}
+
+]]>
+</stylesheet>
