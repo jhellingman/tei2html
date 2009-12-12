@@ -28,7 +28,7 @@
                         <xsl:attribute name="content">
                             <xsl:choose>
                                 <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
-                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
+                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/etext/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
                             </xsl:choose>
                         </xsl:attribute>
                     </meta>
@@ -61,8 +61,22 @@
                 <navMap>
                     <xsl:variable name="navMap">
 
-                        <xsl:if test="/TEI.2/text/front/titlePage">
+                        <xsl:if test="key('id', 'cover')">
                             <navPoint class="cover">
+                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                                <navLabel><text><xsl:value-of select="$strCoverImage"/></text></navLabel>
+                                <content>
+                                    <xsl:attribute name="src">
+                                        <xsl:call-template name="splitter-generate-url-for">
+                                            <xsl:with-param name="node" select="key('id', 'cover')[1]"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                </content>
+                            </navPoint>
+                        </xsl:if>
+
+                        <xsl:if test="/TEI.2/text/front/titlePage">
+                            <navPoint class="titlepage">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                                 <navLabel><text><xsl:value-of select="$strTitlePage"/></text></navLabel>
                                 <content>
@@ -85,6 +99,20 @@
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
                                             <xsl:with-param name="node" select="//divGen[@id='toc'][1]"/>
+                                        </xsl:call-template>
+                                    </xsl:attribute>
+                                </content>
+                            </navPoint>
+                        </xsl:if>
+
+                        <xsl:if test="key('id', 'loi')">
+                            <navPoint class="contents">
+                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                                <navLabel><text><xsl:value-of select="$strListOfIllustrations"/></text></navLabel>
+                                <content>
+                                    <xsl:attribute name="src">
+                                        <xsl:call-template name="splitter-generate-url-for">
+                                            <xsl:with-param name="node" select="key('id', 'loi')[1]"/>
                                         </xsl:call-template>
                                     </xsl:attribute>
                                 </content>
