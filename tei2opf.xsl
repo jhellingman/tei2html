@@ -33,11 +33,17 @@
                     <xsl:if test="@lang">
                         <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
                     </xsl:if>
+
+                    <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
+                        <dc:subject><xsl:value-of select="."/></dc:subject>
+                    </xsl:for-each>
+
                     <xsl:choose>
                         <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
                         <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
                     </xsl:choose>
                     <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+                    <dc:date opf:event="generation"><xsl:value-of select="current-dateTime()"/></dc:date>
                 </metadata>
 
                 <manifest>

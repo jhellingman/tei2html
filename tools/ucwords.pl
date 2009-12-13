@@ -825,6 +825,27 @@ sub reportChars()
 
 
 #
+# reportCharsXML
+#
+sub reportCharsXML()
+{
+    @charList = keys %charHash;
+    print "<characters>\n";
+    @charList = sort @charList;
+
+    $grandTotalCharacters = 0;
+    foreach $char (@charList)
+    {
+        $count = $charHash{$char};
+        $ord = ord($char);
+        $grandTotalCharacters += $count;
+        print "<character code=\"$ord\" count=\"$count\"/>\n";
+    }
+    print "</characters>\n";
+}
+
+
+#
 # reportCompositeChars
 #
 sub reportCompositeChars()
