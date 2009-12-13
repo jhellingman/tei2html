@@ -6,7 +6,7 @@
      version="2005-1"
      xml:lang="en-US">
    <head>
-      <meta name="dbt:uid" content="http://www.gutenberg.org/ebooks/123456789"/>
+      <meta name="dbt:uid" content="http://www.gutenberg.org/etext/123456789"/>
       <meta name="dtb:depth" content="3"/>
       <meta name="dtb:totalPageCount" content="0"/>
       <meta name="dtb:maxPageNumber" content="0"/>
@@ -20,11 +20,11 @@
       <text>Author of Work (Birth-year—Death-year) A. U. Thor W. Riter</text>
    </docAuthor>
    <navMap>
-      <navPoint playOrder="1" class="cover" id="xd22e2">
+      <navPoint playOrder="1" class="titlepage" id="xd22e2">
          <navLabel>
             <text>Title Page</text>
          </navLabel>
-         <content src="test-front-1.xhtml#xd22e76"/>
+         <content src="test-front-1.xhtml#xd22e85"/>
       </navPoint>
       <navPoint playOrder="2" class="part" id="bk01">
          <navLabel>
@@ -42,17 +42,17 @@
                <text>Chapter V Formatting Tables</text>
             </navLabel>
             <content src="test-ch05-1.xhtml"/>
-            <navPoint playOrder="5" class="section" id="xd22e500">
+            <navPoint playOrder="5" class="section" id="xd22e509">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd22e500"/>
+               <content src="test-ch05-3.xhtml#xd22e509"/>
             </navPoint>
-            <navPoint playOrder="6" class="section" id="xd22e522">
+            <navPoint playOrder="6" class="section" id="xd22e531">
                <navLabel>
                   <text>Section Lists</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd22e522"/>
+               <content src="test-ch05-3.xhtml#xd22e531"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="7" class="chapter" id="ch6">
@@ -67,29 +67,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="9" class="section" id="xd22e751">
+         <navPoint playOrder="9" class="section" id="xd22e760">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e751"/>
+            <content src="test-index.xhtml#xd22e760"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd22e756">
+         <navPoint playOrder="10" class="section" id="xd22e765">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e756"/>
+            <content src="test-index.xhtml#xd22e765"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd22e761">
+         <navPoint playOrder="11" class="section" id="xd22e770">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e761"/>
+            <content src="test-index.xhtml#xd22e770"/>
          </navPoint>
-         <navPoint playOrder="12" class="section" id="xd22e766">
+         <navPoint playOrder="12" class="section" id="xd22e775">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd22e766"/>
+            <content src="test-index.xhtml#xd22e775"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="13" class="contents" id="xd22e2">
@@ -102,7 +102,7 @@
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd22e775"/>
+         <content src="test-backmatter.xhtml#xd22e784"/>
       </navPoint>
    </navMap>
 </ncx>

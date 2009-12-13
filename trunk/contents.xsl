@@ -31,6 +31,11 @@
     >
 
 
+    <xsl:template match="divGen">
+        <xsl:message terminate="no">Warning: divGen without or with unknown type attribute.</xsl:message>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Table of Contents -->
     <!-- Take care only to generate ToC entries for divisions of the main text, not for those in quoted texts -->

@@ -35,7 +35,7 @@
          <publicationStmt>
             <publisher>Project Gutenberg</publisher>
             <pubPlace>Urbana, Illinois, USA.</pubPlace>
-            <date>8 April 2004</date>
+            <date>2009-12-13</date>
             <idno type="PGnum">123456789</idno>
             <idno type="PGclearance">[PG Clearance code goes here]</idno>
             <idno type="PGDPProjectID">[PGDP Project number goes here]</idno>
@@ -67,6 +67,15 @@
          <langUsage>
             <language id="en-us">U.S. English.</language>
          </langUsage>
+         <textClass>
+            <keywords>
+                <list>
+                   <item>TEI (Text Encoding Initiative)</item>
+                   <item>XSLT</item>
+                   <item>HTML</item>
+                </list>
+            </keywords>
+         </textClass>
       </profileDesc>
       <revisionDesc>
          <list type="simple">

@@ -616,7 +616,7 @@ ul { list-style-type: none; }
 body
 {
     background: white;
-    margin: 1.58em 16%;
+    margin: 1.58em 2em;
     font-family: "Times New Roman", Times, serif;
 }
 
@@ -702,189 +702,198 @@ sub, sup
 
 
 
+
+
+body
+{
+    margin: 1.58em 16%;
+}
+
+
+
                 
-                .xd22e261
+                .xd22e270
                 {
                     color:red; background-color:yellow;
                 }
             
                 
-                .xd22e262
+                .xd22e271
                 {
                     color:green; text-align:right;
                 }
             
                 
-                .xd22e263
+                .xd22e272
                 {
                     color:blue; text-align:right;
                 }
             
                 
-                .xd22e299
+                .xd22e308
                 {
                     text-align:left;width:40%;
                 }
             
                 
-                .xd22e300
+                .xd22e309
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e113
+                .xd22e122
                 {
                     font-family:'Walbaum-Fraktur';
                 }
             
                 
-                .xd22e126
+                .xd22e135
                 {
                     font-size:14pt; color:red; background-color:yellow;
                 }
             
                 
-                .xd22e228
+                .xd22e237
                 {
                     margin:0px auto; display:table;
                 }
             
                 
-                .xd22e232
+                .xd22e241
                 {
                     valign:middle; width:2;
                 }
             
                 
-                .xd22e233
+                .xd22e242
                 {
                     valign:middle;
                 }
             
                 
-                .xd22e243
+                .xd22e252
                 {
                     margin-left:2em;
                 }
             
                 
-                .xd22e245
+                .xd22e254
                 {
                     width:25%;
                 }
             
                 
-                .xd22e247
+                .xd22e256
                 {
                     width:75%;
                 }
             
                 
-                .xd22e258
+                .xd22e267
                 {
                     width:40%; margin:0px auto; display:table;
                 }
             
                 
-                .xd22e267
+                .xd22e276
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e286
+                .xd22e295
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e291
+                .xd22e300
                 {
                     text-align:left;
                 }
             
                 
-                .xd22e298
+                .xd22e307
                 {
                     width:40%;
                 }
             
-            .xd22e443width
+            .xd22e452width
             {
                 width:80px;
             }
         
                 
-                .xd22e448
+                .xd22e457
                 {
                     width:100px;
                 }
             
-            .xd22e448width
+            .xd22e457width
             {
                 width:80px;
             }
         
-            .xd22e456width
+            .xd22e465width
             {
                 width:80px;
             }
         
-            .xd22e468width
+            .xd22e477width
             {
                 width:480px;
             }
         
-            .xd22e488width
+            .xd22e497width
             {
                 width:480px;
             }
         
                 
-                .xd22e538
+                .xd22e547
                 {
                     font-style:italic;
                 }
             
                 
-                .xd22e569
+                .xd22e578
                 {
                     list-style-type:disc;
                 }
             
                 
-                .xd22e599
+                .xd22e608
                 {
                     list-style-type:upper-roman;
                 }
             
                 
-                .xd22e611
+                .xd22e620
                 {
                     list-style-type:lower-roman;
                 }
             
                 
-                .xd22e631
+                .xd22e640
                 {
                     text-align:left;
                 }
             
                 
-                .xd22e634
+                .xd22e643
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e636
+                .xd22e645
                 {
                     text-align:center;
                 }
             
             
-            .xd22e639
+            .xd22e648
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -892,7 +901,7 @@ sub, sup
                 
             }
 
-            .xd22e639init
+            .xd22e648init
             {
                 float: left;
                 width: 90px;
@@ -908,15 +917,9 @@ sub, sup
 
         
                 
-                .xd22e644
+                .xd22e653
                 {
                     text-align:justify;
-                }
-            
-                
-                .xd22e660
-                {
-                    text-align:center;
                 }
             
                 
@@ -926,31 +929,37 @@ sub, sup
                 }
             
                 
-                .xd22e674
+                .xd22e678
+                {
+                    text-align:center;
+                }
+            
+                
+                .xd22e683
                 {
                     text-indent:1em;
                 }
             
                 
-                .xd22e680
+                .xd22e689
                 {
                     text-indent:2em;
                 }
             
                 
-                .xd22e684
+                .xd22e693
                 {
                     text-indent:3em;
                 }
             
                 
-                .xd22e688
+                .xd22e697
                 {
                     text-indent:10em;
                 }
             
                 
-                .xd22e690
+                .xd22e699
                 {
                     font-style:italic;
                 }

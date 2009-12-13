@@ -13,8 +13,12 @@
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA.</dc:publisher>
       <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
       <dc:language xsi:type="dcterms:RFC4646">en-US</dc:language>
+      <dc:subject>TEI (Text Encoding Initiative)</dc:subject>
+      <dc:subject>XSLT</dc:subject>
+      <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
-      <dc:date opf:event="publication">8 April 2004</dc:date>
+      <dc:date opf:event="publication">2009-12-13</dc:date>
+      <dc:date opf:event="generation">2009-12-13T23:48:32.559+01:00</dc:date>
    </metadata>
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
@@ -28,7 +32,7 @@
       <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
       <item id="index" href="test-index.xhtml" media-type="application/xhtml+xml"/>
       <item id="backmatter" href="test-backmatter.xhtml" media-type="application/xhtml+xml"/>
-      <item id="xd22e135" href="images/hg2101.png" media-type="image/png"/>
+      <item id="xd22e144" href="images/hg2101.png" media-type="image/png"/>
       <item id="test" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="test1" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="test2" href="images/test2.jpg" media-type="image/jpeg"/>
@@ -49,9 +53,9 @@
    </spine>
    <guide>
       <reference type="toc" title="Table of Contents" href="test-front-1.xhtml#toc"/>
-      <reference type="title-page" title="Title Page" href="test-front-1.xhtml#xd22e76"/>
+      <reference type="title-page" title="Title Page" href="test-front-1.xhtml#xd22e85"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk01-1.xhtml#bk01"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd22e775"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd22e784"/>
    </guide>
 </package>
