@@ -112,7 +112,7 @@
                     <xsl:if test="//div1[@type='Dedication']">
                         <reference type="dedication" title="{$strDedication}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Dedication'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Dedication'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -120,7 +120,7 @@
                     <xsl:if test="//div1[@type='Epigraph']">
                         <reference type="epigraph" title="{$strEpigraph}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Epigraph'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Epigraph'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -128,7 +128,7 @@
                     <xsl:if test="//div1[@type='Index']">
                         <reference type="index" title="{$strIndex}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Index'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Index'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -136,7 +136,7 @@
                     <xsl:if test="//div1[@type='Bibliography']">
                         <reference type="bibliography" title="{$strBibliography}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Bibliography'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Bibliography'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -144,7 +144,7 @@
                     <xsl:if test="//div1[@type='Copyright']">
                         <reference type="copyright-page" title="{$strCopyrightPage}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Copyright'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Copyright'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -152,7 +152,7 @@
                     <xsl:if test="//div1[@type='Preface']">
                         <reference type="preface" title="{$strPreface}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//div1[@type='Preface'][1]"/>
+                                <xsl:with-param name="target" select="(//div1[@type='Preface'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>
@@ -168,7 +168,7 @@
                     <xsl:if test="//divGen[@type='Colophon']">
                         <reference type="colophon" title="{$strColophon}">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//divGen[@type='Colophon'][1]"/>
+                                <xsl:with-param name="target" select="(//divGen[@type='Colophon'])[1]"/>
                             </xsl:call-template>
                         </reference>
                     </xsl:if>

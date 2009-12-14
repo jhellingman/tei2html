@@ -98,7 +98,7 @@
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="//divGen[@id='toc'][1]"/>
+                                            <xsl:with-param name="node" select="(//divGen[@id='toc'])[1]"/>
                                         </xsl:call-template>
                                     </xsl:attribute>
                                 </content>
@@ -126,7 +126,7 @@
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="//divGen[@type='Colophon'][1]"/>
+                                            <xsl:with-param name="node" select="(//divGen[@type='Colophon'])[1]"/>
                                         </xsl:call-template>
                                     </xsl:attribute>
                                 </content>

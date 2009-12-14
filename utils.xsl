@@ -12,7 +12,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
@@ -39,7 +39,7 @@
     </xsl:template>
 
     <xsl:template name="generate-id-attribute-for">
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
         <xsl:attribute name="id">
             <xsl:call-template name="generate-id-for">
                 <xsl:with-param name="node" select="$node"/>
@@ -55,7 +55,7 @@
     </xsl:template>
 
     <xsl:template name="generate-id-for">
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
         <xsl:param name="position"/>
         <xsl:choose>
             <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
@@ -66,7 +66,7 @@
 
 
     <xsl:template name="generate-href-attribute">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:attribute name="href">
             <xsl:call-template name="generate-href">
