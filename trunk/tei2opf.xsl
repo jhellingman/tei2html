@@ -52,21 +52,23 @@
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
+                    <!-- CSS Style Sheets -->
                     <item id="css"
                          href="{$basename}.css"
                          media-type="text/css"/>
 
                     <!-- Content Parts -->
-
                     <xsl:apply-templates select="text" mode="manifest"/>
 
-                    <!-- CSS Style Sheets -->
-
                     <!-- Illustrations -->
+                    <!-- Store these in a list, from which we remove the doubles later-on -->
+                    <xsl:variable name="images">
+                        <xsl:apply-templates select="//figure" mode="manifest"/>
+                        <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
+                        <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
+                    </xsl:variable>
 
-                    <xsl:apply-templates select="//figure" mode="manifest"/>
-
-                    <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
+                    <xsl:apply-templates select="$images" mode="undouble"/>
 
                 </manifest>
 
@@ -240,6 +242,19 @@
     </xsl:template>
 
 
+    <xsl:template match="*" mode="manifest">
+        <xsl:if test="contains(@rend, 'image(')">
+            <xsl:variable name="filename">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+            </xsl:variable>
+
+            <xsl:call-template name="manifest-image-item">
+                <xsl:with-param name="filename" select="$filename"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+   
     <xsl:template match="*" mode="manifest-links">
         <xsl:if test="contains(@rend, 'link(')">
             <xsl:variable name="filename">
@@ -276,6 +291,20 @@
             <xsl:attribute name="media-type"><xsl:value-of select="$mimetype"/></xsl:attribute>
         </item>
 
+    </xsl:template>
+
+
+    <!-- We remove duplicated resources from the list (included because the ePub uses
+         them more than one time). -->
+    <xsl:template match="opf:item" mode="undouble">
+        <xsl:variable name="href" select="@href"/>
+        <xsl:if test="not(preceding-sibling::opf:item[@href = $href])">
+            <xsl:copy>
+                <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+                <xsl:attribute name="media-type"><xsl:value-of select="@media-type"/></xsl:attribute>
+            </xsl:copy>
+        </xsl:if>
     </xsl:template>
 
 
