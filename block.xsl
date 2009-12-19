@@ -99,11 +99,11 @@
     <xsl:template match="pb">
         <xsl:choose>
             <!-- In HTML, we do not allow a span element at the top-level. -->
-            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::note">
-                <xsl:call-template name="pb"/>
+            <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
+                <p><xsl:call-template name="pb"/></p>
             </xsl:when>
             <xsl:otherwise>
-                <p><xsl:call-template name="pb"/></p>
+                <xsl:call-template name="pb"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
