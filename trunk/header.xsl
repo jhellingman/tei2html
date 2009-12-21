@@ -61,9 +61,7 @@
             </title>
 
             <xsl:call-template name="generate-metadata"/>
-
             <xsl:call-template name="include-stylesheets"/>
-
         </head>
     </xsl:template>
 

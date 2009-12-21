@@ -266,6 +266,12 @@
                     <xsl:with-param name="filename" select="$filename"/>
                     <xsl:with-param name="how" select="'link'"/>
                 </xsl:call-template>
+                <!-- Also include wrapper HTML -->
+                <item>
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
+                    <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                    <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
+                </item>
             </xsl:if>
         </xsl:if>
     </xsl:template>

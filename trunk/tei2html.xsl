@@ -62,7 +62,7 @@
     <!--====================================================================-->
 
     <xsl:param name="basename" select="'book'"/>
-
+    <xsl:param name="path" select="''"/> <!-- Not used for HTML versions -->
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
