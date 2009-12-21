@@ -28,10 +28,11 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
-    version="1.0"
-    exclude-result-prefixes="img"
+    version="2.0"
+    exclude-result-prefixes="img xs"
     >
 
 
@@ -72,10 +73,23 @@
         <!-- Should we link to an external image? -->
         <xsl:choose>
             <xsl:when test="contains(@rend, 'link(')">
+                <xsl:variable name="url" select="substring-before(substring-after(@rend, 'link('), ')')"/>
                 <a>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="substring-before(substring-after(@rend, 'link('), ')')"/>
-                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
+                            <!-- cannot directly link to image file in epub, need to generate wrapper html
+                                 and link to that. -->
+                            <xsl:call-template name="generate-image-wrapper">
+                                <xsl:with-param name="imagefile" select="$url"/>
+                            </xsl:call-template>
+                            <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="$url"/>
+                            </xsl:attribute>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:call-template name="insertimage2">
                         <xsl:with-param name="alt" select="$alt"/>
                         <xsl:with-param name="format" select="$format"/>
@@ -93,8 +107,8 @@
 
 
     <xsl:template name="insertimage2">
-        <xsl:param name="alt" select="''"/>
-        <xsl:param name="format" select="'.jpg'"/>
+        <xsl:param name="alt" select="''" as="xs:string"/>
+        <xsl:param name="format" select="'.jpg'" as="xs:string"/>
 
         <!-- What is the text that should go on the img alt attribute in HTML? -->
         <xsl:variable name="alt2">
@@ -139,6 +153,42 @@
                 </xsl:attribute>
             </xsl:if>
         </img>
+    </xsl:template>
+
+
+    <xsl:template name="generate-image-wrapper">
+        <xsl:param name="imagefile"/>
+
+        <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
+
+        <xsl:result-document href="{$path}/{$filename}">
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <html>
+                <xsl:call-template name="generate-html-header"/>
+                <body>
+                    <div class="figure">
+
+                        <img src="{$imagefile}">
+                            <xsl:attribute name="alt">
+                                <xsl:choose>
+                                    <xsl:when test="figDesc">
+                                        <xsl:value-of select="figDesc"/>
+                                    </xsl:when>
+                                    <xsl:when test="head">
+                                        <xsl:value-of select="head"/>
+                                    </xsl:when>                                
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="''"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                        </img>
+
+                        <xsl:apply-templates/>
+                    </div>
+                </body>
+            </html>
+        </xsl:result-document>
     </xsl:template>
 
 
@@ -194,57 +244,83 @@
                 <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
             </xsl:attribute>
 
-            <xsl:if test="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight']">
-                <div>
-                    <xsl:attribute name="class">
-                        <xsl:text>figAnnotation </xsl:text>
-                        <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
-                    </xsl:attribute>
-
-                    <xsl:if test="p[@type='figTopLeft']">
-                        <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                    <xsl:if test="p[@type='figTop']">
-                        <span class="figTop"><xsl:apply-templates select="p[@type='figTop']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                    <xsl:if test="not(p[@type='figTop'])">
-                        <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
-                    </xsl:if>
-                    <xsl:if test="p[@type='figTopRight']">
-                        <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                </div>
-            </xsl:if>
+            <xsl:call-template name="figure-annotations-top"/>
 
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="alt" select="head"/>
             </xsl:call-template>
 
-            <xsl:if test="p[@type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']">
-                <div>
-                    <xsl:attribute name="class">
-                        <xsl:text>figAnnotation </xsl:text>
-                        <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
-                    </xsl:attribute>
-
-                    <xsl:if test="p[@type='figBottomLeft']">
-                        <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                    <xsl:if test="p[@type='figBottom']">
-                        <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                    <xsl:if test="not(p[@type='figBottom'])">
-                        <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
-                    </xsl:if>
-                    <xsl:if test="p[@type='figBottomRight']">
-                        <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight']" mode="figAnnotation"/></span>
-                    </xsl:if>
-                </div>
-            </xsl:if>
+            <xsl:call-template name="figure-annotations-bottom"/>
 
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
+    </xsl:template>
+
+
+    <xsl:template name="figure-annotations-top">
+        <xsl:if test="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight']">
+
+            <xsl:variable name="file">
+                <xsl:call-template name="getimagefilename"/>
+            </xsl:variable>
+            <xsl:variable name="width">
+                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+            </xsl:variable>
+
+            <div>
+                <xsl:attribute name="class">
+                    <xsl:text>figAnnotation </xsl:text>
+                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                </xsl:attribute>
+
+                <xsl:if test="p[@type='figTopLeft']">
+                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft']" mode="figAnnotation"/></span>
+                </xsl:if>
+                <xsl:if test="p[@type='figTop']">
+                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop']" mode="figAnnotation"/></span>
+                </xsl:if>
+                <xsl:if test="not(p[@type='figTop'])">
+                    <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
+                </xsl:if>
+                <xsl:if test="p[@type='figTopRight']">
+                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight']" mode="figAnnotation"/></span>
+                </xsl:if>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="figure-annotations-bottom">
+        <xsl:if test="p[@type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']">
+
+            <xsl:variable name="file">
+                <xsl:call-template name="getimagefilename"/>
+            </xsl:variable>
+            <xsl:variable name="width">
+                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+            </xsl:variable>
+
+            <div>
+                <xsl:attribute name="class">
+                    <xsl:text>figAnnotation </xsl:text>
+                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                </xsl:attribute>
+
+                <xsl:if test="p[@type='figBottomLeft']">
+                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft']" mode="figAnnotation"/></span>
+                </xsl:if>
+                <xsl:if test="p[@type='figBottom']">
+                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom']" mode="figAnnotation"/></span>
+                </xsl:if>
+                <xsl:if test="not(p[@type='figBottom'])">
+                    <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
+                </xsl:if>
+                <xsl:if test="p[@type='figBottomRight']">
+                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight']" mode="figAnnotation"/></span>
+                </xsl:if>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 
