@@ -130,16 +130,20 @@
         <xsl:call-template name="closepar"/>
         <xsl:choose>
             <xsl:when test="contains(@rend, 'stars')">
-                <p class="tb">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+                <p class="tb"><xsl:call-template name="generate-id-attribute"/>*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
             </xsl:when>
             <xsl:when test="contains(@rend, 'star')">
-                <p class="tb">*</p>
+                <p class="tb"><xsl:call-template name="generate-id-attribute"/>*</p>
             </xsl:when>
             <xsl:when test="contains(@rend, 'space')">
-                <p class="tb"/>
+                <p class="tb">
+                    <xsl:call-template name="generate-id-attribute"/>
+                </p>
             </xsl:when>
             <xsl:otherwise>
-                <hr class="tb"/>
+                <hr class="tb">
+                    <xsl:call-template name="generate-id-attribute"/>
+                </hr>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>

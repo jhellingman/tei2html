@@ -50,7 +50,7 @@
 
 
     <xsl:template name="getimagefilename">
-        <xsl:param name="format" select="'.jpg'"/>
+        <xsl:param name="format" select="'.jpg'" as="xs:string"/>
         <xsl:choose>
             <xsl:when test="contains(@rend, 'image(')">
                 <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
@@ -67,8 +67,8 @@
 
 
     <xsl:template name="insertimage">
-        <xsl:param name="alt" select="''"/>
-        <xsl:param name="format" select="'.jpg'"/>
+        <xsl:param name="alt" select="''" as="xs:string"/>
+        <xsl:param name="format" select="'.jpg'" as="xs:string"/>
 
         <!-- Should we link to an external image? -->
         <xsl:choose>
@@ -157,7 +157,7 @@
 
 
     <xsl:template name="generate-image-wrapper">
-        <xsl:param name="imagefile"/>
+        <xsl:param name="imagefile" as="xs:string"/>
 
         <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
 
@@ -247,7 +247,7 @@
             <xsl:call-template name="figure-annotations-top"/>
 
             <xsl:call-template name="insertimage">
-                <xsl:with-param name="alt" select="head"/>
+                <xsl:with-param name="alt" select="if (figDesc) then figDesc else (if (head) then head else '')"/>
             </xsl:call-template>
 
             <xsl:call-template name="figure-annotations-bottom"/>
