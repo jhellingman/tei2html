@@ -155,58 +155,100 @@
     </xsl:template>
 
     <xsl:template match="div0" mode="navMap">
-        <xsl:if test="head">
-            <navPoint class="part">
-                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <navLabel>
-                    <text>
-                        <xsl:apply-templates select="head" mode="navLabel"/>
-                    </text>
-                </navLabel>
-                <content>
-                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
-                </content>
-                <xsl:if test="div1">
-                    <xsl:apply-templates select="div1" mode="navMap"/>
-                </xsl:if>
-            </navPoint>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <navPoint class="part">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                    </content>
+                    <xsl:if test="div1">
+                        <xsl:apply-templates select="div1" mode="navMap"/>
+                    </xsl:if>
+                </navPoint>
+            </xsl:when>
+
+            <xsl:when test="head">
+                <navPoint class="part">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel>
+                        <text>
+                            <xsl:apply-templates select="head" mode="navLabel"/>
+                        </text>
+                    </navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                    </content>
+                    <xsl:if test="div1">
+                        <xsl:apply-templates select="div1" mode="navMap"/>
+                    </xsl:if>
+                </navPoint>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="div1" mode="navMap">
-        <xsl:if test="head">
-            <navPoint class="chapter">
-                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <navLabel>
-                    <text>
-                        <xsl:apply-templates select="head" mode="navLabel"/>
-                    </text>
-                </navLabel>
-                <content>
-                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
-                </content>
-                <xsl:if test="div2">
-                    <xsl:apply-templates select="div2" mode="navMap"/>
-                </xsl:if>
-            </navPoint>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <navPoint class="part">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                    </content>
+                    <xsl:if test="div2">
+                        <xsl:apply-templates select="div2" mode="navMap"/>
+                    </xsl:if>
+                </navPoint>
+            </xsl:when>
+
+            <xsl:when test="head">
+                <navPoint class="chapter">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel>
+                        <text>
+                            <xsl:apply-templates select="head" mode="navLabel"/>
+                        </text>
+                    </navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                    </content>
+                    <xsl:if test="div2">
+                        <xsl:apply-templates select="div2" mode="navMap"/>
+                    </xsl:if>
+                </navPoint>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
 
     <xsl:template match="div2" mode="navMap">
-        <xsl:if test="head">
-            <navPoint class="section">
-                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                <navLabel>
-                    <text>
-                        <xsl:apply-templates select="head" mode="navLabel"/>
-                    </text>
-                </navLabel>
-                <content>
-                    <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"></xsl:call-template></xsl:attribute>
-                </content>
-            </navPoint>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <navPoint class="part">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                    </content>
+                </navPoint>
+            </xsl:when>
+
+            <xsl:when test="head">
+                <navPoint class="section">
+                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                    <navLabel>
+                        <text>
+                            <xsl:apply-templates select="head" mode="navLabel"/>
+                        </text>
+                    </navLabel>
+                    <content>
+                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"></xsl:call-template></xsl:attribute>
+                    </content>
+                </navPoint>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="head[@type='super']" mode="navLabel"/>
