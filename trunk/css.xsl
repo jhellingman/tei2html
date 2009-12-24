@@ -57,16 +57,16 @@
             <xsl:when test="normalize-space($value)=''"/>
 
             <!-- Properties handled otherwise -->
-            <xsl:when test="$property='class'"/>
-            <xsl:when test="$property='link'"/>
-            <xsl:when test="$property='image'"/>
-            <xsl:when test="$property='image-alt'"/>
-            <xsl:when test="$property='summary'"/>
-            <xsl:when test="$property='label'"/>
-            <xsl:when test="$property='columns'"/>
-            <xsl:when test="$property='stylesheet'"/>
-            <xsl:when test="$property='position'"/>
-            <xsl:when test="$property='label'"/>
+            <xsl:when test="$property='class'"/>        <!-- pass-through CSS class -->
+            <xsl:when test="$property='link'"/>         <!-- external link (for example on image) -->
+            <xsl:when test="$property='image'"/>        <!-- in-line image -->
+            <xsl:when test="$property='image-alt'"/>    <!-- alt text for image -->
+            <xsl:when test="$property='summary'"/>      <!-- summary text for table, etc. -->
+            <xsl:when test="$property='label'"/>        <!-- label (for head, etc.) -->
+            <xsl:when test="$property='columns'"/>      <!-- number of columns to use on list, table, etc. -->
+            <xsl:when test="$property='stylesheet'"/>   <!-- stylesheet to load (only on top-level text element) -->
+            <xsl:when test="$property='position'"/>     <!-- position in text -->
+            <xsl:when test="$property='toc-head'"/>     <!-- head to be used in table of contents -->
 
             <!-- Properties used to render verse -->
             <xsl:when test="$property='hemistich'"/>
