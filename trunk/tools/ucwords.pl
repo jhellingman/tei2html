@@ -92,9 +92,9 @@ my $infile = $ARGV[0];
 my $defaultLang = "en";
 if ($infile eq "-l")
 {
-	$defaultLang = $ARGV[1];
-	pushLang("NULL", $defaultLang);
-	$infile = $ARGV[2];
+    $defaultLang = $ARGV[1];
+    pushLang("NULL", $defaultLang);
+    $infile = $ARGV[2];
 }
 
 # Database Handle
@@ -114,8 +114,8 @@ loadGoodBadWords();
 
 if ($useDatabase)
 {
-	initDatabase();
-	addBook($idbook, $docTitle, $docAuthor, $infile);
+    initDatabase();
+    addBook($idbook, $docTitle, $docAuthor, $infile);
 }
 
 
@@ -220,7 +220,7 @@ sub heatMapFragment($)
 sub heatMapTag($$)
 {
     my $tag = shift;
-	my $remainder = shift;
+    my $remainder = shift;
 
     # end tag or start tag?
     if ($tag =~ /^!/)
@@ -478,12 +478,16 @@ sub reportXML()
 {
     open (USAGEFILE, ">usage.xml") || die("Could not create output file 'usage.xml'");
 
-	print USAGEFILE "<?xml version=\"1.0\"?>\n";
-	print USAGEFILE "<usage>\n";
+    print USAGEFILE "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+	print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"usage.xsl\"?>";
+    print USAGEFILE "<usage>\n";
 
-	reportCharsXML();
+    reportWordsXML();
+    reportNonWordsXML();
+    reportCharsXML();
+    reportTagsXML();
 
-	print USAGEFILE "</usage>\n";
+    print USAGEFILE "</usage>\n";
 }
 
 
@@ -503,6 +507,20 @@ sub sortWords()
 
 
 #
+# reportWordsXML
+#
+sub reportWordsXML()
+{
+    my @languageList = keys %wordHash;
+    foreach my $language (@languageList)
+    {
+        reportLanguageWordsXML($language);
+    }
+}
+
+
+
+#
 # sortLanguageWords
 #
 sub sortLanguageWords($)
@@ -518,6 +536,56 @@ sub sortLanguageWords($)
     @wordList = sort @wordList;
     reportWords($language);
     reportLanguagePairs($language);
+}
+
+
+#
+# reportLanguageWordsXML
+#
+sub reportLanguageWordsXML($)
+{
+    my $language = shift;
+    my @wordList = keys %{$wordHash{$language}};
+
+    foreach my $word (@wordList)
+    {
+        my $key = Normalize($word);
+        $word = "$key!$word";
+    }
+    @wordList = sort @wordList;
+
+    print USAGEFILE "\n<words xml:lang=\"$language\">\n";
+
+    loadDict($language);
+
+    my $previousKey = "";
+    foreach my $item (@wordList)
+    {
+        my ($key, $word) = split(/!/, $item, 2);
+
+        if ($key ne $previousKey) 
+        {
+            if ($previousKey ne "")
+            {
+                print USAGEFILE "</wordGroup>\n";
+            }
+            print USAGEFILE "<wordGroup>";
+        }
+
+        my $count = $wordHash{$language}{$word};
+        my $known = isKnownWord($word, $language);
+
+        print USAGEFILE "<word count=\"$count\" known=\"$known\">$word</word>";
+
+        $previousKey = $key;
+    }
+
+    if ($previousKey ne "") 
+    {
+        print USAGEFILE "</wordGroup>\n";
+    }
+
+    print USAGEFILE "</words>\n";
 }
 
 
@@ -642,10 +710,10 @@ sub reportWords($)
     my $prevKey  = "";
     my $prevLetter = "";
 
-	$uniqWords = 0;
-	$totalWords = 0;
-	$unknownTotalWords = 0;
-	$unknownUniqWords = 0;
+    $uniqWords = 0;
+    $totalWords = 0;
+    $unknownTotalWords = 0;
+    $unknownUniqWords = 0;
 
     print "\n\n\n<h2>Word frequencies in " . getLanguage(lc($language)) . "</h2>\n";
     loadDict($language);
@@ -823,6 +891,32 @@ sub reportNonWords()
 
 
 #
+# reportNonWordsXML
+#
+sub reportNonWordsXML()
+{
+    my @nonWordList = keys %nonWordHash;
+    @nonWordList = sort @nonWordList;
+
+    print USAGEFILE "<nonwords>\n";
+    foreach my $item (@nonWordList)
+    {
+        $item =~ s/\0/[NULL]/g;
+
+        if ($item ne "")
+        {
+            my $count = $nonWordHash{$item};
+            $item =~ s/\&/\&amp;/g;
+            $item =~ s/</\&lt;/g;
+            $item =~ s/>/\&gt;/g;
+            print USAGEFILE "<nonword count=\"$count\">$item</nonword>\n";
+        }
+    }
+    print USAGEFILE "</nonwords>\n";
+}
+
+
+#
 # reportChars
 #
 sub reportChars()
@@ -904,25 +998,25 @@ sub reportCompositeCharsXML()
 {
     my @compositeCharList = keys %compositeCharHash;
 
-	if (@compositeCharList)
-	{
-	    @compositeCharList = sort @compositeCharList;
-		print USAGEFILE "<composite-characters>\n";
-		foreach my $compositeChar (@compositeCharList)
-		{
-			my $count = $compositeCharHash{$compositeChar};
+    if (@compositeCharList)
+    {
+        @compositeCharList = sort @compositeCharList;
+        print USAGEFILE "<composite-characters>\n";
+        foreach my $compositeChar (@compositeCharList)
+        {
+            my $count = $compositeCharHash{$compositeChar};
 
-			my $ords = "";
-			my @chars = split(//, $compositeChar);
-			foreach my $char (@chars)
-			{
-				$ords .= " " . ord($char);
-			}
-			$compositeChar =~ s/\0/[NULL]/g;
-			print USAGEFILE "<composite-character codes=\"$ords\" count=\"$count\">$compositeChar</composite-character>\n";
-		}
-		print USAGEFILE "</composite-characters>\n";
-	}
+            my $ords = "";
+            my @chars = split(//, $compositeChar);
+            foreach my $char (@chars)
+            {
+                $ords .= " " . ord($char);
+            }
+            $compositeChar =~ s/\0/[NULL]/g;
+            print USAGEFILE "<composite-character codes=\"$ords\" count=\"$count\">$compositeChar</composite-character>\n";
+        }
+        print USAGEFILE "</composite-characters>\n";
+    }
 }
 
 
@@ -970,6 +1064,24 @@ sub reportTags()
         print "<tr><td><code>$tag</code><td align=right><b>$count</b>\n";
     }
     print "</table>\n";
+}
+
+
+#
+# reportTagsxml: report on the occurances of tags.
+#
+sub reportTagsXML()
+{
+    my @tagList = keys %tagHash;
+    @tagList = sort { lc($a) cmp lc($b) } @tagList;
+
+    print USAGEFILE "<tags>\n";
+    foreach my $tag (@tagList)
+    {
+        my $count = $tagHash{$tag};
+        print USAGEFILE "<tag count=\"$count\">$tag</tag>\n";
+    }
+    print USAGEFILE "</tags>\n";
 }
 
 
@@ -1045,7 +1157,7 @@ sub reportCountCounts()
 sub handleTag($$)
 {
     my $tag = shift;
-	my $remainder = shift;
+    my $remainder = shift;
 
     # end tag or start tag?
     if ($tag =~ /^[!?]/)
@@ -1224,7 +1336,7 @@ sub countCompositeChar($)
 sub popLang($)
 {
     my $tag = shift;
-	my $remainder = shift;
+    my $remainder = shift;
 
     if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize])
     {
