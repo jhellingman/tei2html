@@ -361,6 +361,24 @@
 
 
     <!--====================================================================-->
+    <!-- div6 -->
+
+    <xsl:template match="div6">
+        <div class="div6">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setLangAttribute"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="div6/head">
+        <xsl:call-template name="headPicture"/>
+        <h6>
+            <xsl:call-template name="headText"/>
+        </h6>
+    </xsl:template>
+
+    <!--====================================================================-->
     <!-- other headers -->
 
     <xsl:template match="head">

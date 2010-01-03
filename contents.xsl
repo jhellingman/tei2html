@@ -143,6 +143,60 @@
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
+                <xsl:if test="div4">
+                    <ul>
+                        <xsl:apply-templates select="div4" mode="gentoc"/>
+                    </ul>
+                </xsl:if>
+            </li>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- TOC: div4 -->
+
+    <xsl:template match="div4" mode="gentoc">
+        <xsl:if test="head">
+            <li>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
+                </a>
+                <xsl:if test="div5">
+                    <ul>
+                        <xsl:apply-templates select="div5" mode="gentoc"/>
+                    </ul>
+                </xsl:if>
+            </li>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- TOC: div5 -->
+
+    <xsl:template match="div5" mode="gentoc">
+        <xsl:if test="head">
+            <li>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
+                </a>
+                <xsl:if test="div6">
+                    <ul>
+                        <xsl:apply-templates select="div6" mode="gentoc"/>
+                    </ul>
+                </xsl:if>
+            </li>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- TOC: div6 -->
+
+    <xsl:template match="div6" mode="gentoc">
+        <xsl:if test="head">
+            <li>
+                <a>
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
+                </a>
             </li>
         </xsl:if>
     </xsl:template>

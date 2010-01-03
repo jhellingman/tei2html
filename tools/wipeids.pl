@@ -86,6 +86,9 @@ while (<INPUTFILE>)
     # remove useless (in HTML) namespace declarations.
     $output =~ s/xmlns(:\w+)?=\"(.*?)\"//g;
 
+	# normalize <br></br> tags:
+    $output =~ s/<br><\/br>/<br\/>/g;
+
     # Remove empty anchors:
     $output =~ s/<a><\/a>//g;
 

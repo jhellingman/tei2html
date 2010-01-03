@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-    <xsl:stylesheet
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        version="1.0">
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    version="1.0">
 
     <xsl:output 
         method="html" 
@@ -34,14 +34,76 @@
                 </style>
             </head>
             <body>
+                <h3>Contents</h3>
+
+                <ul>
+                    <xsl:apply-templates mode="toc"/>
+                </ul>
+
+                <xsl:call-template name="word-statistics"/>
+
                 <xsl:apply-templates/>
             </body>
         </html>
     </xsl:template>
 
 
+    <!-- Overview of Contents -->
+
+    <xsl:template match="words" mode="toc">
+        <li>
+            <a href="#words{@xml:lang}">Words in <xsl:call-template name="lookup-language-name"/></a>
+        </li>
+    </xsl:template>
+
+    <xsl:template match="characters" mode="toc">
+        <li>
+            <a href="#characters">Characters</a>
+        </li>
+    </xsl:template>
+
+    <xsl:template match="*" mode="toc"/>
+
+    <!-- Words -->
+
+    <xsl:template name="word-statistics">
+        <h4>Statistics</h4>
+        <table>
+            <tr>
+                <th></th>
+                <th>Distinct</th>
+                <th>Total</th>
+                <th>Occuring just once</th>
+            </tr>
+            <tr>
+                <td>Known</td>
+                <td><xsl:value-of select="count(.//word[@known = 1])"/></td>
+                <td><xsl:value-of select="sum(.//word[@known = 1]/@count)"/></td>
+                <td><xsl:value-of select="count(.//word[@known = 1 and @count= 1])"/></td>
+            </tr>
+            <tr>
+                <td>Unknown</td>
+                <td><xsl:value-of select="count(.//word[@known = 0])"/></td>
+                <td><xsl:value-of select="sum(.//word[@known = 0]/@count)"/></td>
+                <td><xsl:value-of select="count(.//word[@known = 0 and @count= 1])"/></td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td><xsl:value-of select="count(.//word)"/></td>
+                <td><xsl:value-of select="sum(.//word/@count)"/></td>
+                <td><xsl:value-of select="count(.//word[@count= 1])"/></td>
+            </tr>
+        </table>
+    </xsl:template>
+
+
     <xsl:template match="words">
-        <h3>Words in <xsl:call-template name="lookup-language-name"/></h3>
+        <h3 id="words{@xml:lang}">Words in <xsl:call-template name="lookup-language-name"/></h3>
+
+        <xsl:call-template name="word-statistics"/>
+
+        <h4>Words</h4>
+
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -105,6 +167,32 @@
         </xsl:attribute>
     </xsl:template>
 
+
+    <!-- Characters -->
+
+    <xsl:template match="characters">
+        <h3 id="characters">Characters</h3>
+
+        <p>
+            <table>
+                <tr><th>Character</th><th>Code</th><th>Count</th></tr>
+
+                <xsl:apply-templates/>
+            </table>
+        </p>
+    </xsl:template>
+
+
+    <xsl:template match="character">
+        <tr>
+            <td><xsl:value-of select="."/></td>
+            <td><xsl:value-of select="@code"/></td>
+            <td><xsl:value-of select="@count"/></td>
+        </tr>
+    </xsl:template>
+
+
+    <!-- Remainder -->
 
     <xsl:template match="*"/>
 
