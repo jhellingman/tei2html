@@ -19,7 +19,13 @@ After installing Perl, install [http://www.imagemagick.org/script/index.php Imag
 
 Alternatively, you can download the more recent Saxon SA product from [http://www.saxonica.com/products.html saxonica.com]. This fully supports XSLT 2.0, as required for the tei2epub style sheets that are now part of this package.
 
+= Java =
+
+Saxon requires Java.
+
 If you already have a Java Runtime Environment, you need to locate it, and update the Perl script tei2html.pl with its proper location.
+
+If you do not have Java, you can download it from http://java.com/en/
 
 = SX, NSGML =
 
@@ -28,3 +34,9 @@ SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP 
 = Patc =
 
 Patc (pattern changer) is a small utility in C, so you will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
+
+= epubcheck =
+
+Epubcheck is a tool to validate epub books, it can be obtained from: http://code.google.com/p/epubcheck/
+
+This tool requires Java.
