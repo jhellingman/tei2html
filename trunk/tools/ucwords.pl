@@ -479,7 +479,7 @@ sub reportXML()
     open (USAGEFILE, ">usage.xml") || die("Could not create output file 'usage.xml'");
 
     print USAGEFILE "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-	print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"usage.xsl\"?>";
+	print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"http://www.gutenberg.ph/xslt/usage.xsl\"?>";
     print USAGEFILE "<usage>\n";
 
     reportWordsXML();
