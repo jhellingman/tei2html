@@ -81,6 +81,10 @@
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
 
+        <xsl:if test="//pb">
+            <xsl:call-template name="pagemap"/>
+        </xsl:if>
+
         <xsl:call-template name="copy-stylesheets"/>
 
         <xsl:apply-templates mode="opf"/>
@@ -88,6 +92,9 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Mimetype file -->
 
     <xsl:template name="mimetype">
         <xsl:result-document 
@@ -97,6 +104,9 @@
             <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Container file -->
 
     <xsl:template name="container">
         <xsl:result-document 
@@ -118,6 +128,7 @@
 
 
     <!--====================================================================-->
+    <!-- Stylesheets -->
 
     <xsl:template name="copy-stylesheets">
         <xsl:result-document 
@@ -145,6 +156,32 @@
             </xsl:if>
 
             <xsl:apply-templates select="/" mode="css"/>
+
+        </xsl:result-document>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- Adobe Pagemap -->
+
+    <xsl:template name="pagemap">
+        <xsl:result-document 
+                doctype-public=""
+                doctype-system=""
+                href="{$path}/pagemap.xml"
+                method="xml" 
+                encoding="UTF-8">
+
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/pagemap.xml.</xsl:message>
+
+            <page-map xmlns="http://www.idpf.org/2007/opf">
+                <xsl:for-each select="//pb">
+                    <page>
+                        <xsl:attribute name="name"><xsl:value-of select="@n"/></xsl:attribute>
+                        <xsl:call-template name="generate-href-attribute"/>
+                    </page>
+                </xsl:for-each>
+            </page-map>
 
         </xsl:result-document>
     </xsl:template>
