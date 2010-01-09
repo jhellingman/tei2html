@@ -52,6 +52,12 @@
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
+                    <xsl:if test="//pb">
+                        <item id="pagemap"
+                            href="pagemap.xml"
+                            media-type="application/oebps-page-map+xml"/>
+                    </xsl:if>
+
                     <!-- CSS Style Sheets -->
                     <item id="css"
                          href="{$basename}.css"
@@ -73,109 +79,13 @@
                 </manifest>
 
                 <spine toc="ncx">
+                    <xsl:if test="//pb">
+                        <xsl:attribute name="page-map">pagemap</xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates select="text" mode="spine"/>
                 </spine>
 
-                <!-- Include references to specific elements -->
-                <guide>
-
-                    <xsl:if test="key('id', 'cover')">
-                        <reference type="cover" title="{$strCoverImage}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'cover')[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="key('id', 'toc')">
-                        <reference type="toc" title="{$strTableOfContents}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'toc')[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="key('id', 'loi')">
-                        <reference type="loi" title="{$strListOfIllustrations}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="key('id', 'loi')[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="/TEI.2/text/front/titlePage">
-                        <reference type="title-page" title="{$strTitlePage}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="/TEI.2/text/front/titlePage[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Dedication']">
-                        <reference type="dedication" title="{$strDedication}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Dedication'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Epigraph']">
-                        <reference type="epigraph" title="{$strEpigraph}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Epigraph'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Index']">
-                        <reference type="index" title="{$strIndex}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Index'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Bibliography']">
-                        <reference type="bibliography" title="{$strBibliography}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Bibliography'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Copyright']">
-                        <reference type="copyright-page" title="{$strCopyrightPage}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Copyright'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//div1[@type='Preface']">
-                        <reference type="preface" title="{$strPreface}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//div1[@type='Preface'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="/TEI.2/text/body/div0|/TEI.2/text/body/div1">
-                        <reference type="text" title="{$strText}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(/TEI.2/text/body/div0|/TEI.2/text/body/div1)[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                    <xsl:if test="//divGen[@type='Colophon']">
-                        <reference type="colophon" title="{$strColophon}">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//divGen[@type='Colophon'])[1]"/>
-                            </xsl:call-template>
-                        </reference>
-                    </xsl:if>
-
-                </guide>
+                <xsl:call-template name="guide"/>
 
             </package>
 
@@ -316,14 +226,118 @@
 
     <!--== spine ===========================================================-->
 
-
     <xsl:template match="text" mode="spine">
         <xsl:apply-templates mode="splitter">
             <xsl:with-param name="action" select="'spine'"/>
         </xsl:apply-templates>
     </xsl:template>
 
-    <!--== guide ===========================================================-->
+    <!--== guides ==========================================================-->
+
+    <xsl:template name="guide">
+
+        <!-- Include references to specific elements -->
+        <guide>
+
+            <xsl:if test="key('id', 'cover')">
+                <reference type="cover" title="{$strCoverImage}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="key('id', 'cover')[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="key('id', 'toc')">
+                <reference type="toc" title="{$strTableOfContents}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="key('id', 'toc')[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="key('id', 'loi')">
+                <reference type="loi" title="{$strListOfIllustrations}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="key('id', 'loi')[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="/TEI.2/text/front/titlePage">
+                <reference type="title-page" title="{$strTitlePage}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="/TEI.2/text/front/titlePage[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Dedication']">
+                <reference type="dedication" title="{$strDedication}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Dedication'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Epigraph']">
+                <reference type="epigraph" title="{$strEpigraph}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Epigraph'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Index']">
+                <reference type="index" title="{$strIndex}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Index'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Bibliography']">
+                <reference type="bibliography" title="{$strBibliography}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Bibliography'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Copyright']">
+                <reference type="copyright-page" title="{$strCopyrightPage}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Copyright'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Preface']">
+                <reference type="preface" title="{$strPreface}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Preface'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="/TEI.2/text/body/div0|/TEI.2/text/body/div1">
+                <reference type="text" title="{$strText}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(/TEI.2/text/body/div0|/TEI.2/text/body/div1)[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//divGen[@type='Colophon']">
+                <reference type="colophon" title="{$strColophon}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//divGen[@type='Colophon'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+        </guide>
+
+    </xsl:template>
 
 
     <!--== forget about all the rest =======================================-->
