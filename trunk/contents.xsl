@@ -1,5 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
-<!--
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY nbsp       "&#160;">
+
+]><!--
 
     Stylesheet with to generate a table of contents, to be imported in 
     tei2html.xsl.
@@ -413,6 +416,7 @@
                 <xsl:apply-templates select="head" mode="tochead"/>
             </a>
             <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+                <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
                 <span class="tocPagenum">
                     <xsl:value-of select="preceding::pb[1]/@n"/>
                 </span>

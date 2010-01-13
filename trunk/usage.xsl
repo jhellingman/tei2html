@@ -56,6 +56,12 @@
         </li>
     </xsl:template>
 
+    <xsl:template match="nonwords" mode="toc">
+        <li>
+            <a href="#nonwords">Non-words</a>
+        </li>
+    </xsl:template>
+
     <xsl:template match="characters" mode="toc">
         <li>
             <a href="#characters">Characters</a>
@@ -117,11 +123,15 @@
             <xsl:when test="$lang = 'en-UK'">English (United Kingdom)</xsl:when>
             <xsl:when test="$lang = 'es'">Spanish</xsl:when>
             <xsl:when test="$lang = 'nl'">Dutch</xsl:when>
+            <xsl:when test="$lang = 'nl-1900'">Dutch (Orthography of De Vries-Te Winkel)</xsl:when>
             <xsl:when test="$lang = 'la'">Latin</xsl:when>
+            <xsl:when test="$lang = 'la-x-bio'">Latin (binominal nomenclature)</xsl:when>
             <xsl:when test="$lang = 'de'">German</xsl:when>
             <xsl:when test="$lang = 'tl'">Tagalog</xsl:when>
             <xsl:when test="$lang = 'fr'">French</xsl:when>
-            <xsl:otherwise>Language with code '<xsl:value-of select="$lang"/>'</xsl:otherwise>
+            <xsl:when test="$lang = 'it'">Italian</xsl:when>
+
+            <xsl:otherwise>language with code '<xsl:value-of select="$lang"/>'</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -165,6 +175,29 @@
                 <xsl:when test="@count &lt; 100">q1</xsl:when>
             </xsl:choose>
         </xsl:attribute>
+    </xsl:template>
+
+    <!-- Non-Words -->
+
+    <xsl:template match="nonwords">
+        <h3 id="nonwords">Non-Words</h3>
+
+        <p>Counted for all languages</p>
+
+        <p>
+            <table>
+                <tr><th>Non-Word</th><th>Count</th></tr>
+
+                <xsl:apply-templates/>
+            </table>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="nonword">
+        <tr>
+            <td><xsl:value-of select="."/></td>
+            <td><xsl:value-of select="@count"/></td>
+        </tr>
     </xsl:template>
 
 
