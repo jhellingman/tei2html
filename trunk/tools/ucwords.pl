@@ -486,6 +486,7 @@ sub reportXML()
     reportNonWordsXML();
     reportCharsXML();
     reportTagsXML();
+    reportRendXML();
 
     print USAGEFILE "</usage>\n";
 }
@@ -909,7 +910,7 @@ sub reportNonWordsXML()
             $item =~ s/\&/\&amp;/g;
             $item =~ s/</\&lt;/g;
             $item =~ s/>/\&gt;/g;
-            print USAGEFILE "<nonword count=\"$count\">$item</nonword>\n";
+            print USAGEFILE "<nonword count=\"$count\" xml:space=\"preserve\">$item</nonword>\n";
         }
     }
     print USAGEFILE "</nonwords>\n";
@@ -1102,6 +1103,24 @@ sub reportRend()
         print "<tr><td><code>$rend</code><td align=right><b>$count</b>\n";
     }
     print "</table>\n";
+}
+
+
+#
+# reportRendXML: report on the occurances of the rend tag.
+#
+sub reportRendXML()
+{
+    my @rendList = keys %rendHash;
+    @rendList = sort { lc($a) cmp lc($b) } @rendList;
+
+    print USAGEFILE "<rends>\n";
+    foreach my $rend (@rendList)
+    {
+        my $count = $rendHash{$rend};
+        print USAGEFILE "<rend count=\"$count\">$rend</rend>\n";
+    }
+    print USAGEFILE "</rends>\n";
 }
 
 
