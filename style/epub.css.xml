@@ -86,6 +86,10 @@ sub, sup
     background-color: inherit;
 }
 
+span.corr, span.abbr, span.measure
+{
+    border-bottom: 0;
+}
 
 
 

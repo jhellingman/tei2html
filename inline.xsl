@@ -270,6 +270,7 @@
     <!-- Arbitrary Blocks (special hooks for rendering) -->
 
     <xsl:template match="ab[@type='tocPagenum' or @type='tocPageNum']">
+        <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
         <span class="tocPagenum">
             <xsl:apply-templates/>
         </span>
