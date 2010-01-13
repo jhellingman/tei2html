@@ -23,6 +23,7 @@
                     
                     .count { color: gray; font-size: smaller; }
                     .gray { color: gray; }
+                    .nonword { background-color: #FFFFA0; }
 
                     .q1 { background-color: #FFFFCC; }
                     .q2 { background-color: #FFFF5C; }
@@ -62,11 +63,24 @@
         </li>
     </xsl:template>
 
+    <xsl:template match="tags" mode="toc">
+        <li>
+            <a href="#tags">Tags</a>
+        </li>
+    </xsl:template>
+
+    <xsl:template match="rends" mode="toc">
+        <li>
+            <a href="#rends">@rend Attributes</a>
+        </li>
+    </xsl:template>
+
     <xsl:template match="characters" mode="toc">
         <li>
             <a href="#characters">Characters</a>
         </li>
     </xsl:template>
+
 
     <xsl:template match="*" mode="toc"/>
 
@@ -186,7 +200,7 @@
 
         <p>
             <table>
-                <tr><th>Non-Word</th><th>Count</th></tr>
+                <tr><th>Non-Word</th><th>Length</th><th>Count</th></tr>
 
                 <xsl:apply-templates/>
             </table>
@@ -194,6 +208,55 @@
     </xsl:template>
 
     <xsl:template match="nonword">
+        <tr>
+            <td><span class="nonword"><xsl:value-of select="translate(., ' ', '&#160;')"/></span></td>
+            <td><xsl:value-of select="string-length(.)"/></td>
+            <td><xsl:value-of select="@count"/></td>
+        </tr>
+    </xsl:template>
+
+
+    <!-- Tags -->
+
+    <xsl:template match="tags">
+        <h3 id="tags">Tags</h3>
+
+        <p>Counted for all languages</p>
+
+        <p>
+            <table>
+                <tr><th>Tag</th><th>Count</th></tr>
+
+                <xsl:apply-templates/>
+            </table>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="tag">
+        <tr>
+            <td><xsl:value-of select="."/></td>
+            <td><xsl:value-of select="@count"/></td>
+        </tr>
+    </xsl:template>
+
+
+    <!-- Rend -->
+
+    <xsl:template match="rends">
+        <h3 id="rends">Rendering Attributes</h3>
+
+        <p>Counted for all languages</p>
+
+        <p>
+            <table>
+                <tr><th>@rend attribute</th><th>Count</th></tr>
+
+                <xsl:apply-templates/>
+            </table>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="rend">
         <tr>
             <td><xsl:value-of select="."/></td>
             <td><xsl:value-of select="@count"/></td>
