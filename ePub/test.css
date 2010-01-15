@@ -9,38 +9,62 @@ body
 }
 
 
-/***** Titlepage *****/
+/***** Titlepage *****************************************************/
 
 .titlePage
 {
     border: #DDDDDD 2px solid;
     margin: 3em 0% 7em 0%;
     padding: 5em 10% 6em 10%;
+    text-align: center;
 }
 
-h1.docTitle
+.titlePage .docTitle
 {
-    font-size:1.6em;
-    line-height:2em;
+    line-height: 3.5em;
+    margin: 2em 0% 2em 0%;
+    font-weight: bold;
 }
 
-h2.byline
+.titlePage .docTitle .mainTitle
 {
-    font-size:1.1em;
-    font-weight:normal;
-    line-height:1.44em;
+    font-size: 1.8em;
 }
 
-span.docAuthor
+.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle, .titlePage .docTitle .volumeTitle
 {
+    font-size: 1.44em;
+}
+
+.titlePage .byline
+{
+    margin: 2em 0% 2em 0%;
     font-size:1.2em;
-    font-weight:bold;
+    line-height:1.72em;
 }
 
-h2.docImprint
+.titlePage .byline .docAuthor
 {
-    font-size:1.2em;
-    font-weight:normal;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.titlePage .figure
+{
+    margin: 2em 0% 2em 0%;
+}
+
+.titlePage .docImprint
+{
+    margin: 4em 0% 0em 0%;
+    font-size: 1.2em;
+    line-height: 1.72em;
+}
+
+.titlePage .docImprint .docDate
+{
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 
@@ -314,7 +338,6 @@ a.noteref, a.pseudonoteref
 }
 
 
-
 .displayfootnote
 {
     display: none;
@@ -322,6 +345,7 @@ a.noteref, a.pseudonoteref
 
 div.footnotes
 {
+    font-size: 80%;
     margin-top: 1em;
     padding: 0;
 }
@@ -336,7 +360,6 @@ hr.fnsep
 
 p.footnote
 {
-    font-size: 80%;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
 }
@@ -347,11 +370,6 @@ p.footnote .label
     width:2em;
     height:12pt;
     display:block;
-}
-
-.footnotes td, .footnotes th, .footnotes .tablecaption
-{
-    font-size: 80%;
 }
 
 /****** Tables ******/
@@ -437,10 +455,6 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
     top: auto;
 }
 
-.footnotes .line
-{
-    font-size:80%;
-}
 
 span.corr
 {
@@ -505,25 +519,25 @@ hr
     width:45%;
 }
 
-h2.docImprint,h1.docTitle,h2.byline,h2.docTitle,.aligncenter,div.figure
+.aligncenter, div.figure
 {
     text-align:center;
 }
 
-h1,h2
+h1, h2
 {
     font-size:1.44em;
     line-height:1.5em;
 }
 
-h1.label,h2.label
+h1.label, h2.label
 {
     font-size:1.2em;
     line-height:1.2em;
     margin-bottom:0;
 }
 
-h5,h6
+h5, h6
 {
     font-size:1em;
     font-style:italic;
@@ -697,6 +711,10 @@ sub, sup
     background-color: inherit;
 }
 
+span.corr, span.abbr, span.measure
+{
+    border-bottom: 0;
+}
 
 
 
@@ -712,188 +730,200 @@ body
 
 
                 
-                .xd22e270
+                .xd23e279
                 {
                     color:red; background-color:yellow;
                 }
             
                 
-                .xd22e271
+                .xd23e280
                 {
                     color:green; text-align:right;
                 }
             
                 
-                .xd22e272
+                .xd23e281
                 {
                     color:blue; text-align:right;
                 }
             
                 
-                .xd22e308
+                .xd23e317
                 {
                     text-align:left;width:40%;
                 }
             
                 
-                .xd22e309
+                .xd23e318
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e122
-                {
-                    font-family:'Walbaum-Fraktur';
-                }
-            
-                
-                .xd22e135
-                {
-                    font-size:14pt; color:red; background-color:yellow;
-                }
-            
-                
-                .xd22e237
-                {
-                    margin:0px auto; display:table;
-                }
-            
-                
-                .xd22e241
-                {
-                    valign:middle; width:2;
-                }
-            
-                
-                .xd22e242
-                {
-                    valign:middle;
-                }
-            
-                
-                .xd22e252
-                {
-                    margin-left:2em;
-                }
-            
-                
-                .xd22e254
-                {
-                    width:25%;
-                }
-            
-                
-                .xd22e256
-                {
-                    width:75%;
-                }
-            
-                
-                .xd22e267
-                {
-                    width:40%; margin:0px auto; display:table;
-                }
-            
-                
-                .xd22e276
-                {
-                    text-align:right;
-                }
-            
-                
-                .xd22e295
-                {
-                    text-align:center;
-                }
-            
-                
-                .xd22e300
-                {
-                    text-align:left;
-                }
-            
-                
-                .xd22e307
-                {
-                    width:40%;
-                }
-            
-            .xd22e452width
-            {
-                width:80px;
-            }
-        
-                
-                .xd22e457
-                {
-                    width:100px;
-                }
-            
-            .xd22e457width
-            {
-                width:80px;
-            }
-        
-            .xd22e465width
-            {
-                width:80px;
-            }
-        
-            .xd22e477width
-            {
-                width:480px;
-            }
-        
-            .xd22e497width
-            {
-                width:480px;
-            }
-        
-                
-                .xd22e547
+                .xd23e89
                 {
                     font-style:italic;
                 }
             
                 
-                .xd22e578
+                .xd23e99
                 {
-                    list-style-type:disc;
+                    background-color:yellow;
                 }
             
                 
-                .xd22e608
+                .xd23e131
                 {
-                    list-style-type:upper-roman;
+                    font-family:'Walbaum-Fraktur';
                 }
             
                 
-                .xd22e620
+                .xd23e144
                 {
-                    list-style-type:lower-roman;
+                    font-size:14pt; color:red; background-color:yellow;
                 }
             
                 
-                .xd22e640
+                .xd23e246
                 {
-                    text-align:left;
+                    margin:0px auto; display:table;
                 }
             
                 
-                .xd22e643
+                .xd23e250
+                {
+                    valign:middle; width:2;
+                }
+            
+                
+                .xd23e251
+                {
+                    valign:middle;
+                }
+            
+                
+                .xd23e261
+                {
+                    margin-left:2em;
+                }
+            
+                
+                .xd23e263
+                {
+                    width:25%;
+                }
+            
+                
+                .xd23e265
+                {
+                    width:75%;
+                }
+            
+                
+                .xd23e276
+                {
+                    width:40%; margin:0px auto; display:table;
+                }
+            
+                
+                .xd23e285
                 {
                     text-align:right;
                 }
             
                 
-                .xd22e645
+                .xd23e304
+                {
+                    text-align:center;
+                }
+            
+                
+                .xd23e309
+                {
+                    text-align:left;
+                }
+            
+                
+                .xd23e316
+                {
+                    width:40%;
+                }
+            
+            .xd23e461width
+            {
+                width:80px;
+            }
+        
+                
+                .xd23e466
+                {
+                    width:100px;
+                }
+            
+            .xd23e466width
+            {
+                width:80px;
+            }
+        
+            .xd23e474width
+            {
+                width:80px;
+            }
+        
+            .xd23e486width
+            {
+                width:480px;
+            }
+        
+            .xd23e506width
+            {
+                width:480px;
+            }
+        
+                
+                .xd23e556
+                {
+                    font-style:italic;
+                }
+            
+                
+                .xd23e587
+                {
+                    list-style-type:disc;
+                }
+            
+                
+                .xd23e617
+                {
+                    list-style-type:upper-roman;
+                }
+            
+                
+                .xd23e629
+                {
+                    list-style-type:lower-roman;
+                }
+            
+                
+                .xd23e649
+                {
+                    text-align:left;
+                }
+            
+                
+                .xd23e652
+                {
+                    text-align:right;
+                }
+            
+                
+                .xd23e654
                 {
                     text-align:center;
                 }
             
             
-            .xd22e648
+            .xd23e657
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -901,7 +931,7 @@ body
                 
             }
 
-            .xd22e648init
+            .xd23e657init
             {
                 float: left;
                 width: 90px;
@@ -917,49 +947,49 @@ body
 
         
                 
-                .xd22e653
+                .xd23e662
                 {
                     text-align:justify;
                 }
             
                 
-                .xd22e669
+                .xd23e678
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e678
+                .xd23e687
                 {
                     text-align:center;
                 }
             
                 
-                .xd22e683
+                .xd23e692
                 {
                     text-indent:1em;
                 }
             
                 
-                .xd22e689
+                .xd23e698
                 {
                     text-indent:2em;
                 }
             
                 
-                .xd22e693
+                .xd23e702
                 {
                     text-indent:3em;
                 }
             
                 
-                .xd22e697
+                .xd23e706
                 {
                     text-indent:10em;
                 }
             
                 
-                .xd22e699
+                .xd23e708
                 {
                     font-style:italic;
                 }
