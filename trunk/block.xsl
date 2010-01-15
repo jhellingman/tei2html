@@ -19,10 +19,6 @@
 
     Stylesheet to format block level elements, to be imported in tei2html.xsl.
 
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
-
 -->
 
 <xsl:stylesheet
@@ -30,67 +26,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="1.0"
     >
-
-
-    <!--====================================================================-->
-    <!-- Title Page -->
-
-    <xsl:template match="titlePage">
-        <div class="titlePage">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
-            <xsl:apply-templates mode="titlePage"/>
-        </div>
-    </xsl:template>
-
-    <xsl:template match="docTitle" mode="titlePage">
-        <xsl:apply-templates mode="titlePage"/>
-    </xsl:template>
-
-    <xsl:template match="titlePart" mode="titlePage">
-        <h1 class="docTitle">
-            <xsl:call-template name="setLangAttribute"/>
-            <xsl:apply-templates mode="titlePage"/>
-        </h1>
-    </xsl:template>
-
-    <xsl:template match="titlePart[@type='sub']" mode="titlePage">
-        <h2 class="docTitle">
-            <xsl:apply-templates mode="titlePage"/>
-        </h2>
-    </xsl:template>
-
-    <xsl:template match="byline" mode="titlePage">
-        <h2 class="byline">
-            <xsl:apply-templates mode="titlePage"/>
-        </h2>
-    </xsl:template>
-
-    <xsl:template match="docAuthor" mode="titlePage">
-        <span class="docAuthor">
-            <xsl:apply-templates mode="titlePage"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="lb" mode="titlePage">
-        <br/>
-    </xsl:template>
-
-    <xsl:template match="docImprint" mode="titlePage">
-        <h2 class="docImprint">
-            <xsl:apply-templates/>
-        </h2>
-    </xsl:template>
-
-    <xsl:template match="epigraph" mode="titlePage">
-        <h2 class="docImprint">
-            <xsl:apply-templates/>
-        </h2>
-    </xsl:template>
-
-    <xsl:template match="figure" mode="titlePage">
-        <xsl:apply-templates select="."/>
-    </xsl:template>
 
 
     <!--====================================================================-->
@@ -153,7 +88,6 @@
     <xsl:template match="milestone">
         <xsl:call-template name="generate-anchor"/>
     </xsl:template>
-
 
 
     <!--====================================================================-->

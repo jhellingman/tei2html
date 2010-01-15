@@ -86,9 +86,16 @@
 <text>
 <front id="front">
 <titlePage>
-<docTitle><titlePart>This is a test document</titlePart></docTitle>
+<docTitle>
+<titlePart>Creating documents in TEI</titlePart>
+<titlePart type="sub" rend="font-style(italic)">A Tei2Html Test Document</titlePart>
+</docTitle>
 
-<byline>by <docAuthor>Jeroen Hellingman</docAuthor></byline>
+<byline>by <lb/><docAuthor>Jeroen Hellingman</docAuthor></byline>
+
+<docImprint>Project Gutenberg
+<lb/><docDate rend="background-color(yellow)">2010</docDate>
+</docImprint>
 </titlePage>
 
 <divGen id="toc" type="toc"/>

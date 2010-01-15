@@ -34,6 +34,7 @@
     <xsl:include href="inline.xsl"/>
     <xsl:include href="css.xsl"/>
     <xsl:include href="references.xsl"/>
+    <xsl:include href="titlepage.xsl"/>
     <xsl:include href="block.xsl"/>
     <xsl:include href="notes.xsl"/>
     <xsl:include href="drama.xsl"/>
