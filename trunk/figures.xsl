@@ -176,7 +176,7 @@
                                     </xsl:when>
                                     <xsl:when test="head">
                                         <xsl:value-of select="head"/>
-                                    </xsl:when>                                
+                                    </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="''"/>
                                     </xsl:otherwise>

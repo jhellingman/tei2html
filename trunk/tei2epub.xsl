@@ -56,7 +56,6 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
-    <xsl:param name="optionExternalCSS" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 
 
@@ -145,6 +144,7 @@
                     <xsl:otherwise>style/epub.css</xsl:otherwise>
                 </xsl:choose>.xml
             </xsl:variable>
+
             <!-- Standard CSS stylesheet -->
             <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
 
@@ -156,6 +156,7 @@
                 <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
             </xsl:if>
 
+            <!-- Generate CSS for rend attributes -->
             <xsl:apply-templates select="/" mode="css"/>
 
         </xsl:result-document>

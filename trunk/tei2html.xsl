@@ -2,19 +2,11 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet to convert TEI to HTML
+    Stylesheets to convert TEI to HTML
 
-    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a
-    CSS stylesheet. Please contact me if you have problems with this stylesheet,
+    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with
+    CSS stylesheets. Please contact me if you have problems with this stylesheet,
     or have improvements or bug fixes to contribute.
-
-    This stylesheet can be used with the saxon XSL processor, or with the
-    build-in XSL processor in IE 6.0 or higher. Note that the XLS processor
-    in Firefox will not always do the right thing.
-
-    You can embed this style sheet in the source document with the
-    <?xml-stylesheet type="text/xsl" href="stylesheet.xsl"?> processing instruction.
-    This works with IE 6.0 or the latest Mozilla browsers.
 
     This file is made available under the GNU General Public License, version 3.0 or later.
 
@@ -67,7 +59,6 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
-    <xsl:param name="optionExternalCSS" select="'No'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 
 
