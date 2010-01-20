@@ -8,7 +8,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
@@ -21,7 +21,7 @@
 
     <xsl:template match="TEI.2">
         <xsl:comment>
-            <xsl:text> This HTML file has been automatically generated from an XML source. </xsl:text>
+            <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text><xsl:value-of select="current-dateTime()"/><xsl:text>. </xsl:text>
         </xsl:comment>
 
         <xsl:text> <!-- insert extra new-line for PG -->
