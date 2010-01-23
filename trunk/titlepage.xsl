@@ -126,9 +126,8 @@
         <br/>
     </xsl:template>
 
-
     <xsl:template match="hi" mode="titlePage">
-        <hi><xsl:apply-templates mode="titlePage"/></hi>
+        <i><xsl:apply-templates mode="titlePage"/></i>
     </xsl:template>
 
 </xsl:stylesheet>
