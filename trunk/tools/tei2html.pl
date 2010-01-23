@@ -205,6 +205,18 @@ sub processFile
         $cssFileParam = "customCssFile=\"file:/$pwd/custom.css.xml\"";
     }
 
+    my $opfManifestFileParam = "";
+    if (-f "opf-manifest.xml")
+    {
+        print "Adding additional elements for the OPF manifest...\n";
+
+        my $pwd = `pwd`;
+        chop($pwd);
+        $pwd =~ s/\\/\//g;
+
+        $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
+    }
+
 
     print "Create HTML version...\n";
     system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > tmp.5");
@@ -230,7 +242,7 @@ sub processFile
     {
         print "Create ePub version...\n";
         # system ("$saxon2 -T $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml 2> tmp-trace.xml");
-        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
+        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > tmp.xhtml");
 
         system ("del $basename.epub");
         chdir "epub";

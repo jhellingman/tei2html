@@ -11,6 +11,9 @@
         version="2.0">
 
 
+    <xsl:param name="opfManifestFile"/>
+
+
     <xsl:template match="TEI.2" mode="opf">
 
         <xsl:result-document 
@@ -75,6 +78,12 @@
                     </xsl:variable>
 
                     <xsl:apply-templates select="$images" mode="undouble"/>
+
+                    <xsl:if test="$opfManifestFile">
+                        <!-- Include additional items in the manifest -->
+                        <xsl:message terminate="no">Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                        <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
+                    </xsl:if>
 
                 </manifest>
 
@@ -223,6 +232,15 @@
         </xsl:if>
     </xsl:template>
 
+    <!-- Copy items from an included manifest snipped file -->
+
+    <xsl:template match="opf:item" mode="copy-manifest">
+        <xsl:copy>
+            <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+            <xsl:attribute name="media-type"><xsl:value-of select="@media-type"/></xsl:attribute>
+        </xsl:copy>
+    </xsl:template>
 
     <!--== spine ===========================================================-->
 
