@@ -1,0 +1,5237 @@
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN">
+<TEI.2 lang=nl-1900>
+<teiHeader>
+<fileDesc>
+<titleStmt>
+<title>Twee Edellieden van Verona</title>
+<author>William Shakespeare</author>
+<respStmt><resp>Transcriptie</resp><name>Jeroen Hellingman</name></respStmt>
+</titleStmt>
+<publicationStmt>
+<publisher>Project Gutenberg</publisher>
+<pubPlace>Urbana, Illinois, USA.</pubPlace>
+<idno type=PGclearance>20060329102432shakespear</idno>
+<idno type=PGDPProjectId>projectID4682dd0768846</idno>
+<idno type=PGnum>26594</idno>
+<date>2008-09-11</date>
+<availability lang=nl>
+<p>&availability.nl;
+
+<p>Dit eBoek is geproduceerd door Jeroen Hellingman en het on-line gedistribueerd correctie team op <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
+
+<p>Het Engelse origineel van dit eBoek is <hi lang=en>Two Gentlemen of Verona</hi>, eBoek nummer <xref url="pg:1108">1108</xref>; <xref url="pg:1509">1509</xref>; <xref url="pg:1773">1773</xref>; <xref url="pg:2236">2236</xref>; <xref url="pg:23043">23043</xref> (Deze laatste in HTML). Een Franse vertaling is beschikbaar als eBoek <xref url="pg:16710">16710</xref>.
+
+<p lang=en>&availability.en;
+
+<p lang=en>This eBook is produced by Jeroen Hellingman and the Online Distributed Proofreading Team at <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
+
+</availability>
+</publicationStmt>
+<sourceDesc>
+<bibl>
+<author>William Shakespeare</author>
+<title>De Klucht der Vergissingen</title>
+<date>1898</date>
+</bibl>
+</sourceDesc>
+</fileDesc>
+<encodingDesc lang=nl>
+<p>Dit bestand is in een verouderde spelling. Er is geen poging gedaan de tekst te moderniseren. Afgebroken woorden aan het einde van de regel zijn stilzwijgend hersteld. Kennelijke zetfouten in het origineel zijn gecorrigeerd. Dergelijke correcties zijn gemarkeerd met het corr-element.
+
+<p>Hoewel in het origineel laag liggende aanhalingstekens openen gebruikt, zijn deze in dit bestand gecodeerd met &ldquo;. Geneste dubbele aanhalingstekens zijn stilzwijgend veranderd in enkele aanhalingstekens.
+
+</encodingDesc>
+<profileDesc>
+	<langUsage lang=nl>
+		<language id=nl-1900>Nederlands (Spelling De Vries-Te Winkel)</language>
+		<language id=nl>Nederlands</language>
+		<language id=en>Engels</language>
+		<language id=de>Duits</language>
+		<language id=fr>Frans</language>
+		<language id=la>Latijn</language>
+	</langUsage>
+</profileDesc>
+<revisionDesc>
+	<list>
+		<item>2008-07-30 begonnen.
+	</list>
+</revisionDesc>
+</teiHeader>
+<text>
+<pb n=159>
+<body>
+<div0 id=ev type=Play>
+<head>Twee Edellieden van Verona.</head>
+
+
+
+<castList>
+<head>Personen:</head>
+
+<castItem><hi rend=sc><role id=her>De Hertog</role></hi> van Milaan, Silvia&apos;s vader.</castItem>
+
+<castGroup>
+<head><corr sic=twee>Twee</corr> edellieden van Verona.</head>
+<castItem><hi rend=sc><role id=val>Valentijn</role></hi>,</castItem>
+<castItem><hi rend=sc><role id=pro>Proteus</role></hi><corr sic=",">.</corr></castItem>
+</castGroup>
+
+<castItem><hi rend=sc><role id=ant>Antonio</role></hi>, vader van Proteus.</castItem>
+<castItem><hi rend=sc><role id=thu>Thurio</role></hi>, een dwaas mededinger van Valentijn.</castItem>
+<castItem><hi rend=sc><role id=egl>Eglamour</role></hi>, begeleider van Silvia op haar vlucht.</castItem>
+<castItem><hi rend=sc><role id=fli>Flink</role></hi>, een potsig dienaar van Valentijn.</castItem>
+<castItem><hi rend=sc><role id=lan>Lans</role></hi>, een dergelijk dienaar van Proteus.</castItem>
+<castItem><hi rend=sc><role id=pan>Panthino</role></hi>, bediende van Antonio.</castItem>
+<castItem>De <role id=waa>Waard</role>, bij wien Julia vertoeft.</castItem>
+<castItem><role id=ban>Bandieten</role>.</castItem>
+
+<castItem><hi rend=sc><role id=jul>Julia</role></hi>, bemind door Proteus.</castItem>
+<castItem><hi rend=sc><role id=sil>Silvia</role></hi>, bemind door Valentijn.</castItem>
+<castItem><hi rend=sc><role id=luc>Lucetta</role></hi>, Julia&apos; s kamerjuffer.</castItem>
+<castItem><role id=bed>Bedienden</role>, <role id=muz>Muzikanten</role>.</castItem>
+</castlist>
+
+
+<set>
+<p>Het tooneel is nu in Verona, dan in Milaan, en ook op de grenzen van Mantua. </set>
+
+
+
+<div1 id=ev.I type=Act>
+<head>Eerste Bedrijf.</head>
+
+
+<div2 id=ev.I.1 type=Scene>
+<head>Eerste Tooneel.</head>
+
+
+<stage type=setting><hi>Een plein in</hi> <hi rend=ex>Verona</hi>.</stage>
+
+<stage type=entrance><hi rend=sc>Valentijn</hi> <hi>en</hi> <hi rend=sc>Proteus</hi> <hi>komen op</hi>.</stage>
+
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Staak vrij uw overreding, lieve Proteus;
+<l id=ev.I.1.2>Thuiszitten maakt een jonkman tot een huishen.
+<l>Ja, hield de liefde uw lente niet geketend
+<l>Aan &apos;t lieflijk lonken van uw aangebeed&apos;ne,
+<l>Dan drong ik u, veeleer te zaam met mij
+<l>Der wijde wereld wond&apos;ren te gaan zien,
+<l>Dan z&oacute;&oacute; uw jeugd, in duffe droomerij
+<l>En lendenlammen lediggang te slijten,
+<l>Doch wijl gij mint,&mdash;blijf minnen, groei er in,
+<l>Zooals mijn wensch zal zijn, als ik eens min.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Gij wilt dus gaan? Vaarwel mijn Valentijn!
+<l>Denk aan uw Proteus, als gij op uw reizen
+<l>Iets vreemds en recht opmerkenswaardigs ziet;
+<l>Indien &apos;t u goed gaat, rijze in u de wensch,
+<l>Dat ik er bij waar&apos;; zijt gij in gevaar,&mdash;
+<l>Indien er ooit gevaren om u zweven,&mdash;
+<l>Beveel uw nood dan aan mijn heil&apos;ge beden,
+<l id=ev.I.1.17>Want ik wil voor u bidden, Valentijn.      <ab type=lineNum>17</ab>
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En zeker bidden uit een liefdeboek?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Uit een geliefd boek, ja, zal &apos;k voor u bidden.
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, uit een grondloos boek van diepe liefde,
+<l>Hoe door den Hellespont Leander zwom.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Dat is een diep verhaal van dieper liefde;
+<l>Hij stak in liefde meer dan schoenendiep.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>&apos;t Is waar! in liefde steekt gij laarzendiep,
+<l>En toch, nooit zwomt gij door den Hellespont.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l id=ev.I.1.27>Wat, laarzen? Pas geen Spaansche laars mij aan.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Nu, &apos;k zeg, gij steekt in folterlaarzen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                                           <l rend="hemistich(Nu, &apos;k zeg, gij steekt in folterlaarzen.)">Wat?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Gij steekt in liefde, die voor smachten hoon,
+<l>Met hartezuchten schuwe blikken koopt,
+<l>Een oogwenk heils met twintig bange nachten,
+<l>Bij zoete zege steeds een ne&ecirc;rlaag wint,
+<l>Bij ne&ecirc;rlaag zure moeite als overwinst;
+<l>Liefde is een dwaasheid, door vernuft gekocht,
+<l>Of wel vernuft, door dwaasheid overmocht.
+</sp>
+
+<pb n=160><sp who=pro>
+<speaker>Proteus.</speaker> <l>Gij stelt mij waarlijk als een dwaas ten toon.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Gij stelt uzelven, vrees ik, dus ten toon.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Gij smaadt de liefde; en ik ben niet de Liefde.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Liefde is uw meester, want die meestert u;
+<l>En hij, die zoo het juk draagt van een dwaas,
+<l>Zij, dunkt mij, bij de wijzen niet geboekt.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Toch staat geboekt: zooals in de&apos; e&ecirc;lsten knop
+<l>De worm verterend huist, zoo kiest de liefde
+<l>Verterend woning in den e&ecirc;lsten geest.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En &apos;t staat geboekt: zooals de vroegste knop
+<l>Verteerd wordt, voor &apos;t ontluiken, door den worm,
+<l>Zoo wordt de jonge en teed&apos;re geest door liefde
+<l>Verkeerd in dwaasheid; in den knop verwelkt hij;
+<l>Reeds bij het eerst ontluiken valt zijn groen
+<l>Met al, wat ooit op vruchten kon doen hopen.
+<l>Doch wat spil ik mijn tijd met raad aan u,
+<l>Die u verpand hebt aan den minnewaan?
+<l id=ev.I.1.53>Nog eens, vaarwel! want aan de haven wacht
+<l>Mijn vader reeds om mij aan boord te brengen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>&apos;k Ga met u naar de haven, Valentijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Neen, Proteus, laat ons hier nu afscheid nemen;      <ab type=lineNum>56</ab>
+<l>Maar schrijf mij spoedig naar Milaan, hoe &apos;t u
+<l>Met uwe liefde gaat, en wat er verder
+<l>Voor nieuws hier is in &apos;t afzijn van uw vriend;
+<l>En wacht van mij gelijk bezoek ten uwent.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Nu, alle heil geworde u in Milaan!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Zoo u niet minder thuis! En nu, vaarwel!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Valentijn</hi> <hi>af</hi>.)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Hij jaagt naar eer en ik naar liefde; hij
+<l>Verlaat zijn vrienden, om hen te verheffen;
+<l>Ik, om de min, mijzelf, mijn vrienden, alles.
+<l>Gij, Julia, hebt mij aan mijzelf ontvoerd,
+<l>Zoodat ik niets studeer, mijn tijd verdoe,
+<l>De wereld niets tel, goeden raad veracht,
+<l>En, suf gedroomd, zwaarmoedig zucht en smacht.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Flink</hi> <hi>komt op</hi>.)</stage>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Vergun, heer Proteus, was mijn meester hier?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Hij ging juist heen, en naar Milaan aan boord.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Nu, twintig tegen een, dan is hij scheep,
+<l>En ik, die van hem af geraakte, een schaap.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, ja, niet zelden raakt een schaap verdwaald,
+<l>Zoodra de scheper in het hoeden faalt.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Gij wilt dus zeggen, dat mijn meester een scheper is en ik een schaap?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Ja juist.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dan zijn mijn horens zijn horens, of ik waak of slaap.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Een recht onnoozel antwoord, passend voor een schaap.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dat maakt mij waarlijk weer tot schaap.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Juist, en uw meester tot scheper.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Neen, ik kan het tegenspreken met een sluitrede.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>En ik maak mij sterk het met een andere te staven.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>De scheper zoekt de schapen en niet het schaap den scheper; welnu, ik zoek mijn meester en niet mijn meester mij; derhalve: ik ben geen schaap.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Het schaap volgt om het vo&ecirc;r den scheper, de scheper niet om het eten &apos;t schaap; gij volgt om loon uw meester, uw meester volgt u niet om loon; derhalve, gij zijt een schaap.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Nog eens zulk een sluitrede, en ik roep m&egrave;-&egrave;!      <ab type=lineNum>98</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Maar hoor nu, hebt gij mijn brief aan Julia gegeven?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p id=ev.I.1.101>Ja, heer; ik, een verloren schaap, gaf uw brief aan haar, een verkoren schaap; en zij, een verkoren schaap, gaf aan mij, een verloren schaap, niets voor mijn moeite.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Voor zooveel schapen is de weide wel wat te klein.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Als het veld overvol is, deedt gij het best, haar te kooien.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p id=ev.I.1.110>Neen, daar zijt gij aan &apos;t dwalen; ik deed het best, u te schutten.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Mij beschutten, heer! met minder dan een pond voor het bezorgen van uw brief zal ik wel terecht komen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wat onzin! &apos;k meen, u in de schutkooi steken.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Mij in een kooi te steken? die vast op fooien reken!
+<l>Die aan uw lief uw liefdebrief zoo schoon wist toe te steken!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Maar wat zeide zij? <stage rend=inline>(<hi rend=sc>Flink</hi> <hi>knikt.</hi>)</stage>
+<l>Zij heeft geknikt, niet?
+</sp>
+
+<pb n=161><sp who=fli>
+<speaker>Flink.</speaker> <p>Niet geknikt? Ja.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Ja bij niet? dat is neen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Gij verstaat mij verkeerd, heer; ik knikte, dat zij knikte; en gij vroegt mij, of zij niet geknikt had, en ik zeide van ja.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>En niet-ja is neen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Nu gij de moeite hebt gedaan, dit bijeen te lezen, moogt gij het voor uw moeite houden.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Neen, neen, ik neem het niet aan, en verlang meer van de briefbestelling te vernemen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Nu, en ik verlang meer voor de briefbestelling te ontvangen en heb geen vrede met uw bestel.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Hoe zoo, kerel, geen vrede met mijn bestel?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Neen, heer, want ik bestelde den brief goed, en uw bestel zegt neen en telt mij niets toe voor mijn moeite.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Verduiveld, gij zijt bij de hand!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>En toch kan mijn vlugge hand uw trage beurs niet machtig worden.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Kom, kom, doe mij kort en goed opening van de zaak; wat heeft zij gezegd?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Open dan uw beurs, opdat wij geld en nieuws gelijk oversteken.        <ab type=lineNum>138</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Nu man, daar hebt gij wat voor uw moeite; wat heeft zij gezegd?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Waarlijk, heer, ik geloof, dat gij niets van haar te hopen hebt.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Waarom? Hebt gij haar dit weten te ontlokken?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Neen, heer, ik heb haar volstrekt niets kunnen ontlokken; neen, zelfs geen onnoozelen dukaat voor het overbrengen van uw brief. En daar zij zoo hard voor mij was, die uwe gezindheid haar schriftelijk overbracht, vrees ik, dat zij even hard zal wezen voor u, als gij haar uwe gezindheid mondeling mededeelt. Geef haar als liefdepanden enkel steenen, want zij is zoo hard als staal.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wat! heeft zij niets gezegd?
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Neen, niet zooveel als: &ldquo;Ziedaar, dat is voor uw moeite&rdquo;. Ik dank u, <ab id=ev.i.1.152>de grootte uwer mildheid</ab> erken ik aan deze grooten, en uit erkentelijkheid laat ik u in het vervolg uwe brieven zelf bestellen. En nu, heer, ga ik uwe groeten aan mijn meester overbrengen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l id=ev.I.1.156>Ga, ga! gij zijt de veiligheid van &apos;t schip!
+<l>Zijt gij aan boord, dan kan het niet vergaan;
+<l>Gij zijt voor droger dood aan land bestemd.&mdash;
+</sp>
+
+<stage type=exit>(<hi rend=sc>Flink</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<l>Ik moet een beet&apos;ren bode tot haar zenden,
+<l>Mijn Julia, vrees ik, acht mijn regels niets,
+<l>Die haar een knaap, zoo diep onwaardig, brengt.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+
+
+<div2 id=ev.I.2 type=Scene>
+<head>Tweede Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar</hi>. <hi>De tuin van</hi> <hi rend=sc>Julia&apos;s</hi> <hi>woning</hi><corr sic=",">.</corr></stage>
+
+<stage type=entrance><hi rend=sc>Julia</hi> <hi>en</hi> <hi rend=sc>Lucetta</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Maar nu, Lucetta, spreek; wij zijn alleen;
+<l>Gij geeft mij dus den raad, verliefd te worden?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ja, jonkvrouw, mits gij niet onachtzaam struikelt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Wien uit den ganschen schoonen kring van heeren,
+<l>Die daag&apos;lijks met gesprekken om mij zwerven;
+<l>Acht gij wel allermeest mijn liefde waard?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ik bid u, noem hen op, dan geef ik u,
+<l>Naar mijn onnoozel inzicht, mijne meening.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Wat dunkt u van den schoonen Eglamour?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Een ridder is hij, welbespraakt en fijn;
+<l>Doch, waar&apos; ik u, hij zou mijn man niet zijn.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Wat van dien rijken heer, Mercatio?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Goed van zijn geld, maar van hemzelf; zoo zoo.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>En den beleefden Proteus, wat van hem?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Heer, heer! mijn dwaasheid brengt mij in de klem!      <ab type=lineNum>15</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Komaan, wat schrikt en beeft gij bij zijn naam?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Vergeef mij, jonkvrouw, &apos;t is, dat ik mij schaam,
+<l>Dat ik, onwaardig schepsel, zoo losweg
+<l>Mijn oordeel over hoofsche minnaars zeg.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Waarom van Proteus niet als van de rest?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ja,&mdash;&apos;k vind van vele goeden hem het best.
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Om welke reden?
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ik heb geen and&apos;re, dan een meisjesreden:
+<l>Ik vind hem zoo, omdat ik hem zoo vind.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Gij raadt mij, hem mijn liefde weg te schenken?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ja, zoo gij haar niet weggeworpen acht.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Van al de rest, heeft hij mij nooit bestormd.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Van al de rest, mint hij u toch het meest.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zijn zwijgen toont zijn koel en kil gemoed.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Het heimlijkst vuur brandt met den felsten gloed.
+</sp>
+
+<pb n=162><sp who=jul>
+<speaker>Julia.</speaker> <l>Hij mint niet, die door niets zijn min verraadt.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Hij mint niet, die er altijd door van praat.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O, las ik eens zijn hart!
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                        <l rend="hemistich(O, las ik eens zijn hart!)">Lees, jonkvrouw, dit papier.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>&ldquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                              <l rend="hemistich(&ldquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?)">Dat vindt gij in den brief.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Nu zeg, wie gaf het u?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>&apos;t Was Valentijns trawant, en Proteus, denk ik, zond het.
+<l>Hij zocht het u te geven, maar ik kwam juist daar aan,
+<l>En nam het van hem over, vergeef mijn stout bestaan.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Nu, op mijn eer, een fraaie makelaarster!
+<l>Gij waagt het, dart&apos;le briefjes aan te nemen?
+<l>Mijn jeugd, met and&apos;ren fluist&apos;rend, te belagen?
+<l>Voorwaar, ik zeg u, &apos;t is een prachtig ambt,
+<l>En gij, zoo dunkt mij, voor dien post geknipt.
+<l>Hier, neem den brief; bezorg hem fluks terug,
+<l>Of, hoort gij, kom mij nooit meer onder de oogen.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Een minpleidooi verdient eer loon dan haat.      <ab type=lineNum>48</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Kom, gaat gij?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>              <l rend="hemistich(Kom, gaat gij?)">Goed; pleeg met uzelve raad.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Lucetta</hi> <hi>af.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Had ik dien brief toch even ingezien!
+<l>Doch haar terug te roepen, en haar dat,
+<l>Waarom ik keef, te vragen, gaat niet aan.
+<l>Hoe dwaas! zij weet, dat ik een meisje ben,
+<l>En dwingt den brief mij niet ter lezing op!
+<l id=ev.I.2.55>Zij weet toch, meisjes zeggen zedig &ldquo;neen&rdquo;,
+<l>Maar wenschen, dat de vrager &ldquo;ja&rdquo; versta.
+<l>Foei, foei! hoe grillig is die dwaze liefde!
+<l>Die als een kregel kind de voedster krabt,
+<l>En dan vol deemoed fluks de roede kust.
+<l>Hoe vinnig keef ik daar Lucetta weg,
+<l>Toen ik haar innig gaarne bij mij hield;
+<l>Hoe toornig plooide ik mijn gelaat tot rimpels,
+<l>Terwijl de vreugd mijn hart tot lachen dwong!
+<l>Mijn boete zij: ik roep Lucetta weer
+<l>En vraag haar voor mijn dwazen streek vergiff&apos;nis.
+<l>Heidaar! Lucetta!
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Lucetta</hi> <hi>komt terug.</hi>)</stage>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>          <l rend="hemistich(Heidaar! Lucetta!)">Wat verlangt gij, jonkvrouw?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Is &apos;t nog geen etenstijd?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                        <l rend="hemistich(Is &apos;t nog geen etenstijd?)">Ik wenschte &apos;t wel.
+<l>Opdat ge uw moed mocht koelen op uw maal,
+<l>En niet op uwe maagd.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Lucetta</hi> <hi>laat den brief vallen en raapt hem weer op.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Wat hebt gij daar behoedzaam opgeraapt?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ik? niets.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Gij buktet toch, waarom?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                        <l rend="hemistich(Gij buktet toch, waarom?)">Om een papier,
+<l>Dat mij ontviel.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker>          <l rend="hemistich(Dat mij ontviel.)">En dat papier is niets?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>&apos;t Is iets, dat mij niet aangaat.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zoo laat voor hen het liggen, wien het aangaat.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Het zal, voor wie het aangaat, wis niet liegen,
+<l>Tenzij men, wat het meldt, valsch uit wil leggen.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Een liefje schreef u wis daar iets op rijm.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Geef gij, mejonkvrouw, mij de wijs, opdat
+<l>Ik &apos;t zing&apos;; gij zet wel meer iets op muziek.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Een niets zet ik geen waarde bij; ik dank;
+<l id=ev.I.2.83>Dus zing &apos;t maar op de wijs van &ldquo;Luchte liefde&rdquo;.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>&apos;t Is veel te wichtig voor zoo lucht een wijs.      <ab type=lineNum>84</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zoo wichtig? daarbij hoort een zware stem.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Toch niet; het klonk wel goed, als gij het zongt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>En waarom gij niet?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                  <l rend="hemistich(En waarom gij niet?)">&apos;t Is voor mij te hoog.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Laat zien uw vers.
+</sp>
+
+<stage>(<hi>Zij neemt</hi> <hi rend=sc>Lucetta</hi> <hi>den brief af.</hi>)</stage>
+
+<sp who=jul>
+                          <l rend="hemistich(Laat zien uw vers.)">O, gij ondeugend nest!
+</sp>
+
+<stage>(<hi>Zij maakt een toornig gebaar.</hi>)</stage>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Vat goed den toon, als gij het uit wilt zingen;
+<l>Maar toch, die toon is lang niet naar mijn zin.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Niet naar uw zin?
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                <l rend="hemistich(Niet naar uw zin?)">Neen, jonkvrouw, veel te schril.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Vrijpostig nest!
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker>                <l rend="hemistich(Vrijpostig nest!)">O, nu zijt gij te laag;
+<l>Gij dempt de hooge stem door dof gebrom;
+<l>En bij uw zang ontbreekt nog de tenoor.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Die gaat door uw gebas geheel verloren.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ja, &apos;k zong voor Proteus de partij wat laag.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>leest den brief</hi>).</stage> Neen, &apos;k laat door al die praatjes mij niet kwellen.&mdash;
+<l>O foei, een stapel liefdes-eeden!&mdash;Daar!&mdash;
+</sp>
+
+<stage>(<hi>Zij verscheurt den brief.</hi>)</stage>
+
+<sp who=jul>
+<l>Gij, ga nu heen, en laat die stukken liggen;
+<l>Zocht gij ze weer bijeen, het zou mij erg&apos;ren.
+</sp>
+
+<pb n=163><sp who=luc>
+<speaker>Lucetta</speaker> <l><stage rend=inline>(<hi>onder &apos;t heengaan</hi>).</stage> Zij houdt zich boos; maar &apos;t deed haar innig goed,
+<l>Als zulk een brief haar nog eens erg&apos;ren kwam.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Lucetta</hi> <hi>af.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Neen, kwam nog maar die zelfde brief mij erg&apos;ren!
+<l>Haathanden, gij! die liefdewoorden stukrijt!
+<l>Den zoeten honig rooft gij, booze wespen,
+<l>En steekt de bijen, die hem leev&apos;ren, dood!
+<l>&apos;k Wil boete doen en ieder stukje kussen.
+<l>Wat staat daar? &ldquo;Zoete Julia?&rdquo;&mdash;Bitt&apos;re Julia!
+<l>Ik werp tot straf voor uw ondankbaarheid
+<l>Uw naam hier op den harden grond en treed
+<l>Uw wreeden trots verachtend in het stof.
+<l>Hier staat: &ldquo;de door de Min gewonde Proteus&rdquo;;
+<l id=ev.I.2.114>Gij arme, kranke naam! mijn boezem zij
+<l>Uw bed, totdat uw wonde gansch geheeld is;
+<l>Ik drenk, doordring haar met een balsemkus.
+</sp>
+
+<stage>(<hi>Zij steekt het stukje in haar borstzak.</hi>)</stage>
+
+<sp who=jul>
+<l>Twee-, driemaal staat hier Proteus&apos; naam; o wind!
+<l>Wees kalm en blaas geen enkel woordje weg,
+<l>Totdat ik ieder enkel woord gespeld heb,
+<l>Mijn naam slechts niet; dien draag een wervelwind
+<l>Naar een afgrijslijk steile, ruwe klip,
+<l>En stort&apos; hem in de gramme baren neer!      <ab type=lineNum>122</ab>
+<l>In &eacute;&eacute;nen regel, zie, zijn naam tweemaal;
+<l>&ldquo;De mijm&apos;raar Proteus, diep onzaal&apos;ge Proteus,
+<l>Aan de engel Julia&rdquo;;&mdash;dit scheur ik er af;
+<l>Doch neen, dat niet, daar hij mijn naam zoo aardig
+<l>Met zijne weeklachtnamen heeft gepaard;
+<l>Ik wil ze vouwen, de&apos; eenen op den and&apos;ren;&mdash;
+<l>Kust nu, omarmt u, kijft, doet wat gij wilt.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Lucetta</hi> <hi>komt weder op.</hi>)</stage>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Mejonkvrouw,
+<l>Het eten is gereed, uw vader wacht.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Goed, gaan wij dan.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Wat! mogen hier die snippers blijven klappen?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Houdt gij ze in eere, goed, neem ze op en me&ecirc;.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Zoo goed naamt gij &apos;t niet op, toen ik ze u meebracht.
+<l>Toch raap ik ze op; zij mochten koude vatten.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l id=ev.I.2.137>Ik zie recht goed, dat gij ze diep vereert.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ja goed, mejonkvrouw, zeg maar, wat gij ziet;
+<l>Maar ik zie ook, al denkt ge, dat ik dommel.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Kom, vlug wat! wilt gij gaan?
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<div2 id=ev.I.3 type=Scene>
+<head>Derde Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar</hi>. <hi>Een vertrek in</hi> <hi rend=sc>Antonio&apos;s</hi> <hi>huis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Antonio</hi> <hi>en</hi> <hi rend=sc>Panthino</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Panthino, zeg mij, welk een diep gesprek
+<l>Hadt gij daar straks in &apos;t klooster met mijn broeder?
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Hij sprak van Proteus, van zijn neef, uw zoon.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>En wat?
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker>        <l rend="hemistich(En wat?)">Hij stond verbaasd, dat uw genade
+<l>Hem hier zijn jeugd verdroomen laat, terwijl
+<l>Zoo menig ander, van gering&apos;ren stand,
+<l>Zijn zoon om rang en eer de wereld inzendt,
+<l>Hetzij in de&apos; oorlog om fortuin te zoeken,
+<l>Hetzij om verre landen op te sporen,
+<l>Hetzij naar scholen, waar geleerdheid huist.
+<l>Voor de eene of and&apos;re loopbaan, of voor allen
+<l>Was naar zijn oordeel Proteus recht geschikt;
+<l>Hij vroeg mij, dat ik bij u aan zou dringen,
+<l>Dat hij niet langer thuis zijn tijd verdroom&apos;;
+<l>Het zou hem in zijn ouderdom nog rouwen,
+<l>Wanneer hij in zijn jeugd niet had gereisd.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Gij hebt geen sterken aandrang noodig, &apos;t was
+<l>De gansche maand reeds niet uit mijn gedachten;
+<l>Ik overwoog reeds lang zijn tijdverlies,
+<l>En hoe hij nooit een deeg&apos;lijk man wordt, als
+<l>De wereld hem niet schudt en mondig maakt;
+<l>Ervaring wordt door vlijt en moeite erlangd,
+<l>En door den snellen gang des tijds gerijpt.
+<l>Doch spreek, waar zou ik best hem henen zenden?
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Het is gewis uw edelheid bewust,
+<l>Dat thans zijn vriend, de jonge Valentijn,
+<l>Zich in Milaan bevindt aan &apos;s keizers hof?
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Ik weet het, ja.      <ab type=lineNum>28</ab>
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Als dan uw edelheid daarheen hem zond.
+<l>Daar leert hem &apos;t steekspel lans en zwaard hanteeren,
+<l>Hij hoort er hoofsche taal, gaat om met de&apos; adel;
+<l>Ja, iedere oef&apos;ning heeft hij steeds voor oogen,
+<l>Die met zijn jeugd en zijn geboorte strookt.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Uw raad behaagt mij, hij is wel doordacht;
+<l>En tot bewijs, hoezeer hij mij behaagt,
+<l>Leg ik hem met den meesten spoed ten uitvoer,
+<l>En maak van de&apos; eersten besten weg gebruik,
+<l>Om Proteus naar des keizers hof te zenden.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Vergun, op morgen reeds zijn Don Alfonso
+<l>En and&apos;re hoogst aanzienlijke edellieden
+<l>Reisvaardig om den keizer te begroeten,
+<l>En hem hun diensten need&apos;rig aan te bieden.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Voortreff&apos;lijk; Proteus reize met hen mee;&mdash;
+<l>En, als geroepen&mdash;; daadlijk hoor&apos; hij &apos;t nieuws.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Proteus</hi> <hi>komt op, een brief lezende.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Zoet leven! zoete reeg&apos;len! zoete liefde!
+<l>Dit is haar hand, het werktuig van haar hart,
+<pb n=164><l>Dit is haar liefdeseed, haar eerepand.
+<l>O, dat nu onze vaders, door hun bijval,
+<l>De zaligheid van onze min bezeeg&apos;len!
+<l>O engel Julia!
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Zoo, gij daar? wat voor brief zijt gij aan &apos;t lezen?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Vergeef mij, &apos;t zijn een woord of twee, waarin
+<l>Mij Valentijn zijn vriendegroeten zendt;
+<l>Een vriend, die bij hem was, bracht dit mij over.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Geef mij den brief en laat mij &apos;t nieuws eens zien.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Er staat geen nieuws in, heer; hij schrijft alleen,
+<l>Dat hij gelukkig leeft, veel vrienden rijk is,
+<l>En daag&apos;lijks hooger stijgt in &apos;s keizers gunst;
+<l>Hij wenscht mij bij zich om zijn heil te deelen.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>En gij, stemt gij ook met zijn wenschen in?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik hang, heer, enkel af van uwen wil,
+<l>En geenszins van de wenschen van mijn vriend.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Mijn wil stemt vrij wel in met zijnen wensch.
+</sp>
+
+<stage>(<hi rend=sc>Proteus</hi> <hi>kijkt verwonderd op.</hi>)</stage>
+
+<sp who=ant>
+<l>Sta niet verbaasd, dat ik zoo snel besluit,
+<l>Want wat ik wil, dat wil ik; daarme&ecirc; uit.
+<l>Ik heb besloten, dat gij een&apos;gen tijd
+<l>Met Valentijn aan &apos;s keizers hof zult toeven;
+<l>Wat hem wordt toegelegd door zijn verwanten,
+<l>Diezelfde som ontvangt ook gij van mij.
+<l>Wees gij nu morgen voor de reis gereed;
+<l>Geen tegenwerping; &apos;t is mijn vaste wil.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Zoo snel, heer, kan ik niet reisvaardig zijn;
+<l>Ik bid u, overweeg een dag of twee.
+</sp>
+
+<sp who=ant>
+<speaker>Antonio.</speaker> <l>Wat mocht ontbreken, wordt u nagezonden;
+<l>Dus geen vertraging; morgen moet gij gaan.&mdash;
+<l>Kom mee, Panthino, ik behoef uw hulp
+<l>Om spoed te maken met die reis.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Antonio</hi> <hi>en</hi> <hi rend=sc>Panthino</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Zoo bleef ik, bang voor branden, ver van &apos;t vuur,
+<l>Maar stortte me in de zee, waar ik verdronk.
+<l>Mijn vader wilde ik Julia&apos;s brief niet toonen,
+<l>Uit vreeze voor belemm&apos;ring in mijn liefde,
+<l>Maar, met behulp juist van mijn eigen uitvlucht,
+<l>Belemmert hij veel meer dan ooit mijn liefde.
+<l>O, hoe gelijkt toch deze liefdelente
+<l>Op eens Aprildags onbetrouwb&apos;re pracht;
+<l>In volle schoonheid straalt de zon een oogwenk,
+<l>Daar komt een wolk en &apos;t is stikdonk&apos;re nacht!
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Panthino</hi> <hi>komt weder op.</hi>)</stage>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Uw vader, heer, verlangt met u te spreken,
+<l>En hij is zeer gehaast; ik bid u, ga.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Helaas, zoo is &apos;t; al wil mijn hart ook breken,
+<l>Al klopt het &ldquo;neen&rdquo;, ik moet toch zeggen &ldquo;ja&rdquo;.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<div1 id=ev.II type=Act>
+<head>Tweede Bedrijf.</head>
+
+
+<div2 id=ev.II.1>
+<head>Eerste Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Milaan.</hi> <hi>Een kamer in &apos;s Hertogs paleis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Valentijn</hi> <hi>en</hi> <hi rend=sc>Flink</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Uw handschoen, heer.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l id=ev.II.1.2>De mijne heb ik aan, die hoort mij niet.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Als gij hem ziet, heer, zingt ge een ander lied.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Laat zien!&mdash;ja geef; &apos;t is mijn bezit, mijn buit!&mdash;
+<l>Lief sieraad, dat een godd&apos;lijk iets omsluit!
+<l>Ach Silvia! Silvia!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Jonkvrouw Silvia! jonkvrouw Silvia!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wat moet dat, knaap?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Zij is niet te beroepen, heer.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wie gaf u last, knaap, haar te roepen?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Uw edelheid zelf, of ik begreep het verkeerd.      <ab type=lineNum>10</ab>
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Genoeg; gij zijt toch altijd te voorbarig.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>En laatst werd ik bekeven, omdat ik altijd te langzaam was.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Loop heen, gij! Zeg mij, kent gij jonkvrouw Silvia?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Waar uw edelheid op verliefd is?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En, hoe weet gij, dat ik verliefd ben?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Hoe? wel, aan deze bijzondere kenteekenen. Vooreerst hebt gij geleerd, evenals uw vriend Proteus uw armen over elka&acirc;r te slaan als een onvergenoegde; u aan een liefdeliedje <pb n=165>te goed te doen als een roodborstje; in uw eentje rond te wandelen als iemand, die de pest heeft gehad; te zuchten als een schooljongen, die zijn A-B-boek verloren heeft; te weenen als een jonge meid, die haar grootmoeder begraven heeft; te vasten als iemand, die de hongerkuur moet doorstaan; te waken als iemand, die voor diefstal beducht is; met een grienstem te spreken <ab id=ev.ii.1.26>als een bedelaar op Allerheiligen</ab>. Vroeger waart ge gewoon, bij het lachen als een haan te kraaien; bij uw wandelen als een leeuw te stappen; niet te vasten, dan dadelijk na den maaltijd; en niet treurig te kijken, dan als gij geldgebrek hadt; maar nu heeft een liefje u zoo veranderd, dat, als ik u aanzie, ik u nauwelijks voor mijn meester kan houden.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>En is dat alles in mij op te merken?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Iedereen merkt het op buiten u.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Buiten mij? onmoog&apos;lijk.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Buiten u? Niets is zekerder, want buiten u is en zal niemand zoo argeloos zijn; maar gij zijt zoo buiten uzelf van die dwaasheden, dat die dwaasheden in u zijn en door u heenschijnen als het water in een urinaal, zoodat geen oog u kan aanzien, of het wordt een dokter, die uw kwaal herkent.      <ab type=lineNum>43</ab>
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Maar zeg mij, kent gij mijn jonkvrouw Silvia?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Die, waar gij zoo op staart, als zij aan tafel zit?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Hebt gij dat opgemerkt? die meen ik, ja.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Neen, heer, ik ken haar niet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wat? kent gij haar door mijn aanstaren en toch kent gij haar niet?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Is zij niet verbazend leelijk, heer?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Neen, knaap, zij is schoon, maar met meer dan met schoonheid begunstigd.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Nu, heer, dit weet ik zeer goed.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wat weet gij?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dat zij niet zoozeer schoon is, als wel, door u, begunstigd.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ik acht haar schoonheid uitgelezen, maar haar andere gaven onvolprezen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ja, omdat de eerste geschilderd is en het andere buiten schatting blijft.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wat geschilderd, en waarom buiten schatting?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wel, heer, zij schildert zich zoo om mooi te zijn, dat niemand haar schoonheid kan schatten.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Waar houdt gij mij dan voor? ik schat haar schoonheid zeer hoog.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Gij hebt haar nooit gezien, sinds zij zoo misvormd is geworden.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Sinds wanneer is zij misvormd geworden?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Van &apos;t oogenblik af, dat gij verliefd op haar werdt.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ik werd op haar verliefd van &apos;t oogenblik af, dat ik haar zag, en ik zie haar nog steeds even schoon.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Als gij op haar verliefd zijt, kunt gij haar niet zien.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Waarom niet?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Omdat de liefde blind is. O, hadt gij mijn oogen, of hadden uw oogen nog de scherpte van vroeger, toen gij uw vriend Proteus den mantel placht uit te vegen, omdat hij <ab id=ev.ii.1.79>zijn hoosbanden</ab> vergat vast te maken!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wat zou ik dan zien?      <ab type=lineNum>80</ab>
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Uw eigen tegenwoordige dwaasheid en haar verbazende leelijkheid; want toen hij verliefd was, kon hij zijn hoosbanden niet zien vast te strikken, en gij kunt, sinds gij verliefd zijt, uwe hozen niet zien aan te trekken.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Dan zijt gij, knaap, naar het schijnt, ook verliefd, want gisteren morgen kondt gij mijn schoenen niet zien te poetsen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dat is ook zoo, heer; ik was verliefd op mijn bed. Ik ben u dankbaar, dat gij mij de ooren gewasschen hebt om mijn verliefdheid, want dit geeft mij te meer hart om u door te halen voor de uwe.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Kort en goed, ik ga geheel in liefde voor haar op.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dan wenschte ik wel, dat gij ondergingt, want dan was het met uw verliefdheid uit.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Gisteren avond droeg zij mij op, eenige regels te schrijven aan iemand, dien zij bemint.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>En hebt gij het gedaan?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ja zeker.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>En hebt gij ze niet kreupel geschreven?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Neen, knaap, zoo goed als ik maar kan.&mdash;Stil! daar komt zij aan.
+</sp>
+
+<sp who=fli>
+<speaker>Flink</speaker> <p><stage rend=inline>(<hi>ter zijde</hi>).</stage> O prachtig marionettenspel! o uitnemende draadpop! Zoo dadelijk gaat hij haar eigen rol voor haar opzeggen.
+</sp>
+
+<pb n=166><stage type=entrance>(<hi rend=sc>Silvia</hi> <hi>komt op</hi>.)</stage>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Mejonkvrouw en gebiedster, duizend goede morgens!
+</sp>
+
+<sp who=fli>
+<speaker>Flink</speaker> <p><stage rend=inline>(<hi>ter zijde</hi>).</stage> O, ik wensch u goede nacht; een millioen plichtplegingen volgt.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p id=ev.II.1.106>Heer Valentijn, mijn dienaar, u twee duizend.
+</sp>
+
+<sp who=fli>
+<speaker>Flink</speaker> <p><stage rend=inline>(<hi>ter zijde</hi>).</stage> Hij moest haar intrest geven en zij is &apos;t, die het h&egrave;m doet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>&apos;k Volbracht uw last en heb uw brief geschreven
+<l>Aan uw geheimen, nameloozen vriend;
+<l>Ik deed het recht ongaarne, doch ik deed het,
+<l>Alleen uit plichtsgevoel voor u, gebiedster.
+</sp>
+
+<stage>(<hi>Hij stelt haar een brief ter hand.</hi>)</stage>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dank, eed&apos;le dienaar!&mdash;&apos;t Is een schrijversproefstuk.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Geloof mij, jonkvrouw, &apos;t ging mij moeilijk af;
+<l>Want onbewust, aan wien het was gericht,
+<l>Schreef ik als in den blinde, zeer onzeker.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dus, zoo veel moeite denkt gij al teveel?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Neen, jonkvrouw, is &apos;t u dienstig, ik zal schrijven,
+<l>Zoo gij &apos;t gebiedt, wel duizendmaal zoo veel;
+<l>En toch,&mdash;<ab type=lineNum>121</ab>
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>&apos;t Is fraai gezegd. Ik gis nu wel, wat volgt;
+<l>En toch, ik zeg het niet;&mdash;en toch, &apos;t behoeft niet;&mdash;
+<l>En toch, neem dit terug;&mdash;en toch, ik dank u
+<l>En roep voortaan uw diensten niet meer in.
+</sp>
+
+<sp who=fli>
+<speaker>Flink</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> En toch, dat zult gij wel, en toch, en toch,&mdash;
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wat meent gij, jonkvrouw? vindt gij dit niet goed?
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>O ja, &apos;t zijn regels, keurig in hun soort,
+<l>Maar toch, ongaarne deedt gij &apos;t, neem ze weer;
+<l>Neem, neem het.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker>      <l rend="hemistich(Neem, neem het.)">Jonkvrouw, &apos;t is voor u geschreven.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ja, ja, gij schreeft dit, heer, op mijn verzoek;
+<l>Maar ik begeer het niet; het is voor u;
+<l>Ik had nog meer gevoel er in gewenscht.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Beveel slechts, en ik schrijf een and&apos;ren brief.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zoo lees ook, is hij af, hem voor mij over;
+<l>Bevalt hij u, nu goed; zoo niet, ook goed.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En als hij, jonkvrouw, mij bevalt, wat dan?
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Bevalt hij u, wel, houd hem voor uw moeite.
+<l>En nu, mijn dienaar, goeden morgen!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Silvia</hi> <hi>af.</hi>)</stage>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>O diepverholen scherts, onzichtbaar, nooit in &apos;t licht
+<l>Gelijk op een toren het haantje, de neus op iemands gezicht!
+<l>Mijn heer maakt haar het hof, zij neemt hem in de leer;
+<l>Zijn les is, hoe de leerling haar meester wordt en heer.
+<l>O allerliefste nieuwe vond, haar zelve tot nut en gerief,
+<l>Dat mijn meester, haar tot schrijver, zichzelven moet schrijven een brief!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Hoe is het, man, wat praat gij met uzelf?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ik maakte een rijmpje, heer; het praten is aan u.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Het praten?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ja, om de woordvoerder te zijn voor jonkvrouw Silvia.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Tot wien?      <ab type=lineNum>153</ab>
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Tot uzelf. Overdrachtelijk maakt zij u het hof.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Overdrachtelijk?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Of letterlijk, moest ik zeggen, door een brief.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wel, heeft zij dan aan mij geschreven?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Waarom zou zij dat, als zij u aan uzelf heeft doen schrijven? Wat! merkt gij de grap nog niet?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Geloof mij, neen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&apos;t Is van u niet te gelooven, heer; maar hebt gij dan haar ernst niet opgemerkt?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Neen, niets van ernst, dan juist een toornig woord.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wel, zij heeft u een brief gegeven.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Den brief, door mij geschreven aan haar vriend.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>En dien brief heeft zij besteld en daarmee uit.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>O ware &apos;t inderdaad niets ergers!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Ik sta u borg, zoo is het, en niet anders;
+<l>Gij schreeft wel vaak aan haar een brief, maar zij, uit zedigheid,
+<pb n=167><l>Of moog&apos;lijk wel uit tijdsgebrek, gaf zelf u geen bescheid;
+<l>Of, bang, dat, zoo ze een bode nam, er niets geheim zou blijven,
+<l>Heeft zij recht slim haar lief geleerd, haar liefste een brief te schrijven.
+</sp>
+
+<sp who=fli>
+<p>Ik praat daar als een boek, want ik heb dit uit een boek.&mdash;Wat staat gij te mijmeren, heer? &apos;t is etenstijd.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ik heb gegeten.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ja, maar hoor toch, heer; al kan de kameleon Liefde van de lucht leven, ik ben iemand, die mijn spijs en drank moet hebben, en verlang naar een maal. O wees niet als uw gebiedster! laat u bewegen! laat u bewegen!
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+
+<div2 id=ev.II.2>
+<head>Tweede Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Verona.</hi> <hi>Een vertrek in</hi> <hi rend=sc>Julia&apos;s</hi> <hi>huis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Julia</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wees kalm, wees kalm, mijn lieve Julia!
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Ik moet, ik kan er niets aan doen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Zoodra &apos;t mij moog&apos;lijk is, keer ik terug.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Is ommekeer u vreemd, te vroeger keert gij. Hier, neem, en blijf uw Julia steeds gedenken.
+</sp>
+
+<stage>(<hi>Zij geeft hem een ring.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Dank! maar in ruil, neem dit, en leef in hoop.
+</sp>
+
+<stage>(<hi>Hij geeft haar een ring.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>En zegel met een heil&apos;gen kus den koop.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Hier is mijn hand, als pand van eeuw&apos;ge trouw;           <ab type=lineNum>8</ab>
+<l>Glipt mij op een&apos;gen dag een uur voorbij,
+<l>Waarin ik niet om u, mijn Julia, zucht,
+<l>Dan straffe voor vergetelheid in liefde
+<l>Mij &apos;t volgend uur met zware ramp en nood!
+<l>Mijn vader wacht mij reeds; neen, antwoord niet!
+<l>Het is nu vloed; &apos;k meen niet uw tranenvloed;
+<l>Die vloed zou mij voorbij mijn tijd doen toeven.
+<l>Julia, vaarwel!&mdash;
+</sp>
+
+<stage type=exit>(<hi rend=sc>Julia</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<l rend="hemistich(Julia, vaarwel!&mdash;)">                  Zij ging? en sprak geen woord?
+<l>Ja, zoo doet trouwe liefde; zwijgen moet zij,
+<l>Want daden zijn de tooi der trouw, niet woorden.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Panthino</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <l>Gij wordt gewacht, heer.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                           <l rend="hemistich(Gij wordt gewacht, heer.)">Ga; ik kom, ik kom!&mdash;
+<l>Ach, scheiden, scheiden maakt gelieven stom!
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<div2 id=ev.II.3>
+<head>Derde Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar.</hi> <hi>Een straat.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Lans</hi> <hi>komt op met een hond aan een touw.</hi></stage>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Neen, ik heb zeker in een uur niet gedaan met schreien; al de Lansen hebben dit zelfde gebrek. Ik heb mijn proportie ontvangen als <ab id=ev.ii.3.4>de verloopen zoon</ab>, en ga met signore Proteus naar het keizershof. Ik geloof, dat Krab, mijn hond, wel de hardvochtigste hond is van alle honden op Gods aardbodem: mijn moeder aan het schreien, mijn vader aan het jammeren, mijn zuster aan het grienen, onze meid aan &apos;t janken, onze kat aan &apos;t handenwringen, en heel ons huis in de grootste ontsteltenis,&mdash;maar dat wreedaardige beest,&mdash;het vergoot zelfs geen enkelen traan! Hij is een steen, een echte keisteen, en er zit in hem niet meer medelijden dan in een hond; een jood zou geweend hebben, als hij ons afscheid gezien had; ja, mijn grootje, die geen oogen heeft, ziet ge, schreide haar oogen blind bij mijn vertrek. Wacht, ik zal u eens vertoonen hoe het toeging. Deze schoen is mijn vader;&mdash;neen, neen, die linkerschoen is mijn moeder;&mdash;neen, dat gaat toch ook niet, evenmin;&mdash;ja toch, zoo is het, die is het meest versleten. Die schoen, met dat gaatje, is mijn moeder, en deze hier is mijn vader. Voor den duivel, ja, zoo is het. Nu, vriend, die stok is mijn zuster, want, ziet ge, ze is zoo wit als een lelie en zoo dun als een wilgerijs; die hoed is Naan, onze meid; ik ben de hond;&mdash;neen, de hond is zichzelf en ik ben de hond;&mdash;och, de hond, dat ben ik, en ik ben mijzelf: ja, ja, zoo is &apos;t. Nu ga ik naar mijn vader; &ldquo;Vader, uw zegen&rdquo;; nu kan die schoen geen woord spreken van wege het schreien; nu ga ik mijn vader kussen; goed, hij schreit al door. Nu ga ik naar mijn moeder;&mdash;o, kon zij nu maar spreken als een radelooze vrouw!&mdash;goed, ik kus haar; ha, daar is het, mijn moeders adem op en top! Nu ga ik naar mijn zuster; let eens op, hoe zij bulkt! Nu, de hond vergiet al dien tijd door geen enkelen traan, en spreekt geen woord; maar ziet eens, hoe ik het stof vastleg met mijn tranen.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Panthino</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Lans, vlug, vlug, scheep! uw meester is lang aan boord, en gij zult hem moeten naroeien. Wat is er? waarom schreit gij, man? Vooruit, gij ezel; de vloed ontgaat u, als gij sammelt; <ab id=ev.ii.3.39>het tij verloopt</ab>.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Mijnentwege mag het mij ontloopen, ik laat het betijen, want hardvochtiger is er niet; de vloed komt nooit!
+</sp>
+
+<pb n=168><sp who=pan>
+<speaker>Panthino.</speaker> <p>De vloed komt nooit?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Neen, geen tranenvloed bij het tuig aan dit touw, bij Krab mijn hond.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Zwijg, kerel, ik zeg, dat de vloed u ontgaat; en als de vloed u ontgaat, dan ontgaat u de reis; en als de reis u ontgaat, dan verliest gij uw meester; en als gij uw meester verliest, dan verliest gij uw dienst; en als gij uw dienst verliest,&mdash;Waarom houdt gij mijn mond dicht?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ik ben bang, dat gij uw tong nog verliest.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Hoe zou ik mijn tong verliezen?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Door dat gesnap.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Dan is &apos;t door dien Krab.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Het tij verliezen, en de reis, en mijn meester en mijn dienst,&mdash;en dit tuig behouden! Wel, man, geloof mij, als de stroom droog was, zou ik in staat zijn hem <ab id=ev.ii.3.58>met mijn tranen weer te vullen</ab>; en als de wind was gaan liggen, zou ik de boot met mijn zuchten kunnen voortblazen.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Kom mee, kerel, kom nu; ik ben uitgestuurd, omdat gij niet kwaamt opdagen.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, man, daag mij dan uit, als gij durft.
+</sp>
+
+<sp who=pan>
+<speaker>Panthino.</speaker> <p>Wilt gij komen of niet?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ja, ik kom.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<div2 id=ev.II.4>
+<head>Vierde Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Milaan.</hi> <hi>Een zaal in het paleis van den Hertog.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Valentijn</hi>, <hi rend=sc>Silvia</hi>, <hi rend=sc>Thurio</hi> <hi>en</hi> <hi rend=sc>Flink</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p>Dienaar!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Gebiedster!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Meester, Signore Thurio kijkt u donker aan.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ja, knaap, uit liefde.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Maar niet tot u.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Tot mijn gebiedster dan.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Gij moest hem eens op &apos;t jak komen.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Flink</hi> <hi>af.</hi>)</stage>
+
+<sp who=sil>
+<speaker>Silvia</speaker> <p><stage rend=inline>(<hi>tot</hi> <hi rend=sc>Valentijn</hi>).</stage> Dienaar, gij zijt ontstemd.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>In waarheid, jonkvrouw, ik heb er den schijn van.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Gij schijnt dus, wat gij niet zijt?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Misschien wel.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Dat doen namaaksels.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Dat doet gij.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Wat schijn ik dan, dat ik niet ben?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Wijs.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Welk bewijs hebt gij voor het tegendeel?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Uw dwaasheid.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>En waarin ziet gij mijn dwaasheid?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>In uw baaitje.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Mijn baaitje! een dubbel gevoerd wambuis!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Goed, dan moogt gij een verdubbelde dwaas zijn.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Wat!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p>Wat, Signore Thurio, toornig? gij verandert van kleur?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Laat hem maar, jonkvrouw; hij is een soort van kameleon.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Die meer lust heeft, zich aan uw bloed te goed te doen, dan in uw lucht te leven.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Gij hebt gesproken, heer.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>En gedaan ook, heer, voor ditmaal.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ik ken dat, heer; gij hebt altijd gedaan, eer gij begonnen zijt.      <ab type=lineNum>32</ab>
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p>Een fraai geweervuur van woorden, edele heeren; en wakker losgebrand!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Dat is zoo, jonkvrouw, dank aan wie het gaf.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p>Wie is dat, dienaar?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Gijzelf, lieve jonkvrouw, gij toch gaaft het vuur. Signore Thurio borgt zijn geest van uwer edelheid blikken, en verspilt, wat hij borgt, recht minzaam in uw tegenwoordigheid.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <p>Als gij, heer, u aan een woordenwisseling met mij waagt, zal ik al uw geest bankroet maken.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ik weet wel, heer, gij hebt een schatkist vol woorden, en, naar ik geloof, geen andere munt om uw dienaars te betalen, want men mag uit hun kale livereien vermoeden, dat zij van uw kale woorden moeten leven.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <p>Genoeg, edele heeren, niet meer! Daar komt mijn vader.
+</sp>
+
+<stage type=entrance>(<hi>De Hertog komt op.</hi>)</stage>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zoo, dochter Silvia, wel wordt gij bestormd!
+<l>Heer Valentijn, uw vader is gezond;
+<pb n=169><l>Wat zoudt gij zeggen van een brief van huis,
+<l>Vol goede tijding?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker>        <l rend="hemistich(Vol goede tijding?)">Recht dankbaar, vorst, zal ik
+<l>Voor ieder blij bericht van ginds mij toonen.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Nu, kent gij Don Antonio, uwen landsman?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, beste vorst, ik ken dien edelman,
+<l>Als hoog in waarde en aanzien, en die tevens
+<l>Niet onverdiend zijn schoonen naam bezit.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>En heeft hij niet een zoon?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, beste vorst, een zoon, die wel verdient,
+<l>Dat elk hem, als zijn&apos; vader, acht en eert.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Gij kent hem goed?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ik ken hem als mijzelven, want wij gingen
+<l>Van kindsbeen af te zamen op en neer;
+<l>Ikzelf was traag, een doeniet, die de gunst
+<l>Des eed&apos;len tijds verzuimde, om mijnen leeftijd
+<l>In der volmaaktheid eng&apos;lenkleed te hullen,
+<l>Terwijl Signore Proteus,&mdash;want zoo heet hij,&mdash;
+<l>Zich altijd ieder uur ten nutte maakte;
+<l>In jaren jong, doch in ervaring oud,      <ab type=lineNum>69</ab>
+<l>Met overjeugdig brein, doch rijp in oordeel,
+<l>Is hij, kortom,&mdash;want hoe ik hem ook prijze,
+<l>Mijn lof schiet bij zijn waarde ver te kort&mdash;
+<l>Volkomen, zoo van lichaam als van geest,
+<l>Door alles, wat een edelman kan aad&apos;len.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Voorwaar, hij is, rechtvaardigt hij uw lof,
+<l>De liefde waardig van een keizerin,
+<l>En in eens keizers raadzaal op zijn plaats.
+<l>Welnu, die edelman kwam juist tot mij,
+<l>Door mannen van gezag mij aanbevolen,
+<l>Om een&apos;gen tijd te toeven aan mijn hof.
+<l>Ik denk, dat u die tijding welkom is.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Als iets mij hier te wenschen bleef, hij was &apos;t.
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zoo heet hem naar zijn waarde welkom hier.
+<l>&apos;k Zeg, Silvia, dit tot u, en u, heer Thurio;&mdash;
+<l>Want Valentijn heb ik niet aan te manen.
+<l>Ik zend hem oogenblikk&apos;lijk naar u toe.
+</sp>
+
+<stage type=exit>(<hi>De Hertog af.</hi>)</stage>
+
+<sp who=val>
+<speaker>Valentijn</speaker> <l><stage rend=inline>(<hi>tot</hi> <hi rend=sc>Silvia</hi>).</stage> &apos;t Is, jonkvrouw, de edelman, die, naar ik zeide,
+<l>Met mij gegaan waar&apos;, had niet zijn gebiedster
+<l>Hem de oogen in kristallen blik geboeid.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dan liet zij zeker nu zijn oogen vrij,
+<l>En eischte een ander pand van trouw er voor.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Neen, zeker, &apos;k gis, zij hield ze nog in boei.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dan waar&apos; hij immers blind; en is hij blind,
+<l>Hoe vond hij dan zijn weg naar hier tot u?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>O, Liefde heeft wel twintig oogenparen.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Toch zegt men: Liefde heeft geen enkel oog.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Voor zulke minnaars, ja, als gij zijt, Thurio;
+<l>Voor wat haar niet behaagt, sluit ze allen toe.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Proteus</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Genoeg! genoeg!&mdash;Hier komt uw edelman.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Welkom, mijn Proteus!&mdash;Geef, mejonkvrouw, &apos;k bid u,
+<l>Dit welkom kracht door uw bijzond&apos;re gunst.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zijn waarde waarborgt hem zijn welkom hier.
+<l>Als hij &apos;t is, waar gij vaak bericht van wenschtet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Hij is &apos;t, gebiedster. Kies hem, eed&apos;le jonkvrouw,
+<l>Om met mij aan uw dienst zich toe te wijden.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>&apos;k Ben geen gebiedster, zulk een dienaar waardig.        <ab type=lineNum>106</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik, eed&apos;le jonkvrouw, ben te onwaardig dienaar,
+<l>Dan dat uw hoogheid mij een blik vereer&apos;.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>O, staakt dit spreken van onwaardigheid!
+<l>Neem, eed&apos;le jonkvrouw, hem als dienaar aan.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Mijn een&apos;ge roem zal wezen, u te dienen.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Geen dienaar derft zijn loon. Dus, dienaar! ik,
+<l>Onwaardige gebiedster, heet u welkom.
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wie buiten u zoo spreekt, verweer&apos; zijn leven!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Die welkom heet?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                <l rend="hemistich(Die welkom heet?)">Die u onwaardig heet.
+</sp>
+
+<stage type=entrance>(<hi>Een Dienaar komt op.</hi>)</stage>
+
+<sp who=bed>
+<speaker>Dienaar.</speaker> <l>De vorst, uw vader, jonkvrouw, wil u spreken.
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ik kom onmidd&apos;lijk.&mdash;
+</sp>
+
+<stage type=exit>(<hi>Dienaar af.</hi>)</stage>
+
+<sp who=sil>
+                              <l rend="hemistich(Ik kom onmidd&apos;lijk.)">Kom, Signore Thurio,
+<l>Verzel mij.&mdash;Nogmaals welkom, nieuwe dienaar;
+<l>&apos;k Verlaat u, dat gij &apos;t nieuws van huis bespreekt,
+<l>En hoop u, is dit afgedaan, te zien.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wij wachten samen op uw edelheid.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Silvia</hi> <hi>en</hi> <hi rend=sc>Thurio</hi> <hi>af.</hi>)</stage>
+
+<pb n=170><sp who=val>
+<speaker>Valentijn.</speaker> <l>Nu, spreek, hoe gaat het allen ginds te huis?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Al de uwen goed; zij laten zeer u groeten.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En ook bij u is &apos;t wel?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                          <l rend="hemistich(En ook bij u is &apos;t wel?)">Gezond en wel.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Hoe gaat het uw gebiedster, en uw liefde?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Als ik van liefde sprak, gingt gij aan &apos;t geeuwen;
+<l>Ik weet, van liefdepraatjes houdt gij niet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Dat was zoo, Proteus, anders is het nu.
+<l>Zwaar moest ik boeten, dat ik Amor smaadde;
+<l>Zijn hooge vorstenwil heeft mij gestraft,
+<l>Met bitter vasten, met berouwvol stenen,
+<l>Met tranen &apos;s nachts, met hartezuchten daags;
+<l>Als straffe voor mijn smaad heeft Amor mij
+<l>Den slaap verjaagd van de onderworpen oogen,
+<l>Hen wakers bij mijn harteleed gemaakt.
+<l>Mijn Proteus! Amor is een machtig heerscher;
+<l>Zoo ben ik thans zijn slaaf, dat ik belijd:
+<l>Geen leed komt zijne tuchtiging nabij,
+<l>Maar ook, geen and&apos;re vreugd op aard zijn dienst!
+<l>Thans, geen gesprek meer, dan van liefde alleen;
+<l>Mijn ochtend-, middag-, avondmaal, mijn slaap,
+<l>Ja, alles is mij &apos;t enkel woordje &ldquo;Liefde&rdquo;.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Genoeg; ik lees uw noodlot in uw oog.
+<l>En zij was de afgod, die ge aldus vereert?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, zij; en is zij niet een hemelsche engel?      <ab type=lineNum>145</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Neen, maar zij is een stoff&apos;lijk evenbeeld.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>O, noem haar godd&apos;lijk.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                          <l rend="hemistich(O, noem haar godd&apos;lijk.)">Vleien wil &apos;k haar niet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>O, vlei dan mij, want lof verrukt de liefde.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Mij gaaft gij, toen ik krank was, bitt&apos;re pillen,
+<l>En ik verorden u dezelfde kuur.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Spreek dan toch waarheid; noem haar, zoo niet godd&apos;lijk,
+<l id=ev.II.4.152>Een macht, een overheid uit de eng&apos;lenschaar,
+<l>Het hoogste wezen, dat op aarde leeft.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Op Julia na.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker>            <l rend="hemistich(Op Julia na.)">Mijn waarde, op niemand na,
+<l>Tenzij gij mijne keus te na wilt komen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Moet ik niet eer mijn liefste hooger stellen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ik help u om haar hooger te doen stijgen;
+<l>E&eacute;n voorrecht boven allen zij haar deel:
+<l>Mijn liefste&apos;s sleep te dragen, opdat de aarde,
+<l>Laag stof, aan haar gewaad geen kus ontsteel&apos;,
+<l>En, door zoo groote gunst van trots vervuld,
+<l>Geen zomerknop meer voede en zwellen doe,
+<l>En ruwen winter eeuwig duren laat.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>O, welk een grootspraak is dit, Valentijn!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Vergeef mij, Proteus; wat ik zeg, is niets
+<l>Bij haar; wat waarde heeft, wordt niets bij haar;
+<l>Ze is eenig.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Nu, zoo laat haar eenig blijven.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Om heel de wereld niet. Vriend, ze is de mijne,
+<l>En ik, nu &apos;k dit juweel bezit, zoo rijk
+<l>Als twintig zee&euml;n, ware &apos;t zand ook paarlen,
+<l>Het water nectar, louter goud de rotsen.
+<l>Vergeef mij, dat ik thans aan u niet denk;
+<l>Gij ziet, hoe mij mijn liefde gansch vervult.
+<l>Die dwaas, mijn mededinger, dien haar vader,
+<l>Alleen omdat hij rijk is, voor haar wenscht,
+<l>Is met haar meegegaan; ik moet hen volgen,
+<l>Want liefde is vol, niet waar? van ijverzucht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>En zij mint u?      <ab type=lineNum>178</ab>
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, en wij zijn verloofd; nog meer, het uur
+<l>Van &apos;t huw&apos;lijk en het sluwe plan ter vlucht
+<l>Bepaald, hoe ik haar venster moet beklimmen,
+<l>De touwen ladder klaar, en alle midd&apos;len
+<l>Tot mijn geluk ontworpen, afgesproken.
+<l>Kom, beste Proteus, met mij op mijn kamer,
+<l>Om met uw goeden raad mij bij te staan.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ga gij vooruit, ik zal den weg wel vragen;
+<l>Ik moet nu naar de reede, om van mijn reisgoed
+<l>Nog iets te ontschepen, dat ik noodig heb,
+<l>Maar dan ben ik terstond tot uwen dienst.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Gij zult u haasten?
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                      <l rend="hemistich(Gij zult u haasten?)">Zeker.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Valentijn</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<l id=ev.II.4.192>Gelijk een gloed een and&apos;ren gloed verdringt,
+<l>Een spijker met geweld een and&apos;ren uitdrijft,
+<l>Zoo is de heug&apos;nis van mijn vroeg&apos;re min
+<l>Nu door een nieuwen aanblik gansch verdoofd.
+<l id=ev.II.4.196>Is &apos;t nu mijn oog, de lof van Valentijn,
+<l>Haar hooge waarde, of mijne valsche wuftheid,
+<l>Die mij, gansch reed&apos;loos, zulke reed&apos;nen ingeeft?
+<l>Schoon is zij, schoon ook Julia, die ik min,&mdash;
+<l>Neen minde, want mijn min is weggesmolten,
+<l id=ev.II.4.201>En toont, zooals een wassen beeld bij &apos;t vuur,
+<l>Geen spoor meer van de vroeg&apos;re wezenstrekken.
+<l>Mij dunkt, voor Valentijn ook ben ik koud,
+<l>En ik bemin hem niet zooals eertijds;
+<l>Doch veel, ja al te veel min ik zijn schoone,
+<pb n=171><l>Daarom bemin ik hem zoo weinig meer.
+<l>Hoe zal ik, meer haar kennend, haar vergoden,
+<l>Als ik niet kennend, haar reeds z&oacute;&oacute; bemin?
+<l>Thans zag ik nog alleen haar beelt&apos;nis; die
+<l>Heeft reeds mijn licht der rede dof geschenen;
+<l>Doch als ik eens haar volle waarde erken,
+<l>Dan helpt geen rede meer en ik word blind.
+<l>Kan ik mijn dolend minnen teug&apos;len, goed;
+<l>Zoo niet, geen rust, eer zij me als gade groet.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+
+
+<div2 id=ev.II.5>
+<head>Vijfde Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar.</hi> <hi>Een straat.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Flink</hi> <hi>en</hi> <hi rend=sc>Lans</hi> <hi>komen op, en ontmoeten elkander.</hi></stage>
+
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p id=ev.II.5.1>Lans! op mijn eerlijkheid, welkom in Milaan!
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Doe geen valschen eed, beste jongen, want ik ben niet welkom. Ik reken dit altijd: een mensch is niet eer verloren, dan als hij gehangen wordt, en ook niet eer ergens welkom, dan als hij een zeker gelag heeft betaald, en de waardin zegt: &ldquo;welkom!&rdquo;
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Kom dan, gij zotskap, ik wil dadelijk met u naar &apos;t bierhuis, waar gij voor een gelag van vijf stuivers wel vijf duizend welkoms zult hebben. Maar, kerel, hoe was het afscheid van uw meester en jonkvrouw Julia?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu, nadat zij in allen ernst het eens geworden waren, zijn zij recht teeder in scherts gescheiden.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Maar zal zij hem trouwen?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Neen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wat dan? zal hij haar trouwen?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ook niet.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wat, is het met hen niet in orde?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel zeker, zij zijn alle beiden zoo gezond als een visch.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Nu, hoe staat het dan met hen?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, als het bij hem goed staat, dan staat het goed voor haar.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wat zijt gij toch voor een ezel! Er is bij u nergens achter te komen.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wat zijt gij toch voor een domkop, dat gij dat niet kunt. Mijn stok kan er wel achter komen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wat gij zegt!
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ja, en wat ik doe ook. Zie maar, nu leun ik, en mijn stok is achter mij.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ja, &apos;t is waar, hij staat achter u.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu er achter komen en er achter zijn is een en hetzelfde.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Maar zeg mij nu in allen ernst, komt het tot een huwelijk?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Vraag het mijn hond: als hij &ldquo;ja&rdquo; zegt, dan gebeurt het; als hij kwispelstaart en niets zegt, dan gebeurt het.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dus het gebeurt op alle manieren.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Zulk een geheim zult gij nooit uit mij krijgen, dan door een gelijkenis.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Mij goed, als ik het er zoo maar uitkrijg.&mdash;Maar, Lans, wat zegt ge er van, dat mijn meester op een verbazende manier is aangeschoten?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ik heb hem nooit anders gekend.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Dan hoe?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat hij van hemel noch aarde weet, zooals gij daar zelf zegt.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wel, gij gevloekte ezel, gij vat mij niet.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, zotskap, ik had u niet te vatten; ik moest uw meester vatten.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Ik zeg u, mijn meester staat van verliefdheid in vuur en vlam.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu, ik zeg u, mijnentwege mag hij in zijn verliefdheid verbranden. Als gij met mij naar het bierhuis wilt gaan, kom dan; zoo niet, dan zijt gij een Hebre&euml;r, een Jood, en niet waard een Christenmensch te heeten.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Waarom?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Omdat gij niet zooveel christelijke liefde in u hebt, <ab id=ev.ii.5.61>dat gij een christenmensch een glas bier gunt</ab>. Wilt gij gaan?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Tot uw dienst.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+<div2 id=ev.II.6>
+<head>Zesde Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar.</hi> <hi>Een kamer in het paleis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Proteus</hi> <hi>komt op.</hi></stage>
+
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Verlaat ik mijne Julia, &apos;k ben meineedig;
+<l>Bemin ik schoone Silvia, &apos;k ben meineedig;
+<l>Verraad ik mijnen vriend, &apos;k ben zwaar meineedig;
+<l>Dezelfde macht, die tot den eed mij dreef,
+<l>Zet thans mij tot driedubb&apos;len meineed aan.
+<l>Min drong mij tot den eed, Min dringt tot meineed.
+<l>O, Min, indien gij, zoet verlokkend, zondigt,
+<l>Leer mij, verleide, ook, hoe ik dat ontschuldig.
+<l>&apos;k Heb eerst een flikk&apos;rend sterretje aangebeden,
+<l>Thans kniel ik voor een hemelsch zonnelicht.
+<l>Beraad mag onberaden eeden breken;
+<l>Hij mist verstand, die moed mist, om &apos;t verstand
+<l>Te leeren, kwaad voor &apos;t beet&apos;re te verruilen.&mdash;
+<pb n=172><l>Foei, goddelooze tong! H&agrave;&agrave;r kwaad te noemen,
+<l>Die gij met twintigduizend heiligste eeden
+<l>Als &apos;t hoogste goed der aard geprezen hebt!
+<l>Liefde op te geven, waag ik niet, en &apos;k doe het;
+<l>Mijn liefde gaat te loor, zoo &apos;k liefde zoek.
+<l>Julia verlies ik; Valentijn verlies ik;
+<l>Behoud ik hen, dan ga ik zelf te loor;
+<l>Verlies ik hen, dan vind ik, door &apos;t verlies,
+<l>Voor Valentijn mijzelf, voor Julia Silvia.
+<l>Ik ben mijzelven liever dan een vriend,
+<l>Want liefde blijft zichzelve steeds het hoogst.
+<l>En Silvia&mdash;ja, bij God, die schoon haar schiep,&mdash;
+<l>Maakt Julia tot moorin nu in mijn oog.
+<l>Vergeten wil ik thans, dat Julia leeft,
+&apos;k Wil denken, dat mijn liefde voor haar dood is;
+<l>En Valentijn wil ik een vijand reek&apos;nen,
+<l>Nu ik naar Silvia&apos;s zoeter vriendschap smacht.
+<l>Mijzelven kan ik nu geen trouwe houden,
+<l>Bega ik geen verraad aan Valentijn;&mdash;
+<l>Met touwen ladder hoopt hij deze nacht
+<l>Het venster van de hemelsche in te klimmen;
+<l>Hij deelde &apos;t mij, zijn mededinger, mee!
+<l>Ik geef terstond haar vader nu bericht,
+<l>Hoe zij, vermomd, te zamen willen vluchten;
+<l>Die zal, vol woede, Valentijn verbannen,
+<l>Want Thurio, wenscht hij, zal zijn dochter huwen.
+<l>Is Valentijn van hier, dan zal ik Thurio&apos;s
+<l>Onnoozel doen door sluwheid wel verijd&apos;len.
+<l>O Liefde! hebt gij &apos;t plan mij ingegeven,
+<l>Zoo leen me ook vleugels om naar &apos;t doel te streven!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+
+
+<div2 id=ev.II.7>
+<head>Zevende Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Verona.</hi> <hi>Een vertrek in</hi> <hi rend=sc>Julia&apos;s</hi> <hi>huis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Julia</hi> <hi>en</hi> <hi rend=sc>Lucetta</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Geef raad, Lucetta; help mij, beste meid;
+<l>En ik bezweer u, bij uw lieve vriendschap,
+<l>Zoo waar gij &apos;t zakboek zijt, waar al mijn denken
+<l>In opgeteekend en gegriffeld wordt,
+<l>Leer gij mij, wijs me een passend middel aan,
+<l>Om, zonder dat mijn naam iets lijdt, een reis
+<l>Naar mijn geliefden Proteus te ondernemen.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Ach, zeer vermoeiend is die reis en lang!
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Een waarlijk vrome pelgrim wordt niet moede,
+<l>Met zwakke schreden landen af te meten;
+<l>Veel minder zij, wie liefde vleug&apos;len leent,
+<l>En die haar vlucht naar een zoo dierb&apos;ren man,
+<l>Zoo godd&apos;lijk eenig als mijn Proteus, richt.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Wacht liever, totdat Proteus wederkeert.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O, is zijn blik mijn zielevoedsel niet?
+<l>Heb deernis met den honger, die mij kwelt,
+<l>Nu ik zoo lang naar voedsel smachten moet.
+<l>O, kendet gij der liefde macht in ons,
+<l>Eer ondernaamt gij vuur met sneeuw te ontsteken,
+<l>Dan liefdevuur met woorden uit te dooven.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Uw laaien liefdegloed wil ik niet dooven,
+<l>Maar slechts van &apos;t vuur de wilde woestheid teuglen,
+<l>Aleer &apos;t der rede perken overslaat.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Hoe meer gij teug&apos;len wilt, te feller vlamt het.
+<l>Gij weet, het beekje glijdt met zacht gemurmel,
+<l>En bruist, als &apos;t wordt gestremd, onstuimig op;
+<l>Maar als zijn schoone loop niet wordt gestuit,
+<l>Dan maakt het zacht muziek met bonte steentjes,
+<l>En groet met zoeten kus elk wieg&apos;lend riet,
+<l>Waarlangs de verre pelgrimstocht het voert.
+<l>Zoo ruischt het voort, in meen&apos;ge bocht zich kronk&apos;lend,
+<l>Steeds dart&apos;lend, naar den wilden oceaan;
+<l>Dus laat mij gaan en houd mijn loop niet tegen;
+<l>&apos;k Zal rustig voortgaan als een kalme stroom,
+<l>En ied&apos;re moede tred zal mij een lust zijn,
+<l>Tot mij de laatste bij mijn liefste brengt;
+<l>Daar vind ik rust, zooals, na &apos;s levens stormen,
+<l>Een zaal&apos;ge geest die in &apos;t Elysium vindt.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Nu dan, in welk gewaad wilt gij de reis doen?      <ab type=lineNum>39</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Niet als een meisje, want ik wil voorkomen,
+<l>Dat mij oneerb&apos;re mannen ruw bejeeg&apos;nen.
+<l>Bezorg mij dus, melieve, een net gewaad,
+<l>Geheel zooals een edelknaap het draagt.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Dan, jonkvrouw, moet ge uw haar terdege korten.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Neen, kind, dat bind ik op met zijden snoeren,
+<l>Met twintig fraai bedachte liefdeknoopen;
+<l>Zoo iets bijzonders staat een jonkman wel,
+<l>Zelfs aan een rijp&apos;ren dan ik schijnen zal.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Hoe moet de snit zijn van uw broek, mejonkvrouw?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Dat klinkt zoo fraai, als:&mdash;&ldquo;Zeg mij, edel heer,
+<l>Hoe wijd wilt gij uw hoepelrok wel dragen?&rdquo;
+<l>Kies gij de snit, die u het best bevalt.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Dan moet zij wezen, jonkvrouw, <ab id=ev.ii.7.53>met een klep</ab>.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O foei, Lucetta, dat zal leelijk staan.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Een pofbroek, jonkvrouw, is geen speld thans waard,
+<l>Ontbreekt de klep, om spelden op te steken.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Hebt gij mij lief, bezorg mij dan, Lucetta,
+<l>Wat gij het meest geschikt en passend acht.
+<pb n=173><l>Maar zeg mij, meid, wat zal de wereld zeggen,
+<l>Als ik zoo luchtig weg die reis aanvaard?
+<l>Ik vrees, het zal mij zeer in opspraak brengen.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Als gij dit ducht, blijf dan te huis, ga niet.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Neen, neen, dat wil ik niet.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Laat dan de wereld praten en ga heen.
+<l>Roemt Proteus uwe reis, wanneer gij komt,
+<l>Dan lake u hier wie wil, wanneer gij weg zijt,
+<l>Ik vrees slechts, dat gij hem niet welkom zijt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O dit, Lucetta, is mijn minste zorg;
+<l>Want duizend eeden en een zee van tranen,
+<l>En blijken van oneindig groote liefde
+<l>Zijn borgen, dat ik Proteus welkom ben.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Dat alles staat ten dienste aan valsche mannen.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Slechts laagheid maakt een laag gebruik er van!
+<l>Maar Proteus&apos; wieg bescheen een ster van trouwe.
+<l>Zijn woord is eed, zijn eed orakeltaal,
+<l>Zijn liefde waar, zijn denken rein, zijn tranen
+<l>Steeds boden van zijn hart, zijn hart zoo ver
+<l>Van elk bedrog, als de aarde is van den hemel.
+</sp>
+
+<sp who=luc>
+<speaker>Lucetta.</speaker> <l>Zoo blijk&apos; hij, bid ik, als gij tot hem komt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Doe hem, hebt gij mij lief, zulk onrecht niet,
+<l>Van aan zijn trouw te twijf&apos;len; wenscht gij, dat
+<l>Ik u genegen ben, wees hem genegen;
+<l>En ga nu mede, daadlijk, naar mijn kamer,
+<l>Om op te teek&apos;nen, wat ik voor mijn reis,
+<l>Mijn reize van verlangst, behoeven zal.
+<l>&apos;k Vertrouw u in mijn afzijn alles toe,
+<l>Mijn huis en goed, mijn land, mijn goeden naam;
+<l>Maar vraag in ruil: bespoedig mijn vertrek.
+<l>Neen, antwoord niet, terstond aan &apos;t werk getogen!
+<l>Mijn eigen dralen wekt mijn ongeduld.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+
+<p><figure id=p176>
+<head><hi rend=ex>Twee edellieden van Verona</hi>, Derde Bedrijf, Eerste Tooneel.</head>
+</figure>
+
+
+
+
+<div1 id=ev.III type=Act>
+<head>Derde Bedrijf.</head>
+
+
+<div2 id=ev.III.1>
+<head>Eerste Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Milaan.</hi> <hi>Een voorzaal in &apos;s Hertogs paleis.</hi></stage>
+
+<stage type=entrance><hi>De Hertog</hi>, <hi rend=sc>Thurio</hi> <hi>en</hi> <hi rend=sc>Proteus</hi> <hi>komen op.</hi></stage>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Heer Thurio, laat ons eenigen tijd alleen,
+<l>Wij hebben iets vertrouw&apos;lijks te bespreken.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Thurio</hi> <hi>af.</hi>)</stage>
+
+<sp who=her>
+<l>Nu, Proteus, spreek, en zeg mij wat gij wenscht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Doorluchtig heer, wat ik moet openbaren,
+<l>Gebiedt de wet der vriendschap mij te helen;
+<l>Maar roep ik voor mijn geest de groote goedheid,
+<l>Door u aan mij, onwaardige, betoond,
+<l>Dan spoort mijn plicht mij aan, u mee te deelen,
+<l>Wat mij geen goed ter wereld hadde ontlokt.
+<l>Weet, eed&apos;le vorst, dat Valentijn, mijn vriend,
+<l>U deze nacht uw dochter wil ontstelen;
+<l>Ikzelf werd deelgenoot van &apos;t plan gemaakt.
+<l>Ik weet, voor Thurio hebt gij haar bestemd,
+<l>Die door uw schoone dochter wordt gehaat,
+<l>En als zij nu aldus u werd ontroofd,
+<l>Waar&apos; &apos;t op uw jaren u een zware slag.
+<l>Dies dreef mijn plicht mij aan, dat ik veeleer
+<l>Mijn vriend verkoos te stuiten in zijn opzet,
+<l>Dan door &apos;t verhelen, u een last van kommer
+<l>Op &apos;t hoofd te hoopen, die, niet afgewend,
+<l>U voor den tijd ten grave buigen zou.        <ab type=lineNum>21</ab>
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Ik dank u, Proteus, voor uw trouwe zorg;
+<l>Eisch ied&apos;ren dank van mij mijn leven lang.
+<l>&apos;k Heb zelf reeds dikwijls beider min bespeurd,
+<l>Als zij wellicht in diepen slaap mij waanden;
+<l>En nam ook vaak mij voor, aan Valentijn
+<l>Mijn hof en haren omgang te verbieden,
+<l>Maar, duchtend, dat mijn argwaan dwalen mocht
+<l>En zoo den jongling schreeuwend onrecht doen,&mdash;
+<l>Een overijling, die ik altijd meed,&mdash;
+<l>Bleef ik hem gunstig aanzien, tot ikzelf
+<l>Ontdekte, wat door u mij wordt gemeld;
+<l>En,&mdash;hieruit blijke u, dat ik vreeze voedde,
+<l>Bewust, hoe teed&apos;re jeugd verleidbaar is,&mdash;
+<l>Ik laat haar op een hoogen toren slapen,
+<l>Waarvan ikzelf den sleutel bij mij draag,
+<l>En daarom is &apos;t onmoog&apos;lijk haar te schaken.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Weet, eed&apos;le vorst, toch werd een plan gesmeed,           <ab type=lineNum>38</ab>
+<l>Hoe hij haar kamervenster zal beklimmen,
+<l>En langs een koorden ladder haar gaan halen;
+<l>De jonge minnaar ging daar juist op uit
+<l>En komt er daad&apos;lijk dezen weg mee langs;
+<l>Zoo &apos;t u behaagt, gij kunt hem licht betrappen.
+<l>Doch doe dit zoo behendig, beste vorst,
+<l>Dat niemand ooit vermoedt, dat ik het aanbracht,
+<l>Want liefde jegens u, geen haat voor hem,
+<l>Dreef mij, dit plan mijns vriends u te openbaren.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>&apos;k Geef u mijn woord, hij zal het nooit vermoeden,
+<l>Dat gij mij een&apos;gen wenk gegeven hebt.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Vaarwel, mijn vorst; ik hoor hem daar reeds komen.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+<pb n=174><stage type=entrance>(<hi rend=sc>Valentijn</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zoo, Signor Valentijn, waarheen zoo ijlings?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Vergun mij, uw Genade, een bode wacht,
+<l>Om brieven aan de mijnen mee te nemen,
+<l>En daarom haast ik mij hem die te brengen.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zij zijn dus van gewicht?
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Hun inhoud is alleen, dat ik gezond ben
+<l>En aan uw hof mij recht gelukkig voel.
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Nu, dan geen haast, maar toef een wijl bij mij;
+<l>Ik heb u in vertrouwen &apos;t een en ander,
+<l>Dat van nabij mij aangaat, mee te deelen.
+<l>&apos;t Is u niet onbekend, dat ik mijn dochter
+<l>Met Thurio, mijnen vriend, verloven wil.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Dit weet ik, heer; en, zeker, die partij
+<l>Waar&apos; rijk en eervol; bovendien verdient
+<l>De man door ridderdeugd en eed&apos;len aard
+<l>Ten volle een gade als uwe schoone dochter.
+<l>Heer, kunt ge in haar geen liefde tot hem wekken?
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Volstrekt niet; ze is weerspannig, geem&apos;lijk, nukkig,          <ab type=lineNum>68</ab>
+<l>Trotsch, stug, onwillig, zonder plichtsbesef;
+<l>Zij houdt niet in het oog, dat zij mijn kind,
+<l>En mij als vader eerbied schuldig is;
+<l>En, &apos;k wil &apos;t u zeggen, dit trotseeren heeft&mdash;
+<l>&apos;k Heb lang geweifeld&mdash;haar mijn liefde ontroofd;
+<l>En dacht ik vroeger &apos;t overschot mijns levens,
+<l>Door hare kinderzorg verpleegd, te slijten,
+<l>Nu is &apos;t mijn vast besluit, een vrouw te nemen;
+<l>En h&agrave;&agrave;r mag houden, wie haar hebben wil;
+<l>En moog&apos; haar schoonheid dan haar bruidsgift zijn;
+<l>Want mij, en wat ik heb, zij telt het niet.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wat wenscht gij, vorst, dat ik in deze doe?
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l id=ev.III.1.81>Er leeft een jonkvrouw hier in deze stad,
+<l>Die mij behaagt; doch, schuw en keurig, acht zij
+<l>Mijn oudemans-welsprekendheid als niets;
+<l>En daarom wensch ik u mij tot een raadsman,&mdash;
+<l>Want lang verleerde ik reeds mijn hof te maken;
+<l>Ook is &apos;t gebruik veranderd na mijn tijd;&mdash;
+<l>Hoe ik het aan moet leggen, dat haar oog,
+<l>Haar zonnenoog, mij met haar gunst bestraal&apos;.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Helpt spreken niet, zoo win haar door geschenken;
+<l>Een stom juweel heeft zwijgend redekunst,
+<l>En wint vaak, eer dan woorden, vrouwengunst.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Wat ik haar zond, versmaadde zij verstoord.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Een vrouw versmaadt soms, wat haar &apos;t meest bekoort.
+<l>Zend haar iets anders, geef haar zoo niet op,
+<l>Want eerste smaad voert later liefde in top.
+<l>Blikt zij verstoord, &apos;t is niet, dat zij u haat,
+<l>Zoo spoort ze u aan, dat gij geen rust haar laat.
+<l>En kijft zij, daarom zendt zij u niet heen,
+<l>Een vrouw wordt dol, houdt gij haar neen voor neen.
+<l>Laat u de deur niet wijzen, wat ze ook zegg&apos;,
+<l>Want zegt zij: &ldquo;ga!&rdquo; dan meent zij niet: &ldquo;ga weg!&rdquo;
+<l>Vlei, prijs haar, roem haar gaven; ziet zij zwart,
+<l>Verklaar toch, dat haar blankheid eng&apos;len tart.
+<l>&apos;k Zeg, heeft een man een tong, hij is geen man,
+<l>Als hem zijn tong geen vrouw veroov&apos;ren kan.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Doch die ik meen beloofden haar verwanten
+<l>Reeds aan een jong en waardig edelman;
+<l>Zij wordt voor mannenomgang streng behoed,
+<l>Zoodat bij dag geen man haar naad&apos;ren kan.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Welnu, dan zou ik haar bij nacht bezoeken.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>De deur is toe, de sleutel goed bewaard,
+<l>Zoodat geen mensch haar &apos;s nachts genaken kan.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En wat belet haar venster te beklimmen?            <ab type=lineNum>112</ab>
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Hoog is haar kamer, verre van den grond;
+<l>De muur zoo steil, dat niemand dien beklimt,
+<l>Dan wie zijn leven roekloos wagen wil.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Nu, met een ladder, hecht van touw gemaakt,
+<l>Met een paar haken, die men vast kan werpen,
+<l>Beklimt men eener tweede Hero toren,
+<l>Zoo maar Leander stout het wagen durft.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Nu, spreek, zoo waar gij aad&apos;lijk bloed bezit,
+<l>Waar kan ik zulk een ladder mij verschaffen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wanneer behoeft gij die? <corr sic=meld>Meld</corr> dit mij, heer.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Deze eigen nacht, want Liefde is als een kind,
+<l>Dat haakt naar alles, wat bereikbaar is.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Te zeven uren breng ik u zulk een ladder.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Doch hoor,&mdash;ik ga geheel alleen tot haar,&mdash;
+<l>Hoe krijg ik best die ladder daar ter plaatse?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Zij is niet zwaar, en onder elken mantel,
+<l>Mits die niet al te kort zij, licht te bergen.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Een mantel, zooals de uwe, waar&apos; dus goed?
+</sp>
+
+<pb n=175><sp who=val>
+<speaker>Valentijn.</speaker> <l>O ja, mijn vorst.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker>                      <l rend="hemistich(O ja, mijn vorst.)">Zoo laat me uw mantel zien,
+<l>Ik schaf er mij een aan van zulk een lengte.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>O, ied&apos;re mantel kan u dienen, heer.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Hoe hang ik zulk een mantel mij wel om&apos;?
+<l>Ik bid u, laat mij dien van u beproeven.&mdash;
+<l>Wat is dat voor een brief? Aan wie?&mdash;&ldquo;Aan Silvia&rdquo;!
+<l>En hier een werktuig, juist als ik behoef.
+<l>Ik ben zoo vrij het zegel te verbreken.
+<l><stage rend=inline>(<hi>Hij leest.</hi>)</stage> &ldquo;Bij Silvia toeven nacht op nacht mijn brieven;
+  <l rend="indent(2)">Ik doe ze vliegen op mijn wenk als slaven;
+<l>O, kon hun meester zoo de ruimte klieven,
+  <l rend="indent(2)">Hij zou zijn ziele, waar zij slapen, laven!
+<l>Aan &apos;t reine hart ontvangt gij mijn gezanten;
+  <l rend="indent(2)">En ik, de koning, die hen zond, moet lijden,
+<l>Dat gij uw gunsten schenkt aan mijn trawanten;
+  <l rend="indent(2)">Ik vloek hen, wijl ikzelf hen moet benijden,
+<l>Ik vloek mijzelf, dat ik dit nooit bedacht,
+<l>Hun &apos;t heil doe smaken, waar ikzelf naar smacht.&rdquo;&mdash;
+<l>Wat volgt nog?          <ab type=lineNum>150</ab>
+<l>&ldquo;Doch ik bevrijd u, Silvia, deze nacht.&rdquo;
+<l>Zoo staat er; en die ladder moest u dienen.
+<l id=ev.III.1.153>Gij Pha&euml;ton, gij and&apos;re Merops-zoon,
+<l>Verstout ge u &apos;s hemels zonnespan te mennen
+<l>En de aard te blaak&apos;ren in uw euvelmoed?
+<l>Grijpt gij naar sterren, wijl zij u bestralen?
+<l>Van hier, verwaten dief! vermeet&apos;le slaaf!
+<l>Vlei uws gelijken met uw zoete lachjes,
+<l>En acht het mijn genade,&mdash;en onverdiend,&mdash;
+<l>Een gunst, dat gij heelhuids van hier ontkomt;
+<l>Dank hier mij meer voor dan voor alle gunsten,
+<l>Die ik maar al te rijk&apos;lijk u bewees;
+<l>Doch toeft gij lang&apos;ren tijd op mijn gebied,
+<l>Dan gij behoeft om met den meesten spoed
+<l>Ons vorstlijk hof te ontvluchten, dan, ik zweer het,
+<l>Dan overtreft mijn gramschap ver de liefde,
+<l>Die &apos;k ooit mijn dochter toedroeg of uzelf.
+<l>Vertrek! en zwijg! geen uitvlucht of verschooning;
+<l>Maar ijlings, hebt ge uw leven lief, van hier!
+</sp>
+
+<stage type=exit>(<hi>De Hertog af.</hi>)</stage>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Waarom niet dood, in plaats van sparend folt&apos;ren?
+<l>Want sterven is verbanning van mijzelven;
+<l>En Silvia is mijzelf; van haar verbannen,
+<l>Is zelf van zelf; het is verbanningsdood!
+<l>Welk licht is licht, is Silvia mij onzichtbaar?
+<l>Wat vreugd is vreugd, is Silvia niet aanwezig?
+<l>Tenzij ik als aanwezig haar kan denken
+<l>En teer van &apos;t schijnbeeld harer heerlijkheid.
+<l>Tenzij ik in de nacht bij Silvia ben,
+<l>Huist geen muziek meer in den nachtegaal;
+<l>Tenzij ik op den dag mijn Silvia zie,
+<l>Is er geen dag, om iets te zien, voor mij.
+<l>Zij is mijn wezen; ik houd op te zijn,
+<l>Tenzij haar lieflijke invloed mij bestraal&apos;,
+<l>Verwarme en koest&apos;re, mij in &apos;t leven houd&apos;.
+<l>Mijn vlucht ontvlucht den doodsdoem, niet den dood;
+<l>Vertoef ik hier, dan wacht ik slechts den dood,
+<l>Maar vlucht ik heen, dan vlucht ik weg van &apos;t leven.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Lans</hi> <hi>komen op.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Loop, loop, knaap, loop en spoor hem op!
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Waar ik hem weet! waar ik hem weet!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wat ziet gij?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Den haas, dien wij jagen; geen haar op zijn hoofd, of &apos;t is een Valentijn.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Gij daar, Valentijn?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Neen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wie dan? zijn geest?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Ook niet.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wat dan?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <p>Niets.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Kan niets spreken? Moet het er op los, meester?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Waar wilt gij op los?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Op niets.           <ab type=lineNum>201</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Schurk, houd op.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu, heer, ik ga op niets los; ik bid u,&mdash;
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Stil, knaap, houd op!&mdash;Vriend Valentijn, een woord!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Mijn oor is vol; &apos;t is doof voor goede tijding;
+<l>Zoo is &apos;t van booze tijding reeds vervuld.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>&apos;k Begraaf in somber zwijgen dan de mijne,
+<l>Want ze is wanluidend, ruw en slecht; &apos;k zeg niets.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Is Silvia dood?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Niets, Valentijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Niets-Valentijn, dit ben ik, is zij engel.&mdash;
+<l>Heeft Silvia mij verzaakt?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Niets, Valentijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Niets-Valentijn, dat ware ik, als zij &apos;t deed.
+<l>Spreek dan, uw nieuws?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <l>Er is omgeroepen, heer, dat gij geballast zijt.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Gebannen zijt,&mdash;ja, ja, dat is het nieuws,&mdash;
+<l>Van hier, van Silvia, en van mij, uw vriend.
+</sp>
+
+<pb n=176><sp who=val>
+<speaker>Valentijn.</speaker> <l>O, deze smart heb ik alreeds geproefd,
+<l>En nu zal de overdaad mij overladen.
+<l>Weet Silvia reeds, dat ik verbannen ben?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ach ja; en haar ontstroomde bij het vonnis,&mdash;
+<l>Dat, blijft het onherroepen, scherp u dreigt,&mdash;
+<l>Een zee van vloeib&apos;re parels, held&apos;re tranen;
+<l>Die stortte ze aan haars vaders wreede voeten;
+<l>Zelf zeeg ze in deemoed knielend voor hem neer,
+<l>En wrong de handen, ach, zoo marmerwit,
+<l>Als waren zij door &apos;t plotsling wee verbleekt,
+<l>Maar zuchten, steunen, zilv&apos;ren tranenvloed,
+<l>Gebogen knie&euml;n, kuisch geheven armen,
+<l>Niets, niets verweekt des harden vaders hart;
+<l>Neen, grijpt men Valentijn, dan moet hij sterven.
+<l>En dan, haar voorspraak heeft hem zoo vergramd,
+<l>Toen ze om herroeping van het vonnis smeekte,
+<l>Dat hij beval, zeer nauw haar op te sluiten,
+<l>Met scherpe dreiging, zoo ze ontsnapping waagt.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Niets meer, tenzij het eerste, dat gij spreekt,
+<l>De macht bezitte &apos;t leven mij te ontnemen;
+<l>Zoo ja, dan bid ik, blaas het mij in &apos;t oor,
+<l>Als graflied, dat mijn eindloos wee doet einden.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Klaag niet om wat gij niet verhelpen kunt;       <ab type=lineNum>241</ab>
+<l>Poog te verhelpen wat u klagen doet.
+<l>De tijd verwekt en voedstert al wat goed is.
+<l>Al blijft gij hier, uw liefste ziet gij niet;
+<l>En ook, uw blijven snijdt uw leven af.
+<l>Eens minnaars staf is Hopen; neem dien met u,
+<l>En zwaai hem, zoo de Wanhoop u besluipt.
+<l>Hoe ver ge ook zijt, door brieven kunt gij hier zijn;
+<l>Zend die aan mij, dan zorg ik, dat zij rusten
+<l>Bij uw geliefde en aan haar blanken boezem.
+<l>&apos;t Is nu geen tijd tot smalen op het lot;
+<l>Kom, ik geleid u door de poort der stad,
+<l>En spreek voor &apos;t scheiden alles met u af,
+<l>Wat ik voor uwe liefde hier kan doen.
+<l>Denk, zoo niet om uzelf, om Silvia&apos;s wil,
+<l>Aan &apos;t fel gevaar, dat dreigt, en laat ons gaan!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ik bid u, Lans, ziet gij mijn dienaar, zeg hem,
+<l>Ten spoedigste aan de Noorderpoort te komen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ga, knaap, en zoek hem op.&mdash;
+<l>Kom, Valentijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ach, dierb&apos;re Silvia! arme Valentijn!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Valentijn</hi> <hi>en</hi> <hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ik ben slechts een domme kerel, ziet gij, maar ik heb toch het verstand om te merken, dat mijn meester een soort van schurk is; maar dat doet er niet toe, als hij maar geen <ab id=ev.iii.1.263>dubbele schurk</ab> is. Die man moet nog geboren worden, die weet, dat ik verliefd ben; en toch, ik ben verliefd; maar geen span paarden zal mij dit uit mijn gemoed rukken, en ook niet, op wie ik verliefd ben; en toch, het is een vrouw; maar wat voor een vrouw, wil ik mijzelf niet eens vertellen; en toch, het is een melkmeisje; en toch, het is geen meisje, want ze heeft al peten aan het werk gezet; en toch is het een meisje, want zij is het melkmeisje van haar meester en zij dient om loon. Zij verstaat meer kunststukjes dan een hond, die te water gaat, en dat is veel voor een eenvoudig christenmensch. Hier is de invidiaris van haar eigenschappen. <stage rend=inline>(<hi>Hij haalt een papier voor den dag.</hi>)</stage> &ldquo;<hi rend=ex>Imprimis</hi>, Zij kan halen en dragen.&rdquo; Wel, een paard kan niet meer doen; neen, een paard gaat niet halen, het draagt alleen; daarom is zij beter dan een knol. &ldquo;<hi rend=ex>Item</hi>, Zij kan melken,&rdquo; ziet eens, een beminnelijke deugd in een meisje, dat schoone handen heeft.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Flink</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Zoo hoe gaat het, sinjeur Lans? Is er van uw heerschap ook wat nieuws te hooren?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, mijn heerschap is met uw heerschap aan het rondzwalken.       <ab type=lineNum>282</ab>
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Och, uw oude kwaal, woordverdraaiing! Zeg, is er geen nieuws in dat papier daar van u?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Het zwartste nieuws, dat ge ooit gehoord hebt.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Hoe zoo, kerel? zoo erg zwart?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, zoo zwart als inkt.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Laat het mij eens lezen.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Foei, schaam u, botterik, gij kunt niet eens lezen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Gelogen; of ik het kan!
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ik wil u toetsen. Vertel mij dus: wie heeft u bij uw moeder verwekt?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wel, de zoon van mijn grootvader.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>O ongeletterde dagdief! het was de zoon van uw grootmoeder. Dat is een bewijs, dat gij niet lezen kunt.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Kom, dwaas, komaan; toets mij met uw papier.
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p id=ev.III.1.300>Daar, en toon door Sint-Nicolaas u flink!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Imprimis</hi>: Zij kan melken.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ja, dat kan zij.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij brouwt goed bier.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>En daar vandaan het zeggen: &ldquo;Gods zegen hier; gij brouwt goed bier.&rdquo;
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p id=ev.III.1.307>&ldquo;<hi rend=ex>Item</hi>: Zij kan naaien.&rdquo;
+</sp>
+
+<pb n=177><sp who=lan>
+<speaker>Lans.</speaker> <p>Dat wil zeggen: voor scheuren weet zij raad, met naald en draad.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi><corr sic=".">:</corr> Zij kan breien.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <l>Breit zij mij kousen en ik kan schoenen koopen,
+<l>Dan zal ik niet op sloffen moeten loopen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij kan wasschen en boenen.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Een bijzonder groote deugd; dan behoeft zij niet gewasschen en geboend te worden.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij kan spinnen.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dan kan ik het rad van Fortuin laten rollen, als zij er haar levensonderhoud van kan afspinnen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft vele naamlooze deugden.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat is zooveel als basterddeugden, die haar vader niet kennen en daarom geen naam hebben.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;Hier volgen haar ondeugden.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Haar deugden dicht op de hielen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is niet wel nuchter te kussen, van wege haar adem.&rdquo;      <ab type=lineNum>327</ab>
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu, dat gebrek is door een ontbijt te verhelpen. Lees door.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is een lekkerbek.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat maakt haar onlekkeren adem weer goed.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij praat in haar slaap.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat hindert niet, als zij maar niet slaapt in haar praat.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is langzaam in het spreken.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>O schurk, die dat bij haar ondeugden zette! Langzaam in het spreken is bij een vrouw een eenige deugd. Ik bid u schrap dat uit en zet het bij haar deugden bovenaan.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is ijdel.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat ook door; dat is haar door Eva vermaakt en haar niet te ontnemen.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft geen tanden!&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat hindert ook niet, want ik ben dol op korstjes.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is bits.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu, dan is het maar goed, dat zij geen tanden heeft om te bijten.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij vindt een slokje overheerlijk.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Als haar slokje goed is, dan moet zij het doen; en als zij het niet doet, doe ik het; want als iets overheerlijk is, moet het gezegd worden.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is al te mild.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Met haar woorden, is onmoog&apos;lijk, want wij hebben hier zwart op wit, dat zij daar langzaam mee is; met haar beurs zal zij het niet wezen, want die zal ik dicht houden; nu kan zij het nog met iets anders zijn, maar daar kan ik niet aan doen. Verder maar.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand, en meer gebreken dan haren, en meer geld dan gebreken.&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Houd op; ik wil haar hebben: zij was mijn en niet mijn, twee- of driemaal in dat laatste artikel. Lees dat nog eens.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand,&rdquo;&mdash;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Meer haar dan verstand,&mdash;dat mag wel: ik wil het bewijzen: het deksel van het zoutvat overdekt het zout, en daarom is het meer dan het zout; het haar, dat het verstand bedekt, is meer dan het verstand, want het grootere overdekt het kleinere. Wat volgt?
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;En meer gebreken dan haren,&mdash;&rdquo;
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Dat is verschrikk&apos;lijk; o, stond dat er niet!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>&ldquo;En meer geld dan gebreken.&rdquo;      <ab type=lineNum>376</ab>
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>O, dat woord maakt de gebreken bekoorlijk! Goed ik wil haar hebben; en als wij een paar worden, zooals geen ding onmoog&apos;lijk is,&mdash;
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Wat dan?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, dan zal ik u vertellen,&mdash;dat uw meester aan de Noorderpoort op u wacht.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Op mij?
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Op u! ja, wat zijt gij er voor een? <corr sic=hij>Hij</corr> heeft op een beteren kerel dan gij zijt, gewacht.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>En moet ik naar hem toe gaan?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Gij moet naar hem toe rennen, want gij hebt zoo lang gewacht, dat gaan bijna niet meer helpen kan.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <p>Waarom hebt gij mij dat niet vroeger gezegd? naar den duivel met uw minnebrieven!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Flink</hi> <hi>af.</hi>)</stage>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Nu zal hij klop krijgen, omdat hij mijn brief gelezen heeft! Een onbeschaamde vlegel, die in een andermans geheimen dringt!&mdash;Ik loop hem na, om mij in de tuchtiging van dien kerel te verkneukelen!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Lans</hi> <hi>af.</hi>)</stage>
+
+
+
+
+<pb n=178>
+<div2 id=ev.III.2>
+<head>Tweede Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar.</hi> <hi>Een kamer in &apos;s Hertogs paleis.</hi></stage>
+
+<stage type=entrance><hi>De Hertog en</hi> <hi rend=sc>Thurio</hi> <hi>komen op; later</hi> <hi rend=sc>Proteus</hi>.</stage>
+
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Beminnen zal ze u, Thurio, twijfel niet,
+<l>Nu Valentijn van haar verbannen is.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Na zijn verbanning haat zij mij nog meer,
+<l>Wil niets meer van mij weten, hoont mij zoo,
+<l>Dat ik den moed geheel heb opgegeven.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zwak is die liefdesindruk, als een letter,
+<l>In &apos;t ijs getrokken; schijn&apos; de zon een uur,
+<l>Zij is verwaterd, ied&apos;re trek verdwenen.
+<l>Een weinig tijds smelt haar bevroren geest;
+<l>Dan is die lage Valentijn vergeten.&mdash;
+<l>Zoo, gij daar, Proteus? Is uw landgenoot
+<l>Op &apos;t uitgevaardigd hoog bevel vertrokken?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Vertrokken, heer en vorst.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zijn heengaan heeft mijn dochter diep bedroefd.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Een weinig tijds, heer, doet die droef&apos;nis sterven.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Dit wacht ik ook, maar Thurio denkt van neen.
+<l>Proteus, ik heb een goeden dunk van u;
+<l>En dit,&mdash;gij gaaft mij proeven van uw ijver,&mdash;
+<l>Is oorzaak dat ik verder u vertrouw.      <ab type=lineNum>19</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Niet langer, dan ik trouw blijf aan uw hoogheid,
+<l>Zij &apos;t leven mij gegund, en bij uw hoogheid.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>&apos;t Is u bekend, hoe gaarne ik een verloving
+<l>Tot stand bracht tusschen Thurio en mijn dochter.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik weet het, heer.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>En toch is u niet onbekend, vermoed ik,
+<l>Hoe zij zich tegen mijnen wil verzet.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Toen Valentijn nog hier was, deed zij &apos;t, heer.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zij is van die verkeerdheid niet bekeerd.
+<l>Hoe doen wij &apos;t meisje Valentijns verliefdheid
+<l>Vergeten en op Thurio verlieven?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Het zekerst door belast&apos;ring; Valentijn
+<l>Zij trouwloos, laf gebleken, laag van afkomst;
+<l>Drie dingen, diep verfoeid door elke vrouw.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Goed, maar zij denkt gewis, dat haat dit ingeeft.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, zoo een vijand dit getuignis geeft;
+<l>Daarom zij &apos;t haar omstandig meegedeeld
+<l>Door iemand, die haar als zijn vriend bekend is.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Gij moet dus die belast&apos;ring op u nemen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>En dit zou ik ongaarne doen, mijn vorst;
+<l>Het is een taak, een edelman onwaardig,
+<l>Vooral zoo dit zijn boezemvriend moet treffen.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Zoo hem uw voorspraak niet van nut kan zijn,
+<l>Kan hem uw achterklap ook nimmer deren;
+<l>Daarom kunt gij gerust die taak aanvaarden,
+<l>Waartoe gij door uw vriend wordt aangezocht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>&apos;k Geef mij gewonnen, heer. Zoo &apos;k iets vermag
+<l>Door wat ik in zijn nadeel zeggen zal,
+<l>Dan zal zij zeker hem niet lang meer minnen.
+<l>Doch wordt haar liefde uit Valentijn gewied,
+<l>&apos;t Volgt niet, dat die in Thurio wort&apos;len zal.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Tracht daarom hare liefde van hem af
+<l>En daad&apos;lijk op mijn kluwen op te winden,
+<l>Eer ze in de war raak&apos; en voor niemand deug&apos;;
+<l>En dit gebeur&apos;, door mij niet min te prijzen,
+<l>Dan gij ten nadeel spreekt van Valentijn.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>En, Proteus, hierin kunnen we u vertrouwen,      <ab type=lineNum>56</ab>
+<l>Omdat ons Valentijn heeft meegedeeld,
+<l>Hoe ge aan de Liefde trouw gezworen hebt;
+<l>En nimmer af zult vallen of verand&apos;ren.
+<l>Om dezen waarborg zult gij toegang hebben
+<l>Tot Silvia, dat gij vrij&apos;lijk met haar spreekt.
+<l>Wel is zij stug, zwaarmoedig, zeer bedrukt,
+<l>Maar u zal ze om uws vriends wil gaarne zien;
+<l>Bepraat haar dus nu zoo, dat Valentijn
+<l>Van haar gehaat worde en mijn vriend bemind.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik zal &apos;t beproeven, doen wat ik vermag.
+<l>Doch Thurio, gij moet feller haar bestoken;
+<l>Lijmroeden leggen, lokken moet gij haar
+<l>Door fraai gerijmde, klagende sonnetten,
+<l>Met eeden van uw hulde zwaar bevracht.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Ja, goed bedacht;
+<l>Groot is van &apos;t Godskind Po&euml;zie de macht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Zeg dit: op &apos;t outer van haar schoonheid offert
+<l>Gij uwe tranen, zuchten, en uw hart.
+<l>Schrijf tot uw inkt verdroogt, en maak hem dan
+<l>Weer met uw tranen vloeibaar; menig dicht
+<l>Vol diep gevoel tuig&apos; van uw hart; besnaard
+<l>Met dichterspezen was de luit van Orpheus,
+<l>Wiens gouden tonen staal en steen verweekten,
+<l>Den tijger temden, woeste Leviathans
+<l>Uit de&apos; afgrond lokten tot een dans aan strand.
+<l>Na zulke hartverscheurende elegie&euml;n
+<l>Genaakt gij &apos;t venster uwer liefste &apos;s nachts
+<l>Met lieflijke muziek en heft daarbij
+<l>Een roerend klaaglied aan; de doodsche nacht
+<pb n=179><l>Maakt zulke liefdeklachten dubbel roerend.
+<l>Of dit, of niets verovert u haar hart<corr>.</corr>
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Dit voorschrift toont, dat gij het hof gemaakt hebt.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>En &apos;k voer uw raad deze eigen nacht nog uit.
+<l>Daarom, mijn beste Proteus, gij mijn gids,
+<l>Begeven wij terstond ons naar de stad,
+<l>En zoeken daar bedreven muzikanten.
+<l>Ik heb een minnedicht, dat dienen kan,
+<l>En daarmee zij uw goede raad beproefd!
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Aan &apos;t werk, gij heeren!
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Tot slapenstijd, mijn vorst, staan we u ten dienst,
+<l>En zorgen dan vol ijver voor ons plan.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Neen, daad&apos;lijk nu aan &apos;t werk! Ik laat u vrij.
+</sp>
+
+<stage type=exit>(<hi>Allen af.</hi>)</stage>
+
+
+
+<div1 id=ev.IV type=Act>
+<head>Vierde Bedrijf.</head>
+
+
+<div2 id=ev.IV.1>
+<head>Eerste Tooneel.</head>
+
+
+<stage type=setting><hi>Een woud, tusschen</hi> <hi rend=ex>Milaan</hi> <hi>en</hi> <hi rend=ex>Verona</hi>.</stage>
+
+<stage type=entrance><hi>Eenige Bandieten komen op.</hi></stage>
+
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Staat, mannen, staat; ik zie een reiziger.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Al waar&apos; &apos;t een tiental, deinst niet, slaat ze neer.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Valentijn</hi> <hi>en</hi> <hi rend=sc>Flink</hi> <hi>treden op.</hi>)</stage>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Sta, heer, en lever uit al wat gij hebt,
+<l>Of gij wordt neergelegd en uitgeschud.
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Wij zijn verloren, heer; dat zijn de schurken,
+<l>Waar alle reizigers beducht voor zijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Mijn vrienden,&mdash;
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Wat vriend! dat zijn wij niet; noem vrij ons vijand.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Stil, laat hem spreken!
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Ja, bij mijn baard, hij is een flinke kerel.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Zoo weet dan, ik heb weinig te verliezen.
+<l>Ik ben een man, door &apos;t ongeluk bestookt;
+<l>Mijn rijkdom zijn mijn poov&apos;re kleed&apos;ren hier,
+<l>En als gij daarvan mij ontblooten wilt,
+<l>Dan neemt gij al mijn have en goed mij af.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Waar reist gij heen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Naar Verona.       <ab type=lineNum>17</ab>
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Van waar komt gij?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Van Milaan.
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Hebt gij daar lang vertoefd?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ruim zestien maanden, en ik ware er nog,
+<l>Zoo niet een heilloos lot mij had gedwarsboomd.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Hoe zoo, werdt gij verbannen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Verbannen, ja.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Om welk vergrijp?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Om een, dat ik met wroeging thans vermeld.
+<l>Ik doodde een man, wiens dood mij zeer berouwt;
+<l>Schoon, ik versloeg hem in manhaften strijd,
+<l>En niet door booze list of laag verraad.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Wel, geen berouw, indien het zoo zich toedroeg.
+<l>En om zoo kleine schuld werdt gij verbannen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ja, en verheugd er zoo nog af te komen.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Verstaat gij talen?      <ab type=lineNum>33</ab>
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Gewis, dit dank ik aan mijn jonglingsreizen;
+<l>&apos;t Ware anders menigmaal mij slecht vergaan.
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l id=ev.IV.1.36>Bij Robin Hood&apos;s gemesten paters kruintje,
+<l>Die borst mocht hoofd zijn onzer woeste bende.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Wij willen hem.&mdash;Gij mannen, hier; een woord!
+</sp>
+
+<sp who=fli>
+<speaker>Flink.</speaker> <l>Heer, sluit u bij hen aan;
+<l>&apos;t Is recht fatsoenlijk stelen, wat zij doen.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Stil, schurk!
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Spreek: hebt gij iets, waar gij op reek&apos;nen kunt?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>&apos;k Heb niets dan wat het lot mij brengt.
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Weet, een&apos;gen onder ons zijn edellieden,
+<l>Die de overmoed der teugellooze jeugd
+<l>Uit de gemeenschap stiet van eerb&apos;re lieden;
+<l>Zoo werd ikzelf verbannen uit Verona,
+<pb n=180><l>Wijl ik beproefde een jonkvrouw daar te schaken,
+<l>Die rijk was en den hertog na verwant.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>En ik uit Mantua, om een edelman,
+<l>Wien ik in drift een dolk in &apos;t harte stiet.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>En ik om even zulk een klein vergrijp.
+<l>Doch nu ter zake; die belijd&apos;nis strekte
+<l>Slechts om ons rooverleven u te ontschuldigen;
+<l>En daar wij zien, dat gij met kloeken bouw
+<l>Begaafd zijt, en, zooals gijzelf daar meldt,
+<l>De talen spreekt, kortom, geheel de man,
+<l>Die ons bij dit beroep recht welkom ware,&mdash;
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>En dan vooral, wijl gij een balling zijt,
+<l>Daarom voornaam&apos;lijk spreken wij tot u.
+<l>Neemt gij ons voorstel aan, ons hoofd te zijn,
+<l>En met ons van den nood een deugd te maken,
+<l>En in de wildernis, als wij, te leven?
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Wat zegt gij? wilt gij een der onzen zijn?
+<l>Sla toe en word de hoofdman van ons allen;
+<l>Dan doen we u hulde en volgen uw bevelen,
+<l>En eeren u als onzen heer en vorst.      <ab type=lineNum>67</ab>
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Maar als gij onze gunst versmaadt, dan sterft gij.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Gij leeft niet, dat gij op ons aanbod pocht.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>&apos;k Neem &apos;t aanbod aan en wil met u hier leven;
+<l>Doch op beding, dat gij steeds zwakke vrouwen
+<l>En arme zwervers spaart, hen nimmer deert.
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Wijzelf verfoeien zulk een laag bedrijf.
+<l>Kom nu, wij brengen u tot onze schare,
+<l>En toonen u den buit, door ons verga&acirc;rd,
+<l>Die, als wijzelf, tot uw beschikking sta.
+</sp>
+
+<stage type=exit>(<hi>Allen af.</hi>)</stage>
+
+
+
+<p><figure id=p180>
+<head><hi rend=ex>Twee edellieden van Verona</hi>, Vierde Bedrijf, Tweede Tooneel.</head>
+</figure>
+
+
+
+<div2 id=ev.IV.2>
+<head>Tweede Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Milaan.</hi> <hi>Open plaats voor &apos;s Hertogs paleis, onder</hi> <hi rend=sc>Silvia&apos;s</hi> <hi>kamervenster.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Proteus</hi> <hi>komt op.</hi></stage>
+
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Reeds was ik trouwloos jegens Valentijn;
+<l>Nu moet ik Thurio &apos;t eigen onrecht doen;
+<l>Want onder &apos;t mom, dat ik zijn voorspraak ben,
+<l>Verwierf ik toegang voor mijn eigen liefde.
+<l>Doch Silvia is te schoon, te trouw, te heilig,
+<l>Dan dat mijn waard&apos;loos aanbod haar verleidt.
+<l>Betuig ik mijn genegenheid en trouwe,
+<l>Dan werpt zij mij mijn valsche vriendschap voor;
+<l>Bezweer ik de eeuw&apos;ge macht van hare schoonheid,
+<l>Dan zegt zij mij, te denken, hoe ik de&apos; eed
+<l>Van trouw aan Julia, die ik minde, brak.
+<l>En toch, trots al haar rassche booze woorden,
+<l>Meer dan genoeg om alle hoop te dooven,&mdash;
+<l>Hoe meer zij mijne liefde van zich stoot,
+<l>Groeit die te meer en vleit haar kwisp&apos;lend steeds.
+<l>Doch Thurio komt; wij moeten aan haar venster
+<l>Nu avondtonen ruischen in haar oor.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Thurio</hi> <hi>komt op, met Muzikanten.</hi>)</stage>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Zoo, Proteus, zijt gij ons vooruitgeslopen?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, waarde Thurio, want gij weet, de liefde
+<l>Wil binnensluipen, waar zij niet kan gaan.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Ja, maar ik hoop, heer, hier bemint gij niet.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik doe het, heer, want anders ware ik elders.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Wie, Silvia?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>            <l rend="hemistich(Wie, Silvia?)">Silvia, ja,&mdash;om uwentwille.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Ik dank u voor uw liefde.&mdash;Heeren, thans
+<l>Gestemd, en &apos;t lied dan lustig aangeheven.      <ab type=lineNum>25</ab>
+</sp>
+
+<stage type=entrance>(<hi>De Waard en</hi> <hi rend=sc>Julia</hi> <hi>komen op, op den achtergrond;</hi> <hi rend=sc>Julia</hi> <hi>in pageskleeding.</hi>)</stage>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <l>Nu, mijn jonge gast, mij dunkt, gij
+<l>zijt mankeliek; mag ik vragen, waarom?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Och, goede vriend, wijl ik niet lustig zijn kan.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <l>Kom, kom, wij zullen u wel lustig
+<l>maken. Ik wil u brengen, waar gij muziek zult
+<l>hooren en den edelman zien, waar gij naar gevraagd
+<l>hebt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>En zal ik hem ook hooren spreken?
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <l>Ja, dat zult gij.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Dat zal muziek zijn.
+</sp>
+
+<stage>(<hi>De muziek begint.</hi>)</stage>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <l>Luister, luister!
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Is hij daarbij?
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <l>Ja, maar stil, laat ons luisteren!
+</sp>
+
+<stage>(<hi>Lied.</hi>)</stage>
+
+<sp>
+<l>Wie is Silvia? wat is zij?
+  <l rend="indent(2)">De jong&apos;lingschap omzwiert haar.&mdash;
+<l>Heilig, schoon en wijs is zij;
+  <l rend="indent(2)">Door &apos;s Hemels gunst versiert haar
+<l>Al wat roem geeft en waardij.
+</sp>
+
+<sp>
+<l>Even goed is zij als schoon;
+  <l rend="indent(2)">Dit schenkt haar alvermogen;
+<pb n=181><l>Amor koos haar oog ter woon
+  <l rend="indent(2)">En ziet nu door haar oogen,
+<l>Zit, niet blind meer, daar ten troon.
+</sp>
+
+<sp>
+<l>Zingt dus Silvia, roemt haar macht
+  <l rend="indent(2)">En we&ecirc;rg&acirc;looze waarde,
+<l>&apos;t Liefste schoon, de rijkste pracht,
+  <l rend="indent(2)">Den roem der glanslooze aarde!
+<l>Huldekransen haar gebracht!
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Hoe is het? zijt gij nog treuriger dan te voren? Hoe is het, jonkman? Is de muziek u niet goed genoeg?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Misgeraden; de muzikant is mij niet goed genoeg.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Hoe zoo, mijn beste knaap?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Hij speelt valsch, vadertje.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Hoe zoo? is het instrument valsch besnaard?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Dat niet, maar hij speelt zoo valsch, dat hij de snaren van mijn hart pijn doet.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Gij zijt fijn van gehoor.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>O, ik wilde, dat ik doof was, want dit doet mijn hart zoo bonzen.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Ik merk het wel, gij houdt niet van muziek.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Volstrekt niet, als zij zoo snerpend is.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Hoor, welk een mooie overgang in die muziek!             <ab type=lineNum>68</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Juist, die overgang doet mij zeer.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Gij zoudt wenschen, dat zij aldoor hetzelfde speelden?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Dat een hetzelfde door bleef spelen, wenschte ik.&mdash;
+<l>Maar zeg, die Proteus, vriend, waar wij van spraken,
+<l>Heeft hij met deze jonkvrouw veel verkeer?
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Ik zeg u, wat Lans, zijn knecht, mij gezegd heeft:&mdash;hij bemint haar zoo, <ab id=ev.iv.2.76>dat de kerfstok vol is</ab>.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Waar is Lans?
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Zijn hond gaan zoeken, dien hij morgen, op bevel van zijn meester, aan de jonkvrouw ten geschenke moet gaan brengen.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Stil, stil, ter zijde; het gezelschap gaat heen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wees niet bekommerd, Thurio; pleiten zal ik,
+<l>Dat gij mijn sluwheid hooglijk roemen zult.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Waar vind ik u?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                <l rend="hemistich(Waar vind ik u?)">Bij den Gregorius-put.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Vaarwel!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Thurio</hi> <hi>af, met de Muzikanten.</hi>)</stage>
+
+<stage type=entrance>(<hi rend=sc>Silvia</hi> <hi>verschijnt aan haar venster.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Uwe Edelheid een goeden avond, jonkvrouw!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Mijn dank voor uw muziekbegroeting, heeren!
+<l>Wie is het, die daar sprak?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>O, kendet gij zijns harten zuiv&apos;re trouw,
+<l>Gij leerdet ras hem aan de stem te kennen.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Signore Proteus, als ik het wel heb.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, Proteus, eed&apos;le jonkvrouw, en uw dienaar.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Wat wilt gij hier?
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                  <l rend="hemistich(Wat wilt gij hier?)">Eenswillend zijn met u.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dit staat aan u; niets anders is mijn wil,
+<l>Dan dat gij daad&apos;lijk u ter ruste spoedt.
+<l>Gij loos, meineedig, valsch en trouwloos man!
+<l>Gelooft gij mij zoo ijdel, zoo onnoozel,
+<l>Dat mij uw vleitaal ooit verlokken zou,
+<l>Hoe menigeen uw eeden ook bedrogen?
+<l>Keer huiswaarts en doe boete aan uw geliefde.
+<l>Ik, bij die bleeke koningin der nacht,
+<l>Ik, verre van uw smeeken te verhooren,
+<l>Veracht u om uw schand&apos;lijk aanzoek diep,
+<l>En ben geneigd mijzelve te verwijten,
+<l>Dat ik nog zooveel tijd aan u verspil.      <ab type=lineNum>104</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, ik erken, geliefde, ik minde een jonkvrouw,
+<l>Doch zij is dood.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Ik kon hem logenstraffen,
+<l>&apos;k Weet zeker, dat zij niet begraven is.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dit moog&apos; zoo zijn, maar Valentijn, uw vriend,
+<l>Hij leeft nog, en met hem,&mdash;gij zijt getuige,&mdash;
+<l>Ben ik verloofd; en schaamt gij u niet diep,
+<l>Door uwen boozen aandrang hem te krenken?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>&apos;k Hoor, dat ook Valentijn gestorven is.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zoo reken mij het ook, want in zijn graf
+<l>Is, weet dit, mijne liefde meebegraven.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Vergun mij, dierb&apos;re, uit de aard die op te raak&apos;len.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ga, rakel uit uw liefste&apos;s graf de hare,
+<l>Of&mdash;dat er de uwe meebegraven zij!
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Hij heeft dat niet gehoord.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Mejonkvrouw, blijft uw hart zoo onvermurwbaar,
+<l>Sta aan mijn liefde toch uw beelt&apos;nis toe,
+<l>De beelt&apos;nis, die in uwe kamer hangt;
+<l>Tot haar wil ik dan spreken, zuchten, weenen;
+<l>Want daar gij &apos;t wezen van uw heerlijk zelf
+<l>Hebt weggeschonken, ben ik slechts een schim,
+<l>En wil uw schaduw trouwe liefde wijden.
+</sp>
+
+<pb n=182><sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Ja, waar&apos; ze een werk&apos;lijk wezen, gij bedroogt het,
+<l>Dat het een schim wierd, zooals ik het ben.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>&apos;k Ben recht ongaarne, heer, uw afgodsbeeld;
+<l>Doch daar het met uw valschheid strookt, dat gij
+<l>Voor schimmen knielt, een ijdel beeld aanbidt,
+<l>Zoo laat het morgen ochtend bij mij halen.
+<l>En nu, slaap wel!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>          <l rend="hemistich(En nu, slaap wel!)">Als arme zondaars doen,
+<l>Wie &apos;t halsgericht den and&apos;ren morgen wacht.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Silvia</hi> <hi>af.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Waard, gaat gij mede?
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>&apos;k Was op mijn woord, daar vast in slaap geraakt.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <p>Waar woont die heer, die Proteus? zeg mij dit.
+</sp>
+
+<sp who=waa>
+<speaker>Waard.</speaker> <p>Wel, in mijn huis. Ik geloof waarachtig, dat het bijna dag is.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Dat niet; maar toch, het was de langste nacht,
+<l>Die ik doorwaakte, en zeker ook de bangste.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<div2 id=ev.IV.3>
+<head>Derde Tooneel.</head>
+
+<stage type=setting><hi rend=ex>Aldaar.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Eglamour</hi> <hi>komt op.</hi></stage>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>&apos;t Is nu het uur, dat jonkvrouw Silvia mij
+<l>Hier heeft ontboden om haar wensch te hooren.
+<l>Voor iets gewichtigs eischt zij wis mijn dienst.
+<l>Mejonkvrouw! jonkvrouw!
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Silvia</hi> <hi>verschijnt weder aan haar venster.</hi>)</stage>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Wie roept daar?
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker>              <l rend="hemistich(Wie roept daar?)">Iemand, die uw dienaar is,
+<l>Een vriend, die uw bevelen komt vernemen.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Heer Eglamour, veel duizend goede morgens!
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>Niet minder, eed&apos;le jonkvrouw, wensch ik u.
+<l>Naar uw vereerende opdracht kom ik hier
+<l>In &apos;t morgenuur vernemen, welken dienst
+<l>Het u behaagd heeft aan mij op te dragen.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>O Eglamour, gij zijt een edelman,&mdash;
+<l>Neen, &apos;t is geen vleitaal, die ik spreek, ik zweer het,&mdash;
+<l>Wijs, dapper, diepgevoelend, waarlijk ridder.
+<l>&apos;t Is u niet onbekend, wat diepe neiging
+<l>Ik voor den balling Valentijn steeds voed,
+<l>Noch, hoe mijn vader tot een echt mij dringt
+<l>Met de&apos; ijd&apos;len Thurio, dien mijn ziel verfoeit.
+<l>Gij hebt bemind; ik hoorde zelve u zeggen,
+<l>Dat nooit een leed zoo diep uw harte trof,
+<l>Als toen uw dierbare uitverkoor&apos;ne stierf,
+<l>Wier graf uw eed van eeuw&apos;ge trouw vernam.
+<l>Heer Eglamour, ik wil naar Valentijn,
+<l>Naar Mantua, waar hij, zoo hoor ik, toeft;
+<l>En daar de wegen hoogst onveilig zijn,
+<l>Zoo vraag ik, steunend op uw eer en trouw,
+<l>Dat gij mij op de reis geleiden wilt.
+<l>Neen, wijs mij op mijns vaders gramschap niet;
+<l>Denk aan mijn leed slechts, eener vrouwe leed,
+<l>En hoe ik recht heb om van hier te vluchten,
+<l>Ten einde een hoogst onheil&apos;gen echt te ontgaan,
+<l>Door hemel beide en &apos;t lot met vloek bedreigd.
+<l>Ik smeek u uit het diepste van een hart,
+<l>Zoo vol van kommer als de zee van zand,
+<l>Dat gij als mijn geleider mij verzelt;
+<l>Zoo niet, dat gij verzwijgt, wat ik u zeide,
+<l>Opdat ik &apos;t wagen moog&apos;, alleen te gaan<corr>.</corr>
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>Mejonkvrouw, ik beklaag uw liefdekommer,
+<l>En weet, hij geldt een deugdrijk edelman;
+<l>Ik ben daarom bereid u te verzellen;
+<l>En luttel acht ik wat mij treffen kan,
+<l>Maar wensch te meer van harte u alle heil.
+<l>Wanneer wenscht gij te gaan?
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker>                      <l rend="hemistich(Wanneer wenscht gij te gaan?)">Deze&apos; eigen avond.
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>Waar vind ik u?
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker>                  <l rend="hemistich(Waar vind ik u?)">In broeder Patrick&apos;s cel,
+<l>Waarheen ik, als ter biecht, mij zal begeven.
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>Ik zal er zijn, mejonkvrouw.
+<l>Thans goeden morgen, lieve jonkvrouw.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dank; goeden morgen, ridder Eglamour.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+
+<p><figure id=p184>
+<head><hi rend=ex>Twee edellieden van Verona</hi>, Vierde Bedrijf, Vierde Tooneel.</head>
+</figure>
+
+
+<div2 id=ev.IV.4>
+<head>Vierde Tooneel.</head>
+
+<stage type=setting><hi rend=ex>Aldaar.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Lans</hi> <hi>komt op, met zijn hond.</hi></stage>
+
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Als een mensch zijn dienaar zich hondsch tegen hem gedraagt, ziet ge, dat is hard; een, dien ik van kindsbeen af heb opgebracht, een, dien ik voor verdrinken bewaard heb, toen drie of vier van zijn blinde broeders of zusters er aan moesten gelooven! Ik heb hem afgericht, juist zooals iemand, die zich voorneemt: &ldquo;Zoo wil ik een hond africhten.&rdquo; Ik werd gestuurd om hem ten geschenke te brengen van mijn meester aan juffer Silvia, en ik had nog nauwelijks een voet in de eetzaal, of hij vliegt me naar haar bord en steelt haar kapoenepootje. O, het is een kwaad ding, als een hond zich niet in ieder gezelschap weet te gedragen! Ik zou willen, om zoo te zeggen, dat een, die op zich neemt een hond te zijn, dan, als het ware, ook in allen <pb n=183>deele een hond was. Als ik niet meer verstand had gehad dan hij, en het vergrijp, dat hij begaan had, niet op mij had genomen, was hij, dit geloof ik zeker, er voor gehangen; zoo waar ik leef, hij was er om koud geweest; oordeelt zelf. Hij dringt me zich daar in het gezelschap van drie of vier voorname honden onder de tafel van den hertog, en is me daar, met verlof, nog geen hondenpisje lang, of de geheele zaal ruikt hem. &ldquo;Naar buiten met den hond!&rdquo; roept de een; &ldquo;Wat is dat voor een mormeldier?&rdquo; zegt de ander; &ldquo;Ranselt hem de deur uit!&rdquo; zegt een derde; &ldquo;Hangt hem op!&rdquo; zegt de hertog. Ik, die de lucht van vroeger kende, wist dadelijk, dat het Krab was, en ik ga me naar den man van de hondenzweep; &ldquo;Vriend&rdquo;, zeg ik, &ldquo;gij zijt van plan dien hond daar te ranselen?&rdquo; &ldquo;Ja waarachtig, dat ben ik&rdquo;, zegt hij. &ldquo;Dan doet gij hem groot onrecht&rdquo;, zeg ik, &ldquo;ik was het, die dat je weet wel, deed.&rdquo; Hij maakt me geen verdere praatjes meer, maar zweept mij de kamer uit. Hoe veel meesters zouden dit voor hun dienaar doen? Ja, ik kan er een eed op doen, ik heb in het voetblok gezeten voor worsten, die hij gestolen had, anders was hij er om afgemaakt; ik heb te pronk gestaan voor ganzen, die hij gedood had, anders had hij er voor moeten bloeden; aan dat alles denk jij nu volstrekt niet meer.&mdash;Ja, en daar denk ik weer aan den streek, dien je mij gespeeld hebt, <ab id=ev.iv.4.39>toen ik afscheid nam van jonkvrouw Silvia</ab>. Heb ik je niet altijd gelast, op mij te letten, en even zoo te doen als ik? <corr sic=wanneer>Wanneer</corr> heb je mij ooit mijn been zien oplichten en wateren tegen een dame haar hoepelrok? <corr sic=heb>Heb</corr> je ooit zulk een streek van mij gezien?             <ab type=lineNum>43</ab>
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Julia</hi> <hi>komen op.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Sebastiaan heet gij? Nu, gij staat mij aan,
+<l>En &apos;k zal terstond u met een dienst belasten.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Met wat gij wilt; doen zal ik wat ik kan.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Dat hoop ik, knaap.&mdash;(<hi>Tot</hi> <hi rend=sc>Lans</hi>.) Gij liederlijke lummel!
+<l>Waar hebt gij sedert gist&apos;ren rondgedwaald?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, heer, ik heb aan juffer Silvia den hond gebracht, zooals gij mij bevolen hadt.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>En wat zegt zij wel van mijn klein juweel?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Wel, zij zegt, uw hond was een mormeldier, en laat u weten, dat een hondsche dank goed genoeg is voor zulk een geschenk.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Zij nam den hond toch aan?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Neen, integendeel, hier heb ik hem weer meegebracht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <p>Wat! heb je dien haar van mij aangeboden?
+</sp>
+
+<sp who=lan>
+<speaker>Lans.</speaker> <p>Ja, heer; het andere eekhoorntje werd mij op de markt <ab id=ev.iv.4.60>door de knapen van den hondenslager</ab> ontstolen; en toen heb ik haar mijn eigen hond gebracht, die zoo groot is als tien van de uwen en daarom een zooveel grooter geschenk.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ga, pak u weg en breng mijn hond terug,
+<l>Of kom mij nimmer weder onder de oogen!
+<l>Weg, zeg ik! Blijft gij staan om mij te tergen?
+<l>Gij knaap, die mij aldoor te schande maakt!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Lans</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<l>Sebastiaan, &apos;k heb u in dienst genomen,
+<l>Ten deele, wijl ik mij een jonkman wensch,
+<l>Die met verstand kan doen, wat ik hem opdraag,
+<l>Want op dien lummel is geen staat te maken;
+<l>Doch meest, wijl uw gelaat en uw manieren,&mdash;
+<l>Indien mijn zienerskunst mij niet bedriegt,&mdash;
+<l>Van goeden stand, geluk en trouw getuigen;
+<l>Deswegen, weet dit, nam ik u in dienst.
+<l>Ga nu terstond, neem dezen ring met u,
+<l>En stel aan jonkvrouw Silvia dien ter hand;
+<l>Die mij hem gaf, zij heeft mij zeer bemind.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Gij haar wis niet, dat gij haar pand zoo wegschenkt;
+<l>Of is zij dood?            <ab type=lineNum>80</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>        <l rend="hemistich(Of is zij dood?)">Dat niet; ik denk, zij leeft.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Helaas!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wat roept gij daar &ldquo;Helaas&rdquo;?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Ik kan niet anders doen dan haar beklagen.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Waarom beklaagt gij haar?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>&apos;k Verbeeld mij, zij beminde u evenzeer,
+<l>Als gij uw jonkvrouw Silvia nu bemint.
+<l>Zij droomt van hem, die hare min vergat;
+<l>Gij dweept met haar, die uwe min verwerpt.
+<l>Wat leed, dat min zoo tegen min zich kant!
+<l>Zie, dit bedenkend, riep ik uit: helaas!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Nu, geef haar dezen ring met dezen brief;&mdash;
+<l>Zie, ginds, d&agrave;t is haar kamer.&mdash;Zeg mijn jonkvrouw,
+<l>Dat ik &apos;t beloofde hemelsch beeld haar vraag.
+<l>En breng mij spoedig &apos;t antwoord; op mijn kamer
+<l>Zult gij mij vinden, treurig en alleen.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Die boodschap, hoeveel vrouwen brachten ze over?
+<l>Ach, arme Proteus, gij hebt daar een vos
+<l>Als herder uwer lamm&apos;ren aangesteld!
+<l>Ach, ik zottin! waarom beklaag ik hem,
+<l>Die uit den grond zijns harten mij versmaadt?
+<l>Omdat hij haar bemint, versmaadt hij mij;
+<l>Omdat ik hem bemin, beklaag ik hem.
+<pb n=184><l>Den ring hier schonk ikzelf hem bij ons afscheid,
+<l>Opdat hij mijner liefde steeds gedacht;
+<l>En ach, nu moet ik,&mdash;ik onzaalge bode!&mdash;
+<l>Gaan vragen wat ik niet erlangen wil,
+<l>Gaan brengen wat ikzelf geweigerd wensch,
+<l>Gaan roemen, wien ik als ontrouw gesmaad wensch!
+<l>Ik ben mijn heer een trouw en echt verloofde,
+<l>Doch kan hem niet een trouwe dienaar zijn,
+<l>Of aan mijzelve pleeg ik boos verraad.
+<l>Toch wil ik voor hem smeeken, doch zoo koud,
+<l>Als ik,&mdash;God weet het,&mdash;hare weig&apos;ring wensch.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Silvia</hi> <hi>komt op, met Gevolg.</hi>)</stage>
+
+<sp who=jul>
+<l>Mejonkvrouw, goeden dag! Ik bid u, help mij,
+<l>Dat ik de jonkvrouw Silvia spreken kan.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zoo ik het waar&apos;, wat zoudt gij van haar willen?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zoo gij het zijt, dat gij geduldig aanhoort,
+<l>Wat ik als boodschap overbrengen moet.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Van wien?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Mejonkvrouw, van mijn heer, Signore Proteus.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Hij zendt om een portret u hier, niet waar?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zoo is &apos;t, mejonkvrouw.      <ab type=lineNum>121</ab>
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ga, Ursula, en haal hier mijn portret.
+</sp>
+
+<stage>(<hi>Er wordt een portret gebracht.</hi>)</stage>
+
+<sp who=sil>
+<l>Gij, breng dit aan uw heer, doch meld hem dit:
+<l>Die Julia, die zijn wufte zin vergeet,
+<l>Zou beter, dan die schim, zijn kamer sieren.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Wil, jonkvrouw, dezen brief van hem doorlezen.&mdash;
+<l>Vergeef mij jonkvrouw, uit verstrooidheid reikte ik
+<l>U daar een brief, dien ik niet geven mocht;
+<l>Dit is het schrijven voor uw edelheid.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ik bid u, laat mij de&apos; andren nog eens zien.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Dit mag niet zijn; vergeef mij, beste jonkvrouw.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Daar, neem dit weer!
+<l>Ik wil het schrijven van uw heer niet inzien,
+<l>&apos;k Weet, met geloften is het opgepropt,
+<l>Met nieuw verzonnen eeden; maar hij breekt die,
+<l>Zoo ras als ik hier zijn papier verscheur.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Hij zendt uw edelheid ook dezen ring.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Te schand&apos;lijker van hem, dien mij te zenden;
+<l>Wel duizendmaal heb ik hem hooren zeggen,
+<l>Dat hem zijn Julia dien bij &apos;t afscheid gaf.
+<l>Maar hebb&apos; zijn valsche vinger dien ontwijd,
+<l>De mijne zal zijn Julia zoo niet krenken.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zij dankt u.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Wat zegt gij?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Ik dank u, dat gij deel neemt in haar lot;
+<l>Die arme maagd! mijn meester krenkt haar diep.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Gij kent haar dus?
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Bijna zoo goed als ik mijzelven ken;
+<l>&apos;k Verzeker u, bij &apos;t denken aan haar leed,
+<l>Heb ik wel honderdmaal om haar geschreid.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zij weet dus, dat haar Proteus trouwloos werd?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Ik denk van ja, en dat zij daarom treurt.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>En is zij niet zeer schoon?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Zij was veel schooner, jonkvrouw, dan zij is.
+<l>Zoo lang zij dacht, dat haar mijn heer beminde,
+<l>Was zij, zoo meen ik, even schoon als gij;
+<l>Maar sinds zij niet meer in den spiegel ziet,
+<l>En &apos;t masker, dat de zonne weerde, wegwierp,
+<l>Verkleurt de lucht de rozen van haar wangen,
+<l>En rooft aan haar gelaat zijn lelieblank;
+<l>En werd zij even bruin, als ik het ben.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Hoe groot was zij?      <ab type=lineNum>162</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Van mijne lengte; want op Pinkst&apos;ren werd
+<l>Er door het jonge volk tooneel gespeeld,
+<l>En viel aan mij de vrouwerol te beurt;
+<l>Men stak mij in een kleed van jonkvrouw Julia;
+<l>En dit zat mij naar aller oordeel zoo,
+<l>Alsof het voor mijzelven was gemaakt;
+<l>Zij moet dus juist van mijne lengte zijn.
+<l>Ik bracht haar toen in allen ernst aan &apos;t weenen,
+<l>Want inderdaad, aandoenlijk was mijn rol.
+<l>&apos;k Was Ariadne, die haar wanhoop uit
+<l>Om Theseus&apos; vlucht en schand&apos;lijk laag verraad;
+<l>Ik speelde zoo natuurlijk in mijn tranen,
+<l>Dat, diep geroerd, mijn arme meesteres
+<l>Recht bitter weende; en sterven wil ik hier,
+<l>Voelde ik niet in mijn hart haar kommer mee!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Zij is u dank verschuldigd, lieve jong&apos;ling.&mdash;
+<l>Die arme jonkvrouw! troostloos en verlaten!&mdash;
+<l>Ikzelf moet weenen, denk ik aan uw woorden.
+<l>Hier, jonkman, neem mijn beurs; ik geef u die
+<l>Om uwer jonkvrouw wil, die gij zoo lief hebt.
+<l>Vaarwel!
+</sp>
+
+<stage type=exit>(<hi rend=sc>Silvia</hi> <hi>met haar Gevolg af.</hi>)</stage>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>En danken zal ze u, leert gij eens haar kennen.&mdash;
+<l>Een eed&apos;le jonkvrouw, lieflijk, zacht en schoon!
+<l>Mijns meesters aanzoek, wacht ik, laat haar koud,
+<l>Daar mijn meest&apos;resse&apos;s liefde haar zoo roert.
+<l>Ach, wat kan liefde beuz&apos;len met zichzelf!
+<l>Hier is haar beelt&apos;nis. Laat mij zien: mij dunkt,
+<l>Met zulk een kapsel ware mijn gelaat
+<l>Volstrekt niet minder lieflijk dan het hare;
+<pb n=185><l>En toch, de schilder vleide haar wel iets,
+<l>Tenzij ik al te zeer mijzelve vlei.
+<l>Haar lokken zijn lichtbruin, de mijne blond;
+<l>Maakt dit nu voor zijn liefde zulk verschil,
+<l>Dan koop ik mij een haartooi van die kleur.
+<l>Haar oog is blauw als glas, het mijne is &apos;t ook,
+<l>Ja, doch haar voorhoofd laag, het mijne hoog.
+<l>Wat kan het zijn, dat hem in haar behaagt,
+<l>En hem niet ook in mij behagen moest,
+<l>Waar&apos; niet de dwaze Liefde een blinde god?
+<l>Kom, schaduw, kom, en neem die schaduw op,
+<l>Uw mededingster! O gij zielloos beeld,
+<l>Gij wordt gekust, vereerd, bemind, vergood;
+<l>En ware er zin in zijn afgoderij,
+<l>Zijn godsbeeld ware, in plaats van u, mijn wezen.
+&apos;k Wil om uw meesteres u goed behand&apos;len,
+<l>Zij deed het mij; want anders, bij den Hemel!
+&apos;k Had u de stikziende oogen uitgekrabd,
+<l>Om van mijns meesters liefde u te berooven.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Julia</hi> <hi>af.</hi>)</stage>
+
+
+
+<div1 id=ev.V type=Act>
+<head>Vijfde Bedrijf.</head>
+
+
+<div2 id=ev.V.1>
+<head>Eerste Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Milaan.</hi> <hi>Een klooster.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Eglamour</hi> <hi>komt op.</hi></stage>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>De zon verguldt den westerhemel reeds,
+<l>En &apos;t is omstreeks dit uur, dat Silvia mij
+<l>Bij broeder Patrick&apos;s cel ontmoeten zou.
+<l>Zij blijft niet uit; verliefden houden woord,
+<l>Alleenlijk plegen zij te vroeg te komen;
+<l>Zoo zeer drijft ongeduld hen aan tot spoed.
+</sp>
+
+<stage type=entrance>(<hi rend=sc>Silvia</hi> <hi>komt op.</hi>)</stage>
+
+<sp who=egl>
+<l>Daar komt zij reeds.&mdash;Mejonkvrouw, goeden avond!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dank, amen, amen! Thans, vriend Eglamour,
+<l>Terstond door de achterpoort van &apos;t klooster voort;
+<l>Bespieders, ducht ik, gaan mijn gangen na.
+</sp>
+
+<sp who=egl>
+<speaker>Eglamour.</speaker> <l>Ducht niets; wij spoeden ons naar &apos;t woud, en daar,
+<l>Geen drie mijl ver, bedreigt ons geen gevaar.
+</sp>
+
+<stage type=exit>(<hi>Beiden af.</hi>)</stage>
+
+
+<div2 id=ev.V.2>
+<head>Tweede Tooneel.</head>
+
+
+<stage type=setting><hi rend=ex>Aldaar.</hi> <hi>Een kamer in &apos;s Hertogs paleis.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Thurio</hi>, <hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Julia</hi> <hi>komen op.</hi></stage>
+
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Heer, wat zegt Silvia van mijn aanzoek thans?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik vond haar zachter, heer, dan vroeger, maar
+<l>Zij vindt aan uw persoon vrij wat te gispen.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Wat? dat mijn been te lang is?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                              <l rend="hemistich(Wat? dat mijn been te lang is?)">Neen, te dun.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Dan draag ik laarzen, die het ronder maken.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Tot wat zij haat, laat liefde zich niet sporen.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Hoe vindt zij mijn gelaat?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                          <l rend="hemistich(Hoe vindt zij mijn gelaat?)">Als blank papier.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Dat liegt het schelmpje; mijn gelaat is zwart.        <ab type=lineNum>10</ab>
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Doch paar&apos;len noemt men blank; en &apos;t zeggen is,
+<l>Een zwart man is een paarl in &apos;t oog der schoonen.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Ja, van die parels, die het oog verduistren,
+<l>Die &apos;k niet wil zien, en waar ik &apos;t oog voor sluit.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>En hoe bevalt haar mijn gesprek?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Slecht, als gij over oorlog spreekt.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Doch goed, als ik van liefde spreek en vrede?
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Nog beter, als gij haar met vrede laat.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Wat zegt zij van mijn moed?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>O, heer, daarover is zij niet in twijfel.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Waarom ook, als zij weet, hoe laf hij is.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Wat zegt zij van mijn afkomst?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Dat gij van hoogen rang zijt afgedaald.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Van edelman tot zotskap, ja voorwaar.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>En spreekt zij van mijn landerijen?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ja, maar met leedbetuiging.
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker>                              <l rend="hemistich(Ja, maar met leedbetuiging.)">En waarom?
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Dat zulk een ezel die bezit.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Dat gij niet zelf er woont, maar die verpacht.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Daar komt de hertog.
+</sp>
+
+<stage type=entrance>(<hi>De Hertog komt op.</hi>)</stage>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Hoe is &apos;t, heer Proteus? en hoe gaat het, Thurio?
+<l>Wie uwer zag sinds kort heer Eglamour?
+</sp>
+
+<pb n=186><sp who=thu>
+<speaker>Thurio.</speaker> <l>Ik niet.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>        <l rend="hemistich(Ik niet.)">Noch ik.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker>                  <l rend="hemistich(Ik niet. Noch ik.)">En mijne dochter?
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                                  <l rend="hemistich(Ik niet. Noch ik. En mijne dochter?)">Ook niet.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Nu, dan,
+<l>Dan vlood zij tot dien kinkel Valentijn,
+<l>En dan is Eglamour haar metgezel.
+<l>Ja, broeder Laurens heeft hen saam ontmoet,
+<l>Toen hij door &apos;t woud ging en gebeden las;
+<l>Hem kende hij, en dacht dat zij het was,
+<l>Doch, daar ze een masker droeg, was hij niet zeker;
+<l>Ook gaf zij voor, in Patricks cel deze&apos; avond
+<l>Ter biecht te willen gaan, maar was er niet.
+<l>Dit alles saam bevestigt hare vlucht.
+<l>Stijgt daarom, bid ik, zonder overwegen,
+<l>Terstond te paard, en vindt mij aan den voet
+<l>Des bergs, waar langs zijn helling zich de weg
+<l>Naar Mantua wendt, want daarheen vloden zij.
+<l>Maakt, beste heeren, spoed, en volgt mij ras.
+</sp>
+
+<stage type=exit>(<hi>De Hertog af.</hi>)</stage>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Dat noem ik toch een dwaze deerne, die
+<l>&apos;t Geluk ontvliedt, wanneer het haar vervolgt.
+<l>Ik volg, veel meer op Eglamour gebeten,
+<l>Dan op de dolle Silvia nog verliefd.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Thurio</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ik volg, veel meer op Silvia steeds verliefd,
+<l>Dan op haar helper Eglamour verbitterd.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
+
+<sp who=pro>
+<l>Julia. En ik volg mee, en ik bestrijd die liefde;
+<l>Maar Silvia haat ik niet, zij vlood uit liefde.
+</sp>
+
+<stage type=exit>(<hi rend=sc>Julia</hi> <hi>af.</hi>)</stage>
+
+
+<div2 id=ev.V.3>
+<head>Derde Tooneel.</head>
+
+
+<stage type=setting><hi>Het woud tusschen</hi> <hi rend=ex>Milaan</hi> <hi>en</hi> <hi rend=ex>Mantua</hi>.</stage>
+
+<stage type=entrance><hi>Bandieten komen op, met</hi> <hi rend=sc>Silvia</hi>.</stage>
+
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Kom, kom;
+<l>Bedaard! wij brengen u tot onzen hoofdman.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Mij leerden duizend andere ongevallen
+<l>Ook dit nu met gelatenheid te dragen.
+</sp>
+
+<sp who=ban>
+<speaker>Tweede Bandiet.</speaker> <l>Komt, brengt haar weg.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Waar is die edelman, die bij haar was?
+</sp>
+
+<sp who=ban>
+<speaker>Derde Bandiet.</speaker> <l>Hij was zoo vlug ter been, dat hij ontsnapte;
+<l>Doch Mozes en Valerius volgen hem.
+<l>Breng gij haar tot den hoofdman, aan den westzoom
+<l>Van &apos;t woud; laat ons den vlucht&apos;ling achtervolgen;
+<l>Het bosch is afgezet; hij kan niet weg.
+</sp>
+
+<sp who=ban>
+<speaker>Eerste Bandiet.</speaker> <l>Kom, naar de grot des hoofdmans breng ik u.
+<l>Vrees niets; grootmoedig is hij; en geen vrouw,
+<l>Die hij ooit smaad of schande lijden deed.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>O Valentijn, om u draag ik dit leed.
+</sp>
+
+<stage type=exit>(<hi>Allen af.</hi>)</stage>
+
+
+<div2 id=ev.V.4>
+<head>Vierde Tooneel.</head>
+
+
+<stage type=setting><hi>Een ander gedeelte van &apos;t woud.</hi></stage>
+
+<stage type=entrance><hi rend=sc>Valentijn</hi> <hi>komt op.</hi></stage>
+
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wat maakt gewoonte ras den mensch iets eigen!
+<l>Deez&apos; donkere eenzaamheid, dit stille woud,
+<l>Behaagt mij meer dan rijke woel&apos;ge steden.
+<l>Hier kan ik eenzaam zitten, ongezien,
+<l>Om aan het klagend lied des nachtegaals
+<l>Mijn jammertonen en mijn wee te huwen.
+<l>O gij, wier woning in mijn boezem is,
+<l>Laat uwe huizing niet zoo lang verlaten,
+<l>Dat ze in verval raak en tot puinhoop wordt,
+<l>Zoodat geen spoor meer blijft van wat zij was.
+<l>O schenk mij, Silvia, door uw bijzijn kracht!
+<l>Gij, zoete nimf, troost uw verlaten herder!&mdash;
+<l>Doch wat gedruisch, wat kreten zijn dat heden?
+<l>Mijn makkers, die hun wil als wet beschouwen,
+<l>Zijn wis een armen zwerver op het spoor,
+<l>Ik word van hen bemind; toch valt het zwaar,
+<l>Altijd hun lust tot ruw geweld te teug&apos;len.
+<l>Verberg u, Valentijn; wie kan daar zijn?
+</sp>
+
+<stage>(<hi>Hij wijkt ter zijde.</hi>)</stage>
+
+<stage type=entrance>(<hi rend=sc>Proteus</hi>, <hi rend=sc>Silvia</hi> <hi>en</hi> <hi rend=sc>Julia</hi> <hi>komen op.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Mejonkvrouw, ik bewees u dezen dienst,&mdash;<ab type=lineNum>19</ab>
+<l>Schoon alles, wat uw dienaar doet, u niets is;&mdash;
+<l>Ik waagde &apos;t leven en ontrukte u hem
+<l>Die eer en liefde u zou ontwrongen hebben.
+<l>Gun mij als loon een enk&apos;len teed&apos;ren blik;
+<l>Om kleiner gunst kan ik u toch niet smeeken,
+<l>En minder nog dan dit kunt gij niet geven.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> Is dit een droom, wat ik daar zie en hoor?
+<l>Leen, Liefde, mij &apos;t geduld om kalm te blijven.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Ellendige en onzaal&apos;ge, die ik ben!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Ellendig waart gij, jonkvrouw, eer ik kwam;
+<l>Doch door mijn komst heb ik u heil gebracht.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Eerst &ugrave;w nabijheid maakt mij recht ellendig.
+</sp>
+
+<sp who=jul>
+<speaker>Julia</speaker> <l><stage rend=inline>(<hi>ter zijde</hi>).</stage> En mij, wanneer hij u nabij wil zijn.
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Had mij een uitgevaste leeuw gegrepen,
+<l>&apos;k Had liever &apos;t ondier tot ontbijt gestrekt,
+<pb n=187><l>Dan dat de valsche Proteus mij bevrijdde.
+<l>Tuig, Hemel, hoe ik Valentijn bemin,
+<l>Wiens leven ik zou koest&apos;ren als mijn ziele;
+<l>En evenzoo,&mdash;daar meer onmooglijk is,&mdash;
+<l>Haat ik den valschen, eedvergeten Proteus.
+<l>Daarom, ga heen; houd niet meer bij mij aan.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wat waagstuk zou ik, hoe de dood ook dreigde,
+<l>Niet voor een enk&apos;len zachten blik bestaan!
+<l>O oude vloek der liefde, dat den man
+<l>De vrouw, die hij bemint, niet minnen kan!
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker> <l>Dat Proteus, die hem mint, niet minnen kan!
+<l>Doorlees van Julia &apos;t hart, uw eerstbeminde;
+<l>Om haar hebt gij uw trouw in duizend stukken,
+<l>Die ge eeden noemt, verdeeld; en elken eed
+<l>Verkeert ge in meineed en zweert dien aan mij.
+<l>U rest geen trouw, of wel, gij hebt twee trouwen,
+<l>Wat erger is dan geen; veel beter geen,
+<l>Dan trouw in &apos;t meervoud; altijd &eacute;&eacute;n te veel.
+<l>Gij huich&apos;laar bij uw trouwsten vriend!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                                <l rend="hemistich(Gij huich&apos;laar bij uw trouwsten vriend!)">Wie kent,
+<l>Waar &apos;t liefde geldt, een vriend?
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker>                          <l rend="hemistich(Waar &apos;t liefde geldt, een vriend?)">Slechts Proteus niet.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Nu, zoo der overreding zachte geest
+<l>U niet tot zachtheid stemmen kan, zoo wil ik
+<l>Op krijgsmanswijs u met mijn arm veroov&apos;ren,
+<l>U tegen liefdes innigst wezen minnen,
+<l>U dwingen,&mdash;<ab type=lineNum>59</ab>
+</sp>
+
+<sp who=sil>
+<speaker>Silvia.</speaker>      <l rend="hemistich(U dwingen,)">Hemel!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>            <l rend="hemistich(U dwingen, Hemel!)">Dwingen, mijn te zijn.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn</speaker> <l><stage rend=inline>(<hi>vooruittredend</hi>).</stage> Ellend&apos;ling, weg van haar die ruwe hand!
+<l>Gij vriend van boos gehalte!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                  <l rend="hemistich(Gij vriend van boos gehalte!)">Valentijn!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Gij lage vriend, gij zonder trouw of liefde,&mdash;
+<l>Ja, zoo is nu een vriend,&mdash;gij aartsverrader!
+<l>Gij hebt mijn hoop bedrogen; slechts mijn oog
+<l>Kon me overtuigen. Nooit meer kan ik zeggen:
+<l>&ldquo;Ik heb een vriend&rdquo;; gij zoudt mij logenstraffen.
+<l>Wie is betrouwbaar, als de rechterhand
+<l>Meineedig wordt aan &apos;t harte? Proteus,
+<l>Mij grieft, dat ik u nooit meer mag vertrouwen,
+<l>Doch heel de wereld vreemd&apos;ling mij moet zijn.
+<l>O diepe zielswond! diepstvervloekte tijd,
+<l>Dat gij, een vriend, mijn ergste vijand zijt!
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Vernietigd ben ik door mijn schande en schuld.&mdash;
+<l>Vergeef mij, Valentijn! Zoo diep berouw
+<l>Als losgeld voor zoo zware schuld volstaat,
+<l>Dan bied ik &apos;t hier; voorwaar mijn smart is groot,
+<l>Zoo groot als mijn vergrijp.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker>                  <l rend="hemistich(Zoo groot als mijn vergrijp.)">Ik ben voldaan;
+<l>En reken u op nieuw een eerlijk man.
+<l>Wien boete niet verzoent, behoort ten hemel
+<l>Noch aarde; beide kan berouw verteed&apos;ren,
+<l>En de Eeuw&apos;ge heft hen op, die zich verneed&apos;ren.
+<l>En, dat ik u weer vriend acht, blijke u nu:
+<l>Al wat in Silvia mijn was, schenk ik u.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O, ik onzaal&apos;ge!
+</sp>
+
+<stage>(<hi>Zij zijgt neder.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker>                <l rend="hemistich(O, ik onzaal&apos;ge!)">Zie, wat schort mijn knaap?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Wat, knaap! h&eacute; schelmpje! wat moet dit beteek&apos;nen?
+<l>Zie op, en spreek!
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker>            <l rend="hemistich(Zie op, en spreek!)">O heer, mijn meester gaf mij
+<l>Een ring, om jonkvrouw Silvia dien te brengen;
+<l>En ik verzuimde &apos;t uit onachtzaamheid.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Waar is die ring, knaap?
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker>                            <l rend="hemistich(Waar is die ring, knaap?)">Hier, hier is hij, heer.
+</sp>
+
+<stage>(<hi>Zij geeft hem een ring.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Geef, laat mij zien.
+<l>Dat is de ring, dien ik aan Julia gaf.    <ab type=lineNum>93</ab>
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>O heer, vergeef mij; &apos;k gaf u den verkeerden;
+<l>Hier is de ring, dien gij aan Silvia zondt.
+</sp>
+
+<stage>(<hi>Zij toont een anderen ring.</hi>)</stage>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Doch hoe kwaamt gij aan dezen ring?
+<l>Ik gaf hem Julia bij het afscheidnemen.
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>En Julia zelf heeft hem aan mij gegeven,
+<l>En Julia zelf heeft hem hierheen gebracht.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Wat! Julia!
+</sp>
+
+<sp who=jul>
+<speaker>Julia.</speaker> <l>Ja, zie haar hier, het doel van al uw eeden,
+<l>Die ze alle diep in &apos;t harte heeft bewaard;
+<l>Hoe vaak hebt gij het diep gekliefd door meineed!
+<l>O Proteus, deze kleeding doe u blozen;
+<l>Schaam gij u, dat ik in onvoegzaam kleed
+<l>Mij hullen moest, indien ten minste schaamte
+<l>Bij valsche liefde woont!
+<l>Bloost Zedigheid, verzaakt de vrouw haar kleed,
+<l>Het grieft haar meer, verzaakt de man zijn eed.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>De man zijn eed! &apos;t is waar; o was de man
+<l>Steeds trouw, hij waar&apos; volmaakt; die eene feil
+<l>Wekt tal van zonden, maakt hem ziende blind;
+<l>Ontrouw valt af, eer &apos;t minnen recht begint.
+<l>Wat schoon siert Silvia, dat mijn oog thans niet,
+<l>Weer trouw, veel schooner nog in Julia ziet?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Komt, elk van u reik&apos; mij de hand!
+<l>Gun mij &apos;t geluk, dat ik den heilvre&ecirc; sluit;
+<l>De haat van zulk een vriendenpaar hebbe uit.
+</sp>
+
+<sp who=pro>
+<speaker>Proteus.</speaker> <l>Tuig, Hemel, &apos;k ben aan &apos;t einddoel mijner wenschen!
+</sp>
+
+<pb n=188><sp who=jul>
+<speaker>Julia.</speaker> <l>En ik der mijne!
+</sp>
+
+<stage type=entrance>(<hi>Bandieten komen op, met den Hertog en</hi> <hi rend=sc>Thurio</hi>.)</stage>
+
+<sp who=ban>
+<speaker>Bandieten.</speaker> <l>Een vangst, een vangst! een vangst!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Laat af! laat af! De hertog is &apos;t, de vorst!&mdash;
+<l>Sta uw genade een man in ongenade
+<l>Een welkomst toe, den balling Valentijn.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Wat, Valentijn!
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker>                <l rend="hemistich(Wat, Valentijn!)">Mijn Silvia daar! de mijne!
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Thurio, terug, of gij omarmt den dood.
+<l>Blijf buiten het bereik van mijnen toorn.
+<l>Noem Silvia de uwe niet, want, zoo gij &apos;t waagt,
+<l id=ev.V.4.129>Geheel Milaan beschermt u niet. Hier staat zij;
+<l>Nu, waag het, roer haar met een vinger aan,
+<l>Mijn liefste met een enk&apos;len ademtocht!
+</sp>
+
+<sp who=thu>
+<speaker>Thurio.</speaker> <l>Heer Valentijn, zij is mij onverschillig.
+<l>Ik reken hem een dwaas, die voor een meisje,
+<l>Dat hem verwerpt, zijn leven wagen wil;
+<l>Ik maak geen aanspraak op haar; zij is u.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Des te nietswaardiger en laag zijt gij,
+<l>Eerst zoo naar haar te staan, als gij het deedt,
+<l>En dan op zulk een wijs haar op te geven.
+<l>Voorwaar, bij de eere van mijn voorgeslacht,
+<l>Ik juich uw moed toe, Valentijn, en reken
+<l>De liefde u waardig van een keizerin.
+<l>Daarom, al wat mij griefde zij vergeten;
+<l>Mijn wrok vervloog; ik roep u weer terug.
+<l>Uw onbetwistb&apos;re waarde geeft u aanspraak
+<l>Op nieuwen rang; dies zeg ik: Valentijn,
+<l>Gij zijt een edelman van besten bloede;
+<l>Neem gij uw Silvia, want gij zijt haar waard.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ik dank u, vorst, uw gift maakt mij gelukkig.
+<l>Ik bid u thans, ter wille van uw dochter,
+<l>Verleen mij &eacute;&eacute;ne gunst, die ik u vraag.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>&apos;k Verleen u, wat ge ook wenscht, om uwentwil.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Die mannen hier, met wie ik heb geleefd,
+<l>Zijn ballingen van stand en van bekwaamheid.
+<l>Vergeef hun, wat zij hier misdreven hebben,
+<l>En roep hen uit hun ballingschap terug.
+<l>Zij zijn verbeterd, welgezind, beschaafd,
+<l>Voor hooge posten bruikbaar, edel vorst.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Gij wint uw pleit, als u vergeef ik hun;
+<l>Geef hun een werkkring zooals gij hen kent.
+<l>Doch gaan wij; ied&apos;re wanklank zij verdoofd
+<l>Door blij gejuich en ongekende feesten.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>En onderweg beproeve mijn verhaal
+<l>Bij uw genade een glimlach uit te lokken.
+<l>Wat dunkt u van deze&apos; edelknaap, mijn vorst?
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>De knaap is recht bevallig; zie, hij bloost.
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Ik zeg u, heer, bevallig eer, dan knaap.
+</sp>
+
+<sp who=her>
+<speaker>Hertog.</speaker> <l>Wat wilt gij daarmee zeggen?
+</sp>
+
+<sp who=val>
+<speaker>Valentijn.</speaker> <l>Behaagt het u, dan deel ik onder &apos;t gaan
+<l>U zaken mee, die u verbazen zullen.&mdash;
+<l>Kom, Proteus, dit moog&apos; heel uw boete zijn,
+<l>De onthulling van uw liefdes aan te hooren;
+<l>Dan moet mijn huwlijksdag ook de uwe zijn;
+<l>&Eacute;&eacute;n feest, &eacute;&eacute;n huis, &eacute;&eacute;n onderling geluk.
+</sp>
+
+<stage type=exit>(<hi>Allen af.</hi>)</stage>
+
+
+
+<div1>
+<head>Aanteekeningen.</head>
+
+
+<p>Van dit stuk is geen oudere druk bekend dan die in de Folio-uitgave van 1623 te vinden is; dat het reeds v&oacute;&oacute;r 1598 was opgevoerd, blijkt uit de vermelding er van door <hi rend=sc>Francis Meres</hi> in zijn <hi>Palladis Tamia</hi> (zie boven blz. <ref target=pb47 type=pageref>47</ref> en <ref target=pb120 type=pageref>120</ref>). Maar ongetwijfeld is het stuk eenige jaren ouder. Let men op den ganschen bouw er van, op den versbouw, het veelvuldig voorkomen van het rijm en van knuppelverzen, op de woordspelingen, op de wijze waarop de twee dienaren als Clowns optreden, op de overeenstemming met gedachten, in &ldquo;Venus en Adonis&rdquo; en in Sonnetten uitgedrukt, dan wordt men hiervan ten stelligste overtuigd. Het vermoeden, dat het stuk van 1591 dagteekent, komt zeker der waarheid zeer nabij. Of het ouder of jonger is dan &ldquo;<ref target=kv>de Klucht der vergissingen</ref>&rdquo; en &ldquo;Veel gemin, geen gewin&rdquo; is ondertusschen niet wel uit te maken.
+
+<p>Voor zoover wij kunnen oordeelen, heeft Shakespeare het plan voor dit stuk geheel zelf ontworpen en niet aan een novelle of iets dergelijks ontleend, al moge dit met enkele bijzonderheden wel het geval zijn. De geschiedenis van Proteus en Julia vertoont namelijk in enkele punten vrij groote overeenkomst met die van Don Felix en Felismena in den herdersroman <pb n=189><hi>La Diana</hi>, van den Spaanschen dichter Jorge de Montemayor<note n=1>Bij de verbranding van de boeken van Don Quichotte wordt deze roman gevonden, maar blijft, op aanraden van den geestelijke, gespaard.</note>, een werk, dat in 1598 in het Engelsch verscheen en veel opgang maakte, maar vele jaren vroeger vertaald en als handschrift door velen gelezen was; reeds in 1584 schijnt uit dezen roman een blijspel, <hi lang=en>The history of Felix and Philiomena</hi>, getrokken en ten hove opgevoerd te zijn.&mdash;Wie juist weten wil, wat Shakespeare aan dezen roman ontleend kan hebben, vindt de hiertoe noodige uittreksels in Delius&apos; Shakespeare-uitgave.
+
+<p>Bij de poging om dit stuk te beoordeelen, stuit men op groote moeilijkheden, zooals wel uit het zeer verschillend oordeel van uitgevers en critici blijken kan, waaromtrent men Knight in zijn Imperial edition van Shakespeare moge naslaan. Terwijl men, het geheele stuk door, den dichter aan zijn zeggingskracht, zijn versbouw, zijn rijkdom van gedachten, zijn wijze om de personen te karakteriseeren herkent, treft men in het beloop van het stuk zooveel tegenstrijdigheden aan, dat men tot het besluit moet komen, een verminkt en door onbevoegde hand gewijzigd stuk van Shakespeare voor zich te hebben. Men oordeele. Valentijn en Proteus worden naar het hof des keizers gezonden, maar komen bij een naamloozen hertog te Milaan aan; van een schoonen ridder Eglamour wordt in Verona verteld, dat hij naar Julia&apos;s hand dingt, en in Milaan wordt van Eglamour getuigd, dat hij, om de nagedachtenis zijner gestorven geliefde in eere te houden, de gelofte van eeuwige kuischheid heeft afgelegd; hij wordt door Silvia gekenschetst als ridder zonder smet of blaam en door haar als beschermer gekozen op haar reis, maar weet, door roovers overvallen, verbazend snel beenen te maken; Julia heeft in het eerste bedrijf een vader, maar geeft, als zij haar tocht gaat ondernemen, het beheer van haar vermogen, landerijen enz. aan haar kamerjuffer en vertrouwde over; als Proteus een poos met Silvia gekeuveld heeft, zegt hij: &ldquo;Ik heb nog alleen hare beeltenis gezien&rdquo;; Julia geeft aan Silvia eerst een verkeerden brief en daarna den rechten, maar van den eersten hoort men niets meer; Silvia ontmoet volgens afspraak den ridder Eglamour bij de cel van broeder Patricius, en toch zegt later haar vader, dat zij er niet geweest is; Valentijn zucht in het bosch om Silvia, ontrukt haar aan de handen van zijn trouweloozen vriend Proteus, die door Silvia verafschuwd wordt, maar staat, zoodra Proteus schuld belijdt en berouw toont, hem zijn Silvia oogenblikkelijk af, en deze heeft niets hiertegen te zeggen.
+
+<p>Bij nauwkeurige beschouwing vindt men enkele bijzonderheden, die ons vermoeden, dat het stuk gewijzigd is geworden, zeer versterken. Waarschijnlijk kwamen Valentijn en Proteus wel aan &apos;s keizers hof aan, en is de keizer tot hertog gedegradeerd; want tot tweemaal toe zegt de hertog, eerst van Proteus, daarna van Valentijn, dat zij de liefde eener <hi>keizerin</hi> waardig zijn; van den laatste, dat hij in den raad eens <hi>keizers</hi> op zijn plaats zou wezen; de omgang van Valentijn met Silvia getuigt van een zeer groot verschil in stand; daarmede strookt de hoogheid van de verwijten des hertogs aan Valentijn, die van het <hi>koninklijk</hi> hof verbannen wordt; de omgang van Valentijn met Silvia was ongetwijfeld door den keizer argeloos toegelaten, omdat het verschil in rang zeer groot was.&mdash;Dat de keizer tot een hertog wordt, die de wenschen van een minnaar als Thurio begunstigt, is zeker aan een lateren bewerker te danken.&mdash;In het oorspronkelijk stuk was Silvia&apos;s portret zeker van meer beteekenis en werd door Proteus gezien en bewonderd, v&oacute;&oacute;r hij haar zelf zag. Eglamour was waarschijnlijk ook een ander persoon; misschien had Valentijn de reis van Silvia met Eglamour en beider vertrouwelijken omgang verkeerd opgevat en zijn geliefde voor trouweloos gehouden, zoodat hij daarom bereid is, haar aan Proteus af te staan.&mdash;Julia zal waarschijnlijk een brief van Proteus, die aan haarzelf gericht was, aan Silvia overhandigd hebben en zich daardoor aan deze bekend gemaakt.&mdash;Wat er van dit alles zij, zooveel kan uit het bovenstaande blijken, dat het stuk, ons door de Folio-uitgave van 1623 bewaard gebleven, vermoedelijk aanmerkelijk afwijkt van wat de dichter geschreven heeft; de leemten, die wij er in opmerken, kunnen niet wel aan een plan- of gedachteloosheid des dichters zijn toe te schrijven. Het is dus hoogstwaarschijnlijk, dat het oorspronkelijk stuk door een omwerker is gewijzigd; misschien was het verminkt geraakt of verloren gegaan, en heeft een onbevoegde hand het met behulp van gedeeltelijke handschriften of uitgeschreven rollen weder trachten samen te stellen.
+
+<milestone unit=tb>
+
+<p><ref target=ev.I.1.2>I. 1. 2.</ref> <hi rend=ex>Thuiszitten maakt een jonkman tot een huishen.</hi> Die niet verder ziet dan de muren van zijn huis. In &apos;t Engelsch: <hi lang=en>Homekeeping youth have ever homely wits.</hi>
+
+<p><ref target=ev.I.1.17>I. 1. 17.</ref> <hi rend=ex>Want ik wil voor u bidden, Valentijn.</hi> <hi lang=en>For I will be thy beadsman, Valentine.</hi> Een man die aangesteld is om gebeden voor iemand te doen.
+
+<p><ref target=ev.I.1.27>I. 1. 27.</ref> <hi rend=ex>Wat, laarzen?</hi> enz. In &apos;t Engelsch is hier een drievoudige woordspeling met <hi lang=en>boots</hi>, laarzen, <hi lang=en>to give the boots</hi>, belachelijk maken, en <hi lang=en>to boot</hi>, baten, bevoordeelen.&mdash;De Spaansche laarzen, hier genoemd, zijn het bekende foltertuig.
+
+<p><ref target=ev.I.1.53>I. 1. 53.</ref> <hi rend=ex>Want aan de haven wacht</hi> enz. In &apos;t Engelsch staat <hi lang=en>at the road</hi>, aan de reede; men zou dus zeggen, dat Verona hier als een zeestad beschouwd moet worden. Er zijn bewijzen <pb n=190 id=pb190>genoeg, dat Shakespeare met de geographie van Itali&euml; zeer goed vertrouwd was; men behoeft hem volstrekt niet van onwetendheid te verdenken. De toeschouwers waren Londenaars; bij grootere reizen naar een anderen staat moesten waterwegen gevolgd worden; de dichter maakt er voor zijn personen daarom ook gebruik van en stelt hiermede de reis zijn toeschouwers aanschouwelijk voor oogen; al ontleent hij de namen van personen en plaatsen aan Itali&euml;, Engelsche toestanden staan hem voor den geest; hier geeft hem een oogenblik later het nagenoeg eveneens klinken van <hi lang=en>ship</hi> en <hi lang=en><corr sic=scheep>sheep</corr></hi> (schip en schaap) aanleiding tot een woordspeling; later wil Lans (<ref target=ev.II.3.58>II. 3. 58.</ref>) het stroombed met tranen vullen, waarbij den toeschouwers de Theems voor den geest kwam; bij struikroovers dachten deze terstond aan de bekende roovers van Sherwoodforest, bij wie broeder Tuck kapelaan was; daarom laat de dichter (<ref target=ev.IV.1.36>IV. 1. 36.</ref>) Italiaansche roovers bij de geschoren kruin van dien pater zweren. Zulk een dichterlijke vrijheid, die de voorgestelde zaken recht aanschouwelijk maakte, veroorloofden zich in de middeleeuwen de dichters algemeen, en dit gebruik was tot den tijd van Shakespeare in zwang gebleven. Aan onwetendheid des dichters behoeft men niet te denken.
+
+<p><ref target=ev.I.1.101>I. 1. 101.</ref> <hi rend=ex>Ik, een verloren schaap, gaf uw brief aan haar, een verkoren schaap.</hi> In &apos;t Engelsch: <hi>I, a lost mutton, gave your letter to her, a laced mutton.</hi> Een woordspeling met <hi>lost</hi> en <hi>laced</hi>, waarbij men bedenke, dat in Sh.&apos;s tijd de <hi>a</hi> in <hi>laced</hi> nog niet met den e-klank werd uitgesproken, zoodat de overeenkomst van <hi>lost</hi> en <hi>laced</hi> toen grooter was dan thans. <hi>Laced</hi> beteekent eigenlijk gevangen of vastgehouden, daar het substantief <hi>lace</hi> of <hi>strik</hi> (in &apos;t Latijn <hi lang=la>laqueus</hi>) of ook een <hi>net</hi> beteekent, zoodat <hi>laced</hi> een goede tegenstelling met <hi>lost</hi> vormt. Men denke dus niet aan een met kanten behangen jonkvrouw en veel minder geve men <hi>laced mutton</hi> de beteekenis van &ldquo;licht vrouwspersoon&rdquo;,&mdash;want al is Flink, die woedend is, dat hij geen fooi ontvangen heeft, brutaal genoeg om zich zulk een uitdrukking ten opzichte van de geliefde zijns meesters te veroorloven, zijn heer zou toch zeker zulk een gezegde niet zoo kalm aanhooren.
+
+<p><ref target=ev.I.1.110>I. 1. 110.</ref> <hi rend=ex>U te schutten</hi>, enz. Dit geheele gesprek van Proteus met zijn dienaar is vol woordspelingen. Hij gebruikt hier het woord <hi lang=en>pound</hi> in de beteekenis van in de schutskooi steken, zooals men verdwaald vee doet. Flink vat het op als een pond sterling en splitst daarna het woord <hi lang=en>pinfold</hi>, schaapskooi, in <hi lang=en>pin</hi>, een speld, een waardeloos ding, en <hi lang=en>fold</hi>. Daarop volgt weer de samenvoeging van <hi lang=en>nod</hi>, knikken, met het voornaamwoord <hi lang=en>I</hi>, ik, of het bevestigende <hi lang=en>ay</hi>, ja, tot <hi lang=en>noddy</hi>, onnoozele bloed.&mdash;In het origineel voegde Theobald achter het zeggen: <hi lang=en>But what said she?</hi> als waarschijnlijk uitgevallen, de woorden: <hi lang=en>Did she nod?</hi> welke op blz. 160 ook in de vertaling zijn opgenomen; zoo kon het onvertaalbare <hi lang=en>noddy</hi> door een andere woordspeling vervangen worden.
+
+<p><ref target=ev.I.1.152>I. 1. 152.</ref> <hi rend=ex>De grootte uwer mildheid</hi> enz. Hier heeft het Engelsch een woordspeling met <hi lang=en>testify</hi>, betuigen, en <hi lang=en>testern</hi>, met een <hi lang=en>tester</hi>,&mdash;een geldstukje van een halven shilling waarde, waar een kop, <hi>testa</hi>, <hi>t&ecirc;te</hi>, op gestempeld was,&mdash;begiftigen, een woord van Sh.&apos;s maaksel.
+
+<p><ref target=ev.I.1.156>I. 1. 156.</ref> <hi rend=ex>Gij zijt de veiligheid van &apos;t schip.</hi> Op het zeggen, dat wie voor de galg bestemd is, niet verdrinkt, zinspeelt Sh. ook in den &ldquo;Storm&rdquo;, I. 1. 30.
+
+<p><ref target=ev.I.2.55>I. 2. 55.</ref> <hi rend=ex>Meisjes zeggen zedig neen.</hi> Een Engelsch spreekwoord zegt: <hi lang=en>Maids say nay, and take it</hi>, &ldquo;meisjes zeggen neen en tasten toe&rdquo;.
+
+<p><ref target=ev.I.2.83>I. 2. 83.</ref> <hi rend=ex>Luchte liefde.</hi> Een lied, &ldquo;Light o&apos; love&rdquo; beginnend, waarop gedanst werd; zooals men toen gewoon was te doen; dezelfde wijs wordt genoemd in &ldquo;Veel leven om niets&rdquo;, III. 4. 44, waar gezegd wordt: &ldquo;zing gij het, dan zal ik dansen&rdquo;.&mdash;In het volgende worden allerlei uitdrukkingen, voor muziek gebruikelijk, tevens in een anderen zin opgevat; zoo beteekent <hi lang=en>burden</hi> zoowel &ldquo;refrein&rdquo; als &ldquo;last&rdquo;, <hi lang=en>base</hi> &ldquo;basstem&rdquo; en tevens een op het land gebruikelijk krijgertjesspel, ook <hi lang=en>prison base</hi> of <hi lang=en>prison bars</hi> geheeten, waarbij <hi lang=en>to bid the base</hi>, het uittarten is van den speler, dat hij niet gekregen kan worden; men zie &ldquo;Venus en Adonis&rdquo; reg. 303 en &ldquo;Cymbeline&rdquo; V 3. 19.
+
+<p><ref target=ev.I.2.114>I. 2. 114.</ref> <hi rend=ex>Mijn boezem zij uw bed.</hi> De dames hadden voor aan haar keurs een zakje voor het bergen van brieven; meermalen wordt hierop gezinspeeld, men zie bijv. in dit stuk <ref target=ev.3.1.144>III. 1. 144</ref> en <ref target=ev.3.1.250>250</ref>.
+
+<p><ref target=ev.I.2.137>I. 2. 137.</ref> <hi rend=ex>Dat gij ze diep vereert.</hi> Er staat: <hi lang=en>you have a month mind to them</hi>, gij zijt er zeer belust op, zooals een vrouw soms heftige, voorbijgaande <corr sic=verlangsten>verlangens</corr> heeft.
+
+<p><ref target=ev.II.1.2>II. 1. 2.</ref> <hi rend=ex>Die hoort mij niet.</hi> In &apos;t Engelsch is een woordspeling met <hi lang=en>on</hi> en <hi lang=en>one</hi>, wat toen tamelijk gelijk werd uitgesproken.
+
+<p><ref target=ev.II.1.26>II. 1. 26.</ref> <hi rend=ex>Als een bedelaar op Allerheiligen.</hi> Op Allerheiligen liepen bedelaars, zacht zingende, de huizen af en ontvingen dan zielekoeken, <hi lang=en>soulcakes</hi>, als het loon hunner gebeden voor de dooden.&mdash;Voor het <hi rend=ex>stappen als een leeuw</hi> staat in &apos;t oorspronkelijke: &ldquo;als een der leeuwen&rdquo;, waardoor de dichter zijn gehoor de leeuwen van den Tower voor den geest bracht.
+
+<p><ref target=ev.II.1.79>II. 1. 79.</ref> <hi rend=ex>Zijn hoosbanden.</hi> Het vergeten der hoosbanden wordt door Shakespeare meermalen als een teeken van verliefdheid aangehaald, zie &ldquo;Elk wat wils&rdquo; (<hi lang=en>As you like it</hi>), III. 2. 397; men vergelijke ook &ldquo;Hamlet&rdquo; II. 1. 80.&mdash;Flink overdrijft nu nog, en zegt, dat Valentijn zelfs vergat zijn hozen aan te trekken.
+
+<pb n=191><p><ref target=ev.II.1.106>II. 1. 106.</ref> <hi rend=ex>Heer Valentijn, mijn dienaar.</hi> In Sh.&apos;s tijd werden de vereerders of minnaars eener schoone of gebiedster, <hi>Madam</hi> of <hi>Mistress</hi>, vaak <hi>servant</hi> genoemd, wat dus nagenoeg hetzelfde beteekent als <hi>lover</hi>.
+
+<p><ref target=ev.II.3.4>II. 3. 4.</ref> <hi rend=ex>De verloopen zoon.</hi> In &apos;t Engelsch zegt Lans <hi lang=en>prodigious</hi> voor <hi lang=en>prodigal</hi> en <hi lang=en>imperials</hi> voor <hi lang=en>emperor&apos;s</hi> of <hi lang=en>imperial</hi>.&mdash;De naam van den hond, <hi lang=en>Crab</hi>, beteekent wilde appel.
+
+<p><ref target=ev.II.3.39>II. 3. 39.</ref> <hi rend=ex>Het tij verloopt.</hi> Het Engelsch heeft hier een woordspeling met <hi lang=en>tide</hi>, &ldquo;getij&rdquo; en <hi lang=en>tied</hi>, de vastgebondene (de hond).
+
+<p><ref target=ev.II.4.152>II. 4. 152.</ref> <hi rend=ex>Een macht, een overheid.</hi> Van een hoogen rang in de engelenschaar; zie Paulus&apos; Brief aan de Romeinen, VIII. 38.
+
+<p><ref target=ev.II.4.192>II. 4. 192.</ref> <hi rend=ex>Gelijk een gloed een and&apos;ren gloed verdringt.</hi> Men vindt dezelfde beelden in &ldquo;Coriolanus&rdquo;, IV. 7. 54.
+
+<p><ref target=ev.II.4.196>II. 4. 196.</ref> <hi rend=ex>Is &apos;t nu mijn oog.</hi> Het Engelsch is hier onvolledig; <hi lang=en>Is it mine or</hi> enz. Het is waarschijnlijker dat hier gelezen moet worden met Warburton: <hi lang=en>Is it mine eye or</hi> enz. dan, met Malone, <hi lang=en>Is it her mien or</hi> enz.
+
+<p><ref target=ev.II.4.201>II. 4. 201.</ref> <hi rend=ex>Zooals een wassen beeld bij &apos;t vuur.</hi> Men vergelijke &ldquo;Koning Jan&rdquo; V. 4. 24. Er wordt gedacht aan wassen beelden, die door toovenaars bij het vuur werden gehouden, om door smelten van het beeld de persoon, die er door werd voorgesteld, te doen wegkwijnen.
+
+<p id=aant.II.5.1><ref target=ev.II.5.1>II. 5. 1.</ref> <hi rend=ex>Welkom in Milaan.</hi> In den tekst der folio-uitgave staat Padua, zooals in <ref target=ev.III.1.81>III. 1. 81</ref> en <ref target=ev.V.4.129>V. 4. 129</ref>. Verona voor Milaan. Het is mogelijk, dat Shakespeare zelf zoo geschreven heeft, voor hij vast bepaald had, waar hij het stuk zou laten spelen, maar &apos;t kan ook aan een omwerker liggen.
+
+<p><ref target=ev.II.5.61>II. 5. 61.</ref> <hi rend=ex>Dat gij een Christenmensch een glas bier gunt.</hi> In &apos;t Engelsch: <hi lang=en>As to go to the ale with a Christian.</hi> &ldquo;Ale&rdquo; beteekent <hi>bier</hi>, maar ook een christelijk volksfeest, waarop, v&oacute;&oacute;r de hervorming, het door de geestelijken gebrouwen bier verkocht werd, aan het volk op het kerkhof, aan de aanzienlijken in de kerk zelf; de opbrengst was voor het onderhoud der kerken bestemd. Naar de plaats en het jaargetijde droeg het bier verschillende namen: <hi lang=en>Lamb-ale</hi>, <hi lang=en>Bride-ale</hi>, <hi lang=en>Church-ale</hi>, <hi lang=en>Whitesun-ale</hi>.&mdash;Als Flink met Lans niet naar een <hi lang=en>Ale</hi>, naar zulk een kerkelijk feest, wil gaan, is hij geen christenmensch.
+
+<p><ref target=ev.II.7.53>II. 7. 53.</ref> <hi rend=ex>Met een klep.</hi> In &apos;t Engelsch staat: <hi lang=en>with a codpiece</hi>, wat aldus verklaard kan worden: &ldquo;a part of the male dress, very indelicately conspicuous in the poet&apos;s time&rdquo;. Het werd nog al sterk opgevuld, zoodat het wel als een speldenkussen dienst kon doen, waarom er ook in andere comedies van dien tijd de draak mee gestoken wordt. Men bezigde dit deel ook wel als zak om de beurs in te bergen, zie &ldquo;Winteravondsprookje&rdquo;, IV. 4. 623.
+
+<p><ref target=ev.III.1.81>III. 1. 81.</ref> <hi rend=ex>Hier in deze stad.</hi> In den tekst staat: <hi lang=en>in Verona here</hi>.
+
+<p><ref target=ev.III.1.153>III. 1. 153.</ref> <hi rend=ex>Gij Pha&euml;ton, gij and&apos;re Merops-zoon.</hi> De vertaling is hier niet letterlijk; er staat eigenlijk: &ldquo;Wat! Pha&euml;ton,&mdash;want gij zijt Merops&apos; zoon&rdquo;.&mdash;Pha&euml;ton was de zoon van Helios, den Zonnegod, en van Clymene, die met den koning Merops, in Aethiopi&euml;, gehuwd was; deze was dus Pha&euml;ton&apos;s aardsche vader te noemen. De tusschenzin <hi>want</hi> enz. kan eenvoudig beteekenen: &ldquo;want gij <hi>zijt</hi> inderdaad een Pha&euml;ton&rdquo;, en dan is de vertaling op blz. <ref target=pb175 type=pageref>175</ref> zeer juist. Wil men er uit lezen: &ldquo;want gij zijt een zoon van Merops, niet van den zonnegod, maar van een mensch, dus van een lage afkomst&rdquo;,&mdash;dan moet de hier gegeven, meer letterlijke vertaling gevolgd worden; deze verklaring komt mij echter vrij gezocht voor en het &ldquo;want&rdquo;, <hi lang=en>for</hi>, past er slecht bij; de eerste schijnt mij de ware te zijn.
+
+<p><ref target=ev.III.1.263>III. 1. 263.</ref> <hi rend=ex>Dubbele schurk.</hi> In meer dan &eacute;&eacute;n opzicht een schurk.
+
+<p><ref target=ev.III.1.300>III. 1. 300.</ref> <hi rend=ex>Toon door Sint Nikolaas u flink.</hi> Sint Nikolaas was de beschermheilige der scholieren en moest daarom Flink in &apos;t lezen bijstaan. De legende verhaalt, dat hij reeds als knaap bisschop werd.
+
+<p><ref target=ev.III.1.307>III. 1. 307.</ref> <hi rend=ex>Zij kan naaien.</hi> In &apos;t Engelsch: <hi lang=en>she can sew</hi>, waarvoor in de folio-uitgave <hi lang=en>sowe</hi> geschreven wordt, zoodat de volgende vraag <hi lang=en>can she so</hi> het woord herhaalt. Hier moest de vertaler zich anders helpen; evenzoo bij het volgende, waar het woord <hi lang=en>stock</hi> eerst in de beteekenis van &ldquo;kapitaal&rdquo;, &ldquo;geld&rdquo;, daarna in die van &ldquo;sok&rdquo;, wordt opgevat.
+
+<p><ref target=ev.IV.1.36>IV. 1. 36.</ref> <hi rend=ex>Bij Robin Hood&apos;s</hi> enz. De bandiet zweert bij de kale kruin van broeder Tuck, den priester en biechtvader van den gevierden roover en wilddief Robin Hood, van Sherwoodforest, die aan iederen Engelschman bekend was en die ook in Scott&apos;s Ivanhoe voorkomt. Zie boven blz. <ref target=pb190 type=pageref>190</ref>.
+
+<p><ref target=ev.IV.2.76>IV. 2. 76.</ref> <hi rend=ex>Dat de kerfstok vol is.</hi> Dat het niet meer te berekenen is.
+
+<p><ref target=ev.IV.4.39>IV. 4. 39.</ref> <hi rend=ex>Toen ik van jonkvrouw Silvia afscheid nam.</hi> Steevens achtte het beter hier Julia te lezen in plaats van Silvia. Het schijnt inderdaad, dat Lans aan een vroeger afscheid dacht.
+
+<p><ref target=ev.IV.4.60>IV. 4. 60.</ref> <hi rend=ex>Door de knapen van den hondenslager.</hi> Er staat eigenlijk &ldquo;door de knapen van den beul&rdquo;, &ldquo;<hi lang=en>the hangman&apos;s boys</hi>&rdquo;. Sommigen verkiezen <hi lang=en>the hangman boys</hi>, waarbij <hi lang=en>hangman</hi> als adjectief beschouwd wordt, zoodat het beteekenen zou: de ellendige, schurkachtige jongens, de galgenbrokken.
+
+<p><ref target=ev.V.4.129>V. 4. 129.</ref> <hi rend=ex>Geheel Milaan beschermt u niet.</hi> In &apos;t Engelsch staat: <hi lang=en>Verona shall not hold thee.</hi> Zie boven de <ref target=aant.II.5.1>aanteekening</ref> op <ref target=ev.II.5.1>II. 5. 1</ref>.
+
+
+
+</body>
+<back>
+
+<divGen type=toc id=toc>
+
+<divGen type=Colophon>
+
+</back>
+</text>
+</TEI.2>
