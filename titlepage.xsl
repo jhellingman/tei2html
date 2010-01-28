@@ -130,4 +130,8 @@
         <i><xsl:apply-templates mode="titlePage"/></i>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='sup']" mode="titlePage">
+        <sup><xsl:apply-templates/></sup>
+    </xsl:template>
+
 </xsl:stylesheet>
