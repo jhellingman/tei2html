@@ -19,10 +19,6 @@
 
     Stylesheet to format inline elements, to be imported in tei2html.xsl.
 
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
-
 -->
 
 <xsl:stylesheet
@@ -36,13 +32,15 @@
     <!--====================================================================-->
     <!-- Poetry -->
 
-    <!-- top-level gets class=lgouter, nested get class=lg. This we use to center the entire poem on the screen, and still keep the left side of all stanzas aligned. -->
+    <!-- top-level gets class=lgouter, nested get class=lg. This we use to 
+         center the entire poem on the screen, and still keep the left side 
+         of all stanzas aligned. -->
     <xsl:template match="lg">
         <xsl:call-template name="closepar"/>
         <div>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:attribute name="class">
-                <xsl:if test="not(parent::lg)">lgouter<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
@@ -71,7 +69,10 @@
             </xsl:if>
 
             <xsl:if test="contains(@rend, 'hemistich(')">
-                <span class="hemistich"><xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/></span>
+                <span class="hemistich">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/>
+                    <xsl:text> </xsl:text>
+                </span>
             </xsl:if>
             <xsl:apply-templates/>
         </p>
