@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 .q1 { background-color: #FFFFCC; }
@@ -22,4 +22,4 @@
 .h1 {  background-color: #CCFFFF;  }
 
 ]]>
-</stylesheet>
+</style>

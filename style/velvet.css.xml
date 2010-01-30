@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 body
@@ -58,4 +58,4 @@ a.hidden:hover, a.noteref:hover
 
 
 ]]>
-</stylesheet>
+</style>

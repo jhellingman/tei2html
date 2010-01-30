@@ -1,15 +1,15 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- This HTML file has been automatically generated from an XML source. -->
+<!-- This HTML file has been automatically generated from an XML source on 2010-01-30T14:55:08.489+01:00. -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
    <head>
       <title>Main Title of Work Goes Here</title>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
       <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"></meta>
-      <meta name="author" content="Author of Work (Birth-year&#8212;Death-year)"></meta>
+      <meta name="author" content="Author of Work (Birth-year&#8212;Death-year) A. U. Thor W. Riter"></meta>
       <link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/"></link>
-      <meta name="DC.Creator" content="Author of Work (Birth-year&#8212;Death-year)"></meta>
+      <meta name="DC.Creator" content="Author of Work (Birth-year&#8212;Death-year) A. U. Thor W. Riter"></meta>
       <meta name="DC.Title" content="Main Title of Work Goes Here"></meta>
       <meta name="DC.Date" content="2009-12-13"></meta>
       <meta name="DC.Language" content="en-US"></meta>
@@ -565,7 +565,7 @@ h5, h6
     line-height:1em;
 }
 
-p,p.initial
+p
 {
     text-indent:0;
 }
@@ -659,13 +659,13 @@ body, a.hidden
     color: black;
 }
 
-h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
+.titlePage
 {
     color: #001FA4;
     font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-.titlePage
+h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
 {
     color: #001FA4;
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -723,7 +723,7 @@ body
 }
 
 
-</style><style type="text/css">
+
                 
                 .xd20e279
                 {
@@ -1030,7 +1030,7 @@ body
          <div class="div0" id="bk01">
             <h2 class="label">Book I</h2>
             <h2 id="xd20e105">This is a Test Document</h2>
-            <p id="xd20e107">This is a test document<a class="noteref" id="xd20e109src" href="#xd20e109">1</a>, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping
+            <p id="xd20e107" class="firstpar">This is a test document<a class="noteref" id="xd20e109src" href="#xd20e109">1</a>, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping
                me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my stylesheet (yes, I
                sometimes forget myself). 
             </p>
@@ -1042,7 +1042,7 @@ body
             <div id="ch04" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h2 class="label">Chapter IV</h2>
                <h2 id="xd20e113">A Chapter<a class="noteref" id="xd20e115src" href="#xd20e115">1</a> Dealing with Text Styles
                </h2>
-               <p id="xd20e118" class="dropcap">This is a sample paragraph, with<span class="pagenum">[<a id="pb002" href="#pb002">2</a>]</span> some <i id="xd20e122">italic</i> and <b id="xd20e125">bold</b> text. We continue the test with some
+               <p id="xd20e118" class="firstpar dropcap">This is a sample paragraph, with<span class="pagenum">[<a id="pb002" href="#pb002">2</a>]</span> some <i id="xd20e122">italic</i> and <b id="xd20e125">bold</b> text. We continue the test with some
                   <span class="smallcaps" id="xd20e128">Small Caps</span>, some <span id="xd20e131" class="xd20e131">fraktur</span>, and some <span class="letterspaced" id="xd20e135">letterspaced</span>
                   text.<a class="noteref" id="xd20e138src" href="#xd20e138">2</a> As you can see, the preceding sentence is followed by
                   a footnote. <span id="xd20e144" class="xd20e144">We can <span class="caps" id="xd20e146">shout</span> in big red letters.</span> We also have a reference to the <a href="#ch05" id="xd20e150">next chapter</a>. It is very well possible to include some text in hieroglyphs, <img src="images/hg2101.png" alt="Inline Hieroglyphs"></img> using in-line images as shown here.
@@ -1051,7 +1051,7 @@ body
                   <div class="body">
                      <div id="xd20e160" class="div1">
                         <h2 id="xd20e161">Section head in quoted material</h2>
-                        <p id="xd20e163">This is a paragraph in quoted material<a class="noteref" id="xd20e165src" href="#xd20e165">3</a> This paragraph contains a footnote, to verify correct handling of this convoluted situation during the transformation.
+                        <p id="xd20e163" class="firstpar">This is a paragraph in quoted material<a class="noteref" id="xd20e165src" href="#xd20e165">3</a> This paragraph contains a footnote, to verify correct handling of this convoluted situation during the transformation.
                         </p>
                      </div>
                   </div>
@@ -1072,7 +1072,7 @@ body
                <h2 id="xd20e183" class="label">Chapter V</h2>
                <h2 id="xd20e185">Formatting Tables</h2>
                <div class="argument">
-                  <p id="xd20e188">This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p>
+                  <p id="xd20e188" class="firstpar">This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p>
                </div>
                <div class="epigraph">
                   <div class="q" id="xd20e192">
@@ -1233,10 +1233,10 @@ body
                   
                </p>
                <div class="figure  xd20e461width" id="test"><img src="images/test.jpg" alt="This is the heading" width="80" height="80"></img><p class="figureHead">This is the heading</p>
-                  <p id="xd20e464">This is the description.</p>
+                  <p id="xd20e464" class="firstpar">This is the description.</p>
                </div>
                <div class="figure floatLeft xd20e466 xd20e466width" id="test1"><a href="images/test.jpg"><img src="images/test.jpg" alt="Tarsier" width="80" height="80"></img></a><p class="figureHead">Tarsier</p>
-                  <p id="xd20e469">This is a somewhat longer test to verify we can limit the size of an image box.</p>
+                  <p id="xd20e469" class="firstpar">This is a somewhat longer test to verify we can limit the size of an image box.</p>
                </div>
                <p id="xd20e471">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
@@ -1292,7 +1292,7 @@ body
                </div>
                <div class="div2" id="xd20e540"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e541" class="label">Section</h3>
                   <h3 id="xd20e543">Lists</h3>
-                  <p id="xd20e545">In this section, the various types of lists are demonstrated.</p>
+                  <p id="xd20e545" class="firstpar">In this section, the various types of lists are demonstrated.</p>
                   <p id="xd20e547">First, we start with a simple, unnumbered list. List items can contain all the normal in-line elements, such as notes, corrections,
                      etc.
                   </p>
@@ -1481,7 +1481,7 @@ body
                   </p>
                </div>
             </div><span class="pagenum">[<a id="xd20e680" href="#xd20e680">23</a>]</span><div id="ch6" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h2 id="xd20e682">Tests of poetry</h2>
-               <p id="xd20e684">This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&#8217;s
+               <p id="xd20e684" class="firstpar">This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&#8217;s
                   aligned. Note that the technique used to center an entire block of text does not work in IE.
                   
                   </p>
@@ -1551,16 +1551,16 @@ body
          <div id="index" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h2 id="xd20e766">Index</h2>
             <div class="transcribernote indextoc" id="xd20e768"><a href="#xd20e770">A</a> | <a href="#xd20e775">B</a> | <a href="#xd20e780">C</a> | <a href="#xd20e785">D</a></div>
             <div class="div2" id="xd20e769"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e770">A.</h3>
-               <p id="xd20e772">A is een aapje.</p>
+               <p id="xd20e772" class="firstpar">A is een aapje.</p>
             </div>
             <div class="div2" id="xd20e774"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e775">B.</h3>
-               <p id="xd20e777">B is een Boom.</p>
+               <p id="xd20e777" class="firstpar">B is een Boom.</p>
             </div>
             <div class="div2" id="xd20e779"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e780">C.</h3>
-               <p id="xd20e782">C is een Cent.</p>
+               <p id="xd20e782" class="firstpar">C is een Cent.</p>
             </div>
             <div class="div2" id="xd20e784"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e785">D.</h3>
-               <p id="xd20e787">D is een Drommedaris.
+               <p id="xd20e787" class="firstpar">D is een Drommedaris.
                   <br id="xd20e789"></br>en een Duizendpoot.
                </p>
             </div>
@@ -1591,7 +1591,7 @@ body
             <div class="transcribernote" id="xd20e793">
                <h2>Colophon</h2>
                <h3>Availability</h3>
-               <p id="xd20e33">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US.
+               <p id="xd20e33" class="firstpar">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US.
                   This test file itself is released under the GNU General Public License, version 3.0, or any later version. See <a class="exlink" title="External link" href="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</a>.
                </p>
                <p id="xd20e38">Typically, the following text will be used:</p>
@@ -1603,7 +1603,7 @@ body
                   
                </p>
                <h3>Encoding</h3>
-               <p id="xd20e64">Details of encoding go here. Here you can describe any special conventions used in the text, such as special tags. This is
+               <p id="xd20e64" class="firstpar">Details of encoding go here. Here you can describe any special conventions used in the text, such as special tags. This is
                   also the place to describe any editorial policy followed when preparing the text.
                </p>
                <h3>Revision History</h3>

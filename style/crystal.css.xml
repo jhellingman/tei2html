@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 body
@@ -118,4 +118,4 @@ h1, h2, h3, h4, h5, h6
 }
 
 ]]>
-</stylesheet>
+</style>
