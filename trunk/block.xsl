@@ -217,6 +217,7 @@
                 <xsl:variable name="class">
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
                     <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
+                    <xsl:call-template name="first-paragraph-class"/>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/>
                 </xsl:variable>
 
@@ -230,6 +231,19 @@
                 <xsl:apply-templates/>
             </p>
         </xsl:if>
+    </xsl:template>
+
+
+    <!-- Determine whether a paragraph is the first of a set (used to determine
+         whether an indentation is required in some cases -->
+    <xsl:template name="first-paragraph-class">
+        <xsl:variable name="preceding">
+            <xsl:value-of select="name(preceding-sibling::*[1])"/>
+        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="position() = 1">firstpar </xsl:when>
+            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb'">firstpar </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
 

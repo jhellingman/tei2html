@@ -1,4 +1,4 @@
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 body
@@ -63,4 +63,4 @@ table
 }
 
 ]]>
-</stylesheet>
+</style>

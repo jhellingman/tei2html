@@ -1,4 +1,4 @@
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 /* borneo.css -- color scheme Borneo, for use with Gutenberg stylesheet */
@@ -29,4 +29,4 @@ a.navline:hover, a.hidden:hover, a.noteref:hover
 }
 
 ]]>
-</stylesheet>
+</style>

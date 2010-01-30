@@ -8,7 +8,7 @@
     in a XSLT stylesheet.
 
 -->
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 body
@@ -554,7 +554,7 @@ h5, h6
     line-height:1em;
 }
 
-p,p.initial
+p
 {
     text-indent:0;
 }
@@ -634,4 +634,4 @@ ul { list-style-type: none; }
 }
 
 ]]>
-</stylesheet>
+</style>

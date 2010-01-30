@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<stylesheet>
+<style type="text/css">
 <![CDATA[
 
 body
@@ -29,6 +29,17 @@ p.byline
 {
     font-style: italic;
     margin-bottom: 2em;
+}
+
+p
+{
+    margin: 0;
+    text-indent: 1em;
+}
+
+p.firstpar
+{
+    text-indent: 0em;
 }
 
 .figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum, .stage
@@ -99,4 +110,4 @@ span.corr, span.abbr, span.measure
 
 
 ]]>
-</stylesheet>
+</style>

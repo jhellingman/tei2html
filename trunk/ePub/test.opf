@@ -18,7 +18,7 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2010-01-16T00:03:42.653+01:00</dc:date>
+      <dc:date opf:event="generation">2010-01-30T14:55:11.051+01:00</dc:date>
    </metadata>
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
