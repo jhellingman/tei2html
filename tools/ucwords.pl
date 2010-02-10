@@ -425,7 +425,7 @@ sub collectWords()
         if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/)
         {
             $idbook = $1;
-            $useDatabase = 1;
+            # $useDatabase = 1;
         }
         if ($remainder =~ /<\/teiHeader>/)
         {
