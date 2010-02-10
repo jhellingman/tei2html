@@ -177,7 +177,7 @@
 
         <!-- PG header and footer stuff -->
 
-        <msg:message name="msgNotCopyrightedUS">Not copyrighted in the United States. If you live elsewhere check the laws of your country before downloading this ebook.</msg:message>
+        <msg:message name="msgNotCopyrightedUS">Not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this ebook.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>

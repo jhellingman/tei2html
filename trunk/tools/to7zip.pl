@@ -1,11 +1,19 @@
 #!/usr/bin/perl -w
 
+#
+# Convert various types of archives to 7zip archives.
+#
+
 use strict;
 use File::Basename;
 
-$totalOriginalSize = 0;
-$totalResultSize = 0;
-$archivesConverted = 0;
+my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
+my $temp = "C:\\Temp";
+
+my $errorCount = 0;
+my $totalOriginalSize = 0;
+my $totalResultSize = 0;
+my $archivesConverted = 0;
 
 
 sub list_recursively($)
@@ -28,7 +36,7 @@ sub list_recursively($)
     {
         if (-f "$directory\\$file")
         {
-			handle_file("$directory\\$file");
+            handle_file("$directory\\$file");
         }
         elsif (-d "$directory\\$file")
         {
@@ -40,46 +48,94 @@ sub list_recursively($)
 
 sub handle_file($)
 {
-	my ($file) = @_;
+    my ($file) = @_;
 
-	if ($file =~ m/^(.*)\.(zip|rar|tar|tar\.gz)$/)
-	{
-		my $path = $1;
-		my $extension = $2;
-		my $base = basename($file, '.' . $extension);
+    if ($file =~ m/^(.*)\.(zip|rar|tar|tar\.gz)$/)
+    {
+        my $path = $1;
+        my $extension = $2;
+        my $base = basename($file, '.' . $extension);
 
-		print "Handling Archive: $file\n";
+        my $tempDir = "$temp\\$base";
 
+        if (-e "$path.7z")
+        {
+            print STDERR "Skipping $file: output \"$path.7z\" exists.\n";
+        }
+        elsif (-e $tempDir)
+        {
+            print STDERR "Skipping $file: temporary directory \"$tempDir\" exists.\n";
+        }
+        else
+        {
+            print "Converting archive: $file\n";
 
-		if (-e "$path.7z")
-		{
-			print STDERR "Output archive \"$path.7z\" already exists.\n";
-		}
-		elsif (-e "c:\\temp\$base")
-		{
-			print STDERR "Directory \"C:\\Temp\\$base\" to extract files into already exists.\n";
-		}
-		else
-		{
-			system ("\"C:\\Program Files\\7-Zip\\7z\" x \"$file\" -oc:\\temp\\$base");
-			system ("\"C:\\Program Files\\7-Zip\\7z\" a -mx9 \"$path.7z\" C:\\Temp\\$base\\*");
-			system ("rmdir /S/Q C:\\Temp\\$base\\");
+            my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tempDir");
+            if ($returnCode != 0) 
+            {
+                $errorCount++;
+                print STDERR "ERROR: 7z returned $returnCode while extracting $file.\n";
+                system ("rmdir /S/Q $tempDir\\");
+            }
+            else
+            {
+                my $packDir = $tempDir;
 
-			my $originalSize = -s $file;
-			my $resultSize = -s "$path.7z";
+                # Sometimes, an archive contains a single folder with the same name as the archive 
+                # itself, and everything else is stored inside that folder. In that case, we 
+                # include the contents of the folder, but not the folder itself.
+                if (-d "$tempDir\\$base")
+                {
+                    my @files = <C:\\Temp\\$base>;
+                    my $fileCount = @files;
+                    if ($fileCount == 1) 
+                    {
+                        print "Including contents of top-level single directory\n";
+                        $packDir = "$tempDir\\$base";
+                    }
+                }
 
-			$archivesConverted++;
-			$totalOriginalSize += $originalSize;
-			$totalResultSize += $resultSize;
+                # Before recompressing the files, we could do the following:
+                # 1. Run pngcrush on all .png image files
+                # 2. Run gif optimizer on all .gif image files
+                # 3. Run jpeg optimizer on all jpeg image files
 
-		}
-	}
+                # Further compression improvements will be possible by using the PPMd
+                # method for text (and html) files.
+
+                # We should drop typical OS generated files such as Thumbs.db or desktop.ini
+
+                my $returnCode = system ("$sevenZip a -mx9 -r \"$path.7z\" $packDir\\*");
+                if ($returnCode != 0) 
+                {
+                    $errorCount++;
+                    print STDERR "ERROR: 7z returned $returnCode while creating $path.7z.\n";
+                }
+                system ("rmdir /S/Q $tempDir\\");
+
+                my $originalSize = -s $file;
+                my $resultSize = -s "$path.7z";
+
+                $archivesConverted++;
+                $totalOriginalSize += $originalSize;
+                $totalResultSize += $resultSize;
+            }
+        }
+    }
 }
 
 
-## initial call ... $ARGV[0] is the first command line argument
-list_recursively($ARGV[0]);
+sub main()
+{
+    ## initial call ... $ARGV[0] is the first command line argument
+    list_recursively($ARGV[0]);
 
-print "Number of archvies:        $archivesConverted\n";
-print "Original size of archives: $totalOriginalSize\n";
-print "New size of archives:      $totalResultSize\n";
+    print "Number of archives:        $archivesConverted\n";
+    print "Number of errors:          $errorCount\n";
+    print "Original size of archives: $totalOriginalSize bytes\n";
+    print "New size of archives:      $totalResultSize bytes\n";
+    print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+}
+
+
+main();
