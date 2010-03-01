@@ -7,8 +7,8 @@
 use strict;
 use File::Basename;
 
-my $pngout = "pngout.exe";				# see http://advsys.net/ken/util/pngout.htm
-my $jpegoptim = "jpegoptim.exe";		# see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
+my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm
+my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
 my $temp = "C:\\Temp";
 
 my $errorCount = 0;
@@ -56,27 +56,27 @@ sub handle_file($)
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
-		my $dirname = dirname($file);
+        my $dirname = dirname($file);
 
-		my $newfile = $dirname . '\\' . $base . '-copy.' . $extension;
+        my $newfile = $dirname . '\\' . $base . '-copy.' . $extension;
 
-		print "Compressing image: $file\n";
-		my $originalSize = -s $file;
+        print "Compressing image: $file\n";
+        my $originalSize = -s $file;
 
-		if ($extension eq 'png') 
-		{
-			my $returnCode = system ("$pngout /y \"$file\" \"$file\"");
-		}
-		elsif ($extension eq 'jpg') 
-		{
-			my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
-		}
+        if ($extension eq 'png') 
+        {
+            my $returnCode = system ("$pngout /y \"$file\" \"$file\"");
+        }
+        elsif ($extension eq 'jpg') 
+        {
+            my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
+        }
 
-		my $resultSize = -s $file;
+        my $resultSize = -s $file;
 
-		$imagesConverted++;
-		$totalOriginalSize += $originalSize;
-		$totalResultSize += $resultSize;
+        $imagesConverted++;
+        $totalOriginalSize += $originalSize;
+        $totalResultSize += $resultSize;
     }
 }
 

@@ -133,27 +133,23 @@
     <!--====================================================================-->
     <!-- Blockquotes -->
 
-    <xsl:template match="q[@rend='block']">
-        <xsl:call-template name="closepar"/>
-        <div class="blockquote">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
-            <xsl:apply-templates/>
-        </div>
-        <xsl:call-template name="reopenpar"/>
-    </xsl:template>
-
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
-        <div class="q">
+        <div>
+            <xsl:variable name="class">
+                <xsl:choose>
+                    <xsl:when test="@rend='block'"><xsl:text>blockquote </xsl:text></xsl:when>
+                    <xsl:otherwise><xsl:text>q </xsl:text></xsl:otherwise>
+                </xsl:choose>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
-
-    <!-- Other uses of q should be ignored, as it is typically used to nest elements that otherwise could not appear at a certain location, such as verse in footnotes. -->
 
 
     <!--====================================================================-->
