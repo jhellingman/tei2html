@@ -262,6 +262,7 @@ sub entities2iso88591($)
     $a =~ s/\&rdquo;/"/g;
     $a =~ s/\&lsquo;/'/g;
     $a =~ s/\&rsquo;/'/g;
+    $a =~ s/\&sbquo;/'/g;
     $a =~ s/\&hellip;/.../g;
     $a =~ s/\&thinsp;/ /g;
     $a =~ s/\&nbsp;/ /g;
