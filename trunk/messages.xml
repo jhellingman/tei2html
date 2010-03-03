@@ -177,7 +177,7 @@
 
         <!-- PG header and footer stuff -->
 
-        <msg:message name="msgNotCopyrightedUS">Not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this ebook.</msg:message>
+        <msg:message name="msgNotCopyrightedUS">This book is not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this book.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
@@ -553,7 +553,7 @@
         <msg:message name="msgListOfIllustrations">Liste der Tafeln</msg:message>
         <msg:message name="msgAvailability">Verfügbarkeit</msg:message>
         <msg:message name="msgOrnament">Ornament</msg:message>
-        <msg:message name="msgOrnament">Ornamente</msg:message>
+        <msg:message name="msgOrnament.n">Ornamente</msg:message>
         <msg:message name="msgDeleted">Weggelassen</msg:message>
         <msg:message name="msgCorrection">Korrektur</msg:message>
         <msg:message name="msgCorrection.n">Korrekturen</msg:message>
@@ -568,6 +568,12 @@
         <msg:message name="msgColor">Farbe</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Die folgenden Korrekturen sind am Text angewendet worden:</msg:message>
         <msg:message name="msgCorrectionsOverview">Übersicht der Korrekturen im Text</msg:message>
+        <msg:message name="msgNotCopyrightedUS">Dieses Buch ist frei von Urheberrechten in den Vereinigten Staaten. Wenn Sie in einem anderen Land wohnen, überprüfen Sie bitte die Gesetze in Ihrem Land, ehe Sie das Buch herunterladen.</msg:message>
+
+        <msg:message name="msgExternalReferences">Externe Referenzen</msg:message>
+        <msg:message name="msgExternalLink">Externe Link</msg:message>
+
+        <msg:message name="msgExternalReferencesDisclaimer">Dieses Project Gutenberg Buch enthält externe Referenzen. Diese Links können möglicherweise für Sie nicht funktionieren.</msg:message>
 
         <msg:message name="msgJanuary">Januar</msg:message>
         <msg:message name="msgFebruary">Februar</msg:message>
@@ -610,6 +616,17 @@
         <msg:message name="pt-br">Portugiesisch (Brasilien)</msg:message>
         <msg:message name="pt-pt">Portugiesisch (Portugal)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
+
+        <msg:message name="msgPGHeader">
+            <p>Das Project Gutenberg E-buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Dieses E-buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#license">dieses Buches</a> oder online unter <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
+            <p class="smallprint">Titel: <msg:param name="title"/>.</p>
+            <p class="smallprint">Autor: <msg:param name="authors"/>.</p>
+            <p class="smallprint">Publikationsdatum: <msg:param name="releasedate"/> [E-buch Nummer: <msg:param name="pgnum"/>]</p>
+            <p class="smallprint">Sprache: <msg:param name="language"/>.</p>
+            <p class="smallprint">Zeichensatz: UTF-8.</p>
+        </msg:message>
+
 
     </msg:messages>
 
@@ -747,14 +764,14 @@
 
         <!-- PG header and footer stuff -->
 
-        <msg:message name="msgNotCopyrightedUS">Vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit eboek download.</msg:message>
+        <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit boek download.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopieeren, weggeven of hergebruiken onder de voorwaarden van de Project Gutenberg Licentie <a href="#license">achterin dit eBoek</a> (Engelstalig) of on-line op <a href='http://www.gutenberg.org/'>www.gutenberg.org</a></p>
             <p class="smallprint">Titel:  <msg:param name="title"/>.</p>
             <p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
-            <p class="smallprint">Uitgiftedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
+            <p class="smallprint">Publicatiedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
             <p class="smallprint">Taal: <msg:param name="language"/>.</p>
             <p class="smallprint">Character set codering: UTF-8.</p>
         </msg:message>
