@@ -1595,6 +1595,7 @@ BEGIN
     $ent{"adgrave"}     = "a" . chr(0x030F); # a with double grave
     $ent{"idgrave"}     = "i" . chr(0x030F); # i with double grave
     $ent{"odgrave"}     = "o" . chr(0x030F); # o with double grave
+    $ent{"rdgrave"}     = "r" . chr(0x030F); # r with double grave
     $ent{"udgrave"}     = "u" . chr(0x030F); # u with double grave
 
     $ent{"adotb"}       = "a" . chr(0x0323); # a with dot below
@@ -1687,7 +1688,9 @@ BEGIN
 
 
     # Multiple combining diacritics
-    $ent{"aumlcirc"}    = chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
+    $ent{"eumlacu"}     = chr(0x00eb) . chr(0x0301); # e with diaresis and acute
+
+	$ent{"aumlcirc"}    = chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
     $ent{"oumlcirc"}    = chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
     $ent{"uumlcirc"}    = chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
 

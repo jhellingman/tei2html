@@ -8,10 +8,9 @@ my $xsldir     = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # l
 my $tmpdir     = "C:\\Temp";                       # place to drop temporary files
 my $bindir     = "C:\\Bin";
 my $catalog    = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
-my $princedir  = "C:\\Program Files\\Prince\\engine\\bin"; # location of prince processor (see http://www.princexml.com/)
 
-my $saxon = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java\" -jar C:\\Bin\\saxon\\saxon.jar "; # command to run the saxon processor (see http://saxon.sourceforge.net/, using Version 6.5.5)
-my $saxon2 = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
+my $prince     = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
+my $saxon2     = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar "; # (see http://saxon.sourceforge.net/)
 
 my $epubcheck = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
 my $epubpreflight = "\"C:\\Program Files (x86)\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
@@ -165,13 +164,13 @@ sub processFile
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $currentname > tmp.1");
     system ("sx -c $catalog -E10000 -xlower -xcomment -xempty -xndata  tmp.1 > tmp.2");
-    system ("$saxon tmp.2 $xsldir/tei2tei.xsl > tmp.3");
+    system ("$saxon2 tmp.2 $xsldir/tei2tei.xsl > tmp.3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < tmp.3 > tmp.4");
     system ("perl $toolsdir/ent2ucs.pl tmp.4 > $basename.xml");
 
     # convert from TEI P4 to TEI P5  (experimental)
-    # system ("$saxon $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
+    # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
 
     # collect information about images.
     if (-d "images")
@@ -227,14 +226,13 @@ sub processFile
     if ($usePrince == 1)
     {
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
-
         print "Create PDF version...\n";
         my $optionPrinceMarkup = "optionPrinceMarkup=\"Yes\"";
-        system ("$saxon $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
+        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $optionPrinceMarkup > tmp.5");
         system ("perl $toolsdir/wipeids.pl tmp.5 > tmp.5a");
         system ("sed \"s/^[ \t]*//g\" < tmp.5a > tmp5b.html");
         system ("tidy -qe -xml tmp5b.html");
-        system ("$princedir/prince tmp5b.html $basename.pdf");
+        system ("$prince tmp5b.html $basename.pdf");
         system ("rm tmp.5a tmp5b.html");
     }
 
@@ -262,7 +260,7 @@ sub processFile
     if (-f "heatmap.xml")
     {
         print "Create text heat map...\n";
-        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+        system ("$saxon2 heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
     }
 
     print "Create text version...\n";
