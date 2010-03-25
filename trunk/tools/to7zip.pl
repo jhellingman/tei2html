@@ -8,12 +8,38 @@ use strict;
 use File::Basename;
 
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
-my $temp = "C:\\Temp";
+my $temp = $ENV{'TMP'};
+if (!$temp)
+{
+    $temp = $ENV{'TMPDIR'};
+}
+if (!$temp)
+{
+    $temp = "D:\\Temp";
+}
 
 my $errorCount = 0;
 my $totalOriginalSize = 0;
 my $totalResultSize = 0;
 my $archivesConverted = 0;
+
+
+main();
+
+sub main()
+{
+    ## initial call ... $ARGV[0] is the first command line argument
+    list_recursively($ARGV[0]);
+
+    print "Number of archives:        $archivesConverted\n";
+    print "Number of errors:          $errorCount\n";
+    print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
+    print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
+    my $savedBytes = $totalOriginalSize - $totalResultSize;
+    my $percentage = ($savedBytes / $totalOriginalSize) * 100;
+    print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
+}
+
 
 
 sub list_recursively($)
@@ -86,7 +112,7 @@ sub handle_file($)
                 # include the contents of the folder, but not the folder itself.
                 if (-d "$tempDir\\$base")
                 {
-                    my @files = <C:\\Temp\\$base>;
+                    my @files = <$tempDir\\$base>;
                     my $fileCount = @files;
                     if ($fileCount == 1) 
                     {
@@ -99,11 +125,18 @@ sub handle_file($)
                 # 1. Run pngcrush on all .png image files
                 # 2. Run gif optimizer on all .gif image files
                 # 3. Run jpeg optimizer on all jpeg image files
+                # 4. Remove unwanted files, such as Thumbs.db, desktop.ini, *.bak, ~* files.
+                # 5. Unpack contained archives into their own directory, taking care
+                #    not to create unneccessary directory levels.
+
+                if (1 == 1) 
+                {
+                    # Further compress images in the archive if possible
+                    system ("perl optimg.pl \"$packDir\"");
+                }
 
                 # Further compression improvements will be possible by using the PPMd
                 # method for text (and html) files.
-
-                # We should drop typical OS generated files such as Thumbs.db or desktop.ini
 
                 my $returnCode = system ("$sevenZip a -mx9 -r \"$path.7z\" $packDir\\*");
                 if ($returnCode != 0) 
@@ -125,17 +158,19 @@ sub handle_file($)
 }
 
 
-sub main()
-{
-    ## initial call ... $ARGV[0] is the first command line argument
-    list_recursively($ARGV[0]);
 
-    print "Number of archives:        $archivesConverted\n";
-    print "Number of errors:          $errorCount\n";
-    print "Original size of archives: $totalOriginalSize bytes\n";
-    print "New size of archives:      $totalResultSize bytes\n";
-    print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+
+sub formatBytes($)
+{
+    my $num = shift;
+    my $kb = 1024;
+    my $mb = (1024 * 1024);
+    my $gb = (1024 * 1024 * 1024);
+
+    ($num > $gb) ? return sprintf("%d GB", $num/$gb) :
+    ($num > $mb) ? return sprintf("%d MB", $num/$mb) :
+    ($num > $kb) ? return sprintf("%d KB", $num/$kb) :
+    return $num . ' B';
 }
 
 
-main();
