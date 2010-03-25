@@ -1518,6 +1518,8 @@ BEGIN
     $ent{"digamma"}     = chr(0x03DC);  # GREEK LETTER DIGAMMA
 
     $ent{"schwa"}       = chr(0x0259);  # LETTER SCHWA
+    $ent{"schwaacu"}    = chr(0x0259) . chr(0x0301); # LETTER SCHWA with acute
+    $ent{"schwacirc"}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with acute
 
 
     $ent{"ezh"}     = chr(0x0292);  # LETTER EZH
@@ -1638,6 +1640,7 @@ BEGIN
     $ent{"ecedil"}      = "e" . chr(0x0327); # e with cedille
     $ent{"Icedil"}      = "I" . chr(0x0327); # I with cedille
     $ent{"icedil"}      = "i" . chr(0x0327); # i with cedille
+    $ent{"icedilacu"}   = "i" . chr(0x0327) . chr(0x0301); # i with cedille and acute
     $ent{"Ocedil"}      = "O" . chr(0x0327); # O with cedille
     $ent{"ocedil"}      = "o" . chr(0x0327); # o with cedille
     $ent{"Ucedil"}      = "U" . chr(0x0327); # U with cedille
@@ -1657,6 +1660,7 @@ BEGIN
     $ent{"ubreveb"}     = "u" . chr(0x032E); # u with breve below
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
+    $ent{"ebowb"}       = "e" . chr(0x032F); # e with bow below (inverted breve)
 
     $ent{"icircb"}      = "i" . chr(0x032D); # i with circumflex below
 
@@ -1671,8 +1675,8 @@ BEGIN
 
     # Using stroke-through overlays: (was actually not needed)
     $ent{"bstrok"}      = chr(0x0180); # b with stroke through stem
+    $ent{"dstrok"}      = "d" . chr(0x0335); # d with stroke through stem
     $ent{"bbar"}        = chr(0x0180); # b with stroke through stem
-
 
     # Requiring wide combining diacritics
     $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve 
@@ -1689,14 +1693,15 @@ BEGIN
 
     # Multiple combining diacritics
     $ent{"eumlacu"}     = chr(0x00eb) . chr(0x0301); # e with diaresis and acute
+    $ent{"aringacu"}    = chr(0x00E5) . chr(0x0301); # a with ring and acute
+
+    $ent{"rdotbacu"}    = chr(0x1E5B) . chr(0x0301); # r with dot below and acute
 
 	$ent{"aumlcirc"}    = chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
     $ent{"oumlcirc"}    = chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
     $ent{"uumlcirc"}    = chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
 
     $ent{"eumlbrev"}    = chr(0x00eb) . chr(0x0306); # e with diaresis and breve
-
-    $ent{"rdotbcirc"}   = chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
     $ent{"oumlmacr"}    = chr(0x00F6) . chr(0x0304); # o with diaresis and macron
 
@@ -1724,6 +1729,8 @@ BEGIN
     $ent{"edotaac"}     = chr(0x0117) . chr(0x0301); # e with dot above and acute
     $ent{"edotatil"}    = chr(0x0117) . chr(0x0303); # e with dot above and tilde
     $ent{"eumltil"}     = chr(0x00eb) . chr(0x0303); # e with diaresis and tilde
+
+    $ent{"ecircgr"}     = chr(0x03B5) . chr(0x0302); # Greek epsilon with circumflex
 
 
     # Special dashes
@@ -2060,8 +2067,10 @@ sub pgdp2sgml
 
     # Letters with strokes
     $string =~ s/\[-b\]/\&bstrok;/g;                    # b with stroke through stem
-    $string =~ s/\[-L\]/\&Lstrok;/g;                    # L with stroke through stem
+    $string =~ s/\[-d\]/\&dstrok;/g;                    # d with stroke through stem
+    $string =~ s/\[-h\]/\&hstrok;/g;                    # h with stroke through stem
     $string =~ s/\[-l\]/\&lstrok;/g;                    # l with stroke through stem
+    $string =~ s/\[-L\]/\&Lstrok;/g;                    # L with stroke through stem
 
     return $string;
 }
