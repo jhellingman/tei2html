@@ -479,7 +479,7 @@ sub reportXML()
     open (USAGEFILE, ">usage.xml") || die("Could not create output file 'usage.xml'");
 
     print USAGEFILE "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-	print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"http://www.gutenberg.ph/xslt/usage.xsl\"?>";
+    print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"http://www.gutenberg.ph/xslt/usage.xsl\"?>";
     print USAGEFILE "<usage>\n";
 
     reportWordsXML();
@@ -1674,6 +1674,39 @@ sub Normalize($)
     return $string;
 }
 
+
+#
+# SimilarityNormalize
+#
+# Sort in such a way that letters that are easily confused sort close together.
+# Typical confused pairs are mapped to one of the pair.
+#
+sub SimilarityNormalize($)
+{
+    my $string = shift;
+    $string = StripDiacritics($string);
+
+    # English spelling variations
+    $string =~ s/ou/o/g;
+    $string =~ s/ll/l/g;
+    $string =~ s/ise/ize/g;
+
+    $string =~ s/ri/m/g;
+    $string =~ s/rn/m/g;
+    $string =~ s/[lI]/l/g;
+    $string =~ s/[bh]/b/g;
+    $string =~ s/[ce]/e/g;
+    $string =~ s/[mw]/m/g;
+    $string =~ s/[HN]/H/g;
+    $string =~ s/[VY]/V/g;
+    $string =~ s/[CG]/C/g;
+
+    # ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+    # ABEFCGJILMWKHNXDOQPRSZTUVYaecouvwbhkdfjygqpltirnmszx
+    $string =~ tr/ABEFCGJILMWKHNXDOQPRSZTUVYaecouvwbhkdfjygqpltirnmszx/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/;
+
+    return lc($string);
+}
 
 
 #####################################
