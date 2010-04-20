@@ -62,6 +62,8 @@ body
 .titlePage .figure
 {
     margin: 2em 0% 2em 0%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .titlePage .docImprint

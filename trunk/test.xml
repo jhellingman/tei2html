@@ -106,10 +106,10 @@
 <div0 id="bk01" n="I" type="Book" rend="label(yes)">
 <head>This is a Test Document</head>
 
-<p>This is a test document<note>This is a footnote at the div0 level, for testing purposes</note>, mainly intended to try-out the features implemented in the tei2html XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my stylesheet (yes, I sometimes forget myself). </p>
+<p>This is a test document<note>This is a footnote at the div0 level, for testing purposes</note>, mainly intended to try-out the features implemented in the tei2html <index level1="XSLT"/>XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my <index level1="Stylesheet"/>stylesheet (yes, I sometimes forget myself). </p>
 
 <div1 id="ch04" n="IV" type="Chapter" rend="label(yes)">
-<head>A Chapter<note place="foot" n="*">Footnote in chapter heading.</note> Dealing with Text Styles</head>
+<head>A Chapter<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note> Dealing with Text Styles</head>
 
 <p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
 <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi>
@@ -119,11 +119,11 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <q rend="block"><text><body><div1><head>Section head in quoted material</head>
 
-<p>This is a paragraph in quoted material<note>This is a footnote in quoted material.</note> This paragraph contains a footnote, to verify correct handling of this convoluted situation during the transformation.</p>
+<p>This is a <index level1="Paragraph"/>paragraph in quoted material<note>This is a <index level1="Footnote" level2="in quoted material"/>footnote in quoted material.</note> This paragraph contains a <index level1="Footnote"/>footnote, to verify correct handling of this convoluted situation during the transformation.</p>
 </div1></body></text></q>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>.</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>.</p>
 
 </div1>
 
@@ -144,7 +144,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 
 
-<p>You may note the small ornament above the chapter heading, which is included using a rend attribute on the head element of this chapter.</p>
+<p>You may note the small <index level1="ornaments"/>ornament above the <index level1="Chapter headings"/>chapter heading, which is included using a <index level1="rend attribute"/>rend attribute on the head element of this chapter.</p>
 
 <p>In this chapter we generate a table:<note place="foot" n="*">Yet another a footnote.</note></p>
 
@@ -162,7 +162,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
         <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
     </row>
     <row>
-        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
+        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
     </row>
 </table>
 </p>
@@ -339,7 +339,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <index level1="Footnote"/>labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -545,7 +545,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <l n="5">This is a rule of verse</l>
 <l n="6" rend="indent(1)">This is another rule of verse</l>
 <l n="7">This is a rule of verse</l>
-<l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.</p>
+<l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a <index level1="Footnote"/>footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.</p>
 
 <q><text><body><div1>
 <lg type="Group" rend="font(italic)" id="footnoteverse">
@@ -556,7 +556,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 </p>
 
-<p>Note that the footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
+<p>Note that the <index level1="Footnote"/>footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
 </div1>
 </div0>
@@ -596,6 +596,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <div1 id="backmatter">
 
 <divGen type="Gallery"/>
+
+<divGen type="Index"/>
 
 <divGen type="Colophon"/>
 
