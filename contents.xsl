@@ -16,6 +16,8 @@
         <divGen type="gallery"/> Generates a gallery of thumbnails of
                                 all included illustrations.
 
+        <divGen type="index"/>  Generates an index.
+
     Special Usage:
         <div2 type="SubToc"/>   Generates a table of contents at the
                                 div2 level. This table replaces the
@@ -29,8 +31,9 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
@@ -488,6 +491,89 @@
 
     <xsl:template match="hi[@rend='ex']" mode="gallery-captions">
         <xsl:apply-templates mode="gallery-captions"/>
+    </xsl:template>
+
+
+
+    <!--====================================================================-->
+    <!-- Index -->
+
+    <xsl:template match="divGen[@type='Index' or @type='index']">
+        <div class="div1">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setLangAttribute"/>
+            <h2 class="normal"><xsl:value-of select="$strIndex"/></h2>
+
+            <xsl:message terminate="no">Generating Index</xsl:message>
+
+            <!-- Collect all index entries into a tree structure, and add the page numbers to them -->
+            <xsl:variable name="index">
+                <divIndex>
+                    <xsl:for-each select="//index">
+                        <index>
+                            <xsl:attribute name="level1"><xsl:value-of select="@level1"/></xsl:attribute>
+                            <xsl:attribute name="level2"><xsl:value-of select="@level2"/></xsl:attribute>
+                            <xsl:attribute name="level3"><xsl:value-of select="@level3"/></xsl:attribute>
+                            <xsl:attribute name="level4"><xsl:value-of select="@level4"/></xsl:attribute>
+                            <xsl:attribute name="index"><xsl:value-of select="@index"/></xsl:attribute>
+                            <xsl:attribute name="page">
+                                <xsl:choose>
+                                    <xsl:when test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+                                        <xsl:value-of select="preceding::pb[1]/@n"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>###</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:attribute>
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="."/>
+                            </xsl:call-template>
+                        </index>
+                    </xsl:for-each>
+                </divIndex>
+            </xsl:variable>
+
+            <xsl:apply-templates select="$index" mode="index"/>
+        </div>
+    </xsl:template>
+
+
+    <xsl:template match="xhtml:divIndex" mode="index">
+        <xsl:for-each-group select="xhtml:index" group-by="lower-case(@level1)">
+            <xsl:sort select="lower-case(@level1)"/>
+
+            <p>
+                <xsl:value-of select="@level1"/>
+
+                <xsl:for-each-group select="current-group()" group-by="lower-case(@level2)">
+                    <xsl:sort select="lower-case(@level2)"/>
+                    <xsl:choose>
+                        <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
+                        <xsl:otherwise>; </xsl:otherwise>
+                    </xsl:choose>
+                    
+                    <xsl:value-of select="@level2"/>
+
+                    <!-- Group to surpress duplicate page numbers -->
+                    <xsl:for-each-group select="current-group()" group-by="@page">
+                        <xsl:choose>
+                            <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
+                            <xsl:otherwise>, </xsl:otherwise>
+                        </xsl:choose>
+                        <a>
+                            <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
+                            <xsl:value-of select="@page"/>
+                        </a>
+                    </xsl:for-each-group>
+                </xsl:for-each-group>
+            </p>
+        </xsl:for-each-group>
+    </xsl:template>
+
+
+    <xsl:template match="index">
+        <a>
+            <xsl:call-template name="generate-id-attribute"/>
+        </a>
     </xsl:template>
 
 

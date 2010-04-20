@@ -164,6 +164,23 @@
 
 
     <!--====================================================================-->
+    <!-- Cover -->
+
+    <xsl:template name="cover">
+        <xsl:result-document 
+                href="{$path}/cover.xhtml"
+                method="xml" 
+                encoding="UTF-8">
+
+            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
+
+
+
+        </xsl:result-document>
+    </xsl:template>
+
+
+    <!--====================================================================-->
     <!-- Adobe Pagemap -->
 
     <xsl:template name="pagemap">
