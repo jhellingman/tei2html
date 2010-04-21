@@ -238,7 +238,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="position() = 1">firstpar </xsl:when>
-            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb'">firstpar </xsl:when>
+            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb' or $preceding = 'epigraph' or $preceding = 'argument'">firstpar </xsl:when>
         </xsl:choose>
     </xsl:template>
 
