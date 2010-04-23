@@ -52,6 +52,8 @@ body
 .titlePage .figure
 {
     margin: 2em 0% 2em 0%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .titlePage .docImprint
@@ -746,31 +748,31 @@ body
 
 
                 
-                .xd23e279
+                .xd23e300
                 {
                     color:red; background-color:yellow;
                 }
             
                 
-                .xd23e280
+                .xd23e301
                 {
                     color:green; text-align:right;
                 }
             
                 
-                .xd23e281
+                .xd23e302
                 {
                     color:blue; text-align:right;
                 }
             
                 
-                .xd23e317
+                .xd23e338
                 {
                     text-align:left;width:40%;
                 }
             
                 
-                .xd23e318
+                .xd23e339
                 {
                     text-align:right;
                 }
@@ -788,158 +790,158 @@ body
                 }
             
                 
-                .xd23e131
+                .xd23e137
                 {
                     font-family:'Walbaum-Fraktur';
                 }
             
                 
-                .xd23e144
+                .xd23e150
                 {
                     font-size:14pt; color:red; background-color:yellow;
                 }
             
                 
-                .xd23e246
+                .xd23e267
                 {
                     margin:0px auto; display:table;
                 }
             
                 
-                .xd23e250
+                .xd23e271
                 {
                     valign:middle; width:2;
                 }
             
                 
-                .xd23e251
+                .xd23e272
                 {
                     valign:middle;
                 }
             
                 
-                .xd23e261
+                .xd23e282
                 {
                     margin-left:2em;
                 }
             
                 
-                .xd23e263
+                .xd23e284
                 {
                     width:25%;
                 }
             
                 
-                .xd23e265
+                .xd23e286
                 {
                     width:75%;
                 }
             
                 
-                .xd23e276
+                .xd23e297
                 {
                     width:40%; margin:0px auto; display:table;
                 }
             
                 
-                .xd23e285
+                .xd23e306
                 {
                     text-align:right;
                 }
             
                 
-                .xd23e304
+                .xd23e325
                 {
                     text-align:center;
                 }
             
                 
-                .xd23e309
+                .xd23e330
                 {
                     text-align:left;
                 }
             
                 
-                .xd23e316
+                .xd23e337
                 {
                     width:40%;
                 }
             
-            .xd23e461width
+            .xd23e482width
             {
                 width:80px;
             }
         
                 
-                .xd23e466
+                .xd23e487
                 {
                     width:100px;
                 }
             
-            .xd23e466width
+            .xd23e487width
             {
                 width:80px;
             }
         
-            .xd23e474width
+            .xd23e495width
             {
                 width:80px;
             }
         
-            .xd23e486width
+            .xd23e509width
             {
                 width:480px;
             }
         
-            .xd23e506width
+            .xd23e529width
             {
                 width:480px;
             }
         
                 
-                .xd23e556
+                .xd23e579
                 {
                     font-style:italic;
                 }
             
                 
-                .xd23e587
+                .xd23e610
                 {
                     list-style-type:disc;
                 }
             
                 
-                .xd23e617
+                .xd23e640
                 {
                     list-style-type:upper-roman;
                 }
             
                 
-                .xd23e629
+                .xd23e652
                 {
                     list-style-type:lower-roman;
                 }
             
                 
-                .xd23e649
+                .xd23e672
                 {
                     text-align:left;
                 }
             
                 
-                .xd23e652
+                .xd23e675
                 {
                     text-align:right;
                 }
             
                 
-                .xd23e654
+                .xd23e677
                 {
                     text-align:center;
                 }
             
             
-            .xd23e657
+            .xd23e680
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -947,7 +949,7 @@ body
                 
             }
 
-            .xd23e657init
+            .xd23e680init
             {
                 float: left;
                 width: 90px;
@@ -963,49 +965,49 @@ body
 
         
                 
-                .xd23e662
+                .xd23e685
                 {
                     text-align:justify;
                 }
             
                 
-                .xd23e678
+                .xd23e701
                 {
                     text-align:center;
                 }
             
                 
-                .xd23e687
+                .xd23e710
                 {
                     text-align:center;
                 }
             
                 
-                .xd23e692
+                .xd23e715
                 {
                     text-indent:1em;
                 }
             
                 
-                .xd23e698
+                .xd23e721
                 {
                     text-indent:2em;
                 }
             
                 
-                .xd23e702
+                .xd23e725
                 {
                     text-indent:3em;
                 }
             
                 
-                .xd23e706
+                .xd23e729
                 {
                     text-indent:10em;
                 }
             
                 
-                .xd23e708
+                .xd23e731
                 {
                     font-style:italic;
                 }

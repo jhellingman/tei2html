@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE ncx
   PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
-<ncx xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
-     xmlns="http://www.daisy.org/z3986/2005/ncx/"
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/"
+     xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
      version="2005-1"
      xml:lang="en-US">
    <head>
@@ -42,17 +42,17 @@
                <text>Chapter V Formatting Tables</text>
             </navLabel>
             <content src="test-ch05-1.xhtml"/>
-            <navPoint playOrder="5" class="section" id="xd23e518">
+            <navPoint playOrder="5" class="section" id="xd23e541">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd23e518"/>
+               <content src="test-ch05-3.xhtml#xd23e541"/>
             </navPoint>
-            <navPoint playOrder="6" class="section" id="xd23e540">
+            <navPoint playOrder="6" class="section" id="xd23e563">
                <navLabel>
                   <text>Section Lists</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd23e540"/>
+               <content src="test-ch05-3.xhtml#xd23e563"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="7" class="chapter" id="ch6">
@@ -67,29 +67,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="9" class="section" id="xd23e769">
+         <navPoint playOrder="9" class="section" id="xd23e796">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e769"/>
+            <content src="test-index.xhtml#xd23e796"/>
          </navPoint>
-         <navPoint playOrder="10" class="section" id="xd23e774">
+         <navPoint playOrder="10" class="section" id="xd23e801">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e774"/>
+            <content src="test-index.xhtml#xd23e801"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd23e779">
+         <navPoint playOrder="11" class="section" id="xd23e806">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e779"/>
+            <content src="test-index.xhtml#xd23e806"/>
          </navPoint>
-         <navPoint playOrder="12" class="section" id="xd23e784">
+         <navPoint playOrder="12" class="section" id="xd23e811">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e784"/>
+            <content src="test-index.xhtml#xd23e811"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="13" class="contents" id="xd23e2">
@@ -102,7 +102,7 @@
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd23e793"/>
+         <content src="test-backmatter.xhtml#xd23e821"/>
       </navPoint>
    </navMap>
 </ncx>

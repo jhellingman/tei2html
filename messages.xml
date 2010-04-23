@@ -213,6 +213,10 @@
         <msg:message name="msgLinkToPg">Link to Project Gutenberg ebook</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Link to OpenLibrary catalog page</msg:message>
         <msg:message name="msgLinkToWorldCat">Link to WorldCat catalog page</msg:message>
+        <msg:message name="msgLinkToWikipedia">Link to related Wikipedia article</msg:message>
+        <msg:message name="msgLinkToWikiPilipinas">Link to related WikiPilipinas article</msg:message>
+        <msg:message name="msgLinkToMap">Link to location on map</msg:message>
+        <msg:message name="msgLinkToBible">Link to cited location in Bible</msg:message>
         <msg:message name="msgExternalLink">External link</msg:message>
 
         <!--==#############################################################==-->
