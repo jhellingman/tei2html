@@ -112,7 +112,7 @@ span.corr, span.abbr, span.measure
     border-bottom: 0;
 }
 
-.lg, .lgouter, .epigraph, .argument
+.lg, .lgouter, .epigraph, .argument, .table
 {
     padding: 0;
     margin-top: 2em;
