@@ -32,8 +32,8 @@ msgstr ""
 </xsl:text>
 
         <xsl:apply-templates select="//msg:message">
-			<xsl:sort select="@name" order="ascending"/>
-		</xsl:apply-templates>
+            <xsl:sort select="@name" order="ascending"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
@@ -65,7 +65,7 @@ msgstr ""
     </xsl:template>
 
 
-	<!-- retain tags as-is in the strigns -->
+    <!-- retain tags as-is in the strigns -->
     <xsl:template match="*" mode="cp">
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="name()"/>
@@ -78,7 +78,7 @@ msgstr ""
     </xsl:template>
 
 
-	<!-- represent parameters with the ${name} syntax -->
+    <!-- represent parameters with the ${name} syntax -->
     <xsl:template match="msg:param" mode="cp">
         <xsl:text>${</xsl:text>
         <xsl:value-of select="@name"/>
@@ -86,7 +86,7 @@ msgstr ""
     </xsl:template>
 
 
-	<!-- surround single lines with quotes --> 
+    <!-- surround single lines with quotes --> 
     <xsl:template match="text()" mode="cp">
         <xsl:call-template name="string-replace-all">
             <xsl:with-param name="text" select="."/>
@@ -97,8 +97,8 @@ msgstr ""
         <!--<xsl:value-of select="translate(., $uppercase, $lowercase)"/> -->
     </xsl:template>
 
-	
-	<!-- handle attributes to be copied, using single quotes -->
+    
+    <!-- handle attributes to be copied, using single quotes -->
     <xsl:template match="@*" mode="cp">
         <xsl:text> </xsl:text>
         <xsl:value-of select="name()"/>
@@ -107,7 +107,7 @@ msgstr ""
         <xsl:text>'</xsl:text>
     </xsl:template>
 
-	
+    
     <xsl:template name="string-replace-all">
         <xsl:param name="text"/>
         <xsl:param name="replace"/>
