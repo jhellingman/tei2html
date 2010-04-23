@@ -262,6 +262,26 @@
             <xsl:with-param name="name" select="'msgLinkToWorldCat'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strLinkToWikipedia">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToWikipedia'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToWikiPilipinas">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToWikiPilipinas'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToMap">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToMap'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strLinkToBible">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLinkToBible'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strExternalLink">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgExternalLink'"/>
