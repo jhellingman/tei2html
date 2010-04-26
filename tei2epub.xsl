@@ -209,7 +209,7 @@
     <!--====================================================================-->
     <!-- ePub specific overrides -->
 
-    <!-- Only generate anchors, but no page numbers in the margin (from block.xsl) -->
+    <!-- Only generate anchors, but do not put page numbers in the margin (from block.xsl) -->
     <xsl:template match="pb" priority="2">
         <xsl:choose>
             <!-- In HTML, we do not allow a span element at the top-level. -->
@@ -222,10 +222,17 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Decorative Initials are ignored in ePub (from block.xsl) -->
+    <!-- Decorative Initials are handled differently in ePub (from block.xsl) -->
     <xsl:template match="p[contains(@rend, 'initial-image')]" priority="2">
-        <xsl:call-template name="handle-paragraph"/>
+        <div class="figure floatLeft">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="insertimage2">
+                <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
+            </xsl:call-template>
+        </div>
+        <p class="firstpar">
+            <xsl:apply-templates mode="eat-initial"/>
+        </p>
     </xsl:template>
-
 
 </xsl:stylesheet>

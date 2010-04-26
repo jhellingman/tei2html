@@ -270,9 +270,12 @@
     </xsl:template>
 
     <xsl:template name="spine.div1">
-        <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
-            <xsl:attribute name="idref"><xsl:call-template name="generate-id"/></xsl:attribute>
-        </itemref>
+        <!-- filter out the cover, as we have placed it first already -->
+        <xsl:if test="@id != 'cover'">
+            <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
+                <xsl:attribute name="idref"><xsl:call-template name="generate-id"/></xsl:attribute>
+            </itemref>
+        </xsl:if>
     </xsl:template>
 
 
