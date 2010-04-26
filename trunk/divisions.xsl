@@ -150,6 +150,7 @@
 
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setRunningHeader"/>
         <xsl:if test="not(contains(@rend, 'display(image-only)'))">
             <h2>
                 <xsl:call-template name="headText"/>
@@ -270,6 +271,7 @@
 
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setRunningHeader"/>
         <xsl:if test="not(contains(@rend, 'display(image-only)'))">
             <h2>
                 <xsl:call-template name="headText"/>
@@ -394,6 +396,20 @@
             <xsl:attribute name="class">byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </p>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- support templates -->
+
+
+    <xsl:template name="setRunningHeader">
+        <xsl:param name="head" select="."/>
+
+        <xsl:if test="$optionEPubMarkup = 'XXX'">
+            <div class="pagehead">
+                <xsl:value-of select="$head"/>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 

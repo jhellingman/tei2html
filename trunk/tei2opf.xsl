@@ -47,6 +47,11 @@
                     </xsl:choose>
                     <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
                     <dc:date opf:event="generation"><xsl:value-of select="current-dateTime()"/></dc:date>
+
+                    <xsl:if test="//figure[@id='cover-image']">
+                        <meta name="cover" content="cover-image"/>
+                    </xsl:if>
+
                 </metadata>
 
                 <manifest>
@@ -91,6 +96,12 @@
                     <xsl:if test="//pb">
                         <xsl:attribute name="page-map">pagemap</xsl:attribute>
                     </xsl:if>
+
+                    <!-- make sure the cover comes first in the spine -->
+                    <xsl:if test="//div1[@id='cover']">
+                        <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="cover"/>
+                    </xsl:if>
+
                     <xsl:apply-templates select="text" mode="spine"/>
                 </spine>
 

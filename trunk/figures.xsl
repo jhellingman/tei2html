@@ -109,6 +109,7 @@
     <xsl:template name="insertimage2">
         <xsl:param name="alt" select="''" as="xs:string"/>
         <xsl:param name="format" select="'.jpg'" as="xs:string"/>
+        <xsl:param name="filename" select="''" as="xs:string"/>
 
         <!-- What is the text that should go on the img alt attribute in HTML? -->
         <xsl:variable name="alt2">
@@ -123,9 +124,17 @@
         </xsl:variable>
 
         <xsl:variable name="file">
-            <xsl:call-template name="getimagefilename">
-                <xsl:with-param name="format" select="$format"/>
-            </xsl:call-template>
+            <!-- Did we get the file name as parameter? -->
+            <xsl:choose>
+                <xsl:when test="$filename = ''">
+                    <xsl:call-template name="getimagefilename">
+                        <xsl:with-param name="format" select="$format"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$filename"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
 
         <xsl:variable name="width">
