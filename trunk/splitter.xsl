@@ -297,35 +297,38 @@
                 <xsl:call-template name="generate-html-header"/>
 
                 <body>
-                    <xsl:choose>
-                        <xsl:when test="(parent::div0 or parent::div1) and position() = 1">
-                            <div class="{name(..)}">
-                                <xsl:call-template name="generate-id-attribute-for">
-                                    <xsl:with-param name="node" select=".."/>
-                                </xsl:call-template>
-                                <xsl:call-template name="GenerateLabel">
+                    <div>
+                        <xsl:call-template name="set-class-attribute-for-body"/>
+                        <xsl:choose>
+                            <xsl:when test="(parent::div0 or parent::div1) and position() = 1">
+                                <div class="{name(..)}">
+                                    <xsl:call-template name="generate-id-attribute-for">
+                                        <xsl:with-param name="node" select=".."/>
+                                    </xsl:call-template>
+                                    <xsl:call-template name="GenerateLabel">
+                                        <xsl:with-param name="div" select=".."/>
+                                    </xsl:call-template>
+                                    <xsl:apply-templates select="$nodes"/>
+
+                                    <xsl:if test="parent::div0">
+                                        <xsl:call-template name="insert-footnotes">
+                                            <xsl:with-param name="notes" select="$nodes//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+                                        </xsl:call-template>
+                                    </xsl:if>
+
+                                </div>
+                            </xsl:when>
+                            <xsl:when test="parent::div1 and position() = last()">
+                                <xsl:apply-templates select="$nodes"/>
+                                <xsl:call-template name="insert-footnotes">
                                     <xsl:with-param name="div" select=".."/>
                                 </xsl:call-template>
+                            </xsl:when>
+                            <xsl:otherwise>
                                 <xsl:apply-templates select="$nodes"/>
-
-                                <xsl:if test="parent::div0">
-                                    <xsl:call-template name="insert-footnotes">
-                                        <xsl:with-param name="notes" select="$nodes//note[@place='foot' or @place='unspecified' or not(@place)]"/>
-                                    </xsl:call-template>
-                                </xsl:if>
-
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="parent::div1 and position() = last()">
-                            <xsl:apply-templates select="$nodes"/>
-                            <xsl:call-template name="insert-footnotes">
-                                <xsl:with-param name="div" select=".."/>
-                            </xsl:call-template>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="$nodes"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </div>
                 </body>
             </html>
         </xsl:result-document>
@@ -343,7 +346,10 @@
                 <xsl:call-template name="generate-html-header"/>
 
                 <body>
-                    <xsl:apply-templates select="."/>
+                    <div>
+                        <xsl:call-template name="set-class-attribute-for-body"/>
+                        <xsl:apply-templates select="."/>
+                    </div>
                 </body>
             </html>
         </xsl:result-document>
@@ -400,6 +406,18 @@
                 <xsl:message terminate="no">Warning: generated ID [x<xsl:value-of select="generate-id($node)"/>] is not stable between runs of XSLT.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+
+    <!-- Determine the class for the body, based on wether it is part of the front matter, body text or back matter of the book -->
+    <xsl:template name="set-class-attribute-for-body">
+        <xsl:attribute name="class">
+            <xsl:choose>
+                <xsl:when test="ancestor::front">front</xsl:when>
+                <xsl:when test="ancestor::back">back</xsl:when>
+                <xsl:otherwise>body</xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
     </xsl:template>
 
 
