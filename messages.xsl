@@ -99,6 +99,16 @@
             <xsl:with-param name="name" select="'msgListOfIllustrations'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strListOfTables">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgListOfTables'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strAcknowledgements">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgAcknowledgements'"/>
+        </xsl:call-template>
+    </xsl:variable>
 
     <xsl:variable name="strCorrections">
         <xsl:call-template name="GetMessage">
@@ -138,6 +148,11 @@
     <xsl:variable name="strColophon">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgColophon'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strGlossary">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgGlossary'"/>
         </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="strApparatus">

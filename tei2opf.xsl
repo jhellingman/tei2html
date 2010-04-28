@@ -276,6 +276,15 @@
                 </reference>
             </xsl:if>
 
+            <!-- name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
+            <xsl:if test="key('id', 'cover-image')">
+                <reference type="other.ms-coverimage" title="{$strCoverImage}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="key('id', 'cover-image')[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
             <xsl:if test="key('id', 'toc')">
                 <reference type="toc" title="{$strTableOfContents}">
                     <xsl:call-template name="generate-href-attribute">
@@ -292,6 +301,14 @@
                 </reference>
             </xsl:if>
 
+            <xsl:if test="key('id', 'lot')">
+                <reference type="lot" title="{$strListOfTables}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="key('id', 'lot')[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
             <xsl:if test="/TEI.2/text/front/titlePage">
                 <reference type="title-page" title="{$strTitlePage}">
                     <xsl:call-template name="generate-href-attribute">
@@ -304,6 +321,14 @@
                 <reference type="dedication" title="{$strDedication}">
                     <xsl:call-template name="generate-href-attribute">
                         <xsl:with-param name="target" select="(//div1[@type='Dedication'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Acknowledgements']">
+                <reference type="acknowledgements" title="{$strAcknowledgements}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Acknowledgements'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
@@ -336,6 +361,14 @@
                 <reference type="copyright-page" title="{$strCopyrightPage}">
                     <xsl:call-template name="generate-href-attribute">
                         <xsl:with-param name="target" select="(//div1[@type='Copyright'])[1]"/>
+                    </xsl:call-template>
+                </reference>
+            </xsl:if>
+
+            <xsl:if test="//div1[@type='Glossary']">
+                <reference type="glossary" title="{$strGlossary}">
+                    <xsl:call-template name="generate-href-attribute">
+                        <xsl:with-param name="target" select="(//div1[@type='Glossary'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>

@@ -77,18 +77,21 @@ sub, sup
 .pglink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
 .catlink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
 .exlink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
