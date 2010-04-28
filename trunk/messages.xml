@@ -52,6 +52,8 @@
         <msg:message name="msgIllustration">Illustration</msg:message>
         <msg:message name="msgIllustration.n">Illustrations</msg:message>
         <msg:message name="msgListOfIllustrations">List of Illustrations</msg:message>
+        <msg:message name="msgListOfTables">List of Tables</msg:message>
+        <msg:message name="msgAcknowledgements">Acknowledgements</msg:message>
         <msg:message name="msgNote">Note</msg:message>
         <msg:message name="msgNote.n">Notes</msg:message>
         <msg:message name="msgPage">Page</msg:message>
@@ -83,6 +85,7 @@
         <msg:message name="msgBibliography">Bibliography</msg:message>
         <msg:message name="msgCoverImage">Cover Image</msg:message>
         <msg:message name="msgPreface">Preface</msg:message>
+        <msg:message name="msgGlossary">Glossary</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -655,6 +658,8 @@
         <msg:message name="msgIllustration">Illustratie</msg:message>
         <msg:message name="msgIllustration.n">Illustraties</msg:message>
         <msg:message name="msgListOfIllustrations">Lijst van Illustraties</msg:message>
+        <msg:message name="msgListOfTables">Lijst van Tabellen</msg:message>
+        <msg:message name="msgAcknowledgements">Dankwoord</msg:message>
         <msg:message name="msgNote">Noot</msg:message>
         <msg:message name="msgNote.n">Noten</msg:message>
         <msg:message name="msgPage">Bladzijde</msg:message>
@@ -686,6 +691,7 @@
         <msg:message name="msgBibliography">Bibliografie</msg:message>
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>
         <msg:message name="msgPreface">Voorwoord</msg:message>
+        <msg:message name="msgGlossary">Verklarende woordenlijst</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>
