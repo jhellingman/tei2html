@@ -228,6 +228,14 @@ p.tocSection
 }
 
 
+p.signed
+{
+    margin-top: 1.6em;
+    margin-left: 3.58em;
+    text-indent: -2em;
+}
+
+
 .epigraph
 {
     font-size:0.9em;
