@@ -85,6 +85,15 @@
    </teiHeader>
 <text>
 <front id="front">
+<div1 id="cover" type="Cover">
+
+
+<p><figure id="cover-image" rend="image(images/cover500.jpg)">
+<figDesc>Cover illustration.</figDesc>
+</figure></p>
+
+
+</div1>
 <titlePage>
 <docTitle>
 <titlePart>Creating documents in TEI</titlePart>

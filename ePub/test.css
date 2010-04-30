@@ -218,6 +218,14 @@ p.tocSection
 }
 
 
+p.signed
+{
+    margin-top: 1.6em;
+    margin-left: 3.58em;
+    text-indent: -2em;
+}
+
+
 .epigraph
 {
     font-size:0.9em;
@@ -669,6 +677,11 @@ p.firstpar
     text-indent: 0em;
 }
 
+p.byline
+{
+    text-indent: 0em;
+}
+
 .figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum, .stage
 {
     color: black;
@@ -699,18 +712,21 @@ sub, sup
 .pglink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
 .catlink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
 .exlink
 {
     background: inherit;
+    background-image: none;
     padding-right: 0;
 }
 
@@ -734,6 +750,36 @@ span.corr, span.abbr, span.measure
     border-bottom: 0;
 }
 
+/* add margins to various text elements */
+.lg, .lgouter, .epigraph, .argument, .table, .figure
+{
+    padding: 0;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* restore original margins on floating images */
+.floatLeft
+{
+    margin:10px 10px 10px 0;
+}
+
+.floatRight
+{
+    margin:10px 0 10px 10px;
+}
+
+
+/* OEB/ePub specific rules */
+.pagehead
+{
+    display:none; display:oeb-page-head;
+}
+
+.pagefoot
+{
+    display:none; display:oeb-page-foot;
+}
 
 
 
@@ -748,134 +794,123 @@ body
 
 
                 
-                .xd23e300
+                .xd23e305
                 {
                     color:red; background-color:yellow;
                 }
             
                 
-                .xd23e301
+                .xd23e306
                 {
                     color:green; text-align:right;
                 }
             
                 
-                .xd23e302
+                .xd23e307
                 {
                     color:blue; text-align:right;
                 }
             
                 
-                .xd23e338
+                .xd23e343
                 {
                     text-align:left;width:40%;
                 }
             
                 
-                .xd23e339
+                .xd23e344
                 {
                     text-align:right;
                 }
             
                 
-                .xd23e89
+                .xd23e94
                 {
                     font-style:italic;
                 }
             
                 
-                .xd23e99
+                .xd23e104
                 {
                     background-color:yellow;
                 }
             
                 
-                .xd23e137
+                .xd23e142
                 {
                     font-family:'Walbaum-Fraktur';
                 }
             
                 
-                .xd23e150
+                .xd23e155
                 {
                     font-size:14pt; color:red; background-color:yellow;
                 }
             
                 
-                .xd23e267
+                .xd23e272
                 {
                     margin:0px auto; display:table;
                 }
             
                 
-                .xd23e271
+                .xd23e276
                 {
                     valign:middle; width:2;
                 }
             
                 
-                .xd23e272
+                .xd23e277
                 {
                     valign:middle;
                 }
             
                 
-                .xd23e282
+                .xd23e287
                 {
                     margin-left:2em;
                 }
             
                 
-                .xd23e284
+                .xd23e289
                 {
                     width:25%;
                 }
             
                 
-                .xd23e286
+                .xd23e291
                 {
                     width:75%;
                 }
             
                 
-                .xd23e297
+                .xd23e302
                 {
                     width:40%; margin:0px auto; display:table;
                 }
             
                 
-                .xd23e306
+                .xd23e311
                 {
                     text-align:right;
                 }
             
                 
-                .xd23e325
+                .xd23e330
                 {
                     text-align:center;
                 }
             
                 
-                .xd23e330
+                .xd23e335
                 {
                     text-align:left;
                 }
             
                 
-                .xd23e337
+                .xd23e342
                 {
                     width:40%;
-                }
-            
-            .xd23e482width
-            {
-                width:80px;
-            }
-        
-                
-                .xd23e487
-                {
-                    width:100px;
                 }
             
             .xd23e487width
@@ -883,65 +918,76 @@ body
                 width:80px;
             }
         
-            .xd23e495width
+                
+                .xd23e492
+                {
+                    width:100px;
+                }
+            
+            .xd23e492width
             {
                 width:80px;
             }
         
-            .xd23e509width
+            .xd23e500width
+            {
+                width:80px;
+            }
+        
+            .xd23e514width
             {
                 width:480px;
             }
         
-            .xd23e529width
+            .xd23e534width
             {
                 width:480px;
             }
         
                 
-                .xd23e579
+                .xd23e584
                 {
                     font-style:italic;
                 }
             
                 
-                .xd23e610
+                .xd23e615
                 {
                     list-style-type:disc;
                 }
             
                 
-                .xd23e640
+                .xd23e645
                 {
                     list-style-type:upper-roman;
                 }
             
                 
-                .xd23e652
+                .xd23e657
                 {
                     list-style-type:lower-roman;
                 }
             
                 
-                .xd23e672
+                .xd23e677
                 {
                     text-align:left;
                 }
             
                 
-                .xd23e675
+                .xd23e680
                 {
                     text-align:right;
                 }
             
                 
-                .xd23e677
+                .xd23e682
                 {
                     text-align:center;
                 }
             
             
-            .xd23e680
+            .xd23e685
             {
                 background: url(images/initial-A.gif) no-repeat top left;
                 
@@ -949,7 +995,7 @@ body
                 
             }
 
-            .xd23e680init
+            .xd23e685init
             {
                 float: left;
                 width: 90px;
@@ -965,19 +1011,13 @@ body
 
         
                 
-                .xd23e685
+                .xd23e690
                 {
                     text-align:justify;
                 }
             
                 
-                .xd23e701
-                {
-                    text-align:center;
-                }
-            
-                
-                .xd23e710
+                .xd23e706
                 {
                     text-align:center;
                 }
@@ -985,29 +1025,35 @@ body
                 
                 .xd23e715
                 {
+                    text-align:center;
+                }
+            
+                
+                .xd23e720
+                {
                     text-indent:1em;
                 }
             
                 
-                .xd23e721
+                .xd23e726
                 {
                     text-indent:2em;
                 }
             
                 
-                .xd23e725
+                .xd23e730
                 {
                     text-indent:3em;
                 }
             
                 
-                .xd23e729
+                .xd23e734
                 {
                     text-indent:10em;
                 }
             
                 
-                .xd23e731
+                .xd23e736
                 {
                     font-style:italic;
                 }
