@@ -327,7 +327,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </note> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
-<figure id="test" url="images/test.jpg" rend="">
+<figure id="test" rend="image(images/test.jpg)">
     <head>This is the heading</head>
     <p>This is the description.</p>
 </figure>
@@ -342,7 +342,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </p>
 
 
-<figure id="test2" url="images/test.jpg" rend="float(right) link(http://www.bohol.ph/)">
+<figure id="test2" rend="image(images/test.jpg) float(right) link(http://www.bohol.ph/)">
     <head>The <hi>Philippine</hi> Tarsier</head>
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
@@ -354,7 +354,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </p>
 
 
-<figure id="tarsier1" url="images/tarsier.jpg">
+<figure id="tarsier1" rend="image(images/tarsier.jpg)">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
     <p type="figTopLeft">Top Left</p>
@@ -369,7 +369,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </figure>
 
 
-<figure id="tarsier2" url="images/tarsier.jpg">
+<figure id="tarsier2" rend="image(images/tarsier.jpg)">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
     <p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>

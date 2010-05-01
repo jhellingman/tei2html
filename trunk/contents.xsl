@@ -457,13 +457,28 @@
         </xsl:for-each>
     </xsl:template>
 
+    <xsl:template name="get-thumbnail-image">
+        <xsl:choose>
+            <!-- Derive name for thumbnail from image file name -->
+            <xsl:when test="contains(@rend, 'image(')">
+                <xsl:variable name="image">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+                </xsl:variable>
+                <xsl:value-of select="substring-before($image, '/')"/>
+                <xsl:text>/thumbs/</xsl:text>
+                <xsl:value-of select="substring-after($image, '/')"/>
+            </xsl:when>
+            <!-- Derive name for thumbnail from image id -->
+            <xsl:otherwise>images/thumbs/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="figure" mode="gallery">
         <td align="center" valign="middle">
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <img>
-                    <xsl:attribute name="src">images/thumbs/<xsl:value-of select="@id"/>.jpg</xsl:attribute>
+                    <xsl:attribute name="src"><xsl:call-template name="get-thumbnail-image"/></xsl:attribute>
                     <xsl:attribute name="alt"><xsl:value-of select="head"/></xsl:attribute>
                 </img>
             </a>
