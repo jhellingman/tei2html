@@ -46,19 +46,18 @@
                &availability.en;
             </availability>
          </publicationStmt>
-         <sourceDesc>
+        <notesStmt>
+            <note type="Description">A document intended to test the various features available in the Tei2html software.</note>
+        </notesStmt>
+        <sourceDesc>
             <bibl>
-               <author>Author of Work (as appears in source)</author>
-
-               <title>Title of Work (as appears in source)</title>
-
-               <publisher>Publisher of Source</publisher>
-
-               <pubPlace>Place</pubPlace>
-
-               <date>Year of Publication</date>
+                <author>Author of Work (as appears in source)</author>
+                <title>Title of Work (as appears in source)</title>
+                <publisher>Publisher of Source</publisher>
+                <pubPlace>Place</pubPlace>
+                <date>Year of Publication</date>
             </bibl>
-         </sourceDesc>
+        </sourceDesc>
       </fileDesc>
       <encodingDesc>
          <p>Details of encoding go here. Here you can describe any special conventions used in the text, such as special tags. This is also the place to describe any editorial policy followed when preparing the text.</p>

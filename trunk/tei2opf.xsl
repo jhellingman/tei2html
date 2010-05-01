@@ -31,6 +31,7 @@
                 <metadata>
                     <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
                     <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
+                    <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata"/>
                     <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
                     <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
                     <xsl:if test="@lang">
@@ -47,6 +48,10 @@
                     </xsl:choose>
                     <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
                     <dc:date opf:event="generation"><xsl:value-of select="current-dateTime()"/></dc:date>
+
+                    <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
+                        <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
+                    </xsl:if>
 
                     <xsl:if test="//figure[@id='cover-image']">
                         <meta name="cover" content="cover-image"/>
@@ -123,8 +128,65 @@
 
     <xsl:template match="author" mode="metadata">
         <dc:creator opf:role="aut">
+            <xsl:attribute name="opf:file-as">
+                <xsl:value-of select="."/>
+            </xsl:attribute>
             <xsl:value-of select="."/>
         </dc:creator>
+    </xsl:template>
+
+    <xsl:template match="respStmt" mode="metadata">
+        <dc:contributor>
+            <xsl:attribute name="opf:role">
+                <xsl:choose>
+                    <!-- List taken from OPF Standard, 2.0, section 2.2.6 [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html],
+                         derived from the MARC Code List for Relators  [http://www.loc.gov/marc/relators/relaterm.html] -->
+                    <xsl:when test="resp='Adapter'">adp</xsl:when>
+                    <xsl:when test="resp='Annotator'">ann</xsl:when>
+                    <xsl:when test="resp='Arranger'">arr</xsl:when>
+                    <xsl:when test="resp='Artist'">art</xsl:when>
+                    <xsl:when test="resp='Associated name'">asn</xsl:when>
+                    <xsl:when test="resp='Author'">aut</xsl:when>
+                    <xsl:when test="resp='Author in text extracts'">aqt</xsl:when>
+                    <xsl:when test="resp='Author in quotations'">aqt</xsl:when>
+                    <xsl:when test="resp='Author of afterword'">aft</xsl:when>
+                    <xsl:when test="resp='Author of postface'">aft</xsl:when>
+                    <xsl:when test="resp='Author of colophon'">aft</xsl:when>
+                    <xsl:when test="resp='Author of introduction'">aui</xsl:when>
+                    <xsl:when test="resp='Author of preface'">aui</xsl:when>
+                    <xsl:when test="resp='Author of foreword'">aui</xsl:when>
+                    <xsl:when test="resp='Bibliographic antecedent'">ant</xsl:when>
+                    <xsl:when test="resp='Book producer'">bkp</xsl:when>
+                    <xsl:when test="resp='Collaborator'">clb</xsl:when>
+                    <xsl:when test="resp='Commentator'">cmm</xsl:when>
+                    <xsl:when test="resp='Designer'">dsr</xsl:when>
+                    <xsl:when test="resp='Editor'">edt</xsl:when>
+                    <xsl:when test="resp='Illustrator'">ill</xsl:when>
+                    <xsl:when test="resp='Lyricist'">lyr</xsl:when>
+                    <xsl:when test="resp='Metadata contact'">mdc</xsl:when>
+                    <xsl:when test="resp='Musician'">mus</xsl:when>
+                    <xsl:when test="resp='Narrator'">nrt</xsl:when>
+                    <xsl:when test="resp='Other'">oth</xsl:when>
+                    <xsl:when test="resp='Photographer'">pht</xsl:when>
+                    <xsl:when test="resp='Printer'">prt</xsl:when>
+                    <xsl:when test="resp='Redactor'">red</xsl:when>
+                    <xsl:when test="resp='Reviewer'">rev</xsl:when>
+                    <xsl:when test="resp='Sponsor'">spn</xsl:when>
+                    <xsl:when test="resp='Thesis advisor'">ths</xsl:when>
+                    <xsl:when test="resp='Transcriber'">trc</xsl:when>
+                    <xsl:when test="resp='Translator'">trl</xsl:when>
+
+                    <!-- Related terms that are responsibility iso role oriented -->
+                    <xsl:when test="resp='Transcription'">trc</xsl:when>
+
+                    <xsl:otherwise>oth</xsl:otherwise>
+                </xsl:choose>
+            </xsl:attribute>
+            <xsl:attribute name="opf:file-as">
+                <xsl:value-of select="name"/>
+            </xsl:attribute>
+            <xsl:value-of select="name"/>
+        </dc:contributor>
     </xsl:template>
 
     <xsl:template match="publicationStmt" mode="metadata">
@@ -163,9 +225,9 @@
                     <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
                 </xsl:when>
                 <xsl:otherwise>images/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
-            </xsl:choose>        
+            </xsl:choose>
         </xsl:variable>
-    
+
         <xsl:call-template name="manifest-image-item">
             <xsl:with-param name="filename" select="$filename"/>
         </xsl:call-template>
@@ -263,6 +325,17 @@
 
     <!--== guides ==========================================================-->
 
+    <xsl:template name="get-cover-image">
+        <xsl:variable name="figure" select="(//figure[@id = 'cover-image'])[1]"/>
+        <xsl:choose>
+            <xsl:when test="contains($figure/@rend, 'image(')">
+                <xsl:value-of select="substring-before(substring-after($figure/@rend, 'image('), ')')"/>
+            </xsl:when>
+            <xsl:otherwise>images/<xsl:value-of select="$figure/@id"/>.jpg</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
     <xsl:template name="guide">
 
         <!-- Include references to specific elements -->
@@ -270,18 +343,21 @@
 
             <xsl:if test="key('id', 'cover')">
                 <reference type="cover" title="{$strCoverImage}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="key('id', 'cover')[1]"/>
-                    </xsl:call-template>
+                    <xsl:attribute name="href">
+                        <!-- We want a bare file name here to help some ePub readers -->
+                        <xsl:call-template name="generate-filename-for">
+                            <xsl:with-param name="node" select="key('id', 'cover')[1]"/>
+                        </xsl:call-template>
+                   </xsl:attribute>
                 </reference>
             </xsl:if>
 
-            <!-- name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
-            <xsl:if test="key('id', 'cover-image')">
+            <!-- Name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
+            <xsl:if test="//figure[@id = 'cover-image']">
                 <reference type="other.ms-coverimage" title="{$strCoverImage}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="key('id', 'cover-image')[1]"/>
-                    </xsl:call-template>
+                    <xsl:attribute name="href">
+                        <xsl:call-template name="get-cover-image"/>
+                    </xsl:attribute>
                 </reference>
             </xsl:if>
 
