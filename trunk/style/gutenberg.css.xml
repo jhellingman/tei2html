@@ -227,6 +227,11 @@ p.tocSection
     margin:0.7em 5%;
 }
 
+p.dateline
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+}
 
 p.signed
 {
@@ -234,7 +239,6 @@ p.signed
     margin-left: 3.58em;
     text-indent: -2em;
 }
-
 
 .epigraph
 {
