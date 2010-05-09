@@ -423,11 +423,11 @@ td.sum
     font-weight: normal;
 }
 
-.lg .linenum
+.lg .linenum, .sp .linenum
 {
     color:#777;
     font-size:90%;
-    left:-2.5em;
+    left: 16%;
     margin:0;
     position:absolute;
     text-align:center;

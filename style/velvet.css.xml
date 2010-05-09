@@ -15,6 +15,12 @@ body, a.hidden
     color: #888888;
 }
 
+.titlePage
+{
+    color: #FDF1BA;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
 {
     color: #FDF1BA;

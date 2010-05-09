@@ -1442,23 +1442,21 @@ bijgenaamden	bijgenaamde*
 bijgepasten	bijgepaste*
 bijgeschaafden	bijgeschaafde*
 bijgeschilderden	bijgeschilderde*
-bijgeschonken	~
-bijgeschoten	~
-bijgesleepten	~
+bijgesleepten	bijgesleepte*
 bijgesmeed	~
 bijgesmeten	~
 bijgesnuit	~
-bijgestelden	~
+bijgestelden	bijgestelde*
 bijgestreken	~
 bijgetelde	~
-bijgetelden	~
-bijgevoegden	~
+bijgetelden	bijgetelde*
+bijgevoegden	bijgevoegde*
 bijgewas	~
 bijgewasje	~
 bijgewasjes	~
 bijgewezen	~
 bijgewit	~
-bijgewoonden	~
+bijgewoonden	bijgewoonde*
 bijgeworpen	~
 bijgezeten	~
 bijgroei	~
@@ -1469,7 +1467,7 @@ bijhangsel	~
 bijhangsels	~
 bijharken	~
 bijhebbend	~
-bijhooren	~
+bijhooren	bijhoren
 bijhouding	~
 bijkaart	~
 bijkaarten	~
@@ -1479,7 +1477,7 @@ bijkeukentje	~
 bijkeukentjes	~
 bijkoks	~
 bijkomst	~
-bijkomstigen	~
+bijkomstigen	bijkomstige*
 bijkruipen	~
 bijlaagje	~
 bijlaagjes	~
@@ -1488,7 +1486,7 @@ bijlandig	~
 bijlbrief	~
 bijlbrieven	~
 bijleggingen	~
-bijloopen	~
+bijloopen	bijlopen
 bijlooper	bijloper
 bijloopers	bijlopers
 bijmeng	~
@@ -1523,8 +1521,8 @@ bijsnuiten	~
 bijstellingszin	~
 bijstellingszinnen	~
 bijstroom	~
-bijstroomen	~
-bijtenden	~
+bijstroomen	bijstromen
+bijtenden	bijtende*
 bijtendst	~
 bijthakken	~
 bijthakker	~
@@ -1532,7 +1530,7 @@ bijthakkers	~
 bijvalletje	~
 bijvalletjes	~
 bijvoegend	~
-bijvoeglijken	~
+bijvoeglijken	bijvoeglijke*
 bijwegje	~
 bijwegjes	~
 bijwerkje	~
@@ -1540,7 +1538,7 @@ bijwerkjes	~
 bijwerpen	~
 bijwijzen	~
 bijwitten	~
-bijwoordelijken	~
+bijwoordelijken	bijwoordelijke*
 bijzaakje	~
 bijzaakjes	~
 bijzettingen	~
@@ -1567,8 +1565,8 @@ biljartlaken	~
 biljoende	~
 biller	~
 billers	~
-billijkeren	~
-billijksten	~
+billijkeren	billijkere*
+billijksten	billijkste*
 billioen	biljoen
 billioenen	biljoenen
 bilzenkruid	~
@@ -1583,14 +1581,14 @@ binkje	~
 binkjes	~
 binnenbanden	~
 binnendijkse	~
-binnendijksen	~
+binnendijksen	binnendijkse*
 binnendoorgaan	~
 binnendoorgegaan	~
 binnengalerijen	~
 binnengedijkt	~
-binnengehaalden	~
+binnengehaalden	binnengehaalde*
 binnengeloodste	~
-binnengeloodsten	~
+binnengeloodsten	binnengeloodste*
 binnengestoomd	~
 binnengezeild	~
 binnenkamertje	~
@@ -1610,7 +1608,7 @@ binnenvertrekjes	~
 binnenvetje	~
 binnenvetjes	~
 binnenvoering	~
-binnenwaartsen	~
+binnenwaartsen	binnenwaartse*
 binnenwegje	~
 binnenwegjes	~
 binnenwind	~
@@ -1621,11 +1619,11 @@ binnenzeilen	~
 biographie	biografie
 biographieën	biografieën
 biographisch	biografisch
-biologischen	~
+biologischen	biologische*
 birkwortel	~
 birkwortels	~
 bismuth	~
-bisschoppelijken	~
+bisschoppelijken	bisschoppelijke*
 bisschopshoeden	~
 bisschopsmijters	~
 bisschopsmuts	~
@@ -1636,10 +1634,10 @@ bisseeren	bisseren
 bitje	~
 bitjes	~
 bitsen	bitse*
-bitsigen	~
+bitsigen	bitsige*
 bitsigst	~
 bitterachtige	~
-bitterachtigen	~
+bitterachtigen	bitterachtige*
 bitterachtiger	~
 bitterachtigst	~
 bitterkaraf	~
@@ -1648,20 +1646,20 @@ bitterkarafje	~
 bitterkarafjes	~
 bittertafels	~
 bitterwateren	~
-bivouak	~
-bivouakeerde	~
-bivouakeeren	~
-bivouakken	~
+bivouak	bivak
+bivouakeerde	bivakeerde
+bivouakeeren	bivakeren
+bivouakken	bivakken
 blaadde	~
 blaarde	~
-blaartrekkenden	~
+blaartrekkenden	blaartrekkende*
 blaasbalgje	~
 blaasbalgjes	~
 blaaskramp	~
 blaasontstekingen	~
-bladerlooze	~
+bladerlooze	bladerloze
 bladerrijk	~
-bladerrijken	~
+bladerrijken	bladerrijke*
 bladerrijker	~
 bladerrijkst	~
 bladgroenten	~
@@ -1676,10 +1674,10 @@ blanco-biljet	~
 blanco-biljetten	~
 blanco-krediet	~
 blanco-kredieten	~
-blankeren	~
+blankeren	blankere*
 blanketsels	~
-blanksten	~
-blauwachtigen	~
+blanksten	blankste*
+blauwachtigen	blauwachtige*
 blauwachtiger	~
 blauwachtigst	~
 blauwbekte	~
@@ -1687,17 +1685,17 @@ blauwbes	~
 blauwbessen	~
 blauwblauw	~
 blauwboekje	~
-blauweren	~
+blauweren	blauwere*
 blauwkiel	~
 blauwkleurige	~
-blauwkleurigen	~
+blauwkleurigen	blauwkleurige*
 blauwkuip	~
 blauwkuipen	~
-blauwlakensch	~
+blauwlakensch	blauwlakens
 blauwselfabriek	~
 blauwselfabrieken	~
 blauwst	~
-blauwsten	~
+blauwsten	blauwste*
 blauwverven	~
 blauwverver	~
 blauwververs	~
@@ -1706,13 +1704,13 @@ bleeker	bleker
 bleekerij	blekerij
 bleekerijen	blekerijen
 bleekers	blekers
-bleekershond	~
-bleekershonden	~
-bleekerswagen	~
-bleekerswagens	~
+bleekershond	blekershond
+bleekershonden	blekershonden
+bleekerswagen	blekerswagen
+bleekerswagens	blekerswagens
 bleekje	~
 bleekloon	~
-bleekloonen	~
+bleekloonen	bleeklonen
 bleekrood	~
 bleekst	~
 bleeksters	~
@@ -1731,10 +1729,10 @@ blesseeren	blesseren
 blesseert	~
 blessuren	~
 blezen	~
-blijderen	~
-blijdsten	~
-blijen	~
-blijgeestigen	~
+blijderen	blijdere*
+blijdsten	blijdste*
+blijen	blije*
+blijgeestigen	blijgeestige*
 blijgeestiger	~
 blijgeestigst	~
 blijkbaarder	~
@@ -1742,8 +1740,8 @@ blijkbaarheid	~
 blijkbaarst	~
 blijkje	~
 blijkjes	~
-blijmoedigen	~
-blijmoedigsten	~
+blijmoedigen	blijmoedige*
+blijmoedigsten	blijmoedigste*
 blikaars	~
 blikaarzen	~
 blikgat	~
@@ -1764,7 +1762,7 @@ blikvuurde	~
 blinde-darmontsteking	~
 blinde-darmontstekingen	~
 blindeer	~
-blindeeren	~
+blindeeren	blinderen
 blindemannen	~
 blindemans	~
 blinden-instituten	~
@@ -1776,32 +1774,32 @@ blinkerds	~
 blinkworm	~
 blinkwormen	~
 bloedbruiloft	~
-bloeddiarrhee	~
-bloeddorstigen	~
+bloeddiarrhee	bloeddiarree
+bloeddorstigen	bloeddorstige*
 bloeddorstigst	~
-bloeddorstigsten	~
+bloeddorstigsten	bloeddorstigste*
 bloedelooze	~
-bloederigen	~
+bloederigen	bloederige*
 bloederiger	~
 bloederigere	~
-bloederigeren	~
+bloederigeren	bloederigere*
 bloederigst	~
 bloederigste	~
-bloederigsten	~
+bloederigsten	bloederigste*
 bloedigen	bloedige*
 bloedigere	~
-bloedigeren	~
+bloedigeren	bloedigere*
 bloedigst	~
-bloedigsten	~
-bloedkleurigen	~
+bloedigsten	bloedigste*
+bloedkleurigen	bloedkleurige*
 bloedloogzout	~
-bloedrijken	~
+bloedrijken	bloedrijke*
 bloedrijker	~
 bloedrijkst	~
-bloedstelpenden	~
+bloedstelpenden	bloedstelpende*
 bloedvlekje	~
 bloedvlekjes	~
-bloedwarmen	~
+bloedwarmen	bloedwarme*
 bloedworsten	~
 bloeisel	~
 bloembodems	~
@@ -1810,21 +1808,21 @@ bloemenmaaksters	~
 bloemenmandje	~
 bloemenmandjes	~
 bloemhoven	~
-bloemigen	~
+bloemigen	bloemige*
 bloemigst	~
 bloemisterijen	~
 bloemkoolen	bloemkolen
 bloemkronen	~
 bloemmarkten	~
 bloemzaden	~
-bloemzoeten	~
+bloemzoeten	bloemzoete*
 bloesempje	~
 blokhuisje	~
 blokhuisjes	~
 blokkeeren	blokkeren
 blokkeering	blokkering
-blokkeeringen	~
-blokkendoozen	~
+blokkeeringen	blokkeringen
+blokkendoozen	blokkendozen
 blokkenmaker	~
 blokkenmakers	~
 blokland	~
@@ -1832,8 +1830,8 @@ bloklanden	~
 bloks	~
 blokstelsel	~
 blondere	~
-blonderen	~
-blondsten	~
+blonderen	blondere*
+blondsten	blondste*
 blooder	bloder
 bloodst	~
 bloohartig	blohartig
@@ -1843,31 +1841,31 @@ blooheid	bloheid
 blootelijk	blotelijk
 blooten	bloten
 blooter	bloter
-blootgelegden	~
+blootgelegden	blootgelegde*
 blootgelegen	~
 blootgeleid	~
-blootgestelden	~
+blootgestelden	blootgestelde*
 blosjes	~
 blouwde	~
 blouwels	~
-blozenden	~
+blozenden	blozende*
 blufferijen	~
 blufje	~
 blufjes	~
-bluschgereedschap	~
-bluschgereedschappen	~
-bluschgranaat	~
-bluschgranaten	~
-bluschmiddel	~
+bluschgereedschap	blusgereedschap
+bluschgereedschappen	blusgereedschappen
+bluschgranaat	blusgranaat
+bluschgranaten	blusgranaten
+bluschmiddel	blusmiddel
 bluschmiddelen	blusmiddelen
-bluschster	~
-bluschsters	~
+bluschster	blusster
+bluschsters	blussters
 bluschte	bluste
 blusschen	blussen
 blusscher	blusser
 blusschers	blussers
 blussching	blussing
-blusschingen	~
+blusschingen	blussingen
 blutsing	~
 blutsingen	~
 blutskoorts	~
@@ -1875,10 +1873,10 @@ blutskoortsen	~
 boa's	~
 bobbekop	~
 bobbekoppen	~
-bobbeligen	~
+bobbeligen	bobbelige*
 bobbeliger	~
 bobbeligst	~
-bobbelingen	~
+bobbelingen	bobbelinge*
 bobberd	~
 bobberde	~
 bobberds	~
@@ -1891,9 +1889,9 @@ bochelen	~
 bocheljoen	~
 bocheljoenen	~
 bocheltjes	~
-bochtigen	~
+bochtigen	bochtige*
 bochtigere	~
-bochtigeren	~
+bochtigeren	bochtigere*
 bochtigst	~
 bochtje	~
 bochtjes	~
@@ -1939,15 +1937,15 @@ boegstag	~
 boegstagen	~
 boeha	~
 boeienden	boeiende*
-boeienderen	~
-boeiendsten	~
+boeienderen	boeiendere*
+boeiendsten	boeiendste*
 boeiertje	~
 boeiertjes	~
 boeiplank	~
-boeireepen	~
+boeireepen	boeirepen
 boeisel	~
 boeisels	~
-boekachtigen	~
+boekachtigen	boekachtige*
 boekachtiger	~
 boekachtigst	~
 boekanieren	~
@@ -1961,10 +1959,10 @@ boekbinderspersen	~
 boekdeelen	boekdelen
 boekdeeltjes	~
 boekdrukpersen	~
-boekeboom	~
-boekeboomen	~
+boekeboom	boekenboom
+boekeboomen	boekenbomen
 boekedegort	~
-boekel	Boekel; boekel
+boekel	boekel
 boekels	~
 boekeltje	~
 boekeltjes	~
@@ -1986,9 +1984,9 @@ boekenrekjes	~
 boekenschorpioen	~
 boekenschorpioenen	~
 boekentasch	boekentas
-boekentasschen	~
+boekentasschen	boekentassen
 boeker	~
-boekerigen	~
+boekerigen	boekerige*
 boekerijtje	~
 boekerijtjes	~
 boekers	~
@@ -2009,9 +2007,9 @@ boekweitekoek	~
 boekweitekoeken	~
 boekweitemeel	~
 boekweiten	~
-boelage	boelage; boelage
+boelage	boelage
 boeldagen	~
-boeleerder	boeleerder; boeleerder
+boeleerder	boeleerder
 boeleeren	boeleren
 boeleersters	~
 boelig	~
@@ -2021,7 +2019,7 @@ boendertje	~
 boenlap	~
 boenlappen	~
 boerenboon	~
-boerenboonen	~
+boerenboonen	boerenbonen
 boerendeernen	~
 boerendeerns	~
 boerengrauw	~
@@ -2051,13 +2049,13 @@ boerinnenrok	~
 boerinnenrokken	~
 boersch	boers
 boerscher	boerser
-boerschheden	~
+boerschheden	boersheden
 boerschheid	boersheid
-boerscht	~
+boerscht	boerst
 boertend	~
 boertenderwijs	~
 boertenderwijze	~
-boertigen	~
+boertigen	boertige*
 boertigst	~
 boertte	~
 boetedag	~
@@ -2067,18 +2065,18 @@ boetgezang	~
 boetgezangen	~
 boetgezanten	~
 boetkleed	~
-boetkleederen	~
+boetkleederen	boetklederen
 boetpredikatie	~
 boetpredikatiën	~
 boetpredikaties	~
-boetpreeken	~
-boetseerder	boetseerder; boetseerder
+boetpreeken	boetpreken
+boetseerder	boetseerder
 boetseeren	boetseren
 boetseering	~
-boetseeringen	~
+boetseeringen	boetseringen
 boetseerstok	~
 boetseerstokken	~
-boetvaardigen	~
+boetvaardigen	boetvaardige*
 boetvaardiger	~
 boetvaardigst	~
 boevenjacht	~
@@ -2113,14 +2111,14 @@ bokachtigheden	~
 bokachtigheid	~
 bokachtigst	~
 bokjes	~
-bokkeleder	~
-bokkelederen	~
-bokkeleer	~
-bokkeleeren	~
+bokkeleder	bokkenleder
+bokkelederen	bokkenlederen
+bokkeleer	bokkenleer
+bokkeleeren	bokkenleren
 bokkenleder	~
 bokkenlederen	~
 bokkenleer	~
-bokkenleeren	~
+bokkenleeren	bokkenleren
 bokkenwagens	~
 bokkepruik	~
 bokkesprong	~
@@ -2133,8 +2131,8 @@ bokkigheid	~
 bokkigst	~
 bokkinghang	~
 bokkinghangen	~
-bokkingrookerij	~
-bokkingrookerijen	~
+bokkingrookerij	bokkingrokerij
+bokkingrookerijen	bokkingrokerijen
 bokkinkje	~
 bokkinkjes	~
 boksbeugels	~
@@ -2142,7 +2140,7 @@ boksblok	~
 boksblokken	~
 boksboon	~
 bokse	~
-boksers	Boksers; boksers
+boksers	boksers
 bokshoorns	~
 bokshoren	~
 bokshorens	~
@@ -2156,16 +2154,16 @@ bolfunctie	~
 bolfuncties	~
 bollaag	~
 bollagen	~
-bolleboozen	~
+bolleboozen	bollebozen
 bollebuis	~
 bollebuisje	~
 bollebuisjes	~
 bollejagen	~
 bollenbakker	~
 bollenbakkers	~
-bolligen	~
+bolligen	bollige*
 bolligheid	~
-bolronden	~
+bolronden	bolronde*
 bolst	~
 bolsterde	~
 bolstert	~
@@ -2173,30 +2171,30 @@ bolton	~
 boltonnen	~
 bolussen	~
 bolvormige-driehoeksmeting	~
-bolvormigen	~
+bolvormigen	bolvormige*
 bolwerkje	~
 bolwerkjes	~
 bolwerkt	~
 bolwormen	~
 bolzaad	~
 bombardeeren	bombarderen
-bombastischen	~
+bombastischen	bombastische*
 bombeen	~
-bombeenen	~
+bombeenen	bombenen
 bomgaten	~
 bom-ijs	~
 bondgenoote	bondgenote
 bondgenooten	bondgenoten
-bondigen	~
+bondigen	bondige*
 bondigere	~
-bondigeren	~
-bondigsten	~
+bondigeren	bondigere*
+bondigsten	bondigste*
 bondstaat	~
 bondstaten	~
 bongel	~
 bongels	~
 bonkerig	~
-bonkerigen	~
+bonkerigen	bonkerige*
 bonkeriger	~
 bonkerigst	~
 bonkers	~
@@ -2206,47 +2204,47 @@ bonnefooi	~
 bonsje	~
 bonsjes	~
 bontere	~
-bonteren	~
-bontsten	~
+bonteren	bontere*
+bontsten	bontste*
 bonzing	~
 bonzingen	~
 bonzings	~
 bonzinkje	~
 bonzinkjes	~
 boodschaplooper	boodschaploper
-boodschaploopers	~
-boogschutter	Boogschutter; boogschutter
+boodschaploopers	boodschaplopers
+boogschutter	boogschutter
 boogswijs	~
 boogswijze	~
 boombasten	~
 boombladeren	~
 boomen	bomen
 boomig	bomig
-boomiger	~
-boomigst	~
+boomiger	bomiger
+boomigst	bomigst
 boomklerk	~
 boomklerken	~
 boomklimmer	~
 boomklimmers	~
 boomkweeker	boomkweker
-boomkweekers	~
+boomkweekers	boomkwekers
 boomswijs	~
 boomswijze	~
 boomwol	~
-booneboom	~
-booneboomen	~
+booneboom	bonenboom
+booneboomen	bonenbomen
 boonen	bonen
-boonenbrood	~
+boonenbrood	bonenbrood
 boonenkruid	bonenkruid
-boonenmeel	~
-boonenpeul	~
-boonensoep	~
+boonenmeel	bonenmeel
+boonenpeul	bonenpeul
+boonensoep	bonensoep
 boonenstaak	bonenstaak
 boonenstaken	bonenstaken
 boonenveld	bonenveld
-boonenvelden	~
+boonenvelden	bonenvelden
 boordendoos	~
-boordendoozen	~
+boordendoozen	boordendozen
 boordevolletjes	~
 boordjes	~
 boordlinten	~
@@ -2254,15 +2252,15 @@ boorijzers	~
 boorlepel	~
 boorlepels	~
 booromslagen	~
-boosaardigen	~
+boosaardigen	boosaardige*
 boosaardigst	~
-boosten	~
+boosten	booste*
 booten	boten
 bootsmansmaats	~
 booze	boze
 boozer	bozer
-boozigheden	~
-boozigheid	~
+boozigheden	bozigheden
+boozigheid	bozigheid
 bordeelen	bordelen
 bordesje	~
 bordesjes	~
@@ -2282,7 +2280,7 @@ borgstroppen	~
 borgtochtelijk	~
 borium	~
 borrelflesch	borrelfles
-borrelflesschen	~
+borrelflesschen	borrelflessen
 borstbeeldje	~
 borstbeeldjes	~
 borstelachtig	~
@@ -2300,15 +2298,15 @@ borstplaatje	~
 borstplaatjes	~
 bosch	bos
 boschachtig	bosachtig
-boschachtiger	~
-boschachtigst	~
+boschachtiger	bosachtiger
+boschachtigst	bosachtigste
 boschbes	bosbes
 boschbessen	bosbessen
 boschbrand	bosbrand
 boschbranden	bosbranden
 boschduif	bosduif
 boschduivel	bosduivel
-boschduivels	~
+boschduivels	bosduivels
 boschduiven	bosduiven
 boschgeus	bosgeus
 boschgeuzen	bosgeuzen
@@ -2316,12 +2314,12 @@ boschgrond	bosgrond
 boschgronden	bosgronden
 boschje	bosje
 boschjes	bosjes
-boschjesman	~
+boschjesman	bosjesman
 boschjesmannen	Bosjesmannen
 boschwachter	boswachter
 boschwachters	boswachters
-bosschage	bossage; bosschage
-bosschages	bossages; bosschages
+bosschage	~
+bosschages	~
 bosschen	bossen
 bosser	~
 bossers	~
@@ -2329,7 +2327,7 @@ bossing	~
 bossingen	~
 bostontafeltje	~
 bostontafeltjes	~
-botanischen	~
+botanischen	botanische*
 botaniseer	~
 botaniseeren	botaniseren
 botboer	~
@@ -2356,7 +2354,7 @@ boterwarmer	~
 boterwarmers	~
 boterwet	~
 boterzuur	~
-botgevierden	~
+botgevierden	botgevierde*
 botheden	~
 botmuilen	~
 botsje	~
@@ -2374,9 +2372,9 @@ botwagens	~
 bouden	boude*
 boudst	~
 bouillonkoppen	~
-bouquetje	~
-bouquetjes	~
-bouquetten	~
+bouquetje	boeketje
+bouquetjes	boeketjes
+bouquetten	boeketten
 boutgat	~
 boutgaten	~
 boutig	~
@@ -2385,7 +2383,7 @@ boutigst	~
 bouwboer	~
 bouwboeren	~
 bouwcommissies	~
-bouwdoozen	~
+bouwdoozen	bouwdozen
 bouwens	~
 bouwerijen	~
 bouwgereedschap	~
@@ -2398,7 +2396,7 @@ bouwlui	~
 bouwman	~
 bouwsteenen	bouwstenen
 bouwtijd	~
-bouwvalligen	~
+bouwvalligen	bouwvallige*
 bouwvalligst	~
 bouwverordening	~
 bovenaardsch	bovenaards
@@ -2525,7 +2523,7 @@ calêche	calèche
 calêches	~
 calligraaf	~
 calligrafen	~
-calligraphie	~
+calligraphie	calligrafie
 calorifères	~
 calqueer	~
 calqueeren	calqueren
@@ -2539,21 +2537,21 @@ canapé's	~
 candelaber	~
 candelabers	~
 candidaat	kandidaat
-candidaat-notaris	~
-candidaat-notarissen	~
+candidaat-notaris	kandidaat-notaris
+candidaat-notarissen	kandidaat-notarissen
 candidaats	kandidaats
 candidaats-examen	kandidaats-examen
-candidaats-examens	~
+candidaats-examens	kandidaats-examens
 candidaats-examina	~
 candidaten	kandidaten
 candidaturen	~
 candidatuur	kandidatuur
-canonieken	~
+canonieken	canonieke*
 cantine	kantine
 cantines	~
 capaciteiten-stelsel	~
 capillair	~
-capillairen	~
+capillairen	capillaire*
 capitool	~
 capitulatiën	~
 capituleer	~
@@ -2581,7 +2579,7 @@ catechisatiekamer	~
 catechisatiekamers	~
 catechisaties	~
 catechiseeren	catechiseren
-categorischen	~
+categorischen	categorische*
 catholicisme	~
 Catholiek	~
 catholiek	~
@@ -2592,7 +2590,7 @@ cavalerie-officier	~
 cavalerie-officieren	~
 caveerde	~
 caveeren	~
-cayenne	Cayenne; cayenne
+cayenne	cayenne
 cayenne-peper	~
 cedelen	~
 cedeltjes	~
@@ -2604,9 +2602,9 @@ ceintuurbanen	~
 ceintuurtjes	~
 cellebroer	~
 cellebroers	~
-cellulairen	~
+cellulairen	cellulaire*
 celvormig	~
-celvormigen	~
+celvormigen	celvormige*
 centiares	~
 centigram	~
 centigrammen	~
@@ -2614,25 +2612,25 @@ centiliter	~
 centiliters	~
 centraalstation	~
 centraalstations	~
-centralen	~
+centralen	centrale*
 centraliseeren	centraliseren
 centraliseert	~
 certificeeren	certificeren
 châle	~
 châles	~
 charivari's	~
-charmanten	~
+charmanten	charmante*
 charmantere	~
-charmanteren	~
+charmanteren	charmantere*
 charmantst	~
-charmantsten	~
+charmantsten	charmantste*
 chassinet	~
 chassinetje	~
 chassinetjes	~
 chassinetten	~
-chauffeurspet	chauffeurspet; chauffeurspet
+chauffeurspet	~
 chauffeurspetten	~
-chemischen	~
+chemischen	chemische*
 chenille	~
 chenilles	~
 Cherubijn	cherubijn
@@ -2642,15 +2640,15 @@ Cherubs	cherubs
 chicaneeren	chicaneren
 chicaneurs	~
 chinaasappel	~
-chinaasappelen	~
-chinaasappels	~
+chinaasappelen	sinasappel
+chinaasappels	sinasappels
 Chineesch	Chinees
 Chineezen	Chinezen
-chirurgischen	~
+chirurgischen	chirurgische*
 chloroformiseerde	~
-chloroformiseeren	~
-chocolaadje	~
-chocolaadjes	~
+chloroformiseeren	chloroformiseren
+chocolaadje	chocolaatje
+chocolaadjes	chocolaatjes
 chocolaketel	~
 chocolaketels	~
 cholerabacil	~
@@ -2665,12 +2663,12 @@ Christendom	christendom
 Christenmensch	christenmens
 Christenmenschen	christenmensen
 Christinnen	christinnen
-chronischen	~
+chronischen	chronische*
 chrysolieten	~
-cigarette	~
+cigarette	sigaret
 cigaretten	sigaretten
-cigarettenkoker	~
-cigarettenkokers	~
+cigarettenkoker	sigarettenkoker
+cigarettenkokers	sigarettenkokers
 cijfertelegram	~
 cijfertelegrammen	~
 cijnsbaar	~
@@ -2682,7 +2680,7 @@ cirkelomtrekken	~
 citaatjes	~
 citeeren	citeren
 citroenpersen	~
-civielen	~
+civielen	civiele*
 civieler	~
 civiel-ingenieur	~
 civiel-ingenieurs	~
@@ -2708,7 +2706,7 @@ cokesbakken	~
 collatiën	~
 collation	~
 collationneerde	~
-collationneeren	~
+collationneeren	collationneren
 collations	~
 collectante	~
 collecte-bus	~
@@ -2721,14 +2719,14 @@ collecte-zak	~
 collecte-zakje	~
 collecte-zakjes	~
 collecte-zakken	~
-collectiën	~
+collectiën	collecties
 collegaen	~
 collega's	~
 cologne-fabriek	~
 cologne-fabrieken	~
 cologne-zeep	~
 colonnen	~
-combinatiën	~
+combinatiën	combinaties
 combineeren	combineren
 comedie	komedie
 comediën	komedies
@@ -2742,7 +2740,7 @@ commandement	~
 commandementen	~
 commandeuren	~
 commandeurskruisen	~
-commanditairen	~
+commanditairen	commanditaire*
 commando-brug	~
 commando-bruggen	~
 commando's	~
@@ -2765,18 +2763,18 @@ communiebanken	~
 communiedag	~
 communiedagen	~
 communieerde	~
-communieeren	~
+communieeren	communieren
 communiekleed	~
 commutator	~
-commutatoren	~
+commutatoren	commutatore*
 commutators	~
 comparativus	~
 compensatiën	~
 compenseer	~
 compenseeren	compenseren
-competenten	~
+competenten	competente*
 competentere	~
-competenteren	~
+competenteren	competentere*
 competentiën	~
 competentst	~
 completeer	~
@@ -2806,7 +2804,7 @@ condensatie-water	~
 condenseeren	condenseren
 conditioneele	conditionele
 conditionneerde	~
-conditionneeren	~
+conditionneeren	conditionneren
 condoleantiebezoek	~
 condoleantiebezoeken	~
 condoleantiën	~
@@ -2832,7 +2830,7 @@ confisqueeren	confisqueren
 confisqueert	~
 confiturentaart	~
 confiturentaarten	~
-conformen	~
+conformen	conforme*
 confronteeren	confronteren
 confuser	~
 confusiën	~
@@ -2849,11 +2847,11 @@ conrectors	~
 consciëntiën	~
 consciënties	~
 consciëntieust	~
-consequenten	~
-consequenteren	~
+consequenten	consequente*
+consequenteren	consequentere*
 consequentiën	~
-consequentsten	~
-conservatieveren	~
+consequentsten	consequentste*
+conservatieveren	conservatievere*
 conservatoire	~
 conservatoires	~
 consideratiën	consideraties
@@ -2894,13 +2892,13 @@ contrôle	controle
 controleeren	controleren
 contrôles	controles
 contubernaal	~
-contubernalen	~
-conventiën	~
+contubernalen	contubernale*
+conventiën	conventies
 conventioneele	conventionele
 conversatie-les	~
 conversatie-lessen	~
 converseeren	converseren
-conversiën	~
+conversiën	conversies
 conversie-ontwerp	~
 conversie-ontwerpen	~
 converteer	~
@@ -2927,17 +2925,17 @@ correcteren	~
 correctiën	~
 correctioneele	correctionele
 correctst	~
-correctsten	~
+correctsten	correctste
 correspondeeren	corresponderen
-correspondentiën	~
+correspondentiën	correspondenties
 corrigeeren	corrigeren
-coryphee	~
+coryphee	coryfee
 corypheeën	coryfeeën
 cosmetiek	~
-cosmographie	~
+cosmographie	cosmografie
 cosmographieën	~
 cosmopoliet	~
-cosmopolieten	~
+cosmopolieten	cosmopoliete*
 cosmopolitisch	~
 cosmopolitisme	~
 cotta	~
@@ -2965,7 +2963,7 @@ credo's	~
 crimineele	criminele
 critiek	kritiek
 critisch	kritisch
-critiseerde	~
+critiseerde	kritiseerde
 critiseeren	kritiseren
 croquette	~
 croquettes	~
@@ -2989,19 +2987,19 @@ cylindertje	~
 cylindertjes	~
 cylindrisch	~
 cynischen	~
-cypersch	~
+cypersch	cypers
 cypersche	cyperse
 cypresje	~
 cypresjes	~
 cypresseboom	~
-cypresseboomen	~
+cypresseboomen	cypressebomen
 cypressenhout	~
 daagsch	daags
 daaldersplaats	~
 daaldersplaatsen	~
 daaldertjes	~
 daarbenevens	~
-dadelijken	~
+dadelijken	dadelijke*
 dadelijkheid	~
 dadeltjes	~
 daderessen	~
@@ -3011,7 +3009,7 @@ daemonisch	demonisch
 dagdiefde	~
 dagdieverijen	~
 dagelijksch	dagelijks
-dagelijksen	~
+dagelijksen	dagelijkse*
 dagkaarten	~
 daglooner	dagloner
 daglooners	dagloners
@@ -3021,20 +3019,20 @@ dagteekening	dagtekening
 dagteekeningen	dagtekeningen
 dahlia's	~
 dakdicht	~
-daklooze	~
+daklooze	dakloze
 damasceerde	~
-damasceeren	~
+damasceeren	damasceren
 damen	~
 damesfietsen	~
-damlooper	~
-damloopers	~
+damlooper	damloper
+damloopers	damlopers
 damper	~
-dampigen	~
+dampigen	dampige*
 dampiger	~
 dampigst	~
 dampkringen	~
 damspelers	~
-danigen	~
+danigen	danige*
 dankfeesten	~
 dansjes	~
 dapperen	dappere*
@@ -3048,8 +3046,8 @@ dassenhol	~
 dassenholen	~
 dassennet	~
 dassennetten	~
-dassevel	~
-dassevellen	~
+dassevel	dassenvel
+dassevellen	dassenvellen
 dateeren	dateren
 dateering	datering
 dateeringen	dateringen
@@ -3062,7 +3060,7 @@ dauwels	~
 dauweltje	~
 dauweltjes	~
 deballoteerde	~
-deballoteeren	~
+deballoteeren	deballoteren
 debatteeren	debatteren
 debietzaak	~
 debietzaken	~
@@ -3111,15 +3109,15 @@ deeling	deling
 deelingen	delingen
 deelinkje	~
 deelinkjes	~
-deelnemenden	~
+deelnemenden	deelnemende*
 deelnemendst	~
 deeltallen	~
-deemoedigen	~
+deemoedigen	deemoedige*
 deemoedigst	~
 Deensch	Deens
-deerlijken	~
+deerlijken	deerlijke*
 deerlijkst	~
-deerniswaardigen	~
+deerniswaardigen	deerniswaardige*
 deerniswaardiger	~
 deerniswaardigst	~
 deesem	desem
@@ -3127,12 +3125,12 @@ deesemde	~
 deesemen	desemen
 definitiën	~
 deftigen	deftige*
-deftigeren	~
-deftigsten	~
+deftigeren	deftigere*
+deftigsten	deftigste*
 degelijken	degelijke*
 degelijkere	~
-degelijkeren	~
-degelijksten	~
+degelijkeren	degelijkere*
+degelijksten	degelijkste*
 degels	~
 degenstooten	degenstoten
 degentjes	~
@@ -3152,7 +3150,7 @@ dekhuizen	~
 dekhutten	~
 dekje	~
 dekjes	~
-dekker	Dekker; dekker
+dekker	dekker
 dekkleeden	dekkleden
 dekknecht	~
 dekknechts	~
@@ -3162,20 +3160,19 @@ dekplank	~
 dekplanken	~
 dekriet	~
 dekselsch	deksels
-dekselsen	~
+dekselsen	dekselse*
 dekservet	~
 dekservetten	~
-deksteenen	~
-dekstroo	~
+deksteenen	dekstenen
+dekstroo	dekstro
 dekstut	~
 dekstutten	~
-delegatiën	~
+delegatiën	delegaties
 delfstofkunde	~
-deliberatiën	~
+deliberatiën	deliberaties
 delicieust	~
 delicieuzer	~
 delirium-tremens	~
-delling	delling; delling
 delta's	~
 deluw	~
 delving	~
@@ -3185,19 +3182,19 @@ demissies	~
 democraatje	~
 democraatjes	~
 democratischen	democratische*
-demonischen	~
-demonstratiën	~
+demonischen	demonische*
+demonstratiën	demonstraties
 demonstreeren	demonstreren
-dempigen	~
+dempigen	dempige*
 dempiger	~
 dempigheid	~
 dempigst	~
-denkbeeldigen	~
+denkbeeldigen	denkbeeldige*
 denkbeeldiger	~
 denkbeeldigst	~
 denkelijken	~
-denneboom	~
-denneboomen	~
+denneboom	dennenboom
+denneboomen	dennenbomen
 departementssecretaris	~
 departementssecretarissen	~
 deponeeren	deponeren
@@ -3209,7 +3206,7 @@ depot's	~
 deputatiën	~
 derailleeren	derailleren
 deraillementen	~
-derdendaagsch	~
+derdendaagsch	derdendaags
 derivative	~
 derrieachtig	~
 dertienen	~
@@ -3226,7 +3223,7 @@ descendentieleer	~
 deserteer	~
 deserteeren	deserteren
 deserteuren	~
-desertiën	~
+desertiën	deserties
 desgevorderd	~
 desinfecteer	~
 desinfecteerde	~
@@ -3236,7 +3233,7 @@ desolate-boedelkamer	~
 desolate-boedelkamers	~
 despootje	~
 despootjes	~
-despotischen	~
+despotischen	despotische*
 dessendiaan	~
 dessertje	~
 dessertjes	~
@@ -3248,8 +3245,8 @@ dessertvork	~
 dessertvorken	~
 dessertvorkje	~
 dessertvorkjes	~
-deugdelijken	~
-deugdelijkeren	~
+deugdelijken	deugdelijke*
+deugdelijkeren	deugdelijkere*
 deugdelijkst	~
 deugnietjes	~
 deukjes	~
@@ -3275,7 +3272,7 @@ diaconiehuizen	~
 diakones	~
 diakonessen	~
 dialectenstudie	~
-dialectischen	~
+dialectischen	dialectische*
 diamantje	~
 diamantjes	~
 diamantletter	~
@@ -3288,52 +3285,52 @@ diarrhee	~
 dichterlijken	dichterlijke*
 dichterlijkst	~
 dichtertjes	~
-dichtgemaakten	~
-dichtsluiten	dichtsluiten; dichtsluiten
-dichtsten	~
+dichtgemaakten	dichtgemaakte*
+dichtsluiten	~
+dichtsten	dichtste*
 dictaatboekje	~
 dictaatboekjes	~
 dictatenstudie	~
 dicteeren	dicteren
 dictee's	~
-diefachtigen	~
+diefachtigen	diefachtige*
 diefachtiger	~
 diefachtigst	~
 diemit	~
 diemiten	~
-dienovereenkomstigen	~
-dienstdoenden	~
-dienstigen	~
+dienovereenkomstigen	dienovereenkomstige*
+dienstdoenden	dienstdoende*
+dienstigen	dienstige*
 dienstigst	~
 dienstje	~
 dienstjes	~
 dienstpet	~
 dienstpetten	~
 diensttijden	~
-dienstvaardigen	~
+dienstvaardigen	dienstvaardige*
 dienstvaardigst	~
 dienstweigeringen	~
-dienstwilligen	~
+dienstwilligen	dienstwillige*
 dienstwilliger	~
 dienstwilligst	~
 dientafeltjes	~
-diepdenkenden	~
+diepdenkenden	diepdenkende*
 dieperen	diepere*
-dieplooden	~
+dieplooden	dieploden
 diepsten	diepste*
-diepzinnigen	~
+diepzinnigen	diepzinnige*
 diepzinnigere	~
-diepzinnigeren	~
+diepzinnigeren	diepzinnigere*
 diepzinnigst	~
-diepzinnigsten	~
+diepzinnigsten	diepzinnigste*
 dierenbeschermer	~
 dierenbeschermers	~
 dierenkweller	~
 dierenkwellers	~
 dierentent	~
 dierententen	~
-diergelijken	~
-dierlijken	~
+diergelijken	diergelijke*
+dierlijken	dierlijke*
 dierlijkst	~
 dievenlantaarntje	~
 dievenlantaarntjes	~
@@ -3362,15 +3359,15 @@ dijkt	~
 dikbloedig	~
 dikbloediger	~
 dikbloedigst	~
-dikbuikigen	~
+dikbuikigen	dikbuikige*
 dikbuikiger	~
 dikbuikigst	~
 dikhuidigen	~
 dikkerdje	~
 dikkerdjes	~
-dikkeren	~
+dikkeren	dikkere*
 dikkoppen	~
-diksten	~
+diksten	dikste*
 diktetje	~
 diktetjes	~
 dilemma's	~
@@ -3380,7 +3377,7 @@ dineeren	dineren
 dineetje	~
 dineetjes	~
 Dingsdag	dinsdag
-Dingsdagen	~
+Dingsdagen	dinsdagen
 Dingsdags	~
 Dingsdagsch	~
 dingtalen	~
@@ -3392,13 +3389,13 @@ diorama's	~
 diphthong	~
 diphthongen	~
 diploma's	~
-diplomatieken	~
-diplomatischen	~
-directen	~
+diplomatieken	diplomatieke*
+diplomatischen	diplomatische*
+directen	directe*
 directeurskamers	~
 directeurswoningen	~
 directieketen	~
-directiën	~
+directiën	directies
 dirigeeren	dirigeren
 dirkjespeer	~
 dirkjesperen	~
@@ -3406,7 +3403,7 @@ dirkte	~
 disch	dis
 dischgenoot	disgenoot
 dischgenooten	disgenoten
-dischte	~
+dischte	diste
 disciplineer	~
 disciplineeren	disciplineren
 disconteer	~
@@ -3448,47 +3445,47 @@ dodderig	~
 dodderiger	~
 dodderigst	~
 doellooze	doelloze
-doelmatigen	~
-doelmatigeren	~
-doelmatigsten	~
-doeltreffenden	~
+doelmatigen	doelmatige*
+doelmatigeren	doelmatigere*
+doelmatigsten	doelmatigste*
+doeltreffenden	doeltreffende*
 doeltreffendere	~
-doeltreffenderen	~
-doeltreffendsten	~
+doeltreffenderen	doeltreffendere*
+doeltreffendsten	doeltreffendste*
 doelverdedigers	~
 doemenswaardig	~
 doemvonnissen	~
-doemwaardigen	~
+doemwaardigen	doemwaardige*
 doemwaardiger	~
 doemwaardigst	~
-doenlijken	~
+doenlijken	doenlijke*
 doetjes	~
 doezelaars	~
 doffelde	~
 doffertje	~
 doffertjes	~
-doffigen	~
+doffigen	doffige*
 doffiger	~
 doffigst	~
 dofje	~
 dofjes	~
 dofst	~
 doggerboot	~
-doggerbooten	~
+doggerbooten	doggerboten
 doggers	~
 doggersbank	Doggersbank
 dogje	~
 dogjes	~
 dogma's	~
-dogmatischen	~
+dogmatischen	dogmatische*
 dokmeester	~
 doktersgang	~
 doktersvisites	~
-doldriftigen	~
+doldriftigen	doldriftige*
 doldriftiger	~
 doldriftigst	~
 doleeren	doleren
-dolf	Dolf; dolf
+dolf	dolf
 dolhamer	~
 dolhamers	~
 dolhuizen	~
@@ -3506,7 +3503,7 @@ dolligheden	~
 dolomiet	~
 dolomieten	Dolomieten
 dolsten	~
-dolzinnigen	~
+dolzinnigen	dolzinnige*
 dolzinniger	~
 dolzinnigheden	~
 dolzinnigst	~
@@ -3524,7 +3521,7 @@ domooren	domoren
 dompeling	~
 dompelingen	~
 dompertjes	~
-dompigen	~
+dompigen	dompige*
 dompiger	~
 dompigst	~
 Donderdag	donderdag
@@ -3532,23 +3529,23 @@ Donderdags	donderdags
 Donderdagsch	~
 donderjaagde	~
 dondersch	donders
-dondersen	~
-dondersteenen	~
-donkerblauwen	~
-donkerbruinen	~
-donkergroenen	~
+dondersen	donderse*
+dondersteenen	donderstenen
+donkerblauwen	donkerblauwe*
+donkerbruinen	donkerbruine*
+donkergroenen	donkergroene*
 donkerroode	donkerrode
-donzigen	~
+donzigen	donzige*
 donzigst	~
 doodakte	~
 doodakten	~
-doodarmen	~
+doodarmen	doodarme*
 doodbedaarde	~
-doodbedaarden	~
+doodbedaarden	doodbedaarde*
 doodbedden	~
 doodbloed	~
 doode	dode
-doodeenvoudigen	~
+doodeenvoudigen	doodeenvoudige*
 doodekop	dodekop
 doodelijk	dodelijk
 doodelijker	dodelijker
@@ -3562,16 +3559,16 @@ dooder	~
 dooders	doders
 doodfamiliaar	~
 doodfamiliare	~
-doodgebloeden	~
+doodgebloeden	doodgebloede*
 doodgejaagd	~
 doodgeloopen	doodgelopen
 doodgezeild	~
-doodgoeden	~
+doodgoeden	doodgoede*
 doodjagen	~
 doodloop	~
 doodloopen	doodlopen
-doodnuchteren	~
-doodsbenauwden	~
+doodnuchteren	doodnuchtere*
+doodsbenauwden	doodsbenauwde*
 doodsbleeke	doodsbleke
 doodsch	doods
 doodscher	~
@@ -3585,7 +3582,7 @@ doodstroom	~
 doodverfde	~
 doodvreters	~
 doodzeilen	~
-doodzieken	~
+doodzieken	doodzieke*
 doodzwijg	~
 doofpotje	~
 doofpotjes	~
@@ -3601,7 +3598,6 @@ doopers	dopers
 doopformulieren	~
 doophekken	~
 doopjurken	~
-doopmaal	doopmaal; doopmaal
 dooraderden	~
 dooraderen	~
 doorarbeiden	~
@@ -3611,7 +3607,7 @@ doorbreien	~
 doorbrekingen	~
 doorbrengers	~
 doorbuig	~
-doordachten	~
+doordachten	doordachte*
 doordraai	~
 doordravers	~
 doordrentelen	~
@@ -3619,15 +3615,15 @@ doordrijverijen	~
 doordringbare	~
 doordringenden	doordringende*
 doordringendheid	~
-doordringendsten	~
-doordrongenen	~
+doordringendsten	doordringendste*
+doordrongenen	doordrongene*
 doordruipen	~
-dooreengegooiden	~
+dooreengegooiden	dooreengegooide*
 dooreengehaspelde	~
-dooreengehaspelden	~
+dooreengehaspelden	dooreengehaspelde*
 dooreengekookt	~
-dooreengeloopen	~
-dooreengemengden	~
+dooreengeloopen	dooreengelopen
+dooreengemengden	dooreengemengde*
 dooreengeslagen	~
 dooreengeward	~
 dooreenkoken	~
@@ -3643,40 +3639,40 @@ doorgearbeid	~
 doorgebabbeld	~
 doorgebakken	~
 doorgebladerde	~
-doorgebladerden	~
-doorgeboorden	~
-doorgebrachten	~
+doorgebladerden	doorgebladerde*
+doorgeboorden	doorgeboorde*
+doorgebrachten	doorgebrachte*
 doorgebrande	~
-doorgebranden	~
+doorgebranden	doorgebrande*
 doorgebreid	~
-doorgedachten	~
+doorgedachten	doorgedachte*
 doorgedraafde	~
-doorgedraafden	~
+doorgedraafden	doorgedraafde*
 doorgedraaid	~
 doorgedraaide	~
-doorgedraaiden	~
+doorgedraaiden	doorgedraaide*
 doorgedrenteld	~
 doorgedronken	~
 doorgedropen	~
-doorgedrukten	~
+doorgedrukten	doorgedrukte*
 doorgegalmd	~
 doorgeglipt	~
 doorgegooid	~
 doorgegoten	~
-doorgegroeiden	~
-doorgehaalden	~
-doorgehakten	~
+doorgegroeiden	doorgegroeide*
+doorgehaalden	doorgehaalde*
+doorgehakten	doorgehakte*
 doorgehouwen	~
 doorgeijld	~
 doorgekermd	~
 doorgekliefd	~
 doorgeklopt	~
 doorgeknaagde	~
-doorgeknaagden	~
+doorgeknaagden	doorgeknaagde*
 doorgeknabbeld	~
-doorgeknipten	~
+doorgeknipten	doorgeknipte*
 doorgekookte	~
-doorgekookten	~
+doorgekookten	doorgekookte*
 doorgekrabd	~
 doorgekregen	~
 doorgekropen	~
@@ -3700,33 +3696,33 @@ doorgeperst	~
 doorgepikt	~
 doorgepriemd	~
 doorgeprikte	~
-doorgeprikten	~
+doorgeprikten	doorgeprikte*
 doorgepruimd	~
 doorgeraasd	~
 doorgeredeneerde	~
-doorgeredeneerden	~
+doorgeredeneerden	doorgeredeneerde*
 doorgeregen	~
-doorgeregenden	~
+doorgeregenden	doorgeregende*
 doorgereisde	~
-doorgereisden	~
+doorgereisden	doorgereisde*
 doorgeroeid	~
-doorgeroesten	~
+doorgeroesten	doorgeroeste*
 doorgerold	~
-doorgerookten	~
+doorgerookten	doorgerookte*
 doorgeschemerd	~
 doorgeschenen	~
 doorgeschermd	~
 doorgescheurde	~
 doorgescheurden	~
-doorgeschrapten	~
+doorgeschrapten	doorgeschrapte*
 doorgeschreeuwd	~
 doorgeschreid	~
 doorgeschut	~
 doorgesijpeld	~
 doorgesijpelde	~
-doorgesijpelden	~
+doorgesijpelden	doorgesijpelde*
 doorgesleept	~
-doorgeslikten	~
+doorgeslikten	doorgeslikte*
 doorgeslokt	~
 doorgeslopen	~
 doorgesluimerd	~
@@ -3734,26 +3730,26 @@ doorgesmeuld	~
 doorgesneeuwd	~
 doorgesnord	~
 doorgespeelde	~
-doorgespeelden	~
+doorgespeelden	doorgespeelde*
 doorgespit	~
 doorgespoelde	~
-doorgespoelden	~
+doorgespoelden	doorgespoelde*
 doorgespoten	~
 doorgesprongen	~
 doorgestampt	~
 doorgestevend	~
 doorgestoomde	~
-doorgestoomden	~
+doorgestoomden	doorgestoomde*
 doorgestooten	doorgestoten
 doorgestormd	~
 doorgestraald	~
 doorgestreden	~
-doorgestreepten	~
+doorgestreepten	doorgestreepte*
 doorgestreken	~
 doorgestrompeld	~
 doorgestroomde	~
-doorgestroomden	~
-doorgestuurden	~
+doorgestroomden	doorgestroomde*
+doorgestuurden	doorgestuurde*
 doorgetast	~
 doorgeteekend	~
 doorgeteld	~
@@ -3765,7 +3761,7 @@ doorgevaren	~
 doorgevijld	~
 doorgevloeid	~
 doorgevlogen	~
-doorgevoerden	~
+doorgevoerden	doorgevoerde*
 doorgevouwen	~
 doorgevraagd	~
 doorgevroren	~
@@ -3775,12 +3771,12 @@ doorgewassen	~
 doorgewaterd	~
 doorgeweekt	~
 doorgeweend	~
-doorgewerkten	~
+doorgewerkten	doorgewerkte*
 doorgewoed	~
 doorgewroet	~
-doorgezaagden	~
+doorgezaagden	doorgezaagde*
 doorgezaaid	~
-doorgezakten	~
+doorgezakten	doorgezakte*
 doorgezegen	~
 doorgezeild	~
 doorgezift	~
@@ -3806,7 +3802,7 @@ doorkronkeld	~
 doorkronkelde	~
 doorkronkelen	~
 doorlachen	~
-doorlaveeren	~
+doorlaveeren	doorlaveren
 doorleer	~
 doorleeren	doorleren
 doorleiden	~
@@ -3819,26 +3815,26 @@ doorluchtigen	doorluchtige*
 doorluchtigst	~
 doorluchtst	~
 doormalen	~
-doormarcheeren	~
+doormarcheeren	doormarcheren
 doormarsch	doormars
-doormarschen	~
-doormengden	~
+doormarschen	doormarsen
+doormengden	doormengde*
 doormijmerd	~
 doormijmerde	~
 doormijmeren	~
 doornaaid	~
 doornaaide	~
 doornaaien	~
-doornachtigen	~
+doornachtigen	doornachtige*
 doornachtiger	~
 doornachtigst	~
 doornagelden	~
 doornagelen	~
-doornigen	~
+doornigen	doornige*
 doorniger	~
 doornigst	~
-doornommeren	~
-doorns	Doorns; doorns
+doornommeren	doornummeren
+doorns	doorns
 doorpennen	~
 doorpersen	~
 doorpikken	~
@@ -3860,13 +3856,13 @@ doorrollen	~
 doorrook	~
 doorrooken	doorroken
 doorrooker	doorroker
-doorrookers	~
-doorrookertje	~
-doorrookertjes	~
+doorrookers	doorrokers
+doorrookertje	doorrokertje
+doorrookertjes	doorrokertjes
 doorschermen	~
 doorscheur	~
 doorscheurden	~
-doorschijnenden	~
+doorschijnenden	doorschijnende*
 doorschijnendheid	~
 doorschotene	~
 doorschotenen	~
@@ -3876,7 +3872,7 @@ doorschreeuwen	~
 doorschreien	~
 doorschutten	~
 doorsijpel	~
-doorslaanden	~
+doorslaanden	doorslaande*
 doorslaander	~
 doorslaandst	~
 doorslagje	~
@@ -3908,10 +3904,10 @@ doorsteker	~
 doorstekertje	~
 doorstekertjes	~
 doorstevenen	~
-doorstikken	doorstikken; doorstikken
+doorstikken	~
 doorstikt	~
 doorstokene	~
-doorstokenen	~
+doorstokenen	doorstokene*
 doorstoom	~
 doorstoomen	doorstomen
 doorstooten	doorstoten
@@ -3926,7 +3922,7 @@ doorstudeeren	doorstuderen
 doorsukkel	~
 doortast	~
 doortastte	~
-doorteekenen	~
+doorteekenen	doortekenen
 doortellen	~
 doortimmerden	~
 doortintelden	~
@@ -4109,7 +4105,6 @@ draakjes	~
 draakwortel	~
 drabbe	~
 drabbigheid	~
-drachten	Drachten; drachten
 drachtigen	~
 dradigen	~
 dradiger	~
@@ -5243,7 +5238,7 @@ frisketten	~
 frisscher	frisser
 fronsel	~
 fronselde	~
-fronselen	fronselen; fronselen
+fronselen	~
 frontaanvallen	~
 frontieren	~
 frontispicen	~
@@ -6100,9 +6095,6 @@ geelst	~
 geelvinken	~
 geëmailleerden	~
 geëmancipeerden	~
-geëmigreerd	gemigreerd; geëmigreerd
-geëmigreerde	gemigreerde; geëmigreerde
-geëmigreerden	gemigreerden
 geëmitteerd	~
 geëmitteerde	~
 geëmitteerden	~
@@ -6589,7 +6581,6 @@ gekiemde	~
 gekiemden	~
 gekierd	~
 gekieskauwd	~
-gekietel	gekietel; gekietel
 gekinderd	~
 gekinkt	~
 gekisten	~
@@ -6744,7 +6735,6 @@ gekroesden	~
 gekrold	~
 gekronkelden	~
 gekrooien	~
-gekrookt	gekrookt; gekrookt
 gekrookten	~
 gekroonden	gekroonde*
 gekroosd	~
@@ -7018,9 +7008,8 @@ gelorrendraaid	~
 gelubden	~
 geluibakt	~
 geluibuisd	~
-geluidgevend	geluidgevend; geluidgevend
+geluidgevend	~
 geluidgevenden	~
-geluierd	geluierd; geluierd
 geluierde	~
 geluierden	~
 geluimde	~
@@ -7630,7 +7619,6 @@ gesalarieerden	~
 gesammeld	~
 gesanctionneerd	~
 gesappeerd	~
-gesarde	gesarde; gescharde
 gesarden	~
 gesatineerden	~
 gesauste	~
@@ -7691,7 +7679,6 @@ geschooi	~
 geschooiden	~
 geschoorden	~
 geschoorvoet	~
-geschopte	geschopte; gesopte
 geschopten	~
 geschraagden	~
 geschraald	~
@@ -7823,8 +7810,6 @@ gesommeerden	~
 gesondeerde	~
 gesondeerden	~
 gesoppedopt	~
-gesopt	geschopt; gesopt
-gesopte	geschopte; gesopte
 gesopten	~
 gesorteerden	~
 gesoupeerde	~
@@ -8357,7 +8342,6 @@ gezondheidsmaatregelen	~
 gezondheidspas	~
 gezondheidspassen	~
 gezondheidspolitie	~
-gezondheidsraad	Gezondheidsraad; gezondheidsraad
 gezondheidsraden	~
 gezondheidsregel	~
 gezondheidsregelen	~
@@ -8474,7 +8458,6 @@ gijnbalken	~
 gijnblok	~
 gijnblokken	~
 gijnbloks	~
-gijnen	gijnen; gijnen
 gijnlooper	~
 gijnloopers	~
 gijns	~
@@ -8720,7 +8703,6 @@ goeierds	~
 goelijken	~
 goelijker	~
 goelijkst	~
-golfstroom	Golfstroom; golfstroom
 golfstroomen	~
 gomachtigen	~
 gomachtiger	~
@@ -9217,7 +9199,6 @@ gulhartigst	~
 gulheden	~
 gulletje	~
 gulletjes	~
-gulpen	Gulpen; gulpen
 gulpje	~
 gulpjes	~
 guluit	~
@@ -9235,8 +9216,6 @@ gunstigsten	~
 gunstje	~
 gunstjes	~
 gusten	~
-guts	guts; guts
-gutsen	gutsen; gutsen
 guttapercha	~
 guttegom	~
 gymnasiën	gymnasia
@@ -9372,7 +9351,6 @@ halssierraad	~
 halsstarrigen	~
 halsstarriglijk	~
 halsstarrigst	~
-halters	Halters; halters
 halveer	~
 halveeren	halveren
 halverwegen	~
@@ -9520,7 +9498,7 @@ harksels	~
 harmonica's	~
 harmonieeren	harmoniëren
 harmoniemuziek	~
-harmonischen	harmonischen; harmonischen
+harmonischen	harmonische*
 harpjes	~
 harpoende	~
 harpt	~
@@ -10313,7 +10291,6 @@ hooghartigen	~
 hooghartigst	~
 hooging	hoging
 hoogingen	hogingen
-hooglander	Hooglander; hooglander
 hooglanders	~
 hoogleeraar	hoogleraar
 hoogleeraars	hoogleraars
@@ -10346,7 +10323,6 @@ hoonender	~
 hoonendst	~
 hoopen	hopen
 hoopsgewijs	~
-hoorderes	hoorderes; hoorderes
 hooren	horen
 hoornachtigen	~
 hoornachtiger	~
@@ -10532,7 +10508,6 @@ huiveringwekkenden	~
 huiveringwekkendere	~
 huiveringwekkenderen	~
 huiveringwekkendst	~
-huizingen	Huizingen; huizingen
 huldde	~
 huldigingseed	~
 hulkje	~
@@ -11402,7 +11377,6 @@ insisteeren	insisteren
 inslager	~
 inslagers	~
 inslobberen	~
-inslokken	inslokken; inslokken
 insluip	~
 insluitingen	~
 insluitingsteeken	~
@@ -11512,7 +11486,7 @@ interpoleer	~
 interpoleeren	interpoleren
 interpreteeren	interpreteren
 intervenieer	~
-intervenieerde	intervenieerde; interveniëerde
+intervenieerde	~
 intervenieeren	~
 intiemen	intieme*
 intiemeren	~
@@ -11598,7 +11572,7 @@ ioon	~
 irenischen	~
 irias	~
 iriassen	~
-iris	Iris; iris
+iris	~
 ironiek	~
 ironischen	ironische*
 i's	~
@@ -11609,7 +11583,7 @@ isoleerbuis	~
 isoleerbuizen	~
 Israëlietisch	~
 isthmus	~
-Italiaansch	Italiaans; Italiaans
+Italiaansch	Italiaans
 ivoordraaiers	~
 izabel	~
 izabellen	~
@@ -11617,7 +11591,7 @@ jaaghout	~
 jaagloon	~
 jaagloonen	~
 jaagschuiten	~
-jaap	Jaap; jaap
+jaap	~
 jaapje	~
 jaapjes	~
 jaapte	~
@@ -11747,14 +11721,14 @@ jodenkriek	~
 jodenkrieken	~
 jodenpek	~
 jodentaal	~
-Jodinnen	Jodinnen; jodinnen
+Jodinnen	~
 jodoformgaas	~
 joechjachen	~
 joechjachte	~
 joedelde	~
 joedelen	~
-joel	Joël; joel
-joke	Joke; joke
+joel	joel
+joke	joke
 joking	~
 jokkebrokken	~
 jokkens	~
@@ -11799,7 +11773,7 @@ jookte	~
 joolde	~
 jooltje	~
 jooltjes	~
-joop	Joop; joop
+joop	~
 jota's	~
 journalistenkringen	~
 journalistieken	~
@@ -11835,7 +11809,7 @@ juristenvereenigingen	~
 jury's	~
 justeer	~
 justeerde	~
-justeerder	justeerder; justeerder
+justeerder	~
 justeerders	~
 justeeren	justeren
 justeert	~
@@ -12352,7 +12326,7 @@ laconieken	laconieke*
 laconiekeren	laconiekere*
 lafhartigen	lafhartige*
 lageren	lagere*
-lagerhuis	Lagerhuis; lagerhuis
+lagerhuis	Lagerhuis
 lakenkooper	lakenkoper
 lakenkoopers	lakenkopers
 lakensch	lakens
@@ -12624,7 +12598,7 @@ lesgeefster	~
 lesgeefsters	~
 lesschen	lessen
 lessching	lessing
-lessen	Lessen; lessen
+lessen	~
 lessenaartje	~
 lessenaartjes	~
 lessenboek	~
@@ -12632,7 +12606,6 @@ lessenboeken	~
 lessenboekje	~
 lessenboekjes	~
 lessenplan	~
-lesuur	leesuur; lesuur
 letterboden	~
 letterdieverijen	~
 lettereindje	~
@@ -12900,7 +12873,6 @@ likkepotjes	~
 likkepotten	~
 liksteenen	likstenen
 likstokken	~
-lillig	lillig; lillig
 lillige	~
 lilligen	~
 lilliger	~
@@ -13344,7 +13316,6 @@ losloopen	loslopen
 losrente	~
 losrenten	~
 losrijgen	~
-lossers	Lossers; lossers
 lossigheden	~
 lossmijten	~
 lossnijden	~
@@ -13511,7 +13482,6 @@ lummerstukken	~
 lunderde	~
 lunderen	~
 lunet	~
-luns	Luns; luns
 lunsde	~
 lunsje	~
 lunsjes	~
@@ -13557,7 +13527,6 @@ maagdevliezen	~
 maagje	~
 maagjes	~
 maagpompen	~
-maagsap	maagsap; maagschap
 maaigeld	~
 maaiing	~
 maaiingen	~
@@ -13600,7 +13569,6 @@ maandkamer	~
 maandkamers	~
 maandpaard	~
 maandpaarden	~
-maandroos	maandroos; maandroos
 maanjaren	~
 maanzieken	~
 maanzieker	~
@@ -13649,7 +13617,7 @@ machtsverheffingen	~
 maderakaraf	~
 maderakaraffen	~
 madonnabeeld	Madonnabeeld
-madonnabeelden	Madonnabeelden; madonnabeelden
+madonnabeelden	Madonnabeelden
 madonna's	~
 Maecenas	mecenas
 Maecenaten	mecenaten
@@ -13795,7 +13763,7 @@ manhaftigen	~
 manhaftigst	~
 manheid	~
 manifestatiën	~
-manilla	Manilla; manilla
+manilla	manilla
 manilla's	~
 manilla-sigaar	~
 manilla-sigaren	~
@@ -13885,7 +13853,6 @@ marinierskazernes	~
 mariolein	~
 marionettenspellen	~
 maritiemen	~
-marjolein	Marjolein; marjolein
 markegrond	~
 markegronden	~
 marketentstersvaatje	~
@@ -14444,7 +14411,7 @@ misselijken	~
 misselijksten	~
 missiekruis	~
 missiekruisen	~
-missiën	misschien; missiën
+missiën	missies
 misslagje	~
 misslagjes	~
 misspringen	~
@@ -14461,7 +14428,6 @@ misteltakken	~
 mistigen	~
 mistigst	~
 mistrappen	~
-mistred	mistred; mistred
 mistreden	~
 mistroostigen	~
 mistroostigst	~
@@ -14706,11 +14672,11 @@ moorddadigst	~
 moordenaren	moordenaars
 moordtooneel	moordtoneel
 moordtooneelen	~
-mooren	moren; Moren; moren
+mooren	moren
 moorendans	~
 moorendansen	~
 moorenland	~
-moorsch	Moors; Moors
+moorsch	Moors
 mooten	moten
 mootje	~
 mopjes	~
@@ -14745,7 +14711,6 @@ morgenjaponnen	~
 morgenspraak	~
 morgentjes	~
 Moriaantjes	~
-Morianen	Morianen; morianen
 morille	~
 mormeldieren	~
 morphine	morfine
@@ -14883,7 +14848,6 @@ muiskatten	~
 muisstille	~
 muisvaal	~
 muisvale	~
-muiteling	muiteling; muiteling
 muitzieken	~
 muitzieker	~
 muitziekst	~
@@ -14912,7 +14876,6 @@ muizings	~
 mulde	~
 mulheid	~
 mullen	~
-mullig	mullig; mullig
 mulligen	~
 mulliger	~
 mulligheid	~
@@ -15359,7 +15322,6 @@ namiddagpreeken	~
 namis	~
 namissen	~
 nanachten	~
-nanking	Nanking; nanking
 naoog	~
 naoogen	naogen
 naooging	~
@@ -15883,7 +15845,6 @@ Nieuwjaarsmorgen	nieuwjaarsmorgen
 Nieuwjaarsmorgens	~
 nieuwjaarswensch	nieuwjaarswens
 nieuwjaarswenschen	nieuwjaarswensen
-nieuwkoop	Nieuwkoop; nieuwkoop
 nieuwkoopje	~
 nieuwmodischen	~
 nieuwsgierigere	~
@@ -16594,7 +16555,6 @@ omruilt	~
 omruischen	~
 omruischt	~
 omruischte	~
-omrukken	omrukken; omrukken
 omrukking	~
 omsabelen	~
 omschaduwd	~
@@ -17042,7 +17002,6 @@ onbedeesd	~
 onbedekten	~
 onbedenkelijk	~
 onbediend	~
-onbedijkt	onbedijkt; onbedijkt
 onbedijkten	~
 onbedorvenst	~
 onbedrevener	~
@@ -17134,7 +17093,6 @@ onbelasten	~
 onbeleefdelijk	~
 onbeleefden	~
 onbeleefdst	~
-onbelegd	onbelegd; onbelegd
 onbelegden	~
 onbelegen	~
 onbelemmerden	~
@@ -18242,7 +18200,6 @@ ongekarteld	~
 ongekenden	ongekende*
 ongekeperd	~
 ongeketend	~
-ongekeurd	ongekeurd; ongekeurd
 ongekeurden	~
 ongekleede	ongeklede
 ongekleurden	~
@@ -18394,8 +18351,8 @@ ongenoeglijkst	~
 ongenoegzaamst	~
 ongenoegzamer	~
 ongenoemden	ongenoemde*
-ongenommerd	~
-ongenoodigd	ongenodigd; ongenodigd
+ongenommerd	ongenummerd
+ongenoodigd	ongenodigd
 ongeoefenden	~
 ongeoefender	~
 ongeoefendst	~
@@ -18462,7 +18419,7 @@ ongesnoeid	~
 ongesnoerd	~
 ongespannen	~
 ongespleten	~
-ongesplitst	ongesplitst; ongesplitst
+ongesplitst	ongesplitst
 ongesplitsten	~
 ongesponnen	~
 ongestadigen	~
@@ -18837,7 +18794,6 @@ onoverwinlijkheid	~
 onoverwinlijkst	~
 onoverwinnelijken	~
 onoverwinnelijkst	~
-onoverwonnen	onoverwonnen; onoverwonnen
 onpaedagogisch	onpedagogisch
 onpartijdigen	onpartijdige*
 onpartijdiglijk	~
@@ -19530,7 +19486,6 @@ onveranderlijkst	~
 onverantwoordelijken	~
 onverantwoordelijkst	~
 onverantwoorden	~
-onverbasterd	onverbasterd; onverbasterd
 onverbasterden	~
 onverbergbaar	~
 onverbergbare	~
@@ -19750,7 +19705,6 @@ onvoldoenbaar	~
 onvoldoenbare	~
 onvoldoendheid	~
 onvoleind	~
-onvoleindigd	onvoleindigd; onvoleindigd
 onvoleindigden	~
 onvolkomenst	~
 onvolledigen	~
@@ -20075,7 +20029,7 @@ oorvijgje	~
 oorvijgjes	~
 oorzakelijken	~
 Oost	oost
-oost	Oost; oost
+oost	oost
 oostelijken	~
 oostelijkere	~
 oostelijkeren	~
@@ -20228,7 +20182,6 @@ openkrabbelen	~
 openkrijgen	~
 openlijken	openlijke*
 openprikken	~
-openrukken	openrukken; openrukken
 opensluiten	~
 opensnijd	~
 openspring	~
@@ -20249,7 +20202,6 @@ opereeren	opereren
 opfladderen	~
 opfleur	~
 opfleuring	~
-opflikken	opflikken; opflikken
 opfluiten	~
 opfoeliën	~
 opfokker	~
@@ -20837,8 +20789,6 @@ overwasschen	overwassen
 overweeke	overweke
 overweeken	overweken*
 overwegenden	overwegende*
-overwerk	overwerk; overwerk
-overwerken	overwerken; overwerken
 overzeesch	overzees
 overzijdsch	overzijds
 oxydatiën	oxidaties
@@ -21866,11 +21816,11 @@ prevelarijen	~
 previeliede	~
 previeliën	~
 priëel	prieel
-priëelen	prielen; priëlen
+priëelen	priëlen
 priëeltje	prieeltje
 priëeltjes	~
 priegelt	~
-prielen	prielen; priëlen
+prielen	prielen
 priemdonker	~
 priemgetallen	~
 priesterkasten	~
@@ -21882,7 +21832,6 @@ prijselijkst	~
 prijsgelden	~
 prijsgerecht	~
 prijsgerechten	~
-prijshoudend	prijshoudend; prijshoudend
 prijshoudenden	~
 prijsjes	~
 prijslijken	~
@@ -22223,7 +22172,6 @@ putgalgen	~
 puthaken	~
 putoor	~
 putoren	~
-putsen	putsen; putschen
 putst	~
 putste	~
 puttee	~
@@ -22351,7 +22299,6 @@ raaskop	~
 raaskoppen	~
 raasmaandag	~
 rabarbersteel	~
-rabat	Rabat; rabat
 rabatijzer	~
 rabatijzers	~
 rabatje	~
@@ -22367,7 +22314,6 @@ rabbelaarster	~
 rabbelaarsters	~
 rabbijnsch	rabbijns
 rabbi's	~
-rachitis	rachitis; rachitisch
 rachter	~
 radeermesjes	~
 radeloozer	~
@@ -22379,8 +22325,7 @@ raderbooten	~
 radijszaad	~
 radst	~
 radsten	~
-raf	Raf; Raph
-rafel	Rafael; Rafaël; rafel
+rafel	rafel
 rafeldraad	~
 rafeldraden	~
 rafeltje	~
@@ -22459,7 +22404,6 @@ ranonkelgewas	~
 ranonkelgewassen	~
 ranonkeltje	~
 ranonkeltjes	~
-ranseling	ranseling; ranseling
 ranselingen	~
 ranseltjes	~
 ransen	~
@@ -22470,7 +22414,6 @@ ransigheid	~
 ransigst	~
 ransoen	~
 ransoeneeren	~
-ranst	Ranst; ranst
 rantsoeneer	~
 rantsoeneeren	~
 rantsoeneert	~
@@ -22519,7 +22462,6 @@ rateling	~
 ratelkousen	~
 ratelmond	~
 ratelmonden	~
-ratelslag	ratelslag; ratelslag
 rateltjes	~
 ratelwacht	~
 ratelwachten	~
@@ -23294,7 +23236,6 @@ riviercorrespondentie	~
 rivierstelsel	~
 rivierstelsels	~
 riviervisch	riviervis
-rob	Rob; rob
 robbedoezen	~
 robbenjachten	~
 robbenspek	~
@@ -23328,7 +23269,6 @@ roeivaartuigen	~
 roeivereeniging	roeivereniging
 roeivereenigingen	~
 roekeloozer	~
-roekoeken	roekoeken; roekoeken
 roekoekte	~
 roemertjes	~
 roemrijken	roemrijke*
@@ -23642,12 +23582,9 @@ Roomschgezind	roomsgezind
 Roomschgezinde	roomsgezinde
 Roomschgezinden	roomsgezinden
 Roomsch-Katholiek	rooms-katholiek
-roomtaart	roomtaart; roomtaart
 roomtaartje	~
 roomtaartjes	~
 roopaard	~
-roosachtig	roosachtig; rosachtig
-roosachtige	roosachtige; rosachtige
 roosachtigen	~
 roosachtiger	~
 roosachtigst	~
@@ -23677,8 +23614,6 @@ rooversholen	~
 roovertje	~
 roovertjes	~
 roovt	~
-rosachtig	roosachtig; rosachtig
-rosachtige	roosachtige; rosachtige
 rosachtigen	~
 rosachtiger	~
 rosachtigst	~
@@ -23859,7 +23794,6 @@ ruimteuitgebreidheden	~
 ruimteuitgebreidheid	~
 ruinde	~
 ruïneeren	ruïneren
-ruinen	ruinen; ruïnen
 ruintje	~
 ruintjes	~
 ruischen	ruisen
@@ -23951,8 +23885,8 @@ rupsenvanger	~
 rupsenvangers	~
 rupsje	~
 rupsjes	~
-rusch	Rus; rus
-russchen	russen; Russen
+rusch	rus
+russchen	russen
 Russischen	Russische*
 rusteloozer	~
 rustieken	~
@@ -24176,7 +24110,6 @@ sappigen	~
 sappigeren	~
 sappigst	~
 sappigsten	~
-saprijk	saprijk; saprijk
 saprijken	~
 saprijkheid	~
 saprijkst	~
@@ -24501,7 +24434,6 @@ schaverhaling	~
 schaverhalingen	~
 schaviel	~
 schavielde	~
-schaving	schaving; schaving
 schavotjes	~
 schavotkleur	~
 schavotteerde	~
@@ -24539,7 +24471,6 @@ scheenbeenderen	~
 scheeprijk	~
 scheeprijker	~
 scheeprijkst	~
-scheepsbehoeften	scheepsbehoeften; scheepsbehoeft
 scheepsbericht	~
 scheepsberichten	~
 scheepsbestier	~
@@ -24747,7 +24678,6 @@ schermbloemig	~
 schermbloemigen	~
 schermdegentje	~
 schermdegentjes	~
-schermer	Schermer; schermer
 schermhandschoen	~
 schermhandschoenen	~
 scherminkel	~
@@ -24965,7 +24895,6 @@ schisma's	~
 schitterendere	~
 schitterenderen	~
 schitterendsten	~
-schobberd	schobberd; schobberd
 schobberds	~
 schobde	~
 schoef	~
@@ -25167,7 +25096,7 @@ schotje	~
 schotjes	~
 Schotlander	~
 Schotsch	Schots
-schotsch	Schots; schots
+schotsch	schots
 schotschbont	~
 Schotsche	Schotse
 schotscher	~
@@ -25652,7 +25581,6 @@ serafsvleugel	~
 serafsvleugels	~
 serafsvlucht	~
 serenademuziek	~
-serge	Serge; serge
 sergeant-majoors	~
 sergeant-schrijver	~
 sergeants-schrijvers	~
@@ -26055,7 +25983,6 @@ slijkte	~
 slijmachtigen	~
 slijmachtiger	~
 slijmachtigst	~
-slijmafdrijvend	slijmafdrijvend; slijmafdrijvend
 slijmberoerte	~
 slijmberoerten	~
 slijmde	~
@@ -27187,7 +27114,6 @@ speldekop	~
 speldekoppen	~
 speldenbakje	~
 speldenbakjes	~
-speldendoosje	speldendoosje; speldendoosje
 speldendoosjes	~
 speldenfabriek	~
 speldenfabrieken	~
@@ -27360,7 +27286,6 @@ spirituslamp	~
 spirituslampen	~
 spirituslampje	~
 spirituslampjes	~
-spirituslichtje	spirituslichtje; spirituslichtje
 spirituslichtjes	~
 spiritusvlammen	~
 spitsbaarden	~
@@ -27934,7 +27859,6 @@ steenachtigeren	~
 steenachtigst	~
 steenbikker	~
 steenbikkers	~
-steenbok	Steenbok; steenbok
 steenbolk	~
 steenbolken	~
 steendrukkerijen	~
@@ -28016,7 +27940,6 @@ stekeltje	~
 stekertje	~
 stekertjes	~
 stekjes	~
-stele	stele; stèle
 stelhout	~
 stelhouten	~
 stelkalf	~
@@ -28130,7 +28053,6 @@ steunweger	~
 steunwegers	~
 steveltje	~
 steveltjes	~
-stevens	Stevens; stevens
 steventje	~
 steventjes	~
 stevigde	~
@@ -28590,7 +28512,6 @@ streksch	~
 strekzaam	~
 strekzaamst	~
 strekzamer	~
-strengeling	strengeling; strengeling
 strengelingen	~
 strengeren	~
 strengsten	~
@@ -28849,7 +28770,6 @@ stuitendst	~
 stuitendsten	~
 stuitertje	~
 stuitertjes	~
-stuitje	stuitje; stuitje
 stuitjes	~
 stuitklamp	~
 stuitklampen	~
@@ -29172,7 +29092,6 @@ talmachtig	~
 talmachtiger	~
 talmachtigheid	~
 talmachtigst	~
-talmer	talmer; talmer
 talmerij	~
 talmpje	~
 talmpjes	~
@@ -29700,7 +29619,6 @@ tergenden	~
 tergendst	~
 terger	~
 tergers	~
-terging	terging; terging
 terige	~
 terigen	~
 teriger	~
@@ -30004,7 +29922,6 @@ tjerkje	~
 tjerkjes	~
 tjingelde	~
 tjotters	~
-tobberd	tobberd; tobberd
 tobberigen	~
 tobberiger	~
 tobberigst	~
@@ -30103,7 +30020,6 @@ toegekurkt	~
 toegelakt	~
 toegelegden	~
 toegelegen	~
-toegeleid	toegeleid; toegeleid
 toegelichten	~
 toegelijmd	~
 toegeloopen	toegelopen
@@ -30188,7 +30104,6 @@ toegooi	~
 toegrendelen	~
 toehaken	~
 toehoor	~
-toehoorderes	toehoorderes; toehoorderes
 toehooren	toehoren
 toehouden	~
 toehuis	~
@@ -30221,7 +30136,6 @@ toemandje	~
 toemandjes	~
 toematen	~
 toemeting	~
-toemetselen	toemetselen; toemetselen
 toemoffelen	~
 toemuren	~
 toenaaien	~
@@ -30285,7 +30199,6 @@ toestroomen	toestromen
 toestuiven	~
 toetakel	~
 toetakeling	~
-toetellen	toetellen; toetellen
 toetertjes	~
 toethoorns	~
 toethoren	~
@@ -30313,7 +30226,7 @@ toewater	~
 toewegen	~
 toewenken	~
 toewenschen	toewensen
-toewensching	~
+toewensching	toewensing
 toewicht	~
 toewinden	~
 toewringen	~
@@ -30978,7 +30891,6 @@ uitgeschetterd	~
 uitgescheurden	~
 uitgeschilderde	~
 uitgeschilderden	~
-uitgeschopt	uitgeschopt; uitgesopt
 uitgeschopte	~
 uitgeschopten	~
 uitgeschraapten	~
@@ -31346,7 +31258,6 @@ uitscheur	~
 uitscheurt	~
 uitschijnsel	~
 uitschijnsels	~
-uitschoppen	uitschoppen; uitsoppen
 uitschotje	~
 uitschotjes	~
 uitschraapsel	~
@@ -31384,7 +31295,6 @@ uitsnijdsels	~
 uitsnorken	~
 uitsnuiten	~
 uitsnuiven	~
-uitsoppen	uitschoppen; uitsoppen
 uitspan	~
 uitspanen	~
 uitspanningsplaats	~
@@ -31562,7 +31472,7 @@ ulsters	~
 ultramarijnen	~
 ultramontaansch	ultramontaans
 ultra's	~
-unaniemen	~
+unaniemen	unanieme*
 unieken	~
 universeele	universele
 universitairen	~
@@ -31638,22 +31548,22 @@ vaatgestellen	~
 vaathout	~
 vaatkwast	~
 vaatsch	vaats
-vaatschheid	~
+vaatschheid	vaatsheid
 vaatwater	~
-vacanten	~
+vacanten	vakante*
 vacantie	vakantie
-vacantiedag	~
-vacantiedagen	~
-vacantiekamer	~
-vacantiekamers	~
-vacantiekolonie	~
-vacantiekoloniën	~
-vacantiekolonies	~
-vacantiën	~
+vacantiedag	vakantiedag
+vacantiedagen	vakantiedagen
+vacantiekamer	vakantiekamer
+vacantiekamers	vakantiekamers
+vacantiekolonie	vakantiekolonie
+vacantiekoloniën	vakantiekolonies
+vacantiekolonies	vakantiekolonies
+vacantiën	vakanties
 vacanties	vakanties
-vacantietijd	~
-vacantiewerk	~
-vaccinatiebewijs	~
+vacantietijd	vakantietijd
+vacantiewerk	vakantiewerk
+vaccinatiebewijs	vakantiebewijs
 vaccineer	~
 vaccineeren	vaccineren
 vaccineert	~
@@ -31730,21 +31640,20 @@ valreepsgasten	~
 valreepsklamp	~
 valreepsklampen	~
 valreepsknoop	~
-valreepsknoopen	~
+valreepsknoopen	valreepsknopen
 valreepstrap	~
 valsch	vals
 valschaard	valsaard
 valschaards	valsaards
 valschelijk	valselijk
 valscher	valser
-valschheden	~
+valschheden	valsheden
 valschheid	valsheid
 valschut	~
 valschutten	~
 valstrikje	~
 valstrikjes	~
 Vandaal	vandaal
-Vandalen	Vandalen; vandalen
 vandehandsch	vandehands
 vanderhandsch	~
 vaneenbarsten	~
@@ -31789,13 +31698,13 @@ vangtouwen	~
 vangwater	~
 vangwiel	~
 vangwielen	~
-vanielje	~
-vanieljeboom	~
-vanieljeboomen	~
-vanielje-ijs	~
-vanieljelikeur	~
-vanieljestokje	~
-vanieljestokjes	~
+vanielje	vanille
+vanieljeboom	vanilleboom
+vanieljeboomen	vanillebomen
+vanielje-ijs	vanille-ijs
+vanieljelikeur	vanillelikeur
+vanieljestokje	vanillestokje
+vanieljestokjes	vanillestokjes
 vannieuws	~
 vanzelve	vanzelf
 varenbed	~
@@ -31808,7 +31717,7 @@ varenkussentje	~
 varenkussentjes	~
 varenstijd	~
 varensvolk	~
-variatiën	~
+variatiën	variaties
 varieeren	variëren
 varkenachtig	~
 varkenachtiger	~
@@ -31934,7 +31843,7 @@ vastgesmeed	~
 vastgesnoerd	~
 vastgesoldeerd	~
 vastgespelden	~
-vastgespijkerden	~
+vastgespijkerden	vastgespijkerde*
 vastgestelden	vastgestelde*
 vastgestoken	~
 vastgestrikt	~
@@ -32007,7 +31916,7 @@ vedervormige	~
 vedervormigen	~
 vedettes	~
 veeartsenijscholen	~
-veebooten	~
+veebooten	veeboten
 veegdoek	~
 veeger	veger
 veegheid	~
@@ -32033,15 +31942,15 @@ veelhalmig	~
 veelhoekigen	~
 veelhoofdigen	~
 veeljarigen	veeljarige*
-veelkleurigen	~
+veelkleurigen	veelkleurige*
 veellettergrepig	~
 veelmaals	~
 veelnamig	~
-veelpootig	~
+veelpootig	veelpotig
 veelregelig	~
 veelslachtig	~
-veelsoortigen	~
-veelstemmigen	~
+veelsoortigen	veelsoortige*
+veelstemmigen	veelstemmige*
 veelterm	~
 veeltermen	~
 veeltongig	~
@@ -32183,11 +32092,11 @@ veldteeken	veldteken
 veldteekens	veldtekens
 velgje	~
 velgjes	~
-vellenkooper	~
-vellenkoopers	~
+vellenkooper	vellenkoper
+vellenkoopers	vellenkopers
 vellenploten	~
 vellenploters	~
-vellig	vellig; vellig
+vellig	~
 velligen	~
 velliger	~
 velligst	~
@@ -32221,7 +32130,7 @@ ventsters	~
 veraanschouwelijkte	~
 veraccijnsde	~
 veraccijnsden	~
-veraccijnzen	veraccijnzen; veraccijnzen
+veraccijnzen	~
 veraccijnzing	~
 veraccijnzingen	~
 verachtelijken	verachtelijke*
@@ -32247,7 +32156,6 @@ verantwoorders	~
 verat	~
 veraten	~
 verbabbelde	~
-verbakken	verbakken; verbakken
 verbakte	~
 verbaliseer	~
 verbaliseerde	~
@@ -32264,7 +32172,6 @@ verbanningsdecreten	~
 verbazenden	verbazende*
 verbazendsten	~
 verbedde	~
-verbedden	verbedden; verbedden
 verbedding	~
 verbeddingen	~
 verbeenen	verbenen
@@ -32434,7 +32341,6 @@ verdoemer	~
 verdoemers	~
 verdoener	~
 verdoeners	~
-verdoffen	verdoffen; verdoffen
 verdokterde	~
 verdolingen	~
 verdonker	~
@@ -32684,7 +32590,6 @@ verhaalsters	~
 verhaarden	~
 verhak	~
 verhaken	~
-verhakken	verhakken; verhakken
 verhakstukt	~
 verhakstukte	~
 verhakte	~
@@ -32927,7 +32832,6 @@ verkwistendst	~
 verlaadde	~
 verlaatte	~
 verlading	~
-verlakker	verlakker; verlakker
 verlakking	~
 verlakkingen	~
 verlaksel	~
@@ -32948,7 +32852,6 @@ verledigde	~
 verleenen	verlenen
 verleening	verlening
 verleeren	verleren
-verleg	verleg; verleg
 verlegenere	~
 verlegeneren	~
 verlegenst	~
@@ -33407,7 +33310,6 @@ versmakken	~
 versmakt	~
 versmakte	~
 versmallingen	~
-versmeden	versmeden; versmeden
 versmeding	~
 versmedingen	~
 versmeedde	~
@@ -33426,7 +33328,6 @@ versold	~
 versolde	~
 versollen	~
 verspande	~
-verspannen	verspannen; verspannen
 verspanning	~
 verspanningen	~
 verspeldde	~
@@ -33936,7 +33837,6 @@ verzenders	~
 verzendlijsten	~
 verzendster	~
 verzendsters	~
-verzenging	verzenging; verzenging
 verzieden	~
 verzienden	~
 verzilver	~
@@ -33966,7 +33866,6 @@ verzongen	~
 verzood	~
 verzoold	~
 verzoolden	~
-verzotten	verzotten; verzotten
 verzoutte	~
 verzuimpje	~
 verzuimpjes	~
@@ -34021,7 +33920,6 @@ vetmesting	~
 veto's	~
 vetpotje	~
 vetpotjes	~
-vetstaart	vetstaart; vetstaart
 vetstaarten	~
 vetsten	~
 vetteren	~
@@ -34126,7 +34024,6 @@ vierzijdigen	~
 viesheden	~
 viest	~
 viesten	~
-viezevazen	viezevazen; viezevazen
 vigeeren	~
 vigileerde	~
 vigileeren	vigileren
@@ -34259,7 +34156,6 @@ vinkentijd	~
 vinkenvangst	~
 vinkeslag	~
 vinkjes	~
-vinkt	Vinkt; vinkt
 vinnetje	~
 vinnigen	~
 vinnigere	~
@@ -34629,7 +34525,6 @@ vliezigen	~
 vlieziger	~
 vliezigst	~
 vlijing	~
-vlijmen	Vlijmen; vlijmen
 vlijmpje	~
 vlijmpjes	~
 vlijtigen	vlijtigen*
@@ -35273,7 +35168,7 @@ voorschilderen	~
 voorschoen	~
 voorschoende	~
 voorschoenen	~
-voorschooten	Voorschoten; voorschoten
+voorschooten	voorschoten
 voorschootje	~
 voorschootjes	~
 voorschotje	~
@@ -35882,7 +35777,6 @@ vrijzinnigst	~
 vrindjes	~
 vroederen	~
 vroedheid	~
-vroedkundige	vroedkundige; vroedkundige
 vroedmeester	~
 vroedmeesters	~
 vroedschapsvergadering	~
@@ -36059,7 +35953,6 @@ waakloonen	~
 waaksch	waaks
 waakscher	~
 waakzaamst	~
-waal	Waal; waal
 Waalsch	Waals
 waalsteen	~
 waalwortel	~
@@ -36076,7 +35969,6 @@ waarachtigsten	~
 waarborgfondsen	~
 waarborgingen	~
 waarborgsommen	~
-waardeerder	waardeerder; waardeerder
 waardeeren	waarderen
 waardeering	waardering
 waardeeringen	waarderingen
@@ -36103,7 +35995,6 @@ waargezeid	~
 waargoed	~
 waarheidlievenden	~
 waarheidszucht	~
-waarloos	Waarloos; waarloos
 waarlooze	~
 waarmakingen	~
 waarmerkt	~
@@ -36135,7 +36026,6 @@ wafelvormige	~
 wafelvormigen	~
 wagenaars	~
 wagenhuur	~
-wagenmakers	Wagenmakers; wagenmakers
 wagenmeesters	~
 wagenschotten	~
 wagenweg	~
@@ -36148,7 +36038,6 @@ wagonlading	~
 wakersloon	~
 wakersloonen	~
 wakheid	~
-wakken	Wakken; wakken
 wakkerst	~
 wakst	~
 waldhoornist	~
@@ -36261,7 +36150,6 @@ wankelste	~
 wankelsten	~
 wanklankje	~
 wanklankjes	~
-wanklinkend	wanklinkend; wanklinkend
 wanklinkender	~
 wanklinkendst	~
 wankoers	~
@@ -36409,7 +36297,6 @@ wasscherijen	wasserijen
 wasschers	wassers
 wassching	wassing
 wasschingen	wassingen
-wassenaar	Wassenaar; wassenaar
 wassenbeeldenspellen	~
 waterachtigen	~
 waterachtiger	~
@@ -36657,7 +36544,7 @@ weekelijk	wekelijk
 weekelijker	~
 weekelijkheid	wekelijkheid
 weekelijkst	wekelijkst
-weekeling	wekeling; wekeling
+weekeling	wekeling
 weekelinge	~
 weekelingen	wekelingen
 weeken	weken
@@ -37052,7 +36939,6 @@ weiachtig	~
 weiachtiger	~
 weiachtigheid	~
 weiachtigst	~
-weider	weider; weider
 weiderij	~
 weiderijen	~
 weiders	~
@@ -37115,7 +37001,6 @@ welbevolkt	~
 welbewaakt	~
 welbewaakte	~
 welbewaakten	~
-welbewerkt	welbewerkt; welbewerkt
 welbewoond	~
 welbezeild	~
 welbezeilder	~
@@ -37645,7 +37530,6 @@ winderigeren	~
 winderigst	~
 winders	~
 windgat	~
-windhoek	Windhoek; windhoek
 windhoozen	~
 windigen	~
 windiger	~
@@ -38083,20 +37967,16 @@ wuitjes	~
 wuivingen	~
 wulkje	~
 wulkjes	~
-wulpen	Wulpen; wulpen
 wulpsch	wulps
 wulpscher	wulpser
 wulpschheid	wulpsheid
 wurgdraad	~
 wurgdraden	~
-xantippe	Xantippe; xantippe
+xantippe	Xantippe
 xantippes	~
 X-beenen	~
 x-en	~
 X-stralen	x-stralen
-zaadbakje	zaadbakje; zaadbakje
-zaadbakjes	~
-zaadhandelaar	~
 zaadhandelaars	~
 zaadleider	~
 zaadleiders	~
@@ -38150,7 +38030,6 @@ zaakrijkheid	~
 zaakrijkst	~
 zaalwachter	~
 zaalwachters	~
-zaan	Zaan; zaan
 zaatje	~
 zabbel	~
 zabbelaar	~
@@ -38566,7 +38445,6 @@ zetschipper	~
 zetschippers	~
 zetseltje	~
 zetseltjes	~
-zeurder	zeurder; zeurder
 zeurigen	~
 zeuriger	~
 zeurigst	~
@@ -38641,7 +38519,6 @@ zieder	~
 zieders	~
 zieding	~
 ziegezaagde	~
-ziegezagen	ziegezagen; ziegezagen
 ziekekamer	~
 ziekelijken	ziekelijke*
 ziekelijkst	~
@@ -38812,7 +38689,6 @@ zoekerbout	~
 zoekerbouten	~
 zoelheid	~
 zoelst	~
-zoener	zoener; zoener
 zoetachtigen	~
 zoetachtiger	~
 zoetachtigst	~
@@ -39024,7 +38900,6 @@ zuidelijkte	~
 Zuiden	zuiden
 Zuiderzeevereeniging	~
 Zuidhollandsch	~
-zuidoost	Zuidoost; zuidoost
 zuidoostelijken	~
 zuidwaartsen	~
 zuidwestelijken	~
@@ -39072,7 +38947,6 @@ zuiveringseeden	~
 zuiveringsprocessen	~
 zuiveringszout	~
 zulken	zulke
-zulte	Zulte; zulte
 zulting	~
 zultspek	~
 zultte	~
@@ -39114,7 +38988,6 @@ zwaaihaak	~
 zwaaihaken	~
 zwaaikom	~
 zwaaikommen	~
-zwaantje	Zwaantje; zwaantje
 zwaarderen	~
 zwaardveger	~
 zwaardvegers	~

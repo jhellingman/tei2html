@@ -68,9 +68,9 @@ sub, sup
     line-height: 0;
 }
 
-
-.lg .linenum
+.lg .linenum, .sp .linenum
 {
+    left: 1.58em;
     color: black;
 }
 
@@ -116,7 +116,7 @@ span.corr, span.abbr, span.measure
 }
 
 /* add margins to various text elements */
-.lg, .lgouter, .epigraph, .argument, .table, .figure
+.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
 {
     padding: 0;
     margin-top: 2em;
