@@ -1,0 +1,281 @@
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" [
+
+<!ENTITY florin CDATA "&#x0192;" -- Florin currency symbol (Netherlands) -->
+
+]>
+<TEI.2 lang=en>
+<teiHeader>
+<fileDesc>
+<titleStmt>
+<title>Tei2html - Guidelines and Reference Manual</title>
+<author>Jeroen Hellingman</author>
+</titleStmt>
+<publicationStmt>
+<publisher>Jeroen Hellingman</publisher>
+<pubPlace>IJsselstein, The Netherlands</pubPlace>
+<idno type=PGclearance>#####</idno>
+<idno type=PGDPProjectId>#####</idno>
+<idno type=PGnum>#####</idno>
+<date>#####</date>
+<availability lang=nl>
+<p>&availability.nl;
+
+<p>Dit eBoek is geproduceerd door het on-line gedistribueerd correctie team op <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
+
+</availability>
+</publicationStmt>
+<notesStmt>
+    <note type="Description">Een korte beschrijving van dit document.</note>
+    <note type="Blurb">Kort stukje promotionele tekst voor op de achterflap.</note>
+    <note type="Extract">Kort extract uit de tekst.</note>
+</notesStmt>
+<sourceDesc>
+<bibl>
+<author>Jeroen Hellingman</author>
+<title>Tei2html - Guidelines and Reference Manual</title>
+<date>2010</date>
+</bibl>
+</sourceDesc>
+</fileDesc>
+<encodingDesc lang=nl>
+
+</encodingDesc>
+<profileDesc>
+    <langUsage lang=nl>
+        <language id=en>English</language>
+    </langUsage>
+    <textClass>
+        <keywords>
+            <list>
+                <item>#####</item>
+            </list>
+        </keywords>
+    </textClass>
+</profileDesc>
+<revisionDesc>
+    <list>
+        <item>2010-05-09 Started, copying relevant content from the .odf version.
+    </list>
+</revisionDesc>
+</teiHeader>
+<text>
+<front>
+<div1 id=cover type=Cover>
+
+
+<p><figure id=cover-image rend="image(images/reference500.jpg)"></figure>
+
+
+<div1 id=pre type=Preface>
+<head>Preface</head>
+
+<p>The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like “give me all citations in Shakespeare where Hamlet uses the past tense”, but makes it harder to produce nicely formatted output from the same source. This is where the tei2html kicks-in.
+
+<p>Tei2html is a collection of XSLT stylesheets that transform a duly marked up TEI file to an attractive HTML, ePub or PDF document. It is intended to work out-of-the-box with unadorned TEI files, but will be able to perform better if certain conventions are followed.
+
+<p>These guidelines describe the conventions for preparing TEI files such that they can successfully be converted by tei2html. They assume a working knowledge of the <xref url="http://www.tei-c.org/Lite/teiu5_en.html">TEI Lite documentation</xref>. They are inspired by, and often follow the <xref url="http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml">Wisconsin University Guidelines for Markup of Electronic Texts</xref>, which provides excellent examples of numerous issues. For real starters, a <xref url="http://www.tei-c.org/Support/Learn/mueller-index.htm">very gentle introduction to the TEI markup language</xref> is available.
+
+<p>Whether TEI is useful for you depends on your needs. If you are occasionally producing a text, and need to have it formatted, TEI and tei2html is probably not the way to go. If you have a large collection of texts, and need to maintain them for a long time, and would like to add numerous types of scholarly annotations to them, TEI certainly warrants serious consideration.
+
+<p>Originally, tei2html was developed to produce beautiful new editions of public domain texts for Project Gutenberg, but it can also be used for other TEI files.
+
+<p>Sections with a light gray background are planned future features, and are not yet available. It is my intention to turn this into a complete document, which can be read independent of the above documents in due time. For, now, however, please get the other documents and read them first.
+
+
+</div1>
+
+
+<divGen id=toc type=toc>
+
+
+</front>
+<body>
+<div1>
+<head>Introduction</head>
+
+
+<div2>
+<head>Guiding Principles</head>
+
+<p>The design of tei2html is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.
+
+<p>The guiding principles are:
+
+<list>
+<item>Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corrolary to this principle, tei2html does not supply much content itself, unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
+<item>Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that tei2html needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
+<item>The @rend attribute in tags are intended as formatting hints only. Ignoring them fully or partially should not render a text incomprehensible.
+</list>
+
+<p>The design decisions are:
+
+<list>
+<item>The @rend attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are thus not copied verbatim.
+</list>
+
+<div2>
+<head>SGML versus XML</head>
+
+<p>XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.
+
+<p>Although XML is simpler, and many more tools can deal with it, SGML is somewhat easier to type due to its more relaxed syntax rules. You don’t need to use quotes on all attribute values, nor need to provide close tags for all elements. For this reason, I normally produce my files in SGML. The conversion to XML is straightforward, and can (almost always) be fully automated. Since I am used to SGML, the examples in this document will be valid SGML snippets, but not necessarily well-formed XML.
+
+<p>If so desired, you can work directly in XML, instead of SGML. Working in XML directly has a number of benefits as well: 1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the tei2html stylesheets used here are too complex for a browser). 2. No conversion tools required. 3. Can use embedded namespaces for other XML schemas.
+
+
+<div2>
+<head>Special Characters</head>
+
+<div3>
+<head>SGML</head>
+
+<p>All my SGML files are either in pure 7-bit ASCII, or in the ISO 8859-1 character set. All characters outside those ranges are represented by character entities.
+
+<p>Use entities from the following sets:
+
+<list>
+<item>The standard SGML ISO 8859 entity sets.
+<item>The other declared entity sets that come with the TEI DTD.
+<item>Invent your own descriptive abbreviation. Always provide the Unicode code point for a character (if it exists) in the entity declaration, and provide the Unicode character name or a description in a comment. Please follow the pattern used by ISO where possible.
+<item>Numeric character entities, based on Unicode.
+</list>
+
+<p>For longer fragments in a non-Latin script, I normally use an ASCII based transliteration scheme, and supply tools to convert these to Unicode. For documents completely a non-Latin script, we will probably have to work with Unicode.
+
+
+Fractions
+Fractions of one figure above and below.
+&amp;frac12;
+
+Fractions with more than one figure above or below.
+
+&amp;frac3_16;
+&amp;frac23_100;
+Special filling characters for leaders
+
+&amp;dotfil;
+&amp;dashfil;
+&amp;linefil;
+&amp;spacefil;
+
+These are roughly equivalent to TEX’s special glue values.
+
+
+<div3>
+<head>XML</head>
+
+<p>XML files are to be in Unicode only, using the UTF-8 format or numeric character entities.
+
+
+
+
+<div2>
+<head>Considerations for Output Formats</head>
+
+<p>TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the rend attribute can be used to record those aspects.
+
+<p>For many uses, a TEI file is not the most desirable format. For reading, the it is far more convenient to have it available in some more presentation oriented format. With tei2html, a TEI document can be converted to various output formats, to wit:
+
+<list>
+<item>HTML for viewing in a browser on a PC.
+<item>ePub for reading on dedicated eBook readers.
+<item>Plain text for reading on simple devices.
+<item>PDF (using Prince-XML) for printing on paper.
+</list>
+
+<p>These output formats place some restrictions on the structure of the TEI file, and the usage conventions adopted not enforced by the DTD. The most important of these are given below.
+
+<p><hi>References to page numbers.</hi> In printed media, the page numbers will differ from the source. To correctly replace page numbers in the source, each page number should be tagged as a reference (ref element) with the type pageref. The tag should only enclose the page number it self, not any of the surrounding material. The transformation will replace the content of this tag with the number of the page the material referred to appears on. Almost always, the reference is not to the page itself, but to some element appearing on this page. For this reason, it is better not to link to the pb element, but to the element actually referred to. (In HTML, the original page numbers will be shown in the margin and used in the text.)
+
+<p><hi>Nesting of cross-references and anchors.</hi> In HTML, it is not possible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these result in nested anchors in HTML. For example, the ref element should not contain corr elements (as the later generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the ref element in the corr element.
+
+<p><hi>Nesting of paragraphs.</hi> In HTML, it is not possible to nest paragraphs. In most cases, the transformation software will take this in account, and close open paragraphs in HTML when needed.
+
+<p>In a few other cases, the transformation may not result in entirely correct results. Always validate the end result.
+
+
+
+<div1>
+<head>Getting Started</head>
+
+<div2>
+<head>Installation</head>
+
+<div2>Running Tei2html</head>
+
+<div2>A Sample document</head>
+
+
+
+<div1>
+<head>The TEI Header</head>
+
+
+
+
+<div1>
+<head>Top Level Text Structure</head>
+
+
+
+<div1>
+<head>Block Level Elements</head>
+
+
+
+<div1>
+<head>Text Level Elements</head>
+
+
+
+<div1>
+<head>Internationalization</head>
+
+
+
+<div1>
+<head>Tuning the Output</head>
+
+
+<div2>
+<head>Using the Rend attribute</head>
+
+
+
+<div2>
+<head>Custom Stylesheets</head>
+
+
+
+
+
+</body>
+<back>
+<div1 type=Appendix>
+<head>Applicable Standards</head>
+
+
+<div1>
+<head>Available Stylesheets</head>
+
+
+
+<div1>
+<head>Generated HTML Elements</head>
+
+
+<div1>
+<head>SGML Entities</head>
+
+
+
+<div1>
+<head>Foreign Script Transcriptions</head>
+
+
+
+
+
+</back>
+</text>
+</TEI.2>
