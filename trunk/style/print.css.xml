@@ -2,17 +2,17 @@
 <style type="text/css">
 <![CDATA[
 
-
 /* 
 
 Stylesheet for printing Project Gutenberg ebooks using Prince http://www.princexml.com/
 
 The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: 
 see http://www.w3.org/TR/css3-page/. For this reason, it should not be included in the 
-final HTML version posted to PG.
+HTML versions posted to Project Gutenberg.
 
 */
 
+/* ==== PAGE LAYOUT ==== */
 
 @page 
 {
@@ -96,22 +96,20 @@ final HTML version posted to PG.
 }
 
 
+/* ==== DOCUMENT LEVEL FORMATTING ==== */
+
 :root
 {
     color: black;
     background: white;
     font-size: 10pt;
-    font-family: Georgia, serif;
-    prince-text-replace: "fi" "\fb01" "fl" "\fb02" "..." "\2026";  /* ligatures available in Georgia */
 }
-
 
 body
 {
     margin: 0 10%;
 	text-align: justify;
 }
-
 
 div.front
 { 
@@ -128,6 +126,8 @@ div.titlePage
 	page: titlepage;
 	page-break-after: always;
 
+    color: black;
+    background: white;
 	border: white 0px solid;
 }
 
@@ -135,8 +135,6 @@ h1.docTitle
 {
 	string-set: doctitle content();
 }
-
-
 
 
 div.div1
@@ -197,14 +195,16 @@ a:link, a:visited
     text-decoration: none;
 }
 
-
-h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p
-{
-    text-indent: 0;
-}
-
+/* ==== Paragraph indentations ==== */
 
 p
+{
+    text-indent: 0;
+    margin: 0;
+    padding: 0;
+}
+
+p + p
 {
     text-indent: 1em;
     margin: 0;
@@ -215,30 +215,7 @@ p
 h1, h2, h3, h4, h5, h6
 {
     color: black;
-    font-family: Georgia, serif;
 }
-
-
-/* ==== PDF bookmarks ==== */
-
-h1 { prince-bookmark-level: 1 }
-h2 { prince-bookmark-level: 2 }
-h3 { prince-bookmark-level: 3 }
-h4 { prince-bookmark-level: 4 }
-h5 { prince-bookmark-level: 5 }
-h6 { prince-bookmark-level: 6 }
-
-h1.label, h2.label, h3.label, h4.label, h5.label, h6.label
-{
-	prince-bookmark-level: none;
-}
-
-div.titlePage > h2
-{
-	prince-bookmark-level: none;
-}
-
-
 
 span.corr, span.abbr, span.measure, abbr
 {
@@ -246,23 +223,19 @@ span.corr, span.abbr, span.measure, abbr
 	text-decoration: none;
 }
 
-
 .transcribernote
 {
     background-color: transparant;
     border: white 0pt solid;
     font-size: 7pt;
     line-height: 1.2em;
-    font-family: Georgia, serif;
     margin: 0;
 }
-
 
 .figureHead, .noteref, span.leftnote, p.legend, .versenum, .rightnote,	.pagenum, .linenum, .pagenum a
 {
 	color: black;
 }
-
 
 hr 
 {
@@ -287,6 +260,24 @@ a.pageref			/* Replace references with pagenumbers with actual pagenumbers */
     display: none;
 }
 
+/* ==== PDF bookmarks ==== */
+
+h1 { prince-bookmark-level: 1 }
+h2 { prince-bookmark-level: 2 }
+h3 { prince-bookmark-level: 3 }
+h4 { prince-bookmark-level: 4 }
+h5 { prince-bookmark-level: 5 }
+h6 { prince-bookmark-level: 6 }
+
+h1.label, h2.label, h3.label, h4.label, h5.label, h6.label
+{
+	prince-bookmark-level: none;
+}
+
+div.titlePage > h2
+{
+	prince-bookmark-level: none;
+}
 
 
 ]]>

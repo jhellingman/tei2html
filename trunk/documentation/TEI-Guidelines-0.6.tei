@@ -264,6 +264,8 @@ These are roughly equivalent to TEX’s special glue values.
 <head>Generated HTML Elements</head>
 
 
+
+
 <div1>
 <head>SGML Entities</head>
 
@@ -272,6 +274,89 @@ These are roughly equivalent to TEX’s special glue values.
 <div1>
 <head>Foreign Script Transcriptions</head>
 
+
+
+<div1>
+<head>Unicode Character Support Test</head>
+
+
+<p>The following tables can be used to determine which characters can be displayed on a device.
+
+<div2>
+<head>Latin-1 Supplement</head>
+
+<table>
+<column rend="font(bold)"></column>
+<row role=label>
+     <cell>     <cell>00A       <cell>00B       <cell>00C       <cell>00D       <cell>00E       <cell>00F
+<row><cell>0    <cell>&#xA0;    <cell>&#xB0;    <cell>&#xC0;    <cell>&#xD0;    <cell>&#xE0;    <cell>&#xF0;
+<row><cell>1    <cell>&#xA1;    <cell>&#xB1;    <cell>&#xC1;    <cell>&#xD1;    <cell>&#xE1;    <cell>&#xF1;
+<row><cell>2    <cell>&#xA2;    <cell>&#xB2;    <cell>&#xC2;    <cell>&#xD2;    <cell>&#xE2;    <cell>&#xF2;
+<row><cell>3    <cell>&#xA3;    <cell>&#xB3;    <cell>&#xC3;    <cell>&#xD3;    <cell>&#xE3;    <cell>&#xF3;
+<row><cell>4    <cell>&#xA4;    <cell>&#xB4;    <cell>&#xC4;    <cell>&#xD4;    <cell>&#xE4;    <cell>&#xF4;
+<row><cell>5    <cell>&#xA5;    <cell>&#xB5;    <cell>&#xC5;    <cell>&#xD5;    <cell>&#xE5;    <cell>&#xF5;
+<row><cell>6    <cell>&#xA6;    <cell>&#xB6;    <cell>&#xC6;    <cell>&#xD6;    <cell>&#xE6;    <cell>&#xF6;
+<row><cell>7    <cell>&#xA7;    <cell>&#xB7;    <cell>&#xC7;    <cell>&#xD7;    <cell>&#xE7;    <cell>&#xF7;
+<row><cell>8    <cell>&#xA8;    <cell>&#xB8;    <cell>&#xC8;    <cell>&#xD8;    <cell>&#xE8;    <cell>&#xF8;
+<row><cell>9    <cell>&#xA9;    <cell>&#xB9;    <cell>&#xC9;    <cell>&#xD9;    <cell>&#xE9;    <cell>&#xF9;
+<row><cell>A    <cell>&#xAA;    <cell>&#xBA;    <cell>&#xCA;    <cell>&#xDA;    <cell>&#xEA;    <cell>&#xFA;
+<row><cell>B    <cell>&#xAB;    <cell>&#xBB;    <cell>&#xCB;    <cell>&#xDB;    <cell>&#xEB;    <cell>&#xFB;
+<row><cell>C    <cell>&#xAC;    <cell>&#xBC;    <cell>&#xCC;    <cell>&#xDC;    <cell>&#xEC;    <cell>&#xFC;
+<row><cell>D    <cell>&#xAD;    <cell>&#xBD;    <cell>&#xCD;    <cell>&#xDD;    <cell>&#xED;    <cell>&#xFD;
+<row><cell>E    <cell>&#xAE;    <cell>&#xBE;    <cell>&#xCE;    <cell>&#xDE;    <cell>&#xEE;    <cell>&#xFE;
+<row><cell>F    <cell>&#xAF;    <cell>&#xBF;    <cell>&#xCF;    <cell>&#xDF;    <cell>&#xEF;    <cell>&#xFF;
+</table>
+
+<div2>
+<head>Latin Extended-A</head>
+
+<table>
+<column rend="font(bold)"></column>
+<row role=label>
+     <cell>     <cell>010       <cell>011       <cell>012       <cell>013       <cell>014       <cell>015       <cell>016       <cell>017   
+<row><cell>0    <cell>&#x100;   <cell>&#x110;   <cell>&#x120;   <cell>&#x130;   <cell>&#x140;   <cell>&#x150;   <cell>&#x160;   <cell>&#x170;
+<row><cell>1    <cell>&#x101;   <cell>&#x111;   <cell>&#x121;   <cell>&#x131;   <cell>&#x141;   <cell>&#x151;   <cell>&#x161;   <cell>&#x171;
+<row><cell>2    <cell>&#x102;   <cell>&#x112;   <cell>&#x122;   <cell>&#x132;   <cell>&#x142;   <cell>&#x152;   <cell>&#x162;   <cell>&#x172;
+<row><cell>3    <cell>&#x103;   <cell>&#x113;   <cell>&#x123;   <cell>&#x133;   <cell>&#x143;   <cell>&#x153;   <cell>&#x163;   <cell>&#x173;
+<row><cell>4    <cell>&#x104;   <cell>&#x114;   <cell>&#x124;   <cell>&#x134;   <cell>&#x144;   <cell>&#x154;   <cell>&#x164;   <cell>&#x174;
+<row><cell>5    <cell>&#x105;   <cell>&#x115;   <cell>&#x125;   <cell>&#x135;   <cell>&#x145;   <cell>&#x155;   <cell>&#x165;   <cell>&#x175;
+<row><cell>6    <cell>&#x106;   <cell>&#x116;   <cell>&#x126;   <cell>&#x136;   <cell>&#x146;   <cell>&#x156;   <cell>&#x166;   <cell>&#x176;
+<row><cell>7    <cell>&#x107;   <cell>&#x117;   <cell>&#x127;   <cell>&#x137;   <cell>&#x147;   <cell>&#x157;   <cell>&#x167;   <cell>&#x177;
+<row><cell>8    <cell>&#x108;   <cell>&#x118;   <cell>&#x128;   <cell>&#x138;   <cell>&#x148;   <cell>&#x158;   <cell>&#x168;   <cell>&#x178;
+<row><cell>9    <cell>&#x109;   <cell>&#x119;   <cell>&#x129;   <cell>&#x139;   <cell>&#x149;   <cell>&#x159;   <cell>&#x169;   <cell>&#x179;
+<row><cell>A    <cell>&#x10A;   <cell>&#x11A;   <cell>&#x12A;   <cell>&#x13A;   <cell>&#x14A;   <cell>&#x15A;   <cell>&#x16A;   <cell>&#x17A;
+<row><cell>B    <cell>&#x10B;   <cell>&#x11B;   <cell>&#x12B;   <cell>&#x13B;   <cell>&#x14B;   <cell>&#x15B;   <cell>&#x16B;   <cell>&#x17B;
+<row><cell>C    <cell>&#x10C;   <cell>&#x11C;   <cell>&#x12C;   <cell>&#x13C;   <cell>&#x14C;   <cell>&#x15C;   <cell>&#x16C;   <cell>&#x17C;
+<row><cell>D    <cell>&#x10D;   <cell>&#x11D;   <cell>&#x12D;   <cell>&#x13D;   <cell>&#x14D;   <cell>&#x15D;   <cell>&#x16D;   <cell>&#x17D;
+<row><cell>E    <cell>&#x10E;   <cell>&#x11E;   <cell>&#x12E;   <cell>&#x13E;   <cell>&#x14E;   <cell>&#x15E;   <cell>&#x16E;   <cell>&#x17E;
+<row><cell>F    <cell>&#x10F;   <cell>&#x11F;   <cell>&#x12F;   <cell>&#x13F;   <cell>&#x14F;   <cell>&#x15F;   <cell>&#x16F;   <cell>&#x17F;
+</table>
+
+
+<div2>
+<head>Latin Extended-B</head>
+
+<table>
+<column rend="font(bold)"></column>
+<row role=label>
+     <cell>     <cell>018       <cell>019       <cell>01A       <cell>01B       <cell>01C       <cell>01D       <cell>01E       <cell>01F       <cell>020       <cell>021       <cell>022       <cell>023       <cell>024    
+<row><cell>0    <cell>&#x180;   <cell>&#x190;   <cell>&#x1A0;   <cell>&#x1B0;   <cell>&#x1C0;   <cell>&#x1D0;   <cell>&#x1E0;   <cell>&#x1F0;   <cell>&#x200;   <cell>&#x210;   <cell>&#x220;   <cell>&#x230;   <cell>&#x240;
+<row><cell>1    <cell>&#x181;   <cell>&#x191;   <cell>&#x1A1;   <cell>&#x1B1;   <cell>&#x1C1;   <cell>&#x1D1;   <cell>&#x1E1;   <cell>&#x1F1;   <cell>&#x201;   <cell>&#x211;   <cell>&#x221;   <cell>&#x231;   <cell>&#x241;
+<row><cell>2    <cell>&#x182;   <cell>&#x192;   <cell>&#x1A2;   <cell>&#x1B2;   <cell>&#x1C2;   <cell>&#x1D2;   <cell>&#x1E2;   <cell>&#x1F2;   <cell>&#x202;   <cell>&#x212;   <cell>&#x222;   <cell>&#x232;   <cell>&#x242;
+<row><cell>3    <cell>&#x183;   <cell>&#x193;   <cell>&#x1A3;   <cell>&#x1B3;   <cell>&#x1C3;   <cell>&#x1D3;   <cell>&#x1E3;   <cell>&#x1F3;   <cell>&#x203;   <cell>&#x213;   <cell>&#x223;   <cell>&#x233;   <cell>&#x243;
+<row><cell>4    <cell>&#x184;   <cell>&#x194;   <cell>&#x1A4;   <cell>&#x1B4;   <cell>&#x1C4;   <cell>&#x1D4;   <cell>&#x1E4;   <cell>&#x1F4;   <cell>&#x204;   <cell>&#x214;   <cell>&#x224;   <cell>&#x234;   <cell>&#x244;
+<row><cell>5    <cell>&#x185;   <cell>&#x195;   <cell>&#x1A5;   <cell>&#x1B5;   <cell>&#x1C5;   <cell>&#x1D5;   <cell>&#x1E5;   <cell>&#x1F5;   <cell>&#x205;   <cell>&#x215;   <cell>&#x225;   <cell>&#x235;   <cell>&#x245;
+<row><cell>6    <cell>&#x186;   <cell>&#x196;   <cell>&#x1A6;   <cell>&#x1B6;   <cell>&#x1C6;   <cell>&#x1D6;   <cell>&#x1E6;   <cell>&#x1F6;   <cell>&#x206;   <cell>&#x216;   <cell>&#x226;   <cell>&#x236;   <cell>&#x246;
+<row><cell>7    <cell>&#x187;   <cell>&#x197;   <cell>&#x1A7;   <cell>&#x1B7;   <cell>&#x1C7;   <cell>&#x1D7;   <cell>&#x1E7;   <cell>&#x1F7;   <cell>&#x207;   <cell>&#x217;   <cell>&#x227;   <cell>&#x237;   <cell>&#x247;
+<row><cell>8    <cell>&#x188;   <cell>&#x198;   <cell>&#x1A8;   <cell>&#x1B8;   <cell>&#x1C8;   <cell>&#x1D8;   <cell>&#x1E8;   <cell>&#x1F8;   <cell>&#x208;   <cell>&#x218;   <cell>&#x228;   <cell>&#x238;   <cell>&#x248;
+<row><cell>9    <cell>&#x189;   <cell>&#x199;   <cell>&#x1A9;   <cell>&#x1B9;   <cell>&#x1C9;   <cell>&#x1D9;   <cell>&#x1E9;   <cell>&#x1F9;   <cell>&#x209;   <cell>&#x219;   <cell>&#x229;   <cell>&#x239;   <cell>&#x249;
+<row><cell>A    <cell>&#x18A;   <cell>&#x19A;   <cell>&#x1AA;   <cell>&#x1BA;   <cell>&#x1CA;   <cell>&#x1DA;   <cell>&#x1EA;   <cell>&#x1FA;   <cell>&#x20A;   <cell>&#x21A;   <cell>&#x22A;   <cell>&#x23A;   <cell>&#x24A;
+<row><cell>B    <cell>&#x18B;   <cell>&#x19B;   <cell>&#x1AB;   <cell>&#x1BB;   <cell>&#x1CB;   <cell>&#x1DB;   <cell>&#x1EB;   <cell>&#x1FB;   <cell>&#x20B;   <cell>&#x21B;   <cell>&#x22B;   <cell>&#x23B;   <cell>&#x24B;
+<row><cell>C    <cell>&#x18C;   <cell>&#x19C;   <cell>&#x1AC;   <cell>&#x1BC;   <cell>&#x1CC;   <cell>&#x1DC;   <cell>&#x1EC;   <cell>&#x1FC;   <cell>&#x20C;   <cell>&#x21C;   <cell>&#x22C;   <cell>&#x23C;   <cell>&#x24C;
+<row><cell>D    <cell>&#x18D;   <cell>&#x19D;   <cell>&#x1AD;   <cell>&#x1BD;   <cell>&#x1CD;   <cell>&#x1DD;   <cell>&#x1ED;   <cell>&#x1FD;   <cell>&#x20D;   <cell>&#x21D;   <cell>&#x22D;   <cell>&#x23D;   <cell>&#x24D;
+<row><cell>E    <cell>&#x18E;   <cell>&#x19E;   <cell>&#x1AE;   <cell>&#x1BE;   <cell>&#x1CE;   <cell>&#x1DE;   <cell>&#x1EE;   <cell>&#x1FE;   <cell>&#x20E;   <cell>&#x21E;   <cell>&#x22E;   <cell>&#x23E;   <cell>&#x24E;
+<row><cell>F    <cell>&#x18F;   <cell>&#x19F;   <cell>&#x1AF;   <cell>&#x1BF;   <cell>&#x1CF;   <cell>&#x1DF;   <cell>&#x1EF;   <cell>&#x1FF;   <cell>&#x20F;   <cell>&#x21F;   <cell>&#x22F;   <cell>&#x23F;   <cell>&#x24F;
+</table>
 
 
 

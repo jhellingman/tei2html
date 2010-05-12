@@ -115,6 +115,7 @@
                     </xsl:choose>.xml
                 </xsl:variable>
 
+
                 <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
                 <style type="text/css">
                     <!-- Standard CSS stylesheet -->
@@ -125,15 +126,6 @@
 
                     <!-- Standard Aural CSS stylesheet -->
                     <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
-
-                    <xsl:if test="$customCssFile">
-                        <!-- Custom CSS stylesheet -->
-                        <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
-                    </xsl:if>
-
-                    <!-- Generate CSS for rend attributes -->
-                    <xsl:apply-templates select="/" mode="css"/>
-
                 </style>
 
                 <!-- Pull in CSS sheet for print (using Prince). -->
@@ -142,6 +134,17 @@
                         <xsl:copy-of select="document('style/print.css.xml')/*/node()"/>
                     </style>
                 </xsl:if>
+
+                <style type="text/css">
+                    <xsl:if test="$customCssFile">
+                        <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
+                        <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
+                    </xsl:if>
+
+                    <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
+                    <xsl:apply-templates select="/" mode="css"/>
+                </style>
+
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
