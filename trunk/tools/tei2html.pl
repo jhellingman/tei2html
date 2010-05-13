@@ -2,7 +2,7 @@
 
 use strict;
 
-use File::Temp qw(tmpnam);
+use File::Temp qw(mktemp);
 use Getopt::Long;
 
 
@@ -50,6 +50,7 @@ my $filename = $ARGV[$argNumber];
 
 my $nsgmlresult = 0;
 
+my $tmpdir = $ENV{'TEMP'};
 
 
 if ($filename eq "")
@@ -131,7 +132,7 @@ sub processFile($)
 
     if ($makeHTML == 1) 
     {
-        my $tmpFile = tmpnam();
+        my $tmpFile = mktemp('tmp-XXXXX');;
         print "Create HTML version...\n";
         system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > $tmpFile");
         system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
@@ -141,8 +142,8 @@ sub processFile($)
 
     if ($makePDF == 1)
     {
-        my $tmpFile1 = tmpnam();
-        my $tmpFile2 = tmpnam();
+        my $tmpFile1 = mktemp('tmp-XXXXX');;
+        my $tmpFile2 = mktemp('tmp-XXXXX');;
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
@@ -157,7 +158,7 @@ sub processFile($)
 
     if ($makeEPUB == 1)
     {
-        my $tmpFile = tmpnam();
+        my $tmpFile = mktemp('tmp-XXXXX');;
         print "Create ePub version...\n";
         system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
@@ -174,8 +175,8 @@ sub processFile($)
 
     if ($makeTXT == 1)
     {
-        my $tmpFile1 = tmpnam();
-        my $tmpFile2 = tmpnam();
+        my $tmpFile1 = mktemp('tmp-XXXXX');;
+        my $tmpFile2 = mktemp('tmp-XXXXX');;
 
         print "Create text version...\n";
         system ("perl $toolsdir/exNotesHtml.pl $filename");
@@ -210,7 +211,7 @@ sub processFile($)
 
     if ($makeReport == 1)
     {
-        my $tmpFile = tmpnam();
+        my $tmpFile = mktemp('tmp-XXXXX');;
         print "Report on word usage...\n";
         system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
         system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
@@ -244,7 +245,7 @@ sub sgml2xml($$)
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
     # Translate Latin-1 characters to entities
-    my $currentFile = tmpnam();
+    my $currentFile = mktemp('tmp-XXXXX');;
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $currentFile");
 
@@ -260,10 +261,10 @@ sub sgml2xml($$)
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $sgmlFile.err $currentFile > $sgmlFile.nsgml");
     system ("rm $sgmlFile.nsgml");
 
-    my $tmpFile1 = tmpnam();
-    my $tmpFile2 = tmpnam();
-    my $tmpFile3 = tmpnam();
-    my $tmpFile4 = tmpnam();
+    my $tmpFile1 = mktemp('tmp-XXXXX');;
+    my $tmpFile2 = mktemp('tmp-XXXXX');;
+    my $tmpFile3 = mktemp('tmp-XXXXX');;
+    my $tmpFile4 = mktemp('tmp-XXXXX');;
 
     print "Convert SGML to XML...\n";
     # hide entities for parser
@@ -292,9 +293,9 @@ sub transcribeGreek($)
     my $containsGreek = system ("grep -q \"<GR>\" $currentFile");
     if ($containsGreek == 0)
     {
-        my $tmpFile1 = tmpnam();
-        my $tmpFile2 = tmpnam();
-        my $tmpFile3 = tmpnam();
+        my $tmpFile1 = mktemp('tmp-XXXXX');;
+        my $tmpFile2 = mktemp('tmp-XXXXX');;
+        my $tmpFile3 = mktemp('tmp-XXXXX');;
 
         print "Converting Greek transcription...\n";
         print "Adding Greek transcription in choice elements...\n";
@@ -323,7 +324,7 @@ sub transcribeNotation($$$$)
     my $containsNotation = system ("grep -q \"$tag\" $currentFile");
     if ($containsNotation == 0)
     {
-        my $tmpFile = tmpnam();
+        my $tmpFile = mktemp('tmp-XXXXX');;
 
         print "Converting $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
