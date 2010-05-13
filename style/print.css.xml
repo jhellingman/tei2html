@@ -2,97 +2,99 @@
 <style type="text/css">
 <![CDATA[
 
-/* 
+/*
 
 Stylesheet for printing Project Gutenberg ebooks using Prince http://www.princexml.com/
 
-The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker: 
-see http://www.w3.org/TR/css3-page/. For this reason, it should not be included in the 
+The CSS3 code used in this stylesheet will generate errors in the W3C CSS checker:
+see http://www.w3.org/TR/css3-page/. For this reason, it should not be included in the
 HTML versions posted to Project Gutenberg.
 
 */
 
 /* ==== PAGE LAYOUT ==== */
 
-@page 
+@page
 {
-	size: demy-octavo;
-	margin: 27mm 16mm 27mm 16mm;
+    size: demy-octavo;
+    margin: 27mm 16mm 27mm 16mm;
 
-	@footnotes 
-	{
-		padding-top: 8pt;
-		margin: 0 10%;
-	}
+    @footnotes
+    {
+        padding-top: 8pt;
+        margin: 0 10%;
+    }
+
+    counter-reset: footnote;
 }
 
 @page coverpage
 {
-	@top-left { content: normal }
-	@top-right { content: normal }
-	@bottom-left { content: normal }
-	@bottom-right { content: normal }
+    @top-left { content: normal }
+    @top-right { content: normal }
+    @bottom-left { content: normal }
+    @bottom-right { content: normal }
 }
 
 
 @page titlepage
-{ 
-	@top-left { content: normal }
-	@top-right { content: normal }
-	@bottom-left { content: normal }
-	@bottom-right { content: normal }
+{
+    @top-left { content: normal }
+    @top-right { content: normal }
+    @bottom-left { content: normal }
+    @bottom-right { content: normal }
 }
 
 
-@page :left 
+@page :left
 {
-	@bottom-left 
-	{
-		content: counter(page);
-		margin: 0 10%;
-	}
+    @bottom-left
+    {
+        content: counter(page);
+        margin: 0 10%;
+    }
 
-	@top-left
-	{
-		content: string(header, first); 
-		font-style: italic;
-		margin: 0 10%;
-	}
+    @top-left
+    {
+        content: string(header, first);
+        font-style: italic;
+        margin: 0 10%;
+    }
 }
 
-@page :right 
+@page :right
 {
-	@bottom-right
-	{
-		content: counter(page);
-		margin: 0 10%;
-	}
+    @bottom-right
+    {
+        content: counter(page);
+        margin: 0 10%;
+    }
 
-	@top-right 
-	{
-		content: string(header, first); 
-		font-style: italic;
-		margin: 0 10%;
-	}
+    @top-right
+    {
+        content: string(header, first);
+        font-style: italic;
+        margin: 0 10%;
+    }
 }
 
 
 @page frontmatter :left
 {
-	@bottom-left 
-	{
-		content: counter(page, lower-roman);
-		margin: 0 10%;
-	}
+    @bottom-left
+    {
+        content: counter(page, lower-roman);
+        margin: 0 10%;
+    }
 }
 
 @page frontmatter :right
 {
-	@bottom-right
-	{
-		content: counter(page, lower-roman);
-		margin: 0 10%;
-	}
+    @bottom-right
+    {
+        content: counter(page, lower-roman);
+        margin: 0 10%;
+    }
 }
 
 
@@ -108,44 +110,44 @@ HTML versions posted to Project Gutenberg.
 body
 {
     margin: 0 10%;
-	text-align: justify;
+    text-align: justify;
 }
 
 div.front
-{ 
-	page: frontmatter 
+{
+    page: frontmatter
 }
 
 div.body
 {
-	counter-reset: page 1;
+    counter-reset: page 1;
 }
 
-div.titlePage 
+div.titlePage
 {
-	page: titlepage;
-	page-break-after: always;
+    page: titlepage;
+    page-break-after: always;
 
     color: black;
     background: white;
-	border: white 0px solid;
+    border: white 0px solid;
 }
 
 h1.docTitle
 {
-	string-set: doctitle content();
+    string-set: doctitle content();
 }
 
 
 div.div1
 {
-	page-break-after: always;
+    page-break-after: always;
 }
 
 
 h2.normal
 {
-	string-set: header content();
+    string-set: header content();
 }
 
 
@@ -153,38 +155,46 @@ h2.normal
 
 .displayfootnote
 {
-	display: prince-footnote;
-	font-size: 8pt;
+    display: prince-footnote;
+    font-size: 8pt;
+    counter-increment: footnote;
+    text-indent: 1em;
+    footnote-style-position: inside;
+    text-align: justify;
 }
 
-::footnote-marker 
+::footnote-marker
 {
-	footnote-style-position: inside;
-	font-size: 83%;
-    vertical-align: super;
-    line-height: none;
-	padding-right: 0.5em;
+    footnote-style-position: inside;
 }
 
-
-div.footnotes					
+::footnote-call
 {
-	display: none;			/* Suppress the display of the generated footnote sections */
-}
-
-.noteref					
-{
-	display: none;			/* Suppress the display of the generated footnote numbers */
-}
-
-.pseudonoteref				/* render references to footnotes similar to note markers */
-{
-    content: target-counter(attr(href), footnote);		
-	font-size: 83%;
+    content: counter(footnote);
+    font-size: 83%;
     vertical-align: super;
     line-height: none;
 }
 
+.pseudonoteref              /* render references to footnotes similar to note markers */
+{
+    content: target-counter(attr(href), footnote);
+    font-size: 83%;
+    vertical-align: super;
+    line-height: none;
+}
+
+/* Suppress display of generated endnotes in HTML */
+
+div.footnotes
+{
+    display: none;          /* Suppress the display of the generated footnote sections */
+}
+
+.noteref
+{
+    display: none;          /* Suppress the display of the generated footnote numbers */
+}
 
 /* ==== LINKS ==== */
 
@@ -199,28 +209,25 @@ a:link, a:visited
 
 p
 {
-    text-indent: 0;
     margin: 0;
-    padding: 0;
-}
-
-p + p
-{
     text-indent: 1em;
-    margin: 0;
-    padding: 0;
 }
 
+p.firstpar, p.tocChapter, p.byline
+{
+    text-indent: 0em;
+}
 
 h1, h2, h3, h4, h5, h6
 {
     color: black;
+    text-align: left;
 }
 
 span.corr, span.abbr, span.measure, abbr
 {
     border-bottom: 0px;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .transcribernote
@@ -232,30 +239,37 @@ span.corr, span.abbr, span.measure, abbr
     margin: 0;
 }
 
-.figureHead, .noteref, span.leftnote, p.legend, .versenum, .rightnote,	.pagenum, .linenum, .pagenum a
+.figureHead, .noteref, span.leftnote, p.legend, .versenum, .rightnote,  .pagenum, .linenum, .pagenum a
 {
-	color: black;
+    color: black;
 }
 
-hr 
+hr
 {
-  border: 0;
-  color: black;
-  background-color: black;
-  height: 1px;
-  width: 15%;
+    border: 0;
+    color: black;
+    background-color: black;
+    height: 1px;
+    width: 15%;
 }
 
+/* add margins to various text elements */
+.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
+{
+    padding: 0;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
 
 /* ==== PAGE NUMBERS ==== */
 
 
-a.pageref			/* Replace references with pagenumbers with actual pagenumbers */
+a.pageref           /* Replace references with pagenumbers with actual pagenumbers */
 {
     content: target-counter(attr(href), page);
 }
 
-.pagenum			/* Suppress marginal pagenumbers */
+.pagenum            /* Suppress marginal pagenumbers */
 {
     display: none;
 }
@@ -271,12 +285,12 @@ h6 { prince-bookmark-level: 6 }
 
 h1.label, h2.label, h3.label, h4.label, h5.label, h6.label
 {
-	prince-bookmark-level: none;
+    prince-bookmark-level: none;
 }
 
 div.titlePage > h2
 {
-	prince-bookmark-level: none;
+    prince-bookmark-level: none;
 }
 
 
