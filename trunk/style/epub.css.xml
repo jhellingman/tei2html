@@ -119,8 +119,8 @@ span.corr, span.abbr, span.measure
 .lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
 {
     padding: 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.58em;
+    margin-bottom: 1.58em;
 }
 
 /* restore original margins on floating images */

@@ -90,9 +90,7 @@ sub processFile($)
     $filename =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/;
     my $basename    = $1;
     my $version     = $3;
-    my $currentname = $filename;
 
-    
     print "Processing TEI-file '$basename' version $version\n";
 
     sgml2xml($filename, $basename . ".xml");
@@ -245,20 +243,20 @@ sub sgml2xml($$)
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
     # Translate Latin-1 characters to entities
-    my $currentFile = mktemp('tmp-XXXXX');;
+    my $tmpFile0 = mktemp('tmp-XXXXX');;
     print "Convert Latin-1 characters to entities...\n";
-    system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $currentFile");
+    system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
-    $currentFile = transcribeGreek($currentFile);
-    $currentFile = transcribeNotation($currentFile, "<AR>", "Arabic",               "$patcdir/arabic/ar2sgml.pat");
-    $currentFile = transcribeNotation($currentFile, "<AS>", "Assamese",             "$patcdir/indic/as2ucs.pat");
-    $currentFile = transcribeNotation($currentFile, "<BN>", "Bengali",              "$patcdir/indic/bn2ucs.pat");
-    $currentFile = transcribeNotation($currentFile, "<HB>", "Hebrew",               "$patcdir/hebrew/he2sgml.pat");
-    $currentFile = transcribeNotation($currentFile, "<TL>", "Tagalog (Baybayin)",   "$patcdir/tagalog/tagalog.pat");
-    $currentFile = transcribeNotation($currentFile, "<TM>", "Tamil",                "$patcdir/indic/tm2ucs.pat");
+    $tmpFile0 = transcribeGreek($tmpFile0);
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>", "Arabic",               "$patcdir/arabic/ar2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>", "Assamese",             "$patcdir/indic/as2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>", "Bengali",              "$patcdir/indic/bn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<HB>", "Hebrew",               "$patcdir/hebrew/he2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",   "$patcdir/tagalog/tagalog.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                "$patcdir/indic/tm2ucs.pat");
 
     print "Check SGML...\n";
-    $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $sgmlFile.err $currentFile > $sgmlFile.nsgml");
+    $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
     system ("rm $sgmlFile.nsgml");
 
     my $tmpFile1 = mktemp('tmp-XXXXX');;
@@ -268,17 +266,18 @@ sub sgml2xml($$)
 
     print "Convert SGML to XML...\n";
     # hide entities for parser
-    system ("sed \"s/\\&/|xxxx|/g\" < $currentFile > $tmpFile1");
+    system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
     system ("sx -c $catalog -E10000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
     system ("$saxon2 $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
 
-    unlink($tmpFile1);
-    unlink($tmpFile2);
-    unlink($tmpFile3);
     unlink($tmpFile4);
+    unlink($tmpFile3);
+    unlink($tmpFile2);
+    unlink($tmpFile1);
+    unlink($tmpFile0);
 }
 
 
@@ -302,9 +301,12 @@ sub transcribeGreek($)
         system ("perl $toolsdir/gr2trans.pl -x $currentFile > $tmpFile1");
         system ("patc -p $patcdir/greek/grt2sgml.pat $tmpFile1 $tmpFile2");
         system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
-        $currentFile = $tmpFile3;
+
         unlink($tmpFile1);
         unlink($tmpFile2);
+
+		unlink($currentFile);
+        $currentFile = $tmpFile3;
     }
     return $currentFile;
 }
@@ -328,6 +330,8 @@ sub transcribeNotation($$$$)
 
         print "Converting $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
+
+		unlink($currentFile);
         $currentFile = $tmpFile;
     }
     return $currentFile;

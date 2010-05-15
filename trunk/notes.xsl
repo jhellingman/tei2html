@@ -141,7 +141,7 @@
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <h2><xsl:value-of select="$strApparatus"/></h2>
+            <h2 class="main"><xsl:value-of select="$strApparatus"/></h2>
 
             <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
         </div>

@@ -26,9 +26,9 @@
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
 
-            <h2><xsl:value-of select="$strColophon"/></h2>
+            <h2 class="main"><xsl:value-of select="$strColophon"/></h2>
 
-            <h3><xsl:value-of select="$strAvailability"/></h3>
+            <h3 class="main"><xsl:value-of select="$strAvailability"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
             <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
@@ -58,16 +58,16 @@
                 </p>
             </xsl:if>
 
-            <h3><xsl:value-of select="$strEncoding"/></h3>
+            <h3 class="main"><xsl:value-of select="$strEncoding"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
 
-            <h3><xsl:value-of select="$strRevisionHistory"/></h3>
+            <h3 class="main"><xsl:value-of select="$strRevisionHistory"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
             <xsl:call-template name="externalReferences"/>
 
             <xsl:if test="//corr">
-                <h3><xsl:value-of select="$strCorrections"/></h3>
+                <h3 class="main"><xsl:value-of select="$strCorrections"/></h3>
                 <xsl:call-template name="correctionTable"/>
             </xsl:if>
 
@@ -79,7 +79,7 @@
 
     <xsl:template match="divGen[@type='corr']">
         <xsl:if test="//corr">
-            <h2><xsl:value-of select="$strCorrections"/></h2>
+            <h2 class="main"><xsl:value-of select="$strCorrections"/></h2>
             <xsl:call-template name="correctionTable"/>
         </xsl:if>
     </xsl:template>
@@ -141,7 +141,7 @@
 
     <xsl:template name="externalReferences">
         <xsl:if test="//xref">
-            <h3><xsl:value-of select="$strExternalReferences"/></h3>
+            <h3 class="main"><xsl:value-of select="$strExternalReferences"/></h3>
 
             <p><xsl:value-of select="$strExternalReferencesDisclaimer"/></p>
         </xsl:if>

@@ -30,6 +30,7 @@ HTML versions posted to Project Gutenberg.
 
 @page coverpage
 {
+    margin: 0;
     @top-left { content: normal }
     @top-right { content: normal }
     @bottom-left { content: normal }
@@ -156,10 +157,13 @@ h2.normal
 .displayfootnote
 {
     display: prince-footnote;
-    font-size: 8pt;
     counter-increment: footnote;
-    text-indent: 1em;
     footnote-style-position: inside;
+
+    font-size: 8pt;
+    font-weight: normal;
+    font-style: normal;
+    text-indent: 1em;
     text-align: justify;
 }
 
@@ -257,8 +261,8 @@ hr
 .lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
 {
     padding: 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.58em;
+    margin-bottom: 1.58em;
 }
 
 /* ==== PAGE NUMBERS ==== */
