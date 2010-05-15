@@ -1,7 +1,7 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- This HTML file has been automatically generated from an XML source on 2010-05-01T11:27:18.7+02:00. -->
+<!-- This HTML file has been automatically generated from an XML source on 2010-05-15T22:10:39.8+02:00. -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
    <head>
       <title>Main Title of Work Goes Here</title>
@@ -238,6 +238,11 @@ p.tocSection
     margin:0.7em 5%;
 }
 
+p.dateline
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+}
 
 p.signed
 {
@@ -245,7 +250,6 @@ p.signed
     margin-left: 3.58em;
     text-indent: -2em;
 }
-
 
 .epigraph
 {
@@ -430,11 +434,11 @@ td.sum
     font-weight: normal;
 }
 
-.lg .linenum
+.lg .linenum, .sp .linenum
 {
     color:#777;
     font-size:90%;
-    left:-2.5em;
+    left: 16%;
     margin:0;
     position:absolute;
     text-align:center;
@@ -724,7 +728,7 @@ sub, sup
 }
 
 
-
+</style><style type="text/css">
 
 
 body
@@ -998,6 +1002,12 @@ body
                 {
                     font-style:italic;
                 }
+            
+                
+                .xd20e829
+                {
+                    tocMaxLevel:1;
+                }
             </style></head>
    <body>
       
@@ -1017,24 +1027,24 @@ body
                
             </div>
          </div>
-         <div xmlns:xhtml="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+         <div xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="div1" id="toc">
             <h2 class="normal">Table of Contents</h2>
             <ul>
                <li><a href="#bk01">This is a Test Document</a><ul>
                      <li><a href="#ch04">A Chapter Dealing with Text Styles</a></li>
-                     <li><a href="#ch05">Formatting Tables</a><ul>
-                           <li><a href="#xd20e549">Letters, Closers, and Openers</a></li>
-                           <li><a href="#xd20e571">Lists</a></li>
+                     <li><a href="#ch05">Formatting Tables</a><span class="tocPagenum"><a type="pageref" href="#xd20e204">2</a></span><ul>
+                           <li><a href="#xd20e549">Letters, Closers, and Openers</a><span class="tocPagenum"><a type="pageref" href="#xd20e550">2</a></span></li>
+                           <li><a href="#xd20e571">Lists</a><span class="tocPagenum"><a type="pageref" href="#xd20e572">2</a></span></li>
                         </ul>
                      </li>
-                     <li><a href="#ch6">Tests of poetry</a></li>
+                     <li><a href="#ch6">Tests of poetry</a><span class="tocPagenum"><a type="pageref" href="#xd20e713">23</a></span></li>
                   </ul>
                </li>
-               <li><a href="#index">Index</a><ul>
-                     <li><a href="#xd20e804">A.</a></li>
-                     <li><a href="#xd20e809">B.</a></li>
-                     <li><a href="#xd20e814">C.</a></li>
-                     <li><a href="#xd20e819">D.</a></li>
+               <li><a href="#index">Index</a><span class="tocPagenum"><a type="pageref" href="#xd20e801">4</a></span><ul>
+                     <li><a href="#xd20e804">A.</a><span class="tocPagenum"><a type="pageref" href="#xd20e805">4</a></span></li>
+                     <li><a href="#xd20e809">B.</a><span class="tocPagenum"><a type="pageref" href="#xd20e810">4</a></span></li>
+                     <li><a href="#xd20e814">C.</a><span class="tocPagenum"><a type="pageref" href="#xd20e815">4</a></span></li>
+                     <li><a href="#xd20e819">D.</a><span class="tocPagenum"><a type="pageref" href="#xd20e820">4</a></span></li>
                   </ul>
                </li>
             </ul>
@@ -1044,8 +1054,8 @@ body
          <div class="div0" id="bk01">
             <h2 class="label">Book I</h2>
             <h2 id="xd20e113">This is a Test Document</h2>
-            <p id="xd20e115" class="firstpar">This is a test document<a class="noteref" id="xd20e117src" href="#xd20e117">1</a>, mainly intended to try-out the features implemented in the tei2html <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e120"></a>XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how
-               certain things are achieved with my <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e122"></a>stylesheet (yes, I sometimes forget myself). 
+            <p id="xd20e115" class="firstpar">This is a test document<a class="noteref" id="xd20e117src" href="#xd20e117">1</a>, mainly intended to try-out the features implemented in the tei2html <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e120"></a>XSLT stylesheet. This serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how
+               certain things are achieved with my <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e122"></a>stylesheet (yes, I sometimes forget myself). 
             </p>
             <div class="footnotes">
                <hr class="fnsep"></hr>
@@ -1064,20 +1074,20 @@ body
                   <div class="body">
                      <div id="xd20e174" class="div1">
                         <h2 id="xd20e175">Section head in quoted material</h2>
-                        <p id="xd20e177" class="firstpar">This is a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e179"></a>paragraph in quoted material<a class="noteref" id="xd20e181src" href="#xd20e181">3</a> This paragraph contains a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e186"></a>footnote, to verify correct handling of this convoluted situation during the transformation.
+                        <p id="xd20e177" class="firstpar">This is a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e179"></a>paragraph in quoted material<a class="noteref" id="xd20e181src" href="#xd20e181">3</a> This paragraph contains a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e186"></a>footnote, to verify correct handling of this convoluted situation during the transformation.
                         </p>
                      </div>
                   </div>
                </div>
-               <p id="xd20e188">Books created with these stylesheet include: <a class="pglink" title="Link to Project Gutenberg ebook" href="http://www.gutenberg.org/etext/19585">De Wereld voor de schepping van den mensch by Camille Flammarion</a>. Books will be posted at <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e193"></a><a class="exlink" title="External link" href="http://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <a class="catlink" title="Link to OpenLibrary catalog page" href="http://openlibrary.org/b/OL11170298M">OLN</a> and <a class="catlink" title="Link to WorldCat catalog page" href="http://www.worldcat.org/oclc/618671">OCLC</a>.
+               <p id="xd20e188">Books created with these stylesheet include: <a class="pglink" title="Link to Project Gutenberg ebook" href="http://www.gutenberg.org/etext/19585">De Wereld voor de schepping van den mensch by Camille Flammarion</a>. Books will be posted at <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e193"></a><a class="exlink" title="External link" href="http://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <a class="catlink" title="Link to OpenLibrary catalog page" href="http://openlibrary.org/b/OL11170298M">OLN</a> and <a class="catlink" title="Link to WorldCat catalog page" href="http://www.worldcat.org/oclc/618671">OCLC</a>.
                </p>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
-                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e127" href="#xd20e127src">1</a></span> Footnote in <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e129"></a>chapter heading.
+                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e127" href="#xd20e127src">1</a></span> Footnote in <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e129"></a>chapter heading.
                   </p>
                   <p class="footnote"><span class="label"><a class="noteref" id="xd20e152" href="#xd20e152src">2</a></span> This is a footnote with some <i id="xd20e154">italic</i>.
                   </p>
-                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e181" href="#xd20e181src">3</a></span> This is a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e183"></a>footnote in quoted material.
+                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e181" href="#xd20e181src">3</a></span> This is a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e183"></a>footnote in quoted material.
                   </p>
                </div>
             </div>
@@ -1095,7 +1105,7 @@ body
                         <p id="xd20e219" class="line ">Et de leurs piés ailés ils devancent les vents.&#8221;</p>
                      </div>
                   </div><span class="bibl">(<i id="xd20e223">Metamorphoses d'Ovide</i>).</span></div>
-               <p id="xd20e226" class="firstpar">You may note the small <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e228"></a>ornament above the <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e230"></a>chapter heading, which is included using a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e232"></a>rend attribute on the head element of this chapter.
+               <p id="xd20e226" class="firstpar">You may note the small <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e228"></a>ornament above the <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e230"></a>chapter heading, which is included using a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e232"></a>rend attribute on the head element of this chapter.
                </p>
                <p id="xd20e234">In this chapter we generate a table:<a class="noteref" id="xd20e236src" href="#xd20e236">1</a></p>
                <p id="xd20e238">
@@ -1114,7 +1124,7 @@ body
                            <td valign="top" id="xd20e252">6<a class="noteref" id="n1src" href="#n1">2</a></td>
                         </tr>
                         <tr valign="top" id="xd20e259">
-                           <td valign="top" id="xd20e260" colspan="2">7: A cell spanning no less than two columns. This should work out fine, even with a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e262"></a>footnote<a class="pseudonoteref" href="#n1">2</a> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <a href="#n1" id="xd20e267">the same footnote</a> without such a special treatment!)
+                           <td valign="top" id="xd20e260" colspan="2">7: A cell spanning no less than two columns. This should work out fine, even with a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e262"></a>footnote<a class="pseudonoteref" href="#n1">2</a> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <a href="#n1" id="xd20e267">the same footnote</a> without such a special treatment!)
                            </td>
                         </tr>
                      </table>
@@ -1259,7 +1269,7 @@ body
                <div class="figure floatRight  xd20e503width" id="test2"><a href="http://www.bohol.ph/"><img src="images/test.jpg" alt="A picture of the Philippine tarsier in a tree." width="80" height="80"></img></a><p class="figureHead">The <i id="xd20e506">Philippine</i> Tarsier
                   </p>
                </div>
-               <p id="xd20e511">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e513"></a>labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+               <p id="xd20e511">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e513"></a>labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                   consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
                   sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   
@@ -1540,11 +1550,11 @@ body
                   
                   
                </p>
-               <p id="xd20e792">Note that the <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e794"></a>footnote includes some verse, to which we can link <a href="#footnoteverse" id="xd20e796">here</a>, and elsewhere in the document.
+               <p id="xd20e792">Note that the <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e794"></a>footnote includes some verse, to which we can link <a href="#footnoteverse" id="xd20e796">here</a>, and elsewhere in the document.
                </p>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
-                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e776" href="#xd20e776src">1</a></span> To add verse in a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" id="xd20e779"></a>footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.
+                  <p class="footnote"><span class="label"><a class="noteref" id="xd20e776" href="#xd20e776src">1</a></span> To add verse in a <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e779"></a>footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.
                   </p>
                   <div class="body">
                      <div id="xd20e785" class="div1">
@@ -1560,7 +1570,7 @@ body
       </div>
       <div class="back">
          <div id="index" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h2 id="xd20e801">Index</h2>
-            <div xmlns:xhtml="http://www.w3.org/1999/xhtml" class="transcribernote indextoc" id="xd20e803"><a href="#xd20e805">A</a> | <a href="#xd20e810">B</a> | <a href="#xd20e815">C</a> | <a href="#xd20e820">D</a></div>
+            <div xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="transcribernote indextoc" id="xd20e803"><a href="#xd20e805">A</a> | <a href="#xd20e810">B</a> | <a href="#xd20e815">C</a> | <a href="#xd20e820">D</a></div>
             <div class="div2" id="xd20e804"><span class="pagenum">[<a href="#toc">Contents</a>]</span><h3 id="xd20e805">A.</h3>
                <p id="xd20e807" class="firstpar">A is een aapje.</p>
             </div>
@@ -1576,7 +1586,7 @@ body
                </p>
             </div>
          </div>
-         <div id="backmatter" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div xmlns:xhtml="http://www.w3.org/1999/xhtml" class="div1" id="xd20e827">
+         <div id="backmatter" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="div1" id="xd20e827">
                <h2 class="normal">List of Illustrations</h2>
                <table>
                   <tr>
@@ -1601,7 +1611,7 @@ body
                   </tr>
                </table>
             </div>
-            <div xmlns:xhtml="http://www.w3.org/1999/xhtml" class="div1" id="xd20e828">
+            <div xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="div1" id="xd20e828">
                <h2 class="normal">Index</h2>
                <p>Chapter headings  <a href="#xd20e129">###</a>, <a href="#xd20e230">2</a></p>
                <p>Footnote  <a href="#xd20e186">2</a>, <a href="#xd20e779">4</a>; in quoted material <a href="#xd20e183">2</a></p>
@@ -1612,7 +1622,19 @@ body
                <p>Stylesheet  <a href="#xd20e122">###</a></p>
                <p>XSLT  <a href="#xd20e120">###</a></p>
             </div>
-            <div class="transcribernote" id="xd20e829">
+            <div xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" class="div1" id="xd20e829">
+               <h2 class="normal">Table of Contents</h2>
+               <ul>
+                  <li><a href="#bk01">This is a Test Document</a><ul>
+                        <li><a href="#ch04">A Chapter Dealing with Text Styles</a></li>
+                        <li><a href="#ch05">Formatting Tables</a><span class="tocPagenum"><a type="pageref" href="#xd20e204">2</a></span></li>
+                        <li><a href="#ch6">Tests of poetry</a><span class="tocPagenum"><a type="pageref" href="#xd20e713">23</a></span></li>
+                     </ul>
+                  </li>
+                  <li><a href="#index">Index</a><span class="tocPagenum"><a type="pageref" href="#xd20e801">4</a></span></li>
+               </ul>
+            </div>
+            <div class="transcribernote" id="xd20e830">
                <h2>Colophon</h2>
                <h3>Availability</h3>
                <p id="xd20e33" class="firstpar">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US.

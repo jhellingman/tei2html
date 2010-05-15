@@ -32,13 +32,14 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0"
     >
 
 
     <xsl:template match="divGen">
-        <xsl:message terminate="no">Warning: divGen without or with unknown type attribute.</xsl:message>
+        <xsl:message terminate="no">Warning: divGen element without or with unknown type attribute.</xsl:message>
     </xsl:template>
 
 
@@ -50,18 +51,34 @@
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
+            <xsl:variable name="maxlevel">
+                <xsl:choose>
+                    <xsl:when test="contains(@rend, 'tocMaxLevel(')">
+                        <xsl:value-of select="substring-before(substring-after(@rend, 'tocMaxLevel('), ')')"/>
+                    </xsl:when>
+                    <xsl:otherwise>7</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
             <ul>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1"/>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
+                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                </xsl:apply-templates>
                 <xsl:choose>
                     <xsl:when test="/TEI.2/text/body/div0">
-                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0"/>
+                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1"/>
+                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
+                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
+                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                </xsl:apply-templates>
             </ul>
         </div>
     </xsl:template>
@@ -70,6 +87,7 @@
     <!-- TOC: div0 -->
 
     <xsl:template match="div0" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
@@ -81,9 +99,12 @@
                     </xsl:choose>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div1">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div1 and $maxlevel &gt;= 1">
                     <ul>
-                        <xsl:apply-templates select="div1" mode="gentoc"/>
+                        <xsl:apply-templates select="div1" mode="gentoc">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </ul>
                 </xsl:if>
             </li>
@@ -94,6 +115,7 @@
     <!-- TOC: div1 -->
 
     <xsl:template match="div1" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
@@ -103,14 +125,17 @@
                             <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
                         </xsl:when>
                         <xsl:when test="@type='appendix'">
-                            Appendix <xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
+                            <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
                         </xsl:when>
                     </xsl:choose>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div2">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div2 and $maxlevel &gt;= 2">
                     <ul>
-                        <xsl:apply-templates select="div2" mode="gentoc"/>
+                        <xsl:apply-templates select="div2" mode="gentoc">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </ul>
                 </xsl:if>
             </li>
@@ -121,15 +146,19 @@
     <!-- TOC: div2 -->
 
     <xsl:template match="div2" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div3">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div3 and $maxlevel &gt;= 3">
                     <ul>
-                        <xsl:apply-templates select="div3" mode="gentoc"/>
+                        <xsl:apply-templates select="div3" mode="gentoc">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </ul>
                 </xsl:if>
             </li>
@@ -143,15 +172,19 @@
     <!-- TOC: div3 -->
 
     <xsl:template match="div3" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div4">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div4 and $maxlevel &gt;= 4">
                     <ul>
-                        <xsl:apply-templates select="div4" mode="gentoc"/>
+                        <xsl:apply-templates select="div4" mode="gentoc">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </ul>
                 </xsl:if>
             </li>
@@ -161,15 +194,19 @@
     <!-- TOC: div4 -->
 
     <xsl:template match="div4" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div5">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div5 and $maxlevel &gt;= 5">
                     <ul>
-                        <xsl:apply-templates select="div5" mode="gentoc"/>
+                        <xsl:apply-templates select="div5" mode="gentoc">
+                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                        </xsl:apply-templates>
                     </ul>
                 </xsl:if>
             </li>
@@ -179,13 +216,15 @@
     <!-- TOC: div5 -->
 
     <xsl:template match="div5" mode="gentoc">
+        <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
-                <xsl:if test="div6">
+                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:if test="div6 and $maxlevel &gt;= 6">
                     <ul>
                         <xsl:apply-templates select="div6" mode="gentoc"/>
                     </ul>
@@ -203,6 +242,7 @@
                     <xsl:call-template name="generate-href-attribute"/>
                     <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
                 </a>
+                <xsl:call-template name="insert-toc-page-number"/>
             </li>
         </xsl:if>
     </xsl:template>
@@ -281,11 +321,28 @@
     <!--====================================================================-->
     <!-- A classical table of contents with chapter labels, titles, and arguments -->
 
+
+    <!-- insert a span containing the page number, and a link to it. -->
+    <xsl:template name="insert-toc-page-number">
+        <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+            <span class="tocPagenum">
+                <a type="pageref">
+                    <xsl:call-template name="generate-href-attribute">
+                        <!-- we always have a head here in the context, so link to that -->
+                        <xsl:with-param name="target" select="head[1]"/>
+                    </xsl:call-template>
+                    <xsl:value-of select="preceding::pb[1]/@n"/>
+                </a>
+            </span>
+        </xsl:if>
+    </xsl:template>
+
+
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <h2 class="normal"><xsl:value-of select="$strTableOfContents"/></h2>
+            <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
             <xsl:choose>
@@ -310,11 +367,7 @@
                         <xsl:apply-templates select="head[@type='label']" mode="gentoca"/>
                     </a>
                     <xsl:if test="not(head[not(@type)])">
-                        <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-                            <span class="tocPagenum">
-                                <xsl:value-of select="preceding::pb[1]/@n"/>
-                            </span>
-                        </xsl:if>
+                        <xsl:call-template name="insert-toc-page-number"/>
                     </xsl:if>
                 </p>
             </xsl:if>
@@ -324,11 +377,7 @@
                         <xsl:call-template name="generate-href-attribute"/>
                         <xsl:apply-templates select="head[not(@type)]" mode="gentoca"/>
                     </a>
-                    <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-                        <span class="tocPagenum">
-                            <xsl:value-of select="preceding::pb[1]/@n"/>
-                        </span>
-                    </xsl:if>
+                    <xsl:call-template name="insert-toc-page-number"/>
                 </p>
             </xsl:if>
             <xsl:if test="argument">
@@ -403,7 +452,7 @@
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <ul>
                 <xsl:apply-templates mode="genloi" select="//figure[head]"/>
             </ul>
@@ -433,7 +482,7 @@
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
-            <h2 class="normal"><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
                     <xsl:with-param name="figures" select="//figure[@id]" />
@@ -517,7 +566,7 @@
         <div class="div1">
             <xsl:call-template name="generate-id-attribute"/>
             <xsl:call-template name="setLangAttribute"/>
-            <h2 class="normal"><xsl:value-of select="$strIndex"/></h2>
+            <h2 class="main"><xsl:value-of select="$strIndex"/></h2>
 
             <xsl:message terminate="no">Generating Index</xsl:message>
 

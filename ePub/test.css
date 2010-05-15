@@ -217,6 +217,11 @@ p.tocSection
     margin:0.7em 5%;
 }
 
+p.dateline
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+}
 
 p.signed
 {
@@ -224,7 +229,6 @@ p.signed
     margin-left: 3.58em;
     text-indent: -2em;
 }
-
 
 .epigraph
 {
@@ -409,11 +413,11 @@ td.sum
     font-weight: normal;
 }
 
-.lg .linenum
+.lg .linenum, .sp .linenum
 {
     color:#777;
     font-size:90%;
-    left:-2.5em;
+    left: 16%;
     margin:0;
     position:absolute;
     text-align:center;
@@ -672,7 +676,7 @@ p
     text-indent: 1em;
 }
 
-p.firstpar
+p.firstpar, p.tocChapter
 {
     text-indent: 0em;
 }
@@ -703,9 +707,9 @@ sub, sup
     line-height: 0;
 }
 
-
-.lg .linenum
+.lg .linenum, .sp .linenum
 {
+    left: 1.58em;
     color: black;
 }
 
@@ -751,11 +755,11 @@ span.corr, span.abbr, span.measure
 }
 
 /* add margins to various text elements */
-.lg, .lgouter, .epigraph, .argument, .table, .figure
+.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
 {
     padding: 0;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1.58em;
+    margin-bottom: 1.58em;
 }
 
 /* restore original margins on floating images */
@@ -1056,5 +1060,11 @@ body
                 .xd23e739
                 {
                     font-style:italic;
+                }
+            
+                
+                .xd23e829
+                {
+                    tocMaxLevel:1;
                 }
             

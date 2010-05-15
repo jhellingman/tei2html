@@ -90,6 +90,7 @@
 
         <xsl:variable name="class">
             <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:if test="not(@type)"><xsl:text>main </xsl:text></xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/>
         </xsl:variable>
 
@@ -151,6 +152,7 @@
     <xsl:template match="div0/head">
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setRunningHeader"/>
+        <xsl:call-template name="setLabelHeader"/>
         <xsl:if test="not(contains(@rend, 'display(image-only)'))">
             <h2>
                 <xsl:call-template name="headText"/>
@@ -272,6 +274,7 @@
     <xsl:template match="div1/head">
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setRunningHeader"/>
+        <xsl:call-template name="setLabelHeader"/>
         <xsl:if test="not(contains(@rend, 'display(image-only)'))">
             <h2>
                 <xsl:call-template name="headText"/>
@@ -299,6 +302,7 @@
 
     <xsl:template match="div2/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
         <h3>
             <xsl:call-template name="headText"/>
         </h3>
@@ -318,6 +322,7 @@
 
     <xsl:template match="div3/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
         <h4>
             <xsl:call-template name="headText"/>
         </h4>
@@ -337,6 +342,7 @@
 
     <xsl:template match="div4/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
         <h5>
             <xsl:call-template name="headText"/>
         </h5>
@@ -356,6 +362,7 @@
 
     <xsl:template match="div5/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
         <h6>
             <xsl:call-template name="headText"/>
         </h6>
@@ -375,6 +382,7 @@
 
     <xsl:template match="div6/head">
         <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
         <h6>
             <xsl:call-template name="headText"/>
         </h6>
@@ -411,6 +419,21 @@
             </div>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:template name="setLabelHeader">
+        <xsl:param name="head" select="."/>
+        <xsl:param name="parent" select="name(..)"/>
+
+        <xsl:if test="$optionPrinceMarkup = 'XXX' and (not($head/@type) or $head/@type='main')">
+            <div class="label{$parent}">
+                <xsl:apply-templates select="$head" mode="setLabelheader"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <!-- suppress footnotes -->
+    <xsl:template match="note" mode="setLabelheader"/>
 
 
 </xsl:stylesheet>
