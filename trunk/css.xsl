@@ -76,6 +76,8 @@
             <xsl:when test="$property='initial-offset'"/>
             <xsl:when test="$property='initial-width'"/>
             <xsl:when test="$property='initial-height'"/>
+            <xsl:when test="$property='dropcap'"/>
+            <xsl:when test="$property='dropcap-offset'"/>
 
             <!-- Figure related special handling. -->
             <xsl:when test="name() = 'figure' and $property = 'float'"/>

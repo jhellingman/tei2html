@@ -34,6 +34,7 @@ HTML versions posted to Project Gutenberg.
     @top-left { content: normal }
     @top-right { content: normal }
     @bottom-left { content: normal }
+    @bottom-center { content: normal }
     @bottom-right { content: normal }
 }
 
@@ -43,6 +44,7 @@ HTML versions posted to Project Gutenberg.
     @top-left { content: normal }
     @top-right { content: normal }
     @bottom-left { content: normal }
+    @bottom-center { content: normal }
     @bottom-right { content: normal }
 }
 

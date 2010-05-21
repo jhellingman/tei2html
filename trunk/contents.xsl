@@ -326,7 +326,7 @@
     <xsl:template name="insert-toc-page-number">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <span class="tocPagenum">
-                <a type="pageref">
+                <a class="pageref">
                     <xsl:call-template name="generate-href-attribute">
                         <!-- we always have a head here in the context, so link to that -->
                         <xsl:with-param name="target" select="head[1]"/>
