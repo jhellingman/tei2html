@@ -5,6 +5,7 @@
     <!ENTITY cr         "&#x0D;">
     <!ENTITY deg        "&#176;">
     <!ENTITY ldquo      "&#x201C;">
+    <!ENTITY lsquo      "&#x2018;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
@@ -273,7 +274,7 @@
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="substring(.,1,1) = '&ldquo;'">
+                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;'">
                         <xsl:value-of select="substring(.,1,2)"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -325,7 +326,7 @@
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>
-            <xsl:when test="position()=1 and substring(.,1,1) = '&ldquo;'">
+            <xsl:when test="position()=1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;')">
                 <xsl:value-of select="substring(.,3)"/>
             </xsl:when>
             <xsl:when test="position()=1">
@@ -342,6 +343,57 @@
         <xsl:if test="position()>1">
             <xsl:apply-templates select="."/>
         </xsl:if>
+    </xsl:template>
+
+
+    <!-- simple drop-caps -->
+    <!-- some CSS implementations do not handle the ::first-letter selector correctly, so we provide a span for this -->
+
+    <xsl:template match="p[contains(@rend, 'dropcap(')]">
+        <p>
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+            <span>
+                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dropcap</xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;'">
+                        <xsl:value-of select="substring(.,1,2)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="substring(.,1,1)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+            <xsl:apply-templates mode="eat-initial"/>
+        </p>
+    </xsl:template>
+
+
+    <xsl:template match="p[contains(@rend, 'dropcap(')]" mode="css">
+
+        <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+
+        .<xsl:call-template name="generate-rend-class-name"/>
+        {
+            text-indent: 0;
+
+            <xsl:if test="normalize-space($properties) != ''">
+                <xsl:value-of select="normalize-space($properties)"/>
+            </xsl:if>
+        }
+
+        .<xsl:call-template name="generate-rend-class-name"/>dropcap
+        {
+            float: left;
+            <xsl:if test="contains(@rend, 'dropcap-offset(')">
+                padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap-offset('), ')')"/>;
+            </xsl:if>
+            font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap('), ')')"/>;
+            margin-left: 0;
+            margin-bottom: 5px;
+            margin-right: 1px;
+        }
+
     </xsl:template>
 
 
