@@ -1561,6 +1561,7 @@ BEGIN
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
     $ent{"mmacr"}       = "m" . chr(0x0304); # m with macron
     $ent{"nmacr"}       = "n" . chr(0x0304); # n with macron
+    $ent{"qmacr"}       = "q" . chr(0x0304); # q with macron
     $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
 
     $ent{"Jbreve"}      = "J" . chr(0x0306); # J with breve
@@ -1616,6 +1617,9 @@ BEGIN
     $ent{"wdotb"}       = "w" . chr(0x0323); # w with dot below
     $ent{"zdotb"}       = "z" . chr(0x0323); # z with dot below
     $ent{"Zdotb"}       = "Z" . chr(0x0323); # Z with dot below
+    $ent{"Cdotb"}       = "C" . chr(0x0323); # C with dot below
+    $ent{"Edotb"}       = "E" . chr(0x0323); # E with dot below
+    $ent{"Fdotb"}       = "F" . chr(0x0323); # F with dot below
 
     $ent{"lumlb"}       = "l" . chr(0x0324); # l with diaresis below
     $ent{"Lumlb"}       = "L" . chr(0x0324); # L with diaresis below

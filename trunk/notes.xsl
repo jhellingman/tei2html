@@ -26,7 +26,7 @@
     <!-- Marginal notes should go to the margin -->
 
     <xsl:template match="/TEI.2/text//note[@place='margin']">
-        <span class="leftnote">
+        <span class="marginnote">
             <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </span>
@@ -42,11 +42,14 @@
             <xsl:call-template name="generate-footnote-href-attribute"/>
             <xsl:call-template name="footnote-number"/>
         </a>
-        <xsl:if test="$optionPrinceMarkup = 'Yes'">
-            <span class="displayfootnote">
-                <xsl:call-template name="setLangAttribute"/>
-                <xsl:apply-templates/>
-            </span>
+        <!-- No explicit request for footnote division -->
+        <xsl:if test="not(//divGen[@type='Footnotes'])">
+            <xsl:if test="$optionPrinceMarkup = 'Yes'">
+                <span class="displayfootnote">
+                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -57,12 +60,17 @@
         <xsl:param name="div" select="."/>
         <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
         
-        <xsl:if test="$div[not(ancestor::q)]">
-            <xsl:if test="$notes">
-                <div class="footnotes">
-                    <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select="$notes"/>
-                </div>
+        <!-- No explicit request for a notes division -->
+        <xsl:if test="not(//divGen[@type='Footnotes'])">
+            <!-- Division is not part of quoted text -->
+            <xsl:if test="$div[not(ancestor::q)]">
+                <!-- We actually do have notes -->
+                <xsl:if test="$notes">
+                    <div class="footnotes">
+                        <hr class="fnsep"/>
+                        <xsl:apply-templates mode="footnotes" select="$notes"/>
+                    </div>
+                </xsl:if>
             </xsl:if>
         </xsl:if>
     </xsl:template>

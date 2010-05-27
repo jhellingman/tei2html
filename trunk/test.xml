@@ -607,6 +607,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <divGen type="Index"/>
 
+<!-- <divGen type="Footnotes"/> -->
+
 <divGen type="toc" rend="tocMaxLevel(1)"/>
 
 <divGen type="Colophon"/>

@@ -58,9 +58,15 @@
     <xsl:template name="generate-footnote-href">
         <xsl:param name="target" select="." as="element()"/>
 
-
         <xsl:variable name="targetfile">
             <xsl:choose>
+                <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
+                <xsl:when test="//divGen[@type='Footnotes']">
+                    <xsl:call-template name="splitter-generate-filename-for">
+                        <xsl:with-param name="node" select="(//divGen[@type='Footnotes'])[1]"/>
+                    </xsl:call-template>
+                </xsl:when>
+
                 <!-- Footnotes to div0 elements are in the same fragment as the note itself -->
                 <xsl:when test="not(ancestor::div1)">
                     <xsl:call-template name="splitter-generate-filename-for">

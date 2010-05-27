@@ -308,6 +308,7 @@
     <xsl:template match="ab">
         <span>
             <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

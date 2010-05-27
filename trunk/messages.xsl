@@ -29,6 +29,16 @@
             <xsl:with-param name="name" select="'msgToc'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strNote">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgNote'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strNotes">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgNote.n'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strFigure">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgFigure'"/>

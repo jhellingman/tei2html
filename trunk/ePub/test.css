@@ -321,7 +321,7 @@ span.parnum
     font-weight: bold;
 }
 
-.leftnote
+.marginnote
 {
     font-size:0.8em;
     height:0;
@@ -686,7 +686,7 @@ p.byline
     text-indent: 0em;
 }
 
-.figureHead, .noteref, .pseudonoteref, span.leftnote, p.legend, .versenum, .stage
+.figureHead, .noteref, .pseudonoteref, span.marginnote, p.legend, .versenum, .stage
 {
     color: black;
 }
@@ -1063,7 +1063,7 @@ body
                 }
             
                 
-                .xd23e829
+                .xd23e830
                 {
                     tocMaxLevel:1;
                 }

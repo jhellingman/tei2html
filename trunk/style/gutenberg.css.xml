@@ -331,7 +331,7 @@ span.parnum
     font-weight: bold;
 }
 
-.leftnote
+.marginnote
 {
     font-size:0.8em;
     height:0;
