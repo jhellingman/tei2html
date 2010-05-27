@@ -641,4 +641,56 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
+    <!-- Footnotes -->
+
+
+    <!-- collect footnotes in a separate section, sorted by div1 -->
+    <xsl:template match="divGen[@type='Footnotes']">
+        <div class="div1 notes">
+            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="setLangAttribute"/>
+            <h2 class="main"><xsl:value-of select="$strNotes"/></h2>
+
+            <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+            <xsl:choose>
+                <xsl:when test="//body/div0">
+                    <xsl:apply-templates select="//body/div0[not(ancestor::q)]" mode="divgen-footnotes"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="//body/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="//back/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="div0" mode="divgen-footnotes">
+        <!-- Only mention the part if it has footnotes (not in the chapters) -->
+        <xsl:if test=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]">
+            <div class="div2 notes">
+                <xsl:apply-templates select="./head" mode="divgen-footnotes"/>
+                <xsl:apply-templates select=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]" mode="footnotes"/>
+            </div>
+        </xsl:if>
+        <xsl:apply-templates select="div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+    </xsl:template>
+
+    <xsl:template match="div1" mode="divgen-footnotes">
+        <!-- Only mention the chapter if it has footnotes -->
+        <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)]">
+            <div class="div2 notes">
+                <xsl:apply-templates select="./head" mode="divgen-footnotes"/>
+                <xsl:apply-templates select=".//note[@place='foot' or @place='unspecified' or not(@place)]" mode="footnotes"/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="head" mode="divgen-footnotes">
+        <h3 class="main">
+            <xsl:apply-templates select="." mode="tochead"/>
+        </h3>
+    </xsl:template>
+
+
 </xsl:stylesheet>
