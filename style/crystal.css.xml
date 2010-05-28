@@ -97,7 +97,7 @@ h1, h2
     font-weight: normal;
 }
 
-.figureHead, .noteref, .pseudonoteref, span.marginnote, p.legend, .versenum
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum
 {
     color: #660000;
 }

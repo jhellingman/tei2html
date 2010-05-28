@@ -245,7 +245,7 @@ span.corr, span.abbr, span.measure, abbr
     margin: 0;
 }
 
-.figureHead, .noteref, span.marginnote, p.legend, .versenum, .rightnote,  .pagenum, .linenum, .pagenum a
+.figureHead, .noteref, .marginnote, p.legend, .versenum, .rightnote,  .pagenum, .linenum, .pagenum a
 {
     color: black;
 }
