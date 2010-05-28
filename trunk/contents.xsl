@@ -669,7 +669,7 @@
         <!-- Only mention the part if it has footnotes (not in the chapters) -->
         <xsl:if test=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]">
             <div class="div2 notes">
-                <xsl:apply-templates select="./head" mode="divgen-footnotes"/>
+                <xsl:apply-templates select="./head[not(@type='label') and not(@type='super')]" mode="divgen-footnotes"/>
                 <xsl:apply-templates select=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]" mode="footnotes"/>
             </div>
         </xsl:if>
@@ -680,7 +680,7 @@
         <!-- Only mention the chapter if it has footnotes -->
         <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)]">
             <div class="div2 notes">
-                <xsl:apply-templates select="./head" mode="divgen-footnotes"/>
+                <xsl:apply-templates select="./head[not(@type='label') and not(@type='super')]" mode="divgen-footnotes"/>
                 <xsl:apply-templates select=".//note[@place='foot' or @place='unspecified' or not(@place)]" mode="footnotes"/>
             </div>
         </xsl:if>

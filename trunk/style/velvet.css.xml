@@ -33,7 +33,7 @@ p.byline
     margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, span.marginnote, p.legend, .versenum
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum
 {
     color: #FDF1BA;
 }

@@ -6,6 +6,7 @@
     <!ENTITY deg        "&#176;">
     <!ENTITY ldquo      "&#x201C;">
     <!ENTITY lsquo      "&#x2018;">
+    <!ENTITY rsquo      "&#x2019;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
@@ -274,7 +275,7 @@
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;'">
+                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
                         <xsl:value-of select="substring(.,1,2)"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -326,7 +327,7 @@
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>
-            <xsl:when test="position()=1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;')">
+            <xsl:when test="position()=1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;')">
                 <xsl:value-of select="substring(.,3)"/>
             </xsl:when>
             <xsl:when test="position()=1">
@@ -356,7 +357,8 @@
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dropcap</xsl:attribute>
                 <xsl:choose>
-                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;'">
+                    <!-- Handle opening quotation marks and apostrophes as part of the drop cap -->
+                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
                         <xsl:value-of select="substring(.,1,2)"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -364,7 +366,10 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </span>
-            <xsl:apply-templates mode="eat-initial"/>
+            <span>
+                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>afterdropcap</xsl:attribute>
+                <xsl:apply-templates mode="eat-initial"/>
+            </span>
         </p>
     </xsl:template>
 
@@ -391,7 +396,12 @@
             font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap('), ')')"/>;
             margin-left: 0;
             margin-bottom: 5px;
-            margin-right: 1px;
+            margin-right: 3px;
+        }
+
+        .<xsl:call-template name="generate-rend-class-name"/>afterdropcap
+        {
+            /* empty */
         }
 
     </xsl:template>

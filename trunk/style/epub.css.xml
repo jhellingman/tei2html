@@ -47,7 +47,7 @@ p.byline
     text-indent: 0em;
 }
 
-.figureHead, .noteref, .pseudonoteref, span.marginnote, p.legend, .versenum, .stage
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum, .stage
 {
     color: black;
 }
