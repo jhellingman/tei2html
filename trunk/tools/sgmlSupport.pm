@@ -1521,13 +1521,13 @@ BEGIN
     $ent{"schwaacu"}    = chr(0x0259) . chr(0x0301); # LETTER SCHWA with acute
     $ent{"schwacirc"}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with acute
 
+    $ent{"ezh"}			= chr(0x0292);  # LETTER EZH
+    $ent{"EZH"}			= chr(0x01B7);  # LETTER EZH
+    $ent{"esh"}			= chr(0x0283);  # LETTER ESH
+    $ent{"ESH"}			= chr(0x01A9);  # LETTER ESH (looks like Greek capital sigma)
 
-    $ent{"ezh"}     = chr(0x0292);  # LETTER EZH
-    $ent{"EZH"}     = chr(0x01B7);  # LETTER EZH
-
-    $ent{"esh"}     = chr(0x0283);  # LETTER ESH
-    $ent{"ESH"}     = chr(0x01A9);  # LETTER ESH (looks like Greek capital sigma)
-
+    $ent{"turna"}		= chr(0x0250);  # letter turned a
+    $ent{"turnacirc"}	= chr(0x0250) . chr(0x0302);  # letter turned a with circumflex
 
     $ent{"aolig"}       = chr(0xa735);  # ao ligature with acute
     $ent{"AOlig"}       = chr(0xa734);  # AO ligature with acute
@@ -1701,7 +1701,7 @@ BEGIN
 
     $ent{"rdotbacu"}    = chr(0x1E5B) . chr(0x0301); # r with dot below and acute
 
-	$ent{"aumlcirc"}    = chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
+    $ent{"aumlcirc"}    = chr(0x00E4) . chr(0x0302); # a with diaresis and circumflex
     $ent{"oumlcirc"}    = chr(0x00F6) . chr(0x0302); # o with diaresis and circumflex
     $ent{"uumlcirc"}    = chr(0x00FC) . chr(0x0302); # u with diaresis and circumflex
 
@@ -2001,6 +2001,10 @@ sub pgdp2sgml
         $string =~ s/\[\x{00b0}\/u\]/\&uringacu;/g;         # u with ring and acute (FRANCK: using degree sign)
         $string =~ s/\[\x{00b0}\x{00fa}\]/\&uringacu;/g;    # u with ring and acute (FRANCK: using degree sign and u acute)
 
+        $string =~ s/\[n,\]/\&eng;/g;                       # BRUGGENCATE: eng
+        $string =~ s/\[a\]/\&turna;/g;                      # BRUGGENCATE: turned a
+        $string =~ s/\[\^a\]/\&turnacirc;/g;                # BRUGGENCATE: turned a with circumflex
+        $string =~ s/\[\x{00e2}\]/\&turnacirc;/g;           # BRUGGENCATE: turned a with circumflex
     }
 
     # Accents above:
