@@ -2,14 +2,32 @@
 
 = Future Features =
 
-I intend, when possible, to add the following to the tei2html toolset.
+I intend, when possible, to add the following to the tei2html tool-set.
 
-  * Support for XHTML
-  * Support for the ePub format
+  * Support for Customization
+  * Support for PDF output via Prince-XML. (Mostly done)
+  * Support for ePub output. (Mostly done)
+  * Support for XHTML output. (Partly done, for ePub).
 
-== Support for Prince-XML ==
+== Support for Customization ==
 
-Currently, some support for Prince-XML is build in. This needs to be extended, such that neat paged format media can be produced as PDFs.
+Currently, fairly limited customization options exists, and they are only accessible either via parameters to the stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
+
+The file would be named `tei2html.config` and would look something like:
+
+{{{
+<tei2html.config>
+   <defaultLanguage>en</defaultLanguage>
+   <stylesheet>style.css</stylesheet>
+   <generateHeaders>no</generateHeaders>
+   <footnotePosition>foot</footnotePosition>
+</tei2html.config>
+}}}
+
+
+== Support for PDF output via Prince-XML ==
+
+Currently, some support for Prince-XML is build in. This needs to be extended, such that neat paged format media can be produced as PDFs. This is mostly a matter of using appropriate CSS stylesheets.
 
 == Support for XHTML ==
 
@@ -17,7 +35,9 @@ Currently, the stylesheet emits normal HTML. It would be nice to be able to gene
 
 == Support for ePub ==
 
-Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on devices called ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the [http://code.google.com/p/epub-tools/ epub-tools] project.
+Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the [http://code.google.com/p/epub-tools/ epub-tools] project.
+
+Most of the work is done. Some improvements to the CSS stylesheets are still required.
 
 === A Note on DRM ===
 
