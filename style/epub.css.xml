@@ -123,6 +123,20 @@ span.corr, span.abbr, span.measure
     margin-bottom: 1.58em;
 }
 
+/* suppress margin: auto usage */
+.lgouter
+{
+    margin-left: 4%;
+    margin-right: 0;
+}
+
+.hr, .figure, .figAnnotation, p.tb, hr.tb, .epigraph, table
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
 /* restore original margins on floating images */
 .floatLeft
 {
@@ -135,7 +149,9 @@ span.corr, span.abbr, span.measure
 }
 
 
-/* OEB/ePub specific rules */
+
+
+/* ePub specific rules (unclear whether they are used at all!) */
 .pagehead
 {
     display:none; display:oeb-page-head;
