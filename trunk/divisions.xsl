@@ -25,21 +25,21 @@
 
     <xsl:template match="front">
         <div class="front">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="body">
         <div class="body">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="back">
         <div class="back">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -85,8 +85,7 @@
 
 
     <xsl:template name="headText">
-        <xsl:call-template name="generate-id-attribute"/>
-        <xsl:call-template name="setLangAttribute"/>
+        <xsl:call-template name="set-lang-id-attributes"/>
 
         <xsl:variable name="class">
             <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
@@ -105,7 +104,7 @@
     <xsl:template name="headPicture">
         <xsl:if test="contains(@rend, 'image(')">
             <div class="figure">
-                <xsl:call-template name="setLangAttribute"/>
+                <xsl:call-template name="set-lang-attribute"/>
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt">
                     <xsl:choose>
@@ -131,8 +130,7 @@
 
     <xsl:template match="div0">
         <div class="div0">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="GenerateLabel"/>
 
             <xsl:apply-templates/>
@@ -185,8 +183,7 @@
         </xsl:if>
 
         <div>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
 
             <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
                 <xsl:if test="contains(@rend, 'class(')">
@@ -289,9 +286,7 @@
 
     <xsl:template match="div2">
         <div class="div2">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
-
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="generate-toc-link"/>
             <xsl:call-template name="GenerateLabel">
                 <xsl:with-param name="headingLevel" select="'h2'"/>
@@ -314,8 +309,7 @@
 
     <xsl:template match="div3">
         <div class="div3">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -334,8 +328,7 @@
 
     <xsl:template match="div4">
         <div class="div4">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -354,8 +347,7 @@
 
     <xsl:template match="div5">
         <div class="div5">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -374,8 +366,7 @@
 
     <xsl:template match="div6">
         <div class="div6">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -393,14 +384,14 @@
 
     <xsl:template match="head">
         <h4>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
 
     <xsl:template match="byline">
         <p>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </p>

@@ -34,8 +34,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                     <xsl:apply-templates/>
                 </xsl:element>
@@ -48,8 +47,7 @@
 
     <xsl:template name="doubleuplist">
         <table>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:variable name="listType">
                 <xsl:choose>
                     <xsl:when test="@type='ordered'">ol</xsl:when>
@@ -78,7 +76,7 @@
 
     <xsl:template match="item">
         <li>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
             <xsl:if test="@n">
                 <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>

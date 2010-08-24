@@ -49,8 +49,7 @@
 
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:variable name="maxlevel">
                 <xsl:choose>
                     <xsl:when test="contains(@rend, 'tocMaxLevel(')">
@@ -340,8 +339,7 @@
 
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
@@ -450,8 +448,7 @@
 
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <ul>
                 <xsl:apply-templates mode="genloi" select="//figure[head]"/>
@@ -462,7 +459,7 @@
 
     <xsl:template match="figure" mode="genloi">
         <li>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <xsl:apply-templates select="head" mode="tochead"/>
@@ -481,7 +478,7 @@
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
@@ -564,8 +561,7 @@
 
     <xsl:template match="divGen[@type='Index' or @type='index']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strIndex"/></h2>
 
             <xsl:message terminate="no">Generating Index</xsl:message>
@@ -636,7 +632,7 @@
 
     <xsl:template match="index">
         <a>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
         </a>
     </xsl:template>
 
@@ -648,8 +644,7 @@
     <!-- collect footnotes in a separate section, sorted by div1 -->
     <xsl:template match="divGen[@type='Footnotes']">
         <div class="div1 notes">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strNotes"/></h2>
 
             <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>

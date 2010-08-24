@@ -97,7 +97,7 @@
 
     <xsl:template match="argument">
         <div class="argument">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -108,14 +108,14 @@
 
     <xsl:template match="epigraph">
         <div class="epigraph">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="bibl">
         <span class="bibl">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -125,7 +125,7 @@
 
     <xsl:template match="trailer">
         <p>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">trailer <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </p>
@@ -138,6 +138,7 @@
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
         <div>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:variable name="class">
                 <xsl:choose>
                     <xsl:when test="@rend='block'"><xsl:text>blockquote </xsl:text></xsl:when>
@@ -146,8 +147,6 @@
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -161,7 +160,7 @@
     <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
         <div class="blockquote letter">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -209,8 +208,7 @@
     <xsl:template name="handle-paragraph">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <p>
-                <xsl:call-template name="generate-id-attribute"/>
-                <xsl:call-template name="setLangAttribute"/>
+                <xsl:call-template name="set-lang-id-attributes"/>
 
                 <xsl:variable name="class">
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
@@ -270,7 +268,7 @@
 
     <xsl:template match="p[contains(@rend, 'initial-image')]">
         <p>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
@@ -352,7 +350,7 @@
 
     <xsl:template match="p[contains(@rend, 'dropcap(')]">
         <p>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dropcap</xsl:attribute>

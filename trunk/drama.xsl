@@ -38,14 +38,13 @@
     <xsl:template match="lg">
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">
                 <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:attribute>
-            <xsl:call-template name="setLangAttribute"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -60,8 +59,7 @@
 
     <xsl:template match="l">
         <p>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
 
             <xsl:if test="@n">
@@ -99,7 +97,7 @@
     <xsl:template match="sp">
         <div>
             <xsl:attribute name="class">sp <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -109,7 +107,7 @@
     <xsl:template match="speaker">
         <p>
             <xsl:attribute name="class">speaker <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -119,7 +117,7 @@
     <xsl:template match="stage">
         <p>
             <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -127,7 +125,7 @@
     <xsl:template match="stage[@type='exit']">
         <p>
             <xsl:attribute name="class">stage alignright <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -135,7 +133,7 @@
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
         <span>
             <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -145,7 +143,7 @@
     <xsl:template match="castList">
         <ul>
             <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
@@ -153,7 +151,7 @@
     <xsl:template match="castList/head">
         <li>
             <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
@@ -161,7 +159,7 @@
     <xsl:template match="castGroup">
         <li>
             <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">
                 <xsl:apply-templates select="castItem"/>
@@ -171,14 +169,14 @@
 
     <xsl:template match="castGroup/head">
         <b>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </b>
     </xsl:template>
 
     <xsl:template match="castItem">
         <li class="castitem">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </li>
     </xsl:template>

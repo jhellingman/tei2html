@@ -234,8 +234,7 @@
     <xsl:template match="figure">
         <xsl:call-template name="closepar"/>
         <div class="figure">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
 
             <xsl:variable name="file">
                 <xsl:call-template name="getimagefilename"/>

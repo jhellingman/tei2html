@@ -41,8 +41,7 @@
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
 
             <xsl:attribute name="class">
                 <xsl:text>table </xsl:text>
@@ -75,7 +74,7 @@
 
     <xsl:template match="head" mode="tablecaption">
         <h4 class="tablecaption">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="contains(../@rend, 'align(center)')">
                 <xsl:attribute name="class">aligncenter</xsl:attribute>
             </xsl:if>
@@ -90,16 +89,14 @@
 
     <xsl:template match="row">
         <tr valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
 
     <xsl:template match="row[@role='label']/cell">
         <td valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
         </td>
@@ -107,8 +104,7 @@
 
     <xsl:template match="cell[@role='label']">
         <td valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <b><xsl:apply-templates/></b>
         </td>
@@ -116,8 +112,7 @@
 
     <xsl:template match="row[@role='unit']/cell">
         <td valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
         </td>
@@ -125,8 +120,7 @@
 
     <xsl:template match="cell[@role='unit']">
         <td valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <i><xsl:apply-templates/></i>
         </td>
@@ -134,8 +128,7 @@
 
     <xsl:template match="cell">
         <td valign="top">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <xsl:apply-templates/>
         </td>

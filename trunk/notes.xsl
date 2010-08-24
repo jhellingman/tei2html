@@ -27,7 +27,7 @@
 
     <xsl:template match="/TEI.2/text//note[@place='margin']">
         <span class="marginnote">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -46,7 +46,7 @@
         <xsl:if test="not(//divGen[@type='Footnotes'])">
             <xsl:if test="$optionPrinceMarkup = 'Yes'">
                 <span class="displayfootnote">
-                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:apply-templates/>
                 </span>
             </xsl:if>
@@ -95,7 +95,7 @@
 
 
     <xsl:template name="footnote-marker">
-        <xsl:call-template name="setLangAttribute"/>
+        <xsl:call-template name="set-lang-attribute"/>
         <span class="label">
             <a class="noteref">
                 <xsl:call-template name="generate-id-attribute"/>
@@ -125,8 +125,7 @@
 
     <xsl:template match="p" mode="footnotes">
         <p class="footnote">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -147,8 +146,7 @@
 
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strApparatus"/></h2>
 
             <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
@@ -157,7 +155,7 @@
 
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
         <p class="footnote">
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <span class="label">
                 <a class="apparatusnote">
                     <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
