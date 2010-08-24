@@ -36,13 +36,13 @@
     <!-- Text styles -->
 
 
-    <!-- Mapped to HTML elements -->
-    <xsl:template match="hi[@rend='italic']">
-        <i><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></i>
+    <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
+    <xsl:template match="hi[@rend='it' or @rend='italic']">
+        <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='bold']">
-        <b><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></b>
+    <xsl:template match="hi[@rend='b' or @rend='bold']">
+        <b><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></b>
     </xsl:template>
 
     <xsl:template match="hi[@rend='sup']">
@@ -53,22 +53,21 @@
         <sub><xsl:apply-templates/></sub>
     </xsl:template>
 
-
-    <!-- Mapped to defined CSS classes -->
+    <!-- Mapped to defined CSS classes: sc = small caps; uc = upper case; ex = letterspaced; rm = roman -->
     <xsl:template match="hi[@rend='sc']">
-        <span class="smallcaps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span class="sc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='caps']">
-        <span class="caps"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='uc']">
+        <span class="uc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='ex']">
-        <span class="letterspaced"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span class="ex"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='rm']">
-        <span class="rm"><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span class="rm"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xsl:template match="hi[@rend='overline']">
@@ -83,8 +82,7 @@
         <xsl:choose>
             <xsl:when test="contains(@rend, '(')">
                 <span>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
                     <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
                     <xsl:apply-templates/>
@@ -92,8 +90,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <i>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="setLangAttribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:apply-templates/>
                 </i>
             </xsl:otherwise>
@@ -103,17 +100,17 @@
 
     <!-- Use other font for Greek passages -->
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
-        <span class="Greek"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span class="Greek"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <!-- Use other font for Arabic passages -->
     <xsl:template match="foreign[@lang='ar']">
-        <span class="Arabic"><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span class="Arabic"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <!-- Foreign phrases are not styled by default, but we do set the language on them -->
     <xsl:template match="foreign">
-        <span><xsl:call-template name="generate-id-attribute"/><xsl:call-template name="setLangAttribute"/><xsl:apply-templates/></span>
+        <span><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
 
@@ -165,8 +162,7 @@
 
     <xsl:template match="abbr">
         <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@expan"/>
             </xsl:attribute>
@@ -185,7 +181,7 @@
 
     <xsl:template match="num">
         <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="@value"/>
             </xsl:attribute>
@@ -204,8 +200,7 @@
 
     <xsl:template match="trans">
         <span class="abbr">
-            <xsl:call-template name="generate-id-attribute"/>
-            <xsl:call-template name="setLangAttribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
             </xsl:attribute>
@@ -242,7 +237,7 @@
 
     <xsl:template match="measure">
         <span class="measure">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="./@reg"/>
             </xsl:attribute>
@@ -255,7 +250,7 @@
 
     <xsl:template match="amount">
         <span class="measure">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
                 <xsl:value-of select="./@unit"/>
                 <xsl:text> </xsl:text>
@@ -307,7 +302,7 @@
     <!-- ab as id placeholders -->
     <xsl:template match="ab">
         <span>
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
             <xsl:apply-templates/>
         </span>

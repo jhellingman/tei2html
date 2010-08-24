@@ -487,19 +487,19 @@ span.measure
 
 /****** Font Styles and Colors *****/
 
-.letterspaced
+.ex
 {
-    letter-spacing:0.2em;
+    letter-spacing: 0.2em;
 }
 
-.smallcaps
+.sc
 {
-    font-variant:small-caps;
+    font-variant: small-caps;
 }
 
-.caps
+.uc
 {
-    text-transform:uppercase;
+    text-transform: uppercase;
 }
 
 
@@ -584,7 +584,7 @@ p.dropcap:first-letter
     padding: .5em 0% .5em 0%;
 }
 
-p.quote,div.blockquote,div.argument
+p.quote,div.blockquote, div.argument
 {
     font-size:0.9em;
     line-height:1.2em;

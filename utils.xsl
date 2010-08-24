@@ -113,7 +113,7 @@
     <!--====================================================================-->
     <!-- Language tagging -->
 
-    <xsl:template name="setLangAttribute">
+    <xsl:template name="set-lang-attribute">
         <xsl:if test="@lang">
             <xsl:choose>
                 <xsl:when test="$outputmethod = 'xml'">
@@ -124,6 +124,14 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- Shortcut for both id and language tagging -->
+
+    <xsl:template name="set-lang-id-attributes">
+        <xsl:call-template name="generate-id-attribute"/>
+        <xsl:call-template name="set-lang-attribute"/>
     </xsl:template>
 
 

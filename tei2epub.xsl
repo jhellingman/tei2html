@@ -225,7 +225,7 @@
     <!-- Decorative Initials are handled differently in ePub (from block.xsl) -->
     <xsl:template match="p[contains(@rend, 'initial-image')]" priority="2">
         <div class="figure floatLeft">
-            <xsl:call-template name="generate-id-attribute"/>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="insertimage2">
                 <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
             </xsl:call-template>
