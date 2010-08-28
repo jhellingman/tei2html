@@ -5,7 +5,6 @@
 body
 {
     background: white;
-    margin: 1.58em 2em;
     font-family: "Times New Roman", Times, serif;
 }
 
@@ -146,20 +145,6 @@ span.corr, span.abbr, span.measure
 .floatRight
 {
     margin:10px 0 10px 10px;
-}
-
-
-
-
-/* ePub specific rules (unclear whether they are used at all!) */
-.pagehead
-{
-    display:none; display:oeb-page-head;
-}
-
-.pagefoot
-{
-    display:none; display:oeb-page-foot;
 }
 
 

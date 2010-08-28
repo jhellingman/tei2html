@@ -146,7 +146,7 @@
             </xsl:variable>
 
             <!-- Standard CSS stylesheet -->
-            <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
+            <xsl:copy-of select="document('style/layout-epub.css.xml')/*/node()"/>
 
             <!-- Supplement CSS stylesheet -->
             <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>

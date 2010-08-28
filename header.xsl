@@ -118,7 +118,7 @@
                 <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
                 <style type="text/css">
                     <!-- Standard CSS stylesheet -->
-                    <xsl:copy-of select="document('style/gutenberg.css.xml')/*/node()"/>
+                    <xsl:copy-of select="document('style/layout.css.xml')/*/node()"/>
 
                     <!-- Supplement CSS stylesheet -->
                     <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
