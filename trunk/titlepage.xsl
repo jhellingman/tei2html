@@ -101,8 +101,8 @@
 
     <xsl:template match="epigraph" mode="titlePage">
         <div>
+            <!-- Wrap epigraph in extra layer for formatting -->
             <xsl:attribute name="class">docImprint <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
-            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates select="."/>
         </div>
     </xsl:template>
