@@ -324,6 +324,7 @@
     <!-- insert a span containing the page number, and a link to it. -->
     <xsl:template name="insert-toc-page-number">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+            <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             <span class="tocPagenum">
                 <a class="pageref">
                     <xsl:call-template name="generate-href-attribute">
