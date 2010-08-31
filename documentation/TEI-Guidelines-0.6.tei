@@ -43,6 +43,7 @@
 <profileDesc>
     <langUsage lang=nl>
         <language id=en>English</language>
+        <language id=nl>Dutch</language>
     </langUsage>
     <textClass>
         <keywords>
@@ -90,11 +91,11 @@
 
 </front>
 <body>
-<div1>
+<div1 type=Introduction>
 <head>Introduction</head>
 
 
-<div2>
+<div2 type=Section>
 <head>Guiding Principles</head>
 
 <p>The design of tei2html is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.
@@ -113,7 +114,7 @@
 <item>The @rend attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are thus not copied verbatim.
 </list>
 
-<div2>
+<div2 type=Section>
 <head>SGML versus XML</head>
 
 <p>XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.
@@ -126,7 +127,7 @@
 <div2>
 <head>Special Characters</head>
 
-<div3>
+<div3 type=Section>
 <head>SGML</head>
 
 <p>All my SGML files are either in pure 7-bit ASCII, or in the ISO 8859-1 character set. All characters outside those ranges are represented by character entities.
@@ -177,10 +178,10 @@ These are roughly equivalent to TEX’s special glue values.
 <p>For many uses, a TEI file is not the most desirable format. For reading, the it is far more convenient to have it available in some more presentation oriented format. With tei2html, a TEI document can be converted to various output formats, to wit:
 
 <list>
-<item>HTML for viewing in a browser on a PC.
-<item>ePub for reading on dedicated eBook readers.
-<item>Plain text for reading on simple devices.
-<item>PDF (using Prince-XML) for printing on paper.
+    <item>HTML for viewing in a browser on a PC.
+    <item>ePub for reading on dedicated eBook readers.
+    <item>Plain text for reading on simple devices.
+    <item>PDF (using Prince-XML) for printing on paper.
 </list>
 
 <p>These output formats place some restrictions on the structure of the TEI file, and the usage conventions adopted not enforced by the DTD. The most important of these are given below.
@@ -198,17 +199,55 @@ These are roughly equivalent to TEX’s special glue values.
 <div1>
 <head>Getting Started</head>
 
+
+
 <div2>
 <head>Installation</head>
 
-<div2>Running Tei2html</head>
+<p>
 
-<div2>A Sample document</head>
+<div2>
+<head>Running Tei2html</head>
 
+<p>
+
+<div2>
+<head>A Sample document</head>
+
+
+<p>
 
 
 <div1>
 <head>The TEI Header</head>
+
+
+<p>The TEI header (<tag>&lt;teiHeader&gt;</tag>) contains information about the text and the sources it is derived from. This meta-data is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.
+
+<p>Tei2html uses the meta-data in the TEI header to construct the meta-data in the target formats, as well as the optional colophon. It is important to have the correctly specify the meta-data in the TEI header.
+
+<p>Preparing a TEI header is less work than it might seem, as you can normally work from a template, prepared with the most common elements already in place.
+
+<p>The TEI header contains four main sections:
+
+
+<p rend="class(code)">&lt;teiHeader>
+<lb>&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileDesc>...&lt;/fileDesc>
+<lb>&nbsp;&nbsp;&nbsp;&nbsp;&lt;encodingDesc>...&lt;/encodingDesc>
+<lb>&nbsp;&nbsp;&nbsp;&nbsp;&lt;profileDesc>...&lt;/profileDesc>
+<lb>&nbsp;&nbsp;&nbsp;&nbsp;&lt;revisionDesc>...&lt;/revisionDesc>
+<lb>&lt;/teiHeader>
+
+
+<div2>
+<head>The File Description</head>
+
+
+<p>The first element of the TEI header is the file description, <tag>&lt;fileDesc&gt;</tag>. This contains the most important meta-data in three main elements, the <tag>&lt;titleStmt&gt;</tag>, <tag>&lt;publicationStmt&gt;</tag>, and <tag>&lt;sourceDesc&gt;</tag>. Our template looks like this.
+
+
+<p>TODO
+
 
 
 
@@ -217,21 +256,32 @@ These are roughly equivalent to TEX’s special glue values.
 <head>Top Level Text Structure</head>
 
 
+<p>
+
+<div2>
+<head>Front Matter</head>
+
+
+<p>
 
 <div1>
 <head>Block Level Elements</head>
 
+
+<p>
 
 
 <div1>
 <head>Text Level Elements</head>
 
 
+<p>
 
 <div1>
 <head>Internationalization</head>
 
 
+<p>
 
 <div1>
 <head>Tuning the Output</head>
@@ -240,13 +290,13 @@ These are roughly equivalent to TEX’s special glue values.
 <div2>
 <head>Using the Rend attribute</head>
 
-
+<p>
 
 <div2>
 <head>Custom Stylesheets</head>
 
 
-
+<p>
 
 
 </body>
@@ -254,27 +304,29 @@ These are roughly equivalent to TEX’s special glue values.
 <div1 type=Appendix>
 <head>Applicable Standards</head>
 
+<p>
 
 <div1>
 <head>Available Stylesheets</head>
 
-
+<p>
 
 <div1>
 <head>Generated HTML Elements</head>
 
 
-
+<p>
 
 <div1>
 <head>SGML Entities</head>
 
-
+<p>
 
 <div1>
 <head>Foreign Script Transcriptions</head>
 
 
+<p>
 
 <div1>
 <head>Unicode Character Support Test</head>
@@ -285,7 +337,8 @@ These are roughly equivalent to TEX’s special glue values.
 <div2>
 <head>Latin-1 Supplement</head>
 
-<table>
+
+<p><table>
 <column rend="font(bold)"></column>
 <row role=label>
      <cell>     <cell>00A       <cell>00B       <cell>00C       <cell>00D       <cell>00E       <cell>00F
@@ -310,7 +363,7 @@ These are roughly equivalent to TEX’s special glue values.
 <div2>
 <head>Latin Extended-A</head>
 
-<table>
+<p><table>
 <column rend="font(bold)"></column>
 <row role=label>
      <cell>     <cell>010       <cell>011       <cell>012       <cell>013       <cell>014       <cell>015       <cell>016       <cell>017   
@@ -336,7 +389,7 @@ These are roughly equivalent to TEX’s special glue values.
 <div2>
 <head>Latin Extended-B</head>
 
-<table>
+<p><table>
 <column rend="font(bold)"></column>
 <row role=label>
      <cell>     <cell>018       <cell>019       <cell>01A       <cell>01B       <cell>01C       <cell>01D       <cell>01E       <cell>01F       <cell>020       <cell>021       <cell>022       <cell>023       <cell>024    
