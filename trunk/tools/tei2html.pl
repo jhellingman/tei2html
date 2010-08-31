@@ -40,9 +40,7 @@ GetOptions (
     'r' => \$makeReport,
     'c=s' => \$customStylesheet);
 
-
-my $argNumber = 0;
-my $filename = $ARGV[$argNumber];
+my $filename = $ARGV[0];
 
 
 #==============================================================================
