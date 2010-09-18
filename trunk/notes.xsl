@@ -79,7 +79,13 @@
     <!-- Handle notes that contain paragraphs different from simple notes -->
 
     <xsl:template match="note[p]" mode="footnotes">
-        <p class="footnote">
+        <p>
+            <xsl:variable name="class">
+                footnote
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
         </p>
@@ -87,7 +93,13 @@
     </xsl:template>
 
     <xsl:template match="note" mode="footnotes">
-        <p class="footnote">
+        <p>
+            <xsl:variable name="class">
+                footnote
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
         </p>
@@ -124,7 +136,13 @@
     </xsl:template>
 
     <xsl:template match="p" mode="footnotes">
-        <p class="footnote">
+        <p>
+            <xsl:variable name="class">
+                footnote
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </p>
@@ -154,7 +172,13 @@
     </xsl:template>
 
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
-        <p class="footnote">
+        <p>
+            <xsl:variable name="class">
+                footnote
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
             <xsl:call-template name="set-lang-id-attributes"/>
             <span class="label">
                 <a class="apparatusnote">
@@ -166,7 +190,5 @@
             <xsl:apply-templates/>
         </p>
     </xsl:template>
-
-
 
 </xsl:stylesheet>
