@@ -171,8 +171,8 @@ sub processFile($)
 
     if ($makeTXT == 1)
     {
-        my $tmpFile1 = mktemp('tmp-XXXXX');;
-        my $tmpFile2 = mktemp('tmp-XXXXX');;
+        my $tmpFile1 = mktemp('tmp-XXXXX');
+        my $tmpFile2 = mktemp('tmp-XXXXX');
 
         print "Create text version...\n";
         system ("perl $toolsdir/exNotesHtml.pl $filename");
@@ -207,7 +207,7 @@ sub processFile($)
 
     if ($makeReport == 1)
     {
-        my $tmpFile = mktemp('tmp-XXXXX');;
+        my $tmpFile = mktemp('tmp-XXXXX');
         print "Report on word usage...\n";
         system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
         system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
@@ -241,7 +241,7 @@ sub sgml2xml($$)
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
     # Translate Latin-1 characters to entities
-    my $tmpFile0 = mktemp('tmp-XXXXX');;
+    my $tmpFile0 = mktemp('tmp-XXXXX');
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
@@ -257,10 +257,10 @@ sub sgml2xml($$)
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
     system ("rm $sgmlFile.nsgml");
 
-    my $tmpFile1 = mktemp('tmp-XXXXX');;
-    my $tmpFile2 = mktemp('tmp-XXXXX');;
-    my $tmpFile3 = mktemp('tmp-XXXXX');;
-    my $tmpFile4 = mktemp('tmp-XXXXX');;
+    my $tmpFile1 = mktemp('tmp-XXXXX');
+    my $tmpFile2 = mktemp('tmp-XXXXX');
+    my $tmpFile3 = mktemp('tmp-XXXXX');
+    my $tmpFile4 = mktemp('tmp-XXXXX');
 
     print "Convert SGML to XML...\n";
     # hide entities for parser

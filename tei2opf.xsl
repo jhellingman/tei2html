@@ -47,7 +47,7 @@
                         <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
                     </xsl:choose>
                     <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
-                    <dc:date opf:event="generation"><xsl:value-of select="current-dateTime()"/></dc:date>
+                    <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>
 
                     <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
                         <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
@@ -65,11 +65,13 @@
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
+                    <!--
                     <xsl:if test="//pb">
                         <item id="pagemap"
                             href="pagemap.xml"
                             media-type="application/oebps-page-map+xml"/>
                     </xsl:if>
+                    -->
 
                     <!-- CSS Style Sheets -->
                     <item id="css"
@@ -98,9 +100,11 @@
                 </manifest>
 
                 <spine toc="ncx">
+                    <!--
                     <xsl:if test="//pb">
                         <xsl:attribute name="page-map">pagemap</xsl:attribute>
                     </xsl:if>
+                    -->
 
                     <!-- make sure the cover comes first in the spine -->
                     <xsl:if test="//div1[@id='cover']">
