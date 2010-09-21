@@ -4,7 +4,7 @@
 body
 {
     font: 100%/1.2em "Times New Roman", Times, serif;
-    margin: 1.58em 16%;
+    margin: 1.58em 2em;
     text-align: left;
 }
 
@@ -38,7 +38,7 @@ body
 
 .titlePage .byline
 {
-    margin: 2em 0% 2em 0%;
+    margin: 2em 0 2em 0;
     font-size:1.2em;
     line-height:1.72em;
 }
@@ -51,14 +51,12 @@ body
 
 .titlePage .figure
 {
-    margin: 2em 0% 2em 0%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2em 0 2em 0;
 }
 
 .titlePage .docImprint
 {
-    margin: 4em 0% 0em 0%;
+    margin: 4em 0 0em 0;
     font-size: 1.2em;
     line-height: 1.72em;
 }
@@ -190,8 +188,6 @@ p.tb, hr.tb
 {
     margin-top: 1.6em;
     margin-bottom: 1.6em;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
 }
 
@@ -235,7 +231,6 @@ p.signed
     font-size:0.9em;
     line-height:1.2em;
     width: 60%;
-    margin-left: auto;
 }
 
 .epigraph span.bibl
@@ -253,9 +248,10 @@ p.signed
 
 .figure
 {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10%;
+    margin-right: 10%;
 }
+
 
 .floatLeft
 {
@@ -269,6 +265,7 @@ p.signed
     margin:10px 0 10px 10px;
 }
 
+
 p.figureHead
 {
     font-size:100%;
@@ -279,7 +276,7 @@ p.figureHead
 {
     font-size:80%;
     position:relative;
-    margin: 0 auto; /* center this */
+    margin: 0 0;
 }
 
 .figTopLeft, .figBottomLeft
@@ -398,9 +395,7 @@ td.sum
 
 .lgouter
 {
-    margin-left: auto;
-    margin-right: auto;
-    display:table; /* used to make the block shrink to the actual size */
+
 }
 
 .lg
@@ -422,7 +417,7 @@ td.sum
     position:absolute;
     text-align:center;
     text-indent:0;
-    top:auto;
+
     width:1.75em;
 }
 
@@ -464,9 +459,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 /* right aligned page number in table of contents */
 .tocPagenum, .flushright
 {
-    position: absolute;
-    right: 16%;
-    top: auto;
+
 }
 
 
@@ -526,8 +519,8 @@ hr
 {
     clear:both;
     height:1px;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left:10%;
+    margin-right:10%;
     margin-top:1em;
     text-align:center;
     width:45%;
@@ -606,19 +599,16 @@ ul { list-style-type: none; }
 
 .pglink
 {
-    background: url(images/book.png) center right no-repeat;
     padding-right: 18px;
 }
 
 .catlink
 {
-    background: url(images/card.png) center right no-repeat;
     padding-right: 17px;
 }
 
 .exlink
 {
-    background: url(images/external.png) center right no-repeat;
     padding-right: 13px;
 }
 
@@ -644,7 +634,6 @@ ul { list-style-type: none; }
 body
 {
     background: white;
-    margin: 1.58em 2em;
     font-family: "Times New Roman", Times, serif;
 }
 
@@ -785,20 +774,6 @@ span.corr, span.abbr, span.measure
 .floatRight
 {
     margin:10px 0 10px 10px;
-}
-
-
-
-
-/* ePub specific rules (unclear whether they are used at all!) */
-.pagehead
-{
-    display:none; display:oeb-page-head;
-}
-
-.pagefoot
-{
-    display:none; display:oeb-page-foot;
 }
 
 

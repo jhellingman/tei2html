@@ -76,9 +76,6 @@ sub handleImage($)
     my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
     my $fileDate = sprintf "%4d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min , $sec;
 
-    my $image = Image::Magick->new;
-
-    my ($width, $height, $fileSize, $fileFormat) = $image->Ping($imageFile);
 
     my $imagePath = $imageFile;
     if ($stripPath == 1)
@@ -97,6 +94,9 @@ sub handleImage($)
         return
     }
     $seenImageHash{$imagePath} = 1;
+
+    my $image = Image::Magick->new;
+    my ($width, $height, $fileSize, $fileFormat) = $image->Ping($imageFile);
 
     print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\">";
 

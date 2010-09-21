@@ -81,9 +81,11 @@
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
 
+        <!--
         <xsl:if test="//pb">
             <xsl:call-template name="pagemap"/>
         </xsl:if>
+        -->
 
         <xsl:call-template name="copy-stylesheets"/>
 

@@ -1486,6 +1486,8 @@ BEGIN
 
     $ent{"Esmall"}      = chr(0x1D07);  # small letter E
 
+	$ent{"glots"}		= chr(0x0294};	# Latin letter glottal stop
+
     $ent{"longs"}       = chr(0x017F);  # long s
 
     $ent{"Crev"}        = chr(0x2183);  # Reversed C (as used in Roman numerals)

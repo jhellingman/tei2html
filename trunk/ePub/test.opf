@@ -19,13 +19,12 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2010-08-24T20:50:16.2+02:00</dc:date>
+      <dc:date opf:event="generation">2010-09-21</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
    </metadata>
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
-      <item id="pagemap" href="pagemap.xml" media-type="application/oebps-page-map+xml"/>
       <item id="css" href="test.css" media-type="text/css"/>
       <item id="cover" href="test-cover.xhtml" media-type="application/xhtml+xml"/>
       <item id="front-2" href="test-front-2.xhtml" media-type="application/xhtml+xml"/>
@@ -46,7 +45,7 @@
       <item id="xd23e688" href="images/initial-A.gif" media-type="image/gif"/>
       <item id="test1wrapper" href="test-test1.xhtml" media-type="application/xhtml+xml"/>
    </manifest>
-   <spine toc="ncx" page-map="pagemap">
+   <spine toc="ncx">
       <itemref linear="no" idref="cover"/>
       <itemref linear="yes" idref="front-2"/>
       <itemref linear="yes" idref="bk01-1"/>
