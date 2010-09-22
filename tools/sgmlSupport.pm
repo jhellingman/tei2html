@@ -1486,7 +1486,7 @@ BEGIN
 
     $ent{"Esmall"}      = chr(0x1D07);  # small letter E
 
-	$ent{"glots"}		= chr(0x0294};	# Latin letter glottal stop
+    $ent{"glots"}       = chr(0x0294);  # Latin letter glottal stop
 
     $ent{"longs"}       = chr(0x017F);  # long s
 
@@ -1523,13 +1523,13 @@ BEGIN
     $ent{"schwaacu"}    = chr(0x0259) . chr(0x0301); # LETTER SCHWA with acute
     $ent{"schwacirc"}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with acute
 
-    $ent{"ezh"}			= chr(0x0292);  # LETTER EZH
-    $ent{"EZH"}			= chr(0x01B7);  # LETTER EZH
-    $ent{"esh"}			= chr(0x0283);  # LETTER ESH
-    $ent{"ESH"}			= chr(0x01A9);  # LETTER ESH (looks like Greek capital sigma)
+    $ent{"ezh"}         = chr(0x0292);  # LETTER EZH
+    $ent{"EZH"}         = chr(0x01B7);  # LETTER EZH
+    $ent{"esh"}         = chr(0x0283);  # LETTER ESH
+    $ent{"ESH"}         = chr(0x01A9);  # LETTER ESH (looks like Greek capital sigma)
 
-    $ent{"turna"}		= chr(0x0250);  # letter turned a
-    $ent{"turnacirc"}	= chr(0x0250) . chr(0x0302);  # letter turned a with circumflex
+    $ent{"turna"}       = chr(0x0250);  # letter turned a
+    $ent{"turnacirc"}   = chr(0x0250) . chr(0x0302);  # letter turned a with circumflex
 
     $ent{"aolig"}       = chr(0xa735);  # ao ligature with acute
     $ent{"AOlig"}       = chr(0xa734);  # AO ligature with acute
@@ -1720,8 +1720,10 @@ BEGIN
     $ent{"amacracu"}    = chr(0x0101) . chr(0x0301); # a with macron and acute
     $ent{"imacacu"}     = chr(0x012B) . chr(0x0301); # i with macron and acute
     $ent{"omacacu"}     = chr(0x014D) . chr(0x0301); # o with macron and acute
-    $ent{"amacrdotb"}   = chr(0x0101) . chr(0x0323); # a with macron and dot below
+    $ent{"imacracu"}    = chr(0x012B) . chr(0x0301); # i with macron and acute
     $ent{"umacracu"}    = chr(0x016B) . chr(0x0301); # u with macron and acute
+
+    $ent{"amacrdotb"}   = chr(0x0101) . chr(0x0323); # a with macron and dot below
 
     $ent{"rdotbcirc"}   = chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
