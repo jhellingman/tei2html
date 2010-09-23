@@ -1196,4 +1196,10 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </xsl:if>
 </xsl:template>
 
+
+<xsl:template match="@lang">
+    <xsl:attribute name="lang"><xsl:value-of select="."/></xsl:attribute>
+    <xsl:attribute name="xml:lang"><xsl:value-of select="."/></xsl:attribute>
+</xsl:template>
+
 </xsl:stylesheet>
