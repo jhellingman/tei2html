@@ -227,13 +227,33 @@ p.tocSection
     margin:0.7em 5%;
 }
 
-p.dateline
+.opener, .address
 {
     margin-top: 1.6em;
     margin-bottom: 1.6em;
 }
 
-p.signed
+.addrline
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dateline
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    text-align: right;
+}
+
+.salute
+{
+    margin-top: 1.6em;
+    margin-left: 3.58em;
+    text-indent: -2em;
+}
+
+.signed
 {
     margin-top: 1.6em;
     margin-left: 3.58em;
