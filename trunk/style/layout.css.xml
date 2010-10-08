@@ -18,8 +18,7 @@ body
     text-align: left;
 }
 
-
-/***** Titlepage *****************************************************/
+/* Titlepage */
 
 .titlePage
 {
@@ -80,7 +79,7 @@ body
 }
 
 
-/***** End Titlepage *****/
+/* End Titlepage */
 
 
 .transcribernote
@@ -416,7 +415,7 @@ p.footnote .label
     display:block;
 }
 
-/****** Tables ******/
+/* Tables */
 
 td.sum
 {
@@ -424,7 +423,7 @@ td.sum
 }
 
 
-/****** Poetry ******/
+/* Poetry */
 
 .lgouter
 {
@@ -472,7 +471,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 }
 
 
-/***** Drama *****/
+/* Drama */
 
 
 .speaker
@@ -488,7 +487,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 }
 
 
-/***** End Drama *****/
+/* End Drama */
 
 
 /* right aligned page number in table of contents */
@@ -515,7 +514,7 @@ span.measure
     border-bottom:1px dotted green;
 }
 
-/****** Font Styles and Colors *****/
+/* Font Styles and Colors */
 
 .ex
 {
@@ -549,7 +548,7 @@ span.measure
     color: red;
 }
 
-/***** End Font Styles and Colors *****/
+/* End Font Styles and Colors */
 
 
 hr
@@ -632,23 +631,29 @@ ul { list-style-type: none; }
 .castlist, .castitem { list-style-type: none; }
 
 
-/***** External Links *****/
+/* External Links */
+
+.pglink, .catlink, .exlink
+{
+    background-repeat: no-repeat;
+    background-position: right center;
+}
 
 .pglink
 {
-    background: url(images/book.png) center right no-repeat;
+    background-image: url(images/book.png);
     padding-right: 18px;
 }
 
 .catlink
 {
-    background: url(images/card.png) center right no-repeat;
+    background-image: url(images/card.png);
     padding-right: 17px;
 }
 
 .exlink
 {
-    background: url(images/external.png) center right no-repeat;
+    background-image: url(images/external.png);
     padding-right: 13px;
 }
 

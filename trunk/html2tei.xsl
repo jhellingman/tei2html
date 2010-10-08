@@ -24,7 +24,7 @@
 <xsl:template match="html:body">
     <body>
         <xsl:call-template name="level1">
-            <xsl:with-param name="nodes" select="*"/>
+            <xsl:with-param name="nodes" select="*|text()"/>
             <xsl:with-param name="level" select="1"/>
         </xsl:call-template>
     </body>
