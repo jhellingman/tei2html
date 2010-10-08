@@ -254,7 +254,7 @@ sub sgml2xml($$)
     $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                "$patcdir/indic/tm2ucs.pat");
 
     print "Check SGML...\n";
-    $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E5000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
+    $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
     system ("rm $sgmlFile.nsgml");
 
     my $tmpFile1 = mktemp('tmp-XXXXX');
@@ -265,7 +265,7 @@ sub sgml2xml($$)
     print "Convert SGML to XML...\n";
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
-    system ("sx -c $catalog -E10000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
+    system ("sx -c $catalog -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
     system ("$saxon2 $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");

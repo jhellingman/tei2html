@@ -67,6 +67,8 @@
             <xsl:when test="$property='stylesheet'"/>   <!-- stylesheet to load (only on top-level text element) -->
             <xsl:when test="$property='position'"/>     <!-- position in text -->
             <xsl:when test="$property='toc-head'"/>     <!-- head to be used in table of contents -->
+            <xsl:when test="$property='toc'"/>          <!-- indicates how to include a head in the toc -->
+            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image iso head -->
 
             <!-- Properties used to render verse -->
             <xsl:when test="$property='hemistich'"/>
