@@ -1717,10 +1717,14 @@ BEGIN
     $ent{"oogoncirc"}   = chr(0x01EB) . chr(0x0302); # o with ogonek and circumflex
     $ent{"oslashcirc"}  = chr(0x00f8) . chr(0x0302); # o slash and circumflex
 
+    $ent{"amacrgra"}    = chr(0x0101) . chr(0x0300); # a with macron and grave
+    $ent{"imacrgra"}    = chr(0x012B) . chr(0x0300); # i with macron and grave
+    $ent{"omacrgra"}    = chr(0x014D) . chr(0x0300); # o with macron and grave
+    $ent{"umacrgra"}    = chr(0x016B) . chr(0x0300); # u with macron and grave
+
     $ent{"amacracu"}    = chr(0x0101) . chr(0x0301); # a with macron and acute
-    $ent{"imacacu"}     = chr(0x012B) . chr(0x0301); # i with macron and acute
-    $ent{"omacacu"}     = chr(0x014D) . chr(0x0301); # o with macron and acute
     $ent{"imacracu"}    = chr(0x012B) . chr(0x0301); # i with macron and acute
+    $ent{"omacracu"}    = chr(0x014D) . chr(0x0301); # o with macron and acute
     $ent{"umacracu"}    = chr(0x016B) . chr(0x0301); # u with macron and acute
 
     $ent{"amacrdotb"}   = chr(0x0101) . chr(0x0323); # a with macron and dot below
