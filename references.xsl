@@ -87,7 +87,7 @@
                 <xsl:when test="substring(@url, 1, 3) = 'pg:'">
                     <xsl:attribute name="class">pglink</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToPg"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.gutenberg.org/etext/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
+                    <xsl:attribute name="href">http://www.gutenberg.org/ebooks/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
                 </xsl:when>
                 
                 <!-- Link to OCLC (worldcat) catalog entry -->
