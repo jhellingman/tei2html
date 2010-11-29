@@ -498,8 +498,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
     top: auto;
 }
 
-
-span.corr
+span.corr, span.gap
 {
     border-bottom:1px dotted red;
 }

@@ -92,13 +92,14 @@
 
     <xsl:template match="msg:param" mode="formatMessage">
         <xsl:param name="params"/>
+        <xsl:variable name="name" select="@name"/>
         <xsl:choose>
-            <xsl:when test="$params/params/param[@name=current()/@name]">
-                <xsl:value-of select="$params/params/param[@name=current()/@name]"/>
+            <xsl:when test="$params//*[@name=$name]">
+                <xsl:value-of select="$params//*[@name=$name]"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="no">Warning: no value specified for parameter '<xsl:value-of select="@name"/>'.</xsl:message>
-                [### <xsl:value-of select="@name"/> ###]
+                <xsl:text>[### </xsl:text><xsl:value-of select="@name"/><xsl:text> ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

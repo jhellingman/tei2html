@@ -156,6 +156,29 @@
         </xsl:choose>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Gaps -->
+
+    <xsl:template match="gap">
+        <xsl:variable name="params">
+            <params>
+                <param name="extent"><xsl:value-of select="@extent"/></param>
+                <param name="unit"><xsl:value-of select="@unit"/></param>
+                <param name="reason"><xsl:value-of select="@reason"/></param>
+            </params>
+        </xsl:variable>
+
+        <span class="gap">
+            <xsl:attribute name="title">
+                <xsl:call-template name="FormatMessage">
+                    <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
+                    <xsl:with-param name="params" select="$params"/>
+                </xsl:call-template>
+            </xsl:attribute>
+            [<i><xsl:value-of select="$strMissingText"/></i>]
+        </span>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Abbreviations -->

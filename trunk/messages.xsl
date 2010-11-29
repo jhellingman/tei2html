@@ -318,6 +318,10 @@
             <xsl:with-param name="name" select="'msgNotCopyrightedUS'"/>
         </xsl:call-template>
     </xsl:variable>
-
+    <xsl:variable name="strMissingText">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgMissingText'"/>
+        </xsl:call-template>
+    </xsl:variable>
 
 </xsl:stylesheet>
