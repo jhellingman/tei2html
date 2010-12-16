@@ -276,9 +276,9 @@ a.pageref           /* Replace references with pagenumbers with actual pagenumbe
     content: target-counter(attr(href), page);
 }
 
-.pagenum            /* Suppress marginal pagenumbers */
+.pagenum            /* Suppress marginal pagenumbers (using display: none will break references!) */
 {
-    display: none;
+    visibility: hidden;
 }
 
 /* ==== PDF bookmarks ==== */
