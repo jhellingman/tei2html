@@ -8,11 +8,10 @@
 
 @patterns 1
 
-"&"     2 "&"       %% jump over SGML entities in source;
+"&"     2 "&"       % jump over SGML entities in source;
 
 "</GR>"     0 "</foreign>"
 "</GRA>"    0 ""
-
 
 "a"         p "&agr;"
 "A"         p "&Agr;"
@@ -270,7 +269,6 @@
 "'\"u"      p "&uadgr;"
 "=\"u"      p "&ucdgr;"
 
-
 "f"         p "&phgr;"
 "F"         p "&PHgr;"
 
@@ -337,14 +335,14 @@
 "&apos;"    p "&apos;"
 "&prime;"   p "&prime;"
 
-%% additional entities not in TEI
+% additional entities not in TEI
 
 "\\=a"      p "&amacgr;"
 "\\=A"      p "&Amacgr;"
 ")a"        p "&abregr;"
 ")A"        p "&Abregr;"
 
-%% most likely mistakes for the "circumflex"
+% most likely mistakes for the "circumflex"
 
 "\\=e"      p "&emacgr;"
 "\\=E"      p "&Emacgr;"
@@ -359,21 +357,21 @@
 "\\=w"      p "&ohmacgr;"
 "\\=W"      p "&OHmacgr;"
 
-%% warn for illegal characters
+% warn for illegal characters
 
-"v"         e "illegal character v"
-"V"         e "illegal character V"
-"C"         e "illegal character C"
-"<"         e "stand alone <"
-"'"         e "stand alone '"
-">"         e "stand alone >"
-"\""        e "stand alone \""
-"`"         e "stand alone `"
-"["         e "illegal character ["
-"]"         e "illegal character ]"
+"v"         e "gr2sgml.pat: illegal character v"
+"V"         e "gr2sgml.pat: illegal character V"
+"C"         e "gr2sgml.pat: illegal character C"
+"<"         e "gr2sgml.pat: stand alone <"
+"'"         e "gr2sgml.pat: stand alone '"
+">"         e "gr2sgml.pat: stand alone >"
+"\""        e "gr2sgml.pat: stand alone \""
+"`"         e "gr2sgml.pat: stand alone `"
+"["         e "gr2sgml.pat: illegal character ["
+"]"         e "gr2sgml.pat: illegal character ]"
 
 
-@patterns 2  %% jumping SGML entities in source
+@patterns 2  % jumping SGML entities in source
 
 ";"         1 ";"               % end of entity: jump back
 "</GR>"     0 ";</foreign>"     % closing Greek early. Forgive.
