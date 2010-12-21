@@ -5,22 +5,21 @@
 
 @patterns 0
 
-"<GRT>"		1 "<foreign lang=el-latn>"
-"<GRT>mp"	1 "<foreign lang=el-latn>b"
-"<GRT>Mp"	1 "<foreign lang=el-latn>B"
-"<GRT>nt"	1 "<foreign lang=el-latn>&dbarb;"
-"<GRT>Nt"	1 "<foreign lang=el-latn>&Dbarb;"
+"<GRT>"     1 "<foreign lang=el-latn>"
+"<GRT>mp"   1 "<foreign lang=el-latn>b"
+"<GRT>Mp"   1 "<foreign lang=el-latn>B"
+"<GRT>nt"   1 "<foreign lang=el-latn>&dbarb;"
+"<GRT>Nt"   1 "<foreign lang=el-latn>&Dbarb;"
 
-
-"<GRTA>"	1 ""
-"<GRTA>mp"	1 "b"
-"<GRTA>Mp"	1 "B"
-"<GRTA>nt"	1 "&dbarb;"
-"<GRTA>Nt"	1 "&Dbarb;"
+"<GRTA>"    1 ""
+"<GRTA>mp"  1 "b"
+"<GRTA>Mp"  1 "B"
+"<GRTA>nt"  1 "&dbarb;"
+"<GRTA>Nt"  1 "&Dbarb;"
 
 @patterns 2 % Skip over SGML entities in Greek transcriptions
 
-";"			1 ";"
+";"         1 ";"
 
 @patterns 1
 
@@ -28,8 +27,7 @@
 
 "</GRTA>"    0 ""
 
-"&"			2 "&"
-
+"&"         2 "&"
 
 "a"         p "a"
 "A"         p "A"
@@ -202,6 +200,12 @@
 ">=i"       p "i"
 ">=I"       p "I"
 
+"\"i"       p "&iuml;"
+"\"I"       p "&Iuml;"
+"`\"i"      p "&iuml;"
+"'\"i"      p "&iuml;"
+"=\"i"      p "&iuml;"
+
 %% ai diphthong
 
 "ai"         p "ai"
@@ -282,7 +286,6 @@
 "U<=i"       p "Hui"
 "u>=i"       p "ui"
 "U>=I"       p "Ui"
-
 
 "k"         p "k"
 "K"         p "K"
@@ -397,6 +400,12 @@
 "<=U"       p "Hy"
 ">=u"       p "y"
 ">=U"       p "Y"
+
+"\"u"       p "&yuml;"
+"\"U"       p "&Yuml;"
+"`\"u"      p "&yuml;"
+"'\"u"      p "&yuml;"
+"=\"u"      p "&yuml;"
 
 %% au diphthong
 
@@ -596,15 +605,15 @@
 
 %% warn for illegal characters
 
-"v"         e "illegal character v"
-"V"         e "illegal character V"
-"C"         e "illegal character C"
-"<"         e "stand alone <"
-"'"         e "stand alone '"
-">"         e "stand alone >"
-"\""        e "stand alone \""
-"`"         e "stand alone `"
-"["         e "illegal character ["
-"]"         e "illegal character ]"
+"v"         e "grt2sgml.pat: illegal character v"
+"V"         e "grt2sgml.pat: illegal character V"
+"C"         e "grt2sgml.pat: illegal character C"
+"<"         e "grt2sgml.pat: stand alone <"
+"'"         e "grt2sgml.pat: stand alone '"
+">"         e "grt2sgml.pat: stand alone >"
+"\""        e "grt2sgml.pat: stand alone \""
+"`"         e "grt2sgml.pat: stand alone `"
+"["         e "grt2sgml.pat: illegal character ["
+"]"         e "grt2sgml.pat: illegal character ]"
 
 @end

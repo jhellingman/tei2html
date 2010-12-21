@@ -126,7 +126,7 @@ sub processFile($)
     }
 
 
-    if ($makeHTML == 1) 
+    if ($makeHTML == 1)
     {
         my $tmpFile = mktemp('tmp-XXXXX');;
         print "Create HTML version...\n";
@@ -302,8 +302,7 @@ sub transcribeGreek($)
 
         unlink($tmpFile1);
         unlink($tmpFile2);
-
-		unlink($currentFile);
+        unlink($currentFile);
         $currentFile = $tmpFile3;
     }
     return $currentFile;
@@ -329,7 +328,7 @@ sub transcribeNotation($$$$)
         print "Converting $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
 
-		unlink($currentFile);
+        unlink($currentFile);
         $currentFile = $tmpFile;
     }
     return $currentFile;
