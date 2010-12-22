@@ -51,7 +51,16 @@ while (<INPUTFILE>)
     my $line = $_;
     my $remainder = $line;
 
-    while($remainder =~ m/<(note\b.*?)>/)
+    # Skip over the TeiHeader;
+    if ($remainder =~ m/<(teiHeader\b.*?)>/)
+    {
+        while ($remainder !~ m/<\/teiHeader>/)
+        {
+            $remainder = <INPUTFILE>;
+        }
+    }
+
+    while ($remainder =~ m/<(note\b.*?)>/)
     {
         my $beforeNote = $`;
         my $attributes = $1;
@@ -134,7 +143,7 @@ while (<INPUTFILE>)
     }
 
     # match the last <pb> tag after the note (or on the line if there is no note).
-    if($remainder =~ /.*<(pb.*?)>/)
+    if ($remainder =~ /.*<(pb.*?)>/)
     {
         my $tag = $1;
         $pageNumber = getAttrVal("n", $tag);
