@@ -18,7 +18,7 @@ while (<INPUTFILE>)
         $remainder = $';
         my $href = getAttrVal("href", $tag);
 
-        if ($href =~ m/^#([a-z][a-z0-9.-]+)$/i) 
+        if ($href =~ m/^#([a-z][a-z0-9.-]*)$/i) 
         {
             my $ref = $1;
             $refHash{$ref}++;

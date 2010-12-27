@@ -401,11 +401,11 @@
 ">=u"       p "y"
 ">=U"       p "Y"
 
-"\"u"       p "&yuml;"
-"\"U"       p "&Yuml;"
-"`\"u"      p "&yuml;"
-"'\"u"      p "&yuml;"
-"=\"u"      p "&yuml;"
+"\"u"       p "y" % diaeresis not needed, as transcribed u in diphthongs
+"\"U"       p "Y"
+"`\"u"      p "y"
+"'\"u"      p "y"
+"=\"u"      p "y"
 
 %% au diphthong
 
