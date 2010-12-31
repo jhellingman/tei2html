@@ -36,6 +36,7 @@ BEGIN
 	$langNameHash{"eo"}			= "Esperanto";
 	$langNameHash{"es"}			= "Spanish";
 	$langNameHash{"et"}			= "Estonian";
+	$langNameHash{"eu"}			= "Basque";
 	
 	$langNameHash{"fa"}			= "Persian";
 	$langNameHash{"fi"}			= "Finnish";
