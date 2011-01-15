@@ -1,7 +1,7 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- This HTML file has been automatically generated from an XML source on 2010-09-23T23:17:06.378+02:00. -->
+<!-- This HTML file has been automatically generated from an XML source on 2011-01-15T15:49:54.417+01:00. -->
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd20e2" lang="en-US">
    <head>
       <title>Main Title of Work Goes Here</title>
@@ -29,8 +29,7 @@ body
     text-align: left;
 }
 
-
-/***** Titlepage *****************************************************/
+/* Titlepage */
 
 .titlePage
 {
@@ -91,7 +90,7 @@ body
 }
 
 
-/***** End Titlepage *****/
+/* End Titlepage */
 
 
 .transcribernote
@@ -238,13 +237,33 @@ p.tocSection
     margin:0.7em 5%;
 }
 
-p.dateline
+.opener, .address
 {
     margin-top: 1.6em;
     margin-bottom: 1.6em;
 }
 
-p.signed
+.addrline
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dateline
+{
+    margin-top: 1.6em;
+    margin-bottom: 1.6em;
+    text-align: right;
+}
+
+.salute
+{
+    margin-top: 1.6em;
+    margin-left: 3.58em;
+    text-indent: -2em;
+}
+
+.signed
 {
     margin-top: 1.6em;
     margin-left: 3.58em;
@@ -407,7 +426,7 @@ p.footnote .label
     display:block;
 }
 
-/****** Tables ******/
+/* Tables */
 
 td.sum
 {
@@ -415,7 +434,7 @@ td.sum
 }
 
 
-/****** Poetry ******/
+/* Poetry */
 
 .lgouter
 {
@@ -463,7 +482,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 }
 
 
-/***** Drama *****/
+/* Drama */
 
 
 .speaker
@@ -479,7 +498,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 }
 
 
-/***** End Drama *****/
+/* End Drama */
 
 
 /* right aligned page number in table of contents */
@@ -490,8 +509,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
     top: auto;
 }
 
-
-span.corr
+span.corr, span.gap
 {
     border-bottom:1px dotted red;
 }
@@ -506,7 +524,7 @@ span.measure
     border-bottom:1px dotted green;
 }
 
-/****** Font Styles and Colors *****/
+/* Font Styles and Colors */
 
 .ex
 {
@@ -540,7 +558,7 @@ span.measure
     color: red;
 }
 
-/***** End Font Styles and Colors *****/
+/* End Font Styles and Colors */
 
 
 hr
@@ -623,23 +641,29 @@ ul { list-style-type: none; }
 .castlist, .castitem { list-style-type: none; }
 
 
-/***** External Links *****/
+/* External Links */
+
+.pglink, .catlink, .exlink
+{
+    background-repeat: no-repeat;
+    background-position: right center;
+}
 
 .pglink
 {
-    background: url(images/book.png) center right no-repeat;
+    background-image: url(images/book.png);
     padding-right: 18px;
 }
 
 .catlink
 {
-    background: url(images/card.png) center right no-repeat;
+    background-image: url(images/card.png);
     padding-right: 17px;
 }
 
 .exlink
 {
-    background: url(images/external.png) center right no-repeat;
+    background-image: url(images/external.png);
     padding-right: 13px;
 }
 
@@ -1073,7 +1097,7 @@ body
                      </div>
                   </div>
                </div>
-               <p id="xd20e188">Books created with these stylesheet include: <a class="pglink" title="Link to Project Gutenberg ebook" href="http://www.gutenberg.org/etext/19585">De Wereld voor de schepping van den mensch by Camille Flammarion</a>. Books will be posted at <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e193"></a><a class="exlink" title="External link" href="http://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <a class="catlink" title="Link to OpenLibrary catalog page" href="http://openlibrary.org/b/OL11170298M">OLN</a> and <a class="catlink" title="Link to WorldCat catalog page" href="http://www.worldcat.org/oclc/618671">OCLC</a>. The code knows short-hand notations for references to such common things as <a class="wplink" title="Link to related Wikipedia article" href="http://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> and the <a class="biblink" title="Link to cited location in Bible" href="http://www.biblegateway.com/passage/?search=gen 1:1">Bible</a>.
+               <p id="xd20e188">Books created with these stylesheet include: <a class="pglink" title="Link to Project Gutenberg ebook" href="http://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch by Camille Flammarion</a>. Books will be posted at <a xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" id="xd20e193"></a><a class="exlink" title="External link" href="http://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <a class="catlink" title="Link to OpenLibrary catalog page" href="http://openlibrary.org/b/OL11170298M">OLN</a> and <a class="catlink" title="Link to WorldCat catalog page" href="http://www.worldcat.org/oclc/618671">OCLC</a>. The code knows short-hand notations for references to such common things as <a class="wplink" title="Link to related Wikipedia article" href="http://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> and the <a class="biblink" title="Link to cited location in Bible" href="http://www.biblegateway.com/passage/?search=gen 1:1">Bible</a>.
                </p>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
@@ -1639,7 +1663,7 @@ body
                   it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <a class="exlink" title="External link" href="http://www.gutenberg.org/">www.gutenberg.org</a>.
                </p>
                <p>Project Gutenberg catalog page:
-                  <a class="pglink" href="http://www.gutenberg.org/etext/123456789">123456789</a>.
+                  <a class="pglink" href="http://www.gutenberg.org/ebooks/123456789">123456789</a>.
                   
                </p>
                <h3 class="main">Encoding</h3>
@@ -1661,35 +1685,35 @@ body
                      <th>Correction</th>
                   </tr>
                   <tr>
-                     <td class="width20"><a class="pageref" href="#xd20e415">2</a></td>
-                     <td class="width40">mistake</td>
-                     <td class="width40">correction</td>
+                     <td class="width20" valign="top"><a class="pageref" href="#xd20e415">2</a></td>
+                     <td class="width40" valign="bottom">mistake</td>
+                     <td class="width40" valign="bottom">correction</td>
                   </tr>
                   <tr>
-                     <td class="width20"><a class="pageref" href="#xd20e418">2</a></td>
-                     <td class="width40">
+                     <td class="width20" valign="top"><a class="pageref" href="#xd20e418">2</a></td>
+                     <td class="width40" valign="bottom">
                         [<i>Not in source</i>]
                         
                      </td>
-                     <td class="width40">insertion</td>
+                     <td class="width40" valign="bottom">insertion</td>
                   </tr>
                   <tr>
-                     <td class="width20"><a class="pageref" href="#xd20e421">2</a></td>
-                     <td class="width40">here</td>
-                     <td class="width40">
+                     <td class="width20" valign="top"><a class="pageref" href="#xd20e421">2</a></td>
+                     <td class="width40" valign="bottom">here</td>
+                     <td class="width40" valign="bottom">
                         [<i>Deleted</i>]
                         
                      </td>
                   </tr>
                   <tr>
-                     <td class="width20"><a class="pageref" href="#xd20e604">3</a></td>
-                     <td class="width40">Zeven</td>
-                     <td class="width40">Seven</td>
+                     <td class="width20" valign="top"><a class="pageref" href="#xd20e604">3</a></td>
+                     <td class="width40" valign="bottom">Zeven</td>
+                     <td class="width40" valign="bottom">Seven</td>
                   </tr>
                   <tr>
-                     <td class="width20"><a class="pageref" href="#xd20e772">4</a></td>
-                     <td class="width40">Correction in verse</td>
-                     <td class="width40">another</td>
+                     <td class="width20" valign="top"><a class="pageref" href="#xd20e772">4</a></td>
+                     <td class="width40" valign="bottom">Correction in verse</td>
+                     <td class="width40" valign="bottom">another</td>
                   </tr>
                </table>
             </div>
