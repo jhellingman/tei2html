@@ -132,7 +132,7 @@
                 <xsl:when test="substring(@url, 1, 4) = 'bib:'">
                     <xsl:attribute name="class">biblink</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToBible"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.biblegateway.com/passage/?search=<xsl:value-of select="substring-after(@url, 'bib:')"/>
+                    <xsl:attribute name="href">http://www.biblegateway.com/passage/?search=<xsl:value-of select="iri-to-uri(substring-after(@url, 'bib:'))"/>
                         <xsl:choose>
                             <xsl:when test="lang('de')">&amp;version=LUTH1545</xsl:when>
                             <xsl:when test="lang('es')">&amp;version=RVR1995</xsl:when>

@@ -57,6 +57,7 @@
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
+    <xsl:param name="optionParagraphNumbers" select="'No'"/>
 
 
     <!--====================================================================-->

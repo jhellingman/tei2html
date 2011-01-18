@@ -182,22 +182,23 @@
             </xsl:if>
         </xsl:if>
 
-        <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
+        <xsl:if test="not(contains(@rend, 'display(none)'))">
+            <div>
+                <xsl:call-template name="set-lang-id-attributes"/>
 
-            <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
-                <xsl:if test="contains(@rend, 'class(')">
-                    <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
-                </xsl:if>
-                <xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
-            </xsl:attribute>
+                <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
+                    <xsl:if test="contains(@rend, 'class(')">
+                        <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
+                    </xsl:if>
+                    <xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
+                </xsl:attribute>
 
-            <xsl:call-template name="generate-toc-link"/>
-
-            <xsl:call-template name="GenerateLabel"/>
-            <xsl:apply-templates/>
-            <xsl:call-template name="insert-footnotes"/>
-        </div>
+                <xsl:call-template name="generate-toc-link"/>
+                <xsl:call-template name="GenerateLabel"/>
+                <xsl:call-template name="handleDiv"/>
+                <xsl:call-template name="insert-footnotes"/>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 
@@ -291,7 +292,7 @@
             <xsl:call-template name="GenerateLabel">
                 <xsl:with-param name="headingLevel" select="'h2'"/>
             </xsl:call-template>
-            <xsl:apply-templates/>
+            <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
@@ -310,7 +311,7 @@
     <xsl:template match="div3">
         <div class="div3">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
@@ -329,7 +330,7 @@
     <xsl:template match="div4">
         <div class="div4">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
@@ -348,7 +349,7 @@
     <xsl:template match="div5">
         <div class="div5">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
@@ -367,7 +368,7 @@
     <xsl:template match="div6">
         <div class="div6">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
@@ -377,6 +378,36 @@
         <h6>
             <xsl:call-template name="headText"/>
         </h6>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- Generic division content handling -->
+
+    <xsl:template name="handleDiv">
+
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'align-with(')">
+
+                <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
+
+                <xsl:message terminate="no">Align two divisions</xsl:message>
+
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Wrap heading part and content part of division in separate divs -->
+                <xsl:if test="*[not(preceding-sibling::p or self::p)]">
+                    <div class="divHead">
+                        <xsl:apply-templates select="*[not(preceding-sibling::p or self::p)]"/>
+                    </div>
+                </xsl:if>
+                <xsl:if test="*[preceding-sibling::p or self::p]">
+                    <div class="divBody">
+                        <xsl:apply-templates select="*[preceding-sibling::p or self::p]"/>
+                    </div>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+
     </xsl:template>
 
     <!--====================================================================-->

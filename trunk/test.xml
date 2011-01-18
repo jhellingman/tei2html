@@ -567,6 +567,32 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <p>Note that the <index level1="Footnote"/>footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
 </div1>
+<div1 id="alignFirst" rend="align-with(alignSecond)">
+
+<p n="1">This is a test of printing translated paragraphs side-by-side</p>
+
+<p n="2">The paragraphs will be numbered using the n attribute.</p>
+
+<p n="3">That way, the style sheet knows which paragraphs belong together.</p>
+
+<p n="4">This makes it easy to verify translations.</p>
+
+</div1>
+<div1 id="alignSecond" rend="display(none)">
+
+<p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
+
+<p n="2">De alinea&apos;s worden genummerd met het n attribuut.</p>
+
+<p n="3">Op die manier weet de stylesheet welke alinea&apos;s bij elkaar horen.</p>
+
+<p>Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+
+<p n="4">Dit maakt het eenvoudig vertalingen te controleren.</p>
+
+</div1>
+
+
 </div0>
 </body>
 <back id="back">

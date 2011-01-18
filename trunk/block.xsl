@@ -223,7 +223,7 @@
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
 
-                <xsl:if test="@n">
+                <xsl:if test="@n and ($optionParagraphNumbers = 'Yes')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 <xsl:apply-templates/>
