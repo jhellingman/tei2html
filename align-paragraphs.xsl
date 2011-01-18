@@ -43,7 +43,7 @@
     <xsl:param name="b"/>
 
     <xsl:variable name="anchors" as="xs:string*">
-        <xsl:for-each-group select="$a/p/@name, $b/p/@name" group-by=".">
+        <xsl:for-each-group select="$a/p/@n, $b/p/@n" group-by=".">
             <xsl:if test="count(current-group()) = 2">
                 <xsl:sequence select="string(.)"/>
             </xsl:if>
@@ -51,8 +51,8 @@
     </xsl:variable>
 
     <table>
-        <xsl:for-each select="$a/p[@name = $anchors]">
-            <xsl:variable name="name" select="@name"/>
+        <xsl:for-each select="$a/p[@n = $anchors]">
+            <xsl:variable name="n" select="@n"/>
 
             <tr>
                 <td>
@@ -63,9 +63,9 @@
                     </xsl:call-template>
                 </td>
                 <td>
-                    <p><xsl:apply-templates select="$b/p[@name = $name]"/></p>
+                    <p><xsl:apply-templates select="$b/p[@n = $n]"/></p>
                     <xsl:call-template name="output-inserted-lines">
-                        <xsl:with-param name="start" select="$b/p[@name = $name]"/>
+                        <xsl:with-param name="start" select="$b/p[@n = $n]"/>
                         <xsl:with-param name="anchors" select="$anchors"/>
                     </xsl:call-template>
                 </td>
@@ -80,7 +80,7 @@
     <xsl:param name="anchors"/>
     <xsl:variable name="next" select="$start/following-sibling::*[1]"/>
 
-    <xsl:if test="not($next/@name = $anchors)">
+    <xsl:if test="not($next/@n = $anchors)">
         <xsl:if test="$next">
             <p><xsl:apply-templates select="$next"/></p>
 
@@ -99,16 +99,16 @@
 <xsl:template name="sample-input">
     <test>
         <div id="ch1">
-            <p name="a1">Eerste Alinea.</p>
-            <p name="a1.1">Zomaar ertussen.</p>
-            <p name="a2">Tweede Alinea.</p>
-            <p name="a3">Derde Alinea.</p>
+            <p n="a1">Eerste Alinea.</p>
+            <p n="a1.1">Zomaar ertussen.</p>
+            <p n="a2">Tweede Alinea.</p>
+            <p n="a3">Derde Alinea.</p>
         </div>
         <div id="ch2">
-            <p name="a1">First Paragraph.</p>
-            <p name="a2">Second Paragraph.</p>
-            <p name="a2.1">Something added here.</p>
-            <p name="a3">Third Paragraph.</p>
+            <p n="a1">First Paragraph.</p>
+            <p n="a2">Second Paragraph.</p>
+            <p n="a2.1">Something added here.</p>
+            <p n="a3">Third Paragraph.</p>
         </div>
     </test>
 </xsl:template>
@@ -129,9 +129,9 @@
     <xsl:param name="b"/>
 
     <table>
-        <xsl:for-each-group group-by="@name" select="$a/p, $b/p">
-            <xsl:sort select="@name"/>
-            <xsl:variable name="name" select="@name"/>
+        <xsl:for-each-group group-by="@n" select="$a/p, $b/p">
+            <xsl:sort select="@n"/>
+            <xsl:variable name="name" select="@n"/>
             <xsl:comment select="current-grouping-key()"/> 
             <tr>
                 <td>
