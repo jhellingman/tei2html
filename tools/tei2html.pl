@@ -25,11 +25,11 @@ my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\
 #==============================================================================
 # Arguments
 
-my $makeTXT             = 1;
-my $makeHTML            = 1;
+my $makeTXT             = 0;
+my $makeHTML            = 0;
 my $makePDF             = 0;
 my $makeEPUB            = 0;
-my $makeReport          = 1;
+my $makeReport          = 0;
 my $customStylesheet    = "custom.css.xml";
 
 GetOptions (
@@ -42,6 +42,13 @@ GetOptions (
 
 my $filename = $ARGV[0];
 
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0) 
+{
+    # Revert to old default:
+    $makeTXT = 1;
+    $makeHTML = 1;
+    $makeReport = 1;
+}
 
 #==============================================================================
 
@@ -92,7 +99,6 @@ sub processFile($)
     print "Processing TEI-file '$basename' version $version\n";
 
     sgml2xml($filename, $basename . ".xml");
-
 
     # convert from TEI P4 to TEI P5  (experimental)
     # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
@@ -156,6 +162,8 @@ sub processFile($)
     {
         my $tmpFile = mktemp('tmp-XXXXX');;
         print "Create ePub version...\n";
+        system ("mkdir epub");
+        copyImages("epub\\images");
         system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
@@ -351,5 +359,22 @@ sub collectImageInfo()
     {
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl -s Gutenberg\\images > imageinfo.xml");
+    }
+}
+
+#
+# copyImages
+#
+sub copyImages()
+{
+    my $destination = shift;
+
+    if (-d "images")
+    {
+        system ("cp -r -u images " . $destination);
+    }
+    elsif (-d "Gutenberg\\images")
+    {
+        system ("cp -r -u Gutenberg\\images " . $destination);
     }
 }
