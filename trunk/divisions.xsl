@@ -11,8 +11,11 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    version="2.0"
+    exclude-result-prefixes="xhtml xs"
     >
 
 
@@ -387,11 +390,12 @@
 
         <xsl:choose>
             <xsl:when test="contains(@rend, 'align-with(')">
-
                 <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
-
                 <xsl:message terminate="no">Align two divisions</xsl:message>
-
+                <xsl:call-template name="align-paragraphs">
+                    <xsl:with-param name="a" select="."/>
+                    <xsl:with-param name="b" select="//*[@id=$otherid]"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
@@ -456,6 +460,68 @@
 
     <!-- suppress footnotes -->
     <xsl:template match="note" mode="setLabelheader"/>
+
+
+    <!--====================================================================-->
+    <!-- code to align two divisions based on the @n attribute -->
+
+    <xsl:template name="align-paragraphs">
+        <xsl:param name="a"/>
+        <xsl:param name="b"/>
+
+        <!-- We collect all 'anchor' paragraphs, i.e., paragraphs with the
+             same value of the @n attribute. Those we line up in our table,
+             taking care to insert all paragraphs inserted after that as well. -->
+
+        <xsl:variable name="anchors" as="xs:string*">
+            <xsl:for-each-group select="$a/p/@n, $b/p/@n" group-by=".">
+                <xsl:if test="count(current-group()) = 2">
+                    <xsl:sequence select="string(.)"/>
+                </xsl:if>
+            </xsl:for-each-group>
+        </xsl:variable>
+
+        <table class="alignedtext">
+            <xsl:for-each select="$a/p[@n = $anchors]">
+                <xsl:variable name="n" select="@n"/>
+
+                <tr>
+                    <td>
+                        <xsl:apply-templates select="."/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="."/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
+                    </td>
+                    <td>
+                        <xsl:apply-templates select="$b/p[@n = $n]"/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="$b/p[@n = $n]"/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </table>
+    </xsl:template>
+
+
+    <xsl:template name="output-inserted-paragraphs">
+        <xsl:param name="start" as="node()"/>
+        <xsl:param name="anchors"/>
+        <xsl:variable name="next" select="$start/following-sibling::*[1]"/>
+
+        <xsl:if test="not($next/@n = $anchors)">
+            <xsl:if test="$next">
+                <xsl:apply-templates select="$next"/>
+
+                <xsl:call-template name="output-inserted-paragraphs">
+                    <xsl:with-param name="start" select="$next"/>
+                    <xsl:with-param name="anchors" select="$anchors"/>
+                </xsl:call-template>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
 
 
 </xsl:stylesheet>

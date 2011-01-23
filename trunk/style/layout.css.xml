@@ -153,6 +153,19 @@ body
     text-decoration: none;
 }
 
+table.alignedtext
+{
+    border-collapse: collapse;
+}
+
+table.alignedtext td
+{
+    vertical-align: top;
+    border-width: 1px;
+    border-color: gray;
+    border-style: dotted;
+}
+
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4
 {
     clear: both;
@@ -442,7 +455,7 @@ td.sum
     font-weight: normal;
 }
 
-.lg .linenum, .sp .linenum
+.lg .linenum, .sp .linenum, .lgouter .linenum
 {
     color:#777;
     font-size:90%;
