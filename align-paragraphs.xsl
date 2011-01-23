@@ -54,16 +54,16 @@
         <xsl:for-each select="$a/p[@n = $anchors]">
             <xsl:variable name="n" select="@n"/>
 
-            <tr>
+            <tr class="alignedtext">
                 <td>
-                    <p><xsl:apply-templates select="."/></p>
+                    <xsl:apply-templates select="."/>
                     <xsl:call-template name="output-inserted-lines">
                         <xsl:with-param name="start" select="."/>
                         <xsl:with-param name="anchors" select="$anchors"/>
                     </xsl:call-template>
                 </td>
                 <td>
-                    <p><xsl:apply-templates select="$b/p[@n = $n]"/></p>
+                    <xsl:apply-templates select="$b/p[@n = $n]"/>
                     <xsl:call-template name="output-inserted-lines">
                         <xsl:with-param name="start" select="$b/p[@n = $n]"/>
                         <xsl:with-param name="anchors" select="$anchors"/>
@@ -82,7 +82,7 @@
 
     <xsl:if test="not($next/@n = $anchors)">
         <xsl:if test="$next">
-            <p><xsl:apply-templates select="$next"/></p>
+            <xsl:apply-templates select="$next"/>
 
             <xsl:call-template name="output-inserted-lines">
                 <xsl:with-param name="start" select="$next"/>

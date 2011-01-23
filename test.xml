@@ -566,29 +566,53 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <p>Note that the <index level1="Footnote"/>footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
+<p>Another piece of verse with line-numbers:</p>
+
+<lg type="Group" rend="font(italic)">
+<l n="1">This is a rule of verse in italics</l>
+<l n="2" rend="indent(1)">This is another rule of verse</l>
+<l n="3">This is a rule of verse</l>
+<l n="4" rend="indent(1)">This is <corr sic="Correction in verse">another</corr> rule of verse</l>
+<l n="5">This is a rule of verse</l>
+<l n="6" rend="indent(1)">This is another rule of verse</l>
+<l n="7">This is a rule of verse</l>
+<l n="8" rend="indent(10)">This is another rule of verse</l>
+</lg>
+
 </div1>
 <div1 id="alignFirst" rend="align-with(alignSecond)">
 
 <p n="1">This is a test of printing translated paragraphs side-by-side</p>
 
-<p n="2">The paragraphs will be numbered using the n attribute.</p>
+<p n="2">The paragraphs will be numbered using the <hi>n</hi> attribute.</p>
 
 <p n="3">That way, the style sheet knows which paragraphs belong together.</p>
 
 <p n="4">This makes it easy to verify translations.</p>
+
+<p n="5">An extra paragraph, with the translation next to it.</p>
+
+<p n="6">And yet another paragraph.</p>
+
+<p n="7">And the final paragraph.</p>
+
 
 </div1>
 <div1 id="alignSecond" rend="display(none)">
 
 <p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
 
-<p n="2">De alinea&apos;s worden genummerd met het n attribuut.</p>
+<p n="2">De alinea&apos;s worden genummerd met het <hi>n</hi> attribuut.</p>
 
 <p n="3">Op die manier weet de stylesheet welke alinea&apos;s bij elkaar horen.</p>
 
 <p>Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
 
 <p n="4">Dit maakt het eenvoudig vertalingen te controleren.</p>
+
+<p n="5">Een extra alinea, met de vertaling ernaast.</p>
+
+<p n="7">En de laatste alinea.</p>
 
 </div1>
 
