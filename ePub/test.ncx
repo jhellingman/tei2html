@@ -73,29 +73,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="10" class="section" id="xd23e869">
+         <navPoint playOrder="10" class="section" id="xd23e887">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e869"/>
+            <content src="test-index.xhtml#xd23e887"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd23e874">
+         <navPoint playOrder="11" class="section" id="xd23e892">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e874"/>
+            <content src="test-index.xhtml#xd23e892"/>
          </navPoint>
-         <navPoint playOrder="12" class="section" id="xd23e879">
+         <navPoint playOrder="12" class="section" id="xd23e897">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e879"/>
+            <content src="test-index.xhtml#xd23e897"/>
          </navPoint>
-         <navPoint playOrder="13" class="section" id="xd23e884">
+         <navPoint playOrder="13" class="section" id="xd23e902">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e884"/>
+            <content src="test-index.xhtml#xd23e902"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="14" class="contents" id="xd23e2">
@@ -108,7 +108,7 @@
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd23e896"/>
+         <content src="test-backmatter.xhtml#xd23e914"/>
       </navPoint>
    </navMap>
 </ncx>

@@ -391,12 +391,24 @@
         <xsl:choose>
             <xsl:when test="contains(@rend, 'align-with(')">
                 <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
-                <xsl:message terminate="no">Align two divisions</xsl:message>
+                <xsl:message terminate="no">Align divisions with other division</xsl:message>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="//*[@id=$otherid]"/>
                 </xsl:call-template>
             </xsl:when>
+
+            <xsl:when test="contains(@rend, 'align-with-document(')">
+                <xsl:variable name="target" select="substring-before(substring-after(@rend, 'align-with-document('), ')')"/>
+                <xsl:variable name="document" select="substring-before($target, '#')"/>
+                <xsl:variable name="otherid" select="substring-after($target, '#')"/>
+                <xsl:message terminate="no">Align divisions with external document</xsl:message>
+                <xsl:call-template name="align-paragraphs">
+                    <xsl:with-param name="a" select="."/>
+                    <xsl:with-param name="b" select="document($document)//*[@id=$otherid]"/>
+                </xsl:call-template>
+            </xsl:when>
+
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
                 <xsl:if test="*[not(preceding-sibling::p or self::p)]">
