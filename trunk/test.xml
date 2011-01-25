@@ -616,6 +616,25 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 </div1>
 
+<div1 id="alignThird" rend="align-with-document(test-alignment.xml#test)">
+
+<p n="1">This is a test of printing translated paragraphs side-by-side</p>
+
+<p n="2">The paragraphs will be numbered using the <hi>n</hi> attribute.</p>
+
+<p n="3">That way, the style sheet knows which paragraphs belong together.</p>
+
+<p n="4">This makes it easy to verify translations.</p>
+
+<p n="5">An extra paragraph, with the translation next to it.</p>
+
+<p n="6">And yet another paragraph.</p>
+
+<p n="7">And the final paragraph.</p>
+
+</div1>
+
+
 
 </div0>
 </body>
