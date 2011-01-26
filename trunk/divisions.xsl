@@ -494,6 +494,16 @@
         </xsl:variable>
 
         <table class="alignedtext">
+
+            <tr>
+                <td>
+                    <xsl:apply-templates select="$a/*[not(preceding-sibling::p or self::p)]"/>
+                </td>
+                <td>
+                    <xsl:apply-templates select="$b/*[not(preceding-sibling::p or self::p)]"/>
+                </td>
+            </tr>
+
             <xsl:for-each select="$a/p[@n = $anchors]">
                 <xsl:variable name="n" select="@n"/>
 
