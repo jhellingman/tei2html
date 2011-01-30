@@ -581,6 +581,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 </div1>
 <div1 id="alignFirst" rend="align-with(alignSecond)">
+<head>Text-Alignment Test</head>
 
 <p n="1">This is a test of printing translated paragraphs side-by-side</p>
 
@@ -599,6 +600,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 </div1>
 <div1 id="alignSecond" rend="display(none)">
+<head>Test van het naast elkaar afdrukken van tekst</head>
 
 <p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
 
@@ -607,6 +609,10 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <p n="3">Op die manier weet de stylesheet welke alinea&apos;s bij elkaar horen.</p>
 
 <p>Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+
+<lg>
+    <l>Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</l>
+</lg>
 
 <p n="4">Dit maakt het eenvoudig vertalingen te controleren.</p>
 
