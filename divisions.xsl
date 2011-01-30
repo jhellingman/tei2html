@@ -481,12 +481,12 @@
         <xsl:param name="a"/>
         <xsl:param name="b"/>
 
-        <!-- We collect all 'anchor' paragraphs, i.e., paragraphs with the
+        <!-- We collect all 'anchor' elements, i.e., elements with the
              same value of the @n attribute. Those we line up in our table,
-             taking care to insert all paragraphs inserted after that as well. -->
+             taking care to insert all elements inserted after that as well. -->
 
         <xsl:variable name="anchors" as="xs:string*">
-            <xsl:for-each-group select="$a/p/@n, $b/p/@n" group-by=".">
+            <xsl:for-each-group select="$a/*/@n, $b/*/@n" group-by=".">
                 <xsl:if test="count(current-group()) = 2">
                     <xsl:sequence select="string(.)"/>
                 </xsl:if>
@@ -495,16 +495,32 @@
 
         <table class="alignedtext">
 
-            <tr>
-                <td>
-                    <xsl:apply-templates select="$a/*[not(preceding-sibling::p or self::p)]"/>
-                </td>
-                <td>
-                    <xsl:apply-templates select="$b/*[not(preceding-sibling::p or self::p)]"/>
-                </td>
-            </tr>
+            <!-- Handle matter before any anchor -->
+            <xsl:if test="not($a/*[1]/@n = $anchors) or not($b/*[1]/@n = $anchors)">
+                <tr>
+                    <td>
+                        <xsl:if test="not($a/*[1]/@n = $anchors)">
+                            <xsl:apply-templates select="$a/*[1]"/>
+                            <xsl:call-template name="output-inserted-paragraphs">
+                                <xsl:with-param name="start" select="$a/*[1]"/>
+                                <xsl:with-param name="anchors" select="$anchors"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    </td>
+                    <td>
+                        <xsl:if test="not($b/*[1]/@n = $anchors)">
+                            <xsl:apply-templates select="$b/*[1]"/>
+                            <xsl:call-template name="output-inserted-paragraphs">
+                                <xsl:with-param name="start" select="$b/*[1]"/>
+                                <xsl:with-param name="anchors" select="$anchors"/>
+                            </xsl:call-template>
+                        </xsl:if>
+                    </td>
+                </tr>
+            </xsl:if>
 
-            <xsl:for-each select="$a/p[@n = $anchors]">
+            <!-- Handle matter for all anchors -->
+            <xsl:for-each select="$a/*[@n = $anchors]">
                 <xsl:variable name="n" select="@n"/>
 
                 <tr>
@@ -516,9 +532,9 @@
                         </xsl:call-template>
                     </td>
                     <td>
-                        <xsl:apply-templates select="$b/p[@n = $n]"/>
+                        <xsl:apply-templates select="$b/*[@n = $n]"/>
                         <xsl:call-template name="output-inserted-paragraphs">
-                            <xsl:with-param name="start" select="$b/p[@n = $n]"/>
+                            <xsl:with-param name="start" select="$b/*[@n = $n]"/>
                             <xsl:with-param name="anchors" select="$anchors"/>
                         </xsl:call-template>
                     </td>

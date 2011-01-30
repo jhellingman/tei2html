@@ -67,48 +67,60 @@
             </navLabel>
             <content src="test-ch6.xhtml"/>
          </navPoint>
+         <navPoint playOrder="9" class="chapter" id="alignFirst">
+            <navLabel>
+               <text>Text-Alignment Test</text>
+            </navLabel>
+            <content src="test-alignFirst.xhtml"/>
+         </navPoint>
+         <navPoint playOrder="10" class="chapter" id="alignSecond">
+            <navLabel>
+               <text>Test van het naast elkaar afdrukken van tekst</text>
+            </navLabel>
+            <content src="test-alignSecond.xhtml"/>
+         </navPoint>
       </navPoint>
-      <navPoint playOrder="9" class="chapter" id="index">
+      <navPoint playOrder="11" class="chapter" id="index">
          <navLabel>
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="10" class="section" id="xd23e887">
+         <navPoint playOrder="12" class="section" id="xd23e894">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e887"/>
+            <content src="test-index.xhtml#xd23e894"/>
          </navPoint>
-         <navPoint playOrder="11" class="section" id="xd23e892">
+         <navPoint playOrder="13" class="section" id="xd23e899">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e892"/>
+            <content src="test-index.xhtml#xd23e899"/>
          </navPoint>
-         <navPoint playOrder="12" class="section" id="xd23e897">
+         <navPoint playOrder="14" class="section" id="xd23e904">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e897"/>
+            <content src="test-index.xhtml#xd23e904"/>
          </navPoint>
-         <navPoint playOrder="13" class="section" id="xd23e902">
+         <navPoint playOrder="15" class="section" id="xd23e909">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e902"/>
+            <content src="test-index.xhtml#xd23e909"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="14" class="contents" id="xd23e2">
+      <navPoint playOrder="16" class="contents" id="xd23e2">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-front-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="15" class="colophon" id="xd23e2">
+      <navPoint playOrder="17" class="colophon" id="xd23e2">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd23e914"/>
+         <content src="test-backmatter.xhtml#xd23e921"/>
       </navPoint>
    </navMap>
 </ncx>
