@@ -164,6 +164,9 @@ table.alignedtext td
     border-width: 1px;
     border-color: gray;
     border-style: dotted;
+    width: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4
