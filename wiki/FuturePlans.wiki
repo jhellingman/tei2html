@@ -27,8 +27,9 @@ The file would be named `tei2html.config` and would look something like:
   * Localization
     * language (The language used for generated content, use ISO 639 code, default value of `/TEI.2/text/@lang`)
     * measurements (Original|Regularized, the metric system used in the output, depends on the presence of `<measure reg="regularized">original</measure>` tags.)
-    * corrections (Source|Correction, use corrections in output)
-    * correctionPopups (Y|N, show pop-ups for corrections.
+    * measurementsPopups (Y|N, show pop-ups for regularized measurements.)
+    * corrections (Source|Correction, use corrections in output.)
+    * correctionPopups (Y|N, show pop-ups for corrections.)
 
   * Style
     * stylesheet (path to additional stylesheet to be included)
@@ -45,7 +46,7 @@ The file would be named `tei2html.config` and would look something like:
 
   * Footnotes
     * footnoteLocation (Paragraph|Page|Chapter|Work, default Chapter)
-    * footnotePopup (Y|N, make footnote pop-up in-line, default N).
+    * footnotePopups (Y|N, make footnote pop-up in-line, default N).
 
   * Generated Content
     * colophon (Y|N, default depends on `<divGen type="Colophon"/>`)
