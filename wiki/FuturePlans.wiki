@@ -25,7 +25,7 @@ The file would be named `tei2html.config` and would look something like:
 
 
   * Localization
-    ** language (ISO 639 code, default value of /TEI.2/text/@lang)
+    ** language (ISO 639 code, default value of `/TEI.2/text/@lang`)
 
   * Style
     ** stylesheet (path to additional stylesheet to be included)
@@ -33,8 +33,8 @@ The file would be named `tei2html.config` and would look something like:
 
   * Numbering and Labels
     ** generateHeadingLabels (Y|N, default N, assuming they are encoded in TEI as `<head type=label>...</head>`)
-    ** showLineNumbers (Y|N, show the value of l/@n, if present, default Y).
-    ** showParagraphNumbers (Y|N, show the value of p/@n, if present, default N).
+    ** showLineNumbers (Y|N, show the value of `l/@n`, if present, default Y).
+    ** showParagraphNumbers (Y|N, show the value of `p/@n`, if present, default N).
 
   * Images
     ** includeImages (Y|N|All|Important, default All)
@@ -51,7 +51,7 @@ The file would be named `tei2html.config` and would look something like:
 
   * Pagination
     ** pageNumbers (None|Inline|Margin, default Margin)
-    ** pageImageLinks (Y|N, default N; depends of presence of appropriate rend attribute)
+    ** pageImageLinks (Y|N, default N; depends of presence of appropriate `rend` attribute)
 
 
 Things that can also be handled via CSS:
@@ -87,6 +87,6 @@ Most of the work is done. Some improvements to the CSS stylesheets are still req
 === A Note on DRM ===
 
 DRM are a misguided attempt dupe end-user from using works to their fullest extend.
-I will never include any support for ePub related DRM schemas. Users and redistributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
+I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
 
 Also note that this code inserts parts of itself into the resulting products (similar to Bison), hence I intend to include a similar exception to the GPL for generated ePub books. However this exception will not except section 3 of the GPL.
