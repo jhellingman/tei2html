@@ -43,6 +43,7 @@ The file would be named `tei2html.config` and would look something like:
   * Images
     * includeImages (Y|N|All|Important, default All)
     * imagePath (path to location of images, default "images")
+    * coverImage (file name of cover image used in ePub, default determined by `figure[@id='cover']`)
 
   * Footnotes
     * footnoteLocation (Paragraph|Page|Chapter|Work, default Chapter)
