@@ -405,7 +405,7 @@
                 <xsl:message terminate="no">Align division <xsl:value-of select="@id"/> with external document '<xsl:value-of select="$target"/>'</xsl:message>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
-                    <xsl:with-param name="b" select="document($document)//*[@id=$otherid]"/>
+                    <xsl:with-param name="b" select="document($document, .)//*[@id=$otherid]"/>
                 </xsl:call-template>
             </xsl:when>
 

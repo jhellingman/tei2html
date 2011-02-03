@@ -30,6 +30,7 @@ my $makeHTML            = 0;
 my $makePDF             = 0;
 my $makeEPUB            = 0;
 my $makeReport          = 0;
+my $makeXML				= 0;
 my $customStylesheet    = "custom.css.xml";
 
 GetOptions (
@@ -38,16 +39,22 @@ GetOptions (
     'e' => \$makeEPUB,
     'p' => \$makePDF,
     'r' => \$makeReport,
+    'x' => \$makeXML,
     'c=s' => \$customStylesheet);
 
 my $filename = $ARGV[0];
 
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0) 
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0) 
 {
     # Revert to old default:
     $makeTXT = 1;
     $makeHTML = 1;
     $makeReport = 1;
+}
+
+if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1)
+{
+    $makeXML = 1;
 }
 
 #==============================================================================
@@ -98,7 +105,10 @@ sub processFile($)
 
     print "Processing TEI-file '$basename' version $version\n";
 
-    sgml2xml($filename, $basename . ".xml");
+	if ($makeXML) 
+	{
+	    sgml2xml($filename, $basename . ".xml");
+	}
 
     # convert from TEI P4 to TEI P5  (experimental)
     # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");

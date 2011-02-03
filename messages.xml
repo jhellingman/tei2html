@@ -86,6 +86,7 @@
         <msg:message name="msgCoverImage">Cover Image</msg:message>
         <msg:message name="msgPreface">Preface</msg:message>
         <msg:message name="msgGlossary">Glossary</msg:message>
+        <msg:message name="msgDedication">Dedication</msg:message>
 
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
@@ -694,6 +695,7 @@
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>
         <msg:message name="msgPreface">Voorwoord</msg:message>
         <msg:message name="msgGlossary">Verklarende woordenlijst</msg:message>
+        <msg:message name="msgDedication">Opdracht</msg:message>
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrection.n">Verbeteringen</msg:message>
