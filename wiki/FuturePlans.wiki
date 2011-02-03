@@ -32,7 +32,7 @@ The file would be named `tei2html.config` and would look something like:
   ** stylesheetLocation (Internal|External) location of external stylesheet, default for HTML Internal, for ePub external)
 
   * Numbering and Labels
-  ** generateHeadingLabels (Y|N, default N, assuming they are encoded in TEI as <head type=label>...</head>)
+  ** generateHeadingLabels (Y|N, default N, assuming they are encoded in TEI as `<head type=label>...</head>`)
   ** showLineNumbers (Y|N, show the value of l/@n, if present, default Y).
   ** showParagraphNumbers (Y|N, show the value of p/@n, if present, default N).
 
@@ -44,9 +44,9 @@ The file would be named `tei2html.config` and would look something like:
   ** footnoteLocation (Paragraph|Page|Chapter|Work, default Chapter)
 
   * Generated Content
-  ** colophon (Y|N, default depends on <divGen type="Colophon"/>)
-  ** index (Y|N, default depends on presence of <divGen type="Index"/>)
-  ** contents (Y|N, default depends on presence of <divGen type="toc"/>)
+  ** colophon (Y|N, default depends on `<divGen type="Colophon"/>`)
+  ** index (Y|N, default depends on presence of `<divGen type="Index"/>`)
+  ** contents (Y|N, default depends on presence of `<divGen type="toc"/>`)
 
   * Pagination
   ** pageNumbers (None|Inline|Margin, default Margin)
