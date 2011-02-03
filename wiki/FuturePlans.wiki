@@ -23,6 +23,7 @@ The file would be named `tei2html.config` and would look something like:
 </tei2html.config>
 }}}
 
+The following elements are foreseen for this configuration file:
 
   * Localization
     * language (The language used for generated content, use ISO 639 code, default value of `/TEI.2/text/@lang`)
