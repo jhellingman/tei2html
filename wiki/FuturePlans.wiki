@@ -26,7 +26,9 @@ The file would be named `tei2html.config` and would look something like:
 
   * Localization
     * language (The language used for generated content, use ISO 639 code, default value of `/TEI.2/text/@lang`)
-    * measurements (Original|Metric, the metric system used in the output, depends on the presence of `<measure reg="metric">original</measure>` tags.)
+    * measurements (Original|Regularized, the metric system used in the output, depends on the presence of `<measure reg="regularized">original</measure>` tags.)
+    * corrections (Source|Correction, use corrections in output)
+    * correctionPopups (Y|N, show pop-ups for corrections.
 
   * Style
     * stylesheet (path to additional stylesheet to be included)
