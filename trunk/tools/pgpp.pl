@@ -43,7 +43,7 @@ while (<INPUTFILE>)
 	$_ =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
 
 	# Replace two dashes by em-dashes
-	$_ =~ s/ *---? */\&mdash;/g;
+	$_ =~ s/--/\&mdash;/g;
 
 	# Replace superscripts
 	$_ =~ s/\^\{(.*?)\}/<hi rend=sup>\1<\/hi>/g;
