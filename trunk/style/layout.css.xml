@@ -161,12 +161,20 @@ table.alignedtext
 table.alignedtext td
 {
     vertical-align: top;
-    border-width: 1px;
-    border-color: gray;
-    border-style: dotted;
     width: 50%;
-    padding-left: 10px;
+}
+
+table.alignedtext td.first
+{
+    border-width: 0 0.1px 0 0;
+    border-color: gray;
+    border-style: solid;
     padding-right: 10px;
+}
+
+table.alignedtext td.second
+{
+    padding-left: 10px;
 }
 
 h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4

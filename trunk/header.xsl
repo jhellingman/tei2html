@@ -137,7 +137,7 @@
                 <style type="text/css">
                     <xsl:if test="$customCssFile">
                         <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-                        <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
+                        <xsl:copy-of select="document(normalize-space($customCssFile), .)/*/node()"/>
                     </xsl:if>
 
                     <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
