@@ -138,10 +138,10 @@
         </xsl:variable>
 
         <xsl:variable name="width">
-            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width, 'px')"/>
+            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width, 'px')"/>
         </xsl:variable>
         <xsl:variable name="height">
-            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@height, 'px')"/>
+            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
 
         <img>
@@ -217,7 +217,7 @@
             <xsl:call-template name="getimagefilename"/>
         </xsl:variable>
         <xsl:variable name="width">
-            <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+            <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
         </xsl:variable>
 
         <xsl:if test="$width != ''">
@@ -240,7 +240,7 @@
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
-                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+                <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
             <xsl:attribute name="class">
@@ -273,7 +273,7 @@
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
-                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+                <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
             <div>
@@ -306,7 +306,7 @@
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
-                <xsl:value-of select="document(normalize-space($imageInfoFile))/img:images/img:image[@path=$file]/@width"/>
+                <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
             <div>

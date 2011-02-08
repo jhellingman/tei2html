@@ -156,7 +156,7 @@
 
             <!-- Custom CSS stylesheet -->
             <xsl:if test="$customCssFile">
-                <xsl:copy-of select="document(normalize-space($customCssFile))/*/node()"/>
+                <xsl:copy-of select="document(normalize-space($customCssFile), .)/*/node()"/>
             </xsl:if>
 
             <!-- Generate CSS for rend attributes -->
