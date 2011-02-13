@@ -25,9 +25,12 @@
             <xsl:apply-templates mode="groups" select="$tokens/*[1]"/>
         </xsl:variable>
 
+        <xsl:variable name="properties">
+            <xsl:apply-templates mode="properties" select="$groups"/>
+        </xsl:variable>
 
         <stylesheet>
-            <xsl:copy-of select="$groups"/>
+            <xsl:copy-of select="$properties"/>
         </stylesheet>
     </xsl:template>
 
@@ -112,5 +115,21 @@
             select="following-sibling::symbol[.='}' and (count(preceding-sibling::symbol[.='{']) - count(preceding-sibling::symbol[.='}'])) = $level][1]"/>
         <xsl:apply-templates mode="groups" select="$closer/following-sibling::*[1]"/>
     </xsl:template>
+
+
+    <!-- group properties -->
+
+    <xsl:template mode="properties" match="group">
+        <group>
+            <xsl:for-each-group select="*" group-ending-with="symbol[.=';']">
+                <property>
+                    <xsl:apply-templates mode="properties" select="current-group()"/>
+                </property>
+            </xsl:for-each-group>
+        </group>
+    </xsl:template>
+
+
+
 
 </xsl:stylesheet>
