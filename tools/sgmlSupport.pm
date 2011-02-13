@@ -1554,6 +1554,7 @@ BEGIN
     $ent{"ijcirc"}      = chr(0x0133) . chr(0x0302); # ij ligature with circumflex
 
     $ent{"gtilde"}      = "g" . chr(0x0303); # g with tilde
+    $ent{"Gtilde"}      = "G" . chr(0x0303); # g with tilde
     $ent{"mtilde"}      = "m" . chr(0x0303); # m with tilde
     $ent{"qtilde"}      = "q" . chr(0x0303); # q with tilde
     $ent{"rtilde"}      = "r" . chr(0x0303); # r with tilde
