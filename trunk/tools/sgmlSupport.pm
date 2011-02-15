@@ -1680,6 +1680,13 @@ BEGIN
     $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
     $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
 
+    $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
+    $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
+    $ent{"usupe"}       = "u" . chr(0x0364); # u with small e above
+    $ent{"Asupe"}       = "A" . chr(0x0364); # A with small e above
+    $ent{"Osupe"}       = "O" . chr(0x0364); # O with small e above
+    $ent{"Usupe"}       = "U" . chr(0x0364); # U with small e above
+
     # Using stroke-through overlays: (was actually not needed)
     $ent{"bstrok"}      = chr(0x0180); # b with stroke through stem
     $ent{"dstrok"}      = "d" . chr(0x0335); # d with stroke through stem
