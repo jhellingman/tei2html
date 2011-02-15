@@ -42,13 +42,14 @@
         3. number:      (-?\d+(\.\d+)?)
         4. word:        (\w+)
         5. symbol:      ([:;,.#@\{\}\[\]])
+        6. space:       (\s+)
         
     -->
     <xsl:template name="tokenize">
         <xsl:param name="text"/>
 
         <xsl:variable name="patterns" 
-            select="'/\*(.*?)\*/','(''|&quot;)(.*?)\2','(-?\d+(\.\d+)?)','([\w-]+)','([:;,.\{\}\[\]])'"/>
+            select="'/\*(.*?)\*/','(''|&quot;)(.*?)\2','(-?\d+(\.\d+)?)','([\w-]+)','([:;,.\{\}\[\]])','(\s+)'"/>
 
         <xsl:analyze-string select="$text" regex="{string-join($patterns,'|')}" flags="s">
             <xsl:matching-substring>
@@ -82,6 +83,12 @@
                         <symbol>
                             <xsl:value-of select="regex-group(7)"/>
                         </symbol>
+                    </xsl:when>
+                    <!-- space -->
+                    <xsl:when test="regex-group(8)">
+                        <space>
+                            <xsl:value-of select="regex-group(8)"/>
+                        </space>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:message terminate="yes" select="'internal error'"/>
