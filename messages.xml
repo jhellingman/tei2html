@@ -814,6 +814,8 @@
 
     </msg:messages>
 
+    <!--==#############################################################==-->
+    <!-- Cebuano translation -->
 
     <msg:messages xml:lang="ceb">
         <msg:message name="msgContents">Sulod</msg:message>
@@ -829,6 +831,31 @@
         <msg:message name="msgAvailability">Pwede nga Magamit</msg:message>
         <msg:message name="msgRevisionHistory">Ang Kasaysayan sa mga Panghitabo sa mga Gipang Usob</msg:message>
 
+    </msg:messages>
+
+
+    <!--==#############################################################==-->
+    <!-- Filipino (Tagalog) translation -->
+
+    <msg:messages xml:lang="tl">
+        <msg:message name="msgContents">Nilalaman</msg:message>
+        <msg:message name="msgToc">Talaan ng Nilalaman</msg:message>
+        <msg:message name="msgPage">Pahina</msg:message>
+        <msg:message name="msgSource">Orihinal</msg:message>
+        <msg:message name="msgCorrection">Pagwawasto</msg:message>
+        <msg:message name="msgOriginal">Orihinal</msg:message>
+        <msg:message name="msgCorrection.n">Mga Pagwawasto</msg:message>
+        <msg:message name="msgNotInSource">Wala sa orihinal</msg:message>
+        <msg:message name="msgColophon">Kolopon</msg:message>
+        <msg:message name="msgAvailability">Mga Maaaring Gamit</msg:message>
+        <msg:message name="msgTableOfContents">Talaan ng Nilalaman</msg:message>
+        <msg:message name="msgExternalLink">Panlabas na link</msg:message>
+        <msg:message name="msgEncoding">Pagkaka-enkowd</msg:message>
+        <msg:message name="msgRevisionHistory">Tala ng mga Ginawang Pagbabago</msg:message>
+        <msg:message name="msgExternalReferences">Mga Di-Nakapaloob na Reperensiya</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Ang elektronikong aklat na ito ng Proyektong Gutenberg ay may mga reperensiyang hindi nakapaloob. Ang mga link para sa mga ito ay maaaring hindi gumana.</msg:message>
+        <msg:message name="msgCorrectionsAppliedToText">Ang mga sumusunod ay ang mga pagwawastong ginawa sa teksto:</msg:message>
+        <msg:message name="msgCorrectionsOverview">Buod ng mga pagwawastong ginawa sa teksto.</msg:message>
     </msg:messages>
 
 
