@@ -266,9 +266,24 @@
     5. We need to remove the first letter from the Paragraph, and render it in 
        the float in white, such that it re-appears when no CSS is available.
 
+    In some rendering engines, these tricks do not yield the desired results,
+    so we fall-back to a more robust method, using an floating image.
+
     -->
 
     <xsl:template match="p[contains(@rend, 'initial-image')]">
+        <xsl:choose>
+            <xsl:when test="$optionPrinceMarkup = 'Yes' or $optionEPubMarkup = 'Yes'">
+                <xsl:call-template name="initial-image-with-float"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="initial-image-with-css"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="initial-image-with-css">
         <p>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
@@ -283,6 +298,19 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </span>
+            <xsl:apply-templates mode="eat-initial"/>
+        </p>
+    </xsl:template>
+
+
+    <xsl:template name="initial-image-with-float">
+        <div class="figure floatLeft">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="insertimage2">
+                <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
+            </xsl:call-template>
+        </div>
+        <p class="firstpar">
             <xsl:apply-templates mode="eat-initial"/>
         </p>
     </xsl:template>
