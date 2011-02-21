@@ -39,12 +39,19 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 || `//front`                        || `.front`             || Front matter             ||
 || `//back`                         || `.back`              || Back matter              ||
 || `//div1`                         || `.div1`              || Similar for all `div`s   ||
+|| `//div1/*[not(preceding-sibling::p)] || `.divHead`       || Typical heading material of a division ||
+|| `//div1/*[preceding-sibling-or-self::p] || `.divBody`      || Typical body of a division ||
 || `//p`                            || `p`                  || Paragraph                ||
 || `//p[position() = 1]`            || `p.first`            || First paragraph (actual XPath more complex) ||
 || `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s ||
 || `//lg[not(ancestor::lg)]`        || `.lgouter`           || Top level `lg` elements  ||
 || `//lg[ancestor::lg]`             || `.lg`                || Nested `lg` elements     ||
-|| `//pb`                             || `.pagenum`           || Value of `@n` placed in a `span` ||
+|| `//l`                            || `.line`              || Lines of verse           ||
+|| `//hi`                           || `i`                  || Default without `@rend`  ||
+|| `//hi[@rend='sc']`               || `.sc`                || On `span`                ||
+|| `//hi[@rend='bold']`             || `b`                  ||                          ||
+|| `//hi[@rend='sup']`              || `sup`                || Superior text            ||
+|| `//pb`                           || `.pagenum`           || Value of `@n` placed in a `span` ||
 
 (_to be completed..._)
 
