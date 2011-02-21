@@ -43,7 +43,7 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 || `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s                ||
 || `//lg[not(ancestor::lg)]`        || `.lgouter`           || Top level `lg` elements  ||
 || `//lg[ancestor::lg]`             || `.lg`                || Nested `lg` elements     ||
-|| `pb`                             || `.pagenum`           || Value of `@n` placed in a `span` ||
+|| `//pb`                             || `.pagenum`           || Value of `@n` placed in a `span` ||
 
 (_to be completed..._)
 
