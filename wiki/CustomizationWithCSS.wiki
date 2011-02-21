@@ -39,8 +39,8 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 || `//front`                        || `.front`             || Front matter             ||
 || `//back`                         || `.back`              || Back matter              ||
 || `//div1`                         || `.div1`              || Similar for all `div`s   ||
-|| `//div1/*[not(preceding-sibling::p)] || `.divHead`       || Typical heading material of a division ||
-|| `//div1/*[preceding-sibling-or-self::p] || `.divBody`      || Typical body of a division ||
+|| `//div1/`*`[not(preceding-sibling::p)] || `.divHead`       || Typical heading material of a division ||
+|| `//div1/`*`[preceding-sibling-or-self::p] || `.divBody`      || Typical body of a division ||
 || `//p`                            || `p`                  || Paragraph                ||
 || `//p[position() = 1]`            || `p.first`            || First paragraph (actual XPath more complex) ||
 || `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s ||
