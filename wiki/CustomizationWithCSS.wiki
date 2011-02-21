@@ -15,3 +15,21 @@ The following steps need to be taken to define custom layout.
 The custom layout CSS file can simply be added by creating a file `custom.css.xml` (note that this is a normal CSS file, wrapped by a single XML element, that can have any name, but I suggest to simply use `<style>`; this limitation inherited from XSLT 1.0 will soon be removed.) If this file is present, the Perl script will pick it up and signal it to the XSLT processor for inclusion in the output.
 
 If you give it any other name, you can tell the perl script about it, using the `-c <filename>` option.
+
+To indicate on what elements in your TEI file your CSS rules should apply to, you can use a number of techniques.
+
+  * Based on ID attributes.
+  * Based on `tei2html` generated class attributes.
+  * Based on custom class attributes.
+
+Since `tei2html` in most cases lifts the ids used in the source to the output, your ids in TEI will also be present in the output document, so you can simply use those ids for one-off effects in the output. This can be used to tweak output, using `#id` selectors. In a few cases, the ids are not
+
+Care need to be taken that ids used in this fashion meet both the syntax rules for CSS and XML.
+
+Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` also generates additional class attributes for some types of elements. A complete overview will be given in the following table.
+
+|| *TEI element || *CSS Selector* || *Notes* ||
+|| div1         || div.div1       ||  ||
+|| lg           || lgouter        || Top level lg elements ||
+|| lg           || lg             || Nested lg elements ||
+
