@@ -6,7 +6,7 @@ If we could easily parse CSS with XSLT, this would make it far easier to generat
 
 = Current Implementation =
 
-The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is parsed in a number of passes. Currently, the code not yet parses all valid CSS 2.1 stylesheets. In particular, @media groups are not supported.
+The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is parsed in a number of passes. Currently, the code not yet parses all valid CSS 2.1 stylesheets. In particular, `@media` groups are not supported.
 
   # tokenize with a simple regular expression based 'lexer'
   # group things between braces using 'sibling recursion' to match open braces with closing braces.
