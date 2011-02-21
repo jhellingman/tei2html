@@ -31,8 +31,8 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 || *TEI element*           || *HTML Output*  || *Notes*                ||
 || _XPath_                 || _CSS Selector_ ||                        ||
 || `//div1`                || `.div1`        || Similar for all `div`s ||
-|| `//lg[not(ancestor::lg)]` || `.lgouter`     || Top level lg elements  ||
-|| `//lg[ancestor::lg]`             || `.lg`             || Nested lg elements     ||
+|| `//lg[not(ancestor::lg)]` || `.lgouter`     || Top level `lg` elements  ||
+|| `//lg[ancestor::lg]`             || `.lg`             || Nested `lg` elements     ||
 
 (_to be completed..._)
 
