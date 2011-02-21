@@ -60,7 +60,7 @@ Footnotes can generate a range of elements in the output, depending on the outpu
 || *HTML Output* || *Notes* ||
 || _CSS Selector ||         ||
 || `.noteref`    || The reference marker placed in the text and before the footnote ||
-|| `.displayfootnote || An inline `span` containing the contents of the footnote (for PDF output) ||
+|| `.displayfootnote` || An inline `span` containing the contents of the footnote (for PDF output) ||
 || `.footnotes`  || A `div` containing all footnotes for a piece of text ||
 || `.fnsep`      || A `hr` to separate the footnotes from the text ||
 || `.footnote`   || A `div` containing a single footnote ||
