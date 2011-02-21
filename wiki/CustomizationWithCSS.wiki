@@ -16,6 +16,8 @@ The custom layout CSS file can simply be added by creating a file `custom.css.xm
 
 If you give it any other name, you can tell the perl script about it, using the `-c <filename>` option.
 
+Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `rend` attributes in the source document.
+
 To indicate on what elements in your TEI file your CSS rules should apply to, you can use a number of techniques.
 
   * Based on ID attributes.
