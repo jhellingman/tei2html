@@ -28,8 +28,12 @@ Care need to be taken that ids used in this fashion meet both the syntax rules f
 
 Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` also generates additional class attributes for some types of elements. A complete overview will be given in the following table.
 
-|| *TEI element || *CSS Selector* || *Notes* ||
-|| div1         || div.div1       ||  ||
-|| lg           || lgouter        || Top level lg elements ||
-|| lg           || lg             || Nested lg elements ||
+|| *TEI element*           || *HTML Output*  || *Notes*                ||
+|| _XPath_                 || _CSS Selector_ ||                        ||
+|| `//div1`                || `.div1`        || Similar for all `div`s ||
+|| `//lg[not(ancestor::lg)]` || `.lgouter`     || Top level lg elements  ||
+|| `//lg[ancestor::lg]`             || `.lg`             || Nested lg elements     ||
 
+(_to be completed..._)
+
+Finally, you can always define a custom class attribute, using `rend="class(myClass)"` on your element, and use that in your custom CSS.
