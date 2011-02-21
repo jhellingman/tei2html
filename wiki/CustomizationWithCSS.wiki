@@ -34,11 +34,16 @@ Care need to be taken that ids used in this fashion meet both the syntax rules f
 
 Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` also generates additional class attributes for some types of elements. A complete overview will be given in the following table.
 
-|| *TEI element*           || *HTML Output*  || *Notes*                ||
-|| _XPath_                 || _CSS Selector_ ||                        ||
-|| `//div1`                || `.div1`        || Similar for all `div`s ||
-|| `//lg[not(ancestor::lg)]` || `.lgouter`     || Top level `lg` elements  ||
-|| `//lg[ancestor::lg]`             || `.lg`             || Nested `lg` elements     ||
+|| *TEI element*                    || *HTML Output*        || *Notes*                  ||
+|| _XPath_                          || _CSS Selector_       ||                          ||
+|| `//front`                        || `.front`             || Front matter             ||
+|| `//back`                         || `.back`              || Back matter              ||
+|| `//div1`                         || `.div1`              || Similar for all `div`s   ||
+|| `//p`                            || `p`                  || Paragraph                ||
+|| `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s                ||
+|| `//lg[not(ancestor::lg)]`        || `.lgouter`           || Top level `lg` elements  ||
+|| `//lg[ancestor::lg]`             || `.lg`                || Nested `lg` elements     ||
+|| `pb`                             || `.pagenum`           || Value of `@n` placed in a `span` ||
 
 (_to be completed..._)
 
