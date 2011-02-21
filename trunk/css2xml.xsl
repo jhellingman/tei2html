@@ -23,12 +23,16 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:variable name="groups">
-            <xsl:apply-templates mode="groups" select="$tokens/*[1]"/>
+        <xsl:variable name="tokens">
+            <xsl:apply-templates mode="atkeyword" select="$tokens"/>
+        </xsl:variable>
+
+        <xsl:variable name="blocks">
+            <xsl:apply-templates mode="blocks" select="$tokens/*[1]"/>
         </xsl:variable>
 
         <xsl:variable name="rules">
-            <xsl:apply-templates mode="rules" select="$groups"/>
+            <xsl:apply-templates mode="rules" select="$blocks"/>
         </xsl:variable>
 
         <xsl:variable name="properties">
@@ -51,7 +55,6 @@
             <xsl:apply-templates mode="unparse" select="$cleanup"/>
         </xsl:variable>
 
-
         <stylesheet>
             <xsl:copy-of select="$cleanup"/>
 
@@ -65,8 +68,8 @@
         1. comment:     /\*(.*?)\*/
         2. string:      ('|&quot;)(.*?)\1
         3. number:      (-?\d+(\.\d+)?)
-        4. word:        ([\w-]+)
-        5. symbol:      ([:;,.#@\{\}\[\]])
+        4. ident:       ([\w-]+)
+        5. symbol:      ([:;,.#%@\{\}\[\]])
         6. space:       (\s+)
 
     -->
@@ -97,11 +100,11 @@
                             <xsl:value-of select="regex-group(4)"/>
                         </number>
                     </xsl:when>
-                    <!-- word -->
+                    <!-- ident -->
                     <xsl:when test="regex-group(6)">
-                        <word>
+                        <ident>
                             <xsl:value-of select="regex-group(6)"/>
-                        </word>
+                        </ident>
                     </xsl:when>
                     <!-- symbol -->
                     <xsl:when test="regex-group(7)">
@@ -129,23 +132,50 @@
     </xsl:template>
 
 
-    <!-- use sibling recursion to group things between braces -->
+    <!-- atkeyword -->
 
-    <xsl:template mode="groups" match="node()" priority="-9">
-        <xsl:copy-of select="."/>
-        <xsl:apply-templates mode="groups" select="following-sibling::*[1]"/>
+    <xsl:template mode="atkeyword" match="@*|node()" priority="-9">
+        <xsl:copy>
+            <xsl:apply-templates mode="atkeyword" select="@*|node()"/>
+        </xsl:copy>
     </xsl:template>
 
-    <xsl:template mode="groups" match="symbol[.='}']"/>
+    <xsl:template mode="atkeyword" match="symbol[.='#'][following-sibling::*[1]/self::ident]">
+        <hash>
+            <xsl:text>#</xsl:text>
+            <xsl:value-of select="following-sibling::*[1]"/>
+        </hash>
+    </xsl:template>
 
-    <xsl:template mode="groups" match="symbol[.='{']">
-        <group>
-            <xsl:apply-templates mode="groups" select="following-sibling::*[1]"/>
-        </group>
+    <xsl:template mode="atkeyword" match="ident[preceding-sibling::*[1]/self::symbol[.='#']]"/>
+
+    <xsl:template mode="atkeyword" match="symbol[.='@'][following-sibling::*[1]/self::ident]">
+        <atkeyword>
+            <xsl:text>@</xsl:text>
+            <xsl:value-of select="following-sibling::*[1]"/>
+        </atkeyword>
+    </xsl:template>
+
+    <xsl:template mode="atkeyword" match="ident[preceding-sibling::*[1]/self::symbol[.='@']]"/>
+
+
+    <!-- use sibling recursion to group things between braces -->
+
+    <xsl:template mode="blocks" match="node()" priority="-9">
+        <xsl:copy-of select="."/>
+        <xsl:apply-templates mode="blocks" select="following-sibling::*[1]"/>
+    </xsl:template>
+
+    <xsl:template mode="blocks" match="symbol[.='}']"/>
+
+    <xsl:template mode="blocks" match="symbol[.='{']">
+        <block>
+            <xsl:apply-templates mode="blocks" select="following-sibling::*[1]"/>
+        </block>
         <xsl:variable name="level" select="count(preceding-sibling::symbol[.='{']) - count(preceding-sibling::symbol[.='}']) + 1"/>
         <xsl:variable name="closer"
             select="following-sibling::symbol[.='}' and (count(preceding-sibling::symbol[.='{']) - count(preceding-sibling::symbol[.='}'])) = $level][1]"/>
-        <xsl:apply-templates mode="groups" select="$closer/following-sibling::*[1]"/>
+        <xsl:apply-templates mode="blocks" select="$closer/following-sibling::*[1]"/>
     </xsl:template>
 
 
@@ -158,7 +188,7 @@
     </xsl:template>
 
     <xsl:template mode="rules" match="/">
-            <xsl:for-each-group select="*" group-ending-with="group">
+            <xsl:for-each-group select="*" group-ending-with="block">
                 <rule>
                     <xsl:apply-templates mode="rules" select="current-group()"/>
                 </rule>
@@ -174,14 +204,14 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template mode="properties" match="group">
-        <group>
+    <xsl:template mode="properties" match="block">
+        <block>
             <xsl:for-each-group select="*" group-ending-with="symbol[.=';']">
                 <property>
                     <xsl:apply-templates mode="properties" select="current-group()"/>
                 </property>
             </xsl:for-each-group>
-        </group>
+        </block>
     </xsl:template>
 
     <!-- eliminate empty rules -->
@@ -223,9 +253,9 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template mode="selector" match="*[following-sibling::group]"/>
+    <xsl:template mode="selector" match="*[following-sibling::block]"/>
 
-    <xsl:template mode="selector" match="group">
+    <xsl:template mode="selector" match="block">
         <selector>
             <xsl:copy-of select="preceding-sibling::*"/>
         </selector>
