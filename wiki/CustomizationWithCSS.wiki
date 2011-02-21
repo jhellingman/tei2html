@@ -40,7 +40,8 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 || `//back`                         || `.back`              || Back matter              ||
 || `//div1`                         || `.div1`              || Similar for all `div`s   ||
 || `//p`                            || `p`                  || Paragraph                ||
-|| `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s                ||
+|| `//p[position() = 1]`            || `p.first`            || First paragraph (actual XPath more complex) ||
+|| `//figure`                       || `.figure`            || The actual `img` tag is nested in various `div`s ||
 || `//lg[not(ancestor::lg)]`        || `.lgouter`           || Top level `lg` elements  ||
 || `//lg[ancestor::lg]`             || `.lg`                || Nested `lg` elements     ||
 || `//pb`                             || `.pagenum`           || Value of `@n` placed in a `span` ||
