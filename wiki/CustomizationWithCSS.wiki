@@ -55,4 +55,14 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 
 (_to be completed..._)
 
+Footnotes can generate a range of elements in the output, depending on the output settings and format.
+
+|| *HTML Output* || *Notes* ||
+|| _CSS Selector ||         ||
+|| `.noteref`    || The reference marker placed in the text and before the footnote ||
+|| `.displayfootnote || An inline `span` containing the contents of the footnote (for PDF output) ||
+|| `.footnotes`  || A `div` containing all footnotes for a piece of text ||
+|| `.fnsep`      || A `hr` to separate the footnotes from the text ||
+|| `.footnote`   || A `div` containing a single footnote ||
+
 Finally, you can always define a custom class attribute, using `rend="class(myClass)"` on your element, and use that in your custom CSS.
