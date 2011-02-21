@@ -1,0 +1,17 @@
+#summary Customization via CSS.
+
+= Introduction =
+
+Since many details of the layout of the output (For both HTML and PDF) are defined in CSS, it is very well possible to define custom CSS to customize the layout of your output.
+
+= Steps for Custom Layout =
+
+The following steps need to be taken to define custom layout.
+
+  * Define a custom layout CSS file.
+  * Tell the transformation process about the CSS file.
+  * Define the points of attachments for the CSS rules.
+
+The custom layout CSS file can simply be added by creating a file `custom.css.xml` (note that this is a normal CSS file, wrapped by a single XML element, that can have any name, but I suggest to simply use `<style>`; this limitation inherited from XSLT 1.0 will soon be removed.) If this file is present, the Perl script will pick it up and signal it to the XSLT processor for inclusion in the output.
+
+If you give it any other name, you can tell the perl script about it, using the `-c <filename>` option.
