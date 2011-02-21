@@ -36,7 +36,7 @@ p
     text-indent: 1em;
 }
 
-p.firstpar, p.tocChapter
+p.first, p.tocChapter
 {
     text-indent: 0em;
 }

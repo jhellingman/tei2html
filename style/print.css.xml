@@ -220,7 +220,7 @@ p
     text-indent: 1em;
 }
 
-p.firstpar, p.tocChapter, p.byline
+p.first, p.tocChapter, p.byline
 {
     text-indent: 0em;
 }
