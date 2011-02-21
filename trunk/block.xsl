@@ -239,8 +239,8 @@
             <xsl:value-of select="name(preceding-sibling::*[1])"/>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="position() = 1">firstpar </xsl:when>
-            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb' or $preceding = 'epigraph' or $preceding = 'argument'">firstpar </xsl:when>
+            <xsl:when test="position() = 1">first </xsl:when>
+            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb' or $preceding = 'epigraph' or $preceding = 'argument'">first </xsl:when>
         </xsl:choose>
     </xsl:template>
 
@@ -310,7 +310,7 @@
                 <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
             </xsl:call-template>
         </div>
-        <p class="firstpar">
+        <p class="first">
             <xsl:apply-templates mode="eat-initial"/>
         </p>
     </xsl:template>
