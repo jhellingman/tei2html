@@ -1,4 +1,4 @@
-#How to specify a cover page.
+#summary How to specify a cover page.
 
 Older books where often sold in simple paper covers, often just repeating the information on the title page. It was expected that the buyer of the book would bind it (or more likely have it bound by a professional bookbinder). As a result, covers for older books are not standard, and often do not contain more than a short title on the spine. The practice of selling books in nice decorative covers started in the late nineteenth century. Including the original cover of the book as an illustration in the TEI version is often nice, and is also a great feature for ePub devices.
 
