@@ -4,9 +4,9 @@ Older books where often sold in simple paper covers, often just repeating the in
 
 When generating ePubs, `tei2html` expects the cover image to be indicated in a specific way in the front matter, using the exact ids as shown below:
 
-{{
+{{{
 <div1 id="cover" type="Cover">
 <p><figure id="cover-image" rend="image(images/front.jpg)"/></p>
-}}
+}}}
 
 To make this work with the various ePub ebook readers, make this image 600 by 800 pixels, preferably as full color JPG.
