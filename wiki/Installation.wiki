@@ -1,23 +1,18 @@
 #summary Installation instructions.
 
-= Introduction =
+= Required Downloads =
 
-The tei2html code has a range of dependencies on third-party software. This page lists those.
+The `tei2html` code has a range of dependencies on third-party software. This page lists those.
 
-= Perl =
 
-You'll need Perl, and it will have to work together with the !PerlMagick extension. To make
-this work, you'll need to install matching versions of both.
+== Saxon ==
 
-My advise is to download [http://www.activestate.com/activeperl/ ActivePerl]. For Windows, use [http://downloads.activestate.com/ActivePerl/Windows/5.10/ActivePerl-5.10.0.1004-MSWin32-x86-287188.msi Perl 5.10, build 1004.] (Also on Vista x64, as the x64 version of Perl is not yet compatible with !ImageMagick.)
+Any XSLT 2.0 processor should work. However, I've developed these stylesheets with Saxon.
 
-After installing Perl, install [http://www.imagemagick.org/script/index.php ImageMagick]. On Windows, use [http://www.imagemagick.org/download/binaries/ImageMagick-6.5.0-5-Q16-windows-dll.exe ImageMagick 6.5.0], 16 bits dynamically linked version. Don't forget to check !PerlMagick installation during the set-up.
+You should download a reasonable recent version of Saxon. For example the Saxon SA product from [http://www.saxonica.com/products.html saxonica.com]. This fully supports XSLT 2.0, as required for the `tei2epub.xsl` stylesheet that is now part of this package.
 
-= Saxon =
 
-You should download a reasonable recent version of Saxon. For example the Saxon SA product from [http://www.saxonica.com/products.html saxonica.com]. This fully supports XSLT 2.0, as required for the tei2epub style sheets that are now part of this package.
-
-= Java =
+== Java ==
 
 Saxon requires Java.
 
@@ -25,16 +20,34 @@ If you already have a Java Runtime Environment, you need to locate it, and updat
 
 If you do not have Java, you can download it from http://java.com/en/
 
-= SX, NSGML =
+
+== Perl ==
+
+If you are using the provided Perl scripts to glue things together, 
+you'll need a Perl interpreter, and it will have to work together with the !PerlMagick extension. To make
+this work, you'll need to install matching versions of both.
+
+My advise is to download [http://www.activestate.com/activeperl/ ActivePerl]. For Windows, use [http://downloads.activestate.com/ActivePerl/Windows/5.10/ActivePerl-5.10.0.1004-MSWin32-x86-287188.msi Perl 5.10, build 1004.] (Also on Vista x64, as the x64 version of Perl is not yet compatible with !ImageMagick.)
+
+After installing Perl, install [http://www.imagemagick.org/script/index.php ImageMagick]. On Windows, use [http://www.imagemagick.org/download/binaries/ImageMagick-6.5.0-5-Q16-windows-dll.exe ImageMagick 6.5.0], 16 bits dynamically linked version. Don't forget to check !PerlMagick installation during the set-up.
+
+
+== SX, NSGML ==
 
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since the tools still support SGML, you will need both those two tools. They can be downloaded from [http://www.jclark.com/ James Clark website]. For windows, get [ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip sp 1.3.4].
 
+
 = Patc =
 
-Patc (pattern changer) is a small utility in C, so you will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
+_optional_ 
+
+Patc (pattern changer) is a small utility in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
+
 
 = epubcheck =
 
+_optional_ 
+
 Epubcheck is a tool to validate epub books, it can be obtained from: http://code.google.com/p/epubcheck/
 
-This tool requires Java.
+This tool also requires Java.
