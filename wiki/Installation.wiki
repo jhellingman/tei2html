@@ -37,14 +37,14 @@ After installing Perl, install [http://www.imagemagick.org/script/index.php Imag
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since the tools still support SGML, you will need both those two tools. They can be downloaded from [http://www.jclark.com/ James Clark website]. For windows, get [ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip sp 1.3.4].
 
 
-= Patc =
+== Patc ==
 
 _optional_ 
 
 Patc (pattern changer) is a small utility in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
 
 
-= epubcheck =
+== epubcheck ==
 
 _optional_ 
 
