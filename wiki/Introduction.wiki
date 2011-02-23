@@ -1,0 +1,15 @@
+#summary Preface and Introduction to tei2html.
+
+= Preface =
+
+The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," but makes it harder to produce nicely formatted output from the same source. This is where the tei2html kicks-in.
+
+`tei2html` is a collection of XSLT stylesheets that transform a duly marked up TEI file to an attractive HTML, ePub or PDF document. It is intended to work out-of-the-box with unadorned TEI files, but will be able to perform better if certain conventions are followed.
+
+These guidelines describe the conventions for preparing TEI files such that they can successfully be converted by tei2html. They assume a working knowledge of the [http://www.tei-c.org/Lite/teiu5_en.html TEI Lite documentation]. They are inspired by, and often follow the [http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml Wisconsin University Guidelines for Markup of Electronic Texts], which provides excellent examples of numerous issues. For real starters, a [http://www.tei-c.org/Support/Learn/mueller-index.htm very gentle introduction to the TEI markup language] is available.
+
+Whether TEI is useful for you depends on your needs. If you are occasionally producing a text, and need to have it formatted, TEI and `tei2html` is probably not the way to go. If you have a large collection of texts, and need to maintain them for a long time, and would like to add numerous types of scholarly annotations to them, TEI certainly warrants serious consideration.
+
+Originally, `tei2html` was developed to produce beautiful new editions of public domain texts for Project Gutenberg, but it can also be used for other TEI files.
+
+= Introduction =
