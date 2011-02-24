@@ -17,7 +17,7 @@ Simple rendering attribute values provide single keywords to provide a rendering
 
 == Rendition Ladders ==
 
-A slightly more powerful mechanism is provided by so called rendering ladders, in which a number of key-value pairs are provided.
+A slightly more powerful mechanism is provided by so called 'rendering ladders', in which a number of key-value pairs are provided. These take the form `key(value)`, and multiple can be present in a `@rend` attribute. They are either translated to CSS, or given a specific meaning, sometimes depending on the element they are applied to.
 
 === CSS equivalents ===
 
