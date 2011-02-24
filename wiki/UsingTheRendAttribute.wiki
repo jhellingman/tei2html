@@ -1,4 +1,3 @@
-
 #summary Instructions on how to use the @rend attribute
 
 = Using the `@rend` attribute =
@@ -51,7 +50,7 @@ The following keys and values are supported:
 || *Element* || *Key* || *Value* || *Example* ||
 || _Any_ || `font` || `italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` || `<hi rend="font(bold)">` (note the difference from fall-through CSS) ||
 || `p`, `q` || `align` || `right`, `left`, `center`, `block` (that is, justified) || `<p rend="align(block)">` ||
-|| `p`, `l` || `indent` || The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. || <l rend="indent(2)"> ||
+|| `p`, `l` || `indent` || The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. || `<l rend="indent(2)">` ||
 || _Any_ || `link`   || any url, rendered as link to the indicated url. || `<figure rend="link(images/a.jpg)">` ||
 || `figure`, `head` || `image`  || any url, rendered as in-line image, obtained from the indicated url. || `<figure rend="image(images/a.jpg)">` ||
 || `figure` || `float`  || The place to float in image, table, etc. Possible values: left, right. || `<figure rend="float(left)">` ||
