@@ -2,7 +2,7 @@
 
 = Using the `@rend` attribute =
 
-he rend attribute is a simple hook into the TEI structure to document or specify rendering features. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
+The `@rend` attribute is a simple hook into the TEI structure to document or specify rendering features. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
 
 == Simple ==
 
