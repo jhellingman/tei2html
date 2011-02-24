@@ -45,7 +45,7 @@ Note that if the same value for the `@rend` attribute is used multiple times, on
 
 In a number of places, rendition ladders are interpreted by `tei2html` directly.
 
-The following keys and values are supported:
+The following keys and values are supported: (Note that this list is not exhaustive, and the full list of options will be indicated with each element.)
 
 || *Element* || *Key* || *Value* || *Example* ||
 || _Any_ || `font` || `italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) || `<hi rend="font(bold)">` ||
