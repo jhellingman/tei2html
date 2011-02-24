@@ -39,7 +39,7 @@ And the following CSS rule:
 .x12345 { font-style: italic; text-align: left; }
 }}}
 
-Note that if the same value for the `@rend` attribute is used multiple times, only one CSS rule will be generated for all occurrences.
+Note that if the same value for the `@rend` attribute is used multiple times, only one CSS rule will be generated matching all occurrences.
 
 === Special interpretations ===
 
