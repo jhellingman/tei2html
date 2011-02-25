@@ -1,0 +1,38 @@
+#summary Auxiliary tools used by `tei2html`.
+
+= Introduction =
+
+Besides the main XSLT scripts, `tei2html` includes a number of Perl scripts to accomplish various tasks. Many of these are quick hacks to get things done.
+
+== `tei2html.pl` ==
+
+The main 'glue' script. This will run the various commands to actually run the `tei2html` XSLT scripts.
+
+|| *Option* || *Action* ||
+|| `-x` || Convert SGML file to XML ||
+|| `-h` || Generate HTML ||
+|| `-e` || Generate ePub ||
+|| `-t` || Generate plain vanilla ASCII (_needs manual cleanup!_) ||
+|| `-p` || Generate PDF (_using Prince XML_) ||
+|| `-c` filename || Include additional CSS file ||
+
+
+== `ucwords.pl` ==
+
+Perl script to list word-frequencies in an XML file. This script will recognize the `@lang` tag, and write a word-frequency list per language encountered. Words in the output will be color-coded, based on frequency and appearance in a spell-check dictionary.
+
+== `fixpb.pl` ==
+
+Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements.
+
+== `catpars.pl` ==
+
+Perl script to unwrap paragraphs, such that they appear on one line. Handle with care.
+
+== `quotes.pl` ==
+
+Perl script to replace ASCII double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.
+
+== `pgpp.pl` ==
+
+Initials script run on the output from PG Distributed Proofreaders, when converting that to TEI (A manual process).
