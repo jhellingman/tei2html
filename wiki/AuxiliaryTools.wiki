@@ -25,9 +25,19 @@ Perl script to list word-frequencies in an XML file. This script will recognize 
 
 Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements.
 
+Syntax:
+
+`perl -S fixpb.pl _filename_ _start_ _offset_`
+
+_filename_: the file of which the page numbers need to be updated
+
+_start_: the first page number that needs to be updated.
+
+_offset_: the offset to be applied to pages after _start_; can be a positive or negative integer.
+
 == `catpars.pl` ==
 
-Perl script to unwrap paragraphs, such that they appear on one line. Handle with care.
+Perl script to unwrap paragraphs, such that they appear on one line. Handle with care!
 
 == `quotes.pl` ==
 
