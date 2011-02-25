@@ -8,18 +8,24 @@ Besides the main XSLT scripts, `tei2html` includes a number of Perl scripts to a
 
 The main 'glue' script. This will run the various commands to actually run the `tei2html` XSLT scripts.
 
+Syntax: `perl.pl -S tei2html.pl [options] filename`
+
 || *Option* || *Action* ||
 || `-x` || Convert SGML file to XML ||
 || `-h` || Generate HTML ||
 || `-e` || Generate ePub ||
 || `-t` || Generate plain vanilla ASCII (_needs manual cleanup!_) ||
 || `-p` || Generate PDF (_using Prince XML_) ||
+|| `-r` || Generate word-usage report ||
 || `-c` filename || Include additional CSS file ||
 
+Default options `-xhtr`.
 
 == `ucwords.pl` ==
 
 Perl script to list word-frequencies in an XML file. This script will recognize the `@lang` tag, and write a word-frequency list per language encountered. Words in the output will be color-coded, based on frequency and appearance in a spell-check dictionary.
+
+Syntax: `perl -S ucwords.pl filename`
 
 == `fixpb.pl` ==
 
@@ -27,7 +33,7 @@ Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` ele
 
 Syntax:
 
-`perl -S fixpb.pl _filename_ _start_ _offset_`
+`perl -S fixpb.pl filename start offset`
 
 _filename_: the file of which the page numbers need to be updated
 
