@@ -2,7 +2,7 @@
 
 = Prerequisites and Installation =
 
-See the page on Installation.
+See the page on [Installation installation].
 
 Note that currently no installer is present, so you will need to get the code from the repository directly.
 
