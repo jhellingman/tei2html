@@ -1,0 +1,8 @@
+#summary Just a scratchpad for interesting ideas, links, and snippets.
+
+= Scratch Pad =
+
+
+= Interesting Links =
+
+  * [http://code.google.com/p/hyphenator/] Javascript hyphenator.
