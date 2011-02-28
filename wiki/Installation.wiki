@@ -36,6 +36,9 @@ After installing Perl, install [http://www.imagemagick.org/script/index.php Imag
 
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since the tools still support SGML, you will need both those two tools. They can be downloaded from [http://www.jclark.com/ James Clark website]. For windows, get [ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip sp 1.3.4].
 
+== ZIP ==
+
+To compress ePub files, you will need a zip utility. You could use [http://www.info-zip.org/Zip.html info-zip].
 
 == Patc ==
 
