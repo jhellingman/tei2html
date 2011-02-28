@@ -29,3 +29,19 @@ After the opening tag:
 <div1>
 <pb n="123"/>
 }}}
+
+Various guidelines for TEI propose different (conflicting) conventions for each option. The `tei2html` scripts all assume the first option (before the closing tag) This way, the generated tables of content, etc., refer to page-number that is current when the `<div1>` tag occurs.
+
+== Cross-References ==
+
+As mentioned, cross-references in printed book often reference to page numbers. The easiest way to encode this is to do something like this:
+
+{{{
+<ref target="pb123">Some referring text</ref>.
+}}}
+
+That links to some `<pb id="pb123" n="123"/>` somewhere in text. Now, of course, the reference is never to the page-break itself, but always to some content that appears on that page, but actually identifying and linking to the content referred to can be a time-consuming task, so is often postponed (think, for example, about an index).
+
+== Processing ==
+
+== Paged Output ==
