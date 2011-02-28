@@ -12,6 +12,30 @@ Most of the interaction on the command line is with small Perl scripts that star
 
 Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly.
 
+To do this, go to `tools/tei2html.pl` and look for a section of code called configuration, and change the paths indicated here to what is current on your machine:
+
+{{{
+#==============================================================================
+# Configuration
+
+my $toolsdir        = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
+my $patcdir         = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
+my $xsldir          = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
+my $tmpdir          = "C:\\Temp";                       # place to drop temporary files
+my $bindir          = "C:\\Bin";
+my $catalog         = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+
+my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
+my $saxon2          = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar "; # (see http://saxon.sourceforge.net/)
+
+my $epubcheck       = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
+my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
+
+}}}
+
+Note to self: This needs considerable cleanup, and use of environment variables where possible.
+
+
 = Running interactively =
 
 No easy window-based interface is yet available. I am working on a small HTML application to run the scripts interactively.
