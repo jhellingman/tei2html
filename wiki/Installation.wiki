@@ -38,7 +38,7 @@ SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP 
 
 == ZIP ==
 
-To compress ePub files, you will need a zip utility. You could use [http://www.info-zip.org/Zip.html info-zip].
+To compress ePub files, you will need a zip utility. `tei2html` uses [http://www.info-zip.org/Zip.html info-zip] to handle the peculiar requirements of the ePub format. (See e.g. [http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html this blog entry on creating ePub files].)
 
 == Patc ==
 
