@@ -4,6 +4,9 @@
 
 Printed books have pages, and thus page-breaks every couple of hundred words or so. Electronic files do not have this concept, but since pages and page numbers have traditionally been used to refer to passages in books, they can be captured in `<pb>` elements, which, for good reason, can appear almost anywhere in a TEI document. Here is where the trouble starts.
 
+References: 
+  * TEI P5 Documentation [http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-pb.html pb]
+
 == Encoding ==
 
 When a page-break occurs between two divisions, it can be encoded in various was, e.g., before the closing tag:
