@@ -9,9 +9,12 @@ I intend, when possible, to add the following to the tei2html tool-set.
   * Support for ePub output. (Mostly done)
   * Support for XHTML output. (Partly done, for ePub).
 
+
 == Support for Customization ==
 
-Currently, fairly limited customization options exists, and they are only accessible either via parameters to the stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
+Currently, fairly limited customization options exists, and they are only accessible either via parameters to the XSLT stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
+
+Note that layout customization is best handled by using custom CSS.
 
 The file would be named `tei2html.config` and would look something like:
 
@@ -60,7 +63,10 @@ The following elements are foreseen for this configuration file:
 
   * Pagination
     * pageNumbers (None|Inline|Margin, default Margin)
-    * pageImageLinks (Y|N, default N; depends of presence of appropriate `rend` attribute)
+    * pageImages (Y|N, default N; depends of presence of appropriate `@rend` or `@facs` attribute)
+
+  * External Links
+    * externalLinks (Y|N, Generate external links, default Y. N may be desired on devices without internet connectivity.)
 
   * Textual Constants
     * organization (name of organization responsible for publication)
@@ -73,11 +79,10 @@ Things that can also be handled via CSS:
   * Default verse alignment (Left/Right/Center)
 
 
-
-
 == Support for print output ==
 
 Currently, some support for print output via PDF with Prince-XML is build in. This needs to be extended and generalized, such that neat paged format media can be produced as PDFs. This is mostly a matter of using appropriate CSS stylesheets, although in a few cases, it is necessary to reorganize elements in the (in this case intermediate) HTML to enable such output (such as footnotes).
+
 
 == Support for HTML5 ==
 
@@ -87,15 +92,18 @@ This feature has two important aspects.
 
 2. Use of CSS3: CCS usage can be changed fairly easily with Tei2Html, so using a customized stylesheet with CSS3 features is already possible. For some usages (print support, aural stylesheets) some changes will be required.
 
+
 == Support for XHTML ==
 
 Currently, the stylesheet emits normal HTML. It would be nice to be able to generate XHTML as well, but for that, some adjustments are needed to guaranty only valid XHTML is generated. Currently, the tei2html stylesheet relies on the more relaxed validation rules of HTML.
+
 
 == Support for ePub ==
 
 Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the [http://code.google.com/p/epub-tools/ epub-tools] project.
 
 Most of the work is done. Some improvements to the CSS stylesheets are still required.
+
 
 === A Note on DRM ===
 
