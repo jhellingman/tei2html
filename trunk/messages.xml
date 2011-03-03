@@ -46,6 +46,7 @@
         <msg:message name="msgBook.n">Books</msg:message>
         <msg:message name="msgChapter">Chapter</msg:message>
         <msg:message name="msgChapter.n">Chapters</msg:message>
+        <msg:message name="msgCopyrightPage">Copyright Page</msg:message>
         <msg:message name="msgContents">Contents</msg:message>
         <msg:message name="msgFigure">Figure</msg:message>
         <msg:message name="msgFigure.n">Figures</msg:message>
