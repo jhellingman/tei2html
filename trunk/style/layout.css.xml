@@ -441,6 +441,21 @@ p.footnote .label
 
 /* Tables */
 
+td, th
+{
+    vertical-align: top;
+}
+
+td.label, tr.label td
+{
+    font-weight: bold;
+}
+
+td.unit, tr.unit td
+{
+    font-style: italic;
+}
+
 td.sum
 {
     padding-top: 2px; border-top: solid black 1px;

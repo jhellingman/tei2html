@@ -113,18 +113,21 @@
          for the first element having this rend attribute value -->
     <xsl:template name="generate-rend-class-name">
         <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="node" select="."/>
 
-        <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name(), ':', $rend)))"/>
+        <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend)))"/>
     </xsl:template>
 
 
     <!-- The same as above, but now wrapped up in an attribute -->
     <xsl:template name="generate-rend-class-attribute">
         <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="node" select="."/>
 
         <xsl:attribute name="class">
             <xsl:call-template name="generate-rend-class-name">
                 <xsl:with-param name="rend" select="$rend"/>
+                <xsl:with-param name="node" select="$node"/>
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
@@ -135,19 +138,21 @@
          declaration in the rend attribute. -->
     <xsl:template name="generate-rend-class-name-if-needed">
         <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="node" select="."/>
 
         <xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/><xsl:text> </xsl:text></xsl:if>
 
         <xsl:variable name="css-properties">
             <xsl:call-template name="translate-rend-attribute">
                 <xsl:with-param name="rend" select="normalize-space($rend)"/>
-                <xsl:with-param name="name" select="name()"/>
+                <xsl:with-param name="name" select="name($node)"/>
             </xsl:call-template>
         </xsl:variable>
 
         <xsl:if test="normalize-space($css-properties) != ''">
             <xsl:call-template name="generate-rend-class-name">
                 <xsl:with-param name="rend" select="$rend"/>
+                <xsl:with-param name="node" select="$node"/>
             </xsl:call-template>
         </xsl:if>
 
@@ -157,10 +162,12 @@
     <!-- The same as above, but now wrapped up in an attribute -->
     <xsl:template name="generate-rend-class-attribute-if-needed">
         <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="node" select="."/>
 
         <xsl:variable name="class">
             <xsl:call-template name="generate-rend-class-name-if-needed">
                 <xsl:with-param name="rend" select="$rend"/>
+                <xsl:with-param name="node" select="$node"/>
             </xsl:call-template>
         </xsl:variable>
 
@@ -187,7 +194,7 @@
 
 
     <!-- Low priority default rule for generating the css rules from the
-         rend attribute in css mode -->
+         rend attribute in css mode. Note how we exclude the column element here -->
     <xsl:template match="*[@rend and name() != 'column']" mode="css" priority="-1">
         <xsl:call-template name="generate-css-rule"/>
         <xsl:apply-templates mode="css"/>

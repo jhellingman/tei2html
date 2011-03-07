@@ -40,17 +40,14 @@
 
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
-        <div>
+        <div class="table">
             <xsl:call-template name="set-lang-id-attributes"/>
 
-            <xsl:attribute name="class">
-                <xsl:text>table </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:attribute>
-
-            <xsl:apply-templates select="head" mode="tablecaption"/>
+            <xsl:apply-templates mode="tablecaption" select="head"/>
 
             <table>
+                <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+
                 <!-- Stretch to the size of the outer div if the width is set explicitly -->
                 <xsl:if test="contains(@rend, 'width(')">
                     <xsl:attribute name="width">100%</xsl:attribute>
@@ -62,8 +59,7 @@
                     </xsl:attribute>
                 </xsl:if>
 
-                <xsl:apply-templates select="head"/>
-                <xsl:apply-templates select="row"/>
+                <xsl:apply-templates/>
             </table>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -71,8 +67,7 @@
 
 
     <!-- HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
-
-    <xsl:template match="head" mode="tablecaption">
+    <xsl:template mode="tablecaption" match="head">
         <h4 class="tablecaption">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="contains(../@rend, 'align(center)')">
@@ -83,58 +78,38 @@
     </xsl:template>
 
 
-    <!-- headers already handled. -->
+    <!-- headers already handled in mode tablecaption. -->
     <xsl:template match="table/head"/>
 
 
     <xsl:template match="row">
         <tr valign="top">
+            <xsl:variable name="class">
+                <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
+                <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells -->
+            </xsl:variable>
+
+            <xsl:if test="normalize-space($class) != ''">
+                <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            </xsl:if>
+
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
 
-    <xsl:template match="row[@role='label']/cell">
-        <td valign="top">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="cell-span"/>
-            <b><xsl:apply-templates/></b>
-        </td>
-    </xsl:template>
-
-    <xsl:template match="cell[@role='label']">
-        <td valign="top">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="cell-span"/>
-            <b><xsl:apply-templates/></b>
-        </td>
-    </xsl:template>
-
-    <xsl:template match="row[@role='unit']/cell">
-        <td valign="top">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="cell-span"/>
-            <i><xsl:apply-templates/></i>
-        </td>
-    </xsl:template>
-
-    <xsl:template match="cell[@role='unit']">
-        <td valign="top">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="cell-span"/>
-            <i><xsl:apply-templates/></i>
-        </td>
-    </xsl:template>
 
     <xsl:template match="cell">
-        <td valign="top">
+        <td>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
+            <xsl:call-template name="cell-rend"/>
             <xsl:apply-templates/>
         </td>
     </xsl:template>
 
 
+    <!-- Determine how many rows and columns we span, and set attributes accordingly. -->
     <xsl:template name="cell-span">
         <xsl:if test="@cols and (@cols > 1)">
             <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
@@ -142,19 +117,20 @@
         <xsl:if test="@rows and (@rows > 1)">
             <xsl:attribute name="rowspan"><xsl:value-of select="@rows"/></xsl:attribute>
         </xsl:if>
-
-        <xsl:call-template name="cell-rend"/>
     </xsl:template>
 
 
-    <!-- Here we potentially need to supply two class names for rendering:
-         one for the column-level rend attribute, and one for the cell-
-         level rend attribute. -->
+    <!-- Here we may need to supply up to four class names for rendering:
+         1. one for the @role attribute,
+         2. one for the column-level @rend attribute, 
+         3. one for the row-level @rend attribute, and
+         4. one for the cell-level @rend attribute. -->
     <xsl:template name="cell-rend">
 
         <xsl:variable name="class">
-            <xsl:if test="@role and not(@role = 'data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
+            <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/>
         </xsl:variable>
 
@@ -174,6 +150,16 @@
             </xsl:call-template>
         </xsl:if>
 
+    </xsl:template>
+
+    <!-- Find rendering information for the current row (our parent) -->
+    <xsl:template name="cell-rend-row">
+        <xsl:if test="../@rend">
+            <xsl:call-template name="generate-rend-class-name">
+                <xsl:with-param name="rend" select="../@rend"/>
+                <xsl:with-param name="node" select=".."/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
 
