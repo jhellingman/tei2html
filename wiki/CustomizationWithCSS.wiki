@@ -61,7 +61,16 @@ Tables pose some peculiar problems for rendering. By default, tables are rendere
 
 When a TEI table is converted to HTML, it is surrounded by a `<div>` element, and the `<head>`, if present, is lifted from the table, as support for the HTML caption element in browsers is limited. The table proper is converted to a HTML table.
 
-Rendering attributes on tables can be applied in four ways: on the table as a whole, and on column, row, or cell level.
+Rendering attributes on tables can be applied in four ways: on the table as a whole, and on column, row, or cell level. 
+
+Rendering on the whole table is handled the normal way.
+
+Rendering on the column level is attached to (non-TEI) `<column>` elements, and is applied before rows or individual cells are considered.
+
+Since HTML support for several CSS attributes on the row level is limited, those rendering attributes will instead be applied to each individual cell in the row. Attributes at row level overrides those set at the column level.
+
+Finally, rendering set at the cell level will override both column and row rendering.
+
 
 === Footnotes ===
 
