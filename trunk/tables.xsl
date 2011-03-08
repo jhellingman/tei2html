@@ -70,6 +70,8 @@
     <xsl:template mode="tablecaption" match="head">
         <h4 class="tablecaption">
             <xsl:call-template name="set-lang-id-attributes"/>
+
+            <!-- TODO: improve handling of table/@rend attribute here -->
             <xsl:if test="contains(../@rend, 'align(center)')">
                 <xsl:attribute name="class">aligncenter</xsl:attribute>
             </xsl:if>
