@@ -180,22 +180,36 @@
     <!-- Top level rule to generate CSS from rend attributes -->
     <xsl:template match="/" mode="css">
 
-        <!-- We need to collect the column related rendering rules first,
+        <!-- We need to collect the column-related rendering rules first,
              so they can be overriden by later cell rendering rules -->
         <xsl:apply-templates select="TEI.2/text//column[@rend]" mode="css-column"/>
+
+        <!-- Then follow the row-related rendering rules -->
+        <xsl:apply-templates select="TEI.2/text//row[@rend]" mode="css-row"/>
 
         <xsl:apply-templates select="/TEI.2/text" mode="css"/>
     </xsl:template>
 
 
+    <!-- Special modes for column and row CSS -->
     <xsl:template match="column[@rend]" mode="css-column">
         <xsl:call-template name="generate-css-rule"/>
+    </xsl:template>
+
+    <xsl:template match="row[@rend]" mode="css-row">
+        <xsl:call-template name="generate-css-rule"/>
+    </xsl:template>
+
+
+    <!-- Exclude the column and row elements from default processing -->
+    <xsl:template match="column | row" mode="css">
+        <xsl:apply-templates mode="css"/>
     </xsl:template>
 
 
     <!-- Low priority default rule for generating the css rules from the
          rend attribute in css mode. Note how we exclude the column element here -->
-    <xsl:template match="*[@rend and name() != 'column']" mode="css" priority="-1">
+    <xsl:template match="*[@rend]" mode="css" priority="-1">
         <xsl:call-template name="generate-css-rule"/>
         <xsl:apply-templates mode="css"/>
     </xsl:template>
@@ -213,11 +227,17 @@
 
             <xsl:if test="normalize-space($css-properties) != ''">
                 <!-- Use the id of the first element with this rend attribute as a class selector -->
-                .<xsl:call-template name="generate-rend-class-name"/>
-                {
+                <xsl:text>
+.</xsl:text>
+                <xsl:call-template name="generate-rend-class-name"/>
+                <xsl:text>
+{
+</xsl:text>
                     <xsl:value-of select="normalize-space($css-properties)"/>
                     <xsl:if test="false()">/* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */</xsl:if>
-                }
+                <xsl:text>
+}
+</xsl:text>
             </xsl:if>
         </xsl:if>
     </xsl:template>
