@@ -12,7 +12,7 @@ More details on the [http://code.google.com/p/epub-revision/ epub-revision proje
 
 Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Specific for ePub3 are:
 
-  * Spine replacement with navigation files
+  * NCX replacement for [http://idpf.org/epub/30/spec/epub30-contentdocs.html#sec-xhtml-nav EPUB Navigation Documents]
   * Page-lists
   * Improved meta-data.
     * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transistion].
