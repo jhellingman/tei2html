@@ -71,8 +71,13 @@ Since HTML support for several CSS attributes on the row level is limited, those
 
 Finally, rendering set at the cell level will override both column and row rendering.
 
-|| *TEI Element || *HTML Output || *Notes* ||
-|| `table`      || `<div 
+|| *TEI Element*|| *HTML Output || *Notes* ||
+|| `table`      || `<div class="table">` || Wrapper div ||
+||              || `<table>`             || Actual table, `@rend` applied on this ||
+|| `table/head` || `<h4 class="tablecaption">` || Header, inside wrapper div, outside table ||
+|| `row`        || `<tr>` || ||
+|| `cell/@role='label' || `<td>` || Even though this is a header, still a `<td>`. ||
+|| `cell`       || `<td>` || ||
 
 
 === Footnotes ===
