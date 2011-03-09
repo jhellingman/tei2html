@@ -15,3 +15,4 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
   * Spine replacement with navigation files
   * Page-lists
   * Improved meta-data.
+    * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transistion].
