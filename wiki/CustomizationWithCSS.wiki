@@ -67,9 +67,12 @@ Rendering on the whole table is handled the normal way.
 
 Rendering on the column level is attached to (non-TEI) `<column>` elements, and is applied before rows or individual cells are considered.
 
-Since HTML support for several CSS attributes on the row level is limited, those rendering attributes will instead be applied to each individual cell in the row. Attributes at row level overrides those set at the column level.
+Since HTML support for several CSS attributes on the row level is limited, those rendering attributes will instead be applied to each individual cell in the row. Rendering specified in an `@rend` attribute at the row level overrides those set at the column level.
 
 Finally, rendering set at the cell level will override both column and row rendering.
+
+|| *TEI Element || *HTML Output || *Notes* ||
+|| `table`      || `<div 
 
 
 === Footnotes ===
