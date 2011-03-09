@@ -10,6 +10,8 @@ More details on the [http://code.google.com/p/epub-revision/ epub-revision proje
 
 = Things to do =
 
+Also see [http://idpf.org/epub/30/spec/epub30-changes.html ePub3 changes].
+
 Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Specific for ePub3 are:
 
   * NCX replacement for [http://idpf.org/epub/30/spec/epub30-contentdocs.html#sec-xhtml-nav EPUB Navigation Documents]
