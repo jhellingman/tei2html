@@ -1,0 +1,17 @@
+#summary Overview of what will be needed for ePub 3 support
+
+= Introduction =
+
+The upcoming ePub 3 standard will be a broad overhoal of ePub, and will add a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
+
+A draft release is here: [http://idpf.org/epub/30 ePub 3.0 Draft].
+
+More details on the [http://code.google.com/p/epub-revision/ epub-revision project page].
+
+= Things to do =
+
+Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Specific for ePub3 are:
+
+  * Spine replacement with navigation files
+  * Page-lists
+  * Improved meta-data.
