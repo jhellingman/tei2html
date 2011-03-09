@@ -2,7 +2,7 @@
 
 = Introduction =
 
-The upcoming ePub 3 standard will be a broad overhoal of ePub, and will add a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
+The upcoming ePub 3 standard will be a broad overhaul of ePub, and will add a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
 
 A draft release is here: [http://idpf.org/epub/30 ePub 3.0 Draft].
 
@@ -15,4 +15,4 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
   * NCX replacement for [http://idpf.org/epub/30/spec/epub30-contentdocs.html#sec-xhtml-nav EPUB Navigation Documents]
   * Page-lists
   * Improved meta-data.
-    * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transistion].
+    * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transition].
