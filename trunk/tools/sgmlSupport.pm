@@ -1772,7 +1772,8 @@ BEGIN
     $ent{"ringsun"}     = "[ringsun]";          # symbol for ring around the sun
     $ent{"ringmoon"}    = "[ringmoon]";         # symbol for ring around the moon
 
-    $ent{"handptr"}     = chr(0x261E);      # White right pointing index 
+    $ent{"handptr"}     = chr(0x261E);			# White right pointing index 
+    $ent{"diamond"}     = chr(0x25C6);			# Black diamond
 
     # Greek additions
     $ent{"amacgr"}      =  chr(0x1FB1);     # Greek alpha with macron

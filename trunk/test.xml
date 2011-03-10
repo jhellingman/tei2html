@@ -212,13 +212,13 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <column rend="color(red) background-color(yellow)"/>
     <column rend="color(green) align(right)"/>
     <column rend="color(blue) align(right)"/>
-    <row>
-        <cell role="label">Name</cell>
-        <cell role="label" rend="align(right)">Age</cell>
+    <row role="label">
+        <cell>Name</cell>
+        <cell rend="align(right)">Age</cell>
     </row>
-    <row>
+    <row role="unit">
         <cell></cell>
-        <cell role="unit" rend="align(right)">Years</cell>
+        <cell rend="align(right)">Years</cell>
     </row>
     <row>
         <cell>Jeroen</cell>
@@ -243,12 +243,12 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </p>
 
 <p>
-<table rend="width(40%)">
-    <column rend="align(left) width(40%)"/>
-    <column rend="align(right)"/>
-    <column rend="align(right)"/>
-    <column rend="align(right)"/>
-    <row role="label">
+<table rend="width(40%) border-collapse(collapse)">
+    <column rend="align(left) width(40%) padding(4px)"/>
+    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <row role="label" rend="border-top(2px solid black)">
         <cell>Name</cell>
         <cell>Length</cell>
         <cell>Weight</cell>
@@ -258,28 +258,37 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
         <cell></cell>
         <cell>Meters</cell>
         <cell>Kilograms</cell>
+        <cell> </cell>
     </row>
-    <row>
+    <row rend="border-top(1px solid black)">
         <cell>Jeroen</cell>
         <cell>1.80</cell>
         <cell>86</cell>
+        <cell></cell>
     </row>
     <row>
         <cell>Rodelyn</cell>
-        <cell cols="2">&mdash;</cell>
+        <cell>&mdash;</cell>
+        <cell>&mdash;</cell>
         <cell>No Info.</cell>
     </row>
     <row>
         <cell>Joshua</cell>
         <cell>1.20</cell>
+        <cell></cell>
+        <cell></cell>
     </row>
     <row>
         <cell>Raphael</cell>
         <cell>1.00</cell>
+        <cell></cell>
+        <cell></cell>
     </row>
-    <row>
+    <row rend="border-bottom(2px solid black)">
         <cell><hi>Total</hi></cell>
         <cell role="sum">4.00</cell>
+        <cell></cell>
+        <cell></cell>
     </row>
 </table>
 </p>

@@ -19,7 +19,7 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2011-01-30</dc:date>
+      <dc:date opf:event="generation">2011-03-10</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
    </metadata>
@@ -46,7 +46,7 @@
       <item id="tarsier1" href="images/tarsier.jpg" media-type="image/jpeg"/>
       <item id="xd23e211" href="images/Ornament.gif" media-type="image/gif"/>
       <item id="xd23e286" href="images/bracket3.gif" media-type="image/gif"/>
-      <item id="xd23e695" href="images/initial-A.gif" media-type="image/gif"/>
+      <item id="xd23e706" href="images/initial-A.gif" media-type="image/gif"/>
       <item id="test1wrapper" href="test-test1.xhtml" media-type="application/xhtml+xml"/>
    </manifest>
    <spine toc="ncx">
@@ -71,6 +71,6 @@
       <reference type="title-page" title="Title Page" href="test-front-2.xhtml#xd23e93"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk01-1.xhtml#bk01"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd23e921"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd23e932"/>
    </guide>
 </package>
