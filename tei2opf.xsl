@@ -299,8 +299,8 @@
     </xsl:template>
 
 
-    <!-- We remove duplicated resources from the list (included because the ePub uses
-         them more than one time). -->
+    <!-- Remove duplicated resources from the list (included because the ePub uses
+         them more than once). -->
     <xsl:template match="opf:item" mode="undouble">
         <xsl:variable name="href" select="@href"/>
         <xsl:if test="not(preceding-sibling::opf:item[@href = $href])">

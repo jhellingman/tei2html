@@ -385,6 +385,21 @@ p.footnote .label
 
 /****** Tables ******/
 
+td, th
+{
+    vertical-align: top;
+}
+
+td.label, tr.label td
+{
+    font-weight: bold;
+}
+
+td.unit, tr.unit td
+{
+    font-style: italic;
+}
+
 td.sum
 {
     padding-top: 2px; border-top: solid black 1px;
@@ -665,7 +680,7 @@ p
     text-indent: 1em;
 }
 
-p.firstpar, p.tocChapter
+p.first, p.tocChapter
 {
     text-indent: 0em;
 }
@@ -788,274 +803,251 @@ body
 
 
 
-                
-                .xd23e315
-                {
-                    color:red; background-color:yellow;
-                }
-            
-                
-                .xd23e316
-                {
-                    color:green; text-align:right;
-                }
-            
-                
-                .xd23e317
-                {
-                    color:blue; text-align:right;
-                }
-            
-                
-                .xd23e353
-                {
-                    text-align:left;width:40%;
-                }
-            
-                
-                .xd23e354
-                {
-                    text-align:right;
-                }
-            
-                
-                .xd23e97
-                {
-                    font-style:italic;
-                }
-            
-                
-                .xd23e107
-                {
-                    background-color:yellow;
-                }
-            
-                
-                .xd23e145
-                {
-                    font-family:'Walbaum-Fraktur';
-                }
-            
-                
-                .xd23e158
-                {
-                    font-size:14pt; color:red; background-color:yellow;
-                }
-            
-                
-                .xd23e282
-                {
-                    margin:0px auto; display:table;
-                }
-            
-                
-                .xd23e286
-                {
-                    valign:middle; width:2;
-                }
-            
-                
-                .xd23e287
-                {
-                    valign:middle;
-                }
-            
-                
-                .xd23e297
-                {
-                    margin-left:2em;
-                }
-            
-                
-                .xd23e299
-                {
-                    width:25%;
-                }
-            
-                
-                .xd23e301
-                {
-                    width:75%;
-                }
-            
-                
-                .xd23e312
-                {
-                    width:40%; margin:0px auto; display:table;
-                }
-            
-                
-                .xd23e321
-                {
-                    text-align:right;
-                }
-            
-                
-                .xd23e340
-                {
-                    text-align:center;
-                }
-            
-                
-                .xd23e345
-                {
-                    text-align:left;
-                }
-            
-                
-                .xd23e352
-                {
-                    width:40%;
-                }
-            
-            .xd23e497width
-            {
-                width:80px;
-            }
-        
-                
-                .xd23e502
-                {
-                    width:100px;
-                }
-            
-            .xd23e502width
-            {
-                width:80px;
-            }
-        
-            .xd23e510width
-            {
-                width:80px;
-            }
-        
-            .xd23e524width
-            {
-                width:480px;
-            }
-        
-            .xd23e544width
-            {
-                width:480px;
-            }
-        
-                
-                .xd23e594
-                {
-                    font-style:italic;
-                }
-            
-                
-                .xd23e625
-                {
-                    list-style-type:disc;
-                }
-            
-                
-                .xd23e655
-                {
-                    list-style-type:upper-roman;
-                }
-            
-                
-                .xd23e667
-                {
-                    list-style-type:lower-roman;
-                }
-            
-                
-                .xd23e687
-                {
-                    text-align:left;
-                }
-            
-                
-                .xd23e690
-                {
-                    text-align:right;
-                }
-            
-                
-                .xd23e692
-                {
-                    text-align:center;
-                }
-            
-            
-            .xd23e695
-            {
-                background: url(images/initial-A.gif) no-repeat top left;
-                
-                    padding-top: 45px;
-                
-            }
+.xd23e315
+{
+color:red; background-color:yellow;
+}
 
-            .xd23e695init
-            {
-                float: left;
-                width: 90px;
-                height: 95px;
-                background: url(images/initial-A.gif) no-repeat;
-                
-                    background-position: 0px -45px;
-                
-                text-align: right;
-                color: white;
-                font-size: 1px;
-            }
+.xd23e316
+{
+color:green; text-align:right;
+}
+
+.xd23e317
+{
+color:blue; text-align:right;
+}
+
+.xd23e353
+{
+text-align:left;width:40%; padding:4px;
+}
+
+.xd23e354
+{
+text-align:right;border-left:1px solid black; padding:4px;
+}
+
+.xd23e357
+{
+border-top:2px solid black;
+}
+
+.xd23e374
+{
+border-top:1px solid black;
+}
+
+.xd23e405
+{
+border-bottom:2px solid black;
+}
+
+.xd23e97
+{
+font-style:italic;
+}
+
+.xd23e107
+{
+background-color:yellow;
+}
+
+.xd23e145
+{
+font-family:'Walbaum-Fraktur';
+}
+
+.xd23e158
+{
+font-size:14pt; color:red; background-color:yellow;
+}
+
+.xd23e282
+{
+margin:0px auto; display:table;
+}
+
+.xd23e286
+{
+valign:middle; width:2;
+}
+
+.xd23e287
+{
+valign:middle;
+}
+
+.xd23e297
+{
+margin-left:2em;
+}
+
+.xd23e299
+{
+width:25%;
+}
+
+.xd23e301
+{
+width:75%;
+}
+
+.xd23e312
+{
+width:40%; margin:0px auto; display:table;
+}
+
+.xd23e321
+{
+text-align:right;
+}
+
+.xd23e340
+{
+text-align:center;
+}
+
+.xd23e345
+{
+text-align:left;
+}
+
+.xd23e352
+{
+width:40%; border-collapse:collapse;
+}
+
+.xd23e508width
+{
+    width:80px;
+}
+        
+.xd23e513
+{
+width:100px;
+}
+
+.xd23e513width
+{
+    width:80px;
+}
+        
+.xd23e521width
+{
+    width:80px;
+}
+        
+.xd23e535width
+{
+    width:480px;
+}
+        
+.xd23e555width
+{
+    width:480px;
+}
+        
+.xd23e605
+{
+font-style:italic;
+}
+
+.xd23e636
+{
+list-style-type:disc;
+}
+
+.xd23e666
+{
+list-style-type:upper-roman;
+}
+
+.xd23e678
+{
+list-style-type:lower-roman;
+}
+
+.xd23e698
+{
+text-align:left;
+}
+
+.xd23e701
+{
+text-align:right;
+}
+
+.xd23e703
+{
+text-align:center;
+}
+
+
+.xd23e706
+{
+    background: url(images/initial-A.gif) no-repeat top left;
+    
+        padding-top: 45px;
+    
+}
+
+.xd23e706init
+{
+    float: left;
+    width: 90px;
+    height: 95px;
+    background: url(images/initial-A.gif) no-repeat;
+    
+        background-position: 0px -45px;
+    
+    text-align: right;
+    color: white;
+    font-size: 1px;
+}
 
         
-                
-                .xd23e700
-                {
-                    text-align:justify;
-                }
-            
-                
-                .xd23e716
-                {
-                    text-align:center;
-                }
-            
-                
-                .xd23e725
-                {
-                    text-align:center;
-                }
-            
-                
-                .xd23e730
-                {
-                    text-indent:1em;
-                }
-            
-                
-                .xd23e736
-                {
-                    text-indent:2em;
-                }
-            
-                
-                .xd23e740
-                {
-                    text-indent:3em;
-                }
-            
-                
-                .xd23e744
-                {
-                    text-indent:10em;
-                }
-            
-                
-                .xd23e746
-                {
-                    font-style:italic;
-                }
-            
-                
-                .xd23e848
-                {
-                    display:none;
-                }
-            
+.xd23e711
+{
+text-align:justify;
+}
+
+.xd23e727
+{
+text-align:center;
+}
+
+.xd23e736
+{
+text-align:center;
+}
+
+.xd23e741
+{
+text-indent:1em;
+}
+
+.xd23e747
+{
+text-indent:2em;
+}
+
+.xd23e751
+{
+text-indent:3em;
+}
+
+.xd23e755
+{
+text-indent:10em;
+}
+
+.xd23e757
+{
+font-style:italic;
+}
+
+.xd23e859
+{
+display:none;
+}

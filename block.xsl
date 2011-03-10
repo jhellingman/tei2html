@@ -320,32 +320,32 @@
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend)))">
 
             <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
-            
-            .<xsl:call-template name="generate-rend-class-name"/>
-            {
-                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
-                <xsl:if test="contains(@rend, 'initial-offset(')">
-                    padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-                </xsl:if>
 
-                <xsl:if test="normalize-space($properties) != ''">
-                    <xsl:value-of select="normalize-space($properties)"/>
-                </xsl:if>
-            }
+.<xsl:call-template name="generate-rend-class-name"/>
+{
+    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
+    <xsl:if test="contains(@rend, 'initial-offset(')">
+        padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+    </xsl:if>
 
-            .<xsl:call-template name="generate-rend-class-name"/>init
-            {
-                float: left;
-                width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
-                height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
-                background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
-                <xsl:if test="contains(@rend, 'initial-offset(')">
-                    background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
-                </xsl:if>
-                text-align: right;
-                color: white;
-                font-size: 1px;
-            }
+    <xsl:if test="normalize-space($properties) != ''">
+        <xsl:value-of select="normalize-space($properties)"/>
+    </xsl:if>
+}
+
+.<xsl:call-template name="generate-rend-class-name"/>init
+{
+    float: left;
+    width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
+    height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
+    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
+    <xsl:if test="contains(@rend, 'initial-offset(')">
+        background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+    </xsl:if>
+    text-align: right;
+    color: white;
+    font-size: 1px;
+}
 
         </xsl:if>
         <xsl:apply-templates mode="css"/>
@@ -406,31 +406,31 @@
 
         <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
-        .<xsl:call-template name="generate-rend-class-name"/>
-        {
-            text-indent: 0;
+.<xsl:call-template name="generate-rend-class-name"/>
+{
+    text-indent: 0;
 
-            <xsl:if test="normalize-space($properties) != ''">
-                <xsl:value-of select="normalize-space($properties)"/>
-            </xsl:if>
-        }
+    <xsl:if test="normalize-space($properties) != ''">
+        <xsl:value-of select="normalize-space($properties)"/>
+    </xsl:if>
+}
 
-        .<xsl:call-template name="generate-rend-class-name"/>dropcap
-        {
-            float: left;
-            <xsl:if test="contains(@rend, 'dropcap-offset(')">
-                padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap-offset('), ')')"/>;
-            </xsl:if>
-            font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap('), ')')"/>;
-            margin-left: 0;
-            margin-bottom: 5px;
-            margin-right: 3px;
-        }
+.<xsl:call-template name="generate-rend-class-name"/>dropcap
+{
+    float: left;
+    <xsl:if test="contains(@rend, 'dropcap-offset(')">
+        padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap-offset('), ')')"/>;
+    </xsl:if>
+    font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap('), ')')"/>;
+    margin-left: 0;
+    margin-bottom: 5px;
+    margin-right: 3px;
+}
 
-        .<xsl:call-template name="generate-rend-class-name"/>afterdropcap
-        {
-            /* empty */
-        }
+.<xsl:call-template name="generate-rend-class-name"/>afterdropcap
+{
+    /* empty */
+}
 
     </xsl:template>
 

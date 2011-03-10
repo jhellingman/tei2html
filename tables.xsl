@@ -59,14 +59,27 @@
                     </xsl:attribute>
                 </xsl:if>
 
-                <xsl:apply-templates/>
+                <xsl:choose>
+                    <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML -->
+                    <xsl:when test="row[1][@role='label' or @role='unit']">
+                        <thead>
+                            <xsl:apply-templates select="*[not(preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')])]"/>
+                        </thead>
+                        <tbody>
+                            <xsl:apply-templates select="*[preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')]]"/>
+                        </tbody>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </table>
         </div>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
 
-    <!-- HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
+    <!-- The HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
     <xsl:template mode="tablecaption" match="head">
         <h4 class="tablecaption">
             <xsl:call-template name="set-lang-id-attributes"/>
