@@ -4,9 +4,9 @@
 
 The upcoming ePub 3 standard will be a broad overhaul of ePub, and will add a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
 
-A draft release is here: [http://idpf.org/epub/30 ePub 3.0 Draft].
-
-More details on the [http://code.google.com/p/epub-revision/ epub-revision project page].
+  * A draft release is here: [http://idpf.org/epub/30 ePub 3.0 Draft].
+  * More details on the [http://code.google.com/p/epub-revision/ epub-revision project page].
+  * An extensive [http://sigildev.blogspot.com/ blog post here].
 
 = Things to do =
 
