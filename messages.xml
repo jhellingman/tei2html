@@ -8,6 +8,7 @@
     <!ENTITY lsquo    "&#x2018;">
     <!ENTITY mdash    "&#x2014;">
     <!ENTITY tm       "&#x2122;">
+    <!ENTITY gtilde   "g&#x303;">
 
 ]>
 <?xml-stylesheet type="text/xsl" href="review-translations.xsl"?>
@@ -840,7 +841,8 @@
 
     <msg:messages xml:lang="tl">
         <msg:message name="msgContents">Nilalaman</msg:message>
-        <msg:message name="msgToc">Talaan ng Nilalaman</msg:message>
+        <msg:message name="msgToc">Nilalaman</msg:message>
+        <msg:message name="msgTableOfContents">Talaan ng Nilalaman</msg:message>
         <msg:message name="msgPage">Pahina</msg:message>
         <msg:message name="msgSource">Orihinal</msg:message>
         <msg:message name="msgCorrection">Pagwawasto</msg:message>
@@ -857,8 +859,39 @@
         <msg:message name="msgExternalReferencesDisclaimer">Ang elektronikong aklat na ito ng Proyektong Gutenberg ay may mga reperensiyang hindi nakapaloob. Ang mga link para sa mga ito ay maaaring hindi gumana.</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Ang mga sumusunod ay ang mga pagwawastong ginawa sa teksto:</msg:message>
         <msg:message name="msgCorrectionsOverview">Buod ng mga pagwawastong ginawa sa teksto.</msg:message>
+
+        <msg:message name="msgDeleted">Tinanggal</msg:message>
+        <msg:message name="msgTitlePage">Pahina ng Pamagat</msg:message>
+        <msg:message name="msgPreface">Paunang Salita</msg:message>
+        <msg:message name="msgText">Teksto</msg:message>
     </msg:messages>
 
+    <!-- Tagalog (accented, as used in the 1920's) translation -->
+    <msg:messages xml:lang="tl-1920">
+        <msg:message name="msgContents">Nilálamán</msg:message>
+        <msg:message name="msgToc">Nilálamán</msg:message>
+        <msg:message name="msgTableOfContents">Talaán n&gtilde; Nilálamán</msg:message>
+        <msg:message name="msgPage">Páhina</msg:message>
+        <msg:message name="msgSource">Orihinál</msg:message>
+        <msg:message name="msgCorrection">Pagwawastô</msg:message>
+        <msg:message name="msgOriginal">Orihinal</msg:message>
+        <msg:message name="msgCorrection.n">M&gtilde;a Pagwawastô</msg:message>
+        <msg:message name="msgNotInSource">Walâ sa orihinál</msg:message>
+        <msg:message name="msgColophon">Kolopon</msg:message>
+        <msg:message name="msgAvailability">M&gtilde;a Maaaring Gamit</msg:message>
+        <msg:message name="msgTableOfContents">Talaan ng Nilalaman</msg:message>
+        <msg:message name="msgExternalLink">Panlabás na link</msg:message>
+        <msg:message name="msgEncoding">Pagkaka-enkowd</msg:message>
+        <msg:message name="msgRevisionHistory">Tala ng mga Ginawang Pagbabago</msg:message>
+        <msg:message name="msgExternalReferences">M&gtilde;a Di-Nakapaloób na Reperénsiya</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Ang elektrónikong aklát na itó n&gtilde; Proyektong Gutenberg ay may m&gtilde;a reperénsiyang hindî nakapaloób. Ang m&gtilde;a link para sa m&gtilde;a itó ay maaaring hindî gumana.</msg:message>
+        <msg:message name="msgCorrectionsAppliedToText">Ang m&gtilde;a sumúsunód ay ang m&gtilde;a pagwawastóng ginawâ sa teksto:</msg:message>
+        <msg:message name="msgCorrectionsOverview">Buód ng m&gtilde;a pagwawastóng ginawâ sa teksto.</msg:message>
+        <msg:message name="msgDeleted">Tinanggál</msg:message>
+        <msg:message name="msgTitlePage">Páhina ng Pamagát</msg:message>
+        <msg:message name="msgPreface">Páunáng Salitâ</msg:message>
+        <msg:message name="msgText">Teksto</msg:message>
+    </msg:messages>
 
     <!--==#############################################################==-->
     <!-- Spanish translation -->

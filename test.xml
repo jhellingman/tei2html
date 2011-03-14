@@ -458,14 +458,14 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </list>
 
 
-<list rend="columns(2)" type="ordered">
+<list rend="columns(2)" type="ordered" lang="nl">
     <item>Een</item>
     <item>Twee</item>
     <item>Drie</item>
     <item>Vier</item>
 </list>
 
-<list rend="columns(2) list-style-type(upper-roman)" type="ordered">
+<list rend="columns(2) list-style-type(upper-roman)" type="ordered" lang="nl">
     <item n="5">Vijf</item>
     <item>Zes</item>
     <item n="7">Zeven</item>
@@ -474,7 +474,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <p>A list with lower case roman numerals:</p>
 
-<list rend="list-style-type(lower-roman)" type="ordered">
+<list rend="list-style-type(lower-roman)" type="ordered" lang="nl">
     <item>Een</item>
     <item>Twee</item>
     <item n="48">Drie</item>
@@ -483,7 +483,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <p>A list without bullets or numbers:</p>
 
-<list type="simple">
+<list type="simple" lang="nl">
     <item>Een</item>
     <item>Twee</item>
     <item>Drie</item>
@@ -608,7 +608,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 
 </div1>
-<div1 id="alignSecond" rend="display(none)">
+<div1 id="alignSecond" rend="display(none)" lang="nl">
 <head>Test van het naast elkaar afdrukken van tekst</head>
 
 <p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
@@ -654,7 +654,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </div0>
 </body>
 <back id="back">
-<div1 id="index" type="Index">
+<div1 id="index" type="Index" lang="nl">
 <head>Index</head>
 
 <divGen type="IndexToc"/>
