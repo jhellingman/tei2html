@@ -177,8 +177,6 @@
 
             <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
 
-
-
         </xsl:result-document>
     </xsl:template>
 
