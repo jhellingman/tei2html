@@ -21,11 +21,12 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
 
 == Metadata ==
 
-New metadata uses the `<meta>` tag (samples taken from draft ePub 3.0 specification):
+New metadata uses the `<meta>` tag (samples taken from draft ePub 3.0 specification).
+
+`<meta>` elements with the `@about` attribute give further information on the metadata.
 
 {{{
 <metadata>
-    ...
     <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</meta>
     <meta about="#pub-id" property="scheme">uuid</meta>
     
