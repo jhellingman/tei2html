@@ -18,3 +18,14 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
   * Page-lists
   * Improved meta-data.
     * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transition].
+
+== Metadata ==
+
+Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer` attribute.
+
+{{{
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="pub-id" prefer="uuid">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</dc:identifier>
+    <meta property="dcterms:identifier" id="uuid">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</meta>
+</metadata>
+}}}
