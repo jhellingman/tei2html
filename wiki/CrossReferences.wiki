@@ -26,12 +26,12 @@ External cross-references are to be encoded using the `<xref>` element, with the
 
 _Project Gutenberg text_: Use `pg:<`_ebook number_`>` as url.
 
-_WorldCat catalog page_: Use `oclc:<`_number_`>` as url.
+_!WorldCat catalog page_: Use `oclc:<`_number_`>` as url.
 
 _Open Library catalog page_: Use `oln:<`_number_`>` as url.
 
-_WikiPedia article_: Use `wp:<`_title_`>` as url.
+_!WikiPedia article_: Use `wp:<`_title_`>` as url.
 
 _Bible citation_: Use `bib:<`_book chapter:verse_`>` as url.
 
-This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway]in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible].
+This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway] in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible].
