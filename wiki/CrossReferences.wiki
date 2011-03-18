@@ -1,0 +1,37 @@
+#summary How to encode cross-references.
+
+= Internal Cross References =
+
+Internal cross-references are to be encoded using the `<ref>` element, with the `@target` attribute carrying the id of the target element referenced to.
+
+== Special types of references ==
+
+_Footnotes_: Sometimes footnotes markers appear multiple times on a page, each referring to the same note. When these are encoded as follows:
+
+`<ref target="n123.1" type="noteref">1</note>`
+
+They will be rendered as a superscript number with the actual number replacing the content.
+
+_Page numbers_: When a reference is made to a pagenumber, you can encode these as follows:
+
+`See page <ref target="pb123" type="pageref">123</note> for details.`
+
+When this is rendered on page media, the content will be replaced with the actual page number of the page the reference appears on.
+
+= External Cross References =
+
+External cross-references are to be encoded using the `<xref>` element, with the `@url` attribute carrying the url of the resource referenced.
+
+== Shorthand notations ==
+
+_Project Gutenberg text_: Use `pg:<`_ebook number_`>` as url.
+
+_WorldCat catalog page_: Use `oclc:<`_number_`>` as url.
+
+_Open Library catalog page_: Use `oln:<`_number_`>` as url.
+
+_WikiPedia article_: Use `wp:<`_title_`>` as url.
+
+_Bible citation_: Use `bib:<`_book chapter:verse_`>` as url.
+
+This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway]in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible].
