@@ -79,7 +79,13 @@ Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-
 
 == Manifest ==
 
-The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values manifest item properties], to specify specific roles of the items listed.
+The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values manifest item properties], to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g. mathml, scripted, remove-content, svg).
+
+{{{
+<item properties="nav" id="toc" href="contents.xhtml" media-type="application/xhtml+xml" />
+...
+<item properties="cover-image" id="cover" href="cover.svg" media-type="image/svg+xml" />
+}}}
 
 = Navigation Document =
 
