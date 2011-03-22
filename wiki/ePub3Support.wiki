@@ -8,7 +8,7 @@ The upcoming ePub 3 standard will be a broad overhaul of ePub, and will add a lo
   * More details on the [http://code.google.com/p/epub-revision/ epub-revision project page].
   * An extensive [http://sigildev.blogspot.com/ blog post here].
 
-= Things to do =
+== Things to do ==
 
 Also see [http://idpf.org/epub/30/spec/epub30-changes.html ePub3 changes].
 
@@ -18,6 +18,8 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
   * Page-lists now part of standard.
   * Improved meta-data in `.odf` file.
     * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transition].
+
+= Changes to the .ODF file =
 
 == Metadata ==
 
@@ -75,6 +77,10 @@ Note that the identifier indicated by the `@unique-identifier` attribute on the 
 
 Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-01T12:00:00Z`.
 
-== Navigation Document ==
+== Manifest ==
+
+The manifest has a number of additional attributes, to specify specific roles of the items listed.
+
+= Navigation Document =
 
 The navigation document is now a valid `XHTML` page, wrapped in the `<nav>` element.
