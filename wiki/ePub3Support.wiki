@@ -79,7 +79,7 @@ Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-
 
 == Manifest ==
 
-The manifest has a number of additional attributes, to specify specific roles of the items listed.
+The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values manifest item properties], to specify specific roles of the items listed.
 
 = Navigation Document =
 
