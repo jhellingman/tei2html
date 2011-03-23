@@ -157,4 +157,9 @@
     <xsl:template match="teiHeader"/>
 
 
+    <!-- Suppress PGTei extensions -->
+    <xsl:template match="pgExtensions">
+        <xsl:message terminate="no">Warning: This stylesheet does not support the Project Gutenberg PGTEI extensions.</xsl:message>
+    </xsl:template>
+
 </xsl:stylesheet>
