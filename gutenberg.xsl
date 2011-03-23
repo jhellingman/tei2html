@@ -17,7 +17,7 @@
 ]>
 <!--
 
-    Stylesheet to format block level elements, to be imported in tei2html.xsl.
+    Stylesheet to format Project Gutenberg related materials, to be imported in tei2html.xsl.
 
     Requires: 
         localization.xsl    : templates for localizing strings.

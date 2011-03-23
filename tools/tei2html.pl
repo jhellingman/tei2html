@@ -94,18 +94,18 @@ sub processFile($)
 {
     my $filename = shift;
 
-    if ($filename eq "" || $filename !~ /\.tei$/)
+    if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/))
     {
         die "File: '$filename' is not a .TEI file\n";
     }
 
-    $filename =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/;
+    $filename =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
     my $basename    = $1;
     my $version     = $3;
 
     print "Processing TEI-file '$basename' version $version\n";
 
-	if ($makeXML) 
+	if ($makeXML && $filename =~ /\.tei$/) 
 	{
 	    sgml2xml($filename, $basename . ".xml");
 	}
