@@ -140,6 +140,11 @@
                         <xsl:copy-of select="document(normalize-space($customCssFile), .)/*/node()"/>
                     </xsl:if>
 
+                    <xsl:if test="//pgStyleSheet">
+                        <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim -->
+                        <xsl:value-of select="string(//pgStyleSheet)"/>
+                    </xsl:if>
+
                     <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
                     <xsl:apply-templates select="/" mode="css"/>
                 </style>

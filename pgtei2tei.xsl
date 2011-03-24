@@ -99,6 +99,18 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Rename the relevant idno for Project Gutenberg.</xd:short>
+        <xd:detail> </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="idno[@type='etext-no']">
+        <idno type='PGnum'>
+            <xsl:apply-templates/>
+        </idno>
+    </xsl:template>
+
+
     <!-- Cleanup DTD artifacts -->
     <xsl:template match="@TEIform"/>
 
