@@ -71,7 +71,7 @@
 
     <xd:doc>
         <xd:short>Join the pb element with the following anchor element, taking the id of the latter.</xd:short>
-        <xd:detail> </xd:detail>
+        <xd:detail>This also strips leading zeros from page numbers.</xd:detail>
     </xd:doc>
 
     <xsl:template match="pb[following-sibling::*[1]/self::anchor]">
@@ -79,7 +79,10 @@
             <xsl:attribute name="id">
                 <xsl:value-of select="following-sibling::*[1]/self::anchor/@id"/>
             </xsl:attribute>
-            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="n">
+                <xsl:value-of select="replace(@n, '0*(.+)', '$1')"/>
+            </xsl:attribute>
+            <xsl:apply-templates select="@*[name() != 'id' and name() != 'n']"/>
         </pb>
     </xsl:template>
 
@@ -93,9 +96,35 @@
 
     <xsl:template match="q">
         <xsl:variable name="n" select="count(ancestor::q) mod 2 + 1"/>
-        <xsl:value-of select="substring('&ldquo;&lsquo;', $n, 1)"/>
+
+        <xsl:if test="not(@rend) or @rend = 'pre' or @rend = 'post: none'">
+            <xsl:value-of select="substring('&ldquo;&lsquo;', $n, 1)"/>
+        </xsl:if>
         <xsl:apply-templates/>
-        <xsl:value-of select="substring('&rdquo;&rsquo;', $n, 1)"/>
+        <xsl:if test="not(@rend) or @rend = 'post' or @rend = 'pre: none'">
+            <xsl:value-of select="substring('&rdquo;&rsquo;', $n, 1)"/>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="quote[@rend='display'] | q[@rend='display']">
+        <q rend='block'>
+            <xsl:apply-templates/>
+        </q>
+    </xsl:template>
+
+
+    <xsl:template match="pgIf">
+        <xsl:choose>
+            <xsl:when test="@has='footnotes' and not(//note[@place='foot'])"/>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="then">
+        <xsl:apply-templates/>
     </xsl:template>
 
 

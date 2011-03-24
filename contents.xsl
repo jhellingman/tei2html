@@ -131,7 +131,7 @@
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
-                <xsl:if test="div2 and $maxlevel &gt;= 2 and @type != 'Index'">
+                <xsl:if test="div2 and $maxlevel &gt;= 2 and (not(@type) or @type != 'Index')">
                     <ul>
                         <xsl:apply-templates select="div2" mode="gentoc">
                             <xsl:with-param name="maxlevel" select="$maxlevel"/>
