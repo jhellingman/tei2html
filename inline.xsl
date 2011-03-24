@@ -35,6 +35,10 @@
     <!--====================================================================-->
     <!-- Text styles -->
 
+    <xsl:template match="emph">
+        <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
+    </xsl:template>
+
 
     <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
     <xsl:template match="hi[@rend='it' or @rend='italic']">
@@ -111,6 +115,15 @@
     <!-- Foreign phrases are not styled by default, but we do set the language on them -->
     <xsl:template match="foreign">
         <span><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+    </xsl:template>
+
+
+    <!--====================================================================-->
+    <!-- Anchors -->
+
+
+    <xsl:template match="anchor">
+        <a><xsl:call-template name="generate-id-attribute"/><xsl:apply-templates/></a>
     </xsl:template>
 
 

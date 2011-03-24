@@ -30,7 +30,7 @@ my $makeHTML            = 0;
 my $makePDF             = 0;
 my $makeEPUB            = 0;
 my $makeReport          = 0;
-my $makeXML				= 0;
+my $makeXML             = 0;
 my $customStylesheet    = "custom.css.xml";
 
 GetOptions (
@@ -105,10 +105,10 @@ sub processFile($)
 
     print "Processing TEI-file '$basename' version $version\n";
 
-	if ($makeXML && $filename =~ /\.tei$/) 
-	{
-	    sgml2xml($filename, $basename . ".xml");
-	}
+    if ($makeXML && $filename =~ /\.tei$/) 
+    {
+        sgml2xml($filename, $basename . ".xml");
+    }
 
     # convert from TEI P4 to TEI P5  (experimental)
     # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
