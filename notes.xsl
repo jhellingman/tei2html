@@ -43,7 +43,7 @@
             <xsl:call-template name="footnote-number"/>
         </a>
         <!-- No explicit request for footnote division -->
-        <xsl:if test="not(//divGen[@type='Footnotes'])">
+        <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes'])">
             <xsl:if test="$optionPrinceMarkup = 'Yes'">
                 <span class="displayfootnote">
                     <xsl:call-template name="set-lang-id-attributes"/>
@@ -61,7 +61,7 @@
         <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
         
         <!-- No explicit request for a notes division -->
-        <xsl:if test="not(//divGen[@type='Footnotes'])">
+        <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes'])">
             <!-- Division is not part of quoted text -->
             <xsl:if test="$div[not(ancestor::q)]">
                 <!-- We actually do have notes -->

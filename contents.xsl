@@ -40,7 +40,7 @@
 
 
     <xsl:template match="divGen">
-        <xsl:message terminate="no">Warning: divGen element without or with unknown type attribute.</xsl:message>
+        <xsl:message terminate="no">Warning: divGen element without or with unknown type attribute: <xsl:value-of select="@type"/>.</xsl:message>
     </xsl:template>
 
 
@@ -644,7 +644,7 @@
 
 
     <!-- collect footnotes in a separate section, sorted by div1 -->
-    <xsl:template match="divGen[@type='Footnotes']">
+    <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
         <div class="div1 notes">
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strNotes"/></h2>
