@@ -54,46 +54,62 @@
         </xsl:for-each>
     </xsl:template>
 
+
+    <xsl:template match="divGen[@type='pgheader']">
+        <xsl:call-template name="PGHeader"/>
+    </xsl:template>
+
+
     <xsl:template name="PGHeader">
-        <xsl:variable name="params">
-            <params>
-                <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                <param name="authors"><xsl:call-template name="authors"/></param>
-                <param name="releasedate"><xsl:value-of select="//publicationStmt/date"/></param>
-                <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
-                <param name="language">
-                    <xsl:call-template name="GetMessage">
-                        <xsl:with-param name="name" select="/TEI.2/@lang"/>
-                    </xsl:call-template>
-                </param>
-            </params>
-        </xsl:variable>
-        <xsl:call-template name="FormatMessage">
-            <xsl:with-param name="name" select="'msgPGHeader'"/>
-            <xsl:with-param name="params" select="$params"/>
-        </xsl:call-template>
-        <hr/>
+        <div class="transcribernote">
+            <xsl:variable name="params">
+                <params>
+                    <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
+                    <param name="authors"><xsl:call-template name="authors"/></param>
+                    <param name="releasedate"><xsl:value-of select="//publicationStmt/date"/></param>
+                    <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
+                    <param name="language">
+                        <xsl:call-template name="GetMessage">
+                            <xsl:with-param name="name" select="/TEI.2/@lang"/>
+                        </xsl:call-template>
+                    </param>
+                </params>
+            </xsl:variable>
+            <xsl:call-template name="FormatMessage">
+                <xsl:with-param name="name" select="'msgPGHeader'"/>
+                <xsl:with-param name="params" select="$params"/>
+            </xsl:call-template>
+        </div>
         <p/>
     </xsl:template>
 
-    <xsl:template name="PGFooter">
-        <xsl:variable name="params">
-            <params>
-                <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                <param name="authors"><xsl:call-template name="authors"/></param>
-                <param name="transcriber"><xsl:value-of select="//titleStmt/respStmt/name"/></param>
-                <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
-                <param name="pgpath"><xsl:value-of select="substring(//publicationStmt/idno, 1, 1)"/>/<xsl:value-of select="substring(//publicationStmt/idno, 2, 1)"/>/<xsl:value-of select="substring(//publicationStmt/idno, 3, 1)"/>/<xsl:value-of select="substring(//publicationStmt/idno, 4, 1)"/>/<xsl:value-of select="//publicationStmt/idno"/>/</param>
-            </params>
-        </xsl:variable>
-        <p/>
-        <hr/>
-        <xsl:call-template name="FormatMessage">
-            <xsl:with-param name="name" select="'msgPGFooter'"/>
-            <xsl:with-param name="params" select="$params"/>
-        </xsl:call-template>
-        <xsl:call-template name="PGLicense"/>
+
+    <xsl:template match="divGen[@type='pgfooter']">
+        <xsl:call-template name="PGFooter"/>
     </xsl:template>
+
+
+    <xsl:template name="PGFooter">
+        <div class="transcribernote">
+            <xsl:variable name="idno" select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/>
+            <xsl:variable name="params">
+                <params>
+                    <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
+                    <param name="authors"><xsl:call-template name="authors"/></param>
+                    <param name="transcriber"><xsl:value-of select="//titleStmt/respStmt[resp='Transcription']/name"/></param>
+                    <param name="pgnum"><xsl:value-of select="$idno"/></param>
+                    <param name="pgpath"><xsl:value-of select="substring($idno, 1, 1)"/>/<xsl:value-of select="substring($idno, 2, 1)"/>/<xsl:value-of select="substring($idno, 3, 1)"/>/<xsl:value-of select="substring($idno, 4, 1)"/>/<xsl:value-of select="$idno"/>/</param>
+                </params>
+            </xsl:variable>
+            <p/>
+            <xsl:call-template name="FormatMessage">
+                <xsl:with-param name="name" select="'msgPGFooter'"/>
+                <xsl:with-param name="params" select="$params"/>
+            </xsl:call-template>
+            <xsl:call-template name="PGLicense"/>
+        </div>
+    </xsl:template>
+
 
     <xsl:template name="PGLicense">
         <xsl:call-template name="FormatMessage">
