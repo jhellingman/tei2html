@@ -213,6 +213,12 @@ p.argument, p.tocArgument
     margin:1.58em 10%;
 }
 
+p.tocPart
+{
+    margin:1.58em 0%;
+    font-variant: small-caps;
+}
+
 p.tocChapter
 {
     margin:1.58em 0%;
