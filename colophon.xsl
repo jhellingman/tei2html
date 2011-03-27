@@ -57,13 +57,17 @@
                 </p>
             </xsl:if>
 
-            <h3 class="main"><xsl:value-of select="$strEncoding"/></h3>
-            <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
+            <xsl:if test="/TEI.2/teiHeader/encodingDesc">
+                <h3 class="main"><xsl:value-of select="$strEncoding"/></h3>
+                <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
+            </xsl:if>
 
             <h3 class="main"><xsl:value-of select="$strRevisionHistory"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
-            <xsl:call-template name="externalReferences"/>
+            <xsl:if test="//xref">
+                <xsl:call-template name="externalReferences"/>
+            </xsl:if>
 
             <xsl:if test="//corr">
                 <h3 class="main"><xsl:value-of select="$strCorrections"/></h3>
