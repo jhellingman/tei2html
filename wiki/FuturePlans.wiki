@@ -78,6 +78,7 @@ Things that can also be handled via CSS:
   * Default table alignment (Left/Right/Center)
   * Default verse alignment (Left/Right/Center)
 
+More ideas: https://github.com/jgsmith/radiant-tei-tools/blob/57180651fe1c10ce4e3f2561c76409cc2ff8a692/README.markdown
 
 == Support for print output ==
 
