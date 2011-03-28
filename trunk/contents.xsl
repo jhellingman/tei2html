@@ -51,36 +51,47 @@
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:variable name="maxlevel">
-                <xsl:choose>
-                    <xsl:when test="contains(@rend, 'tocMaxLevel(')">
-                        <xsl:value-of select="substring-before(substring-after(@rend, 'tocMaxLevel('), ')')"/>
-                    </xsl:when>
-                    <xsl:otherwise>7</xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
             <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
-            <ul>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
-                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                </xsl:apply-templates>
-                <xsl:choose>
-                    <xsl:when test="/TEI.2/text/body/div0">
-                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
-                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                </xsl:apply-templates>
-            </ul>
+            <xsl:call-template name="toc-body"/>
         </div>
+    </xsl:template>
+
+
+    <xsl:template match="divGen[@type='tocBody']">
+        <xsl:call-template name="toc-body"/>
+    </xsl:template>
+
+
+    <xsl:template name="toc-body">
+        <xsl:variable name="maxlevel">
+            <xsl:choose>
+                <xsl:when test="contains(@rend, 'tocMaxLevel(')">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'tocMaxLevel('), ')')"/>
+                </xsl:when>
+                <xsl:otherwise>7</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <ul>
+            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
+                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+            </xsl:apply-templates>
+            <xsl:choose>
+                <xsl:when test="/TEI.2/text/body/div0">
+                    <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0">
+                        <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1">
+                        <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                    </xsl:apply-templates>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
+                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+            </xsl:apply-templates>
+        </ul>
     </xsl:template>
 
 
@@ -649,18 +660,29 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="$strNotes"/></h2>
 
-            <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
-            <xsl:choose>
-                <xsl:when test="//body/div0">
-                    <xsl:apply-templates select="//body/div0[not(ancestor::q)]" mode="divgen-footnotes"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="//body/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:apply-templates select="//back/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+            <xsl:call-template name="footnotes-body"/>
         </div>
     </xsl:template>
+
+
+    <xsl:template match="divGen[@type='footnotesBody']">
+        <xsl:call-template name="footnotes-body"/>
+    </xsl:template>
+
+
+    <xsl:template name="footnotes-body">
+        <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+        <xsl:choose>
+            <xsl:when test="//body/div0">
+                <xsl:apply-templates select="//body/div0[not(ancestor::q)]" mode="divgen-footnotes"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="//body/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:apply-templates select="//back/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
+    </xsl:template>
+
 
     <xsl:template match="div0" mode="divgen-footnotes">
         <!-- Only mention the part if it has footnotes (not in the chapters) -->

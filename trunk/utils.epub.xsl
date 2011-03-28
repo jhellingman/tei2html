@@ -61,9 +61,9 @@
         <xsl:variable name="targetfile">
             <xsl:choose>
                 <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
-                <xsl:when test="//divGen[@type='Footnotes']">
+                <xsl:when test="//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody']">
                     <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="(//divGen[@type='Footnotes'])[1]"/>
+                        <xsl:with-param name="node" select="(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])[1]"/>
                     </xsl:call-template>
                 </xsl:when>
 
