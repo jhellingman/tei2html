@@ -140,6 +140,24 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Adjust the divGen types to generate no headings.</xd:short>
+        <xd:detail> </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="divGen[@type='toc']">
+        <divGen type="tocBody">
+            <xsl:apply-templates select="@*[name() != 'type']"/>
+        </divGen>
+    </xsl:template>
+
+    <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
+        <divGen type="footnotesBody">
+            <xsl:apply-templates select="@*[name() != 'type']"/>
+        </divGen>
+    </xsl:template>
+
+
     <!-- Cleanup DTD artifacts -->
     <xsl:template match="@TEIform"/>
 
