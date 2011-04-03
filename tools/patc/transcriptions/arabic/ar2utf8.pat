@@ -1,4 +1,4 @@
-% ar2utf8.pat -- patterns to translate Yannis Haralambous' transcription of
+﻿% ar2utf8.pat -- patterns to translate Yannis Haralambous' transcription of
 % Arabic, Persian, etc. to Unicode in UTF8 format.
 
 @patterns 0
@@ -96,6 +96,7 @@
 "0n"		p "ن"
 "'n"		p "ں"
 "h"		p "ه"		% normally typed as -h except when initial
+"x"		p "ہ"		% Urdu: normal heh, instead of do-chasmi heh.
 "\"h"		p "ة"
 "0\"h"		p "ة"
 "\"t"		p "ة"
