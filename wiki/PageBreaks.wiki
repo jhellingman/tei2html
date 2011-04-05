@@ -35,6 +35,22 @@ After the opening tag:
 
 Various guidelines for TEI propose different (conflicting) conventions for each option. The `tei2html` scripts all assume the first option (before the closing tag) This way, the generated tables of content, etc., refer to page-number that is current when the `<div1>` tag occurs.
 
+=== Page Images ===
+
+Not implemented yet, but it would be nice for some types of works to include images of the original pages. The syntax would be either something like
+
+{{{
+<pb n="123" folio="p123.png"/>
+}}}
+
+or 
+
+{{{
+<pb n="123" rend="link(pages/p123.png)"/>
+}}}
+
+Such page images should be in a resolution suitable for viewing on most devices (between 100 and 200 dpi in gray scale or color).
+
 == Cross-References ==
 
 As mentioned, cross-references in printed book often reference to page numbers. The easiest way to encode this is to do something like this:
