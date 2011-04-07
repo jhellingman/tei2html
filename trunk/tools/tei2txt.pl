@@ -110,8 +110,8 @@ while (<>)
     $a = "";
     while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/)
     {
-        my $tag = $1;
-        my $rend = getAttrVal("rend", $tag);
+        my $attrs = $1;
+        my $rend = getAttrVal("rend", $attrs);
         if ($rend eq "sup")
         {
             $a .= $` . $2;
@@ -130,6 +130,25 @@ while (<>)
 
     # handle cell boundaries
     $a =~ s/<cell(.*?)>/|/g;
+
+    # drop page-breaks (<pb>) as they interfere with the following processing.
+    $a =~ s/<pb\b(.*?)>//g;
+
+    # handle numbered lines of verse
+    if ($a =~ /( +)<l\b(.*?)>/)
+    {
+        my $prefix = $`;
+        my $remainder = $';
+        my $spaces = $1;
+        my $attrs = $2;
+        my $n = getAttrVal("n", $attrs);
+        if ($n)
+        {
+            my $need = length($spaces) - length($n);
+            my $need = $need < 1 ? 1 : $need;
+            $a = $prefix . $n . spaces($need) . $remainder;
+        }
+    }
 
     # remove any remaining tags
     $a =~ s/<.*?>//g;
@@ -158,7 +177,16 @@ while (<>)
 }
 
 
-
+sub spaces($)
+{
+    my $n = shift;
+    my $result = "";
+    for (my $i = 0; $i < $n; $i++) 
+    {
+        $result .= " ";
+    }
+    return $result;
+}
 
 
 
@@ -281,6 +309,8 @@ sub entities2iso88591($)
     $a =~ s/\&oubb;/ö/g;
     $a =~ s/\&oudb;/ö/g;
 
+    $a =~ s/\&osupe;/ö/g;
+    $a =~ s/\&usupe;/ü/g;
 
     $a =~ s/\&flat;/-flat/g;
     $a =~ s/\&sharp;/-sharp/g;
@@ -349,6 +379,8 @@ sub entities2iso88591($)
     $a =~ s/\&Lambda;/[Lambda]/g;   # Greek capital letter lambda
     $a =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
     $a =~ s/\&ast;/*/g; # asterix
+
+
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb);/$1/g;
     $a =~ s/\&([a-zA-Z]{2})lig;/$1/g;
