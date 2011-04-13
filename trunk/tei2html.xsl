@@ -61,6 +61,8 @@
     <xsl:param name="optionEPubMarkup" select="'No'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
+    <xsl:param name="optionIncludeImages" select="'Yes'"/>
+
 
     <!--====================================================================-->
 

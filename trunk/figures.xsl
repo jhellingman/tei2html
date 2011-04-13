@@ -1,18 +1,6 @@
 <!DOCTYPE xsl:stylesheet [
 
-    <!ENTITY tab        "&#x09;">
-    <!ENTITY lf         "&#x0A;">
-    <!ENTITY cr         "&#x0D;">
-    <!ENTITY deg        "&#176;">
-    <!ENTITY ldquo      "&#x201C;">
     <!ENTITY nbsp       "&#160;">
-    <!ENTITY mdash      "&#x2014;">
-    <!ENTITY prime      "&#x2032;">
-    <!ENTITY Prime      "&#x2033;">
-    <!ENTITY plusmn     "&#x00B1;">
-    <!ENTITY frac14     "&#x00BC;">
-    <!ENTITY frac12     "&#x00BD;">
-    <!ENTITY frac34     "&#x00BE;">
 
 ]>
 <!--
@@ -202,40 +190,20 @@
 
 
     <xsl:template match="figure[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <xsl:call-template name="insertimage">
-            <xsl:with-param name="format" select="'.png'"/>
-        </xsl:call-template>
+        <xsl:if test="$optionIncludeImages = 'Yes'">
+            <xsl:call-template name="insertimage">
+                <xsl:with-param name="format" select="'.png'"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="figure" mode="css">
-        <!-- Generate CCS class the normal way -->
-        <xsl:call-template name="generate-css-rule"/>
+        <xsl:if test="$optionIncludeImages = 'Yes'">
+            <!-- Generate CCS class the normal way -->
+            <xsl:call-template name="generate-css-rule"/>
 
-        <!-- Create a special CSS rule for setting the width of this image -->
-        <xsl:variable name="file">
-            <xsl:call-template name="getimagefilename"/>
-        </xsl:variable>
-        <xsl:variable name="width">
-            <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
-        </xsl:variable>
-
-        <xsl:if test="$width != ''">
-.x<xsl:value-of select="generate-id()"/>width
-{
-    width:<xsl:value-of select="$width"/>;
-}
-        </xsl:if>
-
-        <xsl:apply-templates mode="css"/>
-    </xsl:template>
-
-
-    <xsl:template match="figure">
-        <xsl:call-template name="closepar"/>
-        <div class="figure">
-            <xsl:call-template name="set-lang-id-attributes"/>
-
+            <!-- Create a special CSS rule for setting the width of this image -->
             <xsl:variable name="file">
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
@@ -243,26 +211,52 @@
                 <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
             </xsl:variable>
 
-            <xsl:attribute name="class">
-                <xsl:text>figure </xsl:text>
-                <xsl:if test="contains(@rend, 'float(left)')">floatLeft </xsl:if>
-                <xsl:if test="contains(@rend, 'float(right)')">floatRight </xsl:if>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
-                <!-- Add the class that sets the width, if the width is known -->
-                <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
-            </xsl:attribute>
+            <xsl:if test="$width != ''">
+.x<xsl:value-of select="generate-id()"/>width
+{
+    width:<xsl:value-of select="$width"/>;
+}
+            </xsl:if>
 
-            <xsl:call-template name="figure-annotations-top"/>
+            <xsl:apply-templates mode="css"/>
+        </xsl:if>
+    </xsl:template>
 
-            <xsl:call-template name="insertimage">
-                <xsl:with-param name="alt" select="if (figDesc) then figDesc else (if (head) then head else '')"/>
-            </xsl:call-template>
 
-            <xsl:call-template name="figure-annotations-bottom"/>
+    <xsl:template match="figure">
+        <xsl:if test="$optionIncludeImages = 'Yes'">
+            <xsl:call-template name="closepar"/>
+            <div class="figure">
+                <xsl:call-template name="set-lang-id-attributes"/>
 
-            <xsl:apply-templates/>
-        </div>
-        <xsl:call-template name="reopenpar"/>
+                <xsl:variable name="file">
+                    <xsl:call-template name="getimagefilename"/>
+                </xsl:variable>
+                <xsl:variable name="width">
+                    <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
+                </xsl:variable>
+
+                <xsl:attribute name="class">
+                    <xsl:text>figure </xsl:text>
+                    <xsl:if test="contains(@rend, 'float(left)')">floatLeft </xsl:if>
+                    <xsl:if test="contains(@rend, 'float(right)')">floatRight </xsl:if>
+                    <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
+                    <!-- Add the class that sets the width, if the width is known -->
+                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                </xsl:attribute>
+
+                <xsl:call-template name="figure-annotations-top"/>
+
+                <xsl:call-template name="insertimage">
+                    <xsl:with-param name="alt" select="if (figDesc) then figDesc else (if (head) then head else '')"/>
+                </xsl:call-template>
+
+                <xsl:call-template name="figure-annotations-bottom"/>
+
+                <xsl:apply-templates/>
+            </div>
+            <xsl:call-template name="reopenpar"/>
+        </xsl:if>
     </xsl:template>
 
 
