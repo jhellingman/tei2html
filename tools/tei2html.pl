@@ -31,6 +31,7 @@ my $makePDF             = 0;
 my $makeEPUB            = 0;
 my $makeReport          = 0;
 my $makeXML             = 0;
+my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 
 GetOptions (
@@ -40,6 +41,7 @@ GetOptions (
     'p' => \$makePDF,
     'r' => \$makeReport,
     'x' => \$makeXML,
+    's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
 my $filename = $ARGV[0];
@@ -146,7 +148,7 @@ sub processFile($)
     {
         my $tmpFile = mktemp('tmp-XXXXX');;
         print "Create HTML version...\n";
-        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > $tmpFile");
+        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
         system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
         system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
         unlink($tmpFile);
@@ -159,7 +161,7 @@ sub processFile($)
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
-        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
+        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption optionPrinceMarkup=\"Yes\" > $tmpFile1");
         system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
         system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
         system ("$prince $basename-prince.html $basename.pdf");
@@ -174,7 +176,7 @@ sub processFile($)
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub\\images");
-        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
+        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
         chdir "epub";
