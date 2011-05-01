@@ -189,6 +189,16 @@
     </xsl:template>
 
 
+    <!-- TEI P5 graphic element -->
+    <xsl:template match="graphic">
+        <xsl:if test="$optionIncludeImages = 'Yes'">
+            <xsl:call-template name="insertimage">
+                <xsl:with-param name="format" select="'.png'"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+
     <xsl:template match="figure[@rend='inline' or contains(@rend, 'position(inline)')]">
         <xsl:if test="$optionIncludeImages = 'Yes'">
             <xsl:call-template name="insertimage">
