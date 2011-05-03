@@ -543,6 +543,26 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
     top: auto;
 }
 
+table.tocList
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td.tocPageNum, td.tocDivNum
+{
+    text-align: right;
+    width: 15%;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+td.tocDivTitle
+{
+    width: 70%;
+}
+
 span.corr, span.gap
 {
     border-bottom:1px dotted red;

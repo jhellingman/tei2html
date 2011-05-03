@@ -567,6 +567,32 @@
         <xsl:apply-templates mode="gallery-captions"/>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Render pre-existing table of contents encoded as itemized list as table -->
+
+    <xsl:template match="list[@type='tocList']">
+        <table class="tocList">
+            <xsl:apply-templates mode="tocList"/>
+        </table>
+    </xsl:template>
+
+    <xsl:template mode="tocList" match="item">
+        <tr>
+            <td class="tocDivNum">
+                <xsl:apply-templates mode="tocList" select="ab[@type='tocDivNum']"/>
+            </td>
+            <td class="tocDivTitle">
+                <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum')]"/>
+            </td>
+            <td class="tocPageNum">
+                <xsl:apply-templates mode="tocList" select="ab[@type='tocPageNum']"/>
+            </td>
+        </tr>
+    </xsl:template>
+
+    <xsl:template mode="tocList" match="ab">
+        <xsl:apply-templates/>
+    </xsl:template>
 
 
     <!--====================================================================-->

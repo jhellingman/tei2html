@@ -203,6 +203,12 @@ p.argument, p.tocArgument
     margin:1.58em 10%;
 }
 
+p.tocPart
+{
+    margin:1.58em 0%;
+    font-variant: small-caps;
+}
+
 p.tocChapter
 {
     margin:1.58em 0%;
@@ -922,7 +928,7 @@ width:40%; border-collapse:collapse;
 {
     width:80px;
 }
-        
+            
 .xd23e513
 {
 width:100px;
@@ -932,22 +938,22 @@ width:100px;
 {
     width:80px;
 }
-        
+            
 .xd23e521width
 {
     width:80px;
 }
-        
+            
 .xd23e535width
 {
     width:480px;
 }
-        
+            
 .xd23e555width
 {
     width:480px;
 }
-        
+            
 .xd23e605
 {
 font-style:italic;
