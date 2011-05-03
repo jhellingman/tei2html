@@ -654,6 +654,21 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </div0>
 </body>
 <back id="back">
+<div1 id="test-toc">
+<head>Test Table of Contents</head>
+
+
+<list type="tocList">
+<item>      Introductie   <ab type="tocPageNum">vii</ab></item>
+<item><ab type="tocDivNum">I</ab>      Eerste Hoofdstuk   <ab type="tocPageNum">1</ab></item>
+<item><ab type="tocDivNum">II</ab>      Tweede Hoofdstuk   <ab type="tocPageNum">22</ab></item>
+<item><ab type="tocDivNum">III</ab>      <corr sic="Vierde">Derde</corr> Hoofdstuk   <ab type="tocPageNum">35</ab></item>
+<item><ab type="tocDivNum">DCCCXLIV</ab>      Achthonderdenvierenveertigste Hoofdstuk   <ab type="tocPageNum">57</ab></item>
+<item>      Slot   <ab type="tocPageNum">77</ab></item>
+</list>
+
+
+</div1>
 <div1 id="index" type="Index" lang="nl">
 <head>Index</head>
 

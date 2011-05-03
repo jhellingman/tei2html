@@ -1,7 +1,7 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- This HTML file has been automatically generated from an XML source on 2011-03-10T22:05:56.911+01:00. -->
+<!-- This HTML file has been automatically generated from an XML source on 2011-05-03T23:35:55.569+02:00. -->
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd20e2" lang="en-US">
    <head>
       <title>Main Title of Work Goes Here</title>
@@ -249,6 +249,12 @@ p.argument, p.note, p.tocArgument
 p.argument, p.tocArgument
 {
     margin:1.58em 10%;
+}
+
+p.tocPart
+{
+    margin:1.58em 0%;
+    font-variant: small-caps;
 }
 
 p.tocChapter
@@ -546,6 +552,26 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
     position: absolute;
     right: 16%;
     top: auto;
+}
+
+table.tocList
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td.tocPageNum, td.tocDivNum
+{
+    text-align: right;
+    width: 15%;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+td.tocDivTitle
+{
+    width: 70%;
 }
 
 span.corr, span.gap
@@ -920,7 +946,7 @@ width:40%; border-collapse:collapse;
 {
     width:80px;
 }
-        
+            
 .xd20e513
 {
 width:100px;
@@ -930,22 +956,22 @@ width:100px;
 {
     width:80px;
 }
-        
+            
 .xd20e521width
 {
     width:80px;
 }
-        
+            
 .xd20e535width
 {
     width:480px;
 }
-        
+            
 .xd20e555width
 {
     width:480px;
 }
-        
+            
 .xd20e605
 {
 font-style:italic;
@@ -1085,7 +1111,8 @@ display:none;
                      <li><a href="#alignSecond">Test van het naast elkaar afdrukken van tekst</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e860">4</a></span></li>
                   </ul>
                </li>
-               <li><a href="#index">Index</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e902">4</a></span></li>
+               <li><a href="#test-toc">Test Table of Contents</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e902">4</a></span></li>
+               <li><a href="#index">Index</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e941">4</a></span></li>
             </ul>
          </div>
       </div>
@@ -1435,7 +1462,7 @@ display:none;
                               </td>
                            </tr>
                         </table>
-                        <table id="xd20e657">
+                        <table id="xd20e657" lang="nl">
                            <tr valign="top">
                               <td>
                                  <ol>
@@ -1451,7 +1478,7 @@ display:none;
                               </td>
                            </tr>
                         </table>
-                        <table id="xd20e666">
+                        <table id="xd20e666" lang="nl">
                            <tr valign="top">
                               <td>
                                  <ol class="xd20e666">
@@ -1468,14 +1495,14 @@ display:none;
                            </tr>
                         </table>
                         <p id="xd20e676">A list with lower case roman numerals:</p>
-                        <ol id="xd20e678" class="xd20e678">
+                        <ol id="xd20e678" lang="nl" class="xd20e678">
                            <li id="xd20e679">Een</li>
                            <li id="xd20e681">Twee</li>
                            <li id="xd20e683" value="48">Drie</li>
                            <li id="xd20e685">Vier</li>
                         </ol>
                         <p id="xd20e687">A list without bullets or numbers:</p>
-                        <ul id="xd20e689">
+                        <ul id="xd20e689" lang="nl">
                            <li id="xd20e690">Een</li>
                            <li id="xd20e692">Twee</li>
                            <li id="xd20e694">Drie</li>
@@ -1800,43 +1827,80 @@ display:none;
          </div>
       </div>
       <div class="back" id="back">
-         <div id="index" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-               <h2 id="xd20e902" class="main">Index</h2>
-               <div class="transcribernote indextoc" id="xd20e904"><a href="#xd20e906">A</a> | <a href="#xd20e911">B</a> | <a href="#xd20e916">C</a> | <a href="#xd20e921">D</a></div>
-               <div class="div2" id="xd20e905"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd20e906" class="main">A.</h3>
+         <div id="test-toc" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+               <h2 id="xd20e902" class="main">Test Table of Contents</h2>
+               <table class="tocList">
+                  <tr>
+                     <td class="tocDivNum"></td>
+                     <td class="tocDivTitle">      Introductie   </td>
+                     <td class="tocPageNum">vii</td>
+                  </tr>
+                  <tr>
+                     <td class="tocDivNum">I</td>
+                     <td class="tocDivTitle">      Eerste Hoofdstuk   </td>
+                     <td class="tocPageNum">1</td>
+                  </tr>
+                  <tr>
+                     <td class="tocDivNum">II</td>
+                     <td class="tocDivTitle">      Tweede Hoofdstuk   </td>
+                     <td class="tocPageNum">22</td>
+                  </tr>
+                  <tr>
+                     <td class="tocDivNum">III</td>
+                     <td class="tocDivTitle">      <span class="corr" id="xd20e925" title="Source: Vierde">Derde</span> Hoofdstuk   
+                     </td>
+                     <td class="tocPageNum">35</td>
+                  </tr>
+                  <tr>
+                     <td class="tocDivNum">DCCCXLIV</td>
+                     <td class="tocDivTitle">      Achthonderdenvierenveertigste Hoofdstuk   </td>
+                     <td class="tocPageNum">57</td>
+                  </tr>
+                  <tr>
+                     <td class="tocDivNum"></td>
+                     <td class="tocDivTitle">      Slot   </td>
+                     <td class="tocPageNum">77</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div id="index" lang="nl" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+               <h2 id="xd20e941" class="main">Index</h2>
+               <div class="transcribernote indextoc" id="xd20e943"><a href="#xd20e945">A</a> | <a href="#xd20e950">B</a> | <a href="#xd20e955">C</a> | <a href="#xd20e960">D</a></div>
+               <div class="div2" id="xd20e944"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd20e945" class="main">A.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd20e908" class="first">A is een aapje.</p>
+                     <p id="xd20e947" class="first">A is een aapje.</p>
                   </div>
                </div>
-               <div class="div2" id="xd20e910"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd20e911" class="main">B.</h3>
+               <div class="div2" id="xd20e949"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd20e950" class="main">B.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd20e913" class="first">B is een Boom.</p>
+                     <p id="xd20e952" class="first">B is een Boom.</p>
                   </div>
                </div>
-               <div class="div2" id="xd20e915"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd20e916" class="main">C.</h3>
+               <div class="div2" id="xd20e954"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd20e955" class="main">C.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd20e918" class="first">C is een Cent.</p>
+                     <p id="xd20e957" class="first">C is een Cent.</p>
                   </div>
                </div>
-               <div class="div2" id="xd20e920"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd20e921" class="main">D.</h3>
+               <div class="div2" id="xd20e959"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd20e960" class="main">D.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd20e923" class="first">D is een Drommedaris.
-                        <br id="xd20e925"></br>en een Duizendpoot.
+                     <p id="xd20e962" class="first">D is een Drommedaris.
+                        <br id="xd20e964"></br>en een Duizendpoot.
                      </p>
                   </div>
                </div>
             </div>
          </div>
          <div id="backmatter" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-               <div class="div1" id="xd20e928">
+               <div class="div1" id="xd20e967">
                   <h2 class="main">List of Illustrations</h2>
                   <table>
                      <tr>
@@ -1861,7 +1925,7 @@ display:none;
                      </tr>
                   </table>
                </div>
-               <div class="div1" id="xd20e929">
+               <div class="div1" id="xd20e968">
                   <h2 class="main">Index</h2>
                   <p>Chapter headings  <a href="#xd20e129">###</a>, <a href="#xd20e237">2</a></p>
                   <p>Footnote  <a href="#xd20e186">2</a>, <a href="#xd20e797">4</a>; in quoted material <a href="#xd20e183">2</a></p>
@@ -1872,7 +1936,7 @@ display:none;
                   <p>Stylesheet  <a href="#xd20e122">###</a></p>
                   <p>XSLT  <a href="#xd20e120">###</a></p>
                </div>
-               <div class="div1" id="xd20e931">
+               <div class="div1" id="xd20e970">
                   <h2 class="main">Table of Contents</h2>
                   <ul>
                      <li><a href="#bk01">This is a Test Document</a><ul>
@@ -1883,10 +1947,11 @@ display:none;
                            <li><a href="#alignSecond">Test van het naast elkaar afdrukken van tekst</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e860">4</a></span></li>
                         </ul>
                      </li>
-                     <li><a href="#index">Index</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e902">4</a></span></li>
+                     <li><a href="#test-toc">Test Table of Contents</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e902">4</a></span></li>
+                     <li><a href="#index">Index</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPagenum"><a class="pageref" href="#xd20e941">4</a></span></li>
                   </ul>
                </div>
-               <div class="transcribernote" id="xd20e932">
+               <div class="transcribernote" id="xd20e971">
                   <h2 class="main">Colophon</h2>
                   <h3 class="main">Availability</h3>
                   <p id="xd20e33" class="first">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US.
@@ -1948,6 +2013,11 @@ display:none;
                         <td class="width20" valign="top"><a class="pageref" href="#xd20e783">4</a>, <a class="pageref" href="#xd20e828">4</a></td>
                         <td class="width40" valign="bottom">Correction in verse</td>
                         <td class="width40" valign="bottom">another</td>
+                     </tr>
+                     <tr>
+                        <td class="width20" valign="top"><a class="pageref" href="#xd20e925">4</a></td>
+                        <td class="width40" valign="bottom">Vierde</td>
+                        <td class="width40" valign="bottom">Derde</td>
                      </tr>
                   </table>
                </div>

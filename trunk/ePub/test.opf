@@ -19,7 +19,7 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2011-03-10</dc:date>
+      <dc:date opf:event="generation">2011-05-03</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
    </metadata>
@@ -38,6 +38,7 @@
       <item id="alignSecond" href="test-alignSecond.xhtml"
             media-type="application/xhtml+xml"/>
       <item id="alignThird" href="test-alignThird.xhtml" media-type="application/xhtml+xml"/>
+      <item id="test-toc" href="test-test-toc.xhtml" media-type="application/xhtml+xml"/>
       <item id="index" href="test-index.xhtml" media-type="application/xhtml+xml"/>
       <item id="backmatter" href="test-backmatter.xhtml" media-type="application/xhtml+xml"/>
       <item id="cover-image" href="images/cover500.jpg" media-type="image/jpeg"/>
@@ -61,6 +62,7 @@
       <itemref linear="yes" idref="alignFirst"/>
       <itemref linear="yes" idref="alignSecond"/>
       <itemref linear="yes" idref="alignThird"/>
+      <itemref linear="yes" idref="test-toc"/>
       <itemref linear="yes" idref="index"/>
       <itemref linear="yes" idref="backmatter"/>
    </spine>
@@ -71,6 +73,6 @@
       <reference type="title-page" title="Title Page" href="test-front-2.xhtml#xd23e93"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk01-1.xhtml#bk01"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd23e932"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd23e971"/>
    </guide>
 </package>
