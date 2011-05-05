@@ -1515,6 +1515,8 @@ BEGIN
     $ent{"metlobr"}     = chr(0x23D2);  # METRICAL LONG OVER BREVE SYMBOL
     $ent{"metbreak"}    = chr(0x201E);  # metrical break (= DOUBLE LOW-9 QUOTATION MARK)
 
+    $ent{"asterism"}    = chr(0x2042);  # Asterism
+
     $ent{"Tinv"}        = chr(0x22A5);  # UP TACK (Inversed T)
 
     $ent{"digamma"}     = chr(0x03DC);  # GREEK LETTER DIGAMMA
