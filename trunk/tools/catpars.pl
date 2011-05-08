@@ -11,7 +11,7 @@ while (<INPUTFILE>)
 	$line = $_;
 	if ($mode eq "normal")
 	{
-		if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]+)>/)
+		if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]?)>/)
 		{
 			print stripNewline($line);
 			$mode = "concat";
@@ -23,7 +23,7 @@ while (<INPUTFILE>)
 	}
 	elsif ($mode eq "concat")
 	{
-		if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]+)>/)
+		if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]?)>/)
 		{
 			print "\n\n";
 			print stripNewline($line);
