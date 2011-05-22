@@ -124,7 +124,7 @@
                 </xsl:choose>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:if test="normalize-space()!=''">
+                <xsl:if test="normalize-space() != ''">
                     <xsl:message select="concat('unknown token: ', .)"/>
                 </xsl:if>
             </xsl:non-matching-substring>
