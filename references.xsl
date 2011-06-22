@@ -141,10 +141,14 @@
                     </xsl:attribute>
                 </xsl:when>
 
-                <xsl:otherwise>
+                <xsl:when test="substring(@url, 1, 5) = 'http:' or substring(@url, 1, 6) = 'https:'">
                     <xsl:attribute name="class">exlink</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
                     <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <xsl:message terminate="no">Warning: URL '<xsl:value-of select="@url"/>' not understood.</xsl:message>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:apply-templates/>
