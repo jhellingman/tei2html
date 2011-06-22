@@ -132,20 +132,20 @@
         <xsl:param name="lang" select="@xml:lang"/>
 
         <xsl:choose>
-            <xsl:when test="$lang = 'en'">English</xsl:when>
-            <xsl:when test="$lang = 'en-US'">English (United States)</xsl:when>
-            <xsl:when test="$lang = 'en-UK'">English (United Kingdom)</xsl:when>
-            <xsl:when test="$lang = 'es'">Spanish</xsl:when>
-            <xsl:when test="$lang = 'nl'">Dutch</xsl:when>
-            <xsl:when test="$lang = 'nl-1900'">Dutch (Orthography of De Vries-Te Winkel)</xsl:when>
-            <xsl:when test="$lang = 'la'">Latin</xsl:when>
-            <xsl:when test="$lang = 'la-x-bio'">Latin (binominal nomenclature)</xsl:when>
             <xsl:when test="$lang = 'de'">German</xsl:when>
-            <xsl:when test="$lang = 'tl'">Tagalog</xsl:when>
+            <xsl:when test="$lang = 'en'">English</xsl:when>
+            <xsl:when test="$lang = 'en-UK'">English (United Kingdom)</xsl:when>
+            <xsl:when test="$lang = 'en-US'">English (United States)</xsl:when>
+            <xsl:when test="$lang = 'es'">Spanish</xsl:when>
             <xsl:when test="$lang = 'fr'">French</xsl:when>
             <xsl:when test="$lang = 'it'">Italian</xsl:when>
+            <xsl:when test="$lang = 'la'">Latin</xsl:when>
+            <xsl:when test="$lang = 'la-x-bio'">Latin (binominal nomenclature)</xsl:when>
+            <xsl:when test="$lang = 'nl'">Dutch</xsl:when>
+            <xsl:when test="$lang = 'nl-1900'">Dutch (Orthography of De Vries-Te Winkel)</xsl:when>
+            <xsl:when test="$lang = 'tl'">Tagalog</xsl:when>
 
-            <xsl:otherwise>language with code '<xsl:value-of select="$lang"/>'</xsl:otherwise>
+            <xsl:otherwise>Language with code '<xsl:value-of select="$lang"/>'</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -196,7 +196,7 @@
     <xsl:template match="nonwords">
         <h3 id="nonwords">Non-Words</h3>
 
-        <p>Counted for all languages</p>
+        <p>Counted for all languages combined</p>
 
         <p>
             <table>
@@ -221,7 +221,7 @@
     <xsl:template match="tags">
         <h3 id="tags">Tags</h3>
 
-        <p>Counted for all languages</p>
+        <p>Counted for all languages combined</p>
 
         <p>
             <table>
@@ -245,7 +245,7 @@
     <xsl:template match="rends">
         <h3 id="rends">Rendering Attributes</h3>
 
-        <p>Counted for all languages</p>
+        <p>Counted for all languages combined</p>
 
         <p>
             <table>
