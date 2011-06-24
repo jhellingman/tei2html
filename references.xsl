@@ -80,9 +80,26 @@
     <!-- External References -->
 
     <xsl:template match="xref[@url]">
+        <xsl:choose>
+            <xsl:when test="$optionExternalLinks = 'Yes'">
+                <xsl:call-template name="handle-xref"/>
+            </xsl:when>
+
+            <xsl:when test="$optionExternalLinks = 'HeaderOnly' and ancestor::teiHeader">
+                <xsl:call-template name="handle-xref"/>
+            </xsl:when>
+
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="handle-xref">
         <a>
             <xsl:choose>
-                
+
                 <!-- Link to Project Gutenberg book -->
                 <xsl:when test="substring(@url, 1, 3) = 'pg:'">
                     <xsl:attribute name="class">pglink</xsl:attribute>
