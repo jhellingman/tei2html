@@ -19,7 +19,7 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2011-06-22</dc:date>
+      <dc:date opf:event="generation">2011-06-24</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
    </metadata>
