@@ -266,12 +266,13 @@ sub sgml2xml($$)
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
     $tmpFile0 = transcribeGreek($tmpFile0);
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>", "Arabic",               "$patcdir/arabic/ar2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>", "Assamese",             "$patcdir/indic/as2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>", "Bengali",              "$patcdir/indic/bn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<HB>", "Hebrew",               "$patcdir/hebrew/he2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",   "$patcdir/tagalog/tagalog.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                "$patcdir/indic/tm2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>", "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>", "Assamese",              "$patcdir/indic/as2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>", "Bengali",               "$patcdir/indic/bn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<HB>", "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<SA>", "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                 "$patcdir/indic/tm2ucs.pat");
 
     print "Check SGML...\n";
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
