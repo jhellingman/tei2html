@@ -2,6 +2,7 @@
 
 use strict;
 
+use File::stat;
 use File::Temp qw(mktemp);
 use Getopt::Long;
 
@@ -115,6 +116,9 @@ sub processFile($)
     # convert from TEI P4 to TEI P5  (experimental)
     # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
 
+    # extract metadata
+    system ("$saxon2 $basename.xml $xsldir/tei2dc.xsl > metadata.xml");
+
     collectImageInfo();
 
     my $pwd = `pwd`;
@@ -143,15 +147,21 @@ sub processFile($)
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
-
     if ($makeHTML == 1)
     {
-        my $tmpFile = mktemp('tmp-XXXXX');;
-        print "Create HTML version...\n";
-        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
-        system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
-        system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
-        unlink($tmpFile);
+		if (isNewer($basename . ".html", $basename . ".xml"))
+		{
+			print "Skipping convertion to HTML ($basename.html newer than $basename.xml).\n";
+		}
+		else
+		{
+			my $tmpFile = mktemp('tmp-XXXXX');;
+			print "Create HTML version...\n";
+			system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
+			system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
+			system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
+			unlink($tmpFile);
+		}
     }
 
     if ($makePDF == 1)
@@ -258,6 +268,12 @@ sub sgml2xml($$)
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
+	if (isNewer($xmlFile, $sgmlFile))
+	{
+		print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
+		return;
+	}
+
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
     # Translate Latin-1 characters to entities
@@ -297,6 +313,18 @@ sub sgml2xml($$)
     unlink($tmpFile2);
     unlink($tmpFile1);
     unlink($tmpFile0);
+}
+
+
+#
+# isNewer -- determine whether the first file exists and is newer than the second file
+#
+sub isNewer($$)
+{
+    my $file1 = shift;
+    my $file2 = shift;
+
+	return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime) 
 }
 
 
