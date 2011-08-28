@@ -1806,9 +1806,9 @@ BEGIN
     ###############################################################################
     # Project Gutenberg boilerplate texts
 
-    $ent{"availability.en"} = "This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.";
+    $ent{"availability.en"} = "This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the <xref url='http://www.gutenberg.org/license' rel='license'>Project Gutenberg License</xref> included with this eBook or online at <xref url='http://www.gutenberg.org/' rel='home'>www.gutenberg.org</xref>.";
 
-    $ent{"availability.nl"} = "Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopi&#xEB;ren, weggeven of hergebruiken onder de voorwaarden van de Project Gutenberg Licentie bij dit eBoek of on-line op <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.";
+    $ent{"availability.nl"} = "Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopi&#xEB;ren, weggeven of hergebruiken onder de voorwaarden van de <xref url='http://www.gutenberg.org/license' rel='license'>Project Gutenberg Licentie</xref> bij dit eBoek of on-line op <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.";
 }
 
 

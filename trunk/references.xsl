@@ -168,6 +168,11 @@
                     <xsl:message terminate="no">Warning: URL '<xsl:value-of select="@url"/>' not understood.</xsl:message>
                 </xsl:otherwise>
             </xsl:choose>
+
+            <xsl:if test="@rel">
+                <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>
+            </xsl:if>
+
             <xsl:apply-templates/>
         </a>
     </xsl:template>
