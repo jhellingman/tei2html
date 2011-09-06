@@ -355,7 +355,20 @@ p.figureHead
     float: right;
 }
 
+.hangq
+{
+    text-indent: -0.35em;
+}
 
+.hangqq
+{
+    text-indent: -0.44em;
+}
+
+.hangqqq
+{
+    text-indent: -0.78em;
+}
 
 .figure p
 {
