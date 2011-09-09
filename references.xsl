@@ -102,42 +102,42 @@
 
                 <!-- Link to Project Gutenberg book -->
                 <xsl:when test="substring(@url, 1, 3) = 'pg:'">
-                    <xsl:attribute name="class">pglink</xsl:attribute>
+                    <xsl:attribute name="class">pglink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToPg"/></xsl:attribute>
                     <xsl:attribute name="href">http://www.gutenberg.org/ebooks/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
                 </xsl:when>
                 
                 <!-- Link to OCLC (worldcat) catalog entry -->
                 <xsl:when test="substring(@url, 1, 5) = 'oclc:'">
-                    <xsl:attribute name="class">catlink</xsl:attribute>
+                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToWorldCat"/></xsl:attribute>
                     <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="substring-after(@url, 'oclc:')"/></xsl:attribute>
                 </xsl:when>
 
                 <!-- Link to Open Library catalog entry -->
                 <xsl:when test="substring(@url, 1, 4) = 'oln:'">
-                    <xsl:attribute name="class">catlink</xsl:attribute>
+                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
                     <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
                 </xsl:when>
 
                 <!-- Link to WikiPilipinas article -->
                 <xsl:when test="substring(@url, 1, 4) = 'wpp:'">
-                    <xsl:attribute name="class">wpplink</xsl:attribute>
+                    <xsl:attribute name="class">wpplink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToWikiPilipinas"/></xsl:attribute>
                     <xsl:attribute name="href">http://en.wikipilipinas.org/index.php?title=<xsl:value-of select="substring-after(@url, 'wpp:')"/></xsl:attribute>
                 </xsl:when>
 
                 <!-- Link to Wikipedia article -->
                 <xsl:when test="substring(@url, 1, 3) = 'wp:'">
-                    <xsl:attribute name="class">wplink</xsl:attribute>
+                    <xsl:attribute name="class">wplink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToWikipedia"/></xsl:attribute>
                     <xsl:attribute name="href">http://en.wikipedia.org/wiki/<xsl:value-of select="substring-after(@url, 'wp:')"/></xsl:attribute>
                 </xsl:when>
 
                 <!-- Link to location on map, using coordinates -->
                 <xsl:when test="substring(@url, 1, 4) = 'loc:'">
-                    <xsl:attribute name="class">loclink</xsl:attribute>
+                    <xsl:attribute name="class">loclink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToMap"/></xsl:attribute>
                     <xsl:variable name="coordinates" select="substring-after(@url, 'loc:')"/>
                     <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
@@ -147,7 +147,7 @@
 
                 <!-- Link to Bible citation -->
                 <xsl:when test="substring(@url, 1, 4) = 'bib:'">
-                    <xsl:attribute name="class">biblink</xsl:attribute>
+                    <xsl:attribute name="class">biblink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToBible"/></xsl:attribute>
                     <xsl:attribute name="href">http://www.biblegateway.com/passage/?search=<xsl:value-of select="iri-to-uri(substring-after(@url, 'bib:'))"/>
                         <xsl:choose>
@@ -159,7 +159,7 @@
                 </xsl:when>
 
                 <xsl:when test="substring(@url, 1, 5) = 'http:' or substring(@url, 1, 6) = 'https:'">
-                    <xsl:attribute name="class">exlink</xsl:attribute>
+                    <xsl:attribute name="class">exlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
                     <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
                 </xsl:when>
