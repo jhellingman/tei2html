@@ -10,6 +10,14 @@ I intend, when possible, to add the following to the tei2html tool-set.
   * Support for XHTML output. (Partly done, for ePub).
 
 
+== Support TEI P5 ==
+
+The current code was developed on TEI P3, and needs a few updates to work well with the current TEI P5.
+
+For some background, read the [http://www.tei-c.org/Guidelines/P5/migrate.xml P5 migration guidelines]. The [http://www.tei-c.org/Guidelines/P5/p4top5.xsl p4top5.xsl] stylesheet provided there can also be used.
+
+Most of the changes are additions, which can be handled quite transparently.
+
 == Support for Customization ==
 
 Currently, fairly limited customization options exists, and they are only accessible either via parameters to the XSLT stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
