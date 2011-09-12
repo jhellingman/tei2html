@@ -3,6 +3,7 @@
     <xsl:stylesheet
         xmlns="http://www.idpf.org/2007/opf"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
+        xmlns:dcterms="http://purl.org/dc/terms/"
         xmlns:opf="http://www.idpf.org/2007/opf"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -25,7 +26,11 @@
                 encoding="UTF-8">
             <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
-            <package version="2.0">
+            <package>
+                <xsl:attribute name="version">
+                    <xsl:value-of select="if ($optionEPub3 = 'Yes') then '3.0' else '2.0'"/>
+                </xsl:attribute>
+
                 <xsl:attribute name="unique-identifier">idbook</xsl:attribute>
 
                 <metadata>
@@ -60,10 +65,18 @@
                         <meta name="cover" content="cover-image"/>
                     </xsl:if>
 
+                    <xsl:if test="$optionEPub3 = 'Yes'">
+                        <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
+                        <xsl:variable name="utc-timestamp" select="adjust-dateTime-to-timezone(current-dateTime(), xs:dayTimeDuration('PT0H'))"/>
+
+                        <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
+                        <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
+                        <meta about="#pub-id" property="scheme">uuid</meta>
+                        <meta property="dcterms:modified"><xsl:value-of select="$utc-timestamp"/></meta>
+                    </xsl:if>
                 </metadata>
 
                 <manifest>
-                    
                     <item id="ncx"
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
@@ -99,7 +112,6 @@
                         <xsl:message terminate="no">Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
                         <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
                     </xsl:if>
-
                 </manifest>
 
                 <spine toc="ncx">
@@ -183,7 +195,7 @@
                     <xsl:when test="resp='Transcriber'">trc</xsl:when>
                     <xsl:when test="resp='Translator'">trl</xsl:when>
 
-                    <!-- Related terms that are responsibility iso role oriented -->
+                    <!-- Related terms that are responsibility instead of role oriented -->
                     <xsl:when test="resp='Transcription'">trc</xsl:when>
 
                     <xsl:otherwise>oth</xsl:otherwise>
