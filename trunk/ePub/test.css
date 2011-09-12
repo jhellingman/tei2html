@@ -809,188 +809,188 @@ body
 
 
 
-.xd23e315
+.xd23e317
 {
 color:red; background-color:yellow;
 }
 
-.xd23e316
+.xd23e318
 {
 color:green; text-align:right;
 }
 
-.xd23e317
+.xd23e319
 {
 color:blue; text-align:right;
 }
 
-.xd23e353
+.xd23e355
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd23e354
+.xd23e356
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd23e357
+.xd23e359
 {
 border-top:2px solid black;
 }
 
-.xd23e374
+.xd23e376
 {
 border-top:1px solid black;
 }
 
-.xd23e405
+.xd23e407
 {
 border-bottom:2px solid black;
 }
 
-.xd23e97
+.xd23e99
 {
 font-style:italic;
 }
 
-.xd23e107
+.xd23e109
 {
 background-color:yellow;
 }
 
-.xd23e145
+.xd23e147
 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd23e158
+.xd23e160
 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd23e282
+.xd23e284
 {
 margin:0px auto; display:table;
 }
 
-.xd23e286
+.xd23e288
 {
 valign:middle; width:2;
 }
 
-.xd23e287
+.xd23e289
 {
 valign:middle;
 }
 
-.xd23e297
+.xd23e299
 {
 margin-left:2em;
 }
 
-.xd23e299
+.xd23e301
 {
 width:25%;
 }
 
-.xd23e301
+.xd23e303
 {
 width:75%;
 }
 
-.xd23e312
+.xd23e314
 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd23e321
+.xd23e323
 {
 text-align:right;
 }
 
-.xd23e340
+.xd23e342
 {
 text-align:center;
 }
 
-.xd23e345
+.xd23e347
 {
 text-align:left;
 }
 
-.xd23e352
+.xd23e354
 {
 width:40%; border-collapse:collapse;
 }
 
-.xd23e508width
+.xd23e510width
 {
     width:80px;
 }
             
-.xd23e513
+.xd23e515
 {
 width:100px;
 }
 
-.xd23e513width
+.xd23e515width
 {
     width:80px;
 }
             
-.xd23e521width
+.xd23e523width
 {
     width:80px;
 }
             
-.xd23e535width
+.xd23e537width
 {
     width:480px;
 }
             
-.xd23e555width
+.xd23e557width
 {
     width:480px;
 }
             
-.xd23e605
+.xd23e607
 {
 font-style:italic;
 }
 
-.xd23e636
+.xd23e638
 {
 list-style-type:disc;
 }
 
-.xd23e666
+.xd23e668
 {
 list-style-type:upper-roman;
 }
 
-.xd23e678
+.xd23e680
 {
 list-style-type:lower-roman;
 }
 
-.xd23e698
+.xd23e700
 {
 text-align:left;
 }
 
-.xd23e701
+.xd23e703
 {
 text-align:right;
 }
 
-.xd23e703
+.xd23e705
 {
 text-align:center;
 }
 
 
-.xd23e706
+.xd23e708
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -998,7 +998,7 @@ text-align:center;
     
 }
 
-.xd23e706init
+.xd23e708init
 {
     float: left;
     width: 90px;
@@ -1013,47 +1013,47 @@ text-align:center;
 }
 
         
-.xd23e711
+.xd23e713
 {
 text-align:justify;
 }
 
-.xd23e727
+.xd23e729
 {
 text-align:center;
 }
 
-.xd23e736
+.xd23e738
 {
 text-align:center;
 }
 
-.xd23e741
+.xd23e743
 {
 text-indent:1em;
 }
 
-.xd23e747
+.xd23e749
 {
 text-indent:2em;
 }
 
-.xd23e751
+.xd23e753
 {
 text-indent:3em;
 }
 
-.xd23e755
+.xd23e757
 {
 text-indent:10em;
 }
 
-.xd23e757
+.xd23e759
 {
 font-style:italic;
 }
 
-.xd23e869
+.xd23e871
 {
 display:none;
 }

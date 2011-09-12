@@ -1547,6 +1547,7 @@ BEGIN
 
     $ent{"oeacute"}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
     $ent{"OEacute"}     = chr(0x0152) . chr(0x0301); # OE ligature with acute
+    $ent{"hacute"}     = h . chr(0x0301); # h with acute
 
     $ent{"Kcirc"}       = "K" . chr(0x0302); # K with circumflex
     $ent{"kcirc"}       = "k" . chr(0x0302); # k with circumflex
@@ -1576,6 +1577,7 @@ BEGIN
     $ent{"Adota"}       = "A" . chr(0x0307); # A with dot above
     $ent{"edota"}       = "e" . chr(0x0307); # e with dot above
     $ent{"Edota"}       = "E" . chr(0x0307); # E with dot above
+    $ent{"kdota"}       = "k" . chr(0x0307); # k with dot above
     $ent{"mdota"}       = "m" . chr(0x0307); # m with dot above
     $ent{"ndota"}       = "n" . chr(0x0307); # n with dot above
     $ent{"odota"}       = "o" . chr(0x0307); # o with dot above
@@ -1659,13 +1661,13 @@ BEGIN
 
     $ent{"ucircb"}      = "u" . chr(0x032D); # u with circumflex below
 
-    $ent{"abreveb"}     = "a" . chr(0x032E); # a with breve below
     $ent{"Abreveb"}     = "A" . chr(0x032E); # A with breve below
-    $ent{"ebreveb"}     = "e" . chr(0x032E); # e with breve below
+    $ent{"abreveb"}     = "a" . chr(0x032E); # a with breve below
     $ent{"Ebreveb"}     = "E" . chr(0x032E); # E with breve below
-    $ent{"obreveb"}     = "o" . chr(0x032E); # o with breve below
-    $ent{"Obreveb"}     = "O" . chr(0x032E); # O with breve below
+    $ent{"ebreveb"}     = "e" . chr(0x032E); # e with breve below
     $ent{"ibreveb"}     = "i" . chr(0x032E); # i with breve below
+    $ent{"Obreveb"}     = "O" . chr(0x032E); # O with breve below
+    $ent{"obreveb"}     = "o" . chr(0x032E); # o with breve below
     $ent{"ubreveb"}     = "u" . chr(0x032E); # u with breve below
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
@@ -1677,10 +1679,11 @@ BEGIN
 
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
     $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
-    $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
     $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
-    $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
+    $ent{"mbarb"}       = "m" . chr(0x0331); # m with macron below
+    $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
     $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
+    $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
 
     $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
     $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
