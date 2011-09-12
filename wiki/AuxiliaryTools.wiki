@@ -29,7 +29,7 @@ Syntax: `perl -S ucwords.pl filename`
 
 == `fixpb.pl` ==
 
-Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb<i>n</i>`.
+Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where # is the current page number.
 
 Syntax:
 
@@ -48,6 +48,11 @@ Perl script to unwrap paragraphs, such that they appear on one line. Handle with
 == `quotes.pl` ==
 
 Perl script to replace ASCII double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.
+
+Issues:
+
+  * Open quotes before SGML tags and non-letters go wrong.
+  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes.)
 
 == `pgpp.pl` ==
 
