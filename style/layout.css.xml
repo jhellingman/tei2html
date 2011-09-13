@@ -561,19 +561,32 @@ table.tocList
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    border-width: 0;
+    border-collapse: collapse;
 }
 
 td.tocPageNum, td.tocDivNum
 {
     text-align: right;
-    width: 15%;
-    padding-left: 1em;
-    padding-right: 1em;
+    width: 10%;
+    border-width: 0;
+}
+
+td.tocDivNum
+{
+    padding-left: 0;
+    padding-right: 0.5em;
+}
+
+td.tocPageNum
+{
+    padding-left: 0.5em;
+    padding-right: 0;
 }
 
 td.tocDivTitle
 {
-    width: 70%;
+    width: auto;
 }
 
 span.corr, span.gap
