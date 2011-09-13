@@ -568,26 +568,59 @@
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- Render pre-existing table of contents encoded as itemized list as table -->
+    <!-- Render pre-existing table of contents encoded as itemized list as table 
+         Nested lists are integrated into a single table. 
+         
+         This depends on the following convention to structure a table of contents:
+
+            [list type='tocList']
+                [item] [ab type=tocDivNum]DIVISION NUMBER[/ab] DIVISION TITLE [ab type=tocPageNum]PAGE NUMBER[/ab]
+                    [list type='tocList]
+                        ... 
+                    [/list]
+                [/item]
+            [/list]
+
+         -->
 
     <xsl:template match="list[@type='tocList']">
-        <table class="tocList">
-            <xsl:apply-templates mode="tocList"/>
-        </table>
+        <xsl:choose>
+            <!-- Outer list -->
+            <xsl:when test="not(ancestor::list[@type='tocList'])">
+                <table class="tocList">
+                    <xsl:apply-templates mode="tocList"/>
+                </table>
+            </xsl:when>
+            <!-- Nested list -->
+            <xsl:otherwise>
+                <xsl:apply-templates mode="tocList"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template mode="tocList" match="item">
+        <xsl:variable name="depth" select="count(ancestor::list[@type='tocList']) - 1"/>
         <tr>
+            <!-- Padding cell if needed to indent nested contents -->
+            <xsl:if test="$depth > 0">
+                <td>
+                    <xsl:if test="$depth > 1">
+                        <xsl:attribute name="colspan"><xsl:value-of select="$depth"/></xsl:attribute>
+                    </xsl:if>
+                </td>
+            </xsl:if>
             <td class="tocDivNum">
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocDivNum']"/>
             </td>
-            <td class="tocDivTitle">
-                <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum')]"/>
+            <td class="tocDivTitle" colspan="{5 - $depth}">
+                <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum' or @type='tocList')]"/>
             </td>
             <td class="tocPageNum">
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocPageNum']"/>
             </td>
         </tr>
+        <!-- Render the nested list (omitted before) -->
+        <xsl:apply-templates select="*[@type='tocList']"/>
     </xsl:template>
 
     <xsl:template mode="tocList" match="ab">
