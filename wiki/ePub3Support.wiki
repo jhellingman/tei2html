@@ -8,7 +8,21 @@ The ePub 3 standard is a broad overhaul of ePub, and adds a lot of important fea
   * More details on the [http://code.google.com/p/epub-revision/ epub-revision project page].
   * An extensive [http://sigildev.blogspot.com/ blog post here].
 
+To be able to use the new features introduced in ePub 3.0, we will need to make a number of changes to `tei2html`. The driving forces for this effort from the `tei2html` perspective are:
+
+  * Better support for HTML5 and CSS3
+  * Better support for metadata (including reliable way to specify cover images, etc.)
+  * Better way to specify a table of contents.
+  * Better ability to embed fonts
+  * SVG and MathML support.
+
+All such new features of course need support from readers. Such support can be expected quickly on PC-based viewers, but may take considerable time to trickle down to dedicated reader hardware.
+
+Features not within current scope are JavaScript support (we like to keep our books passive) and media overlays.
+
 == Things to do ==
+
+For `tei2html` to support ePub 3.0 we need to do add some new information to our ePub files. In most cases, that information can easily be derived from the existing TEI files, so no changes to data-files will be required.
 
 Also see [http://idpf.org/epub/30/spec/epub30-changes.html ePub3 changes].
 
