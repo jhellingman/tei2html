@@ -33,7 +33,7 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
   * Improved meta-data in `.odf` file.
     * See [http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition Metadata transition].
 
-= Changes to the .ODF file =
+= Changes to the .OPF file =
 
 == Metadata ==
 
