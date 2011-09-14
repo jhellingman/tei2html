@@ -104,3 +104,7 @@ The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-
 = Navigation Document =
 
 The navigation document is now a valid `XHTML` page, wrapped in the `<nav>` element.
+
+= Validation =
+
+See this [http://blog.threepress.org/2011/06/13/validating-epub-3-today/ short article on threepress].
