@@ -99,6 +99,16 @@
             <xsl:with-param name="name" select="'msgBook'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strGuide">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgGuide'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strGuides">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgGuide.n'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strAnd">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgAnd'"/>

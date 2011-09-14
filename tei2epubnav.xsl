@@ -20,6 +20,7 @@
                 </xsl:attribute>
                 <head>
                     <title><xsl:value-of select="$strTableOfContents"/></title>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
                 </head>
                 <body>
                     <xsl:apply-templates select="text/body" mode="ePubNav"/>
@@ -30,10 +31,14 @@
 
 
     <xsl:template match="body" mode="ePubNav">
-        <nav epub:type="toc" id="toc">
-            <h1><xsl:value-of select="$strTableOfContents"/></h1>
-            <xsl:call-template name="toc-body"/>
-        </nav>
+        <section>
+            <header>
+                <h1><xsl:value-of select="$strTableOfContents"/></h1>
+            </header>
+            <nav epub:type="toc" id="toc">
+                <xsl:call-template name="toc-body"/>
+            </nav>
+        </section>
     </xsl:template>
 
 
@@ -51,8 +56,10 @@
 
 
     <xsl:template match="TEI.2" mode="navLandMarks">
+        <nav epub:type="landmarks" id="guide">
+            <h2><xsl:value-of select="$strGuide"/></h2>
 
-
+        </nav>
     </xsl:template>
 
 

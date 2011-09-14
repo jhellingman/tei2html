@@ -45,6 +45,8 @@
         <msg:message name="msgAppendix.n">Appendices</msg:message>
         <msg:message name="msgBook">Book</msg:message>
         <msg:message name="msgBook.n">Books</msg:message>
+        <msg:message name="msgGuide">Guide</msg:message>
+        <msg:message name="msgGuide.n">Guides</msg:message>
         <msg:message name="msgChapter">Chapter</msg:message>
         <msg:message name="msgChapter.n">Chapters</msg:message>
         <msg:message name="msgCopyrightPage">Copyright Page</msg:message>
@@ -655,6 +657,8 @@
         <msg:message name="msgAppendix.n">Appendices</msg:message>
         <msg:message name="msgBook">Boek</msg:message>
         <msg:message name="msgBook.n">Boeken</msg:message>
+        <msg:message name="msgGuide">Gids</msg:message>
+        <msg:message name="msgGuide.n">Gidsen</msg:message>
         <msg:message name="msgChapter">Hoofdstuk</msg:message>
         <msg:message name="msgChapter.n">Hoofdstukken</msg:message>
         <msg:message name="msgContents">Inhoud</msg:message>
