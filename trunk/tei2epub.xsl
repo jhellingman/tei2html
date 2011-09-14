@@ -41,6 +41,7 @@
 
     <xsl:include href="tei2opf.xsl"/>
     <xsl:include href="tei2ncx.xsl"/>
+    <xsl:include href="tei2epubnav.xsl"/>
 
 
     <xsl:output
@@ -56,7 +57,7 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
-    <xsl:param name="optionEPub3" select="'No'"/>
+    <xsl:param name="optionEPub3" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
     <xsl:param name="optionIncludeImages" select="'Yes'"/>
@@ -95,8 +96,8 @@
 
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
-        <xsl:if test="optionEPub3 = 'Yes'">
-            <xsl:apply-templates mode="nav"/>
+        <xsl:if test="$optionEPub3 = 'Yes'">
+            <xsl:apply-templates mode="ePubNav"/>
         </xsl:if>
         <xsl:apply-templates/>
     </xsl:template>
