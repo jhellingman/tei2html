@@ -81,6 +81,13 @@
                          href="{$basename}.ncx"
                          media-type="application/x-dtbncx+xml"/>
 
+                    <xsl:if test="$optionEPub3 = 'Yes'">
+                        <item id="epub3toc"
+                             properties="nav" 
+                             href="{$basename}-nav.xhtml"
+                             media-type="application/xhtml+xml"/>
+                    </xsl:if>
+
                     <!--
                     <xsl:if test="//pb">
                         <item id="pagemap"
