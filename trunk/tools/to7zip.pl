@@ -23,6 +23,8 @@ my $totalOriginalSize = 0;
 my $totalResultSize = 0;
 my $archivesConverted = 0;
 
+my $outputPath = "to7zip-output";
+my $logFile = "to7zip.log";
 
 main();
 
@@ -36,11 +38,9 @@ sub main()
     print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
     print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
     my $savedBytes = $totalOriginalSize - $totalResultSize;
-    my $percentage = ($savedBytes / $totalOriginalSize) * 100;
+    my $percentage = $totalOriginalSize != 0 ? ($savedBytes / $totalOriginalSize) * 100 : 0;
     print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
 }
-
-
 
 sub list_recursively($)
 {
@@ -49,7 +49,7 @@ sub list_recursively($)
 
     unless (opendir(DIRECTORY, $directory))
     {
-        print "Cannot open directory $directory!\n";
+        logError("Cannot open directory $directory!");
         exit;
     }
 
@@ -81,42 +81,41 @@ sub handle_file($)
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
-
         my $tempDir = "$temp\\$base";
+        my $outputArchive = "$outputPath\\$path.7z";
 
-        if (-e "$path.7z")
+        if (-e "$outputArchive")
         {
-            print STDERR "Skipping $file: output \"$path.7z\" exists.\n";
+            logError("Skipping $file: output \"$outputArchive\" exists.");
         }
         elsif (-e $tempDir)
         {
-            print STDERR "Skipping $file: temporary directory \"$tempDir\" exists.\n";
+            logError("Skipping $file: temporary directory \"$tempDir\" exists.");
         }
         else
         {
-            print "Converting archive: $file\n";
+            print "Converting: $file\n";
 
-            my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tempDir");
-            if ($returnCode != 0) 
+            my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tempDir 1>>$logFile");
+            if ($returnCode != 0)
             {
-                $errorCount++;
-                print STDERR "ERROR: 7z returned $returnCode while extracting $file.\n";
+                logError("7z returned $returnCode while extracting $file.");
                 system ("rmdir /S/Q $tempDir\\");
             }
             else
             {
                 my $packDir = $tempDir;
 
-                # Sometimes, an archive contains a single folder with the same name as the archive 
-                # itself, and everything else is stored inside that folder. In that case, we 
+                # Sometimes, an archive contains a single folder with the same name as the archive
+                # itself, and everything else is stored inside that folder. In that case, we
                 # include the contents of the folder, but not the folder itself.
                 if (-d "$tempDir\\$base")
                 {
                     my @files = <$tempDir\\$base>;
                     my $fileCount = @files;
-                    if ($fileCount == 1) 
+                    if ($fileCount == 1)
                     {
-                        print "Including contents of top-level single directory\n";
+                        print "Lifting contents from single top-level directory\n";
                         $packDir = "$tempDir\\$base";
                     }
                 }
@@ -129,7 +128,7 @@ sub handle_file($)
                 # 5. Unpack contained archives into their own directory, taking care
                 #    not to create unneccessary directory levels.
 
-                if (1 == 1) 
+                if (1 == 0)
                 {
                     # Further compress images in the archive if possible
                     system ("perl optimg.pl \"$packDir\"");
@@ -138,11 +137,11 @@ sub handle_file($)
                 # Further compression improvements will be possible by using the PPMd
                 # method for text (and html) files.
 
-                my $returnCode = system ("$sevenZip a -mx9 -r \"$path.7z\" $packDir\\*");
-                if ($returnCode != 0) 
+                # print "Creating output archive: $path.7z\n";
+                my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir\\* 1>>$logFile");
+                if ($returnCode != 0)
                 {
-                    $errorCount++;
-                    print STDERR "ERROR: 7z returned $returnCode while creating $path.7z.\n";
+                    logError("7z returned $returnCode while creating $path.7z.");
                 }
                 system ("rmdir /S/Q $tempDir\\");
 
@@ -157,8 +156,20 @@ sub handle_file($)
     }
 }
 
+sub logError($)
+{
+    my $logMessage = shift;
 
+    $errorCount++;
+    print STDERR "ERROR: $logMessage\n";
+}
 
+sub logMessage($)
+{
+    my $logMessage = shift;
+
+    print "$logMessage\n";
+}
 
 sub formatBytes($)
 {
