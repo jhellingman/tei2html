@@ -48,6 +48,7 @@ In a number of places, rendition ladders are interpreted by `tei2html` directly.
 The following keys and values are supported: (Note that this list is not exhaustive, and the full list of options will be indicated with each element.)
 
 || *Element* || *Key* || *Value* || *Example* ||
+|| `text` || `stylesheet` || name of CSS stylesheet || `style/classic.css` ||
 || _Any_ || `font` || `italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) || `<hi rend="font(bold)">` ||
 || `p`, `q` || `align` || `right`, `left`, `center`, `block` (that is, justified) || `<p rend="align(block)">` ||
 || `p`, `l` || `indent` || The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. || `<l rend="indent(2)">` ||
