@@ -1508,6 +1508,7 @@ BEGIN
     $ent{"triangle"}    = chr(0x25B3);  #  White triangle
     $ent{"bullet"}      = chr(0x2022);  #  Bullet
     $ent{"vardollar"}   = '$';          #  Variant dollar sign (with diagonal slashes)
+    $ent{"maltese"}     = chr(0x2720);  #  Maltese cross
 
     # Metrical symbols
     $ent{"metlong"}     = chr(0x2013);  # metrical long symbol (= EN DASH)

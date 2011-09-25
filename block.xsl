@@ -66,6 +66,9 @@
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
         <xsl:choose>
+            <xsl:when test="contains(@rend, 'dots')">
+                <p class="tb"><xsl:call-template name="generate-id-attribute"/>. . . . . . . . . . . . . . . . . . . . .</p>
+            </xsl:when>
             <xsl:when test="contains(@rend, 'stars')">
                 <p class="tb"><xsl:call-template name="generate-id-attribute"/>*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
             </xsl:when>
