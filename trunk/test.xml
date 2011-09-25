@@ -182,8 +182,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <table rend="summary(A small table to demonstrate bracket images.) align(center)">
     <row>
         <cell>Gadgets</cell>
-        <cell rows="2" rend="image(images/bracket3.gif)valign(middle)width(2)"></cell>
-        <cell rows="2" rend="valign(middle)">Both 1</cell>
+        <cell rows="2" rend="image(images/bracket3.gif) vertical-align(middle) width(2px)"></cell>
+        <cell rows="2" rend="vertical-align(middle)">Both 1</cell>
     </row>
     <row>
         <cell>Fudgets</cell>
