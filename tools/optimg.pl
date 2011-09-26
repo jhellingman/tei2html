@@ -9,6 +9,7 @@ use File::Basename;
 
 my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
+my $gifsicle = "gifsicle.exe";			# see http://www.lcdf.org/gifsicle/
 my $temp = "C:\\Temp";
 
 my $errorCount = 0;
@@ -51,7 +52,7 @@ sub handle_file($)
 {
     my ($file) = @_;
 
-    if ($file =~ m/^(.*)\.(png|jpg)$/)
+    if ($file =~ m/^(.*)\.(png|jpg|gif)$/)
     {
         my $path = $1;
         my $extension = $2;
@@ -71,6 +72,10 @@ sub handle_file($)
         {
             my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
         }
+		elsif ($extension eq 'gif')
+		{
+            my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
+		}
 
         my $resultSize = -s $file;
 
