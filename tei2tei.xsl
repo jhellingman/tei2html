@@ -47,7 +47,7 @@ $Date: 2001/05/26 $ $Author: rahtz $
  </xsl:copy>
 </xsl:template>
 
-<xsl:template match="@*|processing-instruction()|comment()">
+<xsl:template match="@*|processing-instruction()">
   <xsl:copy/>
 </xsl:template>
 

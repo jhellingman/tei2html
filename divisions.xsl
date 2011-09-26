@@ -189,12 +189,16 @@
             <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
 
-                <xsl:attribute name="class">div1<xsl:if test="@type='Index'"> index</xsl:if>
+                <xsl:variable name="class">
+                    <xsl:text>div1</xsl:text>
                     <xsl:if test="contains(@rend, 'class(')">
                         <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
                     </xsl:if>
+                    <xsl:if test="@type='Index'"> index</xsl:if>
                     <xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
-                </xsl:attribute>
+                    <xsl:text> </xsl:text><xsl:call-template name="generate-rend-class-name-if-needed"/>
+                </xsl:variable>
+                <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
 
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="GenerateLabel"/>
@@ -227,9 +231,7 @@
 
         <!-- Do not do this in quoted material -->
         <xsl:if test="not(ancestor::q)">
-
             <xsl:if test="preceding-sibling::div1 or //*[@id='toc'] or following-sibling::div1">
-
                 <p class="navigation">
                     <xsl:text>[ </xsl:text>
                     <xsl:if test="preceding-sibling::div1">
@@ -264,11 +266,8 @@
                     </xsl:if>
                     <xsl:text> ]</xsl:text>
                 </p>
-
             </xsl:if>
-
         </xsl:if>
-
     </xsl:template>
 
 
@@ -282,7 +281,6 @@
             </h2>
         </xsl:if>
     </xsl:template>
-
 
 
     <!--====================================================================-->
@@ -383,6 +381,7 @@
         </h6>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- Generic division content handling -->
 
@@ -426,6 +425,7 @@
 
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- other headers -->
 
@@ -444,9 +444,9 @@
         </p>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- support templates -->
-
 
     <xsl:template name="setRunningHeader">
         <xsl:param name="head" select="."/>

@@ -362,8 +362,6 @@ sub lookupHeatMapClass($)
 }
 
 
-
-
 #
 # heatMapScanno
 #
@@ -492,7 +490,6 @@ sub reportXML()
 }
 
 
-
 #
 # sortWords
 #
@@ -518,7 +515,6 @@ sub reportWordsXML()
         reportLanguageWordsXML($language);
     }
 }
-
 
 
 #
@@ -634,7 +630,6 @@ sub reportLanguagePairs($)
         }
     }
 }
-
 
 
 #
@@ -991,6 +986,7 @@ sub reportCompositeChars()
     }
     print "</table>\n";
 }
+
 
 #
 # reportCompositeCharsXML
