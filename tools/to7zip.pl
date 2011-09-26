@@ -141,12 +141,12 @@ sub handle_file($)
                 my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir\\* 1>>$logFile");
                 if ($returnCode != 0)
                 {
-                    logError("7z returned $returnCode while creating $path.7z.");
+                    logError("7z returned $returnCode while creating $outputArchive.");
                 }
                 system ("rmdir /S/Q $tempDir\\");
 
                 my $originalSize = -s $file;
-                my $resultSize = -s "$path.7z";
+                my $resultSize = -s $outputArchive;
 
                 $archivesConverted++;
                 $totalOriginalSize += $originalSize;
