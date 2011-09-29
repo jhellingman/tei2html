@@ -129,6 +129,7 @@ BEGIN
     $langNameHash{"pag"}        = "Pangasin&aacute;n";
     $langNameHash{"pam"}        = "Kapampangan";
     $langNameHash{"war"}        = "W&aacute;ray-W&aacute;ray";
+    $langNameHash{"phi"}        = "Philippine (Other)";
 
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
     $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
