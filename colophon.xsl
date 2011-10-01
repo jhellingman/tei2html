@@ -39,11 +39,29 @@
                 </p>
             </xsl:if>
 
+            <xsl:if test="//idno[@type='LCCN']">
+                <p><xsl:value-of select="$strLibraryOfCongressCatalogEntry"/>:
+                    <a class="catlink">
+                        <xsl:attribute name="href">http://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
+                        <xsl:value-of select="//idno[@type='LCCN']"/>
+                    </a>.
+                </p>
+            </xsl:if>
+
             <xsl:if test="//idno[@type='OLN']">
                 <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>:
                     <a class="catlink">
-                        <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
+                        <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OLN']"/>
+                    </a>.
+                </p>
+            </xsl:if>
+
+            <xsl:if test="//idno[@type='OLW']">
+                <p><xsl:value-of select="$strOpenLibraryCatalogWorkEntry"/>:
+                    <a class="catlink">
+                        <xsl:attribute name="href">http://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
+                        <xsl:value-of select="//idno[@type='OLW']"/>
                     </a>.
                 </p>
             </xsl:if>

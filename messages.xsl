@@ -272,6 +272,16 @@
             <xsl:with-param name="name" select="'msgOclcCatalogEntry'"/>
         </xsl:call-template>
     </xsl:variable>
+    <xsl:variable name="strLibraryOfCongressCatalogEntry">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgLibraryOfCongressCatalogEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>
+    <xsl:variable name="strOpenLibraryCatalogWorkEntry">
+        <xsl:call-template name="GetMessage">
+            <xsl:with-param name="name" select="'msgOpenLibraryCatalogWorkEntry'"/>
+        </xsl:call-template>
+    </xsl:variable>
     <xsl:variable name="strOpenLibraryCatalogEntry">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgOpenLibraryCatalogEntry'"/>

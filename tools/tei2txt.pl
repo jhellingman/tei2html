@@ -304,6 +304,7 @@ sub entities2iso88591($)
     $a =~ s/\&rbrace;/}/g;
     $a =~ s/\&lbrace;/{/g;
 
+
     # my additions
     $a =~ s/\&eringb;/e/g;
     $a =~ s/\&oubb;/ö/g;
@@ -380,6 +381,8 @@ sub entities2iso88591($)
     $a =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
     $a =~ s/\&ast;/*/g; # asterix
 
+    $a =~ s/\&there4;/./g;	# Therefor (three dots in triangular arrangement) used as abbreviation dot.
+    $a =~ s/\&maltese;/[+]/g;	# Maltese Cross
 
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb);/$1/g;
