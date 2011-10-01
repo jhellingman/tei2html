@@ -288,23 +288,34 @@
 
 
     <!-- Suppress notes in table of contents (to avoid getting them twice) -->
-
     <xsl:template match="note" mode="tochead"/>
 
 
     <!-- Suppress 'label' headings in table of contents -->
-
     <xsl:template match="head[@type='label']" mode="tochead"/>
 
 
     <xsl:template match="head" mode="tochead">
-        <xsl:if test="position() = 1 and ./@n">
-            <xsl:value-of select="./@n"/><xsl:text> </xsl:text>
-        </xsl:if>
-        <xsl:if test="position() &gt; 1">
-            <xsl:text>: </xsl:text>
-        </xsl:if>
-        <xsl:apply-templates mode="tochead"/>
+        <xsl:choose>
+            <xsl:when test="contains(../@rend, 'toc-head(')">
+                <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
+            </xsl:when>
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+            </xsl:when>
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="position() = 1 and ./@n">
+                    <xsl:value-of select="./@n"/><xsl:text> </xsl:text>
+                </xsl:if>
+                <xsl:if test="position() &gt; 1">
+                    <xsl:text>: </xsl:text>
+                </xsl:if>
+                <xsl:apply-templates mode="tochead"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
