@@ -213,8 +213,10 @@
         <msg:message name="msgExternalReferencesDisclaimer">This Project Gutenberg eBook contains external references. These links may not work for you.</msg:message>
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalog page</msg:message>
+        <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
         <msg:message name="msgOclcCatalogEntry">Related WorldCat catalog page</msg:message>
-        <msg:message name="msgOpenLibraryCatalogEntry">Related Open Library catalog page</msg:message>
+        <msg:message name="msgOpenLibraryCatalogEntry">Related Open Library catalog page (for source)</msg:message>
+        <msg:message name="msgOpenLibraryCatalogWorkEntry">Related Open Library catalog page (for work)</msg:message>
 
         <msg:message name="msgOriginalFrontCover">Original Front Cover</msg:message>
         <msg:message name="msgOriginalBackCover">Original Back Cover</msg:message>
@@ -809,8 +811,10 @@
         <msg:message name="msgExternalReferencesDisclaimer">Dit Project Gutenberg eBoek bevat externe referenties. Het kan zijn dat deze links voor u niet werken.</msg:message>
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
+        <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress catalogus pagina</msg:message>
         <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat catalogus pagina</msg:message>
-        <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library catalogus pagina</msg:message>
+        <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library catalogus pagina (voor bron)</msg:message>
+        <msg:message name="msgOpenLibraryCatalogWorkEntry">Gerelateerde Open Library catalogus pagina (voor werk)</msg:message>
 
         <msg:message name="msgLinkToPg">Link naar Project Gutenberg eboek</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Link naar OpenLibrary cataloguspagina</msg:message>
