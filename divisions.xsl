@@ -446,6 +446,16 @@
 
 
     <!--====================================================================-->
+    <!-- division numbers integrated in heads -->
+
+    <xsl:template match="ab[@type='headDivNum']">
+        <span class="headDivNum">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+
+    <!--====================================================================-->
     <!-- support templates -->
 
     <xsl:template name="setRunningHeader">
