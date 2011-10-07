@@ -12,12 +12,12 @@ body, a.hidden
     color: black;
 }
 
-h1, .pseudoh1
+h1, .h1
 {
     padding-bottom: 5em;
 }
 
-h1, h2, .pseudoh1, .pseudoh2
+h1, h2, .h1, .h2
 {
     text-align: center;
     font-variant: small-caps;
