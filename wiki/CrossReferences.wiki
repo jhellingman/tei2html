@@ -30,7 +30,9 @@ This will link to the catalog page of the given book on [http://www.gutenberg.or
 
 *!WorldCat catalog page:* Use `oclc:<`_number_`>` as url.
 
-*Open Library catalog page:* Use `oln:<`_number_`>` as url.
+*Open Library catalog page:* Use `oln:<`_number_`>` as url (when referring tot the published edition used as source).
+
+*Open Library catalog page:* Use `olw:<`_number_`>` as url (when referring to the abstract 'work').
 
 *!WikiPedia article:* Use `wp:<`_title_`>` as url.
 
