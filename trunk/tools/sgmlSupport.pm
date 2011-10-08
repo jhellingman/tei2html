@@ -1495,6 +1495,7 @@ BEGIN
     $ent{"ayin"}        = chr(0x02BF);  # modifier letter left half ring
     $ent{"lhring"}      = chr(0x02BF);  # modifier letter left half ring
     $ent{"commal"}      = ",";          # (comma used as letter)
+    $ent{"hamza"}       = chr(0x02BE);  # hamza
 
     $ent{"florin"}      = chr(0x0192);  #  LATIN SMALL LETTER F WITH HOOK
     $ent{"lb"}          = chr(0x2114);  #  L B BAR SYMBOL
@@ -1566,6 +1567,7 @@ BEGIN
     $ent{"ltilde"}      = "l" . chr(0x0303); # s with tilde
 
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
+    $ent{"lmacr"}       = "l" . chr(0x0304); # l with macron
     $ent{"mmacr"}       = "m" . chr(0x0304); # m with macron
     $ent{"nmacr"}       = "n" . chr(0x0304); # n with macron
     $ent{"qmacr"}       = "q" . chr(0x0304); # q with macron
@@ -1583,6 +1585,7 @@ BEGIN
     $ent{"ndota"}       = "n" . chr(0x0307); # n with dot above
     $ent{"odota"}       = "o" . chr(0x0307); # o with dot above
     $ent{"rdota"}       = "r" . chr(0x0307); # r with dot above
+    $ent{"Sdota"}       = "S" . chr(0x0307); # S with dot above
     $ent{"tdota"}       = "t" . chr(0x0307); # t with dot above
     $ent{"udota"}       = "u" . chr(0x0307); # u with dot above
     $ent{"Udota"}       = "U" . chr(0x0307); # U with dot above
@@ -1638,6 +1641,7 @@ BEGIN
     $ent{"sumlb"}       = "s" . chr(0x0324); # s with diaresis below
     $ent{"Sumlb"}       = "S" . chr(0x0324); # S with diaresis below
     $ent{"zumlb"}       = "z" . chr(0x0324); # z with diaresis below
+    $ent{"Zumlb"}       = "Z" . chr(0x0324); # Z with diaresis below
 
     $ent{"oudb"}        = "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
     $ent{"oubb"}        = "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
@@ -1681,10 +1685,17 @@ BEGIN
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
     $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
     $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
+    $ent{"ibarb"}       = "i" . chr(0x0331); # i with macron below
+    $ent{"kbarb"}       = "k" . chr(0x0331); # k with macron below
+    $ent{"Kbarb"}       = "K" . chr(0x0331); # K with macron below
+    $ent{"lbarb"}       = "l" . chr(0x0331); # l with macron below
     $ent{"mbarb"}       = "m" . chr(0x0331); # m with macron below
+    $ent{"nbarb"}       = "n" . chr(0x0331); # n with macron below
+    $ent{"Nbarb"}       = "N" . chr(0x0331); # N with macron below
     $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
-    $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
+    $ent{"tbarb"}       = "t" . chr(0x0331); # t with macron below
     $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
+    $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
 
     $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
     $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
@@ -1707,6 +1718,8 @@ BEGIN
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below
     $ent{"khbarb"}      = "k" . chr(0x035F) . "h"; # Kh with double macron below
     $ent{"Khbarb"}      = "K" . chr(0x035F) . "h"; # Kh with double macron below
+    $ent{"shbarb"}      = "s" . chr(0x035F) . "h"; # sh with double macron below
+    $ent{"Shbarb"}      = "S" . chr(0x035F) . "h"; # Sh with double macron below
 
     $ent{"ngtilde"}     = "n" . chr(0x0360) . "g"; # ng with double tilde
 
