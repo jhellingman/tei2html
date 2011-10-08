@@ -95,6 +95,24 @@
     </xsl:template>
 
 
+    <xsl:template name="toc-translate-heading-type">
+        <xsl:param name="type" select="@type"/>
+        <xsl:param name="n" select="./@n"/>
+
+        <xsl:choose>
+            <xsl:when test="$type='part'">
+                <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:when test="$type='chapter'">
+                <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
+            </xsl:when>
+            <xsl:when test="$type='appendix'">
+                <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+
     <!-- TOC: div0 -->
 
     <xsl:template match="div0" mode="gentoc">
@@ -103,11 +121,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:choose>
-                        <xsl:when test="@type='part'">
-                            <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:call-template name="toc-translate-heading-type"/>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
@@ -131,14 +145,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:choose>
-                        <xsl:when test="@type='chapter'">
-                            <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                        </xsl:when>
-                        <xsl:when test="@type='appendix'">
-                            <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text><xsl:value-of select="./@n"/>:<xsl:text> </xsl:text>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:call-template name="toc-translate-heading-type"/>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
