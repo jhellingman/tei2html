@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Additional files to be added verbatim to the manifest in the OPF file -->
+<manifest xmlns="http://www.idpf.org/2007/opf">
+    <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
+    <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
+    <item id="tn3" href="images/thumbs/hg2101.png" media-type="image/png"/>
+    <item id="tn4" href="images/thumbs/test.jpg" media-type="image/jpeg"/>
+</manifest>
