@@ -67,7 +67,7 @@
 
     <xsl:template name="generate-metadata">
 
-        <meta http-equiv="Content-Type" content="{$mimeType}; charset={$encoding}"/>
+        <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
         <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"/>
         <meta name="author"             content="{$author}"/>
 

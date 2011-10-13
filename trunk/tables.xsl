@@ -153,10 +153,6 @@
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains(@rend, 'valign(')">
-            <xsl:attribute name="valign"><xsl:value-of select="substring-before(substring-after(@rend, 'valign('), ')')"/></xsl:attribute>
-        </xsl:if>
-
         <xsl:if test="contains(@rend, 'image(')">
             <xsl:call-template name="insertimage2">
                 <xsl:with-param name="alt">

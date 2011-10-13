@@ -118,7 +118,13 @@
                 <xsl:when test="substring(@url, 1, 4) = 'oln:'">
                     <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
-                    <xsl:attribute name="href">http://openlibrary.org/b/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
+                    <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
+                </xsl:when>
+
+                <xsl:when test="substring(@url, 1, 4) = 'olw:'">
+                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
+                    <xsl:attribute name="href">http://openlibrary.org/work/<xsl:value-of select="substring-after(@url, 'olw:')"/></xsl:attribute>
                 </xsl:when>
 
                 <!-- Link to WikiPilipinas article -->
