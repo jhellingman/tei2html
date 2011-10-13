@@ -72,7 +72,17 @@
                         <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
                         <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
                         <meta about="#pub-id" property="scheme">uuid</meta>
-                        <meta property="dcterms:modified"><xsl:value-of select="$utc-timestamp"/></meta>
+                        <meta property="dcterms:modified"><xsl:value-of select="format-dateTime($utc-timestamp, '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/></meta>
+
+                        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
+                        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
+                        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata3"/>
+                        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata3"/>
+                        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata3"/>
+
+                        <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
+                            <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
+                        </xsl:for-each>
                     </xsl:if>
                 </metadata>
 
@@ -161,52 +171,57 @@
         </dc:creator>
     </xsl:template>
 
+    <xsl:template name="translate-contributor-role">
+        <xsl:param name="role" select="resp"/>
+        <xsl:choose>
+            <!-- List taken from OPF Standard, 2.0, section 2.2.6 [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html],
+                 derived from the MARC Code List for Relators  [http://www.loc.gov/marc/relators/relaterm.html] -->
+            <xsl:when test="resp='Adapter'">adp</xsl:when>
+            <xsl:when test="$role='Annotator'">ann</xsl:when>
+            <xsl:when test="$role='Arranger'">arr</xsl:when>
+            <xsl:when test="$role='Artist'">art</xsl:when>
+            <xsl:when test="$role='Associated name'">asn</xsl:when>
+            <xsl:when test="$role='Author'">aut</xsl:when>
+            <xsl:when test="$role='Author in text extracts'">aqt</xsl:when>
+            <xsl:when test="$role='Author in quotations'">aqt</xsl:when>
+            <xsl:when test="$role='Author of afterword'">aft</xsl:when>
+            <xsl:when test="$role='Author of postface'">aft</xsl:when>
+            <xsl:when test="$role='Author of colophon'">aft</xsl:when>
+            <xsl:when test="$role='Author of introduction'">aui</xsl:when>
+            <xsl:when test="$role='Author of preface'">aui</xsl:when>
+            <xsl:when test="$role='Author of foreword'">aui</xsl:when>
+            <xsl:when test="$role='Bibliographic antecedent'">ant</xsl:when>
+            <xsl:when test="$role='Book producer'">bkp</xsl:when>
+            <xsl:when test="$role='Collaborator'">clb</xsl:when>
+            <xsl:when test="$role='Commentator'">cmm</xsl:when>
+            <xsl:when test="$role='Designer'">dsr</xsl:when>
+            <xsl:when test="$role='Editor'">edt</xsl:when>
+            <xsl:when test="$role='Illustrator'">ill</xsl:when>
+            <xsl:when test="$role='Lyricist'">lyr</xsl:when>
+            <xsl:when test="$role='Metadata contact'">mdc</xsl:when>
+            <xsl:when test="$role='Musician'">mus</xsl:when>
+            <xsl:when test="$role='Narrator'">nrt</xsl:when>
+            <xsl:when test="$role='Other'">oth</xsl:when>
+            <xsl:when test="$role='Photographer'">pht</xsl:when>
+            <xsl:when test="$role='Printer'">prt</xsl:when>
+            <xsl:when test="$role='Redactor'">red</xsl:when>
+            <xsl:when test="$role='Reviewer'">rev</xsl:when>
+            <xsl:when test="$role='Sponsor'">spn</xsl:when>
+            <xsl:when test="$role='Thesis advisor'">ths</xsl:when>
+            <xsl:when test="$role='Transcriber'">trc</xsl:when>
+            <xsl:when test="$role='Translator'">trl</xsl:when>
+
+            <!-- Related terms that are responsibility instead of role oriented -->
+            <xsl:when test="$role='Transcription'">trc</xsl:when>
+
+            <xsl:otherwise>oth</xsl:otherwise>
+        </xsl:choose>    
+    </xsl:template>
+
     <xsl:template match="respStmt" mode="metadata">
         <dc:contributor>
             <xsl:attribute name="opf:role">
-                <xsl:choose>
-                    <!-- List taken from OPF Standard, 2.0, section 2.2.6 [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html],
-                         derived from the MARC Code List for Relators  [http://www.loc.gov/marc/relators/relaterm.html] -->
-                    <xsl:when test="resp='Adapter'">adp</xsl:when>
-                    <xsl:when test="resp='Annotator'">ann</xsl:when>
-                    <xsl:when test="resp='Arranger'">arr</xsl:when>
-                    <xsl:when test="resp='Artist'">art</xsl:when>
-                    <xsl:when test="resp='Associated name'">asn</xsl:when>
-                    <xsl:when test="resp='Author'">aut</xsl:when>
-                    <xsl:when test="resp='Author in text extracts'">aqt</xsl:when>
-                    <xsl:when test="resp='Author in quotations'">aqt</xsl:when>
-                    <xsl:when test="resp='Author of afterword'">aft</xsl:when>
-                    <xsl:when test="resp='Author of postface'">aft</xsl:when>
-                    <xsl:when test="resp='Author of colophon'">aft</xsl:when>
-                    <xsl:when test="resp='Author of introduction'">aui</xsl:when>
-                    <xsl:when test="resp='Author of preface'">aui</xsl:when>
-                    <xsl:when test="resp='Author of foreword'">aui</xsl:when>
-                    <xsl:when test="resp='Bibliographic antecedent'">ant</xsl:when>
-                    <xsl:when test="resp='Book producer'">bkp</xsl:when>
-                    <xsl:when test="resp='Collaborator'">clb</xsl:when>
-                    <xsl:when test="resp='Commentator'">cmm</xsl:when>
-                    <xsl:when test="resp='Designer'">dsr</xsl:when>
-                    <xsl:when test="resp='Editor'">edt</xsl:when>
-                    <xsl:when test="resp='Illustrator'">ill</xsl:when>
-                    <xsl:when test="resp='Lyricist'">lyr</xsl:when>
-                    <xsl:when test="resp='Metadata contact'">mdc</xsl:when>
-                    <xsl:when test="resp='Musician'">mus</xsl:when>
-                    <xsl:when test="resp='Narrator'">nrt</xsl:when>
-                    <xsl:when test="resp='Other'">oth</xsl:when>
-                    <xsl:when test="resp='Photographer'">pht</xsl:when>
-                    <xsl:when test="resp='Printer'">prt</xsl:when>
-                    <xsl:when test="resp='Redactor'">red</xsl:when>
-                    <xsl:when test="resp='Reviewer'">rev</xsl:when>
-                    <xsl:when test="resp='Sponsor'">spn</xsl:when>
-                    <xsl:when test="resp='Thesis advisor'">ths</xsl:when>
-                    <xsl:when test="resp='Transcriber'">trc</xsl:when>
-                    <xsl:when test="resp='Translator'">trl</xsl:when>
-
-                    <!-- Related terms that are responsibility instead of role oriented -->
-                    <xsl:when test="resp='Transcription'">trc</xsl:when>
-
-                    <xsl:otherwise>oth</xsl:otherwise>
-                </xsl:choose>
+                <xsl:call-template name="translate-contributor-role"/>
             </xsl:attribute>
             <xsl:attribute name="opf:file-as">
                 <xsl:value-of select="name"/>
@@ -227,6 +242,32 @@
         <dc:rights>
             <xsl:value-of select="."/>
         </dc:rights>
+    </xsl:template>
+
+    <!--== metadata3 (for ePub3) ===========================================-->
+
+    <xsl:template match="title" mode="metadata3">
+        <meta property="dcterms:title"><xsl:value-of select="."/></meta>
+    </xsl:template>
+
+    <xsl:template match="author" mode="metadata3">
+        <meta property="dcterms:creator"><xsl:value-of select="."/></meta>
+    </xsl:template>
+
+    <xsl:template match="respStmt" mode="metadata3">
+        <meta property="dcterms:contributor"><xsl:value-of select="name"/></meta>
+    </xsl:template>
+
+    <xsl:template match="publicationStmt" mode="metadata3">
+        <meta property="dcterms:publisher">
+            <xsl:value-of select="publisher"/>
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="pubPlace"/>
+        </meta>
+    </xsl:template>
+
+    <xsl:template match="availability" mode="metadata3">
+        <meta property="dcterms:rights"><xsl:value-of select="."/></meta>
     </xsl:template>
 
 

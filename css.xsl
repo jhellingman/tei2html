@@ -98,6 +98,7 @@
             <xsl:when test="$property='font' and $value='italic'">font-style:italic;</xsl:when>
 
             <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>;</xsl:when>
+            <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>;</xsl:when>
             <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="$value"/>em;</xsl:when>
 
             <!-- Assume the rest is valid CSS -->

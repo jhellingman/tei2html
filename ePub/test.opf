@@ -20,13 +20,23 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2011-10-08</dc:date>
+      <dc:date opf:event="generation">2011-10-13</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
       <dc:identifier id="pub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</meta>
       <meta about="#pub-id" property="scheme">uuid</meta>
-      <meta property="dcterms:modified">2011-10-08T20:12:11.022Z</meta>
+      <meta property="dcterms:modified">2011-10-13T20:40:42Z</meta>
+      <meta property="dcterms:title">Main Title of Work Goes Here</meta>
+      <meta property="dcterms:creator">Author of Work (Birth-year—Death-year)</meta>
+      <meta property="dcterms:creator">A. U. Thor</meta>
+      <meta property="dcterms:creator">W. Riter</meta>
+      <meta property="dcterms:contributor">Transcribers Name</meta>
+      <meta property="dcterms:publisher">Project Gutenberg, Urbana, Illinois, USA.</meta>
+      <meta property="dcterms:rights">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</meta>
+      <meta property="dcterms:subject">TEI (Text Encoding Initiative)</meta>
+      <meta property="dcterms:subject">XSLT</meta>
+      <meta property="dcterms:subject">HTML</meta>
    </metadata>
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>

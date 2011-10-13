@@ -9,6 +9,9 @@ my $saxon2 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\sax
 my $epubcheck = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
 my $epubpreflight = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar "; 
 
+# See http://code.google.com/p/epubcheck/wiki/EPUBCheck30 for ePub3 checker
+my $epubcheck3 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0b2.jar ";
+
 
 my $basename = "test";
 
@@ -51,5 +54,6 @@ system ("zip -Xr9Dq ../$basename.epub mimetype");
 system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
 chdir "..";
 
-system ("$epubcheck $basename.epub");
+system ("$epubcheck $basename.epub 2> test-epubcheck.err");
+system ("$epubcheck3 $basename.epub 2> test-epubcheck3.err");
 # system ("$epubpreflight $basename.epub");
