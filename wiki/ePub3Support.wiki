@@ -108,3 +108,9 @@ The navigation document is now a valid `XHTML` page, wrapped in the `<nav>` elem
 = Validation =
 
 See this [http://blog.threepress.org/2011/06/13/validating-epub-3-today/ short article on threepress].
+
+= XHTML =
+
+Will need to generate valid XHTML, which means:
+
+   * Removal of some attributes, such as summary, valign, align, width, etc. from elements.
