@@ -15,14 +15,16 @@ my $epubcheck3 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\
 
 my $basename = "test";
 
+my $pwd = `pwd`;
+chop($pwd);
+$pwd =~ s/\\/\//g;
+
+
 # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.
 my $fileImageParam = "";
 if (-f "imageinfo.xml")
 {
-    my $pwd = `pwd`;
-    chop($pwd);
-    $pwd =~ s/\\/\//g;
-
+    print "Adding imageinfo.xml...\n";
     $fileImageParam = "imageInfoFile=\"file:/$pwd/imageinfo.xml\"";
 }
 
@@ -31,12 +33,14 @@ my $cssFileParam = "";
 if (-f "custom.css.xml")
 {
     print "Adding custom.css stylesheet...\n";
-
-    my $pwd = `pwd`;
-    chop($pwd);
-    $pwd =~ s/\\/\//g;
-
     $cssFileParam = "customCssFile=\"file:/$pwd/custom.css.xml\"";
+}
+
+my $opfManifestFileParam = "";
+if (-f "opf-manifest.xml")
+{
+	print "Adding additional elements for the OPF manifest...\n";
+	$opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
 }
 
 
@@ -45,7 +49,7 @@ if (-f "custom.css.xml")
 
 system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" > test.html");
 
-system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml");
+system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > tmp.xhtml");
 # system ("$saxon2 -T $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml 2> trace.xml");
 
 system ("del $basename.epub");
