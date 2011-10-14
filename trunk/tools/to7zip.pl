@@ -6,17 +6,9 @@
 
 use strict;
 use File::Basename;
+use File::Temp;
 
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
-my $temp = $ENV{'TMP'};
-if (!$temp)
-{
-    $temp = $ENV{'TMPDIR'};
-}
-if (!$temp)
-{
-    $temp = "D:\\Temp";
-}
 
 my $errorCount = 0;
 my $totalOriginalSize = 0;
@@ -26,6 +18,8 @@ my $archivesConverted = 0;
 my $outputPath = "to7zip-output";
 my $logFile = "to7zip.log";
 
+sub main();
+
 main();
 
 sub main()
@@ -34,13 +28,21 @@ sub main()
     list_recursively($ARGV[0]);
 
     print "Number of archives:        $archivesConverted\n";
-    print "Number of errors:          $errorCount\n";
-    print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
-    print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
-    my $savedBytes = $totalOriginalSize - $totalResultSize;
-    my $percentage = $totalOriginalSize != 0 ? ($savedBytes / $totalOriginalSize) * 100 : 0;
-    print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
+    if ($errorCount > 0)
+	{
+		print "Number of errors:          $errorCount\n";
+	}
+	if ($archivesConverted > 0)
+	{
+		print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
+		print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
+		my $savedBytes = $totalOriginalSize - $totalResultSize;
+		my $percentage = $totalOriginalSize != 0 ? ($savedBytes / $totalOriginalSize) * 100 : 0;
+		print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
+	}
 }
+
+sub list_recursively($);
 
 sub list_recursively($)
 {
@@ -80,43 +82,41 @@ sub handle_file($)
     {
         my $path = $1;
         my $extension = $2;
-        my $base = basename($file, '.' . $extension);
-        my $tempDir = "$temp\\$base";
+        my $base = basename($file, '.' . $extension);	
         my $outputArchive = "$outputPath\\$path.7z";
 
         if (-e "$outputArchive")
         {
-            logError("Skipping $file: output \"$outputArchive\" exists.");
-        }
-        elsif (-e $tempDir)
-        {
-            logError("Skipping $file: temporary directory \"$tempDir\" exists.");
+            logMessage("Skipping $file: output \"$outputArchive\" exists.");			
+			# No early return as we are still counting the sizes (probably results from a previous run)	
         }
         else
         {
-            print "Converting: $file\n";
+            logMessage("Converting: $file.");
 
-            my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tempDir 1>>$logFile");
+			my $tmpDir = File::Temp->newdir();
+			my $tmpDirName = $tmpDir->dirname;	
+			
+            my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tmpDirName 1>>$logFile");
             if ($returnCode != 0)
             {
                 logError("7z returned $returnCode while extracting $file.");
-                system ("rmdir /S/Q $tempDir\\");
             }
             else
             {
-                my $packDir = $tempDir;
+                my $packDir = $tmpDirName;
 
                 # Sometimes, an archive contains a single folder with the same name as the archive
                 # itself, and everything else is stored inside that folder. In that case, we
                 # include the contents of the folder, but not the folder itself.
-                if (-d "$tempDir\\$base")
+                if (-d "$tmpDirName\\$base")
                 {
-                    my @files = <$tempDir\\$base>;
+                    my @files = <$tmpDirName\\$base>;
                     my $fileCount = @files;
                     if ($fileCount == 1)
                     {
-                        print "Lifting contents from single top-level directory\n";
-                        $packDir = "$tempDir\\$base";
+                        logMessage("Lifting contents from single top-level directory.");
+                        $packDir = "$tmpDirName\\$base";
                     }
                 }
 
@@ -128,10 +128,10 @@ sub handle_file($)
                 # 5. Unpack contained archives into their own directory, taking care
                 #    not to create unneccessary directory levels.
 
-                if (1 == 0)
+                if (1 == 1)
                 {
                     # Further compress images in the archive if possible
-                    system ("perl optimg.pl \"$packDir\"");
+                    system ("perl optimg.pl \"$packDir\" 1>>$logFile");
                 }
 
                 # Further compression improvements will be possible by using the PPMd
@@ -143,23 +143,20 @@ sub handle_file($)
                 {
                     logError("7z returned $returnCode while creating $outputArchive.");
                 }
-                system ("rmdir /S/Q $tempDir\\");
-
-                my $originalSize = -s $file;
-                my $resultSize = -s $outputArchive;
-
-                $archivesConverted++;
-                $totalOriginalSize += $originalSize;
-                $totalResultSize += $resultSize;
             }
         }
+		
+		my $originalSize = -s $file;
+		my $resultSize = -s $outputArchive;
+		$archivesConverted++;
+		$totalOriginalSize += $originalSize;
+		$totalResultSize += $resultSize;
     }
 }
 
 sub logError($)
 {
     my $logMessage = shift;
-
     $errorCount++;
     print STDERR "ERROR: $logMessage\n";
 }
@@ -167,7 +164,6 @@ sub logError($)
 sub logMessage($)
 {
     my $logMessage = shift;
-
     print "$logMessage\n";
 }
 
@@ -178,9 +174,9 @@ sub formatBytes($)
     my $mb = (1024 * 1024);
     my $gb = (1024 * 1024 * 1024);
 
-    ($num > $gb) ? return sprintf("%d GB", $num/$gb) :
-    ($num > $mb) ? return sprintf("%d MB", $num/$mb) :
-    ($num > $kb) ? return sprintf("%d KB", $num/$kb) :
+    ($num > $gb) ? return sprintf("%d GB", $num / $gb) :
+    ($num > $mb) ? return sprintf("%d MB", $num / $mb) :
+    ($num > $kb) ? return sprintf("%d KB", $num / $kb) :
     return $num . ' B';
 }
 

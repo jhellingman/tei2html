@@ -11,12 +11,15 @@ my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
 my $gifsicle = "gifsicle.exe";          # see http://www.lcdf.org/gifsicle/
 my $temp = "C:\\Temp";
+my $logFile = "optimg.log";
 
 my $errorCount = 0;
 my $totalOriginalSize = 0;
 my $totalResultSize = 0;
 my $imagesConverted = 0;
 
+
+sub list_recursively($);
 
 sub list_recursively($)
 {
@@ -66,15 +69,15 @@ sub handle_file($)
 
         if ($extension eq 'png') 
         {
-            my $returnCode = system ("$pngout /y \"$file\" \"$file\"");
+            my $returnCode = system ("$pngout /y \"$file\" \"$file\" 1>>$logFile");
         }
         elsif ($extension eq 'jpg' or $extension eq 'jpeg') 
         {
-            my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
+            my $returnCode = system ("$jpegoptim --strip-all \"$file\" 1>>$logFile");
         }
         elsif ($extension eq 'gif')
         {
-            my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
+            my $returnCode = system ("$gifsicle -O2 --batch \"$file\" 1>>$logFile");
         }
 
         my $resultSize = -s $file;
@@ -92,10 +95,16 @@ sub main()
     list_recursively($ARGV[0]);
 
     print "Number of images:          $imagesConverted\n";
-    print "Number of errors:          $errorCount\n";
-    print "Original size of images:   $totalOriginalSize bytes\n";
-    print "New size of images:        $totalResultSize bytes\n";
-    print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+	if ($errorCount > 0)
+	{
+		print "Number of errors:          $errorCount\n";
+	}
+	if ($imagesConverted > 0)
+	{
+		print "Original size of images:   $totalOriginalSize bytes\n";
+		print "New size of images:        $totalResultSize bytes\n";
+		print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+	}
 }
 
 
