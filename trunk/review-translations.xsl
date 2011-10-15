@@ -27,14 +27,14 @@
 
                 .param { color: red; font-weight: bold; font-family: courier new; }
                 .missing { background-color: yellow; }
-                TH { text-align: left; }
+                table { width: 100%; }
+                th, td { text-align: left; vertical-align: top; }
 
             </style>
         </head>
         <body>
-
             <h2>Missing Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
-            <table width="100%">
+            <table>
                 <tr>
                     <th width="20%">Message ID</th>
                     <th width="80%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th></tr>
@@ -42,7 +42,7 @@
             </table>
 
             <h2>Overview of Available Translations in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></h2>
-            <table width="100%">
+            <table>
                 <tr>
                     <th width="20%">Message ID</th>
                     <th width="40%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
@@ -60,7 +60,7 @@
             <xsl:variable name="name" select="@name"/>
             <xsl:variable name="value" select="."/>
             <xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">
-                <tr valign="top">
+                <tr>
                     <td class="messageid"><xsl:value-of select="@name"/></td>
 						<xsl:choose>
 						<xsl:when test="string-length($value) &lt; 2000">
@@ -81,7 +81,7 @@
             <xsl:variable name="name" select="@name"/>
             <xsl:variable name="value" select="."/>
             <xsl:variable name="translation" select="//msg:message[@name=$name and lang($destlang)]"/>
-            <tr valign="top">
+            <tr>
                 <td>
                     <xsl:value-of select="@name"/>
                 </td>

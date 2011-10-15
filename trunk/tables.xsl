@@ -98,7 +98,7 @@
 
 
     <xsl:template match="row">
-        <tr valign="top">
+        <tr>
             <xsl:variable name="class">
                 <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
                 <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells -->
