@@ -101,6 +101,11 @@ body
     padding:1em;
 }
 
+.correctiontable
+{
+    width: 75%;
+}
+
 .width20
 {
     width: 20%;
@@ -401,9 +406,14 @@ p.footnote .label
 
 /****** Tables ******/
 
-td, th
+tr, td, th
 {
     vertical-align: top;
+}
+
+td.bottom
+{
+    vertical-align: bottom;
 }
 
 td.label, tr.label td

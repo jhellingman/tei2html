@@ -56,7 +56,7 @@
             </xsl:variable>
 
             <xsl:variable name="halfway" select="ceiling(count(item) div 2)"/>
-            <tr valign="top">
+            <tr>
                 <td>
                     <xsl:element name="{$listType}">
                         <xsl:call-template name="generate-rend-class-attribute-if-needed"/>

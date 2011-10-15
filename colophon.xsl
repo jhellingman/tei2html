@@ -108,7 +108,7 @@
     <xsl:template name="correctionTable">
         <p><xsl:value-of select="$strCorrectionsAppliedToText"/></p>
 
-        <table width="75%">
+        <table class="correctiontable">
             <xsl:attribute name="summary"><xsl:value-of select="$strCorrectionsOverview"/></xsl:attribute>
             <tr>
                 <th><xsl:value-of select="$strPage"/></th>
@@ -116,51 +116,9 @@
                 <th><xsl:value-of select="$strCorrection"/></th>
             </tr>
 
-            <!--
-            <xsl:for-each select="//corr">
-                <xsl:if test="not(@resp) or not(@resp = 'm' or @resp = 'p')">
-                    <tr>
-                        <td class="width20">
-                            <a class="pageref">
-                                <xsl:call-template name="generate-href-attribute"/>
-                                <xsl:choose>
-                                    <xsl:when test="not(preceding::pb[1]/@n) or preceding::pb[1]/@n = ''">
-                                        <xsl:value-of select="$strNotApplicable"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="preceding::pb[1]/@n"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </a>
-                        </td>
-                        <td class="width40">
-                            <xsl:choose>
-                                <xsl:when test="@sic != ''">
-                                    <xsl:value-of select="@sic"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    [<i><xsl:value-of select="$strNotInSource"/></i>]
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </td>
-                        <td class="width40">
-                            <xsl:choose>
-                                <xsl:when test=". != ''">
-                                    <xsl:apply-templates/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    [<i><xsl:value-of select="$strDeleted"/></i>]
-                                </xsl:otherwise>
-                            </xsl:choose>
-                        </td>
-                    </tr>
-                </xsl:if>
-            </xsl:for-each>
-            -->
-
             <xsl:for-each-group select="//corr" group-by="concat(@sic, concat('@@@', .))">
                 <tr>
-                    <td class="width20" valign="top">
+                    <td class="width20">
                         <xsl:for-each select="current-group()">
                             <xsl:if test="position() != 1">
                                 <xsl:text>, </xsl:text>
@@ -179,7 +137,7 @@
                         </xsl:for-each>
                     </td>
 
-                    <td class="width40" valign="bottom">
+                    <td class="width40 bottom">
                         <xsl:choose>
                             <xsl:when test="@sic != ''">
                                 <xsl:value-of select="@sic"/>
@@ -190,7 +148,7 @@
                         </xsl:choose>
                     </td>
 
-                    <td class="width40" valign="bottom">
+                    <td class="width40 bottom">
                         <xsl:choose>
                             <xsl:when test=". != ''">
                                 <xsl:apply-templates/>

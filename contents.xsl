@@ -520,7 +520,6 @@
         </div>
     </xsl:template>
 
-
     <xsl:template name="splitrows">
         <xsl:param name="figures"/>
         <xsl:param name="columns"/>
@@ -562,7 +561,6 @@
         </td>
     </xsl:template>
 
-
     <xsl:template match="figure" mode="gallery-captions">
         <td align="center" valign="top">
             <a>
@@ -571,7 +569,6 @@
             </a>
         </td>
     </xsl:template>
-
 
     <xsl:template match="head" mode="gallery-captions">
         <xsl:apply-templates mode="gallery-captions"/>
