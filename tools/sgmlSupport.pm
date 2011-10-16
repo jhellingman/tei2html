@@ -1720,6 +1720,8 @@ BEGIN
     $ent{"Khbarb"}      = "K" . chr(0x035F) . "h"; # Kh with double macron below
     $ent{"shbarb"}      = "s" . chr(0x035F) . "h"; # sh with double macron below
     $ent{"Shbarb"}      = "S" . chr(0x035F) . "h"; # Sh with double macron below
+    $ent{"zhbarb"}      = "z" . chr(0x035F) . "h"; # zh with double macron below
+    $ent{"Zhbarb"}      = "Z" . chr(0x035F) . "h"; # Zh with double macron below
 
     $ent{"ngtilde"}     = "n" . chr(0x0360) . "g"; # ng with double tilde
 
