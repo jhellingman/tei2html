@@ -819,42 +819,42 @@ body
 
 
 
-.xd24e325
+.xd24e366
 {
 color:red; background-color:yellow;
 }
 
-.xd24e326
+.xd24e367
 {
 color:green; text-align:right;
 }
 
-.xd24e327
+.xd24e368
 {
 color:blue; text-align:right;
 }
 
-.xd24e363
+.xd24e404
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd24e364
+.xd24e405
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd24e367
+.xd24e408
 {
 border-top:2px solid black;
 }
 
-.xd24e384
+.xd24e425
 {
 border-top:1px solid black;
 }
 
-.xd24e415
+.xd24e456
 {
 border-bottom:2px solid black;
 }
@@ -879,128 +879,128 @@ font-family:'Walbaum-Fraktur';
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd24e292
+.xd24e333
 {
 margin:0px auto; display:table;
 }
 
-.xd24e296
+.xd24e337
 {
 vertical-align:middle; width:2px;
 }
 
-.xd24e297
+.xd24e338
 {
 vertical-align:middle;
 }
 
-.xd24e307
+.xd24e348
 {
 margin-left:2em;
 }
 
-.xd24e309
+.xd24e350
 {
 width:25%;
 }
 
-.xd24e311
+.xd24e352
 {
 width:75%;
 }
 
-.xd24e322
+.xd24e363
 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd24e331
+.xd24e372
 {
 text-align:right;
 }
 
-.xd24e350
+.xd24e391
 {
 text-align:center;
 }
 
-.xd24e355
+.xd24e396
 {
 text-align:left;
 }
 
-.xd24e362
+.xd24e403
 {
 width:40%; border-collapse:collapse;
 }
 
-.xd24e518width
+.xd24e559width
 {
     width:80px;
 }
             
-.xd24e523
+.xd24e564
 {
 width:100px;
 }
 
-.xd24e523width
+.xd24e564width
 {
     width:80px;
 }
             
-.xd24e531width
+.xd24e572width
 {
     width:80px;
 }
             
-.xd24e543width
+.xd24e584width
 {
     width:480px;
 }
             
-.xd24e563width
+.xd24e604width
 {
     width:480px;
 }
             
-.xd24e613
+.xd24e654
 {
 font-style:italic;
 }
 
-.xd24e644
+.xd24e685
 {
 list-style-type:disc;
 }
 
-.xd24e674
+.xd24e715
 {
 list-style-type:upper-roman;
 }
 
-.xd24e686
+.xd24e727
 {
 list-style-type:lower-roman;
 }
 
-.xd24e706
+.xd24e747
 {
 text-align:left;
 }
 
-.xd24e709
+.xd24e750
 {
 text-align:right;
 }
 
-.xd24e711
+.xd24e752
 {
 text-align:center;
 }
 
 
-.xd24e714
+.xd24e755
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1008,7 +1008,7 @@ text-align:center;
     
 }
 
-.xd24e714init
+.xd24e755init
 {
     float: left;
     width: 90px;
@@ -1023,47 +1023,47 @@ text-align:center;
 }
 
         
-.xd24e719
+.xd24e760
 {
 text-align:justify;
 }
 
-.xd24e735
+.xd24e776
 {
 text-align:center;
 }
 
-.xd24e744
+.xd24e785
 {
 text-align:center;
 }
 
-.xd24e749
+.xd24e790
 {
 text-indent:1em;
 }
 
-.xd24e755
+.xd24e796
 {
 text-indent:2em;
 }
 
-.xd24e759
+.xd24e800
 {
 text-indent:3em;
 }
 
-.xd24e763
+.xd24e804
 {
 text-indent:10em;
 }
 
-.xd24e765
+.xd24e806
 {
 font-style:italic;
 }
 
-.xd24e877
+.xd24e918
 {
 display:none;
 }

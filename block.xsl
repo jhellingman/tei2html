@@ -15,6 +15,7 @@
     <!ENTITY frac14     "&#x00BC;">
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
+    <!ENTITY asterism   "&#x2042;">
 
 ]>
 <!--
@@ -74,6 +75,9 @@
             </xsl:when>
             <xsl:when test="contains(@rend, 'star')">
                 <p class="tb"><xsl:call-template name="generate-id-attribute"/>*</p>
+            </xsl:when>
+            <xsl:when test="contains(@rend, 'asterism')">
+                <p class="tb"><xsl:call-template name="generate-id-attribute"/>&asterism;</p>
             </xsl:when>
             <xsl:when test="contains(@rend, 'space')">
                 <p class="tb">
