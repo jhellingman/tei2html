@@ -15,6 +15,8 @@
 <!ENTITY egrave "&#232;">
 
 <!ENTITY lorem "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+<!ENTITY quickbrown "The quick brown fox jumps over the lazy dog">
+
 
 <!ENTITY availability.en "<p lang='en'>This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.</p>">
 
@@ -119,6 +121,7 @@
 <p>This is a test document, mainly intended to test<note n="1">Test of a footnote at the div0 level.</note> the features implemented in the tei2html <index level1="XSLT"/>XSLT stylesheets. This document serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my <index level1="Stylesheet"/>stylesheet (yes, I sometimes forget myself). </p>
 
 
+
 <div1 id="ch1" n="1" type="Chapter">
 <head type="label">Chapter 1</head>
 <head>Text Styles</head>
@@ -127,6 +130,23 @@
 <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi>
 text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
 a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+
+<table>
+<row><cell><hi>&quickbrown;</hi>    </cell><cell>Italic</cell></row>
+<row><cell><hi rend="bold">&quickbrown;</hi>    </cell><cell>Bold</cell></row>
+<row><cell><hi rend="sc">&quickbrown;</hi>    </cell><cell>Caps and small-caps</cell></row>
+<row><cell><hi rend="uc">&quickbrown;</hi>    </cell><cell>All-caps</cell></row>
+<row><cell><hi rend="ex">&quickbrown;</hi>    </cell><cell>letter-spaced</cell></row>
+</table>
+
+
+
+</div1>
+<div1 id="ch2" n="2" type="Chapter">
+<head type="label">Chapter 2</head>
+<head>Text Elements</head>
+
+
 
 
 <q rend="block"><text><body><div1><head>Section head in quoted material</head>
@@ -138,7 +158,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> and the <xref url="bib:gen 1:1">Bible</xref>.</p>
 
 </div1>
-<div1 id="ch2" type="Chapter" n="2" rend="label(yes)">
+<div1 id="ch3" type="Chapter" n="3" rend="label(yes)">
 <head>Footnotes<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note></head>
 
 <p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.
