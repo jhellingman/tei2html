@@ -27,11 +27,11 @@ while (<INPUTFILE>)
 
     # Replace PGDP page-separators (preserving proofers):
     # $_ =~ s/^-*File: 0*([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
-    $_ =~ s/^-*File: 0*([0-9]+)\.png-*\\([^\\]+)\\([^\\]?)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1>/g;
+    $_ =~ s/^-*File: 0*([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]?)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1>/g;
     # For DP-EU:
-    $_ =~ s/^-*File: 0*([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1>/g;
+    $_ =~ s/^-*File: 0*([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1>/g;
     # For omitted proofer names.
-    $_ =~ s/^-*File: 0*([0-9]+)\.png-*$/<pb n=\1>/g;
+    $_ =~ s/^-*File: 0*([0-9]+)\.(png|jpg)-*$/<pb n=\1>/g;
 
     # Replace footnote indicators:
     $_ =~ s/\[([0-9]+)\]/<note n=\1><\/note>/g;

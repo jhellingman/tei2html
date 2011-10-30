@@ -22,7 +22,7 @@ my $saxon2          = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\
 
 my $epubcheck       = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck1.2\\epubcheck-1.2.jar ";
 my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
-my $epubcheck3		= "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0b2.jar ";
+my $epubcheck3      = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0b2.jar ";
 
 #==============================================================================
 # Arguments
@@ -120,6 +120,9 @@ sub processFile($)
     # extract metadata
     system ("$saxon2 $basename.xml $xsldir/tei2dc.xsl > metadata.xml");
 
+    # create PGTEI version
+    system ("$saxon2 $basename.xml $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+
     collectImageInfo();
 
     my $pwd = `pwd`;
@@ -150,19 +153,19 @@ sub processFile($)
 
     if ($makeHTML == 1)
     {
-		if (isNewer($basename . ".html", $basename . ".xml"))
-		{
-			print "Skipping convertion to HTML ($basename.html newer than $basename.xml).\n";
-		}
-		else
-		{
-			my $tmpFile = mktemp('tmp-XXXXX');;
-			print "Create HTML version...\n";
-			system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
-			system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
-			system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
-			unlink($tmpFile);
-		}
+        if (isNewer($basename . ".html", $basename . ".xml"))
+        {
+            print "Skipping convertion to HTML ($basename.html newer than $basename.xml).\n";
+        }
+        else
+        {
+            my $tmpFile = mktemp('tmp-XXXXX');;
+            print "Create HTML version...\n";
+            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
+            system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
+            system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
+            unlink($tmpFile);
+        }
     }
 
     if ($makePDF == 1)
@@ -269,11 +272,11 @@ sub sgml2xml($$)
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
-	if (isNewer($xmlFile, $sgmlFile))
-	{
-		print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
-		return;
-	}
+    if (isNewer($xmlFile, $sgmlFile))
+    {
+        print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
+        return;
+    }
 
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
@@ -326,7 +329,7 @@ sub isNewer($$)
     my $file1 = shift;
     my $file2 = shift;
 
-	return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime) 
+    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime) 
 }
 
 

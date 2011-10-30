@@ -27,8 +27,6 @@
     version="1.0"
     >
 
-
-
     <!--====================================================================-->
     <!-- Poetry -->
 
@@ -103,7 +101,6 @@
     </xsl:template>
 
     <!-- Speaker -->
-
     <xsl:template match="speaker">
         <p>
             <xsl:attribute name="class">speaker <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -113,7 +110,6 @@
     </xsl:template>
 
     <!-- Stage directions -->
-
     <xsl:template match="stage">
         <p>
             <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -139,7 +135,6 @@
     </xsl:template>
 
     <!-- Cast lists -->
-
     <xsl:template match="castList">
         <ul>
             <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -180,7 +175,5 @@
             <xsl:apply-templates/>
         </li>
     </xsl:template>
-
-
 
 </xsl:stylesheet>
