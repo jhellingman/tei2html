@@ -61,9 +61,14 @@
                         <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
                     </xsl:if>
 
-                    <xsl:if test="//figure[@id='cover-image']">
-                        <meta name="cover" content="cover-image"/>
-                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="//figure[@id='cover-image']">
+                            <meta name="cover" content="cover-image"/>
+                        </xsl:when>
+                        <xsl:when test="//figure[@id='titlepage-image']">
+                            <meta name="cover" content="cover-image"/>
+                        </xsl:when>
+                    </xsl:choose>
 
                     <xsl:if test="$optionEPub3 = 'Yes'">
                         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
@@ -393,7 +398,7 @@
     <!--== guides ==========================================================-->
 
     <xsl:template name="get-cover-image">
-        <xsl:variable name="figure" select="(//figure[@id = 'cover-image'])[1]"/>
+        <xsl:variable name="figure" select="(if (//figure[@id = 'cover-image']) then //figure[@id = 'cover-image'] else //figure[@id = 'titlepage-image'])[1]"/>
         <xsl:choose>
             <xsl:when test="contains($figure/@rend, 'image(')">
                 <xsl:value-of select="substring-before(substring-after($figure/@rend, 'image('), ')')"/>
