@@ -66,7 +66,7 @@
                             <meta name="cover" content="cover-image"/>
                         </xsl:when>
                         <xsl:when test="//figure[@id='titlepage-image']">
-                            <meta name="cover" content="cover-image"/>
+                            <meta name="cover" content="titlepage-image"/>
                         </xsl:when>
                     </xsl:choose>
 
@@ -425,7 +425,7 @@
             </xsl:if>
 
             <!-- Name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
-            <xsl:if test="//figure[@id = 'cover-image']">
+            <xsl:if test="//figure[@id = 'cover-image' or @id = 'titlepage-image']">
                 <reference type="other.ms-coverimage" title="{$strCoverImage}">
                     <xsl:attribute name="href">
                         <xsl:call-template name="get-cover-image"/>
