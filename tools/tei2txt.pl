@@ -321,9 +321,22 @@ sub entities2iso88591($)
     $a =~ s/\&ghbarb;/gh/g;
     $a =~ s/\&Ghbarb;/Gh/g;
     $a =~ s/\&GHbarb;/GH/g;
+
     $a =~ s/\&khbarb;/kh/g;
     $a =~ s/\&Khbarb;/Kh/g;
     $a =~ s/\&KHbarb;/KH/g;
+
+    $a =~ s/\&shbarb;/sh/g;
+    $a =~ s/\&Shbarb;/Sh/g;
+    $a =~ s/\&SHbarb;/SH/g;
+
+    $a =~ s/\&zhbarb;/zh/g;
+    $a =~ s/\&Zhbarb;/Zh/g;
+    $a =~ s/\&ZHbarb;/ZH/g;
+
+    $a =~ s/\&ayin;/`/g;
+    $a =~ s/\&hamza;/'/g;
+
     $a =~ s/\&amacrdotb;/a/g;
 
     $a =~ s/\&oumlcirc;/ö/g;
