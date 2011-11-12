@@ -1716,12 +1716,16 @@ BEGIN
 
     $ent{"ghbarb"}      = "g" . chr(0x035F) . "h"; # gh with double macron below
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below
+    $ent{"GHbarb"}      = "G" . chr(0x035F) . "H"; # GH with double macron below
     $ent{"khbarb"}      = "k" . chr(0x035F) . "h"; # Kh with double macron below
     $ent{"Khbarb"}      = "K" . chr(0x035F) . "h"; # Kh with double macron below
+    $ent{"KHbarb"}      = "K" . chr(0x035F) . "H"; # KH with double macron below
     $ent{"shbarb"}      = "s" . chr(0x035F) . "h"; # sh with double macron below
     $ent{"Shbarb"}      = "S" . chr(0x035F) . "h"; # Sh with double macron below
+    $ent{"SHbarb"}      = "S" . chr(0x035F) . "H"; # SH with double macron below
     $ent{"zhbarb"}      = "z" . chr(0x035F) . "h"; # zh with double macron below
     $ent{"Zhbarb"}      = "Z" . chr(0x035F) . "h"; # Zh with double macron below
+    $ent{"ZHbarb"}      = "Z" . chr(0x035F) . "H"; # ZH with double macron below
 
     $ent{"ngtilde"}     = "n" . chr(0x0360) . "g"; # ng with double tilde
 
