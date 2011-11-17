@@ -121,7 +121,7 @@ sub processFile($)
     system ("$saxon2 $basename.xml $xsldir/tei2dc.xsl > metadata.xml");
 
     # create PGTEI version
-    system ("$saxon2 $basename.xml $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    # system ("$saxon2 $basename.xml $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     collectImageInfo();
 
