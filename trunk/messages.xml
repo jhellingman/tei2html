@@ -58,6 +58,7 @@
         <msg:message name="msgListOfIllustrations">List of Illustrations</msg:message>
         <msg:message name="msgListOfTables">List of Tables</msg:message>
         <msg:message name="msgAcknowledgements">Acknowledgements</msg:message>
+        <msg:message name="msgEpigraph">Epigraph</msg:message>
         <msg:message name="msgNote">Note</msg:message>
         <msg:message name="msgNote.n">Notes</msg:message>
         <msg:message name="msgPage">Page</msg:message>

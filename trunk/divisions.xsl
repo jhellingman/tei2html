@@ -68,19 +68,19 @@
 
 
     <xsl:template name="TranslateType">
-        <xsl:param name="type" select="@type"/>
+        <xsl:param name="type" select="lower-case(@type)"/>
 
         <xsl:choose>
-            <xsl:when test="$type='Appendix' or $type='appendix'">
+            <xsl:when test="$type='appendix'">
                 <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="$type='Chapter' or $type='chapter'">
+            <xsl:when test="$type='chapter'">
                 <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="$type='Part' or $type='part'">
+            <xsl:when test="$type='part'">
                 <xsl:value-of select="$strPart"/><xsl:text> </xsl:text>
             </xsl:when>
-            <xsl:when test="$type='Book' or $type='book'">
+            <xsl:when test="$type='book'">
                 <xsl:value-of select="$strBook"/><xsl:text> </xsl:text>
             </xsl:when>
         </xsl:choose>
@@ -188,18 +188,7 @@
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
-
-                <xsl:variable name="class">
-                    <xsl:text>div1</xsl:text>
-                    <xsl:if test="contains(@rend, 'class(')">
-                        <xsl:text> </xsl:text><xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
-                    </xsl:if>
-                    <xsl:if test="@type='Index'"> index</xsl:if>
-                    <xsl:if test="@type='Advertisment'"> advertisment</xsl:if>
-                    <xsl:text> </xsl:text><xsl:call-template name="generate-rend-class-name-if-needed"/>
-                </xsl:variable>
-                <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-
+                <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="GenerateLabel"/>
                 <xsl:call-template name="handleDiv"/>
@@ -208,6 +197,18 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="generate-div-class">
+        <xsl:param name="div" select="name()"/>
+
+        <xsl:variable name="class">
+            <xsl:value-of select="$div"/>
+            <xsl:if test="@type">
+                <xsl:text> </xsl:text><xsl:value-of select="lower-case(@type)"/>
+            </xsl:if>
+            <xsl:text> </xsl:text><xsl:call-template name="generate-rend-class-name-if-needed"/>
+        </xsl:variable>
+        <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+    </xsl:template>
 
     <xsl:template name="generate-toc-link">
         <xsl:if test="$outputformat = 'html'"><!-- TODO: improve ePub version of navigational aids -->
@@ -287,8 +288,9 @@
     <!-- div2 -->
 
     <xsl:template match="div2">
-        <div class="div2">
+        <div>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="generate-toc-link"/>
             <xsl:call-template name="GenerateLabel">
                 <xsl:with-param name="headingLevel" select="'h2'"/>
