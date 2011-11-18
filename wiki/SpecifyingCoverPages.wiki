@@ -19,3 +19,6 @@ When a cover image is missing, a title page image can be used instead, as long a
 <div1 id="titlepage" type="Titlepage">
 <p><figure id="titlepage-image" rend="image(images/titlepage.png)"/></p>
 }}}
+
+
+See also: http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/
