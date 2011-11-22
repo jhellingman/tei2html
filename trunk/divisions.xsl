@@ -134,6 +134,7 @@
     <xsl:template match="div0">
         <div class="div0">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="GenerateLabel"/>
 
             <xsl:apply-templates/>
@@ -314,6 +315,7 @@
     <xsl:template match="div3">
         <div class="div3">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
@@ -333,6 +335,7 @@
     <xsl:template match="div4">
         <div class="div4">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
@@ -352,6 +355,7 @@
     <xsl:template match="div5">
         <div class="div5">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
@@ -371,6 +375,7 @@
     <xsl:template match="div6">
         <div class="div6">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>

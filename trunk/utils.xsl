@@ -3,7 +3,7 @@
 
     Stylesheet with various utily templates, to be imported in tei2html.xsl.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
         messages.xsl        : stores localized messages in variables.
 
@@ -16,13 +16,13 @@
     >
 
 
-    <!-- ID Generation 
+    <!-- ID Generation
 
-    Use original ID's when possible to keep ID's stable between versions. 
-    We use generated ID's prepended with 'x' to avoid clashes with original 
-    ID's. Note that the target id generated here should also be generated 
-    on the element being referenced. We cannot use the id() function here, 
-    since we do not use a DTD. 
+    Use original ID's when possible to keep ID's stable between versions.
+    We use generated ID's prepended with 'x' to avoid clashes with original
+    ID's. Note that the target id generated here should also be generated
+    on the element being referenced. We cannot use the id() function here,
+    since we do not use a DTD.
 
     -->
 
@@ -48,22 +48,83 @@
     </xsl:template>
 
     <xsl:template name="generate-id">
+        <xsl:call-template name="generate-id-for">
+            <xsl:with-param name="node" select="."/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <!--
+        We want to generate ids that are slightly more stable than using generate-id().
+        The general idea is to use an explicit id if that is present, and otherwise create
+        an id based on the path to the first ancestor node that does have an id. If,
+        for example the third paragraph of a division with id 'ch2' has no id of itself,
+        we generate: "ch2_p_3" as an id. The second note in this paragraph would receive
+        the id "ch2_p_3_note_2".
+
+        Safe ID syntax:
+            HTML:       [A-Za-z][A-Za-z0-9_:.-]*
+            CSS:        -?[_a-zA-Z]+[_a-zA-Z0-9-]*
+            Combined:   [A-Za-z][A-Za-z0-9_-]*
+
+        THE FOLLOWING TEMPLATE DOES NOT WORK CORRECTLY YET.
+    -->
+
+    <xsl:template name="generate-stable-id-for">
+        <xsl:param name="node" select="."/>
         <xsl:choose>
-            <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-            <xsl:otherwise>x<xsl:value-of select="generate-id(.)"/></xsl:otherwise>
+
+            <!-- We have an explicit id, use that -->
+            <xsl:when test="$node/@id">
+                <xsl:message terminate="no">! <xsl:value-of select="name($node)"/> #<xsl:value-of select="$node/@id"/></xsl:message>
+                <!-- Verify the id is valid for use in HTML and CSS -->
+                <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
+                    <xsl:message terminate="no">Warning: source contains problematic ID [<xsl:value-of select="$node/@id"/>] for CSS or HTML usage.</xsl:message>
+                </xsl:if>
+                <xsl:value-of select="$node/@id"/>
+            </xsl:when>
+
+            <!-- We have reached the root without finding an explicit id -->
+            <xsl:when test="not($node/..)">
+                <xsl:message terminate="no">ROOT</xsl:message>
+                <xsl:text>root</xsl:text>
+            </xsl:when>
+
+            <!-- We have no explicit id: get the stable id of our parent and append ".<node-name>.<count>" -->
+            <xsl:otherwise>
+                <xsl:message terminate="no">- <xsl:value-of select="name($node)"/></xsl:message>
+
+                <xsl:call-template name="generate-stable-id-for">
+                    <xsl:with-param name="node" select="$node/.." />
+                </xsl:call-template>
+                <xsl:text>_</xsl:text><xsl:value-of select="name($node)"/>
+                <xsl:variable name="position" select="count($node/preceding-sibling::*[name(current()) = name($node)])"/>
+                <xsl:if test="$position > 0">
+                    <xsl:text>_</xsl:text><xsl:value-of select="$position"/>
+                </xsl:if>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
     <xsl:template name="generate-id-for">
         <xsl:param name="node" select="." as="element()"/>
         <xsl:param name="position"/>
+        <!--
+        <xsl:call-template name="generate-stable-id-for">
+            <xsl:with-param name="node" select="$node" />
+        </xsl:call-template>
+        -->
         <xsl:choose>
-            <xsl:when test="$node/@id"><xsl:value-of select="$node/@id"/></xsl:when>
+            <xsl:when test="$node/@id">
+                <!-- Verify the id is valid for use in HTML and CSS -->
+                <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
+                    <xsl:message terminate="no">Warning: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS or HTML.</xsl:message>
+                </xsl:if>
+                <xsl:value-of select="$node/@id"/>
+            </xsl:when>
             <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
         </xsl:choose>
         <xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>
     </xsl:template>
-
 
     <xsl:template name="generate-href-attribute">
         <xsl:param name="target" select="." as="element()"/>
@@ -74,7 +135,6 @@
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
-
 
     <xsl:template name="generate-footnote-href-attribute">
         <xsl:param name="target" select="."/>
@@ -88,10 +148,10 @@
 
 
     <!--====================================================================-->
-    <!-- Close and Open paragraphs 
+    <!-- Close and Open paragraphs
 
-    To accomodate the differences between the TEI and HTML paragraph model, 
-    we sometimes need to close (and reopen) paragraphs, as various elements 
+    To accomodate the differences between the TEI and HTML paragraph model,
+    we sometimes need to close (and reopen) paragraphs, as various elements
     are not allowed inside p elements in HTML.
 
     -->
