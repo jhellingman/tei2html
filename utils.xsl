@@ -65,20 +65,20 @@
             HTML:       [A-Za-z][A-Za-z0-9_:.-]*
             CSS:        -?[_a-zA-Z]+[_a-zA-Z0-9-]*
             Combined:   [A-Za-z][A-Za-z0-9_-]*
-
-        THE FOLLOWING TEMPLATE DOES NOT WORK CORRECTLY YET.
     -->
 
     <xsl:template name="generate-stable-id-for">
         <xsl:param name="node" select="."/>
+
+        <xsl:variable name="node-name" select="name($node)"/>
         <xsl:choose>
 
             <!-- We have an explicit id, use that -->
             <xsl:when test="$node/@id">
-                <xsl:message terminate="no">! <xsl:value-of select="name($node)"/> #<xsl:value-of select="$node/@id"/></xsl:message>
+                <xsl:message terminate="no">! <xsl:value-of select="$node-name"/> #<xsl:value-of select="$node/@id"/></xsl:message>
                 <!-- Verify the id is valid for use in HTML and CSS -->
                 <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
-                    <xsl:message terminate="no">Warning: source contains problematic ID [<xsl:value-of select="$node/@id"/>] for CSS or HTML usage.</xsl:message>
+                    <xsl:message terminate="no">Warning: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
                 </xsl:if>
                 <xsl:value-of select="$node/@id"/>
             </xsl:when>
@@ -91,16 +91,18 @@
 
             <!-- We have no explicit id: get the stable id of our parent and append ".<node-name>.<count>" -->
             <xsl:otherwise>
-                <xsl:message terminate="no">- <xsl:value-of select="name($node)"/></xsl:message>
-
                 <xsl:call-template name="generate-stable-id-for">
-                    <xsl:with-param name="node" select="$node/.." />
+                    <xsl:with-param name="node" select="$node/.."/>
                 </xsl:call-template>
-                <xsl:text>_</xsl:text><xsl:value-of select="name($node)"/>
-                <xsl:variable name="position" select="count($node/preceding-sibling::*[name(current()) = name($node)])"/>
+                <xsl:text>_</xsl:text><xsl:value-of select="$node-name"/>
+                <!-- TODO: fix following to count correctly in recursive calls. -->
+                <xsl:variable name="position" select="count($node/preceding-sibling::*[name(current()) = $node-name])"/>
                 <xsl:if test="$position > 0">
                     <xsl:text>_</xsl:text><xsl:value-of select="$position"/>
                 </xsl:if>
+
+                <xsl:message terminate="no">- <xsl:value-of select="$node-name"/> [<xsl:value-of select="$position"/>]</xsl:message>
+
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -117,12 +119,13 @@
             <xsl:when test="$node/@id">
                 <!-- Verify the id is valid for use in HTML and CSS -->
                 <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
-                    <xsl:message terminate="no">Warning: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS or HTML.</xsl:message>
+                    <xsl:message terminate="no">Warning: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
                 </xsl:if>
                 <xsl:value-of select="$node/@id"/>
             </xsl:when>
             <xsl:otherwise>x<xsl:value-of select="generate-id($node)"/></xsl:otherwise>
         </xsl:choose>
+
         <xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>
     </xsl:template>
 
