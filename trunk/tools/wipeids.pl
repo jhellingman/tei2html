@@ -18,13 +18,14 @@ while (<INPUTFILE>)
         $remainder = $';
         my $href = getAttrVal("href", $tag);
 
-        if ($href =~ m/^#([a-z][a-z0-9.-]*)$/i) 
+        if ($href =~ m/^#([a-z][a-z0-9._-]*)$/i)
         {
             my $ref = $1;
             $refHash{$ref}++;
         }
 
-        if ($tag =~ m/^style\b/i) 
+        # Handle IDs referenced in in-line CSS.
+        if ($tag =~ m/^style\b/i)
         {
             my $css = "";
 
@@ -43,8 +44,8 @@ while (<INPUTFILE>)
                 }
             }
 
-            my @refs = $css =~ m/#([a-z][a-z0-9.-]+)/gsi;
-            foreach my $ref (@refs) 
+            my @refs = $css =~ m/#([a-z][a-z0-9._-]+)/gsi;
+            foreach my $ref (@refs)
             {
                 $refHash{$ref}++;
             }
@@ -69,9 +70,9 @@ while (<INPUTFILE>)
         my $id = getAttrVal("id", $tag);
         # $href = getAttrVal("href", $tag);
 
-        if ($id ne "") 
+        if ($id ne "")
         {
-            if (!$refHash{$id}) 
+            if (!$refHash{$id})
             {
                 $tag =~ s/id=\"$id\"//;
             }
@@ -86,7 +87,7 @@ while (<INPUTFILE>)
     # remove useless (in HTML) namespace declarations.
     $output =~ s/xmlns(:\w+)?=\"(.*?)\"//g;
 
-	# normalize <br></br> tags:
+    # normalize <br></br> tags:
     $output =~ s/<br><\/br>/<br\/>/g;
 
     # Remove empty anchors:
@@ -101,7 +102,7 @@ while (<INPUTFILE>)
     # Remove initial spaces:
     $output =~ s/^[\t ]*//g;
 
-    if ($output !~ /^[\t ]*$/) 
+    if ($output !~ /^[\t ]*$/)
     {
         print $output;
     }
