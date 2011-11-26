@@ -12,7 +12,10 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xs"
+    version="2.0"
     >
 
 
@@ -98,83 +101,17 @@
 
     <xsl:template name="handle-xref">
         <a>
-            <xsl:choose>
-
-                <!-- Link to Project Gutenberg book -->
-                <xsl:when test="substring(@url, 1, 3) = 'pg:'">
-                    <xsl:attribute name="class">pglink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToPg"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.gutenberg.org/ebooks/<xsl:value-of select="substring-after(@url, 'pg:')"/></xsl:attribute>
-                </xsl:when>
-                
-                <!-- Link to OCLC (worldcat) catalog entry -->
-                <xsl:when test="substring(@url, 1, 5) = 'oclc:'">
-                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToWorldCat"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="substring-after(@url, 'oclc:')"/></xsl:attribute>
-                </xsl:when>
-
-                <!-- Link to Open Library catalog entry -->
-                <xsl:when test="substring(@url, 1, 4) = 'oln:'">
-                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
-                    <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="substring-after(@url, 'oln:')"/></xsl:attribute>
-                </xsl:when>
-
-                <xsl:when test="substring(@url, 1, 4) = 'olw:'">
-                    <xsl:attribute name="class">catlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:attribute>
-                    <xsl:attribute name="href">http://openlibrary.org/work/<xsl:value-of select="substring-after(@url, 'olw:')"/></xsl:attribute>
-                </xsl:when>
-
-                <!-- Link to WikiPilipinas article -->
-                <xsl:when test="substring(@url, 1, 4) = 'wpp:'">
-                    <xsl:attribute name="class">wpplink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToWikiPilipinas"/></xsl:attribute>
-                    <xsl:attribute name="href">http://en.wikipilipinas.org/index.php?title=<xsl:value-of select="substring-after(@url, 'wpp:')"/></xsl:attribute>
-                </xsl:when>
-
-                <!-- Link to Wikipedia article -->
-                <xsl:when test="substring(@url, 1, 3) = 'wp:'">
-                    <xsl:attribute name="class">wplink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToWikipedia"/></xsl:attribute>
-                    <xsl:attribute name="href">http://en.wikipedia.org/wiki/<xsl:value-of select="substring-after(@url, 'wp:')"/></xsl:attribute>
-                </xsl:when>
-
-                <!-- Link to location on map, using coordinates -->
-                <xsl:when test="substring(@url, 1, 4) = 'loc:'">
-                    <xsl:attribute name="class">loclink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToMap"/></xsl:attribute>
-                    <xsl:variable name="coordinates" select="substring-after(@url, 'loc:')"/>
-                    <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
-                    <xsl:variable name="altitude" select="substring-after($coordinates, ',')"/>
-                    <xsl:attribute name="href">http://maps.google.com/maps?q=<xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/></xsl:attribute>
-                </xsl:when>
-
-                <!-- Link to Bible citation -->
-                <xsl:when test="substring(@url, 1, 4) = 'bib:'">
-                    <xsl:attribute name="class">biblink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strLinkToBible"/></xsl:attribute>
-                    <xsl:attribute name="href">http://www.biblegateway.com/passage/?search=<xsl:value-of select="iri-to-uri(substring-after(@url, 'bib:'))"/>
-                        <xsl:choose>
-                            <xsl:when test="lang('de')">&amp;version=LUTH1545</xsl:when>
-                            <xsl:when test="lang('es')">&amp;version=RVR1995</xsl:when>
-                            <xsl:when test="lang('nl')">&amp;version=HTB</xsl:when>
-                        </xsl:choose>
-                    </xsl:attribute>
-                </xsl:when>
-
-                <xsl:when test="substring(@url, 1, 5) = 'http:' or substring(@url, 1, 6) = 'https:'">
-                    <xsl:attribute name="class">exlink <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
-                    <xsl:attribute name="title"><xsl:value-of select="$strExternalLink"/></xsl:attribute>
-                    <xsl:attribute name="href"><xsl:value-of select="@url"/></xsl:attribute>
-                </xsl:when>
-
-                <xsl:otherwise>
-                    <xsl:message terminate="no">Warning: URL '<xsl:value-of select="@url"/>' not understood.</xsl:message>
-                </xsl:otherwise>
-            </xsl:choose>
-
+            <xsl:attribute name="class">
+                <xsl:value-of select="f:translate-xref-class(@url)"/>
+                <xsl:text> </xsl:text>
+                <xsl:call-template name="generate-rend-class-name"/>
+            </xsl:attribute>
+            <xsl:attribute name="title">
+                <xsl:value-of select="f:translate-xref-title(@url)"/>
+            </xsl:attribute>
+            <xsl:attribute name="href">
+                <xsl:value-of select="f:translate-xref-url(@url, substring(/TEI.2/@lang, 1, 2))"/>
+            </xsl:attribute>
             <xsl:if test="@rel">
                 <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>
             </xsl:if>
@@ -182,6 +119,109 @@
             <xsl:apply-templates/>
         </a>
     </xsl:template>
+
+
+    <xsl:function name="f:translate-xref-class">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:choose>
+            <xsl:when test="substring($url, 1, 3) = 'pg:'">pglink</xsl:when>
+            <xsl:when test="substring($url, 1, 5) = 'oclc:'">catlink</xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'oln:'">catlink</xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'olw:'">catlink</xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'wpp:'">wpplink</xsl:when>
+            <xsl:when test="substring($url, 1, 3) = 'wp:'">wplink</xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'loc:'">loclink</xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'bib:'">biblink</xsl:when>
+            <xsl:otherwise>exlink</xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+    <xsl:function name="f:translate-xref-title">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:choose>
+            <xsl:when test="substring($url, 1, 3) = 'pg:'"><xsl:value-of select="$strLinkToPg"/></xsl:when>
+            <xsl:when test="substring($url, 1, 5) = 'oclc:'"><xsl:value-of select="$strLinkToWorldCat"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'oln:'"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'olw:'"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'wpp:'"><xsl:value-of select="$strLinkToWikiPilipinas"/></xsl:when>
+            <xsl:when test="substring($url, 1, 3) = 'wp:'"><xsl:value-of select="$strLinkToWikipedia"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'loc:'"><xsl:value-of select="$strLinkToMap"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'bib:'"><xsl:value-of select="$strLinkToBible"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="$strExternalLink"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+    <xsl:function name="f:translate-xref-url">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:choose>
+
+            <!-- Link to Project Gutenberg book -->
+            <xsl:when test="substring($url, 1, 3) = 'pg:'">
+                <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, 'pg:')"/>
+            </xsl:when>
+
+            <!-- Link to OCLC (worldcat) catalog entry -->
+            <xsl:when test="substring($url, 1, 5) = 'oclc:'">
+                <xsl:text>http://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, 'oclc:')"/>
+            </xsl:when>
+
+            <!-- Link to Open Library catalog entry (item level) -->
+            <xsl:when test="substring($url, 1, 4) = 'oln:'">
+                <xsl:text>http://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, 'oln:')"/>
+            </xsl:when>
+
+            <!-- Link to Open Library catalog entry (abstract work level) -->
+            <xsl:when test="substring($url, 1, 4) = 'olw:'">
+                <xsl:text>http://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, 'olw:')"/>
+            </xsl:when>
+
+            <!-- Link to WikiPilipinas article -->
+            <xsl:when test="substring($url, 1, 4) = 'wpp:'">
+                <xsl:text>http://en.wikipilipinas.org/index.php?title=</xsl:text><xsl:value-of select="substring-after($url, 'wpp:')"/>
+            </xsl:when>
+
+            <!-- Link to Wikipedia article -->
+            <xsl:when test="substring($url, 1, 3) = 'wp:'">
+                <xsl:text>http://en.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, 'wp:')"/>
+            </xsl:when>
+
+            <!-- Link to location on map, using coordinates -->
+            <xsl:when test="substring($url, 1, 4) = 'loc:'">
+                <xsl:variable name="coordinates" select="substring-after($url, 'loc:')"/>
+                <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
+                <xsl:variable name="altitude" select="substring-after($coordinates, ',')"/>
+                <xsl:text>http://maps.google.com/maps?q=</xsl:text><xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/>
+            </xsl:when>
+
+            <!-- Link to Bible citation -->
+            <xsl:when test="substring($url, 1, 4) = 'bib:'">
+                <xsl:text>http://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, 'bib:'))"/>
+                <xsl:choose>
+                    <!-- TODO: move this to localization data -->
+                    <xsl:when test="$lang = 'de'">&amp;version=LUTH1545</xsl:when>
+                    <xsl:when test="$lang = 'es'">&amp;version=RVR1995</xsl:when>
+                    <xsl:when test="$lang = 'nl'">&amp;version=HTB</xsl:when>
+                    <xsl:otherwise>
+                        <xsl:message terminate="no">No link to text in language '<xsl:value-of select="$lang"/>'.</xsl:message>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+
+            <!-- Link to website (http:// or https://) -->
+            <xsl:when test="substring($url, 1, 5) = 'http:' or substring($url, 1, 6) = 'https:'">
+                <xsl:value-of select="$url"/>
+            </xsl:when>
+
+            <xsl:otherwise>
+                <xsl:message terminate="no">Warning: URL '<xsl:value-of select="$url"/>' not understood.</xsl:message>
+                <xsl:value-of select="$url"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 
 </xsl:stylesheet>

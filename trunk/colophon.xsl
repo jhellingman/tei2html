@@ -15,9 +15,11 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xs"
     version="2.0"
     >
-
 
     <!-- Colophon -->
 
@@ -83,8 +85,8 @@
             <h3 class="main"><xsl:value-of select="$strRevisionHistory"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
-            <xsl:if test="//xref">
-                <xsl:call-template name="externalReferences"/>
+            <xsl:if test="//xref[@url]">
+                <xsl:call-template name="external-references"/>
             </xsl:if>
 
             <xsl:if test="//corr">
@@ -167,13 +169,42 @@
 
     <!-- External References -->
 
-    <xsl:template name="externalReferences">
+    <xsl:template name="external-references">
         <xsl:if test="//xref">
             <h3 class="main"><xsl:value-of select="$strExternalReferences"/></h3>
 
             <p><xsl:value-of select="$strExternalReferencesDisclaimer"/></p>
+
+            <xsl:if test="$optionExternalLinks != 'Yes'">
+                <xsl:call-template name="external-reference-table"/>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="external-reference-table">
+        <xsl:if test="//xref[@url]">
+            <h2 class="main">
+                <xsl:value-of select="$strExternalReferences"/>
+            </h2>
+
+            <p>
+                <xsl:value-of select="$strExternalReferencesDisclaimer"/>
+            </p>
+
+            <table class="externalReferenceTable">
+                <tr>
+                    <th></th>
+                    <th><xsl:value-of select="$strUrl"/></th>
+                </tr>
+                <xsl:for-each-group select="//xref[@url]" group-by="@url">
+                    <xsl:sort select="@url"/>
+                    <tr>
+                        <td><xsl:value-of select="position()"/></td>
+                        <td><xsl:value-of select="f:translate-xref-url(@url, substring(/TEI.2/@lang, 1, 2))"/></td>
+                    </tr>
+                </xsl:for-each-group>
+            </table>
+        </xsl:if>
+    </xsl:template>
 
 </xsl:stylesheet>

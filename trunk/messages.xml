@@ -92,7 +92,9 @@
         <msg:message name="msgPreface">Preface</msg:message>
         <msg:message name="msgGlossary">Glossary</msg:message>
         <msg:message name="msgDedication">Dedication</msg:message>
-
+        <msg:message name="msgReference">Reference</msg:message>
+        <msg:message name="msgUrl">URL</msg:message>
+		
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrection.n">Corrections</msg:message>
         <msg:message name="msgTranscription">Transcription</msg:message>
@@ -810,6 +812,8 @@
 
         <msg:message name="msgExternalReferences">Externe Referenties</msg:message>
         <msg:message name="msgExternalReferencesDisclaimer">Dit Project Gutenberg eBoek bevat externe referenties. Het kan zijn dat deze links voor u niet werken.</msg:message>
+        <msg:message name="msgReference">Referentie</msg:message>
+        <msg:message name="msgUrl">URL</msg:message>
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress catalogus pagina</msg:message>

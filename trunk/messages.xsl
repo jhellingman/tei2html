@@ -130,6 +130,17 @@
         </xsl:call-template>
     </xsl:variable>
 
+  <xsl:variable name="strReference">
+    <xsl:call-template name="GetMessage">
+      <xsl:with-param name="name" select="'msgReference'"/>
+    </xsl:call-template>
+  </xsl:variable>
+  <xsl:variable name="strUrl">
+    <xsl:call-template name="GetMessage">
+      <xsl:with-param name="name" select="'msgUrl'"/>
+    </xsl:call-template>
+  </xsl:variable>
+  
     <xsl:variable name="strCorrections">
         <xsl:call-template name="GetMessage">
             <xsl:with-param name="name" select="'msgCorrection.n'"/>
