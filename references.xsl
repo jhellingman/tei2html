@@ -5,7 +5,6 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
@@ -141,15 +140,15 @@
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="substring($url, 1, 3) = 'pg:'"><xsl:value-of select="$strLinkToPg"/></xsl:when>
-            <xsl:when test="substring($url, 1, 5) = 'oclc:'"><xsl:value-of select="$strLinkToWorldCat"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'oln:'"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'olw:'"><xsl:value-of select="$strLinkToOpenLibrary"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'wpp:'"><xsl:value-of select="$strLinkToWikiPilipinas"/></xsl:when>
-            <xsl:when test="substring($url, 1, 3) = 'wp:'"><xsl:value-of select="$strLinkToWikipedia"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'loc:'"><xsl:value-of select="$strLinkToMap"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'bib:'"><xsl:value-of select="$strLinkToBible"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="$strExternalLink"/></xsl:otherwise>
+            <xsl:when test="substring($url, 1, 3) = 'pg:'"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 5) = 'oclc:'"><xsl:value-of select="f:message('msgLinkToWorldCat')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'oln:'"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'olw:'"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'wpp:'"><xsl:value-of select="f:message('msgLinkToWikiPilipinas')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 3) = 'wp:'"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'loc:'"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 4) = 'bib:'"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 

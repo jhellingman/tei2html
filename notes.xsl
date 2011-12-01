@@ -9,14 +9,15 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f"
+    version="2.0"
     >
 
 
@@ -165,7 +166,7 @@
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strApparatus"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgApparatus')"/></h2>
 
             <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
         </div>

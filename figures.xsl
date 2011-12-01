@@ -10,7 +10,6 @@
 
     Requires:
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 

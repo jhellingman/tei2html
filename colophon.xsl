@@ -7,7 +7,6 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
         utils.xsl           : various utility templates.
 
 -->
@@ -27,13 +26,13 @@
         <div class="transcribernote">
             <xsl:call-template name="set-lang-id-attributes"/>
 
-            <h2 class="main"><xsl:value-of select="$strColophon"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
 
-            <h3 class="main"><xsl:value-of select="$strAvailability"/></h3>
+            <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
             <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
-                <p><xsl:value-of select="$strPgCatalogEntry"/>:
+                <p><xsl:value-of select="f:message('msgPgCatalogEntry')"/>:
                     <a class="pglink">
                         <xsl:attribute name="href">http://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='PGnum']"/>
@@ -42,7 +41,7 @@
             </xsl:if>
 
             <xsl:if test="//idno[@type='LCCN']">
-                <p><xsl:value-of select="$strLibraryOfCongressCatalogEntry"/>:
+                <p><xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='LCCN']"/>
@@ -51,7 +50,7 @@
             </xsl:if>
 
             <xsl:if test="//idno[@type='OLN']">
-                <p><xsl:value-of select="$strOpenLibraryCatalogEntry"/>:
+                <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OLN']"/>
@@ -60,7 +59,7 @@
             </xsl:if>
 
             <xsl:if test="//idno[@type='OLW']">
-                <p><xsl:value-of select="$strOpenLibraryCatalogWorkEntry"/>:
+                <p><xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OLW']"/>
@@ -69,7 +68,7 @@
             </xsl:if>
 
             <xsl:if test="//idno[@type='OCLC']">
-                <p><xsl:value-of select="$strOclcCatalogEntry"/>:
+                <p><xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
                         <xsl:value-of select="//idno[@type='OCLC']"/>
@@ -78,11 +77,11 @@
             </xsl:if>
 
             <xsl:if test="/TEI.2/teiHeader/encodingDesc">
-                <h3 class="main"><xsl:value-of select="$strEncoding"/></h3>
+                <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
                 <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
             </xsl:if>
 
-            <h3 class="main"><xsl:value-of select="$strRevisionHistory"/></h3>
+            <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
             <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
 
             <xsl:if test="//xref[@url]">
@@ -90,7 +89,7 @@
             </xsl:if>
 
             <xsl:if test="//corr">
-                <h3 class="main"><xsl:value-of select="$strCorrections"/></h3>
+                <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
                 <xsl:call-template name="correctionTable"/>
             </xsl:if>
 
@@ -102,20 +101,20 @@
 
     <xsl:template match="divGen[@type='corr']">
         <xsl:if test="//corr">
-            <h2 class="main"><xsl:value-of select="$strCorrections"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h2>
             <xsl:call-template name="correctionTable"/>
         </xsl:if>
     </xsl:template>
 
     <xsl:template name="correctionTable">
-        <p><xsl:value-of select="$strCorrectionsAppliedToText"/></p>
+        <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
         <table class="correctiontable">
-            <xsl:attribute name="summary"><xsl:value-of select="$strCorrectionsOverview"/></xsl:attribute>
+            <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
             <tr>
-                <th><xsl:value-of select="$strPage"/></th>
-                <th><xsl:value-of select="$strSource"/></th>
-                <th><xsl:value-of select="$strCorrection"/></th>
+                <th><xsl:value-of select="f:message('msgPage')"/></th>
+                <th><xsl:value-of select="f:message('msgSource')"/></th>
+                <th><xsl:value-of select="f:message('msgCorrection')"/></th>
             </tr>
 
             <xsl:for-each-group select="//corr" group-by="concat(@sic, concat('@@@', .))">
@@ -129,7 +128,7 @@
                                 <xsl:call-template name="generate-href-attribute"/>
                                 <xsl:choose>
                                     <xsl:when test="not(preceding::pb[1]/@n) or preceding::pb[1]/@n = ''">
-                                        <xsl:value-of select="$strNotApplicable"/>
+                                        <xsl:value-of select="f:message('msgNotApplicable')"/>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:value-of select="preceding::pb[1]/@n"/>
@@ -145,7 +144,7 @@
                                 <xsl:value-of select="@sic"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                [<i><xsl:value-of select="$strNotInSource"/></i>]
+                                [<i><xsl:value-of select="f:message('msgNotInSource')"/></i>]
                             </xsl:otherwise>
                         </xsl:choose>
                     </td>
@@ -156,7 +155,7 @@
                                 <xsl:apply-templates/>
                             </xsl:when>
                             <xsl:otherwise>
-                                [<i><xsl:value-of select="$strDeleted"/></i>]
+                                [<i><xsl:value-of select="f:message('msgDeleted')"/></i>]
                             </xsl:otherwise>
                         </xsl:choose>
                     </td>
@@ -171,9 +170,9 @@
 
     <xsl:template name="external-references">
         <xsl:if test="//xref">
-            <h3 class="main"><xsl:value-of select="$strExternalReferences"/></h3>
+            <h3 class="main"><xsl:value-of select="f:message('msgExternalReferences')"/></h3>
 
-            <p><xsl:value-of select="$strExternalReferencesDisclaimer"/></p>
+            <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
 
             <xsl:if test="$optionExternalLinks != 'Yes'">
                 <xsl:call-template name="external-reference-table"/>
@@ -184,17 +183,17 @@
     <xsl:template name="external-reference-table">
         <xsl:if test="//xref[@url]">
             <h2 class="main">
-                <xsl:value-of select="$strExternalReferences"/>
+                <xsl:value-of select="f:message('msgExternalReferences')"/>
             </h2>
 
             <p>
-                <xsl:value-of select="$strExternalReferencesDisclaimer"/>
+                <xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/>
             </p>
 
             <table class="externalReferenceTable">
                 <tr>
                     <th></th>
-                    <th><xsl:value-of select="$strUrl"/></th>
+                    <th><xsl:value-of select="f:message('msgUrl')"/></th>
                 </tr>
                 <xsl:for-each-group select="//xref[@url]" group-by="@url">
                     <xsl:sort select="@url"/>

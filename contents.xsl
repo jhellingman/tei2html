@@ -25,7 +25,6 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
@@ -34,8 +33,9 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xhtml xs"
     version="2.0"
-    exclude-result-prefixes="xhtml xs"
     >
 
 
@@ -51,7 +51,7 @@
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
             <xsl:call-template name="toc-body"/>
         </div>
     </xsl:template>
@@ -94,25 +94,6 @@
         </ul>
     </xsl:template>
 
-
-    <xsl:template name="toc-translate-heading-type">
-        <xsl:param name="type" select="@type"/>
-        <xsl:param name="n" select="./@n"/>
-
-        <xsl:choose>
-            <xsl:when test="$type='part'">
-                <xsl:value-of select="$strPart"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$type='chapter'">
-                <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$type='appendix'">
-                <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text><xsl:value-of select="$n"/>:<xsl:text> </xsl:text>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:template>
-
-
     <!-- TOC: div0 -->
 
     <xsl:template match="div0" mode="gentoc">
@@ -121,7 +102,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:call-template name="toc-translate-heading-type"/>
+                    <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
@@ -145,7 +126,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:call-template name="toc-translate-heading-type"/>
+                    <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
@@ -371,7 +352,7 @@
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strTableOfContents"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
             <xsl:choose>
@@ -480,7 +461,7 @@
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <ul>
                 <xsl:apply-templates mode="genloi" select="//figure[head]"/>
             </ul>
@@ -510,7 +491,7 @@
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strListOfIllustrations"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
                     <xsl:with-param name="figures" select="//figure[@id]" />
@@ -649,7 +630,7 @@
     <xsl:template match="divGen[@type='Index' or @type='index']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strIndex"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
             <xsl:message terminate="no">Generating Index</xsl:message>
 
@@ -732,7 +713,7 @@
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
         <div class="div1 notes">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="$strNotes"/></h2>
+            <h2 class="main"><xsl:value-of select="f:message('msgNotes')"/></h2>
 
             <xsl:call-template name="footnotes-body"/>
         </div>

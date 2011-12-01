@@ -21,14 +21,15 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f"
+    version="2.0"
     >
 
 
@@ -42,7 +43,7 @@
                     <xsl:value-of select="."/><xsl:text>, </xsl:text>
                 </xsl:when>
                 <xsl:when test="position() = last() and last() > 1">
-                    <xsl:text> </xsl:text><xsl:value-of select="$strAnd"/><xsl:text> </xsl:text><xsl:value-of select="."/>
+                    <xsl:text> </xsl:text><xsl:value-of select="f:message('msgAnd')"/><xsl:text> </xsl:text><xsl:value-of select="."/>
                 </xsl:when>
                 <xsl:when test="last() = 1">
                     <xsl:value-of select="."/>
