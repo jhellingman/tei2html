@@ -21,14 +21,15 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f"
+    version="2.0"
     >
 
 
@@ -147,7 +148,7 @@
                 <span class="corr">
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="$strNotInSource"/>
+                        <xsl:value-of select="f:message('msgNotInSource')"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
@@ -161,7 +162,7 @@
                 <span class="corr">
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="$strSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
+                        <xsl:value-of select="f:message('msgSource')"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
@@ -188,7 +189,7 @@
                     <xsl:with-param name="params" select="$params"/>
                 </xsl:call-template>
             </xsl:attribute>
-            [<i><xsl:value-of select="$strMissingText"/></i>]
+            [<i><xsl:value-of select="f:message('msgMissingText')"/></i>]
         </span>
     </xsl:template>
 
@@ -238,7 +239,7 @@
         <span class="abbr">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="title">
-                <xsl:value-of select="$strTranscription"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
+                <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </span>

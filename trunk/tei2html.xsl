@@ -15,13 +15,12 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
     <xsl:include href="utils.xsl"/>
     <xsl:include href="utils.html.xsl"/>
     <xsl:include href="localization.xsl"/>
-    <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
     <xsl:include href="css.xsl"/>

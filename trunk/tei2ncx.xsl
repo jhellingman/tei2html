@@ -4,6 +4,8 @@
         xmlns="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:f="urn:stylesheet-functions"
+        exclude-result-prefixes="f"
         version="2.0">
 
 
@@ -64,7 +66,7 @@
                         <xsl:if test="key('id', 'cover')">
                             <navPoint class="cover">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="$strCoverImage"/></text></navLabel>
+                                <navLabel><text><xsl:value-of select="f:message('msgCoverImage')"/></text></navLabel>
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
@@ -78,7 +80,7 @@
                         <xsl:if test="/TEI.2/text/front/titlePage">
                             <navPoint class="titlepage">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="$strTitlePage"/></text></navLabel>
+                                <navLabel><text><xsl:value-of select="f:message('msgTitlePage')"/></text></navLabel>
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
@@ -94,7 +96,7 @@
                         <xsl:if test="//divGen[@id='toc']">
                             <navPoint class="contents">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="$strTableOfContents"/></text></navLabel>
+                                <navLabel><text><xsl:value-of select="f:message('msgTableOfContents')"/></text></navLabel>
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
@@ -108,7 +110,7 @@
                         <xsl:if test="key('id', 'loi')">
                             <navPoint class="contents">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="$strListOfIllustrations"/></text></navLabel>
+                                <navLabel><text><xsl:value-of select="f:message('msgListOfIllustrations')"/></text></navLabel>
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">
@@ -122,7 +124,7 @@
                         <xsl:if test="//divGen[@type='Colophon']">
                             <navPoint class="colophon">
                                 <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="$strColophon"/></text></navLabel>
+                                <navLabel><text><xsl:value-of select="f:message('msgColophon')"/></text></navLabel>
                                 <content>
                                     <xsl:attribute name="src">
                                         <xsl:call-template name="splitter-generate-url-for">

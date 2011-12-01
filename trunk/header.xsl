@@ -8,6 +8,8 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f"
     version="2.0"
     >
 
@@ -81,7 +83,7 @@
         <meta name="DC.Format"    content="text/html"/>
         <meta name="DC.Publisher" content="{$publisher}"/>
         <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
-            <meta name="DC.Rights" content="{$strNotCopyrightedUS}"/>
+            <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
             <meta name="DC.Identifier">
                 <xsl:attribute name="content">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
             </meta>

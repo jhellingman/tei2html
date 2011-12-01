@@ -36,7 +36,7 @@
     </xsl:variable>
     <xsl:variable name="strNotes">
         <xsl:call-template name="GetMessage">
-            <xsl:with-param name="name" select="'msgNote.n'"/>
+            <xsl:with-param name="name" select="'msgNotes'"/>
         </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="strFigure">
@@ -106,7 +106,7 @@
     </xsl:variable>
     <xsl:variable name="strGuides">
         <xsl:call-template name="GetMessage">
-            <xsl:with-param name="name" select="'msgGuide.n'"/>
+            <xsl:with-param name="name" select="'msgGuides'"/>
         </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="strAnd">
@@ -143,7 +143,7 @@
   
     <xsl:variable name="strCorrections">
         <xsl:call-template name="GetMessage">
-            <xsl:with-param name="name" select="'msgCorrection.n'"/>
+            <xsl:with-param name="name" select="'msgCorrections'"/>
         </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="strCorrection">

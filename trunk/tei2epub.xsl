@@ -21,7 +21,6 @@
     <xsl:include href="utils.xsl"/>
     <xsl:include href="utils.epub.xsl"/>
     <xsl:include href="localization.xsl"/>
-    <xsl:include href="messages.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
     <xsl:include href="css.xsl"/>

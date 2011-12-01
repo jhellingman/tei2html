@@ -5,13 +5,15 @@
 
     Requires:
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xs"
     version="2.0"
     >
 
@@ -172,7 +174,6 @@
         </xsl:if>
     </xsl:template>
 
-
     <!--====================================================================-->
     <!-- Language tagging -->
 
@@ -197,5 +198,20 @@
         <xsl:call-template name="set-lang-attribute"/>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Generate labels for heads in the correct language -->
+
+    <xsl:function name="f:translate-div-type" as="xs:string">
+        <xsl:param name="type"/>
+        <xsl:variable name="type" select="lower-case($type)"/>
+
+        <xsl:choose>
+            <xsl:when test="$type='appendix'"><xsl:value-of select="f:message('msgAppendix')"/></xsl:when>
+            <xsl:when test="$type='chapter'"><xsl:value-of select="f:message('msgChapter')"/></xsl:when>
+            <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
+            <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="''"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>

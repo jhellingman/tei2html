@@ -7,7 +7,7 @@
 
     == Required variables ==
 
-    The importing stylesheet is responsible for filling these variables.
+    This uses the following variables:
 
     $messages           Node tree of document following the messages.xsd schema. 
                         The actual messages are pulled from this structure.
@@ -22,9 +22,43 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    version="1.0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xs"
+    version="2.0"
     >
 
+    <xsl:variable name="language" select="/TEI.2/@lang" />
+    <xsl:variable name="baselanguage" select="substring-before($language,'-')" />
+    <xsl:variable name="defaultlanguage" select="'en'" />
+    <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
+
+    <xsl:function name="f:_" as="xs:string">
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:value-of select="f:message($name)"/>
+    </xsl:function> 
+
+    <xsl:function name="f:message" as="xs:string">
+        <xsl:param name="name" as="xs:string"/>
+            <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
+            <xsl:choose>
+                <xsl:when test="$msg[lang($language)][1]">
+                    <xsl:apply-templates select="$msg[lang($language)][1]"/>
+                    <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
+                </xsl:when>
+                <xsl:when test="$msg[lang($baselanguage)][1]">
+                    <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
+                    <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
+                </xsl:when>
+                <xsl:when test="$msg[lang($defaultlanguage)][1]">
+                    <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
+                    <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="no">Warning: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+    </xsl:function> 
 
     <xsl:template name="GetMessage">
         <xsl:param name="name" select="'msgError'"/>

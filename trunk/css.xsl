@@ -8,14 +8,13 @@
 
     Requires:
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
+    version="2.0"
     >
 
 
@@ -116,7 +115,7 @@
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
 
-        <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend)))"/>
+        <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
     </xsl:template>
 
 
@@ -217,7 +216,7 @@
 
 
     <xsl:template name="generate-css-rule">
-        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend)))">
+        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
             <xsl:variable name="css-properties">
                 <xsl:call-template name="translate-rend-attribute">

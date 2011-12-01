@@ -5,7 +5,6 @@
 
     Requires: 
         localization.xsl    : templates for localizing strings.
-        messages.xsl        : stores localized messages in variables.
 
 -->
 
@@ -14,8 +13,9 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xhtml xs"
     version="2.0"
-    exclude-result-prefixes="xhtml xs"
     >
 
 
@@ -58,34 +58,12 @@
         <xsl:if test="contains($div/@rend, 'label(yes)')">
             <xsl:element name="{$headingLevel}">
                 <xsl:attribute name="class">label</xsl:attribute>
-                <xsl:call-template name="TranslateType">
-                    <xsl:with-param name="type" select="$div/@type"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:translate-div-type($div/@type)"/>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="$div/@n"/>
             </xsl:element>
         </xsl:if>
     </xsl:template>
-
-
-    <xsl:template name="TranslateType">
-        <xsl:param name="type" select="lower-case(@type)"/>
-
-        <xsl:choose>
-            <xsl:when test="$type='appendix'">
-                <xsl:value-of select="$strAppendix"/><xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$type='chapter'">
-                <xsl:value-of select="$strChapter"/><xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$type='part'">
-                <xsl:value-of select="$strPart"/><xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$type='book'">
-                <xsl:value-of select="$strBook"/><xsl:text> </xsl:text>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:template>
-
 
     <xsl:template name="headText">
         <xsl:call-template name="set-lang-id-attributes"/>
@@ -118,7 +96,7 @@
                             <xsl:value-of select="."/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="$strOrnament"/>
+                            <xsl:value-of select="f:message('msgOrnament')"/>
                         </xsl:otherwise>
                     </xsl:choose>
                     </xsl:with-param>
@@ -221,7 +199,7 @@
                         <xsl:call-template name="generate-href-attribute">
                             <xsl:with-param name="target" select="//*[@id='toc']"/>
                         </xsl:call-template>
-                        <xsl:value-of select="$strToc"/>
+                        <xsl:value-of select="f:message('msgToc')"/>
                      </a>
                      <xsl:text>]</xsl:text>
                 </span>
@@ -241,7 +219,7 @@
                             <xsl:call-template name="generate-href-attribute">
                                 <xsl:with-param name="target" select="preceding-sibling::div1[1]"/>
                             </xsl:call-template>
-                            <xsl:value-of select="$strPrevious"/>
+                            <xsl:value-of select="f:message('msgPrevious')"/>
                         </a>
                     </xsl:if>
 
@@ -252,7 +230,7 @@
                             <xsl:call-template name="generate-href-attribute">
                                 <xsl:with-param name="target" select="//*[@id='toc']"/>
                             </xsl:call-template>
-                            <xsl:value-of select="$strToc"/>
+                            <xsl:value-of select="f:message('msgToc')"/>
                          </a>
                     </xsl:if>
 
@@ -263,7 +241,7 @@
                             <xsl:call-template name="generate-href-attribute">
                                 <xsl:with-param name="target" select="following-sibling::div1[1]"/>
                             </xsl:call-template>
-                            <xsl:value-of select="$strNext"/>
+                            <xsl:value-of select="f:message('msgNext')"/>
                         </a>
                     </xsl:if>
                     <xsl:text> ]</xsl:text>
