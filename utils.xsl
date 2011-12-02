@@ -206,11 +206,15 @@
         <xsl:variable name="type" select="lower-case($type)"/>
 
         <xsl:choose>
+            <xsl:when test="$type=''"><xsl:value-of select="''"/></xsl:when>
             <xsl:when test="$type='appendix'"><xsl:value-of select="f:message('msgAppendix')"/></xsl:when>
             <xsl:when test="$type='chapter'"><xsl:value-of select="f:message('msgChapter')"/></xsl:when>
             <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
             <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="''"/></xsl:otherwise>
+            <xsl:otherwise>
+                <xsl:message terminate="no">Warning: division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
+                <xsl:value-of select="''"/>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 

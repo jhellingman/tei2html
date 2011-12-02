@@ -102,7 +102,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>
+                    <!-- <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>:<xsl:text> </xsl:text> -->
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
@@ -126,7 +126,7 @@
             <li>
                 <a>
                     <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>
+                    <!-- <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>:<xsl:text> </xsl:text> -->
                     <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
                 </a>
                 <xsl:call-template name="insert-toc-page-number"/>
