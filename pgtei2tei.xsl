@@ -27,7 +27,10 @@
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document with unnumberd div elements to numbered div elements.</xd:short>
-        <xd:detail> </xd:detail>
+        <xd:detail>This stylesheet converts the conventions as used in PGTEI to conventions used in stylesheets expected 
+        by Tei2html. The main distinction being the use of the numbered instead of unnumbered div elements. Further changes
+        are made to the rend-attributes, the placement of pb elements, adding of explicit quotation marks to q-elements, and
+        a number of further differences that need to be resolved for successful handling of PGTEI files.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>

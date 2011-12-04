@@ -12,11 +12,19 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xs"
+    exclude-result-prefixes="f xs xd"
     version="2.0"
     >
 
+
+    <xd:doc type="stylesheet">
+        <xd:short>Utility templates and functions, used by tei2html</xd:short>
+        <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2html and tei2epub.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!-- ID Generation
 
@@ -27,6 +35,11 @@
     since we do not use a DTD.
 
     -->
+
+    <xd:doc>
+        <xd:short>Generate an HTML anchor.</xd:short>
+        <xd:detail>Generate an HTML anchor with an id attribute for the current node.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="generate-anchor">
         <a>

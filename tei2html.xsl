@@ -15,8 +15,18 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="2.0"
     >
+
+    <xd:doc type="stylesheet">
+        <xd:short>TEI stylesheet to convert a TEI document to HTML.</xd:short>
+        <xd:detail>This stylesheet is the main entry point for the TEI to HTML conversion. It contains no
+        templates itself, but collects all stylesheets, and sets a number of global variables.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:include href="utils.xsl"/>
     <xsl:include href="utils.html.xsl"/>
