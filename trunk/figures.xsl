@@ -245,6 +245,10 @@
                     <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
                 </xsl:variable>
 
+                <xsl:if test="$width = ''">
+                    <xsl:message terminate="no">Warning: Image "<xsl:value-of select="$file"/>" not present in imageinfo file "<xsl:value-of select="normalize-space($imageInfoFile)"/>".</xsl:message>
+                </xsl:if>
+
                 <xsl:attribute name="class">
                     <xsl:text>figure </xsl:text>
                     <xsl:if test="contains(@rend, 'float(left)')">floatLeft </xsl:if>
