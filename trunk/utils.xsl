@@ -38,7 +38,7 @@
 
     <xd:doc>
         <xd:short>Generate an HTML anchor.</xd:short>
-        <xd:detail>Generate an HTML anchor with an id attribute for the current node.</xd:detail>
+        <xd:detail>Generate an HTML anchor with an <code>id</code> attribute for the current node.</xd:detail>
     </xd:doc>
 
     <xsl:template name="generate-anchor">
@@ -47,11 +47,22 @@
         </a>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate an <code>id</code> attribute.</xd:short>
+        <xd:detail>Generate an <code>id</code> attribute for the current node.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="generate-id-attribute">
         <xsl:attribute name="id">
             <xsl:call-template name="generate-id"/>
         </xsl:attribute>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate an <code>id</code>-attribute.</xd:short>
+        <xd:detail>Generate an <code>id</code>-attribute for a node (default: current node).</xd:detail>
+        <xd:param>The node for which the <code>id</code>-attribute is generated.</xd:param>
+    </xd:doc>
 
     <xsl:template name="generate-id-attribute-for">
         <xsl:param name="node" select="." as="element()"/>
@@ -62,25 +73,37 @@
         </xsl:attribute>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate an <code>id</code>-value.</xd:short>
+        <xd:detail>Generate an <code>id</code>-value for the current node.</xd:detail>
+        <xd:param name="node">The node for which the <code>id</code>-value is generated.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-id">
         <xsl:call-template name="generate-id-for">
             <xsl:with-param name="node" select="."/>
         </xsl:call-template>
     </xsl:template>
 
-    <!--
-        We want to generate ids that are slightly more stable than using generate-id().
-        The general idea is to use an explicit id if that is present, and otherwise create
-        an id based on the path to the first ancestor node that does have an id. If,
-        for example the third paragraph of a division with id 'ch2' has no id of itself,
-        we generate: "ch2_p_3" as an id. The second note in this paragraph would receive
-        the id "ch2_p_3_note_2".
+    <xd:doc>
+        <xd:short>Generate a stable <code>id</code>-value.</xd:short>
+        <xd:detail>
+            <p>We want to generate ids that are slightly more stable than using generate-id().
+            The general idea is to use an explicit id if that is present, and otherwise create
+            an id based on the path to the first ancestor node that does have an id. If,
+            for example the third paragraph of a division with id '<code>ch2</code>' has no id of itself,
+            we generate: "<code>ch2_p_3</code>" as an id. The second note in this paragraph would receive
+            the id "<code>ch2_p_3_note_2</code>".</p>
 
-        Safe ID syntax:
-            HTML:       [A-Za-z][A-Za-z0-9_:.-]*
-            CSS:        -?[_a-zA-Z]+[_a-zA-Z0-9-]*
-            Combined:   [A-Za-z][A-Za-z0-9_-]*
-    -->
+            <table>
+                <tr><th>Language    </th><th>Safe ID syntax </th></tr>
+                <tr><td>HTML:       </td><td><code>[A-Za-z][A-Za-z0-9_:.-]*</code></td></tr>
+                <tr><td>CSS:        </td><td><code>-?[_a-zA-Z]+[_a-zA-Z0-9-]*</code></td></tr>
+                <tr><td>Combined:   </td><td><code>[A-Za-z][A-Za-z0-9_-]*</code></td></tr>
+            </table>
+        </xd:detail>
+        <xd:param name="node">The node for which the <code>id</code>-value is generated (default: the current node).</xd:param>
+    </xd:doc>
 
     <xsl:template name="generate-stable-id-for">
         <xsl:param name="node" select="."/>
@@ -121,6 +144,17 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate an <code>id</code>-value.</xd:short>
+        <xd:detail>
+            <p>Generate an <code>id</code>-value for a node (by default the current node).</p>
+            <p>The generated id will re-use the existing <code>id</code> attribute if present, or use the <code>generate-id()</code> function otherwise.
+            Such generated id's will be prefixed with the letter 'x'</p>
+        </xd:detail>
+        <xd:param name="node">The node for which the <code>id</code>-value is generated.</xd:param>
+        <xd:param name="position" type="string">A value appended after the generated <code>id</code>.</xd:param>
+    </xd:doc>
 
     <xsl:template name="generate-id-for">
         <xsl:param name="node" select="." as="element()"/>
@@ -213,6 +247,14 @@
 
     <!--====================================================================-->
     <!-- Generate labels for heads in the correct language -->
+
+    <xd:doc>
+        <xd:short>Translate the <code>type</code>-attribute of a division.</xd:short>
+        <xd:detail>
+            <p>Translate the <code>type</code>-attribute of a division to a string in the currently active language.</p>
+        </xd:detail>
+        <xd:param name="type" type="string">The value of the <code>type</code>-attribute.</xd:param>
+    </xd:doc>
 
     <xsl:function name="f:translate-div-type" as="xs:string">
         <xsl:param name="type"/>

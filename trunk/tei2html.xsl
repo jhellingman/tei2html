@@ -63,15 +63,31 @@
 
     <!--====================================================================-->
 
+    <xd:doc type="string">Name used as prefix for generated file names (not relevant for HTML, but required for some included stylesheets).</xd:doc>
     <xsl:param name="basename" select="'book'"/>
-    <xsl:param name="path" select="''"/> <!-- Not used for HTML versions -->
 
+    <xd:doc type="string">Path in which generated file will be placed (not relevant for HTML, but required for some included stylesheets).</xd:doc>
+    <xsl:param name="path" select="''"/>
+
+    <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
+
+    <xd:doc type="string">Generate special markup used in ePub files (Yes or No).</xd:doc>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
+
+    <xd:doc type="string">Generate special markup used in ePub3 files (Yes or No).</xd:doc>
     <xsl:param name="optionEPub3" select="'No'"/>
+
+    <xd:doc type="string">Generate Project Gutenberg headers and footers (Yes or No).</xd:doc>
     <xsl:param name="optionPGHeaders" select="'No'"/>
+
+    <xd:doc type="string">Output paragraph numbers, using the value of the @n attribute (Yes or No).</xd:doc>
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
+
+    <xd:doc type="string">Include images in the generated output (Yes or No).</xd:doc>
     <xsl:param name="optionIncludeImages" select="'Yes'"/>
+
+    <xd:doc type="string">Include external links in the generated output (Yes or No).</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
 
 
