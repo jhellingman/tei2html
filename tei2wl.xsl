@@ -3,10 +3,16 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f fn xs"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="f fn xd xs"
     >
 
-<!-- Stylesheet to produce a word frequency list (per language) from any XML document -->
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to produce a word frequency list (per language) from any XML document</xd:short>
+        <xd:detail> </xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 

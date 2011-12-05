@@ -1,9 +1,9 @@
 <xsl:transform
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     version="1.0"
-    exclude-result-prefixes="msg"
->
+    exclude-result-prefixes="msg xd">
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -11,10 +11,15 @@
         method="html"
         encoding="UTF-8"/>
 
-    <!-- review translations in our messages.xml -->
+    <xd:doc type="stylesheet">
+        <xd:short>TEI stylesheet to review translations in our localization xml-files.</xd:short>
+        <xd:detail> </xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
-    <xsl:variable name="srclang" select="'en'"/>
-    <xsl:variable name="destlang" select="'de'"/>
+    <xsl:param name="srclang" select="'en'"/>
+    <xsl:param name="destlang" select="'de'"/>
 
     <xsl:strip-space elements="*"/>
 
