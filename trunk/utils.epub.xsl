@@ -11,9 +11,17 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>ePub-specific utility templates and functions, used by tei2epub</xd:short>
+        <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2epub only.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!-- href attributes 
 
@@ -47,7 +55,7 @@
     ended up. This is typically the same file that contains the last element 
     of the containing div1.
 
-    The strategy is this to find first our div1 ancestor and then the last
+    The strategy is this to first find our div1 ancestor and then the last
     element of it. We then find out in which file that has ended
     up. Links to footnotes then can point to that file.
 
