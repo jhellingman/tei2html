@@ -11,9 +11,17 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="1.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>HTML-specific utility templates and functions, used by tei2html</xd:short>
+        <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2html only.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!-- href attributes 
 

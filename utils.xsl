@@ -178,6 +178,12 @@
         <xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate a <code>href</code>-attribute.</xd:short>
+        <xd:detail>Generate a <code>href</code>-attribute to refer to a target element.</xd:detail>
+        <xd:param name="target">The node the <code>href</code> will point to. Default: the current node.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-href-attribute">
         <xsl:param name="target" select="." as="element()"/>
 
@@ -187,6 +193,15 @@
             </xsl:call-template>
         </xsl:attribute>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate a <code>href</code>-attribute for footnotes.</xd:short>
+        <xd:detail>Generate a <code>href</code>-attribute when referring to footnotes.
+        In the HTML set of utilities this is the same as <code>generate-href-attribute</code>
+        but is included because in the ePub version, these need to be handled in
+        a special way.</xd:detail>
+        <xd:param name="target">The node the <code>href</code> will point to. Default: the current node.</xd:param>
+    </xd:doc>
 
     <xsl:template name="generate-footnote-href-attribute">
         <xsl:param name="target" select="."/>
@@ -200,13 +215,14 @@
 
 
     <!--====================================================================-->
-    <!-- Close and Open paragraphs
+    <!-- Close and Open paragraphs -->
 
-    To accomodate the differences between the TEI and HTML paragraph model,
-    we sometimes need to close (and reopen) paragraphs, as various elements
-    are not allowed inside p elements in HTML.
-
-    -->
+    <xd:doc>
+        <xd:short>Close a <code>p</code>-element in the output.</xd:short>
+        <xd:detail>To accomodate the differences between the TEI and HTML paragraph model,
+        we sometimes need to close (and reopen) paragraphs, as various elements
+        are not allowed inside <code>p</code>-elements in HTML.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="closepar">
         <!-- insert </p> to close current paragraph as tables in paragraphs are illegal in HTML -->
@@ -214,6 +230,12 @@
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Re-open a <code>p</code>-element in the output.</xd:short>
+        <xd:detail>Re-open a previously closed <code>p</code>-element in the output.
+        This generates an extra <code>p</code>-element in the output.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="reopenpar">
         <xsl:if test="parent::p or parent::note">
@@ -223,6 +245,13 @@
 
     <!--====================================================================-->
     <!-- Language tagging -->
+
+    <xd:doc>
+        <xd:short>Generate a lang attribute.</xd:short>
+        <xd:detail>Generate a lang attribute. Depending on the output method (HTML or XML), 
+        either the <code>lang</code> or the <code>xml:lang</code> attribute will be set on
+        the output element if a lang attribute is present in the source.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="set-lang-attribute">
         <xsl:if test="@lang">
@@ -239,6 +268,11 @@
 
     <!--====================================================================-->
     <!-- Shortcut for both id and language tagging -->
+
+    <xd:doc>
+        <xd:short>Generate both a lang and an id attribute.</xd:short>
+        <xd:detail> </xd:detail>
+    </xd:doc>
 
     <xsl:template name="set-lang-id-attributes">
         <xsl:call-template name="generate-id-attribute"/>
