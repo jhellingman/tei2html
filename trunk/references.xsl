@@ -201,6 +201,7 @@
                 <xsl:text>http://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, 'bib:'))"/>
                 <xsl:choose>
                     <!-- TODO: move this to localization data -->
+                    <xsl:when test="$lang = 'en'"/>
                     <xsl:when test="$lang = 'de'">&amp;version=LUTH1545</xsl:when>
                     <xsl:when test="$lang = 'es'">&amp;version=RVR1995</xsl:when>
                     <xsl:when test="$lang = 'nl'">&amp;version=HTB</xsl:when>

@@ -132,7 +132,7 @@
 
                     <xsl:if test="$opfManifestFile">
                         <!-- Include additional items in the manifest -->
-                        <xsl:message terminate="no">Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                        <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
                         <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
                     </xsl:if>
                 </manifest>

@@ -18,21 +18,31 @@
     <!ENTITY asterism   "&#x2042;">
 
 ]>
-<!--
-
-    Stylesheet to format block level elements, to be imported in tei2html.xsl.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="1.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to format block-level elements, to be imported in tei2html.xsl.</xd:short>
+        <xd:detail>This stylesheet formats block-level elements from TEI.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!--====================================================================-->
     <!-- Page Breaks -->
+
+    <xd:doc>
+        <xd:short>Handle a page-break.</xd:short>
+        <xd:detail>Handle a page-break. Generate an HTML anchor with an <code>id</code> attribute.
+        Depending on the element we find the pb in, we may need to wrap the generated content in
+        a wrapping HTML p-element.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="pb">
         <xsl:choose>
@@ -45,6 +55,12 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate an anchor for a page-break.</xd:short>
+        <xd:detail>Generate an anchor for a page-break if the page-break has a number (<code>@n</code>-attribute). Otherwise,
+        just generate an anchor element.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="pb">
         <xsl:choose>
@@ -63,6 +79,12 @@
 
     <!--====================================================================-->
     <!-- Thematic Breaks -->
+
+    <xd:doc>
+        <xd:short>Handle a milestone.</xd:short>
+        <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates 
+        slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
@@ -93,6 +115,11 @@
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Handle a milestone-element.</xd:short>
+        <xd:detail>Handle a milestone-element. Just generate a milestone if the <code>@type</code> and 
+        <code>@rend</code>-attributes are missing.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="milestone">
         <xsl:call-template name="generate-anchor"/>
@@ -100,7 +127,12 @@
 
 
     <!--====================================================================-->
-    <!-- Arguments (a short summary of contents at start of chapter) -->
+    <!-- Arguments -->
+
+    <xd:doc>
+        <xd:short>Handle an argument.</xd:short>
+        <xd:detail>Handle an argument (a short summary of contents at the start of a chapter).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="argument">
         <div class="argument">
@@ -112,6 +144,11 @@
 
     <!--====================================================================-->
     <!-- Epigraphs -->
+
+    <xd:doc>
+        <xd:short>Handle an epigraph.</xd:short>
+        <xd:detail>Handle an epigraph (a short citation at the start of a chapter or book).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="epigraph">
         <div class="epigraph">
@@ -128,7 +165,7 @@
     </xsl:template>
 
 
-    <!-- trailers -->
+    <!-- Trailers -->
 
     <xsl:template match="trailer">
         <p>

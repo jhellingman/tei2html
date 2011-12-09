@@ -632,7 +632,7 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
-            <xsl:message terminate="no">Generating Index</xsl:message>
+            <xsl:message terminate="no">Info: Generating Index</xsl:message>
 
             <!-- Collect all index entries into a tree structure, and add the page numbers to them -->
             <xsl:variable name="index">
@@ -649,7 +649,10 @@
                                     <xsl:when test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
                                         <xsl:value-of select="preceding::pb[1]/@n"/>
                                     </xsl:when>
-                                    <xsl:otherwise>###</xsl:otherwise>
+                                    <xsl:otherwise>
+                                        <xsl:text>###</xsl:text>
+                                        <xsl:message terminate="no">Warning: no valid page number found preceding index entry. (<xsl:value-of select="@level1"/>)</xsl:message>
+                                    </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
                             <xsl:call-template name="generate-href-attribute">
@@ -681,7 +684,7 @@
                     
                     <xsl:value-of select="@level2"/>
 
-                    <!-- Group to surpress duplicate page numbers -->
+                    <!-- Group to suppress duplicate page numbers -->
                     <xsl:for-each-group select="current-group()" group-by="@page">
                         <xsl:choose>
                             <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
@@ -707,7 +710,6 @@
 
     <!--====================================================================-->
     <!-- Footnotes -->
-
 
     <!-- collect footnotes in a separate section, sorted by div1 -->
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
