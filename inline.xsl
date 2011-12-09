@@ -40,7 +40,6 @@
         <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
     </xsl:template>
 
-
     <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
     <xsl:template match="hi[@rend='it' or @rend='italic']">
         <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
@@ -102,7 +101,6 @@
         </xsl:choose>
     </xsl:template>
 
-
     <!-- Use other font for Greek passages -->
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
         <span class="Greek"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
@@ -121,7 +119,6 @@
 
     <!--====================================================================-->
     <!-- Anchors -->
-
 
     <xsl:template match="anchor">
         <a><xsl:call-template name="generate-id-attribute"/><xsl:apply-templates/></a>
@@ -169,6 +166,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Gaps -->
@@ -281,6 +279,7 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Currency amounts (in future with modern PPP equivalent) -->

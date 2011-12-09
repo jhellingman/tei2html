@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="2.0">
+
+    <xd:doc type="stylesheet">
+        <xd:short>Extract page from a TEI document.</xd:short>
+        <xd:detail>This stylesheet extracts a page from a TEI document, that is, all content between two pb-elements.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:output 
         method="xml" 
         indent="yes"
         encoding="UTF-8"/>
 
+    <xd:doc type="string">Number of page to extract.</xd:doc>
+
     <xsl:param name="n" select="12"/>
+
+    <xd:doc type="string">Number of page following the page to extract, determined in code.</xd:doc>
 
     <xsl:variable name="m">
         <xsl:value-of select="//pb[@n=$n]/following::pb[1]/@n"/>
