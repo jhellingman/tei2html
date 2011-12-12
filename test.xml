@@ -155,16 +155,16 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </div1></body></text></q>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> and the <xref url="bib:gen 1:1">Bible</xref>.</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>.</p>
 
 </div1>
 <div1 id="ch3" type="Chapter" n="3" rend="label(yes)">
 <head>Footnotes<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note></head>
 
-<p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.
+<p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.</p>
 
+<p>Here we have a reference to a <ref target="n1">footnote</ref> in a following <ref target="ch05">chapter</ref>, and <ref target="inside-n1">element inside it</ref>.</p>
 
-</p>
 
 </div1>
 
@@ -201,7 +201,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     </row>
     <row>
         <cell>5 (yet another wide cell, just to see how it works out in the result formatting)</cell>
-        <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>.</note></cell>
+        <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell>
     </row>
     <row>
         <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
