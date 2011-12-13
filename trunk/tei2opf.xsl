@@ -55,7 +55,9 @@
                             <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+                    <xsl:if test="teiHeader/fileDesc/publicationStmt/date and not(contains(teiHeader/fileDesc/publicationStmt/date, '#####'))">
+                        <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+                    </xsl:if>
                     <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>
 
                     <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
@@ -73,12 +75,11 @@
 
                     <xsl:if test="$optionEPub3 = 'Yes'">
                         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
-                        <xsl:variable name="utc-timestamp" select="adjust-dateTime-to-timezone(current-dateTime(), xs:dayTimeDuration('PT0H'))"/>
 
                         <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
                         <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
                         <meta about="#pub-id" property="scheme">uuid</meta>
-                        <meta property="dcterms:modified"><xsl:value-of select="format-dateTime($utc-timestamp, '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/></meta>
+                        <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
 
                         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
                         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
