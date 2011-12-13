@@ -40,7 +40,7 @@
                 </p>
             </xsl:if>
 
-            <xsl:if test="//idno[@type='LCCN']">
+            <xsl:if test="//idno[@type='LCCN'] and not(contains(//idno[@type='LCCN'], '#####'))">
                 <p><xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
@@ -49,7 +49,7 @@
                 </p>
             </xsl:if>
 
-            <xsl:if test="//idno[@type='OLN']">
+            <xsl:if test="//idno[@type='OLN'] and not(contains(//idno[@type='OLN'], '#####'))">
                 <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
@@ -58,7 +58,7 @@
                 </p>
             </xsl:if>
 
-            <xsl:if test="//idno[@type='OLW']">
+            <xsl:if test="//idno[@type='OLW'] and not(contains(//idno[@type='OLW'], '#####'))">
                 <p><xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
@@ -67,7 +67,7 @@
                 </p>
             </xsl:if>
 
-            <xsl:if test="//idno[@type='OCLC']">
+            <xsl:if test="//idno[@type='OCLC'] and not(contains(//idno[@type='OCLC'], '#####'))">
                 <p><xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
                     <a class="catlink">
                         <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>

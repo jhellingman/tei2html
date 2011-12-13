@@ -9,10 +9,17 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="f xd"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to format the HTML header.</xd:short>
+        <xd:detail>Stylesheet to format the HTML header, to be imported in tei2html.xsl.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:param name="customCssFile"/>
 
@@ -20,10 +27,16 @@
     <!--====================================================================-->
     <!-- HTML Header -->
 
+    <xd:doc>
+        <xd:short>Generate the high-level HTML.</xd:short>
+        <xd:detail>
+            <p>Generate the high-level structure of the output HTML file.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="TEI.2">
         <xsl:comment>
-            <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text><xsl:value-of select="current-dateTime()"/><xsl:text>. </xsl:text>
+            <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text><xsl:value-of select="f:utc-timestamp()"/><xsl:text>. </xsl:text>
         </xsl:comment>
 
         <xsl:text> <!-- insert extra new-line for PG -->
@@ -55,6 +68,13 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the HTML header.</xd:short>
+        <xd:detail>
+            <p>Generate the HTML header, including the metadata and the included stylesheets.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="generate-html-header">
         <head>
             <title>
@@ -67,6 +87,13 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the metadata in <code>meta</code>-tags.</xd:short>
+        <xd:detail>
+            <p>Generate the metadata in <code>meta</code>-tags. This is based on values placed in variables, and will be output in the Dublin Core format.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="generate-metadata">
 
         <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
@@ -78,7 +105,9 @@
 
         <meta name="DC.Creator"   content="{$author}"/>
         <meta name="DC.Title"     content="{$title}"/>
-        <meta name="DC.Date"      content="{$pubdate}"/>
+        <xsl:if test="$pubdate and not(contains($pubdate, '#####'))">
+            <meta name="DC.Date"      content="{$pubdate}"/>
+        </xsl:if>
         <meta name="DC.Language"  content="{$language}"/>
         <meta name="DC.Format"    content="text/html"/>
         <meta name="DC.Publisher" content="{$publisher}"/>
@@ -97,6 +126,15 @@
 
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate stylesheets.</xd:short>
+        <xd:detail>
+            <p>Generate CSS stylesheets for the generated HTML. With HTML output, these will be placed in-line
+            in the output; with ePub output, they will be placed in a single CSS file, and we only generate a
+            link to that file here.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="include-stylesheets">
 

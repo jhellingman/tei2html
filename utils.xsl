@@ -307,4 +307,17 @@
         </xsl:choose>
     </xsl:function>
 
+    <xd:doc>
+        <xd:short>Get the current UTC-time in a string.</xd:short>
+        <xd:detail>
+            <p>Get the current UTC-time in a string, format "YYYY-MM-DDThh:mm:ssZ"</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:utc-timestamp" as="xs:string">
+        <xsl:variable name="utc-timestamp" select="adjust-dateTime-to-timezone(current-dateTime(), xs:dayTimeDuration('PT0H'))"/>
+        <xsl:value-of select="format-dateTime($utc-timestamp, '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>
