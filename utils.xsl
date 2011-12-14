@@ -61,7 +61,7 @@
     <xd:doc>
         <xd:short>Generate an <code>id</code>-attribute.</xd:short>
         <xd:detail>Generate an <code>id</code>-attribute for a node (default: current node).</xd:detail>
-        <xd:param>The node for which the <code>id</code>-attribute is generated.</xd:param>
+        <xd:param name="node">The node for which the <code>id</code>-attribute is generated.</xd:param>
     </xd:doc>
 
     <xsl:template name="generate-id-attribute-for">

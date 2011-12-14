@@ -176,6 +176,7 @@
             <xsl:when test="substring($url, 1, 4) = 'bib:'">biblink</xsl:when>
             <xsl:when test="substring($url, 1, 6) = 'https:'">seclink</xsl:when>
             <xsl:when test="substring($url, 1, 4) = 'ftp:'">ftplink</xsl:when>
+            <xsl:when test="substring($url, 1, 7) = 'mailto:'">maillink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -201,6 +202,7 @@
             <xsl:when test="substring($url, 1, 3) = 'wp:'"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
             <xsl:when test="substring($url, 1, 4) = 'loc:'"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
             <xsl:when test="substring($url, 1, 4) = 'bib:'"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
+            <xsl:when test="substring($url, 1, 7) = 'mailto:'"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -222,6 +224,7 @@
             <tr><td>wpp:<i>[string]</i></td>        <td>Link to a WikiPilipinas article.</td></tr>
             <tr><td>loc:<i>[coordinates]</i></td>   <td>Link to a geographical location (currently uses Google Maps).</td></tr>
             <tr><td>bib:<i>[book ch:vs]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
+            <tr><td>mailto:<i>[email address]</i></td> <td>Link to an email address.</td></tr>
             </table>
 
         </xd:detail>
@@ -289,7 +292,7 @@
             </xsl:when>
 
             <!-- Link to website (http:// or https://) -->
-            <xsl:when test="substring($url, 1, 5) = 'http:' or substring($url, 1, 6) = 'https:'">
+            <xsl:when test="substring($url, 1, 5) = 'http:' or substring($url, 1, 6) = 'https:' or substring($url, 1, 7) = 'mailto:'">
                 <xsl:value-of select="$url"/>
             </xsl:when>
 
