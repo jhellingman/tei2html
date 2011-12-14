@@ -14,20 +14,40 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="2.0"
     >
+
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to generate a CSS stylesheet to accompany HTML or ePub output</xd:short>
+        <xd:detail>This stylesheet formats generates a CSS stylesheet from TEI. According to the requirements
+        of ePub, not <code>@style</code> attributes are allowed in the generated XHTML, so all CSS
+        rules are collected from the TEI file, and put together in a separate CSS file. Further templates in
+        the <code>css</code> mode are integrated in the other stylesheets, to keep them together with
+        related HTML generating templates.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
 
     <xsl:key name="rend" match="*" use="concat(name(), ':', @rend)"/>
 
+
+    <xd:doc>
+        <xd:short>Translate the <code>@rend</code> attributes to CSS.</xd:short>
+        <xd:detail>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</xd:detail>
+        <xd:param name="rend">The <code>@rend</code> attribute to be translated.</xd:param>
+        <xd:param name="name">The name of the element carrying this attribute.</xd:param>
+    </xd:doc>
 
     <xsl:template name="translate-rend-attribute">
         <xsl:param name="rend" select="normalize-space(@rend)"/>
         <xsl:param name="name" select="name()"/>
 
         <!-- A rendition ladder is straighfowardly converted to CSS, by taking the
-             characters before the ( as the css property, and the characters
-             between ( and ) as the value. We convert an entire string
+             characters before the "(" as the css property, and the characters
+             between "(" and ")" as the value. We convert an entire string
              by simply doing the head, and then recursively the tail -->
 
         <xsl:if test="$rend != ''">
@@ -44,8 +64,13 @@
     </xsl:template>
 
 
-    <!-- We need to filter out those rendering attributes that have special meaning
-         to the formatting code, and should not be translated into CSS -->
+    <xd:doc>
+        <xd:short>Filter CSS properties with special meanigns.</xd:short>
+        <xd:detail>Filter those CSS properties with a special meaning, so they will not
+        be output to CSS.</xd:detail>
+        <xd:param name="property">The name of the property to be filtered.</xd:param>
+        <xd:param name="value">The value of this property.</xd:param>
+    </xd:doc>
 
     <xsl:template name="filter-css-property">
         <xsl:param name="property"/>
@@ -73,7 +98,7 @@
             <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image iso head -->
 
             <!-- Properties used to render verse -->
-            <xsl:when test="$property='hemistich'"/>
+            <xsl:when test="$property='hemistich'"/>    <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
 
             <!-- Properties related to decorative initials -->
             <xsl:when test="$property='initial-image'"/>
@@ -109,8 +134,14 @@
     </xsl:template>
 
 
-    <!-- Generate a class name for the rend; typically we use a generated id
-         for the first element having this rend attribute value -->
+    <xd:doc>
+        <xd:short>Generate a CSS class name.</xd:short>
+        <xd:detail>Generate a CSS class name. This class name is derived from the
+        generated id of the first element having this <code>@rend</code> attribute value.</xd:detail>
+        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
+        <xd:param name="node">The node carrying this attribute.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-rend-class-name">
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
@@ -119,7 +150,13 @@
     </xsl:template>
 
 
-    <!-- The same as above, but now wrapped up in an attribute -->
+    <xd:doc>
+        <xd:short>Generate a CSS class attribute.</xd:short>
+        <xd:detail>The same as above, but now wrapped up in an attribute</xd:detail>
+        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
+        <xd:param name="node">The node carrying this attribute.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-rend-class-attribute">
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
@@ -133,9 +170,15 @@
     </xsl:template>
 
 
-    <!-- We only need to insert a class name in the output, if
-         there is a matching css rule, or an explicit class
-         declaration in the rend attribute. -->
+    <xd:doc>
+        <xd:short>Optionally generate a CSS class name.</xd:short>
+        <xd:detail>As before, but we only need to insert a class name in the output, if
+         there is a matching CSS rule, or an explicit class
+         declaration in the <code>@rend</code> attribute.</xd:detail>
+        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
+        <xd:param name="node">The node carrying this attribute.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-rend-class-name-if-needed">
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
@@ -159,7 +202,13 @@
     </xsl:template>
 
 
-    <!-- The same as above, but now wrapped up in an attribute -->
+    <xd:doc>
+        <xd:short>Optionally generate a CSS class attribute.</xd:short>
+        <xd:detail>The same as above, but now wrapped up in an attribute</xd:detail>
+        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
+        <xd:param name="node">The node carrying this attribute.</xd:param>
+    </xd:doc>
+
     <xsl:template name="generate-rend-class-attribute-if-needed">
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
@@ -177,11 +226,16 @@
     </xsl:template>
 
 
-    <!-- Top level rule to generate CSS from rend attributes -->
+    <xd:doc>
+        <xd:short>Top level rule to generate CSS from <code>@rend</code> attributes.</xd:short>
+        <xd:detail>The top level rule starts generating CSS rules for column-level rendering first,
+        as those might be overridden by following row-level and cell-level rendering in tables.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="/" mode="css">
 
         <!-- We need to collect the column-related rendering rules first,
-             so they can be overriden by later cell rendering rules -->
+             so they can be overridden by later cell rendering rules -->
         <xsl:apply-templates select="TEI.2/text//column[@rend]" mode="css-column"/>
 
         <!-- Then follow the row-related rendering rules -->
@@ -214,6 +268,12 @@
         <xsl:apply-templates mode="css"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate a CSS rule.</xd:short>
+        <xd:detail>Generate a CSS rule from a <code>@rend</code> attribute. Using a key on <code>name():@rend</code>, we
+        do so only for the first occurance of a <code>@rend</code> attribute on an element.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="generate-css-rule">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
