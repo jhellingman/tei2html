@@ -10,7 +10,11 @@
         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
-        version="1.0">
+        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:f="urn:stylesheet-functions"
+        exclude-result-prefixes="f xd xs"
+        version="2.0">
 
     <xsl:output
         method="xml"
@@ -69,7 +73,7 @@
 
     <xsl:template match="item" mode="keywords">
         <!-- Filter out empty subjects and our template default placeholder -->
-        <xsl:if test="not(. = '' or . = '#####')">
+        <xsl:if test="f:isvalid(.)">
             <dc:subject>
                 <xsl:value-of select="."/>
             </dc:subject>
@@ -78,7 +82,7 @@
 
     <xsl:template match="name" mode="contributors">
         <!-- Filter out empty contributors and our template default placeholder -->
-        <xsl:if test="not(. = '' or . = '#####')">
+        <xsl:if test="f:isvalid(.)">
             <dc:contributor>
                 <xsl:value-of select="."/>
             </dc:contributor>
@@ -87,7 +91,7 @@
 
     <xsl:template match="note" mode="descriptions">
         <!-- Filter out empty descriptions and our template default placeholder -->
-        <xsl:if test="not(. = '' or . = '#####')">
+        <xsl:if test="f:isvalid(.)">
             <dc:description>
                 <xsl:value-of select="."/>
             </dc:description>
@@ -95,5 +99,21 @@
     </xsl:template>
 
     <xsl:template match="*"/>
+
+
+    <xd:doc>
+        <xd:short>Determine a string has a valid value.</xd:short>
+        <xd:detail>
+            <p>Determine a string has a valid value, that is, not null, empty or '#####' (copied from utils.xml)</p>
+        </xd:detail>
+        <xd:param name="value" type="string">The value to be tested.</xd:param>
+    </xd:doc>
+    <xsl:function name="f:isvalid" as="xs:boolean">
+        <xsl:param name="value"/>
+        <xsl:choose>
+            <xsl:when test="$value and not($value = '' or $value = '#####')">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>

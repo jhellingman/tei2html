@@ -536,6 +536,15 @@ span.measure
     text-transform: uppercase;
 }
 
+.tt
+{
+    font-family: monospace;
+}
+
+.underline
+{
+    text-decoration: underline;
+}
 
 /* overline is actually a bit too high; overtilde is approximated with overline */
 .overline, .overtilde

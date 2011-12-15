@@ -55,7 +55,7 @@
                             <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:if test="teiHeader/fileDesc/publicationStmt/date and not(contains(teiHeader/fileDesc/publicationStmt/date, '#####'))">
+                    <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
                         <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
                     </xsl:if>
                     <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>

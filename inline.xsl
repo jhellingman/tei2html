@@ -27,60 +27,147 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f"
+    exclude-result-prefixes="f xd"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Templates for inline text elements</xd:short>
+        <xd:detail>This stylesheet contains templates for inline text elements.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!--====================================================================-->
     <!-- Text styles -->
+
+    <xd:doc>
+        <xd:short>Emphasized text.</xd:short>
+        <xd:detail>Emphasized text rendered as italics.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="emph">
         <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
-    <xsl:template match="hi[@rend='it' or @rend='italic']">
+
+    <xd:doc>
+        <xd:short>Italic text.</xd:short>
+        <xd:detail>Italic text, indicated with the <code>@rend</code> attribute value <code>it</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='it' or @rend='italic'] | i">
         <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='b' or @rend='bold']">
+    <xd:doc>
+        <xd:short>Bold text.</xd:short>
+        <xd:detail>Bold text, indicated with the <code>@rend</code> attribute value <code>b</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='b' or @rend='bold'] | b">
         <b><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></b>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='sup']">
+    <xd:doc>
+        <xd:short>Superscript text.</xd:short>
+        <xd:detail>Superscript text, indicated with the <code>@rend</code> attribute value <code>sup</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='sup'] | sup">
         <sup><xsl:apply-templates/></sup>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='sub']">
+    <xd:doc>
+        <xd:short>Subscript text.</xd:short>
+        <xd:detail>Subscript text, indicated with the <code>@rend</code> attribute value <code>sub</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='sub'] | sub">
         <sub><xsl:apply-templates/></sub>
     </xsl:template>
 
-    <!-- Mapped to defined CSS classes: sc = small caps; uc = upper case; ex = letterspaced; rm = roman -->
-    <xsl:template match="hi[@rend='sc']">
+    <!-- Mapped to defined CSS classes: sc = small caps; uc = upper case; ex = letterspaced; rm = roman; tt = typewriter type -->
+
+    <xd:doc>
+        <xd:short>Caps and small-caps text.</xd:short>
+        <xd:detail>Caps and small-caps text, indicated with the <code>@rend</code> attribute value <code>sc</code>.</xd:detail>
+    </xd:doc>
+    
+    <xsl:template match="hi[@rend='sc'] | sc">
         <span class="sc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Uppercase text.</xd:short>
+        <xd:detail>Uppercase text, indicated with the <code>@rend</code> attribute value <code>uc</code>.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="hi[@rend='uc']">
         <span class="uc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <xsl:template match="hi[@rend='ex']">
+    <xd:doc>
+        <xd:short>Letterspaced text.</xd:short>
+        <xd:detail>Letterspace (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='ex'] | g ">
         <span class="ex"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Upright text.</xd:short>
+        <xd:detail>Upright (in an italic context) text, indicated with the <code>@rend</code> attribute value <code>rm</code>.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="hi[@rend='rm']">
         <span class="rm"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Type-writer text.</xd:short>
+        <xd:detail>Type-writer (monospaced) text, indicated with the <code>@rend</code> attribute value <code>tt</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='tt'] | tt">
+        <span class="tt"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Underlined text.</xd:short>
+        <xd:detail>Underlined text, indicated with the <code>@rend</code> attribute value <code>underline</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='underline'] | u">
+        <span class="underline"><xsl:apply-templates/></span>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Overlined text.</xd:short>
+        <xd:detail>Overlined text, indicated with the <code>@rend</code> attribute value <code>overline</code>.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="hi[@rend='overline']">
         <span class="overline"><xsl:apply-templates/></span>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Text spanned with a wide tilde.</xd:short>
+        <xd:detail>Text spanned with a wide tilde, indicated with the <code>@rend</code> attribute value <code>overtilde</code>.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="hi[@rend='overtilde']">
         <span class="overtilde"><xsl:apply-templates/></span>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Hi-lighted text.</xd:short>
+        <xd:detail>Hi-lighted text with other values for the <code>@rend</code> attribute.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="hi">
         <xsl:choose>
@@ -101,17 +188,29 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- Use other font for Greek passages -->
+    <xd:doc>
+        <xd:short>Greek passages.</xd:short>
+        <xd:detail>Use another font for Greek script passages.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
         <span class="Greek"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <!-- Use other font for Arabic passages -->
+    <xd:doc>
+        <xd:short>Arabic passages.</xd:short>
+        <xd:detail>Use another font for Arabic script passages.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="foreign[@lang='ar']">
         <span class="Arabic"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
-    <!-- Foreign phrases are not styled by default, but we do set the language on them -->
+    <xd:doc>
+        <xd:short>Foreign phrases.</xd:short>
+        <xd:detail>Foreign phrases are not styled by default, but we do set the language on them.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="foreign">
         <span><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
@@ -119,6 +218,11 @@
 
     <!--====================================================================-->
     <!-- Anchors -->
+
+    <xd:doc>
+        <xd:short>Anchors.</xd:short>
+        <xd:detail>Anchors are empty placeholders and are translated to HTML anchors.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="anchor">
         <a><xsl:call-template name="generate-id-attribute"/><xsl:apply-templates/></a>
