@@ -320,4 +320,21 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine a string has a valid value.</xd:short>
+        <xd:detail>
+            <p>Determine a string has a valid value, that is, not null, empty or '#####'</p>
+        </xd:detail>
+        <xd:param name="value" type="string">The value to be tested.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:isvalid" as="xs:boolean">
+        <xsl:param name="value"/>
+        <xsl:choose>
+            <xsl:when test="$value and not($value = '' or $value = '#####')">true</xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
 </xsl:stylesheet>
