@@ -110,10 +110,7 @@
     </xd:doc>
     <xsl:function name="f:isvalid" as="xs:boolean">
         <xsl:param name="value"/>
-        <xsl:choose>
-            <xsl:when test="$value and not($value = '' or $value = '#####')">true</xsl:when>
-            <xsl:otherwise>false</xsl:otherwise>
-        </xsl:choose>
+        <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
 
 </xsl:stylesheet>
