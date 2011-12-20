@@ -18,7 +18,9 @@ To be able to use the new features introduced in ePub 3.0, we will need to make 
 
 All such new features of course need support from readers. Such support can be expected quickly on PC-based viewers, but may take considerable time to trickle down to dedicated reader hardware.
 
-Features not within current scope are JavaScript support (we like to keep our books passive) and media overlays.
+For proper development, we also need to be able to test the resulting ePub3 with a number of supporting readers, which are not available at the time.
+
+Features not within current scope are Javascript support (we like to keep our books passive) and media overlays.
 
 == Things to do ==
 
@@ -67,7 +69,7 @@ New metadata uses the `<meta>` tag (samples taken from draft ePub 3.0 specificat
 </metadata>
 }}}
 
-Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer` attribute.
+Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer` attribute. (I think it is unlikely readers will actually use this; library management software might do so.)
 
 {{{
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -76,7 +78,7 @@ Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer
 </metadata>
 }}}
 
-Note that the identifier indicated by the `@unique-identifier` attribute on the `<package>` element combined with  the last modification date is used to generate a package id.
+Note that the identifier indicated by the `@unique-identifier` attribute on the `<package>` element combined with the last modification date is used to generate a package id.
 
 {{{
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -93,7 +95,7 @@ Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-
 
 == Manifest ==
 
-The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values manifest item properties], to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g. mathml, scripted, remove-content, svg).
+The manifest now has [http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values manifest item properties], to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g. mathml, scripted, remove-content, SVG).
 
 {{{
 <item properties="nav" id="toc" href="contents.xhtml" media-type="application/xhtml+xml" />
