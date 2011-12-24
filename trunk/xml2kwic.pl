@@ -7,7 +7,7 @@ my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxo
 
 my $filename = $ARGV[0];
 
-system ("$saxon  $filename $xsldir/xml2kwic.xsl");
+system ("$saxon \"$filename\" $xsldir/xml2kwic.xsl");
 
 
 
