@@ -29,7 +29,7 @@
          CSS precedence rules. Note that all identical rend attributes are
          mapped to the same class, and that those might occur in preceeding
          tables, we thus have to generate all column related classes before
-         that related to cells.
+         those related to cells.
 
          In the cell itself, we will find at most two generated class
          attributes: one for the column and one for the cell itself.
