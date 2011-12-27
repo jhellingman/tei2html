@@ -9,15 +9,15 @@ For quite some time, I wanted to be able to generate a KWIC (KeyWord In Context)
 
 The KWIC generator should:
 
-* Show all words in their context
-* Be able to show words in italics
-* Ignore various tags in the text
-* Handle text in footnotes correctly.
-* Present the resulting KWIC in HTML.
+ * Show all words in their context
+ * Be able to show words in italics
+ * Ignore various tags in the text
+ * Handle text in footnotes correctly.
+ * Present the resulting KWIC in HTML.
 
 = Development =
 
-The first idea was that you can easily use `xsl:analyze-string` to split up fragments of text into words, using the a proper regular expression (in fact the expression is: `[\p{L}\p{N}\p{M}-]+`). Given those words, you can then traverse the text, looking for the word you are interested in, and determine the preceding and following words, by following the `preceding-sibling` and `following-sibling` axes.
+The first idea was that you can easily use `xsl:analyze-string` to split up fragments of text into words, using the a proper regular expression (in fact the expression is: `[\p{L}\p{N}\p{M}-]+` ). Given those words, you can then traverse the text, looking for the word you are interested in, and determine the preceding and following words, by following the `preceding-sibling` and `following-sibling` axes.
 
 This worked fine, but quickly showed that not all context is equally relevant. Basically, you need not look further than paragraph boundaries and their equivalents in various parts of a documents. So, before splitting in words, we divide the text in segments, and flatten that segment structure. At the same time, we need to take care to lift non-sequential items, such as foot-notes out of the context (and handle them elsewhere.)
 
