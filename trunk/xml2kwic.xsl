@@ -39,6 +39,14 @@
 
 
     <xd:doc>
+        <xd:short>Stopwords.</xd:short>
+        <xd:detail>Stopwords will be ignored when generating the KWIC.</xd:detail>
+    </xd:doc>
+
+    <xsl:param name="stopwords" select="('a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'I', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with')"/>
+
+
+    <xd:doc>
         <xd:short>Generate the HTML output.</xd:short>
         <xd:detail>Generate the HTML output.</xd:detail>
     </xd:doc>
@@ -159,7 +167,11 @@
             <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
             <xsl:if test="fn:matches(@form, '^[\p{L}-]+$')">
                 <xsl:variable name="keyword" select="(current-group()[1])/@form"/>
-                <h2><xsl:value-of select="current-group()[1]"/><xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span></h2>
+                <h2>
+                    <span class="cnt">Word:</span><xsl:text> </xsl:text>
+                    <xsl:value-of select="current-group()[1]"/><xsl:text> </xsl:text>
+                    <span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                </h2>
 
                 <xsl:call-template name="report-matches">
                     <xsl:with-param name="segments" select="$segments"/>

@@ -33,6 +33,7 @@ my $makePDF             = 0;
 my $makeEPUB            = 0;
 my $makeReport          = 0;
 my $makeXML             = 0;
+my $makeKwic            = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 
@@ -40,6 +41,7 @@ GetOptions (
     't' => \$makeTXT,
     'h' => \$makeHTML,
     'e' => \$makeEPUB,
+    'k' => \$makeKwic,
     'p' => \$makePDF,
     'r' => \$makeReport,
     'x' => \$makeXML,
@@ -253,6 +255,12 @@ sub processFile($)
             print "Create text heat map...\n";
             system ("$saxon2 heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
         }
+    }
+
+    if ($makeKwic == 1) 
+    {
+        print "Generate a KWIC index (this may take some time)...\n";
+        system ("$saxon2 $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
     }
 
     print " Done!\n";
