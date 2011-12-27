@@ -100,11 +100,6 @@
     </xsl:template>
 
 
-    <xd:doc mode="words">
-        <xd:short>Mode used to collect a word-list.</xd:short>
-        <xd:detail>Words are collected by splitting text into words with analyze-string at the text level.</xd:detail>
-    </xd:doc>
-
     <xd:doc mode="segments">
         <xd:short>Mode used to collect segments.</xd:short>
         <xd:detail>The generic segment-element will replace a range of higher-level structural elements, such as paragraphs.</xd:detail>
@@ -128,13 +123,6 @@
     </xd:doc>
 
     <xsl:template name="build-kwic">
-
-        <!-- Collect all words with their language in a variable -->
-        <xsl:variable name="words">
-            <words>
-                <xsl:apply-templates mode="words"/>
-            </words>
-        </xsl:variable>
 
         <!-- Collect all segments -->
         <xsl:variable name="segments">
@@ -163,7 +151,7 @@
         </xsl:result-document>
         -->
 
-        <xsl:for-each-group select="$words/words/w" group-by="@form">
+        <xsl:for-each-group select="$segments//w" group-by="@form">
             <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
             <xsl:if test="fn:matches(@form, '^[\p{L}-]+$')">
                 <xsl:variable name="keyword" select="(current-group()[1])/@form"/>
@@ -280,21 +268,11 @@
 
 
     <xd:doc>
-        <xd:short>Output a word.</xd:short>
+        <xd:short>Output a word or non-word.</xd:short>
         <xd:detail></xd:detail>
     </xd:doc>
 
-    <xsl:template mode="output" match="w">
-        <xsl:value-of select="."/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Output a non-word.</xd:short>
-        <xd:detail></xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="output" match="nw">
+    <xsl:template mode="output" match="w | nw">
         <xsl:value-of select="."/>
     </xsl:template>
 
@@ -442,7 +420,7 @@
 
     <xsl:template mode="segments" match="TEI.2/text">
         <xsl:apply-templates mode="segments"/>
-        <xsl:apply-templates mode="segment-notes" select="//note"/>
+        <xsl:apply-templates mode="segment-notes" select="/TEI.2/text//note"/>
     </xsl:template>
 
 
@@ -490,68 +468,10 @@
 
 
     <xd:doc>
-        <xd:short>Do not collect words in the <code>teiHeader</code>.</xd:short>
-        <xd:detail>For our analysis, we are not interested in the <code>teiHeader</code>.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="words" match="teiHeader"/>
-
-
-    <xd:doc>
-        <xd:short>Ignore elements when collecting notes.</xd:short>
-        <xd:detail>We are not interested in certain low level elements when analysing our text.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="words" match="pb | hi | index">
-        <xsl:apply-templates mode="words"/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Replace paragraph boundaries with a pilcrow.</xd:short>
-        <xd:detail>Replace paragraph boundaries with a pilcrow. (Intended to show these when not segmenting, currently not used.)</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="words" match="p">
-        <t name="&#182;"/>
-        <xsl:apply-templates mode="words"/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Replace element boundaries with explicit tags.</xd:short>
-        <xd:detail>Replace element boundaries with explicit tags. (Intended to show these when not segmenting, currently not used.)</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="words" match="*">
-        <xsl:choose>
-            <xsl:when test="normalize-space(.) = ''">
-                <t name="&lt;{name()}/&gt;"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <t name="&lt;{name()}&gt;"/>
-                <xsl:apply-templates mode="words"/>
-                <t name="&lt;/{name()}&gt;"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Collect words in <code>w</code> elements.</xd:short>
         <xd:detail>Collect words in <code>w</code> elements. In this element, the normalized version is kept
-        in the <code>@form</code> attribute, and the current language in the <code>@xml:lang</code> attribute.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="words" match="text()">
-        <xsl:call-template name="analyze-text"/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Collect words in <code>w</code> elements.</xd:short>
-        <xd:detail>Collect words in <code>w</code> elements. In this element, the normalized version is kept
-        in the <code>@form</code> attribute, and the current language in the <code>@xml:lang</code> attribute.</xd:detail>
+        in the <code>@form</code> attribute, the current language in the <code>@xml:lang</code> attribute, and the page on
+        which it appears in the <code>@page</code> attribute.</xd:detail>
     </xd:doc>
 
     <xsl:template name="analyze-text">
