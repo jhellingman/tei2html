@@ -151,23 +151,46 @@
         </xsl:result-document>
         -->
 
-        <xsl:for-each-group select="$segments//w" group-by="@form">
-            <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
-            <xsl:if test="fn:matches(@form, '^[\p{L}-]+$')">
-                <xsl:variable name="keyword" select="(current-group()[1])/@form"/>
-                <h2>
-                    <span class="cnt">Word:</span><xsl:text> </xsl:text>
-                    <xsl:value-of select="current-group()[1]"/><xsl:text> </xsl:text>
-                    <span class="cnt"><xsl:value-of select="count(current-group())"/></span>
-                </h2>
+        <xsl:variable name="matches">
+            <xsl:apply-templates mode="multi-kwic" select="$segments//w"/>
+        </xsl:variable>
 
-                <xsl:call-template name="report-matches">
-                    <xsl:with-param name="segments" select="$segments"/>
-                    <xsl:with-param name="keyword" select="$keyword"/>
+        <xsl:for-each-group select="$matches/match" group-by="word/w/@form">
+            <xsl:sort select="(current-group()[1])/word/w/@form" order="ascending"/>
+            <xsl:if test="fn:matches(current-group()[1]/word/w/@form, '^[\p{L}-]+$')">
+                <xsl:call-template name="report-matches2">
+                    <xsl:with-param name="matches" select="current-group()"/>
                 </xsl:call-template>
             </xsl:if>
         </xsl:for-each-group>
     </xsl:template>
+
+    
+    <xsl:template name="report-matches2">
+        <xsl:param name="matches" as="element()*"/>
+
+        <xsl:variable name="keyword" select="$matches[1]/word/w"/>
+
+        <h2>
+            <span class="cnt">Word:</span><xsl:text> </xsl:text>
+            <xsl:value-of select="$keyword"/><xsl:text> </xsl:text>
+            <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+        </h2>
+
+        <table>
+            <tr>
+                <th/>
+                <th/>
+                <th/>
+                <th class="pn">Page</th>
+            </tr>
+
+            <xsl:apply-templates mode="output" select="$matches">
+                <xsl:sort select="fn:lower-case(f:strip_diacritics(following))" order="ascending"/>
+            </xsl:apply-templates>
+        </table>
+    </xsl:template>
+
 
 
     <xd:doc>
@@ -213,7 +236,7 @@
 
         <xsl:variable name="matches">
             <matches>
-                <xsl:apply-templates mode="kwic" select="$segments//w">
+                <xsl:apply-templates mode="single-kwic" select="$segments//w">
                     <xsl:with-param name="keyword" select="$keyword"/>
                 </xsl:apply-templates>
             </matches>
@@ -273,7 +296,14 @@
     </xd:doc>
 
     <xsl:template mode="output" match="w | nw">
-        <xsl:value-of select="."/>
+        <xsl:choose>
+            <xsl:when test="@parent = 'hi'">
+                <i><xsl:value-of select="."/></i>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -287,7 +317,7 @@
     </xsl:template>
 
 
-    <xd:doc mode="kwic">
+    <xd:doc mode="single-kwic">
         <xd:short>Mode used to find matches.</xd:short>
         <xd:detail>This traverses the segments, looking for matching words.</xd:detail>
     </xd:doc>
@@ -297,8 +327,8 @@
         <xd:detail>Find a match in a segment.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="kwic" match="segment">
-        <xsl:apply-templates mode="kwic" select="."/>
+    <xsl:template mode="single-kwic" match="segment">
+        <xsl:apply-templates mode="single-kwic" select="."/>
     </xsl:template>
 
 
@@ -307,7 +337,7 @@
         <xd:detail>Find a matching word, when a word is found, the preceding and following contexts are kept with the match.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="kwic" match="w">
+    <xsl:template mode="single-kwic" match="w">
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
@@ -317,6 +347,15 @@
                 <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
             </match>
         </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template mode="multi-kwic" match="w">
+        <match>
+            <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
+            <word><xsl:apply-templates mode="context" select="."/></word>
+            <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
+        </match>
     </xsl:template>
 
 
@@ -441,7 +480,7 @@
         <xd:detail>Handle high-level structure. These are typically further divided in segments, so we need not introduce a segment for them.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="segments" match="front | back | body | div0 | div1 | div2 | div3 | div4 | div5 | div6 | lg | table | row">
+    <xsl:template mode="segments" match="front | back | body | div0 | div1 | div2 | div3 | div4 | div5 | div6 | lg | table | row | sp">
         <xsl:apply-templates mode="segments"/>
     </xsl:template>
 
@@ -451,7 +490,7 @@
         <xd:detail>Introduce a segment for each of these elements that contain text.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage">
+    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker">
         <segment>
             <xsl:apply-templates mode="segments"/>
         </segment>
