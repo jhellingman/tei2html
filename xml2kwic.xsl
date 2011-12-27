@@ -155,9 +155,9 @@
             <xsl:apply-templates mode="multi-kwic" select="$segments//w"/>
         </xsl:variable>
 
-        <xsl:for-each-group select="$matches/match" group-by="word/w/@form">
-            <xsl:sort select="(current-group()[1])/word/w/@form" order="ascending"/>
-            <xsl:if test="fn:matches(current-group()[1]/word/w/@form, '^[\p{L}-]+$')">
+        <xsl:for-each-group select="$matches/match" group-by="@form">
+            <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
+            <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}-]+$')">
                 <xsl:call-template name="report-matches2">
                     <xsl:with-param name="matches" select="current-group()"/>
                 </xsl:call-template>
@@ -169,7 +169,7 @@
     <xsl:template name="report-matches2">
         <xsl:param name="matches" as="element()*"/>
 
-        <xsl:variable name="keyword" select="$matches[1]/word/w"/>
+        <xsl:variable name="keyword" select="$matches[1]/word"/>
 
         <h2>
             <span class="cnt">Word:</span><xsl:text> </xsl:text>
@@ -284,36 +284,21 @@
                 <xsl:apply-templates mode="output" select="following"/>
             </td>
             <td class="pn">
-                <xsl:value-of select="word/w/@page"/>
+                <xsl:value-of select="@page"/>
             </td>
         </tr>
     </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Output a word or non-word.</xd:short>
+        <xd:short>Output italics.</xd:short>
         <xd:detail></xd:detail>
     </xd:doc>
 
-    <xsl:template mode="output" match="w | nw">
-        <xsl:choose>
-            <xsl:when test="@parent = 'hi'">
-                <i><xsl:value-of select="."/></i>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Output a tag.</xd:short>
-        <xd:detail></xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="output" match="t">
-        <span class="tag"><xsl:value-of select="@name"/></span>
+    <xsl:template mode="output" match="i">
+        <i>
+            <xsl:value-of select="."/>
+        </i>
     </xsl:template>
 
 
@@ -341,7 +326,7 @@
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
-            <match>
+            <match form="{@form}" page="{@page}">
                 <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
                 <word><xsl:apply-templates mode="context" select="."/></word>
                 <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -351,7 +336,7 @@
 
 
     <xsl:template mode="multi-kwic" match="w">
-        <match>
+        <match form="{@form}" page="{@page}">
             <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
             <word><xsl:apply-templates mode="context" select="."/></word>
             <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -369,8 +354,15 @@
         <xd:detail>Copy matching words and non-words in the context.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="context" match="w|nw|t">
-        <xsl:copy-of select="."/>
+    <xsl:template mode="context" match="w|nw">
+        <xsl:choose>
+            <xsl:when test="@parent = 'hi'">
+                <i><xsl:value-of select="."/></i>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="."/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -514,14 +506,14 @@
     </xd:doc>
 
     <xsl:template name="analyze-text">
-        <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
+        <!-- <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/> -->
         <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/>
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
 
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
             <xsl:matching-substring>
                 <w>
-                    <xsl:attribute name="xml:lang" select="$lang"/>
+                    <!-- <xsl:attribute name="xml:lang" select="$lang"/> -->
                     <xsl:attribute name="parent" select="$parent"/>
                     <xsl:attribute name="page" select="$page"/>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
@@ -530,6 +522,7 @@
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <nw>
+                    <xsl:attribute name="parent" select="$parent"/>
                     <xsl:value-of select="."/>
                 </nw>
             </xsl:non-matching-substring>
