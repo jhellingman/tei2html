@@ -1,4 +1,4 @@
-<xsl:stylesheet 
+<xsl:stylesheet
     version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -11,7 +11,7 @@
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to produce a KWIC from a TEI document</xd:short>
         <xd:detail>This stylesheet produces a KWIC from a TEI document. It shows all occurances of all words
-        in the document in their context in alphabetical order. The output can become rather big, as a rule-of-thumb, 
+        in the document in their context in alphabetical order. The output can become rather big, as a rule-of-thumb,
         30 to 40 times the size of the original. Furthermore, the processing time can be considerable.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
@@ -22,7 +22,7 @@
 
     <xd:doc>
         <xd:short>The keyword to generate a KWIC for.</xd:short>
-        <xd:detail>The keyword to generate a KWIC for. If omitted, a KWIC will be generated for all words 
+        <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
         in the document. TODO</xd:detail>
     </xd:doc>
 
@@ -58,7 +58,7 @@
 
                 table
                 {
-                    margin-left: auto; 
+                    margin-left: auto;
                     margin-right: auto;
                 }
 
@@ -93,7 +93,13 @@
             </style>
         </head>
         <html>
-            <h1>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title"/></h1>
+            <h1>
+                KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title"/>
+
+                <xsl:if test="$keyword != ''">
+                    (<xsl:value-of select="$keyword"/>)
+                </xsl:if>
+            </h1>
 
             <xsl:call-template name="build-kwic"/>
         </html>
@@ -139,11 +145,11 @@
         </xsl:variable>
 
         <!--
-        <xsl:result-document 
+        <xsl:result-document
                 doctype-public=""
                 doctype-system=""
                 href="kwic-segments.xml"
-                method="xml" 
+                method="xml"
                 indent="yes"
                 encoding="UTF-8">
             <xsl:message terminate="no">Info: generated file: kwic-segments.xml.</xsl:message>
@@ -151,21 +157,37 @@
         </xsl:result-document>
         -->
 
-        <xsl:variable name="matches">
-            <xsl:apply-templates mode="multi-kwic" select="$segments//w"/>
-        </xsl:variable>
+        <xsl:choose>
+            <xsl:when test="$keyword != ''">
 
-        <xsl:for-each-group select="$matches/match" group-by="@form">
-            <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
-            <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}-]+$')">
-                <xsl:call-template name="report-matches2">
-                    <xsl:with-param name="matches" select="current-group()"/>
+                <!-- Build KWIC for searched word(s) -->
+                <xsl:variable name="keywords" select="tokenize(fn:lower-case(f:strip_diacritics($keyword)), '\s+')"/>
+
+                <xsl:call-template name="report-matches">
+                    <xsl:with-param name="keyword" select="$keywords"/>
+                    <xsl:with-param name="segments" select="$segments"/>
                 </xsl:call-template>
-            </xsl:if>
-        </xsl:for-each-group>
+            </xsl:when>
+            <xsl:otherwise>
+
+                <!-- Build KWIC for all words in document -->
+                <xsl:variable name="matches">
+                    <xsl:apply-templates mode="multi-kwic" select="$segments//w"/>
+                </xsl:variable>
+
+                <xsl:for-each-group select="$matches/match" group-by="@form">
+                    <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
+                    <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}-]+$')">
+                        <xsl:call-template name="report-matches2">
+                            <xsl:with-param name="matches" select="current-group()"/>
+                        </xsl:call-template>
+                    </xsl:if>
+                </xsl:for-each-group>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
-    
+
     <xsl:template name="report-matches2">
         <xsl:param name="matches" as="element()*"/>
 
@@ -190,7 +212,6 @@
             </xsl:apply-templates>
         </table>
     </xsl:template>
-
 
 
     <xd:doc>
@@ -482,6 +503,7 @@
         <xd:detail>Introduce a segment for each of these elements that contain text.</xd:detail>
     </xd:doc>
 
+    <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
     <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker">
         <segment>
             <xsl:apply-templates mode="segments"/>
