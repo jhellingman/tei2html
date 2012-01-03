@@ -88,6 +88,22 @@
                 .match
                 {
                     font-weight: bold;
+                    color: #D10000;
+                }
+
+                .sc
+                {
+                    font-variant: small-caps;
+                }
+
+                .uc
+                {
+                    text-transform: uppercase;
+                }
+
+                .ex
+                {
+                    letter-spacing: 0.2em;
                 }
 
             </style>
@@ -312,14 +328,26 @@
 
 
     <xd:doc>
-        <xd:short>Output italics.</xd:short>
+        <xd:short>Output font styles.</xd:short>
         <xd:detail></xd:detail>
     </xd:doc>
 
-    <xsl:template mode="output" match="i">
-        <i>
+    <xsl:template mode="output" match="i | b | sup | sub">
+        <xsl:copy>
             <xsl:value-of select="."/>
-        </i>
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Output font styles (in span element).</xd:short>
+        <xd:detail></xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="output" match="span">
+        <span class="{@class}">
+            <xsl:value-of select="."/>
+        </span>
     </xsl:template>
 
 
@@ -372,14 +400,20 @@
 
     <xd:doc>
         <xd:short>Copy matching words and non-words in the context.</xd:short>
-        <xd:detail>Copy matching words and non-words in the context.</xd:detail>
+        <xd:detail>Copy matching words and non-words in the context, taking care to apply the correct text style.</xd:detail>
     </xd:doc>
 
     <xsl:template mode="context" match="w|nw">
         <xsl:choose>
-            <xsl:when test="@parent = 'hi'">
-                <i><xsl:value-of select="."/></i>
-            </xsl:when>
+            <xsl:when test="@style = 'i'"><i><xsl:value-of select="."/></i></xsl:when>
+            <xsl:when test="@style = 'b'"><b><xsl:value-of select="."/></b></xsl:when>
+            <xsl:when test="@style = 'sup'"><sup><xsl:value-of select="."/></sup></xsl:when>
+            <xsl:when test="@style = 'sub'"><sub><xsl:value-of select="."/></sub></xsl:when>
+
+            <xsl:when test="@style = 'sc'"><span class="sc"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@style = 'uc'"><span class="uc"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@style = 'ex'"><span class="ex"><xsl:value-of select="."/></span></xsl:when>
+
             <xsl:otherwise>
                 <xsl:value-of select="."/>
             </xsl:otherwise>
@@ -529,14 +563,16 @@
 
     <xsl:template name="analyze-text">
         <!-- <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/> -->
-        <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/>
+        <!-- <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/> -->
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
+        <xsl:variable name="style" select="f:find-text-style(.)"/>
 
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
             <xsl:matching-substring>
                 <w>
                     <!-- <xsl:attribute name="xml:lang" select="$lang"/> -->
-                    <xsl:attribute name="parent" select="$parent"/>
+                    <!-- <xsl:attribute name="parent" select="$parent"/> -->
+                    <xsl:attribute name="style" select="$style"/>
                     <xsl:attribute name="page" select="$page"/>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
                     <xsl:value-of select="."/>
@@ -544,11 +580,39 @@
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <nw>
-                    <xsl:attribute name="parent" select="$parent"/>
+                    <xsl:attribute name="style" select="$style"/>
                     <xsl:value-of select="."/>
                 </nw>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Establish the current text style of a word.</xd:short>
+        <xd:detail>Establish the current text style of a word, by looking at the first <code>hi</code> ancestor. This is somewhat crude,
+        but works reasonably well for texts in my collection.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:find-text-style">
+        <xsl:param name="node"/>
+        <xsl:variable name="hi" select="$node/ancestor-or-self::hi[1]"/>
+        <!-- Ignore hi elements if we are in a note, and the hi is outside the note -->
+        <xsl:if test="$hi and not($hi/descendant::note)">
+            <xsl:variable name="rend" select="$hi/@rend"/>
+            <xsl:choose>
+                <xsl:when test="$rend = 'bold'">b</xsl:when>
+                <xsl:when test="$rend = 'sup'">sup</xsl:when>
+                <xsl:when test="$rend = 'sub'">sub</xsl:when>
+
+                <xsl:when test="$rend = 'ex'">ex</xsl:when>
+                <xsl:when test="$rend = 'uc'">uc</xsl:when>
+                <xsl:when test="$rend = 'sc'">sc</xsl:when>
+
+                <xsl:otherwise>i</xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:function>
+
 
 </xsl:stylesheet>
