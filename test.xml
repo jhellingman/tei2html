@@ -155,7 +155,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </div1></body></text></q>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585">De Wereld voor de schepping van den mensch by Camille Flammarion</xref>. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>.</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion. Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>.</p>
 
 </div1>
 <div1 id="ch3" type="Chapter" n="3" rend="label(yes)">
