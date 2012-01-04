@@ -29,6 +29,9 @@
     <xsl:param name="keyword" select="''"/>
 
 
+    <xsl:variable name="defaultlang" select="/TEI.2/@lang"/>
+
+
     <xd:doc>
         <xd:short>The lenght of the context to show.</xd:short>
         <xd:detail>The lenght of the context to show. This counts both words and non-words (spaces and punctuation marks).
@@ -77,6 +80,13 @@
                 .pre, .pn
                 {
                     text-align: right;
+                }
+
+                .lang
+                {
+                    padding-left: 2em;
+                    font-weight: bold;
+                    color: blue;
                 }
 
                 th.ph
@@ -323,6 +333,11 @@
             <td class="pn">
                 <xsl:value-of select="@page"/>
             </td>
+            <xsl:if test="@xml:lang != $defaultlang">
+                <td class="lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </td>
+            </xsl:if>
         </tr>
     </xsl:template>
 
@@ -333,9 +348,7 @@
     </xd:doc>
 
     <xsl:template mode="output" match="i | b | sup | sub">
-        <xsl:copy>
-            <xsl:value-of select="."/>
-        </xsl:copy>
+        <xsl:copy><xsl:value-of select="."/></xsl:copy>
     </xsl:template>
 
 
@@ -345,9 +358,7 @@
     </xd:doc>
 
     <xsl:template mode="output" match="span">
-        <span class="{@class}">
-            <xsl:value-of select="."/>
-        </span>
+        <span class="{@class}"><xsl:value-of select="."/></span>
     </xsl:template>
 
 
@@ -375,7 +386,7 @@
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
-            <match form="{@form}" page="{@page}">
+            <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
                 <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
                 <word><xsl:apply-templates mode="context" select="."/></word>
                 <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -385,7 +396,7 @@
 
 
     <xsl:template mode="multi-kwic" match="w">
-        <match form="{@form}" page="{@page}">
+        <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
             <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
             <word><xsl:apply-templates mode="context" select="."/></word>
             <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -414,9 +425,7 @@
             <xsl:when test="@style = 'uc'"><span class="uc"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'ex'"><span class="ex"><xsl:value-of select="."/></span></xsl:when>
 
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
+            <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -562,7 +571,7 @@
     </xd:doc>
 
     <xsl:template name="analyze-text">
-        <!-- <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/> -->
+        <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
         <!-- <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/> -->
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
@@ -570,7 +579,7 @@
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
             <xsl:matching-substring>
                 <w>
-                    <!-- <xsl:attribute name="xml:lang" select="$lang"/> -->
+                    <xsl:attribute name="xml:lang" select="$lang"/>
                     <!-- <xsl:attribute name="parent" select="$parent"/> -->
                     <xsl:attribute name="style" select="$style"/>
                     <xsl:attribute name="page" select="$page"/>
@@ -604,11 +613,9 @@
                 <xsl:when test="$rend = 'bold'">b</xsl:when>
                 <xsl:when test="$rend = 'sup'">sup</xsl:when>
                 <xsl:when test="$rend = 'sub'">sub</xsl:when>
-
                 <xsl:when test="$rend = 'ex'">ex</xsl:when>
                 <xsl:when test="$rend = 'uc'">uc</xsl:when>
                 <xsl:when test="$rend = 'sc'">sc</xsl:when>
-
                 <xsl:otherwise>i</xsl:otherwise>
             </xsl:choose>
         </xsl:if>
