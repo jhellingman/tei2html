@@ -17,8 +17,11 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:output omit-xml-declaration="yes" indent="yes"/>
-
+    <xsl:output
+        doctype-public="-//W3C//DTD XHTML 1.1//EN"
+        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+        method="xml"
+        encoding="utf-8"/>
 
     <xd:doc>
         <xd:short>The keyword to generate a KWIC for.</xd:short>
