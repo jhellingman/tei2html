@@ -11,8 +11,9 @@ The KWIC generator should:
 
  * Show all words in their context.
  * Indicate the page on which they appear.
+ * Indicate the (tagged) language of the keyword.
  * Be able to show words in italics (and other font-styles).
- * Segementize text to have meaningful contexts.
+ * Segmentize text to have meaningful contexts.
  * Ignore other tags in the text.
  * Handle text in footnotes correctly.
  * Present the resulting KWIC in HTML.
@@ -21,7 +22,7 @@ The KWIC generator should:
 
 = Development =
 
-For a long time, I have felt that XSLT 2.0 was the right tool for the job. XSLT 1.0 lacked the required regular expression facilities to break text in to words effectively, while other programming languages, such as PERL or Phyton, are much less suited to handling XML textual data.
+For a long time, I have felt that XSLT 2.0 was the right tool for the job. XSLT 1.0 lacked the required regular expression facilities to break text in to words effectively, while other programming languages, such as PERL or Python, are much less suited to handling XML textual data.
 
 The first idea was that you can easily use `xsl:analyze-string` to split up fragments of text into words, using the a proper regular expression (in fact the expression is: `[\p{L}\p{N}\p{M}-]+` ). Given those words, you can then traverse the text, looking for the word you are interested in, and determine the preceding and following words, by following the `preceding-sibling` and `following-sibling` axes.
 
@@ -43,3 +44,5 @@ Some issues in texts I've found with this script:
  * Spelling variants in names. Personal names are normally not part of spelling checkers, and can be spelled in various ways. An added complication is that another person may have a similar name, so you really need the context to make that out.
  * Checking a (preexisting) index. The index entry will show up in the KWIC with the page number it lists, together with the referenced phrase (and page number).
  * Missing periods after common abbreviations.
+ * Inconsistent styling. Foreign words that are mostly given in italics, but sometimes not.
+ * Hyphenated version non-hyphenated words.
