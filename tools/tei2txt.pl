@@ -153,6 +153,10 @@ while (<>)
     # remove any remaining tags
     $a =~ s/<.*?>//g;
 
+	# Some problematic ones from Wolff.
+    $a =~ s/\&larr;/<-/g;	# Left Arrow
+    $a =~ s/\&rarr;/->/g;	# Right Arrow
+
     # warn for entities that slipped through.
     if ($a =~ /\&([a-zA-Z0-9._-]+);/)
     {
@@ -396,6 +400,9 @@ sub entities2iso88591($)
 
     $a =~ s/\&there4;/./g;	# Therefor (three dots in triangular arrangement) used as abbreviation dot.
     $a =~ s/\&maltese;/[+]/g;	# Maltese Cross
+
+
+
 
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb);/$1/g;

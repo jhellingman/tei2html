@@ -20,13 +20,13 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2011-12-16</dc:date>
+      <dc:date opf:event="generation">2012-01-05</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
       <dc:identifier id="pub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</meta>
       <meta about="#pub-id" property="scheme">uuid</meta>
-      <meta property="dcterms:modified">2011-12-16T21:24:47Z</meta>
+      <meta property="dcterms:modified">2012-01-05T22:48:03Z</meta>
       <meta property="dcterms:title">Main Title of Work Goes Here</meta>
       <meta property="dcterms:creator">Author of Work (Birth-year—Death-year)</meta>
       <meta property="dcterms:creator">A. U. Thor</meta>
