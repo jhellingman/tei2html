@@ -34,7 +34,6 @@
     </xd:doc>
 
     <xsl:template match="TEI.2" mode="opf">
-
         <xsl:result-document 
                 doctype-public=""
                 doctype-system=""
@@ -48,77 +47,13 @@
                 <xsl:attribute name="version">
                     <xsl:value-of select="if ($optionEPub3 = 'Yes') then '3.0' else '2.0'"/>
                 </xsl:attribute>
-
                 <xsl:attribute name="unique-identifier">idbook</xsl:attribute>
 
                 <xsl:call-template name="metadata"/>
-
-
-
-                <manifest>
-                    <item id="ncx"
-                         href="{$basename}.ncx"
-                         media-type="application/x-dtbncx+xml"/>
-
-                    <xsl:if test="$optionEPub3 = 'Yes'">
-                        <item id="epub3toc"
-                             properties="nav" 
-                             href="{$basename}-nav.xhtml"
-                             media-type="application/xhtml+xml"/>
-                    </xsl:if>
-
-                    <!--
-                    <xsl:if test="//pb">
-                        <item id="pagemap"
-                            href="pagemap.xml"
-                            media-type="application/oebps-page-map+xml"/>
-                    </xsl:if>
-                    -->
-
-                    <!-- CSS Style Sheets -->
-                    <item id="css"
-                         href="{$basename}.css"
-                         media-type="text/css"/>
-
-                    <!-- Content Parts -->
-                    <xsl:apply-templates select="text" mode="manifest"/>
-
-                    <!-- Illustrations -->
-                    <!-- Store these in a list, from which we remove the doubles later-on -->
-                    <xsl:variable name="images">
-                        <xsl:apply-templates select="//figure" mode="manifest"/>
-                        <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
-                        <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
-                    </xsl:variable>
-
-                    <xsl:apply-templates select="$images" mode="undouble"/>
-
-                    <xsl:if test="$opfManifestFile">
-                        <!-- Include additional items in the manifest -->
-                        <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
-                        <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
-                    </xsl:if>
-                </manifest>
-
-                <spine toc="ncx">
-                    <!--
-                    <xsl:if test="//pb">
-                        <xsl:attribute name="page-map">pagemap</xsl:attribute>
-                    </xsl:if>
-                    -->
-
-                    <!-- make sure the cover comes first in the spine -->
-                    <xsl:if test="//div1[@id='cover']">
-                        <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="cover"/>
-                    </xsl:if>
-
-                    <xsl:apply-templates select="text" mode="spine"/>
-                </spine>
-
+                <xsl:call-template name="manifest"/>
+                <xsl:call-template name="spine"/>
                 <xsl:call-template name="guide"/>
-
             </package>
-
         </xsl:result-document>
     </xsl:template>
 
@@ -306,6 +241,53 @@
 
     <!--== manifest ========================================================-->
 
+    <xsl:template name="manifest">
+        <manifest>
+            <item id="ncx"
+                 href="{$basename}.ncx"
+                 media-type="application/x-dtbncx+xml"/>
+
+            <xsl:if test="$optionEPub3 = 'Yes'">
+                <item id="epub3toc"
+                     properties="nav" 
+                     href="{$basename}-nav.xhtml"
+                     media-type="application/xhtml+xml"/>
+            </xsl:if>
+
+            <!--
+            <xsl:if test="//pb">
+                <item id="pagemap"
+                    href="pagemap.xml"
+                    media-type="application/oebps-page-map+xml"/>
+            </xsl:if>
+            -->
+
+            <!-- CSS Style Sheets -->
+            <item id="css"
+                 href="{$basename}.css"
+                 media-type="text/css"/>
+
+            <!-- Content Parts -->
+            <xsl:apply-templates select="text" mode="manifest"/>
+
+            <!-- Illustrations -->
+            <!-- Store these in a list, from which we remove the doubles later-on -->
+            <xsl:variable name="images">
+                <xsl:apply-templates select="//figure" mode="manifest"/>
+                <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
+                <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
+            </xsl:variable>
+
+            <xsl:apply-templates select="$images" mode="undouble"/>
+
+            <xsl:if test="$opfManifestFile">
+                <!-- Include additional items in the manifest -->
+                <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
+            </xsl:if>
+        </manifest>
+    </xsl:template>
+
     <!--== main divisions ==-->
 
 
@@ -405,7 +387,7 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Copy items from an included manifest snipped file -->
+    <!-- Copy items from an included manifest-snippet -->
 
     <xsl:template match="opf:item" mode="copy-manifest">
         <xsl:copy>
@@ -416,6 +398,24 @@
     </xsl:template>
 
     <!--== spine ===========================================================-->
+
+    <xsl:template name="spine">
+        <spine toc="ncx">
+            <!--
+            <xsl:if test="//pb">
+                <xsl:attribute name="page-map">pagemap</xsl:attribute>
+            </xsl:if>
+            -->
+
+            <!-- make sure the cover comes first in the spine -->
+            <xsl:if test="//div1[@id='cover']">
+                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="cover"/>
+            </xsl:if>
+
+            <xsl:apply-templates select="text" mode="spine"/>
+        </spine>
+    </xsl:template>
+
 
     <xsl:template match="text" mode="spine">
         <xsl:apply-templates mode="splitter">
