@@ -23,6 +23,7 @@
 
 
     <xd:doc type="string">Filename of file with additional items to be added to the OPF file, such as custom fonts.</xd:doc>
+
     <xsl:param name="opfManifestFile"/>
 
 
@@ -34,11 +35,11 @@
     </xd:doc>
 
     <xsl:template match="TEI.2" mode="opf">
-        <xsl:result-document 
+        <xsl:result-document
                 doctype-public=""
                 doctype-system=""
                 href="{$path}/{$basename}.opf"
-                method="xml" 
+                method="xml"
                 indent="yes"
                 encoding="UTF-8">
             <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
@@ -62,66 +63,55 @@
 
     <xsl:template name="metadata">
         <metadata>
-            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
-            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
-            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata"/>
-            <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
-            <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
-            <xsl:if test="@lang">
-                <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
-            </xsl:if>
-
-            <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-                <dc:subject><xsl:value-of select="."/></dc:subject>
-            </xsl:for-each>
-
-            <xsl:choose>
-                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
-                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
-                <xsl:otherwise>
-                    <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
-                </xsl:otherwise>
-            </xsl:choose>
-            <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
-                <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
-            </xsl:if>
-            <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>
-
-            <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
-                <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
-            </xsl:if>
-
-            <xsl:choose>
-                <xsl:when test="//figure[@id='cover-image']">
-                    <meta name="cover" content="cover-image"/>
-                </xsl:when>
-                <xsl:when test="//figure[@id='titlepage-image']">
-                    <meta name="cover" content="titlepage-image"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:message terminate="no">Warning: no suitable cover or title-page image found.</xsl:message>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:call-template name="metadata2"/>
 
             <xsl:if test="$optionEPub3 = 'Yes'">
-                <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
-
-                <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-                <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
-                <meta about="#pub-id" property="scheme">uuid</meta>
-                <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
-
-                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata3"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata3"/>
-                <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata3"/>
-
-                <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-                    <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
-                </xsl:for-each>
+                <xsl:call-template name="metadata3"/>
             </xsl:if>
         </metadata>
+    </xsl:template>
+
+    <xsl:template name="metadata2">
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
+        <xsl:if test="@lang">
+            <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
+        </xsl:if>
+
+        <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
+            <dc:subject><xsl:value-of select="."/></dc:subject>
+        </xsl:for-each>
+
+        <xsl:choose>
+            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
+            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
+            <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+        </xsl:if>
+        <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>
+
+        <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
+            <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
+        </xsl:if>
+
+        <xsl:choose>
+            <xsl:when test="//figure[@id='cover-image']">
+                <meta name="cover" content="cover-image"/>
+            </xsl:when>
+            <xsl:when test="//figure[@id='titlepage-image']">
+                <meta name="cover" content="titlepage-image"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message terminate="no">Warning: no suitable cover or title-page image found.</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="title" mode="metadata">
@@ -182,8 +172,11 @@
             <!-- Related terms that are responsibility instead of role oriented -->
             <xsl:when test="$role='Transcription'">trc</xsl:when>
 
-            <xsl:otherwise>oth</xsl:otherwise>
-        </xsl:choose>    
+            <xsl:otherwise>
+                <xsl:text>oth</xsl:text>
+                <xsl:message terminate="no">Warning: unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="respStmt" mode="metadata">
@@ -213,6 +206,26 @@
     </xsl:template>
 
     <!--== metadata3 (for ePub3) ===========================================-->
+
+
+    <xsl:template name="metadata3">
+        <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
+
+        <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
+        <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
+        <meta about="#pub-id" property="scheme">uuid</meta>
+        <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
+
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata3"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata3"/>
+        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata3"/>
+
+        <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
+            <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
+        </xsl:for-each>
+    </xsl:template>
 
     <xsl:template match="title" mode="metadata3">
         <meta property="dcterms:title"><xsl:value-of select="."/></meta>
@@ -249,7 +262,7 @@
 
             <xsl:if test="$optionEPub3 = 'Yes'">
                 <item id="epub3toc"
-                     properties="nav" 
+                     properties="nav"
                      href="{$basename}-nav.xhtml"
                      media-type="application/xhtml+xml"/>
             </xsl:if>
@@ -328,7 +341,7 @@
         </xsl:if>
     </xsl:template>
 
-   
+
     <xsl:template match="*" mode="manifest-links">
         <xsl:if test="contains(@rend, 'link(')">
             <xsl:variable name="filename">
