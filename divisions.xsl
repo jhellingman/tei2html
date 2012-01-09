@@ -288,82 +288,25 @@
 
 
     <!--====================================================================-->
-    <!-- div3 -->
+    <!-- div3 and higher -->
 
-    <xsl:template match="div3">
-        <div class="div3">
+    <xsl:template match="div3 | div4 | div5 | div6">
+        <div class="{name()}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="handleDiv"/>
         </div>
     </xsl:template>
 
-    <xsl:template match="div3/head">
+    <xsl:template match="div3/head | div4/head | div5/head | div6/head">
+        <xsl:variable name="level" select="number(substring(name(..), 4, 1)) + 1"/>
+        <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
+
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setLabelHeader"/>
-        <h4>
+        <xsl:element name="h{$level}">
             <xsl:call-template name="headText"/>
-        </h4>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- div4 -->
-
-    <xsl:template match="div4">
-        <div class="div4">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="handleDiv"/>
-        </div>
-    </xsl:template>
-
-    <xsl:template match="div4/head">
-        <xsl:call-template name="headPicture"/>
-        <xsl:call-template name="setLabelHeader"/>
-        <h5>
-            <xsl:call-template name="headText"/>
-        </h5>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- div5 -->
-
-    <xsl:template match="div5">
-        <div class="div5">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="handleDiv"/>
-        </div>
-    </xsl:template>
-
-    <xsl:template match="div5/head">
-        <xsl:call-template name="headPicture"/>
-        <xsl:call-template name="setLabelHeader"/>
-        <h6>
-            <xsl:call-template name="headText"/>
-        </h6>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- div6 -->
-
-    <xsl:template match="div6">
-        <div class="div6">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="handleDiv"/>
-        </div>
-    </xsl:template>
-
-    <xsl:template match="div6/head">
-        <xsl:call-template name="headPicture"/>
-        <xsl:call-template name="setLabelHeader"/>
-        <h6>
-            <xsl:call-template name="headText"/>
-        </h6>
+        </xsl:element>
     </xsl:template>
 
 
@@ -395,6 +338,7 @@
 
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
+                <!-- TODO: this fails when a division immediately contains a division -->
                 <xsl:if test="*[not(preceding-sibling::p or self::p)]">
                     <div class="divHead">
                         <xsl:apply-templates select="*[not(preceding-sibling::p or self::p)]"/>

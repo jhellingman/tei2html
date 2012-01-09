@@ -72,7 +72,8 @@
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:call-template name="generate-id-attribute"/>
+
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
                     </xsl:if>
@@ -134,6 +135,7 @@
 
     <xsl:template name="handle-xref">
         <a>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">
                 <xsl:value-of select="f:translate-xref-class(@url)"/>
                 <xsl:text> </xsl:text>

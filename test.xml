@@ -522,8 +522,35 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <item>Vier</item>
 </list>
 
-</div2>
 
+<div3>
+<head>Division at Level 3</head>
+
+<p>Text in division at level 3</p>
+
+<div4>
+<head>Division at Level 4</head>
+
+<p>Text in division at level 4</p>
+
+<div5>
+<head>Division at Level 5</head>
+
+<p>Text in division at level 5</p>
+
+<div6>
+<head>Division at Level 6</head>
+
+<p>Text in division at level 6</p>
+
+
+</div6>
+</div5>
+</div4>
+</div3>
+</div2>
+<div2>
+<head>Some Further Tests</head>
 
 <p rend="align(left)">[align(left)] &lorem;
 </p>
@@ -554,6 +581,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <trailer rend="align(center)">The End</trailer>
 
 
+</div2>
 </div1>
 <pb n="23"/>
 <div1 id="ch6" n="II">

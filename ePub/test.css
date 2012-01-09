@@ -993,23 +993,23 @@ list-style-type:upper-roman;
 list-style-type:lower-roman;
 }
 
-.xd23e764
+.xd23e787
 {
 text-align:left;
 }
 
-.xd23e767
+.xd23e790
 {
 text-align:right;
 }
 
-.xd23e769
+.xd23e792
 {
 text-align:center;
 }
 
 
-.xd23e772
+.xd23e794
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1017,7 +1017,7 @@ text-align:center;
     
 }
 
-.xd23e772init
+.xd23e794init
 {
     float: left;
     width: 90px;
@@ -1032,47 +1032,47 @@ text-align:center;
 }
 
         
-.xd23e777
+.xd23e799
 {
 text-align:justify;
 }
 
-.xd23e793
+.xd23e815
 {
 text-align:center;
 }
 
-.xd23e802
+.xd23e824
 {
 text-align:center;
 }
 
-.xd23e807
+.xd23e829
 {
 text-indent:1em;
 }
 
-.xd23e813
+.xd23e835
 {
 text-indent:2em;
 }
 
-.xd23e817
+.xd23e839
 {
 text-indent:3em;
 }
 
-.xd23e821
+.xd23e843
 {
 text-indent:10em;
 }
 
-.xd23e823
+.xd23e845
 {
 font-style:italic;
 }
 
-.xd23e935
+.xd23e957
 {
 display:none;
 }
