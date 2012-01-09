@@ -26,7 +26,7 @@
     <xd:doc>
         <xd:short>The keyword to generate a KWIC for.</xd:short>
         <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
-        in the document. TODO</xd:detail>
+        in the document.</xd:detail>
     </xd:doc>
 
     <xsl:param name="keyword" select="''"/>
@@ -397,6 +397,11 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Collect preceding and following contexts.</xd:short>
+        <xd:detail>For every word the preceding and following contexts are kept with the match.</xd:detail>
+    </xd:doc>
 
     <xsl:template mode="multi-kwic" match="w">
         <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
