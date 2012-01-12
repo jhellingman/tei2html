@@ -305,7 +305,7 @@
                                     <xsl:call-template name="generate-id-attribute-for">
                                         <xsl:with-param name="node" select=".."/>
                                     </xsl:call-template>
-                                    <xsl:call-template name="GenerateLabel">
+                                    <xsl:call-template name="generate-label">
                                         <xsl:with-param name="div" select=".."/>
                                     </xsl:call-template>
                                     <xsl:apply-templates select="$nodes"/>
