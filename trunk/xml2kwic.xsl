@@ -228,6 +228,24 @@
             <span class="cnt"><xsl:value-of select="count($matches)"/></span>
         </h2>
 
+        <xsl:variable name="variant-count">
+            <xsl:variable name="groups">
+                <xsl:for-each-group select="$matches" group-by="./word">.</xsl:for-each-group>
+            </xsl:variable>
+            <xsl:value-of select="string-length($groups)"/>
+        </xsl:variable>
+
+        <xsl:if test="$variant-count &gt; 1">
+            <p><span class="cnt">Variants:</span>
+                <xsl:for-each-group select="$matches" group-by="./word">
+                    <xsl:sort select="count(current-group())" order="descending"/>
+
+                    <xsl:text> </xsl:text><b><xsl:value-of select="current-group()[1]/word"/></b>
+                    <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                </xsl:for-each-group>
+            </p>
+        </xsl:if>
+
         <table>
             <tr>
                 <th/>
