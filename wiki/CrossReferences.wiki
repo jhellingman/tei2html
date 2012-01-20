@@ -39,3 +39,16 @@ This will link to the catalog page of the given book on [http://www.gutenberg.or
 *Bible citation:* Use `bib:<`_book chapter:verse_`>` as url.
 
 This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway] in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible].
+
+= External Link Locations =
+
+Depending on the output format and configuration, the external links can be handled in different ways. In some output formats (print paper) hyperlinks do not work, in others (ePub) they may or may not work, depending on the reader being used. In that case it might be desirable to collect all external references in an appendix, and present the full URL, so they can be accessed manually if so desired.
+
+== A generated section with external links ==
+
+Feature: 
+
+  * Collect all external links in a table.
+  * Show the link URL in this table, and make it active if technically possible.
+  * From each original link, link from the original link to the location in the table.
+  * From each entry in the table, link to the location of the original link.
