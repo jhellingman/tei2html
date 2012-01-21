@@ -47,7 +47,7 @@ if (-f "opf-manifest.xml")
 
 # system ("$saxon $basename.xml $xsldir/tei2dc.xsl  > test-dc.xml");
 
-system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" > test.html");
+system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test.html");
 
 system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"$basename\" > tmp.xhtml");
 # system ("$saxon2 -T $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam basename=\"$basename\" > tmp.xhtml 2> trace.xml");

@@ -213,6 +213,15 @@
         </xsl:attribute>
     </xsl:template>
 
+    <xsl:template name="generate-xref-table-href-attribute">
+        <xsl:param name="target" select="."/>
+
+        <xsl:attribute name="href">
+            <xsl:call-template name="generate-xref-table-href">
+                <xsl:with-param name="target" select="$target"/>
+            </xsl:call-template>
+        </xsl:attribute>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- Close and Open paragraphs -->

@@ -65,7 +65,7 @@
 
 
     <xd:doc>
-        <xd:short>Filter CSS properties with special meanigns.</xd:short>
+        <xd:short>Filter CSS properties with special meanings.</xd:short>
         <xd:detail>Filter those CSS properties with a special meaning, so they will not
         be output to CSS.</xd:detail>
         <xd:param name="property">The name of the property to be filtered.</xd:param>
@@ -86,6 +86,7 @@
             <xsl:when test="$property='image'"/>        <!-- in-line image -->
             <xsl:when test="$property='image-alt'"/>    <!-- alt text for image -->
             <xsl:when test="$property='summary'"/>      <!-- summary text for table, etc. -->
+            <xsl:when test="$property='title'"/>        <!-- title text for links, etc. -->
             <xsl:when test="$property='label'"/>        <!-- label (for head, etc.) -->
             <xsl:when test="$property='columns'"/>      <!-- number of columns to use on list, table, etc. -->
             <xsl:when test="$property='stylesheet'"/>   <!-- stylesheet to load (only on top-level text element) -->

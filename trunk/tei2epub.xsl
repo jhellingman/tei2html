@@ -61,6 +61,7 @@
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
     <xsl:param name="optionIncludeImages" select="'Yes'"/>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
+    <xsl:param name="optionExternalLinksTable" select="'Yes'"/>
 
 
     <!--====================================================================-->

@@ -45,7 +45,7 @@
             <idno type="PGclearance">[PG Clearance code goes here]</idno>
             <idno type="PGDPProjectID">[PGDP Project number goes here]</idno>
             <availability>
-               <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See <xref url="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
+               <p>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See <xref url="http://www.gnu.org/copyleft/gpl.html" rend="title(GPL licence)">http://www.gnu.org/copyleft/gpl.html</xref>.</p>
                <p>Typically, the following text will be used:</p>
 
                &availability.en;

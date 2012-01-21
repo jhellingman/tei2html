@@ -93,4 +93,25 @@
         <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
     </xsl:template>
 
+
+
+    <!-- xref-table href attributes always point to somewhere in the colophon -->
+
+    <xsl:template name="generate-xref-table-href">
+        <xsl:param name="target" select="." as="element()"/>
+
+        <xsl:variable name="targetfile">
+            <xsl:choose>
+                <!-- We should have an explicit call for a colophon section, the xref-table is in there -->
+                <xsl:when test="//divGen[@type='Colophon']">
+                    <xsl:call-template name="splitter-generate-filename-for">
+                        <xsl:with-param name="node" select="(//divGen[@type='Colophon'])[1]"/>
+                    </xsl:call-template>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template><xsl:text>ext</xsl:text>
+    </xsl:template>
+
 </xsl:stylesheet>
