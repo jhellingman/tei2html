@@ -102,14 +102,36 @@
         <xd:short>Handle an external cross-reference (1).</xd:short>
         <xd:detail>
             <p>Insert a hyperlink that will link to the referenced <code>@url</code>-attribute in the generated output.</p>
-            <p>The generation of external links can be enabled by setting the stylesheet parameter 
-            <code>optionExternalLinks</code> to <code>Yes</code>. External links can be limited to the generated Colophon 
-            only by setting this value to <code>HeaderOnly</code>.</p>
+            <p>Two stylesheet parameters control the generation of external links.</p>
+
+            <ul>
+                <li>Active external links will be put in the output by setting the stylesheet parameter 
+                <code>optionExternalLinks</code> to <code>Yes</code>. External links can be limited to the generated Colophon 
+                only by setting this value to <code>HeaderOnly</code>.</li>
+                <li>External links will be placed in a table in the colophon (provided a colophon is present) by
+                setting <code>optionExternalLinksTable</code> to <code>Yes</code>. Here they will be rendered as an URL.
+                The original link will then reference to the table.</li>
+            </ul>
         </xd:detail>
     </xd:doc>
 
     <xsl:template match="xref[@url]">
         <xsl:choose>
+            <xsl:when test="$optionExternalLinksTable = 'Yes'">
+                <xsl:choose>
+                    <xsl:when test="//divGen[@type='Colophon']">
+                        <a>
+                            <xsl:call-template name="generate-id-attribute"/>
+                            <xsl:call-template name="generate-xref-table-href-attribute"/>
+                            <xsl:apply-templates/>
+                        </a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+
             <xsl:when test="$optionExternalLinks = 'Yes'">
                 <xsl:call-template name="handle-xref"/>
             </xsl:when>
@@ -154,6 +176,7 @@
             <xsl:apply-templates/>
         </a>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Translate a URL to an HTML class.</xd:short>

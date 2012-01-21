@@ -53,4 +53,17 @@
     </xsl:template>
 
 
+    <!-- xref table href attributes are the same as normal hrefs in
+         single file operation, followed by 'ext' -->
+
+    <xsl:template name="generate-xref-table-href">
+        <xsl:param name="target" select="."/>
+
+        <xsl:call-template name="generate-href">
+            <xsl:with-param name="target" select="$target"/>
+        </xsl:call-template>
+        <xsl:text>ext</xsl:text>
+    </xsl:template>
+
+
 </xsl:stylesheet>

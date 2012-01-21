@@ -742,7 +742,7 @@ ul { list-style-type: none; }
 
 /* External Links */
 
-.pglink, .catlink, .exlink
+.pglink, .catlink, .exlink, .wplink, .biblink
 {
     background-repeat: no-repeat;
     background-position: right center;
@@ -760,7 +760,7 @@ ul { list-style-type: none; }
     padding-right: 17px;
 }
 
-.exlink
+.exlink, .wplink, .biblink
 {
     background-image: url(images/external.png);
     padding-right: 13px;
@@ -776,7 +776,7 @@ ul { list-style-type: none; }
     background-color: #FFFFDC;
 }
 
-.exlink:hover
+.exlink:hover, .wplink:hover, .biblink:hover
 {
     background-color: #FFDCDC;
 }
