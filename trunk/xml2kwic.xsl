@@ -45,11 +45,14 @@
 
 
     <xd:doc>
-        <xd:short>Stopwords.</xd:short>
-        <xd:detail>Stopwords will be ignored when generating the KWIC.</xd:detail>
+        <xd:short>Stopwords (per language).</xd:short>
+        <xd:detail>Stopwords will be ignored when generating the KWIC. Stopwords can be provided in a single string, separated 
+        by a space. Internally this will be converted to a sequence.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="stopwords" select="('a', 'about', 'an', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'how', 'I', 'in', 'is', 'it', 'of', 'on', 'or', 'that', 'the', 'this', 'to', 'was', 'what', 'when', 'where', 'who', 'will', 'with')"/>
+    <xsl:param name="en-stopwords" select="'a about an are as at be by for from how I in is it of on or that the this to was what when where who will with'"/>
+
+    <xsl:variable name="en-stopwords-sequence" select="tokenize($en-stopwords, ' ')"/>
 
 
     <xd:doc>
@@ -422,11 +425,13 @@
     </xd:doc>
 
     <xsl:template mode="multi-kwic" match="w">
-        <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
-            <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
-            <word><xsl:apply-templates mode="context" select="."/></word>
-            <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
-        </match>
+        <xsl:if test="not(f:is-stopword(., @xml:lang))">
+            <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
+                <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
+                <word><xsl:apply-templates mode="context" select="."/></word>
+                <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
+            </match>
+        </xsl:if>
     </xsl:template>
 
 
@@ -627,6 +632,7 @@
         <xd:short>Establish the current text style of a word.</xd:short>
         <xd:detail>Establish the current text style of a word, by looking at the first <code>hi</code> ancestor. This is somewhat crude,
         but works reasonably well for texts in my collection.</xd:detail>
+        <xd:param name="node">The node for which to establish the text style.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:find-text-style">
@@ -647,5 +653,29 @@
         </xsl:if>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine whether a word is a stopword.</xd:short>
+        <xd:detail>Determine whether a word appears in a list of stopwords for a particular language.</xd:detail>
+        <xd:param name="word">The word to test.</xd:param>
+        <xd:param name="lang">The language of the word (used to select the stopword list).</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:is-stopword" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:variable name="baselang" select="substring-before($lang, '-')"/>
+        <xsl:variable name="word" select="lower-case($word)"/>
+
+        <xsl:choose>
+            <xsl:when test="$baselang = 'en'">
+                <xsl:sequence select="$word = $en-stopwords-sequence"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="false()"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 </xsl:stylesheet>
