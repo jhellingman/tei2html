@@ -665,7 +665,7 @@
         <xsl:param name="word" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:variable name="baselang" select="substring-before($lang, '-')"/>
+        <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
         <xsl:variable name="word" select="lower-case($word)"/>
 
         <xsl:choose>

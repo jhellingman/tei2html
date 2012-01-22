@@ -29,7 +29,7 @@
     >
 
     <xsl:variable name="language" select="/TEI.2/@lang" />
-    <xsl:variable name="baselanguage" select="substring-before($language,'-')" />
+    <xsl:variable name="baselanguage" select="if (contains($language, '-')) then substring-before($language, '-') else $language" />
     <xsl:variable name="defaultlanguage" select="'en'" />
     <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
 
