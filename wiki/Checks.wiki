@@ -15,3 +15,15 @@ Verify whether numbered items are in sequence.
 = Quotation Marks =
 
 Verify whether quotation marks are applied correctly.
+
+Quotation marks need to be nested correctly, and for each
+opening mark, there should be a corresponding closing mark.
+
+This is slightly complicated by several facts:
+
+  * different types of usage
+    * US: outer double, inner single quotation marks
+    * UK: outer single, inner double quotation marks
+  * different conventions for languages and countries.
+  * usage around other punctuation might vary.
+  * non-closed marks are to be re-opened in next paragraph.
