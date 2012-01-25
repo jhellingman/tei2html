@@ -1,0 +1,17 @@
+#summary Tools to check TEI documents for various issues.
+
+= Introduction =
+
+Proposed tools to check various TEI conventions and textual issues.
+
+
+= Numbering =
+
+Verify whether numbered items are in sequence.
+
+  * page-breaks `<pb>`
+  * divisions `<div#>`
+
+= Quotation Marks =
+
+Verify whether quotation marks are applied correctly.
