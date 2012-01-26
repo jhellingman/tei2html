@@ -17,7 +17,6 @@
 <!ENTITY lorem "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
 <!ENTITY quickbrown "The quick brown fox jumps over the lazy dog">
 
-
 <!ENTITY availability.en "<p lang='en'>This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.</p>">
 
 <!ENTITY nl "<abbr expan='namelijk'>n.l.</abbr>">
@@ -552,25 +551,19 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <div2>
 <head>Some Further Tests</head>
 
-<p rend="align(left)">[align(left)] &lorem;
-</p>
+<p rend="align(left)">[align(left)] &lorem;</p>
 
 <milestone unit="tb"/>
 
-<p rend="align(right)">[align(right)] &lorem;
-</p>
+<p rend="align(right)">[align(right)] &lorem;</p>
 
-<p rend="align(center)">[align(center)] &lorem;
-</p>
+<p rend="align(center)">[align(center)] &lorem;</p>
 
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note>
-</p>
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
 
-<p rend="align(justify)">[align(justify)] &lorem;
-</p>
+<p rend="align(justify)">[align(justify)] &lorem;</p>
 
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note>
-</p>
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
 
 
 <p>Test of entity declaration: 23&prime; is 23 minutes.</p>
@@ -587,7 +580,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <div1 id="ch6" n="II">
 <head>Tests of poetry</head>
 
-<p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&rsquo;s aligned. Note that the technique used to center an entire block of text does not work in IE.
+<p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&apos;s aligned. Note that the technique used to center an entire block of text does not work in IE.</p>
 
 <lg>
 <head rend="align(center)">Three stanzas in a row</head>
@@ -632,14 +625,12 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </div1></body></text></q></note></l></lg></lg>
 
 
-<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation. &lorem;</p>
+<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation. &lorem;&rsquo;</p>
 
-<p rend="class(hangqq)">&ldquo;Test of hanging punctuation. &lorem;</p>
+<p rend="class(hangqq)">&ldquo;Test of hanging punctuation. &lorem;&rdquo;</p>
 
-<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation. &lorem;</p></q>
+<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation. &lorem;&rdquo;&rsquo;</p></q>
 
-
-</p>
 
 <p>Note that the <index level1="Footnote"/>footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
