@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="tei2html.xsl"?>
 <!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [
 
 <!ENTITY prime  "&#x2032;">
