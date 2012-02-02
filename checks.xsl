@@ -37,6 +37,12 @@
     </xd:doc>
 
 
+    <xsl:template match="divGen[@type='check']">
+
+
+    </xsl:template>
+
+
     <xsl:template match="/">
 
         <!-- page numbers in sequence -->
@@ -52,7 +58,7 @@
 
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
-        <xsl:message terminate="no">Warning: contains non-TEI element <xsl:value-of select="name()"/></xsl:message>
+        <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Warning: contains non-TEI element <xsl:value-of select="name()"/></xsl:message>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
@@ -84,7 +90,7 @@
 
         <!-- Now the $pairs should start with what we expect: -->
         <xsl:if test="substring($pairs, 1, string-length($expect)) != $expect">
-            <xsl:message terminate="no">Paragraph does not start with <xsl:value-of select="$expect"/></xsl:message>
+            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph does not start with <xsl:value-of select="$expect"/></xsl:message>
         </xsl:if>
 
         <!--
@@ -97,10 +103,10 @@
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'unexpected'">
-                <xsl:message terminate="no">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></xsl:message>
+                <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <xsl:message terminate="no">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></xsl:message>
+                <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -143,5 +149,24 @@
 
     <!-- Get function for line numbers to work. See http://www.xmlplease.com/linenumber, but fix some issues here -->
 
+    <xsl:function name="f:line-number" as="xs:string*">
+        <xsl:param name="node" as="node()"/>
+        <xsl:if test="$node/@__pos">
+            <xsl:variable name="line" select="substring-before($node/@__pos, ':')"/>
+            <xsl:variable name="column" select="substring-after($node/@__pos, ':')"/>
+
+            <xsl:text>line </xsl:text><xsl:value-of select="$line"/> column <xsl:value-of select="$column"/>
+        </xsl:if>
+    </xsl:function>
+
+    <!--
+
+    <xsl:function name="f:log-issue">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="issue" as="xs:string"/>
+
+    </xsl:function>
+
+    -->
 
 </xsl:stylesheet>
