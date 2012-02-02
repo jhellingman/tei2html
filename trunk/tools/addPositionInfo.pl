@@ -16,7 +16,7 @@ while (<INPUTFILE>)
     $lineNumber++;
     my $column = 0;
 
-    while ($remainder =~ m/<([a-z][a-z0-9._-]*)(.*?)>/i)
+    while ($remainder =~ m/<([a-z][a-z0-9.:_-]*)(.*?)>/i)
     {
         my $before = $`;
         my $tag = $1;

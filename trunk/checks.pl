@@ -7,4 +7,9 @@ my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxo
 
 my $filename = $ARGV[0];
 
-system ("$saxon \"$filename\" $xsldir/checks.xsl");
+$filename =~ /^(.*)\.xml$/;
+my $basename = $1;
+my $newname = $basename . "-pos.xml";
+
+system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
+system ("$saxon \"$newname\" $xsldir/checks.xsl");
