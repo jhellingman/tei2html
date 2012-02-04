@@ -34,6 +34,7 @@ my $makeEPUB            = 0;
 my $makeReport          = 0;
 my $makeXML             = 0;
 my $makeKwic            = 0;
+my $runChecks           = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 
@@ -45,12 +46,13 @@ GetOptions (
     'p' => \$makePDF,
     'r' => \$makeReport,
     'x' => \$makeXML,
+    'v' => \$runChecks,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
 my $filename = $ARGV[0];
 
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0) 
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0) 
 {
     # Revert to old default:
     $makeTXT = 1;
@@ -114,6 +116,11 @@ sub processFile($)
     if ($makeXML && $filename =~ /\.tei$/) 
     {
         sgml2xml($filename, $basename . ".xml");
+    }
+
+    if ($runChecks) 
+    {
+        runChecks($filename);
     }
 
     # convert from TEI P4 to TEI P5  (experimental)
@@ -269,6 +276,30 @@ sub processFile($)
     {
         print "WARNING: NSGML found validation errors in $filename.\n";
     }
+}
+
+
+#
+# runChecks -- run various checks on the file. To help error reporting, line/column information is
+# added to the TEI file first.
+#
+sub runChecks($)
+{
+    my $sgmlFile = shift;
+
+    $sgmlFile =~ /^(.*)\.(xml|tei)$/;
+    my $basename = $1;
+    my $extension = $2;
+    my $newname = $basename . "-pos." . $extension;
+    system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
+
+    if ($extension eq "tei") 
+    {
+        sgml2xml($newname, $basename . "-pos.xml");
+        $newname = $basename . "-pos.xml";
+    }
+
+    system ("$saxon2 \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
 }
 
 

@@ -6,7 +6,7 @@ my $inputFile = $ARGV[0];
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-print STDERR "Adding __pos attributes to $inputFile\n";
+print STDERR "Adding pos attributes to $inputFile\n";
 
 my $lineNumber = 0;
 
@@ -24,7 +24,7 @@ while (<INPUTFILE>)
         $remainder = $';
         $column += length "$before";
 
-        $attrs = " __pos='$lineNumber:$column'$attrs";
+        $attrs = " pos='$lineNumber:$column'$attrs";
         print "$before<$tag$attrs>";
 
         # Do not count added attribute, as it is not in the source.
