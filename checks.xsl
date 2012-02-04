@@ -23,9 +23,10 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:f="urn:stylesheet-functions"
+    xmlns:f="urn:stylesheet-functions"    
+    xmlns:i="http://gutenberg.ph/issues"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xhtml xs xd"
+    exclude-result-prefixes="i f xhtml xs xd"
     version="2.0"
     >
 
@@ -37,9 +38,8 @@
     </xd:doc>
 
 
-    <xsl:template match="divGen[@type='check']">
-
-
+    <xsl:template match="divGen[@type='checks']">
+        <xsl:apply-templates select="/" mode="checks"/>
     </xsl:template>
 
 
@@ -53,12 +53,77 @@
 
         <!-- quotation marks matching -->
 
+        <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
+
+        <xsl:variable name="issues">
+            <i:issues>
+                <xsl:apply-templates mode="checks"/>
+            </i:issues>
+        </xsl:variable>
+
+        <html>
+            <head>
+                <title>Checks</title>
+            </head>
+            <body>
+                <table>
+                    <tr>
+                        <th>Line</th>
+                        <th>Column</th>
+                        <th>Issue</th>
+                    </tr>
+                    <xsl:apply-templates select="$issues" mode="report"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+
+    <xsl:template mode="report" match="i:issue">
+        <tr>
+            <td><xsl:value-of select="substring-before(@pos, ':')"/></td>
+            <td><xsl:value-of select="substring-after(@pos, ':')"/></td>
+            <td><xsl:value-of select="."/></td>
+        </tr>
+    </xsl:template>
+
+
+
+    <xsl:variable name="expectedFrontDiv1Types" select="'Preface', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle'"/>
+    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
+
+    <xsl:template mode="checks" match="front/div1">
+        <xsl:call-template name="check-div1"/>
+        <xsl:if test="not(@type = $expectedFrontDiv1Types)">
+            <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Unexpected type for div1: <xsl:value-of select="@type"/></xsl:message>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="body/div1">
+        <xsl:call-template name="check-div1"/>
+        <xsl:if test="not(@type = $expectedBodyDiv1Types)">
+            <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Unexpected type for div1: <xsl:value-of select="@type"/></xsl:message>
+        </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
 
+
+
+    <xsl:template name="check-div1">
+        <xsl:if test="not(@type)">
+            <i:issue pos="{@pos}">No type specified for div1</i:issue>
+            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> No type specified for div1</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
-        <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Warning: contains non-TEI element <xsl:value-of select="name()"/></xsl:message>
+        <i:issue pos="{@pos}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
+        <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Non-TEI element <xsl:value-of select="name()"/></xsl:message>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
@@ -67,6 +132,7 @@
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
         </xsl:call-template>
+        <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
 
@@ -90,6 +156,7 @@
 
         <!-- Now the $pairs should start with what we expect: -->
         <xsl:if test="substring($pairs, 1, string-length($expect)) != $expect">
+            <i:issue pos="{@pos}">Paragraph does not start with <xsl:value-of select="$expect"/></i:issue>
             <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph does not start with <xsl:value-of select="$expect"/></xsl:message>
         </xsl:if>
 
@@ -103,9 +170,11 @@
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'unexpected'">
+                <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></i:issue>
                 <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
+                <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></i:issue>
                 <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
         </xsl:choose>
@@ -143,7 +212,7 @@
                                     then f:unclosed-pairs($tail, concat($head, $stack))
                                     else if ($head = $expect)
                                         then f:unclosed-pairs($tail, substring($stack, 2))
-                                        else concat('unexpected closer: ', $head)"/>
+                                        else concat('unexpected closing punctuation: ', $head)"/>
     </xsl:function>
 
 
@@ -151,9 +220,9 @@
 
     <xsl:function name="f:line-number" as="xs:string*">
         <xsl:param name="node" as="node()"/>
-        <xsl:if test="$node/@__pos">
-            <xsl:variable name="line" select="substring-before($node/@__pos, ':')"/>
-            <xsl:variable name="column" select="substring-after($node/@__pos, ':')"/>
+        <xsl:if test="$node/@pos">
+            <xsl:variable name="line" select="substring-before($node/@pos, ':')"/>
+            <xsl:variable name="column" select="substring-after($node/@pos, ':')"/>
 
             <xsl:text>line </xsl:text><xsl:value-of select="$line"/> column <xsl:value-of select="$column"/>
         </xsl:if>
