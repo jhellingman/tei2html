@@ -60,7 +60,7 @@ BEGIN
     $ent{"aogon"}       = chr(0x0105);  #  LATIN SMALL LETTER A WITH OGONEK
     $ent{"ap"}          = chr(0x2248);  #  ALMOST EQUAL TO
     $ent{"ape"}         = chr(0x224A);  #  ALMOST EQUAL OR EQUAL TO
-    # $ent{"apos"}      = chr(0x02BC);  #  MODIFIER LETTER APOSTROPHE
+    $ent{"mlapos"}      = chr(0x02BC);  #  MODIFIER LETTER APOSTROPHE
     $ent{"Aring"}       = chr(0x00C5);  #  LATIN CAPITAL LETTER A WITH RING ABOVE
     $ent{"aring"}       = chr(0x00E5);  #  LATIN SMALL LETTER A WITH RING ABOVE
     $ent{"ast"}         = chr(0x002A);  #  ASTERISK

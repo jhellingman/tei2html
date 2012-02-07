@@ -89,7 +89,7 @@
 
 
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Preface', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Preface', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'Titlepage'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
 
     <xsl:template mode="checks" match="front/div1">
@@ -110,9 +110,6 @@
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
-
-
-
     <xsl:template name="check-div1">
         <xsl:if test="not(@type)">
             <i:issue pos="{@pos}">No type specified for div1</i:issue>
@@ -121,11 +118,13 @@
     </xsl:template>
 
 
+
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
         <i:issue pos="{@pos}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Non-TEI element <xsl:value-of select="name()"/></xsl:message>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
 
 
     <xsl:template mode="checks" match="p">
