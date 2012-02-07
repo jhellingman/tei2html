@@ -285,9 +285,8 @@ sub processFile($)
 #
 sub runChecks($)
 {
-    my $sgmlFile = shift;
-
-    $sgmlFile =~ /^(.*)\.(xml|tei)$/;
+    my $filename = shift;
+    $filename =~ /^(.*)\.(xml|tei)$/;
     my $basename = $1;
     my $extension = $2;
     my $newname = $basename . "-pos." . $extension;
@@ -295,8 +294,14 @@ sub runChecks($)
 
     if ($extension eq "tei") 
     {
-        sgml2xml($newname, $basename . "-pos.xml");
+		my $tmpFile = mktemp('tmp-XXXXX');
+
+		# turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
+		system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
+
+        sgml2xml($tmpFile, $basename . "-pos.xml");
         $newname = $basename . "-pos.xml";
+		# unlink($tmpFile);
     }
 
     system ("$saxon2 \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
