@@ -5,6 +5,9 @@
 XSLT style-sheet to check various TEI conventions and textual issues.
 
 
+= Metadata =
+
+Verify metadata is present and correct.
 
 = Rendering =
 
