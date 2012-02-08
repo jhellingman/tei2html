@@ -2,8 +2,20 @@
 
 = Introduction =
 
-Proposed tools to check various TEI conventions and textual issues.
+XSLT style-sheet to check various TEI conventions and textual issues.
 
+
+
+= Rendering =
+
+Verify valid rendering attributes are used
+
+  * valid CSS-based rendition ladders
+  * valid tei2html extensions.
+
+= Types =
+
+Verify types for elements are valid according to the conventions.
 
 = Numbering =
 
@@ -11,6 +23,10 @@ Verify whether numbered items are in sequence.
 
   * page-breaks `<pb>`
   * divisions `<div#>`
+
+= Spacing and Punctuation =
+
+Verify punctuation marks are properly spaced.
 
 = Quotation Marks =
 
