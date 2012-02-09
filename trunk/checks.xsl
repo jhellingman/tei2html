@@ -96,7 +96,6 @@
         <xsl:call-template name="check-div1"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
             <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
-            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Unexpected type for div1: <xsl:value-of select="@type"/></xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -105,7 +104,6 @@
         <xsl:call-template name="check-div1"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
             <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
-            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Unexpected type for div1: <xsl:value-of select="@type"/></xsl:message>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -113,7 +111,6 @@
     <xsl:template name="check-div1">
         <xsl:if test="not(@type)">
             <i:issue pos="{@pos}">No type specified for div1</i:issue>
-            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> No type specified for div1</xsl:message>
         </xsl:if>
     </xsl:template>
 
@@ -121,10 +118,31 @@
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
         <i:issue pos="{@pos}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
-        <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Non-TEI element <xsl:value-of select="name()"/></xsl:message>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
+
+    <xsl:template mode="checks" match="pb">
+        <xsl:variable name="preceding" select="preceding::pb[1]/@n"/>
+
+        <xsl:choose>
+            <xsl:when test="not(@n)">
+                <i:issue pos="{@pos}">Page break without page number.</i:issue>
+            </xsl:when>
+
+            <xsl:when test="not(f:is-number(@n) or f:is-roman(@n))">
+                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
+            </xsl:when>
+
+            <xsl:when test="f:is-roman(@n) and f:is-roman($preceding) and not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
+                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
+            </xsl:when>
+
+            <xsl:when test="f:is-number(@n) and f:is-number($preceding) and not(@n = $preceding + 1)">
+                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
 
 
     <xsl:template mode="checks" match="p">
@@ -156,7 +174,6 @@
         <!-- Now the $pairs should start with what we expect: -->
         <xsl:if test="substring($pairs, 1, string-length($expect)) != $expect">
             <i:issue pos="{@pos}">Paragraph does not start with <xsl:value-of select="$expect"/></i:issue>
-            <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph does not start with <xsl:value-of select="$expect"/></xsl:message>
         </xsl:if>
 
         <!--
@@ -170,11 +187,9 @@
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'unexpected'">
                 <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></i:issue>
-                <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
                 <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></i:issue>
-                <xsl:message terminate="no"><xsl:value-of select="f:line-number(.)"/> Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></xsl:message>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -215,8 +230,6 @@
     </xsl:function>
 
 
-    <!-- Get function for line numbers to work. See http://www.xmlplease.com/linenumber, but fix some issues here -->
-
     <xsl:function name="f:line-number" as="xs:string*">
         <xsl:param name="node" as="node()"/>
         <xsl:if test="$node/@pos">
@@ -227,14 +240,60 @@
         </xsl:if>
     </xsl:function>
 
-    <!--
 
-    <xsl:function name="f:log-issue">
-        <xsl:param name="node" as="node()"/>
-        <xsl:param name="issue" as="xs:string"/>
+    <xsl:function name="f:from-roman" as="xs:integer">
+        <xsl:param name="roman" as="xs:string"/>
 
+        <xsl:sequence select="f:from-roman-implementation($roman, 0)"/>
     </xsl:function>
 
-    -->
+
+    <xsl:function name="f:from-roman-implementation" as="xs:integer">
+        <xsl:param name="roman" as="xs:string"/>
+        <xsl:param name="value" as="xs:integer"/>
+
+        <xsl:variable name="length" select="string-length($roman)"/>
+      
+        <xsl:choose>
+            <xsl:when test="not($length) or $length = 0">
+                <xsl:sequence select="$value"/>
+            </xsl:when>
+            
+            <xsl:when test="$length = 1">
+                <xsl:sequence select="$value + f:roman-value($roman)"/>
+            </xsl:when>
+            
+            <xsl:otherwise>
+                <xsl:variable name="head-value" select="f:roman-value(substring($roman, 1, 1))"/>
+                <xsl:variable name="tail" select="substring($roman, 2, $length - 1)"/>
+                
+                <xsl:sequence select="if ($head-value &lt; f:roman-value(substring($roman, 2, 1)))
+                    then f:from-roman-implementation($tail, $value - $head-value)
+                    else f:from-roman-implementation($tail, $value + $head-value)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-number" as="xs:boolean">
+        <xsl:param name="string"/>
+        
+        <xsl:sequence select="matches($string, '^[\d]+$', 'i')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-roman" as="xs:boolean">
+        <xsl:param name="string"/>
+        
+        <xsl:sequence select="matches($string, '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', 'i')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:roman-value">
+        <xsl:param name="character" as="xs:string"/>
+        
+        <xsl:sequence select="(1, 5, 10, 50, 100, 500, 1000)[index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'), upper-case($character))]"/>
+    </xsl:function>
+
 
 </xsl:stylesheet>
