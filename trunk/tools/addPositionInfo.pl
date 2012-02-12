@@ -24,7 +24,11 @@ while (<INPUTFILE>)
         $remainder = $';
         $column += length "$before";
 
-        $attrs = " pos='$lineNumber:$column'$attrs";
+		# Filter out special transcription tags.
+		if ($tag ne 'GR') 
+		{
+			$attrs = " pos='$lineNumber:$column'$attrs";
+		}
         print "$before<$tag$attrs>";
 
         # Do not count added attribute, as it is not in the source.
