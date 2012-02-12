@@ -49,8 +49,6 @@
 
     <xsl:template match="/">
 
-        <!-- page numbers in sequence -->
-
         <!-- page numbers in odd places -->
 
         <!-- division numbers in sequence -->
@@ -153,25 +151,30 @@
 
     <xsl:template mode="checks" match="p">
 
-        <!-- TODO: establish match position with tokenize() and give some context of the matches. -->
-        <!-- TODO: exclude elements like figures, tables, etc. from the check. -->
-        <xsl:if test="matches(., '\s+[.,:;!?]')">
-            <i:issue pos="{@pos}" code="P0004">Space before punctuation mark.</i:issue>
-        </xsl:if>
+        <!-- TODO: exclude elements like figures, tables, etc. from the string-based checks. -->
 
-        <xsl:if test="matches(., '\s+[)&rdquo;&rsquo;]')">
-            <i:issue pos="{@pos}" code="P0005">Space before closing punctuation mark.</i:issue>
-        </xsl:if>
-
-        <xsl:if test="matches(., '[(&lsquo;&ldquo;&bdquo;]\s+')">
-            <i:issue pos="{@pos}" code="P0006">Space after opening punctuation mark.</i:issue>
-        </xsl:if>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                 'P0004', 'Space before punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',        'P0005', 'Space before closing punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+', 'P0006', 'Space after opening punctuation mark.')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
         </xsl:call-template>
+
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
+
+    <xsl:function name="f:should-not-contain">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="pattern" as="xs:string"/>
+        <xsl:param name="code" as="xs:string"/>
+        <xsl:param name="message" as="xs:string"/>
+
+        <xsl:if test="matches($node, $pattern)">
+            <i:issue pos="{$node/@pos}" code="{$code}"><xsl:value-of select="$message"/> [<xsl:value-of select="f:match-fragment($node, $pattern)"/>]</i:issue>
+        </xsl:if>
+    </xsl:function>
 
 
     <xsl:template mode="checks" match="text()"/>
@@ -265,6 +268,34 @@
             <xsl:text>line </xsl:text><xsl:value-of select="$line"/> column <xsl:value-of select="$column"/>
         </xsl:if>
     </xsl:function>
+
+
+
+    <xsl:function name="f:match-position" as="xs:integer">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="pattern" as="xs:string"/>
+
+        <xsl:sequence select="if (matches ($string, $pattern)) then string-length(tokenize($string, $pattern)[1]) else -1"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:match-fragment" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="pattern" as="xs:string"/>
+
+        <xsl:variable name="match-position" select="f:match-position($string, $pattern)"/>
+
+        <xsl:choose>
+            <xsl:when test="$match-position = -1">
+                <xsl:sequence select="''"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:variable name="start" select="if ($match-position - 20 &lt; 0) then 0 else $match-position - 20"/>
+                <xsl:sequence select="substring($string, $start, 40)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
 
 
     <xd:doc>
