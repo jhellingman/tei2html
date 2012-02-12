@@ -17,6 +17,10 @@
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
 
+    <!ENTITY raquo     "&#187;">
+    <!ENTITY laquo     "&#171;">
+    <!ENTITY bdquo     "&#8222;">
+
 ]>
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
@@ -68,6 +72,7 @@
             <body>
                 <table>
                     <tr>
+                        <th>Code</th>
                         <th>Line</th>
                         <th>Column</th>
                         <th>Issue</th>
@@ -81,6 +86,7 @@
 
     <xsl:template mode="report" match="i:issue">
         <tr>
+            <td><xsl:value-of select="@code"/></td>
             <td><xsl:value-of select="substring-before(@pos, ':')"/></td>
             <td><xsl:value-of select="substring-after(@pos, ':')"/></td>
             <td><xsl:value-of select="."/></td>
@@ -89,13 +95,13 @@
 
 
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Preface', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'Titlepage'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
 
     <xsl:template mode="checks" match="front/div1">
         <xsl:call-template name="check-div1"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
-            <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -103,21 +109,21 @@
     <xsl:template mode="checks" match="body/div1">
         <xsl:call-template name="check-div1"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
-            <i:issue pos="{@pos}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
     <xsl:template name="check-div1">
         <xsl:if test="not(@type)">
-            <i:issue pos="{@pos}">No type specified for div1</i:issue>
+            <i:issue pos="{@pos}" code="C0002">No type specified for div1</i:issue>
         </xsl:if>
     </xsl:template>
 
 
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
-        <i:issue pos="{@pos}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
+        <i:issue pos="{@pos}" code="T0001">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
@@ -127,25 +133,40 @@
 
         <xsl:choose>
             <xsl:when test="not(@n)">
-                <i:issue pos="{@pos}">Page break without page number.</i:issue>
+                <i:issue pos="{@pos}" code="C0003">Page break without page number.</i:issue>
             </xsl:when>
 
             <xsl:when test="not(f:is-number(@n) or f:is-roman(@n))">
-                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
+                <i:issue pos="{@pos}" code="C0004">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
             </xsl:when>
 
             <xsl:when test="f:is-roman(@n) and f:is-roman($preceding) and not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
-                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
+                <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
             </xsl:when>
 
             <xsl:when test="f:is-number(@n) and f:is-number($preceding) and not(@n = $preceding + 1)">
-                <i:issue pos="{@pos}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
+                <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
 
     <xsl:template mode="checks" match="p">
+
+        <!-- TODO: establish match position with tokenize() and give some context of the matches. -->
+        <!-- TODO: exclude elements like figures, tables, etc. from the check. -->
+        <xsl:if test="matches(., '\s+[.,:;!?]')">
+            <i:issue pos="{@pos}" code="P0004">Space before punctuation mark.</i:issue>
+        </xsl:if>
+
+        <xsl:if test="matches(., '\s+[)&rdquo;&rsquo;]')">
+            <i:issue pos="{@pos}" code="P0005">Space before closing punctuation mark.</i:issue>
+        </xsl:if>
+
+        <xsl:if test="matches(., '[(&lsquo;&ldquo;&bdquo;]\s+')">
+            <i:issue pos="{@pos}" code="P0006">Space after opening punctuation mark.</i:issue>
+        </xsl:if>
+
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
         </xsl:call-template>
@@ -169,11 +190,11 @@
         <xsl:param name="expect" select="''" as="xs:string"/>
 
         <!-- Remove anything not a pairing punctionation mark -->
-        <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;]', '')"/>
+        <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;&laquo;&raquo;&bdquo;]', '')"/>
 
         <!-- Now the $pairs should start with what we expect: -->
         <xsl:if test="substring($pairs, 1, string-length($expect)) != $expect">
-            <i:issue pos="{@pos}">Paragraph does not start with <xsl:value-of select="$expect"/></i:issue>
+            <i:issue pos="{@pos}" code="P0001">Paragraph does not start with <xsl:value-of select="$expect"/></i:issue>
         </xsl:if>
 
         <!--
@@ -186,17 +207,22 @@
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'unexpected'">
-                <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></i:issue>
+                <i:issue pos="{@pos}" code="P0002">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></i:issue>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue pos="{@pos}">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></i:issue>
+                <i:issue pos="{@pos}" code="P0003">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></i:issue>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
 
-    <xsl:variable name="opener" select="'(', '[', '{', '&lsquo;', '&ldquo;'"/>
-    <xsl:variable name="closer" select="')', ']', '}', '&rsquo;', '&rdquo;'"/>
+    <!-- The following two variables should list the openers and matching closers in the same order -->
+    <!-- The current values work well for my 19th century Dutch books that use: &raquo;...&rdquo; -->
+
+    <xsl:variable name="opener" select="'(', '[', '{', '&lsquo;', '&ldquo;', '&raquo;', '&bdquo;'"/>
+    <xsl:variable name="closer" select="')', ']', '}', '&rsquo;', '&rdquo;', '&rdquo;', '&rdquo;'"/>
+    <xsl:variable name="opener-string" select="string-join($opener, '')"/>
+    <xsl:variable name="closer-string" select="string-join($closer, '')"/>
 
     <xd:doc>
         <xd:short>Find unclosed pairs of paired punctuation marks.</xd:short>
@@ -214,7 +240,7 @@
 
         <xsl:variable name="head" select="substring($pairs, 1, 1)"/>
         <xsl:variable name="tail" select="substring($pairs, 2)"/>
-        <xsl:variable name="expect" select="translate(substring($stack, 1, 1),'[({&lsquo;&ldquo;', '])}&rsquo;&rdquo;')"/>
+        <xsl:variable name="expect" select="translate(substring($stack, 1, 1), $opener-string, $closer-string)"/>
 
         <!--
         <xsl:message terminate="no">Checking mark:   [<xsl:value-of select="$head"/>] : [<xsl:value-of select="$tail"/>]  (stack [<xsl:value-of select="$stack"/>], expect [<xsl:value-of select="$expect"/>]) </xsl:message>
@@ -240,6 +266,16 @@
         </xsl:if>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Convert a Roman number to an integer.</xd:short>
+        <xd:detail>
+            <p>Convert a Roman number to an integer. This function calls a recursive implementation, which 
+            establishes the value of the first letter, and then adds or subtracts that value to/from the
+            value of the tail, depending on whether the next character represent a higher or lower
+            value.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:from-roman" as="xs:integer">
         <xsl:param name="roman" as="xs:string"/>
