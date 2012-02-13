@@ -125,6 +125,31 @@
                     letter-spacing: 0.2em;
                 }
 
+                .var2
+                {
+                    background-color: #80FFEE;
+                }
+
+                .var3
+                {
+                    background-color: #BFFF80;
+                }
+
+                .var4
+                {
+                    background-color: #FFFF80;
+                }
+
+                .var5
+                {
+                    background-color: #FFD780;
+                }
+
+                .var6, .var7, .var8, .var9, .var10, .var11, .var12
+                {
+                    background-color: $FF8080;
+                }
+
             </style>
         </head>
         <html>
@@ -246,11 +271,18 @@
                 <xsl:for-each-group select="$matches" group-by="./word">
                     <xsl:sort select="count(current-group())" order="descending"/>
 
-                    <xsl:text> </xsl:text><b><xsl:value-of select="current-group()[1]/word"/></b>
+                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/word"/></b>
                     <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
                 </xsl:for-each-group>
             </p>
         </xsl:if>
+
+        <xsl:variable name="variants">
+            <xsl:for-each-group select="$matches" group-by="./word">
+                <xsl:sort select="count(current-group())" order="descending"/>
+                    <w><xsl:value-of select="current-group()[1]/word"/></w>
+            </xsl:for-each-group>
+        </xsl:variable>
 
         <table>
             <tr>
@@ -261,6 +293,7 @@
             </tr>
 
             <xsl:apply-templates mode="output" select="$matches">
+                <xsl:with-param name="variants" tunnel="yes" select="$variants/w"/>
                 <xsl:sort select="fn:lower-case(f:strip_diacritics(following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
@@ -326,6 +359,7 @@
     </xd:doc>
 
     <xsl:template mode="output" match="matches">
+
         <table>
             <tr>
                 <th/>
@@ -347,11 +381,13 @@
     </xd:doc>
 
     <xsl:template mode="output" match="match">
+        <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
+
         <tr>
             <td class="pre">
                 <xsl:apply-templates mode="output" select="preceding"/>
             </td>
-            <td class="match">
+            <td class="match var{index-of($variants, string(word))}">
                 <xsl:apply-templates mode="output" select="word"/>
             </td>
             <td class="post">

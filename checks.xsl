@@ -93,7 +93,7 @@
 
 
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
 
     <xsl:template mode="checks" match="front/div1">
@@ -153,9 +153,13 @@
 
         <!-- TODO: exclude elements like figures, tables, etc. from the string-based checks. -->
 
-        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                 'P0004', 'Space before punctuation mark.')"/>
-        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',        'P0005', 'Space before closing punctuation mark.')"/>
-        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+', 'P0006', 'Space after opening punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                     'P0004', 'Space before punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',            'P0005', 'Space before closing punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+',     'P0006', 'Space after opening punctuation mark.')"/>
+
+        <!--
+        <xsl:copy-of select="f:should-not-contain(., ',[^\s&rdquo;&rsquo;0-9]',         'P0007', 'Missing space after comma.')"/>
+        -->
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
