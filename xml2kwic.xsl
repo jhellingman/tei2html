@@ -147,7 +147,8 @@
 
                 .var6, .var7, .var8, .var9, .var10, .var11, .var12
                 {
-                    background-color: $FF8080;
+                    background-color: #FF8080;
+                    color: black;
                 }
 
             </style>
