@@ -42,6 +42,9 @@
     </xd:doc>
 
 
+    <xsl:include href="segmentize.xsl"/>
+
+
     <xsl:template match="divGen[@type='checks']">
         <xsl:apply-templates select="/" mode="checks"/>
     </xsl:template>
@@ -57,9 +60,22 @@
 
         <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
 
+        <xsl:variable name="segments">
+            <xsl:call-template name="segmentize"/>
+        </xsl:variable>
+
+        <!--
+        <xsl:call-template name="output-segments">
+            <xsl:with-param name="segments" select="$segments"/>
+        </xsl:call-template>
+        -->
+
         <xsl:variable name="issues">
             <i:issues>
                 <xsl:apply-templates mode="checks"/>
+
+                <!-- Check textual issues on segments -->
+                <xsl:apply-templates mode="checks" select="$segments//segment"/>
             </i:issues>
         </xsl:variable>
 
@@ -149,7 +165,8 @@
     </xsl:template>
 
 
-    <xsl:template mode="checks" match="p">
+
+    <xsl:template mode="checks" match="segment">
 
         <!-- TODO: exclude elements like figures, tables, etc. from the string-based checks. -->
 
@@ -176,7 +193,7 @@
         <xsl:param name="message" as="xs:string"/>
 
         <xsl:if test="matches($node, $pattern)">
-            <i:issue pos="{$node/@pos}" code="{$code}"><xsl:value-of select="$message"/> [<xsl:value-of select="f:match-fragment($node, $pattern)"/>]</i:issue>
+            <i:issue pos="{$node/@pos}" code="{$code}"><xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($node, $pattern)"/></i:issue>
         </xsl:if>
     </xsl:function>
 
@@ -213,11 +230,11 @@
 
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
-            <xsl:when test="substring($unclosed, 1, 10) = 'unexpected'">
-                <i:issue pos="{@pos}" code="P0002">Paragraph [<xsl:value-of select="$head"/>] contains <xsl:value-of select="$unclosed"/></i:issue>
+            <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
+                <i:issue pos="{@pos}" code="P0002"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue pos="{@pos}" code="P0003">Paragraph [<xsl:value-of select="$head"/>] contains unclosed punctuation: <xsl:value-of select="$unclosed"/></i:issue>
+                <i:issue pos="{@pos}" code="P0003">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -259,7 +276,7 @@
                                     then f:unclosed-pairs($tail, concat($head, $stack))
                                     else if ($head = $expect)
                                         then f:unclosed-pairs($tail, substring($stack, 2))
-                                        else concat('unexpected closing punctuation: ', $head)"/>
+                                        else concat(concat(concat('Unexpected closing punctuation: ', $head), if ($stack) then ' open: ' else ''), $stack)"/>
     </xsl:function>
 
 
