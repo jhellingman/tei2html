@@ -23,6 +23,8 @@
         method="xml"
         encoding="utf-8"/>
 
+    <xsl:include href="segmentize.xsl"/>
+
     <xd:doc>
         <xd:short>The keyword to generate a KWIC for.</xd:short>
         <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
@@ -167,56 +169,21 @@
     </xsl:template>
 
 
-    <xd:doc mode="segments">
-        <xd:short>Mode used to collect segments.</xd:short>
-        <xd:detail>The generic segment-element will replace a range of higher-level structural elements, such as paragraphs.</xd:detail>
-    </xd:doc>
-
-    <xd:doc mode="flatten-segments">
-        <xd:short>Mode used to flatten segments.</xd:short>
-        <xd:detail>Segments are flattened by grouping segment and non-segment elements; the non-segments will be wrapped into a new segment, and the contained segments will be handled recursively.</xd:detail>
-    </xd:doc>
-
     <xd:doc>
         <xd:short>Generate the KWIC</xd:short>
         <xd:detail>Generate the KWIC. This template build a KWIC in the following steps.
         <ol>
+            <li>Segmentize the text.</li>
             <li>Collect all words that appear in the document.</li>
-            <li>Collect all segments in the document, to provide meaningful contexts.</li>
-            <li>Flatten the segments.</li>
             <li>Loop over the list of words, and find matches for each word.</li>
         </ol>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="build-kwic">
-
-        <!-- Collect all segments -->
         <xsl:variable name="segments">
-            <segment>
-                <xsl:apply-templates mode="segments"/>
-            </segment>
+            <xsl:call-template name="segmentize"/>
         </xsl:variable>
-
-        <!-- Flatten segments -->
-        <xsl:variable name="segments">
-            <segments>
-                <xsl:apply-templates mode="flatten-segments" select="$segments"/>
-            </segments>
-        </xsl:variable>
-
-        <!--
-        <xsl:result-document
-                doctype-public=""
-                doctype-system=""
-                href="kwic-segments.xml"
-                method="xml"
-                indent="yes"
-                encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: kwic-segments.xml.</xsl:message>
-            <xsl:copy-of select="$segments"/>
-        </xsl:result-document>
-        -->
 
         <xsl:choose>
             <xsl:when test="$keyword != ''">
@@ -301,31 +268,6 @@
     </xsl:template>
 
 
-    <xd:doc>
-        <xd:short>Flatten segments.</xd:short>
-        <xd:detail>Flatten segments, that is, make sure segments are not nested.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="flatten-segments" match="segment">
-        <xsl:for-each-group select="node()" group-adjacent="not(self::segment)">
-            <xsl:choose>
-                <xsl:when test="current-grouping-key()">
-                    <!-- Sequence of non-segment elements -->
-                    <segment>
-                        <xsl:copy-of select="current-group()"/>
-                    </segment>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- Sequence of segment elements -->
-                    <xsl:for-each select="current-group()">
-                        <xsl:apply-templates select="." mode="flatten-segments"/>
-                    </xsl:for-each>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each-group>
-    </xsl:template>
-
-
     <xd:doc mode="output">
         <xd:short>Mode used to output the matches.</xd:short>
         <xd:detail>This produces the HTML to report the matches found.</xd:detail>
@@ -369,7 +311,7 @@
                 <th class="pn">Page</th>
             </tr>
 
-            <xsl:apply-templates mode="output">
+            <xsl:apply-templates mode="#current">
                 <xsl:sort select="fn:lower-case(f:strip_diacritics(following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
@@ -386,13 +328,13 @@
 
         <tr>
             <td class="pre">
-                <xsl:apply-templates mode="output" select="preceding"/>
+                <xsl:apply-templates mode="#current" select="preceding"/>
             </td>
             <td class="match var{index-of($variants, string(word))}">
-                <xsl:apply-templates mode="output" select="word"/>
+                <xsl:apply-templates mode="#current" select="word"/>
             </td>
             <td class="post">
-                <xsl:apply-templates mode="output" select="following"/>
+                <xsl:apply-templates mode="#current" select="following"/>
             </td>
             <td class="pn">
                 <xsl:value-of select="@page"/>
@@ -437,7 +379,7 @@
     </xd:doc>
 
     <xsl:template mode="single-kwic" match="segment">
-        <xsl:apply-templates mode="single-kwic" select="."/>
+        <xsl:apply-templates mode="#current" select="."/>
     </xsl:template>
 
 
@@ -502,34 +444,6 @@
 
 
     <xd:doc>
-        <xd:short>Report word-usage.</xd:short>
-        <xd:detail>Report word-usage, grouped by language and word-form.</xd:detail>
-        <xd:param name="words">The node-tree with all the words to be reported.</xd:param>
-    </xd:doc>
-
-    <xsl:template name="report-usage">
-        <xsl:param name="words" as="element()"/>
-        <usage>
-            <xsl:for-each-group select="$words/w" group-by="@xml:lang">
-                <words xml:lang="{(current-group()[1])/@xml:lang}">
-                    <xsl:for-each-group select="current-group()" group-by="@form">
-                        <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
-                        <group>
-                            <xsl:for-each-group select="current-group()" group-by=".">
-                                <xsl:sort select="(current-group()[1])" order="ascending"/>
-                                <word count="{count(current-group())}">
-                                    <xsl:value-of select="current-group()[1]"/>
-                                </word>
-                            </xsl:for-each-group>
-                        </group>
-                    </xsl:for-each-group>
-                </words>
-            </xsl:for-each-group>
-        </usage>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Split a string into words.</xd:short>
         <xd:detail>Split a string into words, using a regular expression syntax.</xd:detail>
         <xd:param name="string">The string to be split in words.</xd:param>
@@ -560,73 +474,9 @@
 
 
     <xd:doc>
-        <xd:short>Ignore the TEI header.</xd:short>
-        <xd:detail>Ignore the TEI header, as we are not interested in the words that appear there.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="segments" match="teiHeader"/>
-
-    <xd:doc>
-        <xd:short>Ignore notes.</xd:short>
-        <xd:detail>Ignore notes. Notes will be lifted from their context, and handled separately.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="segments" match="note"/>
-
-
-    <xd:doc mode="segment-notes">
-        <xd:short>Mode used to lift notes out of their context.</xd:short>
-        <xd:detail>Mode used to lift notes out of their context, into a separate context.</xd:detail>
-    </xd:doc>
-
-    <xd:doc>
-        <xd:short>Segmentize the text.</xd:short>
-        <xd:detail>Segmentize the text. Here we also handle the notes separately.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="segments" match="TEI.2/text">
-        <xsl:apply-templates mode="segments"/>
-        <xsl:apply-templates mode="segment-notes" select="/TEI.2/text//note"/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Segmentize notes.</xd:short>
-        <xd:detail>Segmentize notes. Special handling at this level only, can use mode <code>segments</code> for elements inside notes.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="segment-notes" match="note">
-        <segment>
-            <xsl:apply-templates mode="segments"/>
-        </segment>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Handle high-level structure.</xd:short>
-        <xd:detail>Handle high-level structure. These are typically further divided in segments, so we need not introduce a segment for them.</xd:detail>
-    </xd:doc>
-
-    <xsl:template mode="segments" match="front | back | body | div0 | div1 | div2 | div3 | div4 | div5 | div6 | lg | table | row | sp">
-        <xsl:apply-templates mode="segments"/>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Handle segment structure.</xd:short>
-        <xd:detail>Introduce a segment for each of these elements that contain text.</xd:detail>
-    </xd:doc>
-
-    <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
-    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker">
-        <segment>
-            <xsl:apply-templates mode="segments"/>
-        </segment>
-    </xsl:template>
-
-    <xd:doc>
         <xd:short>Analyze text nodes.</xd:short>
-        <xd:detail>Analyze text nodes of segments in the same way as we analyzed them when generating the word-list.</xd:detail>
+        <xd:detail>Split segments into words (using the <code>segments</code> mode of segmentize.xsl,
+        so this happens during segmenting the text).</xd:detail>
     </xd:doc>
 
     <xsl:template mode="segments" match="text()">
