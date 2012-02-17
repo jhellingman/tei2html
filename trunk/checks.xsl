@@ -56,8 +56,6 @@
 
         <!-- division numbers in sequence -->
 
-        <!-- quotation marks matching -->
-
         <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
 
         <xsl:variable name="segments">
@@ -108,39 +106,74 @@
     </xsl:template>
 
 
+    <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
+    <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>
 
     <xsl:template mode="checks" match="front/div1">
-        <xsl:call-template name="check-div1"/>
+        <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
             <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
+    <xsl:template mode="checks" match="body/div0">
+        <xsl:call-template name="check-div-type-present"/>
+        <xsl:if test="not(@type = $expectedBodyDiv0Types)">
+            <i:issue pos="{@pos}" code="C0001">Unexpected type for div0: <xsl:value-of select="@type"/></i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
     <xsl:template mode="checks" match="body/div1">
-        <xsl:call-template name="check-div1"/>
+        <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
             <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
-    <xsl:template name="check-div1">
+    <xsl:template mode="checks" match="back/div1">
+        <xsl:call-template name="check-div-type-present"/>
+        <xsl:if test="not(@type = $expectedBackDiv1Types)">
+            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+    <xsl:template name="check-div-type-present">
         <xsl:if test="not(@type)">
-            <i:issue pos="{@pos}" code="C0002">No type specified for div1</i:issue>
+            <i:issue pos="{@pos}" code="C0002">No type specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
 
+    <!-- divGen types -->
+
+    <xsl:variable name="expectedDivGenTypes" select="'toc', 'Colophon', 'IndexToc'"/>
+
+    <xsl:template mode="checks" match="divGen">
+        <xsl:call-template name="check-div-type-present"/>
+        <xsl:if test="not(@type = $expectedDivGenTypes)">
+            <i:issue pos="{@pos}" code="C0006">Unexpected type for divGen: <xsl:value-of select="@type"/></i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+
+    <!-- Elements not valid in TEI, but sometimes abused -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
         <i:issue pos="{@pos}" code="T0001">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
+
+    <!-- Page-break sequence -->
 
     <xsl:template mode="checks" match="pb">
         <xsl:variable name="preceding" select="preceding::pb[1]/@n"/>
@@ -154,29 +187,30 @@
                 <i:issue pos="{@pos}" code="C0004">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
             </xsl:when>
 
-            <xsl:when test="f:is-roman(@n) and f:is-roman($preceding) and not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
-                <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
+            <xsl:when test="f:is-roman(@n) and f:is-roman($preceding)">
+                <xsl:if test="not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
+                    <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
+                </xsl:if>
             </xsl:when>
 
-            <xsl:when test="f:is-number(@n) and f:is-number($preceding) and not(@n = $preceding + 1)">
-                <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
+            <xsl:when test="f:is-number(@n) and f:is-number($preceding)">
+                <xsl:if test="not(@n = $preceding + 1)">
+                    <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
+                </xsl:if>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
 
+    <!-- Text level checks, run on segments -->
 
     <xsl:template mode="checks" match="segment">
-
-        <!-- TODO: exclude elements like figures, tables, etc. from the string-based checks. -->
 
         <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                     'P0004', 'Space before punctuation mark.')"/>
         <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',            'P0005', 'Space before closing punctuation mark.')"/>
         <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+',     'P0006', 'Space after opening punctuation mark.')"/>
 
-        <!--
-        <xsl:copy-of select="f:should-not-contain(., ',[^\s&rdquo;&rsquo;0-9]',         'P0007', 'Missing space after comma.')"/>
-        -->
+        <xsl:copy-of select="f:should-not-contain(., ',[^\s&mdash;&rdquo;&rsquo;0-9)\]]',   'P0007', 'Missing space after comma.')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
@@ -373,7 +407,7 @@
     <xsl:function name="f:is-roman" as="xs:boolean">
         <xsl:param name="string"/>
         
-        <xsl:sequence select="matches($string, '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', 'i')"/>
+        <xsl:sequence select="string-length($string) != 0 and matches($string, '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', 'i')"/>
     </xsl:function>
 
 
