@@ -134,7 +134,7 @@
     </xd:doc>
 
     <xsl:template mode="segment-notes" match="note">
-        <segment>
+        <segment sourceElement="{name()}">
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates mode="segments"/>
         </segment>
@@ -157,8 +157,8 @@
     </xd:doc>
 
     <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
-    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker">
-        <segment>
+    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
+        <segment sourceElement="{name()}">
             <xsl:copy-of select="@*"/>
             <xsl:apply-templates mode="#current"/>
         </segment>
