@@ -294,17 +294,20 @@ sub runChecks($)
 
     if ($extension eq "tei") 
     {
-		my $tmpFile = mktemp('tmp-XXXXX');
+        my $tmpFile = mktemp('tmp-XXXXX');
 
-		# turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
-		system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
+        # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
+        system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
+		unlink ($newname);
 
         sgml2xml($tmpFile, $basename . "-pos.xml");
         $newname = $basename . "-pos.xml";
-		# unlink($tmpFile);
+        unlink($tmpFile);
+        unlink($tmpFile . ".err");
     }
 
     system ("$saxon2 \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
+	unlink ($newname);
 }
 
 
