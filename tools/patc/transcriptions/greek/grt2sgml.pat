@@ -1,5 +1,5 @@
 % Classical Greek in my transcription to Latin transcription according to the ALA-LC Romanization Tables.
-% This notation is identical to Yannis Haralambous' notation.
+% My notation is identical to Yannis Haralambous' notation.
 
 % Assuming the following diphthongs: ai au ei eu oi ou hu ui, with the accents always on the second letter.
 
@@ -576,7 +576,7 @@
 
 % punctuation marks
 
-"&middot;"  p "&middot;"
+"&middot;"  p ";"
 ";"         p "?"
 
 "&apos;"    p "&apos;"
