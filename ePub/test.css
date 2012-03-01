@@ -828,188 +828,188 @@ body
 
 
 
-.xd23e383
+.xd23e382
 {
 color:red; background-color:yellow;
 }
 
-.xd23e384
+.xd23e383
 {
 color:green; text-align:right;
 }
 
-.xd23e385
+.xd23e384
 {
 color:blue; text-align:right;
 }
 
-.xd23e421
+.xd23e420
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd23e422
+.xd23e421
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd23e425
+.xd23e424
 {
 border-top:2px solid black;
 }
 
-.xd23e442
+.xd23e441
 {
 border-top:1px solid black;
 }
 
-.xd23e473
+.xd23e472
 {
 border-bottom:2px solid black;
 }
 
-.xd23e99
+.xd23e98
 {
 font-style:italic;
 }
 
-.xd23e109
+.xd23e108
 {
 background-color:yellow;
 }
 
-.xd23e144
+.xd23e143
 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd23e157
+.xd23e156
 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd23e350
+.xd23e349
 {
 margin:0px auto; display:table;
 }
 
-.xd23e354
+.xd23e353
 {
 vertical-align:middle; width:2px;
 }
 
-.xd23e355
+.xd23e354
 {
 vertical-align:middle;
 }
 
-.xd23e365
+.xd23e364
 {
 margin-left:2em;
 }
 
-.xd23e367
+.xd23e366
 {
 width:25%;
 }
 
-.xd23e369
+.xd23e368
 {
 width:75%;
 }
 
-.xd23e380
+.xd23e379
 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd23e389
+.xd23e388
 {
 text-align:right;
 }
 
-.xd23e408
+.xd23e407
 {
 text-align:center;
 }
 
-.xd23e413
+.xd23e412
 {
 text-align:left;
 }
 
-.xd23e420
+.xd23e419
 {
 width:40%; border-collapse:collapse;
 }
 
-.xd23e576width
+.xd23e575width
 {
     width:80px;
 }
             
-.xd23e581
+.xd23e580
 {
 width:100px;
 }
 
-.xd23e581width
+.xd23e580width
 {
     width:80px;
 }
             
-.xd23e589width
+.xd23e588width
 {
     width:80px;
 }
             
-.xd23e601width
+.xd23e600width
 {
     width:480px;
 }
             
-.xd23e621width
+.xd23e620width
 {
     width:480px;
 }
             
-.xd23e671
+.xd23e670
 {
 font-style:italic;
 }
 
-.xd23e702
+.xd23e701
 {
 list-style-type:disc;
 }
 
-.xd23e732
+.xd23e731
 {
 list-style-type:upper-roman;
 }
 
-.xd23e744
+.xd23e743
 {
 list-style-type:lower-roman;
 }
 
-.xd23e787
+.xd23e786
 {
 text-align:left;
 }
 
-.xd23e790
+.xd23e789
 {
 text-align:right;
 }
 
-.xd23e792
+.xd23e791
 {
 text-align:center;
 }
 
 
-.xd23e794
+.xd23e793
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1017,7 +1017,7 @@ text-align:center;
     
 }
 
-.xd23e794init
+.xd23e793init
 {
     float: left;
     width: 90px;
@@ -1032,47 +1032,47 @@ text-align:center;
 }
 
         
-.xd23e798
+.xd23e797
 {
 text-align:justify;
 }
 
-.xd23e813
+.xd23e812
 {
 text-align:center;
 }
 
-.xd23e822
+.xd23e821
 {
 text-align:center;
 }
 
-.xd23e827
+.xd23e826
 {
 text-indent:1em;
 }
 
-.xd23e833
+.xd23e832
 {
 text-indent:2em;
 }
 
-.xd23e837
+.xd23e836
 {
 text-indent:3em;
 }
 
-.xd23e841
+.xd23e840
 {
 text-indent:10em;
 }
 
-.xd23e843
+.xd23e842
 {
 font-style:italic;
 }
 
-.xd23e953
+.xd23e952
 {
 display:none;
 }

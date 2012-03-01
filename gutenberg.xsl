@@ -15,26 +15,27 @@
     <!ENTITY frac34     "&#x00BE;">
 
 ]>
-<!--
-
-    Stylesheet to format Project Gutenberg related materials, to be imported in tei2html.xsl.
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-
--->
-
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     exclude-result-prefixes="f"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to output Project Gutenberg related information to the output.</xd:short>
+        <xd:detail>This stylesheet ads various elements to the generated output relevant to Project Gutenberg.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
-    <!--====================================================================-->
-    <!-- Project Gutenberg Header, Footer, and License -->
+
+    <xd:doc>
+        <xd:short>Combine author names.</xd:short>
+        <xd:detail>Combine author names to a sentence, connected with commas and 'and'.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="authors">
         <xsl:for-each select="//titleStmt/author">
@@ -60,6 +61,11 @@
         <xsl:call-template name="PGHeader"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate the PG header.</xd:short>
+        <xd:detail>Generate the PG header, based on information in the <code>teiHeader</code>.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="PGHeader">
         <div class="transcribernote">
@@ -89,6 +95,11 @@
         <xsl:call-template name="PGFooter"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate the PG footer.</xd:short>
+        <xd:detail>Generate the PG footer, based on information in the <code>teiHeader</code>, and including the long legal text.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="PGFooter">
         <div class="transcribernote">
