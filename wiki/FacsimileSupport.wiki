@@ -38,7 +38,7 @@ This later case also allows to point to zones within a page, but that is current
 
 The output consists of a series of HTML pages, one per page, with some metadata in the heading of the page, and some navigational aids to conveniently jump to another page.
 
-By convention, images will go into a directory `images/pages/`
+By convention, the facsimile images and wrapper pages will go into a directory `page-images`, and will look like this:
 
 {{{
   <html>
@@ -47,8 +47,10 @@ By convention, images will go into a directory `images/pages/`
     </head>
     <body>
       <div class="facsimile-header">
+         <h1>Document Title, by Document Author, Page x</hi1>
       </div>
       <div class="facsimile-navigation">
+         <!-- Buttons to go to previous and next page, and back to text -->
       </div>
       <div class="facsimile-page>
          <img src="\images\pages\p123.gif"/>
@@ -56,6 +58,8 @@ By convention, images will go into a directory `images/pages/`
     </body>
   </html>
 }}}
+
+For each `pb`-element for which a `@facs` attribute is present, a link will be generated to the wrapper file, decorated with a facsimile page-image icon.
 
 
 == ePub ==
