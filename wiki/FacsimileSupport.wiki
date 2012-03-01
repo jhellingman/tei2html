@@ -12,7 +12,7 @@ The `facsimile` element is a top-level element, that describes a series of page 
 
 {{{
    <facsimile>
-      <graphic url="p123.gif"/>
+      <graphic id=facs123 url="p123.gif"/>
    </facsimile>
 }}}
 
@@ -21,8 +21,16 @@ The `facsimile` element is a top-level element, that describes a series of page 
 The `@facs` attribute on `pb` elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images sub-directory, for example).
 
 {{{
-  <pb facs="p123.gif"/>
+  <pb n=123 facs="p123.gif"/>
 }}}
+
+Alternatively, it can link to an element in the `facsimile` element, for example:
+
+{{{
+  <pb n=123 facs="#facs123"/>
+}}}
+
+This later case also allows to point to zones within a page, but that is currently out-of-scope for tei2html.
 
 = Generated Output =
 
@@ -30,6 +38,26 @@ The `@facs` attribute on `pb` elements can be used to point to scanned images of
 
 The output consists of a series of HTML pages, one per page, with some metadata in the heading of the page, and some navigational aids to conveniently jump to another page.
 
+By convention, images will go into a directory `images/pages/`
+
+{{{
+  <html>
+    <head>
+      <title>Document title, page x</title>
+    </head>
+    <body>
+      <div class="facsimile-header">
+      </div>
+      <div class="facsimile-navigation">
+      </div>
+      <div class="facsimile-page>
+         <img src="\images\pages\p123.gif"/>
+      </div>
+    </body>
+  </html>
+}}}
+
+
 == ePub ==
 
-Similar to HTML, taking into account additions to Spine, etc.
+Similar to HTML, taking into account additions to Spine, metadata, etc.
