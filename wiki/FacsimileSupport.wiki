@@ -61,6 +61,29 @@ By convention, the facsimile images and wrapper pages will go into a directory `
 
 For each `pb`-element for which a `@facs` attribute is present, a link will be generated to the wrapper file, decorated with a facsimile page-image icon.
 
+=== Things to show ===
+
+In header
+
+  * Title of document
+  * Name of author
+  * Page number (if encoded in `@n` attribute)
+  * Title(s) of current division at bottom of page.
+
+Titles are indicated as follows:
+
+{{{
+(Front | Body | Back |) > Title Level 1 > Title Level 2 > ...
+}}}
+
+Each of these elements are active links, and will link back to those pages (content or facsimile view, to be decided)
+
+In Navigation
+
+  * Link to Previous Page
+  * Link to Next Page
+  * (Optional) Links to all pages
+  * Link back to location in transcribed text.
 
 == ePub ==
 
