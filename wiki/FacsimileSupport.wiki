@@ -2,10 +2,18 @@
 
 = Introduction =
 
-TEI P5 contains a [http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html facsimile element] to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.
+TEI P5 contains a [http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html `facsimile` element] to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.
 
 Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with or production.
 
 = Facsimile Element =
 
-= @facs Attribute =
+The Facsimile element is a top-level element, that describes a series of page images, and can stand independently of the transcribed text. This allows to specify just the metadata (in the Header) and the scans, to produce a digital facsimile.
+
+= `@facs` Attribute =
+
+The `@facs` attribute on `pb` elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images sub-directory, for example).
+
+= Generated Output =
+
+The output consists of a series of HTML pages, one per page, with some metadata in the heading of the page, and some navigational aids to conveniently jump to another page.
