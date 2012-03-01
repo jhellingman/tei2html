@@ -1,0 +1,11 @@
+#summary What needs to be done to support the TEI P5 facsimile features.
+
+= Introduction =
+
+TEI P5 contains a [http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html facsimile element] to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.
+
+Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with or production.
+
+= Facsimile Element =
+
+= @facs Attribute =
