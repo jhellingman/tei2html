@@ -46,6 +46,7 @@
     <xsl:include href="figures.xsl"/>
     <xsl:include href="colophon.xsl"/>
     <xsl:include href="gutenberg.xsl"/>
+    <xsl:include href="facsimile.xsl"/>
 
 
     <xsl:output
@@ -92,6 +93,9 @@
 
     <xd:doc type="string">Include a table of external links in the colophon (Yes or No).</xd:doc>
     <xsl:param name="optionExternalLinksTable" select="'No'"/>
+
+    <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
+    <xsl:param name="optionGenerateFacsimile" select="'No'"/>
 
 
     <!--====================================================================-->
