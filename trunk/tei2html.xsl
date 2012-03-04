@@ -70,6 +70,9 @@
     <xd:doc type="string">Path in which generated file will be placed (not relevant for HTML, but required for some included stylesheets).</xd:doc>
     <xsl:param name="path" select="''"/>
 
+    <xd:doc type="string">path in which page-images are stored (and page-image wrapper files will be generated for a digital facsimile).</xd:doc>
+    <xsl:variable name="facsimilePath">page-images</xsl:variable>
+
     <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
 

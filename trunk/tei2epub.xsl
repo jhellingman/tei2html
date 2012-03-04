@@ -2,7 +2,7 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet to convert TEI to HTML
+    Stylesheet to convert TEI to ePub
 
     Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a
     CSS stylesheet. Please contact me if you have problems with this stylesheet,
@@ -15,8 +15,18 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    exclude-result-prefixes="xd"
     version="2.0"
     >
+
+    <xd:doc type="stylesheet">
+        <xd:short>TEI stylesheet to convert a TEI document to ePub.</xd:short>
+        <xd:detail>This stylesheet is the main entry point for the TEI to ePub conversion. It contains no
+        templates itself, but collects all stylesheets, and sets a number of global variables.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:include href="utils.xsl"/>
     <xsl:include href="utils.epub.xsl"/>
@@ -37,6 +47,7 @@
     <xsl:include href="figures.xsl"/>
     <xsl:include href="colophon.xsl"/>
     <xsl:include href="gutenberg.xsl"/>
+    <xsl:include href="facsimile.xsl"/>
 
     <xsl:include href="tei2opf.xsl"/>
     <xsl:include href="tei2ncx.xsl"/>
@@ -54,6 +65,9 @@
     <xsl:param name="basename" select="'book'"/>
     <xsl:param name="path" select="'ePub'"/>
 
+    <xd:doc type="string">path in which page-images are stored (and page-image wrapper files will be generated for a digital facsimile).</xd:doc>
+    <xsl:variable name="facsimilePath">page-images</xsl:variable>
+
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
     <xsl:param name="optionEPub3" select="'Yes'"/>
@@ -63,6 +77,8 @@
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
     <xsl:param name="optionExternalLinksTable" select="'Yes'"/>
 
+    <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
+    <xsl:param name="optionGenerateFacsimile" select="'No'"/>
 
     <!--====================================================================-->
 
