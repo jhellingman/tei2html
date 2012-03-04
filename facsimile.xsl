@@ -38,13 +38,6 @@
 </xsl:template>
 
 
-<xsl:variable name="base-path">
-    <xsl:value-of select="base-uri()"/>
-</xsl:variable>
-
-
-<xsl:variable name="facsimile-path">page-images</xsl:variable>
-
 
 <xsl:function name="f:facsimile-filename" as="xs:string">
     <xsl:param name="pb" as="node()"/>
@@ -62,22 +55,40 @@
 
 
 <xsl:template match="pb" mode="facsimile">
-    <xsl:call-template name="facsimile-wrapper"/>
+    <xsl:if test="@facs">
+        <xsl:if test="not(preceding::pb[@facs])">
+            <xsl:call-template name="facsimile-css"/>
+        </xsl:if>
+
+        <xsl:call-template name="facsimile-wrapper"/>
+    </xsl:if>
 </xsl:template>
 
 
-<!-- To be called in context of pb element -->
+
+<xsl:template name="facsimile-css">
+    <xsl:variable name="facsimile-css-file" select="concat($facsimilePath, '/facsimile.css')"/>
+
+    <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
+        <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-css-file"/>.</xsl:message>
+            
+            body
+            {
+                text-align: center;
+            }
+
+    </xsl:result-document>
+</xsl:template>
+
+
 
 <xsl:template name="facsimile-wrapper">
-    <xsl:if test="@facs">
-        <xsl:variable name="facsimile-file" select="concat($facsimile-path, concat('/', f:facsimile-filename(.)))"/>
+    <xsl:variable name="facsimile-file" select="concat($facsimilePath, concat('/', f:facsimile-filename(.)))"/>
 
-        <!-- Generate a wrapper file for the page image -->
-        <xsl:result-document href="{$facsimile-file}">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>
-            <xsl:call-template name="facsimile-html"/>
-        </xsl:result-document>
-    </xsl:if>
+    <xsl:result-document href="{$facsimile-file}">
+        <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>
+        <xsl:call-template name="facsimile-html"/>
+    </xsl:result-document>
 </xsl:template>
 
 
@@ -105,7 +116,7 @@
                 <xsl:value-of select="@n"/>
             </xsl:if>
         </title>
-        <!-- TODO: generate CSS file (only once!) and include it -->
+        <link rel="stylesheet" type="text/css" href="facsimile.css" />
     </head>
 </xsl:template>
 
@@ -158,14 +169,9 @@
 
     <!-- TODO: puzzle out what works best with our conventions for PB element placement (probably going to next pb) -->
 
-    <!-- TODO: generate link back to generated HTML file (need to find out from name of TEI source somehow) -->
-
     <xsl:variable name="breadcrumbs">
-        <xsl:apply-templates select="ancestor::front | ancestor::body | ancestor::back | ancestor::div0 | ancestor::div1 | ancestor::div2 | ancestor::div3" mode="breadcrumbs"/>
+        <xsl:apply-templates select="ancestor::front | ancestor::body | ancestor::back | ancestor::div0 | ancestor::div1 | ancestor::div2 | ancestor::div3 | ." mode="breadcrumbs"/>
     </xsl:variable>
-
-    <!-- TODO: unpack base-path to guess output file-name (convention) -->
-    <div><xsl:value-of select="$base-path"/></div>
 
     <div class="breadcrumb-navigation">
         <xsl:for-each select="$breadcrumbs/*">
@@ -180,7 +186,10 @@
 
 <xsl:template match="front | body | back" mode="breadcrumbs">
     <a>
-        <xsl:call-template name="generate-href-attribute"/>
+        <xsl:attribute name="href">
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+        </xsl:attribute>
+
         <xsl:choose>
             <xsl:when test="name() = 'front'">Front Matter</xsl:when>
             <xsl:when test="name() = 'back'">Back Matter</xsl:when>
@@ -192,9 +201,23 @@
 
 <xsl:template match="div0 | div1 | div2 | div3" mode="breadcrumbs">
     <a>
-        <xsl:call-template name="generate-href-attribute"/>
-        <!-- TODO: neatly render head for this purpose -->
+        <xsl:attribute name="href">
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+        </xsl:attribute>
+
+        <!-- TODO: neatly render head for this purpose, and handle case it is missing -->
         <xsl:value-of select="head"/>
+    </a>
+</xsl:template>
+
+<xsl:template match="pb" mode="breadcrumbs">
+    <a>
+        <xsl:attribute name="href">
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+        </xsl:attribute>
+
+        <xsl:text>Page </xsl:text>
+        <xsl:value-of select="@n"/>
     </a>
 </xsl:template>
 

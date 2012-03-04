@@ -63,6 +63,7 @@
         <msg:message name="msgNotes">Notes</msg:message>
         <msg:message name="msgPage">Page</msg:message>
         <msg:message name="msgPages">Pages</msg:message>
+        <msg:message name="msgPageImage">Page Image</msg:message>
         <msg:message name="msgParagraph">Paragraph</msg:message>
         <msg:message name="msgParagraphs">Paragraphs</msg:message>
         <msg:message name="msgPart">Part</msg:message>
@@ -679,6 +680,7 @@
         <msg:message name="msgNotes">Noten</msg:message>
         <msg:message name="msgPage">Bladzijde</msg:message>
         <msg:message name="msgPages">Bladzijden</msg:message>
+        <msg:message name="msgPageImage">Afbeelding van Bladzijde</msg:message>
         <msg:message name="msgParagraph">Alinea</msg:message>
         <msg:message name="msgParagraphs">Alineas</msg:message>
         <msg:message name="msgPart">Deel</msg:message>

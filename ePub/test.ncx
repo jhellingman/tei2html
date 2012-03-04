@@ -20,17 +20,17 @@
       <text>Author of Work (Birth-year—Death-year) A. U. Thor W. Riter</text>
    </docAuthor>
    <navMap>
-      <navPoint playOrder="1" class="cover" id="xd23e1">
+      <navPoint playOrder="1" class="cover" id="xd24e1">
          <navLabel>
             <text>Cover Image</text>
          </navLabel>
          <content src="test-cover.xhtml#cover"/>
       </navPoint>
-      <navPoint playOrder="2" class="titlepage" id="xd23e1">
+      <navPoint playOrder="2" class="titlepage" id="xd24e1">
          <navLabel>
             <text>Title Page</text>
          </navLabel>
-         <content src="test-front-2.xhtml#xd23e94"/>
+         <content src="test-front-2.xhtml#xd24e94"/>
       </navPoint>
       <navPoint playOrder="3" class="part" id="bk1">
          <navLabel>
@@ -60,23 +60,23 @@
                <text>Chapter V Tables</text>
             </navLabel>
             <content src="test-ch05-1.xhtml"/>
-            <navPoint playOrder="8" class="section" id="xd23e632">
+            <navPoint playOrder="8" class="section" id="xd24e632">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd23e632"/>
+               <content src="test-ch05-3.xhtml#xd24e632"/>
             </navPoint>
-            <navPoint playOrder="9" class="section" id="xd23e654">
+            <navPoint playOrder="9" class="section" id="xd24e654">
                <navLabel>
                   <text>Section Lists</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd23e654"/>
+               <content src="test-ch05-3.xhtml#xd24e654"/>
             </navPoint>
-            <navPoint playOrder="10" class="section" id="xd23e783">
+            <navPoint playOrder="10" class="section" id="xd24e783">
                <navLabel>
                   <text>Some Further Tests</text>
                </navLabel>
-               <content src="test-ch05-3.xhtml#xd23e783"/>
+               <content src="test-ch05-3.xhtml#xd24e783"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="11" class="chapter" id="ch6">
@@ -109,42 +109,42 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="16" class="section" id="xd23e1037">
+         <navPoint playOrder="16" class="section" id="xd24e1037">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e1037"/>
+            <content src="test-index.xhtml#xd24e1037"/>
          </navPoint>
-         <navPoint playOrder="17" class="section" id="xd23e1042">
+         <navPoint playOrder="17" class="section" id="xd24e1042">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e1042"/>
+            <content src="test-index.xhtml#xd24e1042"/>
          </navPoint>
-         <navPoint playOrder="18" class="section" id="xd23e1047">
+         <navPoint playOrder="18" class="section" id="xd24e1047">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e1047"/>
+            <content src="test-index.xhtml#xd24e1047"/>
          </navPoint>
-         <navPoint playOrder="19" class="section" id="xd23e1052">
+         <navPoint playOrder="19" class="section" id="xd24e1052">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd23e1052"/>
+            <content src="test-index.xhtml#xd24e1052"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="20" class="contents" id="xd23e1">
+      <navPoint playOrder="20" class="contents" id="xd24e1">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-front-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="21" class="colophon" id="xd23e1">
+      <navPoint playOrder="21" class="colophon" id="xd24e1">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd23e1064"/>
+         <content src="test-backmatter.xhtml#xd24e1064"/>
       </navPoint>
    </navMap>
 </ncx>

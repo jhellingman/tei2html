@@ -170,7 +170,7 @@ sub processFile($)
         {
             my $tmpFile = mktemp('tmp-XXXXX');;
             print "Create HTML version...\n";
-            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption > $tmpFile");
+            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
             system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
             unlink($tmpFile);

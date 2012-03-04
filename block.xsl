@@ -21,10 +21,11 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     exclude-result-prefixes="xd"
-    version="1.0"
+    version="2.0"
     >
 
     <xd:doc type="stylesheet">
@@ -65,10 +66,19 @@
     <xsl:template name="pb">
         <xsl:choose>
             <xsl:when test="@n">
-                <span class="pagenum">[<a>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:value-of select="@n"/></a>]</span>
+                <span class="pagenum">
+                    <xsl:text>[</xsl:text>
+                    <a>
+                        <xsl:call-template name="generate-id-attribute"/>
+                        <xsl:call-template name="generate-href-attribute"/>
+                        <xsl:value-of select="@n"/>
+                    </a>
+                    <xsl:text>]</xsl:text>
+                    <xsl:if test="$optionGenerateFacsimile = 'Yes' and ./@facs">
+                        <xsl:text>&nbsp;</xsl:text>
+                        <a href="{$facsimilePath}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                    </xsl:if>
+                 </span>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="generate-anchor"/>
@@ -361,7 +371,7 @@
 
 
     <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css">
-        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend)))">
+        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
             <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
