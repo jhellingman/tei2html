@@ -24,7 +24,7 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
+    exclude-result-prefixes="f xd"
     version="2.0"
     >
 
