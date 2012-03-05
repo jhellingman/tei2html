@@ -4,7 +4,7 @@
 
 TEI P5 contains a [http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html facsimile element] to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.
 
-Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with or production, so we have two types of facsimiles: external images and internal images.
+Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with our ebook, so we have two types of facsimiles: external images and internal images.
 
 = Facsimile Element =
 
@@ -31,6 +31,8 @@ Alternatively, it can link to an element in the `facsimile` element, for example
 }}}
 
 This later case also allows to point to zones within a page, but that is currently out-of-scope for tei2html.
+
+The two ways should not be combined.
 
 = Generated Output =
 
@@ -70,13 +72,15 @@ In header
   * Page number (if encoded in `@n` attribute)
   * Title(s) of current division at bottom of page.
 
-Titles are indicated as follows:
+Titles are indicated as follows as bread-crumbs:
 
 {{{
-(Front | Body | Back |) > Title Level 1 > Title Level 2 > ...
+(Front | Body | Back |) > Title Level 1 > Title Level 2 > ... > Page 123
 }}}
 
 Each of these elements are active links, and will link back to those pages (content or facsimile view, to be decided)
+
+Issue: current code removes unused anchors in HTML, using a Perl script, that needs to be modified, as anchors used by those 'external' HTML files are not recognized.
 
 In Navigation
 
