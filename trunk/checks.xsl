@@ -236,6 +236,16 @@
     </xsl:template>
 
 
+    <!-- Correction corrects nothing -->
+
+    <xsl:template mode="checks" match="corr">
+        <xsl:if test="string(.) = string(@sic)">
+            <i:issue pos="{@pos}" code="T0002">Correction same as original text.</i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+
     <!-- Page-break sequence -->
 
     <xsl:template mode="checks" match="pb">
