@@ -24,15 +24,37 @@ The `@facs` attribute on `pb` elements can be used to point to scanned images of
   <pb n=123 facs="p123.gif"/>
 }}}
 
+Lets call this "direct" facsimile links.
+
 Alternatively, it can link to an element in the `facsimile` element, for example:
 
 {{{
   <pb n=123 facs="#facs123"/>
 }}}
 
+Lets call this "indirect" facsimile links.
+
 This later case also allows to point to zones within a page, but that is currently out-of-scope for tei2html.
 
-The two ways should not be combined.
+The two ways should not be combined. Currently, the code only allows the "direct" way of linking to page images.
+
+== Comparison of direct and indirect linking to facsimiles ==
+
+=== Direct ===
+
+Generate output wrapper file for each `pb`-element.
+
+Location in text version defined by that `pb`-element.
+
+Non-transcribed pages cannot be included (or should encode additional `pb`-elements)
+
+=== Indirect ===
+
+Generate output wrapper file for each `graphic`-element.
+
+Need to look-up referring `pb`-element to find location in text version.
+
+Not all `graphic`-elements might be referred to by a `pb`-element.
 
 = Generated Output =
 
@@ -81,6 +103,8 @@ Titles are indicated as follows as bread-crumbs:
 Each of these elements are active links, and will link back to those pages (content or facsimile view, to be decided)
 
 Issue: current code removes unused anchors in HTML, using a Perl script, that needs to be modified, as anchors used by those 'external' HTML files are not recognized.
+
+Issue: our current conventions put the `pb` just before the `div#`s. This will lead to the wrong header above the page-image for the first page of a section. Need to add check for case that `pb` element is (almost) last element of a `div#`.
 
 In Navigation
 
