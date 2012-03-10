@@ -11,9 +11,16 @@
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to create digital facsimile versions of TEI documents.</xd:short>
-        <xd:detail>This stylesheet can be used to generate a digital facsimile edition of a TEI document,
+        <xd:detail><p>This stylesheet can be used to generate a digital facsimile edition of a TEI document,
         provided that page-images are available, and encoded in the <code>@facs</code> attribute of
-        <code>pb</code>-elements. [STILL UNDER DEVELOPMENT; MUCH TODO]</xd:detail>
+        <code>pb</code>-elements.</p>
+        
+        <p>The stylesheet generates page-image wrapper pages and will take into account the
+        case that pb-elements can be placed at the very end of a division (so that the next
+        page will begin a new division), even though, strictly speaking, the page-break
+        is still part of the previous division.</p>
+        
+        <p>[THIS STYLESHEET IS STILL UNDER DEVELOPMENT; MUCH TODO]</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -25,18 +32,29 @@
         </facsimile>
     -->
 
-<xsl:template match="facsimile">
 
+<xsl:template match="facsimile">
+    <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="surface">
 
+<xsl:template match="surface">
+    <!-- TODO: Warning tei2html does not support surfaces -->
+    <xsl:apply-templates/>
 </xsl:template>
 
 <xsl:template match="graphic">
 
-</xsl:template>
+    <!-- TODO: Generate html wrapper for graphic -->
+    
+    <!-- TODO: Link to previous and next graphic -->
+    
+    <!-- TODO: Find location of corresponding pb in text -->
+    <xsl:if test="pb[@target = concat('#', @id)]">
+    
+    </xsl:if>
 
+</xsl:template>
 
 
 <xsl:function name="f:facsimile-filename" as="xs:string">
@@ -65,7 +83,6 @@
 </xsl:template>
 
 
-
 <xsl:template name="facsimile-css">
     <xsl:variable name="facsimile-css-file" select="concat($facsimilePath, '/facsimile.css')"/>
 
@@ -79,7 +96,6 @@
 
     </xsl:result-document>
 </xsl:template>
-
 
 
 <xsl:template name="facsimile-wrapper">
@@ -143,34 +159,98 @@
         <!-- Note: some pb elements do not have a @facs attribute, typically those in footnotes; we can ignore those. -->
         <div class="pager-navigation">
             <xsl:if test="preceding::pb[@facs]">
-                <a href="{f:facsimile-filename(preceding::pb[@facs][1])}">Previous</a>
+                <a href="{f:facsimile-filename(preceding::pb[@facs][1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
                 <xsl:text> | </xsl:text>
             </xsl:if>
 
-            <xsl:text>Page </xsl:text>
+            <xsl:value-of select="f:message('msgPage')"/>
+            <xsl:text> </xsl:text>
             <xsl:if test="@n">
                 <xsl:value-of select="@n"/>
             </xsl:if>
 
             <xsl:if test="following::pb[@facs]">
                 <xsl:text> | </xsl:text>
-                <a href="{f:facsimile-filename(following::pb[@facs][1])}">Next</a>
+                <a href="{f:facsimile-filename(following::pb[@facs][1])}"><xsl:value-of select="f:message('msgNext')"/></a>
             </xsl:if>
         </div>
     </div>
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Find out in which div-elements a given pd-element is at the end.</xd:short>
+    <xd:detail>Find out in which div-elements a given pd-element is at the end, which means, there is no content following it.
+    This is done in the following steps:
+    
+    <ol>
+        <li>Select all relevant (div-element) ancestors.</li>
+        <li>Select all content following the pb that is a descendent of the same ancestor.</li>
+        <li>Determine the length of text of that content.</li>
+        <li>Include the div-element in the result, if that length is zero.</li>
+    </ol>
+    </xd:detail>
+</xd:doc>
+
+<xsl:function name="f:is-pb-at-end-of-div">
+    <xsl:param name="pb"/>
+
+    <xsl:variable name="div-parent" select="($pb/ancestor::front | $pb/ancestor::body | $pb/ancestor::back | $pb/ancestor::div0 | $pb/ancestor::div1 | $pb/ancestor::div2 | $pb/ancestor::div3)"/>
+
+    <xsl:for-each select="$div-parent">
+        <!-- Need to store parent-id as we cannot access the context node in the second line below. -->
+        <xsl:variable name="parent-id" select="generate-id(.)"/>
+        <xsl:variable name="following-pb" select="$pb/following::node()[ancestor::*[generate-id() = $parent-id]]"/>
+        <xsl:variable name="following-pb-length" select="string-length(normalize-space(string-join($following-pb, '')))"/>
+        <xsl:if test="$following-pb-length = 0">
+            <xsl:sequence select="."/>
+        </xsl:if>
+    </xsl:for-each>
+</xsl:function>
+
+
+<xd:doc>
+    <xd:short>Create bread-crumb navigation for the page.</xd:short>
+    <xd:detail>Create bread-crumb navigation for the current page. Some complexity arises as we need to take into
+    account that sometimes the pb-element is placed at the very end of a division, and the page being displayed
+    this shows the beginning of the next division.
+    </xd:detail>
+</xd:doc>
+
 <xsl:template name="breadcrumb-navigation">
 
-    <!-- Where are we in the document structure at the top of this page?
-         Collect this information in a sequence of anchors: <a href="">Text</a>
-    -->
+    <!-- Get the highest-level division of which the pb is at the end -->
+    <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div(.)[1]"/>
+    <xsl:variable name="pb" select="."/>
+    <xsl:if test="$ending-div">
+        <xsl:message terminate="no">page-break <xsl:value-of select="$pb/@n"/> is at the end of a division, so will use next division.</xsl:message>
+    </xsl:if>
 
-    <!-- TODO: puzzle out what works best with our conventions for PB element placement (probably going to next pb) -->
+    <xsl:choose>
+        <xsl:when test="$ending-div">
+            <xsl:call-template name="breadcrumb-navigation-for-node">
+                <!-- Find first of following div0, div1, div2, div3 -->
+                <xsl:with-param name="node" select="($ending-div/following::div0 | $ending-div/following::div1 | $ending-div/following::div2 | $ending-div/following::div3)[1]"/>
+                <xsl:with-param name="pb" select="."/>
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="breadcrumb-navigation-for-node"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+
+<xsl:template name="breadcrumb-navigation-for-node">
+    <xsl:param name="node" select="."/>
+    <xsl:param name="pb" select="."/>
 
     <xsl:variable name="breadcrumbs">
-        <xsl:apply-templates select="ancestor::front | ancestor::body | ancestor::back | ancestor::div0 | ancestor::div1 | ancestor::div2 | ancestor::div3 | ." mode="breadcrumbs"/>
+        <!-- No problem $node and $pb are same node in default case: XSLT union will make sure it is used only once -->
+        <xsl:apply-templates select="$node/ancestor::front | $node/ancestor::body | $node/ancestor::back | $node/ancestor::div0 | $node/ancestor::div1 | $node/ancestor::div2 | $node/ancestor::div3 | $node | $pb" mode="breadcrumbs">
+            <!-- Sort by depth of node, to make sure the pb element is last in line -->
+            <xsl:sort select="count(ancestor::*)"/>
+        </xsl:apply-templates>
     </xsl:variable>
 
     <div class="breadcrumb-navigation">
@@ -191,9 +271,9 @@
         </xsl:attribute>
 
         <xsl:choose>
-            <xsl:when test="name() = 'front'">Front Matter</xsl:when>
-            <xsl:when test="name() = 'back'">Back Matter</xsl:when>
-            <xsl:otherwise>Body Matter</xsl:otherwise>
+            <xsl:when test="name() = 'front'"><xsl:value-of select="f:message('msgFrontMatter')"/></xsl:when>
+            <xsl:when test="name() = 'back'"><xsl:value-of select="f:message('msgBackMatter')"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="f:message('msgBodyMatter')"/></xsl:otherwise>
         </xsl:choose>
     </a>
 </xsl:template>
@@ -210,13 +290,15 @@
     </a>
 </xsl:template>
 
+
 <xsl:template match="pb" mode="breadcrumbs">
     <a>
         <xsl:attribute name="href">
             <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
         </xsl:attribute>
 
-        <xsl:text>Page </xsl:text>
+        <xsl:value-of select="f:message('msgPage')"/>
+        <xsl:text> </xsl:text>
         <xsl:value-of select="@n"/>
     </a>
 </xsl:template>
