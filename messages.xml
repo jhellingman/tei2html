@@ -60,6 +60,9 @@
         <msg:message name="msgAcknowledgements">Acknowledgements</msg:message>
         <msg:message name="msgEpigraph">Epigraph</msg:message>
         <msg:message name="msgNote">Note</msg:message>
+        <msg:message name="msgFrontMatter">Front Matter</msg:message>
+        <msg:message name="msgBodyMatter">Body Matter</msg:message>
+        <msg:message name="msgBackMatter">Back Matter</msg:message>
         <msg:message name="msgNotes">Notes</msg:message>
         <msg:message name="msgPage">Page</msg:message>
         <msg:message name="msgPages">Pages</msg:message>
@@ -669,6 +672,11 @@
         <msg:message name="msgChapter">Hoofdstuk</msg:message>
         <msg:message name="msgChapters">Hoofdstukken</msg:message>
         <msg:message name="msgContents">Inhoud</msg:message>
+
+        <msg:message name="msgFrontMatter">Voorwerk</msg:message>
+        <msg:message name="msgBodyMatter">Hoofdwerk</msg:message>
+        <msg:message name="msgBackMatter">Nawerk</msg:message>
+
         <msg:message name="msgFigure">Figuur</msg:message>
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgIllustration">Illustratie</msg:message>
