@@ -50,12 +50,17 @@
     <!-- TODO: Link to previous and next graphic -->
     
     <!-- TODO: Find location of corresponding pb in text -->
-    <xsl:if test="pb[@target = concat('#', @id)]">
+    <xsl:if test="pb[@facs = concat('#', @id)]">
     
     </xsl:if>
 
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Generate a file-name for the HTML wrapper page.</xd:short>
+    <xd:detail>The name is derived from the generated id, which in turn uses the element id, if present.</xd:detail>
+</xd:doc>
 
 <xsl:function name="f:facsimile-filename" as="xs:string">
     <xsl:param name="pb" as="node()"/>
@@ -83,6 +88,12 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Create a CSS file for wrapper pages.</xd:short>
+    <xd:detail>Create a CSS file for wrapper pages. The calling template needs to make sure this is generated
+    only once per document.</xd:detail>
+</xd:doc>
+
 <xsl:template name="facsimile-css">
     <xsl:variable name="facsimile-css-file" select="concat($facsimilePath, '/facsimile.css')"/>
 
@@ -98,6 +109,11 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Create the HTML file for a wrapper page.</xd:short>
+    <xd:detail>Create the HTML file for a wrapper page.</xd:detail>
+</xd:doc>
+
 <xsl:template name="facsimile-wrapper">
     <xsl:variable name="facsimile-file" select="concat($facsimilePath, concat('/', f:facsimile-filename(.)))"/>
 
@@ -107,6 +123,12 @@
     </xsl:result-document>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Create the wrapper HTML content for a page.</xd:short>
+    <xd:detail>Create the wrapper HTML content for a page, calling a template for each of the main parts of
+    that page.</xd:detail>
+</xd:doc>
 
 <xsl:template name="facsimile-html">
     <html>
@@ -120,15 +142,22 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Create HTML head-elements for a page.</xd:short>
+    <xd:detail>Create HTML head-elements for a page.</xd:detail>
+</xd:doc>
+
 <xsl:template name="facsimile-html-head">
     <head>
         <title>
             <!-- TODO: neat method to render title for this and similar cases -->
-            <xsl:value-of select="$title"/>
-            <xsl:text> by </xsl:text>
             <xsl:value-of select="$author"/>
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="$title"/>
             <xsl:if test="@n">
-                <xsl:text>, Page </xsl:text>
+                <xsl:text>, </xsl:text>
+                <xsl:value-of select="f:message('msgPage')"/>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="@n"/>
             </xsl:if>
         </title>
@@ -137,20 +166,33 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Create the title for a page.</xd:short>
+    <xd:detail>Create the title for a page.</xd:detail>
+</xd:doc>
+
 <xsl:template name="facsimile-head">
     <div class="facsimile-head">
         <h2>
-            <xsl:value-of select="$title"/>
-            <xsl:text> by </xsl:text>
             <xsl:value-of select="$author"/>
+            <xsl:text>, </xsl:text>
+            <i><xsl:value-of select="$title"/></i>
             <xsl:if test="@n">
-                <xsl:text>, Page </xsl:text>
+                <xsl:text>, </xsl:text>
+                <xsl:value-of select="f:message('msgPage')"/>
+                <xsl:text> </xsl:text>
                 <xsl:value-of select="@n"/>
             </xsl:if>
         </h2>
     </div>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Create navigation-elements for a page.</xd:short>
+    <xd:detail>Create navigation elements for a page: one set is based on the sequence of pages, the other on
+    the content-structure of the document.</xd:detail>
+</xd:doc>
 
 <xsl:template name="facsimile-navigation">
     <div class="facsimile-navigation">
@@ -241,6 +283,12 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Create bread-crumb navigation for a node.</xd:short>
+    <xd:detail>Create bread-crumb navigation for the the given node (and related pb-element, which may or may not be the same
+    element. The bread-crumbs will contain all ancestor div-elements, and the front, body, or back matter.</xd:detail>
+</xd:doc>
+
 <xsl:template name="breadcrumb-navigation-for-node">
     <xsl:param name="node" select="."/>
     <xsl:param name="pb" select="."/>
@@ -311,12 +359,12 @@
             <xsl:when test="starts-with(@facs, '#')">
                 <!-- TODO: warning message if graphic not present -->
                 <xsl:if test="//graphic[@id = substring(@facs, 2)]">
-                    <img src="{//graphic[@id = substring(@facs, 2)][1]//@url}" alt="Page image {@n}"/>
+                    <img src="{//graphic[@id = substring(@facs, 2)][1]//@url}" alt="{f:message('msgPageImage')} {@n}"/>
                 </xsl:if>
             </xsl:when>
             <!-- Direct reference to image file -->
             <xsl:otherwise>
-                <img src="{@facs}" alt="Page image {@n}"/>
+                <img src="{@facs}" alt="{f:message('msgPageImage')} {@n}"/>
             </xsl:otherwise>
         </xsl:choose>
     </div>
