@@ -20,7 +20,7 @@
         page will begin a new division), even though, strictly speaking, the page-break
         is still part of the previous division.</p>
         
-        <p>[THIS STYLESHEET IS STILL UNDER DEVELOPMENT; MUCH TODO]</p></xd:detail>
+        <p>[THIS STYLESHEET IS STILL UNDER DEVELOPMENT; MUCH TODO] TODO: fix links in generated HTML if graphic are used to generate wrappers.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -43,17 +43,12 @@
     <xsl:apply-templates/>
 </xsl:template>
 
-<xsl:template match="graphic">
 
-    <!-- TODO: Generate html wrapper for graphic -->
-    
-    <!-- TODO: Link to previous and next graphic -->
-    
-    <!-- TODO: Find location of corresponding pb in text -->
-    <xsl:if test="pb[@facs = concat('#', @id)]">
-    
+<xsl:template match="facsimile/graphic">
+    <xsl:if test="not(preceding::graphic)">
+        <xsl:call-template name="facsimile-css"/>
     </xsl:if>
-
+    <xsl:call-template name="facsimile-wrapper"/>
 </xsl:template>
 
 
@@ -77,8 +72,14 @@
 </xsl:function>
 
 
+<xd:doc>
+    <xd:short>Handle a pb-element with a @facs-attribute.</xd:short>
+    <xd:detail>Handle a pb-element with a @facs-attribute, but only if this refers directly to
+    a page-image.</xd:detail>
+</xd:doc>
+
 <xsl:template match="pb" mode="facsimile">
-    <xsl:if test="@facs">
+    <xsl:if test="@facs and not(starts-with(@facs, '#'))">
         <xsl:if test="not(preceding::pb[@facs])">
             <xsl:call-template name="facsimile-css"/>
         </xsl:if>
@@ -135,7 +136,14 @@
         <xsl:call-template name="facsimile-html-head"/>
         <body>
             <xsl:call-template name="facsimile-head"/>
-            <xsl:call-template name="facsimile-navigation"/>
+            <xsl:choose>
+                <xsl:when test="name() = 'graphic'">
+                    <xsl:call-template name="facsimile-navigation-graphic"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="facsimile-navigation"/>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:call-template name="facsimile-image"/>
         </body>
     </html>
@@ -197,25 +205,61 @@
 <xsl:template name="facsimile-navigation">
     <div class="facsimile-navigation">
         <xsl:call-template name="breadcrumb-navigation"/>
+        <xsl:call-template name="pager-navigation"/>
+    </div>
+</xsl:template>
 
-        <!-- Note: some pb elements do not have a @facs attribute, typically those in footnotes; we can ignore those. -->
-        <div class="pager-navigation">
-            <xsl:if test="preceding::pb[@facs]">
-                <a href="{f:facsimile-filename(preceding::pb[@facs][1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
-                <xsl:text> | </xsl:text>
-            </xsl:if>
 
-            <xsl:value-of select="f:message('msgPage')"/>
-            <xsl:text> </xsl:text>
-            <xsl:if test="@n">
-                <xsl:value-of select="@n"/>
-            </xsl:if>
+<xsl:template name="facsimile-navigation-graphic">
+    <div class="facsimile-navigation">
+        <xsl:variable name="value" select="concat('#', @id)"/>
+        <xsl:call-template name="breadcrumb-navigation">
+            <xsl:with-param name="pb" select="//pb[@facs = $value][1]"/>
+        </xsl:call-template>
+        <xsl:call-template name="pager-navigation-graphic"/>
+    </div>
+</xsl:template>
 
-            <xsl:if test="following::pb[@facs]">
-                <xsl:text> | </xsl:text>
-                <a href="{f:facsimile-filename(following::pb[@facs][1])}"><xsl:value-of select="f:message('msgNext')"/></a>
-            </xsl:if>
-        </div>
+
+<xsl:template name="pager-navigation">
+    <!-- Note: some pb elements do not have a @facs attribute, typically those in footnotes; we can ignore those. -->
+    <div class="pager-navigation">
+        <xsl:if test="preceding::pb[@facs]">
+            <a href="{f:facsimile-filename(preceding::pb[@facs][1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
+            <xsl:text> | </xsl:text>
+        </xsl:if>
+
+        <xsl:value-of select="f:message('msgPage')"/>
+        <xsl:text> </xsl:text>
+        <xsl:if test="@n">
+            <xsl:value-of select="@n"/>
+        </xsl:if>
+
+        <xsl:if test="following::pb[@facs]">
+            <xsl:text> | </xsl:text>
+            <a href="{f:facsimile-filename(following::pb[@facs][1])}"><xsl:value-of select="f:message('msgNext')"/></a>
+        </xsl:if>
+    </div>
+</xsl:template>
+
+
+<xsl:template name="pager-navigation-graphic">
+    <div class="pager-navigation">
+        <xsl:if test="preceding::graphic">
+            <a href="{f:facsimile-filename(preceding::graphic[1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
+            <xsl:text> | </xsl:text>
+        </xsl:if>
+
+        <xsl:value-of select="f:message('msgPage')"/>
+        <xsl:text> </xsl:text>
+        <xsl:if test="@n">
+            <xsl:value-of select="@n"/>
+        </xsl:if>
+
+        <xsl:if test="following::graphic">
+            <xsl:text> | </xsl:text>
+            <a href="{f:facsimile-filename(following::graphic[1])}"><xsl:value-of select="f:message('msgNext')"/></a>
+        </xsl:if>
     </div>
 </xsl:template>
 
@@ -260,10 +304,10 @@
 </xd:doc>
 
 <xsl:template name="breadcrumb-navigation">
+    <xsl:param name="pb" select="."/>
 
     <!-- Get the highest-level division of which the pb is at the end -->
-    <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div(.)[1]"/>
-    <xsl:variable name="pb" select="."/>
+    <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div($pb)[1]"/>
     <xsl:if test="$ending-div">
         <xsl:message terminate="no">page-break <xsl:value-of select="$pb/@n"/> is at the end of a division, so will use next division.</xsl:message>
     </xsl:if>
@@ -273,11 +317,14 @@
             <xsl:call-template name="breadcrumb-navigation-for-node">
                 <!-- Find first of following div0, div1, div2, div3 -->
                 <xsl:with-param name="node" select="($ending-div/following::div0 | $ending-div/following::div1 | $ending-div/following::div2 | $ending-div/following::div3)[1]"/>
-                <xsl:with-param name="pb" select="."/>
+                <xsl:with-param name="pb" select="$pb"/>
             </xsl:call-template>
         </xsl:when>
         <xsl:otherwise>
-            <xsl:call-template name="breadcrumb-navigation-for-node"/>
+            <xsl:call-template name="breadcrumb-navigation-for-node">
+                <xsl:with-param name="node" select="$pb"/>
+                <xsl:with-param name="pb" select="$pb"/>
+            </xsl:call-template>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
@@ -355,14 +402,18 @@
 <xsl:template name="facsimile-image">
     <div class="facsimile-image">
         <xsl:choose>
-            <!-- Reference to graphic in facsimile-element elsewhere -->
+            <!-- graphic-element that references an image file -->
+            <xsl:when test="@url">
+                <img src="{@url}" alt="{f:message('msgPageImage')} {@n}"/>
+            </xsl:when>
+            <!-- pb-element that references a graphic-element elsewhere -->
             <xsl:when test="starts-with(@facs, '#')">
                 <!-- TODO: warning message if graphic not present -->
                 <xsl:if test="//graphic[@id = substring(@facs, 2)]">
                     <img src="{//graphic[@id = substring(@facs, 2)][1]//@url}" alt="{f:message('msgPageImage')} {@n}"/>
                 </xsl:if>
             </xsl:when>
-            <!-- Direct reference to image file -->
+            <!-- pb-element that directly references an image file -->
             <xsl:otherwise>
                 <img src="{@facs}" alt="{f:message('msgPageImage')} {@n}"/>
             </xsl:otherwise>
