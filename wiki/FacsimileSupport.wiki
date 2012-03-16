@@ -54,7 +54,7 @@ Non-transcribed pages cannot be included (or should encode additional `pb`-eleme
 
 Generate output wrapper file for each `graphic`-element.
 
-Need to look-up referring `pb`-element to find location in text version.
+Need to look-up referring `pb`-element to find location in text version. This may not be present, in which case we cannot use structural navigation guides (or use the next `graphic` element that does have a matching `pb`)
 
 Not all `graphic`-elements might be referred to by a `pb`-element.
 
