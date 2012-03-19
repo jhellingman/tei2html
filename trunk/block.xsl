@@ -76,7 +76,18 @@
                     <xsl:text>]</xsl:text>
                     <xsl:if test="$optionGenerateFacsimile = 'Yes' and ./@facs">
                         <xsl:text>&nbsp;</xsl:text>
-                        <a href="{$facsimilePath}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                        <xsl:choose>
+                            <xsl:when test="starts-with(@facs, '#')">
+                                <xsl:variable name="id" select="substring(@facs, 2)"/>
+                                <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
+                                <xsl:if test="$graphic">
+                                    <a href="{$facsimilePath}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <a href="{$facsimilePath}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:if>
                  </span>
             </xsl:when>
