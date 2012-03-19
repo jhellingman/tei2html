@@ -98,7 +98,7 @@
     <xsl:param name="optionExternalLinksTable" select="'No'"/>
 
     <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
-    <xsl:param name="optionGenerateFacsimile" select="'No'"/>
+    <xsl:param name="optionGenerateFacsimile" select="'Yes'"/>
 
 
     <!--====================================================================-->

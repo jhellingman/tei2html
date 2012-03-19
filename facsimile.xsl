@@ -18,9 +18,7 @@
         <p>The stylesheet generates page-image wrapper pages and will take into account the
         case that pb-elements can be placed at the very end of a division (so that the next
         page will begin a new division), even though, strictly speaking, the page-break
-        is still part of the previous division.</p>
-        
-        <p>[THIS STYLESHEET IS STILL UNDER DEVELOPMENT; MUCH TODO] TODO: fix links in generated HTML if graphic are used to generate wrappers.</p></xd:detail>
+        is still part of the previous division.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -39,10 +37,15 @@
 
 
 <xsl:template match="surface">
-    <!-- TODO: Warning tei2html does not support surfaces -->
+    <xsl:message terminate="no">Warning: tei2html does not support the surface element.</xsl:message>
     <xsl:apply-templates/>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Handle a graphic element in the facsimile.</xd:short>
+    <xd:detail>Handle a graphic element, by generating a wrapper file for the referenced graphic.</xd:detail>
+</xd:doc>
 
 <xsl:template match="facsimile/graphic">
     <xsl:if test="not(preceding::graphic)">
@@ -58,12 +61,12 @@
 </xd:doc>
 
 <xsl:function name="f:facsimile-filename" as="xs:string">
-    <xsl:param name="pb" as="node()"/>
+    <xsl:param name="node" as="node()"/>
 
     <xsl:variable name="filename">
         <xsl:text>page-</xsl:text>
             <xsl:call-template name="generate-id-for">
-                <xsl:with-param name="node" select="$pb"/>
+                <xsl:with-param name="node" select="$node"/>
             </xsl:call-template>
         <xsl:text>.html</xsl:text>
     </xsl:variable>
@@ -75,7 +78,7 @@
 <xd:doc>
     <xd:short>Handle a pb-element with a @facs-attribute.</xd:short>
     <xd:detail>Handle a pb-element with a @facs-attribute, but only if this refers directly to
-    a page-image.</xd:detail>
+    a page-image (otherwise, it will be handled by the graphic element referred to).</xd:detail>
 </xd:doc>
 
 <xsl:template match="pb" mode="facsimile">
@@ -204,19 +207,20 @@
 
 <xsl:template name="facsimile-navigation">
     <div class="facsimile-navigation">
-        <xsl:call-template name="breadcrumb-navigation"/>
         <xsl:call-template name="pager-navigation"/>
+        <xsl:call-template name="breadcrumb-navigation"/>
     </div>
 </xsl:template>
 
 
 <xsl:template name="facsimile-navigation-graphic">
     <div class="facsimile-navigation">
+        <xsl:call-template name="pager-navigation-graphic"/>
         <xsl:variable name="value" select="concat('#', @id)"/>
         <xsl:call-template name="breadcrumb-navigation">
             <xsl:with-param name="pb" select="//pb[@facs = $value][1]"/>
         </xsl:call-template>
-        <xsl:call-template name="pager-navigation-graphic"/>
+        <!-- TODO: handle case where no matching pb is found -->
     </div>
 </xsl:template>
 
