@@ -52,12 +52,47 @@
         by a space. Internally this will be converted to a sequence.</xd:detail>
     </xd:doc>
 
+    <!--
+    -->
     <xsl:param name="en-stopwords" select="'a about an are as at be by for from how I in is it of on or that the this to was what when where who will with'"/>
-
     <xsl:param name="nl-stopwords" select="'aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had heb hebben heeft hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou'"/>
 
-    <xsl:variable name="en-stopwords-sequence" select="tokenize($en-stopwords, ' ')"/>
-    <xsl:variable name="nl-stopwords-sequence" select="tokenize($nl-stopwords, ' ')"/>
+    <!--
+    <xsl:param name="en-stopwords" select="'@/Bin/dic/en.dic'"/>
+    <xsl:param name="nl-stopwords" select="'@/Bin/dic/nl.dic'"/>
+    -->    
+
+    <xsl:variable name="en-stopwords-sequence" select="f:load-stopwords($en-stopwords)"/>
+    <xsl:variable name="nl-stopwords-sequence" select="f:load-stopwords($nl-stopwords)"/>
+
+
+    <xd:doc>
+        <xd:short>Load stopwords.</xd:short>
+        <xd:detail>Function to load stopwords, either from a string, or from a file, if the string starts
+        with an @-sign.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:load-stopwords" as="xs:string*">
+        <xsl:param name="source"/>
+
+        <xsl:sequence select="if (substring($source, 1, 1) = '@') then f:load-dictionary(substring($source, 2)) else tokenize($source, ' ')"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Load dictionary from a file.</xd:short>
+        <xd:detail>Load a dictionary from a file, assumed to have one word per line, and encoded
+        in the iso-8859-1 character set.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:load-dictionary" as="xs:string*">
+        <xsl:param name="filename"/>
+
+        <xsl:message terminate="no">Loading stopwords from file: <xsl:value-of select="$filename"/></xsl:message>
+        <xsl:variable name="file-contents" as="xs:string" select="unparsed-text($filename, 'iso-8859-1')"/>
+        <xsl:sequence select="tokenize($file-contents, '\r?\n')"/>
+    </xsl:function>
+
 
 
     <xd:doc>
