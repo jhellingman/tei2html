@@ -298,7 +298,7 @@ sub runChecks($)
 
         # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
         system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
-		unlink ($newname);
+        unlink ($newname);
 
         sgml2xml($tmpFile, $basename . "-pos.xml");
         $newname = $basename . "-pos.xml";
@@ -307,7 +307,7 @@ sub runChecks($)
     }
 
     system ("$saxon2 \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
-	unlink ($newname);
+    unlink ($newname);
 }
 
 
@@ -341,6 +341,7 @@ sub sgml2xml($$)
     $tmpFile0 = transcribeNotation($tmpFile0, "<HI>", "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                 "$patcdir/indic/tm2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<RU>", "Russian",               "$patcdir/cyrillic/cy2ucs.pat");
 
     print "Check SGML...\n";
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
