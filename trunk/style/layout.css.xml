@@ -754,12 +754,6 @@ ul { list-style-type: none; }
     padding-right: 18px;
 }
 
-.facslink
-{
-    background-image: url(images/page-image.png);
-    padding-right: 10px;
-}
-
 .catlink
 {
     background-image: url(images/card.png);

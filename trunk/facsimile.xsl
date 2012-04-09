@@ -56,6 +56,36 @@
 
 
 <xd:doc>
+    <xd:short>Output related CSS</xd:short>
+    <xd:detail>Output related CSS for main, but only if needed by the source.</xd:detail>
+</xd:doc>
+
+<xsl:template match="facsimile/graphic" mode="css">
+    <xsl:if test="not(preceding::graphic)">
+        <xsl:call-template name="main-facsimile-css"/>
+    </xsl:if>
+</xsl:template>
+
+
+<xsl:template match="pb" mode="css">
+    <xsl:if test="@facs and not(starts-with(@facs, '#'))">
+        <xsl:if test="not(preceding::pb[@facs])">
+            <xsl:call-template name="main-facsimile-css"/>
+        </xsl:if>
+    </xsl:if>
+</xsl:template>
+
+
+<xsl:template name="main-facsimile-css">
+.facslink
+{
+    background-image: url(images/page-image.png);
+    padding-right: 10px;
+}
+</xsl:template>
+
+
+<xd:doc>
     <xd:short>Generate a file-name for the HTML wrapper page.</xd:short>
     <xd:detail>The name is derived from the generated id, which in turn uses the element id, if present.</xd:detail>
 </xd:doc>

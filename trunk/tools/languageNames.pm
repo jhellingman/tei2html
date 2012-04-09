@@ -19,6 +19,7 @@ BEGIN
     $langNameHash{"bo"}         = "Tibetan";
     $langNameHash{"bo-latn"}    = "Tibetan (Latin transcription)";
 
+    $langNameHash{"ca"}         = "Catalan";
     $langNameHash{"cy"}         = "Welsh";
 
     $langNameHash{"da"}         = "Danish";
@@ -53,6 +54,7 @@ BEGIN
     $langNameHash{"hr"}         = "Croatian";
 
     $langNameHash{"it"}         = "Italian";
+    $langNameHash{"is"}         = "Icelandic";
 
     $langNameHash{"jp"}         = "Japanese";
     $langNameHash{"jp-hira"}    = "Japanese (Hiragana)";
@@ -115,6 +117,10 @@ BEGIN
     $langNameHash{"tm-latn"}    = "Tamil (Latin transcription)";
     $langNameHash{"tr"}         = "Turkish";
 
+    $langNameHash{"vi"}         = "Vietnamese";
+
+    $langNameHash{"yi"}         = "Yiddish";
+
     $langNameHash{"zh"}         = "Chinese";
     $langNameHash{"zh-latn"}    = "Chinese (Latin transcription)";
 
@@ -152,10 +158,8 @@ BEGIN
 }
 
 
-
 sub getLanguage
 {
     my $code = shift;
     return $langNameHash{$code};
 }
-
