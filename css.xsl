@@ -242,6 +242,8 @@
         <!-- Then follow the row-related rendering rules -->
         <xsl:apply-templates select="TEI.2/text//row[@rend]" mode="css-row"/>
 
+        <!-- Handle the rest of the document -->
+        <xsl:apply-templates select="/TEI.2/facsimile" mode="css"/>
         <xsl:apply-templates select="/TEI.2/text" mode="css"/>
     </xsl:template>
 
