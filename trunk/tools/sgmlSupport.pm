@@ -1759,6 +1759,12 @@ BEGIN
     $ent{"imacracu"}    = chr(0x012B) . chr(0x0301); # i with macron and acute
     $ent{"omacracu"}    = chr(0x014D) . chr(0x0301); # o with macron and acute
     $ent{"umacracu"}    = chr(0x016B) . chr(0x0301); # u with macron and acute
+    $ent{"Umacracu"}    = chr(0x016A) . chr(0x0301); # U with macron and acute
+
+    $ent{"amacrcir"}    = chr(0x0101) . chr(0x0302); # a with macron and circumflex
+    $ent{"imacrcir"}    = chr(0x012B) . chr(0x0302); # i with macron and circumflex
+    $ent{"omacrcir"}    = chr(0x014D) . chr(0x0302); # o with macron and circumflex
+    $ent{"umacrcir"}    = chr(0x016B) . chr(0x0302); # u with macron and circumflex
 
     $ent{"amacrdotb"}   = chr(0x0101) . chr(0x0323); # a with macron and dot below
 
