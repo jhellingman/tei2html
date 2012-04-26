@@ -22,3 +22,8 @@ When a cover image is missing, a title page image can be used instead, as long a
 
 
 See also: http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/
+
+
+== Cover Thumbnail ==
+
+Sometimes it makes sense to also have a cover thumbnail which isn't just a reduction of the (original) cover page. To do this, just specify (as a hack) `cover-thumbnail(imagefile)` in the rend attribute of the text element. Similarly, `cover-image(imagefile)` can be used to specify a cover image that is not part of the original book, for those who like to have both. [TODO: implement this].
