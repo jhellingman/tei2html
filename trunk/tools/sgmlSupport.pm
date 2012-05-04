@@ -1547,9 +1547,11 @@ BEGIN
 
     # Requiring combining diacritics
 
+    $ent{"mgrave"}      = "m" . chr(0x0300); # m with grave
+
     $ent{"oeacute"}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
     $ent{"OEacute"}     = chr(0x0152) . chr(0x0301); # OE ligature with acute
-    $ent{"hacute"}     = h . chr(0x0301); # h with acute
+    $ent{"hacute"}      = "h" . chr(0x0301); # h with acute
 
     $ent{"Kcirc"}       = "K" . chr(0x0302); # K with circumflex
     $ent{"kcirc"}       = "k" . chr(0x0302); # k with circumflex
