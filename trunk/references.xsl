@@ -42,7 +42,7 @@
 
     <xsl:template match="ref[@target]">
         <xsl:variable name="target" select="@target"/>
-        <xsl:variable name="targetNode" select="key('id', $target)"/>
+        <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">

@@ -121,7 +121,7 @@ if ($useDatabase)
 
 report();
 
-reportXML();
+# reportXML();
 
 # heatMapDocument();
 
