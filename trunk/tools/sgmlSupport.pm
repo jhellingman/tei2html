@@ -22,7 +22,7 @@ BEGIN
     $smallLetter = "([a-z]|$smallAccLetter|$smallLigLetter|$smallSpecLetter)";
     $letter = "($capLetter|$smallLetter)";
 
-    # mapping from SGML entities to Unicode 
+    # mapping from SGML entities to Unicode
     # Derived from SGML.TXT, downloaded from www.unicode.org
     %ent = ();
     $ent{"Aacgr"}       = chr(0x0386);  #  GREEK CAPITAL LETTER ALPHA WITH TONOS
@@ -1222,7 +1222,7 @@ BEGIN
     $ent{"igdgr"}       = chr(0x1fd2); # "`\"i"
     $ent{"iadgr"}       = chr(0x1fd3); # "'\"i"
     $ent{"icdgr"}       = chr(0x1fd7); # "=\"i"
-    
+
     $ent{"kgr"}         = chr(0x3ba); # "k"
     $ent{"Kgr"}         = chr(0x39a); # "K"
 
@@ -1542,6 +1542,9 @@ BEGIN
     $ent{"AOacute"}     = chr(0xa734) . chr(0x0301); # AO ligature with acute
 
 
+    $ent{"N"}			= "N"; # Capital letter N (used with special meaning in Wolff's dictionary.)
+
+
     ###############################################################################
     # things not in Unicode (as a single character)
 
@@ -1712,9 +1715,9 @@ BEGIN
     $ent{"bbar"}        = chr(0x0180); # b with stroke through stem
 
     # Requiring wide combining diacritics
-    $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve 
+    $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve
 
-    $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron 
+    $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron
 
     $ent{"ghbarb"}      = "g" . chr(0x035F) . "h"; # gh with double macron below
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below
@@ -1805,7 +1808,7 @@ BEGIN
     $ent{"ringsun"}     = "[ringsun]";          # symbol for ring around the sun
     $ent{"ringmoon"}    = "[ringmoon]";         # symbol for ring around the moon
 
-    $ent{"handptr"}     = chr(0x261E);			# White right pointing index 
+    $ent{"handptr"}     = chr(0x261E);			# White right pointing index
     $ent{"diamond"}     = chr(0x25C6);			# Black diamond
 
     # Greek additions
@@ -1900,19 +1903,19 @@ sub sgml2utf_common
         my $entity = $1;
         $source = $';
 
-        if ($forHtml == 1 && $entity eq "lt") 
+        if ($forHtml == 1 && $entity eq "lt")
         {
             $char = "&lt;";
         }
-        elsif ($forHtml == 1 && $entity eq "gt") 
+        elsif ($forHtml == 1 && $entity eq "gt")
         {
             $char = "&gt;";
         }
-        elsif ($forHtml == 1 && $entity eq "quot") 
+        elsif ($forHtml == 1 && $entity eq "quot")
         {
             $char = "&quot;";
         }
-        elsif ($forHtml == 1 && $entity eq "amp") 
+        elsif ($forHtml == 1 && $entity eq "amp")
         {
             $char = "&amp;";
         }
@@ -1976,7 +1979,7 @@ sub utf2sgml
     my @chars = split(//, $string);
     foreach (@chars)
     {
-        if (ord($_) > 127) 
+        if (ord($_) > 127)
         {
             $_ = "&#" . ord($_) . ";";
         }
