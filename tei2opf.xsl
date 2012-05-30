@@ -260,49 +260,49 @@
                  href="{$basename}.ncx"
                  media-type="application/x-dtbncx+xml"/>
 
-            <xsl:if test="$optionEPub3 = 'Yes'">
-                <item id="epub3toc"
-                     properties="nav"
-                     href="{$basename}-nav.xhtml"
-                     media-type="application/xhtml+xml"/>
-            </xsl:if>
+            <!-- Store these in a list, from which we remove duplicates later-on -->
+            <xsl:variable name="manifest-items">
+                <xsl:if test="$optionEPub3 = 'Yes'">
+                    <item id="epub3toc"
+                         properties="nav"
+                         href="{$basename}-nav.xhtml"
+                         media-type="application/xhtml+xml"/>
+                </xsl:if>
 
-            <!--
-            <xsl:if test="//pb">
-                <item id="pagemap"
-                    href="pagemap.xml"
-                    media-type="application/oebps-page-map+xml"/>
-            </xsl:if>
-            -->
+                <!--
+                <xsl:if test="//pb">
+                    <item id="pagemap"
+                        href="pagemap.xml"
+                        media-type="application/oebps-page-map+xml"/>
+                </xsl:if>
+                -->
 
-            <!-- CSS Style Sheets -->
-            <item id="css"
-                 href="{$basename}.css"
-                 media-type="text/css"/>
+                <!-- CSS Style Sheets -->
+                <item id="css"
+                     href="{$basename}.css"
+                     media-type="text/css"/>
 
-            <!-- Content Parts -->
-            <xsl:apply-templates select="text" mode="manifest"/>
+                <!-- Content Parts -->
+                <xsl:apply-templates select="text" mode="manifest"/>
 
-            <!-- Illustrations -->
-            <!-- Store these in a list, from which we remove the doubles later-on -->
-            <xsl:variable name="images">
+                <!-- Illustrations -->
                 <xsl:apply-templates select="//figure" mode="manifest"/>
                 <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
                 <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
+
+                <!-- Include custom items in the manifest -->
+                <xsl:if test="$opfManifestFile">
+                    <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                    <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
+                </xsl:if>
             </xsl:variable>
 
-            <xsl:apply-templates select="$images" mode="undouble"/>
-
-            <xsl:if test="$opfManifestFile">
-                <!-- Include additional items in the manifest -->
-                <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
-                <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
-            </xsl:if>
+            <xsl:apply-templates select="$manifest-items" mode="undouble"/>
         </manifest>
     </xsl:template>
 
-    <!--== main divisions ==-->
 
+    <!--== main divisions ==-->
 
     <xsl:template match="text" mode="manifest">
         <xsl:apply-templates mode="splitter">
@@ -396,6 +396,9 @@
                 <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
                 <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
                 <xsl:attribute name="media-type"><xsl:value-of select="@media-type"/></xsl:attribute>
+                <xsl:if test="@properties">
+                    <xsl:attribute name="properties"><xsl:value-of select="@properties"/></xsl:attribute>
+                </xsl:if>
             </xsl:copy>
         </xsl:if>
     </xsl:template>
@@ -441,6 +444,9 @@
     <xsl:template name="get-cover-image">
         <xsl:variable name="figure" select="(if (//figure[@id = 'cover-image']) then //figure[@id = 'cover-image'] else //figure[@id = 'titlepage-image'])[1]"/>
         <xsl:choose>
+            <xsl:when test="contains(/TEI.2/text/@rend, 'cover-image(')">
+                <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'cover-image('), ')')"/>
+            </xsl:when>
             <xsl:when test="contains($figure/@rend, 'image(')">
                 <xsl:value-of select="substring-before(substring-after($figure/@rend, 'image('), ')')"/>
             </xsl:when>
