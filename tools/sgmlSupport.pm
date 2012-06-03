@@ -1637,16 +1637,17 @@ BEGIN
     $ent{"Edotb"}       = "E" . chr(0x0323); # E with dot below
     $ent{"Fdotb"}       = "F" . chr(0x0323); # F with dot below
 
-    $ent{"lumlb"}       = "l" . chr(0x0324); # l with diaresis below
+    $ent{"humlb"}       = "h" . chr(0x0324); # h with diaresis below
     $ent{"Lumlb"}       = "L" . chr(0x0324); # L with diaresis below
+    $ent{"lumlb"}       = "l" . chr(0x0324); # l with diaresis below
     $ent{"oumlb"}       = "o" . chr(0x0324); # o with diaresis below
-    $ent{"uumlb"}       = "u" . chr(0x0324); # u with diaresis below
-    $ent{"tumlb"}       = "t" . chr(0x0324); # t with diaresis below
-    $ent{"Tumlb"}       = "T" . chr(0x0324); # T with diaresis below
-    $ent{"sumlb"}       = "s" . chr(0x0324); # s with diaresis below
     $ent{"Sumlb"}       = "S" . chr(0x0324); # S with diaresis below
-    $ent{"zumlb"}       = "z" . chr(0x0324); # z with diaresis below
+    $ent{"sumlb"}       = "s" . chr(0x0324); # s with diaresis below
+    $ent{"Tumlb"}       = "T" . chr(0x0324); # T with diaresis below
+    $ent{"tumlb"}       = "t" . chr(0x0324); # t with diaresis below
+    $ent{"uumlb"}       = "u" . chr(0x0324); # u with diaresis below
     $ent{"Zumlb"}       = "Z" . chr(0x0324); # Z with diaresis below
+    $ent{"zumlb"}       = "z" . chr(0x0324); # z with diaresis below
 
     $ent{"oudb"}        = "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
     $ent{"oubb"}        = "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
