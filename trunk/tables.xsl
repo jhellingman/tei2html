@@ -45,11 +45,22 @@
 
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
-        <div class="table">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates mode="tablecaption" select="head"/>
-            <xsl:call-template name="inner-table"/>
-        </div>
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'position(inline)') or contains(@rend, 'class(intralinear)')">
+                <span class="table">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:apply-templates mode="tablecaption" select="head"/>
+                    <xsl:call-template name="inner-table"/>
+                </span>
+            </xsl:when>
+            <xsl:otherwise>
+                <div class="table">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:apply-templates mode="tablecaption" select="head"/>
+                    <xsl:call-template name="inner-table"/>
+                </div>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
