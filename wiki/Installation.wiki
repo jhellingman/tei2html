@@ -31,6 +31,8 @@ My advise is to download [http://www.activestate.com/activeperl/ ActivePerl]. Fo
 
 After installing Perl, install [http://www.imagemagick.org/script/index.php ImageMagick]. On Windows, use [http://www.imagemagick.org/download/binaries/ImageMagick-6.5.0-5-Q16-windows-dll.exe ImageMagick 6.5.0], 16 bits dynamically linked version. Don't forget to check !PerlMagick installation during the set-up.
 
+PS. Also works with Perl 5.14.2.1402 and !ImageMagick-6.7.7-5-Q16-windows-dll, and got it to work after moving the !ImageMagick dlls to a location on the path.
+
 
 == SX, NSGML ==
 
