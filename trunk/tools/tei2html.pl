@@ -35,10 +35,11 @@ my $makeReport          = 0;
 my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
+my $useUnicode			= 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 
-GetOptions (
+GetOptions(
     't' => \$makeTXT,
     'h' => \$makeHTML,
     'e' => \$makeEPUB,
@@ -47,6 +48,7 @@ GetOptions (
     'r' => \$makeReport,
     'x' => \$makeXML,
     'v' => \$runChecks,
+	'u' => \$useUnicode,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
@@ -60,7 +62,7 @@ if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeR
     $makeReport = 1;
 }
 
-if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1)
+if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1)
 {
     $makeXML = 1;
 }
@@ -220,8 +222,17 @@ sub processFile($)
         print "Create text version...\n";
         system ("perl $toolsdir/exNotesHtml.pl $filename");
         system ("cat $filename.out $filename.notes > $tmpFile1");
-        system ("perl $toolsdir/tei2txt.pl $tmpFile1 > $tmpFile2");
-        system ("fmt -sw72 $tmpFile2 > $basename.txt");
+        system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . "$tmpFile1 > $tmpFile2");
+
+		if ($useUnicode == 1) 
+		{
+			# Use our own script to wrap lines, as fmt cannot deal with unicode text.
+			system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
+		}
+		else
+		{
+			system ("fmt -sw72 $tmpFile2 > $basename.txt");
+		}
         system ("gutcheck $basename.txt > $basename.gutcheck");
         system ("$bindir\\jeebies $basename.txt > $basename.jeebies");
 
