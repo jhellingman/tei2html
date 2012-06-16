@@ -1951,7 +1951,6 @@ sub sgml2utf_common
     return $result;
 }
 
-
 sub handleFraction
 {
     my $appendTo = shift;
@@ -1963,7 +1962,6 @@ sub handleFraction
 
     return  $connector . chr(0x200B) . $numerator . chr(0x2044) . $denominator . chr(0x200B);
 }
-
 
 
 # Map Unicode to (numeric) SGML entities
@@ -1987,8 +1985,6 @@ sub utf2sgml
     }
     return join('', @chars);
 }
-
-
 
 
 #

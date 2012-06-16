@@ -1,15 +1,33 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use strict;
+
+use Getopt::Long;
+
 use SgmlSupport qw/getAttrVal sgml2utf/;
 
+my $useUnicode = 0;
+my $useItalics = 0;
+
+GetOptions('u' => \$useUnicode);
+
+if ($useUnicode == 1) 
+{
+    binmode(STDOUT, ":utf8");
+    use open ':utf8';
+}
 
 my $tagPattern = "<(.*?)>";
 my $italicStart = "_";
 my $italicEnd = "_";
 
 
-if (1 == 1)
+if ($useItalics == 1)
+{
+    $italicStart = "_";
+    $italicEnd = "_";
+}
+else
 {
     $italicStart = "";
     $italicEnd = "";
@@ -100,10 +118,15 @@ while (<>)
         print "------\n";
     }
 
-
     # convert entities
-    $a = entities2iso88591($a);
-
+    if ($useUnicode == 1) 
+    {
+        $a = sgml2utf($a);
+    }
+    else
+    {
+        $a = entities2iso88591($a);
+    }
 
     # handle italics (with underscores)
     my $remainder = $a;
@@ -153,9 +176,9 @@ while (<>)
     # remove any remaining tags
     $a =~ s/<.*?>//g;
 
-	# Some problematic ones from Wolff.
-    $a =~ s/\&larr;/<-/g;	# Left Arrow
-    $a =~ s/\&rarr;/->/g;	# Right Arrow
+    # Some problematic ones from Wolff.
+    $a =~ s/\&larr;/<-/g;   # Left Arrow
+    $a =~ s/\&rarr;/->/g;   # Right Arrow
 
     # warn for entities that slipped through.
     if ($a =~ /\&([a-zA-Z0-9._-]+);/)
@@ -180,7 +203,6 @@ while (<>)
     print $a;
 }
 
-
 sub spaces($)
 {
     my $n = shift;
@@ -191,7 +213,6 @@ sub spaces($)
     }
     return $result;
 }
-
 
 
 #
@@ -398,11 +419,8 @@ sub entities2iso88591($)
     $a =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
     $a =~ s/\&ast;/*/g; # asterix
 
-    $a =~ s/\&there4;/./g;	# Therefor (three dots in triangular arrangement) used as abbreviation dot.
-    $a =~ s/\&maltese;/[+]/g;	# Maltese Cross
-
-
-
+    $a =~ s/\&there4;/./g;  # Therefor (three dots in triangular arrangement) used as abbreviation dot.
+    $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
 
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb);/$1/g;
