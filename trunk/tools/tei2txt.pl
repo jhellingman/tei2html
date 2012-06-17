@@ -128,28 +128,7 @@ while (<>)
         $a = entities2iso88591($a);
     }
 
-    # handle italics (with underscores)
-    my $remainder = $a;
-    $a = "";
-    while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/)
-    {
-        my $attrs = $1;
-        my $rend = getAttrVal("rend", $attrs);
-        if ($rend eq "sup")
-        {
-            $a .= $` . $2;
-        }
-        elsif ($rend eq "sc" || $rend eq "expanded")
-        {
-            $a .= $` . $2;
-        }
-        else
-        {
-            $a .= $` . $italicStart . $2 . $italicEnd;
-        }
-        $remainder = $';
-    }
-    $a .= $remainder;
+    $a = handleHighlighted($a);
 
     # handle cell boundaries
     $a =~ s/<cell(.*?)>/|/g;
@@ -176,7 +155,7 @@ while (<>)
     # remove any remaining tags
     $a =~ s/<.*?>//g;
 
-    # Some problematic ones from Wolff.
+    # Some problematic entities from Wolff.
     $a =~ s/\&larr;/<-/g;   # Left Arrow
     $a =~ s/\&rarr;/->/g;   # Right Arrow
 
@@ -212,6 +191,32 @@ sub spaces($)
         $result .= " ";
     }
     return $result;
+}
+
+sub handleHighlighted($)
+{
+    my $remainder = shift;
+
+    my $a = "";
+    while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/)
+    {
+        my $attrs = $1;
+        my $rend = getAttrVal("rend", $attrs);
+        if ($rend eq "sup")
+        {
+            $a .= $` . $2;
+        }
+        elsif ($rend eq "sc" || $rend eq "expanded")
+        {
+            $a .= $` . $2;
+        }
+        else
+        {
+            $a .= $` . $italicStart . $2 . $italicEnd;
+        }
+        $remainder = $';
+    }
+    return $a . $remainder;
 }
 
 

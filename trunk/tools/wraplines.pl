@@ -19,10 +19,10 @@ if ($useUnicode == 1)
 while (<>)
 {
     my $line = $_;
-
-    $line =~ /^( *).*(\n*)$/;
+    $line =~ /^( *)(.*)(\n*)$/;
     my $initialSpace = $1;
-    my $finalNewlines = $2;
+    $line = $2;
+    my $finalNewlines = $3;
 
     print wrap($initialSpace, $initialSpace, $line);
     print $finalNewlines;
