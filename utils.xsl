@@ -85,8 +85,9 @@
         </xsl:call-template>
     </xsl:template>
 
+
     <xd:doc>
-        <xd:short>Generate a stable <code>id</code>-value.</xd:short>
+        <xd:short>Generate a stable id for a node.</xd:short>
         <xd:detail>
             <p>We want to generate ids that are slightly more stable than using generate-id().
             The general idea is to use an explicit id if that is present, and otherwise create
@@ -102,48 +103,76 @@
                 <tr><td>Combined:   </td><td><code>[A-Za-z][A-Za-z0-9_-]*</code></td></tr>
             </table>
         </xd:detail>
-        <xd:param name="node">The node for which the <code>id</code>-value is generated (default: the current node).</xd:param>
+        <xd:param name="node">The node for which the stable id is generated.</xd:param>
     </xd:doc>
 
-    <xsl:template name="generate-stable-id-for">
-        <xsl:param name="node" select="."/>
+    <xsl:function name="f:generate-stable-id-for" as="xs:string">
+        <xsl:param name="node" as="node()"/>
 
-        <xsl:variable name="node-name" select="name($node)"/>
-        <xsl:choose>
-
-            <!-- We have an explicit id, use that -->
-            <xsl:when test="$node/@id">
-                <xsl:message terminate="no">! <xsl:value-of select="$node-name"/> #<xsl:value-of select="$node/@id"/></xsl:message>
-                <!-- Verify the id is valid for use in HTML and CSS -->
-                <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
-                    <xsl:message terminate="no">Warning: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
+        <xsl:variable name="first" select="$node/ancestor-or-self::*[@id][1]"/>
+        <xsl:variable name="parts">
+            <xsl:value-of select="if ($first) then $first/@id else ''"/>
+            <xsl:for-each select="if ($first) then $node/ancestor-or-self::*[not(descendant::*[@id])] else $node/ancestor-or-self::*">
+                <xsl:value-of select="concat('_', name())"/>
+                <xsl:variable name="precedingSiblings" select="count(preceding-sibling::*[name()=name(current())])"/>
+                <xsl:if test="$precedingSiblings">
+                    <xsl:value-of select="concat('_', $precedingSiblings + 1)"/>
                 </xsl:if>
-                <xsl:value-of select="$node/@id"/>
-            </xsl:when>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="string-join($parts, '')"/>
+    </xsl:function>
 
-            <!-- We have reached the root without finding an explicit id -->
-            <xsl:when test="not($node/..)">
-                <xsl:message terminate="no">ROOT</xsl:message>
-                <xsl:text>root</xsl:text>
-            </xsl:when>
 
-            <!-- We have no explicit id: get the stable id of our parent and append ".<node-name>.<count>" -->
-            <xsl:otherwise>
-                <xsl:call-template name="generate-stable-id-for">
-                    <xsl:with-param name="node" select="$node/.."/>
-                </xsl:call-template>
-                <xsl:text>_</xsl:text><xsl:value-of select="$node-name"/>
-                <!-- TODO: fix following to count correctly in recursive calls. -->
-                <xsl:variable name="position" select="count($node/preceding-sibling::*[name(current()) = $node-name])"/>
-                <xsl:if test="$position > 0">
-                    <xsl:text>_</xsl:text><xsl:value-of select="$position"/>
+    <xd:doc>
+        <xd:short>Generate an XPath to a node, starting from the first ancestor with an id attribute.</xd:short>
+        <xd:detail>
+            <p></p>
+        </xd:detail>
+        <xd:param name="node">The node for which the XPath is generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-xpath-from-id-for" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:variable name="first" select="$node/ancestor-or-self::*[@id][1]"/>
+        <xsl:variable name="parts">
+            <xsl:value-of select="if ($first) then concat('id(''', $first/@id, ''')') else ''"/>
+            <xsl:for-each select="if ($first) then $node/ancestor-or-self::*[not(descendant::*[@id])] else $node/ancestor-or-self::*">
+                <xsl:value-of select="concat('/', name())"/>
+                <xsl:variable name="precedingSiblings" select="count(preceding-sibling::*[name()=name(current())])"/>
+                <xsl:if test="$precedingSiblings">
+                    <xsl:value-of select="concat('[', $precedingSiblings + 1, ']')"/>
                 </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="string-join($parts, '')"/>
+    </xsl:function>
 
-                <xsl:message terminate="no">- <xsl:value-of select="$node-name"/> [<xsl:value-of select="$position"/>]</xsl:message>
 
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
+    <xd:doc>
+        <xd:short>Generate an XPath to a node.</xd:short>
+        <xd:detail>
+            <p></p>
+        </xd:detail>
+        <xd:param name="node">The node for which the XPath is generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-xpath-for" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:variable name="parts">
+            <xsl:for-each select="$node/ancestor-or-self::*">
+                <xsl:value-of select="concat('/', name())"/>
+                <xsl:variable name="precedingSiblings" select="count(preceding-sibling::*[name()=name(current())])"/>
+                <xsl:if test="$precedingSiblings">
+                    <xsl:value-of select="concat('[', $precedingSiblings + 1, ']')"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="string-join($parts, '')"/>
+    </xsl:function>
+
 
     <xd:doc>
         <xd:short>Generate an <code>id</code>-value.</xd:short>
@@ -159,10 +188,11 @@
     <xsl:template name="generate-id-for">
         <xsl:param name="node" select="." as="element()"/>
         <xsl:param name="position"/>
+
         <!--
-        <xsl:call-template name="generate-stable-id-for">
-            <xsl:with-param name="node" select="$node" />
-        </xsl:call-template>
+        <xsl:message select="concat('Full XPath:  ', f:generate-xpath-for($node))"/>
+        <xsl:message select="concat('Short XPath: ', f:generate-xpath-from-id-for($node))"/>
+        <xsl:message select="concat('Stable ID:   ', f:generate-stable-id-for($node))"/>
         -->
         <xsl:choose>
             <xsl:when test="$node/@id">
