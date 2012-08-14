@@ -38,7 +38,7 @@ This will link to the catalog page of the given book on [http://www.gutenberg.or
 
 *Bible citation:* Use `bib:<`_book chapter:verse_`>` as url.
 
-This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway] in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible].
+This will link to a page at the [http://www.biblegateway.com/passage/?search=job%201:21&version=NIV BibleGateway] in the same language as the text. Alternatively, it could use the [http://skepticsannotatedbible.com/job/1.html#21 Skeptics Annotated Bible]. Also see the section on Canonical References in TEI P5, which describes a more complex way of encoding such references, using the `cRef` attribute on the `<ref>` element
 
 = External Link Locations =
 
@@ -72,4 +72,3 @@ It would even be better if we could link into all books, even if they are not ye
 = Standard Schemes =
 
 Currently, there is a standard scheme for the Bible; it would be nice to have these for many widely cited works as well, e.q. the Koran, the Vedas, works by Shakespeare, Milton, etc. Basically, anything that in the past editors found it beneficial to define schemes for in reference works.
-
