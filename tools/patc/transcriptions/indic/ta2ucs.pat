@@ -1,4 +1,4 @@
-% tm2ucs.pat -- Tamil transcription to UCS (Unicode) in &#xxxxx;-notation
+% ta2ucs.pat -- Tamil transcription to UCS (Unicode) in &#xxxxx;-notation
 %
 % History:
 %   04-DEC-2003 Changed to emit &#xxxxx; entities (JH)
@@ -7,17 +7,17 @@
 
 @patterns 0
 
-"<TM>"      1 "<foreign lang=tm>"   % handle Tamil parts
-"<TMA>"     1 ""        % handle Tamil parts (without tagging them)
-"</TM>"     e "tag </TM> found in Roman mode"
-"</TMA>"    e "tag </TMA> found in Roman mode"
+"<TA>"      1 "<foreign lang=ta>"   % handle Tamil parts
+"<TAA>"     1 ""        % handle Tamil parts (without tagging them)
+"</TA>"     e "tag </TA> found in Roman mode"
+"</TAA>"    e "tag </TAA> found in Roman mode"
 
 @patterns 2             % copy SGML tags in Tamil mode
 
 ">"     1 ">"
 "\n"    e "new line in tag in Tamil mode"
 
-"<TM2>" 1 ""            % handle Tamil parts (hack for nested occurences in attributes)
+"<TA2>" 1 ""            % handle Tamil parts (hack for nested occurences in attributes)
 
 @patterns 3             % copy SGML entities in Tamil mode
 
@@ -26,12 +26,12 @@
 
 @rpatterns 1            % Tamil transcription to Unicode
 
-"</TM>"     0 "</foreign>"
-"</TMA>"    0 ""
-"<TM>"      e "tag <TM> found in Tamil mode"
-"<TMA>"     e "tag <TMA> found in Tamil mode"
+"</TA>"     0 "</foreign>"
+"</TAA>"    0 ""
+"<TA>"      e "tag <TA> found in Tamil mode"
+"<TAA>"     e "tag <TAA> found in Tamil mode"
 
-"</TM2>"    2 ""        % handle Tamil parts (hack for nested occurences in attributes)
+"</TA2>"    2 ""        % handle Tamil parts (hack for nested occurences in attributes)
 
 "<"     2 "<"           % SGML tag in Tamil mode
 "&"     3 "&"           % SGML entity in Tamil mode
