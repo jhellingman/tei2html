@@ -351,7 +351,7 @@ sub sgml2xml($$)
     $tmpFile0 = transcribeNotation($tmpFile0, "<SA>", "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<HI>", "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TM>", "Tamil",                 "$patcdir/indic/tm2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TA>", "Tamil",                 "$patcdir/indic/ta2ucs.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<RU>", "Russian",               "$patcdir/cyrillic/cy2ucs.pat");
 
     print "Check SGML...\n";
