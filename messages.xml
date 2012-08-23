@@ -160,7 +160,7 @@
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
         <!-- ISO 639 two letter codes -->
-        <msg:message name="cn">Chinese</msg:message>
+        <msg:message name="zh">Chinese</msg:message>
         <msg:message name="de">German</msg:message>
         <msg:message name="el">Greek</msg:message>
         <msg:message name="en">English</msg:message>
@@ -176,6 +176,8 @@
         <msg:message name="pt">Portuguese</msg:message>
         <msg:message name="pt-br">Portugese (Brazil)</msg:message>
         <msg:message name="pt-pt">Portugese (Portugal)</msg:message>
+        <msg:message name="ta">Tamil</msg:message>
+        <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
 
         <!-- ISO 639 three letter codes -->
@@ -493,7 +495,7 @@
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
         <!-- ISO 639 two letter codes -->
-        <msg:message name="cn">Chinois</msg:message>
+        <msg:message name="zh">Chinois</msg:message>
         <msg:message name="de">Allemand</msg:message>
         <msg:message name="el">Grec</msg:message>
         <msg:message name="en">Anglais</msg:message>
@@ -623,7 +625,7 @@
         <msg:message name="msgFriday">Freitag</msg:message>
         <msg:message name="msgSaturday">Samstag</msg:message>
 
-        <msg:message name="cn">Chinesisch</msg:message>
+        <msg:message name="zh">Chinesisch</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="de">Deutsch</msg:message>
         <msg:message name="el">Griechisch</msg:message>
@@ -771,7 +773,7 @@
 
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
-        <msg:message name="cn">Chinees</msg:message>
+        <msg:message name="zh">Chinees</msg:message>
         <msg:message name="ja">Japans</msg:message>
         <msg:message name="pt">Portugees</msg:message>
         <msg:message name="pt-pt">Portugees (Portugal)</msg:message>
@@ -1038,7 +1040,7 @@
 
         <!-- ISO 639 two letter codes -->
         <!--IFG Note in Spanish language names are lowercase -->
-        <msg:message name="cn">Chino</msg:message>
+        <msg:message name="zh">Chino</msg:message>
         <msg:message name="de">Alemán</msg:message>
         <msg:message name="en">Inglés</msg:message>
         <msg:message name="en-us">Inglés (EE. UU.)</msg:message>
