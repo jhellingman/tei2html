@@ -121,6 +121,9 @@
         <msg:message name="msgEncoding">Encoding</msg:message>
         <msg:message name="msgMissingText">missing text</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Missing <msg:param name="extent"/> <msg:param name="unit"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgOverviewForeignFragments">Overview of fragments in foreign languages</msg:message>
+        <msg:message name="msgFragment">Fragment</msg:message>
+        <msg:message name="msgElement">Element</msg:message>
 
         <!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
 
@@ -839,6 +842,11 @@
         <msg:message name="msgLinkToWorldCat">Link naar WorldCat cataloguspagina</msg:message>
         <msg:message name="msgExternalLink">Externe link</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
+
+        <msg:message name="msgOverviewForeignFragments">Overzicht van fragmenten in andere talen</msg:message>
+        <msg:message name="msgFragment">Fragment</msg:message>
+        <msg:message name="msgElement">Element</msg:message>
+
 
     </msg:messages>
 

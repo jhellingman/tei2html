@@ -178,14 +178,6 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="bibl">
-        <span class="bibl">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-
     <!-- Trailers -->
 
     <xsl:template match="trailer">
