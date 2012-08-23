@@ -284,6 +284,7 @@
 
 
     <xsl:template match="head" mode="tochead">
+        <!-- <xsl:message terminate="no">Note: head type = <xsl:value-of select="@type"/></xsl:message> -->
         <xsl:choose>
             <xsl:when test="contains(../@rend, 'toc-head(')">
                 <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
@@ -584,6 +585,7 @@
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
                 <table class="tocList">
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:apply-templates mode="tocList"/>
                 </table>
             </xsl:when>

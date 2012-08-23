@@ -449,4 +449,21 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
+    <!-- Bibliographic elements -->
+
+    <xsl:template match="bibl">
+        <span class="bibl">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="cit">
+        <span class="cit">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
 </xsl:stylesheet>

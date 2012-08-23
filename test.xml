@@ -716,7 +716,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <head>Test Table of Contents</head>
 
 
-<list type="tocList">
+<list type="tocList" lang="nl">
 <item>      Introductie   <ab type="tocPageNum">vii</ab></item>
 <item><ab type="tocDivNum">I</ab>      Eerste Hoofdstuk   <ab type="tocPageNum">1</ab></item>
 <item><ab type="tocDivNum">II</ab>      Tweede Hoofdstuk   <ab type="tocPageNum">22</ab></item>
@@ -769,6 +769,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <divGen type="toc" rend="tocMaxLevel(1)"/>
 
 <divGen type="Colophon"/>
+
+<divGen type="LanguageFragments"/>
 
 </div1>
 </back>

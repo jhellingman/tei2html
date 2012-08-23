@@ -49,11 +49,37 @@
     </xsl:template>
 
 
-    <xsl:template name="colophon-body">
+    <xsl:template match="divGen[@type='ColophonBody']">
+        <xsl:call-template name="colophon-body"/>
+    </xsl:template>
 
+
+    <xsl:template name="colophon-body">
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
 
+        <xsl:call-template name="catalog-entries"/>
+
+        <xsl:if test="/TEI.2/teiHeader/encodingDesc">
+            <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
+            <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
+        </xsl:if>
+
+        <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
+        <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
+
+        <xsl:if test="//xref[@url]">
+            <xsl:call-template name="external-references"/>
+        </xsl:if>
+
+        <xsl:if test="//corr">
+            <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
+            <xsl:call-template name="correctionTable"/>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="catalog-entries">
         <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
             <p><xsl:value-of select="f:message('msgPgCatalogEntry')"/>:
                 <a class="pglink">
@@ -98,24 +124,6 @@
                 </a>.
             </p>
         </xsl:if>
-
-        <xsl:if test="/TEI.2/teiHeader/encodingDesc">
-            <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
-            <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
-        </xsl:if>
-
-        <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
-        <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
-
-        <xsl:if test="//xref[@url]">
-            <xsl:call-template name="external-references"/>
-        </xsl:if>
-
-        <xsl:if test="//corr">
-            <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
-            <xsl:call-template name="correctionTable"/>
-        </xsl:if>
-
     </xsl:template>
 
 
@@ -158,14 +166,7 @@
                             </xsl:if>
                             <a class="pageref">
                                 <xsl:call-template name="generate-href-attribute"/>
-                                <xsl:choose>
-                                    <xsl:when test="not(preceding::pb[1]/@n) or preceding::pb[1]/@n = ''">
-                                        <xsl:value-of select="f:message('msgNotApplicable')"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="preceding::pb[1]/@n"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <xsl:value-of select="f:find-pagenumber(.)"/>
                             </a>
                         </xsl:for-each>
                     </td>
@@ -243,15 +244,7 @@
                                     <xsl:attribute name="id">
                                         <xsl:call-template name="generate-id"/><xsl:text>ext</xsl:text>
                                     </xsl:attribute>
-
-                                    <xsl:choose>
-                                        <xsl:when test="not(preceding::pb[1]/@n) or preceding::pb[1]/@n = ''">
-                                            <xsl:value-of select="f:message('msgNotApplicable')"/>
-                                        </xsl:when>
-                                        <xsl:otherwise>
-                                            <xsl:value-of select="preceding::pb[1]/@n"/>
-                                        </xsl:otherwise>
-                                    </xsl:choose>
+                                    <xsl:value-of select="f:find-pagenumber(.)"/>
                                 </a>
                             </xsl:for-each>
                         </td>
@@ -271,5 +264,75 @@
             </table>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:find-pagenumber" as="xs:string">
+        <xsl:param name="node"/>
+
+        <xsl:choose>
+            <xsl:when test="not($node/preceding::pb[1]/@n) or $node/preceding::pb[1]/@n = ''">
+                <xsl:value-of select="f:message('msgNotApplicable')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$node/preceding::pb[1]/@n"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <!--====================================================================-->
+    <!-- Language Fragments -->
+
+    <xsl:template match="divGen[@type='LanguageFragments']">
+        <div class="transcribernote">
+            <h2 class="main"><xsl:value-of select="f:message('msgOverviewForeignFragments')"/></h2>
+
+            <xsl:variable name="mainlang" select="/TEI.2/@lang"/>
+            <xsl:for-each-group select="//*[@lang != $mainlang]" group-by="@lang">
+                <xsl:sort select="@lang"/>
+
+                <xsl:variable name="lang" select="@lang"/>
+                <h3 class="main"><xsl:value-of select="f:message($lang)"/></h3>
+                <xsl:call-template name="language-fragments">
+                    <xsl:with-param name="lang" select="$lang"/>
+                </xsl:call-template>
+
+            </xsl:for-each-group>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="language-fragments">
+        <xsl:param name="lang"/>
+
+        <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
+
+        <table class="languageFragmentTable">
+            <tr>
+                <th><xsl:value-of select="f:message('msgPage')"/></th>
+                <th><xsl:value-of select="f:message('msgElement')"/></th>
+                <th><xsl:value-of select="f:message('msgFragment')"/></th>
+            </tr>
+            <xsl:for-each select="$fragments">
+                <tr>
+                    <td>
+                        <a class="pageref">
+                            <xsl:call-template name="generate-href-attribute"/>
+                            <xsl:attribute name="id">
+                                <xsl:call-template name="generate-id"/><xsl:text>ext</xsl:text>
+                            </xsl:attribute>
+                            <xsl:value-of select="f:find-pagenumber(.)"/>
+                        </a>
+                    </td>
+                    <td>
+                        <xsl:value-of select="name(.)"/>
+                    </td>
+                    <td>
+                        <xsl:apply-templates select="."/>
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </table>
+    </xsl:template>
+
 
 </xsl:stylesheet>

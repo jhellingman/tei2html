@@ -67,14 +67,14 @@
             <xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">
                 <tr>
                     <td class="messageid"><xsl:value-of select="@name"/></td>
-						<xsl:choose>
-						<xsl:when test="string-length($value) &lt; 2000">
-							<td><xsl:apply-templates select="$value" mode="cp"/></td>
-						</xsl:when>
-						<xsl:otherwise>
-							<td><i class="missing">long message omitted</i></td>
-						</xsl:otherwise>
-					</xsl:choose>
+                        <xsl:choose>
+                        <xsl:when test="string-length($value) &lt; 2000">
+                            <td><xsl:apply-templates select="$value" mode="cp"/></td>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <td><i class="missing">long message omitted</i></td>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </tr>
             </xsl:if>
         </xsl:if>
@@ -91,18 +91,18 @@
                     <xsl:value-of select="@name"/>
                 </td>
                 <td>
-					<xsl:apply-templates select="$value" mode="cp"/>
+                    <xsl:apply-templates select="$value" mode="cp"/>
                 </td>
-				<td>
+                <td>
                     <xsl:choose>
-						<xsl:when test="$translation">
-							<xsl:apply-templates select="$translation" mode="cp"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<i class="missing">no translation available</i>
-						</xsl:otherwise>
-					</xsl:choose>
-				</td>
+                        <xsl:when test="$translation">
+                            <xsl:apply-templates select="$translation" mode="cp"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <i class="missing">no translation available</i>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
             </tr>
         </xsl:if>
     </xsl:template>
