@@ -1,12 +1,12 @@
 
 @patterns 0
 
-"<HB>"	1 "<foreign lang=he>"
+"<HE>"	1 "<foreign lang=he>"
 
 
 @rpatterns 1
 
-"</HB>"	0 "</foreign>"
+"</HE>"	0 "</foreign>"
 
 " "	     p " "		 % space.
 
