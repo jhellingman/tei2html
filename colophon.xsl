@@ -266,6 +266,14 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Find the page-number for a node.</xd:short>
+        <xd:detail>
+            <p>Find the page-number for a node. This will try to locate the preceding <code>pb</code>-element, and return its
+            <code>@n</code>-attribute value. This should normally correspond with the page the node appeared on in the source.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:function name="f:find-pagenumber" as="xs:string">
         <xsl:param name="node"/>
 
@@ -282,6 +290,14 @@
 
     <!--====================================================================-->
     <!-- Language Fragments -->
+
+    <xd:doc>
+        <xd:short>Generate an overview of foreign language fragments.</xd:short>
+        <xd:detail>
+            <p>Generate a table of overview of foreign language fragments in the text, as indicated by the <code>@lang</code>-attribute.
+            The fragments are grouped by language, and presented in document order.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='LanguageFragments']">
         <div class="transcribernote">
