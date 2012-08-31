@@ -30,3 +30,17 @@ Further more, a number of ids have special value to the rendering process, and s
 Finally, some elements might no longer be needed in the combined volume (such as textual references to another volume, or labels giving the volume number.) They should be filtered out.
 
 To make this easy, we will need to supplement the standard XSLT import function with a smart import that will take care of those changes.
+
+{{{
+	<xsl:function name="f:import-document">
+		<xsl:param name="location" as="xs:string"/>
+		<xsl:param name="prefix" as="xs:string"/>
+		<xsl:param name="keepPrefix" as="xs:string"/>
+
+		<xsl:apply-templates select="document($location)" mode="import-document">
+			<xsl:with-param name="prefix" select="$prefix"/>
+			<xsl:with-param name="keepPrefix" select="$keepPrefix"/>
+		</xsl:apply-templates>
+	</xsl:function>
+
+}}}
