@@ -91,7 +91,7 @@
     <xd:doc type="string">Include images in the generated output (Yes or No).</xd:doc>
     <xsl:param name="optionIncludeImages" select="'Yes'"/>
 
-    <xd:doc type="string">Include external links in the generated output (Yes or No).</xd:doc>
+    <xd:doc type="string">Include external links in the generated output (Yes, No, or HeaderOnly). When using HeaderOnly, external links will only appear in the generated colophon.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
 
     <xd:doc type="string">Include a table of external links in the colophon (Yes or No).</xd:doc>
