@@ -406,7 +406,7 @@
 
     <xsl:template match="ab[@type='tocPagenum' or @type='tocPageNum']">
         <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
-        <span class="tocPagenum">
+        <span class="tocPageNum">
             <xsl:apply-templates/>
         </span>
     </xsl:template>

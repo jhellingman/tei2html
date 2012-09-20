@@ -8,25 +8,25 @@
          unique-identifier="idbook">
    <metadata>
       <dc:title>Main Title of Work Goes Here</dc:title>
-      <dc:creator opf:role="aut" opf:file-as="Author of Work (Birth-year—Death-year)">Author of Work (Birth-year—Death-year)</dc:creator>
-      <dc:creator opf:role="aut" opf:file-as="A. U. Thor">A. U. Thor</dc:creator>
-      <dc:creator opf:role="aut" opf:file-as="W. Riter">W. Riter</dc:creator>
-      <dc:contributor opf:role="trc" opf:file-as="Transcribers Name">Transcribers Name</dc:contributor>
+      <dc:creator>Author of Work (Birth-year—Death-year)</dc:creator>
+      <dc:creator>A. U. Thor</dc:creator>
+      <dc:creator>W. Riter</dc:creator>
+      <dc:contributor>Transcribers Name</dc:contributor>
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA.</dc:publisher>
       <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
-      <dc:language xsi:type="dcterms:RFC4646">en-US</dc:language>
+      <dc:language>en-US</dc:language>
       <dc:subject>TEI (Text Encoding Initiative)</dc:subject>
       <dc:subject>XSLT</dc:subject>
       <dc:subject>HTML</dc:subject>
-      <dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
-      <dc:date opf:event="publication">2009-12-13</dc:date>
-      <dc:date opf:event="generation">2012-08-23</dc:date>
+      <dc:identifier id="idbook">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
+      <dc:date>2009-12-13</dc:date>
+      <dc:date>2012-09-20</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
       <dc:identifier id="pub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</meta>
       <meta about="#pub-id" property="scheme">uuid</meta>
-      <meta property="dcterms:modified">2012-08-23T18:43:32Z</meta>
+      <meta property="dcterms:modified">2012-09-20T21:55:12Z</meta>
       <meta property="dcterms:title">Main Title of Work Goes Here</meta>
       <meta property="dcterms:creator">Author of Work (Birth-year—Death-year)</meta>
       <meta property="dcterms:creator">A. U. Thor</meta>
@@ -93,11 +93,10 @@
    </spine>
    <guide>
       <reference type="cover" title="Cover Image" href="test-cover.xhtml"/>
-      <reference type="other.ms-coverimage" title="Cover Image" href="images/cover500.jpg"/>
       <reference type="toc" title="Table of Contents" href="test-front-2.xhtml#toc"/>
       <reference type="title-page" title="Title Page" href="test-front-2.xhtml#xd24e94"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk1-1.xhtml#bk1"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd24e1064"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd24e1065"/>
    </guide>
 </package>

@@ -4,8 +4,9 @@
         xmlns="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:f="urn:stylesheet-functions"
-        exclude-result-prefixes="f"
+        exclude-result-prefixes="f xs"
         version="2.0">
 
 
@@ -63,77 +64,14 @@
                 <navMap>
                     <xsl:variable name="navMap">
 
-                        <xsl:if test="key('id', 'cover')">
-                            <navPoint class="cover">
-                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="f:message('msgCoverImage')"/></text></navLabel>
-                                <content>
-                                    <xsl:attribute name="src">
-                                        <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="key('id', 'cover')[1]"/>
-                                        </xsl:call-template>
-                                    </xsl:attribute>
-                                </content>
-                            </navPoint>
-                        </xsl:if>
-
-                        <xsl:if test="/TEI.2/text/front/titlePage">
-                            <navPoint class="titlepage">
-                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="f:message('msgTitlePage')"/></text></navLabel>
-                                <content>
-                                    <xsl:attribute name="src">
-                                        <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="/TEI.2/text/front/titlePage[1]"/>
-                                        </xsl:call-template>
-                                    </xsl:attribute>
-                                </content>
-                            </navPoint>
-                        </xsl:if>
+                        <xsl:copy-of select="f:create-nav-point(key('id', 'cover')[1], 'cover', f:message('msgCoverImage'))"/>
+                        <xsl:copy-of select="f:create-nav-point(/TEI.2/text/front/titlePage[1], 'titlepage', f:message('msgTitlePage'))"/>
 
                         <xsl:apply-templates select="text" mode="navMap"/>
 
-                        <xsl:if test="//divGen[@id='toc']">
-                            <navPoint class="contents">
-                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="f:message('msgTableOfContents')"/></text></navLabel>
-                                <content>
-                                    <xsl:attribute name="src">
-                                        <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="(//divGen[@id='toc'])[1]"/>
-                                        </xsl:call-template>
-                                    </xsl:attribute>
-                                </content>
-                            </navPoint>
-                        </xsl:if>
-
-                        <xsl:if test="key('id', 'loi')">
-                            <navPoint class="contents">
-                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="f:message('msgListOfIllustrations')"/></text></navLabel>
-                                <content>
-                                    <xsl:attribute name="src">
-                                        <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="key('id', 'loi')[1]"/>
-                                        </xsl:call-template>
-                                    </xsl:attribute>
-                                </content>
-                            </navPoint>
-                        </xsl:if>
-
-                        <xsl:if test="//divGen[@type='Colophon']">
-                            <navPoint class="colophon">
-                                <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                                <navLabel><text><xsl:value-of select="f:message('msgColophon')"/></text></navLabel>
-                                <content>
-                                    <xsl:attribute name="src">
-                                        <xsl:call-template name="splitter-generate-url-for">
-                                            <xsl:with-param name="node" select="(//divGen[@type='Colophon'])[1]"/>
-                                        </xsl:call-template>
-                                    </xsl:attribute>
-                                </content>
-                            </navPoint>
-                        </xsl:if>
+                        <xsl:copy-of select="f:create-nav-point((//divGen[@id='toc'])[1], 'contents', f:message('msgTableOfContents'))"/>
+                        <xsl:copy-of select="f:create-nav-point(key('id', 'loi')[1], 'contents', f:message('msgListOfIllustrations'))"/>
+                        <xsl:copy-of select="f:create-nav-point((//divGen[@type='Colophon'])[1], 'colophon', f:message('msgColophon'))"/>
 
                     </xsl:variable>
                     <xsl:apply-templates select="$navMap" mode="playorder"/>
@@ -144,6 +82,30 @@
         </xsl:result-document>
 
     </xsl:template>
+
+    <xsl:function name="f:create-nav-point">
+        <xsl:param name="node"/>
+        <xsl:param name="class" as="xs:string"/>
+        <xsl:param name="label" as="xs:string"/>
+
+        <xsl:if test="$node">
+            <navPoint class="{$class}">
+                <xsl:attribute name="id">
+                    <xsl:call-template name="generate-id-for">
+                        <xsl:with-param name="node" select="$node"/>
+                    </xsl:call-template>
+                </xsl:attribute>
+                <navLabel><text><xsl:value-of select="$label"/></text></navLabel>
+                <content>
+                    <xsl:attribute name="src">
+                        <xsl:call-template name="splitter-generate-url-for">
+                            <xsl:with-param name="node" select="$node"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                </content>
+            </navPoint>
+        </xsl:if>
+    </xsl:function>
 
 
     <!--== navMap ==========================================================-->
@@ -161,7 +123,11 @@
             <xsl:when test="contains(@rend, 'toc-head(')">
                 <navPoint class="part">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <navLabel>
+                        <text>
+                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+                        </text>
+                    </navLabel>
                     <content>
                         <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                     </content>

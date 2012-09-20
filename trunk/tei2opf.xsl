@@ -64,7 +64,6 @@
     <xsl:template name="metadata">
         <metadata>
             <xsl:call-template name="metadata2"/>
-
             <xsl:if test="$optionEPub3 = 'Yes'">
                 <xsl:call-template name="metadata3"/>
             </xsl:if>
@@ -78,7 +77,14 @@
         <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
         <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
         <xsl:if test="@lang">
-            <dc:language xsi:type="dcterms:RFC4646"><xsl:value-of select="@lang"/></dc:language>
+            <dc:language>
+                <xsl:if test="$optionEPubStrict != 'Yes'">
+                    <xsl:attribute name="xsi:type">
+                        <xsl:value-of select="'dcterms:RFC4646'"/>
+                    </xsl:attribute>
+                </xsl:if>
+                <xsl:value-of select="@lang"/>
+            </dc:language>
         </xsl:if>
 
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
@@ -86,16 +92,41 @@
         </xsl:for-each>
 
         <xsl:choose>
-            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><dc:identifier id="idbook" opf:scheme="ISBN"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></dc:identifier></xsl:when>
-            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']"><dc:identifier id="idbook" opf:scheme="URI">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></dc:identifier></xsl:when>
+            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
+                <dc:identifier id="idbook">
+                    <xsl:if test="$optionEPubStrict != 'Yes'">
+                        <xsl:attribute name="opf:scheme" select="'ISBN'"/>
+                    </xsl:if>
+                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
+                </dc:identifier>
+            </xsl:when>
+            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
+                <dc:identifier id="idbook">
+                    <xsl:if test="$optionEPubStrict != 'Yes'">
+                        <xsl:attribute name="opf:scheme" select="'URI'"/>
+                    </xsl:if>
+                    <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text>
+                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
+                </dc:identifier>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
-            <dc:date opf:event="publication"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/></dc:date>
+            <dc:date>
+                <xsl:if test="$optionEPubStrict != 'Yes'">
+                    <xsl:attribute name="opf:event" select="'publication'"/>
+                </xsl:if>
+                <xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/>
+            </dc:date>
         </xsl:if>
-        <dc:date opf:event="generation"><xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/></dc:date>
+        <dc:date>
+            <xsl:if test="$optionEPubStrict != 'Yes'">
+                <xsl:attribute name="opf:event" select="'generation'"/>
+            </xsl:if>
+            <xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
+        </dc:date>
 
         <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
             <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
@@ -121,10 +152,11 @@
     </xsl:template>
 
     <xsl:template match="author" mode="metadata">
-        <dc:creator opf:role="aut">
-            <xsl:attribute name="opf:file-as">
-                <xsl:value-of select="."/>
-            </xsl:attribute>
+        <dc:creator>
+            <xsl:if test="$optionEPubStrict != 'Yes'">
+                <xsl:attribute name="opf:role" select="'aut'"/>
+                <xsl:attribute name="opf:file-as" select="."/>
+            </xsl:if>
             <xsl:value-of select="."/>
         </dc:creator>
     </xsl:template>
@@ -181,12 +213,14 @@
 
     <xsl:template match="respStmt" mode="metadata">
         <dc:contributor>
-            <xsl:attribute name="opf:role">
-                <xsl:call-template name="translate-contributor-role"/>
-            </xsl:attribute>
-            <xsl:attribute name="opf:file-as">
-                <xsl:value-of select="name"/>
-            </xsl:attribute>
+            <xsl:if test="$optionEPubStrict != 'Yes'">
+                <xsl:attribute name="opf:role">
+                    <xsl:call-template name="translate-contributor-role"/>
+                </xsl:attribute>
+                <xsl:attribute name="opf:file-as">
+                    <xsl:value-of select="name"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:value-of select="name"/>
         </dc:contributor>
     </xsl:template>
@@ -471,13 +505,15 @@
                 </reference>
             </xsl:if>
 
-            <!-- Name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
-            <xsl:if test="//figure[@id = 'cover-image' or @id = 'titlepage-image']">
-                <reference type="other.ms-coverimage" title="{f:message('msgCoverImage')}">
-                    <xsl:attribute name="href">
-                        <xsl:call-template name="get-cover-image"/>
-                    </xsl:attribute>
-                </reference>
+            <xsl:if test="$optionEPubStrict != 'Yes'">
+                <!-- Name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
+                <xsl:if test="//figure[@id = 'cover-image' or @id = 'titlepage-image']">
+                    <reference type="other.ms-coverimage" title="{f:message('msgCoverImage')}">
+                        <xsl:attribute name="href">
+                            <xsl:call-template name="get-cover-image"/>
+                        </xsl:attribute>
+                    </reference>
+                </xsl:if>
             </xsl:if>
 
             <xsl:if test="key('id', 'toc')">
