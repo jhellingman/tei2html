@@ -22,7 +22,8 @@
                 </xsl:attribute>
                 <head>
                     <title><xsl:value-of select="f:message('msgTableOfContents')"/></title>
-                    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+                    <!-- <meta http-equiv="content-type" content="text/html; charset=utf-8"/> -->
+                    <meta charset="utf-8"/>
                 </head>
                 <body>
                     <xsl:apply-templates select="text/body" mode="ePubNav"/>
@@ -47,26 +48,14 @@
     <xsl:template match="*" mode="ePubNav"/>
 
 
-
-
-
-
-    <xsl:template match="TEI.2" mode="navPageList">
-
-
-    </xsl:template>
+    <xsl:template match="TEI.2" mode="navPageList"/>
 
 
     <xsl:template match="TEI.2" mode="navLandMarks">
         <nav epub:type="landmarks" id="guide">
             <h2><xsl:value-of select="f:message('msgGuide')"/></h2>
-
         </nav>
     </xsl:template>
-
-
-
-
 
 
 </xsl:stylesheet>

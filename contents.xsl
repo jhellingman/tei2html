@@ -100,12 +100,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <!-- <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>:<xsl:text> </xsl:text> -->
-                    <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div1 and $maxlevel &gt;= 1">
                     <ul>
                         <xsl:apply-templates select="div1" mode="gentoc">
@@ -124,12 +119,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <!-- <xsl:value-of select="f:translate-div-type(@type)"/><xsl:text> </xsl:text><xsl:value-of select="@n"/>:<xsl:text> </xsl:text> -->
-                    <xsl:apply-templates select="head[not(@type='label') and not(@type='super')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div2 and $maxlevel &gt;= 2 and (not(@type) or @type != 'Index')">
                     <ul>
                         <xsl:apply-templates select="div2" mode="gentoc">
@@ -148,11 +138,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div3 and $maxlevel &gt;= 3">
                     <ul>
                         <xsl:apply-templates select="div3" mode="gentoc">
@@ -174,11 +160,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div4 and $maxlevel &gt;= 4">
                     <ul>
                         <xsl:apply-templates select="div4" mode="gentoc">
@@ -196,11 +178,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div5 and $maxlevel &gt;= 5">
                     <ul>
                         <xsl:apply-templates select="div5" mode="gentoc">
@@ -218,11 +196,7 @@
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:if test="head">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="div6 and $maxlevel &gt;= 6">
                     <ul>
                         <xsl:apply-templates select="div6" mode="gentoc"/>
@@ -237,11 +211,7 @@
     <xsl:template match="div6" mode="gentoc">
         <xsl:if test="head">
             <li>
-                <a>
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:apply-templates select="head[not(@type='label')]" mode="tochead"/>
-                </a>
-                <xsl:call-template name="insert-toc-page-number"/>
+                <xsl:call-template name="generate-toc-head-link"/>
             </li>
         </xsl:if>
     </xsl:template>
@@ -275,38 +245,51 @@
     </xsl:template>
 
 
-    <!-- Suppress notes in table of contents (to avoid getting them twice) -->
-    <xsl:template match="note" mode="tochead"/>
+    <xsl:template name="generate-toc-head-link">
+        <xsl:if test="@n">
+            <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
+        </xsl:if>
+        <a>
+            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:call-template name="generate-single-head"/>
+        </a>
+        <xsl:call-template name="insert-toc-page-number"/>
+    </xsl:template>
 
 
-    <!-- Suppress 'label' headings in table of contents -->
-    <xsl:template match="head[@type='label']" mode="tochead"/>
-
-
-    <xsl:template match="head" mode="tochead">
-        <!-- <xsl:message terminate="no">Note: head type = <xsl:value-of select="@type"/></xsl:message> -->
+    <!-- Combine all heads for a division into a single line -->
+    <xsl:template name="generate-single-head">
         <xsl:choose>
-            <xsl:when test="contains(../@rend, 'toc-head(')">
+
+            <!-- Do we want to fully override the head for the toc -->
+            <xsl:when test="contains(@rend, 'toc-head(')">
                 <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
             </xsl:when>
-            <xsl:when test="contains(@rend, 'toc-head(')">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
-            </xsl:when>
-            <xsl:when test="contains(@rend, 'toc-head(')">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
-            </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="position() = 1 and ./@n">
-                    <xsl:value-of select="./@n"/><xsl:text> </xsl:text>
-                </xsl:if>
-                <xsl:if test="position() &gt; 1">
-                    <xsl:text>: </xsl:text>
-                </xsl:if>
-                <xsl:apply-templates mode="tochead"/>
+
+                <!-- Handle all remaining headers in sequence -->
+                <xsl:for-each select="head">
+                    <xsl:choose>
+                        <xsl:when test="@type='super'"/>
+                        <xsl:when test="@type='label'"/>
+                        <xsl:when test="contains(@rend, 'toc-head(')">
+                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates mode="tochead"/>
+                            <xsl:if test="following-sibling::head">
+                                <xsl:text> </xsl:text>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
+
+    <!-- Suppress notes in table of contents (to avoid getting them twice) -->
+    <xsl:template match="note" mode="tochead"/>
 
     <!-- Text styles in chapter headings -->
 
@@ -337,12 +320,9 @@
     <xsl:template name="insert-toc-page-number">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
-            <span class="tocPagenum">
+            <span class="tocPageNum">
                 <a class="pageref">
-                    <xsl:call-template name="generate-href-attribute">
-                        <!-- we always have a head here in the context, so link to that -->
-                        <xsl:with-param name="target" select="head[1]"/>
-                    </xsl:call-template>
+                    <xsl:call-template name="generate-href-attribute"/>
                     <xsl:value-of select="preceding::pb[1]/@n"/>
                 </a>
             </span>
@@ -448,10 +428,7 @@
 
     <xsl:template match="div2" mode="SubToc">
         <li>
-            <xsl:if test="@n">
-                <xsl:value-of select="@n"/>.
-            </xsl:if>
-            <xsl:apply-templates select="head" mode="tochead"/>
+            <xsl:call-template name="generate-toc-head-link"/>
         </li>
     </xsl:template>
 
@@ -473,16 +450,7 @@
     <xsl:template match="figure" mode="genloi">
         <li>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <a>
-                <xsl:call-template name="generate-href-attribute"/>
-                <xsl:apply-templates select="head" mode="tochead"/>
-            </a>
-            <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-                <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
-                <span class="tocPagenum">
-                    <xsl:value-of select="preceding::pb[1]/@n"/>
-                </span>
-            </xsl:if>
+            <xsl:call-template name="generate-toc-head-link"/>
         </li>
     </xsl:template>
 
@@ -657,9 +625,7 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="."/>
-                            </xsl:call-template>
+                            <xsl:call-template name="generate-href-attribute"/>
                         </index>
                     </xsl:for-each>
                 </divIndex>

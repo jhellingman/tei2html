@@ -222,6 +222,7 @@ BEGIN
     $langNameHash{"pam"}        = "Kapampangan";
     $langNameHash{"war"}        = "W&aacute;ray-W&aacute;ray";
     $langNameHash{"phi"}        = "Philippine (Other)";
+    $langNameHash{"ifu"}        = "Ifugao";
 
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
     $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
@@ -244,7 +245,7 @@ BEGIN
 }
 
 
-sub getLanguage
+sub getLanguage($)
 {
     my $code = shift;
     my $language = $langNameHash{$code};
@@ -254,7 +255,3 @@ sub getLanguage
     }
     return $langNameHash{$code};
 }
-
-
-
-

@@ -20,13 +20,13 @@
       <text>Author of Work (Birth-year—Death-year) A. U. Thor W. Riter</text>
    </docAuthor>
    <navMap>
-      <navPoint playOrder="1" class="cover" id="xd24e1">
+      <navPoint playOrder="1" class="cover" id="cover">
          <navLabel>
             <text>Cover Image</text>
          </navLabel>
          <content src="test-cover.xhtml#cover"/>
       </navPoint>
-      <navPoint playOrder="2" class="titlepage" id="xd24e1">
+      <navPoint playOrder="2" class="titlepage" id="xd24e94">
          <navLabel>
             <text>Title Page</text>
          </navLabel>
@@ -134,17 +134,17 @@
             <content src="test-index.xhtml#xd24e1052"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="20" class="contents" id="xd24e1">
+      <navPoint playOrder="20" class="contents" id="toc">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-front-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="21" class="colophon" id="xd24e1">
+      <navPoint playOrder="21" class="colophon" id="xd24e1065">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd24e1064"/>
+         <content src="test-backmatter.xhtml#xd24e1065"/>
       </navPoint>
    </navMap>
 </ncx>

@@ -768,6 +768,8 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <divGen type="toc" rend="tocMaxLevel(1)"/>
 
+<divGen type="loi"/>
+
 <divGen type="Colophon"/>
 
 <divGen type="LanguageFragments"/>

@@ -375,7 +375,7 @@
     <xsl:template name="splitter-generate-filename-for">
         <xsl:param name="node" select="." as="element()"/>
 
-        <xsl:apply-templates select="/TEI.2/text" mode="splitter">
+        <xsl:apply-templates select="root($node)/TEI.2/text" mode="splitter">
             <xsl:with-param name="node" select="$node"/>
             <xsl:with-param name="action" select="'filename'"/>
         </xsl:apply-templates>
