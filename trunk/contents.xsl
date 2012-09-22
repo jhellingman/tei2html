@@ -2,42 +2,45 @@
 
     <!ENTITY nbsp       "&#160;">
 
-]><!--
-
-    Stylesheet with to generate a table of contents, to be imported in 
-    tei2html.xsl.
-
-    Usage: 
-        <divGen type="toc"/>    Generates a standard table of contents.
-        <divGen type="toca"/>   Generates a classice table of contents,
-                                with arguments taken from the chapter
-                                headings.
-        <divGen type="loi"/>    Generates a list of illustrations.
-        <divGen type="gallery"/> Generates a gallery of thumbnails of
-                                all included illustrations.
-
-        <divGen type="index"/>  Generates an index.
-
-    Special Usage:
-        <div2 type="SubToc"/>   Generates a table of contents at the
-                                div2 level. This table replaces the
-                                actual content of the div2.
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-
--->
+]>
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xhtml xs"
+    exclude-result-prefixes="f xhtml xs xd"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to generate tables of contents and indexes.</xd:short>
+        <xd:detail>
+            <p>This stylesheet will contains code to handle the <code>divGen</code> elements that call for generating a table of contents or index.</p>
+        
+            <p>The following are supported:</p>
+
+            <table>
+                <tr><td><code>&lt;divGen type="toc"/&gt;</code></td>        <td>Generates a standard table of contents.</td></tr>
+                <tr><td><code>&lt;divGen type="toca"/&gt;</code></td>       <td>Generates a classical table of contents, with arguments taken from the chapter headings.</td></tr>
+                <tr><td><code>&lt;divGen type="loi"/&gt;</code></td>        <td>Generates a list of illustrations.</td></tr>
+                <tr><td><code>&lt;divGen type="gallery"/&gt;</code></td>    <td>Generates a gallery of thumbnails of all included illustrations.</td></tr>
+                <tr><td><code>&lt;divGen type="index"/&gt;</code></td>      <td>Generates an index.</td></tr>
+                <tr><td><code>&lt;divGen type="IndexToc"/&gt;</code></td>   <td>Generates a one-line table of contents, specially designed for indexes.</td></tr>
+                <tr><td><code>&lt;divGen type="footnotes"/&gt;</code></td>  <td>Generates a section with footnotes.</td></tr>
+                <tr><td><code>&lt;div2 type="SubToc"/&gt;</code></td>       <td>Generates a table of contents at the div2 level. This table replaces the actual content of the div2 element.</td></tr>
+            </table>
+        </xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
+
+
+    <xd:doc>
+        <xd:short>Warn for unknown <code>divGen</code> types.</xd:short>
+    </xd:doc>
 
     <xsl:template match="divGen">
         <xsl:message terminate="no">Warning: divGen element without or with unknown type attribute: <xsl:value-of select="@type"/>.</xsl:message>
@@ -46,7 +49,13 @@
 
     <!--====================================================================-->
     <!-- Table of Contents -->
-    <!-- Take care only to generate ToC entries for divisions of the main text, not for those in quoted texts -->
+
+    <xd:doc>
+        <xd:short>Generate a table of contents</xd:short>
+        <xd:detail>
+            <p>Generate a table of contents for a TEI file, including its head.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
@@ -56,6 +65,13 @@
         </div>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate the table of contents body.</xd:short>
+        <xd:detail>
+            <p>Generate body of the table of contents for a TEI file. Take care only to generate ToC entries for divisions of the main text, not for those in quoted texts.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='tocBody']">
         <xsl:call-template name="toc-body"/>
@@ -76,34 +92,34 @@
             <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
-            <xsl:choose>
-                <xsl:when test="/TEI.2/text/body/div0">
-                    <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div0">
-                        <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                    </xsl:apply-templates>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates mode="gentoc" select="/TEI.2/text/body/div1">
-                        <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                    </xsl:apply-templates>
-                </xsl:otherwise>
-            </xsl:choose>
+
+            <xsl:apply-templates mode="gentoc" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else /TEI.2/text/body/div1">
+                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+            </xsl:apply-templates>
+
             <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
         </ul>
     </xsl:template>
 
-    <!-- TOC: div0 -->
+    <xd:doc>
+        <xd:short>Generate an entry in the table of contents.</xd:short>
+        <xd:detail>
+            <p>Generate an entry for a division in the table of contents, and recursively generate lines for the underlying divisions.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:template match="div0" mode="gentoc">
+    <xsl:template match="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
         <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
+
+        <!-- We need a head to be able to display an entry in the toc -->
+        <xsl:if test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
             <li>
                 <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div1 and $maxlevel &gt;= 1">
+                <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
                     <ul>
-                        <xsl:apply-templates select="div1" mode="gentoc">
+                        <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
                             <xsl:with-param name="maxlevel" select="$maxlevel"/>
                         </xsl:apply-templates>
                     </ul>
@@ -113,110 +129,135 @@
     </xsl:template>
 
 
-    <!-- TOC: div1 -->
+    <xd:doc>
+        <xd:short>Test whether a division contains further subdivisions.</xd:short>
+    </xd:doc>
 
-    <xsl:template match="div1" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div2 and $maxlevel &gt;= 2 and (not(@type) or @type != 'Index')">
-                    <ul>
-                        <xsl:apply-templates select="div2" mode="gentoc">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </ul>
-                </xsl:if>
-            </li>
+    <xsl:function name="f:contains-div" as="xs:boolean">
+        <xsl:param name="div" as="node()"/>
+        <xsl:value-of select="if ($div/div0 or $div/div1 or $div/div2 or $div/div3 or $div/div4 or $div/div5 or $div/div6) then 1 else 0"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Determine the level of the division (by looking at its name).</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:div-level" as="xs:integer">
+        <xsl:param name="div" as="node()"/>
+        <xsl:value-of select="substring(local-name($div), 4)"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Generate a link to a division in the toc, including its number and pagenumber.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="generate-toc-head-link">
+        <xsl:if test="@n">
+            <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
+        </xsl:if>
+        <a>
+            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:call-template name="generate-single-head"/>
+        </a>
+        <xsl:call-template name="insert-toc-page-number"/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Combine all heads in a division into a single line.</xd:short>
+        <xd:detail>
+            <p>Combine all heads in a division into a single line, ignoring "super" and "label" type heads, and adding the division number coded in the <code>@n</code>-attribute.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="generate-single-head">
+        <xsl:choose>
+
+            <!-- Do we want to fully override the head for the toc using the toc-head() rendering -->
+            <xsl:when test="contains(@rend, 'toc-head(')">
+                <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
+            </xsl:when>
+            <xsl:otherwise>
+
+                <!-- Handle all remaining headers in sequence -->
+                <xsl:for-each select="head">
+                    <xsl:choose>
+                        <xsl:when test="@type='super'"/>
+                        <xsl:when test="@type='label'"/>
+                        <xsl:when test="contains(@rend, 'toc-head(')">
+                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates mode="tochead"/>
+                            <xsl:if test="following-sibling::head">
+                                <xsl:text> </xsl:text>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generating a span containing the page number the current node appears on, and a link to the current node.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="insert-toc-page-number">
+        <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
+            <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
+            <span class="tocPageNum">
+                <a class="pageref">
+                    <xsl:call-template name="generate-href-attribute"/>
+                    <xsl:value-of select="preceding::pb[1]/@n"/>
+                </a>
+            </span>
         </xsl:if>
     </xsl:template>
 
 
-    <!-- TOC: div2 -->
+    <xd:doc>
+        <xd:short>Ignore notes that occur in heads in the toc.</xd:short>
+    </xd:doc>
 
-    <xsl:template match="div2" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div3 and $maxlevel &gt;= 3">
-                    <ul>
-                        <xsl:apply-templates select="div3" mode="gentoc">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </ul>
-                </xsl:if>
-            </li>
-        </xsl:if>
+    <xsl:template match="note" mode="tochead"/>
+
+
+    <xd:doc>
+        <xd:short>Handle text styles in chapter heads.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="hi" mode="tochead">
+        <i>
+            <xsl:apply-templates mode="tochead"/>
+        </i>
     </xsl:template>
 
-    <!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
-    <xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
-
-
-    <!-- TOC: div3 -->
-
-    <xsl:template match="div3" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div4 and $maxlevel &gt;= 4">
-                    <ul>
-                        <xsl:apply-templates select="div4" mode="gentoc">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </ul>
-                </xsl:if>
-            </li>
-        </xsl:if>
+    <xsl:template match="hi[@rend='italic']" mode="tochead">
+        <i>
+            <xsl:apply-templates mode="tochead"/>
+        </i>
     </xsl:template>
 
-    <!-- TOC: div4 -->
-
-    <xsl:template match="div4" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div5 and $maxlevel &gt;= 5">
-                    <ul>
-                        <xsl:apply-templates select="div5" mode="gentoc">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </ul>
-                </xsl:if>
-            </li>
-        </xsl:if>
+    <xsl:template match="hi[@rend='sup']" mode="tochead">
+        <sup>
+            <xsl:apply-templates mode="tochead"/>
+        </sup>
     </xsl:template>
 
-    <!-- TOC: div5 -->
 
-    <xsl:template match="div5" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:if test="head">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="div6 and $maxlevel &gt;= 6">
-                    <ul>
-                        <xsl:apply-templates select="div6" mode="gentoc"/>
-                    </ul>
-                </xsl:if>
-            </li>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- TOC: div6 -->
-
-    <xsl:template match="div6" mode="gentoc">
-        <xsl:if test="head">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-            </li>
-        </xsl:if>
-    </xsl:template>
-
+    <!--====================================================================-->
     <!-- Special short table of contents for indexes -->
+
+    <xd:doc>
+        <xd:short>Generate a one-line table-of-contents for use with an index.</xd:short>
+        <xd:detail>
+            <p>Generate a one-line table-of-contents for use with an index. This shows all the letters separated by bars, to make faster navigation possible.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='IndexToc']">
         <xsl:call-template name="genindextoc"/>
@@ -245,90 +286,15 @@
     </xsl:template>
 
 
-    <xsl:template name="generate-toc-head-link">
-        <xsl:if test="@n">
-            <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
-        </xsl:if>
-        <a>
-            <xsl:call-template name="generate-href-attribute"/>
-            <xsl:call-template name="generate-single-head"/>
-        </a>
-        <xsl:call-template name="insert-toc-page-number"/>
-    </xsl:template>
-
-
-    <!-- Combine all heads for a division into a single line -->
-    <xsl:template name="generate-single-head">
-        <xsl:choose>
-
-            <!-- Do we want to fully override the head for the toc -->
-            <xsl:when test="contains(@rend, 'toc-head(')">
-                <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
-            </xsl:when>
-            <xsl:otherwise>
-
-                <!-- Handle all remaining headers in sequence -->
-                <xsl:for-each select="head">
-                    <xsl:choose>
-                        <xsl:when test="@type='super'"/>
-                        <xsl:when test="@type='label'"/>
-                        <xsl:when test="contains(@rend, 'toc-head(')">
-                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates mode="tochead"/>
-                            <xsl:if test="following-sibling::head">
-                                <xsl:text> </xsl:text>
-                            </xsl:if>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:for-each>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <!-- Suppress notes in table of contents (to avoid getting them twice) -->
-    <xsl:template match="note" mode="tochead"/>
-
-    <!-- Text styles in chapter headings -->
-
-    <xsl:template match="hi" mode="tochead">
-        <i>
-            <xsl:apply-templates mode="tochead"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='italic']" mode="tochead">
-        <i>
-            <xsl:apply-templates mode="tochead"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sup']" mode="tochead">
-        <sup>
-            <xsl:apply-templates mode="tochead"/>
-        </sup>
-    </xsl:template>
-
-
     <!--====================================================================-->
-    <!-- A classical table of contents with chapter labels, titles, and arguments -->
+    <!-- A classic table of contents with chapter labels, titles, and arguments -->
 
-
-    <!-- insert a span containing the page number, and a link to it. -->
-    <xsl:template name="insert-toc-page-number">
-        <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-            <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
-            <span class="tocPageNum">
-                <a class="pageref">
-                    <xsl:call-template name="generate-href-attribute"/>
-                    <xsl:value-of select="preceding::pb[1]/@n"/>
-                </a>
-            </span>
-        </xsl:if>
-    </xsl:template>
-
+    <xd:doc>
+        <xd:short>Generate a classic table of contents with chapter labels, titles, and arguments.</xd:short>
+        <xd:detail>
+            <p>Generate a classic table of contents with chapter labels, titles, and arguments. This table of contents only goes one level deep.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
@@ -336,14 +302,7 @@
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
-            <xsl:choose>
-                <xsl:when test="/TEI.2/text/body/div0">
-                    <xsl:apply-templates mode="gentoca" select="/TEI.2/text/body/div0"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates mode="gentoca" select="/TEI.2/text/body/div1"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates mode="gentoca" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else /TEI.2/text/body/div1"/>
             <xsl:apply-templates mode="gentoca" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
         </div>
     </xsl:template>
@@ -355,7 +314,7 @@
                 <p class="tocChapter">
                     <a>
                         <xsl:call-template name="generate-href-attribute"/>
-                        <xsl:apply-templates select="head[@type='label']" mode="gentoca"/>
+                        <xsl:apply-templates select="head[@type='label']" mode="tochead"/>
                     </a>
                     <xsl:if test="not(head[not(@type)])">
                         <xsl:call-template name="insert-toc-page-number"/>
@@ -366,14 +325,14 @@
                 <p class="tocChapter">
                     <a>
                         <xsl:call-template name="generate-href-attribute"/>
-                        <xsl:apply-templates select="head[not(@type)]" mode="gentoca"/>
+                        <xsl:apply-templates select="head[not(@type)]" mode="tochead"/>
                     </a>
                     <xsl:call-template name="insert-toc-page-number"/>
                 </p>
             </xsl:if>
             <xsl:if test="argument">
                 <p class="tocArgument">
-                    <xsl:apply-templates select="argument" mode="gentoca"/>
+                    <xsl:apply-templates select="argument" mode="tochead"/>
                 </p>
             </xsl:if>
         </xsl:if>
@@ -384,34 +343,19 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="note" mode="gentoca"/>
-
-    <xsl:template match="hi" mode="gentoca">
-        <i>
-            <xsl:apply-templates mode="gentoca"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='italic']" mode="gentoca">
-        <i>
-            <xsl:apply-templates mode="gentoca"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sup']" mode="gentoca">
-        <sup>
-            <xsl:apply-templates mode="gentoca"/>
-        </sup>
-    </xsl:template>
-
 
     <!--====================================================================-->
     <!-- SubToc (special handling for Tribes and Castes volumes) -->
 
-    <!-- A SubToc is a short table of contents at div2 level, which appears at the beginning of a div1 -->
+    <xd:doc>
+        <xd:short>Replace a div2 element with a generated toc.</xd:short>
+        <xd:detail>
+            <p>A SubToc is a short table of contents at div2 level, which appears at the beginning of a div1.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="div2[@type='SubToc']">
-        <!-- Render heading in normal fashion -->
+        <!-- Render heading in normal way -->
         <xsl:apply-templates select="head"/>
 
         <!-- Generate the table of contents -->
@@ -420,21 +364,24 @@
         <!-- Ignore original content -->
     </xsl:template>
 
+
     <xsl:template name="SubToc">
         <ul>
             <xsl:apply-templates select="../div2[@type != 'SubToc']" mode="gentoc"/>
         </ul>
     </xsl:template>
 
-    <xsl:template match="div2" mode="SubToc">
-        <li>
-            <xsl:call-template name="generate-toc-head-link"/>
-        </li>
-    </xsl:template>
+
+    <!-- Do not list subordinate tables of contents (the actual subtoc will be replaced by a generated table of contents and links will not work properly) -->
+    <xsl:template match="div2[@type='SubToc']" mode="gentoc"/>
 
 
     <!--====================================================================-->
     <!-- List of Illustrations -->
+
+    <xd:doc>
+        <xd:short>Generate a list of illustrations.</xd:short>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
@@ -455,7 +402,19 @@
     </xsl:template>
 
 
+    <!--====================================================================-->
     <!-- Gallery of thumbnail images -->
+
+    <xd:doc>
+        <xd:short>Generate a thumbnail gallery.</xd:short>
+
+        <xd:detail>
+            <p>Generate a thumbnail gallery. This template assumes that for each image, a thumbnail is
+            available, and will use that image in a gallery, linking to the original (full-size) image. The name
+            of the thumbnail image file is assumed to be the same as the full-size image, but is located in
+            a subdirectory <code>/thumbs/</code>.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
@@ -532,6 +491,7 @@
         <xsl:apply-templates mode="gallery-captions"/>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- Render pre-existing table of contents encoded as itemized list as table 
          Nested lists are integrated into a single table. 
@@ -546,7 +506,7 @@
                 [/item]
             [/list]
 
-         -->
+    -->
 
     <xsl:template match="list[@type='tocList']">
         <xsl:choose>
@@ -557,7 +517,7 @@
                     <xsl:apply-templates mode="tocList"/>
                 </table>
             </xsl:when>
-            <!-- Nested list -->
+            <!-- Nested list, part of table generated for outermost list -->
             <xsl:otherwise>
                 <xsl:apply-templates mode="tocList"/>
             </xsl:otherwise>
