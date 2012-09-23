@@ -1735,6 +1735,8 @@ BEGIN
 
     $ent{"ngtilde"}     = "n" . chr(0x0360) . "g"; # ng with double tilde
 
+    $ent{"Voline"}      = "V" . chr(0x0305); # V with overline
+    $ent{"Xoline"}      = "X" . chr(0x0305); # V with overline
 
     # Multiple combining diacritics
     $ent{"eumlacu"}     = chr(0x00eb) . chr(0x0301); # e with diaresis and acute
