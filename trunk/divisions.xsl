@@ -387,8 +387,8 @@
 
 
     <xd:doc>
-        <xd:short>Generate a link to the table of contents.</xd:short>
-        <xd:detail>Generate a link to the table of contents, to be placed in the right margin in the HTML output.</xd:detail>
+        <xd:short>Generate a link back to the table of contents.</xd:short>
+        <xd:detail>Generate a link back (in)to the table of contents, to be placed in the right margin in the HTML output.</xd:detail>
     </xd:doc>
 
     <xsl:template name="generate-toc-link">
@@ -398,8 +398,10 @@
                 <span class="pagenum">
                     <xsl:text>[</xsl:text>
                     <a>
+                        <xsl:variable name="id" select="@id"/>
                         <xsl:call-template name="generate-href-attribute">
-                            <xsl:with-param name="target" select="//*[@id='toc']"/>
+                            <!-- Link to entry for current division if available to make navigation back easier -->
+                            <xsl:with-param name="target" select="if (//*[@id='toc']//ref[@target=$id]) then //*[@id='toc']//ref[@target=$id] else //*[@id='toc']"/>
                         </xsl:call-template>
                         <xsl:value-of select="f:message('msgToc')"/>
                      </a>
