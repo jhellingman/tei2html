@@ -103,7 +103,6 @@
         </html>
     </xsl:template>
 
-
     <xsl:template mode="report" match="i:issue">
         <tr>
             <td><xsl:value-of select="@code"/></td>
@@ -112,6 +111,21 @@
             <td><xsl:value-of select="."/></td>
         </tr>
     </xsl:template>
+
+    <!-- Information in TEI header -->
+
+    <xsl:template mode="checks" match="publicationStmt">
+        <xsl:if test="not(idno[@type='epub-id'])">
+            <i:issue pos="{@pos}" code="H0001">No ePub-id present.</i:issue>
+        </xsl:if>
+
+        <xsl:if test="idno[@type='epub-id'] and not(matches(idno[@type='epub-id'], '^(urn:uuid:([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$'))">
+            <i:issue pos="{@pos}" code="H0002">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+        </xsl:if>
+
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
 
     <!-- Numbering of divisions -->
 
