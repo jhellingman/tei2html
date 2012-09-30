@@ -1490,6 +1490,8 @@ BEGIN
 
     $ent{"longs"}       = chr(0x017F);  # long s
 
+    $ent{"yogh"}        = chr(0x021D);  # yogh
+
     $ent{"Crev"}        = chr(0x2183);  # Reversed C (as used in Roman numerals)
 
     $ent{"ayin"}        = chr(0x02BF);  # modifier letter left half ring
@@ -1527,10 +1529,10 @@ BEGIN
     $ent{"schwaacu"}    = chr(0x0259) . chr(0x0301); # LETTER SCHWA with acute
     $ent{"schwacirc"}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with acute
 
-    $ent{"ezh"}         = chr(0x0292);  # LETTER EZH
-    $ent{"EZH"}         = chr(0x01B7);  # LETTER EZH
-    $ent{"esh"}         = chr(0x0283);  # LETTER ESH
-    $ent{"ESH"}         = chr(0x01A9);  # LETTER ESH (looks like Greek capital sigma)
+    $ent{"ezh"}         = chr(0x0292);  # letter ezh
+    $ent{"EZH"}         = chr(0x01B7);  # letter Ezh
+    $ent{"esh"}         = chr(0x0283);  # letter esh
+    $ent{"ESH"}         = chr(0x01A9);  # letter Esh (looks like Greek capital sigma)
 
     $ent{"turna"}       = chr(0x0250);  # letter turned a
     $ent{"turnacirc"}   = chr(0x0250) . chr(0x0302);  # letter turned a with circumflex
@@ -1540,6 +1542,8 @@ BEGIN
 
     $ent{"aoacute"}     = chr(0xa735) . chr(0x0301); # ao ligature with acute
     $ent{"AOacute"}     = chr(0xa734) . chr(0x0301); # AO ligature with acute
+
+    $ent{"sml.s"}       = chr(0x02e2);  # Spacing modifier letter small s
 
 
     $ent{"N"}			= "N"; # Capital letter N (used with special meaning in Wolff's dictionary.)
@@ -1551,10 +1555,30 @@ BEGIN
     # Requiring combining diacritics
 
     $ent{"mgrave"}      = "m" . chr(0x0300); # m with grave
+    $ent{"sgrave"}      = "s" . chr(0x0300); # s with grave
+    $ent{"Sgrave"}      = "S" . chr(0x0300); # S with grave
+    $ent{"ygrave"}      = "y" . chr(0x0300); # y with grave
+    $ent{"Ygrave"}      = "Y" . chr(0x0300); # Y with grave
+    $ent{"dgrave"}      = "d" . chr(0x0300); # d with grave
+    $ent{"lgrave"}      = "l" . chr(0x0300); # l with grave
+    $ent{"zgrave"}      = "z" . chr(0x0300); # z with grave
 
+    $ent{"kacute"}      = 'k' . chr(0x0301); # k with acute
     $ent{"oeacute"}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
     $ent{"OEacute"}     = chr(0x0152) . chr(0x0301); # OE ligature with acute
     $ent{"hacute"}      = "h" . chr(0x0301); # h with acute
+    $ent{"vacute"}      = "v" . chr(0x0301); # v with acute
+    $ent{"Vacute"}      = "V" . chr(0x0301); # V with acute
+    $ent{"tacute"}      = "t" . chr(0x0301); # t with acute
+    $ent{"Tacute"}      = "T" . chr(0x0301); # T with acute
+    $ent{"pacute"}      = "p" . chr(0x0301); # p with acute
+    $ent{"Pacute"}      = "P" . chr(0x0301); # P with acute
+    $ent{"xacute"}      = "x" . chr(0x0301); # x with acute
+    $ent{"Xacute"}      = "X" . chr(0x0301); # X with acute
+    $ent{"dacute"}      = "d" . chr(0x0301); # d with acute
+    $ent{"Dacute"}      = "D" . chr(0x0301); # D with acute
+    $ent{"jacute"}      = "j" . chr(0x0301); # j with acute
+    $ent{"Jacute"}      = "J" . chr(0x0301); # J with acute
 
     $ent{"Kcirc"}       = "K" . chr(0x0302); # K with circumflex
     $ent{"kcirc"}       = "k" . chr(0x0302); # k with circumflex
@@ -1570,24 +1594,47 @@ BEGIN
     $ent{"rtilde"}      = "r" . chr(0x0303); # r with tilde
     $ent{"stilde"}      = "s" . chr(0x0303); # s with tilde
     $ent{"ltilde"}      = "l" . chr(0x0303); # s with tilde
+    $ent{"wtilde"}      = "w" . chr(0x0303); # w with tilde
+    $ent{"Wtilde"}      = "W" . chr(0x0303); # W with tilde
+    $ent{"ptilde"}      = "p" . chr(0x0303); # p with tilde
+    $ent{"Ptilde"}      = "P" . chr(0x0303); # P with tilde
+    $ent{"htilde"}      = "h" . chr(0x0303); # h with tilde
+    $ent{"Htilde"}      = "H" . chr(0x0303); # H with tilde
+    $ent{"ttilde"}      = "t" . chr(0x0303); # t with tilde
 
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
     $ent{"lmacr"}       = "l" . chr(0x0304); # l with macron
     $ent{"mmacr"}       = "m" . chr(0x0304); # m with macron
     $ent{"nmacr"}       = "n" . chr(0x0304); # n with macron
     $ent{"qmacr"}       = "q" . chr(0x0304); # q with macron
+    $ent{"gmacr"}       = "g" . chr(0x0304); # g with macron
+    $ent{"Gmacr"}       = "G" . chr(0x0304); # G with macron
     $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
+    $ent{"vmacr"}       = "v" . chr(0x0304); # v with macron
 
     $ent{"Jbreve"}      = "J" . chr(0x0306); # J with breve
     $ent{"jbreve"}      = "j" . chr(0x0306); # j with breve
+    $ent{"Sbreve"}      = "S" . chr(0x0306); # S with breve
+    $ent{"sbreve"}      = "s" . chr(0x0306); # s with breve
+    $ent{"Zbreve"}      = "Z" . chr(0x0306); # Z with breve
+    $ent{"zbreve"}      = "z" . chr(0x0306); # z with breve
+    $ent{"ybreve"}      = "y" . chr(0x0306); # y with breve
+    $ent{"Ybreve"}      = "Y" . chr(0x0306); # Y with breve
+    $ent{"vbreve"}      = "v" . chr(0x0306); # v with breve
+    $ent{"Vbreve"}      = "V" . chr(0x0306); # V with breve
+
+    $ent{"zbrevdotb"}   = "z" . chr(0x0306) . chr(0x0323); # z with breve and dot b
 
     $ent{"adota"}       = "a" . chr(0x0307); # a with dot above
     $ent{"Adota"}       = "A" . chr(0x0307); # A with dot above
+    $ent{"bdota"}       = "b" . chr(0x0307); # b with dot above
+    $ent{"Bdota"}       = "B" . chr(0x0307); # B with dot above
     $ent{"edota"}       = "e" . chr(0x0307); # e with dot above
     $ent{"Edota"}       = "E" . chr(0x0307); # E with dot above
     $ent{"kdota"}       = "k" . chr(0x0307); # k with dot above
     $ent{"mdota"}       = "m" . chr(0x0307); # m with dot above
     $ent{"ndota"}       = "n" . chr(0x0307); # n with dot above
+    $ent{"Ndota"}       = "N" . chr(0x0307); # N with dot above
     $ent{"odota"}       = "o" . chr(0x0307); # o with dot above
     $ent{"rdota"}       = "r" . chr(0x0307); # r with dot above
     $ent{"Sdota"}       = "S" . chr(0x0307); # S with dot above
@@ -1595,6 +1642,23 @@ BEGIN
     $ent{"udota"}       = "u" . chr(0x0307); # u with dot above
     $ent{"Udota"}       = "U" . chr(0x0307); # U with dot above
     $ent{"zdota"}       = "z" . chr(0x0307); # z with dot above
+    $ent{"ldota"}       = "l" . chr(0x0307); # l with dot above
+    $ent{"pdota"}       = "p" . chr(0x0307); # p with dot above
+    $ent{"ddota"}       = "d" . chr(0x0307); # d with dot above
+    $ent{"gdota"}       = "g" . chr(0x0307); # g with dot above
+    $ent{"Gdota"}       = "G" . chr(0x0307); # G with dot above
+    $ent{"sdota"}       = "s" . chr(0x0307); # s with dot above
+    $ent{"Sdota"}       = "S" . chr(0x0307); # S with dot above
+    $ent{"cdota"}       = "c" . chr(0x0307); # c with dot above
+    $ent{"Cdota"}       = "C" . chr(0x0307); # C with dot above
+    $ent{"hdota"}       = "h" . chr(0x0307); # h with dot above
+    $ent{"Hdota"}       = "H" . chr(0x0307); # H with dot above
+    $ent{"ydota"}       = "y" . chr(0x0307); # y with dot above
+    $ent{"Ydota"}       = "Y" . chr(0x0307); # Y with dot above
+    $ent{"vdota"}       = "v" . chr(0x0307); # v with dot above
+    $ent{"Vdota"}       = "V" . chr(0x0307); # V with dot above
+    $ent{"jdota"}       = "j" . chr(0x0307); # j with dot above
+    $ent{"Jdota"}       = "J" . chr(0x0307); # J with dot above
 
     $ent{"ruml"}        = "r" . chr(0x0308); # r with diaresis
 
@@ -1611,11 +1675,22 @@ BEGIN
     $ent{"Ucaron"}      = chr(0x01D3); # U with caron
     $ent{"ucaron"}      = chr(0x01D4); # u with caron
 
+    $ent{"zcardotb"}    = "z" . chr(0x030C) . chr(0x0323); # z with caron and dot below
+
     $ent{"adgrave"}     = "a" . chr(0x030F); # a with double grave
     $ent{"idgrave"}     = "i" . chr(0x030F); # i with double grave
     $ent{"odgrave"}     = "o" . chr(0x030F); # o with double grave
     $ent{"rdgrave"}     = "r" . chr(0x030F); # r with double grave
     $ent{"udgrave"}     = "u" . chr(0x030F); # u with double grave
+
+    $ent{"prcomma"}     = "p" . chr(0x0314); # p with reverse comma above
+    $ent{"krcomma"}     = "k" . chr(0x0314); # k with reverse comma above
+    $ent{"crcomma"}     = "c" . chr(0x0314); # c with reverse comma above
+    $ent{"trcomma"}     = "t" . chr(0x0314); # t with reverse comma above
+
+	$ent{"cdacdotb"}     = "c" . chr(0x030B) . chr(0x0323); # c with double acute and dot below
+
+	$ent{"glhringa"}     = "g" . chr(0x0351); # g with left half ring above
 
     $ent{"adotb"}       = "a" . chr(0x0323); # a with dot below
     $ent{"edotb"}       = "e" . chr(0x0323); # e with dot below
@@ -1628,6 +1703,7 @@ BEGIN
     $ent{"ldotb"}       = "l" . chr(0x0323); # 1 with dot below
     $ent{"mdotb"}       = "m" . chr(0x0323); # m with dot below
     $ent{"odotb"}       = chr(0x1ECD); # o with dot below
+    $ent{"Odotb"}       = "O" . chr(0x0323); # O with dot below
     $ent{"udotb"}       = "u" . chr(0x0323); # u with dot below
     $ent{"Udotb"}       = "U" . chr(0x0323); # U with dot below
     $ent{"wdotb"}       = "w" . chr(0x0323); # w with dot below
@@ -1636,6 +1712,12 @@ BEGIN
     $ent{"Cdotb"}       = "C" . chr(0x0323); # C with dot below
     $ent{"Edotb"}       = "E" . chr(0x0323); # E with dot below
     $ent{"Fdotb"}       = "F" . chr(0x0323); # F with dot below
+    $ent{"xdotb"}       = "x" . chr(0x0323); # x with dot below
+    $ent{"Xdotb"}       = "X" . chr(0x0323); # X with dot below
+    $ent{"jdotb"}       = "j" . chr(0x0323); # j with dot below
+    $ent{"Jdotb"}       = "J" . chr(0x0323); # J with dot below
+    $ent{"gdotb"}       = "g" . chr(0x0323); # g with dot below
+    $ent{"Gdotb"}       = "G" . chr(0x0323); # G with dot below
 
     $ent{"humlb"}       = "h" . chr(0x0324); # h with diaresis below
     $ent{"Lumlb"}       = "L" . chr(0x0324); # L with diaresis below
@@ -1648,6 +1730,10 @@ BEGIN
     $ent{"uumlb"}       = "u" . chr(0x0324); # u with diaresis below
     $ent{"Zumlb"}       = "Z" . chr(0x0324); # Z with diaresis below
     $ent{"zumlb"}       = "z" . chr(0x0324); # z with diaresis below
+    $ent{"Uumlb"}       = "U" . chr(0x0324); # U with diaresis below
+    $ent{"uumlb"}       = "u" . chr(0x0324); # u with diaresis below
+
+    $ent{"ubrevumlb"}	= "u" . chr(0x0306) . chr(0x0324); # u with breve and diaresis below
 
     $ent{"oudb"}        = "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
     $ent{"oubb"}        = "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
@@ -1669,8 +1755,13 @@ BEGIN
     $ent{"ucedil"}      = "u" . chr(0x0327); # u with cedille
     $ent{"Zcedil"}      = "Z" . chr(0x0327); # Z with cedille
     $ent{"zcedil"}      = "z" . chr(0x0327); # z with cedille
+    $ent{"dcedil"}      = "d" . chr(0x0327); # d with cedille
+    $ent{"xcedil"}      = "x" . chr(0x0327); # x with cedille
 
     $ent{"ucircb"}      = "u" . chr(0x032D); # u with circumflex below
+    $ent{"zcircb"}      = "z" . chr(0x032D); # z with circumflex below
+    $ent{"scircb"}      = "s" . chr(0x032D); # s with circumflex below
+    $ent{"tcircb"}      = "t" . chr(0x032D); # t with circumflex below
 
     $ent{"Abreveb"}     = "A" . chr(0x032E); # A with breve below
     $ent{"abreveb"}     = "a" . chr(0x032E); # a with breve below
@@ -1680,6 +1771,8 @@ BEGIN
     $ent{"Obreveb"}     = "O" . chr(0x032E); # O with breve below
     $ent{"obreveb"}     = "o" . chr(0x032E); # o with breve below
     $ent{"ubreveb"}     = "u" . chr(0x032E); # u with breve below
+    $ent{"tbreveb"}     = "t" . chr(0x032E); # t with breve below
+
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
     $ent{"ebowb"}       = "e" . chr(0x032F); # e with bow below (inverted breve)
@@ -1690,6 +1783,7 @@ BEGIN
 
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
     $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
+    $ent{"Ebarb"}       = "E" . chr(0x0331); # E with macron below
     $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
     $ent{"ibarb"}       = "i" . chr(0x0331); # i with macron below
     $ent{"kbarb"}       = "k" . chr(0x0331); # k with macron below
@@ -1699,9 +1793,12 @@ BEGIN
     $ent{"nbarb"}       = "n" . chr(0x0331); # n with macron below
     $ent{"Nbarb"}       = "N" . chr(0x0331); # N with macron below
     $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
+    $ent{"Obarb"}       = "O" . chr(0x0331); # O with macron below
     $ent{"tbarb"}       = "t" . chr(0x0331); # t with macron below
     $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
     $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
+    $ent{"pbarb"}       = "p" . chr(0x0331); # p with macron below
+    $ent{"Pbarb"}       = "P" . chr(0x0331); # P with macron below
 
     $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
     $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
@@ -1779,11 +1876,15 @@ BEGIN
     $ent{"rdotbcirc"}   = chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
     $ent{"amacrbrev"}   = chr(0x0101) . chr(0x0306); # a with macron and breve
-    $ent{"emacrbrev"}   = chr(0x0113) . chr(0x0306); # e with macron and breve
+    $ent{"amacrtild"}   = chr(0x0101) . chr(0x0303); # a with macron and tilde
+	$ent{"emacrbrev"}   = chr(0x0113) . chr(0x0306); # e with macron and breve
     $ent{"imacrbrev"}   = chr(0x012B) . chr(0x0306); # i with macron and breve
     $ent{"omacrbrev"}   = chr(0x014D) . chr(0x0306); # o with macron and breve
     $ent{"umacrbrev"}   = chr(0x016B) . chr(0x0306); # u with macron and breve
     $ent{"ymacrbrev"}   = chr(0x0233) . chr(0x0306); # y with macron and breve
+
+    $ent{"atildmacr"}   = "a" . chr(0x0303) . chr(0x0304); # a with tilde and macron
+    $ent{"atildbrev"}   = "a" . chr(0x0303) . chr(0x0306); # a with tilde and breve
 
     $ent{"edotaac"}     = chr(0x0117) . chr(0x0301); # e with dot above and acute
     $ent{"edotatil"}    = chr(0x0117) . chr(0x0303); # e with dot above and tilde
