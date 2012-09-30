@@ -696,5 +696,19 @@
         </h3>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Included material (alternative for xml:include) -->
+
+    <xsl:template match="divGen[@type='Inclusion']">
+        <!-- Include material should be rendered here; material is given on an url parameter -->
+        <xsl:if test="@url">
+            <xsl:variable name="target" select="@url"/>
+            <xsl:variable name="document" select="substring-before($target, '#')"/>
+            <xsl:variable name="otherid" select="substring-after($target, '#')"/>
+
+            <xsl:apply-templates select="document($document, .)//*[@id=$otherid]"/>
+        </xsl:if>
+    </xsl:template>
+
 
 </xsl:stylesheet>
