@@ -154,7 +154,7 @@
     </xd:doc>
 
     <xsl:template name="generate-toc-head-link">
-        <xsl:if test="@n">
+        <xsl:if test="@n and f:getConfigurationBoolean('numberTocEntries')">
             <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a>
