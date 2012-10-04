@@ -242,8 +242,12 @@
 
     <xsl:template name="do-corr">
         <xsl:choose>
+            <!-- Don't report minor or punctuation corrections -->
             <xsl:when test="@resp = 'm' or @resp = 'p'">
-                <xsl:apply-templates/>
+                <span>
+                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:apply-templates/>
+                </span>
             </xsl:when>
             <xsl:when test="not(@sic) or @sic=''">
                 <span class="corr">
@@ -254,6 +258,7 @@
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
+            <!-- Don't generate an empty span, as that will be purged by some HTML tools -->
             <xsl:when test=". = ''">
                 <a>
                     <xsl:call-template name="generate-id-attribute"/>

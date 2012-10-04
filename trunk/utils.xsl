@@ -372,5 +372,4 @@
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
 
-
 </xsl:stylesheet>
