@@ -24,11 +24,13 @@
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xd:doc type="string">Name of custom configuration file.</xd:doc>
+    <xsl:param name="configurationFile"/>
 
     <xd:doc>
         <xd:short>The default configuration.</xd:short>
         <xd:detail>
-            <p>The contents of this variable is at the same time the structure for the configuration files that
+            <p>The contents of this variable follow the structure for configuration files that
             can be used with documents.</p>
         </xd:detail>
     </xd:doc>
@@ -44,14 +46,14 @@
         <xd:short>Load the file-specific configuration from the place where the file resides.</xd:short>
     </xd:doc>
 
-    <xsl:variable name="configuration" select="document('tei2html.config', /)"/>
+    <xsl:variable name="configuration" select="if ($configurationFile) then document($configurationFile, /) else $default-configuration"/>
 
 
     <xd:doc>
         <xd:short>Get a value from the configuration.</xd:short>
         <xd:detail>
-            <p>Get a value from the configuration. First try to get it from a local file named tei2html.config, and if that fails, obtain
-            the value from the default configuration included in this stylesheet.</p>
+            <p>Get a value from the configuration. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: tei2html.config), and if that fails, obtain
+            the value from the default configuration included in this stylesheet. If that too fails, a message is logged to the console.</p>
         </xd:detail>
     </xd:doc>
 
@@ -59,9 +61,13 @@
         <xsl:param name="name"/>
 
         <xsl:variable name="value" select="$configuration//*[name()=$name]"/>
-        <xsl:variable name="defaultvalue" select="$default-configuration//*[name()=$name]"/>
+        <xsl:variable name="value" select="if ($value) then $value else $default-configuration//*[name()=$name]"/>
 
-        <xsl:sequence select="if ($value) then $value else $defaultvalue"/>
+        <xsl:if test="not($value)">
+            <xsl:message terminate="no">Cannot get configuration value: <xsl:value-of select="$name"/>.</xsl:message>
+        </xsl:if>
+
+        <xsl:sequence select="$value"/>
     </xsl:function>
 
 

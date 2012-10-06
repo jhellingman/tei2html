@@ -38,6 +38,7 @@ my $runChecks           = 0;
 my $useUnicode			= 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
+my $configurationFile	= "tei2html.config";
 
 GetOptions(
     't' => \$makeTXT,
@@ -49,6 +50,7 @@ GetOptions(
     'x' => \$makeXML,
     'v' => \$runChecks,
 	'u' => \$useUnicode,
+	'k=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
@@ -155,6 +157,13 @@ sub processFile($)
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";
     }
 
+    my $configurationFileParam = "";
+    if (-f $configurationFile)
+    {
+        print "Adding custom configuration: $configurationFile ...\n";
+        $configurationFileParam = "configurationFile=\"file:/$pwd/$configurationFile\"";
+    }
+
     my $opfManifestFileParam = "";
     if (-f "opf-manifest.xml")
     {
@@ -172,7 +181,7 @@ sub processFile($)
         {
             my $tmpFile = mktemp('tmp-XXXXX');;
             print "Create HTML version...\n";
-            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption basename=\"$basename\" > $tmpFile");
+            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
             system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
             unlink($tmpFile);
@@ -186,7 +195,7 @@ sub processFile($)
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
-        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption optionPrinceMarkup=\"Yes\" > $tmpFile1");
+        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
         system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
         system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
         system ("$prince $basename-prince.html $basename.pdf");
@@ -201,7 +210,7 @@ sub processFile($)
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub\\images");
-        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $opfManifestFileParam basename=\"$basename\" > $tmpFile");
+        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
         chdir "epub";
