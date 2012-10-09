@@ -111,7 +111,7 @@
     </xd:doc>
 
     <xsl:template match="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer"/>
+        <xsl:param name="maxlevel" as="xs:integer" select="7"/>
 
         <!-- We need a head to be able to display an entry in the toc -->
         <xsl:if test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
