@@ -364,17 +364,17 @@ p.figureHead
 
 .hangq
 {
-    text-indent: -0.35em;
+    text-indent: -0.32em;
 }
 
 .hangqq
 {
-    text-indent: -0.44em;
+    text-indent: -0.40em;
 }
 
 .hangqqq
 {
-    text-indent: -0.78em;
+    text-indent: -0.71em;
 }
 
 .figure p
