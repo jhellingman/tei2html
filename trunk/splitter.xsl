@@ -361,7 +361,15 @@
 
     <xsl:template name="generate-filename">
         <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
-        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
+
+        <xsl:choose>
+            <xsl:when test="@id='cover'">
+                <xsl:value-of select="'cover.html'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="generate-filename-for">
