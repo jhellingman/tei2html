@@ -117,6 +117,8 @@
 
     <!--====================================================================-->
 
+    <xd:doc type="string">If units are encoded using the <code>measure</code> tag: use either the original or regularized units (TODO;
+    currently both are shown, the original in the text, the regularized units in a pop-up).</xd:doc>
     <xsl:variable name="unitsUsed" select="'Original'"/>
 
 

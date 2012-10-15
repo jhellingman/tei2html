@@ -32,15 +32,36 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     version="2.0"
-    exclude-result-prefixes="xs"
+    exclude-result-prefixes="xs xd"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Templates for splitting a TEI document in parts</xd:short>
+        <xd:detail>This stylesheet contains templates for splitting a TEI document in parts, specifically meant
+        for generating ePub output.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
+
+
+    <xd:doc>
+        <xd:short>Split a TEI document.</xd:short>
+        <xd:detail>Split a TEI document into parts, entering the splitter in default mode.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="/TEI.2/text" priority="2">
         <xsl:apply-templates mode="splitter"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Split text element.</xd:short>
+        <xd:detail>Split the top-level text element of a TEI file.</xd:detail>
+            <xd:param name="action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
+            <xd:param name="node">Node of which we want to know in which output file it will end-up (only relevant in <code>filename</code>-mode).</xd:param>
+    </xd:doc>
 
     <xsl:template match="text" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
@@ -64,6 +85,11 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Split body element.</xd:short>
+        <xd:detail>Split the body element of a TEI file on div0 elements.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="body[div0]" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
         <xsl:param name="node"/>
@@ -74,6 +100,12 @@
         </xsl:apply-templates>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Split elements on div1 elements.</xd:short>
+        <xd:detail>Split div0, front, back, and body elements of a TEI file on div1 elements. Here we can either have
+        a sequence of non-div1 elements (we split no further) or a sequence of div1 elements (we may need to split further).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="div0 | front | back | body[div1]" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
@@ -100,6 +132,14 @@
         </xsl:for-each-group>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle a fragment of a div0 element.</xd:short>
+        <xd:detail>Handle a fragment of a div0 element. What we do depends on the action parameter being passed.</xd:detail>
+            <xd:param name="action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
+            <xd:param name="node">Node of which we want to know in which output file it will end-up (only relevant in <code>filename</code>-mode).</xd:param>
+            <xd:param name="nodes">The nodes that make up the fragment.</xd:param>
+    </xd:doc>
 
     <xsl:template name="div0fragment">
         <xsl:param name="action" select="''" as="xs:string"/>
@@ -132,6 +172,10 @@
 
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Split elements a div1 element.</xd:short>
+        <xd:detail>Split a div1 elements of a TEI file on the <code>epubsplit</code> processing instruction.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="div1" mode="splitter">
         <xsl:param name="action" select="''" as="xs:string"/>
@@ -364,19 +408,41 @@
 
         <xsl:choose>
             <xsl:when test="@id='cover'">
-                <xsl:value-of select="'cover.html'"/>
+                <xsl:value-of select="'cover.xhtml'"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.<xsl:value-of select="$extension"/>
+                <xsl:value-of select="$basename"/>
+                <xsl:text>-</xsl:text>
+                <xsl:call-template name="generate-id"/>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="$extension"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <xsl:template name="generate-filename-for">
         <xsl:param name="node" as="element()"/>
         <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
         <xsl:param name="position"/>
-        <xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$node"/></xsl:call-template><xsl:if test="$position">-<xsl:value-of select="$position"/></xsl:if>.<xsl:value-of select="$extension"/>
+        <xsl:choose>
+            <xsl:when test="$node/@id='cover'">
+                <xsl:value-of select="'cover.xhtml'"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$basename"/>
+                <xsl:text>-</xsl:text>
+                <xsl:call-template name="generate-id-for">
+                    <xsl:with-param name="node" select="$node"/>
+                </xsl:call-template>
+                <xsl:if test="$position">
+                    <xsl:text>-</xsl:text>
+                    <xsl:value-of select="$position"/>
+                </xsl:if>
+                <xsl:text>.</xsl:text>
+                <xsl:value-of select="$extension"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -389,6 +455,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
+
     <xsl:template name="splitter-generate-url-for">
         <xsl:param name="node" select="." as="element()"/>
 
@@ -400,6 +467,7 @@
             <xsl:with-param name="node" select="$node"/>
         </xsl:call-template>
     </xsl:template>
+
 
     <xsl:template name="splitter-generate-id">
         <xsl:param name="node" select="." as="element()"/>
@@ -417,7 +485,7 @@
     </xsl:template>
 
 
-    <!-- Determine the class for the body, based on wether it is part of the front matter, body text or back matter of the book -->
+    <!-- Determine the class for the body, based on whether it is part of the front matter, body text or back matter of the book -->
     <xsl:template name="set-class-attribute-for-body">
         <xsl:attribute name="class">
             <xsl:choose>
