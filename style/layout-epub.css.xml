@@ -295,7 +295,6 @@ p.figureHead
 .figAnnotation
 {
     font-size:80%;
-    position:relative;
     margin: 0 0;
 }
 
@@ -643,24 +642,6 @@ ul { list-style-type: none; }
 
 .castlist, .castitem { list-style-type: none; }
 
-
-/***** External Links *****/
-
-
-.pglink:hover
-{
-    background-color: #DCFFDC;
-}
-
-.catlink:hover
-{
-    background-color: #FFFFDC;
-}
-
-.exlink:hover
-{
-    background-color: #FFDCDC;
-}
 
 ]]>
 </style>

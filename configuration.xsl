@@ -37,6 +37,7 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
+            <defaultStylesheet>style/arctic.css</defaultStylesheet>
             <numberTocEntries>true</numberTocEntries>
         </tei2html.config>
     </xsl:variable>
