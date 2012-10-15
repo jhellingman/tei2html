@@ -238,8 +238,8 @@
     <!-- Only generate anchors, but do not put page numbers in the margin (from block.xsl) -->
     <xsl:template match="pb" priority="2">
         <xsl:choose>
-            <!-- In HTML, we do not allow a span element at the top-level. -->
-            <xsl:when test="ancestor::p | ancestor::list | ancestor::table">
+            <!-- In HTML, we do not allow a span element at the top-level, so wrap into a p-element, unless we are in a block element already. -->
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
                 <xsl:call-template name="generate-anchor"/>
             </xsl:when>
             <xsl:otherwise>
