@@ -35,10 +35,10 @@ my $makeReport          = 0;
 my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
-my $useUnicode			= 0;
+my $useUnicode          = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
-my $configurationFile	= "tei2html.config";
+my $configurationFile   = "tei2html.config";
 
 GetOptions(
     't' => \$makeTXT,
@@ -49,14 +49,14 @@ GetOptions(
     'r' => \$makeReport,
     'x' => \$makeXML,
     'v' => \$runChecks,
-	'u' => \$useUnicode,
-	'k=s' => \$configurationFile,
+    'u' => \$useUnicode,
+    'k=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
 my $filename = $ARGV[0];
 
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0) 
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0)
 {
     # Revert to old default:
     $makeTXT = 1;
@@ -117,12 +117,12 @@ sub processFile($)
 
     print "Processing TEI-file '$basename' version $version\n";
 
-    if ($makeXML && $filename =~ /\.tei$/) 
+    if ($makeXML && $filename =~ /\.tei$/)
     {
         sgml2xml($filename, $basename . ".xml");
     }
 
-    if ($runChecks) 
+    if ($runChecks)
     {
         runChecks($filename);
     }
@@ -210,6 +210,25 @@ sub processFile($)
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub\\images");
+
+        # Remove redundant icon images (not used in the ePub)
+        if (-f "epub\\images\\book.png")
+        {
+            system ("del epub\\images\\book.png");
+        }
+        if (-f "epub\\images\\card.png")
+        {
+            system ("del epub\\images\\card.png");
+        }
+        if (-f "epub\\images\\external.png")
+        {
+            system ("del epub\\images\\external.png");
+        }
+        if (-f "epub\\images\\new-cover-tn.jpg")
+        {
+            system ("del epub\\images\\new-cover-tn.jpg");
+        }
+
         system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
@@ -233,17 +252,23 @@ sub processFile($)
         system ("cat $filename.out $filename.notes > $tmpFile1");
         system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . "$tmpFile1 > $tmpFile2");
 
-		if ($useUnicode == 1) 
-		{
-			# Use our own script to wrap lines, as fmt cannot deal with unicode text.
-			system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-		}
-		else
-		{
-			system ("fmt -sw72 $tmpFile2 > $basename.txt");
-		}
+        if ($useUnicode == 1)
+        {
+            # Use our own script to wrap lines, as fmt cannot deal with unicode text.
+            system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
+        }
+        else
+        {
+            system ("fmt -sw72 $tmpFile2 > $basename.txt");
+        }
         system ("gutcheck $basename.txt > $basename.gutcheck");
         system ("$bindir\\jeebies $basename.txt > $basename.jeebies");
+
+        # Check the version in the Gutenberg directory as well.
+        if (-f "Gutenberg\\$basename.txt")
+        {
+            system ("gutcheck Gutenberg\\$basename.txt > $basename-final.gutcheck");
+        }
 
         unlink("$filename.out");
         unlink("$filename.notes");
@@ -284,7 +309,7 @@ sub processFile($)
         }
     }
 
-    if ($makeKwic == 1) 
+    if ($makeKwic == 1)
     {
         print "Generate a KWIC index (this may take some time)...\n";
         system ("$saxon2 $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
@@ -312,7 +337,7 @@ sub runChecks($)
     my $newname = $basename . "-pos." . $extension;
     system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
 
-    if ($extension eq "tei") 
+    if ($extension eq "tei")
     {
         my $tmpFile = mktemp('tmp-XXXXX');
 
@@ -397,7 +422,7 @@ sub isNewer($$)
     my $file1 = shift;
     my $file2 = shift;
 
-    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime) 
+    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
 }
 
 
@@ -479,7 +504,7 @@ sub collectImageInfo()
 #
 # copyImages
 #
-sub copyImages()
+sub copyImages($)
 {
     my $destination = shift;
 
