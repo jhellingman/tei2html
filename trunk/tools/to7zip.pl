@@ -29,17 +29,17 @@ sub main()
 
     print "Number of archives:        $archivesConverted\n";
     if ($errorCount > 0)
-	{
-		print "Number of errors:          $errorCount\n";
-	}
-	if ($archivesConverted > 0)
-	{
-		print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
-		print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
-		my $savedBytes = $totalOriginalSize - $totalResultSize;
-		my $percentage = $totalOriginalSize != 0 ? ($savedBytes / $totalOriginalSize) * 100 : 0;
-		print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
-	}
+    {
+        print "Number of errors:          $errorCount\n";
+    }
+    if ($archivesConverted > 0)
+    {
+        print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
+        print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
+        my $savedBytes = $totalOriginalSize - $totalResultSize;
+        my $percentage = $totalOriginalSize != 0 ? ($savedBytes / $totalOriginalSize) * 100 : 0;
+        print "Space saved:               $savedBytes bytes (" . formatBytes($savedBytes) . "; $percentage %)\n";
+    }
 }
 
 sub list_recursively($);
@@ -82,21 +82,21 @@ sub handle_file($)
     {
         my $path = $1;
         my $extension = $2;
-        my $base = basename($file, '.' . $extension);	
+        my $base = basename($file, '.' . $extension);
         my $outputArchive = "$outputPath\\$path.7z";
 
         if (-e "$outputArchive")
         {
-            logMessage("Skipping $file: output \"$outputArchive\" exists.");			
-			# No early return as we are still counting the sizes (probably results from a previous run)	
+            logMessage("Skipping $file: output \"$outputArchive\" exists.");
+            # No early return as we are still counting the sizes (probably results from a previous run)
         }
         else
         {
             logMessage("Converting: $file.");
 
-			my $tmpDir = File::Temp->newdir();
-			my $tmpDirName = $tmpDir->dirname;	
-			
+            my $tmpDir = File::Temp->newdir();
+            my $tmpDirName = $tmpDir->dirname;
+
             my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tmpDirName 1>>$logFile");
             if ($returnCode != 0)
             {
@@ -145,12 +145,12 @@ sub handle_file($)
                 }
             }
         }
-		
-		my $originalSize = -s $file;
-		my $resultSize = -s $outputArchive;
-		$archivesConverted++;
-		$totalOriginalSize += $originalSize;
-		$totalResultSize += $resultSize;
+
+        my $originalSize = -s $file;
+        my $resultSize = -s $outputArchive;
+        $archivesConverted++;
+        $totalOriginalSize += $originalSize;
+        $totalResultSize += $resultSize;
     }
 }
 
@@ -179,5 +179,3 @@ sub formatBytes($)
     ($num > $kb) ? return sprintf("%d KB", $num / $kb) :
     return $num . ' B';
 }
-
-
