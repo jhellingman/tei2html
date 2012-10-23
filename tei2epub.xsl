@@ -66,9 +66,6 @@
     <xsl:param name="basename" select="'book'"/>
     <xsl:param name="path" select="'ePub'"/>
 
-    <xd:doc type="string">path in which page-images are stored (and page-image wrapper files will be generated for a digital facsimile).</xd:doc>
-    <xsl:variable name="facsimilePath">page-images</xsl:variable>
-
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
     <xsl:param name="optionEPub3" select="'Yes'"/>

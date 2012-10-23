@@ -177,7 +177,7 @@
 
             <!-- Do we want to fully override the head for the toc using the toc-head() rendering -->
             <xsl:when test="contains(@rend, 'toc-head(')">
-                <xsl:value-of select="substring-before(substring-after(../@rend, 'toc-head('), ')')"/>
+                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
             </xsl:when>
             <xsl:otherwise>
 

@@ -496,7 +496,7 @@ span.hemistich /* invisible text to achieve visual effect of hemistich indentati
 
 
 /* right aligned page number in table of contents */
-.tocPagenum, .flushright
+span.tocPagenum, span.flushright
 {
 
 }
