@@ -81,11 +81,11 @@
                                 <xsl:variable name="id" select="substring(@facs, 2)"/>
                                 <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
                                 <xsl:if test="$graphic">
-                                    <a href="{$facsimilePath}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                                    <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
                                 </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
-                                <a href="{$facsimilePath}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                                <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:if>

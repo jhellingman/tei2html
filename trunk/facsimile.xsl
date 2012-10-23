@@ -106,6 +106,16 @@
 
 
 <xd:doc>
+    <xd:short>Get the path where facsimile images are stored from the configuration.</xd:short>
+    <xd:detail>In this same location, page-image wrapper files will be generated for a digital facsimile.</xd:detail>
+</xd:doc>
+
+<xsl:function name="f:facsimile-path" as="xs:string">
+    <xsl:sequence select="f:getConfiguration('facsimilePath')"/>
+</xsl:function>
+
+
+<xd:doc>
     <xd:short>Handle a pb-element with a @facs-attribute.</xd:short>
     <xd:detail>Handle a pb-element with a @facs-attribute, but only if this refers directly to
     a page-image (otherwise, it will be handled by the graphic element referred to).</xd:detail>
@@ -129,7 +139,7 @@
 </xd:doc>
 
 <xsl:template name="facsimile-css">
-    <xsl:variable name="facsimile-css-file" select="concat($facsimilePath, '/facsimile.css')"/>
+    <xsl:variable name="facsimile-css-file" select="concat(f:facsimile-path(), '/facsimile.css')"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
         <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-css-file"/>.</xsl:message>
@@ -149,7 +159,7 @@
 </xd:doc>
 
 <xsl:template name="facsimile-wrapper">
-    <xsl:variable name="facsimile-file" select="concat($facsimilePath, concat('/', f:facsimile-filename(.)))"/>
+    <xsl:variable name="facsimile-file" select="concat(f:facsimile-path(), concat('/', f:facsimile-filename(.)))"/>
 
     <xsl:result-document href="{$facsimile-file}">
         <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>

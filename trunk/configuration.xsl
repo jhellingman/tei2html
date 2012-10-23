@@ -39,6 +39,7 @@
         <tei2html.config>
             <defaultStylesheet>style/arctic.css</defaultStylesheet>
             <numberTocEntries>true</numberTocEntries>
+            <facsimilePath>page-images</facsimilePath>
         </tei2html.config>
     </xsl:variable>
 
@@ -53,7 +54,7 @@
     <xd:doc>
         <xd:short>Get a value from the configuration.</xd:short>
         <xd:detail>
-            <p>Get a value from the configuration. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: tei2html.config), and if that fails, obtain
+            <p>Get a value from the configuration. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, obtain
             the value from the default configuration included in this stylesheet. If that too fails, a message is logged to the console.</p>
         </xd:detail>
     </xd:doc>

@@ -50,7 +50,7 @@ GetOptions(
     'x' => \$makeXML,
     'v' => \$runChecks,
     'u' => \$useUnicode,
-    'k=s' => \$configurationFile,
+    'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet);
 
