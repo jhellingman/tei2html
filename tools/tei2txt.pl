@@ -11,7 +11,7 @@ my $useItalics = 0;
 
 GetOptions('u' => \$useUnicode);
 
-if ($useUnicode == 1) 
+if ($useUnicode == 1)
 {
     binmode(STDOUT, ":utf8");
     use open ':utf8';
@@ -112,14 +112,26 @@ while (<>)
     if ($a =~ /<table.*?>/)
     {
         print "\n------\nTABLE\n";
+        parseTable($a);
     }
     if ($a =~ /<\/table>/)
     {
         print "------\n";
     }
 
+    $a = handleLine($a);
+
+
+    print $a;
+}
+
+
+sub handleLine($)
+{
+    my $a = shift;
+
     # convert entities
-    if ($useUnicode == 1) 
+    if ($useUnicode == 1)
     {
         $a = sgml2utf($a);
     }
@@ -130,7 +142,7 @@ while (<>)
 
     $a = handleHighlighted($a);
 
-    # handle cell boundaries
+    # handle cell boundaries (non should remain if tables are parsed correctly)
     $a =~ s/<cell(.*?)>/|/g;
 
     # drop page-breaks (<pb>) as they interfere with the following processing.
@@ -174,19 +186,19 @@ while (<>)
     $a =~ s/\&lt;/</g;
     $a =~ s/\&amp;/&/g;
 
-
     # warn for anything that slipped through.
     # BUG: if for example &c; should appear in the output, a bug will be reported
     # $a =~ s/\&\w+;/[ERROR: unhandled $&]/g;
 
-    print $a;
+    return $a;
 }
+
 
 sub spaces($)
 {
     my $n = shift;
     my $result = "";
-    for (my $i = 0; $i < $n; $i++) 
+    for (my $i = 0; $i < $n; $i++)
     {
         $result .= " ";
     }
@@ -219,6 +231,175 @@ sub handleHighlighted($)
     return $a . $remainder;
 }
 
+sub parseTable($)
+{
+    my $table = shift;
+    while (<>)
+    {
+        my $line = $_;
+        $table .= $line;
+        if ($line =~ /<\/table>/)
+        {
+            my @result = handleTable($table);
+            printTable(@result);
+            return;
+        }
+    }
+}
+
+sub handleTable($)
+{
+    my $table = shift;
+    $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
+    $table =~ /<table(.*?)>(.*?)<\/table>/;
+    my $tableContent = $2;
+
+    my @rows = split(/<row.*?>/, $tableContent);
+    shift @rows;
+    my @result = ();
+    foreach my $row (@rows)
+    {
+        $row = trim($row);
+        push @result, [ handleRow($row) ];
+    }
+    return @result;
+}
+
+sub handleRow($)
+{
+    my $row = shift;
+    my @cells = split(/<cell.*?>/, $row);
+    shift @cells;
+
+    my @result = ();
+    foreach my $cell (@cells)
+    {
+        $cell = handleLine(trim($cell));
+        push @result, $cell;
+    }
+    return @result;
+}
+
+sub printTable(@)
+{
+    my @rows = @_;
+
+    my @columnWidths = ();
+    my @rowHeights = ();
+
+    for my $i (0 .. $#rows)
+    {
+        for my $j (0 .. $#{$rows[$i]})
+        {
+            my $cell = $rows[$i][$j];
+            my $cellLength = length($cell);
+            if ($cellLength > $columnWidths[$j])
+            {
+                $columnWidths[$j] = $cellLength;
+            }
+        }
+    }
+
+    printHorizontaLine(@columnWidths);
+
+    for my $i (0 .. $#rows)
+    {
+        print "| ";
+        for my $j (0 .. $#{$rows[$i]})
+        {
+            # print STDERR "CELL $i $j: $rows[$i][$j]\n";
+            printWithPadding($rows[$i][$j], $columnWidths[$j]);
+        }
+        print "\n";
+    }
+
+    printHorizontaLine(@columnWidths);
+}
+
+# Distribute width to columns; taking into account the available
+# width, the minimal width of each column, the average width of
+# the column (before splitting), and the total available width.
+#
+# 1. Assign minimal required width to each column.
+# 2. Distribute remaining width according to width of each column.
+#
+sub distributeWidth($@)
+{
+    my $availableWidth = shift;
+    my @widths = @_;
+
+    # my @totalWidth =
+    # my @factor =
+
+}
+
+
+# Wrap a line to a max length
+sub wrap($$)
+{
+    my $line = shift;
+    my $length = shift;
+
+}
+
+# length of longest line in cell.
+sub cellWidth($)
+{
+
+
+}
+
+
+# height of cell in lines;
+sub cellHeight($)
+{
+
+}
+
+
+sub repeat($$)
+{
+    my $char = shift;
+    my $count = shift;
+    my $result = "";
+    for (my $j = 0; $j < $count; $j++)
+    {
+        $result .= $char;
+    }
+    return $result;
+}
+
+sub printHorizontaLine(@)
+{
+    my @columnWidths = @_;
+
+    print "+=";
+    for my $i (0 .. $#columnWidths)
+    {
+        print repeat("=", $columnWidths[$i]);
+        print "=+=";
+    }
+    print "\n";
+}
+
+sub printWithPadding($$)
+{
+    my $string = shift;
+    my $width = shift;
+
+    print $string;
+    print spaces($width  - length($string));
+    print " | ";
+}
+
+
+sub trim($)
+{
+    my $string = shift;
+    $string =~ s/^\s+//;
+    $string =~ s/\s+$//;
+    return $string;
+}
 
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
@@ -437,5 +618,3 @@ sub entities2iso88591($)
 
     return $a;
 }
-
-
