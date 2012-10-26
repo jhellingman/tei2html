@@ -12,9 +12,13 @@ in which various parameters can be set.
 
 = Current Status =
 
-  <tei2html.config>
-     
-  </tei2html.config>
+The default configuration file is:
+
+        <tei2html.config>
+            <defaultStylesheet>style/arctic.css</defaultStylesheet>
+            <numberTocEntries>true</numberTocEntries>
+            <facsimilePath>page-images</facsimilePath>
+        </tei2html.config>
 
 = Future Ideas =
 
