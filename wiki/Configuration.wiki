@@ -4,21 +4,19 @@
 
 Currently there are little options to change the generated output, other than setting parameters on the input, or changing the actual code or document.
 
-To make this easier, it will be possible to have a file named
-
- tei2html.config
-
-in which various parameters can be set.
+To make this easier, it will be possible to have a file named `tei2html.config` in which various parameters can be set.
 
 = Current Status =
 
 The default configuration file is:
 
-        <tei2html.config>
-            <defaultStylesheet>style/arctic.css</defaultStylesheet>
-            <numberTocEntries>true</numberTocEntries>
-            <facsimilePath>page-images</facsimilePath>
-        </tei2html.config>
+{{{
+    <tei2html.config>
+        <defaultStylesheet>style/arctic.css</defaultStylesheet>
+        <numberTocEntries>true</numberTocEntries>
+        <facsimilePath>page-images</facsimilePath>
+    </tei2html.config>
+}}}
 
 = Future Ideas =
 
