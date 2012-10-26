@@ -18,12 +18,14 @@ The default configuration file is:
     </tei2html.config>
 }}}
 
+This can also be found `configuration.xsl`.
+
 = Future Ideas =
 
  * Sections depending on output type (HTML or ePub)
  * Include images (Y/N/All/Important)
  * Image path (`<path>`)
- * Include external references (Y/N)
+ * Include external references (Y/N/Colophon Only)
  * Footnote location (Page/Chapter/Work)
  * Generate colophon (Y/N)
  * Generate table of contents (Front/Back/None)
@@ -31,6 +33,23 @@ The default configuration file is:
  * CSS stylesheet location (Internal/External)
  * Generate marginal page-numbers (Y/N)
  * Generate links to page-images (Y/N)
+
+{{{
+    <tei2html.config>
+        <defaultStylesheet>style/arctic.css</defaultStylesheet>
+        <additionalStylesheet>custom.css</additionalStylesheet>
+        <numberTocEntries>true</numberTocEntries>
+        <imagePath>images</imagePath>
+        <includeImages>true</includeImages>
+        <facsimilePath>page-images</facsimilePath>
+       
+        <output format="html">
+        </output>
+
+        <output format="epub">
+        </output>              
+    </tei2html.config>
+}}}
 
 Things that can also be handled via CSS:
 
