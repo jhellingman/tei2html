@@ -1,0 +1,36 @@
+#summary Configuration of tei2html (in development).
+
+= Introduction =
+
+Currently there are little options to change the generated output, other than setting parameters on the input, or changing the actual code or document.
+
+To make this easier, it will be possible to have a file named
+
+ tei2html.config
+
+in which various parameters can be set.
+
+= Current Status =
+
+  <tei2html.config>
+     
+  </tei2html.config>
+
+= Future Ideas =
+
+* Sections depending on output type (HTML or ePub)
+* Include images (Y/N/All/Important)
+* Image path (<path>)
+* Include external references (Y/N)
+* Footnote location (Page/Chapter/Work)
+* Generate colophon (Y/N)
+* Generate table of contents (Front/Back/None)
+* Additional CSS stylesheets (<name>)
+* CSS stylesheet location (Internal/External)
+* Generate marginal page-numbers (Y/N)
+* Generate links to page-images (Y/N)
+
+Things that can also be handled via CSS:
+
+* Default table alignment (Left/Right/Center)
+* Default verse alignment (Left/Right/Center)
