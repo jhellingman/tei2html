@@ -247,14 +247,18 @@ sub parseTable($)
     }
 }
 
+# Place a table in a three-dimensional array: rows, cells, lines (within each cell)
+#
 sub handleTable($)
 {
     my $table = shift;
-    $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
-    $table =~ /<table(.*?)>(.*?)<\/table>/;
+    # $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
+    $table =~ /<table(.*?)>(.*?)<\/table>/ms;
     my $tableContent = $2;
 
-    my @rows = split(/<row.*?>/, $tableContent);
+    my @rows = split(/<row.*?>/ms, $tableContent);
+
+    # First element in result is empty, so drop it
     shift @rows;
     my @result = ();
     foreach my $row (@rows)
@@ -268,14 +272,30 @@ sub handleTable($)
 sub handleRow($)
 {
     my $row = shift;
-    my @cells = split(/<cell.*?>/, $row);
+    my @cells = split(/<cell.*?>/ms, $row);
+
+    # First element in result is empty, so drop it
     shift @cells;
 
     my @result = ();
     foreach my $cell (@cells)
     {
-        $cell = handleLine(trim($cell));
-        push @result, $cell;
+        $cell = wrapLines(handleLine(trim($cell)));
+        push @result, [ handleCell($cell) ];
+    }
+    return @result;
+}
+
+sub handleCell($)
+{
+    my $cell = shift;
+    my @lines = split("\n", $cell);
+
+    my @result = ();
+    foreach my $line (@lines)
+    {
+        $line = trim($line);
+        push @result, $line;
     }
     return @result;
 }
@@ -284,6 +304,7 @@ sub printTable(@)
 {
     my @rows = @_;
 
+    # Establish the width of each column and height of each row
     my @columnWidths = ();
     my @rowHeights = ();
 
@@ -291,29 +312,44 @@ sub printTable(@)
     {
         for my $j (0 .. $#{$rows[$i]})
         {
-            my $cell = $rows[$i][$j];
-            my $cellLength = length($cell);
-            if ($cellLength > $columnWidths[$j])
+            my $cellHeight = $#{$rows[$i][$j]};
+            for my $k (0 .. $cellHeight)
             {
-                $columnWidths[$j] = $cellLength;
+                my $line = $rows[$i][$j][$k];
+                my $lineLength = length($line);
+                if ($lineLength > $columnWidths[$j])
+                {
+                    $columnWidths[$j] = $lineLength;
+                }
+            }
+            if ($cellHeight > $rowHeights[$i])
+            {
+                $rowHeights[$i] = $cellHeight;
             }
         }
     }
 
-    printHorizontaLine(@columnWidths);
+    printHorizontaLine("=", @columnWidths);
 
     for my $i (0 .. $#rows)
     {
-        print "| ";
-        for my $j (0 .. $#{$rows[$i]})
+        # Print a entire row line-by-line for each cell.
+        for my $k (0 .. $rowHeights[$i])
         {
-            # print STDERR "CELL $i $j: $rows[$i][$j]\n";
-            printWithPadding($rows[$i][$j], $columnWidths[$j]);
+            print "| ";
+            for my $j (0 .. $#{$rows[$i]})
+            {
+                printWithPadding($rows[$i][$j][$k], $columnWidths[$j]);
+            }
+            print "\n";
         }
-        print "\n";
+        if ($i < $#rows)
+        {
+            printHorizontaLine("-", @columnWidths);
+        }
     }
 
-    printHorizontaLine(@columnWidths);
+    printHorizontaLine("=", @columnWidths);
 }
 
 # Distribute width to columns; taking into account the available
@@ -333,13 +369,52 @@ sub distributeWidth($@)
 
 }
 
-
-# Wrap a line to a max length
-sub wrap($$)
+sub wrapLines($)
 {
     my $line = shift;
-    my $length = shift;
+    my @lines = split("\n", $line);
 
+    my @result = ();
+    foreach my $line (@lines)
+    {
+        push @result, wrapLine($line);
+    }
+    return join ("\n", @result);
+}
+
+# Wrap a line to a max length 30 (TODO: make variable)
+sub wrapLine($)
+{
+    my $line = shift;
+    my $maxLength = 30;
+
+    my @words = split(/\s+/, $line);
+
+    my $result = "";
+    my $currentLength = 0;
+    foreach my $word (@words)
+    {
+        my $wordLength = length ($word);
+        $currentLength += $wordLength;
+        if ($currentLength > $maxLength)
+        {
+            if ($currentLength != 0)
+            {
+                $result .= "\n";
+            }
+            $currentLength = $wordLength;
+        }
+        else
+        {
+            if ($currentLength != 0)
+            {
+                $currentLength++;
+                $result .= " ";
+            }
+        }
+        $result .= $word;
+    }
+    return $result;
 }
 
 # length of longest line in cell.
@@ -369,15 +444,20 @@ sub repeat($$)
     return $result;
 }
 
-sub printHorizontaLine(@)
+sub printHorizontaLine($@)
 {
+    my $char = shift;
     my @columnWidths = @_;
 
-    print "+=";
+    print "+$char";
     for my $i (0 .. $#columnWidths)
     {
-        print repeat("=", $columnWidths[$i]);
-        print "=+=";
+        print repeat($char, $columnWidths[$i]);
+        print "$char+";
+        if ($i < $#columnWidths)
+        {
+            print $char;
+        }
     }
     print "\n";
 }
