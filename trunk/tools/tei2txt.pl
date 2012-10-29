@@ -3,6 +3,7 @@
 use strict;
 
 use Getopt::Long;
+use POSIX qw/floor/;
 
 use SgmlSupport qw/getAttrVal sgml2utf/;
 
@@ -280,7 +281,7 @@ sub handleRow($)
     my @result = ();
     foreach my $cell (@cells)
     {
-        $cell = wrapLines(handleLine(trim($cell)));
+        $cell = wrapLines(handleLine(trim($cell)), 30);
         push @result, [ handleCell($cell) ];
     }
     return @result;
@@ -299,6 +300,154 @@ sub handleCell($)
     }
     return @result;
 }
+
+
+sub wrapTable($@)
+{
+	my $fitWidth = shift;
+	my @rows = @_;
+
+	# Establish minimal column widths (narrowest column width without breaking words)
+	# Establish maximal column widths (maximum required width)
+	# Establish column weight (total number of characters in a column)
+	# Establish total weight of all columns (total number of characters in table)
+	my @minColumnWidths = ();
+    my @maxColumnWidths = ();
+	my @columnWeight = ();
+	my $totalWeight = 0;
+
+    for my $i (0 .. $#rows)
+    {
+        for my $j (0 .. $#{$rows[$i]})
+        {
+            my $cellHeight = $#{$rows[$i][$j]};
+            for my $k (0 .. $cellHeight)
+            {
+                my $line = $rows[$i][$j][$k];
+                my $lineLength = length($line);
+				$columnWeight[$j] += $lineLength;
+				$totalWeight += $lineLength;
+                if ($lineLength > $maxColumnWidths[$j])
+                {
+                    $maxColumnWidths[$j] = $lineLength;
+                }
+
+				my @words = split("\s+", $line);
+				foreach my $word (@words) 
+				{
+					my $wordLength = length($word);
+					if ($wordLength > $minColumnWidths[$j]) 
+					{
+						$minColumnWidths[$j] = $wordLength;
+					}
+				}
+            }
+        }
+    }
+
+	# Find minimal width of table;
+	my @columnWidths = ();
+	my $minWidth = 0;
+	my $columns = 0;
+	for my $j (0 .. $#minColumnWidths)
+	{
+		$columns++;
+		$columnWidths[$j] = $minColumnWidths[$j];
+		$minWidth += $minColumnWidths[$j];
+	}
+
+	# Adjust for border widths
+	$minWidth += $columns * 3 + 1;
+
+	if ($minWidth > $fitWidth) 
+	{
+		print STDERR "WARNING: Table cannot be fitted into $fitWidth columns!";
+	}
+
+	# Distribute the remaining width over the columns, according to their weight.
+	my $remainingWidth = $fitWidth - $minWidth;
+	my $spendWidth = 0;
+	my @targetWidths = ();
+	while ($remainingWidth > 0) 
+	{
+		for my $j (0 .. $columns)
+		{
+			my $entitlement = $columnWidths[$j] + floor($remainingWidth * ($columnWeight[$j] / $totalWeight));
+			if ($entitlement > $maxColumnWidths[$j]) 
+			{
+				$entitlement = $maxColumnWidths[$j];
+			}
+			$spendWidth =+ $entitlement - $columnWidths[$j];
+			$columnWidths[$j] = $entitlement;
+		}
+		$remainingWidth -= $spendWidth;
+
+		# Can we spend more using this method (or is no cell getting more than a fractional space)
+		if ($spendWidth == 0) 
+		{
+			last;
+		}
+	}
+
+	# End game, we may still have a few characters remaining; give them to the first that can still use them.
+	while ($remainingWidth > 0) 
+	{
+		$spendWidth = 0;
+		for my $j (0 .. $columns)
+		{
+			if ($columnWidths[$j] < $maxColumnWidths[$j])
+			{
+				$columnWidths[$j]++;
+				$spendWidth++;
+				$remainingWidth--;
+				if ($remainingWidth == 0) 
+				{
+					last;
+				}
+			}
+		}
+
+		# All cells satisfied?
+		if ($spendWidth == 0) 
+		{
+			last;
+		}
+	}
+
+	# We've should have a workable set of widths now. Now wrap each cell to the right width.
+
+
+
+}
+
+
+#
+#       +===+===+       =========       /=======\
+#       |   |   |       |   |   |       |   |   |
+#       +---+---+       |---+---|       |---+---|
+#       |   |   |       |   |   |       |   |   |
+#       +===+===+       =========       \=======/
+#
+
+my $borderTopLeft     = "+";
+my $borderTopLine     = "=";
+my $borderTopCross    = "+";
+my $borderTopRight    = "+";
+
+my $borderLeft        = "|";
+my $borderLeftCross   = "+";
+my $borderRight       = "|";
+my $borderRightCross  = "+";
+
+my $innerVertical     = "|";
+my $innerCross        = "+";
+my $innerHorizontal   = "-";
+
+my $borderBottomLeft  = "+";
+my $borderBottomLine  = "=";
+my $borderBottomCross = "+";
+my $borderBottomRight = "+";
+
 
 sub printTable(@)
 {
@@ -369,24 +518,24 @@ sub distributeWidth($@)
 
 }
 
-sub wrapLines($)
+sub wrapLines($$)
 {
     my $line = shift;
+    my $maxLength = shift;
     my @lines = split("\n", $line);
 
     my @result = ();
     foreach my $line (@lines)
     {
-        push @result, wrapLine($line);
+        push @result, wrapLine($line, $maxLength);
     }
     return join ("\n", @result);
 }
 
-# Wrap a line to a max length 30 (TODO: make variable)
-sub wrapLine($)
+sub wrapLine($$)
 {
     my $line = shift;
-    my $maxLength = 30;
+    my $maxLength = shift;
 
     my @words = split(/\s+/, $line);
 
