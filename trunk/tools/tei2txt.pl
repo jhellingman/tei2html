@@ -112,7 +112,7 @@ while (<>)
     # indicate tables for manual processing.
     if ($a =~ /<table.*?>/)
     {
-        print "\n------\nTABLE\n";
+        # print "\n------\nTABLE\n";
         parseTable($a);
     }
     if ($a =~ /<\/table>/)
@@ -242,7 +242,8 @@ sub parseTable($)
         if ($line =~ /<\/table>/)
         {
             my @result = handleTable($table);
-            printTable(@result);
+            my @wrappedTable = sizeTableColumns(68, @result);
+            printTable(@wrappedTable);
             return;
         }
     }
@@ -281,7 +282,7 @@ sub handleRow($)
     my @result = ();
     foreach my $cell (@cells)
     {
-        $cell = wrapLines(handleLine(trim($cell)), 30);
+        $cell = handleLine(trim($cell));
         push @result, [ handleCell($cell) ];
     }
     return @result;
@@ -296,128 +297,289 @@ sub handleCell($)
     foreach my $line (@lines)
     {
         $line = trim($line);
+        $line =~ s/\s+/ /g;
         push @result, $line;
     }
     return @result;
 }
 
 
-sub wrapTable($@)
+sub sizeTableColumns($@)
 {
-	my $fitWidth = shift;
-	my @rows = @_;
+    # See also: https://developer.mozilla.org/en-US/docs/Table_Layout_Strategy
+    # See http://nothings.org/computer/badtable/
+    # in particular: http://www.csse.monash.edu.au/~marriott/HurMarMou05.pdf
+    # http://www.csse.monash.edu.au/~marriott/HurMarAlb06.pdf
 
-	# Establish minimal column widths (narrowest column width without breaking words)
-	# Establish maximal column widths (maximum required width)
-	# Establish column weight (total number of characters in a column)
-	# Establish total weight of all columns (total number of characters in table)
-	my @minColumnWidths = ();
-    my @maxColumnWidths = ();
-	my @columnWeight = ();
-	my $totalWeight = 0;
+    my $finalWidth = shift;
+    my @rows = @_;
+
+    # Establish minimal column widths (narrowest column width without breaking words)
+    # Establish maximal column widths (maximum desired width; no line-breaks needed)
+    # Establish column weight (total number of characters in a column)
+    # Establish total weight of all columns (total number of characters in table)
+    my @minimalColumnWidths = ();
+    my @desiredColumnWidths = ();
+    my @columnArea = ();
+    my $totalArea = 0;
 
     for my $i (0 .. $#rows)
     {
-        for my $j (0 .. $#{$rows[$i]})
+        my $cellCount = $#{$rows[$i]};
+        for my $j (0 .. $cellCount)
         {
             my $cellHeight = $#{$rows[$i][$j]};
             for my $k (0 .. $cellHeight)
             {
                 my $line = $rows[$i][$j][$k];
                 my $lineLength = length($line);
-				$columnWeight[$j] += $lineLength;
-				$totalWeight += $lineLength;
-                if ($lineLength > $maxColumnWidths[$j])
+                $columnArea[$j] += $lineLength;
+                $totalArea += $lineLength;
+                if ($lineLength > $desiredColumnWidths[$j])
                 {
-                    $maxColumnWidths[$j] = $lineLength;
+                    $desiredColumnWidths[$j] = $lineLength;
                 }
 
-				my @words = split("\s+", $line);
-				foreach my $word (@words) 
-				{
-					my $wordLength = length($word);
-					if ($wordLength > $minColumnWidths[$j]) 
-					{
-						$minColumnWidths[$j] = $wordLength;
-					}
-				}
+                my @words = split(/\s+/, $line);
+                foreach my $word (@words)
+                {
+                    my $wordLength = length($word);
+                    if ($wordLength > $minimalColumnWidths[$j])
+                    {
+                        $minimalColumnWidths[$j] = $wordLength;
+                    }
+                }
             }
         }
     }
 
-	# Find minimal width of table;
-	my @columnWidths = ();
-	my $minWidth = 0;
-	my $columns = 0;
-	for my $j (0 .. $#minColumnWidths)
-	{
-		$columns++;
-		$columnWidths[$j] = $minColumnWidths[$j];
-		$minWidth += $minColumnWidths[$j];
-	}
+    # Find minimal width of table;
+    my @finalColumnWidths = ();
+    my $minimalWidth = 0;
+    my $columns = 0;
+    for my $j (0 .. $#minimalColumnWidths)
+    {
+        $columns++;
+        $finalColumnWidths[$j] = $minimalColumnWidths[$j];
+        $minimalWidth += $minimalColumnWidths[$j];
+    }
 
-	# Adjust for border widths
-	$minWidth += $columns * 3 + 1;
+    # Adjust final width for borders (left 2; between 3; right 2)
+    $finalWidth -= (($columns - 1) * 3) + 4;
 
-	if ($minWidth > $fitWidth) 
-	{
-		print STDERR "WARNING: Table cannot be fitted into $fitWidth columns!";
-	}
+    if ($minimalWidth > $finalWidth)
+    {
+        print STDERR "\nWARNING: Table cannot be fitted into $finalWidth columns!";
+    }
 
-	# Distribute the remaining width over the columns, according to their weight.
-	my $remainingWidth = $fitWidth - $minWidth;
-	my $spendWidth = 0;
-	my @targetWidths = ();
-	while ($remainingWidth > 0) 
-	{
-		for my $j (0 .. $columns)
-		{
-			my $entitlement = $columnWidths[$j] + floor($remainingWidth * ($columnWeight[$j] / $totalWeight));
-			if ($entitlement > $maxColumnWidths[$j]) 
-			{
-				$entitlement = $maxColumnWidths[$j];
-			}
-			$spendWidth =+ $entitlement - $columnWidths[$j];
-			$columnWidths[$j] = $entitlement;
-		}
-		$remainingWidth -= $spendWidth;
+    # Now we need to distribute the remaining width, by adding it to the most needy column
 
-		# Can we spend more using this method (or is no cell getting more than a fractional space)
-		if ($spendWidth == 0) 
-		{
-			last;
-		}
-	}
+    # Calculate entitlements (how much every column is supposed to have, based on its area)
+    ##print STDERR "\n\nEstablishing column widths (rows: $#rows; columns: $columns; width: $finalWidth; area: $totalArea)";
+    my @entitlement = ();
+    my @fillFactor = ();
+    for my $j (0 .. $columns - 1)
+    {
+        my $fraction = sqrt($columnArea[$j]) / sqrt($totalArea);
+        $entitlement[$j] = $finalWidth * $fraction;
+        ##print STDERR "\nColumn $j: ";
+        my $pfraction = floor($fraction * 100.0)/100.0;
+        my $pentitlement = floor($entitlement[$j]);
+        ##print STDERR "\n    width: $finalColumnWidths[$j];\n    area: $desiredColumnWidths[$j]\n    fraction: $pfraction; \n    entitlement: $pentitlement";
+        if ($finalColumnWidths[$j] >= $desiredColumnWidths[$j])
+        {
+            $fillFactor[$j] = 1.0;
+        }
+        else
+        {
+            $fillFactor[$j] = $finalColumnWidths[$j] / $entitlement[$j];
+        }
+        ##print STDERR "\n    fill factor: $fillFactor[$j]";
+    }
 
-	# End game, we may still have a few characters remaining; give them to the first that can still use them.
-	while ($remainingWidth > 0) 
-	{
-		$spendWidth = 0;
-		for my $j (0 .. $columns)
-		{
-			if ($columnWidths[$j] < $maxColumnWidths[$j])
-			{
-				$columnWidths[$j]++;
-				$spendWidth++;
-				$remainingWidth--;
-				if ($remainingWidth == 0) 
-				{
-					last;
-				}
-			}
-		}
+    # Add spaces to columns with the lowest fill factor, recalculating it as we go;
+    my $remainingWidth = $finalWidth - $minimalWidth;
+    while ($remainingWidth > 0)
+    {
+        my $mostNeedy = -1;
+        my $worstFillFactor = 1;
+        # Find column with lowest fill factor;
+        for my $j (0 .. $columns - 1)
+        {
+            if ($fillFactor[$j] < 1.0 && $fillFactor[$j] < $worstFillFactor)
+            {
+                $mostNeedy = $j;
+                $worstFillFactor = $fillFactor[$j];
+            }
+        }
 
-		# All cells satisfied?
-		if ($spendWidth == 0) 
-		{
-			last;
-		}
-	}
+        if ($mostNeedy == -1)
+        {
+            # All columns are satisfied
+            last;
+        }
+        else
+        {
+            # Give that column an extra space and recalculate fill factor
+            $remainingWidth--;
+            $finalColumnWidths[$mostNeedy]++;
 
-	# We've should have a workable set of widths now. Now wrap each cell to the right width.
+            if ($finalColumnWidths[$mostNeedy] >= $desiredColumnWidths[$mostNeedy])
+            {
+                $fillFactor[$mostNeedy] = 1.0;
+            }
+            else
+            {
+                $fillFactor[$mostNeedy] = $finalColumnWidths[$mostNeedy] / $entitlement[$mostNeedy];
+            }
+        }
+    }
+
+    # Now we can start optimizing the table (TODO).
+
+    # Break lines in cells.
+    for my $i (0 .. $#rows)
+    {
+        for my $j (0 .. $#{$rows[$i]})
+        {
+            my @newCell = ();
+            my $cellHeight = $#{$rows[$i][$j]};
+            for my $k (0 .. $cellHeight)
+            {
+                my $line = $rows[$i][$j][$k];
+                ##print STDERR "\n\n[$line]\n\n";
+                my $splitLine = wrapLine($line, $finalColumnWidths[$j]);
+                ##print STDERR "\n\n[$splitLine]\n\n";
+                push (@newCell, split("\n", $splitLine));
+            }
+            # print STDERR "\n@newCell";
+            $rows[$i][$j] = [ @newCell ];
+        }
+    }
+    return @rows;
+}
 
 
+sub minimumCellHeightGivenWidth($$)
+{
+    my $width = shift;
+    my $cell = shift;
 
+    # Just break lines greedily.
+    my $line = shift;
+    my $maxLength = shift;
+    my @lines = split("\n", $line);
+
+    my $height = 0;
+    foreach my $line (@lines)
+    {
+        $height += minimumLineHeightGivenWidth($line, $width);
+    }
+    return $height;
+}
+
+sub minimumLineHeightGivenWidth($$)
+{
+    my $line = shift;
+    my $width = shift;
+
+    my @words = split(/\s+/, $line);
+
+    my $height = 1;
+    my $currentWidth = 0;
+    foreach my $word (@words)
+    {
+        my $wordWidth = length ($word);
+        $currentWidth += $wordWidth;
+        if ($currentWidth > $width)
+        {
+            $height++;
+            $currentWidth = $wordWidth;
+        }
+        else
+        {
+            if ($currentWidth != 0)
+            {
+                $currentWidth++;
+            }
+        }
+    }
+    return $height;
+}
+
+
+sub nextShorterLineWidth($$$)
+{
+    my $line = shift;
+    my $width = shift;
+    my $height = shift;
+
+    my @words = split(/\s+/, $line);
+
+    # Find word widths (should be stored)
+    my @widths = ();
+    my $n = 0;
+    foreach my $word (@words)
+    {
+        $widths[$n] = length ($word);
+        $n++;
+    }
+
+    # find line starting words;
+    my $i = 0;
+    my $lastLine = 0;
+    my @lineStart = ();
+    $lineStart[0] = 0;
+    my $currentWidth = 0;
+    foreach my $word (@words)
+    {
+        $currentWidth += $widths[$i];
+        if ($currentWidth > $width)
+        {
+            $lastLine++;
+            $lineStart[$lastLine] = $i;
+            $currentWidth = $widths[$i];
+        }
+        else
+        {
+            if ($currentWidth != 0)
+            {
+                $currentWidth++;
+            }
+        }
+    }
+
+    # We have split the line with the original width. Now
+    # merge last line into previous line.
+
+    my @minWidth = ();
+    my $lineLength = $widths[$n - 1];
+    for (my $w = $n - 1; $w > $lineStart[$lastLine - 2]; $w--)
+    {
+        $minWidth[$w] = max($width, $lineLength);
+        $lineLength = $lineLength + 1 + $widths[$w - 1];
+    }
+
+    for (my $L = $lastLine - 3; $L >= 0; $L--)
+    {
+        my $nlw = $lineStart[$L + 1];
+        $lineLength = $widths[$lineStart[$L]];
+        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++)
+        {
+            $lineLength = $widths[$w] + 1 + $lineLength;
+        }
+        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++)
+        {
+            while ($minWidth[$nlw] > $lineLength && $nlw < $lineStart[$L + 2])
+            {
+                $lineLength = $lineLength + 1 + $widths[$nlw];
+                $nlw++;
+            }
+            $minWidth[$w] = min($minWidth[$nlw - 1], $lineLength);
+            $lineLength = $lineLength - (1 + $widths[$w]);
+        }
+    }
+    return $minWidth[0];
 }
 
 
@@ -544,8 +706,7 @@ sub wrapLine($$)
     foreach my $word (@words)
     {
         my $wordLength = length ($word);
-        $currentLength += $wordLength;
-        if ($currentLength > $maxLength)
+        if ($currentLength + $wordLength > $maxLength)
         {
             if ($currentLength != 0)
             {
@@ -560,6 +721,7 @@ sub wrapLine($$)
                 $currentLength++;
                 $result .= " ";
             }
+            $currentLength += $wordLength;
         }
         $result .= $word;
     }
