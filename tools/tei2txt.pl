@@ -35,6 +35,37 @@ else
 }
 
 
+#    0.                   1.              2.              3.            4.
+#
+#    No borders, just     +===+===+       =========       /=======\     =========
+#    three spaces         |   |   |       |   |   |       |   |   |
+#    between columns      +---+---+       |---+---|       |---+---|
+#                         |   |   |       |   |   |       |   |   |
+#                         +===+===+       =========       \=======/     =========
+#
+
+my $borderStyle = 2;
+
+my @borderTopLeft       = ("",      "+=",   "==",   "/=",   "");
+my @borderTopLine       = ("",      "=",    "=",    "=",    "=");
+my @borderTopCross      = ("",      "=+=",  "===",  "===",  "===");
+my @borderTopRight      = ("",      "=+",   "==",   "=\\",  "");
+
+my @borderLeft          = ("",      "| ",   "| ",   "| ",   "");
+my @borderLeftCross     = ("",      "+-",   "|-",   "|-",   "");
+my @borderRight         = ("",      " |",   " |",   " |",   "");
+my @borderRightCross    = ("",      "-+",   "-|",   "-|",   "");
+
+my @innerVertical       = ("   ",   " | ",  " | ",  " | ",  "   ");
+my @innerCross          = ("   ",   "-+-",  "-+-",  "-+-",  "   ");
+my @innerHorizontal     = ("",      "-",    "-",    "-",    "");
+
+my @borderBottomLeft    = ("",      "+=",   "==",   "\\=",  "");
+my @borderBottomLine    = ("",      "=",    "=",    "=",    "=");
+my @borderBottomCross   = ("",      "=+=",  "===",  "===",  "===");
+my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "");
+
+
 #
 # Main program loop
 #
@@ -365,7 +396,9 @@ sub sizeTableColumns($@)
     }
 
     # Adjust final width for borders (left 2; between 3; right 2)
-    $finalWidth -= (($columns - 1) * 3) + 4;
+    $finalWidth -= (($columns - 1) * length($innerCross[$borderStyle])) +
+        length($borderLeft[$borderStyle]) +
+        length($borderRight[$borderStyle]);
 
     if ($minimalWidth > $finalWidth)
     {
@@ -435,7 +468,7 @@ sub sizeTableColumns($@)
         }
     }
 
-    # Now we can start optimizing the table (TODO).
+    # TODO: optimize the table.
 
     # Break lines in cells.
     for my $i (0 .. $#rows)
@@ -447,12 +480,17 @@ sub sizeTableColumns($@)
             for my $k (0 .. $cellHeight)
             {
                 my $line = $rows[$i][$j][$k];
-                ##print STDERR "\n\n[$line]\n\n";
-                my $splitLine = wrapLine($line, $finalColumnWidths[$j]);
-                ##print STDERR "\n\n[$splitLine]\n\n";
-                push (@newCell, split("\n", $splitLine));
+				if ($line eq "") 
+				{
+					# Handle empty lines directly.
+					push (@newCell, "");
+				}
+				else
+				{
+					my $wrappedLine = wrapLine($line, $finalColumnWidths[$j]);
+					push (@newCell, split("\n", $wrappedLine));
+				}
             }
-            # print STDERR "\n@newCell";
             $rows[$i][$j] = [ @newCell ];
         }
     }
@@ -583,34 +621,6 @@ sub nextShorterLineWidth($$$)
 }
 
 
-#
-#       +===+===+       =========       /=======\
-#       |   |   |       |   |   |       |   |   |
-#       +---+---+       |---+---|       |---+---|
-#       |   |   |       |   |   |       |   |   |
-#       +===+===+       =========       \=======/
-#
-
-my $borderTopLeft     = "+";
-my $borderTopLine     = "=";
-my $borderTopCross    = "+";
-my $borderTopRight    = "+";
-
-my $borderLeft        = "|";
-my $borderLeftCross   = "+";
-my $borderRight       = "|";
-my $borderRightCross  = "+";
-
-my $innerVertical     = "|";
-my $innerCross        = "+";
-my $innerHorizontal   = "-";
-
-my $borderBottomLeft  = "+";
-my $borderBottomLine  = "=";
-my $borderBottomCross = "+";
-my $borderBottomRight = "+";
-
-
 sub printTable(@)
 {
     my @rows = @_;
@@ -640,45 +650,34 @@ sub printTable(@)
         }
     }
 
-    printHorizontaLine("=", @columnWidths);
+    printTopBorder(@columnWidths);
 
     for my $i (0 .. $#rows)
     {
         # Print a entire row line-by-line for each cell.
         for my $k (0 .. $rowHeights[$i])
         {
-            print "| ";
+            print $borderLeft[$borderStyle];
             for my $j (0 .. $#{$rows[$i]})
             {
                 printWithPadding($rows[$i][$j][$k], $columnWidths[$j]);
+                if ($j < $#{$rows[$i]})
+                {
+                    print $innerVertical[$borderStyle];
+                }
             }
+            print $borderRight[$borderStyle];
             print "\n";
         }
         if ($i < $#rows)
         {
-            printHorizontaLine("-", @columnWidths);
+            printInnerBorder(@columnWidths);
         }
     }
 
-    printHorizontaLine("=", @columnWidths);
+    printBottomBorder(@columnWidths);
 }
 
-# Distribute width to columns; taking into account the available
-# width, the minimal width of each column, the average width of
-# the column (before splitting), and the total available width.
-#
-# 1. Assign minimal required width to each column.
-# 2. Distribute remaining width according to width of each column.
-#
-sub distributeWidth($@)
-{
-    my $availableWidth = shift;
-    my @widths = @_;
-
-    # my @totalWidth =
-    # my @factor =
-
-}
 
 sub wrapLines($$)
 {
@@ -728,20 +727,6 @@ sub wrapLine($$)
     return $result;
 }
 
-# length of longest line in cell.
-sub cellWidth($)
-{
-
-
-}
-
-
-# height of cell in lines;
-sub cellHeight($)
-{
-
-}
-
 
 sub repeat($$)
 {
@@ -755,23 +740,51 @@ sub repeat($$)
     return $result;
 }
 
-sub printHorizontaLine($@)
+sub printTopBorder(@)
 {
-    my $char = shift;
     my @columnWidths = @_;
-
-    print "+$char";
-    for my $i (0 .. $#columnWidths)
+    if (length ($borderTopLine[$borderStyle]) > 0)
     {
-        print repeat($char, $columnWidths[$i]);
-        print "$char+";
-        if ($i < $#columnWidths)
+        print $borderTopLeft[$borderStyle];
+        for my $i (0 .. $#columnWidths)
         {
-            print $char;
+            print repeat($borderTopLine[$borderStyle], $columnWidths[$i]);
+            print $i < $#columnWidths ? $borderTopCross[$borderStyle] : $borderTopRight[$borderStyle];
         }
+        print "\n";
     }
-    print "\n";
 }
+
+sub printInnerBorder(@)
+{
+    my @columnWidths = @_;
+    if (length ($innerHorizontal[$borderStyle]) > 0)
+    {
+        print $borderLeftCross[$borderStyle];
+        for my $i (0 .. $#columnWidths)
+        {
+            print repeat($innerHorizontal[$borderStyle], $columnWidths[$i]);
+            print $i < $#columnWidths ? $innerCross[$borderStyle] : $borderRightCross[$borderStyle];
+        }
+        print "\n";
+    }
+}
+
+sub printBottomBorder(@)
+{
+    my @columnWidths = @_;
+    if (length ($borderBottomLine[$borderStyle]) > 0)
+    {
+        print $borderBottomLeft[$borderStyle];
+        for my $i (0 .. $#columnWidths)
+        {
+            print repeat($borderBottomLine[$borderStyle], $columnWidths[$i]);
+            print $i < $#columnWidths ? $borderBottomCross[$borderStyle] : $borderBottomRight[$borderStyle];
+        }
+        print "\n";
+    }
+}
+
 
 sub printWithPadding($$)
 {
@@ -780,7 +793,6 @@ sub printWithPadding($$)
 
     print $string;
     print spaces($width  - length($string));
-    print " | ";
 }
 
 
