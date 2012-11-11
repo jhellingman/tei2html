@@ -351,6 +351,7 @@ sub sizeTableColumns($@)
     # Establish total weight of all columns (total number of characters in table)
     my @minimalColumnWidths = ();
     my @desiredColumnWidths = ();
+	my @widestWord = ();
     my @columnArea = ();
     my $totalArea = 0;
 
@@ -377,6 +378,7 @@ sub sizeTableColumns($@)
                     my $wordLength = length($word);
                     if ($wordLength > $minimalColumnWidths[$j])
                     {
+						$widestWord[$j] = $word;
                         $minimalColumnWidths[$j] = $wordLength;
                     }
                 }
@@ -391,18 +393,23 @@ sub sizeTableColumns($@)
     for my $j (0 .. $#minimalColumnWidths)
     {
         $columns++;
+		##print STDERR "\nCOLUMN: $j WIDTH: $minimalColumnWidths[$j] WORD: $widestWord[$j]";
         $finalColumnWidths[$j] = $minimalColumnWidths[$j];
         $minimalWidth += $minimalColumnWidths[$j];
     }
 
     # Adjust final width for borders (left 2; between 3; right 2)
-    $finalWidth -= (($columns - 1) * length($innerCross[$borderStyle])) +
+	my $borderAdjustment = (($columns - 1) * length($innerCross[$borderStyle])) +
         length($borderLeft[$borderStyle]) +
         length($borderRight[$borderStyle]);
 
+	##print STDERR "\nTOTAL WIDTH: $finalWidth - $borderAdjustment for $columns columns";
+
+    $finalWidth -= $borderAdjustment;
+
     if ($minimalWidth > $finalWidth)
     {
-        print STDERR "\nWARNING: Table cannot be fitted into $finalWidth columns!";
+        print STDERR "WARNING: Table cannot be fitted into " . ($finalWidth + $borderAdjustment) . " columns! Need " . ($minimalWidth + $borderAdjustment) . " columns.\n";
     }
 
     # Now we need to distribute the remaining width, by adding it to the most needy column
@@ -477,6 +484,9 @@ sub sizeTableColumns($@)
         {
             my @newCell = ();
             my $cellHeight = $#{$rows[$i][$j]};
+
+			## print STDERR "\nCOLUMN $j: wrapping to $finalColumnWidths[$j]";
+
             for my $k (0 .. $cellHeight)
             {
                 my $line = $rows[$i][$j][$k];
@@ -697,6 +707,7 @@ sub wrapLine($$)
 {
     my $line = shift;
     my $maxLength = shift;
+	my $actualMaxLength = 0;
 
     my @words = split(/\s+/, $line);
 
@@ -705,12 +716,20 @@ sub wrapLine($$)
     foreach my $word (@words)
     {
         my $wordLength = length ($word);
-        if ($currentLength + $wordLength > $maxLength)
+
+		my $newLength = $currentLength == 0 ? $wordLength : $currentLength + $wordLength + 1;
+
+		# Need to start a new line?
+        if ($newLength > $maxLength)
         {
             if ($currentLength != 0)
             {
                 $result .= "\n";
             }
+			else
+			{
+				print STDERR "WARNING: single word '$word' longer than $maxLength\n";
+			}
             $currentLength = $wordLength;
         }
         else
@@ -723,7 +742,18 @@ sub wrapLine($$)
             $currentLength += $wordLength;
         }
         $result .= $word;
+
+		if ($actualMaxLength < $currentLength) 
+		{
+			$actualMaxLength = $currentLength;
+		}
     }
+
+	if ($actualMaxLength > $maxLength) 
+	{
+		print STDERR "WARNING: could not wrap line to $maxLength; needed $actualMaxLength\n";
+	}
+
     return $result;
 }
 
