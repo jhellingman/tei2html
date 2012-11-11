@@ -35,35 +35,35 @@ else
 }
 
 
-#    0.                   1.              2.              3.            4.
+#    0.                   1.              2.              3.            4.              5.
 #
-#    No borders, just     +===+===+       =========       /=======\     =========
-#    three spaces         |   |   |       |   |   |       |   |   |
-#    between columns      +---+---+       |---+---|       |---+---|
-#                         |   |   |       |   |   |       |   |   |
-#                         +===+===+       =========       \=======/     =========
+#    No borders, just     +===+===+       =========       /=======\     =========       =========
+#    three spaces         |   |   |       |   |   |       |   |   |                         |
+#    between columns      +---+---+       |---+---|       |---+---|                     ----+----
+#                         |   |   |       |   |   |       |   |   |     =========           |
+#                         +===+===+       =========       \=======/                     =========
 #
 
-my $borderStyle = 2;
+my $borderStyle = 0;
 
-my @borderTopLeft       = ("",      "+=",   "==",   "/=",   "");
-my @borderTopLine       = ("",      "=",    "=",    "=",    "=");
-my @borderTopCross      = ("",      "=+=",  "===",  "===",  "===");
-my @borderTopRight      = ("",      "=+",   "==",   "=\\",  "");
+my @borderTopLeft       = ("",      "+=",   "==",   "/=",   "",     "");
+my @borderTopLine       = ("",      "=",    "=",    "=",    "=",    "=");
+my @borderTopCross      = ("",      "=+=",  "===",  "===",  "===",  "===");
+my @borderTopRight      = ("",      "=+",   "==",   "=\\",  "",     "");
 
-my @borderLeft          = ("",      "| ",   "| ",   "| ",   "");
-my @borderLeftCross     = ("",      "+-",   "|-",   "|-",   "");
-my @borderRight         = ("",      " |",   " |",   " |",   "");
-my @borderRightCross    = ("",      "-+",   "-|",   "-|",   "");
+my @borderLeft          = ("",      "| ",   "| ",   "| ",   "",     "");
+my @borderLeftCross     = ("",      "+-",   "|-",   "|-",   "",     "");
+my @borderRight         = ("",      " |",   " |",   " |",   "",     "");
+my @borderRightCross    = ("",      "-+",   "-|",   "-|",   "",     "");
 
-my @innerVertical       = ("   ",   " | ",  " | ",  " | ",  "   ");
-my @innerCross          = ("   ",   "-+-",  "-+-",  "-+-",  "   ");
-my @innerHorizontal     = ("",      "-",    "-",    "-",    "");
+my @innerVertical       = ("   ",   " | ",  " | ",  " | ",  "   ",  " | ");
+my @innerCross          = ("   ",   "-+-",  "-+-",  "-+-",  "   ",  "-+-");
+my @innerHorizontal     = ("",      "-",    "-",    "-",    "",     "-");
 
-my @borderBottomLeft    = ("",      "+=",   "==",   "\\=",  "");
-my @borderBottomLine    = ("",      "=",    "=",    "=",    "=");
-my @borderBottomCross   = ("",      "=+=",  "===",  "===",  "===");
-my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "");
+my @borderBottomLeft    = ("",      "+=",   "==",   "\\=",  "",     "");
+my @borderBottomLine    = ("",      "=",    "=",    "=",    "=",    "=");
+my @borderBottomCross   = ("",      "=+=",  "===",  "===",  "===",  "===");
+my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "",     "");
 
 
 #
@@ -351,7 +351,7 @@ sub sizeTableColumns($@)
     # Establish total weight of all columns (total number of characters in table)
     my @minimalColumnWidths = ();
     my @desiredColumnWidths = ();
-	my @widestWord = ();
+    my @widestWord = ();
     my @columnArea = ();
     my $totalArea = 0;
 
@@ -378,7 +378,7 @@ sub sizeTableColumns($@)
                     my $wordLength = length($word);
                     if ($wordLength > $minimalColumnWidths[$j])
                     {
-						$widestWord[$j] = $word;
+                        $widestWord[$j] = $word;
                         $minimalColumnWidths[$j] = $wordLength;
                     }
                 }
@@ -393,17 +393,17 @@ sub sizeTableColumns($@)
     for my $j (0 .. $#minimalColumnWidths)
     {
         $columns++;
-		##print STDERR "\nCOLUMN: $j WIDTH: $minimalColumnWidths[$j] WORD: $widestWord[$j]";
+        ##print STDERR "\nCOLUMN: $j WIDTH: $minimalColumnWidths[$j] WORD: $widestWord[$j]";
         $finalColumnWidths[$j] = $minimalColumnWidths[$j];
         $minimalWidth += $minimalColumnWidths[$j];
     }
 
     # Adjust final width for borders (left 2; between 3; right 2)
-	my $borderAdjustment = (($columns - 1) * length($innerCross[$borderStyle])) +
+    my $borderAdjustment = (($columns - 1) * length($innerCross[$borderStyle])) +
         length($borderLeft[$borderStyle]) +
         length($borderRight[$borderStyle]);
 
-	##print STDERR "\nTOTAL WIDTH: $finalWidth - $borderAdjustment for $columns columns";
+    ##print STDERR "\nTOTAL WIDTH: $finalWidth - $borderAdjustment for $columns columns";
 
     $finalWidth -= $borderAdjustment;
 
@@ -485,21 +485,21 @@ sub sizeTableColumns($@)
             my @newCell = ();
             my $cellHeight = $#{$rows[$i][$j]};
 
-			## print STDERR "\nCOLUMN $j: wrapping to $finalColumnWidths[$j]";
+            ## print STDERR "\nCOLUMN $j: wrapping to $finalColumnWidths[$j]";
 
             for my $k (0 .. $cellHeight)
             {
                 my $line = $rows[$i][$j][$k];
-				if ($line eq "") 
-				{
-					# Handle empty lines directly.
-					push (@newCell, "");
-				}
-				else
-				{
-					my $wrappedLine = wrapLine($line, $finalColumnWidths[$j]);
-					push (@newCell, split("\n", $wrappedLine));
-				}
+                if ($line eq "")
+                {
+                    # Handle empty lines directly.
+                    push (@newCell, "");
+                }
+                else
+                {
+                    my $wrappedLine = wrapLine($line, $finalColumnWidths[$j]);
+                    push (@newCell, split("\n", $wrappedLine));
+                }
             }
             $rows[$i][$j] = [ @newCell ];
         }
@@ -707,7 +707,7 @@ sub wrapLine($$)
 {
     my $line = shift;
     my $maxLength = shift;
-	my $actualMaxLength = 0;
+    my $actualMaxLength = 0;
 
     my @words = split(/\s+/, $line);
 
@@ -717,19 +717,19 @@ sub wrapLine($$)
     {
         my $wordLength = length ($word);
 
-		my $newLength = $currentLength == 0 ? $wordLength : $currentLength + $wordLength + 1;
+        my $newLength = $currentLength == 0 ? $wordLength : $currentLength + $wordLength + 1;
 
-		# Need to start a new line?
+        # Need to start a new line?
         if ($newLength > $maxLength)
         {
             if ($currentLength != 0)
             {
                 $result .= "\n";
             }
-			else
-			{
-				print STDERR "WARNING: single word '$word' longer than $maxLength\n";
-			}
+            else
+            {
+                print STDERR "WARNING: single word '$word' longer than $maxLength\n";
+            }
             $currentLength = $wordLength;
         }
         else
@@ -743,16 +743,16 @@ sub wrapLine($$)
         }
         $result .= $word;
 
-		if ($actualMaxLength < $currentLength) 
-		{
-			$actualMaxLength = $currentLength;
-		}
+        if ($actualMaxLength < $currentLength)
+        {
+            $actualMaxLength = $currentLength;
+        }
     }
 
-	if ($actualMaxLength > $maxLength) 
-	{
-		print STDERR "WARNING: could not wrap line to $maxLength; needed $actualMaxLength\n";
-	}
+    if ($actualMaxLength > $maxLength)
+    {
+        print STDERR "WARNING: could not wrap line to $maxLength; needed $actualMaxLength\n";
+    }
 
     return $result;
 }
