@@ -39,6 +39,7 @@ my $useUnicode          = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 my $configurationFile   = "tei2html.config";
+my $pageWidth			= 72;
 
 GetOptions(
     't' => \$makeTXT,
@@ -52,7 +53,8 @@ GetOptions(
     'u' => \$useUnicode,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
-    'c=s' => \$customStylesheet);
+    'c=s' => \$customStylesheet,
+    'w=i' => \$pageWidth);
 
 my $filename = $ARGV[0];
 
@@ -183,7 +185,7 @@ sub processFile($)
             print "Create HTML version...\n";
             system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
-            system ("tidy -m -wrap 72 -f $basename-tidy.err $basename.html");
+            system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $basename.html");
             unlink($tmpFile);
         }
     }
@@ -250,7 +252,7 @@ sub processFile($)
         print "Create text version...\n";
         system ("perl $toolsdir/exNotesHtml.pl $filename");
         system ("cat $filename.out $filename.notes > $tmpFile1");
-        system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . "$tmpFile1 > $tmpFile2");
+        system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
 
         if ($useUnicode == 1)
         {
@@ -259,7 +261,7 @@ sub processFile($)
         }
         else
         {
-            system ("fmt -sw72 $tmpFile2 > $basename.txt");
+            system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
         }
         system ("gutcheck $basename.txt > $basename.gutcheck");
         system ("$bindir\\jeebies $basename.txt > $basename.jeebies");

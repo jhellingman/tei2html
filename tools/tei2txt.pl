@@ -9,8 +9,11 @@ use SgmlSupport qw/getAttrVal sgml2utf/;
 
 my $useUnicode = 0;
 my $useItalics = 0;
+my $pageWidth = 72;
 
-GetOptions('u' => \$useUnicode);
+GetOptions(
+	'u' => \$useUnicode,
+    'w=i' => \$pageWidth);
 
 if ($useUnicode == 1)
 {
@@ -273,7 +276,7 @@ sub parseTable($)
         if ($line =~ /<\/table>/)
         {
             my @result = handleTable($table);
-            my @wrappedTable = sizeTableColumns(68, @result);
+            my @wrappedTable = sizeTableColumns($pageWidth - 1, @result);
             printTable(@wrappedTable);
             return;
         }
