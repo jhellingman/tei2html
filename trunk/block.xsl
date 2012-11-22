@@ -180,6 +180,11 @@
 
     <!-- Trailers -->
 
+    <xd:doc>
+        <xd:short>Handle an trailer.</xd:short>
+        <xd:detail>Handle an trailer (a short phrase at the end of a chapter or book).</xd:detail>
+    </xd:doc>
+
     <xsl:template match="trailer">
         <p>
             <xsl:call-template name="set-lang-id-attributes"/>
@@ -191,6 +196,11 @@
 
     <!--====================================================================-->
     <!-- Blockquotes -->
+
+    <xd:doc>
+        <xd:short>Handle an block-quote.</xd:short>
+        <xd:detail>Handle a block-quote (a quote normally set off from the text by some extra space and identation).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
