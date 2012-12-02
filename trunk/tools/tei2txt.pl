@@ -12,7 +12,7 @@ my $useItalics = 0;
 my $pageWidth = 72;
 
 GetOptions(
-	'u' => \$useUnicode,
+    'u' => \$useUnicode,
     'w=i' => \$pageWidth);
 
 if ($useUnicode == 1)
@@ -308,7 +308,31 @@ sub handleTable($)
 sub handleRow($)
 {
     my $row = shift;
-    my @cells = split(/<cell.*?>/ms, $row);
+    my @items = split(/<cell\b(.*?)>/ms, $row);
+	my @cells = ();
+	my @colspans = ();
+	my @rowspans = ();
+
+	# every second item contains tag; first cell is empty.
+	for (my $i = 0; $i <= $#items; $i++)
+	{
+		my $item = $items[$i];
+		if ($i % 2 == 0) 
+		{
+			push @cells, $item;
+		}
+		else
+		{
+			my $cols = getAttrVal("cols", $item);
+			my $rows = getAttrVal("rows", $item);
+
+			$cols = $cols eq "" ? 1 : $cols;
+			$rows = $rows eq "" ? 1 : $rows;
+
+			push @colspans, $cols;
+			push @rowspans, $rows;
+		}
+	}
 
     # First element in result is empty, so drop it
     shift @cells;
@@ -824,8 +848,17 @@ sub printWithPadding($$)
     my $string = shift;
     my $width = shift;
 
-    print $string;
-    print spaces($width  - length($string));
+    # Align right if number or amount
+    if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/) 
+    {
+        print spaces($width  - length($string));
+        print $string;
+    }
+    else
+    {
+        print $string;
+        print spaces($width  - length($string));
+    }
 }
 
 
