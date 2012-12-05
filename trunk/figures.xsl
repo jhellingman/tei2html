@@ -15,11 +15,12 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     version="2.0"
-    exclude-result-prefixes="img xs"
+    exclude-result-prefixes="f img xs"
     >
 
 
@@ -34,7 +35,6 @@
     image()
 
     -->
-
 
     <xsl:template name="getimagefilename">
         <xsl:param name="format" select="'.jpg'" as="xs:string"/>
@@ -51,6 +51,24 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:getimagefilename" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="defaultformat" as="xs:string"/>
+        <xsl:choose>
+            <xsl:when test="contains($node/@rend, 'image(')">
+                <xsl:value-of select="substring-before(substring-after($node/@rend, 'image('), ')')"/>
+            </xsl:when>
+            <xsl:when test="$node/@url">
+                <xsl:value-of select="$node/@url"/>
+                <xsl:message terminate="no">Warning: using non-standard attribute url on figure.</xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>images/</xsl:text><xsl:value-of select="$node/@id"/><xsl:value-of select="$defaultformat"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 
     <xsl:template name="insertimage">
