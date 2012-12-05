@@ -1056,6 +1056,7 @@ sub entities2iso88591($)
     $a =~ s/\&Rs;/Rs/g;     # Rupee sign.
     $a =~ s/\&tb;/\n\n/g;   # Thematic Break;
 
+    $a =~ s/\&diamond;/*/g;
     $a =~ s/\&triangle;/[triangle]/g;
     $a =~ s/\&bullet;/·/g;
 
@@ -1078,7 +1079,7 @@ sub entities2iso88591($)
     $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
 
     # strip accents from remaining entities
-    $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb);/$1/g;
+    $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;
     $a =~ s/\&([a-zA-Z]{2})lig;/$1/g;
     $a =~ s/([0-9])\&frac([0-9])([0-9]*);/$1 $2\/$3/g;  # fraction preceded by number
     $a =~ s/\&frac([0-9])([0-9]*);/$1\/$2/g; # other fractions

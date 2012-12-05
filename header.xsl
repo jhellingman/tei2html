@@ -100,6 +100,11 @@
         <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"/>
         <meta name="author"             content="{$author}"/>
 
+        <!-- Link to cover page -->
+        <xsl:if test="//figure[@id='cover-image']">
+            <link rel="coverpage" href="{f:getimagefilename(//figure[@id='cover-image'][1], '.jpg')}"/>
+        </xsl:if>
+
         <!-- Insert Dublin Core metadata -->
         <link rel="schema.DC"     href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
 
