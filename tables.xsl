@@ -10,9 +10,11 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -43,6 +45,15 @@
     </xd:doc>
 
 
+    <xd:doc>
+        <xd:short>Handle a table.</xd:short>
+        <xd:detail>
+            <p>At the top-level, the code differentiates between an inline table, and one
+            at the block level; the former get wrapped in a HTML span element, the latter in
+            a div element.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="table">
         <xsl:call-template name="closepar"/>
         <xsl:choose>
@@ -65,6 +76,14 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle a table (2).</xd:short>
+        <xd:detail>
+            <p>The second step in handling tables is deciding whether they need to be
+            doubled-up.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="inner-table">
         <xsl:choose>
             <xsl:when test="contains(@rend, 'columns(2)')">
@@ -76,6 +95,15 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle a table (3).</xd:short>
+        <xd:detail>
+            <p>Now we are ready to actually format a normal (not-doubled-up) table.
+            When possible, the header rows (with the role-attribute having the values
+            label or unit) are treated separately from the data-rows.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="normal-table">
         <table>
@@ -170,14 +198,19 @@
          1. one for the @role attribute,
          2. one for the column-level @rend attribute, 
          3. one for the row-level @rend attribute, and
-         4. one for the cell-level @rend attribute. -->
+         4. one for the cell-level @rend attribute. 
+         5. one for the cell position in the table: 
+            cellTop cellRight cellBottom cellLeft
+            cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft
+    -->
     <xsl:template name="cell-rend">
 
         <xsl:variable name="class">
             <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
-            <xsl:call-template name="cell-rend-col"/>
+            <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
+            <xsl:call-template name="cell-pos-class"/>
         </xsl:variable>
 
         <xsl:if test="normalize-space($class) != ''">
@@ -193,6 +226,7 @@
         </xsl:if>
 
     </xsl:template>
+
 
     <!-- Find rendering information for the current row (our parent) -->
     <xsl:template name="cell-rend-row">
@@ -215,6 +249,25 @@
         </xsl:for-each>
     </xsl:template>
 
+    <!-- Find relative postion of cell in table -->
+    <xsl:template name="cell-pos-class">
+        <xsl:choose>
+            <!-- A cell is considered part of the table head if it has a @role of label or unit -->
+            <xsl:when test="..[@role='label' or @role='unit']">
+                <xsl:if test="not(preceding-sibling::cell)"><xsl:text>cellHeadLeft </xsl:text></xsl:if>
+                <xsl:if test="not(following-sibling::cell)"><xsl:text>cellHeadRight </xsl:text></xsl:if>
+                <xsl:if test="not(../preceding-sibling::row[@role='label' or @role='unit'])"><xsl:text>cellHeadTop </xsl:text></xsl:if>
+                <xsl:if test="not(../following-sibling::row[@role='label' or @role='unit'])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="not(preceding-sibling::cell)"><xsl:text>cellLeft </xsl:text></xsl:if>
+                <xsl:if test="not(following-sibling::cell)"><xsl:text>cellRight </xsl:text></xsl:if>
+                <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
+                <xsl:if test="not(../following-sibling::row)"><xsl:text>cellBottom </xsl:text></xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 
     <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
@@ -223,6 +276,16 @@
         <xsl:value-of select="sum(preceding-sibling::cell[@cols]/@cols) + count(preceding-sibling::cell[not(@cols)]) + 1"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Double-up a table.</xd:short>
+        <xd:detail>
+            <p>Render a table in doubled-up format, that is, using double the number of
+            columns and half the number of rows; repeating the heading-rows on top.
+            Note that this may fail if rows are spanned. The case of an odd number
+            of data-rows is handled (the last row will just be half-filled.)</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="doubleup-table">
 

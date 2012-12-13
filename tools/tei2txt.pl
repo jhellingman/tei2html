@@ -92,11 +92,11 @@ while (<>)
     # drop comments from text (replace with single space).
     $a =~ s/<!--.*?-->/ /g;
     # warn for remaining comments
-    $a =~ s/<!--/[ERROR: unhandled comment start]/g;
+    $a =~ s/<!--/[**ERROR: unhandled comment start]/g;
 
     # warn for notes (which should have been handled in a separate process)
-    $a =~ s/<note\b.*?>/[ERROR: unhandled note start tag]/g;
-    $a =~ s/<\/note\b.*?>/[ERROR: unhandled note end tag]/g;
+    $a =~ s/<note\b.*?>/[**ERROR: unhandled note start tag]/g;
+    $a =~ s/<\/note\b.*?>/[**ERROR: unhandled note end tag]/g;
 
     # generate part headings
     if ($a =~ /<(div0.*?)>/)
@@ -146,7 +146,7 @@ while (<>)
     # indicate tables for manual processing.
     if ($a =~ /<table.*?>/)
     {
-        # print "\n------\nTABLE\n";
+        print "\n[**TODO: Verify table]\n";
         parseTable($a);
     }
     if ($a =~ /<\/table>/)
@@ -212,7 +212,7 @@ sub handleLine($)
         my $ent = $1;
         if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp"))
         {
-            print "\n[ERROR: Contains unhandled entity &$ent;]\n";
+            print "\n[**ERROR: Contains unhandled entity &$ent;]\n";
         }
     }
 
