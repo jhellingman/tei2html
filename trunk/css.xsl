@@ -22,7 +22,7 @@
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a CSS stylesheet to accompany HTML or ePub output.</xd:short>
         <xd:detail>This stylesheet formats generates a CSS stylesheet from TEI. According to the requirements
-        of ePub, not <code>@style</code> attributes are allowed in the generated XHTML, so all CSS
+        of ePub, <code>@style</code> attributes are not allowed in the generated XHTML, so all CSS
         rules are collected from the TEI file, and put together in a separate CSS file. Further templates in
         the <code>css</code> mode are integrated in the other stylesheets, to keep them together with
         related HTML generating templates.</xd:detail>
