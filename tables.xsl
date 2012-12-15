@@ -20,7 +20,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to translate the TEI table model to HTML tables.</xd:short>
-        <xd:detail><p>This stylesheet translates the TEI table model to HTML tables. This assumes 
+        <xd:detail><p>This stylesheet translates the TEI table model to HTML tables. This assumes
         that in the source, cells 'spanned' by other cells are omitted in the data.</p>
 
         <p>To accommodate attributes common to all cells in a column, this code
@@ -44,9 +44,14 @@
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:template match="table">
+        <xsl:call-template name="closepar"/>
+        <xsl:apply-templates select="." mode="render-table"/>
+        <xsl:call-template name="reopenpar"/>
+    </xsl:template>
 
     <xd:doc>
-        <xd:short>Handle a table.</xd:short>
+        <xd:short>Render a table in HTML.</xd:short>
         <xd:detail>
             <p>At the top-level, the code differentiates between an inline table, and one
             at the block level; the former get wrapped in a HTML span element, the latter in
@@ -54,8 +59,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="table">
-        <xsl:call-template name="closepar"/>
+    <xsl:template match="table" mode="render-table">
         <xsl:choose>
             <xsl:when test="contains(@rend, 'position(inline)') or contains(@rend, 'class(intralinear)')">
                 <span class="table">
@@ -72,12 +76,11 @@
                 </div>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Handle a table (2).</xd:short>
+        <xd:short>Render a table in HTML (2).</xd:short>
         <xd:detail>
             <p>The second step in handling tables is deciding whether they need to be
             doubled-up.</p>
@@ -97,7 +100,7 @@
 
 
     <xd:doc>
-        <xd:short>Handle a table (3).</xd:short>
+        <xd:short>Render a table in HTML (3).</xd:short>
         <xd:detail>
             <p>Now we are ready to actually format a normal (not-doubled-up) table.
             When possible, the header rows (with the role-attribute having the values
@@ -196,10 +199,10 @@
 
     <!-- Here we may need to supply up to four class names for rendering:
          1. one for the @role attribute,
-         2. one for the column-level @rend attribute, 
+         2. one for the column-level @rend attribute,
          3. one for the row-level @rend attribute, and
-         4. one for the cell-level @rend attribute. 
-         5. one for the cell position in the table: 
+         4. one for the cell-level @rend attribute.
+         5. one for the cell position in the table:
             cellTop cellRight cellBottom cellLeft
             cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft
     -->
@@ -251,29 +254,44 @@
 
     <!-- Find relative postion of cell in table -->
     <xsl:template name="cell-pos-class">
+
+        <!-- A cell is considered part of the table head if it has a @role of label or unit -->
+        <xsl:variable name="prefix" select="if (..[@role='label' or @role='unit']) then 'cellHead' else 'cell'"/>
+
         <xsl:choose>
-            <!-- A cell is considered part of the table head if it has a @role of label or unit -->
+            <!-- Do we have the @col attribute on the table, then we can use those attributes -->
+            <xsl:when test="@col">
+                <xsl:if test="@col = 1"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
+                <xsl:if test="@col + @cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="not(preceding-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
+                <xsl:if test="not(following-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+
+        <xsl:choose>
             <xsl:when test="..[@role='label' or @role='unit']">
-                <xsl:if test="not(preceding-sibling::cell)"><xsl:text>cellHeadLeft </xsl:text></xsl:if>
-                <xsl:if test="not(following-sibling::cell)"><xsl:text>cellHeadRight </xsl:text></xsl:if>
-                <xsl:if test="not(../preceding-sibling::row[@role='label' or @role='unit'])"><xsl:text>cellHeadTop </xsl:text></xsl:if>
+                <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellHeadTop </xsl:text></xsl:if>
                 <xsl:if test="not(../following-sibling::row[@role='label' or @role='unit'])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="not(preceding-sibling::cell)"><xsl:text>cellLeft </xsl:text></xsl:if>
-                <xsl:if test="not(following-sibling::cell)"><xsl:text>cellRight </xsl:text></xsl:if>
                 <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
                 <xsl:if test="not(../following-sibling::row)"><xsl:text>cellBottom </xsl:text></xsl:if>
             </xsl:otherwise>
         </xsl:choose>
+
+        <!-- Fix the case when a bottom cell is spanned -->
+        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@rows"><xsl:value-of select="$prefix"/><xsl:text>Bottom </xsl:text></xsl:if>
     </xsl:template>
 
 
     <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
         <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
-        <!-- Note that this simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
-        <xsl:value-of select="sum(preceding-sibling::cell[@cols]/@cols) + count(preceding-sibling::cell[not(@cols)]) + 1"/>
+        <!-- If we have the @col attribute, we will use this value -->
+        <!-- The alternative simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
+        <xsl:value-of select="if (@col) then @col else sum(preceding-sibling::cell[@cols]/@cols) + count(preceding-sibling::cell[not(@cols)]) + 1"/>
     </xsl:template>
 
 

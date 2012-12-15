@@ -1,17 +1,16 @@
-<!-- Based on code found at  -->
-
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    version="2.0" 
+    version="2.0"
     exclude-result-prefixes="xs xd">
 
-<xsl:output indent="yes" omit-xml-declaration="yes"/>
+<xsl:output indent="no" omit-xml-declaration="yes"/>
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to normalize TEI tables.</xd:short>
         <xd:detail><p>This stylesheet normalizes TEI tables, to be able to apply the
-        proper style to a table-cell, we need to be able what it's position in the table is, 
+        proper style to a table-cell, we need to be able what it's position in the table is,
         while taking into account spanned rows and columns.</p>
 
         <p>To establish the actual row and column of a cell, we need to first normalize
@@ -19,7 +18,7 @@
         register the cell position in additional attributes. In a final stage, we remove
         the spanned cells again.</p>
 
-        <p>The normalizing code is based on sample code found on-line here: 
+        <p>The normalizing code is based on sample code found on-line here:
         http://andrewjwelch.com/code/xslt/table/table-normalization.html. This has been
         adjusted to the TEI table model and expanded with code to detect non-well-formed
         tables.</p>
@@ -27,17 +26,26 @@
     </xd:doc>
 
 
+<xsl:template match="@TEIform" mode="#all"/>
+
 <xsl:template match="table">
+
+    <!-- Step 1: eliminate spanned columns -->
     <xsl:variable name="table-without-colspans">
-        <xsl:apply-templates select="." mode="normalize-colspans"/>
+        <xsl:apply-templates select="." mode="normalize-table-colspans"/>
     </xsl:variable>
+
+    <!-- Step 2: eliminate spanned rows -->
     <xsl:variable name="table-without-rowspans">
-        <xsl:apply-templates select="$table-without-colspans" mode="normalize-rowspans"/>
+        <xsl:apply-templates select="$table-without-colspans" mode="normalize-table-rowspans"/>
     </xsl:variable>
+
+    <!-- Step 3: cleanup added attributes and cells -->
     <xsl:apply-templates select="$table-without-rowspans" mode="normalize-table-final"/>
 </xsl:template>
 
 
+<!-- Templates to normalize a table -->
 
 <xsl:template match="@*|node()" mode="#all">
     <xsl:copy>
@@ -46,7 +54,7 @@
 </xsl:template>
 
 
-<xsl:template match="cell" mode="normalize-colspans">
+<xsl:template match="cell" mode="normalize-table-colspans">
     <xsl:choose>
         <xsl:when test="@cols">
             <xsl:variable name="this" select="." as="element()"/>
@@ -81,20 +89,19 @@
 </xsl:template>
 
 
-
-<xsl:template match="table" mode="normalize-rowspans">
+<xsl:template match="table" mode="normalize-table-rowspans">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
         <xsl:copy-of select="*[not(self::row)]"/>
         <xsl:copy-of select="row[1]"/>
-        <xsl:apply-templates select="row[2]" mode="normalize-rowspans">
+        <xsl:apply-templates select="row[2]" mode="normalize-table-rowspans">
             <xsl:with-param name="previousRow" select="row[1]"/>
         </xsl:apply-templates>
     </xsl:copy>
 </xsl:template>
 
 
-<xsl:template match="row" mode="normalize-rowspans">
+<xsl:template match="row" mode="normalize-table-rowspans">
     <xsl:param name="previousRow" as="element()"/>
 
     <xsl:variable name="currentRow" select="."/>
@@ -133,7 +140,7 @@
 
     <xsl:copy-of select="$newRow"/>
 
-    <xsl:apply-templates select="following-sibling::row[1]" mode="normalize-rowspans">
+    <xsl:apply-templates select="following-sibling::row[1]" mode="normalize-table-rowspans">
         <xsl:with-param name="previousRow" select="$newRow"/>
     </xsl:apply-templates>
 </xsl:template>
@@ -142,6 +149,7 @@
 <xsl:template match="table" mode="normalize-table-final">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
+        <!-- TODO: Count heading rows -->
         <xsl:attribute name="cols" select="count(row[1]/cell)"/>
         <xsl:attribute name="rows" select="count(row)"/>
 

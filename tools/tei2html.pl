@@ -39,7 +39,7 @@ my $useUnicode          = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 my $configurationFile   = "tei2html.config";
-my $pageWidth			= 72;
+my $pageWidth           = 72;
 
 GetOptions(
     't' => \$makeTXT,
@@ -129,14 +129,21 @@ sub processFile($)
         runChecks($filename);
     }
 
-    # convert from TEI P4 to TEI P5  (experimental)
-    # system ("$saxon2 $basename.xml $xsldir/p4top5.xsl > $basename-p5.xml");
+    my $xmlfilename = "$basename-normalized.xml";
+	if (!isNewer($xmlfilename, $basename . ".xml"))
+	{
+		print "Add col and row attributes to tables...\n";
+		system ("$saxon2 $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
+	}
+
+    # convert from TEI P4 to TEI P5 (experimental)
+    # system ("$saxon2 $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
 
     # extract metadata
-    system ("$saxon2 $basename.xml $xsldir/tei2dc.xsl > metadata.xml");
+    system ("$saxon2 $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
 
     # create PGTEI version
-    # system ("$saxon2 $basename.xml $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    # system ("$saxon2 $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     collectImageInfo();
 
@@ -175,15 +182,15 @@ sub processFile($)
 
     if ($makeHTML == 1)
     {
-        if (isNewer($basename . ".html", $basename . ".xml"))
+        if (isNewer($basename . ".html", $xmlfilename))
         {
-            print "Skipping convertion to HTML ($basename.html newer than $basename.xml).\n";
+            print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
         }
         else
         {
-            my $tmpFile = mktemp('tmp-XXXXX');;
+            my $tmpFile = mktemp('tmp-XXXXX');
             print "Create HTML version...\n";
-            system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
+            system ("$saxon2 $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
             system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $basename.html");
             unlink($tmpFile);
@@ -192,12 +199,12 @@ sub processFile($)
 
     if ($makePDF == 1)
     {
-        my $tmpFile1 = mktemp('tmp-XXXXX');;
-        my $tmpFile2 = mktemp('tmp-XXXXX');;
+        my $tmpFile1 = mktemp('tmp-XXXXX');
+        my $tmpFile2 = mktemp('tmp-XXXXX');
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
-        system ("$saxon2 $basename.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
+        system ("$saxon2 $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
         system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
         system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
         system ("$prince $basename-prince.html $basename.pdf");
@@ -208,7 +215,7 @@ sub processFile($)
 
     if ($makeEPUB == 1)
     {
-        my $tmpFile = mktemp('tmp-XXXXX');;
+        my $tmpFile = mktemp('tmp-XXXXX');
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub\\images");
@@ -231,7 +238,7 @@ sub processFile($)
             system ("del epub\\images\\new-cover-tn.jpg");
         }
 
-        system ("$saxon2 $basename.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
+        system ("$saxon2 $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
         chdir "epub";
@@ -439,9 +446,9 @@ sub transcribeGreek($)
     my $containsGreek = system ("grep -q \"<GR>\" $currentFile");
     if ($containsGreek == 0)
     {
-        my $tmpFile1 = mktemp('tmp-XXXXX');;
-        my $tmpFile2 = mktemp('tmp-XXXXX');;
-        my $tmpFile3 = mktemp('tmp-XXXXX');;
+        my $tmpFile1 = mktemp('tmp-XXXXX');
+        my $tmpFile2 = mktemp('tmp-XXXXX');
+        my $tmpFile3 = mktemp('tmp-XXXXX');
 
         print "Converting Greek transcription...\n";
         print "Adding Greek transcription in choice elements...\n";
@@ -472,7 +479,7 @@ sub transcribeNotation($$$$)
     my $containsNotation = system ("grep -q \"$tag\" $currentFile");
     if ($containsNotation == 0)
     {
-        my $tmpFile = mktemp('tmp-XXXXX');;
+        my $tmpFile = mktemp('tmp-XXXXX');
 
         print "Converting $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
