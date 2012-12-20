@@ -181,7 +181,17 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="cell-span"/>
             <xsl:call-template name="cell-rend"/>
-            <xsl:apply-templates/>
+
+            <xsl:choose>
+                <xsl:when test="@role='sum'">
+                    <span class="sum">
+                        <xsl:apply-templates/>
+                    </span>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
         </td>
     </xsl:template>
 
@@ -209,7 +219,7 @@
     <xsl:template name="cell-rend">
 
         <xsl:variable name="class">
-            <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:if test="@role and not(@role='data' or @role='sum')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
@@ -281,7 +291,8 @@
             </xsl:otherwise>
         </xsl:choose>
 
-        <!-- Fix the case when a bottom cell is spanned -->
+        <!-- Handle the case when a bottom cell is spanned -->
+        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@headrows"><xsl:value-of select="$prefix"/><xsl:text>Bottom </xsl:text></xsl:if>
         <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@rows"><xsl:value-of select="$prefix"/><xsl:text>Bottom </xsl:text></xsl:if>
     </xsl:template>
 

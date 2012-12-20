@@ -149,9 +149,10 @@
 <xsl:template match="table" mode="normalize-table-final">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
-        <!-- TODO: Count heading rows -->
         <xsl:attribute name="cols" select="count(row[1]/cell)"/>
         <xsl:attribute name="rows" select="count(row)"/>
+        <!-- TODO: Count heading rows only at top -->
+        <xsl:attribute name="headrows" select="count(row[@role = 'label' or @role = 'unit'])"/>
 
         <xsl:apply-templates mode="normalize-table-final"/>
     </xsl:copy>
