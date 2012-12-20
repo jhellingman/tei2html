@@ -413,6 +413,9 @@
 
         <item>
             <!-- Append $how after id to make it unique for linked images -->
+            <xsl:if test="@id='cover-image'">
+                <xsl:attribute name="properties">cover-image</xsl:attribute>
+            </xsl:if>
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/><xsl:value-of select="$how"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
             <xsl:attribute name="media-type"><xsl:value-of select="$mimetype"/></xsl:attribute>

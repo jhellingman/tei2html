@@ -130,11 +130,11 @@ sub processFile($)
     }
 
     my $xmlfilename = "$basename-normalized.xml";
-	if (!isNewer($xmlfilename, $basename . ".xml"))
-	{
-		print "Add col and row attributes to tables...\n";
-		system ("$saxon2 $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
-	}
+    if (!isNewer($xmlfilename, $basename . ".xml"))
+    {
+        print "Add col and row attributes to tables...\n";
+        system ("$saxon2 $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
+    }
 
     # convert from TEI P4 to TEI P5 (experimental)
     # system ("$saxon2 $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
@@ -182,7 +182,7 @@ sub processFile($)
 
     if ($makeHTML == 1)
     {
-        if (isNewer($basename . ".html", $xmlfilename))
+        if (isNewer($basename . ".html", $basename . ".xml"))
         {
             print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
         }
