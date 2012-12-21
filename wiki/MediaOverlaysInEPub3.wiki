@@ -8,17 +8,17 @@ Have a structure like this:
 
 {{{
 <smil 
-  xmlns="http://www.w3.org/ns/SMIL" 
-  xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">
+    xmlns="http://www.w3.org/ns/SMIL" 
+    xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">
   <body>
     <seq id="sequence_id" epub:textref="chapter.xhtml" epub:type="bodymatter chapter">
       <par id="par1">
         <text src="chapter.xhtml#p1"/>
-        <audio clipBegin="0:00:00" clipEnd="0:00:02.162036" src="audio/chapter.mp3"/>
+        <audio clipBegin="0:00:00" clipEnd="0:00:02.162" src="audio/chapter.mp3"/>
       </par>
       <par id="par2">
-        <text src="s004-Preface-01.xhtml#azp2"/>
-        <audio clipBegin="0:00:02.162036" clipEnd="0:00:05.718101" src="audio/s004-Preface-01.mp3"/>
+        <text src="chapter.xhtml#p2"/>
+        <audio clipBegin="0:00:02.162" clipEnd="0:00:05.718" src="audio/chapter.mp3"/>
       </par>
     </seq>
   </body>
