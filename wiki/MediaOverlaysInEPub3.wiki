@@ -50,7 +50,7 @@ Add a number of media overlay metadata items; they reference items in the manife
 <meta property="media:duration" refines="#ch1">5:30:15</meta>
 <meta property="media:duration">5:30:15</meta>
 <meta property="media:narrator">Narrator Name</meta>
-<meta property="media:active-class">correct</meta>
+<meta property="media:active-class">-epub-media-overlay-active</meta>
 }}}
 
 === Manifest section ===
