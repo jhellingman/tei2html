@@ -50,8 +50,8 @@ Add the smil and audio files added to the ePub container:
 This also indicates how to handle fall-back media in an alternative format.
 
 {{{
-   <item id="ch1" href="chapter.smil" media-type="application/smil+xml"/>
+<item id="ch1" href="chapter.smil" media-type="application/smil+xml"/>
 
-    <item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
-    <item id="audio02" href="audio/chapter.ogg" media-type="audio/ogg"/>
+<item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
+<item id="audio02" href="audio/chapter.ogg" media-type="audio/ogg"/>
 }}}
