@@ -10,6 +10,7 @@ Based on a little reverse engineering of a working book (with the freely availab
  * https://epub-revision.googlecode.com/svn-history/r1915/trunk/build/EPUB_MediaOverlays30.html#d16293e836
  * http://www.daisy.org/project/tobi
  * http://azardi.infogridpacific.com/resources.html
+ * http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SASYMP
 
 == SMIL Files ==
 
@@ -81,4 +82,3 @@ Currently, there is no support for SMIL types of overlay in TEI. We can solve th
 }}}
 
 And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
-
