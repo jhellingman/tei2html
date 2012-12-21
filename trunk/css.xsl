@@ -83,6 +83,7 @@
             <!-- Properties handled otherwise -->
             <xsl:when test="$property='class'"/>        <!-- pass-through CSS class -->
             <xsl:when test="$property='cover-image'"/>  <!-- cover-image for ePub versions -->
+            <xsl:when test="$property='media-overlay'"/> <!-- media overlay for ePub versions -->
             <xsl:when test="$property='link'"/>         <!-- external link (for example on image) -->
             <xsl:when test="$property='image'"/>        <!-- in-line image -->
             <xsl:when test="$property='image-alt'"/>    <!-- alt text for image -->

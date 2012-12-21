@@ -8,9 +8,10 @@
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        xmlns:smil="http://www.w3.org/ns/SMIL"
         xmlns:f="urn:stylesheet-functions"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd xs"
+        exclude-result-prefixes="f xd xs smil"
         version="2.0">
 
 
@@ -24,6 +25,7 @@
 
     <xd:doc type="string">Filename of file with additional items to be added to the OPF file, such as custom fonts.</xd:doc>
 
+    <xsl:param name="opfMetadataFile"/>
     <xsl:param name="opfManifestFile"/>
 
 
@@ -66,6 +68,11 @@
             <xsl:call-template name="metadata2"/>
             <xsl:if test="$optionEPub3 = 'Yes'">
                 <xsl:call-template name="metadata3"/>
+            </xsl:if>
+
+            <xsl:if test="$opfMetadataFile">
+                <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
+                <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
             </xsl:if>
         </metadata>
     </xsl:template>
@@ -239,8 +246,8 @@
         </dc:rights>
     </xsl:template>
 
-    <!--== metadata3 (for ePub3) ===========================================-->
 
+    <!--== metadata3 (for ePub3) ===========================================-->
 
     <xsl:template name="metadata3">
         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
@@ -324,6 +331,9 @@
                 <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
                 <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
 
+                <!-- Media overlays -->
+                <xsl:apply-templates select="//*[contains(@rend, 'media-overlay(')]" mode="manifest"/>
+
                 <!-- Include custom items in the manifest -->
                 <xsl:if test="$opfManifestFile">
                     <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
@@ -350,8 +360,8 @@
     <xsl:template match="figure" mode="manifest">
         <xsl:variable name="filename">
             <xsl:choose>
-                <xsl:when test="contains(@rend, 'image(')">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+                <xsl:when test="f:has-rend-value(., 'image')">
+                    <xsl:value-of select="f:rend-value(., 'image')"/>
                 </xsl:when>
                 <xsl:otherwise>images/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
             </xsl:choose>
@@ -364,22 +374,56 @@
 
 
     <xsl:template match="*" mode="manifest">
-        <xsl:if test="contains(@rend, 'image(')">
+        <xsl:if test="f:has-rend-value(., 'image')">
             <xsl:variable name="filename">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+                <xsl:value-of select="f:rend-value(., 'image')"/>
             </xsl:variable>
 
             <xsl:call-template name="manifest-image-item">
                 <xsl:with-param name="filename" select="$filename"/>
             </xsl:call-template>
         </xsl:if>
+
+        <xsl:if test="f:has-rend-value(., 'media-overlay')">
+            <xsl:variable name="filename">
+                <xsl:value-of select="f:rend-value(., 'media-overlay')"/>
+            </xsl:variable>
+            <xsl:call-template name="manifest-media-overlay-item">
+                <xsl:with-param name="filename" select="$filename"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="manifest-media-overlay-item">
+        <xsl:param name="filename" as="xs:string"/>
+
+        <!-- Entry for the .smil file itself. -->
+        <item>
+            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>overlay</xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
+            <xsl:attribute name="media-type">application/smil+xml</xsl:attribute>
+        </item>
+
+        <!-- Handle the .smil file itself for further entries -->
+        <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$filename"/>".</xsl:message>
+        <xsl:apply-templates mode="manifest-smil" select="document($filename)"/>
+    </xsl:template>
+
+
+    <xsl:template match="smil:audio[@src]" mode="manifest-smil">
+        <item>
+            <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="@src"/></xsl:attribute>
+            <xsl:attribute name="media-type">audio/mpeg</xsl:attribute>
+        </item>
     </xsl:template>
 
 
     <xsl:template match="*" mode="manifest-links">
-        <xsl:if test="contains(@rend, 'link(')">
+        <xsl:if test="f:has-rend-value(., 'link')">
             <xsl:variable name="filename">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'link('), ')')"/>
+                <xsl:value-of select="f:rend-value(., 'link')"/>
             </xsl:variable>
 
             <xsl:if test="matches($filename, '^[^:]+\.(jpg|png|gif|svg)$')">
@@ -429,25 +473,14 @@
     <xsl:template match="opf:item" mode="undouble">
         <xsl:variable name="href" select="@href"/>
         <xsl:if test="not(preceding-sibling::opf:item[@href = $href])">
-            <xsl:copy>
-                <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-                <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
-                <xsl:attribute name="media-type"><xsl:value-of select="@media-type"/></xsl:attribute>
-                <xsl:if test="@properties">
-                    <xsl:attribute name="properties"><xsl:value-of select="@properties"/></xsl:attribute>
-                </xsl:if>
-            </xsl:copy>
+            <xsl:copy-of select="."/>
         </xsl:if>
     </xsl:template>
 
     <!-- Copy items from an included manifest-snippet -->
 
     <xsl:template match="opf:item" mode="copy-manifest">
-        <xsl:copy>
-            <xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
-            <xsl:attribute name="media-type"><xsl:value-of select="@media-type"/></xsl:attribute>
-        </xsl:copy>
+        <xsl:copy-of select="."/>
     </xsl:template>
 
     <!--== spine ===========================================================-->
