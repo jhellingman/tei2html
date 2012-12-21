@@ -82,3 +82,9 @@ Currently, there is no support for SMIL types of overlay in TEI. We can solve th
 }}}
 
 And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
+
+== TODO ==
+
+* Copy .smil files to ePub output directory.
+* Better handling of media metadata.
+* Find way to specify fallback media.
