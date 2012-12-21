@@ -78,7 +78,7 @@ Then also refer to the media-overlay in the entry for the original (text) items
 Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the .smil file to use as an overlay.
 
 {{{
-<div1 id="ch1" rend="epub3-media-overlay(chapter1.smil)">
+<div1 id="ch1" rend="media-overlay(chapter1.smil)">
 }}}
 
 And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
