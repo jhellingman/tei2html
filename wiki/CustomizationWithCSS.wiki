@@ -79,6 +79,14 @@ Finally, rendering set at the cell level will override both column and row rende
 || `cell/@role='label'` || `<td>` || Even though this is a header, still a `<td>`. ||
 || `cell`       || `<td>` || ||
 
+Furthermore, cells get attributes to indicate whether they are the topmost, rightmost, bottommost or leftmost cell in a table. These can be used to set borders. (Note that those attributes take into account spans).
+
+|| *position*  || *Cell in Head* || *Cell in Body* ||
+|| top || `cellHeadTop` || `cellTop` ||
+|| right || `cellHeadRight` || `cellRight` ||
+|| bottom || `cellHeadBottom` || `cellBottom` ||
+|| left || `cellHeadLeft` || `cellLeft` ||
+
 
 === Footnotes ===
 
