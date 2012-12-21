@@ -85,6 +85,6 @@ And then parse the .smil file for the entries that need to be added to the OPF m
 
 == TODO ==
 
-* Copy .smil files to ePub output directory.
-* Better handling of media metadata.
-* Find way to specify fallback media.
+ * Copy .smil files to ePub output directory.
+ * Better handling of media metadata.
+ * Find way to specify fallback media.
