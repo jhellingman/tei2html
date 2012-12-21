@@ -5,6 +5,7 @@ Based on a little reverse engineering of a working book.
 == References ==
 
  * https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
+ * http://idpf.org/epub/30/spec/epub30-mediaoverlays.html
  * https://epub-revision.googlecode.com/svn-history/r1915/trunk/build/EPUB_MediaOverlays30.html#d16293e836
 
 
