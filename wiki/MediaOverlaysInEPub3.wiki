@@ -1,0 +1,13 @@
+#summary Structure of Media Overlays in ePub3.
+
+Based on a little reverse engineering 
+
+== SMIL Files ==
+
+== MP3 or OGG Files ==
+
+== OPF File ==
+
+=== Metadata section ===
+
+=== Manifest section ===
