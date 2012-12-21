@@ -1,4 +1,4 @@
-#summary Structure of Media Overlays in ePub3 (_proposed feature_).
+#summary Structure of Media Overlays in ePub3 (proposed feature).
 
 Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; other readers remain to be tested).
 
