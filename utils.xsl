@@ -372,4 +372,21 @@
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
 
+
+    <xsl:function name="f:has-rend-value" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="name" as="xs:string"/>
+
+        <xsl:value-of select="contains($node/@rend, concat($name, '('))"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:rend-value" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="name" as="xs:string"/>
+
+        <xsl:value-of select="substring-before(substring-after($node/@rend, concat($name, '(')), ')')"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>

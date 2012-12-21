@@ -33,8 +33,9 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:f="urn:stylesheet-functions"
     version="2.0"
-    exclude-result-prefixes="xs xd"
+    exclude-result-prefixes="f xs xd"
     >
 
     <xd:doc type="stylesheet">
@@ -294,6 +295,10 @@
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
+
+            <xsl:if test="f:has-rend-value(., 'media-overlay')">
+                <xsl:attribute name="media-overlay"><xsl:value-of select="$id"/>overlay</xsl:attribute>
+            </xsl:if>
         </item>
     </xsl:template>
 

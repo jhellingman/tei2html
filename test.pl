@@ -39,11 +39,18 @@ if (-f "opf-manifest.xml")
     $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
 }
 
+my $opfMetadataFileParam = "";
+if (-f "opf-metadata.xml")
+{
+    print "Adding additional items to the OPF metadata...\n";
+    $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
+}
+
 print "Add col and row attributes to tables...\n";
 system ("$saxon2 test.xml $xsldir/normalize-table.xsl > test-normalized.xml");
 
 system ("$saxon2 test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test.html");
-system ("$saxon2 test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam basename=\"test\" > tmp.xhtml");
+system ("$saxon2 test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
 system ("del test.epub");
 chdir "epub";

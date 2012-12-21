@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Additional metadata to be added verbatim to the metadata in the OPF file -->
+<metadata xmlns="http://www.idpf.org/2007/opf">
+    <meta property="media:duration" refines="#ch1overlay">0:00:24</meta>
+    <meta property="media:duration">0:00:24</meta>
+    <meta property="media:narrator">Loon</meta>
+    <meta property="media:active-class">-epub-media-overlay-active</meta>
+</metadata>

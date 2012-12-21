@@ -120,7 +120,7 @@
 
 
 
-<div1 id="ch1" n="1" type="Chapter">
+<div1 id="ch1" n="1" type="Chapter" rend="media-overlay(test.smil)">
 <head type="label">Chapter 1</head>
 <head>Text Styles</head>
 
@@ -137,7 +137,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <row><cell><hi rend="ex">&quickbrown;</hi>    </cell><cell>letter-spaced</cell></row>
 </table>
 
-
+<p id="loon">A sample of an embedded audio file: The sound of a <hi>Loon</hi>, courtesy of the U.S. Fish and Wildlife Service.</p>
 
 </div1>
 <div1 id="ch2" n="2" type="Chapter">

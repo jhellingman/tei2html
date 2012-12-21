@@ -424,7 +424,7 @@ td.unit, tr.unit td
     font-style: italic;
 }
 
-td.sum
+span.sum
 {
     padding-top: 2px; border-top: solid black 1px;
 }
