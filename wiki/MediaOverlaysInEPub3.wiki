@@ -5,6 +5,7 @@ Based on a little reverse engineering of a working book (with the freely availab
 == References ==
 
  * https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
+ * http://data.daisy.org/publications/guidelines/accessible_epub_3_in_epub_3.epub
  * http://idpf.org/epub/30/spec/epub30-mediaoverlays.html
  * https://epub-revision.googlecode.com/svn-history/r1915/trunk/build/EPUB_MediaOverlays30.html#d16293e836
  * http://www.daisy.org/project/tobi
@@ -62,4 +63,11 @@ This also indicates how to handle fall-back media in an alternative format.
 
 <item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
 <item id="audio02" href="audio/chapter.ogg" media-type="audio/ogg"/>
+}}}
+
+
+Then also refer to the media-overlay in the entry for the original (text) items
+
+{{{
+<item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml" media-overlay="ch1"/>
 }}}
