@@ -1,13 +1,14 @@
 #summary Structure of Media Overlays in ePub3.
 
-Based on a little reverse engineering of a working book.
+Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; other readers remain to be tested).
 
 == References ==
 
  * https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
  * http://idpf.org/epub/30/spec/epub30-mediaoverlays.html
  * https://epub-revision.googlecode.com/svn-history/r1915/trunk/build/EPUB_MediaOverlays30.html#d16293e836
-
+ * http://www.daisy.org/project/tobi
+ * http://azardi.infogridpacific.com/resources.html
 
 == SMIL Files ==
 
