@@ -27,7 +27,7 @@
 
     <xsl:param name="opfMetadataFile"/>
     <xsl:param name="opfManifestFile"/>
-
+    <xsl:param name="useOggFallback" select="true()"/>
 
     <xd:doc>
         <xd:short>Generate the OPF file.</xd:short>
@@ -407,16 +407,35 @@
 
         <!-- Handle the .smil file itself for further entries -->
         <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$filename"/>".</xsl:message>
-        <xsl:apply-templates mode="manifest-smil" select="document($filename)"/>
+        <xsl:apply-templates mode="manifest-smil" select="document($filename, .)"/>
     </xsl:template>
 
 
     <xsl:template match="smil:audio[@src]" mode="manifest-smil">
+        <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
+        <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
+
         <item>
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+            <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="@src"/></xsl:attribute>
             <xsl:attribute name="media-type">audio/mpeg</xsl:attribute>
+            <xsl:if test="$useOggFallback">
+                <xsl:attribute name="fallback"><xsl:value-of select="$id"/>-ogg</xsl:attribute>
+            </xsl:if>
         </item>
+
+        <xsl:if test="$useOggFallback">
+            <item>
+                <xsl:attribute name="id"><xsl:value-of select="$id"/>-ogg</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="$basename"/>.ogg</xsl:attribute>
+                <xsl:attribute name="media-type">audio/ogg</xsl:attribute>
+            </item>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="@*|node()" mode="manifest-smil">
+        <xsl:apply-templates mode="manifest-smil"/>
     </xsl:template>
 
 

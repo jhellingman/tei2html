@@ -180,6 +180,13 @@ sub processFile($)
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
+    my $opfMetadataFileParam = "";
+    if (-f "opf-metadata.xml")
+    {
+        print "Adding additional items to the OPF metadata...\n";
+        $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
+    }
+
     if ($makeHTML == 1)
     {
         if (isNewer($basename . ".html", $basename . ".xml"))
@@ -238,7 +245,7 @@ sub processFile($)
             system ("del epub\\images\\new-cover-tn.jpg");
         }
 
-        system ("$saxon2 $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam basename=\"$basename\" > $tmpFile");
+        system ("$saxon2 $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
         chdir "epub";
