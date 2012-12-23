@@ -20,6 +20,7 @@ Based on a little reverse engineering of a working book (with the freely availab
 
 === Synchronizing Text ===
 
+ * https://www.youtube.com/watch?v=dQaVXdgKSn0
  * https://forum.librivox.org/viewtopic.php?p=226242#p226242
  * http://www.mycnknow.com/download/TUTORIAL/tutor.htm
  * http://www.ling.upenn.edu/phonetics/p2fa/
