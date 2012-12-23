@@ -11,6 +11,19 @@ Based on a little reverse engineering of a working book (with the freely availab
  * http://www.daisy.org/project/tobi
  * http://azardi.infogridpacific.com/resources.html
  * http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SASYMP
+ * https://forum.librivox.org/viewtopic.php?p=23815#p23815
+
+=== Alternative viewers ===
+
+ * http://reader.dinglabs.com/
+ * https://www.youtube.com/watch?v=IG00lyK01pQ
+
+=== Synchronizing Text ===
+
+ * https://forum.librivox.org/viewtopic.php?p=226242#p226242
+ * http://www.mycnknow.com/download/TUTORIAL/tutor.htm
+ * http://www.ling.upenn.edu/phonetics/p2fa/
+
 
 == SMIL Files ==
 
@@ -87,4 +100,9 @@ And then parse the .smil file for the entries that need to be added to the OPF m
 
  * Copy .smil files to ePub output directory.
  * Better handling of media metadata.
- * Find way to specify fallback media.
+
+== Implementation observations ==
+
+ * Azardi doesn't seem to like ids with periods in them, or more than millisecond precision.
+ * Azardi needs fallback media to Ogg.
+ * Casing of filenames is important.
