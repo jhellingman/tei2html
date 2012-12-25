@@ -633,6 +633,11 @@ ul { list-style-type: none; }
 .castlist, .castitem { list-style-type: none; }
 
 
+.epub-media-overlay-active
+{
+    background-color: yellow;
+}
+
 
 
 
