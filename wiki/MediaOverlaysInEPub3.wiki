@@ -100,10 +100,11 @@ And then parse the .smil file for the entries that need to be added to the OPF m
 == TODO ==
 
  * Copy .smil files to ePub output directory.
- * Better handling of media metadata.
+ * Better handling of media metadata. (Generate them from the smil file).
 
 == Implementation observations ==
 
- * Azardi doesn't seem to like ids with periods in them, or more than millisecond precision.
+ * Azardi doesn't seem to like ids with periods in them.
  * Azardi needs fallback media to Ogg.
+ * Azardi requires a body element to have a seq element, the standard also allows par elements directly in the body (as Tobi generates it).
  * Casing of filenames is important.
