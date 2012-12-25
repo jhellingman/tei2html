@@ -19,13 +19,13 @@
       <dc:subject>HTML</dc:subject>
       <dc:identifier id="idbook">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <dc:date>2009-12-13</dc:date>
-      <dc:date>2012-12-22</dc:date>
+      <dc:date>2012-12-25</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
       <dc:identifier id="pub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</meta>
       <meta about="#pub-id" property="scheme">uuid</meta>
-      <meta property="dcterms:modified">2012-12-22T18:43:18Z</meta>
+      <meta property="dcterms:modified">2012-12-25T16:51:17Z</meta>
       <meta property="dcterms:title">Main Title of Work Goes Here</meta>
       <meta property="dcterms:creator">Author of Work (Birth-year—Death-year)</meta>
       <meta property="dcterms:creator">A. U. Thor</meta>
@@ -38,8 +38,8 @@
       <meta property="dcterms:subject">HTML</meta>
       <meta property="media:duration" refines="#ch1overlay">0:00:24</meta>
       <meta property="media:duration">0:00:24</meta>
+      <meta property="media:active-class">epub-media-overlay-active</meta>
       <meta property="media:narrator">Loon</meta>
-      <meta property="media:active-class">-epub-media-overlay-active</meta>
    </metadata>
    <manifest>
       <item id="ncx" href="test.ncx" media-type="application/x-dtbncx+xml"/>
@@ -74,9 +74,9 @@
       <item id="xd25e798" href="images/initial-A.gif" media-type="image/gif"/>
       <item id="test1wrapper" href="test-test1.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch1overlay" href="test.smil" media-type="application/smil+xml"/>
-      <item id="xd107e11" href="audio/test.mp3" media-type="audio/mpeg"
-            fallback="xd107e11-ogg"/>
-      <item id="xd107e11-ogg" href="audio/test.ogg" media-type="audio/ogg"/>
+      <item id="xd106e11" href="audio/test.mp3" media-type="audio/mpeg"
+            fallback="xd106e11-ogg"/>
+      <item id="xd106e11-ogg" href="audio/test.ogg" media-type="audio/ogg"/>
       <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
       <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
       <item id="tn3" href="images/thumbs/hg2101.png" media-type="image/png"/>
