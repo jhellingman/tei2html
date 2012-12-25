@@ -226,24 +226,7 @@ sub processFile($)
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub\\images");
-
-        # Remove redundant icon images (not used in the ePub)
-        if (-f "epub\\images\\book.png")
-        {
-            system ("del epub\\images\\book.png");
-        }
-        if (-f "epub\\images\\card.png")
-        {
-            system ("del epub\\images\\card.png");
-        }
-        if (-f "epub\\images\\external.png")
-        {
-            system ("del epub\\images\\external.png");
-        }
-        if (-f "epub\\images\\new-cover-tn.jpg")
-        {
-            system ("del epub\\images\\new-cover-tn.jpg");
-        }
+        copyAudio("epub\\audio");
 
         system ("$saxon2 $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
 
@@ -531,5 +514,40 @@ sub copyImages($)
     elsif (-d "Gutenberg\\images")
     {
         system ("cp -r -u Gutenberg\\images " . $destination);
+    }
+
+    # Remove redundant icon images (not used in the ePub)
+    if (-f "epub\\images\\book.png")
+    {
+        system ("del epub\\images\\book.png");
+    }
+    if (-f "epub\\images\\card.png")
+    {
+        system ("del epub\\images\\card.png");
+    }
+    if (-f "epub\\images\\external.png")
+    {
+        system ("del epub\\images\\external.png");
+    }
+    if (-f "epub\\images\\new-cover-tn.jpg")
+    {
+        system ("del epub\\images\\new-cover-tn.jpg");
+    }
+}
+
+#
+# copyAudio
+#
+sub copyAudio($)
+{
+    my $destination = shift;
+
+    if (-d "audio")
+    {
+        system ("cp -r -u audio " . $destination);
+    }
+    elsif (-d "Gutenberg\\audio")
+    {
+        system ("cp -r -u Gutenberg\\audio " . $destination);
     }
 }

@@ -415,6 +415,14 @@
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
         <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
 
+        <xsl:variable name="clipBegin" select="f:timeToSeconds(@clipBegin)"/>
+        <xsl:variable name="clipEnd" select="f:timeToSeconds(@clipEnd)"/>
+        <xsl:variable name="duration" select="f:secondsToTime($clipEnd - $clipBegin)"/>
+
+        <!--
+        <xsl:message terminate="no">Info: adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
+        -->
+
         <item>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="@src"/></xsl:attribute>
@@ -432,6 +440,54 @@
             </item>
         </xsl:if>
     </xsl:template>
+
+    <!-- Enable access to the initial TEI file while handling the .smil file -->
+    <xsl:variable name="teiFile" select="/"/>
+
+    <xsl:template match="smil:text[@src]" mode="manifest-smil">
+        <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.xhtml.*$', '')"/></xsl:variable>
+        <xsl:variable name="fragmentid"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
+
+        <xsl:if test="not($teiFile//*[@id=$fragmentid])">
+            <xsl:message terminate="no">Warning: fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:function name="f:timeToSeconds" as="xs:double">
+        <xsl:param name="time" as="xs:string"/>
+
+        <!-- 00:00:00.000 -->
+        <xsl:analyze-string select="$time" regex="^([0-9]+):([0-9]+):([0-9]+(\.[0-9]+)?)$">
+            <xsl:matching-substring>
+                <xsl:value-of select="number(regex-group(1)) * 3600 + number(regex-group(2)) * 60 + number(regex-group(3))"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:message terminate="no">Warning: time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
+                <xsl:text>0</xsl:text>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:function>
+
+
+    <xsl:function name="f:secondsToTime" as="xs:string">
+        <xsl:param name="seconds" as="xs:double"/>
+
+        <xsl:variable name="hours" select="floor($seconds div 3600)"/>
+        <xsl:variable name="seconds" select="$seconds - $hours * 3600"/>
+        <xsl:variable name="minutes" select="floor($seconds div 60)"/>
+        <xsl:variable name="seconds" select="$seconds - $minutes * 60"/>
+
+        <xsl:variable name="time">
+            <xsl:value-of select="$hours"/>
+            <xsl:text>:</xsl:text>
+            <xsl:value-of select="if ($minutes &lt; 10) then concat('0', $minutes) else $minutes"/>
+            <xsl:text>:</xsl:text>
+            <xsl:value-of select="if ($seconds &lt; 10) then concat('0', $seconds) else $seconds"/>
+        </xsl:variable>
+
+        <xsl:value-of select="$time"/>
+    </xsl:function>
 
 
     <xsl:template match="@*|node()" mode="manifest-smil">
