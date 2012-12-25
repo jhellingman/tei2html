@@ -70,6 +70,7 @@
                 <xsl:call-template name="metadata3"/>
             </xsl:if>
 
+            <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
                 <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
                 <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
@@ -266,6 +267,8 @@
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
             <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
         </xsl:for-each>
+
+        <xsl:call-template name="metadata-smil"/>
     </xsl:template>
 
     <xsl:template match="title" mode="metadata3">
@@ -290,6 +293,46 @@
 
     <xsl:template match="availability" mode="metadata3">
         <meta property="dcterms:rights"><xsl:value-of select="."/></meta>
+    </xsl:template>
+
+
+    <xsl:template name="metadata-smil">
+        <xsl:if test="//*[contains(@rend, 'media-overlay(')]">
+            <!-- Add up the durations for each audio fragment -->
+            <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
+                <xsl:variable name="durations">
+                    <xsl:variable name="filename" select="f:rend-value(., 'media-overlay')"/>
+                    <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
+                </xsl:variable>
+
+                <meta property="media:duration" refines="#{@id}overlay">
+                    <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                </meta>
+            </xsl:for-each>
+
+            <!-- Find total duration -->
+            <xsl:variable name="durations">
+                <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
+                    <xsl:variable name="filename" select="f:rend-value(., 'media-overlay')"/>
+                    <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
+                </xsl:for-each>
+            </xsl:variable>
+            <meta property="media:duration">
+                <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+            </meta>
+
+            <!-- Add further required tag if media overlays are present -->
+            <meta property="media:active-class">epub-media-overlay-active</meta>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="smil:audio[@src]" mode="metadata-smil">
+        <xsl:variable name="clipBegin" select="f:timeToSeconds(@clipBegin)"/>
+        <xsl:variable name="clipEnd" select="f:timeToSeconds(@clipEnd)"/>
+        <xsl:variable name="duration" select="$clipEnd - $clipBegin"/>
+
+        <duration><xsl:value-of select="$duration"/></duration>
     </xsl:template>
 
 
@@ -414,10 +457,6 @@
     <xsl:template match="smil:audio[@src]" mode="manifest-smil">
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
         <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
-
-        <xsl:variable name="clipBegin" select="f:timeToSeconds(@clipBegin)"/>
-        <xsl:variable name="clipEnd" select="f:timeToSeconds(@clipEnd)"/>
-        <xsl:variable name="duration" select="f:secondsToTime($clipEnd - $clipBegin)"/>
 
         <!--
         <xsl:message terminate="no">Info: adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
