@@ -11,8 +11,9 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
+    exclude-result-prefixes="xd xs"
     version="2.0"
     >
 
@@ -113,5 +114,23 @@
 
         <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template><xsl:text>ext</xsl:text>
     </xsl:template>
+
+
+    <xsl:template name="copy-xml-file">
+        <xsl:param name="filename" as="xs:string"/>
+
+        <xsl:message terminate="no">Info: copying XML file: <xsl:value-of select="$filename"/> to <xsl:value-of select="$path"/>.</xsl:message>
+
+        <xsl:result-document
+                doctype-public=""
+                doctype-system=""
+                href="{$path}/{$filename}"
+                method="xml"
+                indent="no"
+                encoding="UTF-8">
+            <xsl:copy-of select="document($filename, .)"/>
+        </xsl:result-document>
+    </xsl:template>
+
 
 </xsl:stylesheet>

@@ -109,6 +109,7 @@
         -->
 
         <xsl:call-template name="copy-stylesheets"/>
+        <xsl:call-template name="copy-smil-files"/>
 
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
@@ -188,6 +189,16 @@
         </xsl:result-document>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- SMIL files -->
+
+    <xsl:template name="copy-smil-files">
+        <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
+            <xsl:call-template name="copy-xml-file">
+                <xsl:with-param name="filename" select="f:rend-value(., 'media-overlay')"/>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- Cover -->
