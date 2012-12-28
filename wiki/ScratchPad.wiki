@@ -2,7 +2,16 @@
 
 = Scratch Pad =
 
-
-= Interesting Links =
+== Interesting Links ==
 
   * [http://code.google.com/p/hyphenator/] Javascript hyphenator.
+
+
+== Metadata ==
+
+Adding metadata to ePub is not yet standardized.
+
+{{{
+<meta name="calibre:series" content="CAC"/>
+<meta name="calibre:series_index" content="29"/>
+}}}
