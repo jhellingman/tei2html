@@ -140,6 +140,14 @@
             <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
         </xsl:if>
 
+        <!-- Support the Calibre tags for series and series volume -->
+        <xsl:if test="teiHeader/fileDesc/seriesStmt/title">
+            <meta name="calibre:series"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/title"/></meta>
+        </xsl:if>
+        <xsl:if test="teiHeader/fileDesc/seriesStmt/biblScope[@type='vol']">
+            <meta name="calibre:series_index"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/biblScope"/></meta>
+        </xsl:if>
+
         <xsl:choose>
             <xsl:when test="//figure[@id='cover-image']">
                 <meta name="cover" content="cover-image"/>
