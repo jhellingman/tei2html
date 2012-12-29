@@ -22,7 +22,7 @@ my $saxon2          = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\
 
 my $epubcheck       = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck1.2\\epubcheck-1.2.jar ";
 my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
-my $epubcheck3      = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0b2.jar ";
+my $epubcheck3      = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar ";
 
 #==============================================================================
 # Arguments
@@ -236,8 +236,8 @@ sub processFile($)
         system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
         chdir "..";
 
-        system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
-        system ("$epubcheck3 $basename.epub 2> $basename-epubcheck3.err");
+        # system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
+        system ("$epubcheck3 $basename.epub 2> $basename-epubcheck.err");
         unlink($tmpFile);
     }
 

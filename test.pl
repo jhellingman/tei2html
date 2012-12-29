@@ -9,7 +9,7 @@ my $epubcheck     = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\b
 my $epubpreflight = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
 
 # See http://code.google.com/p/epubcheck/wiki/EPUBCheck30 for ePub3 checker
-my $epubcheck3 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0b2.jar ";
+my $epubcheck3 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar ";
 
 my $pwd = `pwd`;
 chop($pwd);

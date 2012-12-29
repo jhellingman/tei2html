@@ -232,6 +232,7 @@ BEGIN
     $ent{"cuwed"}       = chr(0x22CF);  #  CURLY LOGICAL AND
     $ent{"dagger"}      = chr(0x2020);  #  DAGGER
     $ent{"Dagger"}      = chr(0x2021);  #  DOUBLE DAGGER
+    $ent{"idagger"}     = chr(0x2020);  #  inverted DAGGER (not Unicode, so using dagger!)
     $ent{"daleth"}      = chr(0x2138);  #  DALET SYMBOL
     $ent{"darr"}        = chr(0x2193);  #  DOWNWARDS ARROW
     $ent{"dArr"}        = chr(0x21D3);  #  DOWNWARDS DOUBLE ARROW
