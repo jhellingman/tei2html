@@ -1,6 +1,6 @@
 #summary Structure of Media Overlays in ePub3 (proposed feature).
 
-Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; other readers remain to be tested).
+Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; also tested output with Tobi, which correctly picks-up the files, and the Readium app for Chrome. Other readers remain to be tested).
 
 == References ==
 
@@ -101,8 +101,8 @@ And then parse the .smil file for the entries that need to be added to the OPF m
 
 == TODO ==
 
- * Copy `.smil` files to ePub output directory.
- * Better handling of media metadata. (Generate them from the smil file).
+ * Copy `.smil` files to ePub output directory. DONE
+ * Better handling of media metadata. (Generate them from the smil file). DONE; need to look at minor rounding issues in calculation.
 
 == Implementation observations ==
 
@@ -110,3 +110,4 @@ And then parse the .smil file for the entries that need to be added to the OPF m
  * Azardi needs fallback media to Ogg.
  * Azardi requires a body element of the `.smil` to have a seq element, the standard also allows par elements directly in the body (as Tobi generates it).
  * Casing of file names is important.
+ * Now works fine in Readium, which seems to have a better interface than Azardi.
