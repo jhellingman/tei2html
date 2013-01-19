@@ -263,7 +263,7 @@
 
         <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
         <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
-        <meta about="#pub-id" property="scheme">uuid</meta>
+        <!-- <meta about="#pub-id" property="scheme">uuid</meta> --><!-- Removed to silence epubcheck 3.0 -->
         <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
 
         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
