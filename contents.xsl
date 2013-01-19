@@ -79,6 +79,8 @@
 
 
     <xsl:template name="toc-body">
+        <xsl:param name="list-element" select="'ul'"/>
+
         <xsl:variable name="maxlevel">
             <xsl:choose>
                 <xsl:when test="contains(@rend, 'tocMaxLevel(')">
@@ -88,19 +90,22 @@
             </xsl:choose>
         </xsl:variable>
 
-        <ul>
+        <xsl:element name="{$list-element}">
             <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else /TEI.2/text/body/div1">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
-        </ul>
+        </xsl:element>
     </xsl:template>
 
     <xd:doc>
@@ -112,17 +117,18 @@
 
     <xsl:template match="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
         <xsl:param name="maxlevel" as="xs:integer" select="7"/>
+        <xsl:param name="list-element" select="'ul'"/>
 
         <!-- We need a head to be able to display an entry in the toc -->
         <xsl:if test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
             <li>
                 <xsl:call-template name="generate-toc-head-link"/>
                 <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
-                    <ul>
+                    <xsl:element name="{$list-element}">
                         <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
                             <xsl:with-param name="maxlevel" select="$maxlevel"/>
                         </xsl:apply-templates>
-                    </ul>
+                    </xsl:element>
                 </xsl:if>
             </li>
         </xsl:if>

@@ -39,7 +39,9 @@
                 <h1><xsl:value-of select="f:message('msgTableOfContents')"/></h1>
             </header>
             <nav epub:type="toc" id="toc">
-                <xsl:call-template name="toc-body"/>
+                <xsl:call-template name="toc-body">
+                    <xsl:with-param name="list-element" select="'ol'"/>
+                </xsl:call-template>
             </nav>
         </section>
     </xsl:template>

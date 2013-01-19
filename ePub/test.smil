@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<smil xmlns="http://www.w3.org/ns/SMIL" xmlns:epub="http://www.idpf.org/2007/ops"
-      version="3.0">
+<?xml version="1.0" encoding="UTF-8"?><smil xmlns="http://www.w3.org/ns/SMIL" xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">
     <body>
         <seq id="sequence_id" epub:textref="test-ch1.xhtml" epub:type="bodymatter chapter">
             <par id="par1">

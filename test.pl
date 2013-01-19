@@ -58,5 +58,5 @@ system ("zip -Xr9Dq ../test.epub mimetype");
 system ("zip -Xr9Dq ../test.epub * -x mimetype");
 chdir "..";
 
-system ("$epubcheck test.epub 2> test-epubcheck.err");
-system ("$epubcheck3 test.epub 2> test-epubcheck3.err");
+# system ("$epubcheck test.epub 2> test-epubcheck.err");
+system ("$epubcheck3 test.epub 2> test-epubcheck.err");

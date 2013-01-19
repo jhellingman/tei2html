@@ -173,7 +173,6 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <argument><p>This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p></argument>
 
-
 <epigraph>
     <cit lang="fr"><q><lg type="Group"><l>&ldquo;Ils partent; et loin d&apos;eux repoussant la barri&egrave;re,</l>
     <l>Ils fendent dans les airs les nuages mouvans,</l>
@@ -181,7 +180,6 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
     <bibl>(<hi>Metamorphoses d&apos;Ovide</hi>).</bibl></cit>
 </epigraph>
-
 
 
 <p>You may note the small <index level1="ornaments"/>ornament above the <index level1="Chapter headings"/>chapter heading, which is included using a <index level1="rend attribute"/>rend attribute on the head element of this chapter.</p>
@@ -203,6 +201,124 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     </row>
     <row>
         <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
+    </row>
+</table>
+</p>
+
+
+<p>A table with vertical borders on the inside:</p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI) class(verticalBorderInside)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row role="label">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+    </row>
+    <row role="unit">
+        <cell></cell>
+        <cell>kg</cell>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+</table>
+</p>
+
+<p>The same table with borders on the outside:</p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI) class(borderOutside)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row role="label">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+    </row>
+    <row role="unit">
+        <cell></cell>
+        <cell>kg</cell>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+</table>
+</p>
+
+<p>The same table with all cell borders shown:</p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI) class(borderAll)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row role="label">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+    </row>
+    <row role="unit">
+        <cell></cell>
+        <cell>kg</cell>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
     </row>
 </table>
 </p>
