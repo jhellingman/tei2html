@@ -10,6 +10,7 @@ use SgmlSupport qw/getAttrVal sgml2utf/;
 my $useUnicode = 0;
 my $useItalics = 0;
 my $pageWidth = 72;
+my $centerTables = 1;
 
 GetOptions(
     'u' => \$useUnicode,
@@ -309,30 +310,30 @@ sub handleRow($)
 {
     my $row = shift;
     my @items = split(/<cell\b(.*?)>/ms, $row);
-	my @cells = ();
-	my @colspans = ();
-	my @rowspans = ();
+    my @cells = ();
+    my @colspans = ();
+    my @rowspans = ();
 
-	# every second item contains tag; first cell is empty.
-	for (my $i = 0; $i <= $#items; $i++)
-	{
-		my $item = $items[$i];
-		if ($i % 2 == 0) 
-		{
-			push @cells, $item;
-		}
-		else
-		{
-			my $cols = getAttrVal("cols", $item);
-			my $rows = getAttrVal("rows", $item);
+    # every second item contains tag; first cell is empty.
+    for (my $i = 0; $i <= $#items; $i++)
+    {
+        my $item = $items[$i];
+        if ($i % 2 == 0)
+        {
+            push @cells, $item;
+        }
+        else
+        {
+            my $cols = getAttrVal("cols", $item);
+            my $rows = getAttrVal("rows", $item);
 
-			$cols = $cols eq "" ? 1 : $cols;
-			$rows = $rows eq "" ? 1 : $rows;
+            $cols = $cols eq "" ? 1 : $cols;
+            $rows = $rows eq "" ? 1 : $rows;
 
-			push @colspans, $cols;
-			push @rowspans, $rows;
-		}
-	}
+            push @colspans, $cols;
+            push @rowspans, $rows;
+        }
+    }
 
     # First element in result is empty, so drop it
     shift @cells;
@@ -553,6 +554,7 @@ sub minimumCellHeightGivenWidth($$)
     return $height;
 }
 
+
 sub minimumLineHeightGivenWidth($$)
 {
     my $line = shift;
@@ -658,6 +660,21 @@ sub nextShorterLineWidth($$$)
 }
 
 
+sub totalTableWidth(@)
+{
+    my @columnWidths = @_;
+
+    my $totalTableWidth = length($borderLeft[$borderStyle]);
+    for my $i (0 .. $#columnWidths)
+    {
+        $totalTableWidth += $columnWidths[$i];
+        $totalTableWidth += $i < $#columnWidths ? length($innerCross[$borderStyle]) : length($borderRight[$borderStyle]);
+    }
+    ##print STDERR "totalTableWidth: $totalTableWidth\n";
+    return $totalTableWidth;
+}
+
+
 sub printTable(@)
 {
     my @rows = @_;
@@ -687,13 +704,20 @@ sub printTable(@)
         }
     }
 
-    printTopBorder(@columnWidths);
+    my $totalTableWidth = totalTableWidth(@columnWidths);
+
+    if (length ($borderTopLine[$borderStyle]) > 0)
+    {
+        printCenterSpacing($totalTableWidth);
+        printTopBorder(@columnWidths);
+    }
 
     for my $i (0 .. $#rows)
     {
         # Print a entire row line-by-line for each cell.
         for my $k (0 .. $rowHeights[$i])
         {
+            printCenterSpacing($totalTableWidth);
             print $borderLeft[$borderStyle];
             for my $j (0 .. $#{$rows[$i]})
             {
@@ -708,11 +732,33 @@ sub printTable(@)
         }
         if ($i < $#rows)
         {
-            printInnerBorder(@columnWidths);
+            if (length ($innerHorizontal[$borderStyle]) > 0)
+            {
+                printCenterSpacing($totalTableWidth);
+                printInnerBorder(@columnWidths);
+            }
         }
     }
+    if (length ($borderBottomLine[$borderStyle]) > 0)
+    {
+        printCenterSpacing($totalTableWidth);
+        printBottomBorder(@columnWidths);
+    }
+}
 
-    printBottomBorder(@columnWidths);
+
+sub printCenterSpacing($)
+{
+    my $lineWidth = shift;
+
+    if ($centerTables != 0)
+    {
+        my $centerSpacing = floor(($pageWidth - $lineWidth) / 2);
+        if ($centerSpacing > 1)
+        {
+            print repeat(' ', $centerSpacing);
+        }
+    }
 }
 
 
@@ -849,7 +895,7 @@ sub printWithPadding($$)
     my $width = shift;
 
     # Align right if number or amount
-    if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/) 
+    if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/)
     {
         print spaces($width  - length($string));
         print $string;

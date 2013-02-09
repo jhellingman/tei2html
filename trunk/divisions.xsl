@@ -179,15 +179,17 @@
     <!-- div2 -->
 
     <xsl:template match="div2">
-        <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="generate-toc-link"/>
-            <xsl:call-template name="generate-label">
-                <xsl:with-param name="headingLevel" select="'h2'"/>
-            </xsl:call-template>
-            <xsl:call-template name="handleDiv"/>
-        </div>
+        <xsl:if test="not(contains(@rend, 'display(none)'))">
+            <div>
+                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:call-template name="generate-div-class"/>
+                <xsl:call-template name="generate-toc-link"/>
+                <xsl:call-template name="generate-label">
+                    <xsl:with-param name="headingLevel" select="'h2'"/>
+                </xsl:call-template>
+                <xsl:call-template name="handleDiv"/>
+            </div>
+        </xsl:if>
     </xsl:template>
 
     <!--====================================================================-->
