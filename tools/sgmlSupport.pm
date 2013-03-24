@@ -1783,23 +1783,24 @@ BEGIN
     $ent{"ptildeb"}     = "p" . chr(0x0330); # p with tilde below
 
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
-    $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
+    $ent{"cbarb"}       = "c" . chr(0x0331); # c with macron below
     $ent{"Ebarb"}       = "E" . chr(0x0331); # E with macron below
+    $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
     $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
     $ent{"ibarb"}       = "i" . chr(0x0331); # i with macron below
-    $ent{"kbarb"}       = "k" . chr(0x0331); # k with macron below
     $ent{"Kbarb"}       = "K" . chr(0x0331); # K with macron below
+    $ent{"kbarb"}       = "k" . chr(0x0331); # k with macron below
     $ent{"lbarb"}       = "l" . chr(0x0331); # l with macron below
     $ent{"mbarb"}       = "m" . chr(0x0331); # m with macron below
-    $ent{"nbarb"}       = "n" . chr(0x0331); # n with macron below
     $ent{"Nbarb"}       = "N" . chr(0x0331); # N with macron below
-    $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
+    $ent{"nbarb"}       = "n" . chr(0x0331); # n with macron below
     $ent{"Obarb"}       = "O" . chr(0x0331); # O with macron below
+    $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
+    $ent{"Pbarb"}       = "P" . chr(0x0331); # P with macron below
+    $ent{"pbarb"}       = "p" . chr(0x0331); # p with macron below
     $ent{"tbarb"}       = "t" . chr(0x0331); # t with macron below
     $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
     $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
-    $ent{"pbarb"}       = "p" . chr(0x0331); # p with macron below
-    $ent{"Pbarb"}       = "P" . chr(0x0331); # P with macron below
 
     $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
     $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
