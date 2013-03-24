@@ -206,7 +206,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </p>
 
 
-<p>A table with vertical borders on the inside:</p>
+<p>A table with vertical borders on the inside [class(verticalBorderInside)]:</p>
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI) class(verticalBorderInside)">
@@ -245,7 +245,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </table>
 </p>
 
-<p>The same table with borders on the outside:</p>
+<p>The same table with borders on the outside [class(borderOutside)]:</p>
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI) class(borderOutside)">
@@ -284,7 +284,7 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </table>
 </p>
 
-<p>The same table with all cell borders shown:</p>
+<p>The same table with all cell borders shown [class(borderAll)]:</p>
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI) class(borderAll)">
