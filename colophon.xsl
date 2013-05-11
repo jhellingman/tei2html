@@ -54,9 +54,18 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the colophon body.</xd:short>
+        <xd:detail>
+            <p>Generate the body of a colophon for a TEI file, based on information in the <code>teiHeader</code>.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="colophon-body">
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
+
+        <xsl:call-template name="classification"/>
 
         <xsl:call-template name="catalog-entries"/>
 
@@ -78,6 +87,34 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate a list of classifications.</xd:short>
+        <xd:detail>
+            <p>Generate a list of classifications, based on information in the <code>profileDesc/textClass/classCode</code>. 
+            Note that for proper rendering, a <code>taxonomy</code> element corresponding to the indicated scheme must be present,
+            and contain a human-readable text.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="classification">
+        <xsl:if test="//profileDesc/textClass/classCode">
+            <xsl:for-each select="//profileDesc/textClass/classCode">
+                <xsl:if test="not(contains(., '#'))">
+                    <xsl:variable name="scheme" select="./@scheme"/>
+                    <p><xsl:value-of select="//taxonomy[@id=$scheme]/bibl"/>: <xsl:value-of select="."/>.</p>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate links to catalog entries.</xd:short>
+        <xd:detail>
+            <p>Depending on the presence of various types of <code>idno</code> elements, corresponding links to the relevant sites will be created. Currently
+            understood are IDs pointing to Project Gutenberg, the Library of Congress, WorldCat, Open Library and LibraryThing.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="catalog-entries">
         <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
@@ -124,6 +161,16 @@
                 </a>.
             </p>
         </xsl:if>
+
+        <xsl:if test="f:isvalid(//idno[@type='LibThing'])">
+            <p><xsl:value-of select="f:message('msgLibraryThingEntry')"/>:
+                <a class="catlink">
+                    <xsl:attribute name="href">https://www.librarything.com/work/<xsl:value-of select="//idno[@type='LibThing']"/></xsl:attribute>
+                    <xsl:value-of select="//idno[@type='LibThing']"/>
+                </a>.
+            </p>
+        </xsl:if>
+
     </xsl:template>
 
 
