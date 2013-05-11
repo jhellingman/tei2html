@@ -230,6 +230,7 @@
         <msg:message name="msgOclcCatalogEntry">Related WorldCat catalog page</msg:message>
         <msg:message name="msgOpenLibraryCatalogEntry">Related Open Library catalog page (for source)</msg:message>
         <msg:message name="msgOpenLibraryCatalogWorkEntry">Related Open Library catalog page (for work)</msg:message>
+        <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
 
         <msg:message name="msgOriginalFrontCover">Original Front Cover</msg:message>
         <msg:message name="msgOriginalBackCover">Original Back Cover</msg:message>

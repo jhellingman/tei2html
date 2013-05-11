@@ -1547,7 +1547,7 @@ BEGIN
     $ent{"sml.s"}       = chr(0x02e2);  # Spacing modifier letter small s
 
 
-    $ent{"N"}			= "N"; # Capital letter N (used with special meaning in Wolff's dictionary.)
+    $ent{"N"}           = "N"; # Capital letter N (used with special meaning in Wolff's dictionary.)
 
 
     ###############################################################################
@@ -1588,20 +1588,35 @@ BEGIN
     $ent{"aecirc"}      = chr(0x00e6) . chr(0x0302); # ae ligature with circumflex
     $ent{"ijcirc"}      = chr(0x0133) . chr(0x0302); # ij ligature with circumflex
 
+    $ent{"dtilde"}      = "d" . chr(0x0303); # d with tilde
     $ent{"gtilde"}      = "g" . chr(0x0303); # g with tilde
-    $ent{"Gtilde"}      = "G" . chr(0x0303); # g with tilde
+    $ent{"Gtilde"}      = "G" . chr(0x0303); # G with tilde
+    $ent{"Htilde"}      = "H" . chr(0x0303); # H with tilde
+    $ent{"htilde"}      = "h" . chr(0x0303); # h with tilde
+    $ent{"jtilde"}      = "j" . chr(0x0303); # j with tilde
+    $ent{"ltilde"}      = "l" . chr(0x0303); # s with tilde
     $ent{"mtilde"}      = "m" . chr(0x0303); # m with tilde
+    $ent{"ptilde"}      = "p" . chr(0x0303); # p with tilde
+    $ent{"Ptilde"}      = "P" . chr(0x0303); # P with tilde
     $ent{"qtilde"}      = "q" . chr(0x0303); # q with tilde
     $ent{"rtilde"}      = "r" . chr(0x0303); # r with tilde
     $ent{"stilde"}      = "s" . chr(0x0303); # s with tilde
-    $ent{"ltilde"}      = "l" . chr(0x0303); # s with tilde
-    $ent{"wtilde"}      = "w" . chr(0x0303); # w with tilde
-    $ent{"Wtilde"}      = "W" . chr(0x0303); # W with tilde
-    $ent{"ptilde"}      = "p" . chr(0x0303); # p with tilde
-    $ent{"Ptilde"}      = "P" . chr(0x0303); # P with tilde
-    $ent{"htilde"}      = "h" . chr(0x0303); # h with tilde
-    $ent{"Htilde"}      = "H" . chr(0x0303); # H with tilde
     $ent{"ttilde"}      = "t" . chr(0x0303); # t with tilde
+    $ent{"Wtilde"}      = "W" . chr(0x0303); # W with tilde
+    $ent{"wtilde"}      = "w" . chr(0x0303); # w with tilde
+    $ent{"longstilde"}  = chr(0x017F) . chr(0x0303); # long s with tilde
+
+    $ent{"Pstroke"}     = chr(0xA750); # P with stroke through descender
+    $ent{"pstroke"}     = chr(0xA751); # p with stroke through descender
+
+    $ent{"Pflour"}      = chr(0xA752); # P with flourish
+    $ent{"pflour"}      = chr(0xA753); # p with flourish
+
+    $ent{"rum"}         = chr(0xA775); # rum (r with stroke through flag)
+    $ent{"Rum"}         = chr(0xA776); # small capital Rum (r with stroke through tail)
+
+    $ent{"vdiagstrok"}  = chr(0xA75F); # v with diagonal stroke
+
 
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
     $ent{"lmacr"}       = "l" . chr(0x0304); # l with macron
@@ -1689,9 +1704,9 @@ BEGIN
     $ent{"crcomma"}     = "c" . chr(0x0314); # c with reverse comma above
     $ent{"trcomma"}     = "t" . chr(0x0314); # t with reverse comma above
 
-	$ent{"cdacdotb"}     = "c" . chr(0x030B) . chr(0x0323); # c with double acute and dot below
+    $ent{"cdacdotb"}     = "c" . chr(0x030B) . chr(0x0323); # c with double acute and dot below
 
-	$ent{"glhringa"}     = "g" . chr(0x0351); # g with left half ring above
+    $ent{"glhringa"}     = "g" . chr(0x0351); # g with left half ring above
 
     $ent{"adotb"}       = "a" . chr(0x0323); # a with dot below
     $ent{"edotb"}       = "e" . chr(0x0323); # e with dot below
@@ -1734,7 +1749,7 @@ BEGIN
     $ent{"Uumlb"}       = "U" . chr(0x0324); # U with diaresis below
     $ent{"uumlb"}       = "u" . chr(0x0324); # u with diaresis below
 
-    $ent{"ubrevumlb"}	= "u" . chr(0x0306) . chr(0x0324); # u with breve and diaresis below
+    $ent{"ubrevumlb"}   = "u" . chr(0x0306) . chr(0x0324); # u with breve and diaresis below
 
     $ent{"oudb"}        = "o" . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
     $ent{"oubb"}        = "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
@@ -1879,7 +1894,7 @@ BEGIN
 
     $ent{"amacrbrev"}   = chr(0x0101) . chr(0x0306); # a with macron and breve
     $ent{"amacrtild"}   = chr(0x0101) . chr(0x0303); # a with macron and tilde
-	$ent{"emacrbrev"}   = chr(0x0113) . chr(0x0306); # e with macron and breve
+    $ent{"emacrbrev"}   = chr(0x0113) . chr(0x0306); # e with macron and breve
     $ent{"imacrbrev"}   = chr(0x012B) . chr(0x0306); # i with macron and breve
     $ent{"omacrbrev"}   = chr(0x014D) . chr(0x0306); # o with macron and breve
     $ent{"umacrbrev"}   = chr(0x016B) . chr(0x0306); # u with macron and breve
@@ -1897,6 +1912,8 @@ BEGIN
 
     # Special dashes
     $ent{"longdash"}    = chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
+    
+    $ent{"special"}     = "[#]";                     # Unknown symbol.
 
     # Spaces and dots
     $ent{"sp2"}         = "  ";
@@ -1914,8 +1931,8 @@ BEGIN
     $ent{"ringsun"}     = "[ringsun]";          # symbol for ring around the sun
     $ent{"ringmoon"}    = "[ringmoon]";         # symbol for ring around the moon
 
-    $ent{"handptr"}     = chr(0x261E);			# White right pointing index
-    $ent{"diamond"}     = chr(0x25C6);			# Black diamond
+    $ent{"handptr"}     = chr(0x261E);          # White right pointing index
+    $ent{"diamond"}     = chr(0x25C6);          # Black diamond
 
     # Greek additions
     $ent{"amacgr"}      =  chr(0x1FB1);     # Greek alpha with macron
