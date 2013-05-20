@@ -159,7 +159,7 @@
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
         <a class="apparatusnote">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
-            <xsl:call-template name="generate-href-attribute"/>
+            <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;</a>
     </xsl:template>
 
@@ -182,10 +182,7 @@
 
             <xsl:call-template name="set-lang-id-attributes"/>
             <span class="label">
-                <a class="apparatusnote">
-                    <xsl:attribute name="href">#<xsl:call-template name="generate-id"/>src</xsl:attribute>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    &deg;</a>
+                <a class="apparatusnote"><xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>&deg;</a>
             </span>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
