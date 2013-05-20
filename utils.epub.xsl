@@ -95,6 +95,20 @@
     </xsl:template>
 
 
+    <!-- Apparatus notes are created from a divGen element with type Apparatus -->
+
+    <xsl:template name="generate-apparatus-note-href">
+        <xsl:param name="target" select="." as="element()"/>
+
+        <xsl:variable name="targetfile">
+            <xsl:call-template name="splitter-generate-filename-for">
+                <xsl:with-param name="node" select="(//divGen[@type='Apparatus' or @type='apparatus'])[1]"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+    </xsl:template>
+
 
     <!-- xref-table href attributes always point to somewhere in the colophon -->
 

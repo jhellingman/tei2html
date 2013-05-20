@@ -52,6 +52,16 @@
         </xsl:call-template>
     </xsl:template>
 
+    <!-- apparatus-note href attributes are the same as normal hrefs in
+         single file operation -->
+
+    <xsl:template name="generate-apparatus-note-href">
+        <xsl:param name="target" select="."/>
+
+        <xsl:call-template name="generate-href">
+            <xsl:with-param name="target" select="$target"/>
+        </xsl:call-template>
+    </xsl:template>
 
     <!-- xref table href attributes are the same as normal hrefs in
          single file operation, followed by 'ext' -->
