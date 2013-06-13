@@ -709,47 +709,47 @@ body
 
 
 
-.xd25e357
+.xd25e361
 {
 text-align:right;
 }
 
-.xd25e531
+.xd25e535
 {
 color:red; background-color:yellow;
 }
 
-.xd25e532
+.xd25e536
 {
 color:green; text-align:right;
 }
 
-.xd25e533
+.xd25e537
 {
 color:blue; text-align:right;
 }
 
-.xd25e569
+.xd25e573
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd25e570
+.xd25e574
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd25e573
+.xd25e577
 {
 border-top:2px solid black;
 }
 
-.xd25e590
+.xd25e594
 {
 border-top:1px solid black;
 }
 
-.xd25e621
+.xd25e625
 {
 border-bottom:2px solid black;
 }
@@ -774,128 +774,128 @@ font-family:'Walbaum-Fraktur';
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd25e499
+.xd25e503
 {
 margin:0px auto; display:table;
 }
 
-.xd25e503
+.xd25e507
 {
 vertical-align:middle; width:2px;
 }
 
-.xd25e504
+.xd25e508
 {
 vertical-align:middle;
 }
 
-.xd25e514
+.xd25e518
 {
 margin-left:2em;
 }
 
-.xd25e516
+.xd25e520
 {
 width:25%;
 }
 
-.xd25e518
+.xd25e522
 {
 width:75%;
 }
 
-.xd25e528
+.xd25e532
 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd25e537
+.xd25e541
 {
 text-align:right;
 }
 
-.xd25e556
+.xd25e560
 {
 text-align:center;
 }
 
-.xd25e561
+.xd25e565
 {
 text-align:left;
 }
 
-.xd25e568
+.xd25e572
 {
 width:40%; border-collapse:collapse;
 }
 
-.xd25e725width
+.xd25e729width
 {
     width:80px;
 }
             
-.xd25e730
+.xd25e734
 {
 width:100px;
 }
 
-.xd25e730width
+.xd25e734width
 {
     width:80px;
 }
             
-.xd25e737width
+.xd25e741width
 {
     width:80px;
 }
             
-.xd25e749width
+.xd25e753width
 {
     width:480px;
 }
             
-.xd25e769width
+.xd25e773width
 {
     width:480px;
 }
             
-.xd25e820
+.xd25e824
 {
 font-style:italic;
 }
 
-.xd25e851
+.xd25e855
 {
 list-style-type:disc;
 }
 
-.xd25e881
+.xd25e885
 {
 list-style-type:upper-roman;
 }
 
-.xd25e893
+.xd25e897
 {
 list-style-type:lower-roman;
 }
 
-.xd25e936
+.xd25e940
 {
 text-align:left;
 }
 
-.xd25e939
+.xd25e943
 {
 text-align:right;
 }
 
-.xd25e941
+.xd25e945
 {
 text-align:center;
 }
 
 
-.xd25e943
+.xd25e947
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -903,7 +903,7 @@ text-align:center;
     
 }
 
-.xd25e943init
+.xd25e947init
 {
     float: left;
     width: 90px;
@@ -918,47 +918,47 @@ text-align:center;
 }
 
         
-.xd25e947
+.xd25e951
 {
 text-align:justify;
 }
 
-.xd25e962
+.xd25e966
 {
 text-align:center;
 }
 
-.xd25e971
+.xd25e975
 {
 text-align:center;
 }
 
-.xd25e976
+.xd25e980
 {
 text-indent:1em;
 }
 
-.xd25e982
+.xd25e986
 {
 text-indent:2em;
 }
 
-.xd25e986
+.xd25e990
 {
 text-indent:3em;
 }
 
-.xd25e990
+.xd25e994
 {
 text-indent:10em;
 }
 
-.xd25e992
+.xd25e996
 {
 font-style:italic;
 }
 
-.xd25e1102
+.xd25e1106
 {
 display:none;
 }
