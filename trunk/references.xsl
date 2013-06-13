@@ -265,7 +265,16 @@
 
             <!-- Link to Project Gutenberg book -->
             <xsl:when test="substring($url, 1, 3) = 'pg:'">
-                <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, 'pg:')"/>
+                <xsl:choose>
+                    <xsl:when test="contains($url, '#')">
+                        <xsl:variable name="number" select="substring-before(substring-after($url, 'pg:'), '#')"/>
+                        <xsl:variable name="anchor" select="substring-after($url, '#')"/>
+                        <xsl:value-of select="concat('http://www.gutenberg.org/files/', $number, '/', $number, '-h/', $number, '-h.htm#', $anchor)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, 'pg:')"/>
+                    </xsl:otherwise>
+                </xsl:choose> 
             </xsl:when>
 
             <!-- Link to OCLC (worldcat) catalog entry -->
