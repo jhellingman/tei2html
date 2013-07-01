@@ -119,19 +119,26 @@
         <xsl:param name="maxlevel" as="xs:integer" select="7"/>
         <xsl:param name="list-element" select="'ul'"/>
 
-        <!-- We need a head to be able to display an entry in the toc -->
-        <xsl:if test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
-            <li>
-                <xsl:call-template name="generate-toc-head-link"/>
-                <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
-                    <xsl:element name="{$list-element}">
-                        <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                        </xsl:apply-templates>
-                    </xsl:element>
+        <xsl:choose>
+            <!-- We need a head to be able to display an entry in the toc -->
+            <xsl:when test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
+                <li>
+                    <xsl:call-template name="generate-toc-head-link"/>
+                    <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
+                        <xsl:element name="{$list-element}">
+                            <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
+                                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                            </xsl:apply-templates>
+                        </xsl:element>
+                    </xsl:if>
+                </li>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="not(contains(@rend, 'toc(none)'))">
+                    <xsl:message terminate="no">Warning: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                 </xsl:if>
-            </li>
-        </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

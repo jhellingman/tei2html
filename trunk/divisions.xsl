@@ -403,7 +403,7 @@
                         <xsl:variable name="id" select="@id"/>
                         <xsl:call-template name="generate-href-attribute">
                             <!-- Link to entry for current division if available to make navigation back easier -->
-                            <xsl:with-param name="target" select="if (//*[@id='toc']//ref[@target=$id]) then //*[@id='toc']//ref[@target=$id] else //*[@id='toc']"/>
+                            <xsl:with-param name="target" select="if (//*[@id='toc']//ref[@target=$id]) then (//*[@id='toc']//ref[@target=$id])[1] else (//*[@id='toc'])[1]"/>
                         </xsl:call-template>
                         <xsl:value-of select="f:message('msgToc')"/>
                      </a>

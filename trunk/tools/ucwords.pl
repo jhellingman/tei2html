@@ -527,7 +527,7 @@ sub sortLanguageWords($)
 
     foreach my $word (@wordList)
     {
-        my $key = Normalize($word);
+        my $key = NormalizeForLanguage($word, $language);
         $word = "$key!$word";
     }
     @wordList = sort @wordList;
@@ -546,7 +546,7 @@ sub reportLanguageWordsXML($)
 
     foreach my $word (@wordList)
     {
-        my $key = Normalize($word);
+        my $key = NormalizeForLanguage($word, $language);
         $word = "$key!$word";
     }
     @wordList = sort @wordList;
@@ -1667,6 +1667,42 @@ sub Normalize($)
     my $string = shift;
     $string =~ s/-//g;
     $string = lc(StripDiacritics($string));
+    return $string;
+}
+
+
+#
+# NormalizeForLanguage
+#
+sub NormalizeForLanguage($$)
+{
+    my $string = shift;
+	my $lang = shift;
+	if ($lang eq 'ceb') 
+	{
+		return CebuanoNormalize($string);
+	}
+	return Normalize($string);
+}
+
+
+#
+# CebuanoNormalize
+#
+sub CebuanoNormalize($)
+{
+    my $string = shift;
+    $string = Normalize($string);
+
+    # Handle old Spanish-derived spelling variants
+    $string =~ s/gui/gi/g;
+    $string =~ s/qui/ki/g;
+    $string =~ s/o/u/g;
+    $string =~ s/e/i/g;
+    $string =~ s/ci/si/g;
+    $string =~ s/c/k/g;
+    $string =~ s/ao/aw/g;
+
     return $string;
 }
 
