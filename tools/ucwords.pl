@@ -44,6 +44,7 @@ my %rendHash = ();
 my %dictHash = ();
 my %countCountHash = ();
 
+my @lines = ();
 my @pageList = ();
 my @wordList = ();
 
@@ -120,6 +121,7 @@ if ($useDatabase)
 
 
 report();
+reportSQL();
 
 # reportXML();
 
@@ -401,16 +403,28 @@ sub heatMapPair()
 #
 
 
+sub loadDocument($)
+{
+	my $infile = shift;
+    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+    while (<INPUTFILE>)
+    {
+		push (@lines, $_);
+	}
+    close (INPUTFILE);
+}
+
+
 #
 # collectWords
 #
 sub collectWords()
 {
-    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+	loadDocument($infile);
 
-    while (<INPUTFILE>)
+    foreach my $line (@lines)
     {
-        my $remainder = $_;
+        my $remainder = $line;
 
         if ($remainder =~ /<title>(.*?)<\/title>/)
         {
@@ -443,8 +457,6 @@ sub collectWords()
         }
         handleFragment($remainder);
     }
-
-    close (INPUTFILE);
 }
 
 
@@ -736,6 +748,65 @@ sub reportWords($)
 
     reportWordStatistics();
 }
+
+
+
+
+sub reportSQL()
+{
+    open (SQLFILE, ">usage.sql") || die("Could not create output file 'usage.sql'");
+
+
+	print SQLFILE "DELETE FROM WORDS WHERE idbook = $idbook\n";
+	print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idbook\n";
+
+	print SQLFILE "INSERT INTO BOOKS ($idbook, \"$docTitle\", \"$docAuthor\")\n";
+
+	print SQLFILE "\n\n\n";
+
+    reportWordsSQL();
+
+	close SQLFILE;
+}
+
+#
+# reportWordsSQL
+#
+sub reportWordsSQL()
+{
+    my @languageList = keys %wordHash;
+    foreach my $language (@languageList)
+    {
+        reportLanguageWordsSQL($language);
+    }
+}
+
+#
+# reportLanguageWordsSQL
+#
+sub reportLanguageWordsSQL($)
+{
+    my $language = shift;
+
+    my @wordList = keys %{$wordHash{$language}};
+    foreach my $word (@wordList)
+    {
+        reportWordSQL($word, $language);
+    }
+}
+
+#
+# reportWordSql
+#
+sub reportWordSQL($$)
+{
+    my $word = shift;
+    my $language = shift;
+
+    my $count = $wordHash{$language}{$word};
+	print SQLFILE "INSERT INTO WORDS ($idbook, \"$word\", \"$language\", $count)\n";
+}
+
 
 
 #
@@ -1853,3 +1924,5 @@ sub addBook($$$)
     $sth = $dbh->prepare("INSERT INTO book (idbook, title, author, file) VALUES (?, ?, ?, ?)");
     $sth->execute($idbook, $title, $author, $filename);
 }
+
+
