@@ -1043,8 +1043,11 @@
         <msg:message name="msgLinkToOpenLibrary">Enlace a la página del catálogo de Open Library</msg:message>
         <msg:message name="msgLinkToWorldCat">Enlace a la página del catálogo de WorldCat</msg:message>
         <msg:message name="msgExternalLink">Enlace externo</msg:message>
-
+        <msg:message name="msgMissingText">falta texto</msg:message>
+        <msg:message name="msgMissingTextWithExtentReason">Falta <msg:param name="extent"/> <msg:param name="unit"/>, por la siguiente razón: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgColor">Color</msg:message>
+        <msg:message name="msgDedication">Dedicación</msg:message>
 
         <!--IFG Note in Spanish month names are lowercase -->
         <msg:message name="msgJanuary">Enero</msg:message>
