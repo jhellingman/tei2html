@@ -61,7 +61,7 @@
     </xsl:function> 
 
     <xsl:template name="GetMessage">
-        <xsl:param name="name" select="'msgError'"/>
+        <xsl:param name="name" select="'msgError'" as="xs:string"/>
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
@@ -83,8 +83,8 @@
     </xsl:template>
 
     <xsl:template name="FormatMessage">
-        <xsl:param name="name" select="'msgError'"/>
-        <xsl:param name="params"/>
+        <xsl:param name="name" select="'msgError'" as="xs:string"/>
+        <xsl:param name="params" as="document-node()"/>
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
@@ -98,8 +98,10 @@
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>.</xsl:message>
-                <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage"/>
+                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
+                <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage">
+                    <xsl:with-param name="params" select="$params"/>
+                </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:message terminate="no">Warning: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
@@ -108,14 +110,14 @@
     </xsl:template>
 
     <xsl:template match="msg:message" mode="formatMessage">
-        <xsl:param name="params"/>
+        <xsl:param name="params" as="document-node()?"/>
         <xsl:apply-templates mode="formatMessage">
             <xsl:with-param name="params" select="$params"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="*" mode="formatMessage">
-        <xsl:param name="params"/>
+        <xsl:param name="params" as="document-node()?"/>
             <xsl:copy>
                 <xsl:copy-of select="@*"/>
                 <xsl:apply-templates mode="formatMessage">
@@ -125,7 +127,7 @@
     </xsl:template>
 
     <xsl:template match="msg:param" mode="formatMessage">
-        <xsl:param name="params"/>
+        <xsl:param name="params" as="document-node()?"/>
         <xsl:variable name="name" select="@name"/>
         <xsl:choose>
             <xsl:when test="$params//*[@name=$name]">
