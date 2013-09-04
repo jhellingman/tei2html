@@ -31,7 +31,7 @@
 "8"		p "۸"
 "9"		p "۹"
 
-"-"		f		% hyphen disambiguates encoding, should dissappear
+"-"		f		% hyphen disambiguates encoding, should disappear.
 
 "A"		p "ا"
 "'a"		p "أ"

@@ -31,7 +31,7 @@
 "8"     p "8"
 "9"     p "9"
 
-"-"     f       % hyphen disambiguates encoding, should dissappear
+"-"     f       % hyphen disambiguates encoding, should disappear
 
 "A"     p "&amacr;"
 "'a"        p "&amacr;"

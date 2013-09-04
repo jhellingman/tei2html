@@ -38,7 +38,7 @@
 "8"         p "&#x06F8;"
 "9"         p "&#x06F9;"
 
-"-"         f               % hyphen disambiguates encoding, should dissappear
+"-"         f               % hyphen disambiguates encoding, should disappear
 
 "A"         p "&#x0627;"
 "'a"        p "&#x0623;"
