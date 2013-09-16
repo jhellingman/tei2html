@@ -191,17 +191,18 @@
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="substring($url, 1, 3) = 'pg:'">pglink</xsl:when>
-            <xsl:when test="substring($url, 1, 5) = 'oclc:'">catlink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'oln:'">catlink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'olw:'">catlink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'wpp:'">wpplink</xsl:when>
-            <xsl:when test="substring($url, 1, 3) = 'wp:'">wplink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'loc:'">loclink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'bib:'">biblink</xsl:when>
-            <xsl:when test="substring($url, 1, 6) = 'https:'">seclink</xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'ftp:'">ftplink</xsl:when>
-            <xsl:when test="substring($url, 1, 7) = 'mailto:'">maillink</xsl:when>
+            <xsl:when test="starts-with($url, 'pg:')">pglink</xsl:when>
+            <xsl:when test="starts-with($url, 'pgi:')">pgilink</xsl:when>
+            <xsl:when test="starts-with($url, 'oclc:')">catlink</xsl:when>
+            <xsl:when test="starts-with($url, 'oln:')">catlink</xsl:when>
+            <xsl:when test="starts-with($url, 'olw:')">catlink</xsl:when>
+            <xsl:when test="starts-with($url, 'wpp:')">wpplink</xsl:when>
+            <xsl:when test="starts-with($url, 'wp:')">wplink</xsl:when>
+            <xsl:when test="starts-with($url, 'loc:')">loclink</xsl:when>
+            <xsl:when test="starts-with($url, 'bib:')">biblink</xsl:when>
+            <xsl:when test="starts-with($url, 'https:')">seclink</xsl:when>
+            <xsl:when test="starts-with($url, 'ftp:')">ftplink</xsl:when>
+            <xsl:when test="starts-with($url, 'mailto:')">maillink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -219,15 +220,16 @@
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="substring($url, 1, 3) = 'pg:'"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 5) = 'oclc:'"><xsl:value-of select="f:message('msgLinkToWorldCat')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'oln:'"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'olw:'"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'wpp:'"><xsl:value-of select="f:message('msgLinkToWikiPilipinas')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 3) = 'wp:'"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'loc:'"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 4) = 'bib:'"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
-            <xsl:when test="substring($url, 1, 7) = 'mailto:'"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'pg:')"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'pgi:')"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'oclc:')"><xsl:value-of select="f:message('msgLinkToWorldCat')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'oln:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'olw:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'wpp:')"><xsl:value-of select="f:message('msgLinkToWikiPilipinas')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'wp:')"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'loc:')"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -242,6 +244,7 @@
             <table>
             <tr><th>Shorthand notation</th>         <th>Description</th></tr>
             <tr><td>pg:<i>[number]</i></td>         <td>Link to a Project Gutenberg ebook.</td></tr>
+            <tr><td>pgi:<i>[number]</i></td>        <td>Link to a Project Gutenberg ebook (internal, for example between multi-volume sets).</td></tr>
             <tr><td>oclc:<i>[id]</i></td>           <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
             <tr><td>oln:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the item level).</td></tr>
             <tr><td>olw:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
@@ -264,55 +267,55 @@
         <xsl:choose>
 
             <!-- Link to Project Gutenberg book -->
-            <xsl:when test="substring($url, 1, 3) = 'pg:'">
+            <xsl:when test="starts-with($url, 'pg:') or starts-with($url, 'pgi:')">
                 <xsl:choose>
                     <xsl:when test="contains($url, '#')">
-                        <xsl:variable name="number" select="substring-before(substring-after($url, 'pg:'), '#')"/>
+                        <xsl:variable name="number" select="substring-before(substring-after($url, ':'), '#')"/>
                         <xsl:variable name="anchor" select="substring-after($url, '#')"/>
                         <xsl:value-of select="concat('http://www.gutenberg.org/files/', $number, '/', $number, '-h/', $number, '-h.htm#', $anchor)"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, 'pg:')"/>
+                        <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
                     </xsl:otherwise>
                 </xsl:choose> 
             </xsl:when>
 
             <!-- Link to OCLC (worldcat) catalog entry -->
-            <xsl:when test="substring($url, 1, 5) = 'oclc:'">
-                <xsl:text>http://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, 'oclc:')"/>
+            <xsl:when test="starts-with($url, 'oclc:')">
+                <xsl:text>http://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (item level) -->
-            <xsl:when test="substring($url, 1, 4) = 'oln:'">
-                <xsl:text>http://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, 'oln:')"/>
+            <xsl:when test="starts-with($url, 'oln:')">
+                <xsl:text>http://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (abstract work level) -->
-            <xsl:when test="substring($url, 1, 4) = 'olw:'">
-                <xsl:text>http://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, 'olw:')"/>
+            <xsl:when test="starts-with($url, 'olw:')">
+                <xsl:text>http://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to WikiPilipinas article -->
-            <xsl:when test="substring($url, 1, 4) = 'wpp:'">
-                <xsl:text>http://en.wikipilipinas.org/index.php?title=</xsl:text><xsl:value-of select="substring-after($url, 'wpp:')"/>
+            <xsl:when test="starts-with($url, 'wpp:')">
+                <xsl:text>http://en.wikipilipinas.org/index.php?title=</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Wikipedia article -->
-            <xsl:when test="substring($url, 1, 3) = 'wp:'">
-                <xsl:text>http://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, 'wp:')"/>
+            <xsl:when test="starts-with($url, 'wp:')">
+                <xsl:text>http://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to location on map, using coordinates -->
-            <xsl:when test="substring($url, 1, 4) = 'loc:'">
-                <xsl:variable name="coordinates" select="substring-after($url, 'loc:')"/>
+            <xsl:when test="starts-with($url, 'loc:')">
+                <xsl:variable name="coordinates" select="substring-after($url, ':')"/>
                 <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
                 <xsl:variable name="altitude" select="substring-after($coordinates, ',')"/>
                 <xsl:text>http://maps.google.com/maps?q=</xsl:text><xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/>
             </xsl:when>
 
             <!-- Link to Bible citation -->
-            <xsl:when test="substring($url, 1, 4) = 'bib:'">
-                <xsl:text>http://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, 'bib:'))"/>
+            <xsl:when test="starts-with($url, 'bib:')">
+                <xsl:text>http://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, ':'))"/>
                 <xsl:choose>
                     <!-- TODO: move this to localization data -->
                     <xsl:when test="$lang = 'en'"/>
@@ -326,7 +329,7 @@
             </xsl:when>
 
             <!-- Link to website (http:// or https://) -->
-            <xsl:when test="substring($url, 1, 5) = 'http:' or substring($url, 1, 6) = 'https:' or substring($url, 1, 7) = 'mailto:'">
+            <xsl:when test="starts-with($url, 'http:') or starts-with($url, 'https:') or starts-with($url, 'mailto:')">
                 <xsl:value-of select="$url"/>
             </xsl:when>
 

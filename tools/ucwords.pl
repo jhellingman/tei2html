@@ -405,12 +405,12 @@ sub heatMapPair()
 
 sub loadDocument($)
 {
-	my $infile = shift;
+    my $infile = shift;
     open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
     while (<INPUTFILE>)
     {
-		push (@lines, $_);
-	}
+        push (@lines, $_);
+    }
     close (INPUTFILE);
 }
 
@@ -420,7 +420,7 @@ sub loadDocument($)
 #
 sub collectWords()
 {
-	loadDocument($infile);
+    loadDocument($infile);
 
     foreach my $line (@lines)
     {
@@ -757,16 +757,16 @@ sub reportSQL()
     open (SQLFILE, ">usage.sql") || die("Could not create output file 'usage.sql'");
 
 
-	print SQLFILE "DELETE FROM WORDS WHERE idbook = $idbook\n";
-	print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idbook\n";
+    print SQLFILE "DELETE FROM WORDS WHERE idbook = $idbook\n";
+    print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idbook\n";
 
-	print SQLFILE "INSERT INTO BOOKS ($idbook, \"$docTitle\", \"$docAuthor\")\n";
+    print SQLFILE "INSERT INTO BOOKS ($idbook, \"$docTitle\", \"$docAuthor\")\n";
 
-	print SQLFILE "\n\n\n";
+    print SQLFILE "\n\n\n";
 
     reportWordsSQL();
 
-	close SQLFILE;
+    close SQLFILE;
 }
 
 #
@@ -804,7 +804,7 @@ sub reportWordSQL($$)
     my $language = shift;
 
     my $count = $wordHash{$language}{$word};
-	print SQLFILE "INSERT INTO WORDS ($idbook, \"$word\", \"$language\", $count)\n";
+    print SQLFILE "INSERT INTO WORDS ($idbook, \"$word\", \"$language\", $count)\n";
 }
 
 
@@ -1721,6 +1721,11 @@ sub StripDiacritics($)
         s/\x{0152}/Oe/g;    ##  Œ
         s/\x{0153}/oe/g;    ##  œ
 
+        s/\x{02bb}//g;          ## 'Okina (Hawaiian glottal stop)
+        s/\x{02bc}//g;          ## Modifier letter apostrophe
+        s/\x{02bf}//g;          ## Modifier letter left half ring (Ayin)
+        s/\x{02be}//g;          ## Modifier letter right half ring (Hamza)
+
         tr/\x{00d0}\x{0110}\x{00f0}\x{0111}\x{0126}\x{0127}/DDddHh/; # ÐÐðdHh
         tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/; # i??L?l
         tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/; # ???Øø?
@@ -1748,12 +1753,12 @@ sub Normalize($)
 sub NormalizeForLanguage($$)
 {
     my $string = shift;
-	my $lang = shift;
-	if ($lang eq 'ceb') 
-	{
-		return CebuanoNormalize($string);
-	}
-	return Normalize($string);
+    my $lang = shift;
+    if ($lang eq 'ceb') 
+    {
+        return CebuanoNormalize($string);
+    }
+    return Normalize($string);
 }
 
 

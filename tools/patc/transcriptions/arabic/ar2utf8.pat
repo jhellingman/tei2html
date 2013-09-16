@@ -122,7 +122,7 @@
 "iN"		p "ٍ"
 "uN"		p "ٌ"
 
-% doubled letters get shadda (Todo for letters without dots and Marrocan letters)
+% doubled letters get shadda (Todo for letters without dots and Moroccan letters)
 
 "bb"		p "بّ"
 "tt"		p "تّ"
