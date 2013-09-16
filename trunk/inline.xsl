@@ -471,4 +471,74 @@
         </span>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Ditto marks in tables and lists -->
+
+    <xd:doc>
+        <xd:short>Ditto marks in tables and lists.</xd:short>
+        <xd:detail>To set ditto-marks in tables, we need a number of HTML formatting tricks. Basically, when a phrase is in a ditto element,
+        we want to replace the individual words with pairs of commas, neatly centered under each word. To achieve this, we create a small table 
+        of one column and two rows. We place the word in the first row, but then make it invisible and reduce its size to zero (using CSS), 
+        and place the ditto-mark centered in the second row. Some further trickery is needed to handle the most common formatting that
+        can occur in contexts where ditto-marks are used. Note that this code is quite fragile, and will fail if unexpected tagging is encountered
+        inside the ditto element.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="ditto">
+        <xsl:apply-templates mode="ditto"/>
+    </xsl:template>
+
+    <xsl:template mode="ditto" match="text()">
+        <!-- Split the text-content of the ditto on space boundaries -->
+        <xsl:variable name="context" select="."/>
+        <xsl:for-each select="tokenize(., '\s+')">
+            <xsl:choose>
+                <xsl:when test="matches(., '^[.,:;!]$')">
+                    <xsl:message terminate="no">WARNING: stand-alone punctionation mark '<xsl:value-of select="."/>' in ditto (will not use ditto mark).</xsl:message>
+                    <table class="ditto">
+                        <tr class="s"><td><xsl:value-of select="."/></td></tr>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <table class="ditto">
+                        <tr class="s">
+                            <td>
+                            <!-- Handle most common in-line style elements. -->
+                                <xsl:choose>
+                                    <xsl:when test="$context/parent::hi[@rend='b' or @rend='bold']">
+                                        <b><xsl:value-of select="."/></b>
+                                    </xsl:when>
+                                    <xsl:when test="$context/parent::hi[@rend='sup']">
+                                        <sup><xsl:value-of select="."/></sup>
+                                    </xsl:when>
+                                    <xsl:when test="$context/parent::hi[@rend='sub']">
+                                        <sub><xsl:value-of select="."/></sub>
+                                    </xsl:when>
+                                    <xsl:when test="$context/parent::hi[@rend='sc']">
+                                        <span class="sc"><xsl:value-of select="."/></span>
+                                    </xsl:when>
+                                    <xsl:when test="$context/parent::hi">
+                                        <i><xsl:value-of select="."/></i>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="."/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </td>
+                        </tr>
+                        <!-- No ditto marks for parts that are superscripted or subscripted -->
+                        <xsl:if test="not($context/parent::hi[@rend='sub' or @rend='sup'])">
+                            <tr class="d">
+                                <td>
+                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else ',,'"/>
+                                </td>
+                            </tr>
+                        </xsl:if>
+                    </table>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
+
 </xsl:stylesheet>

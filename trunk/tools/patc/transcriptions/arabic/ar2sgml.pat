@@ -138,7 +138,7 @@
 "iN"        p "&#x064D;"
 "uN"        p "&#x064C;"
 
-% doubled letters get shadda (Todo for letters without dots and Marrocan letters)
+% doubled letters get shadda (Todo for letters without dots and Moroccan letters)
 
 "bb"        p "&#x0628;&#x0651;"
 "tt"        p "&#x062A;&#x0651;"
