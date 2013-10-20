@@ -31,6 +31,7 @@ BEGIN
     $langNameHash{"bo"}        = "Tibetan";
     $langNameHash{"bo-latn"}   = "Tibetan (Latin transcription)";
     $langNameHash{"br"}        = "Breton";
+    $langNameHash{"bs"}        = "Bosnian";
     $langNameHash{"ca"}        = "Catalan";
     $langNameHash{"co"}        = "Corsican";
     $langNameHash{"cs"}        = "Czech";

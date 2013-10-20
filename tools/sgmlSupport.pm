@@ -1658,6 +1658,7 @@ BEGIN
     $ent{"udota"}       = "u" . chr(0x0307); # u with dot above
     $ent{"Udota"}       = "U" . chr(0x0307); # U with dot above
     $ent{"zdota"}       = "z" . chr(0x0307); # z with dot above
+    $ent{"Zdota"}       = "Z" . chr(0x0307); # z with dot above
     $ent{"ldota"}       = "l" . chr(0x0307); # l with dot above
     $ent{"pdota"}       = "p" . chr(0x0307); # p with dot above
     $ent{"ddota"}       = "d" . chr(0x0307); # d with dot above

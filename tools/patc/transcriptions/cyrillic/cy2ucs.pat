@@ -6,6 +6,7 @@
 
 @patterns 0
 
+"<CY>"      1 "<foreign>"
 "<RU>"      1 "<foreign lang=ru>"
 "<RUA>"     1 ""
 
@@ -13,6 +14,7 @@
 
 "&"         2 "&"       % jump over SGML entities in source;
 
+"</CY>"     0 "</foreign>"
 "</RU>"     0 "</foreign>"
 "</RUA>"    0 ""
 
@@ -139,6 +141,7 @@
 @patterns 2  % jumping SGML entities in source
 
 ";"         1 ";"               % end of entity: jump back
+"</CY>"     0 ";</foreign>"     % closing Cyrillic early. Forgive.
 "</RU>"     0 ";</foreign>"     % closing Cyrillic early. Forgive.
 "</RUA>"    0 ";"               % closing Cyrillic early. Forgive.
 " "         1 " "               % something unexpected, also jump back.

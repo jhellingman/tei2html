@@ -386,6 +386,7 @@ sub sgml2xml($$)
     $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<TA>", "Tamil",                 "$patcdir/indic/ta2ucs.pat");
     $tmpFile0 = transcribeNotation($tmpFile0, "<RU>", "Russian",               "$patcdir/cyrillic/cy2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<CY>", "Cyrillic",              "$patcdir/cyrillic/cy2ucs.pat");
 
     print "Check SGML...\n";
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
