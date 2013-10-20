@@ -745,6 +745,8 @@
         <msg:message name="msgRevisionHistory">Documentgeschiedenis</msg:message>
         <msg:message name="msgAvailability">Beschikbaarheid</msg:message>
         <msg:message name="msgEncoding">Codering</msg:message>
+        <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
+        <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
 
         <msg:message name="msgColor">Kleur</msg:message>
 

@@ -430,6 +430,45 @@ span.sum
 }
 
 
+/* Special purpose tables: */
+
+table.intralinear
+{
+    display: inline;
+    border-collapse: collapse;
+}
+
+table.intralinear td
+{
+    font-size: small;
+    text-align: center;
+}
+
+table.ditto
+{
+    display: inline;
+    border-collapse: collapse;
+    vertical-align: bottom;
+}
+
+table.ditto tr.s
+{
+    height: 0;
+    color: white;
+    line-height: 0;
+}
+
+table.ditto tr.s td
+{
+    padding: 0px;
+}
+
+table.ditto tr.d td
+{
+    text-align: center;
+    line-height: 10pt;
+}
+
 /****** Poetry ******/
 
 .lgouter
