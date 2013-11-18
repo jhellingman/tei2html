@@ -1,9 +1,7 @@
 # fixNotes.pl -- fix (renumber) notes in text files
 
-
-$inputFile			= $ARGV[0];
-$firstNoteNumber	= $ARGV[1];
-
+$inputFile          = $ARGV[0];
+$firstNoteNumber    = $ARGV[1];
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
@@ -18,29 +16,29 @@ while (<INPUTFILE>)
     $remainder = $line;
     while ($remainder =~ m/\[([0-9]*)\]/)
     {
-		$before = $`;
-		$nOriginalNoteNumber = $1;
+        $before = $`;
+        $nOriginalNoteNumber = $1;
         $remainder = $';
 
-		print STDERR "Seen [$nOriginalNoteNumber]\n";
+        print STDERR "Seen [$nOriginalNoteNumber]\n";
 
-		if ($nOriginalNoteNumber != $nPreviousNoteNumber + 1) 
-		{
-			if ($nOriginalNoteNumber == 1) 
-			{
-				print STDERR "Restarting new note count with $firstNoteNumber (notes section reached)\n";
-				$nNewNoteNumber = $firstNoteNumber;
-			}
-			else
-			{
-				print STDERR "Note numbers not in order: $nOriginalNoteNumber follows $nPreviousNoteNumber\n";
-			}
-		}
-		$nPreviousNoteNumber = $nOriginalNoteNumber;
+        if ($nOriginalNoteNumber != $nPreviousNoteNumber + 1) 
+        {
+            if ($nOriginalNoteNumber == 1) 
+            {
+                print STDERR "Restarting new note count with $firstNoteNumber (notes section reached)\n";
+                $nNewNoteNumber = $firstNoteNumber;
+            }
+            else
+            {
+                print STDERR "Note numbers not in order: $nOriginalNoteNumber follows $nPreviousNoteNumber\n";
+            }
+        }
+        $nPreviousNoteNumber = $nOriginalNoteNumber;
 
-		print $before . "[" . $nNewNoteNumber . "]";
+        print $before . "[" . $nNewNoteNumber . "]";
 
-		$nNewNoteNumber++;
+        $nNewNoteNumber++;
     }
-	print $remainder;
+    print $remainder;
 }
