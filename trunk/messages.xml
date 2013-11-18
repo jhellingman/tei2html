@@ -600,6 +600,7 @@
         <msg:message name="msgCorrectionsAppliedToText">Die folgenden Korrekturen sind am Text angewendet worden:</msg:message>
         <msg:message name="msgCorrectionsOverview">Übersicht der Korrekturen im Text</msg:message>
         <msg:message name="msgNotCopyrightedUS">Dieses Buch ist frei von Urheberrechten in den Vereinigten Staaten. Wenn Sie in einem anderen Land wohnen, überprüfen Sie bitte die Gesetze in Ihrem Land, ehe Sie das Buch herunterladen.</msg:message>
+        <msg:message name="msgNotApplicable">Nicht zutreffend</msg:message>
 
         <msg:message name="msgExternalReferences">Externe Referenzen</msg:message>
         <msg:message name="msgExternalLink">Externe Link</msg:message>

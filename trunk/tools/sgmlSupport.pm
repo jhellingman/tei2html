@@ -1615,6 +1615,9 @@ BEGIN
     $ent{"rum"}         = chr(0xA775); # rum (r with stroke through flag)
     $ent{"Rum"}         = chr(0xA776); # small capital Rum (r with stroke through tail)
 
+    $ent{"Ysc"}         = chr(0x028F); # small caps Y
+    $ent{"Dsc"}         = chr(0x1D05); # small caps D
+
     $ent{"vdiagstrok"}  = chr(0xA75F); # v with diagonal stroke
 
 
