@@ -160,7 +160,7 @@ body
     text-decoration: none;
 }
 
-table.alignedtext
+table.alignedtext, table.alignedverse
 {
     border-collapse: collapse;
 }
@@ -171,7 +171,12 @@ table.alignedtext td
     width: 50%;
 }
 
-table.alignedtext td.first
+table.alignedverse
+{
+    vertical-align: top;
+}
+
+table.alignedtext td.first, table.alignedverse td.first
 {
     border-width: 0 0.2px 0 0;
     border-color: gray;
@@ -179,9 +184,19 @@ table.alignedtext td.first
     padding-right: 10px;
 }
 
-table.alignedtext td.second
+table.alignedtext td.second, table.alignedverse td.second
 {
     padding-left: 10px;
+}
+
+table.alignedverse td.first, table.alignedverse td.second
+{
+    width: 45%;
+}
+
+table.alignedverse td.linenumbers
+{
+    width: 10%;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4

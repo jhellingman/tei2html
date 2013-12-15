@@ -498,6 +498,13 @@
     <!--====================================================================-->
     <!-- code to align two divisions based on the @n attribute -->
 
+    <xd:doc>
+        <xd:short>Align two division based on the @n attribute in paragraphs.</xd:short>
+        <xd:detail>Align two division based on the @n attribute in paragraphs. This code handles 
+        the case where paragraphs are added or removed between aligned paragraphs, as can be
+        expected in a more free translation.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="align-paragraphs">
         <xsl:param name="a"/>
         <xsl:param name="b"/>
@@ -564,6 +571,11 @@
         </table>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Output inserted paragraphs in aligned divisions.</xd:short>
+        <xd:detail>Output paragraphs not present in the first division, but present in
+        the second (that is, without a matching @n attribute).</xd:detail>
+    </xd:doc>
 
     <xsl:template name="output-inserted-paragraphs">
         <xsl:param name="start" as="node()"/>

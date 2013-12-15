@@ -1,7 +1,7 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<!-- This HTML file has been automatically generated from an XML source on 2013-06-13T18:57:53Z. -->
+<!-- This HTML file has been automatically generated from an XML source on 2013-12-15T08:28:25Z. -->
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd21e1" lang="en-US">
    <head>
       <title>Main Title of Work Goes Here</title>
@@ -172,7 +172,7 @@ body
     text-decoration: none;
 }
 
-table.alignedtext
+table.alignedtext, table.alignedverse
 {
     border-collapse: collapse;
 }
@@ -183,7 +183,12 @@ table.alignedtext td
     width: 50%;
 }
 
-table.alignedtext td.first
+table.alignedverse
+{
+    vertical-align: top;
+}
+
+table.alignedtext td.first, table.alignedverse td.first
 {
     border-width: 0 0.2px 0 0;
     border-color: gray;
@@ -191,9 +196,19 @@ table.alignedtext td.first
     padding-right: 10px;
 }
 
-table.alignedtext td.second
+table.alignedtext td.second, table.alignedverse td.second
 {
     padding-left: 10px;
+}
+
+table.alignedverse td.first, table.alignedverse td.second
+{
+    width: 45%;
+}
+
+table.alignedverse td.linenumbers
+{
+    width: 10%;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4
@@ -617,6 +632,45 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight
     border-right: 2px solid black;
 }
 
+/* Special purpose tables: */
+
+table.intralinear
+{
+    display: inline;
+    border-collapse: collapse;
+}
+
+table.intralinear td
+{
+    font-size: small;
+    text-align: center;
+}
+
+table.ditto
+{
+    display: inline;
+    border-collapse: collapse;
+    vertical-align: bottom;
+}
+
+table.ditto tr.s
+{
+    height: 0;
+    color: white;
+    line-height: 0;
+}
+
+table.ditto tr.s td
+{
+    padding: 0px;
+}
+
+table.ditto tr.d td
+{
+    text-align: center;
+    line-height: 10pt;
+}
+
 /* Poetry */
 
 .lgouter
@@ -868,7 +922,7 @@ ul { list-style-type: none; }
 
 /* External Links */
 
-.pglink, .catlink, .exlink, .wplink, .biblink
+.pglink, .catlink, .exlink, .wplink, .biblink, .seclink
 {
     background-repeat: no-repeat;
     background-position: right center;
@@ -886,7 +940,7 @@ ul { list-style-type: none; }
     padding-right: 17px;
 }
 
-.exlink, .wplink, .biblink
+.exlink, .wplink, .biblink, .seclink
 {
     background-image: url(images/external.png);
     padding-right: 13px;
@@ -1236,7 +1290,17 @@ text-indent:10em;
 font-style:italic;
 }
 
-.xd21e1106
+.xd21e1088
+{
+font-style:italic;
+}
+
+.xd21e1099
+{
+display:none;
+}
+
+.xd21e1130
 {
 display:none;
 }
@@ -2084,6 +2148,59 @@ display:none;
                      <p id="xd21e1084" class="line xd21e994"><span class="linenum">8</span>This is another rule of verse
                      </p>
                   </div>
+                  <p id="xd21e1086" class="first">Two verses, aligned:</p>
+                  <table class="alignedverse">
+                     <tr>
+                        <td class="linenumbers"></td>
+                        <td class="first"><span class="h4">Frère Jacques</span></td>
+                        <td class="second"><span class="h4">Brother John</span></td>
+                     </tr>
+                     <tr>
+                        <td class="linenumbers"><span class="linenum">1</span></td>
+                        <td class="first">
+                           <p id="xd21e1091" class="line ">Frère Jacques, frère Jacques,</p>
+                        </td>
+                        <td class="second">
+                           <p id="xd21e1102" class="line ">Are you sleeping, are you sleeping,</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="linenumbers"><span class="linenum">2</span></td>
+                        <td class="first">
+                           <p id="xd21e1093" class="line ">Dormez-vous ? Dormez-vous ?</p>
+                        </td>
+                        <td class="second">
+                           <p id="xd21e1104" class="line ">Brother John? Brother John?</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="linenumbers"></td>
+                        <td class="first">
+                           <p id="xd21e1095" class="line ">Sonnez les matines ! Sonnez les matines !</p>
+                        </td>
+                        <td class="second">
+                           <p id="xd21e1106" class="line ">Morning bells are ringing! Morning bells are ringing!</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="linenumbers"><span class="linenum">4</span></td>
+                        <td class="first">
+                           <p id="xd21e1097" class="line xd21e986">Ding, daing, dong. Ding, daing, dong.</p>
+                        </td>
+                        <td class="second">
+                           <p id="xd21e1108" class="line xd21e986">Ding, dang, dong. Ding, dang, dong.</p>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="fj-en" lang="fr" class="lgouter xd21e1099">
+                     <h4>Brother John</h4>
+                     <p id="xd21e1102" class="line ">Are you sleeping, are you sleeping,</p>
+                     <p id="xd21e1104" class="line "><span class="linenum">2</span>Brother John? Brother John?
+                     </p>
+                     <p id="xd21e1106" class="line ">Morning bells are ringing! Morning bells are ringing!</p>
+                     <p id="xd21e1108" class="line xd21e986"><span class="linenum">4</span>Ding, dang, dong. Ding, dang, dong.
+                     </p>
+                  </div>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
@@ -2104,65 +2221,65 @@ display:none;
             <div id="alignFirst" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><table class="alignedtext">
                   <tr>
                      <td class="first">
-                        <h2 id="xd21e1087" class="main">Text-Alignment Test</h2>
+                        <h2 id="xd21e1111" class="main">Text-Alignment Test</h2>
                      </td>
                      <td class="second">
-                        <h2 id="xd21e1107" class="main">Test van het naast elkaar afdrukken van tekst</h2>
+                        <h2 id="xd21e1131" class="main">Test van het naast elkaar afdrukken van tekst</h2>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1089" class="first">This is a test of printing translated paragraphs side-by-side</p>
+                        <p id="xd21e1113" class="first">This is a test of printing translated paragraphs side-by-side</p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1109" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
+                        <p id="xd21e1133" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1091" class="first">The paragraphs will be numbered using the <i id="xd21e1093">n</i> attribute.
+                        <p id="xd21e1115" class="first">The paragraphs will be numbered using the <i id="xd21e1117">n</i> attribute.
                         </p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1111" class="first">De alinea's worden genummerd met het <i id="xd21e1113">n</i> attribuut.
+                        <p id="xd21e1135" class="first">De alinea's worden genummerd met het <i id="xd21e1137">n</i> attribuut.
                         </p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1096" class="first">That way, the style sheet knows which paragraphs belong together.</p>
+                        <p id="xd21e1120" class="first">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1116" class="first">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
-                        <p id="xd21e1118" class="first">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
-                        <div id="xd21e1120" class="lgouter ">
-                           <p id="xd21e1121" class="line ">Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</p>
+                        <p id="xd21e1140" class="first">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
+                        <p id="xd21e1142" class="first">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <div id="xd21e1144" class="lgouter ">
+                           <p id="xd21e1145" class="line ">Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</p>
                         </div>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1098" class="first">This makes it easy to verify translations.</p>
+                        <p id="xd21e1122" class="first">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1123" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd21e1147" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1100" class="first">An extra paragraph, with the translation next to it.</p>
-                        <p id="xd21e1102" class="first">And yet another paragraph.</p>
+                        <p id="xd21e1124" class="first">An extra paragraph, with the translation next to it.</p>
+                        <p id="xd21e1126" class="first">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1125" class="first">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd21e1149" class="first">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1104" class="first">And the final paragraph.</p>
+                        <p id="xd21e1128" class="first">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd21e1127" class="first">En de laatste alinea.</p>
+                        <p id="xd21e1151" class="first">En de laatste alinea.</p>
                      </td>
                   </tr>
                </table>
@@ -2171,60 +2288,60 @@ display:none;
                   <tr>
                      <td class="first"></td>
                      <td class="second">
-                        <h2 id="xd725e5" class="main">Nogmaals een test</h2>
+                        <h2 id="xd742e5" class="main">Nogmaals een test</h2>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1130" class="first">This is a test of printing translated paragraphs side-by-side</p>
+                        <p id="xd21e1154" class="first">This is a test of printing translated paragraphs side-by-side</p>
                      </td>
                      <td class="second">
-                        <p id="xd725e8" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
-                        <p id="xd725e11" class="first">Deze alinea staat in een externe bron.</p>
+                        <p id="xd742e8" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
+                        <p id="xd742e11" class="first">Deze alinea staat in een externe bron.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1132" class="first">The paragraphs will be numbered using the <i id="xd21e1134">n</i> attribute.
+                        <p id="xd21e1156" class="first">The paragraphs will be numbered using the <i id="xd21e1158">n</i> attribute.
                         </p>
                      </td>
                      <td class="second">
-                        <p id="xd725e14" class="first">De alinea's worden genummerd met het <i id="xd725e16">n</i> attribuut.
+                        <p id="xd742e14" class="first">De alinea's worden genummerd met het <i id="xd742e16">n</i> attribuut.
                         </p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1137" class="first">That way, the style sheet knows which paragraphs belong together.</p>
+                        <p id="xd21e1161" class="first">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd725e20" class="first">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
-                        <p id="xd725e24" class="first">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd742e20" class="first">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
+                        <p id="xd742e24" class="first">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1139" class="first">This makes it easy to verify translations.</p>
+                        <p id="xd21e1163" class="first">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd725e27" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd742e27" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1141" class="first">An extra paragraph, with the translation next to it.</p>
-                        <p id="xd21e1143" class="first">And yet another paragraph.</p>
+                        <p id="xd21e1165" class="first">An extra paragraph, with the translation next to it.</p>
+                        <p id="xd21e1167" class="first">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd725e30" class="first">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd742e30" class="first">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first">
-                        <p id="xd21e1145" class="first">And the final paragraph.</p>
+                        <p id="xd21e1169" class="first">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd725e33" class="first">En de laatste alinea.</p>
+                        <p id="xd742e33" class="first">En de laatste alinea.</p>
                      </td>
                   </tr>
                </table>
@@ -2233,8 +2350,8 @@ display:none;
       </div>
       <div class="back" id="back">
          <div id="test-toc" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-               <h2 id="xd21e1149" class="main">Test Table of Contents</h2>
-               <table class="tocList" id="xd21e1151" lang="nl">
+               <h2 id="xd21e1173" class="main">Test Table of Contents</h2>
+               <table class="tocList" id="xd21e1175" lang="nl">
                   <tr>
                      <td class="tocDivNum"></td>
                      <td class="tocDivTitle" colspan="5">      Introductie   </td>
@@ -2252,7 +2369,7 @@ display:none;
                   </tr>
                   <tr>
                      <td class="tocDivNum">III</td>
-                     <td class="tocDivTitle" colspan="5">      <span class="corr" id="xd21e1172" title="Source: Vierde">Derde</span> Hoofdstuk   
+                     <td class="tocDivTitle" colspan="5">      <span class="corr" id="xd21e1196" title="Source: Vierde">Derde</span> Hoofdstuk   
                      </td>
                      <td class="tocPageNum">35</td>
                   </tr>
@@ -2270,42 +2387,42 @@ display:none;
             </div>
          </div>
          <div id="index" lang="nl" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-               <h2 id="xd21e1188" class="main">Index</h2>
-               <div class="transcribernote indextoc" id="xd21e1190"><a href="#xd21e1192">A</a> | <a href="#xd21e1197">B</a> | <a href="#xd21e1202">C</a> | <a href="#xd21e1207">D</a></div>
-               <div id="xd21e1191" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd21e1192" class="main">A.</h3>
+               <h2 id="xd21e1212" class="main">Index</h2>
+               <div class="transcribernote indextoc" id="xd21e1214"><a href="#xd21e1216">A</a> | <a href="#xd21e1221">B</a> | <a href="#xd21e1226">C</a> | <a href="#xd21e1231">D</a></div>
+               <div id="xd21e1215" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd21e1216" class="main">A.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd21e1194" class="first">A is een aapje.</p>
+                     <p id="xd21e1218" class="first">A is een aapje.</p>
                   </div>
                </div>
-               <div id="xd21e1196" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd21e1197" class="main">B.</h3>
+               <div id="xd21e1220" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd21e1221" class="main">B.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd21e1199" class="first">B is een Boom.</p>
+                     <p id="xd21e1223" class="first">B is een Boom.</p>
                   </div>
                </div>
-               <div id="xd21e1201" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd21e1202" class="main">C.</h3>
+               <div id="xd21e1225" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd21e1226" class="main">C.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd21e1204" class="first">C is een Cent.</p>
+                     <p id="xd21e1228" class="first">C is een Cent.</p>
                   </div>
                </div>
-               <div id="xd21e1206" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                     <h3 id="xd21e1207" class="main">D.</h3>
+               <div id="xd21e1230" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                     <h3 id="xd21e1231" class="main">D.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd21e1209" class="first">D is een Drommedaris.
-                        <br id="xd21e1211"></br>en een Duizendpoot.
+                     <p id="xd21e1233" class="first">D is een Drommedaris.
+                        <br id="xd21e1235"></br>en een Duizendpoot.
                      </p>
                   </div>
                </div>
             </div>
          </div>
          <div id="backmatter" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-               <div class="div1" id="xd21e1214">
+               <div class="div1" id="xd21e1238">
                   <h2 class="main">List of Illustrations</h2>
                   <table>
                      <tr>
@@ -2330,7 +2447,7 @@ display:none;
                      </tr>
                   </table>
                </div>
-               <div class="div1" id="xd21e1215">
+               <div class="div1" id="xd21e1239">
                   <h2 class="main">Index</h2>
                   <p>Chapter headings  <a href="#xd21e266">2</a></p>
                   <p>Footnote  <a href="#xd21e230">2</a>, <a href="#xd21e1036">4</a>; in quoted material <a href="#xd21e227">2</a></p>
@@ -2341,7 +2458,7 @@ display:none;
                   <p>Stylesheet  <a href="#xd21e123">###</a></p>
                   <p>XSLT  <a href="#xd21e121">###</a></p>
                </div>
-               <div class="div1" id="xd21e1217">
+               <div class="div1" id="xd21e1241">
                   <h2 class="main">Table of Contents</h2>
                   <ul>
                      <li>I. <a href="#bk1">Tei2html Test Document</a><ul>
@@ -2365,7 +2482,7 @@ display:none;
                      <li><a href="#index">Index</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPageNum"><a class="pageref" href="#index">4</a></span></li>
                   </ul>
                </div>
-               <div class="div1" id="xd21e1218">
+               <div class="div1" id="xd21e1242">
                   <h2 class="main">List of Illustrations</h2>
                   <ul>
                      <li id="test"><a href="#test">This is the heading</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPageNum"><a class="pageref" href="#test">2</a></span></li>
@@ -2375,7 +2492,7 @@ display:none;
                      <li id="tarsier2"><a href="#tarsier2">The <i>Philippine</i> Tarsier</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPageNum"><a class="pageref" href="#tarsier2">2</a></span></li>
                   </ul>
                </div>
-               <div class="transcribernote" id="xd21e1219">
+               <div class="transcribernote" id="xd21e1243">
                   <h2 class="main">Colophon</h2>
                   <h3 class="main">Availability</h3>
                   <p id="xd21e34" class="first">Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US.
@@ -2439,7 +2556,7 @@ display:none;
                         <td class="width40 bottom">another</td>
                      </tr>
                      <tr>
-                        <td class="width20"><a class="pageref" href="#xd21e1172">4</a></td>
+                        <td class="width20"><a class="pageref" href="#xd21e1196">4</a></td>
                         <td class="width40 bottom">Vierde</td>
                         <td class="width40 bottom">Derde</td>
                      </tr>
@@ -2495,6 +2612,21 @@ display:none;
                                     <p id="xd21e299" class="line ">Et de leurs piés ailés ils devancent les vents.&#8221;</p>
                                  </div>
                               </div><span class="bibl" id="xd21e301">(<i id="xd21e303">Metamorphoses d'Ovide</i>).</span></span></td>
+                     </tr>
+                     <tr>
+                        <td><a class="pageref" href="#fj-en" id="fj-enext">4</a></td>
+                        <td>lg</td>
+                        <td>
+                           <div id="fj-en" lang="fr" class="lgouter xd21e1099">
+                              <h4>Brother John</h4>
+                              <p id="xd21e1102" class="line ">Are you sleeping, are you sleeping,</p>
+                              <p id="xd21e1104" class="line "><span class="linenum">2</span>Brother John? Brother John?
+                              </p>
+                              <p id="xd21e1106" class="line ">Morning bells are ringing! Morning bells are ringing!</p>
+                              <p id="xd21e1108" class="line xd21e986"><span class="linenum">4</span>Ding, dang, dong. Ding, dang, dong.
+                              </p>
+                           </div>
+                        </td>
                      </tr>
                   </table>
                   <h3 class="main">Dutch</h3>
@@ -2593,10 +2725,10 @@ display:none;
                         <td></td>
                      </tr>
                      <tr>
-                        <td><a class="pageref" href="#xd21e1151" id="xd21e1151ext">4</a></td>
+                        <td><a class="pageref" href="#xd21e1175" id="xd21e1175ext">4</a></td>
                         <td>list</td>
                         <td>
-                           <table class="tocList" id="xd21e1151" lang="nl">
+                           <table class="tocList" id="xd21e1175" lang="nl">
                               <tr>
                                  <td class="tocDivNum"></td>
                                  <td class="tocDivTitle" colspan="5">      Introductie   </td>
@@ -2614,7 +2746,7 @@ display:none;
                               </tr>
                               <tr>
                                  <td class="tocDivNum">III</td>
-                                 <td class="tocDivTitle" colspan="5">      <span class="corr" id="xd21e1172" title="Source: Vierde">Derde</span> Hoofdstuk   
+                                 <td class="tocDivTitle" colspan="5">      <span class="corr" id="xd21e1196" title="Source: Vierde">Derde</span> Hoofdstuk   
                                  </td>
                                  <td class="tocPageNum">35</td>
                               </tr>
@@ -2636,35 +2768,35 @@ display:none;
                         <td>div1</td>
                         <td>
                            <div id="index" lang="nl" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                                 <h2 id="xd21e1188" class="main">Index</h2>
-                                 <div class="transcribernote indextoc" id="xd21e1190"><a href="#xd21e1192">A</a> | <a href="#xd21e1197">B</a> | <a href="#xd21e1202">C</a> | <a href="#xd21e1207">D</a></div>
-                                 <div id="xd21e1191" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                                       <h3 id="xd21e1192" class="main">A.</h3>
+                                 <h2 id="xd21e1212" class="main">Index</h2>
+                                 <div class="transcribernote indextoc" id="xd21e1214"><a href="#xd21e1216">A</a> | <a href="#xd21e1221">B</a> | <a href="#xd21e1226">C</a> | <a href="#xd21e1231">D</a></div>
+                                 <div id="xd21e1215" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                                       <h3 id="xd21e1216" class="main">A.</h3>
                                     </div>
                                     <div class="divBody">
-                                       <p id="xd21e1194" class="first">A is een aapje.</p>
+                                       <p id="xd21e1218" class="first">A is een aapje.</p>
                                     </div>
                                  </div>
-                                 <div id="xd21e1196" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                                       <h3 id="xd21e1197" class="main">B.</h3>
+                                 <div id="xd21e1220" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                                       <h3 id="xd21e1221" class="main">B.</h3>
                                     </div>
                                     <div class="divBody">
-                                       <p id="xd21e1199" class="first">B is een Boom.</p>
+                                       <p id="xd21e1223" class="first">B is een Boom.</p>
                                     </div>
                                  </div>
-                                 <div id="xd21e1201" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                                       <h3 id="xd21e1202" class="main">C.</h3>
+                                 <div id="xd21e1225" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                                       <h3 id="xd21e1226" class="main">C.</h3>
                                     </div>
                                     <div class="divBody">
-                                       <p id="xd21e1204" class="first">C is een Cent.</p>
+                                       <p id="xd21e1228" class="first">C is een Cent.</p>
                                     </div>
                                  </div>
-                                 <div id="xd21e1206" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
-                                       <h3 id="xd21e1207" class="main">D.</h3>
+                                 <div id="xd21e1230" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
+                                       <h3 id="xd21e1231" class="main">D.</h3>
                                     </div>
                                     <div class="divBody">
-                                       <p id="xd21e1209" class="first">D is een Drommedaris.
-                                          <br id="xd21e1211"></br>en een Duizendpoot.
+                                       <p id="xd21e1233" class="first">D is een Drommedaris.
+                                          <br id="xd21e1235"></br>en een Duizendpoot.
                                        </p>
                                     </div>
                                  </div>
