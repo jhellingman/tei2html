@@ -762,6 +762,27 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <l n="8" rend="indent(10)">This is another rule of verse</l>
 </lg>
 
+<p>Two verses, aligned:</p>
+
+<lg id="fj-fr" type="Group" rend="align-with(fj-en) font(italic)">
+    <head>Fr&egrave;re Jacques</head>
+
+    <l n="1">Fr&egrave;re Jacques, fr&egrave;re Jacques,</l>
+    <l>Dormez-vous ? Dormez-vous ?</l>
+    <l>Sonnez les matines ! Sonnez les matines !</l>
+    <l n="4" rend="indent(2)">Ding, daing, dong. Ding, daing, dong.</l>
+</lg>
+
+<lg id="fj-en" lang="fr" type="Group" rend="display(none)">
+    <head>Brother John</head>
+
+    <l>Are you sleeping, are you sleeping,</l>
+    <l n="2">Brother John? Brother John?</l>
+    <l>Morning bells are ringing! Morning bells are ringing!</l>
+    <l n="4" rend="indent(2)">Ding, dang, dong. Ding, dang, dong.</l>
+</lg>
+
+
 </div1>
 <div1 id="alignFirst" rend="align-with(alignSecond)">
 <head>Text-Alignment Test</head>

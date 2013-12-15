@@ -420,6 +420,45 @@ span.sum
 }
 
 
+/* Special purpose tables: */
+
+table.intralinear
+{
+    display: inline;
+    border-collapse: collapse;
+}
+
+table.intralinear td
+{
+    font-size: small;
+    text-align: center;
+}
+
+table.ditto
+{
+    display: inline;
+    border-collapse: collapse;
+    vertical-align: bottom;
+}
+
+table.ditto tr.s
+{
+    height: 0;
+    color: white;
+    line-height: 0;
+}
+
+table.ditto tr.s td
+{
+    padding: 0px;
+}
+
+table.ditto tr.d td
+{
+    text-align: center;
+    line-height: 10pt;
+}
+
 /****** Poetry ******/
 
 .lgouter
@@ -958,7 +997,17 @@ text-indent:10em;
 font-style:italic;
 }
 
-.xd25e1106
+.xd25e1088
+{
+font-style:italic;
+}
+
+.xd25e1099
+{
+display:none;
+}
+
+.xd25e1130
 {
 display:none;
 }
