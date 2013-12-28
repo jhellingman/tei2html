@@ -37,7 +37,7 @@
 
 
 <xsl:template match="surface">
-    <xsl:message terminate="no">Warning: tei2html does not support the surface element.</xsl:message>
+    <xsl:message terminate="no">WARNING: tei2html does not support the surface element.</xsl:message>
     <xsl:apply-templates/>
 </xsl:template>
 
@@ -142,7 +142,7 @@
     <xsl:variable name="facsimile-css-file" select="concat(f:facsimile-path(), '/facsimile.css')"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
-        <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-css-file"/>.</xsl:message>
+        <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$facsimile-css-file"/>.</xsl:message>
             
             body
             {
@@ -162,7 +162,7 @@
     <xsl:variable name="facsimile-file" select="concat(f:facsimile-path(), concat('/', f:facsimile-filename(.)))"/>
 
     <xsl:result-document href="{$facsimile-file}">
-        <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>
+        <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>
         <xsl:call-template name="facsimile-html"/>
     </xsl:result-document>
 </xsl:template>

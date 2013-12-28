@@ -89,6 +89,7 @@ BEGIN
     $langNameHash{"jp-latn"}   = "Japanese (Latin transcription)";
     $langNameHash{"jv"}        = "Javanese";
     $langNameHash{"ka"}        = "Georgian";
+    $langNameHash{"ka-latn"}   = "Georgian (Latin transcription)";
     $langNameHash{"kk"}        = "Kazakh";
     $langNameHash{"kl"}        = "Greenlandic";
     $langNameHash{"km"}        = "Cambodian";

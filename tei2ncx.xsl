@@ -19,7 +19,7 @@
                 method="xml"
                 indent="yes"
                 encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
 
             <ncx version="2005-1">
                 <xsl:attribute name="xml:lang">

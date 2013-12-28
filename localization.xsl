@@ -44,18 +44,18 @@
             <xsl:choose>
                 <xsl:when test="$msg[lang($language)][1]">
                     <xsl:apply-templates select="$msg[lang($language)][1]"/>
-                    <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
+                    <!-- <xsl:message terminate="no">INFO:    message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
                 </xsl:when>
                 <xsl:when test="$msg[lang($baselanguage)][1]">
                     <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
-                    <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
+                    <!-- <xsl:message terminate="no">INFO:    message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
                 </xsl:when>
                 <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                    <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
+                    <xsl:message terminate="no">WARNING: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
                     <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:message terminate="no">Warning: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
+                    <xsl:message terminate="no">WARNING: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
                 </xsl:otherwise>
             </xsl:choose>
     </xsl:function> 
@@ -66,18 +66,18 @@
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]"/>
-                <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
+                <!-- <xsl:message terminate="no">INFO:    message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$language"/>.</xsl:message> -->
             </xsl:when>
             <xsl:when test="$msg[lang($baselanguage)][1]">
                 <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
-                <!-- <xsl:message terminate="no">Info: message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
+                <!-- <xsl:message terminate="no">INFO:    message '<xsl:value-of select="$name"/>' is '<xsl:value-of select="$msg[lang($baselanguage)][1]"/>' in locale <xsl:value-of select="$baselanguage"/>.</xsl:message> -->
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
+                <xsl:message terminate="no">WARNING: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
+                <xsl:message terminate="no">WARNING: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -98,13 +98,13 @@
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:message terminate="no">Warning: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
+                <xsl:message terminate="no">WARNING: message '<xsl:value-of select="$name"/>' not available in locale <xsl:value-of select="$language"/>, using <xsl:value-of select="$defaultlanguage"/> instead.</xsl:message>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage">
                     <xsl:with-param name="params" select="$params"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
+                <xsl:message terminate="no">WARNING: unknown message '<xsl:value-of select="$name"/>'.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -134,7 +134,7 @@
                 <xsl:value-of select="$params//*[@name=$name]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: no value specified for parameter '<xsl:value-of select="@name"/>'.</xsl:message>
+                <xsl:message terminate="no">WARNING: no value specified for parameter '<xsl:value-of select="@name"/>'.</xsl:message>
                 <xsl:text>[### </xsl:text><xsl:value-of select="@name"/><xsl:text> ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>

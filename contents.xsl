@@ -43,7 +43,7 @@
     </xd:doc>
 
     <xsl:template match="divGen">
-        <xsl:message terminate="no">Warning: divGen element without or with unknown type attribute: <xsl:value-of select="@type"/>.</xsl:message>
+        <xsl:message terminate="no">WARNING: divGen element without or with unknown type attribute: <xsl:value-of select="@type"/>.</xsl:message>
     </xsl:template>
 
 
@@ -135,7 +135,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="not(contains(@rend, 'toc(none)'))">
-                    <xsl:message terminate="no">Warning: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
+                    <xsl:message terminate="no">WARNING: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
@@ -575,7 +575,7 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
-            <xsl:message terminate="no">Info: Generating Index</xsl:message>
+            <xsl:message terminate="no">INFO:    Generating Index</xsl:message>
 
             <!-- Collect all index entries into a tree structure, and add the page numbers to them -->
             <xsl:variable name="index">
@@ -594,7 +594,7 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:text>###</xsl:text>
-                                        <xsl:message terminate="no">Warning: no valid page number found preceding index entry. (<xsl:value-of select="@level1"/>)</xsl:message>
+                                        <xsl:message terminate="no">WARNING: no valid page number found preceding index entry. (<xsl:value-of select="@level1"/>)</xsl:message>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>

@@ -133,7 +133,7 @@
     <xsl:template name="copy-xml-file">
         <xsl:param name="filename" as="xs:string"/>
 
-        <xsl:message terminate="no">Info: copying XML file: <xsl:value-of select="$filename"/> to <xsl:value-of select="$path"/>.</xsl:message>
+        <xsl:message terminate="no">INFO:    copying XML file: <xsl:value-of select="$filename"/> to <xsl:value-of select="$path"/>.</xsl:message>
 
         <xsl:result-document
                 doctype-public=""

@@ -235,7 +235,7 @@
 
         <!-- Does any of the nodes contains the node sought after? -->
         <xsl:for-each select="$nodes">
-            <!--<xsl:message terminate="no">Info: locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
+            <!--<xsl:message terminate="no">INFO:    locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
             <xsl:message terminate="no">Content: <xsl:value-of select="$node"/>.</xsl:message>-->
 
             <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
@@ -341,7 +341,7 @@
         </xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
             <html>
                 <xsl:call-template name="generate-html-header"/>
 
@@ -390,7 +390,7 @@
         <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
             <html>
                 <xsl:call-template name="generate-html-header"/>
 
@@ -484,7 +484,7 @@
             <xsl:otherwise>
                 <xsl:text>x</xsl:text>
                 <xsl:value-of select="generate-id($node)"/>
-                <xsl:message terminate="no">Warning: generated ID [x<xsl:value-of select="generate-id($node)"/>] is not stable between runs of XSLT.</xsl:message>
+                <xsl:message terminate="no">WARNING: generated ID [x<xsl:value-of select="generate-id($node)"/>] is not stable between runs of XSLT.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

@@ -128,7 +128,7 @@
                 href="{$path}/mimetype"
                 method="text" 
                 encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
     </xsl:template>
 
 
@@ -143,7 +143,7 @@
                 method="xml" 
                 indent="yes"
                 encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/META-INF/container.xml.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/META-INF/container.xml.</xsl:message>
 
             <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
                <rootfiles>
@@ -209,7 +209,7 @@
                 method="xml" 
                 encoding="UTF-8">
 
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
 
         </xsl:result-document>
     </xsl:template>
@@ -226,7 +226,7 @@
                 method="xml" 
                 encoding="UTF-8">
 
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/pagemap.xml.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/pagemap.xml.</xsl:message>
 
             <page-map xmlns="http://www.idpf.org/2007/opf">
                 <xsl:for-each select="//pb">
