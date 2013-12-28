@@ -31,10 +31,10 @@
   <xsl:variable name="today">
     <xsl:choose>
       <xsl:when test="function-available('edate:date-time')">
-	<xsl:value-of select="edate:date-time()"/>
+    <xsl:value-of select="edate:date-time()"/>
       </xsl:when>
       <xsl:when test="contains($processor,'SAXON')">
-	<xsl:value-of select="Date:toString(Date:new())" xmlns:Date="/java.util.Date"/>
+    <xsl:value-of select="Date:toString(Date:new())" xmlns:Date="/java.util.Date"/>
       </xsl:when>
       <xsl:otherwise>0000-00-00</xsl:otherwise>
     </xsl:choose>
@@ -46,14 +46,14 @@
   <xsl:template match="*">
     <xsl:choose>
       <xsl:when test="namespace-uri()=''">
-	<xsl:element namespace="http://www.tei-c.org/ns/1.0" name="{local-name(.)}">
-	  <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-	</xsl:element>
+    <xsl:element namespace="http://www.tei-c.org/ns/1.0" name="{local-name(.)}">
+      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+    </xsl:element>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:copy>
-	  <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-	</xsl:copy>
+    <xsl:copy>
+      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+    </xsl:copy>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -112,7 +112,7 @@
   <xsl:template match="figure[@url]">
     <figure xmlns="http://www.tei-c.org/ns/1.0">
       <graphic xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:copy-of select="@*"/>
+    <xsl:copy-of select="@*"/>
       </graphic>
       <xsl:apply-templates/>
     </figure>
@@ -126,7 +126,7 @@
   <xsl:template match="figure[@entity]">
     <figure xmlns="http://www.tei-c.org/ns/1.0">
       <graphic xmlns="http://www.tei-c.org/ns/1.0" url="{unparsed-entity-uri(@entity)}">
-	<xsl:apply-templates select="@*"/>
+    <xsl:apply-templates select="@*"/>
       </graphic>
       <xsl:apply-templates/>
     </figure>
@@ -163,9 +163,9 @@
   
   <xsl:template match="language">
     <xsl:element namespace="http://www.tei-c.org/ns/1.0" name="language">
-	<xsl:if test="@id">
+    <xsl:if test="@id">
         <xsl:attribute name="ident">
-         	<xsl:value-of select="@id"/>
+            <xsl:value-of select="@id"/>
         </xsl:attribute>
         </xsl:if>
       <xsl:apply-templates select="*|processing-instruction()|comment()|text()"/>
@@ -207,14 +207,14 @@
   <xsl:template match="@id">
     <xsl:choose>
       <xsl:when test="parent::lang">
-	<xsl:attribute name="ident">
-	  <xsl:value-of select="."/>
-	</xsl:attribute>
+    <xsl:attribute name="ident">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:attribute name="xml:id">
-	  <xsl:value-of select="."/>
-	</xsl:attribute>
+    <xsl:attribute name="xml:id">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -244,9 +244,9 @@
   <xsl:template match="@ana|@active|@adj|@adjFrom|@adjTo|@children|@children|@class|@code|@code|@copyOf|@corresp|@decls|@domains|@end|@exclude|@fVal|@feats|@follow|@from|@hand|@inst|@langKey|@location|@mergedin|@new|@next|@old|@origin|@otherLangs|@parent|@passive|@perf|@prev|@render|@resp|@sameAs|@scheme|@script|@select|@since|@start|@synch|@target|@targetEnd|@to|@to|@value|@value|@who|@wit">
     <xsl:attribute name="{name(.)}">
       <xsl:call-template name="splitter">
-	<xsl:with-param name="val">
-	  <xsl:value-of select="."/>
-	</xsl:with-param>
+    <xsl:with-param name="val">
+      <xsl:value-of select="."/>
+    </xsl:with-param>
       </xsl:call-template>
     </xsl:attribute>
   </xsl:template>
@@ -256,18 +256,18 @@
     <xsl:param name="val"/>
     <xsl:choose>
       <xsl:when test="contains($val,' ')">
-	<xsl:text>#</xsl:text>
-	<xsl:value-of select="substring-before($val,' ')"/>
-	<xsl:text> </xsl:text>
-	<xsl:call-template name="splitter">
-	  <xsl:with-param name="val">
-	    <xsl:value-of select="substring-after($val,' ')"/>
-	  </xsl:with-param>
-	</xsl:call-template>
+    <xsl:text>#</xsl:text>
+    <xsl:value-of select="substring-before($val,' ')"/>
+    <xsl:text> </xsl:text>
+    <xsl:call-template name="splitter">
+      <xsl:with-param name="val">
+        <xsl:value-of select="substring-after($val,' ')"/>
+      </xsl:with-param>
+    </xsl:call-template>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:text>#</xsl:text>
-	<xsl:value-of select="$val"/>
+    <xsl:text>#</xsl:text>
+    <xsl:value-of select="$val"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -295,33 +295,33 @@
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()"/>
       
       <xsl:if test="not(revisionDesc) and (@date.created or @date.updated)">
-	<revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
-	  <xsl:if test="@date.updated">
-	    <change xmlns="http://www.tei-c.org/ns/1.0">&gt;
-	    <label>updated</label>
-	    <date xmlns="http://www.tei-c.org/ns/1.0">
-	      <xsl:value-of select="@date.updated"/>
-	    </date>
-	    <label xmlns="http://www.tei-c.org/ns/1.0">Date edited</label>
-	    </change>
-	  </xsl:if>
-	  <xsl:if test="@date.created">
-	    <change xmlns="http://www.tei-c.org/ns/1.0">
-	      <label>created</label>
-	      <date xmlns="http://www.tei-c.org/ns/1.0">
-		<xsl:value-of select="@date.created"/>
-	      </date>
-	      <label xmlns="http://www.tei-c.org/ns/1.0">Date created</label>
-	    </change>
-	  </xsl:if>
-	</revisionDesc>
+    <revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
+      <xsl:if test="@date.updated">
+        <change xmlns="http://www.tei-c.org/ns/1.0">&gt;
+        <label>updated</label>
+        <date xmlns="http://www.tei-c.org/ns/1.0">
+          <xsl:value-of select="@date.updated"/>
+        </date>
+        <label xmlns="http://www.tei-c.org/ns/1.0">Date edited</label>
+        </change>
+      </xsl:if>
+      <xsl:if test="@date.created">
+        <change xmlns="http://www.tei-c.org/ns/1.0">
+          <label>created</label>
+          <date xmlns="http://www.tei-c.org/ns/1.0">
+        <xsl:value-of select="@date.created"/>
+          </date>
+          <label xmlns="http://www.tei-c.org/ns/1.0">Date created</label>
+        </change>
+      </xsl:if>
+    </revisionDesc>
       </xsl:if>
       <!--
-	  <change when="{$today}"  xmlns="http://www.tei-c.org/ns/1.0">Converted to TEI P5 XML by p4top5.xsl
-	  written by Sebastian
-	  Rahtz at Oxford University Computing Services.</change>
-	  </revisionDesc>
-	  </xsl:if>
+      <change when="{$today}"  xmlns="http://www.tei-c.org/ns/1.0">Converted to TEI P5 XML by p4top5.xsl
+      written by Sebastian
+      Rahtz at Oxford University Computing Services.</change>
+      </revisionDesc>
+      </xsl:if>
       -->
     </teiHeader>
   </xsl:template>
@@ -336,9 +336,9 @@
     <publicationStmt xmlns="http://www.tei-c.org/ns/1.0">
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()"/>
       <!--
-	  <availability xmlns="http://www.tei-c.org/ns/1.0">
-	  <p xmlns="http://www.tei-c.org/ns/1.0">Licensed under <ptr xmlns="http://www.tei-c.org/ns/1.0" target="http://creativecommons.org/licenses/by-sa/2.0/uk/"/></p>
-	  </availability>
+      <availability xmlns="http://www.tei-c.org/ns/1.0">
+      <p xmlns="http://www.tei-c.org/ns/1.0">Licensed under <ptr xmlns="http://www.tei-c.org/ns/1.0" target="http://creativecommons.org/licenses/by-sa/2.0/uk/"/></p>
+      </availability>
       -->
     </publicationStmt>
   </xsl:template>
@@ -354,9 +354,9 @@
   <xsl:template match="tagsDecl">
     <xsl:if test="*">
       <tagsDecl xmlns="http://www.tei-c.org/ns/1.0">
-	<namespace name="http://www.tei-c.org/ns/1.0">
-	  <xsl:apply-templates select="*|comment()|processing-instruction"/>
-	</namespace>
+    <namespace name="http://www.tei-c.org/ns/1.0">
+      <xsl:apply-templates select="*|comment()|processing-instruction"/>
+    </namespace>
       </tagsDecl>
     </xsl:if>
   </xsl:template>
@@ -373,10 +373,10 @@
   <xsl:template match="corr[@sic]">
     <choice xmlns="http://www.tei-c.org/ns/1.0">
       <corr xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="text()"/>
+    <xsl:value-of select="text()"/>
       </corr>
       <sic xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="@sic"/>
+    <xsl:value-of select="@sic"/>
       </sic>
     </choice>
   </xsl:template>
@@ -384,10 +384,10 @@
   <xsl:template match="sic[@corr]">
     <choice xmlns="http://www.tei-c.org/ns/1.0">
       <sic xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="text()"/>
+    <xsl:value-of select="text()"/>
       </sic>
       <corr xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="@corr"/>
+    <xsl:value-of select="@corr"/>
       </corr>
     </choice>
   </xsl:template>
@@ -395,10 +395,10 @@
   <xsl:template match="abbr[@expan]">
     <choice xmlns="http://www.tei-c.org/ns/1.0">
       <abbr xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="text()"/>
+    <xsl:value-of select="text()"/>
       </abbr>
       <expan xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="@expan"/>
+    <xsl:value-of select="@expan"/>
       </expan>
     </choice>
   </xsl:template>
@@ -406,10 +406,10 @@
   <xsl:template match="expan[@abbr]">
     <choice xmlns="http://www.tei-c.org/ns/1.0">
       <expan xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="text()"/>
+    <xsl:value-of select="text()"/>
       </expan>
       <abbr xmlns="http://www.tei-c.org/ns/1.0">
-	<xsl:value-of select="@abbr"/>
+    <xsl:value-of select="@abbr"/>
       </abbr>
     </choice>
   </xsl:template>
@@ -421,18 +421,18 @@
       <xsl:apply-templates select="date"/>
       
       <xsl:if test="respStmt/resp">
-	<label>
-	  <xsl:value-of select="respStmt/resp/text()"/>
-	</label>
+    <label>
+      <xsl:value-of select="respStmt/resp/text()"/>
+    </label>
       </xsl:if>
-	<xsl:for-each select="respStmt/name">
-	  <name xmlns="http://www.tei-c.org/ns/1.0">
-	    <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
-	  </name>
-	</xsl:for-each>
-	<xsl:for-each select="item">
-	  <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
-	</xsl:for-each>
+    <xsl:for-each select="respStmt/name">
+      <name xmlns="http://www.tei-c.org/ns/1.0">
+        <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
+      </name>
+    </xsl:for-each>
+    <xsl:for-each select="item">
+      <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
+    </xsl:for-each>
     </change>
   </xsl:template>
 
@@ -440,21 +440,21 @@
   <xsl:template match="respStmt[resp]">
     <respStmt xmlns="http://www.tei-c.org/ns/1.0">
       <xsl:choose>
-	<xsl:when test="resp/name">
-	  <resp xmlns="http://www.tei-c.org/ns/1.0">
-	    <xsl:value-of select="resp/text()"/>
-	  </resp>
-	    <xsl:for-each select="resp/name">
-	      <name xmlns="http://www.tei-c.org/ns/1.0">
-		<xsl:apply-templates/>
-	      </name>
-	    </xsl:for-each>
-	</xsl:when>
-	<xsl:otherwise>
-	  <xsl:apply-templates/>
-	  <name xmlns="http://www.tei-c.org/ns/1.0">
-	  </name>
-	</xsl:otherwise>
+    <xsl:when test="resp/name">
+      <resp xmlns="http://www.tei-c.org/ns/1.0">
+        <xsl:value-of select="resp/text()"/>
+      </resp>
+        <xsl:for-each select="resp/name">
+          <name xmlns="http://www.tei-c.org/ns/1.0">
+        <xsl:apply-templates/>
+          </name>
+        </xsl:for-each>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:apply-templates/>
+      <name xmlns="http://www.tei-c.org/ns/1.0">
+      </name>
+    </xsl:otherwise>
       </xsl:choose>
     </respStmt>
   </xsl:template>
@@ -475,7 +475,7 @@
   <xsl:template match="@targOrder">
     <xsl:if test="not(translate(.,$uc,$lc) ='u')">
       <xsl:attribute name="targOrder">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -484,7 +484,7 @@
   <xsl:template match="@opt">
     <xsl:if test="not(translate(.,$uc,$lc) ='n')">
       <xsl:attribute name="opt">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -493,7 +493,7 @@
   <xsl:template match="@to">
     <xsl:if test="not(translate(.,$uc,$lc) ='ditto')">
       <xsl:attribute name="to">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -503,9 +503,9 @@
     <xsl:choose>
       <xsl:when test="translate(.,$uc,$lc)= 'no'"/>
       <xsl:otherwise>
-	<xsl:attribute name="default">
-	  <xsl:value-of select="."/>
-	</xsl:attribute>
+    <xsl:attribute name="default">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -514,7 +514,7 @@
   <xsl:template match="@part">
     <xsl:if test="not(translate(.,$uc,$lc) ='n')">
       <xsl:attribute name="part">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -523,7 +523,7 @@
   <xsl:template match="@full">
     <xsl:if test="not(translate(.,$uc,$lc) ='yes')">
       <xsl:attribute name="full">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -532,7 +532,7 @@
   <xsl:template match="@from">
     <xsl:if test="not(translate(.,$uc,$lc) ='root')">
       <xsl:attribute name="from">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -541,23 +541,23 @@
   <xsl:template match="@status">
     <xsl:choose>
       <xsl:when test="parent::teiHeader">
-	<xsl:if test="not(translate(.,$uc,$lc) ='new')">
-	  <xsl:attribute name="status">
-	    <xsl:value-of select="."/>
-	  </xsl:attribute>
-	</xsl:if>
+    <xsl:if test="not(translate(.,$uc,$lc) ='new')">
+      <xsl:attribute name="status">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
       </xsl:when>
       <xsl:when test="parent::del">
-	<xsl:if test="not(translate(.,$uc,$lc) ='unremarkable')">
-	  <xsl:attribute name="status">
-	    <xsl:value-of select="."/>
-	  </xsl:attribute>
-	</xsl:if>
+    <xsl:if test="not(translate(.,$uc,$lc) ='unremarkable')">
+      <xsl:attribute name="status">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:attribute name="status">
-	  <xsl:value-of select="."/>
-	</xsl:attribute>
+    <xsl:attribute name="status">
+      <xsl:value-of select="."/>
+    </xsl:attribute>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -566,7 +566,7 @@
   <xsl:template match="@place">
     <xsl:if test="not(translate(.,$uc,$lc) ='unspecified')">
       <xsl:attribute name="place">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -575,7 +575,7 @@
   <xsl:template match="@sample">
     <xsl:if test="not(translate(.,$uc,$lc) ='complete')">
       <xsl:attribute name="sample">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -584,7 +584,7 @@
   <xsl:template match="@org">
     <xsl:if test="not(translate(.,$uc,$lc) ='uniform')">
       <xsl:attribute name="org">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -592,7 +592,7 @@
   <xsl:template match="teiHeader/@type">
     <xsl:if test="not(translate(.,$uc,$lc) ='text')">
       <xsl:attribute name="type">
-	<xsl:value-of select="."/>
+    <xsl:value-of select="."/>
       </xsl:attribute>
     </xsl:if>
   </xsl:template>
@@ -602,8 +602,8 @@
   <xsl:template match="@anchored">
     <xsl:attribute name="anchored">
       <xsl:choose>
-	<xsl:when test="translate(.,$uc,$lc)='yes'">true</xsl:when>
-	<xsl:when test="translate(.,$uc,$lc)='no'">false</xsl:when>
+    <xsl:when test="translate(.,$uc,$lc)='yes'">true</xsl:when>
+    <xsl:when test="translate(.,$uc,$lc)='no'">false</xsl:when>
       </xsl:choose>
     </xsl:attribute>
   </xsl:template>
@@ -613,8 +613,8 @@
   <xsl:template match="@tei">
     <xsl:attribute name="tei">
       <xsl:choose>
-	<xsl:when test="translate(.,$uc,$lc)='yes'">true</xsl:when>
-	<xsl:when test="translate(.,$uc,$lc)='no'">false</xsl:when>
+    <xsl:when test="translate(.,$uc,$lc)='yes'">true</xsl:when>
+    <xsl:when test="translate(.,$uc,$lc)='no'">false</xsl:when>
       </xsl:choose>
     </xsl:attribute>
   </xsl:template>
@@ -638,11 +638,11 @@
     <xsl:variable name="divName">
     <xsl:choose>
       <xsl:when test="ancestor::div0">
-	<xsl:text>div</xsl:text>
-	<xsl:value-of select="number(substring-after(local-name(.),'div')) + 1"/>
+    <xsl:text>div</xsl:text>
+    <xsl:value-of select="number(substring-after(local-name(.),'div')) + 1"/>
       </xsl:when>
       <xsl:otherwise>
-	<xsl:value-of select="local-name()"/>
+    <xsl:value-of select="local-name()"/>
       </xsl:otherwise>
     </xsl:choose>
     </xsl:variable>

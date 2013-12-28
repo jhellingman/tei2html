@@ -44,7 +44,7 @@
                 method="xml"
                 indent="yes"
                 encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
             <package>
                 <xsl:attribute name="version">
@@ -72,7 +72,7 @@
 
             <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
-                <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
+                <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
                 <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
             </xsl:if>
         </metadata>
@@ -118,7 +118,7 @@
                 </dc:identifier>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: ePub needs a unique id.</xsl:message>
+                <xsl:message terminate="no">WARNING: ePub needs a unique id.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
@@ -156,7 +156,7 @@
                 <meta name="cover" content="titlepage-image"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: no suitable cover or title-page image found.</xsl:message>
+                <xsl:message terminate="no">WARNING: no suitable cover or title-page image found.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -222,7 +222,7 @@
 
             <xsl:otherwise>
                 <xsl:text>oth</xsl:text>
-                <xsl:message terminate="no">Warning: unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
+                <xsl:message terminate="no">WARNING: unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -387,7 +387,7 @@
 
                 <!-- Include custom items in the manifest -->
                 <xsl:if test="$opfManifestFile">
-                    <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                    <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
                     <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
                 </xsl:if>
             </xsl:variable>
@@ -457,7 +457,7 @@
         </item>
 
         <!-- Handle the .smil file itself for further entries -->
-        <xsl:message terminate="no">Info: Reading from "<xsl:value-of select="$filename"/>".</xsl:message>
+        <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$filename"/>".</xsl:message>
         <xsl:apply-templates mode="manifest-smil" select="document($filename, .)"/>
     </xsl:template>
 
@@ -467,7 +467,7 @@
         <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
 
         <!--
-        <xsl:message terminate="no">Info: adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
+        <xsl:message terminate="no">INFO:    adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
         -->
 
         <item>
@@ -496,7 +496,7 @@
         <xsl:variable name="fragmentid"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
 
         <xsl:if test="not($teiFile//*[@id=$fragmentid])">
-            <xsl:message terminate="no">Warning: fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
+            <xsl:message terminate="no">WARNING: fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
         </xsl:if>
     </xsl:template>
 
@@ -510,7 +510,7 @@
                 <xsl:value-of select="number(regex-group(1)) * 3600 + number(regex-group(2)) * 60 + number(regex-group(3))"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:message terminate="no">Warning: time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
+                <xsl:message terminate="no">WARNING: time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
                 <xsl:text>0</xsl:text>
             </xsl:non-matching-substring>
         </xsl:analyze-string>

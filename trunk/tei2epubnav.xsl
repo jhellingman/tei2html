@@ -14,7 +14,7 @@
                 method="xml"
                 indent="yes"
                 encoding="UTF-8">
-            <xsl:message terminate="no">Info: generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>-nav.xhtml.</xsl:message>
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>-nav.xhtml.</xsl:message>
 
             <html>
                 <xsl:attribute name="xml:lang">

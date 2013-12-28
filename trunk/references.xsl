@@ -46,7 +46,7 @@
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">
-                <xsl:message terminate="no">Warning: target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
+                <xsl:message terminate="no">WARNING: target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
                 <xsl:apply-templates/>
             </xsl:when>
             
@@ -334,7 +334,7 @@
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:message terminate="no">Warning: URL '<xsl:value-of select="$url"/>' not understood.</xsl:message>
+                <xsl:message terminate="no">WARNING: URL '<xsl:value-of select="$url"/>' not understood.</xsl:message>
                 <xsl:value-of select="$url"/>
             </xsl:otherwise>
         </xsl:choose>

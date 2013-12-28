@@ -131,6 +131,10 @@
 
     <xsl:template mode="checks" match="front | body | back">
 
+        <xsl:if test="not(name() = 'body')">
+            <xsl:call-template name="check-id-present"/>
+        </xsl:if>
+
         <xsl:call-template name="sequence-in-order">
             <xsl:with-param name="nodes" select="div1"/>
         </xsl:call-template>
@@ -165,6 +169,7 @@
 
     <xsl:template mode="checks" match="body/div0">
         <xsl:call-template name="check-div-type-present"/>
+        <xsl:call-template name="check-id-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv0Types)">
             <i:issue pos="{@pos}" code="C0001">Unexpected type for div0: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
@@ -208,8 +213,15 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="check-id-present">
+        <xsl:if test="not(@id)">
+            <i:issue pos="{@pos}" code="C0011">No id specified for <xsl:value-of select="name()"/></i:issue>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template mode="checks" match="div1">
         <xsl:call-template name="check-div-type-present"/>
+        <xsl:call-template name="check-id-present"/>
 
         <xsl:call-template name="sequence-in-order">
             <xsl:with-param name="nodes" select="div2"/>
