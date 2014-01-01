@@ -1938,6 +1938,9 @@ BEGIN
     $ent{"handptr"}     = chr(0x261E);          # White right pointing index
     $ent{"diamond"}     = chr(0x25C6);          # Black diamond
 
+    $ent{"Sun"}			= chr(0x2609);          # Symbol for Sun.
+
+
     # Greek additions
     $ent{"amacgr"}      =  chr(0x1FB1);     # Greek alpha with macron
     $ent{"Amacgr"}      =  chr(0x1FB9);     # Greek Alpha with macron
