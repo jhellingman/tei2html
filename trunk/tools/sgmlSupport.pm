@@ -1604,6 +1604,8 @@ BEGIN
     $ent{"ttilde"}      = "t" . chr(0x0303); # t with tilde
     $ent{"Wtilde"}      = "W" . chr(0x0303); # W with tilde
     $ent{"wtilde"}      = "w" . chr(0x0303); # w with tilde
+    $ent{"Xtilde"}      = "X" . chr(0x0303); # X with tilde
+    $ent{"xtilde"}      = "x" . chr(0x0303); # x with tilde
     $ent{"longstilde"}  = chr(0x017F) . chr(0x0303); # long s with tilde
 
     $ent{"Pstroke"}     = chr(0xA750); # P with stroke through descender

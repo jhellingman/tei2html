@@ -7,6 +7,9 @@
 use strict;
 use warnings;
 
+binmode(STDOUT, ":utf8");
+use open ':utf8';
+
 use File::Basename;
 use File::Temp;
 use Cwd;
@@ -14,7 +17,17 @@ use XML::XPath;
 
 use Date::Format;
 
+my $reportFile = "pgreport.txt";
 
+open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
+
+my %excluded = 
+	(
+		"AlberunisIndia", 1,
+		"TEI-template-NL", 1,
+		"TEI-template-EN", 1,
+		"1917-Inhoud", 1
+	);
 
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
 
@@ -92,6 +105,9 @@ sub handleTeiFile($)
     my $baseName    = $1;
     my $version     = $3;
 
+    logError("---------------------");
+    logError("File:       $fileName$suffix");
+
     logMessage("---------------------");
     logMessage("File:       $fileName$suffix");
     logMessage("Version:    $version");
@@ -105,31 +121,40 @@ sub handleTeiFile($)
     }
 
 	my $xmlFileName = $filePath . "$baseName.xml";
-    if (-e $xmlFileName)
-    {
-        # logMessage("XML File:   $xmlFileName");
-		my $xpath = XML::XPath->new(filename => $xmlFileName);
 
-		my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
-		my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
-		my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
-		my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
+	if (defined ($version) && $version > 0.0 && !$excluded{$baseName} == 1)
+	{
+		if (!-e $xmlFileName || -M $xmlFileName > 1)
+		{
+			my $cwd = getcwd;
+			chdir ($filePath);
+			system ("perl -S tei2html.pl -x -f $fileName$suffix");
+			chdir ($cwd);
+		}
 
-		logMessage("Title:      $title");
-		logMessage("Authors:    " . $authors);
-		# for my $author ($authors->get_nodelist()) 
-		# {
-		# 	logMessage("Author:     " . $author->getNodeValue());
-		# }
+		if (-e $xmlFileName)
+		{
+			# logMessage("XML File:   $xmlFileName");
+			my $xpath = XML::XPath->new(filename => $xmlFileName);
 
-		logMessage("PG Number:  $pgNum");
-		logMessage("Posted:     $postedDate");
-    }
+			my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
+			my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
+			my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
+			my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
+			my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
 
-    # my $cwd = getcwd;
-    # chdir ($filePath);
-    # system ("perl -S tei2html.pl -x $fileName$suffix");
-    # chdir ($cwd);
+			logMessage("Title:      $title");
+			# logMessage("Authors:    " . $authors);
+			for my $author ($authors->get_nodelist()) 
+			{
+				logMessage("Author:     " . $author->string_value());
+			}
+
+			logMessage("ePub ID:    $epubId");
+			logMessage("PG Number:  $pgNum");
+			logMessage("Posted:     $postedDate");
+		}
+	}
 }
 
 sub logError($)
@@ -142,7 +167,7 @@ sub logError($)
 sub logMessage($)
 {
     my $logMessage = shift;
-    print "$logMessage\n";
+    print REPORTFILE "$logMessage\n";
 }
 
 sub formatBytes($)

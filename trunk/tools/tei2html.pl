@@ -36,6 +36,7 @@ my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
+my $force				= 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 my $configurationFile   = "tei2html.config";
@@ -51,6 +52,7 @@ GetOptions(
     'x' => \$makeXML,
     'v' => \$runChecks,
     'u' => \$useUnicode,
+	'f' => \$force,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
@@ -130,7 +132,7 @@ sub processFile($)
     }
 
     my $xmlfilename = "$basename-normalized.xml";
-    if (!isNewer($xmlfilename, $basename . ".xml"))
+    if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml"))
     {
         print "Add col and row attributes to tables...\n";
         system ("$saxon2 $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
@@ -189,7 +191,7 @@ sub processFile($)
 
     if ($makeHTML == 1)
     {
-        if (isNewer($basename . ".html", $basename . ".xml"))
+        if ($force == 0 && isNewer($basename . ".html", $basename . ".xml"))
         {
             print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
         }
@@ -363,7 +365,7 @@ sub sgml2xml($$)
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
-    if (isNewer($xmlFile, $sgmlFile))
+    if ($force == 0 && isNewer($xmlFile, $sgmlFile))
     {
         print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
         return;
