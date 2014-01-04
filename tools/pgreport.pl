@@ -1,56 +1,45 @@
 #!/usr/bin/perl -w
 
 #
-# Report / process on the Project Gutenberg files.
+# Report / process a directory of .TEI files (old-fashioned SGML format)
 #
 
 use strict;
 use warnings;
 
+use Cwd;
+use Date::Format;
+use File::Basename;
+use File::stat;
+use File::Temp;
+use Getopt::Long;
+use XML::XPath;
+
 binmode(STDOUT, ":utf8");
 use open ':utf8';
 
-use File::Basename;
-use File::Temp;
-use Cwd;
-use XML::XPath;
+my $force = 0;  # force generation of XML files, even if up-to-date.
 
-use Date::Format;
+GetOptions(
+    'f' => \$force);
 
 my $reportFile = "pgreport.txt";
 
 open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
 
-my %excluded = 
-	(
-		"AlberunisIndia", 1,
-		"TEI-template-NL", 1,
-		"TEI-template-EN", 1,
-		"1917-Inhoud", 1
-	);
+my %excluded =
+    (
+        "TEI-template-NL", 1,
+        "TEI-template-EN", 1
+    );
 
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
 
-my $errorCount = 0;
-my $totalOriginalSize = 0;
-my $totalResultSize = 0;
-my $archivesConverted = 0;
-
-my $outputPath = "project-gutenberg-report.txt";
-my $logFile = "project-gutenberg-report.log";
-
-sub main();
-
-main();
-
-sub main()
-{
-    ## initial call ... $ARGV[0] is the first command line argument
-    listRecursively($ARGV[0]);
-}
-
+my $directory = $ARGV[0];
 
 sub listRecursively($);
+
+listRecursively($directory);
 
 sub listRecursively($)
 {
@@ -92,12 +81,13 @@ sub handleFile($)
     }
 }
 
+
 sub handleTeiFile($)
 {
     my $fullName = shift;
 
     my $fileSize = -s $fullName;
-    my $fileDate = time2str("%Y-%m-%d", (stat $fullName)[9]);
+    my $fileDate = time2str("%Y-%m-%d", stat($fullName)->mtime);
 
     my ($fileName, $filePath, $suffix) = fileparse($fullName, '.tei');
 
@@ -105,70 +95,101 @@ sub handleTeiFile($)
     my $baseName    = $1;
     my $version     = $3;
 
-    logError("---------------------");
-    logError("File:       $fileName$suffix");
+    print STDERR "---------------------\n";
+    print STDERR "$fullName\n";
 
     logMessage("---------------------");
     logMessage("File:       $fileName$suffix");
-    logMessage("Version:    $version");
+    if (defined ($version))
+    {
+        logMessage("Version:    $version");
+    }
     logMessage("Size:       " . formatBytes($fileSize));
     logMessage("Date:       $fileDate");
     logMessage("Path:       $filePath");
 
-    if (-e $filePath . "/metadata.xml") 
+    my $xmlFileName = $filePath . "$baseName.xml";
+
+    if (!$excluded{$baseName} == 1)
     {
-        # logMessage("METADATA");
+        if ($force != 0 || !-e $xmlFileName || isNewer($fullName, $xmlFileName) || -M $xmlFileName > 30)
+        {
+            my $cwd = getcwd;
+            chdir ($filePath);
+            system ("perl -S tei2html.pl -x -f $fileName$suffix");
+            chdir ($cwd);
+        }
+
+        if (-e $xmlFileName)
+        {
+            # Use eval, so we can recover from fatal parse errors in XML:XPath.
+            eval
+            {
+                my $xpath = XML::XPath->new(filename => $xmlFileName);
+
+                my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
+                my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
+                my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
+                my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
+                my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
+                my $language = $xpath->find('/TEI.2/@lang');
+
+                logMessage("Title:      $title");
+                for my $author ($authors->get_nodelist())
+                {
+                    logMessage("Author:     " . $author->string_value());
+                }
+                logMessage("Language:   $language");
+                logMessage("ePub ID:    $epubId");
+                logMessage("PG Number:  $pgNum");
+                logMessage("Posted:     $postedDate");
+
+                # Find out whether we have a cover image:
+                my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();
+                if ($coverImage ne "")
+                {
+                    my $coverImageFile = "cover.jpg";
+                    my $coverImageRend = $xpath->find('//figure[@id="cover-image"]/@rend')->string_value();
+                    if ($coverImageRend =~ /image\((.*?)\)/)
+                    {
+                        $coverImageFile = $1;
+                    }
+                    logMessage("Cover:      $coverImageFile");
+                }
+
+                1;
+            }
+            or do
+            {
+                logError("Problem parsing $xmlFileName");
+            };
+        }
     }
-
-	my $xmlFileName = $filePath . "$baseName.xml";
-
-	if (defined ($version) && $version > 0.0 && !$excluded{$baseName} == 1)
-	{
-		if (!-e $xmlFileName || -M $xmlFileName > 1)
-		{
-			my $cwd = getcwd;
-			chdir ($filePath);
-			system ("perl -S tei2html.pl -x -f $fileName$suffix");
-			chdir ($cwd);
-		}
-
-		if (-e $xmlFileName)
-		{
-			# logMessage("XML File:   $xmlFileName");
-			my $xpath = XML::XPath->new(filename => $xmlFileName);
-
-			my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
-			my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
-			my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
-			my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
-			my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
-
-			logMessage("Title:      $title");
-			# logMessage("Authors:    " . $authors);
-			for my $author ($authors->get_nodelist()) 
-			{
-				logMessage("Author:     " . $author->string_value());
-			}
-
-			logMessage("ePub ID:    $epubId");
-			logMessage("PG Number:  $pgNum");
-			logMessage("Posted:     $postedDate");
-		}
-	}
 }
+
+
+#
+# Write HTML entry.
+#
+sub writeHtmlEntry()
+{
+
+}
+
 
 sub logError($)
 {
-    my $logMessage = shift;
-    $errorCount++;
-    print STDERR "ERROR: $logMessage\n";
+    my $message = shift;
+    print STDERR "ERROR: $message\n";
 }
+
 
 sub logMessage($)
 {
-    my $logMessage = shift;
-    print REPORTFILE "$logMessage\n";
+    my $message = shift;
+    print REPORTFILE "$message\n";
 }
+
 
 sub formatBytes($)
 {
@@ -181,4 +202,16 @@ sub formatBytes($)
     ($num > $mb) ? return sprintf("%d MB", $num / $mb) :
     ($num > $kb) ? return sprintf("%d KB", $num / $kb) :
     return $num . ' B';
+}
+
+
+#
+# isNewer -- determine whether the first file exists and is newer than the second file
+#
+sub isNewer($$)
+{
+    my $file1 = shift;
+    my $file2 = shift;
+
+    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
 }

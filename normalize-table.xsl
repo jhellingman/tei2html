@@ -128,7 +128,7 @@
 
     <!-- Warn for potential data-loss if table is not well-formed -->
     <xsl:if test="count($normalizedCells/cell) &lt; count($currentRow/cell) + count($previousRow/cell[@rows &gt; 1])">
-        <xsl:message terminate="no">WARNING: table '<xsl:value-of select="$currentRow/../@id"/>' not rectangular; extra cells will be lost in row <xsl:value-of select="count($currentRow/preceding-sibling::row) + 1"/>!</xsl:message>
+        <xsl:message terminate="no">WARNING: table '<xsl:value-of select="$currentRow/../@id"/>' not rectangular at row <xsl:value-of select="count($currentRow/preceding-sibling::row) + 1"/>. Extra cells will be lost!</xsl:message>
     </xsl:if>
 
     <xsl:variable name="newRow" as="element(row)">
