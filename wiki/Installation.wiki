@@ -27,11 +27,21 @@ If you are using the provided Perl scripts to glue things together,
 you'll need a Perl interpreter, and it will have to work together with the !PerlMagick extension. To make
 this work, you'll need to install matching versions of both.
 
+=== Perl 5.10 ===
+
 My advise is to download [http://www.activestate.com/activeperl/ ActivePerl]. For Windows, use [http://downloads.activestate.com/ActivePerl/Windows/5.10/ActivePerl-5.10.0.1004-MSWin32-x86-287188.msi Perl 5.10, build 1004.] (Also on Vista x64, as the x64 version of Perl is not yet compatible with !ImageMagick.)
 
 After installing Perl, install [http://www.imagemagick.org/script/index.php ImageMagick]. On Windows, use [http://www.imagemagick.org/download/binaries/ImageMagick-6.5.0-5-Q16-windows-dll.exe ImageMagick 6.5.0], 16 bits dynamically linked version. Don't forget to check !PerlMagick installation during the set-up.
 
+=== Perl 5.14 ===
+
 PS. Also works with Perl 5.14.2.1402 and !ImageMagick-6.7.7-5-Q16-windows-dll, and got it to work after moving the !ImageMagick dlls to a location on the path.
+
+=== Perl 5.18 ===
+
+
+=== Packages used ===
+
 
 
 == SX, NSGML ==
