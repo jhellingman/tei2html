@@ -104,19 +104,25 @@ sub handleTeiFile($)
     {
         logMessage("Version:    $version");
     }
-    logMessage("Size:       " . formatBytes($fileSize));
+    logMessage("File Size:  " . formatBytes($fileSize));
     logMessage("Date:       $fileDate");
     logMessage("Path:       $filePath");
 
+    my $processScript = $filePath . "process.pl";
+    if (-e $processScript)
+    {
+        logMessage("Note:       process.pl present; file may require special processing.");
+    }
+
     my $xmlFileName = $filePath . "$baseName.xml";
 
-    if (!$excluded{$baseName} == 1)
+    if (!$excluded{$baseName} == 1 && defined($version))
     {
-        if ($force != 0 || !-e $xmlFileName || isNewer($fullName, $xmlFileName) || -M $xmlFileName > 30)
+        if ($force != 0 || !-e $xmlFileName || isNewer($fullName, $xmlFileName))
         {
             my $cwd = getcwd;
             chdir ($filePath);
-            system ("perl -S tei2html.pl -x -f $fileName$suffix");
+            system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
             chdir ($cwd);
         }
 
@@ -161,8 +167,29 @@ sub handleTeiFile($)
             }
             or do
             {
+                logMessage("Note:       Problem parsing $xmlFileName.");
                 logError("Problem parsing $xmlFileName");
             };
+        }
+
+        # words-file
+        my $wordsFileName = $filePath . "$baseName-words.html";
+        if (-e $wordsFileName)
+        {
+            if (open(WORDSFILE, "<:encoding(iso-8859-1)", $wordsFileName))
+            {
+                while (<WORDSFILE>)
+                {
+                    my $line =  $_;
+                    if ($line =~ /<td id=textWordCount>([0-9]+)/)
+                    {
+                        my $wordCount = $1;
+                        logMessage("Words:      $wordCount");
+                        last;
+                    }
+                }
+                close WORDSFILE;
+            }
         }
     }
 }

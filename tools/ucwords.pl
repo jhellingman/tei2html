@@ -1206,7 +1206,7 @@ sub reportStatistics
     print "\n<h2>Overall Statistics</h2>";
     print "\n<table>";
     print "\n<tr><th>Items                  <th>Overall             <th>TEI Header          <th>Text                <th>Notes";
-    print "\n<tr><td>Number of words:           <td>$wordCount          <td>$headerWordCount    <td>$textWordCount      <td>$langCount languages";
+    print "\n<tr><td>Number of words:           <td>$wordCount          <td>$headerWordCount    <td id=textWordCount>$textWordCount      <td id=langCount>$langCount languages";
     print "\n<tr><td>Number of non-words:       <td>$nonWordCount       <td>$headerNonWordCount <td>$textNonWordCount   <td>";
     print "\n<tr><td>Number of numbers:     <td>$numberCount        <td>$headerNumberCount  <td>$textNumberCount    <td>";
     print "\n<tr><td>Number of characters:  <td>$charCount          <td>$headerCharCount    <td>$textCharCount      <td>excluding characters in tags, SGML headers, or SGML comments, includes header information";

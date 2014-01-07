@@ -38,6 +38,9 @@
                 <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
+                <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
+                    <dc:identifier>pg:<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/></dc:identifier>
+                </xsl:if>
             </rdf:Description>
         </rdf:RDF>
     </xsl:template>
