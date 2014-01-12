@@ -1499,6 +1499,10 @@ sub loadScannoFile($)
 sub loadDict($)
 {
     my $lang = shift;
+	if ($lang eq "xx") 
+	{
+		return;
+	}
 
     if (!openDictionary("$lang.dic"))
     {

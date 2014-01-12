@@ -36,7 +36,7 @@ my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
-my $force				= 0;
+my $force               = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css.xml";
 my $configurationFile   = "tei2html.config";
@@ -52,7 +52,7 @@ GetOptions(
     'x' => \$makeXML,
     'v' => \$runChecks,
     'u' => \$useUnicode,
-	'f' => \$force,
+    'f' => \$force,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
