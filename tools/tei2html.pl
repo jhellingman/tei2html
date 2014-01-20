@@ -5,24 +5,25 @@ use strict;
 use File::stat;
 use File::Temp qw(mktemp);
 use Getopt::Long;
+use FindBin qw($Bin);
 
+print $Bin;
 
 #==============================================================================
 # Configuration
 
-my $toolsdir        = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
-my $patcdir         = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
-my $xsldir          = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $tmpdir          = "C:\\Temp";                       # place to drop temporary files
+my $toolsdir        = $Bin;                                 # location of tools
+my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
+my $xsldir          = $toolsdir . "/..";                    # location of xsl stylesheets
+my $tmpdir          = "C:\\Temp";                           # place to drop temporary files
 my $bindir          = "C:\\Bin";
-my $catalog         = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+my $catalog         = "C:\\Bin\\pubtext\\CATALOG";          # location of SGML catalog (required for nsgmls and sx)
+
+my $java            = "java";
 
 my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
-my $saxon2          = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar "; # (see http://saxon.sourceforge.net/)
-
-my $epubcheck       = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck1.2\\epubcheck-1.2.jar ";
-my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
-my $epubcheck3      = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar ";
+my $saxon           = "$java -jar C:\\bin\\saxonhe9\\saxon9he.jar ";        # (see http://saxon.sourceforge.net/)
+my $epubcheck       = "$java -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar "; # (see https://github.com/IDPF/epubcheck)
 
 #==============================================================================
 # Arguments
@@ -135,17 +136,17 @@ sub processFile($)
     if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml"))
     {
         print "Add col and row attributes to tables...\n";
-        system ("$saxon2 $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
+        system ("$saxon $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
     }
 
     # convert from TEI P4 to TEI P5 (experimental)
-    # system ("$saxon2 $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
+    # system ("$saxon $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
 
     # extract metadata
-    system ("$saxon2 $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
+    system ("$saxon $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
 
     # create PGTEI version
-    # system ("$saxon2 $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    # system ("$saxon $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     collectImageInfo();
 
@@ -199,7 +200,7 @@ sub processFile($)
         {
             my $tmpFile = mktemp('tmp-XXXXX');
             print "Create HTML version...\n";
-            system ("$saxon2 $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
+            system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
             system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $basename.html");
             unlink($tmpFile);
@@ -213,7 +214,7 @@ sub processFile($)
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
-        system ("$saxon2 $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
+        system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
         system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
         system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
         system ("$prince $basename-prince.html $basename.pdf");
@@ -230,7 +231,7 @@ sub processFile($)
         copyImages("epub\\images");
         copyAudio("epub\\audio");
 
-        system ("$saxon2 $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
+        system ("$saxon $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
 
         system ("del $basename.epub");
         chdir "epub";
@@ -238,8 +239,7 @@ sub processFile($)
         system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
         chdir "..";
 
-        # system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
-        system ("$epubcheck3 $basename.epub 2> $basename-epubcheck.err");
+        system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
         unlink($tmpFile);
     }
 
@@ -306,14 +306,14 @@ sub processFile($)
         if (-f "heatmap.xml")
         {
             print "Create text heat map...\n";
-            system ("$saxon2 heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+            system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
         }
     }
 
     if ($makeKwic == 1)
     {
         print "Generate a KWIC index (this may take some time)...\n";
-        system ("$saxon2 $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
+        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
     }
 
     print " Done!\n";
@@ -352,7 +352,7 @@ sub runChecks($)
         unlink($tmpFile . ".err");
     }
 
-    system ("$saxon2 \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
+    system ("$saxon \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
     unlink ($newname);
 }
 
@@ -403,7 +403,7 @@ sub sgml2xml($$)
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
     system ("sx -c $catalog -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
-    system ("$saxon2 $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
+    system ("$saxon $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
