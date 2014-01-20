@@ -1551,10 +1551,6 @@ sub loadCustomDictionary($)
 
         close(DICTFILE);
     }
-    else
-    {
-        print STDERR "WARNING: Could not open custom dictionary $file\n";
-    }
 }
 
 

@@ -109,9 +109,11 @@ sub handleTeiFile($)
     logMessage("Path:       $filePath");
 
     my $processScript = $filePath . "process.pl";
+    my $specialProcessing = 0;
     if (-e $processScript)
     {
-        logMessage("Note:       process.pl present; file may require special processing.");
+        logMessage("Note:       process.pl present; files in this directory may require special processing.");
+        $specialProcessing = 1;
     }
 
     my $xmlFileName = $filePath . "$baseName.xml";
@@ -122,7 +124,14 @@ sub handleTeiFile($)
         {
             my $cwd = getcwd;
             chdir ($filePath);
-            system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+            if ($specialProcessing == 1) 
+            {
+                # system ("perl -S process.pl");
+            }
+            else
+            {
+                system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+            }
             chdir ($cwd);
         }
 
@@ -137,6 +146,7 @@ sub handleTeiFile($)
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
                 my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
+                my $pgClearance = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGclearance"]');
                 my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
                 my $language = $xpath->find('/TEI.2/@lang');
 
@@ -148,6 +158,7 @@ sub handleTeiFile($)
                 logMessage("Language:   $language");
                 logMessage("ePub ID:    $epubId");
                 logMessage("PG Number:  $pgNum");
+                logMessage("Clearance:  $pgClearance");
                 logMessage("Posted:     $postedDate");
 
                 # Find out whether we have a cover image:
