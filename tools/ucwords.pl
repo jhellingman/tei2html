@@ -22,7 +22,8 @@ use LanguageNames qw/getLanguage/;
 
 
 # Global settings
-my $useDatabase = 0;   # set to 1 to store the word statistics in a database.
+my $verbose = 0;		# Set to 1 to verbosely report what is happening.
+my $useDatabase = 0;	# Set to 1 to store the word statistics in a database.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -119,12 +120,10 @@ if ($useDatabase)
     addBook($idbook, $docTitle, $docAuthor, $infile);
 }
 
-
 report();
-reportSQL();
 
+# reportSQL();
 # reportXML();
-
 # heatMapDocument();
 
 
@@ -1480,13 +1479,13 @@ sub loadScannoFile($)
             $scannoHash{"$prev:$word:$next"} = $frequency;
             $count++;
         }
-        print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
+        $verbose && print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
 
         close(SCANNOFILE);
     }
     else
     {
-        print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
+        $verbose && print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
     }
 }
 
@@ -1510,7 +1509,7 @@ sub loadDict($)
         my $shortlang = $`;
         if ($shortlang eq "" || !openDictionary("$shortlang.dic"))
         {
-            print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
+            $verbose && print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
             return;
         }
     }
@@ -1523,7 +1522,7 @@ sub loadDict($)
         $dictHash{$lang}{$dictword} = 1;
         $count++;
     }
-    print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
+    $verbose && print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
     close(DICTFILE);
 
     loadCustomDictionary($lang);
@@ -1547,7 +1546,7 @@ sub loadCustomDictionary($)
             $dictHash{$lang}{$dictword} = 1;
             $count++;
         }
-        print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
+        $verbose && print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
 
         close(DICTFILE);
     }
@@ -1594,7 +1593,7 @@ sub loadGoodBadWords()
                 $goodWordsHash{$dictword} = 1;
                 $count++;
             }
-            print STDERR "NOTICE:  Loaded good_words.txt with $count words\n";
+            $verbose && print STDERR "NOTICE:  Loaded good_words.txt with $count words\n";
             close(GOODWORDSFILE);
         }
     }
@@ -1611,7 +1610,7 @@ sub loadGoodBadWords()
                 $badWordsHash{$dictword} = 1;
                 $count++;
             }
-            print STDERR "NOTICE:  Loaded bad_words.txt with $count words\n";
+            $verbose && print STDERR "NOTICE:  Loaded bad_words.txt with $count words\n";
             close(BADWORDSFILE);
         }
     }

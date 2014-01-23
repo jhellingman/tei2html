@@ -33,13 +33,31 @@ my %excluded =
         "TEI-template-EN", 1
     );
 
-my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
-
 my $directory = $ARGV[0];
+if (! defined $directory) 
+{
+    $directory = ".";
+}
+
+my $totalFiles = 0;
+my $totalPages = 0;
+my $totalWords = 0;
+my $totalBytes = 0;
 
 sub listRecursively($);
 
 listRecursively($directory);
+
+
+sub logTotals()
+{
+    logMessage("---------------------");
+    logMessage("Files:      $totalFiles");
+    logMessage("Words:      $totalWords");
+    logMessage("Bytes:      $totalBytes");
+}
+
+logTotals();
 
 sub listRecursively($)
 {
@@ -108,6 +126,9 @@ sub handleTeiFile($)
     logMessage("Date:       $fileDate");
     logMessage("Path:       $filePath");
 
+    $totalFiles++;
+    $totalBytes += $fileSize;
+
     my $processScript = $filePath . "process.pl";
     my $specialProcessing = 0;
     if (-e $processScript)
@@ -144,6 +165,8 @@ sub handleTeiFile($)
 
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
+                my $originalDate = $xpath->find('/TEI.2/teiHeader/fileDesc/sourceDesc/bibl/date[1]');
+                my $pageCount = $xpath->find('count(//pb[not(ancestor::note)])');
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
                 my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
                 my $pgClearance = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGclearance"]');
@@ -155,6 +178,8 @@ sub handleTeiFile($)
                 {
                     logMessage("Author:     " . $author->string_value());
                 }
+                logMessage("Orig. Date: $originalDate");
+                logMessage("Pages:      $pageCount");
                 logMessage("Language:   $language");
                 logMessage("ePub ID:    $epubId");
                 logMessage("PG Number:  $pgNum");
@@ -195,6 +220,7 @@ sub handleTeiFile($)
                     if ($line =~ /<td id=textWordCount>([0-9]+)/)
                     {
                         my $wordCount = $1;
+                        $totalWords += $wordCount;
                         logMessage("Words:      $wordCount");
                         last;
                     }
