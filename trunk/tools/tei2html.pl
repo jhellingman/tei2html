@@ -7,8 +7,6 @@ use File::Temp qw(mktemp);
 use Getopt::Long;
 use FindBin qw($Bin);
 
-print $Bin;
-
 #==============================================================================
 # Configuration
 
@@ -17,13 +15,13 @@ my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc t
 my $xsldir          = $toolsdir . "/..";                    # location of xsl stylesheets
 my $tmpdir          = "C:\\Temp";                           # place to drop temporary files
 my $bindir          = "C:\\Bin";
-my $catalog         = "C:\\Bin\\pubtext\\CATALOG";          # location of SGML catalog (required for nsgmls and sx)
+
+my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
 
 my $java            = "java";
-
 my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
-my $saxon           = "$java -jar C:\\bin\\saxonhe9\\saxon9he.jar ";        # (see http://saxon.sourceforge.net/)
-my $epubcheck       = "$java -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar "; # (see https://github.com/IDPF/epubcheck)
+my $saxon           = "$java -jar " . $toolsdir . "/lib/saxon9he.jar ";			# (see http://saxon.sourceforge.net/)
+my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-3.0.1.jar ";	# (see https://github.com/IDPF/epubcheck)
 
 #==============================================================================
 # Arguments
@@ -403,7 +401,7 @@ sub sgml2xml($$)
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
     system ("sx -c $catalog -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
-    system ("$saxon $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
+    system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
