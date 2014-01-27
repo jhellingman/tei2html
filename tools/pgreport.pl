@@ -23,30 +23,52 @@ my $force = 0;  # force generation of XML files, even if up-to-date.
 GetOptions(
     'f' => \$force);
 
-my $reportFile = "pgreport.txt";
-
-open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
-
-my %excluded =
-    (
-        "TEI-template-NL", 1,
-        "TEI-template-EN", 1
-    );
-
-my $directory = $ARGV[0];
-if (! defined $directory) 
-{
-    $directory = ".";
-}
-
 my $totalFiles = 0;
 my $totalPages = 0;
 my $totalWords = 0;
 my $totalBytes = 0;
 
-sub listRecursively($);
+my %excluded =
+	(
+		"TEI-template-NL", 1,
+		"TEI-template-EN", 1
+	);
 
-listRecursively($directory);
+
+sub listRecursively($);
+sub main();
+
+
+main();
+
+
+sub main()
+{
+    my $reportFile = "pgreport.txt";
+    my $xmlFile = "pgreport.xml";
+
+    open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
+    open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
+
+    my $directory = $ARGV[0];
+    if (! defined $directory)
+    {
+        $directory = ".";
+    }
+
+    print XMLFILE "<?xml version=\"1.0\"?>\n";
+    print XMLFILE "<?xml-stylesheet type=\"text/xsl\" href=\"pgreport.xsl\"?>\n";
+    print XMLFILE "<pgreport>\n";
+
+    listRecursively($directory);
+
+    print XMLFILE "</pgreport>\n";
+    close XMLFILE;
+
+    logTotals();
+
+    close REPORTFILE;
+}
 
 
 sub logTotals()
@@ -57,7 +79,6 @@ sub logTotals()
     logMessage("Bytes:      $totalBytes");
 }
 
-logTotals();
 
 sub listRecursively($)
 {
@@ -116,15 +137,24 @@ sub handleTeiFile($)
     print STDERR "---------------------\n";
     print STDERR "$fullName\n";
 
+    print XMLFILE "  <book>\n";
+
     logMessage("---------------------");
     logMessage("File:       $fileName$suffix");
+    print XMLFILE "    <file>\n";
+    print XMLFILE "      <name>$fileName$suffix</name>\n";
     if (defined ($version))
     {
         logMessage("Version:    $version");
+        print XMLFILE "      <version>$version</version>\n";
     }
     logMessage("File Size:  " . formatBytes($fileSize));
+    print XMLFILE "      <size>$fileSize</size>\n";
     logMessage("Date:       $fileDate");
+    print XMLFILE "      <date>$fileDate</date>\n";
     logMessage("Path:       $filePath");
+    print XMLFILE "      <path>$filePath</path>\n";
+    print XMLFILE "    </file>\n";
 
     $totalFiles++;
     $totalBytes += $fileSize;
@@ -145,7 +175,7 @@ sub handleTeiFile($)
         {
             my $cwd = getcwd;
             chdir ($filePath);
-            if ($specialProcessing == 1) 
+            if ($specialProcessing == 1)
             {
                 # system ("perl -S process.pl");
             }
@@ -170,21 +200,33 @@ sub handleTeiFile($)
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
                 my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
                 my $pgClearance = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGclearance"]');
+                my $projectId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGDPProjectId"]');
                 my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
                 my $language = $xpath->find('/TEI.2/@lang');
 
                 logMessage("Title:      $title");
+                print XMLFILE "    <title>" . escapeXml($title) . "</title>\n";
+
                 for my $author ($authors->get_nodelist())
                 {
                     logMessage("Author:     " . $author->string_value());
+                    print XMLFILE "    <author>" . escapeXml($author->string_value()) . "</author>\n";
                 }
                 logMessage("Orig. Date: $originalDate");
+                print XMLFILE "    <date>$originalDate</date>\n";
                 logMessage("Pages:      $pageCount");
+                print XMLFILE "    <pageCount>$pageCount</pageCount>\n";
                 logMessage("Language:   $language");
+                print XMLFILE "    <language>$language</language>\n";
                 logMessage("ePub ID:    $epubId");
+                print XMLFILE "    <epubid>$epubId</epubid>\n";
                 logMessage("PG Number:  $pgNum");
+                print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
+                print XMLFILE "    <projectId>$projectId</projectId>\n";
                 logMessage("Clearance:  $pgClearance");
+                print XMLFILE "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
                 logMessage("Posted:     $postedDate");
+                print XMLFILE "    <postedDate>$postedDate</postedDate>\n";
 
                 # Find out whether we have a cover image:
                 my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();
@@ -197,6 +239,7 @@ sub handleTeiFile($)
                         $coverImageFile = $1;
                     }
                     logMessage("Cover:      $coverImageFile");
+                    print XMLFILE "    <cover>$coverImageFile</cover>\n";
                 }
 
                 1;
@@ -222,6 +265,7 @@ sub handleTeiFile($)
                         my $wordCount = $1;
                         $totalWords += $wordCount;
                         logMessage("Words:      $wordCount");
+                        print XMLFILE "    <wordCount>$wordCount</wordCount>\n";
                         last;
                     }
                 }
@@ -229,6 +273,21 @@ sub handleTeiFile($)
             }
         }
     }
+
+    print XMLFILE "  </book>\n";
+}
+
+
+sub escapeXml($)
+{
+    my $data = shift;
+
+    $data =~ s/&/&amp;/sg;
+    $data =~ s/</&lt;/sg;
+    $data =~ s/>/&gt;/sg;
+    $data =~ s/"/&quot;/sg;
+
+    return $data;
 }
 
 

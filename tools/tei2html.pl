@@ -20,8 +20,8 @@ my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML c
 
 my $java            = "java";
 my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
-my $saxon           = "$java -jar " . $toolsdir . "/lib/saxon9he.jar ";			# (see http://saxon.sourceforge.net/)
-my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-3.0.1.jar ";	# (see https://github.com/IDPF/epubcheck)
+my $saxon           = "$java -jar " . $toolsdir . "/lib/saxon9he.jar ";         # (see http://saxon.sourceforge.net/)
+my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-3.0.1.jar ";  # (see https://github.com/IDPF/epubcheck)
 
 #==============================================================================
 # Arguments
