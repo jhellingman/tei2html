@@ -108,6 +108,7 @@
         </xsl:element>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate an entry in the table of contents.</xd:short>
         <xd:detail>
@@ -119,27 +120,47 @@
         <xsl:param name="maxlevel" as="xs:integer" select="7"/>
         <xsl:param name="list-element" select="'ul'"/>
 
-        <xsl:choose>
-            <!-- We need a head to be able to display an entry in the toc -->
-            <xsl:when test="(head or contains(@rend, 'toc-head(')) and not(contains(@rend, 'toc(none)')) and not(contains(@rend, 'display(none)'))">
-                <li>
-                    <xsl:call-template name="generate-toc-head-link"/>
-                    <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
-                        <xsl:element name="{$list-element}">
-                            <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
-                                <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                            </xsl:apply-templates>
-                        </xsl:element>
+        <!-- Do we want to include this division in the toc? -->
+        <xsl:if test="not(contains(@rend, 'display(none)')) and not(contains(@rend, 'toc(none)'))">
+            <xsl:choose>
+                <!-- Do we have a head to display in the toc? -->
+                <xsl:when test="f:has-toc-head(.)">
+                    <li>
+                        <xsl:call-template name="generate-toc-entry"/>
+                        <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
+                            <xsl:element name="{$list-element}">
+                                <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
+                                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                                </xsl:apply-templates>
+                            </xsl:element>
+                        </xsl:if>
+                    </li>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="not(contains(@rend, 'toc(none)'))">
+                        <xsl:message terminate="no">WARNING: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                     </xsl:if>
-                </li>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="not(contains(@rend, 'toc(none)'))">
-                    <xsl:message terminate="no">WARNING: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
-                </xsl:if>
-            </xsl:otherwise>
-        </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Does the division have a suitable head for display in a table of contents.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:has-toc-head" as="xs:boolean">
+        <xsl:param name="div" as="node()"/>
+
+        <xsl:variable name="defaultHead">
+            <xsl:if test="f:getConfigurationBoolean('defaultTocEntries')">
+                <xsl:value-of select="f:default-toc-head($div/@type)"/>
+            </xsl:if>
+        </xsl:variable>
+
+        <xsl:value-of select="if ($div/head or contains($div/@rend, 'toc-head(') or $defaultHead != '') then 1 else 0"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -163,10 +184,32 @@
 
 
     <xd:doc>
-        <xd:short>Generate a link to a division in the toc, including its number and pagenumber.</xd:short>
+        <xd:short>Lookup a default head based on the division type for an entry in the table of contents.</xd:short>
     </xd:doc>
 
-    <xsl:template name="generate-toc-head-link">
+    <xsl:function name="f:default-toc-head" as="xs:string">
+        <xsl:param name="type" as="xs:string"/>
+
+        <xsl:variable name="head">
+            <xsl:choose>
+                <xsl:when test="$type = 'Colophon'"><xsl:value-of select="f:message('msgColophon')"/></xsl:when>
+                <xsl:when test="$type = 'Cover'"><xsl:value-of select="f:message('msgCover')"/></xsl:when>
+                <xsl:when test="$type = 'Imprint'"><xsl:value-of select="f:message('msgImprint')"/></xsl:when>
+                <xsl:when test="$type = 'TitlePage'"><xsl:value-of select="f:message('msgTitlePage')"/></xsl:when>
+                <xsl:when test="$type = 'Ad'"><xsl:value-of select="f:message('msgAdvertisement')"/></xsl:when>
+                <xsl:when test="$type = 'Ads'"><xsl:value-of select="f:message('msgAdvertisements')"/></xsl:when>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$head"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Generate an entry in a table of contents, including its number and pagenumber.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="generate-toc-entry">
         <xsl:if test="@n and f:getConfigurationBoolean('numberTocEntries')">
             <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
         </xsl:if>
@@ -179,7 +222,7 @@
 
 
     <xd:doc>
-        <xd:short>Combine all heads in a division into a single line.</xd:short>
+        <xd:short>Combine all heads in a division into a single line for use in a table of contents.</xd:short>
         <xd:detail>
             <p>Combine all heads in a division into a single line, ignoring "super" and "label" type heads, and adding the division number coded in the <code>@n</code>-attribute.</p>
         </xd:detail>
@@ -188,12 +231,11 @@
     <xsl:template name="generate-single-head">
         <xsl:choose>
 
-            <!-- Do we want to fully override the head for the toc using the toc-head() rendering -->
+            <!-- Do we want to fully override the head for the toc using the toc-head() rendering? -->
             <xsl:when test="contains(@rend, 'toc-head(')">
                 <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
             </xsl:when>
-            <xsl:otherwise>
-
+            <xsl:when test="head">
                 <!-- Handle all remaining headers in sequence -->
                 <xsl:for-each select="head">
                     <xsl:choose>
@@ -210,6 +252,9 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="f:default-toc-head(@type)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -410,7 +455,7 @@
     <xsl:template match="figure" mode="genloi">
         <li>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-toc-head-link"/>
+            <xsl:call-template name="generate-toc-entry"/>
         </li>
     </xsl:template>
 

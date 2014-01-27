@@ -1898,8 +1898,12 @@ BEGIN
 
     $ent{"rdotbcirc"}   = chr(0x1E5B) . chr(0x0302); # r with dot below and circumflex
 
-    $ent{"amacrbrev"}   = chr(0x0101) . chr(0x0306); # a with macron and breve
     $ent{"amacrtild"}   = chr(0x0101) . chr(0x0303); # a with macron and tilde
+    $ent{"Emacrtild"}   = chr(0x0112) . chr(0x0303); # E with macron and tilde
+    $ent{"emacrtild"}   = chr(0x0113) . chr(0x0303); # e with macron and tilde
+    $ent{"umacrtild"}   = chr(0x016B) . chr(0x0303); # u with macron and tilde
+
+    $ent{"amacrbrev"}   = chr(0x0101) . chr(0x0306); # a with macron and breve
     $ent{"emacrbrev"}   = chr(0x0113) . chr(0x0306); # e with macron and breve
     $ent{"imacrbrev"}   = chr(0x012B) . chr(0x0306); # i with macron and breve
     $ent{"omacrbrev"}   = chr(0x014D) . chr(0x0306); # o with macron and breve

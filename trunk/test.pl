@@ -2,14 +2,13 @@
 
 use strict;
 
-my $xsldir = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $saxon2 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
+use FindBin qw($Bin);
 
-my $epubcheck     = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck1.2\\epubcheck-1.2.jar ";
-my $epubpreflight = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
+my $toolsdir    = $Bin;
+my $xsldir      = $toolsdir;
+my $saxon       = "java -jar " . $toolsdir . "/tools/lib/saxon9he.jar ";
+my $epubcheck   = "java -jar " . $toolsdir . "/tools/lib/epubcheck-3.0.1.jar ";
 
-# See http://code.google.com/p/epubcheck/wiki/EPUBCheck30 for ePub3 checker
-my $epubcheck3 = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck3\\epubcheck-3.0.jar ";
 
 my $pwd = `pwd`;
 chop($pwd);
@@ -47,10 +46,10 @@ if (-f "opf-metadata.xml")
 }
 
 print "Add col and row attributes to tables...\n";
-system ("$saxon2 test.xml $xsldir/normalize-table.xsl > test-normalized.xml");
+system ("$saxon test.xml $xsldir/normalize-table.xsl > test-normalized.xml");
 
-system ("$saxon2 test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test.html");
-system ("$saxon2 test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
+system ("$saxon test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test.html");
+system ("$saxon test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
 system ("del test.epub");
 chdir "epub";
@@ -58,5 +57,4 @@ system ("zip -Xr9Dq ../test.epub mimetype");
 system ("zip -Xr9Dq ../test.epub * -x mimetype");
 chdir "..";
 
-# system ("$epubcheck test.epub 2> test-epubcheck.err");
-system ("$epubcheck3 test.epub 2> test-epubcheck.err");
+system ("$epubcheck test.epub 2> test-epubcheck.err");

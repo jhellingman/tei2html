@@ -124,6 +124,11 @@
         <msg:message name="msgOverviewForeignFragments">Overview of fragments in foreign languages</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
         <msg:message name="msgElement">Element</msg:message>
+        <msg:message name="msgCover">Cover</msg:message>
+        <msg:message name="msgCovers">Covers</msg:message>
+        <msg:message name="msgAdvertisement">Advertisement</msg:message>
+        <msg:message name="msgAdvertisements">Advertisements</msg:message>
+        <msg:message name="msgImprint">Imprint</msg:message>
 
         <!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
 
@@ -748,6 +753,12 @@
         <msg:message name="msgEncoding">Codering</msg:message>
         <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
+
+        <msg:message name="msgCover">Omslag</msg:message>
+        <msg:message name="msgCovers">Omslagen</msg:message>
+        <msg:message name="msgAdvertisement">Advertentie</msg:message>
+        <msg:message name="msgAdvertisements">Advertenties</msg:message>
+        <msg:message name="msgImprint">Impressum</msg:message>
 
         <msg:message name="msgColor">Kleur</msg:message>
 
