@@ -19,7 +19,7 @@
 
     Stylesheet to format inline elements, to be imported in tei2html.xsl.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
 
 -->
@@ -96,7 +96,7 @@
         <xd:short>Caps and small-caps text.</xd:short>
         <xd:detail>Caps and small-caps text, indicated with the <code>@rend</code> attribute value <code>sc</code>.</xd:detail>
     </xd:doc>
-    
+
     <xsl:template match="hi[@rend='sc'] | sc">
         <span class="sc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
@@ -476,20 +476,33 @@
     <!-- Ditto marks in tables and lists -->
 
     <xd:doc>
-        <xd:short>Ditto marks in tables and lists.</xd:short>
+        <xd:short>Use ditto marks in tables and lists.</xd:short>
         <xd:detail>To set ditto-marks in tables, we need a number of HTML formatting tricks. Basically, when a phrase is in a ditto element,
-        we want to replace the individual words with pairs of commas, neatly centered under each word. To achieve this, we create a small table 
-        of one column and two rows. We place the word in the first row, but then make it invisible and reduce its size to zero (using CSS), 
+        we want to replace the individual words with pairs of commas, neatly centered under each word. To achieve this, we create a small table
+        of one column and two rows. We place the word in the first row, but then make it invisible and reduce its size to zero (using CSS),
         and place the ditto-mark centered in the second row. Some further trickery is needed to handle the most common formatting that
         can occur in contexts where ditto-marks are used. Note that this code is quite fragile, and will fail if unexpected tagging is encountered
-        inside the ditto element.</xd:detail>
+        inside the ditto element, or outside a table or list (such as a plain paragraph).</xd:detail>
     </xd:doc>
 
     <xsl:template match="ditto">
-        <xsl:apply-templates mode="ditto"/>
+        <xsl:choose>
+            <xsl:when test="f:getConfigurationBoolean('useDittoMarks')">
+                <xsl:apply-templates mode="ditto"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
+
     <xsl:template mode="ditto" match="text()">
+        <xsl:call-template name="use_ditto_marks"/>
+    </xsl:template>
+
+
+    <xsl:template name="use_ditto_marks">
         <!-- Split the text-content of the ditto on space boundaries -->
         <xsl:variable name="context" select="."/>
         <xsl:for-each select="tokenize(., '\s+')">
@@ -540,5 +553,6 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
+
 
 </xsl:stylesheet>
