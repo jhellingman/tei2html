@@ -40,6 +40,7 @@
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include -->
             <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries -->
             <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
+            <useDittoMarks>false</useDittoMarks>                        <!-- Use ditto signs where items are marked with the DITTO tag -->
             <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present -->
         </tei2html.config>
     </xsl:variable>
