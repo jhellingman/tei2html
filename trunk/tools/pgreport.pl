@@ -29,10 +29,10 @@ my $totalWords = 0;
 my $totalBytes = 0;
 
 my %excluded =
-	(
-		"TEI-template-NL", 1,
-		"TEI-template-EN", 1
-	);
+    (
+        "TEI-template-NL", 1,
+        "TEI-template-EN", 1
+    );
 
 
 sub listRecursively($);
@@ -250,6 +250,29 @@ sub handleTeiFile($)
                 logError("Problem parsing $xmlFileName");
             };
         }
+
+        my $imageInfoFileName = $filePath . "imageinfo.xml";
+        if (-e $imageInfoFileName)
+        {
+            # Use eval, so we can recover from fatal parse errors in XML:XPath.
+            eval
+            {
+                my $xpath = XML::XPath->new(filename => $imageInfoFileName);
+
+                my $imageCount = $xpath->find('count(//image)');
+
+                logMessage("Images:     $imageCount");
+                print XMLFILE "    <imageCount>$imageCount</imageCount>\n";
+
+                1;
+            }
+            or do
+            {
+                logMessage("Note:       Problem parsing $imageInfoFileName.");
+                logError("Problem parsing $imageInfoFileName");
+            };
+        }
+
 
         # words-file
         my $wordsFileName = $filePath . "$baseName-words.html";
