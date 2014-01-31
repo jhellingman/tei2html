@@ -10,7 +10,7 @@ An XSLT 2.0 processor is required for tei2html, any XSLT 2.0 processor should wo
 
 You should download a reasonable recent version of Saxon. For example the Saxon SA product from [http://www.saxonica.com/products.html saxonica.com].
 
-The perl scripts assume that saxon9he.jar is placed in the tools/lib/subdirectory.
+The perl scripts assume that saxon9he.jar is placed in the tools/lib/ subdirectory.
 
 == Java ==
 
@@ -43,9 +43,13 @@ PS. Also works with Perl 5.14.2.1402 and !ImageMagick-6.7.7-5-Q16-windows-dll, a
 
 == SX, NSGML ==
 
+_optional, only needed you use SGML, not when using XML only_
+
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since the tools still support SGML, you will need both those two tools. They can be downloaded from [http://www.jclark.com/ James Clark website]. For windows, get [ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip sp 1.3.4].
 
-For use with SX and NSGML you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named tools/pubtext/CATALOG
+For use with SX and NSGML you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named tools/pubtext/CATALOG. 
+
+A short explanation of Catalog files can be found in the SP documentation on James Clark's website references above.
 
 == ZIP ==
 
@@ -53,13 +57,13 @@ To compress ePub files, you will need a zip utility. `tei2html` uses [http://www
 
 == Patc ==
 
-_optional_ 
+_optional, only needed when you use the transcription schemes I use in SGML_ 
 
 Patc (pattern changer) is a small utility in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
 
 == epubcheck ==
 
-_optional_ 
+_optional, only needed if you want to check generated ePubs_ 
 
 Epubcheck is a tool to validate epub books, it can be obtained from: http://code.google.com/p/epubcheck/
 
