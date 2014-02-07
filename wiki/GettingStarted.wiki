@@ -10,43 +10,9 @@ Note that currently no installer is present, so you will need to get the code fr
 
 Most of the interaction on the command line is with small Perl scripts that start the actual XSLT processor, and some other scripts.
 
-Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly.
+Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly. Perl should be able to find the place where you've located your scripts (when running perl with the -S option.)
 
-To do this, go to `tools/tei2html.pl` and look for a section of code called configuration, and change the paths indicated here to what is current on your machine:
-
-{{{
-# Configuration
-
-my $toolsdir        = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
-my $patcdir         = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
-my $xsldir          = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $tmpdir          = "C:\\Temp";                       # place to drop temporary files
-my $bindir          = "C:\\Bin";
-my $catalog         = "C:\\Bin\\pubtext\\CATALOG";      # location of SGML catalog (required for nsgmls and sx)
-
-my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
-my $saxon2          = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar "; # (see http://saxon.sourceforge.net/)
-
-my $epubcheck       = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubcheck-1.0.4.jar ";
-my $epubpreflight   = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\epubcheck\\epubpreflight-0.1.0.jar ";
-
-}}}
-
-Note to self: This needs considerable cleanup, and use of environment variables where possible.
-
-Items that need configuration:
-
-  * Location of `tei2html`
-  * Location of Perl processor
-  * Location of nsgmls and sx (SGML tools)
-  * Location of the SGML catalog (for SGML tools)
-  * Location of the Java JRE (for Saxon)
-  * Location of various other tools, i.e.
-    * Saxon
-    * Prince XML
-    * ePubCheck, ePubPreFlight
-    * patc
-
+The various .jar files (for saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
 
 = Running interactively =
 
