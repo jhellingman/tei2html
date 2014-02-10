@@ -1,9 +1,11 @@
 
 use strict;
 
-my $xsldir = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";
-my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
-my $xsltdoc = "..\\XSLTdoc_1.2.2\\xsl\\xsltdoc.xsl";
+use FindBin qw($Bin);
+
+my $toolsdir    = $Bin;
+my $xsldir      = $toolsdir;
+my $saxon       = "java -jar " . $toolsdir . "/tools/lib/saxon9he.jar ";
+my $xsltdoc     = $toolsdir . "/tools/lib/XSLTdoc_1.2.2/xsl/xsltdoc.xsl";
 
 system ("$saxon xsltdoc.config $xsltdoc > xsltdoc.log");
-
