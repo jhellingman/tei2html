@@ -203,6 +203,9 @@ sub handleTeiFile($)
                 my $projectId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGDPProjectId"]');
                 my $postedDate = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/date');
                 my $language = $xpath->find('/TEI.2/@lang');
+                my $description = $xpath->find('/TEI.2/teiHeader/fileDesc/notesStmt/note[@type="Description"]');
+                my $keywords = $xpath->find('/TEI.2/teiHeader/profileDesc/textClass/keywords/list/item');
+
 
                 logMessage("Title:      $title");
                 print XMLFILE "    <title>" . escapeXml($title) . "</title>\n";
@@ -227,6 +230,12 @@ sub handleTeiFile($)
                 print XMLFILE "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
                 logMessage("Posted:     $postedDate");
                 print XMLFILE "    <postedDate>$postedDate</postedDate>\n";
+
+                print XMLFILE "    <description>" . escapeXml($description) . "</description>\n";
+                for my $keyword ($keywords->get_nodelist())
+                {
+                    print XMLFILE "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
+                }
 
                 # Find out whether we have a cover image:
                 my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();

@@ -55,7 +55,6 @@
     <xsl:include href="tei2ncx.xsl"/>
     <xsl:include href="tei2epubnav.xsl"/>
 
-
     <xsl:output
         doctype-public="-//W3C//DTD XHTML 1.1//EN"
         doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
@@ -73,8 +72,14 @@
     <xsl:param name="optionEPubStrict" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
+
+    <xd:doc type="string">Include images in the HTML output.</xd:doc>
     <xsl:param name="optionIncludeImages" select="'Yes'"/>
+
+    <xd:doc type="string">Render external links as such in HTML.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
+
+    <xd:doc type="string">Place external links in a separate table in the Colophon.</xd:doc>
     <xsl:param name="optionExternalLinksTable" select="'Yes'"/>
 
     <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
@@ -96,6 +101,13 @@
 
     <xsl:variable name="unitsUsed" select="'Original'"/>
 
+    <xd:doc>
+        <xd:short>Main stylesheet for ePub generation.</xd:short>
+        <xd:detail>
+            <p>This stylesheet is intended to be the first triggered, and will initiates 
+            generation of various ePub elements.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="/">
 
@@ -123,6 +135,10 @@
     <!--====================================================================-->
     <!-- Mimetype file -->
 
+    <xd:doc>
+        <xd:short>Generate the file with the epub mimetype: application/epub+zip.</xd:short>
+    </xd:doc>
+
     <xsl:template name="mimetype">
         <xsl:result-document 
                 href="{$path}/mimetype"
@@ -134,6 +150,10 @@
 
     <!--====================================================================-->
     <!-- Container file -->
+
+    <xd:doc>
+        <xd:short>Generate the container file which points to the OPF file, as required by ePub.</xd:short>
+    </xd:doc>
 
     <xsl:template name="container">
         <xsl:result-document 
@@ -156,6 +176,10 @@
 
     <!--====================================================================-->
     <!-- Stylesheets -->
+
+    <xd:doc>
+        <xd:short>Collect all CSS used into a single .css file.</xd:short>
+    </xd:doc>
 
     <xsl:template name="copy-stylesheets">
         <xsl:result-document 
@@ -192,6 +216,10 @@
     <!--====================================================================-->
     <!-- SMIL files -->
 
+    <xd:doc>
+        <xd:short>Collect all SMIL-files with media-overlays, and copy them into the output.</xd:short>
+    </xd:doc>
+
     <xsl:template name="copy-smil-files">
         <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
             <xsl:call-template name="copy-xml-file">
@@ -217,6 +245,10 @@
 
     <!--====================================================================-->
     <!-- Adobe Pagemap -->
+
+    <xd:doc>
+        <xd:short>Create a (non-standard) Adobe pagemap file.</xd:short>
+    </xd:doc>
 
     <xsl:template name="pagemap">
         <xsl:result-document 
