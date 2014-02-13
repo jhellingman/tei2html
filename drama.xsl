@@ -47,6 +47,7 @@
 
     <xsl:template match="lg">
         <xsl:choose>
+            <xsl:when test="contains(@rend, 'display(none)')"/>
             <xsl:when test="contains(@rend, 'align-with(')">
                 <xsl:call-template name="handleAlignedLg"/>
             </xsl:when>
