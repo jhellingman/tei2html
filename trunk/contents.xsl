@@ -79,7 +79,7 @@
 
 
     <xsl:template name="toc-body">
-        <xsl:param name="list-element" select="'ul'"/>
+        <xsl:param name="list-element" select="'ul'" as="xs:string"/>
 
         <xsl:variable name="maxlevel">
             <xsl:choose>
@@ -118,7 +118,7 @@
 
     <xsl:template match="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
         <xsl:param name="maxlevel" as="xs:integer" select="7"/>
-        <xsl:param name="list-element" select="'ul'"/>
+        <xsl:param name="list-element" as="xs:string" select="'ul'"/>
 
         <!-- Do we want to include this division in the toc? -->
         <xsl:if test="not(contains(@rend, 'display(none)')) and not(contains(@rend, 'toc(none)'))">
@@ -131,6 +131,7 @@
                             <xsl:element name="{$list-element}">
                                 <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
                                     <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                                    <xsl:with-param name="list-element" select="$list-element"/>
                                 </xsl:apply-templates>
                             </xsl:element>
                         </xsl:if>
@@ -210,14 +211,19 @@
     </xd:doc>
 
     <xsl:template name="generate-toc-entry">
-        <xsl:if test="@n and f:getConfigurationBoolean('numberTocEntries')">
+        <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
+        <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
+
+        <xsl:if test="@n and f:getConfigurationBoolean('numberTocEntries') and $show-div-numbers">
             <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a>
             <xsl:call-template name="generate-href-attribute"/>
             <xsl:call-template name="generate-single-head"/>
         </a>
-        <xsl:call-template name="insert-toc-page-number"/>
+        <xsl:if test="$show-page-numbers">
+            <xsl:call-template name="insert-toc-page-number"/>
+        </xsl:if>
     </xsl:template>
 
 
