@@ -1,19 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to format cross references, to be imported in tei2html.xsl.
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="f xs xd"
     version="2.0"
     >
@@ -52,15 +44,15 @@
             
             <xsl:when test="@type='noteref'">
                 <!-- Special case: reference to footnote, used when the content of the reference 
-                     needs to be rendered as the footnote reference mark -->
+                     needs to be rendered as a footnote reference mark -->
                 <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
             </xsl:when>
 
             <xsl:otherwise>
                 <a>
                     <xsl:choose>
-                        <!-- $target is footnote or inside footnote -->
-                        <xsl:when test="$targetNode/ancestor-or-self::note[@place='foot' or @place='unspecified' or not(@place)]">
+                        <!-- $target is a footnote or inside footnote -->
+                        <xsl:when test="f:insideFootnote($targetNode)">
                             <xsl:call-template name="generate-footnote-href-attribute">
                                 <xsl:with-param name="target" select="$targetNode"/>
                             </xsl:call-template>
@@ -93,6 +85,21 @@
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Is a node a footnote or inside a footnote?</xd:short>
+        <xd:detail>
+            <p>This function determines whether a node is a footnote or inside a footnote. This is important,
+            as footnotes may be placed in quite different locations than the text they are referred to.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:insideFootnote">
+        <xsl:param name="targetNode" as="node()"/>
+
+        <xsl:value-of select="$targetNode/ancestor-or-self::note[@place='foot' or @place='unspecified' or not(@place)]"/>
+    </xsl:function>
 
 
     <!--====================================================================-->
