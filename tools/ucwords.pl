@@ -22,8 +22,8 @@ use LanguageNames qw/getLanguage/;
 
 
 # Global settings
-my $verbose = 0;		# Set to 1 to verbosely report what is happening.
-my $useDatabase = 0;	# Set to 1 to store the word statistics in a database.
+my $verbose = 0;        # Set to 1 to verbosely report what is happening.
+my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -1498,10 +1498,10 @@ sub loadScannoFile($)
 sub loadDict($)
 {
     my $lang = shift;
-	if ($lang eq "xx") 
-	{
-		return;
-	}
+    if ($lang eq "xx") 
+    {
+        return;
+    }
 
     if (!openDictionary("$lang.dic"))
     {

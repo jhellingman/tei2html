@@ -22,30 +22,27 @@ $UCwordPattern = "\\b($UCletter)+(([-']|&rsquo;|&apos;)($UCletter)+)*\\b";
 
 while (<INPUTFILE>)
 {
-	$remainder = $_;
-	while($remainder =~ /($UCwordPattern)/)
-	{
-		print $`;
-		$remainder = $';
-		$word = $&;
-		if (length($word) > 1) 
-		{
-			if ($word =~ /^[IVXLCDM]+$/) 
-			{
-				print $word;
-			}
-			else
-			{
-				print "<sc>" . ucfirst(lc($word)) . "</sc>";
-			}
-		}
-		else
-		{
-			print $word;
-		}
-	}
-	print $remainder;
+    $remainder = $_;
+    while($remainder =~ /($UCwordPattern)/)
+    {
+        print $`;
+        $remainder = $';
+        $word = $&;
+        if (length($word) > 1) 
+        {
+            if ($word =~ /^[IVXLCDM]+$/) 
+            {
+                print $word;
+            }
+            else
+            {
+                print "<sc>" . ucfirst(lc($word)) . "</sc>";
+            }
+        }
+        else
+        {
+            print $word;
+        }
+    }
+    print $remainder;
 }
-
-
-
