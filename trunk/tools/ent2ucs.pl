@@ -6,6 +6,6 @@ use SgmlSupport qw/sgml2utf_html utf2sgml/;
 
 while (<>)
 {
-	my $string = $_;
-	print utf2sgml(sgml2utf_html($string));
+    my $string = $_;
+    print utf2sgml(sgml2utf_html($string));
 }
