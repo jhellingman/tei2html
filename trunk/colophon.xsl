@@ -212,7 +212,14 @@
                                 <xsl:text>, </xsl:text>
                             </xsl:if>
                             <a class="pageref">
-                                <xsl:call-template name="generate-href-attribute"/>
+                                <xsl:choose>
+                                    <xsl:when test="f:insideFootnote(.)">
+                                        <xsl:call-template name="generate-footnote-href-attribute"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:call-template name="generate-href-attribute"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                                 <xsl:value-of select="f:find-pagenumber(.)"/>
                             </a>
                         </xsl:for-each>

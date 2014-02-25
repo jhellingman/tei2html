@@ -1,18 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet with various utily templates, to be imported in tei2html.xsl.
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="xd xs"
     version="2.0"
     >
