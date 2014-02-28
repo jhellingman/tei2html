@@ -1,18 +1,19 @@
-# tagMeasures.pl -- Tag measures appearing in documents.
+# tagBibleRefs.pl -- Tag Bible references appearing in documents.
 
 use strict;
 use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $tagPattern = "<(.*?)>";
 
-my $romanNumberPattern = "(?:M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))";
+my $romanNumberPattern = "(?:[MmDdCcLlXxVvIi]+)";
 my $numberPattern = "(?:[0-9]+)";
 
 my $refPattern = "";
 
+
 my %books = (
 
-# The Jewish Bible/Old Testament 
+# The Jewish Bible/Old Testament
 
 "Amos"                      => "Amos",
 "Am"                        => "Amos",
@@ -121,7 +122,7 @@ my %books = (
 "Wisdom"                    => "Wisdom of Solomon",
 "Wisd. of Sol."             => "Wisdom of Solomon",
 
-# The New Testament 
+# The New Testament
 
 "Acts"                      => "Acts of the Apostles",
 "Apoc."                     => "Revelation",
@@ -181,7 +182,7 @@ my %books = (
 
 my %abbreviations = (
 
-# The Jewish Bible/Old Testament 
+# The Jewish Bible/Old Testament
 
 "amos"                      => "Am",
 "am"                        => "Am",
@@ -333,7 +334,7 @@ my %abbreviations = (
 "wisdom"                    => "Ws",
 "wisd. of sol."             => "Ws",
 
-# The New Testament 
+# The New Testament
 
 "acts of the apostles"      => "Acts",
 "acts"                      => "Acts",
@@ -410,8 +411,21 @@ my %abbreviations = (
 );
 
 
+my %chapterCounts = (
+"gn"    => 50,
+"ex"    => 40,
+"lv"    => 27,
+"nm"    => 36,
+"dt"    => 34,
+"jo"    => 24,
+"jd"    => 21
+);
+
+
+
 buildRegularExpression();
 
+main();
 
 
 
@@ -426,10 +440,10 @@ sub buildRegularExpression()
     my @sortedBooks = uniq(sort(@listBooks));
 
     my $booksPattern = "";
-    for (my $i = 0; $i < $#sortedBooks; $i++) 
+    for (my $i = 0; $i < $#sortedBooks; $i++)
     {
         my $book = $sortedBooks[$i];
-        if ($i > 0) 
+        if ($i > 0)
         {
             $booksPattern .= "|";
         }
@@ -437,9 +451,11 @@ sub buildRegularExpression()
     }
 
     $booksPattern =~ s/\./\\./g;
-    $booksPattern =~ s/ /\\s+/g;
+    # $booksPattern =~ s/ /\\s+/g;
 
-    $refPattern = "($booksPattern),? ($romanNumberPattern|$numberPattern) ?:? ($numberPattern)?";
+    $refPattern = "\\b($booksPattern),? ($romanNumberPattern|$numberPattern) ?[.:]? ?(?:($numberPattern)?(?:(?:&ndash;|-)($numberPattern))?)\\b";
+
+    # print STDERR "PATTERN: $refPattern\n";
 }
 
 
@@ -457,8 +473,7 @@ sub uniq {
 }
 
 
-test();
-
+# test();
 
 sub test
 {
@@ -475,12 +490,13 @@ sub main()
     while (<INPUTFILE>)
     {
         my $remainder = $_;
-        while ($remainder =~ /$tagPattern/)
+        while ($remainder =~ m/$tagPattern/)
         {
             my $fragment = $`;
-            my $tag = $1;
+            my $tag = $&;
             $remainder = $';
             print tagRefs($fragment);
+            print $tag;
         }
         print tagRefs($remainder);
     }
@@ -494,17 +510,18 @@ sub tagRefs($)
     my $remainder = shift;
 
     my $result = "";
-    while ($remainder =~ /$refPattern/i)
+    while ($remainder =~ m/$refPattern/)
     {
         my $before = $`;
         my $match = $&;
         my $book = $1;
         my $chapter = $2;
         my $verse = $3;
+        my $range = $4;
         $remainder = $';
 
         $result .= $before;
-        $result .= tagRef($match, $book, $chapter, $verse);
+        $result .= tagRef($match, $book, $chapter, $verse, $range);
     }
     $result .= $remainder;
 
@@ -518,8 +535,12 @@ sub tagRef
     my $book = shift;
     my $chapter = shift;
     my $verse = shift;
+    my $range = shift;
 
-    if (isroman($chapter)) 
+    # print STDERR "MATCH: $match\n";
+    # print STDERR "BOOK: $book CHAPTER: $chapter VERSE: $verse\n";
+
+    if (isroman($chapter))
     {
         $chapter = arabic($chapter);
     }
@@ -529,6 +550,25 @@ sub tagRef
         $book = $abbreviations{lc $book}
     }
 
-    return "<xref url=\"bib:$book $chapter:$verse\">$match</xref>";
+    if (($book eq "ps" && $chapter > 150) || $chapter > 66)
+    {
+        print STDERR "CHAPTER number out of range in $match\n";
+        return $match;
+    }
+
+    if ($book ne "")
+    {
+        if ($verse == 0)
+        {
+            return "<xref url=\"bib:$book $chapter\">$match</xref>";
+        }
+        if ($range == 0)
+        {
+            return "<xref url=\"bib:$book $chapter:$verse\">$match</xref>";
+        }
+        return "<xref url=\"bib:$book $chapter:$verse-$range\">$match</xref>";
+
+    }
+    return $match;
 }
 
