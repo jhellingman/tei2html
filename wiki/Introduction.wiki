@@ -85,7 +85,7 @@ These are roughly equivalent to TEX's special glue values.
 
 TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the `@rend` attribute can be used to record those aspects.
 
-For many uses, a TEI file is not the most desirable format. For reading, the it is far more convenient to have it available in some more presentation-oriented format. With `tei2html`, a TEI document can be converted to various output formats, to wit:
+For many uses, a TEI file is not the most desirable format. For reading, it is far more convenient to have it available in some more presentation-oriented format. With `tei2html`, a TEI document can be converted to various output formats, which are:
 
 
   * HTML for viewing in a browser on a PC.
@@ -96,10 +96,10 @@ For many uses, a TEI file is not the most desirable format. For reading, the it 
 
 These output formats place some restrictions on the structure of the TEI file, and the usage conventions adopted not enforced by the DTD. The most important of these are given below.
 
-_References to page numbers._ In printed media, the page numbers will differ from the source. To correctly replace page numbers in the source, each page number should be tagged as a reference (`ref` element) with `@type=pageref`. The tag should only enclose the page number it self, not any of the surrounding material. The transformation will replace the content of this tag with the number of the page the material referred to appears on. Almost always, the reference is not to the page itself, but to some element appearing on this page. For this reason, it is better not to link to the `pb` element, but to the element actually referred to. (In HTML, the original page numbers will be shown in the margin and used in the text.)
+_References to page numbers._ In printed media, the page numbers produced in the output will differ from the source. To correctly replace page numbers in the source, each page number should be tagged as a reference (`ref` element) with `@type=pageref`. The tag should only enclose the page number itself, not any of the surrounding material. The transformation will replace the content of this tag with the actual number of the page the material referred to appears on. Almost always, the reference is not to the page itself, but to some element appearing on this page. For this reason, it is better not to link to the `pb` element, but to the element actually referred to. (In HTML output, the original page numbers will be shown in the margin and used in the text.)
 
 _Nesting of cross-references and anchors._ In HTML, it is not possible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these result in nested anchors in HTML. For example, the `ref` element should not contain `corr` elements (as the later generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the `ref` element in the `corr` element.
 
-_Nesting of paragraphs._ In HTML, it is not possible to nest paragraphs. In most cases, the transformation software will take this in account, and close open paragraphs in HTML when needed.
+_Nesting of paragraphs._ In HTML, it is not possible to nest paragraphs. In most cases, the transformation software will take this in account, and close (and re-open) open paragraphs in HTML when needed.
 
-In a few other cases, the transformation may not result in entirely correct results. Always validate the end result.
+In a few other cases, the transformation may not result in entirely correct results. Always validate the end result with tools such as tidy or epubcheck.
