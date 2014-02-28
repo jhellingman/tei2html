@@ -2,6 +2,10 @@
 
 = Scratch Pad =
 
+== Small improvements ==
+
+* Use page-break-after in CSS for ePub versions. See http://css-tricks.com/almanac/properties/p/page-break/
+
 == Interesting Links ==
 
   * [http://code.google.com/p/hyphenator/] Javascript hyphenator.
