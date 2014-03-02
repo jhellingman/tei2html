@@ -3,28 +3,30 @@
     <!ENTITY deg        "&#176;">
 
 ]>
-<!--
-
-    Stylesheet to format (foot)notes, to be imported in tei2html.xsl.
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="f"
     version="2.0"
     >
 
+    <xd:doc type="stylesheet">
+        <xd:short>Stylesheet to handle footnotes.</xd:short>
+        <xd:detail>This stylesheet contains templates to handle footnotes in TEI files.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <!--====================================================================-->
     <!-- Notes -->
 
-    <!-- Marginal notes should go to the margin -->
+    <xd:doc>
+        <xd:short>Handle marginal notes.</xd:short>
+        <xd:detail>Marginal notes should go to the margin. The actual placement in handled through CSS.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="/TEI.2/text//note[@place='margin']">
         <span class="marginnote">
@@ -33,9 +35,14 @@
         </span>
     </xsl:template>
 
-    <!-- Move footnotes to the end of the div1 element they appear in (but not in
-    quoted texts). Optionally, we place the text of the footnote in-line as well,
-    for use by the print stylesheet. In browsers it will be hidden. -->
+
+    <xd:doc>
+        <xd:short>Handle footnotes.</xd:short>
+        <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves 
+        footnotes to the end of the div1 element they appear in (but be careful to avoid this in
+        div1 elements embedded in quoted texts). Optionally, we place the text of the footnote in-line as well,
+        for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="/TEI.2/text//note[@place='foot' or @place='unspecified' or not(@place)]">
         <a class="noteref">
@@ -55,7 +62,11 @@
     </xsl:template>
 
 
-    <!-- Insert footnotes at the current location -->
+    <xd:doc>
+        <xd:short>Insert footnotes at the current location.</xd:short>
+        <xd:detail>Insert footnotes at the current location. This template will place all footnotes occuring in the
+        indicated division at this location.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="."/>
@@ -79,6 +90,12 @@
 
     <!-- Handle notes that contain paragraphs different from simple notes -->
 
+    <xd:doc>
+        <xd:short>Handle footnotes with embedded paragraphs.</xd:short>
+        <xd:detail>Insert a footnote with embedded paragraphs. These need to be handled slightly differently 
+        from footnotes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="note[p]" mode="footnotes">
         <p>
             <xsl:variable name="class">
@@ -92,6 +109,11 @@
         </p>
         <xsl:apply-templates select="*[position() > 1]" mode="footnotes"/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Handle footnotes without embedded paragraphs.</xd:short>
+        <xd:detail>Insert a footnote without embedded paragraphs.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="note" mode="footnotes">
         <p>
@@ -107,6 +129,11 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Place a footnote marker.</xd:short>
+        <xd:detail>Place a footnote marker in front of the footnote.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="footnote-marker">
         <xsl:call-template name="set-lang-attribute"/>
         <span class="label">
@@ -119,6 +146,11 @@
         <xsl:text> </xsl:text>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Calculate the footnote number.</xd:short>
+        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the div0 or div1 element it occurs in.
+        Take care to ignore div1 elements that appear in embedded quoted text.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="footnote-number">
         <xsl:choose>
@@ -154,7 +186,11 @@
     </xsl:template>
 
 
-    <!-- Notes in a critical apparatus (coded with attribute place="apparatus") -->
+    <xd:doc>
+        <xd:short>Handle notes in a text-critical apparatus.</xd:short>
+        <xd:detail>Handle notes in a text-critical apparatus (coded with attribute place="apparatus"). These notes are only
+        included when a divGen element is present, calling for their rendition.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
         <a class="apparatusnote">
@@ -162,6 +198,11 @@
             <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;</a>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate the notes for a text-critical apparatus.</xd:short>
+        <xd:detail>Render all text-critical notes preceding the matched divGen element here.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">

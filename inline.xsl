@@ -15,15 +15,6 @@
     <!ENTITY frac34     "&#x00BE;">
 
 ]>
-<!--
-
-    Stylesheet to format inline elements, to be imported in tei2html.xsl.
-
-    Requires:
-        localization.xsl    : templates for localizing strings.
-
--->
-
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
