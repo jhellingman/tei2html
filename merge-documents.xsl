@@ -26,7 +26,7 @@
         <xd:param name="location">The location of the file to be imported.</xd:param>
         <xd:param name="basenode">Node to disambiguate relative locations.</xd:param>
         <xd:param name="prefix">The prefix to add to all ids in this document.</xd:param>
-        <xd:param name="keepPrefix">Prefix of ids that should <i>not</i> be prefixed.</xd:param>
+        <xd:param name="keepPrefix">List space-separated prefixes of ids that should <i>not</i> be prefixed.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:import-document">
@@ -35,9 +35,11 @@
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefix" as="xs:string"/>
 
+        <xsl:variable name="keepPrefixes" select="tokenize($keepPrefix, ' ')"/>
+
         <xsl:apply-templates select="document($location, $basenode)" mode="import-document">
             <xsl:with-param name="prefix" select="$prefix"/>
-            <xsl:with-param name="keepPrefix" select="$keepPrefix"/>
+            <xsl:with-param name="keepPrefixes" select="$keepPrefixes"/>
         </xsl:apply-templates>
     </xsl:function>
 
@@ -49,56 +51,69 @@
         </xd:detail>
         <xd:param name="id">The id to be adjusted.</xd:param>
         <xd:param name="prefix">The prefix to add.</xd:param>
-        <xd:param name="keepPrefix">Prefix of ids that should <i>not</i> be prefixed.</xd:param>
+        <xd:param name="keepPrefixes">Prefixes of ids that should <i>not</i> be prefixed.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:combine-id">
         <xsl:param name="id" as="xs:string"/>
         <xsl:param name="prefix" as="xs:string"/>
-        <xsl:param name="keepPrefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
 
-        <xsl:choose>
-            <xsl:when test="starts-with($id, $keepPrefix)">
-                <xsl:value-of select="$id"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="concat($prefix, $id)"/>
-            </xsl:otherwise>
-         </xsl:choose>
+        <!--
+        <xsl:message>ID: <xsl:value-of select="$id"/>.</xsl:message>
+        <xsl:message>PREFIX: <xsl:value-of select="$prefix"/>.</xsl:message>
+        <xsl:message>PREFIXES: <xsl:value-of select="$keepPrefixes"/>.</xsl:message>
+        <xsl:message>TEST: <xsl:value-of select="f:starts-with-any($id, $keepPrefixes)"/>.</xsl:message>
+        <xsl:message>RESULT: <xsl:value-of select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>.</xsl:message>
+        -->
+
+        <xsl:value-of select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>
+
     </xsl:function>
 
+    <xsl:function name="f:starts-with-any" as="xs:boolean">
+        <xsl:param name="id" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
+
+        <!--
+        <xsl:message>TEST: <xsl:value-of select="$id"/> : <xsl:value-of select="$keepPrefixes"/>.</xsl:message>
+        <xsl:message>RESULT: <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) > 1"/>.</xsl:message>
+        -->
+
+        <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt;= 1"/>
+
+    </xsl:function>
 
     <xsl:template match="@id" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
-        <xsl:param name="keepPrefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
 
         <xsl:attribute name="id">
-            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefix)"/>
+            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefixes)"/>
         </xsl:attribute>
     </xsl:template>
 
 
     <xsl:template match="@target" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
-        <xsl:param name="keepPrefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
 
         <xsl:attribute name="target">
-            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefix)"/>
+            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefixes)"/>
         </xsl:attribute>
     </xsl:template>
 
 
     <xsl:template match="node()|@*" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
-        <xsl:param name="keepPrefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
 
         <xsl:copy>
             <xsl:apply-templates select="node()|@*" mode="import-document">
                 <xsl:with-param name="prefix" select="$prefix"/>
-                <xsl:with-param name="keepPrefix" select="$keepPrefix"/>
+                <xsl:with-param name="keepPrefixes" select="$keepPrefixes"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
-
 
 </xsl:transform>
