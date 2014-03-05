@@ -89,7 +89,7 @@ Then also refer to the media-overlay in the entry for the original (text) items
 <item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml" media-overlay="ch1"/>
 }}}
 
-== Implementation in TEI ==
+== Implementation in `tei2html`  ==
 
 Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the .smil file to use as an overlay.
 
@@ -98,6 +98,8 @@ Currently, there is no support for SMIL types of overlay in TEI. We can solve th
 }}}
 
 And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
+
+All this is handled in the file `tei2opf.xml`.
 
 == TODO ==
 
