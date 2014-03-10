@@ -13,7 +13,7 @@
 
 == Metadata ==
 
-Adding metadata to ePub is not yet standardized.
+Adding metadata about the series a book belongs to in ePub is not yet standardized. Follow the calibre convention for now:
 
 {{{
 <meta name="calibre:series" content="CAC"/>
