@@ -19,3 +19,5 @@ Adding metadata about the series a book belongs to in ePub is not yet standardiz
 <meta name="calibre:series" content="CAC"/>
 <meta name="calibre:series_index" content="29"/>
 }}}
+
+For ePub 3.0, see http://www.idpf.org/epub/301/spec/epub-publications.html#sec-opf-dctitle
