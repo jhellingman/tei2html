@@ -27,10 +27,12 @@ my %books = (
 "Dt"                        => "Deuteronomy",
 "Eccles."                   => "Ecclesiastes",
 "Eccl"                      => "Ecclesiastes",
+"Eccl."                     => "Ecclesiastes",
 "Esther"                    => "Esther",
 "Est"                       => "Esther",
 "Exod."                     => "Exodus",
 "Ex"                        => "Exodus",
+"Ex."                       => "Exodus",
 "Ezek."                     => "Ezekiel",
 "Ez"                        => "Ezekiel",
 "Ezra"                      => "Ezra",
@@ -45,6 +47,7 @@ my %books = (
 "Hos"                       => "Hosea",
 "Isa."                      => "Isaiah",
 "Is"                        => "Isaiah",
+"Is."                       => "Isaiah",
 "Jer."                      => "Jeremiah",
 "Jer"                       => "Jeremiah",
 "Job"                       => "Job",
@@ -154,6 +157,7 @@ my %books = (
 "Lk"                        => "Luke",
 "Mark"                      => "Mark",
 "Mk"                        => "Mark",
+"Mat."                      => "Matthew",
 "Matt."                     => "Matthew",
 "Mt"                        => "Matthew",
 "1 Pet."                    => "1 Peter",
@@ -170,8 +174,10 @@ my %books = (
 "Rom"                       => "Romans",
 "1 Thess."                  => "1 Thessalonians",
 "1 Thes"                    => "1 Thessalonians",
+"1 Thes."                   => "1 Thessalonians",
 "2 Thess."                  => "2 Thessalonians",
 "2 Thes"                    => "2 Thessalonians",
+"2 Thes."                   => "2 Thessalonians",
 "1 Tim."                    => "1 Timothy",
 "1 Tm"                      => "1 Timothy",
 "2 Tim."                    => "2 Timothy",
@@ -201,11 +207,13 @@ my %abbreviations = (
 "ecclesiastes"              => "Eccl",
 "eccles."                   => "Eccl",
 "eccl"                      => "Eccl",
+"eccl."                     => "Eccl",
 "esther"                    => "Est",
 "est"                       => "Est",
 "exodus"                    => "Ex",
 "exod."                     => "Ex",
 "ex"                        => "Ex",
+"ex."                       => "Ex",
 "ezekiel"                   => "Ez",
 "ezek."                     => "Ez",
 "ez"                        => "Ez",
@@ -225,6 +233,7 @@ my %abbreviations = (
 "isaiah"                    => "Is",
 "isa."                      => "Is",
 "is"                        => "Is",
+"is."                       => "Is",
 "jeremiah"                  => "Jer",
 "jer."                      => "Jer",
 "jer"                       => "Jer",
@@ -376,6 +385,7 @@ my %abbreviations = (
 "mk"                        => "Mk",
 "matthew"                   => "Mt",
 "matt."                     => "Mt",
+"mat."                      => "Mt",
 "mt"                        => "Mt",
 "1 peter"                   => "1 Pt",
 "1 pet."                    => "1 Pt",
@@ -397,9 +407,11 @@ my %abbreviations = (
 "1 thessalonians"           => "1 Thes",
 "1 thess."                  => "1 Thes",
 "1 thes"                    => "1 Thes",
+"1 thes."                   => "1 Thes",
 "2 thessalonians"           => "2 Thes",
 "2 thess."                  => "2 Thes",
 "2 thes"                    => "2 Thes",
+"2 thes."                   => "2 Thes",
 "1 timothy"                 => "1 Tm",
 "1 tim."                    => "1 Tm",
 "1 tm"                      => "1 Tm",
@@ -550,9 +562,9 @@ sub tagRef
         $book = $abbreviations{lc $book}
     }
 
-    if (($book eq "ps" && $chapter > 150) || $chapter > 66)
+    if ((lc($book) eq "ps" && $chapter > 150) || (lc($book) ne "ps" && $chapter > 66))
     {
-        print STDERR "CHAPTER number out of range in $match\n";
+        print STDERR "CHAPTER number out of range in match '$match' (book: '$book', chapter: $chapter)\n";
         return $match;
     }
 
