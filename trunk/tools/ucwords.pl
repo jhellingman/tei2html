@@ -1308,12 +1308,12 @@ sub handleFragment($)
 
     my $prevWord = "";
     # NOTE: we don't use \w and \W here, since it gives some unexpected results
-    my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
+    my @words = split(/([^\x{2032}`\pL\pN\pM-]+)/, $fragment);
     foreach my $word (@words)
     {
         if ($word ne "")
         {
-            if ($word =~ /^[^\pL\pN\pM-]+$/)
+            if ($word =~ /^[^\x{2032}`\pL\pN\pM-]+$/)
             {
                 countNonWord($word);
                 # reset previous word if not separated by more than just a space.
@@ -1720,6 +1720,8 @@ sub StripDiacritics($)
         s/\x{0152}/Oe/g;    ##  Œ
         s/\x{0153}/oe/g;    ##  œ
 
+        s/\x{2032}//g;          ## prime
+        s/`//g;					## back-tick.
         s/\x{02bb}//g;          ## 'Okina (Hawaiian glottal stop)
         s/\x{02bc}//g;          ## Modifier letter apostrophe
         s/\x{02bf}//g;          ## Modifier letter left half ring (Ayin)
