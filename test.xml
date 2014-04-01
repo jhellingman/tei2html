@@ -512,13 +512,13 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <figure id="tarsier1" rend="image(images/tarsier.jpg)">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
-    <p type="figTopLeft">Top Left</p>
-    <p type="figTop">Top</p>
-    <p type="figTopRight">Top Right</p>
+    <p rend="position(figTopLeft)">Top Left</p>
+    <p rend="position(figTop)">Top</p>
+    <p rend="position(figTopRight)">Top Right</p>
 
-    <p type="figBottomLeft">Bottom Left</p>
-    <p type="figBottom">Bottom</p>
-    <p type="figBottomRight">Bottom Right</p>
+    <p rend="position(figBottomLeft)">Bottom Left</p>
+    <p rend="position(figBottom)">Bottom</p>
+    <p rend="position(figBottomRight)">Bottom Right</p>
 
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
@@ -527,9 +527,9 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 <figure id="tarsier2" rend="image(images/tarsier.jpg)">
     <head>The <hi>Philippine</hi> Tarsier</head>
 
-    <p type="figTopLeft">A very long piece of text in the top left to test its behaviour.</p>
+    <p rend="position(figTopLeft)">A very long piece of text in the top left to test its behaviour.</p>
 
-    <p type="figBottomRight">A very long piece of text in the bottom right to test its behaviour.</p>
+    <p rend="position(figBottomRight)">A very long piece of text in the bottom right to test its behaviour.</p>
 
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>

@@ -373,7 +373,7 @@
 
 
     <xsl:template name="figure-annotations-top">
-        <xsl:if test="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight']">
+        <xsl:if test="p[f:hasTopPositionAnnotation(@rend)]">
 
             <xsl:variable name="file">
                 <xsl:call-template name="getimagefilename"/>
@@ -388,17 +388,17 @@
                     <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
-                <xsl:if test="p[@type='figTopLeft']">
-                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopLeft']">
+                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft' or contains(@rend, 'position(figTopLeft)')]" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="p[@type='figTop']">
-                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTop']">
+                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop' or contains(@rend, 'position(figTop)')]" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="not(p[@type='figTop'])">
+                <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figTop'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
-                <xsl:if test="p[@type='figTopRight']">
-                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopRight']">
+                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight' or contains(@rend, 'position(figTopRight)')]" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
         </xsl:if>
@@ -406,7 +406,7 @@
 
 
     <xsl:template name="figure-annotations-bottom">
-        <xsl:if test="p[@type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']">
+        <xsl:if test="p[f:hasBottomPositionAnnotation(@rend)]">
 
             <xsl:variable name="file">
                 <xsl:call-template name="getimagefilename"/>
@@ -421,31 +421,75 @@
                     <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
-                <xsl:if test="p[@type='figBottomLeft']">
-                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomLeft']">
+                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft' or contains(@rend, 'position(figBottomLeft)')]" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="p[@type='figBottom']">
-                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottom']">
+                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom' or contains(@rend, 'position(figBottom)')]" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="not(p[@type='figBottom'])">
+                <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figBottom'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
-                <xsl:if test="p[@type='figBottomRight']">
-                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight']" mode="figAnnotation"/></span>
+                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomRight']">
+                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight' or contains(@rend, 'position(figBottomRight)')]" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
         </xsl:if>
     </xsl:template>
 
 
+    <xsl:function name="f:hasPositionAnnotation" as="xs:boolean">
+        <xsl:param name="rend"/>
+
+        <xsl:value-of select="f:positionAnnotation($rend) != ''"/>
+    </xsl:function>
+
+    <xsl:function name="f:hasTopPositionAnnotation" as="xs:boolean">
+        <xsl:param name="rend"/>
+
+        <xsl:value-of select="f:topPositionAnnotation($rend) != ''"/>
+    </xsl:function>
+
+    <xsl:function name="f:hasBottomPositionAnnotation" as="xs:boolean">
+        <xsl:param name="rend"/>
+
+        <xsl:value-of select="f:bottomPositionAnnotation($rend) != ''"/>
+    </xsl:function>
+
+    <xsl:function name="f:positionAnnotation" as="xs:string">
+        <xsl:param name="rend"/>
+
+        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
+
+        <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight'
+                                or $position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
+    </xsl:function>
+
+    <xsl:function name="f:topPositionAnnotation" as="xs:string">
+        <xsl:param name="rend"/>
+
+        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
+
+        <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight') then $position else ''"/>
+    </xsl:function>
+
+     <xsl:function name="f:bottomPositionAnnotation" as="xs:string">
+        <xsl:param name="rend"/>
+
+        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
+
+        <xsl:value-of select="if ($position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
+    </xsl:function>
+
     <xsl:template match="figure/head">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
 
-    <xsl:template match="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight' or @type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']"/>
+    <xsl:template match="p[f:hasPositionAnnotation(@rend)]"/>
 
-    <xsl:template match="p[@type='figTopLeft' or @type='figTop' or @type='figTopRight' or @type='figBottomLeft' or @type='figBottom' or @type='figBottomRight']" mode="figAnnotation">
+
+    <xsl:template match="p[f:hasPositionAnnotation(@rend)]" mode="figAnnotation">
         <xsl:apply-templates/>
     </xsl:template>
 
