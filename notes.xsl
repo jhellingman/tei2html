@@ -1,6 +1,8 @@
 <!DOCTYPE xsl:stylesheet [
 
     <!ENTITY deg        "&#176;">
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY uparrow    "&#8593;">
 
 ]>
 
@@ -107,8 +109,10 @@
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
         </p>
-        <xsl:apply-templates select="*[position() > 1]" mode="footnotes"/>
+        <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
+        <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle footnotes without embedded paragraphs.</xd:short>
@@ -125,6 +129,7 @@
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
+            <xsl:call-template name="footnote-return-arrow"/>
         </p>
     </xsl:template>
 
@@ -146,6 +151,26 @@
         <xsl:text> </xsl:text>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Place a footnote return arrow.</xd:short>
+        <xd:detail>Place a footnote return arrow after the footnote.</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="footnote-return-arrow">
+        <xsl:text>&nbsp;</xsl:text>
+        <a class="fnarrow">
+            <xsl:attribute name="href">
+                <xsl:call-template name="generate-href">
+                    <xsl:with-param name="target" select="ancestor-or-self::note"/>
+                </xsl:call-template>
+                <xsl:text>src</xsl:text>
+            </xsl:attribute>
+            <xsl:text>&uparrow;</xsl:text>
+        </a>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Calculate the footnote number.</xd:short>
         <xd:detail>Calculate the footnote number. This number is based on the position of the note in the div0 or div1 element it occurs in.
@@ -164,24 +189,34 @@
     </xsl:template>
 
 
-    <xsl:template match="*" mode="footfirst">
+    <xsl:template match="*" mode="footfirst footlast">
         <xsl:apply-templates/>
     </xsl:template>
 
+
     <xsl:template match="p" mode="footnotes">
         <p>
-            <xsl:variable name="class">
-                footnote
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:apply-templates/>
+            <xsl:call-template name="footnote-paragraph"/>
         </p>
     </xsl:template>
 
-    <xsl:template match="*" mode="footnotes">
+
+    <xsl:template match="p" mode="footlast">
+        <p>
+            <xsl:call-template name="footnote-paragraph"/>
+            <xsl:call-template name="footnote-return-arrow"/>
+        </p>
+    </xsl:template>
+
+
+    <xsl:template name="footnote-paragraph">
+        <xsl:variable name="class">
+            footnote
+            <xsl:call-template name="generate-rend-class-name-if-needed"/>
+        </xsl:variable>
+        <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
+        <xsl:call-template name="set-lang-id-attributes"/>
         <xsl:apply-templates/>
     </xsl:template>
 
