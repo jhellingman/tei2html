@@ -126,7 +126,7 @@
 
 <p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
 <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi>
-text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italic</hi>.</note> As you can see, the preceding sentence is followed by
+text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by
 a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table>
@@ -138,6 +138,14 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 </table>
 
 <p id="loon">A sample of an embedded audio file: The sound of a <hi>Loon</hi>, courtesy of the U.S. Fish and Wildlife Service.</p>
+
+<p>Footnote test paragraph.
+First,<note>Note without paragraph.</note>
+second,<note><p>Note with just one paragraph.</p></note>
+third,<note><p>Note with two paragraphs.</p><p>Second paragraph.</p></note>
+fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third paragraph.</p></note>
+</p>
+
 
 </div1>
 <div1 id="ch2" n="2" type="Chapter">

@@ -11,7 +11,7 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f"
+    exclude-result-prefixes="f xd"
     version="2.0"
     >
 
@@ -108,6 +108,9 @@
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
+            <xsl:if test="count(*) = 1">
+                <xsl:call-template name="footnote-return-arrow"/>
+            </xsl:if>
         </p>
         <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
         <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
