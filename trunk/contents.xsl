@@ -34,7 +34,7 @@
             </table>
         </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2012, 2014, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -91,17 +91,17 @@
         </xsl:variable>
 
         <xsl:element name="{$list-element}">
-            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1">
+            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1 | /TEI.2/text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else /TEI.2/text/body/div1">
+            <xsl:apply-templates mode="gentoc" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else (/TEI.2/text/body/div1 | /TEI.2/text/body/div)">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]">
+            <xsl:apply-templates mode="gentoc" select="(/TEI.2/text/back/div1 | /TEI.2/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
@@ -116,7 +116,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
+    <xsl:template match="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
         <xsl:param name="maxlevel" as="xs:integer" select="7"/>
         <xsl:param name="list-element" as="xs:string" select="'ul'"/>
 
@@ -129,7 +129,7 @@
                         <xsl:call-template name="generate-toc-entry"/>
                         <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
                             <xsl:element name="{$list-element}">
-                                <xsl:apply-templates select="div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
+                                <xsl:apply-templates select="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
                                     <xsl:with-param name="maxlevel" select="$maxlevel"/>
                                     <xsl:with-param name="list-element" select="$list-element"/>
                                 </xsl:apply-templates>
@@ -170,17 +170,24 @@
 
     <xsl:function name="f:contains-div" as="xs:boolean">
         <xsl:param name="div" as="node()"/>
-        <xsl:value-of select="if ($div/div0 or $div/div1 or $div/div2 or $div/div3 or $div/div4 or $div/div5 or $div/div6) then 1 else 0"/>
+        <xsl:value-of select="if ($div/div or $div/div0 or $div/div1 or $div/div2 or $div/div3 or $div/div4 or $div/div5 or $div/div6) then 1 else 0"/>
     </xsl:function>
 
 
     <xd:doc>
-        <xd:short>Determine the level of the division (by looking at its name).</xd:short>
+        <xd:short>Determine the level of the division (by counting its parents or looking at its name).</xd:short>
     </xd:doc>
 
     <xsl:function name="f:div-level" as="xs:integer">
         <xsl:param name="div" as="node()"/>
-        <xsl:value-of select="substring(local-name($div), 4)"/>
+        <xsl:choose>
+            <xsl:when test="local-name($div) = 'div'">
+                <xsl:value-of select="count($div/ancestor::div)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="substring(local-name($div), 4)"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
 

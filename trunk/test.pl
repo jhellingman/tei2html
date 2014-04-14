@@ -58,3 +58,15 @@ system ("zip -Xr9Dq ../test.epub * -x mimetype");
 chdir "..";
 
 system ("$epubcheck test.epub 2> test-epubcheck.err");
+
+
+
+# system ("$saxon test-div.xml $xsldir/normalize-table.xsl > test-div-normalized.xml");
+# system ("$saxon test-div-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test-div.html");
+# system ("$saxon test-div-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test-div\" > tmp-div.xhtml");
+
+# system ("del test-div.epub");
+# chdir "epub";
+# system ("zip -Xr9Dq ../test-div.epub mimetype");
+# system ("zip -Xr9Dq ../test-div.epub * -x mimetype");
+# chdir "..";
