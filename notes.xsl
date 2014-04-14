@@ -176,12 +176,16 @@
 
     <xd:doc>
         <xd:short>Calculate the footnote number.</xd:short>
-        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the div0 or div1 element it occurs in.
-        Take care to ignore div1 elements that appear in embedded quoted text.</xd:detail>
+        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the <code>div0</code> or <code>div1</code> element it occurs in.
+        Take care to ignore <code>div1</code> elements that appear in embedded quoted text.</xd:detail>
     </xd:doc>
 
     <xsl:template name="footnote-number">
         <xsl:choose>
+            <!-- TODO: fill in proper values for from attribute, needs to take into account level of div element (parent should be front, body, or back). -->
+            <xsl:when test="ancestor::div">
+                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div[not(ancestor::q)]"/>
+            </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
                 <xsl:number level="any" count="note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
             </xsl:when>

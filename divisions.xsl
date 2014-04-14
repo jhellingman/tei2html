@@ -70,7 +70,7 @@
 
     <xd:doc>
         <xd:short>Format a div0 element.</xd:short>
-        <xd:detail>Format a div0 element. At this level, we need to take care of inserting footnotes not handled earlier.</xd:detail>
+        <xd:detail>Format a <code>div0</code> element. At this level, we need to take care of inserting footnotes not handled earlier.</xd:detail>
     </xd:doc>
 
     <xsl:template match="div0">
@@ -95,7 +95,7 @@
 
     <xd:doc>
         <xd:short>Format head element of div0.</xd:short>
-        <xd:detail>Format a head element for a div0. At this level we still set the running header (for ePub3).</xd:detail>
+        <xd:detail>Format a head element for a <code>div0</code>. At this level we still set the running header (for ePub3).</xd:detail>
     </xd:doc>
 
     <xsl:template match="div0/head">
@@ -128,8 +128,8 @@
 
     <xd:doc>
         <xd:short>Format div1 element.</xd:short>
-        <xd:detail>Format div1 element. At this level, we need to take care of inserting footnotes at the end of the division.
-        We also may need to insert footnotes of a higher-level div0 element, if present, before starting the output division.</xd:detail>
+        <xd:detail>Format <code>div1</code> element. At this level, we need to take care of inserting footnotes at the end of the division.
+        We also may need to insert footnotes of a higher-level <code>div0</code> element, if present, before starting the output division.</xd:detail>
     </xd:doc>
 
     <xsl:template match="div1">
@@ -160,7 +160,7 @@
 
     <xd:doc>
         <xd:short>Format head element of div1.</xd:short>
-        <xd:detail>Format a head element for a div1. At this level we still set the running header (for ePub3).</xd:detail>
+        <xd:detail>Format a head element for a <code>div1</code>. At this level we still set the running header (for ePub3).</xd:detail>
     </xd:doc>
 
     <xsl:template match="div1/head">
@@ -205,6 +205,30 @@
 
     <xsl:template match="div2/head | div3/head | div4/head | div5/head | div6/head">
         <xsl:variable name="level" select="number(substring(name(..), 4, 1)) + 1"/>
+        <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
+
+        <xsl:call-template name="headPicture"/>
+        <xsl:call-template name="setLabelHeader"/>
+        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+            <xsl:element name="h{$level}">
+                <xsl:call-template name="headText"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
+
+    <xsl:template match="div">
+        <div class="{name()}">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-div-class"/>
+            <xsl:call-template name="handleDiv"/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="div/head">
+        <xsl:variable name="level" select="count(ancestor::div) + 1"/>
         <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
 
         <xsl:call-template name="headPicture"/>
