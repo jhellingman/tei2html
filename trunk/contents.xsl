@@ -313,6 +313,18 @@
         </i>
     </xsl:template>
 
+    <xsl:template match="hi[@rend='bold']" mode="tochead">
+        <b>
+            <xsl:apply-templates mode="tochead"/>
+        </b>
+    </xsl:template>
+
+    <xsl:template match="hi[@rend='sc']" mode="tochead">
+        <span class="sc">
+            <xsl:apply-templates mode="tochead"/>
+        </span>
+    </xsl:template>
+
     <xsl:template match="hi[@rend='sup']" mode="tochead">
         <sup>
             <xsl:apply-templates mode="tochead"/>
