@@ -40,7 +40,7 @@
 
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
-        <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves 
+        <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves
         footnotes to the end of the div1 element they appear in (but be careful to avoid this in
         div1 elements embedded in quoted texts). Optionally, we place the text of the footnote in-line as well,
         for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
@@ -73,7 +73,7 @@
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="."/>
         <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
-        
+
         <!-- No explicit request for a notes division -->
         <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
             <!-- Division is not part of quoted text -->
@@ -94,7 +94,7 @@
 
     <xd:doc>
         <xd:short>Handle footnotes with embedded paragraphs.</xd:short>
-        <xd:detail>Insert a footnote with embedded paragraphs. These need to be handled slightly differently 
+        <xd:detail>Insert a footnote with embedded paragraphs. These need to be handled slightly differently
         from footnotes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
     </xd:doc>
 
@@ -165,7 +165,8 @@
         <a class="fnarrow">
             <xsl:attribute name="href">
                 <xsl:call-template name="generate-href">
-                    <xsl:with-param name="target" select="ancestor-or-self::note"/>
+                    <!-- Take care to pick the first ancestor, to work correctly with nested footnotes. -->
+                    <xsl:with-param name="target" select="ancestor-or-self::note[1]"/>
                 </xsl:call-template>
                 <xsl:text>src</xsl:text>
             </xsl:attribute>
@@ -176,15 +177,14 @@
 
     <xd:doc>
         <xd:short>Calculate the footnote number.</xd:short>
-        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the <code>div0</code> or <code>div1</code> element it occurs in.
+        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the <code>div</code>, <code>div0</code> or <code>div1</code> element it occurs in.
         Take care to ignore <code>div1</code> elements that appear in embedded quoted text.</xd:detail>
     </xd:doc>
 
     <xsl:template name="footnote-number">
         <xsl:choose>
-            <!-- TODO: fill in proper values for from attribute, needs to take into account level of div element (parent should be front, body, or back). -->
             <xsl:when test="ancestor::div">
-                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
             </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
                 <xsl:number level="any" count="note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
@@ -230,7 +230,7 @@
 
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
-        <xd:detail>Handle notes in a text-critical apparatus (coded with attribute place="apparatus"). These notes are only
+        <xd:detail>Handle notes in a text-critical apparatus (coded with attribute <code>place="apparatus"</code>). These notes are only
         included when a divGen element is present, calling for their rendition.</xd:detail>
     </xd:doc>
 

@@ -3,7 +3,7 @@
 
     Stylesheet to format division elements, to be imported in tei2html.xsl.
 
-    Requires: 
+    Requires:
         localization.xsl    : templates for localizing strings.
 
 -->
@@ -220,15 +220,27 @@
     <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
 
     <xsl:template match="div">
-        <div class="{name()}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="handleDiv"/>
-        </div>
+        <xsl:if test="not(contains(@rend, 'display(none)'))">
+            <xsl:variable name="level" select="f:divLevel(.) + 1"/>
+            <div class="{name()}{$level}">
+                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:call-template name="generate-div-class"/>
+                <xsl:if test="$level &lt; 3">
+                    <xsl:call-template name="generate-toc-link"/>
+                    <xsl:call-template name="generate-label">
+                        <xsl:with-param name="headingLevel" select="concat('h', $level)"/>
+                    </xsl:call-template>
+                </xsl:if>
+                <xsl:call-template name="handleDiv"/>
+                <xsl:if test="parent::front | parent::body | parent::back">
+                    <xsl:call-template name="insert-footnotes"/>
+                </xsl:if>
+            </div>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="div/head">
-        <xsl:variable name="level" select="count(ancestor::div) + 1"/>
+        <xsl:variable name="level" select="f:divLevel(.)"/>
         <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
 
         <xsl:call-template name="headPicture"/>
@@ -240,6 +252,19 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xsl:function name="f:divLevel" as="xs:integer">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:choose>
+            <xsl:when test="$node/ancestor::q">
+                <xsl:value-of select="count($node/ancestor::div[ancestor::q])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="count($node/ancestor::div)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
     <!--====================================================================-->
     <!-- Generic division content handling -->
@@ -524,7 +549,7 @@
 
     <xd:doc>
         <xd:short>Align two division based on the @n attribute in paragraphs.</xd:short>
-        <xd:detail>Align two division based on the @n attribute in paragraphs. This code handles 
+        <xd:detail>Align two division based on the @n attribute in paragraphs. This code handles
         the case where paragraphs are added or removed between aligned paragraphs, as can be
         expected in a more free translation.</xd:detail>
     </xd:doc>
