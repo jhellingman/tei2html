@@ -223,6 +223,12 @@
     <!--====================================================================-->
     <!-- Corrections -->
 
+    <xd:doc>
+        <xd:short>Corrections.</xd:short>
+        <xd:detail>Corrections are rendered as red-dash-underline spans with a pop-up that
+        will show the original text.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="corr">
         <xsl:call-template name="do-corr"/>
     </xsl:template>
@@ -230,6 +236,13 @@
     <xsl:template match="corr" mode="titlePage">
         <xsl:call-template name="do-corr"/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Handle Corrections.</xd:short>
+        <xd:detail>In this template, we filter out the minor and punctuation corrections (marked with the <code>@resp</code>
+        attribute with value <code>n</code> or <code>p</code>). Furthermore, the span will be given an id, such that
+        the list of corrections in the colophon can link to it.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="do-corr">
         <xsl:choose>
@@ -271,6 +284,16 @@
     <!--====================================================================-->
     <!-- Gaps -->
 
+    <xd:doc>
+        <xd:short>Hangle a gap.</xd:short>
+        <xd:detail><p>The <code>gap</code> element indicated that some text has been omitted. The
+        <code>@reason</code> attribute can be used to give a reason; the <code>@unit</code> and <code>@extent</code>
+        attributes can be used to give an estimate of the size of the omitted material.</p>
+        
+        <p>In HTML, a gap is rendered with the localized words [<i>missing text</i>], and a pop-up giving the reason 
+        and extent.</p></xd:detail>
+    </xd:doc>
+
     <xsl:template match="gap">
         <xsl:variable name="params">
             <params>
@@ -282,10 +305,20 @@
 
         <span class="gap">
             <xsl:attribute name="title">
-                <xsl:call-template name="FormatMessage">
-                    <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
-                    <xsl:with-param name="params" select="$params"/>
-                </xsl:call-template>
+                <xsl:choose>
+                    <xsl:when test="@extent">
+                        <xsl:call-template name="FormatMessage">
+                            <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
+                            <xsl:with-param name="params" select="$params"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="FormatMessage">
+                            <xsl:with-param name="name" select="'msgMissingTextWithReason'"/>
+                            <xsl:with-param name="params" select="$params"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:attribute>
             [<i><xsl:value-of select="f:message('msgMissingText')"/></i>]
         </span>
@@ -294,6 +327,12 @@
 
     <!--====================================================================-->
     <!-- Abbreviations -->
+
+    <xd:doc>
+        <xd:short>Abbreviations.</xd:short>
+        <xd:detail>Abbreviations are rendered as dash-underline spans with a pop-up that
+        will show the expanded text taken from the <code>@expan</code> attribute (if available).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="abbr">
         <span class="abbr">
@@ -332,6 +371,12 @@
 
     <!--====================================================================-->
     <!-- Transcriptions (see also choice element) -->
+
+    <xd:doc>
+        <xd:short>Transcriptions.</xd:short>
+        <xd:detail>Transcriptions are rendered as spans with a pop-up that
+        will show the transcribed text taken from the <code>@trans</code> attribute (if available).</xd:detail>
+    </xd:doc>
 
     <xsl:template match="trans">
         <span class="abbr">
