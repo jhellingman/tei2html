@@ -120,6 +120,7 @@
         <msg:message name="msgAvailability">Availability</msg:message>
         <msg:message name="msgEncoding">Encoding</msg:message>
         <msg:message name="msgMissingText">missing text</msg:message>
+        <msg:message name="msgMissingTextWithReason">Missing text, for the following reason: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Missing <msg:param name="extent"/> <msg:param name="unit"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgOverviewForeignFragments">Overview of fragments in foreign languages</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>

@@ -10,6 +10,7 @@
     <!ENTITY rsquo      "&#x2019;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
+    <!ENTITY ndash      "&#x2013;">
     <!ENTITY prime      "&#x2032;">
     <!ENTITY Prime      "&#x2033;">
     <!ENTITY plusmn     "&#x00B1;">
@@ -352,6 +353,9 @@
         <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+',     'P0006', 'Space after opening punctuation mark.')"/>
 
         <xsl:copy-of select="f:should-not-contain(., ',[^\s&mdash;&rdquo;&rsquo;0-9)\]]',   'P0007', 'Missing space after comma.')"/>
+        <xsl:copy-of select="f:should-not-contain(., ',[&mdash;&ndash;]-',   'P0010', 'Em-dash or en-dash followed by dash.')"/>
+        <xsl:copy-of select="f:should-not-contain(., ',[&mdash;-]&ndash;',   'P0011', 'Em-dash or dash followed by en-dash.')"/>
+        <xsl:copy-of select="f:should-not-contain(., ',[&ndash;-]&mdash;',   'P0012', 'En-dash or dash followed by em-dash.')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
