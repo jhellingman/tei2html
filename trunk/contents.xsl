@@ -349,7 +349,7 @@
     <xsl:template name="genindextoc">
         <div class="transcribernote indextoc">
             <xsl:call-template name="generate-id-attribute"/>
-            <xsl:apply-templates select="../div2/head" mode="genindextoc"/>
+            <xsl:apply-templates select="../div2/head | ../div/head" mode="genindextoc"/>
         </div>
     </xsl:template>
 
