@@ -7,7 +7,7 @@
 
     <xsl:output
         method="text"
-        encoding="UTF-8"/>
+        encoding="utf-8"/>
 
     <!-- review translations in our messages.xml -->
 

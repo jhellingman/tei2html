@@ -27,10 +27,11 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+
     <xsl:output 
         method="xml" 
         indent="yes"
-        encoding="UTF-8"/>
+        encoding="utf-8"/>
 
 
     <xd:doc type="string">Number of page to extract (based on @n attribute).</xd:doc>

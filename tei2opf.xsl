@@ -23,6 +23,14 @@
     </xd:doc>
 
 
+    <xsl:output name="opf"
+        doctype-public=""
+        doctype-system=""
+        method="xml"
+        indent="yes"
+        encoding="utf-8"/>
+
+
     <xd:doc type="string">Filename of file with additional items to be added to the OPF file, such as custom fonts.</xd:doc>
 
     <xsl:param name="opfMetadataFile"/>
@@ -37,13 +45,7 @@
     </xd:doc>
 
     <xsl:template match="TEI.2" mode="opf">
-        <xsl:result-document
-                doctype-public=""
-                doctype-system=""
-                href="{$path}/{$basename}.opf"
-                method="xml"
-                indent="yes"
-                encoding="UTF-8">
+        <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
             <package>

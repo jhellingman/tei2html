@@ -146,13 +146,7 @@
 
         <xsl:message terminate="no">INFO:    copying XML file: <xsl:value-of select="$filename"/> to <xsl:value-of select="$path"/>.</xsl:message>
 
-        <xsl:result-document
-                doctype-public=""
-                doctype-system=""
-                href="{$path}/{$filename}"
-                method="xml"
-                indent="no"
-                encoding="UTF-8">
+        <xsl:result-document format="xml-noindent" href="{$path}/{$filename}">
             <xsl:copy-of select="document($filename, .)"/>
         </xsl:result-document>
     </xsl:template>

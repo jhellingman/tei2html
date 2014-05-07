@@ -24,11 +24,7 @@
     </xd:doc>
 
     <xsl:template match="TEI.2" mode="ePubNav">
-        <xsl:result-document
-                href="{$path}/{$basename}-nav.xhtml"
-                method="xml"
-                indent="yes"
-                encoding="UTF-8">
+        <xsl:result-document href="{$path}/{$basename}-nav.xhtml">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>-nav.xhtml.</xsl:message>
 
             <html>

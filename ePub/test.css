@@ -673,6 +673,17 @@ p.quote,div.blockquote, div.argument
     text-decoration:none;
 }
 
+td.galleryFigure
+{
+    text-align: center;
+    vertical-align: middle;
+}
+
+td.galleryCaption
+{
+    text-align: center;
+    vertical-align: top;
+}
 
 ul { list-style-type: none; }
 

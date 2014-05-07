@@ -55,11 +55,31 @@
     <xsl:include href="tei2ncx.xsl"/>
     <xsl:include href="tei2epubnav.xsl"/>
 
-    <xsl:output
+    <xsl:output name="xhtml"
         doctype-public="-//W3C//DTD XHTML 1.1//EN"
         doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
         method="xml"
         encoding="utf-8"/>
+
+    <xsl:output name="xml"
+        doctype-public=""
+        doctype-system=""
+        method="xml"
+        indent="yes"
+        encoding="utf-8"/>
+
+    <xsl:output name="xml-noindent"
+        doctype-public=""
+        doctype-system=""
+        method="xml"
+        indent="no"
+        encoding="utf-8"/>
+
+    <xsl:output
+        method="xml"
+        doctype-system="about:legacy-compat"
+        encoding="utf-8"
+        indent="no"/>
 
     <!--====================================================================-->
 
@@ -88,7 +108,7 @@
     <!--====================================================================-->
 
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>
-    <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
+    <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output[not(@name)]/@encoding"/>
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputformat" select="'epub'"/>
 
@@ -104,7 +124,7 @@
     <xd:doc>
         <xd:short>Main stylesheet for ePub generation.</xd:short>
         <xd:detail>
-            <p>This stylesheet is intended to be the first triggered, and will initiates 
+            <p>This stylesheet is intended to be the first triggered, and will initiate
             generation of various ePub elements.</p>
         </xd:detail>
     </xd:doc>
@@ -140,9 +160,9 @@
     </xd:doc>
 
     <xsl:template name="mimetype">
-        <xsl:result-document 
+        <xsl:result-document
                 href="{$path}/mimetype"
-                method="text" 
+                method="text"
                 encoding="UTF-8">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
     </xsl:template>
@@ -156,13 +176,7 @@
     </xd:doc>
 
     <xsl:template name="container">
-        <xsl:result-document 
-                doctype-public=""
-                doctype-system=""
-                href="{$path}/META-INF/container.xml"
-                method="xml" 
-                indent="yes"
-                encoding="UTF-8">
+        <xsl:result-document format="xml" href="{$path}/META-INF/container.xml">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/META-INF/container.xml.</xsl:message>
 
             <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
@@ -182,9 +196,9 @@
     </xd:doc>
 
     <xsl:template name="copy-stylesheets">
-        <xsl:result-document 
+        <xsl:result-document
                 href="{$path}/{$basename}.css"
-                method="text" 
+                method="text"
                 encoding="UTF-8">
 
             <xsl:variable name="stylesheetname">
@@ -232,9 +246,9 @@
     <!-- Cover -->
 
     <xsl:template name="cover">
-        <xsl:result-document 
+        <xsl:result-document
                 href="{$path}/cover.xhtml"
-                method="xml" 
+                method="xml"
                 encoding="UTF-8">
 
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
@@ -251,11 +265,11 @@
     </xd:doc>
 
     <xsl:template name="pagemap">
-        <xsl:result-document 
+        <xsl:result-document
                 doctype-public=""
                 doctype-system=""
                 href="{$path}/pagemap.xml"
-                method="xml" 
+                method="xml"
                 encoding="UTF-8">
 
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/pagemap.xml.</xsl:message>

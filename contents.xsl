@@ -542,7 +542,7 @@
     </xsl:template>
 
     <xsl:template match="figure" mode="gallery">
-        <td align="center" valign="middle">
+        <td class="galleryFigure">
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <img>
@@ -554,7 +554,7 @@
     </xsl:template>
 
     <xsl:template match="figure" mode="gallery-captions">
-        <td align="center" valign="top">
+        <td class="galleryCaption">
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <xsl:apply-templates select="head" mode="gallery-captions"/>
