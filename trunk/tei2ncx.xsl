@@ -10,15 +10,17 @@
         version="2.0">
 
 
+    <xsl:output name="ncx"
+        doctype-public="-//NISO//DTD ncx 2005-1//EN"
+        doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
+        method="xml"
+        indent="yes"
+        encoding="utf-8"/>
+
+
     <xsl:template match="TEI.2" mode="ncx">
 
-        <xsl:result-document
-                href="{$path}/{$basename}.ncx"
-                doctype-public="-//NISO//DTD ncx 2005-1//EN"
-                doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
-                method="xml"
-                indent="yes"
-                encoding="UTF-8">
+        <xsl:result-document format="ncx" href="{$path}/{$basename}.ncx">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
 
             <ncx version="2005-1">

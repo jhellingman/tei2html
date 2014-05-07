@@ -96,9 +96,16 @@
 
     <xsl:template name="generate-metadata">
 
-        <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
+        <xsl:choose>
+            <xsl:when test="$optionEPub3 = 'Yes'">
+                <meta charset="{$encoding}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
+            </xsl:otherwise>
+        </xsl:choose>
         <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"/>
-        <meta name="author"             content="{$author}"/>
+        <meta name="author" content="{$author}"/>
 
         <!-- Link to cover page -->
         <xsl:if test="//figure[@id='cover-image']">
@@ -106,15 +113,15 @@
         </xsl:if>
 
         <!-- Insert Dublin Core metadata -->
-        <link rel="schema.DC"     href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
+        <link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
 
-        <meta name="DC.Creator"   content="{$author}"/>
-        <meta name="DC.Title"     content="{$title}"/>
+        <meta name="DC.Creator" content="{$author}"/>
+        <meta name="DC.Title" content="{$title}"/>
         <xsl:if test="f:isvalid($pubdate)">
-            <meta name="DC.Date"      content="{$pubdate}"/>
+            <meta name="DC.Date" content="{$pubdate}"/>
         </xsl:if>
-        <meta name="DC.Language"  content="{$language}"/>
-        <meta name="DC.Format"    content="text/html"/>
+        <meta name="DC.Language" content="{$language}"/>
+        <meta name="DC.Format" content="text/html"/>
         <meta name="DC.Publisher" content="{$publisher}"/>
         <xsl:if test="f:isvalid(//idno[@type='PGnum'])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
@@ -146,7 +153,7 @@
         <xsl:choose>
             <xsl:when test="$outputformat = 'epub'">
                 <!-- In ePub, we collect all stylesheets into a single file -->
-                <link href="{$basename}.css"    rel="stylesheet"            type="text/css"/>
+                <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
             </xsl:when>
 
             <xsl:otherwise>

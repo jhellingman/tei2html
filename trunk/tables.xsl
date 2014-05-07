@@ -112,12 +112,8 @@
         <table>
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
 
-            <!-- Stretch to the size of the outer div if the width is set explicitly -->
-            <xsl:if test="contains(@rend, 'width(')">
-                <xsl:attribute name="width">100%</xsl:attribute>
-            </xsl:if>
-
-            <xsl:if test="contains(@rend, 'summary(')">
+            <!-- Epub3 doesn't like summaries on tables -->
+            <xsl:if test="contains(@rend, 'summary(') and $optionEPub3 != 'Yes'">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
                 </xsl:attribute>
