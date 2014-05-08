@@ -197,7 +197,9 @@
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
         <table class="correctiontable">
-            <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
+            <xsl:if test="$optionEPub3 != 'Yes'">
+                <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
+            </xsl:if>
             <tr>
                 <th><xsl:value-of select="f:message('msgPage')"/></th>
                 <th><xsl:value-of select="f:message('msgSource')"/></th>

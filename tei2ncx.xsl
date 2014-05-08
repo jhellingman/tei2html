@@ -10,9 +10,10 @@
         version="2.0">
 
 
+    <!-- Epubcheck complains about the doctypes, so leave them empty. -//NISO//DTD ncx 2005-1//EN http://www.daisy.org/z3986/2005/ncx-2005-1.dtd -->
     <xsl:output name="ncx"
-        doctype-public="-//NISO//DTD ncx 2005-1//EN"
-        doctype-system="http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"
+        doctype-public=""
+        doctype-system=""
         method="xml"
         indent="yes"
         encoding="utf-8"/>
@@ -29,11 +30,11 @@
                 </xsl:attribute>
 
                 <head>
-                    <meta name="dbt:uid">
+                    <meta name="dtb:uid">
                         <xsl:attribute name="content">
                             <xsl:choose>
                                 <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
-                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/etext/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
+                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
                             </xsl:choose>
                         </xsl:attribute>
                     </meta>
@@ -72,7 +73,7 @@
                         <xsl:apply-templates select="text" mode="navMap"/>
 
                         <xsl:copy-of select="f:create-nav-point((//divGen[@id='toc'])[1], 'contents', f:message('msgTableOfContents'))"/>
-                        <xsl:copy-of select="f:create-nav-point(key('id', 'loi')[1], 'contents', f:message('msgListOfIllustrations'))"/>
+                        <xsl:copy-of select="f:create-nav-point((//divGen[@id='loi'])[1], 'contents', f:message('msgListOfIllustrations'))"/>
                         <xsl:copy-of select="f:create-nav-point((//divGen[@type='Colophon'])[1], 'colophon', f:message('msgColophon'))"/>
 
                     </xsl:variable>
