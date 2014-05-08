@@ -131,12 +131,6 @@
                 <xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/>
             </dc:date>
         </xsl:if>
-        <dc:date>
-            <xsl:if test="$optionEPubStrict != 'Yes'">
-                <xsl:attribute name="opf:event" select="'generation'"/>
-            </xsl:if>
-            <xsl:value-of select="format-date(current-date(), '[Y0001]-[M01]-[D01]')"/>
-        </dc:date>
 
         <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
             <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
