@@ -65,6 +65,13 @@
 
     <!--== metadata ========================================================-->
 
+    <xd:doc>
+        <xd:short>Generate the metadata for in the OPF file.</xd:short>
+        <xd:detail>
+            <p>Generate the metadata for in the OPF file, based on information found mainly in the <code>teiHeader</code>.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="metadata">
         <metadata>
             <xsl:call-template name="metadata2"/>
@@ -79,6 +86,14 @@
             </xsl:if>
         </metadata>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generate ePub2 style metadata.</xd:short>
+        <xd:detail>
+            <p>Generate ePub2 style metadata.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="metadata2">
         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
@@ -157,11 +172,27 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle title information in metadata.</xd:short>
+        <xd:detail>
+            <p>Handle title information in metadata.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="title" mode="metadata">
         <dc:title>
             <xsl:value-of select="."/>
         </dc:title>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle author information in metadata.</xd:short>
+        <xd:detail>
+            <p>Handle author information in metadata.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="author" mode="metadata">
         <dc:creator>
@@ -173,11 +204,19 @@
         </dc:creator>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Translate the contributor role to an OPF code.</xd:short>
+        <xd:detail>
+            <p>Translate the contributor role to an OPF code. The list used was taken from OPF Standard, 2.0, section 2.2.6 
+            [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html], derived from the MARC Code List for Relators 
+            [http://www.loc.gov/marc/relators/relaterm.html]</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="translate-contributor-role">
         <xsl:param name="role" select="resp"/>
         <xsl:choose>
-            <!-- List taken from OPF Standard, 2.0, section 2.2.6 [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html],
-                 derived from the MARC Code List for Relators  [http://www.loc.gov/marc/relators/relaterm.html] -->
             <xsl:when test="resp='Adapter'">adp</xsl:when>
             <xsl:when test="$role='Annotator'">ann</xsl:when>
             <xsl:when test="$role='Arranger'">arr</xsl:when>
@@ -223,6 +262,14 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle information on other contributors in metadata.</xd:short>
+        <xd:detail>
+            <p>Handle information on other contributors in metadata.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="respStmt" mode="metadata">
         <dc:contributor>
             <xsl:if test="$optionEPubStrict != 'Yes'">
@@ -237,6 +284,14 @@
         </dc:contributor>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle publication details in metadata.</xd:short>
+        <xd:detail>
+            <p>Handle publication details in metadata.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="publicationStmt" mode="metadata">
         <dc:publisher>
             <xsl:value-of select="publisher"/>
@@ -244,6 +299,14 @@
             <xsl:value-of select="pubPlace"/>
         </dc:publisher>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle rights in metadata.</xd:short>
+        <xd:detail>
+            <p>Handle rights in metadata. Just copy the availability statement over to the <code>dc:rights</code> element.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="availability" mode="metadata">
         <dc:rights>
@@ -253,6 +316,13 @@
 
 
     <!--== metadata3 (for ePub3) ===========================================-->
+
+    <xd:doc>
+        <xd:short>Generate ePub3 style metadata.</xd:short>
+        <xd:detail>
+            <p>Generate ePub3 style metadata.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="metadata3">
         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
@@ -300,6 +370,13 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate metadata related to media-overlays.</xd:short>
+        <xd:detail>
+            <p>Generate metadata related to media-overlays. Derive the durations from the references SMIL files.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="metadata-smil">
         <xsl:if test="//*[contains(@rend, 'media-overlay(')]">
             <!-- Add up the durations for each audio fragment -->
@@ -341,6 +418,14 @@
 
 
     <!--== manifest ========================================================-->
+
+    <xd:doc>
+        <xd:short>Generate the ePub manifest.</xd:short>
+        <xd:detail>
+            <p>Generate the ePub manifest. Collect names and other information on files that will be
+            included in the ePub container.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="manifest">
         <manifest>
@@ -404,6 +489,13 @@
 
     <!--== figures ==-->
 
+    <xd:doc>
+        <xd:short>Generate a manifest item for a figure.</xd:short>
+        <xd:detail>
+            <p>Generate a manifest item for the referenced image file.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="figure" mode="manifest">
         <xsl:variable name="filename">
             <xsl:choose>
@@ -419,6 +511,13 @@
         </xsl:call-template>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate a manifest item for referenced items.</xd:short>
+        <xd:detail>
+            <p>Generate a manifest item for references images and media overlays.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="*" mode="manifest">
         <xsl:if test="f:has-rend-value(., 'image')">
@@ -441,6 +540,14 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate manifest items for media overlays.</xd:short>
+        <xd:detail>
+            <p>Generate a manifest item for the SMIL file as well as the audio files
+            referenced in the SMIL file.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="manifest-media-overlay-item">
         <xsl:param name="filename" as="xs:string"/>
@@ -497,6 +604,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Calculate the number of seconds in a duration expressed as hh:mm:ss.sss.</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:timeToSeconds" as="xs:double">
         <xsl:param name="time" as="xs:string"/>
 
@@ -512,6 +623,10 @@
         </xsl:analyze-string>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Convert a number of seconds to a duration expressed as hh:mm:ss.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:secondsToTime" as="xs:string">
         <xsl:param name="seconds" as="xs:double"/>
@@ -612,7 +727,7 @@
             -->
 
             <!-- make sure the cover comes first in the spine -->
-            <xsl:if test="//div1[@id='cover']">
+            <xsl:if test="//div1[@id='cover'] | //div[@id='cover']">
                 <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="cover"/>
             </xsl:if>
 
@@ -702,74 +817,74 @@
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Dedication']">
+            <xsl:if test="//div1[@type='Dedication'] | //div[@type='Dedication']">
                 <reference type="dedication" title="{f:message('msgDedication')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Dedication'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Dedication'] | //div[@type='Dedication'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Acknowledgements']">
+            <xsl:if test="//div1[@type='Acknowledgements'] | //div[@type='Acknowledgements']">
                 <reference type="acknowledgements" title="{f:message('msgAcknowledgements')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Acknowledgements'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Acknowledgements'] | //div[@type='Acknowledgements'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Epigraph']">
+            <xsl:if test="//div1[@type='Epigraph'] | //div[@type='Epigraph']">
                 <reference type="epigraph" title="{f:message('msgEpigraph')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Epigraph'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Epigraph'] | //div[@type='Epigraph'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Index']">
+            <xsl:if test="//div1[@type='Index'] | //div[@type='Index']">
                 <reference type="index" title="{f:message('msgIndex')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Index'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Index'] | //div[@type='Index'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Bibliography']">
+            <xsl:if test="//div1[@type='Bibliography'] | //div[@type='Bibliography']">
                 <reference type="bibliography" title="{f:message('msgBibliography')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Bibliography'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Bibliography'] | //div[@type='Bibliography'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Copyright']">
+            <xsl:if test="//div1[@type='Copyright'] | //div[@type='Copyright']">
                 <reference type="copyright-page" title="{f:message('msgCopyrightPage')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Copyright'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Copyright'] | //div[@type='Copyright'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Glossary']">
+            <xsl:if test="//div1[@type='Glossary'] | //div[@type='Glossary']">
                 <reference type="glossary" title="{f:message('msgGlossary')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Glossary'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Glossary'] | //div[@type='Glossary'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="//div1[@type='Preface']">
+            <xsl:if test="//div1[@type='Preface'] | //div[@type='Preface']">
                 <reference type="preface" title="{f:message('msgPreface')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Preface'])[1]"/>
+                        <xsl:with-param name="target" select="(//div1[@type='Preface'] | //div[@type='Preface'])[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
 
-            <xsl:if test="/TEI.2/text/body/div0|/TEI.2/text/body/div1">
+            <xsl:if test="/TEI.2/text/body/div0 | /TEI.2/text/body/div1 | /TEI.2/text/body/div">
                 <reference type="text" title="{f:message('msgText')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(/TEI.2/text/body/div0|/TEI.2/text/body/div1)[1]"/>
+                        <xsl:with-param name="target" select="(/TEI.2/text/body/div0 | /TEI.2/text/body/div1 | /TEI.2/text/body/div)[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
