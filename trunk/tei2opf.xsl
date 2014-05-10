@@ -732,6 +732,9 @@
             </xsl:if>
 
             <xsl:apply-templates select="text" mode="spine"/>
+
+            <!-- Handle figures that contain links, as we generate a wrapper file for these -->
+            <xsl:apply-templates select="//figure" mode="spine-links"/>
         </spine>
     </xsl:template>
 
@@ -741,6 +744,16 @@
             <xsl:with-param name="action" select="'spine'"/>
         </xsl:apply-templates>
     </xsl:template>
+
+
+    <xsl:template match="figure" mode="spine-links">
+        <xsl:if test="f:has-rend-value(., 'link')">
+            <itemref xmlns="http://www.idpf.org/2007/opf" linear="no">
+                <xsl:attribute name="idref"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
+            </itemref>
+        </xsl:if>
+    </xsl:template>
+
 
     <!--== guides ==========================================================-->
 
