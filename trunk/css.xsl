@@ -244,9 +244,11 @@
         <!-- Then follow the row-related rendering rules -->
         <xsl:apply-templates select="TEI.2/text//row[@rend]" mode="css-row"/>
 
-        <!-- Handle the rest of the document -->
+        <!-- Handle the rest of the document (including table cells) -->
         <xsl:apply-templates select="/TEI.2/facsimile" mode="css"/>
         <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+
+        <xsl:apply-templates select="/TEI.2/text" mode="css-handheld"/>
     </xsl:template>
 
 
@@ -260,14 +262,24 @@
     </xsl:template>
 
 
-    <!-- Exclude the column and row elements from default processing -->
+    <xd:doc>
+        <xd:short>Exclude the column and row elements from default CSS processing.</xd:short>
+        <xd:detail>The column and row elements are excluded, as we need to process them in an
+        earlier stage, such that the corresponding CSS rules end up in the correct order.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="column | row" mode="css">
         <xsl:apply-templates mode="css"/>
     </xsl:template>
 
 
-    <!-- Low priority default rule for generating the css rules from the
-         rend attribute in css mode. Note how we exclude the column element here -->
+    <xd:doc>
+        <xd:short>Low priority default rule for generating the css rules.</xd:short>
+        <xd:detail>Low priority default rule for generating the css rules from the
+         rend attribute in css mode. Note that we exclude the column element in another
+         rule.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="*[@rend]" mode="css" priority="-1">
         <xsl:call-template name="generate-css-rule"/>
         <xsl:apply-templates mode="css"/>
@@ -309,7 +321,19 @@
 
 
     <!-- Ignore content in css-mode -->
-    <xsl:template match="text()" mode="css"/>
+    <xsl:template match="text()" mode="css css-handheld"/>
+
+
+    <!-- Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation -->
+    <xsl:template match="text" mode="css-handheld">
+        <xsl:text>@media handheld
+{
+</xsl:text>
+        <xsl:apply-templates select="*" mode="css-handheld"/>
+        <xsl:text>
+}
+</xsl:text>
+    </xsl:template>
 
 
 </xsl:stylesheet>
