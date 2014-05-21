@@ -419,6 +419,32 @@
     </xsl:template>
 
 
+    <!-- Override decorative initials for handheld devices. -->
+    <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css-handheld">
+        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
+
+.<xsl:call-template name="generate-rend-class-name"/>
+{
+    background-image: none;
+    padding-top: 0;
+}
+
+.<xsl:call-template name="generate-rend-class-name"/>init
+{
+    float: none;
+    width: auto;
+    height: auto;
+    background-image: none;
+    text-align: right;
+    color: inherit;
+    font-size: inherit;
+}
+
+        </xsl:if>
+        <xsl:apply-templates mode="css-handheld"/>
+    </xsl:template>
+
+
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>

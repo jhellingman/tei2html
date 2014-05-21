@@ -471,7 +471,7 @@ sub buildRegularExpression()
     $booksPattern =~ s/\./\\./g;
     # $booksPattern =~ s/ /\\s+/g;
 
-    $refPattern = "\\b($booksPattern),? ($romanNumberPattern|$numberPattern) ?[.:]? ?(?:($numberPattern)?(?:(?:&ndash;|-)($numberPattern))?)\\b";
+    $refPattern = "\\b($booksPattern),? ($romanNumberPattern|$numberPattern) ?[,.:]? ?(?:($numberPattern)?(?:(?:&ndash;|-)($numberPattern))?)\\b";
 
     # print STDERR "PATTERN: $refPattern\n";
 }
