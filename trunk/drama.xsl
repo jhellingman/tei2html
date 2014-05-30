@@ -112,7 +112,7 @@
     <xd:doc>
         <xd:short>Format a line of verse.</xd:short>
         <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistich.
-        A line number is given a span with the class linenum, and leaves it to the CSS to place it at the proper
+        A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place it at the proper
         location. A hemistich is handled by adding a span with the class hemistich, which is supposed to contain the text
         of the previous line of the hemistichs, and leaves it to the CSS stylesheet to color that text white, so that
         it is rendered invisible (and the current of the hemistich shows up indented the correct way).</xd:detail>
@@ -124,7 +124,7 @@
             <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
 
             <xsl:if test="@n">
-                <span class="linenum"><xsl:value-of select="@n"/></span>
+                <span class="lineNum"><xsl:value-of select="@n"/></span>
             </xsl:if>
 
             <xsl:if test="contains(@rend, 'hemistich(')">
@@ -180,13 +180,13 @@
                 <xsl:variable name="position" select="count(preceding-sibling::*) + 1"/>
                 <tr>
                     <xsl:if test="$hasNumbers">
-                        <td class="linenumbers">
+                        <td class="lineNumbers">
                             <xsl:choose>
                                 <xsl:when test="@n">
-                                    <span class="linenum"><xsl:value-of select="@n"/></span>
+                                    <span class="lineNum"><xsl:value-of select="@n"/></span>
                                 </xsl:when>
                                 <xsl:when test="$b/*[$position]/@n">
-                                    <span class="linenum"><xsl:value-of select="$b/*[$position]/@n"/></span>
+                                    <span class="lineNum"><xsl:value-of select="$b/*[$position]/@n"/></span>
                                 </xsl:when>
                             </xsl:choose>
                         </td>

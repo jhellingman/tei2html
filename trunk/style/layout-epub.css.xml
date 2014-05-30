@@ -493,7 +493,7 @@ table.ditto tr.d td
     font-weight: normal;
 }
 
-.lg .linenum, .sp .linenum
+.lg .lineNum, .sp .lineNum
 {
     color:#777;
     font-size:90%;
