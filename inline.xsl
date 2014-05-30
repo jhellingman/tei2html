@@ -445,48 +445,25 @@
     <!--====================================================================-->
     <!-- Arbitrary Blocks (special hooks for rendering) -->
 
-    <xsl:template match="ab[@type='tocPagenum' or @type='tocPageNum']">
-        <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
-        <span class="tocPageNum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='flushright']">
-        <span class="flushright">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='versenum']">
-        <span class="versenum">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="ab[@type='lineNum']">
+    <xsl:template match="ab">
         <xsl:if test="not(@rend='hide')">
-            <span class="linenum">
+            <!-- If the item is to go flush right, add some space to avoid a colission in HTML. -->
+            <xsl:if test="@type='tocPageNum' or @type='flushright' or @type='adPrice'">
+                <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
+            </xsl:if>
+            <span>
+                <xsl:call-template name="set-lang-id-attributes"/>
+
+                <xsl:variable name="class">
+                    <xsl:value-of select="@type"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                </xsl:variable>
+
+                <xsl:attribute name="class" select="normalize-space($class)"/>
                 <xsl:apply-templates/>
             </span>
         </xsl:if>
-    </xsl:template>
-
-    <!-- Heatmap attributes -->
-    <xsl:template match="ab[@type='q1' or @type='q2' or @type='q3' or @type='q4' or @type='q5' or @type='p1' or @type='p2' or @type='p3' or @type='h1' or @type='h2' or @type='h3']">
-        <span>
-            <xsl:attribute name="class"><xsl:value-of select="@type"/></xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <!-- ab as id placeholders -->
-    <xsl:template match="ab">
-        <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
-            <xsl:apply-templates/>
-        </span>
     </xsl:template>
 
 

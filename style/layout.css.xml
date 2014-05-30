@@ -201,7 +201,7 @@ table.alignedverse td.first, table.alignedverse td.second
     width: 45%;
 }
 
-table.alignedverse td.linenumbers
+table.alignedverse td.lineNumbers
 {
     width: 10%;
 }
@@ -685,7 +685,7 @@ table.ditto tr.d td
     font-weight: normal;
 }
 
-.lg .linenum, .sp .linenum, .lgouter .linenum
+.lg .lineNum, .sp .lineNum, .lgouter .lineNum
 {
     color:#777;
     font-size:90%;
