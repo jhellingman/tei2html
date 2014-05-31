@@ -325,7 +325,7 @@
 
 
     <!-- Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation -->
-    <xsl:template match="text" mode="css-handheld">
+    <xsl:template match="text[not(ancestor::q)]" mode="css-handheld">
         <xsl:text>@media handheld
 {
 </xsl:text>
