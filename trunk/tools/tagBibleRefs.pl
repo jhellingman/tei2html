@@ -36,6 +36,7 @@ my %books = (
 "Ex"                        => "Exodus",
 "Ex."                       => "Exodus",
 "Ezek."                     => "Ezekiel",
+"Ez."						=> "Ezekiel",
 "Ez"                        => "Ezekiel",
 "Ezra"                      => "Ezra",
 "Ezr"                       => "Ezra",
