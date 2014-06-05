@@ -1628,6 +1628,7 @@ BEGIN
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
     $ent{"lmacr"}       = "l" . chr(0x0304); # l with macron
     $ent{"mmacr"}       = "m" . chr(0x0304); # m with macron
+    $ent{"Mmacr"}       = "M" . chr(0x0304); # M with macron
     $ent{"nmacr"}       = "n" . chr(0x0304); # n with macron
     $ent{"qmacr"}       = "q" . chr(0x0304); # q with macron
     $ent{"gmacr"}       = "g" . chr(0x0304); # g with macron
