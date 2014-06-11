@@ -392,6 +392,11 @@
     <!--====================================================================-->
     <!-- Code -->
 
+    <xd:doc>
+        <xd:short>Code samples.</xd:short>
+        <xd:detail>Code samples are rendered in a typewriter font (using the <code>code</code> element in HTML).</xd:detail>
+    </xd:doc>
+
     <xsl:template match="gi|tag|att">
         <code>
             <xsl:apply-templates/>
@@ -480,6 +485,25 @@
     <xsl:template match="cit">
         <span class="cit">
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <!--====================================================================-->
+    <!-- Segments (sentences or phrases.) -->
+
+    <xd:doc>
+        <xd:short>Segments.</xd:short>
+        <xd:detail>Segments are used in text-analysis. We also use them for synchronizing
+        LibreVox spoken version with the text. To be able to recognize these segments,
+        we generate ids for them in a non-standard way.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="seg">
+        <span class="seg">
+            <xsl:attribute name="id">
+                <xsl:text>seg</xsl:text><xsl:number count="//seg" level="any"/>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
