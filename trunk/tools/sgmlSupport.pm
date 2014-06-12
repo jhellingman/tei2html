@@ -1857,6 +1857,8 @@ BEGIN
     $ent{"ZHbarb"}      = "Z" . chr(0x035F) . "H"; # ZH with double macron below
 
     $ent{"ngtilde"}     = "n" . chr(0x0360) . "g"; # ng with double tilde
+    $ent{"Ngtilde"}     = "N" . chr(0x0360) . "g"; # Ng with double tilde
+    $ent{"NGtilde"}     = "N" . chr(0x0360) . "G"; # NG with double tilde
 
     $ent{"Voline"}      = "V" . chr(0x0305); # V with overline
     $ent{"Xoline"}      = "X" . chr(0x0305); # V with overline

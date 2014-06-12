@@ -28,7 +28,7 @@ use strict;
 #
 #       <lb>, <pb>
 
-# Special handling: 
+# Special handling:
 #
 #       <note> -- lift from context, handle separately.
 
@@ -51,14 +51,93 @@ my $liftedTagMark = "___";
 my $liftedTagCounter = 1;
 my %liftedTags = ();
 
-
-
 my %abbreviations =
 (
-    "Prof." => 1,
-    "Dr." => 2,
-    "Ing." => 3,
-	"Ds." => 4,
+    "Dr."       => "Dokter",
+    "Ing."      => "Ingenieur",
+    "Prof."     => "Professor",
+    "Ds."       => "Dominee",
+
+# bacc
+# bc
+# bgen
+# c.i
+# dhr
+# dr
+# dr.h.c
+# drs
+# drs
+# ds
+# eint
+# fa
+# Fa
+# fam
+# gen
+# genm
+# ing
+# ir
+# jhr
+# jkvr
+# jr
+# kand
+# kol
+# lgen
+# lkol
+# Lt
+# maj
+# Mej
+# mevr
+# Mme
+# mr
+# mr
+# Mw
+# o.b.s
+# plv
+# prof
+# ritm
+# tint
+# Vz
+# Z.D
+# Z.D.H
+# Z.E
+# Z.Em
+# Z.H
+# Z.K.H
+# Z.K.M
+# Z.M
+# z.v
+#
+# a.g.v
+    "bijv."         => "bijvoorbeeld",
+# bijz
+# bv
+    "bv."           => "bijvoorbeeld",
+# d.w.z
+    "d.w.z."        => "dat wil zeggen",
+# e.c
+# e.g
+# e.k
+# ev
+# i.p.v
+    "i.p.v."        => "in plaats van",
+# i.s.m
+# i.t.t
+    "i.t.t."        => "in tegenstelling tot",
+# i.v.m
+    "i.v.m."        => "in verband met",
+# m.a.w
+    "m.a.w."        => "met andere woorden",
+# m.b.t
+    "m.b.t."        => "met betrekking tot",
+# m.b.v
+# m.h.o
+# m.i
+# m.i.v
+    "m.i.v."        => "met ingang van",
+# v.w.t
+
+
+
 );
 
 
@@ -69,44 +148,65 @@ sub test()
     exit;
 }
 
+sub assertEquals($$)
+{
+    my $expected = shift;
+    my $actual = shift;
+
+    if ($expected ne $actual)
+    {
+        print "  ERROR: Strings not equal!\n";
+        print "         Expected: $expected\n";
+        print "         Actual:   $actual\n";
+    }
+}
 
 sub testLiftInlineTags()
 {
-    print "TESTING liftInlineTags()\n\n";
+    print "TEST: liftInlineTags()\n";
 
-    testLiftInlineTags1("<tb>");
-    testLiftInlineTags1("<lb>");
-    testLiftInlineTags1("Dit is een korte test<pb n=23>. Hiermee tonen<lb> we <corr sic='an'>aan</corr> dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.");
+    my $input    = "Dit is een korte test<pb n=23>. Hiermee tonen<lb> we <corr sic='an'>aan</corr> dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.";
+    my $expected = "Dit is een korte test___1___. Hiermee tonen___2___ we ___3___aan___4___ dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.";
+    my $output = liftInlineTags($input);
+    assertEquals($expected, $output);
+    $output = restoreInlineTags($output);
+    assertEquals($input, $output);
 }
-
-
-sub testLiftInlineTags1($)
-{
-    my $line = shift;
-    my $lifted = liftInlineTags($line);
-    my $tagged = tagSegments($lifted);
-    my $restored = restoreInlineTags($tagged);
-
-    print $restored;
-    print "\n\n";
-}
-
 
 sub testTagSegments()
 {
-    print "TESTING tagSegments()\n\n";
-    print tagSegments("Dit is een korte test. Hiermee tonen we aan dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.");
-    print "\n\n";
-    print tagSegments("Dit is een korte test. &Eacute;&Eacute;n, twee, drie!");
-    print "\n\n";
-    print tagSegments("Laat mij eens denken.... Ja!");
-    print "\n\n";
-    print tagSegments("\"Laat mij eens denken....\" Ja!");
-    print "\n\n";
-    print tagSegments("\"Laat mij eens denken....\" zei Prof. Dr. Ing. Janssen.");
-    print "\n\n";
-    print tagSegments("Laat mij vertellen. 't Was op een koude zaterdag.");
-    print "\n\n";
+    print "TEST: tagSegments()\n\n";
+
+    my $input    = "Dit is een korte test. Hiermee tonen we aan dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.";
+    my $expected = "<seg>Dit is een korte test.</seg> <seg>Hiermee tonen we aan dat we zinnen in stukken kunnen breken!</seg> <seg>Zie je dit?</seg> <seg>Het werkt.</seg>";
+
+    my $output = tagSegments($input);
+    assertEquals($expected, $output);
+
+    $input    = "Dit is een korte test. &Eacute;&Eacute;n, twee, drie!";
+    $expected = "<seg>Dit is een korte test.</seg> <seg>&Eacute;&Eacute;n,</seg> <seg>twee,</seg> <seg>drie!</seg>";
+    $output = tagSegments($input);
+    assertEquals($expected, $output);
+
+    $input    = "Laat mij eens denken.... Ja!";
+    $expected = "<seg>Laat mij eens denken....</seg> <seg>Ja!</seg>";
+    $output = tagSegments($input);
+    assertEquals($expected, $output);
+
+    $input    = "\"Laat mij eens denken....\" Ja!";
+    $expected = "<seg>\"Laat mij eens denken....\"</seg> <seg>Ja!</seg>";
+    $output = tagSegments($input);
+    assertEquals($expected, $output);
+
+    $input    = "\"Laat mij eens denken....\", zei Prof. Dr. Ing. A. M. Janssen.";
+    $expected = "<seg>\"Laat mij eens denken....\",</seg> <seg>zei Prof. Dr. Ing. A. M. Janssen.</seg>";
+    $output = tagSegments($input);
+    assertEquals($expected, $output);
+
+    $input    = "En nu vertelt Louis zijn wedervaren. Ook Truida wordt daarbij genoemd&mdash;hoe kan het anders?";
+    $expected = "<seg>En nu vertelt Louis zijn wedervaren.</seg> <seg>Ook Truida wordt daarbij genoemd&mdash;hoe kan het anders?</seg>";
+    $output = tagSegments($input);
+    assertEquals($expected, $output);
 }
 
 
@@ -114,7 +214,7 @@ sub main
 {
     my $file = $ARGV[0];
 
-    if (!defined($file) || $file eq '') 
+    if (!defined($file) || $file eq '')
     {
         test();
     }
@@ -122,7 +222,7 @@ sub main
     open(INPUTFILE, $file) || die("Could not open input file $file");
 
     # Skip upto start of actual text.
-    while (<INPUTFILE>) 
+    while (<INPUTFILE>)
     {
         my $line = $_;
         if ($line =~ /<text(.*?)>/)
@@ -133,11 +233,18 @@ sub main
         print $line;
     }
 
-
     while (<INPUTFILE>)
     {
         my $remainder = $_;
-		$remainder = liftInlineTags($remainder);
+
+        # Skip trailing material. (That is, the checklist I tend to add there.)
+        if ($remainder =~ /<\/text>/)
+        {
+            print $remainder;
+            last;
+        }
+
+        $remainder = liftInlineTags($remainder);
         my $result = "";
         while ($remainder =~ /$tagPattern/)
         {
@@ -148,8 +255,15 @@ sub main
         }
         $result .= tagSegments($remainder);
 
-		$result = restoreInlineTags($result);
+        $result = restoreInlineTags($result);
         print $result;
+    }
+
+    # Skip whatever is remaining.
+    while (<INPUTFILE>)
+    {
+        my $line = $_;
+        print $line;
     }
 
     close INPUTFILE;
@@ -160,7 +274,7 @@ sub liftInlineTags($)
 {
     my $line = shift;
 
-	$line = liftGreek($line);
+    $line = liftGreek($line);
 
     my $remainder = $line;
     my $result = "";
@@ -212,8 +326,8 @@ sub restoreInlineTags($)
     }
     $result .= $remainder;
 
-	# Eliminate pointless <seg><tag></seg> sequences.
-	$result =~ s/<seg>(<(pb|lb)(.*?)>)<\/seg>/\1/g;
+    # Eliminate pointless <seg><tag></seg> sequences.
+    $result =~ s/<seg>(<(pb|lb)(.*?)>)<\/seg>/\1/g;
 
     return $result;
 }
@@ -230,13 +344,13 @@ sub findSegmentBreaks($)
     my $punctuationClose = "(?:\\&rsquo;|\\&rdquo;|[\\'\\\"\\)\\]\\p{IsPf}])";
 
     # Handle the special Dutch case of 't and 'n starting a new sentence.
-    my $dutchSpecial = "(?:\\&apos;|\\')[tn]\\s+";
+    my $dutchSpecial = "(?:\\&apos;|\\')[tn]";
 
-    my $sentenceStarter = "($punctuationOpen)*($dutchSpecial)?($upperCaseLetter)";
+    my $sentenceStarter = "($punctuationOpen)*($dutchSpecial\\s+)?($upperCaseLetter)";
 
     # print "PATTERN: $punctuationClose\n";
 
-    $text =~ s/([:;,])( +)/$1$mark$2/g;
+    $text =~ s/([:,])( +)/$1$mark$2/g;
 
     $text =~ s/([?!])( +)($sentenceStarter)/$1$mark$2$3/g;
     $text =~ s/(\.[\.]+)( +)($sentenceStarter)/$1$mark$2$3/g;
@@ -245,19 +359,39 @@ sub findSegmentBreaks($)
     my @words = split(/(\s+)/, $text);
     my $i;
     my $result = "";
-    for ($i = 0; $i < (scalar(@words) - 1); $i++) 
+    for ($i = 0; $i < (scalar(@words) - 1); $i++)
     {
         my $word = $words[$i];
-        if ($word =~ /(($alphaNum|\&apos;|[\.\-])+)($punctuationClose*)(\.+)$/) 
+        my $nextWord = defined($words[$i + 2]) ? $words[$i + 2] : '';
+        my $thirdWord = defined($words[$i + 4]) ? $words[$i + 4] : '';
+
+        # print "WORDS: '$word' : '$nextWord' : '$thirdWord'\n";
+
+        # Does the 'word' end with a ;, but is not an SGML entity?
+        if ($word =~ /;$/ && !($word =~ /\&[A-Za-z0-9]+;$/))
         {
-			# Is the word an abbreviation or a (set of) initials?
+            $result .= $word . $mark;
+        }
+        elsif ($word =~ /(($alphaNum|\&apos;|[\.\-])+)($punctuationClose*)(\.+)$/)
+        {
+            # Is the word an abbreviation or a (set of) initials?
             if (isAbbreviation($word) || $word =~ /^($upperCaseLetter\.)+$/)
             {
                 $result .= $word;
             }
-            else
+            # Does the following 'word' start with a sentence starter?
+            elsif ($nextWord =~ /^$upperCaseLetter/)
             {
                 $result .= $word . $mark;
+            }
+            # Do we have the Dutch special case ('t Was or 'n Huis)?
+            elsif ($nextWord =~ /^$dutchSpecial$/ && $thirdWord =~ /^$upperCaseLetter/)
+            {
+                $result .= $word . $mark;
+            }
+            else
+            {
+                $result .= $word;
             }
         }
         else
@@ -266,7 +400,7 @@ sub findSegmentBreaks($)
         }
     }
     $result .= $words[$i];
-    
+
     return $result;
 }
 
@@ -281,9 +415,9 @@ sub tagSegments($)
     my @sentences = split(/<sb>(\s+)/, $text);
 
     my $result = "";
-    foreach my $sentence (@sentences) 
+    foreach my $sentence (@sentences)
     {
-        if ($sentence !~ /^\s+$/) 
+        if ($sentence !~ /^\s+$/)
         {
             $result .= startSegment() . $sentence . endSegment();
         }
@@ -304,7 +438,7 @@ sub startSegment()
     my $counter =  sprintf("%06d", $segmentCounter);
     $segmentCounter++;
     # return "<seg id=\"seg$counter\">";
-	return "<seg>";
+    return "<seg>";
 }
 
 
