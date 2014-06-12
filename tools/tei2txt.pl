@@ -1080,6 +1080,8 @@ sub entities2iso88591($)
     $a =~ s/\&peso;/P/g;
     $a =~ s/\&Peso;/P/g;
     $a =~ s/\&ngtilde;/ng/g;
+    $a =~ s/\&Ngtilde;/Ng/g;
+    $a =~ s/\&NGtilde;/NG/g;
     $a =~ s/\&apos;/'/g;
     $a =~ s/\&mlapos;/'/g;
     $a =~ s/\&okina;/`/g;

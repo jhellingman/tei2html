@@ -237,7 +237,7 @@
     <xd:doc>
         <xd:short>Combine all heads in a division into a single line for use in a table of contents.</xd:short>
         <xd:detail>
-            <p>Combine all heads in a division into a single line, ignoring "super" and "label" type heads, and adding the division number coded in the <code>@n</code>-attribute.</p>
+            <p>Combine all heads in a division into a single line, ignoring "super" and "label" type heads (unless the only available head is marked "label").</p>
         </xd:detail>
     </xd:doc>
 
@@ -248,15 +248,25 @@
             <xsl:when test="contains(@rend, 'toc-head(')">
                 <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
             </xsl:when>
+
+            <!-- Handle case where we only have a label as head -->
+            <xsl:when test="head[@type='label'] and not(head[2])">
+                <xsl:apply-templates mode="tochead" select="head"/>
+            </xsl:when>
+
             <xsl:when test="head">
                 <!-- Handle all remaining headers in sequence -->
                 <xsl:for-each select="head">
                     <xsl:choose>
+                        <!-- Ignore super heads -->
                         <xsl:when test="@type='super'"/>
+                        <!-- Ignore label heads -->
                         <xsl:when test="@type='label'"/>
+                        <!-- Use alternative toc-head when present -->
                         <xsl:when test="contains(@rend, 'toc-head(')">
                             <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
                         </xsl:when>
+                        <!-- Include the head given -->
                         <xsl:otherwise>
                             <xsl:apply-templates mode="tochead"/>
                             <xsl:if test="following-sibling::head">
@@ -266,6 +276,7 @@
                     </xsl:choose>
                 </xsl:for-each>
             </xsl:when>
+
             <xsl:otherwise>
                 <xsl:value-of select="f:default-toc-head(@type)"/>
             </xsl:otherwise>
