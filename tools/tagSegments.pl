@@ -274,7 +274,8 @@ sub liftInlineTags($)
 {
     my $line = shift;
 
-    $line = liftGreek($line);
+	$line = liftRegex("<GR>(.*?)<\\/GR>", $line);
+	$line = liftRegex("<abbr(.*?)>(.*?)<\\/abbr>", $line);
 
     my $remainder = $line;
     my $result = "";
@@ -292,17 +293,17 @@ sub liftInlineTags($)
 }
 
 
-# Remove <GR>...</GR> tagging from the file.
-sub liftGreek($)
+sub liftRegex($$)
 {
+	my $regex = shift;
     my $remainder = shift;
     my $result = "";
-    while ($remainder =~ m/(<GR>(.*?)<\/GR>)/)
+    while ($remainder =~ m/($regex)/)
     {
         my $before = $`;
-        my $greek = $1;
+        my $lifted = $1;
         $remainder = $';
-        $liftedTags{$liftedTagCounter} = $greek;
+        $liftedTags{$liftedTagCounter} = $lifted;
         $result .= $before . $liftedTagMark . $liftedTagCounter . $liftedTagMark;
         $liftedTagCounter++;
     }
@@ -437,8 +438,8 @@ sub startSegment()
 {
     my $counter =  sprintf("%06d", $segmentCounter);
     $segmentCounter++;
-    # return "<seg id=\"seg$counter\">";
-    return "<seg>";
+    return "<seg id=\"seg$counter\">";
+    # return "<seg>";
 }
 
 

@@ -495,15 +495,12 @@
     <xd:doc>
         <xd:short>Segments.</xd:short>
         <xd:detail>Segments are used in text-analysis. We also use them for synchronizing
-        LibreVox spoken version with the text. To be able to recognize these segments,
-        we generate ids for them in a non-standard way.</xd:detail>
+        LibreVox spoken version with the text.</xd:detail>
     </xd:doc>
 
     <xsl:template match="seg">
         <span class="seg">
-            <xsl:attribute name="id">
-                <xsl:text>seg</xsl:text><xsl:number count="//seg" level="any"/>
-            </xsl:attribute>
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
