@@ -29,7 +29,7 @@
 
             <html>
                 <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="@lang"/>
+                    <xsl:value-of select="f:fix-lang(@lang)"/>
                 </xsl:attribute>
                 <head>
                     <title><xsl:value-of select="f:message('msgTableOfContents')"/></title>
@@ -78,6 +78,8 @@
         <xd:short>Create the ePub3 navigation document landmark-body.</xd:short>
         <xd:detail>To be implemented....</xd:detail>
     </xd:doc>
+
+    <!-- http://www.idpf.org/accessibility/guidelines/content/nav/landmarks.php -->
 
     <xsl:template match="text" mode="navLandMarks">
         <nav epub:type="landmarks" id="guide">

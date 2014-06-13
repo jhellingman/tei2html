@@ -108,7 +108,7 @@
                         <xsl:value-of select="'dcterms:RFC4646'"/>
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:value-of select="@lang"/>
+                <xsl:value-of select="f:fix-lang(@lang)"/>
             </dc:language>
         </xsl:if>
 
