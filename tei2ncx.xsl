@@ -26,7 +26,7 @@
 
             <ncx version="2005-1">
                 <xsl:attribute name="xml:lang">
-                    <xsl:value-of select="@lang"/>
+                    <xsl:value-of select="f:fix-lang(@lang)"/>
                 </xsl:attribute>
 
                 <head>

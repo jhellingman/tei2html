@@ -143,8 +143,9 @@ my %abbreviations =
 
 sub test()
 {
-    testLiftInlineTags();
-    testTagSegments();
+    # testLiftInlineTags();
+    # testTagSegments();
+    testFixNesting();
     exit;
 }
 
@@ -160,6 +161,29 @@ sub assertEquals($$)
         print "         Actual:   $actual\n";
     }
 }
+
+
+sub testFixNesting()
+{
+    print "TEST: fixNesting()\n";
+
+    my $input       = "<seg>Dit is <hi>gewoon eenvoudig.</hi></seg>";
+    my $expected    = "<seg>Dit is <hi>gewoon eenvoudig.</hi></seg>";
+    my $output = fixNesting($input);
+    assertEquals($expected, $output);
+
+    $input      = "<seg>Dit is <hi>fout genest.</seg> <seg>Dat</hi> snap je wel.</seg>";
+    $expected   = "<seg>Dit is <hi>fout genest.</hi></seg> <seg><hi>Dat</hi> snap je wel.</seg>";
+    $output = fixNesting($input);
+    assertEquals($expected, $output);
+
+    $input      = "<seg>Dit is <hi rend='sc'><hi>fout genest.</seg> <seg>Dat</hi> snap</hi> je wel.</seg>";
+    $expected   = "<seg>Dit is <hi rend='sc'><hi>fout genest.</hi></hi></seg> <seg><hi rend='sc'><hi>Dat</hi> snap</hi> je wel.</seg>";
+    $output = fixNesting($input);
+    assertEquals($expected, $output);
+
+}
+
 
 sub testLiftInlineTags()
 {
@@ -274,8 +298,8 @@ sub liftInlineTags($)
 {
     my $line = shift;
 
-	$line = liftRegex("<GR>(.*?)<\\/GR>", $line);
-	$line = liftRegex("<abbr(.*?)>(.*?)<\\/abbr>", $line);
+    $line = liftRegex("<GR>(.*?)<\\/GR>", $line);
+    $line = liftRegex("<abbr(.*?)>(.*?)<\\/abbr>", $line);
 
     my $remainder = $line;
     my $result = "";
@@ -295,7 +319,7 @@ sub liftInlineTags($)
 
 sub liftRegex($$)
 {
-	my $regex = shift;
+    my $regex = shift;
     my $remainder = shift;
     my $result = "";
     while ($remainder =~ m/($regex)/)
@@ -332,6 +356,77 @@ sub restoreInlineTags($)
 
     return $result;
 }
+
+
+# Fix the nesting of <seg> tags relative to <hi> tags.
+sub fixNesting($)
+{
+    my $line = shift;
+
+    my $remainder = $line;
+    my $result = "";
+
+    my $stackSize = 0;
+    my $maxStackSize = 0;
+    my %tagStack = ();
+
+    while ($remainder =~ m/<(\/?(?:hi|seg))(.*?)>/)
+    {
+        my $before = $`;
+        my $tag = $1;
+        my $attrs = $2;
+        $remainder = $';
+
+        my $fullTag = "<$tag$attrs>";
+        my $resultTag = $fullTag;
+
+        if ($tag eq "hi")
+        {
+            $tagStack{$stackSize} = $fullTag;
+            $stackSize++;
+            if ($stackSize > $maxStackSize)
+            {
+                $maxStackSize = $stackSize;
+            }
+        }
+        elsif ($tag eq "/hi")
+        {
+            $stackSize--;
+        }
+        elsif ($tag eq "seg" || $tag eq "/seg")
+        {
+            if ($stackSize > 0)
+            {
+                # close all <hi> tags on the stack, and reopen.
+                my $stackPointer = $stackSize;
+                $resultTag = "";
+                while ($stackPointer > 0)
+                {
+                    $resultTag .= "</hi>";
+                    $stackPointer--;
+                }
+                $resultTag .= $fullTag;
+
+                while ($stackPointer <= $stackSize)
+                {
+                    $resultTag .= $tagStack{$stackPointer};
+                    $stackPointer++;
+                }
+            }
+        }
+        $result .= $before . $resultTag;
+    }
+    $result .= $remainder;
+
+    # Eliminate pointless <hi> </hi> sequences (cannot see italic spaces anyway).
+    for (my $i = $maxStackSize; $i > 0; $i--)
+    {
+        $result =~ s/<hi([^>]*?)>(\s+)<\/hi>/\2/g;
+    }
+
+    return $result;
+}
+
 
 
 sub findSegmentBreaks($)
@@ -429,6 +524,9 @@ sub tagSegments($)
     }
 
     $result =~ s/(\s+)(<\/seg>)/\2\1/g;
+    $result =~ s/(<seg[^>]*?>)(\s+)/\2\1/g;
+
+    $result = fixNesting($result);
 
     return $result;
 }
@@ -436,7 +534,7 @@ sub tagSegments($)
 
 sub startSegment()
 {
-    my $counter =  sprintf("%06d", $segmentCounter);
+    my $counter =  sprintf("%05d", $segmentCounter);
     $segmentCounter++;
     return "<seg id=\"seg$counter\">";
     # return "<seg>";

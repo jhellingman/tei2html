@@ -296,14 +296,40 @@
         <xsl:if test="@lang">
             <xsl:choose>
                 <xsl:when test="$outputmethod = 'xml'">
-                    <xsl:attribute name="xml:lang"><xsl:value-of select="@lang"/></xsl:attribute>
+                    <xsl:attribute name="xml:lang"><xsl:value-of select="f:fix-lang(@lang)"/></xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="lang"><xsl:value-of select="@lang"/></xsl:attribute>
+                    <xsl:attribute name="lang"><xsl:value-of select="f:fix-lang(@lang)"/></xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Normalize a language attribute.</xd:short>
+        <xd:detail>Normalize language attributes used in the output to match
+        valid language codes (see http://tools.ietf.org/html/rfc5646).</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:fix-lang">
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:choose>
+            <!-- Strip endings with -x-..., such as in la-x-bio -->
+            <xsl:when test="matches($lang, '^[a-z]{2}-x-')">
+                <xsl:value-of select="substring($lang, 1, 2)"/>
+            </xsl:when>
+            <!-- Strip endings with -1900, such as in nl-1900 -->
+            <xsl:when test="matches($lang, '^[a-z]{2}-\d{4}')">
+                <xsl:value-of select="substring($lang, 1, 2)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$lang"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
 
     <!--====================================================================-->
     <!-- Shortcut for both id and language tagging -->
