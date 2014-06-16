@@ -7,5 +7,11 @@ my $saxon           = "java -jar " . $Bin . "/lib/saxon9he.jar ";
 my $xsldir          = $Bin . "/..";                    # location of xsl stylesheets
 
 my $filename = $ARGV[0];
+my $tmpFile = "tmp-legacy";
 
-system ("$saxon \"$filename\" $xsldir/extract-segs.xsl");
+
+system ("perl -S stripDocType.pl $filename > $tmpFile");
+
+system ("$saxon \"$tmpFile\" $xsldir/extract-segs.xsl");
+
+
