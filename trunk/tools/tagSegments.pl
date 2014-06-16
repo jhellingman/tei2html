@@ -197,6 +197,7 @@ sub testLiftInlineTags()
     assertEquals($input, $output);
 }
 
+
 sub testTagSegments()
 {
     print "TEST: tagSegments()\n\n";
@@ -262,7 +263,8 @@ sub main
         my $remainder = $_;
 
         # Skip trailing material. (That is, the checklist I tend to add there.)
-        if ($remainder =~ /<\/text>/)
+		# Follow convention that final </text> is on its own line.
+        if ($remainder =~ /^<\/text>/)
         {
             print $remainder;
             last;
@@ -278,8 +280,12 @@ sub main
             $result .= tagSegments($before) . $tag;
         }
         $result .= tagSegments($remainder);
-
         $result = restoreInlineTags($result);
+
+		# Remove pointless segments only containing a <pb> tag.
+		$result =~ s/(<seg[^>]*?>)(<(pb|lb)([^>]*?)>)<\/seg>/\2/g;
+
+		$result = fixNesting($result);
         print $result;
     }
 
@@ -370,7 +376,7 @@ sub fixNesting($)
     my $maxStackSize = 0;
     my %tagStack = ();
 
-    while ($remainder =~ m/<(\/?(?:hi|seg))(.*?)>/)
+    while ($remainder =~ m/<(\/?(?:hi|seg|ref))(.*?)>/)
     {
         my $before = $`;
         my $tag = $1;
@@ -380,7 +386,7 @@ sub fixNesting($)
         my $fullTag = "<$tag$attrs>";
         my $resultTag = $fullTag;
 
-        if ($tag eq "hi")
+        if ($tag eq "hi" || $tag eq "ref")
         {
             $tagStack{$stackSize} = $fullTag;
             $stackSize++;
@@ -389,7 +395,7 @@ sub fixNesting($)
                 $maxStackSize = $stackSize;
             }
         }
-        elsif ($tag eq "/hi")
+        elsif ($tag eq "/hi" || $tag eq "/ref")
         {
             $stackSize--;
         }
@@ -402,7 +408,9 @@ sub fixNesting($)
                 $resultTag = "";
                 while ($stackPointer > 0)
                 {
-                    $resultTag .= "</hi>";
+					my $closeTag = $tagStack{$stackPointer - 1} =~ /^<ref/ ? "</ref>" : "</hi>";
+
+                    $resultTag .= $closeTag;
                     $stackPointer--;
                 }
                 $resultTag .= $fullTag;
@@ -421,7 +429,8 @@ sub fixNesting($)
     # Eliminate pointless <hi> </hi> sequences (cannot see italic spaces anyway).
     for (my $i = $maxStackSize; $i > 0; $i--)
     {
-        $result =~ s/<hi([^>]*?)>(\s+)<\/hi>/\2/g;
+        $result =~ s/<hi([^>]*?)>(\s*)<\/hi>/\2/g;
+        $result =~ s/<ref([^>]*?)>(\s*)<\/ref>/\2/g;
     }
 
     return $result;
@@ -444,8 +453,6 @@ sub findSegmentBreaks($)
 
     my $sentenceStarter = "($punctuationOpen)*($dutchSpecial\\s+)?($upperCaseLetter)";
 
-    # print "PATTERN: $punctuationClose\n";
-
     $text =~ s/([:,])( +)/$1$mark$2/g;
 
     $text =~ s/([?!])( +)($sentenceStarter)/$1$mark$2$3/g;
@@ -460,8 +467,6 @@ sub findSegmentBreaks($)
         my $word = $words[$i];
         my $nextWord = defined($words[$i + 2]) ? $words[$i + 2] : '';
         my $thirdWord = defined($words[$i + 4]) ? $words[$i + 4] : '';
-
-        # print "WORDS: '$word' : '$nextWord' : '$thirdWord'\n";
 
         # Does the 'word' end with a ;, but is not an SGML entity?
         if ($word =~ /;$/ && !($word =~ /\&[A-Za-z0-9]+;$/))
@@ -523,6 +528,7 @@ sub tagSegments($)
         }
     }
 
+	# Move whitespace out of segments where possible.
     $result =~ s/(\s+)(<\/seg>)/\2\1/g;
     $result =~ s/(<seg[^>]*?>)(\s+)/\2\1/g;
 
@@ -534,10 +540,9 @@ sub tagSegments($)
 
 sub startSegment()
 {
-    my $counter =  sprintf("%05d", $segmentCounter);
+    my $counter = $segmentCounter;
     $segmentCounter++;
     return "<seg id=\"seg$counter\">";
-    # return "<seg>";
 }
 
 
