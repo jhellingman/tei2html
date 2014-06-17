@@ -38,6 +38,8 @@
                 </head>
                 <body>
                     <xsl:apply-templates select="text" mode="ePubNav"/>
+                    <xsl:apply-templates select="text" mode="navLandMarks"/>
+                    <xsl:apply-templates select="text" mode="navPageList"/>
                 </body>
             </html>
         </xsl:result-document>
@@ -67,16 +69,33 @@
     <xsl:template match="*" mode="ePubNav"/>
 
     <xd:doc>
-        <xd:short>Create the ePub3 navigation document pagelist-body.</xd:short>
-        <xd:detail>To be implemented....</xd:detail>
+        <xd:short>Create the ePub3 navigation document page list.</xd:short>
+        <xd:detail>Create the ePub3 navigation document page list. Only include numbered pages and avoid adding page-breaks
+        that occur in footnotes.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="text" mode="navPageList"/>
+    <xsl:template match="text" mode="navPageList">
+        <nav epub:type="page-list" id="page-list">
+            <ol>
+                <xsl:for-each select="//pb[@n and not(ancestor::note)]">
+                    <li>
+                        <a>
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="."/>
+                            </xsl:call-template>
+                            <xsl:value-of select="@n"/>
+                        </a>
+                    </li>
+                </xsl:for-each>
+            </ol>
+        </nav>
+    </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Create the ePub3 navigation document landmark-body.</xd:short>
-        <xd:detail>To be implemented....</xd:detail>
+        <xd:short>Create the ePub3 navigation document landmarks list.</xd:short>
+        <xd:detail>Create the ePub3 navigation document landmarks list. Include the first occurance of each
+        of the possible categories.</xd:detail>
     </xd:doc>
 
     <!-- http://www.idpf.org/accessibility/guidelines/content/nav/landmarks.php -->
@@ -84,6 +103,130 @@
     <xsl:template match="text" mode="navLandMarks">
         <nav epub:type="landmarks" id="guide">
             <h2><xsl:value-of select="f:message('msgGuide')"/></h2>
+            <ol>
+                
+                <xsl:if test="//figure[@id='cover-image']">
+                    <li>
+                        <a epub:type="cover">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//figure[@id='cover-image'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgCover')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@id='toc'] | //divGen[@type='toc']">
+                    <li>
+                        <a epub:type="toc">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@id='toc'] | //divGen[@type='toc'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgToc')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@id='loi']">
+                    <li>
+                        <a epub:type="loi">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@id='toc'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgToc')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//frontmatter/div1">
+                    <li>
+                        <a epub:type="frontmatter">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//frontmatter/div1)[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgFrontMatter')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//titlePage">
+                    <li>
+                        <a epub:type="titlepage">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="//titlePage[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgTitlePage')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@type='Preface']">
+                    <li>
+                        <a epub:type="preface">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@type='Preface'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgPreface')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//body/div0|//body/div1">
+                    <li>
+                        <a epub:type="bodymatter">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//body/div0|//body/div1)[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgBodyMatter')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//backmatter/div1">
+                    <li>
+                        <a epub:type="frontmatter">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//backmatter/div1)[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgBackMatter')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@type='Glossary']">
+                    <li>
+                        <a epub:type="glossary">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@type='Glossary'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgGlossary')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@type='Bibliography']">
+                    <li>
+                        <a epub:type="bibliography">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@type='Bibliography'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgBibliography')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+                <xsl:if test="//*[@type='Index']">
+                    <li>
+                        <a epub:type="index">
+                            <xsl:call-template name="generate-href-attribute">
+                                <xsl:with-param name="target" select="(//*[@type='Index'])[1]"/>
+                            </xsl:call-template>
+                            <xsl:value-of select="f:message('msgIndex')"/>
+                        </a>
+                    </li>
+                </xsl:if>
+
+            </ol>
         </nav>
     </xsl:template>
 
