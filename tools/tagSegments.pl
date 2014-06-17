@@ -258,38 +258,41 @@ sub main
         print $line;
     }
 
+	my $text = "";
     while (<INPUTFILE>)
     {
-        my $remainder = $_;
+        my $line = $_;
 
         # Skip trailing material. (That is, the checklist I tend to add there.)
 		# Follow convention that final </text> is on its own line.
-        if ($remainder =~ /^<\/text>/)
+        if ($line =~ /^<\/text>/)
         {
-            print $remainder;
+			print processText($text);
+            print $line;
+			$text = "";
             last;
         }
 
-        $remainder = liftInlineTags($remainder);
-        my $result = "";
-        while ($remainder =~ /$tagPattern/)
-        {
-            my $before = $`;
-            my $tag = $1;
-            $remainder = $';
-            $result .= tagSegments($before) . $tag;
-        }
-        $result .= tagSegments($remainder);
-        $result = restoreInlineTags($result);
-
-		# Remove pointless segments only containing a <pb> tag.
-		$result =~ s/(<seg[^>]*?>)(<(pb|lb)([^>]*?)>)<\/seg>/\2/g;
-
-		$result = fixNesting($result);
-        print $result;
+		# Handle material in chunks separate by an empty line, so we grab full paragraphs.
+		if ($line =~ /^\s*$/) {
+			print processText($text);
+			print $line;
+			$text = "";
+		}
+		else
+		{
+			$text .= $line;
+		}
     }
 
-    # Skip whatever is remaining.
+	# Handle what is left-over.
+	if ($text ne "") 
+	{
+		print processText($text);
+	}
+
+
+    # Copy whatever is remaining in the file.
     while (<INPUTFILE>)
     {
         my $line = $_;
@@ -297,6 +300,30 @@ sub main
     }
 
     close INPUTFILE;
+}
+
+
+
+sub processText($)
+{
+	my $remainder = shift;
+	$remainder = liftInlineTags($remainder);
+	my $result = "";
+	while ($remainder =~ /$tagPattern/)
+	{
+		my $before = $`;
+		my $tag = $1;
+		$remainder = $';
+		$result .= tagSegments($before) . $tag;
+	}
+	$result .= tagSegments($remainder);
+	$result = restoreInlineTags($result);
+
+	# Remove pointless segments only containing a <pb> tag.
+	$result =~ s/(<seg[^>]*?>)(<(pb|lb)([^>]*?)>)<\/seg>/\2/g;
+
+	$result = fixNesting($result);
+	return $result;
 }
 
 

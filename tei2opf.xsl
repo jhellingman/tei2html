@@ -35,7 +35,7 @@
 
     <xsl:param name="opfMetadataFile"/>
     <xsl:param name="opfManifestFile"/>
-    <xsl:param name="useOggFallback" select="true()"/>
+    <xsl:param name="useOggFallback" select="false()"/>
 
     <xd:doc>
         <xd:short>Generate the OPF file.</xd:short>

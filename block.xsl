@@ -178,6 +178,19 @@
         </div>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle an epigraph on the title page.</xd:short>
+        <xd:detail>When an epigraph appears on the title page, do not to use a <code>div</code> element to enclose it.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="epigraph[parent::titlePage]">
+        <span class="epigraph">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
     <!-- Trailers -->
 
     <xd:doc>
@@ -217,6 +230,24 @@
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle an quote in a citation.</xd:short>
+        <xd:detail>Quotes inside a <code>cit</code> element should not be output as a <code>div</code> element in HTML.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="q[parent::cit]">
+        <span>
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:variable name="class">
+                <xsl:text>epigraph </xsl:text>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
 
