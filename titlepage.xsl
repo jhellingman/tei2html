@@ -31,7 +31,6 @@
         </div>
     </xsl:template>
 
-
     <xsl:template match="docTitle" mode="titlePage">
         <div>
             <xsl:attribute name="class">docTitle <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -72,7 +71,6 @@
         </div>
     </xsl:template>
 
-
     <xsl:template match="byline" mode="titlePage">
         <div>
             <xsl:attribute name="class">byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -89,7 +87,6 @@
         </span>
     </xsl:template>
 
-
     <xsl:template match="docImprint" mode="titlePage">
         <div>
             <xsl:attribute name="class">docImprint <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
@@ -105,7 +102,6 @@
             <xsl:apply-templates mode="titlePage"/>
         </span>
     </xsl:template>
-
 
     <xsl:template match="epigraph" mode="titlePage">
         <div>
@@ -133,6 +129,13 @@
 
     <xsl:template match="hi[@rend='sup']" mode="titlePage">
         <sup><xsl:apply-templates/></sup>
+    </xsl:template>
+
+    <xsl:template match="seg" mode="titlePage">
+        <span class="seg">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
 </xsl:stylesheet>
