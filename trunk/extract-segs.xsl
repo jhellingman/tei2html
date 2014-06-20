@@ -29,7 +29,7 @@
     <xsl:template match="html:span[@class='seg']">
         <xsl:value-of select="@id"/>
         <xsl:text>|</xsl:text>
-        <xsl:value-of select="."/>
+        <xsl:value-of select="normalize-space(.)"/>
         <xsl:text>&#x0A;</xsl:text>
     </xsl:template>
 

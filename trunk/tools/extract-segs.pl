@@ -17,7 +17,7 @@ sub list_recursively($)
     my ($directory) = @_;
     my @files = (  );
 
-	print STDERR "listing $directory\n";
+	print STDERR "Extracting directory $directory\n";
 
     unless (opendir(DIRECTORY, $directory))
     {
@@ -50,6 +50,8 @@ sub handle_file($)
 
     if ($file =~ m/^(.*)\.(xhtml)$/)
     {
+		print STDERR "Extracting file $file\n";
+
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
