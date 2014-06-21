@@ -46,7 +46,7 @@
 
     <xsl:template match="TEI.2" mode="opf">
         <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
             <package>
                 <xsl:attribute name="version">
@@ -81,7 +81,7 @@
 
             <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
-                <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
+                <xsl:message terminate="no">INFO:    Reading extra OPF metadata from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
                 <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
             </xsl:if>
         </metadata>
@@ -442,14 +442,6 @@
                          media-type="application/xhtml+xml"/>
                 </xsl:if>
 
-                <!--
-                <xsl:if test="//pb">
-                    <item id="pagemap"
-                        href="pagemap.xml"
-                        media-type="application/oebps-page-map+xml"/>
-                </xsl:if>
-                -->
-
                 <!-- CSS Style Sheets -->
                 <item id="css"
                      href="{$basename}.css"
@@ -468,7 +460,7 @@
 
                 <!-- Include custom items in the manifest -->
                 <xsl:if test="$opfManifestFile">
-                    <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                    <xsl:message terminate="no">INFO:    Reading extra OPF manifest items from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
                     <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
                 </xsl:if>
             </xsl:variable>
@@ -560,7 +552,7 @@
         </item>
 
         <!-- Handle the .smil file itself for further entries -->
-        <xsl:message terminate="no">INFO:    Reading from "<xsl:value-of select="$filename"/>".</xsl:message>
+        <xsl:message terminate="no">INFO:    Reading media overlay information from "<xsl:value-of select="$filename"/>".</xsl:message>
         <xsl:apply-templates mode="manifest-smil" select="document($filename, .)"/>
     </xsl:template>
 
@@ -720,11 +712,6 @@
 
     <xsl:template name="spine">
         <spine toc="ncx">
-            <!--
-            <xsl:if test="//pb">
-                <xsl:attribute name="page-map">pagemap</xsl:attribute>
-            </xsl:if>
-            -->
 
             <!-- make sure the cover comes first in the spine -->
             <xsl:if test="//div1[@id='cover'] | //div[@id='cover']">

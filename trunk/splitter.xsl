@@ -296,7 +296,7 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Determine the filename of a divisivion.</xd:short>
+        <xd:short>Determine the filename of a division.</xd:short>
         <xd:detail>Determine the filename of the file that contains a certain node.</xd:detail>
     </xd:doc>
 
@@ -311,8 +311,9 @@
 
 
     <xd:doc>
-        <xd:short>Generate a manifest entry for a div-fragment.</xd:short>
-        <xd:detail>Generate a manifest entry for the file that contains a div-fragment.</xd:detail>
+        <xd:short>Generate an OPF manifest entry for a div-fragment.</xd:short>
+        <xd:detail>Generate an OPF manifest entry for the file that contains a div-fragment. Also handle the case where
+        an item in this fragment (typically a title page) refers to a media overlay.</xd:detail>
     </xd:doc>
 
     <xsl:template name="manifest.div-fragment">
@@ -333,12 +334,32 @@
                 </xsl:call-template>
             </xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
+
+            <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
+            <xsl:variable name="media-overlays">
+                <xsl:for-each select="$nodes">
+                    <xsl:if test="f:has-rend-value(., 'media-overlay')">
+                        <xsl:value-of select="$id"/>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:variable>
+
+            <!-- Only use the first media overlay, we cannot have more than one (typically on the title page).  -->
+            <xsl:if test="$media-overlays[1]">
+                <xsl:attribute name="media-overlay"><xsl:value-of select="$media-overlays[1]"/>overlay</xsl:attribute>
+            </xsl:if>
+
+            <!-- Warn for extra media overlays -->
+            <xsl:if test="$media-overlays[2]">
+                    <xsl:message terminate="no">ERROR:   Ignoring second media-overlay for single file (id: <xsl:value-of select="$media-overlays[2]"/>).</xsl:message>
+            </xsl:if>
+
         </item>
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Generate a manifest entry for a division.</xd:short>
-        <xd:detail>Generate a manifest entry for the file that contains a division. Also handle the case where
+        <xd:short>Generate an OPF manifest entry for a division.</xd:short>
+        <xd:detail>Generate an OPF manifest entry for the file that contains a division. Also handle the case where
         this division refers to a media overlay.</xd:detail>
     </xd:doc>
 
