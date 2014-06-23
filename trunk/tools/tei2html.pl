@@ -228,6 +228,7 @@ sub processFile($)
         system ("mkdir epub");
         copyImages("epub\\images");
         copyAudio("epub\\audio");
+        copyFonts("epub\\fonts");
 
         system ("$saxon $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
 
@@ -550,5 +551,22 @@ sub copyAudio($)
     elsif (-d "Gutenberg\\audio")
     {
         system ("cp -r -u Gutenberg\\audio " . $destination);
+    }
+}
+
+#
+# copyFonts
+#
+sub copyFonts($)
+{
+    my $destination = shift;
+
+    if (-d "fonts")
+    {
+        system ("cp -r -u fonts " . $destination);
+    }
+    elsif (-d "Gutenberg\\fonts")
+    {
+        system ("cp -r -u Gutenberg\\fonts " . $destination);
     }
 }

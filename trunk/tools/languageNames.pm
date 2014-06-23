@@ -184,7 +184,7 @@ BEGIN
     $langNameHash{"tk"}        = "Turkmen";
     $langNameHash{"tl"}        = "Tagalog";
     $langNameHash{"tl-1900"}   = "Tagalog (19th and early 20th century orthography)";
-    $langNameHash{"tl-bayb"}   = "Tagalog (in Baybayin script)";
+    $langNameHash{"tl-tglg"}   = "Tagalog (in old Tagalog or Baybayin script)";
     $langNameHash{"tn"}        = "Setswana";
     $langNameHash{"to"}        = "Tonga";
     $langNameHash{"tr"}        = "Turkish";

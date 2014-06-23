@@ -2,7 +2,7 @@
 
 @patterns 0
 
-"<TL>"      1 "<foreign lang=TL-Bayb>"
+"<TL>"      1 "<foreign lang=tl-Tglg>"
 
 @rpatterns 1 % primary position
 
