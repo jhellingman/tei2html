@@ -271,10 +271,20 @@
     </xd:doc>
 
     <xsl:template match="respStmt" mode="metadata">
-        <dc:contributor>
+
+        <xsl:variable name="id">
+            <xsl:call-template name="generate-id"/><xsl:text>metadata</xsl:text>
+        </xsl:variable>
+
+        <xsl:variable name="role">
+            <xsl:call-template name="translate-contributor-role"/>
+        </xsl:variable>
+
+        <dc:contributor id="{$id}">
+            <!-- Old style attributes for roles not supported in ePub3 -->
             <xsl:if test="$optionEPubStrict != 'Yes'">
                 <xsl:attribute name="opf:role">
-                    <xsl:call-template name="translate-contributor-role"/>
+                    <xsl:value-of select="$role"/>
                 </xsl:attribute>
                 <xsl:attribute name="opf:file-as">
                     <xsl:value-of select="name"/>
@@ -282,6 +292,14 @@
             </xsl:if>
             <xsl:value-of select="name"/>
         </dc:contributor>
+
+        <!-- ePub3 type role -->
+        <xsl:if test="$optionEPub3 = 'Yes'">
+            <xsl:if test="$role != ''">
+                <meta property="role" refines="{$id}"><xsl:value-of select="$role"/></meta>
+            </xsl:if>
+        </xsl:if>
+
     </xsl:template>
 
 

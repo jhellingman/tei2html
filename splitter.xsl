@@ -345,7 +345,7 @@
             </xsl:variable>
 
             <!-- Only use the first media overlay, we cannot have more than one (typically on the title page).  -->
-            <xsl:if test="$media-overlays[1]">
+            <xsl:if test="$media-overlays[1] != ''">
                 <xsl:attribute name="media-overlay"><xsl:value-of select="$media-overlays[1]"/>overlay</xsl:attribute>
             </xsl:if>
 
