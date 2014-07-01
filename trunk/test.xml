@@ -27,11 +27,11 @@
          <titleStmt>
             <title>Main Title of Work Goes Here</title>
             <author>Author of Work (Birth-year&mdash;Death-year)</author>
-            <author>A. U. Thor</author>
-            <author>W. Riter</author>
+            <author key="Thor, A. U.">A. U. Thor</author>
+            <author key="Riter, W.">W. Riter</author>
             <respStmt>
                <resp>Transcription</resp>
-               <name>Transcribers Name</name>
+               <name key="Anscriber, T. R.">T. R. Anscriber</name>
             </respStmt>
          </titleStmt>
          <publicationStmt>

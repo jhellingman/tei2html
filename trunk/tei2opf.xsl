@@ -195,13 +195,27 @@
     </xd:doc>
 
     <xsl:template match="author" mode="metadata">
-        <dc:creator>
+
+        <xsl:variable name="id">
+            <xsl:call-template name="generate-id"/><xsl:text>metadata</xsl:text>
+        </xsl:variable>
+
+        <dc:creator id="{$id}">
             <xsl:if test="$optionEPubStrict != 'Yes'">
                 <xsl:attribute name="opf:role" select="'aut'"/>
                 <xsl:attribute name="opf:file-as" select="."/>
             </xsl:if>
             <xsl:value-of select="."/>
         </dc:creator>
+
+        <xsl:if test="$optionEPub3 = 'Yes'">
+            <meta property="role" refines="{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
+
+            <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
+            <xsl:if test="@key">
+                <meta property="file-as" refines="{$id}"><xsl:value-of select="@key"/></meta>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
 
@@ -296,7 +310,10 @@
         <!-- ePub3 type role -->
         <xsl:if test="$optionEPub3 = 'Yes'">
             <xsl:if test="$role != ''">
-                <meta property="role" refines="{$id}"><xsl:value-of select="$role"/></meta>
+                <meta property="role" refines="{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
+            </xsl:if>
+            <xsl:if test="name/@key">
+                <meta property="file-as" refines="{$id}"><xsl:value-of select="name/@key"/></meta>
             </xsl:if>
         </xsl:if>
 
@@ -350,6 +367,7 @@
         <!-- <meta about="#pub-id" property="scheme">uuid</meta> --><!-- Removed to silence epubcheck 3.0 -->
         <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
 
+        <!-- Avoid doubling the data already in the <dc:...> elements
         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
         <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata3"/>
@@ -359,6 +377,7 @@
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
             <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
         </xsl:for-each>
+        -->
 
         <xsl:call-template name="metadata-smil"/>
     </xsl:template>

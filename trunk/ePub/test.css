@@ -483,7 +483,7 @@ table.ditto tr.d td
     font-weight: normal;
 }
 
-.lg .linenum, .sp .linenum
+.lg .lineNum, .sp .lineNum
 {
     color:#777;
     font-size:90%;
@@ -1028,4 +1028,27 @@ display:none;
 .xd25e1153
 {
 display:none;
+}
+@media handheld
+{
+
+
+.xd25e970
+{
+    background-image: none;
+    padding-top: 0;
+}
+
+.xd25e970init
+{
+    float: none;
+    width: auto;
+    height: auto;
+    background-image: none;
+    text-align: right;
+    color: inherit;
+    font-size: inherit;
+}
+
+        
 }
