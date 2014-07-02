@@ -11,7 +11,7 @@
         xmlns:smil="http://www.w3.org/ns/SMIL"
         xmlns:f="urn:stylesheet-functions"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd xs smil"
+        exclude-result-prefixes="f xd smil"
         version="2.0">
 
 
@@ -209,11 +209,11 @@
         </dc:creator>
 
         <xsl:if test="$optionEPub3 = 'Yes'">
-            <meta property="role" refines="{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
+            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
 
             <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
             <xsl:if test="@key">
-                <meta property="file-as" refines="{$id}"><xsl:value-of select="@key"/></meta>
+                <meta property="file-as" refines="#{$id}"><xsl:value-of select="@key"/></meta>
             </xsl:if>
         </xsl:if>
     </xsl:template>
@@ -310,10 +310,10 @@
         <!-- ePub3 type role -->
         <xsl:if test="$optionEPub3 = 'Yes'">
             <xsl:if test="$role != ''">
-                <meta property="role" refines="{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
+                <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
             </xsl:if>
             <xsl:if test="name/@key">
-                <meta property="file-as" refines="{$id}"><xsl:value-of select="name/@key"/></meta>
+                <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
             </xsl:if>
         </xsl:if>
 
@@ -363,8 +363,8 @@
         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
 
         <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-        <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta>
-        <!-- <meta about="#pub-id" property="scheme">uuid</meta> --><!-- Removed to silence epubcheck 3.0 -->
+        <meta refines="#pub-id" property="identifier-type" scheme="xs:string">uuid</meta>
+        <!-- <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta> -->
         <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
 
         <!-- Avoid doubling the data already in the <dc:...> elements
