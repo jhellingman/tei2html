@@ -658,12 +658,14 @@ table.ditto tr.s
 table.ditto tr.s td
 {
     padding: 0px;
+    border-style: none;
 }
 
 table.ditto tr.d td
 {
     text-align: center;
     line-height: 10pt;
+    border-style: none;
 }
 
 /* Poetry */
