@@ -578,7 +578,7 @@
                         <xsl:if test="not($context/parent::hi[@rend='sub' or @rend='sup'])">
                             <tr class="d">
                                 <td>
-                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else ',,'"/>
+                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getConfiguration('dittoMark')"/>
                                 </td>
                             </tr>
                         </xsl:if>

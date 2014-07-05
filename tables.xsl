@@ -113,7 +113,7 @@
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
 
             <!-- Epub3 doesn't like summaries on tables -->
-            <xsl:if test="contains(@rend, 'summary(') and $optionEPub3 != 'Yes'">
+            <xsl:if test="contains(@rend, 'summary(') and $optionEPubMarkup != 'Yes'">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
                 </xsl:attribute>

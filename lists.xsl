@@ -98,7 +98,7 @@
         <li>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
-            <xsl:if test="@n and ($optionEPub3 != 'Yes')">
+            <xsl:if test="@n and ($optionEPubMarkup != 'Yes')">
                 <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
                 <xsl:attribute name="value"><xsl:value-of select="@n"/></xsl:attribute>
             </xsl:if>
