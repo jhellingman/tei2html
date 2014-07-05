@@ -50,9 +50,9 @@
 
             <package>
                 <xsl:attribute name="version">
-                    <xsl:value-of select="if ($optionEPub3 = 'Yes') then '3.0' else '2.0'"/>
+                    <xsl:value-of select="'3.0'"/>
                 </xsl:attribute>
-                <xsl:attribute name="unique-identifier">idbook</xsl:attribute>
+                <xsl:attribute name="unique-identifier">epub-id</xsl:attribute>
 
                 <xsl:call-template name="metadata"/>
                 <xsl:call-template name="manifest"/>
@@ -74,10 +74,83 @@
 
     <xsl:template name="metadata">
         <metadata>
-            <xsl:call-template name="metadata2"/>
-            <xsl:if test="$optionEPub3 = 'Yes'">
-                <xsl:call-template name="metadata3"/>
+            <!-- ePub document ids -->
+            <xsl:choose>
+                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']">
+                    <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
+
+                    <dc:identifier id="epub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
+                    <meta refines="#epub-id" property="identifier-type">uuid</meta>
+                    <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="no">WARNING: ePub documents needs a unique id.</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
+                <dc:identifier id="isbn">
+                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
+                </dc:identifier>
             </xsl:if>
+            <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
+                <dc:identifier id="pgnum">
+                    <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text>
+                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
+                </dc:identifier>
+                <meta refines="#pgnum" property="identifier-type">uri</meta>
+            </xsl:if>
+
+            <!-- Metadata from the titleStmt and publicationStmt -->
+            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
+            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
+            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata"/>
+            <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
+            <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
+
+            <xsl:if test="@lang">
+                <dc:language>
+                    <xsl:value-of select="f:fix-lang(@lang)"/>
+                </dc:language>
+            </xsl:if>
+
+            <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
+                <dc:subject><xsl:value-of select="."/></dc:subject>
+            </xsl:for-each>
+
+            <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
+                <dc:date>
+                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/>
+                </dc:date>
+            </xsl:if>
+
+            <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
+                <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
+            </xsl:if>
+
+            <!-- Support the Calibre tags for series and series volume -->
+            <xsl:if test="teiHeader/fileDesc/seriesStmt/title">
+                <meta name="calibre:series"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/title"/></meta>
+            </xsl:if>
+            <xsl:if test="teiHeader/fileDesc/seriesStmt/biblScope[@type='vol']">
+                <meta name="calibre:series_index"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/biblScope"/></meta>
+            </xsl:if>
+
+            <!-- Identify the cover page -->
+            <xsl:choose>
+                <xsl:when test="//figure[@id='cover-image']">
+                    <meta name="cover" content="cover-image"/>
+                </xsl:when>
+                <xsl:when test="//figure[@id='titlepage-image']">
+                    <meta name="cover" content="titlepage-image"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="no">WARNING: no suitable cover or title-page image found.</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <!-- Retrieve additional metadata for audio overlays from SMIL files -->
+            <xsl:call-template name="metadata-smil"/>
+
 
             <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
@@ -85,92 +158,6 @@
                 <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
             </xsl:if>
         </metadata>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Generate ePub2 style metadata.</xd:short>
-        <xd:detail>
-            <p>Generate ePub2 style metadata.</p>
-        </xd:detail>
-    </xd:doc>
-
-    <xsl:template name="metadata2">
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata"/>
-        <xsl:if test="@lang">
-            <dc:language>
-                <xsl:if test="$optionEPubStrict != 'Yes'">
-                    <xsl:attribute name="xsi:type">
-                        <xsl:value-of select="'dcterms:RFC4646'"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:value-of select="f:fix-lang(@lang)"/>
-            </dc:language>
-        </xsl:if>
-
-        <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-            <dc:subject><xsl:value-of select="."/></dc:subject>
-        </xsl:for-each>
-
-        <xsl:choose>
-            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
-                <dc:identifier id="idbook">
-                    <xsl:if test="$optionEPubStrict != 'Yes'">
-                        <xsl:attribute name="opf:scheme" select="'ISBN'"/>
-                    </xsl:if>
-                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
-                </dc:identifier>
-                <meta refines="#idbook" property="identifier-type">uri</meta>
-            </xsl:when>
-            <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
-                <dc:identifier id="idbook">
-                    <xsl:if test="$optionEPubStrict != 'Yes'">
-                        <xsl:attribute name="opf:scheme" select="'URI'"/>
-                    </xsl:if>
-                    <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text>
-                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
-                </dc:identifier>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:message terminate="no">WARNING: ePub needs a unique id.</xsl:message>
-            </xsl:otherwise>
-        </xsl:choose>
-        <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
-            <dc:date>
-                <xsl:if test="$optionEPubStrict != 'Yes'">
-                    <xsl:attribute name="opf:event" select="'publication'"/>
-                </xsl:if>
-                <xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/>
-            </dc:date>
-        </xsl:if>
-
-        <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
-            <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
-        </xsl:if>
-
-        <!-- Support the Calibre tags for series and series volume -->
-        <xsl:if test="teiHeader/fileDesc/seriesStmt/title">
-            <meta name="calibre:series"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/title"/></meta>
-        </xsl:if>
-        <xsl:if test="teiHeader/fileDesc/seriesStmt/biblScope[@type='vol']">
-            <meta name="calibre:series_index"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/biblScope"/></meta>
-        </xsl:if>
-
-        <xsl:choose>
-            <xsl:when test="//figure[@id='cover-image']">
-                <meta name="cover" content="cover-image"/>
-            </xsl:when>
-            <xsl:when test="//figure[@id='titlepage-image']">
-                <meta name="cover" content="titlepage-image"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:message terminate="no">WARNING: no suitable cover or title-page image found.</xsl:message>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
 
@@ -202,20 +189,14 @@
         </xsl:variable>
 
         <dc:creator id="{$id}">
-            <xsl:if test="$optionEPubStrict != 'Yes'">
-                <xsl:attribute name="opf:role" select="'aut'"/>
-                <xsl:attribute name="opf:file-as" select="."/>
-            </xsl:if>
             <xsl:value-of select="."/>
         </dc:creator>
 
-        <xsl:if test="$optionEPub3 = 'Yes'">
-            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
+        <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
 
-            <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
-            <xsl:if test="@key">
-                <meta property="file-as" refines="#{$id}"><xsl:value-of select="@key"/></meta>
-            </xsl:if>
+        <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
+        <xsl:if test="@key">
+            <meta property="file-as" refines="#{$id}"><xsl:value-of select="@key"/></meta>
         </xsl:if>
     </xsl:template>
 
@@ -296,28 +277,15 @@
         </xsl:variable>
 
         <dc:contributor id="{$id}">
-            <!-- Old style attributes for roles not supported in ePub3 -->
-            <xsl:if test="$optionEPubStrict != 'Yes'">
-                <xsl:attribute name="opf:role">
-                    <xsl:value-of select="$role"/>
-                </xsl:attribute>
-                <xsl:attribute name="opf:file-as">
-                    <xsl:value-of select="name"/>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:value-of select="name"/>
         </dc:contributor>
 
-        <!-- ePub3 type role -->
-        <xsl:if test="$optionEPub3 = 'Yes'">
-            <xsl:if test="$role != ''">
-                <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
-            </xsl:if>
-            <xsl:if test="name/@key">
-                <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
-            </xsl:if>
+        <xsl:if test="$role != ''">
+            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
         </xsl:if>
-
+        <xsl:if test="name/@key">
+            <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
+        </xsl:if>
     </xsl:template>
 
 
@@ -348,63 +316,6 @@
         <dc:rights>
             <xsl:value-of select="."/>
         </dc:rights>
-    </xsl:template>
-
-
-    <!--== metadata3 (for ePub3) ===========================================-->
-
-    <xd:doc>
-        <xd:short>Generate ePub3 style metadata.</xd:short>
-        <xd:detail>
-            <p>Generate ePub3 style metadata.</p>
-        </xd:detail>
-    </xd:doc>
-
-    <xsl:template name="metadata3">
-        <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
-
-        <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-        <meta refines="#pub-id" property="identifier-type">uuid</meta>
-        <!-- <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta> -->
-        <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
-
-        <!-- Avoid doubling the data already in the <dc:...> elements
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title" mode="metadata3"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author" mode="metadata3"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt" mode="metadata3"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt" mode="metadata3"/>
-        <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability" mode="metadata3"/>
-
-        <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-            <meta property="dcterms:subject"><xsl:value-of select="."/></meta>
-        </xsl:for-each>
-        -->
-
-        <xsl:call-template name="metadata-smil"/>
-    </xsl:template>
-
-    <xsl:template match="title" mode="metadata3">
-        <meta property="dcterms:title"><xsl:value-of select="."/></meta>
-    </xsl:template>
-
-    <xsl:template match="author" mode="metadata3">
-        <meta property="dcterms:creator"><xsl:value-of select="."/></meta>
-    </xsl:template>
-
-    <xsl:template match="respStmt" mode="metadata3">
-        <meta property="dcterms:contributor"><xsl:value-of select="name"/></meta>
-    </xsl:template>
-
-    <xsl:template match="publicationStmt" mode="metadata3">
-        <meta property="dcterms:publisher">
-            <xsl:value-of select="publisher"/>
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="pubPlace"/>
-        </meta>
-    </xsl:template>
-
-    <xsl:template match="availability" mode="metadata3">
-        <meta property="dcterms:rights"><xsl:value-of select="."/></meta>
     </xsl:template>
 
 
@@ -473,12 +384,11 @@
 
             <!-- Store these in a list, from which we remove duplicates later-on -->
             <xsl:variable name="manifest-items">
-                <xsl:if test="$optionEPub3 = 'Yes'">
-                    <item id="epub3toc"
-                         properties="nav"
-                         href="{$basename}-nav.xhtml"
-                         media-type="application/xhtml+xml"/>
-                </xsl:if>
+
+                <item id="epub3toc"
+                     properties="nav"
+                     href="{$basename}-nav.xhtml"
+                     media-type="application/xhtml+xml"/>
 
                 <!-- CSS Style Sheets -->
                 <item id="css"
@@ -818,17 +728,6 @@
                         </xsl:call-template>
                    </xsl:attribute>
                 </reference>
-            </xsl:if>
-
-            <xsl:if test="$optionEPubStrict != 'Yes'">
-                <!-- Name hinted by Mobipocket creator for use when ePub is converted to Mobi format -->
-                <xsl:if test="//figure[@id = 'cover-image' or @id = 'titlepage-image']">
-                    <reference type="other.ms-coverimage" title="{f:message('msgCoverImage')}">
-                        <xsl:attribute name="href">
-                            <xsl:call-template name="get-cover-image"/>
-                        </xsl:attribute>
-                    </reference>
-                </xsl:if>
             </xsl:if>
 
             <xsl:if test="key('id', 'toc')">

@@ -97,7 +97,7 @@
     <xsl:template name="generate-metadata">
 
         <xsl:choose>
-            <xsl:when test="$optionEPub3 = 'Yes'">
+            <xsl:when test="$optionEPubMarkup = 'Yes'">
                 <meta charset="{$encoding}"/>
             </xsl:when>
             <xsl:otherwise>

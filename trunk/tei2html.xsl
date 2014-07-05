@@ -77,9 +77,6 @@
     <xd:doc type="string">Generate special markup used in ePub files (Yes or No).</xd:doc>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
 
-    <xd:doc type="string">Generate special markup used in ePub3 files (Yes or No).</xd:doc>
-    <xsl:param name="optionEPub3" select="'No'"/>
-
     <xd:doc type="string">Generate Project Gutenberg headers and footers (Yes or No).</xd:doc>
     <xsl:param name="optionPGHeaders" select="'No'"/>
 

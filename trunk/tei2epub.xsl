@@ -88,8 +88,6 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
-    <xsl:param name="optionEPub3" select="'Yes'"/>
-    <xsl:param name="optionEPubStrict" select="'Yes'"/>
     <xsl:param name="optionPGHeaders" select="'No'"/>
     <xsl:param name="optionParagraphNumbers" select="'No'"/>
 
@@ -130,24 +128,14 @@
     </xd:doc>
 
     <xsl:template match="/">
-
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
-
-        <!--
-        <xsl:if test="//pb">
-            <xsl:call-template name="pagemap"/>
-        </xsl:if>
-        -->
-
         <xsl:call-template name="copy-stylesheets"/>
         <xsl:call-template name="copy-smil-files"/>
 
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
-        <xsl:if test="$optionEPub3 = 'Yes'">
-            <xsl:apply-templates mode="ePubNav"/>
-        </xsl:if>
+        <xsl:apply-templates mode="ePubNav"/>
         <xsl:apply-templates/>
     </xsl:template>
 

@@ -32,10 +32,7 @@
                 <head>
                     <meta name="dtb:uid">
                         <xsl:attribute name="content">
-                            <xsl:choose>
-                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/></xsl:when>
-                                <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">http://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/></xsl:when>
-                            </xsl:choose>
+                            <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/>
                         </xsl:attribute>
                     </meta>
 
