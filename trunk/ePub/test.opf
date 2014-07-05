@@ -29,8 +29,8 @@
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
       <dc:identifier id="pub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
-      <meta refines="#pub-id" property="identifier-type" scheme="xs:string">uuid</meta>
-      <meta property="dcterms:modified">2014-07-02T19:34:31Z</meta>
+      <meta refines="#pub-id" property="identifier-type">uuid</meta>
+      <meta property="dcterms:modified">2014-07-03T20:21:03Z</meta>
       <meta property="media:duration" refines="#ch1overlay">0:00:24</meta>
       <meta property="media:duration">0:00:24</meta>
       <meta property="media:active-class">epub-media-overlay-active</meta>
@@ -93,7 +93,6 @@
       <itemref linear="yes" idref="index"/>
       <itemref linear="yes" idref="backmatter"/>
       <itemref linear="no" idref="test1wrapper"/>
-      <itemref linear="no" idref="test2wrapper"/>
    </spine>
    <guide>
       <reference type="cover" title="Cover Image" href="cover.xhtml"/>

@@ -11,7 +11,7 @@
         xmlns:smil="http://www.w3.org/ns/SMIL"
         xmlns:f="urn:stylesheet-functions"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd smil"
+        exclude-result-prefixes="f xd xs smil"
         version="2.0">
 
 
@@ -124,6 +124,7 @@
                     </xsl:if>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
                 </dc:identifier>
+                <meta refines="#idbook" property="identifier-type">uri</meta>
             </xsl:when>
             <xsl:when test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
                 <dc:identifier id="idbook">
@@ -363,7 +364,7 @@
         <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
 
         <dc:identifier id="pub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-        <meta refines="#pub-id" property="identifier-type" scheme="xs:string">uuid</meta>
+        <meta refines="#pub-id" property="identifier-type">uuid</meta>
         <!-- <meta property="dcterms:identifier" id="dcterms-id"><xsl:value-of select="$epub-id"/></meta> -->
         <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
 
@@ -684,16 +685,17 @@
 
     <xsl:template match="*" mode="manifest-links">
         <xsl:if test="f:has-rend-value(., 'link')">
-            <xsl:variable name="filename">
+            <xsl:variable name="target">
                 <xsl:value-of select="f:rend-value(., 'link')"/>
             </xsl:variable>
 
-            <xsl:if test="matches($filename, '^[^:]+\.(jpg|png|gif|svg)$')">
+            <!-- Only for local images: add the image to the manifest -->
+            <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
                 <xsl:call-template name="manifest-image-item">
-                    <xsl:with-param name="filename" select="$filename"/>
+                    <xsl:with-param name="filename" select="$target"/>
                     <xsl:with-param name="how" select="'link'"/>
                 </xsl:call-template>
-                <!-- Also include wrapper HTML -->
+                <!-- Also add the generated wrapper HTML to the manifest -->
                 <item>
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
                     <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
@@ -772,9 +774,16 @@
 
     <xsl:template match="figure" mode="spine-links">
         <xsl:if test="f:has-rend-value(., 'link')">
-            <itemref xmlns="http://www.idpf.org/2007/opf" linear="no">
-                <xsl:attribute name="idref"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
-            </itemref>
+            <xsl:variable name="target">
+                <xsl:value-of select="f:rend-value(., 'link')"/>
+            </xsl:variable>
+
+            <!-- Only for local images: add the generated HTML wrapper to the spine -->
+            <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
+                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no">
+                    <xsl:attribute name="idref"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
+                </itemref>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
