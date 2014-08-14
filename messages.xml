@@ -173,6 +173,7 @@
         <msg:message name="en-uk">English (U.K.)</msg:message>
         <msg:message name="en-us">English (U.S.)</msg:message>
         <msg:message name="es">Spanish</msg:message>
+        <msg:message name="ms">Malay</msg:message>
         <msg:message name="fi">Finnish</msg:message>
         <msg:message name="fr">French</msg:message>
         <msg:message name="it">Italian</msg:message>
@@ -188,10 +189,12 @@
 
         <!-- ISO 639 three letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>
+        <msg:message name="ilo">Ilokano</msg:message>
         <msg:message name="grc">Greek (Classical)</msg:message>
 
         <!-- Private extentions -->
         <msg:message name="nl-1900">Dutch (Old Spelling)</msg:message>
+        <msg:message name="la-x-bio">Latin (Biological nomenclature)</msg:message>
 
 
         <!-- Creating a list of items -->
@@ -801,6 +804,7 @@
         <msg:message name="nl">Nederlands</msg:message>
         <msg:message name="nl-1900">Nederlands (Oude Spelling)</msg:message>
         <msg:message name="es">Spaans</msg:message>
+        <msg:message name="ms">Maleis</msg:message>
         <msg:message name="fr">Frans</msg:message>
         <msg:message name="it">Italiaans</msg:message>
         <msg:message name="la">Latijn</msg:message>
