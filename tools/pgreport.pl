@@ -18,10 +18,12 @@ use XML::XPath;
 binmode(STDOUT, ":utf8");
 use open ':utf8';
 
-my $force = 0;  # force generation of XML files, even if up-to-date.
+my $force = 0;		# Force generation of XML files, even if up-to-date.
+my $makeHtml = 0;   # Generate HTML files.
 
 GetOptions(
-    'f' => \$force);
+    'f' => \$force,
+	'h' => \$makeHtml);
 
 my $totalFiles = 0;
 my $totalPages = 0;
@@ -168,10 +170,11 @@ sub handleTeiFile($)
     }
 
     my $xmlFileName = $filePath . "$baseName.xml";
+	my $htmlFileName = $filePath . "$baseName.html";
 
     if (!$excluded{$baseName} == 1 && defined($version))
     {
-        if ($force != 0 || !-e $xmlFileName || isNewer($fullName, $xmlFileName))
+        if ($force != 0 || !-e $xmlFileName || ($makeHtml != 0 && !-e $htmlFileName) || isNewer($fullName, $xmlFileName))
         {
             my $cwd = getcwd;
             chdir ($filePath);
@@ -181,7 +184,14 @@ sub handleTeiFile($)
             }
             else
             {
-                system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+				if ($makeHtml != 0) 
+				{
+					system ("perl -S tei2html.pl -h -r -f $fileName$suffix");
+				}
+				else
+				{
+					system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+				}
             }
             chdir ($cwd);
         }

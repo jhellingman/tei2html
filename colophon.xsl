@@ -399,12 +399,26 @@
                         <xsl:value-of select="name(.)"/>
                     </td>
                     <td>
-                        <xsl:apply-templates select="."/>
+                        <xsl:apply-templates select="." mode="languageFragments"/>
                     </td>
                 </tr>
             </xsl:for-each>
         </table>
     </xsl:template>
 
+
+    <xsl:template match="*" mode="languageFragments">
+        <xsl:apply-templates select="."/>
+    </xsl:template>
+
+    <!-- Prevent notes from being rendered as raised numerals in the language fragment overview -->
+    <xsl:template match="note" mode="languageFragments">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <!-- Prevent cells from being rendered as extra tb elements in the language fragment overview -->
+    <xsl:template match="cell" mode="languageFragments">
+        <xsl:apply-templates/>
+    </xsl:template>
 
 </xsl:stylesheet>
