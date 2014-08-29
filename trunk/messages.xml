@@ -166,19 +166,21 @@
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
         <!-- ISO 639 two letter codes -->
-        <msg:message name="zh">Chinese</msg:message>
         <msg:message name="de">German</msg:message>
         <msg:message name="el">Greek</msg:message>
+        <msg:message name="el-latn">Greek (Latin transcription)</msg:message>
         <msg:message name="en">English</msg:message>
         <msg:message name="en-uk">English (U.K.)</msg:message>
         <msg:message name="en-us">English (U.S.)</msg:message>
         <msg:message name="es">Spanish</msg:message>
-        <msg:message name="ms">Malay</msg:message>
         <msg:message name="fi">Finnish</msg:message>
         <msg:message name="fr">French</msg:message>
+        <msg:message name="he">Hebrew</msg:message>
+        <msg:message name="he-latn">Hebrew (Latin transcription)</msg:message>
         <msg:message name="it">Italian</msg:message>
         <msg:message name="ja">Japanese</msg:message>
         <msg:message name="la">Latin</msg:message>
+        <msg:message name="ms">Malay</msg:message>
         <msg:message name="nl">Dutch</msg:message>
         <msg:message name="pt">Portuguese</msg:message>
         <msg:message name="pt-br">Portugese (Brazil)</msg:message>
@@ -186,6 +188,7 @@
         <msg:message name="ta">Tamil</msg:message>
         <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
+        <msg:message name="zh">Chinese</msg:message>
 
         <!-- ISO 639 three letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>
@@ -254,6 +257,11 @@
         <msg:message name="msgLinkToBible">Link to cited location in Bible</msg:message>
         <msg:message name="msgExternalLink">External link</msg:message>
 
+        <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
+        <msg:message name="msgLinkToMp3File">Download MP3 file</msg:message>
+        <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
+        <msg:message name="msgLinkToMusiScoreFile">Download MusiScore file</msg:message>
+        <msg:message name="msgAudioLink">Link to audio file</msg:message>
 
         <!--==#############################################################==-->
         <!-- Do not translate the following legal text -->
@@ -865,6 +873,15 @@
         <msg:message name="msgLinkToWorldCat">Link naar WorldCat cataloguspagina</msg:message>
         <msg:message name="msgExternalLink">Externe link</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
+        <msg:message name="msgLinkToWikipedia">Link naar gerelateerd Wikipedia artikel</msg:message>
+        <msg:message name="msgLinkToWikiPilipinas">Link naar gerelateerd WikiPilipinas artikel</msg:message>
+        <msg:message name="msgLinkToMap">Link naar locatie op kaart</msg:message>
+
+        <msg:message name="msgLinkToMidiFile">Download MIDI-bestand</msg:message>
+        <msg:message name="msgLinkToMp3File">Download MP3bestand</msg:message>
+        <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
+        <msg:message name="msgLinkToMusiScoreFile">Download MusiScore-bestand</msg:message>
+        <msg:message name="msgAudioLink">Link naar geluidsbestand</msg:message>
 
         <msg:message name="msgOverviewForeignFragments">Overzicht van fragmenten in andere talen</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>

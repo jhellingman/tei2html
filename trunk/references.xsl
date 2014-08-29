@@ -210,6 +210,7 @@
             <xsl:when test="starts-with($url, 'https:')">seclink</xsl:when>
             <xsl:when test="starts-with($url, 'ftp:')">ftplink</xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')">maillink</xsl:when>
+            <xsl:when test="starts-with($url, 'audio/')">audiolink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -237,6 +238,15 @@
             <xsl:when test="starts-with($url, 'loc:')"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
             <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'audio/')">
+                 <xsl:choose>
+                    <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')"><xsl:value-of select="f:message('msgLinkToMidiFile')"/></xsl:when>
+                    <xsl:when test="ends-with($url, '.mp3')"><xsl:value-of select="f:message('msgLinkToMp3File')"/></xsl:when>
+                    <xsl:when test="ends-with($url, '.ly')"><xsl:value-of select="f:message('msgLinkToLilypondFile')"/></xsl:when>
+                    <xsl:when test="ends-with($url, '.mscz')"><xsl:value-of select="f:message('msgLinkToMusiScoreFile')"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="f:message('msgAudioLink')"/></xsl:otherwise>
+                 </xsl:choose>
+            </xsl:when>
             <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -337,6 +347,11 @@
 
             <!-- Link to website (http:// or https://) -->
             <xsl:when test="starts-with($url, 'http:') or starts-with($url, 'https:') or starts-with($url, 'mailto:')">
+                <xsl:value-of select="$url"/>
+            </xsl:when>
+
+            <!-- Internal link to audio file -->
+            <xsl:when test="starts-with($url, 'audio/')">
                 <xsl:value-of select="$url"/>
             </xsl:when>
 
