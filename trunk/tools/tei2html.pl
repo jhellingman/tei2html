@@ -37,7 +37,7 @@ my $runChecks           = 0;
 my $useUnicode          = 0;
 my $force               = 0;
 my $customOption        = "";
-my $customStylesheet    = "custom.css.xml";
+my $customStylesheet    = "custom.css";
 my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
 
@@ -161,7 +161,7 @@ sub processFile($)
 
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
     my $cssFileParam = "";
-    if (-f $customStylesheet)
+    if (-f $customStylesheet || -f $customStylesheet . ".xml")
     {
         print "Adding custom stylesheet: $customStylesheet ...\n";
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";

@@ -10,7 +10,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -156,81 +157,19 @@
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="embed-xml-wrapped-stylesheets"/>
+                <xsl:call-template name="embed-css-stylesheets"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-<!-- 
-
-TODO: create include-style-sheet function that looks at the extension (.css or .xml)
-and includes it in the proper way, also taking care of error handling and encoding issues.
-If the stylesheet is missing, an error needs to be logged, other wise
-the verbatim content of the stylesheet needs to be included, prefereably compactized.
-
--->
-
+    
     <xd:doc>
-        <xd:short>Embed XML-wrapped stylesheets.</xd:short>
+        <xd:short>Embed stylesheets.</xd:short>
         <xd:detail>
             <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
         </xd:detail>
     </xd:doc>
-
-    <xsl:template name="embed-xml-wrapped-stylesheets">
-        <xsl:variable name="stylesheetname">
-            <xsl:choose>
-                <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
-                    <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
-            </xsl:choose>.xml
-        </xsl:variable>
-
-        <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
-        <style type="text/css">
-            <!-- Standard CSS stylesheet -->
-            <xsl:copy-of select="document('style/layout.css.xml')/*/node()"/>
-
-            <!-- Supplement CSS stylesheet -->
-            <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
-
-            <!-- Standard Aural CSS stylesheet -->
-            <xsl:copy-of select="document('style/aural.css.xml')/*/node()"/>
-        </style>
-
-        <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="$optionPrinceMarkup = 'Yes'">
-            <style type="text/css" media="print">
-                <xsl:copy-of select="document('style/print.css.xml')/*/node()"/>
-            </style>
-        </xsl:if>
-
-        <style type="text/css">
-            <xsl:if test="$customCssFile">
-                <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-                <xsl:copy-of select="document(normalize-space($customCssFile), .)/*/node()"/>
-            </xsl:if>
-
-            <xsl:if test="//pgStyleSheet">
-                <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim -->
-                <xsl:value-of select="string(//pgStyleSheet)"/>
-            </xsl:if>
-
-            <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
-            <xsl:apply-templates select="/" mode="css"/>
-        </style>
-
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Embed stylesheets (not wrapped in xml).</xd:short>
-        <xd:detail>
-            <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
-        </xd:detail>
-    </xd:doc>
-
+    
     <xsl:template name="embed-css-stylesheets">
         <xsl:variable name="stylesheetname">
             <xsl:choose>
@@ -240,30 +179,30 @@ the verbatim content of the stylesheet needs to be included, prefereably compact
                 <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-
+        
         <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
         <style type="text/css">
             <!-- Standard CSS stylesheet -->
-            <xsl:value-of select="unparsed-text('style/layout.css')"/>
+            <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
 
             <!-- Supplement CSS stylesheet -->
-            <xsl:value-of select="unparsed-text(normalize-space($stylesheetname))"/>
+            <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
 
             <!-- Standard Aural CSS stylesheet -->
-            <xsl:value-of select="unparsed-text('style/aural.css')"/>
+            <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
         </style>
-
+        
         <!-- Pull in CSS sheet for print (when using Prince). -->
         <xsl:if test="$optionPrinceMarkup = 'Yes'">
             <style type="text/css" media="print">
-                <xsl:value-of select="unparsed-text('style/print.css')"/>
+                <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
         </xsl:if>
-
+        
         <style type="text/css">
             <xsl:if test="$customCssFile">
                 <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-                <xsl:value-of select="unparsed-text(normalize-space(resolve-uri($customCssFile, document-uri(.))))"/>
+                <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
             </xsl:if>
 
             <xsl:if test="//pgStyleSheet">
@@ -274,9 +213,9 @@ the verbatim content of the stylesheet needs to be included, prefereably compact
             <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
             <xsl:apply-templates select="/" mode="css"/>
         </style>
-
+        
     </xsl:template>
-
+    
 
     <!--====================================================================-->
     <!-- TEI Header -->
