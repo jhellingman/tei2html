@@ -188,6 +188,7 @@
                 href="{$path}/{$basename}.css"
                 method="text"
                 encoding="UTF-8">
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
 
             <xsl:variable name="stylesheetname">
                 <xsl:choose>
@@ -195,18 +196,18 @@
                         <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
                     </xsl:when>
                     <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
-                </xsl:choose>.xml
+                </xsl:choose>
             </xsl:variable>
 
             <!-- Standard CSS stylesheet -->
-            <xsl:copy-of select="document('style/layout-epub.css.xml')/*/node()"/>
+            <xsl:value-of select="f:css-stylesheet('style/layout-epub.css')"/>
 
             <!-- Supplement CSS stylesheet -->
-            <xsl:copy-of select="document(normalize-space($stylesheetname))/*/node()"/>
+            <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
 
             <!-- Custom CSS stylesheet -->
             <xsl:if test="$customCssFile">
-                <xsl:copy-of select="document(normalize-space($customCssFile), .)/*/node()"/>
+                <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
             </xsl:if>
 
             <!-- Generate CSS for rend attributes -->

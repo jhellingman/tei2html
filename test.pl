@@ -25,10 +25,10 @@ if (-f "imageinfo.xml")
 
 # Provide the custom CSS file with a full path in a parameter.
 my $cssFileParam = "";
-if (-f "custom.css.xml")
+if (-f "custom.css")
 {
     print "Adding custom.css stylesheet...\n";
-    $cssFileParam = "customCssFile=\"file:/$pwd/custom.css.xml\"";
+    $cssFileParam = "customCssFile=\"file:/$pwd/custom.css\"";
 }
 
 my $opfManifestFileParam = "";

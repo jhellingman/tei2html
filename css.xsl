@@ -2,20 +2,19 @@
 <!--
 
     Stylesheet to generate css, to be imported in tei2html.xsl.
-    Note that the templates for css mode are mostly integrated
+    Note that the templates for css mode are often integrated
     with the content templates, to keep these together with
     the layout code.
-
-    Requires:
-        localization.xsl    : templates for localizing strings.
 
 -->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -336,4 +335,55 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Load a CSS stylesheet.</xd:short>
+        <xd:detail>
+            <p>Get the content of a CSS stylesheet (for example, to embed in an HTML document).</p>
+        </xd:detail>
+        <xd:param name="uri">The (relative) URI of the CSS stylesheet.</xd:param>
+        <xd:param name="node">The node of a document relative to which the URI will be resolved.</xd:param>
+    </xd:doc>
+    
+    <xsl:function name="f:css-stylesheet" as="xs:string">
+        <xsl:param name="uri" as="xs:string"/>
+        <xsl:param name="node" as="node()"/>
+        
+        <xsl:variable name="uri" select="normalize-space($uri)"/>
+        <xsl:variable name="uri" select="resolve-uri($uri, base-uri($node))"/>
+        <xsl:value-of select="f:css-stylesheet($uri)"/>
+    </xsl:function>
+ 
+ 
+     <xd:doc>
+        <xd:short>Load a CSS stylesheet.</xd:short>
+        <xd:detail>
+            <p>Get the content of a CSS stylesheet (for example, to embed in an HTML document). This will first check
+            for the presence of the indicated file, and then open it. Handles both plain CSS files as well as CSS files
+            wrapped in a top-level XML element.</p>
+        </xd:detail>
+        <xd:param name="uri">The (relative) URI of the CSS stylesheet.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:css-stylesheet" as="xs:string">
+        <xsl:param name="uri" as="xs:string"/>
+        <xsl:variable name="uri" select="normalize-space($uri)"/>
+
+        <xsl:message terminate="no">INFO:    Including CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
+
+        <xsl:choose>
+            <xsl:when test="ends-with($uri, '.css') and unparsed-text-available($uri)">
+                <xsl:value-of select="replace(unparsed-text($uri), '&#xD;?&#xA;', '&#xA;')"/>
+            </xsl:when>
+            <xsl:when test="ends-with($uri, '.xml') and unparsed-text-available($uri)">
+                <xsl:value-of select="document($uri)/*/node()"/>
+            </xsl:when>
+            <xsl:when test="unparsed-text-available(concat($uri, '.xml'))">
+                <xsl:value-of select="document(concat($uri, '.xml'))/*/node()"/>
+            </xsl:when>    
+            <xsl:otherwise>
+                <xsl:message terminate="no">ERROR:   Unable to find CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+    
 </xsl:stylesheet>
