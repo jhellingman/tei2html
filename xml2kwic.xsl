@@ -100,6 +100,7 @@
 
     <xsl:template match="/">
         <head>
+            <meta charset="UTF-8"/>
             <title>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title"/></title>
             <style>
 
