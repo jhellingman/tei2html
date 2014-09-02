@@ -67,6 +67,6 @@ Patc (pattern changer) is a small utility in C to do multiple find-and-replace a
 
 _optional, only needed if you want to check generated ePubs_ 
 
-Epubcheck is a tool to validate epub books, it can be obtained from: http://code.google.com/p/epubcheck/
+Epubcheck is a tool to validate epub books, it can be obtained from: https://github.com/IDPF/epubcheck
 
 This tool also requires Java; the scripts assume you use epubcheck-3.0.1.jar, placed in the tools/lib subdirectory.
