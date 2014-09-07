@@ -1,13 +1,9 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet to create a Colophon from a TEI file, to be imported in tei2html.xsl.
+    Stylesheet to create a colophon from a TEI file, to be imported in tei2html.xsl.
 
     Usage: <divGen type="Colophon"/>
-
-    Requires: 
-        localization.xsl    : templates for localizing strings.
-        utils.xsl           : various utility templates.
 
 -->
 
@@ -107,6 +103,7 @@
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Generate links to catalog entries.</xd:short>
@@ -350,7 +347,7 @@
     <xd:doc>
         <xd:short>Generate an overview of foreign language fragments.</xd:short>
         <xd:detail>
-            <p>Generate a table of overview of foreign language fragments in the text, as indicated by the <code>@lang</code>-attribute.
+            <p>Generate a table of foreign language fragments in the text, as indicated by the <code>@lang</code>-attribute.
             The fragments are grouped by language, and presented in document order.</p>
         </xd:detail>
     </xd:doc>
@@ -373,6 +370,15 @@
         </div>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate an overview of foreign language fragments, for one language.</xd:short>
+        <xd:detail>
+            <p>Generate a table of foreign language fragments in the text for a given language.
+            The fragments are grouped by content (that is, undoubled), and presented in document order.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="language-fragments">
         <xsl:param name="lang"/>
 
@@ -384,16 +390,25 @@
                 <th><xsl:value-of select="f:message('msgElement')"/></th>
                 <th><xsl:value-of select="f:message('msgFragment')"/></th>
             </tr>
-            <xsl:for-each select="$fragments">
+            <xsl:for-each-group select="$fragments" group-by=".">
                 <tr>
                     <td>
-                        <a class="pageref">
-                            <xsl:call-template name="generate-href-attribute"/>
-                            <xsl:attribute name="id">
-                                <xsl:call-template name="generate-id"/><xsl:text>ext</xsl:text>
-                            </xsl:attribute>
-                            <xsl:value-of select="f:find-pagenumber(.)"/>
-                        </a>
+                        <xsl:for-each select="current-group()">
+                            <xsl:if test="position() != 1">
+                                <xsl:text>, </xsl:text>
+                            </xsl:if>
+                            <a class="pageref">
+                                <xsl:choose>
+                                    <xsl:when test="f:insideFootnote(.)">
+                                        <xsl:call-template name="generate-footnote-href-attribute"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:call-template name="generate-href-attribute"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                <xsl:value-of select="f:find-pagenumber(.)"/>
+                            </a>
+                        </xsl:for-each>
                     </td>
                     <td>
                         <xsl:value-of select="name(.)"/>
@@ -402,7 +417,7 @@
                         <xsl:apply-templates select="." mode="languageFragments"/>
                     </td>
                 </tr>
-            </xsl:for-each>
+            </xsl:for-each-group>
         </table>
     </xsl:template>
 
