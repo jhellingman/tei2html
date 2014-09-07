@@ -243,7 +243,7 @@
                     <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')"><xsl:value-of select="f:message('msgLinkToMidiFile')"/></xsl:when>
                     <xsl:when test="ends-with($url, '.mp3')"><xsl:value-of select="f:message('msgLinkToMp3File')"/></xsl:when>
                     <xsl:when test="ends-with($url, '.ly')"><xsl:value-of select="f:message('msgLinkToLilypondFile')"/></xsl:when>
-                    <xsl:when test="ends-with($url, '.mscz')"><xsl:value-of select="f:message('msgLinkToMusiScoreFile')"/></xsl:when>
+                    <xsl:when test="ends-with($url, '.mscz')"><xsl:value-of select="f:message('msgLinkToMuseScoreFile')"/></xsl:when>
                     <xsl:otherwise><xsl:value-of select="f:message('msgAudioLink')"/></xsl:otherwise>
                  </xsl:choose>
             </xsl:when>

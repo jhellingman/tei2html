@@ -166,6 +166,8 @@
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
         <!-- ISO 639 two letter codes -->
+        <msg:message name="ar">Arabic</msg:message>
+        <msg:message name="ar-latn">Arabic (Latin transcription)</msg:message>
         <msg:message name="de">German</msg:message>
         <msg:message name="el">Greek</msg:message>
         <msg:message name="el-latn">Greek (Latin transcription)</msg:message>
@@ -185,6 +187,8 @@
         <msg:message name="pt">Portuguese</msg:message>
         <msg:message name="pt-br">Portugese (Brazil)</msg:message>
         <msg:message name="pt-pt">Portugese (Portugal)</msg:message>
+        <msg:message name="sa">Sanskrit</msg:message>
+        <msg:message name="sa-latn">Sanskrit (Latin transcription)</msg:message>
         <msg:message name="ta">Tamil</msg:message>
         <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
@@ -260,7 +264,7 @@
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
         <msg:message name="msgLinkToMp3File">Download MP3 file</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
-        <msg:message name="msgLinkToMusiScoreFile">Download MusiScore file</msg:message>
+        <msg:message name="msgLinkToMuseScoreFile">Download MuseScore file</msg:message>
         <msg:message name="msgAudioLink">Link to audio file</msg:message>
 
         <!--==#############################################################==-->
@@ -880,7 +884,7 @@
         <msg:message name="msgLinkToMidiFile">Download MIDI-bestand</msg:message>
         <msg:message name="msgLinkToMp3File">Download MP3bestand</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
-        <msg:message name="msgLinkToMusiScoreFile">Download MusiScore-bestand</msg:message>
+        <msg:message name="msgLinkToMuseScoreFile">Download MuseScore-bestand</msg:message>
         <msg:message name="msgAudioLink">Link naar geluidsbestand</msg:message>
 
         <msg:message name="msgOverviewForeignFragments">Overzicht van fragmenten in andere talen</msg:message>
