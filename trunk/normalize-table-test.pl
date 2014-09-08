@@ -2,8 +2,12 @@
 
 use strict;
 
-my $xsldir = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
+use FindBin qw($Bin);
+
+my $toolsdir    = $Bin;
+my $xsldir      = $toolsdir;
+my $saxon       = "java -jar " . $toolsdir . "/tools/lib/saxon9he.jar ";
+my $epubcheck   = "java -jar " . $toolsdir . "/tools/lib/epubcheck-3.0.1.jar ";
 
 my $filename = $ARGV[0];
 

@@ -1,0 +1,15 @@
+<TEI.2>
+<body>
+
+<table id="sample-table" rend="summary(A small table to demonstrate tables in TEI)" cols="2" rows="4" headrows="0"><row>
+        <cell col="1" row="1" rows="2">1 (this cell is actually spanning two rows)</cell>
+        <cell col="2" row="1">2 (with a much wider cell, for a change, so that we can verify the result of such wide cells in the output)</cell>
+    </row><row><cell col="2" row="2">4</cell></row><row><cell col="1" row="3">5 (yet another wide cell, just to see how it works out in the result formatting)</cell><cell col="2" row="3">6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell></row><row><cell col="1" row="4" cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell></row></table>
+
+<table id="test-1" cols="4" rows="4" headrows="0"><head>Test Table</head><row id="row-1">
+        <cell col="1" row="1" cols="2" rows="2">a</cell>
+        <cell col="3" row="1" cols="2">b</cell>
+    </row><row><cell col="3" row="2">c</cell><cell col="4" row="2" rows="3">d</cell></row><row><cell col="1" row="3" cols="3">e</cell></row><row><cell col="1" row="4">f</cell><cell col="2" row="4">g</cell><cell col="3" row="4">h</cell></row></table>
+
+</body>
+</TEI.2>
