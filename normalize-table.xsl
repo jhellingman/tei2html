@@ -10,7 +10,7 @@
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to normalize TEI tables.</xd:short>
         <xd:detail><p>This stylesheet normalizes TEI tables, to be able to apply the
-        proper style to a table-cell, we need to be able what it's position in the table is,
+        proper style to a table-cell, we need to know what its position in the table is,
         while taking into account spanned rows and columns.</p>
 
         <p>To establish the actual row and column of a cell, we need to first normalize
@@ -45,14 +45,37 @@
 </xsl:template>
 
 
+<xsl:template match="@*|node()">
+    <xsl:copy>
+        <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+</xsl:template>
+
+
 <!-- Templates to normalize a table -->
 
-<xsl:template match="@*|node()" mode="#all">
+<xd:doc>
+    <xd:short>Copy untouched elements when normalizing a table.</xd:short>
+    <xd:detail>
+        <p>Copy (in the current phase) untouched elements when normalizing a table.</p>
+    </xd:detail>
+</xd:doc>
+
+<xsl:template match="@*|node()" mode="normalize-table normalize-table-colspans normalize-table-rowspans normalize-table-final">
     <xsl:copy>
         <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Normalize the column-spans in a table.</xd:short>
+    <xd:detail>
+        <p>Normalize the column-spans in a table. This template inserts placeholder cells for each spanned column.
+        It also copies the <code>@rows</code> attribute on cells to a temporary attribute <code>@orig_rows</code> and the <code>@cols</code>
+        attribute to <code>@orig_cols</code>.</p>
+    </xd:detail>
+</xd:doc>
 
 <xsl:template match="cell" mode="normalize-table-colspans">
     <xsl:choose>
@@ -89,6 +112,13 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Normalize the row-spans in a table.</xd:short>
+    <xd:detail>
+        <p>Normalize the row-spans in a table. Start with the easy case by copying the first row. Then handle each row in order.</p>
+    </xd:detail>
+</xd:doc>
+
 <xsl:template match="table" mode="normalize-table-rowspans">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
@@ -100,6 +130,15 @@
     </xsl:copy>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Normalize the row-spans in a table-row.</xd:short>
+    <xd:detail>
+        <p>Normalize the row-spans in a table-row. Start with the second row, compare this 
+        with the preceding row, and insert placeholder cells for each spanned row. Then
+        recurse for the next row, until the end of the table.</p>
+    </xd:detail>
+</xd:doc>
 
 <xsl:template match="row" mode="normalize-table-rowspans">
     <xsl:param name="previousRow" as="element()"/>
@@ -146,6 +185,14 @@
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Cleanup the table as last phase of normalization.</xd:short>
+    <xd:detail>
+        <p>Cleanup the table as last phase of normalization. Insert the <code>@cols</code> and <code>@rows</code>
+        attributes at the table level. Then cleanup the contents of the table.</p>
+    </xd:detail>
+</xd:doc>
+
 <xsl:template match="table" mode="normalize-table-final">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
@@ -158,6 +205,15 @@
     </xsl:copy>
 </xsl:template>
 
+
+<xd:doc>
+    <xd:short>Cleanup a cell as last phase of normalization.</xd:short>
+    <xd:detail>
+        <p>Cleanup a cell as last phase of normalization. Drop spanned cells introduced int he process
+        and restore the <code>@cols</code> and <code>@rows</code> attributes. At the <code>@col</code> and <code>@row</code> attribute
+        by counting siblings.</p>
+    </xd:detail>
+</xd:doc>
 
 <xsl:template match="cell" mode="normalize-table-final">
     <xsl:if test="not(@spanned)">
