@@ -8,7 +8,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2014-09-08T17:26:41Z</meta>
+      <meta property="dcterms:modified">2014-09-08T20:01:44Z</meta>
       <dc:identifier id="pgnum">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
