@@ -1,4 +1,5 @@
 <xsl:stylesheet
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
@@ -28,7 +29,13 @@
 
 <xsl:template match="@TEIform" mode="#all"/>
 
+
 <xsl:template match="table">
+    <xsl:apply-templates select="." mode="normalize-table"/>
+</xsl:template>
+
+
+<xsl:template match="table" mode="normalize-table">
 
     <!-- Step 1: eliminate spanned columns -->
     <xsl:variable name="table-without-colspans">
@@ -61,7 +68,7 @@
     </xd:detail>
 </xd:doc>
 
-<xsl:template match="@*|node()" mode="normalize-table normalize-table-colspans normalize-table-rowspans normalize-table-final">
+<xsl:template match="@*|node()" mode="normalize-table-colspans normalize-table-rowspans normalize-table-final">
     <xsl:copy>
         <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
@@ -80,33 +87,33 @@
 <xsl:template match="cell" mode="normalize-table-colspans">
     <xsl:choose>
         <xsl:when test="@cols">
-            <xsl:variable name="this" select="." as="element()"/>
+            <xsl:variable name="cell" select="." as="element()"/>
             <xsl:for-each select="1 to @cols">
-                <cell>
-                    <xsl:copy-of select="$this/@*[not(name() = 'cols')]"/>
+                <xsl:element name="cell" namespace="">
+                    <xsl:copy-of select="$cell/@*[not(name() = 'cols')]"/>
                     <xsl:choose>
                         <xsl:when test="position() = 1">
                             <!-- Copy the content of the current cell -->
-                            <xsl:attribute name="orig_cols" select="$this/@cols"/>
-                            <xsl:if test="$this/@rows"><xsl:attribute name="orig_rows" select="$this/@rows"/></xsl:if>
-                            <xsl:copy-of select="$this/node()"/>
+                            <xsl:attribute name="orig_cols" select="$cell/@cols"/>
+                            <xsl:if test="$cell/@rows"><xsl:attribute name="orig_rows" select="$cell/@rows"/></xsl:if>
+                            <xsl:copy-of select="$cell/node()"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <!-- Insert a placeholder for the spanned cell -->
+                            <!-- Indicate this is a placeholder for a spanned cell -->
                             <xsl:attribute name="spanned" select="'true'"/>
                         </xsl:otherwise>
                     </xsl:choose>
-                </cell>
+                </xsl:element>
             </xsl:for-each>
         </xsl:when>
         <xsl:otherwise>
-            <cell>
+            <xsl:element name="cell" namespace="">
                 <xsl:if test="@rows">
                     <xsl:attribute name="orig_rows" select="@rows"/>
                 </xsl:if>
                 <xsl:copy-of select="@*"/>
                 <xsl:copy-of select="./node()"/>
-            </cell>
+            </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
