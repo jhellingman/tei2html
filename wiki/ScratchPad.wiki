@@ -21,3 +21,9 @@ Adding metadata about the series a book belongs to in ePub is not yet standardiz
 }}}
 
 For ePub 3.0, see http://www.idpf.org/epub/301/spec/epub-publications.html#sec-opf-dctitle
+
+== Hanging punctuation ==
+
+See: http://dabblet.com/gist/9623025
+
+and http://webdesign.tutsplus.com/articles/getting-the-hang-of-hanging-punctuation--cms-19890
