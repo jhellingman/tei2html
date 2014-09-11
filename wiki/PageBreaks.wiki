@@ -72,7 +72,7 @@ When creating new printed output, we will have to deal with yet another set of p
 
   * Exact values for cross-references can only be established when final pagination is known. This may result in changes in the page layout inducing changes in the page numbers itself ("see page 100" is wider than "see page 99"). Most current layout tools can deal with this type of issues reasonably, although in some extreme cases this still pops up.
   * When generating an index, you want to avoid things like 
-    * *common entry*, 12, 12, 12, 23, 24, 25 45.
+    * *common entry*, 12, 12, 12, 23, 24, 25, 45.
     but summarize them as
     * *common entry* 12, 23-25, 45.
     which is not really supported by most current index generating tools, and is pretty hard to do as well.
