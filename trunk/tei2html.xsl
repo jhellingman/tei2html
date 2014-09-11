@@ -77,15 +77,6 @@
     <xd:doc type="string">Generate special markup used in ePub files (Yes or No).</xd:doc>
     <xsl:param name="optionEPubMarkup" select="'No'"/>
 
-    <xd:doc type="string">Generate Project Gutenberg headers and footers (Yes or No).</xd:doc>
-    <xsl:param name="optionPGHeaders" select="'No'"/>
-
-    <xd:doc type="string">Output paragraph numbers, using the value of the @n attribute (Yes or No).</xd:doc>
-    <xsl:param name="optionParagraphNumbers" select="'No'"/>
-
-    <xd:doc type="string">Include images in the generated output (Yes or No).</xd:doc>
-    <xsl:param name="optionIncludeImages" select="'Yes'"/>
-
     <xd:doc type="string">Include external links in the generated output (Yes, No, or HeaderOnly). When using HeaderOnly, external links will only appear in the generated colophon.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
 

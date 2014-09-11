@@ -57,6 +57,7 @@
         </xsl:choose>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate an anchor for a page-break.</xd:short>
         <xd:detail>Generate an anchor for a page-break if the page-break has a number (<code>@n</code>-attribute). Otherwise,
@@ -135,6 +136,7 @@
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle a milestone-element.</xd:short>
@@ -254,7 +256,12 @@
     <!--====================================================================-->
     <!-- Letters, with openers, closers, etc. -->
 
-    <!-- non-TEI shortcut for <q><text><body><div1 type="Letter"> -->
+
+    <xd:doc>
+        <xd:short>Handle a cited letter.</xd:short>
+        <xd:detail>Handle a cited letter. This is a non-TEI shortcut for <code>&lt;q&gt;&lt;text&gt;&lt;body&gt;&lt;div1 type="Letter"&gt;</code>.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
         <div class="blockquote letter">
@@ -298,6 +305,12 @@
     <!--====================================================================-->
     <!-- Paragraphs -->
 
+
+    <xd:doc>
+        <xd:short>Handle a paragraph.</xd:short>
+        <xd:detail>Handle a paragraph. All action is delegated to a named template.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="p">
         <xsl:call-template name="handle-paragraph"/>
     </xsl:template>
@@ -321,7 +334,7 @@
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
 
-                <xsl:if test="@n and ($optionParagraphNumbers = 'Yes')">
+                <xsl:if test="@n and f:getConfigurationBoolean('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 <xsl:apply-templates/>
@@ -330,8 +343,12 @@
     </xsl:template>
 
 
-    <!-- Determine whether a paragraph is the first of a set (used to determine
-         whether an indentation is required in some cases -->
+    <xd:doc>
+        <xd:short>Determine whether a paragraph is first.</xd:short>
+        <xd:detail>Determine whether a paragraph is first in a division, and generate the class-name 'first'
+        if so. This can be used to determine whether an indentation is required in some cases.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="first-paragraph-class">
         <xsl:variable name="preceding">
             <xsl:value-of select="name(preceding-sibling::*[1])"/>
@@ -414,6 +431,10 @@
     </xsl:template>
 
 
+    <xd:doc mode="css">
+        <xd:short>Mode to generate CSS.</xd:short>
+    </xd:doc>
+
     <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
@@ -450,6 +471,10 @@
     </xsl:template>
 
 
+    <xd:doc mode="css-handheld">
+        <xd:short>Mode to generate CSS for hand-held devices.</xd:short>
+    </xd:doc>
+
     <!-- Override decorative initials for handheld devices. -->
     <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css-handheld">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
@@ -476,13 +501,17 @@
     </xsl:template>
 
 
+    <xd:doc mode="eat-initial">
+        <xd:short>Mode to remove the first letter (and any preceding quotation marks) from a paragraph.</xd:short>
+    </xd:doc>
+
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="eat-initial">
         <xsl:choose>
-            <xsl:when test="position()=1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;')">
+            <xsl:when test="position() = 1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;')">
                 <xsl:value-of select="substring(.,3)"/>
             </xsl:when>
-            <xsl:when test="position()=1">
+            <xsl:when test="position() = 1">
                 <xsl:value-of select="substring(.,2)"/>
             </xsl:when>
             <xsl:otherwise>
@@ -493,9 +522,14 @@
 
 
     <xsl:template match="*" mode="eat-initial">
-        <xsl:if test="position()>1">
-            <xsl:apply-templates select="."/>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="position() > 1">
+                <xsl:apply-templates select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="." mode="eat-initial"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

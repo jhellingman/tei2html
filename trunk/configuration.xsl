@@ -39,6 +39,9 @@
         <tei2html.config>
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include -->
             <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries -->
+            <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
+            <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
+            <includeImages>true</includeImages>                         <!-- Include images in the generated output. -->
             <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
             <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag -->
             <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark -->
@@ -63,7 +66,7 @@
     </xd:doc>
 
     <xsl:function name="f:getConfiguration" as="xs:string">
-        <xsl:param name="name"/>
+        <xsl:param name="name" as="xs:string"/>
 
         <xsl:variable name="value" select="$configuration//*[name()=$name]"/>
         <xsl:variable name="value" select="if ($value) then $value else $default-configuration//*[name()=$name]"/>
@@ -81,7 +84,7 @@
     </xd:doc>
 
     <xsl:function name="f:getConfigurationBoolean" as="xs:boolean">
-        <xsl:param name="name"/>
+        <xsl:param name="name" as="xs:string"/>
 
         <xsl:variable name="value" select="f:getConfiguration($name)"/>
         <xsl:sequence select="if ($value = 'true') then true() else false()"/>

@@ -51,13 +51,13 @@
                 <xsl:text> <!-- insert extra new-line for PG -->
                 </xsl:text>
 
-                <xsl:if test="$optionPGHeaders = 'Yes'">
+                <xsl:if test="f:getConfigurationBoolean('includePGHeaders')">
                     <xsl:call-template name="PGHeader"/>
                 </xsl:if>
 
                 <xsl:apply-templates/>
 
-                <xsl:if test="$optionPGHeaders = 'Yes'">
+                <xsl:if test="f:getConfigurationBoolean('includePGHeaders')">
                     <xsl:call-template name="PGFooter"/>
                 </xsl:if>
             </body>

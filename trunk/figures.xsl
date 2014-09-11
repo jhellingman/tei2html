@@ -8,9 +8,6 @@
     Stylesheet with templates to format figures, to be imported in
     tei2html.xsl.
 
-    Requires:
-        localization.xsl    : templates for localizing strings.
-
 -->
 
 <xsl:stylesheet
@@ -266,7 +263,7 @@
 
     <!-- TEI P5 graphic element -->
     <xsl:template match="graphic">
-        <xsl:if test="$optionIncludeImages = 'Yes'">
+        <xsl:if test="f:getConfigurationBoolean('includeImages')">
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="format" select="'.png'"/>
             </xsl:call-template>
@@ -282,7 +279,7 @@
     </xd:doc>
 
     <xsl:template match="figure[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <xsl:if test="$optionIncludeImages = 'Yes'">
+        <xsl:if test="f:getConfigurationBoolean('includeImages')">
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="format" select="'.png'"/>
             </xsl:call-template>
@@ -299,7 +296,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-        <xsl:if test="$optionIncludeImages = 'Yes'">
+        <xsl:if test="f:getConfigurationBoolean('includeImages')">
             <!-- Generate CCS class the normal way -->
             <xsl:call-template name="generate-css-rule"/>
 
@@ -332,7 +329,7 @@
     </xd:doc>
 
     <xsl:template match="figure">
-        <xsl:if test="$optionIncludeImages = 'Yes'">
+        <xsl:if test="f:getConfigurationBoolean('includeImages')">
             <xsl:call-template name="closepar"/>
             <div class="figure">
                 <xsl:call-template name="set-lang-id-attributes"/>
@@ -473,7 +470,7 @@
         <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight') then $position else ''"/>
     </xsl:function>
 
-     <xsl:function name="f:bottomPositionAnnotation" as="xs:string">
+    <xsl:function name="f:bottomPositionAnnotation" as="xs:string">
         <xsl:param name="rend"/>
 
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
