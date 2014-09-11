@@ -88,11 +88,6 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
     <xsl:param name="optionEPubMarkup" select="'Yes'"/>
-    <xsl:param name="optionPGHeaders" select="'No'"/>
-    <xsl:param name="optionParagraphNumbers" select="'No'"/>
-
-    <xd:doc type="string">Include images in the HTML output.</xd:doc>
-    <xsl:param name="optionIncludeImages" select="'Yes'"/>
 
     <xd:doc type="string">Render external links as such in HTML.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
