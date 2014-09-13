@@ -23,9 +23,10 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
+    exclude-result-prefixes="f xd"
     version="2.0"
     >
 
@@ -121,7 +122,14 @@
     <xsl:template match="l">
         <p>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+
+            <xsl:variable name="class">
+                line
+                <xsl:value-of select="f:hangingPunctuationClass(.)"/><xsl:text> </xsl:text>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
 
             <xsl:if test="@n">
                 <span class="lineNum"><xsl:value-of select="@n"/></span>
