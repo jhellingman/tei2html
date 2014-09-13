@@ -22,9 +22,10 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xd"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -326,18 +327,30 @@
                     <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
                     <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
-                    <xsl:call-template name="first-paragraph-class"/>
+                    <xsl:if test="f:isFirstParagraph(.)">first </xsl:if>
+                    <xsl:value-of select="f:hangingPunctuationClass(.)"/><xsl:text> </xsl:text>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/>
                 </xsl:variable>
 
                 <xsl:if test="normalize-space($class) != ''">
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
-
+                
                 <xsl:if test="@n and f:getConfigurationBoolean('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
+                
                 <xsl:apply-templates/>
+                <!--
+                <xsl:choose>
+                	<xsl:when  test="f:startsWithPunctuation(.)">
+                		<xsl:call-template name="hangOpenPunctuation"/>
+                	</xsl:when>
+                	<xsl:otherwise>
+ 	               		<xsl:apply-templates/>
+ 	                </xsl:otherwise>
+                </xsl:choose>
+                -->
             </p>
         </xsl:if>
     </xsl:template>
@@ -345,47 +358,125 @@
 
     <xd:doc>
         <xd:short>Determine whether a paragraph is first.</xd:short>
-        <xd:detail>Determine whether a paragraph is first in a division, and generate the class-name 'first'
-        if so. This can be used to determine whether an indentation is required in some cases.</xd:detail>
+        <xd:detail>Determine whether a paragraph is first in a division. This can be used to determine whether 
+        extra or no-indentation is required in some cases.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="first-paragraph-class">
+    <xsl:function name="f:isFirstParagraph" as="xs:boolean">
+		<xsl:param name="node" as="node()"/>
+		                    	
         <xsl:variable name="preceding">
-            <xsl:value-of select="name(preceding-sibling::*[1])"/>
+            <xsl:value-of select="name($node/preceding-sibling::*[1])"/>
         </xsl:variable>
-        <xsl:choose>
-            <xsl:when test="position() = 1">first </xsl:when>
-            <xsl:when test="$preceding = 'head' or $preceding = 'byline' or $preceding = 'lg' or $preceding = 'tb' or $preceding = 'epigraph' or $preceding = 'argument'">first </xsl:when>
-        </xsl:choose>
-    </xsl:template>
 
+        <xsl:value-of select="count($node/preceding-sibling::*) = 0 
+            or $preceding = 'head' 
+            or $preceding = 'byline' 
+            or $preceding = 'lg' 
+            or $preceding = 'tb' 
+            or $preceding = 'epigraph' 
+            or $preceding = 'argument'
+            or $preceding = 'opener'"/>
+	</xsl:function>
+    
+    <!-- Hanging punctuation -->
+
+    <xd:doc>
+        <xd:short>Determine a class for a paragraph if it starts with quotation marks.</xd:short>
+        <xd:detail>Determine a class for a paragraph if it starts with quotation marks. This can be used
+        to &lsquo;hang&rsquo; the quotation marks using CSS.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:hangingPunctuationClass" as="xs:string">
+		<xsl:param name="text" as="xs:string"/>
+		                    	
+        <xsl:choose>
+            <!-- Longer sequences should go first! -->
+            <xsl:when test="starts-with($text, '&ldquo;&lsquo;')">indent-hang-large</xsl:when>
+            <xsl:when test="starts-with($text, '&lsquo;&ldquo;')">indent-hang-large</xsl:when>
+
+            <xsl:when test="starts-with($text, '&ldquo;')">indent-hang-medium</xsl:when>
+            <xsl:when test="starts-with($text, '&lsquo;')">indent-hang-small</xsl:when>
+            <xsl:when test="starts-with($text, '&rsquo;')">indent-hang-small</xsl:when>
+
+            <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
+        </xsl:choose>
+	</xsl:function>
+
+
+	<xsl:function name="f:startsWithPunctuation" as="xs:boolean">
+		<xsl:param name="node" as="node()"/>
+		                    	
+        <xsl:variable name="first" select="$node/(*|text())[1]"/>
+
+        <!-- First child node should be text node -->       	
+    	<xsl:value-of select="not(name($first)) and matches($first, '^[&ldquo;&lsquo;&rsquo;]')"/>
+	</xsl:function>
+	
+	
+	<xsl:template name="hangOpenPunctuation">
+		<!-- First child node is a text node that starts with punctuation -->
+		<xsl:variable name="first" select="text()[1]"/>
+	
+		<xsl:analyze-string select="$first" regex="^[&ldquo;&lsquo;&rsquo;]+">
+     		<xsl:matching-substring>
+         		<span class="hanging-punctuation-start">
+         			<xsl:value-of select="." />
+         		</span>
+     		</xsl:matching-substring>
+     		<xsl:non-matching-substring>
+       			<xsl:value-of select="." />
+     		</xsl:non-matching-substring>
+   		</xsl:analyze-string>
+		
+		<!-- process remainder of the current node in the normal fashion. -->
+		<xsl:apply-templates select="*|text()[position() > 1]"/>
+	</xsl:template>
+	
 
     <!--====================================================================-->
-    <!-- Decorative Initials
-
-    Decorative initials are encoded with the rend attribute on the paragraph 
-    level.
-
-    To properly show an initial in HTML that may stick over the text, we need 
-    to use a number of tricks in CSS.
-
-    1. We set the initial as background picture on the paragraph.
-    2. We create a small div which we let float to the left, to give the initial 
-       the space it needs.
-    3. We set the padding-top to a value such that the initial actually appears 
-       to stick over the paragraph.
-    4. We set the initial as background picture to the float, such that if the 
-       paragraph is to small to contain the entire initial, the float will. We 
-       need to take care to adjust the background position to match the 
-       padding-top, such that the two background images will align exactly.
-    5. We need to remove the first letter from the Paragraph, and render it in 
-       the float in white, such that it re-appears when no CSS is available.
-
-    In some rendering engines, these tricks do not yield the desired results,
-    so we fall-back to a more robust method, using an floating image.
-
-    -->
-
+    <!-- Decorative Initials -->
+    
+    <xd:doc>
+        <xd:short>Start a paragraph with a decorative initial.</xd:short>
+        <xd:detail>
+        	<p>Start a paragraph with a decorative initial. Decorative initials are encoded 
+        	within the <code>rend</code> attribute on the paragraph level, using the value
+        	<code>initial-image()</code>.</p>
+        	
+        	<p>To properly show an initial in HTML that may stick over the text, we need 
+    		to use a number of tricks in CSS.</p>
+    		
+    		<ol>
+    			<li>We set the initial as background picture on the paragraph.</li>
+     			<li>We create a small div which we let float to the left, to give the initial 
+       			the space it needs.</li>
+    			<li>We set the padding-top to a value such that the initial actually appears 
+       			to stick over the paragraph.</li>
+    			<li>We set the initial as background picture to the float, such that if the 
+       			paragraph is to small to contain the entire initial, the float will. We 
+       			need to take care to adjust the background position to match the 
+       			padding-top, such that the two background images will align exactly.</li>
+    			<li>We need to remove the initial letter from the paragraph, and render it in 
+       			the float in white, such that it re-appears when no CSS is available.</li>
+       			<li>We need to remove opening quotation marks when they appear before
+       			the initial letter.</li>
+        	</ol>
+        	
+        	<p>The following rendition-ladder values are used in this process:</p>
+        	
+        	<table>
+        		<tr><td>initial-image</td><td>Name of the image file to use as initial.</td></tr>
+        		<tr><td>initial-width</td><td>The width to reserve for the initial.</td></tr>
+        		<tr><td>initial-height</td><td>The height to reserve for the initial.</td></tr>
+        		<tr><td>initial-offset</td><td>The distance the initial will stick out above the paragraph.</td></tr>
+        	</table>
+        	
+        	<p>In some rendering engines, these tricks do not yield the desired results,
+    		so we fall-back to a more robust method, using an floating image.</p>
+        </xd:detail>
+    </xd:doc>
+    
     <xsl:template match="p[contains(@rend, 'initial-image')]">
         <xsl:choose>
             <xsl:when test="$optionPrinceMarkup = 'Yes' or $optionEPubMarkup = 'Yes'">

@@ -3,3 +3,18 @@ body
 {
     margin: 1.58em 16%;
 }
+
+.indent-hang-small
+{
+	text-indent: -0.31em;
+}
+
+.indent-hang-medium
+{
+	text-indent: -0.44em;
+}
+
+.indent-hang-large
+{
+	text-indent: -0.76em;
+}
