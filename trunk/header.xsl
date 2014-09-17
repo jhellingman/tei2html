@@ -150,10 +150,9 @@
     </xd:doc>
 
     <xsl:template name="include-stylesheets">
-
         <xsl:choose>
-            <xsl:when test="$outputformat = 'epub'">
-                <!-- In ePub, we collect all stylesheets into a single file -->
+            <xsl:when test="not(f:getConfigurationBoolean('inlineStylesheet')) or $outputformat = 'epub'">
+                <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
             </xsl:when>
             <xsl:otherwise>
@@ -161,61 +160,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-    
-    <xd:doc>
-        <xd:short>Embed stylesheets.</xd:short>
-        <xd:detail>
-            <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
-        </xd:detail>
-    </xd:doc>
-    
-    <xsl:template name="embed-css-stylesheets">
-        <xsl:variable name="stylesheetname">
-            <xsl:choose>
-                <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
-                    <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        
-        <!-- Pull in CSS sheets. This requires the CSS to be wrapped in an XML tag at toplevel, so they become valid XML -->
-        <style type="text/css">
-            <!-- Standard CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
-
-            <!-- Supplement CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
-
-            <!-- Standard Aural CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
-        </style>
-        
-        <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="$optionPrinceMarkup = 'Yes'">
-            <style type="text/css" media="print">
-                <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
-            </style>
-        </xsl:if>
-        
-        <style type="text/css">
-            <xsl:if test="$customCssFile">
-                <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-                <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
-            </xsl:if>
-
-            <xsl:if test="//pgStyleSheet">
-                <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim -->
-                <xsl:value-of select="string(//pgStyleSheet)"/>
-            </xsl:if>
-
-            <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
-            <xsl:apply-templates select="/" mode="css"/>
-        </style>
-        
-    </xsl:template>
-    
 
     <!--====================================================================-->
     <!-- TEI Header -->

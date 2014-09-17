@@ -34,6 +34,85 @@
 
 
     <xd:doc>
+        <xd:short>Embed CSS stylesheets.</xd:short>
+        <xd:detail>
+            <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
+        </xd:detail>
+    </xd:doc>
+    
+    <xsl:template name="embed-css-stylesheets">
+        <style type="text/css">
+            <xsl:call-template name="common-css-stylesheets-1"/>
+
+            <!-- Standard Aural CSS stylesheet -->
+            <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
+        </style>
+        
+        <!-- Pull in CSS sheet for print (when using Prince). -->
+        <xsl:if test="$optionPrinceMarkup = 'Yes'">
+            <style type="text/css" media="print">
+                <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
+            </style>
+        </xsl:if>
+        
+        <style type="text/css">
+            <xsl:call-template name="common-css-stylesheets-2"/>
+        </style>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Collect all CSS used into a single (external) .css file.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="copy-css-stylesheets">
+        <xsl:result-document
+                href="{$path}/{$basename}.css"
+                method="text"
+                encoding="UTF-8">
+            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
+            <xsl:call-template name="common-css-stylesheets-1"/>
+            <xsl:call-template name="common-css-stylesheets-2"/>
+        </xsl:result-document>
+    </xsl:template>
+
+
+    <xsl:template name="common-css-stylesheets-1">
+        <xsl:variable name="stylesheetname">
+            <xsl:choose>
+                <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
+                    <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
+                </xsl:when>
+                <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <!-- Standard CSS stylesheet -->
+        <xsl:value-of select="f:css-stylesheet(if ($outputformat = 'epub') then 'style/layout-epub.css' else 'style/layout.css')"/>
+
+        <!-- Supplement CSS stylesheet -->
+        <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
+    </xsl:template>
+
+
+    <xsl:template name="common-css-stylesheets-2">
+        <xsl:if test="$customCssFile">
+            <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
+            <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
+        </xsl:if>
+
+        <xsl:if test="//pgStyleSheet">
+            <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim -->
+            <xsl:value-of select="string(//pgStyleSheet)"/>
+        </xsl:if>
+
+        <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
+        <xsl:apply-templates select="/" mode="css"/>
+    </xsl:template>
+
+
+
+    <xd:doc>
         <xd:short>Translate the <code>@rend</code> attributes to CSS.</xd:short>
         <xd:detail>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</xd:detail>
         <xd:param name="rend">The <code>@rend</code> attribute to be translated.</xd:param>
