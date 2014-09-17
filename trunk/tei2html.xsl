@@ -65,11 +65,11 @@
 
     <!--====================================================================-->
 
-    <xd:doc type="string">Name used as prefix for generated file names (not relevant for HTML, but required for some included stylesheets).</xd:doc>
+    <xd:doc type="string">Name used as prefix for generated file names.</xd:doc>
     <xsl:param name="basename" select="'book'"/>
 
-    <xd:doc type="string">Path in which generated file will be placed (not relevant for HTML, but required for some included stylesheets).</xd:doc>
-    <xsl:param name="path" select="''"/>
+    <xd:doc type="string">Path in which generated files will be placed.</xd:doc>
+    <xsl:param name="path" select="'.'"/>
 
     <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>

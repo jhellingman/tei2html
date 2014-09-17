@@ -154,6 +154,11 @@
             <xsl:when test="not(f:getConfigurationBoolean('inlineStylesheet')) or $outputformat = 'epub'">
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
+
+                <!-- For ePub, the stylesheets are generated here; for HTML we still have to call the generating template. -->
+                <xsl:if test="$outputformat = 'html'">
+                    <xsl:call-template name="copy-css-stylesheets"/>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="embed-css-stylesheets"/>

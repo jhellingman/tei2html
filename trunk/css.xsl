@@ -42,7 +42,7 @@
     
     <xsl:template name="embed-css-stylesheets">
         <style type="text/css">
-            <xsl:call-template name="common-css-stylesheets-1"/>
+            <xsl:call-template name="common-css-stylesheets"/>
 
             <!-- Standard Aural CSS stylesheet -->
             <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
@@ -56,13 +56,16 @@
         </xsl:if>
         
         <style type="text/css">
-            <xsl:call-template name="common-css-stylesheets-2"/>
+            <xsl:call-template name="custom-css-stylesheets"/>
         </style>
     </xsl:template>
 
 
     <xd:doc>
         <xd:short>Collect all CSS used into a single (external) .css file.</xd:short>
+        <xd:detail>
+            <p>Collect the standard and generated CSS stylesheets in a single external .css file.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template name="copy-css-stylesheets">
@@ -71,13 +74,20 @@
                 method="text"
                 encoding="UTF-8">
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
-            <xsl:call-template name="common-css-stylesheets-1"/>
-            <xsl:call-template name="common-css-stylesheets-2"/>
+            <xsl:call-template name="common-css-stylesheets"/>
+            <xsl:call-template name="custom-css-stylesheets"/>
         </xsl:result-document>
     </xsl:template>
 
 
-    <xsl:template name="common-css-stylesheets-1">
+    <xd:doc>
+        <xd:short>Collect the common CSS stylesheets.</xd:short>
+        <xd:detail>
+            <p>Copy the standard CSS stylesheets.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="common-css-stylesheets">
         <xsl:variable name="stylesheetname">
             <xsl:choose>
                 <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
@@ -95,7 +105,14 @@
     </xsl:template>
 
 
-    <xsl:template name="common-css-stylesheets-2">
+    <xd:doc>
+        <xd:short>Collect the custom and generated CSS stylesheets.</xd:short>
+        <xd:detail>
+            <p>Copy the custom and generated CSS stylesheets.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="custom-css-stylesheets">
         <xsl:if test="$customCssFile">
             <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
             <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
@@ -107,9 +124,11 @@
         </xsl:if>
 
         <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
+        <xsl:text>
+        /* CSS rules generated from @rend attributes in TEI file */
+        </xsl:text>
         <xsl:apply-templates select="/" mode="css"/>
     </xsl:template>
-
 
 
     <xd:doc>
