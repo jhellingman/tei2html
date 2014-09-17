@@ -117,7 +117,7 @@
     <xd:doc>
         <xd:short>Main stylesheet for ePub generation.</xd:short>
         <xd:detail>
-            <p>This stylesheet is intended to be the first triggered, and will initiate
+            <p>This XSLT-stylesheet is intended to be the first triggered, and will initiate
             generation of various ePub elements.</p>
         </xd:detail>
     </xd:doc>
@@ -125,7 +125,7 @@
     <xsl:template match="/">
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
-        <xsl:call-template name="copy-stylesheets"/>
+        <xsl:call-template name="copy-css-stylesheets"/>
         <xsl:call-template name="copy-smil-files"/>
 
         <xsl:apply-templates mode="opf"/>
@@ -171,45 +171,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- Stylesheets -->
-
-    <xd:doc>
-        <xd:short>Collect all CSS used into a single .css file.</xd:short>
-    </xd:doc>
-
-    <xsl:template name="copy-stylesheets">
-        <xsl:result-document
-                href="{$path}/{$basename}.css"
-                method="text"
-                encoding="UTF-8">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
-
-            <xsl:variable name="stylesheetname">
-                <xsl:choose>
-                    <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
-                        <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
-                    </xsl:when>
-                    <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
-                </xsl:choose>
-            </xsl:variable>
-
-            <!-- Standard CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet('style/layout-epub.css')"/>
-
-            <!-- Supplement CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
-
-            <!-- Custom CSS stylesheet -->
-            <xsl:if test="$customCssFile">
-                <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
-            </xsl:if>
-
-            <!-- Generate CSS for rend attributes -->
-            <xsl:apply-templates select="/" mode="css"/>
-
-        </xsl:result-document>
-    </xsl:template>
 
     <!--====================================================================-->
     <!-- SMIL files -->

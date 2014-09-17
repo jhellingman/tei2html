@@ -37,7 +37,8 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include -->
+            <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
+            <inlineStylesheet>true</inlineStylesheet>                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
             <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries -->
             <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
