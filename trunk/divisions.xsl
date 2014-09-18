@@ -509,13 +509,13 @@
 
     <xd:doc>
         <xd:short>Set the running header.</xd:short>
-        <xd:detail>Set the running header, for ePub3 only.</xd:detail>
+        <xd:detail>Set the running header, for ePub3 only (not supported in readers yet).</xd:detail>
     </xd:doc>
 
     <xsl:template name="setRunningHeader">
         <xsl:param name="head" select="."/>
 
-        <xsl:if test="$optionEPubMarkup = 'XXX'">
+        <xsl:if test="$outputformat = 'XXX'">
             <div class="pagehead">
                 <xsl:value-of select="$head"/>
             </div>

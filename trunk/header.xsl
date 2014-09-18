@@ -98,7 +98,7 @@
     <xsl:template name="generate-metadata">
 
         <xsl:choose>
-            <xsl:when test="$optionEPubMarkup = 'Yes'">
+            <xsl:when test="$outputformat = 'epub'">
                 <meta charset="{$encoding}"/>
             </xsl:when>
             <xsl:otherwise>
@@ -155,7 +155,7 @@
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
 
-                <!-- For ePub, the stylesheets are generated here; for HTML we still have to call the generating template. -->
+                <!-- For ePub, the stylesheets are generated elsewhere; for HTML we still have to call the generating template. -->
                 <xsl:if test="$outputformat = 'html'">
                     <xsl:call-template name="copy-css-stylesheets"/>
                 </xsl:if>

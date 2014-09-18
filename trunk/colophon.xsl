@@ -194,7 +194,7 @@
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
         <table class="correctiontable">
-            <xsl:if test="$optionEPubMarkup != 'Yes'">
+            <xsl:if test="$outputformat != 'epub'">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
             </xsl:if>
             <tr>

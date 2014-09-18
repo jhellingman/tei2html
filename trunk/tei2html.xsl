@@ -74,9 +74,6 @@
     <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
 
-    <xd:doc type="string">Generate special markup used in ePub files (Yes or No).</xd:doc>
-    <xsl:param name="optionEPubMarkup" select="'No'"/>
-
     <xd:doc type="string">Include external links in the generated output (Yes, No, or HeaderOnly). When using HeaderOnly, external links will only appear in the generated colophon.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
 
@@ -86,6 +83,9 @@
     <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
     <xsl:param name="optionGenerateFacsimile" select="'Yes'"/>
 
+    <xd:doc type="string">If units are encoded using the <code>measure</code> tag: use either the original or regularized units (TODO;
+    currently both are shown, the original in the text, the regularized units in a pop-up).</xd:doc>
+    <xsl:variable name="unitsUsed" select="'Original'"/>
 
     <!--====================================================================-->
 
@@ -99,12 +99,6 @@
     <xsl:variable name="publisher" select="/TEI.2/teiHeader/fileDesc/publicationStmt/publisher" />
     <xsl:variable name="pubdate" select="/TEI.2/teiHeader/fileDesc/publicationStmt/date" />
 
-
     <!--====================================================================-->
-
-    <xd:doc type="string">If units are encoded using the <code>measure</code> tag: use either the original or regularized units (TODO;
-    currently both are shown, the original in the text, the regularized units in a pop-up).</xd:doc>
-    <xsl:variable name="unitsUsed" select="'Original'"/>
-
 
 </xsl:stylesheet>

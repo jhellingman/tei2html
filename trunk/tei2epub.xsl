@@ -87,7 +87,6 @@
     <xsl:param name="path" select="'ePub'"/>
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
-    <xsl:param name="optionEPubMarkup" select="'Yes'"/>
 
     <xd:doc type="string">Render external links as such in HTML.</xd:doc>
     <xsl:param name="optionExternalLinks" select="'Yes'"/>
@@ -97,6 +96,8 @@
 
     <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
     <xsl:param name="optionGenerateFacsimile" select="'No'"/>
+
+    <xsl:variable name="unitsUsed" select="'Original'"/>
 
     <!--====================================================================-->
 
@@ -112,7 +113,6 @@
 
     <!--====================================================================-->
 
-    <xsl:variable name="unitsUsed" select="'Original'"/>
 
     <xd:doc>
         <xd:short>Main stylesheet for ePub generation.</xd:short>
@@ -171,7 +171,6 @@
     </xsl:template>
 
 
-
     <!--====================================================================-->
     <!-- SMIL files -->
 
@@ -187,6 +186,7 @@
         </xsl:for-each>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- Cover -->
 
@@ -197,36 +197,6 @@
                 encoding="UTF-8">
 
             <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
-
-        </xsl:result-document>
-    </xsl:template>
-
-
-    <!--====================================================================-->
-    <!-- Adobe Pagemap -->
-
-    <xd:doc>
-        <xd:short>Create a (non-standard) Adobe pagemap file.</xd:short>
-    </xd:doc>
-
-    <xsl:template name="pagemap">
-        <xsl:result-document
-                doctype-public=""
-                doctype-system=""
-                href="{$path}/pagemap.xml"
-                method="xml"
-                encoding="UTF-8">
-
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/pagemap.xml.</xsl:message>
-
-            <page-map xmlns="http://www.idpf.org/2007/opf">
-                <xsl:for-each select="//pb">
-                    <page>
-                        <xsl:attribute name="name"><xsl:value-of select="@n"/></xsl:attribute>
-                        <xsl:call-template name="generate-href-attribute"/>
-                    </page>
-                </xsl:for-each>
-            </page-map>
 
         </xsl:result-document>
     </xsl:template>
