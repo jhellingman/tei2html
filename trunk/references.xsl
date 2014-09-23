@@ -299,17 +299,17 @@
 
             <!-- Link to OCLC (worldcat) catalog entry -->
             <xsl:when test="starts-with($url, 'oclc:')">
-                <xsl:text>http://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (item level) -->
             <xsl:when test="starts-with($url, 'oln:')">
-                <xsl:text>http://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (abstract work level) -->
             <xsl:when test="starts-with($url, 'olw:')">
-                <xsl:text>http://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to WikiPilipinas article -->
@@ -319,7 +319,7 @@
 
             <!-- Link to Wikipedia article -->
             <xsl:when test="starts-with($url, 'wp:')">
-                <xsl:text>http://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to location on map, using coordinates -->
@@ -327,12 +327,12 @@
                 <xsl:variable name="coordinates" select="substring-after($url, ':')"/>
                 <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
                 <xsl:variable name="altitude" select="substring-after($coordinates, ',')"/>
-                <xsl:text>http://maps.google.com/maps?q=</xsl:text><xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/>
+                <xsl:text>https://maps.google.com/maps?q=</xsl:text><xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/>
             </xsl:when>
 
             <!-- Link to Bible citation -->
             <xsl:when test="starts-with($url, 'bib:')">
-                <xsl:text>http://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, ':'))"/>
+                <xsl:text>https://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, ':'))"/>
                 <xsl:choose>
                     <!-- TODO: move this to localization data -->
                     <xsl:when test="$lang = 'en'"/>
