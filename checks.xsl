@@ -150,7 +150,7 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
     <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>

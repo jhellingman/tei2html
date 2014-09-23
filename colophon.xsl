@@ -135,7 +135,7 @@
         <xsl:if test="f:isvalid(//idno[@type='OLN'])">
             <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
                 <a class="catlink">
-                    <xsl:attribute name="href">http://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
+                    <xsl:attribute name="href">https://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
                     <xsl:value-of select="//idno[@type='OLN']"/>
                 </a>.
             </p>
@@ -144,7 +144,7 @@
         <xsl:if test="f:isvalid(//idno[@type='OLW'])">
             <p><xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
                 <a class="catlink">
-                    <xsl:attribute name="href">http://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
+                    <xsl:attribute name="href">https://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
                     <xsl:value-of select="//idno[@type='OLW']"/>
                 </a>.
             </p>
@@ -153,7 +153,7 @@
         <xsl:if test="f:isvalid(//idno[@type='OCLC'])">
             <p><xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
                 <a class="catlink">
-                    <xsl:attribute name="href">http://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
+                    <xsl:attribute name="href">https://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
                     <xsl:value-of select="//idno[@type='OCLC']"/>
                 </a>.
             </p>
