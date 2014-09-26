@@ -85,4 +85,4 @@ For details see page <ref target="pb123" type="pageref">123</ref>.
 
 That is, directly surrounding the page number, and the additional `@type` attribute set to pageref. This indicates to the rendering application that the content of the `<ref>` element needs to be replaced with the actual page number on which the details appear.
 
-To prevent that the details do not appear on the indicated page, but on a previous or next page, you should replace the target with the non-`<bp>` element the details are really in (most likely a paragraph).
+To prevent that the details do not appear on the indicated page, but on a previous or next page, you should replace the target with the non-`<pb>` element the details are really in (most likely a paragraph).
