@@ -94,11 +94,6 @@
     <xd:doc type="string">Place external links in a separate table in the Colophon.</xd:doc>
     <xsl:param name="optionExternalLinksTable" select="'Yes'"/>
 
-    <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
-    <xsl:param name="optionGenerateFacsimile" select="'No'"/>
-
-    <xsl:variable name="unitsUsed" select="'Original'"/>
-
     <!--====================================================================-->
 
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>

@@ -237,7 +237,8 @@
     <xd:doc>
         <xd:short>Combine all heads in a division into a single line for use in a table of contents.</xd:short>
         <xd:detail>
-            <p>Combine all heads in a division into a single line, ignoring "super" and "label" type heads (unless the only available head is marked "label").</p>
+            <p>Called in context of a division (<code>div0</code>, <code>div1</code>, etc.). Combine all heads in a division into a 
+            single line, ignoring "super" and "label" type heads (unless the only available head is marked "label").</p>
         </xd:detail>
     </xd:doc>
 
@@ -471,7 +472,6 @@
 
 
     <!--====================================================================-->
-    <!-- List of Illustrations -->
 
     <xd:doc>
         <xd:short>Generate a list of illustrations.</xd:short>
@@ -497,13 +497,12 @@
 
 
     <!--====================================================================-->
-    <!-- Gallery of thumbnail images -->
 
     <xd:doc>
         <xd:short>Generate a thumbnail gallery.</xd:short>
 
         <xd:detail>
-            <p>Generate a thumbnail gallery. This template assumes that for each image, a thumbnail is
+            <p>Generate a gallery of thumbnail images. This template assumes that for each image, a thumbnail is
             available, and will use that image in a gallery, linking to the original (full-size) image. The name
             of the thumbnail image file is assumed to be the same as the full-size image, but is located in
             a subdirectory <code>/thumbs/</code>.</p>
@@ -649,7 +648,14 @@
 
 
     <!--====================================================================-->
-    <!-- Index -->
+
+    <xd:doc>
+        <xd:short>Generate an index.</xd:short>
+        <xd:detail>
+            <p>Generate an index. This depends on <code>index</code> tags being used in the main text of the document.
+            All these elements will be collected into a temporary structure, and then rendered to HTML.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='Index' or @type='index']">
         <div class="div1">
@@ -690,6 +696,14 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Output a sorted index.</xd:short>
+        <xd:detail>
+            <p>Output a sorted index from elements stored in a temporary structure, taking care
+            of two levels of index entries.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="xhtml:divIndex" mode="index">
         <xsl:for-each-group select="xhtml:index" group-by="lower-case(@level1)">
             <xsl:sort select="lower-case(@level1)"/>
@@ -723,6 +737,13 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle an index entry in the text.</xd:short>
+        <xd:detail>
+            <p>Handle an index entry in the text, by making sure it has an anchor.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="index">
         <a>
             <xsl:call-template name="set-lang-id-attributes"/>
@@ -731,7 +752,13 @@
 
 
     <!--====================================================================-->
-    <!-- Footnotes -->
+
+    <xd:doc>
+        <xd:short>Generate a footnote section.</xd:short>
+        <xd:detail>
+            <p>Generate a footnote section, complete with head.</p>
+        </xd:detail>
+    </xd:doc>
 
     <!-- collect footnotes in a separate section, sorted by div1 -->
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
@@ -744,10 +771,22 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the body of a footnote section only.</xd:short>
+    </xd:doc>
+
     <xsl:template match="divGen[@type='footnotesBody']">
         <xsl:call-template name="footnotes-body"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate the footnote section (implementation).</xd:short>
+        <xd:detail>
+            <p>Generate the footnote section. Collect all footnotes in the text,
+            and present them, divided by division.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template name="footnotes-body">
         <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
@@ -767,34 +806,37 @@
         <!-- Only mention the part if it has footnotes (not in the chapters) -->
         <xsl:if test=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]">
             <div class="div2 notes">
-                <xsl:apply-templates select="./head[not(@type='label') and not(@type='super')]" mode="divgen-footnotes"/>
+                <xsl:call-template name="footnote-sectionhead"/>
                 <xsl:apply-templates select=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]" mode="footnotes"/>
             </div>
         </xsl:if>
         <xsl:apply-templates select="div1[not(ancestor::q)]" mode="divgen-footnotes"/>
     </xsl:template>
 
+
     <xsl:template match="div1" mode="divgen-footnotes">
         <!-- Only mention the chapter if it has footnotes -->
         <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)]">
             <div class="div2 notes">
-                <xsl:apply-templates select="./head[not(@type='label') and not(@type='super')]" mode="divgen-footnotes"/>
+                <xsl:call-template name="footnote-sectionhead"/>
                 <xsl:apply-templates select=".//note[@place='foot' or @place='unspecified' or not(@place)]" mode="footnotes"/>
             </div>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="head" mode="divgen-footnotes">
+
+    <xsl:template name="footnote-sectionhead">
         <h3 class="main">
-            <xsl:apply-templates select="." mode="tochead"/>
+            <xsl:call-template name="generate-single-head"/>
         </h3>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Included material (alternative for xml:include) -->
 
     <xsl:template match="divGen[@type='Inclusion']">
-        <!-- Include material should be rendered here; material is given on an url parameter -->
+        <!-- Material to be included should be rendered here; material is given on an url parameter -->
         <xsl:if test="@url">
             <xsl:variable name="target" select="@url"/>
             <xsl:variable name="document" select="substring-before($target, '#')"/>
