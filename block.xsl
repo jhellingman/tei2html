@@ -76,7 +76,7 @@
                         <xsl:value-of select="@n"/>
                     </a>
                     <xsl:text>]</xsl:text>
-                    <xsl:if test="$optionGenerateFacsimile = 'Yes' and ./@facs">
+                    <xsl:if test="f:getConfigurationBoolean('generateFacsimile') and ./@facs">
                         <xsl:text>&nbsp;</xsl:text>
                         <xsl:choose>
                             <xsl:when test="starts-with(@facs, '#')">

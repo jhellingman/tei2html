@@ -80,13 +80,6 @@
     <xd:doc type="string">Include a table of external links in the colophon (Yes or No).</xd:doc>
     <xsl:param name="optionExternalLinksTable" select="'No'"/>
 
-    <xd:doc type="string">Generate a digital facsimile from page images (Yes or No).</xd:doc>
-    <xsl:param name="optionGenerateFacsimile" select="'Yes'"/>
-
-    <xd:doc type="string">If units are encoded using the <code>measure</code> tag: use either the original or regularized units (TODO;
-    currently both are shown, the original in the text, the regularized units in a pop-up).</xd:doc>
-    <xsl:variable name="unitsUsed" select="'Original'"/>
-
     <!--====================================================================-->
 
     <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->

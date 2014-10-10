@@ -34,7 +34,7 @@
     <xsl:template match="text">
         <xsl:apply-templates/>
 
-        <xsl:if test="$optionGenerateFacsimile = 'Yes'">
+        <xsl:if test="f:getConfigurationBoolean('generateFacsimile')">
             <xsl:apply-templates select="//pb[@facs]" mode="facsimile"/>
         </xsl:if>
     </xsl:template>

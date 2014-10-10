@@ -421,13 +421,26 @@
     <!-- Measurements with metric equivalent -->
 
     <xsl:template match="measure">
-        <span class="measure">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="./@reg"/>
-            </xsl:attribute>
-            <xsl:apply-templates/>
-        </span>
+        <xsl:choose>
+            <xsl:when test="f:getConfigurationBoolean('useRegularizedUnits')">
+                <span class="measure">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="."/>
+                    </xsl:attribute>
+                    <xsl:value-of select="./@reg"/>
+                </span>
+            </xsl:when>
+            <xsl:otherwise>
+                <span class="measure">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="./@reg"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

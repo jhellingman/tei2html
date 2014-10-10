@@ -46,7 +46,10 @@
             <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
             <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag -->
             <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark -->
+            <generateFacsimile>false</generateFacsimile>                <!-- Output section with and links to facsimile images if required information is present -->
             <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present -->
+            <useRegularizedUnits>false</useRegularizedUnits>            <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a 
+                                                                             pop-up; true: regularized in text, original in pop-up) -->
         </tei2html.config>
     </xsl:variable>
 
