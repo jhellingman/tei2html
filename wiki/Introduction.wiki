@@ -1,4 +1,4 @@
-#summary Preface and Introduction to tei2html.
+#summary 01 Preface and Introduction to tei2html.
 
 = Preface =
 
