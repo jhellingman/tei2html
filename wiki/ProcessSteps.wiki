@@ -1,4 +1,4 @@
-#summary The steps taken to process a TEI file.
+#summary 05 The steps taken to process a TEI file.
 
 = Introduction =
 
@@ -28,4 +28,3 @@ Table handling in TEI and HTML is complicated. To deal with them correctly, we h
 == Step 2.2: Transform to HTML ==
 
 After the tables have been normalised, we're ready to transform to HTML. This is done now.
-
