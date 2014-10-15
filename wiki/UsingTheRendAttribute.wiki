@@ -1,4 +1,4 @@
-#summary Instructions on how to use the @rend attribute
+#summary 07 Instructions on how to use the @rend attribute
 
 = Using the `@rend` attribute =
 
