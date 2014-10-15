@@ -1,4 +1,4 @@
-#summary Configuration of tei2html (in development).
+#summary 04 Configuration of tei2html (in development).
 
 = Introduction =
 
