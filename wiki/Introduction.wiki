@@ -2,7 +2,7 @@
 
 = Preface =
 
-The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," but makes it harder to produce nicely formatted output from the same source. This is where the tei2html stylesheets kick-in.
+The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the tei2html stylesheets kick-in.
 
 `tei2html` is a collection of XSLT stylesheets that transform a duly marked up TEI file to an attractive HTML, ePub or PDF document. It is intended to work out-of-the-box with unadorned TEI files, but will be able to perform better if certain conventions are followed.
 
