@@ -422,7 +422,7 @@
 
     <xsl:template match="measure">
         <xsl:choose>
-            <xsl:when test="f:getConfigurationBoolean('useRegularizedUnits')">
+            <xsl:when test="f:isSet('useRegularizedUnits')">
                 <span class="measure">
                     <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:attribute name="title">
@@ -534,7 +534,7 @@
 
     <xsl:template match="ditto">
         <xsl:choose>
-            <xsl:when test="f:getConfigurationBoolean('useDittoMarks')">
+            <xsl:when test="f:isSet('useDittoMarks')">
                 <xsl:apply-templates mode="ditto"/>
             </xsl:when>
             <xsl:otherwise>
@@ -591,7 +591,7 @@
                         <xsl:if test="not($context/parent::hi[@rend='sub' or @rend='sup'])">
                             <tr class="d">
                                 <td>
-                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getConfiguration('dittoMark')"/>
+                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getSetting('dittoMark')"/>
                                 </td>
                             </tr>
                         </xsl:if>

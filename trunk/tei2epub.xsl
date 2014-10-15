@@ -88,12 +88,6 @@
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
 
-    <xd:doc type="string">Render external links as such in HTML.</xd:doc>
-    <xsl:param name="optionExternalLinks" select="'Yes'"/>
-
-    <xd:doc type="string">Place external links in a separate table in the Colophon.</xd:doc>
-    <xsl:param name="optionExternalLinksTable" select="'Yes'"/>
-
     <!--====================================================================-->
 
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>

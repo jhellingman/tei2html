@@ -155,7 +155,7 @@
         <xsl:param name="div" as="node()"/>
 
         <xsl:variable name="defaultHead">
-            <xsl:if test="f:getConfigurationBoolean('defaultTocEntries')">
+            <xsl:if test="f:isSet('defaultTocEntries')">
                 <xsl:value-of select="f:default-toc-head($div/@type)"/>
             </xsl:if>
         </xsl:variable>
@@ -221,7 +221,7 @@
         <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
-        <xsl:if test="@n and f:getConfigurationBoolean('numberTocEntries') and $show-div-numbers">
+        <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
             <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a>
