@@ -1,4 +1,4 @@
-#summary 02 How to get started with `tei2html`
+#summary 02 How to get started with tei2html
 
 = Prerequisites and Installation =
 
