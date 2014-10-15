@@ -1,4 +1,4 @@
-#summary How to encode cross-references.
+#summary 08 How to encode cross-references.
 
 = Internal Cross References =
 
