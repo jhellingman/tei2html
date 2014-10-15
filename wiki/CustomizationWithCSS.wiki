@@ -1,4 +1,4 @@
-#summary Customization of output via CSS.
+#summary 06 Customization of output via CSS.
 
 = Introduction =
 
