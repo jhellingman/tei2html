@@ -76,7 +76,7 @@
                         <xsl:value-of select="@n"/>
                     </a>
                     <xsl:text>]</xsl:text>
-                    <xsl:if test="f:getConfigurationBoolean('generateFacsimile') and ./@facs">
+                    <xsl:if test="f:isSet('generateFacsimile') and ./@facs">
                         <xsl:text>&nbsp;</xsl:text>
                         <xsl:choose>
                             <xsl:when test="starts-with(@facs, '#')">
@@ -336,7 +336,7 @@
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
                 
-                <xsl:if test="@n and f:getConfigurationBoolean('showParagraphNumbers')">
+                <xsl:if test="@n and f:isSet('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 

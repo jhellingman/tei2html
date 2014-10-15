@@ -51,13 +51,13 @@
                 <xsl:text> <!-- insert extra new-line for PG -->
                 </xsl:text>
 
-                <xsl:if test="f:getConfigurationBoolean('includePGHeaders')">
+                <xsl:if test="f:isSet('includePGHeaders')">
                     <xsl:call-template name="PGHeader"/>
                 </xsl:if>
 
                 <xsl:apply-templates/>
 
-                <xsl:if test="f:getConfigurationBoolean('includePGHeaders')">
+                <xsl:if test="f:isSet('includePGHeaders')">
                     <xsl:call-template name="PGFooter"/>
                 </xsl:if>
             </body>
@@ -151,7 +151,7 @@
 
     <xsl:template name="include-stylesheets">
         <xsl:choose>
-            <xsl:when test="not(f:getConfigurationBoolean('inlineStylesheet')) or $outputformat = 'epub'">
+            <xsl:when test="not(f:isSet('inlineStylesheet')) or $outputformat = 'epub'">
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
 

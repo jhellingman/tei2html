@@ -270,7 +270,7 @@
 
             <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
 
-            <xsl:if test="$optionExternalLinksTable = 'Yes'">
+            <xsl:if test="f:isSet('outputExternalLinksTable')">
                 <xsl:call-template name="external-reference-table"/>
             </xsl:if>
         </xsl:if>
@@ -304,7 +304,7 @@
                         <td>
                             <xsl:variable name="url" select="f:translate-xref-url(@url, substring(/TEI.2/@lang, 1, 2))"/>
                             <xsl:choose>
-                                <xsl:when test="$optionExternalLinks != 'No'">
+                                <xsl:when test="f:getSetting('outputExternalLinks') != 'never'">
                                     <a href="{$url}" class="{f:translate-xref-class(@url)}"><xsl:value-of select="$url"/></a>
                                 </xsl:when>
                                 <xsl:otherwise>

@@ -74,12 +74,6 @@
     <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>
 
-    <xd:doc type="string">Include external links in the generated output (Yes, No, or HeaderOnly). When using HeaderOnly, external links will only appear in the generated colophon.</xd:doc>
-    <xsl:param name="optionExternalLinks" select="'Yes'"/>
-
-    <xd:doc type="string">Include a table of external links in the colophon (Yes or No).</xd:doc>
-    <xsl:param name="optionExternalLinksTable" select="'No'"/>
-
     <!--====================================================================-->
 
     <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->

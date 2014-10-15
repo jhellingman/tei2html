@@ -93,7 +93,7 @@
                 <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
                     <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:getConfiguration('defaultStylesheet')"/></xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="f:getSetting('defaultStylesheet')"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 

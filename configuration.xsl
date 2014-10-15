@@ -39,17 +39,29 @@
         <tei2html.config>
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
             <inlineStylesheet>true</inlineStylesheet>                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
-            <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries -->
+            <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries. -->
             <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
             <includeImages>true</includeImages>                         <!-- Include images in the generated output. -->
             <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
-            <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag -->
-            <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark -->
-            <generateFacsimile>false</generateFacsimile>                <!-- Output section with and links to facsimile images if required information is present -->
-            <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present -->
+            <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag. -->
+            <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark. -->
+            <generateFacsimile>false</generateFacsimile>                <!-- Output section with and links to facsimile images if required information is present. -->
+            <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present. -->
             <useRegularizedUnits>false</useRegularizedUnits>            <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a 
                                                                              pop-up; true: regularized in text, original in pop-up) -->
+            <outputExternalLinks>always</outputExternalLinks>           <!-- Generate external links, possible values: always | never | colophon -->
+            <outputExternalLinksTable>false</outputExternalLinksTable>  <!-- Place external links in a separate table in the colophon. -->
+
+            <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
+            <output format="html">
+                <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
+            </output>
+            <output format="epub">
+                <useMouseOverPopups>false</useMouseOverPopups>
+                <outputExternalLinks>always</outputExternalLinks>
+                <outputExternalLinksTable>true</outputExternalLinksTable>
+            </output>
         </tei2html.config>
     </xsl:variable>
 
@@ -69,14 +81,19 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:getConfiguration" as="xs:string">
+    <xsl:function name="f:getSetting" as="xs:string">
         <xsl:param name="name" as="xs:string"/>
 
-        <xsl:variable name="value" select="$configuration//*[name()=$name]"/>
-        <xsl:variable name="value" select="if ($value) then $value else $default-configuration//*[name()=$name]"/>
+        <!-- Get the value from the current configuration -->
+        <xsl:variable name="value" select="$configuration/tei2html.config/output[@format=$outputformat]/*[name()=$name]"/>
+        <xsl:variable name="value" select="if ($value) then $value else $configuration/tei2html.config/*[name()=$name]"/>
+
+        <!-- If not found: get the value from the default configuration -->
+        <xsl:variable name="value" select="if ($value) then $value else $default-configuration/tei2html.config/output[@format=$outputformat]/*[name()=$name]"/>
+        <xsl:variable name="value" select="if ($value) then $value else $default-configuration/tei2html.config/*[name()=$name]"/>
 
         <xsl:if test="not($value)">
-            <xsl:message terminate="no">Cannot get configuration value: <xsl:value-of select="$name"/>.</xsl:message>
+            <xsl:message terminate="no">ERROR:   Cannot get configuration value: <xsl:value-of select="$name"/>.</xsl:message>
         </xsl:if>
 
         <xsl:sequence select="$value"/>
@@ -87,10 +104,10 @@
         <xd:short>Get a boolean value from the configuration.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:getConfigurationBoolean" as="xs:boolean">
+    <xsl:function name="f:isSet" as="xs:boolean">
         <xsl:param name="name" as="xs:string"/>
 
-        <xsl:variable name="value" select="f:getConfiguration($name)"/>
+        <xsl:variable name="value" select="f:getSetting($name)"/>
         <xsl:sequence select="if ($value = 'true') then true() else false()"/>
     </xsl:function>
 

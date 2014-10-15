@@ -263,7 +263,7 @@
 
     <!-- TEI P5 graphic element -->
     <xsl:template match="graphic">
-        <xsl:if test="f:getConfigurationBoolean('includeImages')">
+        <xsl:if test="f:isSet('includeImages')">
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="format" select="'.png'"/>
             </xsl:call-template>
@@ -279,7 +279,7 @@
     </xd:doc>
 
     <xsl:template match="figure[@rend='inline' or contains(@rend, 'position(inline)')]">
-        <xsl:if test="f:getConfigurationBoolean('includeImages')">
+        <xsl:if test="f:isSet('includeImages')">
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="format" select="'.png'"/>
             </xsl:call-template>
@@ -296,7 +296,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-        <xsl:if test="f:getConfigurationBoolean('includeImages')">
+        <xsl:if test="f:isSet('includeImages')">
             <!-- Generate CCS class the normal way -->
             <xsl:call-template name="generate-css-rule"/>
 
@@ -329,7 +329,7 @@
     </xd:doc>
 
     <xsl:template match="figure">
-        <xsl:if test="f:getConfigurationBoolean('includeImages')">
+        <xsl:if test="f:isSet('includeImages')">
             <xsl:call-template name="closepar"/>
             <div class="figure">
                 <xsl:call-template name="set-lang-id-attributes"/>

@@ -111,7 +111,7 @@
 </xd:doc>
 
 <xsl:function name="f:facsimile-path" as="xs:string">
-    <xsl:sequence select="f:getConfiguration('facsimilePath')"/>
+    <xsl:sequence select="f:getSetting('facsimilePath')"/>
 </xsl:function>
 
 

@@ -113,18 +113,18 @@
 
             <ul>
                 <li>Active external links will be put in the output by setting the stylesheet parameter 
-                <code>optionExternalLinks</code> to <code>Yes</code>. External links can be limited to the generated Colophon 
-                only by setting this value to <code>HeaderOnly</code>.</li>
+                <code>outputExternalLinks</code> to <code>always</code>. External links can be limited to the generated Colophon 
+                only by setting this value to <code>colophon</code>.</li>
                 <li>External links will be placed in a table in the colophon (provided a colophon is present) by
-                setting <code>optionExternalLinksTable</code> to <code>Yes</code>. Here they will be rendered as an URL.
-                The original link will then reference to the table.</li>
+                setting <code>outputExternalLinksTable</code> to <code>true</code>. Here they will be rendered as an URL.
+                The original link will then link to the table.</li>
             </ul>
         </xd:detail>
     </xd:doc>
 
     <xsl:template match="xref[@url]">
         <xsl:choose>
-            <xsl:when test="$optionExternalLinksTable = 'Yes'">
+            <xsl:when test="f:isSet('outputExternalLinksTable')">
                 <xsl:choose>
                     <xsl:when test="//divGen[@type='Colophon']">
                         <a>
@@ -139,11 +139,11 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="$optionExternalLinks = 'Yes'">
+            <xsl:when test="f:getSetting('outputExternalLinks') = 'always'">
                 <xsl:call-template name="handle-xref"/>
             </xsl:when>
 
-            <xsl:when test="$optionExternalLinks = 'HeaderOnly' and ancestor::teiHeader">
+            <xsl:when test="f:getSetting('outputExternalLinks') = 'colophon' and ancestor::teiHeader">
                 <xsl:call-template name="handle-xref"/>
             </xsl:when>
 
