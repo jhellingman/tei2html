@@ -1,4 +1,4 @@
-#summary 04 The steps taken to process a TEI file.
+#summary 05 The steps taken to process a TEI file.
 
 = Introduction =
 
