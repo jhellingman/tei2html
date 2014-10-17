@@ -391,6 +391,8 @@
 		<xsl:param name="text" as="xs:string"/>
 		                    	
         <xsl:choose>
+            <xsl:when test="not(f:isSet('useHangingPunctuation'))"><xsl:text> </xsl:text></xsl:when>
+
             <!-- Longer sequences should go first! -->
             <xsl:when test="starts-with($text, '&ldquo;&lsquo;')">indent-hang-large</xsl:when>
             <xsl:when test="starts-with($text, '&lsquo;&ldquo;')">indent-hang-large</xsl:when>

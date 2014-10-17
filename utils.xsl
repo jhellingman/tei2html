@@ -198,7 +198,7 @@
             <xsl:when test="$node/@id">
                 <!-- Verify the id is valid for use in HTML and CSS 
                 <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
-                    <xsl:message terminate="no">WARNING: source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
+                    <xsl:message terminate="no">WARNING: Source contains id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
                 </xsl:if>-->
                 <xsl:value-of select="$node/@id"/>
             </xsl:when>
@@ -366,7 +366,7 @@
             <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
             <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">WARNING: division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
+                <xsl:message terminate="no">WARNING: Division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
                 <xsl:value-of select="''"/>
             </xsl:otherwise>
         </xsl:choose>

@@ -73,7 +73,7 @@
                 href="{$path}/{$basename}.css"
                 method="text"
                 encoding="UTF-8">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.css.</xsl:message>
             <xsl:call-template name="common-css-stylesheets"/>
             <xsl:call-template name="custom-css-stylesheets"/>
         </xsl:result-document>

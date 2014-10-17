@@ -22,7 +22,7 @@
     <xsl:template match="TEI.2" mode="ncx">
 
         <xsl:result-document format="ncx" href="{$path}/{$basename}.ncx">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
 
             <ncx version="2005-1">
                 <xsl:attribute name="xml:lang">

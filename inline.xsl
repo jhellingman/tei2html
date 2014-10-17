@@ -246,8 +246,8 @@
 
     <xsl:template name="do-corr">
         <xsl:choose>
-            <!-- Don't report minor or punctuation corrections -->
-            <xsl:when test="@resp = 'm' or @resp = 'p'">
+            <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
+            <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
                 <span>
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:apply-templates/>
@@ -304,22 +304,24 @@
         </xsl:variable>
 
         <span class="gap">
-            <xsl:attribute name="title">
-                <xsl:choose>
-                    <xsl:when test="@extent">
-                        <xsl:call-template name="FormatMessage">
-                            <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
-                            <xsl:with-param name="params" select="$params"/>
-                        </xsl:call-template>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:call-template name="FormatMessage">
-                            <xsl:with-param name="name" select="'msgMissingTextWithReason'"/>
-                            <xsl:with-param name="params" select="$params"/>
-                        </xsl:call-template>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:choose>
+                        <xsl:when test="@extent">
+                            <xsl:call-template name="FormatMessage">
+                                <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
+                                <xsl:with-param name="params" select="$params"/>
+                            </xsl:call-template>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:call-template name="FormatMessage">
+                                <xsl:with-param name="name" select="'msgMissingTextWithReason'"/>
+                                <xsl:with-param name="params" select="$params"/>
+                            </xsl:call-template>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
             [<i><xsl:value-of select="f:message('msgMissingText')"/></i>]
         </span>
     </xsl:template>
@@ -337,13 +339,17 @@
     <xsl:template match="abbr">
         <span class="abbr">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="@expan"/>
-            </xsl:attribute>
-            <abbr>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@expan"/>
                 </xsl:attribute>
+            </xsl:if>
+            <abbr>
+                <xsl:if test="f:isSet('useMouseOverPopups')">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="@expan"/>
+                    </xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates/>
             </abbr>
         </span>
@@ -356,13 +362,17 @@
     <xsl:template match="num">
         <span class="abbr">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="@value"/>
-            </xsl:attribute>
-            <abbr>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@value"/>
                 </xsl:attribute>
+            </xsl:if>
+            <abbr>
+                <xsl:if test="f:isSet('useMouseOverPopups')">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="@value"/>
+                    </xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates/>
             </abbr>
         </span>
@@ -381,9 +391,11 @@
     <xsl:template match="trans">
         <span class="abbr">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
-            </xsl:attribute>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -409,9 +421,11 @@
 
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
-            <xsl:attribute name="title">
-                <xsl:value-of select="reg"/>
-            </xsl:attribute>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="reg"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates select="orig"/>
         </span>
     </xsl:template>
@@ -425,18 +439,22 @@
             <xsl:when test="f:isSet('useRegularizedUnits')">
                 <span class="measure">
                     <xsl:call-template name="set-lang-id-attributes"/>
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="."/>
-                    </xsl:attribute>
+                    <xsl:if test="f:isSet('useMouseOverPopups')">
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="."/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:value-of select="./@reg"/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
                 <span class="measure">
                     <xsl:call-template name="set-lang-id-attributes"/>
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="./@reg"/>
-                    </xsl:attribute>
+                    <xsl:if test="f:isSet('useMouseOverPopups')">
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="./@reg"/>
+                        </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates/>
                 </span>
             </xsl:otherwise>
@@ -450,11 +468,13 @@
     <xsl:template match="amount">
         <span class="measure">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="title">
-                <xsl:value-of select="./@unit"/>
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="./@amount"/>
-            </xsl:attribute>
+            <xsl:if test="f:isSet('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="./@unit"/>
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="./@amount"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -555,7 +575,7 @@
         <xsl:for-each select="tokenize(., '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
-                    <xsl:message terminate="no">WARNING: stand-alone punctionation mark '<xsl:value-of select="."/>' in ditto (will not use ditto mark).</xsl:message>
+                    <xsl:message terminate="no">WARNING: Stand-alone punctionation mark '<xsl:value-of select="."/>' in ditto (will not use ditto mark).</xsl:message>
                     <table class="ditto">
                         <tr class="s"><td><xsl:value-of select="."/></td></tr>
                     </table>

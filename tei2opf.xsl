@@ -144,7 +144,7 @@
                     <meta name="cover" content="titlepage-image"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:message terminate="no">WARNING: no suitable cover or title-page image found.</xsl:message>
+                    <xsl:message terminate="no">WARNING: No suitable cover or title-page image found.</xsl:message>
                 </xsl:otherwise>
             </xsl:choose>
 
@@ -253,7 +253,7 @@
 
             <xsl:otherwise>
                 <xsl:text>oth</xsl:text>
-                <xsl:message terminate="no">WARNING: unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
+                <xsl:message terminate="no">WARNING: Unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -510,7 +510,7 @@
         <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
 
         <!--
-        <xsl:message terminate="no">INFO:    adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
+        <xsl:message terminate="no">INFO:    Adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
         -->
 
         <item>
@@ -539,7 +539,7 @@
         <xsl:variable name="fragmentid"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
 
         <xsl:if test="not($teiFile//*[@id=$fragmentid])">
-            <xsl:message terminate="no">WARNING: fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
+            <xsl:message terminate="no">WARNING: Fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
         </xsl:if>
     </xsl:template>
 
@@ -557,7 +557,7 @@
                 <xsl:value-of select="number(regex-group(1)) * 3600 + number(regex-group(2)) * 60 + number(regex-group(3))"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:message terminate="no">WARNING: time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
+                <xsl:message terminate="no">WARNING: Time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
                 <xsl:text>0</xsl:text>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
