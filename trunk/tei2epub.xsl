@@ -136,7 +136,7 @@
                 href="{$path}/mimetype"
                 method="text"
                 encoding="UTF-8">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/mimetype.</xsl:message>application/epub+zip</xsl:result-document>
     </xsl:template>
 
 
@@ -149,7 +149,7 @@
 
     <xsl:template name="container">
         <xsl:result-document format="xml" href="{$path}/META-INF/container.xml">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/META-INF/container.xml.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/META-INF/container.xml.</xsl:message>
 
             <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
                <rootfiles>
@@ -185,7 +185,7 @@
                 method="xml"
                 encoding="UTF-8">
 
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/cover.xhtml.</xsl:message>
 
         </xsl:result-document>
     </xsl:template>

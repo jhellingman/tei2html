@@ -139,7 +139,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="not(contains(@rend, 'toc(none)'))">
-                        <xsl:message terminate="no">WARNING: no suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
+                        <xsl:message terminate="no">WARNING: No suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
@@ -681,7 +681,7 @@
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:text>###</xsl:text>
-                                        <xsl:message terminate="no">WARNING: no valid page number found preceding index entry. (<xsl:value-of select="@level1"/>)</xsl:message>
+                                        <xsl:message terminate="no">WARNING: No valid page number found preceding index entry. (<xsl:value-of select="@level1"/>)</xsl:message>
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>

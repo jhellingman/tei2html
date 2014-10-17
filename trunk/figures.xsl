@@ -55,7 +55,7 @@
             </xsl:when>
             <xsl:when test="@url">
                 <xsl:value-of select="@url"/>
-                <xsl:message terminate="no">WARNING: using non-standard attribute url on figure.</xsl:message>
+                <xsl:message terminate="no">WARNING: Using non-standard attribute url on figure.</xsl:message>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>images/</xsl:text><xsl:value-of select="@id"/><xsl:value-of select="$format"/>
@@ -86,7 +86,7 @@
             </xsl:when>
             <xsl:when test="$node/@url">
                 <xsl:value-of select="$node/@url"/>
-                <xsl:message terminate="no">WARNING: using non-standard attribute url on figure.</xsl:message>
+                <xsl:message terminate="no">WARNING: Using non-standard attribute url on figure.</xsl:message>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:text>images/</xsl:text><xsl:value-of select="$node/@id"/><xsl:value-of select="$defaultformat"/>
@@ -231,7 +231,7 @@
         <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message terminate="no">INFO:    generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>

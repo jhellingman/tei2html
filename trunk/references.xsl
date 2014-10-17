@@ -38,7 +38,7 @@
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">
-                <xsl:message terminate="no">WARNING: target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
+                <xsl:message terminate="no">WARNING: Target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
                 <xsl:apply-templates/>
             </xsl:when>
             

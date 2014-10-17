@@ -34,7 +34,7 @@
         <xd:short>Stylesheet to convert the verse and drama in a TEI file to HTML</xd:short>
         <xd:detail>This stylesheet to convert the verse and drama elements in a TEI file to HTML.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2013, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -145,14 +145,24 @@
         </p>
     </xsl:template>
 
-    <!-- linebreaks specific to an edition are not represented in the output -->
+
+    <xd:doc>
+        <xd:short>Format an edition-specific line-break.</xd:short>
+        <xd:detail>Format an edition-specific line-break. Line-breaks specific to an edition are not represented in the output</xd:detail>
+    </xd:doc>
+
     <xsl:template match="lb[@ed]">
         <a>
             <xsl:call-template name="generate-id-attribute"/>
         </a>
     </xsl:template>
 
-    <!-- linebreaks not linked to a specific edition are to be output -->
+
+    <xd:doc>
+        <xd:short>Format a line-break.</xd:short>
+        <xd:detail>Format a line-break. Line-breaks not linked to a specific edition are to be output.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="lb">
         <br>
             <xsl:call-template name="generate-id-attribute"/>
@@ -162,6 +172,11 @@
 
     <!--====================================================================-->
     <!-- code to align two verses  -->
+
+    <xd:doc mode="alignedverse">
+        <xd:short>Mode used to format lines in aligned verse.</xd:short>
+        <xd:detail>This mode takes care the heads and lines are properly wrapped in <code>span</code> and <code>p</code>-element in the HTML output.</xd:detail>
+    </xd:doc>
 
     <xd:doc>
         <xd:short>Align two verses.</xd:short>
@@ -208,13 +223,29 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Format a head in aligned verse.</xd:short>
+        <xd:detail>Since we cannot have an <code>h2</code>-elements inside tables in HTML, we place the head in
+        a span, and give it the CSS-class <code>h2</code>, so we can make it look like a head.</xd:detail>
+    </xd:doc>
+
     <xsl:template mode="alignedverse" match="head">
         <span class="h4"><xsl:apply-templates/></span>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Format a line-group in aligned verse.</xd:short>
+    </xd:doc>
+
     <xsl:template mode="alignedverse" match="lg">
         <xsl:apply-templates select="."/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Format a line in aligned verse.</xd:short>
+    </xd:doc>
 
     <xsl:template mode="alignedverse" match="l">
         <p>
