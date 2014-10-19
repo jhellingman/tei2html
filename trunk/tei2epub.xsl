@@ -194,10 +194,15 @@
     <!--====================================================================-->
     <!-- ePub specific overrides -->
 
-    <!-- Only generate anchors, but do not put page numbers in the margin (from block.xsl) -->
+    <xd:doc>
+        <xd:short>Generate output for <code>pb</code>-element.</xd:short>
+        <xd:detail>Only generate anchors, but do not put original page numbers in the margin (override template in block.xsl).
+        Since, in HTML, we do not allow a span element at the top-level, so wrap into a p-element, 
+        unless we are in a block element already.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="pb" priority="2">
         <xsl:choose>
-            <!-- In HTML, we do not allow a span element at the top-level, so wrap into a p-element, unless we are in a block element already. -->
             <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
                 <xsl:call-template name="generate-anchor"/>
             </xsl:when>

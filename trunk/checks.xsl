@@ -267,7 +267,7 @@
 
     <xsl:template mode="checks" match="corr">
         <xsl:if test="string(.) = string(@sic)">
-            <i:issue pos="{@pos}" code="T0002">Correction same as original text.</i:issue>
+            <i:issue pos="{@pos}" code="T0002">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
