@@ -61,7 +61,7 @@
             <output format="epub">
                 <useMouseOverPopups>false</useMouseOverPopups>
                 <outputExternalLinks>always</outputExternalLinks>
-                <outputExternalLinksTable>true</outputExternalLinksTable>
+                <outputExternalLinksTable>true</outputExternalLinksTable>                
             </output>
         </tei2html.config>
     </xsl:variable>
