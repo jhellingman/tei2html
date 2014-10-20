@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="tei2html.config">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="configurationItems" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="output"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="output">
+    <xs:complexType>
+      <xs:group ref="configurationItems" maxOccurs="unbounded"/>
+      <xs:attribute name="format" use="required" type="outputFormats"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:group name="configurationItems">
+    <xs:choice>
+      <xs:element ref="defaultStylesheet" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="inlineStylesheet" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="numberTocEntries" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="showParagraphNumbers" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="includePGHeaders" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="includeImages" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="defaultTocEntries" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="useDittoMarks" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="dittoMark" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="generateFacsimile" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="facsimilePath" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="useRegularizedUnits" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="outputExternalLinks" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="outputExternalLinksTable" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="useMouseOverPopups" minOccurs="0" maxOccurs="1"/>
+    </xs:choice>
+  </xs:group>
+  
+  <xs:element name="defaultStylesheet" type="xs:string"/>
+  <xs:element name="inlineStylesheet" type="xs:boolean"/>
+  <xs:element name="numberTocEntries" type="xs:boolean"/>
+  <xs:element name="showParagraphNumbers" type="xs:boolean"/>
+  <xs:element name="includePGHeaders" type="xs:boolean"/>
+  <xs:element name="includeImages" type="xs:boolean"/>
+  <xs:element name="defaultTocEntries" type="xs:boolean"/>
+  <xs:element name="useDittoMarks" type="xs:boolean"/>
+  <xs:element name="dittoMark" type="xs:string"/>
+  <xs:element name="generateFacsimile" type="xs:boolean"/>
+  <xs:element name="facsimilePath" type="xs:string"/>
+  <xs:element name="useRegularizedUnits" type="xs:boolean"/>
+  <xs:element name="useMouseOverPopups" type="xs:boolean"/>
+  <xs:element name="outputExternalLinks" type="linkGenerationType"/>
+  <xs:element name="outputExternalLinksTable" type="xs:boolean"/>
+  
+  <xs:simpleType name="linkGenerationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="always" />
+      <xs:enumeration value="never" />
+      <xs:enumeration value="colophon" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="outputFormats">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="html" />
+      <xs:enumeration value="epub" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
