@@ -37,8 +37,33 @@
         <xd:detail>Combine author names to a sentence, connected with commas and 'and'.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="authors">
+    <xsl:template name="combine-authors">
         <xsl:for-each select="//titleStmt/author">
+            <xsl:choose>
+                <xsl:when test="position() != last() and last() > 2">
+                    <xsl:value-of select="."/><xsl:text>, </xsl:text>
+                </xsl:when>
+                <xsl:when test="position() = last() and last() > 1">
+                    <xsl:text> </xsl:text><xsl:value-of select="f:message('msgAnd')"/><xsl:text> </xsl:text><xsl:value-of select="."/>
+                </xsl:when>
+                <xsl:when test="last() = 1">
+                    <xsl:value-of select="."/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Combine transcriber names.</xd:short>
+        <xd:detail>Combine transcriber names to a sentence, connected with commas and 'and'.</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="combine-transcribers">
+        <xsl:for-each select="//titleStmt/respStmt[resp='Transcription']/name">
             <xsl:choose>
                 <xsl:when test="position() != last() and last() > 2">
                     <xsl:value-of select="."/><xsl:text>, </xsl:text>
@@ -72,7 +97,7 @@
             <xsl:variable name="params">
                 <params>
                     <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                    <param name="authors"><xsl:call-template name="authors"/></param>
+                    <param name="authors"><xsl:call-template name="combine-authors"/></param>
                     <param name="releasedate"><xsl:value-of select="//publicationStmt/date"/></param>
                     <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
                     <param name="language">
@@ -107,8 +132,8 @@
             <xsl:variable name="params">
                 <params>
                     <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                    <param name="authors"><xsl:call-template name="authors"/></param>
-                    <param name="transcriber"><xsl:value-of select="//titleStmt/respStmt[resp='Transcription']/name"/></param>
+                    <param name="authors"><xsl:call-template name="combine-authors"/></param>
+                    <param name="transcriber"><xsl:call-template name="combine-transcribers"/></param>
                     <param name="pgnum"><xsl:value-of select="$idno"/></param>
                     <param name="pgpath"><xsl:value-of select="substring($idno, 1, 1)"/>/<xsl:value-of select="substring($idno, 2, 1)"/>/<xsl:value-of select="substring($idno, 3, 1)"/>/<xsl:value-of select="substring($idno, 4, 1)"/>/<xsl:value-of select="$idno"/>/</param>
                 </params>
@@ -124,8 +149,10 @@
 
 
     <xsl:template name="PGLicense">
+        <xsl:variable name="params"><params/></xsl:variable>
         <xsl:call-template name="FormatMessage">
             <xsl:with-param name="name" select="'msgPGLicense'"/>
+            <xsl:with-param name="params" select="$params"/>
         </xsl:call-template>
     </xsl:template>
 
