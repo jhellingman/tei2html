@@ -2,10 +2,11 @@
 
 use strict;
 
+use File::Copy;
 use File::stat;
 use File::Temp qw(mktemp);
-use Getopt::Long;
 use FindBin qw($Bin);
+use Getopt::Long;
 
 #==============================================================================
 # Configuration
@@ -40,6 +41,7 @@ my $customOption        = "";
 my $customStylesheet    = "custom.css";
 my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
+my $makeZip             = 0;
 
 GetOptions(
     't' => \$makeTXT,
@@ -52,6 +54,7 @@ GetOptions(
     'v' => \$runChecks,
     'u' => \$useUnicode,
     'f' => \$force,
+	'z' => \$makeZip,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
@@ -119,6 +122,12 @@ sub processFile($)
     my $version     = $3;
 
     print "Processing TEI-file '$basename' version $version\n";
+
+	my $pgNumber = extractPgNumber($filename);
+	if ($pgNumber > 0) 
+	{
+		print "Project Gutenberg Ebook: $pgNumber\n";
+	}
 
     if ($makeXML && $filename =~ /\.tei$/)
     {
@@ -226,9 +235,9 @@ sub processFile($)
         my $tmpFile = mktemp('tmp-XXXXX');
         print "Create ePub version...\n";
         system ("mkdir epub");
-        copyImages("epub\\images");
-        copyAudio("epub\\audio");
-        copyFonts("epub\\fonts");
+        copyImages("epub/images");
+        copyAudio("epub/audio");
+        copyFonts("epub/fonts");
 
         system ("$saxon $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
 
@@ -315,12 +324,70 @@ sub processFile($)
         system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
     }
 
-    print " Done!\n";
+	if ($makeZip == 1 && $pgNumber > 0) 
+	{
+		print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
+		
+		if (!-f $pgNumber) 
+		{
+			mkdir $pgNumber;
+		}		
+		if (-d $pgNumber) 
+		{
+			# Copy text version to final location
+			if (-f $basename . ".txt") 
+			{
+				copy($basename . ".txt", $pgNumber . "/" . $pgNumber . ".txt");
+
+				# TODO: append PG header and footer.
+			}
+
+			# Copy HTML version to final location
+			if (-f $basename . ".html") 
+			{
+				my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
+				if (!-f $htmlDirectory) 
+				{
+					mkdir $htmlDirectory;
+				}
+				copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
+				copyImages("$htmlDirectory/images");
+			}
+			
+			# Zip the whole structure.
+			system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
+		}
+	}
+
+
+    print "=== Done! ==================================================================\n";
 
     if ($nsgmlresult != 0)
     {
         print "WARNING: NSGML found validation errors in $filename.\n";
     }
+}
+
+
+#
+# extractPgNumber -- try to find the PGnum from a TEI file; look for <idno type="PGnum">11205</idno>
+#
+sub extractPgNumber($)
+{
+	my $file = shift;
+    open(PGFILE, $file) || die("Could not open input file $file");
+
+    # Skip upto start of actual text.
+    while (<PGFILE>)
+    {
+        my $line = $_;
+        if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/)
+        {
+            return $1;
+        }
+    }
+	close(PGFILE);
+	return -1;
 }
 
 
@@ -509,13 +576,20 @@ sub copyImages($)
 {
     my $destination = shift;
 
+	if (-d $destination) 
+	{
+		# Destination exists, prevent copying into it.
+		print "Warning: Destination exists; not copying images again\n";
+		return;
+	}
+
     if (-d "images")
     {
         system ("cp -r -u images " . $destination);
     }
-    elsif (-d "Gutenberg\\images")
+    elsif (-d "Gutenberg/images")
     {
-        system ("cp -r -u Gutenberg\\images " . $destination);
+        system ("cp -r -u Gutenberg/images " . $destination);
     }
 
     # Remove redundant icon images (not used in the ePub)
