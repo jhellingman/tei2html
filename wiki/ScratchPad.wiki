@@ -39,7 +39,9 @@ Also add check to the checking tool to verify this, and adjust all code to deal 
 <title type="main">Wanderings Among South Sea Savages</title>
 <title type="sub">And in Borneo and the Philippines</title>
 
-<title type="uniform">...</title>
+<title type="main">War and Peace</title>
+<title type="uniform">Война и Мир, English</title>
+
 <title type="series">...</title>
 }}}
 
