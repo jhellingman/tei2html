@@ -54,7 +54,7 @@
                 </head>
 
                 <docTitle>
-                    <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/title"/></text>
+                    <text><xsl:value-of select="teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></text>
                 </docTitle>
 
                 <docAuthor>
