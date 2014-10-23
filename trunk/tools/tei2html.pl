@@ -62,6 +62,16 @@ GetOptions(
 
 my $filename = $ARGV[0];
 
+# Metadata
+
+my $pgNumber = "00000";
+my $mainTitle = "";
+my $shortTitle = "";
+my $author = "";
+my $language = "";
+my $releaseDate = "";
+
+
 if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0)
 {
     # Revert to old default:
@@ -123,11 +133,9 @@ sub processFile($)
 
     print "Processing TEI-file '$basename' version $version\n";
 
-	my $pgNumber = extractPgNumber($filename);
-	if ($pgNumber > 0) 
-	{
-		print "Project Gutenberg Ebook: $pgNumber\n";
-	}
+
+	extractMetadata($filename);
+
 
     if ($makeXML && $filename =~ /\.tei$/)
     {
@@ -370,9 +378,9 @@ sub processFile($)
 
 
 #
-# extractPgNumber -- try to find the PGnum from a TEI file; look for <idno type="PGnum">11205</idno>
+# extractMetadata -- try to extract some metadata from TEI file.
 #
-sub extractPgNumber($)
+sub extractMetadata($)
 {
 	my $file = shift;
     open(PGFILE, $file) || die("Could not open input file $file");
@@ -381,13 +389,74 @@ sub extractPgNumber($)
     while (<PGFILE>)
     {
         my $line = $_;
+		if ($line =~ /<TEI.2 lang=\"?([a-z][a-z]).*?\"?>/) 
+		{
+			$language = $1;
+		}
         if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/)
         {
-            return $1;
+            $pgNumber = $1;			
+			next;
         }
+		if ($line =~ /<author\b.*?>(.*?)<\/author>/)
+		{
+			if ($author eq "") 
+			{
+				$author = $1;
+			}
+			else
+			{
+				$author .= ", " . $1;
+			}			
+			next;
+		}
+		if ($line =~ /<date>(.*?)<\/date>/)
+		{
+			$releaseDate = $1;
+			next;
+		}
+		if ($line =~ /<title>(.*?)<\/title>/)
+		{
+			$mainTitle = $1;
+			next;
+		}
+		if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/)
+		{
+			$shortTitle = $1;
+			next;
+		}
+		if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/)
+		{
+			$shortTitle = $1;
+			next;
+		}
+
+		# All relevant metadata should be in or before the publicationStmt.
+		if ($line =~ /<\/publicationStmt>/)
+		{
+			last;
+		}
     }
 	close(PGFILE);
-	return -1;
+
+	if (length($mainTitle) <= 26 && $shortTitle != "") 
+	{
+		$shortTitle = $mainTitle;
+	}
+
+	if (length($shortTitle) > 26 )
+	{
+		print "WARNING: short title too long (should be less than 27 characters)\n";
+	}
+
+	print "----------------------------------------------------------------------------\n";
+	print "Author:      $author\n";
+	print "Title:       $mainTitle\n";
+	print "Short title: $shortTitle\n";
+	print "Language:    $language\n";
+	print "Ebook #:     $pgNumber\n";
+	print "Release Date $releaseDate\n";
+	print "----------------------------------------------------------------------------\n";
 }
 
 

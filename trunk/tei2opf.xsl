@@ -174,6 +174,8 @@
         </dc:title>
     </xsl:template>
 
+    <xsl:template match="title[@type='pgshort']" mode="metadata"/>
+
 
     <xd:doc>
         <xd:short>Handle author information in metadata.</xd:short>
