@@ -61,40 +61,63 @@
 
     <xd:doc>
         <xd:short>Generate an anchor for a page-break.</xd:short>
-        <xd:detail>Generate an anchor for a page-break if the page-break has a number (<code>@n</code>-attribute). Otherwise,
-        just generate an anchor element.</xd:detail>
+        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute). 
+        Otherwise, just generate an anchor element.</xd:detail>
     </xd:doc>
 
     <xsl:template name="pb">
         <xsl:choose>
-            <xsl:when test="@n">
-                <span class="pagenum">
-                    <xsl:text>[</xsl:text>
-                    <a>
-                        <xsl:call-template name="generate-id-attribute"/>
-                        <xsl:call-template name="generate-href-attribute"/>
-                        <xsl:value-of select="@n"/>
-                    </a>
-                    <xsl:text>]</xsl:text>
-                    <xsl:if test="f:isSet('generateFacsimile') and ./@facs">
-                        <xsl:text>&nbsp;</xsl:text>
-                        <xsl:choose>
-                            <xsl:when test="starts-with(@facs, '#')">
-                                <xsl:variable name="id" select="substring(@facs, 2)"/>
-                                <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
-                                <xsl:if test="$graphic">
-                                    <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
-                                </xsl:if>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:if>
-                 </span>
+            <xsl:when test="@n and f:isSet('showPageNumbers')">
+                <xsl:call-template name="pb-margin"/>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:call-template name="pb-anchor"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="pb-margin">
+        <span class="pagenum">
+            <xsl:text>[</xsl:text>
+            <a>
+                <xsl:call-template name="generate-id-attribute"/>
+                <xsl:call-template name="generate-href-attribute"/>
+                <xsl:value-of select="@n"/>
+            </a>
+            <xsl:text>]</xsl:text>
+            <xsl:if test="f:isSet('generateFacsimile') and ./@facs">
+                <xsl:text>&nbsp;</xsl:text>
+                <xsl:choose>
+                    <xsl:when test="starts-with(@facs, '#')">
+                        <xsl:variable name="id" select="substring(@facs, 2)"/>
+                        <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
+                        <xsl:if test="$graphic">
+                            <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:if>
+         </span>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate anchor for <code>pb</code>-element.</xd:short>
+        <xd:detail>Generate an anchors for a <code>pb</code>-element. Since, in HTML, we do not 
+        allow a span element at the top-level, so wrap into a <code>p</code>-element, unless we are in a block 
+        element already.</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="pb-anchor">
+        <xsl:choose>
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
                 <xsl:call-template name="generate-anchor"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:call-template name="generate-anchor"/></p>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

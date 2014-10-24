@@ -40,6 +40,7 @@
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
             <inlineStylesheet>true</inlineStylesheet>                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
             <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries. -->
+            <showPageNumbers>true</showPageNumbers>                     <!-- Show page numbers in the right margin -->
             <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
             <includeImages>true</includeImages>                         <!-- Include images in the generated output. -->
@@ -59,6 +60,7 @@
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
             </output>
             <output format="epub">
+                <showPageNumbers>false</showPageNumbers>
                 <useMouseOverPopups>false</useMouseOverPopups>
                 <outputExternalLinks>always</outputExternalLinks>
                 <outputExternalLinksTable>true</outputExternalLinksTable>                
