@@ -271,7 +271,7 @@
 
     <xd:doc>
         <xd:short>Format a division.</xd:short>
-        <xd:detail>Format a division. This generic templated is called for divisions at every level, to handle the contents.</xd:detail>
+        <xd:detail>Format a division. This generic template is called for divisions at every level, to handle their contents.</xd:detail>
     </xd:doc>
 
     <xsl:template name="handleDiv">
@@ -285,7 +285,7 @@
                 </xsl:call-template>
             </xsl:when>
 
-            <xsl:when test="contains(@rend, 'align-with-document(')">
+            <xsl:when test="f:isSet('includeAlignedDivisions') and contains(@rend, 'align-with-document(')">
                 <xsl:variable name="target" select="substring-before(substring-after(@rend, 'align-with-document('), ')')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherid" select="substring-after($target, '#')"/>

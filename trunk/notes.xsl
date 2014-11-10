@@ -41,8 +41,8 @@
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
         <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves
-        footnotes to the end of the div1 element they appear in (but be careful to avoid this in
-        div1 elements embedded in quoted texts). Optionally, we place the text of the footnote in-line as well,
+        footnotes to the end of the <code>div1</code> element they appear in (but be careful to avoid this in
+        <code>div1</code> elements embedded in quoted texts). Optionally, we place the text of the footnote in-line as well,
         for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
     </xd:doc>
 

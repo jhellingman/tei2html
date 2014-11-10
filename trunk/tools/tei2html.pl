@@ -335,38 +335,8 @@ sub processFile($)
 	if ($makeZip == 1 && $pgNumber > 0) 
 	{
 		print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
-		
-		if (!-f $pgNumber) 
-		{
-			mkdir $pgNumber;
-		}		
-		if (-d $pgNumber) 
-		{
-			# Copy text version to final location
-			if (-f $basename . ".txt") 
-			{
-				copy($basename . ".txt", $pgNumber . "/" . $pgNumber . ".txt");
-
-				# TODO: append PG header and footer.
-			}
-
-			# Copy HTML version to final location
-			if (-f $basename . ".html") 
-			{
-				my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
-				if (!-f $htmlDirectory) 
-				{
-					mkdir $htmlDirectory;
-				}
-				copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
-				copyImages("$htmlDirectory/images");
-			}
-			
-			# Zip the whole structure.
-			system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
-		}
+		makeZip($basename);		
 	}
-
 
     print "=== Done! ==================================================================\n";
 
@@ -374,6 +344,51 @@ sub processFile($)
     {
         print "WARNING: NSGML found validation errors in $filename.\n";
     }
+}
+
+
+
+#
+# makeZip -- Prepare a zip file for (re-)submission to Project Gutenberg.
+#
+sub makeZip($)
+{
+	my $basename = shift;
+
+	if (!-f $pgNumber) 
+	{
+		mkdir $pgNumber;
+	}		
+	if (!-d $pgNumber) 
+	{
+		print "Failed to create directory $pgNumber, not making zip file.\n";
+	}
+
+	# Copy text version to final location
+
+	my $textFilename = "Gutenberg/" . $basename . ".txt";
+
+	if (-f $textFilename) 
+	{
+		copy($textFilename, $pgNumber . "/" . $pgNumber . ".txt");
+
+		# TODO: append PG header and footer.
+	}
+
+	# Copy HTML version to final location
+	if (-f $basename . ".html") 
+	{
+		my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
+		if (!-f $htmlDirectory) 
+		{
+			mkdir $htmlDirectory;
+		}
+		copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
+		copyImages("$htmlDirectory/images");
+	}
+	
+	# Zip the whole structure.
+	system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
 }
 
 
@@ -450,12 +465,12 @@ sub extractMetadata($)
 	}
 
 	print "----------------------------------------------------------------------------\n";
-	print "Author:      $author\n";
-	print "Title:       $mainTitle\n";
-	print "Short title: $shortTitle\n";
-	print "Language:    $language\n";
-	print "Ebook #:     $pgNumber\n";
-	print "Release Date $releaseDate\n";
+	print "Author:       $author\n";
+	print "Title:        $mainTitle\n";
+	print "Short title:  $shortTitle\n";
+	print "Language:     $language\n";
+	print "Ebook #:      $pgNumber\n";
+	print "Release Date: $releaseDate\n";
 	print "----------------------------------------------------------------------------\n";
 }
 
@@ -631,10 +646,15 @@ sub collectImageInfo()
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
-    elsif (-d "Gutenberg\\images")
+    elsif (-d "Gutenberg/images")
     {
         print "Collect image dimensions...\n";
-        system ("perl $toolsdir/imageinfo.pl -s Gutenberg\\images > imageinfo.xml");
+        system ("perl $toolsdir/imageinfo.pl -s Gutenberg/images > imageinfo.xml");
+    }
+    elsif (-d "Processed/images")
+    {
+        print "Collect image dimensions...\n";
+        system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
     }
 }
 
@@ -659,6 +679,10 @@ sub copyImages($)
     elsif (-d "Gutenberg/images")
     {
         system ("cp -r -u Gutenberg/images " . $destination);
+    }
+    elsif (-d "Processed/images")
+    {
+        system ("cp -r -u Processed/images " . $destination);
     }
 
     # Remove redundant icon images (not used in the ePub)
@@ -691,9 +715,9 @@ sub copyAudio($)
     {
         system ("cp -r -u audio " . $destination);
     }
-    elsif (-d "Gutenberg\\audio")
+    elsif (-d "Gutenberg/audio")
     {
-        system ("cp -r -u Gutenberg\\audio " . $destination);
+        system ("cp -r -u Gutenberg/audio " . $destination);
     }
 }
 
@@ -708,8 +732,8 @@ sub copyFonts($)
     {
         system ("cp -r -u fonts " . $destination);
     }
-    elsif (-d "Gutenberg\\fonts")
+    elsif (-d "Gutenberg/fonts")
     {
-        system ("cp -r -u Gutenberg\\fonts " . $destination);
+        system ("cp -r -u Gutenberg/fonts " . $destination);
     }
 }
