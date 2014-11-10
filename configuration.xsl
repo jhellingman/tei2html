@@ -44,6 +44,7 @@
             <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
             <includeImages>true</includeImages>                         <!-- Include images in the generated output. -->
+            <includeAlignedDivisions>true</includeAlignedDivisions>     <!-- Include divisions indicated by "align-with-document()" -->
             <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
             <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag. -->
             <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark. -->
@@ -54,7 +55,7 @@
             <outputExternalLinks>always</outputExternalLinks>           <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>  <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>        <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
-
+            
             <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
             <output format="html">
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
