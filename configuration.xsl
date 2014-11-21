@@ -38,6 +38,8 @@
     <xsl:variable name="default-configuration">
         <tei2html.config>
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
+            <useCommonStylesheets>true</useCommonStylesheets>           <!-- Use the build-in stylesheets (for screen) -->
+            <useCommonPrintStylesheets>true</useCommonPrintStylesheets> <!-- Use the build-in stylesheets (for print media) -->
             <inlineStylesheet>true</inlineStylesheet>                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
             <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries. -->
             <showPageNumbers>true</showPageNumbers>                     <!-- Show page numbers in the right margin -->
@@ -55,7 +57,8 @@
             <outputExternalLinks>always</outputExternalLinks>           <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>  <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>        <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
-            
+            <useFootnoteReturnArrow>true</useFootnoteReturnArrow>       <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
+
             <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
             <output format="html">
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->

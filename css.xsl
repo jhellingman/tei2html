@@ -41,15 +41,18 @@
     </xd:doc>
     
     <xsl:template name="embed-css-stylesheets">
-        <style type="text/css">
-            <xsl:call-template name="common-css-stylesheets"/>
 
-            <!-- Standard Aural CSS stylesheet -->
-            <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
-        </style>
-        
+        <xsl:if test="f:isSet('useCommonStylesheets')">
+            <style type="text/css">
+                <xsl:call-template name="common-css-stylesheets"/>
+
+                <!-- Standard Aural CSS stylesheet -->
+                <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
+            </style>
+        </xsl:if>
+
         <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="$optionPrinceMarkup = 'Yes'">
+        <xsl:if test="f:isSet('useCommonPrintStylesheets') and $optionPrinceMarkup = 'Yes'">
             <style type="text/css" media="print">
                 <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
