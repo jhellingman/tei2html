@@ -11,6 +11,8 @@ HTML versions posted to Project Gutenberg.
 
 /* ==== PAGE LAYOUT ==== */
 
+@media print {
+
 @page
 {
     size: demy-octavo;
@@ -296,3 +298,11 @@ div.titlePage > h2
     prince-bookmark-level: none;
 }
 
+
+.pglink, .catlink, .exlink, .wplink, .biblink, .seclink
+{
+    background-image: none;
+    padding-right: 0;
+}
+
+}
