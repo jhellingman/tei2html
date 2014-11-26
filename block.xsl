@@ -277,6 +277,35 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle <code>q</code> and <code>lg</code> elements within a footnote.</xd:short>
+        <xd:detail>Quotes and lines of verse within a footnote are (due to the required structure of a TEI document), nested
+        within a <code>text/body/div1</code> structure. In the generated output, we need to ignore this
+        superflous structure.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="note[@type='foot' or not(@type)]//q/text">
+        <div class="nestedtext">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="note[@type='foot' or not(@type)]//q/text/body">
+        <div class="nestedbody">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </div>    
+    </xsl:template>
+
+    <xsl:template match="note[@type='foot' or not(@type)]//q/text/body/div1">
+        <div class="nesteddiv1">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Letters, with openers, closers, etc. -->
 
