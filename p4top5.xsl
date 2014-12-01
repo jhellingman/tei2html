@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
-<xsl:stylesheet xmlns:edate="http://exslt.org/dates-and-times" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei edate" version="1.0">
+<xsl:stylesheet 
+    xmlns:edate="http://exslt.org/dates-and-times" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:tei="http://www.tei-c.org/ns/1.0" 
+    exclude-result-prefixes="tei edate" 
+    version="1.0">
+
   <!-- 
        
        P4 to P5 converter 
@@ -22,6 +28,7 @@
        in all copies or substantial portions of the Software.
        
   -->
+
   <xsl:output method="xml" encoding="utf-8" cdata-section-elements="tei:eg" omit-xml-declaration="yes"/>
   
   <xsl:variable name="processor">

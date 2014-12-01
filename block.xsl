@@ -678,15 +678,18 @@
     </xsl:template>
 
 
-    <!-- simple drop-caps -->
-    <!-- some CSS implementations do not handle the ::first-letter selector correctly, so we provide a span for this -->
+    <xd:doc mode="eat-initial">
+        <xd:short>Use a simple drop-cap at the start of a paragraph.</xd:short>
+        <xd:detail>Use a simple drop-cap at the start of a paragraph. Provide a unique class name for the drop-cap, as well as a generic one.
+        Some CSS implementations do not handle the <code>:first-letter</code> psuedo-selector correctly, so we provide a span for this.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="p[contains(@rend, 'dropcap(')]">
         <p>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
-                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dropcap</xsl:attribute>
+                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dc initdropcap</xsl:attribute>
                 <xsl:choose>
                     <!-- Handle opening quotation marks and apostrophes as part of the drop cap -->
                     <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
@@ -698,12 +701,19 @@
                 </xsl:choose>
             </span>
             <span>
-                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>afterdropcap</xsl:attribute>
+                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>adc afterdropcap</xsl:attribute>
                 <xsl:apply-templates mode="eat-initial"/>
             </span>
         </p>
     </xsl:template>
 
+
+    <xd:doc mode="eat-initial">
+        <xd:short>Generate CSS for drop-cap.</xd:short>
+        <xd:detail>Generate CSS for drop-cap. Note that the exact size to be used for a drop-cap depends on the specific
+        font being used, and the number of lines desired to be occupied by the drop-cap. This needs to be tweaked when the
+        choice for a font, font-size, and line-spacing has been made.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="p[contains(@rend, 'dropcap(')]" mode="css">
 
@@ -718,7 +728,7 @@
     </xsl:if>
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>dropcap
+.<xsl:call-template name="generate-rend-class-name"/>dc
 {
     float: left;
     <xsl:if test="contains(@rend, 'dropcap-offset(')">
@@ -730,7 +740,7 @@
     margin-right: 3px;
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>afterdropcap
+.<xsl:call-template name="generate-rend-class-name"/>adc
 {
     /* empty */
 }
