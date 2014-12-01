@@ -884,7 +884,7 @@ p.dropcap:first-letter
     padding: 0px;
     line-height: 0.8em;
     font-size: 420%;
-    vertical-align:super;
+    vertical-align: super;
 }
 
 .lg
