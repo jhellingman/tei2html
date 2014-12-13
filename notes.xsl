@@ -54,11 +54,22 @@
         </a>
         <!-- No explicit request for footnote division -->
         <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
-            <xsl:if test="$optionPrinceMarkup = 'Yes'">
-                <span class="displayfootnote">
-                    <xsl:call-template name="set-lang-id-attributes"/>
-                    <xsl:apply-templates/>
-                </span>
+            <!-- TODO: this doesn't work properly yet, so disabled. -->
+            <xsl:if test="$optionPrinceMarkup = 'XXX'">
+                <xsl:choose>
+                    <xsl:when test="p">
+                        <div class="displayfootnote">
+                            <xsl:call-template name="set-lang-id-attributes"/>
+                            <xsl:apply-templates/>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="displayfootnote">
+                            <xsl:call-template name="set-lang-id-attributes"/>
+                            <xsl:apply-templates/>
+                        </span>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
         </xsl:if>
     </xsl:template>
