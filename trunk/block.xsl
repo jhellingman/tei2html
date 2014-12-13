@@ -61,7 +61,7 @@
 
     <xd:doc>
         <xd:short>Generate an anchor for a page-break.</xd:short>
-        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute). 
+        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).
         Otherwise, just generate an anchor element.</xd:detail>
     </xd:doc>
 
@@ -106,8 +106,8 @@
 
     <xd:doc>
         <xd:short>Generate anchor for <code>pb</code>-element.</xd:short>
-        <xd:detail>Generate an anchors for a <code>pb</code>-element. Since, in HTML, we do not 
-        allow a span element at the top-level, so wrap into a <code>p</code>-element, unless we are in a block 
+        <xd:detail>Generate an anchors for a <code>pb</code>-element. Since, in HTML, we do not
+        allow a span element at the top-level, so wrap into a <code>p</code>-element, unless we are in a block
         element already.</xd:detail>
     </xd:doc>
 
@@ -128,7 +128,7 @@
 
     <xd:doc>
         <xd:short>Handle a milestone.</xd:short>
-        <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates 
+        <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates
         slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
     </xd:doc>
 
@@ -164,7 +164,7 @@
 
     <xd:doc>
         <xd:short>Handle a milestone-element.</xd:short>
-        <xd:detail>Handle a milestone-element. Just generate a milestone if the <code>@type</code> and 
+        <xd:detail>Handle a milestone-element. Just generate a milestone if the <code>@type</code> and
         <code>@rend</code>-attributes are missing.</xd:detail>
     </xd:doc>
 
@@ -295,7 +295,7 @@
         <div class="nestedbody">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
-        </div>    
+        </div>
     </xsl:template>
 
     <xsl:template match="note[@type='foot' or not(@type)]//q/text/body/div1">
@@ -387,21 +387,21 @@
                 <xsl:if test="normalize-space($class) != ''">
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
                 </xsl:if>
-                
+
                 <xsl:if test="@n and f:isSet('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
-                
+
                 <xsl:apply-templates/>
                 <!--
-                <xsl:choose>
-                	<xsl:when  test="f:startsWithPunctuation(.)">
-                		<xsl:call-template name="hangOpenPunctuation"/>
-                	</xsl:when>
-                	<xsl:otherwise>
- 	               		<xsl:apply-templates/>
- 	                </xsl:otherwise>
-                </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="f:startsWithPunctuation(.)">
+                            <xsl:call-template name="hangOpenPunctuation"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 -->
             </p>
         </xsl:if>
@@ -410,27 +410,27 @@
 
     <xd:doc>
         <xd:short>Determine whether a paragraph is first.</xd:short>
-        <xd:detail>Determine whether a paragraph is first in a division. This can be used to determine whether 
+        <xd:detail>Determine whether a paragraph is first in a division. This can be used to determine whether
         extra or no-indentation is required in some cases.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:isFirstParagraph" as="xs:boolean">
-		<xsl:param name="node" as="node()"/>
-		                    	
+        <xsl:param name="node" as="node()"/>
+
         <xsl:variable name="preceding">
             <xsl:value-of select="name($node/preceding-sibling::*[1])"/>
         </xsl:variable>
 
-        <xsl:value-of select="count($node/preceding-sibling::*) = 0 
-            or $preceding = 'head' 
-            or $preceding = 'byline' 
-            or $preceding = 'lg' 
-            or $preceding = 'tb' 
-            or $preceding = 'epigraph' 
+        <xsl:value-of select="count($node/preceding-sibling::*) = 0
+            or $preceding = 'head'
+            or $preceding = 'byline'
+            or $preceding = 'lg'
+            or $preceding = 'tb'
+            or $preceding = 'epigraph'
             or $preceding = 'argument'
             or $preceding = 'opener'"/>
-	</xsl:function>
-    
+    </xsl:function>
+
     <!-- Hanging punctuation -->
 
     <xd:doc>
@@ -440,8 +440,8 @@
     </xd:doc>
 
     <xsl:function name="f:hangingPunctuationClass" as="xs:string">
-		<xsl:param name="text" as="xs:string"/>
-		                    	
+        <xsl:param name="text" as="xs:string"/>
+
         <xsl:choose>
             <xsl:when test="not(f:isSet('useHangingPunctuation'))"><xsl:text> </xsl:text></xsl:when>
 
@@ -455,82 +455,82 @@
 
             <xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise>
         </xsl:choose>
-	</xsl:function>
+    </xsl:function>
 
 
-	<xsl:function name="f:startsWithPunctuation" as="xs:boolean">
-		<xsl:param name="node" as="node()"/>
-		                    	
+    <xsl:function name="f:startsWithPunctuation" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+
         <xsl:variable name="first" select="$node/(*|text())[1]"/>
 
-        <!-- First child node should be text node -->       	
-    	<xsl:value-of select="not(name($first)) and matches($first, '^[&ldquo;&lsquo;&rsquo;]')"/>
-	</xsl:function>
-	
-	
-	<xsl:template name="hangOpenPunctuation">
-		<!-- First child node is a text node that starts with punctuation -->
-		<xsl:variable name="first" select="text()[1]"/>
-	
-		<xsl:analyze-string select="$first" regex="^[&ldquo;&lsquo;&rsquo;]+">
-     		<xsl:matching-substring>
-         		<span class="hanging-punctuation-start">
-         			<xsl:value-of select="." />
-         		</span>
-     		</xsl:matching-substring>
-     		<xsl:non-matching-substring>
-       			<xsl:value-of select="." />
-     		</xsl:non-matching-substring>
-   		</xsl:analyze-string>
-		
-		<!-- process remainder of the current node in the normal fashion. -->
-		<xsl:apply-templates select="*|text()[position() > 1]"/>
-	</xsl:template>
-	
+        <!-- First child node should be text node -->
+        <xsl:value-of select="not(name($first)) and matches($first, '^[&ldquo;&lsquo;&rsquo;]')"/>
+    </xsl:function>
+
+
+    <xsl:template name="hangOpenPunctuation">
+        <!-- First child node is a text node that starts with punctuation -->
+        <xsl:variable name="first" select="text()[1]"/>
+
+        <xsl:analyze-string select="$first" regex="^[&ldquo;&lsquo;&rsquo;]+">
+            <xsl:matching-substring>
+                <span class="hanging-punctuation-start">
+                    <xsl:value-of select="." />
+                </span>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="." />
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+
+        <!-- process remainder of the current node in the normal fashion. -->
+        <xsl:apply-templates select="*|text()[position() > 1]"/>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Decorative Initials -->
-    
+
     <xd:doc>
         <xd:short>Start a paragraph with a decorative initial.</xd:short>
         <xd:detail>
-        	<p>Start a paragraph with a decorative initial. Decorative initials are encoded 
-        	within the <code>rend</code> attribute on the paragraph level, using the value
-        	<code>initial-image()</code>.</p>
-        	
-        	<p>To properly show an initial in HTML that may stick over the text, we need 
-    		to use a number of tricks in CSS.</p>
-    		
-    		<ol>
-    			<li>We set the initial as background picture on the paragraph.</li>
-     			<li>We create a small div which we let float to the left, to give the initial 
-       			the space it needs.</li>
-    			<li>We set the padding-top to a value such that the initial actually appears 
-       			to stick over the paragraph.</li>
-    			<li>We set the initial as background picture to the float, such that if the 
-       			paragraph is to small to contain the entire initial, the float will. We 
-       			need to take care to adjust the background position to match the 
-       			padding-top, such that the two background images will align exactly.</li>
-    			<li>We need to remove the initial letter from the paragraph, and render it in 
-       			the float in white, such that it re-appears when no CSS is available.</li>
-       			<li>We need to remove opening quotation marks when they appear before
-       			the initial letter.</li>
-        	</ol>
-        	
-        	<p>The following rendition-ladder values are used in this process:</p>
-        	
-        	<table>
-        		<tr><td>initial-image</td><td>Name of the image file to use as initial.</td></tr>
-        		<tr><td>initial-width</td><td>The width to reserve for the initial.</td></tr>
-        		<tr><td>initial-height</td><td>The height to reserve for the initial.</td></tr>
-        		<tr><td>initial-offset</td><td>The distance the initial will stick out above the paragraph.</td></tr>
-        	</table>
-        	
-        	<p>In some rendering engines, these tricks do not yield the desired results,
-    		so we fall-back to a more robust method, using an floating image.</p>
+            <p>Start a paragraph with a decorative initial. Decorative initials are encoded
+            within the <code>rend</code> attribute on the paragraph level, using the value
+            <code>initial-image()</code>.</p>
+
+            <p>To properly show an initial in HTML that may stick over the text, we need
+            to use a number of tricks in CSS.</p>
+
+            <ol>
+                <li>We set the initial as background picture on the paragraph.</li>
+                <li>We create a small div which we let float to the left, to give the initial
+                the space it needs.</li>
+                <li>We set the padding-top to a value such that the initial actually appears
+                to stick over the paragraph.</li>
+                <li>We set the initial as background picture to the float, such that if the
+                paragraph is to small to contain the entire initial, the float will. We
+                need to take care to adjust the background position to match the
+                padding-top, such that the two background images will align exactly.</li>
+                <li>We need to remove the initial letter from the paragraph, and render it in
+                the float in white, such that it re-appears when no CSS is available.</li>
+                <li>We need to remove opening quotation marks when they appear before
+                the initial letter.</li>
+            </ol>
+
+            <p>The following rendition-ladder values are used in this process:</p>
+
+            <table>
+                <tr><td>initial-image</td><td>Name of the image file to use as initial.</td></tr>
+                <tr><td>initial-width</td><td>The width to reserve for the initial.</td></tr>
+                <tr><td>initial-height</td><td>The height to reserve for the initial.</td></tr>
+                <tr><td>initial-offset</td><td>The distance the initial will stick out above the paragraph.</td></tr>
+            </table>
+
+            <p>In some rendering engines, these tricks do not yield the desired results,
+            so we fall-back to a more robust method, using an floating image.</p>
         </xd:detail>
     </xd:doc>
-    
+
     <xsl:template match="p[contains(@rend, 'initial-image')]">
         <xsl:choose>
             <xsl:when test="$optionPrinceMarkup = 'Yes' or $outputformat = 'epub'">
