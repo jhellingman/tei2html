@@ -120,7 +120,7 @@
     </xd:doc>
 
     <xsl:template match="l">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
 
             <xsl:variable name="class">
@@ -142,7 +142,7 @@
                 </span>
             </xsl:if>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -248,11 +248,11 @@
     </xd:doc>
 
     <xsl:template mode="alignedverse" match="l">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates select="*|text()"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -269,28 +269,28 @@
 
     <!-- Speaker -->
     <xsl:template match="speaker">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:attribute name="class">speaker <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
     <!-- Stage directions -->
     <xsl:template match="stage">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:attribute name="class">stage alignright <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">

@@ -110,9 +110,9 @@
     </xd:doc>
 
     <xsl:template match="note[p]" mode="footnotes">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                footnote
+                par footnote
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -122,7 +122,7 @@
             <xsl:if test="count(*) = 1">
                 <xsl:call-template name="footnote-return-arrow"/>
             </xsl:if>
-        </p>
+        </xsl:element>
         <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
         <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
     </xsl:template>
@@ -134,9 +134,9 @@
     </xd:doc>
 
     <xsl:template match="note" mode="footnotes">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                footnote
+                par footnote
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -144,7 +144,7 @@
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
             <xsl:call-template name="footnote-return-arrow"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -215,23 +215,23 @@
 
 
     <xsl:template match="p" mode="footnotes">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="footnote-paragraph"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
     <xsl:template match="p" mode="footlast">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="footnote-paragraph"/>
             <xsl:call-template name="footnote-return-arrow"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
     <xsl:template name="footnote-paragraph">
         <xsl:variable name="class">
-            footnote
+            par footnote
             <xsl:call-template name="generate-rend-class-name-if-needed"/>
         </xsl:variable>
         <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -269,9 +269,9 @@
     </xsl:template>
 
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                footnote
+                par footnote
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -282,7 +282,7 @@
             </span>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 </xsl:stylesheet>

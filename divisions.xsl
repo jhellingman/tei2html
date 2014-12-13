@@ -325,11 +325,11 @@
     </xsl:template>
 
     <xsl:template match="byline">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:attribute name="class">par byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 

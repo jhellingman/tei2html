@@ -100,6 +100,8 @@
     <xsl:variable name="publisher" select="/TEI.2/teiHeader/fileDesc/publicationStmt/publisher" />
     <xsl:variable name="pubdate" select="/TEI.2/teiHeader/fileDesc/publicationStmt/date" />
 
+    <xsl:variable name="p.element" select="'p'"/>
+
     <!--====================================================================-->
 
 
