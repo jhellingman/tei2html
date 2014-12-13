@@ -136,21 +136,29 @@
         <xsl:call-template name="closepar"/>
         <xsl:choose>
             <xsl:when test="contains(@rend, 'dots')">
-                <p class="tb"><xsl:call-template name="generate-id-attribute"/>. . . . . . . . . . . . . . . . . . . . .</p>
+                <xsl:call-template name="generate-tb-par">
+                    <xsl:with-param name="string" select="'. . . . . . . . . . . . . . . . . . . . .'"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(@rend, 'stars')">
-                <p class="tb"><xsl:call-template name="generate-id-attribute"/>*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+                <xsl:call-template name="generate-tb-par">
+                    <xsl:with-param name="string" select="'*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*'"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(@rend, 'star')">
-                <p class="tb"><xsl:call-template name="generate-id-attribute"/>*</p>
+                <xsl:call-template name="generate-tb-par">
+                    <xsl:with-param name="string" select="'*'"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(@rend, 'asterism')">
-                <p class="tb"><xsl:call-template name="generate-id-attribute"/>&asterism;</p>
+                <xsl:call-template name="generate-tb-par">
+                    <xsl:with-param name="string" select="'&asterism;'"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(@rend, 'space')">
-                <p class="tb">
-                    <xsl:call-template name="generate-id-attribute"/>
-                </p>
+                <xsl:call-template name="generate-tb-par">
+                    <xsl:with-param name="string" select="''"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
                 <hr class="tb">
@@ -159,6 +167,15 @@
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>
+    </xsl:template>
+
+
+    <xsl:template name="generate-tb-par">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:element name="{$p.element}">
+            <xsl:attribute name="class">tb</xsl:attribute>
+            <xsl:call-template name="generate-id-attribute"/><xsl:value-of select="$string"/>
+        </xsl:element>
     </xsl:template>
 
 
@@ -225,11 +242,11 @@
     </xd:doc>
 
     <xsl:template match="trailer">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">trailer <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -371,10 +388,11 @@
 
     <xsl:template name="handle-paragraph">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
-            <p>
+            <xsl:element name="{$p.element}">
                 <xsl:call-template name="set-lang-id-attributes"/>
 
                 <xsl:variable name="class">
+                    <xsl:text>par </xsl:text>
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
                     <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
@@ -403,7 +421,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 -->
-            </p>
+            </xsl:element>
         </xsl:if>
     </xsl:template>
 
@@ -544,9 +562,9 @@
 
 
     <xsl:template name="initial-image-with-css">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+            <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
                 <xsl:choose>
@@ -559,7 +577,7 @@
                 </xsl:choose>
             </span>
             <xsl:apply-templates mode="eat-initial"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -570,9 +588,10 @@
                 <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
             </xsl:call-template>
         </div>
-        <p class="first">
+        <xsl:element name="{$p.element}">
+            <xsl:attribute name="class">par first</xsl:attribute>
             <xsl:apply-templates mode="eat-initial"/>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
@@ -685,9 +704,9 @@
     </xd:doc>
 
     <xsl:template match="p[contains(@rend, 'dropcap(')]">
-        <p>
+        <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+            <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dc initdropcap</xsl:attribute>
                 <xsl:choose>
@@ -704,7 +723,7 @@
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>adc afterdropcap</xsl:attribute>
                 <xsl:apply-templates mode="eat-initial"/>
             </span>
-        </p>
+        </xsl:element>
     </xsl:template>
 
 
