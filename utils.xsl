@@ -254,7 +254,7 @@
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- Close and Open paragraphs -->
+    <!-- Close and (re-)open paragraphs -->
 
     <xd:doc>
         <xd:short>Close a <code>p</code>-element in the output.</xd:short>
@@ -265,7 +265,7 @@
 
     <xsl:template name="closepar">
         <!-- insert </p> to close current paragraph as tables in paragraphs are illegal in HTML -->
-        <xsl:if test="parent::p or parent::note">
+        <xsl:if test="$p.element = 'p' and (parent::p or parent::note)">
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -277,8 +277,8 @@
     </xd:doc>
 
     <xsl:template name="reopenpar">
-        <xsl:if test="parent::p or parent::note">
-            <xsl:text disable-output-escaping="yes">&lt;p&gt;</xsl:text>
+        <xsl:if test="$p.element = 'p' and (parent::p or parent::note)">
+            <xsl:text disable-output-escaping="yes">&lt;p class="par"&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
 

@@ -241,7 +241,7 @@ h4, .h4
     text-align:justify;
 }
 
-p.tb, hr.tb
+p.tb, hr.tb, .par.tb
 {
     margin-top: 1.6em;
     margin-bottom: 1.6em;
@@ -250,30 +250,30 @@ p.tb, hr.tb
     text-align: center;
 }
 
-p.argument, p.note, p.tocArgument
+p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument
 {
     font-size:0.9em;
     line-height:1.2em;
     text-indent:0;
 }
 
-p.argument, p.tocArgument
+p.argument, p.tocArgument, .par.argument, .par.tocArgument
 {
     margin:1.58em 10%;
 }
 
-p.tocPart
+p.tocPart, .par.tocPart
 {
     margin:1.58em 0%;
     font-variant: small-caps;
 }
 
-p.tocChapter
+p.tocChapter, .par.tocChapter
 {
     margin:1.58em 0%;
 }
 
-p.tocSection
+p.tocSection, .par.tocSection
 {
     margin:0.7em 5%;
 }
@@ -340,8 +340,8 @@ p.tocSection
 
 .floatLeft
 {
-    float:left;
-    margin:10px 10px 10px 0;
+    float: left;
+    margin: 10px 10px 10px 0;
 }
 
 .floatRight
@@ -350,16 +350,16 @@ p.tocSection
     margin:10px 0 10px 10px;
 }
 
-p.figureHead
+p.figureHead, .par.figureHead
 {
-    font-size:100%;
-    text-align:center;
+    font-size: 100%;
+    text-align: center;
 }
 
 .figAnnotation
 {
-    font-size:80%;
-    position:relative;
+    font-size: 80%;
+    position: relative;
     margin: 0 auto; /* center this */
 }
 
@@ -392,7 +392,7 @@ p.figureHead
     text-indent: -0.71em;
 }
 
-.figure p
+.figure p, .figure .par
 {
     font-size:80%;
     margin-top:0;
@@ -404,7 +404,7 @@ img
     border-width:0;
 }
 
-p.smallprint,li.smallprint
+p.smallprint, li.smallprint, .par.smallprint
 {
     color:#666666;
     font-size:80%;
@@ -466,13 +466,13 @@ hr.fnsep
     width: 25%;
 }
 
-p.footnote
+p.footnote, .par.footnote
 {
     margin-bottom: 0.5em;
     margin-top: 0.5em;
 }
 
-p.footnote .label
+p.footnote .label, .par.footnote .label
 {
     float:left;
     width:2em;
@@ -693,7 +693,7 @@ table.ditto tr.d td
     width:1.75em;
 }
 
-p.line
+p.line, .par.line
 {
     margin: 0 0% 0 0%;
 }
@@ -866,17 +866,17 @@ h5, h6
     line-height:1em;
 }
 
-p
+p, .par
 {
     text-indent:0;
 }
 
-p.firstlinecaps:first-line
+p.firstlinecaps:first-line, .par.firstlinecaps:first-line
 {
     text-transform: uppercase;
 }
 
-p.dropcap:first-letter
+p.dropcap:first-letter, .par.dropcap:first-letter
 {
     float: left;
     clear: left;
@@ -892,7 +892,7 @@ p.dropcap:first-letter
     padding: .5em 0% .5em 0%;
 }
 
-p.quote,div.blockquote, div.argument
+p.quote, div.blockquote, div.argument, .par.quote
 {
     font-size:0.9em;
     line-height:1.2em;
