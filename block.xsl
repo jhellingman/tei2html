@@ -42,8 +42,8 @@
     <xd:doc>
         <xd:short>Handle a page-break.</xd:short>
         <xd:detail>Handle a page-break. Generate an HTML anchor with an <code>id</code> attribute.
-        Depending on the element we find the pb in, we may need to wrap the generated content in
-        a wrapping HTML p-element.</xd:detail>
+        Depending on the element we find the <code>pb</code> in, we may need to wrap the generated content in
+        a wrapping HTML <code>p</code>-element.</xd:detail>
     </xd:doc>
 
     <xsl:template match="pb">
@@ -52,8 +52,12 @@
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
-            <xsl:otherwise>
+            <!-- In some odd cases, you can have a parent::front, and also a ancestor::p, this is why those tests are separated -->
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
                 <xsl:call-template name="pb"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <p><xsl:call-template name="pb"/></p>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -76,6 +80,12 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
+        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).
+        Otherwise, just generate an anchor element.</xd:detail>
+    </xd:doc>
 
     <xsl:template name="pb-margin">
         <span class="pagenum">
@@ -106,20 +116,11 @@
 
     <xd:doc>
         <xd:short>Generate anchor for <code>pb</code>-element.</xd:short>
-        <xd:detail>Generate an anchors for a <code>pb</code>-element. Since, in HTML, we do not
-        allow a span element at the top-level, so wrap into a <code>p</code>-element, unless we are in a block
-        element already.</xd:detail>
+        <xd:detail>Generate an anchors for a <code>pb</code>-element.</xd:detail>
     </xd:doc>
 
     <xsl:template name="pb-anchor">
-        <xsl:choose>
-            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
-                <xsl:call-template name="generate-anchor"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <p><xsl:call-template name="generate-anchor"/></p>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:call-template name="generate-anchor"/>
     </xsl:template>
 
 
