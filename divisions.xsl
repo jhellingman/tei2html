@@ -222,7 +222,7 @@
     <xsl:template match="div">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
             <xsl:variable name="level" select="f:divLevel(.) + 1"/>
-            <div class="{name()}{$level}">
+            <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:if test="$level &lt; 3">
@@ -425,6 +425,8 @@
 
     <xsl:template name="generate-div-class">
         <xsl:param name="div" select="name()"/>
+
+        <xsl:variable name="div" select="if ($div = 'div') then concat('div', f:divLevel(.) + 1) else $div"/>
 
         <xsl:variable name="class">
             <xsl:value-of select="$div"/>
