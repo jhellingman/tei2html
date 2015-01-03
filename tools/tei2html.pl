@@ -37,6 +37,7 @@ my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
 my $force               = 0;
+my $showHelp            = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css";
 my $configurationFile   = "tei2html.config";
@@ -54,7 +55,8 @@ GetOptions(
     'v' => \$runChecks,
     'u' => \$useUnicode,
     'f' => \$force,
-	'z' => \$makeZip,
+    'z' => \$makeZip,
+    'H' => \$showHelp,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
@@ -70,6 +72,33 @@ my $shortTitle = "";
 my $author = "";
 my $language = "";
 my $releaseDate = "";
+
+
+if ($showHelp) 
+{
+    print "tei2html.pl -- process a TEI file to produce text, HTML, and ePub output\n\n";
+    print "Usage: tei2html.pl [-thekprxvufzH] <inputfile.tei>\n\n";
+    print "Options:\n";
+    print "    t         Produce text output.\n";
+    print "    h         Produce HTML output.\n";
+    print "    e         Produce ePub output.\n";
+    print "    k         Produce KWIC index of text.\n";
+    print "    p         Produce PDF output.\n";
+    print "    r         Produce word-usage report.\n";
+    print "    x         Produce XML output.\n";
+    print "    v         Run a number of checks, and produce a report.\n";
+    print "    u         Use Unicode output (in the text version).\n";
+    print "    f         Force generation of output file, even if it is newer than input.\n";
+    print "    z         Produce ZIP file for Project Guteberg submission (IN DEVELOPMENT).\n";
+    print "    H         Print this help and exit.\n";
+    print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
+    print "    s=<value> Set the custom option (handed to XSLT processor).\n";
+    print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
+    print "    w=<int>   Set the page width (default: 72 characters).\n";
+
+    exit(0);
+}
+
 
 
 if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0)
@@ -134,7 +163,7 @@ sub processFile($)
     print "Processing TEI-file '$basename' version $version\n";
 
 
-	extractMetadata($filename);
+    extractMetadata($filename);
 
 
     if ($makeXML && $filename =~ /\.tei$/)
@@ -332,11 +361,11 @@ sub processFile($)
         system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
     }
 
-	if ($makeZip == 1 && $pgNumber > 0) 
-	{
-		print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
-		makeZip($basename);		
-	}
+    if ($makeZip == 1 && $pgNumber > 0) 
+    {
+        print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
+        makeZip($basename);     
+    }
 
     print "=== Done! ==================================================================\n";
 
@@ -353,42 +382,42 @@ sub processFile($)
 #
 sub makeZip($)
 {
-	my $basename = shift;
+    my $basename = shift;
 
-	if (!-f $pgNumber) 
-	{
-		mkdir $pgNumber;
-	}		
-	if (!-d $pgNumber) 
-	{
-		print "Failed to create directory $pgNumber, not making zip file.\n";
-	}
+    if (!-f $pgNumber) 
+    {
+        mkdir $pgNumber;
+    }       
+    if (!-d $pgNumber) 
+    {
+        print "Failed to create directory $pgNumber, not making zip file.\n";
+    }
 
-	# Copy text version to final location
+    # Copy text version to final location
 
-	my $textFilename = "Gutenberg/" . $basename . ".txt";
+    my $textFilename = "Gutenberg/" . $basename . ".txt";
 
-	if (-f $textFilename) 
-	{
-		copy($textFilename, $pgNumber . "/" . $pgNumber . ".txt");
+    if (-f $textFilename) 
+    {
+        copy($textFilename, $pgNumber . "/" . $pgNumber . ".txt");
 
-		# TODO: append PG header and footer.
-	}
+        # TODO: append PG header and footer.
+    }
 
-	# Copy HTML version to final location
-	if (-f $basename . ".html") 
-	{
-		my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
-		if (!-f $htmlDirectory) 
-		{
-			mkdir $htmlDirectory;
-		}
-		copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
-		copyImages("$htmlDirectory/images");
-	}
-	
-	# Zip the whole structure.
-	system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
+    # Copy HTML version to final location
+    if (-f $basename . ".html") 
+    {
+        my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
+        if (!-f $htmlDirectory) 
+        {
+            mkdir $htmlDirectory;
+        }
+        copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
+        copyImages("$htmlDirectory/images");
+    }
+    
+    # Zip the whole structure.
+    system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
 }
 
 
@@ -397,81 +426,81 @@ sub makeZip($)
 #
 sub extractMetadata($)
 {
-	my $file = shift;
+    my $file = shift;
     open(PGFILE, $file) || die("Could not open input file $file");
 
     # Skip upto start of actual text.
     while (<PGFILE>)
     {
         my $line = $_;
-		if ($line =~ /<TEI.2 lang=\"?([a-z][a-z]).*?\"?>/) 
-		{
-			$language = $1;
-		}
+        if ($line =~ /<TEI.2 lang=\"?([a-z][a-z]).*?\"?>/) 
+        {
+            $language = $1;
+        }
         if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/)
         {
-            $pgNumber = $1;			
-			next;
+            $pgNumber = $1;         
+            next;
         }
-		if ($line =~ /<author\b.*?>(.*?)<\/author>/)
-		{
-			if ($author eq "") 
-			{
-				$author = $1;
-			}
-			else
-			{
-				$author .= ", " . $1;
-			}			
-			next;
-		}
-		if ($line =~ /<date>(.*?)<\/date>/)
-		{
-			$releaseDate = $1;
-			next;
-		}
-		if ($line =~ /<title>(.*?)<\/title>/)
-		{
-			$mainTitle = $1;
-			next;
-		}
-		if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/)
-		{
-			$shortTitle = $1;
-			next;
-		}
-		if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/)
-		{
-			$shortTitle = $1;
-			next;
-		}
+        if ($line =~ /<author\b.*?>(.*?)<\/author>/)
+        {
+            if ($author eq "") 
+            {
+                $author = $1;
+            }
+            else
+            {
+                $author .= ", " . $1;
+            }           
+            next;
+        }
+        if ($line =~ /<date>(.*?)<\/date>/)
+        {
+            $releaseDate = $1;
+            next;
+        }
+        if ($line =~ /<title>(.*?)<\/title>/)
+        {
+            $mainTitle = $1;
+            next;
+        }
+        if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/)
+        {
+            $shortTitle = $1;
+            next;
+        }
+        if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/)
+        {
+            $shortTitle = $1;
+            next;
+        }
 
-		# All relevant metadata should be in or before the publicationStmt.
-		if ($line =~ /<\/publicationStmt>/)
-		{
-			last;
-		}
+        # All relevant metadata should be in or before the publicationStmt.
+        if ($line =~ /<\/publicationStmt>/)
+        {
+            last;
+        }
     }
-	close(PGFILE);
+    close(PGFILE);
 
-	if (length($mainTitle) <= 26 && $shortTitle != "") 
-	{
-		$shortTitle = $mainTitle;
-	}
+    if (length($mainTitle) <= 26 && $shortTitle != "") 
+    {
+        $shortTitle = $mainTitle;
+    }
 
-	if (length($shortTitle) > 26 )
-	{
-		print "WARNING: short title too long (should be less than 27 characters)\n";
-	}
+    if (length($shortTitle) > 26 )
+    {
+        print "WARNING: short title too long (should be less than 27 characters)\n";
+    }
 
-	print "----------------------------------------------------------------------------\n";
-	print "Author:       $author\n";
-	print "Title:        $mainTitle\n";
-	print "Short title:  $shortTitle\n";
-	print "Language:     $language\n";
-	print "Ebook #:      $pgNumber\n";
-	print "Release Date: $releaseDate\n";
-	print "----------------------------------------------------------------------------\n";
+    print "----------------------------------------------------------------------------\n";
+    print "Author:       $author\n";
+    print "Title:        $mainTitle\n";
+    print "Short title:  $shortTitle\n";
+    print "Language:     $language\n";
+    print "Ebook #:      $pgNumber\n";
+    print "Release Date: $releaseDate\n";
+    print "----------------------------------------------------------------------------\n";
 }
 
 
@@ -665,12 +694,12 @@ sub copyImages($)
 {
     my $destination = shift;
 
-	if (-d $destination) 
-	{
-		# Destination exists, prevent copying into it.
-		print "Warning: Destination exists; not copying images again\n";
-		return;
-	}
+    if (-d $destination) 
+    {
+        # Destination exists, prevent copying into it.
+        print "Warning: Destination exists; not copying images again\n";
+        return;
+    }
 
     if (-d "images")
     {
