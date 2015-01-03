@@ -78,6 +78,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the table of contents body (as a HTML list, OBSOLETE).</xd:short>
+    </xd:doc>
+
     <xsl:template name="toc-body">
         <xsl:param name="list-element" select="'ul'" as="xs:string"/>
 
@@ -110,7 +114,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an entry in the table of contents.</xd:short>
+        <xd:short>Generate an entry in the table of contents (as a HTML list, OBSOLETE).</xd:short>
         <xd:detail>
             <p>Generate an entry for a division in the table of contents, and recursively generate lines for the underlying divisions.</p>
         </xd:detail>
@@ -307,6 +311,17 @@
     </xd:doc>
 
     <xsl:template match="note" mode="tochead"/>
+
+
+    <xd:doc>
+        <xd:short>Ignore division numbers that appear in a head.</xd:short>
+        <xd:detail>
+            <p>Ignore division numbers that appear in a head, when they are indicated
+            by <code>&lt;ab type="divNum"&gt;...&lt;/ab&gt;</code>.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="ab[@type='divNum']" mode="tochead"/>
 
 
     <xd:doc>

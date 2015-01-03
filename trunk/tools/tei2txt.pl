@@ -1036,6 +1036,9 @@ sub entities2iso88591($)
     $a =~ s/\&oubb;/ö/g;
     $a =~ s/\&oudb;/ö/g;
 
+    $a =~ s/\&eemacr;/ee/g;
+    $a =~ s/\&oomacr;/oo/g;
+
     $a =~ s/\&osupe;/ö/g;
     $a =~ s/\&usupe;/ü/g;
 
@@ -1055,6 +1058,9 @@ sub entities2iso88591($)
     $a =~ s/\&shbarb;/sh/g;
     $a =~ s/\&Shbarb;/Sh/g;
     $a =~ s/\&SHbarb;/SH/g;
+
+    $a =~ s/\&suptack;/s/g;
+    $a =~ s/\&sdntack;/s/g;
 
     $a =~ s/\&zhbarb;/zh/g;
     $a =~ s/\&Zhbarb;/Zh/g;
