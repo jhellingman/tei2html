@@ -56,7 +56,7 @@ GetOptions(
     'u' => \$useUnicode,
     'f' => \$force,
     'z' => \$makeZip,
-    'H' => \$showHelp,
+    'q' => \$showHelp,
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
@@ -90,7 +90,7 @@ if ($showHelp)
     print "    u         Use Unicode output (in the text version).\n";
     print "    f         Force generation of output file, even if it is newer than input.\n";
     print "    z         Produce ZIP file for Project Guteberg submission (IN DEVELOPMENT).\n";
-    print "    H         Print this help and exit.\n";
+    print "    q         Print this help and exit.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";

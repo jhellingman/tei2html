@@ -91,7 +91,7 @@ while (<>)
     }
 
     # drop comments from text (replace with single space).
-    $a =~ s/<!--.*?-->/ /g;
+    $a =~ s/\s*<!--.*?-->\s*/ /g;
     # warn for remaining comments
     $a =~ s/<!--/[**ERROR: unhandled comment start]/g;
 

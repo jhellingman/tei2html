@@ -889,6 +889,15 @@
         <msg:message name="msgExternalReferencesDisclaimer">Kini nga Projekto Gutenberg eBook nagsulod ug mga reperensya ngadto sa gawas. Kini nga mga koneksiyon posible nga dili molihok.</msg:message>
         <msg:message name="msgCorrectionsOverview">Listahan sa mga koreksyon sa balasahon.</msg:message>
         <msg:message name="msgDeleted">Gitangtang</msg:message>
+        <msg:message name="msgNote">Pahibalo</msg:message>
+        <msg:message name="msgNotes">Mga Pahibalo</msg:message>
+        <msg:message name="msgPage">Pahina</msg:message>
+        <msg:message name="msgNotes">Mga Pahina</msg:message>
+        <msg:message name="msgBook">Basahon</msg:message>
+        <msg:message name="msgBooks">Mga Basahon</msg:message>
+        <msg:message name="msgChapter">Anib</msg:message>
+        <msg:message name="msgChapters">Mga Anib</msg:message>
+		<msg:message name="msgTableOfContents">Talaan sa mga Hilisgutan</msg:message>
 
         <!-- Days and Months -->
 
