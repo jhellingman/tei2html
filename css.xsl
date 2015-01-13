@@ -100,12 +100,44 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:variable name="standardstylesheetname" select="if ($outputformat = 'epub') then 'style/layout-epub.css' else 'style/layout.css'"/>
+        <!-- Standard CSS stylesheet. -->
+        <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
 
-        <!-- Standard CSS stylesheet -->
-        <xsl:value-of select="f:css-stylesheet($standardstylesheetname)"/>
+        <!-- Stylesheets for various types of elements, only included when needed. -->
+        <xsl:if test="//titlePage">
+            <xsl:value-of select="f:css-stylesheet('style/titlepage.css')"/>
+        </xsl:if>
 
-        <!-- Supplement CSS stylesheet -->
+        <xsl:if test="//figure">
+            <xsl:value-of select="f:css-stylesheet('style/figure.css')"/>
+        </xsl:if>
+
+        <xsl:if test="//table">
+            <xsl:value-of select="f:css-stylesheet('style/table.css')"/>
+        </xsl:if>
+
+        <xsl:if test="//lg or //sp or //castList">
+            <xsl:value-of select="f:css-stylesheet('style/verse.css')"/>
+        </xsl:if>
+
+        <xsl:if test="//div[contains(@rend, 'align-with')] or //lg[contains(@rend, 'align-with')]">
+            <xsl:value-of select="f:css-stylesheet('style/aligned-text.css')"/>
+        </xsl:if>
+
+        <xsl:if test="//ditto or //table[contains(@rend, 'intralinear')]">
+            <xsl:value-of select="f:css-stylesheet('style/special.css')"/>
+        </xsl:if>
+
+        <!-- Format-specific stylesheets. -->
+        <xsl:if test="$outputformat = 'epub'">
+            <xsl:value-of select="f:css-stylesheet('style/layout-epub.css')"/>
+        </xsl:if>
+
+        <xsl:if test="$outputformat = 'html'">
+            <xsl:value-of select="f:css-stylesheet('style/layout-html.css')"/>
+        </xsl:if>
+
+        <!-- Supplement CSS stylesheet. -->
         <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
     </xsl:template>
 
