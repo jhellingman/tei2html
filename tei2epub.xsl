@@ -116,7 +116,7 @@
     <xsl:template match="/">
         <xsl:call-template name="mimetype"/>
         <xsl:call-template name="container"/>
-        <xsl:call-template name="copy-css-stylesheets"/>
+        <xsl:call-template name="external-css-stylesheets"/>
         <xsl:call-template name="copy-smil-files"/>
 
         <xsl:apply-templates mode="opf"/>

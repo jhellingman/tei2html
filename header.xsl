@@ -157,7 +157,7 @@
 
                 <!-- For ePub, the stylesheets are generated elsewhere; for HTML we still have to call the generating template. -->
                 <xsl:if test="$outputformat = 'html'">
-                    <xsl:call-template name="copy-css-stylesheets"/>
+                    <xsl:call-template name="external-css-stylesheets"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
