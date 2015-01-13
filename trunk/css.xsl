@@ -39,7 +39,7 @@
             <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
         </xd:detail>
     </xd:doc>
-    
+
     <xsl:template name="embed-css-stylesheets">
 
         <xsl:if test="f:isSet('useCommonStylesheets')">
@@ -57,7 +57,7 @@
                 <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
         </xsl:if>
-        
+
         <style type="text/css">
             <xsl:call-template name="custom-css-stylesheets"/>
         </style>
@@ -71,7 +71,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="copy-css-stylesheets">
+    <xsl:template name="external-css-stylesheets">
         <xsl:result-document
                 href="{$path}/{$basename}.css"
                 method="text"
@@ -100,8 +100,10 @@
             </xsl:choose>
         </xsl:variable>
 
+        <xsl:variable name="standardstylesheetname" select="if ($outputformat = 'epub') then 'style/layout-epub.css' else 'style/layout.css'"/>
+
         <!-- Standard CSS stylesheet -->
-        <xsl:value-of select="f:css-stylesheet(if ($outputformat = 'epub') then 'style/layout-epub.css' else 'style/layout.css')"/>
+        <xsl:value-of select="f:css-stylesheet($standardstylesheetname)"/>
 
         <!-- Supplement CSS stylesheet -->
         <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
@@ -444,19 +446,19 @@
         <xd:param name="uri">The (relative) URI of the CSS stylesheet.</xd:param>
         <xd:param name="node">The node of a document relative to which the URI will be resolved.</xd:param>
     </xd:doc>
-    
+
     <xsl:function name="f:css-stylesheet" as="xs:string">
         <xsl:param name="uri" as="xs:string"/>
         <xsl:param name="node" as="node()"/>
-        
+
         <xsl:variable name="uri" select="normalize-space($uri)"/>
         <xsl:variable name="uri" select="resolve-uri($uri, base-uri($node))"/>
         <xsl:value-of select="f:css-stylesheet($uri)"/>
     </xsl:function>
- 
- 
+
+
      <xd:doc>
-        <xd:short>Load a CSS stylesheet.</xd:short>
+        <xd:short>Load a CSS stylesheet from resolved URI.</xd:short>
         <xd:detail>
             <p>Get the content of a CSS stylesheet (for example, to embed in an HTML document). This will first check
             for the presence of the indicated file, and then open it. Handles both plain CSS files as well as CSS files
@@ -471,20 +473,30 @@
 
         <xsl:message terminate="no">INFO:    Including CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
 
-        <xsl:choose>
-            <xsl:when test="ends-with($uri, '.css') and unparsed-text-available($uri)">
-                <xsl:value-of select="replace(unparsed-text($uri), '&#xD;?&#xA;', '&#xA;')"/>
-            </xsl:when>
-            <xsl:when test="ends-with($uri, '.xml') and unparsed-text-available($uri)">
-                <xsl:value-of select="document($uri)/*/node()"/>
-            </xsl:when>
-            <xsl:when test="unparsed-text-available(concat($uri, '.xml'))">
-                <xsl:value-of select="document(concat($uri, '.xml'))/*/node()"/>
-            </xsl:when>    
-            <xsl:otherwise>
-                <xsl:message terminate="no">ERROR:   Unable to find CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="css">
+            <xsl:choose>
+                <xsl:when test="ends-with($uri, '.css') and unparsed-text-available($uri)">
+                    <xsl:value-of select="replace(unparsed-text($uri), '&#xD;?&#xA;', '&#xA;')"/>
+                </xsl:when>
+                <xsl:when test="ends-with($uri, '.xml') and unparsed-text-available($uri)">
+                    <xsl:value-of select="document($uri)/*/node()"/>
+                </xsl:when>
+                <xsl:when test="unparsed-text-available(concat($uri, '.xml'))">
+                    <xsl:value-of select="document(concat($uri, '.xml'))/*/node()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:message terminate="no">ERROR:   Unable to find CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <!-- Strip comments from the CSS -->
+        <xsl:variable name="css" select='replace($css, "/\*(.|[\r\n])*?\*/", " ")'/>
+
+        <!-- Strip excessive space from the CSS -->
+        <xsl:variable name="css" select='replace($css, "[ &#x9;]+", " ")'/>
+
+        <xsl:value-of select="$css"/>
     </xsl:function>
-    
+
 </xsl:stylesheet>
