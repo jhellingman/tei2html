@@ -4,502 +4,428 @@
     Copyright 2006-2015, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-body
-{
-    font-family: "Times New Roman", Times, serif;
-    font-size: 100%;
-    line-height: 1.2em;
-    text-align: left;
+body {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 100%;
+	line-height: 1.2em;
+	text-align: left;
 }
 
-.div0
-{
-    padding-top: 5.6em;
+.div0 {
+	padding-top: 5.6em;
 }
 
-.div1
-{
-    padding-top: 4.8em;
+.div1 {
+	padding-top: 4.8em;
 }
 
-.div2
-{
-    padding-top: 3.6em;
+.div2 {
+	padding-top: 3.6em;
 }
 
-.div3, .div4, .div5
-{
-    padding-top: 2.4em;
+.div3, .div4, .div5 {
+	padding-top: 2.4em;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4
-{
-    clear: both;
-    font-style: normal;
-    text-transform: none;
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+	clear: both;
+	font-style: normal;
+	text-transform: none;
 }
 
-h3, .h3
-{
-    font-size:1.2em;
-    line-height:1.2em;
+h3, .h3 {
+	font-size: 1.2em;
+	line-height: 1.2em;
 }
 
-h3.label
-{
-    font-size: 1em;
-    line-height: 1.2em;
-    margin-bottom: 0;
+h3.label {
+	font-size: 1em;
+	line-height: 1.2em;
+	margin-bottom: 0;
 }
 
-h4, .h4
-{
-    font-size: 1em;
-    line-height: 1.2em;
+h4, .h4 {
+	font-size: 1em;
+	line-height: 1.2em;
 }
 
-.alignleft
-{
-    text-align: left;
+.alignleft {
+	text-align: left;
 }
 
-.alignright
-{
-    text-align: right;
+.alignright {
+	text-align: right;
 }
 
-.alignblock
-{
-    text-align: justify;
+.alignblock {
+	text-align: justify;
 }
 
-p.tb, hr.tb, .par.tb
-{
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+p.tb, hr.tb, .par.tb {
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument
-{
-    font-size: 0.9em;
-    line-height: 1.2em;
-    text-indent: 0;
+	{
+	font-size: 0.9em;
+	line-height: 1.2em;
+	text-indent: 0;
 }
 
-p.argument, p.tocArgument, .par.argument, .par.tocArgument
-{
-    margin: 1.58em 10%;
+p.argument, p.tocArgument, .par.argument, .par.tocArgument {
+	margin: 1.58em 10%;
 }
 
-.opener, .address
-{
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
+.opener, .address {
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
 }
 
-.addrline
-{
-    margin-top: 0;
-    margin-bottom: 0;
+.addrline {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
-.dateline
-{
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
-    text-align: right;
+.dateline {
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
+	text-align: right;
 }
 
-.salute
-{
-    margin-top: 1.6em;
-    margin-left: 3.58em;
-    text-indent: -2em;
+.salute {
+	margin-top: 1.6em;
+	margin-left: 3.58em;
+	text-indent: -2em;
 }
 
-.signed
-{
-    margin-top: 1.6em;
-    margin-left: 3.58em;
-    text-indent: -2em;
+.signed {
+	margin-top: 1.6em;
+	margin-left: 3.58em;
+	text-indent: -2em;
 }
 
-.epigraph
-{
-    font-size:0.9em;
-    line-height:1.2em;
-    width: 60%;
-    margin-left: auto;
+.epigraph {
+	font-size: 0.9em;
+	line-height: 1.2em;
+	width: 60%;
+	margin-left: auto;
 }
 
-.epigraph span.bibl
-{
-    display: block;
-    text-align: right;
+.epigraph span.bibl {
+	display: block;
+	text-align: right;
 }
 
-.trailer
-{
-    clear: both;
-    padding-top: 2.4em;
-    padding-bottom: 1.6em;
+.trailer {
+	clear: both;
+	padding-top: 2.4em;
+	padding-bottom: 1.6em;
 }
 
 /* paragraph numbers */
-span.parnum
-{
-    font-weight: bold;
+
+span.parnum {
+	font-weight: bold;
 }
 
 /* page numbers, placed in right margin */
-.pagenum
-{
-    display: inline;
-    font-size: 70%;
-    font-style: normal;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 1%;
-    text-align: right;
+
+.pagenum {
+	display: inline;
+	font-size: 70%;
+	font-style: normal;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 1%;
+	text-align: right;
 }
 
-span.corr, span.gap
-{
-    border-bottom: 1px dotted red;
+span.corr, span.gap {
+	border-bottom: 1px dotted red;
 }
 
-span.abbr
-{
-    border-bottom: 1px dotted gray;
+span.abbr {
+	border-bottom: 1px dotted gray;
 }
 
-span.measure
-{
-    border-bottom: 1px dotted green;
+span.measure {
+	border-bottom: 1px dotted green;
 }
 
 /* Font Styles and Colors */
 
-.ex
-{
-    letter-spacing: 0.2em;
+.ex {
+	letter-spacing: 0.2em;
 }
 
-.sc
-{
-    font-variant: small-caps;
+.sc {
+	font-variant: small-caps;
 }
 
-.uc
-{
-    text-transform: uppercase;
+.uc {
+	text-transform: uppercase;
 }
 
-.tt
-{
-    font-family: monospace;
+.tt {
+	font-family: monospace;
 }
 
-.underline
-{
-    text-decoration: underline;
+.underline {
+	text-decoration: underline;
 }
 
 /* overline is actually a bit too high; overtilde is approximated with overline */
-.overline, .overtilde
-{
-    text-decoration: overline;
+
+.overline, .overtilde {
+	text-decoration: overline;
 }
 
-.rm
-{
-    font-style: normal;
+.rm {
+	font-style: normal;
 }
 
-.red
-{
-    color: red;
+.red {
+	color: red;
 }
 
 /* End Font Styles and Colors */
 
-hr
-{
-    clear: both;
-    height: 1px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    text-align: center;
-    width: 45%;
+hr {
+	clear: both;
+	height: 1px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	text-align: center;
+	width: 45%;
 }
 
-.aligncenter
-{
-    text-align: center;
+.aligncenter {
+	text-align: center;
 }
 
-h1, h2
-{
-    font-size:1.44em;
-    line-height:1.5em;
+h1, h2 {
+	font-size: 1.44em;
+	line-height: 1.5em;
 }
 
-h1.label, h2.label
-{
-    font-size:1.2em;
-    line-height:1.2em;
-    margin-bottom:0;
+h1.label, h2.label {
+	font-size: 1.2em;
+	line-height: 1.2em;
+	margin-bottom: 0;
 }
 
-h5, h6
-{
-    font-size:1em;
-    font-style:italic;
-    line-height:1em;
+h5, h6 {
+	font-size: 1em;
+	font-style: italic;
+	line-height: 1em;
 }
 
-p, .par
-{
-    text-indent:0;
+p, .par {
+	text-indent: 0;
 }
 
-p.firstlinecaps:first-line, .par.firstlinecaps:first-line
-{
-    text-transform: uppercase;
+p.firstlinecaps:first-line, .par.firstlinecaps:first-line {
+	text-transform: uppercase;
 }
 
-.hangq
-{
-    text-indent: -0.32em;
+.hangq {
+	text-indent: -0.32em;
 }
 
-.hangqq
-{
-    text-indent: -0.40em;
+.hangqq {
+	text-indent: -0.40em;
 }
 
-.hangqqq
-{
-    text-indent: -0.71em;
+.hangqqq {
+	text-indent: -0.71em;
 }
 
-p.dropcap:first-letter, .par.dropcap:first-letter
-{
-    float: left;
-    clear: left;
-    margin: 0em 0.05em 0 0;
-    padding: 0px;
-    line-height: 0.8em;
-    font-size: 420%;
-    vertical-align: super;
+p.dropcap:first-letter, .par.dropcap:first-letter {
+	float: left;
+	clear: left;
+	margin: 0em 0.05em 0 0;
+	padding: 0px;
+	line-height: 0.8em;
+	font-size: 420%;
+	vertical-align: super;
 }
 
-p.quote, div.blockquote, div.argument, .par.quote
-{
-    font-size: 0.9em;
-    line-height: 1.2em;
-    margin: 1.58em 5%;
+p.quote, div.blockquote, div.argument, .par.quote {
+	font-size: 0.9em;
+	line-height: 1.2em;
+	margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden
-{
-    text-decoration: none;
+.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden {
+	text-decoration: none;
 }
 
-ul
-{ 
-	list-style-type: none; 
+ul {
+	list-style-type: none;
 }
 
-.advertisment
-{
-    background-color: #FFFEE0;
-    border: black 1px dotted;
-    color: #000;
-    margin: 2em 5%;
-    padding: 1em;
+.advertisment {
+	background-color: #FFFEE0;
+	border: black 1px dotted;
+	color: #000;
+	margin: 2em 5%;
+	padding: 1em;
 }
 
 /***** Footnotes and other notes *****/
 
-.footnotes .body,
-.footnotes .div1
-{
-    padding: 0;
+.footnotes .body, .footnotes .div1 {
+	padding: 0;
 }
 
 /* up-arrow at end of footnote */
-.fnarrow
-{
-    color: #AAAAAA;
-    font-weight: bold;
-    text-decoration: none;
+.fnarrow {
+	color: #AAAAAA;
+	font-weight: bold;
+	text-decoration: none;
 }
 
-a.noteref, a.pseudonoteref
-{
-    font-size: 80%;
-    text-decoration: none;
-    vertical-align: 0.25em;
+a.noteref, a.pseudonoteref {
+	font-size: 80%;
+	text-decoration: none;
+	vertical-align: 0.25em;
 }
 
-.displayfootnote
-{
-    display: none;
+.displayfootnote {
+	display: none;
 }
 
-div.footnotes
-{
-    font-size: 80%;
-    margin-top: 1em;
-    padding: 0;
+div.footnotes {
+	font-size: 80%;
+	margin-top: 1em;
+	padding: 0;
 }
 
-hr.fnsep
-{
-    margin-left: 0;
-    margin-right: 0;
-    text-align: left;
-    width: 25%;
+hr.fnsep {
+	margin-left: 0;
+	margin-right: 0;
+	text-align: left;
+	width: 25%;
 }
 
-p.footnote, .par.footnote
-{
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+p.footnote, .par.footnote {
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
 }
 
-p.footnote .label, .par.footnote .label
-{
-    float:left;
-    width:2em;
-    height:12pt;
-    display:block;
+p.footnote .label, .par.footnote .label {
+	float: left;
+	width: 2em;
+	height: 12pt;
+	display: block;
 }
 
-.marginnote
-{
-    font-size:0.8em;
-    height:0;
-    left:1%;
-    line-height:1.2em;
-    position:absolute;
-    text-indent:0;
-    width:14%;
+.marginnote {
+	font-size: 0.8em;
+	height: 0;
+	left: 1%;
+	line-height: 1.2em;
+	position: absolute;
+	text-indent: 0;
+	width: 14%;
 }
 
-.apparatusnote
-{
-    text-decoration: none;
+.apparatusnote {
+	text-decoration: none;
 }
 
 /***** Table of Contents *****/
 
-span.tocPageNum, span.flushright
-{
-    position: absolute;
-    right: 16%;
-    top: auto;
+span.tocPageNum, span.flushright {
+	position: absolute;
+	right: 16%;
+	top: auto;
 }
 
-table.tocList
-{
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    border-width: 0;
-    border-collapse: collapse;
+table.tocList {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	border-width: 0;
+	border-collapse: collapse;
 }
 
-td.tocPageNum, td.tocDivNum
-{
-    text-align: right;
-    width: 10%;
-    border-width: 0;
+td.tocPageNum, td.tocDivNum {
+	text-align: right;
+	width: 10%;
+	border-width: 0;
 }
 
-td.tocDivNum
-{
-    padding-left: 0;
-    padding-right: 0.5em;
+td.tocDivNum {
+	padding-left: 0;
+	padding-right: 0.5em;
 }
 
-td.tocPageNum
-{
-    padding-left: 0.5em;
-    padding-right: 0;
+td.tocPageNum {
+	padding-left: 0.5em;
+	padding-right: 0;
 }
 
-td.tocDivTitle
-{
-    width: auto;
+td.tocDivTitle {
+	width: auto;
 }
 
-p.tocPart, .par.tocPart
-{
-    margin: 1.58em 0%;
-    font-variant: small-caps;
+p.tocPart, .par.tocPart {
+	margin: 1.58em 0%;
+	font-variant: small-caps;
 }
 
-p.tocChapter, .par.tocChapter
-{
-    margin: 1.58em 0%;
+p.tocChapter, .par.tocChapter {
+	margin: 1.58em 0%;
 }
 
-p.tocSection, .par.tocSection
-{
-    margin:0.7em 5%;
+p.tocSection, .par.tocSection {
+	margin: 0.7em 5%;
 }
 
 /***** Index *****/
 
-.index
-{
-    font-size: 80%;
+.index {
+	font-size: 80%;
 }
 
-.indextoc
-{
-    text-align: center;
+.indextoc {
+	text-align: center;
 }
 
 /***** Colophon *****/
 
-.transcribernote
-{
-    background-color: #DDE;
-    border: black 1px dotted;
-    color: #000;
-    font-family: sans-serif;
-    font-size: 80%;
-    margin: 2em 5%;
-    padding: 1em;
+.transcribernote {
+	background-color: #DDE;
+	border: black 1px dotted;
+	color: #000;
+	font-family: sans-serif;
+	font-size: 80%;
+	margin: 2em 5%;
+	padding: 1em;
 }
 
-.correctiontable
-{
-    width: 75%;
+.correctiontable {
+	width: 75%;
 }
 
-.width20
-{
-    width: 20%;
+.width20 {
+	width: 20%;
 }
 
-.width40
-{
-    width: 40%;
+.width40 {
+	width: 40%;
 }
 
-p.smallprint, li.smallprint, .par.smallprint
-{
-    color: #666666;
-    font-size: 80%;
+p.smallprint, li.smallprint, .par.smallprint {
+	color: #666666;
+	font-size: 80%;
 }
 
 /***** End of layout.css *****/

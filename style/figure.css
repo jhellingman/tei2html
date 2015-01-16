@@ -4,78 +4,66 @@
     Copyright 2006-2015, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-div.figure
-{
-    text-align: center;
+div.figure {
+	text-align: center;
 }
 
-.figure
-{
-    margin-left: auto;
-    margin-right: auto;
+.figure {
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.floatLeft
-{
-    float: left;
-    margin: 10px 10px 10px 0;
+.floatLeft {
+	float: left;
+	margin: 10px 10px 10px 0;
 }
 
-.floatRight
-{
-    float: right;
-    margin: 10px 0 10px 10px;
+.floatRight {
+	float: right;
+	margin: 10px 0 10px 10px;
 }
 
-p.figureHead, .par.figureHead
-{
-    font-size: 100%;
-    text-align: center;
+p.figureHead, .par.figureHead {
+	font-size: 100%;
+	text-align: center;
 }
 
-.figAnnotation
-{
-    font-size: 80%;
-    position: relative;
-    margin: 0 auto; /* center this */
+.figAnnotation {
+	font-size: 80%;
+	position: relative;
+	margin: 0 auto; /* center this */
 }
 
-.figTopLeft, .figBottomLeft
-{
-    float: left;
+.figTopLeft, .figBottomLeft {
+	float: left;
 }
 
-.figTop, .figBottom
-{
+.figTop, .figBottom {
+	
 }
 
-.figTopRight, .figBottomRight
-{
-    float: right;
+.figTopRight, .figBottomRight {
+	float: right;
 }
 
-.figure p, .figure .par
-{
-    font-size: 80%;
-    margin-top: 0;
-    text-align: center;
+.figure p, .figure .par {
+	font-size: 80%;
+	margin-top: 0;
+	text-align: center;
 }
 
-img
-{
-    border-width: 0;
+img {
+	border-width: 0;
 }
 
-td.galleryFigure
-{
-    text-align: center;
-    vertical-align: middle;
+td.galleryFigure {
+	text-align: center;
+	vertical-align: middle;
 }
 
-td.galleryCaption
-{
-    text-align: center;
-    vertical-align: top;
+td.galleryCaption {
+	text-align: center;
+	vertical-align: top;
 }
 
 /* End of figure.css */

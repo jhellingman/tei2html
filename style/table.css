@@ -4,29 +4,24 @@
     Copyright 2006-2015, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-tr, td, th
-{
-    vertical-align: top;
+tr, td, th {
+	vertical-align: top;
 }
 
-td.bottom
-{
-    vertical-align: bottom;
+td.bottom {
+	vertical-align: bottom;
 }
 
-td.label, tr.label td
-{
-    font-weight: bold;
+td.label, tr.label td {
+	font-weight: bold;
 }
 
-td.unit, tr.unit td
-{
-    font-style: italic;
+td.unit, tr.unit td {
+	font-style: italic;
 }
 
-span.sum
-{
-    padding-top: 2px; 
+span.sum {
+	padding-top: 2px;
 	border-top: solid black 1px;
 }
 
@@ -34,113 +29,95 @@ span.sum
 
 /* Table with borders on the outside and between the table head and data. */
 
-table.borderOutside
-{
-    border-collapse: collapse;
+table.borderOutside {
+	border-collapse: collapse;
 }
 
-table.borderOutside td
-{
-    padding-left: 4px;
-    padding-right: 4px;
+table.borderOutside td {
+	padding-left: 4px;
+	padding-right: 4px;
 }
 
-table.borderOutside .cellHeadTop, table.borderOutside .cellTop
-{
-    border-top: 2px solid black;
+table.borderOutside .cellHeadTop, table.borderOutside .cellTop {
+	border-top: 2px solid black;
 }
 
-table.borderOutside .cellHeadBottom
-{
-    border-bottom: 1px solid black;
+table.borderOutside .cellHeadBottom {
+	border-bottom: 1px solid black;
 }
 
-table.borderOutside .cellBottom
-{
-    border-bottom: 2px solid black;
+table.borderOutside .cellBottom {
+	border-bottom: 2px solid black;
 }
 
-table.borderOutside .cellLeft, table.borderOutside .cellHeadLeft
-{
-    border-left: 2px solid black;
+table.borderOutside .cellLeft, table.borderOutside .cellHeadLeft {
+	border-left: 2px solid black;
 }
 
-table.borderOutside .cellRight, table.borderOutside .cellHeadRight
-{
-    border-right: 2px solid black;
+table.borderOutside .cellRight, table.borderOutside .cellHeadRight {
+	border-right: 2px solid black;
 }
 
 /* Table with borders on the vertical inside edges. */
 
-table.verticalBorderInside
-{
-    border-collapse: collapse;
+table.verticalBorderInside {
+	border-collapse: collapse;
 }
 
-table.verticalBorderInside td
-{
-    padding-left: 4px;
-    padding-right: 4px;
-    border-left: 1px solid black;
+table.verticalBorderInside td {
+	padding-left: 4px;
+	padding-right: 4px;
+	border-left: 1px solid black;
 }
 
 table.verticalBorderInside .cellHeadTop, table.verticalBorderInside .cellTop
-{
-    border-top: 2px solid black;
+	{
+	border-top: 2px solid black;
 }
 
-table.verticalBorderInside .cellHeadBottom
-{
-    border-bottom: 1px solid black;
+table.verticalBorderInside .cellHeadBottom {
+	border-bottom: 1px solid black;
 }
 
-table.verticalBorderInside .cellBottom
-{
-    border-bottom: 2px solid black;
+table.verticalBorderInside .cellBottom {
+	border-bottom: 2px solid black;
 }
 
 table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft
-{
-    border-left: 0px solid black;
+	{
+	border-left: 0px solid black;
 }
 
 /* Table with borders on all edges, outer edges somewhat fatter. */
 
-table.borderAll
-{
-    border-collapse: collapse;
+table.borderAll {
+	border-collapse: collapse;
 }
 
-table.borderAll td
-{
-    padding-left: 4px;
-    padding-right: 4px;
-    border: 1px solid black;
+table.borderAll td {
+	padding-left: 4px;
+	padding-right: 4px;
+	border: 1px solid black;
 }
 
-table.borderAll .cellHeadTop, table.borderAll .cellTop
-{
-    border-top: 2px solid black;
+table.borderAll .cellHeadTop, table.borderAll .cellTop {
+	border-top: 2px solid black;
 }
 
-table.borderAll .cellHeadBottom
-{
-    border-bottom: 1px solid black;
+table.borderAll .cellHeadBottom {
+	border-bottom: 1px solid black;
 }
 
-table.borderAll .cellBottom
-{
-    border-bottom: 2px solid black;
+table.borderAll .cellBottom {
+	border-bottom: 2px solid black;
 }
 
-table.borderAll .cellLeft, table.borderAll .cellHeadLeft
-{
-    border-left: 2px solid black;
+table.borderAll .cellLeft, table.borderAll .cellHeadLeft {
+	border-left: 2px solid black;
 }
 
-table.borderAll .cellRight, table.borderAll .cellHeadRight
-{
-    border-right: 2px solid black;
+table.borderAll .cellRight, table.borderAll .cellHeadRight {
+	border-right: 2px solid black;
 }
 
 /* End of table.css */

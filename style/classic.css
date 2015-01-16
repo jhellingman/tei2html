@@ -1,61 +1,50 @@
-
-body
-{
-    background: #FFFFFF;
-    font-family: "Times New Roman", Times, serif;
+body {
+	background: #FFFFFF;
+	font-family: "Times New Roman", Times, serif;
 }
 
-body, a.hidden
-{
-    color: black;
+body, a.hidden {
+	color: black;
 }
 
-h1, .h1
-{
-    padding-bottom: 5em;
+h1, .h1 {
+	padding-bottom: 5em;
 }
 
-h1, h2, .h1, .h2
-{
-    text-align: center;
-    font-variant: small-caps;
-    font-weight: normal;
+h1, h2, .h1, .h2 {
+	text-align: center;
+	font-variant: small-caps;
+	font-weight: normal;
 }
 
-p.byline
-{
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 2em;
+p.byline {
+	text-align: center;
+	font-style: italic;
+	margin-bottom: 2em;
 }
 
 .figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum
-{
-    color: #660000;
+	{
+	color: #660000;
 }
 
-.rightnote, .pagenum, .linenum, .pagenum a
-{
-    color: #AAAAAA;
+.rightnote, .pagenum, .linenum, .pagenum a {
+	color: #AAAAAA;
 }
 
-a.hidden:hover, a.noteref:hover
-{
-    color: red;
+a.hidden:hover, a.noteref:hover {
+	color: red;
 }
 
-h1, h2, h3, h4, h5, h6
-{
-    font-weight: normal;
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
 }
 
-table
-{
-    margin-left: auto;
-    margin-right: auto;
+table {
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.tablecaption
-{
-    text-align: center;
+.tablecaption {
+	text-align: center;
 }

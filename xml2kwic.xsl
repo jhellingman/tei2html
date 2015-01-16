@@ -53,7 +53,7 @@
     </xd:doc>
 
     <xsl:param name="en-stopwords" select="'a about an are as at be by for from how I in is it of on or that the this to was what when where who will with'"/>
-    <xsl:param name="nl-stopwords" select="'aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had heb hebben heeft hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou'"/>
+    <xsl:param name="nl-stopwords" select="'aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had hebben hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou'"/>
 
     <!--
     <xsl:param name="en-stopwords" select="'@/Bin/dic/en.dic'"/>
@@ -101,7 +101,7 @@
     <xsl:template match="/">
         <head>
             <meta charset="UTF-8"/>
-            <title>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title"/></title>
+            <title>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
             <style>
 
                 table
@@ -191,7 +191,7 @@
         </head>
         <html>
             <h1>
-                KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title"/>
+                KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
 
                 <xsl:if test="$keyword != ''">
                     (<xsl:value-of select="$keyword"/>)

@@ -6,45 +6,39 @@
 
 /* Intralinear text stacked in tables */
 
-table.intralinear
-{
-    display: inline;
-    border-collapse: collapse;
+table.intralinear {
+	display: inline;
+	border-collapse: collapse;
 }
 
-table.intralinear td
-{
-    font-size: small;
-    text-align: center;
+table.intralinear td {
+	font-size: small;
+	text-align: center;
 }
 
 /* ditto symbols simulated by tables */
 
-table.ditto
-{
-    display: inline;
-    border-collapse: collapse;
-    vertical-align: bottom;
+table.ditto {
+	display: inline;
+	border-collapse: collapse;
+	vertical-align: bottom;
 }
 
-table.ditto tr.s
-{
-    height: 0;
-    color: white;
-    line-height: 0;
+table.ditto tr.s {
+	height: 0;
+	color: white;
+	line-height: 0;
 }
 
-table.ditto tr.s td
-{
-    padding: 0px;
-    border-style: none;
+table.ditto tr.s td {
+	padding: 0px;
+	border-style: none;
 }
 
-table.ditto tr.d td
-{
-    text-align: center;
-    line-height: 10pt;
-    border-style: none;
+table.ditto tr.d td {
+	text-align: center;
+	line-height: 10pt;
+	border-style: none;
 }
 
 /* End of special.css */
