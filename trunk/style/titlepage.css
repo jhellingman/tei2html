@@ -4,62 +4,54 @@
     Copyright 2006-2015, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-.titlePage
-{
-    border: #DDDDDD 2px solid;
-    margin: 3em 0% 7em 0%;
-    padding: 5em 10% 6em 10%;
-    text-align: center;
+.titlePage {
+	border: #DDDDDD 2px solid;
+	margin: 3em 0% 7em 0%;
+	padding: 5em 10% 6em 10%;
+	text-align: center;
 }
 
-.titlePage .docTitle
-{
-    line-height: 3.5em;
-    margin: 2em 0% 2em 0%;
-    font-weight: bold;
+.titlePage .docTitle {
+	line-height: 3.5em;
+	margin: 2em 0% 2em 0%;
+	font-weight: bold;
 }
 
-.titlePage .docTitle .mainTitle
-{
-    font-size: 1.8em;
+.titlePage .docTitle .mainTitle {
+	font-size: 1.8em;
 }
 
-.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle, .titlePage .docTitle .volumeTitle
-{
-    font-size: 1.44em;
+.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle,
+	.titlePage .docTitle .volumeTitle {
+	font-size: 1.44em;
 }
 
-.titlePage .byline
-{
-    margin: 2em 0% 2em 0%;
-    font-size:1.2em;
-    line-height:1.72em;
+.titlePage .byline {
+	margin: 2em 0% 2em 0%;
+	font-size: 1.2em;
+	line-height: 1.72em;
 }
 
-.titlePage .byline .docAuthor
-{
-    font-size: 1.2em;
-    font-weight: bold;
+.titlePage .byline .docAuthor {
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
-.titlePage .figure
-{
-    margin: 2em 0% 2em 0%;
-    margin-left: auto;
-    margin-right: auto;
+.titlePage .figure {
+	margin: 2em 0% 2em 0%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-.titlePage .docImprint
-{
-    margin: 4em 0% 0em 0%;
-    font-size: 1.2em;
-    line-height: 1.72em;
+.titlePage .docImprint {
+	margin: 4em 0% 0em 0%;
+	font-size: 1.2em;
+	line-height: 1.72em;
 }
 
-.titlePage .docImprint .docDate
-{
-    font-size: 1.2em;
-    font-weight: bold;
+.titlePage .docImprint .docDate {
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 /* End of titlepage.css */
