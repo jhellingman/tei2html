@@ -16,7 +16,7 @@
 
 
     <xd:doc type="stylesheet">
-        <xd:short>TEI stylesheet to create an ePub OPF file from a TEI document.</xd:short>
+        <xd:short>XSLT stylesheet to create an ePub OPF file from a TEI document.</xd:short>
         <xd:detail>This stylesheet generates the OPF file from a TEI document.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
