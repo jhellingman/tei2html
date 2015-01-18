@@ -25,7 +25,13 @@
         <xsl:attribute name="lang" select="fb2:description/fb2:title-info/fb2:lang"/>
         <xsl:apply-templates select="fb2:description"/>
         <text>
-            <xsl:apply-templates select="fb2:body"/>
+            <body>
+                <xsl:apply-templates select="fb2:body"/>
+            </body>
+            <back id="backmatter">
+                <divGen type="toc" id="toc"/>
+                <divGen type="Colophon"/>
+            </back>
         </text>
         <xsl:apply-templates select="fb2:binary"/>
     </TEI.2>
@@ -33,50 +39,86 @@
 
 
 <xsl:template match="fb2:description">
-
-        <teiHeader>
-            <fileDesc>
-                <titleStmt>
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>
+                    <xsl:value-of select="fb2:title-info/fb2:book-title"/>
+                </title>
+                <author>
+                    <xsl:value-of select="f:concatName(fb2:title-info/fb2:author)"/>
+                 </author>
+            </titleStmt>
+            <publicationStmt>
+                <publisher>
+                    <xsl:value-of select="fb2:publish-info/fb2:publisher"/>
+                </publisher>
+                <pubPlace></pubPlace>
+                <idno type="isbn">
+                    <xsl:value-of select="fb2:publish-info/fb2:isbn"/>
+                </idno>
+                <idno type="epub-id">
+                    <xsl:value-of select="fb2:document-info/fb2:id"/>
+                </idno>
+                <date>
+                    <xsl:value-of select="fb2:publish-info/fb2:year"/>
+                </date>
+            </publicationStmt>
+            <notesStmt>
+                <note type="Description">
+                    <xsl:value-of select="fb2:title-info/fb2:annotation"/>
+                </note>
+            </notesStmt>
+            <sourceDesc>
+                <bibl>
+                    <author>
+                        <xsl:value-of select="f:concatName(fb2:title-info/fb2:author)"/>
+                    </author>
                     <title>
                         <xsl:value-of select="fb2:title-info/fb2:book-title"/>
                     </title>
-                    <author>
-                        <xsl:value-of select="f:concatName(fb2:title-info/fb2:author)"/>
-                     </author>
-                </titleStmt>
-                <publicationStmt>
-                    <publisher>
-                        <xsl:value-of select="fb2:publish-info/fb2:publisher"/>
-                    </publisher>
-                    <pubPlace></pubPlace>
-                    <idno type="isbn">
-                        <xsl:value-of select="fb2:publish-info/fb2:isbn"/>
-                    </idno>
-                    <idno type="epub-id">
-                        <xsl:value-of select="fb2:document-info/fb2:id"/>
-                    </idno>
                     <date>
                         <xsl:value-of select="fb2:publish-info/fb2:year"/>
                     </date>
-                </publicationStmt>
-                <sourceDesc>
-                    <bibl>
-                        <author>
-                            <xsl:value-of select="f:concatName(fb2:title-info/fb2:author)"/>
-                        </author>
-                        <title>
-                            <xsl:value-of select="fb2:title-info/fb2:book-title"/>
-                        </title>
-                        <date>
-                            <xsl:value-of select="fb2:publish-info/fb2:year"/>
-                        </date>
-                    </bibl>
-                </sourceDesc>
-            </fileDesc>
-        </teiHeader>
+                </bibl>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <xsl:apply-templates select="fb2:title-info/fb2:annotation"/>
+        </encodingDesc>
+        <profileDesc>
+            <langUsage>
+                <language id="en">English</language>
 
+                <language>
+                    <xsl:attribute name="id" select="//fb2:description/fb2:title-info/fb2:lang"/>
+                    <xsl:text>TODO: lookup main language name.</xsl:text>
+                </language>
+
+                <xsl:for-each-group select="//@xml:lang" group-by=".">
+                    <language id="{.}">TODO: lookup language name.</language>
+                </xsl:for-each-group>
+
+            </langUsage>
+            <xsl:apply-templates mode="keywords" select="fb2:title-info/fb2:keywords"/>
+        </profileDesc>
+    </teiHeader>
 </xsl:template>
 
+
+<xsl:template mode="keywords" match="fb2:keywords">
+    <textClass>
+        <keywords>
+            <list>
+                <xsl:for-each select="tokenize(current(), ',')">
+                    <item>
+                        <xsl:value-of select="normalize-space(.)"/>
+                    </item>
+                </xsl:for-each>
+            </list>
+        </keywords>
+    </textClass>
+</xsl:template>
 
 
 <xsl:function name="f:concatName" as="xs:string">
@@ -103,6 +145,10 @@
 
 <xsl:template match="fb2:p">
     <p>
+        <xsl:if test="@xml:lang">
+            <xsl:attribute name="lang" select="@xml:lang"/>
+        </xsl:if>
+
         <xsl:apply-templates/>
     </p>
 </xsl:template>
@@ -110,14 +156,41 @@
 
 <xsl:template match="fb2:title">
     <head>
-        <xsl:apply-templates/>
+        <xsl:apply-templates mode="head"/>
     </head>
+</xsl:template>
+
+<!-- Skip p elements in titles -->
+<xsl:template mode="head" match="fb2:p">
+    <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template mode="head" match="*">
+    <xsl:apply-templates/>
+</xsl:template>
+
+
+<xsl:template mode="head" match="fb2:epigraph">
+    <epigraph>
+        <xsl:apply-templates/>
+    </epigraph>
 </xsl:template>
 
 
 <xsl:template match="fb2:empty-line">
-    <milestone unit="tb"/>
+    <milestone unit="tb" rend="space"/>
 </xsl:template>
+
+
+<xsl:template match="fb2:style[@name='foreign lang']">
+    <span>
+        <xsl:if test="@xml:lang">
+            <xsl:attribute name="lang" select="@xml:lang"/>
+        </xsl:if>
+        <xsl:apply-templates/>
+    </span>
+</xsl:template>
+
 
 
 <xsl:template match="fb2:strong">
@@ -134,11 +207,67 @@
 </xsl:template>
 
 
+<xsl:template match="fb2:poem">
+    <lg type="lgouter">
+        <xsl:apply-templates/>
+    </lg>
+</xsl:template>
+
+<xsl:template match="fb2:stanza">
+    <lg>
+        <xsl:apply-templates/>
+    </lg>
+</xsl:template>
+
+<xsl:template match="fb2:v">
+    <l>
+        <xsl:apply-templates/>
+    </l>
+</xsl:template>
+
+
+
+
+<xsl:template match="fb2:a[@type='note']">
+    <note type="footnote">
+        <xsl:attribute name="n" select="."/>
+
+        <xsl:variable name="id" select="f:href2id(@xlink:href)"/>
+
+        <xsl:message>ID: <xsl:value-of select="$id"/></xsl:message>
+        <xsl:apply-templates mode="footnote" select="//*[@id=$id]"/>
+    </note>
+</xsl:template>
+
+
+<!-- Skip section elements in footnotes -->
+<xsl:template mode="footnote" match="fb2:section">
+    <xsl:apply-templates mode="footnote"/>
+</xsl:template>
+
+<!-- Remove title elements in footnotes (they are the footnote numbers!) -->
+<xsl:template mode="footnote" match="fb2:title"/>
+
+<xsl:template mode="footnote" match="*">
+    <xsl:apply-templates/>
+</xsl:template>
+
+
+<xsl:function name="f:href2id" as="xs:string">
+    <xsl:param name="href"/>
+    <xsl:value-of select="substring-after($href, '#')"/>
+</xsl:function>
+
+
+<!-- Drop section with footnotes; should be inlined by this template. -->
+<xsl:template match="fb2:body[@name='notes']"/>
+
+
 <xsl:template match="fb2:image">
     <figure>
         <xsl:attribute name="rend">
-            <xsl:text>image(images/</xsl:text>
-            <xsl:value-of select="@xlink:href"/>
+            <xsl:text>image(</xsl:text>
+            <xsl:value-of select="f:href2id(@xlink:href)"/>
             <xsl:text>)</xsl:text>
         </xsl:attribute>
     </figure>
@@ -169,7 +298,7 @@
         </xsl:choose>
     </xsl:variable>
 
-    <xsl:value-of select="concat($basename, $extension)"/>
+    <xsl:value-of select="if (ends-with($basename, $extension)) then $basename else concat($basename, $extension)"/>
 </xsl:function>
 
 
