@@ -25,9 +25,7 @@
         <xsl:attribute name="lang" select="fb2:description/fb2:title-info/fb2:lang"/>
         <xsl:apply-templates select="fb2:description"/>
         <text>
-            <body>
-                <xsl:apply-templates select="fb2:body"/>
-            </body>
+            <xsl:apply-templates select="fb2:body"/>
             <back id="backmatter">
                 <divGen type="toc" id="toc"/>
                 <divGen type="Colophon"/>
@@ -88,17 +86,13 @@
         </encodingDesc>
         <profileDesc>
             <langUsage>
-                <language id="en">English</language>
-
                 <language>
                     <xsl:attribute name="id" select="//fb2:description/fb2:title-info/fb2:lang"/>
                     <xsl:text>TODO: lookup main language name.</xsl:text>
                 </language>
-
                 <xsl:for-each-group select="//@xml:lang" group-by=".">
                     <language id="{.}">TODO: lookup language name.</language>
                 </xsl:for-each-group>
-
             </langUsage>
             <xsl:apply-templates mode="keywords" select="fb2:title-info/fb2:keywords"/>
         </profileDesc>
@@ -136,10 +130,29 @@
 </xsl:function>
 
 
+<xsl:template match="fb2:*">
+    <xsl:message terminate="no">Unhandled fb2 element: <xsl:value-of select="name()"/></xsl:message>
+        <xsl:apply-templates/>
+</xsl:template>
+
+
+
+<xsl:template match="fb2:body">
+    <body>
+        <xsl:apply-templates/>
+    </body>
+</xsl:template>
+
+
 <xsl:template match="fb2:section">
     <div>
         <xsl:apply-templates/>
     </div>
+</xsl:template>
+
+
+<xsl:template match="fb2:annotation">
+    <xsl:apply-templates/>
 </xsl:template>
 
 
@@ -159,6 +172,27 @@
         <xsl:apply-templates mode="head"/>
     </head>
 </xsl:template>
+
+
+<xsl:template match="fb2:cite">
+    <p rend="class(cite)">
+        <xsl:apply-templates/>
+    </p>
+</xsl:template>
+
+
+<xsl:template match="fb2:subtitle">
+    <p rend="class(subtitle)">
+        <xsl:apply-templates/>
+    </p>
+</xsl:template>
+
+<xsl:template match="fb2:text-author">
+    <p rend="class(text-author)">
+        <xsl:apply-templates/>
+    </p>
+</xsl:template>
+
 
 <!-- Skip p elements in titles -->
 <xsl:template mode="head" match="fb2:p">
@@ -183,12 +217,12 @@
 
 
 <xsl:template match="fb2:style[@name='foreign lang']">
-    <span>
+    <foreign>
         <xsl:if test="@xml:lang">
             <xsl:attribute name="lang" select="@xml:lang"/>
         </xsl:if>
         <xsl:apply-templates/>
-    </span>
+    </foreign>
 </xsl:template>
 
 
@@ -227,14 +261,10 @@
 
 
 
-
 <xsl:template match="fb2:a[@type='note']">
     <note type="footnote">
         <xsl:attribute name="n" select="."/>
-
         <xsl:variable name="id" select="f:href2id(@xlink:href)"/>
-
-        <xsl:message>ID: <xsl:value-of select="$id"/></xsl:message>
         <xsl:apply-templates mode="footnote" select="//*[@id=$id]"/>
     </note>
 </xsl:template>
