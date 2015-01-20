@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet [
 
+    <!ENTITY lf         "&#x0A;">
+    <!ENTITY cr         "&#x0D;">
+
+]>
 <xsl:stylesheet 
     version="2.0"
 
@@ -25,7 +30,25 @@
         <xsl:attribute name="lang" select="fb2:description/fb2:title-info/fb2:lang"/>
         <xsl:apply-templates select="fb2:description"/>
         <text>
+            <xsl:if test="/fb2:FictionBook/fb2:description/fb2:title-info/fb2:coverpage/fb2:image/@xlink:href">
+                <xsl:text>&lf;</xsl:text>
+                <front id="frontmatter">
+                    <div id="cover" type="Cover">
+                        <p>
+                            <xsl:variable name="coverFile" select="f:href2id(/fb2:FictionBook/fb2:description/fb2:title-info/fb2:coverpage/fb2:image/@xlink:href)"/>
+                            <figure id="cover-image">
+                                <xsl:attribute name="rend">
+                                    <xsl:text>image(</xsl:text><xsl:value-of select="$coverFile"/><xsl:text>)</xsl:text>
+                                </xsl:attribute>
+                                <figDesc>Front Cover.</figDesc>
+                            </figure>
+                        </p>
+                    </div>
+                </front>
+            </xsl:if>
+            <xsl:text>&lf;</xsl:text>
             <xsl:apply-templates select="fb2:body"/>
+            <xsl:text>&lf;</xsl:text>
             <back id="backmatter">
                 <divGen type="toc" id="toc"/>
                 <divGen type="Colophon"/>
@@ -138,6 +161,7 @@
 
 
 <xsl:template match="fb2:body">
+    <xsl:text>&lf;</xsl:text>
     <body>
         <xsl:apply-templates/>
     </body>
@@ -145,6 +169,7 @@
 
 
 <xsl:template match="fb2:section">
+    <xsl:text>&lf;</xsl:text>
     <div>
         <xsl:apply-templates/>
     </div>
@@ -157,6 +182,7 @@
 
 
 <xsl:template match="fb2:p">
+    <xsl:text>&lf;</xsl:text>
     <p>
         <xsl:if test="@xml:lang">
             <xsl:attribute name="lang" select="@xml:lang"/>
@@ -168,6 +194,7 @@
 
 
 <xsl:template match="fb2:title">
+    <xsl:text>&lf;</xsl:text>
     <head>
         <xsl:apply-templates mode="head"/>
     </head>
@@ -175,6 +202,7 @@
 
 
 <xsl:template match="fb2:cite">
+    <xsl:text>&lf;</xsl:text>
     <p rend="class(cite)">
         <xsl:apply-templates/>
     </p>
@@ -182,12 +210,14 @@
 
 
 <xsl:template match="fb2:subtitle">
+    <xsl:text>&lf;&lf;</xsl:text>
     <p rend="class(subtitle)">
         <xsl:apply-templates/>
     </p>
 </xsl:template>
 
 <xsl:template match="fb2:text-author">
+    <xsl:text>&lf;</xsl:text>
     <p rend="class(text-author)">
         <xsl:apply-templates/>
     </p>
@@ -204,7 +234,8 @@
 </xsl:template>
 
 
-<xsl:template mode="head" match="fb2:epigraph">
+<xsl:template match="fb2:epigraph">
+    <xsl:text>&lf;</xsl:text>
     <epigraph>
         <xsl:apply-templates/>
     </epigraph>
@@ -212,7 +243,9 @@
 
 
 <xsl:template match="fb2:empty-line">
+    <xsl:text>&lf;&lf;</xsl:text>
     <milestone unit="tb" rend="space"/>
+    <xsl:text>&lf;</xsl:text>
 </xsl:template>
 
 
@@ -242,12 +275,14 @@
 
 
 <xsl:template match="fb2:poem">
+    <xsl:text>&lf;</xsl:text>
     <lg type="lgouter">
         <xsl:apply-templates/>
     </lg>
 </xsl:template>
 
 <xsl:template match="fb2:stanza">
+    <xsl:text>&lf;</xsl:text>
     <lg>
         <xsl:apply-templates/>
     </lg>
@@ -294,6 +329,7 @@
 
 
 <xsl:template match="fb2:image">
+    <xsl:text>&lf;</xsl:text>
     <figure>
         <xsl:attribute name="rend">
             <xsl:text>image(</xsl:text>
@@ -330,6 +366,29 @@
 
     <xsl:value-of select="if (ends-with($basename, $extension)) then $basename else concat($basename, $extension)"/>
 </xsl:function>
+
+
+
+
+<xsl:template match="text()" >
+    <xsl:call-template name="hyperlink"/>
+</xsl:template>
+
+
+<xsl:template name="hyperlink">
+   <xsl:param name="string" select="string(.)" />
+   <xsl:analyze-string select="$string"
+        regex="(^|[ \s])((ftp|http|https|mailto):(([A-Za-z0-9$_.+!*(),;/?:@&amp;~=-])|%[A-Fa-f0-9]{{2}}){{2,}}(#([a-zA-Z0-9][a-zA-Z0-9$_.+!*(),;/?:@&amp;~=%-]*))?([A-Za-z0-9$_+!*();/?:~-]))">
+     <xsl:matching-substring>
+       <xref url="{normalize-space(.)}">
+         <xsl:value-of select="."/>
+       </xref>
+     </xsl:matching-substring>
+     <xsl:non-matching-substring>
+       <xsl:value-of select="."/>
+     </xsl:non-matching-substring>
+   </xsl:analyze-string>
+ </xsl:template>
 
 
 </xsl:stylesheet>
