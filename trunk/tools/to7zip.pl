@@ -9,6 +9,7 @@ use File::Basename;
 use File::Temp;
 
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
+$sevenZip = "7z";
 
 my $errorCount = 0;
 my $totalOriginalSize = 0;
@@ -62,13 +63,13 @@ sub list_recursively($)
 
     foreach my $file (@files)
     {
-        if (-f "$directory\\$file")
+        if (-f "$directory/$file")
         {
-            handle_file("$directory\\$file");
+            handle_file("$directory/$file");
         }
-        elsif (-d "$directory\\$file")
+        elsif (-d "$directory/$file")
         {
-            list_recursively("$directory\\$file");
+            list_recursively("$directory/$file");
         }
     }
 }
@@ -83,7 +84,7 @@ sub handle_file($)
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
-        my $outputArchive = "$outputPath\\$path.7z";
+        my $outputArchive = "$outputPath/$path.7z";
 
         if (-e "$outputArchive")
         {
@@ -109,14 +110,14 @@ sub handle_file($)
                 # Sometimes, an archive contains a single folder with the same name as the archive
                 # itself, and everything else is stored inside that folder. In that case, we
                 # include the contents of the folder, but not the folder itself.
-                if (-d "$tmpDirName\\$base")
+                if (-d "$tmpDirName/$base")
                 {
-                    my @files = <$tmpDirName\\$base>;
+                    my @files = <$tmpDirName/$base>;
                     my $fileCount = @files;
                     if ($fileCount == 1)
                     {
-                        logMessage("Lifting contents from single top-level directory.");
-                        $packDir = "$tmpDirName\\$base";
+                        logMessage("Lifting contents from single top-level directory '$base'.");
+                        $packDir = "$tmpDirName/$base";
                     }
                 }
 
@@ -128,7 +129,7 @@ sub handle_file($)
                 # 5. Unpack contained archives into their own directory, taking care
                 #    not to create unneccessary directory levels.
 
-                if (1 == 1)
+                if (1 == 0)
                 {
                     # Further compress images in the archive if possible
                     system ("perl optimg.pl \"$packDir\" 1>>$logFile");
@@ -138,7 +139,7 @@ sub handle_file($)
                 # method for text (and html) files.
 
                 # print "Creating output archive: $path.7z\n";
-                my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir\\* 1>>$logFile");
+                my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir/* 1>>$logFile");
                 if ($returnCode != 0)
                 {
                     logError("7z returned $returnCode while creating $outputArchive.");
