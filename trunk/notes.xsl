@@ -243,20 +243,24 @@
 
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
-        <xd:detail>Handle notes in a text-critical apparatus (coded with attribute <code>place="apparatus"</code>). These notes are only
-        included when a divGen element is present, calling for their rendition.</xd:detail>
+        <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with attribute <code>place="apparatus"</code>). These notes are only
+        included when a <code>divGen</code> element is present, calling for their rendition; a text can include
+        multiple <code>divGen</code> elements, in which case only the text-critical notes after the preceding one
+        are included.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/TEI.2/text//note[@place='apparatus']">
         <a class="apparatusnote">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
-            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>&deg;</a>
+            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
+            <xsl:text>&deg;</xsl:text>
+        </a>
     </xsl:template>
 
     <xd:doc>
         <xd:short>Generate the notes for a text-critical apparatus.</xd:short>
-        <xd:detail>Render all text-critical notes preceding the matched divGen element here.</xd:detail>
+        <xd:detail>Render all text-critical notes preceding the matched <code>divGen</code>, but after the previous <code>divGen</code>, here.</xd:detail>
     </xd:doc>
 
     <xsl:template match="divGen[@type='apparatus']">
@@ -264,9 +268,23 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="f:message('msgApparatus')"/></h2>
 
-            <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
+            <xsl:choose>
+                <xsl:when test="preceding::divGen[@type='apparatus']">
+                    <!-- We already have seen a divGen, so only include the notes after the previous one! -->
+                    <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
+                    <xsl:apply-templates select="preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]" mode="apparatus"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </div>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Generate a single note for a text-critical apparatus.</xd:short>
+        <xd:detail>Render a single text-critical note.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
         <xsl:element name="{$p.element}">
@@ -278,7 +296,10 @@
 
             <xsl:call-template name="set-lang-id-attributes"/>
             <span class="label">
-                <a class="apparatusnote"><xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>&deg;</a>
+                <a class="apparatusnote">
+                    <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
+                    <xsl:text>&deg;</xsl:text>
+                </a>
             </span>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
