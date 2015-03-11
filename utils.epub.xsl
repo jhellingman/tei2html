@@ -92,7 +92,8 @@
     <xd:doc>
         <xd:short>Generate an href attribute for an apparatus note.</xd:short>
         <xd:detail>
-            <p>Apparatus notes are created from a divGen element with type Apparatus.</p>
+            <p>Apparatus notes are created from a <code>divGen</code> element with type Apparatus. The instance of the <code>divGen</code> element that
+            generates the note content is the first one following the node.</p>
         </xd:detail>
     </xd:doc>
 
@@ -101,7 +102,7 @@
 
         <xsl:variable name="targetfile">
             <xsl:call-template name="splitter-generate-filename-for">
-                <xsl:with-param name="node" select="(//divGen[@type='Apparatus' or @type='apparatus'])[1]"/>
+                <xsl:with-param name="node" select="($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1]"/>
             </xsl:call-template>
         </xsl:variable>
 
