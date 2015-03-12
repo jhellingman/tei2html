@@ -1,0 +1,17 @@
+# Prerequisites and Installation #
+
+See the page on [installation](Installation.md).
+
+Note that currently no installer is present, so you will need to get the code from the repository directly.
+
+# Running from the command line #
+
+Most of the interaction on the command line is with small Perl scripts that start the actual XSLT processor, and some other scripts.
+
+Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly. Perl should be able to find the place where you've located your scripts (when running perl with the -S option.)
+
+The various .jar files (for saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
+
+# Running interactively #
+
+No easy window-based interface is yet available. I am working on a small HTML application to run the scripts interactively.

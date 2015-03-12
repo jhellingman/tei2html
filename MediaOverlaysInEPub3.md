@@ -1,0 +1,113 @@
+Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; also tested output with Tobi, which correctly picks-up the files, and the Readium app for Chrome. Other readers remain to be tested).
+
+## References ##
+
+  * https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
+  * http://data.daisy.org/publications/guidelines/accessible_epub_3_in_epub_3.epub
+  * http://idpf.org/epub/30/spec/epub30-mediaoverlays.html
+  * https://epub-revision.googlecode.com/svn-history/r1915/trunk/build/EPUB_MediaOverlays30.html#d16293e836
+  * http://www.daisy.org/project/tobi
+  * http://azardi.infogridpacific.com/resources.html
+  * http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SASYMP
+  * https://forum.librivox.org/viewtopic.php?p=23815#p23815
+
+### Alternative viewers ###
+
+  * http://reader.dinglabs.com/
+  * https://www.youtube.com/watch?v=IG00lyK01pQ
+
+### Synchronizing Text ###
+
+  * https://www.youtube.com/watch?v=dQaVXdgKSn0
+  * https://forum.librivox.org/viewtopic.php?p=226242#p226242
+  * http://www.mycnknow.com/download/TUTORIAL/tutor.htm
+  * http://www.ling.upenn.edu/phonetics/p2fa/
+
+
+## SMIL Files ##
+
+Have a structure like this, and is located in the same directory as the referenced HTML file.
+
+```
+<smil 
+    xmlns="http://www.w3.org/ns/SMIL" 
+    xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">
+  <body>
+    <seq id="sequence_id" epub:textref="chapter.xhtml" epub:type="bodymatter chapter">
+      <par id="par1">
+        <text src="chapter.xhtml#p1"/>
+        <audio clipBegin="0:00:00" clipEnd="0:00:02.162" src="audio/chapter.mp3"/>
+      </par>
+      <par id="par2">
+        <text src="chapter.xhtml#p2"/>
+        <audio clipBegin="0:00:02.162" clipEnd="0:00:05.718" src="audio/chapter.mp3"/>
+      </par>
+    </seq>
+  </body>
+</smil>
+```
+
+
+## MP3 or OGG Files ##
+
+The actual audio files are in a sub-directory called `audio`.
+
+## OPF File ##
+
+### Metadata section ###
+
+Add a number of media overlay metadata items; they reference items in the manifest.
+
+```
+<meta property="media:duration" refines="#ch1">5:30:15</meta>
+<meta property="media:duration">5:30:15</meta>
+<meta property="media:narrator">Narrator Name</meta>
+<meta property="media:active-class">-epub-media-overlay-active</meta>
+```
+
+Except for the narrator, these items are derived from the `.smil` files related to each section.
+
+### Manifest section ###
+
+Add the `.smil` and audio files added to the ePub container:
+
+This also indicates how to handle fall-back media in an alternative format.
+
+```
+<item id="ch1" href="chapter.smil" media-type="application/smil+xml"/>
+
+<item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
+<item id="audio02" href="audio/chapter.ogg" media-type="audio/ogg"/>
+```
+
+
+Then also refer to the media-overlay in the entry for the original (text) items
+
+```
+<item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml" media-overlay="ch1"/>
+```
+
+## Implementation in `tei2html` ##
+
+Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the .smil file to use as an overlay.
+
+```
+<div1 id="ch1" rend="media-overlay(chapter1.smil)">
+```
+
+And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
+
+All this is handled in the file `tei2opf.xml`.
+
+## TODO ##
+
+  * Copy `.smil` files to ePub output directory. DONE
+  * Better handling of media metadata. (Generate them from the smil file). DONE; need to look at minor rounding issues in calculation.
+
+## Implementation observations ##
+
+  * Azardi doesn't seem to like ids with periods in them.
+  * Azardi needs fallback media to Ogg.
+  * Azardi requires a body element of the `.smil` to have a seq element, the standard also allows par elements directly in the body (as Tobi generates it).
+  * Casing of file names is important.
+  * Now works fine in Readium, which seems to have a better interface than Azardi.

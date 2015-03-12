@@ -1,0 +1,86 @@
+# Those Pesky Page-Breaks #
+
+Printed books have pages, and thus page-breaks every couple of hundred words or so. Electronic files do not have this concept, but since pages and page numbers have traditionally been used to refer to passages in books, they can be captured in `<pb>` elements, which, for good reason, can appear almost anywhere in a TEI document. Here is where the trouble starts.
+
+References:
+  * TEI P5 Documentation [pb](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-pb.html)
+
+## Encoding ##
+
+When a page-break occurs between two divisions, it can be encoded in various was, e.g., before the closing tag:
+
+```
+<pb n="123"/>
+</div1>
+<div1>
+```
+
+Between the closing and opening tag:
+
+```
+</div1>
+<pb n="123"/>
+<div1>
+```
+
+After the opening tag:
+
+```
+</div1>
+<div1>
+<pb n="123"/>
+```
+
+Various guidelines for TEI propose different (conflicting) conventions for each option. The `tei2html` scripts all assume the first option (before the closing tag) This way, the generated tables of content, etc., refer to page-number that is current when the `<div1>` tag occurs.
+
+It should be very well possible to write a small XSLT script to normalize this usage, avoiding complications in the other XSLT scripts.
+
+### Page Images ###
+
+Not implemented yet, but it would be nice for some types of works to include images of the original pages. The syntax would be either something like (see http://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PHFAX)
+
+```
+<pb n="123" facs="p123.png"/>
+```
+
+or
+
+```
+<pb n="123" rend="link(pages/p123.png)"/>
+```
+
+Such page images should be in a resolution suitable for viewing on most devices (between 100 and 200 dpi in gray scale or color).
+
+## Cross-References ##
+
+As mentioned, cross-references in printed book often reference to page numbers. The easiest way to encode this is to do something like this:
+
+```
+For details <ref target="pb123">see page 123</ref>.
+```
+
+That links to some `<pb id="pb123" n="123"/>` somewhere in text. Now, of course, the reference is never to the page-break itself, but always to some content that appears on that page, but actually identifying and linking to the content referred to can be a time-consuming task, so is often postponed (think, for example, about an index). So we often have texts that just link like this.
+
+## Processing ##
+
+
+## Paged Output ##
+
+When creating new printed output, we will have to deal with yet another set of page-breaks: those in the output medium. Here a whole new range of problems arise.
+
+  * Exact values for cross-references can only be established when final pagination is known. This may result in changes in the page layout inducing changes in the page numbers itself ("see page 100" is wider than "see page 99"). Most current layout tools can deal with this type of issues reasonably, although in some extreme cases this still pops up.
+  * When generating an index, you want to avoid things like
+    * **common entry**, 12, 12, 12, 23, 24, 25, 45.
+> > but summarize them as
+    * **common entry** 12, 23-25, 45.
+> > which is not really supported by most current index generating tools, and is pretty hard to do as well.
+
+For these reasons, `tei2html` specifies that references to page-numbers are tagged as:
+
+```
+For details see page <ref target="pb123" type="pageref">123</ref>.
+```
+
+That is, directly surrounding the page number, and the additional `@type` attribute set to pageref. This indicates to the rendering application that the content of the `<ref>` element needs to be replaced with the actual page number on which the details appear.
+
+To prevent that the details do not appear on the indicated page, but on a previous or next page, you should replace the target with the non-`<pb>` element the details are really in (most likely a paragraph).

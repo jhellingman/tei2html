@@ -1,0 +1,35 @@
+# Introduction #
+
+If we could easily parse CSS with XSLT, this would make it far easier to generate optimized HTML. Currently, we include the full CSS stylesheets with even the simplest texts, which increases clutter. If we parse a CSS stylesheet, and only retain those CSS rules that actually apply, text size and clutter is reduced.
+
+# Current Implementation #
+
+The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is parsed in a number of passes. Currently, the code not yet parses all valid CSS 2.1 stylesheets. In particular, `@media` groups are not supported.
+
+  1. tokenize with a simple regular expression based 'lexer'
+  1. group things between braces using 'sibling recursion' to match open braces with closing braces.
+  1. group properties, based on semicolons.
+  1. determine key-value pairs, based on the semi-colon.
+  1. determine selectors.
+  1. clean-up parsing artifacts.
+
+Items remaining todo are:
+
+  * Better follow tokenization as defined for [CSS 2.1 tokenization](http://www.w3.org/TR/CSS21/syndata.html#tokenization).
+  * Properly understand all valid CSS 2.1 features.
+  * Implement a way to translate CSS selectors to XPath expressions.
+
+# Usage #
+
+Having CSS in XML, makes it easier to determine from within XSLT what rules within CSS kan be removed or rewritten in a simpler form.
+
+  * Determine which CSS rules are actually used in a HTML document.
+  * Determine which CSS rules are overruled within the same CSS stylesheet.
+
+As a result, the CSS stylesheet can be pruned, and only the relevant rules emitted in the output.
+
+# References #
+
+  * Some great implementation ideas are in [json2xml](http://www.gerixsoft.com/blog/xslt/json2xml)
+  * Need to translate CSS selectors to XPath.
+  * Need to keep transformation result in variable to do tests against.
