@@ -1,0 +1,29 @@
+align-paragraphs-output.html
+align-paragraphs-output-orig.xml
+attick/
+doc/
+dtd/
+Sample ePubs/
+tools/corpus tools/Nederlandsch Woordenlijst/
+tools/lib/
+tools/pubtext/
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-pos.xml
+i18n.xml
+test.epub
+test.fodt
+test.odt
+test.pdf
+*.err
+test-normalized.xml
+test-odt.xml
+test-old.html
+test-p5.xml
+test-prince.html
+tmp.xhtml
+tmp-odt.xhtml
+ePub/audio/
+ePub/images/
+libraries/json2xml/
+*.xsx
+tools/corpus tools/test/
+tools/corpus tools/out.features
