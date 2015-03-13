@@ -1,0 +1,45 @@
+# Introduction #
+
+For quite some time, I wanted to be able to generate a KWIC (Key Word In Context) index of TEI files. With a KWIC, you can quickly inspect the usage of certain words in a context, which helps to determine how words are used.
+
+# Requirements #
+
+The KWIC generator should:
+
+  * Show all words in their context.
+  * Indicate the page on which they appear.
+  * Indicate the (tagged) language of the keyword.
+  * Be able to show words in italics (and other font-styles).
+  * Segmentize text to have meaningful contexts.
+  * Ignore other tags in the text.
+  * Handle text in footnotes correctly.
+  * Present the resulting KWIC in HTML.
+  * Work with all Unicode supported scripts.
+  * Ignore case and accent variants (but they should be preserved and signalled).
+
+# Development #
+
+For a long time, I have felt that XSLT 2.0 was the right tool for the job. XSLT 1.0 lacked the required regular expression facilities to break text into words effectively, while other programming languages, such as PERL or Python, are much less suited to handling XML textual data.
+
+The first idea was that you can easily use `xsl:analyze-string` to split up fragments of text into words, using the a proper regular expression (in fact the expression is: `[\p{L}\p{N}\p{M}-]+` ). Given those words, you can then traverse the text, looking for the word you are interested in, and determine the preceding and following words, by following the `preceding-sibling` and `following-sibling` axes.
+
+This worked fine, but quickly showed that not all context is equally relevant. Basically, you need not look further than paragraph boundaries and their equivalents in various parts of a documents. So, before splitting in words, we divide the text in segments, and flatten that segment structure. At the same time, we need to take care to lift non-sequential items, such as foot-notes out of the context (and handle them elsewhere.)
+
+Having done this for one word, it is fairly easy to iterate over all words in the document and build a KWIC for each of them. However, this is a very inefficient way to do it, if we want a KWIC index for all words. So instead, we simply start with the first word, collecting contexts as we go, and then sort them into the desired order afterwards. (Order by word, and then by the following context, or preceding context retrograde)
+
+Generating a KWIC unfortunately consumes a considerable amount of memory, so some tuning is required to be able to handle large texts. KWIC indexes tend to get fairly big: a 2 megabyte text can result in a 80 megabyte KWIC index, especially if no stop-word-list is used to remove the most common words.
+
+The result is `xml2kwic.xsl`, about 500 lines of XSLT code (including documentation comments), that produces a KWIC index from a TEI file in a few seconds. This can be used in two modes. In the first, a KWIC is generated for every word in the document (including such common words as 'the' or 'a'), in the second, a word or list of words is provided to the script, and a KWIC of only those words is build: handy for example to compare the usage of two different spellings or synonyms.
+
+# Having fun with KWIC #
+
+The KWIC little tool already has helped me to locate numerous small issues Project Gutenberg texts that would otherwise have escaped the attention of proof readers. In particular variant spellings of names and consistent usage of hyphenated versus non-hyphenated words are often difficult to catch, while in a KWIC, they simply jump into your face.
+
+Some issues in texts I've found with this script:
+
+  * Variant ways of references to cited works.
+  * Spelling variants in names. Personal names are normally not known to spelling checkers, and can be spelled in various ways. An added complication is that another person may have a similar name, so you really need the context to make that out.
+  * Checking a (preexisting) index. The index entry will show up in the KWIC with the page number it lists, together with the referenced phrase (and page number).
+  * Missing periods after common abbreviations.
+  * Inconsistent styling. Foreign words that are mostly given in italics, but sometimes not.
+  * Hyphenated version non-hyphenated words.

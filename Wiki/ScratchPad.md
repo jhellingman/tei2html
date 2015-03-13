@@ -1,0 +1,61 @@
+# Scratch Pad #
+
+## Small improvements ##
+
+  * Use page-break-after in CSS for ePub versions. See http://css-tricks.com/almanac/properties/p/page-break/ and http://www.w3schools.com/cssref/pr_print_pageba.asp
+
+## Interesting Links ##
+
+  * http://code.google.com/p/hyphenator/ Javascript hyphenator.
+
+
+## Packaging in .zip for PG ##
+
+When submitting a text to PG, it needs to be packaged in a zip-file and provided with PG headers, footers and small-print.
+
+This requires a short title to be used in the start and end tags:
+
+```
+*** START OF THIS PROJECT GUTENBERG EBOOK SOUTH SEA SAVAGES ***
+
+*** END OF THIS PROJECT GUTENBERG EBOOK SOUTH SEA SAVAGES ***
+```
+
+Since the line length is restricted to 72 characters, the length of the title should be abbreviated to
+at most 26 characters. Need to introduce the following extra title in the fileDesc/titleStmt for this purpose:
+
+```
+<title type="pgshort">South Sea Savages</title>
+```
+
+Only to be added if the main or even short title is longer than 26 characters. (But not in all-caps, the transform can take care of that!)
+
+Also add check to the checking tool to verify this, and adjust all code to deal with the added titles, which could include:
+
+```
+<title type="full">Wanderings Among South Sea Savages and in Borneo and the Philippines</title>
+<title type="main">Wanderings Among South Sea Savages</title>
+<title type="sub">And in Borneo and the Philippines</title>
+
+<title type="main">War and Peace</title>
+<title type="uniform">Война и Мир, English</title>
+
+<title type="series">...</title>
+```
+
+## Metadata ##
+
+Adding metadata about the series a book belongs to in ePub is not yet standardized. Follow the calibre convention for now:
+
+```
+<meta name="calibre:series" content="CAC"/>
+<meta name="calibre:series_index" content="29"/>
+```
+
+For ePub 3.0, see http://www.idpf.org/epub/301/spec/epub-publications.html#sec-opf-dctitle
+
+## Hanging punctuation ##
+
+See: http://dabblet.com/gist/9623025
+
+and http://webdesign.tutsplus.com/articles/getting-the-hang-of-hanging-punctuation--cms-19890
