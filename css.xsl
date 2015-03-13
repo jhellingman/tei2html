@@ -182,7 +182,7 @@
         <!-- A rendition ladder is straighfowardly converted to CSS, by taking the
              characters before the "(" as the css property, and the characters
              between "(" and ")" as the value. We convert an entire string
-             by simply doing the head, and then recursively the tail -->
+             by first handling the head, and then recursively the tail -->
 
         <xsl:if test="$rend != ''">
             <xsl:call-template name="filter-css-property">
@@ -215,27 +215,27 @@
             <xsl:when test="normalize-space($value)=''"/>
 
             <!-- Properties handled otherwise -->
-            <xsl:when test="$property='class'"/>        <!-- pass-through CSS class -->
-            <xsl:when test="$property='cover-image'"/>  <!-- cover-image for ePub versions -->
-            <xsl:when test="$property='media-overlay'"/> <!-- media overlay for ePub versions -->
-            <xsl:when test="$property='link'"/>         <!-- external link (for example on image) -->
-            <xsl:when test="$property='image'"/>        <!-- in-line image -->
-            <xsl:when test="$property='image-alt'"/>    <!-- alt text for image -->
-            <xsl:when test="$property='summary'"/>      <!-- summary text for table, etc. -->
-            <xsl:when test="$property='title'"/>        <!-- title text for links, etc. -->
-            <xsl:when test="$property='label'"/>        <!-- label (for head, etc.) -->
-            <xsl:when test="$property='columns'"/>      <!-- number of columns to use on list, table, etc. -->
-            <xsl:when test="$property='stylesheet'"/>   <!-- stylesheet to load (only on top-level text element) -->
-            <xsl:when test="$property='position'"/>     <!-- position in text -->
-            <xsl:when test="$property='toc-head'"/>     <!-- head to be used in table of contents -->
-            <xsl:when test="$property='toc'"/>          <!-- indicates how to include a head in the toc -->
-            <xsl:when test="$property='align-with'"/>   <!-- indicates to align one division with another in a table -->
-            <xsl:when test="$property='align-with-document'"/>   <!-- indicates to align one division with another in a table -->
-            <xsl:when test="$property='tocMaxLevel'"/>  <!-- the maximum level (depth) of a generated table of contents -->
-            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image iso head -->
+            <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
+            <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
+            <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
+            <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
+            <xsl:when test="$property='image'"/>                <!-- in-line image -->
+            <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
+            <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
+            <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
+            <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
+            <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
+            <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
+            <xsl:when test="$property='position'"/>             <!-- position in text -->
+            <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
+            <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
+            <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
+            <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
+            <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
+            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image in stead of head -->
 
             <!-- Properties used to render verse -->
-            <xsl:when test="$property='hemistich'"/>    <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
+            <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
 
             <!-- Properties related to decorative initials -->
             <xsl:when test="$property='initial-image'"/>
@@ -267,7 +267,6 @@
                 <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/>;
             </xsl:otherwise>
         </xsl:choose>
-
     </xsl:template>
 
 
@@ -335,7 +334,6 @@
                 <xsl:with-param name="node" select="$node"/>
             </xsl:call-template>
         </xsl:if>
-
     </xsl:template>
 
 
