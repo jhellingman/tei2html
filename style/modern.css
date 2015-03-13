@@ -1,0 +1,50 @@
+/* modern.css -- more modern style of formatting books */
+
+body {
+	background: #FFFFFF;
+	font-family: Garamond, Baskerville, 'Baskerville Old Face' , 'Hoefler Text', 'Times New Roman', serif;
+}
+
+body, a.hidden {
+	color: black;
+}
+
+h1, .h1 {
+	padding-bottom: 5em;
+}
+
+h1, h2, .h1, .h2 {
+	text-align: left;
+	font-weight: bold;
+}
+
+p.byline {
+	text-align: left;
+	font-style: italic;
+	margin-bottom: 2em;
+}
+
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum {
+	color: #660000;
+}
+
+.rightnote, .pagenum, .linenum, .pagenum a {
+	color: #AAAAAA;
+}
+
+a.hidden:hover, a.noteref:hover {
+	color: red;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tablecaption {
+	text-align: left;
+}
