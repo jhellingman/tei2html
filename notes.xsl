@@ -254,7 +254,7 @@
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
-            <xsl:text>&deg;</xsl:text>
+            <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
         </a>
     </xsl:template>
 
@@ -298,7 +298,7 @@
             <span class="label">
                 <a class="apparatusnote">
                     <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
-                    <xsl:text>&deg;</xsl:text>
+                    <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
                 </a>
             </span>
             <xsl:text> </xsl:text>
