@@ -110,9 +110,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- div1 -->
-
     <xd:doc>
         <xd:short>Format transcriber notes.</xd:short>
         <xd:detail>Format transcriber notes, which are typically not present in the source, using a special class.</xd:detail>
@@ -175,8 +172,10 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- div2 -->
+    <xd:doc>
+        <xd:short>Format div2 element.</xd:short>
+        <xd:detail>Format a <code>div2</code> element.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="div2">
         <xsl:if test="not(contains(@rend, 'display(none)'))">
@@ -192,16 +191,27 @@
         </xsl:if>
     </xsl:template>
 
-    <!--====================================================================-->
-    <!-- div3 and higher -->
+
+    <xd:doc>
+        <xd:short>Format div3 or deeper nested div element.</xd:short>
+        <xd:detail>Format a <code>div2</code> or deeper nested element.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="div3 | div4 | div5 | div6">
-        <div class="{name()}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-div-class"/>
-            <xsl:call-template name="handleDiv"/>
-        </div>
+        <xsl:if test="not(contains(@rend, 'display(none)'))">
+            <div class="{name()}">
+                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:call-template name="generate-div-class"/>
+                <xsl:call-template name="handleDiv"/>
+            </div>
+        </xsl:if>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Format head element of div2..div6.</xd:short>
+        <xd:detail>Format a head element for a <code>div2</code>...<code>div6</code>.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="div2/head | div3/head | div4/head | div5/head | div6/head">
         <xsl:variable name="level" select="number(substring(name(..), 4, 1)) + 1"/>
@@ -238,6 +248,7 @@
             </div>
         </xsl:if>
     </xsl:template>
+
 
     <xsl:template match="div/head">
         <xsl:variable name="level" select="f:divLevel(.)"/>
