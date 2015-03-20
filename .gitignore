@@ -27,3 +27,4 @@ libraries/json2xml/
 *.xsx
 tools/corpus tools/test/
 tools/corpus tools/out.features
+common/
