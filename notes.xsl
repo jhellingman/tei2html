@@ -10,8 +10,9 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -272,14 +273,59 @@
                 <xsl:when test="preceding::divGen[@type='apparatus']">
                     <!-- We already have seen a divGen, so only include the notes after the previous one! -->
                     <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
-                    <xsl:apply-templates select="preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]" mode="apparatus"/>
+                    <xsl:call-template name="handle-apparatus-notes">
+                        <xsl:with-param name="notes" select="preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]"/>
+                        <xsl:with-param name="rend" select="@rend"/>
+                    </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="preceding::note[@place='apparatus']" mode="apparatus"/>
+                    <xsl:call-template name="handle-apparatus-notes"> 
+                        <xsl:with-param name="notes" select="preceding::note[@place='apparatus']"/>
+                        <xsl:with-param name="rend" select="@rend"/>
+                    </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
         </div>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generate the notes for a text-critical apparatus in one or two columns.</xd:short>
+        <xd:detail>Render the text-critical notes in one or two columns. The splitting works under the assumption
+        that the average length of each note is about the same. A smarter way of balancing the two
+        columns can be achieved when actually rendering the columns (in the browser or otherwise).</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="handle-apparatus-notes">
+        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="rend" as="xs:string?"/>
+
+        <xsl:choose>
+            <xsl:when test="contains(@rend, 'columns(2)') and count($notes) &gt; 1">
+                <xsl:variable name="halfway" select="ceiling(count($notes) div 2)"/>
+                <table class="apparataus">
+                    <tr>
+                        <td class="first">
+                            <xsl:for-each select="$notes[position() &lt; $halfway + 1]">
+                                <xsl:apply-templates select="." mode="apparatus"/>
+                            </xsl:for-each>
+                        </td>
+                        <td class="second">
+                            <xsl:for-each select="$notes[position() &gt; $halfway]">
+                                <xsl:apply-templates select="." mode="apparatus"/>
+                            </xsl:for-each>
+                        </td>
+                    </tr>
+                </table>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="$notes">
+                    <xsl:apply-templates select="." mode="apparatus"/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 
     <xd:doc>
         <xd:short>Generate a single note for a text-critical apparatus.</xd:short>
@@ -289,7 +335,7 @@
     <xsl:template match="note[@place='apparatus']" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                par footnote
+                par footnote apparatus
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
