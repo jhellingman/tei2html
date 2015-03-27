@@ -389,6 +389,14 @@ p.tocSection, .par.tocSection {
 	margin: 0.7em 5%;
 }
 
+table.tocList td {
+    vertical-align: top;
+}
+
+table.tocList td.tocPageNum {
+    vertical-align: bottom;
+}
+
 /***** Index *****/
 
 .index {

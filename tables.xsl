@@ -45,9 +45,7 @@
     </xd:doc>
 
     <xsl:template match="table">
-        <xsl:call-template name="closepar"/>
         <xsl:apply-templates select="." mode="render-table"/>
-        <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
     <xd:doc>
@@ -69,11 +67,13 @@
                 </span>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:call-template name="closepar"/>
                 <div class="table">
                     <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </div>
+                <xsl:call-template name="reopenpar"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

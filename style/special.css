@@ -7,7 +7,7 @@
 /* Intralinear text stacked in tables */
 
 table.intralinear {
-	display: inline;
+	display: inline-table;
 	border-collapse: collapse;
 }
 
@@ -19,7 +19,7 @@ table.intralinear td {
 /* ditto symbols simulated by tables */
 
 table.ditto {
-	display: inline;
+	display: inline-table;
 	border-collapse: collapse;
 	vertical-align: bottom;
 }
