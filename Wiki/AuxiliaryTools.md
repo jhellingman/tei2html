@@ -51,7 +51,12 @@ Perl script to replace ASCII double-quotes with curly quotes. May need some manu
 Issues:
 
   * Open quotes before SGML tags and non-letters go wrong.
-  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes.)
+  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes, but see below.)
+  * 
+
+## `aposquote.pl` ##
+
+Perl script to replace ASCII single quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections.
 
 ## `pgpp.pl` ##
 
