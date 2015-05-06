@@ -1076,6 +1076,11 @@ sub entities2iso88591($)
     $a =~ s/\&imacacu;/í/g;
     $a =~ s/\&omacacu;/ó/g;
 
+    $a =~ s/\&amacracu;/á/g;
+    $a =~ s/\&emacracu;/é/g;
+    $a =~ s/\&omacracu;/ó/g;
+    $a =~ s/\&umacracu;/ú/g;
+
     $a =~ s/\&longs;/s/g;
     $a =~ s/\&prime;/'/g;
     $a =~ s/\&Prime;/''/g;

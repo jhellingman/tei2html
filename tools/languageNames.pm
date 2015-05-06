@@ -232,6 +232,7 @@ BEGIN
     $langNameHash{"sit-ao-chongli"} = "Ao Naga, Chongli dialect";
     $langNameHash{"sit-sema"}       = "Sema Naga";
     $langNameHash{"sit-angami"}     = "Angami Naga";
+    $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
 

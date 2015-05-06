@@ -28,3 +28,6 @@ libraries/json2xml/
 tools/corpus tools/test/
 tools/corpus tools/out.features
 common/
+tei2odt.pl
+tei2odt.xsl
+audio/test.ogg

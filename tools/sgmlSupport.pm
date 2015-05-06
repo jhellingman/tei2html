@@ -1278,7 +1278,6 @@ BEGIN
     $ent{"heshindot"}       = chr(0x5C1);   # ׁ
     $ent{"hesindot"}        = chr(0x5C2);   # ׂ
 
-
     ###############################################################################
 
     $ent{"jcaron"}      = "j" . chr(0x030C); # j with caron
@@ -1372,6 +1371,9 @@ BEGIN
 
     $ent{"aoacute"}     = chr(0xa735) . chr(0x0301); # ao ligature with acute
     $ent{"AOacute"}     = chr(0xa734) . chr(0x0301); # AO ligature with acute
+
+    $ent{"thornstrok"}  = chr(0xA765);  # small letter thorn with stroke
+    $ent{"Thornstrok"}  = chr(0xA764);  # capital letter thorn with stroke
 
     $ent{"sml.s"}       = chr(0x02e2);  # Spacing modifier letter small s
 
@@ -1715,11 +1717,13 @@ BEGIN
     $ent{"oslashcirc"}  = chr(0x00f8) . chr(0x0302); # o slash and circumflex
 
     $ent{"amacrgra"}    = chr(0x0101) . chr(0x0300); # a with macron and grave
+    $ent{"emacrgra"}    = chr(0x0113) . chr(0x0300); # e with macron and grave
     $ent{"imacrgra"}    = chr(0x012B) . chr(0x0300); # i with macron and grave
     $ent{"omacrgra"}    = chr(0x014D) . chr(0x0300); # o with macron and grave
     $ent{"umacrgra"}    = chr(0x016B) . chr(0x0300); # u with macron and grave
 
     $ent{"amacracu"}    = chr(0x0101) . chr(0x0301); # a with macron and acute
+    $ent{"emacracu"}    = chr(0x0113) . chr(0x0301); # e with macron and acute
     $ent{"imacracu"}    = chr(0x012B) . chr(0x0301); # i with macron and acute
     $ent{"omacracu"}    = chr(0x014D) . chr(0x0301); # o with macron and acute
     $ent{"umacracu"}    = chr(0x016B) . chr(0x0301); # u with macron and acute
