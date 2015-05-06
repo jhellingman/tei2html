@@ -15,3 +15,8 @@ The various .jar files (for saxon and epubcheck), and the SGML catalog files nee
 # Running interactively #
 
 No easy window-based interface is yet available. I am working on a small HTML application to run the scripts interactively.
+
+# Running with Oxygen #
+
+You can use the stylesheets with Oxygen, provided your sources are in XML format. Make sure you select an XSLT 2.0 processor to perform the transformation.
+
