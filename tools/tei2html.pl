@@ -32,6 +32,7 @@ my $makeHTML            = 0;
 my $makePDF             = 0;
 my $makeEPUB            = 0;
 my $makeReport          = 0;
+my $makeP5              = 0;
 my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
@@ -50,6 +51,7 @@ GetOptions(
     'e' => \$makeEPUB,
     'k' => \$makeKwic,
     'p' => \$makePDF,
+    '5' => \$makeP5,
     'r' => \$makeReport,
     'x' => \$makeXML,
     'v' => \$runChecks,
@@ -86,6 +88,7 @@ if ($showHelp)
     print "    p         Produce PDF output.\n";
     print "    r         Produce word-usage report.\n";
     print "    x         Produce XML output.\n";
+    print "    5         Convert XML output to P5 format.\n";
     print "    v         Run a number of checks, and produce a report.\n";
     print "    u         Use Unicode output (in the text version).\n";
     print "    f         Force generation of output file, even if it is newer than input.\n";
@@ -99,9 +102,7 @@ if ($showHelp)
     exit(0);
 }
 
-
-
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0)
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0)
 {
     # Revert to old default:
     $makeTXT = 1;
@@ -109,7 +110,7 @@ if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeR
     $makeReport = 1;
 }
 
-if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1)
+if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1)
 {
     $makeXML = 1;
 }
@@ -184,7 +185,9 @@ sub processFile($)
     }
 
     # convert from TEI P4 to TEI P5 (experimental)
-    # system ("$saxon $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
+    if ($makeP5 != 0) {
+        system ("$saxon $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
+    }
 
     # extract metadata
     system ("$saxon $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
