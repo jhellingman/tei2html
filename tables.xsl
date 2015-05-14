@@ -158,8 +158,15 @@
     <xsl:template match="row">
         <tr>
             <xsl:variable name="class">
-                <xsl:if test="@role and not(@role='data')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
-                <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells -->
+                <xsl:if test="@role and not(@role='data')">
+                    <xsl:value-of select="@role"/>
+                    <xsl:text> </xsl:text>
+                </xsl:if>
+                <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells; however, we do extract the explicitly named class. -->
+                <xsl:if test="contains(@rend, 'class(')">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
+                    <xsl:text> </xsl:text>
+                </xsl:if>
             </xsl:variable>
 
             <xsl:if test="normalize-space($class) != ''">
