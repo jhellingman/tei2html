@@ -11,6 +11,7 @@ Syntax: `perl.pl -S tei2html.pl [options] filename`
 | **Option** | **Action** |
 |:-----------|:-----------|
 | `-x` | Convert SGML file to XML |
+| `-5` | Convert to TEI P5 format, using tei2tei.xsl |
 | `-h` | Generate HTML |
 | `-e` | Generate ePub |
 | `-t` | Generate plain vanilla ASCII (_needs manual cleanup!_) |
@@ -28,7 +29,7 @@ Syntax: `perl -S ucwords.pl filename`
 
 ## `fixpb.pl` ##
 
-Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where # is the current page number.
+Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where # is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)
 
 Syntax:
 
@@ -42,7 +43,7 @@ _offset_: the offset to be applied to pages after _start_; can be a positive or 
 
 ## `catpars.pl` ##
 
-Perl script to unwrap paragraphs, such that they appear on one line. Handle with care!
+Perl script to unwrap paragraphs, such that they appear on one line. Handle with care, as it might unwrap entire tables or lists if it deems them part of a paragraph.
 
 ## `quotes.pl` ##
 
@@ -56,7 +57,7 @@ Issues:
 
 ## `aposquote.pl` ##
 
-Perl script to replace ASCII single quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections.
+Perl script to replace ASCII single quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections. (Use `tei2html.pl` with the `-v` option to find such cases.)
 
 ## `pgpp.pl` ##
 
