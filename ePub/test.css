@@ -666,6 +666,14 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight {
  border-right: 2px solid black;
 }
 
+
+ 
+.cellDoubleUp {
+ border: 0px solid black !important;
+ width: 1em;
+}
+
+
   
 
  
@@ -951,83 +959,93 @@ text-align:left;
 width:40%; border-collapse:collapse;
 }
 
-.xd25e778width
+.xd25e687
+{
+margin:0px auto; display:table;
+}
+
+.xd25e758
+{
+margin:0px auto; display:table;
+}
+
+.xd25e918width
 {
     width:80px;
 }
             
-.xd25e783
+.xd25e923
 {
 width:100px;
 }
 
-.xd25e783width
+.xd25e923width
 {
     width:80px;
 }
             
-.xd25e790width
+.xd25e930width
 {
     width:80px;
 }
             
-.xd25e802width
+.xd25e943width
 {
     width:480px;
 }
             
-.xd25e822width
+.xd25e963width
 {
     width:480px;
 }
             
-.xd25e873
+.xd25e1013
 {
 font-style:italic;
 }
 
-.xd25e904
+.xd25e1044
 {
 list-style-type:disc;
 }
 
-.xd25e934
+.xd25e1074
 {
 list-style-type:upper-roman;
 }
 
-.xd25e946
+.xd25e1086
 {
 list-style-type:lower-roman;
 }
 
-.xd25e968
+.xd25e1108
 {
 list-style-type:disc;
 }
 
-.xd25e991
+.xd25e1131
 {
 list-style-type:disc;
 }
 
-.xd25e1035
+.xd25e1175
 {
 text-align:left;
 }
 
-.xd25e1038
+.xd25e1178
 {
 text-align:right;
 }
 
-.xd25e1040
+.xd25e1180
 {
 text-align:center;
 }
 
 
-.xd25e1042
+.xd25e1182
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1035,7 +1053,7 @@ text-align:center;
     
 }
 
-.xd25e1042init
+.xd25e1182init
 {
     float: left;
     width: 90px;
@@ -1050,57 +1068,57 @@ text-align:center;
 }
 
         
-.xd25e1046
+.xd25e1186
 {
 text-align:justify;
 }
 
-.xd25e1061
+.xd25e1201
 {
 text-align:center;
 }
 
-.xd25e1070
+.xd25e1210
 {
 text-align:center;
 }
 
-.xd25e1075
+.xd25e1215
 {
 text-indent:1em;
 }
 
-.xd25e1081
+.xd25e1221
 {
 text-indent:2em;
 }
 
-.xd25e1085
+.xd25e1225
 {
 text-indent:3em;
 }
 
-.xd25e1089
+.xd25e1229
 {
 text-indent:10em;
 }
 
-.xd25e1091
+.xd25e1231
 {
 font-style:italic;
 }
 
-.xd25e1183
+.xd25e1323
 {
 font-style:italic;
 }
 
-.xd25e1194
+.xd25e1334
 {
 display:none;
 }
 
-.xd25e1225
+.xd25e1365
 {
 display:none;
 }
@@ -1108,13 +1126,13 @@ display:none;
 {
 
 
-.xd25e1042
+.xd25e1182
 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd25e1042init
+.xd25e1182init
 {
     float: none;
     width: auto;

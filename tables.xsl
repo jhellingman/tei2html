@@ -1,13 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to format tables, to be imported in tei2html.xsl.
-
-    Requires:
-        localization.xsl    : templates for localizing strings.
-
--->
-
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
@@ -41,7 +32,7 @@
         attributes: one for the column and one for the cell itself.</p>
         </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <xsl:template match="table">
@@ -49,11 +40,11 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Render a table in HTML.</xd:short>
+        <xd:short>Render a table in HTML (1).</xd:short>
         <xd:detail>
             <p>At the top-level, the code differentiates between an inline table, and one
-            at the block level; the former get wrapped in a HTML span element, the latter in
-            a div element.</p>
+            at the block level; the former get wrapped in a HTML <code>span</code> element, the latter in
+            a <code>div</code> element.</p>
         </xd:detail>
     </xd:doc>
 
@@ -83,15 +74,18 @@
         <xd:short>Render a table in HTML (2).</xd:short>
         <xd:detail>
             <p>The second step in handling tables is deciding whether they need to be
-            doubled-up.</p>
+            doubled-up. This is indicated by the <code>columns(2)</code> value in the
+            <code>@rend</code>-attribute.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="inner-table">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'columns(2)')">
-                <xsl:call-template name="doubleup-table"/>
+
+            <xsl:when test="contains(@rend, 'columns(')">
+                <xsl:call-template name="n-up-table"/>
             </xsl:when>
+
             <xsl:otherwise>
                 <xsl:call-template name="normal-table"/>
             </xsl:otherwise>
@@ -137,7 +131,13 @@
     </xsl:template>
 
 
-    <!-- The HTML caption element is not correctly handled in some browsers, so lift them out and make them headers. -->
+    <xd:doc>
+        <xd:short>Handle a table caption.</xd:short>
+        <xd:detail>
+            <p>The HTML caption element is not correctly handled in some browsers, so lift them out and make them headers.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template mode="tablecaption" match="head">
         <h4 class="tablecaption">
             <xsl:call-template name="set-lang-id-attributes"/>
@@ -151,26 +151,27 @@
     </xsl:template>
 
 
-    <!-- headers already handled in mode tablecaption. -->
+    <xd:doc>
+        <xd:short>Eliminate table headers.</xd:short>
+        <xd:detail>
+            <p>The table header is already handled in the mode <code>tablecaption</code>, so can be omitted.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="table/head"/>
 
 
+    <xd:doc>
+        <xd:short>Handle a table row.</xd:short>
+        <xd:detail>
+            <p>Handle a table row. Determine the <code>class</code> and <code>id</code> attributes, and render its content.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="row">
         <tr>
-            <xsl:variable name="class">
-                <xsl:if test="@role and not(@role='data')">
-                    <xsl:value-of select="@role"/>
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-                <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells; however, we do extract the explicitly named class. -->
-                <xsl:if test="contains(@rend, 'class(')">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'class('), ')')"/>
-                    <xsl:text> </xsl:text>
-                </xsl:if>
-            </xsl:variable>
-
-            <xsl:if test="normalize-space($class) != ''">
-                <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:if test="f:determine-row-class(.) != ''">
+                <xsl:attribute name="class"><xsl:value-of select="f:determine-row-class(.)"/></xsl:attribute>
             </xsl:if>
 
             <xsl:call-template name="set-lang-id-attributes"/>
@@ -178,6 +179,13 @@
         </tr>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Handle a table cell.</xd:short>
+        <xd:detail>
+            <p>Handle a table cell. Deal with spans and determine the <code>class</code> and <code>id</code> attributes, and render its content.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="cell">
         <td>
@@ -199,7 +207,13 @@
     </xsl:template>
 
 
-    <!-- Determine how many rows and columns we span, and set attributes accordingly. -->
+    <xd:doc>
+        <xd:short>Determine spanned rows and columns.</xd:short>
+        <xd:detail>
+            <p>Determine how many rows and columns we span, and set HTML attributes accordingly.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="cell-span">
         <xsl:if test="@cols and (@cols > 1)">
             <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
@@ -210,15 +224,23 @@
     </xsl:template>
 
 
-    <!-- Here we may need to supply up to four class names for rendering:
-         1. one for the @role attribute,
-         2. one for the column-level @rend attribute,
-         3. one for the row-level @rend attribute, and
-         4. one for the cell-level @rend attribute.
-         5. one for the cell position in the table:
-            cellTop cellRight cellBottom cellLeft
-            cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft
-    -->
+    <xd:doc>
+        <xd:short>Determine cell rendering.</xd:short>
+        <xd:detail>
+            <p>Determine how to render a cell, using a class attribute with multiple values; we may need to supply up to five class names for rendering:</p>
+
+            <ol>
+                <li>one based on the <code>@role</code> attribute,</li>
+                <li>one based on the column-level <code>@rend</code> attribute,</li>
+                <li>one based on the row-level <code>@rend</code> attribute, and</li>
+                <li>one based on the cell-level <code>@rend</code> attribute.</li>
+                <li>one to four, based on the position of the cell in the table; the following classes can appear:
+                        for data-cells: <code>cellTop cellRight cellBottom cellLeft</code>;
+                        for header-cells: <code>cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft</code>.</li>
+            </ol>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="cell-rend">
 
         <xsl:variable name="class">
@@ -310,51 +332,127 @@
 
 
     <xd:doc>
-        <xd:short>Double-up a table.</xd:short>
+        <xd:short>Determine the class to apply to a row.</xd:short>
         <xd:detail>
-            <p>Render a table in doubled-up format, that is, using double the number of
-            columns and half the number of rows; repeating the heading-rows on top.
-            Note that this may fail if rows are spanned. The case of an odd number
-            of data-rows is handled (the last row will just be half-filled.)</p>
+            <p>Determine the class to apply to a row. This is based on the <code>@role</code> attribute and the class
+            indicated in the <code>@rend</code> attribute.</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="doubleup-table">
+    <xsl:function name="f:determine-row-class" as="xs:string">
+        <xsl:param name="node" as="node()"/>
 
-        <!-- Get labels and units first (simplified model, see template normal-table for more complex situation -->
-        <xsl:variable name="headers" select="*[not(preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')])]"/>
+        <xsl:variable name="class">
+            <xsl:if test="$node/@role and not($node/@role='data')">
+                <xsl:value-of select="$node/@role"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells; however, we do extract the explicitly named class. -->
+            <xsl:if test="contains($node/@rend, 'class(')">
+                <xsl:value-of select="substring-before(substring-after($node/@rend, 'class('), ')')"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
+        </xsl:variable>
+
+        <xsl:value-of select="normalize-space($class)"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>N-up a table.</xd:short>
+        <xd:detail>
+            <p>Render a table in n-up format, that is, using n times the number of
+            columns and 1/n-th the number of rows; repeating the heading-rows on top.
+            Note that this may fail if rows are spanned. The case of number
+            of data-rows not divisible by n is handled (the last column will just be partially-filled.)</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="n-up-table">
+
+        <xsl:variable name="n" as="xs:integer">
+            <xsl:value-of select="number(substring-before(substring-after(@rend, 'columns('), ')'))"/>
+        </xsl:variable>
+
+        <xsl:variable name="item-order">
+            <xsl:value-of select="substring-before(substring-after(@rend, 'item-order('), ')')"/>
+        </xsl:variable>
+
+        <!-- Get labels and units first (simplified model, see templates dealing with a normal-table for more complex situation). -->
+        <xsl:variable name="headers" select="row[not(preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')])]"/>
 
         <!-- Get remainder of data  -->
-        <xsl:variable name="rows" select="*[preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')]]"/>
-        <xsl:variable name="halfway" select="ceiling(count($rows) div 2)"/>
-        <xsl:variable name="rows1" select="$rows[position() &lt; $halfway + 1]"/>
-        <xsl:variable name="rows2" select="$rows[position() &gt; $halfway]"/>
+        <xsl:variable name="rows" select="row[preceding-sibling::row[not(@role='label' or @role='unit')] or self::row[not(@role='label' or @role='unit')]]"/>
+
+        <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
 
         <table>
+            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+
+            <!-- ePub3 doesn't like summaries on tables -->
+            <xsl:if test="contains(@rend, 'summary(') and $outputformat != 'epub'">
+                <xsl:attribute name="summary">
+                    <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
+                </xsl:attribute>
+            </xsl:if>
+
             <xsl:if test="$headers">
-                <!-- Set headers twice -->
+                <!-- Repeat headers n times -->
                 <thead>
-                    <xsl:for-each select="$headers">
+                    <xsl:for-each select="1 to count($headers)">
+                        <xsl:variable name="headerRow" select="."/>
                         <tr>
-                            <xsl:apply-templates select="./cell"/>
-                            <xsl:apply-templates select="./cell"/>
+                            <xsl:if test="f:determine-row-class($headers[$headerRow]) != ''">
+                                <xsl:attribute name="class"><xsl:value-of select="f:determine-row-class($headers[$headerRow])"/></xsl:attribute>
+                            </xsl:if>
+
+                            <xsl:for-each select="1 to $n">
+                                <xsl:variable name="i" select="."/>
+                                <xsl:for-each select="$headers[$headerRow]/cell">
+                                    <!-- Insert a dummy cell between doubled-up columns -->
+                                    <xsl:if test="$i &gt; 1 and position() = 1">
+                                        <td class="cellDoubleUp"/>
+                                    </xsl:if>
+                                    <xsl:apply-templates select="."/>
+                                </xsl:for-each>
+                            </xsl:for-each>
                         </tr>
                     </xsl:for-each>
                 </thead>
             </xsl:if>
 
-            <!-- Take data from each half -->
+            <!-- Take data from each part -->
             <tbody>
-                <xsl:for-each select="$rows1">
-                    <xsl:variable name="position" select="position()"/>
-                    <tr>
-                        <xsl:apply-templates select="./cell"/>
-                        <xsl:apply-templates select="$rows2[$position]/cell"/>
-                    </tr>
-                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="$item-order = 'row-first'">
+                        <xsl:for-each-group select="$rows" group-by="(position() - 1) idiv $n">
+                            <tr>
+                                <xsl:for-each select="current-group()/cell">
+                                    <!-- Insert a dummy cell between doubled-up columns -->
+                                    <xsl:if test="position() &gt; 1 and count(./preceding-sibling::*) = 0">
+                                        <td class="cellDoubleUp"/>
+                                    </xsl:if>
+                                    <xsl:apply-templates select="."/>
+                                </xsl:for-each>
+                            </tr>
+                        </xsl:for-each-group>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each-group select="$rows" group-by="(position() - 1) mod $rowCount">
+                            <tr>
+                                <xsl:for-each select="current-group()/cell">
+                                    <!-- Insert a dummy cell between doubled-up columns -->
+                                    <xsl:if test="position() &gt; 1 and count(./preceding-sibling::*) = 0">
+                                        <td class="cellDoubleUp"/>
+                                    </xsl:if>
+                                    <xsl:apply-templates select="."/>
+                                </xsl:for-each>
+                            </tr>
+                        </xsl:for-each-group>
+                    </xsl:otherwise>
+                </xsl:choose>
             </tbody>
         </table>
     </xsl:template>
-
 
 </xsl:stylesheet>

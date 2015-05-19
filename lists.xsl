@@ -66,12 +66,12 @@
         <xsl:variable name="columns" as="xs:integer">
             <xsl:value-of select="number(substring-before(substring-after(@rend, 'columns('), ')'))"/>
         </xsl:variable>
-        <xsl:variable name="row-order">
+        <xsl:variable name="item-order">
             <xsl:value-of select="substring-before(substring-after(@rend, 'item-order('), ')')"/>
         </xsl:variable>
 
         <xsl:choose>
-            <xsl:when test="$row-order = 'row-first'">
+            <xsl:when test="$item-order = 'row-first'">
                 <xsl:call-template name="splitlist-rows">
                     <xsl:with-param name="columns" select="$columns"/>
                 </xsl:call-template>

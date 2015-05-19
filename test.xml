@@ -466,6 +466,120 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
 </p>
 
 
+<p>Setting a table in 3-up format, by using rend="columns(3)". This makes it possible to set
+tables more compactly when they are tall and narrow. Note that the border-lines at the bottom are not always
+correctly drawn.</p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row role="label">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+    </row>
+    <row role="unit">
+        
+        <cell></cell>
+        <cell>kg</cell>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+    <row>
+        <cell>5</cell>
+        <cell>Oranges</cell>
+        <cell>2.4</cell>
+    </row>
+    <row>
+        <cell>6</cell>
+        <cell>Strawberries</cell>
+        <cell>1.0</cell>
+    </row>
+    <row>
+        <cell>7</cell>
+        <cell>Cherries</cell>
+        <cell>4.0</cell>
+    </row>
+</table>
+</p>
+
+<p>The same table once more, now using item-order(row-first):</p>
+
+<p>
+<table rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center) item-order(row-first)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row role="label">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+    </row>
+    <row role="unit">
+        
+        <cell></cell>
+        <cell>kg</cell>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+    <row>
+        <cell>5</cell>
+        <cell>Oranges</cell>
+        <cell>2.4</cell>
+    </row>
+    <row>
+        <cell>6</cell>
+        <cell>Strawberries</cell>
+        <cell>1.0</cell>
+    </row>
+    <row>
+        <cell>7</cell>
+        <cell>Cherries</cell>
+        <cell>4.0</cell>
+    </row>
+</table>
+</p>
+
+
+
 <p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.</p>
 
 <p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>

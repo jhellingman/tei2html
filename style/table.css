@@ -120,4 +120,12 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight {
 	border-right: 2px solid black;
 }
 
+
+/* Cell inserted when tables are doubled-up, to separate the columns */
+.cellDoubleUp {
+    border: 0px solid black !important;
+    width: 1em;
+}
+
+
 /* End of table.css */
