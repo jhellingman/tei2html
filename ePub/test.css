@@ -1,76 +1,63 @@
  
 
-body
-{
+body {
  font-family: "Times New Roman", Times, serif;
  font-size: 100%;
  line-height: 1.2em;
  text-align: left;
 }
 
-.div0
-{
+.div0 {
  padding-top: 5.6em;
 }
 
-.div1
-{
+.div1 {
  padding-top: 4.8em;
 }
 
-.div2
-{
+.div2 {
  padding-top: 3.6em;
 }
 
-.div3, .div4, .div5
-{
+.div3, .div4, .div5 {
  padding-top: 2.4em;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4
-{
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
  clear: both;
  font-style: normal;
  text-transform: none;
 }
 
-h3, .h3
-{
- font-size:1.2em;
- line-height:1.2em;
+h3, .h3 {
+ font-size: 1.2em;
+ line-height: 1.2em;
 }
 
-h3.label
-{
+h3.label {
  font-size: 1em;
  line-height: 1.2em;
  margin-bottom: 0;
 }
 
-h4, .h4
-{
+h4, .h4 {
  font-size: 1em;
  line-height: 1.2em;
 }
 
-.alignleft
-{
+.alignleft {
  text-align: left;
 }
 
-.alignright
-{
+.alignright {
  text-align: right;
 }
 
-.alignblock
-{
+.alignblock {
  text-align: justify;
 }
 
-p.tb, hr.tb, .par.tb
-{
+p.tb, hr.tb, .par.tb {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
  margin-left: auto;
@@ -79,80 +66,71 @@ p.tb, hr.tb, .par.tb
 }
 
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument
-{
+ {
  font-size: 0.9em;
  line-height: 1.2em;
  text-indent: 0;
 }
 
-p.argument, p.tocArgument, .par.argument, .par.tocArgument
-{
+p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  margin: 1.58em 10%;
 }
 
-.opener, .address
-{
+.opener, .address {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
 }
 
-.addrline
-{
+.addrline {
  margin-top: 0;
  margin-bottom: 0;
 }
 
-.dateline
-{
+.dateline {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
  text-align: right;
 }
 
-.salute
-{
+.salute {
  margin-top: 1.6em;
  margin-left: 3.58em;
  text-indent: -2em;
 }
 
-.signed
-{
+.signed {
  margin-top: 1.6em;
  margin-left: 3.58em;
  text-indent: -2em;
 }
 
-.epigraph
-{
- font-size:0.9em;
- line-height:1.2em;
+.epigraph {
+ font-size: 0.9em;
+ line-height: 1.2em;
  width: 60%;
  margin-left: auto;
 }
 
-.epigraph span.bibl
-{
+.epigraph span.bibl {
  display: block;
  text-align: right;
 }
 
-.trailer
-{
+.trailer {
  clear: both;
  padding-top: 2.4em;
  padding-bottom: 1.6em;
 }
 
  
-span.parnum
-{
+
+span.parnum {
  font-weight: bold;
 }
 
  
-.pagenum
-{
+
+.pagenum {
  display: inline;
  font-size: 70%;
  font-style: normal;
@@ -163,68 +141,57 @@ span.parnum
  text-align: right;
 }
 
-span.corr, span.gap
-{
+span.corr, span.gap {
  border-bottom: 1px dotted red;
 }
 
-span.abbr
-{
+span.abbr {
  border-bottom: 1px dotted gray;
 }
 
-span.measure
-{
+span.measure {
  border-bottom: 1px dotted green;
 }
 
  
 
-.ex
-{
+.ex {
  letter-spacing: 0.2em;
 }
 
-.sc
-{
+.sc {
  font-variant: small-caps;
 }
 
-.uc
-{
+.uc {
  text-transform: uppercase;
 }
 
-.tt
-{
+.tt {
  font-family: monospace;
 }
 
-.underline
-{
+.underline {
  text-decoration: underline;
 }
 
  
-.overline, .overtilde
-{
+
+.overline, .overtilde {
  text-decoration: overline;
 }
 
-.rm
-{
+.rm {
  font-style: normal;
 }
 
-.red
-{
+.red {
  color: red;
 }
 
  
 
-hr
-{
+hr {
  clear: both;
  height: 1px;
  margin-left: auto;
@@ -234,58 +201,48 @@ hr
  width: 45%;
 }
 
-.aligncenter
-{
+.aligncenter {
  text-align: center;
 }
 
-h1, h2
-{
- font-size:1.44em;
- line-height:1.5em;
+h1, h2 {
+ font-size: 1.44em;
+ line-height: 1.5em;
 }
 
-h1.label, h2.label
-{
- font-size:1.2em;
- line-height:1.2em;
- margin-bottom:0;
+h1.label, h2.label {
+ font-size: 1.2em;
+ line-height: 1.2em;
+ margin-bottom: 0;
 }
 
-h5, h6
-{
- font-size:1em;
- font-style:italic;
- line-height:1em;
+h5, h6 {
+ font-size: 1em;
+ font-style: italic;
+ line-height: 1em;
 }
 
-p, .par
-{
- text-indent:0;
+p, .par {
+ text-indent: 0;
 }
 
-p.firstlinecaps:first-line, .par.firstlinecaps:first-line
-{
+p.firstlinecaps:first-line, .par.firstlinecaps:first-line {
  text-transform: uppercase;
 }
 
-.hangq
-{
+.hangq {
  text-indent: -0.32em;
 }
 
-.hangqq
-{
+.hangqq {
  text-indent: -0.40em;
 }
 
-.hangqqq
-{
+.hangqqq {
  text-indent: -0.71em;
 }
 
-p.dropcap:first-letter, .par.dropcap:first-letter
-{
+p.dropcap:first-letter, .par.dropcap:first-letter {
  float: left;
  clear: left;
  margin: 0em 0.05em 0 0;
@@ -295,25 +252,21 @@ p.dropcap:first-letter, .par.dropcap:first-letter
  vertical-align: super;
 }
 
-p.quote, div.blockquote, div.argument, .par.quote
-{
+p.quote, div.blockquote, div.argument, .par.quote {
  font-size: 0.9em;
  line-height: 1.2em;
  margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden
-{
+.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden {
  text-decoration: none;
 }
 
-ul
-{ 
- list-style-type: none; 
+ul {
+ list-style-type: none;
 }
 
-.advertisment
-{
+.advertisment {
  background-color: #FFFEE0;
  border: black 1px dotted;
  color: #000;
@@ -323,88 +276,75 @@ ul
 
  
 
-.footnotes .body,
-.footnotes .div1
-{
+.footnotes .body, .footnotes .div1 {
  padding: 0;
 }
 
  
-.fnarrow
-{
+.fnarrow {
  color: #AAAAAA;
  font-weight: bold;
  text-decoration: none;
 }
 
-a.noteref, a.pseudonoteref
-{
+a.noteref, a.pseudonoteref {
  font-size: 80%;
  text-decoration: none;
  vertical-align: 0.25em;
 }
 
-.displayfootnote
-{
+.displayfootnote {
  display: none;
 }
 
-div.footnotes
-{
+div.footnotes {
  font-size: 80%;
  margin-top: 1em;
  padding: 0;
 }
 
-hr.fnsep
-{
+hr.fnsep {
  margin-left: 0;
  margin-right: 0;
  text-align: left;
  width: 25%;
 }
 
-p.footnote, .par.footnote
-{
+p.footnote, .par.footnote {
  margin-bottom: 0.5em;
  margin-top: 0.5em;
 }
 
-p.footnote .label, .par.footnote .label
-{
- float:left;
- width:2em;
- height:12pt;
- display:block;
+p.footnote .label, .par.footnote .label {
+ float: left;
+ width: 2em;
+ height: 12pt;
+ display: block;
 }
 
-.marginnote
-{
- font-size:0.8em;
- height:0;
- left:1%;
- line-height:1.2em;
- position:absolute;
- text-indent:0;
- width:14%;
+.marginnote {
+ font-size: 0.8em;
+ height: 0;
+ left: 1%;
+ line-height: 1.2em;
+ position: absolute;
+ text-indent: 0;
+ width: 14%;
 }
 
-.apparatusnote
-{
+.apparatusnote {
  text-decoration: none;
 }
 
  
 
-span.tocPageNum, span.flushright
-{
+span.tocPageNum, span.flushright {
  position: absolute;
  right: 16%;
  top: auto;
 }
 
-table.tocList
-{
+table.tocList {
  width: 100%;
  margin-left: auto;
  margin-right: auto;
@@ -412,62 +352,60 @@ table.tocList
  border-collapse: collapse;
 }
 
-td.tocPageNum, td.tocDivNum
-{
+td.tocPageNum, td.tocDivNum {
  text-align: right;
  width: 10%;
  border-width: 0;
 }
 
-td.tocDivNum
-{
+td.tocDivNum {
  padding-left: 0;
  padding-right: 0.5em;
 }
 
-td.tocPageNum
-{
+td.tocPageNum {
  padding-left: 0.5em;
  padding-right: 0;
 }
 
-td.tocDivTitle
-{
+td.tocDivTitle {
  width: auto;
 }
 
-p.tocPart, .par.tocPart
-{
+p.tocPart, .par.tocPart {
  margin: 1.58em 0%;
  font-variant: small-caps;
 }
 
-p.tocChapter, .par.tocChapter
-{
+p.tocChapter, .par.tocChapter {
  margin: 1.58em 0%;
 }
 
-p.tocSection, .par.tocSection
-{
- margin:0.7em 5%;
+p.tocSection, .par.tocSection {
+ margin: 0.7em 5%;
+}
+
+table.tocList td {
+ vertical-align: top;
+}
+
+table.tocList td.tocPageNum {
+ vertical-align: bottom;
 }
 
  
 
-.index
-{
+.index {
  font-size: 80%;
 }
 
-.indextoc
-{
+.indextoc {
  text-align: center;
 }
 
  
 
-.transcribernote
-{
+.transcribernote {
  background-color: #DDE;
  border: black 1px dotted;
  color: #000;
@@ -477,191 +415,159 @@ p.tocSection, .par.tocSection
  padding: 1em;
 }
 
-.correctiontable
-{
+.correctiontable {
  width: 75%;
 }
 
-.width20
-{
+.width20 {
  width: 20%;
 }
 
-.width40
-{
+.width40 {
  width: 40%;
 }
 
-p.smallprint, li.smallprint, .par.smallprint
-{
+p.smallprint, li.smallprint, .par.smallprint {
  color: #666666;
  font-size: 80%;
 }
 
- 
- 
+  
 
-.titlePage
-{
+.titlePage {
  border: #DDDDDD 2px solid;
  margin: 3em 0% 7em 0%;
  padding: 5em 10% 6em 10%;
  text-align: center;
 }
 
-.titlePage .docTitle
-{
+.titlePage .docTitle {
  line-height: 3.5em;
  margin: 2em 0% 2em 0%;
  font-weight: bold;
 }
 
-.titlePage .docTitle .mainTitle
-{
+.titlePage .docTitle .mainTitle {
  font-size: 1.8em;
 }
 
-.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle, .titlePage .docTitle .volumeTitle
-{
+.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle,
+ .titlePage .docTitle .volumeTitle {
  font-size: 1.44em;
 }
 
-.titlePage .byline
-{
+.titlePage .byline {
  margin: 2em 0% 2em 0%;
- font-size:1.2em;
- line-height:1.72em;
+ font-size: 1.2em;
+ line-height: 1.72em;
 }
 
-.titlePage .byline .docAuthor
-{
+.titlePage .byline .docAuthor {
  font-size: 1.2em;
  font-weight: bold;
 }
 
-.titlePage .figure
-{
+.titlePage .figure {
  margin: 2em 0% 2em 0%;
  margin-left: auto;
  margin-right: auto;
 }
 
-.titlePage .docImprint
-{
+.titlePage .docImprint {
  margin: 4em 0% 0em 0%;
  font-size: 1.2em;
  line-height: 1.72em;
 }
 
-.titlePage .docImprint .docDate
-{
+.titlePage .docImprint .docDate {
  font-size: 1.2em;
  font-weight: bold;
 }
 
- 
- 
+  
 
-div.figure
-{
+div.figure {
  text-align: center;
 }
 
-.figure
-{
+.figure {
  margin-left: auto;
  margin-right: auto;
 }
 
-.floatLeft
-{
+.floatLeft {
  float: left;
  margin: 10px 10px 10px 0;
 }
 
-.floatRight
-{
+.floatRight {
  float: right;
  margin: 10px 0 10px 10px;
 }
 
-p.figureHead, .par.figureHead
-{
+p.figureHead, .par.figureHead {
  font-size: 100%;
  text-align: center;
 }
 
-.figAnnotation
-{
+.figAnnotation {
  font-size: 80%;
  position: relative;
  margin: 0 auto; 
 }
 
-.figTopLeft, .figBottomLeft
-{
+.figTopLeft, .figBottomLeft {
  float: left;
 }
 
-.figTop, .figBottom
-{
+.figTop, .figBottom {
+ 
 }
 
-.figTopRight, .figBottomRight
-{
+.figTopRight, .figBottomRight {
  float: right;
 }
 
-.figure p, .figure .par
-{
+.figure p, .figure .par {
  font-size: 80%;
  margin-top: 0;
  text-align: center;
 }
 
-img
-{
+img {
  border-width: 0;
 }
 
-td.galleryFigure
-{
+td.galleryFigure {
  text-align: center;
  vertical-align: middle;
 }
 
-td.galleryCaption
-{
+td.galleryCaption {
  text-align: center;
  vertical-align: top;
 }
 
- 
- 
+  
 
-tr, td, th
-{
+tr, td, th {
  vertical-align: top;
 }
 
-td.bottom
-{
+td.bottom {
  vertical-align: bottom;
 }
 
-td.label, tr.label td
-{
+td.label, tr.label td {
  font-weight: bold;
 }
 
-td.unit, tr.unit td
-{
+td.unit, tr.unit td {
  font-style: italic;
 }
 
-span.sum
-{
- padding-top: 2px; 
+span.sum {
+ padding-top: 2px;
  border-top: solid black 1px;
 }
 
@@ -669,112 +575,94 @@ span.sum
 
  
 
-table.borderOutside
-{
+table.borderOutside {
  border-collapse: collapse;
 }
 
-table.borderOutside td
-{
+table.borderOutside td {
  padding-left: 4px;
  padding-right: 4px;
 }
 
-table.borderOutside .cellHeadTop, table.borderOutside .cellTop
-{
+table.borderOutside .cellHeadTop, table.borderOutside .cellTop {
  border-top: 2px solid black;
 }
 
-table.borderOutside .cellHeadBottom
-{
+table.borderOutside .cellHeadBottom {
  border-bottom: 1px solid black;
 }
 
-table.borderOutside .cellBottom
-{
+table.borderOutside .cellBottom {
  border-bottom: 2px solid black;
 }
 
-table.borderOutside .cellLeft, table.borderOutside .cellHeadLeft
-{
+table.borderOutside .cellLeft, table.borderOutside .cellHeadLeft {
  border-left: 2px solid black;
 }
 
-table.borderOutside .cellRight, table.borderOutside .cellHeadRight
-{
+table.borderOutside .cellRight, table.borderOutside .cellHeadRight {
  border-right: 2px solid black;
 }
 
  
 
-table.verticalBorderInside
-{
+table.verticalBorderInside {
  border-collapse: collapse;
 }
 
-table.verticalBorderInside td
-{
+table.verticalBorderInside td {
  padding-left: 4px;
  padding-right: 4px;
  border-left: 1px solid black;
 }
 
 table.verticalBorderInside .cellHeadTop, table.verticalBorderInside .cellTop
-{
+ {
  border-top: 2px solid black;
 }
 
-table.verticalBorderInside .cellHeadBottom
-{
+table.verticalBorderInside .cellHeadBottom {
  border-bottom: 1px solid black;
 }
 
-table.verticalBorderInside .cellBottom
-{
+table.verticalBorderInside .cellBottom {
  border-bottom: 2px solid black;
 }
 
 table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft
-{
+ {
  border-left: 0px solid black;
 }
 
  
 
-table.borderAll
-{
+table.borderAll {
  border-collapse: collapse;
 }
 
-table.borderAll td
-{
+table.borderAll td {
  padding-left: 4px;
  padding-right: 4px;
  border: 1px solid black;
 }
 
-table.borderAll .cellHeadTop, table.borderAll .cellTop
-{
+table.borderAll .cellHeadTop, table.borderAll .cellTop {
  border-top: 2px solid black;
 }
 
-table.borderAll .cellHeadBottom
-{
+table.borderAll .cellHeadBottom {
  border-bottom: 1px solid black;
 }
 
-table.borderAll .cellBottom
-{
+table.borderAll .cellBottom {
  border-bottom: 2px solid black;
 }
 
-table.borderAll .cellLeft, table.borderAll .cellHeadLeft
-{
+table.borderAll .cellLeft, table.borderAll .cellHeadLeft {
  border-left: 2px solid black;
 }
 
-table.borderAll .cellRight, table.borderAll .cellHeadRight
-{
+table.borderAll .cellRight, table.borderAll .cellHeadRight {
  border-right: 2px solid black;
 }
 
@@ -782,26 +670,22 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight
 
  
 
-.lgouter
-{
+.lgouter {
  margin-left: auto;
  margin-right: auto;
- display:table; 
+ display: table; 
 }
 
-.lg
-{
+.lg {
  text-align: left;
  padding: .5em 0% .5em 0%;
 }
 
-.lg h4, .lgouter h4
-{
+.lg h4, .lgouter h4 {
  font-weight: normal;
 }
 
-.lg .lineNum, .sp .lineNum, .lgouter .lineNum
-{
+.lg .lineNum, .sp .lineNum, .lgouter .lineNum {
  color: #777;
  font-size: 90%;
  left: 16%;
@@ -813,147 +697,118 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight
  width: 1.75em;
 }
 
-p.line, .par.line
-{
+p.line, .par.line {
  margin: 0 0% 0 0%;
 }
 
-span.hemistich 
-{
+span.hemistich {
+ 
  color: white;
 }
 
-.versenum
-{
- font-weight:bold;
+.versenum {
+ font-weight: bold;
 }
-
 
  
 
-.speaker
-{
+.speaker {
  font-weight: bold;
  margin-bottom: 0.4em;
 }
 
-.sp .line
-{
+.sp .line {
  margin: 0 10%;
  text-align: left;
 }
 
-.castlist, .castitem
-{
+.castlist, .castitem {
  list-style-type: none;
 }
 
+  
 
- 
- 
-
-table.alignedtext, table.alignedverse
-{
+table.alignedtext, table.alignedverse {
  border-collapse: collapse;
 }
 
-table.alignedtext td
-{
+table.alignedtext td {
  vertical-align: top;
  width: 50%;
 }
 
-table.alignedverse
-{
+table.alignedverse {
  vertical-align: top;
 }
 
-table.alignedtext td.first, table.alignedverse td.first
-{
+table.alignedtext td.first, table.alignedverse td.first {
  border-width: 0 0.2px 0 0;
  border-color: gray;
  border-style: solid;
  padding-right: 10px;
 }
 
-table.alignedtext td.second, table.alignedverse td.second
-{
+table.alignedtext td.second, table.alignedverse td.second {
  padding-left: 10px;
 }
 
-table.alignedverse td.first, table.alignedverse td.second
-{
+table.alignedverse td.first, table.alignedverse td.second {
  width: 45%;
 }
 
-table.alignedverse td.lineNumbers
-{
+table.alignedverse td.lineNumbers {
  width: 10%;
 }
 
- 
- 
+  
 
-.epub-media-overlay-active
-{
+.epub-media-overlay-active {
  background-color: yellow;
-}
-
-body
-{
+}body {
  background: #FFFFFF;
  font-family: "Times New Roman", Times, serif;
 }
 
-body, a.hidden
-{
+body, a.hidden {
  color: black;
 }
 
-.titlePage
-{
+.titlePage {
  color: #001FA4;
  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4
-{
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
  color: #001FA4;
  font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-p.byline
-{
+p.byline {
  font-style: italic;
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum, .stage
-{
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum,
+ .stage {
  color: #001FA4;
 }
 
-.rightnote, .pagenum, .linenum, .pagenum a
-{
+.rightnote, .pagenum, .linenum, .pagenum a {
  color: #AAAAAA;
 }
 
-a.hidden:hover, a.noteref:hover
-{
+a.hidden:hover, a.noteref:hover {
  color: red;
 }
 
-p.dropcap:first-letter
-{
+p.dropcap:first-letter {
  color: #001FA4;
  font-weight: bold;
 }
 
-sub, sup 
-{ 
+sub, sup {
  line-height: 0;
 }
-
 body
 {
  padding: 1.58em 16%;
@@ -1146,23 +1001,33 @@ list-style-type:upper-roman;
 list-style-type:lower-roman;
 }
 
-.xd25e989
+.xd25e968
+{
+list-style-type:disc;
+}
+
+.xd25e991
+{
+list-style-type:disc;
+}
+
+.xd25e1035
 {
 text-align:left;
 }
 
-.xd25e992
+.xd25e1038
 {
 text-align:right;
 }
 
-.xd25e994
+.xd25e1040
 {
 text-align:center;
 }
 
 
-.xd25e996
+.xd25e1042
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1170,7 +1035,7 @@ text-align:center;
     
 }
 
-.xd25e996init
+.xd25e1042init
 {
     float: left;
     width: 90px;
@@ -1185,57 +1050,57 @@ text-align:center;
 }
 
         
-.xd25e1000
+.xd25e1046
 {
 text-align:justify;
 }
 
-.xd25e1015
+.xd25e1061
 {
 text-align:center;
 }
 
-.xd25e1024
+.xd25e1070
 {
 text-align:center;
 }
 
-.xd25e1029
+.xd25e1075
 {
 text-indent:1em;
 }
 
-.xd25e1035
+.xd25e1081
 {
 text-indent:2em;
 }
 
-.xd25e1039
+.xd25e1085
 {
 text-indent:3em;
 }
 
-.xd25e1043
+.xd25e1089
 {
 text-indent:10em;
 }
 
-.xd25e1045
+.xd25e1091
 {
 font-style:italic;
 }
 
-.xd25e1137
+.xd25e1183
 {
 font-style:italic;
 }
 
-.xd25e1148
+.xd25e1194
 {
 display:none;
 }
 
-.xd25e1179
+.xd25e1225
 {
 display:none;
 }
@@ -1243,13 +1108,13 @@ display:none;
 {
 
 
-.xd25e996
+.xd25e1042
 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd25e996init
+.xd25e1042init
 {
     float: none;
     width: auto;

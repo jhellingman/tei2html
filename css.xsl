@@ -225,6 +225,7 @@
             <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
             <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
             <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
+            <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
             <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
             <xsl:when test="$property='position'"/>             <!-- position in text -->
             <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->

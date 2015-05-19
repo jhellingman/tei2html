@@ -628,6 +628,8 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
 </list>
 
 
+
+
 <list rend="columns(2)" type="ordered" lang="nl">
     <item>Een</item>
     <item>Twee</item>
@@ -642,7 +644,7 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
     <item>Acht</item>
 </list>
 
-<p>A list with lower case roman numerals:</p>
+<p>A list with lower case roman numerals, using the n-attribute to set the number value.:</p>
 
 <list rend="list-style-type(lower-roman)" type="ordered" lang="nl">
     <item>Een</item>
@@ -660,6 +662,36 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
     <item>Vier</item>
 </list>
 
+
+<p>Similarly, we can split it in three columns as well, using columns(3).</p>
+
+<list rend="columns(3) list-style-type(disc)">
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+    <item>Four</item>
+    <item>Five</item>
+    <item>Six</item>
+    <item>Seven</item>
+    <item>Eight</item>
+    <item>Nine</item>
+    <item>Ten</item>
+</list>
+
+<p>And in a different order, by using item-order(row-first).</p>
+
+<list rend="columns(3) item-order(row-first) list-style-type(disc)">
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+    <item>Four</item>
+    <item>Five</item>
+    <item>Six</item>
+    <item>Seven</item>
+    <item>Eight</item>
+    <item>Nine</item>
+    <item>Ten</item>
+</list>
 
 <div3>
 <head>Division at Level 3</head>
