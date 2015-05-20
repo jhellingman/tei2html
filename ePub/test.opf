@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2015-05-19T21:48:14Z</meta>
+      <meta property="dcterms:modified">2015-05-20T19:05:45Z</meta>
       <dc:identifier id="pgnum">http://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -44,16 +44,20 @@
             media-type="application/xhtml+xml"/>
       <item id="css" href="test.css" media-type="text/css"/>
       <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
-      <item id="front-2" href="test-front-2.xhtml" media-type="application/xhtml+xml"/>
+      <item id="frontmatter-2" href="test-frontmatter-2.xhtml"
+            media-type="application/xhtml+xml"/>
       <item id="bk1-1" href="test-bk1-1.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch1" href="test-ch1.xhtml" media-type="application/xhtml+xml"
             media-overlay="ch1overlay"/>
       <item id="ch2" href="test-ch2.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch3" href="test-ch3.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch05-1" href="test-ch05-1.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch05-3" href="test-ch05-3.xhtml" media-type="application/xhtml+xml"/>
-      <item id="bk1-3" href="test-bk1-3.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch03" href="test-ch03.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch04-1" href="test-ch04-1.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch04-3" href="test-ch04-3.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch05" href="test-ch05.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch07" href="test-ch07.xhtml" media-type="application/xhtml+xml"/>
+      <item id="bk1-3" href="test-bk1-3.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch08" href="test-ch08.xhtml" media-type="application/xhtml+xml"/>
       <item id="alignFirst" href="test-alignFirst.xhtml" media-type="application/xhtml+xml"/>
       <item id="alignSecond" href="test-alignSecond.xhtml"
             media-type="application/xhtml+xml"/>
@@ -66,9 +70,9 @@
       <item id="xd25e165" href="images/hg2101.png" media-type="image/png"/>
       <item id="test" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="tarsier1" href="images/tarsier.jpg" media-type="image/jpeg"/>
-      <item id="xd25e333" href="images/Ornament.gif" media-type="image/gif"/>
-      <item id="xd25e556" href="images/bracket3.gif" media-type="image/gif"/>
-      <item id="xd25e1182" href="images/initial-A.gif" media-type="image/gif"/>
+      <item id="xd25e388" href="images/initial-A.gif" media-type="image/gif"/>
+      <item id="xd25e454" href="images/Ornament.gif" media-type="image/gif"/>
+      <item id="xd25e692" href="images/bracket3.gif" media-type="image/gif"/>
       <item id="test1wrapper" href="test-test1.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch1overlay" href="test.smil" media-type="application/smil+xml"/>
       <item id="xd127e11" href="audio/test.mp3" media-type="audio/mpeg"/>
@@ -79,15 +83,18 @@
    </manifest>
    <spine toc="ncx">
       <itemref linear="no" idref="cover"/>
-      <itemref linear="yes" idref="front-2"/>
+      <itemref linear="yes" idref="frontmatter-2"/>
       <itemref linear="yes" idref="bk1-1"/>
       <itemref linear="yes" idref="ch1"/>
       <itemref linear="yes" idref="ch2"/>
-      <itemref linear="yes" idref="ch3"/>
-      <itemref linear="yes" idref="ch05-1"/>
-      <itemref linear="yes" idref="ch05-3"/>
-      <itemref linear="yes" idref="bk1-3"/>
+      <itemref linear="yes" idref="ch03"/>
+      <itemref linear="yes" idref="ch04-1"/>
+      <itemref linear="yes" idref="ch04-3"/>
+      <itemref linear="yes" idref="ch05"/>
       <itemref linear="yes" idref="ch6"/>
+      <itemref linear="yes" idref="ch07"/>
+      <itemref linear="yes" idref="bk1-3"/>
+      <itemref linear="yes" idref="ch08"/>
       <itemref linear="yes" idref="alignFirst"/>
       <itemref linear="yes" idref="alignSecond"/>
       <itemref linear="yes" idref="alignThird"/>
@@ -98,10 +105,10 @@
    </spine>
    <guide>
       <reference type="cover" title="Cover Image" href="cover.xhtml"/>
-      <reference type="toc" title="Table of Contents" href="test-front-2.xhtml#toc"/>
-      <reference type="title-page" title="Title Page" href="test-front-2.xhtml#xd25e94"/>
+      <reference type="toc" title="Table of Contents" href="test-frontmatter-2.xhtml#toc"/>
+      <reference type="title-page" title="Title Page" href="test-frontmatter-2.xhtml#xd25e94"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk1-1.xhtml#bk1"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd25e1478"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd25e1506"/>
    </guide>
 </package>

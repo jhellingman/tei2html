@@ -839,47 +839,47 @@ body
 
         /* CSS rules generated from @rend attributes in TEI file */
         
-.xd25e410
+.xd25e546
 {
 text-align:right;
 }
 
-.xd25e584
+.xd25e720
 {
 color:red; background-color:yellow;
 }
 
-.xd25e585
+.xd25e721
 {
 color:green; text-align:right;
 }
 
-.xd25e586
+.xd25e722
 {
 color:blue; text-align:right;
 }
 
-.xd25e622
+.xd25e758
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd25e623
+.xd25e759
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd25e626
+.xd25e762
 {
 border-top:2px solid black;
 }
 
-.xd25e643
+.xd25e779
 {
 border-top:1px solid black;
 }
 
-.xd25e674
+.xd25e810
 {
 border-bottom:2px solid black;
 }
@@ -904,148 +904,23 @@ font-family:'Walbaum-Fraktur';
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd25e552
-{
-margin:0px auto; display:table;
-}
-
-.xd25e556
-{
-vertical-align:middle; width:2px;
-}
-
-.xd25e557
-{
-vertical-align:middle;
-}
-
-.xd25e567
-{
-margin-left:2em;
-}
-
-.xd25e569
-{
-width:25%;
-}
-
-.xd25e571
-{
-width:75%;
-}
-
-.xd25e581
-{
-width:40%; margin:0px auto; display:table;
-}
-
-.xd25e590
-{
-text-align:right;
-}
-
-.xd25e609
-{
-text-align:center;
-}
-
-.xd25e614
+.xd25e381
 {
 text-align:left;
 }
 
-.xd25e621
-{
-width:40%; border-collapse:collapse;
-}
-
-.xd25e687
-{
-margin:0px auto; display:table;
-}
-
-.xd25e758
-{
-margin:0px auto; display:table;
-}
-
-.xd25e918width
-{
-    width:80px;
-}
-            
-.xd25e923
-{
-width:100px;
-}
-
-.xd25e923width
-{
-    width:80px;
-}
-            
-.xd25e930width
-{
-    width:80px;
-}
-            
-.xd25e943width
-{
-    width:480px;
-}
-            
-.xd25e963width
-{
-    width:480px;
-}
-            
-.xd25e1013
-{
-font-style:italic;
-}
-
-.xd25e1044
-{
-list-style-type:disc;
-}
-
-.xd25e1074
-{
-list-style-type:upper-roman;
-}
-
-.xd25e1086
-{
-list-style-type:lower-roman;
-}
-
-.xd25e1108
-{
-list-style-type:disc;
-}
-
-.xd25e1131
-{
-list-style-type:disc;
-}
-
-.xd25e1175
-{
-text-align:left;
-}
-
-.xd25e1178
+.xd25e384
 {
 text-align:right;
 }
 
-.xd25e1180
+.xd25e386
 {
 text-align:center;
 }
 
 
-.xd25e1182
+.xd25e388
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -1053,7 +928,7 @@ text-align:center;
     
 }
 
-.xd25e1182init
+.xd25e388init
 {
     float: left;
     width: 90px;
@@ -1068,57 +943,182 @@ text-align:center;
 }
 
         
-.xd25e1186
+.xd25e392
 {
 text-align:justify;
 }
 
-.xd25e1201
+.xd25e407
 {
 text-align:center;
 }
 
-.xd25e1210
+.xd25e505
+{
+width:40%; margin:0px auto; display:table;
+}
+
+.xd25e511
+{
+text-align:right;
+}
+
+.xd25e688
+{
+margin:0px auto; display:table;
+}
+
+.xd25e692
+{
+vertical-align:middle; width:2px;
+}
+
+.xd25e693
+{
+vertical-align:middle;
+}
+
+.xd25e703
+{
+margin-left:2em;
+}
+
+.xd25e705
+{
+width:25%;
+}
+
+.xd25e707
+{
+width:75%;
+}
+
+.xd25e745
 {
 text-align:center;
 }
 
-.xd25e1215
+.xd25e750
+{
+text-align:left;
+}
+
+.xd25e757
+{
+width:40%; border-collapse:collapse;
+}
+
+.xd25e824
+{
+margin:0px auto; display:table;
+}
+
+.xd25e895
+{
+margin:0px auto; display:table;
+}
+
+.xd25e989width
+{
+    width:80px;
+}
+            
+.xd25e994
+{
+width:100px;
+}
+
+.xd25e994width
+{
+    width:80px;
+}
+            
+.xd25e1001width
+{
+    width:80px;
+}
+            
+.xd25e1013width
+{
+    width:480px;
+}
+            
+.xd25e1034width
+{
+    width:480px;
+}
+            
+.xd25e1062
+{
+font-style:italic;
+}
+
+.xd25e1093
+{
+list-style-type:disc;
+}
+
+.xd25e1123
+{
+list-style-type:upper-roman;
+}
+
+.xd25e1135
+{
+list-style-type:lower-roman;
+}
+
+.xd25e1157
+{
+list-style-type:disc;
+}
+
+.xd25e1180
+{
+list-style-type:disc;
+}
+
+.xd25e1240
+{
+text-align:center;
+}
+
+.xd25e1245
 {
 text-indent:1em;
 }
 
-.xd25e1221
+.xd25e1251
 {
 text-indent:2em;
 }
 
-.xd25e1225
+.xd25e1255
 {
 text-indent:3em;
 }
 
-.xd25e1229
+.xd25e1259
 {
 text-indent:10em;
 }
 
-.xd25e1231
+.xd25e1261
 {
 font-style:italic;
 }
 
-.xd25e1323
+.xd25e1344
 {
 font-style:italic;
 }
 
-.xd25e1334
+.xd25e1355
 {
 display:none;
 }
 
-.xd25e1365
+.xd25e1389
 {
 display:none;
 }
@@ -1126,13 +1126,13 @@ display:none;
 {
 
 
-.xd25e1182
+.xd25e388
 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd25e1182init
+.xd25e388init
 {
     float: none;
     width: auto;

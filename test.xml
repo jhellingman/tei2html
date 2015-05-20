@@ -86,7 +86,7 @@
       </revisionDesc>
    </teiHeader>
 <text>
-<front id="front">
+<front id="frontmatter">
 <div1 id="cover" type="Cover">
 
 
@@ -105,7 +105,7 @@
 <byline>by <lb/><docAuthor>Jeroen Hellingman</docAuthor></byline>
 
 <docImprint>Project Gutenberg
-<lb/><docDate rend="background-color(yellow)">2010</docDate>
+<lb/><docDate rend="background-color(yellow)">2010-2015</docDate>
 </docImprint>
 </titlePage>
 
@@ -116,18 +116,15 @@
 <div0 id="bk1" n="I" type="Book" rend="label(yes)">
 <head>Tei2html Test Document</head>
 
-<p>This is a test document, mainly intended to test<note n="1">Test of a footnote at the div0 level.</note> the features implemented in the tei2html <index level1="XSLT"/>XSLT stylesheets. This document serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my <index level1="Stylesheet"/>stylesheet (yes, I sometimes forget myself). </p>
+<p>This is a test document, mainly intended to test<note n="1">Test of a footnote at the div0 level.</note> the features implemented in the tei2html <index level1="XSLT"/>XSLT stylesheets. This document serves the dual purpose of helping me to develop new features, and act as a cheat-sheet to look up how certain things are achieved with my <index level1="Stylesheet"/>stylesheet (yes, I sometimes forget myself).</p>
 
 
 
-<div1 id="ch1" n="1" type="Chapter" rend="media-overlay(test.smil)">
-<head type="label">Chapter 1</head>
-<head>Text Styles</head>
+<div1 id="ch1" n="I" type="Chapter" rend="media-overlay(test.smil)">
+<head type="label">Chapter I</head>
+<head>Inline Text Elements</head>
 
-<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some
-<hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi>
-text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by
-a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table>
 <row><cell><hi>&quickbrown;</hi>    </cell><cell>Italic</cell></row>
@@ -139,11 +136,11 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
 
 <p id="loon">A sample of an embedded audio file (as audio overlay in ePub3 version only): The sound of a <hi>Loon</hi>, courtesy of the U.S. Fish and Wildlife Service.</p>
 
-<p>&lsquo;A sample of hanging punctuation.&rsquo;</p>
+<p>&lsquo;A sample of quotation marks.&rsquo;</p>
 
-<p>&ldquo;A sample of hanging punctuation<note><p>&ldquo;Note with hanging punctuation.&rdquo;</p></note>.&rdquo;</p>
+<p>&ldquo;A sample of hanging punctuation<note><p>&ldquo;Note with quotation marks.&rdquo;</p></note>.&rdquo;</p>
 
-<p>&ldquo;&lsquo;A sample of hanging punctuation.&rsquo;&rdquo;</p>
+<p>&ldquo;&lsquo;A sample of double quotation marks.&rsquo;&rdquo;</p>
 
 <lg>
     <l>&ldquo;Lines of verse</l>
@@ -151,49 +148,32 @@ a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We ca
     <l>Are shown here.&rdquo;</l>
 </lg>
 
-<p>&ldquo;<hi rend="bold">A sample of hanging punctuation.</hi>&rdquo;</p>
+<p>&ldquo;<hi rend="bold">A sample of quotation marks in bold, excluding the marks.</hi>&rdquo;</p>
 
-<p><hi rend="bold">&ldquo;A sample of hanging punctuation.&rdquo;</hi></p>
+<p><hi rend="bold">&ldquo;A sample of quotation marks in bold, including the marks.&rdquo;</hi></p>
 
-<p>Footnote test paragraph.
-First,<note>Note without paragraph.</note>
-second,<note><p>Note with just one paragraph.</p></note>
-third,<note><p>Note with two paragraphs.</p><p>Second paragraph.</p></note>
-fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third paragraph.</p></note>
-</p>
+<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation using class(hangq). &lorem;&rsquo;</p>
 
+<p rend="class(hangqq)">&ldquo;Test of hanging punctuation using class(hangqq). &lorem;&rdquo;</p>
 
-</div1>
-<div1 id="ch2" n="2" type="Chapter">
-<head type="label">Chapter 2</head>
-<head>Text Elements</head>
+<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation using class(hangqqq). &lorem;&rdquo;&rsquo;</p></q>
 
+<p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.</p>
 
+<p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
 
-
-<q rend="block"><text><body><div1><head>Section head in quoted material</head>
-
-<p>This is a <index level1="Paragraph"/>paragraph in quoted material<note>This is a <index level1="Footnote" level2="in quoted material"/>footnote in quoted material.</note> This paragraph contains a <index level1="Footnote"/>footnote, to verify correct handling of this convoluted situation during the transformation.</p>
-</div1></body></text></q>
+<p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
 
 
 <p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="http://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>.</p>
 
-</div1>
-<div1 id="ch3" type="Chapter" n="3" rend="label(yes)">
-<head>Footnotes<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note></head>
-
-<p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.</p>
-
-<p>Here we have a reference to a <ref target="n1">footnote</ref> in a following <ref target="ch05">chapter</ref>, and <ref target="inside-n1">element inside it</ref>.</p>
 
 
 </div1>
+<div1 id="ch2" n="II" type="Chapter">
+<head type="label">Chapter II</head>
+<head>Block-level Text Elements</head>
 
-
-<div1 id="ch05" n="5" type="Chapter" rend="label(no)">
-<head type="label" rend="image(images/Ornament.gif)">Chapter V</head>
-<head>Tables</head>
 
 <argument><p>This is the argument of this chapter, a block of text giving a short kind of index to the chapter.</p></argument>
 
@@ -206,9 +186,85 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
 </epigraph>
 
 
-<p>You may note the small <index level1="ornaments"/>ornament above the <index level1="Chapter headings"/>chapter heading, which is included using a <index level1="rend attribute"/>rend attribute on the head element of this chapter.</p>
+<p>This chapter demonstrates some block-level text elements that can occur in a book.</p>
 
-<p>In this chapter we generate a table:<note place="foot" n="*">Yet another a footnote.</note></p>
+
+    <q rend="block"><text><body><div1 id="quotedDiv"><head>Section head in quoted material</head>
+
+    <p>This is a <index level1="Paragraph"/>paragraph in quoted material<note>This is a <index level1="Footnote" level2="in quoted material"/>footnote in quoted material.</note> This paragraph contains a <index level1="Footnote"/>footnote, to verify correct handling of this convoluted situation during the transformation.</p></div1></body></text></q>
+
+
+
+<div2>
+<head>Letters, Closers, and Openers</head>
+
+<p>A quoted letter is shown below.</p>
+
+<q rend="block"><text><body><div1 id="quotedLetter" type="Letter">
+
+<opener>
+<dateline>23 June 1893</dateline>
+<salute>Dear John:</salute>
+</opener>
+
+<p>Test of letter. &lorem;</p>
+
+<closer>
+<signed>Dr. May</signed>
+</closer>
+
+
+</div1></body></text></q>
+
+</div2>
+<div2>
+<head>Some Further Tests of Paragrapns</head>
+
+<p rend="align(left)">[align(left)] &lorem;</p>
+
+<milestone unit="tb"/>
+
+<p rend="align(right)">[align(right)] &lorem;</p>
+
+<p rend="align(center)">[align(center)] &lorem;</p>
+
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
+
+<p rend="align(justify)">[align(justify)] &lorem;</p>
+
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
+
+
+<p>Test of entity declaration: 23&prime; is 23 minutes.</p>
+
+<p>Test of parsed entity: &nl; should look like <abbr expan="namelijk">n.l.</abbr></p>
+
+
+<trailer rend="align(center)">The End</trailer>
+
+
+</div2>
+</div1>
+<div1 id="ch03" type="Chapter" n="III" rend="label(yes)">
+<head>Footnotes<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note></head>
+
+<p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.</p>
+
+<p>Here we have a reference to a <ref target="n1">footnote</ref> in a following <ref target="ch05">chapter</ref>, and <ref target="inside-n1">element inside it</ref>.</p>
+
+<p>Footnote test paragraph. First,<note>Note without paragraph.</note> second,<note><p>Note with just one paragraph.</p></note> third,<note><p>Note with two paragraphs.</p><p>Second paragraph.</p></note> fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third paragraph.</p></note></p>
+
+
+
+
+</div1>
+<div1 id="ch04" n="IV" type="Chapter" rend="label(no)">
+<head type="label" rend="image(images/Ornament.gif)">Chapter IV</head>
+<head>Tables</head>
+
+
+<p>In this chapter we generate a table:<note place="foot" n="*">Yet another footnote.</note></p>
+
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI)">
@@ -228,6 +284,39 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
     </row>
 </table>
 </p>
+
+
+<p>We can also place tables in footnotes.<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
+
+<p><table rend="width(40%) align(center)">
+    <head>Head above table.</head>
+    <row>
+        <cell role="label">Name</cell>
+        <cell role="label" rend="align(right)">Age</cell>
+    </row>
+    <row>
+        <cell></cell>
+        <cell role="unit" rend="align(right)">Years</cell>
+    </row>
+    <row>
+        <cell>Jeroen</cell>
+        <cell rend="align(right)">39</cell>
+    </row>
+    <row>
+        <cell>Rodelyn</cell>
+        <cell rend="align(right)">29</cell>
+    </row>
+    <row>
+        <cell>Joshua</cell>
+        <cell rend="align(right)">6</cell>
+    </row>
+    <row>
+        <cell>Raphael</cell>
+        <cell rend="align(right)">2</cell>
+    </row>
+</table>
+</p>
+</note></p>
 
 
 <p>A table with vertical borders on the inside [class(verticalBorderInside)]:</p>
@@ -466,9 +555,10 @@ fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third 
 </p>
 
 
-<p>Setting a table in 3-up format, by using rend="columns(3)". This makes it possible to set
-tables more compactly when they are tall and narrow. Note that the border-lines at the bottom are not always
-correctly drawn.</p>
+<?epubsplit?>
+
+
+<p>Setting a table in 3-up format, by using rend="columns(3)". This makes it possible to set tables more compactly when they are tall and narrow. Note that the border-lines at the bottom are not always correctly drawn.</p>
 
 <p>
 <table rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center)">
@@ -580,46 +670,16 @@ correctly drawn.</p>
 
 
 
-<p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.</p>
-
-<p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
-
-<p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
-
-<?epubsplit?>
-
-<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign>  adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
+</div1>
+<div1 id="ch05" n="V" type="Chapter">
+<head type="label" rend="image(images/Ornament.gif)">Chapter V</head>
+<head>Figures</head>
 
 
-<p><table rend="width(40%) align(center)">
-    <head>Head above table.</head>
-    <row>
-        <cell role="label">Name</cell>
-        <cell role="label" rend="align(right)">Age</cell>
-    </row>
-    <row>
-        <cell></cell>
-        <cell role="unit" rend="align(right)">Years</cell>
-    </row>
-    <row>
-        <cell>Jeroen</cell>
-        <cell rend="align(right)">39</cell>
-    </row>
-    <row>
-        <cell>Rodelyn</cell>
-        <cell rend="align(right)">29</cell>
-    </row>
-    <row>
-        <cell>Joshua</cell>
-        <cell rend="align(right)">6</cell>
-    </row>
-    <row>
-        <cell>Raphael</cell>
-        <cell rend="align(right)">2</cell>
-    </row>
-</table>
-</p>
-</note> cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<p>You may note the small <index level1="ornaments"/>ornament above the <index level1="Chapter headings"/>chapter heading, which is included using a <index level1="rend attribute"/>rend attribute on the head element of this chapter.</p>
+
+
+<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
 <figure id="test" rend="image(images/test.jpg)">
@@ -672,33 +732,13 @@ correctly drawn.</p>
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
 
-<div2>
-<head>Letters, Closers, and Openers</head>
 
 
-<q rend="block"><text><body><div1 type="Letter">
-
-<opener>
-<dateline>23 June 1893</dateline>
-<salute>Dear John:</salute>
-</opener>
-
-<p>Test of letter</p>
-
-<closer>
-<signed>Dr. May</signed>
-</closer>
-
-
-</div1></body></text></q>
-
-
-
-
-</div2>
-<div2>
-<head type="label">Section</head>
+</div1>
+<div1 id="ch6" n="VI">
+<head type="label">Chapter VI</head>
 <head>Lists</head>
+
 
 <p>In this section, the various types of lists are demonstrated.</p>
 
@@ -740,8 +780,6 @@ correctly drawn.</p>
     <item>Nine</item>
     <item>Ten</item>
 </list>
-
-
 
 
 <list rend="columns(2)" type="ordered" lang="nl">
@@ -807,25 +845,38 @@ correctly drawn.</p>
     <item>Ten</item>
 </list>
 
+
+</div1>
+<div1 id="ch07" n="VII" type="Chapter">
+<head type="label" rend="image(images/Ornament.gif)">Chapter VII</head>
+<head>Text Divisions</head>
+
+
+<div2>
+<head>Division at Level 2</head>
+
+<p>Text in division at level 3. &lorem;</p>
+
+
 <div3>
 <head>Division at Level 3</head>
 
-<p>Text in division at level 3</p>
+<p>Text in division at level 3. &lorem;</p>
 
 <div4>
 <head>Division at Level 4</head>
 
-<p>Text in division at level 4</p>
+<p>Text in division at level 4. &lorem;</p>
 
 <div5>
 <head>Division at Level 5</head>
 
-<p>Text in division at level 5</p>
+<p>Text in division at level 5. &lorem;</p>
 
 <div6>
 <head>Division at Level 6</head>
 
-<p>Text in division at level 6</p>
+<p>Text in division at level 6. &lorem;</p>
 
 
 </div6>
@@ -833,37 +884,11 @@ correctly drawn.</p>
 </div4>
 </div3>
 </div2>
-<div2>
-<head>Some Further Tests</head>
-
-<p rend="align(left)">[align(left)] &lorem;</p>
-
-<milestone unit="tb"/>
-
-<p rend="align(right)">[align(right)] &lorem;</p>
-
-<p rend="align(center)">[align(center)] &lorem;</p>
-
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
-
-<p rend="align(justify)">[align(justify)] &lorem;</p>
-
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
-
-
-<p>Test of entity declaration: 23&prime; is 23 minutes.</p>
-
-<p>Test of parsed entity: &nl; should look like <abbr expan="namelijk">n.l.</abbr></p>
-
-
-<trailer rend="align(center)">The End</trailer>
-
-
-</div2>
 </div1>
 <pb n="23"/>
-<div1 id="ch6" n="II">
-<head>Tests of poetry</head>
+<div1 id="ch08" n="VIII">
+<head type="label">Chapter VIII</head>
+<head>Poetry</head>
 
 <p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&apos;s aligned. Note that the technique used to center an entire block of text does not work in IE.</p>
 
@@ -902,20 +927,12 @@ correctly drawn.</p>
 <l n="7">This is a rule of verse</l>
 <l n="8" rend="indent(10)">This is another rule of verse<note n="1" place="foot"><p>To add verse in a <index level1="Footnote"/>footnote, the lg element needs to be enclosed with a q element. This is a requirement of the TEI DTD.</p>
 
-<q><text><body><div1>
+<q><text><body><div1 id="quotedPoetry">
 <lg type="Group" rend="font(italic)" id="footnoteverse">
 <l>This is a rule of verse in italics in a footnote</l>
 <l rend="indent(1)">This is another rule of verse in a footnote</l>
 </lg>
 </div1></body></text></q></note></l></lg></lg>
-
-
-<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation. &lorem;&rsquo;</p>
-
-<p rend="class(hangqq)">&ldquo;Test of hanging punctuation. &lorem;&rdquo;</p>
-
-<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation. &lorem;&rdquo;&rsquo;</p></q>
-
 
 <p>Note that the <index level1="Footnote"/>footnote includes some verse, to which we can link <ref target="footnoteverse">here</ref>, and elsewhere in the document.</p>
 
@@ -954,8 +971,9 @@ correctly drawn.</p>
 
 
 </div1>
-<div1 id="alignFirst" rend="align-with(alignSecond)">
-<head>Text-Alignment Test</head>
+<div1 id="alignFirst" n="IX" rend="align-with(alignSecond)">
+<head type="label">Chapter IX</head>
+<head>Text Alignments</head>
 
 <p n="1">This is a test of printing translated paragraphs side-by-side</p>
 
@@ -973,8 +991,9 @@ correctly drawn.</p>
 
 
 </div1>
-<div1 id="alignSecond" rend="display(none)" lang="nl">
-<head>Test van het naast elkaar afdrukken van tekst</head>
+<div1 id="alignSecond" n="IX" rend="display(none)" lang="nl">
+<head type="label">Hoofdstuk IX</head>
+<head>Tekstsynchronisatie</head>
 
 <p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
 
@@ -998,7 +1017,7 @@ correctly drawn.</p>
 
 <div1 id="alignThird" rend="align-with-document(test-alignment.xml#test)">
 
-<p n="1">This is a test of printing translated paragraphs side-by-side</p>
+<p n="1">This is a test of printing translated paragraphs side-by-side, this time the translation is pulled-in from another source.</p>
 
 <p n="2">The paragraphs will be numbered using the <hi>n</hi> attribute.</p>
 
@@ -1020,8 +1039,9 @@ correctly drawn.</p>
 </body>
 <back id="back">
 <div1 id="test-toc">
-<head>Test Table of Contents</head>
+<head>Table of Contents</head>
 
+<p>The below table of contents is manually created, however, specially formatted.</p>
 
 <list type="tocList" lang="nl">
 <item>      Introductie   <ab type="tocPageNum">vii</ab></item>
