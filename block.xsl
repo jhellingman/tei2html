@@ -33,10 +33,10 @@
         <xd:short>Stylesheet to format block-level elements, to be imported in tei2html.xsl.</xd:short>
         <xd:detail>This stylesheet formats block-level elements from TEI.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <!--====================================================================-->
+
     <!-- Page Breaks -->
 
     <xd:doc>
@@ -114,8 +114,9 @@
          </span>
     </xsl:template>
 
+
     <xd:doc>
-        <xd:short>Generate anchor for <code>pb</code>-element.</xd:short>
+        <xd:short>Generate anchor for a <code>pb</code>-element.</xd:short>
         <xd:detail>Generate an anchors for a <code>pb</code>-element.</xd:detail>
     </xd:doc>
 
@@ -124,7 +125,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Thematic Breaks -->
 
     <xd:doc>
@@ -191,7 +191,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Arguments -->
 
     <xd:doc>
@@ -207,7 +206,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Epigraphs -->
 
     <xd:doc>
@@ -235,6 +233,7 @@
         </span>
     </xsl:template>
 
+
     <!-- Trailers -->
 
     <xd:doc>
@@ -251,7 +250,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Blockquotes -->
 
     <xd:doc>
@@ -324,9 +322,7 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Letters, with openers, closers, etc. -->
-
 
     <xd:doc>
         <xd:short>Handle a cited letter.</xd:short>
@@ -373,9 +369,7 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Paragraphs -->
-
 
     <xd:doc>
         <xd:short>Handle a paragraph.</xd:short>
@@ -431,6 +425,7 @@
         <xd:short>Determine whether a paragraph is first.</xd:short>
         <xd:detail>Determine whether a paragraph is first in a division. This can be used to determine whether
         extra or no-indentation is required in some cases.</xd:detail>
+        <xd:param name="node">The (<code>p</code>) element of which the position needs to be determined.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:isFirstParagraph" as="xs:boolean">
@@ -450,12 +445,14 @@
             or $preceding = 'opener'"/>
     </xsl:function>
 
+
     <!-- Hanging punctuation -->
 
     <xd:doc>
         <xd:short>Determine a class for a paragraph if it starts with quotation marks.</xd:short>
         <xd:detail>Determine a class for a paragraph if it starts with quotation marks. This can be used
         to &lsquo;hang&rsquo; the quotation marks using CSS.</xd:detail>
+        <xd:param name="text">The string of which the starting punctuation is to be determined.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:hangingPunctuationClass" as="xs:string">
@@ -477,6 +474,11 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine whether a node starts with punctuation.</xd:short>
+        <xd:param name="node">The element of which the existence of starting punctuation is to be determined.</xd:param>
+    </xd:doc>
+
     <xsl:function name="f:startsWithPunctuation" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
 
@@ -486,6 +488,10 @@
         <xsl:value-of select="not(name($first)) and matches($first, '^[&ldquo;&lsquo;&rsquo;]')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Handle hanging punctuation at the start of a paragraph.</xd:short>
+    </xd:doc>
 
     <xsl:template name="hangOpenPunctuation">
         <!-- First child node is a text node that starts with punctuation -->
@@ -507,7 +513,6 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
     <!-- Decorative Initials -->
 
     <xd:doc>
@@ -600,6 +605,10 @@
         <xd:short>Mode to generate CSS.</xd:short>
     </xd:doc>
 
+    <xd:doc>
+        <xd:short>Generate the CSS related to a decorative initial.</xd:short>
+    </xd:doc>
+
     <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
@@ -638,6 +647,10 @@
 
     <xd:doc mode="css-handheld">
         <xd:short>Mode to generate CSS for hand-held devices.</xd:short>
+    </xd:doc>
+
+    <xd:doc>
+        <xd:short>Generate the CSS related to a decorative initial (for use on hand-held devices).</xd:short>
     </xd:doc>
 
     <!-- Override decorative initials for handheld devices. -->
@@ -698,7 +711,7 @@
     </xsl:template>
 
 
-    <xd:doc mode="eat-initial">
+    <xd:doc>
         <xd:short>Use a simple drop-cap at the start of a paragraph.</xd:short>
         <xd:detail>Use a simple drop-cap at the start of a paragraph. Provide a unique class name for the drop-cap, as well as a generic one.
         Some CSS implementations do not handle the <code>:first-letter</code> psuedo-selector correctly, so we provide a span for this.</xd:detail>
@@ -728,7 +741,7 @@
     </xsl:template>
 
 
-    <xd:doc mode="eat-initial">
+    <xd:doc>
         <xd:short>Generate CSS for drop-cap.</xd:short>
         <xd:detail>Generate CSS for drop-cap. Note that the exact size to be used for a drop-cap depends on the specific
         font being used, and the number of lines desired to be occupied by the drop-cap. This needs to be tweaked when the
