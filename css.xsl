@@ -93,8 +93,8 @@
     <xsl:template name="common-css-stylesheets">
         <xsl:variable name="stylesheetname">
             <xsl:choose>
-                <xsl:when test="contains(/TEI.2/text/@rend, 'stylesheet(')">
-                    <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'stylesheet('), ')')"/>
+                <xsl:when test="f:has-rend-value(/TEI.2/text/@rend, 'stylesheet')">
+                    <xsl:value-of select="f:rend-value(/TEI.2/text/@rend, 'stylesheet')"/>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="f:getSetting('defaultStylesheet')"/></xsl:otherwise>
             </xsl:choose>
@@ -120,6 +120,7 @@
             <xsl:value-of select="f:css-stylesheet('style/verse.css')"/>
         </xsl:if>
 
+        <!-- Test covers align-with(...) and align-with-document(...) -->
         <xsl:if test="//div[contains(@rend, 'align-with')] or //lg[contains(@rend, 'align-with')]">
             <xsl:value-of select="f:css-stylesheet('style/aligned-text.css')"/>
         </xsl:if>
@@ -320,7 +321,10 @@
         <xsl:param name="rend" select="@rend"/>
         <xsl:param name="node" select="."/>
 
-        <xsl:if test="contains($rend, 'class(')"><xsl:value-of select="substring-before(substring-after($rend, 'class('), ')')"/><xsl:text> </xsl:text></xsl:if>
+        <xsl:if test="f:has-rend-value($rend, 'class')">
+            <xsl:value-of select="f:rend-value($rend, 'class')"/>
+            <xsl:text> </xsl:text>
+        </xsl:if>
 
         <xsl:variable name="css-properties">
             <xsl:call-template name="translate-rend-attribute">

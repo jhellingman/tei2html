@@ -87,8 +87,8 @@
 
         <xsl:variable name="maxlevel">
             <xsl:choose>
-                <xsl:when test="contains(@rend, 'tocMaxLevel(')">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'tocMaxLevel('), ')')"/>
+                <xsl:when test="f:has-rend-value(@rend, 'tocMaxLevel')">
+                    <xsl:value-of select="f:rend-value(@rend, 'tocMaxLevel')"/>
                 </xsl:when>
                 <xsl:otherwise>7</xsl:otherwise>
             </xsl:choose>
@@ -125,7 +125,7 @@
         <xsl:param name="list-element" as="xs:string" select="'ul'"/>
 
         <!-- Do we want to include this division in the toc? -->
-        <xsl:if test="not(contains(@rend, 'display(none)')) and not(contains(@rend, 'toc(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none' and f:rend-value(@rend, 'toc') != 'none'">
             <xsl:choose>
                 <!-- Do we have a head to display in the toc? -->
                 <xsl:when test="f:has-toc-head(.)">
@@ -142,7 +142,7 @@
                     </li>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="not(contains(@rend, 'toc(none)'))">
+                    <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
                         <xsl:message terminate="no">WARNING: No suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                     </xsl:if>
                 </xsl:otherwise>
@@ -164,7 +164,7 @@
             </xsl:if>
         </xsl:variable>
 
-        <xsl:value-of select="if ($div/head or contains($div/@rend, 'toc-head(') or $defaultHead != '') then 1 else 0"/>
+        <xsl:value-of select="if ($div/head or f:has-rend-value($div/@rend, 'toc-head') or $defaultHead != '') then 1 else 0"/>
     </xsl:function>
 
 
@@ -250,8 +250,8 @@
         <xsl:choose>
 
             <!-- Do we want to fully override the head for the toc using the toc-head() rendering? -->
-            <xsl:when test="contains(@rend, 'toc-head(')">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
+                <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
             </xsl:when>
 
             <!-- Handle case where we only have a label as head -->
@@ -268,8 +268,8 @@
                         <!-- Ignore label heads -->
                         <xsl:when test="@type='label'"/>
                         <!-- Use alternative toc-head when present -->
-                        <xsl:when test="contains(@rend, 'toc-head(')">
-                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+                        <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
+                            <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
                         </xsl:when>
                         <!-- Include the head given -->
                         <xsl:otherwise>
@@ -365,8 +365,8 @@
     <xsl:template name="toc-body-table">
         <xsl:variable name="maxlevel">
             <xsl:choose>
-                <xsl:when test="contains(@rend, 'tocMaxLevel(')">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'tocMaxLevel('), ')')"/>
+                <xsl:when test="f:has-rend-value(@rend, 'tocMaxLevel')">
+                    <xsl:value-of select="f:rend-value(@rend, 'tocMaxLevel')"/>
                 </xsl:when>
                 <xsl:otherwise>7</xsl:otherwise>
             </xsl:choose>
@@ -393,7 +393,7 @@
         <xsl:param name="curlevel" as="xs:integer" select="0"/>
 
         <!-- Do we want to include this division in the toc? -->
-        <xsl:if test="not(contains(@rend, 'display(none)')) and not(contains(@rend, 'toc(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none' and f:rend-value(@rend, 'toc') != 'none'">
             <xsl:choose>
                 <!-- Do we have a head to display in the toc? -->
                 <xsl:when test="f:has-toc-head(.)">
@@ -411,7 +411,7 @@
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="not(contains(@rend, 'toc(none)'))">
+                    <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
                         <xsl:message terminate="no">WARNING: No suitable head for division '<xsl:value-of select="@id"/>'; this and all underlying divisions will be omitted from the table of contents.</xsl:message>
                     </xsl:if>
                 </xsl:otherwise>
@@ -522,7 +522,7 @@
 
 
     <xsl:template match="div0|div1" mode="gentoca">
-        <xsl:if test="head and not(contains(@rend, 'toc(none)'))">
+        <xsl:if test="head and f:rend-value(@rend, 'toc') != 'none'">
             <xsl:if test="head[@type='label']">
                 <p class="tocChapter">
                     <a>
@@ -656,9 +656,9 @@
     <xsl:template name="get-thumbnail-image">
         <xsl:choose>
             <!-- Derive name for thumbnail from image file name -->
-            <xsl:when test="contains(@rend, 'image(')">
+            <xsl:when test="f:has-rend-value(@rend, 'image')">
                 <xsl:variable name="image">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+                    <xsl:value-of select="f:rend-value(@rend, 'image')"/>
                 </xsl:variable>
                 <xsl:value-of select="substring-before($image, '/')"/>
                 <xsl:text>/thumbs/</xsl:text>

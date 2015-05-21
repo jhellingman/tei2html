@@ -162,6 +162,7 @@
 
     <xsl:template match="hi">
         <xsl:choose>
+            <!-- Test covers any potential rendition ladder -->
             <xsl:when test="contains(@rend, '(')">
                 <span>
                     <xsl:call-template name="set-lang-id-attributes"/>

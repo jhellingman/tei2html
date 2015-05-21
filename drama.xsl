@@ -48,8 +48,8 @@
 
     <xsl:template match="lg">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'display(none)')"/>
-            <xsl:when test="contains(@rend, 'align-with(')">
+            <xsl:when test="f:rend-value(@rend, 'display') = 'none'"/>
+            <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:call-template name="handleAlignedLg"/>
             </xsl:when>
             <xsl:otherwise>
@@ -135,9 +135,9 @@
                 <span class="lineNum"><xsl:value-of select="@n"/></span>
             </xsl:if>
 
-            <xsl:if test="contains(@rend, 'hemistich(')">
+            <xsl:if test="f:has-rend-value(@rend, 'hemistich')">
                 <span class="hemistich">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'hemistich('), ')')"/>
+                    <xsl:value-of select="f:rend-value(@rend, 'hemistich')"/>
                     <xsl:text> </xsl:text>
                 </span>
             </xsl:if>
@@ -293,7 +293,7 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="stage[@rend='inline' or contains(@rend, 'position(inline)')]">
+    <xsl:template match="stage[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
         <span>
             <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>

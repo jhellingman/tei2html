@@ -50,7 +50,7 @@
 
     <xsl:template match="table" mode="render-table">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'position(inline)') or contains(@rend, 'class(intralinear)')">
+            <xsl:when test="f:rend-value(@rend, 'position') = 'inline' or f:rend-value(@rend, 'class')  = 'intralinear'">
                 <span class="table">
                     <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
@@ -82,7 +82,7 @@
     <xsl:template name="inner-table">
         <xsl:choose>
 
-            <xsl:when test="contains(@rend, 'columns(')">
+            <xsl:when test="f:has-rend-value(@rend, 'columns')">
                 <xsl:call-template name="n-up-table"/>
             </xsl:when>
 
@@ -107,9 +107,9 @@
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="contains(@rend, 'summary(') and $outputformat != 'epub'">
+            <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
                 <xsl:attribute name="summary">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
+                    <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>
             </xsl:if>
 
@@ -143,7 +143,7 @@
             <xsl:call-template name="set-lang-id-attributes"/>
 
             <!-- TODO: improve handling of table/@rend attribute here -->
-            <xsl:if test="contains(../@rend, 'align(center)')">
+            <xsl:if test="f:rend-value(../@rend, 'align') = 'center'">
                 <xsl:attribute name="class">aligncenter</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
@@ -255,7 +255,7 @@
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
         </xsl:if>
 
-        <xsl:if test="contains(@rend, 'image(')">
+        <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:call-template name="insertimage2">
                 <xsl:with-param name="alt">
                     <xsl:value-of select="x"/>
@@ -348,8 +348,8 @@
                 <xsl:text> </xsl:text>
             </xsl:if>
             <!-- Due to the way HTML deals with CSS on tr elements, the @rend attribute here is handled on the individual cells; however, we do extract the explicitly named class. -->
-            <xsl:if test="contains($node/@rend, 'class(')">
-                <xsl:value-of select="substring-before(substring-after($node/@rend, 'class('), ')')"/>
+            <xsl:if test="f:has-rend-value($node/@rend, 'class')">
+                <xsl:value-of select="f:rend-value($node/@rend, 'class')"/>
                 <xsl:text> </xsl:text>
             </xsl:if>
         </xsl:variable>
@@ -390,9 +390,9 @@
             <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="contains(@rend, 'summary(') and $outputformat != 'epub'">
+            <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
                 <xsl:attribute name="summary">
-                    <xsl:value-of select="substring-before(substring-after(@rend, 'summary('), ')')"/>
+                    <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>
             </xsl:if>
 

@@ -329,11 +329,11 @@
     </xd:doc>
 
     <xsl:template name="metadata-smil">
-        <xsl:if test="//*[contains(@rend, 'media-overlay(')]">
+        <xsl:if test="//*[f:has-rend-value(@rend, 'media-overlay')]">
             <!-- Add up the durations for each audio fragment -->
-            <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
+            <xsl:for-each select="//*[f:has-rend-value(@rend, 'media-overlay')]">
                 <xsl:variable name="durations">
-                    <xsl:variable name="filename" select="f:rend-value(., 'media-overlay')"/>
+                    <xsl:variable name="filename" select="f:rend-value(@rend, 'media-overlay')"/>
                     <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
                 </xsl:variable>
 
@@ -344,8 +344,8 @@
 
             <!-- Find total duration -->
             <xsl:variable name="durations">
-                <xsl:for-each select="//*[contains(@rend, 'media-overlay(')]">
-                    <xsl:variable name="filename" select="f:rend-value(., 'media-overlay')"/>
+                <xsl:for-each select="//*[f:has-rend-value(@rend, 'media-overlay')]">
+                    <xsl:variable name="filename" select="f:rend-value(@rend, 'media-overlay')"/>
                     <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
                 </xsl:for-each>
             </xsl:variable>
@@ -402,11 +402,11 @@
 
                 <!-- Illustrations -->
                 <xsl:apply-templates select="//figure" mode="manifest"/>
-                <xsl:apply-templates select="//*[contains(@rend, 'image(')]" mode="manifest"/>
-                <xsl:apply-templates select="//*[contains(@rend, 'link(')]" mode="manifest-links"/>
+                <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'image')]" mode="manifest"/>
+                <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'link')]" mode="manifest-links"/>
 
                 <!-- Media overlays -->
-                <xsl:apply-templates select="//*[contains(@rend, 'media-overlay(')]" mode="manifest"/>
+                <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'media-overlay')]" mode="manifest"/>
 
                 <!-- Include custom items in the manifest -->
                 <xsl:if test="$opfManifestFile">
@@ -441,8 +441,8 @@
     <xsl:template match="figure" mode="manifest">
         <xsl:variable name="filename">
             <xsl:choose>
-                <xsl:when test="f:has-rend-value(., 'image')">
-                    <xsl:value-of select="f:rend-value(., 'image')"/>
+                <xsl:when test="f:has-rend-value(@rend, 'image')">
+                    <xsl:value-of select="f:rend-value(@rend, 'image')"/>
                 </xsl:when>
                 <xsl:otherwise>images/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
             </xsl:choose>
@@ -462,9 +462,9 @@
     </xd:doc>
 
     <xsl:template match="*" mode="manifest">
-        <xsl:if test="f:has-rend-value(., 'image')">
+        <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:variable name="filename">
-                <xsl:value-of select="f:rend-value(., 'image')"/>
+                <xsl:value-of select="f:rend-value(@rend, 'image')"/>
             </xsl:variable>
 
             <xsl:call-template name="manifest-image-item">
@@ -472,9 +472,9 @@
             </xsl:call-template>
         </xsl:if>
 
-        <xsl:if test="f:has-rend-value(., 'media-overlay')">
+        <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
             <xsl:variable name="filename">
-                <xsl:value-of select="f:rend-value(., 'media-overlay')"/>
+                <xsl:value-of select="f:rend-value(@rend, 'media-overlay')"/>
             </xsl:variable>
             <xsl:call-template name="manifest-media-overlay-item">
                 <xsl:with-param name="filename" select="$filename"/>
@@ -596,9 +596,9 @@
 
 
     <xsl:template match="*" mode="manifest-links">
-        <xsl:if test="f:has-rend-value(., 'link')">
+        <xsl:if test="f:has-rend-value(@rend, 'link')">
             <xsl:variable name="target">
-                <xsl:value-of select="f:rend-value(., 'link')"/>
+                <xsl:value-of select="f:rend-value(@rend, 'link')"/>
             </xsl:variable>
 
             <!-- Only for local images: add the image to the manifest -->
@@ -685,9 +685,9 @@
 
 
     <xsl:template match="figure" mode="spine-links">
-        <xsl:if test="f:has-rend-value(., 'link')">
+        <xsl:if test="f:has-rend-value(@rend, 'link')">
             <xsl:variable name="target">
-                <xsl:value-of select="f:rend-value(., 'link')"/>
+                <xsl:value-of select="f:rend-value(@rend, 'link')"/>
             </xsl:variable>
 
             <!-- Only for local images: add the generated HTML wrapper to the spine -->
@@ -705,11 +705,11 @@
     <xsl:template name="get-cover-image">
         <xsl:variable name="figure" select="(if (//figure[@id = 'cover-image']) then //figure[@id = 'cover-image'] else //figure[@id = 'titlepage-image'])[1]"/>
         <xsl:choose>
-            <xsl:when test="contains(/TEI.2/text/@rend, 'cover-image(')">
-                <xsl:value-of select="substring-before(substring-after(/TEI.2/text/@rend, 'cover-image('), ')')"/>
+            <xsl:when test="f:has-rend-value(/TEI.2/text/@rend, 'cover-image')">
+                <xsl:value-of select="f:rend-value(/TEI.2/text/@rend, 'cover-image')"/>
             </xsl:when>
-            <xsl:when test="contains($figure/@rend, 'image(')">
-                <xsl:value-of select="substring-before(substring-after($figure/@rend, 'image('), ')')"/>
+            <xsl:when test="f:has-rend-value($figure/@rend, 'image')">
+                <xsl:value-of select="f:rend-value($figure/@rend, 'image')"/>
             </xsl:when>
             <xsl:otherwise>images/<xsl:value-of select="$figure/@id"/>.jpg</xsl:otherwise>
         </xsl:choose>

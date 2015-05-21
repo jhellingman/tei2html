@@ -338,7 +338,7 @@
             <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
             <xsl:variable name="media-overlays">
                 <xsl:for-each select="$nodes">
-                    <xsl:if test="f:has-rend-value(., 'media-overlay')">
+                    <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
                         <xsl:value-of select="$id"/>
                     </xsl:if>
                 </xsl:for-each>
@@ -370,7 +370,7 @@
             <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
 
-            <xsl:if test="f:has-rend-value(., 'media-overlay')">
+            <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
                 <xsl:attribute name="media-overlay"><xsl:value-of select="$id"/>overlay</xsl:attribute>
             </xsl:if>
         </item>

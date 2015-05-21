@@ -50,8 +50,8 @@
     <xsl:template name="getimagefilename">
         <xsl:param name="format" select="'.jpg'" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'image(')">
-                <xsl:value-of select="substring-before(substring-after(@rend, 'image('), ')')"/>
+            <xsl:when test="f:has-rend-value(@rend, 'image')">
+                <xsl:value-of select="f:rend-value(@rend, 'image')"/>
             </xsl:when>
             <xsl:when test="@url">
                 <xsl:value-of select="@url"/>
@@ -81,8 +81,8 @@
         <xsl:param name="node" as="node()"/>
         <xsl:param name="defaultformat" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="contains($node/@rend, 'image(')">
-                <xsl:value-of select="substring-before(substring-after($node/@rend, 'image('), ')')"/>
+            <xsl:when test="f:has-rend-value($node/@rend, 'image')">
+                <xsl:value-of select="f:rend-value($node/@rend, 'image')"/>
             </xsl:when>
             <xsl:when test="$node/@url">
                 <xsl:value-of select="$node/@url"/>
@@ -112,8 +112,8 @@
 
         <!-- Should we link to an external image? -->
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'link(')">
-                <xsl:variable name="url" select="substring-before(substring-after(@rend, 'link('), ')')"/>
+            <xsl:when test="f:has-rend-value(@rend, 'link')">
+                <xsl:variable name="url" select="f:rend-value(@rend, 'link')"/>
                 <a>
                     <xsl:choose>
                         <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
@@ -278,7 +278,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="figure[@rend='inline' or contains(@rend, 'position(inline)')]">
+    <xsl:template match="figure[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
         <xsl:if test="f:isSet('includeImages')">
             <xsl:call-template name="insertimage">
                 <xsl:with-param name="format" select="'.png'"/>
@@ -347,8 +347,8 @@
 
                 <xsl:attribute name="class">
                     <xsl:text>figure </xsl:text>
-                    <xsl:if test="contains(@rend, 'float(left)')">floatLeft </xsl:if>
-                    <xsl:if test="contains(@rend, 'float(right)')">floatRight </xsl:if>
+                    <xsl:if test="f:rend-value(@rend, 'float') = 'left'">floatLeft </xsl:if>
+                    <xsl:if test="f:rend-value(@rend, 'float') = 'right'">floatRight </xsl:if>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
                     <!-- Add the class that sets the width, if the width is known -->
                     <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
@@ -386,16 +386,16 @@
                 </xsl:attribute>
 
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopLeft']">
-                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft' or contains(@rend, 'position(figTopLeft)')]" mode="figAnnotation"/></span>
+                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft' or f:rend-value(@rend, 'position') = 'figTopLeft']" mode="figAnnotation"/></span>
                 </xsl:if>
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figTop']">
-                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop' or contains(@rend, 'position(figTop)')]" mode="figAnnotation"/></span>
+                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop' or f:rend-value(@rend, 'position') = 'figTop']" mode="figAnnotation"/></span>
                 </xsl:if>
                 <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figTop'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopRight']">
-                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight' or contains(@rend, 'position(figTopRight)')]" mode="figAnnotation"/></span>
+                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight' or f:rend-value(@rend, 'position') = 'figTopRight']" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
         </xsl:if>
@@ -419,16 +419,16 @@
                 </xsl:attribute>
 
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomLeft']">
-                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft' or contains(@rend, 'position(figBottomLeft)')]" mode="figAnnotation"/></span>
+                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft' or f:rend-value(@rend, 'position') = 'figBottomLeft']" mode="figAnnotation"/></span>
                 </xsl:if>
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottom']">
-                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom' or contains(@rend, 'position(figBottom)')]" mode="figAnnotation"/></span>
+                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom' or f:rend-value(@rend, 'position') = 'figBottom']" mode="figAnnotation"/></span>
                 </xsl:if>
                 <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figBottom'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomRight']">
-                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight' or contains(@rend, 'position(figBottomRight)')]" mode="figAnnotation"/></span>
+                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight' or f:rend-value(@rend, 'position') = 'figBottomRight']" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
         </xsl:if>

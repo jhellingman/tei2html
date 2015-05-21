@@ -382,7 +382,7 @@
 
 
     <xsl:template name="handle-paragraph">
-        <xsl:if test="not(contains(@rend, 'display(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:element name="{$p.element}">
                 <xsl:call-template name="set-lang-id-attributes"/>
 
@@ -555,7 +555,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="p[contains(@rend, 'initial-image')]">
+    <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]">
         <xsl:choose>
             <xsl:when test="$optionPrinceMarkup = 'Yes' or $outputformat = 'epub'">
                 <xsl:call-template name="initial-image-with-float"/>
@@ -609,16 +609,16 @@
         <xd:short>Generate the CSS related to a decorative initial.</xd:short>
     </xd:doc>
 
-    <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css">
+    <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
             <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
 .<xsl:call-template name="generate-rend-class-name"/>
 {
-    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat top left;
-    <xsl:if test="contains(@rend, 'initial-offset(')">
-        padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+    background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat top left;
+    <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
+        padding-top: <xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
     </xsl:if>
 
     <xsl:if test="normalize-space($properties) != ''">
@@ -629,11 +629,11 @@
 .<xsl:call-template name="generate-rend-class-name"/>init
 {
     float: left;
-    width: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-width('), ')')"/>;
-    height: <xsl:value-of select="substring-before(substring-after(@rend, 'initial-height('), ')')"/>;
-    background: url(<xsl:value-of select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>) no-repeat;
-    <xsl:if test="contains(@rend, 'initial-offset(')">
-        background-position: 0px -<xsl:value-of select="substring-before(substring-after(@rend, 'initial-offset('), ')')"/>;
+    width: <xsl:value-of select="f:rend-value(@rend, 'initial-width')"/>;
+    height: <xsl:value-of select="f:rend-value(@rend, 'initial-height')"/>;
+    background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat;
+    <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
+        background-position: 0px -<xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
     </xsl:if>
     text-align: right;
     color: white;
@@ -654,7 +654,7 @@
     </xd:doc>
 
     <!-- Override decorative initials for handheld devices. -->
-    <xsl:template match="p[contains(@rend, 'initial-image')]" mode="css-handheld">
+    <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css-handheld">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
 .<xsl:call-template name="generate-rend-class-name"/>
@@ -717,7 +717,7 @@
         Some CSS implementations do not handle the <code>:first-letter</code> psuedo-selector correctly, so we provide a span for this.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="p[contains(@rend, 'dropcap(')]">
+    <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
@@ -748,7 +748,7 @@
         choice for a font, font-size, and line-spacing has been made.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="p[contains(@rend, 'dropcap(')]" mode="css">
+    <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]" mode="css">
 
         <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
@@ -764,10 +764,10 @@
 .<xsl:call-template name="generate-rend-class-name"/>dc
 {
     float: left;
-    <xsl:if test="contains(@rend, 'dropcap-offset(')">
-        padding-top: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap-offset('), ')')"/>;
+    <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
+        padding-top: <xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/>;
     </xsl:if>
-    font-size: <xsl:value-of select="substring-before(substring-after(@rend, 'dropcap('), ')')"/>;
+    font-size: <xsl:value-of select="f:rend-value(@rend, 'dropcap')"/>;
     margin-left: 0;
     margin-bottom: 5px;
     margin-right: 3px;

@@ -301,7 +301,7 @@
         <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'columns(2)') and count($notes) &gt; 1">
+            <xsl:when test="f:rend-value(@rend, 'columns') = '2' and count($notes) &gt; 1">
                 <xsl:variable name="halfway" select="ceiling(count($notes) div 2)"/>
                 <table class="apparataus">
                     <tr>

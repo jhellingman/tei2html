@@ -27,7 +27,7 @@
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
 
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'columns(')">
+            <xsl:when test="f:has-rend-value(@rend, 'columns')">
                 <xsl:call-template name="splitlist"/>
             </xsl:when>
             <xsl:otherwise>
@@ -64,10 +64,10 @@
 
     <xsl:template name="splitlist">
         <xsl:variable name="columns" as="xs:integer">
-            <xsl:value-of select="number(substring-before(substring-after(@rend, 'columns('), ')'))"/>
+            <xsl:value-of select="number(f:rend-value(@rend, 'columns'))"/>
         </xsl:variable>
         <xsl:variable name="item-order">
-            <xsl:value-of select="substring-before(substring-after(@rend, 'item-order('), ')')"/>
+            <xsl:value-of select="f:rend-value(@rend, 'item-order')"/>
         </xsl:variable>
 
         <xsl:choose>

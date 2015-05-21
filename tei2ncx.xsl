@@ -120,12 +120,12 @@
 
     <xsl:template match="div0" mode="navMap">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'toc-head(')">
+            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
                 <navPoint class="part">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                     <navLabel>
                         <text>
-                            <xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/>
+                            <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
                         </text>
                     </navLabel>
                     <content>
@@ -158,10 +158,10 @@
 
     <xsl:template match="div1" mode="navMap">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'toc-head(')">
+            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
                 <navPoint class="part">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <navLabel><text><xsl:value-of select="f:rend-value(@rend, 'toc-head')"/></text></navLabel>
                     <content>
                         <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                     </content>
@@ -193,10 +193,10 @@
 
     <xsl:template match="div2" mode="navMap">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'toc-head(')">
+            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
                 <navPoint class="part">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel><text><xsl:value-of select="substring-before(substring-after(@rend, 'toc-head('), ')')"/></text></navLabel>
+                    <navLabel><text><xsl:value-of select="f:rend-value(@rend, 'toc-head')"/></text></navLabel>
                     <content>
                         <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
                     </content>

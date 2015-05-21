@@ -102,7 +102,7 @@
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setRunningHeader"/>
         <xsl:call-template name="setLabelHeader"/>
-        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
             <h2>
                 <xsl:call-template name="headText"/>
             </h2>
@@ -142,7 +142,7 @@
             </xsl:if>
         </xsl:if>
 
-        <xsl:if test="not(contains(@rend, 'display(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -164,7 +164,7 @@
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setRunningHeader"/>
         <xsl:call-template name="setLabelHeader"/>
-        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
             <h2>
                 <xsl:call-template name="headText"/>
             </h2>
@@ -178,7 +178,7 @@
     </xd:doc>
 
     <xsl:template match="div2">
-        <xsl:if test="not(contains(@rend, 'display(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -198,7 +198,7 @@
     </xd:doc>
 
     <xsl:template match="div3 | div4 | div5 | div6">
-        <xsl:if test="not(contains(@rend, 'display(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div class="{name()}">
                 <xsl:call-template name="set-lang-id-attributes"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -219,7 +219,7 @@
 
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setLabelHeader"/>
-        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
             <xsl:element name="h{$level}">
                 <xsl:call-template name="headText"/>
             </xsl:element>
@@ -230,7 +230,7 @@
     <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
 
     <xsl:template match="div">
-        <xsl:if test="not(contains(@rend, 'display(none)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:variable name="level" select="f:divLevel(.) + 1"/>
             <div>
                 <xsl:call-template name="set-lang-id-attributes"/>
@@ -256,7 +256,7 @@
 
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setLabelHeader"/>
-        <xsl:if test="not(contains(@rend, 'display(image-only)'))">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
             <xsl:element name="h{$level}">
                 <xsl:call-template name="headText"/>
             </xsl:element>
@@ -287,8 +287,8 @@
 
     <xsl:template name="handleDiv">
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'align-with(')">
-                <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
+            <xsl:when test="f:has-rend-value(@rend, 'align-with')">
+                <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
                 <xsl:message terminate="no">INFO:    Align division <xsl:value-of select="@id"/> with division <xsl:value-of select="$otherid"/></xsl:message>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
@@ -296,8 +296,8 @@
                 </xsl:call-template>
             </xsl:when>
 
-            <xsl:when test="f:isSet('includeAlignedDivisions') and contains(@rend, 'align-with-document(')">
-                <xsl:variable name="target" select="substring-before(substring-after(@rend, 'align-with-document('), ')')"/>
+            <xsl:when test="f:isSet('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with-document')">
+                <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherid" select="substring-after($target, '#')"/>
                 <xsl:message terminate="no">INFO:    Align division <xsl:value-of select="@id"/> with external document '<xsl:value-of select="$target"/>'</xsl:message>
@@ -367,7 +367,7 @@
         <xsl:param name="div" select="."/>
         <xsl:param name="headingLevel" select="'h2'"/>
 
-        <xsl:if test="contains($div/@rend, 'label(yes)')">
+        <xsl:if test="f:rend-value($div/@rend, 'label') = 'yes'">
             <xsl:element name="{$headingLevel}">
                 <xsl:attribute name="class">label</xsl:attribute>
                 <xsl:value-of select="f:translate-div-type($div/@type)"/>
@@ -406,14 +406,14 @@
     </xd:doc>
 
     <xsl:template name="headPicture">
-        <xsl:if test="contains(@rend, 'image(')">
+        <xsl:if test="f:has-rend-value(@rend, 'image')">
             <div class="figure">
                 <xsl:call-template name="set-lang-attribute"/>
                 <xsl:call-template name="insertimage2">
                     <xsl:with-param name="alt">
                     <xsl:choose>
-                        <xsl:when test="contains(@rend, 'image-alt')">
-                            <xsl:value-of select="substring-before(substring-after(@rend, 'image-alt('), ')')"/>
+                        <xsl:when test="f:has-rend-value(@rend, 'image-alt')">
+                            <xsl:value-of select="f:rend-value(@rend, 'image-alt')"/>
                         </xsl:when>
                         <xsl:when test=". != ''">
                             <xsl:value-of select="."/>

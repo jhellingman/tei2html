@@ -399,20 +399,53 @@
     </xsl:function>
 
 
-    <xsl:function name="f:has-rend-value" as="xs:boolean">
-        <xsl:param name="node" as="node()"/>
-        <xsl:param name="name" as="xs:string"/>
+    <xd:doc>
+        <xd:short>Determine whether a rendition ladder contains a certain value.</xd:short>
+        <xd:detail>
+            <p>Determine whether a rendition ladder contains a certain value. This takes care of handling the case where a key is a substring of another key.</p>
+        </xd:detail>
+        <xd:param name="rend">The rendition ladder to be tested.</xd:param>
+        <xd:param name="key">The key to look for.</xd:param>
+    </xd:doc>
 
-        <xsl:value-of select="contains($node/@rend, concat($name, '('))"/>
+    <xsl:function name="f:has-rend-value" as="xs:boolean">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="key" as="xs:string"/>
+
+        <xsl:value-of select="matches($rend, concat('(^|\W)', $key, '\(.+?\)'), 'i')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Find the value for a key in a rendition ladder.</xd:short>
+        <xd:detail>
+            <p>Find the value for a key in a rendition ladder. This takes care of handling the case where a key is a substring of another key.
+            If the rendition ladder is empty or doesn't contain the key, the result will be an empty string.</p>
+        </xd:detail>
+        <xd:param name="rend">The rendition ladder to be tested.</xd:param>
+        <xd:param name="key">The key to find the value for. This should be a string matching <code>/[a-z0-9-]+/</code>, as otherwise the regular expression constructed from it will fail.</xd:param>
+    </xd:doc>
 
     <xsl:function name="f:rend-value" as="xs:string">
-        <xsl:param name="node" as="node()"/>
-        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="key" as="xs:string"/>
 
-        <xsl:value-of select="substring-before(substring-after($node/@rend, concat($name, '(')), ')')"/>
+        <xsl:variable name="regex" select="concat('(^|\W)', $key, '\((.+?)\)')"/>
+
+        <xsl:variable name="result">
+            <xsl:choose>
+                <xsl:when test="not($rend)"/>
+                <xsl:otherwise>
+                    <xsl:analyze-string select="$rend" regex="{$regex}" flags="i">
+                        <xsl:matching-substring>
+                            <xsl:value-of select="regex-group(2)"/>
+                        </xsl:matching-substring>
+                    </xsl:analyze-string>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$result"/>
     </xsl:function>
-
 
 </xsl:stylesheet>
