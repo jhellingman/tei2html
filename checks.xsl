@@ -564,7 +564,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:roman-value">
+    <xsl:function name="f:roman-value" as="xs:integer">
         <xsl:param name="character" as="xs:string"/>
         
         <xsl:sequence select="(1, 5, 10, 50, 100, 500, 1000)[index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'), upper-case($character))]"/>
