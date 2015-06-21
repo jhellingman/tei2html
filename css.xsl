@@ -383,6 +383,7 @@
 
         <!-- Handle the rest of the document (including table cells) -->
         <xsl:apply-templates select="/TEI.2/facsimile" mode="css"/>
+        <xsl:apply-templates select="/TEI.2/teiHeader" mode="css"/>
         <xsl:apply-templates select="/TEI.2/text" mode="css"/>
 
         <xsl:apply-templates select="/TEI.2/text" mode="css-handheld"/>

@@ -94,6 +94,7 @@
                         <th>Code</th>
                         <th>Line</th>
                         <th>Column</th>
+                        <th>Element</th>
                         <th>Issue</th>
                     </tr>
                     <xsl:apply-templates select="$issues//i:issue" mode="report">
@@ -109,6 +110,7 @@
             <td><xsl:value-of select="@code"/></td>
             <td><xsl:value-of select="substring-before(@pos, ':')"/></td>
             <td><xsl:value-of select="substring-after(@pos, ':')"/></td>
+            <td><xsl:value-of select="@element"/></td>
             <td><xsl:value-of select="."/></td>
         </tr>
     </xsl:template>
@@ -117,11 +119,11 @@
 
     <xsl:template mode="checks" match="publicationStmt">
         <xsl:if test="not(idno[@type='epub-id'])">
-            <i:issue pos="{@pos}" code="H0001">No ePub-id present.</i:issue>
+            <i:issue pos="{@pos}" code="H0001" element="{name(.)}">No ePub-id present.</i:issue>
         </xsl:if>
 
         <xsl:if test="idno[@type='epub-id'] and not(matches(idno[@type='epub-id'], '^(urn:uuid:([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$'))">
-            <i:issue pos="{@pos}" code="H0002">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+            <i:issue pos="{@pos}" code="H0002" element="{name(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
         </xsl:if>
 
         <xsl:apply-templates mode="checks"/>
@@ -158,7 +160,7 @@
     <xsl:template mode="checks" match="front/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
-            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001" element="{name(.)}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -172,7 +174,7 @@
         <xsl:call-template name="check-div-type-present"/>
         <xsl:call-template name="check-id-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv0Types)">
-            <i:issue pos="{@pos}" code="C0001">Unexpected type for div0: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001" element="{name(.)}">Unexpected type for div0: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -185,7 +187,7 @@
     <xsl:template mode="checks" match="body/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
-            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001" element="{name(.)}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -198,7 +200,7 @@
     <xsl:template mode="checks" match="back/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBackDiv1Types)">
-            <i:issue pos="{@pos}" code="C0001">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0001" element="{name(.)}">Unexpected type for div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -210,13 +212,13 @@
 
     <xsl:template name="check-div-type-present">
         <xsl:if test="not(@type)">
-            <i:issue pos="{@pos}" code="C0002">No type specified for <xsl:value-of select="name()"/></i:issue>
+            <i:issue pos="{@pos}" code="C0002" element="{name(.)}">No type specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
     <xsl:template name="check-id-present">
         <xsl:if test="not(@id)">
-            <i:issue pos="{@pos}" code="C0011">No id specified for <xsl:value-of select="name()"/></i:issue>
+            <i:issue pos="{@pos}" code="C0011" element="{name(.)}">No id specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
@@ -249,7 +251,7 @@
     <xsl:template mode="checks" match="divGen">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedDivGenTypes)">
-            <i:issue pos="{@pos}" code="C0006">Unexpected type for divGen: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="C0006" element="{name(.)}">Unexpected type for divGen: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -258,7 +260,7 @@
     <!-- Elements not valid in TEI, but sometimes abused -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
-        <i:issue pos="{@pos}" code="T0001">Non-TEI element <xsl:value-of select="name()"/></i:issue>
+        <i:issue pos="{@pos}" code="T0001" element="{name(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
@@ -267,7 +269,7 @@
 
     <xsl:template mode="checks" match="corr">
         <xsl:if test="string(.) = string(@sic)">
-            <i:issue pos="{@pos}" code="T0002">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
+            <i:issue pos="{@pos}" code="T0002" element="{name(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -280,22 +282,22 @@
 
         <xsl:choose>
             <xsl:when test="not(@n)">
-                <i:issue pos="{@pos}" code="C0003">Page break without page number.</i:issue>
+                <i:issue pos="{@pos}" code="C0003" element="{name(.)}">Page break without page number.</i:issue>
             </xsl:when>
 
             <xsl:when test="not(f:is-number(@n) or f:is-roman(@n))">
-                <i:issue pos="{@pos}" code="C0004">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
+                <i:issue pos="{@pos}" code="C0004" element="{name(.)}">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
             </xsl:when>
 
             <xsl:when test="f:is-roman(@n) and f:is-roman($preceding)">
                 <xsl:if test="not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
-                    <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
+                    <i:issue pos="{@pos}" code="C0005" element="{name(.)}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
 
             <xsl:when test="f:is-number(@n) and f:is-number($preceding)">
                 <xsl:if test="not(@n = $preceding + 1)">
-                    <i:issue pos="{@pos}" code="C0005">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
+                    <i:issue pos="{@pos}" code="C0005" element="{name(.)}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
         </xsl:choose>
@@ -322,22 +324,22 @@
 
         <xsl:choose>
             <xsl:when test="not($first/@n)">
-                <i:issue pos="{$first/@pos}" code="C0007">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
+                <i:issue pos="{$first/@pos}" code="C0007" element="{name($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
             </xsl:when>
 
             <xsl:when test="not(f:is-number($first/@n) or f:is-roman($first/@n))">
-                <i:issue pos="{$first/@pos}" code="C0008">Element <xsl:value-of select="name($first)"/>: n-attribute <xsl:value-of select="$first/@n"/> not numeric.</i:issue>
+                <i:issue pos="{$first/@pos}" code="C0008" element="{name($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute <xsl:value-of select="$first/@n"/> not numeric.</i:issue>
             </xsl:when>
 
             <xsl:when test="f:is-roman($first/@n) and f:is-roman($second/@n)">
                 <xsl:if test="not(f:from-roman($second/@n) = f:from-roman($first/@n) + 1)">
-                    <i:issue pos="{$second/@pos}" code="C0009">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
+                    <i:issue pos="{$second/@pos}" code="C0009" element="{name($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
 
             <xsl:when test="f:is-number($first/@n) and f:is-number($second/@n)">
                 <xsl:if test="not($second/@n = $first/@n + 1)">
-                    <i:issue pos="{$second/@pos}" code="C0010">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
+                    <i:issue pos="{$second/@pos}" code="C0010" element="{name($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
         </xsl:choose>
@@ -372,8 +374,9 @@
         <xsl:param name="code" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
 
+
         <xsl:if test="matches($node, $pattern)">
-            <i:issue pos="{$node/@pos}" code="{$code}"><xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($node, $pattern)"/></i:issue>
+            <i:issue pos="{$node/@pos}" code="{$code}" element="{$node/@sourceElement}"><xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($node, $pattern)"/></i:issue>
         </xsl:if>
     </xsl:function>
 
@@ -406,15 +409,15 @@
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
-                <i:issue pos="{@pos}" code="P0002"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
+                <i:issue pos="{@pos}" code="P0002" element="{./@sourceElement}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
             </xsl:when>
             <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&raquo;&bdquo;]+$')">
                 <xsl:if test="not(starts-with($next, $unclosed))">
-                    <i:issue pos="{@pos}" code="P0008">Unclosed punctuation: <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. Current: <xsl:value-of select="$head"/> Next: <xsl:value-of select="substring($next, 1, 40)"/></i:issue>
+                    <i:issue pos="{@pos}" code="P0008" element="{./@sourceElement}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. Current: <xsl:value-of select="$head"/> Next: <xsl:value-of select="substring($next, 1, 40)"/></i:issue>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue pos="{@pos}" code="P0003">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
+                <i:issue pos="{@pos}" code="P0003" element="{./@sourceElement}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
