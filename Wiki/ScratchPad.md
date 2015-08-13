@@ -54,6 +54,18 @@ Adding metadata about the series a book belongs to in ePub is not yet standardiz
 
 For ePub 3.0, see http://www.idpf.org/epub/301/spec/epub-publications.html#sec-opf-dctitle
 
+### Collections ###
+
+To indicate that a TEI file belongs to a certain collection, we can use the following kludge with the `idno` element in the TEI header.
+
+```
+<idno type="PGnum">12345</idno>
+<idno type="collection.name1">123</idno>
+<idno type="collection.name2">456</idno>
+```
+
+The first `idno` gives the number the text has in the Project Gutenberg collection; the other in some locally defined collections.
+
 ## Hanging punctuation ##
 
 See: http://dabblet.com/gist/9623025
