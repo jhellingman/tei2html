@@ -14,17 +14,20 @@ Originally, `tei2html` was developed to produce beautiful new editions of public
 
 ## Guiding Principles ##
 
-The design of tei2html is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.
+The design of `tei2html` is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.
 
 The guiding principles are:
 
-  * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself, unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
-  * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that tei2html needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
+  * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself. Unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
+  * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that `tei2html` needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
   * The `@rend` attribute in tags are intended as formatting hints only. Ignoring them fully or partially should not render a text incomprehensible.
 
-The design decisions are:
+The design decisions is:
 
-  * The `@rend` attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are thus not copied verbatim.
+  * The `@rend` attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are also used for effects that are not supported by CSS, and are thus not copied verbatim.
+  * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
+
+As a result of these design decisions, a document can be neatly formatted in CSS with minimal rendering information 'poluting' the TEI master file.
 
 
 ## SGML versus XML ##
@@ -33,11 +36,12 @@ XML is a considerably simplified reincarnation of SGML. It does away with much o
 
 Although XML is simpler, and many more tools can deal with it, SGML is somewhat easier to type due to its more relaxed syntax rules. You don't need to use quotes on all attribute values, nor need to provide close tags for all elements. For this reason, I normally produce my files in SGML. The conversion to XML is straightforward, and can (almost always) be fully automated. Since I am used to SGML, the examples in this document will be valid SGML snippets, but not necessarily well-formed XML.
 
-If so desired, you can work directly in XML, instead of SGML. Working in XML directly has a number of benefits as well:
+Of course, you can work directly in XML instead of SGML. Working in XML directly has a number of benefits as well:
 
   1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 2.0).
-  1. No initial conversion tool required.
-  1. Can use embedded namespaces for other XML schemas.
+  2. No initial conversion tool required.
+  3. Can use embedded namespaces for other XML schemas.
+  4. Can use one or more of the various XML authoring tools available.
 
 
 ## Considerations for Output Formats ##
@@ -68,7 +72,7 @@ In a few other cases, the transformation may not result in entirely correct resu
 
 For XML files actually used by the XSLT stylesheets, any character encoding supported by XML/XSLT works. For SGML, the options are more limited.
 
-However, the pre-processing scripts in Perl can only deal with either pure 7-bit ASCII, or in the ISO 8859-1 character set. All characters outside those ranges are represented by character entities.
+However, the pre-processing scripts in Perl can only deal with either pure 7-bit ASCII or the ISO 8859-1 character set. All characters outside those ranges are represented by character entities.
 
 Use entities from the following sets:
 
@@ -77,7 +81,7 @@ Use entities from the following sets:
   * Invent your own descriptive abbreviation. Always provide the Unicode code point for a character (if it exists) in the entity declaration, and provide the Unicode character name or a description in a comment. Please follow the pattern used by ISO where possible.
   * Numeric character entities, based on Unicode.
 
-For longer fragments in a non-Latin script, I normally use an ASCII based transliteration scheme, and supply tools (called `patc`) to convert these to Unicode. For documents completely a non-Latin script, it will probably be better to work with Unicode.
+For longer fragments in a non-Latin script, I normally use an ASCII based transliteration scheme, and supply tools (called `patc`) to convert these to Unicode. For documents completely a non-Latin script, it will probably be better to work with Unicode in a suitable editor (and using XML directly).
 
 
 ### Fractions entities ###
