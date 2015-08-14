@@ -37,19 +37,7 @@ It should be very well possible to write a small XSLT script to normalize this u
 
 ### Page Images ###
 
-Not implemented yet, but it would be nice for some types of works to include images of the original pages. The syntax would be either something like (see http://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PHFAX)
-
-```
-<pb n="123" facs="p123.png"/>
-```
-
-or
-
-```
-<pb n="123" rend="link(pages/p123.png)"/>
-```
-
-Such page images should be in a resolution suitable for viewing on most devices (between 100 and 200 dpi in gray scale or color).
+See [facsimile support](FacsimileSupport.md)
 
 ## Cross-References ##
 
