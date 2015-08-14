@@ -47,21 +47,11 @@ As mentioned, cross-references in printed book often reference to page numbers. 
 For details <ref target="pb123">see page 123</ref>.
 ```
 
-That links to some `<pb id="pb123" n="123"/>` somewhere in text. Now, of course, the reference is never to the page-break itself, but always to some content that appears on that page, but actually identifying and linking to the content referred to can be a time-consuming task, so is often postponed (think, for example, about an index). So we often have texts that just link like this.
+However, there are several problems with this.
 
-## Processing ##
-
-
-## Paged Output ##
-
-When creating new printed output, we will have to deal with yet another set of page-breaks: those in the output medium. Here a whole new range of problems arise.
-
-  * Exact values for cross-references can only be established when final pagination is known. This may result in changes in the page layout inducing changes in the page numbers itself ("see page 100" is wider than "see page 99"). Most current layout tools can deal with this type of issues reasonably, although in some extreme cases this still pops up.
-  * When generating an index, you want to avoid things like
-    * **common entry**, 12, 12, 12, 23, 24, 25, 45.
-> > but summarize them as
-    * **common entry** 12, 23-25, 45.
-> > which is not really supported by most current index generating tools, and is pretty hard to do as well.
+1. This reference refers to some `<pb id="pb123" n="123"/>` somewhere in text. Now, of course, the reference is almost never to the page-break itself, but always to some content that appears on that page (a picture, a paragraph or phrase), but actually identifying and linking to the content referred to can be a time-consuming task, so is often postponed (think, for example, about an index). So we often have texts that just link like this.
+2. The reference contains more than just the page number. This makes it harder to replace the page number with the actual page number in paged output, if such is generated.
+3. The reference does not make clear that it is indeed to a page number (which could hint the rendering process to replace it when rendering on paged media.
 
 For these reasons, `tei2html` specifies that references to page-numbers are tagged as:
 
@@ -72,3 +62,13 @@ For details see page <ref target="pb123" type="pageref">123</ref>.
 That is, directly surrounding the page number, and the additional `@type` attribute set to pageref. This indicates to the rendering application that the content of the `<ref>` element needs to be replaced with the actual page number on which the details appear.
 
 To prevent that the details do not appear on the indicated page, but on a previous or next page, you should replace the target with the non-`<pb>` element the details are really in (most likely a paragraph).
+
+When creating new paged output, we will have to deal with yet another set of issues:
+
+  * Exact values for cross-references can only be established when final pagination is known. In some cases, this may result in changes in the page layout inducing changes in the page numbers itself ("see page 100" is wider than "see page 99"). Most current layout tools can deal with this type of issues reasonably, although in some extreme cases this still pops up.
+  * When generating an index, you want to avoid things like
+    * **common entry**, 12, 12, 12, 23, 24, 25, 45.
+> > but summarize them as
+    * **common entry** 12, 23-25, 45.
+> > which is not really supported by most current index generating tools, and is pretty hard to do as well.
+
