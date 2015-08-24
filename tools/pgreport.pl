@@ -18,12 +18,12 @@ use XML::XPath;
 binmode(STDOUT, ":utf8");
 use open ':utf8';
 
-my $force = 0;		# Force generation of XML files, even if up-to-date.
+my $force = 0;      # Force generation of XML files, even if up-to-date.
 my $makeHtml = 0;   # Generate HTML files.
 
 GetOptions(
     'f' => \$force,
-	'h' => \$makeHtml);
+    'h' => \$makeHtml);
 
 my $totalFiles = 0;
 my $totalPages = 0;
@@ -170,7 +170,7 @@ sub handleTeiFile($)
     }
 
     my $xmlFileName = $filePath . "$baseName.xml";
-	my $htmlFileName = $filePath . "$baseName.html";
+    my $htmlFileName = $filePath . "$baseName.html";
 
     if (!$excluded{$baseName} == 1 && defined($version))
     {
@@ -184,14 +184,14 @@ sub handleTeiFile($)
             }
             else
             {
-				if ($makeHtml != 0) 
-				{
-					system ("perl -S tei2html.pl -h -r -f $fileName$suffix");
-				}
-				else
-				{
-					system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
-				}
+                if ($makeHtml != 0) 
+                {
+                    system ("perl -S tei2html.pl -h -r -f $fileName$suffix");
+                }
+                else
+                {
+                    system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+                }
             }
             chdir ($cwd);
         }
@@ -208,6 +208,7 @@ sub handleTeiFile($)
                 my $originalDate = $xpath->find('/TEI.2/teiHeader/fileDesc/sourceDesc/bibl/date[1]');
                 my $pageCount = $xpath->find('count(//pb[not(ancestor::note)])');
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
+                my $pgphNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGPH"]');
                 my $epubId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="epub-id"]');
                 my $pgClearance = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGclearance"]');
                 my $projectId = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGDPProjectId"]');
@@ -235,6 +236,7 @@ sub handleTeiFile($)
                 print XMLFILE "    <epubid>$epubId</epubid>\n";
                 logMessage("PG Number:  $pgNum");
                 print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
+                print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
                 print XMLFILE "    <projectId>$projectId</projectId>\n";
                 logMessage("Clearance:  $pgClearance");
                 print XMLFILE "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
