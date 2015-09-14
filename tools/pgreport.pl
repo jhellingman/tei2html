@@ -196,6 +196,7 @@ sub handleTeiFile($)
             chdir ($cwd);
         }
 
+        my $coverImageFile = "cover.jpg";
         if (-e $xmlFileName)
         {
             # Use eval, so we can recover from fatal parse errors in XML:XPath.
@@ -253,7 +254,6 @@ sub handleTeiFile($)
                 my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();
                 if ($coverImage ne "")
                 {
-                    my $coverImageFile = "cover.jpg";
                     my $coverImageRend = $xpath->find('//figure[@id="cover-image"]/@rend')->string_value();
                     if ($coverImageRend =~ /image\((.*?)\)/)
                     {
@@ -281,9 +281,13 @@ sub handleTeiFile($)
                 my $xpath = XML::XPath->new(filename => $imageInfoFileName);
 
                 my $imageCount = $xpath->find('count(//image)');
-
                 logMessage("Images:     $imageCount");
                 print XMLFILE "    <imageCount>$imageCount</imageCount>\n";
+
+                my $coverWidth = $xpath->find('//image[@path="' . $coverImageFile . '"]/@width');
+                my $coverHeight = $xpath->find('//image[@path="' . $coverImageFile . '"]/@height');
+                logMessage("Cover size: $coverWidth by $coverHeight");
+                print XMLFILE "    <coverSize><width>$coverWidth</width><height>$coverHeight</height></coverSize>\n";
 
                 1;
             }

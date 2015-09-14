@@ -751,6 +751,10 @@ sub copyAudio($)
     {
         system ("cp -r -u Gutenberg/audio " . $destination);
     }
+    elsif (-d "Processed/audio")
+    {
+        system ("cp -r -u Processed/audio " . $destination);
+    }
 }
 
 #
@@ -767,5 +771,9 @@ sub copyFonts($)
     elsif (-d "Gutenberg/fonts")
     {
         system ("cp -r -u Gutenberg/fonts " . $destination);
+    }
+    elsif (-d "Processed/fonts")
+    {
+        system ("cp -r -u Processed/fonts " . $destination);
     }
 }
