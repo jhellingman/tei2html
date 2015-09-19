@@ -547,7 +547,7 @@
         <xd:short>Use ditto marks in tables and lists.</xd:short>
         <xd:detail>To set ditto-marks in tables, we need a number of HTML formatting tricks. Basically, when a phrase is in a ditto element,
         we want to replace the individual words with pairs of commas, neatly centered under each word. To achieve this, we create a small table
-        of one column and two rows. We place the word in the first row, but then make it invisible and reduce its size to zero (using CSS),
+        of one column and two rows. We place the word in the first row, but then make it invisible and reduce its height to zero (using CSS),
         and place the ditto-mark centered in the second row. Some further trickery is needed to handle the most common formatting that
         can occur in contexts where ditto-marks are used. Note that this code is quite fragile, and will fail if unexpected tagging is encountered
         inside the ditto element, or outside a table or list (such as a plain paragraph).</xd:detail>
