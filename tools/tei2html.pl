@@ -313,10 +313,10 @@ sub processFile($)
         system ("gutcheck $basename.txt > $basename.gutcheck");
         system ("$bindir\\jeebies $basename.txt > $basename.jeebies");
 
-        # Check the version in the Gutenberg directory as well.
-        if (-f "Gutenberg\\$basename.txt")
+        # Check the version in the Processed directory as well.
+        if (-f "Processed\\$basename.txt")
         {
-            system ("gutcheck Gutenberg\\$basename.txt > $basename-final.gutcheck");
+            system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
         }
 
         unlink("$filename.out");
@@ -398,7 +398,7 @@ sub makeZip($)
 
     # Copy text version to final location
 
-    my $textFilename = "Gutenberg/" . $basename . ".txt";
+    my $textFilename = "Processed/" . $basename . ".txt";
 
     if (-f $textFilename) 
     {
@@ -678,11 +678,6 @@ sub collectImageInfo()
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     }
-    elsif (-d "Gutenberg/images")
-    {
-        print "Collect image dimensions...\n";
-        system ("perl $toolsdir/imageinfo.pl -s Gutenberg/images > imageinfo.xml");
-    }
     elsif (-d "Processed/images")
     {
         print "Collect image dimensions...\n";
@@ -707,10 +702,6 @@ sub copyImages($)
     if (-d "images")
     {
         system ("cp -r -u images " . $destination);
-    }
-    elsif (-d "Gutenberg/images")
-    {
-        system ("cp -r -u Gutenberg/images " . $destination);
     }
     elsif (-d "Processed/images")
     {
@@ -747,10 +738,6 @@ sub copyAudio($)
     {
         system ("cp -r -u audio " . $destination);
     }
-    elsif (-d "Gutenberg/audio")
-    {
-        system ("cp -r -u Gutenberg/audio " . $destination);
-    }
     elsif (-d "Processed/audio")
     {
         system ("cp -r -u Processed/audio " . $destination);
@@ -767,10 +754,6 @@ sub copyFonts($)
     if (-d "fonts")
     {
         system ("cp -r -u fonts " . $destination);
-    }
-    elsif (-d "Gutenberg/fonts")
-    {
-        system ("cp -r -u Gutenberg/fonts " . $destination);
     }
     elsif (-d "Processed/fonts")
     {
