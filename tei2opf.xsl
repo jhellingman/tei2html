@@ -94,7 +94,7 @@
             </xsl:if>
             <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
                 <dc:identifier id="pgnum">
-                    <xsl:text>http://www.gutenberg.org/ebooks/</xsl:text>
+                    <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
                 </dc:identifier>
                 <meta refines="#pgnum" property="identifier-type">uri</meta>

@@ -127,7 +127,7 @@
         <xsl:if test="f:isvalid(//idno[@type='PGnum'])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
             <meta name="DC.Identifier">
-                <xsl:attribute name="content">http://www.gutenberg.org/etext/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
+                <xsl:attribute name="content">https://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
             </meta>
         </xsl:if>
 

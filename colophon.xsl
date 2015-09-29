@@ -117,7 +117,7 @@
         <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
             <p><xsl:value-of select="f:message('msgPgCatalogEntry')"/>:
                 <a class="pglink">
-                    <xsl:attribute name="href">http://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
+                    <xsl:attribute name="href">https://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
                     <xsl:value-of select="//idno[@type='PGnum']"/>
                 </a>.
             </p>
