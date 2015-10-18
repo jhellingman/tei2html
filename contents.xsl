@@ -19,7 +19,7 @@
         <xd:short>Stylesheet to generate tables of contents and indexes.</xd:short>
         <xd:detail>
             <p>This stylesheet will contains code to handle the <code>divGen</code> elements that call for generating a table of contents or index.</p>
-        
+
             <p>The following are supported:</p>
 
             <table>
@@ -152,7 +152,7 @@
 
 
     <xd:doc>
-        <xd:short>Does the division have a suitable head for display in a table of contents.</xd:short>
+        <xd:short>Test whether the division has a suitable head for display in a table of contents.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:has-toc-head" as="xs:boolean">
@@ -241,7 +241,7 @@
     <xd:doc>
         <xd:short>Combine all heads in a division into a single line for use in a table of contents.</xd:short>
         <xd:detail>
-            <p>Called in context of a division (<code>div0</code>, <code>div1</code>, etc.). Combine all heads in a division into a 
+            <p>Called in context of a division (<code>div0</code>, <code>div1</code>, etc.). Combine all heads in a division into a
             single line, ignoring "super" and "label" type heads (unless the only available head is marked "label").</p>
         </xd:detail>
     </xd:doc>
@@ -605,10 +605,18 @@
         </div>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate an entry in the list of illustrations.</xd:short>
+    </xd:doc>
 
     <xsl:template match="figure" mode="genloi">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:attribute name="id">
+                <!-- TODO: make id unique for each occurance of <divGen type="loi"> -->
+                <xsl:text>loi.</xsl:text>
+                <xsl:call-template name="generate-id"/>
+            </xsl:attribute>
+            <xsl:call-template name="set-lang-attribute"/>
             <xsl:call-template name="generate-toc-entry"/>
         </li>
     </xsl:template>
@@ -703,21 +711,30 @@
     </xsl:template>
 
 
-    <!--====================================================================-->
-    <!-- Render pre-existing table of contents encoded as itemized list as table 
-         Nested lists are integrated into a single table. 
-         
-         This depends on the following convention to structure a table of contents:
+    <xd:doc>
+        <xd:short>Render a table of contents encoded as a list as a table.</xd:short>
 
-            [list type='tocList']
-                [item] [ab type=tocDivNum]DIVISION NUMBER[/ab] DIVISION TITLE [ab type=tocPageNum]PAGE NUMBER[/ab]
-                    [list type='tocList]
-                        ... 
-                    [/list]
-                [/item]
-            [/list]
+        <xd:detail>
+            <p>Render a pre-existing table of contents encoded as an itemized list as a table.
+            Nested lists are integrated into a single table.</p>
 
-    -->
+            <p>This depends on the following convention being applied to structure the list representing a table of contents:</p>
+
+            <pre>
+                &lt;list type='tocList'&gt;
+                    &lt;item&gt; &lt;ab type='tocDivNum'&gt;DIVISION NUMBER&lt;/ab&gt; DIVISION TITLE &lt;ab type='tocPageNum'&gt;PAGE NUMBER&lt;/ab&gt;
+                        &lt;list type='tocList'&gt;
+                            ...
+                        &lt;/list&gt;
+                    &lt;/item&gt;
+                &lt;/list&gt;
+            </pre>
+
+            <p>This will result in a HTML table, in which the item numbers are placed in cells on the left, the items themselves in
+            spanned cells in the middle (made to span less columns as they are part of deeply nested items) and the page numbers
+            in a cell on the right.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="list[@type='tocList']">
         <xsl:choose>
@@ -738,7 +755,7 @@
     <xsl:template mode="tocList" match="item">
         <xsl:variable name="depth" select="count(ancestor::list[@type='tocList']) - 1"/>
         <tr>
-            <!-- Padding cell if needed to indent nested contents -->
+            <!-- Use padding cell if needed to indent nested contents -->
             <xsl:if test="$depth > 0">
                 <td>
                     <xsl:if test="$depth > 1">
@@ -749,7 +766,7 @@
             <td class="tocDivNum">
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocDivNum']"/>
             </td>
-            <td class="tocDivTitle" colspan="{5 - $depth}">
+            <td class="tocDivTitle" colspan="{7 - $depth}">
                 <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum' or @type='tocList')]"/>
             </td>
             <td class="tocPageNum">
@@ -761,6 +778,91 @@
     </xsl:template>
 
     <xsl:template mode="tocList" match="ab">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
+
+    <xd:doc>
+        <xd:short>Render a determination table encoded as a list as a table.</xd:short>
+
+        <xd:detail>
+            <p>Render a determination table (as used in biology books) encoded as an itemized list as a table.</p>
+
+            <p>The code is fairly similar to the code for tables of contents above. This depends on the following 
+            convention being applied to structure the list representing a determination table:</p>
+
+            <pre>
+                &lt;list type='determinationTable'&gt;
+                    &lt;item&gt; &lt;ab type='itemNum'&gt;ITEM NUMBER&lt;/ab&gt; OBSERVATION &lt;ab type='determination'&gt;DETERMINATION or CROSS REFERENCE&lt;/ab&gt;
+                        &lt;list type='determinationTable'&gt;
+                            ...
+                        &lt;/list&gt;
+                    &lt;/item&gt;
+                &lt;/list&gt;
+            </pre>
+
+            <p>This will result in a HTML table, in which the item numbers are placed in cells on the left, the items themselves in
+            spanned cells to the right (made to span less columns as they are part of deeply nested items) together with the
+            determinations, such that the latter are set flush-right, and won't collide (using an inner table).</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="list[@type='determinationTable']">
+        <xsl:choose>
+            <!-- Outer list -->
+            <xsl:when test="not(ancestor::list[@type='determinationTable'])">
+                <table class="tocList">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:apply-templates mode="determinationTable"/>
+                </table>
+            </xsl:when>
+            <!-- Nested list, part of table generated for outermost list -->
+            <xsl:otherwise>
+                <xsl:apply-templates mode="determinationTable"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template mode="determinationTable" match="item">
+        <xsl:variable name="depth" select="count(ancestor::list[@type='determinationTable']) - 1"/>
+        <tr>
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <!-- Use padding cell if needed to indent nested contents -->
+            <xsl:if test="$depth > 0">
+                <td>
+                    <xsl:if test="$depth > 1">
+                        <xsl:attribute name="colspan"><xsl:value-of select="$depth"/></xsl:attribute>
+                    </xsl:if>
+                </td>
+            </xsl:if>
+            <td class="itemNum">
+                <xsl:apply-templates mode="determinationTable" select="ab[@type='itemNum']"/>
+            </td>
+            <xsl:choose>
+                <!-- No determination to be set flush right? -->
+                <xsl:when test="not(*[@type='determination'])">
+                    <td colspan="{7 - $depth}">
+                        <xsl:apply-templates select="text()|*[not(@type='itemNum' or @type='determination' or @type='determinationTable')]"/>
+                    </td>
+                </xsl:when>
+                <xsl:otherwise>
+                    <td colspan="{7 - $depth}" class="innerContainer">
+                        <table class="inner">
+                            <tr>
+                                <td><xsl:apply-templates select="text()|*[not(@type='itemNum' or @type='determination' or @type='determinationTable')]"/></td>
+                                <td class="alignright"><xsl:apply-templates mode="tocList" select="ab[@type='determination']"/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </xsl:otherwise>
+            </xsl:choose>
+        </tr>
+        <!-- Render the nested list (omitted before) -->
+        <xsl:apply-templates select="*[@type='determinationTable']"/>
+    </xsl:template>
+
+    <xsl:template mode="determinationTable" match="ab">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -835,7 +937,7 @@
                         <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
                         <xsl:otherwise>; </xsl:otherwise>
                     </xsl:choose>
-                    
+
                     <xsl:value-of select="@level2"/>
 
                     <!-- Group to suppress duplicate page numbers -->
