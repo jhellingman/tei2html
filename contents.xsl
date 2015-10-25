@@ -809,6 +809,7 @@
     </xd:doc>
 
     <xsl:template match="list[@type='determinationTable']">
+        <xsl:call-template name="closepar"/>
         <xsl:choose>
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='determinationTable'])">
@@ -822,6 +823,7 @@
                 <xsl:apply-templates mode="determinationTable"/>
             </xsl:otherwise>
         </xsl:choose>
+        <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
     <xsl:template mode="determinationTable" match="item">

@@ -258,14 +258,35 @@
 
     <xd:doc>
         <xd:short>Close a <code>p</code>-element in the output.</xd:short>
-        <xd:detail>To accomodate the differences between the TEI and HTML paragraph model,
+        <xd:detail><p>To accomodate the differences between the TEI and HTML paragraph model,
         we sometimes need to close (and reopen) paragraphs, as various elements
-        are not allowed inside <code>p</code>-elements in HTML.</xd:detail>
+        are not allowed inside <code>p</code>-elements in HTML.</p>
+        
+        <p>The following cases need to be taken into account:</p>
+        
+        <ul>
+            <li>We use the variable <code>$p.element</code> but it is not set the value <code>'p'</code></li>
+            <li>We are actually inside a <code>p</code> element.</li>
+            <li>We do not locally override the variable <code>$p.element</code>, for example when we need to nest special elements
+            in a <code>p</code> element (see template handle-paragraph in block.xsl).</li>
+        </ul>
+        
+        </xd:detail>
     </xd:doc>
+
+    <xsl:function name="f:needsclosepar" as="xs:boolean">
+        <xsl:param name="element"/>
+
+        <xsl:variable name="output_p" select="$p.element = 'p'" as="xs:boolean"/>
+        <xsl:variable name="parent_p" select="$element/parent::p or $element/parent::note" as="xs:boolean"/>
+        <xsl:variable name="parent_does_not_contain_ditto" select="not($element/parent::p[.//ditto] or $element/parent::note[.//ditto])" as="xs:boolean"/>
+
+        <xsl:value-of select="$output_p and $parent_p and $parent_does_not_contain_ditto"/>
+    </xsl:function>
 
     <xsl:template name="closepar">
         <!-- insert </p> to close current paragraph as tables in paragraphs are illegal in HTML -->
-        <xsl:if test="$p.element = 'p' and (parent::p or parent::note)">
+        <xsl:if test="f:needsclosepar(.)">
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -277,7 +298,7 @@
     </xd:doc>
 
     <xsl:template name="reopenpar">
-        <xsl:if test="$p.element = 'p' and (parent::p or parent::note)">
+        <xsl:if test="f:needsclosepar(.)">
             <xsl:text disable-output-escaping="yes">&lt;p class="par"&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
