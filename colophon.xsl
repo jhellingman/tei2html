@@ -21,7 +21,7 @@
         <xd:short>Stylesheet to generate a colophon.</xd:short>
         <xd:detail>This stylesheet will generate a colophon from the <code>teiHeader</code>, and various other types of information in the TEI file.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <!--====================================================================-->
@@ -45,15 +45,22 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate the colophon body.</xd:short>
+        <xd:detail>
+            <p>Generate the body of a colophon for a TEI file, based on information in the <code>teiHeader</code>.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="divGen[@type='ColophonBody']">
         <xsl:call-template name="colophon-body"/>
     </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Generate the colophon body.</xd:short>
+        <xd:short>Generate the contents of the colophon body.</xd:short>
         <xd:detail>
-            <p>Generate the body of a colophon for a TEI file, based on information in the <code>teiHeader</code>.</p>
+            <p>Generate the contents of the body of a colophon for a TEI file, based on information in the <code>teiHeader</code>.</p>
         </xd:detail>
     </xd:doc>
 
@@ -190,6 +197,13 @@
         </xsl:if>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate the contents of the list of corrections.</xd:short>
+        <xd:detail>
+            <p>Generate the contents of the list of corrections as an HTML table.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="correctionTable">
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
@@ -276,6 +290,13 @@
         </xsl:if>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Generate the contents of the external references.</xd:short>
+        <xd:detail>
+            <p>Generate the contents of the table of external references as an HTML table.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template name="external-reference-table">
         <xsl:if test="//xref[@url]">
 
@@ -325,6 +346,7 @@
             <p>Find the page-number for a node. This will try to locate the preceding <code>pb</code>-element, and return its
             <code>@n</code>-attribute value. This should normally correspond with the page the node appeared on in the source.</p>
         </xd:detail>
+        <xd:param name="node" type="node()">The node for which the page-number is to be found.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:find-pagenumber" as="xs:string">
@@ -370,6 +392,13 @@
         </div>
     </xsl:template>
 
+    <xd:doc mode="languageFragments">
+        <xd:short>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments.</xd:short>
+        <xd:detail>
+            <p>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments. This takes
+            care that elements which are normally processed in a special way are treated as normal in this overview.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xd:doc>
         <xd:short>Generate an overview of foreign language fragments, for one language.</xd:short>
@@ -377,6 +406,7 @@
             <p>Generate a table of foreign language fragments in the text for a given language.
             The fragments are grouped by content (that is, undoubled), and presented in document order.</p>
         </xd:detail>
+        <xd:param name="lang" type="string">The code of the language to handle.</xd:param>
     </xd:doc>
 
     <xsl:template name="language-fragments">
@@ -422,16 +452,28 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle elements as usual by default.</xd:short>
+    </xd:doc>
+
     <xsl:template match="*" mode="languageFragments">
         <xsl:apply-templates select="."/>
     </xsl:template>
 
-    <!-- Prevent notes from being rendered as raised numerals in the language fragment overview -->
+
+    <xd:doc>
+        <xd:short>Prevent notes from being rendered as raised numerals in the language fragment overview.</xd:short>
+    </xd:doc>
+
     <xsl:template match="note" mode="languageFragments">
         <xsl:apply-templates/>
     </xsl:template>
 
-    <!-- Prevent cells from being rendered as extra tb elements in the language fragment overview -->
+
+    <xd:doc>
+        <xd:short>Prevent cells from being rendered as extra tb elements in the language fragment overview.</xd:short>
+    </xd:doc>
+
     <xsl:template match="cell" mode="languageFragments">
         <xsl:apply-templates/>
     </xsl:template>

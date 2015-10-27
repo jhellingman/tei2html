@@ -28,7 +28,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:f="urn:stylesheet-functions"    
+    xmlns:f="urn:stylesheet-functions"
     xmlns:i="http://gutenberg.ph/issues"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     exclude-result-prefixes="i f xhtml xs xd"
@@ -37,9 +37,13 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to perform various checks on a TEI file.</xd:short>
-        <xd:detail>This stylesheet performs a number of checks on a TEI file, to help find potential issues with both the text and tagging.</xd:detail>
+        <xd:detail><p>This stylesheet performs a number of checks on a TEI file, to help find potential issues with both the text and tagging.</p>
+        <p>Since the standard XSLT processor does not provide line and column information to report errors on, this stylesheet expects that all
+        elements are provided with a <code>pos</code> element that contains the line and column the element appears on in the source file. This element
+        should have the format <code>line:column</code>. A small Perl script (<code>addPositionInfo.pl</code>) is available to add those attributes to 
+        elements as a preprocessing step.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -50,6 +54,20 @@
         <xsl:apply-templates select="/" mode="checks"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Determine potential problems in a TEI file.</xd:short>
+        <xd:detail>
+            <p>Issues are collected in two phases. First, usign the mode <code>checks</code>, all
+            issues are stored in a variable <code>issues</code>; then, the contents of this
+            variable are processed using the mode <code>report</code>.</p>
+
+            <p>Several textual issues are verified on a flattened representation of the text, 
+            collected in the variable <code>segments</code>. A segment roughly corresponds to
+            a paragraph, but without further internal structure. Furthermore, list-items,
+            table-cells, headers, etc., are also treated as segments.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="/">
 
@@ -105,6 +123,15 @@
         </html>
     </xsl:template>
 
+
+    <xd:doc mode="report">
+        <xd:short>Mode for reporting the found issues in an HTML table.</xd:short>
+    </xd:doc>
+
+    <xd:doc>
+        <xd:short>Report an issue as a row in a HTML table.</xd:short>
+    </xd:doc>
+
     <xsl:template mode="report" match="i:issue">
         <tr>
             <td><xsl:value-of select="@code"/></td>
@@ -115,7 +142,15 @@
         </tr>
     </xsl:template>
 
-    <!-- Information in TEI header -->
+
+    <xd:doc mode="checks">
+        <xd:short>Mode for collecting issues in a simple intermediate structure.</xd:short>
+    </xd:doc>
+
+
+    <xd:doc>
+        <xd:short>Check the information in the TEI-header is complete.</xd:short>
+    </xd:doc>
 
     <xsl:template mode="checks" match="publicationStmt">
         <xsl:if test="not(idno[@type='epub-id'])">
@@ -130,7 +165,9 @@
     </xsl:template>
 
 
-    <!-- Numbering of divisions -->
+    <xd:doc>
+        <xd:short>Check the numbering of divisions.</xd:short>
+    </xd:doc>
 
     <xsl:template mode="checks" match="front | body | back">
 
@@ -157,6 +194,11 @@
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
     <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>
 
+
+    <xd:doc>
+        <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
+    </xd:doc>
+
     <xsl:template mode="checks" match="front/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
@@ -169,6 +211,11 @@
 
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Check the types of <code>div0</code> divisions in the body.</xd:short>
+    </xd:doc>
 
     <xsl:template mode="checks" match="body/div0">
         <xsl:call-template name="check-div-type-present"/>
@@ -184,6 +231,11 @@
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Check the types of <code>div1</code> divisions in the body.</xd:short>
+    </xd:doc>
+
     <xsl:template mode="checks" match="body/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
@@ -196,6 +248,11 @@
 
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Check the types of <code>div1</code> divisions in the backmatter.</xd:short>
+    </xd:doc>
 
     <xsl:template mode="checks" match="back/div1">
         <xsl:call-template name="check-div-type-present"/>
@@ -246,7 +303,7 @@
 
     <!-- divGen types -->
 
-    <xsl:variable name="expectedDivGenTypes" select="'toc', 'Colophon', 'IndexToc'"/>
+    <xsl:variable name="expectedDivGenTypes" select="'toc', 'loi', 'Colophon', 'IndexToc'"/>
 
     <xsl:template mode="checks" match="divGen">
         <xsl:call-template name="check-div-type-present"/>
@@ -386,7 +443,7 @@
     <xd:doc>
         <xd:short>Verify paired punctuation marks match.</xd:short>
         <xd:detail>
-            <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the 
+            <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the
             right single quote character (&rsquo;) is not being used for the apostrophe (hint: temporarily change those to
             something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, and &ldquo;&rdquo;.</p>
         </xd:detail>
@@ -436,7 +493,7 @@
     <xd:doc>
         <xd:short>Find unclosed pairs of paired punctuation marks.</xd:short>
         <xd:detail>
-            <p>Find unclosed pairs of paired punctuation marks in a string of punctuation marks using recursive calls. 
+            <p>Find unclosed pairs of paired punctuation marks in a string of punctuation marks using recursive calls.
             This pushes open marks on a stack, and pops them when the closing mark comes by.
             When an unexpected closing mark is encountered, we return an error; when the string is fully consumed,
             the remainder of the stack is returned. Normally, this is expected to be empty.</p>
@@ -509,10 +566,11 @@
         <xsl:sequence select="codepoints-to-string(reverse(string-to-codepoints($string)))"/>
     </xsl:function>
 
+
     <xd:doc>
         <xd:short>Convert a Roman number to an integer.</xd:short>
         <xd:detail>
-            <p>Convert a Roman number to an integer. This function calls a recursive implementation, which 
+            <p>Convert a Roman number to an integer. This function calls a recursive implementation, which
             establishes the value of the first letter, and then adds or subtracts that value to/from the
             value of the tail, depending on whether the next character represent a higher or lower
             value.</p>
@@ -531,20 +589,20 @@
         <xsl:param name="value" as="xs:integer"/>
 
         <xsl:variable name="length" select="string-length($roman)"/>
-      
+
         <xsl:choose>
             <xsl:when test="not($length) or $length = 0">
                 <xsl:sequence select="$value"/>
             </xsl:when>
-            
+
             <xsl:when test="$length = 1">
                 <xsl:sequence select="$value + f:roman-value($roman)"/>
             </xsl:when>
-            
+
             <xsl:otherwise>
                 <xsl:variable name="head-value" select="f:roman-value(substring($roman, 1, 1))"/>
                 <xsl:variable name="tail" select="substring($roman, 2, $length - 1)"/>
-                
+
                 <xsl:sequence select="if ($head-value &lt; f:roman-value(substring($roman, 2, 1)))
                     then f:from-roman-implementation($tail, $value - $head-value)
                     else f:from-roman-implementation($tail, $value + $head-value)"/>
@@ -555,21 +613,21 @@
 
     <xsl:function name="f:is-number" as="xs:boolean">
         <xsl:param name="string"/>
-        
+
         <xsl:sequence select="matches($string, '^[\d]+$', 'i')"/>
     </xsl:function>
 
 
     <xsl:function name="f:is-roman" as="xs:boolean">
         <xsl:param name="string"/>
-        
+
         <xsl:sequence select="string-length($string) != 0 and matches($string, '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', 'i')"/>
     </xsl:function>
 
 
     <xsl:function name="f:roman-value" as="xs:integer">
         <xsl:param name="character" as="xs:string"/>
-        
+
         <xsl:sequence select="(1, 5, 10, 50, 100, 500, 1000)[index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'), upper-case($character))]"/>
     </xsl:function>
 

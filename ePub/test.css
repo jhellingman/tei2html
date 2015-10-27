@@ -354,7 +354,7 @@ table.tocList {
 
 td.tocPageNum, td.tocDivNum {
  text-align: right;
- width: 10%;
+ min-width: 10%;
  border-width: 0;
 }
 
@@ -392,6 +392,26 @@ table.tocList td {
 table.tocList td.tocPageNum {
  vertical-align: bottom;
 }
+
+ 
+
+table.inner {
+ display: inline-table;
+ border-collapse: collapse;
+ width: 100%;
+}
+
+td.itemNum {
+ text-align: right;
+ min-width: 5%;
+ padding-right: 0.8em;
+}
+
+td.innerContainer {
+ padding: 0;
+ margin: 0;
+}
+
 
  
 
@@ -616,8 +636,7 @@ table.verticalBorderInside td {
  border-left: 1px solid black;
 }
 
-table.verticalBorderInside .cellHeadTop, table.verticalBorderInside .cellTop
- {
+table.verticalBorderInside .cellHeadTop, table.verticalBorderInside .cellTop {
  border-top: 2px solid black;
 }
 
@@ -629,8 +648,7 @@ table.verticalBorderInside .cellBottom {
  border-bottom: 2px solid black;
 }
 
-table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft
- {
+table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft {
  border-left: 0px solid black;
 }
 
