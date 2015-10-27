@@ -18,6 +18,7 @@ Syntax: `perl.pl -S tei2html.pl [options] filename`
 | `-p` | Generate PDF (_using Prince XML_) |
 | `-r` | Generate word-usage report |
 | `-c` filename | Include additional CSS file |
+| `-v` | Generate a report of common errors that appear in the TEI file |
 
 Default options `-xhtr`.
 
@@ -51,14 +52,13 @@ Perl script to replace ASCII double-quotes with curly quotes. May need some manu
 
 Issues:
 
-  * Open quotes before SGML tags and non-letters go wrong.
-  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes, but see below.)
-  * 
+  * Open quotes before SGML tags and non-letters go wrong (they become the default: a close quote).
+  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes, but see `aposquote.pl` below.)
 
 ## `aposquote.pl` ##
 
-Perl script to replace ASCII single quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections. (Use `tei2html.pl` with the `-v` option to find such cases.)
+Perl script to replace ASCII single-quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections. (Manually check for ASCII single-quotes, and apply the correct one. Use `tei2html.pl` with the `-v` option to find cases where quotes are still not balanced.)
 
 ## `pgpp.pl` ##
 
-Initials script run on the output from PG Distributed Proofreaders, when converting that to TEI (A manual process, the resulting output is still very far removed from being an actual TEI file).
+Script run initially on the output from PG Distributed Proofreaders, when converting that to TEI (The actual convertion is a manual process, as the resulting output is still very far removed from being an actual TEI file).
