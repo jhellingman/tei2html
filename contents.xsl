@@ -323,6 +323,7 @@
 
     <xsl:template match="ab[@type='divNum']" mode="tochead"/>
 
+    <xsl:template match="ab[@type='lineNum']" mode="tochead"/>
 
     <xd:doc>
         <xd:short>Handle text styles in chapter heads.</xd:short>
