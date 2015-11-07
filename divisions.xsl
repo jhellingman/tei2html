@@ -561,8 +561,8 @@
     <!-- code to align two divisions based on the @n attribute -->
 
     <xd:doc>
-        <xd:short>Align two division based on the @n attribute in paragraphs.</xd:short>
-        <xd:detail>Align two division based on the @n attribute in paragraphs. This code handles
+        <xd:short>Align two division based on the <code>@n</code> attribute in paragraphs.</xd:short>
+        <xd:detail>Align two division based on the <code>@n</code> attribute in paragraphs. This code handles
         the case where paragraphs are added or removed between aligned paragraphs, as can be
         expected in a more free translation.</xd:detail>
     </xd:doc>
@@ -570,6 +570,10 @@
     <xsl:template name="align-paragraphs">
         <xsl:param name="a"/>
         <xsl:param name="b"/>
+
+        <!-- Determine the language of each side, so we can correctly indicate it on the cells -->
+        <xsl:variable name="firstLang" select="($a/ancestor-or-self::*/@lang)[last()]"/>
+        <xsl:variable name="secondLang" select="($b/ancestor-or-self::*/@lang)[last()]"/>
 
         <!-- We collect all 'anchor' elements, i.e., elements with the
              same value of the @n attribute. Those we line up in our table,
@@ -588,7 +592,7 @@
             <!-- Handle matter before any anchor -->
             <xsl:if test="not($a/*[1]/@n = $anchors) or not($b/*[1]/@n = $anchors)">
                 <tr>
-                    <td class="first">
+                    <td class="first" lang="{$firstLang}">
                         <xsl:if test="not($a/*[1]/@n = $anchors)">
                             <xsl:apply-templates select="$a/*[1]"/>
                             <xsl:call-template name="output-inserted-paragraphs">
@@ -597,7 +601,7 @@
                             </xsl:call-template>
                         </xsl:if>
                     </td>
-                    <td class="second">
+                    <td class="second" lang="{$secondLang}">
                         <xsl:if test="not($b/*[1]/@n = $anchors)">
                             <xsl:apply-templates select="$b/*[1]"/>
                             <xsl:call-template name="output-inserted-paragraphs">
@@ -614,14 +618,14 @@
                 <xsl:variable name="n" select="@n"/>
 
                 <tr>
-                    <td class="first">
+                    <td class="first" lang="{$firstLang}">
                         <xsl:apply-templates select="."/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="."/>
                             <xsl:with-param name="anchors" select="$anchors"/>
                         </xsl:call-template>
                     </td>
-                    <td class="second">
+                    <td class="second" lang="{$secondLang}">
                         <xsl:apply-templates select="$b/*[@n = $n]"/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="$b/*[@n = $n]"/>
@@ -636,7 +640,7 @@
     <xd:doc>
         <xd:short>Output inserted paragraphs in aligned divisions.</xd:short>
         <xd:detail>Output paragraphs not present in the first division, but present in
-        the second (that is, without a matching @n attribute).</xd:detail>
+        the second (that is, without a matching <code>@n</code> attribute).</xd:detail>
     </xd:doc>
 
     <xsl:template name="output-inserted-paragraphs">
