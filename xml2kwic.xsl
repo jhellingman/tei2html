@@ -268,6 +268,10 @@
             <xsl:value-of select="string-length($groups)"/>
         </xsl:variable>
 
+        <xsl:if test="$keyword != fn:lower-case(f:strip_diacritics($keyword))">
+            <p><xsl:text>Normalized word: </xsl:text><xsl:value-of select="fn:lower-case(f:strip_diacritics($keyword))"/><xsl:text> </xsl:text></p>
+        </xsl:if>
+
         <xsl:if test="$variant-count &gt; 1">
             <p><span class="cnt">Variants:</span>
                 <xsl:for-each-group select="$matches" group-by="./word">

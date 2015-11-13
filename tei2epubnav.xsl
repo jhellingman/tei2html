@@ -131,7 +131,7 @@
                     <li>
                         <a epub:type="loi">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@id='toc'])[1]"/>
+                                <xsl:with-param name="target" select="(//*[@id='loi'])[1]"/>
                             </xsl:call-template>
                             <xsl:value-of select="f:message('msgToc')"/>
                         </a>

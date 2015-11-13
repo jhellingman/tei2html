@@ -1094,6 +1094,7 @@ sub entities2iso88591($)
     $a =~ s/\&Ngtilde;/Ng/g;
     $a =~ s/\&NGtilde;/NG/g;
     $a =~ s/\&apos;/'/g;
+    $a =~ s/\&rhring;/`/g;
     $a =~ s/\&mlapos;/'/g;
     $a =~ s/\&okina;/`/g;
     $a =~ s/\&sup([0-9a-zA-Z]);/$1/g;
