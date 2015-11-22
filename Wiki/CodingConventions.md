@@ -6,9 +6,15 @@ The `@type` attribute can indicate a sub-class or special use of a certain eleme
 
 ## Special values ##
 
-The following table gives special values for the `@type` attribute in various contexts.
+The following table gives special values for the `@type` attribute in various contexts. These are
+handled in a special way when processing the TEI file.
 
-| **TEI element**       | **`@type` value        | **Notes**                  |
+**TODO** use lower camel case convention for these names.
+
+**TODO** merge divNum and headDivNum (adjust files and stylesheets).
+
+
+| **TEI element**       | **`@type` value**      | **Notes**                  |
 |:----------------------|:-----------------------|:---------------------------|
 | `ab`                  | `divNum`               | Indicates a division number (typically within a `head` element). |
 | `ab`                  | `flushright`           | Indicates the `ab` should be set flush right. |
@@ -18,7 +24,7 @@ The following table gives special values for the `@type` attribute in various co
 | `ab`                  | `tocPageNum`           | Indicates a page number within a toc. |
 | `div1`                | `TranscriberNote`      | The division is a note by the transcriber (rendered in a different color). |
 | `div2`                | `SubToc`               | The division is a toc for the div1 it appears in (content will be replaced by generated content). |
-| `divGen`              | `apparatus`            | Generate a section with apparatus notes. |
+| `divGen`              | `apparatus`            | Generate a section with apparatus notes (can be used multiple times, all apparatus notes between this and the previous instance will be included). |
 | `divGen`              | `Colophon`             | Generate a colophon (based on information in the TEI header). |
 | `divGen`              | `ColophonBody`         | Generate the body of a colophon (based on information in the TEI header). |
 | `divGen`              | `Footnotes`            | Generate a section with footnotes. |
@@ -37,19 +43,16 @@ The following table gives special values for the `@type` attribute in various co
 | `head`                | `label`                | The (division) heading is a label indicating its type and number. (Typically 'Chapter IX'). |
 | `head`                | `sub`                  | The (division) heading is a sub-title. |
 | `head`                | `super`                | The (division) heading is the title of a higher level division. |
-| `head`                | `TranscriberNote`      | The division is a note by the transcriber (rendered in a different color). |
-| `idno`                | `epub-id`              | The idno gives a unique identifier for the generated ePub file. |
-| `idno`                | `ISBN`                 | The idno gives the ISBN for the edition. |
-| `idno`                | `LCCN`                 | The idno gives the Library of Congress call number. |
-| `idno`                | `LibThing`             | The idno gives the Library Thing catalog number for the edition. |
-| `idno`                | `OCLC`                 | The idno gives the WorldCat catalog number for the edition. |
-| `idno`                | `OLN`                  | The idno gives the Open Library catalog number for the (source) edition. |
-| `idno`                | `OLW`                  | The idno gives the Open Library catalog number for the work. |
-| `idno`                | `PGnum`                | The idno gives the Project Gutenberg ebook number. |
+| `idno`                | `epub-id`              | The `idno` gives a unique identifier for the generated ePub file. |
+| `idno`                | `ISBN`                 | The `idno` gives the ISBN for the edition. |
+| `idno`                | `LCCN`                 | The `idno` gives the Library of Congress call number. |
+| `idno`                | `LibThing`             | The `idno` gives the Library Thing catalog number for the edition. |
+| `idno`                | `OCLC`                 | The `idno` gives the WorldCat catalog number for the edition. |
+| `idno`                | `OLN`                  | The `idno` gives the Open Library catalog number for the (source) edition. |
+| `idno`                | `OLW`                  | The `idno` gives the Open Library catalog number for the work. |
+| `idno`                | `PGnum`                | The `idno` gives the Project Gutenberg ebook number. |
 | `list`                | `determinationTable`   | Convert the list to a (potentially nested) table as used for determination in biological works. |
 | `list`                | `tocList`              | Convert the list to a (potentially nested) table of contents. |
-| `note`                | `apparatus`            | The note is part of a critical apparatus. |
-| `note`                | `foot`                 | The note is a footnote (*default*). |
 | `p`                   | `figBottom`            | The paragraph will be placed on the bottom-center of a figure. |
 | `p`                   | `figBottomLeft`        | The paragraph will be placed on the bottom-left of a figure. |
 | `p`                   | `figBottomRight`       | The paragraph will be placed on the bottom-right of a figure. |
@@ -65,3 +68,13 @@ The following table gives special values for the `@type` attribute in various co
 | `titlePart`           | `sub`                  | The title part is a sub-title. |
 
 
+| **TEI element**       | **`@place` value**     | **Notes**                  |
+|:----------------------|:-----------------------|:---------------------------|
+| `note`                | `apparatus`            | The note is part of a critical apparatus. |
+| `note`                | `foot`                 | The note is a footnote (*default*). |
+| `note`                | `margin`               | The note is a marginal note. |
+
+
+| **TEI element**       | **`@unit` value**      | **Notes**                  |
+|:----------------------|:-----------------------|:---------------------------|
+| `milestone`           | `tb`                   | The milestone is a thematic break. |
