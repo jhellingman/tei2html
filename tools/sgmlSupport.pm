@@ -1364,6 +1364,11 @@ BEGIN
     $ent{"esh"}         = chr(0x0283);  # letter esh
     $ent{"ESH"}         = chr(0x01A9);  # letter Esh (looks like Greek capital sigma)
 
+    $ent{"lllig"}       = chr(0x1EFB);  # ll ligature (Welsh)
+    $ent{"Lllig"}       = chr(0x1EFA);  # Ll ligature (Welsh)
+    $ent{"wwelsh"}      = chr(0x1EFD);  # Middle Welsh w
+    $ent{"Wwelsh"}      = chr(0x1EFC);  # Middle Welsh W
+
     $ent{"turna"}       = chr(0x0250);  # letter turned a
     $ent{"turnacirc"}   = chr(0x0250) . chr(0x0302);  # letter turned a with circumflex
 
@@ -1667,9 +1672,7 @@ BEGIN
     $ent{"Osupe"}       = "O" . chr(0x0364); # O with small e above
     $ent{"Usupe"}       = "U" . chr(0x0364); # U with small e above
 
-    # Using stroke-through overlays: (was actually not needed)
     $ent{"bstrok"}      = chr(0x0180); # b with stroke through stem
-    $ent{"dstrok"}      = "d" . chr(0x0335); # d with stroke through stem
 
     # Requiring wide combining diacritics
     $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve
@@ -2292,6 +2295,18 @@ sub pgdp2sgml
     $string =~ s/\[AE\]/\&AElig;/g;                     # AE ligature
     $string =~ s/\[oe\]/\&oelig;/g;                     # oe ligature
     $string =~ s/\[OE\]/\&OElig;/g;                     # OE ligature
+
+    # Welsh special letters
+    $string =~ s/\[ll\]/\&lllig;/g;                     # ll ligature (Welsh)
+    $string =~ s/\[Ll\]/\&Lllig;/g;                     # Ll ligature (Welsh)
+    $string =~ s/\[LL\]/\&Lllig;/g;                     # LL ligature (Welsh)
+
+    $string =~ s/\[dd\]/\&dstrok;/g;                    # dd = d with stroke (Welsh)
+    $string =~ s/\[Dd\]/\&Dstrok;/g;                    # Dd = D with stroke (Welsh)
+    $string =~ s/\[DD\]/\&Dstrok;/g;                    # DD = D with stroke (Welsh)
+
+    $string =~ s/\[w6\]/\&wwelsh;/g;                    # Middle Welsh w (looks like 6 with open loop)
+    $string =~ s/\[W6\]/\&Wwelsh;/g;                    # Middle Welsh W (looks like 6 with open loop)
 
     # Ligatures with accents
     $string =~ s/\[\^(ae|\x{00e6})\]/\&aecirc;/g;       # ae with circumflex
