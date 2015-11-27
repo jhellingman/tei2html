@@ -735,6 +735,8 @@
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgColophon">Colofon</msg:message>
         <msg:message name="msgApparatus">Tekstkritische noten</msg:message>
+		<msg:message xml:lang="nl-1900" name="msgApparatus">Tekstcritische noten</msg:message>
+
         <msg:message name="msgRevisionHistory">Documentgeschiedenis</msg:message>
         <msg:message name="msgAvailability">Beschikbaarheid</msg:message>
         <msg:message name="msgEncoding">Codering</msg:message>

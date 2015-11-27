@@ -20,6 +20,7 @@ handled in a special way when processing the TEI file.
 | `ab`                  | `flushright`           | Indicates the `ab` should be set flush right. |
 | `ab`                  | `headDivNum`           | Indicates a division number (typically within a `head` element). |
 | `ab`                  | `lineNum`              | Indicates a line number (typically within a `p` or `l` element). |
+| `ab`                  | `lineNumRef`           | Indicates a reference to a line number. |
 | `ab`                  | `tocDivNum`            | Indicates a division number within a toc. |
 | `ab`                  | `tocPageNum`           | Indicates a page number within a toc. |
 | `div1`                | `TranscriberNote`      | The division is a note by the transcriber (rendered in a different color). |
