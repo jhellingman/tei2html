@@ -17,6 +17,7 @@ BEGIN
     $langNameHash{"af"}        = "Afrikaans";
     $langNameHash{"am"}        = "Amharic";
     $langNameHash{"an"}        = "Aragonese";
+    $langNameHash{"ang"}       = "Anglo-Saxon";
     $langNameHash{"ar"}        = "Arabic";
     $langNameHash{"ar-latn"}   = "Arabic (Latin transcription)";
     $langNameHash{"as"}        = "Assamese";

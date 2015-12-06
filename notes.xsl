@@ -332,7 +332,7 @@
         <xd:detail>Render a single text-critical note.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[@place='apparatus']" mode="apparatus">
+    <xsl:template match="note[@place='apparatus' and not(p)]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
                 par footnote apparatus
@@ -341,15 +341,45 @@
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
 
             <xsl:call-template name="set-lang-id-attributes"/>
-            <span class="label">
-                <a class="apparatusnote">
-                    <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
-                    <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
-                </a>
-            </span>
+            <xsl:call-template name="apparatus-note-marker"/>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
+            <xsl:call-template name="footnote-return-arrow"/>
         </xsl:element>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Handle text-critical apparatus notes with embedded paragraphs.</xd:short>
+        <xd:detail>Insert a footnote with embedded paragraphs. These need to be handled slightly differently
+        from footnotes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
+        <xsl:element name="{$p.element}">
+            <xsl:variable name="class">
+                par footnote apparatus
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:variable>
+            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="apparatus-note-marker"/>
+            <xsl:apply-templates select="*[1]" mode="footfirst"/>
+            <xsl:if test="count(*) = 1">
+                <xsl:call-template name="footnote-return-arrow"/>
+            </xsl:if>
+        </xsl:element>
+        <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
+        <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
+    </xsl:template>
+
+    <xsl:template name="apparatus-note-marker">
+        <span class="label">
+            <a class="apparatusnote">
+                <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
+                <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
+            </a>
+        </span>
     </xsl:template>
 
 </xsl:stylesheet>

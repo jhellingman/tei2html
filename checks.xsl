@@ -303,7 +303,7 @@
 
     <!-- divGen types -->
 
-    <xsl:variable name="expectedDivGenTypes" select="'toc', 'loi', 'Colophon', 'IndexToc'"/>
+    <xsl:variable name="expectedDivGenTypes" select="'toc', 'loi', 'Colophon', 'IndexToc', 'apparatus'"/>
 
     <xsl:template mode="checks" match="divGen">
         <xsl:call-template name="check-div-type-present"/>
