@@ -3,14 +3,23 @@
     <xsl:stylesheet
         xmlns="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
+        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:f="urn:stylesheet-functions"
-        exclude-result-prefixes="f xs"
+        exclude-result-prefixes="f xd xs"
         version="2.0">
 
+    <xd:doc type="stylesheet">
+        <xd:short>TEI stylesheet to convert a TEI document to an NCX file, used in ePub 2.0.</xd:short>
+        <xd:detail>This stylesheet generates an NCX file, as used in ePub 2.0 (and ePub3 for backwards compatibility).</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2012-15, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
-    <!-- Epubcheck complains about the doctypes, so leave them empty. -//NISO//DTD ncx 2005-1//EN http://www.daisy.org/z3986/2005/ncx-2005-1.dtd -->
+    <!-- Epubcheck complains about the doctypes, so leave them empty.
+         -//NISO//DTD ncx 2005-1//EN http://www.daisy.org/z3986/2005/ncx-2005-1.dtd
+    -->
     <xsl:output name="ncx"
         doctype-public=""
         doctype-system=""
@@ -18,6 +27,18 @@
         indent="yes"
         encoding="utf-8"/>
 
+
+    <xd:doc>
+        <xd:short>Generate an NCX file.</xd:short>
+        <xd:detail>
+            <p>Generate an NCX file. This file is the table of contents for older (ePub 2.0)
+            ePub readers. The most important element is the <code>navMap</code>.</p>
+
+            <p>The navMap is generated in two phases. In the first, the contents are collected
+            in a variable, in the second, the nodes of the navMap are given the correct playOrder
+            attribute.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="TEI.2" mode="ncx">
 
@@ -49,8 +70,7 @@
 
                     <meta name="dtb:totalPageCount" content="0"/>
                     <meta name="dtb:maxPageNumber" content="0"/>
-                    <meta name="dtb:generator" content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
-
+                    <meta name="dtb:generator" content="tei2ncx.xsl, see https://github.com/jhellingman/tei2html"/>
                 </head>
 
                 <docTitle>
@@ -76,12 +96,17 @@
                     </xsl:variable>
                     <xsl:apply-templates select="$navMap" mode="playorder"/>
                 </navMap>
-
             </ncx>
-
         </xsl:result-document>
-
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Create a navPoint element.</xd:short>
+        <xd:detail>
+            <p>Create a navPoint element for a given node, if the node is present.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:create-nav-point">
         <xsl:param name="node"/>
@@ -108,118 +133,127 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine the textual content of the label for a division.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:create-label">
+        <xsl:param name="node"/>
+
+        <xsl:choose>
+            <xsl:when test="f:has-rend-value($node/@rend, 'toc-head')">
+                <xsl:value-of select="f:rend-value($node/@rend, 'toc-head')"/>
+            </xsl:when>
+            <xsl:when test="$node/head">
+                <xsl:apply-templates select="$node/head" mode="navLabel"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
     <!--== navMap ==========================================================-->
 
     <xsl:template match="text" mode="navMap">
         <xsl:apply-templates select="front | body | back" mode="navMap"/>
     </xsl:template>
 
+
     <xsl:template match="front | body | back" mode="navMap">
         <xsl:apply-templates select="div0 | div1" mode="navMap"/>
     </xsl:template>
 
-    <xsl:template match="div0" mode="navMap">
-        <xsl:choose>
-            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
-                <navPoint class="part">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel>
-                        <text>
-                            <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
-                        </text>
-                    </navLabel>
-                    <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
-                    </content>
-                    <xsl:if test="div1">
-                        <xsl:apply-templates select="div1" mode="navMap"/>
-                    </xsl:if>
-                </navPoint>
-            </xsl:when>
 
-            <xsl:when test="head">
+    <xsl:template match="div0" mode="navMap">
+        <xsl:if test="not(f:rend-value(@rend, 'display') = 'none')">
+
+            <xsl:variable name="label" select="f:create-label(.)"/>
+
+            <xsl:if test="$label != ''">
                 <navPoint class="part">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                     <navLabel>
                         <text>
-                            <xsl:apply-templates select="head" mode="navLabel"/>
+                            <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
                     <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                        <xsl:attribute name="src">
+                            <xsl:call-template name="splitter-generate-filename-for"/>
+                        </xsl:attribute>
                     </content>
                     <xsl:if test="div1">
                         <xsl:apply-templates select="div1" mode="navMap"/>
                     </xsl:if>
                 </navPoint>
-            </xsl:when>
-        </xsl:choose>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
-    <xsl:template match="div1" mode="navMap">
-        <xsl:choose>
-            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
-                <navPoint class="part">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel><text><xsl:value-of select="f:rend-value(@rend, 'toc-head')"/></text></navLabel>
-                    <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
-                    </content>
-                    <xsl:if test="div2">
-                        <xsl:apply-templates select="div2" mode="navMap"/>
-                    </xsl:if>
-                </navPoint>
-            </xsl:when>
 
-            <xsl:when test="head">
+    <xsl:template match="div1" mode="navMap">
+        <xsl:if test="not(f:rend-value(@rend, 'display') = 'none')">
+
+            <xsl:variable name="label" select="f:create-label(.)"/>
+
+            <xsl:if test="$label != ''">
                 <navPoint class="chapter">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                     <navLabel>
                         <text>
-                            <xsl:apply-templates select="head" mode="navLabel"/>
+                            <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
                     <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
+                        <xsl:attribute name="src">
+                            <xsl:call-template name="splitter-generate-filename-for"/>
+                        </xsl:attribute>
                     </content>
                     <xsl:if test="div2">
                         <xsl:apply-templates select="div2" mode="navMap"/>
                     </xsl:if>
                 </navPoint>
-            </xsl:when>
-        </xsl:choose>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="div2" mode="navMap">
-        <xsl:choose>
-            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
-                <navPoint class="part">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
-                    <navLabel><text><xsl:value-of select="f:rend-value(@rend, 'toc-head')"/></text></navLabel>
-                    <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-filename-for"/></xsl:attribute>
-                    </content>
-                </navPoint>
-            </xsl:when>
+        <xsl:if test="not(f:rend-value(@rend, 'display') = 'none')">
 
-            <xsl:when test="head">
+            <xsl:variable name="label" select="f:create-label(.)"/>
+
+            <xsl:if test="$label != ''">
                 <navPoint class="section">
                     <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
                     <navLabel>
                         <text>
-                            <xsl:apply-templates select="head" mode="navLabel"/>
+                            <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
                     <content>
-                        <xsl:attribute name="src"><xsl:call-template name="splitter-generate-url-for"></xsl:call-template></xsl:attribute>
+                        <xsl:attribute name="src">
+                            <xsl:call-template name="splitter-generate-url-for"/>
+                        </xsl:attribute>
                     </content>
                 </navPoint>
-            </xsl:when>
-        </xsl:choose>
+            </xsl:if>
+        </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Ignore 'super' heads, that is, heads repeating the higher-level title.</xd:short>
+    </xd:doc>
+
     <xsl:template match="head[@type='super']" mode="navLabel"/>
+
+
+    <xd:doc>
+        <xd:short>Process the textual content of a head.</xd:short>
+    </xd:doc>
 
     <xsl:template match="head" mode="navLabel">
         <xsl:apply-templates mode="navLabel"/>
@@ -228,7 +262,20 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Ignore footnotes appearing in a head.</xd:short>
+    </xd:doc>
+
     <xsl:template match="note" mode="navLabel"/>
+
+
+    <xd:doc>
+        <xd:short>Ignore line-numbers appearing in a head.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="ab[@type='lineNum']" mode="navLabel"/>
+
 
     <!--== playorder =======================================================-->
 
@@ -240,7 +287,9 @@
 
     <xsl:template match="ncx:navPoint" mode="playorder">
         <xsl:copy>
-            <xsl:attribute name="playOrder"><xsl:number level="any" count="ncx:navPoint"/></xsl:attribute>
+            <xsl:attribute name="playOrder">
+                <xsl:number level="any" count="ncx:navPoint"/>
+            </xsl:attribute>
             <xsl:apply-templates select="@*|node()" mode="playorder"/>
         </xsl:copy>
     </xsl:template>
