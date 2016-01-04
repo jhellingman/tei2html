@@ -139,6 +139,15 @@
             </p>
         </xsl:if>
 
+        <xsl:if test="f:isvalid(//idno[@type='VIAF'])">
+            <p><xsl:value-of select="f:message('msgVirtualInternationalAuthorityFile')"/>:
+                <a class="catlink">
+                    <xsl:attribute name="href">http://viaf.org/viaf/<xsl:value-of select="//idno[@type='VIAF']"/></xsl:attribute>
+                    <xsl:value-of select="//idno[@type='VIAF']"/>
+                </a>.
+            </p>
+        </xsl:if>
+
         <xsl:if test="f:isvalid(//idno[@type='OLN'])">
             <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
                 <a class="catlink">

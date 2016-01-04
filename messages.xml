@@ -247,6 +247,7 @@
 
         <msg:message name="msgPgCatalogEntry">Project Gutenberg catalog page</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
+        <msg:message name="msgVirtualInternationalAuthorityFile">Related Virtual International Authority File Entry</msg:message>
         <msg:message name="msgOclcCatalogEntry">Related WorldCat catalog page</msg:message>
         <msg:message name="msgOpenLibraryCatalogEntry">Related Open Library catalog page (for source)</msg:message>
         <msg:message name="msgOpenLibraryCatalogWorkEntry">Related Open Library catalog page (for work)</msg:message>

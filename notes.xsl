@@ -233,6 +233,7 @@
     <xsl:template name="footnote-paragraph">
         <xsl:variable name="class">
             par footnote
+            <xsl:if test="ancestor::note[@place='apparatus']">apparatus</xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/>
         </xsl:variable>
         <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
