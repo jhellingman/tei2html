@@ -20,7 +20,7 @@
         <xd:short>Stylesheet to handle footnotes.</xd:short>
         <xd:detail>This stylesheet contains templates to handle footnotes in TEI files.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <!--====================================================================-->
@@ -230,6 +230,11 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle a paragraph in a footnote.</xd:short>
+        <xd:detail>Handle a paragraph in a footnote (and apparatus note) by setting the relevant classes, and handling the content as regular content.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="footnote-paragraph">
         <xsl:variable name="class">
             par footnote
@@ -260,6 +265,7 @@
         </a>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate the notes for a text-critical apparatus.</xd:short>
         <xd:detail>Render all text-critical notes preceding the matched <code>divGen</code>, but after the previous <code>divGen</code>, here.</xd:detail>
@@ -268,24 +274,20 @@
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <h2 class="main"><xsl:value-of select="f:message('msgApparatus')"/></h2>
 
-            <xsl:choose>
-                <xsl:when test="preceding::divGen[@type='apparatus']">
-                    <!-- We already have seen a divGen, so only include the notes after the previous one! -->
-                    <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
-                    <xsl:call-template name="handle-apparatus-notes">
-                        <xsl:with-param name="notes" select="preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]"/>
-                        <xsl:with-param name="rend" select="@rend"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:call-template name="handle-apparatus-notes"> 
-                        <xsl:with-param name="notes" select="preceding::note[@place='apparatus']"/>
-                        <xsl:with-param name="rend" select="@rend"/>
-                    </xsl:call-template>
-                </xsl:otherwise>
-            </xsl:choose>
+            <!-- Determine whether we already have seen a divGen for apparatus notes, by finding its id.
+                 If that is the case, we only include the apparatus notes after the previous one! -->
+            <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
+            <xsl:variable name="notes" select="if ($id)
+                        then preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id] 
+                        else preceding::note[@place='apparatus']"/>
+
+            <h2 class="main"><xsl:value-of select="if (count($notes) &lt;= 1) then f:message('msgApparatusNote') else f:message('msgApparatusNotes')"/></h2>
+
+            <xsl:call-template name="handle-apparatus-notes"> 
+                <xsl:with-param name="notes" select="$notes"/>
+                <xsl:with-param name="rend" select="@rend"/>
+            </xsl:call-template>
         </div>
     </xsl:template>
 
@@ -294,7 +296,7 @@
         <xd:short>Generate the notes for a text-critical apparatus in one or two columns.</xd:short>
         <xd:detail>Render the text-critical notes in one or two columns. The splitting works under the assumption
         that the average length of each note is about the same. A smarter way of balancing the two
-        columns can be achieved when actually rendering the columns (in the browser or otherwise).</xd:detail>
+        columns can only be achieved when actually rendering the columns (in the browser or otherwise).</xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes">
@@ -302,7 +304,7 @@
         <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:choose>
-            <xsl:when test="f:rend-value(@rend, 'columns') = '2' and count($notes) &gt; 1">
+            <xsl:when test="f:rend-value($rend, 'columns') = '2' and count($notes) &gt; 1">
                 <xsl:variable name="halfway" select="ceiling(count($notes) div 2)"/>
                 <table class="apparataus">
                     <tr>
@@ -348,6 +350,7 @@
             <xsl:call-template name="footnote-return-arrow"/>
         </xsl:element>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle text-critical apparatus notes with embedded paragraphs.</xd:short>

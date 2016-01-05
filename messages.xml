@@ -115,7 +115,8 @@
         <msg:message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overview of corrections applied to the text.</msg:message>
         <msg:message name="msgColophon">Colophon</msg:message>
-        <msg:message name="msgApparatus">Textual Notes</msg:message>
+        <msg:message name="msgApparatusNote">Textual Note</msg:message>
+        <msg:message name="msgApparatusNotes">Textual Notes</msg:message>
         <msg:message name="msgRevisionHistory">Revision History</msg:message>
         <msg:message name="msgAvailability">Availability</msg:message>
         <msg:message name="msgEncoding">Encoding</msg:message>
@@ -735,8 +736,10 @@
         <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgColophon">Colofon</msg:message>
-        <msg:message name="msgApparatus">Tekstkritische noten</msg:message>
-		<msg:message xml:lang="nl-1900" name="msgApparatus">Tekstcritische noten</msg:message>
+        <msg:message name="msgApparatusNote">Tekstkritische noot</msg:message>
+        <msg:message name="msgApparatusNotes">Tekstkritische noten</msg:message>
+        <msg:message xml:lang="nl-1900" name="msgApparatusNote">Tekstcritische noot</msg:message>
+        <msg:message xml:lang="nl-1900" name="msgApparatusNotes">Tekstcritische noten</msg:message>
 
         <msg:message name="msgRevisionHistory">Documentgeschiedenis</msg:message>
         <msg:message name="msgAvailability">Beschikbaarheid</msg:message>
@@ -900,7 +903,7 @@
         <msg:message name="msgBooks">Mga Basahon</msg:message>
         <msg:message name="msgChapter">Anib</msg:message>
         <msg:message name="msgChapters">Mga Anib</msg:message>
-		<msg:message name="msgTableOfContents">Talaan sa mga Hilisgutan</msg:message>
+        <msg:message name="msgTableOfContents">Talaan sa mga Hilisgutan</msg:message>
 
         <!-- Days and Months -->
 
@@ -1052,7 +1055,7 @@
         <msg:message name="msgCoverImage">Imagen de la cubierta</msg:message>
         <msg:message name="msgPreface">Prefacio</msg:message>
         <msg:message name="msgCorrectionsOverview">Sumario de las correcciones hechas sobre el texto.</msg:message>
-        <msg:message name="msgApparatus">Notas al texto</msg:message>
+        <msg:message name="msgApparatusNotes">Notas al texto</msg:message>
         <msg:message name="msgNotCopyrightedUS">Sin derechos de autor en los Estados Unidos. Si vive en otro lugar, consulte las leyes de su país antes de descargar este libro digital.</msg:message>
         <msg:message name="msgExternalReferences">Referencias externas</msg:message>
         <msg:message name="msgExternalReferencesDisclaimer">Este libro digital de Project Gutenberg contiene referencias externas. Es posible que éstas no funcionen para usted.</msg:message>
