@@ -182,7 +182,7 @@
         <xd:short>Align two verses.</xd:short>
         <xd:detail>Align two verses in a table. Here the assumption is that both verses have
         the same number of elements. We simply iterate through both, and place them side-by-side.
-        Note that the rend attribute on the lg elements will be ignored. Linenumbers will be inserted
+        Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Linenumbers will be inserted
         from either of both verses to be aligned, in a separate column.</xd:detail>
     </xd:doc>
 
@@ -337,10 +337,56 @@
     </xsl:template>
 
     <xsl:template match="castItem">
-        <li class="castitem">
+        <li>
+            <xsl:attribute name="class">castitem <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
         </li>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Render a castGroup with a brace on the right.</xd:short>
+        <xd:detail><p>Render a castGroup as a table with a brace on the right, followed by some description common to all the castItems in the group, which text is to be encoded in the head. This assumes an image file named <code>rbrace<i>N</i></code> is present, where <i>N</i> is the number of castItems in the castGroup.</p>
+        
+        <p>This was specially implemented to render the cast-lists, as found in the works of Shakespeare, in the same way as in the original work, without having
+        to add significant presentation-oriented tagging to the TEI source files.</p></xd:detail>
+    </xd:doc>
+
+    <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']">
+        <li>
+            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:variable name="count" select="count(castItem)"/>
+            <xsl:variable name="this" select="."/>
+            <table class="castGroupTable">
+                <xsl:for-each select="castItem">
+                    <tr>
+                        <td><xsl:apply-templates select="." mode="castGroupTable"/></td>
+                        <xsl:if test="position() = 1">
+                            <td rowspan="{$count}" class="castGroupBrace">
+                                <xsl:call-template name="insertimage2">
+                                    <xsl:with-param name="alt" select="'}'"/>
+                                    <xsl:with-param name="format" select="'.png'"/>
+                                    <xsl:with-param name="filename" select="concat('images/rbrace', $count, '.png')"/>
+                                </xsl:call-template>
+                            </td>
+                            <td rowspan="{$count}"><xsl:apply-templates select="$this/head" mode="castGroupTable"/></td>
+                        </xsl:if>
+                    </tr>
+                </xsl:for-each>
+            </table>
+        </li>
+    </xsl:template>
+
+    <xsl:template match="castGroup/head" mode="castGroupTable">
+        <span>
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="castItem" mode="castGroupTable">
+        <xsl:apply-templates/>
     </xsl:template>
 
 </xsl:stylesheet>

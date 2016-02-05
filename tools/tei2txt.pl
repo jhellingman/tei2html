@@ -1108,6 +1108,9 @@ sub entities2iso88591($)
     $a =~ s/\&aeacute;/æ/g;
     $a =~ s/\&AEacute;/Æ/g;
     $a =~ s/\&oeacute;/oe/g;
+
+    $a =~ s/\&aoacute;/aó/g;
+
     $a =~ s/\&cslash;/¢/g;
     $a =~ s/\&grchi;/x/g;
     $a =~ s/\&omactil;/o/g;
