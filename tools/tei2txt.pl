@@ -923,6 +923,9 @@ sub entities2iso88591($)
 {
     my $a = shift;
 
+    # Remove soft-hyphen:
+    $a =~ s/\&shy;//g;
+
     # change supported accented letters:
     $a =~ s/\&aacute;/á/g;
     $a =~ s/\&Aacute;/Á/g;
@@ -1093,6 +1096,8 @@ sub entities2iso88591($)
     $a =~ s/\&ngtilde;/ng/g;
     $a =~ s/\&Ngtilde;/Ng/g;
     $a =~ s/\&NGtilde;/NG/g;
+    $a =~ s/\&mring;/m/g;
+    $a =~ s/\&Mring;/M/g;
     $a =~ s/\&apos;/'/g;
     $a =~ s/\&rhring;/`/g;
     $a =~ s/\&mlapos;/'/g;

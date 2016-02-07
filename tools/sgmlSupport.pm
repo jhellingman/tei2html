@@ -1386,6 +1386,10 @@ BEGIN
 
     $ent{"N"}           = "N"; # Capital letter N (used with special meaning in Wolff's dictionary.)
 
+    # Combining letters (placed above the base letter)
+
+    $ent{"ocomb"}      = chr(0x0366); # combining o above
+    $ent{"rcomb"}      = chr(0x036c); # combining r above
 
     ###############################################################################
     # things not in Unicode (as a single character)
@@ -1459,8 +1463,8 @@ BEGIN
 
     $ent{"vdiagstrok"}  = chr(0xA75F); # v with diagonal stroke
 
-    $ent{"suptack"}		= "s" . chr(0x031D); # s with up tack below
-    $ent{"sdntack"}		= "s" . chr(0x031E); # s with down tack below
+    $ent{"suptack"}     = "s" . chr(0x031D); # s with up tack below
+    $ent{"sdntack"}     = "s" . chr(0x031E); # s with down tack below
 
     $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
     $ent{"gmacr"}       = "g" . chr(0x0304); # g with macron
@@ -1788,7 +1792,7 @@ BEGIN
     $ent{"handptr"}     = chr(0x261E);          # White right pointing index
     $ent{"diamond"}     = chr(0x25C6);          # Black diamond
 
-    $ent{"Sun"}			= chr(0x2609);          # Symbol for Sun.
+    $ent{"Sun"}         = chr(0x2609);          # Symbol for Sun.
 
 
     # Greek additions
@@ -1825,24 +1829,24 @@ BEGIN
     $ent{"availability.nl"} = "Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopi&#xEB;ren, weggeven of hergebruiken onder de voorwaarden van de <xref url='http://www.gutenberg.org/license' rel='license'>Project Gutenberg Licentie</xref> bij dit eBoek of on-line op <xref url='http://www.gutenberg.org/'>www.gutenberg.org</xref>.";
 
 
-	# %revent = reverse %ent;
+    # %revent = reverse %ent;
 
-	%revent = ();
-	foreach my $key (keys %ent) {
-		my $value = $ent{$key};
-		if (length $value == 1) {
-			if ($revent{$value}) {
-				# print "$key already mapped.\n";
-			}
-			else
-			{
-				$revent{$value} = $key;
-			}
-		}
-	}
+    %revent = ();
+    foreach my $key (keys %ent) {
+        my $value = $ent{$key};
+        if (length $value == 1) {
+            if ($revent{$value}) {
+                # print "$key already mapped.\n";
+            }
+            else
+            {
+                $revent{$value} = $key;
+            }
+        }
+    }
 
 
-	# Duplicate entities from above.
+    # Duplicate entities from above.
     $ent{"peso"}        = chr(0x20B1);  #  Peso sign
     $ent{"euro"}        = chr(0x20AC);  #  Euro sign
     $ent{"vardollar"}   = '$';          #  Variant dollar sign (with diagonal slashes)
@@ -1900,7 +1904,7 @@ BEGIN
     $ent{"half"}        = chr(0x00BD);  #  VULGAR FRACTION ONE HALF
     $ent{"iff"}         = chr(0x21D4);  #  LEFT RIGHT DOUBLE ARROW
 
-	# Arrows and shapes
+    # Arrows and shapes
     $ent{"xcirc"}       = chr(0x25CB);  #  WHITE CIRCLE
     $ent{"xdtri"}       = chr(0x25BD);  #  WHITE DOWN-POINTING TRIANGLE
     $ent{"xharr"}       = chr(0x2194);  #  LEFT RIGHT ARROW
@@ -1918,7 +1922,7 @@ BEGIN
     $ent{"metlobr"}     = chr(0x23D2);  # METRICAL LONG OVER BREVE SYMBOL
     $ent{"metbreak"}    = chr(0x201E);  # metrical break (= DOUBLE LOW-9 QUOTATION MARK)
 
-	# Greek letters
+    # Greek letters
     $ent{"sigmav"}      = chr(0x03C2);  #  GREEK SMALL LETTER FINAL SIGMA
     $ent{"sigmaf"}      = chr(0x03C2);  #  GREEK SMALL LETTER FINAL SIGMA
     $ent{"thetav"}      = chr(0x03D1);  #  GREEK THETA SYMBOL
@@ -2184,14 +2188,14 @@ sub utf2entities
     {
         if (ord($_) > 127)
         {
-			if ($revent{$_}) 
-			{
-				$_ = "&" . $revent{$_} . ";";
-			}
-			else 
-			{
-				$_ = "&#" . ord($_) . ";";
-			}
+            if ($revent{$_}) 
+            {
+                $_ = "&" . $revent{$_} . ";";
+            }
+            else 
+            {
+                $_ = "&#" . ord($_) . ";";
+            }
         }
     }
     return join('', @chars);

@@ -234,7 +234,8 @@
             <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
             <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
             <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
-            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image in stead of head -->
+            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
+            <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
 
             <!-- Properties used to render verse -->
             <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
