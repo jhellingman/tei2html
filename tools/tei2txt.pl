@@ -923,8 +923,8 @@ sub entities2iso88591($)
 {
     my $a = shift;
 
-    # Remove soft-hyphen:
-    $a =~ s/\&shy;//g;
+    # soft-hyphen:
+    $a =~ s/\&shy;/\x{00AD}/g;
 
     # change supported accented letters:
     $a =~ s/\&aacute;/á/g;

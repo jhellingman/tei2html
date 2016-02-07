@@ -175,7 +175,8 @@ sub heatMapFragment($)
     my $lang = getLang();
 
     my $prevWord = "";
-    # NOTE: we don't use \w and \W here, since it gives some unexpected results
+
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
     my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
 
     my $size = @words;
@@ -1307,16 +1308,18 @@ sub handleFragment($)
     my $lang = getLang();
 
     my $prevWord = "";
-    # NOTE: we don't use \w and \W here, since it gives some unexpected results
-    my @words = split(/([^\x{2032}`\pL\pN\pM-]+)/, $fragment);
+
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
+    # Character codes: 2032 = prime; 00AD = soft hyphen.
+    my @words = split(/([^\x{2032}\x{00AD}`\pL\pN\pM-]+)/, $fragment);
     foreach my $word (@words)
     {
         if ($word ne "")
         {
-            if ($word =~ /^[^\x{2032}`\pL\pN\pM-]+$/)
+            if ($word =~ /^[^\x{2032}\x{00AD}`\pL\pN\pM-]+$/)
             {
                 countNonWord($word);
-                # reset previous word if not separated by more than just a space.
+                # reset previous word if not separated by more than just some space.
                 if ($word !~ /^[\pZ]+$/)
                 {
                     $prevWord = "";
@@ -1711,17 +1714,22 @@ sub StripDiacritics($)
         $_ = NFD($_);       ##  decompose (Unicode Normalization Form D)
         s/\pM//g;           ##  strip combining characters
 
-        # additional normalizations:
+        # additional normalizations: (see https://en.wikipedia.org/wiki/Typographic_ligature)
         s/\x{00df}/ss/g;    ##  German eszet “ß” -> “ss”
+        s/\x{1E9E}/SS/g;    ##  German capital eszet “ß” -> “SS”
         s/\x{00c6}/AE/g;    ##  Æ
         s/\x{00e6}/ae/g;    ##  æ
         s/\x{0132}/IJ/g;    ##  Dutch IJ
         s/\x{0133}/ij/g;    ##  Dutch ij
-        s/\x{0152}/Oe/g;    ##  Œ
+        s/\x{0152}/OE/g;    ##  Œ
         s/\x{0153}/oe/g;    ##  œ
 
+        s/\x{A734}/AO/g;   ##  Ligature AO
+        s/\x{A735}/ao/g;   ##  ligature ao
+
+        s/\x{00AD}//g;          ## soft-hyphen
         s/\x{2032}//g;          ## prime
-        s/`//g;					## back-tick.
+        s/`//g;                 ## back-tick
         s/\x{02bb}//g;          ## 'Okina (Hawaiian glottal stop)
         s/\x{02bc}//g;          ## Modifier letter apostrophe
         s/\x{02bf}//g;          ## Modifier letter left half ring (Ayin)
