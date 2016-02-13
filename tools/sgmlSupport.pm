@@ -3,7 +3,7 @@ package SgmlSupport;
 
 require Exporter;
 @ISA = qw(Exporter);
-@EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities pgdp2sgml);
+@EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity);
 
 
 BEGIN
@@ -1388,6 +1388,7 @@ BEGIN
 
     # Combining letters (placed above the base letter)
 
+    $ent{"acomb"}      = chr(0x0363); # combining o above
     $ent{"ocomb"}      = chr(0x0366); # combining o above
     $ent{"rcomb"}      = chr(0x036c); # combining r above
 
@@ -1683,6 +1684,7 @@ BEGIN
 
     $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron
     $ent{"eemacr"}      = "e" . chr(0x035E) . "e"; # ee with wide macron
+    $ent{"mmmacr"}      = "m" . chr(0x035E) . "m"; # mm with wide macron
 
     $ent{"ghbarb"}      = "g" . chr(0x035F) . "h"; # gh with double macron below
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below
@@ -2026,9 +2028,6 @@ BEGIN
     $ent{"b.kappav"}    = chr(0x03F0);  #  GREEK KAPPA SYMBOL
     $ent{"b.rhov"}      = chr(0x03F1);  #  GREEK RHO SYMBOL
 
-
-
-
 }
 
 
@@ -2172,12 +2171,18 @@ sub utf2sgml
 }
 
 
+sub translateEntity($) {
+    my $entity = shift;
+    return $ent{$entity};
+}
+
+
 # Map Unicode to SGML entities, trying to use named entities when possible.
 #
 # Usage:
 #   utf2entities($string)
 # Parameter:
-#   $string: the string to be converted to UTF-8.
+#   $string: the string to be converted to entities.
 
 sub utf2entities
 {
@@ -2201,6 +2206,20 @@ sub utf2entities
     return join('', @chars);
 }
 
+sub utf2numericEntities
+{
+    my $string = shift;
+
+    my @chars = split(//, $string);
+    foreach (@chars)
+    {
+        if (ord($_) > 127)
+        {
+            $_ = "&#x" . sprintf("%04X", ord($_)) . ";";
+        }
+    }
+    return join('', @chars);
+}
 
 
 #

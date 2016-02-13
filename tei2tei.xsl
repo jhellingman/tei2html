@@ -1100,7 +1100,7 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </xsl:template>
 
 <xsl:template match="@targorder">
-  <xsl:if test="not(. = 'u')">
+  <xsl:if test="not(. = 'u' or . = 'U')">
  <xsl:attribute name="targOrder"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
@@ -1134,63 +1134,77 @@ $Date: 2001/05/26 $ $Author: rahtz $
 <xsl:template match="@teiform"/>
 
 <xsl:template match="@opt">
-  <xsl:if test="not(. = 'n')">
+  <xsl:if test="not(. = 'n' or . = 'N')">
  <xsl:attribute name="opt"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@to">
-  <xsl:if test="not(. = 'ditto')">
+  <xsl:if test="not(. = 'ditto' or . = 'DITTO')">
  <xsl:attribute name="to"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
+<xsl:template match="@from">
+  <xsl:if test="not(. = 'root' or . = 'ROOT')">
+ <xsl:attribute name="from"><xsl:value-of
+ select="."/></xsl:attribute>
+</xsl:if>
+</xsl:template>
+
 <xsl:template match="@default">
-  <xsl:if test="not(. = 'no')">
+  <xsl:if test="not(. = 'no' or . = 'NO')">
  <xsl:attribute name="default"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@part">
-  <xsl:if test="not(. = 'n')">
+  <xsl:if test="not(. = 'n' or . = 'N')">
  <xsl:attribute name="part"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@full">
-  <xsl:if test="not(. = 'yes')">
+  <xsl:if test="not(. = 'yes' or . = 'YES')">
  <xsl:attribute name="full"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@status">
-  <xsl:if test="not(. = 'unremarkable')">
+  <xsl:if test="not(. = 'unremarkable' or . = 'UNREMARKABLE')">
  <xsl:attribute name="status"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@place">
-  <xsl:if test="not(. = 'unspecified')">
+  <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
  <xsl:attribute name="place"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
+<xsl:template match="@direct">
+  <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
+ <xsl:attribute name="direct"><xsl:value-of
+ select="."/></xsl:attribute>
+</xsl:if>
+</xsl:template>
+
 <xsl:template match="@sample">
-  <xsl:if test="not(. = 'complete')">
+  <xsl:if test="not(. = 'complete' or . = 'COMPLETE')">
  <xsl:attribute name="sample"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
 </xsl:template>
 
 <xsl:template match="@org">
-  <xsl:if test="not(. = 'uniform')">
+  <xsl:if test="not(. = 'uniform' or . = 'UNIFORM')">
  <xsl:attribute name="org"><xsl:value-of
  select="."/></xsl:attribute>
 </xsl:if>
@@ -1201,5 +1215,15 @@ $Date: 2001/05/26 $ $Author: rahtz $
     <xsl:attribute name="lang"><xsl:value-of select="."/></xsl:attribute>
     <xsl:attribute name="xml:lang"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
+
+
+<!-- Remove some more default values -->
+
+<xsl:template match="row/@role[. = 'data']"/>
+<xsl:template match="cell/@role[. = 'data']"/>
+<!-- <xsl:template match="cell/@rows[. = '1']"/> -->
+<!-- <xsl:template match="cell/@cols[. = '1']"/> -->
+<xsl:template match="note/@anchored[. = 'yes']"/>
+
 
 </xsl:stylesheet>

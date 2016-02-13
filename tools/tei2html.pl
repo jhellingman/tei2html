@@ -8,6 +8,8 @@ use File::Temp qw(mktemp);
 use FindBin qw($Bin);
 use Getopt::Long;
 
+use SgmlSupport qw/utf2numericEntities translateEntity/;
+
 #==============================================================================
 # Configuration
 
@@ -76,8 +78,7 @@ my $language = "";
 my $releaseDate = "";
 
 
-if ($showHelp) 
-{
+if ($showHelp) {
     print "tei2html.pl -- process a TEI file to produce text, HTML, and ePub output\n\n";
     print "Usage: tei2html.pl [-thekprxvufzH] <inputfile.tei>\n\n";
     print "Options:\n";
@@ -102,16 +103,14 @@ if ($showHelp)
     exit(0);
 }
 
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0)
-{
+if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
     # Revert to old default:
     $makeTXT = 1;
     $makeHTML = 1;
     $makeReport = 1;
 }
 
-if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1)
-{
+if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1) {
     $makeXML = 1;
 }
 
@@ -123,24 +122,19 @@ my $nsgmlresult = 0;
 my $tmpdir = $ENV{'TEMP'};
 
 
-if ($filename eq "")
-{
+if ($filename eq "") {
     my ($directory) = ".";
     my @files = ( );
     opendir(DIRECTORY, $directory) or die "Cannot open directory $directory!\n";
     @files = readdir(DIRECTORY);
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/)
-        {
+    foreach my $file (@files) {
+        if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/) {
             processFile($file);
         }
     }
-}
-else
-{
+} else {
     processFile($filename);
 }
 
@@ -148,12 +142,10 @@ else
 #
 # processFile -- process a TEI file.
 #
-sub processFile($)
-{
+sub processFile($) {
     my $filename = shift;
 
-    if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/))
-    {
+    if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
         die "File: '$filename' is not a .TEI file\n";
     }
 
@@ -165,21 +157,19 @@ sub processFile($)
 
 
     extractMetadata($filename);
+    extractEntities($filename);
 
 
-    if ($makeXML && $filename =~ /\.tei$/)
-    {
+    if ($makeXML && $filename =~ /\.tei$/) {
         sgml2xml($filename, $basename . ".xml");
     }
 
-    if ($runChecks)
-    {
+    if ($runChecks) {
         runChecks($filename);
     }
 
     my $xmlfilename = "$basename-normalized.xml";
-    if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml"))
-    {
+    if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml")) {
         print "Add col and row attributes to tables...\n";
         system ("$saxon $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
     }
@@ -201,50 +191,41 @@ sub processFile($)
     chop($pwd);
     $pwd =~ s/\\/\//g;
 
-    # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path in a parameter.
+    # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path as a parameter.
     my $fileImageParam = "";
-    if (-f "imageinfo.xml")
-    {
+    if (-f "imageinfo.xml") {
         $fileImageParam = "imageInfoFile=\"file:/$pwd/imageinfo.xml\"";
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
     my $cssFileParam = "";
-    if (-f $customStylesheet || -f $customStylesheet . ".xml")
-    {
+    if (-f $customStylesheet || -f $customStylesheet . ".xml") {
         print "Adding custom stylesheet: $customStylesheet ...\n";
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";
     }
 
     my $configurationFileParam = "";
-    if (-f $configurationFile)
-    {
+    if (-f $configurationFile) {
         print "Adding custom configuration: $configurationFile ...\n";
         $configurationFileParam = "configurationFile=\"file:/$pwd/$configurationFile\"";
     }
 
     my $opfManifestFileParam = "";
-    if (-f "opf-manifest.xml")
-    {
+    if (-f "opf-manifest.xml") {
         print "Adding additional elements for the OPF manifest...\n";
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
     my $opfMetadataFileParam = "";
-    if (-f "opf-metadata.xml")
-    {
+    if (-f "opf-metadata.xml") {
         print "Adding additional items to the OPF metadata...\n";
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
-    if ($makeHTML == 1)
-    {
-        if ($force == 0 && isNewer($basename . ".html", $basename . ".xml"))
-        {
+    if ($makeHTML == 1) {
+        if ($force == 0 && isNewer($basename . ".html", $basename . ".xml")) {
             print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
-        }
-        else
-        {
+        } else {
             my $tmpFile = mktemp('tmp-XXXXX');
             print "Create HTML version...\n";
             system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
@@ -254,8 +235,7 @@ sub processFile($)
         }
     }
 
-    if ($makePDF == 1)
-    {
+    if ($makePDF == 1) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');
 
@@ -270,8 +250,7 @@ sub processFile($)
         unlink($tmpFile2);
     }
 
-    if ($makeEPUB == 1)
-    {
+    if ($makeEPUB == 1) {
         my $tmpFile = mktemp('tmp-XXXXX');
         print "Create ePub version...\n";
         system ("mkdir epub");
@@ -291,8 +270,7 @@ sub processFile($)
         unlink($tmpFile);
     }
 
-    if ($makeTXT == 1)
-    {
+    if ($makeTXT == 1) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');
 
@@ -301,21 +279,17 @@ sub processFile($)
         system ("cat $filename.out $filename.notes > $tmpFile1");
         system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
 
-        if ($useUnicode == 1)
-        {
+        if ($useUnicode == 1) {
             # Use our own script to wrap lines, as fmt cannot deal with unicode text.
             system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-        }
-        else
-        {
+        } else {
             system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
         }
         system ("gutcheck $basename.txt > $basename.gutcheck");
         system ("$bindir\\jeebies $basename.txt > $basename.jeebies");
 
         # Check the version in the Processed directory as well.
-        if (-f "Processed\\$basename.txt")
-        {
+        if (-f "Processed\\$basename.txt") {
             system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
         }
 
@@ -326,24 +300,20 @@ sub processFile($)
 
         # check for required manual intervetions
         my $containsError = system ("grep -q \"\\[ERROR:\" $basename.txt");
-        if ($containsError == 0)
-        {
+        if ($containsError == 0) {
             print "NOTE: Please check $basename.txt for [ERROR: ...] messages.\n";
         }
         my $containsTable = system ("grep -q \"TABLE\" $basename.txt");
-        if ($containsTable == 0)
-        {
+        if ($containsTable == 0) {
             print "NOTE: Please check $basename.txt for TABLEs.\n";
         }
         my $containsFigure = system ("grep -q \"FIGURE\" $basename.txt");
-        if ($containsFigure == 0)
-        {
+        if ($containsFigure == 0) {
             print "NOTE: Please check $basename.txt for FIGUREs.\n";
         }
     }
 
-    if ($makeReport == 1)
-    {
+    if ($makeReport == 1) {
         my $tmpFile = mktemp('tmp-XXXXX');
         print "Report on word usage...\n";
         system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
@@ -351,33 +321,28 @@ sub processFile($)
         unlink($tmpFile);
 
         # Create a text heat map.
-        if (-f "heatmap.xml")
-        {
+        if (-f "heatmap.xml") {
             print "Create text heat map...\n";
             system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
         }
     }
 
-    if ($makeKwic == 1)
-    {
+    if ($makeKwic == 1) {
         print "Generate a KWIC index (this may take some time)...\n";
         system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
     }
 
-    if ($makeZip == 1 && $pgNumber > 0) 
-    {
+    if ($makeZip == 1 && $pgNumber > 0) {
         print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
-        makeZip($basename);     
+        makeZip($basename);
     }
 
     print "=== Done! ==================================================================\n";
 
-    if ($nsgmlresult != 0)
-    {
+    if ($nsgmlresult != 0) {
         print "WARNING: NSGML found validation errors in $filename.\n";
     }
 }
-
 
 
 #
@@ -387,12 +352,11 @@ sub makeZip($)
 {
     my $basename = shift;
 
-    if (!-f $pgNumber) 
-    {
+    if (!-f $pgNumber) {
         mkdir $pgNumber;
-    }       
-    if (!-d $pgNumber) 
-    {
+    }
+
+    if (!-d $pgNumber) {
         print "Failed to create directory $pgNumber, not making zip file.\n";
     }
 
@@ -400,25 +364,22 @@ sub makeZip($)
 
     my $textFilename = "Processed/" . $basename . ".txt";
 
-    if (-f $textFilename) 
-    {
+    if (-f $textFilename) {
         copy($textFilename, $pgNumber . "/" . $pgNumber . ".txt");
 
         # TODO: append PG header and footer.
     }
 
     # Copy HTML version to final location
-    if (-f $basename . ".html") 
-    {
+    if (-f $basename . ".html") {
         my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
-        if (!-f $htmlDirectory) 
-        {
+        if (!-f $htmlDirectory) {
             mkdir $htmlDirectory;
         }
         copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
         copyImages("$htmlDirectory/images");
     }
-    
+
     # Zip the whole structure.
     system ("zip -Xr9Dq $pgNumber.zip $pgNumber");
 }
@@ -427,72 +388,57 @@ sub makeZip($)
 #
 # extractMetadata -- try to extract some metadata from TEI file.
 #
-sub extractMetadata($)
-{
+sub extractMetadata($) {
     my $file = shift;
     open(PGFILE, $file) || die("Could not open input file $file");
 
     # Skip upto start of actual text.
-    while (<PGFILE>)
-    {
+    while (<PGFILE>) {
         my $line = $_;
-        if ($line =~ /<TEI.2 lang=\"?([a-z][a-z]).*?\"?>/) 
-        {
+        if ($line =~ /<TEI.2 lang=\"?([a-z][a-z]).*?\"?>/) {
             $language = $1;
         }
-        if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/)
-        {
-            $pgNumber = $1;         
+        if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/) {
+            $pgNumber = $1;
             next;
         }
-        if ($line =~ /<author\b.*?>(.*?)<\/author>/)
-        {
-            if ($author eq "") 
-            {
+        if ($line =~ /<author\b.*?>(.*?)<\/author>/) {
+            if ($author eq "") {
                 $author = $1;
-            }
-            else
-            {
+            } else {
                 $author .= ", " . $1;
-            }           
+            }
             next;
         }
-        if ($line =~ /<date>(.*?)<\/date>/)
-        {
+        if ($line =~ /<date>(.*?)<\/date>/) {
             $releaseDate = $1;
             next;
         }
-        if ($line =~ /<title>(.*?)<\/title>/)
-        {
+        if ($line =~ /<title>(.*?)<\/title>/) {
             $mainTitle = $1;
             next;
         }
-        if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/)
-        {
+        if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/) {
             $shortTitle = $1;
             next;
         }
-        if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/)
-        {
+        if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/) {
             $shortTitle = $1;
             next;
         }
 
         # All relevant metadata should be in or before the publicationStmt.
-        if ($line =~ /<\/publicationStmt>/)
-        {
+        if ($line =~ /<\/publicationStmt>/) {
             last;
         }
     }
     close(PGFILE);
 
-    if (length($mainTitle) <= 26 && $shortTitle != "") 
-    {
+    if (length($mainTitle) <= 26 && $shortTitle != "") {
         $shortTitle = $mainTitle;
     }
 
-    if (length($shortTitle) > 26 )
-    {
+    if (length($shortTitle) > 26 ) {
         print "WARNING: short title too long (should be less than 27 characters)\n";
     }
 
@@ -508,11 +454,48 @@ sub extractMetadata($)
 
 
 #
+# extractEntities -- Extract a list of entities used.
+#
+sub extractEntities($) {
+    my $file = shift;
+    my %entityHash = ();
+    my $entityPattern = "\&([a-z0-9._-]+);";
+
+    open(PGFILE, $file) || die("Could not open input file $file");
+
+    while (<PGFILE>) {
+        my $remainder = $_;
+        while ($remainder =~ /$entityPattern/) {
+            $remainder = $';
+            my $entity = $1;
+            $entityHash{$entity}++;
+        }
+    }
+
+    delete @entityHash{ qw(lt gt amp quot availability.en) };
+
+    # Report found entities:
+    if (keys %entityHash > 0) {
+        print "<!DOCTYPE TEI.2 PUBLIC \"-//TEI//DTD TEI Lite 1.0//EN\" [\n";
+        my @entityList = sort keys %entityHash;
+        foreach my $entity (@entityList) {
+
+            my $translation = utf2numericEntities(translateEntity($entity));
+            my $paddedEntity = sprintf "%s%-*s", $entity, 12 - length $entity, ' ';
+            my $paddedTranslation = sprintf "\"%s\"%-*s", $translation, 20 - length $translation, ' ';
+            my $count = $entityHash{$entity};
+            print "<!ENTITY $paddedEntity CDATA $paddedTranslation -- $count -->\n";
+        }
+        print "]>\n";
+    }
+}
+
+
+#
 # runChecks -- run various checks on the file. To help error reporting, line/column information is
 # added to the TEI file first.
 #
-sub runChecks($)
-{
+sub runChecks($) {
     my $filename = shift;
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $basename = $1;
@@ -520,8 +503,7 @@ sub runChecks($)
     my $newname = $basename . "-pos." . $extension;
     system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
 
-    if ($extension eq "tei")
-    {
+    if ($extension eq "tei") {
         my $tmpFile = mktemp('tmp-XXXXX');
 
         # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
@@ -542,8 +524,7 @@ sub runChecks($)
 #
 # sgml2xml -- convert a file from SGML TEI to XML, also converting various notations if needed.
 #
-sub sgml2xml($$)
-{
+sub sgml2xml($$) {
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
@@ -601,8 +582,7 @@ sub sgml2xml($$)
 #
 # isNewer -- determine whether the first file exists and is newer than the second file
 #
-sub isNewer($$)
-{
+sub isNewer($$) {
     my $file1 = shift;
     my $file2 = shift;
 
@@ -613,14 +593,12 @@ sub isNewer($$)
 #
 # transcribeGreek -- transcribe Greek in a specific notation to Greek script, and add transcription in choice elements.
 #
-sub transcribeGreek($)
-{
+sub transcribeGreek($) {
     my $currentFile = shift;
 
     # Check for presence of Greek transcription
     my $containsGreek = system ("grep -q \"<GR>\" $currentFile");
-    if ($containsGreek == 0)
-    {
+    if ($containsGreek == 0) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');
         my $tmpFile3 = mktemp('tmp-XXXXX');
@@ -643,17 +621,15 @@ sub transcribeGreek($)
 #
 # transcribeNotation -- transcribe some specific notation using patc.
 #
-sub transcribeNotation($$$$)
-{
+sub transcribeNotation($$$$) {
     my $currentFile = shift;
     my $tag = shift;
     my $name = shift;
     my $patternFile = shift;
 
-    # Check for presence of transcription notation
+    # Check for presence of notation (indicated by a given tag).
     my $containsNotation = system ("grep -q \"$tag\" $currentFile");
-    if ($containsNotation == 0)
-    {
+    if ($containsNotation == 0) {
         my $tmpFile = mktemp('tmp-XXXXX');
 
         print "Converting $name transcription...\n";
@@ -671,92 +647,71 @@ sub transcribeNotation($$$$)
 #
 # add -c to called script arguments to also collect contour information with this script.
 #
-sub collectImageInfo()
-{
-    if (-d "images")
-    {
+sub collectImageInfo() {
+    if (-d "images") {
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
-    }
-    elsif (-d "Processed/images")
-    {
+    } elsif (-d "Processed/images") {
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
     }
 }
 
 #
-# copyImages
+# copyImages -- copy image files for use in ePub.
 #
-sub copyImages($)
-{
+sub copyImages($) {
     my $destination = shift;
 
-    if (-d $destination) 
-    {
+    if (-d $destination) {
         # Destination exists, prevent copying into it.
         print "Warning: Destination exists; not copying images again\n";
         return;
     }
 
-    if (-d "images")
-    {
+    if (-d "images") {
         system ("cp -r -u images " . $destination);
-    }
-    elsif (-d "Processed/images")
-    {
+    } elsif (-d "Processed/images") {
         system ("cp -r -u Processed/images " . $destination);
     }
 
     # Remove redundant icon images (not used in the ePub)
-    if (-f "epub\\images\\book.png")
-    {
+    if (-f "epub\\images\\book.png") {
         system ("del epub\\images\\book.png");
     }
-    if (-f "epub\\images\\card.png")
-    {
+    if (-f "epub\\images\\card.png") {
         system ("del epub\\images\\card.png");
     }
-    if (-f "epub\\images\\external.png")
-    {
+    if (-f "epub\\images\\external.png") {
         system ("del epub\\images\\external.png");
     }
-    if (-f "epub\\images\\new-cover-tn.jpg")
-    {
+    if (-f "epub\\images\\new-cover-tn.jpg") {
         system ("del epub\\images\\new-cover-tn.jpg");
     }
 }
 
 #
-# copyAudio
+# copyAudio -- copy audio files for use in ePub.
 #
-sub copyAudio($)
-{
+sub copyAudio($) {
     my $destination = shift;
 
-    if (-d "audio")
-    {
+    if (-d "audio") {
         system ("cp -r -u audio " . $destination);
-    }
-    elsif (-d "Processed/audio")
-    {
+    } elsif (-d "Processed/audio") {
         system ("cp -r -u Processed/audio " . $destination);
     }
 }
 
 #
-# copyFonts
+# copyFonts -- copy fonts files for use in ePub.
 #
-sub copyFonts($)
-{
+sub copyFonts($) {
     my $destination = shift;
 
-    if (-d "fonts")
-    {
+    if (-d "fonts") {
         system ("cp -r -u fonts " . $destination);
-    }
-    elsif (-d "Processed/fonts")
-    {
+    } elsif (-d "Processed/fonts") {
         system ("cp -r -u Processed/fonts " . $destination);
     }
 }
