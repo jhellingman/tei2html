@@ -105,7 +105,7 @@
                 <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
             </xsl:otherwise>
         </xsl:choose>
-        <meta name="generator" content="tei2html.xsl, see http://code.google.com/p/tei2html/"/>
+        <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"/>
         <meta name="author" content="{$author}"/>
 
         <!-- Link to cover page -->

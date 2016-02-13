@@ -314,13 +314,15 @@
     </xd:doc>
 
     <xsl:template name="set-lang-attribute">
-        <xsl:if test="@lang">
+        <xsl:param name="lang" select="@lang"/>
+
+        <xsl:if test="$lang">
             <xsl:choose>
                 <xsl:when test="$outputmethod = 'xml'">
-                    <xsl:attribute name="xml:lang"><xsl:value-of select="f:fix-lang(@lang)"/></xsl:attribute>
+                    <xsl:attribute name="xml:lang"><xsl:value-of select="f:fix-lang($lang)"/></xsl:attribute>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:attribute name="lang"><xsl:value-of select="f:fix-lang(@lang)"/></xsl:attribute>
+                    <xsl:attribute name="lang"><xsl:value-of select="f:fix-lang($lang)"/></xsl:attribute>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>

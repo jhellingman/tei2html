@@ -472,7 +472,7 @@ sub extractEntities($) {
         }
     }
 
-    delete @entityHash{ qw(lt gt amp quot availability.en) };
+    delete @entityHash{ qw(lt gt amp quot availability.en availability.nl) };
 
     # Report found entities:
     if (keys %entityHash > 0) {

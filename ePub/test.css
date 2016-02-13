@@ -752,6 +752,20 @@ span.hemistich {
  list-style-type: none;
 }
 
+.castGroupTable {
+ border-collapse: collapse;
+}
+
+.castGroupTable td {
+ padding: 0;
+ margin: 0;
+ vertical-align: middle;
+}
+
+.castGroupBrace {
+ padding: 0 0.5em !important;
+}
+
   
 
 table.alignedtext, table.alignedverse {

@@ -592,7 +592,11 @@
             <!-- Handle matter before any anchor -->
             <xsl:if test="not($a/*[1]/@n = $anchors) or not($b/*[1]/@n = $anchors)">
                 <tr>
-                    <td class="first" lang="{$firstLang}">
+                    <td class="first">
+                        <xsl:call-template name="set-lang-attribute">
+                            <xsl:with-param name="lang" select="$firstLang"/>
+                        </xsl:call-template>
+
                         <xsl:if test="not($a/*[1]/@n = $anchors)">
                             <xsl:apply-templates select="$a/*[1]"/>
                             <xsl:call-template name="output-inserted-paragraphs">
@@ -601,7 +605,12 @@
                             </xsl:call-template>
                         </xsl:if>
                     </td>
-                    <td class="second" lang="{$secondLang}">
+
+                    <td class="second">
+                        <xsl:call-template name="set-lang-attribute">
+                            <xsl:with-param name="lang" select="$secondLang"/>
+                        </xsl:call-template>
+
                         <xsl:if test="not($b/*[1]/@n = $anchors)">
                             <xsl:apply-templates select="$b/*[1]"/>
                             <xsl:call-template name="output-inserted-paragraphs">
@@ -618,14 +627,23 @@
                 <xsl:variable name="n" select="@n"/>
 
                 <tr>
-                    <td class="first" lang="{$firstLang}">
+                    <td class="first">
+                        <xsl:call-template name="set-lang-attribute">
+                            <xsl:with-param name="lang" select="$firstLang"/>
+                        </xsl:call-template>
+
                         <xsl:apply-templates select="."/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="."/>
                             <xsl:with-param name="anchors" select="$anchors"/>
                         </xsl:call-template>
                     </td>
-                    <td class="second" lang="{$secondLang}">
+
+                    <td class="second">
+                        <xsl:call-template name="set-lang-attribute">
+                            <xsl:with-param name="lang" select="$secondLang"/>
+                        </xsl:call-template>
+
                         <xsl:apply-templates select="$b/*[@n = $n]"/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="$b/*[@n = $n]"/>

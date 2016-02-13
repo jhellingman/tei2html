@@ -9,7 +9,7 @@
       <meta name="dtb:totalPageCount" content="0"/>
       <meta name="dtb:maxPageNumber" content="0"/>
       <meta name="dtb:generator"
-            content="tei2ncx.xsl, see http://code.google.com/p/tei2html/"/>
+            content="tei2ncx.xsl, see https://github.com/jhellingman/tei2html"/>
    </head>
    <docTitle>
       <text>Main Title of Work Goes Here</text>
@@ -107,56 +107,50 @@
             </navLabel>
             <content src="test-alignFirst.xhtml"/>
          </navPoint>
-         <navPoint playOrder="16" class="chapter" id="alignSecond">
-            <navLabel>
-               <text>Hoofdstuk IX Tekstsynchronisatie</text>
-            </navLabel>
-            <content src="test-alignSecond.xhtml"/>
-         </navPoint>
       </navPoint>
-      <navPoint playOrder="17" class="chapter" id="test-toc">
+      <navPoint playOrder="16" class="chapter" id="test-toc">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-test-toc.xhtml"/>
       </navPoint>
-      <navPoint playOrder="18" class="chapter" id="index">
+      <navPoint playOrder="17" class="chapter" id="index">
          <navLabel>
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="19" class="section" id="xd25e1478">
+         <navPoint playOrder="18" class="section" id="xd25e1478">
             <navLabel>
                <text>A.</text>
             </navLabel>
             <content src="test-index.xhtml#xd25e1478"/>
          </navPoint>
-         <navPoint playOrder="20" class="section" id="xd25e1483">
+         <navPoint playOrder="19" class="section" id="xd25e1483">
             <navLabel>
                <text>B.</text>
             </navLabel>
             <content src="test-index.xhtml#xd25e1483"/>
          </navPoint>
-         <navPoint playOrder="21" class="section" id="xd25e1488">
+         <navPoint playOrder="20" class="section" id="xd25e1488">
             <navLabel>
                <text>C.</text>
             </navLabel>
             <content src="test-index.xhtml#xd25e1488"/>
          </navPoint>
-         <navPoint playOrder="22" class="section" id="xd25e1493">
+         <navPoint playOrder="21" class="section" id="xd25e1493">
             <navLabel>
                <text>D.</text>
             </navLabel>
             <content src="test-index.xhtml#xd25e1493"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="23" class="contents" id="toc">
+      <navPoint playOrder="22" class="contents" id="toc">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="24" class="colophon" id="xd25e1506">
+      <navPoint playOrder="23" class="colophon" id="xd25e1506">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
