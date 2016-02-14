@@ -37,9 +37,9 @@
                     <meta charset="utf-8"/>
                 </head>
                 <body>
-                    <xsl:apply-templates select="text" mode="ePubNav"/>
-                    <xsl:apply-templates select="text" mode="navLandMarks"/>
-                    <xsl:apply-templates select="text" mode="navPageList"/>
+                    <xsl:apply-templates select="text[1]" mode="ePubNav"/>
+                    <xsl:apply-templates select="text[1]" mode="navLandMarks"/>
+                    <xsl:apply-templates select="text[1]" mode="navPageList"/>
                 </body>
             </html>
         </xsl:result-document>
@@ -153,7 +153,7 @@
                     <li>
                         <a epub:type="titlepage">
                             <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//titlePage[1]"/>
+                                <xsl:with-param name="target" select="(//titlePage)[1]"/>
                             </xsl:call-template>
                             <xsl:value-of select="f:message('msgTitlePage')"/>
                         </a>

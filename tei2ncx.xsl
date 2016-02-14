@@ -85,7 +85,7 @@
                     <xsl:variable name="navMap">
 
                         <xsl:copy-of select="f:create-nav-point(key('id', 'cover')[1], 'cover', f:message('msgCoverImage'))"/>
-                        <xsl:copy-of select="f:create-nav-point(/TEI.2/text/front/titlePage[1], 'titlepage', f:message('msgTitlePage'))"/>
+                        <xsl:copy-of select="f:create-nav-point((/TEI.2/text/front/titlePage)[1], 'titlepage', f:message('msgTitlePage'))"/>
 
                         <xsl:apply-templates select="text" mode="navMap"/>
 

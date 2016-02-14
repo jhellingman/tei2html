@@ -759,7 +759,7 @@
             <xsl:if test="/TEI.2/text/front/titlePage">
                 <reference type="title-page" title="{f:message('msgTitlePage')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="/TEI.2/text/front/titlePage[1]"/>
+                        <xsl:with-param name="target" select="(/TEI.2/text/front/titlePage)[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
