@@ -1,0 +1,71 @@
+
+ETextTools -- A collection of tools to process e-text.
+
+ETextTools is a collection of tools, written in Perl, C, AWK, batch or shell commands,
+to make the processing of e-text easier.
+
+
+extractNotes.pl
+
+	Extract TEI tagged notes from a text file.
+
+	usage:
+
+		perl extractNotes.pl [-h] <filename>
+
+	options:
+
+		-h	perpare for HTML output.
+
+	This produces two ouput files:
+		
+		<filename>.out	The original text without the notes
+		<filename>.not	The notes
+	
+	If the -h option is used, hyperlinks between the two files are inserted.
+	otherwise, the notes are indicated with a sequence number in square
+	brackets.
+
+tei2txt.pl
+
+	usage:
+
+		perl tei2txt.pl <filename>
+
+	Convert a TEI file to plain vanilla ASCII.
+
+	Notes: 
+	1. This script assumes extractNotes.pl has been run before.
+	2. Accented and special letters are converted to their nearest ASCII equivalents.
+
+
+tei2txt.bat
+
+	Convert a TEI file to plain vanilla ASCII.
+
+	This batch files runs extractNotes.pl, concatenated the two resulting
+	files, and then runs tei2txt.pl on the resulting file. The result is a
+	single ASCII file.
+
+
+
+
+ent2win.pl
+
+
+splitWords.pl
+
+
+listWord.pl
+
+	List all the words in a TEI file
+
+listWord.bat
+
+	Make a list of all words in a TEI file, with occurance count.
+
+	perl listWord.pl | perl.ent2win.pl | sort | uniq -c
+
+
+listName.bat
+

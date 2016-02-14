@@ -465,7 +465,7 @@ sub extractEntities($) {
 
     while (<PGFILE>) {
         my $remainder = $_;
-        while ($remainder =~ /$entityPattern/) {
+        while ($remainder =~ /$entityPattern/i) {
             $remainder = $';
             my $entity = $1;
             $entityHash{$entity}++;
