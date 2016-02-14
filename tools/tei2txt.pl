@@ -1148,6 +1148,62 @@ sub entities2iso88591($)
     $a =~ s/\&there4;/./g;  # Therefor (three dots in triangular arrangement) used as abbreviation dot.
     $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
 
+    # Rough Greek transcription
+
+    $a =~ s/\&Alpha;/A/g;       #  GREEK CAPITAL LETTER ALPHA
+    $a =~ s/\&Beta;/B/g;        #  GREEK CAPITAL LETTER BETA
+    $a =~ s/\&Gamma;/G/g;       #  GREEK CAPITAL LETTER GAMMA
+    $a =~ s/\&Delta;/D/g;       #  GREEK CAPITAL LETTER DELTA
+    $a =~ s/\&Epsilon;/E/g;     #  GREEK CAPITAL LETTER EPSILON
+    $a =~ s/\&Zeta;/Z/g;        #  GREEK CAPITAL LETTER ZETA
+    $a =~ s/\&Eta;/Ê/g;         #  GREEK CAPITAL LETTER ETA
+    $a =~ s/\&Theta;/Th/g;      #  GREEK CAPITAL LETTER THETA
+    $a =~ s/\&Iota;/I/g;        #  GREEK CAPITAL LETTER IOTA
+    $a =~ s/\&Kappa;/K/g;       #  GREEK CAPITAL LETTER KAPPA
+    $a =~ s/\&Lambda;/L/g;      #  GREEK CAPITAL LETTER LAMDA
+    $a =~ s/\&Mu;/M/g;          #  GREEK CAPITAL LETTER MU
+    $a =~ s/\&Nu;/N/g;          #  GREEK CAPITAL LETTER NU
+    $a =~ s/\&Xi;/X/g;          #  GREEK CAPITAL LETTER XI
+    $a =~ s/\&Omicron;/O/g;     #  GREEK CAPITAL LETTER OMICRON
+    $a =~ s/\&Pi;/P/g;          #  GREEK CAPITAL LETTER PI
+    $a =~ s/\&Rho;/R/g;         #  GREEK CAPITAL LETTER RHO
+    $a =~ s/\&Sigma;/S/g;       #  GREEK CAPITAL LETTER SIGMA
+    $a =~ s/\&Tau;/T/g;         #  GREEK CAPITAL LETTER TAU
+    $a =~ s/\&Upsilon;/U/g;     #  GREEK CAPITAL LETTER UPSILON
+    $a =~ s/\&Upsi;/U/g;        #  GREEK CAPITAL LETTER UPSILON
+    $a =~ s/\&Phi;/F/g;         #  GREEK CAPITAL LETTER PHI
+    $a =~ s/\&Chi;/Ch/g;        #  GREEK CAPITAL LETTER CHI
+    $a =~ s/\&Psi;/Ps/g;        #  GREEK CAPITAL LETTER PSI
+    $a =~ s/\&Omega;/Ô/g;       #  GREEK CAPITAL LETTER OMEGA
+
+    $a =~ s/\&alpha;/a/g;       #  GREEK SMALL LETTER ALPHA
+    $a =~ s/\&beta;/b/g;        #  GREEK SMALL LETTER BETA
+    $a =~ s/\&gamma;/g/g;       #  GREEK SMALL LETTER GAMMA
+    $a =~ s/\&delta;/d/g;       #  GREEK SMALL LETTER DELTA
+    $a =~ s/\&epsilon;/e/g;     #  GREEK SMALL LETTER EPSILON
+    $a =~ s/\&epsi;/e/g;        #  GREEK SMALL LETTER EPSILON
+    $a =~ s/\&zeta;/z/g;        #  GREEK SMALL LETTER ZETA
+    $a =~ s/\&eta;/ê/g;         #  GREEK SMALL LETTER ETA
+    $a =~ s/\&thetas;/th/g;     #  GREEK SMALL LETTER THETA
+    $a =~ s/\&theta;/th/g;      #  GREEK SMALL LETTER THETA
+    $a =~ s/\&iota;/i/g;        #  GREEK SMALL LETTER IOTA
+    $a =~ s/\&kappa;/k/g;       #  GREEK SMALL LETTER KAPPA
+    $a =~ s/\&lambda;/l/g;      #  GREEK SMALL LETTER LAMDA
+    $a =~ s/\&mu;/m/g;          #  GREEK SMALL LETTER MU
+    $a =~ s/\&nu;/n/g;          #  GREEK SMALL LETTER NU
+    $a =~ s/\&xi;/x/g;          #  GREEK SMALL LETTER XI
+    $a =~ s/\&omicron;/o/g;     #  GREEK SMALL LETTER OMICRON
+    $a =~ s/\&pi;/p/g;          #  GREEK SMALL LETTER PI
+    $a =~ s/\&rho;/r/g;         #  GREEK SMALL LETTER RHO
+    $a =~ s/\&sigma;/s/g;       #  GREEK SMALL LETTER SIGMA
+    $a =~ s/\&tau;/t/g;         #  GREEK SMALL LETTER TAU
+    $a =~ s/\&upsilon;/u/g;     #  GREEK SMALL LETTER UPSILON
+    $a =~ s/\&upsi;/u/g;        #  GREEK SMALL LETTER UPSILON
+    $a =~ s/\&phi;/f/g;         #  GREEK SMALL LETTER PHI
+    $a =~ s/\&chi;/ch/g;        #  GREEK SMALL LETTER CHI
+    $a =~ s/\&psi;/ps/g;        #  GREEK SMALL LETTER PSI
+    $a =~ s/\&omega;/ô/g;       #  GREEK SMALL LETTER OMEGA
+
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;
     $a =~ s/\&([a-zA-Z]{2})lig;/$1/g;

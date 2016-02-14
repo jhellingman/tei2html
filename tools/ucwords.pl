@@ -24,6 +24,7 @@ use LanguageNames qw/getLanguage/;
 # Global settings
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
+my $useHeatmap = 0;     # Set to 1 to generate a heat-map document.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -124,9 +125,10 @@ report();
 
 # reportSQL();
 # reportXML();
-# heatMapDocument();
 
-
+if ($useHeatmap) {
+    heatMapDocument();
+}
 
 
 #################################################

@@ -323,7 +323,7 @@ sub processFile($) {
         # Create a text heat map.
         if (-f "heatmap.xml") {
             print "Create text heat map...\n";
-            system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style\\heatmap.css.xml\" > $basename-heatmap.html");
+            system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style/heatmap.css\" > $basename-heatmap.html");
         }
     }
 
@@ -476,7 +476,7 @@ sub extractEntities($) {
 
     # Report found entities:
     if (keys %entityHash > 0) {
-        print "<!DOCTYPE TEI.2 PUBLIC \"-//TEI//DTD TEI Lite 1.0//EN\" [\n";
+        print "<!DOCTYPE TEI.2 PUBLIC \"-//TEI//DTD TEI Lite 1.0//EN\" [\n\n";
         my @entityList = sort keys %entityHash;
         foreach my $entity (@entityList) {
 
@@ -484,9 +484,9 @@ sub extractEntities($) {
             my $paddedEntity = sprintf "%s%-*s", $entity, 12 - length $entity, ' ';
             my $paddedTranslation = sprintf "\"%s\"%-*s", $translation, 20 - length $translation, ' ';
             my $count = $entityHash{$entity};
-            print "<!ENTITY $paddedEntity CDATA $paddedTranslation -- $count -->\n";
+            print "    <!ENTITY $paddedEntity CDATA $paddedTranslation -- $count -->\n";
         }
-        print "]>\n";
+        print "\n]>\n\n";
     }
 }
 
