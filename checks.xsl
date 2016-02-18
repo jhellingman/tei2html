@@ -327,6 +327,13 @@
     </xsl:template>
 
 
+    <!-- Do we have a following divGen[@type='apparatus'] for this note? -->
+    <xsl:template mode="checks" match="note[@place='apparatus']">
+        <xsl:if test="not(following::divGen[@type='apparatus'])">
+            <i:issue pos="{@pos}" code="C0013" element="{name(.)}">No &lt;divGen type="apparatus"&gt; following apparatus note.</i:issue>
+        </xsl:if>
+    </xsl:template>
+
     <!-- Elements not valid in TEI, but sometimes abused -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
