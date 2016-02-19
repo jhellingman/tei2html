@@ -121,7 +121,7 @@
         </xsl:if>
 
         <!-- Test covers align-with(...) and align-with-document(...) -->
-        <xsl:if test="//div[contains(@rend, 'align-with')] or //lg[contains(@rend, 'align-with')]">
+        <xsl:if test="(//div|//div1||//div2|//div3|//div4|//div5|//div6)[contains(@rend, 'align-with')] or //lg[contains(@rend, 'align-with')]">
             <xsl:value-of select="f:css-stylesheet('style/aligned-text.css')"/>
         </xsl:if>
 
