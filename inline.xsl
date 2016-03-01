@@ -420,6 +420,13 @@
     <!--====================================================================-->
     <!-- Choice element (borrowed from P5) -->
 
+    <xd:doc>
+        <xd:short>Handle a choice (for transcription).</xd:short>
+        <xd:detail>A <code>choice</code> element containing a <code>reg</code> and an <code>orig</code> element, with <code>@type="trans"</code> are used
+        to represent transcriptions, and translated to HTML pop-ups. These <code>choice</code>-elements are typically introduced by a script automatically
+        adding transcriptions to Greek fragments.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
             <xsl:if test="f:isSet('useMouseOverPopups')">
@@ -428,6 +435,23 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="orig"/>
+        </span>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Handle a choice (for corrections).</xd:short>
+        <xd:detail>A <code>choice</code> element containing a <code>sic</code> and a <code>corr</code> element are used
+        to represent corrections, and translated to HTML pop-ups.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="choice[corr]">
+        <span class="corr">
+            <xsl:if test="f:isSet('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="sic"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="corr/(*|text())"/>
         </span>
     </xsl:template>
 

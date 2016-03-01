@@ -509,7 +509,7 @@ sub reportXML()
 #
 sub sortWords()
 {
-    my @languageList = keys %wordHash;
+    my @languageList = sort keys %wordHash;
     foreach my $language (@languageList)
     {
         $langCount++;

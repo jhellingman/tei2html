@@ -1685,6 +1685,7 @@ BEGIN
     $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron
     $ent{"eemacr"}      = "e" . chr(0x035E) . "e"; # ee with wide macron
     $ent{"mmmacr"}      = "m" . chr(0x035E) . "m"; # mm with wide macron
+    $ent{"mnmacr"}      = "m" . chr(0x035E) . "n"; # mn with wide macron
 
     $ent{"ghbarb"}      = "g" . chr(0x035F) . "h"; # gh with double macron below
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below

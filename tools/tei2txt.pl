@@ -184,6 +184,10 @@ sub handleLine($)
     # drop page-breaks (<pb>) as they interfere with the following processing.
     $a =~ s/<pb\b(.*?)>//g;
 
+    # handle <choice><sic></sic><corr></corr></choice> and <choice><corr></corr><sic></sic></choice>
+    $a =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
+    $a =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
+
     # handle numbered lines of verse
     if ($a =~ /( +)<l\b(.*?)>/)
     {
