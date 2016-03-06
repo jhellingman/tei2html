@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
 #
-# Report / process a directory of .TEI files (old-fashioned SGML format)
+# Report on a directory of .TEI files (old-fashioned SGML format)
 #
 
 use strict;
@@ -18,8 +18,8 @@ use XML::XPath;
 binmode(STDOUT, ":utf8");
 use open ':utf8';
 
-my $force = 0;      # Force generation of XML files, even if up-to-date.
-my $makeHtml = 0;   # Generate HTML files.
+my $force = 0;          # Force generation of XML files, even if up-to-date.
+my $makeHtml = 0;       # Generate HTML files.
 
 GetOptions(
     'f' => \$force,
@@ -30,8 +30,7 @@ my $totalPages = 0;
 my $totalWords = 0;
 my $totalBytes = 0;
 
-my %excluded =
-    (
+my %excluded = (
         "TEI-template-NL", 1,
         "TEI-template-EN", 1
     );
@@ -44,8 +43,7 @@ sub main();
 main();
 
 
-sub main()
-{
+sub main() {
     my $reportFile = "pgreport.txt";
     my $xmlFile = "pgreport.xml";
 
@@ -53,8 +51,7 @@ sub main()
     open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
 
     my $directory = $ARGV[0];
-    if (! defined $directory)
-    {
+    if (! defined $directory) {
         $directory = ".";
     }
 
@@ -73,8 +70,7 @@ sub main()
 }
 
 
-sub logTotals()
-{
+sub logTotals() {
     logMessage("---------------------");
     logMessage("Files:      $totalFiles");
     logMessage("Words:      $totalWords");
@@ -82,13 +78,11 @@ sub logTotals()
 }
 
 
-sub listRecursively($)
-{
+sub listRecursively($) {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory))
-    {
+    unless (opendir(DIRECTORY, $directory)) {
         logError("Cannot open directory $directory!");
         exit;
     }
@@ -98,33 +92,25 @@ sub listRecursively($)
 
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory\\$file")
-        {
+    foreach my $file (@files) {
+        if (-f "$directory\\$file") {
             handleFile("$directory\\$file");
-        }
-        elsif (-d "$directory\\$file")
-        {
+        } elsif (-d "$directory\\$file") {
             listRecursively("$directory\\$file");
         }
     }
 }
 
 
-sub handleFile($)
-{
+sub handleFile($) {
     my ($file) = @_;
-
-    if ($file =~ m/^(.*)\.(tei)$/)
-    {
+    if ($file =~ m/^(.*)\.(tei)$/) {
         handleTeiFile($file);
     }
 }
 
 
-sub handleTeiFile($)
-{
+sub handleTeiFile($) {
     my $fullName = shift;
 
     my $fileSize = -s $fullName;
@@ -145,8 +131,7 @@ sub handleTeiFile($)
     logMessage("File:       $fileName$suffix");
     print XMLFILE "    <file>\n";
     print XMLFILE "      <name>$fileName$suffix</name>\n";
-    if (defined ($version))
-    {
+    if (defined ($version)) {
         logMessage("Version:    $version");
         print XMLFILE "      <version>$version</version>\n";
     }
@@ -163,33 +148,29 @@ sub handleTeiFile($)
 
     my $processScript = $filePath . "process.pl";
     my $specialProcessing = 0;
-    if (-e $processScript)
-    {
+    if (-e $processScript) {
         logMessage("Note:       process.pl present; files in this directory may require special processing.");
         $specialProcessing = 1;
     }
 
     my $xmlFileName = $filePath . "$baseName.xml";
     my $htmlFileName = $filePath . "$baseName.html";
+    my $wordsFileName = $filePath . "$baseName-words.html";
 
-    if (!$excluded{$baseName} == 1 && defined($version))
-    {
-        if ($force != 0 || !-e $xmlFileName || ($makeHtml != 0 && !-e $htmlFileName) || isNewer($fullName, $xmlFileName))
-        {
+    if (!$excluded{$baseName} == 1 && defined($version)) {
+        if ($force != 0
+                || !-e $xmlFileName
+                || !-e $wordsFileName
+                || ($makeHtml != 0 && !-e $htmlFileName)
+                || isNewer($fullName, $xmlFileName)) {
             my $cwd = getcwd;
             chdir ($filePath);
-            if ($specialProcessing == 1)
-            {
+            if ($specialProcessing == 1) {
                 # system ("perl -S process.pl");
-            }
-            else
-            {
-                if ($makeHtml != 0) 
-                {
+            } else {
+                if ($makeHtml != 0) {
                     system ("perl -S tei2html.pl -h -r -f $fileName$suffix");
-                }
-                else
-                {
+                } else {
                     system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
                 }
             }
@@ -197,11 +178,9 @@ sub handleTeiFile($)
         }
 
         my $coverImageFile = "cover.jpg";
-        if (-e $xmlFileName)
-        {
+        if (-e $xmlFileName) {
             # Use eval, so we can recover from fatal parse errors in XML:XPath.
-            eval
-            {
+            eval {
                 my $xpath = XML::XPath->new(filename => $xmlFileName);
 
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
@@ -218,12 +197,10 @@ sub handleTeiFile($)
                 my $description = $xpath->find('/TEI.2/teiHeader/fileDesc/notesStmt/note[@type="Description"]');
                 my $keywords = $xpath->find('/TEI.2/teiHeader/profileDesc/textClass/keywords/list/item');
 
-
                 logMessage("Title:      $title");
                 print XMLFILE "    <title>" . escapeXml($title) . "</title>\n";
 
-                for my $author ($authors->get_nodelist())
-                {
+                for my $author ($authors->get_nodelist()) {
                     logMessage("Author:     " . $author->string_value());
                     print XMLFILE "    <author>" . escapeXml($author->string_value()) . "</author>\n";
                 }
@@ -245,18 +222,15 @@ sub handleTeiFile($)
                 print XMLFILE "    <postedDate>$postedDate</postedDate>\n";
 
                 print XMLFILE "    <description>" . escapeXml($description) . "</description>\n";
-                for my $keyword ($keywords->get_nodelist())
-                {
+                for my $keyword ($keywords->get_nodelist()) {
                     print XMLFILE "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
                 }
 
                 # Find out whether we have a cover image:
                 my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();
-                if ($coverImage ne "")
-                {
+                if ($coverImage ne "") {
                     my $coverImageRend = $xpath->find('//figure[@id="cover-image"]/@rend')->string_value();
-                    if ($coverImageRend =~ /image\((.*?)\)/)
-                    {
+                    if ($coverImageRend =~ /image\((.*?)\)/) {
                         $coverImageFile = $1;
                     }
                     logMessage("Cover:      $coverImageFile");
@@ -264,20 +238,16 @@ sub handleTeiFile($)
                 }
 
                 1;
-            }
-            or do
-            {
+            } or do {
                 logMessage("Note:       Problem parsing $xmlFileName.");
                 logError("Problem parsing $xmlFileName");
             };
         }
 
         my $imageInfoFileName = $filePath . "imageinfo.xml";
-        if (-e $imageInfoFileName)
-        {
+        if (-e $imageInfoFileName) {
             # Use eval, so we can recover from fatal parse errors in XML:XPath.
-            eval
-            {
+            eval {
                 my $xpath = XML::XPath->new(filename => $imageInfoFileName);
 
                 my $imageCount = $xpath->find('count(//image)');
@@ -290,9 +260,7 @@ sub handleTeiFile($)
                 print XMLFILE "    <coverSize><width>$coverWidth</width><height>$coverHeight</height></coverSize>\n";
 
                 1;
-            }
-            or do
-            {
+            } or do {
                 logMessage("Note:       Problem parsing $imageInfoFileName.");
                 logError("Problem parsing $imageInfoFileName");
             };
@@ -301,15 +269,11 @@ sub handleTeiFile($)
 
         # words-file
         my $wordsFileName = $filePath . "$baseName-words.html";
-        if (-e $wordsFileName)
-        {
-            if (open(WORDSFILE, "<:encoding(iso-8859-1)", $wordsFileName))
-            {
-                while (<WORDSFILE>)
-                {
+        if (-e $wordsFileName) {
+            if (open(WORDSFILE, "<:encoding(iso-8859-1)", $wordsFileName)) {
+                while (<WORDSFILE>) {
                     my $line =  $_;
-                    if ($line =~ /<td id=textWordCount>([0-9]+)/)
-                    {
+                    if ($line =~ /<td id=textWordCount>([0-9]+)/) {
                         my $wordCount = $1;
                         $totalWords += $wordCount;
                         logMessage("Words:      $wordCount");
@@ -326,8 +290,7 @@ sub handleTeiFile($)
 }
 
 
-sub escapeXml($)
-{
+sub escapeXml($) {
     my $data = shift;
 
     $data =~ s/&/&amp;/sg;
@@ -339,31 +302,19 @@ sub escapeXml($)
 }
 
 
-#
-# Write HTML entry.
-#
-sub writeHtmlEntry()
-{
-
-}
-
-
-sub logError($)
-{
+sub logError($) {
     my $message = shift;
     print STDERR "ERROR: $message\n";
 }
 
 
-sub logMessage($)
-{
+sub logMessage($) {
     my $message = shift;
     print REPORTFILE "$message\n";
 }
 
 
-sub formatBytes($)
-{
+sub formatBytes($) {
     my $num = shift;
     my $kb = 1024;
     my $mb = (1024 * 1024);
@@ -379,8 +330,7 @@ sub formatBytes($)
 #
 # isNewer -- determine whether the first file exists and is newer than the second file
 #
-sub isNewer($$)
-{
+sub isNewer($$) {
     my $file1 = shift;
     my $file2 = shift;
 

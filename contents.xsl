@@ -30,7 +30,7 @@
                 <tr><td><code>&lt;divGen type="index"/&gt;</code></td>      <td>Generates an index.</td></tr>
                 <tr><td><code>&lt;divGen type="IndexToc"/&gt;</code></td>   <td>Generates a one-line table of contents, specially designed for indexes.</td></tr>
                 <tr><td><code>&lt;divGen type="footnotes"/&gt;</code></td>  <td>Generates a section with footnotes.</td></tr>
-                <tr><td><code>&lt;div2 type="SubToc"/&gt;</code></td>       <td>Generates a table of contents at the div2 level. This table replaces the actual content of the div2 element.</td></tr>
+                <tr><td><code>&lt;div2 type="SubToc"/&gt;</code></td>       <td>Generates a table of contents at the <code>div2</code> level. This table replaces the actual content of the <code>div2</code> element.</td></tr>
             </table>
         </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>

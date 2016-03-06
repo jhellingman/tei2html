@@ -1,0 +1,65 @@
+
+
+Stappenplan modernisatie oud Nederlands.
+
+# 0. Voorbereiding:
+
+	- Tekst in XML formaat.
+	- Tekst voorzien van lang tags, tekst in een oude Nederlandse spelling als volgt:
+		lang=nl-1900
+		lang=nl-1800
+	- Tekst in andere talen wordt genegeerd.
+	- Tekst in XML attributed wordt genegeerd.
+
+# 1. Maak lijst van onbekende woorden
+
+Deze woordenlijst moet van te voren even doorgelopen worden, en uitgebreid worden met onbekende spellingen
+
+# 2. vervangen woorden volgens woordenboek
+
+Merkop dat we de spelling moderniseren, ongeacht of het woord in kwestie zelf nog gebruikelijk is.
+
+Zoek woorden in de oude spelling op in het woordenboek, en vervang deze door woorden in de moderne spelling.
+
+Merk op dat verouderde woorden worden voorzien van hints (via het woordenboek)
+
+wier		[**wier|van wie]
+der		[**der|van de|van het]
+
+photographie	[**fotografie|foto]
+photographiën	[**fotografiën|foto's]
+kikvorsch	[**kikvors|kikker]
+kikvorschen	[**kikvorsen|kikkers]
+bezie		[**bezie|bes]
+beziën		[**beziën|bessen]
+
+Mogelijke namen beginnen met een hoofdletter, zonder het begin van een zin te zijn, en krijgen een optie
+
+de Heer Bosch	de Heer [**Bosch|Bos]
+
+Oud gebruik van hoofletters wordt aangepast via het woordenboek:
+
+Maandag		maandag
+
+Niet standaard afkortingen
+
+KM.		km
+K.M.		km
+
+
+
+# 3. naamvals -n
+
+Zoek voorkomens van de vierde naamvals uitgang op -n, en verwijder deze.
+
+Patronen:
+
+	Den groten man	-> De grote man
+	Enen ouden man  -> Een oude man
+
+	LIDWOORD op n + BIJV.NW. op n + ZELFS.NW.  -> verwijder de naamvals n'en.
+
+# 4. Handmatige nabewerking.
+
+Zoek alle gegenereerde notities op, en kijk hoe deze aangepast moeten worden
+

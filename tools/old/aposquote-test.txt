@@ -1,0 +1,18 @@
+<p>'Dit is,' zei de oude man, 'een goede test van software die
+enkele aanhalingstekens kan kiezen.'
+
+<p>'Wat zei je?' vroeg de vrouw, die sinds '68 al d'r aanhalingstekens
+door de war gooide. 'Is dat werkelijk zo?'
+
+<p>'Jazeker, mevrouw, 'k heb het met je te doen!'
+
+<p>Test ('test') Test!
+
+<p>Test <hi>'test'</hi> Test!
+
+<p>Test '<hi>test</hi>' Test!
+
+<p>'Het is maar liefst 20' breed.'
+
+<p>'hij zei'&mdash;'hij zegt.'
+
