@@ -171,14 +171,17 @@
 
     <xd:doc>
         <xd:short>Translate the <code>@rend</code> attributes to CSS.</xd:short>
-        <xd:detail>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</xd:detail>
+        <xd:detail><p>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</p>
+
+        <p>rendition-ladder syntax consists of a series of keys followed by the value between parentheses, e.g., 
+        <code>font-size(large) color(red)</code>.</p></xd:detail>
         <xd:param name="rend">The <code>@rend</code> attribute to be translated.</xd:param>
         <xd:param name="name">The name of the element carrying this attribute.</xd:param>
     </xd:doc>
 
     <xsl:template name="translate-rend-attribute">
-        <xsl:param name="rend" select="normalize-space(@rend)"/>
-        <xsl:param name="name" select="name()"/>
+        <xsl:param name="rend" select="normalize-space(@rend)" as="xs:string"/>
+        <xsl:param name="name" select="name()" as="xs:string"/>
 
         <!-- A rendition ladder is straighfowardly converted to CSS, by taking the
              characters before the "(" as the css property, and the characters
@@ -208,8 +211,8 @@
     </xd:doc>
 
     <xsl:template name="filter-css-property">
-        <xsl:param name="property"/>
-        <xsl:param name="value"/>
+        <xsl:param name="property" as="xs:string"/>
+        <xsl:param name="value" as="xs:string"/>
 
         <xsl:choose>
             <!-- Drop properties without values -->
@@ -282,7 +285,7 @@
     </xd:doc>
 
     <xsl:template name="generate-rend-class-name">
-        <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="rend" select="@rend" as="xs:string?"/>
         <xsl:param name="node" select="."/>
 
         <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
@@ -297,7 +300,7 @@
     </xd:doc>
 
     <xsl:template name="generate-rend-class-attribute">
-        <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="rend" select="@rend" as="xs:string?"/>
         <xsl:param name="node" select="."/>
 
         <xsl:attribute name="class">
@@ -319,7 +322,7 @@
     </xd:doc>
 
     <xsl:template name="generate-rend-class-name-if-needed">
-        <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="rend" select="@rend" as="xs:string?"/>
         <xsl:param name="node" select="."/>
 
         <xsl:if test="f:has-rend-value($rend, 'class')">
@@ -351,7 +354,7 @@
     </xd:doc>
 
     <xsl:template name="generate-rend-class-attribute-if-needed">
-        <xsl:param name="rend" select="@rend"/>
+        <xsl:param name="rend" select="@rend" as="xs:string?"/>
         <xsl:param name="node" select="."/>
 
         <xsl:variable name="class">
@@ -428,7 +431,7 @@
     <xd:doc>
         <xd:short>Generate a CSS rule.</xd:short>
         <xd:detail>Generate a CSS rule from a <code>@rend</code> attribute. Using a key on <code>name():@rend</code>, we
-        do so only for the first occurance of a <code>@rend</code> attribute on an element.</xd:detail>
+        do so only for the first occurance of a <code>@rend</code> attribute on each element type.</xd:detail>
     </xd:doc>
 
     <xsl:template name="generate-css-rule">
