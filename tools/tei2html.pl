@@ -275,7 +275,7 @@ sub processFile($) {
         my $tmpFile2 = mktemp('tmp-XXXXX');
 
         print "Create text version...\n";
-        system ("perl $toolsdir/exNotesHtml.pl $filename");
+        system ("perl $toolsdir/extractNotes.pl $filename");
         system ("cat $filename.out $filename.notes > $tmpFile1");
         system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
 

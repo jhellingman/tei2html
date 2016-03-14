@@ -439,7 +439,23 @@
                             <a class="pageref">
                                 <xsl:choose>
                                     <xsl:when test="f:insideFootnote(.)">
-                                        <xsl:call-template name="generate-footnote-href-attribute"/>
+                                        <xsl:choose>
+                                            <xsl:when test="f:insideChoice(.)">
+                                                <!-- Typical scenario: Greek text with automatically added transliteration in footnote. -->
+                                                <xsl:call-template name="generate-footnote-href-attribute">
+                                                    <xsl:with-param name="target" select="./ancestor::choice"/>
+                                                </xsl:call-template>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:call-template name="generate-footnote-href-attribute"/>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </xsl:when>
+                                    <xsl:when test="f:insideChoice(.)">
+                                        <!-- Typical scenario: Greek text with automatically added transliteration. -->
+                                        <xsl:call-template name="generate-href-attribute">
+                                            <xsl:with-param name="target" select="./ancestor::choice"/>
+                                        </xsl:call-template>
                                     </xsl:when>
                                     <xsl:otherwise>
                                         <xsl:call-template name="generate-href-attribute"/>
@@ -480,7 +496,7 @@
 
 
     <xd:doc>
-        <xd:short>Prevent cells from being rendered as extra tb elements in the language fragment overview.</xd:short>
+        <xd:short>Prevent cells from being rendered as extra <code>tb</code> elements in the language fragment overview.</xd:short>
     </xd:doc>
 
     <xsl:template match="cell" mode="languageFragments">

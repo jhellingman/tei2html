@@ -804,7 +804,12 @@ table.alignedverse td.lineNumbers {
 
 .epub-media-overlay-active {
  background-color: yellow;
-}body {
+}
+
+span.measure {
+ border-bottom: none;
+}
+body {
  background: #FFFFFF;
  font-family: "Times New Roman", Times, serif;
 }

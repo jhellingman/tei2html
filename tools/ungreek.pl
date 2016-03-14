@@ -5,7 +5,7 @@ use strict;
 use File::stat;
 use File::Temp qw(mktemp);
 
-my $toolsdir        = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
+my $toolsdir        = "D:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
 my $patcdir         = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
 
 my $infile = $ARGV[0];

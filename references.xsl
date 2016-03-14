@@ -101,6 +101,21 @@
         <xsl:value-of select="$targetNode/ancestor-or-self::note[@place='foot' or @place='unspecified' or not(@place)]"/>
     </xsl:function>
 
+    <xd:doc>
+        <xd:short>Is a node inside a choice-element?</xd:short>
+        <xd:detail>
+            <p>This function determines whether a node is inside a choice-element. This is important,
+            as elements inside choice elements may not be rendered at all.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:insideChoice">
+        <xsl:param name="targetNode" as="node()"/>
+
+        <xsl:value-of select="$targetNode/ancestor::choice"/>
+    </xsl:function>
+
+
 
     <!--====================================================================-->
     <!-- External References -->

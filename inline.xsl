@@ -429,6 +429,7 @@
 
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="reg"/>
@@ -446,6 +447,7 @@
 
     <xsl:template match="choice[corr]">
         <span class="corr">
+            <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="sic"/>
