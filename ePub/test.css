@@ -274,6 +274,21 @@ ul {
  padding: 1em;
 }
 
+
+.itemGroupTable {
+ border-collapse: collapse;
+}
+
+.itemGroupTable td {
+ padding: 0;
+ margin: 0;
+ vertical-align: middle;
+}
+
+.itemGroupBrace {
+ padding: 0 0.5em !important;
+}
+
  
 
 .footnotes .body, .footnotes .div1 {
@@ -1115,47 +1130,47 @@ list-style-type:disc;
 list-style-type:disc;
 }
 
-.xd25e1240
+.xd25e1277
 {
 text-align:center;
 }
 
-.xd25e1245
+.xd25e1282
 {
 text-indent:1em;
 }
 
-.xd25e1251
+.xd25e1288
 {
 text-indent:2em;
 }
 
-.xd25e1255
+.xd25e1292
 {
 text-indent:3em;
 }
 
-.xd25e1259
+.xd25e1296
 {
 text-indent:10em;
 }
 
-.xd25e1261
+.xd25e1298
 {
 font-style:italic;
 }
 
-.xd25e1344
+.xd25e1381
 {
 font-style:italic;
 }
 
-.xd25e1355
+.xd25e1392
 {
 display:none;
 }
 
-.xd25e1389
+.xd25e1426
 {
 display:none;
 }

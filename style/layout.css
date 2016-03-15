@@ -278,6 +278,21 @@ ul {
 	padding: 1em;
 }
 
+.itemGroupTable {
+	border-collapse: collapse;
+    margin-left: 0;
+}
+
+.itemGroupTable td {
+	padding: 0;
+	margin: 0;
+	vertical-align: middle;
+}
+
+.itemGroupBrace {
+	padding: 0 0.5em !important;
+}
+
 /***** Footnotes and other notes *****/
 
 .footnotes .body, .footnotes .div1 {

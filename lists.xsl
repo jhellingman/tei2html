@@ -13,8 +13,9 @@
         <xd:short>Stylesheet to format lists, to be imported in tei2html.xsl.</xd:short>
         <xd:detail>This stylesheet formats lists elements from TEI.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
+
 
     <xd:doc>
         <xd:short>Format a list.</xd:short>
@@ -202,13 +203,76 @@
 
     <xd:doc>
         <xd:short>Format a list item.</xd:short>
-        <xd:detail>Format a a list item.</xd:detail>
+        <xd:detail>Format a list item.</xd:detail>
     </xd:doc>
 
     <xsl:template match="item">
         <li>
             <xsl:call-template name="handle-item"/>
         </li>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Format a group of items.</xd:short>
+        <xd:detail>Format a group of list items. Sometimes, lists are encountered with braces that group items. The (non-standard)
+        element <code>itemGroup</code> provides an easy shortcut to encode them and achieve the graphic result.
+        See also the stylesheet for <code>castGroup</code> in drama.xsl.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="itemGroup">
+        <li>
+            <xsl:attribute name="class">itemGroup <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:call-template name="set-lang-id-attributes"/>
+
+            <xsl:variable name="this" select="."/>
+            <xsl:variable name="count" select="count(item)"/>
+            <xsl:variable name="before" select="(*|text())[not(self::item or preceding-sibling::item)]"/>
+            <xsl:variable name="after" select="(*|text())[not(self::item or following-sibling::item)]"/>
+            <xsl:variable name="contentBefore" select="normalize-space(string-join($before, '')) != ''"/>
+            <xsl:variable name="contentAfter" select="normalize-space(string-join($after, '')) != ''"/>
+
+            <table class="itemGroupTable">
+                <xsl:for-each select="item">
+                    <tr>
+                        <xsl:if test="position() = 1">
+                            <xsl:if test="$contentBefore">
+                                <td rowspan="{$count}"><xsl:apply-templates select="$before"/></td>
+                            </xsl:if>
+                            <xsl:if test="$contentBefore or $this/@rend='braceBefore'">
+                                <td rowspan="{$count}" class="itemGroupBrace">
+                                    <xsl:call-template name="insertimage2">
+                                        <xsl:with-param name="alt" select="'{'"/>
+                                        <xsl:with-param name="format" select="'.png'"/>
+                                        <xsl:with-param name="filename" select="concat('images/lbrace', $count, '.png')"/>
+                                    </xsl:call-template>
+                                </td>
+                            </xsl:if>
+                        </xsl:if>
+                        <td><xsl:apply-templates select="." mode="itemGroupTable"/></td>
+                        <xsl:if test="position() = 1">
+                            <xsl:if test="$contentAfter or $this/@rend='braceAfter'">
+                                <td rowspan="{$count}" class="itemGroupBrace">
+                                    <xsl:call-template name="insertimage2">
+                                        <xsl:with-param name="alt" select="'}'"/>
+                                        <xsl:with-param name="format" select="'.png'"/>
+                                        <xsl:with-param name="filename" select="concat('images/rbrace', $count, '.png')"/>
+                                    </xsl:call-template>
+                                </td>
+                            </xsl:if>
+                            <xsl:if test="$contentAfter">
+                                <td rowspan="{$count}"><xsl:apply-templates select="$after"/></td>
+                            </xsl:if>
+                        </xsl:if>
+                    </tr>
+                </xsl:for-each>
+            </table>
+        </li>
+    </xsl:template>
+
+
+    <xsl:template match="item" mode="itemGroupTable">
+        <xsl:apply-templates/>
     </xsl:template>
 
 

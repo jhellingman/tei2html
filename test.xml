@@ -845,6 +845,27 @@
     <item>Ten</item>
 </list>
 
+<p>A list with grouping</p>
+
+<list>
+    <item>One</item>
+    <item>Two</item>
+    <item>Three</item>
+	<itemGroup rend="braceAfter">
+		<item>Four</item>
+		<item>Five</item>
+	</itemGroup>
+    <item>Six</item>
+	<itemGroup> 
+		This <hi>italic</hi> text will go first
+		<item>Seven</item>
+		<item>Eight</item> 
+		This <hi rend="bold">bold</hi> text will go last.
+	</itemGroup>
+    <item>Nine</item>
+    <item>Ten</item>
+</list>
+
 
 </div1>
 <div1 id="ch07" n="VII" type="Chapter">

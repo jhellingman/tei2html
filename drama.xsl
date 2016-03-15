@@ -349,7 +349,7 @@
         <xd:detail><p>Render a castGroup as a table with a brace on the right, followed by some description common to all the castItems in the group, which text is to be encoded in the head. This assumes an image file named <code>rbrace<i>N</i></code> is present, where <i>N</i> is the number of castItems in the castGroup.</p>
         
         <p>This was specially implemented to render the cast-lists, as found in the works of Shakespeare, in the same way as in the original work, without having
-        to add significant presentation-oriented tagging to the TEI source files.</p></xd:detail>
+        to add significant presentation-oriented tagging to the TEI source files. See also the stylesheet for <code>itemGroup</code> in list.xsl.</p></xd:detail>
     </xd:doc>
 
     <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']">

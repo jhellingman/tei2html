@@ -153,6 +153,13 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </castGroup>
 </xsl:template>
 
+<xsl:template match="itemgroup">
+<itemGroup>
+ <xsl:apply-templates select="@*"/>
+ <xsl:apply-templates/>
+</itemGroup>
+</xsl:template>
+
 <xsl:template match="castitem">
 <castItem>
  <xsl:apply-templates select="@*"/>
