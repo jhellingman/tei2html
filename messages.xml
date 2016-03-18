@@ -99,7 +99,8 @@
         <msg:message name="msgReference">Reference</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgEmailLink">Send email message</msg:message>
-
+        <msg:message name="msgAuthorCorrection">Corrected by author from</msg:message>
+        <msg:message name="msgAuthorAddition">Added by author</msg:message>
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrections">Corrections</msg:message>
         <msg:message name="msgTranscription">Transcription</msg:message>

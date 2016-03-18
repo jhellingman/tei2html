@@ -246,6 +246,9 @@
     </xd:doc>
 
     <xsl:template name="do-corr">
+        <xsl:variable name="msgSource" select="if (@resp = 'errata') then f:message('msgAuthorCorrection') else f:message('msgSource')"/>
+        <xsl:variable name="msgNotInSource" select="if (@resp = 'errata') then f:message('msgAuthorAddition') else f:message('msgNotInSource')"/>
+
         <xsl:choose>
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
             <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
@@ -258,7 +261,7 @@
                 <span class="corr">
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="f:message('msgNotInSource')"/>
+                        <xsl:value-of select="$msgNotInSource"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
@@ -273,7 +276,7 @@
                 <span class="corr">
                     <xsl:call-template name="generate-id-attribute"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="f:message('msgSource')"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
+                        <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
                     </xsl:attribute>
                     <xsl:apply-templates/>
                 </span>
