@@ -9,6 +9,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -300,7 +301,7 @@
         columns can only be achieved when actually rendering the columns (in the browser or otherwise).</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handle-apparatus-notes">
+    <xsl:template name="handle-apparatus-notes-xx">
         <xsl:param name="notes" as="node()*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
@@ -319,6 +320,42 @@
                                 <xsl:apply-templates select="." mode="apparatus"/>
                             </xsl:for-each>
                         </td>
+                    </tr>
+                </table>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="$notes">
+                    <xsl:apply-templates select="." mode="apparatus"/>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Split a sequence of notes into columns (row-mayor; table).</xd:short>
+        <xd:detail>Split a sequence of notes into columns, using a table; order will be: [1, 2], [3, 4].</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="handle-apparatus-notes-xxx">
+        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="rend" as="xs:string?"/>
+
+        <xsl:variable name="columns" select="number(f:rend-value($rend, 'columns'))"/>
+
+        <xsl:choose>
+            <xsl:when test="$columns &gt; 1 and count($notes) &gt; 1">
+                <xsl:variable name="rows" select="ceiling(count($notes) div $columns)"/>
+                <table class="cols{$columns}">
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <tr>
+                        <xsl:for-each-group select="$notes" group-by="(position() - 1) idiv number($rows)">
+                            <td>
+                                <xsl:for-each select="current-group()">
+                                    <xsl:apply-templates select="." mode="apparatus"/>
+                                </xsl:for-each>
+                            </td>
+                        </xsl:for-each-group>
                     </tr>
                 </table>
             </xsl:when>
@@ -386,5 +423,90 @@
             </a>
         </span>
     </xsl:template>
+
+
+
+    <!-- Handle notes as a single paragraph. A complicating factor here is that some of the notes do contain
+    paragraphs, and we want to preserve the paragraph breaks, having a multi-paragraph note following the preceding note
+    on the same line, start a new line for the following paragraphs of that note, and have the following note follow the
+    last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, indicating where
+    the paragraph breaks should remain, and then group them back into paragraphs. 
+    
+    As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
+    original notes, as to keep cross references working. -->
+
+    <xsl:template name="handle-apparatus-notes">
+        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="rend" as="xs:string?"/>
+
+        <xsl:variable name="collected-notes">
+            <xsl:for-each select="$notes">
+                <xsl:apply-templates select="." mode="collect-apparatus"/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <div class="textual-notes-body">
+            <xsl:for-each-group select="$collected-notes/*" group-starting-with="tmp:br">
+                <xsl:element name="{$p.element}">
+                    <xsl:variable name="class">
+                        par apparatus
+                        <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                    </xsl:variable>
+                    <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
+                    <xsl:apply-templates select="current-group()"/>
+                </xsl:element>
+            </xsl:for-each-group>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="note[@place='apparatus' and not(p)]" mode="collect-apparatus">
+        <tmp:span>
+            <xsl:call-template name="generate-id-attribute-for"/>
+            <!-- TODO: copy rend and lang attributes -->
+            <xsl:for-each select="*|text()">
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+        </tmp:span>
+    </xsl:template>
+
+    <xsl:template match="note[@place='apparatus' and p]" mode="collect-apparatus">
+        <xsl:apply-templates select="*[1]" mode="collect-apparatus-first"/>
+        <xsl:apply-templates select="*[position() > 1]" mode="collect-apparatus"/>
+    </xsl:template>
+
+    <xsl:template match="p" mode="collect-apparatus-first">
+        <tmp:span>
+            <xsl:call-template name="generate-id-attribute-for">
+                <xsl:with-param name="node" select="ancestor::note[1]"/>
+            </xsl:call-template>
+            <!-- TODO: copy rend and lang attributes of parent -->
+            <xsl:for-each select="*|text()">
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+        </tmp:span>
+    </xsl:template>
+
+    <xsl:template match="p" mode="collect-apparatus">
+        <tmp:br/>
+        <tmp:span>
+            <!-- TODO: copy rend and lang attributes of parent -->
+            <xsl:for-each select="*|text()">
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+        </tmp:span>
+    </xsl:template>
+
+    <xsl:template match="tmp:span">
+        <span class="apparatus-note">
+            <xsl:if test="@id">
+                <xsl:attribute name="id" select="@id"/>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="tmp:br"/>
+
 
 </xsl:stylesheet>

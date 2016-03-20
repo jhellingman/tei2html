@@ -22,6 +22,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
@@ -42,7 +43,7 @@
     <xd:doc>
         <xd:short>Handle a page-break.</xd:short>
         <xd:detail>Handle a page-break. Generate an HTML anchor with an <code>id</code> attribute.
-        Depending on the element we find the <code>pb</code> in, we may need to wrap the generated content in
+        Depending on the element that contains the <code>pb</code>-element, we may need to wrap the generated content in
         a wrapping HTML <code>p</code>-element.</xd:detail>
     </xd:doc>
 
@@ -53,7 +54,7 @@
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
             <!-- In some odd cases, you can have a parent::front, and also a ancestor::p, this is why those tests are separated -->
-            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l">
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span">
                 <xsl:call-template name="pb"/>
             </xsl:when>
             <xsl:otherwise>
