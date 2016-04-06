@@ -425,15 +425,17 @@
     </xsl:template>
 
 
-
-    <!-- Handle notes as a single paragraph. A complicating factor here is that some of the notes do contain
-    paragraphs, and we want to preserve the paragraph breaks, having a multi-paragraph note following the preceding note
-    on the same line, start a new line for the following paragraphs of that note, and have the following note follow the
-    last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, indicating where
-    the paragraph breaks should remain, and then group them back into paragraphs. 
+    <xd:doc>
+        <xd:short>Format apparatus notes as a single paragraph.</xd:short>
+        <xd:detail><p>Format apparatus notes as a single paragraph. A complicating factor here is that some of the notes do contain
+        paragraphs, and we want to preserve the paragraph breaks, having a multi-paragraph note following the preceding note
+        on the same line, start a new line for the following paragraphs of that note, and have the following note follow the
+        last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, indicating where
+        the paragraph breaks should remain, and then group them back into paragraphs.</p>
     
-    As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
-    original notes, as to keep cross references working. -->
+        <p>As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
+        original notes, as to keep cross references working.</p></xd:detail>
+    </xd:doc>
 
     <xsl:template name="handle-apparatus-notes">
         <xsl:param name="notes" as="node()*"/>
@@ -463,7 +465,8 @@
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="collect-apparatus">
         <tmp:span>
             <xsl:call-template name="generate-id-attribute-for"/>
-            <!-- TODO: copy rend and lang attributes -->
+            <xsl:attribute name="rend" select="@rend"/>
+            <xsl:attribute name="lang" select="@lang"/>
             <xsl:for-each select="*|text()">
                 <xsl:copy-of select="."/>
             </xsl:for-each>
@@ -480,7 +483,8 @@
             <xsl:call-template name="generate-id-attribute-for">
                 <xsl:with-param name="node" select="ancestor::note[1]"/>
             </xsl:call-template>
-            <!-- TODO: copy rend and lang attributes of parent -->
+            <xsl:attribute name="rend" select="ancestor::note[1]/@rend"/>
+            <xsl:attribute name="lang" select="ancestor::note[1]/@lang"/>
             <xsl:for-each select="*|text()">
                 <xsl:copy-of select="."/>
             </xsl:for-each>
@@ -490,7 +494,8 @@
     <xsl:template match="p" mode="collect-apparatus">
         <tmp:br/>
         <tmp:span>
-            <!-- TODO: copy rend and lang attributes of parent -->
+            <xsl:attribute name="rend" select="ancestor::note[1]/@rend"/>
+            <xsl:attribute name="lang" select="ancestor::note[1]/@lang"/>
             <xsl:for-each select="*|text()">
                 <xsl:copy-of select="."/>
             </xsl:for-each>
@@ -501,6 +506,11 @@
         <span class="apparatus-note">
             <xsl:if test="@id">
                 <xsl:attribute name="id" select="@id"/>
+                <a class="apparatusnote">
+                    <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
+                    <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
+                    <xsl:value-of select="f:getSetting('textCriticalNoteReturnSymbol')"/>
+                </a>
             </xsl:if>
             <xsl:apply-templates/>
         </span>

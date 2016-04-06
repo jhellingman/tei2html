@@ -97,6 +97,8 @@
 
                 <xsl:apply-templates mode="checks"/>
 
+                <xsl:apply-templates mode="check-ids"/>
+
                 <!-- Check textual issues on segments -->
                 <xsl:apply-templates mode="checks" select="$segments//segment"/>
             </i:issues>
@@ -334,6 +336,37 @@
         </xsl:if>
     </xsl:template>
 
+
+    <!-- Types of stage instructions ('mix' is the default provided by the DTD) -->
+
+    <xsl:variable name="expectedStageTypes" select="'mix', 'entrance', 'exit', 'setting'"/>
+
+    <xd:doc>
+        <xd:short>Check the types of <code>stage</code> elements.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="stage">
+        <xsl:if test="@type and not(@type = $expectedStageTypes)">
+            <i:issue pos="{@pos}" code="C0014" element="{name(.)}">Unexpected type for stage instruction: <xsl:value-of select="@type"/></i:issue>
+        </xsl:if>
+    </xsl:template>
+
+
+    <!-- Types of ab (arbitrary block) elements -->
+
+    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum'"/>
+
+    <xd:doc>
+        <xd:short>Check the types of <code>ab</code> elements.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="ab">
+        <xsl:if test="@type and not(@type = $expectedAbTypes)">
+            <i:issue pos="{@pos}" code="C0015" element="{name(.)}">Unexpected type for ab (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
+        </xsl:if>
+    </xsl:template>
+
+
     <!-- Elements not valid in TEI, but sometimes abused -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
@@ -422,6 +455,45 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <!-- Check ids referenced but not present -->
+
+    <xsl:template mode="check-ids" match="text">
+
+        <!-- @target points to existing @id -->
+        <xsl:for-each-group select="//*[@target]" group-by="@target">
+            <xsl:variable name="target" select="./@target"/>
+            <xsl:if test="not(//*[@id=$target])">
+                <i:issue 
+                    pos="{./@pos}" 
+                    code="X0001" 
+                    element="{name(.)}">Element <xsl:value-of select="name(.)"/>: target-attribute value <xsl:value-of select="./@target"/> not present as id.</i:issue>
+            </xsl:if>
+        </xsl:for-each-group>
+
+        <!-- @who points to existing @id on role -->
+        <xsl:for-each-group select="//*[@who]" group-by="@who">
+            <xsl:variable name="who" select="./@who"/>
+            <xsl:if test="not(//role[@id=$who])">
+                <i:issue 
+                    pos="{./@pos}" 
+                    code="X0002" 
+                    element="{name(.)}">Element <xsl:value-of select="name(.)"/>: who-attribute value <xsl:value-of select="./@who"/> not present as id of role.</i:issue>
+            </xsl:if>
+        </xsl:for-each-group>
+
+        <!-- @id of language not being used in the text -->
+        <xsl:for-each select="//language">
+            <xsl:variable name="id" select="@id"/>
+            <xsl:if test="not(//*[@lang=$id])">
+                <i:issue 
+                    pos="{./@pos}" 
+                    code="X0003" 
+                    element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
+            </xsl:if>
+        </xsl:for-each>
+
+    </xsl:template>
 
     <!-- Text level checks, run on segments -->
 

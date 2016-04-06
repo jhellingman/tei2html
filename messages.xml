@@ -118,6 +118,7 @@
         <msg:message name="msgColophon">Colophon</msg:message>
         <msg:message name="msgApparatusNote">Textual Note</msg:message>
         <msg:message name="msgApparatusNotes">Textual Notes</msg:message>
+        <msg:message name="msgReturnToSourceLocation">Return to source location</msg:message>
         <msg:message name="msgRevisionHistory">Revision History</msg:message>
         <msg:message name="msgAvailability">Availability</msg:message>
         <msg:message name="msgEncoding">Encoding</msg:message>
@@ -189,6 +190,8 @@
         <msg:message name="pt">Portuguese</msg:message>
         <msg:message name="pt-br">Portugese (Brazil)</msg:message>
         <msg:message name="pt-pt">Portugese (Portugal)</msg:message>
+        <msg:message name="si">Sinhalese</msg:message>
+        <msg:message name="si-latn">Sinhalese (Latin transcription)</msg:message>
         <msg:message name="sa">Sanskrit</msg:message>
         <msg:message name="sa-latn">Sanskrit (Latin transcription)</msg:message>
         <msg:message name="ta">Tamil</msg:message>
