@@ -208,7 +208,7 @@
     <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
@@ -354,7 +354,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum'"/>
+    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum'"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>

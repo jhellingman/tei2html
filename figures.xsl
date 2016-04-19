@@ -354,6 +354,7 @@
                     <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
+                <xsl:call-template name="figure-head-top"/>
                 <xsl:call-template name="figure-annotations-top"/>
 
                 <xsl:call-template name="insertimage">
@@ -361,10 +362,17 @@
                 </xsl:call-template>
 
                 <xsl:call-template name="figure-annotations-bottom"/>
-
                 <xsl:apply-templates/>
+
             </div>
             <xsl:call-template name="reopenpar"/>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="figure-head-top">
+        <xsl:if test="head[f:positionAnnotation(@rend) = 'figTop']">
+            <xsl:apply-templates select="head[f:positionAnnotation(@rend) = 'figTop']" mode="figAnnotation"/>
         </xsl:if>
     </xsl:template>
 
@@ -478,12 +486,20 @@
         <xsl:value-of select="if ($position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
     </xsl:function>
 
-    <xsl:template match="figure/head">
+    <xsl:template match="figure/head[not(f:hasPositionAnnotation(@rend))]">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
 
+    <xsl:template match="figure/head[f:hasPositionAnnotation(@rend)]"/>
+
+
     <xsl:template match="p[f:hasPositionAnnotation(@rend)]"/>
+
+
+    <xsl:template match="figure/head[f:hasPositionAnnotation(@rend)]" mode="figAnnotation">
+        <p class="figureHead"><xsl:apply-templates/></p>
+    </xsl:template>
 
 
     <xsl:template match="p[f:hasPositionAnnotation(@rend)]" mode="figAnnotation">

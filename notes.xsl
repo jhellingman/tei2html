@@ -95,7 +95,9 @@
                 <xsl:if test="$notes">
                     <div class="footnotes">
                         <hr class="fnsep"/>
-                        <xsl:apply-templates mode="footnotes" select="$notes"/>
+                        <div class="footnote-body">
+                            <xsl:apply-templates mode="footnotes" select="$notes"/>
+                        </div>
                     </div>
                 </xsl:if>
             </xsl:if>
