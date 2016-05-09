@@ -149,7 +149,10 @@
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="generate-label"/>
                 <xsl:call-template name="handleDiv"/>
-                <xsl:call-template name="insert-footnotes"/>
+
+                <xsl:if test="not(f:has-rend-value(@rend, 'align-with') or f:has-rend-value(@rend, 'align-with-document'))">
+                    <xsl:call-template name="insert-footnotes"/>
+                </xsl:if>
             </div>
         </xsl:if>
     </xsl:template>
@@ -652,6 +655,23 @@
                     </td>
                 </tr>
             </xsl:for-each>
+
+            <!-- Include footnotes if at div1 level (for both sides) -->
+            <xsl:if test="$a/../div1">
+                <tr>
+                    <td class="first">
+                        <xsl:call-template name="insert-footnotes">
+                            <xsl:with-param name="div" select="$a"/>
+                        </xsl:call-template>
+                    </td>
+                    <td class="second">
+                        <xsl:call-template name="insert-footnotes">
+                            <xsl:with-param name="div" select="$b"/>
+                        </xsl:call-template>
+                    </td>
+                </tr>
+            </xsl:if>
+
         </table>
     </xsl:template>
 
