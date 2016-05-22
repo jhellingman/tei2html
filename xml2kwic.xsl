@@ -104,87 +104,76 @@
             <title>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
             <style>
 
-                table
-                {
+                table {
                     margin-left: auto;
                     margin-right: auto;
                 }
 
-                .tag
-                {
+                .tag {
                     font-size: xx-small;
                     color: grey;
                 }
 
-                .cnt
-                {
+                .cnt {
                     font-size: small;
                     color: grey;
                 }
 
-                .pre, .pn
-                {
+                .pre, .pn {
                     text-align: right;
                 }
 
-                .lang
-                {
+                .lang {
                     padding-left: 2em;
                     font-weight: bold;
                     color: blue;
                 }
 
-                th.ph
-                {
+                th.ph {
                     font-size: small;
                     color: gray;
                 }
 
-                .match
-                {
+                .match {
                     font-weight: bold;
                     color: #D10000;
                 }
 
-                .sc
-                {
+                .sc {
                     font-variant: small-caps;
                 }
 
-                .uc
-                {
+                .uc {
                     text-transform: uppercase;
                 }
 
-                .ex
-                {
+                .ex {
                     letter-spacing: 0.2em;
                 }
 
-                .var2
-                {
+                .var2 {
                     background-color: #80FFEE;
                 }
 
-                .var3
-                {
+                .var3 {
                     background-color: #BFFF80;
                 }
 
-                .var4
-                {
+                .var4 {
                     background-color: #FFFF80;
                 }
 
-                .var5
-                {
+                .var5 {
                     background-color: #FFD780;
                 }
 
-                .var6, .var7, .var8, .var9, .var10, .var11, .var12
-                {
+                .var6, .var7, .var8, .var9, .var10, .var11, .var12 {
                     background-color: #FF8080;
                     color: black;
+                }
+
+                .ix {
+                    background-color: yellow;
                 }
 
             </style>
@@ -365,6 +354,9 @@
         <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
 
         <tr>
+            <xsl:if test="@inIndex = 'true'">
+                <xsl:attribute name="class" select="'ix'"/>
+            </xsl:if>
             <td class="pre">
                 <xsl:apply-templates mode="#current" select="preceding"/>
             </td>
@@ -430,7 +422,7 @@
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
-            <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
+            <match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
                 <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
                 <word><xsl:apply-templates mode="context" select="."/></word>
                 <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -446,7 +438,7 @@
 
     <xsl:template mode="multi-kwic" match="w">
         <xsl:if test="not(f:is-stopword(., @xml:lang))">
-            <match form="{@form}" page="{@page}" xml:lang="{@xml:lang}">
+            <match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
                 <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
                 <word><xsl:apply-templates mode="context" select="."/></word>
                 <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
@@ -534,6 +526,7 @@
         <!-- <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/> -->
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
+        <xsl:variable name="inIndex" select="if (ancestor-or-self::*[@type='Index']) then 'true' else 'false'"/>
 
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
             <xsl:matching-substring>
@@ -542,6 +535,7 @@
                     <!-- <xsl:attribute name="parent" select="$parent"/> -->
                     <xsl:attribute name="style" select="$style"/>
                     <xsl:attribute name="page" select="$page"/>
+                    <xsl:attribute name="inIndex" select="$inIndex"/>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
                     <xsl:value-of select="."/>
                 </w>

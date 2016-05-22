@@ -133,7 +133,7 @@
         <xsl:if test="f:isvalid(//idno[@type='LCCN'])">
             <p><xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
                 <a class="catlink">
-                    <xsl:attribute name="href">http://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
+                    <xsl:attribute name="href">https://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
                     <xsl:value-of select="//idno[@type='LCCN']"/>
                 </a>.
             </p>
