@@ -727,6 +727,7 @@
 
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrections">Verbeteringen</msg:message>
+		<msg:message name="msgAuthorCorrection">Verbeterd door de auteur van</msg:message>
         <msg:message name="msgSource">Bron</msg:message>
         <msg:message name="msgSources">Bronnen</msg:message>
         <msg:message name="msgTranscription">Transcriptie</msg:message>

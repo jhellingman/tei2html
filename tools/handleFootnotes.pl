@@ -27,7 +27,7 @@ sub main() {
 sub handlePage($) {
 
     my $page = shift;
-    my @matches = $page =~ /\[Footnote ([0-9]+): (.*?)\]\n/smg;
+    my @matches = $page =~ /\[Footnote ([0-9]+|[A-Z]): (.*?)\]\n/smg;
 
     my $iterator = natatime(2, @matches);
     while (my @footnote = $iterator->()) {

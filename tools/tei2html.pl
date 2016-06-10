@@ -541,17 +541,16 @@ sub sgml2xml($$) {
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
-    $tmpFile0 = transcribeGreek($tmpFile0);
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>", "Arabic",                "$patcdir/arabic/ar2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>", "Assamese",              "$patcdir/indic/as2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>", "Bengali",               "$patcdir/indic/bn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<HE>", "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<SA>", "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<HI>", "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>", "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TA>", "Tamil",                 "$patcdir/indic/ta2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<RU>", "Russian",               "$patcdir/cyrillic/cy2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<CY>", "Cyrillic",              "$patcdir/cyrillic/cy2ucs.pat");
+    $tmpFile0 = addTranscriptions($tmpFile0);
+
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
+    $tmpFile0 = transcribeNotation($tmpFile0, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
 
     print "Check SGML...\n";
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
@@ -591,23 +590,24 @@ sub isNewer($$) {
 
 
 #
-# transcribeGreek -- transcribe Greek in a specific notation to Greek script, and add transcription in choice elements.
+# addTranscriptions -- add a transcription of Greek or Cyrillic script in choice elements.
 #
-sub transcribeGreek($) {
+sub addTranscriptions($) {
     my $currentFile = shift;
 
-    # Check for presence of Greek transcription
-    my $containsGreek = system ("grep -q \"<GR>\" $currentFile");
+    # Check for presence of Greek or Cyrillic
+    my $containsGreek = system ("grep -q -e \"<GR>\\|<CY>\\|<RU>\\|<RUX>\" $currentFile");
     if ($containsGreek == 0) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');
         my $tmpFile3 = mktemp('tmp-XXXXX');
 
-        print "Converting Greek transcription...\n";
-        print "Adding Greek transcription in choice elements...\n";
-        system ("perl $toolsdir/gr2trans.pl -x $currentFile > $tmpFile1");
+        print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
+        system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
         system ("patc -p $patcdir/greek/grt2sgml.pat $tmpFile1 $tmpFile2");
         system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
+        system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile1 $tmpFile2");
+        system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile2 $tmpFile3");
 
         unlink($tmpFile1);
         unlink($tmpFile2);

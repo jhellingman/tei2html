@@ -1502,6 +1502,8 @@ BEGIN
     $ent{"ddota"}       = "d" . chr(0x0307); # d with dot above
     $ent{"edota"}       = "e" . chr(0x0307); # e with dot above
     $ent{"Edota"}       = "E" . chr(0x0307); # E with dot above
+    $ent{"fdota"}       = "f" . chr(0x0307); # f with dot above
+    $ent{"Fdota"}       = "F" . chr(0x0307); # F with dot above
     $ent{"gdota"}       = "g" . chr(0x0307); # g with dot above
     $ent{"Gdota"}       = "G" . chr(0x0307); # G with dot above
     $ent{"hdota"}       = "h" . chr(0x0307); # h with dot above
