@@ -601,18 +601,22 @@ sub addTranscriptions($) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');
         my $tmpFile3 = mktemp('tmp-XXXXX');
+        my $tmpFile4 = mktemp('tmp-XXXXX');
+        my $tmpFile5 = mktemp('tmp-XXXXX');
 
         print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
         system ("patc -p $patcdir/greek/grt2sgml.pat $tmpFile1 $tmpFile2");
         system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
-        system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile1 $tmpFile2");
-        system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile2 $tmpFile3");
+        system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile3 $tmpFile4");
+        system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile4 $tmpFile5");
 
         unlink($tmpFile1);
         unlink($tmpFile2);
+        unlink($tmpFile3);
+        unlink($tmpFile4);
         unlink($currentFile);
-        $currentFile = $tmpFile3;
+        $currentFile = $tmpFile5;
     }
     return $currentFile;
 }
