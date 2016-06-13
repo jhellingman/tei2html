@@ -105,6 +105,44 @@
 "ya"        p "i&#x0361;a"  % CYRILLIC SMALL LETTER YA 
 "io"        p "&euml;"      % CYRILLIC SMALL LETTER IO 
 
+% The hard sign is omitted in word-final positions
+
+"^''\n"         p "\n"
+"^'' "          p " "
+"^'',"          p ","
+"^''."          p "."
+"^'';"          p ";"
+"^'':"          p ":"
+"^''?"          p "?"
+"^''!"          p "!"
+"^'')"          p ")"
+"^'']"          p "]"
+
+"^''&"          2 "&"
+"^''<"          3 "<"
+"^''</CYT>"     0 "</foreign>"
+"^''</RUT>"     0 "</foreign>"
+"^''</RUXT>"    0 "</foreign>"
+"^''</RUAT>"    0 ""
+
+"''\n"          p "\n"
+"'' "           p " "
+"'',"           p ","
+"''."           p "."
+"'';"           p ";"
+"'':"           p ":"
+"''?"           p "?"
+"''!"           p "!"
+"'')"           p ")"
+"'']"           p "]"
+
+"''&"           2 "&"
+"''<"           3 "<"
+"''</CYT>"      0 "</foreign>"
+"''</RUT>"      0 "</foreign>"
+"''</RUXT>"     0 "</foreign>"
+"''</RUAT>"     0 ""
+
 % Obsolete letters
 
 "Ex"        p "i&#x0361;e"  % CYRILLIC CAPITAL LETTER YAT
@@ -150,18 +188,6 @@
 %             p "&#x045C;"    % CYRILLIC SMALL LETTER KJE 
 %             p "&#x045E;"    % CYRILLIC SMALL LETTER SHORT U (Byelorussian) 
 %             p "&#x045F;"    % CYRILLIC SMALL LETTER DZHE 
-
-
-% warn for illegal characters
-
-"<"         e "cyt2ucs.pat: stand alone <"
-"'"         e "cyt2ucs.pat: stand alone '"
-">"         e "cyt2ucs.pat: stand alone >"
-"\""        e "cyt2ucs.pat: stand alone \""
-"`"         e "cyt2ucs.pat: stand alone `"
-"["         e "cyt2ucs.pat: illegal character ["
-"]"         e "cyt2ucs.pat: illegal character ]"
-
 
 @patterns 2  % jumping SGML entities in source
 

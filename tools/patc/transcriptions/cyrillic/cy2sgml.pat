@@ -149,18 +149,6 @@
 %             "&ubrcy;"   % 0x045E    CYRILLIC SMALL LETTER SHORT U (Byelorussian)
 %             "&dzcy;"    % 0x045F    CYRILLIC SMALL LETTER DZHE
 
-
-% warn for illegal characters
-
-"<"         e "cy2sgml.pat: stand alone <"
-"'"         e "cy2sgml.pat: stand alone '"
-">"         e "cy2sgml.pat: stand alone >"
-"\""        e "cy2sgml.pat: stand alone \""
-"`"         e "cy2sgml.pat: stand alone `"
-"["         e "cy2sgml.pat: illegal character ["
-"]"         e "cy2sgml.pat: illegal character ]"
-
-
 @patterns 2  % jumping SGML entities in source
 
 ";"         1 ";"               % end of entity: jump back

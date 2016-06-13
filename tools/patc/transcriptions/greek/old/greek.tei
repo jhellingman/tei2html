@@ -1,0 +1,321 @@
+<!-- Greek entities in TEI -->
+<!-- TODO: add more unicode values -->
+
+<!ENTITY agr CDATA                      "&#x3b1;"  -->
+<!ENTITY Agr CDATA                      "&#x391;"  -->
+<!ENTITY aiotgr CDATA                   "&#x1fb3;"  -->
+<!ENTITY Aiotgr CDATA                   "&#x1fbc;"  -->
+<!ENTITY arigr CDATA                    "&#x1f81;"  -->
+<!ENTITY Arigr CDATA                    "&#x1f89;"  -->
+<!ENTITY asigr CDATA                    "&#x1f80;"  -->
+<!ENTITY Asigr CDATA                    "&#x1f88;"  -->
+<!ENTITY aaigr CDATA                    "&#x1fb4;"  -->
+<!ENTITY Aaigr CDATA                    "###"  -->
+<!ENTITY agigr CDATA                    "&#x1fb2;"  -->
+<!ENTITY Agigr CDATA                    "###"  -->
+<!ENTITY acigr CDATA                    "&#x1fb7;"  -->
+<!ENTITY Acigr CDATA                    "###"  -->
+<!ENTITY araigr CDATA                   "&#x1f85;"  -->
+<!ENTITY Araigr CDATA                   "&#x1f8d;"  -->
+<!ENTITY asaigr CDATA                   "&#x1f84;"  -->
+<!ENTITY Asaigr CDATA                   "&#x1f8c;"  -->
+<!ENTITY argigr CDATA                   "&#x1f83;"  -->
+<!ENTITY Argigr CDATA                   "&#x1f8b;"  -->
+<!ENTITY asgigr CDATA                   "&#x1f82;"  -->
+<!ENTITY Asgigr CDATA                   "&#x1f8a;"  -->
+<!ENTITY arcigr CDATA                   "&#x1f87;"  -->
+<!ENTITY Arcigr CDATA                   "&#x1f8f;"  -->
+<!ENTITY ascigr CDATA                   "&#x1f87;"  -->
+<!ENTITY Ascigr CDATA                   "&#x1f8e;"  -->
+<!ENTITY arougr CDATA                   "&#x1f01;"  -->
+<!ENTITY Arougr CDATA                   "&#x1f09;"  -->
+<!ENTITY asmogr CDATA                   "&#x1f00;"  -->
+<!ENTITY Asmogr CDATA                   "&#x1f08;"  -->
+<!ENTITY agragr CDATA                   "&#x1f70;"  -->
+<!ENTITY Agragr CDATA                   "&#x1fba;"  -->
+<!ENTITY aacugr CDATA                   "&#x1f71;"  -->
+<!ENTITY Aacugr CDATA                   "&#x1fbb;"  -->
+<!ENTITY acirgr CDATA                   "&#x1fb6;"  -->
+<!ENTITY Acirgr CDATA                   "###"  -->
+<!ENTITY aragr CDATA                    "&#x1f05;"  -->
+<!ENTITY Aragr CDATA                    "&#x1f0d;"  -->
+<!ENTITY asagr CDATA                    "&#x1f04;"  -->
+<!ENTITY Asagr CDATA                    "&#x1f0c;"  -->
+<!ENTITY arggr CDATA                    "&#x1f03;"  -->
+<!ENTITY Arggr CDATA                    "&#x1f0b;"  -->
+<!ENTITY asggr CDATA                    "&#x1f02;"  -->
+<!ENTITY Asggr CDATA                    "&#x1f0a;"  -->
+<!ENTITY arcgr CDATA                    "&#x1f07;"  -->
+<!ENTITY Arcgr CDATA                    "&#x1f0f;"  -->
+<!ENTITY ascgr CDATA                    "&#x1f06;"  -->
+<!ENTITY Ascgr CDATA                    "&#x1f0e;"  -->
+
+<!ENTITY bgr CDATA                      "&#x3b2;"  -->
+<!ENTITY Bgr CDATA                      "&#x392;"  -->
+
+<!ENTITY ggr CDATA                      "&#x3b3;"  -->
+<!ENTITY Ggr CDATA                      "&#x393;"  -->
+
+<!ENTITY dgr CDATA                      "&#x3b4;"  -->
+<!ENTITY Dgr CDATA                      "&#x394;"  -->
+
+<!ENTITY egr CDATA                      "&#x3b5;"  -->
+<!ENTITY Egr CDATA                      "&#x395;"  -->
+<!ENTITY erougr CDATA                   "&#x1f11;"  -->
+<!ENTITY Erougr CDATA                   "&#x1f19;"  -->
+<!ENTITY esmogr CDATA                   "&#x1f10;"  -->
+<!ENTITY Esmogr CDATA                   "&#x1f18;"  -->
+<!ENTITY egragr CDATA                   "&#x1f72;"  -->
+<!ENTITY Egragr CDATA                   "&#x1fc8;"  -->
+<!ENTITY eacugr CDATA                   "&#x1f73;"  -->
+<!ENTITY Eacugr CDATA                   "&#x1fc9;"  -->
+<!ENTITY ecirgr CDATA                   "###"  -->
+<!ENTITY Ecirgr CDATA                   "###"  -->
+<!ENTITY eragr CDATA                    "&#x1f15;"  -->
+<!ENTITY Eragr CDATA                    "&#x1f1d;"  -->
+<!ENTITY esagr CDATA                    "&#x1f14;"  -->
+<!ENTITY Esagr CDATA                    "&#x1f1c;"  -->
+<!ENTITY erggr CDATA                    "&#x1f13;"  -->
+<!ENTITY Erggr CDATA                    "&#x1f1b;"  -->
+<!ENTITY esggr CDATA                    "&#x1f12;"  -->
+<!ENTITY Esggr CDATA                    "&#x1f1a;"  -->
+<!ENTITY ercgr CDATA                    "###"  -->
+<!ENTITY Ercgr CDATA                    "###"  -->
+<!ENTITY escgr CDATA                    "###"  -->
+<!ENTITY Escgr CDATA                    "###"  -->
+
+<!ENTITY zgr CDATA                      "&#x3b6;"  -->
+<!ENTITY Zgr CDATA                      "&#x396;"  -->
+
+<!ENTITY eegr CDATA                     "&#x3b7;"  -->
+<!ENTITY EEgr CDATA                     "&#x397;"  -->
+<!ENTITY eeiotgr CDATA                  "&#x1fc3;"  -->
+<!ENTITY EEiotgr CDATA                  "&#x1fcc;"  -->
+<!ENTITY eerigr CDATA                   "&#x1f91;"  -->
+<!ENTITY EErigr CDATA                   "&#x1f99;"  -->
+<!ENTITY eesigr CDATA                   "&#x1f90;"  -->
+<!ENTITY EEsigr CDATA                   "&#x1f98;"  -->
+<!ENTITY eeaigr CDATA                   "&#x1fc4;"  -->
+<!ENTITY EEaigr CDATA                   "###"  -->
+<!ENTITY eegigr CDATA                   "&#x1fc2;"  -->
+<!ENTITY EEgigr CDATA                   "###"  -->
+<!ENTITY eecigr CDATA                   "&#x1fc7;"  -->
+<!ENTITY EEcigr CDATA                   "###"  -->
+<!ENTITY eeraigr CDATA                  "&#x1f95;"  -->
+<!ENTITY EEraigr CDATA                  "&#x1f9d;"  -->
+<!ENTITY eesaigr CDATA                  "&#x1f94;"  -->
+<!ENTITY EEsaigr CDATA                  "&#x1f9c;"  -->
+<!ENTITY eergigr CDATA                  "&#x1f93;"  -->
+<!ENTITY EErgigr CDATA                  "&#x1f9b;"  -->
+<!ENTITY eesgigr CDATA                  "&#x1f92;"  -->
+<!ENTITY EEsgigr CDATA                  "&#x1f9a;"  -->
+<!ENTITY eercigr CDATA                  "&#x1f97;"  -->
+<!ENTITY EErcigr CDATA                  "&#x1f9f;"  -->
+<!ENTITY eescigr CDATA                  "&#x1f96;"  -->
+<!ENTITY EEscigr CDATA                  "&#x1f9e;"  -->
+<!ENTITY eerougr CDATA                  "&#x1f21;"  -->
+<!ENTITY EErougr CDATA                  "&#x1f29;"  -->
+<!ENTITY eesmogr CDATA                  "&#x1f20;"  -->
+<!ENTITY EEsmogr CDATA                  "&#x1f28;"  -->
+<!ENTITY eegragr CDATA                  "&#x1f74;"  -->
+<!ENTITY EEgragr CDATA                  "&#x1fca;"  -->
+<!ENTITY eeacugr CDATA                  "&#x1f75;"  -->
+<!ENTITY EEacugr CDATA                  "&#x1fcb;"  -->
+<!ENTITY eecirgr CDATA                  "&#x1fc6;"  -->
+<!ENTITY EEcirgr CDATA                  "###"   % "=
+<!ENTITY eeragr CDATA                   "&#x1f25;"  -->
+<!ENTITY EEragr CDATA                   "&#x1f2d;"  -->
+<!ENTITY eesagr CDATA                   "&#x1f24;"  -->
+<!ENTITY EEsagr CDATA                   "&#x1f2c;"  -->
+<!ENTITY eerggr CDATA                   "&#x1f23;"  -->
+<!ENTITY EErggr CDATA                   "&#x1f2b;"  -->
+<!ENTITY eesggr CDATA                   "&#x1f22;"  -->
+<!ENTITY EEsggr CDATA                   "&#x1f2a;"  -->
+<!ENTITY eercgr CDATA                   "&#x1f27;"  -->
+<!ENTITY EErcgr CDATA                   "&#x1f2f;"  -->
+<!ENTITY eescgr CDATA                   "&#x1f26;"  -->
+<!ENTITY EEscgr CDATA                   "&#x1f2e;"  -->
+
+<!ENTITY thgr CDATA                     "&#x3b8;"  -->
+<!ENTITY THgr CDATA                     "&#x398;"  -->
+
+<!ENTITY igr CDATA                      "&#x3b9;"  -->
+<!ENTITY Igr CDATA                      "&#x399;"  -->
+<!ENTITY irougr CDATA                   "&#x1f31;"  -->
+<!ENTITY Irougr CDATA                   "&#x1f39;"  -->
+<!ENTITY ismogr CDATA                   "&#x1f30;"  -->
+<!ENTITY Ismogr CDATA                   "&#x1f38;"  -->
+<!ENTITY igragr CDATA                   "&#x1f76;"  -->
+<!ENTITY Igragr CDATA                   "&#x1fda;"  -->
+<!ENTITY iacugr CDATA                   "&#x1f77;"  -->
+<!ENTITY Iacugr CDATA                   "&#x1fdb;"  -->
+<!ENTITY icirgr CDATA                   "&#x1fd6;"  -->
+<!ENTITY Icirgr CDATA                   "###"  -->
+<!ENTITY iragr CDATA                    "&#x1f35;"  -->
+<!ENTITY Iragr CDATA                    "&#x1f3d;"  -->
+<!ENTITY isagr CDATA                    "&#x1f34;"  -->
+<!ENTITY Isagr CDATA                    "&#x1f3c;"  -->
+<!ENTITY irggr CDATA                    "&#x1f33;"  -->
+<!ENTITY Irggr CDATA                    "&#x1f3b;"  -->
+<!ENTITY isggr CDATA                    "&#x1f32;"  -->
+<!ENTITY Isggr CDATA                    "&#x1f3a;"  -->
+<!ENTITY ircgr CDATA                    "&#x1f37;"  -->
+<!ENTITY Ircgr CDATA                    "&#x1f3f;"  -->
+<!ENTITY iscgr CDATA                    "&#x1f36;"  -->
+<!ENTITY Iscgr CDATA                    "&#x1f3e;"  -->
+
+<!ENTITY kgr CDATA                      "&#x3ba;"  -->
+<!ENTITY Kgr CDATA                      "&#x39a;"  -->
+
+<!ENTITY lgr CDATA                      "&#x3bb;"  -->
+<!ENTITY Lgr CDATA                      "&#x39b;"  -->
+
+<!ENTITY mgr CDATA                      "&#x3bc;"  -->
+<!ENTITY Mgr CDATA                      "&#x39c;"  -->
+
+<!ENTITY ngr CDATA                      "&#x3bd;"  -->
+<!ENTITY Ngr CDATA                      "&#x39d;"  -->
+
+<!ENTITY xgr CDATA                      "&#x3be;"  -->
+<!ENTITY Xgr CDATA                      "&#x39e;"  -->
+
+<!ENTITY ogr CDATA                      "&#x3bf;"  -->
+<!ENTITY Ogr CDATA                      "&#x39f;"  -->
+<!ENTITY orougr CDATA                   "&#x1f41;"  -->
+<!ENTITY Orougr CDATA                   "&#x1f49;"  -->
+<!ENTITY osmogr CDATA                   "&#x1f40;"  -->
+<!ENTITY Osmogr CDATA                   "&#x1f48;"  -->
+<!ENTITY ogragr CDATA                   "&#x1f78;"  -->
+<!ENTITY Ogragr CDATA                   "&#x1ff8;"  -->
+<!ENTITY oacugr CDATA                   "&#x1f79;"  -->
+<!ENTITY Oacugr CDATA                   "&#x1ff9;"  -->
+<!ENTITY ocirgr CDATA                   "###"  -->
+<!ENTITY Ocirgr CDATA                   "###"  -->
+<!ENTITY oragr CDATA                    "&#x1f45;"  -->
+<!ENTITY Oragr CDATA                    "&#x1f4d;"  -->
+<!ENTITY osagr CDATA                    "&#x1f44;"  -->
+<!ENTITY Osagr CDATA                    "&#x1f4c;"  -->
+<!ENTITY orggr CDATA                    "&#x1f43;"  -->
+<!ENTITY Orggr CDATA                    "&#x1f4b;"  -->
+<!ENTITY osggr CDATA                    "&#x1f42;"  -->
+<!ENTITY Osggr CDATA                    "&#x1f4a;"  -->
+<!ENTITY orcgr CDATA                    "###"  -->
+<!ENTITY Orcgr CDATA                    "###"  -->
+<!ENTITY oscgr CDATA                    "###"  -->
+<!ENTITY Oscgr CDATA                    "###"  -->
+
+<!ENTITY pgr CDATA                      "&#x3c0;"  -->
+<!ENTITY Pgr CDATA                      "&#x3a0;"  -->
+
+<!ENTITY rgr CDATA                      "&#x3c1;"  -->
+<!ENTITY Rgr CDATA                      "&#x3a1;"  -->
+<!ENTITY rrougr CDATA                   "&#x1fe5;"  -->
+<!ENTITY Rrougr CDATA                   "&#x1fec;"  -->
+
+<!ENTITY sgr CDATA                      "&#x3c3;"  -->
+<!ENTITY Sgr CDATA                      "&#x3a3;"  -->
+<!ENTITY sfgr CDATA                     "&#x3c2;"  -->
+
+<!ENTITY tgr CDATA                      "&#x3c4;"  -->
+<!ENTITY Tgr CDATA                      "&#x3a4;"  -->
+
+<!ENTITY ugr CDATA                      "&#x3c5;"  -->
+<!ENTITY Ugr CDATA                      "&#x3a5;"  -->
+<!ENTITY urougr CDATA                   "###"  -->
+<!ENTITY Urougr CDATA                   "###"  -->
+<!ENTITY usmogr CDATA                   "###"  -->
+<!ENTITY Usmogr CDATA                   "###"  -->
+<!ENTITY ugragr CDATA                   "###"  -->
+<!ENTITY Ugragr CDATA                   "###"  -->
+<!ENTITY uacugr CDATA                   "###"  -->
+<!ENTITY Uacugr CDATA                   "###"  -->
+<!ENTITY ucirgr CDATA                   "###"  -->
+<!ENTITY Ucirgr CDATA                   "###"  -->
+<!ENTITY uragr CDATA                    "###"  -->
+<!ENTITY Uragr CDATA                    "###"  -->
+<!ENTITY usagr CDATA                    "###"  -->
+<!ENTITY Usagr CDATA                    "###"  -->
+<!ENTITY urggr CDATA                    "###"  -->
+<!ENTITY Urggr CDATA                    "###"  -->
+<!ENTITY usggr CDATA                    "###"  -->
+<!ENTITY Usggr CDATA                    "###"  -->
+<!ENTITY urcgr CDATA                    "###"  -->
+<!ENTITY Urcgr CDATA                    "###"  -->
+<!ENTITY uscgr CDATA                    "###"  -->
+<!ENTITY Uscgr CDATA                    "###"  -->
+
+<!ENTITY phgr CDATA                     "&#x3c6;"  -->
+<!ENTITY PHgr CDATA                     "&#x3a6;"  -->
+
+<!ENTITY khgr CDATA                     "&#x3c7;"  -->
+<!ENTITY KHgr CDATA                     "&#x3a7;"  -->
+
+<!ENTITY psgr CDATA                     "&#x3c8;"  -->
+<!ENTITY PSgr CDATA                     "&#x3a8;"  -->
+
+<!ENTITY ohgr CDATA                     "&#x3c9;"  -->
+<!ENTITY OHgr CDATA                     "&#x3a9;"  -->
+<!ENTITY ohiotgr CDATA                  "###"  -->
+<!ENTITY OHiotgr CDATA                  "###"  -->
+<!ENTITY ohrigr CDATA                   "###"  -->
+<!ENTITY OHrigr CDATA                   "###"  -->
+<!ENTITY ohsigr CDATA                   "###"  -->
+<!ENTITY OHsigr CDATA                   "###"  -->
+<!ENTITY ohaigr CDATA                   "###"  -->
+<!ENTITY OHaigr CDATA                   "###"  -->
+<!ENTITY ohgigr CDATA                   "###"  -->
+<!ENTITY OHgigr CDATA                   "###"  -->
+<!ENTITY ohcigr CDATA                   "###"  -->
+<!ENTITY OHcigr CDATA                   "###"  -->
+<!ENTITY ohraigr CDATA                  "###"  -->
+<!ENTITY OHraigr CDATA                  "###"  -->
+<!ENTITY ohsaigr CDATA                  "###"  -->
+<!ENTITY OHsaigr CDATA                  "###"  -->
+<!ENTITY ohrgigr CDATA                  "###"  -->
+<!ENTITY OHrgigr CDATA                  "###"  -->
+<!ENTITY ohsgigr CDATA                  "###"  -->
+<!ENTITY OHsgigr CDATA                  "###"  -->
+<!ENTITY ohrcigr CDATA                  "###"  -->
+<!ENTITY OHrcigr CDATA                  "###"  -->
+<!ENTITY ohscigr CDATA                  "###"  -->
+<!ENTITY OHscigr CDATA                  "###"  -->
+<!ENTITY ohrougr CDATA                  "###"  -->
+<!ENTITY OHrougr CDATA                  "###"  -->
+<!ENTITY ohsmogr CDATA                  "###"  -->
+<!ENTITY OHsmogr CDATA                  "###"  -->
+<!ENTITY ohgragr CDATA                  "###"  -->
+<!ENTITY OHgragr CDATA                  "###"  -->
+<!ENTITY ohacugr CDATA                  "###"  -->
+<!ENTITY OHacugr CDATA                  "###"  -->
+<!ENTITY ohcirgr CDATA                  "###"  -->
+<!ENTITY OHcirgr CDATA                  "###"  -->
+<!ENTITY ohragr CDATA                   "###"  -->
+<!ENTITY OHragr CDATA                   "###"  -->
+<!ENTITY ohsagr CDATA                   "###"  -->
+<!ENTITY OHsagr CDATA                   "###"  -->
+<!ENTITY ohrggr CDATA                   "###"  -->
+<!ENTITY OHrggr CDATA                   "###"  -->
+<!ENTITY ohsggr CDATA                   "###"  -->
+<!ENTITY OHsggr CDATA                   "###"  -->
+<!ENTITY ohrcgr CDATA                   "###"  -->
+<!ENTITY OHrcgr CDATA                   "###"  -->
+<!ENTITY ohscgr CDATA                   "###"  -->
+<!ENTITY OHscgr CDATA                   "###"  -->
+
+<!-- punctuation marks -->
+
+<!ENTITY ckgr CDATA                     "&#x387;"  -->
+<!ENTITY qmgr CDATA                     "&#x37e;"  -->
+
+<!ENTITY apos CDATA                     "&#x2bc;"  -->
+<!ENTITY prime CDATA                    "&#x2032;"  -->
+
+<!-- additional entities not in TEI -->
+
+<!ENTITY amacgr CDATA                   "###"  -->
+<!ENTITY Amacgr CDATA                   "###"  -->
+<!ENTITY abregr CDATA                   "###"  -->
+<!ENTITY Abregr CDATA                   "###"  -->
+
+
+<!-- End of Greek entities. -->

@@ -1,4 +1,4 @@
-# addtrans.pl -- Add transcription to Greek and Cyrillic text
+# addTrans.pl -- Add transcription to Greek and Cyrillic text
 #
 # Assumption: Greek sections are marked <GR>...</GR>; Cyrillic sections are marked <CY>/<RU>/<CYX>; other tool will actually convert to transcription.
 #
