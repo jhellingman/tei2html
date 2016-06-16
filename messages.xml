@@ -198,6 +198,9 @@
         <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinese</msg:message>
+        <msg:message name="ru">Russian</msg:message>
+        <msg:message name="ru-1900">Russian (Pre-1918 orthography)</msg:message>
+        <msg:message name="ru-latn">Russian (Latin transcription)</msg:message>
 
         <!-- ISO 639 three letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>
