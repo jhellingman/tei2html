@@ -59,7 +59,7 @@
 "SHCH"      p "SHCH"        % CYRILLIC CAPITAL LETTER SHCHA 
 "Shch"      p "Shch"        % CYRILLIC CAPITAL LETTER SHCHA 
 "^''"       p "&Prime;"     % CYRILLIC CAPITAL LETTER HARD SIGN 
-"Y"         p "y"           % CYRILLIC CAPITAL LETTER YERU 
+"Y"         p "Y"           % CYRILLIC CAPITAL LETTER YERU 
 "^'"        p "&prime;"     % CYRILLIC CAPITAL LETTER SOFT SIGN 
 "E"         p "&Edota;"     % CYRILLIC CAPITAL LETTER E 
 "YU"        p "I&#x0361;U"  % CYRILLIC CAPITAL LETTER YU 
@@ -145,8 +145,8 @@
 
 % Obsolete letters
 
-"Ex"        p "i&#x0361;e"  % CYRILLIC CAPITAL LETTER YAT
-"EX"        p "i&#x0361;e"  % CYRILLIC CAPITAL LETTER YAT
+"Ex"        p "I&#x0361;e"  % CYRILLIC CAPITAL LETTER YAT
+"EX"        p "I&#x0361;E"  % CYRILLIC CAPITAL LETTER YAT
 "ex"        p "i&#x0361;e"  % CYRILLIC SMALL LETTER YAT
 
 "Fx"        p "&Fdota;"     % CYRILLIC CAPITAL LETTER FITA

@@ -1216,5 +1216,7 @@ sub entities2iso88591($)
     $a =~ s/\&frac([0-9])-([0-9]*);/$1\/$2/g; # other fractions
     $a =~ s/\&frac([0-9]+)-([0-9]*);/$1\/$2/g; # other fractions
 
+    $a =~ s/\&\#x0361;//g; # non-spacing bow.
+
     return $a;
 }
