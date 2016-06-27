@@ -213,7 +213,8 @@ BEGIN
 
     # Three letter codes
 
-    $langNameHash{"grc"}        = "Greek (classical)";
+    $langNameHash{"grc"}       = "Greek (classical)";
+    $langNameHash{"grc-latn"}  = "Greek (classical, Latin transcription)";
 
     $langNameHash{"bik"}        = "Bicolano or Bikol";
     $langNameHash{"bis"}        = "Bisayan (unspecified)";

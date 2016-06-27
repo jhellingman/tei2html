@@ -6,11 +6,24 @@
 
 @patterns 0
 
-"<GRT>"     1 "<foreign lang=el-latn>"
-"<GRT>mp"   1 "<foreign lang=el-latn>b"
-"<GRT>Mp"   1 "<foreign lang=el-latn>B"
-"<GRT>nt"   1 "<foreign lang=el-latn>&dbarb;"
-"<GRT>Nt"   1 "<foreign lang=el-latn>&Dbarb;"
+"<ELT>"     1 "<foreign lang=el-latn>"
+"<ELT>mp"   1 "<foreign lang=el-latn>b"
+"<ELT>Mp"   1 "<foreign lang=el-latn>B"
+"<ELT>nt"   1 "<foreign lang=el-latn>&dbarb;"
+"<ELT>Nt"   1 "<foreign lang=el-latn>&Dbarb;"
+
+"<ELTA>"    1 ""
+"<ELTA>mp"  1 "b"
+"<ELTA>Mp"  1 "B"
+"<ELTA>nt"  1 "&dbarb;"
+"<ELTA>Nt"  1 "&Dbarb;"
+
+
+"<GRT>"     1 "<foreign lang=grc-latn>"
+"<GRT>mp"   1 "<foreign lang=grc-latn>b"
+"<GRT>Mp"   1 "<foreign lang=grc-latn>B"
+"<GRT>nt"   1 "<foreign lang=grc-latn>&dbarb;"
+"<GRT>Nt"   1 "<foreign lang=grc-latn>&Dbarb;"
 
 "<GRTA>"    1 ""
 "<GRTA>mp"  1 "b"
@@ -24,8 +37,10 @@
 
 @patterns 1
 
-"</GRT>"     0 "</foreign>"
+"</ELT>"     0 "</foreign>"
+"</ELTA>"    0 ""
 
+"</GRT>"     0 "</foreign>"
 "</GRTA>"    0 ""
 
 "&"         2 "&"

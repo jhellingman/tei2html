@@ -596,7 +596,7 @@ sub addTranscriptions($) {
     my $currentFile = shift;
 
     # Check for presence of Greek or Cyrillic
-    my $containsGreek = system ("grep -q -e \"<GR>\\|<CY>\\|<RU>\\|<RUX>\" $currentFile");
+    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<RUX>\" $currentFile");
     if ($containsGreek == 0) {
         my $tmpFile1 = mktemp('tmp-XXXXX');
         my $tmpFile2 = mktemp('tmp-XXXXX');

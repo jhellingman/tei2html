@@ -206,6 +206,7 @@
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="ilo">Ilokano</msg:message>
         <msg:message name="grc">Greek (Classical)</msg:message>
+        <msg:message name="grc-latn">Greek (Classical; Latin transcription)</msg:message>
 
         <!-- Private extentions -->
         <msg:message name="nl-1900">Dutch (Old Spelling)</msg:message>

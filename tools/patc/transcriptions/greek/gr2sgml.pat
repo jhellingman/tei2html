@@ -3,13 +3,17 @@
 
 @patterns 0
 
-"<GR>"      1 "<foreign lang=el>"
+"<EL>"      1 "<foreign lang=el>"
+"<ELA>"     1 ""
+"<GR>"      1 "<foreign lang=grc>"
 "<GRA>"     1 ""
 
 @patterns 1
 
 "&"     2 "&"       % jump over SGML entities in source;
 
+"</EL>"     0 "</foreign>"
+"</ELA>"    0 ""
 "</GR>"     0 "</foreign>"
 "</GRA>"    0 ""
 
@@ -374,6 +378,8 @@
 @patterns 2  % jumping SGML entities in source
 
 ";"         1 ";"               % end of entity: jump back
+"</EL>"     0 ";</foreign>"     % closing Greek early. Forgive.
+"</ELA>"    0 ";"               % closing Greek early. Forgive.
 "</GR>"     0 ";</foreign>"     % closing Greek early. Forgive.
 "</GRA>"    0 ";"               % closing Greek early. Forgive.
 " "         1 " "               % something unexpected, also jump back.
