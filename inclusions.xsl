@@ -9,8 +9,8 @@
     >
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to align paragraphs in two TEI documents.</xd:short>
-        <xd:detail><p>Stylesheet to align paragraphs in two TEI documents.</p>
+        <xd:short>Stylesheet to include external files into TEI documents.</xd:short>
+        <xd:detail><p>Stylesheet to include external files into TEI documents.</p>
         </xd:detail>
     </xd:doc>
 
