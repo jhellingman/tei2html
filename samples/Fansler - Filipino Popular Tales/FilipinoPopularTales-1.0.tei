@@ -1,38 +1,38 @@
 <!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" [
 
-	<!ENTITY amacr CDATA "amacr" -- a with macron -->
-	<!ENTITY emacr CDATA "emacr" -- e with macron -->
-	<!ENTITY imacr CDATA "imacr" -- i with macron -->
-	<!ENTITY omacr CDATA "omacr" -- o with macron -->
-	<!ENTITY umacr CDATA "umacr" -- u with macron -->
+    <!ENTITY amacr CDATA "amacr" -- a with macron -->
+    <!ENTITY emacr CDATA "emacr" -- e with macron -->
+    <!ENTITY imacr CDATA "imacr" -- i with macron -->
+    <!ENTITY omacr CDATA "omacr" -- o with macron -->
+    <!ENTITY umacr CDATA "umacr" -- u with macron -->
 
-	<!ENTITY yuml CDATA "yuml" -- y with umlaut -->
-	<!ENTITY Yuml CDATA "Yuml" -- Y with umlaut -->
+    <!ENTITY yuml CDATA "yuml" -- y with umlaut -->
+    <!ENTITY Yuml CDATA "Yuml" -- Y with umlaut -->
 
-	<!ENTITY ndot CDATA "ndot" -- n with dot -->
+    <!ENTITY ndot CDATA "ndot" -- n with dot -->
 
-	<!ENTITY ndotb CDATA "ndotb" -- n with dot below -->
-	<!ENTITY ddotb CDATA "ddotb" -- d with dot below -->
-	<!ENTITY ldotb CDATA "ldotb" -- l with dot below -->
-	<!ENTITY tdotb CDATA "tdotb" -- t with dot below -->
-	<!ENTITY zdotb CDATA "zdotb" -- z with dot below -->
-	<!ENTITY sacute CDATA "sacute" -- s with acute -->
-	<!ENTITY cacute CDATA "cacute" -- c with acute -->
+    <!ENTITY ndotb CDATA "ndotb" -- n with dot below -->
+    <!ENTITY ddotb CDATA "ddotb" -- d with dot below -->
+    <!ENTITY ldotb CDATA "ldotb" -- l with dot below -->
+    <!ENTITY tdotb CDATA "tdotb" -- t with dot below -->
+    <!ENTITY zdotb CDATA "zdotb" -- z with dot below -->
+    <!ENTITY sacute CDATA "sacute" -- s with acute -->
+    <!ENTITY cacute CDATA "cacute" -- c with acute -->
 
-	<!ENTITY sup0 CDATA "sup0" -- superscript zero -->
-	<!ENTITY sup1 CDATA "sup1" -- superscript one -->
-	<!ENTITY sup2 CDATA "sup2" -- superscript two -->
-	<!ENTITY sup3 CDATA "sup3" -- superscript three -->
-	<!ENTITY sup4 CDATA "sup4" -- superscript four -->
-	<!ENTITY sup5 CDATA "sup5" -- superscript five -->
-	<!ENTITY sup6 CDATA "sup6" -- superscript six -->
-	<!ENTITY sup7 CDATA "sup7" -- superscript seven -->
-	<!ENTITY sup8 CDATA "sup8" -- superscript eight -->
-	<!ENTITY sup9 CDATA "sup9" -- superscript nine -->
-	<!ENTITY supe CDATA "supe" -- superscript small letter e -->
-	<!ENTITY supmin CDATA "supmin" -- superscript minus -->
+    <!ENTITY sup0 CDATA "sup0" -- superscript zero -->
+    <!ENTITY sup1 CDATA "sup1" -- superscript one -->
+    <!ENTITY sup2 CDATA "sup2" -- superscript two -->
+    <!ENTITY sup3 CDATA "sup3" -- superscript three -->
+    <!ENTITY sup4 CDATA "sup4" -- superscript four -->
+    <!ENTITY sup5 CDATA "sup5" -- superscript five -->
+    <!ENTITY sup6 CDATA "sup6" -- superscript six -->
+    <!ENTITY sup7 CDATA "sup7" -- superscript seven -->
+    <!ENTITY sup8 CDATA "sup8" -- superscript eight -->
+    <!ENTITY sup9 CDATA "sup9" -- superscript nine -->
+    <!ENTITY supe CDATA "supe" -- superscript small letter e -->
+    <!ENTITY supmin CDATA "supmin" -- superscript minus -->
 
-	<!ENTITY prime CDATA "prime" -- prime -->
+    <!ENTITY prime CDATA "prime" -- prime -->
 
 ]>
 <TEI.2 lang=en-US>
@@ -40,13 +40,15 @@
 <fileDesc>
 <titleStmt>
 <title>Filipino Popular Tales</title>
-<author>Fansler, Dean Spruill, 1885&ndash;</author>
-<respStmt><resp>Transcription</resp><name>Jeroen Hellingman</name></respStmt>
+<author sortkey="Fansler, Dean Spruill">Dean Spruill Fansler (1885&ndash;)</author>
+<respStmt><resp>Transcription</resp> <name>Jeroen Hellingman</name></respStmt>
 </titleStmt>
 <publicationStmt>
 <publisher>Project Gutenberg</publisher>
 <pubPlace>Urbana, Illinois, USA.</pubPlace>
+<idno type=epub-id>urn:uuid:68323419-722b-4aa8-9dc5-e488b2bb288a</idno>
 <idno type=PGnum>8299</idno>
+<idno type=PGPH>8</idno>
 <date>2005-06-01</date>
 <availability>
 <p>This text is in the public domain. First published in 1921 in the U.S.A., so the copyright has expired. Note that the supplemental material, added for the 1965 reprint has been removed.
@@ -72,68 +74,85 @@
 
 <p>The new preface has been omitted for copyright reasons.
 
-<p>id scheme
+<p>Id scheme used:
 
 <table>
-	<row role=label><cell>tag	<cell>id		<cell>description
-	<row><cell>p	<cell>p#		<cell>paragraph, sequential number.
-	<row><cell>pb	<cell>pb#		<cell>page break, page breaks in footnotes get pb#n.
-	<row><cell>note	<cell>n#.#		<cell>footnote, pagenumber and footnote number.
-	<row><cell>div1	<cell>t#X		<cell>tale number
-	<row><cell>div2
+    <row role=label><cell>tag   <cell>id        <cell>description
+    <row><cell>p    <cell>p#        <cell>paragraph, sequential number.
+    <row><cell>pb   <cell>pb#       <cell>page break, page breaks in footnotes get pb#n.
+    <row><cell>note <cell>n#.#      <cell>footnote, pagenumber and footnote number.
+    <row><cell>div1 <cell>t#X       <cell>tale number
+    <row><cell>div2
 </table>
 
 <p>Special Characters used:
 
 <table>
-	<row><cell>&amacr; <cell>a with macron
-	<row><cell>&emacr; <cell>e with macron
-	<row><cell>&imacr; <cell>i with macron
-	<row><cell>&omacr; <cell>o with macron
-	<row><cell>&umacr; <cell>u with macron
-	<row><cell>&yuml; <cell>y with umlaut
-	<row><cell>&Yuml; <cell>Y with umlaut
-	<row><cell>&ndot; <cell>n with dot
-	<row><cell>&ndotb; <cell>n with dot below
-	<row><cell>&ddotb; <cell>d with dot below
-	<row><cell>&ldotb; <cell>l with dot below
-	<row><cell>&tdotb; <cell>t with dot below
-	<row><cell>&zdotb; <cell>z with dot below
-	<row><cell>&sup0; <cell>superior zero
-	<row><cell>&sup1; <cell>superior one
-	<row><cell>&sup2; <cell>superior two
-	<row><cell>&sup3; <cell>superior three
-	<row><cell>&sup4; <cell>superior four
-	<row><cell>&sup5; <cell>superior five
-	<row><cell>&sup6; <cell>superior six
-	<row><cell>&sup7; <cell>superior seven
-	<row><cell>&sup8; <cell>superior eight
-	<row><cell>&sup9; <cell>superior nine
+    <row><cell>&amacr; <cell>a with macron
+    <row><cell>&emacr; <cell>e with macron
+    <row><cell>&imacr; <cell>i with macron
+    <row><cell>&omacr; <cell>o with macron
+    <row><cell>&umacr; <cell>u with macron
+    <row><cell>&yuml; <cell>y with umlaut
+    <row><cell>&Yuml; <cell>Y with umlaut
+    <row><cell>&ndot; <cell>n with dot
+    <row><cell>&ndotb; <cell>n with dot below
+    <row><cell>&ddotb; <cell>d with dot below
+    <row><cell>&ldotb; <cell>l with dot below
+    <row><cell>&tdotb; <cell>t with dot below
+    <row><cell>&zdotb; <cell>z with dot below
+    <row><cell>&sup0; <cell>superior zero
+    <row><cell>&sup1; <cell>superior one
+    <row><cell>&sup2; <cell>superior two
+    <row><cell>&sup3; <cell>superior three
+    <row><cell>&sup4; <cell>superior four
+    <row><cell>&sup5; <cell>superior five
+    <row><cell>&sup6; <cell>superior six
+    <row><cell>&sup7; <cell>superior seven
+    <row><cell>&sup8; <cell>superior eight
+    <row><cell>&sup9; <cell>superior nine
 </table>
 
 </encodingDesc>
 <profileDesc>
-<langUsage>
-	<language id=en-US>American English.</language>
-	<language id=es>Spanish.</language>
-	<language id=de>German.</language>
-	<language id=fr>French.</language>
-	<language id=it>Italian.</language>
-	<language id=tl>Tagalog.</language>
-	<language id=pag>Pampangan.</language>
-	<language id=bik>Bicol.</language>
-	<language id=no>Norwegian.</language>
-</langUsage>
+    <langUsage>
+        <language id=en-US>American English.</language>
+        <language id=es>Spanish.</language>
+        <language id=de>German.</language>
+        <language id=fr>French.</language>
+        <language id=it>Italian.</language>
+        <language id=tl>Tagalog.</language>
+        <language id=pag>Pampangan.</language>
+        <language id=bik>Bicol.</language>
+        <language id=no>Norwegian.</language>
+    </langUsage>
+    <textClass>
+        <keywords>
+            <list>
+                <item>Folklore -- Philippines</item>
+                <item>Tales -- Philippines</item>
+            </list>
+        </keywords>
+    </textClass>
 </profileDesc>
 <revisionDesc>
 <list>
-	<item>2008-12-08: Made page numbers consistent with 1921 version.
-	<item>2001-11-18: Added TEI tags.
+    <item>2013-06-22: Improved tagging; added references to newly added Project Gutenberg texts.
+    <item>2008-12-08: Made page numbers consistent with 1921 version.
+    <item>2001-11-18: Added TEI tags.
 </list>
 </revisionDesc>
 </teiHeader>
 <text>
-<front>
+<front id=frontmatter>
+<div1 id=cover type=Cover>
+
+
+<p><figure id=cover-image rend="image(images/new-cover.jpg)">
+<figDesc>Newly Designed Front Cover.</figDesc>
+</figure>
+
+
 <titlePage>
 <docTitle>
 <titlePart>Filipino Popular Tales</titlePart>
@@ -143,8 +162,7 @@
 
 <byLine>By <docAuthor>Dean S. Fansler</docAuthor>, Ph. D.</byLine>
 
-<docImprint>
-Lancaster, PA., and New York:
+<docImprint>Lancaster, PA., and New York:
 <lb>Published by the American Folk-Lore Society.
 <lb>G. E. Stechert &amp; Co., New York, Agents.
 <lb><docDate>1921</docDate>
@@ -165,7 +183,7 @@ Lancaster, PA., and New York:
 
 
 <pb n=v>
-<div1 id=preface type=preface>
+<div1 id=preface type=Preface>
 <head>Preface.</head>
 
 <p>The folk-tales in this volume, which were collected in the Philippines during the years from 1908 to 1914, have not appeared in print before. They are given to the public now in the hope that they will be no mean or uninteresting addition to the volumes of Oriental <hi>M&auml;rchen</hi> already in existence. The Philippine archipelago, from the very nature of its geographical position and its political history, cannot but be a significant field to the student of popular stories. Lying as it does at the very doors of China and Japan, connected as it is ethnically with the Malayan and Indian civilizations, Occidentalized as it has been for three centuries and more, it stands at the junction of East and West. It is therefore from this point of view that these tales have been put into a form convenient for reference. Their importance consists in their relationship to the body of world fiction.
@@ -178,9 +196,9 @@ Lancaster, PA., and New York:
 
 <p><pb n=viii>A word might be added as to the nature of the tales. I have included only &ldquo;hero tales, serious and droll,&rdquo; beast stories and fables, and <hi>pourquoi</hi> or &ldquo;just-so&rdquo; stories. Myths, legends, and fairy-tales (including all kinds of spirit and demon stories) I have purposely excluded, in order to keep the size of the volume within reasonable limits. I have, however, occasionally drawn upon my manuscript collection of these types to illustrate a native superstition or custom.
 
-<p>Columbia University,
+<p rend="class(signed)">Columbia University,
 
-<p>May, 1918.
+<p rend="class(dateline)">May, 1918.
 
 
 
@@ -191,213 +209,213 @@ Lancaster, PA., and New York:
 <head>Contents.</head>
 
 
-<list>
-<item>I. <ref target=p1>HERO TALES AND DROLLS.</ref>
-<list>
-<item>1.	(a) <ref target=t1a>Suan&apos;s Good Luck</ref> 1
-<item>	(b) <ref target=t1b>Suan Eket</ref> 2
-<item>2.	<ref target=t2>The Charcoal-Maker who became King</ref> 10
-<item>3.	<ref target=t3>The Story of Carancal</ref> 17
-<item>4.	(a) <ref target=t4a>Suac and his Adventures</ref> 29
-<item>	(b) <ref target=t4b>The Three Friends,&mdash;the Monkey, the Dog, and the Carabao</ref> 31
-<item>5.	(a) <ref target=t5a>How Suan became Rich</ref> 35
-<item>	(b) <ref target=t5b>The King&apos;s Decisions</ref> 37
-<item>6.	(a) <ref target=t6a>The Four Blind Brothers</ref> 42
-<item>	(b) <ref target=t6b>Juan the Blind Man</ref> 43
-<item>	(c) <ref target=t6c>Teofilo the Hunchback, and the Giant</ref> 46
-<item>	(d) <ref target=t6d>Juan and the Buringcantada</ref> 47
-<item>	(e) <ref target=t6e>The Manglalabas</ref> 49
-<item>7.	(a) <ref target=t7a>Sagacious Marcela</ref> 53
-<item>	(b) <ref target=t7b>King Tasio</ref> 55
-<item>8.	(a) <ref target=t8a>The Story of Zaragoza</ref> 64
-<item>	(b) <ref target=t8b>Juan the Peerless Robber</ref> 69
-<item>9.	<ref target=t9>The Seven Crazy Fellows</ref> 75
-<item>10.	(a) <ref target=t10a>Juan Manalaksan</ref> 79
-<item>	(b) <ref target=t10b>Juan the Poor, who became Juan the King</ref> 81
-<item>11.	(a) <ref target=t11a>Lucas the Strong</ref> 89
-<item>	(b) <ref target=t11b>Juan and his Six Companions</ref> 92
-<item>	(c) <ref target=t11c>The Story of King Palmarin</ref> 98
-<item>12.	(a) <ref target=t12a>The Three Brothers</ref> 116
-<item>	(b) <ref target=t12b>Three Brothers of Fortune</ref> 118
-<item>	(c) <ref target=t12c>Pablo and the Princess</ref> 120
-<item>	(d) <ref target=t12d>Legend of Prince Oswaldo</ref> 122
-<item>13.	(a) <ref target=t13a>The Rich and the Poor</ref> 137
-<item>	(b) <ref target=t13b>Lucas the Rope-Maker</ref> 140
-<item>14.	(a) <ref target=t14a>The King and the Dervish</ref> 144
-<item>	(b) <ref target=t14b>The Mysterious Book</ref> 145
-<item>15.	<ref target=t15>The Miraculous Cow</ref> 150
-<pb n=x><item>16.	<ref target=t16>The Clever Husband and Wife</ref> 152
-<item>17.	<ref target=t17>The Three Brothers</ref> 155
-<item>18.	<ref target=t18>Juan and his Adventures</ref> 171
-<item>19.	<ref target=t19>Juan wearing a Monkey&apos;s Skin</ref> 178
-<item>20.	(a) <ref target=t20a>How Salaksak became Rich</ref> 183
-<item>	(b) <ref target=t20b>Clever Juan and Envious Diego</ref> 186
-<item>	(c) <ref target=t20c>Ruined because of Invidiousness</ref> 188
-<item>	(d) <ref target=t20d>The Two Friends</ref> 190
-<item>	(e) <ref target=t20e>Juan the Orphan</ref> 192
-<item>21.	<ref target=t21>Is he the Crafty Ulysses?</ref> 197
-<item>22.	<ref target=t22>The Reward of Kindness</ref> 207
-<item>23.	<ref target=t23>Pedro and Satan</ref> 211
-<item>24.	<ref target=t24>The Devil and the Guachinango</ref> 214
-<item>25.	<ref target=t25>Juan Sadut</ref> 223
-<item>26.	<ref target=t26>An Act of Kindness</ref> 227
-<item>27.	<ref target=t27>The Indolent Husband</ref> 231
-<item>28.	<ref target=t28>Cecilio, the Servant of Emilio</ref> 237
-<item>29.	<ref target=t29>Chonguita</ref> 244
-<item>30.	<ref target=t30>The Golden Lock</ref> 248
-<item>31.	<ref target=t31>Who is the Nearest Relative?</ref> 257
-<item>32.	<ref target=t31>With One Centavo Juan marries a Princess</ref> 262
-<item>33.	(a) <ref target=t33a>The Three Humpbacks</ref> 265
-<item>	(b) <ref target=t33b>The Seven Humpbacks</ref> 267
-<item>34.	(a) <ref target=t34a>Respect Old Age</ref> 271
-<item>	(b) <ref target=t34b>The Golden Rule</ref> 271
-<item>35.	<ref target=t35>Cochinango</ref> 276
-<item>36.	<ref target=t36>Pedro and the Witch</ref> 279
-<item>37.	<ref target=t37>The Woman and her <hi>Coles</hi> Plant</ref> 285
-<item>38.	<ref target=t38>A Negrito Slave</ref> 287
-<item>39.	<ref target=t39>Alberto and the Monsters</ref> 291
-<item>40.	<ref target=t40>Juan and Maria</ref> 295
-<item>41.	<ref target=t41>The Enchanted Prince</ref> 301
-<item>42.	<ref target=t42>The Prince&apos;s Dream</ref> 304
-<item>43.	<ref target=t43>The Wicked Woman&apos;s Reward</ref> 309
-<item>44.	<ref target=t44>The Magic Ring</ref> 310
-<item>45.	(a) <ref target=t45a>Maria and the Golden Slipper</ref> 314
-<item>	(b) <ref target=t45b>Abadeja</ref> 316
-<item>46.	<ref target=t46>Juan the Poor</ref> 319
-<item>47.	<ref target=t47>The Fate of an Envious Woman</ref> 323
-<item>48.	(a) <ref target=t48a>The Monkey and Juan Pusong Tambi-Tambi</ref> 326
-<item>	(b) <ref target=t48b>Andres the Trapper</ref> 332
-<item>49.	<ref target=t49>Juan the Fool</ref> 338
-<pb n=xi><item>50.	<ref target=t50>Juan and his Painted Hat</ref> 353
-<item>51.	<ref target=t51>Juan and Clotilde</ref> 355
-<item>52.	<ref target=t52>The Poor Man and his Three Sons</ref> 359
-<item>53.	<ref target=t53>The Denied Mother</ref> 361
-<item>54.	<ref target=t54>Tomarind and the Wicked Datu</ref> 363
+<list type=tocList>
+<item><ab type=tocDivNum>I.</ab> <ref target=p1>HERO TALES AND DROLLS.</ref>
+<list type=tocList>
+<item><ab type=tocDivNum>1. (a)</ab>  <ref target=t1a>Suan&apos;s Good Luck</ref> <ab type=tocPageNum>1</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t1b>Suan Eket</ref> <ab type=tocPageNum>2</ab>
+<item><ab type=tocDivNum>2.</ab>      <ref target=t2>The Charcoal-Maker who became King</ref> <ab type=tocPageNum>10</ab>
+<item><ab type=tocDivNum>3.</ab>      <ref target=t3>The Story of Carancal</ref> <ab type=tocPageNum>17</ab>
+<item><ab type=tocDivNum>4. (a)</ab>  <ref target=t4a>Suac and his Adventures</ref> <ab type=tocPageNum>29</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t4b>The Three Friends,&mdash;the Monkey, the Dog, and the Carabao</ref> <ab type=tocPageNum>31</ab>
+<item><ab type=tocDivNum>5. (a)</ab>  <ref target=t5a>How Suan became Rich</ref> <ab type=tocPageNum>35</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t5b>The King&apos;s Decisions</ref> <ab type=tocPageNum>37</ab>
+<item><ab type=tocDivNum>6. (a)</ab>  <ref target=t6a>The Four Blind Brothers</ref> <ab type=tocPageNum>42</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t6b>Juan the Blind Man</ref> <ab type=tocPageNum>43</ab>
+<item><ab type=tocDivNum>   (c)</ab>  <ref target=t6c>Teofilo the Hunchback, and the Giant</ref> <ab type=tocPageNum>46</ab>
+<item><ab type=tocDivNum>   (d)</ab>  <ref target=t6d>Juan and the Buringcantada</ref> <ab type=tocPageNum>47</ab>
+<item><ab type=tocDivNum>   (e)</ab>  <ref target=t6e>The Manglalabas</ref> <ab type=tocPageNum>49</ab>
+<item><ab type=tocDivNum>7. (a)</ab>  <ref target=t7a>Sagacious Marcela</ref> <ab type=tocPageNum>53</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t7b>King Tasio</ref> <ab type=tocPageNum>55</ab>
+<item><ab type=tocDivNum>8. (a)</ab>  <ref target=t8a>The Story of Zaragoza</ref> <ab type=tocPageNum>64</ab>
+<item><ab type=tocDivNum>   (b)</ab>  <ref target=t8b>Juan the Peerless Robber</ref> <ab type=tocPageNum>69</ab>
+<item><ab type=tocDivNum>9.</ab>      <ref target=t9>The Seven Crazy Fellows</ref> <ab type=tocPageNum>75</ab>
+<item><ab type=tocDivNum>10. (a)</ab> <ref target=t10a>Juan Manalaksan</ref> <ab type=tocPageNum>79</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t10b>Juan the Poor, who became Juan the King</ref> <ab type=tocPageNum>81</ab>
+<item><ab type=tocDivNum>11. (a)</ab> <ref target=t11a>Lucas the Strong</ref> <ab type=tocPageNum>89</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t11b>Juan and his Six Companions</ref> <ab type=tocPageNum>92</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t11c>The Story of King Palmarin</ref> <ab type=tocPageNum>98</ab>
+<item><ab type=tocDivNum>12. (a)</ab> <ref target=t12a>The Three Brothers</ref> <ab type=tocPageNum>116</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t12b>Three Brothers of Fortune</ref> <ab type=tocPageNum>118</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t12c>Pablo and the Princess</ref> <ab type=tocPageNum>120</ab>
+<item><ab type=tocDivNum>    (d)</ab> <ref target=t12d>Legend of Prince Oswaldo</ref> <ab type=tocPageNum>122</ab>
+<item><ab type=tocDivNum>13. (a)</ab> <ref target=t13a>The Rich and the Poor</ref> <ab type=tocPageNum>137</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t13b>Lucas the Rope-Maker</ref> <ab type=tocPageNum>140</ab>
+<item><ab type=tocDivNum>14. (a)</ab> <ref target=t14a>The King and the Dervish</ref> <ab type=tocPageNum>144</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t14b>The Mysterious Book</ref> <ab type=tocPageNum>145</ab>
+<item><ab type=tocDivNum>15.</ab>     <ref target=t15>The Miraculous Cow</ref> <ab type=tocPageNum>150</ab>
+<pb n=x><item><ab type=tocDivNum>16.</ab>     <ref target=t16>The Clever Husband and Wife</ref> <ab type=tocPageNum>152</ab>
+<item><ab type=tocDivNum>17.</ab>     <ref target=t17>The Three Brothers</ref> <ab type=tocPageNum>155</ab>
+<item><ab type=tocDivNum>18.</ab>     <ref target=t18>Juan and his Adventures</ref> <ab type=tocPageNum>171</ab>
+<item><ab type=tocDivNum>19.</ab>     <ref target=t19>Juan wearing a Monkey&apos;s Skin</ref> <ab type=tocPageNum>178</ab>
+<item><ab type=tocDivNum>20. (a)</ab> <ref target=t20a>How Salaksak became Rich</ref> <ab type=tocPageNum>183</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t20b>Clever Juan and Envious Diego</ref> <ab type=tocPageNum>186</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t20c>Ruined because of Invidiousness</ref> <ab type=tocPageNum>188</ab>
+<item><ab type=tocDivNum>    (d)</ab> <ref target=t20d>The Two Friends</ref> <ab type=tocPageNum>190</ab>
+<item><ab type=tocDivNum>    (e)</ab> <ref target=t20e>Juan the Orphan</ref> <ab type=tocPageNum>192</ab>
+<item><ab type=tocDivNum>21.</ab>     <ref target=t21>Is he the Crafty Ulysses?</ref> <ab type=tocPageNum>197</ab>
+<item><ab type=tocDivNum>22.</ab>     <ref target=t22>The Reward of Kindness</ref> <ab type=tocPageNum>207</ab>
+<item><ab type=tocDivNum>23.</ab>     <ref target=t23>Pedro and Satan</ref> <ab type=tocPageNum>211</ab>
+<item><ab type=tocDivNum>24.</ab>     <ref target=t24>The Devil and the Guachinango</ref> <ab type=tocPageNum>214</ab>
+<item><ab type=tocDivNum>25.</ab>     <ref target=t25>Juan Sadut</ref> <ab type=tocPageNum>223</ab>
+<item><ab type=tocDivNum>26.</ab>     <ref target=t26>An Act of Kindness</ref> <ab type=tocPageNum>227</ab>
+<item><ab type=tocDivNum>27.</ab>     <ref target=t27>The Indolent Husband</ref> <ab type=tocPageNum>231</ab>
+<item><ab type=tocDivNum>28.</ab>     <ref target=t28>Cecilio, the Servant of Emilio</ref> <ab type=tocPageNum>237</ab>
+<item><ab type=tocDivNum>29.</ab>     <ref target=t29>Chonguita</ref> <ab type=tocPageNum>244</ab>
+<item><ab type=tocDivNum>30.</ab>     <ref target=t30>The Golden Lock</ref> <ab type=tocPageNum>248</ab>
+<item><ab type=tocDivNum>31.</ab>     <ref target=t31>Who is the Nearest Relative?</ref> <ab type=tocPageNum>257</ab>
+<item><ab type=tocDivNum>32.</ab>     <ref target=t31>With One Centavo Juan marries a Princess</ref> <ab type=tocPageNum>262</ab>
+<item><ab type=tocDivNum>33. (a)</ab> <ref target=t33a>The Three Humpbacks</ref> <ab type=tocPageNum>265</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t33b>The Seven Humpbacks</ref> <ab type=tocPageNum>267</ab>
+<item><ab type=tocDivNum>34. (a)</ab> <ref target=t34a>Respect Old Age</ref> <ab type=tocPageNum>271</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t34b>The Golden Rule</ref> <ab type=tocPageNum>271</ab>
+<item><ab type=tocDivNum>35.</ab>     <ref target=t35>Cochinango</ref> <ab type=tocPageNum>276</ab>
+<item><ab type=tocDivNum>36.</ab>     <ref target=t36>Pedro and the Witch</ref> <ab type=tocPageNum>279</ab>
+<item><ab type=tocDivNum>37.</ab>     <ref target=t37>The Woman and her <hi>Coles</hi> Plant</ref> <ab type=tocPageNum>285</ab>
+<item><ab type=tocDivNum>38.</ab>     <ref target=t38>A Negrito Slave</ref> <ab type=tocPageNum>287</ab>
+<item><ab type=tocDivNum>39.</ab>     <ref target=t39>Alberto and the Monsters</ref> <ab type=tocPageNum>291</ab>
+<item><ab type=tocDivNum>40.</ab>     <ref target=t40>Juan and Maria</ref> <ab type=tocPageNum>295</ab>
+<item><ab type=tocDivNum>41.</ab>     <ref target=t41>The Enchanted Prince</ref> <ab type=tocPageNum>301</ab>
+<item><ab type=tocDivNum>42.</ab>     <ref target=t42>The Prince&apos;s Dream</ref> <ab type=tocPageNum>304</ab>
+<item><ab type=tocDivNum>43.</ab>     <ref target=t43>The Wicked Woman&apos;s Reward</ref> <ab type=tocPageNum>309</ab>
+<item><ab type=tocDivNum>44.</ab>     <ref target=t44>The Magic Ring</ref> <ab type=tocPageNum>310</ab>
+<item><ab type=tocDivNum>45. (a)</ab> <ref target=t45a>Maria and the Golden Slipper</ref> <ab type=tocPageNum>314</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t45b>Abadeja</ref> <ab type=tocPageNum>316</ab>
+<item><ab type=tocDivNum>46.</ab>     <ref target=t46>Juan the Poor</ref> <ab type=tocPageNum>319</ab>
+<item><ab type=tocDivNum>47.</ab>     <ref target=t47>The Fate of an Envious Woman</ref> <ab type=tocPageNum>323</ab>
+<item><ab type=tocDivNum>48. (a)</ab> <ref target=t48a>The Monkey and Juan Pusong Tambi-Tambi</ref> <ab type=tocPageNum>326</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t48b>Andres the Trapper</ref> <ab type=tocPageNum>332</ab>
+<item><ab type=tocDivNum>49.</ab>     <ref target=t49>Juan the Fool</ref> <ab type=tocPageNum>338</ab>
+<pb n=xi><item><ab type=tocDivNum>50.</ab>     <ref target=t50>Juan and his Painted Hat</ref> <ab type=tocPageNum>353</ab>
+<item><ab type=tocDivNum>51.</ab>     <ref target=t51>Juan and Clotilde</ref> <ab type=tocPageNum>355</ab>
+<item><ab type=tocDivNum>52.</ab>     <ref target=t52>The Poor Man and his Three Sons</ref> <ab type=tocPageNum>359</ab>
+<item><ab type=tocDivNum>53.</ab>     <ref target=t53>The Denied Mother</ref> <ab type=tocPageNum>361</ab>
+<item><ab type=tocDivNum>54.</ab>     <ref target=t54>Tomarind and the Wicked Datu</ref> <ab type=tocPageNum>363</ab>
 </list>
-<item>II. <ref target=p2>FABLES AND ANIMAL STORIES.</ref>
-<list>
-<item>55.	<ref target=t55>The Monkey and the Turtle</ref> (three versions) 366
-<item>56.	<ref target=t56>The Monkey and the Crocodile</ref> (two versions) 374
-<item>57.	<ref target=t57>The Monkeys and the Dragon-Flies</ref> 379
-<item>58.	<ref target=t58>The Monkey, the Turtle, and the Crocodile</ref> 382
-<item>59.	<ref target=t59>The Iguana and the Turtle</ref> 383
-<item>60.	(a) <ref target=t60a>The Trial among the Animals</ref> 385
-<item>	(b) <ref target=t60b>The Pugu&apos;s Case</ref> 386
-<item>	(c) <ref target=t60c>Why Mosquitoes hum and try to get into the Holes of our Ears</ref> 387
-<item>	(d) <ref target=t60d>A Tyrant</ref> 388
-<item>61.	<ref target=t61>The Greedy Crow</ref> 391
-<item>62.	<ref target=t62>The Humming-Bird and the Carabao</ref> 393
-<item>63.	<ref target=t63>The Camanchile and the Passion</ref> 394
-<item>64.	<ref target=t64>Auac and Lamiran</ref> 395
+<item><ab type=tocDivNum>II.</ab>   <ref target=p2>FABLES AND ANIMAL STORIES.</ref>
+<list type=tocList>
+<item><ab type=tocDivNum>55.</ab>     <ref target=t55>The Monkey and the Turtle</ref> (three versions) <ab type=tocPageNum>366</ab>
+<item><ab type=tocDivNum>56.</ab>     <ref target=t56>The Monkey and the Crocodile</ref> (two versions) <ab type=tocPageNum>374</ab>
+<item><ab type=tocDivNum>57.</ab>     <ref target=t57>The Monkeys and the Dragon-Flies</ref> <ab type=tocPageNum>379</ab>
+<item><ab type=tocDivNum>58.</ab>     <ref target=t58>The Monkey, the Turtle, and the Crocodile</ref> <ab type=tocPageNum>382</ab>
+<item><ab type=tocDivNum>59.</ab>     <ref target=t59>The Iguana and the Turtle</ref> <ab type=tocPageNum>383</ab>
+<item><ab type=tocDivNum>60. (a)</ab> <ref target=t60a>The Trial among the Animals</ref> <ab type=tocPageNum>385</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t60b>The Pugu&apos;s Case</ref> <ab type=tocPageNum>386</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t60c>Why Mosquitoes hum and try to get into the Holes of our Ears</ref> <ab type=tocPageNum>387</ab>
+<item><ab type=tocDivNum>    (d)</ab> <ref target=t60d>A Tyrant</ref> <ab type=tocPageNum>388</ab>
+<item><ab type=tocDivNum>61.</ab>     <ref target=t61>The Greedy Crow</ref> <ab type=tocPageNum>391</ab>
+<item><ab type=tocDivNum>62.</ab>     <ref target=t62>The Humming-Bird and the Carabao</ref> <ab type=tocPageNum>393</ab>
+<item><ab type=tocDivNum>63.</ab>     <ref target=t63>The Camanchile and the Passion</ref> <ab type=tocPageNum>394</ab>
+<item><ab type=tocDivNum>64.</ab>     <ref target=t64>Auac and Lamiran</ref> <ab type=tocPageNum>395</ab>
 </list>
-<item>III. <ref target=p3>&ldquo;JUST-SO&rdquo; STORIES.</ref>
-<list>
-<item>65.	<ref target=t65>Why the Ant is not so Venomous as the Snake</ref> 398
-<item>66.	<ref target=t66>Why Locusts are Harmful</ref> 399
-<item>67.	<ref target=t67>How Lansones became Edible</ref> 401
-<item>68.	<ref target=t68>Why Cocks fight One Another</ref> 403
-<item>69.	<ref target=t69>Why Bats fly at Night</ref> 404
-<item>70.	<ref target=t70>Why the Sun shines more brightly than the Moon</ref> 404
-<item>71.	(a) <ref target=t71a>Why the Culing has a Tonsure</ref> 407
-<item>	(b) <ref target=t71b>The Culeto and the Crow</ref> 407
-<item>	(c) <ref target=t71c>The Hawk and the Coling</ref> 408
-<item>72.	(a) <ref target=t72a>Why the Cow&apos;s Skin is Loose on the Neck</ref> 410
-<item>	(b) <ref target=t72b>The First Loose-Skinned Cow and the First Tight-Skinned Carabao</ref> 411
-<item>73.	<ref target=t73>Why the Monkey is Wise</ref> 412
-<item>74.	(a) <ref target=t74a>The Lost Necklace</ref> 414
-<item>	(b) <ref target=t74b>The Cock and the Sparrow-Hawk</ref> 415
-<item>75.	<ref target=t75>The Story of our Fingers</ref> 416
-<item>76.	<ref target=t76>Why Snails climb up Grass</ref> 417
-<item>77.	<ref target=t77>Why the Cuttlefish and Squids produce a Black Liquid</ref> 419
-<item>78.	<ref target=t78>Why Cocks have Combs on their Heads</ref> 420
-<pb n=xii><item>79.	(a) <ref target=t79a>How the Crow became Black</ref> 420
-<item>	(b) <ref target=t79b>Why the Crow is Black</ref> 421
-<item>	(c) <ref target=t79c>The Dove and the Crow</ref> 422
-<item>80.	<ref target=t80>Why the Ocean is Salty</ref> 425
-<item>81.	(a) <ref target=t81a>Why the Sky is Curved</ref> 426
-<item>	(b) <ref target=t81b>Why the Sky is High</ref> 426
-<item>82.	<ref target=t82>An Unequal Match; or, Why the Carabao&apos;s Hoof is split</ref> 428
+<item><ab type=tocDivNum>III.</ab> <ref target=p3>&ldquo;JUST-SO&rdquo; STORIES.</ref>
+<list type=tocList>
+<item><ab type=tocDivNum>65.</ab>     <ref target=t65>Why the Ant is not so Venomous as the Snake</ref> <ab type=tocPageNum>398</ab>
+<item><ab type=tocDivNum>66.</ab>     <ref target=t66>Why Locusts are Harmful</ref> <ab type=tocPageNum>399</ab>
+<item><ab type=tocDivNum>67.</ab>     <ref target=t67>How Lansones became Edible</ref> <ab type=tocPageNum>401</ab>
+<item><ab type=tocDivNum>68.</ab>     <ref target=t68>Why Cocks fight One Another</ref> <ab type=tocPageNum>403</ab>
+<item><ab type=tocDivNum>69.</ab>     <ref target=t69>Why Bats fly at Night</ref> <ab type=tocPageNum>404</ab>
+<item><ab type=tocDivNum>70.</ab>     <ref target=t70>Why the Sun shines more brightly than the Moon</ref> <ab type=tocPageNum>404</ab>
+<item><ab type=tocDivNum>71. (a)</ab> <ref target=t71a>Why the Culing has a Tonsure</ref> <ab type=tocPageNum>407</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t71b>The Culeto and the Crow</ref> <ab type=tocPageNum>407</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t71c>The Hawk and the Coling</ref> <ab type=tocPageNum>408</ab>
+<item><ab type=tocDivNum>72. (a)</ab> <ref target=t72a>Why the Cow&apos;s Skin is Loose on the Neck</ref> <ab type=tocPageNum>410</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t72b>The First Loose-Skinned Cow and the First Tight-Skinned Carabao</ref> <ab type=tocPageNum>411</ab>
+<item><ab type=tocDivNum>73.</ab>     <ref target=t73>Why the Monkey is Wise</ref> <ab type=tocPageNum>412</ab>
+<item><ab type=tocDivNum>74. (a)</ab> <ref target=t74a>The Lost Necklace</ref> <ab type=tocPageNum>414</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t74b>The Cock and the Sparrow-Hawk</ref> <ab type=tocPageNum>415</ab>
+<item><ab type=tocDivNum>75.</ab>     <ref target=t75>The Story of our Fingers</ref> <ab type=tocPageNum>416</ab>
+<item><ab type=tocDivNum>76.</ab>     <ref target=t76>Why Snails climb up Grass</ref> <ab type=tocPageNum>417</ab>
+<item><ab type=tocDivNum>77.</ab>     <ref target=t77>Why the Cuttlefish and Squids produce a Black Liquid</ref> <ab type=tocPageNum>419</ab>
+<item><ab type=tocDivNum>78.</ab>     <ref target=t78>Why Cocks have Combs on their Heads</ref> <ab type=tocPageNum>420</ab>
+<pb n=xii><item><ab type=tocDivNum>79. (a)</ab> <ref target=t79a>How the Crow became Black</ref> <ab type=tocPageNum>420</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t79b>Why the Crow is Black</ref> <ab type=tocPageNum>421</ab>
+<item><ab type=tocDivNum>    (c)</ab> <ref target=t79c>The Dove and the Crow</ref> <ab type=tocPageNum>422</ab>
+<item><ab type=tocDivNum>80.</ab>     <ref target=t80>Why the Ocean is Salty</ref> <ab type=tocPageNum>425</ab>
+<item><ab type=tocDivNum>81. (a)</ab> <ref target=t81a>Why the Sky is Curved</ref> <ab type=tocPageNum>426</ab>
+<item><ab type=tocDivNum>    (b)</ab> <ref target=t81b>Why the Sky is High</ref> <ab type=tocPageNum>426</ab>
+<item><ab type=tocDivNum>82.</ab>     <ref target=t82>An Unequal Match; or, Why the Carabao&apos;s Hoof is split</ref> <ab type=tocPageNum>428</ab>
 </list>
 </list>
 
 
 
-<div2 type=section>
+<div2 type=Section>
 <head>Filipino Stories given in the Notes.</head>
 
 
 <p>[Only stories from my own manuscript collection are listed here. Titles of those given in full are printed in Roman; of those given merely in abstract, in Italics. A &ldquo;(C)&rdquo; after a title indicates that the story is taken from one of the native <hi>corridos</hi>, or metrical romances printed in the vernacular.]
 
 <list>
-<item><hi><ref target=q1>Pedro&apos;s Fortunes</ref></hi> 15
-<item><hi><ref target=q2>Pusong</ref></hi> 23
-<item><hi><ref target=q3>Cabagboc</ref></hi> 23
-<item><hi><ref target=q4>Sandapal</ref></hi> 23
-<item><hi><ref target=t3d>Sandangcal</ref></hi> 23
-<item><hi><ref target=q6>Greedy Juan</ref></hi> 23
-<item><hi><ref target=q7>Juan Tapon</ref></hi> 23
-<item><hi><ref target=q8>Dangandangan</ref></hi> 23
-<item><hi><ref target=q9>Tangarangan</ref></hi> 23
-<item><hi><ref target=q10>Kakarangkang</ref></hi> 29
-<item><hi><ref target=q11>How Piro became Rich</ref></hi> 41
-<item><hi><ref target=q12>The Cripple and the Blind Man</ref></hi> 51
-<item><hi><ref target=q13>Marcela outwits the King</ref></hi> 56
-<item><ref target=q14>Cay Calabasa</ref> (C) 57
-<item><hi><ref target=q15>Rodolfo</ref></hi> (C) 60
-<item><hi><ref target=q16>Juan and his Six Friends</ref></hi> 78
-<item><hi><ref target=q17>Edmundo</ref></hi> (C) 87
-<item><hi><ref target=q18>The Three Brothers</ref></hi> 127
-<item><hi><ref target=q19>The Priest and his Pupil</ref></hi> 148
-<item><hi><ref target=q20>Abu-Hasan</ref></hi> (C) 154
-<item><hi><ref target=q21>Don Agustin, Don Pedro, and Don Juan</ref></hi> (C) 169
-<item><hi><ref target=q22>The Adarna Bird</ref></hi> (C) (two versions) 169
-<item><hi><ref target=q23>Pedro and the Giants</ref></hi> 175
-<item><hi><ref target=q24>The Monkey becomes King</ref></hi> 182
-<item><hi><ref target=q25>Juan the Ashes-Trader</ref></hi> 195
-<item><hi><ref target=q26>Colassit and Colaskel</ref></hi> 195
-<item><hi><ref target=q27>Juan the Poor</ref></hi> 202
-<item><ref target=q28>Juan Bachiller</ref> (C) 202
-<item><ref target=q29>Mabait and the Duende</ref> 217
-<pb n=xiii><item><hi><ref target=q30>The Fortunes of Andoy, an Orphan</ref></hi> 241
-<item><hi><ref target=q31>Peter the Violinist</ref></hi> 241
-<item><hi><ref target=q32>Duke Almanzor</ref></hi> (C) 251
-<item><hi><ref target=q33>The Seven Hunchbacked Brothers</ref></hi> 268
-<item><ref target=q34>Juan and his Father</ref> 275
-<item><hi><ref target=q35>Pugut Negro</ref></hi> (C) 280
-<item><hi><ref target=q36>Juan Ti&ntilde;oso</ref></hi> (C) 283
-<item><hi><ref target=q37>Juan and Maria</ref></hi> (C) 298
-<item><ref target=q38>Pitong</ref> 299
-<item><hi><ref target=q39>The Wonderful Tree</ref></hi> 318
-<item><hi><ref target=q40>King Asuero and Juan the Poor</ref></hi> (C) 322
-<item><hi><ref target=q41>Ricardo and his Adventures</ref></hi> 347
-<item><ref target=q42>Juan and the Robbers</ref> 348
-<item><ref target=q43>The Adventure of Two Robbers</ref> 349
-<item><ref target=q44>Juan Sadut</ref> 351
-<item><ref target=q45>Juan Loco</ref> 352
-<item><hi><ref target=q46>The Monkey and the Crocodile</ref></hi> 377
-<item><ref target=q47>The Battle between the Birds and the Beasts</ref> 381
-<item><hi><ref target=q48>The Bacuit&apos;s Case</ref></hi> 389
-<item><ref target=q49>Why the Ant is not so Venomous as the Snake</ref> 399
-<item><ref target=q50>The Origin of Locusts</ref> 399
-<item><ref target=q51>The Origin of Locusts</ref> 400
-<item><ref target=q52>The Adam and Eve of the Tagalogs</ref> 402
-<item><ref target=q53>How Lanzones became Edible</ref> 402
-<item><ref target=q54>The Sun, the Moon, and the Stars</ref> 405
-<item><ref target=q55>The Sun and the Moon</ref> 406
-<item><ref target=q56>Origin of the Monkey</ref> 413
-<item><ref target=q57>The First Monkey</ref> 413
-<item><hi><ref target=q58>The Deer and the Snail</ref></hi> 429
+<item><hi><ref target=q1>Pedro&apos;s Fortunes</ref></hi> <ab type=tocPageNum>15</ab>
+<item><hi><ref target=q2>Pusong</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q3>Cabagboc</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q4>Sandapal</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=t3d>Sandangcal</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q6>Greedy Juan</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q7>Juan Tapon</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q8>Dangandangan</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q9>Tangarangan</ref></hi> <ab type=tocPageNum>23</ab>
+<item><hi><ref target=q10>Kakarangkang</ref></hi> <ab type=tocPageNum>29</ab>
+<item><hi><ref target=q11>How Piro became Rich</ref></hi> <ab type=tocPageNum>41</ab>
+<item><hi><ref target=q12>The Cripple and the Blind Man</ref></hi> <ab type=tocPageNum>51</ab>
+<item><hi><ref target=q13>Marcela outwits the King</ref></hi> <ab type=tocPageNum>56</ab>
+<item><ref target=q14>Cay Calabasa</ref> (C) <ab type=tocPageNum>57</ab>
+<item><hi><ref target=q15>Rodolfo</ref></hi> (C) <ab type=tocPageNum>60</ab>
+<item><hi><ref target=q16>Juan and his Six Friends</ref></hi> <ab type=tocPageNum>78</ab>
+<item><hi><ref target=q17>Edmundo</ref></hi> (C) <ab type=tocPageNum>87</ab>
+<item><hi><ref target=q18>The Three Brothers</ref></hi> <ab type=tocPageNum>127</ab>
+<item><hi><ref target=q19>The Priest and his Pupil</ref></hi> <ab type=tocPageNum>148</ab>
+<item><hi><ref target=q20>Abu-Hasan</ref></hi> (C) <ab type=tocPageNum>154</ab>
+<item><hi><ref target=q21>Don Agustin, Don Pedro, and Don Juan</ref></hi> (C) <ab type=tocPageNum>169</ab>
+<item><hi><ref target=q22>The Adarna Bird</ref></hi> (C) (two versions) <ab type=tocPageNum>169</ab>
+<item><hi><ref target=q23>Pedro and the Giants</ref></hi> <ab type=tocPageNum>175</ab>
+<item><hi><ref target=q24>The Monkey becomes King</ref></hi> <ab type=tocPageNum>182</ab>
+<item><hi><ref target=q25>Juan the Ashes-Trader</ref></hi> <ab type=tocPageNum>195</ab>
+<item><hi><ref target=q26>Colassit and Colaskel</ref></hi> <ab type=tocPageNum>195</ab>
+<item><hi><ref target=q27>Juan the Poor</ref></hi> <ab type=tocPageNum>202</ab>
+<item><ref target=q28>Juan Bachiller</ref> (C) <ab type=tocPageNum>202</ab>
+<item><ref target=q29>Mabait and the Duende</ref> <ab type=tocPageNum>217</ab>
+<pb n=xiii><item><hi><ref target=q30>The Fortunes of Andoy, an Orphan</ref></hi> <ab type=tocPageNum>241</ab>
+<item><hi><ref target=q31>Peter the Violinist</ref></hi> <ab type=tocPageNum>241</ab>
+<item><hi><ref target=q32>Duke Almanzor</ref></hi> (C) <ab type=tocPageNum>251</ab>
+<item><hi><ref target=q33>The Seven Hunchbacked Brothers</ref></hi> <ab type=tocPageNum>268</ab>
+<item><ref target=q34>Juan and his Father</ref> <ab type=tocPageNum>275</ab>
+<item><hi><ref target=q35>Pugut Negro</ref></hi> (C) <ab type=tocPageNum>280</ab>
+<item><hi><ref target=q36>Juan Ti&ntilde;oso</ref></hi> (C) <ab type=tocPageNum>283</ab>
+<item><hi><ref target=q37>Juan and Maria</ref></hi> (C) <ab type=tocPageNum>298</ab>
+<item><ref target=q38>Pitong</ref> <ab type=tocPageNum>299</ab>
+<item><hi><ref target=q39>The Wonderful Tree</ref></hi> <ab type=tocPageNum>318</ab>
+<item><hi><ref target=q40>King Asuero and Juan the Poor</ref></hi> (C) <ab type=tocPageNum>322</ab>
+<item><hi><ref target=q41>Ricardo and his Adventures</ref></hi> <ab type=tocPageNum>347</ab>
+<item><ref target=q42>Juan and the Robbers</ref> <ab type=tocPageNum>348</ab>
+<item><ref target=q43>The Adventure of Two Robbers</ref> <ab type=tocPageNum>349</ab>
+<item><ref target=q44>Juan Sadut</ref> <ab type=tocPageNum>351</ab>
+<item><ref target=q45>Juan Loco</ref> <ab type=tocPageNum>352</ab>
+<item><hi><ref target=q46>The Monkey and the Crocodile</ref></hi> <ab type=tocPageNum>377</ab>
+<item><ref target=q47>The Battle between the Birds and the Beasts</ref> <ab type=tocPageNum>381</ab>
+<item><hi><ref target=q48>The Bacuit&apos;s Case</ref></hi> <ab type=tocPageNum>389</ab>
+<item><ref target=q49>Why the Ant is not so Venomous as the Snake</ref> <ab type=tocPageNum>399</ab>
+<item><ref target=q50>The Origin of Locusts</ref> <ab type=tocPageNum>399</ab>
+<item><ref target=q51>The Origin of Locusts</ref> <ab type=tocPageNum>400</ab>
+<item><ref target=q52>The Adam and Eve of the Tagalogs</ref> <ab type=tocPageNum>402</ab>
+<item><ref target=q53>How Lanzones became Edible</ref> <ab type=tocPageNum>402</ab>
+<item><ref target=q54>The Sun, the Moon, and the Stars</ref> <ab type=tocPageNum>405</ab>
+<item><ref target=q55>The Sun and the Moon</ref> <ab type=tocPageNum>406</ab>
+<item><ref target=q56>Origin of the Monkey</ref> <ab type=tocPageNum>413</ab>
+<item><ref target=q57>The First Monkey</ref> <ab type=tocPageNum>413</ab>
+<item><hi><ref target=q58>The Deer and the Snail</ref></hi> <ab type=tocPageNum>429</ab>
 </list>
 
-<p><ref target=appendix>APPENDIX</ref> 431
+<p><ref target=appendix>APPENDIX</ref> <ab type=tocPageNum>431</ab>
 
-<p>INDEX 447
+<p>INDEX <ab type=tocPageNum>447</ab>
 
 
 
 
 <pb n=xv>
-<div1 id=biblography type=toc>
+<div1 id=biblography type=Bibliography>
 <head>Bibliography.</head>
 
 
@@ -409,11 +427,11 @@ Lancaster, PA., and New York:
 
 <p>Bahar-i-Danush. Translated from the Persian by <hi rend=sc>Jonathan Scott</hi>. 3 vols. Shrewsbury, 1799.
 
-<p><hi rend=sc>Bain, R. Nisbet</hi>. Russian Fairy Tales. From the Skazki of Polevoi. New York, N.D.
+<p><hi rend=sc>Bain, R. Nisbet</hi>. <xref url="pg:34705">Russian Fairy Tales. From the Skazki of Polevoi.</xref> New York, N.D.
 
 <p><hi rend=sc>Basile, G.</hi> Pentamerone. Translated by Sir <hi rend=sc>Richard Burton</hi>. 2 vols. London, 1893.
 
-<p><hi rend=sc>Bateman, G. W.</hi> Zanzibar Tales. Chicago, 1901.
+<p><hi rend=sc>Bateman, G. W.</hi> <xref url="pg:37472">Zanzibar Tales</xref>. Chicago, 1901.
 
 <p><hi rend=sc>Benfey, Theodor</hi>. <foreign lang=de>Pantschatantra: f&uuml;nf B&uuml;cher indischer Fabeln, M&auml;rchen und Erz&auml;hlungen. Aus dem Sanskrit &uuml;bersetzt, mit Einleitung und Anmerkungen.</foreign> 2 vols. Leipzig, 1859.
 
@@ -425,11 +443,11 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Burton</hi>, Sir <hi rend=sc>Richard</hi>. See <hi>Arabian Nights&apos; Entertainments</hi>, and <hi>Basile</hi>.
 
-<p>(<hi rend=sc>Busk.</hi>) Sagas from the Far East; or Kalmouk and Mongolian Traditionary Tales. London, 1873. (Compiled by <hi rend=sc>Rachel Harriette Busk</hi>.)
+<p>(<hi rend=sc>Busk.</hi>) <xref url="pg:40402">Sagas from the Far East; or Kalmouk and Mongolian Traditionary Tales</xref>. London, 1873. (Compiled by <hi rend=sc>Rachel Harriette Busk</hi>.)
 
 <p><hi rend=sc>Caballero, Fernan.</hi> <foreign lang=es>Cuentos y poesias populares Andaluces.</foreign> Leipzig, 1866. See also <hi>Ingram</hi>.
 
-<p><hi rend=sc>Campbell, A.</hi> Santal Folk-Tales. Pokhuria, India, 1891.
+<p><hi rend=sc>Campbell, A.</hi> <xref url="pg:35060">Santal Folk-Tales</xref>. Pokhuria, India, 1891.
 
 <p><hi rend=sc>Campbell, J. F.</hi> Popular Tales of the West Highlands. 4 vols. 1890.
 
@@ -453,13 +471,13 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Crane, Thomas F.</hi> <xref url="pg:23634">Italian Popular Tales</xref>. Boston, 1885.
 
-<p><hi rend=sc>Crooke, W.</hi> Religion and Folklore of Northern India. 2 vols. Westminster, 1896.
+<p><hi rend=sc>Crooke, W.</hi> <xref url="pg:43681">Religion and Folklore of Northern India</xref>. 2 vols. Westminster, 1896.
 
 <p><hi rend=sc>D&auml;hnhardt, Oskar.</hi> <foreign lang=de>Natursagen. Eine Sammlung naturdeutender Sagen, M&auml;rchen, Fabeln und Legenden.</foreign> 4 vols. Leipzig, 1907&ndash;12.
 
 <p><hi rend=sc>Dasent, G. W.</hi> <xref url="pg:8933">Popular Tales from the Norse</xref>. London, N.D. (The London Library.)
 
-<p><hi rend=sc>Dayrell, Elphinstone.</hi> Folk Stories from Southern Nigeria, West Africa. London, 1910.
+<p><hi rend=sc>Dayrell, Elphinstone.</hi> <xref url="pg:34655">Folk Stories from Southern Nigeria, West Africa</xref>. London, 1910.
 
 <p><hi rend=sc>Dracott, Alice E.</hi> Simla Village Tales. London, 1906.
 
@@ -469,15 +487,15 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Fansler, Harriott E.</hi> Types of Prose Narratives. Chicago, 1911.
 
-<p><hi rend=sc>Fleeson, Katherine Neville.</hi> Laos Folk-Lore of Farther India. Chicago, 1899.
+<p><hi rend=sc>Fleeson, Katherine Neville.</hi> <xref url="pg:35564">Laos Folk-Lore of Farther India</xref>. Chicago, 1899.
 
 <p>Folk-Lore Journal. Folk-Lore Society. 7 vols. London, 1883&ndash;89. (Cited FLJ.)
 
 <p>Folk-Lore: A Quarterly Review, current since 1890. (Cited FL.)
 
-<p><hi rend=sc>Frere, M.</hi> Old Deccan Days, or Hindoo Fairy Legends Current in Southern India. London, 1868.
+<p><hi rend=sc>Frere, M.</hi> <xref url="pg:36696">Old Deccan Days, or Hindoo Fairy Legends Current in Southern India</xref>. London, 1868.
 
-<p><hi rend=sc>Gerould, G. H.</hi> The Grateful Dead. (Folk-Lore Society.) London, 1907.
+<p><hi rend=sc>Gerould, G. H.</hi> <xref url="pg:39408">The Grateful Dead</xref>. (Folk-Lore Society.) London, 1907.
 
 <p>Gesta Romanorum. Translated by the Rev. <hi rend=sc>Charles Swan.</hi> Revised edition. London, 1906.
 
@@ -491,7 +509,7 @@ Lancaster, PA., and New York:
 
 <pb n=xvii><p><hi rend=sc>Hartland, E. S.</hi> <xref url="pg:24614">Science of Fairy Tales</xref>. London, 1891.
 
-<p><hi rend=sc>Hone&yuml;, James A.</hi> South African Folk Tales. New York, 1910.
+<p><hi rend=sc>Hone&yuml;, James A.</hi> <xref url="pg:38339">South African Folk Tales</xref>. New York, 1910.
 
 <p><hi rend=sc>Hose (Charles)</hi> and <hi rend=sc>McDougall (William)</hi>. <xref url="pg:3307">The Pagan Tribes of Borneo</xref>. 2 vols. London, 1912. (Cited Hose-McDougall.)
 
@@ -521,7 +539,7 @@ Lancaster, PA., and New York:
 
 <p>Journal of the Royal Asiatic Society of Bengal, N.S. (Cited JRASB.) Kath&amacr;-sarit-s&amacr;gara. See <hi>Somadeva</hi>.
 
-<p><hi rend=sc>Kingscote,</hi> Mrs. <hi rend=sc>Howard.</hi> Tales of the Sun, or Folklore of Southern India. London, 1890.
+<p><hi rend=sc>Kingscote,</hi> Mrs. <hi rend=sc>Howard.</hi> <xref url="pg:37002">Tales of the Sun, or Folklore of Southern India</xref>. London, 1890.
 
 <p><hi rend=sc>Kittredge, George L.</hi> Arthur and Gorlagon (in Harvard Studies and Notes in Philology and Literature).
 
@@ -529,7 +547,7 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Kohler, Reinhold.</hi> <foreign lang=de>Kleinere Schriften. I. Zur M&auml;rchenforschung.</foreign> Edited by <hi rend=sc>J. Bolte</hi>. Weimar, 1898. (Cited K&ouml;hler-Bolte.)
 
-<p><hi rend=sc>Lal Behari Day.</hi> Folk-Tales of Bengal. London, 1883.
+<p><hi rend=sc>Lal Behari Day.</hi> <xref url="pg:38488">Folk-Tales of Bengal</xref>. London, 1883.
 
 <p><hi rend=sc>Lang, Andrew.</hi> <xref url="pg:14080">Custom and Myth</xref>. 2d ed. London, 1885.
 
@@ -541,9 +559,9 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Meier, E.</hi> <foreign lang=de>Deutsche Volksm&auml;rchen aus Schwaben.</foreign> Stuttgart, 1852.
 
-<pb n=xviii><p><hi rend=sc>Metelerkamp, Sanni.</hi> Outa Karel&apos;s Stories: South African Folk-Lore Tales. London, 1914.
+<pb n=xviii><p><hi rend=sc>Metelerkamp, Sanni.</hi> <xref url="pg:35557">Outa Karel&apos;s Stories: South African Folk-Lore Tales</xref>. London, 1914.
 
-<p><hi rend=sc>Mijatovies,</hi> Mme. Serbian Folk-Lore. London, 1874.
+<p><hi rend=sc>Mijatovies,</hi> Mme. <xref url="pg:45321">Serbian Folk-Lore</xref>. London, 1874.
 
 <p><foreign lang=de>Orient und Occident, insbesondere in ihren gegenw&auml;rtigen Beziehungen,</foreign> etc. 3 vols. G&ouml;ttingen, 1860&ndash;64.
 
@@ -577,7 +595,7 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Roth, H. Ling.</hi> The Natives of Sarawak and British North Borneo. 2 vols. London, 1896.
 
-<p><hi rend=sc>Rouse, W. H. D.</hi> The Talking Thrush and Other Tales from India. London, 1899.
+<p><hi rend=sc>Rouse, W. H. D.</hi> <xref url="pg:30635">The Talking Thrush and Other Tales from India</xref>. London, 1899.
 
 <p><hi rend=sc>Schiefner, Anton Von.</hi> See <hi>Tibetan Tales</hi>.
 
@@ -589,13 +607,13 @@ Lancaster, PA., and New York:
 
 <p><hi rend=sc>Scott, Jonathan</hi>. See <hi>Bahar-i-Danush</hi>.
 
-<p><hi rend=sc>Sellers, C.</hi> Tales from the Land of Nuts and Grapes. London, 1888.
+<p><hi rend=sc>Sellers, C.</hi> <xref url="pg:31481">Tales from the Land of Nuts and Grapes</xref>. London, 1888.
 
 <p><hi rend=sc>Skeat, W. W.</hi> Fables and Folk-Tales from an Eastern Forest. Cambridge, 1901. (Cited Skeat 1.)
 
-<pb n=xix><p><hi rend=sc>Skeat, W. W.</hi> Malay Magic. London, 1900. (Cited Skeat 2.)
+<pb n=xix><p><hi rend=sc>Skeat, W. W.</hi> <xref url="pg:47873">Malay Magic</xref>. London, 1900. (Cited Skeat 2.)
 
-<p><hi rend=sc>Somadeva</hi>. Kath&amacr;-sarit-s&amacr;gara. Translated into English by <hi rend=sc>C. H. Tawney</hi>. 2 vols. Calcutta, 1880, 1884.
+<p><hi rend=sc>Somadeva</hi>. <xref url="pg:40588">Kath&amacr;-sarit-s&amacr;gara</xref>. Translated into English by <hi rend=sc>C. H. Tawney</hi>. 2 vols. Calcutta, 1880, 1884.
 
 <p><hi rend=sc>Steel (F. A.)</hi> and <hi rend=sc>Temple (R. C.)</hi>. Wideawake Stories = Tales of the Punjab. London, 1894. (Cited Steel-Temple.)
 
@@ -615,13 +633,13 @@ Lancaster, PA., and New York:
 
 <p>Tibetan Tales. Translated from the Tibetan of the Kah-Gyur by <hi rend=sc>F. Anton Von Schiefner</hi>. Done into English from the German, with an Introduction, by <hi rend=sc>W. R. S. Ralston</hi>. London, 1882. (Cited Ralston 2.)
 
-<p>Tootinameh; or Tales of a Parrot. Persian text with English translation.  Calcutta, 1792.
+<p>Tootinameh; or Tales of a Parrot. Persian text with English translation. Calcutta, 1792.
 
 <p><hi rend=sc>Waldau, A.</hi> <foreign lang=de>B&ouml;hmisches M&auml;rchenbuch.</foreign> Prag, 1860.
 
-<p><hi rend=sc>Wardrop, M.</hi> Georgian Folk Tales. London, 1894.
+<p><hi rend=sc>Wardrop, M.</hi> <xref url="pg:44536">Georgian Folk Tales</xref>. London, 1894.
 
-<p><hi rend=sc>Webster, Wentworth.</hi> Basque Legends. London (2d ed.), 1879.
+<p><hi rend=sc>Webster, Wentworth.</hi> <xref url="pg:34902">Basque Legends</xref>. London (2d ed.), 1879.
 
 <p><hi rend=sc>Wratislaw, A. H.</hi> Sixty Slavonic Folk-Tales. Boston, 1890.
 
@@ -632,16 +650,16 @@ Lancaster, PA., and New York:
 
 
 
+<pb n=1>
 </front>
 <body>
-<pb n=1>
 <div0 type=part n=I id=p1>
 <head type=super>Filipino Popular Tales.</head>
 
 <head>Hero Tales and Drolls.</head>
 
 
-<div1 id=t1 n=1 type=tales>
+<div1 id=t1 n=1 type=tales rend="toc-head(Suan&apos;s Good Luck.)">
 <div2 id=t1a type=tale n=a>
 <head>Suan&apos;s Good Luck.</head>
 
@@ -694,9 +712,9 @@ Lancaster, PA., and New York:
 <p>&ldquo;Come here, father! I will guess where it is.&rdquo; Suan took his pencil and a piece of paper. On the paper he wrote figures of various shapes. He then looked up, and said,&mdash;
 
 <lg type=group lang=tl>
-	<l>&ldquo;Ararokes, ararokes,
-	<l>Na <sic>na nakawes</sic>
-	<l>Ay na s&apos;imburnales,&rdquo;&mdash;
+    <l>&ldquo;Ararokes, ararokes,
+    <l>Na <sic>na nakawes</sic>
+    <l>Ay na s&apos;imburnales,&rdquo;&mdash;
 </lg>
 
 <p>which meant that the plough had been stolen by a neighbor and hidden in a creek. Suan&apos;s father looked for it in the creek near their house, and found it. In great wonder he said, &ldquo;My son is truly the wisest boy in the town.&rdquo; News spread that Suan was a good guesser.
@@ -707,10 +725,10 @@ Lancaster, PA., and New York:
 
 <p>Suan took his pencil and a piece of paper. On the paper he wrote some round figures. He then looked up, and said,
 
-<lg>
-	<l>&ldquo;Carabaues, carabaues,
-	<l>Na <sic>nanakawes</sic>
-	<l>Ay na sa bundokes,&rdquo;&mdash;
+<lg lang=tl>
+    <l>&ldquo;Carabaues, carabaues,
+    <l>Na <sic>nanakawes</sic>
+    <l>Ay na sa bundokes,&rdquo;&mdash;
 </lg>
 
 <p>which meant that the carabao was stolen by a neighbor and was hidden in the mountain. For many days Pedro looked for it in the mountain. At last he found it in a very secret place. He then went to Suan&apos;s house, and told him that the carabao was truly in the mountain. In great wonder he said, &ldquo;My nephew is surely a good guesser.&rdquo;
@@ -752,9 +770,9 @@ Lancaster, PA., and New York:
 <p>Suan replied,&mdash;
 
 <lg>
-	<l>&ldquo;Singsing na nawala
-	<l>Ninakao ang akala
-	<l>Ay nas&apos; &apos;big ng gansa,&rdquo;&mdash;
+    <l>&ldquo;Singsing na nawala
+    <l>Ninakao ang akala
+    <l>Ay nas&apos; &apos;big ng gansa,&rdquo;&mdash;
 </lg>
 
 <p>which meant that the ring was not stolen, but had been swallowed by a goose. The king ordered all the geese to be killed. In the crop of one of them they found the ring. In great joy the king patted Suan on the back, and said, &ldquo;You are truly the wisest boy in the world.&rdquo;
@@ -826,10 +844,10 @@ Lancaster, PA., and New York:
 <p>These incidents are distributed among the four forms of the story as follows:&mdash;
 
 <list>
-<item>Version <hi>a</hi>		A&sup1;A&sup4;C&sup1;C&sup3;DEG
-<item>Version <hi>b</hi>		A&sup1;A&sup2;BB&sup1;C&sup1;C&sup2;DEG
-<item>Version <hi>c</hi>		A&sup1;A&sup2;BCC&sup2;DE(accidentally hears answer)FH
-<item>Version <hi>d</hi>		A&sup1;A&sup3;A&sup4;EB
+<item>Version <hi>a</hi>        A&sup1;A&sup4;C&sup1;C&sup3;DEG
+<item>Version <hi>b</hi>        A&sup1;A&sup2;BB&sup1;C&sup1;C&sup2;DEG
+<item>Version <hi>c</hi>        A&sup1;A&sup2;BCC&sup2;DE(accidentally hears answer)FH
+<item>Version <hi>d</hi>        A&sup1;A&sup3;A&sup4;EB
 </list>
 
 <p>A concluding adventure is sometimes added to version <hi>c</hi>, &ldquo;Juan the Guesser.&rdquo; King and queen of another country visit palace of Juan&apos;s father-in-law and want their newly-born child baptized. Juan <pb n=8>is selected to be godfather. When called upon to sign the baptism certificate, he instantly dies of shame, pen in hand: he cannot write even his own name.
@@ -866,7 +884,7 @@ Lancaster, PA., and New York:
 
 <p>In conclusion I might call attention to Benfey&apos;s treatment of this droll in &ldquo;<foreign lang=de>Orient und Occident</foreign>&rdquo; (1 : 371 <hi>et seq.</hi>). Benfey traces the story from the Orient, but considers that its fullest form is that given in Schleicher&apos;s Lithuanian legends. The tale is also found in &ldquo;Somadeva,&rdquo; Chapter XXX (Tawney, 1 : 272&ndash;274).
 
-<div1 id=t2 n=2>
+<div1 id=t2 n=2 rend="toc-head(The Charcoal-maker Who Became King.)">
 <div2 id=t2a>
 <head>The Charcoal-maker Who Became King.</head>
 
@@ -943,7 +961,7 @@ Lancaster, PA., and New York:
 
 <p>Besides Aarne, for a general discussion of this cycle see Cosquin, 1 : 123&ndash;132; R. K&ouml;hler&apos;s notes to Gonzenbach&apos;s No. 31, and his variants of this story in <foreign lang=de>Zeitschrift des Vereins f&uuml;r Volkskunde</foreign> (1896); Von Hahn, 2 : 246&ndash;247; Grimm, notes to No. 122, &ldquo;Donkey Cabbages&rdquo; (in Tales [ed. Hunt], 2 : 419&ndash;423). F. H. Groome&apos;s &ldquo;The Seer&rdquo; (No. 23), a part of which resembles very closely the literary form of the story in the Gesta Romanorum (ch. 120), seems to have been overlooked by Aarne.
 
-<div1 id=t3 n=3>
+<div1 id=t3 n=3 rend="toc-head(The Story of Carancal.)">
 <div2 id=t3a>
 <head>The Story of Carancal.</head>
 
@@ -1079,15 +1097,15 @@ Lancaster, PA., and New York:
 <p>These incidents are distributed among the different versions thus:&mdash;
 
 <list>
-<item><ref target="t3">No. 3</ref>				AB&sup1;B&sup3;C&sup1;C&sup2;DD&sup1;EF&sup1;F&sup2;F&sup3;GG&sup1;
-<item>Version <hi>a</hi>		AB&sup1;B&sup5;D
-<item>Version <hi>b</hi>		C&sup1;DD&sup1;EF&sup3;F&sup4;F&sup5;GG&sup1;
-<item>Version <hi>c</hi>		AB&sup5;B&sup1;B&sup4;C&sup1;C&sup2;C&sup4;
-<item>Version <hi>d</hi>		AB&sup1;B&sup2;C&sup1;C&sup3;DE&sup1;F&sup6;
-<item>Version <hi>e</hi>		AB&sup1;B&sup3;C&sup1;C&sup2;DG&sup1;
-<item>Version <hi>f</hi>		AB&sup4;B&sup1;C&sup1;C&sup4;
-<item>Version <hi>g</hi>		AB&sup1;B&sup2;C&sup1;C&sup3;DD&sup1;EF&sup4;G
-<item>Version <hi>h</hi>		AB&sup1;B&sup2;C&sup1;C&sup3;DD&sup1;
+<item><ref target="t3">No. 3</ref>              AB&sup1;B&sup3;C&sup1;C&sup2;DD&sup1;EF&sup1;F&sup2;F&sup3;GG&sup1;
+<item>Version <hi>a</hi>        AB&sup1;B&sup5;D
+<item>Version <hi>b</hi>        C&sup1;DD&sup1;EF&sup3;F&sup4;F&sup5;GG&sup1;
+<item>Version <hi>c</hi>        AB&sup5;B&sup1;B&sup4;C&sup1;C&sup2;C&sup4;
+<item>Version <hi>d</hi>        AB&sup1;B&sup2;C&sup1;C&sup3;DE&sup1;F&sup6;
+<item>Version <hi>e</hi>        AB&sup1;B&sup3;C&sup1;C&sup2;DG&sup1;
+<item>Version <hi>f</hi>        AB&sup4;B&sup1;C&sup1;C&sup4;
+<item>Version <hi>g</hi>        AB&sup1;B&sup2;C&sup1;C&sup3;DD&sup1;EF&sup4;G
+<item>Version <hi>h</hi>        AB&sup1;B&sup2;C&sup1;C&sup3;DD&sup1;
 </list>
 
 <p>Up to the point where the hero leaves home, these various Filipino stories agree in the main: i.e., the hero is a dwarf of superhuman strength and extraordinary eating-capacity; his parents (or guardian) are driven by poverty to attempt to kill him (usually twice, sometimes thrice), but their efforts are vain; he finally determines to leave home, often taking with him some mighty weapon. From this point on, the narratives differ widely. All are alike in this respect, however: the hero never marries. Obviously this group of stories is connected with two well-known European cycles of folk-tales,&mdash;&ldquo;Strong Hans&rdquo; and &ldquo;John the Bear.&rdquo; The points of resemblance will be indicated <pb n=25>below in an analysis of the incidents found in the members of our group. (Variants are referred to by italicized lower-case letters thus: <hi>a</hi> [Pusong], <hi>b</hi> [Cabagboc], etc. No. 3 refers to our complete story of &ldquo;Carancal.&rdquo;)
@@ -1124,9 +1142,9 @@ Lancaster, PA., and New York:
 <item>G The <hi>denouement</hi>. Cabagboc finally reaches home, and spends the rest of his life with his parents (<hi>b</hi>); Sandapal (<hi>c</hi>) is bought by the king, and amuses the court lords and ladies by his feats of strength; Sandangcal (<hi>d</hi>) distributes ten billion pesos among his three helpers, and lives the rest of his days feasting on carabao-livers; Greedy Juan (<hi>e</hi>) comes back home with a magic money-producing goat, which he leaves to his parents, while he by chance finds a wonderful house in the forest with plenty to eat, and there he remains; Juan Tapon (<hi>f</hi>) joins the king&apos;s army to fight a neighboring monarch; Dangandangan (<hi>g</hi>) becomes a general in the king&apos;s army; Tangarangan (<hi>h</hi>) performs marvellous deeds abroad, but never returns home again.
 </list>
 
-<p id=q10>Two other variants remain to be noticed briefly. One of these I have only in abstract, the other is avowedly a confusion of two stories by the narrator. Both are Ilocano tales. The hero&apos;s name in both is Kakarangkang (from <hi>kaka</hi>, a term of respect given to either a senior or a junior; and <hi>dangkang</hi>, &ldquo;a span&rdquo;). In both, the hero is a great eater and prodigiously strong. The only adventure of Kakarangkang recorded in the abstract is an adventure with a crocodile. Kakarangkang goes fishing and hooks a crocodile; but, while trying to draw it to shore, he is thrown into the air, falls into the reptile&apos;s mouth, and is swallowed. He manages, however, to cut his way out. In the other story, besides some incidents properly belonging to the story of &ldquo;The Monkey and the Turtle&rdquo; (cf. also <ref target=t4b>4 [<hi>b</hi>]</ref>), we find this same adventure with the crocodile, the slaying of a seven-headed giant (F&sup5;), and the removal of an enormous decaying fish (F&sup3;). The diminutive hero receives the hand of the king&apos;s daughter in return for this last service,&mdash;an honor which the heroes of our other versions decline. The incident of the small hero being swallowed by an animal and ultimately emerging into the light of day alive, at once suggests Tom Thumb&apos;s adventure in the cow and the wolf. For &ldquo;swallow&rdquo; tales in general, see Macculloch, 47&ndash;51; Bolte-Pol&iacute;vka, 1 : 395&ndash;398; Cosquin, 2 : 150&ndash;155. The combination of the &ldquo;interrupted-cooking&rdquo;  episode (F&sup1;), which properly belongs to the &ldquo;John the Bear&rdquo; cycle, with <hi>motifs</hi> from &ldquo;The Monkey and the Turtle&rdquo; and &ldquo;The Monkey and the Crocodile&rdquo; stories, will be discussed in the notes to Nos. <ref target=t4n>4</ref>, <ref target=t55n>55</ref>, and <ref target=t56n>56</ref>.
+<p id=q10>Two other variants remain to be noticed briefly. One of these I have only in abstract, the other is avowedly a confusion of two stories by the narrator. Both are Ilocano tales. The hero&apos;s name in both is Kakarangkang (from <hi>kaka</hi>, a term of respect given to either a senior or a junior; and <hi>dangkang</hi>, &ldquo;a span&rdquo;). In both, the hero is a great eater and prodigiously strong. The only adventure of Kakarangkang recorded in the abstract is an adventure with a crocodile. Kakarangkang goes fishing and hooks a crocodile; but, while trying to draw it to shore, he is thrown into the air, falls into the reptile&apos;s mouth, and is swallowed. He manages, however, to cut his way out. In the other story, besides some incidents properly belonging to the story of &ldquo;The Monkey and the Turtle&rdquo; (cf. also <ref target=t4b>4 [<hi>b</hi>]</ref>), we find this same adventure with the crocodile, the slaying of a seven-headed giant (F&sup5;), and the removal of an enormous decaying fish (F&sup3;). The diminutive hero receives the hand of the king&apos;s daughter in return for this last service,&mdash;an honor which the heroes of our other versions decline. The incident of the small hero being swallowed by an animal and ultimately emerging into the light of day alive, at once suggests Tom Thumb&apos;s adventure in the cow and the wolf. For &ldquo;swallow&rdquo; tales in general, see Macculloch, 47&ndash;51; Bolte-Pol&iacute;vka, 1 : 395&ndash;398; Cosquin, 2 : 150&ndash;155. The combination of the &ldquo;interrupted-cooking&rdquo; episode (F&sup1;), which properly belongs to the &ldquo;John the Bear&rdquo; cycle, with <hi>motifs</hi> from &ldquo;The Monkey and the Turtle&rdquo; and &ldquo;The Monkey and the Crocodile&rdquo; stories, will be discussed in the notes to Nos. <ref target=t4n>4</ref>, <ref target=t55n>55</ref>, and <ref target=t56n>56</ref>.
 
-<div1 id=t4 n=4>
+<div1 id=t4 n=4 rend="toc-head(Suac and His Adventures.)">
 <div2 id=t4a n="a">
 <head>Suac and His Adventures.</head>
 
@@ -1210,7 +1228,7 @@ Lancaster, PA., and New York:
 
 <p>For a Borneo story of a &ldquo;Deer, Pig, and Plandok (Mouse-Deer),&rdquo; see Roth, 1 : 346. In this tale, as well as in another from British North Borneo (Evans, 471&ndash;473, &ldquo;The Plandok and the Gergasi&rdquo;), it is the clever plandok who alone is able to outwit the giant. In the latter story there are seven animals,&mdash;carabao, ox, dog, stag, horse, mouse-deer, and barking-deer. The carabao and horse in turn try in vain to guard fish from the <hi>gergasi</hi> (a mythical giant who carries a spear over his shoulder). The plandok takes his turn now, after his two companions have been badly mishandled, and tricks the giant into letting himself be bound and pushed into a well, because the &ldquo;sky is falling.&rdquo; There he is killed by the other animals when they return. With this last incident compare the trick of the fox in the Mongolian story in our <ref target=t48n>notes to No. 48</ref>. In two other stories of the cunning of the plandok, &ldquo;The Plandok and the Tiger&rdquo; (Evans, 474) <pb n=35>and &ldquo;The Plandok and the Bear&rdquo; (<hi>ibid.</hi>), we meet with the &ldquo;king&apos;s belt&rdquo; trick and the &ldquo;king&apos;s gong&rdquo; trick respectively. For an additional record from Borneo, see Edwin H. Gomes, &ldquo;Seventeen Years among the Sea Dyaks of Borneo&rdquo; (Lond., 1911), 255&ndash;261.
 
-<div1 id=t5 n=5>
+<div1 id=t5 n=5 rend="toc-head(How Suan Became Rich.)">
 <div2 id=t5a n=a>
 <head>How Suan Became Rich.</head>
 
@@ -1349,7 +1367,7 @@ Lancaster, PA., and New York:
 <p>All in all, the close agreement between our stories and the three Eastern versions cited above makes it reasonably certain that the &ldquo;Wonderful Decisions&rdquo; group in the Philippines derives directly from India.
 
 <p><pb n=42>
-<div1 id=t6 n=6>
+<div1 id=t6 n=6 rend="toc-head(The Four Blind Brothers.)">
 <div2 id=t6a n=a>
 <head>The Four Blind Brothers.</head>
 
@@ -1584,7 +1602,7 @@ Lancaster, PA., and New York:
 
 <p>Certain of the false proofs in the Filipino stories have no parallel in the Indian tales; viz., duck for louse, gun or horn for voice, tail of sting-ray (<hi>pagui</hi>) for hair. The suggestion for this last comparison may have come from the belief among the Filipinos that the tail of the sting-ray is a very efficacious charm against demons and witches. It is a &ldquo;specific&rdquo; against the <hi>mangkukulam</hi>.<note id=n53.1 n=1><hi>Mangkukulam</hi>, an old woman endowed with the powers of a witch.</note> On the other hand, there are certain details of the Indian versions lacking in the Filipino,&mdash;the donkey, the palmyra-tree, the wash-tub. Nevertheless the close agreement, not only of <hi>motifs</hi>, but of <hi>motifs in the same sequence</hi>, makes it certain beyond all reasonable doubt that the story as we find it in the Islands (most fully represented by the Bicol &ldquo;Juan the Blind Man&rdquo;) goes back directly to southern India, possibly to the parent story of Miss Frere&apos;s old Deccan narrative.
 
-<div1 id=t7 n=7>
+<div1 id=t7 n=7 rend="toc-head(Sagacious Marcela.)">
 <div2 id=t7a n=a>
 <head>Sagacious Marcela.</head>
 
@@ -1843,7 +1861,7 @@ Lancaster, PA., and New York:
 
 <p>Compare with this whole cycle No. 38, <ref target=t38>&ldquo;A Negrito Slave,&rdquo;</ref> and the <ref target=t38n>notes</ref>.
 
-<div1 id=t8 n=8>
+<div1 id=t8 n=8 rend="toc-head(The Story of Zaragoza.)">
 <div2 id=t8a n=a>
 <head>The Story of Zaragoza.</head>
 
@@ -2025,7 +2043,7 @@ Lancaster, PA., and New York:
 
 <p>&ldquo;Juan the Peerless Robber,&rdquo; garbled and unsatisfactory as it is in detail and perverted in <hi>d&eacute;nouement</hi>, presents the interesting combination of the skill-contest between the two thieves (see above), the treachery of one (cf. the Persian Bahar-i-Danush, 2 : 225&ndash;248), and the stealing of the abbot in a sack.
 
-<div1 id=t9 n=9>
+<div1 id=t9 n=9 rend="toc-head(The Seven Crazy Fellows.)">
 <div2 id=t9a n=a>
 <head>The Seven Crazy Fellows.</head>
 
@@ -2071,8 +2089,7 @@ Lancaster, PA., and New York:
 
 <p>These two noodle stories are obviously drawn from a common source. The main incidents to be found in them are (1) the miscounting of the swimmers and the subsequent correct reckoning by a stranger (this second part lacking in the Bicol variant); (2) the killing of the fly on the old woman&apos;s face; (3) the loss of the corpse and the burial of the old fagot-gathering woman by mistake.
 
-<p>
-(1) The incident of <hi>not counting one&apos;s self</hi> is found in a number of Eastern stories (see Clouston 1, 28&ndash;33; Grimm, 2 : 441). For a Kashmir droll recording a similar situation, where a townsman finds ten peasants weeping because they cannot account for the loss of one of their companions, see Knowles, 322&ndash;323.
+<p>(1) The incident of <hi>not counting one&apos;s self</hi> is found in a number of Eastern stories (see Clouston 1, 28&ndash;33; Grimm, 2 : 441). For a Kashmir droll recording a similar situation, where a townsman finds ten peasants weeping because they cannot account for the loss of one of their companions, see Knowles, 322&ndash;323.
 
 <p>(2) <hi>Killing of fly on face</hi> is a very old incident, and assumes various forms. In a Buddhist birth-story (J&amacr;taka, 44), a mosquito lights on a man&apos;s head. The foolish son attempts to kill it with an axe. In another (J&amacr;taka, 45) the son uses a pestle. Italian stories containing this episode will be found in Crane, 293&ndash;294 (see also Crane, 380, notes 13&ndash;15). In a Bicol fable relating a war between the monkeys and the dragon-flies, the dragon-flies easily defeat the monkeys, who kill one another in their attempts to slay their enemies, that have, at the order of their king, alighted on the monkeys&apos; heads (see <ref target=t57>No. 57</ref>). Full bibliography for this incident may be found in Bolte-Pol&iacute;vka, 1 : 519.
 
@@ -2080,7 +2097,7 @@ Lancaster, PA., and New York:
 
 <p><pb n=79>Our story as a whole seems to owe nothing to European forms, though it has some faint general resemblances to the &ldquo;Seven Swabians&rdquo; (Grimm, No. 119). All three incidents of our story are found separately in India. Their combination may have taken place in the Islands, or even before the Malay migration.
 
-<div1 id=t10 n=10>
+<div1 id=t10 n=10 rend="toc-head(Juan Manalaksan.)">
 <div2 id=t10a n="a">
 <head>Juan Manalaksan.</head>
 
@@ -2098,7 +2115,7 @@ Lancaster, PA., and New York:
 
 <p><pb n=80>But Juan answered, &ldquo;I do not want you to give me any money. All I want is the glass which you keep in your right armpit.&rdquo;
 
-<p>&ldquo;Very well,&rdquo; said Pedro, &ldquo;here it is.&rdquo;	When Juan had received the glass, he hurried back home.
+<p>&ldquo;Very well,&rdquo; said Pedro, &ldquo;here it is.&rdquo; When Juan had received the glass, he hurried back home.
 
 <p>Juan reached his hut in the woods, and found his mother starving. He quickly thought of his magic glass, and, punching a small stick through the hole in the glass, he found himself surrounded by giants.
 
@@ -2148,8 +2165,7 @@ Lancaster, PA., and New York:
 <l>And, besides, a pretty wife.&rdquo;
 </lg>
 
-<p>
-Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
+<p>Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>&ldquo;Yes, I swear,&rdquo; answered the monster.
 
@@ -2242,9 +2258,9 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>It is curious to see this identical situation of the hero winning his magic reward by saving some person or animal from choking appearing in Roumania and the Philippines, and in connection, too, with incidents from the &ldquo;Magic Ring&rdquo; cycle. The resemblance can hardly be fortuitous.
 
-<div1 id=t11 n=11>
+<div1 id=t11 n=11 rend="toc-head(Lucas the Strong.)">
 <div2 id=t11a n="a">
-<head>Lucas The Strong.</head>
+<head>Lucas the Strong.</head>
 
 <byline>Narrated by Paulo Macasaet, a Tagalog, who heard the story from a Tagalog farmer.</byline>
 
@@ -2468,7 +2484,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>&ldquo;To follow you,&rdquo; was the reply.
 
-<p>&ldquo;If that is your desire,&rdquo; said Don Juan, &ldquo;you will please mount one of the horses.&rdquo; So the three men went on their <pb n=103>journey. They had not gone far when they met a man walking  alone. Noet Noen said to him, &ldquo;What are you here for? Come along with us!&rdquo; This man was Miran Miron, who had a wonderfully loud voice. When he shouted, his sound was more sonorous than thunder. He also had very keen sight. He could see clearly an object, though it were covered with a cover a hundred yards thick.
+<p>&ldquo;If that is your desire,&rdquo; said Don Juan, &ldquo;you will please mount one of the horses.&rdquo; So the three men went on their <pb n=103>journey. They had not gone far when they met a man walking alone. Noet Noen said to him, &ldquo;What are you here for? Come along with us!&rdquo; This man was Miran Miron, who had a wonderfully loud voice. When he shouted, his sound was more sonorous than thunder. He also had very keen sight. He could see clearly an object, though it were covered with a cover a hundred yards thick.
 
 <p>When the four travellers had gone a little farther, they saw a man walking swiftly on one leg. They spurred up their horses to overtake him, but in vain. At last Noet Noen said, &ldquo;I think that is my friend Curan Curing, so there is little hope of our catching him.&rdquo;
 
@@ -2683,7 +2699,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>In conclusion, attention may be called to the fact that while these three stories have the same basic framework, each has its own peculiar variations. The testimony of the narrator of &ldquo;Juan and his Six Companions,&rdquo; that his informant, an old Balayan woman, said that the story was very popular in her section of the country, is a bit of evidence that the tale has been known in the Philippines for decades, probably. Whether or not her form of the story was derived from a printed account, I am unable to say; but I suspect that it was; the diction sounds &ldquo;bookish.&rdquo; Nevertheless I have found no external evidence of a Tagalog <hi>corrido</hi> treating the story we have printed.
 
-<div1 id=t12 n=12>
+<div1 id=t12 n=12 rend="toc-head(The Three Brothers.)">
 <div2 id=t12a n=a>
 <head>The Three Brothers.</head>
 
@@ -2973,7 +2989,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>In the first Tagalog story (<hi>c</hi>) the three men are not brothers. They are given the magic objects as a reward for kindness. The sentimental <hi>d&eacute;nouement</hi> reads somewhat smug and strained after all three men have been represented as equally kind-hearted. The shooting-contest with arrows to decide the question, however, may be reminiscent of the &ldquo;1001 Nights&rdquo; version. For the resuscitating flute in droll stories, see Bolte-Pol&iacute;vka&apos;s notes to Grimm, No. 61 (episode G&sup1;). The book of knowledge suggests the magic book in the Pangasinan version.
 
-<div1 id=t13 n=13>
+<div1 id=t13 n=13 rend="toc-head(The Rich and the Poor.)">
 <div2 id=t13a n="a">
 <head>The Rich and the Poor.</head>
 
@@ -3087,11 +3103,11 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Our second folk-tale (<hi>b</hi>) seems to stand half way between this literary version and &ldquo;The Rich and the Poor,&rdquo;&mdash;not chronologically, to be sure, but so far as fidelity to the Arabian story is concerned. Although the events are practically the same in (<hi>b</hi>) and in Molteni, the proper names differ throughout. It is possible that (<hi>b</hi>) derives from an earlier Tagalog literary version that is no longer extant. (<hi>a</hi>) is definitely localized on Laguna de Bay, and the story as a whole seems thoroughly native. It is likely much older than either of the other two forms.
 
-<p>A Bengal tale somewhat similar to these is to be found in McCulloch&apos;s &ldquo;Bengali Household Tales,&rdquo; No. III; it is also connected with the Dr. Knowall cycle (our <ref target=t1>No. 1</ref>). Caballero has a Spanish story (see Ingram, &ldquo;Dame Fortune and Don Money&rdquo;). For a discussion of the continuously unlucky hero, see Clouston 2, 489&ndash;493. In Ralston 1, I95 f., may be found a group of stories dealing with luck. Compare also Thorpe&apos;s &ldquo;Yule-tide Stories,&rdquo; 460 f., for the North German story of &ldquo;The Three Gifts.&rdquo;
+<p>A Bengal tale somewhat similar to these is to be found in McCulloch&apos;s &ldquo;Bengali Household Tales,&rdquo; No. III; it is also connected with the Dr. Knowall cycle (our <ref target=t1>No. 1</ref>). Caballero has a Spanish story (see Ingram, &ldquo;Dame Fortune and Don Money&rdquo;). For a discussion of the continuously unlucky hero, see Clouston 2, 489&ndash;493. In Ralston 1, 195 f., may be found a group of stories dealing with luck. Compare also Thorpe&apos;s &ldquo;Yule-tide Stories,&rdquo; 460 f., for the North German story of &ldquo;The Three Gifts.&rdquo;
 
 <p>For the &ldquo;ejaculation guess&rdquo; in <ref target=t13a>No. 13(<hi>a</hi>)</ref>, see <ref target=t1n>notes to No. 1</ref> (pp. 7&ndash;8).
 
-<div1 id=t14 n=14>
+<div1 id=t14 n=14 rend="toc-head(The King and the Dervish.)">
 <div2 id=t14a n=a>
 <head>The King and the Dervish.</head>
 
@@ -3170,9 +3186,9 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 <p>With slight variations from the formula as given above, these elements are distributed thus in our stories:&mdash;
 
 <p><table>
-<row><cell>(<hi>b</hi>) 	<cell>BD&sup2;D&sup3;
-<row><cell>(<hi>c</hi>) 	<cell>BCD&sup2;D&sup3;
-<row><cell>(<hi>d</hi>) 	<cell>BCD&sup1;D&sup3;
+<row><cell>(<hi>b</hi>)     <cell>BD&sup2;D&sup3;
+<row><cell>(<hi>c</hi>)     <cell>BCD&sup2;D&sup3;
+<row><cell>(<hi>d</hi>)     <cell>BCD&sup1;D&sup3;
 </table>
 
 <p>Bolte and Pol&iacute;vka (2 : 66) cite a number of Oriental versions of the story (Hindoo and Arabian) which in their main outlines are practically identical with our variants. In the absence of the story in any Spanish version, it seems most reasonable to look to India as the source of our tales; unless, as is possible, they were introduced into the Islands from Straparola (viii, 5), whose collection of stories might have found their way there through the Spaniards. For further discussions of this cycle, see Macculloch, 164&ndash;166; Clouston 3, 1 : 413 ff.; K&ouml;hler-Bolte, 1 : 138 ff., 556 f.; Benfey, 1 : 410&ndash;413.
@@ -3181,7 +3197,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Benfey explains the &ldquo;transformation combat&rdquo; as originating in the disputes between Buddhists and Brahmans. Doubtless the story first grew up in India. A very ancient Oriental analogue, which has not hitherto been pointed out, I believe, is the Hebrew account of Aaron&apos;s magical contest with the Egyptian sorcerers (see Exodus, vii, 9&ndash;12). Compare also the betting-contest between the two kings in <ref target=t1>No. 1 of this collection</ref>, and see the <ref target=t1n>notes</ref>.
 
-<div1 id=t15 n=15>
+<div1 id=t15 n=15 rend="toc-head(The Miraculous Cow.)">
 <div2 id=t15a>
 <head>The Miraculous Cow.</head>
 
@@ -3212,7 +3228,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Stories of the transformation of a child into an animal because of a parent&apos;s curse are found all over Europe. This <hi>motif</hi> is also widespread in the Philippines among both the Christian and the Pagan tribes. It is usually incorporated in an origin story, such as &ldquo;The Origin of Monkeys.&rdquo; For this belief among a non-Christian people in northern Luzon, see Cole, Nos. 65&ndash;67. None of these tales, however, assume the droll form: they are told as serious etiological myths.
 
-<div1 id=t16 n=16>
+<div1 id=t16 n=16 rend="toc-head(The Clever Husband and Wife.)">
 <div2 id=t16a>
 <head>The Clever Husband and Wife.</head>
 
@@ -3220,7 +3236,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Pedro had been living as a servant in a doctor&apos;s house for more than nine years. He wanted very much to have a wife, but he had no business of any kind on which to support one.
 
-<p>One day he felt very sad. His look of dejection did not escape the notice of his master, who said, &ldquo;What is the matter, my boy? Why do you look so sad?	Is there anything I can do to comfort you?&rdquo;
+<p>One day he felt very sad. His look of dejection did not escape the notice of his master, who said, &ldquo;What is the matter, my boy? Why do you look so sad? Is there anything I can do to comfort you?&rdquo;
 
 <p>&ldquo;Oh, yes!&rdquo; said Pedro.
 
@@ -3265,13 +3281,13 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Our story, the Tagalog folk-tale, is told almost as an anecdote. The sultan has been transformed into a doctor; the sultana, into the doctor&apos;s sister; Abu, into a poor servant, Pedro; and Nuzhat, into Marta. The glitter of the Oriental harem has vanished, as indeed has also the first two-thirds of the story. The descent in setting and language has been so great, that I am inclined to suspect that this droll has existed&mdash;at least, in one family&mdash;for a long time. It could hardly have been derived from Molteni&apos;s poetic version. For the same sort of relationship between another folk-tale and an &ldquo;Arabian Nights&rdquo; story, see <ref target=t13>No. 13</ref> and the <ref target=t13n>notes</ref>.
 
-<div1 id=t17 n=17>
+<div1 id=t17 n=17 rend="toc-head(The Three Brothers.)">
 <div2 id=t17a>
 <head>The Three Brothers.</head>
 
 <byline>Narrated by Gregorio Frondoso, a Bicol from Tigaon, Camarines. The narrator says, &ldquo;This story was told to me by an old man who happened to stay at our house one night. He was a traveller. I was then a little boy.&rdquo;</byline>
 
-<p>Once upon a time, when wishing was having, there dwelt in the joyous village of	Delight a poor farmer, Tetong, with his loving wife Maria. His earning for a day&apos;s toil was just enough to sustain them; yet they were peaceful and happy. Nevertheless they thought that their happiness could not be complete unless they had at least one child. So morning and night they would kneel before their rustic altar and pray God to grant them their desire. As they were faithful in their purpose, their wish was fulfilled. A son was born to them, and joy filled their <pb n=156>hearts. The couple&apos;s love for their child grew so intense, that they craved for another, and then for still another. The Lord was mindful of their prayers; and so, as time went on, two more sons were born to them. The second son they named Felipe; and the youngest, Juan. The name of the oldest was Pedro. All three boys were lovely and handsome, and they greatly delighted their parents.
+<p>Once upon a time, when wishing was having, there dwelt in the joyous village of Delight a poor farmer, Tetong, with his loving wife Maria. His earning for a day&apos;s toil was just enough to sustain them; yet they were peaceful and happy. Nevertheless they thought that their happiness could not be complete unless they had at least one child. So morning and night they would kneel before their rustic altar and pray God to grant them their desire. As they were faithful in their purpose, their wish was fulfilled. A son was born to them, and joy filled their <pb n=156>hearts. The couple&apos;s love for their child grew so intense, that they craved for another, and then for still another. The Lord was mindful of their prayers; and so, as time went on, two more sons were born to them. The second son they named Felipe; and the youngest, Juan. The name of the oldest was Pedro. All three boys were lovely and handsome, and they greatly delighted their parents.
 
 <p>In the course of time, however, when they were about eight, seven, and six years old, Pedro, Felipe, and Juan became monstrously great eaters. Each would eat at a single meal six or seven <hi>chupas</hi><note n=1 place=foot><hi>Chupa</hi>, a measure, equal roughly to about four handfuls of raw rice.</note> of rice: consequently their father was obliged to work very hard, for he had five mouths to feed. In this state of affairs, Tetong felt that, although these children had been born to him and his wife as an increase of their happiness, they would finally exhaust what little he had. Nor was Maria any the less aware of the gluttony of her sons. By degrees their love for their sons ripened into hatred, and at last Tetong resolved to do away with his children.
 
@@ -3439,7 +3455,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Considering the fact that both parts of our story are practically world-wide in their distribution, it is almost impossible to say where and when the two in combination first existed. I am inclined to think, on the whole, that our Filipino folk-tale is an importation, and is not native. As to the relationship between the popular and the literary versions of the story, I believe that in general the literary has been derived from the popular.
 
-<div1 id=t18 n=18>
+<div1 id=t18 n=18 rend="toc-head(Juan and His Adventures.)">
 <div2 id=t18a>
 <head>Juan and His Adventures.</head>
 
@@ -3536,7 +3552,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Taken as a whole, our story seems to have been imported into the Philippines from the Occident, for the reason that no Oriental analogues of it appear to exist, while not a few are known from southern Europe. Our two variants are from the Tagalog province of Batangas, and, so far as I know, the story is not found elsewhere in the Islands. As suggested above, however, the introduction is probably native, or at least very old, and the conclusion has been modified by the influence of another cycle well known in the Orient.
 
-<div1 id=t19 n=19>
+<div1 id=t19 n=19 rend="toc-head(Juan Wearing a Monkey&apos;s Skin.)">
 <div2 id=t19a>
 <head>Juan Wearing a Monkey&apos;s Skin.</head>
 
@@ -3615,7 +3631,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p>Among the Santals, the theme of a girl&apos;s marrying a monkey is common in <hi>M&auml;rchen</hi> (see Bompas, No. XV, &ldquo;The Monkey Boy;&rdquo; No. XXXII, &ldquo;The Monkey and the Girl;&rdquo; and No. LXX, &ldquo;The Monkey Husband&rdquo;). In none of these stories, however, is there a transformation of the animal into a human being.
 
-<div1 id=t20 n=20>
+<div1 id=t20 n=20 rend="toc-head(How Salaksak Became Rich.)">
 <div2 id=t20a n=a>
 <head>How Salaksak Became Rich.</head>
 
@@ -3801,8 +3817,7 @@ Juan lowered his axe, and said, &ldquo;Oho! is that so?&rdquo;
 
 <p><pb n=196>The cycle of tales to which all our variants belong, and which may appropriately be called the &ldquo;Master Cheat&rdquo; cycle, is one of the most popular known. It occurs in many different forms; indeed, the very nature of the story&mdash;merely a succession of incidents in which a poor but shrewd knave outwits his rich friend or enemy (the distinction matters little to the narrator), and finally brings about his enemy&apos;s death while he himself becomes rich&mdash;is such as to admit of indefinite expansion, so far as the number and variety of the episodes are concerned. There have been at least four comprehensive descriptive or bibliographical studies of this cycle made,&mdash;K&ouml;hler&apos;s (on Campbell&apos;s Gaelic story, No. 39), Cosquin&apos;s (notes to Nos. 10 and 20), Clouston&apos;s (2 : 229&ndash;288), and Bolte-Pol&iacute;vka&apos;s (on Grimm, No. 61). Of these, the last, inasmuch as it is the latest (1914) and made use of all the preceding, is the most complete. From it (2 : 10) we learn that the characteristic incidents of this family of drolls are as follows:&mdash;
 
-<p>
-A&sup1; A rabbit (goat, bird) as carrier of messages. A&sup2; A wolf sold for a ram.
+<p>A&sup1; A rabbit (goat, bird) as carrier of messages. A&sup2; A wolf sold for a ram.
 
 <p>B A gold-dropping ass (or horse).
 
@@ -3820,8 +3835,7 @@ A&sup1; A rabbit (goat, bird) as carrier of messages. A&sup2; A wolf sold for a 
 
 <p>J Death of the envious one, who wishes to secure some &ldquo;marine cattle.&rdquo;
 
-<p>
-The opponents in this group of stories, says Bolte, &ldquo;are either village companions, or unacquainted marketers, or a rich and an avaricious brother.&rdquo; In addition to the episodes enumerated above, might be mentioned two others not uncommonly found in this cycle:&mdash;
+<p>The opponents in this group of stories, says Bolte, &ldquo;are either village companions, or unacquainted marketers, or a rich and an avaricious brother.&rdquo; In addition to the episodes enumerated above, might be mentioned two others not uncommonly found in this cycle:&mdash;
 
 <p>F&sup5; Frightening robbers under tree by dropping hide or table on them.
 
@@ -3831,7 +3845,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Of the elements mentioned by Bolte-Pol&iacute;vka, our five stories and two variants have the following: &ldquo;How Salaksak became Rich,&rdquo; F&sup4;BE&sup1;HJ; &ldquo;Clever Juan and Envious Diego,&rdquo; G&sup1;F&sup5;HJ; &ldquo;Ruined because of Invidiousness,&rdquo; F&sup4;F&sup5;F&sup6;; &ldquo;The Two Friends,&rdquo; F&sup2;G&sup2;HJ; &ldquo;Juan the Orphan,&rdquo; F&sup4;H (modified) J; &ldquo;Juan the Ashes-Trader,&rdquo; E&sup1;F&sup5;; &ldquo;Colassit and Colaskel,&rdquo; F&sup3;. In a Visayan tale (JAFL 19 : 107&ndash;109) we find a combination of HJ with a variant of our <ref target=t1>No. 1.</ref> Incident D (hat paying landlord) forms a separate story, which we give below,&mdash;No. 50, &ldquo;Juan and his Painted Hat.&rdquo; Incident B is also narrated as a droll by the Tagalogs; the sharper of the story scattering silver coins about the manure of his cow, and subsequently selling the &ldquo;magic&rdquo; animal for a large sum. An examination of the incidents distributed among the Filipino members of this cycle reveals the fact that episode A&sup1; (hare as messenger) is altogether lacking. I have not met with it in any native story, and am inclined to believe that it is not known in the Islands. It is found widespread in Europe, but does not appear to be common in India: among fifteen Indian variants cited by Bolte it is found only twice (i.e., Indian Antiquary, 3 : 11 f.; Bompas, No. 80, p. 242). These Indian versions show, however, that the story in one form or another is found quite generally throughout that country, the Santali furnishing the largest number of variants (six, in all). It would seem reasonable to conclude, therefore, considering the fact that at least seven forms of the tale are known in the Philippines, extending from the Visayas to the northernmost part of Luzon, that the source of the incidents common to these and the Indian versions need not be sought outside the Orient. The case of incidents F&sup1;F&sup2;F&sup3; seems different. They are lacking in the Far-Eastern representatives of this cycle; and their appearance in the Philippines may be safely traced, I think, to European influence. However, an Indian source for these incidents may yet be discovered, just as sources already have been for so many Italian <hi lang=it>novella</hi> and French <hi lang=fr>fabliaux</hi> of a similar flavor. The fact that the earliest form of the &ldquo;Master Cheat&rdquo; cycle known is a Latin poem of the eleventh, possibly tenth, century (K&ouml;hler-Bolte, 233&ndash;234), is of course no proof that elements F&sup4;G&sup1;HJ, found in that poem, were introduced into India from Europe, though it might be an indication.
 
-<div1 id=t21 n=21>
+<div1 id=t21 n=21 rend="toc-head(Is He the Crafty Ulysses?)">
 <div2 id=t21a>
 <head>Is He the Crafty Ulysses?</head>
 
@@ -3855,7 +3869,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>&ldquo;I will not fail to fulfil my promise, your Majesty,&rdquo; said Suguid.
 
-<p>After this brief interview, Suguid went directly home.	He told the merchant all about his plan to marry the princess.
+<p>After this brief interview, Suguid went directly home. He told the merchant all about his plan to marry the princess.
 
 <p>&ldquo;Why did you dare tell the king that you know where his daughter is,&rdquo; said the merchant, &ldquo;when there is no certainty at all of your finding her or of gaining her consent?&rdquo;
 
@@ -3966,15 +3980,15 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>In none of these three stories (nor in Pitr&egrave;, No. 96, which is a shorter variant of No. 95) does the opening resemble our forms of the tale. Nor in any of the three, either, does the hero bring the wager on himself because of the announcement he makes that he who has gold can discover anything. With this detail, however, compare the couplet which the hero displays in Pitr&egrave;, No. 96:&mdash;
 
 <lg>
-	<l>&ldquo;Cu&apos; havi dinari fa chiddu chi voli,
-	<l>Cu&apos; havi bon cavallu va unni voli.&rdquo;
+    <l>&ldquo;Cu&apos; havi dinari fa chiddu chi voli,
+    <l>Cu&apos; havi bon cavallu va unni voli.&rdquo;
 </lg>
 
 <p>The line &ldquo;He who has gold can do whatever he wishes&rdquo; is almost identical with the corresponding line in the Tagalog verse story.
 
 <p><pb n=207>It is to be noted that the bride-wager incident in this group of stories resembles closely the same episode in our <ref target=t19>No. 19</ref>. The opening of our <ref target=t21>No. 21</ref> has been influenced by the setting of the stories of the Carancal group (<ref target=t3>No. 3</ref>).
 
-<div1 id=t22 n=22>
+<div1 id=t22 n=22 rend="toc-head(The Reward of Kindness.)">
 <div2 id=t22a>
 <head>The Reward of Kindness.</head>
 
@@ -4026,7 +4040,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>The broken-ring recognition on the return home is a feature which I believe occurs in no other Filipino folk-tale, but is met with not infrequently in European saga and story (cf. K&ouml;hler-Bolte, 117, 584; see also Bolte-Pol&iacute;vka, 1 : 234; 2 : 348).
 
 <pb n=211>
-<div1 id=t23 n=23>
+<div1 id=t23 n=23 rend="toc-head(Pedro and Satan.)">
 <div2 id=t23a>
 <head>Pedro and Satan.</head>
 
@@ -4059,7 +4073,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The testimony of the narrator that he heard the story from one of his playmates when he was a little boy, throws an interesting ray of light on the way in which popular stories circulate in the Philippines.
 
-<div1 id=t24 n=24>
+<div1 id=t24 n=24 rend="toc-head(The Devil and the Guachinango.)">
 <div2 n=t24a>
 <head>The Devil and the Guachinango.</head>
 
@@ -4145,7 +4159,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Masama, in great envy, went to the king, and said, &ldquo;Master, Mabait, your favorite slave, has a friend. This friend is a duende, which will be injurious to us if you let it live here. As Mabait said, it will be the means of his acquiring all of your wealth and taking your daughter for his wife.&rdquo;
 
-<p>The king, in great rage, summoned Mabait, and punished him severely by beating his palms with a piece of leather. Then he ordered his servants to find the duende and kill it. The duende hid in a small jar. Masama saw it, and covered the mouth of the jar with a saint&apos;s dress. The duende was afraid of the dress, and dared not come out.	&ldquo;Open the jar, and I will give you ten isabels,&rdquo; said the little man.
+<p>The king, in great rage, summoned Mabait, and punished him severely by beating his palms with a piece of leather. Then he ordered his servants to find the duende and kill it. The duende hid in a small jar. Masama saw it, and covered the mouth of the jar with a saint&apos;s dress. The duende was afraid of the dress, and dared not come out. &ldquo;Open the jar, and I will give you ten isabels,&rdquo; said the little man.
 
 <p>&ldquo;Give me the money first.&rdquo;
 
@@ -4241,7 +4255,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The question of the origin of the Pampango version of this story is not easy to answer definitely, for the reason that it presents details not found in any of the other variants. However, since nearly all the machinery of our story turns on the teachings of the Roman Church, and since the <hi>denouement</hi> is practically identical with the ending of Caballero&apos;s Andalusian story, I conclude that in its main outlines our version was derived from Spain. At the same time, I think it likely that the fairy-tale of &ldquo;Mabait and the Duende&rdquo; was already existent earlier in the Islands (though this, too, may have been imported), and that the motivation of the spirit&apos;s desire to revenge himself on his tormentor for his avarice and greed was incorporated into the <hi>M&auml;rchen</hi> from the fairy-tale. My reasons for thinking the fairy-tale the older are: (1) its crudeness (the good and the bad hero are a very awkward device compared with the combination of qualities in the guachinango); (2) its local references and its native names; (3) its use of native superstitions and beliefs.
 
-<div1 id=t25 n=25>
+<div1 id=t25 n=25 rend="toc-head(Juan Sadut.)">
 <div2 id=t25a>
 <head>Juan Sadut.</head>
 
@@ -4287,7 +4301,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>The two distinctive features in our story are the introduction and the first task. The cruelty displayed by the hero&apos;s father is not unusual in folk-tales, but his method of getting rid of his son is. The benevolence of the snake, which is not motivated at all, may be at bottom connected with some such moralizing tradition as is found in Somadeva, &ldquo;The Story of the Three Brahmin Brothers&rdquo; (Tawney, 1 : 293), where two older brothers, in order to get rid of the youngest, who has been slandered by their wives (&ldquo;Potiphar&apos;s wife&rdquo; situation), order him to dig up an ant-hill in which lives a venomous snake. Because of his virtue, however, he finds a pitcher filled with gold! There is nothing else in this story which even in the remotest way suggests ours. While Benfey (1 : 214&ndash;215, note) has shown that the conception of the snake-jewel is essentially Indian,&mdash;and the belief in one form or another is widespread in the Philippines,&mdash;he also shows that it was held in Europe even in classical times; and, as every one knows, the idea is a commonplace in folk-lore. Obviously nothing can be concluded as to the origin of our story from this detail alone. The first task, which is performed without supernatural aid, though the hero asks his ring for advice, may be a remnant of tradition; if so, it is of Indian or Malayan tradition, not Philippine, for the tiger is not found in the Islands.
 
 <pb n=227>
-<div1 id=t26 n=26>
+<div1 id=t26 n=26 rend="toc-head(An Act of Kindness.)">
 <div2 id=t26a>
 <head>An Act of Kindness.</head>
 
@@ -4338,7 +4352,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>As a whole, while our story is reminiscent of at least three different cycles of tales, it nevertheless does not sound like a modern bit of patchwork, but appears to be old; how old, I am unable to say. The most unreasonable part of our narrative is the fact that the hero should find himself so many miles from home when going to buy five cents&apos; worth of rice. It must be supposed that the trip to the snake-cave occupied much more time than it appears in the story to have taken.
 
-<div1 id=t27 n=27>
+<div1 id=t27 n=27 rend="toc-head(The Indolent Husband.)">
 <div2 id=t27a>
 <head>The Indolent Husband.</head>
 
@@ -4423,7 +4437,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Numerous as are the Indian and other Oriental variants, it seems to me very likely that out story was not derived directly from them, but from Europe. However, I shall not undertake to name the parent version.
 
-<div1 id=t28 n=28>
+<div1 id=t28 n=28 rend="toc-head(Cecilio, the Servant of Emilio.)">
 <div2 id=t28a>
 <head>Cecilio, the Servant of Emilio.</head>
 
@@ -4444,16 +4458,15 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>Then the old woman said, &ldquo;Take this cane with you, and whenever you see him, let it loose and pronounce these words:&mdash;
 
 <lg>
-	<l>&ldquo;&thinsp;&lsquo;<hi>Sigue garrote, sigue garrote</hi>,<note n=1 place=foot>(Spanish) &ldquo;At him, cudgel!&rdquo;</note>
-	<l>Strike that fellow over there!&rsquo;
+    <l>&ldquo;&thinsp;&lsquo;<hi lang=es>Sigue garrote, sigue garrote</hi>,<note n=1 place=foot>(Spanish) &ldquo;At him, cudgel!&rdquo;</note>
+    <l>Strike that fellow over there!&rsquo;
 </lg>
 
 <p><corr>&ldquo;</corr>When you want the cane to stop, all you need to say is&mdash;
 
-<p><pb n=239>
-<lg>
-	<l>&ldquo;&thinsp;&lsquo;Stop, stop,
-	<l>For that is enough!&rsquo;&thinsp;&rdquo;
+<pb n=239><lg>
+    <l>&ldquo;&thinsp;&lsquo;Stop, stop,
+    <l>For that is enough!&rsquo;&thinsp;&rdquo;
 </lg>
 
 <p>The boy then said, &ldquo;Is that all?&rdquo;
@@ -4469,8 +4482,8 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>&ldquo;Very well, I will pardon you,&rdquo; said Cecilio; &ldquo;but if you had treated me as you should have treated me and others, you would not have been harmed.&rdquo; Then he said to the cane,&mdash;
 
 <lg>
-	<l>&ldquo;Stop, stop,
-	<l>For that is enough!&rdquo;
+    <l>&ldquo;Stop, stop,
+    <l>For that is enough!&rdquo;
 </lg>
 
 <p>At once the magic stick stopped, and returned to its owner. The money was given back, and the man promised Cecilio that he would not rob any poor boy again.
@@ -4513,9 +4526,9 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>I am unable to name the immediate source of our story of &ldquo;Cecilio&rdquo; and of the two variants; though, as has been remarked above, it was pretty certainly European. None of the three seems to owe anything in particular to the Spanish ballad printed in the &ldquo;Romancero General,&rdquo; No. 1265, which Bolte and Pol&iacute;vka think is based directly on Grimm, No. 110. The local modifications in our story, and the definite native atmosphere maintained throughout, suggest that it is not a recent importation.
 
-<p>An interesting animal version from South Africa, containing the magic bow and magic fiddle, is given by Hone&yuml; (p. 14), &ldquo;The Monkey&apos;s Fiddle.&rdquo;	This story was doubtless taken over by the natives from the Dutch.
+<p>An interesting animal version from South Africa, containing the magic bow and magic fiddle, is given by Hone&yuml; (p. 14), &ldquo;The Monkey&apos;s Fiddle.&rdquo; This story was doubtless taken over by the natives from the Dutch.
 
-<div1 id=t29 n=29>
+<div1 id=t29 n=29 rend="toc-head(Chonguita.)">
 <div2 id=t29a>
 <head>Chonguita.</head>
 
@@ -4566,16 +4579,16 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>In only two of the variants cited by Bolte-Pol&iacute;vka (to Grimm, No. 63) is the animal wife a monkey,&mdash;Comparetti, No. 58, &ldquo;Le Scimmie;&rdquo; and Von Hahn, No. 67, &ldquo;<foreign lang=de>Die Aeffin.</foreign>&rdquo; Of these, only the Greek story resembles our tale; but here the similarities are so many, that I will summarize briefly the main points of Von Hahn&apos;s version:&mdash;
 
-<q rend="block"><p>An old king once called his three sons to him, and said, &ldquo;My sons, I am old; I should like to have you married, so that I may celebrate your wedding with you before I die. Therefore each of you are to shoot an arrow into the air, and to follow its course, for there each will find what is appointed for him.&rdquo; The eldest shot first: his arrow carried him to a king&apos;s daughter, whom he married. The second obtained a prince&apos;s daughter. But the arrow of the third stuck in a dung-hill. He dug a hole in it, and came to a marble slab, which, when raised, disclosed a flight of stairs leading down. Courageously he descended, and came to a cellar in which a lot of monkeys were sitting in a circle. The mother of the monkeys approached him, and asked him what he wanted. He answered, that, according to the flight of his arrow, he was destined to have a monkey-wife. &ldquo;Choose one for yourself,&rdquo; she said. &ldquo;Here sit my maids; there, my daughters.&rdquo; He selected one, and took her back to his father. His brothers,  however, ridiculed him.
+<q rend="block"><p>An old king once called his three sons to him, and said, &ldquo;My sons, I am old; I should like to have you married, so that I may celebrate your wedding with you before I die. Therefore each of you are to shoot an arrow into the air, and to follow its course, for there each will find what is appointed for him.&rdquo; The eldest shot first: his arrow carried him to a king&apos;s daughter, whom he married. The second obtained a prince&apos;s daughter. But the arrow of the third stuck in a dung-hill. He dug a hole in it, and came to a marble slab, which, when raised, disclosed a flight of stairs leading down. Courageously he descended, and came to a cellar in which a lot of monkeys were sitting in a circle. The mother of the monkeys approached him, and asked him what he wanted. He answered, that, according to the flight of his arrow, he was destined to have a monkey-wife. &ldquo;Choose one for yourself,&rdquo; she said. &ldquo;Here sit my maids; there, my daughters.&rdquo; He selected one, and took her back to his father. His brothers, however, ridiculed him.
 
-<p>After a time the eldest son asked the king to divide up his kingdom,  as he was already old and was likely to die. &ldquo;I&apos;ll give you three tasks,&rdquo; said the king to his sons. &ldquo;The one who performs them best shall be king.&rdquo; The first count was to be won by the son whose house forty days thence was cleanest and most beautifully adorned. The youngest son was very sad when inspection-time approached. &ldquo;Why so sad?&rdquo; said his wife. He told her; and she said to him on the morning of the last day, &ldquo;Go to my mother, and ask her for a hazel-nut and an almond.&rdquo; He did so. When the time for  inspection arrived, the monkey-wife cracked the hazel-nut and drew from it a diamond covering for the whole house. From the almond she drew a very <pb n=248>beautiful carpet for the king to walk on. Youngest son won the first count, naturally. The second task was to furnish the king with fresh fruits in the winter-time. The two oldest sons were unable to get any, but the youngest son got a fine supply from the monkeys&apos; garden under the dunghill. The third count was to be won by the son whose wife should be declared the most beautiful at a feast to be given ten days thence. The monkey-wife sent her husband again for an almond, a hazel-nut, two stallions, and five servants. When he returned with them, she cracked the almond and drew from it a magnificent dress for herself. From the hazelnut she drew <hi>her own beauty</hi>, and handsome equipment for her husband. When she was arrayed, she rode into the courtyard of the king, and tried to escape without being recognized; but the king was too quick for her: she was caught, and her husband was declared the final winner. He became king when his father died.
+<p>After a time the eldest son asked the king to divide up his kingdom, as he was already old and was likely to die. &ldquo;I&apos;ll give you three tasks,&rdquo; said the king to his sons. &ldquo;The one who performs them best shall be king.&rdquo; The first count was to be won by the son whose house forty days thence was cleanest and most beautifully adorned. The youngest son was very sad when inspection-time approached. &ldquo;Why so sad?&rdquo; said his wife. He told her; and she said to him on the morning of the last day, &ldquo;Go to my mother, and ask her for a hazel-nut and an almond.&rdquo; He did so. When the time for inspection arrived, the monkey-wife cracked the hazel-nut and drew from it a diamond covering for the whole house. From the almond she drew a very <pb n=248>beautiful carpet for the king to walk on. Youngest son won the first count, naturally. The second task was to furnish the king with fresh fruits in the winter-time. The two oldest sons were unable to get any, but the youngest son got a fine supply from the monkeys&apos; garden under the dunghill. The third count was to be won by the son whose wife should be declared the most beautiful at a feast to be given ten days thence. The monkey-wife sent her husband again for an almond, a hazel-nut, two stallions, and five servants. When he returned with them, she cracked the almond and drew from it a magnificent dress for herself. From the hazelnut she drew <hi>her own beauty</hi>, and handsome equipment for her husband. When she was arrayed, she rode into the courtyard of the king, and tried to escape without being recognized; but the king was too quick for her: she was caught, and her husband was declared the final winner. He became king when his father died.
 </q>
 
 <p>This Greek story can hardly have any immediate relationship with &ldquo;Chonguita,&rdquo; though it does appear in its first half to be connected with the 1833 Indian <hi>M&auml;rchen</hi> given above. Our story, it will be noticed, lacks the shooting of arrows, so characteristic of the European forms; it mentions the monkey-kingdom to which the youngest prince was directed by an old man, and where Chonguita is forced on him; it represents the king as requiring his daughters-in-law to perform difficult tasks because he wishes to find an excuse for putting to death the animal-wife. Moreover, the three tasks themselves are different, although the first two are reminiscent of some found in the Occidental versions. For the third I know of no folk-tale parallel. On the whole, I am prone to believe that our story was not imported from Europe, but that it belongs to an Oriental branch of the family.
 
 <p>The disenchantment of the monkey-wife by hurling her in anger against the wall is exactly like the disenchantment of the frog-prince in Grimm, No. 1. This conceit is most unusual, and, it might be added, unreasonable. Hence this identity of detail in two stories so far removed in every other way is particularly striking. I know of no further occurrences of the incident.
 
-<div1 id=t30 n=30>
+<div1 id=t30 n=30 rend="toc-head(The Golden Lock.)">
 <div2 id=t30a>
 <head>The Golden Lock.</head>
 
@@ -4617,7 +4630,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Clotilde arrived in the city just a few minutes before the execution. She drove directly to the king&apos;s pavilion. Her only companion was the same old woman who had caused all this trouble. The turbulent persons who had gathered in the public square to witness the horrible spectacle were awed by the loveliness and magnificent attire of Clotilde. When she reached the king, and asked him for all the details concerning Ludovico&apos;s case, and when the king had given her all the information he could, she turned and pointed toward Pio, and said, &ldquo;That man has stolen my other slipper which looks like this one I am wearing.&rdquo;
 
-<p>The king called Pio from the place where he was standing,  and told him all about the fair lady&apos;s accusation. &ldquo;I have not committed any crime against her,&rdquo; said Pio angrily. &ldquo;I don&apos;t even know her. This is the first time I have ever seen her.&rdquo;
+<p>The king called Pio from the place where he was standing, and told him all about the fair lady&apos;s accusation. &ldquo;I have not committed any crime against her,&rdquo; said Pio angrily. &ldquo;I don&apos;t even know her. This is the first time I have ever seen her.&rdquo;
 
 <p>&ldquo;Sir,&rdquo; said Clotilde sneeringly, &ldquo;why, then, did you tell his Majesty and other persons that you have discovered my secrets? I am the wife of Ludovico, whose life you have threatened to end by your deceit. I know now by what means you got possession of my golden lock.&rdquo;
 
@@ -4642,7 +4655,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <q rend="block"><p>After his marriage, Rodolfo went back to Valencia, and informed the king that he had found a virtuous woman and had married her. She was then in Babilonia. The king detained him for a few days in the palace. At the same time he sent Fortunato, a gallant, to court Rodolfo&apos;s wife, to test whether or not she was true to her husband. Fortunato went to Babilonia and declared his love to Estela; but she would have nothing to do with him. Ashamed to return to the palace without having won her affection, Fortunato stole her underskirt and took it to the king, stating that Estela had given it to him as a remembrance. Rodolfo was summoned: and when he saw the skirt with Adela&apos;s name on it, he was thunderstruck. The king then said, &ldquo;You see, your wife is no more virtuous than my daughter Leocadia. Remember your boast; your life is forfeit.&rdquo; Rodolfo, however, asked for a complete investigation of his wife&apos;s alleged treachery. Estela was accordingly summoned to Valencia; and when asked how her underskirt happened to be there in the palace, she asked in turn who had brought it. &ldquo;Fortunato,&rdquo; she was told. Then she said, &ldquo;The underskirt is mine. The knight Fortunato declared his love to me, but I rejected it because I am married. He stole the underskirt while I was taking a bath, and ought to be punished.&rdquo; When confronted with the charge, Fortunato denied the theft, and maintained that he had been given the garment by Estela as a token of her love for him. When Rodolfo heard this denial, he begged the king to assemble all the dignitaries and judges in the kingdom. Before the court Rodolfo asked Fortunato for definite proof to back up his assertions. He was unable to give any, and was consequently sentenced to be deported for ten years to a lonely island. Rodolfo and his wife were now honored by the king, and Rodolfo was finally made a knight.
 </q>
 
-<p>Although this portion of the romance is only a distant analogue of out story, inasmuch as it lacks both the wager and the clever trick of the wife to get her maligner to convict himself, I give it, because this same combination of the &ldquo;chastity-wager&rdquo; motive with the &ldquo;hen-divided&rdquo; motive (see first part of &ldquo;Rodolfo,&rdquo; <ref target=t7n>notes to No. 7</ref>) occurs in a Mentonese story, &ldquo;<foreign lang=fr>La Femme Avis&eacute;e</foreign>&rdquo; (Romania, II : 415&ndash;416).  The tale may be briefly summarized:&mdash;
+<p>Although this portion of the romance is only a distant analogue of out story, inasmuch as it lacks both the wager and the clever trick of the wife to get her maligner to convict himself, I give it, because this same combination of the &ldquo;chastity-wager&rdquo; motive with the &ldquo;hen-divided&rdquo; motive (see first part of &ldquo;Rodolfo,&rdquo; <ref target=t7n>notes to No. 7</ref>) occurs in a Mentonese story, &ldquo;<foreign lang=fr>La Femme Avis&eacute;e</foreign>&rdquo; (Romania, II : 415&ndash;416). The tale may be briefly summarized:&mdash;
 
 <q rend="block"><p>A prince benighted in a forest is entertained for the night at a countryman&apos;s house. At dinner the prince carves the fowl, and gives the head to the father, the stomach to the mother, and the heart to the daughter. <pb n=254>On the old man&apos;s complaining later of his guest&apos;s strange division of the bird, the girl explains to her father just why the prince acted as he did. The prince overhears her, admires her wit, falls in love with her, and marries her. Some time afterward the prince is called to Egypt on business. He leaves his wife behind at home, and she promises to be very discreet. The prince communicates her promise to a friend, who wagers that he will be able to tell the prince of any defects on her body. The friend goes to the home of the prince and bribes the lady-in-waiting. She informs him, that, beautiful as the young wife is, she has a strawberry-mark on her shoulder. When the prince, on his return, is told this intimate detail by his friend, he is very angry, and, going home, accuses his wife of faithlessness. She proves her innocence by going before the king and swearing that her maligner has stolen one of her golden slippers. He denies the charge, and swears that he has never seen his accuser before. Thus self-convicted, he is imprisoned for many years.
 </q>
@@ -4712,7 +4725,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>For some additional bibliographical items in connection with this cycle, see K&ouml;hler, &ldquo;<foreign lang=de>Literaturblatt</foreign>,&rdquo; etc., p. 274. To the list above should be added finally, of course, the stories given in more detail earlier in this note.
 
-<div1 id=t31 n=31>
+<div1 id=t31 n=31 rend="toc-head(Who is the Nearest Relative?)">
 <div2 id=t31a>
 <head>Who is the Nearest Relative?</head>
 
@@ -4759,7 +4772,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>&ldquo;Because&rdquo;&mdash;
 
-<p>&ldquo;Because, what to a woman is a husband?	She can marry again; she can find another.&rdquo;
+<p>&ldquo;Because, what to a woman is a husband? She can marry again; she can find another.&rdquo;
 
 <p>&ldquo;That is true,&rdquo; said the old man.
 
@@ -4784,10 +4797,10 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>This story from the Greek historian clearly supplied not merely the thought but also the form of the reference in lines 909&ndash;912 of Sophocles&apos; &ldquo;Antigone.&rdquo; In Campbell&apos;s English translation of the Greek play, the passage, which is put into the mouth of the heroine, runs thus:&mdash;
 
 <lg>
-	<l>&ldquo;A husband lost might be replaced; a son,
-	<l>If son were lost to me, might yet be born;
-	<l>But with both parents hidden in the tomb,
-	<l>No brother may arise to comfort me.&rdquo;
+    <l>&ldquo;A husband lost might be replaced; a son,
+    <l>If son were lost to me, might yet be born;
+    <l>But with both parents hidden in the tomb,
+    <l>No brother may arise to comfort me.&rdquo;
 </lg>
 
 <p>Chronologically, the next two occurrences of the story are Indian. In the &ldquo;Uccha&ndot;ga-j&amacr;taka&rdquo; (Fausb&ouml;ll, No. 67, of uncertain date, but possibly going back to the third century B.C.) we are told&mdash;
@@ -4799,9 +4812,9 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>In the Cambridge translation of this &ldquo;J&amacr;taka,&rdquo; the verse reply of the woman is rendered thus:&mdash;
 
 <lg>
-	<l>&ldquo;A son&apos;s an easy find; of husbands too
-	<l>An ample choice throngs public ways. But where
-	<l>With all my pains another brother find?&rdquo;
+    <l>&ldquo;A son&apos;s an easy find; of husbands too
+    <l>An ample choice throngs public ways. But where
+    <l>With all my pains another brother find?&rdquo;
 </lg>
 
 <p>In the &ldquo;R&amacr;m&amacr;yana,&rdquo; the most celebrated art epic of India, we are told how, in the battle about Lank&amacr;, Lakshmana, the favorite brother and inseparable companion of the hero R&amacr;ma, is to all appearances killed. R&amacr;ma laments over him in these words: &ldquo;Anywhere at all I could get a wife, a son, and all other relatives; but I know of no place where I might be able to acquire a brother. The teaching of the Veda is true, that Parjanya rains down everything; but also is the proverb true that he does not rain down brothers.&rdquo; (Ed. Gorresio, 6 : 24, 7&ndash;8.) This parallel was pointed out by R. Pischel in &ldquo;Hermes,&rdquo; 28 (1893) : 465.
@@ -4814,7 +4827,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>The riddle form in which our story is cast is possibly an invention of the narrator; but folk-tales ending thus are common (see <ref target=t12n>notes to No. 12</ref>). Again, our story fails to state whether or not all three men were pardoned. The implication is that they were not. The localization of the events seems to point either to a long existence of the story in La Laguna province or to exceptional adaptive skill on the part of the narrator.
 
 <pb n=262>
-<div1 id=t32 n=32>
+<div1 id=t32 n=32 rend="toc-head(With One Centavo Juan Marries a Princess.)">
 <div2 id=t32a>
 <head>With One Centavo Juan Marries a Princess.</head>
 
@@ -4852,7 +4865,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The Filipino version appears to be old, and I am inclined to think that it is native; that is, if any stories may be called native. Several facts point to the primitiveness of the tale: (1) the local color and realistic touches, slight though they are; (2) the non-emphasis of the comic possibilities of the situations; (3) the somewhat unsystematic arrangement of incidents, the third demand and exchange (iron rod for dead dog) not appearing to be an upward progression; (4) the crudity of invention displayed in this same third exchange (though an iron-picketed fence seems modern). My reasons for thinking our story not imported from the Occident are the differences in beginning, middle, and end between it and the European versions cited by Bolte-Pol&iacute;vka (<hi>loc. cit.</hi>). The good luck coming to the hero from the exchange of <hi>dead</hi> animals suggests a distant basic connection between our story and the &ldquo;J&amacr;taka,&rdquo; although it must be admitted that the idea could occur independently to many different peoples.
 
-<div1 id=t33 n=33>
+<div1 id=t33 n=33 rend="toc-head(The Three Humpbacks.)">
 <div2 id=t33a n="a">
 <head>The Three Humpbacks.</head>
 
@@ -4934,7 +4947,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 </q>
 
 <pb n=271>
-<div1 id=t34 n=34>
+<div1 id=t34 n=34 rend="toc-head(Respect Old Age.)">
 <div2 id=t34a n="a">
 <head>Respect Old Age.</head>
 
@@ -4977,19 +4990,19 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <q rend="block"><p>In a certain village of K&amacr;si there lived a man who supported his old father. The father regretted seeing his son toil so hard for him, and against <pb n=273>the son&apos;s will sent for a woman to be his daughter-in-law. Soon the son began to be pleased with his new wife, who took good care of his father. As time went on, however, she became tired of the old man, and planned to set his son against him. She accused her father-in-law of being not only very untidy, but also fierce and violent, and forever picking quarrels with her, and at last, by constant dinning her complaints in his ear, persuaded her husband to agree to take the old man into a cemetery, kill him, and bury him in a pit. Her small son, a wise lad of seven, overheard the plot, and decided to prevent his father from committing murder. The next day he insisted on accompanying his father and grandfather. When they reached the cemetery, and the father began to dig the pit, the small boy asked what it was for. The father replied,&mdash;
 
 <lg>
-	<l>&ldquo;Thy grandsire, son, is very weak and old,
-	<l>Opprest by pain and ailments manifold;
-	<l>Him will I bury in a pit to-day;
-	<l>In such a life I could not wish him stay.&rdquo;
+    <l>&ldquo;Thy grandsire, son, is very weak and old,
+    <l>Opprest by pain and ailments manifold;
+    <l>Him will I bury in a pit to-day;
+    <l>In such a life I could not wish him stay.&rdquo;
 </lg><!--
 
 --><p>The boy caught the spade from his father&apos;s hands, and at no great distance began to dig another pit. His father asked why he dug that pit; and he answered,&mdash;
 
 <lg>
-	<l>&ldquo;I too, when thou art aged, father mine,
-	<l>Will treat my father as thou treatest thine;
-	<l>Following the custom of the family,
-	<l>Deep in a pit I too will bury thee.&rdquo;
+    <l>&ldquo;I too, when thou art aged, father mine,
+    <l>Will treat my father as thou treatest thine;
+    <l>Following the custom of the family,
+    <l>Deep in a pit I too will bury thee.&rdquo;
 </lg><!--
 
 --><p>By repeating a few more stanzas the son convinced his father that he was about to commit a great crime. The father, penitent, seated himself in the cart with his son and the old man, and they returned home. There the husband gave the wicked wife a sound drubbing, bundled her heels over head out of the house, and bade her never darken his doors again. [The rest of the story, which has no connection with ours, tells how the little son by a trick made his mother repent and become a good woman, and brought about a reconciliation between her and his father.]
@@ -5009,15 +5022,15 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <!-- TODO: check Spanish -->
 
 <q rend="block" lang=es><lg>
-	<l><hi>Patri qualis fueris, tibi filius talis erit</hi>.
-	<l>Cual fueres &aacute; tu padre que trabaj&oacute; por t&iacute;,
-	<l>El fijo que engendrares tal ser&aacute; &aacute; t&iacute;.
+    <l><hi>Patri qualis fueris, tibi filius talis erit</hi>.
+    <l>Cual fueres &aacute; tu padre que trabaj&oacute; por t&iacute;,
+    <l>El fijo que engendrares tal ser&aacute; &aacute; t&iacute;.
 </lg><!--
 
 --><p>Cuentan que un viejo di&oacute; &aacute; un fijo que lo sirvi&oacute; mucho bien todos sus bienes; mas despues que gelos hobo dado, ech&oacute;lo de la c&aacute;mara onde dormia &eacute; tom&oacute;la para &eacute;l &eacute; para su mujer, &eacute; fizo facer &aacute; su padre el lecho tras la puerta. &Eacute; de que vino el invierno el viejo habia frio, ca el fijo le habia tornado la buena ropa con que se cobria, &eacute; rog&oacute; &aacute; un su nieto, fijo de su fijo, que rogase &aacute; su padre que le diese alguna ropa para se cobrir; &eacute; el mozo apenas pudo alcanzar de su padre dos varas de sayal para su abuelo, &eacute; qued&aacute;banle al fijo otros dos. &Eacute; el mozo llorando rog&oacute; al padre que le diese las otros dos, &eacute; tanto llor&oacute;, que gelas hobo de dar, &eacute; demand&oacute;le que para qu&eacute; las queria, &eacute; respondi&oacute;le: &ldquo;Qui&eacute;rolas guardar fasta que t&uacute; seas tal commo es agora tu padre, &eacute; estonce non te dar&eacute; mas, as&iacute; commo t&uacute; non quieres dar &aacute; tu padre.&rdquo;
 </q>
 
-<p>Finally may be given another Indian story, No. 16 in the &ldquo;Antarakath&amacr;samgraha&rdquo; of R&amacr;ja&sacute;ekhara (Bolte-Pol&iacute;vka, 2 : 139), which connects the &ldquo;divided-blanket&rdquo; <hi>motif</hi> with the old &ldquo;J&amacr;taka.&rdquo;	R&amacr;ja&sacute;ekhara flourished about A.D. 900. This story runs thus:&mdash;
+<p>Finally may be given another Indian story, No. 16 in the &ldquo;Antarakath&amacr;samgraha&rdquo; of R&amacr;ja&sacute;ekhara (Bolte-Pol&iacute;vka, 2 : 139), which connects the &ldquo;divided-blanket&rdquo; <hi>motif</hi> with the old &ldquo;J&amacr;taka.&rdquo; R&amacr;ja&sacute;ekhara flourished about A.D. 900. This story runs thus:&mdash;
 
 <q rend="block"><p>In Haripura lived a merchant named Sankha, who had four sons. When he became old, he handed over his business and all his wealth to them. But they would no longer obey him; their wives mistreated him; and the old man crept into a corner of the house, wasted by hunger and oppressed with <sic>years</sic>. Once in the cold time of the year he asked his oldest son, Kumuda, for a cloth to protect him from the night frost. Kumuda spoke this verse:&mdash;
 
@@ -5040,13 +5053,13 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>Compare this last story with <ref target=t31>No. 31</ref>.
 
 <pb n=276>
-<div1 id=t35 n=35>
+<div1 id=t35 n=35 rend="toc-head(Cochinango.)">
 <div2 id=t35a>
 <head>Cochinango.</head>
 
 <byline>Narrated by Felix Y. Velasco, who heard the story from his grandmother, a native of Laoag, Ilocos Norte.</byline>
 
-<p>Once upon a time there	lived in a small village on the border of a powerful kingdom a poor farmer, who had a son. This son was called a fool by many; but a palmer predicted that Cochinango would some day dine with the king, kiss the princess, marry her, and finally would himself be king.
+<p>Once upon a time there lived in a small village on the border of a powerful kingdom a poor farmer, who had a son. This son was called a fool by many; but a palmer predicted that Cochinango would some day dine with the king, kiss the princess, marry her, and finally would himself be king.
 
 <p>Cochinango wondered how he could ever marry the princess and himself be king, for he was very poor. One day he heard that the king had summoned all those who would like to attempt to answer the questions of the princess. It was announced that the person who could answer them all without fall should marry her. Cochinango thought that the time had now come for him to try his fortune, so he mounted his ass and rode towards the king&apos;s palace.
 
@@ -5075,13 +5088,13 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The reference at the end to raiding Moros appears to be a remnant of very old native tradition.
 
-<div1 id=t36 n=36>
+<div1 id=t36 n=36 rend="toc-head(Pedro and the Witch.)">
 <div2 id=t36a>
 <head>Pedro and the Witch.</head>
 
 <byline>Narrated by Santiago Dumlao of San Narciso, Zambales.</byline>
 
-<p>Pedro was the son of a poor man. He lived with his father and mother by the seashore. Early	one morning his parents went to look for food, leaving him	alone in the house. He staid there all day waiting for them to return. Evening came, but his father and mother did not appear; some misfortune had overtaken them. Pedro felt very hungry, but he could find no food in the house. In the middle of the night he heard some one tapping at the door. Thinking that it was his mother, he arose and went to meet her. When he opened the door, however, he saw that it was not his mother who had rapped, but Boroka,<note n=2 place=foot><hi>Boroka</hi>, apparently a corruption of the Spanish <hi>bruja</hi> (&ldquo;witch&rdquo;).</note> whom children are very much afraid of. Now, Boroka was a witch. She had wings like a bird, four feet like a horse, but a head like that of a woman. She devoured boys and girls, and was especially fond of their liver. As soon as Pedro opened the door, she seized him and carried him off to her home in the mountains.
+<p>Pedro was the son of a poor man. He lived with his father and mother by the seashore. Early one morning his parents went to look for food, leaving him alone in the house. He staid there all day waiting for them to return. Evening came, but his father and mother did not appear; some misfortune had overtaken them. Pedro felt very hungry, but he could find no food in the house. In the middle of the night he heard some one tapping at the door. Thinking that it was his mother, he arose and went to meet her. When he opened the door, however, he saw that it was not his mother who had rapped, but Boroka,<note n=2 place=foot><hi>Boroka</hi>, apparently a corruption of the Spanish <hi>bruja</hi> (&ldquo;witch&rdquo;).</note> whom children are very much afraid of. Now, Boroka was a witch. She had wings like a bird, four feet like a horse, but a head like that of a woman. She devoured boys and girls, and was especially fond of their liver. As soon as Pedro opened the door, she seized him and carried him off to her home in the mountains.
 
 <p>Pedro was not afraid of the witch; he was obedient to her, and soon she made him her housekeeper. Whenever she went out at night to look for food, he was sure to have flesh and liver for breakfast the next day. Whenever the witch was away, Pedro used to amuse himself riding on the back of a horse that would often come to see him. It taught him how to ride well, and the two became great friends.
 
@@ -5134,7 +5147,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>It might be added as an item of some interest that &ldquo;Juan Ti&ntilde;oso&rdquo; is written as a sequel to another story of widespread popularity, &ldquo;The Story of Prince Oliveros and Princess Armenia in the Kingdom of England, and that of Prince Artos and Princess Blanca, who were the Father and Mother of Don Juan Ti&ntilde;oso in the Kingdom of Valencia.&rdquo; This tale of Oliveros and Artos is directly derived from a Spanish romance of chivalry, and is one form of the &ldquo;Grateful Dead&rdquo; type (see Gerould, &ldquo;The Grateful Dead,&rdquo; FLS 1907).
 
-<div1 id=t37 n=37>
+<div1 id=t37 n=37 rend="toc-head(The Woman and her Coles Plant.)">
 <div2 id=t37a>
 <head>The Woman and her <hi>Coles</hi> Plant.</head>
 
@@ -5158,7 +5171,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>K&ouml;hler (<hi>ibid</hi>., p. 103) says that probably the heaven-reaching plant did not originally belong to this story of the poor man&apos;s proud wife, and that it was probably taken over from the English folk-tale of &ldquo;Jack and the Beanstalk.&rdquo; Bolte and Pol&iacute;vka, in their notes to Grimm, No. 19 (1 : 147), observe: &ldquo;It can easily be seen that these stories (i.e., the variants of the &lsquo;Fisherman and his Wife&rsquo;) fall into two groups. In the one, which is particularly widespread among the Germanic and Slavic peoples, but is also found in France and Spain, a captive goblin in the form of a fish grants his captor three or more wishes; among the French and Italians, on the other hand, it is usually God or the door-keeper of heaven who grants the same wishes to a poor man who reaches Paradise by means of a bean-stalk. This beanstalk here may have originated from the story of &lsquo;Jack and the Beanstalk&rsquo; or from the &lsquo;lying-story,&rsquo; Grimm No. 112.&rdquo; In a French folk-tale given by Carnoy (Romania, 8 : 250), &ldquo;La Tige de F&egrave;ve,&rdquo; the husband plants a bean which he has received from a beggar, and climbs up the stalk to heaven. When he asks for his last wish, he plunges down to earth. This story, it will be seen, resembles ours in its tragic conclusion, although the protagonist, as in the Normandy version, is a man instead of a woman. The fact that in our story no husband is mentioned counts for little, as practically all the <hi>exempla</hi> of this type are directed against woman&apos;s vanity; and the woman&apos;s case in our story illustrates the punishment for that vanity, or pride. There appears to be recorded no Spanish story containing the insatiable wife and the heaven-reaching plant. It seems reasonable to conclude, therefore, that our folk-tale was derived from the French or Italian, and probably through the medium of the clergy.
 
-<div1 id=t38 n=38>
+<div1 id=t38 n=38 rend="toc-head(A Negrito Slave.)">
 <div2 id=t38a>
 <head>A Negrito Slave.</head>
 
@@ -5201,7 +5214,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The method of answering the questions asked in this cycle of stories, and the obscure origin of the clever substitute, form a direct connection, I believe, between this group and the &ldquo;Clever Lass&rdquo; cycle. Not only do we find in both the situation of a person out of favor required to answer difficult riddles, and the task assumed voluntarily by some one humbler but more clever than he, but even some of the questions themselves, and the same style of answers, are found in both cycles. For example, compare questions and answers 1, 3, 5, 7, above, with tasks 1, 2, 4, in the <ref target=t7n>notes to our No. 7</ref>. In Grimm, No. 152, &ldquo;The Shepherd Boy,&rdquo; the hero is asked three questions impossible to answer,&mdash;How many drops of water are there in the sea? How many stars are in the heavens? How many seconds has eternity? He gets out of his difficulty just as the &ldquo;Clever Lass&rdquo; gets out of hers,&mdash;by making equally impossible counter-demands, or else giving answers that cannot be proved incorrect.
 
-<div1 id=t39 n=39>
+<div1 id=t39 n=39 rend="toc-head(Alberto and the Monsters.)">
 <div2 id=t39a>
 <head>Alberto and the Monsters.</head>
 
@@ -5240,7 +5253,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Although the events of our story are located in the Philippines, the Casiguran mentioned probably being the town in Tayabas on the west toast of Luzon, the tale as a whole appears to have been imported. The Sinucuan referred to is probably the famous legendary King of Pampanga, of whom the Pampangans have a rich oral literature. He is said to have lived on Mount Arayat. He figures in our <ref target=t79b>No. 79 (<hi>b</hi>)</ref>.
 
-<div1 id=t40 n=40>
+<div1 id=t40 n=40 rend="toc-head(Juan and Maria.)">
 <div2 id=t40a>
 <head>Juan and Maria.</head>
 
@@ -5311,7 +5324,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>As for the giant, when he awoke, he was deprived of all his power. He was so weak that he could not even get up from the ground, so he died there in the woods.
 </div1></body></text></q>
 
-<div1 id=t41 n=41>
+<div1 id=t41 n=41 rend="toc-head(The Enchanted Prince.<)">
 <div2 id=t41a>
 <head>The Enchanted Prince.</head>
 
@@ -5333,7 +5346,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>I might call attention to the fact that the number <hi>500</hi> and the <hi>monkey</hi>-prince suggest vaguely Buddhistic lore.
 
 <pb n=304>
-<div1 id=t42 n=42>
+<div1 id=t42 n=42 rend="toc-head(The Prince&apos;s Dream.)">
 <div2 id=t42a>
 <head>The Prince&apos;s Dream.</head>
 
@@ -5375,7 +5388,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Dr. Franz Boas informs me that this story is from the &ldquo;Arabian Nights,&rdquo; &ldquo;The Tale of Zayn Al-Asnam&rdquo; (see Burton, Supplemental Nights,&rdquo; iii, 3&ndash;38; for Clouston&apos;s discussion of variants and analogues, <hi>ibid</hi>., 553&ndash;563).
 
-<div1 id=t43 n=43>
+<div1 id=t43 n=43 rend="toc-head(The Wicked Woman&apos;s Reward.)">
 <div2 id=t43a>
 <head>The Wicked Woman&apos;s Reward.</head>
 
@@ -5396,9 +5409,9 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>I know of no other versions of this story. The incident of the animal substitution for child is a commonplace in folk-tales, though it is usually ascribed to an envious step-mother rather than an envious co-wife. For abstracts of Filipino stories containing this incident see JAFL 29 : 226 <hi>et seq</hi>., 228, 229; 19 : 265&ndash;272.
 
-<div1 id=t44 n=44>
+<div1 id=t44 n=44 rend="toc-head(The Magic Ring.)">
 <div2 id=t44a>
-<head>The Magic Ring (&ldquo;Ang Singsing Nga Tantanan&rdquo;).</head>
+<head>The Magic Ring (&ldquo;<foreign lang=tl>Ang Singsing Nga Tantanan</foreign>&rdquo;).</head>
 
 <byline>Narrated by Encarnacion Gonzaga, a Visayan from Jaro, Iloilo. The story, she says, is very popular among the Visayans.</byline>
 
@@ -5456,7 +5469,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>I know of no variants of this story. The detail of the helpful animals is common in Filipino <hi>M&auml;rchen</hi>; here, however, the kindness of the eagle and the fish lack the usual motivation.
 
 <pb n=314>
-<div1 id=t45 n=45>
+<div1 id=t45 n=45 rend="toc-head(Maria and the Golden Slipper.)">
 <div2 id=t45a n=a>
 <head>Maria and the Golden Slipper.</head>
 
@@ -5508,7 +5521,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The Cinderella story is perhaps the most widespread <hi>M&auml;rchen</hi> in the world. See M. R. Cox&apos;s bibliographical study of it: &ldquo;Cinderella, 345 Variants of Cinderella, Catskin, and Cap o&apos; Rushes, abstracted and tabulated, with a discussion of medieval analogues, and notes. London, 1893.&rdquo; Bolte-Pol&iacute;vka&apos;s notes to Grimm, No. 21, examine Miss Cox&apos;s material from a somewhat new angle, and are very useful for reference. It seems hardly necessary to attempt to add here to those two exhaustive monographs. Attention may be called to the fact, however, that our story of &ldquo;Abadeja,&rdquo; which comes from Leyte, <pb n=319>presents a number of interesting items not found in the other Filipino variants: e.g., (1) the task of washing a black handkerchief white, and <hi>vice-vers&acirc;</hi>; (2) the magic tree growing up from the feet of a wonderful chicken given the heroine by the mysterious woman; (3) the unusual device for providing a rich husband for the heroine. There are some slight resemblances between these last two details and corresponding incidents in Mr. Rusk&apos;s variant &ldquo;The Wonderful Tree.&rdquo;
 
-<div1 id=t46 n=46>
+<div1 id=t46 n=46 rend="toc-head(Juan the Poor.)">
 <div2 id=t46a>
 <head>Juan the Poor.</head>
 
@@ -5548,7 +5561,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The exact source of this romance I am unable to point to; but without question it is Occidental, I believe.
 
-<div1 id=t47 n=47>
+<div1 id=t47 n=47 rend="toc-head(The Fate of an Envious Woman.)">
 <div2 id=t47a>
 <head>The Fate of an Envious Woman.</head>
 
@@ -5576,7 +5589,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>It is unsafe to attempt to trace a story with only three examples as data: but it appears to me not unreasonable to suppose that our Tagalog story is a refined, pious, Christianized modernization of the Visayan form represented by &ldquo;The Two Wives and the Witch;&rdquo; and that the Visayan form, in turn, goes back to some Indian or Malayan moral tale of two wives, rivals for the affection of their husband. The Bengali tale can hardly be the direct source of our Visayan form, but it appears to be fairly closely related to that source.
 
-<div1 id=t48 n=48>
+<div1 id=t48 n=48 rend="toc-head(The Monkey and Juan Pusong Tambi-tambi.)">
 <div2 id=t48a n=a>
 <head>The Monkey and Juan Pusong Tambi-tambi.</head>
 
@@ -5736,7 +5749,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>Two other Philippine variants of the &ldquo;Puss in Boots&rdquo; cycle have been printed,&mdash;one Visayan, &ldquo;Masoy and the Ape&rdquo; (JAFL 20 : 311&ndash;314); and the other Tagalog, &ldquo;Juan and the Monkey&rdquo; (<hi>ibid</hi>., 108&ndash;109). It would thus appear, not only from the fact of its wide distribution, but also from the testimony of the recorders of the stories, that the tale is fairly well known and popular throughout the Archipelago.
 
-<p>The most complete bibliography of this cycle is Bolte-Pol&iacute;vka&apos;s notes on Grimm, No. 33 (<hi>a</hi>), &ldquo;Puss in Boots&rdquo; (<foreign lang=de>Anmerkungen</foreign>, I : 325&ndash;334). See also K&ouml;hler&apos;s notes to Gonzenbach, No. 65, &ldquo;Vom Conte Piro&rdquo; (2 : 242 f.); Macculloch, ch. VIII (p. 225 f.); W. R. S. Ralston in the &ldquo;Nineteenth Century&rdquo; (13 [1883] : 88&ndash;104). The oldest known version of the story is Straparola&apos;s (XI, i), which is translated in full by Crane (pp. 348&ndash;350). The second oldest is also Italian, by Basile (2 : iv); the third, French, Perrault&apos;s &ldquo;<foreign lang=fr>Le Chat Bott</foreign>&eacute;.&rdquo; In all three the helpful animal is a cat, as it is without exception in the German, Scandinavian, English, and French forms. In the Italian the animal is usually a cat, though the fox takes its <pb n=336>place in a number of Sicilian tales. In the Greek, Roumanian, Bulgarian, Serbian, Russian, and in general all East European forms, the helpful animal is regularly the fox, as it is also in the examples collected from Siberia, Kurdestan, Daghestan, and Mongolia. In the four Indian variants known, the animal is a jackal; in the four from the Philippines, a monkey. In a Swahili tale (Steere, p. 13) it is a gazelle. It is not hard to see how, through a process of transmission, jackal, fox, and cat might become interchanged; but where the Philippine monkey, consistently used in all versions, came from, is more difficult to explain; so the Swahili gazelle. I have, however, attempted an explanation below.
+<p>The most complete bibliography of this cycle is Bolte-Pol&iacute;vka&apos;s notes on Grimm, No. 33 (<hi>a</hi>), &ldquo;Puss in Boots&rdquo; (<foreign lang=de>Anmerkungen</foreign>, I : 325&ndash;334). See also K&ouml;hler&apos;s notes to Gonzenbach, No. 65, &ldquo;Vom Conte Piro&rdquo; (2 : 242 f.); Macculloch, ch. VIII (p. 225 f.); W. R. S. Ralston in the &ldquo;Nineteenth Century&rdquo; (13 [1883] : 88&ndash;104). The oldest known version of the story is Straparola&apos;s (XI, i), which is translated in full by Crane (pp. 348&ndash;350). The second oldest is also Italian, by Basile (2 : iv); the third, French, Perrault&apos;s &ldquo;<foreign lang=fr>Le Chat Bott&eacute;</foreign>.&rdquo; In all three the helpful animal is a cat, as it is without exception in the German, Scandinavian, English, and French forms. In the Italian the animal is usually a cat, though the fox takes its <pb n=336>place in a number of Sicilian tales. In the Greek, Roumanian, Bulgarian, Serbian, Russian, and in general all East European forms, the helpful animal is regularly the fox, as it is also in the examples collected from Siberia, Kurdestan, Daghestan, and Mongolia. In the four Indian variants known, the animal is a jackal; in the four from the Philippines, a monkey. In a Swahili tale (Steere, p. 13) it is a gazelle. It is not hard to see how, through a process of transmission, jackal, fox, and cat might become interchanged; but where the Philippine monkey, consistently used in all versions, came from, is more difficult to explain; so the Swahili gazelle. I have, however, attempted an explanation below.
 
 <p>An examination of the four members of the Philippine group reveals some striking family resemblances: (1) The motive of the monkey&apos;s gratitude is the same in all the stories: the thieving animal is caught in some sort of trap, and promises to serve the hero for life if he will only spare it. The animal is true to its word. (2) In all the stories occurs the incident of the borrowed measure returned with coins sticking to it. (3) In all the versions occurs the marriage of the poor hero with the chief&apos;s daughter, brought about by the ingenious monkey. (4) In three of the versions (all except the Pangasinan) we have as the final episode the destruction of a powerful witch or demon, and the winning of all its fortune by the monkey for the hero. In the Hindoo variants we find that the motive of the jackal&apos;s gratitude agrees with the motive in our versions. In other respects they differ (with the exception of the marriage, which is found in nearly all members of the &ldquo;Puss in Boots&rdquo; cycle): the Hindoo tales lack the incidents of the borrowed measure and the destruction of the demon. So far as the opening is concerned, then, our variants and the Indian belong to the same family. The separation, however, must have taken place ages ago; for in India the animal is consistently a jackal, and in the Philippines a monkey. The only other form that I know of in which the animal is a monkey is the Arabian, in the &ldquo;1001 Nights,&rdquo; &ldquo;Aboo Mohammed the Lazy;&rdquo; but here the helpful ape later turns out to be a malicious demon, who treacherously abducts the hero&apos;s beautiful wife. At last, through the aid of a friendly <hi>jinnee</hi>, the hero recovers her, captures the ape, and encloses it forever in a bottle of brass. He then gains possession of all the demon&apos;s enormous wealth. It is difficult to see any immediate connection between the Arabian version and ours.
 
@@ -5757,7 +5770,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>In Dracott&apos;s story the human hero is a weaver also, as in the Santal. His last exploit has been borrowed from another Indian tale not connected with our group, &ldquo;Valiant Vicky the Weaver&rdquo; (Steel-Temple, p. 80; cf. Kingscote, No. IX).
 
-<div1 id=t49 n=49>
+<div1 id=t49 n=49 rend="toc-head(Juan the Fool.)">
 <div2 id=t49a>
 <head>Juan the Fool.</head>
 
@@ -5942,7 +5955,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>For other noodle stories of the Filipinos, see our <ref target=t9>No. 9</ref> and <xref>JAFL 20 : 104&ndash;106</xref>.
 
-<div1 id=t50 n=50>
+<div1 id=t50 n=50 rend="toc-head(Juan and his Painted Hat.)">
 <div2 id=t50a>
 <head>Juan and his Painted Hat.</head>
 
@@ -5975,7 +5988,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>This droll was without doubt imported from Europe, where it has a fairly wide distribution. It does not appear hitherto to have been found in the Orient. In the European forms we find it both as a separate tale, like our story, and also as a part of the &ldquo;Master Cheat&rdquo; cycle, which we have discussed in the <ref target=t20n>notes to No. 20</ref>. For a complete list of the known occurrences of the &ldquo;hat pays&rdquo; episode, see Bolte-Pol&iacute;vka, 2 : 10&ndash;15, incident D (on Grimm, No. 61). According to their classification, versions from Holland, Denmark, Sweden, Rumania, Serbo-Croatia, Poland, Russia, and Lithuania are known. See also K&ouml;hler-Bolte, 246, 251 (note&nbsp;1).
 
-<div1 id=t51 n=51>
+<div1 id=t51 n=51 rend="toc-head(Juan and Clotilde.)">
 <div2 id=t51a>
 <head>Juan and Clotilde.</head>
 
@@ -6019,7 +6032,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The Spanish story, says the editor of the &ldquo;Romancero General,&rdquo; is one of those founded directly on Oriental material which was transmitted by the Arabs. It is curious that so few of these tales, which have been preserved for generations as oral tradition, have made their way into print. The differences noticeable between our <hi>M&auml;rchen</hi> and the ballad may be due to a tradition somewhat divergent from that on which Alonso de Morales&apos;s poem is based.
 
-<div1 id=t52 n=52>
+<div1 id=t52 n=52 rend="toc-head(The Poor Man and his Three Sons.)">
 <div2 id=t52a>
 <head>The Poor Man and his Three Sons.</head>
 
@@ -6042,7 +6055,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p><pb n=361>The oldest form of our story known is that found in Nicholas de Troyes&apos; &ldquo;<foreign lang=fr>Grand Parangon des nouvelles Nouvelles,</foreign>&rdquo; No. X, dating from 1535. The three things here bequeathed by the father are a cock, a cat, and a sickle, as in our version. I think it probable that the tale was introduced into the Philippines through the medium of a French religious. The Catalan form differs from the French in mentioning a fourth &ldquo;heirloom,&rdquo; a <hi>raven</hi>, and was probably not the parent of our Tagalog version.
 
-<div1 id=t53 n=53>
+<div1 id=t53 n=53 rend="toc-head(The Denied Mother.)">
 <div2 id=t53a>
 <head>The Denied Mother.</head>
 
@@ -6072,7 +6085,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>It will be noticed that in the Indian tale the r&ocirc;les of the daughters are the reverse of what they are in our story.
 
-<div1 id=t54 n=54>
+<div1 id=t54 n=54 rend="toc-head(Tomarind and the Wicked Datu.)">
 <div2 id=t54a>
 <head>Tomarind and the Wicked Datu.</head>
 
@@ -6098,7 +6111,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <div0 id=p2 n="II">
 <head>Fables and Animal Stories.</head>
 
-<div1 id=t55 n=55>
+<div1 id=t55 n=55 rend="toc-head(The Turtle and the Monkey.)">
 <div2 id=t55a n=a>
 <head>The Turtle and the Monkey.</head>
 
@@ -6250,13 +6263,13 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>These incidents are distributed as follows:
 
 <list>
-<item>Version (<hi>a</hi>) 	ABC&sup1;DE
-<item>Version (<hi>b</hi>) 	ABCHJK
-<item>Version (<hi>c</hi>) 	(Opening different, but monkey greedy as in B) L
-<item>Version (<hi>d</hi>) 	A&sup1;B&sup2;C&sup1;D&sup1;EF&sup2;F&sup3;G
-<item>Version (<hi>e</hi>) 	ABC&sup1;DEF&sup1;
-<item>Version (<hi>f</hi>) 	A&sup1;BC (glass on trunk of tree) EF (monkey in his rage leaps after turtle and is drowned)
-<item>Version (<hi>g</hi>) 	AB&sup1;C&sup1; (sharp shells) DEF (monkeys dive in to catch fish when they see turtle appear with one in his mouth, and are drowned). Incidents K and a form of J are found in the story of &ldquo;The Turtle and the Lizard&rdquo; (Cole, 196)
+<item>Version (<hi>a</hi>) ABC&sup1;DE
+<item>Version (<hi>b</hi>) ABCHJK
+<item>Version (<hi>c</hi>) (Opening different, but monkey greedy as in B) L
+<item>Version (<hi>d</hi>) A&sup1;B&sup2;C&sup1;D&sup1;EF&sup2;F&sup3;G
+<item>Version (<hi>e</hi>) ABC&sup1;DEF&sup1;
+<item>Version (<hi>f</hi>) A&sup1;BC (glass on trunk of tree) EF (monkey in his rage leaps after turtle and is drowned)
+<item>Version (<hi>g</hi>) AB&sup1;C&sup1; (sharp shells) DEF (monkeys dive in to catch fish when they see turtle appear with one in his mouth, and are drowned). Incidents K and a form of J are found in the story of &ldquo;The Turtle and the Lizard&rdquo; (Cole, 196)
 </list>
 
 <p>The incidents common to most of these versions are some form of ABCDEF; and these, I think, we must consider as integral parts of the story. It will be seen that one of our versions (<hi>c</hi>) properly does not belong to this cycle at all, except under a very broad definition of the group. In all these tales the turtle is the injured creature: he is represented as patient and quiet, but clever. The monkey is depicted as selfish, mischievous, insolent, but stupid. In general, although the versions differ in details, they are all the same story, in that they tell how a monkey insults a turtle which has done him no harm, and how he finally pays dearly for his insult.
@@ -6267,7 +6280,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>The sources of the other incidents, which I have not found in the Buddhistic stories, I am unable to point out. However, many of them occur in the beast tales of other Oriental and Occidental countries: for instance, incident E is a commonplace in &ldquo;Brer Rabbit&rdquo; stories both in Africa and America, whence it has made its way into the tales of the American Indians (see, for example, Hone&yuml;, 82; Cole, 195, note; D&auml;hnhardt, 4 : 43&ndash;45); incident J and another droll episode found in an Ilocano story&mdash;&ldquo;king&apos;s bell&rdquo; (= beehive) <hi>motif&mdash;</hi>occur in a Milanau tale from Sarawak, Borneo, &ldquo;The Plandok, Deer, and <pb n=374>the Pig&rdquo; (Roth, 1 : 347), and in two other North Borneo stories given by Evans (p. 474), &ldquo;Plandok and Bear&rdquo; and &ldquo;Plandok and Tiger.&rdquo; In Malayan stories in general, the mouse-deer (<hi>plandok</hi>) is represented as the cleverest of animals, taking the r&ocirc;le of the rabbit in African tales, and of the jackal in Hindoo. In the Ilocano story referred to, both these incidents&mdash;&ldquo;king&apos;s belt&rdquo; and &ldquo;king&apos;s bell&rdquo;&mdash;are found, though the rest of the tale belongs to the &ldquo;Carancal&rdquo; group (<ref target=t3>No. 3</ref>; see also <ref target=t4b>No. 4 [<hi>b</hi>]</ref>), Incident L is found among the Negroes of South Africa (Hone&yuml;, 84, where the two animals are a monkey and a jackal). With incident G compare a Tibetan story (Ralston, No. XLII), where men take counsel as to how to kill a troop of monkeys that are destroying their corn. The plan is to cut down all the trees which stand about the place, one Tinduka-tree only being allowed to remain. A hedge of thorns is drawn about the open space, and the monkeys are to be killed inside the enclosure when they climb the tree in search of food. The monkeys escape, however; for another monkey goes and fires the village, thus distracting the attention of the men. Incident D, the Thyestean banquet, is widespread throughout European saga and <hi>M&auml;rchen</hi> literature: but even this incident Cosquin (I : xxxix) connects with India through an Annamite tale. With incident F&sup3; compare a story from British North Borneo (Evans, 429&ndash;430), in which the adjutant-bird (<hi>lungun</hi>) and the tortoise revenge themselves on monkeys. The monkeys pull out all of the bird&apos;s feathers while it is asleep. In two months the feathers grow in again, and the bird seeks vengeance. It gets the tortoise to help it by placing its body in a large hole in the bottom of a boat, so that the water will not leak in; the bird then sails the boat. The monkeys want a ride, and the bird lets forty-one of them in. When the boat is out in the ocean and begins to roll, the bird advises the monkeys to tie their tails together two and two and sit on the edge of the boat to steady it. Then the bird flies away, the tortoise drops out of the hole, and the boat sinks. All the monkeys are drowned but the odd one.
 
-<div1 id=t56 n=56>
+<div1 id=t56 n=56 rend="toc-head(The Monkey and the Crocodile.)">
 <head>The Monkey and the Crocodile.</head>
 
 <div2 id=t56a n=a>
@@ -6332,7 +6345,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>For further bibliography and discussion of this cycle, see D&auml;hnhardt, 4 : 1&ndash;26.
 
-<div1 id=t57 n=57>
+<div1 id=t57 n=57 rend="toc-head(The Monkeys and the Dragon-Flies.)">
 <div2 id=t57a>
 <head>The Monkeys and the Dragon-Flies.</head>
 
@@ -6347,11 +6360,11 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>The dragon-fly, being very quick, had flown away before the cruel monkey could hit her. She hurried to her brother the king, and told him what had happened. The king became very angry, and resolved to make war on the monkeys. So he despatched three of his soldiers to the king of the monkeys with this challenge:&mdash;
 
 
-	<q rend="block"><p><corr>&ldquo;</corr>The King of the Monkeys.
+    <q rend="block"><p><corr>&ldquo;</corr>The King of the Monkeys.
 
-	<p>&ldquo;Sir,&mdash;As one of your subjects has treated my sister cruelly, I am resolved to kill you and your subjects with all speed.
+    <p>&ldquo;Sir,&mdash;As one of your subjects has treated my sister cruelly, I am resolved to kill you and your subjects with all speed.
 
-	<p><corr>&ldquo;</corr>DRAGON.<corr>&rdquo;</corr></q>
+    <p><corr>&ldquo;</corr>DRAGON.<corr>&rdquo;</corr></q>
 
 
 <p>The monkey-king laughed at the challenge. He said to the messengers, &ldquo;Let your king and his soldiers come to the battle-field, and they will see how well my troops fight.&rdquo;
@@ -6381,7 +6394,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 </div1></body></text></q>
 
 <pb n=382>
-<div1 id=t58 n=58>
+<div1 id=t58 n=58 rend="toc-head(The Monkey, the Turtle, and the Crocodile.)">
 <div2 id=t58a>
 <head>The Monkey, the Turtle, and the Crocodile.</head>
 
@@ -6417,7 +6430,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 
 <p>I know of no exact parallels for this story, though the character of the monkey as depicted here is similar to that in <ref target=t55>No. 55</ref>. Compare with it the r&ocirc;le of the deceitful jackal in some of the South African stories (e.g., Metelerkamp, No. v; Hone&yuml;, 22, 24, 45, 105, etc.). This may be a sort of &ldquo;compensation story,&rdquo; manufactured long ago, however, in which the monkey gets even with his two traditional opponents, the crocodile and the turtle.
 
-<div1 id=t59 n=59>
+<div1 id=t59 n=59 rend="toc-head(The Iguana and the Turtle.)">
 <div2 id=t59a>
 <head>The Iguana and the Turtle.</head>
 
@@ -6459,7 +6472,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <p>The escape of snared animals and birds by shamming dead, and then making off when the bunter or fowler throws them aside as worthless, is commonly met with in Buddhistic fables.
 
 <pb n=385>
-<div1 id=t60 n=60>
+<div1 id=t60 n=60 rend="toc-head(The Trial among the Animals.)">
 <div2 id=t60a n=a>
 <head>The Trial among the Animals.</head>
 
@@ -6514,7 +6527,7 @@ The opponents in this group of stories, says Bolte, &ldquo;are either village co
 <div2 id=t60c n=c>
 <head>Why Mosquitoes Hum and Try to get into the Holes of our Ears.</head>
 
-<byline>Narrated by Fermin Torralba, a Visayan from Tagbilaran, Bohol.	He heard the story from an old man of his province.</byline>
+<byline>Narrated by Fermin Torralba, a Visayan from Tagbilaran, Bohol. He heard the story from an old man of his province.</byline>
 
 <p>A long time ago, when the world was much quieter and younger than it is now, people told and believed many strange stories about wonderful things which none of us have ever seen. In those very early times, in the province of Bohol, there lived a creature called Mangla;<note n=2 place=foot><hi>Mangla</hi>, big land-crabs.</note> he was king of the crabs.
 
@@ -6605,7 +6618,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <q rend="block"><p>A deer, frightened by the noise of an owl and a cricket, flees through the forest and into a stream, where it crushes a small fish almost to death. The fish complains to the court; and the deer, owl, cricket, and fish have a lawsuit. In the trial comes out this evidence: As the deer fled, he ran into some dry grass, and the seed fell into the eye of a wild chicken, and the pain caused by the seed made the chicken fly up against a nest of red ants. Alarmed, the red ants flew out to do battle, and in their haste bit a mongoose. The mongoose ran into a vine of wild fruit, and shook several pieces of it on the head of a hermit, who sat thinking under a tree. The hermit then asked the fruit why it fell, and the fruit blamed the mongoose; mongoose blamed ants; ants blamed chicken; chicken blamed seed; seed blamed deer; deer blamed owl. &ldquo;O Owl!&rdquo; asked the hermit, &ldquo;why didst thou frighten the deer?&rdquo; The owl replied, &ldquo;I called but as I am accustomed to call; the cricket, too, called.&rdquo; Having heard the evidence, the judge says, &ldquo;The cricket must replace the crushed parts of the fish and make it well,&rdquo; as he, the cricket, called and frightened the deer. Since the cricket is smaller and weaker than the owl or the deer, he had to bear the penalty.
 </q>
 
-<div1 id=t61 n=61>
+<div1 id=t61 n=61 rend="toc-head(The Greedy Crow.)">
 <div2 id=t61a>
 <head>The Greedy Crow.</head>
 
@@ -6629,26 +6642,26 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <q rend="block"><p>An unfaithful wife eloping with her lover arrives at the bank of a stream. There the lover persuades her to strip herself, so that he may carry her clothes across the stream, which he proceeds to do, but never returns. Indra, seeing her plight, changes himself into a jackal bearing a piece of meat, and goes down to the bank of the stream. In its waters fish are disporting; and the Indra-jackal, laying aside his meat, plunges in after one of them. A vulture hovering near seizes hold of the meat and bears it aloft; and the jackal, returning unsuccessful from his fishing, is taunted by the woman, who had observed all this, in the first <hi>g&amacr;tha</hi>:&mdash;
 
 <lg>
-	<l>&ldquo;O jackal so brown! most stupid are you;
-	<l>No skill have you got, not knowledge, nor wit;
-	<l>Your fish you have lost, your meat is all gone,
-	<l>And now you sit grieving all poor and forlorn.&rdquo;
+    <l>&ldquo;O jackal so brown! most stupid are you;
+    <l>No skill have you got, not knowledge, nor wit;
+    <l>Your fish you have lost, your meat is all gone,
+    <l>And now you sit grieving all poor and forlorn.&rdquo;
 </lg><!--
 
 --><p>To which the Indra-jackal repeats the second <hi>g&amacr;tha</hi>:&mdash;
 
 <lg>
-	<l>&ldquo;The faults of others are easy to see,
-	<l>But hard indeed our own are to behold;
-	<l>Thy husband thou hast lost, and lover eke,
-	<l>And now, I ween, thou grievest o&apos;er thy loss.&rdquo;
+    <l>&ldquo;The faults of others are easy to see,
+    <l>But hard indeed our own are to behold;
+    <l>Thy husband thou hast lost, and lover eke,
+    <l>And now, I ween, thou grievest o&apos;er thy loss.&rdquo;
 </lg></q>
 
 <p>The same story is found in the &ldquo;Pancatantra&rdquo; (V, viii; see Benfey, I : 468), whence it made its way into the &ldquo;T&umacr;t&imacr;-n&amacr;meh.&rdquo; It does not appear to be known in the Occident in this form (it is lacking in the &ldquo;Kalilah and Dimnah&rdquo;).
 
 <p><pb n=393>Although the details of our story differ from those of the Indian fable of &ldquo;The Jackal and the Faithless Wife,&rdquo; the general outlines of the two are near enough to justify us in supposing a rather close connection between them. I know of no European analogues nearly so close, and am inclined to consider &ldquo;The Greedy Crow&rdquo; a native Tagalog tale. From the testimony of the narrator, it appears that the fable is not a recent importation.
 
-<div1 id=t62 n=62>
+<div1 id=t62 n=62 rend="toc-head(The Humming-bird and the Carabao.)">
 <div2 id=t62a>
 <head>The Humming-bird and the Carabao.</head>
 
@@ -6690,7 +6703,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>I know of no other Philippine versions, but I dare say that many exist between Luzon and Mindanao.
 
-<div1 id=t63 n=63>
+<div1 id=t63 n=63 rend="toc-head(The Camanchile and the Passion.)">
 <div2 id=t63a>
 <head>The Camanchile and the Passion.</head>
 
@@ -6715,7 +6728,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>With this story compare the &ldquo;Pal&amacr;sa-j&amacr;taka,&rdquo; No. 370, which tells how a Judas-tree was destroyed by the parasitic growth of a banyan-shoot. The general idea is the same in both stories, though I hardly suspect that ours is descended from the Indian. The situation of a tree choked to death by a parasite is such a commonplace in everyday experience, that a moral story based on it might arise spontaneously almost anywhere.
 
-<div1 id=t64 n=64>
+<div1 id=t64 n=64 rend="toc-head(Auac and Lamiran.)">
 <div2 id=t64a>
 <head>Auac and Lamiran.</head>
 
@@ -6733,40 +6746,41 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <p>(1) The &ldquo;Jambu-kh&amacr;daka-j&amacr;taka,&rdquo; No. 294, in which we find a fox (jackal) and a crow flattering each other. The crow is eating <hi>jambus</hi>, when he is addressed thus by the jackal:&mdash;
 
 <lg>
-	<l>&ldquo;Who may this be, whose rich and pleasant notes
-	<l>Proclaim him best of all the singing birds,
-	<l>Warbling so sweetly on the <hi>jambu</hi>-branch,
-	<l>Where like a peacock he sits firm and grand!&rdquo;
+    <l>&ldquo;Who may this be, whose rich and pleasant notes
+    <l>Proclaim him best of all the singing birds,
+    <l>Warbling so sweetly on the <hi>jambu</hi>-branch,
+    <l>Where like a peacock he sits firm and grand!&rdquo;
 </lg>
 
 <p>The crow replies,&mdash;
 
 <lg>
-	<l>&ldquo;&thinsp;&apos;Tis a well-bred young gentleman who knows
-	<l>To speak of gentlemen in terms polite!
-	<l>Good sir,&mdash;whose shape and glossy coat reveal
-	<l>The tiger&apos;s offspring,&mdash;eat of these, I pray!&rdquo;
+    <l>&ldquo;&thinsp;&apos;Tis a well-bred young gentleman who knows
+    <l>To speak of gentlemen in terms polite!
+    <l>Good sir,&mdash;whose shape and glossy coat reveal
+    <l>The tiger&apos;s offspring,&mdash;eat of these, I pray!&rdquo;
 </lg>
 
 <p>Buddha, in the form of the genius of the <hi>jambu</hi>-tree, comments thus on their conversation:&mdash;
 
 <lg>
-	<l>&ldquo;Too long, forsooth, I&apos;ve borne the sight
-	<l>Of these poor chatterers of lies,&mdash;
-	<l>The refuse-eater and the offal-eater
-	<l>Belauding each other.&rdquo;
+    <l>&ldquo;Too long, forsooth, I&apos;ve borne the sight
+    <l>Of these poor chatterers of lies,&mdash;
+    <l>The refuse-eater and the offal-eater
+    <l>Belauding each other.&rdquo;
 </lg>
 
 <p>(2) The &ldquo;Anta-j&amacr;taka,&rdquo; No. 295, in which the r&ocirc;les are reversed, <pb n=397>the crow wheedling flesh from the jackal; here, too, the Buddha comments as above.
 
 <p>Our Pampangan story is of particular interest because of the moralizing of the heron at the end, making the form close to that of the two J&amacr;takas. Possibly our story goes back to some old Buddhistic fable like these. The squirrel (or &ldquo;wild-cat,&rdquo; as Bergafio&apos;s &ldquo;Vocabulario,&rdquo; dated 1732, defines <hi>lamiran</hi>) is not a very happy substitution for the original ground-animal, whatever that was; for the squirrel could reach a fish hanging to dry almost as easily as a bird could. Besides, squirrels are not carnivorous. Doubtless the older meaning of &ldquo;wild-cat&rdquo; should be adopted for <hi>lamiran</hi>.
 
-<p>
+
+
 <pb n=398>
 <div0 id=p3 n=III>
 <head>&ldquo;Just-So&rdquo; Stories.</head>
 
-<div1 id=t65 n=65>
+<div1 id=t65 n=65 rend="toc-head(Why the Ant is not so Venomous as the Snake.)">
 <div2 id=t65a>
 <head>Why the Ant is not so Venomous as the Snake.</head>
 
@@ -6799,7 +6813,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>The narrator testified that she heard the story from an old woman in her town of Lipa. So far as I know, this &ldquo;just-so&rdquo; fable of &ldquo;The Ant and the Snake and God&rdquo; has not been recorded outside of Lipa, Batangas; and I am inclined to believe that it represents old local tradition.
 
-<div1 id=t66 n=66>
+<div1 id=t66 n=66 rend="toc-head(Why Locusts Are Harmful.)">
 <div2 id=t66a>
 <head>Why Locusts Are Harmful.</head>
 
@@ -6842,7 +6856,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>In a Rumanian saga (D&auml;hnhardt, 3 : 250) a swarm of locusts is sent by God to punish an emperor who would not invite any priests or nuns to his wedding-banquet. When the guests were about to eat the feast prepared, the insects appeared and devoured everything. <hi>Since that time locusts have appeared whenever mankind has forgotten God</hi>.
 
-<div1 id=t67 n=67>
+<div1 id=t67 n=67 rend="toc-head(How Lansones Became Edible.)">
 <div2 id=t67a>
 <head>How Lansones Became Edible.</head>
 
@@ -6871,7 +6885,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <p>This is the way by which the <hi>lanzones</hi> were transformed from a poisonous, dangerous fruit to a sweet, delicate food. If any one discredits this story, all he needs to do to prove its truth is to open up any <hi>lanzon</hi> he finds, and he will see without fall the finger-prints of the Virgin.
 </q>
 
-<div1 id=t68 n=68>
+<div1 id=t68 n=68 rend="toc-head(Why Cocks Fight One Another.)">
 <div2 id=t68a>
 <head>Why Cocks Fight One Another.</head>
 
@@ -6890,7 +6904,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>I know of no variant of this story.
 
-<div1 id=t69 n=69>
+<div1 id=t69 n=69 rend="toc-head(Why Bats Fly at Night.)">
 <div2 id=t69a>
 <head>Why Bats Fly at Night.</head>
 
@@ -6905,7 +6919,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>This somewhat unsatisfactory <hi>pourquoi</hi> story appears to represent at bottom <corr>a</corr> very ancient tradition. I know of no parallels; but tales explaining why the bat flies at night are found among many peoples (e.g., D&auml;hnhardt, 3 : 94, 267, 270; Dayrell, Nos. VII, XII).
 
-<div1 id=t70 n=70>
+<div1 id=t70 n=70 rend="toc-head(Why the Sun Shines more Brightly than the Moon.)">
 <div2 id=t70a>
 <head>Why the Sun Shines more Brightly than the Moon.</head>
 
@@ -6940,20 +6954,20 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <p>This same struggle between the two great luminaries is reflected in two short cradle-songs that Pampangan mothers sing to their children to still them. These verses were contributed by Lorenzo Licup of Angeles:&mdash;
 
 <q rend="block"><lg lang=pag>
-	<l>Ing bulan ilaning aldo
-	<l>Mitatagalan la baho
-	<l>Pangaras da quetang cuarto
-	<l>Nipag sundang, mipagpusto.
+    <l>Ing bulan ilaning aldo
+    <l>Mitatagalan la baho
+    <l>Pangaras da quetang cuarto
+    <l>Nipag sundang, mipagpusto.
 </lg><!--
 
 --><p>&ldquo;The Moon and the Sun chased each other above. When they came into a room, they took their daggers from their sides and were ready to fight each other.&rdquo;
 
 <p><pb n=407>
 <lg lang=pag>
-	<l>Ing aldo ilaning bulan
-	<l>Mitatagalan la lalan
-	<l>Pangaras da quetang Pampang
-	<l>Mipagpustu, &apos;t, mitabacan.
+    <l>Ing aldo ilaning bulan
+    <l>Mitatagalan la lalan
+    <l>Pangaras da quetang Pampang
+    <l>Mipagpustu, &apos;t, mitabacan.
 </lg><!--
 
 --><p>&ldquo;The Sun and the Moon chased each other below. When they came to a bank, they first made preparation, and then began to fight each other with bolos.&rdquo;
@@ -6963,7 +6977,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>For Tinguian, Bukidnon, Mandaya, and Visayan myths of the sun, moon, and stars, see M. C. Cole, 65, 124, 145, 201.
 
-<div1 id=t71 n=71>
+<div1 id=t71 n=71 rend="toc-head(Why the Culing has a Tonsure.)">
 <div2 id=t71a n=a>
 <head>Why the Culing has a Tonsure.</head>
 
@@ -7041,7 +7055,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>With the explanation given in the second tale of this group of why the crow is black, compare a Pawnee story (JAFL 6 : 126), in which a crow, which is sent to the sun to get fire, has all his feathers singed.
 
-<div1 id=t72 n=72>
+<div1 id=t72 n=72 rend="toc-head(Why the Cow&apos;s Skin is Loose on the Neck.)">
 <div2 id=t72a n=a>
 <head>Why the Cow&apos;s Skin is Loose on the Neck.</head>
 
@@ -7068,7 +7082,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <byline>Narrated by Amanda Morente, a Tagalog from Pinamalayan, Mindoro. She heard the story from an old woman of her town.</byline>
 
-<p>Many years ago, when the people of the	world were still few in number and the animals took the place of servants, an old man bought a cow and a carabao from his neighbor. With these animals he travelled until he reached the top of a mountain. There they saw a cave, and the old man told his servants to enter and see if there was any danger inside. With slow and cautious steps the carabao and the cow went in, examining every corner. All at once the cow perceived something moving. In his fright he jumped back, and hid behind his companion; but the slow-going carabao did not see the figure, and suddenly he felt his hind leg seized in a strong grasp. The god of the cave had caught him. Then the god of the cave spoke. His voice was terrifying, but his words were kind. He told them how for many days he had been hungry, and he asked for meat. The cow, whose courage had by this time been somewhat restored, <pb n=412>gladly offered him some of her master&apos;s provisions, which she was carrying. In return for this kindness, the god gave each of the animals a dress: to the carabao he gave one of gold; and to the cow, one of bronze. He also invited the two to remain with him and be his servants.
+<p>Many years ago, when the people of the world were still few in number and the animals took the place of servants, an old man bought a cow and a carabao from his neighbor. With these animals he travelled until he reached the top of a mountain. There they saw a cave, and the old man told his servants to enter and see if there was any danger inside. With slow and cautious steps the carabao and the cow went in, examining every corner. All at once the cow perceived something moving. In his fright he jumped back, and hid behind his companion; but the slow-going carabao did not see the figure, and suddenly he felt his hind leg seized in a strong grasp. The god of the cave had caught him. Then the god of the cave spoke. His voice was terrifying, but his words were kind. He told them how for many days he had been hungry, and he asked for meat. The cow, whose courage had by this time been somewhat restored, <pb n=412>gladly offered him some of her master&apos;s provisions, which she was carrying. In return for this kindness, the god gave each of the animals a dress: to the carabao he gave one of gold; and to the cow, one of bronze. He also invited the two to remain with him and be his servants.
 
 <p>Some time after the two friends had been installed in their new home, the god of the cave sent them one day to gather fruits. The carabao and the cow were delighted at this prospect of a change, and they jumped with joy. They rushed out into the woods; and when they came to a pond, they took off their new clothes and plunged into the soft mud. While they were enjoying their bath, they saw their master coming. He was carrying a big stick. They knew very well that he would beat them, for they had been away the whole morning. In their haste to get their clothes back on, they made a mistake: the carabao got into the cow&apos;s dress, and the cow into the carabao&apos;s. After that they never exchanged their clothes, which finally became their outer skin. So to-day the carabao has a tight bronze-colored skin; and the cow, a loose golden-colored one.
 
@@ -7077,7 +7091,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>Like the preceding, this story appears to be a native Tagalog tale. I know of no other variants.
 
-<div1 id=t73 n=73>
+<div1 id=t73 n=73 rend="toc-head(Why the Monkey is Wise.)">
 <div2 id=t73a>
 <head>Why the Monkey is Wise.</head>
 
@@ -7137,7 +7151,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>The Filipinos have other explanatory myths which credit Lucifer with the creation of monkeys and snakes.
 
-<div1 id=t74 n=74>
+<div1 id=t74 n=74 rend="toc-head(The Lost Necklace.)">
 <div2 id=t74a n=a>
 <head>The Lost Necklace.</head>
 
@@ -7164,7 +7178,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>The sparrow-hawk answered, &ldquo;With much pleasure, my friend.&rdquo;
 
-<p>So the cock went to the fiesta wearing the borrowed bracelet. While he was dancing, however, he lost the jewel, and could find it nowhere. At last he went back to the sparrow-hawk, and said, &ldquo;I am very sorry, my friend, but I lost your bracelet  <pb n=416>while I was dancing, and I can find it nowhere. What do you wish me to give you in payment for it?&rdquo;
+<p>So the cock went to the fiesta wearing the borrowed bracelet. While he was dancing, however, he lost the jewel, and could find it nowhere. At last he went back to the sparrow-hawk, and said, &ldquo;I am very sorry, my friend, but I lost your bracelet <pb n=416>while I was dancing, and I can find it nowhere. What do you wish me to give you in payment for it?&rdquo;
 
 <p>The sparrow-hawk answered, &ldquo;Since that bracelet was an heirloom, I valued it very highly. You must go back to the place where you think you lost it, and there look for it until you find it. In the mean time I reserve the right to take from your flock a chicken whenever I please.&rdquo;
 
@@ -7175,7 +7189,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>Another Visayan variant of these two stories may be found in the &ldquo;Journal of American Folk-Lore&rdquo; (20 : 100), whence it has been reprinted by M. C. Cole (p. 212), &ldquo;The Hawk and the Hen.&rdquo; An African analogue may be found in Dayrell (No. xv, p. 62).
 
-<div1 id=t75 n=75>
+<div1 id=t75 n=75 rend="toc-head(The Story of our Fingers.)">
 <div2 id=t75a>
 <head>The Story of our Fingers.</head>
 
@@ -7208,23 +7222,23 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>I know of no other Filipino accounts of why the thumb is separated from the rest of the fingers. As an interesting curiosity, however, I might cite a Bicol children&apos;s jingle of five lines which characterize briefly the five fingers (the thumb is the last described) :&mdash;
 
-<lg lang=bik>
-	<l>Maya-mayang saday
-	<l>Magayon na singsignan
-	<l>Daculang mangmang
-	<l>Atrevido
-	<l>Hababang tao
+<lg><lg lang=bik>
+    <l>Maya-mayang saday
+    <l>Magayon na singsignan
+    <l>Daculang mangmang
+    <l>Atrevido
+    <l>Hababang tao
 </lg>
 
 <lg>
-	<l>&ldquo;Pretty little sparrow,
-	<l>Beautiful for a ring,
-	<l>Long but lazy fellow,
-	<l>Froward, insolent thing,
-	<l>Dumpy, dwarfish one.&rdquo;
-</lg>
+    <l>&ldquo;Pretty little sparrow,
+    <l>Beautiful for a ring,
+    <l>Long but lazy fellow,
+    <l>Froward, insolent thing,
+    <l>Dumpy, dwarfish one.&rdquo;
+</lg></lg>
 
-<div1 id=t76 n=76>
+<div1 id=t76 n=76 rend="toc-head(Why Snails Climb up Grass.)">
 <div2 id=t76a>
 <head>Why Snails Climb up Grass.</head>
 
@@ -7240,7 +7254,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>Now only Snail was left. He set out from his home, and wandered everywhere in search of his three companions, weeping <pb n=419>as he went. His food consisted mostly of mud. Whenever he could find a stalk of grass or the stem of a water-plant, Snail would climb up to look around and to see if any of his old friends were in sight. Even to-day the snails still weep; and whenever they see a stalk of grass projecting above the surface of the water, they climb up and look around, trying to discover their old friends.
 
-<div1 id=t77 n=77>
+<div1 id=t77 n=77 rend="toc-head(Why the Cuttle-Fish and Squids Produce a Black Liquid.)">
 <div2 id=t77a>
 <head>Why the Cuttle-Fish and Squids Produce a Black Liquid.</head>
 
@@ -7250,7 +7264,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>At once all the fishes became very quiet and respectful, for all were anxious to know what offices each was going to hold. Bathala appointed the sting-ray sergeant-at-arms: hence all sting-rays now have whip-like tails. The crocodile was appointed cadaver-carrier: so now all its children have a coffin-like skin on their backs. The crab was made a soldier: so to-day all its descendants have large and strong fore-legs. Bathala had not finished giving out his appointments when the two missing members came. They at once interrupted the meeting by asking what it was all about. Bathala became very angry at the interruption, so he scolded the sting-ray and the squid severely. The rebuke humiliated them so, that they agreed between themselves to go get mud and throw it on the official appointments. When they had gotten the mud, they came back and asked Bathala to give them something to do; but, <pb n=420>instead of appointing them to some work, he only scolded them for being late. Angered, they now threw mud on all the appointments that had already been drawn up. This insulting act of the cuttle-fish and the squid so enraged Bathala, that he stood up, and said in thundering tones, &ldquo;Now I shall punish you. From this time on, you and your descendants shall carry pouches of mud with you all the time. Besides, you shall be very slow in moving because of your heavy loads.&rdquo; The squid tried to make excuses, but Bathala became angrier than ever, and said, &ldquo;You are the naughtiest creature I ever had. As a punishment, you and your children shall remain the same size as you are now.&rdquo; And all of Bathala&apos;s words have turned out to be true.
 
-<div1 id=t78 n=78>
+<div1 id=t78 n=78 rend="toc-head(Why Cocks have Combs on their Heads.)">
 <div2 id=t78a>
 <head>Why Cocks have Combs on their Heads.</head>
 
@@ -7263,7 +7277,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>I know of no variants of stories Nos. 76&ndash;78.
 
-<div1 id=t79 n=79>
+<div1 id=t79 n=79 rend="toc-head(How the Crow became Black.)">
 <div2 id=t79a n=a>
 <head>How the Crow became Black.</head>
 
@@ -7325,7 +7339,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>(3) In the Visayan story Bathala makes the crow black by hurling an inkstand at it. This undignified detail may have been taken over from one of the popular metrical romances (&ldquo;Baldovinos&rdquo; or &ldquo;Doce Pares&rdquo;) in which Charlemagne loses his temper and throws an inkwell at Roland (see JAFL 29 : 208, 214, 215). Or it is just barely possible that this popular bit of machinery became attached to our story of the crow on the analogy of an Annamite tale (Landes, Contes annamites, p. 210 f., cited by D&auml;hnhardt, 3 : 65):&mdash;
 
-<q rend="block"><p>The raven and the <hi>coq de pagode</hi> were once men in the service of the saint (Confucius), who transformed them into birds as a punishment for disobedience. In order to undo the punishment and to make the saint laugh, the raven smeared itself all over with ink. The <hi>coq de pagode</hi> wished to do the same to itself, but had only enough black ink for half its body; for the rest it was obliged to use red.	Therefore the raven is black, and the <hi>coq de pagode</hi> is half red, half black.
+<q rend="block"><p>The raven and the <hi>coq de pagode</hi> were once men in the service of the saint (Confucius), who transformed them into birds as a punishment for disobedience. In order to undo the punishment and to make the saint laugh, the raven smeared itself all over with ink. The <hi>coq de pagode</hi> wished to do the same to itself, but had only enough black ink for half its body; for the rest it was obliged to use red. Therefore the raven is black, and the <hi>coq de pagode</hi> is half red, half black.
 </q>
 
 <p>(4) In the Zambal story the crow is punished, not by being made black, but by having a chain put on its legs; so that the crows to-day cannot walk, but must hop from place to place.
@@ -7337,7 +7351,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>For other folk explanations of the black color of the crow or raven, see D&auml;hnhardt, 3 : 59, 65&ndash;66, 71, 369. An entirely different account of how the crow&apos;s feathers, which were originally as white as starch, became black, is given in out <ref target=t71b>No. 71 (<hi>b</hi>)</ref>.
 
-<div1 id=t80 n=80>
+<div1 id=t80 n=80 rend="toc-head(Why the Ocean is Salty.)">
 <div2 id=t80a>
 <head>Why the Ocean is Salty.</head>
 
@@ -7358,7 +7372,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>The hero of the tale, Ang-ngalo, is the same as the Aolo (Angalo) mentioned in the <ref target=t3n>notes to No. 3</ref> (p. 27, footnote). Blumentritt (<hi>s.v</hi>.) writes, &ldquo;Angangalo is the name of the Adam of the Ilocanos. He was a giant who created the world at the order of the supreme God.&rdquo;
 
-<div1 id=t81 n=81>
+<div1 id=t81 n=81 rend="toc-head(Why the Sky is Curved.)">
 <div2 id=t81a n=a>
 <head>Why the Sky is Curved.</head>
 
@@ -7401,7 +7415,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <p>&ldquo;Long ago, when the sky was very low down, only a man&apos;s height from the ground, the moon and the Pwak fell in love and married. At that time there was a man whose wife was with child. The woman came down from the house, and as the heat of the sun struck her on the stomach, she became ill, for the sky was very low. Then the man was very angry because his wife was ill, and he made seven blow-pipe arrows. Early the next morning he took his blow-pipe with him and went to the place where the sun rises, and waited. Now at that time there were seven suns. When they rose, he shot six of them and left one remaining; then he went home. At the time the man shot the suns the Pwak was sitting on the house-top in the sky combing her hair. The comb fell from the sky to the ground, and the Pwak flew down to get it; but when she found it, she could no longer fly back to the sky; for, while she had been looking for the comb, the sky had risen to its present place; since, when the man had shot the six suns, the remaining sun, being frightened, ran away up into the air and took the sky with it. And so on the present day, whenever the moon comes out, the Pwak cries to it; but the moon says to it, &lsquo;What can I do, for you are down there below, while I am up here in the sky?&rsquo;&thinsp;&rdquo;
 </q>
 
-<div1 id=t82 n=82>
+<div1 id=t82 n=82 rend="toc-head(An Unequal Match; Or, Why the Carabao&apos;s Hoof is Split.)">
 <div2 id=t82a>
 <head>An Unequal Match; Or, Why the Carabao&apos;s Hoof is Split.</head>
 
@@ -7436,9 +7450,12 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 
 <p>A Borneo version (Evans, 475&ndash;476) not given in D&auml;hnhardt may be mentioned here in conclusion. In it the <hi>plandok</hi> (mouse-deer), which has deceived and brought about the deaths of all the larger animals, agrees to tun a race with the <hi>omong</hi> (hermit-crab). The crab stations three companions at corners of the square race-course, and wins. The mouse-deer runs itself to death.
 
-</body>
-<back>
+
+
+
 <pb n=431>
+</body>
+<back id=backmatter>
 <div1 id=appendix type=Appendix>
 <head>Appendix.</head>
 
@@ -7446,7 +7463,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 <p>[Additional notes, chiefly in the nature of American Indian, Negro, and Sinhalese (Ceylon) variants.]
 
 
-<div1 id=bibliography2 type=bibliography>
+<div1 id=bibliography2 type=Bibliography>
 <head>Supplementary Bibliography.</head>
 
 
@@ -7832,9 +7849,7 @@ Bacuit <hi>vs</hi>. frog; frog <hi>vs</hi>. turtle; turtle <hi>vs</hi>. firefly.
 </div1>
 
 
-
 <divGen type=Colophon>
-
 
 
 </back>

@@ -4,12 +4,13 @@
 <fileDesc>
 <titleStmt>
 <title>Twee Edellieden van Verona</title>
-<author>William Shakespeare</author>
-<respStmt><resp>Transcriptie</resp><name>Jeroen Hellingman</name></respStmt>
+<author sortkey="Shakespeare, William">William Shakespeare</author>
+<respStmt><resp>Transcription</resp> <name>Jeroen Hellingman</name></respStmt>
 </titleStmt>
 <publicationStmt>
 <publisher>Project Gutenberg</publisher>
 <pubPlace>Urbana, Illinois, USA.</pubPlace>
+<idno type=epub-id>urn:uuid:ad0b608f-8824-42d0-bc23-af9d01c4883d</idno>
 <idno type=PGclearance>20060329102432shakespear</idno>
 <idno type=PGDPProjectId>projectID4682dd0768846</idno>
 <idno type=PGnum>26594</idno>
@@ -17,7 +18,7 @@
 <availability lang=nl>
 <p>&availability.nl;
 
-<p>Dit eBoek is geproduceerd door Jeroen Hellingman en het on-line gedistribueerd correctie team op <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
+<p>Dit eBoek is geproduceerd door Jeroen Hellingman en het on-line gedistribueerd correctieteam op <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
 
 <p>Het Engelse origineel van dit eBoek is <hi lang=en>Two Gentlemen of Verona</hi>, eBoek nummer <xref url="pg:1108">1108</xref>; <xref url="pg:1509">1509</xref>; <xref url="pg:1773">1773</xref>; <xref url="pg:2236">2236</xref>; <xref url="pg:23043">23043</xref> (Deze laatste in HTML). Een Franse vertaling is beschikbaar als eBoek <xref url="pg:16710">16710</xref>.
 
@@ -30,7 +31,7 @@
 <sourceDesc>
 <bibl>
 <author>William Shakespeare</author>
-<title>De Klucht der Vergissingen</title>
+<title>Twee Edellieden van Verona</title>
 <date>1898</date>
 </bibl>
 </sourceDesc>
@@ -38,27 +39,33 @@
 <encodingDesc lang=nl>
 <p>Dit bestand is in een verouderde spelling. Er is geen poging gedaan de tekst te moderniseren. Afgebroken woorden aan het einde van de regel zijn stilzwijgend hersteld. Kennelijke zetfouten in het origineel zijn gecorrigeerd. Dergelijke correcties zijn gemarkeerd met het corr-element.
 
-<p>Hoewel in het origineel laag liggende aanhalingstekens openen gebruikt, zijn deze in dit bestand gecodeerd met &ldquo;. Geneste dubbele aanhalingstekens zijn stilzwijgend veranderd in enkele aanhalingstekens.
-
 </encodingDesc>
 <profileDesc>
-	<langUsage lang=nl>
-		<language id=nl-1900>Nederlands (Spelling De Vries-Te Winkel)</language>
-		<language id=nl>Nederlands</language>
-		<language id=en>Engels</language>
-		<language id=de>Duits</language>
-		<language id=fr>Frans</language>
-		<language id=la>Latijn</language>
-	</langUsage>
+    <langUsage lang=nl>
+        <language id=nl-1900>Nederlands (Spelling De Vries-Te Winkel)</language>
+        <language id=nl>Nederlands</language>
+        <language id=en>Engels</language>
+        <language id=la>Latijn</language>
+    </langUsage>
 </profileDesc>
 <revisionDesc>
-	<list>
-		<item>2008-07-30 begonnen.
-	</list>
+    <list>
+        <item>2008-07-30 begonnen.
+    </list>
 </revisionDesc>
 </teiHeader>
 <text>
-<pb n=159>
+<front id=frontmatter>
+<div1 id=cover type=Cover>
+
+
+<p><figure id=cover-image rend="image(images/new-cover.jpg)">
+<figDesc>Nieuw ontworpen voorkant.</figDesc>
+</figure>
+
+
+<pb n=159 id=pb159>
+</front>
 <body>
 <div0 id=ev type=Play>
 <head>Twee Edellieden van Verona.</head>
@@ -70,10 +77,10 @@
 
 <castItem><hi rend=sc><role id=her>De Hertog</role></hi> van Milaan, Silvia&apos;s vader.</castItem>
 
-<castGroup>
-<head><corr sic=twee>Twee</corr> edellieden van Verona.</head>
-<castItem><hi rend=sc><role id=val>Valentijn</role></hi>,</castItem>
-<castItem><hi rend=sc><role id=pro>Proteus</role></hi><corr sic=",">.</corr></castItem>
+<castGroup rend="display(castGroupTable)">
+    <head>twee edellieden van Verona.</head>
+    <castItem><hi rend=sc><role id=val>Valentijn</role></hi>,</castItem>
+    <castItem><hi rend=sc><role id=pro>Proteus</role></hi>,</castItem>
 </castGroup>
 
 <castItem><hi rend=sc><role id=ant>Antonio</role></hi>, vader van Proteus.</castItem>
@@ -93,15 +100,16 @@
 
 
 <set>
-<p>Het tooneel is nu in Verona, dan in Milaan, en ook op de grenzen van Mantua. </set>
+<p>Het tooneel is nu in Verona, dan in Milaan, en ook op de grenzen van Mantua.
+</set>
 
 
 
-<div1 id=ev.I type=Act>
+<div1 n=I id=ev.I type=Act>
 <head>Eerste Bedrijf.</head>
 
 
-<div2 id=ev.I.1 type=Scene>
+<div2 n=1 id=ev.I.1 type=Scene>
 <head>Eerste Tooneel.</head>
 
 
@@ -421,7 +429,7 @@
 <speaker>Proteus.</speaker> <p>Wat! heeft zij niets gezegd?
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>Neen, niet zooveel als: &ldquo;Ziedaar, dat is voor uw moeite&rdquo;. Ik dank u, <ab id=ev.i.1.152>de grootte uwer mildheid</ab> erken ik aan deze grooten, en uit erkentelijkheid laat ik u in het vervolg uwe brieven zelf bestellen. En nu, heer, ga ik uwe groeten aan mijn meester overbrengen.
+<speaker>Flink.</speaker> <p>Neen, niet zooveel als: &bdquo;Ziedaar, dat is voor uw moeite&rdquo;. Ik dank u, <ab id=ev.i.1.152>de grootte uwer mildheid</ab> erken ik aan deze grooten, en uit erkentelijkheid laat ik u in het vervolg uwe brieven zelf bestellen. En nu, heer, ga ik uwe groeten aan mijn meester overbrengen.
 </sp>
 
 <sp who=pro>
@@ -442,7 +450,7 @@
 
 
 
-<div2 id=ev.I.2 type=Scene>
+<div2 n=2 id=ev.I.2 type=Scene>
 <head>Tweede Tooneel.</head>
 
 
@@ -562,11 +570,11 @@
 </sp>
 
 <sp who=jul>
-<speaker>Julia.</speaker> <l>&ldquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?
+<speaker>Julia.</speaker> <l>&bdquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?
 </sp>
 
 <sp who=luc>
-<speaker>Lucetta.</speaker>                              <l rend="hemistich(&ldquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?)">Dat vindt gij in den brief.
+<speaker>Lucetta.</speaker>                              <l rend="hemistich(&bdquo;Aan Julia&rdquo;.&mdash;Spreek, van wien?)">Dat vindt gij in den brief.
 </sp>
 
 <sp who=jul>
@@ -609,8 +617,8 @@
 <l>Waarom ik keef, te vragen, gaat niet aan.
 <l>Hoe dwaas! zij weet, dat ik een meisje ben,
 <l>En dwingt den brief mij niet ter lezing op!
-<l id=ev.I.2.55>Zij weet toch, meisjes zeggen zedig &ldquo;neen&rdquo;,
-<l>Maar wenschen, dat de vrager &ldquo;ja&rdquo; versta.
+<l id=ev.I.2.55>Zij weet toch, meisjes zeggen zedig &bdquo;neen&rdquo;,
+<l>Maar wenschen, dat de vrager &bdquo;ja&rdquo; versta.
 <l>Foei, foei! hoe grillig is die dwaze liefde!
 <l>Die als een kregel kind de voedster krabt,
 <l>En dan vol deemoed fluks de roede kust.
@@ -686,7 +694,7 @@
 
 <sp who=jul>
 <speaker>Julia.</speaker> <l>Een niets zet ik geen waarde bij; ik dank;
-<l id=ev.I.2.83>Dus zing &apos;t maar op de wijs van &ldquo;Luchte liefde&rdquo;.
+<l id=ev.I.2.83>Dus zing &apos;t maar op de wijs van &bdquo;Luchte liefde&rdquo;.
 </sp>
 
 <sp who=luc>
@@ -777,11 +785,11 @@
 <l>Den zoeten honig rooft gij, booze wespen,
 <l>En steekt de bijen, die hem leev&apos;ren, dood!
 <l>&apos;k Wil boete doen en ieder stukje kussen.
-<l>Wat staat daar? &ldquo;Zoete Julia?&rdquo;&mdash;Bitt&apos;re Julia!
+<l>Wat staat daar? &bdquo;Zoete Julia?&rdquo;&mdash;Bitt&apos;re Julia!
 <l>Ik werp tot straf voor uw ondankbaarheid
 <l>Uw naam hier op den harden grond en treed
 <l>Uw wreeden trots verachtend in het stof.
-<l>Hier staat: &ldquo;de door de Min gewonde Proteus&rdquo;;
+<l>Hier staat: &bdquo;de door de Min gewonde Proteus&rdquo;;
 <l id=ev.I.2.114>Gij arme, kranke naam! mijn boezem zij
 <l>Uw bed, totdat uw wonde gansch geheeld is;
 <l>Ik drenk, doordring haar met een balsemkus.
@@ -797,7 +805,7 @@
 <l>Naar een afgrijslijk steile, ruwe klip,
 <l>En stort&apos; hem in de gramme baren neer!      <ab type=lineNum>122</ab>
 <l>In &eacute;&eacute;nen regel, zie, zijn naam tweemaal;
-<l>&ldquo;De mijm&apos;raar Proteus, diep onzaal&apos;ge Proteus,
+<l>&bdquo;De mijm&apos;raar Proteus, diep onzaal&apos;ge Proteus,
 <l>Aan de engel Julia&rdquo;;&mdash;dit scheur ik er af;
 <l>Doch neen, dat niet, daar hij mijn naam zoo aardig
 <l>Met zijne weeklachtnamen heeft gepaard;
@@ -846,7 +854,7 @@
 
 
 
-<div2 id=ev.I.3 type=Scene>
+<div2 n=3 id=ev.I.3 type=Scene>
 <head>Derde Tooneel.</head>
 
 
@@ -1027,18 +1035,18 @@
 
 <sp who=pro>
 <speaker>Proteus.</speaker> <l>Helaas, zoo is &apos;t; al wil mijn hart ook breken,
-<l>Al klopt het &ldquo;neen&rdquo;, ik moet toch zeggen &ldquo;ja&rdquo;.
+<l>Al klopt het &bdquo;neen&rdquo;, ik moet toch zeggen &bdquo;ja&rdquo;.
 </sp>
 
 <stage type=exit>(<hi>Beiden af.</hi>)</stage>
 
 
 
-<div1 id=ev.II type=Act>
+<div1 n=II id=ev.II type=Act>
 <head>Tweede Bedrijf.</head>
 
 
-<div2 id=ev.II.1>
+<div2 n=1 id=ev.II.1>
 <head>Eerste Tooneel.</head>
 
 
@@ -1461,7 +1469,7 @@
 
 
 
-<div2 id=ev.II.2>
+<div2 n=2 id=ev.II.2>
 <head>Tweede Tooneel.</head>
 
 
@@ -1533,7 +1541,7 @@
 
 
 
-<div2 id=ev.II.3>
+<div2 n=3 id=ev.II.3>
 <head>Derde Tooneel.</head>
 
 
@@ -1542,7 +1550,7 @@
 <stage type=entrance><hi rend=sc>Lans</hi> <hi>komt op met een hond aan een touw.</hi></stage>
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>Neen, ik heb zeker in een uur niet gedaan met schreien; al de Lansen hebben dit zelfde gebrek. Ik heb mijn proportie ontvangen als <ab id=ev.ii.3.4>de verloopen zoon</ab>, en ga met signore Proteus naar het keizershof. Ik geloof, dat Krab, mijn hond, wel de hardvochtigste hond is van alle honden op Gods aardbodem: mijn moeder aan het schreien, mijn vader aan het jammeren, mijn zuster aan het grienen, onze meid aan &apos;t janken, onze kat aan &apos;t handenwringen, en heel ons huis in de grootste ontsteltenis,&mdash;maar dat wreedaardige beest,&mdash;het vergoot zelfs geen enkelen traan! Hij is een steen, een echte keisteen, en er zit in hem niet meer medelijden dan in een hond; een jood zou geweend hebben, als hij ons afscheid gezien had; ja, mijn grootje, die geen oogen heeft, ziet ge, schreide haar oogen blind bij mijn vertrek. Wacht, ik zal u eens vertoonen hoe het toeging. Deze schoen is mijn vader;&mdash;neen, neen, die linkerschoen is mijn moeder;&mdash;neen, dat gaat toch ook niet, evenmin;&mdash;ja toch, zoo is het, die is het meest versleten. Die schoen, met dat gaatje, is mijn moeder, en deze hier is mijn vader. Voor den duivel, ja, zoo is het. Nu, vriend, die stok is mijn zuster, want, ziet ge, ze is zoo wit als een lelie en zoo dun als een wilgerijs; die hoed is Naan, onze meid; ik ben de hond;&mdash;neen, de hond is zichzelf en ik ben de hond;&mdash;och, de hond, dat ben ik, en ik ben mijzelf: ja, ja, zoo is &apos;t. Nu ga ik naar mijn vader; &ldquo;Vader, uw zegen&rdquo;; nu kan die schoen geen woord spreken van wege het schreien; nu ga ik mijn vader kussen; goed, hij schreit al door. Nu ga ik naar mijn moeder;&mdash;o, kon zij nu maar spreken als een radelooze vrouw!&mdash;goed, ik kus haar; ha, daar is het, mijn moeders adem op en top! Nu ga ik naar mijn zuster; let eens op, hoe zij bulkt! Nu, de hond vergiet al dien tijd door geen enkelen traan, en spreekt geen woord; maar ziet eens, hoe ik het stof vastleg met mijn tranen.
+<speaker>Lans.</speaker> <p>Neen, ik heb zeker in een uur niet gedaan met schreien; al de Lansen hebben dit zelfde gebrek. Ik heb mijn proportie ontvangen als <ab id=ev.ii.3.4>de verloopen zoon</ab>, en ga met signore Proteus naar het keizershof. Ik geloof, dat Krab, mijn hond, wel de hardvochtigste hond is van alle honden op Gods aardbodem: mijn moeder aan het schreien, mijn vader aan het jammeren, mijn zuster aan het grienen, onze meid aan &apos;t janken, onze kat aan &apos;t handenwringen, en heel ons huis in de grootste ontsteltenis,&mdash;maar dat wreedaardige beest,&mdash;het vergoot zelfs geen enkelen traan! Hij is een steen, een echte keisteen, en er zit in hem niet meer medelijden dan in een hond; een jood zou geweend hebben, als hij ons afscheid gezien had; ja, mijn grootje, die geen oogen heeft, ziet ge, schreide haar oogen blind bij mijn vertrek. Wacht, ik zal u eens vertoonen hoe het toeging. Deze schoen is mijn vader;&mdash;neen, neen, die linkerschoen is mijn moeder;&mdash;neen, dat gaat toch ook niet, evenmin;&mdash;ja toch, zoo is het, die is het meest versleten. Die schoen, met dat gaatje, is mijn moeder, en deze hier is mijn vader. Voor den duivel, ja, zoo is het. Nu, vriend, die stok is mijn zuster, want, ziet ge, ze is zoo wit als een lelie en zoo dun als een wilgerijs; die hoed is Naan, onze meid; ik ben de hond;&mdash;neen, de hond is zichzelf en ik ben de hond;&mdash;och, de hond, dat ben ik, en ik ben mijzelf: ja, ja, zoo is &apos;t. Nu ga ik naar mijn vader; &bdquo;Vader, uw zegen&rdquo;; nu kan die schoen geen woord spreken van wege het schreien; nu ga ik mijn vader kussen; goed, hij schreit al door. Nu ga ik naar mijn moeder;&mdash;o, kon zij nu maar spreken als een radelooze vrouw!&mdash;goed, ik kus haar; ha, daar is het, mijn moeders adem op en top! Nu ga ik naar mijn zuster; let eens op, hoe zij bulkt! Nu, de hond vergiet al dien tijd door geen enkelen traan, en spreekt geen woord; maar ziet eens, hoe ik het stof vastleg met mijn tranen.
 </sp>
 
 <stage type=entrance>(<hi rend=sc>Panthino</hi> <hi>komt op.</hi>)</stage>
@@ -1607,7 +1615,7 @@
 
 
 
-<div2 id=ev.II.4>
+<div2 n=4 id=ev.II.4>
 <head>Vierde Tooneel.</head>
 
 
@@ -1985,7 +1993,7 @@
 <l>Maar ook, geen and&apos;re vreugd op aard zijn dienst!
 <l>Thans, geen gesprek meer, dan van liefde alleen;
 <l>Mijn ochtend-, middag-, avondmaal, mijn slaap,
-<l>Ja, alles is mij &apos;t enkel woordje &ldquo;Liefde&rdquo;.
+<l>Ja, alles is mij &apos;t enkel woordje &bdquo;Liefde&rdquo;.
 </sp>
 
 <sp who=pro>
@@ -2134,7 +2142,7 @@
 
 
 
-<div2 id=ev.II.5>
+<div2 n=5 id=ev.II.5>
 <head>Vijfde Tooneel.</head>
 
 
@@ -2147,7 +2155,7 @@
 <speaker>Flink.</speaker> <p id=ev.II.5.1>Lans! op mijn eerlijkheid, welkom in Milaan!
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>Doe geen valschen eed, beste jongen, want ik ben niet welkom. Ik reken dit altijd: een mensch is niet eer verloren, dan als hij gehangen wordt, en ook niet eer ergens welkom, dan als hij een zeker gelag heeft betaald, en de waardin zegt: &ldquo;welkom!&rdquo;
+<speaker>Lans.</speaker> <p>Doe geen valschen eed, beste jongen, want ik ben niet welkom. Ik reken dit altijd: een mensch is niet eer verloren, dan als hij gehangen wordt, en ook niet eer ergens welkom, dan als hij een zeker gelag heeft betaald, en de waardin zegt: &bdquo;welkom!&rdquo;
 </sp>
 
 <sp who=fli>
@@ -2219,7 +2227,7 @@
 </sp>
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>Vraag het mijn hond: als hij &ldquo;ja&rdquo; zegt, dan gebeurt het; als hij kwispelstaart en niets zegt, dan gebeurt het.
+<speaker>Lans.</speaker> <p>Vraag het mijn hond: als hij &bdquo;ja&rdquo; zegt, dan gebeurt het; als hij kwispelstaart en niets zegt, dan gebeurt het.
 </sp>
 
 <sp who=fli>
@@ -2277,7 +2285,7 @@
 <stage type=exit>(<hi>Beiden af.</hi>)</stage>
 
 
-<div2 id=ev.II.6>
+<div2 n=6 id=ev.II.6>
 <head>Zesde Tooneel.</head>
 
 
@@ -2336,7 +2344,7 @@
 
 
 
-<div2 id=ev.II.7>
+<div2 n=7 id=ev.II.7>
 <head>Zevende Tooneel.</head>
 
 
@@ -2431,7 +2439,7 @@
 </sp>
 
 <sp who=jul>
-<speaker>Julia.</speaker> <l>Dat klinkt zoo fraai, als:&mdash;&ldquo;Zeg mij, edel heer,
+<speaker>Julia.</speaker> <l>Dat klinkt zoo fraai, als:&mdash;&bdquo;Zeg mij, edel heer,
 <l>Hoe wijd wilt gij uw hoepelrok wel dragen?&rdquo;
 <l>Kies gij de snit, die u het best bevalt.
 </sp>
@@ -2522,11 +2530,11 @@
 
 
 
-<div1 id=ev.III type=Act>
+<div1 n=III id=ev.III type=Act>
 <head>Derde Bedrijf.</head>
 
 
-<div2 id=ev.III.1>
+<div2 n=1 id=ev.III.1>
 <head>Eerste Tooneel.</head>
 
 
@@ -2693,7 +2701,7 @@
 <l>En kijft zij, daarom zendt zij u niet heen,
 <l>Een vrouw wordt dol, houdt gij haar neen voor neen.
 <l>Laat u de deur niet wijzen, wat ze ook zegg&apos;,
-<l>Want zegt zij: &ldquo;ga!&rdquo; dan meent zij niet: &ldquo;ga weg!&rdquo;
+<l>Want zegt zij: &bdquo;ga!&rdquo; dan meent zij niet: &bdquo;ga weg!&rdquo;
 <l>Vlei, prijs haar, roem haar gaven; ziet zij zwart,
 <l>Verklaar toch, dat haar blankheid eng&apos;len tart.
 <l>&apos;k Zeg, heeft een man een tong, hij is geen man,
@@ -2781,10 +2789,10 @@
 <sp who=her>
 <speaker>Hertog.</speaker> <l>Hoe hang ik zulk een mantel mij wel om&apos;?
 <l>Ik bid u, laat mij dien van u beproeven.&mdash;
-<l>Wat is dat voor een brief? Aan wie?&mdash;&ldquo;Aan Silvia&rdquo;!
+<l>Wat is dat voor een brief? Aan wie?&mdash;&bdquo;Aan Silvia&rdquo;!
 <l>En hier een werktuig, juist als ik behoef.
 <l>Ik ben zoo vrij het zegel te verbreken.
-<l><stage rend=inline>(<hi>Hij leest.</hi>)</stage> &ldquo;Bij Silvia toeven nacht op nacht mijn brieven;
+<l><stage rend=inline>(<hi>Hij leest.</hi>)</stage> &bdquo;Bij Silvia toeven nacht op nacht mijn brieven;
   <l rend="indent(2)">Ik doe ze vliegen op mijn wenk als slaven;
 <l>O, kon hun meester zoo de ruimte klieven,
   <l rend="indent(2)">Hij zou zijn ziele, waar zij slapen, laven!
@@ -2795,7 +2803,7 @@
 <l>Ik vloek mijzelf, dat ik dit nooit bedacht,
 <l>Hun &apos;t heil doe smaken, waar ikzelf naar smacht.&rdquo;&mdash;
 <l>Wat volgt nog?          <ab type=lineNum>150</ab>
-<l>&ldquo;Doch ik bevrijd u, Silvia, deze nacht.&rdquo;
+<l>&bdquo;Doch ik bevrijd u, Silvia, deze nacht.&rdquo;
 <l>Zoo staat er; en die ladder moest u dienen.
 <l id=ev.III.1.153>Gij Pha&euml;ton, gij and&apos;re Merops-zoon,
 <l>Verstout ge u &apos;s hemels zonnespan te mennen
@@ -3013,7 +3021,7 @@
 <stage type=exit>(<hi rend=sc>Valentijn</hi> <hi>en</hi> <hi rend=sc>Proteus</hi> <hi>af.</hi>)</stage>
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>Ik ben slechts een domme kerel, ziet gij, maar ik heb toch het verstand om te merken, dat mijn meester een soort van schurk is; maar dat doet er niet toe, als hij maar geen <ab id=ev.iii.1.263>dubbele schurk</ab> is. Die man moet nog geboren worden, die weet, dat ik verliefd ben; en toch, ik ben verliefd; maar geen span paarden zal mij dit uit mijn gemoed rukken, en ook niet, op wie ik verliefd ben; en toch, het is een vrouw; maar wat voor een vrouw, wil ik mijzelf niet eens vertellen; en toch, het is een melkmeisje; en toch, het is geen meisje, want ze heeft al peten aan het werk gezet; en toch is het een meisje, want zij is het melkmeisje van haar meester en zij dient om loon. Zij verstaat meer kunststukjes dan een hond, die te water gaat, en dat is veel voor een eenvoudig christenmensch. Hier is de invidiaris van haar eigenschappen. <stage rend=inline>(<hi>Hij haalt een papier voor den dag.</hi>)</stage> &ldquo;<hi rend=ex>Imprimis</hi>, Zij kan halen en dragen.&rdquo; Wel, een paard kan niet meer doen; neen, een paard gaat niet halen, het draagt alleen; daarom is zij beter dan een knol. &ldquo;<hi rend=ex>Item</hi>, Zij kan melken,&rdquo; ziet eens, een beminnelijke deugd in een meisje, dat schoone handen heeft.
+<speaker>Lans.</speaker> <p>Ik ben slechts een domme kerel, ziet gij, maar ik heb toch het verstand om te merken, dat mijn meester een soort van schurk is; maar dat doet er niet toe, als hij maar geen <ab id=ev.iii.1.263>dubbele schurk</ab> is. Die man moet nog geboren worden, die weet, dat ik verliefd ben; en toch, ik ben verliefd; maar geen span paarden zal mij dit uit mijn gemoed rukken, en ook niet, op wie ik verliefd ben; en toch, het is een vrouw; maar wat voor een vrouw, wil ik mijzelf niet eens vertellen; en toch, het is een melkmeisje; en toch, het is geen meisje, want ze heeft al peten aan het werk gezet; en toch is het een meisje, want zij is het melkmeisje van haar meester en zij dient om loon. Zij verstaat meer kunststukjes dan een hond, die te water gaat, en dat is veel voor een eenvoudig christenmensch. Hier is de invidiaris van haar eigenschappen. <stage rend=inline>(<hi>Hij haalt een papier voor den dag.</hi>)</stage> &bdquo;<hi rend=ex>Imprimis</hi>, Zij kan halen en dragen.&rdquo; Wel, een paard kan niet meer doen; neen, een paard gaat niet halen, het draagt alleen; daarom is zij beter dan een knol. &bdquo;<hi rend=ex>Item</hi>, Zij kan melken,&rdquo; ziet eens, een beminnelijke deugd in een meisje, dat schoone handen heeft.
 </sp>
 
 <stage type=entrance>(<hi rend=sc>Flink</hi> <hi>komt op.</hi>)</stage>
@@ -3075,7 +3083,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Imprimis</hi>: Zij kan melken.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Imprimis</hi>: Zij kan melken.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3083,15 +3091,15 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij brouwt goed bier.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij brouwt goed bier.&rdquo;
 </sp>
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>En daar vandaan het zeggen: &ldquo;Gods zegen hier; gij brouwt goed bier.&rdquo;
+<speaker>Lans.</speaker> <p>En daar vandaan het zeggen: &bdquo;Gods zegen hier; gij brouwt goed bier.&rdquo;
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p id=ev.III.1.307>&ldquo;<hi rend=ex>Item</hi>: Zij kan naaien.&rdquo;
+<speaker>Flink.</speaker> <p id=ev.III.1.307>&bdquo;<hi rend=ex>Item</hi>: Zij kan naaien.&rdquo;
 </sp>
 
 <pb n=177><sp who=lan>
@@ -3099,7 +3107,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi><corr sic=".">:</corr> Zij kan breien.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi><corr sic=".">:</corr> Zij kan breien.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3108,7 +3116,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij kan wasschen en boenen.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij kan wasschen en boenen.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3116,7 +3124,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij kan spinnen.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij kan spinnen.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3124,7 +3132,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft vele naamlooze deugden.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij heeft vele naamlooze deugden.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3132,7 +3140,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;Hier volgen haar ondeugden.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;Hier volgen haar ondeugden.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3140,7 +3148,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is niet wel nuchter te kussen, van wege haar adem.&rdquo;      <ab type=lineNum>327</ab>
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is niet wel nuchter te kussen, van wege haar adem.&rdquo;      <ab type=lineNum>327</ab>
 </sp>
 
 <sp who=lan>
@@ -3148,7 +3156,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is een lekkerbek.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is een lekkerbek.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3156,7 +3164,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij praat in haar slaap.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij praat in haar slaap.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3164,7 +3172,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is langzaam in het spreken.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is langzaam in het spreken.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3172,7 +3180,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is ijdel.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is ijdel.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3180,7 +3188,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft geen tanden!&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij heeft geen tanden!&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3188,7 +3196,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is bits.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is bits.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3196,7 +3204,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij vindt een slokje overheerlijk.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij vindt een slokje overheerlijk.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3204,7 +3212,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij is al te mild.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij is al te mild.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3212,7 +3220,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand, en meer gebreken dan haren, en meer geld dan gebreken.&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand, en meer gebreken dan haren, en meer geld dan gebreken.&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3220,7 +3228,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand,&rdquo;&mdash;
+<speaker>Flink.</speaker> <p>&bdquo;<hi rend=ex>Item</hi>: Zij heeft meer haar dan verstand,&rdquo;&mdash;
 </sp>
 
 <sp who=lan>
@@ -3228,7 +3236,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;En meer gebreken dan haren,&mdash;&rdquo;
+<speaker>Flink.</speaker> <p>&bdquo;En meer gebreken dan haren,&mdash;&rdquo;
 </sp>
 
 <sp who=lan>
@@ -3236,7 +3244,7 @@
 </sp>
 
 <sp who=fli>
-<speaker>Flink.</speaker> <p>&ldquo;En meer geld dan gebreken.&rdquo;      <ab type=lineNum>376</ab>
+<speaker>Flink.</speaker> <p>&bdquo;En meer geld dan gebreken.&rdquo;      <ab type=lineNum>376</ab>
 </sp>
 
 <sp who=lan>
@@ -3282,7 +3290,7 @@
 
 
 <pb n=178>
-<div2 id=ev.III.2>
+<div2 n=2 id=ev.III.2>
 <head>Tweede Tooneel.</head>
 
 
@@ -3482,11 +3490,11 @@
 
 
 
-<div1 id=ev.IV type=Act>
+<div1 n=IV id=ev.IV type=Act>
 <head>Vierde Bedrijf.</head>
 
 
-<div2 id=ev.IV.1>
+<div2 n=1 id=ev.IV.1>
 <head>Eerste Tooneel.</head>
 
 
@@ -3697,7 +3705,7 @@
 
 
 
-<div2 id=ev.IV.2>
+<div2 n=2 id=ev.IV.2>
 <head>Tweede Tooneel.</head>
 
 
@@ -4061,7 +4069,7 @@
 
 
 
-<div2 id=ev.IV.3>
+<div2 n=3 id=ev.IV.3>
 <head>Derde Tooneel.</head>
 
 <stage type=setting><hi rend=ex>Aldaar.</hi></stage>
@@ -4166,7 +4174,7 @@
 </figure>
 
 
-<div2 id=ev.IV.4>
+<div2 n=4 id=ev.IV.4>
 <head>Vierde Tooneel.</head>
 
 <stage type=setting><hi rend=ex>Aldaar.</hi></stage>
@@ -4175,7 +4183,7 @@
 
 
 <sp who=lan>
-<speaker>Lans.</speaker> <p>Als een mensch zijn dienaar zich hondsch tegen hem gedraagt, ziet ge, dat is hard; een, dien ik van kindsbeen af heb opgebracht, een, dien ik voor verdrinken bewaard heb, toen drie of vier van zijn blinde broeders of zusters er aan moesten gelooven! Ik heb hem afgericht, juist zooals iemand, die zich voorneemt: &ldquo;Zoo wil ik een hond africhten.&rdquo; Ik werd gestuurd om hem ten geschenke te brengen van mijn meester aan juffer Silvia, en ik had nog nauwelijks een voet in de eetzaal, of hij vliegt me naar haar bord en steelt haar kapoenepootje. O, het is een kwaad ding, als een hond zich niet in ieder gezelschap weet te gedragen! Ik zou willen, om zoo te zeggen, dat een, die op zich neemt een hond te zijn, dan, als het ware, ook in allen <pb n=183>deele een hond was. Als ik niet meer verstand had gehad dan hij, en het vergrijp, dat hij begaan had, niet op mij had genomen, was hij, dit geloof ik zeker, er voor gehangen; zoo waar ik leef, hij was er om koud geweest; oordeelt zelf. Hij dringt me zich daar in het gezelschap van drie of vier voorname honden onder de tafel van den hertog, en is me daar, met verlof, nog geen hondenpisje lang, of de geheele zaal ruikt hem. &ldquo;Naar buiten met den hond!&rdquo; roept de een; &ldquo;Wat is dat voor een mormeldier?&rdquo; zegt de ander; &ldquo;Ranselt hem de deur uit!&rdquo; zegt een derde; &ldquo;Hangt hem op!&rdquo; zegt de hertog. Ik, die de lucht van vroeger kende, wist dadelijk, dat het Krab was, en ik ga me naar den man van de hondenzweep; &ldquo;Vriend&rdquo;, zeg ik, &ldquo;gij zijt van plan dien hond daar te ranselen?&rdquo; &ldquo;Ja waarachtig, dat ben ik&rdquo;, zegt hij. &ldquo;Dan doet gij hem groot onrecht&rdquo;, zeg ik, &ldquo;ik was het, die dat je weet wel, deed.&rdquo; Hij maakt me geen verdere praatjes meer, maar zweept mij de kamer uit. Hoe veel meesters zouden dit voor hun dienaar doen? Ja, ik kan er een eed op doen, ik heb in het voetblok gezeten voor worsten, die hij gestolen had, anders was hij er om afgemaakt; ik heb te pronk gestaan voor ganzen, die hij gedood had, anders had hij er voor moeten bloeden; aan dat alles denk jij nu volstrekt niet meer.&mdash;Ja, en daar denk ik weer aan den streek, dien je mij gespeeld hebt, <ab id=ev.iv.4.39>toen ik afscheid nam van jonkvrouw Silvia</ab>. Heb ik je niet altijd gelast, op mij te letten, en even zoo te doen als ik? <corr sic=wanneer>Wanneer</corr> heb je mij ooit mijn been zien oplichten en wateren tegen een dame haar hoepelrok? <corr sic=heb>Heb</corr> je ooit zulk een streek van mij gezien?             <ab type=lineNum>43</ab>
+<speaker>Lans.</speaker> <p>Als een mensch zijn dienaar zich hondsch tegen hem gedraagt, ziet ge, dat is hard; een, dien ik van kindsbeen af heb opgebracht, een, dien ik voor verdrinken bewaard heb, toen drie of vier van zijn blinde broeders of zusters er aan moesten gelooven! Ik heb hem afgericht, juist zooals iemand, die zich voorneemt: &bdquo;Zoo wil ik een hond africhten.&rdquo; Ik werd gestuurd om hem ten geschenke te brengen van mijn meester aan juffer Silvia, en ik had nog nauwelijks een voet in de eetzaal, of hij vliegt me naar haar bord en steelt haar kapoenepootje. O, het is een kwaad ding, als een hond zich niet in ieder gezelschap weet te gedragen! Ik zou willen, om zoo te zeggen, dat een, die op zich neemt een hond te zijn, dan, als het ware, ook in allen <pb n=183>deele een hond was. Als ik niet meer verstand had gehad dan hij, en het vergrijp, dat hij begaan had, niet op mij had genomen, was hij, dit geloof ik zeker, er voor gehangen; zoo waar ik leef, hij was er om koud geweest; oordeelt zelf. Hij dringt me zich daar in het gezelschap van drie of vier voorname honden onder de tafel van den hertog, en is me daar, met verlof, nog geen hondenpisje lang, of de geheele zaal ruikt hem. &bdquo;Naar buiten met den hond!&rdquo; roept de een; &bdquo;Wat is dat voor een mormeldier?&rdquo; zegt de ander; &bdquo;Ranselt hem de deur uit!&rdquo; zegt een derde; &bdquo;Hangt hem op!&rdquo; zegt de hertog. Ik, die de lucht van vroeger kende, wist dadelijk, dat het Krab was, en ik ga me naar den man van de hondenzweep; &bdquo;Vriend&rdquo;, zeg ik, &bdquo;gij zijt van plan dien hond daar te ranselen?&rdquo; &bdquo;Ja waarachtig, dat ben ik&rdquo;, zegt hij. &bdquo;Dan doet gij hem groot onrecht&rdquo;, zeg ik, &bdquo;ik was het, die dat je weet wel, deed.&rdquo; Hij maakt me geen verdere praatjes meer, maar zweept mij de kamer uit. Hoe veel meesters zouden dit voor hun dienaar doen? Ja, ik kan er een eed op doen, ik heb in het voetblok gezeten voor worsten, die hij gestolen had, anders was hij er om afgemaakt; ik heb te pronk gestaan voor ganzen, die hij gedood had, anders had hij er voor moeten bloeden; aan dat alles denk jij nu volstrekt niet meer.&mdash;Ja, en daar denk ik weer aan den streek, dien je mij gespeeld hebt, <ab id=ev.iv.4.39>toen ik afscheid nam van jonkvrouw Silvia</ab>. Heb ik je niet altijd gelast, op mij te letten, en even zoo te doen als ik? <corr sic=wanneer>Wanneer</corr> heb je mij ooit mijn been zien oplichten en wateren tegen een dame haar hoepelrok? <corr sic=heb>Heb</corr> je ooit zulk een streek van mij gezien?             <ab type=lineNum>43</ab>
 </sp>
 
 <stage type=entrance>(<hi rend=sc>Proteus</hi> <hi>en</hi> <hi rend=sc>Julia</hi> <hi>komen op.</hi>)</stage>
@@ -4259,7 +4267,7 @@
 </sp>
 
 <sp who=pro>
-<speaker>Proteus.</speaker> <l>Wat roept gij daar &ldquo;Helaas&rdquo;?
+<speaker>Proteus.</speaker> <l>Wat roept gij daar &bdquo;Helaas&rdquo;?
 </sp>
 
 <sp who=jul>
@@ -4501,11 +4509,11 @@
 
 
 
-<div1 id=ev.V type=Act>
+<div1 n=V id=ev.V type=Act>
 <head>Vijfde Bedrijf.</head>
 
 
-<div2 id=ev.V.1>
+<div2 n=1 id=ev.V.1>
 <head>Eerste Tooneel.</head>
 
 
@@ -4542,7 +4550,7 @@
 <stage type=exit>(<hi>Beiden af.</hi>)</stage>
 
 
-<div2 id=ev.V.2>
+<div2 n=2 id=ev.V.2>
 <head>Tweede Tooneel.</head>
 
 
@@ -4729,7 +4737,7 @@
 <stage type=exit>(<hi rend=sc>Julia</hi> <hi>af.</hi>)</stage>
 
 
-<div2 id=ev.V.3>
+<div2 n=3 id=ev.V.3>
 <head>Derde Tooneel.</head>
 
 
@@ -4777,7 +4785,7 @@
 <stage type=exit>(<hi>Allen af.</hi>)</stage>
 
 
-<div2 id=ev.V.4>
+<div2 n=4 id=ev.V.4>
 <head>Vierde Tooneel.</head>
 
 
@@ -4912,7 +4920,7 @@
 <l>Ja, zoo is nu een vriend,&mdash;gij aartsverrader!
 <l>Gij hebt mijn hoop bedrogen; slechts mijn oog
 <l>Kon me overtuigen. Nooit meer kan ik zeggen:
-<l>&ldquo;Ik heb een vriend&rdquo;; gij zoudt mij logenstraffen.
+<l>&bdquo;Ik heb een vriend&rdquo;; gij zoudt mij logenstraffen.
 <l>Wie is betrouwbaar, als de rechterhand
 <l>Meineedig wordt aan &apos;t harte? Proteus,
 <l>Mij grieft, dat ik u nooit meer mag vertrouwen,
@@ -5139,15 +5147,15 @@
 
 
 
-<div1>
+<div1 id=ev.aant type=Chapter>
 <head>Aanteekeningen.</head>
 
 
-<p>Van dit stuk is geen oudere druk bekend dan die in de Folio-uitgave van 1623 te vinden is; dat het reeds v&oacute;&oacute;r 1598 was opgevoerd, blijkt uit de vermelding er van door <hi rend=sc>Francis Meres</hi> in zijn <hi>Palladis Tamia</hi> (zie boven blz. <ref target=pb47 type=pageref>47</ref> en <ref target=pb120 type=pageref>120</ref>). Maar ongetwijfeld is het stuk eenige jaren ouder. Let men op den ganschen bouw er van, op den versbouw, het veelvuldig voorkomen van het rijm en van knuppelverzen, op de woordspelingen, op de wijze waarop de twee dienaren als Clowns optreden, op de overeenstemming met gedachten, in &ldquo;Venus en Adonis&rdquo; en in Sonnetten uitgedrukt, dan wordt men hiervan ten stelligste overtuigd. Het vermoeden, dat het stuk van 1591 dagteekent, komt zeker der waarheid zeer nabij. Of het ouder of jonger is dan &ldquo;<ref target=kv>de Klucht der vergissingen</ref>&rdquo; en &ldquo;Veel gemin, geen gewin&rdquo; is ondertusschen niet wel uit te maken.
+<p>Van dit stuk is geen oudere druk bekend dan die in de Folio-uitgave van 1623 te vinden is; dat het reeds v&oacute;&oacute;r 1598 was opgevoerd, blijkt uit de vermelding er van door <hi rend=sc>Francis Meres</hi> in zijn <hi>Palladis Tamia</hi> (zie boven blz. <ref target=pb47 type=pageref>47</ref> en <ref target=pb120 type=pageref>120</ref>). Maar ongetwijfeld is het stuk eenige jaren ouder. Let men op den ganschen bouw er van, op den versbouw, het veelvuldig voorkomen van het rijm en van knuppelverzen, op de woordspelingen, op de wijze waarop de twee dienaren als Clowns optreden, op de overeenstemming met gedachten, in &bdquo;Venus en Adonis&rdquo; en in Sonnetten uitgedrukt, dan wordt men hiervan ten stelligste overtuigd. Het vermoeden, dat het stuk van 1591 dagteekent, komt zeker der waarheid zeer nabij. Of het ouder of jonger is dan &bdquo;<ref target=kv>de Klucht der vergissingen</ref>&rdquo; en &bdquo;<ref target=vggg>Veel gemin, geen gewin</ref>&rdquo; is ondertusschen niet wel uit te maken.
 
 <p>Voor zoover wij kunnen oordeelen, heeft Shakespeare het plan voor dit stuk geheel zelf ontworpen en niet aan een novelle of iets dergelijks ontleend, al moge dit met enkele bijzonderheden wel het geval zijn. De geschiedenis van Proteus en Julia vertoont namelijk in enkele punten vrij groote overeenkomst met die van Don Felix en Felismena in den herdersroman <pb n=189><hi>La Diana</hi>, van den Spaanschen dichter Jorge de Montemayor<note n=1>Bij de verbranding van de boeken van Don Quichotte wordt deze roman gevonden, maar blijft, op aanraden van den geestelijke, gespaard.</note>, een werk, dat in 1598 in het Engelsch verscheen en veel opgang maakte, maar vele jaren vroeger vertaald en als handschrift door velen gelezen was; reeds in 1584 schijnt uit dezen roman een blijspel, <hi lang=en>The history of Felix and Philiomena</hi>, getrokken en ten hove opgevoerd te zijn.&mdash;Wie juist weten wil, wat Shakespeare aan dezen roman ontleend kan hebben, vindt de hiertoe noodige uittreksels in Delius&apos; Shakespeare-uitgave.
 
-<p>Bij de poging om dit stuk te beoordeelen, stuit men op groote moeilijkheden, zooals wel uit het zeer verschillend oordeel van uitgevers en critici blijken kan, waaromtrent men Knight in zijn Imperial edition van Shakespeare moge naslaan. Terwijl men, het geheele stuk door, den dichter aan zijn zeggingskracht, zijn versbouw, zijn rijkdom van gedachten, zijn wijze om de personen te karakteriseeren herkent, treft men in het beloop van het stuk zooveel tegenstrijdigheden aan, dat men tot het besluit moet komen, een verminkt en door onbevoegde hand gewijzigd stuk van Shakespeare voor zich te hebben. Men oordeele. Valentijn en Proteus worden naar het hof des keizers gezonden, maar komen bij een naamloozen hertog te Milaan aan; van een schoonen ridder Eglamour wordt in Verona verteld, dat hij naar Julia&apos;s hand dingt, en in Milaan wordt van Eglamour getuigd, dat hij, om de nagedachtenis zijner gestorven geliefde in eere te houden, de gelofte van eeuwige kuischheid heeft afgelegd; hij wordt door Silvia gekenschetst als ridder zonder smet of blaam en door haar als beschermer gekozen op haar reis, maar weet, door roovers overvallen, verbazend snel beenen te maken; Julia heeft in het eerste bedrijf een vader, maar geeft, als zij haar tocht gaat ondernemen, het beheer van haar vermogen, landerijen enz. aan haar kamerjuffer en vertrouwde over; als Proteus een poos met Silvia gekeuveld heeft, zegt hij: &ldquo;Ik heb nog alleen hare beeltenis gezien&rdquo;; Julia geeft aan Silvia eerst een verkeerden brief en daarna den rechten, maar van den eersten hoort men niets meer; Silvia ontmoet volgens afspraak den ridder Eglamour bij de cel van broeder Patricius, en toch zegt later haar vader, dat zij er niet geweest is; Valentijn zucht in het bosch om Silvia, ontrukt haar aan de handen van zijn trouweloozen vriend Proteus, die door Silvia verafschuwd wordt, maar staat, zoodra Proteus schuld belijdt en berouw toont, hem zijn Silvia oogenblikkelijk af, en deze heeft niets hiertegen te zeggen.
+<p>Bij de poging om dit stuk te beoordeelen, stuit men op groote moeilijkheden, zooals wel uit het zeer verschillend oordeel van uitgevers en critici blijken kan, waaromtrent men Knight in zijn Imperial edition van Shakespeare moge naslaan. Terwijl men, het geheele stuk door, den dichter aan zijn zeggingskracht, zijn versbouw, zijn rijkdom van gedachten, zijn wijze om de personen te karakteriseeren herkent, treft men in het beloop van het stuk zooveel tegenstrijdigheden aan, dat men tot het besluit moet komen, een verminkt en door onbevoegde hand gewijzigd stuk van Shakespeare voor zich te hebben. Men oordeele. Valentijn en Proteus worden naar het hof des keizers gezonden, maar komen bij een naamloozen hertog te Milaan aan; van een schoonen ridder Eglamour wordt in Verona verteld, dat hij naar Julia&apos;s hand dingt, en in Milaan wordt van Eglamour getuigd, dat hij, om de nagedachtenis zijner gestorven geliefde in eere te houden, de gelofte van eeuwige kuischheid heeft afgelegd; hij wordt door Silvia gekenschetst als ridder zonder smet of blaam en door haar als beschermer gekozen op haar reis, maar weet, door roovers overvallen, verbazend snel beenen te maken; Julia heeft in het eerste bedrijf een vader, maar geeft, als zij haar tocht gaat ondernemen, het beheer van haar vermogen, landerijen enz. aan haar kamerjuffer en vertrouwde over; als Proteus een poos met Silvia gekeuveld heeft, zegt hij: &bdquo;Ik heb nog alleen hare beeltenis gezien&rdquo;; Julia geeft aan Silvia eerst een verkeerden brief en daarna den rechten, maar van den eersten hoort men niets meer; Silvia ontmoet volgens afspraak den ridder Eglamour bij de cel van broeder Patricius, en toch zegt later haar vader, dat zij er niet geweest is; Valentijn zucht in het bosch om Silvia, ontrukt haar aan de handen van zijn trouweloozen vriend Proteus, die door Silvia verafschuwd wordt, maar staat, zoodra Proteus schuld belijdt en berouw toont, hem zijn Silvia oogenblikkelijk af, en deze heeft niets hiertegen te zeggen.
 
 <p>Bij nauwkeurige beschouwing vindt men enkele bijzonderheden, die ons vermoeden, dat het stuk gewijzigd is geworden, zeer versterken. Waarschijnlijk kwamen Valentijn en Proteus wel aan &apos;s keizers hof aan, en is de keizer tot hertog gedegradeerd; want tot tweemaal toe zegt de hertog, eerst van Proteus, daarna van Valentijn, dat zij de liefde eener <hi>keizerin</hi> waardig zijn; van den laatste, dat hij in den raad eens <hi>keizers</hi> op zijn plaats zou wezen; de omgang van Valentijn met Silvia getuigt van een zeer groot verschil in stand; daarmede strookt de hoogheid van de verwijten des hertogs aan Valentijn, die van het <hi>koninklijk</hi> hof verbannen wordt; de omgang van Valentijn met Silvia was ongetwijfeld door den keizer argeloos toegelaten, omdat het verschil in rang zeer groot was.&mdash;Dat de keizer tot een hertog wordt, die de wenschen van een minnaar als Thurio begunstigt, is zeker aan een lateren bewerker te danken.&mdash;In het oorspronkelijk stuk was Silvia&apos;s portret zeker van meer beteekenis en werd door Proteus gezien en bewonderd, v&oacute;&oacute;r hij haar zelf zag. Eglamour was waarschijnlijk ook een ander persoon; misschien had Valentijn de reis van Silvia met Eglamour en beider vertrouwelijken omgang verkeerd opgevat en zijn geliefde voor trouweloos gehouden, zoodat hij daarom bereid is, haar aan Proteus af te staan.&mdash;Julia zal waarschijnlijk een brief van Proteus, die aan haarzelf gericht was, aan Silvia overhandigd hebben en zich daardoor aan deze bekend gemaakt.&mdash;Wat er van dit alles zij, zooveel kan uit het bovenstaande blijken, dat het stuk, ons door de Folio-uitgave van 1623 bewaard gebleven, vermoedelijk aanmerkelijk afwijkt van wat de dichter geschreven heeft; de leemten, die wij er in opmerken, kunnen niet wel aan een plan- of gedachteloosheid des dichters zijn toe te schrijven. Het is dus hoogstwaarschijnlijk, dat het oorspronkelijk stuk door een omwerker is gewijzigd; misschien was het verminkt geraakt of verloren gegaan, en heeft een onbevoegde hand het met behulp van gedeeltelijke handschriften of uitgeschreven rollen weder trachten samen te stellen.
 
@@ -5161,17 +5169,17 @@
 
 <p><ref target=ev.I.1.53>I. 1. 53.</ref> <hi rend=ex>Want aan de haven wacht</hi> enz. In &apos;t Engelsch staat <hi lang=en>at the road</hi>, aan de reede; men zou dus zeggen, dat Verona hier als een zeestad beschouwd moet worden. Er zijn bewijzen <pb n=190 id=pb190>genoeg, dat Shakespeare met de geographie van Itali&euml; zeer goed vertrouwd was; men behoeft hem volstrekt niet van onwetendheid te verdenken. De toeschouwers waren Londenaars; bij grootere reizen naar een anderen staat moesten waterwegen gevolgd worden; de dichter maakt er voor zijn personen daarom ook gebruik van en stelt hiermede de reis zijn toeschouwers aanschouwelijk voor oogen; al ontleent hij de namen van personen en plaatsen aan Itali&euml;, Engelsche toestanden staan hem voor den geest; hier geeft hem een oogenblik later het nagenoeg eveneens klinken van <hi lang=en>ship</hi> en <hi lang=en><corr sic=scheep>sheep</corr></hi> (schip en schaap) aanleiding tot een woordspeling; later wil Lans (<ref target=ev.II.3.58>II. 3. 58.</ref>) het stroombed met tranen vullen, waarbij den toeschouwers de Theems voor den geest kwam; bij struikroovers dachten deze terstond aan de bekende roovers van Sherwoodforest, bij wie broeder Tuck kapelaan was; daarom laat de dichter (<ref target=ev.IV.1.36>IV. 1. 36.</ref>) Italiaansche roovers bij de geschoren kruin van dien pater zweren. Zulk een dichterlijke vrijheid, die de voorgestelde zaken recht aanschouwelijk maakte, veroorloofden zich in de middeleeuwen de dichters algemeen, en dit gebruik was tot den tijd van Shakespeare in zwang gebleven. Aan onwetendheid des dichters behoeft men niet te denken.
 
-<p><ref target=ev.I.1.101>I. 1. 101.</ref> <hi rend=ex>Ik, een verloren schaap, gaf uw brief aan haar, een verkoren schaap.</hi> In &apos;t Engelsch: <hi>I, a lost mutton, gave your letter to her, a laced mutton.</hi> Een woordspeling met <hi>lost</hi> en <hi>laced</hi>, waarbij men bedenke, dat in Sh.&apos;s tijd de <hi>a</hi> in <hi>laced</hi> nog niet met den e-klank werd uitgesproken, zoodat de overeenkomst van <hi>lost</hi> en <hi>laced</hi> toen grooter was dan thans. <hi>Laced</hi> beteekent eigenlijk gevangen of vastgehouden, daar het substantief <hi>lace</hi> of <hi>strik</hi> (in &apos;t Latijn <hi lang=la>laqueus</hi>) of ook een <hi>net</hi> beteekent, zoodat <hi>laced</hi> een goede tegenstelling met <hi>lost</hi> vormt. Men denke dus niet aan een met kanten behangen jonkvrouw en veel minder geve men <hi>laced mutton</hi> de beteekenis van &ldquo;licht vrouwspersoon&rdquo;,&mdash;want al is Flink, die woedend is, dat hij geen fooi ontvangen heeft, brutaal genoeg om zich zulk een uitdrukking ten opzichte van de geliefde zijns meesters te veroorloven, zijn heer zou toch zeker zulk een gezegde niet zoo kalm aanhooren.
+<p><ref target=ev.I.1.101>I. 1. 101.</ref> <hi rend=ex>Ik, een verloren schaap, gaf uw brief aan haar, een verkoren schaap.</hi> In &apos;t Engelsch: <hi>I, a lost mutton, gave your letter to her, a laced mutton.</hi> Een woordspeling met <hi>lost</hi> en <hi>laced</hi>, waarbij men bedenke, dat in Sh.&apos;s tijd de <hi>a</hi> in <hi>laced</hi> nog niet met den e-klank werd uitgesproken, zoodat de overeenkomst van <hi>lost</hi> en <hi>laced</hi> toen grooter was dan thans. <hi>Laced</hi> beteekent eigenlijk gevangen of vastgehouden, daar het substantief <hi>lace</hi> of <hi>strik</hi> (in &apos;t Latijn <hi lang=la>laqueus</hi>) of ook een <hi>net</hi> beteekent, zoodat <hi>laced</hi> een goede tegenstelling met <hi>lost</hi> vormt. Men denke dus niet aan een met kanten behangen jonkvrouw en veel minder geve men <hi>laced mutton</hi> de beteekenis van &bdquo;licht vrouwspersoon&rdquo;,&mdash;want al is Flink, die woedend is, dat hij geen fooi ontvangen heeft, brutaal genoeg om zich zulk een uitdrukking ten opzichte van de geliefde zijns meesters te veroorloven, zijn heer zou toch zeker zulk een gezegde niet zoo kalm aanhooren.
 
 <p><ref target=ev.I.1.110>I. 1. 110.</ref> <hi rend=ex>U te schutten</hi>, enz. Dit geheele gesprek van Proteus met zijn dienaar is vol woordspelingen. Hij gebruikt hier het woord <hi lang=en>pound</hi> in de beteekenis van in de schutskooi steken, zooals men verdwaald vee doet. Flink vat het op als een pond sterling en splitst daarna het woord <hi lang=en>pinfold</hi>, schaapskooi, in <hi lang=en>pin</hi>, een speld, een waardeloos ding, en <hi lang=en>fold</hi>. Daarop volgt weer de samenvoeging van <hi lang=en>nod</hi>, knikken, met het voornaamwoord <hi lang=en>I</hi>, ik, of het bevestigende <hi lang=en>ay</hi>, ja, tot <hi lang=en>noddy</hi>, onnoozele bloed.&mdash;In het origineel voegde Theobald achter het zeggen: <hi lang=en>But what said she?</hi> als waarschijnlijk uitgevallen, de woorden: <hi lang=en>Did she nod?</hi> welke op blz. 160 ook in de vertaling zijn opgenomen; zoo kon het onvertaalbare <hi lang=en>noddy</hi> door een andere woordspeling vervangen worden.
 
 <p><ref target=ev.I.1.152>I. 1. 152.</ref> <hi rend=ex>De grootte uwer mildheid</hi> enz. Hier heeft het Engelsch een woordspeling met <hi lang=en>testify</hi>, betuigen, en <hi lang=en>testern</hi>, met een <hi lang=en>tester</hi>,&mdash;een geldstukje van een halven shilling waarde, waar een kop, <hi>testa</hi>, <hi>t&ecirc;te</hi>, op gestempeld was,&mdash;begiftigen, een woord van Sh.&apos;s maaksel.
 
-<p><ref target=ev.I.1.156>I. 1. 156.</ref> <hi rend=ex>Gij zijt de veiligheid van &apos;t schip.</hi> Op het zeggen, dat wie voor de galg bestemd is, niet verdrinkt, zinspeelt Sh. ook in den &ldquo;Storm&rdquo;, I. 1. 30.
+<p><ref target=ev.I.1.156>I. 1. 156.</ref> <hi rend=ex>Gij zijt de veiligheid van &apos;t schip.</hi> Op het zeggen, dat wie voor de galg bestemd is, niet verdrinkt, zinspeelt Sh. ook in den &bdquo;Storm&rdquo;, I. 1. 30.
 
-<p><ref target=ev.I.2.55>I. 2. 55.</ref> <hi rend=ex>Meisjes zeggen zedig neen.</hi> Een Engelsch spreekwoord zegt: <hi lang=en>Maids say nay, and take it</hi>, &ldquo;meisjes zeggen neen en tasten toe&rdquo;.
+<p><ref target=ev.I.2.55>I. 2. 55.</ref> <hi rend=ex>Meisjes zeggen zedig neen.</hi> Een Engelsch spreekwoord zegt: <hi lang=en>Maids say nay, and take it</hi>, &bdquo;meisjes zeggen neen en tasten toe&rdquo;.
 
-<p><ref target=ev.I.2.83>I. 2. 83.</ref> <hi rend=ex>Luchte liefde.</hi> Een lied, &ldquo;Light o&apos; love&rdquo; beginnend, waarop gedanst werd; zooals men toen gewoon was te doen; dezelfde wijs wordt genoemd in &ldquo;Veel leven om niets&rdquo;, III. 4. 44, waar gezegd wordt: &ldquo;zing gij het, dan zal ik dansen&rdquo;.&mdash;In het volgende worden allerlei uitdrukkingen, voor muziek gebruikelijk, tevens in een anderen zin opgevat; zoo beteekent <hi lang=en>burden</hi> zoowel &ldquo;refrein&rdquo; als &ldquo;last&rdquo;, <hi lang=en>base</hi> &ldquo;basstem&rdquo; en tevens een op het land gebruikelijk krijgertjesspel, ook <hi lang=en>prison base</hi> of <hi lang=en>prison bars</hi> geheeten, waarbij <hi lang=en>to bid the base</hi>, het uittarten is van den speler, dat hij niet gekregen kan worden; men zie &ldquo;Venus en Adonis&rdquo; reg. 303 en &ldquo;Cymbeline&rdquo; V 3. 19.
+<p><ref target=ev.I.2.83>I. 2. 83.</ref> <hi rend=ex>Luchte liefde.</hi> Een lied, &bdquo;Light o&apos; love&rdquo; beginnend, waarop gedanst werd; zooals men toen gewoon was te doen; dezelfde wijs wordt genoemd in &bdquo;Veel leven om niets&rdquo;, III. 4. 44, waar gezegd wordt: &bdquo;zing gij het, dan zal ik dansen&rdquo;.&mdash;In het volgende worden allerlei uitdrukkingen, voor muziek gebruikelijk, tevens in een anderen zin opgevat; zoo beteekent <hi lang=en>burden</hi> zoowel &bdquo;refrein&rdquo; als &bdquo;last&rdquo;, <hi lang=en>base</hi> &bdquo;basstem&rdquo; en tevens een op het land gebruikelijk krijgertjesspel, ook <hi lang=en>prison base</hi> of <hi lang=en>prison bars</hi> geheeten, waarbij <hi lang=en>to bid the base</hi>, het uittarten is van den speler, dat hij niet gekregen kan worden; men zie &bdquo;Venus en Adonis&rdquo; reg. 303 en &bdquo;Cymbeline&rdquo; V 3. 19.
 
 <p><ref target=ev.I.2.114>I. 2. 114.</ref> <hi rend=ex>Mijn boezem zij uw bed.</hi> De dames hadden voor aan haar keurs een zakje voor het bergen van brieven; meermalen wordt hierop gezinspeeld, men zie bijv. in dit stuk <ref target=ev.3.1.144>III. 1. 144</ref> en <ref target=ev.3.1.250>250</ref>.
 
@@ -5179,39 +5187,39 @@
 
 <p><ref target=ev.II.1.2>II. 1. 2.</ref> <hi rend=ex>Die hoort mij niet.</hi> In &apos;t Engelsch is een woordspeling met <hi lang=en>on</hi> en <hi lang=en>one</hi>, wat toen tamelijk gelijk werd uitgesproken.
 
-<p><ref target=ev.II.1.26>II. 1. 26.</ref> <hi rend=ex>Als een bedelaar op Allerheiligen.</hi> Op Allerheiligen liepen bedelaars, zacht zingende, de huizen af en ontvingen dan zielekoeken, <hi lang=en>soulcakes</hi>, als het loon hunner gebeden voor de dooden.&mdash;Voor het <hi rend=ex>stappen als een leeuw</hi> staat in &apos;t oorspronkelijke: &ldquo;als een der leeuwen&rdquo;, waardoor de dichter zijn gehoor de leeuwen van den Tower voor den geest bracht.
+<p><ref target=ev.II.1.26>II. 1. 26.</ref> <hi rend=ex>Als een bedelaar op Allerheiligen.</hi> Op Allerheiligen liepen bedelaars, zacht zingende, de huizen af en ontvingen dan zielekoeken, <hi lang=en>soulcakes</hi>, als het loon hunner gebeden voor de dooden.&mdash;Voor het <hi rend=ex>stappen als een leeuw</hi> staat in &apos;t oorspronkelijke: &bdquo;als een der leeuwen&rdquo;, waardoor de dichter zijn gehoor de leeuwen van den Tower voor den geest bracht.
 
-<p><ref target=ev.II.1.79>II. 1. 79.</ref> <hi rend=ex>Zijn hoosbanden.</hi> Het vergeten der hoosbanden wordt door Shakespeare meermalen als een teeken van verliefdheid aangehaald, zie &ldquo;Elk wat wils&rdquo; (<hi lang=en>As you like it</hi>), III. 2. 397; men vergelijke ook &ldquo;Hamlet&rdquo; II. 1. 80.&mdash;Flink overdrijft nu nog, en zegt, dat Valentijn zelfs vergat zijn hozen aan te trekken.
+<p><ref target=ev.II.1.79>II. 1. 79.</ref> <hi rend=ex>Zijn hoosbanden.</hi> Het vergeten der hoosbanden wordt door Shakespeare meermalen als een teeken van verliefdheid aangehaald, zie &bdquo;Elk wat wils&rdquo; (<hi lang=en>As you like it</hi>), III. 2. 397; men vergelijke ook &bdquo;Hamlet&rdquo; II. 1. 80.&mdash;Flink overdrijft nu nog, en zegt, dat Valentijn zelfs vergat zijn hozen aan te trekken.
 
 <pb n=191><p><ref target=ev.II.1.106>II. 1. 106.</ref> <hi rend=ex>Heer Valentijn, mijn dienaar.</hi> In Sh.&apos;s tijd werden de vereerders of minnaars eener schoone of gebiedster, <hi>Madam</hi> of <hi>Mistress</hi>, vaak <hi>servant</hi> genoemd, wat dus nagenoeg hetzelfde beteekent als <hi>lover</hi>.
 
 <p><ref target=ev.II.3.4>II. 3. 4.</ref> <hi rend=ex>De verloopen zoon.</hi> In &apos;t Engelsch zegt Lans <hi lang=en>prodigious</hi> voor <hi lang=en>prodigal</hi> en <hi lang=en>imperials</hi> voor <hi lang=en>emperor&apos;s</hi> of <hi lang=en>imperial</hi>.&mdash;De naam van den hond, <hi lang=en>Crab</hi>, beteekent wilde appel.
 
-<p><ref target=ev.II.3.39>II. 3. 39.</ref> <hi rend=ex>Het tij verloopt.</hi> Het Engelsch heeft hier een woordspeling met <hi lang=en>tide</hi>, &ldquo;getij&rdquo; en <hi lang=en>tied</hi>, de vastgebondene (de hond).
+<p><ref target=ev.II.3.39>II. 3. 39.</ref> <hi rend=ex>Het tij verloopt.</hi> Het Engelsch heeft hier een woordspeling met <hi lang=en>tide</hi>, &bdquo;getij&rdquo; en <hi lang=en>tied</hi>, de vastgebondene (de hond).
 
 <p><ref target=ev.II.4.152>II. 4. 152.</ref> <hi rend=ex>Een macht, een overheid.</hi> Van een hoogen rang in de engelenschaar; zie Paulus&apos; Brief aan de Romeinen, VIII. 38.
 
-<p><ref target=ev.II.4.192>II. 4. 192.</ref> <hi rend=ex>Gelijk een gloed een and&apos;ren gloed verdringt.</hi> Men vindt dezelfde beelden in &ldquo;Coriolanus&rdquo;, IV. 7. 54.
+<p><ref target=ev.II.4.192>II. 4. 192.</ref> <hi rend=ex>Gelijk een gloed een and&apos;ren gloed verdringt.</hi> Men vindt dezelfde beelden in &bdquo;Coriolanus&rdquo;, IV. 7. 54.
 
 <p><ref target=ev.II.4.196>II. 4. 196.</ref> <hi rend=ex>Is &apos;t nu mijn oog.</hi> Het Engelsch is hier onvolledig; <hi lang=en>Is it mine or</hi> enz. Het is waarschijnlijker dat hier gelezen moet worden met Warburton: <hi lang=en>Is it mine eye or</hi> enz. dan, met Malone, <hi lang=en>Is it her mien or</hi> enz.
 
-<p><ref target=ev.II.4.201>II. 4. 201.</ref> <hi rend=ex>Zooals een wassen beeld bij &apos;t vuur.</hi> Men vergelijke &ldquo;Koning Jan&rdquo; V. 4. 24. Er wordt gedacht aan wassen beelden, die door toovenaars bij het vuur werden gehouden, om door smelten van het beeld de persoon, die er door werd voorgesteld, te doen wegkwijnen.
+<p><ref target=ev.II.4.201>II. 4. 201.</ref> <hi rend=ex>Zooals een wassen beeld bij &apos;t vuur.</hi> Men vergelijke &bdquo;Koning Jan&rdquo; V. 4. 24. Er wordt gedacht aan wassen beelden, die door toovenaars bij het vuur werden gehouden, om door smelten van het beeld de persoon, die er door werd voorgesteld, te doen wegkwijnen.
 
 <p id=aant.II.5.1><ref target=ev.II.5.1>II. 5. 1.</ref> <hi rend=ex>Welkom in Milaan.</hi> In den tekst der folio-uitgave staat Padua, zooals in <ref target=ev.III.1.81>III. 1. 81</ref> en <ref target=ev.V.4.129>V. 4. 129</ref>. Verona voor Milaan. Het is mogelijk, dat Shakespeare zelf zoo geschreven heeft, voor hij vast bepaald had, waar hij het stuk zou laten spelen, maar &apos;t kan ook aan een omwerker liggen.
 
-<p><ref target=ev.II.5.61>II. 5. 61.</ref> <hi rend=ex>Dat gij een Christenmensch een glas bier gunt.</hi> In &apos;t Engelsch: <hi lang=en>As to go to the ale with a Christian.</hi> &ldquo;Ale&rdquo; beteekent <hi>bier</hi>, maar ook een christelijk volksfeest, waarop, v&oacute;&oacute;r de hervorming, het door de geestelijken gebrouwen bier verkocht werd, aan het volk op het kerkhof, aan de aanzienlijken in de kerk zelf; de opbrengst was voor het onderhoud der kerken bestemd. Naar de plaats en het jaargetijde droeg het bier verschillende namen: <hi lang=en>Lamb-ale</hi>, <hi lang=en>Bride-ale</hi>, <hi lang=en>Church-ale</hi>, <hi lang=en>Whitesun-ale</hi>.&mdash;Als Flink met Lans niet naar een <hi lang=en>Ale</hi>, naar zulk een kerkelijk feest, wil gaan, is hij geen christenmensch.
+<p><ref target=ev.II.5.61>II. 5. 61.</ref> <hi rend=ex>Dat gij een Christenmensch een glas bier gunt.</hi> In &apos;t Engelsch: <hi lang=en>As to go to the ale with a Christian.</hi> &bdquo;Ale&rdquo; beteekent <hi>bier</hi>, maar ook een christelijk volksfeest, waarop, v&oacute;&oacute;r de hervorming, het door de geestelijken gebrouwen bier verkocht werd, aan het volk op het kerkhof, aan de aanzienlijken in de kerk zelf; de opbrengst was voor het onderhoud der kerken bestemd. Naar de plaats en het jaargetijde droeg het bier verschillende namen: <hi lang=en>Lamb-ale</hi>, <hi lang=en>Bride-ale</hi>, <hi lang=en>Church-ale</hi>, <hi lang=en>Whitesun-ale</hi>.&mdash;Als Flink met Lans niet naar een <hi lang=en>Ale</hi>, naar zulk een kerkelijk feest, wil gaan, is hij geen christenmensch.
 
-<p><ref target=ev.II.7.53>II. 7. 53.</ref> <hi rend=ex>Met een klep.</hi> In &apos;t Engelsch staat: <hi lang=en>with a codpiece</hi>, wat aldus verklaard kan worden: &ldquo;a part of the male dress, very indelicately conspicuous in the poet&apos;s time&rdquo;. Het werd nog al sterk opgevuld, zoodat het wel als een speldenkussen dienst kon doen, waarom er ook in andere comedies van dien tijd de draak mee gestoken wordt. Men bezigde dit deel ook wel als zak om de beurs in te bergen, zie &ldquo;Winteravondsprookje&rdquo;, IV. 4. 623.
+<p><ref target=ev.II.7.53>II. 7. 53.</ref> <hi rend=ex>Met een klep.</hi> In &apos;t Engelsch staat: <hi lang=en>with a codpiece</hi>, wat aldus verklaard kan worden: &bdquo;a part of the male dress, very indelicately conspicuous in the poet&apos;s time&rdquo;. Het werd nog al sterk opgevuld, zoodat het wel als een speldenkussen dienst kon doen, waarom er ook in andere comedies van dien tijd de draak mee gestoken wordt. Men bezigde dit deel ook wel als zak om de beurs in te bergen, zie &bdquo;Winteravondsprookje&rdquo;, IV. 4. 623.
 
 <p><ref target=ev.III.1.81>III. 1. 81.</ref> <hi rend=ex>Hier in deze stad.</hi> In den tekst staat: <hi lang=en>in Verona here</hi>.
 
-<p><ref target=ev.III.1.153>III. 1. 153.</ref> <hi rend=ex>Gij Pha&euml;ton, gij and&apos;re Merops-zoon.</hi> De vertaling is hier niet letterlijk; er staat eigenlijk: &ldquo;Wat! Pha&euml;ton,&mdash;want gij zijt Merops&apos; zoon&rdquo;.&mdash;Pha&euml;ton was de zoon van Helios, den Zonnegod, en van Clymene, die met den koning Merops, in Aethiopi&euml;, gehuwd was; deze was dus Pha&euml;ton&apos;s aardsche vader te noemen. De tusschenzin <hi>want</hi> enz. kan eenvoudig beteekenen: &ldquo;want gij <hi>zijt</hi> inderdaad een Pha&euml;ton&rdquo;, en dan is de vertaling op blz. <ref target=pb175 type=pageref>175</ref> zeer juist. Wil men er uit lezen: &ldquo;want gij zijt een zoon van Merops, niet van den zonnegod, maar van een mensch, dus van een lage afkomst&rdquo;,&mdash;dan moet de hier gegeven, meer letterlijke vertaling gevolgd worden; deze verklaring komt mij echter vrij gezocht voor en het &ldquo;want&rdquo;, <hi lang=en>for</hi>, past er slecht bij; de eerste schijnt mij de ware te zijn.
+<p><ref target=ev.III.1.153>III. 1. 153.</ref> <hi rend=ex>Gij Pha&euml;ton, gij and&apos;re Merops-zoon.</hi> De vertaling is hier niet letterlijk; er staat eigenlijk: &bdquo;Wat! Pha&euml;ton,&mdash;want gij zijt Merops&apos; zoon&rdquo;.&mdash;Pha&euml;ton was de zoon van Helios, den Zonnegod, en van Clymene, die met den koning Merops, in Aethiopi&euml;, gehuwd was; deze was dus Pha&euml;ton&apos;s aardsche vader te noemen. De tusschenzin <hi>want</hi> enz. kan eenvoudig beteekenen: &bdquo;want gij <hi>zijt</hi> inderdaad een Pha&euml;ton&rdquo;, en dan is de vertaling op blz. <ref target=pb175 type=pageref>175</ref> zeer juist. Wil men er uit lezen: &bdquo;want gij zijt een zoon van Merops, niet van den zonnegod, maar van een mensch, dus van een lage afkomst&rdquo;,&mdash;dan moet de hier gegeven, meer letterlijke vertaling gevolgd worden; deze verklaring komt mij echter vrij gezocht voor en het &bdquo;want&rdquo;, <hi lang=en>for</hi>, past er slecht bij; de eerste schijnt mij de ware te zijn.
 
 <p><ref target=ev.III.1.263>III. 1. 263.</ref> <hi rend=ex>Dubbele schurk.</hi> In meer dan &eacute;&eacute;n opzicht een schurk.
 
 <p><ref target=ev.III.1.300>III. 1. 300.</ref> <hi rend=ex>Toon door Sint Nikolaas u flink.</hi> Sint Nikolaas was de beschermheilige der scholieren en moest daarom Flink in &apos;t lezen bijstaan. De legende verhaalt, dat hij reeds als knaap bisschop werd.
 
-<p><ref target=ev.III.1.307>III. 1. 307.</ref> <hi rend=ex>Zij kan naaien.</hi> In &apos;t Engelsch: <hi lang=en>she can sew</hi>, waarvoor in de folio-uitgave <hi lang=en>sowe</hi> geschreven wordt, zoodat de volgende vraag <hi lang=en>can she so</hi> het woord herhaalt. Hier moest de vertaler zich anders helpen; evenzoo bij het volgende, waar het woord <hi lang=en>stock</hi> eerst in de beteekenis van &ldquo;kapitaal&rdquo;, &ldquo;geld&rdquo;, daarna in die van &ldquo;sok&rdquo;, wordt opgevat.
+<p><ref target=ev.III.1.307>III. 1. 307.</ref> <hi rend=ex>Zij kan naaien.</hi> In &apos;t Engelsch: <hi lang=en>she can sew</hi>, waarvoor in de folio-uitgave <hi lang=en>sowe</hi> geschreven wordt, zoodat de volgende vraag <hi lang=en>can she so</hi> het woord herhaalt. Hier moest de vertaler zich anders helpen; evenzoo bij het volgende, waar het woord <hi lang=en>stock</hi> eerst in de beteekenis van &bdquo;kapitaal&rdquo;, &bdquo;geld&rdquo;, daarna in die van &bdquo;sok&rdquo;, wordt opgevat.
 
 <p><ref target=ev.IV.1.36>IV. 1. 36.</ref> <hi rend=ex>Bij Robin Hood&apos;s</hi> enz. De bandiet zweert bij de kale kruin van broeder Tuck, den priester en biechtvader van den gevierden roover en wilddief Robin Hood, van Sherwoodforest, die aan iederen Engelschman bekend was en die ook in Scott&apos;s Ivanhoe voorkomt. Zie boven blz. <ref target=pb190 type=pageref>190</ref>.
 
@@ -5219,14 +5227,14 @@
 
 <p><ref target=ev.IV.4.39>IV. 4. 39.</ref> <hi rend=ex>Toen ik van jonkvrouw Silvia afscheid nam.</hi> Steevens achtte het beter hier Julia te lezen in plaats van Silvia. Het schijnt inderdaad, dat Lans aan een vroeger afscheid dacht.
 
-<p><ref target=ev.IV.4.60>IV. 4. 60.</ref> <hi rend=ex>Door de knapen van den hondenslager.</hi> Er staat eigenlijk &ldquo;door de knapen van den beul&rdquo;, &ldquo;<hi lang=en>the hangman&apos;s boys</hi>&rdquo;. Sommigen verkiezen <hi lang=en>the hangman boys</hi>, waarbij <hi lang=en>hangman</hi> als adjectief beschouwd wordt, zoodat het beteekenen zou: de ellendige, schurkachtige jongens, de galgenbrokken.
+<p><ref target=ev.IV.4.60>IV. 4. 60.</ref> <hi rend=ex>Door de knapen van den hondenslager.</hi> Er staat eigenlijk &bdquo;door de knapen van den beul&rdquo;, &bdquo;<hi lang=en>the hangman&apos;s boys</hi>&rdquo;. Sommigen verkiezen <hi lang=en>the hangman boys</hi>, waarbij <hi lang=en>hangman</hi> als adjectief beschouwd wordt, zoodat het beteekenen zou: de ellendige, schurkachtige jongens, de galgenbrokken.
 
 <p><ref target=ev.V.4.129>V. 4. 129.</ref> <hi rend=ex>Geheel Milaan beschermt u niet.</hi> In &apos;t Engelsch staat: <hi lang=en>Verona shall not hold thee.</hi> Zie boven de <ref target=aant.II.5.1>aanteekening</ref> op <ref target=ev.II.5.1>II. 5. 1</ref>.
 
 
 
 </body>
-<back>
+<back id=backmatter>
 
 <divGen type=toc id=toc>
 
