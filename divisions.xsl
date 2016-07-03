@@ -1,12 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to format division elements, to be imported in tei2html.xsl.
-
-    Requires:
-        localization.xsl    : templates for localizing strings.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
@@ -19,13 +11,12 @@
     version="2.0"
     >
 
-
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to convert the main divisions of a TEI file to HTML</xd:short>
-        <xd:detail>This stylesheet to convert the main divisions of a TEI file to HTML. Each main division
+        <xd:detail>This stylesheet converts the main divisions of a TEI file to HTML. Each main division
         is converted to a <code>div</code>-element, with a class attribute matching the type of the division.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <!--====================================================================-->

@@ -3,12 +3,6 @@
     <!ENTITY nbsp       "&#160;">
 
 ]>
-<!--
-
-    Stylesheet with templates to format figures, to be imported in
-    tei2html.xsl.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
@@ -23,9 +17,9 @@
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to handle figures.</xd:short>
-        <xd:detail>This stylesheet handles TEI figure elements.</xd:detail>
+        <xd:detail>This stylesheet handles TEI figure elements; part of tei2html.xsl.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -40,9 +34,9 @@
     <xd:doc>
         <xd:short>Determine the file name for an image.</xd:short>
         <xd:detail>
-            <p>Derive a file name from the unique id, and assume that the format
-            is .jpg, unless an alternative name is given in the rend attribute, using
-            image().</p>
+            <p>Derive a file name from the <code>@id</code> attribute, and assume that the extension
+            is <code>.jpg</code>, unless an alternative name is given in the <code>@rend</code> attribute, using
+            the rendition-ladder notation <code>image()</code>.</p>
         </xd:detail>
         <xd:param name="format" type="string">The default file-extension of the image file.</xd:param>
     </xd:doc>
@@ -67,9 +61,9 @@
     <xd:doc>
         <xd:short>Determine the file name for an image.</xd:short>
         <xd:detail>
-            <p>Derive a file name from the unique id, and assume that the format
-            is .jpg, unless an alternative name is given in the rend attribute, using
-            image().</p>
+            <p>Derive a file name from the <code>@id</code> attribute, and assume that the extension
+            is <code>.jpg</code>, unless an alternative name is given in the <code>@rend</code> attribute, using
+            the rendition-ladder notation <code>image()</code>.</p>
 
             <p>This function should replace the similarly named named template.</p>
         </xd:detail>
@@ -162,7 +156,7 @@
         <xsl:param name="filename" select="''" as="xs:string"/>
 
         <!-- What is the text that should go on the img alt attribute in HTML? -->
-        <xsl:variable name="alt2">
+        <xsl:variable name="alt">
             <xsl:choose>
                 <xsl:when test="figDesc">
                     <xsl:value-of select="figDesc"/>
@@ -194,13 +188,11 @@
             <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
 
-        <img>
-            <xsl:attribute name="src">
-                <xsl:value-of select="$file"/>
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-                <xsl:value-of select="$alt2"/>
-            </xsl:attribute>
+        <xsl:if test="$width = ''">
+            <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" not present in image-info file "<xsl:value-of select="normalize-space($imageInfoFile)"/>".</xsl:message>
+        </xsl:if>
+
+        <img src="{$file}" alt="{$alt}">
             <xsl:if test="$width != ''">
                 <xsl:attribute name="width">
                     <xsl:value-of select="$width"/>
@@ -230,29 +222,27 @@
 
         <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
 
+        <xsl:variable name="alt">
+            <xsl:choose>
+                <xsl:when test="figDesc">
+                    <xsl:value-of select="figDesc"/>
+                </xsl:when>
+                <xsl:when test="head">
+                    <xsl:value-of select="head"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="''"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
         <xsl:result-document href="{$path}/{$filename}">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
                     <div class="figure">
-
-                        <img src="{$imagefile}">
-                            <xsl:attribute name="alt">
-                                <xsl:choose>
-                                    <xsl:when test="figDesc">
-                                        <xsl:value-of select="figDesc"/>
-                                    </xsl:when>
-                                    <xsl:when test="head">
-                                        <xsl:value-of select="head"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="''"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </xsl:attribute>
-                        </img>
-
+                        <img src="{$imagefile}" alt="{$alt}"/>
                         <xsl:apply-templates/>
                     </div>
                 </body>
@@ -290,8 +280,7 @@
     <xd:doc>
         <xd:short>Generate CSS code related to images.</xd:short>
         <xd:detail>
-            <p>In the CSS for each image, we register its length and width, to help
-            HTML rendering.</p>
+            <p>In the CSS for each image, we register its length and width, to help HTML rendering.</p>
         </xd:detail>
     </xd:doc>
 
@@ -340,10 +329,6 @@
                 <xsl:variable name="width">
                     <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
                 </xsl:variable>
-
-                <xsl:if test="$width = ''">
-                    <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" not present in imageinfo file "<xsl:value-of select="normalize-space($imageInfoFile)"/>".</xsl:message>
-                </xsl:if>
 
                 <xsl:attribute name="class">
                     <xsl:text>figure </xsl:text>
