@@ -44,7 +44,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2" mode="opf">
+    <xsl:template match="TEI.2|TEI" mode="opf">
         <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 
@@ -705,8 +705,8 @@
     <xsl:template name="get-cover-image">
         <xsl:variable name="figure" select="(if (//figure[@id = 'cover-image']) then //figure[@id = 'cover-image'] else //figure[@id = 'titlepage-image'])[1]"/>
         <xsl:choose>
-            <xsl:when test="f:has-rend-value(/TEI.2/text/@rend, 'cover-image')">
-                <xsl:value-of select="f:rend-value(/TEI.2/text/@rend, 'cover-image')"/>
+            <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'cover-image')">
+                <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'cover-image')"/>
             </xsl:when>
             <xsl:when test="f:has-rend-value($figure/@rend, 'image')">
                 <xsl:value-of select="f:rend-value($figure/@rend, 'image')"/>
@@ -756,10 +756,10 @@
                 </reference>
             </xsl:if>
 
-            <xsl:if test="/TEI.2/text/front/titlePage">
+            <xsl:if test="/*[self::TEI.2 or self::TEI]/text/front/titlePage">
                 <reference type="title-page" title="{f:message('msgTitlePage')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(/TEI.2/text/front/titlePage)[1]"/>
+                        <xsl:with-param name="target" select="(/*[self::TEI.2 or self::TEI]/text/front/titlePage)[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>
@@ -828,10 +828,10 @@
                 </reference>
             </xsl:if>
 
-            <xsl:if test="/TEI.2/text/body/div0 | /TEI.2/text/body/div1 | /TEI.2/text/body/div">
+            <xsl:if test="/*[self::TEI.2 or self::TEI]/text/body/div0 | /*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div">
                 <reference type="text" title="{f:message('msgText')}">
                     <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(/TEI.2/text/body/div0 | /TEI.2/text/body/div1 | /TEI.2/text/body/div)[1]"/>
+                        <xsl:with-param name="target" select="(/*[self::TEI.2 or self::TEI]/text/body/div0 | /*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)[1]"/>
                     </xsl:call-template>
                 </reference>
             </xsl:if>

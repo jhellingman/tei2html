@@ -37,7 +37,7 @@
         <xd:detail>The language and specific locale to use, e.g. 'de-AT'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="language" select="/TEI.2/@lang" />
+    <xsl:variable name="language" select="/*[self::TEI.2 or self::TEI]/@lang" />
 
     <xd:doc>
         <xd:short>Localization base-language.</xd:short>

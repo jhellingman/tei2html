@@ -25,7 +25,7 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="TEI.2">
+    <xsl:template match="TEI.2|TEI">
         <rdf:RDF>
             <rdf:Description>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>

@@ -62,6 +62,13 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </TEI.2>
 </xsl:template>
 
+<xsl:template match="tei">
+<TEI>
+ <xsl:apply-templates select="@*"/>
+ <xsl:apply-templates/>
+</TEI>
+</xsl:template>
+
 <xsl:template match="addname">
 <addName>
  <xsl:apply-templates select="@*"/>

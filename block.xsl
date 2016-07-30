@@ -26,7 +26,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xd xs"
+    exclude-result-prefixes="f xd xs tmp"
     version="2.0"
     >
 

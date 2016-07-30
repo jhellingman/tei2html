@@ -1,11 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to create a colophon from a TEI file, to be imported in tei2html.xsl.
-
-    Usage: <divGen type="Colophon"/>
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
@@ -66,19 +59,19 @@
 
     <xsl:template name="colophon-body">
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
-        <xsl:apply-templates select="/TEI.2/teiHeader/fileDesc/publicationStmt/availability"/>
+        <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
         <xsl:call-template name="classification"/>
 
         <xsl:call-template name="catalog-entries"/>
 
-        <xsl:if test="/TEI.2/teiHeader/encodingDesc">
+        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
-            <xsl:apply-templates select="/TEI.2/teiHeader/encodingDesc"/>
+            <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc"/>
         </xsl:if>
 
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
-        <xsl:apply-templates select="/TEI.2/teiHeader/revisionDesc"/>
+        <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/revisionDesc"/>
 
         <xsl:if test="//xref[@url]">
             <xsl:call-template name="external-references"/>
@@ -332,7 +325,7 @@
                             </xsl:for-each>
                         </td>
                         <td>
-                            <xsl:variable name="url" select="f:translate-xref-url(@url, substring(/TEI.2/@lang, 1, 2))"/>
+                            <xsl:variable name="url" select="f:translate-xref-url(@url, substring(/*[self::TEI.2 or self::TEI]/@lang, 1, 2))"/>
                             <xsl:choose>
                                 <xsl:when test="f:getSetting('outputExternalLinks') != 'never'">
                                     <a href="{$url}" class="{f:translate-xref-class(@url)}"><xsl:value-of select="$url"/></a>
@@ -387,7 +380,7 @@
         <div class="transcribernote">
             <h2 class="main"><xsl:value-of select="f:message('msgOverviewForeignFragments')"/></h2>
 
-            <xsl:variable name="mainlang" select="/TEI.2/@lang"/>
+            <xsl:variable name="mainlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
             <xsl:for-each-group select="//*[@lang != $mainlang]" group-by="@lang">
                 <xsl:sort select="@lang"/>
 
@@ -441,7 +434,7 @@
                                     <xsl:when test="f:insideFootnote(.)">
                                         <xsl:choose>
                                             <xsl:when test="f:insideChoice(.)">
-                                                <!-- Typical scenario: Greek text with automatically added transliteration in footnote. -->
+                                                <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
                                                 <xsl:call-template name="generate-footnote-href-attribute">
                                                     <xsl:with-param name="target" select="./ancestor::choice"/>
                                                 </xsl:call-template>
@@ -452,7 +445,7 @@
                                         </xsl:choose>
                                     </xsl:when>
                                     <xsl:when test="f:insideChoice(.)">
-                                        <!-- Typical scenario: Greek text with automatically added transliteration. -->
+                                        <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
                                         <xsl:call-template name="generate-href-attribute">
                                             <xsl:with-param name="target" select="./ancestor::choice"/>
                                         </xsl:call-template>

@@ -13,7 +13,7 @@
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xs"
+    exclude-result-prefixes="f xd xs tmp"
     version="2.0"
     >
 
@@ -32,7 +32,7 @@
         <xd:detail>Marginal notes should go to the margin. The actual placement in handled through CSS.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/TEI.2/text//note[@place='margin']">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='margin']">
         <span class="marginnote">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
@@ -48,7 +48,7 @@
         for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/TEI.2/text//note[@place='foot' or @place='unspecified' or not(@place)]">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='foot' or @place='unspecified' or not(@place)]">
         <a class="noteref">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:call-template name="generate-footnote-href-attribute"/>
@@ -260,7 +260,7 @@
         are included.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/TEI.2/text//note[@place='apparatus']">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
         <a class="apparatusnote">
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>

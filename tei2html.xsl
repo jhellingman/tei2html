@@ -81,10 +81,10 @@
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputformat" select="'html'"/>
 
-    <xsl:variable name="title" select="/TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
-    <xsl:variable name="author" select="/TEI.2/teiHeader/fileDesc/titleStmt/author"/>
-    <xsl:variable name="publisher" select="/TEI.2/teiHeader/fileDesc/publicationStmt/publisher"/>
-    <xsl:variable name="pubdate" select="/TEI.2/teiHeader/fileDesc/publicationStmt/date"/>
+    <xsl:variable name="title" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
+    <xsl:variable name="author" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/author"/>
+    <xsl:variable name="publisher" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher"/>
+    <xsl:variable name="pubdate" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/date"/>
 
     <xsl:variable name="p.element" select="if ($optionPrinceMarkup = 'Yes') then 'div' else 'p'"/>
 

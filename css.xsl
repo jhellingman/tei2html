@@ -93,8 +93,8 @@
     <xsl:template name="common-css-stylesheets">
         <xsl:variable name="stylesheetname">
             <xsl:choose>
-                <xsl:when test="f:has-rend-value(/TEI.2/text/@rend, 'stylesheet')">
-                    <xsl:value-of select="f:rend-value(/TEI.2/text/@rend, 'stylesheet')"/>
+                <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
+                    <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
                 </xsl:when>
                 <xsl:otherwise><xsl:value-of select="f:getSetting('defaultStylesheet')"/></xsl:otherwise>
             </xsl:choose>
@@ -380,17 +380,17 @@
 
         <!-- We need to collect the column-related rendering rules first,
              so they can be overridden by later cell rendering rules -->
-        <xsl:apply-templates select="TEI.2/text//column[@rend]" mode="css-column"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//column[@rend]" mode="css-column"/>
 
         <!-- Then follow the row-related rendering rules -->
-        <xsl:apply-templates select="TEI.2/text//row[@rend]" mode="css-row"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//row[@rend]" mode="css-row"/>
 
         <!-- Handle the rest of the document (including table cells) -->
-        <xsl:apply-templates select="/TEI.2/facsimile" mode="css"/>
-        <xsl:apply-templates select="/TEI.2/teiHeader" mode="css"/>
-        <xsl:apply-templates select="/TEI.2/text" mode="css"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="css"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css"/>
 
-        <xsl:apply-templates select="/TEI.2/text" mode="css-handheld"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-handheld"/>
     </xsl:template>
 
 

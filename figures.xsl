@@ -187,9 +187,21 @@
         <xsl:variable name="height">
             <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@height, 'px')"/>
         </xsl:variable>
+        <xsl:variable name="fileSize">
+            <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@filesize"/>
+        </xsl:variable>
 
         <xsl:if test="$width = ''">
             <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" not present in image-info file "<xsl:value-of select="normalize-space($imageInfoFile)"/>".</xsl:message>
+        </xsl:if>
+        <xsl:if test="$width != '' and $width > 720">
+            <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" width more than 720 pixels (<xsl:value-of select="$width"/> px).</xsl:message>
+        </xsl:if>
+        <xsl:if test="$height != '' and $height > 720">
+            <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" height more than 720 pixels (<xsl:value-of select="$height"/> px).</xsl:message>
+        </xsl:if>
+        <xsl:if test="$fileSize != '' and $fileSize > 102400">
+            <xsl:message terminate="no">WARNING: Image "<xsl:value-of select="$file"/>" file-size more than 100 kilobytes (<xsl:value-of select="ceiling($fileSize div 1024)"/> kB).</xsl:message>
         </xsl:if>
 
         <img src="{$file}" alt="{$alt}">

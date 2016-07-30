@@ -40,7 +40,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2" mode="ncx">
+    <xsl:template match="TEI.2|TEI" mode="ncx">
 
         <xsl:result-document format="ncx" href="{$path}/{$basename}.ncx">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
@@ -85,7 +85,7 @@
                     <xsl:variable name="navMap">
 
                         <xsl:copy-of select="f:create-nav-point(key('id', 'cover')[1], 'cover', f:message('msgCoverImage'))"/>
-                        <xsl:copy-of select="f:create-nav-point((/TEI.2/text/front/titlePage)[1], 'titlepage', f:message('msgTitlePage'))"/>
+                        <xsl:copy-of select="f:create-nav-point((/*[self::TEI.2 or self::TEI]/text/front/titlePage)[1], 'titlepage', f:message('msgTitlePage'))"/>
 
                         <xsl:apply-templates select="text" mode="navMap"/>
 

@@ -102,7 +102,7 @@
                     <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
                     <param name="language">
                         <xsl:call-template name="GetMessage">
-                            <xsl:with-param name="name" select="/TEI.2/@lang"/>
+                            <xsl:with-param name="name" select="/*[self::TEI.2 or self::TEI]/@lang"/>
                         </xsl:call-template>
                     </param>
                 </params>

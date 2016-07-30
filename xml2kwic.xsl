@@ -34,7 +34,7 @@
     <xsl:param name="keyword" select="''"/>
 
 
-    <xsl:variable name="defaultlang" select="/TEI.2/@lang"/>
+    <xsl:variable name="defaultlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
 
 
     <xd:doc>
@@ -101,7 +101,7 @@
     <xsl:template match="/">
         <head>
             <meta charset="UTF-8"/>
-            <title>KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
+            <title>KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
             <style>
 
                 table {
@@ -180,7 +180,7 @@
         </head>
         <html>
             <h1>
-                KWIC for <xsl:value-of select="TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
+                KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
 
                 <xsl:if test="$keyword != ''">
                     (<xsl:value-of select="$keyword"/>)

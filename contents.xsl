@@ -95,17 +95,17 @@
         </xsl:variable>
 
         <xsl:element name="{$list-element}">
-            <xsl:apply-templates mode="gentoc" select="/TEI.2/text/front/div1 | /TEI.2/text/front/div">
+            <xsl:apply-templates mode="gentoc" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else (/TEI.2/text/body/div1 | /TEI.2/text/body/div)">
+            <xsl:apply-templates mode="gentoc" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else (/*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="(/TEI.2/text/back/div1 | /TEI.2/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
+            <xsl:apply-templates mode="gentoc" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
@@ -374,15 +374,15 @@
         </xsl:variable>
 
         <table>
-            <xsl:apply-templates mode="gentoc-table" select="/TEI.2/text/front/div1 | /TEI.2/text/front/div">
+            <xsl:apply-templates mode="gentoc-table" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else (/TEI.2/text/body/div1 | /TEI.2/text/body/div)">
+            <xsl:apply-templates mode="gentoc-table" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else (/*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="(/TEI.2/text/back/div1 | /TEI.2/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
+            <xsl:apply-templates mode="gentoc-table" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
         </table>
@@ -515,9 +515,9 @@
             <xsl:call-template name="set-lang-id-attributes"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
-            <xsl:apply-templates mode="gentoca" select="/TEI.2/text/front/div1"/>
-            <xsl:apply-templates mode="gentoca" select="if (/TEI.2/text/body/div0) then /TEI.2/text/body/div0 else /TEI.2/text/body/div1"/>
-            <xsl:apply-templates mode="gentoca" select="/TEI.2/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
+            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/front/div1"/>
+            <xsl:apply-templates mode="gentoca" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else /*[self::TEI.2 or self::TEI]/text/body/div1"/>
+            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
         </div>
     </xsl:template>
 

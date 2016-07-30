@@ -46,7 +46,6 @@
         <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-
     <xsl:include href="segmentize.xsl"/>
 
 
@@ -74,7 +73,6 @@
         <!-- page numbers in odd places -->
 
         <!-- division numbers in sequence -->
-
 
         <xsl:variable name="segments">
             <xsl:call-template name="segmentize"/>
@@ -499,14 +497,19 @@
 
     <xsl:template mode="checks" match="segment">
 
-        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                     'P0004', 'Space before punctuation mark.')"/>
-        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',            'P0005', 'Space before closing punctuation mark.')"/>
-        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&bdquo;]\s+',     'P0006', 'Space after opening punctuation mark.')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                                 'P0004', 'Space before punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',                        'P0005', 'Space before closing punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',          'P0006', 'Space after opening punctuation mark')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., ',[^\s&mdash;&rdquo;&rsquo;0-9)\]]',   'P0007', 'Missing space after comma.')"/>
-        <xsl:copy-of select="f:should-not-contain(., ',[&mdash;&ndash;]-',   'P0010', 'Em-dash or en-dash followed by dash.')"/>
-        <xsl:copy-of select="f:should-not-contain(., ',[&mdash;-]&ndash;',   'P0011', 'Em-dash or dash followed by en-dash.')"/>
-        <xsl:copy-of select="f:should-not-contain(., ',[&ndash;-]&mdash;',   'P0012', 'En-dash or dash followed by em-dash.')"/>
+        <xsl:copy-of select="f:should-not-contain(., ',[^\s&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',    'P0007', 'Missing space after comma')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\.[^\s.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',  'P0015', 'Missing space after period')"/>
+
+        <xsl:copy-of select="f:should-not-contain(., '[&mdash;&ndash;]-',                           'P0010', 'Em-dash or en-dash followed by dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., '[&mdash;-]&ndash;',                           'P0011', 'Em-dash or dash followed by en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., '[&ndash;-]&mdash;',                           'P0012', 'En-dash or dash followed by em-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., '--',                                          'P0013', 'Two dashes should be en-dash')"/>
+
+        <xsl:copy-of select="f:should-not-contain(., '[:;!?][^\s&mdash;&rdquo;&raquo;&rsquo;)\]]',  'P0014', 'Missing space after punctuation mark')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="."/>
@@ -523,7 +526,6 @@
         <xsl:param name="code" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
 
-
         <xsl:if test="matches($node, $pattern)">
             <i:issue pos="{$node/@pos}" code="{$code}" element="{$node/@sourceElement}"><xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($node, $pattern)"/></i:issue>
         </xsl:if>
@@ -537,7 +539,8 @@
         <xd:detail>
             <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the
             right single quote character (&rsquo;) is not being used for the apostrophe (hint: temporarily change those to
-            something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, and &ldquo;&rdquo;.</p>
+            something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, &ldquo;&rdquo;, 
+            and &laquo;&raquo;.</p>
         </xd:detail>
     </xd:doc>
 
@@ -560,7 +563,7 @@
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
                 <i:issue pos="{@pos}" code="P0002" element="{./@sourceElement}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
             </xsl:when>
-            <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&raquo;&bdquo;]+$')">
+            <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&laquo;&bdquo;]+$')">
                 <xsl:if test="not(starts-with($next, $unclosed))">
                     <i:issue pos="{@pos}" code="P0008" element="{./@sourceElement}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. Current: <xsl:value-of select="$head"/> Next: <xsl:value-of select="substring($next, 1, 40)"/></i:issue>
                 </xsl:if>
@@ -575,12 +578,12 @@
     <!-- The following two variables should list the openers and matching closers in the same order -->
     <!-- The current values work well for my 19th century Dutch books that use: &raquo;...&rdquo; -->
 
-    <xsl:variable name="opener" select="'(', '[', '{', '&lsquo;', '&ldquo;', '&raquo;', '&bdquo;'"/>
-    <xsl:variable name="closer" select="')', ']', '}', '&rsquo;', '&rdquo;', '&rdquo;', '&rdquo;'"/>
+    <xsl:variable name="opener" select="'(', '[', '{', '&lsquo;', '&ldquo;', '&laquo;', '&bdquo;'"/>
+    <xsl:variable name="closer" select="')', ']', '}', '&rsquo;', '&rdquo;', '&raquo;', '&rdquo;'"/>
     <xsl:variable name="opener-string" select="string-join($opener, '')"/>
     <xsl:variable name="closer-string" select="string-join($closer, '')"/>
 
-    <xsl:variable name="open-quotation-marks" select="'&lsquo;&ldquo;&raquo;&bdquo;'"/>
+    <xsl:variable name="open-quotation-marks" select="'&lsquo;&ldquo;&laquo;&bdquo;'"/>
 
     <xd:doc>
         <xd:short>Find unclosed pairs of paired punctuation marks.</xd:short>

@@ -44,7 +44,7 @@
         <xd:detail>Split a TEI document into parts, entering the splitter in default mode.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/TEI.2/text" priority="2">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text" priority="2">
         <xsl:apply-templates mode="splitter"/>
     </xsl:template>
 
@@ -534,7 +534,7 @@
     <xsl:template name="splitter-generate-filename-for">
         <xsl:param name="node" select="." as="element()"/>
 
-        <xsl:apply-templates select="root($node)/TEI.2/text" mode="splitter">
+        <xsl:apply-templates select="root($node)/*[self::TEI.2 or self::TEI]/text" mode="splitter">
             <xsl:with-param name="node" select="$node"/>
             <xsl:with-param name="action" select="'filename'"/>
         </xsl:apply-templates>
