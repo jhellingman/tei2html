@@ -36,6 +36,7 @@ BEGIN
     $langNameHash{"ca"}        = "Catalan";
     $langNameHash{"co"}        = "Corsican";
     $langNameHash{"cs"}        = "Czech";
+    $langNameHash{"cs-cz"}     = "Czech (Czech Republic)";
     $langNameHash{"cy"}        = "Welsh";
     $langNameHash{"da"}        = "Danish";
     $langNameHash{"de"}        = "German";
@@ -52,6 +53,8 @@ BEGIN
     $langNameHash{"en-us"}     = "English (United States)";
     $langNameHash{"eo"}        = "Esperanto";
     $langNameHash{"es"}        = "Spanish";
+    $langNameHash{"es-es"}     = "Spanish (Spain)";
+    $langNameHash{"es-mx"}     = "Spanish (Mexico)";
     $langNameHash{"et"}        = "Estonian";
     $langNameHash{"eu"}        = "Basque";
     $langNameHash{"fa"}        = "Farsi";

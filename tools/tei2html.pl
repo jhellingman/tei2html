@@ -155,10 +155,8 @@ sub processFile($) {
 
     print "Processing TEI-file '$basename' version $version\n";
 
-
     extractMetadata($filename);
     extractEntities($filename);
-
 
     if ($makeXML && $filename =~ /\.tei$/) {
         sgml2xml($filename, $basename . ".xml");
@@ -528,8 +526,7 @@ sub sgml2xml($$) {
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
-    if ($force == 0 && isNewer($xmlFile, $sgmlFile))
-    {
+    if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
         print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
         return;
     }
