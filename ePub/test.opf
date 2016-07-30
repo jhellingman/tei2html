@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dc="http://purl.org/dc/elements/1.1/"
+<package xmlns:opf="http://www.idpf.org/2007/opf"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns="http://www.idpf.org/2007/opf"
          xmlns:dcterms="http://purl.org/dc/terms/"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://www.idpf.org/2007/opf"
-         xmlns:opf="http://www.idpf.org/2007/opf"
          version="3.0"
          unique-identifier="epub-id">
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2016-03-15T20:30:52Z</meta>
+      <meta property="dcterms:modified">2016-07-30T22:00:03Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>

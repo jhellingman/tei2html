@@ -274,9 +274,9 @@ ul {
  padding: 1em;
 }
 
-
 .itemGroupTable {
  border-collapse: collapse;
+ margin-left: 0;
 }
 
 .itemGroupTable td {
