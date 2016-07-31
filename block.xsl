@@ -37,6 +37,9 @@
         <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xd:doc mode="#default">
+        <xd:short>Default mode; generates HTML output.</xd:short>
+    </xd:doc>
 
     <!-- Page Breaks -->
 

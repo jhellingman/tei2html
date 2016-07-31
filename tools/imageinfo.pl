@@ -20,8 +20,7 @@ GetOptions (
 
 my $directory = $ARGV[0];
 
-if (!$directory)
-{
+if (!$directory) {
     $directory = ".";
 }
 
@@ -38,8 +37,7 @@ print "\n</images>";
 #
 # listRecursively -- list a directory tree to find all images in it.
 #
-sub listRecursively($)
-{
+sub listRecursively($) {
     my $directory = shift;
     my @files = (  );
 
@@ -48,17 +46,13 @@ sub listRecursively($)
     @files = grep (!/^\.\.?$/, readdir(DIR));
     closedir(DIR);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory/$file")
-        {
-            if ($file =~ /\.jpe?g$|\.png|\.gif/i)
-            {
+    foreach my $file (@files) {
+        if (-f "$directory/$file") {
+            if ($file =~ /\.jpe?g$|\.png|\.gif/i) {
                 handleImage("$directory/$file");
             }
         }
-        elsif (-d "$directory/$file")
-        {
+        elsif (-d "$directory/$file") {
             listRecursively("$directory/$file");
         }
     }
@@ -68,8 +62,7 @@ sub listRecursively($)
 #
 # handleImage -- find the dimensions and optionally outer contours of an image.
 #
-sub handleImage($)
-{
+sub handleImage($) {
     my $imageFile = shift;
     my $fileFormat;
     my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $fileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($imageFile);
@@ -78,20 +71,16 @@ sub handleImage($)
 
 
     my $imagePath = $imageFile;
-    if ($stripPath == 1)
-    {
+    if ($stripPath == 1) {
         my ($name, $path, $suffix) = fileparse($imageFile, "");
         $imagePath = "images/$name";
-    }
-    else
-    {
+    } else {
         $imagePath = dropPath($imagePath, $dropPath);
     }
 
-    if ($seenImageHash{$imagePath}) 
-    {
+    if ($seenImageHash{$imagePath}) {
         print STDERR "Ignoring second instance of $imagePath\n";
-        return
+        return;
     }
     $seenImageHash{$imagePath} = 1;
 
@@ -100,8 +89,7 @@ sub handleImage($)
 
     print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\">";
 
-    if ($needContour != 0)
-    {
+    if ($needContour != 0) {
         $image->Read($imageFile);
 
         # collect contour information
@@ -109,48 +97,36 @@ sub handleImage($)
         my @leftBoundary;
         my @rightBoundary;
 
-        for (my $y = 0; $y < $height; $y++)
-        {
+        for (my $y = 0; $y < $height; $y++) {
             $leftBoundary[$y] = 0;
-            for (my $x = 0; $x < $width; $x++)
-            {
+            for (my $x = 0; $x < $width; $x++) {
                 my ($r, $g, $b, $a) = split(",", $image->Get("pixel[$x,$y]"));
 
-                if (isWhite($r, $g, $b))
-                {
+                if (isWhite($r, $g, $b)) {
                     $leftBoundary[$y]++;
-                }
-                else
-                {
+                } else {
                     last;
                 }
             }
         }
 
-        for (my $y = 0; $y < $height; $y++)
-        {
+        for (my $y = 0; $y < $height; $y++) {
             $rightBoundary[$y] = 0;
-            for (my $x = 0; $x < $width; $x++)
-            {
+            for (my $x = 0; $x < $width; $x++) {
                 my $str = "pixel[" . ($width - $x - 1) . ",$y]";
                 my ($r, $g, $b, $a) = split(",", $image->Get($str));
-                if (isWhite($r, $g, $b))
-                {
+                if (isWhite($r, $g, $b)) {
                     $rightBoundary[$y]++;
-                }
-                else
-                {
+                } else {
                     last;
                 }
             }
         }
 
         print "\n<leftBoundary level=\"$whiteLevel\" step=\"${stepSize}px\">";
-        for (my $y = 0; $y < $height; $y += $stepSize)
-        {
+        for (my $y = 0; $y < $height; $y += $stepSize) {
             my $max = $leftBoundary[$y];
-            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++)
-            {
+            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++) {
                 $max = $max < $leftBoundary[$y2] ? $max : $leftBoundary[$y2];
             }
             print ($y == 0 ? "$max" : ", $max");
@@ -158,11 +134,9 @@ sub handleImage($)
         print "</leftBoundary>";
 
         print "\n<rightBoundary level=\"$whiteLevel\" step=\"${stepSize}px\">";
-        for (my $y = 0; $y < $height; $y += $stepSize)
-        {
+        for (my $y = 0; $y < $height; $y += $stepSize) {
             my $max = $rightBoundary[$y];
-            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++)
-            {
+            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++) {
                 $max = $max < $rightBoundary[$y2] ? $max : $rightBoundary[$y2];
             }
             print ($y == 0 ? "$max" : ", $max");
@@ -177,8 +151,7 @@ sub handleImage($)
 #
 # isWhite -- determine whether a pixel is white enough.
 #
-sub isWhite($$$)
-{
+sub isWhite($$$) {
     my ($r, $g, $b) = @_;
 
     my $gray =  0.299 * $r + 0.587 * $g + 0.114 * $b;
@@ -191,8 +164,7 @@ sub isWhite($$$)
 #
 # dropPath -- drop the first $n levels from a directory path.
 #
-sub dropPath($$)
-{
+sub dropPath($$) {
     my $path = shift;
     my $n = shift;
 
@@ -200,14 +172,10 @@ sub dropPath($$)
 
     my $i = 0;
     $path = "";
-    foreach my $component (@components)
-    {
-        if ($i == $n) 
-        {
+    foreach my $component (@components) {
+        if ($i == $n) {
             $path = $component;
-        }
-        elsif ($i > $n || $i == @components)
-        {
+        } elsif ($i > $n || $i == @components) {
             $path .= "/" . $component;
         }
         $i++;

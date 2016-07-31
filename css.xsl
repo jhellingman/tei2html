@@ -29,6 +29,9 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xd:doc>
+        <xd:short>Key to quickly find rend attributes on elements.</xd:short>
+    </xd:doc>
 
     <xsl:key name="rend" match="*" use="concat(name(), ':', @rend)"/>
 
