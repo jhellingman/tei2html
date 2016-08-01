@@ -52,11 +52,11 @@
 
     <xsl:template match="pb">
         <xsl:choose>
-            <!-- In HTML, we do not allow a span element at the top-level. -->
+            <!-- In HTML, we do not allow a span element at the top-level, so wrap it into a paragraph. -->
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
-            <!-- In some odd cases, you can have a parent::front, and also a ancestor::p, this is why those tests are separated -->
+            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separated -->
             <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span">
                 <xsl:call-template name="pb"/>
             </xsl:when>

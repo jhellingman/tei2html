@@ -357,7 +357,7 @@
         <xd:param name="value" type="string">The value to be tested.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:isvalid" as="xs:boolean">
+    <xsl:function name="f:isValid" as="xs:boolean">
         <xsl:param name="value"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>

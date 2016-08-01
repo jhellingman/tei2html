@@ -38,7 +38,7 @@
                 <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
-                <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
+                <xsl:if test="f:isValid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
                     <dc:identifier>pg:<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/></dc:identifier>
                 </xsl:if>
             </rdf:Description>
@@ -76,7 +76,7 @@
 
     <xsl:template match="item" mode="keywords">
         <!-- Filter out empty subjects and our template default placeholder -->
-        <xsl:if test="f:isvalid(.)">
+        <xsl:if test="f:isValid(.)">
             <dc:subject>
                 <xsl:value-of select="."/>
             </dc:subject>
@@ -85,7 +85,7 @@
 
     <xsl:template match="name" mode="contributors">
         <!-- Filter out empty contributors and our template default placeholder -->
-        <xsl:if test="f:isvalid(.)">
+        <xsl:if test="f:isValid(.)">
             <dc:contributor>
                 <xsl:value-of select="."/>
             </dc:contributor>
@@ -94,7 +94,7 @@
 
     <xsl:template match="note" mode="descriptions">
         <!-- Filter out empty descriptions and our template default placeholder -->
-        <xsl:if test="f:isvalid(.)">
+        <xsl:if test="f:isValid(.)">
             <dc:description>
                 <xsl:value-of select="."/>
             </dc:description>
@@ -111,7 +111,8 @@
         </xd:detail>
         <xd:param name="value" type="string">The value to be tested.</xd:param>
     </xd:doc>
-    <xsl:function name="f:isvalid" as="xs:boolean">
+
+    <xsl:function name="f:isValid" as="xs:boolean">
         <xsl:param name="value"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>

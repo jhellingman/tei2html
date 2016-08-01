@@ -117,7 +117,7 @@
                 <dc:subject><xsl:value-of select="."/></dc:subject>
             </xsl:for-each>
 
-            <xsl:if test="f:isvalid(teiHeader/fileDesc/publicationStmt/date)">
+            <xsl:if test="f:isValid(teiHeader/fileDesc/publicationStmt/date)">
                 <dc:date>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/date"/>
                 </dc:date>

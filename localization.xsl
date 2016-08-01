@@ -1,11 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to handle the localization of messages in XSLT.
-
-    This file is made available under the GNU General Public License, version 3.0 or later.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"

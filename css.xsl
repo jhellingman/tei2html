@@ -1,12 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to generate css, to be imported in tei2html.xsl.
-    Note that the templates for css mode are often integrated
-    with the content templates, to keep these together with
-    the layout code.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"

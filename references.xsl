@@ -24,16 +24,24 @@
     <!-- Cross References -->
 
     <xd:doc>
-        <xd:short>Handle an internal cross-reference.</xd:short>
+        <xd:short>Handle an internal cross-reference (TEI.2/P4).</xd:short>
         <xd:detail>
             <p>Insert a hyperlink that will link to the referenced <code>@target</code>-attribute in the generated output.</p>
             <p>This template includes special handling to make sure elements inside footnotes do point to the correct
             target file when generating multiple-file output, and those footnotes end-up in a different file.</p>
+            <p>This template is for TEI.2 (P4) documents only.</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="ref[@target]">
-        <xsl:variable name="target" select="@target"/>
+    <xsl:template match="TEI.2//ref[@target]">
+        <xsl:call-template name="internal-reference">
+            <xsl:with-param name="target" select="@target"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template name="internal-reference">
+        <xsl:param name="target" as="xs:string"/>
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
         <xsl:choose>
 
@@ -79,6 +87,14 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
+        <xd:detail>
+            <p>Make explicit references to a footnote (marked <code>noteref</code>) look exactly 
+            the same as automatically generated footnote references.</p>
+        </xd:detail>
+    </xd:doc>
+
     <xsl:template match="note" mode="noterefnumber">
         <a class="pseudonoteref">
             <xsl:call-template name="generate-footnote-href-attribute"/>
@@ -116,7 +132,6 @@
     </xsl:function>
 
 
-
     <!--====================================================================-->
     <!-- External References -->
 
@@ -134,6 +149,8 @@
                 setting <code>outputExternalLinksTable</code> to <code>true</code>. Here they will be rendered as an URL.
                 The original link will then link to the table.</li>
             </ul>
+
+            <p>The <code>xref</code>-element has been removed in TEI P5, so this template will not be used with newer TEI files.</p>
         </xd:detail>
     </xd:doc>
 
@@ -254,13 +271,13 @@
             <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
             <xsl:when test="starts-with($url, 'audio/')">
-                 <xsl:choose>
+                <xsl:choose>
                     <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')"><xsl:value-of select="f:message('msgLinkToMidiFile')"/></xsl:when>
                     <xsl:when test="ends-with($url, '.mp3')"><xsl:value-of select="f:message('msgLinkToMp3File')"/></xsl:when>
                     <xsl:when test="ends-with($url, '.ly')"><xsl:value-of select="f:message('msgLinkToLilypondFile')"/></xsl:when>
                     <xsl:when test="ends-with($url, '.mscz')"><xsl:value-of select="f:message('msgLinkToMuseScoreFile')"/></xsl:when>
                     <xsl:otherwise><xsl:value-of select="f:message('msgAudioLink')"/></xsl:otherwise>
-                 </xsl:choose>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
         </xsl:choose>
@@ -274,17 +291,17 @@
             <p>The following short-hand notations are supported:</p>
 
             <table>
-            <tr><th>Shorthand notation</th>         <th>Description</th></tr>
-            <tr><td>pg:<i>[number]</i></td>         <td>Link to a Project Gutenberg ebook.</td></tr>
-            <tr><td>pgi:<i>[number]</i></td>        <td>Link to a Project Gutenberg ebook (internal, for example between multi-volume sets).</td></tr>
-            <tr><td>oclc:<i>[id]</i></td>           <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
-            <tr><td>oln:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the item level).</td></tr>
-            <tr><td>olw:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
-            <tr><td>wp:<i>[string]</i></td>         <td>Link to a Wikipedia article.</td></tr>
-            <tr><td>wpp:<i>[string]</i></td>        <td>Link to a WikiPilipinas article.</td></tr>
-            <tr><td>loc:<i>[coordinates]</i></td>   <td>Link to a geographical location (currently uses Google Maps).</td></tr>
-            <tr><td>bib:<i>[book ch:vs]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
-            <tr><td>mailto:<i>[email address]</i></td> <td>Link to an email address.</td></tr>
+                <tr><th>Shorthand notation</th>         <th>Description</th></tr>
+                <tr><td>pg:<i>[number]</i></td>         <td>Link to a Project Gutenberg ebook.</td></tr>
+                <tr><td>pgi:<i>[number]</i></td>        <td>Link to a Project Gutenberg ebook (internal, for example between multi-volume sets).</td></tr>
+                <tr><td>oclc:<i>[id]</i></td>           <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
+                <tr><td>oln:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the item level).</td></tr>
+                <tr><td>olw:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
+                <tr><td>wp:<i>[string]</i></td>         <td>Link to a Wikipedia article.</td></tr>
+                <tr><td>wpp:<i>[string]</i></td>        <td>Link to a WikiPilipinas article.</td></tr>
+                <tr><td>loc:<i>[coordinates]</i></td>   <td>Link to a geographical location (currently uses Google Maps).</td></tr>
+                <tr><td>bib:<i>[book ch:vs]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
+                <tr><td>mailto:<i>[email address]</i></td> <td>Link to an email address.</td></tr>
             </table>
 
         </xd:detail>
@@ -376,6 +393,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
 
 </xsl:stylesheet>

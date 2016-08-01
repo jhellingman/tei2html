@@ -1,9 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to format the HTML header, to be imported in tei2html.xsl.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
@@ -118,13 +113,13 @@
 
         <meta name="DC.Creator" content="{$author}"/>
         <meta name="DC.Title" content="{$title}"/>
-        <xsl:if test="f:isvalid($pubdate)">
+        <xsl:if test="f:isValid($pubdate)">
             <meta name="DC.Date" content="{$pubdate}"/>
         </xsl:if>
         <meta name="DC.Language" content="{$language}"/>
         <meta name="DC.Format" content="text/html"/>
         <meta name="DC.Publisher" content="{$publisher}"/>
-        <xsl:if test="f:isvalid(//idno[@type='PGnum'])">
+        <xsl:if test="f:isValid(//idno[@type='PGnum'])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
             <meta name="DC.Identifier">
                 <xsl:attribute name="content">https://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>

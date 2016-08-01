@@ -123,7 +123,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='LCCN'])">
+        <xsl:if test="f:isValid(//idno[@type='LCCN'])">
             <p><xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">https://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
@@ -132,7 +132,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='VIAF'])">
+        <xsl:if test="f:isValid(//idno[@type='VIAF'])">
             <p><xsl:value-of select="f:message('msgVirtualInternationalAuthorityFile')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">http://viaf.org/viaf/<xsl:value-of select="//idno[@type='VIAF']"/></xsl:attribute>
@@ -141,7 +141,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='OLN'])">
+        <xsl:if test="f:isValid(//idno[@type='OLN'])">
             <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">https://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
@@ -150,7 +150,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='OLW'])">
+        <xsl:if test="f:isValid(//idno[@type='OLW'])">
             <p><xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">https://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
@@ -159,7 +159,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='OCLC'])">
+        <xsl:if test="f:isValid(//idno[@type='OCLC'])">
             <p><xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">https://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
@@ -168,7 +168,7 @@
             </p>
         </xsl:if>
 
-        <xsl:if test="f:isvalid(//idno[@type='LibThing'])">
+        <xsl:if test="f:isValid(//idno[@type='LibThing'])">
             <p><xsl:value-of select="f:message('msgLibraryThingEntry')"/>:
                 <a class="catlink">
                     <xsl:attribute name="href">https://www.librarything.com/work/<xsl:value-of select="//idno[@type='LibThing']"/></xsl:attribute>
@@ -352,7 +352,7 @@
     </xd:doc>
 
     <xsl:function name="f:find-pagenumber" as="xs:string">
-        <xsl:param name="node"/>
+        <xsl:param name="node" as="node()"/>
 
         <xsl:choose>
             <xsl:when test="not($node/preceding::pb[1]/@n) or $node/preceding::pb[1]/@n = ''">
@@ -412,7 +412,7 @@
     </xd:doc>
 
     <xsl:template name="language-fragments">
-        <xsl:param name="lang"/>
+        <xsl:param name="lang" as="xs:string"/>
 
         <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
 
