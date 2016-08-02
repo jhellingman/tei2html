@@ -48,7 +48,7 @@
     <xsl:include href="colophon.xsl"/>
     <xsl:include href="gutenberg.xsl"/>
     <xsl:include href="facsimile.xsl"/>
-
+    <xsl:include href="stripns.xsl"/>
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"

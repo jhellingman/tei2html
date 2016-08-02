@@ -23,7 +23,7 @@
         <xd:detail>Create a separate ePub3 navigation document.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2|TEI" mode="ePubNav">
+    <xsl:template match="TEI.2 | TEI" mode="ePubNav">
         <xsl:result-document href="{$path}/{$basename}-nav.xhtml">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>-nav.xhtml.</xsl:message>
 

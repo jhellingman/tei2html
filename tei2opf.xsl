@@ -44,7 +44,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2|TEI" mode="opf">
+    <xsl:template match="TEI.2 | TEI" mode="opf">
         <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
 

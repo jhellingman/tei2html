@@ -24,6 +24,30 @@
     <!-- Cross References -->
 
     <xd:doc>
+        <xd:short>Handle a cross-reference (TEI/P5).</xd:short>
+        <xd:detail>
+            <p>Handle TEI/P5 references that can be either internal or external references. Targets starting with a
+            <code>#</code> are considered internal, all others external.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="TEI//ref[@target]">
+        <xsl:choose>
+            <xsl:when test="starts-with(@target, '#')">
+                <xsl:call-template name="handleInternalReference">
+                    <xsl:with-param name="target" select="substring(@target, 2)"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="handleExternalReference">
+                    <xsl:with-param name="url" select="@target"/>
+                </xsl:call-template>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xd:doc>
         <xd:short>Handle an internal cross-reference (TEI.2/P4).</xd:short>
         <xd:detail>
             <p>Insert a hyperlink that will link to the referenced <code>@target</code>-attribute in the generated output.</p>
@@ -34,13 +58,13 @@
     </xd:doc>
 
     <xsl:template match="TEI.2//ref[@target]">
-        <xsl:call-template name="internal-reference">
+        <xsl:call-template name="handleInternalReference">
             <xsl:with-param name="target" select="@target"/>
         </xsl:call-template>
     </xsl:template>
 
 
-    <xsl:template name="internal-reference">
+    <xsl:template name="handleInternalReference">
         <xsl:param name="target" as="xs:string"/>
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
         <xsl:choose>
@@ -155,6 +179,15 @@
     </xd:doc>
 
     <xsl:template match="xref[@url]">
+        <xsl:call-template name="handleExternalReference">
+            <xsl:with-param name="url" select="@url"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template name="handleExternalReference">
+        <xsl:param name="url" as="xs:string"/>
+
         <xsl:choose>
             <xsl:when test="f:isSet('outputExternalLinksTable')">
                 <xsl:choose>
@@ -171,12 +204,11 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:getSetting('outputExternalLinks') = 'always'">
-                <xsl:call-template name="handle-xref"/>
-            </xsl:when>
-
-            <xsl:when test="f:getSetting('outputExternalLinks') = 'colophon' and ancestor::teiHeader">
-                <xsl:call-template name="handle-xref"/>
+            <xsl:when test="f:getSetting('outputExternalLinks') = 'always' 
+                            or (f:getSetting('outputExternalLinks') = 'colophon' and ancestor::teiHeader)">
+                <xsl:call-template name="handle-xref">
+                    <xsl:with-param name="url" select="$url"/>
+                </xsl:call-template>
             </xsl:when>
 
             <xsl:otherwise>
@@ -195,18 +227,20 @@
     </xd:doc>
 
     <xsl:template name="handle-xref">
+        <xsl:param name="url" as="xs:string"/>
+
         <a>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">
-                <xsl:value-of select="f:translate-xref-class(@url)"/>
+                <xsl:value-of select="f:translate-xref-class($url)"/>
                 <xsl:text> </xsl:text>
                 <xsl:call-template name="generate-rend-class-name"/>
             </xsl:attribute>
             <xsl:attribute name="title">
-                <xsl:value-of select="f:translate-xref-title(@url)"/>
+                <xsl:value-of select="f:translate-xref-title($url)"/>
             </xsl:attribute>
             <xsl:attribute name="href">
-                <xsl:value-of select="f:translate-xref-url(@url, substring(/*[self::TEI.2 or self::TEI]/@lang, 1, 2))"/>
+                <xsl:value-of select="f:translate-xref-url($url, substring(/*[self::TEI.2 or self::TEI]/@lang, 1, 2))"/>
             </xsl:attribute>
             <xsl:if test="@rel">
                 <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>

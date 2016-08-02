@@ -30,7 +30,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2|TEI">
+    <xsl:template match="TEI.2 | TEI">
         <xsl:comment>
             <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text><xsl:value-of select="f:utc-timestamp()"/><xsl:text>. </xsl:text>
         </xsl:comment>

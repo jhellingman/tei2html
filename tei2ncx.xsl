@@ -40,7 +40,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="TEI.2|TEI" mode="ncx">
+    <xsl:template match="TEI.2 | TEI" mode="ncx">
 
         <xsl:result-document format="ncx" href="{$path}/{$basename}.ncx">
             <xsl:message terminate="no">INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
