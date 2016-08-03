@@ -5,8 +5,9 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xs xd"
+    exclude-result-prefixes="f tmp xs xd"
     version="2.0"
     >
 
@@ -14,7 +15,7 @@
         <xd:short>Stylesheet to generate a colophon.</xd:short>
         <xd:detail>This stylesheet will generate a colophon from the <code>teiHeader</code>, and various other types of information in the TEI file.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <!--====================================================================-->
@@ -73,9 +74,7 @@
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/revisionDesc"/>
 
-        <xsl:if test="//xref[@url]">
-            <xsl:call-template name="external-references"/>
-        </xsl:if>
+        <xsl:call-template name="external-references"/>
 
         <xsl:if test="//corr">
             <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
@@ -202,7 +201,10 @@
     <xd:doc>
         <xd:short>Generate the contents of the list of corrections.</xd:short>
         <xd:detail>
-            <p>Generate the contents of the list of corrections as an HTML table.</p>
+            <p>Generate the contents of the list of corrections as an HTML table. Since corrections can be encoded
+            in two ways (as <code>corr</code> elements in older TEI versions and as <code>choice</code> elements
+            in newer TEI versions), the two ways are collected and normalized into <code>tmp:choice</code> elements
+            in the variable <code>$corrections</code>. These are then grouped and rendered.</p>
         </xd:detail>
     </xd:doc>
 
@@ -219,31 +221,25 @@
                 <th><xsl:value-of select="f:message('msgCorrection')"/></th>
             </tr>
 
-            <xsl:for-each-group select="//corr" group-by="concat(@sic, concat('@@@', .))">
+            <xsl:variable name="corrections">
+                <xsl:apply-templates select="//corr[not(parent::choice)] | //choice[corr]" mode="collectCorrections"/>
+            </xsl:variable>
+
+            <xsl:for-each-group select="$corrections/tmp:choice" group-by="concat(tmp:sic, '@@@', tmp:corr)">
                 <tr>
                     <td class="width20">
                         <xsl:for-each select="current-group()">
                             <xsl:if test="position() != 1">
                                 <xsl:text>, </xsl:text>
                             </xsl:if>
-                            <a class="pageref">
-                                <xsl:choose>
-                                    <xsl:when test="f:insideFootnote(.)">
-                                        <xsl:call-template name="generate-footnote-href-attribute"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:call-template name="generate-href-attribute"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:value-of select="f:find-pagenumber(.)"/>
-                            </a>
+                            <a class="pageref" href="{@href}"><xsl:value-of select="@page"/></a>
                         </xsl:for-each>
                     </td>
 
                     <td class="width40 bottom">
                         <xsl:choose>
-                            <xsl:when test="@sic != ''">
-                                <xsl:value-of select="@sic"/>
+                            <xsl:when test="tmp:sic != ''">
+                                <xsl:apply-templates select="tmp:sic"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 [<i><xsl:value-of select="f:message('msgNotInSource')"/></i>]
@@ -253,8 +249,8 @@
 
                     <td class="width40 bottom">
                         <xsl:choose>
-                            <xsl:when test=". != ''">
-                                <xsl:apply-templates/>
+                            <xsl:when test="tmp:corr != ''">
+                                <xsl:apply-templates select="tmp:corr"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 [<i><xsl:value-of select="f:message('msgDeleted')"/></i>]
@@ -268,20 +264,73 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Convert a traditional corr element to a temporary choice element.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="corr" mode="collectCorrections">
+        <tmp:choice>
+            <xsl:attribute name="page" select="f:find-pagenumber(.)"/>
+            <xsl:call-template name="corr-href-attribute"/>
+            <tmp:corr>
+                <xsl:copy-of select="* | text()"/>
+            </tmp:corr>
+            <tmp:sic>
+                <xsl:value-of select="@sic"/>
+            </tmp:sic>
+        </tmp:choice>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Convert a correction in a choice element to a temporary choice element.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="choice" mode="collectCorrections">
+        <tmp:choice>
+            <xsl:attribute name="page" select="f:find-pagenumber(.)"/>
+            <xsl:call-template name="corr-href-attribute"/>
+            <tmp:corr>
+                <xsl:copy-of select="corr/* | corr/text()"/>
+            </tmp:corr>
+            <tmp:sic>
+                <xsl:copy-of select="sic/* | sic/text()"/>
+            </tmp:sic>
+         </tmp:choice>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Determine the link back to the correction.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="corr-href-attribute">
+        <xsl:choose>
+            <xsl:when test="f:insideFootnote(.)">
+                <xsl:call-template name="generate-footnote-href-attribute"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="generate-href-attribute"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- External References -->
 
     <xd:doc>
         <xd:short>Generate a table of external references.</xd:short>
         <xd:detail>
-            <p>Generate a table of external references in the text, as indicated by <code>xref</code>-elements. Identical
-            external references are grouped together. The page numbers link back to the <code>xref</code>-element as it 
-            appears in the text.</p>
+            <p>Generate a table of external references in the text, as indicated by <code>xref</code>-elements or
+            <code>ref</code>-elements. Identical
+            external references are grouped together. The page numbers link back to location the external
+            reference appears in the text.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="external-references">
-        <xsl:if test="//xref">
+        <xsl:if test="//xref[@url] | /TEI//ref[not(starts-with(@target, '#'))]">
             <h3 class="main"><xsl:value-of select="f:message('msgExternalReferences')"/></h3>
 
             <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
@@ -300,6 +349,8 @@
     </xd:doc>
 
     <xsl:template name="external-reference-table">
+
+        <!-- TODO: make this table also work for P5 href elements -->
         <xsl:if test="//xref[@url]">
 
             <table class="externalReferenceTable">
