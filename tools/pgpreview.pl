@@ -8,13 +8,11 @@ use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 main();
 
 
-sub main()
-{
+sub main() {
     my $file = $ARGV[0];
     my $useExtensions = 0;
 
-    if ($file eq "-x") 
-    {
+    if ($file eq "-x") {
         $useExtensions = 1;
         $file = $ARGV[1];
         print STDERR "USING EXTENSIONS FOR FRANCK!\n";
@@ -26,33 +24,25 @@ sub main()
 
     my $paragraph = "";
 
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $line = $_;
 
-        if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) 
-        {
+        if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
             print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
             print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
             $paragraph = "";
-        }
-        elsif ($line ne "\n") 
-        {
+        } elsif ($line ne "\n") {
             chomp($line);
             $paragraph .= " " . $line;
-        }
-        else
-        {
-            if ($paragraph ne "") 
-            {
+        } else {
+            if ($paragraph ne "") {
                 print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
             }
             $paragraph = "";
         }
     }
 
-    if ($paragraph ne "") 
-    {
+    if ($paragraph ne "") {
         print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
     }
 
@@ -62,8 +52,7 @@ sub main()
 }
 
 
-sub handleParagraph($$)
-{
+sub handleParagraph($$) {
     my $paragraph = shift;
     my $useExtensions = shift;
 
@@ -91,6 +80,7 @@ sub handleParagraph($$)
 
     # Tag Greek sections (after processing)
     $paragraph =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
+    $paragraph =~ s/<foreign lang=grc>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
 
     # Replace illustration markup:
     $paragraph =~ s/\[Ill?ustration:? (.*)\]/<span class=figure>\n[Illustration: \1\n<\/span>/g;
@@ -137,8 +127,7 @@ sub handleParagraph($$)
 
 
 
-sub printHtmlHead()
-{
+sub printHtmlHead() {
     print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
     print "<html>\n";
     print "<title>DP Preview</title>\n";
@@ -156,8 +145,7 @@ sub printHtmlHead()
 }
 
 
-sub printHtmlTail()
-{
+sub printHtmlTail() {
     print "</body></html>";
 }
 
