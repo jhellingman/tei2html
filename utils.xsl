@@ -76,7 +76,6 @@
     <xd:doc>
         <xd:short>Generate an <code>id</code>-value.</xd:short>
         <xd:detail>Generate an <code>id</code>-value for the current node.</xd:detail>
-        <xd:param name="node">The node for which the <code>id</code>-value is generated.</xd:param>
     </xd:doc>
 
     <xsl:template name="generate-id">
@@ -90,7 +89,7 @@
         <xd:short>Generate a stable id for a node.</xd:short>
         <xd:detail>
             <p>We want to generate ids that are slightly more stable than those genrated by 
-            generate-id(). The general idea is to use an explicit id if that is present, and 
+            <code>generate-id()</code>. The general idea is to use an explicit id if that is present, and 
             otherwise create an id based on the first ancestor node that does have an id. If,
             for example the third paragraph of a division with id '<code>ch2</code>' has no id of itself,
             we generate: "<code>ch2_p_3</code>" as an id. The second note in this division would receive
@@ -175,7 +174,7 @@
     </xd:doc>
 
     <xsl:template name="generate-footnote-href-attribute">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:attribute name="href">
             <xsl:call-template name="generate-footnote-href">
@@ -185,7 +184,7 @@
     </xsl:template>
 
     <xsl:template name="generate-xref-table-href-attribute">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:attribute name="href">
             <xsl:call-template name="generate-xref-table-href">
@@ -216,7 +215,7 @@
     </xd:doc>
 
     <xsl:function name="f:needsclosepar" as="xs:boolean">
-        <xsl:param name="element"/>
+        <xsl:param name="element" as="element()"/>
 
         <xsl:variable name="output_p" select="$p.element = 'p'" as="xs:boolean"/>
         <xsl:variable name="parent_p" select="$element/parent::p or $element/parent::note" as="xs:boolean"/>
@@ -255,7 +254,7 @@
     </xd:doc>
 
     <xsl:template name="set-lang-attribute">
-        <xsl:param name="lang" select="@lang"/>
+        <xsl:param name="lang" select="@lang" as="xs:string?"/>
 
         <xsl:if test="$lang">
             <xsl:choose>
@@ -276,7 +275,7 @@
         valid language codes (see http://tools.ietf.org/html/rfc5646).</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:fix-lang">
+    <xsl:function name="f:fix-lang" as="xs:string">
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:choose>
@@ -320,7 +319,7 @@
     </xd:doc>
 
     <xsl:function name="f:translate-div-type" as="xs:string">
-        <xsl:param name="type"/>
+        <xsl:param name="type" as="xs:string"/>
         <xsl:variable name="type" select="lower-case($type)"/>
 
         <xsl:choose>
@@ -358,7 +357,7 @@
     </xd:doc>
 
     <xsl:function name="f:isValid" as="xs:boolean">
-        <xsl:param name="value"/>
+        <xsl:param name="value" as="xs:string?"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
 

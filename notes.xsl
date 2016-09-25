@@ -84,8 +84,8 @@
     </xd:doc>
 
     <xsl:template name="insert-footnotes">
-        <xsl:param name="div" select="."/>
-        <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+        <xsl:param name="div" select="." as="element()"/>
+        <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]" as="element(note)*"/>
 
         <!-- No explicit request for a notes division -->
         <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
@@ -304,7 +304,7 @@
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes-xx">
-        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:choose>
@@ -340,7 +340,7 @@
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes-xxx">
-        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:variable name="columns" select="number(f:rend-value($rend, 'columns'))"/>
@@ -440,7 +440,7 @@
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes">
-        <xsl:param name="notes" as="node()*"/>
+        <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:variable name="collected-notes">

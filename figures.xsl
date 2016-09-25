@@ -410,7 +410,7 @@
     <xsl:template name="figure-annotations-bottom">
         <xsl:if test="p[f:hasBottomPositionAnnotation(@rend)]">
 
-            <xsl:variable name="file">
+            <xsl:variable name="file" as="xs:string">
                 <xsl:call-template name="getimagefilename"/>
             </xsl:variable>
             <xsl:variable name="width">
@@ -441,25 +441,25 @@
 
 
     <xsl:function name="f:hasPositionAnnotation" as="xs:boolean">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:value-of select="f:positionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:hasTopPositionAnnotation" as="xs:boolean">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:value-of select="f:topPositionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:hasBottomPositionAnnotation" as="xs:boolean">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:value-of select="f:bottomPositionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:positionAnnotation" as="xs:string">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
 
@@ -468,7 +468,7 @@
     </xsl:function>
 
     <xsl:function name="f:topPositionAnnotation" as="xs:string">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
 
@@ -476,7 +476,7 @@
     </xsl:function>
 
     <xsl:function name="f:bottomPositionAnnotation" as="xs:string">
-        <xsl:param name="rend"/>
+        <xsl:param name="rend" as="xs:string?"/>
 
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
 

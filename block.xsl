@@ -74,6 +74,7 @@
     </xd:doc>
 
     <xsl:template name="pb">
+        <xsl:variable name="context" select="." as="element(pb)"/>
         <xsl:choose>
             <xsl:when test="@n and f:isSet('showPageNumbers')">
                 <xsl:call-template name="pb-margin"/>
@@ -92,6 +93,7 @@
     </xd:doc>
 
     <xsl:template name="pb-margin">
+        <xsl:variable name="context" select="." as="element(pb)"/>
         <span class="pagenum">
             <xsl:text>[</xsl:text>
             <a>
@@ -125,6 +127,7 @@
     </xd:doc>
 
     <xsl:template name="pb-anchor">
+        <xsl:variable name="context" select="." as="element(pb)"/>
         <xsl:call-template name="generate-anchor"/>
     </xsl:template>
 
@@ -177,6 +180,7 @@
 
     <xsl:template name="generate-tb-par">
         <xsl:param name="string" as="xs:string"/>
+        <xsl:variable name="context" select="." as="element(milestone)"/>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">tb</xsl:attribute>
             <xsl:call-template name="generate-id-attribute"/><xsl:value-of select="$string"/>
@@ -386,6 +390,7 @@
 
 
     <xsl:template name="handle-paragraph">
+        <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
 
             <!-- Hack to make sure ditto elements in paragraps render as expected: HTML doesn't allow tables inside paragraps. -->
@@ -436,7 +441,7 @@
     </xd:doc>
 
     <xsl:function name="f:isFirstParagraph" as="xs:boolean">
-        <xsl:param name="node" as="node()"/>
+        <xsl:param name="node" as="element(p)"/>
 
         <xsl:variable name="preceding">
             <xsl:value-of select="name($node/preceding-sibling::*[1])"/>
@@ -501,6 +506,7 @@
     </xd:doc>
 
     <xsl:template name="hangOpenPunctuation">
+        <xsl:variable name="context" select="." as="element(p)"/>
         <!-- First child node is a text node that starts with punctuation -->
         <xsl:variable name="first" select="text()[1]"/>
 
@@ -575,6 +581,7 @@
 
 
     <xsl:template name="initial-image-with-css">
+        <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
@@ -595,6 +602,7 @@
 
 
     <xsl:template name="initial-image-with-float">
+        <xsl:variable name="context" select="." as="element(p)"/>
         <div class="figure floatLeft">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="insertimage2">

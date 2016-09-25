@@ -360,6 +360,7 @@
     <xsl:template name="generate-label">
         <xsl:param name="div" select="."/>
         <xsl:param name="headingLevel" select="'h2'"/>
+        <xsl:variable name="context" select="." as="element()"/>
 
         <xsl:if test="f:rend-value($div/@rend, 'label') = 'yes'">
             <xsl:element name="{$headingLevel}">
@@ -378,6 +379,7 @@
     </xd:doc>
 
     <xsl:template name="headText">
+        <xsl:variable name="context" select="." as="element(head)"/>
         <xsl:call-template name="set-lang-id-attributes"/>
 
         <xsl:variable name="class">
@@ -400,6 +402,7 @@
     </xd:doc>
 
     <xsl:template name="headPicture">
+        <xsl:variable name="context" select="." as="element(head)"/>
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <div class="figure">
                 <xsl:call-template name="set-lang-attribute"/>

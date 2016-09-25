@@ -50,7 +50,7 @@
     </xd:doc>
 
     <xsl:function name="f:determine-list-type" as="xs:string">
-        <xsl:param name="type"/>
+        <xsl:param name="type" as="xs:string?"/>
         <xsl:choose>
             <xsl:when test="$type = 'ordered'">ol</xsl:when>
             <xsl:otherwise>ul</xsl:otherwise>
@@ -67,7 +67,7 @@
         <xsl:variable name="columns" as="xs:integer">
             <xsl:value-of select="number(f:rend-value(@rend, 'columns'))"/>
         </xsl:variable>
-        <xsl:variable name="item-order">
+        <xsl:variable name="item-order" as="xs:string">
             <xsl:value-of select="f:rend-value(@rend, 'item-order')"/>
         </xsl:variable>
 

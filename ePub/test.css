@@ -699,6 +699,70 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight {
  border-right: 2px solid black;
 }
 
+ 
+
+th.borderTop, td.borderTop {
+ border-top: 2px !important;
+}
+
+th.borderRight, td.borderRight {
+ border-right: 2px !important;
+}
+
+th.borderLeft, td.borderLeft {
+ border-left: 2px !important;
+}
+
+th.borderBottom, td.borderBottom {
+ border-bottom: 2px !important;
+}
+
+th.borderHorizontal, td.borderHorizontal {
+ border-top: 2px !important;
+ border-bottom: 2px !important;
+}
+
+th.borderVertical, td.borderVertical {
+ border-right: 2px !important;
+ border-left: 2px !important;
+}
+
+th.borderAll, td.borderAll {
+ border: 2px !important;
+}
+
+ 
+
+th.noBorderTop, td.noBorderTop {
+ border-top: none !important;
+}
+
+th.noBorderRight, td.noBorderRight {
+ border-right: none !important;
+}
+
+th.noBorderLeft, td.noBorderLeft {
+ border-left: none !important;
+}
+
+th.noBorderBottom, td.noBorderBottom {
+ border-bottom: none !important;
+}
+
+th.noBorderHorizontal, td.noBorderHorizontal {
+ border-top: none !important;
+ border-bottom: none !important;
+}
+
+th.noBorderVertical, td.noBorderVertical {
+ border-right: none !important;
+ border-left: none !important;
+}
+
+th.borderAll, td.noBorderAll {
+ border: none !important;
+}
+
 
  
 .cellDoubleUp {
@@ -891,49 +955,59 @@ body
 
         /* CSS rules generated from @rend attributes in TEI file */
         
-.xd25e546
+.xd25e553
 {
 text-align:right;
 }
 
-.xd25e720
+.xd25e727
 {
 color:red; background-color:yellow;
 }
 
-.xd25e721
+.xd25e728
 {
 color:green; text-align:right;
 }
 
-.xd25e722
+.xd25e729
 {
 color:blue; text-align:right;
 }
 
-.xd25e758
+.xd25e765
 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd25e759
+.xd25e766
 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd25e762
+.xd25e976
+{
+background-color:green;
+}
+
+.xd25e769
 {
 border-top:2px solid black;
 }
 
-.xd25e779
+.xd25e786
 {
 border-top:1px solid black;
 }
 
-.xd25e810
+.xd25e817
 {
 border-bottom:2px solid black;
+}
+
+.xd25e977
+{
+background-color:white;
 }
 
 .xd25e98
@@ -956,23 +1030,23 @@ font-family:'Walbaum-Fraktur';
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd25e381
+.xd25e388
 {
 text-align:left;
 }
 
-.xd25e384
+.xd25e391
 {
 text-align:right;
 }
 
-.xd25e386
+.xd25e393
 {
 text-align:center;
 }
 
 
-.xd25e388
+.xd25e395
 {
     background: url(images/initial-A.gif) no-repeat top left;
     
@@ -980,7 +1054,7 @@ text-align:center;
     
 }
 
-.xd25e388init
+.xd25e395init
 {
     float: left;
     width: 90px;
@@ -995,182 +1069,207 @@ text-align:center;
 }
 
         
-.xd25e392
+.xd25e399
 {
 text-align:justify;
 }
 
-.xd25e407
+.xd25e414
 {
 text-align:center;
 }
 
-.xd25e505
+.xd25e512
 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd25e511
+.xd25e518
 {
 text-align:right;
 }
 
-.xd25e688
+.xd25e695
 {
 margin:0px auto; display:table;
 }
 
-.xd25e692
+.xd25e699
 {
 vertical-align:middle; width:2px;
 }
 
-.xd25e693
+.xd25e700
 {
 vertical-align:middle;
 }
 
-.xd25e703
+.xd25e710
 {
 margin-left:2em;
 }
 
-.xd25e705
+.xd25e712
 {
 width:25%;
 }
 
-.xd25e707
+.xd25e714
 {
 width:75%;
 }
 
-.xd25e745
+.xd25e752
 {
 text-align:center;
-}
-
-.xd25e750
-{
-text-align:left;
 }
 
 .xd25e757
 {
+text-align:left;
+}
+
+.xd25e764
+{
 width:40%; border-collapse:collapse;
 }
 
-.xd25e824
+.xd25e831
 {
 margin:0px auto; display:table;
 }
 
-.xd25e895
+.xd25e902
 {
 margin:0px auto; display:table;
 }
 
-.xd25e989width
+.xd25e972
+{
+margin:0px auto; display:table;
+}
+
+.xd25e1007
+{
+background-color:yellow;
+}
+
+.xd25e1025
+{
+background-color:blue;
+}
+
+.xd25e1034
+{
+background-color:orange;
+}
+
+.xd25e1044
+{
+background-color:red;
+}
+
+.xd25e1084width
 {
     width:80px;
 }
             
-.xd25e994
+.xd25e1089
 {
 width:100px;
 }
 
-.xd25e994width
+.xd25e1089width
 {
     width:80px;
 }
             
-.xd25e1001width
+.xd25e1096width
 {
     width:80px;
 }
             
-.xd25e1013width
+.xd25e1108width
 {
     width:480px;
 }
             
-.xd25e1034width
+.xd25e1129width
 {
     width:480px;
 }
             
-.xd25e1062
+.xd25e1157
 {
 font-style:italic;
 }
 
-.xd25e1093
+.xd25e1188
 {
 list-style-type:disc;
 }
 
-.xd25e1123
+.xd25e1218
 {
 list-style-type:upper-roman;
 }
 
-.xd25e1135
+.xd25e1230
 {
 list-style-type:lower-roman;
 }
 
-.xd25e1157
+.xd25e1252
 {
 list-style-type:disc;
 }
 
-.xd25e1180
+.xd25e1275
 {
 list-style-type:disc;
 }
 
-.xd25e1277
+.xd25e1372
 {
 text-align:center;
 }
 
-.xd25e1282
+.xd25e1377
 {
 text-indent:1em;
 }
 
-.xd25e1288
+.xd25e1383
 {
 text-indent:2em;
 }
 
-.xd25e1292
+.xd25e1387
 {
 text-indent:3em;
 }
 
-.xd25e1296
+.xd25e1391
 {
 text-indent:10em;
 }
 
-.xd25e1298
+.xd25e1393
 {
 font-style:italic;
 }
 
-.xd25e1381
+.xd25e1476
 {
 font-style:italic;
 }
 
-.xd25e1392
+.xd25e1487
 {
 display:none;
 }
 
-.xd25e1426
+.xd25e1521
 {
 display:none;
 }
@@ -1178,13 +1277,13 @@ display:none;
 {
 
 
-.xd25e388
+.xd25e395
 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd25e388init
+.xd25e395init
 {
     float: none;
     width: auto;

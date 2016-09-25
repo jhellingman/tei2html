@@ -30,21 +30,21 @@
         <xd:detail>The language and specific locale to use, e.g. 'de-AT'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="language" select="/TEI.2/@lang | /*:TEI/@xml:lang" />
+    <xsl:variable name="language" select="/TEI.2/@lang | /*:TEI/@xml:lang" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Localization base-language.</xd:short>
         <xd:detail>The language without the locale, e.g. 'de'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="baselanguage" select="if (contains($language, '-')) then substring-before($language, '-') else $language" />
+    <xsl:variable name="baselanguage" select="if (contains($language, '-')) then substring-before($language, '-') else $language" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Localization default language.</xd:short>
         <xd:detail>The default language, to be used when no message is available in the specified language. (A warning will be issued in this case.)</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="defaultlanguage" select="'en'" />
+    <xsl:variable name="defaultlanguage" select="'en'" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Find a localized message (short form).</xd:short>

@@ -32,7 +32,7 @@
     -->
 
     <xsl:template name="generate-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:text>#</xsl:text>
         <xsl:call-template name="generate-id-for">
@@ -45,29 +45,31 @@
          single file operation -->
 
     <xsl:template name="generate-footnote-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:call-template name="generate-href">
             <xsl:with-param name="target" select="$target"/>
         </xsl:call-template>
     </xsl:template>
+
 
     <!-- apparatus-note href attributes are the same as normal hrefs in
          single file operation -->
 
     <xsl:template name="generate-apparatus-note-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:call-template name="generate-href">
             <xsl:with-param name="target" select="$target"/>
         </xsl:call-template>
     </xsl:template>
 
+
     <!-- xref table href attributes are the same as normal hrefs in
          single file operation, followed by 'ext' -->
 
     <xsl:template name="generate-xref-table-href">
-        <xsl:param name="target" select="."/>
+        <xsl:param name="target" select="." as="element()"/>
 
         <xsl:call-template name="generate-href">
             <xsl:with-param name="target" select="$target"/>

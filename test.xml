@@ -127,11 +127,12 @@
 <p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table>
-<row><cell><hi>&quickbrown;</hi>    </cell><cell>Italic</cell></row>
+<row><cell><hi>&quickbrown;</hi>    			</cell><cell>Italic</cell></row>
 <row><cell><hi rend="bold">&quickbrown;</hi>    </cell><cell>Bold</cell></row>
-<row><cell><hi rend="sc">&quickbrown;</hi>    </cell><cell>Caps and small-caps</cell></row>
-<row><cell><hi rend="uc">&quickbrown;</hi>    </cell><cell>All-caps</cell></row>
-<row><cell><hi rend="ex">&quickbrown;</hi>    </cell><cell>letter-spaced</cell></row>
+<row><cell><hi rend="sc">&quickbrown;</hi>    	</cell><cell>Caps and small-caps</cell></row>
+<row><cell><hi rend="uc">&quickbrown;</hi>    	</cell><cell>All-caps</cell></row>
+<row><cell><hi rend="ex">&quickbrown;</hi>    	</cell><cell>letter-spaced</cell></row>
+<row><cell><hi rend="tt">&quickbrown;</hi>    	</cell><cell>mono-spaced</cell></row>
 </table>
 
 <p id="loon">A sample of an embedded audio file (as audio overlay in ePub3 version only): The sound of a <hi>Loon</hi>, courtesy of the U.S. Fish and Wildlife Service.</p>
@@ -500,7 +501,7 @@
 </table>
 </p>
 
-<p>In the following table, we use a TEI extension element column to provide rendering attributes that cover an entire column. Since the HTML colspan and col elements are not widely supported, we translate these to attributes on each cell in the column.
+<p>In the following table, we use a TEI extension, that is, the element column to provide rendering attributes that cover an entire column. Since the HTML colspan and col elements are not widely supported, we translate these to class attributes on each cell in the column.
 </p>
 
 <p>
@@ -664,6 +665,73 @@
         <cell>7</cell>
         <cell>Cherries</cell>
         <cell>4.0</cell>
+    </row>
+</table>
+</p>
+
+<p>A table to demonstrate manually applied overrides for the cell-borders (note that removing borders in tables can be tricky, as often the border line is drawn twice for bordered cells neighbouring each other, so you have to override on both sides, as is done below for the cell &lsquo;Bananas&rsquo;):</p>
+
+<p>
+<table rend="summary(A table to demonstrate manually applied overrides for the cell-borders) class(borderAll) align(center)">
+
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+	<column rend="class(noBorderAll) background-color(green)"/>
+		
+    <row role="label" rend="background-color(white)">
+        <cell rows="2">No.</cell>
+        <cell>Type.</cell>
+        <cell>Quantity.</cell>
+		<cell>Color.</cell>
+    </row>
+    <row role="unit" rend="background-color(white)">
+        
+        <cell/>
+        <cell>kg</cell>
+		<cell/>
+    </row>
+    <row>
+        <cell>1</cell>
+        <cell rend="class(noBorderBottom)">Apples</cell>
+        <cell>12.4</cell>
+		<cell>Green</cell>
+    </row>
+    <row>
+        <cell rend="class(noBorderRight)">2</cell>
+        <cell rend="class(noBorderAll)">Bananas</cell>
+        <cell rend="class(noBorderLeft)">22.8</cell>
+		<cell rend="background-color(yellow)">Yellow</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell rend="class(noBorderTop)">Melon</cell>
+        <cell>4.6</cell>
+		<cell>Dark Green</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+		<cell rend="background-color(blue)">Blue</cell>
+    </row>
+    <row>
+        <cell>5</cell>
+        <cell>Oranges</cell>
+        <cell>2.4</cell>
+		<cell rend="background-color(orange)">Orange</cell>
+    </row>
+    <row>
+        <cell>6</cell>
+        <cell>Strawberries</cell>
+        <cell>1.0</cell>
+		<cell rend="background-color(red)">Red</cell>
+    </row>
+    <row>
+        <cell>7</cell>
+        <cell>Cherries</cell>
+        <cell>4.0</cell>
+		<cell rend="background-color(red)">Dark Red</cell>
     </row>
 </table>
 </p>

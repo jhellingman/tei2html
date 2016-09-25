@@ -118,6 +118,70 @@ table.borderAll .cellRight, table.borderAll .cellHeadRight {
 	border-right: 2px solid black;
 }
 
+/* Borders on cell, explicitly specified */
+
+th.borderTop, td.borderTop {
+	border-top: 2px !important;
+}
+
+th.borderRight, td.borderRight {
+	border-right: 2px !important;
+}
+
+th.borderLeft, td.borderLeft {
+	border-left: 2px !important;
+}
+
+th.borderBottom, td.borderBottom {
+	border-bottom: 2px !important;
+}
+
+th.borderHorizontal, td.borderHorizontal {
+	border-top: 2px !important;
+	border-bottom: 2px !important;
+}
+
+th.borderVertical, td.borderVertical {
+	border-right: 2px !important;
+	border-left: 2px !important;
+}
+
+th.borderAll, td.borderAll {
+	border: 2px !important;
+}
+
+/* Remove borders selectively */
+
+th.noBorderTop, td.noBorderTop {
+	border-top: none !important;
+}
+
+th.noBorderRight, td.noBorderRight {
+	border-right: none !important;
+}
+
+th.noBorderLeft, td.noBorderLeft {
+	border-left: none !important;
+}
+
+th.noBorderBottom, td.noBorderBottom {
+	border-bottom: none !important;
+}
+
+th.noBorderHorizontal, td.noBorderHorizontal {
+	border-top: none !important;
+	border-bottom: none !important;
+}
+
+th.noBorderVertical, td.noBorderVertical {
+	border-right: none !important;
+	border-left: none !important;
+}
+
+th.borderAll, td.noBorderAll {
+	border: none !important;
+}
+
 
 /* Cell inserted when tables are doubled-up, to separate the columns */
 .cellDoubleUp {
