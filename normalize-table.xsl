@@ -78,46 +78,44 @@
 <xd:doc>
     <xd:short>Normalize the column-spans in a table.</xd:short>
     <xd:detail>
-        <p>Normalize the column-spans in a table. This template inserts placeholder cells for each spanned column.
+        <p>Normalize the column-spans in a table. This template inserts a placeholder cell for each spanned column.
         It also copies the <code>@rows</code> attribute on cells to a temporary attribute <code>@orig_rows</code> and the <code>@cols</code>
         attribute to <code>@orig_cols</code>.</p>
     </xd:detail>
 </xd:doc>
 
-<xsl:template match="cell" mode="normalize-table-colspans">
-    <xsl:choose>
-        <xsl:when test="@cols">
-            <xsl:variable name="cell" select="." as="element()"/>
-            <xsl:for-each select="1 to @cols">
-                <xsl:element name="cell" namespace="">
-                    <xsl:copy-of select="$cell/@*[not(name() = 'cols')]"/>
-                    <xsl:choose>
-                        <xsl:when test="position() = 1">
-                            <!-- Copy the content of the current cell -->
-                            <xsl:attribute name="orig_cols" select="$cell/@cols"/>
-                            <xsl:if test="$cell/@rows"><xsl:attribute name="orig_rows" select="$cell/@rows"/></xsl:if>
-                            <xsl:copy-of select="$cell/node()"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <!-- Indicate this is a placeholder for a spanned cell -->
-                            <xsl:attribute name="spanned" select="'true'"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:element>
-            </xsl:for-each>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:element name="cell" namespace="">
-                <xsl:if test="@rows">
-                    <xsl:attribute name="orig_rows" select="@rows"/>
-                </xsl:if>
-                <xsl:copy-of select="@*"/>
-                <xsl:copy-of select="./node()"/>
-            </xsl:element>
-        </xsl:otherwise>
-    </xsl:choose>
+<xsl:template match="cell[@cols]" mode="normalize-table-colspans">
+    <xsl:variable name="cell" select="." as="element(cell)"/>
+    <xsl:for-each select="1 to @cols">
+        <xsl:element name="cell" namespace="">
+            <xsl:copy-of select="$cell/@*[not(name() = 'cols')]"/>
+            <xsl:choose>
+                <xsl:when test="position() = 1">
+                    <!-- Copy the content of the current cell -->
+                    <xsl:attribute name="orig_cols" select="$cell/@cols"/>
+                    <xsl:if test="$cell/@rows">
+                        <xsl:attribute name="orig_rows" select="$cell/@rows"/>
+                    </xsl:if>
+                    <xsl:copy-of select="$cell/node()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <!-- Indicate this is a placeholder for a spanned cell -->
+                    <xsl:attribute name="spanned" select="'true'"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:element>
+    </xsl:for-each>
 </xsl:template>
 
+<xsl:template match="cell" mode="normalize-table-colspans">
+    <xsl:element name="cell" namespace="">
+        <xsl:if test="@rows">
+            <xsl:attribute name="orig_rows" select="@rows"/>
+        </xsl:if>
+        <xsl:copy-of select="@*"/>
+        <xsl:copy-of select="./node()"/>
+    </xsl:element>
+</xsl:template>
 
 <xd:doc>
     <xd:short>Normalize the row-spans in a table.</xd:short>
@@ -148,28 +146,13 @@
 </xd:doc>
 
 <xsl:template match="row" mode="normalize-table-rowspans">
-    <xsl:param name="previousRow" as="element()"/>
-
-    <xsl:variable name="currentRow" select="."/>
+    <xsl:param name="previousRow" as="element(row)"/>
+    <xsl:variable name="currentRow" select="." as="element(row)"/>
 
     <xsl:variable name="normalizedCells">
-        <xsl:for-each select="$previousRow/cell">
-            <xsl:choose>
-                <xsl:when test="@rows &gt; 1">
-                    <!-- Insert a placeholder cell for the spanned cell from the previous row -->
-                    <xsl:copy>
-                        <xsl:attribute name="spanned" select="'true'"/>
-                        <xsl:attribute name="rows" select="@rows - 1"/>
-                    </xsl:copy>
-                </xsl:when>
-                <xsl:otherwise>
-                    <!-- Copy the cell from the current row -->
-                    <xsl:variable name="currentPosition" select="1 + count(current()/preceding-sibling::cell[not(@rows) or (@rows = 1)])"/>
-                    <xsl:variable name="currentCell" select="$currentRow/cell[$currentPosition]"/>
-                    <xsl:copy-of select="$currentCell"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
+        <xsl:apply-templates select="$previousRow/cell" mode="spans-for-previous-rows">
+            <xsl:with-param name="currentRow" select="$currentRow"/>
+        </xsl:apply-templates>
     </xsl:variable>
 
     <!-- Warn for potential data-loss if table is not well-formed -->
@@ -190,6 +173,24 @@
         <xsl:with-param name="previousRow" select="$newRow"/>
     </xsl:apply-templates>
 </xsl:template>
+
+
+<xsl:template mode="spans-for-previous-rows" match="cell[@rows &gt; 1]">
+    <!-- Insert a placeholder cell for the spanned cell from the previous row -->
+    <xsl:copy>
+        <xsl:attribute name="spanned" select="'true'"/>
+        <xsl:attribute name="rows" select="@rows - 1"/>
+    </xsl:copy>
+</xsl:template>
+
+<xsl:template mode="spans-for-previous-rows" match="cell">
+    <xsl:param name="currentRow" as="element(row)"/>
+    <!-- Copy the cell from the current row -->
+    <xsl:variable name="currentPosition" select="1 + count(current()/preceding-sibling::cell[not(@rows) or (@rows = 1)])"/>
+    <xsl:variable name="currentCell" select="$currentRow/cell[$currentPosition]"/>
+    <xsl:copy-of select="$currentCell"/>
+</xsl:template>
+
 
 
 <xd:doc>
@@ -217,25 +218,26 @@
     <xd:short>Cleanup a cell as last phase of normalization.</xd:short>
     <xd:detail>
         <p>Cleanup a cell as last phase of normalization. Drop spanned cells introduced int he process
-        and restore the <code>@cols</code> and <code>@rows</code> attributes. At the <code>@col</code> and <code>@row</code> attribute
+        and restore the <code>@cols</code> and <code>@rows</code> attributes. Add the <code>@col</code> and <code>@row</code> attribute
         by counting siblings.</p>
     </xd:detail>
 </xd:doc>
 
 <xsl:template match="cell" mode="normalize-table-final">
-    <xsl:if test="not(@spanned)">
-        <xsl:copy>
-            <xsl:attribute name="col" select="count(preceding-sibling::cell) + 1"/>
-            <xsl:attribute name="row" select="count(../preceding-sibling::row) + 1"/>
+    <xsl:copy>
+        <xsl:attribute name="col" select="count(preceding-sibling::cell) + 1"/>
+        <xsl:attribute name="row" select="count(../preceding-sibling::row) + 1"/>
 
-            <!-- Restore the original cols and rows -->
-            <xsl:if test="@orig_cols"><xsl:attribute name="cols" select="@orig_cols"/></xsl:if>
-            <xsl:if test="@orig_rows"><xsl:attribute name="rows" select="@orig_rows"/></xsl:if>
+        <!-- Restore the original cols and rows -->
+        <xsl:if test="@orig_cols"><xsl:attribute name="cols" select="@orig_cols"/></xsl:if>
+        <xsl:if test="@orig_rows"><xsl:attribute name="rows" select="@orig_rows"/></xsl:if>
 
-            <xsl:copy-of select="@*[not(name() = 'rows')][not(name() = 'orig_rows')][not(name() = 'orig_cols')]"/>
-            <xsl:copy-of select="node()"/>
-        </xsl:copy>
-    </xsl:if>
+        <xsl:copy-of select="@*[not(name() = 'rows')][not(name() = 'orig_rows')][not(name() = 'orig_cols')]"/>
+        <xsl:copy-of select="node()"/>
+    </xsl:copy>
 </xsl:template>
+
+<xsl:template match="cell[@spanned]" mode="normalize-table-final"/>
+
 
 </xsl:stylesheet>
