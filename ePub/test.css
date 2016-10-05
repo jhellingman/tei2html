@@ -771,6 +771,21 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 }
 
 
+td.alignDecimalIntegerPart {
+ text-align: right;
+ border-right: none !important;
+ padding-right: 0 !important;
+ margin-right: 0 !important;
+}
+
+td.alignDecimalFractionPart {
+ text-align: left;
+ border-left: none !important;
+ padding-left: 0 !important;
+ margin-left: 0 !important;
+}
+
+
   
 
  

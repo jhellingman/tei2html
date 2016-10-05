@@ -86,7 +86,7 @@
     </xd:doc>
 
     <xsl:template name="common-css-stylesheets">
-        <xsl:variable name="stylesheetname">
+        <xsl:variable name="stylesheetname" as="xs:string">
             <xsl:choose>
                 <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
                     <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
@@ -281,7 +281,7 @@
 
     <xsl:template name="generate-rend-class-name">
         <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
     </xsl:template>
@@ -296,7 +296,7 @@
 
     <xsl:template name="generate-rend-class-attribute">
         <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:attribute name="class">
             <xsl:call-template name="generate-rend-class-name">
@@ -318,7 +318,7 @@
 
     <xsl:template name="generate-rend-class-name-if-needed">
         <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:if test="f:has-rend-value($rend, 'class')">
             <xsl:value-of select="f:rend-value($rend, 'class')"/>
@@ -350,7 +350,7 @@
 
     <xsl:template name="generate-rend-class-attribute-if-needed">
         <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="."/>
+        <xsl:param name="node" select="." as="element()"/>
 
         <xsl:variable name="class">
             <xsl:call-template name="generate-rend-class-name-if-needed">
@@ -504,7 +504,7 @@
 
     <xsl:function name="f:css-stylesheet" as="xs:string">
         <xsl:param name="uri" as="xs:string"/>
-        <xsl:variable name="uri" select="normalize-space($uri)"/>
+        <xsl:variable name="uri" select="normalize-space($uri)" as="xs:string"/>
 
         <xsl:message terminate="no">INFO:    Including CSS stylesheet: <xsl:value-of select="$uri"/></xsl:message>
 
@@ -526,10 +526,10 @@
         </xsl:variable>
 
         <!-- Strip comments from the CSS -->
-        <xsl:variable name="css" select='replace($css, "/\*(.|[\r\n])*?\*/", " ")'/>
+        <xsl:variable name="css" select='replace($css, "/\*(.|[\r\n])*?\*/", " ")' as="xs:string"/>
 
         <!-- Strip excessive space from the CSS -->
-        <xsl:variable name="css" select='replace($css, "[ &#x9;]+", " ")'/>
+        <xsl:variable name="css" select='replace($css, "[ &#x9;]+", " ")' as="xs:string"/>
 
         <xsl:value-of select="$css"/>
     </xsl:function>

@@ -35,9 +35,99 @@
         <cell>f</cell>
         <cell>g</cell>
         <cell>h</cell>
-        <cell>X</cell>
+        <cell>X (This cell is extra, and should generate a warning message while processing)</cell>
     </row>
 </table>
+
+<table id="test-2">
+    <head>Test Table For Splitting Column</head>
+	<column rend="font-weight(bold) align(center)"/>
+	<column rend="font-weight(bold) align(decimal) color(red) class(test)"/>
+	<column/>
+	<column rend="align(decimal)"/>
+	
+	<row><cell cols="4">Span Everything</cell></row>
+	<row><cell cols="2">Spanned Cell</cell><cell>Count</cell><cell>NOT SO</cell></row>
+	
+	<row><cell>A: </cell><cell>123.4</cell><cell>one  </cell><cell>1.1</cell></row>
+	<row><cell>B: </cell><cell>12.34</cell><cell>two  </cell><cell>22.22</cell></row>
+	<row><cell>C: </cell><cell>1234 </cell><cell>three</cell><cell>333.333</cell></row>
+	<row><cell>D: </cell><cell><hi>f</hi> 1,234.567<note>test</note> xx </cell><cell>four<note>2</note></cell><cell>4444.4444</cell></row>
+</table>
+
+<table id="t333" rend="class(verticalBorderInside) font-size(small)">
+    <column id="c1"/>
+    <column id="c2" rend="align(decimal)"/>
+    <column id="c3" rend="align(decimal)"/>
+    <column id="c4" rend="align(decimal)"/>
+    <column id="c5" rend="align(decimal)"/>
+    <column id="c6" rend="align(decimal)"/>
+    <row role="label">
+        <cell rows="2" cols="1"></cell>
+        <cell rows="1" cols="2">Berechnet nach</cell>
+        <cell rows="2" cols="1">Nach Engelhardt
+            <note n="B">F. B. Engelhardt, Der Flächenraum der einzelnen Staaten in Europa und der übrigen Länder auf der
+                Erde. Berlin 1853.
+            </note>
+        </cell>
+        <cell rows="2" cols="2">Nach dem <foreign lang="es" xml:lang="es">Anuario estadistico de España 1858</foreign>.
+            Behm’s geograph. Jahrbuch I. 1869.
+        </cell>
+    </row>
+    <row role="label">
+        <cell rows="1" cols="1">Coello’s Karte</cell>
+        <cell rows="1" cols="1">der hydrographischen Karte</cell>
+    </row>
+    <row role="unit">
+        <cell rows="1" cols="1"></cell>
+        <cell rows="1" cols="1">?M.</cell>
+        <cell rows="1" cols="1">?M.</cell>
+        <cell rows="1" cols="1">?M.</cell>
+        <cell rows="1" cols="1">?M.</cell>
+        <cell rows="1" cols="1">?Kilom.
+
+        </cell>
+    </row>
+    <row>
+        <cell rows="1" cols="1">Luzon</cell>
+        <cell rows="1" cols="1">1934.2</cell>
+        <cell rows="1" cols="1">1932.9</cell>
+        <cell rows="1" cols="1">1937.31</cell>
+        <cell rows="1" cols="1">2014.8</cell>
+        <cell rows="1" cols="1">110.940</cell>
+    </row>
+    <row>
+        <cell rows="1" cols="1">Mindanáo</cell>
+        <cell rows="1" cols="1">1569.9</cell>
+        <cell rows="1" cols="1">1625.7</cell>
+        <cell rows="1" cols="1"></cell>
+        <cell rows="1" cols="1">1538.8</cell>
+        <cell rows="1" cols="1">84.730</cell>
+    </row>
+    
+    <row>
+        <cell rows="1" cols="1">Ticáo</cell>
+        <cell rows="1" cols="1">6.8</cell>
+        <cell rows="1" cols="1">6.4</cell>
+        <cell rows="1" cols="1"></cell>
+        <cell rows="1" cols="1"></cell>
+        <cell rows="1" cols="1">
+        </cell>
+    </row>
+    <row>
+        <cell rows="1" cols="1">Der ganze Archipel</cell>
+        <cell role="sum" rows="1" cols="1">5293
+            <note n="C">Rechnet man hierzu, wie im Anuario, die thatsächlich unabhängigen Inseln Basilan 23.2, Sulu
+                14.5, Taui-taui etc., zusammen 27.5 ?M., so erhält man 6365.5 ?M.
+            </note>
+        </cell>
+        <cell role="sum" rows="1" cols="1">5392.7</cell>
+        <cell rows="1" cols="1"></cell>
+        <cell role="sum" rows="1" cols="1">5368</cell>
+        <cell role="sum" rows="1" cols="1">295585</cell>
+    </row>
+</table>
+
 
 </body>
 </TEI.2>

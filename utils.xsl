@@ -132,7 +132,7 @@
 
     <xsl:template name="generate-id-for">
         <xsl:param name="node" select="." as="element()"/>
-        <xsl:param name="position"/>
+        <xsl:param name="position" as="xs:integer?"/>
 
         <xsl:choose>
             <xsl:when test="$node/@id">
@@ -320,7 +320,7 @@
 
     <xsl:function name="f:translate-div-type" as="xs:string">
         <xsl:param name="type" as="xs:string"/>
-        <xsl:variable name="type" select="lower-case($type)"/>
+        <xsl:variable name="type" select="lower-case($type)" as="xs:string"/>
 
         <xsl:choose>
             <xsl:when test="$type=''"><xsl:value-of select="''"/></xsl:when>
