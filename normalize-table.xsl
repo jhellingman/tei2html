@@ -9,6 +9,8 @@
 
     <xsl:output indent="no" omit-xml-declaration="yes"/>
 
+    <xsl:include href="rend.xsl"/>
+
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to normalize TEI tables.</xd:short>
         <xd:detail><p>This stylesheet normalizes TEI tables, to be able to apply the
@@ -252,72 +254,6 @@
 
 
     <!-- Split columns -->
-
-    <!-- from utils.xsl (TODO: move to its own rend.xsl file) -->
-    <xsl:function name="f:rend-value" as="xs:string">
-        <xsl:param name="rend" as="xs:string?"/>
-        <xsl:param name="key" as="xs:string"/>
-
-        <xsl:variable name="regex" select="concat('(^|\W)', $key, '\((.+?)\)')"/>
-
-        <xsl:variable name="result">
-            <xsl:choose>
-                <xsl:when test="not($rend)"/>
-                <xsl:otherwise>
-                    <xsl:analyze-string select="$rend" regex="{$regex}" flags="i">
-                        <xsl:matching-substring>
-                            <xsl:value-of select="regex-group(2)"/>
-                        </xsl:matching-substring>
-                    </xsl:analyze-string>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-
-        <xsl:value-of select="$result"/>
-    </xsl:function>
-
-
-    <xd:doc>
-        <xd:short>Remove a key-value-pair from a rendition ladder.</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:remove-rend-value" as="xs:string">
-        <xsl:param name="rend" as="xs:string?"/>
-        <xsl:param name="key" as="xs:string"/>
-
-        <xsl:variable name="regex" select="'([a-z][0-9a-z-]+)\((.+?)\)'"/>
-
-        <xsl:variable name="result">
-            <xsl:choose>
-                <xsl:when test="not($rend)"/>
-                <xsl:otherwise>
-                    <xsl:analyze-string select="$rend" regex="{$regex}" flags="i">
-                        <xsl:matching-substring>
-                            <xsl:if test="regex-group(1) != $key">
-                                <xsl:value-of select="regex-group(0)"/>
-                                <xsl:text> </xsl:text>
-                            </xsl:if>
-                        </xsl:matching-substring>
-                    </xsl:analyze-string>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-
-        <xsl:value-of select="normalize-space($result)"/>
-    </xsl:function>
-
-
-    <xd:doc>
-        <xd:short>Add a class to the class key in a rendition ladder.</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:add-class" as="xs:string">
-        <xsl:param name="rend" as="xs:string?"/>
-        <xsl:param name="class" as="xs:string"/>
-
-        <xsl:variable name="new-class" select="normalize-space(concat(f:rend-value($rend, 'class'), ' ', $class))"/>
-        <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, 'class'), ' class(', $new-class, ')'))"/>
-    </xsl:function>
 
 
     <xd:doc>

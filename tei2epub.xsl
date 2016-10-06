@@ -35,6 +35,7 @@
     <xsl:include href="localization.xsl"/>
     <xsl:include href="header.xsl"/>
     <xsl:include href="inline.xsl"/>
+    <xsl:include href="rend.xsl"/>
     <xsl:include href="css.xsl"/>
     <xsl:include href="references.xsl"/>
     <xsl:include href="titlepage.xsl"/>
