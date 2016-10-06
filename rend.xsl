@@ -110,20 +110,29 @@
         <xd:short>Adjust the given dimension in a rendition ladder by multiplying it with a factor.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:adjust-dimension" as="xs:string">
+    <xsl:function name="f:adjust-dimension" as="xs:string?">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="factor" as="xs:double"/>
 
+        <!-- <xsl:message>ADJUST REND: <xsl:value-of select="$rend"/></xsl:message> -->
+
         <xsl:variable name="dimension" select="f:rend-value($rend, $key)"/>
-        <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z]+)'"/>
-        <xsl:variable name="count" select="replace($dimension, $regex, '$1')"/>
-        <xsl:variable name="unit" select="replace($dimension, $regex, '$3')"/>
-        <xsl:variable name="new-value" select="concat($count * $factor, $unit)"/>
+        <xsl:choose>
+            <xsl:when test="$dimension != ''">
+                <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z%]+)'" as="xs:string"/>
+                <xsl:variable name="count" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
+                <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
+                <xsl:variable name="new-value" select="concat($count * $factor, $unit)" as="xs:string"/>
 
-        <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $new-value, ')'))"/>
+                <!-- <xsl:message>ADJUST <xsl:value-of select="$key"/>: <xsl:value-of select="$count"/><xsl:value-of select="$unit"/> to <xsl:value-of select="$new-value"/></xsl:message> -->
+    
+                <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $new-value, ')'))"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$rend"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
-
-
 
 </xsl:stylesheet>

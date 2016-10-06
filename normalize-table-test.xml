@@ -44,12 +44,12 @@
 	<column rend="font-weight(bold) align(center)"/>
 	<column rend="font-weight(bold) align(decimal) color(red) class(test)"/>
 	<column/>
-	<column rend="align(decimal)"/>
+	<column rend="align(decimal) width(10%)"/>
 	
 	<row><cell cols="4">Span Everything</cell></row>
 	<row><cell cols="2">Spanned Cell</cell><cell>Count</cell><cell>NOT SO</cell></row>
 	
-	<row><cell>A: </cell><cell>123.4</cell><cell>one  </cell><cell>1.1</cell></row>
+	<row><cell>A: </cell><cell rend="width(3em)">123.4</cell><cell>one  </cell><cell>1.1</cell></row>
 	<row><cell>B: </cell><cell>12.34</cell><cell>two  </cell><cell>22.22</cell></row>
 	<row><cell>C: </cell><cell>1234 </cell><cell>three</cell><cell>333.333</cell></row>
 	<row><cell>D: </cell><cell><hi>f</hi> 1,234.567<note>test</note> xx </cell><cell>four<note>2</note></cell><cell>4444.4444</cell></row>
