@@ -234,6 +234,7 @@
             <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
             <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
             <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
+            <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
 
             <!-- Properties used to render verse -->
             <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->

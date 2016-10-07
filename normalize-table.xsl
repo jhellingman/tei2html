@@ -293,7 +293,10 @@
 
 
     <xd:doc>
-        <xd:short>Split the cell element when the corresponding column contains a rendition <code>align(decimal)</code>.</xd:short>
+        <xd:short>Determine whether a cell element needs to be split.</xd:short>
+        <xd:detail>
+            <p>A cell needs to be split when the corresponding column contains a rendition <code>align(decimal)</code>.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template mode="split-columns" match="cell">
@@ -345,14 +348,20 @@
     </xsl:function>
 
 
-    <!-- Split the cell if the first text() node in it is numeric -->
+    <xd:doc>
+        <xd:short>Split a cell in two if the first text() node in it is numeric.</xd:short>
+        <xd:detail>
+            <p>The first <code>text()</code> node is split on the first decimal separator. Any non-text nodes preceding 
+            the text node go to the first cell, any nodes following this text node go to the second cell.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:variable name="decimal-separator" select="'.'"/>
-    <xsl:variable name="number-pattern" select="'([0-9]+[,])*[0-9]+(\.[0-9]+)?'"/>
-
-
-    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[1]), $number-pattern)]">
+    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[1]), f:determineNumberPattern(.))]">
         <xsl:variable name="text" select="text()[1]" as="xs:string"/>
+
+        <xsl:variable name="decimal-separator" select="f:determineDecimalSeparator(.)"/>
+        <xsl:variable name="number-pattern" select="f:determineNumberPattern(.)"/>
+
         <xsl:variable name="integer"
             select="if (contains($text, $decimal-separator))
                     then substring-before($text, $decimal-separator)
@@ -362,8 +371,7 @@
                     then concat($decimal-separator, substring-after($text, $decimal-separator))
                     else ''"/>
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
-
-        <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)"/>
+        <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)" as="xs:string"/>
 
         <!-- Generate the cell for the integer part -->
         <xsl:element name="cell" namespace="">
@@ -388,7 +396,10 @@
     </xsl:template>
 
 
-    <!-- Don't split other types of cells, but take care column numbering and column spanning is adjusted -->
+    <xd:doc>
+        <xd:short>Don't split other types of cells, but take care column numbering and column spanning is adjusted.</xd:short>
+    </xd:doc>
+
     <xsl:template mode="split-cell" match="cell">
         <xsl:element name="cell" namespace="">
             <xsl:copy-of select="@*[not(name() = ('col', 'cols'))]"/>
@@ -415,5 +426,43 @@
         </xsl:element>
     </xsl:template>
 
+
+    <xsl:variable name="document-root" select="/"/>
+    <xsl:variable name="default-decimal-separator" select="'.'"/>
+    <xsl:variable name="number-pattern-period" select="'^\s?([0-9]+[,])*[0-9]+([.][0-9]+)?'"/>
+    <xsl:variable name="number-pattern-comma" select="'^\s?([0-9]+[.])*[0-9]+([,][0-9]+)?'"/>
+
+
+    <xd:doc>
+        <xd:short>Determine the decimal separator symbol to be used.</xd:short>
+        <xd:detail>
+            <p>Obtain this value from the decimal-separator rendition ladder element. First look at the <code>cell</code>-element itself, 
+            then on the <code>table</code>-element it is in, and finally on the top-level <code>text</code>-element.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:determineDecimalSeparator">
+        <xsl:param name="cell" as="element(cell)"/>
+
+        <xsl:variable name="rend-cell"  select="$cell/@rend"/>
+        <xsl:variable name="rend-table" select="$cell/ancestor::table[1]/@rend"/>
+        <xsl:variable name="rend-text"  select="$document-root//text[1]/@rend"/>
+
+        <xsl:value-of select="if (f:has-rend-value($rend-cell, 'decimal-separator'))
+            then f:rend-value($rend-cell, 'decimal-separator')
+            else if (f:has-rend-value($rend-table, 'decimal-separator'))
+                 then f:rend-value($rend-table, 'decimal-separator')
+                 else if (f:has-rend-value($rend-text, 'decimal-separator'))
+                      then f:rend-value($rend-text, 'decimal-separator')
+                      else $default-decimal-separator"/>
+    </xsl:function>
+
+    <xsl:function name="f:determineNumberPattern">
+        <xsl:param name="cell" as="element(cell)"/>
+
+        <xsl:value-of select="if (f:determineDecimalSeparator($cell) = ',')
+            then $number-pattern-comma
+            else $number-pattern-period"/>
+    </xsl:function>
 
 </xsl:stylesheet>
