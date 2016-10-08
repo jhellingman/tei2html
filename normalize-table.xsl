@@ -441,7 +441,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:determineDecimalSeparator">
+    <xsl:function name="f:determineDecimalSeparator" as="xs:string">
         <xsl:param name="cell" as="element(cell)"/>
 
         <xsl:variable name="rend-cell"  select="$cell/@rend"/>
@@ -457,7 +457,11 @@
                       else $default-decimal-separator"/>
     </xsl:function>
 
-    <xsl:function name="f:determineNumberPattern">
+    <xd:doc>
+        <xd:short>Determine the pattern to be used to recognize numbers.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:determineNumberPattern" as="xs:string">
         <xsl:param name="cell" as="element(cell)"/>
 
         <xsl:value-of select="if (f:determineDecimalSeparator($cell) = ',')

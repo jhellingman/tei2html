@@ -90,7 +90,7 @@
             <i:issues>
 
                 <xsl:call-template name="sequence-in-order">
-                    <xsl:with-param name="nodes" select="//pb"/>
+                    <xsl:with-param name="elements" select="//pb"/>
                 </xsl:call-template>
 
                 <xsl:apply-templates mode="checks"/>
@@ -176,11 +176,11 @@
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div1"/>
+            <xsl:with-param name="elements" select="div1"/>
         </xsl:call-template>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div0"/>
+            <xsl:with-param name="elements" select="div0"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -203,10 +203,10 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'"/>
-    <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'"/>
-    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'" as="xs:string*"/>
+    <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
+    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'" as="xs:string*"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
@@ -219,7 +219,7 @@
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div2"/>
+            <xsl:with-param name="elements" select="div2"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -238,7 +238,7 @@
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div1"/>
+            <xsl:with-param name="elements" select="div1"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -256,7 +256,7 @@
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div2"/>
+            <xsl:with-param name="elements" select="div2"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -274,7 +274,7 @@
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div2"/>
+            <xsl:with-param name="elements" select="div2"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -297,7 +297,7 @@
         <xsl:call-template name="check-id-present"/>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div2"/>
+            <xsl:with-param name="elements" select="div2"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -307,7 +307,7 @@
         <xsl:call-template name="check-div-type-present"/>
 
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="nodes" select="div3"/>
+            <xsl:with-param name="elements" select="div3"/>
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
@@ -415,20 +415,20 @@
     <!-- Generic sequence -->
 
     <xsl:template name="sequence-in-order">
-        <xsl:param name="nodes"/>
+        <xsl:param name="elements" as="element()*"/>
 
-        <xsl:for-each select="1 to count($nodes) - 1">
+        <xsl:for-each select="1 to count($elements) - 1">
             <xsl:variable name="counter" select="."/>
             <xsl:call-template name="pair-in-order">
-                <xsl:with-param name="first" select="$nodes[$counter]"/>
-                <xsl:with-param name="second" select="$nodes[$counter + 1]"/>
+                <xsl:with-param name="first" select="$elements[$counter]"/>
+                <xsl:with-param name="second" select="$elements[$counter + 1]"/>
             </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
 
     <xsl:template name="pair-in-order">
-        <xsl:param name="first"/>
-        <xsl:param name="second"/>
+        <xsl:param name="first" as="element()"/>
+        <xsl:param name="second" as="element()"/>
 
         <xsl:choose>
             <xsl:when test="not($first/@n)">
@@ -460,7 +460,7 @@
 
         <!-- @target points to existing @id -->
         <xsl:for-each-group select="//*[@target]" group-by="@target">
-            <xsl:variable name="target" select="./@target"/>
+            <xsl:variable name="target" select="./@target" as="xs:string"/>
             <xsl:if test="not(//*[@id=$target])">
                 <i:issue 
                     pos="{./@pos}" 
@@ -471,7 +471,7 @@
 
         <!-- @who points to existing @id on role -->
         <xsl:for-each-group select="//*[@who]" group-by="@who">
-            <xsl:variable name="who" select="./@who"/>
+            <xsl:variable name="who" select="./@who" as="xs:string"/>
             <xsl:if test="not(//role[@id=$who])">
                 <i:issue 
                     pos="{./@pos}" 
@@ -482,7 +482,7 @@
 
         <!-- @id of language not being used in the text -->
         <xsl:for-each select="//language">
-            <xsl:variable name="id" select="@id"/>
+            <xsl:variable name="id" select="@id" as="xs:string"/>
             <xsl:if test="not(//*[@lang=$id])">
                 <i:issue 
                     pos="{./@pos}" 
@@ -501,8 +501,8 @@
         <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',                        'P0005', 'Space before closing punctuation mark')"/>
         <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',          'P0006', 'Space after opening punctuation mark')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., ',[^\s&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',    'P0007', 'Missing space after comma')"/>
-        <xsl:copy-of select="f:should-not-contain(., '\.[^\s.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',  'P0015', 'Missing space after period')"/>
+        <xsl:copy-of select="f:should-not-contain(., ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',    'P0007', 'Missing space after comma')"/>
+        <xsl:copy-of select="f:should-not-contain(., '\.[^\s&nbsp;.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',  'P0015', 'Missing space after period')"/>
 
         <xsl:copy-of select="f:should-not-contain(., '[&mdash;&ndash;]-',                           'P0010', 'Em-dash or en-dash followed by dash')"/>
         <xsl:copy-of select="f:should-not-contain(., '[&mdash;-]&ndash;',                           'P0011', 'Em-dash or dash followed by en-dash')"/>
@@ -583,7 +583,7 @@
     <xsl:variable name="opener-string" select="string-join($opener, '')"/>
     <xsl:variable name="closer-string" select="string-join($closer, '')"/>
 
-    <xsl:variable name="open-quotation-marks" select="'&lsquo;&ldquo;&laquo;&bdquo;'"/>
+    <xsl:variable name="open-quotation-marks" select="'&lsquo;&ldquo;&laquo;&bdquo;'" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Find unclosed pairs of paired punctuation marks.</xd:short>
@@ -608,10 +608,10 @@
         -->
 
         <xsl:sequence select="if (not($head))
-                                then $stack
-                                else if ($head = $opener)
-                                    then f:unclosed-pairs($tail, concat($head, $stack))
-                                    else if ($head = $expect)
+                              then $stack
+                              else if ($head = $opener)
+                                   then f:unclosed-pairs($tail, concat($head, $stack))
+                                   else if ($head = $expect)
                                         then f:unclosed-pairs($tail, substring($stack, 2))
                                         else concat(concat(concat('Unexpected closing punctuation: ', $head), if ($stack) then ' open: ' else ''), f:reverse($stack))"/>
     </xsl:function>
