@@ -52,7 +52,7 @@
                 <xsl:message terminate="no">WARNING: Using non-standard attribute url on figure.</xsl:message>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>images/</xsl:text><xsl:value-of select="@id"/><xsl:value-of select="$format"/>
+                <xsl:value-of select="concat('images/', @id, $format)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -83,7 +83,7 @@
                 <xsl:message terminate="no">WARNING: Using non-standard attribute url on figure.</xsl:message>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>images/</xsl:text><xsl:value-of select="$node/@id"/><xsl:value-of select="$defaultformat"/>
+                <xsl:value-of select="concat('images/', $node/@id, $defaultformat)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

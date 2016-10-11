@@ -108,9 +108,9 @@
     <row>
         <cell rows="1" cols="1">Ticáo</cell>
         <cell rows="1" cols="1">6.8</cell>
-        <cell rows="1" cols="1">6.4</cell>
-        <cell rows="1" cols="1"></cell>
-        <cell rows="1" cols="1"></cell>
+        <cell rows="1" cols="1">6&#x215b;</cell>
+        <cell rows="1" cols="1">6.75&#x215b;</cell>
+        <cell rows="1" cols="1">&#x215b;</cell>
         <cell rows="1" cols="1">
         </cell>
     </row>
@@ -121,9 +121,9 @@
                 14.5, Taui-taui etc., zusammen 27.5 ?M., so erhält man 6365.5 ?M.
             </note>
         </cell>
-        <cell role="sum" rows="1" cols="1">5392.7</cell>
+        <cell role="sum" rows="1" cols="1"><ab>(TEST BEFORE)</ab> 5392.7 <ab>(TEST AFTER)</ab></cell>
         <cell rows="1" cols="1"></cell>
-        <cell role="sum" rows="1" cols="1">5368</cell>
+        <cell role="sum" rows="1" cols="1">5368 (B)</cell>
         <cell role="sum" rows="1" cols="1">295585</cell>
     </row>
 </table>

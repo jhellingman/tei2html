@@ -351,17 +351,26 @@
     <xd:doc>
         <xd:short>Split a cell in two if the first text() node in it is numeric.</xd:short>
         <xd:detail>
-            <p>The first <code>text()</code> node is split on the first decimal separator. Any non-text nodes preceding 
-            the text node go to the first cell, any nodes following this text node go to the second cell.</p>
+            <p>If the first <code>text()</code> node is numeric (according to the selected number pattern), it is split
+            into an integer and fractional part. Cells with non-numeric content are normally not split, but if any content
+            in the cell is wrapped in an element node, it will be ignored for determining whether the cell is numeric. 
+            Any non-text nodes preceding the text node go to the first cell, any nodes following this text node go to 
+            the second cell.</p>
+
+            <p>The use of normalize-space is to avoid an issue in Saxon when dealing with numbers that are followed by new-lines.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[1]), f:determineNumberPattern(.))]">
-        <xsl:variable name="text" select="text()[1]" as="xs:string"/>
+        <xsl:variable name="text" select="normalize-space(text()[1])" as="xs:string"/>
 
         <xsl:variable name="decimal-separator" select="f:determineDecimalSeparator(.)"/>
         <xsl:variable name="number-pattern" select="f:determineNumberPattern(.)"/>
 
+        <xsl:variable name="integer" select="replace($text, $number-pattern, '$2')"/>
+        <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7')"/>
+
+        <!--
         <xsl:variable name="integer"
             select="if (contains($text, $decimal-separator))
                     then substring-before($text, $decimal-separator)
@@ -370,6 +379,7 @@
             select="if (contains($text, $decimal-separator))
                     then concat($decimal-separator, substring-after($text, $decimal-separator))
                     else ''"/>
+        -->
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
         <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)" as="xs:string"/>
 
@@ -429,8 +439,17 @@
 
     <xsl:variable name="document-root" select="/"/>
     <xsl:variable name="default-decimal-separator" select="'.'"/>
-    <xsl:variable name="number-pattern-period" select="'^\s?([0-9]+[,])*[0-9]+([.][0-9]+)?'"/>
-    <xsl:variable name="number-pattern-comma" select="'^\s?([0-9]+[.])*[0-9]+([,][0-9]+)?'"/>
+
+    <xd:doc>
+        <xd:short>Pattern to match Unicode numbers.</xd:short>
+        <xd:detail>
+            <p>Pattern to match numbers in Unicode, based on the Unicode character category \p{Decimal_Digit_Number}. To allow
+            for fractions to appear in a number, we also allow the category \p{Other_Number} to follow a number or stand alone.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:variable name="number-pattern-period" select="'^\s?(((\p{Nd}+[,])*\p{Nd}+)(([.]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
+    <xsl:variable name="number-pattern-comma" select="'^\s?(((\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
 
 
     <xd:doc>
