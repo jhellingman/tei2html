@@ -8,8 +8,9 @@
     exclude-result-prefixes="f xs xd">
 
     <xd:doc type="stylesheet">
-        <xd:short>Functions for dealing with rendition-ladders</xd:short>
-        <xd:detail>This stylesheet contains a number of functions to make dealing with rendition-ladders easier.</xd:detail>
+        <xd:short>Functions for dealing with rendition ladders</xd:short>
+        <xd:detail>This stylesheet contains a number of functions to make dealing with rendition-ladders easier. rendition ladders are a string
+        of key value pairs represented as follows: <code>key1(value1) key2(value2)</code>, etc.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -90,6 +91,19 @@
         </xsl:variable>
 
         <xsl:value-of select="normalize-space($result)"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Add (or update) a key-value-pair to a rendition ladder.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:add-rend-value" as="xs:string">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="key" as="xs:string"/>
+        <xsl:param name="value" as="xs:string"/>
+
+        <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $value, ')'))"/>
     </xsl:function>
 
 

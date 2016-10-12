@@ -45,7 +45,7 @@
 	<column rend="font-weight(bold) align(decimal) color(red) class(test)"/>
 	<column/>
 	<column rend="align(decimal) width(10%)"/>
-	
+
 	<row><cell cols="4">Span Everything</cell></row>
 	<row><cell cols="2">Spanned Cell</cell><cell>Count</cell><cell>NOT SO</cell></row>
 	
@@ -124,7 +124,7 @@
         <cell role="sum" rows="1" cols="1"><ab>(TEST BEFORE)</ab> 5392.7 <ab>(TEST AFTER)</ab></cell>
         <cell rows="1" cols="1"></cell>
         <cell role="sum" rows="1" cols="1">5368 (B)</cell>
-        <cell role="sum" rows="1" cols="1">295585</cell>
+        <cell role="sum" rows="1" cols="1"> <ab>(A)</ab> 295585 <ab>(with spaces)</ab> </cell>
     </row>
 </table>
 

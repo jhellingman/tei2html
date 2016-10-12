@@ -170,7 +170,7 @@
 
         <!-- Warn for potential data-loss if table is not well-formed -->
         <xsl:if test="count($normalizedCells/cell) &lt; count($currentRow/cell) + count($previousRow/cell[@rows &gt; 1])">
-            <xsl:message terminate="no">ERROR:   Table '<xsl:value-of select="$currentRow/../@id"/>' not rectangular at row <xsl:value-of select="count($currentRow/preceding-sibling::row) + 1"/>. Extra cells will be lost!</xsl:message>
+            <xsl:message>ERROR:   Table '<xsl:value-of select="$currentRow/../@id"/>' not rectangular at row <xsl:value-of select="count($currentRow/preceding-sibling::row) + 1"/>. Extra cells will be lost!</xsl:message>
         </xsl:if>
 
         <xsl:variable name="newRow" as="element(row)">
@@ -223,6 +223,10 @@
             <xsl:attribute name="headrows" select="count(row[@role = 'label' or @role = 'unit'])"/>
 
             <xsl:apply-templates mode="normalize-table-final"/>
+
+            <xsl:if test="count(column) != 0 and count(column) != count(row[1]/cell)">
+                <xsl:message>WARNING: Table '<xsl:value-of select="@id"/>': count(column) = <xsl:value-of select="count(column)"/>; count(row[1]/cell) = <xsl:value-of select="count(row[1]/cell)"/>.</xsl:message>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
 
@@ -253,7 +257,7 @@
     <xsl:template match="cell[@spanned]" mode="normalize-table-final"/>
 
 
-    <!-- Split columns -->
+    <!--==== Split columns ====-->
 
     <xd:doc>
         <xd:short>Adjust the column count of a table if necessary</xd:short>
@@ -349,37 +353,26 @@
 
 
     <xd:doc>
-        <xd:short>Split a cell in two if the first text() node in it is numeric.</xd:short>
+        <xd:short>Split a cell in two if the first non-empty text() node in it is numeric.</xd:short>
         <xd:detail>
-            <p>If the first <code>text()</code> node is numeric (according to the selected number pattern), it is split
-            into an integer and fractional part. Cells with non-numeric content are normally not split, but if any content
+            <p>If the first non-empty <code>text()</code> node is numeric (according to the selected number pattern), it is split
+            into an integer and a fractional part. Cells with non-numeric content are normally not split, but if any content
             in the cell is wrapped in an element node, it will be ignored for determining whether the cell is numeric. 
             Any non-text nodes preceding the text node go to the first cell, any nodes following this text node go to 
             the second cell.</p>
 
-            <p>The use of normalize-space is to avoid an issue in Saxon when dealing with numbers that are followed by new-lines.</p>
+            <p>The use of normalize-space is to avoid issues with pattern-matching in relation to new-lines.</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[1]), f:determineNumberPattern(.))]">
-        <xsl:variable name="text" select="normalize-space(text()[1])" as="xs:string"/>
+    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[normalize-space(.) != ''][1]), f:determineNumberPattern(.))]">
+        <xsl:variable name="text" select="normalize-space(text()[normalize-space(.) != ''][1])" as="xs:string"/>
 
-        <xsl:variable name="decimal-separator" select="f:determineDecimalSeparator(.)"/>
         <xsl:variable name="number-pattern" select="f:determineNumberPattern(.)"/>
 
         <xsl:variable name="integer" select="replace($text, $number-pattern, '$2')"/>
         <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7')"/>
 
-        <!--
-        <xsl:variable name="integer"
-            select="if (contains($text, $decimal-separator))
-                    then substring-before($text, $decimal-separator)
-                    else $text"/>
-        <xsl:variable name="fraction"
-            select="if (contains($text, $decimal-separator))
-                    then concat($decimal-separator, substring-after($text, $decimal-separator))
-                    else ''"/>
-        -->
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
         <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)" as="xs:string"/>
 
@@ -388,7 +381,7 @@
             <xsl:copy-of select="@*[not(name() = ('col', 'rend'))]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalIntegerPart')"/>
-            <xsl:apply-templates select="*[not(preceding-sibling::text())]"/>
+            <xsl:apply-templates select="*[not(preceding-sibling::text()[normalize-space(.) != ''])]"/>
             <xsl:value-of select="$integer"/>
         </xsl:element>
 
@@ -401,7 +394,7 @@
                 <xsl:attribute name="cols" select="f:new-cols-value(../.., xs:integer(@col + 1), @cols)"/>
             </xsl:if>
             <xsl:value-of select="$fraction"/>
-            <xsl:apply-templates select="(*|text())[preceding-sibling::text()]"/>
+            <xsl:apply-templates select="(*|text())[preceding-sibling::text()[normalize-space(.) != '']]"/>
         </xsl:element>
     </xsl:template>
 
@@ -411,10 +404,12 @@
     </xd:doc>
 
     <xsl:template mode="split-cell" match="cell">
+        <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
         <xsl:element name="cell" namespace="">
-            <xsl:copy-of select="@*[not(name() = ('col', 'cols'))]"/>
+            <xsl:copy-of select="@*[not(name() = ('col', 'cols', 'rend'))]"/>
             <xsl:attribute name="cols" select="if (@cols) then f:new-cols-value(../.., @col, @cols) + 1 else 2"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
+            <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalNotNumber')"/>
             <xsl:copy-of select="*|text()"/>
         </xsl:element>
     </xsl:template>
@@ -436,8 +431,18 @@
         </xsl:element>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>The document root.</xd:short>
+        <xd:detail>The document root is set to the root of the document we process, so we can access that, even if we are
+        processing document trees generated while processing documents in multiple rounds.</xd:detail>
+    </xd:doc>
 
     <xsl:variable name="document-root" select="/"/>
+
+    <xd:doc>
+        <xd:short>The default decimal separator, set to a period (English usage).</xd:short>
+    </xd:doc>
+
     <xsl:variable name="default-decimal-separator" select="'.'"/>
 
     <xd:doc>
@@ -449,7 +454,7 @@
     </xd:doc>
 
     <xsl:variable name="number-pattern-period" select="'^\s?(((\p{Nd}+[,])*\p{Nd}+)(([.]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
-    <xsl:variable name="number-pattern-comma" select="'^\s?(((\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
+    <xsl:variable name="number-pattern-comma"  select="'^\s?(((\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
 
 
     <xd:doc>
