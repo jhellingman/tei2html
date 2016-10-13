@@ -398,7 +398,15 @@
 
     <xd:doc>
         <xd:short>Handle an image placed above a head.</xd:short>
-        <xd:detail>Handle an image placed above a head, typically a decorative illustration.</xd:detail>
+        <xd:detail>
+            <p>Handle an image placed above a head, typically a decorative illustration.</p>
+        
+            <p>There are two ways to indicate such images. 1. Use the <code>@rend</code> attribute on the 
+            head with a rendition element <code>image(image.jpg)</code> and 2. Place a <code>@rend</code>
+            attribute on a figure in the division, with a rendition element <code>position(abovehead)</code>. 
+            The first method is appropriate for decorative images without accompanying text, the second can 
+            be used if a title and legend needs to appear with the image.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template name="headPicture">
@@ -423,7 +431,18 @@
                 </xsl:call-template>
             </div>
         </xsl:if>
+        <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">
+            <xsl:message>WARNING: <xsl:value-of select="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead'])"/> found to be placed above the division head.</xsl:message>
+        </xsl:if>
+        <xsl:apply-templates select="../p/figure[f:rend-value(@rend, 'position') = 'abovehead']"/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Skip images already placed above the chapter heading.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="p[figure[f:rend-value(@rend, 'position') = 'abovehead']]"/>
 
 
     <xd:doc>
