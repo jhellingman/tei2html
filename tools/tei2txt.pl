@@ -16,8 +16,7 @@ GetOptions(
     'u' => \$useUnicode,
     'w=i' => \$pageWidth);
 
-if ($useUnicode == 1)
-{
+if ($useUnicode == 1) {
     binmode(STDOUT, ":utf8");
     use open ':utf8';
 }
@@ -27,13 +26,10 @@ my $italicStart = "_";
 my $italicEnd = "_";
 
 
-if ($useItalics == 1)
-{
+if ($useItalics == 1) {
     $italicStart = "_";
     $italicEnd = "_";
-}
-else
-{
+} else {
     $italicStart = "";
     $italicEnd = "";
 }
@@ -74,16 +70,13 @@ my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "",     "");
 # Main program loop
 #
 
-while (<>)
-{
+while (<>) {
     my $a = $_;
 
     # remove TeiHeader
-    if ($a =~ /<[Tt]ei[Hh]eader/)
-    {
+    if ($a =~ /<[Tt]ei[Hh]eader/) {
         $a = $';
-        while($a !~ /<\/[Tt]ei[Hh]eader>/)
-        {
+        while($a !~ /<\/[Tt]ei[Hh]eader>/) {
             $a = <>;
         }
         $a =~ /<\/[Tt]ei[Hh]eader>/;
@@ -100,79 +93,64 @@ while (<>)
     $a =~ s/<\/note\b.*?>/[**ERROR: unhandled note end tag]/g;
 
     # generate part headings
-    if ($a =~ /<(div0.*?)>/)
-    {
+    if ($a =~ /<(div0.*?)>/) {
         my $tag = $1;
         my $partNumber = getAttrVal("n", $tag);
-        if ($partNumber ne "")
-        {
+        if ($partNumber ne "") {
             print "\nPART $partNumber\n";
         }
     }
 
     # generate chapter headings
-    if ($a =~ /<(div1.*?)>/)
-    {
+    if ($a =~ /<(div1.*?)>/) {
         my $tag = $1;
         my $chapterNumber = getAttrVal("n", $tag);
-        if ($chapterNumber ne "")
-        {
+        if ($chapterNumber ne "") {
             print "\nCHAPTER $chapterNumber\n";
         }
     }
 
     # generate section headings
-    if ($a =~ /<(div2.*?)>/)
-    {
+    if ($a =~ /<(div2.*?)>/) {
         my $tag = $1;
         my $sectionNumber = getAttrVal("n", $tag);
-        if ($sectionNumber ne "")
-        {
+        if ($sectionNumber ne "") {
             print "\nSECTION $sectionNumber\n";
         }
     }
 
     # generate figure headings
-    if ($a =~ /<(figure.*?)>/)
-    {
+    if ($a =~ /<(figure.*?)>/) {
         my $tag = $1;
         my $figureNumber = getAttrVal("n", $tag);
         print "\n------\nFIGURE $figureNumber\n";
     }
-    if ($a =~ /<\/figure>/)
-    {
+    if ($a =~ /<\/figure>/) {
         print "------\n";
     }
 
     # indicate tables for manual processing.
-    if ($a =~ /<table.*?>/)
-    {
+    if ($a =~ /<table.*?>/) {
         print "\n[**TODO: Verify table]\n";
         parseTable($a);
     }
-    if ($a =~ /<\/table>/)
-    {
+    if ($a =~ /<\/table>/) {
         print "------\n";
     }
 
     $a = handleLine($a);
 
-
     print $a;
 }
 
 
-sub handleLine($)
-{
+sub handleLine($) {
     my $a = shift;
 
     # convert entities
-    if ($useUnicode == 1)
-    {
+    if ($useUnicode == 1) {
         $a = sgml2utf($a);
-    }
-    else
-    {
+    } else {
         $a = entities2iso88591($a);
     }
 
@@ -189,15 +167,13 @@ sub handleLine($)
     $a =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
 
     # handle numbered lines of verse
-    if ($a =~ /( +)<l\b(.*?)>/)
-    {
+    if ($a =~ /( +)<l\b(.*?)>/) {
         my $prefix = $`;
         my $remainder = $';
         my $spaces = $1;
         my $attrs = $2;
         my $n = getAttrVal("n", $attrs);
-        if ($n)
-        {
+        if ($n) {
             my $need = length($spaces) - length($n);
             my $need = $need < 1 ? 1 : $need;
             $a = $prefix . $n . spaces($need) . $remainder;
@@ -212,11 +188,9 @@ sub handleLine($)
     $a =~ s/\&rarr;/->/g;   # Right Arrow
 
     # warn for entities that slipped through.
-    if ($a =~ /\&([a-zA-Z0-9._-]+);/)
-    {
+    if ($a =~ /\&([a-zA-Z0-9._-]+);/) {
         my $ent = $1;
-        if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp"))
-        {
+        if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp")) {
             print "\n[**ERROR: Contains unhandled entity &$ent;]\n";
         }
     }
@@ -234,36 +208,27 @@ sub handleLine($)
 }
 
 
-sub spaces($)
-{
+sub spaces($) {
     my $n = shift;
     my $result = "";
-    for (my $i = 0; $i < $n; $i++)
-    {
+    for (my $i = 0; $i < $n; $i++) {
         $result .= " ";
     }
     return $result;
 }
 
-sub handleHighlighted($)
-{
+sub handleHighlighted($) {
     my $remainder = shift;
 
     my $a = "";
-    while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/)
-    {
+    while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/) {
         my $attrs = $1;
         my $rend = getAttrVal("rend", $attrs);
-        if ($rend eq "sup")
-        {
+        if ($rend eq "sup") {
             $a .= $` . $2;
-        }
-        elsif ($rend eq "sc" || $rend eq "expanded")
-        {
+        } elsif ($rend eq "sc" || $rend eq "expanded") {
             $a .= $` . $2;
-        }
-        else
-        {
+        } else {
             $a .= $` . $italicStart . $2 . $italicEnd;
         }
         $remainder = $';
@@ -271,15 +236,12 @@ sub handleHighlighted($)
     return $a . $remainder;
 }
 
-sub parseTable($)
-{
+sub parseTable($) {
     my $table = shift;
-    while (<>)
-    {
+    while (<>) {
         my $line = $_;
         $table .= $line;
-        if ($line =~ /<\/table>/)
-        {
+        if ($line =~ /<\/table>/) {
             my @result = handleTable($table);
             my @wrappedTable = sizeTableColumns($pageWidth - 1, @result);
             printTable(@wrappedTable);
@@ -290,8 +252,7 @@ sub parseTable($)
 
 # Place a table in a three-dimensional array: rows, cells, lines (within each cell)
 #
-sub handleTable($)
-{
+sub handleTable($) {
     my $table = shift;
     # $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
     $table =~ /<table(.*?)>(.*?)<\/table>/ms;
@@ -302,16 +263,14 @@ sub handleTable($)
     # First element in result is empty, so drop it
     shift @rows;
     my @result = ();
-    foreach my $row (@rows)
-    {
+    foreach my $row (@rows) {
         $row = trim($row);
         push @result, [ handleRow($row) ];
     }
     return @result;
 }
 
-sub handleRow($)
-{
+sub handleRow($) {
     my $row = shift;
     my @items = split(/<cell\b(.*?)>/ms, $row);
     my @cells = ();
@@ -319,15 +278,11 @@ sub handleRow($)
     my @rowspans = ();
 
     # every second item contains tag; first cell is empty.
-    for (my $i = 0; $i <= $#items; $i++)
-    {
+    for (my $i = 0; $i <= $#items; $i++) {
         my $item = $items[$i];
-        if ($i % 2 == 0)
-        {
+        if ($i % 2 == 0) {
             push @cells, $item;
-        }
-        else
-        {
+        } else {
             my $cols = getAttrVal("cols", $item);
             my $rows = getAttrVal("rows", $item);
 
@@ -343,22 +298,19 @@ sub handleRow($)
     shift @cells;
 
     my @result = ();
-    foreach my $cell (@cells)
-    {
+    foreach my $cell (@cells) {
         $cell = handleLine(trim($cell));
         push @result, [ handleCell($cell) ];
     }
     return @result;
 }
 
-sub handleCell($)
-{
+sub handleCell($) {
     my $cell = shift;
     my @lines = split("\n", $cell);
 
     my @result = ();
-    foreach my $line (@lines)
-    {
+    foreach my $line (@lines) {
         $line = trim($line);
         $line =~ s/\s+/ /g;
         push @result, $line;
@@ -367,8 +319,7 @@ sub handleCell($)
 }
 
 
-sub sizeTableColumns($@)
-{
+sub sizeTableColumns($@) {
     # See also: https://developer.mozilla.org/en-US/docs/Table_Layout_Strategy
     # See http://nothings.org/computer/badtable/
     # in particular: http://www.csse.monash.edu.au/~marriott/HurMarMou05.pdf
@@ -387,29 +338,23 @@ sub sizeTableColumns($@)
     my @columnArea = ();
     my $totalArea = 0;
 
-    for my $i (0 .. $#rows)
-    {
+    for my $i (0 .. $#rows) {
         my $cellCount = $#{$rows[$i]};
-        for my $j (0 .. $cellCount)
-        {
+        for my $j (0 .. $cellCount) {
             my $cellHeight = $#{$rows[$i][$j]};
-            for my $k (0 .. $cellHeight)
-            {
+            for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
                 my $lineLength = length($line);
                 $columnArea[$j] += $lineLength;
                 $totalArea += $lineLength;
-                if ($lineLength > $desiredColumnWidths[$j])
-                {
+                if ($lineLength > $desiredColumnWidths[$j]) {
                     $desiredColumnWidths[$j] = $lineLength;
                 }
 
                 my @words = split(/\s+/, $line);
-                foreach my $word (@words)
-                {
+                foreach my $word (@words) {
                     my $wordLength = length($word);
-                    if ($wordLength > $minimalColumnWidths[$j])
-                    {
+                    if ($wordLength > $minimalColumnWidths[$j]) {
                         $widestWord[$j] = $word;
                         $minimalColumnWidths[$j] = $wordLength;
                     }
@@ -422,8 +367,7 @@ sub sizeTableColumns($@)
     my @finalColumnWidths = ();
     my $minimalWidth = 0;
     my $columns = 0;
-    for my $j (0 .. $#minimalColumnWidths)
-    {
+    for my $j (0 .. $#minimalColumnWidths) {
         $columns++;
         ##print STDERR "\nCOLUMN: $j WIDTH: $minimalColumnWidths[$j] WORD: $widestWord[$j]";
         $finalColumnWidths[$j] = $minimalColumnWidths[$j];
@@ -439,8 +383,7 @@ sub sizeTableColumns($@)
 
     $finalWidth -= $borderAdjustment;
 
-    if ($minimalWidth > $finalWidth)
-    {
+    if ($minimalWidth > $finalWidth) {
         print STDERR "WARNING: Table cannot be fitted into " . ($finalWidth + $borderAdjustment) . " columns! Need " . ($minimalWidth + $borderAdjustment) . " columns.\n";
     }
 
@@ -450,20 +393,16 @@ sub sizeTableColumns($@)
     ##print STDERR "\n\nEstablishing column widths (rows: $#rows; columns: $columns; width: $finalWidth; area: $totalArea)";
     my @entitlement = ();
     my @fillFactor = ();
-    for my $j (0 .. $columns - 1)
-    {
+    for my $j (0 .. $columns - 1) {
         my $fraction = sqrt($columnArea[$j]) / sqrt($totalArea);
         $entitlement[$j] = $finalWidth * $fraction;
         ##print STDERR "\nColumn $j: ";
         my $pfraction = floor($fraction * 100.0)/100.0;
         my $pentitlement = floor($entitlement[$j]);
         ##print STDERR "\n    width: $finalColumnWidths[$j];\n    area: $desiredColumnWidths[$j]\n    fraction: $pfraction; \n    entitlement: $pentitlement";
-        if ($finalColumnWidths[$j] >= $desiredColumnWidths[$j])
-        {
+        if ($finalColumnWidths[$j] >= $desiredColumnWidths[$j]) {
             $fillFactor[$j] = 1.0;
-        }
-        else
-        {
+        } else {
             $fillFactor[$j] = $finalColumnWidths[$j] / $entitlement[$j];
         }
         ##print STDERR "\n    fill factor: $fillFactor[$j]";
@@ -471,37 +410,28 @@ sub sizeTableColumns($@)
 
     # Add spaces to columns with the lowest fill factor, recalculating it as we go;
     my $remainingWidth = $finalWidth - $minimalWidth;
-    while ($remainingWidth > 0)
-    {
+    while ($remainingWidth > 0) {
         my $mostNeedy = -1;
         my $worstFillFactor = 1;
         # Find column with lowest fill factor;
-        for my $j (0 .. $columns - 1)
-        {
-            if ($fillFactor[$j] < 1.0 && $fillFactor[$j] < $worstFillFactor)
-            {
+        for my $j (0 .. $columns - 1) {
+            if ($fillFactor[$j] < 1.0 && $fillFactor[$j] < $worstFillFactor) {
                 $mostNeedy = $j;
                 $worstFillFactor = $fillFactor[$j];
             }
         }
 
-        if ($mostNeedy == -1)
-        {
+        if ($mostNeedy == -1) {
             # All columns are satisfied
             last;
-        }
-        else
-        {
+        } else {
             # Give that column an extra space and recalculate fill factor
             $remainingWidth--;
             $finalColumnWidths[$mostNeedy]++;
 
-            if ($finalColumnWidths[$mostNeedy] >= $desiredColumnWidths[$mostNeedy])
-            {
+            if ($finalColumnWidths[$mostNeedy] >= $desiredColumnWidths[$mostNeedy]) {
                 $fillFactor[$mostNeedy] = 1.0;
-            }
-            else
-            {
+            } else {
                 $fillFactor[$mostNeedy] = $finalColumnWidths[$mostNeedy] / $entitlement[$mostNeedy];
             }
         }
@@ -510,25 +440,19 @@ sub sizeTableColumns($@)
     # TODO: optimize the table.
 
     # Break lines in cells.
-    for my $i (0 .. $#rows)
-    {
-        for my $j (0 .. $#{$rows[$i]})
-        {
+    for my $i (0 .. $#rows) {
+        for my $j (0 .. $#{$rows[$i]}) {
             my @newCell = ();
             my $cellHeight = $#{$rows[$i][$j]};
 
             ## print STDERR "\nCOLUMN $j: wrapping to $finalColumnWidths[$j]";
 
-            for my $k (0 .. $cellHeight)
-            {
+            for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
-                if ($line eq "")
-                {
+                if ($line eq "") {
                     # Handle empty lines directly.
                     push (@newCell, "");
-                }
-                else
-                {
+                } else {
                     my $wrappedLine = wrapLine($line, $finalColumnWidths[$j]);
                     push (@newCell, split("\n", $wrappedLine));
                 }
@@ -540,8 +464,7 @@ sub sizeTableColumns($@)
 }
 
 
-sub minimumCellHeightGivenWidth($$)
-{
+sub minimumCellHeightGivenWidth($$) {
     my $width = shift;
     my $cell = shift;
 
@@ -551,16 +474,14 @@ sub minimumCellHeightGivenWidth($$)
     my @lines = split("\n", $line);
 
     my $height = 0;
-    foreach my $line (@lines)
-    {
+    foreach my $line (@lines) {
         $height += minimumLineHeightGivenWidth($line, $width);
     }
     return $height;
 }
 
 
-sub minimumLineHeightGivenWidth($$)
-{
+sub minimumLineHeightGivenWidth($$) {
     my $line = shift;
     my $width = shift;
 
@@ -568,19 +489,14 @@ sub minimumLineHeightGivenWidth($$)
 
     my $height = 1;
     my $currentWidth = 0;
-    foreach my $word (@words)
-    {
+    foreach my $word (@words) {
         my $wordWidth = length ($word);
         $currentWidth += $wordWidth;
-        if ($currentWidth > $width)
-        {
+        if ($currentWidth > $width) {
             $height++;
             $currentWidth = $wordWidth;
-        }
-        else
-        {
-            if ($currentWidth != 0)
-            {
+        } else {
+            if ($currentWidth != 0) {
                 $currentWidth++;
             }
         }
@@ -589,8 +505,7 @@ sub minimumLineHeightGivenWidth($$)
 }
 
 
-sub nextShorterLineWidth($$$)
-{
+sub nextShorterLineWidth($$$) {
     my $line = shift;
     my $width = shift;
     my $height = shift;
@@ -600,8 +515,7 @@ sub nextShorterLineWidth($$$)
     # Find word widths (should be stored)
     my @widths = ();
     my $n = 0;
-    foreach my $word (@words)
-    {
+    foreach my $word (@words) {
         $widths[$n] = length ($word);
         $n++;
     }
@@ -612,19 +526,14 @@ sub nextShorterLineWidth($$$)
     my @lineStart = ();
     $lineStart[0] = 0;
     my $currentWidth = 0;
-    foreach my $word (@words)
-    {
+    foreach my $word (@words) {
         $currentWidth += $widths[$i];
-        if ($currentWidth > $width)
-        {
+        if ($currentWidth > $width) {
             $lastLine++;
             $lineStart[$lastLine] = $i;
             $currentWidth = $widths[$i];
-        }
-        else
-        {
-            if ($currentWidth != 0)
-            {
+        } else {
+            if ($currentWidth != 0) {
                 $currentWidth++;
             }
         }
@@ -635,24 +544,19 @@ sub nextShorterLineWidth($$$)
 
     my @minWidth = ();
     my $lineLength = $widths[$n - 1];
-    for (my $w = $n - 1; $w > $lineStart[$lastLine - 2]; $w--)
-    {
+    for (my $w = $n - 1; $w > $lineStart[$lastLine - 2]; $w--) {
         $minWidth[$w] = max($width, $lineLength);
         $lineLength = $lineLength + 1 + $widths[$w - 1];
     }
 
-    for (my $L = $lastLine - 3; $L >= 0; $L--)
-    {
+    for (my $L = $lastLine - 3; $L >= 0; $L--) {
         my $nlw = $lineStart[$L + 1];
         $lineLength = $widths[$lineStart[$L]];
-        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++)
-        {
+        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++) {
             $lineLength = $widths[$w] + 1 + $lineLength;
         }
-        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++)
-        {
-            while ($minWidth[$nlw] > $lineLength && $nlw < $lineStart[$L + 2])
-            {
+        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++) {
+            while ($minWidth[$nlw] > $lineLength && $nlw < $lineStart[$L + 2]) {
                 $lineLength = $lineLength + 1 + $widths[$nlw];
                 $nlw++;
             }
@@ -664,13 +568,11 @@ sub nextShorterLineWidth($$$)
 }
 
 
-sub totalTableWidth(@)
-{
+sub totalTableWidth(@) {
     my @columnWidths = @_;
 
     my $totalTableWidth = length($borderLeft[$borderStyle]);
-    for my $i (0 .. $#columnWidths)
-    {
+    for my $i (0 .. $#columnWidths) {
         $totalTableWidth += $columnWidths[$i];
         $totalTableWidth += $i < $#columnWidths ? length($innerCross[$borderStyle]) : length($borderRight[$borderStyle]);
     }
@@ -679,30 +581,24 @@ sub totalTableWidth(@)
 }
 
 
-sub printTable(@)
-{
+sub printTable(@) {
     my @rows = @_;
 
     # Establish the width of each column and height of each row
     my @columnWidths = ();
     my @rowHeights = ();
 
-    for my $i (0 .. $#rows)
-    {
-        for my $j (0 .. $#{$rows[$i]})
-        {
+    for my $i (0 .. $#rows) {
+        for my $j (0 .. $#{$rows[$i]}) {
             my $cellHeight = $#{$rows[$i][$j]};
-            for my $k (0 .. $cellHeight)
-            {
+            for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
                 my $lineLength = length($line);
-                if ($lineLength > $columnWidths[$j])
-                {
+                if ($lineLength > $columnWidths[$j]) {
                     $columnWidths[$j] = $lineLength;
                 }
             }
-            if ($cellHeight > $rowHeights[$i])
-            {
+            if ($cellHeight > $rowHeights[$i]) {
                 $rowHeights[$i] = $cellHeight;
             }
         }
@@ -710,78 +606,64 @@ sub printTable(@)
 
     my $totalTableWidth = totalTableWidth(@columnWidths);
 
-    if (length ($borderTopLine[$borderStyle]) > 0)
-    {
+    if (length ($borderTopLine[$borderStyle]) > 0) {
         printCenterSpacing($totalTableWidth);
         printTopBorder(@columnWidths);
     }
 
-    for my $i (0 .. $#rows)
-    {
+    for my $i (0 .. $#rows) {
         # Print a entire row line-by-line for each cell.
-        for my $k (0 .. $rowHeights[$i])
-        {
+        for my $k (0 .. $rowHeights[$i]) {
             printCenterSpacing($totalTableWidth);
             print $borderLeft[$borderStyle];
-            for my $j (0 .. $#{$rows[$i]})
-            {
+            for my $j (0 .. $#{$rows[$i]}) {
                 printWithPadding($rows[$i][$j][$k], $columnWidths[$j]);
-                if ($j < $#{$rows[$i]})
-                {
+                if ($j < $#{$rows[$i]}) {
                     print $innerVertical[$borderStyle];
                 }
             }
             print $borderRight[$borderStyle];
             print "\n";
         }
-        if ($i < $#rows)
-        {
-            if (length ($innerHorizontal[$borderStyle]) > 0)
-            {
+        if ($i < $#rows) {
+            if (length ($innerHorizontal[$borderStyle]) > 0) {
                 printCenterSpacing($totalTableWidth);
                 printInnerBorder(@columnWidths);
             }
         }
     }
-    if (length ($borderBottomLine[$borderStyle]) > 0)
-    {
+    if (length ($borderBottomLine[$borderStyle]) > 0) {
         printCenterSpacing($totalTableWidth);
         printBottomBorder(@columnWidths);
     }
 }
 
 
-sub printCenterSpacing($)
-{
+sub printCenterSpacing($) {
     my $lineWidth = shift;
 
-    if ($centerTables != 0)
-    {
+    if ($centerTables != 0) {
         my $centerSpacing = floor(($pageWidth - $lineWidth) / 2);
-        if ($centerSpacing > 1)
-        {
+        if ($centerSpacing > 1) {
             print repeat(' ', $centerSpacing);
         }
     }
 }
 
 
-sub wrapLines($$)
-{
+sub wrapLines($$) {
     my $line = shift;
     my $maxLength = shift;
     my @lines = split("\n", $line);
 
     my @result = ();
-    foreach my $line (@lines)
-    {
+    foreach my $line (@lines) {
         push @result, wrapLine($line, $maxLength);
     }
     return join ("\n", @result);
 }
 
-sub wrapLine($$)
-{
+sub wrapLine($$) {
     my $line = shift;
     my $maxLength = shift;
     my $actualMaxLength = 0;
@@ -790,29 +672,21 @@ sub wrapLine($$)
 
     my $result = "";
     my $currentLength = 0;
-    foreach my $word (@words)
-    {
+    foreach my $word (@words) {
         my $wordLength = length ($word);
 
         my $newLength = $currentLength == 0 ? $wordLength : $currentLength + $wordLength + 1;
 
         # Need to start a new line?
-        if ($newLength > $maxLength)
-        {
-            if ($currentLength != 0)
-            {
+        if ($newLength > $maxLength) {
+            if ($currentLength != 0) {
                 $result .= "\n";
-            }
-            else
-            {
+            } else {
                 print STDERR "WARNING: single word '$word' longer than $maxLength\n";
             }
             $currentLength = $wordLength;
-        }
-        else
-        {
-            if ($currentLength != 0)
-            {
+        } else {
+            if ($currentLength != 0) {
                 $currentLength++;
                 $result .= " ";
             }
@@ -820,14 +694,12 @@ sub wrapLine($$)
         }
         $result .= $word;
 
-        if ($actualMaxLength < $currentLength)
-        {
+        if ($actualMaxLength < $currentLength) {
             $actualMaxLength = $currentLength;
         }
     }
 
-    if ($actualMaxLength > $maxLength)
-    {
+    if ($actualMaxLength > $maxLength) {
         print STDERR "WARNING: could not wrap line to $maxLength; needed $actualMaxLength\n";
     }
 
@@ -835,26 +707,21 @@ sub wrapLine($$)
 }
 
 
-sub repeat($$)
-{
+sub repeat($$) {
     my $char = shift;
     my $count = shift;
     my $result = "";
-    for (my $j = 0; $j < $count; $j++)
-    {
+    for (my $j = 0; $j < $count; $j++) {
         $result .= $char;
     }
     return $result;
 }
 
-sub printTopBorder(@)
-{
+sub printTopBorder(@) {
     my @columnWidths = @_;
-    if (length ($borderTopLine[$borderStyle]) > 0)
-    {
+    if (length ($borderTopLine[$borderStyle]) > 0) {
         print $borderTopLeft[$borderStyle];
-        for my $i (0 .. $#columnWidths)
-        {
+        for my $i (0 .. $#columnWidths) {
             print repeat($borderTopLine[$borderStyle], $columnWidths[$i]);
             print $i < $#columnWidths ? $borderTopCross[$borderStyle] : $borderTopRight[$borderStyle];
         }
@@ -862,14 +729,11 @@ sub printTopBorder(@)
     }
 }
 
-sub printInnerBorder(@)
-{
+sub printInnerBorder(@) {
     my @columnWidths = @_;
-    if (length ($innerHorizontal[$borderStyle]) > 0)
-    {
+    if (length ($innerHorizontal[$borderStyle]) > 0) {
         print $borderLeftCross[$borderStyle];
-        for my $i (0 .. $#columnWidths)
-        {
+        for my $i (0 .. $#columnWidths) {
             print repeat($innerHorizontal[$borderStyle], $columnWidths[$i]);
             print $i < $#columnWidths ? $innerCross[$borderStyle] : $borderRightCross[$borderStyle];
         }
@@ -877,14 +741,11 @@ sub printInnerBorder(@)
     }
 }
 
-sub printBottomBorder(@)
-{
+sub printBottomBorder(@) {
     my @columnWidths = @_;
-    if (length ($borderBottomLine[$borderStyle]) > 0)
-    {
+    if (length ($borderBottomLine[$borderStyle]) > 0) {
         print $borderBottomLeft[$borderStyle];
-        for my $i (0 .. $#columnWidths)
-        {
+        for my $i (0 .. $#columnWidths) {
             print repeat($borderBottomLine[$borderStyle], $columnWidths[$i]);
             print $i < $#columnWidths ? $borderBottomCross[$borderStyle] : $borderBottomRight[$borderStyle];
         }
@@ -893,27 +754,22 @@ sub printBottomBorder(@)
 }
 
 
-sub printWithPadding($$)
-{
+sub printWithPadding($$) {
     my $string = shift;
     my $width = shift;
 
     # Align right if number or amount
-    if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/)
-    {
+    if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/) {
         print spaces($width  - length($string));
         print $string;
-    }
-    else
-    {
+    } else {
         print $string;
         print spaces($width  - length($string));
     }
 }
 
 
-sub trim($)
-{
+sub trim($) {
     my $string = shift;
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
@@ -923,8 +779,7 @@ sub trim($)
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
 #
-sub entities2iso88591($)
-{
+sub entities2iso88591($) {
     my $a = shift;
 
     # soft-hyphen:
