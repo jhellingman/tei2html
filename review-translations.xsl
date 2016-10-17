@@ -19,7 +19,7 @@
     </xd:doc>
 
     <xsl:param name="srclang" select="'en'"/>
-    <xsl:param name="destlang" select="'ceb'"/>
+    <xsl:param name="destlang" select="'de'"/>
 
     <xsl:strip-space elements="*"/>
 
