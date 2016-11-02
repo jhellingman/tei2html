@@ -7,8 +7,7 @@ $letter = "(\\w|$accLetter|$ligLetter|$specLetter;)";
 $wordPattern = "($letter)+(([-']|&rsquo;|&apos;)($letter)+)*";
 $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
-while(<>)
-{
+while (<>) {
 	$line = $_;
 
 	# open quotes
@@ -21,8 +20,7 @@ while(<>)
 
 	$remainder = $line;
 	$line = "";
-	while ($remainder =~ /(<.*?>)/) 
-	{
+	while ($remainder =~ /(<.*?>)/) {
 		$line .= $`;
 		$tag = $1;
 		$remainder = $';

@@ -331,7 +331,10 @@
 
     <xsl:template match="figure">
         <xsl:if test="f:isSet('includeImages')">
-            <xsl:call-template name="closepar"/>
+            <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
+                <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
+                <xsl:call-template name="closepar"/>
+            </xsl:if>
             <div class="figure">
                 <xsl:call-template name="set-lang-id-attributes"/>
 
@@ -360,9 +363,10 @@
 
                 <xsl:call-template name="figure-annotations-bottom"/>
                 <xsl:apply-templates/>
-
             </div>
-            <xsl:call-template name="reopenpar"/>
+            <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
+                <xsl:call-template name="reopenpar"/>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 

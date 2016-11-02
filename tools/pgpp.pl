@@ -7,8 +7,7 @@ use SgmlSupport qw/pgdp2sgml/;
 my $file = $ARGV[0];
 my $useExtensions = 0;
 
-if ($file eq "-x")
-{
+if ($file eq "-x") {
     $useExtensions = 1;
     $file = $ARGV[1];
     print STDERR "USING EXTENSIONS FOR FRANCK!\n";
@@ -18,8 +17,7 @@ if ($file eq "-x")
 open(INPUTFILE, $file) || die("Could not open input file $file");
 
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     # Replace ampersands (if they are not likely entities):
     $_ =~ s/\& /\&amp; /g;
     $_ =~ s/\&$/\&amp;/g;

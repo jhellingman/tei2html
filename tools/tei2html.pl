@@ -5,6 +5,7 @@ use strict;
 use File::Copy;
 use File::stat;
 use File::Temp qw(mktemp);
+use File::Path qw(make_path remove_tree);
 use FindBin qw($Bin);
 use Getopt::Long;
 
@@ -266,6 +267,7 @@ sub processFile($) {
 
         system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
         unlink($tmpFile);
+        remove_tree("epub")
     }
 
     if ($makeTXT == 1) {
