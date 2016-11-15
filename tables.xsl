@@ -197,6 +197,12 @@
             <xsl:call-template name="cell-rend"/>
 
             <xsl:choose>
+                <xsl:when test="@rows &gt; 1 and normalize-space(.) = '{'">
+                    <xsl:call-template name="insert-left-brace"/>
+                </xsl:when>
+                <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
+                    <xsl:call-template name="insert-right-brace"/>
+                </xsl:when>
                 <xsl:when test="@role='sum'">
                     <span class="sum">
                         <xsl:apply-templates/>
@@ -207,6 +213,21 @@
                 </xsl:otherwise>
             </xsl:choose>
         </td>
+    </xsl:template>
+
+
+    <xsl:template name="insert-right-brace">
+        <xsl:call-template name="insertimage2">
+            <xsl:with-param name="alt" select="''"/>
+            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="insert-left-brace">
+        <xsl:call-template name="insertimage2">
+            <xsl:with-param name="alt" select="''"/>
+            <xsl:with-param name="filename" select="concat('images/lbrace', @rows, '.png')"/>
+        </xsl:call-template>
     </xsl:template>
 
 
@@ -263,9 +284,7 @@
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:call-template name="insertimage2">
-                <xsl:with-param name="alt">
-                    <xsl:value-of select="x"/>
-                </xsl:with-param>
+                <xsl:with-param name="alt" select="''"/>
             </xsl:call-template>
         </xsl:if>
 

@@ -108,6 +108,9 @@
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'link')">
                 <xsl:variable name="url" select="f:rend-value(@rend, 'link')"/>
+                <xsl:call-template name="verify-linked-image">
+                    <xsl:with-param name="url" select="$url"/>
+                </xsl:call-template>
                 <a>
                     <xsl:choose>
                         <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
@@ -141,9 +144,25 @@
 
 
     <xd:doc>
+        <xd:short>Verify an image linked to is actually present in the imageinfo file.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="verify-linked-image">
+        <xsl:param name="url"/>
+
+        <xsl:variable name="width">
+            <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$url]/@width, 'px')"/>
+        </xsl:variable>
+        <xsl:if test="$width = ''">
+            <xsl:message terminate="no">WARNING: Linked image "<xsl:value-of select="$url"/>" not present in image-info file "<xsl:value-of select="normalize-space($imageInfoFile)"/>".</xsl:message>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xd:doc>
         <xd:short>Insert an image in the output (step 2).</xd:short>
         <xd:detail>
-            <p>Insert the actual img-element in the output HTML.</p>
+            <p>Insert the actual <code>img</code>-element in the output HTML.</p>
         </xd:detail>
         <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
         <xd:param name="format" type="string">The default file-extension of the image file.</xd:param>
@@ -224,7 +243,7 @@
         <xd:detail>
             <p>Since images may not appear stand-alone in an ePub file, this generates
             an HTML wrapper for (mostly large) images linked to from a smaller image using
-            link() in the rend attribute.</p>
+            <code>link()</code> in the <code>@rend</code> attribute.</p>
         </xd:detail>
         <xd:param name="imagefile" type="string">The name of the image file (may be left empty).</xd:param>
     </xd:doc>
