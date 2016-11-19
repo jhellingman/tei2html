@@ -64,3 +64,4 @@ metadata.xml
 .idea/
 *.bak
 tmp.xml
+xsltdoc.log

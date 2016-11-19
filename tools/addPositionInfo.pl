@@ -10,14 +10,14 @@ print STDERR "Adding pos attributes to $inputFile\n";
 
 my $lineNumber = 0;
 
-while (<INPUTFILE>)
-{
+my @filterTags = ['GR', 'GRC', 'CY'];
+
+while (<INPUTFILE>) {
     my $remainder = $_;
     $lineNumber++;
     my $column = 0;
 
-    while ($remainder =~ m/<([a-z][a-z0-9.:_-]*)(.*?)>/i)
-    {
+    while ($remainder =~ m/<([a-z][a-z0-9.:_-]*)(.*?)>/i) {
         my $before = $`;
         my $tag = $1;
         my $attrs = $2;
@@ -25,13 +25,12 @@ while (<INPUTFILE>)
         $column += length "$before";
 
         # Filter out special transcription tags.
-        if ($tag ne 'GR') 
-        {
-            $attrs = " pos='$lineNumber:$column'$attrs";
+        if ($tag ne 'GR') {
+            $attrs = "$attrs pos='$lineNumber:$column'";
         }
         print "$before<$tag$attrs>";
 
-        # Do not count added attribute, as it is not in the source.
+        # Do not count length of added POS attribute, as it is not in the source.
         $column += length "<$tag$attrs>";
     }
     print $remainder;

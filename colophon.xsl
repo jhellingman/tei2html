@@ -63,6 +63,8 @@
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
+        <xsl:call-template name="keywords"/>
+
         <xsl:call-template name="classification"/>
 
         <xsl:call-template name="catalog-entries"/>
@@ -104,6 +106,17 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xsl:template name="keywords">
+        <xsl:if test="//profileDesc/textClass/keywords/list/item[not(contains(., '#'))]">
+            <p><xsl:value-of select="f:message('msgKeywords')"/>: 
+            <xsl:for-each select="//profileDesc/textClass/keywords/list/item[not(contains(., '#'))]">
+                <xsl:value-of select="."/>
+                <xsl:value-of select="if (position() &lt; last()) then ', ' else '.'"/>
+            </xsl:for-each>
+            </p>
+        </xsl:if>
+    </xsl:template>
 
     <xd:doc>
         <xd:short>Generate links to catalog entries.</xd:short>

@@ -70,22 +70,11 @@
 
     <xsl:template match="/">
 
-        <!-- page numbers in odd places -->
-
-        <!-- division numbers in sequence -->
-
         <xsl:variable name="segments">
             <xsl:call-template name="segmentize"/>
         </xsl:variable>
 
-        <!--
-        <xsl:call-template name="output-segments">
-            <xsl:with-param name="segments" select="$segments"/>
-        </xsl:call-template>
-        -->
-
         <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
-
         <xsl:variable name="issues">
             <i:issues>
 
@@ -200,6 +189,7 @@
             <i:issue pos="{@pos}" code="C0012" element="{name(.)}">Unexpected type for head: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
     </xsl:template>
+
 
     <!-- Types of divisions -->
 
@@ -380,35 +370,6 @@
             <i:issue pos="{@pos}" code="T0002" element="{name(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
-    </xsl:template>
-
-
-    <!-- Page-break sequence -->
-
-    <xsl:template mode="checks" match="pb">
-        <xsl:variable name="preceding" select="preceding::pb[1]/@n"/>
-
-        <xsl:choose>
-            <xsl:when test="not(@n)">
-                <i:issue pos="{@pos}" code="C0003" element="{name(.)}">Page break without page number.</i:issue>
-            </xsl:when>
-
-            <xsl:when test="not(f:is-number(@n) or f:is-roman(@n))">
-                <i:issue pos="{@pos}" code="C0004" element="{name(.)}">Page break <xsl:value-of select="@n"/> not numeric.</i:issue>
-            </xsl:when>
-
-            <xsl:when test="f:is-roman(@n) and f:is-roman($preceding)">
-                <xsl:if test="not(f:from-roman(@n) = f:from-roman($preceding) + 1)">
-                    <i:issue pos="{@pos}" code="C0005" element="{name(.)}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="$preceding"/>)</i:issue>
-                </xsl:if>
-            </xsl:when>
-
-            <xsl:when test="f:is-number(@n) and f:is-number($preceding)">
-                <xsl:if test="not(@n = $preceding + 1)">
-                    <i:issue pos="{@pos}" code="C0005" element="{name(.)}">Page break <xsl:value-of select="@n"/> out-of-sequence. (preceding: <xsl:value-of select="if (not($preceding)) then 'not set' else $preceding"/>)</i:issue>
-                </xsl:if>
-            </xsl:when>
-        </xsl:choose>
     </xsl:template>
 
 
