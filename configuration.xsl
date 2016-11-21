@@ -40,6 +40,7 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
+            <debug>true</debug>                                         <!-- Use debug mode. -->
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
             <useCommonStylesheets>true</useCommonStylesheets>           <!-- Use the build-in stylesheets (for screen) -->
             <useCommonPrintStylesheets>true</useCommonPrintStylesheets> <!-- Use the build-in stylesheets (for print media) -->

@@ -122,12 +122,10 @@ sub main {
     my $file = $ARGV[0];
     open(INPUTFILE, $file) || die("Could not open input file $file");
 
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $remainder = $_;
         my $result = "";
-        while ($remainder =~ /$tagPattern/)
-        {
+        while ($remainder =~ /$tagPattern/) {
             my $fragment = $`;
             my $tag = $1;
             $remainder = $';
@@ -139,8 +137,7 @@ sub main {
         # Special handling for degrees Fahrenheit.
         $remainder = $result;
         $result = "";
-        while ($remainder =~ /$tagPattern/)
-        {
+        while ($remainder =~ /$tagPattern/) {
             my $fragment = $`;
             my $tag = $1;
             $remainder = $';
@@ -148,11 +145,8 @@ sub main {
             $result .= $tag;
         }
         $result .= tagFahrenheits($remainder);
-
-
         print $result;
     }
-
     close INPUTFILE;
 }
 
@@ -179,7 +173,6 @@ sub tagMeasures($) {
         $result .= tagMeasure($number, $unit, 1);
     }
     $result .= $remainder;
-
     return $result;
 }
 
@@ -227,7 +220,6 @@ sub tagFahrenheits($) {
         $result .= tagFahrenheit($number, $unit, 1);
     }
     $result .= $remainder;
-
     return $result;
 }
 

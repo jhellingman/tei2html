@@ -81,6 +81,7 @@
         <msg:message name="msgFigures">Figures</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
         <msg:message name="msgFrontMatter">Front Matter</msg:message>
+        <msg:message name="msgGitHubRepository">GitHub repository for this eBook</msg:message>
         <msg:message name="msgGlossary">Glossary</msg:message>
         <msg:message name="msgGuide">Guide</msg:message>
         <msg:message name="msgGuides">Guides</msg:message>
@@ -89,8 +90,8 @@
         <msg:message name="msgIllustrations">Illustrations</msg:message>
         <msg:message name="msgImprint">Imprint</msg:message>
         <msg:message name="msgIndex">Index</msg:message>
-		<msg:message name="msgKeyword">Keyword</msg:message>
-		<msg:message name="msgKeywords">Keywords</msg:message>
+        <msg:message name="msgKeyword">Keyword</msg:message>
+        <msg:message name="msgKeywords">Keywords</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
         <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
         <msg:message name="msgLinkToBible">Link to cited location in Bible</msg:message>
@@ -593,8 +594,8 @@
         <msg:message name="msgIllustrations">Abbildungen</msg:message>
         <msg:message name="msgImprint">Impressum</msg:message>
         <msg:message name="msgIndex">Index</msg:message>
-		<msg:message name="msgKeyword">Stichwort</msg:message>
-		<msg:message name="msgKeywords">Stichwörter</msg:message>
+        <msg:message name="msgKeyword">Stichwort</msg:message>
+        <msg:message name="msgKeywords">Stichwörter</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Katalogseite der Library of Congress</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Link zu OpenLibrary Katalogseite</msg:message>
         <msg:message name="msgLinkToPg">Link zu Project Gutenberg Ebook</msg:message>
@@ -787,8 +788,8 @@
         <msg:message name="msgIllustrations">Illustraties</msg:message>
         <msg:message name="msgImprint">Impressum</msg:message>
         <msg:message name="msgIndex">Index</msg:message>
-		<msg:message name="msgKeyword">Trefwoord</msg:message>
-		<msg:message name="msgKeywords">Trefwoorden</msg:message>		
+        <msg:message name="msgKeyword">Trefwoord</msg:message>
+        <msg:message name="msgKeywords">Trefwoorden</msg:message>       
         <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress catalogus pagina</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
@@ -1088,8 +1089,8 @@
         <msg:message name="msgIllustration">Ilustración</msg:message>
         <msg:message name="msgIllustrations">Ilustraciones</msg:message>
         <msg:message name="msgIndex">Índice analítico</msg:message>
-		<msg:message name="msgKeyword">Palabra clave</msg:message>
-		<msg:message name="msgKeywords">Palabras clave</msg:message>		
+        <msg:message name="msgKeyword">Palabra clave</msg:message>
+        <msg:message name="msgKeywords">Palabras clave</msg:message>        
         <msg:message name="msgLinkToOpenLibrary">Enlace a la página del catálogo de Open Library</msg:message>
         <msg:message name="msgLinkToPg">Enlace al libro digital de Project Gutenberg</msg:message>
         <msg:message name="msgLinkToWorldCat">Enlace a la página del catálogo de WorldCat</msg:message>

@@ -190,6 +190,15 @@
             </p>
         </xsl:if>
 
+        <xsl:if test="f:isValid(//idno[@type='PGSrc'])">
+            <p><xsl:value-of select="f:message('msgGitHubRepository')"/>:
+                <a class="catlink">
+                    <xsl:attribute name="href">https://github.com/GutenbergSource/<xsl:value-of select="//idno[@type='PGSrc']"/></xsl:attribute>
+                    <xsl:value-of select="//idno[@type='PGSrc']"/>
+                </a>.
+            </p>
+        </xsl:if>
+
     </xsl:template>
 
 
