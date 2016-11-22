@@ -283,7 +283,7 @@
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
-                <xsl:message terminate="no">INFO:    Align division <xsl:value-of select="@id"/> with division <xsl:value-of select="$otherid"/></xsl:message>
+                <xsl:message>INFO:    Align division <xsl:value-of select="@id"/> with division <xsl:value-of select="$otherid"/></xsl:message>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="//*[@id=$otherid]"/>
@@ -294,7 +294,7 @@
                 <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherid" select="substring-after($target, '#')"/>
-                <xsl:message terminate="no">INFO:    Align division <xsl:value-of select="@id"/> with external document '<xsl:value-of select="$target"/>'</xsl:message>
+                <xsl:message>INFO:    Align division <xsl:value-of select="@id"/> with external document '<xsl:value-of select="$target"/>'</xsl:message>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="document($document, .)//*[@id=$otherid]"/>

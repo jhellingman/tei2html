@@ -92,7 +92,7 @@
                 method="xml"
                 indent="yes"
                 encoding="UTF-8">
-            <xsl:message terminate="no">INFO:    Generated file: segments.xml.</xsl:message>
+            <xsl:message>INFO:    Generated file: segments.xml.</xsl:message>
             <xsl:copy-of select="$segments"/>
         </xsl:result-document>
     </xsl:template>

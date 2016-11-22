@@ -89,7 +89,7 @@
 
     <xsl:template name="handleAlignedLg">
         <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
-        <xsl:message terminate="no">INFO:    Align verse <xsl:value-of select="@id"/> with verse <xsl:value-of select="$otherid"/></xsl:message>
+        <xsl:message>INFO:    Align verse <xsl:value-of select="@id"/> with verse <xsl:value-of select="$otherid"/></xsl:message>
         <xsl:call-template name="align-verses">
             <xsl:with-param name="a" select="."/>
             <xsl:with-param name="b" select="//*[@id=$otherid]"/>
@@ -192,10 +192,10 @@
 
         <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
 
-        <xsl:message terminate="no">INFO:    Elements in first: <xsl:value-of select="count($a/*)"/>; elements in second <xsl:value-of select="count($b/*)"/>.</xsl:message>
+        <xsl:message>INFO:    Elements in first: <xsl:value-of select="count($a/*)"/>; elements in second <xsl:value-of select="count($b/*)"/>.</xsl:message>
 
         <xsl:if test="count($a/*) != count($b/*)">
-            <xsl:message terminate="no">WARNING: Number of elements in verses to align does not match!</xsl:message>
+            <xsl:message>WARNING: Number of elements in verses to align does not match!</xsl:message>
         </xsl:if>
 
         <table class="alignedverse">

@@ -129,7 +129,7 @@
             <xsl:when test="$node/@id">
                 <!-- Verify the id is valid for use in HTML and CSS 
                 <xsl:if test="not(matches($node/@id,'^[A-Za-z][A-Za-z0-9_-]*$'))">
-                    <xsl:message terminate="no">WARNING: Source contains an id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
+                    <xsl:message>WARNING: Source contains an id [<xsl:value-of select="$node/@id"/>] that may cause problems in CSS.</xsl:message>
                 </xsl:if>-->
                 <xsl:value-of select="$node/@id"/>
             </xsl:when>
@@ -320,7 +320,7 @@
             <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
             <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
             <xsl:otherwise>
-                <xsl:message terminate="no">WARNING: Division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
+                <xsl:message>WARNING: Division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
                 <xsl:value-of select="''"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -351,5 +351,95 @@
         <xsl:param name="value" as="xs:string?"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
+
+
+
+    <xsl:function name="f:logError">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:logMessage('error', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:formatError" as="xs:string">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:formatLogMessage('error', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:logWarning">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:logMessage('warning', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:formatWarning" as="xs:string">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:formatLogMessage('warning', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:logInfo">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:logMessage('info', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:formatInfo" as="xs:string">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:formatLogMessage('info', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:logDebug">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:logMessage('debug', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:formatDebug" as="xs:string">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:copy-of select="f:formatLogMessage('debug', $message, $params)"/>
+    </xsl:function>
+
+    <xsl:function name="f:logMessage">
+        <xsl:param name="level" as="xs:string"/>
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+
+        <xsl:variable name="formatted" select="f:formatLogMessage($level, $message, $params)"/>
+        <xsl:if test="f:isSet('debug')">
+            <span class="t2h{$level}"><xsl:value-of select="$formatted"/></span>
+        </xsl:if>
+        <xsl:message><xsl:value-of select="$formatted"/></xsl:message>
+    </xsl:function>
+
+    <xsl:function name="f:formatLogMessage" as="xs:string">
+        <xsl:param name="level" as="xs:string"/>
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+        <xsl:value-of select="concat(upper-case($level), ': ', f:formatString($message, $params))"/>
+    </xsl:function>
+
+    <xsl:function name="f:formatString" as="xs:string">
+        <xsl:param name="message" as="xs:string"/>
+        <xsl:param name="params" as="xs:string*"/>
+
+        <!-- replace parameters in the message string like {1} {2} {3} to the matching value in the $param sequence -->
+        <xsl:variable name="formatted">
+            <xsl:analyze-string select="$message" regex="\{{([0-9]+)\}}">
+                <xsl:matching-substring>
+                    <xsl:variable name="index" select="xs:integer(regex-group(1))" as="xs:integer"/>
+                    <xsl:value-of select="$params[$index]"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:value-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+
+        <xsl:value-of select="$formatted"/>
+    </xsl:function>
+
 
 </xsl:stylesheet>

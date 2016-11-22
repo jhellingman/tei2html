@@ -40,7 +40,7 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <debug>true</debug>                                         <!-- Use debug mode. -->
+            <debug>false</debug>                                         <!-- Use debug mode. -->
             <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
             <useCommonStylesheets>true</useCommonStylesheets>           <!-- Use the build-in stylesheets (for screen) -->
             <useCommonPrintStylesheets>true</useCommonPrintStylesheets> <!-- Use the build-in stylesheets (for print media) -->
@@ -106,7 +106,7 @@
         <xsl:variable name="value" select="if ($value) then $value else $default-configuration/tei2html.config/*[name()=$name]"/>
 
         <xsl:if test="not($value)">
-            <xsl:message terminate="no">ERROR:   Cannot get configuration value: <xsl:value-of select="$name"/>.</xsl:message>
+            <xsl:message><xsl:value-of select="f:formatError('Cannot get configuration value: &quot;{1}&quot;.', ($name))"/></xsl:message>
         </xsl:if>
 
         <xsl:sequence select="$value"/>

@@ -589,7 +589,7 @@ tr, td, th {
  vertical-align: top;
 }
 
-td.bottom {
+tr.bottom, td.bottom, th.bottom {
  vertical-align: bottom;
 }
 
@@ -785,6 +785,9 @@ td.alignDecimalFractionPart {
  margin-left: 0 !important;
 }
 
+td.alignDecimalNotNumber {
+ text-align: center;
+}
 
   
 

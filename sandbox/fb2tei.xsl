@@ -154,7 +154,7 @@
 
 
 <xsl:template match="fb2:*">
-    <xsl:message terminate="no">Unhandled fb2 element: <xsl:value-of select="name()"/></xsl:message>
+    <xsl:message>Unhandled fb2 element: <xsl:value-of select="name()"/></xsl:message>
         <xsl:apply-templates/>
 </xsl:template>
 
@@ -342,7 +342,7 @@
 
 <xsl:template match="fb2:binary">
     <xsl:variable name="filename" select="f:getFilename(.)"/>
-    <xsl:message terminate="no">Extracted binary file: <xsl:value-of select="$filename"/></xsl:message>
+    <xsl:message>Extracted binary file: <xsl:value-of select="$filename"/></xsl:message>
     <xsl:result-document
             href="{$filename}.hex"
             method="text"

@@ -86,7 +86,7 @@
     <xsl:function name="f:load-dictionary" as="xs:string*">
         <xsl:param name="filename"/>
 
-        <xsl:message terminate="no">Loading stopwords from file: <xsl:value-of select="$filename"/></xsl:message>
+        <xsl:message>Loading stopwords from file: <xsl:value-of select="$filename"/></xsl:message>
         <xsl:variable name="file-contents" as="xs:string" select="unparsed-text($filename, 'iso-8859-1')"/>
         <xsl:sequence select="tokenize($file-contents, '\r?\n')"/>
     </xsl:function>

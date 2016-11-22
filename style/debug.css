@@ -1,0 +1,28 @@
+
+/* color scheme for error information */
+
+.t2hdebug, .t2hinfo, .t2hwarning, .t2herror {
+    padding: 4px 8px 4px 8px;
+    font-family: "Segoe UI", "Calibri", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.t2hdebug {
+    background-color: #ebecfb;
+    color: #4e874a;
+}
+
+.t2hinfo {
+    background-color: #ecfbeb;
+    color: #4e874a;
+}
+
+.t2hwarning {
+    background-color: #ffe082;
+    color: #e67000;
+}
+
+.t2herror {
+    background-color: #fc9a8d;
+    color: #973433;
+}
