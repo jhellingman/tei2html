@@ -509,7 +509,7 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="next" as="xs:string"/>
 
-        <!-- Remove anything not a pairing punctionation mark -->
+        <!-- Remove anything not a pairing punctuation mark -->
         <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;&laquo;&raquo;&bdquo;]', '')"/>
 
         <xsl:variable name="head" select="if (string-length($string) &lt; 40) then $string else concat(substring($string, 1, 37), '...')"/>
