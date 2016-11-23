@@ -71,7 +71,7 @@
                 href="{$path}/{$basename}.css"
                 method="text"
                 encoding="UTF-8">
-            <xsl:message><xsl:value-of select="f:formatInfo('Generated CSS file: {1}/{2}.css', ($path, $basename))"/></xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated CSS stylesheet: {1}/{2}.css', ($path, $basename))"/>
             <xsl:call-template name="common-css-stylesheets"/>
             <xsl:call-template name="custom-css-stylesheets"/>
         </xsl:result-document>
@@ -122,11 +122,6 @@
 
         <xsl:if test="//ditto or //table[contains(@rend, 'intralinear')]">
             <xsl:value-of select="f:css-stylesheet('style/special.css')"/>
-        </xsl:if>
-
-        <!-- Debugging CSS -->
-        <xsl:if test="f:isSet('debug')">
-            <xsl:value-of select="f:css-stylesheet('style/debug.css')"/>
         </xsl:if>
 
         <!-- Format-specific stylesheets. -->
@@ -512,7 +507,7 @@
         <xsl:param name="uri" as="xs:string"/>
         <xsl:variable name="uri" select="normalize-space($uri)" as="xs:string"/>
 
-        <xsl:message><xsl:value-of select="f:formatInfo('Including CSS stylesheet: {1}', ($uri))"/></xsl:message>
+        <xsl:copy-of select="f:logInfo('Including CSS stylesheet: {1}', ($uri))"/>
 
         <xsl:variable name="css">
             <xsl:choose>
@@ -526,7 +521,7 @@
                     <xsl:value-of select="document(concat($uri, '.xml'))/*/node()"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:message><xsl:value-of select="f:formatError('Unable to find CSS stylesheet: {1}', ($uri))"/></xsl:message>
+                    <xsl:copy-of select="f:logError('Unable to find CSS stylesheet: {1}', ($uri))"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

@@ -605,7 +605,7 @@
         <xsl:for-each select="tokenize(., '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
-                    <xsl:message>WARNING: Stand-alone punctionation mark '<xsl:value-of select="."/>' in ditto (will not use ditto mark).</xsl:message>
+                    <xsl:copy-of select="f:logWarning('Stand-alone punctionation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
                     <table class="ditto">
                         <tr class="s"><td><xsl:value-of select="."/></td></tr>
                     </table>

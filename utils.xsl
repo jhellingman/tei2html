@@ -105,7 +105,8 @@
         <xsl:variable name="count" select="count($first//*[local-name() = $name] except $node/following::*[local-name() = $name])"/>
         <xsl:variable name="id" select="concat($baseid, '_', $name, '_', $count)"/>
 
-        <xsl:message>Generated ID: <xsl:value-of select="$id"/>.</xsl:message>
+        <xsl:copy-of select="f:logInfo('Generated ID: {1}.', ($id))"/>
+
         <xsl:value-of select="$id"/>
     </xsl:function>
 
@@ -320,7 +321,7 @@
             <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
             <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
             <xsl:otherwise>
-                <xsl:message>WARNING: Division's type attribute [<xsl:value-of select="$type"/>] not handled correctly in translate-div-type.</xsl:message>
+                <xsl:copy-of select="f:logWarning('Division type: {1} not understood.', ($type))"/>
                 <xsl:value-of select="''"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -393,7 +394,9 @@
     <xsl:function name="f:logDebug">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('debug', $message, $params)"/>
+        <xsl:if test="f:isSet('debug')">
+            <xsl:copy-of select="f:logMessage('debug', $message, $params)"/>
+        </xsl:if>
     </xsl:function>
 
     <xsl:function name="f:formatDebug" as="xs:string">
@@ -408,9 +411,6 @@
         <xsl:param name="params" as="xs:string*"/>
 
         <xsl:variable name="formatted" select="f:formatLogMessage($level, $message, $params)"/>
-        <xsl:if test="f:isSet('debug')">
-            <span class="t2h{$level}"><xsl:value-of select="$formatted"/></span>
-        </xsl:if>
         <xsl:message><xsl:value-of select="$formatted"/></xsl:message>
     </xsl:function>
 

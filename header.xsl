@@ -171,7 +171,7 @@
 
     <!-- Suppress PGTei extensions -->
     <xsl:template match="pgExtensions">
-        <xsl:message>WARNING: This stylesheet does not support the Project Gutenberg PGTEI extensions.</xsl:message>
+        <xsl:copy-of select="f:logWarning('This stylesheet does not support the Project Gutenberg PGTEI extensions.', ())"/>
     </xsl:template>
 
 </xsl:stylesheet>

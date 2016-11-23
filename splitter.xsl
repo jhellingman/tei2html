@@ -351,9 +351,8 @@
 
             <!-- Warn for extra media overlays -->
             <xsl:if test="$media-overlays[2]">
-                    <xsl:message>ERROR:   Ignoring second media-overlay for single file (id: <xsl:value-of select="$media-overlays[2]"/>).</xsl:message>
+                <xsl:copy-of select="f:logError('Ignoring second media-overlay for single file (id: {1}).', ($media-overlays[2]))"/>
             </xsl:if>
-
         </item>
     </xsl:template>
 
@@ -415,7 +414,7 @@
     <xsl:template name="content.div-fragment">
         <xsl:param name="nodes" as="node()*"/>
 
-        <xsl:variable name="filename">
+        <xsl:variable name="filename" as="xs:string">
             <xsl:call-template name="generate-filename-for">
                 <xsl:with-param name="node" select=".."/>
                 <xsl:with-param name="position" select="position()"/>
@@ -423,7 +422,7 @@
         </xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message>INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
@@ -470,7 +469,7 @@
         <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message>INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
 
@@ -510,24 +509,27 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
         <xsl:param name="position" as="xs:integer?"/>
-        <xsl:choose>
-            <xsl:when test="$node/@id='cover'">
-                <xsl:value-of select="'cover.xhtml'"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$basename"/>
-                <xsl:text>-</xsl:text>
-                <xsl:call-template name="generate-id-for">
-                    <xsl:with-param name="node" select="$node"/>
-                </xsl:call-template>
-                <xsl:if test="$position">
+        <xsl:variable name="filename">
+            <xsl:choose>
+                <xsl:when test="$node/@id='cover'">
+                    <xsl:value-of select="'cover.xhtml'"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$basename"/>
                     <xsl:text>-</xsl:text>
-                    <xsl:value-of select="$position"/>
-                </xsl:if>
-                <xsl:text>.</xsl:text>
-                <xsl:value-of select="$extension"/>
-            </xsl:otherwise>
-        </xsl:choose>
+                    <xsl:call-template name="generate-id-for">
+                        <xsl:with-param name="node" select="$node"/>
+                    </xsl:call-template>
+                    <xsl:if test="$position">
+                        <xsl:text>-</xsl:text>
+                        <xsl:value-of select="$position"/>
+                    </xsl:if>
+                    <xsl:text>.</xsl:text>
+                    <xsl:value-of select="$extension"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="$filename"/>
     </xsl:template>
 
 
@@ -564,7 +566,7 @@
             <xsl:otherwise>
                 <xsl:text>x</xsl:text>
                 <xsl:value-of select="generate-id($node)"/>
-                <xsl:message>WARNING: Generated ID [x<xsl:value-of select="generate-id($node)"/>] is not stable between runs of XSLT.</xsl:message>
+                <xsl:copy-of select="f:logWarning('Generated id x{1} is not stable between runs of XSLT.', (generate-id($node)))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

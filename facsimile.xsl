@@ -14,7 +14,7 @@
         <xd:detail><p>This stylesheet can be used to generate a digital facsimile edition of a TEI document,
         provided that page-images are available, and encoded in the <code>@facs</code> attribute of
         <code>pb</code>-elements.</p>
-        
+
         <p>The stylesheet generates page-image wrapper pages and will take into account the
         case that pb-elements can be placed at the very end of a division (so that the next
         page will begin a new division), even though, strictly speaking, the page-break
@@ -37,7 +37,7 @@
 
 
 <xsl:template match="surface">
-    <xsl:message>WARNING: tei2html does not support the surface element.</xsl:message>
+    <xsl:copy-of select="f:logWarning('tei2html does not support the surface element.', ())"/>
     <xsl:apply-templates/>
 </xsl:template>
 
@@ -142,8 +142,8 @@
     <xsl:variable name="facsimile-css-file" select="concat(f:facsimile-path(), '/facsimile.css')"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
-        <xsl:message>INFO:    Generated file: <xsl:value-of select="$facsimile-css-file"/>.</xsl:message>
-            
+        <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-css-file))"/>
+
             body
             {
                 text-align: center;
@@ -162,7 +162,7 @@
     <xsl:variable name="facsimile-file" select="concat(f:facsimile-path(), concat('/', f:facsimile-filename(.)))"/>
 
     <xsl:result-document href="{$facsimile-file}">
-        <xsl:message>INFO:    Generated file: <xsl:value-of select="$facsimile-file"/>.</xsl:message>
+        <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-file))"/>
         <xsl:call-template name="facsimile-html"/>
     </xsl:result-document>
 </xsl:template>
@@ -312,7 +312,7 @@
     <xd:short>Find out in which div-elements a given pd-element is at the end.</xd:short>
     <xd:detail>Find out in which div-elements a given pd-element is at the end, which means, there is no content following it.
     This is done in the following steps:
-    
+
     <ol>
         <li>Select all relevant (div-element) ancestors.</li>
         <li>Select all content following the pb that is a descendent of the same ancestor.</li>
@@ -353,7 +353,7 @@
     <!-- Get the highest-level division of which the pb is at the end -->
     <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div($pb)[1]"/>
     <xsl:if test="$ending-div">
-        <xsl:message>page-break <xsl:value-of select="$pb/@n"/> is at the end of a division, so will use next division.</xsl:message>
+        <xsl:copy-of select="f:logWarning('page-break {1} is at the end of a division, so will use next division.', ($pb/@n))"/>
     </xsl:if>
 
     <xsl:choose>

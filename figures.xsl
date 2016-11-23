@@ -49,7 +49,7 @@
             </xsl:when>
             <xsl:when test="@url">
                 <xsl:value-of select="@url"/>
-                <xsl:message><xsl:value-of select="f:formatWarning('Using non-standard attribute url &quot;{1}&quot; on figure.', (@url))"/></xsl:message>
+                <xsl:copy-of select="f:logWarning('Using non-standard attribute url {1} on figure.', (@url))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat('images/', @id, $format)"/>
@@ -80,7 +80,7 @@
             </xsl:when>
             <xsl:when test="$node/@url">
                 <xsl:value-of select="$node/@url"/>
-                <xsl:message><xsl:value-of select="f:formatWarning('Using non-standard attribute url &quot;{1}&quot; on figure.', ($node/@url))"/></xsl:message>
+                <xsl:copy-of select="f:logWarning('Using non-standard attribute url {1} on figure.', ($node/@url))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat('images/', $node/@id, $defaultformat)"/>
@@ -154,7 +154,7 @@
             <xsl:value-of select="substring-before(document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$url]/@width, 'px')"/>
         </xsl:variable>
         <xsl:if test="$width = ''">
-            <xsl:message><xsl:value-of select="f:formatWarning('Linked image &quot;{1}&quot; not present in image-info file &quot;{2}&quot;.', ($url, normalize-space($imageInfoFile)))"/></xsl:message>
+            <xsl:copy-of select="f:logWarning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
         </xsl:if>
     </xsl:template>
 
@@ -211,16 +211,16 @@
         </xsl:variable>
 
         <xsl:if test="$width = ''">
-            <xsl:message><xsl:value-of select="f:formatWarning('Image &quot;{1}&quot; not present in image-info file &quot;{2}&quot;.', ($file, normalize-space($imageInfoFile)))"/></xsl:message>
+            <xsl:copy-of select="f:logWarning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
         </xsl:if>
         <xsl:if test="$width != '' and $width > 720">
-            <xsl:message><xsl:value-of select="f:formatWarning('Image &quot;{1}&quot; width more than 720 pixels ({2} px).', ($file, $width))"/></xsl:message>
+            <xsl:copy-of select="f:logWarning('Image {1} width more than 720 pixels ({2} px).', ($file, $width))"/>
         </xsl:if>
         <xsl:if test="$height != '' and $height > 720">
-            <xsl:message><xsl:value-of select="f:formatWarning('Image &quot;{1}&quot; height more than 720 pixels ({2} px).', ($file, $height))"/></xsl:message>
+            <xsl:copy-of select="f:logWarning('Image {1} height more than 720 pixels ({2} px).', ($file, $height))"/>
         </xsl:if>
         <xsl:if test="$fileSize != '' and $fileSize > 102400">
-            <xsl:message><xsl:value-of select="f:formatWarning('Image &quot;{1}&quot; file-size more than 100 kilobytes ({2} kB).', ($file, ceiling($fileSize div 1024)))"/></xsl:message>
+            <xsl:copy-of select="f:logWarning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, ceiling($fileSize div 1024)))"/>
         </xsl:if>
 
         <img src="{$file}" alt="{$alt}">
@@ -268,7 +268,7 @@
         </xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:message>INFO:    Generated image wrapper file: <xsl:value-of select="$path"/>/<xsl:value-of select="$filename"/>.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated image wrapper file: {1}/{2}.', ($path, $filename))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>

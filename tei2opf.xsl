@@ -46,7 +46,7 @@
 
     <xsl:template match="TEI.2 | TEI" mode="opf">
         <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
-            <xsl:message>INFO:    Generated OPF file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.opf.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated OPF file: {1}/{2}.opf.', ($path, $basename))"/>
 
             <package>
                 <xsl:attribute name="version">
@@ -84,7 +84,7 @@
                     <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:message>WARNING: An ePub document needs a unique id.</xsl:message>
+                    <xsl:copy-of select="f:logWarning('An ePub document needs a unique id.', ())"/>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
@@ -144,7 +144,7 @@
                     <meta name="cover" content="titlepage-image"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:message>WARNING: No suitable cover or title-page image found.</xsl:message>
+                    <xsl:copy-of select="f:logWarning('No suitable cover or title-page image found.', ())"/>
                 </xsl:otherwise>
             </xsl:choose>
 
@@ -154,7 +154,7 @@
 
             <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
-                <xsl:message>INFO:    Reading extra OPF metadata from "<xsl:value-of select="$opfMetadataFile"/>".</xsl:message>
+                <xsl:copy-of select="f:logInfo('Reading extra OPF metadata from: {1}.', ($opfMetadataFile))"/>
                 <xsl:copy-of select="document(normalize-space($opfMetadataFile))/opf:metadata/*"/>
             </xsl:if>
         </metadata>
@@ -502,7 +502,7 @@
         </item>
 
         <!-- Handle the .smil file itself for further entries -->
-        <xsl:message>INFO:    Reading media overlay information from "<xsl:value-of select="$filename"/>".</xsl:message>
+        <xsl:copy-of select="f:logInfo('Reading media overlay information from: {1}.', ($filename))"/>
         <xsl:apply-templates mode="manifest-smil" select="document($filename, .)"/>
     </xsl:template>
 
@@ -511,9 +511,7 @@
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
         <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
 
-        <!--
-        <xsl:message>INFO:    Adding audio: '<xsl:value-of select="@src"/>' duration: <xsl:value-of select="$duration"/>.</xsl:message>
-        -->
+        <xsl:copy-of select="f:logDebug('Adding audio: {1}; begin: {2}; end: {3}.', (@src, @clipBegin, @clipEnd))"/>
 
         <item>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
@@ -541,7 +539,7 @@
         <xsl:variable name="fragmentid"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
 
         <xsl:if test="not($teiFile//*[@id=$fragmentid])">
-            <xsl:message>WARNING: Fragment id: '<xsl:value-of select="$fragmentid"/>' not present in text.</xsl:message>
+            <xsl:copy-of select="f:logWarning('Fragment id: {1} not present in text.', ($fragmentid))"/>
         </xsl:if>
     </xsl:template>
 
@@ -559,7 +557,7 @@
                 <xsl:value-of select="number(regex-group(1)) * 3600 + number(regex-group(2)) * 60 + number(regex-group(3))"/>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:message>WARNING: Time: '<xsl:value-of select="$time"/>' not recognized.</xsl:message>
+                <xsl:copy-of select="f:logWarning('Time: {1} not recognized.', ($time))"/>
                 <xsl:text>0</xsl:text>
             </xsl:non-matching-substring>
         </xsl:analyze-string>

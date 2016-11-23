@@ -43,7 +43,7 @@
     <xsl:template match="TEI.2 | TEI" mode="ncx">
 
         <xsl:result-document format="ncx" href="{$path}/{$basename}.ncx">
-            <xsl:message>INFO:    Generated NCX file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>.ncx.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated NCX file: {1}/{2}.ncx.', ($path, $basename))"/>
 
             <ncx version="2005-1">
                 <xsl:attribute name="xml:lang">

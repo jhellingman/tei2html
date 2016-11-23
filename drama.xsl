@@ -15,18 +15,14 @@
     <!ENTITY frac34     "&#x00BE;">
 
 ]>
-<!--
-
-    Stylesheet to format inline elements, to be imported in tei2html.xsl.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xd"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -67,6 +63,7 @@
     </xd:doc>
 
     <xsl:template name="handleLg">
+        <xsl:variable name="context" select="." as="element(lg)"/>
         <xsl:call-template name="closepar"/>
         <div>
             <xsl:call-template name="set-lang-id-attributes"/>
@@ -88,8 +85,9 @@
     </xd:doc>
 
     <xsl:template name="handleAlignedLg">
+        <xsl:variable name="context" select="." as="element(lg)"/>
         <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
-        <xsl:message>INFO:    Align verse <xsl:value-of select="@id"/> with verse <xsl:value-of select="$otherid"/></xsl:message>
+        <xsl:copy-of select="f:logInfo('Align verse {1} with verse {2}.', (@id, $otherid))"/>
         <xsl:call-template name="align-verses">
             <xsl:with-param name="a" select="."/>
             <xsl:with-param name="b" select="//*[@id=$otherid]"/>
@@ -99,7 +97,7 @@
 
     <xd:doc>
         <xd:short>Format a head in an lg element.</xd:short>
-        <xd:detail>Format a head in an lg element. Represented as an h4 level head in HTML.</xd:detail>
+        <xd:detail>Format a <code>head</code> in an <code>lg</code> element. Represented as an h4 level head in HTML.</xd:detail>
     </xd:doc>
 
     <xsl:template match="lg/head">
@@ -187,15 +185,14 @@
     </xd:doc>
 
     <xsl:template name="align-verses">
-        <xsl:param name="a"/>
-        <xsl:param name="b"/>
+        <xsl:param name="a" as="element(lg)"/>
+        <xsl:param name="b" as="element(lg)"/>
 
         <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
 
-        <xsl:message>INFO:    Elements in first: <xsl:value-of select="count($a/*)"/>; elements in second <xsl:value-of select="count($b/*)"/>.</xsl:message>
-
+        <xsl:copy-of select="f:logInfo('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
         <xsl:if test="count($a/*) != count($b/*)">
-            <xsl:message>WARNING: Number of elements in verses to align does not match!</xsl:message>
+            <xsl:copy-of select="f:logWarning('Number of elements in verses to align does not match!', ())"/>
         </xsl:if>
 
         <table class="alignedverse">

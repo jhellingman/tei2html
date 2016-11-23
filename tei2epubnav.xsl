@@ -25,7 +25,7 @@
 
     <xsl:template match="TEI.2 | TEI" mode="ePubNav">
         <xsl:result-document href="{$path}/{$basename}-nav.xhtml">
-            <xsl:message>INFO:    Generated file: <xsl:value-of select="$path"/>/<xsl:value-of select="$basename"/>-nav.xhtml.</xsl:message>
+            <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}-nav.xhtml.', ($path, $basename))"/>
 
             <html>
                 <xsl:attribute name="xml:lang">

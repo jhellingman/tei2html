@@ -145,7 +145,7 @@
     <xsl:template name="copy-xml-file">
         <xsl:param name="filename" as="xs:string"/>
 
-        <xsl:message>INFO:    Copying XML file: <xsl:value-of select="$filename"/> to <xsl:value-of select="$path"/>.</xsl:message>
+        <xsl:copy-of select="f:logInfo('Copying XML file: {1} to: {2}.', ($filename, $path))"/>
 
         <xsl:result-document format="xml-noindent" href="{$path}/{$filename}">
             <xsl:copy-of select="document($filename, .)"/>

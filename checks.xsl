@@ -512,11 +512,6 @@
         <!-- Remove anything not a pairing punctionation mark -->
         <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;&laquo;&raquo;&bdquo;]', '')"/>
 
-        <!--
-        <xsl:message>Checking string: <xsl:value-of select="$string"/> </xsl:message>
-        <xsl:message>Checking pairs:  <xsl:value-of select="$pairs"/> </xsl:message>
-        -->
-
         <xsl:variable name="head" select="if (string-length($string) &lt; 40) then $string else concat(substring($string, 1, 37), '...')"/>
 
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
@@ -563,10 +558,6 @@
         <xsl:variable name="head" select="substring($pairs, 1, 1)"/>
         <xsl:variable name="tail" select="substring($pairs, 2)"/>
         <xsl:variable name="expect" select="translate(substring($stack, 1, 1), $opener-string, $closer-string)"/>
-
-        <!--
-        <xsl:message>Checking mark:   [<xsl:value-of select="$head"/>] : [<xsl:value-of select="$tail"/>]  (stack [<xsl:value-of select="$stack"/>], expect [<xsl:value-of select="$expect"/>]) </xsl:message>
-        -->
 
         <xsl:sequence select="if (not($head))
                               then $stack

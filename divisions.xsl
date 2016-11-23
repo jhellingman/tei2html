@@ -283,7 +283,7 @@
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
-                <xsl:message>INFO:    Align division <xsl:value-of select="@id"/> with division <xsl:value-of select="$otherid"/></xsl:message>
+                <xsl:copy-of select="f:logInfo('Align division {1} with division {2}.', (@id, $otherid))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="//*[@id=$otherid]"/>
@@ -294,7 +294,7 @@
                 <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherid" select="substring-after($target, '#')"/>
-                <xsl:message>INFO:    Align division <xsl:value-of select="@id"/> with external document '<xsl:value-of select="$target"/>'</xsl:message>
+                <xsl:copy-of select="f:logInfo('Align division {1} with external document {2}.', (@id, $target))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="document($document, .)//*[@id=$otherid]"/>
@@ -432,7 +432,7 @@
             </div>
         </xsl:if>
         <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">
-            <xsl:message>WARNING: <xsl:value-of select="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead'])"/> found to be placed above the division head.</xsl:message>
+            <xsl:copy-of select="f:logWarning('{1} paragraphs found to be placed above the division head.', (xs:string(count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']))))"/>
         </xsl:if>
         <xsl:apply-templates select="../p/figure[f:rend-value(@rend, 'position') = 'abovehead']"/>
     </xsl:template>

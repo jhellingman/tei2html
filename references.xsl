@@ -70,7 +70,7 @@
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">
-                <xsl:message>WARNING: Target '<xsl:value-of select="$target"/>' of cross reference not found.</xsl:message>
+                <xsl:copy-of select="f:logWarning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
             
@@ -406,7 +406,7 @@
                     <xsl:when test="$lang = 'es'">&amp;version=RVR1995</xsl:when>
                     <xsl:when test="$lang = 'nl'">&amp;version=HTB</xsl:when>
                     <xsl:otherwise>
-                        <xsl:message>No link to text in language '<xsl:value-of select="$lang"/>'.</xsl:message>
+                        <xsl:copy-of select="f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -422,7 +422,7 @@
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:message>WARNING: URL '<xsl:value-of select="$url"/>' not understood.</xsl:message>
+                <xsl:copy-of select="f:logWarning('URL &quot;{1}&quot; not understood.', ($url))"/>
                 <xsl:value-of select="$url"/>
             </xsl:otherwise>
         </xsl:choose>
