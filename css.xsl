@@ -133,6 +133,11 @@
             <xsl:value-of select="f:css-stylesheet('style/layout-html.css')"/>
         </xsl:if>
 
+        <!-- Debugging CSS stylesheet. -->
+        <xsl:if test="f:isSet('debug')">
+            <xsl:value-of select="f:css-stylesheet('style/debug.css')"/>
+        </xsl:if>
+
         <!-- Supplement CSS stylesheet. -->
         <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
     </xsl:template>

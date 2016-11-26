@@ -440,7 +440,7 @@
                 <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>
-        <td class="tocDivTitle" colspan="{$maxlevel - $curlevel}">
+        <td class="tocDivTitle" colspan="{($maxlevel + 1) - $curlevel}">
             <a>
                 <xsl:call-template name="generate-href-attribute"/>
                 <xsl:call-template name="generate-single-head"/>

@@ -1,4 +1,26 @@
 
+/* Show borders of tables */
+
+table {
+    border: 1px dotted gray;
+    background-color: #E0F7FF;
+}
+
+td {
+    border: 1px dotted blue;
+}
+
+th {
+    border: 1px dotted red;
+}
+
+ol, ul {
+    border: 1px dotted gray;
+    background-color: #E7FFE0;
+}
+
+
+
 /* color scheme for error information */
 
 .t2hdebug, .t2hinfo, .t2hwarning, .t2herror {
