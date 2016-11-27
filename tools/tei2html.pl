@@ -497,11 +497,16 @@ sub extractEntities($) {
 #
 sub runChecks($) {
     my $filename = shift;
+    print "Running checks on $filename.\n";
+
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $basename = $1;
     my $extension = $2;
     my $newname = $basename . "-pos." . $extension;
-    system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
+
+    my $transcribedFile = transcribe($filename);
+
+    system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$newname\"");
 
     if ($extension eq "tei") {
         my $tmpFile = mktemp('tmp-XXXXX');
@@ -517,6 +522,9 @@ sub runChecks($) {
     }
 
     system ("$saxon \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
+    if ($filename ne $transcribedFile) {
+        unlink ($transcribedFile);
+    }
     unlink ($newname);
 }
 
@@ -535,21 +543,12 @@ sub sgml2xml($$) {
 
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
-    # Translate Latin-1 characters to entities
+    # Convert Latin-1 characters to entities
     my $tmpFile0 = mktemp('tmp-XXXXX');
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
-    $tmpFile0 = addTranscriptions($tmpFile0);
-
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-    $tmpFile0 = transcribeNotation($tmpFile0, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
+    $tmpFile0 = transcribe($tmpFile0);
 
     print "Check SGML...\n";
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
@@ -574,6 +573,27 @@ sub sgml2xml($$) {
     unlink($tmpFile2);
     unlink($tmpFile1);
     unlink($tmpFile0);
+}
+
+
+#
+# transcribe -- transcribe foreign scripts in special notations to entities.
+#
+sub transcribe($) {
+    my $sgmlFile = shift;
+
+    $sgmlFile = addTranscriptions($sgmlFile);
+
+    $sgmlFile = transcribeNotation($sgmlFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
+
+    return $sgmlFile;
 }
 
 
