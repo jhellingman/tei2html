@@ -128,15 +128,15 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:call-template name="insertimage2">
-                        <xsl:with-param name="alt" select="$alt"/>
-                        <xsl:with-param name="format" select="$format"/>
+                        <xsl:with-param name="alt" select="$alt" as="xs:string"/>
+                        <xsl:with-param name="format" select="$format" as="xs:string"/>
                     </xsl:call-template>
                 </a>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="insertimage2">
-                    <xsl:with-param name="alt" select="$alt"/>
-                    <xsl:with-param name="format" select="$format"/>
+                    <xsl:with-param name="alt" select="$alt" as="xs:string"/>
+                    <xsl:with-param name="format" select="$format" as="xs:string"/>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
@@ -220,7 +220,7 @@
             <xsl:copy-of select="f:logWarning('Image {1} height more than 720 pixels ({2} px).', ($file, $height))"/>
         </xsl:if>
         <xsl:if test="$fileSize != '' and $fileSize > 102400">
-            <xsl:copy-of select="f:logWarning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, ceiling($fileSize div 1024)))"/>
+            <xsl:copy-of select="f:logWarning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, xs:string(ceiling($fileSize div 1024))))"/>
         </xsl:if>
 
         <img src="{$file}" alt="{$alt}">

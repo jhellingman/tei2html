@@ -2,12 +2,13 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f tmp xs xd"
+    exclude-result-prefixes="f tmp xs xd html"
     version="2.0"
     >
 
@@ -63,6 +64,8 @@
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
+        <xsl:call-template name="contributors"/>
+
         <xsl:call-template name="keywords"/>
 
         <xsl:call-template name="classification"/>
@@ -84,6 +87,74 @@
             <xsl:call-template name="correctionTable"/>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:template name="contributors">
+        <table>
+            <tr>
+                <th><xsl:value-of select="f:message('msgName')"/></th>
+                <th/>
+                <th><xsl:value-of select="f:message('msgRole')"/></th>
+            </tr>
+
+            <!-- Authors -->
+            <xsl:for-each select="//titleStmt/author">
+                <xsl:sort select="@key"/>
+                <xsl:copy-of select="f:contributorLine(., @ref, f:message('msgAuthor'))"/>
+            </xsl:for-each>
+
+            <!-- Editors -->
+            <xsl:for-each select="//titleStmt/editor">
+                <xsl:sort select="@key"/>
+                <xsl:copy-of select="f:contributorLine(., @ref, f:message('msgEditor'))"/>
+            </xsl:for-each>
+
+            <!-- Other contributors -->
+            <xsl:for-each select="//titleStmt/respStmt[resp != 'Transcription']">
+                <xsl:sort select="name/@key"/>
+                <xsl:copy-of select="f:contributorLine(name, name/@ref, f:translateResp(resp))"/>
+            </xsl:for-each>
+        </table>
+    </xsl:template>
+
+    <xsl:function name="f:contributorLine">
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="ref" as="xs:string?"/>
+        <xsl:param name="role" as="xs:string"/>
+
+        <tr>
+            <td>
+                <xsl:value-of select="$name"/>
+            </td>
+            <td>
+                <xsl:if test="f:isValid($ref)">
+                    <a href="{$ref}"><xsl:value-of select="'VIAF'"/></a>
+                </xsl:if>
+            </td>
+            <td><xsl:value-of select="$role"/></td>
+        </tr>
+    </xsl:function>
+
+
+    <xsl:function name="f:translateResp" as="xs:string">
+        <xsl:param name="resp" as="xs:string"/>
+
+        <xsl:variable name="roles">
+            <roles>
+                <role message="msgAdaptor">Adapter</role>
+                <role message="msgContributor">Contributor</role>
+                <role message="msgTranscriber">Transcription</role>
+                <role message="msgTranslator">Translation</role>
+                <role message="msgTranslator">Translator</role>
+                <role message="msgIllustrator">Illustrator</role>
+            </roles>
+        </xsl:variable>
+
+        <xsl:variable name="role" select="$roles//*[.=$resp]/@message"/>
+        <xsl:copy-of select="f:logDebug('Translating: {1} to {2}', ($resp, $role))"/>
+        <xsl:value-of select="if ($role) then f:message($role) else f:message('msgUnknown')"/>
+    </xsl:function>
+
 
 
     <xd:doc>

@@ -38,6 +38,9 @@
 
         -->
 
+        <msg:message name="msgAdaptor">Adaptor</msg:message>        
+        <msg:message name="msgIllustrator">Illustrator</msg:message>
+        <msg:message name="msgContributor">Contributor</msg:message>
         <msg:message name="msgAbbreviation">Abbreviation</msg:message>
         <msg:message name="msgAbbreviations">Abbreviations</msg:message>
         <msg:message name="msgAcknowledgements">Acknowledgements</msg:message>
@@ -48,6 +51,8 @@
         <msg:message name="msgAppendices">Appendices</msg:message>
         <msg:message name="msgAppendix">Appendix</msg:message>
         <msg:message name="msgAudioLink">Link to audio file</msg:message>
+        <msg:message name="msgAuthor">Author</msg:message>
+        <msg:message name="msgAuthors">Authors</msg:message>
         <msg:message name="msgAuthorAddition">Added by author</msg:message>
         <msg:message name="msgAuthorCorrection">Corrected by author from</msg:message>
         <msg:message name="msgAvailability">Availability</msg:message>
@@ -70,6 +75,7 @@
         <msg:message name="msgCovers">Covers</msg:message>
         <msg:message name="msgDedication">Dedication</msg:message>
         <msg:message name="msgDeleted">Deleted</msg:message>
+        <msg:message name="msgEditor">Editor</msg:message>
         <msg:message name="msgElement">Element</msg:message>
         <msg:message name="msgEmailLink">Send email message</msg:message>
         <msg:message name="msgEncoding">Encoding</msg:message>
@@ -109,6 +115,8 @@
         <msg:message name="msgListOfTables">List of Tables</msg:message>
         <msg:message name="msgLocation">Location</msg:message>
         <msg:message name="msgLocations">Locations</msg:message>
+        <msg:message name="msgName">Name</msg:message>
+        <msg:message name="msgRole">Role</msg:message>
         <msg:message name="msgMissingText">missing text</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Missing <msg:param name="extent"/> <msg:param name="unit"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgMissingTextWithReason">Missing text, for the following reason: <msg:param name="reason"/>.</msg:message>
@@ -155,6 +163,9 @@
         <msg:message name="msgToc">Contents</msg:message>
         <msg:message name="msgTranscription">Transcription</msg:message>
         <msg:message name="msgTranscriptions">Transcriptions</msg:message>
+        <msg:message name="msgUnknown">Unknown</msg:message>
+        <msg:message name="msgTranscriber">Transcriber</msg:message>
+        <msg:message name="msgTranslator">Translator</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgVirtualInternationalAuthorityFile">Related Virtual International Authority File Entry</msg:message>
         <msg:message name="msgVolume">Volume</msg:message>
@@ -556,6 +567,8 @@
         <msg:message name="msgApparatusNotes">Textkritischen Notizen</msg:message>
         <msg:message name="msgAppendices">Appendizes</msg:message>
         <msg:message name="msgAppendix">Appendix</msg:message>
+        <msg:message name="msgAuthor">Autor</msg:message>
+        <msg:message name="msgAuthors">Autoren</msg:message>
         <msg:message name="msgAuthorAddition">Vom Autor zugefügt</msg:message>
         <msg:message name="msgAuthorCorrection">Autorkorrektur</msg:message>
         <msg:message name="msgAvailability">Verfügbarkeit</msg:message>
@@ -605,6 +618,8 @@
         <msg:message name="msgListOfTables">Liste der Tabellen</msg:message>
         <msg:message name="msgLocation">Position</msg:message>
         <msg:message name="msgLocations">Positionen</msg:message>
+        <msg:message name="msgName">Name</msg:message>
+        <msg:message name="msgRole">Rolle</msg:message>
         <msg:message name="msgMissingText">Fehlender Text</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Fehlender Text: <msg:param name="extent"/> <msg:param name="unit"/>, aus dem folgende Grund: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgMissingTextWithReason">Fehlender Text, aus dem folgende Grund: <msg:param name="reason"/>.</msg:message>
@@ -738,6 +753,9 @@
 
     <msg:messages xml:lang="nl">
 
+        <msg:message name="msgAdaptor">Bewerker</msg:message>
+        <msg:message name="msgIllustrator">Illustrator</msg:message>		
+        <msg:message name="msgContributor">Bijdrager</msg:message>
         <msg:message name="msgAbbreviation">Afkorting</msg:message>
         <msg:message name="msgAbbreviations">Afkortingen</msg:message>
         <msg:message name="msgAcknowledgements">Dankwoord</msg:message>
@@ -748,6 +766,8 @@
         <msg:message name="msgAppendices">Appendices</msg:message>
         <msg:message name="msgAppendix">Appendix</msg:message>
         <msg:message name="msgAudioLink">Link naar geluidsbestand</msg:message>
+        <msg:message name="msgAuthor">Auteur</msg:message>
+        <msg:message name="msgAuthors">Auteurs</msg:message>
         <msg:message name="msgAuthorCorrection">Verbeterd door de auteur van</msg:message>
         <msg:message name="msgAvailability">Beschikbaarheid</msg:message>
         <msg:message name="msgBackMatter">Nawerk</msg:message>
@@ -769,6 +789,7 @@
         <msg:message name="msgCovers">Omslagen</msg:message>
         <msg:message name="msgDedication">Opdracht</msg:message>
         <msg:message name="msgDeleted">Verwijderd</msg:message>
+        <msg:message name="msgEditor">Redacteur</msg:message>
         <msg:message name="msgElement">Element</msg:message>
         <msg:message name="msgEmailLink">Verstuur emailbericht</msg:message>
         <msg:message name="msgEncoding">Codering</msg:message>
@@ -806,6 +827,8 @@
         <msg:message name="msgListOfTables">Lijst van Tabellen</msg:message>
         <msg:message name="msgLocation">Plaats</msg:message>
         <msg:message name="msgLocations">Plaatsen</msg:message>
+        <msg:message name="msgName">Naam</msg:message>
+        <msg:message name="msgRole">Rol</msg:message>
         <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Volgende</msg:message>
@@ -847,6 +870,9 @@
         <msg:message name="msgToc">Inhoud</msg:message>
         <msg:message name="msgTranscription">Transcriptie</msg:message>
         <msg:message name="msgTranscriptions">Transcripties</msg:message>
+        <msg:message name="msgUnknown">Onbekend</msg:message>
+        <msg:message name="msgTranscriber">Transcribent</msg:message>
+        <msg:message name="msgTranslator">Vertaler</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgVolume">Deel</msg:message>
         <msg:message name="msgVolumes">Delen</msg:message>

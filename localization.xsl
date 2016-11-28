@@ -80,7 +80,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                    <xsl:text>[### </xsl:text><xsl:value-of select="$name"/><xsl:text> ###]</xsl:text>
+                    <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
                 </xsl:otherwise>
             </xsl:choose>
     </xsl:function> 
