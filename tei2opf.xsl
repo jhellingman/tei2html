@@ -204,64 +204,6 @@
 
 
     <xd:doc>
-        <xd:short>Translate the contributor role to an OPF code.</xd:short>
-        <xd:detail>
-            <p>Translate the contributor role to an OPF code. The list used was taken from OPF Standard, 2.0, section 2.2.6 
-            [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html], derived from the MARC Code List for Relators 
-            [http://www.loc.gov/marc/relators/relaterm.html]</p>
-        </xd:detail>
-    </xd:doc>
-
-    <xsl:template name="translate-contributor-role">
-        <xsl:param name="role" select="resp"/>
-        <xsl:choose>
-            <xsl:when test="resp='Adapter'">adp</xsl:when>
-            <xsl:when test="$role='Annotator'">ann</xsl:when>
-            <xsl:when test="$role='Arranger'">arr</xsl:when>
-            <xsl:when test="$role='Artist'">art</xsl:when>
-            <xsl:when test="$role='Associated name'">asn</xsl:when>
-            <xsl:when test="$role='Author'">aut</xsl:when>
-            <xsl:when test="$role='Author in text extracts'">aqt</xsl:when>
-            <xsl:when test="$role='Author in quotations'">aqt</xsl:when>
-            <xsl:when test="$role='Author of afterword'">aft</xsl:when>
-            <xsl:when test="$role='Author of postface'">aft</xsl:when>
-            <xsl:when test="$role='Author of colophon'">aft</xsl:when>
-            <xsl:when test="$role='Author of introduction'">aui</xsl:when>
-            <xsl:when test="$role='Author of preface'">aui</xsl:when>
-            <xsl:when test="$role='Author of foreword'">aui</xsl:when>
-            <xsl:when test="$role='Bibliographic antecedent'">ant</xsl:when>
-            <xsl:when test="$role='Book producer'">bkp</xsl:when>
-            <xsl:when test="$role='Collaborator'">clb</xsl:when>
-            <xsl:when test="$role='Commentator'">cmm</xsl:when>
-            <xsl:when test="$role='Designer'">dsr</xsl:when>
-            <xsl:when test="$role='Editor'">edt</xsl:when>
-            <xsl:when test="$role='Illustrator'">ill</xsl:when>
-            <xsl:when test="$role='Lyricist'">lyr</xsl:when>
-            <xsl:when test="$role='Metadata contact'">mdc</xsl:when>
-            <xsl:when test="$role='Musician'">mus</xsl:when>
-            <xsl:when test="$role='Narrator'">nrt</xsl:when>
-            <xsl:when test="$role='Other'">oth</xsl:when>
-            <xsl:when test="$role='Photographer'">pht</xsl:when>
-            <xsl:when test="$role='Printer'">prt</xsl:when>
-            <xsl:when test="$role='Redactor'">red</xsl:when>
-            <xsl:when test="$role='Reviewer'">rev</xsl:when>
-            <xsl:when test="$role='Sponsor'">spn</xsl:when>
-            <xsl:when test="$role='Thesis advisor'">ths</xsl:when>
-            <xsl:when test="$role='Transcriber'">trc</xsl:when>
-            <xsl:when test="$role='Translator'">trl</xsl:when>
-
-            <!-- Related terms that are responsibility instead of role oriented -->
-            <xsl:when test="$role='Transcription'">trc</xsl:when>
-
-            <xsl:otherwise>
-                <xsl:text>oth</xsl:text>
-                <xsl:message>WARNING: Unknown contributor role: <xsl:value-of select="$role"/>.</xsl:message>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Handle information on other contributors in metadata.</xd:short>
         <xd:detail>
             <p>Handle information on other contributors in metadata.</p>
@@ -274,16 +216,12 @@
             <xsl:call-template name="generate-id"/><xsl:text>metadata</xsl:text>
         </xsl:variable>
 
-        <xsl:variable name="role">
-            <xsl:call-template name="translate-contributor-role"/>
-        </xsl:variable>
-
         <dc:contributor id="{$id}">
             <xsl:value-of select="name"/>
         </dc:contributor>
 
-        <xsl:if test="$role != ''">
-            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="$role"/></meta>
+        <xsl:if test="resp">
+            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translateRespCode(resp)"/></meta>
         </xsl:if>
         <xsl:if test="name/@key">
             <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
@@ -410,7 +348,7 @@
 
                 <!-- Include custom items in the manifest -->
                 <xsl:if test="$opfManifestFile">
-                    <xsl:message>INFO:    Reading extra OPF manifest items from "<xsl:value-of select="$opfManifestFile"/>".</xsl:message>
+                    <xsl:copy-of select="f:logInfo('Reading extra OPF manifest items from: {1}.', ($opfManifestFile))"/>
                     <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest"/>
                 </xsl:if>
             </xsl:variable>

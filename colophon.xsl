@@ -2,13 +2,12 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f tmp xs xd html"
+    exclude-result-prefixes="f tmp xs xd"
     version="2.0"
     >
 
@@ -134,27 +133,6 @@
             <td><xsl:value-of select="$role"/></td>
         </tr>
     </xsl:function>
-
-
-    <xsl:function name="f:translateResp" as="xs:string">
-        <xsl:param name="resp" as="xs:string"/>
-
-        <xsl:variable name="roles">
-            <roles>
-                <role message="msgAdaptor">Adapter</role>
-                <role message="msgContributor">Contributor</role>
-                <role message="msgTranscriber">Transcription</role>
-                <role message="msgTranslator">Translation</role>
-                <role message="msgTranslator">Translator</role>
-                <role message="msgIllustrator">Illustrator</role>
-            </roles>
-        </xsl:variable>
-
-        <xsl:variable name="role" select="$roles//*[.=$resp]/@message"/>
-        <xsl:copy-of select="f:logDebug('Translating: {1} to {2}', ($resp, $role))"/>
-        <xsl:value-of select="if ($role) then f:message($role) else f:message('msgUnknown')"/>
-    </xsl:function>
-
 
 
     <xd:doc>

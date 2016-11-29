@@ -129,7 +129,7 @@
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="factor" as="xs:double"/>
 
-        <!-- <xsl:message>ADJUST REND: <xsl:value-of select="$rend"/></xsl:message> -->
+        <xsl:copy-of select="f:logDebug('Adjusting dimensions in rend attribute: {1}.', ($rend))"/>
 
         <xsl:variable name="dimension" select="f:rend-value($rend, $key)"/>
         <xsl:choose>
@@ -139,8 +139,8 @@
                 <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
                 <xsl:variable name="new-value" select="concat($count * $factor, $unit)" as="xs:string"/>
 
-                <!-- <xsl:message>ADJUST <xsl:value-of select="$key"/>: <xsl:value-of select="$count"/><xsl:value-of select="$unit"/> to <xsl:value-of select="$new-value"/></xsl:message> -->
-    
+                <xsl:copy-of select="f:logDebug('Value of {1}: {2}{3} becomes {4}.', ($key, xs:string($count), $unit, $new-value))"/>
+
                 <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $new-value, ')'))"/>
             </xsl:when>
             <xsl:otherwise>

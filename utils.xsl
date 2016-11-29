@@ -354,92 +354,71 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>List of contributor roles and related OPF-codes and message ids.</xd:short>
+        <xd:detail>
+            <p>The list used was taken from the OPF Standard, 2.0, section 2.2.6 
+            [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html], which in turn was derived from the 
+            MARC Code List for Relators [http://www.loc.gov/marc/relators/relaterm.html] and extended.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:function name="f:logError">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('error', $message, $params)"/>
+    <xsl:variable name="contributorRoles">
+        <roles>
+            <role code="adp" message="msgAdaptor">Adapter</role>
+            <role code="aft" message="msgAuthorOfAfterword">Author of afterword</role>
+            <role code="aft" message="msgAuthorOfColophon">Author of colophon</role>
+            <role code="aft" message="msgAuthorOfPostface">Author of postface</role>
+            <role code="ann" message="msgAnnotator">Annotator</role>
+            <role code="ant" message="msgBibliographicAntecedent">Bibliographic antecedent</role>
+            <role code="aqt" message="msgAuthorInQuotations">Author in quotations</role>
+            <role code="aqt" message="msgAuthorInTextExtracts">Author in text extracts</role>
+            <role code="arr" message="msgArranger">Arranger</role>
+            <role code="art" message="msgArtist">Artist</role>
+            <role code="asn" message="msgAssociatedName">Associated name</role>
+            <role code="aui" message="msgAuthorOfForeword">Author of foreword</role>
+            <role code="aui" message="msgAuthorOfIntroduction">Author of introduction</role>
+            <role code="aui" message="msgAuthorOfPreface">Author of preface</role>
+            <role code="aut" message="msgAuthor">Author</role>
+            <role code="bkp" message="msgBookProducer">Book producer</role>
+            <role code="clb" message="msgCollaborator">Collaborator</role>
+            <role code="clb" message="msgContributor">Contributor</role>
+            <role code="cmm" message="msgCommentator">Commentator</role>
+            <role code="dsr" message="msgDesigner">Designer</role>
+            <role code="edt" message="msgEditor">Editor</role>
+            <role code="ill" message="msgIllustrator">Illustrator</role>
+            <role code="lyr" message="msgLyricist">Lyricist</role>
+            <role code="mdc" message="msgMetadataContact">Metadata contact</role>
+            <role code="mus" message="msgMusician">Musician</role>
+            <role code="nrt" message="msgNarrator">Narrator</role>
+            <role code="oth" message="msgOther">Other</role>
+            <role code="pht" message="msgPhotographer">Photographer</role>
+            <role code="prt" message="msgPrinter">Printer</role>
+            <role code="red" message="msgRedactor">Redactor</role>
+            <role code="rev" message="msgReviewer">Reviewer</role>
+            <role code="spn" message="msgSponsor">Sponsor</role>
+            <role code="ths" message="msgThesisAdvisor">Thesis advisor</role>
+            <role code="trc" message="msgTranscriber">Transcriber</role>
+            <role code="trc" message="msgTranscriber">Transcription</role>
+            <role code="trl" message="msgTranslator">Translation</role>
+            <role code="trl" message="msgTranslator">Translator</role>
+        </roles>
+    </xsl:variable>
+
+    <xsl:function name="f:translateResp" as="xs:string">
+        <xsl:param name="resp" as="xs:string"/>
+
+        <xsl:variable name="message" select="$contributorRoles//*[.=$resp]/@message"/>
+        <xsl:copy-of select="f:logDebug('Translating contributor role: {1} to {2}', ($resp, $message))"/>
+        <xsl:value-of select="if ($message) then f:message($message) else f:message('msgUnknown')"/>
     </xsl:function>
 
-    <xsl:function name="f:formatError" as="xs:string">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('error', $message, $params)"/>
+    <xsl:function name="f:translateRespCode" as="xs:string">
+        <xsl:param name="resp" as="xs:string"/>
+
+        <xsl:variable name="code" select="$contributorRoles//*[.=$resp]/@code"/>
+        <xsl:copy-of select="f:logDebug('Translating contributor role: {1} to {2}', ($resp, $code))"/>
+        <xsl:value-of select="if ($code) then $code else 'oth'"/>
     </xsl:function>
-
-    <xsl:function name="f:logWarning">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('warning', $message, $params)"/>
-    </xsl:function>
-
-    <xsl:function name="f:formatWarning" as="xs:string">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('warning', $message, $params)"/>
-    </xsl:function>
-
-    <xsl:function name="f:logInfo">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('info', $message, $params)"/>
-    </xsl:function>
-
-    <xsl:function name="f:formatInfo" as="xs:string">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('info', $message, $params)"/>
-    </xsl:function>
-
-    <xsl:function name="f:logDebug">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:if test="f:isSet('debug')">
-            <xsl:copy-of select="f:logMessage('debug', $message, $params)"/>
-        </xsl:if>
-    </xsl:function>
-
-    <xsl:function name="f:formatDebug" as="xs:string">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('debug', $message, $params)"/>
-    </xsl:function>
-
-    <xsl:function name="f:logMessage">
-        <xsl:param name="level" as="xs:string"/>
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-
-        <xsl:variable name="formatted" select="f:formatLogMessage($level, $message, $params)"/>
-        <xsl:message><xsl:value-of select="$formatted"/></xsl:message>
-    </xsl:function>
-
-    <xsl:function name="f:formatLogMessage" as="xs:string">
-        <xsl:param name="level" as="xs:string"/>
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-        <xsl:value-of select="concat(upper-case($level), ': ', f:formatString($message, $params))"/>
-    </xsl:function>
-
-    <xsl:function name="f:formatString" as="xs:string">
-        <xsl:param name="message" as="xs:string"/>
-        <xsl:param name="params" as="xs:string*"/>
-
-        <!-- replace parameters in the message string like {1} {2} {3} to the matching value in the $param sequence -->
-        <xsl:variable name="formatted">
-            <xsl:analyze-string select="$message" regex="\{{([0-9]+)\}}">
-                <xsl:matching-substring>
-                    <xsl:variable name="index" select="xs:integer(regex-group(1))" as="xs:integer"/>
-                    <xsl:value-of select="$params[$index]"/>
-                </xsl:matching-substring>
-                <xsl:non-matching-substring>
-                    <xsl:value-of select="."/>
-                </xsl:non-matching-substring>
-            </xsl:analyze-string>
-        </xsl:variable>
-
-        <xsl:value-of select="$formatted"/>
-    </xsl:function>
-
 
 </xsl:stylesheet>

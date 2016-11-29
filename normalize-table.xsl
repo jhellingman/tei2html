@@ -9,6 +9,13 @@
 
     <xsl:output indent="no" omit-xml-declaration="yes"/>
 
+    <!-- stub function used by log.xsl -->
+    <xsl:function name="f:isSet" as="xs:boolean">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:value-of select="true()"/>
+    </xsl:function>
+
+    <xsl:include href="log.xsl"/>
     <xsl:include href="rend.xsl"/>
 
     <xd:doc type="stylesheet">
