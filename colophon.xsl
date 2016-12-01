@@ -63,13 +63,7 @@
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
-        <xsl:call-template name="contributors"/>
-
-        <xsl:call-template name="keywords"/>
-
-        <xsl:call-template name="classification"/>
-
-        <xsl:call-template name="catalog-entries"/>
+        <xsl:call-template name="metadata"/>
 
         <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
@@ -88,49 +82,61 @@
     </xsl:template>
 
 
-    <xsl:template name="contributors">
-        <table>
-            <tr>
-                <th><xsl:value-of select="f:message('msgName')"/></th>
-                <th/>
-                <th><xsl:value-of select="f:message('msgRole')"/></th>
-            </tr>
+    <xsl:template name="metadata">
+    
+    <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
 
-            <!-- Authors -->
-            <xsl:for-each select="//titleStmt/author">
-                <xsl:sort select="@key"/>
-                <xsl:copy-of select="f:contributorLine(., @ref, f:message('msgAuthor'))"/>
-            </xsl:for-each>
+    <table>
+        <!-- Title(s) -->
+        <xsl:copy-of select="f:metadataLine(f:message('msgTitle'), $title, @ref)"/>
 
-            <!-- Editors -->
-            <xsl:for-each select="//titleStmt/editor">
-                <xsl:sort select="@key"/>
-                <xsl:copy-of select="f:contributorLine(., @ref, f:message('msgEditor'))"/>
-            </xsl:for-each>
+        <xsl:call-template name="contributors"/>
 
-            <!-- Other contributors -->
-            <xsl:for-each select="//titleStmt/respStmt[resp != 'Transcription']">
-                <xsl:sort select="name/@key"/>
-                <xsl:copy-of select="f:contributorLine(name, name/@ref, f:translateResp(resp))"/>
-            </xsl:for-each>
-        </table>
+        <xsl:copy-of select="f:metadataLine(f:message('msgLanguage'), f:message($language), null)"/>
+
+        <xsl:call-template name="keywords"/>
+        <xsl:call-template name="classification"/>
+    </table>
+
+    <xsl:call-template name="catalog-entries"/>
+
     </xsl:template>
 
-    <xsl:function name="f:contributorLine">
-        <xsl:param name="name" as="xs:string"/>
+    <xsl:template name="contributors">
+        <!-- Authors -->
+        <xsl:for-each select="//titleStmt/author">
+            <xsl:sort select="@key"/>
+            <xsl:copy-of select="f:metadataLine(f:message('msgAuthor'), ., @ref)"/>
+        </xsl:for-each>
+
+        <!-- Editors -->
+        <xsl:for-each select="//titleStmt/editor">
+            <xsl:sort select="@key"/>
+            <xsl:copy-of select="f:metadataLine(f:message('msgEditor'), ., @ref)"/>
+        </xsl:for-each>
+
+        <!-- Other contributors -->
+        <xsl:for-each select="//titleStmt/respStmt[resp != 'Transcription']">
+            <xsl:sort select="name/@key"/>
+            <xsl:copy-of select="f:metadataLine(f:translateResp(resp), name, name/@ref)"/>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:function name="f:metadataLine">
+        <xsl:param name="key" as="xs:string"/>
+        <xsl:param name="value" as="xs:string"/>
         <xsl:param name="ref" as="xs:string?"/>
-        <xsl:param name="role" as="xs:string"/>
 
         <tr>
+            <td><b><xsl:value-of select="if ($key = '') then '' else concat($key, ':')"/></b></td>
             <td>
-                <xsl:value-of select="$name"/>
+                <xsl:value-of select="$value"/>
             </td>
             <td>
                 <xsl:if test="f:isValid($ref)">
-                    <a href="{$ref}"><xsl:value-of select="'VIAF'"/></a>
+                    <a href="{$ref}"><xsl:value-of select="f:message('msgInfo')"/></a>
                 </xsl:if>
             </td>
-            <td><xsl:value-of select="$role"/></td>
         </tr>
     </xsl:function>
 
@@ -148,8 +154,7 @@
         <xsl:if test="//profileDesc/textClass/classCode">
             <xsl:for-each select="//profileDesc/textClass/classCode">
                 <xsl:if test="not(contains(., '#'))">
-                    <xsl:variable name="scheme" select="./@scheme"/>
-                    <p><xsl:value-of select="//taxonomy[@id=$scheme]/bibl"/>: <xsl:value-of select="."/>.</p>
+                    <xsl:copy-of select="f:metadataLine(//taxonomy[@id=current()/@scheme]/bibl, ., null)"/>
                 </xsl:if>
             </xsl:for-each>
         </xsl:if>
@@ -158,12 +163,11 @@
 
     <xsl:template name="keywords">
         <xsl:if test="//profileDesc/textClass/keywords/list/item[not(contains(., '#'))]">
-            <p><xsl:value-of select="f:message('msgKeywords')"/>: 
             <xsl:for-each select="//profileDesc/textClass/keywords/list/item[not(contains(., '#'))]">
-                <xsl:value-of select="."/>
-                <xsl:value-of select="if (position() &lt; last()) then ', ' else '.'"/>
+                <xsl:sort select="."/>
+                <xsl:variable name="key" select="if (position() = 1) then f:message('msgKeywords') else ''"/>
+                <xsl:copy-of select="f:metadataLine($key, ., null)"/>
             </xsl:for-each>
-            </p>
         </xsl:if>
     </xsl:template>
 

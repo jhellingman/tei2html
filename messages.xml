@@ -38,7 +38,12 @@
 
         -->
 
-        <msg:message name="msgAdaptor">Adaptor</msg:message>        
+        <msg:message name="msgTitle">Title</msg:message>
+        <msg:message name="msgMetadata">Metadata</msg:message>
+        <msg:message name="msgInfo">Info</msg:message>
+        <msg:message name="msgLanguage">Language</msg:message>
+
+        <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Contributor</msg:message>
         <msg:message name="msgAbbreviation">Abbreviation</msg:message>
@@ -602,7 +607,7 @@
         <msg:message name="msgGlossary">Wörterverzeichnis</msg:message>
         <msg:message name="msgGuide">Wegweiser</msg:message>
         <msg:message name="msgGuides">Wegweiser</msg:message>
-        <msg:message name="msgHere">Hier</msg:message>              
+        <msg:message name="msgHere">Hier</msg:message>
         <msg:message name="msgIllustration">Abbildung</msg:message>
         <msg:message name="msgIllustrations">Abbildungen</msg:message>
         <msg:message name="msgImprint">Impressum</msg:message>
@@ -653,7 +658,7 @@
         <msg:message name="msgReturnToSourceLocation">Zurück zur Quelle</msg:message>
         <msg:message name="msgRevisionHistory">Überblick der Revisionen</msg:message>
         <msg:message name="msgSection">Sektion</msg:message>
-        <msg:message name="msgSections">Sektionen</msg:message>     
+        <msg:message name="msgSections">Sektionen</msg:message>
         <msg:message name="msgSource">Quelle</msg:message>
         <msg:message name="msgSources">Quellen</msg:message>
         <msg:message name="msgTable">Tabelle</msg:message>
@@ -666,7 +671,7 @@
         <msg:message name="msgTranscriptions">Transkriptionen</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgVolume">Band</msg:message>
-        <msg:message name="msgVolumes">Bände</msg:message>      
+        <msg:message name="msgVolumes">Bände</msg:message>
 
         <msg:message name="msgListTwo"><msg:param name="first"/> und <msg:param name="second"/></msg:message>
         <msg:message name="msgListThree"><msg:param name="first"/>, <msg:param name="second"/> und <msg:param name="third"/></msg:message>
@@ -734,7 +739,7 @@
         <msg:message name="ta-latn">Tamil (lateinische Transkription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinesisch</msg:message>
-        
+
         <msg:message name="msgPGHeader">
             <p>Das Project Gutenberg E-buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dieses E-buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#pglicense">dieses Buches</a> oder online unter <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
@@ -753,8 +758,13 @@
 
     <msg:messages xml:lang="nl">
 
+        <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgMetadata">Metadata</msg:message>
+        <msg:message name="msgInfo">Info</msg:message>
+        <msg:message name="msgLanguage">Taal</msg:message>
+		
         <msg:message name="msgAdaptor">Bewerker</msg:message>
-        <msg:message name="msgIllustrator">Illustrator</msg:message>		
+        <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Bijdrager</msg:message>
         <msg:message name="msgAbbreviation">Afkorting</msg:message>
         <msg:message name="msgAbbreviations">Afkortingen</msg:message>
@@ -810,7 +820,7 @@
         <msg:message name="msgImprint">Impressum</msg:message>
         <msg:message name="msgIndex">Index</msg:message>
         <msg:message name="msgKeyword">Trefwoord</msg:message>
-        <msg:message name="msgKeywords">Trefwoorden</msg:message>       
+        <msg:message name="msgKeywords">Trefwoorden</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress catalogus pagina</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
@@ -1116,7 +1126,7 @@
         <msg:message name="msgIllustrations">Ilustraciones</msg:message>
         <msg:message name="msgIndex">Índice analítico</msg:message>
         <msg:message name="msgKeyword">Palabra clave</msg:message>
-        <msg:message name="msgKeywords">Palabras clave</msg:message>        
+        <msg:message name="msgKeywords">Palabras clave</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Enlace a la página del catálogo de Open Library</msg:message>
         <msg:message name="msgLinkToPg">Enlace al libro digital de Project Gutenberg</msg:message>
         <msg:message name="msgLinkToWorldCat">Enlace a la página del catálogo de WorldCat</msg:message>
