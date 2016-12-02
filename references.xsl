@@ -260,7 +260,7 @@
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:translate-xref-class">
+    <xsl:function name="f:translate-xref-class" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
@@ -290,7 +290,7 @@
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:translate-xref-title">
+    <xsl:function name="f:translate-xref-title" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>

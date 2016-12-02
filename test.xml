@@ -65,12 +65,19 @@
       </fileDesc>
       <encodingDesc>
          <p>Details of encoding go here. Here you can describe any special conventions used in the text, such as special tags. This is also the place to describe any editorial policy followed when preparing the text.</p>
+		 <classDecl>
+			<taxonomy id="testTaxonomy">
+				<bibl>Test Taxonomy</bibl>
+			</taxonomy>
+		</classDecl>
       </encodingDesc>
       <profileDesc>
          <langUsage>
             <language id="en-us">U.S. English.</language>
          </langUsage>
          <textClass>
+			<classCode scheme="testTaxonomy">123.456.789</classCode>
+			<classCode scheme="missingTaxonomy">555.666.777</classCode>
             <keywords>
                 <list>
                    <item>TEI (Text Encoding Initiative)</item>

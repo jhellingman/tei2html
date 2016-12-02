@@ -551,7 +551,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:unclosed-pairs">
+    <xsl:function name="f:unclosed-pairs" as="xs:string">
         <xsl:param name="pairs" as="xs:string"/>
         <xsl:param name="stack" as="xs:string"/>
 

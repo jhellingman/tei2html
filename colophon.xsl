@@ -34,7 +34,7 @@
 
             <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
 
-            <xsl:call-template name="colophon-body"/>
+            <xsl:call-template name="colophonBody"/>
         </div>
     </xsl:template>
 
@@ -47,7 +47,7 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='ColophonBody']">
-        <xsl:call-template name="colophon-body"/>
+        <xsl:call-template name="colophonBody"/>
     </xsl:template>
 
 
@@ -58,12 +58,12 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="colophon-body">
+    <xsl:template name="colophonBody">
         <xsl:variable name="context" select="." as="element(divGen)"/>
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
-        <xsl:call-template name="metadata"/>
+        <xsl:call-template name="colophonMetadata"/>
 
         <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
@@ -73,7 +73,7 @@
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/revisionDesc"/>
 
-        <xsl:call-template name="external-references"/>
+        <xsl:call-template name="externalReferences"/>
 
         <xsl:if test="//corr">
             <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
@@ -81,26 +81,32 @@
         </xsl:if>
     </xsl:template>
 
-
-    <xsl:template name="metadata">
-    
-    <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
-
-    <table>
-        <!-- Title(s) -->
-        <xsl:copy-of select="f:metadataLine(f:message('msgTitle'), $title, @ref)"/>
-
-        <xsl:call-template name="contributors"/>
-
-        <xsl:copy-of select="f:metadataLine(f:message('msgLanguage'), f:message($language), null)"/>
-
-        <xsl:call-template name="keywords"/>
-        <xsl:call-template name="classification"/>
-    </table>
-
-    <xsl:call-template name="catalog-entries"/>
-
+    <xsl:template match="encodingDesc">
+        <xsl:apply-templates/>
     </xsl:template>
+
+    <!-- Ignore the classDecl inside the encodingDesc -->
+    <xsl:template match="encodingDesc/classDecl"/>
+
+
+    <xsl:template name="colophonMetadata">
+        <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
+        <table>
+            <!-- Title(s) -->
+            <xsl:copy-of select="f:metadataLine(f:message('msgTitle'), $title, @ref)"/>
+
+            <xsl:call-template name="contributors"/>
+
+            <xsl:copy-of select="f:metadataLine(f:message('msgLanguage'), f:message(lower-case($language)), null)"/>
+
+            <xsl:apply-templates select="//sourceDesc" mode="colophonSourceDesc"/>
+            
+            <xsl:call-template name="keywords"/>
+            <xsl:call-template name="classification"/>
+        </table>
+        <xsl:call-template name="catalogEntries"/>
+    </xsl:template>
+
 
     <xsl:template name="contributors">
         <!-- Authors -->
@@ -134,11 +140,35 @@
             </td>
             <td>
                 <xsl:if test="f:isValid($ref)">
-                    <a href="{$ref}"><xsl:value-of select="f:message('msgInfo')"/></a>
+                    <a href="{$ref}" class="{f:translate-xref-class($ref)}"><xsl:value-of select="f:message('msgInfo')"/></a>
                 </xsl:if>
             </td>
         </tr>
     </xsl:function>
+
+
+    <xsl:template match="sourceDesc" mode="colophonSourceDesc">
+        <xsl:apply-templates mode="colophonSourceDesc"/>
+    </xsl:template>
+
+    <xsl:template match="bibl" mode="colophonSourceDesc">
+        <xsl:apply-templates mode="colophonSourceDesc"/>
+    </xsl:template>
+
+    <xsl:template match="publisher" mode="colophonSourceDesc">
+        <xsl:copy-of select="f:metadataLine(f:message('msgSourcePublisher'), ., null)"/>
+    </xsl:template>
+
+    <xsl:template match="pubPlace" mode="colophonSourceDesc">
+        <xsl:copy-of select="f:metadataLine(f:message('msgSourcePubPlace'), ., null)"/>
+    </xsl:template>
+
+    <xsl:template match="date[f:isValid(.)]" mode="colophonSourceDesc">
+        <xsl:copy-of select="f:metadataLine(f:message('msgSourcePublicationDate'), ., null)"/>
+    </xsl:template>
+
+    <!-- Ignore other items in sourceDesc for colophon -->
+    <xsl:template match="*" mode="colophonSourceDesc"/>
 
 
     <xd:doc>
@@ -146,16 +176,21 @@
         <xd:detail>
             <p>Generate a list of classifications, based on information in the <code>profileDesc/textClass/classCode</code>. 
             Note that for proper rendering, a <code>taxonomy</code> element corresponding to the indicated scheme must be present,
-            and contain a human-readable text.</p>
+            and contain a human-readable text. (works for TEI P3; TODO: make this work for TEI P5.)</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="classification">
         <xsl:if test="//profileDesc/textClass/classCode">
             <xsl:for-each select="//profileDesc/textClass/classCode">
-                <xsl:if test="not(contains(., '#'))">
-                    <xsl:copy-of select="f:metadataLine(//taxonomy[@id=current()/@scheme]/bibl, ., null)"/>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="not(contains(., '#')) and //taxonomy[@id=current()/@scheme]/bibl">
+                        <xsl:copy-of select="f:metadataLine(//taxonomy[@id=current()/@scheme]/bibl, ., null)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy-of select="f:metadataLine(f:message('msgClassCode'), ., null)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
@@ -171,6 +206,7 @@
         </xsl:if>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate links to catalog entries.</xd:short>
         <xd:detail>
@@ -179,80 +215,113 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="catalog-entries">
-        <xsl:if test="//idno[@type='PGnum'] and not(contains(//idno[@type='PGnum'], '#'))">
-            <p><xsl:value-of select="f:message('msgPgCatalogEntry')"/>:
-                <a class="pglink">
-                    <xsl:attribute name="href">https://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='PGnum']"/>
-                </a>.
-            </p>
+    <xsl:template name="catalogEntries">
+        <xsl:if test="//idno[f:isValid(.)]">
+            <xsl:apply-templates select="//idno[@type = 'PGnum'][f:isValid(.)]" mode="catalogEntries"/>
+            <xsl:apply-templates select="//idno[@type != 'PGnum'][f:isValid(.)]" mode="catalogEntries">
+                <xsl:sort select="@type"/>
+            </xsl:apply-templates>
         </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='LCCN'])">
-            <p><xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://lccn.loc.gov/<xsl:value-of select="//idno[@type='LCCN']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='LCCN']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='VIAF'])">
-            <p><xsl:value-of select="f:message('msgVirtualInternationalAuthorityFile')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">http://viaf.org/viaf/<xsl:value-of select="//idno[@type='VIAF']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='VIAF']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='OLN'])">
-            <p><xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://openlibrary.org/books/<xsl:value-of select="//idno[@type='OLN']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='OLN']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='OLW'])">
-            <p><xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://openlibrary.org/works/<xsl:value-of select="//idno[@type='OLW']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='OLW']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='OCLC'])">
-            <p><xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://www.worldcat.org/oclc/<xsl:value-of select="//idno[@type='OCLC']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='OCLC']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='LibThing'])">
-            <p><xsl:value-of select="f:message('msgLibraryThingEntry')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://www.librarything.com/work/<xsl:value-of select="//idno[@type='LibThing']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='LibThing']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
-        <xsl:if test="f:isValid(//idno[@type='PGSrc'])">
-            <p><xsl:value-of select="f:message('msgGitHubRepository')"/>:
-                <a class="catlink">
-                    <xsl:attribute name="href">https://github.com/GutenbergSource/<xsl:value-of select="//idno[@type='PGSrc']"/></xsl:attribute>
-                    <xsl:value-of select="//idno[@type='PGSrc']"/>
-                </a>.
-            </p>
-        </xsl:if>
-
     </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='PGnum']">
+        <p>
+            <xsl:value-of select="f:message('msgPgCatalogEntry')"/>:
+            <a class="pglink">
+                <xsl:attribute name="href">https://www.gutenberg.org/ebooks/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='LCCN']">
+        <p>
+            <xsl:value-of select="f:message('msgLibraryOfCongressCatalogEntry')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://lccn.loc.gov/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='VIAF']">
+        <p>
+            <xsl:value-of select="f:message('msgVirtualInternationalAuthorityFile')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">http://viaf.org/viaf/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='OLN']">
+        <p>
+            <xsl:value-of select="f:message('msgOpenLibraryCatalogEntry')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://openlibrary.org/books/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='OLW']">
+        <p>
+            <xsl:value-of select="f:message('msgOpenLibraryCatalogWorkEntry')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://openlibrary.org/works/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='OCLC']">
+        <p>
+            <xsl:value-of select="f:message('msgOclcCatalogEntry')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://www.worldcat.org/oclc/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='LibThing']">
+        <p>
+            <xsl:value-of select="f:message('msgLibraryThingEntry')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://www.librarything.com/work/<xsl:value-of select="."/></xsl:attribute>
+                <xsl:value-of select="."/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <xsl:template mode="catalogEntries" match="idno[@type='PGSrc']">
+        <p>
+            <xsl:value-of select="f:message('msgGitHubRepository')"/>:
+            <a class="catlink">
+                <xsl:attribute name="href">https://github.com/GutenbergSource/<xsl:value-of select="//idno[@type='PGSrc']"/></xsl:attribute>
+                <xsl:value-of select="//idno[@type='PGSrc']"/>
+            </a>.
+        </p>
+    </xsl:template>
+
+    <!-- Ignore other types of idno's -->
+    <xsl:template mode="catalogEntries" match="idno"/>
+
+    <xsl:function name="f:catalog-entry">
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="id" as="xs:string"/>
+        <xsl:param name="baseUrl" as="xs:string"/>
+
+        <tr>
+            <td><b><xsl:value-of select="f:message('msgCatalogEntry')"/>:</b></td>
+            <td colspan="2">
+                <xsl:value-of select="$name"/>:
+                <a class="catlink" href="{concat($baseUrl, $id)}">
+                    <xsl:value-of select="$id"/>
+                </a>
+            </td>
+        </tr>
+    </xsl:function>
 
 
     <!--====================================================================-->
@@ -341,12 +410,12 @@
 
 
     <xd:doc>
-        <xd:short>Convert a traditional corr element to a temporary choice element.</xd:short>
+        <xd:short>Convert a traditional <code>corr</code> element to a temporary <code>choice</code> element.</xd:short>
     </xd:doc>
 
     <xsl:template match="corr" mode="collectCorrections">
         <tmp:choice>
-            <xsl:attribute name="page" select="f:find-pagenumber(.)"/>
+            <xsl:attribute name="page" select="f:findPageNumber(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
                 <xsl:copy-of select="* | text()"/>
@@ -359,12 +428,12 @@
 
 
     <xd:doc>
-        <xd:short>Convert a correction in a choice element to a temporary choice element.</xd:short>
+        <xd:short>Convert a correction in a <code>choice</code> element to a temporary choice element.</xd:short>
     </xd:doc>
 
     <xsl:template match="choice" mode="collectCorrections">
         <tmp:choice>
-            <xsl:attribute name="page" select="f:find-pagenumber(.)"/>
+            <xsl:attribute name="page" select="f:findPageNumber(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
                 <xsl:copy-of select="corr/* | corr/text()"/>
@@ -405,14 +474,14 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="external-references">
+    <xsl:template name="externalReferences">
         <xsl:if test="//xref[@url] | /TEI//ref[not(starts-with(@target, '#'))]">
             <h3 class="main"><xsl:value-of select="f:message('msgExternalReferences')"/></h3>
 
             <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
 
             <xsl:if test="f:isSet('outputExternalLinksTable')">
-                <xsl:call-template name="external-reference-table"/>
+                <xsl:call-template name="externalReferenceTable"/>
             </xsl:if>
         </xsl:if>
     </xsl:template>
@@ -424,7 +493,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="external-reference-table">
+    <xsl:template name="externalReferenceTable">
 
         <!-- TODO: make this table also work for P5 href elements -->
         <xsl:if test="//xref[@url]">
@@ -447,7 +516,7 @@
                                     <xsl:attribute name="id">
                                         <xsl:call-template name="generate-id"/><xsl:text>ext</xsl:text>
                                     </xsl:attribute>
-                                    <xsl:value-of select="f:find-pagenumber(.)"/>
+                                    <xsl:value-of select="f:findPageNumber(.)"/>
                                 </a>
                             </xsl:for-each>
                         </td>
@@ -470,15 +539,15 @@
 
 
     <xd:doc>
-        <xd:short>Find the page-number for a node.</xd:short>
+        <xd:short>Find the page number for a node.</xd:short>
         <xd:detail>
-            <p>Find the page-number for a node. This will try to locate the preceding <code>pb</code>-element, and return its
+            <p>Find the page number for a node. This will try to locate the preceding <code>pb</code>-element, and return its
             <code>@n</code>-attribute value. This should normally correspond with the page the node appeared on in the source.</p>
         </xd:detail>
         <xd:param name="node" type="node()">The node for which the page-number is to be found.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:find-pagenumber" as="xs:string">
+    <xsl:function name="f:findPageNumber" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
         <xsl:choose>
@@ -513,13 +582,14 @@
 
                 <xsl:variable name="lang" select="@lang"/>
                 <h3 class="main"><xsl:value-of select="f:message($lang)"/></h3>
-                <xsl:call-template name="language-fragments">
+                <xsl:call-template name="languageFragments">
                     <xsl:with-param name="lang" select="$lang"/>
                 </xsl:call-template>
 
             </xsl:for-each-group>
         </div>
     </xsl:template>
+
 
     <xd:doc mode="languageFragments">
         <xd:short>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments.</xd:short>
@@ -528,6 +598,7 @@
             care that elements which are normally processed in a special way are treated as normal in this overview.</p>
         </xd:detail>
     </xd:doc>
+
 
     <xd:doc>
         <xd:short>Generate an overview of foreign language fragments, for one language.</xd:short>
@@ -538,7 +609,7 @@
         <xd:param name="lang" type="string">The code of the language to handle.</xd:param>
     </xd:doc>
 
-    <xsl:template name="language-fragments">
+    <xsl:template name="languageFragments">
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
@@ -581,7 +652,7 @@
                                         <xsl:call-template name="generate-href-attribute"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <xsl:value-of select="f:find-pagenumber(.)"/>
+                                <xsl:value-of select="f:findPageNumber(.)"/>
                             </a>
                         </xsl:for-each>
                     </td>

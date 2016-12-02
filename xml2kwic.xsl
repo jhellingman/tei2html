@@ -557,8 +557,8 @@
         <xd:param name="node">The node for which to establish the text style.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:find-text-style">
-        <xsl:param name="node"/>
+    <xsl:function name="f:find-text-style" as="xs:string?">
+        <xsl:param name="node" as="node()"/>
         <xsl:variable name="hi" select="$node/ancestor-or-self::hi[1]"/>
         <!-- Ignore hi elements if we are in a note, and the hi is outside the note -->
         <xsl:if test="$hi and not($hi/descendant::note)">
