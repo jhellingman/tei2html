@@ -6,9 +6,10 @@ use FindBin qw($Bin);
 
 my $toolsdir    = $Bin;
 my $xsldir      = $toolsdir;
-my $saxon       = "java -jar " . $toolsdir . "/tools/lib/saxon9he.jar ";
-my $epubcheck   = "java -jar " . $toolsdir . "/tools/lib/epubcheck-3.0.1.jar ";
-my $prince		= "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
+my $libdir      = $toolsdir . "/tools/lib";
+my $saxon       = "java -jar " . $libdir . "/saxon9he.jar ";
+my $epubcheck   = "java -jar " . $libdir . "/epubcheck-3.0.1.jar ";
+my $prince      = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
 
 
 my $pwd = `pwd`;
@@ -60,18 +61,5 @@ chdir "..";
 
 system ("$epubcheck test.epub 2> test-epubcheck.err");
 
-
 system ("$saxon test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionPrinceMarkup=\"Yes\" > test-prince.html");
 system ("$prince test-prince.html test.pdf");
-
-
-
-# system ("$saxon test-div.xml $xsldir/normalize-table.xsl > test-div-normalized.xml");
-# system ("$saxon test-div-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionExternalLinks=\"Yes\" optionExternalLinksTable=\"No\" > test-div.html");
-# system ("$saxon test-div-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test-div\" > tmp-div.xhtml");
-
-# system ("del test-div.epub");
-# chdir "epub";
-# system ("zip -Xr9Dq ../test-div.epub mimetype");
-# system ("zip -Xr9Dq ../test-div.epub * -x mimetype");
-# chdir "..";

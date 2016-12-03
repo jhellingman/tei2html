@@ -404,8 +404,8 @@
                     <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
                     <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
-                    <xsl:if test="f:isFirstParagraph(.)">first </xsl:if>
-                    <xsl:value-of select="f:hangingPunctuationClass(.)"/><xsl:text> </xsl:text>
+                    <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
+                    <xsl:value-of select="f:hanging-punctuation-class(.)"/><xsl:text> </xsl:text>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/>
                 </xsl:variable>
 
@@ -420,7 +420,7 @@
                 <xsl:apply-templates/>
                 <!--
                     <xsl:choose>
-                        <xsl:when test="f:startsWithPunctuation(.)">
+                        <xsl:when test="f:starts-with-punctuation(.)">
                             <xsl:call-template name="hangOpenPunctuation"/>
                         </xsl:when>
                         <xsl:otherwise>
@@ -440,7 +440,7 @@
         <xd:param name="node">The (<code>p</code>) element of which the position needs to be determined.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:isFirstParagraph" as="xs:boolean">
+    <xsl:function name="f:is-first-paragraph" as="xs:boolean">
         <xsl:param name="node" as="element(p)"/>
 
         <xsl:variable name="preceding">
@@ -467,7 +467,7 @@
         <xd:param name="text">The string of which the starting punctuation is to be determined.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:hangingPunctuationClass" as="xs:string">
+    <xsl:function name="f:hanging-punctuation-class" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:choose>
@@ -491,7 +491,7 @@
         <xd:param name="node">The element of which the existence of starting punctuation is to be determined.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:startsWithPunctuation" as="xs:boolean">
+    <xsl:function name="f:starts-with-punctuation" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
 
         <xsl:variable name="first" select="$node/(*|text())[1]"/>

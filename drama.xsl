@@ -123,7 +123,7 @@
 
             <xsl:variable name="class">
                 line
-                <xsl:value-of select="f:hangingPunctuationClass(.)"/><xsl:text> </xsl:text>
+                <xsl:value-of select="f:hanging-punctuation-class(.)"/><xsl:text> </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
 

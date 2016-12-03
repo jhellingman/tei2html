@@ -46,6 +46,8 @@
         <msg:message name="msgSourcePublisher">Original publisher</msg:message>
         <msg:message name="msgSourcePubPlace">Original publication place</msg:message>		
         <msg:message name="msgSourcePublicationDate">Original publication date</msg:message>		
+        <msg:message name="msgCatalogEntry">Catalog entry</msg:message>		
+        <msg:message name="msgCatalogEntries">Catalog entries</msg:message>		
 		
         <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
@@ -770,6 +772,8 @@
         <msg:message name="msgSourcePublisher">Oorspronkelijke uitgever</msg:message>
         <msg:message name="msgSourcePubPlace">Oorspronkelijke plaats van uitgifte</msg:message>		
         <msg:message name="msgSourcePublicationDate">Oorspronkelijke uitgiftedatum</msg:message>		
+        <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>		
+        <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>		
 		
         <msg:message name="msgAdaptor">Bewerker</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>

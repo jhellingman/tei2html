@@ -57,7 +57,7 @@
             <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark. -->
             <generateFacsimile>false</generateFacsimile>                <!-- Output section with and links to facsimile images if required information is present. -->
             <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present. -->
-            <useRegularizedUnits>false</useRegularizedUnits>            <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a 
+            <useRegularizedUnits>false</useRegularizedUnits>            <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                              pop-up; true: regularized in text, original in pop-up) -->
             <outputExternalLinks>always</outputExternalLinks>           <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>  <!-- Place external links in a separate table in the colophon. -->
@@ -74,7 +74,7 @@
                 <showPageNumbers>false</showPageNumbers>
                 <useMouseOverPopups>false</useMouseOverPopups>
                 <outputExternalLinks>always</outputExternalLinks>
-                <outputExternalLinksTable>true</outputExternalLinksTable>                
+                <outputExternalLinksTable>true</outputExternalLinksTable>
             </output>
         </tei2html.config>
     </xsl:variable>
