@@ -44,11 +44,12 @@
         <msg:message name="msgLanguage">Language</msg:message>
         <msg:message name="msgClassCode">Class code</msg:message>
         <msg:message name="msgSourcePublisher">Original publisher</msg:message>
-        <msg:message name="msgSourcePubPlace">Original publication place</msg:message>		
-        <msg:message name="msgSourcePublicationDate">Original publication date</msg:message>		
-        <msg:message name="msgCatalogEntry">Catalog entry</msg:message>		
-        <msg:message name="msgCatalogEntries">Catalog entries</msg:message>		
-		
+        <msg:message name="msgSourcePubPlace">Original publication place</msg:message>
+        <msg:message name="msgSourcePublicationDate">Original publication date</msg:message>
+        <msg:message name="msgCatalogEntry">Catalog entry</msg:message>
+        <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
+        <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
+
         <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Contributor</msg:message>
@@ -770,11 +771,12 @@
         <msg:message name="msgLanguage">Taal</msg:message>
         <msg:message name="msgClassCode">Classificatiecode</msg:message>
         <msg:message name="msgSourcePublisher">Oorspronkelijke uitgever</msg:message>
-        <msg:message name="msgSourcePubPlace">Oorspronkelijke plaats van uitgifte</msg:message>		
-        <msg:message name="msgSourcePublicationDate">Oorspronkelijke uitgiftedatum</msg:message>		
-        <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>		
-        <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>		
-		
+        <msg:message name="msgSourcePubPlace">Oorspronkelijke plaats van uitgifte</msg:message>
+        <msg:message name="msgSourcePublicationDate">Oorspronkelijke uitgiftedatum</msg:message>
+        <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>
+        <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>
+        <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
+
         <msg:message name="msgAdaptor">Bewerker</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Bijdrager</msg:message>
