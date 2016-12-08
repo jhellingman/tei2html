@@ -1,3 +1,6 @@
+# sgmlSupport.pm -- package to support SGML entities.
+#
+# WARNING: Edit in Unicode-aware editor, this file contains Unicode characters. (E.g. aleph: א.)
 
 package SgmlSupport;
 
