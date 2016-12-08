@@ -909,6 +909,10 @@ sub entities2iso88591($) {
     $a =~ s/\&natur;/-natural/g;
     $a =~ s/\&Sun;/[Sun]/g;
 
+    $a =~ s/\&chbarb;/ch/g;
+    $a =~ s/\&Chbarb;/Ch/g;
+    $a =~ s/\&CHbarb;/CH/g;
+
     $a =~ s/\&ghbarb;/gh/g;
     $a =~ s/\&Ghbarb;/Gh/g;
     $a =~ s/\&GHbarb;/GH/g;

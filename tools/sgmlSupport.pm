@@ -1689,6 +1689,8 @@ BEGIN
     $ent{"mmmacr"}      = "m" . chr(0x035E) . "m"; # mm with wide macron
     $ent{"mnmacr"}      = "m" . chr(0x035E) . "n"; # mn with wide macron
 
+    $ent{"chbarb"}      = "c" . chr(0x035F) . "h"; # ch with double macron below
+    $ent{"Chbarb"}      = "C" . chr(0x035F) . "h"; # Ch with double macron below
     $ent{"ghbarb"}      = "g" . chr(0x035F) . "h"; # gh with double macron below
     $ent{"Ghbarb"}      = "G" . chr(0x035F) . "h"; # Gh with double macron below
     $ent{"GHbarb"}      = "G" . chr(0x035F) . "H"; # GH with double macron below
