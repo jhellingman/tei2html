@@ -141,16 +141,62 @@
         <xd:short>Check the information in the TEI-header is complete.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="checks" match="publicationStmt">
-        <xsl:if test="not(idno[@type='epub-id'])">
-            <i:issue pos="{@pos}" code="H0001" element="{name(.)}">No ePub-id present.</i:issue>
-        </xsl:if>
-
-        <xsl:if test="idno[@type='epub-id'] and not(matches(idno[@type='epub-id'], '^(urn:uuid:([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$'))">
-            <i:issue pos="{@pos}" code="H0002" element="{name(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
-        </xsl:if>
-
+    <xsl:template mode="checks" match="publicationStmt[not(idno[@type='epub-id'])]">
+        <i:issue pos="{@pos}" code="H0001" element="{name(.)}">No ePub-id present.</i:issue>
         <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+    <xsl:variable name="guidFormat" select="'^(urn:uuid:([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$'"/>
+
+    <xsl:template mode="checks" match="idno[@type='epub-id'][not(matches(., $guidFormat))]">
+        <i:issue pos="{@pos}" code="H0002" element="{name(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/author[not(@key)]" priority="1">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @key attribute present for author <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/editor[not(@key)]" priority="1">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @key attribute present for editor <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/respStmt/name[not(@key)]" priority="1">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @key attribute present for name <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/author[not(@ref)]" priority="2">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @ref attribute present for author <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/editor[not(@ref)]" priority="2">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @ref attribute present for editor <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/respStmt/name[not(@ref)]" priority="2">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">No @ref attribute present for name <xsl:value-of select="."/>.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:variable name="viafUrlFormat" select="'^https://viaf\.org/viaf/[0-9]+$'"/>
+
+    <xsl:template mode="checks" match="titleStmt/author[@ref and not(matches(@ref, $viafUrlFormat))]">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on author <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/editor[@ref and not(matches(@ref, $viafUrlFormat))]">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on editor <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="titleStmt/respStmt/name[@ref and not(matches(@ref, $viafUrlFormat))]">
+        <i:issue pos="{@pos}" code="A0000" element="{name(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on name <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <xsl:next-match/>
     </xsl:template>
 
 
@@ -184,10 +230,8 @@
         <xd:short>Check the types of <code>head</code> elements.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="checks" match="head">
-        <xsl:if test="@type and not(@type = $expectedHeadTypes)">
-            <i:issue pos="{@pos}" code="C0012" element="{name(.)}">Unexpected type for head: <xsl:value-of select="@type"/></i:issue>
-        </xsl:if>
+    <xsl:template mode="checks" match="head[@type and not(@type = $expectedHeadTypes)]">
+        <i:issue pos="{@pos}" code="C0012" element="{name(.)}">Unexpected type for head: <xsl:value-of select="@type"/></i:issue>
     </xsl:template>
 
 
@@ -348,10 +392,9 @@
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="checks" match="ab">
-        <xsl:if test="@type and not(@type = $expectedAbTypes)">
-            <i:issue pos="{@pos}" code="C0015" element="{name(.)}">Unexpected type for ab (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
-        </xsl:if>
+    <xsl:template mode="checks" match="ab[@type and not(@type = $expectedAbTypes)]">
+        <i:issue pos="{@pos}" code="C0015" element="{name(.)}">Unexpected type for ab (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
+        <xsl:next-match/>
     </xsl:template>
 
 

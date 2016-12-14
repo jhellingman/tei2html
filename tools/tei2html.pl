@@ -585,6 +585,7 @@ sub transcribe($) {
     $sgmlFile = addTranscriptions($sgmlFile);
 
     $sgmlFile = transcribeNotation($sgmlFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+    $sgmlFile = transcribeNotation($sgmlFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ar2sgml.pat");
     $sgmlFile = transcribeNotation($sgmlFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
     $sgmlFile = transcribeNotation($sgmlFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
     $sgmlFile = transcribeNotation($sgmlFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
