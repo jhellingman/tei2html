@@ -129,6 +129,9 @@ while (<>) {
         print "------\n";
     }
 
+    # handle ditto tags.
+
+
     # indicate tables for manual processing.
     if ($a =~ /<table.*?>/) {
         print "\n[**TODO: Verify table]\n";
@@ -776,6 +779,23 @@ sub trim($) {
     return $string;
 }
 
+sub handleDittos($) {
+    my $string = shift;
+
+    $string =~ s/<ditto>(.*?)<\/ditto>/handleDitto($1)/eg;
+
+    return $string;
+}
+
+sub handleDitto($) {
+    my $string = shift;
+
+    print STDERR $string;
+
+
+}
+
+
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
 #
@@ -1066,6 +1086,13 @@ sub entities2iso88591($) {
     $a =~ s/\&chi;/ch/g;        #  GREEK SMALL LETTER CHI
     $a =~ s/\&psi;/ps/g;        #  GREEK SMALL LETTER PSI
     $a =~ s/\&omega;/ô/g;       #  GREEK SMALL LETTER OMEGA
+
+    # Common abbreviations in small-caps -> upper case.
+    $a =~ s/\&BC;/B.C./g;       #  Before Christ
+    $a =~ s/\&AD;/A.D./g;       #  Anno Domino
+    $a =~ s/\&AH;/A.H./g;       #  Anno Heriga
+    $a =~ s/\&AM;/A.M./g;       #  Anno Mundi / Ante Meridian
+    $a =~ s/\&PM;/P.M./g;       #  Post Meridian
 
     # strip accents from remaining entities
     $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;

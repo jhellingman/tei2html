@@ -9,8 +9,7 @@ require Exporter;
 @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity);
 
 
-BEGIN
-{
+BEGIN {
     # patterns for recognizing letters (including letter entities)
 
     $capAccLetter = "\\&[A-Z](acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);";
@@ -1262,24 +1261,24 @@ BEGIN
     $ent{"heshin"}          = chr(0x5E9);   # ש
     $ent{"hetav"}           = chr(0x5EA);   # ת
 
-    $ent{"hesheva"}         = chr(0x5B0);   # ְ
-    $ent{"hehatafsegol"}    = chr(0x5B1);   # ֱ
-    $ent{"hehatafpatah"}    = chr(0x5B2);   # ֲ
-    $ent{"hehatafqamats"}   = chr(0x5B3);   # ֳ
-    $ent{"hehiriq"}         = chr(0x5B4);   # ִ
-    $ent{"hetsere"}         = chr(0x5B5);   # ֵ
-    $ent{"heseqol"}         = chr(0x5B6);   # ֶ
-    $ent{"hepatah"}         = chr(0x5B7);   # ַ
-    $ent{"heqamats"}        = chr(0x5B8);   # ָ
-    $ent{"heholam"}         = chr(0x5B9);   # ֹ
+    $ent{"hesheva"}         = chr(0x5B0);   #  ְ
+    $ent{"hehatafsegol"}    = chr(0x5B1);   #  ֱ
+    $ent{"hehatafpatah"}    = chr(0x5B2);   #  ֲ
+    $ent{"hehatafqamats"}   = chr(0x5B3);   #  ֳ
+    $ent{"hehiriq"}         = chr(0x5B4);   #  ִ
+    $ent{"hetsere"}         = chr(0x5B5);   #  ֵ
+    $ent{"heseqol"}         = chr(0x5B6);   #  ֶ
+    $ent{"hepatah"}         = chr(0x5B7);   #  ַ
+    $ent{"heqamats"}        = chr(0x5B8);   #  ָ
+    $ent{"heholam"}         = chr(0x5B9);   #  ֹ
 
-    $ent{"hequbuts"}        = chr(0x5BB);   # ֻ
-    $ent{"hedagesh"}        = chr(0x5BC);   # ּ
+    $ent{"hequbuts"}        = chr(0x5BB);   #  ֻ
+    $ent{"hedagesh"}        = chr(0x5BC);   #  ּ
 
     $ent{"hemaqaf"}         = chr(0x5BE);   # ־
 
-    $ent{"heshindot"}       = chr(0x5C1);   # ׁ
-    $ent{"hesindot"}        = chr(0x5C2);   # ׂ
+    $ent{"heshindot"}       = chr(0x5C1);   #  ׁ
+    $ent{"hesindot"}        = chr(0x5C2);   #  ׂ
 
     ###############################################################################
 
@@ -1842,7 +1841,14 @@ BEGIN
 
     $ent{"availability.nl"} = "Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopi&#xEB;ren, weggeven of hergebruiken onder de voorwaarden van de <xref url='https://www.gutenberg.org/license' rel='license'>Project Gutenberg Licentie</xref> bij dit eBoek of on-line op <xref url='https://www.gutenberg.org/'>www.gutenberg.org</xref>.";
 
-
+    # Common abbreviations in small-caps.
+    
+    $ent{"BC"} = "<hi rend='sc'>b.c.</hi>";
+    $ent{"AD"} = "<hi rend='sc'>a.d.</hi>";
+    $ent{"AH"} = "<hi rend='sc'>a.h.</hi>";
+    $ent{"AM"} = "<hi rend='sc'>a.m.</hi>";
+    $ent{"PM"} = "<hi rend='sc'>p.m.</hi>";
+    
     # %revent = reverse %ent;
 
     %revent = ();
@@ -1851,14 +1857,11 @@ BEGIN
         if (length $value == 1) {
             if ($revent{$value}) {
                 # print "$key already mapped.\n";
-            }
-            else
-            {
+            } else {
                 $revent{$value} = $key;
             }
         }
     }
-
 
     # Duplicate entities from above.
     $ent{"peso"}        = chr(0x20B1);  #  Peso sign
@@ -2051,18 +2054,14 @@ BEGIN
 #   $attrName: the name of which the attribute value is required.
 #   $attrs: string with SGML style attributes:  A=abc B="test" C="aap"
 
-sub getAttrVal
-{
+sub getAttrVal {
     my $attrName = shift;
     my $attrs = shift;
     my $attrVal = "";
 
-    if($attrs =~ /$attrName\s*=\s*(\w+)/i)
-    {
+    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
         $attrVal = $1;
-    }
-    elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-    {
+    } elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         $attrVal = $1;
     }
     return $attrVal;
@@ -2076,68 +2075,45 @@ sub getAttrVal
 # Parameter:
 #   $string: the string to be converted to UTF-8.
 
-sub sgml2utf
-{
+sub sgml2utf {
     my $source = shift;
     return sgml2utf_common($source, 0);
 }
 
-sub sgml2utf_html
-{
+sub sgml2utf_html {
     my $source = shift;
     return sgml2utf_common($source, 1);
 }
 
-sub sgml2utf_common
-{
+sub sgml2utf_common {
     my $source = shift;
     my $forHtml = shift;
     my $result = "";
 
-    while ($source =~ /\&(#?[a-z0-9._-]+);/i)
-    {
+    while ($source =~ /\&(#?[a-z0-9._-]+);/i) {
         $result .= $`;
         my $entity = $1;
         $source = $';
 
-        if ($forHtml == 1 && $entity eq "lt")
-        {
+        if ($forHtml == 1 && $entity eq "lt") {
             $char = "&lt;";
-        }
-        elsif ($forHtml == 1 && $entity eq "gt")
-        {
+        } elsif ($forHtml == 1 && $entity eq "gt") {
             $char = "&gt;";
-        }
-        elsif ($forHtml == 1 && $entity eq "quot")
-        {
+        } elsif ($forHtml == 1 && $entity eq "quot") {
             $char = "&quot;";
-        }
-        elsif ($forHtml == 1 && $entity eq "amp")
-        {
+        } elsif ($forHtml == 1 && $entity eq "amp") {
             $char = "&amp;";
-        }
-        elsif ($ent{$entity})
-        {
+        } elsif ($ent{$entity}) {
             $char = $ent{$entity};
-        }
-        elsif ($entity =~ /#x([a-f0-9]+)/i)
-        {
+        } elsif ($entity =~ /#x([a-f0-9]+)/i) {
             $char = chr(hex($1));
-        }
-        elsif ($entity =~ /#([0-9]+)/)
-        {
+        } elsif ($entity =~ /#([0-9]+)/) {
             $char = chr($1);
-        }
-        elsif ($entity =~ /frac([0-9])([0-9]+)$/)
-        {
+        } elsif ($entity =~ /frac([0-9])([0-9]+)$/) {
             $char = handleFraction($result, $1, $2);
-        }
-        elsif ($entity =~ /frac([0-9]+)-([0-9]+)$/)
-        {
+        } elsif ($entity =~ /frac([0-9]+)-([0-9]+)$/) {
             $char = handleFraction($result, $1, $2);
-        }
-        else
-        {
+        } else {
             $char = "&" . $entity . ";";
             print STDERR "ERROR:   unmapped SGML entity: $char\n";
         }
@@ -2147,8 +2123,7 @@ sub sgml2utf_common
     return $result;
 }
 
-sub handleFraction
-{
+sub handleFraction {
     my $appendTo = shift;
     my $numerator = shift;
     my $denominator = shift;
@@ -2167,15 +2142,12 @@ sub handleFraction
 # Parameter:
 #   $string: the string to be converted to UTF-8.
 
-sub utf2sgml
-{
+sub utf2sgml {
     my $string = shift;
 
     my @chars = split(//, $string);
-    foreach (@chars)
-    {
-        if (ord($_) > 127)
-        {
+    foreach (@chars) {
+        if (ord($_) > 127) {
             $_ = "&#" . ord($_) . ";";
         }
     }
@@ -2196,21 +2168,15 @@ sub translateEntity($) {
 # Parameter:
 #   $string: the string to be converted to entities.
 
-sub utf2entities
-{
+sub utf2entities {
     my $string = shift;
 
     my @chars = split(//, $string);
-    foreach (@chars)
-    {
-        if (ord($_) > 127)
-        {
-            if ($revent{$_}) 
-            {
+    foreach (@chars) {
+        if (ord($_) > 127) {
+            if ($revent{$_}) {
                 $_ = "&" . $revent{$_} . ";";
-            }
-            else 
-            {
+            } else {
                 $_ = "&#" . ord($_) . ";";
             }
         }
@@ -2218,15 +2184,12 @@ sub utf2entities
     return join('', @chars);
 }
 
-sub utf2numericEntities
-{
+sub utf2numericEntities {
     my $string = shift;
 
     my @chars = split(//, $string);
-    foreach (@chars)
-    {
-        if (ord($_) > 127)
-        {
+    foreach (@chars) {
+        if (ord($_) > 127) {
             $_ = "&#x" . sprintf("%04X", ord($_)) . ";";
         }
     }
@@ -2237,13 +2200,12 @@ sub utf2numericEntities
 #
 # Handle special letters in the coding system as used on PGDP.
 #
-sub pgdp2sgml
-{
+sub pgdp2sgml {
     my $string = shift;
     my $useExtensions = shift;
 
-    if ($useExtensions == 1)  # Extensions used for FRANCK
-    {
+    # Extensions used for FRANCK
+    if ($useExtensions == 1) {
         $string =~ s/\[\x{00b0}([a-zA-Z])\]/\&\1ring;/g;    # ring (FRANCK: using degree sign)
 
         $string =~ s/\[o\)\]/\&oogon;/g;                    # FRANCK: o with ogonek (NON-STANDARD!)

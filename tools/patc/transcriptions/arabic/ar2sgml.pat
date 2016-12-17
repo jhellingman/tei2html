@@ -1,5 +1,5 @@
 % ar2sgml.pat   -- patterns to translate Yannis Haralambous' transcription of
-%                  Arabic, Persian, Urdu, etc. to Unicode (XML Entity notation)
+%                  Arabic, etc. to Unicode (XML Entity notation)
 %
 % see also: http://utf8-chartable.de/unicode-utf8-table.pl?start=1536&utf8=string-literal
 
@@ -8,8 +8,8 @@
 "<AR>"      1 "<foreign lang=ar>"
 "</AR>"     e "</AR> in Roman mode!"
 
-"<UR>"      1 "<foreign lang=ur>"
-"</UR>"     e "</UR> in Roman mode!"
+"<ARA>"     1 ""
+"</ARA>"    e "</ARA> in Roman mode!"
 
 
 @rpatterns 1
@@ -19,8 +19,8 @@
 "</AR>"     0 "</foreign>"
 "<AR>"      e "<AR> om Arabic mode!!!"
 
-"</UR>"     0 "</foreign>"
-"<UR>"      e "<UR> om Arabic (Urdu) mode!!!"
+"</ARA>"    0 ""
+"<ARA>"     e "<ARA> om Arabic mode!!!"
 
 "-"         f               % hyphen disambiguates encoding, should disappear
 
@@ -31,18 +31,18 @@
 ";"         p "&#x061B;"    % ARABIC SEMICOLON
 "?"         p "&#x061F;"    % ARABIC QUESTION MARK
 
-# The following numbers are appropriate for Farsi and Urdu:
+% The following numbers are appropriate for Arabic:
 
-"0"         p "&#x06F0;"    % EXTENDED ARABIC-INDIC DIGIT ZERO
-"1"         p "&#x06F1;"    % EXTENDED ARABIC-INDIC DIGIT ONE
-"2"         p "&#x06F2;"    % EXTENDED ARABIC-INDIC DIGIT TWO
-"3"         p "&#x06F3;"    % EXTENDED ARABIC-INDIC DIGIT THREE
-"4"         p "&#x06F4;"    % EXTENDED ARABIC-INDIC DIGIT FOUR
-"5"         p "&#x06F5;"    % EXTENDED ARABIC-INDIC DIGIT FIVE
-"6"         p "&#x06F6;"    % EXTENDED ARABIC-INDIC DIGIT SIX
-"7"         p "&#x06F7;"    % EXTENDED ARABIC-INDIC DIGIT SEVEN
-"8"         p "&#x06F8;"    % EXTENDED ARABIC-INDIC DIGIT EIGHT
-"9"         p "&#x06F9;"    % EXTENDED ARABIC-INDIC DIGIT NINE
+"0"         p "&#x0660;"    % ARABIC-INDIC DIGIT ZERO
+"1"         p "&#x0661;"    % ARABIC-INDIC DIGIT ONE
+"2"         p "&#x0662;"    % ARABIC-INDIC DIGIT TWO
+"3"         p "&#x0663;"    % ARABIC-INDIC DIGIT THREE
+"4"         p "&#x0664;"    % ARABIC-INDIC DIGIT FOUR
+"5"         p "&#x0665;"    % ARABIC-INDIC DIGIT FIVE
+"6"         p "&#x0666;"    % ARABIC-INDIC DIGIT SIX
+"7"         p "&#x0667;"    % ARABIC-INDIC DIGIT SEVEN
+"8"         p "&#x0668;"    % ARABIC-INDIC DIGIT EIGHT
+"9"         p "&#x0669;"    % ARABIC-INDIC DIGIT NINE
 
 "A"         p "&#x0627;"    % ARABIC LETTER ALEF
 "'a"        p "&#x0623;"    % ARABIC LETTER ALEF WITH HAMZA ABOVE
