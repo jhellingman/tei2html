@@ -365,7 +365,7 @@
 
     <xsl:variable name="contributorRoles">
         <roles>
-            <role code="adp" message="msgAdaptor">Adapter</role>
+            <role code="adp" message="msgAdaptor">Adaptor</role>
             <role code="aft" message="msgAuthorOfAfterword">Author of afterword</role>
             <role code="aft" message="msgAuthorOfColophon">Author of colophon</role>
             <role code="aft" message="msgAuthorOfPostface">Author of postface</role>

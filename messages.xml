@@ -50,6 +50,40 @@
         <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
 
+        <msg:message name="msgAuthorOfAfterword">Author of afterword</msg:message>
+        <msg:message name="msgAuthorOfColophon">Author of colophon</msg:message>
+        <msg:message name="msgAuthorOfPostface">Author of postface</msg:message>
+        <msg:message name="msgAnnotator">Annotator</msg:message>
+        <msg:message name="msgBibliographicAntecedent">Bibliographic anteceden</msg:message>
+        <msg:message name="msgAuthorInQuotations">Author in quotations</msg:message>
+        <msg:message name="msgAuthorInTextExtracts">Author in text extracts</msg:message>
+        <msg:message name="msgArranger">Arranger</msg:message>
+        <msg:message name="msgArtist">Artist</msg:message>
+        <msg:message name="msgAssociatedName">Associated name</msg:message>
+        <msg:message name="msgAuthorOfForeword">Author of foreword</msg:message>
+        <msg:message name="msgAuthorOfPreface">Author of preface</msg:message>
+        <msg:message name="msgAuthor">Author</msg:message>
+        <msg:message name="msgBookProducer">Book producer</msg:message>
+        <msg:message name="msgCollaborator">Collaborator</msg:message>
+        <msg:message name="msgContributor">Contributor</msg:message>
+        <msg:message name="msgCommentator">Commentator</msg:message>
+        <msg:message name="msgDesigner">Designer</msg:message>
+        <msg:message name="msgEditor">Editor</msg:message>
+        <msg:message name="msgIllustrator">Illustrator</msg:message>
+        <msg:message name="msgLyricist">Lyricist</msg:message>
+        <msg:message name="msgMetadataContact">Metadata contact</msg:message>
+        <msg:message name="msgMusician">Musician</msg:message>
+        <msg:message name="msgNarrator">Narrator</msg:message>
+        <msg:message name="msgOther">Other</msg:message>
+        <msg:message name="msgPhotographer">Photographer</msg:message>
+        <msg:message name="msgPrinter">Printer</msg:message>
+        <msg:message name="msgRedactor">Redactor</msg:message>
+        <msg:message name="msgReviewer">Reviewer</msg:message>
+        <msg:message name="msgSponsor">Sponsor</msg:message>
+        <msg:message name="msgThesisAdvisor">Thesis advisor</msg:message>
+        <msg:message name="msgTranscriber">Transcriber</msg:message>
+        <msg:message name="msgTranslator">Translator</msg:message>
+        
         <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Contributor</msg:message>
@@ -65,6 +99,7 @@
         <msg:message name="msgAudioLink">Link to audio file</msg:message>
         <msg:message name="msgAuthor">Author</msg:message>
         <msg:message name="msgAuthors">Authors</msg:message>
+        <msg:message name="msgAuthorOfForeword">Author of foreword</msg:message>
         <msg:message name="msgAuthorAddition">Added by author</msg:message>
         <msg:message name="msgAuthorCorrection">Corrected by author from</msg:message>
         <msg:message name="msgAvailability">Availability</msg:message>
@@ -252,6 +287,7 @@
         <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinese</msg:message>
+        <msg:message name="ur">Urdu</msg:message>
 
         <!-- ISO 639 three letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>

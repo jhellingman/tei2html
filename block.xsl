@@ -87,6 +87,31 @@
 
 
     <xd:doc>
+        <xd:short>Formswork, for now just ignore, except if to be placed in the margin.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="fw">
+        <xsl:copy-of select="f:logInfo('Ignoring fw element.', ())"/>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']">
+        <xsl:copy-of select="f:logInfo('Placing fw element in margin.', ())"/>
+        <span class="fwMargin">
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list/item">
+        <br/><xsl:apply-templates/>
+    </xsl:template>
+
+
+    <xd:doc>
         <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
         <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).
         Otherwise, just generate an anchor element.</xd:detail>
