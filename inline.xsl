@@ -231,11 +231,17 @@
     </xd:doc>
 
     <xsl:template match="corr">
-        <xsl:call-template name="do-corr"/>
+        <xsl:call-template name="handle-correction">
+            <xsl:with-param name="sic" select="@sic"/>
+            <xsl:with-param name="corr" select="./node()"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="corr" mode="titlePage">
-        <xsl:call-template name="do-corr"/>
+        <xsl:call-template name="handle-correction">
+            <xsl:with-param name="sic" select="@sic"/>
+            <xsl:with-param name="corr" select="./node()"/>
+        </xsl:call-template>
     </xsl:template>
 
     <xd:doc>
@@ -245,7 +251,10 @@
         the list of corrections in the colophon can link to it.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="do-corr">
+    <xsl:template name="handle-correction">
+        <xsl:param name="sic"/>
+        <xsl:param name="corr"/>
+
         <xsl:variable name="msgSource" select="if (@resp = 'errata') then f:message('msgAuthorCorrection') else f:message('msgSource')"/>
         <xsl:variable name="msgNotInSource" select="if (@resp = 'errata') then f:message('msgAuthorAddition') else f:message('msgNotInSource')"/>
 
@@ -253,32 +262,32 @@
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
             <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
                 <span>
-                    <xsl:call-template name="generate-id-attribute"/>
-                    <xsl:apply-templates/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
-            <xsl:when test="not(@sic) or @sic=''">
+            <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
-                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$msgNotInSource"/>
                     </xsl:attribute>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
             <!-- Don't generate an empty span, as that will be purged by some HTML tools -->
-            <xsl:when test=". = ''">
+            <xsl:when test="not($corr) or $corr = ''">
                 <a>
                     <xsl:call-template name="generate-id-attribute"/>
                 </a>
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">
-                    <xsl:call-template name="generate-id-attribute"/>
+                    <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="@sic"/>
+                        <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="$sic"/>
                     </xsl:attribute>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:otherwise>
         </xsl:choose>
@@ -449,15 +458,10 @@
     </xd:doc>
 
     <xsl:template match="choice[corr]">
-        <span class="corr">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
-                <xsl:attribute name="title">
-                    <xsl:value-of select="sic"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="corr/(*|text())"/>
-        </span>
+        <xsl:call-template name="handle-correction">
+            <xsl:with-param name="sic" select="sic/node()"/>
+            <xsl:with-param name="corr" select="corr/node()"/>
+        </xsl:call-template>
     </xsl:template>
 
 

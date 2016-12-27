@@ -47,9 +47,11 @@ my $customStylesheet    = "custom.css";
 my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
 my $makeZip             = 0;
+my $noTranscription     = 0;
 
 GetOptions(
     't' => \$makeTXT,
+    'T' => \$noTranscription,
     'h' => \$makeHTML,
     'e' => \$makeEPUB,
     'k' => \$makeKwic,
@@ -582,18 +584,19 @@ sub sgml2xml($$) {
 sub transcribe($) {
     my $sgmlFile = shift;
 
-    $sgmlFile = addTranscriptions($sgmlFile);
+    if ($noTranscription == 0) {
+        $sgmlFile = addTranscriptions($sgmlFile);
 
-    $sgmlFile = transcribeNotation($sgmlFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-    $sgmlFile = transcribeNotation($sgmlFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
-
+        $sgmlFile = transcribeNotation($sgmlFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
+        $sgmlFile = transcribeNotation($sgmlFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
+    }
     return $sgmlFile;
 }
 

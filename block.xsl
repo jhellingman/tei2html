@@ -91,11 +91,11 @@
     </xd:doc>
 
     <xsl:template match="fw">
-        <xsl:copy-of select="f:logInfo('Ignoring fw element.', ())"/>
+        <xsl:copy-of select="f:logInfo('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
     </xsl:template>
 
     <xsl:template match="fw[@place='margin']">
-        <xsl:copy-of select="f:logInfo('Placing fw element in margin.', ())"/>
+        <xsl:copy-of select="f:logInfo('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
@@ -106,10 +106,17 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']/list/item">
+    <xsl:template match="fw[@place='margin']/list/item" priority="2">
         <br/><xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template match="fw[@place='margin']/list/item[1]" priority="1">
+        <b><xsl:apply-templates/><br/>&mdash;</b>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list/item[2]" priority="1">
+        <br/><b><xsl:apply-templates/></b>
+    </xsl:template>
 
     <xd:doc>
         <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>

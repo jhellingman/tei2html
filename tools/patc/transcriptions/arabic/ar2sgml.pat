@@ -31,6 +31,8 @@
 ";"         p "&#x061B;"    % ARABIC SEMICOLON
 "?"         p "&#x061F;"    % ARABIC QUESTION MARK
 
+"_"         p "&#x0640;"    % ARABIC TATWEEL
+
 % The following numbers are appropriate for Arabic:
 
 "0"         p "&#x0660;"    % ARABIC-INDIC DIGIT ZERO
@@ -138,8 +140,9 @@
 "0n"        p "&#x0646;"    % undotted n -> U+06BA ARABIC LETTER NOON GHUNNA
 "'n"        p "&#x06BA;"    % ARABIC LETTER NOON GHUNNA    Urdu: noon ghunna. (nuun without dot)
 
-"h"         p "&#x0647;"    % ARABIC LETTER HEH                normally typed as -h except when initial
-"x"         p "&#x06C1;"    % ARABIC LETTER HEH GOAL        Urdu: normal heh, instead of do-chasmi heh.
+"h"         p "&#x0647;"    % ARABIC LETTER HEH                 normally typed as -h except when initial
+"x"         p "&#x06C1;"    % ARABIC LETTER HEH GOAL            Urdu: normal heh, instead of do-chasmi heh.
+"'h"        p "&#x06BE;"    % ARABIC LETTER HEH DOACHASHMEE     Urdu: do-chasmi heh.
 
 "\"h"       p "&#x0629;"    % ARABIC LETTER TEH MARBUTA
 "0\"h"      p "&#x0629;"    % undotted teh marbuta -> ? U+06C1 ARABIC LETTER HEH GOAL

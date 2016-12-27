@@ -76,11 +76,22 @@ while (<>) {
     # remove TeiHeader
     if ($a =~ /<[Tt]ei[Hh]eader/) {
         $a = $';
-        while($a !~ /<\/[Tt]ei[Hh]eader>/) {
+        while ($a !~ /<\/[Tt]ei[Hh]eader>/) {
             $a = <>;
         }
         $a =~ /<\/[Tt]ei[Hh]eader>/;
         $a = $';
+    }
+
+    # remove forme works (<fw>...</fw>).
+    if ($a =~ /<fw\b(.*?)>/) {
+        my $before = $`;
+        $a = $';
+        while ($a !~ /<\/fw>/) {
+            $a = <>;
+        }
+        $a =~ /<\/fw>/;
+        $a = $before . $';
     }
 
     # drop comments from text (replace with single space).
@@ -165,7 +176,7 @@ sub handleLine($) {
     # drop page-breaks (<pb>) as they interfere with the following processing.
     $a =~ s/<pb\b(.*?)>//g;
 
-    # handle <choice><sic></sic><corr></corr></choice> and <choice><corr></corr><sic></sic></choice>
+    # handle <choice><sic>...</sic><corr>...</corr></choice> and <choice><corr>...</corr><sic>...</sic></choice>
     $a =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
     $a =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
 
