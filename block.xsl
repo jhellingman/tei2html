@@ -661,8 +661,7 @@
 
             <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
-.<xsl:call-template name="generate-rend-class-name"/>
-{
+.<xsl:call-template name="generate-rend-class-name"/> {
     background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat top left;
     <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
@@ -673,8 +672,7 @@
     </xsl:if>
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>init
-{
+.<xsl:call-template name="generate-rend-class-name"/>init {
     float: left;
     width: <xsl:value-of select="f:rend-value(@rend, 'initial-width')"/>;
     height: <xsl:value-of select="f:rend-value(@rend, 'initial-height')"/>;
@@ -704,14 +702,12 @@
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css-handheld">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
-.<xsl:call-template name="generate-rend-class-name"/>
-{
+.<xsl:call-template name="generate-rend-class-name"/> {
     background-image: none;
     padding-top: 0;
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>init
-{
+.<xsl:call-template name="generate-rend-class-name"/>init {
     float: none;
     width: auto;
     height: auto;
@@ -799,8 +795,7 @@
 
         <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
 
-.<xsl:call-template name="generate-rend-class-name"/>
-{
+.<xsl:call-template name="generate-rend-class-name"/> {
     text-indent: 0;
 
     <xsl:if test="normalize-space($properties) != ''">
@@ -808,8 +803,7 @@
     </xsl:if>
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>dc
-{
+.<xsl:call-template name="generate-rend-class-name"/>dc {
     float: left;
     <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/>;
@@ -820,8 +814,7 @@
     margin-right: 3px;
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>adc
-{
+.<xsl:call-template name="generate-rend-class-name"/>adc {
     /* empty */
 }
 

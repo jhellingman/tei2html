@@ -18,9 +18,10 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xd"
+    exclude-result-prefixes="f xd xs"
     version="2.0"
     >
 
@@ -252,11 +253,19 @@
     </xd:doc>
 
     <xsl:template name="handle-correction">
-        <xsl:param name="sic"/>
-        <xsl:param name="corr"/>
+        <xsl:param name="sic" xs:as="node()*"/>
+        <xsl:param name="corr" xs:as="node()*"/>
 
         <xsl:variable name="msgSource" select="if (@resp = 'errata') then f:message('msgAuthorCorrection') else f:message('msgSource')"/>
         <xsl:variable name="msgNotInSource" select="if (@resp = 'errata') then f:message('msgAuthorAddition') else f:message('msgNotInSource')"/>
+
+        <!-- Concatenate string values ourselves to prevent the XSLT processor from inserting spaces when concatenating nodes
+             (Tennison, Beginning XSLT 2.0, p. 358). -->
+        <xsl:variable name="sicString">
+            <xsl:for-each select="$sic">
+                <xsl:value-of select="."/>
+            </xsl:for-each>
+        </xsl:variable>
 
         <xsl:choose>
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
@@ -285,7 +294,7 @@
                 <span class="corr">
                     <xsl:call-template name="set-lang-id-attributes"/>
                     <xsl:attribute name="title">
-                        <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="$sic"/>
+                        <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="$sicString"/>
                     </xsl:attribute>
                     <xsl:apply-templates select="$corr"/>
                 </span>
@@ -302,8 +311,8 @@
         <xd:detail><p>The <code>gap</code> element indicated that some text has been omitted. The
         <code>@reason</code> attribute can be used to give a reason; the <code>@unit</code> and <code>@extent</code>
         attributes can be used to give an estimate of the size of the omitted material.</p>
-        
-        <p>In HTML, a gap is rendered with the localized words [<i>missing text</i>], and a pop-up giving the reason 
+
+        <p>In HTML, a gap is rendered with the localized words [<i>missing text</i>], and a pop-up giving the reason
         and extent.</p></xd:detail>
     </xd:doc>
 
@@ -430,7 +439,7 @@
 
 
     <!--====================================================================-->
-    <!-- Choice element (borrowed from P5) -->
+    <!-- Choice element (TEI P5) -->
 
     <xd:doc>
         <xd:short>Handle a choice (for transcription).</xd:short>
