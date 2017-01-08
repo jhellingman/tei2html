@@ -91,11 +91,11 @@
     </xd:doc>
 
     <xsl:template match="fw">
-        <xsl:copy-of select="f:logInfo('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
+        <xsl:copy-of select="f:logDebug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
     </xsl:template>
 
     <xsl:template match="fw[@place='margin']">
-        <xsl:copy-of select="f:logInfo('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
+        <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>

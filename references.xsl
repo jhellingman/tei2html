@@ -334,7 +334,7 @@
                 <tr><td>wp:<i>[string]</i></td>         <td>Link to a Wikipedia article.</td></tr>
                 <tr><td>wpp:<i>[string]</i></td>        <td>Link to a WikiPilipinas article.</td></tr>
                 <tr><td>loc:<i>[coordinates]</i></td>   <td>Link to a geographical location (currently uses Google Maps).</td></tr>
-                <tr><td>bib:<i>[book ch:vs]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
+                <tr><td>bib:<i>[book ch:vs@version]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
                 <tr><td>mailto:<i>[email address]</i></td> <td>Link to an email address.</td></tr>
             </table>
 
@@ -398,17 +398,27 @@
 
             <!-- Link to Bible citation -->
             <xsl:when test="starts-with($url, 'bib:')">
-                <xsl:text>https://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri(substring-after($url, ':'))"/>
-                <xsl:choose>
-                    <!-- TODO: move this to localization data -->
-                    <xsl:when test="$lang = 'en'"/>
-                    <xsl:when test="$lang = 'de'">&amp;version=LUTH1545</xsl:when>
-                    <xsl:when test="$lang = 'es'">&amp;version=RVR1995</xsl:when>
-                    <xsl:when test="$lang = 'nl'">&amp;version=HTB</xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy-of select="f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:variable name="version">
+                    <xsl:choose>
+                        <xsl:when test="contains($url, '@')"><xsl:value-of select="substring-after($url, '@')"/></xsl:when>
+                        <xsl:when test="$lang = 'en'">NRSV</xsl:when>
+                        <xsl:when test="$lang = 'fr'">LSG</xsl:when>
+                        <xsl:when test="$lang = 'de'">LUTH1545</xsl:when>
+                        <xsl:when test="$lang = 'es'">RVR1995</xsl:when>
+                        <xsl:when test="$lang = 'nl'">HTB</xsl:when> <!-- unfortunately, only version available in Dutch -->
+                        <xsl:when test="$lang = 'la'">VULGATE</xsl:when>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="url" select="if (contains($url, '@')) then substring-before($url, '@') else $url"/>
+                <xsl:variable name="location" select="substring-after($url, ':')"/>
+
+                <xsl:text>https://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri($location)"/>
+                <xsl:if test="$version != ''">
+                    <xsl:text>&amp;version=</xsl:text><xsl:value-of select="iri-to-uri($version)"/>
+                </xsl:if>
             </xsl:when>
 
             <!-- Link to website (http:// or https://) -->

@@ -182,7 +182,7 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:variable name="viafUrlFormat" select="'^https://viaf\.org/viaf/[0-9]+$'"/>
+    <xsl:variable name="viafUrlFormat" select="'^https://viaf\.org/viaf/[0-9]+/$'"/>
 
     <xsl:template mode="checks" match="titleStmt/author[@ref and not(matches(@ref, $viafUrlFormat))]">
         <i:issue pos="{@pos}" code="A0000" element="{name(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on author <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
@@ -219,6 +219,15 @@
         </xsl:call-template>
 
         <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+
+    <!-- Types of titleParts -->
+
+    <xsl:variable name="expectedTitlePartTypes" select="'main', 'sub', 'series'"/>
+
+    <xsl:template mode="checks" match="titlePart[@type and not(@type = $expectedTitlePartTypes)]">
+        <i:issue pos="{@pos}" code="C0012" element="{name(.)}">Unexpected type for titlePart: <xsl:value-of select="@type"/></i:issue>
     </xsl:template>
 
 

@@ -861,6 +861,7 @@
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
         <msg:message name="msgFrontMatter">Voorwerk</msg:message>
+        <msg:message name="msgGitHubRepository">GitHub repository voor dit eBoek</msg:message>
         <msg:message name="msgGlossary">Verklarende woordenlijst</msg:message>
         <msg:message name="msgGuide">Gids</msg:message>
         <msg:message name="msgGuides">Gidsen</msg:message>
