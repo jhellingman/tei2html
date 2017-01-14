@@ -329,8 +329,7 @@
             </xsl:variable>
 
             <xsl:if test="$width != ''">
-.x<xsl:value-of select="generate-id()"/>width
-{
+.x<xsl:value-of select="generate-id()"/>width {
     width:<xsl:value-of select="$width"/>;
 }
             </xsl:if>

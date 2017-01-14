@@ -605,6 +605,18 @@
 
     <msg:messages xml:lang="de">
 
+	    <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgMetadata">Metadaten</msg:message>
+        <msg:message name="msgInfo">Information</msg:message>
+        <msg:message name="msgLanguage">Sprache</msg:message>
+        <msg:message name="msgClassCode">Class code</msg:message>
+        <msg:message name="msgSourcePublisher">Herausgeber des Originals</msg:message>
+        <msg:message name="msgSourcePubPlace">Veröffentlichungsort des Originals</msg:message>
+        <msg:message name="msgSourcePublicationDate">Veröffentlichungsdatum des Originals</msg:message>
+        <msg:message name="msgCatalogEntry">Katalogeintrag</msg:message>
+        <msg:message name="msgCatalogEntries">Katalogeinträge</msg:message>
+        <msg:message name="msgAuthorOfIntroduction">Autor der Einleitung</msg:message>
+
         <msg:message name="msgAbbreviation">Abkürzung</msg:message>
         <msg:message name="msgAbbreviations">Abkürzungen</msg:message>
         <msg:message name="msgAdvertisement">Anzeige</msg:message>

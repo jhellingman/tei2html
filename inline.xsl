@@ -6,6 +6,7 @@
     <!ENTITY deg        "&#176;">
     <!ENTITY ldquo      "&#x201C;">
     <!ENTITY nbsp       "&#160;">
+    <!ENTITY zwsp       "&#x200B;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
     <!ENTITY Prime      "&#x2033;">
@@ -307,7 +308,7 @@
     <!-- Gaps -->
 
     <xd:doc>
-        <xd:short>Hangle a gap.</xd:short>
+        <xd:short>Handle a gap.</xd:short>
         <xd:detail><p>The <code>gap</code> element indicated that some text has been omitted. The
         <code>@reason</code> attribute can be used to give a reason; the <code>@unit</code> and <code>@extent</code>
         attributes can be used to give an estimate of the size of the omitted material.</p>
@@ -346,6 +347,43 @@
             </xsl:if>
             [<i><xsl:value-of select="f:message('msgMissingText')"/></i>]
         </span>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle a space.</xd:short>
+        <xd:detail><p>The <code>space</code> element indicated that some (extra-wide) space has been inserted. The
+        <code>@unit</code> and <code>@quantity</code> attributes can be used to give an indication of the size of the 
+        space.</p>
+
+        <p>In HTML, a space is rendered with a zero-width space and appropriately sized padding, applied via CSS.</p></xd:detail>
+    </xd:doc>
+
+    <xsl:template match="space">
+        <xsl:variable name="quantity" select="if (@quantity) then @quantity else 1"/>
+        <span>
+            <xsl:attribute name="class">
+                <xsl:text>space </xsl:text>
+                <xsl:text>x</xsl:text><xsl:value-of select="generate-id()"/><xsl:text>space</xsl:text>
+            </xsl:attribute>
+            <!-- Insert a zero-width space to prevent tidy from removing up this span. -->
+            <xsl:text>&zwsp;</xsl:text>
+        </span>
+    </xsl:template>
+
+
+    <xsl:template match="space" mode="css">
+        <xsl:variable name="quantity" select="if (@quantity) then @quantity else 1"/>
+        <xsl:variable name="unit" select="if (@unit) then @unit else 'em'"/>
+
+        <!-- Assume a character is 0.5em. -->
+        <xsl:variable name="quantity" select="if ($unit = ('char', 'chars')) then $quantity div 2.0 else $quantity"/>
+        <xsl:variable name="unit" select="if ($unit = ('char', 'chars')) then 'em' else $unit"/>
+
+        <!-- Cannot set width of span, so set padding-left -->
+.x<xsl:value-of select="generate-id()"/>space {
+   padding-left: <xsl:value-of select="$quantity"/><xsl:value-of select="$unit"/>
+}
     </xsl:template>
 
 
