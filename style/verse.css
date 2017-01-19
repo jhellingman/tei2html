@@ -38,8 +38,8 @@ p.line, .par.line {
 }
 
 span.hemistich {
-	/* invisible text to achieve visual effect of hemistich indentation. */
-	color: white;
+	/* hidden text to achieve visual effect of hemistich indentation. */
+	visibility: hidden;
 }
 
 .versenum {

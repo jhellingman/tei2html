@@ -657,46 +657,43 @@
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
                     <xsl:copy-of select="f:logWarning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
-                    <table class="ditto">
-                        <tr class="s"><td><xsl:value-of select="."/></td></tr>
-                    </table>
+                    <span class="ditto">
+                        <span class="s"><xsl:value-of select="."/></span>
+                    </span>
                 </xsl:when>
                 <xsl:otherwise>
-                    <table class="ditto">
-                        <tr class="s">
-                            <td>
+                    <span class="ditto">
+                        <span class="s">
                             <!-- Handle most common in-line style elements. -->
-                                <xsl:choose>
-                                    <xsl:when test="$context/parent::hi[@rend='b' or @rend='bold']">
-                                        <b><xsl:value-of select="."/></b>
-                                    </xsl:when>
-                                    <xsl:when test="$context/parent::hi[@rend='sup']">
-                                        <sup><xsl:value-of select="."/></sup>
-                                    </xsl:when>
-                                    <xsl:when test="$context/parent::hi[@rend='sub']">
-                                        <sub><xsl:value-of select="."/></sub>
-                                    </xsl:when>
-                                    <xsl:when test="$context/parent::hi[@rend='sc']">
-                                        <span class="sc"><xsl:value-of select="."/></span>
-                                    </xsl:when>
-                                    <xsl:when test="$context/parent::hi">
-                                        <i><xsl:value-of select="."/></i>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="."/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                            </td>
-                        </tr>
+                            <xsl:choose>
+                                <xsl:when test="$context/parent::hi[@rend='b' or @rend='bold']">
+                                    <b><xsl:value-of select="."/></b>
+                                </xsl:when>
+                                <xsl:when test="$context/parent::hi[@rend='sup']">
+                                    <sup><xsl:value-of select="."/></sup>
+                                </xsl:when>
+                                <xsl:when test="$context/parent::hi[@rend='sub']">
+                                    <sub><xsl:value-of select="."/></sub>
+                                </xsl:when>
+                                <xsl:when test="$context/parent::hi[@rend='sc']">
+                                    <span class="sc"><xsl:value-of select="."/></span>
+                                </xsl:when>
+                                <xsl:when test="$context/parent::hi">
+                                    <i><xsl:value-of select="."/></i>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="."/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </span>
                         <!-- No ditto marks for parts that are superscripted or subscripted -->
                         <xsl:if test="not($context/parent::hi[@rend='sub' or @rend='sup'])">
-                            <tr class="d">
-                                <td>
-                                    <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getSetting('dittoMark')"/>
-                                </td>
-                            </tr>
+                            <!-- Nest two levels of span to enable CSS to get alignment right -->
+                            <span class="d"><span class="i">
+                                <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getSetting('dittoMark')"/>
+                            </span></span>
                         </xsl:if>
-                    </table>
+                    </span>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>

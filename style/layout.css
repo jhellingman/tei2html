@@ -179,6 +179,10 @@ span.measure {
 	text-decoration: underline;
 }
 
+sup {
+    line-height: 6pt;
+}
+
 /* overline is actually a bit too high; overtilde is approximated with overline */
 
 .overline, .overtilde {

@@ -550,6 +550,16 @@ sub sgml2xml($$) {
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
+    # Convert <INTRA> notation.
+    my $containsIntralinear = system ("grep -q \"<INTRA\" $sgmlFile");
+    if ($containsIntralinear == 0) {
+        my $tmpFileA = mktemp('tmp-XXXXX');
+        print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
+        system ("perl $toolsdir/intralinear.pl $tmpFile0 > $tmpFileA");
+        unlink($tmpFile0);
+        $tmpFile0 = $tmpFileA;
+    }
+
     $tmpFile0 = transcribe($tmpFile0);
 
     print "Check SGML...\n";

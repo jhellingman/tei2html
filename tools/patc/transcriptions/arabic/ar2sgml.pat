@@ -31,6 +31,9 @@
 ";"         p "&#x061B;"    % ARABIC SEMICOLON
 "?"         p "&#x061F;"    % ARABIC QUESTION MARK
 
+"("         p "("   
+")"         p ")"   
+
 "_"         p "&#x0640;"    % ARABIC TATWEEL
 
 % The following numbers are appropriate for Arabic:

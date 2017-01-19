@@ -1,0 +1,17 @@
+/* CSS for intralineair text */
+
+span.intra {
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+
+span.intra, span.intra span.top, span.intra span.bottom {
+    padding: 1px 0.5px;
+    font-size: small;
+}
+
+span.intra span.bottom {
+    display: block;
+    font-style: italic;
+}
