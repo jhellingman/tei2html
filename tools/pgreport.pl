@@ -184,7 +184,12 @@ sub handleTeiFile($) {
                 my $xpath = XML::XPath->new(filename => $xmlFileName);
 
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
+
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
+                my $editors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor');
+                my $respRoles = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/resp');
+                my $respNames = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/name');
+
                 my $originalDate = $xpath->find('/TEI.2/teiHeader/fileDesc/sourceDesc/bibl/date[1]');
                 my $pageCount = $xpath->find('count(//pb[not(ancestor::note)])');
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
@@ -205,6 +210,15 @@ sub handleTeiFile($) {
                     logMessage("Author:     " . $author->string_value());
                     print XMLFILE "    <author>" . escapeXml($author->string_value()) . "</author>\n";
                 }
+                for my $editor ($editors->get_nodelist()) {
+                    logMessage("Editor:     " . $editor->string_value());
+                    print XMLFILE "    <editor>" . escapeXml($editor->string_value()) . "</editor>\n";
+                }
+                for my $respName ($respNames->get_nodelist()) {
+                    logMessage("Contributor:     " . $respName->string_value());
+                    print XMLFILE "    <contributor>" . escapeXml($respName->string_value()) . "</contributor>\n";
+                }
+
                 logMessage("Orig. Date: $originalDate");
                 print XMLFILE "    <date>$originalDate</date>\n";
                 logMessage("Pages:      $pageCount");

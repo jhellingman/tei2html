@@ -33,7 +33,7 @@ while (<INPUTFILE>) {
     }
 
     if ($mode == 1) {
-        $line =~ s/\[(.*?)\|(.*?)\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">\1<\/ab><ab type=\"bottom\" lang=\"$langs[1]\">\2<\/ab><\/ab>\n/g;
+        $line =~ s/\[(.*?)\|(.*?)\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">\1<\/ab> <ab type=\"bottom\" lang=\"$langs[1]\">\2<\/ab><\/ab>\n/g;
     }
 
     print $line;

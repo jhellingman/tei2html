@@ -425,9 +425,7 @@
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
 
-            <!-- Hack to make sure ditto elements in paragraps render as expected: HTML doesn't allow tables inside paragraps. -->
-            <xsl:variable name="local.p.element" select="if (.//ditto) then 'div' else $p.element"/>
-            <xsl:element name="{$local.p.element}">
+            <xsl:element name="{$p.element}">
                 <xsl:call-template name="set-lang-id-attributes"/>
 
                 <xsl:variable name="class">

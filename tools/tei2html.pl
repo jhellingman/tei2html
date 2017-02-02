@@ -25,7 +25,7 @@ my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML c
 my $java            = "java";
 my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
 my $saxon           = "$java -Xss1024k -jar " . $toolsdir . "/lib/saxon9he.jar ";         # (see http://saxon.sourceforge.net/)
-my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-3.0.1.jar ";  # (see https://github.com/IDPF/epubcheck)
+my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # (see https://github.com/IDPF/epubcheck)
 
 #==============================================================================
 # Arguments
@@ -592,22 +592,22 @@ sub sgml2xml($$) {
 # transcribe -- transcribe foreign scripts in special notations to entities.
 #
 sub transcribe($) {
-    my $sgmlFile = shift;
+    my $currentFile = shift;
 
     if ($noTranscription == 0) {
-        $sgmlFile = addTranscriptions($sgmlFile);
+        $currentFile = addTranscriptions($currentFile);
 
-        $sgmlFile = transcribeNotation($sgmlFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-        $sgmlFile = transcribeNotation($sgmlFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
+        $currentFile = transcribeNotation($currentFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
     }
-    return $sgmlFile;
+    return $currentFile;
 }
 
 

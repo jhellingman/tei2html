@@ -395,7 +395,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum'"/>
+    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum', 'intra', 'top', 'bottom'"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
