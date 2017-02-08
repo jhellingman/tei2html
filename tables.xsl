@@ -187,6 +187,8 @@
         <xd:short>Handle a table cell.</xd:short>
         <xd:detail>
             <p>Handle a table cell. Deal with spans and determine the <code>class</code> and <code>id</code> attributes, and render its content.</p>
+
+            <p>Special handling for a cell that spans more than one row and contains only a brace symbol.</p>
         </xd:detail>
     </xd:doc>
 
@@ -198,10 +200,10 @@
 
             <xsl:choose>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '{'">
-                    <xsl:call-template name="insert-left-brace"/>
+                    <xsl:call-template name="cell-with-left-brace"/>
                 </xsl:when>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
-                    <xsl:call-template name="insert-right-brace"/>
+                    <xsl:call-template name="cell-with-right-brace"/>
                 </xsl:when>
                 <xsl:when test="@role='sum'">
                     <span class="sum">
@@ -216,17 +218,17 @@
     </xsl:template>
 
 
-    <xsl:template name="insert-right-brace">
-        <xsl:call-template name="insertimage2">
-            <xsl:with-param name="alt" select="''"/>
-            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <xsl:template name="insert-left-brace">
+    <xsl:template name="cell-with-left-brace">
         <xsl:call-template name="insertimage2">
             <xsl:with-param name="alt" select="''"/>
             <xsl:with-param name="filename" select="concat('images/lbrace', @rows, '.png')"/>
+        </xsl:call-template>
+    </xsl:template>
+
+    <xsl:template name="cell-with-right-brace">
+        <xsl:call-template name="insertimage2">
+            <xsl:with-param name="alt" select="''"/>
+            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
         </xsl:call-template>
     </xsl:template>
 
@@ -273,6 +275,8 @@
         <xsl:variable name="class">
             <xsl:if test="@role and not(@role='data' or @role='sum')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
+            <xsl:if test="@rows > 1">rowspan </xsl:if>
+            <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>

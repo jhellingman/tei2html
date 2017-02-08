@@ -132,19 +132,6 @@ span.parnum {
 	font-weight: bold;
 }
 
-/* page numbers, placed in right margin */
-
-.pagenum {
-	display: inline;
-	font-size: 70%;
-	font-style: normal;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	right: 1%;
-	text-align: right;
-}
-
 span.corr, span.gap {
 	border-bottom: 1px dotted red;
 }
@@ -345,27 +332,11 @@ p.footnote .label, .par.footnote .label {
 	display: block;
 }
 
-.marginnote {
-	font-size: 0.8em;
-	height: 0;
-	left: 1%;
-	line-height: 1.2em;
-	position: absolute;
-	text-indent: 0;
-	width: 14%;
-}
-
 .apparatusnote {
 	text-decoration: none;
 }
 
 /***** Table of Contents *****/
-
-span.tocPageNum, span.flushright {
-	position: absolute;
-	right: 16%;
-	top: auto;
-}
 
 table.tocList {
 	width: 100%;

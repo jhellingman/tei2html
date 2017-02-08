@@ -343,6 +343,9 @@
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'image')]" mode="manifest"/>
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'link')]" mode="manifest-links"/>
 
+                <!-- Automatically inserted illustrations in tables (i.e. braces for cells that span more than one row and contain only a brace) -->
+                <xsl:apply-templates select="//cell" mode="manifest-braces"/>
+
                 <!-- Media overlays -->
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'media-overlay')]" mode="manifest"/>
 
@@ -554,6 +557,25 @@
     </xsl:template>
 
 
+    <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '{']" mode="manifest-braces">
+        <xsl:call-template name="manifest-image-item">
+            <xsl:with-param name="filename" select="concat('images/lbrace', @rows, '.png')"/>
+            <xsl:with-param name="how" select="'brace'"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '}']" mode="manifest-braces">
+        <xsl:call-template name="manifest-image-item">
+            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
+            <xsl:with-param name="how" select="'brace'"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template match="cell" mode="manifest-braces"/>
+
+
     <xsl:template name="manifest-image-item">
         <xsl:param name="filename" as="xs:string"/>
         <xsl:param name="how" select="''" as="xs:string"/>
@@ -569,7 +591,7 @@
 
         <item>
             <!-- Append $how after id to make it unique for linked images -->
-            <xsl:if test="@id='cover-image'">
+            <xsl:if test="@id = 'cover-image'">
                 <xsl:attribute name="properties">cover-image</xsl:attribute>
             </xsl:if>
             <xsl:attribute name="id"><xsl:call-template name="generate-id"/><xsl:value-of select="$how"/></xsl:attribute>

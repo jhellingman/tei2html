@@ -8,6 +8,37 @@ body {
 	padding: 1.58em 16%;
 }
 
+/* The following rules use absolute positioning and are thus taboo in ePubs */
+
+/* page numbers, placed in right margin */
+
+.pagenum {
+	display: inline;
+	font-size: 70%;
+	font-style: normal;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 1%;
+	text-align: right;
+}
+
+.marginnote {
+	font-size: 0.8em;
+	height: 0;
+	left: 1%;
+	line-height: 1.2em;
+	position: absolute;
+	text-indent: 0;
+	width: 14%;
+}
+
+span.tocPageNum, span.flushright {
+	position: absolute;
+	right: 16%;
+	top: auto;
+}
+
 /* External Links are decorated with little icons in the HTML version: */
 
 .pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
