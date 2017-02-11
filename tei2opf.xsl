@@ -361,7 +361,14 @@
     </xsl:template>
 
 
-    <!--== main divisions ==-->
+    <xd:doc>
+        <xd:short>Generate manifest entries for the main divisions of the text.</xd:short>
+        <xd:detail>
+            <p>Generate manifest entries for the main. To make sure the divisions are determined in the 
+            same way as when they are generated, the same splitter templates are used to achieve this.
+            See <code>splitter.xsl</code> for details.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="text" mode="manifest">
         <xsl:apply-templates mode="splitter">
@@ -370,12 +377,10 @@
     </xsl:template>
 
 
-    <!--== figures ==-->
-
     <xd:doc>
-        <xd:short>Generate a manifest item for a figure.</xd:short>
+        <xd:short>Generate a manifest entry for a figure.</xd:short>
         <xd:detail>
-            <p>Generate a manifest item for the referenced image file.</p>
+            <p>Generate a manifest entry for the referenced image file.</p>
         </xd:detail>
     </xd:doc>
 
@@ -396,9 +401,9 @@
 
 
     <xd:doc>
-        <xd:short>Generate a manifest item for referenced items.</xd:short>
+        <xd:short>Generate a manifest entry for referenced items.</xd:short>
         <xd:detail>
-            <p>Generate a manifest item for references images and media overlays.</p>
+            <p>Generate a manifest entry for referenced images and media overlays.</p>
         </xd:detail>
     </xd:doc>
 
@@ -425,9 +430,9 @@
 
 
     <xd:doc>
-        <xd:short>Generate manifest items for media overlays.</xd:short>
+        <xd:short>Generate manifest entries for media overlays.</xd:short>
         <xd:detail>
-            <p>Generate a manifest item for the SMIL file as well as the audio files
+            <p>Generate a manifest entry for the SMIL file as well as the audio files
             referenced in the SMIL file.</p>
         </xd:detail>
     </xd:doc>
@@ -447,6 +452,13 @@
         <xsl:apply-templates mode="manifest-smil" select="document($filename, .)"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate manifest entries for audio files.</xd:short>
+        <xd:detail>
+            <p>Generate a manifest entry for audio files referenced in a SMIL file.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="smil:audio[@src]" mode="manifest-smil">
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
@@ -472,8 +484,17 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Enable access to the initial TEI file while handling the .smil file -->
+
+    <xd:doc>
+        <xd:short>Enable access to the initial TEI file while handling the .smil file.</xd:short>
+    </xd:doc>
+
     <xsl:variable name="teiFile" select="/"/>
+
+
+    <xd:doc>
+        <xd:short>Verify fragments mentioned in the .smil file are available in the text.</xd:short>
+    </xd:doc>
 
     <xsl:template match="smil:text[@src]" mode="manifest-smil">
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.xhtml.*$', '')"/></xsl:variable>
@@ -534,6 +555,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Generate manifest entries for images linked to.</xd:short>
+    </xd:doc>
+
     <xsl:template match="*" mode="manifest-links">
         <xsl:if test="f:has-rend-value(@rend, 'link')">
             <xsl:variable name="target">
@@ -556,6 +581,10 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Generate manifest entries for images of braces automatically inserted in tables.</xd:short>
+    </xd:doc>
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '{']" mode="manifest-braces">
         <xsl:call-template name="manifest-image-item">
@@ -602,8 +631,11 @@
     </xsl:template>
 
 
-    <!-- Remove duplicated resources from the list (included because the ePub uses
-         them more than once). -->
+    <xd:doc>
+        <xd:short>Remove duplicated resources from the list (included because the ePub uses
+         them more than once).</xd:short>
+    </xd:doc>
+
     <xsl:template match="opf:item" mode="undouble">
         <xsl:variable name="href" select="@href"/>
         <xsl:if test="not(preceding-sibling::opf:item[@href = $href])">
@@ -611,11 +643,15 @@
         </xsl:if>
     </xsl:template>
 
-    <!-- Copy items from an included manifest-snippet -->
+
+    <xd:doc>
+        <xd:short>Copy items from an included manifest-snippet.</xd:short>
+    </xd:doc>
 
     <xsl:template match="opf:item" mode="copy-manifest">
         <xsl:copy-of select="."/>
     </xsl:template>
+
 
     <!--== spine ===========================================================-->
 
