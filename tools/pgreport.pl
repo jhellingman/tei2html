@@ -46,9 +46,11 @@ main();
 sub main() {
     my $reportFile = "pgreport.txt";
     my $xmlFile = "pgreport.xml";
+    my $gitFile = "cloneAll.bat";
 
     open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
     open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
+    open(GITFILE, "> $gitFile") || die("Could not open $gitFile");
 
     my $directory = $ARGV[0];
     if (! defined $directory) {
@@ -67,6 +69,7 @@ sub main() {
     logTotals();
 
     close REPORTFILE;
+    close GITFILE;
 }
 
 
@@ -230,6 +233,11 @@ sub handleTeiFile($) {
                 logMessage("PG Number:  $pgNum");
                 print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
                 print XMLFILE "    <pgsource>$pgSrc</pgsource>\n";
+
+                my $repo = $pgSrc->string_value();
+                if (defined $repo && $repo ne "" && $repo ne "#####") {
+                    print GITFILE "git clone https://github.com/GutenbergSource/$pgSrc.git\n";
+                }
                 print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
                 print XMLFILE "    <projectId>$projectId</projectId>\n";
                 logMessage("Clearance:  $pgClearance");

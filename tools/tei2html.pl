@@ -48,6 +48,7 @@ my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
 my $makeZip             = 0;
 my $noTranscription     = 0;
+my $debug               = 0;
 
 GetOptions(
     't' => \$makeTXT,
@@ -55,6 +56,7 @@ GetOptions(
     'h' => \$makeHTML,
     'e' => \$makeEPUB,
     'k' => \$makeKwic,
+    'D' => \$debug,
     'p' => \$makePDF,
     '5' => \$makeP5,
     'r' => \$makeReport,
@@ -70,6 +72,7 @@ GetOptions(
     'w=i' => \$pageWidth);
 
 my $filename = $ARGV[0];
+
 
 # Metadata
 
@@ -123,6 +126,8 @@ if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $ma
 my $nsgmlresult = 0;
 
 my $tmpdir = $ENV{'TEMP'};
+my $tmpBase = 'tmp';
+my $tmpCount = 0;
 
 
 if ($filename eq "") {
@@ -227,18 +232,18 @@ sub processFile($) {
         if ($force == 0 && isNewer($basename . ".html", $basename . ".xml")) {
             print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
         } else {
-            my $tmpFile = mktemp('tmp-XXXXX');
+            my $tmpFile = temporaryFile('html', '.html');
             print "Create HTML version...\n";
             system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
             system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
             system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $basename.html");
-            unlink($tmpFile);
+            $debug || unlink($tmpFile);
         }
     }
 
     if ($makePDF == 1) {
-        my $tmpFile1 = mktemp('tmp-XXXXX');
-        my $tmpFile2 = mktemp('tmp-XXXXX');
+        my $tmpFile1 = temporaryFile('pdf', '.html');
+        my $tmpFile2 = temporaryFile('pdf', '.html');
 
         # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
         print "Create PDF version...\n";
@@ -247,12 +252,12 @@ sub processFile($) {
         system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
         system ("$prince $basename-prince.html $basename.pdf");
 
-        unlink($tmpFile1);
-        unlink($tmpFile2);
+        $debug || unlink($tmpFile1);
+        $debug || unlink($tmpFile2);
     }
 
     if ($makeEPUB == 1) {
-        my $tmpFile = mktemp('tmp-XXXXX');
+        my $tmpFile = temporaryFile('epub', '.html');
         print "Create ePub version...\n";
         system ("mkdir epub");
         copyImages("epub/images");
@@ -268,13 +273,13 @@ sub processFile($) {
         chdir "..";
 
         system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
-        unlink($tmpFile);
-        remove_tree("epub")
+        $debug || unlink($tmpFile);
+        $debug || remove_tree("epub")
     }
 
     if ($makeTXT == 1) {
-        my $tmpFile1 = mktemp('tmp-XXXXX');
-        my $tmpFile2 = mktemp('tmp-XXXXX');
+        my $tmpFile1 = temporaryFile('txt', '.txt');
+        my $tmpFile2 = temporaryFile('txt', '.txt');
 
         print "Create text version...\n";
         system ("perl $toolsdir/extractNotes.pl $filename");
@@ -295,10 +300,10 @@ sub processFile($) {
             system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
         }
 
-        unlink("$filename.out");
-        unlink("$filename.notes");
-        unlink($tmpFile1);
-        unlink($tmpFile2);
+        $debug || unlink("$filename.out");
+        $debug || unlink("$filename.notes");
+        $debug || unlink($tmpFile1);
+        $debug || unlink($tmpFile2);
 
         # check for required manual intervetions
         my $containsError = system ("grep -q \"\\[ERROR:\" $basename.txt");
@@ -316,11 +321,11 @@ sub processFile($) {
     }
 
     if ($makeReport == 1) {
-        my $tmpFile = mktemp('tmp-XXXXX');
+        my $tmpFile = temporaryFile('report', '.html');
         print "Report on word usage...\n";
         system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
         system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
-        unlink($tmpFile);
+        $debug || unlink($tmpFile);
 
         # Create a text heat map.
         if (-f "heatmap.xml") {
@@ -511,23 +516,23 @@ sub runChecks($) {
     system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$newname\"");
 
     if ($extension eq "tei") {
-        my $tmpFile = mktemp('tmp-XXXXX');
+        my $tmpFile = temporaryFile('checks', '.tei');
 
         # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
         system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
-        unlink ($newname);
+        $debug || unlink ($newname);
 
         sgml2xml($tmpFile, $basename . "-pos.xml");
         $newname = $basename . "-pos.xml";
-        unlink($tmpFile);
-        unlink($tmpFile . ".err");
+        $debug || unlink($tmpFile);
+        $debug || unlink($tmpFile . ".err");
     }
 
     system ("$saxon \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
     if ($filename ne $transcribedFile) {
-        unlink ($transcribedFile);
+        $debug || unlink ($transcribedFile);
     }
-    unlink ($newname);
+    $debug || unlink ($newname);
 }
 
 
@@ -546,17 +551,17 @@ sub sgml2xml($$) {
     print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
 
     # Convert Latin-1 characters to entities
-    my $tmpFile0 = mktemp('tmp-XXXXX');
+    my $tmpFile0 = temporaryFile('entities', '.tei');
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
 
     # Convert <INTRA> notation.
     my $containsIntralinear = system ("grep -q \"<INTRA\" $sgmlFile");
     if ($containsIntralinear == 0) {
-        my $tmpFileA = mktemp('tmp-XXXXX');
+        my $tmpFileA = temporaryFile('intra', '.tei');
         print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
         system ("perl $toolsdir/intralinear.pl $tmpFile0 > $tmpFileA");
-        unlink($tmpFile0);
+        $debug || unlink($tmpFile0);
         $tmpFile0 = $tmpFileA;
     }
 
@@ -566,10 +571,10 @@ sub sgml2xml($$) {
     $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
     system ("rm $sgmlFile.nsgml");
 
-    my $tmpFile1 = mktemp('tmp-XXXXX');
-    my $tmpFile2 = mktemp('tmp-XXXXX');
-    my $tmpFile3 = mktemp('tmp-XXXXX');
-    my $tmpFile4 = mktemp('tmp-XXXXX');
+    my $tmpFile1 = temporaryFile('hide-entities', '.tei');
+    my $tmpFile2 = temporaryFile('sx', '.xml');
+    my $tmpFile3 = temporaryFile('restore-entities', '.xml');
+    my $tmpFile4 = temporaryFile('ucs', '.xml');
 
     print "Convert SGML to XML...\n";
     # hide entities for parser
@@ -580,11 +585,11 @@ sub sgml2xml($$) {
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
 
-    unlink($tmpFile4);
-    unlink($tmpFile3);
-    unlink($tmpFile2);
-    unlink($tmpFile1);
-    unlink($tmpFile0);
+    $debug || unlink($tmpFile4);
+    $debug || unlink($tmpFile3);
+    $debug || unlink($tmpFile2);
+    $debug || unlink($tmpFile1);
+    $debug || unlink($tmpFile0);
 }
 
 
@@ -631,11 +636,11 @@ sub addTranscriptions($) {
     # Check for presence of Greek or Cyrillic
     my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<RUX>\" $currentFile");
     if ($containsGreek == 0) {
-        my $tmpFile1 = mktemp('tmp-XXXXX');
-        my $tmpFile2 = mktemp('tmp-XXXXX');
-        my $tmpFile3 = mktemp('tmp-XXXXX');
-        my $tmpFile4 = mktemp('tmp-XXXXX');
-        my $tmpFile5 = mktemp('tmp-XXXXX');
+        my $tmpFile1 = temporaryFile('greek', '.xml');
+        my $tmpFile2 = temporaryFile('greek', '.xml');
+        my $tmpFile3 = temporaryFile('greek', '.xml');
+        my $tmpFile4 = temporaryFile('greek', '.xml');
+        my $tmpFile5 = temporaryFile('greek', '.xml');
 
         print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
@@ -644,11 +649,11 @@ sub addTranscriptions($) {
         system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile3 $tmpFile4");
         system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile4 $tmpFile5");
 
-        unlink($tmpFile1);
-        unlink($tmpFile2);
-        unlink($tmpFile3);
-        unlink($tmpFile4);
-        unlink($currentFile);
+        $debug || unlink($tmpFile1);
+        $debug || unlink($tmpFile2);
+        $debug || unlink($tmpFile3);
+        $debug || unlink($tmpFile4);
+        $debug || unlink($currentFile);
         $currentFile = $tmpFile5;
     }
     return $currentFile;
@@ -667,12 +672,12 @@ sub transcribeNotation($$$$) {
     # Check for presence of notation (indicated by a given tag).
     my $containsNotation = system ("grep -q \"$tag\" $currentFile");
     if ($containsNotation == 0) {
-        my $tmpFile = mktemp('tmp-XXXXX');
+        my $tmpFile = temporaryFile('notation', '.xml');
 
         print "Converting $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
 
-        unlink($currentFile);
+        $debug || unlink($currentFile);
         $currentFile = $tmpFile;
     }
     return $currentFile;
@@ -751,4 +756,12 @@ sub copyFonts($) {
     } elsif (-d "Processed/fonts") {
         system ("cp -r -u Processed/fonts " . $destination);
     }
+}
+
+
+sub temporaryFile($) {
+    my $phase = shift;
+    my $extension = shift;
+    $tmpCount++;
+    return $tmpBase . "-" . $tmpCount . "-" . $phase . $extension;
 }

@@ -612,7 +612,7 @@
                                             <xsl:when test="f:insideChoice(.)">
                                                 <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
                                                 <xsl:call-template name="generate-footnote-href-attribute">
-                                                    <xsl:with-param name="target" select="./ancestor::choice"/>
+                                                    <xsl:with-param name="target" select="./ancestor::*[not(f:insideChoice(.))][1]"/>
                                                 </xsl:call-template>
                                             </xsl:when>
                                             <xsl:otherwise>
@@ -623,7 +623,7 @@
                                     <xsl:when test="f:insideChoice(.)">
                                         <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
                                         <xsl:call-template name="generate-href-attribute">
-                                            <xsl:with-param name="target" select="./ancestor::choice"/>
+                                            <xsl:with-param name="target" select="./ancestor::*[not(f:insideChoice(.))][1]"/>
                                         </xsl:call-template>
                                     </xsl:when>
                                     <xsl:otherwise>
