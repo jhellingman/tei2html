@@ -23,6 +23,7 @@
 "<URA>"     e "<URA> om Arabic (Urdu) mode!!!"
 
 "-"         f               % hyphen disambiguates encoding, should disappear
+"--"        p "&mdash;"
 
 "\n"        p "\n"
 " "         p " "

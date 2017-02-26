@@ -108,7 +108,7 @@
         <xd:detail>Letterspace (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='ex'] | g ">
+    <xsl:template match="hi[@rend='ex'] | g">
         <span class="ex"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 
@@ -117,7 +117,7 @@
         <xd:detail>Upright (in an italic context) text, indicated with the <code>@rend</code> attribute value <code>rm</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='rm']">
+    <xsl:template match="hi[@rend='rm'] | rm">
         <span class="rm"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
     </xsl:template>
 

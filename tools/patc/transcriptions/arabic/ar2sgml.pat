@@ -23,6 +23,7 @@
 "<ARA>"     e "<ARA> om Arabic mode!!!"
 
 "-"         f               % hyphen disambiguates encoding, should disappear
+"--"        p "&mdash;"
 
 "\n"        p "\n"
 " "         p " "
