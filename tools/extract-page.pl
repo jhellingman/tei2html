@@ -9,11 +9,8 @@ my $xsldir          = $Bin . "/..";                    # location of xsl stylesh
 my $filename = $ARGV[0];
 my $page = $ARGV[1];
 
-if ($page eq '')
-{
+if ($page eq '') {
     system ("$saxon \"$filename\" $xsldir/extract-page.xsl");
-}
-else
-{
+} else {
     system ("$saxon \"$filename\" $xsldir/extract-page.xsl n=\"$page\"");
 }

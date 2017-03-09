@@ -69,6 +69,7 @@ BEGIN
     $langNameHash{"gl"}        = "Galician";
     $langNameHash{"gn"}        = "Guarani";
     $langNameHash{"gu"}        = "Gujarati";
+    $langNameHash{"gu-latn"}   = "Gujarati (Latin transcription)";
     $langNameHash{"gv"}        = "Gaelic (Manx)";
     $langNameHash{"ha"}        = "Hausa";
     $langNameHash{"he"}        = "Hebrew";

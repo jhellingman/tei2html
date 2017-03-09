@@ -16,10 +16,10 @@
 
 "&"         2 "&"           % copy entity.
 
-"</AR>"     0 "</foreign>"
+"</AR>"     0 "&lrm;</foreign>"
 "<AR>"      e "<AR> om Arabic mode!!!"
 
-"</ARA>"    0 ""
+"</ARA>"    0 "&lrm;"
 "<ARA>"     e "<ARA> om Arabic mode!!!"
 
 "-"         f               % hyphen disambiguates encoding, should disappear

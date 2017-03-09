@@ -6,8 +6,8 @@
 
 @rpatterns 1
 
-"</HE>"  0 "</foreign>"
-"</HE2>" 0 ""
+"</HE>"  0 "&lrm;</foreign>"
+"</HE2>" 0 "&lrm;"
 
 " "      p " "                  % space.
 

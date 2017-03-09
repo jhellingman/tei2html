@@ -5,18 +5,19 @@ use strict;
 my $infile = $ARGV[0];
 open(INPUTFILE, $infile) || die("Could not open input file $infile");
 
-my $mode = "normal";
+my $mode = "normal";    # normal | concat
+
 while (<INPUTFILE>) {
     my $line = $_;
     if ($mode eq "normal") {
-        if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]*)>/) {
+        if ($line =~ /^(<pb\b([^>]*)>)?(<q\b([^>]*)>)?<p\b([^>]*)>/) {
             print stripNewline($line);
             $mode = "concat";
         } else {
             print $line;
         }
     } elsif ($mode eq "concat") {
-        if ($line =~ /^(<pb n=[0-9]+>)?<p\b([^>]*)>/) {
+        if ($line =~ /^(<pb\b([^>]*)>)?<p\b([^>]*)>/) {
             print "\n\n";
             print stripNewline($line);
         } elsif ($line =~ /^\s$/) {
