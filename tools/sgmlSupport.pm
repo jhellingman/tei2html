@@ -1481,6 +1481,7 @@ BEGIN {
     $ent{"qmacr"}       = "q" . chr(0x0304); # q with macron
     $ent{"rmacr"}       = "r" . chr(0x0304); # r with macron
     $ent{"vmacr"}       = "v" . chr(0x0304); # v with macron
+    $ent{"Dmacr"}       = "D" . chr(0x0304); # D with macron
 
     $ent{"jbreve"}      = "j" . chr(0x0306); # j with breve
     $ent{"Jbreve"}      = "J" . chr(0x0306); # J with breve
