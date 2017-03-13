@@ -1656,7 +1656,11 @@ BEGIN {
     $ent{"ptildeb"}     = "p" . chr(0x0330); # p with tilde below
 
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
+    $ent{"bbarb"}       = "b" . chr(0x0331); # b with macron below
+    $ent{"Bbarb"}       = "B" . chr(0x0331); # B with macron below
     $ent{"cbarb"}       = "c" . chr(0x0331); # c with macron below
+    $ent{"dbarb"}       = "d" . chr(0x0331); # d with macron below
+    $ent{"Dbarb"}       = "D" . chr(0x0331); # D with macron below
     $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
     $ent{"Ebarb"}       = "E" . chr(0x0331); # E with macron below
     $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
@@ -1672,6 +1676,7 @@ BEGIN {
     $ent{"pbarb"}       = "p" . chr(0x0331); # p with macron below
     $ent{"Pbarb"}       = "P" . chr(0x0331); # P with macron below
     $ent{"tbarb"}       = "t" . chr(0x0331); # t with macron below
+    $ent{"Tbarb"}       = "T" . chr(0x0331); # T with macron below
     $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
     $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
 
@@ -1913,8 +1918,8 @@ BEGIN {
     $ent{"les"}         = chr(0x2264);  #  LESS-THAN OR EQUAL TO
     $ent{"ges"}         = chr(0x2265);  #  GREATER-THAN OR EQUAL TO
     $ent{"vprime"}      = chr(0x2032);  #  PRIME
-    $ent{"bbar"}        = chr(0x0180); # b with stroke through stem
-    $ent{"ayin"}        = chr(0x02BF);  # modifier letter left half ring
+    $ent{"bbar"}        = chr(0x0180);  #  b with stroke through stem
+    $ent{"ayin"}        = chr(0x02BF);  #  modifier letter left half ring
     $ent{"cupre"}       = chr(0x227C);  #  PRECEDES OR EQUAL TO
     $ent{"sccue"}       = chr(0x227D);  #  SUCCEEDS OR EQUAL TO
     $ent{"sfrown"}      = chr(0x2322);  #  FROWN
