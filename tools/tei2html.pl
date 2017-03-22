@@ -612,6 +612,7 @@ sub transcribe($) {
         $currentFile = transcribeNotation($currentFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
         $currentFile = transcribeNotation($currentFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
         $currentFile = transcribeNotation($currentFile, "<SY>",  "Syriac",                "$patcdir/syriac/sy2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, "<CO>",  "Coptic",                "$patcdir/coptic/co2sgml.pat");
     }
     return $currentFile;
 }

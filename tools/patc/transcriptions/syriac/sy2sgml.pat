@@ -5,6 +5,8 @@
 %   http://www.omniglot.com/writing/syriac.htm
 %   https://en.wikipedia.org/wiki/Syriac_alphabet
 %   http://ctan.sharelatex.com/tex-archive/language/aramaic/serto/sertodoc.pdf
+%   http://geonames.nga.mil/gns/html/Romanization/Modern_Syriac_Romanization_System_2011.pdf
+
 
 @patterns 0
 
@@ -114,22 +116,22 @@
 "+"         p "&#x0742;"    % SYRIAC RUKKAKHA (aspirated; "soft")
 
 % Syriac hard letters (doubled) begadkepat
-
-"bb"        p "&#x0712;&#x0741;"    % SYRIAC LETTER BETH + SYRIAC QUSHSHAYA
-"gg"        p "&#x0713;&#x0741;"    % SYRIAC LETTER GAMAL + SYRIAC QUSHSHAYA
-"dd"        p "&#x0715;&#x0741;"    % SYRIAC LETTER DALATH + SYRIAC QUSHSHAYA
-"kk"        p "&#x071F;&#x0741;"    % SYRIAC LETTER KAPH + SYRIAC QUSHSHAYA
-"pp"        p "&#x0726;&#x0741;"    % SYRIAC LETTER PE + SYRIAC QUSHSHAYA
-"tt"        p "&#x072C;&#x0741;"    % SYRIAC LETTER TAW + SYRIAC QUSHSHAYA
-
+% 
+% "bb"        p "&#x0712;&#x0741;"    % SYRIAC LETTER BETH + SYRIAC QUSHSHAYA
+% "gg"        p "&#x0713;&#x0741;"    % SYRIAC LETTER GAMAL + SYRIAC QUSHSHAYA
+% "dd"        p "&#x0715;&#x0741;"    % SYRIAC LETTER DALATH + SYRIAC QUSHSHAYA
+% "kk"        p "&#x071F;&#x0741;"    % SYRIAC LETTER KAPH + SYRIAC QUSHSHAYA
+% "pp"        p "&#x0726;&#x0741;"    % SYRIAC LETTER PE + SYRIAC QUSHSHAYA
+% "tt"        p "&#x072C;&#x0741;"    % SYRIAC LETTER TAW + SYRIAC QUSHSHAYA
+% 
 % Syriac soft letters (letter + rukkakha)
-
-"v"         p "&#x0712;&#x0742;"    % SYRIAC LETTER BETH + SYRIAC RUKKAKHA
-"gh"        p "&#x0713;&#x0742;"    % SYRIAC LETTER GAMAL + SYRIAC RUKKAKHA
-"dh"        p "&#x0715;&#x0742;"    % SYRIAC LETTER DALATH + SYRIAC RUKKAKHA
-"kh"        p "&#x071F;&#x0742;"    % SYRIAC LETTER KAPH + SYRIAC RUKKAKHA
-"f"         p "&#x0726;&#x0742;"    % SYRIAC LETTER PE + SYRIAC RUKKAKHA
-"th"        p "&#x072C;&#x0742;"    % SYRIAC LETTER TAW + SYRIAC RUKKAKHA
+% 
+% "v"         p "&#x0712;&#x0742;"    % SYRIAC LETTER BETH + SYRIAC RUKKAKHA
+% "gh"        p "&#x0713;&#x0742;"    % SYRIAC LETTER GAMAL + SYRIAC RUKKAKHA
+% "dh"        p "&#x0715;&#x0742;"    % SYRIAC LETTER DALATH + SYRIAC RUKKAKHA
+% "kh"        p "&#x071F;&#x0742;"    % SYRIAC LETTER KAPH + SYRIAC RUKKAKHA
+% "f"         p "&#x0726;&#x0742;"    % SYRIAC LETTER PE + SYRIAC RUKKAKHA
+% "th"        p "&#x072C;&#x0742;"    % SYRIAC LETTER TAW + SYRIAC RUKKAKHA
 
 
 @patterns 2 % copy entity in Syriac mode
