@@ -8,16 +8,14 @@ open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
 print STDERR "Handling $inputFile\n";
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $line = $_;
     $line = disambiguateQuotes($line);
     print $line;
 }
 
 
-sub disambiguateQuotes($)
-{
+sub disambiguateQuotes($) {
     my $line = shift;
 
     # After interpunction is most likely a close-quote:
@@ -33,7 +31,7 @@ sub disambiguateQuotes($)
     # [Feet or Minutes] after digits is most likely a prime:
     $line =~ s/([0-9])'(\s+)/\1\&prime;\2/gi;
 
-    # But if their is a space it is most likely an open-quote:
+    # But if there is a space it is most likely an open-quote:
     $line =~ s/([.,:;?!]\s+)'([a-z])/\1\&lsquo;\2/gi;
 
     # After open brace is most likely open-quote:
@@ -64,6 +62,3 @@ sub disambiguateQuotes($)
 
     return $line;
 }
-
-
-
