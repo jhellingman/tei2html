@@ -93,7 +93,7 @@ sub, sup {
 	background-color: inherit;
 }
 
-span.corr, span.abbr, span.measure {
+span.corr, span.num, span.abbr, span.trans, span.measure, abbr {
 	border-bottom: 0;
 }
 

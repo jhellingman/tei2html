@@ -136,7 +136,7 @@ span.corr, span.gap {
 	border-bottom: 1px dotted red;
 }
 
-span.abbr {
+span.num, span.trans, span.trans {
 	border-bottom: 1px dotted gray;
 }
 

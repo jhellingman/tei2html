@@ -359,7 +359,7 @@
 
     <!-- divGen types -->
 
-    <xsl:variable name="expectedDivGenTypes" select="'toc', 'loi', 'Colophon', 'IndexToc', 'apparatus'"/>
+    <xsl:variable name="expectedDivGenTypes" select="'toc', 'loi', 'Colophon', 'IndexToc', 'apparatus'" as="xs:string*"/>
 
     <xsl:template mode="checks" match="divGen">
         <xsl:call-template name="check-div-type-present"/>
@@ -395,7 +395,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum', 'intra', 'top', 'bottom'"/>
+    <xsl:variable name="expectedAbTypes" select="'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
@@ -403,6 +403,20 @@
 
     <xsl:template mode="checks" match="ab[@type and not(@type = $expectedAbTypes)]">
         <i:issue pos="{@pos}" code="C0015" element="{name(.)}">Unexpected type for ab (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+
+    <!-- Types of abbr (abbreviation) elements -->
+
+    <xsl:variable name="expectedAbbrTypes" select="'acronym', 'initialism', 'compass', 'compound', 'degree', 'era', 'name', 'postal', 'temperature', 'time', 'timezone'" as="xs:string*"/>
+
+    <xd:doc>
+        <xd:short>Check the types of <code>abbr</code> elements.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="abbr[@type and not(@type = $expectedAbbrTypes)]">
+        <i:issue pos="{@pos}" code="C0016" element="{name(.)}">Unexpected type for abbr (abbreviation) element: <xsl:value-of select="@type"/></i:issue>
         <xsl:next-match/>
     </xsl:template>
 

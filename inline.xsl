@@ -158,8 +158,8 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Hi-lighted text.</xd:short>
-        <xd:detail>Hi-lighted text with other values for the <code>@rend</code> attribute.</xd:detail>
+        <xd:short>Highlighted text.</xd:short>
+        <xd:detail>Highlighted text with other values for the <code>@rend</code> attribute.</xd:detail>
     </xd:doc>
 
     <xsl:template match="hi">
@@ -397,22 +397,18 @@
     </xd:doc>
 
     <xsl:template match="abbr">
-        <span class="abbr">
+        <abbr>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:if test="@type">
+                <xsl:attribute name="class" select="@type"/>
+            </xsl:if>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@expan"/>
                 </xsl:attribute>
             </xsl:if>
-            <abbr>
-                <xsl:if test="f:isSet('useMouseOverPopups')">
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="@expan"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates/>
-            </abbr>
-        </span>
+            <xsl:apply-templates/>
+        </abbr>
     </xsl:template>
 
 
@@ -420,21 +416,14 @@
     <!-- Numbers -->
 
     <xsl:template match="num">
-        <span class="abbr">
+        <span class="num">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@value"/>
                 </xsl:attribute>
             </xsl:if>
-            <abbr>
-                <xsl:if test="f:isSet('useMouseOverPopups')">
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="@value"/>
-                    </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates/>
-            </abbr>
+            <xsl:apply-templates/>
         </span>
     </xsl:template>
 
@@ -449,7 +438,7 @@
     </xd:doc>
 
     <xsl:template match="trans">
-        <span class="abbr">
+        <span class="trans">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">

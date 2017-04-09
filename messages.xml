@@ -49,6 +49,7 @@
         <msg:message name="msgCatalogEntry">Catalog entry</msg:message>
         <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
+        <msg:message name="msgEditDistance">Edit distance</msg:message>
 
         <msg:message name="msgAuthorOfAfterword">Author of afterword</msg:message>
         <msg:message name="msgAuthorOfColophon">Author of colophon</msg:message>

@@ -18,6 +18,8 @@
         <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="levenshtein.xsl"/>
+
     <!--====================================================================-->
     <!-- Colophon -->
 
@@ -342,6 +344,9 @@
                 <th><xsl:value-of select="f:message('msgPage')"/></th>
                 <th><xsl:value-of select="f:message('msgSource')"/></th>
                 <th><xsl:value-of select="f:message('msgCorrection')"/></th>
+                <xsl:if test="f:isSet('colophon.showEditDistance')">
+                    <th><xsl:value-of select="f:message('msgEditDistance')"/></th>
+                </xsl:if>
             </tr>
 
             <xsl:variable name="corrections">
@@ -380,6 +385,15 @@
                             </xsl:otherwise>
                         </xsl:choose>
                     </td>
+
+                    <xsl:if test="f:isSet('colophon.showEditDistance')">
+                        <td class="bottom">
+                            <xsl:value-of select="f:levenshtein(tmp:sic, tmp:corr)"/>
+                            <xsl:text> / </xsl:text>
+                            <xsl:value-of select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))"/>
+                        </td>
+                    </xsl:if>
+
                 </tr>
             </xsl:for-each-group>
 

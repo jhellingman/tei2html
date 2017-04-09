@@ -441,4 +441,19 @@
         <xsl:value-of select="if ($code) then $code else 'oth'"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Strip all diacritics from a string.</xd:short>
+        <xd:detail>
+            <p>Strip all diacritics from a string, by first putting the string in the Unicode 'NFKD' normalization form, and
+            then removing all characters in the category diacritic mark.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:stripDiacritics" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:value-of select="replace(normalize-unicode($string, 'NFKD'), '\p{M}' ,'')"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>
