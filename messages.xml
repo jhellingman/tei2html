@@ -38,6 +38,11 @@
 
         -->
 
+        <msg:message name="msgEditDistance">Edit distance</msg:message>
+        <msg:message name="msgAbbreviationOverview">Overview of abbreviations</msg:message>
+        <msg:message name="msgExpansion">Expansion</msg:message>
+        <msg:message name="msgExpansionNotAvailable">Expansion not available</msg:message>
+
         <msg:message name="msgTitle">Title</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
@@ -49,13 +54,12 @@
         <msg:message name="msgCatalogEntry">Catalog entry</msg:message>
         <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
-        <msg:message name="msgEditDistance">Edit distance</msg:message>
 
         <msg:message name="msgAuthorOfAfterword">Author of afterword</msg:message>
         <msg:message name="msgAuthorOfColophon">Author of colophon</msg:message>
         <msg:message name="msgAuthorOfPostface">Author of postface</msg:message>
         <msg:message name="msgAnnotator">Annotator</msg:message>
-        <msg:message name="msgBibliographicAntecedent">Bibliographic anteceden</msg:message>
+        <msg:message name="msgBibliographicAntecedent">Bibliographic antecedent</msg:message>
         <msg:message name="msgAuthorInQuotations">Author in quotations</msg:message>
         <msg:message name="msgAuthorInTextExtracts">Author in text extracts</msg:message>
         <msg:message name="msgArranger">Arranger</msg:message>
@@ -606,7 +610,7 @@
 
     <msg:messages xml:lang="de">
 
-	    <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadaten</msg:message>
         <msg:message name="msgInfo">Information</msg:message>
         <msg:message name="msgLanguage">Sprache</msg:message>
@@ -814,6 +818,14 @@
 
     <msg:messages xml:lang="nl">
 
+		<msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
+		<msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
+	
+        <msg:message name="msgEditDistance">Bewerkingsafstand</msg:message>
+        <msg:message name="msgAbbreviationOverview">Overzicht van afkortingen</msg:message>
+        <msg:message name="msgExpansion">Uitgeschreven</msg:message>
+        <msg:message name="msgExpansionNotAvailable">Uitgeschreven vorm niet beschikbaar</msg:message>
+    
         <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
@@ -827,6 +839,38 @@
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
         <msg:message name="msgAuthorOfPreface">Auteur van voorwoord</msg:message>
 
+        <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
+        <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
+        <msg:message name="msgAuthorOfPostface">Auteur van naschrift</msg:message>
+        <msg:message name="msgAnnotator">Annotator</msg:message>
+        <msg:message name="msgBibliographicAntecedent">Bibliografisch antecedent</msg:message>
+        <msg:message name="msgAuthorInQuotations">Auteur in citaten</msg:message>
+        <msg:message name="msgAuthorInTextExtracts">Auteur in textfragmenten</msg:message>
+        <msg:message name="msgArranger">Arrangeur</msg:message>
+        <msg:message name="msgArtist">Artiest</msg:message>
+        <msg:message name="msgAssociatedName">Gerelateerde naam</msg:message>
+        <msg:message name="msgAuthorOfForeword">Auteur van inleiding</msg:message>
+        <msg:message name="msgAuthorOfPreface">Auteur van voorwoord</msg:message>
+        <msg:message name="msgAuthor">Auteur</msg:message>
+        <msg:message name="msgBookProducer">Producent van boek</msg:message>
+        <msg:message name="msgCollaborator">Medewerker</msg:message>
+        <msg:message name="msgCommentator">Commentator</msg:message>
+        <msg:message name="msgDesigner">Ontwerper</msg:message>
+        <msg:message name="msgEditor">Redacteur</msg:message>
+        <msg:message name="msgLyricist">Tekstdichter</msg:message>
+        <msg:message name="msgMetadataContact">Contactpersoon voor metadata</msg:message>
+        <msg:message name="msgMusician">Musicus</msg:message>
+        <msg:message name="msgNarrator">Verteller</msg:message>
+        <msg:message name="msgOther">Anders</msg:message>
+        <msg:message name="msgPhotographer">Fotograaf</msg:message>
+        <msg:message name="msgPrinter">Drukker</msg:message>
+        <msg:message name="msgRedactor">Redacteur</msg:message>
+        <msg:message name="msgReviewer">Recensent</msg:message>
+        <msg:message name="msgSponsor">Sponsor</msg:message>
+        <msg:message name="msgThesisAdvisor">Scriptiebegeleider</msg:message>
+        <msg:message name="msgTranscriber">Transcribent</msg:message>
+        <msg:message name="msgTranslator">Vertaler</msg:message>
+        
         <msg:message name="msgAdaptor">Bewerker</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Bijdrager</msg:message>
@@ -886,7 +930,7 @@
         <msg:message name="msgIndex">Index</msg:message>
         <msg:message name="msgKeyword">Trefwoord</msg:message>
         <msg:message name="msgKeywords">Trefwoorden</msg:message>
-        <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress catalogus pagina</msg:message>
+        <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress cataloguspagina</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
         <msg:message name="msgLinkToMap">Link naar locatie op kaart</msg:message>
@@ -906,14 +950,16 @@
         <msg:message name="msgRole">Rol</msg:message>
         <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
+		<msg:message name="msgMissingTextWithReason">Ontbrekende tekst, om de volgende reden: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Volgende</msg:message>
         <msg:message name="msgNotApplicable">n.v.t.</msg:message>
         <msg:message name="msgNote">Noot</msg:message>
         <msg:message name="msgNotes">Noten</msg:message>
         <msg:message name="msgNotInSource">Niet in bron</msg:message>
-        <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat catalogus pagina</msg:message>
-        <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library catalogus pagina (voor bron)</msg:message>
-        <msg:message name="msgOpenLibraryCatalogWorkEntry">Gerelateerde Open Library catalogus pagina (voor werk)</msg:message>
+		<msg:message name="msgLibraryThingEntry">Gerelateerde Library Thing cataloguspagina</msg:message>
+        <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat cataloguspagina</msg:message>
+        <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library cataloguspagina (voor bron)</msg:message>
+        <msg:message name="msgOpenLibraryCatalogWorkEntry">Gerelateerde Open Library cataloguspagina (voor werk)</msg:message>
         <msg:message name="msgOriginal">Origineel</msg:message>
         <msg:message name="msgOriginals">Originelen</msg:message>
         <msg:message name="msgOrnament">Ornament</msg:message>
@@ -926,7 +972,7 @@
         <msg:message name="msgParagraphs">Alineas</msg:message>
         <msg:message name="msgPart">Deel</msg:message>
         <msg:message name="msgParts">Delen</msg:message>
-        <msg:message name="msgPgCatalogEntry">Project Gutenberg catalogus pagina</msg:message>
+        <msg:message name="msgPgCatalogEntry">Project Gutenberg cataloguspagina</msg:message>
         <msg:message name="msgPlate">Plaat</msg:message>
         <msg:message name="msgPlates">Platen</msg:message>
         <msg:message name="msgPreface">Voorwoord</msg:message>
@@ -982,9 +1028,12 @@
 
         <!-- Language designations: ID's are based on the offical ISO codes -->
 
+        <msg:message name="ar">Arabisch</msg:message>
+        <msg:message name="ar-latn">Arabisch (Latijnse transcriptie)</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="el">Grieks</msg:message>
+        <msg:message name="el-latn">Grieks (Latijnse transcriptie)</msg:message>
         <msg:message name="en">Engels</msg:message>
         <msg:message name="en-uk">Engels (V.K.)</msg:message>
         <msg:message name="en-us">Engels (V.S.)</msg:message>
@@ -992,16 +1041,26 @@
         <msg:message name="fi">Fins</msg:message>
         <msg:message name="fr">Frans</msg:message>
         <msg:message name="grc">Grieks (Klassiek)</msg:message>
+        <msg:message name="grc-latn">Grieks (Klassiek; Latijnse transcriptie)</msg:message>
+        <msg:message name="he">Hebreeuws</msg:message>
+        <msg:message name="he-latn">Hebreeuws (Latijnse transcriptie)</msg:message>
         <msg:message name="it">Italiaans</msg:message>
         <msg:message name="ja">Japans</msg:message>
         <msg:message name="la">Latijn</msg:message>
+        <msg:message name="la-x-bio">Latijn (Biologische naamgeving)</msg:message>
         <msg:message name="ms">Maleis</msg:message>
         <msg:message name="nl">Nederlands</msg:message>
         <msg:message name="nl-1900">Nederlands (Oude Spelling)</msg:message>
         <msg:message name="pt">Portugees</msg:message>
         <msg:message name="pt-br">Portugees (Brazilië)</msg:message>
         <msg:message name="pt-pt">Portugees (Portugal)</msg:message>
+        <msg:message name="ru">Russisch</msg:message>
+        <msg:message name="ru-1900">Russisch (Oude Spelling)</msg:message>
+        <msg:message name="ru-latn">Russisch (Latijnse transcriptie)</msg:message>
+        <msg:message name="sa">Sanskriet</msg:message>
+        <msg:message name="sa-latn">Sanskriet (Latijnse transcriptie)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
+        <msg:message name="ur">Urdu</msg:message>
         <msg:message name="zh">Chinees</msg:message>
 
         <!-- Creating a list of items -->

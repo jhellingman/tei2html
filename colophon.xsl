@@ -76,11 +76,18 @@
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/revisionDesc"/>
 
-        <xsl:call-template name="externalReferences"/>
+        <xsl:if test="f:isSet('colophon.showExternalReferences')">
+            <xsl:call-template name="externalReferences"/>
+        </xsl:if>
 
-        <xsl:if test="//corr">
+        <xsl:if test="f:isSet('colophon.showCorrections') and //corr">
             <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
             <xsl:call-template name="correctionTable"/>
+        </xsl:if>
+
+        <xsl:if test="f:isSet('colophon.showAbbreviations') and //abbr">
+            <h3 class="main"><xsl:value-of select="f:message('msgAbbreviations')"/></h3>
+            <xsl:call-template name="abbreviationTable"/>
         </xsl:if>
     </xsl:template>
 
@@ -388,9 +395,13 @@
 
                     <xsl:if test="f:isSet('colophon.showEditDistance')">
                         <td class="bottom">
-                            <xsl:value-of select="f:levenshtein(tmp:sic, tmp:corr)"/>
-                            <xsl:text> / </xsl:text>
-                            <xsl:value-of select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))"/>
+                            <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
+                            <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))" as="xs:integer"/>
+                            <xsl:value-of select="$editDistance"/>
+                            <xsl:if test="$editDistance != $normalizedEditDistance">
+                                <xsl:text> / </xsl:text>
+                                <xsl:value-of select="$normalizedEditDistance"/>
+                            </xsl:if>
                         </td>
                     </xsl:if>
 
@@ -402,7 +413,7 @@
 
 
     <xd:doc>
-        <xd:short>Convert a traditional <code>corr</code> element to a temporary <code>choice</code> element.</xd:short>
+        <xd:short>Convert a traditional <code>corr</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
     <xsl:template match="corr" mode="collectCorrections">
@@ -420,7 +431,7 @@
 
 
     <xd:doc>
-        <xd:short>Convert a correction in a <code>choice</code> element to a temporary choice element.</xd:short>
+        <xd:short>Convert a correction in a <code>tmp:choice</code> element to a temporary choice element.</xd:short>
     </xd:doc>
 
     <xsl:template match="choice" mode="collectCorrections">
@@ -452,6 +463,100 @@
         </xsl:choose>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- Abbreviations -->
+
+    <xd:doc>
+        <xd:short>Generate the contents of the list of abbreviations.</xd:short>
+        <xd:detail>
+            <p>Generate the contents of the list of abbreviations as an HTML table. Since abbreviations can be encoded
+            in two ways (as <code>abbr</code> elements in older TEI versions and as <code>choice</code> elements
+            in newer TEI versions), the two ways are collected and normalized into <code>tmp:choice</code> elements
+            in the variable <code>$abbreviations</code>. These are then grouped and rendered.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="abbreviationTable">
+        <p><xsl:value-of select="f:message('msgAbbreviationOverview')"/></p>
+
+        <table class="abbreviationtable">
+            <xsl:if test="$outputformat != 'epub'">
+                <xsl:attribute name="summary"><xsl:value-of select="f:message('msgAbbreviationOverview')"/></xsl:attribute>
+            </xsl:if>
+            <tr>
+                <th><xsl:value-of select="f:message('msgAbbreviation')"/></th>
+                <th><xsl:value-of select="f:message('msgExpansion')"/></th>
+            </tr>
+
+            <xsl:variable name="abbreviations">
+                <xsl:apply-templates select="//abbr[not(parent::choice)] | //choice[abbr]" mode="collectAbbreviations"/>
+            </xsl:variable>
+
+            <xsl:variable name="abbreviations">
+                <xsl:for-each select="$abbreviations/tmp:choice">
+                    <xsl:variable name="abbr" select="tmp:abbr" as="xs:string"/>
+                    <xsl:choose>
+                        <!-- If we have no expansion, but we do have a case of this abbreviation with an expansion then forget about it. -->
+                        <xsl:when test="tmp:expan = '' and $abbreviations/tmp:choice[string(tmp:abbr) = $abbr and tmp:expan != '']"/>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="."/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </xsl:variable>
+
+            <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="concat(tmp:abbr, '@@@', tmp:expan)">            
+                <tr>
+                    <td class="bottom">
+                        <xsl:apply-templates select="tmp:abbr"/>
+                    </td>
+                    <td class="bottom">
+                        <xsl:choose>
+                            <xsl:when test="tmp:expan != ''">
+                                <xsl:apply-templates select="tmp:expan"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                [<i><xsl:value-of select="f:message('msgExpansionNotAvailable')"/></i>]
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </td>
+                </tr>
+            </xsl:for-each-group>
+        </table>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Convert a traditional <code>abbr</code> element to a <code>tmp:choice</code> element.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="abbr" mode="collectAbbreviations">
+        <tmp:choice>
+            <tmp:abbr>
+                <xsl:copy-of select="* | text()"/>
+            </tmp:abbr>
+            <tmp:expan>
+                <xsl:value-of select="@expan"/>
+            </tmp:expan>
+        </tmp:choice>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Convert an abbreviation in a <code>choice</code> element to a <code>tmp:choice</code> element.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="choice" mode="collectAbbreviations">
+        <tmp:choice>
+            <tmp:abbr>
+                <xsl:copy-of select="abbr/* | abbr/text()"/>
+            </tmp:abbr>
+            <tmp:expan>
+                <xsl:copy-of select="expan/* | expan/text()"/>
+            </tmp:expan>
+         </tmp:choice>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- External References -->
@@ -460,9 +565,8 @@
         <xd:short>Generate a table of external references.</xd:short>
         <xd:detail>
             <p>Generate a table of external references in the text, as indicated by <code>xref</code>-elements or
-            <code>ref</code>-elements. Identical
-            external references are grouped together. The page numbers link back to location the external
-            reference appears in the text.</p>
+            <code>ref</code>-elements. Identical external references are grouped together. The page numbers link 
+            back to the location the external reference appears in the text.</p>
         </xd:detail>
     </xd:doc>
 
