@@ -107,8 +107,7 @@
     </xd:doc>
 
     <xsl:template match="div1[@type='TranscriberNote']">
-        <div class="transcribernote">
-            <xsl:call-template name="generate-id-attribute"/>
+        <div class="transcribernote" id="{f:generate-id(.)}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>

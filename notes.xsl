@@ -49,8 +49,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='foot' or @place='unspecified' or not(@place)]">
-        <a class="noteref">
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
+        <a class="noteref" id="{f:generate-id(.)}src">
             <xsl:call-template name="generate-footnote-href-attribute"/>
             <xsl:call-template name="footnote-number"/>
         </a>
@@ -160,8 +159,7 @@
     <xsl:template name="footnote-marker">
         <xsl:call-template name="set-lang-attribute"/>
         <span class="label">
-            <a class="noteref">
-                <xsl:call-template name="generate-id-attribute"/>
+            <a class="noteref" id="{f:generate-id(.)}">
                 <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
                 <xsl:call-template name="footnote-number"/>
             </a>
@@ -261,8 +259,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
-        <a class="apparatusnote">
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>src</xsl:attribute>
+        <a class="apparatusnote" id="{f:generate-id(.)}src">
             <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
@@ -465,8 +462,7 @@
     </xsl:template>
 
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="collect-apparatus">
-        <tmp:span>
-            <xsl:call-template name="generate-id-attribute-for"/>
+        <tmp:span id="{f:generate-id(.)}">
             <xsl:attribute name="rend" select="@rend"/>
             <xsl:attribute name="lang" select="@lang"/>
             <xsl:for-each select="*|text()">
@@ -481,10 +477,7 @@
     </xsl:template>
 
     <xsl:template match="p" mode="collect-apparatus-first">
-        <tmp:span>
-            <xsl:call-template name="generate-id-attribute-for">
-                <xsl:with-param name="node" select="ancestor::note[1]"/>
-            </xsl:call-template>
+        <tmp:span id="{f:generate-id(ancestor::note[1])}">
             <xsl:attribute name="rend" select="ancestor::note[1]/@rend"/>
             <xsl:attribute name="lang" select="ancestor::note[1]/@lang"/>
             <xsl:for-each select="*|text()">

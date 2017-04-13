@@ -607,11 +607,8 @@
                                 <xsl:if test="position() != 1">
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
-                                <a class="pageref">
+                                <a class="pageref" id="{f:generate-id(.)}ext">
                                     <xsl:call-template name="generate-href-attribute"/>
-                                    <xsl:attribute name="id">
-                                        <xsl:call-template name="generate-id"/><xsl:text>ext</xsl:text>
-                                    </xsl:attribute>
                                     <xsl:value-of select="f:find-page-number(.)"/>
                                 </a>
                             </xsl:for-each>

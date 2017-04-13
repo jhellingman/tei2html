@@ -119,7 +119,7 @@
                             <xsl:call-template name="generate-image-wrapper">
                                 <xsl:with-param name="imagefile" select="$url"/>
                             </xsl:call-template>
-                            <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                            <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:attribute>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:attribute name="href">
@@ -251,7 +251,7 @@
     <xsl:template name="generate-image-wrapper">
         <xsl:param name="imagefile" as="xs:string"/>
 
-        <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:variable>
+        <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:variable>
 
         <xsl:variable name="alt">
             <xsl:choose>
@@ -329,7 +329,7 @@
             </xsl:variable>
 
             <xsl:if test="$width != ''">
-.x<xsl:value-of select="generate-id()"/>width {
+.<xsl:value-of select="f:generate-id(.)"/>width {
     width:<xsl:value-of select="$width"/>;
 }
             </xsl:if>
@@ -369,7 +369,7 @@
                     <xsl:if test="f:rend-value(@rend, 'float') = 'right'">floatRight </xsl:if>
                     <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
                     <!-- Add the class that sets the width, if the width is known -->
-                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
                 <xsl:call-template name="figure-head-top"/>
@@ -409,7 +409,7 @@
             <div>
                 <xsl:attribute name="class">
                     <xsl:text>figAnnotation </xsl:text>
-                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopLeft']">
@@ -442,7 +442,7 @@
             <div>
                 <xsl:attribute name="class">
                     <xsl:text>figAnnotation </xsl:text>
-                    <xsl:if test="$width != ''">x<xsl:value-of select="generate-id()"/><xsl:text>width</xsl:text></xsl:if>
+                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
                 <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomLeft']">

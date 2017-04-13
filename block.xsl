@@ -128,8 +128,7 @@
         <xsl:variable name="context" select="." as="element(pb)"/>
         <span class="pagenum">
             <xsl:text>[</xsl:text>
-            <a>
-                <xsl:call-template name="generate-id-attribute"/>
+            <a id="{f:generate-id(.)}">
                 <xsl:call-template name="generate-href-attribute"/>
                 <xsl:value-of select="@n"/>
             </a>
@@ -201,9 +200,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <hr class="tb">
-                    <xsl:call-template name="generate-id-attribute"/>
-                </hr>
+                <hr class="tb" id="{f:generate-id(.)}"/>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>
@@ -215,7 +212,8 @@
         <xsl:variable name="context" select="." as="element(milestone)"/>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">tb</xsl:attribute>
-            <xsl:call-template name="generate-id-attribute"/><xsl:value-of select="$string"/>
+            <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
+            <xsl:value-of select="$string"/>
         </xsl:element>
     </xsl:template>
 

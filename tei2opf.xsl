@@ -186,9 +186,7 @@
 
     <xsl:template match="author" mode="metadata">
 
-        <xsl:variable name="id">
-            <xsl:call-template name="generate-id"/><xsl:text>metadata</xsl:text>
-        </xsl:variable>
+        <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
 
         <dc:creator id="{$id}">
             <xsl:value-of select="."/>
@@ -212,9 +210,7 @@
 
     <xsl:template match="respStmt" mode="metadata">
 
-        <xsl:variable name="id">
-            <xsl:call-template name="generate-id"/><xsl:text>metadata</xsl:text>
-        </xsl:variable>
+        <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
 
         <dc:contributor id="{$id}">
             <xsl:value-of select="name"/>
@@ -442,7 +438,7 @@
 
         <!-- Entry for the .smil file itself. -->
         <item>
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/>overlay</xsl:attribute>
+            <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/>overlay</xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/smil+xml</xsl:attribute>
         </item>
@@ -462,7 +458,7 @@
 
     <xsl:template match="smil:audio[@src]" mode="manifest-smil">
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.mp3$', '')"/></xsl:variable>
-        <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
+        <xsl:variable name="id" select="f:generate-id(.)"/>
 
         <xsl:copy-of select="f:logDebug('Adding audio: {1}; begin: {2}; end: {3}.', (@src, @clipBegin, @clipEnd))"/>
 
@@ -623,7 +619,7 @@
             <xsl:if test="@id = 'cover-image'">
                 <xsl:attribute name="properties">cover-image</xsl:attribute>
             </xsl:if>
-            <xsl:attribute name="id"><xsl:call-template name="generate-id"/><xsl:value-of select="$how"/></xsl:attribute>
+            <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/><xsl:value-of select="$how"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
             <xsl:attribute name="media-type"><xsl:value-of select="$mimetype"/></xsl:attribute>
         </item>
@@ -686,9 +682,7 @@
 
             <!-- Only for local images: add the generated HTML wrapper to the spine -->
             <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
-                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no">
-                    <xsl:attribute name="idref"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
-                </itemref>
+                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="{concat(f:generate-id(.), 'wrapper')}"/>
             </xsl:if>
         </xsl:if>
     </xsl:template>

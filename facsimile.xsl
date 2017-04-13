@@ -77,8 +77,7 @@
 
 
 <xsl:template name="main-facsimile-css">
-.facslink
-{
+.facslink {
     background-image: url(images/page-image.png);
     padding-right: 10px;
 }
@@ -95,9 +94,7 @@
 
     <xsl:variable name="filename">
         <xsl:text>page-</xsl:text>
-            <xsl:call-template name="generate-id-for">
-                <xsl:with-param name="node" select="$node"/>
-            </xsl:call-template>
+        <xsl:value-of select="f:generate-id($node)"/>
         <xsl:text>.html</xsl:text>
     </xsl:variable>
 
@@ -328,7 +325,7 @@
     <xsl:variable name="div-parent" select="($pb/ancestor::front | $pb/ancestor::body | $pb/ancestor::back | $pb/ancestor::div0 | $pb/ancestor::div1 | $pb/ancestor::div2 | $pb/ancestor::div3)"/>
 
     <xsl:for-each select="$div-parent">
-        <!-- Need to store parent-id as we cannot access the context node in the second line below. -->
+        <!-- Need to store parent-id as we cannot access the context node in the second line below. TODO: use context() -->
         <xsl:variable name="parent-id" select="generate-id(.)"/>
         <xsl:variable name="following-pb" select="$pb/following::node()[ancestor::*[generate-id() = $parent-id]]"/>
         <xsl:variable name="following-pb-length" select="string-length(normalize-space(string-join($following-pb, '')))"/>

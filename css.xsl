@@ -293,7 +293,7 @@
         <xsl:param name="rend" select="@rend" as="xs:string?"/>
         <xsl:param name="node" select="." as="element()"/>
 
-        <xsl:text>x</xsl:text><xsl:value-of select="generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
+        <xsl:value-of select="f:generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
     </xsl:template>
 
 

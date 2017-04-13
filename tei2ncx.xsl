@@ -114,12 +114,7 @@
         <xsl:param name="label" as="xs:string"/>
 
         <xsl:if test="$node">
-            <navPoint class="{$class}">
-                <xsl:attribute name="id">
-                    <xsl:call-template name="generate-id-for">
-                        <xsl:with-param name="node" select="$node"/>
-                    </xsl:call-template>
-                </xsl:attribute>
+            <navPoint class="{$class}" id="{f:generate-id($node)}">
                 <navLabel><text><xsl:value-of select="$label"/></text></navLabel>
                 <content>
                     <xsl:attribute name="src">
@@ -172,8 +167,7 @@
             <xsl:variable name="label" select="f:create-label(.)"/>
 
             <xsl:if test="$label != ''">
-                <navPoint class="part">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                <navPoint class="part" id="{f:generate-id(.)}">
                     <navLabel>
                         <text>
                             <xsl:value-of select="$label"/>
@@ -199,8 +193,7 @@
             <xsl:variable name="label" select="f:create-label(.)"/>
 
             <xsl:if test="$label != ''">
-                <navPoint class="chapter">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                <navPoint class="chapter" id="{f:generate-id(.)}">
                     <navLabel>
                         <text>
                             <xsl:value-of select="$label"/>
@@ -226,8 +219,7 @@
             <xsl:variable name="label" select="f:create-label(.)"/>
 
             <xsl:if test="$label != ''">
-                <navPoint class="section">
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/></xsl:attribute>
+                <navPoint class="section" id="{f:generate-id(.)}">
                     <navLabel>
                         <text>
                             <xsl:value-of select="$label"/>

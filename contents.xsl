@@ -478,8 +478,7 @@
     </xsl:template>
 
     <xsl:template name="genindextoc">
-        <div class="transcribernote indextoc">
-            <xsl:call-template name="generate-id-attribute"/>
+        <div class="transcribernote indextoc" id="{f:generate-id(.)}">
             <xsl:apply-templates select="../div2/head | ../div3/head | ../div/head" mode="genindextoc"/>
         </div>
     </xsl:template>
@@ -611,12 +610,8 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="genloi">
-        <li>
-            <xsl:attribute name="id">
-                <!-- TODO: make id unique for each occurance of <divGen type="loi"> -->
-                <xsl:text>loi.</xsl:text>
-                <xsl:call-template name="generate-id"/>
-            </xsl:attribute>
+        <!-- TODO: make id unique for each occurance of <divGen type="loi"> -->
+        <li id="loi.{f:generate-id(.)}">
             <xsl:call-template name="set-lang-attribute"/>
             <xsl:call-template name="generate-toc-entry"/>
         </li>

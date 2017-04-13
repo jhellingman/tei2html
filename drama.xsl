@@ -150,9 +150,7 @@
     </xd:doc>
 
     <xsl:template match="lb[@ed]">
-        <a>
-            <xsl:call-template name="generate-id-attribute"/>
-        </a>
+        <a id="{f:generate-id(.)}"/>
     </xsl:template>
 
 
@@ -162,9 +160,7 @@
     </xd:doc>
 
     <xsl:template match="lb">
-        <br>
-            <xsl:call-template name="generate-id-attribute"/>
-        </br>
+        <br id="{f:generate-id(.)}"/>
     </xsl:template>
 
 

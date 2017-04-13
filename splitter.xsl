@@ -320,12 +320,9 @@
         <xsl:param name="nodes" as="node()*"/>
 
         <item xmlns="http://www.idpf.org/2007/opf">
-            <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
+            <xsl:variable name="id" select="f:generate-id(.)"/>
             <xsl:attribute name="id">
-                <xsl:call-template name="generate-id-for">
-                    <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="position()"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:generate-nth-id(.., position())"/>
             </xsl:attribute>
             <xsl:attribute name="href">
                 <xsl:call-template name="generate-filename-for">
@@ -364,7 +361,7 @@
 
     <xsl:template name="manifest.div">
         <item xmlns="http://www.idpf.org/2007/opf">
-            <xsl:variable name="id"><xsl:call-template name="generate-id"/></xsl:variable>
+            <xsl:variable name="id" select="f:generate-id(.)"/>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
             <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
@@ -386,10 +383,7 @@
 
         <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
             <xsl:attribute name="idref">
-                <xsl:call-template name="generate-id-for">
-                    <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="position()"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:generate-nth-id(.., position())"/>
             </xsl:attribute>
         </itemref>
     </xsl:template>
@@ -402,9 +396,7 @@
     <xsl:template name="spine.div">
         <!-- filter out the cover, as we have placed it first already -->
         <xsl:if test="@id != 'cover'">
-            <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
-                <xsl:attribute name="idref"><xsl:call-template name="generate-id"/></xsl:attribute>
-            </itemref>
+            <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="{f:generate-id(.)}"/>
         </xsl:if>
     </xsl:template>
 
@@ -430,10 +422,7 @@
                         <xsl:call-template name="set-class-attribute-for-body"/>
                         <xsl:choose>
                             <xsl:when test="(parent::div0 or parent::div1 or parent::div) and position() = 1">
-                                <div class="{name(..)}">
-                                    <xsl:call-template name="generate-id-attribute-for">
-                                        <xsl:with-param name="node" select=".."/>
-                                    </xsl:call-template>
+                                <div class="{name(..)}" id="{f:generate-id(..)}">
                                     <xsl:call-template name="generate-label">
                                         <xsl:with-param name="div" select=".."/>
                                     </xsl:call-template>
@@ -517,9 +506,7 @@
                 <xsl:otherwise>
                     <xsl:value-of select="$basename"/>
                     <xsl:text>-</xsl:text>
-                    <xsl:call-template name="generate-id-for">
-                        <xsl:with-param name="node" select="$node"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="f:generate-id($node)"/>
                     <xsl:if test="$position">
                         <xsl:text>-</xsl:text>
                         <xsl:value-of select="$position"/>
@@ -558,17 +545,7 @@
 
     <xsl:template name="splitter-generate-id">
         <xsl:param name="node" select="." as="element()"/>
-
-        <xsl:choose>
-            <xsl:when test="$node/@id">
-                <xsl:value-of select="$node/@id"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text>x</xsl:text>
-                <xsl:value-of select="generate-id($node)"/>
-                <xsl:copy-of select="f:logWarning('Generated id x{1} is not stable between runs of XSLT.', (generate-id($node)))"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="f:generate-id($node)"/>
     </xsl:template>
 
 

@@ -192,8 +192,7 @@
             <xsl:when test="f:isSet('outputExternalLinksTable')">
                 <xsl:choose>
                     <xsl:when test="//divGen[@type='Colophon']">
-                        <a>
-                            <xsl:call-template name="generate-id-attribute"/>
+                        <a id="{f:generate-id(.)}">
                             <xsl:call-template name="generate-xref-table-href-attribute"/>
                             <xsl:apply-templates/>
                         </a>

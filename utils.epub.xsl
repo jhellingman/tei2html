@@ -36,7 +36,7 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/>
     </xsl:template>
 
 
@@ -85,7 +85,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/>
     </xsl:template>
 
 
@@ -106,7 +106,7 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template>
+        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/>
     </xsl:template>
 
 
@@ -133,7 +133,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:call-template name="generate-id-for"><xsl:with-param name="node" select="$target"/></xsl:call-template><xsl:text>ext</xsl:text>
+        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/><xsl:text>ext</xsl:text>
     </xsl:template>
 
 

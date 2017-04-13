@@ -219,7 +219,7 @@
     </xd:doc>
 
     <xsl:template match="anchor">
-        <a><xsl:call-template name="generate-id-attribute"/><xsl:apply-templates/></a>
+        <a id="{f:generate-id(.)}"><xsl:apply-templates/></a>
     </xsl:template>
 
 
@@ -287,9 +287,7 @@
             </xsl:when>
             <!-- Don't generate an empty span, as that will be purged by some HTML tools -->
             <xsl:when test="not($corr) or $corr = ''">
-                <a>
-                    <xsl:call-template name="generate-id-attribute"/>
-                </a>
+                <a id="{f:generate-id(.)}"/>
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">
@@ -364,7 +362,7 @@
         <span>
             <xsl:attribute name="class">
                 <xsl:text>space </xsl:text>
-                <xsl:text>x</xsl:text><xsl:value-of select="generate-id()"/><xsl:text>space</xsl:text>
+                <xsl:value-of select="f:generate-id(.)"/><xsl:text>space</xsl:text>
             </xsl:attribute>
             <!-- Insert a zero-width space to prevent tidy from removing up this span. -->
             <xsl:text>&zwsp;</xsl:text>
@@ -381,7 +379,7 @@
         <xsl:variable name="unit" select="if ($unit = ('char', 'chars')) then 'em' else $unit"/>
 
         <!-- Cannot set width of span, so set padding-left -->
-.x<xsl:value-of select="generate-id()"/>space {
+.<xsl:value-of select="f:generate-id(.)"/>space {
    padding-left: <xsl:value-of select="$quantity"/><xsl:value-of select="$unit"/>
 }
     </xsl:template>
