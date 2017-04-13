@@ -91,9 +91,7 @@
                         </xsl:when>
 
                         <xsl:otherwise>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="$targetNode"/>
-                            </xsl:call-template>
+                            <xsl:attribute name="href" select="f:generate-href($targetNode)"/>
                         </xsl:otherwise>
                     </xsl:choose>
 

@@ -403,7 +403,7 @@
 <xsl:template match="front | body | back" mode="breadcrumbs">
     <a>
         <xsl:attribute name="href">
-            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:value-of select="f:generate-href(.)"/>
         </xsl:attribute>
 
         <xsl:choose>
@@ -418,7 +418,7 @@
 <xsl:template match="div0 | div1 | div2 | div3" mode="breadcrumbs">
     <a>
         <xsl:attribute name="href">
-            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:value-of select="f:generate-href(.)"/>
         </xsl:attribute>
 
         <!-- TODO: neatly render head for this purpose, and handle case it is missing -->
@@ -430,7 +430,7 @@
 <xsl:template match="pb" mode="breadcrumbs">
     <a>
         <xsl:attribute name="href">
-            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:call-template name="generate-href"/>
+            <xsl:text>../</xsl:text><xsl:value-of select="$basename"/>.html<xsl:value-of select="f:generate-href(.)"/>
         </xsl:attribute>
 
         <xsl:value-of select="f:message('msgPage')"/>

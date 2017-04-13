@@ -128,8 +128,7 @@
         <xsl:variable name="context" select="." as="element(pb)"/>
         <span class="pagenum">
             <xsl:text>[</xsl:text>
-            <a id="{f:generate-id(.)}">
-                <xsl:call-template name="generate-href-attribute"/>
+            <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
                 <xsl:value-of select="@n"/>
             </a>
             <xsl:text>]</xsl:text>

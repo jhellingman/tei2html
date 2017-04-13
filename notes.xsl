@@ -159,8 +159,7 @@
     <xsl:template name="footnote-marker">
         <xsl:call-template name="set-lang-attribute"/>
         <span class="label">
-            <a class="noteref" id="{f:generate-id(.)}">
-                <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
+            <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
                 <xsl:call-template name="footnote-number"/>
             </a>
         </span>
@@ -176,14 +175,8 @@
     <xsl:template name="footnote-return-arrow">
         <xsl:if test="f:isSet('useFootnoteReturnArrow')">
             <xsl:text>&nbsp;</xsl:text>
-            <a class="fnarrow">
-                <xsl:attribute name="href">
-                    <xsl:call-template name="generate-href">
-                        <!-- Take care to pick the first ancestor, to work correctly with nested footnotes. -->
-                        <xsl:with-param name="target" select="ancestor-or-self::note[1]"/>
-                    </xsl:call-template>
-                    <xsl:text>src</xsl:text>
-                </xsl:attribute>
+            <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
+            <a class="fnarrow" href="{f:generate-href(ancestor-or-self::note[1])}src">
                 <xsl:text>&uparrow;</xsl:text>
             </a>
         </xsl:if>
@@ -416,8 +409,7 @@
 
     <xsl:template name="apparatus-note-marker">
         <span class="label">
-            <a class="apparatusnote">
-                <xsl:attribute name="href"><xsl:call-template name="generate-href"/>src</xsl:attribute>
+            <a class="apparatusnote" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
             </a>
         </span>

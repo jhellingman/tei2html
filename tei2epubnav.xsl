@@ -79,10 +79,7 @@
             <ol>
                 <xsl:for-each select="//pb[@n and not(ancestor::note)]">
                     <li>
-                        <a>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="."/>
-                            </xsl:call-template>
+                        <a href="{f:generate-href(.)}">
                             <xsl:value-of select="@n"/>
                         </a>
                     </li>
@@ -104,13 +101,9 @@
         <nav epub:type="landmarks" id="guide">
             <h2><xsl:value-of select="f:message('msgGuide')"/></h2>
             <ol>
-                
                 <xsl:if test="//figure[@id='cover-image']">
                     <li>
-                        <a epub:type="cover">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//figure[@id='cover-image'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="cover" href="{f:generate-href((//figure[@id='cover-image'])[1])}">
                             <xsl:value-of select="f:message('msgCover')"/>
                         </a>
                     </li>
@@ -118,10 +111,7 @@
 
                 <xsl:if test="//*[@id='toc'] | //divGen[@type='toc']">
                     <li>
-                        <a epub:type="toc">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@id='toc'] | //divGen[@type='toc'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="toc" href="{f:generate-href((//*[@id='toc'] | //divGen[@type='toc'])[1])}">
                             <xsl:value-of select="f:message('msgToc')"/>
                         </a>
                     </li>
@@ -129,10 +119,7 @@
 
                 <xsl:if test="//*[@id='loi']">
                     <li>
-                        <a epub:type="loi">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@id='loi'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="loi" href="{f:generate-href((//*[@id='loi'])[1])}">
                             <xsl:value-of select="f:message('msgToc')"/>
                         </a>
                     </li>
@@ -140,10 +127,7 @@
 
                 <xsl:if test="//frontmatter/div1">
                     <li>
-                        <a epub:type="frontmatter">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//frontmatter/div1)[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="frontmatter" href="{f:generate-href((//frontmatter/div1)[1])}">
                             <xsl:value-of select="f:message('msgFrontMatter')"/>
                         </a>
                     </li>
@@ -151,10 +135,7 @@
 
                 <xsl:if test="//titlePage">
                     <li>
-                        <a epub:type="titlepage">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//titlePage)[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="titlepage" href="{f:generate-href((//titlePage)[1])}">
                             <xsl:value-of select="f:message('msgTitlePage')"/>
                         </a>
                     </li>
@@ -162,10 +143,7 @@
 
                 <xsl:if test="//*[@type='Preface']">
                     <li>
-                        <a epub:type="preface">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@type='Preface'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="preface" href="{f:generate-href((//*[@type='Preface'])[1])}">
                             <xsl:value-of select="f:message('msgPreface')"/>
                         </a>
                     </li>
@@ -173,10 +151,7 @@
 
                 <xsl:if test="//body/div0|//body/div1">
                     <li>
-                        <a epub:type="bodymatter">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//body/div0|//body/div1)[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="bodymatter" href="{f:generate-href((//body/div0|//body/div1)[1])}">
                             <xsl:value-of select="f:message('msgBodyMatter')"/>
                         </a>
                     </li>
@@ -184,10 +159,7 @@
 
                 <xsl:if test="//backmatter/div1">
                     <li>
-                        <a epub:type="frontmatter">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//backmatter/div1)[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="frontmatter" href="{f:generate-href((//backmatter/div1)[1])}">
                             <xsl:value-of select="f:message('msgBackMatter')"/>
                         </a>
                     </li>
@@ -195,10 +167,7 @@
 
                 <xsl:if test="//*[@type='Glossary']">
                     <li>
-                        <a epub:type="glossary">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@type='Glossary'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="glossary" href="{f:generate-href((//*[@type='Glossary'])[1])}">
                             <xsl:value-of select="f:message('msgGlossary')"/>
                         </a>
                     </li>
@@ -206,10 +175,7 @@
 
                 <xsl:if test="//*[@type='Bibliography']">
                     <li>
-                        <a epub:type="bibliography">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@type='Bibliography'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="bibliography" href="{f:generate-href((//*[@type='Bibliography'])[1])}">
                             <xsl:value-of select="f:message('msgBibliography')"/>
                         </a>
                     </li>
@@ -217,15 +183,11 @@
 
                 <xsl:if test="//*[@type='Index']">
                     <li>
-                        <a epub:type="index">
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="(//*[@type='Index'])[1]"/>
-                            </xsl:call-template>
+                        <a epub:type="index" href="{f:generate-href((//*[@type='Index'])[1])}">
                             <xsl:value-of select="f:message('msgIndex')"/>
                         </a>
                     </li>
                 </xsl:if>
-
             </ol>
         </nav>
     </xsl:template>

@@ -40,6 +40,20 @@
     </xsl:template>
 
 
+    <xsl:function name="f:generate-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
+
+        <xsl:variable name="targetfile">
+            <xsl:call-template name="splitter-generate-filename-for">
+                <xsl:with-param name="node" select="$target"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
+    </xsl:function>
+
+
+
     <xd:doc>
         <xd:short>Generate an href attribute for a footnote.</xd:short>
         <xd:detail>

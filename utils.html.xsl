@@ -11,6 +11,7 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     exclude-result-prefixes="xd"
@@ -38,6 +39,13 @@
         <xsl:text>#</xsl:text>
         <xsl:value-of select="f:generate-id($target)"/>
     </xsl:template>
+
+
+    <xsl:function name="f:generate-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
+
+        <xsl:value-of select="concat('#', f:generate-id($target))"/>
+    </xsl:function>
 
 
     <!-- footnote href attributes are the same as normal hrefs in

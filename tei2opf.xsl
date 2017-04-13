@@ -360,7 +360,7 @@
     <xd:doc>
         <xd:short>Generate manifest entries for the main divisions of the text.</xd:short>
         <xd:detail>
-            <p>Generate manifest entries for the main. To make sure the divisions are determined in the 
+            <p>Generate manifest entries for the main. To make sure the divisions are determined in the
             same way as when they are generated, the same splitter templates are used to achieve this.
             See <code>splitter.xsl</code> for details.</p>
         </xd:detail>
@@ -568,9 +568,8 @@
                     <xsl:with-param name="how" select="'link'"/>
                 </xsl:call-template>
                 <!-- Also add the generated wrapper HTML to the manifest -->
-                <item>
-                    <xsl:attribute name="id"><xsl:call-template name="generate-id"/>wrapper</xsl:attribute>
-                    <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:call-template name="generate-id"/>.xhtml</xsl:attribute>
+                <item id="{f:generate-id(.)}wrapper">
+                    <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:attribute>
                     <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
                 </item>
             </xsl:if>
@@ -721,115 +720,101 @@
             </xsl:if>
 
             <xsl:if test="key('id', 'toc')">
-                <reference type="toc" title="{f:message('msgTableOfContents')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="key('id', 'toc')[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="toc"
+                    title="{f:message('msgTableOfContents')}"
+                    href="{f:generate-href(key('id', 'toc')[1])}"/>
             </xsl:if>
 
             <xsl:if test="key('id', 'loi')">
-                <reference type="loi" title="{f:message('msgListOfIllustrations')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="key('id', 'loi')[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="loi"
+                    title="{f:message('msgListOfIllustrations')}"
+                    href="{f:generate-href(key('id', 'loi')[1])}"/>
             </xsl:if>
 
             <xsl:if test="key('id', 'lot')">
-                <reference type="lot" title="{f:message('msgListOfTables')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="key('id', 'lot')[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="lot"
+                    title="{f:message('msgListOfTables')}"
+                    href="{f:generate-href(key('id', 'lot')[1])}"/>
             </xsl:if>
 
             <xsl:if test="/*[self::TEI.2 or self::TEI]/text/front/titlePage">
-                <reference type="title-page" title="{f:message('msgTitlePage')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(/*[self::TEI.2 or self::TEI]/text/front/titlePage)[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="title-page"
+                    title="{f:message('msgTitlePage')}"
+                    href="{f:generate-href((/*[self::TEI.2 or self::TEI]/text/front/titlePage)[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Dedication'] | //div[@type='Dedication']">
-                <reference type="dedication" title="{f:message('msgDedication')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Dedication'] | //div[@type='Dedication'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="dedication"
+                    title="{f:message('msgDedication')}"
+                    href="{f:generate-href((//div1[@type='Dedication'] | //div[@type='Dedication'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Acknowledgements'] | //div[@type='Acknowledgements']">
-                <reference type="acknowledgements" title="{f:message('msgAcknowledgements')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Acknowledgements'] | //div[@type='Acknowledgements'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="acknowledgements"
+                    title="{f:message('msgAcknowledgements')}"
+                    href="{f:generate-href((//div1[@type='Acknowledgements'] | //div[@type='Acknowledgements'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Epigraph'] | //div[@type='Epigraph']">
-                <reference type="epigraph" title="{f:message('msgEpigraph')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Epigraph'] | //div[@type='Epigraph'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="epigraph"
+                    title="{f:message('msgEpigraph')}"
+                    href="{f:generate-href((//div1[@type='Epigraph'] | //div[@type='Epigraph'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Index'] | //div[@type='Index']">
-                <reference type="index" title="{f:message('msgIndex')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Index'] | //div[@type='Index'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="index"
+                    title="{f:message('msgIndex')}"
+                    href="{f:generate-href((//div1[@type='Index'] | //div[@type='Index'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Bibliography'] | //div[@type='Bibliography']">
-                <reference type="bibliography" title="{f:message('msgBibliography')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Bibliography'] | //div[@type='Bibliography'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="bibliography"
+                    title="{f:message('msgBibliography')}"
+                    href="{f:generate-href((//div1[@type='Bibliography'] | //div[@type='Bibliography'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Copyright'] | //div[@type='Copyright']">
-                <reference type="copyright-page" title="{f:message('msgCopyrightPage')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Copyright'] | //div[@type='Copyright'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="copyright-page"
+                    title="{f:message('msgCopyrightPage')}"
+                    href="{f:generate-href((//div1[@type='Copyright'] | //div[@type='Copyright'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Glossary'] | //div[@type='Glossary']">
-                <reference type="glossary" title="{f:message('msgGlossary')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Glossary'] | //div[@type='Glossary'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="glossary"
+                    title="{f:message('msgGlossary')}"
+                    href="{f:generate-href((//div1[@type='Glossary'] | //div[@type='Glossary'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="//div1[@type='Preface'] | //div[@type='Preface']">
-                <reference type="preface" title="{f:message('msgPreface')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//div1[@type='Preface'] | //div[@type='Preface'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="preface"
+                    title="{f:message('msgPreface')}"
+                    href="{f:generate-href((//div1[@type='Preface'] | //div[@type='Preface'])[1])}"/>
             </xsl:if>
 
             <xsl:if test="/*[self::TEI.2 or self::TEI]/text/body/div0 | /*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div">
-                <reference type="text" title="{f:message('msgText')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(/*[self::TEI.2 or self::TEI]/text/body/div0 | /*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="text"
+                    title="{f:message('msgText')}"
+                    href="{f:generate-href((/*[self::TEI.2 or self::TEI]/text/body/div0 | /*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)[1])}"/>
             </xsl:if>
 
             <xsl:if test="//divGen[@type='Colophon']">
-                <reference type="colophon" title="{f:message('msgColophon')}">
-                    <xsl:call-template name="generate-href-attribute">
-                        <xsl:with-param name="target" select="(//divGen[@type='Colophon'])[1]"/>
-                    </xsl:call-template>
-                </reference>
+                <reference
+                    type="colophon"
+                    title="{f:message('msgColophon')}"
+                    href="{f:generate-href((//divGen[@type='Colophon'])[1])}"/>
             </xsl:if>
 
         </guide>

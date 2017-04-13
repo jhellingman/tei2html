@@ -228,8 +228,7 @@
         <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
             <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
         </xsl:if>
-        <a>
-            <xsl:call-template name="generate-href-attribute"/>
+        <a href="{f:generate-href(.)}">
             <xsl:call-template name="generate-single-head"/>
         </a>
         <xsl:if test="$show-page-numbers">
@@ -297,8 +296,7 @@
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             <span class="tocPageNum">
-                <a class="pageref">
-                    <xsl:call-template name="generate-href-attribute"/>
+                <a class="pageref" href="{f:generate-href(.)}">
                     <xsl:value-of select="preceding::pb[1]/@n"/>
                 </a>
             </span>
@@ -441,8 +439,7 @@
             </xsl:if>
         </td>
         <td class="tocDivTitle" colspan="{($maxlevel + 1) - $curlevel}">
-            <a>
-                <xsl:call-template name="generate-href-attribute"/>
+            <a href="{f:generate-href(.)}">
                 <xsl:call-template name="generate-single-head"/>
             </a>
         </td>
@@ -455,8 +452,7 @@
 
     <xsl:template name="insert-toc-page-number-table">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-            <a class="pageref">
-                <xsl:call-template name="generate-href-attribute"/>
+            <a class="pageref" href="{f:generate-href(.)}">
                 <xsl:value-of select="preceding::pb[1]/@n"/>
             </a>
         </xsl:if>
@@ -487,8 +483,7 @@
         <xsl:if test="position() != 1">
             <xsl:text> | </xsl:text>
         </xsl:if>
-        <a>
-            <xsl:call-template name="generate-href-attribute"/>
+        <a href="{f:generate-href(.)}">
             <xsl:if test="contains(., '.')">
                 <xsl:value-of select="substring-before(., '.')"/>
             </xsl:if>
@@ -525,8 +520,7 @@
         <xsl:if test="head and f:rend-value(@rend, 'toc') != 'none'">
             <xsl:if test="head[@type='label']">
                 <p class="tocChapter">
-                    <a>
-                        <xsl:call-template name="generate-href-attribute"/>
+                    <a href="{f:generate-href(.)}">
                         <xsl:apply-templates select="head[@type='label']" mode="tochead"/>
                     </a>
                     <xsl:if test="not(head[not(@type)])">
@@ -536,8 +530,7 @@
             </xsl:if>
             <xsl:if test="head[not(@type)]">
                 <p class="tocChapter">
-                    <a>
-                        <xsl:call-template name="generate-href-attribute"/>
+                    <a href="{f:generate-href(.)}">
                         <xsl:apply-templates select="head[not(@type)]" mode="tochead"/>
                     </a>
                     <xsl:call-template name="insert-toc-page-number"/>
@@ -675,8 +668,7 @@
 
     <xsl:template match="figure" mode="gallery">
         <td class="galleryFigure">
-            <a>
-                <xsl:call-template name="generate-href-attribute"/>
+            <a href="{f:generate-href(.)}">
                 <img>
                     <xsl:attribute name="src"><xsl:call-template name="get-thumbnail-image"/></xsl:attribute>
                     <xsl:attribute name="alt"><xsl:value-of select="head"/></xsl:attribute>
@@ -687,8 +679,7 @@
 
     <xsl:template match="figure" mode="gallery-captions">
         <td class="galleryCaption">
-            <a>
-                <xsl:call-template name="generate-href-attribute"/>
+            <a href="{f:generate-href(.)}">
                 <xsl:apply-templates select="head" mode="gallery-captions"/>
             </a>
         </td>
@@ -886,7 +877,7 @@
             <xsl:variable name="index">
                 <divIndex>
                     <xsl:for-each select="//index">
-                        <index>
+                        <index href="{f:generate-href(.)}">
                             <xsl:attribute name="level1"><xsl:value-of select="@level1"/></xsl:attribute>
                             <xsl:attribute name="level2"><xsl:value-of select="@level2"/></xsl:attribute>
                             <xsl:attribute name="level3"><xsl:value-of select="@level3"/></xsl:attribute>
@@ -903,7 +894,6 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
-                            <xsl:call-template name="generate-href-attribute"/>
                         </index>
                     </xsl:for-each>
                 </divIndex>

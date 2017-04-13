@@ -477,11 +477,9 @@
                 <span class="pagenum">
                     <xsl:text>[</xsl:text>
                     <a>
+                        <!-- Link to entry for current division if available to make navigation back easier -->
                         <xsl:variable name="id" select="@id"/>
-                        <xsl:call-template name="generate-href-attribute">
-                            <!-- Link to entry for current division if available to make navigation back easier -->
-                            <xsl:with-param name="target" select="if (//*[@id='toc']//ref[@target=$id]) then (//*[@id='toc']//ref[@target=$id])[1] else (//*[@id='toc'])[1]"/>
-                        </xsl:call-template>
+                        <xsl:attribute name="href" select="f:generate-href(if (//*[@id='toc']//ref[@target=$id]) then (//*[@id='toc']//ref[@target=$id])[1] else (//*[@id='toc'])[1])"/>
                         <xsl:value-of select="f:message('msgToc')"/>
                      </a>
                      <xsl:text>]</xsl:text>
@@ -499,10 +497,7 @@
                 <p class="navigation">
                     <xsl:text>[ </xsl:text>
                     <xsl:if test="preceding-sibling::div1">
-                        <a>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="preceding-sibling::div1[1]"/>
-                            </xsl:call-template>
+                        <a href="{f:generate-href(preceding-sibling::div1[1])}">
                             <xsl:value-of select="f:message('msgPrevious')"/>
                         </a>
                     </xsl:if>
@@ -510,21 +505,14 @@
                     <xsl:if test="//*[@id='toc']">
                         <!-- If we have an element with id 'toc', include a link to it -->
                         <xsl:if test="preceding-sibling::div1"> | </xsl:if>
-                        <a>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="//*[@id='toc']"/>
-                            </xsl:call-template>
+                        <a href="{f:generate-href(//*[@id='toc'])}">
                             <xsl:value-of select="f:message('msgToc')"/>
                          </a>
                     </xsl:if>
 
                     <xsl:if test="following-sibling::div1">
                         <xsl:if test="preceding-sibling::div1 or //*[@id='toc']"> | </xsl:if>
-
-                        <a>
-                            <xsl:call-template name="generate-href-attribute">
-                                <xsl:with-param name="target" select="following-sibling::div1[1]"/>
-                            </xsl:call-template>
+                        <a href="{f:generate-href(following-sibling::div1[1])}">
                             <xsl:value-of select="f:message('msgNext')"/>
                         </a>
                     </xsl:if>

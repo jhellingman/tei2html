@@ -458,7 +458,7 @@
                 <xsl:call-template name="generate-footnote-href-attribute"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="generate-href-attribute"/>
+                <xsl:attribute name="href" select="f:generate-href(.)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -607,8 +607,7 @@
                                 <xsl:if test="position() != 1">
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
-                                <a class="pageref" id="{f:generate-id(.)}ext">
-                                    <xsl:call-template name="generate-href-attribute"/>
+                                <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
                                     <xsl:value-of select="f:find-page-number(.)"/>
                                 </a>
                             </xsl:for-each>
@@ -737,12 +736,10 @@
                                     </xsl:when>
                                     <xsl:when test="f:insideChoice(.)">
                                         <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
-                                        <xsl:call-template name="generate-href-attribute">
-                                            <xsl:with-param name="target" select="./ancestor::*[not(f:insideChoice(.))][1]"/>
-                                        </xsl:call-template>
+                                        <xsl:attribute name="href" select="f:generate-href(./ancestor::*[not(f:insideChoice(.))][1])"/>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <xsl:call-template name="generate-href-attribute"/>
+                                        <xsl:attribute name="href" select="f:generate-href(.)"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
                                 <xsl:value-of select="f:find-page-number(.)"/>

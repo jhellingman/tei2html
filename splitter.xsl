@@ -486,7 +486,7 @@
             <xsl:otherwise>
                 <xsl:value-of select="$basename"/>
                 <xsl:text>-</xsl:text>
-                <xsl:call-template name="generate-id"/>
+                <xsl:value-of select="f:generate-id(.)"/>
                 <xsl:text>.</xsl:text>
                 <xsl:value-of select="$extension"/>
             </xsl:otherwise>
