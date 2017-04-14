@@ -85,9 +85,7 @@
                     <xsl:choose>
                         <!-- $target is a footnote or inside footnote -->
                         <xsl:when test="f:insideFootnote($targetNode)">
-                            <xsl:call-template name="generate-footnote-href-attribute">
-                                <xsl:with-param name="target" select="$targetNode"/>
-                            </xsl:call-template>
+                            <xsl:attribute name="href" select="f:generate-footnote-href($targetNode)"/>
                         </xsl:when>
 
                         <xsl:otherwise>
@@ -118,8 +116,7 @@
     </xd:doc>
 
     <xsl:template match="note" mode="noterefnumber">
-        <a class="pseudonoteref">
-            <xsl:call-template name="generate-footnote-href-attribute"/>
+        <a class="pseudonoteref" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>

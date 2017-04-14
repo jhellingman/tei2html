@@ -106,23 +106,14 @@
 
 
     <xd:doc>
-        <xd:short>Generate a <code>href</code>-attribute for footnotes.</xd:short>
-        <xd:detail>Generate a <code>href</code>-attribute when referring to footnotes.
+        <xd:short>Generate a <code>href</code>-attribute for entries in the xref-table.</xd:short>
+        <xd:detail>Generate a <code>href</code>-attribute when referring to the xref-table.
         In the HTML set of utilities this is the same as <code>generate-href-attribute</code>
         but is included because in the ePub version, these need to be handled in
         a special way.</xd:detail>
         <xd:param name="target">The node the <code>href</code> will point to. Default: the current node.</xd:param>
     </xd:doc>
 
-    <xsl:template name="generate-footnote-href-attribute">
-        <xsl:param name="target" select="." as="element()"/>
-
-        <xsl:attribute name="href">
-            <xsl:call-template name="generate-footnote-href">
-                <xsl:with-param name="target" select="$target"/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
 
     <xsl:template name="generate-xref-table-href-attribute">
         <xsl:param name="target" select="." as="element()"/>

@@ -25,21 +25,15 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <!-- href attributes 
 
-    href attributes need to point to the correct file and element, depending on
-    whether we generate a monolithic or multiple files using the splitter.
-    This file contains the named templates for the monolithic variant.
-
-    -->
-
-    <xsl:template name="generate-href">
-        <xsl:param name="target" select="." as="element()"/>
-
-        <xsl:text>#</xsl:text>
-        <xsl:value-of select="f:generate-id($target)"/>
-    </xsl:template>
-
+    <xd:doc>
+        <xd:short>Generate a href-attribute.</xd:short>
+        <xd:detail>
+            <p>href attributes need to point to the correct file and element, depending on whether we generate 
+            a monolithic or multiple files using the splitter. This file contains the named templates for the 
+            monolithic variant.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:generate-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
@@ -48,16 +42,19 @@
     </xsl:function>
 
 
-    <!-- footnote href attributes are the same as normal hrefs in
-         single file operation -->
+    <xd:doc>
+        <xd:short>Generate a href-attribute for footnotes.</xd:short>
+        <xd:detail>
+            <p>Footnote href attributes are the same as normal hrefs in
+            single file operation.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:template name="generate-footnote-href">
-        <xsl:param name="target" select="." as="element()"/>
+    <xsl:function name="f:generate-footnote-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
 
-        <xsl:call-template name="generate-href">
-            <xsl:with-param name="target" select="$target"/>
-        </xsl:call-template>
-    </xsl:template>
+        <xsl:value-of select="f:generate-href($target)"/>
+    </xsl:function>
 
 
     <!-- apparatus-note href attributes are the same as normal hrefs in
@@ -66,9 +63,7 @@
     <xsl:template name="generate-apparatus-note-href">
         <xsl:param name="target" select="." as="element()"/>
 
-        <xsl:call-template name="generate-href">
-            <xsl:with-param name="target" select="$target"/>
-        </xsl:call-template>
+        <xsl:value-of select="f:generate-href($target)"/>
     </xsl:template>
 
 
@@ -78,10 +73,7 @@
     <xsl:template name="generate-xref-table-href">
         <xsl:param name="target" select="." as="element()"/>
 
-        <xsl:call-template name="generate-href">
-            <xsl:with-param name="target" select="$target"/>
-        </xsl:call-template>
-        <xsl:text>ext</xsl:text>
+        <xsl:value-of select="concat(f:generate-href($target), 'ext')"/>
     </xsl:template>
 
 

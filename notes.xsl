@@ -49,8 +49,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='foot' or @place='unspecified' or not(@place)]">
-        <a class="noteref" id="{f:generate-id(.)}src">
-            <xsl:call-template name="generate-footnote-href-attribute"/>
+        <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
         <!-- No explicit request for footnote division -->

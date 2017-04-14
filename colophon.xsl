@@ -455,7 +455,7 @@
     <xsl:template name="corr-href-attribute">
         <xsl:choose>
             <xsl:when test="f:insideFootnote(.)">
-                <xsl:call-template name="generate-footnote-href-attribute"/>
+                <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:attribute name="href" select="f:generate-href(.)"/>
@@ -725,12 +725,10 @@
                                         <xsl:choose>
                                             <xsl:when test="f:insideChoice(.)">
                                                 <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
-                                                <xsl:call-template name="generate-footnote-href-attribute">
-                                                    <xsl:with-param name="target" select="./ancestor::*[not(f:insideChoice(.))][1]"/>
-                                                </xsl:call-template>
+                                                <xsl:attribute name="href" select="f:generate-footnote-href(./ancestor::*[not(f:insideChoice(.))][1])"/>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:call-template name="generate-footnote-href-attribute"/>
+                                                <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:when>
