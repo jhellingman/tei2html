@@ -14,7 +14,7 @@
         <xd:short>ePub-specific utility templates and functions, used by tei2epub</xd:short>
         <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2epub only.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011-2014, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -90,7 +90,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Generate an href attribute for an apparatus note.</xd:short>
         <xd:detail>
@@ -99,8 +98,8 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="generate-apparatus-note-href">
-        <xsl:param name="target" select="." as="element()"/>
+    <xsl:function name="f:generate-apparatus-note-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
 
         <xsl:variable name="targetfile">
             <xsl:call-template name="splitter-generate-filename-for">
@@ -108,8 +107,8 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/>
-    </xsl:template>
+        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -121,22 +120,26 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="generate-xref-table-href">
-        <xsl:param name="target" select="." as="element()"/>
+    <xsl:function name="f:generate-xref-table-href">
+        <xsl:param name="target" as="element()"/>
 
+        <xsl:variable name="root" select="$target/ancestor::document-node()"/>
         <xsl:variable name="targetfile">
             <xsl:choose>
-                <!-- We should have an explicit call for a colophon section, the xref-table is in there -->
-                <xsl:when test="//divGen[@type='Colophon']">
+                <!-- We should have an explicit call for a colophon section; the xref-table is in there. -->
+                <xsl:when test="$root//divGen[@type='Colophon']">
                     <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="(//divGen[@type='Colophon'])[1]"/>
+                        <xsl:with-param name="node" select="($root//divGen[@type='Colophon'])[1]"/>
                     </xsl:call-template>
                 </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="f:logError('No colophon for cross-reference table in document', ())"/>
+                </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile"/>#<xsl:value-of select="f:generate-id($target)"/><xsl:text>ext</xsl:text>
-    </xsl:template>
+        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target), 'ext')"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -153,6 +156,5 @@
             <xsl:copy-of select="document($filename, .)"/>
         </xsl:result-document>
     </xsl:template>
-
 
 </xsl:stylesheet>

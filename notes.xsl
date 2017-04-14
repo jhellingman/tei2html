@@ -21,7 +21,7 @@
         <xd:short>Stylesheet to handle footnotes.</xd:short>
         <xd:detail>This stylesheet contains templates to handle footnotes in TEI files.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <!--====================================================================-->
@@ -251,8 +251,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
-        <a class="apparatusnote" id="{f:generate-id(.)}src">
-            <xsl:attribute name="href"><xsl:call-template name="generate-apparatus-note-href"/></xsl:attribute>
+        <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
         </a>

@@ -14,27 +14,8 @@
         <xd:short>Utility templates and functions, used by tei2html</xd:short>
         <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2html and tei2epub.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
-
-    <!-- ID Generation
-
-    Use original ID's when possible to keep ID's stable between versions.
-    We use generated ID's prepended with 'x' to avoid clashes with original
-    ID's. Note that the target id generated here should also be generated
-    on the element being referenced. We cannot use the id() function here,
-    since we do not use a DTD.
-
-    -->
-
-    <xd:doc>
-        <xd:short>Generate an HTML anchor.</xd:short>
-        <xd:detail>Generate an HTML anchor with an <code>id</code> attribute for the current node.</xd:detail>
-    </xd:doc>
-
-    <xsl:template name="generate-anchor">
-        <a id="{f:generate-id(.)}"/>
-    </xsl:template>
 
 
     <xd:doc>
@@ -79,7 +60,7 @@
             <p>The generated id will re-use the existing <code>id</code> attribute if present, or use the <code>generate-id()</code> function otherwise.
             Such generated id's will be prefixed with the letter 'x'</p>
         </xd:detail>
-        <xd:param name="node">The node for which the <code>id</code>-value is generated.</xd:param>
+        <xd:param name="node" type="element()">The node for which the <code>id</code>-value is generated.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:generate-id" as="xs:string">
@@ -94,8 +75,8 @@
             <p>Generate an <code>id</code>-value for a node.</p>
             <p>The generated id will use <code>f:generate-id</code> and append the position.</p>
         </xd:detail>
-        <xd:param name="node">The node for which the <code>id</code>-value is generated.</xd:param>
-        <xd:param name="position" type="string">A value appended after the generated <code>id</code>.</xd:param>
+        <xd:param name="node" type="element()">The node for which the <code>id</code>-value is generated.</xd:param>
+        <xd:param name="position" type="xs:integer">A value appended after the generated <code>id</code>.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:generate-nth-id" as="xs:string">
@@ -104,26 +85,6 @@
         <xsl:value-of select="concat(f:generate-id($node), '-', $position)"/>
     </xsl:function>
 
-
-    <xd:doc>
-        <xd:short>Generate a <code>href</code>-attribute for entries in the xref-table.</xd:short>
-        <xd:detail>Generate a <code>href</code>-attribute when referring to the xref-table.
-        In the HTML set of utilities this is the same as <code>generate-href-attribute</code>
-        but is included because in the ePub version, these need to be handled in
-        a special way.</xd:detail>
-        <xd:param name="target">The node the <code>href</code> will point to. Default: the current node.</xd:param>
-    </xd:doc>
-
-
-    <xsl:template name="generate-xref-table-href-attribute">
-        <xsl:param name="target" select="." as="element()"/>
-
-        <xsl:attribute name="href">
-            <xsl:call-template name="generate-xref-table-href">
-                <xsl:with-param name="target" select="$target"/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
 
     <!--====================================================================-->
     <!-- Close and (re-)open paragraphs -->
@@ -286,6 +247,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+
 
     <xd:doc>
         <xd:short>Get the current UTC-time in a string.</xd:short>

@@ -158,7 +158,7 @@
 
     <xsl:template name="pb-anchor">
         <xsl:variable name="context" select="." as="element(pb)"/>
-        <xsl:call-template name="generate-anchor"/>
+        <a id="{f:generate-id(.)}"/>
     </xsl:template>
 
 
@@ -219,12 +219,12 @@
 
     <xd:doc>
         <xd:short>Handle a milestone-element.</xd:short>
-        <xd:detail>Handle a milestone-element. Just generate a milestone if the <code>@type</code> and
+        <xd:detail>Handle a milestone-element. Just generate an anchor if the <code>@type</code> and
         <code>@rend</code>-attributes are missing.</xd:detail>
     </xd:doc>
 
     <xsl:template match="milestone">
-        <xsl:call-template name="generate-anchor"/>
+        <a id="{f:generate-id(.)}"/>
     </xsl:template>
 
 

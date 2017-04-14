@@ -22,7 +22,7 @@
         <xd:short>HTML-specific utility templates and functions, used by tei2html</xd:short>
         <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2html only.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -57,24 +57,34 @@
     </xsl:function>
 
 
-    <!-- apparatus-note href attributes are the same as normal hrefs in
-         single file operation -->
+    <xd:doc>
+        <xd:short>Generate a href-attribute for apparatus notes.</xd:short>
+        <xd:detail>
+            <p>Apparatus-note href attributes are the same as normal hrefs in
+            single file operation.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:template name="generate-apparatus-note-href">
-        <xsl:param name="target" select="." as="element()"/>
+    <xsl:function name="f:generate-apparatus-note-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
 
         <xsl:value-of select="f:generate-href($target)"/>
-    </xsl:template>
+    </xsl:function>
 
 
-    <!-- xref table href attributes are the same as normal hrefs in
-         single file operation, followed by 'ext' -->
+    <xd:doc>
+        <xd:short>Generate a href-attribute to the xref-table in the colophon.</xd:short>
+        <xd:detail>
+            <p>xref table href attributes are the same as normal hrefs in
+         single file operation, followed by 'ext'.</p>
+        </xd:detail>
+    </xd:doc>
 
-    <xsl:template name="generate-xref-table-href">
-        <xsl:param name="target" select="." as="element()"/>
+    <xsl:function name="f:generate-xref-table-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
 
         <xsl:value-of select="concat(f:generate-href($target), 'ext')"/>
-    </xsl:template>
+    </xsl:function>
 
 
 </xsl:stylesheet>
