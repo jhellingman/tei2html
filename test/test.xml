@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "dtd/teixlite.dtd" [
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "../dtd/teixlite.dtd" [
 
 <!ENTITY prime  "&#x2032;">
 <!ENTITY mdash  "&#x2014;">

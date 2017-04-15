@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Additional media metadata to be added verbatim to the metadata in the OPF file -->
+<metadata xmlns="http://www.idpf.org/2007/opf">
+    <meta property="media:narrator">Loon</meta>
+</metadata>

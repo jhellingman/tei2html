@@ -1,0 +1,22 @@
+<test>
+    <div1 id="test">
+    <head>Nogmaals een test</head>
+
+    <p n="1">Dit is een test van het naast elkaar afdrukken van vertaalde alinea&apos;s</p>
+
+    <p>Deze alinea staat in een externe bron.</p>
+
+    <p n="2">De alinea&apos;s worden genummerd met het <hi>n</hi> attribuut.</p>
+
+    <p n="3">Op die manier weet de stylesheet welke alinea&apos;s bij elkaar horen.</p>
+
+    <p>Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+
+    <p n="4">Dit maakt het eenvoudig vertalingen te controleren.</p>
+
+    <p n="5">Een extra alinea, met de vertaling ernaast.</p>
+
+    <p n="7">En de laatste alinea.</p>
+
+    </div1>
+</test>

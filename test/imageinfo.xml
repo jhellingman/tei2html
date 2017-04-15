@@ -1,0 +1,11 @@
+<images xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo">
+    <image path="images/initial-A.gif" filesize="3009" filedate="2006-02-05 23:17:04" width="128px" height="143px">
+        <leftBoundary level="10" step="10px">27, 8, 6, 18, 2, 2, 9, 12, 5, 8, 9, 13, 28, 37, 44</leftBoundary>
+        <rightBoundary level="10" step="10px">34, 2, 7, 9, 24, 42, 40, 40, 41, 41, 44, 49, 64, 73, 81</rightBoundary>
+    </image>
+    <image path="images/test.jpg" filesize="3080" filedate="2005-03-13 00:02:35" width="80px" height="80px">
+        <leftBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</leftBoundary>
+        <rightBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</rightBoundary>
+    </image>
+    <image path="images/tarsier.jpg" width="480px" height="326px"/>
+</images>
