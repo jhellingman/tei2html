@@ -39,7 +39,7 @@
         -->
 
         <msg:message name="msgEditDistance">Edit distance</msg:message>
-        <msg:message name="msgAbbreviationOverview">Overview of abbreviations</msg:message>
+        <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
         <msg:message name="msgExpansion">Expansion</msg:message>
         <msg:message name="msgExpansionNotAvailable">Expansion not available</msg:message>
 
@@ -88,7 +88,7 @@
         <msg:message name="msgThesisAdvisor">Thesis advisor</msg:message>
         <msg:message name="msgTranscriber">Transcriber</msg:message>
         <msg:message name="msgTranslator">Translator</msg:message>
-        
+
         <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Contributor</msg:message>
@@ -818,14 +818,14 @@
 
     <msg:messages xml:lang="nl">
 
-		<msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
-		<msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
-	
+        <msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
+        <msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
+
         <msg:message name="msgEditDistance">Bewerkingsafstand</msg:message>
-        <msg:message name="msgAbbreviationOverview">Overzicht van afkortingen</msg:message>
+        <msg:message name="msgAbbreviationOverview">Overzicht van gebruikte afkortingen.</msg:message>
         <msg:message name="msgExpansion">Uitgeschreven</msg:message>
         <msg:message name="msgExpansionNotAvailable">Uitgeschreven vorm niet beschikbaar</msg:message>
-    
+
         <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
@@ -870,7 +870,7 @@
         <msg:message name="msgThesisAdvisor">Scriptiebegeleider</msg:message>
         <msg:message name="msgTranscriber">Transcribent</msg:message>
         <msg:message name="msgTranslator">Vertaler</msg:message>
-        
+
         <msg:message name="msgAdaptor">Bewerker</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
         <msg:message name="msgContributor">Bijdrager</msg:message>
@@ -950,13 +950,13 @@
         <msg:message name="msgRole">Rol</msg:message>
         <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
-		<msg:message name="msgMissingTextWithReason">Ontbrekende tekst, om de volgende reden: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithReason">Ontbrekende tekst, om de volgende reden: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Volgende</msg:message>
         <msg:message name="msgNotApplicable">n.v.t.</msg:message>
         <msg:message name="msgNote">Noot</msg:message>
         <msg:message name="msgNotes">Noten</msg:message>
         <msg:message name="msgNotInSource">Niet in bron</msg:message>
-		<msg:message name="msgLibraryThingEntry">Gerelateerde Library Thing cataloguspagina</msg:message>
+        <msg:message name="msgLibraryThingEntry">Gerelateerde Library Thing cataloguspagina</msg:message>
         <msg:message name="msgOclcCatalogEntry">Gerelateerde WorldCat cataloguspagina</msg:message>
         <msg:message name="msgOpenLibraryCatalogEntry">Gerelateerde Open Library cataloguspagina (voor bron)</msg:message>
         <msg:message name="msgOpenLibraryCatalogWorkEntry">Gerelateerde Open Library cataloguspagina (voor werk)</msg:message>

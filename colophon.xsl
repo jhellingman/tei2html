@@ -506,6 +506,7 @@
             </xsl:variable>
 
             <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="concat(tmp:abbr, '@@@', tmp:expan)">            
+                <xsl:sort select="tmp:abbr" data-type="text" order="ascending"/>
                 <tr>
                     <td class="bottom">
                         <xsl:apply-templates select="tmp:abbr"/>

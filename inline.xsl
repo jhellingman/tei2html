@@ -401,13 +401,35 @@
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
             <xsl:if test="f:isSet('useMouseOverPopups')">
-                <xsl:attribute name="title">
-                    <xsl:value-of select="@expan"/>
-                </xsl:attribute>
+                <xsl:variable name="expan" select="f:findExpansion(.)" as="xs:string"/>
+                <xsl:if test="$expan != ''">
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="$expan"/>
+                    </xsl:attribute>
+                </xsl:if>
             </xsl:if>
             <xsl:apply-templates/>
         </abbr>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Find the expansion of an abbreviation.</xd:short>
+        <xd:detail>Find the expansion of an abbreviation, by first looking for the value of the <code>@expan</code> attribute
+        on the abbreviation itself, or, if that is not available, look for other occurances of the same abbreviation, that
+        might provide the expansion.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:findExpansion" as="xs:string">
+        <xsl:param name="abbr" as="element()"/>
+
+        <xsl:value-of select="if ($abbr/@expan != '') 
+            then $abbr/@expan
+            else if (root($abbr)//abbr[. = $abbr and ./@expan != ''])
+                 then (root($abbr)//abbr[. = $abbr and ./@expan != '']/@expan)[1]
+                 else if (root($abbr)//choice[abbr = $abbr and expan != ''])
+                      then (root($abbr)//choice[abbr = $abbr and expan != '']/expan)[1]
+                      else ''"/>
+    </xsl:function>
 
 
     <!--====================================================================-->
