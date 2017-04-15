@@ -197,6 +197,7 @@
 
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Split elements a <code>div1</code> or <code>div</code> element.</xd:short>
         <xd:detail>Split a <code>div1</code> or (unnumbered) <code>div</code> element of a TEI file on the <code>epubsplit</code> processing instruction.</xd:detail>
@@ -289,6 +290,7 @@
 
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Determine the filename of a division.</xd:short>
         <xd:detail>Determine the filename of the file that contains a certain node.</xd:detail>
@@ -344,6 +346,7 @@
         </item>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate an OPF manifest entry for a division.</xd:short>
         <xd:detail>Generate an OPF manifest entry for the file that contains a division. Also handle the case where
@@ -378,6 +381,7 @@
             </xsl:attribute>
         </itemref>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Generate a spine entry for a division.</xd:short>
@@ -460,7 +464,10 @@
     </xsl:template>
 
 
-    <!-- Support functions -->
+    <xd:doc>
+        <xd:short>Generate a filename.</xd:short>
+        <xd:detail>Generate a filename for use in an ePub file.</xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:generate-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
@@ -468,6 +475,12 @@
         <xsl:value-of select="if ($node/@id = 'cover') then 'cover.xhtml' else concat($basename, '-', f:generate-id($node), '.xhtml')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Generate a filename with number.</xd:short>
+        <xd:detail>Generate a filename for use in an ePub file. This function is used when a single element is split-up in multiple
+        parts.</xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:generate-nth-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
@@ -478,6 +491,12 @@
                               else concat($basename, '-', f:generate-id($node), '-', $position, '.xhtml')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine the name of the file a certain element appears in.</xd:short>
+        <xd:detail>Determine the name of the file a certain element appears in. This function is used to establish
+        in which file a certain element has ended up.</xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:determine-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
@@ -494,6 +513,11 @@
             else $filename"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine the url for an element.</xd:short>
+        <xd:detail>Determine the url for an element within the scope of an ePub file.</xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:determine-url" as="xs:string">
         <xsl:param name="node" as="element()"/>

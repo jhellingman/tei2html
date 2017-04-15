@@ -454,8 +454,7 @@
                 <xsl:text>
 .</xsl:text>
                 <xsl:call-template name="generate-rend-class-name"/>
-                <xsl:text>
-{
+                <xsl:text> {
 </xsl:text>
                     <xsl:value-of select="normalize-space($css-properties)"/>
                     <xsl:if test="false()">/* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */</xsl:if>
@@ -473,8 +472,7 @@
 
     <!-- Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation -->
     <xsl:template match="text[not(ancestor::q)]" mode="css-handheld">
-        <xsl:text>@media handheld
-{
+        <xsl:text>@media handheld {
 </xsl:text>
         <xsl:apply-templates select="*" mode="css-handheld"/>
         <xsl:text>

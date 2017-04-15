@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2017-04-15T13:15:02Z</meta>
+      <meta property="dcterms:modified">2017-04-15T13:56:08Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -56,7 +56,6 @@
       <item id="ch05" href="test-ch05.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch07" href="test-ch07.xhtml" media-type="application/xhtml+xml"/>
-      <item id="bk1-3" href="test-bk1-3.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch08" href="test-ch08.xhtml" media-type="application/xhtml+xml"/>
       <item id="alignFirst" href="test-alignFirst.xhtml" media-type="application/xhtml+xml"/>
       <item id="alignSecond" href="test-alignSecond.xhtml"
@@ -93,7 +92,6 @@
       <itemref linear="yes" idref="ch05"/>
       <itemref linear="yes" idref="ch6"/>
       <itemref linear="yes" idref="ch07"/>
-      <itemref linear="yes" idref="bk1-3"/>
       <itemref linear="yes" idref="ch08"/>
       <itemref linear="yes" idref="alignFirst"/>
       <itemref linear="yes" idref="alignSecond"/>

@@ -926,115 +926,93 @@ p.dropcap:first-letter {
 sub, sup {
  line-height: 0;
 }
-body
-{
+body {
  padding: 1.58em 16%;
 }
 
-.indent-hang-small
-{
+.indent-hang-small {
  text-indent: -0.31em;
 }
 
-.indent-hang-medium
-{
+.indent-hang-medium {
  text-indent: -0.44em;
 }
 
-.indent-hang-large
-{
+.indent-hang-large {
  text-indent: -0.76em;
 }
 
         /* CSS rules generated from @rend attributes in TEI file */
         
-.xd28e563
-{
+.xd28e563 {
 text-align:right;
 }
 
-.xd28e737
-{
+.xd28e737 {
 color:red; background-color:yellow;
 }
 
-.xd28e738
-{
+.xd28e738 {
 color:green; text-align:right;
 }
 
-.xd28e739
-{
+.xd28e739 {
 color:blue; text-align:right;
 }
 
-.xd28e775
-{
+.xd28e775 {
 text-align:left;width:40%; padding:4px;
 }
 
-.xd28e776
-{
+.xd28e776 {
 text-align:right;border-left:1px solid black; padding:4px;
 }
 
-.xd28e986
-{
+.xd28e986 {
 background-color:green;
 }
 
-.xd28e779
-{
+.xd28e779 {
 border-top:2px solid black;
 }
 
-.xd28e796
-{
+.xd28e796 {
 border-top:1px solid black;
 }
 
-.xd28e827
-{
+.xd28e827 {
 border-bottom:2px solid black;
 }
 
-.xd28e987
-{
+.xd28e987 {
 background-color:white;
 }
 
-.xd28e108
-{
+.xd28e108 {
 font-style:italic;
 }
 
-.xd28e118
-{
+.xd28e118 {
 background-color:yellow;
 }
 
-.xd28e153
-{
+.xd28e153 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd28e166
-{
+.xd28e166 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd28e398
-{
+.xd28e398 {
 text-align:left;
 }
 
-.xd28e401
-{
+.xd28e401 {
 text-align:right;
 }
 
-.xd28e403
-{
+.xd28e403 {
 text-align:center;
 }
 
@@ -1060,103 +1038,83 @@ text-align:center;
 }
 
         
-.xd28e409
-{
+.xd28e409 {
 text-align:justify;
 }
 
-.xd28e424
-{
+.xd28e424 {
 text-align:center;
 }
 
-.xd28e522
-{
+.tableDemo2 {
 width:40%; margin:0px auto; display:table;
 }
 
-.xd28e528
-{
+.xd28e528 {
 text-align:right;
 }
 
-.xd28e705
-{
+.tableDemoBracket {
 margin:0px auto; display:table;
 }
 
-.xd28e709
-{
+.xd28e709 {
 vertical-align:middle; width:2px;
 }
 
-.xd28e710
-{
+.xd28e710 {
 vertical-align:middle;
 }
 
-.xd28e720
-{
+.tableDemoIndent {
 margin-left:2em;
 }
 
-.xd28e722
-{
+.xd28e722 {
 width:25%;
 }
 
-.xd28e724
-{
+.xd28e724 {
 width:75%;
 }
 
-.xd28e762
-{
+.xd28e762 {
 text-align:center;
 }
 
-.xd28e767
-{
+.xd28e767 {
 text-align:left;
 }
 
-.xd28e774
-{
+.tableDemoAlign {
 width:40%; border-collapse:collapse;
 }
 
-.xd28e841
-{
+.tableDemoThreeUp {
 margin:0px auto; display:table;
 }
 
-.xd28e912
-{
+.tableDemoThreeUp2 {
 margin:0px auto; display:table;
 }
 
-.xd28e982
-{
+.tableDemoBorders4 {
 margin:0px auto; display:table;
 }
 
-.xd28e1017
-{
+.xd28e1017 {
 background-color:yellow;
 }
 
-.xd28e1035
-{
+.xd28e1035 {
 background-color:blue;
 }
 
-.xd28e1044
-{
+.xd28e1044 {
 background-color:orange;
 }
 
-.xd28e1054
-{
+.xd28e1054 {
 background-color:red;
 }
 
@@ -1164,8 +1122,7 @@ background-color:red;
     width:80px;
 }
             
-.test1
-{
+.test1 {
 width:100px;
 }
 
@@ -1185,82 +1142,66 @@ width:100px;
     width:480px;
 }
             
-.xd28e1167
-{
+.xd28e1167 {
 font-style:italic;
 }
 
-.xd28e1198
-{
+.xd28e1198 {
 list-style-type:disc;
 }
 
-.xd28e1228
-{
+.xd28e1228 {
 list-style-type:upper-roman;
 }
 
-.xd28e1240
-{
+.xd28e1240 {
 list-style-type:lower-roman;
 }
 
-.xd28e1262
-{
+.xd28e1262 {
 list-style-type:disc;
 }
 
-.xd28e1285
-{
+.xd28e1285 {
 list-style-type:disc;
 }
 
-.xd28e1382
-{
+.xd28e1382 {
 text-align:center;
 }
 
-.xd28e1387
-{
+.xd28e1387 {
 text-indent:1em;
 }
 
-.xd28e1393
-{
+.xd28e1393 {
 text-indent:2em;
 }
 
-.xd28e1397
-{
+.xd28e1397 {
 text-indent:3em;
 }
 
-.xd28e1401
-{
+.xd28e1401 {
 text-indent:10em;
 }
 
-.xd28e1403
-{
+.xd28e1403 {
 font-style:italic;
 }
 
-.fj-fr
-{
+.fj-fr {
 font-style:italic;
 }
 
-.fj-en
-{
+.fj-en {
 display:none;
 }
 
-.alignSecond
-{
+.alignSecond {
 display:none;
 }
-@media handheld
-{
+@media handheld {
 
 
 .xd28e405 {
