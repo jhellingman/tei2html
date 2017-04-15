@@ -83,8 +83,8 @@ while (<>) {
         $a = $';
     }
 
-    # remove forme works (<fw>...</fw>).
-    if ($a =~ /<fw\b(.*?)>/) {
+    # remove forme works (<fw>...</fw>). (multiple can occur in a single line.)
+    while ($a =~ /<fw\b(.*?)>/) {
         my $before = $`;
         $a = $';
         while ($a !~ /<\/fw>/) {
