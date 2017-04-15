@@ -278,19 +278,13 @@
             <xsl:message>Content: <xsl:value-of select="$node"/>.</xsl:message>-->
 
             <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
-                <xsl:call-template name="generate-filename-for">
-                    <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="$position"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
             </xsl:if>
         </xsl:for-each>
 
         <!-- Handle the case where we are referring to the div0 element itself (our parent) -->
         <xsl:if test="(generate-id(..) = generate-id($node)) and position() = 1">
-            <xsl:call-template name="generate-filename-for">
-                <xsl:with-param name="node" select=".."/>
-                <xsl:with-param name="position" select="$position"/>
-            </xsl:call-template>
+            <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
         </xsl:if>
 
     </xsl:template>
@@ -305,7 +299,7 @@
 
         <!-- Does this div1 or (unnumbered) div contain the node sought after? -->
         <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
-            <xsl:call-template name="generate-filename"/>
+            <xsl:value-of select="f:generate-filename(.)"/>
         </xsl:if>
     </xsl:template>
 
@@ -325,10 +319,7 @@
                 <xsl:value-of select="f:generate-nth-id(.., position())"/>
             </xsl:attribute>
             <xsl:attribute name="href">
-                <xsl:call-template name="generate-filename-for">
-                    <xsl:with-param name="node" select=".."/>
-                    <xsl:with-param name="position" select="position()"/>
-                </xsl:call-template>
+                <xsl:value-of select="f:generate-nth-filename(.., position())"/>
             </xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
 
@@ -363,7 +354,7 @@
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id" select="f:generate-id(.)"/>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
-            <xsl:attribute name="href"><xsl:call-template name="generate-filename"/></xsl:attribute>
+            <xsl:attribute name="href"><xsl:value-of select="f:generate-filename(.)"/></xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
 
             <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
@@ -406,12 +397,7 @@
     <xsl:template name="content.div-fragment">
         <xsl:param name="nodes" as="node()*"/>
 
-        <xsl:variable name="filename" as="xs:string">
-            <xsl:call-template name="generate-filename-for">
-                <xsl:with-param name="node" select=".."/>
-                <xsl:with-param name="position" select="position()"/>
-            </xsl:call-template>
-        </xsl:variable>
+        <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
             <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
@@ -455,7 +441,7 @@
 
     <xsl:template name="content.div">
 
-        <xsl:variable name="filename"><xsl:call-template name="generate-filename"/></xsl:variable>
+        <xsl:variable name="filename" select="f:generate-filename(.)" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
             <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
@@ -476,77 +462,44 @@
 
     <!-- Support functions -->
 
-    <xsl:template name="generate-filename">
-        <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
-
-        <xsl:choose>
-            <xsl:when test="@id='cover'">
-                <xsl:value-of select="'cover.xhtml'"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$basename"/>
-                <xsl:text>-</xsl:text>
-                <xsl:value-of select="f:generate-id(.)"/>
-                <xsl:text>.</xsl:text>
-                <xsl:value-of select="$extension"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-
-    <xsl:template name="generate-filename-for">
+    <xsl:function name="f:generate-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:param name="extension" select="'xhtml'" as="xs:string"/>
-        <xsl:param name="position" as="xs:integer?"/>
+
+        <xsl:value-of select="if ($node/@id = 'cover') then 'cover.xhtml' else concat($basename, '-', f:generate-id($node), '.xhtml')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:generate-nth-filename" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="position" as="xs:integer"/>
+
+        <xsl:value-of select="if ($node/@id = 'cover' and $position = 1) 
+                              then 'cover.xhtml' 
+                              else concat($basename, '-', f:generate-id($node), '-', $position, '.xhtml')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:determine-filename" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+
         <xsl:variable name="filename">
-            <xsl:choose>
-                <xsl:when test="$node/@id='cover'">
-                    <xsl:value-of select="'cover.xhtml'"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$basename"/>
-                    <xsl:text>-</xsl:text>
-                    <xsl:value-of select="f:generate-id($node)"/>
-                    <xsl:if test="$position">
-                        <xsl:text>-</xsl:text>
-                        <xsl:value-of select="$position"/>
-                    </xsl:if>
-                    <xsl:text>.</xsl:text>
-                    <xsl:value-of select="$extension"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:apply-templates select="root($node)/*[self::TEI.2 or self::TEI]/text" mode="splitter">
+                <xsl:with-param name="node" select="$node"/>
+                <xsl:with-param name="action" select="'filename'"/>
+            </xsl:apply-templates>
         </xsl:variable>
-        <xsl:value-of select="$filename"/>
-    </xsl:template>
+
+        <xsl:value-of select="if ($filename = '') 
+            then f:logError('Unable to determine filename for {1} with generated id: {2}', (name($node), f:generate-id($node)))
+            else $filename"/>
+    </xsl:function>
 
 
-    <xsl:template name="splitter-generate-filename-for">
-        <xsl:param name="node" select="." as="element()"/>
-
-        <xsl:apply-templates select="root($node)/*[self::TEI.2 or self::TEI]/text" mode="splitter">
-            <xsl:with-param name="node" select="$node"/>
-            <xsl:with-param name="action" select="'filename'"/>
-        </xsl:apply-templates>
-    </xsl:template>
-
-
-    <xsl:template name="splitter-generate-url-for">
-        <xsl:param name="node" select="." as="element()"/>
-
-        <xsl:call-template name="splitter-generate-filename-for">
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:call-template>
-        <xsl:text>#</xsl:text>
-        <xsl:call-template name="splitter-generate-id">
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:call-template>
-    </xsl:template>
-
-
-    <xsl:template name="splitter-generate-id">
-        <xsl:param name="node" select="." as="element()"/>
-        <xsl:value-of select="f:generate-id($node)"/>
-    </xsl:template>
+    <xsl:function name="f:determine-url" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+ 
+        <xsl:value-of select="concat(f:determine-filename($node), '#', f:generate-id($node))"/>
+    </xsl:function>
 
 
     <!-- Determine the class for the body, based on whether it is part of the front matter, body text or back matter of the book -->

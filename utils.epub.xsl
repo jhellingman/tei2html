@@ -30,13 +30,7 @@
     <xsl:function name="f:generate-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="targetfile">
-            <xsl:call-template name="splitter-generate-filename-for">
-                <xsl:with-param name="node" select="$target"/>
-            </xsl:call-template>
-        </xsl:variable>
-
-        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
+        <xsl:value-of select="concat(f:determine-filename($target), '#', f:generate-id($target))"/>
     </xsl:function>
 
 
@@ -60,28 +54,21 @@
     <xsl:function name="f:generate-footnote-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="root" select="$target/ancestor::document-node()"/>
         <xsl:variable name="targetfile">
             <xsl:choose>
                 <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
-                <xsl:when test="$root//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody']">
-                    <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="($root//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])[1]"/>
-                    </xsl:call-template>
+                <xsl:when test="root($target)//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody']">
+                    <xsl:value-of select="f:determine-filename((root($target)//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])[1])"/>
                 </xsl:when>
 
                 <!-- Footnotes to div0 elements (i.e., those not in a div1) are in the same fragment as the note itself -->
                 <xsl:when test="not($target/ancestor::div1)">
-                    <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="$target"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="f:determine-filename($target)"/>
                 </xsl:when>
 
                 <!-- Footnotes to div1 elements are found in the last fragment of the div1 -->
                 <xsl:otherwise>
-                    <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="$target/ancestor::div1[not(ancestor::q)]/*[position() = last()]"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="f:determine-filename($target/ancestor::div1[not(ancestor::q)]/*[position() = last()])"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -101,12 +88,7 @@
     <xsl:function name="f:generate-apparatus-note-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="targetfile">
-            <xsl:call-template name="splitter-generate-filename-for">
-                <xsl:with-param name="node" select="($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1]"/>
-            </xsl:call-template>
-        </xsl:variable>
-
+        <xsl:variable name="targetfile" select="f:determine-filename(($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1])"/>
         <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
     </xsl:function>
 
@@ -123,14 +105,11 @@
     <xsl:function name="f:generate-xref-table-href">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="root" select="$target/ancestor::document-node()"/>
         <xsl:variable name="targetfile">
             <xsl:choose>
                 <!-- We should have an explicit call for a colophon section; the xref-table is in there. -->
-                <xsl:when test="$root//divGen[@type='Colophon']">
-                    <xsl:call-template name="splitter-generate-filename-for">
-                        <xsl:with-param name="node" select="($root//divGen[@type='Colophon'])[1]"/>
-                    </xsl:call-template>
+                <xsl:when test="root($target)//divGen[@type='Colophon']">
+                    <xsl:value-of select="f:determine-filename((root($target)//divGen[@type='Colophon'])[1])"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:logError('No colophon for cross-reference table in document', ())"/>

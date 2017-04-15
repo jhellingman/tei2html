@@ -116,13 +116,7 @@
         <xsl:if test="$node">
             <navPoint class="{$class}" id="{f:generate-id($node)}">
                 <navLabel><text><xsl:value-of select="$label"/></text></navLabel>
-                <content>
-                    <xsl:attribute name="src">
-                        <xsl:call-template name="splitter-generate-url-for">
-                            <xsl:with-param name="node" select="$node"/>
-                        </xsl:call-template>
-                    </xsl:attribute>
-                </content>
+                <content src="{f:determine-url($node)}"/>
             </navPoint>
         </xsl:if>
     </xsl:function>
@@ -173,11 +167,7 @@
                             <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
-                    <content>
-                        <xsl:attribute name="src">
-                            <xsl:call-template name="splitter-generate-filename-for"/>
-                        </xsl:attribute>
-                    </content>
+                    <content src="{f:determine-filename(.)}"/>
                     <xsl:if test="div1">
                         <xsl:apply-templates select="div1" mode="navMap"/>
                     </xsl:if>
@@ -199,11 +189,7 @@
                             <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
-                    <content>
-                        <xsl:attribute name="src">
-                            <xsl:call-template name="splitter-generate-filename-for"/>
-                        </xsl:attribute>
-                    </content>
+                    <content src="{f:determine-filename(.)}"/>
                     <xsl:if test="div2">
                         <xsl:apply-templates select="div2" mode="navMap"/>
                     </xsl:if>
@@ -225,11 +211,7 @@
                             <xsl:value-of select="$label"/>
                         </text>
                     </navLabel>
-                    <content>
-                        <xsl:attribute name="src">
-                            <xsl:call-template name="splitter-generate-url-for"/>
-                        </xsl:attribute>
-                    </content>
+                    <content src="{f:determine-url(.)}"/>
                 </navPoint>
             </xsl:if>
         </xsl:if>

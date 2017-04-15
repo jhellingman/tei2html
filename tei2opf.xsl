@@ -712,9 +712,7 @@
                 <reference type="cover" title="{f:message('msgCoverImage')}">
                     <xsl:attribute name="href">
                         <!-- We want a bare file name here to help some ePub readers -->
-                        <xsl:call-template name="generate-filename-for">
-                            <xsl:with-param name="node" select="key('id', 'cover')[1]"/>
-                        </xsl:call-template>
+                        <xsl:value-of select="f:generate-filename(key('id', 'cover')[1])"/>
                    </xsl:attribute>
                 </reference>
             </xsl:if>
