@@ -331,7 +331,12 @@
     <xsl:template match="byline">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">par byline <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>byline </xsl:text>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>

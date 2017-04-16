@@ -122,7 +122,7 @@
             <xsl:call-template name="set-lang-id-attributes"/>
 
             <xsl:variable name="class">
-                line
+                <xsl:text>line </xsl:text>
                 <xsl:value-of select="f:hanging-punctuation-class(.)"/><xsl:text> </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
@@ -243,7 +243,10 @@
     <xsl:template mode="alignedverse" match="l">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">line <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:text>line </xsl:text>
+                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            </xsl:attribute>
             <xsl:apply-templates select="*|text()"/>
         </xsl:element>
     </xsl:template>

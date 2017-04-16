@@ -132,7 +132,7 @@
 
     <xsl:template name="reopenpar">
         <xsl:if test="f:needsclosepar(.)">
-            <xsl:text disable-output-escaping="yes">&lt;p class="par"&gt;</xsl:text>
+            <xsl:text disable-output-escaping="yes">&lt;p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
 

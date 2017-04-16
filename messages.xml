@@ -11,7 +11,7 @@
     <!ENTITY gtilde   "g&#x303;">
 
 ]>
-<?xml-stylesheet type="text/xsl" href="review-translations.xsl"?>
+<?xml-stylesheet type="text/xsl" href="messages.xsl"?>
 <msg:repository
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     version="1.0">
@@ -267,6 +267,7 @@
         <msg:message name="en-uk">English (U.K.)</msg:message>
         <msg:message name="en-us">English (U.S.)</msg:message>
         <msg:message name="es">Spanish</msg:message>
+        <msg:message name="es-es">Spanish (Spain)</msg:message>
         <msg:message name="fi">Finnish</msg:message>
         <msg:message name="fr">French</msg:message>
         <msg:message name="he">Hebrew</msg:message>
@@ -825,6 +826,7 @@
         <msg:message name="msgAbbreviationOverview">Overzicht van gebruikte afkortingen.</msg:message>
         <msg:message name="msgExpansion">Uitgeschreven</msg:message>
         <msg:message name="msgExpansionNotAvailable">Uitgeschreven vorm niet beschikbaar</msg:message>
+		<msg:message name="msgReturnToSourceLocation">Terug naar plaats in bron</msg:message>
 
         <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -838,7 +840,10 @@
         <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
         <msg:message name="msgAuthorOfPreface">Auteur van voorwoord</msg:message>
-
+        <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
+        <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
+        <msg:message name="msgOriginalSpine">Originele Rug</msg:message>
+		
         <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
         <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
         <msg:message name="msgAuthorOfPostface">Auteur van naschrift</msg:message>
@@ -1038,6 +1043,7 @@
         <msg:message name="en-uk">Engels (V.K.)</msg:message>
         <msg:message name="en-us">Engels (V.S.)</msg:message>
         <msg:message name="es">Spaans</msg:message>
+        <msg:message name="es-es">Spaans (Spanje)</msg:message>
         <msg:message name="fi">Fins</msg:message>
         <msg:message name="fr">Frans</msg:message>
         <msg:message name="grc">Grieks (Klassiek)</msg:message>
@@ -1335,6 +1341,7 @@
         <msg:message name="en-uk">Inglés (R. U.)</msg:message>
         <msg:message name="en-us">Inglés (EE. UU.)</msg:message>
         <msg:message name="es">Español</msg:message>
+        <msg:message name="es-es">Español (España)</msg:message>
         <msg:message name="fi">Finés</msg:message>
         <msg:message name="fr">Francés</msg:message>
         <msg:message name="grc">Griego (clásico)</msg:message>

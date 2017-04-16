@@ -114,7 +114,10 @@
     <xsl:template match="note[p]" mode="footnotes">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                par footnote
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>footnote </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -138,7 +141,10 @@
     <xsl:template match="note" mode="footnotes">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                par footnote
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>footnote </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -230,7 +236,10 @@
 
     <xsl:template name="footnote-paragraph">
         <xsl:variable name="class">
-            par footnote
+            <xsl:if test="$p.element != 'p'">
+                <xsl:text>par </xsl:text>
+            </xsl:if>
+            <xsl:text>footnote </xsl:text>
             <xsl:if test="preceding-sibling::p">cont </xsl:if>
             <xsl:if test="ancestor::note[@place='apparatus']">apparatus</xsl:if>
             <xsl:call-template name="generate-rend-class-name-if-needed"/>
@@ -366,7 +375,10 @@
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                par footnote apparatus
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>footnote apparatus </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -389,7 +401,10 @@
     <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                par footnote apparatus
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>footnote apparatus </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
@@ -440,7 +455,10 @@
             <xsl:for-each-group select="$collected-notes/*" group-starting-with="tmp:br">
                 <xsl:element name="{$p.element}">
                     <xsl:variable name="class">
-                        par apparatus
+                        <xsl:if test="$p.element != 'p'">
+                            <xsl:text>par </xsl:text>
+                        </xsl:if>
+                        <xsl:text>apparatus </xsl:text>
                         <xsl:call-template name="generate-rend-class-name-if-needed"/>
                     </xsl:variable>
                     <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>

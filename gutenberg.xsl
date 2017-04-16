@@ -100,11 +100,7 @@
                     <param name="authors"><xsl:call-template name="combine-authors"/></param>
                     <param name="releasedate"><xsl:value-of select="//publicationStmt/date"/></param>
                     <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
-                    <param name="language">
-                        <xsl:call-template name="GetMessage">
-                            <xsl:with-param name="name" select="/*[self::TEI.2 or self::TEI]/@lang"/>
-                        </xsl:call-template>
-                    </param>
+                    <param name="language"><xsl:value-of select="f:message(/*[self::TEI.2 or self::TEI]/@lang)"/></param>
                 </params>
             </xsl:variable>
             <xsl:call-template name="FormatMessage">

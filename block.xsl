@@ -426,7 +426,10 @@
                 <xsl:call-template name="set-lang-id-attributes"/>
 
                 <xsl:variable name="class">
-                    <xsl:text>par </xsl:text>
+                    <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
+                    <xsl:if test="$p.element != 'p'">
+                        <xsl:text>par </xsl:text>
+                    </xsl:if>
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
                     <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
@@ -611,7 +614,12 @@
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:call-template name="generate-rend-class-name"/>
+            </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
                 <xsl:choose>
@@ -637,7 +645,12 @@
             </xsl:call-template>
         </div>
         <xsl:element name="{$p.element}">
-            <xsl:attribute name="class">par first</xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:text>first</xsl:text>
+            </xsl:attribute>
             <xsl:apply-templates mode="eat-initial"/>
         </xsl:element>
     </xsl:template>
@@ -758,7 +771,12 @@
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">par <xsl:call-template name="generate-rend-class-name"/></xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:if test="$p.element != 'p'">
+                    <xsl:text>par </xsl:text>
+                </xsl:if>
+                <xsl:call-template name="generate-rend-class-name"/>
+            </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dc initdropcap</xsl:attribute>
                 <xsl:choose>
