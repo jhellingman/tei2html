@@ -110,7 +110,7 @@
             <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message(lower-case($language)))"/>
 
             <xsl:apply-templates select="//sourceDesc" mode="colophonSourceDesc"/>
-            
+
             <xsl:call-template name="keywords"/>
             <xsl:call-template name="classification"/>
         </table>
@@ -193,7 +193,7 @@
     <xd:doc>
         <xd:short>Generate a list of classifications.</xd:short>
         <xd:detail>
-            <p>Generate a list of classifications, based on information in the <code>profileDesc/textClass/classCode</code>. 
+            <p>Generate a list of classifications, based on information in the <code>profileDesc/textClass/classCode</code>.
             Note that for proper rendering, a <code>taxonomy</code> element corresponding to the indicated scheme must be present,
             and contain a human-readable text. (works for TEI P3; TODO: make this work for TEI P5.)</p>
         </xd:detail>
@@ -318,7 +318,7 @@
         <xd:short>Generate a list of corrections.</xd:short>
         <xd:detail>
             <p>Generate a list of corrections made to the text, as indicated by <code>corr</code>-elements. Identical
-            corrections are grouped together. The page numbers link back to the <code>corr</code>-element as it 
+            corrections are grouped together. The page numbers link back to the <code>corr</code>-element as it
             appears in the text.</p>
         </xd:detail>
     </xd:doc>
@@ -505,8 +505,8 @@
                 </xsl:for-each>
             </xsl:variable>
 
-            <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="concat(tmp:abbr, '@@@', tmp:expan)">            
-                <xsl:sort select="tmp:abbr" data-type="text" order="ascending"/>
+            <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="concat(tmp:abbr, '@@@', tmp:expan)">
+                <xsl:sort select="lower-case(tmp:abbr)" data-type="text" order="ascending"/>
                 <tr>
                     <td class="bottom">
                         <xsl:apply-templates select="tmp:abbr"/>
@@ -566,7 +566,7 @@
         <xd:short>Generate a table of external references.</xd:short>
         <xd:detail>
             <p>Generate a table of external references in the text, as indicated by <code>xref</code>-elements or
-            <code>ref</code>-elements. Identical external references are grouped together. The page numbers link 
+            <code>ref</code>-elements. Identical external references are grouped together. The page numbers link
             back to the location the external reference appears in the text.</p>
         </xd:detail>
     </xd:doc>

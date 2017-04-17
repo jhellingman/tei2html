@@ -5,7 +5,7 @@
 */
 
 body {
-	padding: 1.58em 16%;
+    padding: 1.58em 16%;
 }
 
 /* The following rules use absolute positioning and are thus taboo in ePubs */
@@ -13,62 +13,63 @@ body {
 /* page numbers, placed in right margin */
 
 .pagenum {
-	display: inline;
-	font-size: 70%;
-	font-style: normal;
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	right: 1%;
-	text-align: right;
+    display: inline;
+    font-size: 70%;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 1%;
+    text-align: right;
 }
 
 .marginnote {
-	font-size: 0.8em;
-	height: 0;
-	left: 1%;
-	line-height: 1.2em;
-	position: absolute;
-	text-indent: 0;
-	width: 14%;
+    font-size: 0.8em;
+    height: 0;
+    left: 1%;
+    line-height: 1.2em;
+    position: absolute;
+    text-indent: 0;
+    width: 14%;
+    text-align: left;
 }
 
 span.tocPageNum, span.flushright {
-	position: absolute;
-	right: 16%;
-	top: auto;
+    position: absolute;
+    right: 16%;
+    top: auto;
 }
 
 /* External Links are decorated with little icons in the HTML version: */
 
 .pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
-	background-repeat: no-repeat;
-	background-position: right center;
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
 .pglink {
-	background-image: url(images/book.png);
-	padding-right: 18px;
+    background-image: url(images/book.png);
+    padding-right: 18px;
 }
 
 .catlink {
-	background-image: url(images/card.png);
-	padding-right: 17px;
+    background-image: url(images/card.png);
+    padding-right: 17px;
 }
 
 .exlink, .wplink, .biblink, .seclink {
-	background-image: url(images/external.png);
-	padding-right: 13px;
+    background-image: url(images/external.png);
+    padding-right: 13px;
 }
 
 .pglink:hover {
-	background-color: #DCFFDC;
+    background-color: #DCFFDC;
 }
 
 .catlink:hover {
-	background-color: #FFFFDC;
+    background-color: #FFFFDC;
 }
 
 .exlink:hover, .wplink:hover, .biblink:hover {
-	background-color: #FFDCDC;
+    background-color: #FFDCDC;
 }
