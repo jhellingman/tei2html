@@ -25,14 +25,17 @@ sub main() {
 
     my $tmpFile1 = mktemp('tmp-XXXXX');
     my $tmpFile2 = mktemp('tmp-XXXXX');
+    my $tmpFile3 = mktemp('tmp-XXXXX');
 
     adjustNotationTags($infile, $tmpFile1);
     
     system ("patc -p $patcdir/greek/grt2sgml8.pat $tmpFile1 $tmpFile2");
-    system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile2 $outfile");
+    system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile2 $tmpFile3");
+    system ("patc -p $patcdir/indic/dn2latn8.pat $tmpFile3 $outfile");
 
     unlink($tmpFile1);
     unlink($tmpFile2);
+    unlink($tmpFile3);
 }
 
 sub adjustNotationTags($$) {

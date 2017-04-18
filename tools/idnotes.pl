@@ -1,4 +1,4 @@
-# idnotes.pl -- give footnotes ids base on de page and number they have
+# idnotes.pl -- give footnotes ids based on de page and number they have
 
 use strict;
 
