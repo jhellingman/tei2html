@@ -247,7 +247,7 @@ p.dropcap:first-letter, .par.dropcap:first-letter {
     vertical-align: super;
 }
 
-p.quote, div.blockquote, div.argument, .par.quote {
+blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     font-size: 0.9em;
     line-height: 1.2em;
     margin: 1.58em 5%;

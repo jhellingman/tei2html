@@ -299,15 +299,23 @@
         <div>
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:variable name="class">
-                <xsl:choose>
-                    <xsl:when test="@rend='block'"><xsl:text>blockquote </xsl:text></xsl:when>
-                    <xsl:otherwise><xsl:text>q </xsl:text></xsl:otherwise>
-                </xsl:choose>
+                <xsl:text>q </xsl:text>
                 <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
             <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
             <xsl:apply-templates/>
         </div>
+        <xsl:call-template name="reopenpar"/>
+    </xsl:template>
+
+
+    <xsl:template match="q[@rend = 'block']">
+        <xsl:call-template name="closepar"/>
+        <blockquote>
+            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+            <xsl:apply-templates/>
+        </blockquote>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
@@ -368,10 +376,10 @@
 
     <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
-        <div class="blockquote letter">
+        <blockquote class="letter">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:apply-templates/>
-        </div>
+        </blockquote>
         <xsl:call-template name="reopenpar"/>
     </xsl:template>
 
@@ -667,7 +675,7 @@
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
-            <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+            <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
 .<xsl:call-template name="generate-rend-class-name"/> {
     background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat top left;
@@ -675,8 +683,8 @@
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
     </xsl:if>
 
-    <xsl:if test="normalize-space($properties) != ''">
-        <xsl:value-of select="normalize-space($properties)"/>
+    <xsl:if test="normalize-space($css-properties) != ''">
+        <xsl:value-of select="normalize-space($css-properties)"/>
     </xsl:if>
 }
 
@@ -806,13 +814,13 @@
 
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]" mode="css">
 
-        <xsl:variable name="properties"><xsl:call-template name="translate-rend-attribute"/></xsl:variable>
+        <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
 .<xsl:call-template name="generate-rend-class-name"/> {
     text-indent: 0;
 
-    <xsl:if test="normalize-space($properties) != ''">
-        <xsl:value-of select="normalize-space($properties)"/>
+    <xsl:if test="normalize-space($css-properties) != ''">
+        <xsl:value-of select="normalize-space($css-properties)"/>
     </xsl:if>
 }
 

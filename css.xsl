@@ -183,102 +183,103 @@
         <xd:param name="name">The name of the element carrying this attribute.</xd:param>
     </xd:doc>
 
-    <xsl:template name="translate-rend-attribute">
-        <xsl:param name="rend" select="normalize-space(@rend)" as="xs:string"/>
-        <xsl:param name="name" select="name()" as="xs:string"/>
+    <xsl:function name="f:translate-rend-ladder" as="xs:string">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="name" as="xs:string"/>
 
-        <!-- A rendition ladder is straighfowardly converted to CSS, by taking the
-             characters before the "(" as the css property, and the characters
-             between "(" and ")" as the value. We convert an entire string
-             by first handling the head, and then recursively the tail -->
+        <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
-        <xsl:if test="$rend != ''">
-            <xsl:call-template name="filter-css-property">
-                <xsl:with-param name="property" select="substring-before($rend, '(')"/>
-                <xsl:with-param name="value" select="substring-before(substring-after($rend, '('), ')')"/>
-            </xsl:call-template>
+        <xsl:variable name="css">
+            <xsl:analyze-string select="$rend" regex="([a-z][a-z-0-9]*)\((.*?)\)" flags="i">
+                <xsl:matching-substring>
+                    <xsl:value-of select="f:translate-rend-ladder-step(regex-group(1), regex-group(2), $name)"/>
+                </xsl:matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable> 
 
-            <xsl:call-template name="translate-rend-attribute">
-                <xsl:with-param name="rend" select="normalize-space(substring-after($rend, ')'))"/>
-                <xsl:with-param name="name" select="$name"/>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>
+        <xsl:value-of select="normalize-space($css)"/>
+    </xsl:function>
 
 
     <xd:doc>
-        <xd:short>Filter CSS properties with special meanings.</xd:short>
-        <xd:detail>Filter those CSS properties with a special meaning, so they will not
-        be output to CSS.</xd:detail>
+        <xd:short>Translate a single rend-ladder step to a CSS property.</xd:short>
+        <xd:detail>Translate a single rend-ladder step to a CSS property. Filter those steps 
+        with a special meaning, so they will not be output as invalid CSS.</xd:detail>
         <xd:param name="property">The name of the property to be filtered.</xd:param>
         <xd:param name="value">The value of this property.</xd:param>
+        <xd:param name="name">The name of the element carrying the rend attribute.</xd:param>
     </xd:doc>
 
-    <xsl:template name="filter-css-property">
+    <xsl:function name="f:translate-rend-ladder-step" as="xs:string">
         <xsl:param name="property" as="xs:string"/>
         <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="name" as="xs:string"/>
 
-        <xsl:choose>
-            <!-- Drop properties without values -->
-            <xsl:when test="normalize-space($value)=''"/>
+        <xsl:variable name="css">
+            <xsl:choose>
+                <!-- Drop properties without values -->
+                <xsl:when test="normalize-space($value)=''"/>
 
-            <!-- Properties handled otherwise -->
-            <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
-            <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
-            <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
-            <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
-            <xsl:when test="$property='image'"/>                <!-- in-line image -->
-            <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
-            <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
-            <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
-            <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
-            <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
-            <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
-            <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
-            <xsl:when test="$property='position'"/>             <!-- position in text -->
-            <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
-            <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
-            <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
-            <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
-            <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
-            <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
-            <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
-            <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
+                <!-- Properties handled otherwise -->
+                <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
+                <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
+                <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
+                <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
+                <xsl:when test="$property='image'"/>                <!-- in-line image -->
+                <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
+                <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
+                <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
+                <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
+                <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
+                <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
+                <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
+                <xsl:when test="$property='position'"/>             <!-- position in text -->
+                <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
+                <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
+                <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
+                <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
+                <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
+                <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
+                <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
+                <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
 
-            <!-- Properties used to render verse -->
-            <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
+                <!-- Properties used to render verse -->
+                <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
 
-            <!-- Properties related to decorative initials -->
-            <xsl:when test="$property='initial-image'"/>
-            <xsl:when test="$property='initial-offset'"/>
-            <xsl:when test="$property='initial-width'"/>
-            <xsl:when test="$property='initial-height'"/>
-            <xsl:when test="$property='dropcap'"/>
-            <xsl:when test="$property='dropcap-offset'"/>
+                <!-- Properties related to decorative initials -->
+                <xsl:when test="$property='initial-image'"/>
+                <xsl:when test="$property='initial-offset'"/>
+                <xsl:when test="$property='initial-width'"/>
+                <xsl:when test="$property='initial-height'"/>
+                <xsl:when test="$property='dropcap'"/>
+                <xsl:when test="$property='dropcap-offset'"/>
 
-            <!-- Figure related special handling. -->
-            <xsl:when test="name() = 'figure' and $property = 'float'"/>
+                <!-- Figure related special handling. -->
+                <xsl:when test="$name = 'figure' and $property = 'float'"/>
 
-            <!-- Table related special handling. With the rule
-                 margin: 0px auto, the table is centered, while
-                 display: table shrinks the bounding box to the content -->
-            <xsl:when test="name() = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table;</xsl:when>
-            <xsl:when test="name() = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="$value"/>em;</xsl:when>
+                <!-- Table related special handling. With the rule
+                     margin: 0px auto, the table is centered, while
+                     display: table shrinks the bounding box to the content -->
+                <xsl:when test="$name = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
+                <xsl:when test="$name = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="$value"/>em; </xsl:when>
 
-            <!-- Properties related to special font usage -->
-            <xsl:when test="$property='font' and $value='fraktur'">font-family:'Walbaum-Fraktur';</xsl:when>
-            <xsl:when test="$property='font' and $value='italic'">font-style:italic;</xsl:when>
+                <!-- Properties related to special font usage -->
+                <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:getSetting('css.frakturFont')"/>'; </xsl:when>
+                <xsl:when test="$property='font' and $value='italic'">font-style:italic; </xsl:when>
 
-            <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>;</xsl:when>
-            <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>;</xsl:when>
-            <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="$value"/>em;</xsl:when>
+                <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>; </xsl:when>
+                <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>; </xsl:when>
+                <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="$value"/>em; </xsl:when>
 
-            <!-- Assume the rest is valid CSS -->
-            <xsl:otherwise>
-                <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/>;
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
+                <!-- Assume the rest is valid CSS -->
+                <xsl:otherwise>
+                    <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/><xsl:text>; </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$css"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -335,12 +336,7 @@
             <xsl:text> </xsl:text>
         </xsl:if>
 
-        <xsl:variable name="css-properties">
-            <xsl:call-template name="translate-rend-attribute">
-                <xsl:with-param name="rend" select="normalize-space($rend)"/>
-                <xsl:with-param name="name" select="name($node)"/>
-            </xsl:call-template>
-        </xsl:variable>
+        <xsl:variable name="css-properties" select="f:translate-rend-ladder($rend, name())"/>
 
         <xsl:if test="normalize-space($css-properties) != ''">
             <xsl:call-template name="generate-rend-class-name">
@@ -442,12 +438,7 @@
     <xsl:template name="generate-css-rule">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
-            <xsl:variable name="css-properties">
-                <xsl:call-template name="translate-rend-attribute">
-                    <xsl:with-param name="rend" select="normalize-space(@rend)"/>
-                    <xsl:with-param name="name" select="name()"/>
-                </xsl:call-template>
-            </xsl:variable>
+            <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>               
 
             <xsl:if test="normalize-space($css-properties) != ''">
                 <!-- Use the id of the first element with this rend attribute as a class selector -->

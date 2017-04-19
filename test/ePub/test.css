@@ -243,7 +243,7 @@ p.dropcap:first-letter, .par.dropcap:first-letter {
  vertical-align: super;
 }
 
-p.quote, div.blockquote, div.argument, .par.quote {
+blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  font-size: 0.9em;
  line-height: 1.2em;
  margin: 1.58em 5%;
@@ -961,11 +961,11 @@ color:blue; text-align:right;
 }
 
 .xd28e776 {
-text-align:left;width:40%; padding:4px;
+text-align:left; width:40%; padding:4px;
 }
 
 .xd28e777 {
-text-align:right;border-left:1px solid black; padding:4px;
+text-align:right; border-left:1px solid black; padding:4px;
 }
 
 .xd28e987 {

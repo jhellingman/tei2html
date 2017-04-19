@@ -66,6 +66,8 @@
             <textCriticalNoteSymbol>&deg;</textCriticalNoteSymbol>      <!-- Note marker used with text-critical notes (coded with place=apparatus) at location in text. -->
             <textCriticalNoteReturnSymbol>&deg;</textCriticalNoteReturnSymbol> <!-- Note marker used with text-critical notes (coded with place=apparatus) in apparatus, to return to text. -->
 
+            <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified -->
+
             <colophon.showEditDistance>true</colophon.showEditDistance>     <!-- Show the Levenshtein edit distance in the list of corrections made in the colophon. -->
             <colophon.showCorrections>true</colophon.showCorrections>       <!-- Show a list of corrections in the colophon. -->
             <colophon.showAbbreviations>true</colophon.showAbbreviations>   <!-- Show a list of abbreviations in the colophon. -->
