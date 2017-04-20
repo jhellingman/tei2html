@@ -107,7 +107,7 @@
         <xsl:variable name="context" select="." as="element(table)"/>
 
         <table>
-            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+            <xsl:copy-of select="f:generate-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
@@ -274,17 +274,13 @@
 
         <xsl:variable name="class">
             <xsl:if test="@role and not(@role='data' or @role='sum')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
-            <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
             <xsl:if test="@rows > 1">rowspan </xsl:if>
             <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>
         </xsl:variable>
-
-        <xsl:if test="normalize-space($class) != ''">
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-        </xsl:if>
+        <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:call-template name="insertimage2">
@@ -300,10 +296,7 @@
         <xsl:variable name="context" select="." as="element(cell)"/>
 
         <xsl:if test="../@rend">
-            <xsl:call-template name="generate-rend-class-name">
-                <xsl:with-param name="rend" select="../@rend"/>
-                <xsl:with-param name="node" select=".."/>
-            </xsl:call-template>
+            <xsl:value-of select="f:generate-class-name(..)"/>
         </xsl:if>
     </xsl:template>
 
@@ -316,7 +309,7 @@
             <xsl:call-template name="find-column-number"/>
         </xsl:variable>
         <xsl:for-each select="../../column[position() = $position]">
-            <xsl:call-template name="generate-rend-class-name-if-needed"/>
+            <xsl:copy-of select="f:generate-class(.)"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -424,7 +417,7 @@
         <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
 
         <table>
-            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+            <xsl:copy-of select="f:generate-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">

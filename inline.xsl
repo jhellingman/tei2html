@@ -169,7 +169,7 @@
                 <span>
                     <xsl:call-template name="set-lang-id-attributes"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
-                    <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+                    <xsl:copy-of select="f:generate-class-attribute(.)"/>
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
@@ -581,14 +581,10 @@
             </xsl:if>
             <span>
                 <xsl:call-template name="set-lang-id-attributes"/>
-
                 <xsl:variable name="class">
                     <xsl:value-of select="@type"/>
-                    <xsl:text> </xsl:text>
-                    <xsl:call-template name="generate-rend-class-name-if-needed"/>
                 </xsl:variable>
-
-                <xsl:attribute name="class" select="normalize-space($class)"/>
+                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
                 <xsl:apply-templates/>
             </span>
         </xsl:if>

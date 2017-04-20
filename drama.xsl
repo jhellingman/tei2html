@@ -67,12 +67,12 @@
         <xsl:call-template name="closepar"/>
         <div>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">
+            <xsl:variable name="class">
                 <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg or parent::sp">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:attribute>
+            </xsl:variable>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -102,7 +102,7 @@
 
     <xsl:template match="lg/head">
         <h4>
-            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+            <xsl:copy-of select="f:generate-class-attribute(.)"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
@@ -123,11 +123,9 @@
 
             <xsl:variable name="class">
                 <xsl:text>line </xsl:text>
-                <xsl:value-of select="f:hanging-punctuation-class(.)"/><xsl:text> </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                <xsl:value-of select="f:hanging-punctuation-class(.)"/>
             </xsl:variable>
-
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
             <xsl:if test="@n">
                 <span class="lineNum"><xsl:value-of select="@n"/></span>
@@ -243,10 +241,7 @@
     <xsl:template mode="alignedverse" match="l">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">
-                <xsl:text>line </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'line')"/>
             <xsl:apply-templates select="*|text()"/>
         </xsl:element>
     </xsl:template>
@@ -257,8 +252,8 @@
 
     <xsl:template match="sp">
         <div>
-            <xsl:attribute name="class">sp <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'sp')"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -266,8 +261,8 @@
     <!-- Speaker -->
     <xsl:template match="speaker">
         <xsl:element name="{$p.element}">
-            <xsl:attribute name="class">speaker <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'speaker')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
@@ -275,24 +270,24 @@
     <!-- Stage directions -->
     <xsl:template match="stage">
         <xsl:element name="{$p.element}">
-            <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
         <xsl:element name="{$p.element}">
-            <xsl:attribute name="class">stage alignright <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage alignright')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
         <span>
-            <xsl:attribute name="class">stage <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -300,24 +295,24 @@
     <!-- Cast lists -->
     <xsl:template match="castList">
         <ul>
-            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
         <li>
-            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
 
     <xsl:template match="castGroup">
         <li>
-            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">
                 <xsl:apply-templates select="castItem"/>
@@ -334,8 +329,8 @@
 
     <xsl:template match="castItem">
         <li>
-            <xsl:attribute name="class">castitem <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'castitem')"/>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
@@ -350,8 +345,8 @@
 
     <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']">
         <li>
-            <xsl:attribute name="class">castlist <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
             <xsl:variable name="count" select="count(castItem)"/>
             <xsl:variable name="this" select="."/>
             <table class="castGroupTable">

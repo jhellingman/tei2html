@@ -363,14 +363,15 @@
                     <xsl:value-of select="document(normalize-space($imageInfoFile), .)/img:images/img:image[@path=$file]/@width"/>
                 </xsl:variable>
 
-                <xsl:attribute name="class">
+                <xsl:variable name="class">
                     <xsl:text>figure </xsl:text>
                     <xsl:if test="f:rend-value(@rend, 'float') = 'left'">floatLeft </xsl:if>
                     <xsl:if test="f:rend-value(@rend, 'float') = 'right'">floatRight </xsl:if>
-                    <xsl:call-template name="generate-rend-class-name-if-needed"/><xsl:text> </xsl:text>
+
                     <!-- Add the class that sets the width, if the width is known -->
                     <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
-                </xsl:attribute>
+                </xsl:variable>
+                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
                 <xsl:call-template name="figure-head-top"/>
                 <xsl:call-template name="figure-annotations-top"/>

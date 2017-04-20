@@ -283,92 +283,93 @@
 
 
     <xd:doc>
-        <xd:short>Generate a CSS class name.</xd:short>
-        <xd:detail>Generate a CSS class name. This class name is derived from the
-        generated id of the first element having this <code>@rend</code> attribute value.</xd:detail>
-        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
-        <xd:param name="node">The node carrying this attribute.</xd:param>
+        <xd:short>Generate a class name for a rendition ladder.</xd:short>
+        <xd:detail>Generate a class name for a rendition ladder. This class name is derived from the (generated) id 
+        of the first element having the specific <code>@rend</code> attribute value of this node.</xd:detail>
+        <xd:param name="node">The node for which a class name is to be generated.</xd:param>
     </xd:doc>
 
-    <xsl:template name="generate-rend-class-name">
-        <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="." as="element()"/>
+    <xsl:function name="f:generate-class-name" as="xs:string">
+        <xsl:param name="node" as="element()"/>
 
-        <xsl:value-of select="f:generate-id(key('rend', concat(name($node), ':', $rend))[1])"/>
-    </xsl:template>
+        <xsl:value-of select="f:generate-id(key('rend', concat(name($node), ':', $node/@rend), root($node))[1])"/>
+    </xsl:function>
 
 
     <xd:doc>
-        <xd:short>Generate a CSS class attribute.</xd:short>
-        <xd:detail>The same as above, but now wrapped up in an attribute</xd:detail>
-        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
-        <xd:param name="node">The node carrying this attribute.</xd:param>
+        <xd:short>Generate a CSS selector for a rendition ladder.</xd:short>
+        <xd:detail>Generate a CSS selector name for a rendition ladder. This is the same value as calculated
+        in <code>f:generate-class-name()</code>, but with periods escaped to accomodate CSS.</xd:detail>
+        <xd:param name="node">The node for which a CSS selector is to be generated.</xd:param>
     </xd:doc>
 
-    <xsl:template name="generate-rend-class-attribute">
-        <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="." as="element()"/>
+    <xsl:function name="f:generate-css-class-selector" as="xs:string">
+        <xsl:param name="node" as="element()"/>
 
-        <xsl:attribute name="class">
-            <xsl:call-template name="generate-rend-class-name">
-                <xsl:with-param name="rend" select="$rend"/>
-                <xsl:with-param name="node" select="$node"/>
-            </xsl:call-template>
-        </xsl:attribute>
-    </xsl:template>
+        <xsl:value-of select="replace(f:generate-class-name($node), '\.', '\\.')"/>
+    </xsl:function>
 
 
     <xd:doc>
-        <xd:short>Optionally generate a CSS class name.</xd:short>
-        <xd:detail>As before, but we only need to insert a class name in the output, if
-         there is a matching CSS rule, or an explicit class
-         declaration in the <code>@rend</code> attribute.</xd:detail>
-        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
-        <xd:param name="node">The node carrying this attribute.</xd:param>
+        <xd:short>Generate the class for an element.</xd:short>
+        <xd:detail>Generate the class for an element. This is a combination of the class generated
+        for the rendition ladder and any explicit classes provided in the <code>@rend</code> attribute.</xd:detail>
+        <xd:param name="node">The node for which a class is to be generated.</xd:param>
     </xd:doc>
 
-    <xsl:template name="generate-rend-class-name-if-needed">
-        <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="." as="element()"/>
+    <xsl:function name="f:generate-class" as="xs:string">
+        <xsl:param name="node" as="element()"/>
 
-        <xsl:if test="f:has-rend-value($rend, 'class')">
-            <xsl:value-of select="f:rend-value($rend, 'class')"/>
-            <xsl:text> </xsl:text>
-        </xsl:if>
-
-        <xsl:variable name="css-properties" select="f:translate-rend-ladder($rend, name())"/>
-
-        <xsl:if test="normalize-space($css-properties) != ''">
-            <xsl:call-template name="generate-rend-class-name">
-                <xsl:with-param name="rend" select="$rend"/>
-                <xsl:with-param name="node" select="$node"/>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Optionally generate a CSS class attribute.</xd:short>
-        <xd:detail>The same as above, but now wrapped up in an attribute</xd:detail>
-        <xd:param name="rend">The <code>@rend</code> attribute for which a class name is generated.</xd:param>
-        <xd:param name="node">The node carrying this attribute.</xd:param>
-    </xd:doc>
-
-    <xsl:template name="generate-rend-class-attribute-if-needed">
-        <xsl:param name="rend" select="@rend" as="xs:string?"/>
-        <xsl:param name="node" select="." as="element()"/>
+        <xsl:variable name="rend" select="$node/@rend" as="xs:string?"/>
 
         <xsl:variable name="class">
-            <xsl:call-template name="generate-rend-class-name-if-needed">
-                <xsl:with-param name="rend" select="$rend"/>
-                <xsl:with-param name="node" select="$node"/>
-            </xsl:call-template>
+            <xsl:if test="f:has-rend-value($rend, 'class')">
+                <xsl:value-of select="f:rend-value($rend, 'class')"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <xsl:if test="normalize-space(f:translate-rend-ladder($rend, name($node))) != ''">
+                <xsl:value-of select="f:generate-class-name($node)"/>
+            </xsl:if>
         </xsl:variable>
+        <xsl:value-of select="normalize-space($class)"/>
+    </xsl:function>
 
-        <xsl:if test="normalize-space($class) != ''">
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+
+    <xd:doc>
+        <xd:short>Generate an optional class attribute for an element.</xd:short>
+        <xd:detail>Generate an optional class attribute for an element. This is the result
+        of the call to <code>f:generate-class()</code>, wrapped in an attribute.</xd:detail>
+        <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-class-attribute" as="attribute()?">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:variable name="class" select="f:generate-class($node)"/>
+        <xsl:if test="$class != ''">
+            <xsl:attribute name="class" select="$class"/>
         </xsl:if>
-    </xsl:template>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Generate an optional class attribute for an element.</xd:short>
+        <xd:detail>Generate an optional class attribute for an element. This is the result
+        of the call to <code>f:generate-class()</code>, with the second argument appended, 
+        wrapped in an attribute.</xd:detail>
+        <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
+        <xd:param name="class">Classes to add to the generated class.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-class-attribute-with" as="attribute()?">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="class" as="xs:string"/>
+
+        <xsl:variable name="class" select="normalize-space(concat($class, ' ', f:generate-class($node)))"/>
+        <xsl:if test="$class != ''">
+            <xsl:attribute name="class" select="$class"/>
+        </xsl:if>
+    </xsl:function>
 
 
     <xd:doc>
@@ -438,17 +439,16 @@
     <xsl:template name="generate-css-rule">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
-            <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>               
+            <xsl:variable name="css-properties" select="normalize-space(f:translate-rend-ladder(@rend, name()))"/>               
 
-            <xsl:if test="normalize-space($css-properties) != ''">
+            <xsl:if test="$css-properties != ''">
                 <!-- Use the id of the first element with this rend attribute as a class selector -->
                 <xsl:text>
 .</xsl:text>
-                <xsl:call-template name="generate-rend-class-name"/>
+                <xsl:value-of select="f:generate-css-class-selector(.)"/>
                 <xsl:text> {
 </xsl:text>
-                    <xsl:value-of select="normalize-space($css-properties)"/>
-                    <xsl:if test="false()">/* node='<xsl:value-of select="name()"/>' rend='<xsl:value-of select="normalize-space(@rend)"/>' count='<xsl:value-of select="count(key('rend', concat(name(), ':', @rend)))"/>' */</xsl:if>
+                    <xsl:value-of select="$css-properties"/>
                 <xsl:text>
 }
 </xsl:text>

@@ -34,7 +34,7 @@
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
                     <xsl:call-template name="set-lang-id-attributes"/>
-                    <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+                    <xsl:copy-of select="f:generate-class-attribute(.)"/>
                     <xsl:apply-templates/>
                 </xsl:element>
             </xsl:otherwise>
@@ -136,7 +136,6 @@
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
-        <xsl:variable name="rend" select="@rend"/>
         <xsl:variable name="node" select="."/>
 
         <table class="splitlisttable">
@@ -145,10 +144,7 @@
                 <xsl:for-each-group select="*" group-by="(position() - 1) idiv $rows">
                     <td>
                         <xsl:element name="{$listType}">
-                            <xsl:call-template name="generate-rend-class-attribute-if-needed">
-                                <xsl:with-param name="rend" select="$rend"/>
-                                <xsl:with-param name="node" select="$node"/>
-                            </xsl:call-template>
+                            <xsl:copy-of select="f:generate-class-attribute($node)"/>
                             <xsl:apply-templates select="current-group()"/>
                         </xsl:element>
                     </td>
@@ -167,7 +163,6 @@
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
-        <xsl:variable name="rend" select="@rend"/>
         <xsl:variable name="node" select="."/>
 
         <table class="splitlisttable">
@@ -176,10 +171,7 @@
                 <xsl:for-each-group select="*" group-by="(position() - 1) mod $columns">
                     <td>
                         <xsl:element name="{$listType}">
-                            <xsl:call-template name="generate-rend-class-attribute-if-needed">
-                                <xsl:with-param name="rend" select="$rend"/>
-                                <xsl:with-param name="node" select="$node"/>
-                            </xsl:call-template>
+                            <xsl:copy-of select="f:generate-class-attribute($node)"/>
                             <xsl:apply-templates select="current-group()"/>
                         </xsl:element>
                     </td>
@@ -222,8 +214,8 @@
 
     <xsl:template match="itemGroup">
         <li>
-            <xsl:attribute name="class">itemGroup <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'itemGroup')"/>
 
             <xsl:variable name="this" select="."/>
             <xsl:variable name="count" select="count(item)"/>
@@ -283,7 +275,7 @@
 
     <xsl:template name="handle-item">
         <xsl:call-template name="set-lang-id-attributes"/>
-        <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+        <xsl:copy-of select="f:generate-class-attribute(.)"/>
         <xsl:if test="@n and ($outputformat != 'epub')">
             <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
             <xsl:attribute name="value">

@@ -227,7 +227,7 @@
             <xsl:attribute name="class">
                 <xsl:value-of select="f:translate-xref-class($url)"/>
                 <xsl:text> </xsl:text>
-                <xsl:call-template name="generate-rend-class-name"/>
+                <xsl:value-of select="f:generate-class-name(.)"/>
             </xsl:attribute>
             <xsl:attribute name="title">
                 <xsl:value-of select="f:translate-xref-title($url)"/>

@@ -281,7 +281,7 @@
     <xsl:template match="trailer">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:attribute name="class">trailer <xsl:call-template name="generate-rend-class-name-if-needed"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'trailer')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
@@ -298,11 +298,7 @@
         <xsl:call-template name="closepar"/>
         <div>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:variable name="class">
-                <xsl:text>q </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'q')"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -313,7 +309,7 @@
         <xsl:call-template name="closepar"/>
         <blockquote>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:call-template name="generate-rend-class-attribute-if-needed"/>
+            <xsl:copy-of select="f:generate-class-attribute(.)"/>
             <xsl:apply-templates/>
         </blockquote>
         <xsl:call-template name="reopenpar"/>
@@ -328,11 +324,7 @@
     <xsl:template match="q[parent::cit]">
         <span>
             <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:variable name="class">
-                <xsl:text>epigraph </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., 'epigraph')"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -435,37 +427,20 @@
 
                 <xsl:variable name="class">
                     <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
-                    <xsl:if test="$p.element != 'p'">
-                        <xsl:text>par </xsl:text>
-                    </xsl:if>
+                    <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
-                    <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
+                    <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]"><xsl:text>footnote </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
                     <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
                     <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
-                    <xsl:value-of select="f:hanging-punctuation-class(.)"/><xsl:text> </xsl:text>
-                    <xsl:call-template name="generate-rend-class-name-if-needed"/>
+                    <xsl:value-of select="f:hanging-punctuation-class(.)"/>
                 </xsl:variable>
-
-                <xsl:if test="normalize-space($class) != ''">
-                    <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-                </xsl:if>
+                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
                 <xsl:if test="@n and f:isSet('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
-
                 <xsl:apply-templates/>
-                <!--
-                    <xsl:choose>
-                        <xsl:when test="f:starts-with-punctuation(.)">
-                            <xsl:call-template name="hangOpenPunctuation"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                -->
             </xsl:element>
         </xsl:if>
     </xsl:template>
@@ -623,13 +598,11 @@
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
-                <xsl:call-template name="generate-rend-class-name"/>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                <xsl:value-of select="f:generate-class-name(.)"/>
             </xsl:attribute>
             <span>
-                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>init</xsl:attribute>
+                <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
                 <xsl:choose>
                     <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
                         <xsl:value-of select="substring(.,1,2)"/>
@@ -677,7 +650,7 @@
 
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
-.<xsl:call-template name="generate-rend-class-name"/> {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
     background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat top left;
     <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
@@ -688,7 +661,7 @@
     </xsl:if>
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>init {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/>init {
     float: left;
     width: <xsl:value-of select="f:rend-value(@rend, 'initial-width')"/>;
     height: <xsl:value-of select="f:rend-value(@rend, 'initial-height')"/>;
@@ -718,12 +691,12 @@
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css-handheld">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
 
-.<xsl:call-template name="generate-rend-class-name"/> {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
     background-image: none;
     padding-top: 0;
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>init {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/>init {
     float: none;
     width: auto;
     height: auto;
@@ -780,13 +753,11 @@
         <xsl:element name="{$p.element}">
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:attribute name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
-                <xsl:call-template name="generate-rend-class-name"/>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                <xsl:value-of select="f:generate-class-name(.)"/>
             </xsl:attribute>
             <span>
-                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>dc initdropcap</xsl:attribute>
+                <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>dc initdropcap</xsl:attribute>
                 <xsl:choose>
                     <!-- Handle opening quotation marks and apostrophes as part of the drop cap -->
                     <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
@@ -798,7 +769,7 @@
                 </xsl:choose>
             </span>
             <span>
-                <xsl:attribute name="class"><xsl:call-template name="generate-rend-class-name"/>adc afterdropcap</xsl:attribute>
+                <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>
                 <xsl:apply-templates mode="eat-initial"/>
             </span>
         </xsl:element>
@@ -816,7 +787,7 @@
 
         <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
-.<xsl:call-template name="generate-rend-class-name"/> {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
     text-indent: 0;
 
     <xsl:if test="normalize-space($css-properties) != ''">
@@ -824,7 +795,7 @@
     </xsl:if>
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>dc {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/>dc {
     float: left;
     <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/>;
@@ -835,7 +806,7 @@
     margin-right: 3px;
 }
 
-.<xsl:call-template name="generate-rend-class-name"/>adc {
+.<xsl:value-of select="f:generate-css-class-selector(.)"/>adc {
     /* empty */
 }
 

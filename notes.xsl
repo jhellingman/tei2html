@@ -114,13 +114,10 @@
     <xsl:template match="note[p]" mode="footnotes">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
@@ -141,13 +138,10 @@
     <xsl:template match="note" mode="footnotes">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
@@ -235,18 +229,14 @@
     </xd:doc>
 
     <xsl:template name="footnote-paragraph">
+        <xsl:call-template name="set-lang-id-attributes"/>
         <xsl:variable name="class">
-            <xsl:if test="$p.element != 'p'">
-                <xsl:text>par </xsl:text>
-            </xsl:if>
+            <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
             <xsl:text>footnote </xsl:text>
             <xsl:if test="preceding-sibling::p">cont </xsl:if>
             <xsl:if test="ancestor::note[@place='apparatus']">apparatus</xsl:if>
-            <xsl:call-template name="generate-rend-class-name-if-needed"/>
         </xsl:variable>
-        <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-
-        <xsl:call-template name="set-lang-id-attributes"/>
+        <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -375,13 +365,10 @@
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote apparatus </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
             </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="set-lang-id-attributes"/>
             <xsl:call-template name="apparatus-note-marker"/>
@@ -400,16 +387,13 @@
 
     <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
         <xsl:element name="{$p.element}">
-            <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
-                <xsl:text>footnote apparatus </xsl:text>
-                <xsl:call-template name="generate-rend-class-name-if-needed"/>
-            </xsl:variable>
-            <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
-
             <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:variable name="class">
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                <xsl:text>footnote apparatus</xsl:text>
+            </xsl:variable>
+            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+
             <xsl:call-template name="apparatus-note-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
             <xsl:if test="count(*) = 1">
@@ -455,13 +439,10 @@
             <xsl:for-each-group select="$collected-notes/*" group-starting-with="tmp:br">
                 <xsl:element name="{$p.element}">
                     <xsl:variable name="class">
-                        <xsl:if test="$p.element != 'p'">
-                            <xsl:text>par </xsl:text>
-                        </xsl:if>
+                        <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                         <xsl:text>apparatus </xsl:text>
-                        <xsl:call-template name="generate-rend-class-name-if-needed"/>
                     </xsl:variable>
-                    <xsl:attribute name="class"><xsl:value-of select="normalize-space($class)"/></xsl:attribute>
+                    <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
 
                     <xsl:apply-templates select="current-group()"/>
                 </xsl:element>
