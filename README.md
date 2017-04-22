@@ -35,6 +35,18 @@ reasonable in any case.)
 If you need modifications, extensions of these scripts, or need to have other TEI/XML/XSLT related work 
 done, please be in touch with me on how I can help (at a fee).
 
+## Directories
+
+  * samples: contains a number of sample files (of books posted to Project Gutenberg).
+  * sandbox: contains experimental code.
+  * schemas: contains schema definition for a number of supplementary XML formats.
+  * style: contains CSS stylesheets, used by the generated HTML and ePub results.
+  * test: contains a test TEI file, complete with the generated output in XML, HTML and ePub format. This
+    is used to verify the correct transformation; contains a large number of samples of use, and serves as
+    a regression test when refactoring the XSLT transforms.
+  * tools: contains perl scripts that can be used to apply the transforms; also includes a number of perl scripts
+    that can be used while preparing TEI files.
+
 ## External Links
 
   * [TEI tools](http://www.tei-c.org/Tools/)
