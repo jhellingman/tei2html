@@ -33,8 +33,8 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
-                    <xsl:call-template name="set-lang-id-attributes"/>
-                    <xsl:copy-of select="f:generate-class-attribute(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-class-attribute(.)"/>
                     <xsl:apply-templates/>
                 </xsl:element>
             </xsl:otherwise>
@@ -95,7 +95,7 @@
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <table>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) idiv $columns">
                 <tr>
                     <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
@@ -116,7 +116,7 @@
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
 
         <table>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) mod $rows">
                 <tr>
                     <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
@@ -139,12 +139,12 @@
         <xsl:variable name="node" select="."/>
 
         <table class="splitlisttable">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) idiv $rows">
                     <td>
                         <xsl:element name="{$listType}">
-                            <xsl:copy-of select="f:generate-class-attribute($node)"/>
+                            <xsl:copy-of select="f:set-class-attribute($node)"/>
                             <xsl:apply-templates select="current-group()"/>
                         </xsl:element>
                     </td>
@@ -166,12 +166,12 @@
         <xsl:variable name="node" select="."/>
 
         <table class="splitlisttable">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) mod $columns">
                     <td>
                         <xsl:element name="{$listType}">
-                            <xsl:copy-of select="f:generate-class-attribute($node)"/>
+                            <xsl:copy-of select="f:set-class-attribute($node)"/>
                             <xsl:apply-templates select="current-group()"/>
                         </xsl:element>
                     </td>
@@ -214,8 +214,8 @@
 
     <xsl:template match="itemGroup">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'itemGroup')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup')"/>
 
             <xsl:variable name="this" select="."/>
             <xsl:variable name="count" select="count(item)"/>
@@ -274,8 +274,8 @@
     </xd:doc>
 
     <xsl:template name="handle-item">
-        <xsl:call-template name="set-lang-id-attributes"/>
-        <xsl:copy-of select="f:generate-class-attribute(.)"/>
+        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+        <xsl:copy-of select="f:set-class-attribute(.)"/>
         <xsl:if test="@n and ($outputformat != 'epub')">
             <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
             <xsl:attribute name="value">

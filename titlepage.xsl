@@ -26,80 +26,80 @@
 
     <xsl:template match="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'titlePage')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'titlePage')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docTitle" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'docTitle')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'docTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'mainTitle')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'mainTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='sub']" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'subTitle')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'subTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='series' or @type='Series']" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'seriesTitle')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'seriesTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='volume' or @type='Volume']" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'volumeTitle')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'volumeTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="byline" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'byline')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'byline')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docAuthor" mode="titlePage">
         <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'docAuthor')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'docAuthor')"/>
             <xsl:apply-templates mode="titlePage"/>
         </span>
     </xsl:template>
 
     <xsl:template match="docImprint" mode="titlePage">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'docImprint')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'docImprint')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docDate" mode="titlePage">
         <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'docDate')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'docDate')"/>
             <xsl:apply-templates mode="titlePage"/>
         </span>
     </xsl:template>
@@ -107,7 +107,7 @@
     <xsl:template match="epigraph" mode="titlePage">
         <div>
             <!-- Wrap epigraph in extra layer for formatting -->
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'docImprint')"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'docImprint')"/>
             <xsl:apply-templates select="."/>
         </div>
     </xsl:template>
@@ -134,7 +134,7 @@
 
     <xsl:template match="seg" mode="titlePage">
         <span class="seg">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

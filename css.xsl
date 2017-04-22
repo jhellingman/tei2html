@@ -342,7 +342,7 @@
         <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:generate-class-attribute" as="attribute()?">
+    <xsl:function name="f:set-class-attribute" as="attribute()?">
         <xsl:param name="node" as="element()"/>
 
         <xsl:variable name="class" select="f:generate-class($node)"/>
@@ -361,7 +361,7 @@
         <xd:param name="class">Classes to add to the generated class.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:generate-class-attribute-with" as="attribute()?">
+    <xsl:function name="f:set-class-attribute-with" as="attribute()?">
         <xsl:param name="node" as="element()"/>
         <xsl:param name="class" as="xs:string"/>
 

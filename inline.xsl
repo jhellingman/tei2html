@@ -42,7 +42,7 @@
     </xd:doc>
 
     <xsl:template match="emph">
-        <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
+        <i><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
@@ -53,7 +53,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='it' or @rend='italic'] | i">
-        <i><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></i>
+        <i><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></i>
     </xsl:template>
 
     <xd:doc>
@@ -62,7 +62,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='b' or @rend='bold'] | b">
-        <b><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></b>
+        <b><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></b>
     </xsl:template>
 
     <xd:doc>
@@ -91,7 +91,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='sc'] | sc">
-        <span class="sc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="sc"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -100,7 +100,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='uc']">
-        <span class="uc"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="uc"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -109,7 +109,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='ex'] | g">
-        <span class="ex"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="ex"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -118,7 +118,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='rm'] | rm">
-        <span class="rm"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="rm"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -127,7 +127,7 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='tt'] | tt">
-        <span class="tt"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="tt"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -167,15 +167,15 @@
             <!-- Test covers any potential rendition ladder -->
             <xsl:when test="contains(@rend, '(')">
                 <span>
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
-                    <xsl:copy-of select="f:generate-class-attribute(.)"/>
+                    <xsl:copy-of select="f:set-class-attribute(.)"/>
                     <xsl:apply-templates/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
                 <i>
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates/>
                 </i>
             </xsl:otherwise>
@@ -188,7 +188,7 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
-        <span class="Greek"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="Greek"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -197,7 +197,7 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='ar']">
-        <span class="Arabic"><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span class="Arabic"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
     <xd:doc>
@@ -206,7 +206,7 @@
     </xd:doc>
 
     <xsl:template match="foreign">
-        <span><xsl:call-template name="set-lang-id-attributes"/><xsl:apply-templates/></span>
+        <span><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
     </xsl:template>
 
 
@@ -272,13 +272,13 @@
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
             <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
                 <span>
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$msgNotInSource"/>
                     </xsl:attribute>
@@ -291,7 +291,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="$sicString"/>
                     </xsl:attribute>
@@ -396,7 +396,7 @@
 
     <xsl:template match="abbr">
         <abbr>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="@type">
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
@@ -437,7 +437,7 @@
 
     <xsl:template match="num">
         <span class="num">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@value"/>
@@ -459,7 +459,7 @@
 
     <xsl:template match="trans">
         <span class="trans">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
@@ -497,7 +497,7 @@
 
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="reg"/>
@@ -528,7 +528,7 @@
         <xsl:choose>
             <xsl:when test="f:isSet('useRegularizedUnits')">
                 <span class="measure">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:if test="f:isSet('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="."/>
@@ -539,7 +539,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <span class="measure">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:if test="f:isSet('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="./@reg"/>
@@ -557,7 +557,7 @@
 
     <xsl:template match="amount">
         <span class="measure">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="./@unit"/>
@@ -580,11 +580,11 @@
                 <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             </xsl:if>
             <span>
-                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:variable name="class">
                     <xsl:value-of select="@type"/>
                 </xsl:variable>
-                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
                 <xsl:apply-templates/>
             </span>
         </xsl:if>
@@ -596,14 +596,14 @@
 
     <xsl:template match="bibl">
         <span class="bibl">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
     <xsl:template match="cit">
         <span class="cit">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -619,7 +619,7 @@
 
     <xsl:template match="seg">
         <span class="seg">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

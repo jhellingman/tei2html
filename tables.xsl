@@ -52,7 +52,7 @@
         <xsl:choose>
             <xsl:when test="f:rend-value(@rend, 'position') = 'inline' or f:rend-value(@rend, 'class')  = 'intralinear'">
                 <span class="table">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </span>
@@ -60,7 +60,7 @@
             <xsl:otherwise>
                 <xsl:call-template name="closepar"/>
                 <div class="table">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </div>
@@ -107,7 +107,7 @@
         <xsl:variable name="context" select="." as="element(table)"/>
 
         <table>
-            <xsl:copy-of select="f:generate-class-attribute(.)"/>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
@@ -143,7 +143,7 @@
 
     <xsl:template mode="tablecaption" match="head">
         <h4 class="tablecaption">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <!-- TODO: improve handling of table/@rend attribute here -->
             <xsl:if test="f:rend-value(../@rend, 'align') = 'center'">
@@ -177,7 +177,7 @@
                 <xsl:attribute name="class"><xsl:value-of select="f:determine-row-class(.)"/></xsl:attribute>
             </xsl:if>
 
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
@@ -194,7 +194,7 @@
 
     <xsl:template match="cell">
         <td>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="cell-span"/>
             <xsl:call-template name="cell-rend"/>
 
@@ -280,7 +280,7 @@
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>
         </xsl:variable>
-        <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:call-template name="insertimage2">
@@ -417,7 +417,7 @@
         <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
 
         <table>
-            <xsl:copy-of select="f:generate-class-attribute(.)"/>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">

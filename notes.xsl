@@ -34,7 +34,7 @@
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='margin']">
         <span class="marginnote">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -59,13 +59,13 @@
                 <xsl:choose>
                     <xsl:when test="p">
                         <div class="displayfootnote">
-                            <xsl:call-template name="set-lang-id-attributes"/>
+                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                             <xsl:apply-templates/>
                         </div>
                     </xsl:when>
                     <xsl:otherwise>
                         <span class="displayfootnote">
-                            <xsl:call-template name="set-lang-id-attributes"/>
+                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:otherwise>
@@ -117,7 +117,7 @@
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote </xsl:text>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
@@ -141,7 +141,7 @@
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote </xsl:text>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
@@ -156,7 +156,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-marker">
-        <xsl:call-template name="set-lang-attribute"/>
+        <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
         <span class="label">
             <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
                 <xsl:call-template name="footnote-number"/>
@@ -229,14 +229,14 @@
     </xd:doc>
 
     <xsl:template name="footnote-paragraph">
-        <xsl:call-template name="set-lang-id-attributes"/>
+        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
         <xsl:variable name="class">
             <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
             <xsl:text>footnote </xsl:text>
             <xsl:if test="preceding-sibling::p">cont </xsl:if>
             <xsl:if test="ancestor::note[@place='apparatus']">apparatus</xsl:if>
         </xsl:variable>
-        <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -264,7 +264,7 @@
 
     <xsl:template match="divGen[@type='apparatus']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <!-- Determine whether we already have seen a divGen for apparatus notes, by finding its id.
                  If that is the case, we only include the apparatus notes after the previous one! -->
@@ -336,7 +336,7 @@
             <xsl:when test="$columns &gt; 1 and count($notes) &gt; 1">
                 <xsl:variable name="rows" select="ceiling(count($notes) div $columns)"/>
                 <table class="cols{$columns}">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <tr>
                         <xsl:for-each-group select="$notes" group-by="(position() - 1) idiv number($rows)">
                             <td>
@@ -368,9 +368,9 @@
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote apparatus </xsl:text>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="apparatus-note-marker"/>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
@@ -387,12 +387,12 @@
 
     <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote apparatus</xsl:text>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
             <xsl:call-template name="apparatus-note-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
@@ -442,7 +442,7 @@
                         <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                         <xsl:text>apparatus </xsl:text>
                     </xsl:variable>
-                    <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+                    <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
                     <xsl:apply-templates select="current-group()"/>
                 </xsl:element>

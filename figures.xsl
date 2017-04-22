@@ -354,7 +354,7 @@
                 <xsl:call-template name="closepar"/>
             </xsl:if>
             <div class="figure">
-                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
                 <xsl:variable name="file">
                     <xsl:call-template name="getimagefilename"/>
@@ -371,7 +371,7 @@
                     <!-- Add the class that sets the width, if the width is known -->
                     <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:variable>
-                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
                 <xsl:call-template name="figure-head-top"/>
                 <xsl:call-template name="figure-annotations-top"/>

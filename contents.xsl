@@ -59,7 +59,7 @@
 
     <xsl:template match="divGen[@type='toc']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
             <xsl:call-template name="toc-body-table"/>
         </div>
@@ -506,7 +506,7 @@
 
     <xsl:template match="divGen[@type='toca']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/front/div1"/>
@@ -590,7 +590,7 @@
 
     <xsl:template match="divGen[@type='loi']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <ul>
                 <xsl:apply-templates mode="genloi" select="//figure[head]"/>
@@ -605,7 +605,7 @@
     <xsl:template match="figure" mode="genloi">
         <!-- TODO: make id unique for each occurance of <divGen type="loi"> -->
         <li id="loi.{f:generate-id(.)}">
-            <xsl:call-template name="set-lang-attribute"/>
+            <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
             <xsl:call-template name="generate-toc-entry"/>
         </li>
     </xsl:template>
@@ -626,7 +626,7 @@
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
@@ -728,7 +728,7 @@
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
                 <table class="tocList">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tocList"/>
                 </table>
             </xsl:when>
@@ -801,7 +801,7 @@
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='determinationTable'])">
                 <table class="tocList">
-                    <xsl:call-template name="set-lang-id-attributes"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="determinationTable"/>
                 </table>
             </xsl:when>
@@ -816,7 +816,7 @@
     <xsl:template mode="determinationTable" match="item">
         <xsl:variable name="depth" select="count(ancestor::list[@type='determinationTable']) - 1"/>
         <tr>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <!-- Use padding cell if needed to indent nested contents -->
             <xsl:if test="$depth > 0">
                 <td>
@@ -868,7 +868,7 @@
 
     <xsl:template match="divGen[@type='Index' or @type='index']">
         <div class="div1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
             <xsl:copy-of select="f:logInfo('Generating Index', ())"/>
@@ -954,7 +954,7 @@
 
     <xsl:template match="index">
         <a>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
         </a>
     </xsl:template>
 
@@ -971,7 +971,7 @@
     <!-- collect footnotes in a separate section, sorted by div1 -->
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
         <div class="div1 notes">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgNotes')"/></h2>
 
             <xsl:call-template name="footnotes-body"/>

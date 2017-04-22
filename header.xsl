@@ -39,7 +39,7 @@
         </xsl:text>
 
         <html>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-html-header"/>
 
             <body>

@@ -32,7 +32,7 @@
 
     <xsl:template match="divGen[@type='Colophon']">
         <div class="transcribernote">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
 

@@ -69,6 +69,21 @@
     </xsl:function>
 
 
+    <xsl:function name="f:needs-id" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+
+        <!-- Do we have a reference to it -->
+        <xsl:value-of select="root($node)//ref[@target = $node/@id]"/>
+
+        <!-- Division that appears in a table of contents -->
+        <!-- Image that appears in a list of illustrations -->
+        <!-- Correction that appears in a list of corrections -->
+        <!-- External reference that appears in a list of exteral references -->
+        <!-- Footnote? -->
+
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Generate an <code>id</code>-value.</xd:short>
         <xd:detail>
@@ -182,6 +197,22 @@
     </xsl:template>
 
 
+    <xsl:function name="f:generate-lang-attribute" as="attribute()?">
+        <xsl:param name="lang" as="xs:string?"/>
+
+        <xsl:if test="$lang">
+            <xsl:choose>
+                <xsl:when test="$outputmethod = 'xml'">
+                    <xsl:attribute name="xml:lang" select="f:fix-lang($lang)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="lang" select="f:fix-lang($lang)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Normalize a language attribute.</xd:short>
         <xd:detail>Normalize language attributes used in the output to match
@@ -215,10 +246,14 @@
         <xd:detail> </xd:detail>
     </xd:doc>
 
-    <xsl:template name="set-lang-id-attributes">
-        <xsl:attribute name="id" select="f:generate-id(.)"/>
-        <xsl:call-template name="set-lang-attribute"/>
-    </xsl:template>
+    <xsl:function name="f:set-lang-id-attributes" as="attribute()*">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:attribute name="id" select="f:generate-id($node)"/>
+        <xsl:copy-of select="f:generate-lang-attribute($node/@lang)"/>
+    </xsl:function>
+
+
 
     <!--====================================================================-->
     <!-- Generate labels for heads in the correct language -->

@@ -87,7 +87,7 @@
 
 
     <xd:doc>
-        <xd:short>Formswork, for now just ignore, except if to be placed in the margin.</xd:short>
+        <xd:short>Formswork, for now just ignore, except if is to be placed in the margin.</xd:short>
     </xd:doc>
 
     <xsl:template match="fw">
@@ -97,7 +97,7 @@
     <xsl:template match="fw[@place='margin']">
         <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -153,7 +153,7 @@
 
     <xd:doc>
         <xd:short>Generate anchor for a <code>pb</code>-element.</xd:short>
-        <xd:detail>Generate an anchors for a <code>pb</code>-element.</xd:detail>
+        <xd:detail>Generate an anchor for a <code>pb</code>-element.</xd:detail>
     </xd:doc>
 
     <xsl:template name="pb-anchor">
@@ -237,7 +237,7 @@
 
     <xsl:template match="argument">
         <div class="argument">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -252,7 +252,7 @@
 
     <xsl:template match="epigraph">
         <div class="epigraph">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -265,7 +265,7 @@
 
     <xsl:template match="epigraph[parent::titlePage]">
         <span class="epigraph">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -280,8 +280,8 @@
 
     <xsl:template match="trailer">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'trailer')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'trailer')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
@@ -297,8 +297,8 @@
     <xsl:template match="q">
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'q')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'q')"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -308,8 +308,8 @@
     <xsl:template match="q[@rend = 'block']">
         <xsl:call-template name="closepar"/>
         <blockquote>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
             <xsl:apply-templates/>
         </blockquote>
         <xsl:call-template name="reopenpar"/>
@@ -323,8 +323,8 @@
 
     <xsl:template match="q[parent::cit]">
         <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'epigraph')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'epigraph')"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -339,21 +339,21 @@
 
     <xsl:template match="note[@type='foot' or not(@type)]//q/text">
         <div class="nestedtext">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[@type='foot' or not(@type)]//q/text/body">
         <div class="nestedbody">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[@type='foot' or not(@type)]//q/text/body/div1">
         <div class="nesteddiv1">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -369,7 +369,7 @@
     <xsl:template match="letter">
         <xsl:call-template name="closepar"/>
         <blockquote class="letter">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </blockquote>
         <xsl:call-template name="reopenpar"/>
@@ -423,7 +423,7 @@
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
 
             <xsl:element name="{$p.element}">
-                <xsl:call-template name="set-lang-id-attributes"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
                 <xsl:variable name="class">
                     <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
@@ -435,7 +435,7 @@
                     <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
                     <xsl:value-of select="f:hanging-punctuation-class(.)"/>
                 </xsl:variable>
-                <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
                 <xsl:if test="@n and f:isSet('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
@@ -596,7 +596,7 @@
     <xsl:template name="initial-image-with-css">
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>
@@ -620,16 +620,14 @@
     <xsl:template name="initial-image-with-float">
         <xsl:variable name="context" select="." as="element(p)"/>
         <div class="figure floatLeft">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="insertimage2">
                 <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
             </xsl:call-template>
         </div>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">
-                <xsl:if test="$p.element != 'p'">
-                    <xsl:text>par </xsl:text>
-                </xsl:if>
+                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>first</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates mode="eat-initial"/>
@@ -751,7 +749,7 @@
 
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>

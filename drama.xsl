@@ -66,13 +66,13 @@
         <xsl:variable name="context" select="." as="element(lg)"/>
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg or parent::sp">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <xsl:apply-templates/>
         </div>
         <xsl:call-template name="reopenpar"/>
@@ -102,7 +102,7 @@
 
     <xsl:template match="lg/head">
         <h4>
-            <xsl:copy-of select="f:generate-class-attribute(.)"/>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
@@ -119,13 +119,13 @@
 
     <xsl:template match="l">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <xsl:variable name="class">
                 <xsl:text>line </xsl:text>
                 <xsl:value-of select="f:hanging-punctuation-class(.)"/>
             </xsl:variable>
-            <xsl:copy-of select="f:generate-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
             <xsl:if test="@n">
                 <span class="lineNum"><xsl:value-of select="@n"/></span>
@@ -240,8 +240,8 @@
 
     <xsl:template mode="alignedverse" match="l">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'line')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'line')"/>
             <xsl:apply-templates select="*|text()"/>
         </xsl:element>
     </xsl:template>
@@ -252,8 +252,8 @@
 
     <xsl:template match="sp">
         <div>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'sp')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'sp')"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -261,8 +261,8 @@
     <!-- Speaker -->
     <xsl:template match="speaker">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'speaker')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'speaker')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
@@ -270,24 +270,24 @@
     <!-- Stage directions -->
     <xsl:template match="stage">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
         <xsl:element name="{$p.element}">
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage alignright')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'stage alignright')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
         <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'stage')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -295,24 +295,24 @@
     <!-- Cast lists -->
     <xsl:template match="castList">
         <ul>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
 
     <xsl:template match="castGroup">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">
                 <xsl:apply-templates select="castItem"/>
@@ -322,15 +322,15 @@
 
     <xsl:template match="castGroup/head">
         <b>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </b>
     </xsl:template>
 
     <xsl:template match="castItem">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'castitem')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'castitem')"/>
             <xsl:apply-templates/>
         </li>
     </xsl:template>
@@ -345,8 +345,8 @@
 
     <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']">
         <li>
-            <xsl:call-template name="set-lang-id-attributes"/>
-            <xsl:copy-of select="f:generate-class-attribute-with(., 'castlist')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:variable name="count" select="count(castItem)"/>
             <xsl:variable name="this" select="."/>
             <table class="castGroupTable">
@@ -371,7 +371,7 @@
 
     <xsl:template match="castGroup/head" mode="castGroupTable">
         <span>
-            <xsl:call-template name="set-lang-id-attributes"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

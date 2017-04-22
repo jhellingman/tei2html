@@ -4,6 +4,7 @@ use strict;
 
 my $inputFile = $ARGV[0];
 my $pageNumber = 0;
+my $appNoteNumber = 0;
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
@@ -18,6 +19,7 @@ while (<INPUTFILE>) {
         $remainder = $';
 
         idNotes($before, $pageNumber);
+        $appNoteNumber = 0;
         $pageNumber = getAttrVal("n", $pbAttrs);
         print $pbTag;
     }
@@ -37,9 +39,15 @@ sub idNotes($$) {
         my $noteNumber = getAttrVal("n", $noteAttrs);
         my $notePlace = getAttrVal("place", $noteAttrs);
         my $noteId = getAttrVal("id", $noteAttrs);
+        my $noteLang = getAttrVal("lang", $noteAttrs);
+        my $noteLangAttr = $noteLang ne "" ? " lang=\"$noteLang\"" : "";
         my $newNoteTag = $noteTag;
         if ($noteNumber =~ m/([0-9]+|[A-Z])/ and $noteId eq '' and ($notePlace eq '' or $notePlace eq 'foot')) {
-            $newNoteTag = "<note n=$noteNumber id=n$pageNumber.$noteNumber>";
+            $newNoteTag = "<note n=$noteNumber id=n$pageNumber.$noteNumber$noteLangAttr>";
+        }
+        if ($noteId eq '' and $notePlace eq 'apparatus') {
+            $appNoteNumber++;
+            $newNoteTag = "<note place=apparatus id=an$pageNumber.$appNoteNumber$noteLangAttr>";
         }
 
         print STDERR "$noteTag    ->    $newNoteTag\n";
@@ -58,7 +66,7 @@ sub getAttrVal($$) {
     my $attrs = shift;
     my $attrVal = "";
 
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
+    if ($attrs =~ /$attrName\s*=\s*([\w-]+)/i) {
         $attrVal = $1;
     } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         $attrVal = $1;
