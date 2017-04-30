@@ -13,7 +13,7 @@
         <xd:short>Templates for splitting a TEI document in parts.</xd:short>
         <xd:detail><p>This stylesheet contains templates for splitting a TEI document in parts, specifically meant
         for generating ePub output.</p>
-        
+
         <p>We need to split a TEI document into pieces, and in addition, also
         need to be able to consistently generate various types of lists
         of generated files, and cross-references both internal to a part
@@ -486,8 +486,8 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="position" as="xs:integer"/>
 
-        <xsl:value-of select="if ($node/@id = 'cover' and $position = 1) 
-                              then 'cover.xhtml' 
+        <xsl:value-of select="if ($node/@id = 'cover' and $position = 1)
+                              then 'cover.xhtml'
                               else concat($basename, '-', f:generate-id($node), '-', $position, '.xhtml')"/>
     </xsl:function>
 
@@ -501,6 +501,9 @@
     <xsl:function name="f:determine-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
 
+        <!-- Elements included in the teiHeader appear in the generated colophon (if they appear at all) -->
+        <xsl:variable name="node" select="if ($node/ancestor-or-self::teiHeader) then root($node)//divGen[@type='Colophon'] else $node"/>
+
         <xsl:variable name="filename">
             <xsl:apply-templates select="root($node)/*[self::TEI.2 or self::TEI]/text" mode="splitter">
                 <xsl:with-param name="node" select="$node"/>
@@ -508,8 +511,8 @@
             </xsl:apply-templates>
         </xsl:variable>
 
-        <xsl:value-of select="if ($filename = '') 
-            then f:logError('Unable to determine filename for {1} with generated id: {2}', (name($node), f:generate-id($node)))
+        <xsl:value-of select="if ($filename = '')
+            then f:logError('Unable to determine filename for {1} with generated id: {2} (in: {3}; {4})', (name($node), f:generate-id($node), name($node/ancestor::*[@id][1]), $node/ancestor::*[@id][1]/@id))
             else $filename"/>
     </xsl:function>
 
@@ -521,7 +524,7 @@
 
     <xsl:function name="f:determine-url" as="xs:string">
         <xsl:param name="node" as="element()"/>
- 
+
         <xsl:value-of select="concat(f:determine-filename($node), '#', f:generate-id($node))"/>
     </xsl:function>
 

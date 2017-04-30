@@ -230,6 +230,10 @@ h1, h2, h3, h4, h5, h6
     text-align: left;
 }
 
+span.abbr, abbr {
+    white-space: nowrap;
+}
+
 span.num, span.corr, span.abbr, span.trans, span.measure, abbr
 {
     border-bottom: 0px;

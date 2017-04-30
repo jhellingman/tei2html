@@ -4,9 +4,14 @@
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
     <!ENTITY deg        "&#176;">
+    <!ENTITY lsquo      "&#x2018;">
+    <!ENTITY rsquo      "&#x2019;">
     <!ENTITY ldquo      "&#x201C;">
+    <!ENTITY rdquo      "&#x201D;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY zwsp       "&#x200B;">
+    <!ENTITY hairsp     "&#x200A;">
+    <!ENTITY hellip     "&#x2026;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
     <!ENTITY Prime      "&#x2033;">
@@ -32,6 +37,40 @@
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
+
+    <!--====================================================================-->
+    <!-- Plain Text -->
+
+    <xsl:template match="text()">
+        <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes(.) else ."/>
+        <xsl:variable name="text" select="if (f:isSet('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+        <xsl:value-of select="$text"/>
+    </xsl:template>
+
+
+    <xsl:function name="f:handle-quotes" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+    
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&lsquo;&ldquo;', '&lsquo;&hairsp;&ldquo;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&rsquo;&rdquo;', '&rsquo;&hairsp;&rdquo;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&ldquo;&lsquo;', '&ldquo;&hairsp;&lsquo;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&rdquo;&rsquo;', '&rdquo;&hairsp;&rsquo;')"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:handle-ellipses" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+    
+        <xsl:variable name="text" as="xs:string" select="replace($text, '\.\.\.', '&hellip;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, '(\w)&hellip;', '$1&hairsp;&hellip;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&hellip;(\w)', '&hellip;&hairsp;$1')"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
 
     <!--====================================================================-->
     <!-- Text styles -->

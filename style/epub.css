@@ -93,6 +93,10 @@ sub, sup {
 	background-color: inherit;
 }
 
+span.abbr, abbr {
+    white-space: nowrap;
+}
+
 span.corr, span.num, span.abbr, span.trans, span.measure, abbr {
 	border-bottom: 0;
 }

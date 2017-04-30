@@ -69,13 +69,20 @@
     </xsl:function>
 
 
-    <xsl:function name="f:needs-id" as="xs:string">
+    <xsl:function name="f:needs-id" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
 
-        <!-- Do we have a reference to it -->
-        <xsl:value-of select="root($node)//ref[@target = $node/@id]"/>
+        <xsl:choose>
+            <!-- Do we have a reference to it -->
+            <xsl:when test="root($node)//ref[@target = $node/@id]"><xsl:value-of select="true()"/></xsl:when>
+            <!-- Division that appears in a table of contents -->
+            <xsl:when test="name($node) = ('div', 'div0', 'div1', 'div2', 'div3', 'div4', 'div5', 'div6') and root($node)//divGen[@type='toc']"><xsl:value-of select="true()"/></xsl:when>
 
-        <!-- Division that appears in a table of contents -->
+            <xsl:otherwise><xsl:value-of select="false()"/></xsl:otherwise>
+        </xsl:choose>
+
+
+        
         <!-- Image that appears in a list of illustrations -->
         <!-- Correction that appears in a list of corrections -->
         <!-- External reference that appears in a list of exteral references -->
