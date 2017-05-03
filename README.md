@@ -37,7 +37,7 @@ done, please be in touch with me on how I can help (at a fee).
 
 ## Directories
 
-  * samples: contains a number of sample files (of books posted to Project Gutenberg).
+  * samples: contains a number of sample files (of books posted to Project Gutenberg; I am in the process of adding all my TEI master files to GitHub: see https://github.com/GutenbergSource for many more examples).
   * sandbox: contains experimental code.
   * schemas: contains schema definition for a number of supplementary XML formats.
   * style: contains CSS stylesheets, used by the generated HTML and ePub results.
