@@ -49,8 +49,7 @@ sub main() {
     close INPUTFILE;
 }
 
-sub handleParagraph($)
-{
+sub handleParagraph($) {
     my $paragraph = shift;
 
     if ($useHtml == 1) {

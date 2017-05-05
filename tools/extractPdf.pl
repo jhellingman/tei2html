@@ -12,13 +12,11 @@ my $pdfcount = 1000;
 
 sub list_recursively($);
 
-sub list_recursively($)
-{
+sub list_recursively($) {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory))
-    {
+    unless (opendir(DIRECTORY, $directory)) {
         print "Cannot open directory $directory!\n";
         exit;
     }
@@ -28,25 +26,19 @@ sub list_recursively($)
 
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory\\$file")
-        {
+    foreach my $file (@files) {
+        if (-f "$directory\\$file") {
             handle_file("$directory\\$file");
-        }
-        elsif (-d "$directory\\$file")
-        {
+        } elsif (-d "$directory\\$file") {
             list_recursively("$directory\\$file");
         }
     }
 }
 
 
-sub handle_file($)
-{
+sub handle_file($) {
     my ($file) = @_;
-    if ($file =~ m/^(.*)\.(pdf)$/)
-    {
+    if ($file =~ m/^(.*)\.(pdf)$/) {
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
@@ -56,8 +48,7 @@ sub handle_file($)
 
         print "Extracting images from PDF: $file\n";
 
-        if ($extension eq 'pdf')
-        {
+        if ($extension eq 'pdf') {
             $pdfcount++;
             # print "$pdfimages -j $file $pdfcount\n";
             my $returnCode = system ("$pdfimages -j \"$file\" $pdfcount");
@@ -66,8 +57,7 @@ sub handle_file($)
 }
 
 
-sub main()
-{
+sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 }

@@ -10,17 +10,14 @@ print STDERR "Handling $inputFile\n";
 
 my $previousLevel = 0;
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $remainder = $_;
 
-    if ($remainder =~ m/<(body|front|back)(.*?)>/i)
-    {
+    if ($remainder =~ m/<(body|front|back)(.*?)>/i) {
         $previousLevel = 0;
     }
 
-    while ($remainder =~ m/<div([0-9])(.*?)>/i)
-    {
+    while ($remainder =~ m/<div([0-9])(.*?)>/i) {
         my $before = $`;
         my $level = $1;
         my $attrs = $2;
@@ -28,8 +25,7 @@ while (<INPUTFILE>)
 
         my $close = $previousLevel - $level;
         $previousLevel = $level;
-        for ( ; $close >= 0; $close--)
-        {
+        for ( ; $close >= 0; $close--) {
             print "</div>";
         }
         print "<div$attrs>";

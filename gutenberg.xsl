@@ -25,7 +25,7 @@
     >
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to output Project Gutenberg related information to the output.</xd:short>
+        <xd:short>Stylesheet to output Project Gutenberg related information.</xd:short>
         <xd:detail>This stylesheet ads various elements to the generated output relevant to Project Gutenberg.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>

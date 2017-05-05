@@ -1,10 +1,12 @@
+# Perl script to test the the html2tei.xsl stylesheet with Saxon.
+
 use strict;
-
 use File::Temp qw(mktemp);
+use FindBin qw($Bin);
 
-
-my $xsldir  = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $saxon	= "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar "; # (see http://saxon.sourceforge.net/)
+my $toolsdir    = $Bin;
+my $xsldir      = $toolsdir;
+my $saxon       = "java -jar " . $toolsdir . "/lib/saxon9he.jar ";
 
 my $filename = $ARGV[0];
 
@@ -13,8 +15,8 @@ my $tmpFile2 = mktemp('tmp-XXXXX');
 
 system ("tidy -asxhtml -clean --doctype omit \"$filename\" > $tmpFile1");
 system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile1 > $tmpFile2");
-system ("$saxon $tmpFile2 \"$xsldir\\html2tei.xsl\" > $tmpFile1");
-system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile1 > out.tei");
+system ("$saxon $tmpFile2 \"$xsldir/../sandbox/html2tei.xsl\" > $tmpFile1");
+system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile1 > out.xml");
 
 unlink($tmpFile2);
 unlink($tmpFile1);

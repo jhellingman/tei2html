@@ -190,30 +190,25 @@ $tagPattern = "<(.*?)>";
 $langCount = 0;
 $langStackSize = 0;
 
-if ($langNames{uc($outLang)}) 
-{
-	$langName = $langNames{uc($outLang)};
-}
-else
-{
-	$langName = $outLang;
+if ($langNames{uc($outLang)}) {
+    $langName = $langNames{uc($outLang)};
+} else {
+    $langName = $outLang;
 }
 
 print "<!-- Fragments in $langName from $infile -->";
 print "<fragments>";
 
-while (<INPUTFILE>)
-{
-	$remainder = $_;
-	while ($remainder =~ /$tagPattern/)
-	{
-		$fragment = $`;
-		$tag = $1;
-		$remainder = $';
-		handleFragment($fragment);
-		handleTag($tag);
-	}
-	handleFragment($remainder);
+while (<INPUTFILE>) {
+    $remainder = $_;
+    while ($remainder =~ /$tagPattern/) {
+        $fragment = $`;
+        $tag = $1;
+        $remainder = $';
+        handleFragment($fragment);
+        handleTag($tag);
+    }
+    handleFragment($remainder);
 }
 
 print "</fragments>";
@@ -221,123 +216,98 @@ print "</fragments>";
 #
 # getAttrVal: Get an attribute value from a tag (if the attribute is present)
 #
-sub getAttrVal
-{
-	my $attrName = shift;
-	my $attrs = shift;
-	my $attrVal = "";
+sub getAttrVal {
+    my $attrName = shift;
+    my $attrs = shift;
+    my $attrVal = "";
 
-	if($attrs =~ /$attrName\s*=\s*(\w+)/i)
-	{
-		$attrVal = $1;
-	}
-	elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-	{
-		$attrVal = $1;
-	}
-	return $attrVal;
+    if($attrs =~ /$attrName\s*=\s*(\w+)/i) {
+        $attrVal = $1;
+    } elsif($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
+        $attrVal = $1;
+    }
+    return $attrVal;
 }
 
 #
 # handleTag: push/pop an XML tag on the tag-stack.
 #
-sub handleTag
-{
-	my $tag = shift;
+sub handleTag {
+    my $tag = shift;
 
 
-	# end tag or start tag?
-	if ($tag =~ /^!/) 
-	{
-		# Comment, don't care.
-	}
-	elsif ($tag =~ /^\/(.+?\b)/)
-	{
-		if (getLang() eq $outLang) 
-		{
-			print "<$tag>\n";
-		}
+    # end tag or start tag?
+    if ($tag =~ /^!/) {
+        # Comment, don't care.
+    } elsif ($tag =~ /^\/(.+?\b)/) {
+        if (getLang() eq $outLang) {
+            print "<$tag>\n";
+        }
 
-		my $element = $1;
-		popLang($element);
-	}
-	elsif ($tag =~ /\/$/)
-	{
-		# empty element, don't care.
-	}
-	else
-	{
-		$tag =~ /^(.+?\b)/;
-		my $element = $1;
+        my $element = $1;
+        popLang($element);
+    } elsif ($tag =~ /\/$/) {
+        # empty element, don't care.
+    } else {
+        $tag =~ /^(.+?\b)/;
+        my $element = $1;
         my $lang = getAttrVal("lang", $tag);
-		if ($lang ne "")
-		{
-			pushLang($element, $lang);
-		}
-		else
-		{
-			pushLang($element, getLang());
-		}
+        if ($lang ne "") {
+            pushLang($element, $lang);
+        } else {
+            pushLang($element, getLang());
+        }
 
-		if (getLang() eq $outLang) 
-		{
-			print "\n<$tag>";
-		}
-	}
+        if (getLang() eq $outLang) {
+            print "\n<$tag>";
+        }
+    }
 }
 
 #
 # handleFragment
 #
-sub handleFragment
-{
-	my $remainder = shift;
-	
-	my $lang = getLang();
+sub handleFragment {
+    my $remainder = shift;
+    
+    my $lang = getLang();
 
-	if ($lang eq $outLang) 
-	{
-		print $remainder;
-	}
+    if ($lang eq $outLang) {
+        print $remainder;
+    }
 }
 
 #==============================================================================
 #
 # popLang: pop from the tag-stack when a tag is closed.
 #
-sub popLang
-{
-	my $tag = shift;
+sub popLang {
+    my $tag = shift;
 
-	if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize])
-	{
-		$langStackSize--;
-	}
-	else
-	{
-		die("XML not well-formed");
-	}
+    if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize]) {
+        $langStackSize--;
+    } else {
+        die("XML not well-formed");
+    }
 }
 
 #
 # pushLang: push on the tag-stack when a tag is opened
 #
-sub pushLang
-{
-	my $tag = shift;
-	my $lang = shift;
+sub pushLang {
+    my $tag = shift;
+    my $lang = shift;
 
-	$langHash{$lang}++;
-	$langStackSize++;
-	$stackLang[$langStackSize] = $lang;
-	$stackTag[$langStackSize] = $tag;
+    $langHash{$lang}++;
+    $langStackSize++;
+    $stackLang[$langStackSize] = $lang;
+    $stackTag[$langStackSize] = $tag;
 }
 
 #
 # getLang: get the current language
 #
-sub getLang
-{
-	return $stackLang[$langStackSize];
+sub getLang {
+    return $stackLang[$langStackSize];
 }
 

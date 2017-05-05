@@ -555,7 +555,7 @@ sub sgml2xml($$) {
     # Convert Latin-1 characters to entities
     my $tmpFile0 = temporaryFile('entities', '.tei');
     print "Convert Latin-1 characters to entities...\n";
-    system ("patc -p $toolsdir/win2sgml.pat $sgmlFile $tmpFile0");
+    system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
 
     # Convert <INTRA> notation.
     my $containsIntralinear = system ("grep -q \"<INTRA\" $sgmlFile");

@@ -17,10 +17,9 @@ sub list_recursively($)
     my ($directory) = @_;
     my @files = (  );
 
-	print STDERR "Extracting directory $directory\n";
+    print STDERR "Extracting directory $directory\n";
 
-    unless (opendir(DIRECTORY, $directory))
-    {
+    unless (opendir(DIRECTORY, $directory)) {
         print "Cannot open directory $directory!\n";
         exit;
     }
@@ -30,44 +29,37 @@ sub list_recursively($)
 
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory\\$file")
-        {
+    foreach my $file (@files) {
+        if (-f "$directory\\$file") {
             handle_file("$directory\\$file");
-        }
-        elsif (-d "$directory\\$file")
-        {
+        } elsif (-d "$directory\\$file") {
             list_recursively("$directory\\$file");
         }
     }
 }
 
 
-sub handle_file($)
-{
+sub handle_file($) {
     my ($file) = @_;
 
-    if ($file =~ m/^(.*)\.(xhtml)$/)
-    {
-		print STDERR "Extracting file $file\n";
+    if ($file =~ m/^(.*)\.(xhtml)$/) {
+        print STDERR "Extracting file $file\n";
 
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
         my $dirname = dirname($file);
 
-		my $tempFile = "tmp-segments.xml";
+        my $tempFile = "tmp-segments.xml";
         my $newFile = $dirname . '\\' . $base . '-segments.txt';
 
-		system ("perl -S stripDocType.pl $file > $tempFile");
-		system ("$saxon \"$tempFile\" $xsldir/extract-segs.xsl > $newFile");
+        system ("perl -S stripDocType.pl $file > $tempFile");
+        system ("$saxon \"$tempFile\" $xsldir/extract-segs.xsl > $newFile");
     }
 }
 
 
-sub main()
-{
+sub main() {
     list_recursively($filename);
 }
 

@@ -9,10 +9,17 @@
 <xsl:output method="xml" indent="no"/>
 
 
-
 <!-- Main block-level conversions -->
 <xsl:template match="html:html">
-    <xsl:apply-templates select="html:body"/>
+    <TEI.2>
+        <teiHeader>
+        </teiHeader>
+        <text lang="{/html:html/@lang}">
+            <body>
+                <xsl:apply-templates select="html:body"/>
+            </body>
+        </text>
+    </TEI.2>
 </xsl:template>
 
 
@@ -21,17 +28,39 @@
      if some h-levels are skipped in the source HTML. You may however get
      more div-levels than you want, and post-processing will be required. -->
 <xsl:template match="html:body">
-    <body>
-        <xsl:call-template name="level1">
-            <xsl:with-param name="nodes" select="*|text()"/>
-            <xsl:with-param name="level" select="1"/>
-        </xsl:call-template>
-    </body>
+
+    <!--
+    <xsl:call-template name="level1">
+        <xsl:with-param name="nodes" select="*|text()"/>
+        <xsl:with-param name="level" select="1"/>
+    </xsl:call-template>
+    -->
+
+    <xsl:call-template name="hr-split"/>
+
+    <!-- <xsl:apply-templates/> -->
+
 </xsl:template>
 
 
+<!-- Split on <hr class='chap'/> -->
+
+<xsl:template name="hr-split">
+    <xsl:for-each-group select="*" group-starting-with="html:hr[@class='chap']">
+        <div>
+            <xsl:apply-templates select="current-group()"/>
+        </div>
+    </xsl:for-each-group>
+</xsl:template>
+
+
+<xsl:template match="html:hr[@class='chap']"/>
+
+
+<!-- Split on h1...h6 -->
+
 <xsl:template name="level1">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
     
     <xsl:choose>
@@ -55,7 +84,7 @@
 </xsl:template>
 
 <xsl:template name="level2">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
     
     <xsl:choose>
@@ -79,7 +108,7 @@
 </xsl:template>
 
 <xsl:template name="level3">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
     
     <xsl:choose>
@@ -103,7 +132,7 @@
 </xsl:template>
 
 <xsl:template name="level4">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
     
     <xsl:choose>
@@ -127,7 +156,7 @@
 </xsl:template>
 
 <xsl:template name="level5">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
     
     <xsl:choose>
@@ -152,7 +181,7 @@
 
 
 <xsl:template name="level6">
-    <xsl:param name="nodes" as="element()*"/>
+    <xsl:param name="nodes" as="node()*"/>
     <xsl:param name="level" as="xs:integer"/>
 
     <xsl:apply-templates select="$nodes/self::*"/>
@@ -210,6 +239,12 @@
  </hi>
 </xsl:template>
 
+<xsl:template match="html:sup">
+ <hi rend="sup">
+  <xsl:apply-templates/>
+ </hi>
+</xsl:template>
+
 <xsl:template match="html:small">
   <xsl:apply-templates/>
 </xsl:template>
@@ -262,11 +297,18 @@
 
 
 <xsl:template match="html:div|html:span|html:pre">
-    <xsl:apply-templates/>
+    <p>
+        <xsl:apply-templates/>
+    </p>
 </xsl:template>
 
 
+<!-- Page breaks -->
+<!-- <span class="pagenum"><a name="Page_6" id="Page_6">[Pg 6]</a></span> -->
 
+<xsl:template match="html:span[@class='pagenum']">
+    <pb id="{html:a/@id}"/>
+</xsl:template>
 
 
 <!-- Images -->

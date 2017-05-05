@@ -1,7 +1,6 @@
+#
 # fixAnchors.pl -- provide Anchors with sequential numbers per page in TEI tagged files
 #
-# 1. sequence of numbers
-# 2. average size of pages with large deviations
 
 use strict;
 use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
@@ -16,12 +15,10 @@ open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
 print STDERR "Fixing anchors in $inputFile\n";
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $line = $_;
     my $remainder = $line;
-    while ($remainder =~ m/<pb(.*?)>/)
-    {
+    while ($remainder =~ m/<pb(.*?)>/) {
         my $before = $`;
         my $attrs = $1;
         $remainder = $';
@@ -37,8 +34,7 @@ while (<INPUTFILE>)
 
 sub handleAnchors($) {
     my $remainder = shift;
-    while ($remainder =~ m/<anchor(.*?)>/)
-    {
+    while ($remainder =~ m/<anchor(.*?)>/) {
         my $before = $`;
         my $attrs = $1;
         $remainder = $';
@@ -55,29 +51,24 @@ sub handleAnchors($) {
     print $remainder;
 }
 
-sub isnum($)
-{
+
+sub isnum($) {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
 }
 
 
-
 #
 # getAttrVal: Get an attribute value from a tag (if the attribute is present)
 #
-sub getAttrVal($$)
-{
+sub getAttrVal($$) {
     my $attrName = shift;
     my $attrs = shift;
     my $attrVal = "";
 
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i)
-    {
+    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
         $attrVal = $1;
-    }
-    elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-    {
+    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         $attrVal = $1;
     }
     return $attrVal;
