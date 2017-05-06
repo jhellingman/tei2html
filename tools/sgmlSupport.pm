@@ -1341,6 +1341,7 @@ BEGIN {
     $ent{"Crev"}        = chr(0x2183);  # Reversed C (as used in Roman numerals)
 
     $ent{"okina"}       = chr(0x02BB);  # modifier letter turned comma
+    $ent{"tcomma"}      = chr(0x02BB);  # modifier letter turned comma
 
     $ent{"rhring"}      = chr(0x02BE);  # modifier letter right half ring
     $ent{"lhring"}      = chr(0x02BF);  # modifier letter left half ring
