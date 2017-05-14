@@ -739,7 +739,8 @@
         <msg:message name="msgAbbreviationOverview">Übersicht der Abkürzungen im Text.</msg:message>
         <msg:message name="msgExpansion">Ersetzung</msg:message>
         <msg:message name="msgExpansionNotAvailable">Ersetzung nicht verfügbar</msg:message>
-	
+        <msg:message name="msgUnknown">Unbekannt</msg:message>
+
         <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadaten</msg:message>
         <msg:message name="msgInfo">Information</msg:message>

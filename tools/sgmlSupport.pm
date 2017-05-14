@@ -2117,9 +2117,9 @@ sub sgml2utf_common {
         } elsif ($entity =~ /#([0-9]+)/) {
             $char = chr($1);
         } elsif ($entity =~ /frac([0-9])([0-9]+)$/) {
-            $char = handleFraction($result, $1, $2);
+            $char = handleFraction($1, $2, $result, $source);
         } elsif ($entity =~ /frac([0-9]+)-([0-9]+)$/) {
-            $char = handleFraction($result, $1, $2);
+            $char = handleFraction($1, $2, $result, $source);
         } else {
             $char = "&" . $entity . ";";
             print STDERR "ERROR:   unmapped SGML entity: $char\n";
@@ -2131,14 +2131,16 @@ sub sgml2utf_common {
 }
 
 sub handleFraction {
-    my $appendTo = shift;
     my $numerator = shift;
     my $denominator = shift;
+    my $before = shift;
+    my $after = shift;
 
-    # Fractions that follow a number should be separated from it with a space.
-    my $connector = ($appendTo =~ /[0-9]$/) ? " " : "";
+    # Insert a zero-width space before (after) the fraction if no whitespace is already present before (after).
+    my $leftBoundary = ($before =~ /\s$/) ? '' : chr(0x200B);
+    my $rightBoundary = ($before =~ /^\s/) ? '' : chr(0x200B);
 
-    return  $connector . chr(0x200B) . $numerator . chr(0x2044) . $denominator . chr(0x200B);
+    return  $leftBoundary . $numerator . chr(0x2044) . $denominator . $rightBoundary;
 }
 
 
