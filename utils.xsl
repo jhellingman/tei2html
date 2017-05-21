@@ -386,4 +386,17 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine whether an element is rendered in the output.</xd:short>
+        <xd:detail>
+            <p>Determine whether an element is rendered in the output, based on the presence of <code>display(none)</code> in the <code>@rend</code>
+            attribute of this element or one of its ancestors.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:isRendered" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <xsl:value-of select="not($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none'])"/>
+    </xsl:function>
+
 </xsl:stylesheet>

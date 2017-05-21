@@ -66,10 +66,12 @@
             <textCriticalNoteSymbol>&deg;</textCriticalNoteSymbol>      <!-- Note marker used with text-critical notes (coded with place=apparatus) at location in text. -->
             <textCriticalNoteReturnSymbol>&deg;</textCriticalNoteReturnSymbol> <!-- Note marker used with text-critical notes (coded with place=apparatus) in apparatus, to return to text. -->
 
-            <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consequtive quotation marks -->
-            <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consequitive periods with an ellipis character -->
+            <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image. -->
 
-            <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified -->
+            <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consequtive quotation marks. -->
+            <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consequitive periods with an ellipis character. -->
+
+            <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
 
             <colophon.showEditDistance>true</colophon.showEditDistance>     <!-- Show the Levenshtein edit distance in the list of corrections made in the colophon. -->
             <colophon.showCorrections>true</colophon.showCorrections>       <!-- Show a list of corrections in the colophon. -->

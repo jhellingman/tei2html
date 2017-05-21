@@ -122,6 +122,10 @@ p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  padding-bottom: 1.6em;
 }
 
+span.abbr, abbr {
+ white-space: nowrap;
+}
+
  
 
 span.parnum {
@@ -1119,29 +1123,29 @@ background-color:red;
 }
 
 .testwidth {
-    width:80px;
+width:80px;
 }
-            
+
 .test1 {
 width:100px;
 }
 
 .test1width {
-    width:80px;
+width:80px;
 }
-            
+
 .test2width {
-    width:80px;
+width:80px;
 }
-            
+
 .tarsier1width {
-    width:480px;
+width:480px;
 }
-            
+
 .tarsier2width {
-    width:480px;
+width:480px;
 }
-            
+
 .xd28e1168 {
 font-style:italic;
 }

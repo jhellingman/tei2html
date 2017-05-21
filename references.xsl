@@ -262,10 +262,11 @@
             <xsl:when test="starts-with($url, 'oclc:')">catlink</xsl:when>
             <xsl:when test="starts-with($url, 'oln:')">catlink</xsl:when>
             <xsl:when test="starts-with($url, 'olw:')">catlink</xsl:when>
-            <xsl:when test="starts-with($url, 'wpp:')">wpplink</xsl:when>
             <xsl:when test="starts-with($url, 'wp:')">wplink</xsl:when>
             <xsl:when test="starts-with($url, 'loc:')">loclink</xsl:when>
             <xsl:when test="starts-with($url, 'bib:')">biblink</xsl:when>
+            <xsl:when test="starts-with($url, 'tia:')">tialink</xsl:when>
+
             <xsl:when test="starts-with($url, 'https:')">seclink</xsl:when>
             <xsl:when test="starts-with($url, 'ftp:')">ftplink</xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')">maillink</xsl:when>
@@ -292,11 +293,12 @@
             <xsl:when test="starts-with($url, 'oclc:')"><xsl:value-of select="f:message('msgLinkToWorldCat')"/></xsl:when>
             <xsl:when test="starts-with($url, 'oln:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
             <xsl:when test="starts-with($url, 'olw:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'wpp:')"><xsl:value-of select="f:message('msgLinkToWikiPilipinas')"/></xsl:when>
             <xsl:when test="starts-with($url, 'wp:')"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
             <xsl:when test="starts-with($url, 'loc:')"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
             <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'tia:')"><xsl:value-of select="f:message('msgLinkToInternetArchive')"/></xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
+
             <xsl:when test="starts-with($url, 'audio/')">
                 <xsl:choose>
                     <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')"><xsl:value-of select="f:message('msgLinkToMidiFile')"/></xsl:when>
@@ -318,17 +320,17 @@
             <p>The following short-hand notations are supported:</p>
 
             <table>
-                <tr><th>Shorthand notation</th>         <th>Description</th></tr>
-                <tr><td>pg:<i>[number]</i></td>         <td>Link to a Project Gutenberg ebook.</td></tr>
-                <tr><td>pgi:<i>[number]</i></td>        <td>Link to a Project Gutenberg ebook (internal, for example between multi-volume sets).</td></tr>
-                <tr><td>oclc:<i>[id]</i></td>           <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
-                <tr><td>oln:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the item level).</td></tr>
-                <tr><td>olw:<i>[id]</i></td>            <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
-                <tr><td>wp:<i>[string]</i></td>         <td>Link to a Wikipedia article.</td></tr>
-                <tr><td>wpp:<i>[string]</i></td>        <td>Link to a WikiPilipinas article.</td></tr>
-                <tr><td>loc:<i>[coordinates]</i></td>   <td>Link to a geographical location (currently uses Google Maps).</td></tr>
+                <tr><th>Shorthand notation</th>                 <th>Description</th></tr>
+                <tr><td>pg:<i>[number]</i></td>                 <td>Link to a Project Gutenberg ebook.</td></tr>
+                <tr><td>pgi:<i>[number]</i></td>                <td>Link to a Project Gutenberg ebook (internal, for example between multi-volume sets).</td></tr>
+                <tr><td>oclc:<i>[id]</i></td>                   <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
+                <tr><td>oln:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the item level).</td></tr>
+                <tr><td>olw:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
+                <tr><td>wp:<i>[string]</i></td>                 <td>Link to a Wikipedia article.</td></tr>
+                <tr><td>tia:<i>[string]</i></td>                <td>Link to an Internet Archive item.</td></tr>
+                <tr><td>loc:<i>[coordinates]</i></td>           <td>Link to a geographical location (currently uses Google Maps).</td></tr>
                 <tr><td>bib:<i>[book ch:vs@version]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
-                <tr><td>mailto:<i>[email address]</i></td> <td>Link to an email address.</td></tr>
+                <tr><td>mailto:<i>[email address]</i></td>      <td>Link to an email address.</td></tr>
             </table>
 
         </xd:detail>
@@ -371,14 +373,14 @@
                 <xsl:text>https://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
-            <!-- Link to WikiPilipinas article -->
-            <xsl:when test="starts-with($url, 'wpp:')">
-                <xsl:text>http://en.wikipilipinas.org/index.php?title=</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
-            </xsl:when>
-
             <!-- Link to Wikipedia article -->
             <xsl:when test="starts-with($url, 'wp:')">
                 <xsl:text>https://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+            </xsl:when>
+
+            <!-- Link to The Internet Archive -->
+            <xsl:when test="starts-with($url, 'tia:')">
+                <xsl:text>https://archive.org/details/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to location on map, using coordinates -->

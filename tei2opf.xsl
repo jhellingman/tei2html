@@ -381,18 +381,20 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="manifest">
-        <xsl:variable name="filename">
-            <xsl:choose>
-                <xsl:when test="f:has-rend-value(@rend, 'image')">
-                    <xsl:value-of select="f:rend-value(@rend, 'image')"/>
-                </xsl:when>
-                <xsl:otherwise>images/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:if test="f:isRendered(.)">
+            <xsl:variable name="filename">
+                <xsl:choose>
+                    <xsl:when test="f:has-rend-value(@rend, 'image')">
+                        <xsl:value-of select="f:rend-value(@rend, 'image')"/>
+                    </xsl:when>
+                    <xsl:otherwise>images/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
 
-        <xsl:call-template name="manifest-image-item">
-            <xsl:with-param name="filename" select="$filename"/>
-        </xsl:call-template>
+            <xsl:call-template name="manifest-image-item">
+                <xsl:with-param name="filename" select="$filename"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
 

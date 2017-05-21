@@ -42,6 +42,7 @@
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
         <msg:message name="msgExpansion">Expansion</msg:message>
         <msg:message name="msgExpansionNotAvailable">Expansion not available</msg:message>
+        <msg:message name="msgLinkToInternetArchive">Link to the Internet Archive</msg:message>
 
         <msg:message name="msgTitle">Title</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -161,7 +162,6 @@
         <msg:message name="msgLinkToOpenLibrary">Link to OpenLibrary catalog page</msg:message>
         <msg:message name="msgLinkToPg">Link to Project Gutenberg ebook</msg:message>
         <msg:message name="msgLinkToWikipedia">Link to related Wikipedia article</msg:message>
-        <msg:message name="msgLinkToWikiPilipinas">Link to related WikiPilipinas article</msg:message>
         <msg:message name="msgLinkToWorldCat">Link to WorldCat catalog page</msg:message>
         <msg:message name="msgListOfIllustrations">List of Illustrations</msg:message>
         <msg:message name="msgListOfTables">List of Tables</msg:message>
@@ -1075,7 +1075,6 @@
         <msg:message name="msgLinkToOpenLibrary">Link naar OpenLibrary cataloguspagina</msg:message>
         <msg:message name="msgLinkToPg">Link naar Project Gutenberg eboek</msg:message>
         <msg:message name="msgLinkToWikipedia">Link naar gerelateerd Wikipedia artikel</msg:message>
-        <msg:message name="msgLinkToWikiPilipinas">Link naar gerelateerd WikiPilipinas artikel</msg:message>
         <msg:message name="msgLinkToWorldCat">Link naar WorldCat cataloguspagina</msg:message>
         <msg:message name="msgListOfIllustrations">Lijst van Illustraties</msg:message>
         <msg:message name="msgListOfTables">Lijst van Tabellen</msg:message>
