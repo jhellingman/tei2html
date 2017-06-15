@@ -1490,6 +1490,9 @@ sub StripDiacritics($) {
         s/\x{A734}/AO/g;   ##  Ligature AO
         s/\x{A735}/ao/g;   ##  ligature ao
 
+        s/\x{1EFA}/LL/g;   ##  ligature Ll (older Welsh)
+        s/\x{1EFB}/ll/g;   ##  Ligature ll (older Welsh)
+
         s/\x{00AD}//g;          ## soft-hyphen
         s/\x{2032}//g;          ## prime
         s/`//g;                 ## back-tick

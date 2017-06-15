@@ -1008,6 +1008,8 @@ sub entities2iso88591($) {
     $a =~ s/\&aeacute;/æ/g;
     $a =~ s/\&AEacute;/Æ/g;
     $a =~ s/\&oeacute;/oe/g;
+    $a =~ s/\&dstrok;/d/g;
+    $a =~ s/\&Dstrok;/D/g;
 
     $a =~ s/\&aoacute;/aó/g;
 
@@ -1016,6 +1018,7 @@ sub entities2iso88591($) {
     $a =~ s/\&omactil;/o/g;
     $a =~ s/\&ebreacu;/e/g;
     $a =~ s/\&amacacu;/a/g;
+    $a =~ s/\&nringb;/n/g;
     $a =~ s/\&ymacr;/y/g;
     $a =~ s/\&eng;/ng/g;
     $a =~ s/\&Rs;/Rs/g;     # Rupee sign.

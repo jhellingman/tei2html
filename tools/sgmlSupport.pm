@@ -1470,7 +1470,9 @@ BEGIN {
     $ent{"suptack"}     = "s" . chr(0x031D); # s with up tack below
     $ent{"sdntack"}     = "s" . chr(0x031E); # s with down tack below
 
-    $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligatures with macron
+    $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligature with macron
+    $ent{"aemacracu"}   = chr(0x00E6) . chr(0x0304) . chr(0x0301); # ae ligatures with macron and acute
+
     $ent{"gmacr"}       = "g" . chr(0x0304); # g with macron
     $ent{"Gmacr"}       = "G" . chr(0x0304); # G with macron
     $ent{"hmacr"}       = "h" . chr(0x0304); # h with macron
@@ -1614,6 +1616,7 @@ BEGIN {
     $ent{"oubb"}        = "o" . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
 
     $ent{"eringb"}      = "e" . chr(0x0325); # e with ring below
+    $ent{"nringb"}      = "n" . chr(0x0325); # n with ring below
 
     $ent{"gcomma"}      = "g" . chr(0x0326); # g with comma below
 
@@ -1647,6 +1650,8 @@ BEGIN {
     $ent{"Obreveb"}     = "O" . chr(0x032E); # O with breve below
     $ent{"tbreveb"}     = "t" . chr(0x032E); # t with breve below
     $ent{"ubreveb"}     = "u" . chr(0x032E); # u with breve below
+
+    $ent{"iibrevb"}     = "i" . chr(0x032F); # u with inverted breve below
 
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
