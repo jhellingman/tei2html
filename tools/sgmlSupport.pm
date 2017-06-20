@@ -1617,6 +1617,7 @@ BEGIN {
 
     $ent{"eringb"}      = "e" . chr(0x0325); # e with ring below
     $ent{"nringb"}      = "n" . chr(0x0325); # n with ring below
+    $ent{"mringb"}      = "m" . chr(0x0325); # m with ring below
 
     $ent{"gcomma"}      = "g" . chr(0x0326); # g with comma below
 
@@ -1651,7 +1652,7 @@ BEGIN {
     $ent{"tbreveb"}     = "t" . chr(0x032E); # t with breve below
     $ent{"ubreveb"}     = "u" . chr(0x032E); # u with breve below
 
-    $ent{"iibrevb"}     = "i" . chr(0x032F); # u with inverted breve below
+    $ent{"iibrevb"}     = "i" . chr(0x032F); # i with inverted breve below
 
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
@@ -1744,6 +1745,8 @@ BEGIN {
 
     $ent{"oogoncirc"}   = chr(0x01EB) . chr(0x0302); # o with ogonek and circumflex
     $ent{"oslashcirc"}  = chr(0x00f8) . chr(0x0302); # o slash and circumflex
+
+    $ent{"ubrevacu"}    = chr(0x016D) . chr(0x0301); # u with breve and acute
 
     $ent{"amacrgra"}    = chr(0x0101) . chr(0x0300); # a with macron and grave
     $ent{"emacrgra"}    = chr(0x0113) . chr(0x0300); # e with macron and grave
