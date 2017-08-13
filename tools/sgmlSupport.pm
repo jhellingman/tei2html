@@ -1,6 +1,6 @@
 # sgmlSupport.pm -- package to support SGML entities.
 #
-# WARNING: Edit in Unicode-aware editor, this file contains Unicode characters. (E.g. aleph: א.)
+# WARNING: Edit in Unicode-aware editor, this file contains Unicode characters. (E.g. aleph: ?.)
 
 package SgmlSupport;
 
@@ -1118,6 +1118,8 @@ BEGIN {
     $ent{"Rgr"}         = chr(0x03a1); # "R"
     $ent{"rrougr"}      = chr(0x1fe5); # "<r"
     $ent{"Rrougr"}      = chr(0x1fec); # "<R"
+    $ent{"rsmogr"}      = chr(0x1fe4); # ">r"
+    $ent{"Rsmogr"}      = chr(0x03a1) . chr(0x0313); # ">R"
 
     $ent{"sgr"}         = chr(0x03c3); # "s"
     $ent{"Sgr"}         = chr(0x03a3); # "S"
@@ -1233,52 +1235,52 @@ BEGIN {
     ###############################################################################
     # Hebrew
 
-    $ent{"healef"}          = chr(0x5D0);   # א
-    $ent{"hebet"}           = chr(0x5D1);   # ב
-    $ent{"hegimel"}         = chr(0x5D2);   # ג
-    $ent{"hedalet"}         = chr(0x5D3);   # ד
-    $ent{"hehe"}            = chr(0x5D4);   # ה
-    $ent{"hevav"}           = chr(0x5D5);   # ו
-    $ent{"hezayin"}         = chr(0x5D6);   # ז
-    $ent{"hehet"}           = chr(0x5D7);   # ח
-    $ent{"hetet"}           = chr(0x5D8);   # ט
-    $ent{"heyod"}           = chr(0x5D9);   # י
-    $ent{"hefinalkaf"}      = chr(0x5DA);   # ך
-    $ent{"hekaf"}           = chr(0x5DB);   # כ
-    $ent{"helamed"}         = chr(0x5DC);   # ל
-    $ent{"hefinalmem"}      = chr(0x5DD);   # ם
-    $ent{"hemem"}           = chr(0x5DE);   # מ
-    $ent{"hefinalnun"}      = chr(0x5DF);   # ן
-    $ent{"henun"}           = chr(0x5E0);   # נ
-    $ent{"hesamekh"}        = chr(0x5E1);   # ס
-    $ent{"heayin"}          = chr(0x5E2);   # ע
-    $ent{"hefinalpe"}       = chr(0x5E3);   # ף
-    $ent{"hepe"}            = chr(0x5E4);   # פ
-    $ent{"hefinaltsadi"}    = chr(0x5E5);   # ץ
-    $ent{"hetsadi"}         = chr(0x5E6);   # צ
-    $ent{"heqof"}           = chr(0x5E7);   # ק
-    $ent{"heresh"}          = chr(0x5E8);   # ר
-    $ent{"heshin"}          = chr(0x5E9);   # ש
-    $ent{"hetav"}           = chr(0x5EA);   # ת
+    $ent{"healef"}          = chr(0x5D0);   # ?
+    $ent{"hebet"}           = chr(0x5D1);   # ?
+    $ent{"hegimel"}         = chr(0x5D2);   # ?
+    $ent{"hedalet"}         = chr(0x5D3);   # ?
+    $ent{"hehe"}            = chr(0x5D4);   # ?
+    $ent{"hevav"}           = chr(0x5D5);   # ?
+    $ent{"hezayin"}         = chr(0x5D6);   # ?
+    $ent{"hehet"}           = chr(0x5D7);   # ?
+    $ent{"hetet"}           = chr(0x5D8);   # ?
+    $ent{"heyod"}           = chr(0x5D9);   # ?
+    $ent{"hefinalkaf"}      = chr(0x5DA);   # ?
+    $ent{"hekaf"}           = chr(0x5DB);   # ?
+    $ent{"helamed"}         = chr(0x5DC);   # ?
+    $ent{"hefinalmem"}      = chr(0x5DD);   # ?
+    $ent{"hemem"}           = chr(0x5DE);   # ?
+    $ent{"hefinalnun"}      = chr(0x5DF);   # ?
+    $ent{"henun"}           = chr(0x5E0);   # ?
+    $ent{"hesamekh"}        = chr(0x5E1);   # ?
+    $ent{"heayin"}          = chr(0x5E2);   # ?
+    $ent{"hefinalpe"}       = chr(0x5E3);   # ?
+    $ent{"hepe"}            = chr(0x5E4);   # ?
+    $ent{"hefinaltsadi"}    = chr(0x5E5);   # ?
+    $ent{"hetsadi"}         = chr(0x5E6);   # ?
+    $ent{"heqof"}           = chr(0x5E7);   # ?
+    $ent{"heresh"}          = chr(0x5E8);   # ?
+    $ent{"heshin"}          = chr(0x5E9);   # ?
+    $ent{"hetav"}           = chr(0x5EA);   # ?
 
-    $ent{"hesheva"}         = chr(0x5B0);   #  ְ
-    $ent{"hehatafsegol"}    = chr(0x5B1);   #  ֱ
-    $ent{"hehatafpatah"}    = chr(0x5B2);   #  ֲ
-    $ent{"hehatafqamats"}   = chr(0x5B3);   #  ֳ
-    $ent{"hehiriq"}         = chr(0x5B4);   #  ִ
-    $ent{"hetsere"}         = chr(0x5B5);   #  ֵ
-    $ent{"heseqol"}         = chr(0x5B6);   #  ֶ
-    $ent{"hepatah"}         = chr(0x5B7);   #  ַ
-    $ent{"heqamats"}        = chr(0x5B8);   #  ָ
-    $ent{"heholam"}         = chr(0x5B9);   #  ֹ
+    $ent{"hesheva"}         = chr(0x5B0);   #  ?
+    $ent{"hehatafsegol"}    = chr(0x5B1);   #  ?
+    $ent{"hehatafpatah"}    = chr(0x5B2);   #  ?
+    $ent{"hehatafqamats"}   = chr(0x5B3);   #  ?
+    $ent{"hehiriq"}         = chr(0x5B4);   #  ?
+    $ent{"hetsere"}         = chr(0x5B5);   #  ?
+    $ent{"heseqol"}         = chr(0x5B6);   #  ?
+    $ent{"hepatah"}         = chr(0x5B7);   #  ?
+    $ent{"heqamats"}        = chr(0x5B8);   #  ?
+    $ent{"heholam"}         = chr(0x5B9);   #  ?
 
-    $ent{"hequbuts"}        = chr(0x5BB);   #  ֻ
-    $ent{"hedagesh"}        = chr(0x5BC);   #  ּ
+    $ent{"hequbuts"}        = chr(0x5BB);   #  ?
+    $ent{"hedagesh"}        = chr(0x5BC);   #  ?
 
-    $ent{"hemaqaf"}         = chr(0x5BE);   # ־
+    $ent{"hemaqaf"}         = chr(0x5BE);   # ?
 
-    $ent{"heshindot"}       = chr(0x5C1);   #  ׁ
-    $ent{"hesindot"}        = chr(0x5C2);   #  ׂ
+    $ent{"heshindot"}       = chr(0x5C1);   #  ?
+    $ent{"hesindot"}        = chr(0x5C2);   #  ?
 
     ###############################################################################
 

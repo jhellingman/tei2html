@@ -384,6 +384,8 @@
 "R"         p "R"
 "<r"        p "rh"
 "<R"        p "Rh"
+">r"        p "r"
+">R"        p "R"
 
 "s"         p "s"
 "S"         p "S"

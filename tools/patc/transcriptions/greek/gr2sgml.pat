@@ -234,6 +234,8 @@
 "R"         p "&Rgr;"
 "<r"        p "&rrougr;"
 "<R"        p "&Rrougr;"
+">r"        p "&rsmogr;"
+">R"        p "&Rsmogr;"
 
 "s"         p "&sgr;"
 "S"         p "&Sgr;"
