@@ -18,8 +18,7 @@ my $addLineNumbers = 0;
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $line = $_;
 
     if ($line =~ /<!-- START VERSE NUMBERS -->/) {
@@ -54,18 +53,14 @@ while (<INPUTFILE>)
 #
 # getAttrVal: Get an attribute value from a tag (if the attribute is present)
 #
-sub getAttrVal($$)
-{
+sub getAttrVal($$) {
     my $attrName = shift;
     my $attrs = shift;
     my $attrVal = "";
 
-    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i)
-    {
+    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i) {
         $attrVal = $1;
-    }
-    elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-    {
+    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         $attrVal = $1;
     }
     return $attrVal;

@@ -13,23 +13,17 @@ my $parNumber = 0;
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $line = $_;
 
-    if ($line =~ /<div1(.*?)>/) 
-    {
+    if ($line =~ /<div1(.*?)>/) {
         my $attrs = $1;
         my $newDivNumber = getAttrVal("n", $attrs);
-        if ($newDivNumber ne "") 
-        {
+        if ($newDivNumber ne "") {
             $newDivNumber = isroman($newDivNumber) ? arabic($newDivNumber) : $newDivNumber;
-        }
-        else
-        {
+        } else {
             $newDivNumber = getAttrVal("id", $attrs);
-            if ($newDivNumber ne "")
-            {
+            if ($newDivNumber ne "") {
                 $newDivNumber = substr($newDivNumber, 0, 1);
             }
         }
@@ -42,16 +36,14 @@ while (<INPUTFILE>)
     
     my $remainder = $line;
 
-    while ($remainder =~ m/<p\b(.*?)>/)
-    {
+    while ($remainder =~ m/<p\b(.*?)>/) {
         my $before = $`;
         my $attrs = $1;
         $remainder = $';
         $parNumber++;
 
         my $currentNumber = getAttrVal("n", $attrs);
-        if ($currentNumber eq "") 
-        {
+        if ($currentNumber eq "") {
             $currentNumber = ($divNumber ne "" && $divNumber ne "0") ? "$divNumber.$parNumber" : $parNumber;
             $attrs = $attrs . " n=$currentNumber";
         }
@@ -62,8 +54,7 @@ while (<INPUTFILE>)
 }
 
 
-sub isnum($)
-{
+sub isnum($) {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
 }
@@ -72,18 +63,14 @@ sub isnum($)
 #
 # getAttrVal: Get an attribute value from a tag (if the attribute is present)
 #
-sub getAttrVal($$)
-{
+sub getAttrVal($$) {
     my $attrName = shift;
     my $attrs = shift;
     my $attrVal = "";
 
-    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i)
-    {
+    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i) {
         $attrVal = $1;
-    }
-    elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i)
-    {
+    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         $attrVal = $1;
     }
     return $attrVal;
