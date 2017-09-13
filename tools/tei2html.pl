@@ -163,6 +163,10 @@ sub processFile($) {
     my $basename    = $1;
     my $version     = $3;
 
+    if ($version >= 1.0) {
+        $makeTXT = 0;
+    }
+
     print "Processing TEI-file '$basename' version $version\n";
 
     extractMetadata($filename);
