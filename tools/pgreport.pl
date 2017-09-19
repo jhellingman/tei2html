@@ -235,11 +235,13 @@ sub handleTeiFile($) {
                 print XMLFILE "    <pgsource>$pgSrc</pgsource>\n";
 
                 my $repo = $pgSrc->string_value();
-                if (defined $repo && $repo ne "" && $repo ne "#####") {
+                if (isValid($repo)) {
                     print GITFILE "git clone https://github.com/GutenbergSource/$pgSrc.git\n";
                 }
                 print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
-                print XMLFILE "    <projectId>$projectId</projectId>\n";
+                if (isValid($projectId->string_value())) {
+                    print XMLFILE "    <projectId>$projectId</projectId>\n";
+                }
                 logMessage("Clearance:  $pgClearance");
                 print XMLFILE "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
                 logMessage("Posted:     $postedDate");
@@ -335,6 +337,12 @@ sub logError($) {
 sub logMessage($) {
     my $message = shift;
     print REPORTFILE "$message\n";
+}
+
+
+sub isValid($) {
+    my $value = shift;
+    return defined $value && $value ne "" && $value ne "#####";
 }
 
 

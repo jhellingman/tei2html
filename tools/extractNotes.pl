@@ -1,7 +1,8 @@
 # extractNotes.pl -- extract notes from TEI tagged files
 #
 # Extract occurances of footnotes in TEI tagged files to a separate foot-note file, with links back to the
-# original note locations. This code depends on valid TEI.
+# original note locations. This code depends on valid TEI following a few formatting conventions (i.e. tags 
+# are always on a single line).
 
 use strict;
 
@@ -54,23 +55,27 @@ while (<INPUTFILE>) {
         # Find the end of the note
         my $nestingLevel = 0;
         my $endFound = 0;
+        my $followingSpace = "";
         while ($endFound == 0) {
-            if ($remainder =~ m/<(\/?note)\b(.*?)>/) {
+            if ($remainder =~ m/<(\/?note)\b(.*?)>([ ]*)/) {
                 my $beforeTag = $`;
                 my $noteTag = $1;
+                my $attributes = $2;
+                $followingSpace = $3;
                 $remainder = $';
 
                 if ($noteTag eq "note") {
                     $nestingLevel++;
                     $noteText .= $beforeTag . " ((";
-                    print "WARNING: Nested notes on page $pageNumber rendered in-line (check for '((')\n";
+                    my $noteNumber = getAttrVal("n", $attributes);
+                    print "WARNING: Nested note $noteNumber on page $pageNumber rendered in-line (check for '((')\n";
                 } elsif ($noteTag eq "\/note") {
                     if ($nestingLevel == 0) {
                         $endFound = 1;
                         $noteText .= $beforeTag;
                     } else {
                         $nestingLevel--;
-                        $noteText .= $beforeTag . ")) ";
+                        $noteText .= $beforeTag . ")) $followingSpace";
                     }
                 }
             } else {
@@ -83,12 +88,12 @@ while (<INPUTFILE>) {
             print "WARNING: (almost) empty note '$noteText' on page $pageNumber (n=$noteNumber)\n";
         }
 
-        if ($notePlace ne "margin") {
-            $seqNumber++;
-            print OUTPUTFILE " [$seqNumber]";
-            print NOTESFILE "[$seqNumber] $noteText\n\n"
-        } else {
+        if ($notePlace eq "margin") {
             print OUTPUTFILE "[$noteText] ";
+        } else {
+            $seqNumber++;
+            print OUTPUTFILE " [$seqNumber]$followingSpace";
+            print NOTESFILE "[$seqNumber] $noteText\n\n"
         }
     }
 

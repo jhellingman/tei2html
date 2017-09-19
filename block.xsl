@@ -52,6 +52,10 @@
 
     <xsl:template match="pb">
         <xsl:choose>
+            <!-- Don't show page breaks when they appear in a marginal note -->
+            <xsl:when test="ancestor::note[@place = 'margin']">
+                <xsl:call-template name="pb-anchor"/>
+            </xsl:when>
             <!-- In HTML, we do not allow a span element at the top-level, so wrap it into a paragraph. -->
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>

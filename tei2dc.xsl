@@ -1,20 +1,24 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE xsl:stylesheet [
 
-    <!-- Generate RDF/Dublin Core metadata from a TEI file
+    <!ENTITY ndash      "&#x2013;">
 
-         This is still a very basic implementation.
-         For further ideas on refinements see: http://dublincore.org/documents/dcq-rdf-xml/.
-    -->
+]>
 
-    <xsl:stylesheet
-        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        xmlns:f="urn:stylesheet-functions"
-        exclude-result-prefixes="f xd xs"
-        version="2.0">
+<!-- Generate RDF/Dublin Core metadata from a TEI file
+
+     This is still a very basic implementation.
+     For further ideas on refinements see: http://dublincore.org/documents/dcq-rdf-xml/.
+-->
+
+<xsl:stylesheet
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:f="urn:stylesheet-functions"
+    exclude-result-prefixes="f xd xs"
+    version="2.0">
 
     <xsl:output
         method="xml"
@@ -25,11 +29,15 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:variable name="TEI" select="TEI.2 | TEI"/>
+
     <xsl:template match="TEI.2 | TEI">
         <rdf:RDF>
             <rdf:Description>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
+                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/editor"/>
+                <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt[resp != 'Transcription']/name"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
                 <xsl:if test="text/@lang">
@@ -57,6 +65,18 @@
         </dc:creator>
     </xsl:template>
 
+    <xsl:template match="editor">
+        <dc:creator>
+            <xsl:value-of select="."/>
+        </dc:creator>
+    </xsl:template>
+
+    <xsl:template match="respStmt/name">
+        <dc:creator>
+            <xsl:value-of select="."/>
+        </dc:creator>
+    </xsl:template>
+
     <xsl:template match="publicationStmt">
         <dc:publisher>
             <xsl:value-of select="publisher"/>
@@ -69,8 +89,38 @@
     </xsl:template>
 
     <xsl:template match="availability">
+
+        <xsl:variable name="contributors">
+            <contributors>
+                <xsl:for-each select="$TEI/teiHeader/fileDesc/titleStmt/author">
+                    <xsl:copy-of select="f:parseName(.)"/>
+                </xsl:for-each>
+                <xsl:for-each select="$TEI/teiHeader/fileDesc/titleStmt/editor">
+                    <xsl:copy-of select="f:parseName(.)"/>
+                </xsl:for-each>
+                <xsl:for-each select="$TEI/teiHeader/fileDesc/titleStmt/respStmt/name">
+                    <xsl:copy-of select="f:parseName(.)"/>
+                </xsl:for-each>
+            </contributors>
+        </xsl:variable>
+
+        <xsl:variable name="lastDeath" select="if ($contributors//death[matches(., '[0-9]+')]) then max($contributors//death[matches(., '[0-9]+')]) else 0"/>
+
         <dc:rights>
             <xsl:value-of select="."/>
+
+            <xsl:choose>
+                <xsl:when test="$lastDeath > year-from-date(current-date()) - 71">
+                    <xsl:text>(Based on the available metadata, this work is likely to be subject to copyright in jurisdictions where copyright lasts for life plus 70 years until at least 1 January </xsl:text>
+                    <xsl:value-of select="$lastDeath + 71"/>
+                    <xsl:text>.)</xsl:text>
+                </xsl:when>
+                <xsl:when test="$lastDeath > year-from-date(current-date()) - 51">
+                    <xsl:text>(Based on the available metadata, this work is likely to be subject to copyright in jurisdictions where copyright lasts for life plus 50 years until at least 1 January </xsl:text>
+                    <xsl:value-of select="$lastDeath + 51"/>
+                    <xsl:text>.)</xsl:text>
+                </xsl:when>
+            </xsl:choose>
         </dc:rights>
     </xsl:template>
 
@@ -115,6 +165,56 @@
     <xsl:function name="f:isValid" as="xs:boolean">
         <xsl:param name="value"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:parseName">
+        <xsl:param name="name" as="xs:string"/>
+
+        <!-- <xsl:message>ANALYZING: <xsl:value-of select="$name"/></xsl:message> -->
+        <xsl:choose>
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?$">
+                    <xsl:matching-substring>
+                        <contributor>
+                            <!--
+                            <xsl:message>FOUND NAME: <xsl:value-of select="regex-group(1)"/></xsl:message>
+                            <xsl:message>FOUND BIRTH: <xsl:value-of select="regex-group(2)"/></xsl:message>
+                            <xsl:message>FOUND DEATH: <xsl:value-of select="regex-group(3)"/></xsl:message>
+                            -->
+                            <name><xsl:value-of select="regex-group(1)"/></name>
+                            <birth><xsl:value-of select="regex-group(2)"/></birth>
+                            <death><xsl:value-of select="regex-group(3)"/></death>
+                        </contributor>
+                    </xsl:matching-substring>
+                </xsl:analyze-string>
+            </xsl:when>
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?$">
+                    <xsl:matching-substring>
+                        <contributor>
+                            <name><xsl:value-of select="regex-group(1)"/></name>
+                            <death><xsl:value-of select="regex-group(2)"/></death>
+                        </contributor>
+                    </xsl:matching-substring>
+                </xsl:analyze-string>
+            </xsl:when>
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?$">
+                    <xsl:matching-substring>
+                        <contributor>
+                            <name><xsl:value-of select="regex-group(1)"/></name>
+                            <birth><xsl:value-of select="regex-group(2)"/></birth>
+                        </contributor>
+                    </xsl:matching-substring>
+                </xsl:analyze-string>
+            </xsl:when>
+            <xsl:otherwise>
+                <contributor>
+                    <name><xsl:value-of select="$name"/></name>
+                </contributor>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
 </xsl:stylesheet>

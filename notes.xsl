@@ -39,6 +39,13 @@
         </span>
     </xsl:template>
 
+    <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage -->
+    <xsl:template match="margin">
+        <span class="marginnote">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
 
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>

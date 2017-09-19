@@ -17,6 +17,19 @@
 "</GR>"     0 "</foreign>"
 "</GRA>"    0 ""
 
+% some TEI tags:
+"<g>"               p "<g>"
+"<b>"               p "<b>"
+"<sc>"              p "<sc>"
+"<hi>"              p "<hi>"
+"<hi rend=ex>"      p "<hi rend=ex>"
+"<hi rend=sc>"      p "<hi rend=sc>"
+"<hi rend=bold>"    p "<hi rend=bold>"
+"</g>"              p "</g>"
+"</b>"              p "</b>"
+"</sc>"             p "</sc>"
+"</hi>"             p "</hi>"
+
 "a"         p "&agr;"
 "A"         p "&Agr;"
 "a|"        p "&aiotgr;"
