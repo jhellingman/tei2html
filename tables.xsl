@@ -19,12 +19,12 @@
         model.</p>
 
         <p>The formatting of a cell is derived from the <code>@rend</code> attribute on the
-        column, and can be overriden by the <code>@rend</code> attribute on the cell itself.
+        column, and can be overridden by the <code>@rend</code> attribute on the cell itself.
         Both <code>@rend</code> attributes are converted to classes, where care needs to be
         taken that the column related classes are always defined before
         the cell classes, as to make this work out correctly with the
         CSS precedence rules. Note that all identical <code>@rend</code> attributes are
-        mapped to the same class, and that those might occur in preceeding
+        mapped to the same class, and that those might occur in preceding
         tables, we thus have to generate all column-related classes before
         those related to cells.</p>
 

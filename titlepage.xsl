@@ -1,7 +1,7 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet to format a titlepage, to be imported in tei2html.xsl.
+    Stylesheet to format a title page, to be imported in tei2html.xsl.
 
 -->
 
@@ -15,7 +15,7 @@
     >
 
     <xd:doc type="stylesheet">
-        <xd:short>Format titlepages.</xd:short>
+        <xd:short>Format title pages.</xd:short>
         <xd:detail>This stylesheet is used by tei2html and tei2epub to format the <code>titlePage</code>-element.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>

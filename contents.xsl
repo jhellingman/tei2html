@@ -603,7 +603,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="genloi">
-        <!-- TODO: make id unique for each occurance of <divGen type="loi"> -->
+        <!-- TODO: make id unique for each occurrence of <divGen type="loi"> -->
         <li id="loi.{f:generate-id(.)}">
             <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
             <xsl:call-template name="generate-toc-entry"/>

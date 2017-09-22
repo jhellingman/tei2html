@@ -68,8 +68,8 @@
 
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image. -->
 
-            <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consequtive quotation marks. -->
-            <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consequitive periods with an ellipis character. -->
+            <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
+            <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
 
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
 

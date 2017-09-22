@@ -143,11 +143,11 @@
                         <xsl:variable name="id" select="substring(@facs, 2)"/>
                         <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
                         <xsl:if test="$graphic">
-                            <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                            <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"/>
                         </xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
-                        <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"></a>
+                        <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:if>
@@ -295,7 +295,7 @@
 
     <xd:doc>
         <xd:short>Handle an block-quote.</xd:short>
-        <xd:detail>Handle a block-quote (a quote normally set off from the text by some extra space and identation).</xd:detail>
+        <xd:detail>Handle a block-quote (a quote normally set off from the text by some extra space and indentation).</xd:detail>
     </xd:doc>
 
     <xsl:template match="q">
@@ -338,7 +338,7 @@
         <xd:short>Handle <code>q</code> and <code>lg</code> elements within a footnote.</xd:short>
         <xd:detail>Quotes and lines of verse within a footnote are (due to the required structure of a TEI document), nested
         within a <code>text/body/div1</code> structure. In the generated output, we need to ignore this
-        superflous structure.</xd:detail>
+        superfluous structure.</xd:detail>
     </xd:doc>
 
     <xsl:template match="note[@type='foot' or not(@type)]//q/text">
@@ -748,7 +748,7 @@
     <xd:doc>
         <xd:short>Use a simple drop-cap at the start of a paragraph.</xd:short>
         <xd:detail>Use a simple drop-cap at the start of a paragraph. Provide a unique class name for the drop-cap, as well as a generic one.
-        Some CSS implementations do not handle the <code>:first-letter</code> psuedo-selector correctly, so we provide a span for this.</xd:detail>
+        Some CSS implementations do not handle the <code>:first-letter</code> pseudo-selector correctly, so we provide a span for this.</xd:detail>
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]">

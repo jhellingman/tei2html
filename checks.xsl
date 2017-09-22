@@ -41,7 +41,7 @@
         <p>Since the standard XSLT processor does not provide line and column information to report errors on, this stylesheet expects that all
         elements are provided with a <code>pos</code> element that contains the line and column the element appears on in the source file. This element
         should have the format <code>line:column</code>. A small Perl script (<code>addPositionInfo.pl</code>) is available to add those attributes to 
-        elements as a preprocessing step.</p></xd:detail>
+        elements as a pre-processing step.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2015, Jeroen Hellingman</xd:copyright>
     </xd:doc>

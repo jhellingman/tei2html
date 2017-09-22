@@ -113,7 +113,7 @@
 
     <xd:doc>
         <xd:short>Close a <code>p</code>-element in the output.</xd:short>
-        <xd:detail><p>To accomodate the differences between the TEI and HTML paragraph model,
+        <xd:detail><p>To accommodate the differences between the TEI and HTML paragraph model,
         we sometimes need to close (and reopen) paragraphs, as various elements
         are not allowed inside <code>p</code>-elements in HTML.</p>
 

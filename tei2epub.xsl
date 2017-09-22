@@ -132,7 +132,7 @@
     <!-- Mimetype file -->
 
     <xd:doc>
-        <xd:short>Generate the file with the epub mimetype: application/epub+zip.</xd:short>
+        <xd:short>Generate the file with the ePub mimetype: application/epub+zip.</xd:short>
     </xd:doc>
 
     <xsl:template name="mimetype">

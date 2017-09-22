@@ -24,7 +24,8 @@
 
     <xd:doc mode="flatten-segments">
         <xd:short>Mode used to flatten segments.</xd:short>
-        <xd:detail>Segments are flattened by grouping segment and non-segment elements; the non-segments will be wrapped into a new segment, and the contained segments will be handled recursively.</xd:detail>
+        <xd:detail>Segments are flattened by grouping segment and non-segment elements; the non-segments will be wrapped
+            into a new segment, and the contained segments will be handled recursively.</xd:detail>
     </xd:doc>
 
     <xd:doc>

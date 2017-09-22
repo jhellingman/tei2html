@@ -547,14 +547,14 @@
 
         <xsl:if test="$optionPrinceMarkup = 'XXX' and (not($head/@type) or $head/@type='main')">
             <div class="label{$parent}">
-                <xsl:apply-templates select="$head" mode="setLabelheader"/>
+                <xsl:apply-templates select="$head" mode="setLabelHeader"/>
             </div>
         </xsl:if>
     </xsl:template>
 
 
     <!-- suppress footnotes -->
-    <xsl:template match="note" mode="setLabelheader"/>
+    <xsl:template match="note" mode="setLabelHeader"/>
 
 
     <!--====================================================================-->

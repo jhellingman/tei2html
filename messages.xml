@@ -255,7 +255,7 @@
         <msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
-        <!-- Language designations: ID's are based on the offical ISO codes -->
+        <!-- Language designations: ID's are based on the official ISO codes -->
 
         <!-- ISO 639 two letter codes -->
         <msg:message name="aa">Afar</msg:message>

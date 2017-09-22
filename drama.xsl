@@ -174,7 +174,7 @@
         <xd:short>Align two verses.</xd:short>
         <xd:detail>Align two verses in a table. Here the assumption is that both verses have
         the same number of elements. We simply iterate through both, and place them side-by-side.
-        Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Linenumbers will be inserted
+        Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Line numbers will be inserted
         from either of both verses to be aligned, in a separate column.</xd:detail>
     </xd:doc>
 

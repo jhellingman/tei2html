@@ -84,7 +84,7 @@
         <i><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></i>
     </xsl:template>
 
-    <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscrip; sub = subscript -->
+    <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscript; sub = subscript -->
 
     <xd:doc>
         <xd:short>Italic text.</xd:short>
@@ -454,7 +454,7 @@
     <xd:doc>
         <xd:short>Find the expansion of an abbreviation.</xd:short>
         <xd:detail>Find the expansion of an abbreviation, by first looking for the value of the <code>@expan</code> attribute
-        on the abbreviation itself, or, if that is not available, look for other occurances of the same abbreviation, that
+        on the abbreviation itself, or, if that is not available, look for other occurrences of the same abbreviation, that
         might provide the expansion.</xd:detail>
     </xd:doc>
 

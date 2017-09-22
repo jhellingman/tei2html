@@ -10,7 +10,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to produce a KWIC from a TEI document</xd:short>
-        <xd:detail>This stylesheet produces a KWIC from a TEI document. It shows all occurances of all words
+        <xd:detail>This stylesheet produces a KWIC from a TEI document. It shows all occurrences of all words
         in the document in their context in alphabetical order. The output can become rather big, as a rule-of-thumb,
         30 to 40 times the size of the original. Furthermore, the processing time can be considerable.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
@@ -38,8 +38,8 @@
 
 
     <xd:doc>
-        <xd:short>The lenght of the context to show.</xd:short>
-        <xd:detail>The lenght of the context to show. This counts both words and non-words (spaces and punctuation marks).
+        <xd:short>The length of the context to show.</xd:short>
+        <xd:detail>The length of the context to show. This counts both words and non-words (spaces and punctuation marks).
         The preceding and following contexts are counted separately.</xd:detail>
     </xd:doc>
 
@@ -47,8 +47,8 @@
 
 
     <xd:doc>
-        <xd:short>Stopwords (per language).</xd:short>
-        <xd:detail>Stopwords will be ignored when generating the KWIC. Stopwords can be provided in a single string, separated
+        <xd:short>Stop-words (per language).</xd:short>
+        <xd:detail>Stop-words will be ignored when generating the KWIC. Stop-words can be provided in a single string, separated
         by a space. Internally this will be converted to a sequence.</xd:detail>
     </xd:doc>
 
@@ -65,8 +65,8 @@
 
 
     <xd:doc>
-        <xd:short>Load stopwords.</xd:short>
-        <xd:detail>Function to load stopwords, either from a string, or from a file, if the string starts
+        <xd:short>Load stop-words.</xd:short>
+        <xd:detail>Function to load stop-words, either from a string, or from a file, if the string starts
         with an @-sign.</xd:detail>
     </xd:doc>
 
@@ -86,7 +86,7 @@
     <xsl:function name="f:load-dictionary" as="xs:string*">
         <xsl:param name="filename"/>
 
-        <xsl:message>Loading stopwords from file: <xsl:value-of select="$filename"/></xsl:message>
+        <xsl:message>Loading stop-words from file: <xsl:value-of select="$filename"/></xsl:message>
         <xsl:variable name="file-contents" as="xs:string" select="unparsed-text($filename, 'iso-8859-1')"/>
         <xsl:sequence select="tokenize($file-contents, '\r?\n')"/>
     </xsl:function>
@@ -380,7 +380,6 @@
 
     <xd:doc>
         <xd:short>Output font styles.</xd:short>
-        <xd:detail></xd:detail>
     </xd:doc>
 
     <xsl:template mode="output" match="i | b | sup | sub">
@@ -390,7 +389,6 @@
 
     <xd:doc>
         <xd:short>Output font styles (in span element).</xd:short>
-        <xd:detail></xd:detail>
     </xd:doc>
 
     <xsl:template mode="output" match="span">
@@ -577,10 +575,10 @@
 
 
     <xd:doc>
-        <xd:short>Determine whether a word is a stopword.</xd:short>
-        <xd:detail>Determine whether a word appears in a list of stopwords for a particular language.</xd:detail>
+        <xd:short>Determine whether a word is a stop-word.</xd:short>
+        <xd:detail>Determine whether a word appears in a list of stop-words for a particular language.</xd:detail>
         <xd:param name="word">The word to test.</xd:param>
-        <xd:param name="lang">The language of the word (used to select the stopword list).</xd:param>
+        <xd:param name="lang">The language of the word (used to select the stop-word list).</xd:param>
     </xd:doc>
 
     <xsl:function name="f:is-stopword" as="xs:boolean">

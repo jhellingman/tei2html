@@ -84,7 +84,7 @@
 
     <xd:doc>
         <xd:short>Insert footnotes at the current location.</xd:short>
-        <xd:detail>Insert footnotes at the current location. This template will place all footnotes occuring in the
+        <xd:detail>Insert footnotes at the current location. This template will place all footnotes occurring in the
         indicated division at this location.</xd:detail>
     </xd:doc>
 

@@ -115,7 +115,7 @@
                 <a>
                     <xsl:choose>
                         <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
-                            <!-- cannot directly link to image file in epub, need to generate wrapper html
+                            <!-- cannot directly link to image file in ePub, need to generate wrapper html
                                  and link to that. -->
                             <xsl:call-template name="generate-image-wrapper">
                                 <xsl:with-param name="imagefile" select="$url"/>
@@ -325,7 +325,7 @@ width:<xsl:value-of select="$width"/>;
     <xd:doc>
         <xd:short>Handle a figure element.</xd:short>
         <xd:detail>
-            <p>This template handles the figure element. It takes care of both the figure annotations (title, legenda, etc.)
+            <p>This template handles the figure element. It takes care of both the figure annotations (title, legend, etc.)
             and the in-line loading of the image in HTML.</p>
         </xd:detail>
     </xd:doc>
