@@ -296,6 +296,7 @@ sub processFile($) {
             # Use our own script to wrap lines, as fmt cannot deal with unicode text.
             system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
         } else {
+            # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
             system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
         }
         system ("gutcheck $basename.txt > $basename.gutcheck");

@@ -10,16 +10,14 @@ GetOptions('u' => \$useUnicode);
 
 $Text::Wrap::columns = 72;
 
-if ($useUnicode == 1) 
-{
+if ($useUnicode == 1) {
     binmode(STDOUT, ":utf8");
     use open ':utf8';
 }
 
-while (<>)
-{
+while (<>) {
     my $line = $_;
-    $line =~ /^( *)(.*)(\n*)$/;
+    $line =~ /^(\s*)(.*)(\n*)$/;
     my $initialSpace = $1;
     $line = $2;
     my $finalNewlines = $3;

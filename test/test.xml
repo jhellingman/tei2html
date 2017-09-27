@@ -132,7 +132,7 @@
 <head type="label">Chapter I</head>
 <head>Inline Text Elements</head>
 
-<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb002" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb2" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table id="tableStyles">
 <row><cell><hi>&quickbrown;</hi>    			</cell><cell>Italic</cell></row>
@@ -257,7 +257,7 @@
 <div1 id="ch03" type="Chapter" n="III" rend="label(yes)">
 <head>Footnotes<note place="foot" n="*">Footnote in <index level1="Chapter headings"/>chapter heading.</note></head>
 
-<p>In this chapter, we set out to test footnotes<index level1="Footnote"/>.</p>
+<p>In this chapter, we set out to test <index level1="Footnote"/>footnotes<index level1="Footnote"/>.</p>
 
 <p>Here we have a reference to a <ref target="n1">footnote</ref> in a following <ref target="ch05">chapter</ref>, and <ref target="inside-n1">element inside it</ref>.</p>
 
@@ -286,7 +286,7 @@
     </row>
     <row>
         <cell>5 (yet another wide cell, just to see how it works out in the result formatting)</cell>
-        <cell>6<note place="foot" id="n1" n="*">This is a footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell>
+        <cell>6<note place="foot" id="n1" n="*">This is a <index level1="Footnote"/>footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell>
     </row>
     <row>
         <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
@@ -295,7 +295,7 @@
 </p>
 
 
-<p>We can also place tables in footnotes.<note n="3" place="foot"><p>Just adding a table in a footnote:</p>
+<p>We can also place tables in footnotes.<note n="3" place="foot"><p>Just adding a table in a <index level1="Footnote"/>footnote:</p>
 
 <p><table id="tableDemo2" rend="width(40%) align(center)">
     <head>Head above table.</head>
@@ -827,7 +827,7 @@
     <item>Three</item>
     <item rend="font(italic)">Four</item>
     <item>Five<pb n="3" id="pb3"/></item>
-    <item>Six<note n="1">This is a footnote to list-item six.</note></item>
+    <item>Six<note n="1">This is a <index level1="Footnote"/>footnote to list-item six.</note></item>
     <item><corr sic="Zeven">Seven</corr></item>
     <item>Eight</item>
     <item>Nine</item>
@@ -982,20 +982,22 @@
 </div4>
 </div3>
 </div2>
-<pb n="23" id="pb23"/>
+<pb n="4" id="pb4"/>
 </div1>
 <div1 id="ch08" n="VIII">
 <head type="label">Chapter VIII</head>
 <head>Poetry</head>
 
-<p>This section is to test the rendering of poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&apos;s aligned. Note that the technique used to center an entire block of text does not work in IE.</p>
+<p>This section is to test the rendering of <index level1="Poetry"/>poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza&apos;s aligned. Note that the technique used to center an entire block of text does not work in IE.</p>
+
+<p>(An index reference to a <index level1="Footnote"/>footnote here as well.)</p>
 
 <lg>
 <head rend="align(center)">Three stanzas in a row</head>
 
 <lg type="Group">
 <l>This is a rule of verse</l>
-<l rend="indent(1)">This is another <pb n="4" id="pb4"/>rule of verse</l>
+<l rend="indent(1)">This is another <pb n="5" id="pb5"/>rule of verse</l>
 <l>This is a rule of verse</l>
 <l rend="indent(2)">This is another rule of verse</l>
 <l>This is a rule of verse</l>
@@ -1006,9 +1008,9 @@
 
 <lg type="Group" rend="font(italic)">
 <l>This is a rule of verse in italics</l>
-<l rend="indent(1)">This is another rule of verse</l>
+<l rend="indent(1)">This is another rule of <index level1="Poetry"/>verse</l>
 <l>This is a rule of verse</l>
-<l rend="indent(2)">This is another rule of verse</l>
+<l rend="indent(2)">This is another rule of <index level1="Poetry"/>verse</l>
 <l>This is a rule of verse</l>
 <l rend="indent(3)">This is another rule of verse</l>
 <l>This is a rule of verse</l>

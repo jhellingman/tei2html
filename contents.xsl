@@ -1,6 +1,7 @@
 <!DOCTYPE xsl:stylesheet [
 
     <!ENTITY nbsp       "&#160;">
+    <!ENTITY ndash      "&#x2013;">
 
 ]>
 
@@ -873,11 +874,11 @@
 
             <xsl:copy-of select="f:logInfo('Generating Index', ())"/>
 
-            <!-- Collect all index entries into a tree structure, and add the page numbers to them -->
+            <!-- Collect all index entries into a node structure and add page numbers to them. -->
             <xsl:variable name="index">
-                <divIndex>
+                <index>
                     <xsl:for-each select="//index">
-                        <index href="{f:generate-href(.)}">
+                        <entry href="{f:generate-href(.)}">
                             <xsl:attribute name="level1"><xsl:value-of select="@level1"/></xsl:attribute>
                             <xsl:attribute name="level2"><xsl:value-of select="@level2"/></xsl:attribute>
                             <xsl:attribute name="level3"><xsl:value-of select="@level3"/></xsl:attribute>
@@ -894,9 +895,9 @@
                                     </xsl:otherwise>
                                 </xsl:choose>
                             </xsl:attribute>
-                        </index>
+                        </entry>
                     </xsl:for-each>
-                </divIndex>
+                </index>
             </xsl:variable>
 
             <xsl:apply-templates select="$index" mode="index"/>
@@ -912,36 +913,87 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="xhtml:divIndex" mode="index">
-        <xsl:for-each-group select="xhtml:index" group-by="lower-case(@level1)">
+    <xsl:template match="xhtml:index" mode="index">
+        <xsl:for-each-group select="xhtml:entry" group-by="lower-case(@level1)">
             <xsl:sort select="lower-case(@level1)"/>
-
             <p>
                 <xsl:value-of select="@level1"/>
-
                 <xsl:for-each-group select="current-group()" group-by="lower-case(@level2)">
                     <xsl:sort select="lower-case(@level2)"/>
                     <xsl:choose>
                         <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
                         <xsl:otherwise>; </xsl:otherwise>
                     </xsl:choose>
-
                     <xsl:value-of select="@level2"/>
-
-                    <!-- Group to suppress duplicate page numbers -->
-                    <xsl:for-each-group select="current-group()" group-by="@page">
-                        <xsl:choose>
-                            <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
-                            <xsl:otherwise>, </xsl:otherwise>
-                        </xsl:choose>
-                        <a>
-                            <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
-                            <xsl:value-of select="@page"/>
-                        </a>
-                    </xsl:for-each-group>
+                    <xsl:call-template name="indexPageReferences"/>
                 </xsl:for-each-group>
             </p>
         </xsl:for-each-group>
+    </xsl:template>
+
+    <xsl:template name="indexPageReferences">
+        <!-- Group to suppress duplicate page numbers -->
+        <xsl:variable name="pages">
+            <pages>
+                <xsl:for-each-group select="current-group()" group-by="@page">
+                    <xsl:copy-of select="f:logDebug('Index page: {2} {1}.', (@href, @page))"/>
+                    <page href="{@href}" page="{@page}"/>
+                </xsl:for-each-group>
+            </pages>
+        </xsl:variable>
+
+        <!-- Group to consolidate consecutive page numbers, i.e., 1, 2, 3, 4 becomes 1-4 -->
+        <xsl:variable name="pages">
+            <pages>
+                <xsl:for-each-group select="$pages//xhtml:page" group-adjacent="@page = preceding::xhtml:page[1]/@page + 1 or @page = following::xhtml:page[1]/@page - 1">
+                    <xsl:choose>
+                        <xsl:when test="current-grouping-key()">
+                            <xsl:variable name="range">
+                                <pages>
+                                    <xsl:for-each select="current-group()">
+                                        <page href="{@href}" page="{@page}"/>
+                                    </xsl:for-each>
+                                </pages>
+                            </xsl:variable>
+                            <xsl:copy-of select="f:logDebug('Page range: {1}-{2}.', ($range//xhtml:page[1]/@page, $range//xhtml:page[last()]/@page))"/>
+                            <range
+                                firstPage="{$range//xhtml:page[1]/@page}"
+                                firstHref="{$range//xhtml:page[1]/@href}"
+                                lastPage="{$range//xhtml:page[last()]/@page}"
+                                lastHref="{$range//xhtml:page[last()]/@href}"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:for-each select="current-group()">
+                                <xsl:copy-of select="f:logDebug('Single page: {1}.', (@page))"/>
+                                <page href="{@href}" page="{@page}"/>
+                            </xsl:for-each>
+                        </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:for-each-group>
+            </pages>
+        </xsl:variable>
+
+        <!-- Output the pages -->
+        <xsl:for-each select="$pages//xhtml:page | $pages//xhtml:range ">
+            <xsl:choose>
+                <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
+                <xsl:otherwise>, </xsl:otherwise>
+            </xsl:choose>
+            <xsl:copy-of select="f:logDebug('Output page: {1} : {2}.', (@page, @href))"/>
+            <xsl:apply-templates select="." mode="index"/>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template match="xhtml:page" mode="index">
+        <a href="{@href}"><xsl:value-of select="@page"/></a>
+    </xsl:template>
+
+    <xsl:template match="xhtml:range[@firstPage = @lastPage - 1]" mode="index">
+        <a href="{@firstHref}"><xsl:value-of select="@firstPage"/></a>, <a href="{@lastHref}"><xsl:value-of select="@lastPage"/></a>
+    </xsl:template>
+
+    <xsl:template match="xhtml:range" mode="index">
+        <a href="{@firstHref}"><xsl:value-of select="@firstPage"/></a>&ndash;<a href="{@lastHref}"><xsl:value-of select="@lastPage"/></a>
     </xsl:template>
 
 
