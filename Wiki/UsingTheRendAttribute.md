@@ -57,3 +57,24 @@ The following keys and values are supported: (Note that this list is not exhaust
 | `figure` | `float`  | The place to float in image, table, etc. Possible values: left, right. | `<figure rend="float(left)">` |
 | `table`, `list` | `columns` | Set the element in multiple columns. May be applied to tables and lists. |  `<list rend="columns(2)">...</list>` |
 | _Any_ | `class` | Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. | `<p rend="class(myClass)">` |
+
+
+### Using `@style` and `@rendition` ###
+
+The current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. This is currently not supported, but would be fairly easy to add to the style-sheets. See the [TEI guidelines on rendition attributes](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html).
+
+TODO:
+
+1. Handle the `@style` attribute, and output it as a CSS rule.
+   - give the CSS fragment a unique class-name
+   - output the value of the `@style` attribute verbatim.
+   - remove duplicates, such that identical `@style` attributes are only output once.
+   - apply the class-name to the relevant output element in HTML.
+2. Handle the `@rendition` attribute.
+   - apply the given class name to the relevant output element in HTML.
+   - verify a `<rendition>` element for the give class name is present in the `<tagsDecl>` of the TEI file.
+   - warn if this is not the case.
+3. Handle the `<rendition>` tags in the `<tagsDecl>`.  
+   - verify the rendition id is actually used in the file.
+   - output the corresponding CSS verbatim.
+   
