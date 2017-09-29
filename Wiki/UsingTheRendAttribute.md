@@ -2,6 +2,8 @@
 
 The `@rend` attribute is a simple hook into the TEI structure to document or specify rendering features. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
 
+Note that according to the TEI Guidelines, the rendering attributes are intended to describe the presentation of the source material, and are not to prescribe any presentation of the output. Since the intention here is to faithfully reproduce text, this distinction is not really important for `tei2html`.
+
 ## Simple ##
 
 Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient 95 percent of the time. The available rendering keywords are element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.
@@ -66,13 +68,13 @@ The current TEI guidelines also provide `@style` and `@rendition` to define pres
 TODO:
 
 1. Handle the `@style` attribute, and output it as a CSS rule.
-   - give the CSS fragment a unique class-name
+   - generate a unique class-name for the CSS fragment.
    - output the value of the `@style` attribute verbatim.
    - remove duplicates, such that identical `@style` attributes are only output once.
-   - apply the class-name to the relevant output element in HTML.
+   - apply the generated class-name to the relevant output element in HTML.
 2. Handle the `@rendition` attribute.
-   - apply the given class name to the relevant output element in HTML.
-   - verify a `<rendition>` element for the give class name is present in the `<tagsDecl>` of the TEI file.
+   - apply the given class name(s) to the relevant output element in HTML.
+   - verify `<rendition>` elements for the given class names are present in the `<tagsDecl>` of the TEI file.
    - warn if this is not the case.
 3. Handle the `<rendition>` tags in the `<tagsDecl>`.  
    - verify the rendition id is actually used in the file.
