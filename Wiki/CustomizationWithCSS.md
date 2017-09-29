@@ -4,6 +4,16 @@ Since many details of the layout of the output (For both HTML and PDF) are defin
 
 Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `@rend` attributes in the source document.
 
+Order of precendence of renditions
+
+1. CSS derived from `@rend` or `@style` attribute on element.
+2. CSS derived from `@rend` or `@style` attribute on row (for table cells).
+3. CSS derived from `@rend` or `@style` attribute on column (for table cells).
+4. CSS in `<rendition>` elements in document.
+5. Custom CSS stylesheet.
+6. Default CSS stylesheet.
+7. Browser defaults.
+
 # Steps for Custom Layout #
 
 The following steps need to be taken to define custom layout.
