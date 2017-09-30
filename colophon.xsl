@@ -98,6 +98,8 @@
     <!-- Ignore the classDecl inside the encodingDesc -->
     <xsl:template match="encodingDesc/classDecl"/>
 
+    <!-- Ignore the tagsDecl inside the encodingDesc -->
+    <xsl:template match="encodingDesc/tagsDecl"/>
 
     <xsl:template name="colophonMetadata">
         <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>

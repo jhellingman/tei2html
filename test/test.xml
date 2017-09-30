@@ -70,6 +70,12 @@
 				<bibl>Test Taxonomy</bibl>
 			</taxonomy>
 		</classDecl>
+		<tagsDecl>
+			<rendition id="red">color: red;</rendition>
+			<rendition id="green">color: green;</rendition>
+			<rendition selector="#blue">color: blue;</rendition>
+			<rendition id="large-letter" scope="first-letter">font-size: xx-large; color: red</rendition>
+		</tagsDecl>
       </encodingDesc>
       <profileDesc>
          <langUsage>
@@ -1133,6 +1139,19 @@
 
 </div1>
 
+<div1 id="usingStyle" n="X">
+<head type="label">Hoofdstuk X</head>
+<head>Using @style and @rendition attributes</head>
+
+<p>This is a test of using <hi style="color:red">CSS</hi> in <hi style="color:red">@style</hi> attributes.</p>
+
+<p>This is a test of using <hi rendition="green">CSS</hi> using <hi rendition="green">@rendition</hi> attributes.</p>
+
+<p>This is a test of using <hi id="blue">CSS</hi> using a style defined in a rendition element: CSS before should be blue.</p>
+
+<p rendition="large-letter">This is a test of using CSS using a style defined in a rendition element. The first letter of this paragraph should be large and red.</p>
+
+</div1>
 
 
 </div0>

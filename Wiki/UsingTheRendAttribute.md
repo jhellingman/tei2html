@@ -63,9 +63,9 @@ The following keys and values are supported: (Note that this list is not exhaust
 
 ### Using `@style` and `@rendition` ###
 
-The current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. This is currently not supported, but would be fairly easy to add to the style-sheets. See the [TEI guidelines on rendition attributes](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html).
+As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. See the [TEI guidelines on rendition attributes](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html).
 
-TODO:
+Implementation notes:
 
 1. Handle the `@style` attribute, and output it as a CSS rule.
    - generate a unique class-name for the CSS fragment.
@@ -76,7 +76,7 @@ TODO:
    - apply the given class name(s) to the relevant output element in HTML.
    - verify `<rendition>` elements for the given class names are present in the `<tagsDecl>` of the TEI file.
    - warn if this is not the case.
-3. Handle the `<rendition>` tags in the `<tagsDecl>`.  
+3. Handle the `<rendition>` tags in the `<tagsDecl>`.
    - verify the rendition id is actually used in the file.
    - output the corresponding CSS verbatim.
-   
+

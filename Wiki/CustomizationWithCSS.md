@@ -4,15 +4,18 @@ Since many details of the layout of the output (For both HTML and PDF) are defin
 
 Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `@rend` attributes in the source document.
 
-Order of precendence of renditions
+Order of precendence of renditions:
 
-1. CSS derived from `@rend` or `@style` attribute on element.
-2. CSS derived from `@rend` or `@style` attribute on row (for table cells).
-3. CSS derived from `@rend` or `@style` attribute on column (for table cells).
-4. CSS in `<rendition>` elements in document.
-5. Custom CSS stylesheet.
-6. Default CSS stylesheet.
-7. Browser defaults.
+1. CSS derived from `@style` attribute on element.
+2. CSS derived from `@style` attribute on row (for table cells only).
+3. CSS derived from `@style` attribute on column (for table cells only).
+4. CSS derived from `@rend` attribute on element.
+5. CSS derived from `@rend` attribute on row (for table cells only).
+6. CSS derived from `@rend` attribute on column (for table cells only).
+7. CSS in `<rendition>` elements in document.
+8. Custom CSS stylesheet.
+9. Default CSS stylesheets.
+10. Browser defaults.
 
 # Steps for Custom Layout #
 
@@ -34,7 +37,8 @@ To indicate on what elements in your TEI file your CSS rules should apply to, yo
 
   * Based on ID attributes.
   * Based on `tei2html` generated class attributes.
-  * Based on custom class attributes.
+  * Based on custom class attributes, specified in `class(...)` in the `@rend` attribute.
+  * Based on IDs used in the `@rendition` attribute.
 
 Since `tei2html` in most cases lifts the ids used in the source to the output, your ids in TEI will also be present in the output document, so you can simply use those ids for one-off effects in the output. This can be used to tweak output, using `#id` selectors.
 

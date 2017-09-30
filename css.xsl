@@ -21,11 +21,19 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+
     <xd:doc>
-        <xd:short>Key to quickly find rend attributes on elements.</xd:short>
+        <xd:short>Key to quickly find <code>@rend</code> attributes on elements.</xd:short>
     </xd:doc>
 
     <xsl:key name="rend" match="*" use="concat(name(), ':', @rend)"/>
+
+
+    <xd:doc>
+        <xd:short>Key to quickly find <code>@style</code> attributes on elements.</xd:short>
+    </xd:doc>
+
+    <xsl:key name="style" match="*" use="@style"/>
 
 
     <xd:doc>
@@ -119,13 +127,13 @@
             <xsl:value-of select="f:css-stylesheet('style/intralinear.css')"/>
         </xsl:if>
 
+        <xsl:if test="//ditto">
+            <xsl:value-of select="f:css-stylesheet('style/special.css')"/>
+        </xsl:if>
+
         <!-- Test covers align-with(...) and align-with-document(...) -->
         <xsl:if test="(//div|//div1|//div2|//div3|//div4|//div5|//div6)[contains(@rend, 'align-with')] or //lg[contains(@rend, 'align-with')]">
             <xsl:value-of select="f:css-stylesheet('style/aligned-text.css')"/>
-        </xsl:if>
-
-        <xsl:if test="//ditto or //table[contains(@rend, 'intralinear')]">
-            <xsl:value-of select="f:css-stylesheet('style/special.css')"/>
         </xsl:if>
 
         <!-- Format-specific stylesheets. -->
@@ -165,19 +173,84 @@
             <xsl:value-of select="string(//pgStyleSheet)"/>
         </xsl:if>
 
-        <!-- Generate CSS for rend attributes, overrides all other CSS, so should be last -->
+        <xsl:if test="//tagsDecl/rendition">
+            <xsl:text>
+/* CSS rules generated from rendition elements in TEI file */
+</xsl:text>
+            <xsl:apply-templates select="//tagsDecl/rendition" mode="rendition"/>
+        </xsl:if>
+
+        <!-- Generate CSS for rend attributes, overrides CSS from stylesheets, so should be last -->
         <xsl:text>
-        /* CSS rules generated from @rend attributes in TEI file */
-        </xsl:text>
+/* CSS rules generated from @rend attributes in TEI file */
+</xsl:text>
         <xsl:apply-templates select="/" mode="css"/>
+        
+        <xsl:text>
+/* CSS rules copied from @style attributes in TEI file */
+</xsl:text>
+        <xsl:apply-templates select="/" mode="style"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Convert a rendition element to a CSS rule.</xd:short>
+        <xd:detail>
+            <p>Convert a rendition element to a CSS rule. Rendition elements with a
+            selector attribute, the scope attribute will be ignored.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="rendition[@selector]" mode="rendition">
+        <xsl:value-of select="@selector"/>
+        <xsl:text> {
+</xsl:text>
+            <xsl:value-of select="."/>
+        <xsl:text>
+}
+</xsl:text>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Convert a rendition element to a CSS rule.</xd:short>
+        <xd:detail>
+            <p>Convert a rendition element to a CSS rule. For rendition elements without
+            a selector attribute, the id attribute will be converted to class selecter.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="rendition[@id]" mode="rendition">
+        <xsl:text>
+.</xsl:text>
+        <xsl:value-of select="@id"/>
+        <xsl:if test="@scope">
+            <!-- Translate scope to CSS pseudo-element -->
+            <xsl:text>::</xsl:text>
+            <xsl:value-of select="@scope"/>
+        </xsl:if>
+        <xsl:text> {
+</xsl:text>
+            <xsl:value-of select="."/>
+        <xsl:text>
+}
+</xsl:text>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Warn for invalid rendition elements.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="rendition" mode="rendition">
+        <xsl:copy-of select="f:logWarning('Rendition element without id or selector: {1}', (rendition))"/>
+    </xsl:template>
 
     <xd:doc>
         <xd:short>Translate the <code>@rend</code> attributes to CSS.</xd:short>
         <xd:detail><p>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</p>
 
-        <p>rendition-ladder syntax consists of a series of keys followed by the value between parentheses, e.g., 
+        <p>rendition-ladder syntax consists of a series of keys followed by the value between parentheses, e.g.,
         <code>font-size(large) color(red)</code>.</p></xd:detail>
         <xd:param name="rend">The <code>@rend</code> attribute to be translated.</xd:param>
         <xd:param name="name">The name of the element carrying this attribute.</xd:param>
@@ -195,7 +268,7 @@
                     <xsl:value-of select="f:translate-rend-ladder-step(regex-group(1), regex-group(2), $name)"/>
                 </xsl:matching-substring>
             </xsl:analyze-string>
-        </xsl:variable> 
+        </xsl:variable>
 
         <xsl:value-of select="normalize-space($css)"/>
     </xsl:function>
@@ -203,7 +276,7 @@
 
     <xd:doc>
         <xd:short>Translate a single rend-ladder step to a CSS property.</xd:short>
-        <xd:detail>Translate a single rend-ladder step to a CSS property. Filter those steps 
+        <xd:detail>Translate a single rend-ladder step to a CSS property. Filter those steps
         with a special meaning, so they will not be output as invalid CSS.</xd:detail>
         <xd:param name="property">The name of the property to be filtered.</xd:param>
         <xd:param name="value">The value of this property.</xd:param>
@@ -284,15 +357,27 @@
 
     <xd:doc>
         <xd:short>Generate a class name for a rendition ladder.</xd:short>
-        <xd:detail>Generate a class name for a rendition ladder. This class name is derived from the (generated) id 
+        <xd:detail>Generate a class name for a rendition ladder. This class name is derived from the (generated) id
         of the first element having the specific <code>@rend</code> attribute value of this node.</xd:detail>
         <xd:param name="node">The node for which a class name is to be generated.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:generate-class-name" as="xs:string">
         <xsl:param name="node" as="element()"/>
-
         <xsl:value-of select="f:generate-id(key('rend', concat(name($node), ':', $node/@rend), root($node))[1])"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Generate a class name for a style.</xd:short>
+        <xd:detail>Generate a class name for a style. This class name is derived from the (generated) id
+        of the first element having the specific <code>@style</code> attribute.</xd:detail>
+        <xd:param name="node">The node for which a class name is to be generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-style-name" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:value-of select="f:generate-id(key('style', $node/@style, root($node))[1])"/>
     </xsl:function>
 
 
@@ -305,15 +390,32 @@
 
     <xsl:function name="f:generate-css-class-selector" as="xs:string">
         <xsl:param name="node" as="element()"/>
-
         <xsl:value-of select="replace(f:generate-class-name($node), '\.', '\\.')"/>
     </xsl:function>
 
 
     <xd:doc>
+        <xd:short>Generate a CSS selector for a style.</xd:short>
+        <xd:detail>Generate a CSS selector name for a style. This is the same value as calculated
+        in <code>f:generate-style-name()</code>, but with periods escaped to accomodate CSS.</xd:detail>
+        <xd:param name="node">The node for which a CSS selector is to be generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:generate-style-class-selector" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:value-of select="replace(f:generate-style-name($node), '\.', '\\.')"/>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Generate the class for an element.</xd:short>
-        <xd:detail>Generate the class for an element. This is a combination of the class generated
-        for the rendition ladder and any explicit classes provided in the <code>@rend</code> attribute.</xd:detail>
+        <xd:detail><p>Generate the class for an element. This is determined from the following:</p>
+            <ul>
+                <li>The class generated for the rendition ladder and any explicit classes provided in the <code>@rend</code> attribute.</li>
+                <li>The class generated for the <code>@style</code> attribute.</li>
+                <li>The classes explicitly provided in the <code>@rendition</code> attribute.</li>
+            </ul>
+        </xd:detail>
         <xd:param name="node">The node for which a class is to be generated.</xd:param>
     </xd:doc>
 
@@ -329,6 +431,15 @@
             </xsl:if>
             <xsl:if test="normalize-space(f:translate-rend-ladder($rend, name($node))) != ''">
                 <xsl:value-of select="f:generate-class-name($node)"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <xsl:if test="normalize-space($node/@style) != ''">
+                <xsl:value-of select="f:generate-style-name($node)"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <xsl:if test="normalize-space($node/@rendition) != ''">
+                <!-- TODO: verify presence of rendition elements given -->
+                <xsl:value-of select="$node/@rendition"/>
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
@@ -355,7 +466,7 @@
     <xd:doc>
         <xd:short>Generate an optional class attribute for an element.</xd:short>
         <xd:detail>Generate an optional class attribute for an element. This is the result
-        of the call to <code>f:generate-class()</code>, with the second argument appended, 
+        of the call to <code>f:generate-class()</code>, with the second argument appended,
         wrapped in an attribute.</xd:detail>
         <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
         <xd:param name="class">Classes to add to the generated class.</xd:param>
@@ -396,6 +507,28 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Top level rule to copy CSS from <code>@style</code> attributes.</xd:short>
+        <xd:detail>The top level rule starts copying CSS rules for column-level styles first,
+        as those might be overridden by following row-level and cell-level styles in tables.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="/" mode="style">
+
+        <!-- We need to collect the column-related rendering rules first,
+             so they can be overridden by later cell rendering rules -->
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//column[@style]" mode="style-column"/>
+
+        <!-- Then follow the row-related rendering rules -->
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//row[@style]" mode="style-row"/>
+
+        <!-- Handle the rest of the document (including table cells) -->
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="style"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="style"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style"/>
+    </xsl:template>
+
+
     <!-- Special modes for column and row CSS -->
     <xsl:template match="column[@rend]" mode="css-column">
         <xsl:call-template name="generate-css-rule"/>
@@ -403,6 +536,14 @@
 
     <xsl:template match="row[@rend]" mode="css-row">
         <xsl:call-template name="generate-css-rule"/>
+    </xsl:template>
+
+    <xsl:template match="column[@style]" mode="style-column">
+        <xsl:call-template name="generate-style-rule"/>
+    </xsl:template>
+
+    <xsl:template match="row[@style]" mode="style-row">
+        <xsl:call-template name="generate-style-rule"/>
     </xsl:template>
 
 
@@ -416,17 +557,34 @@
         <xsl:apply-templates mode="css"/>
     </xsl:template>
 
+    <xsl:template match="column | row" mode="style">
+        <xsl:apply-templates mode="style"/>
+    </xsl:template>
+
 
     <xd:doc>
-        <xd:short>Low priority default rule for generating the css rules.</xd:short>
-        <xd:detail>Low priority default rule for generating the css rules from the
-         rend attribute in css mode. Note that we exclude the column element in another
+        <xd:short>Low priority default template for generating css rules.</xd:short>
+        <xd:detail>Low priority default template for generating css rules from the
+         <code>@rend</code> attribute in css mode. Note that we exclude the column element in another
          rule.</xd:detail>
     </xd:doc>
 
     <xsl:template match="*[@rend]" mode="css" priority="-1">
         <xsl:call-template name="generate-css-rule"/>
         <xsl:apply-templates mode="css"/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Low priority default template for copying css styles.</xd:short>
+        <xd:detail>Low priority default template for copying css styles from the
+         <code>@style</code> attribute in css mode. Note that we exclude the column element in another
+         template.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="*[@style]" mode="style" priority="-1">
+        <xsl:call-template name="generate-style-rule"/>
+        <xsl:apply-templates mode="style"/>
     </xsl:template>
 
 
@@ -438,9 +596,7 @@
 
     <xsl:template name="generate-css-rule">
         <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
-
-            <xsl:variable name="css-properties" select="normalize-space(f:translate-rend-ladder(@rend, name()))"/>               
-
+            <xsl:variable name="css-properties" select="normalize-space(f:translate-rend-ladder(@rend, name()))"/>
             <xsl:if test="$css-properties != ''">
                 <!-- Use the id of the first element with this rend attribute as a class selector -->
                 <xsl:text>
@@ -448,7 +604,7 @@
                 <xsl:value-of select="f:generate-css-class-selector(.)"/>
                 <xsl:text> {
 </xsl:text>
-                    <xsl:value-of select="$css-properties"/>
+                <xsl:value-of select="$css-properties"/>
                 <xsl:text>
 }
 </xsl:text>
@@ -457,11 +613,43 @@
     </xsl:template>
 
 
-    <!-- Ignore content in css-mode -->
-    <xsl:template match="text()" mode="css css-handheld"/>
+    <xd:doc>
+        <xd:short>Copy a CSS rule.</xd:short>
+        <xd:detail>Copy a CSS rule from a <code>@style</code> attribute. Using a key on <code>@style</code>, we
+        do so only for the first occurance of a <code>@style</code> attribute.</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="generate-style-rule">
+        <xsl:if test="generate-id() = generate-id(key('style', @style)[1])">
+            <xsl:variable name="style" select="normalize-space(@style)"/>
+            <xsl:if test="$style != ''">
+                <!-- Use the id of the first element with this style attribute as a class selector -->
+                <xsl:text>
+.</xsl:text>
+                <xsl:value-of select="f:generate-style-class-selector(.)"/>
+                <xsl:text> {
+</xsl:text>
+                <xsl:value-of select="$style"/>
+                <xsl:text>
+}
+</xsl:text>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
 
 
-    <!-- Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation -->
+    <xd:doc>
+        <xd:short>Ignore content in CSS modes.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="text()" mode="css css-handheld style"/>
+
+
+    <xd:doc>
+        <xd:short>Generate CSS for handheld devices.</xd:short>
+        <xd:detail>Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="text[not(ancestor::q)]" mode="css-handheld">
         <xsl:text>@media handheld {
 </xsl:text>
@@ -491,7 +679,7 @@
     </xsl:function>
 
 
-     <xd:doc>
+    <xd:doc>
         <xd:short>Load a CSS stylesheet from resolved URI.</xd:short>
         <xd:detail>
             <p>Get the content of a CSS stylesheet (for example, to embed in an HTML document). This will first check

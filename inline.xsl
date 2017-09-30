@@ -204,7 +204,7 @@
     <xsl:template match="hi">
         <xsl:choose>
             <!-- Test covers any potential rendition ladder -->
-            <xsl:when test="contains(@rend, '(')">
+            <xsl:when test="contains(@rend, '(') or @style or @rendition">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
@@ -227,7 +227,11 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='el' or @lang='grc']">
-        <span class="Greek"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+        <span>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'Greek')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -236,7 +240,11 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='ar']">
-        <span class="Arabic"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+        <span>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'Arabic')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -245,7 +253,11 @@
     </xd:doc>
 
     <xsl:template match="foreign">
-        <span><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+        <span>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
 

@@ -496,6 +496,23 @@
             </xsl:if>
         </xsl:for-each-group>
 
+        <!-- @rendition points to existing @rendition element -->
+        <xsl:for-each-group select="//*[@rendition]" group-by="@rendition">
+            <xsl:variable name="name" select="name(.)" as="xs:string"/>
+            <xsl:variable name="pos" select="./@pos"/>
+            <xsl:variable name="root" select="/"/>
+            <xsl:for-each select="tokenize(@rendition, ' ')">
+                <xsl:variable name="id" select="." as="xs:string"/>
+                <xsl:if test="not($root//rendition[@id=$id])">
+                    <i:issue 
+                        pos="{$pos}" 
+                        code="X0004" 
+                        element="{$name}">Element <xsl:value-of select="$name"/>: rendition element <xsl:value-of select="."/> not present.</i:issue>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:for-each-group>
+
+
         <!-- @who points to existing @id on role -->
         <xsl:for-each-group select="//*[@who]" group-by="@who">
             <xsl:variable name="who" select="./@who" as="xs:string"/>
