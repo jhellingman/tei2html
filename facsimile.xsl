@@ -140,12 +140,9 @@
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
         <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-css-file))"/>
-
-            body
-            {
-                text-align: center;
-            }
-
+body {
+    text-align: center;
+}
     </xsl:result-document>
 </xsl:template>
 

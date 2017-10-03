@@ -6,8 +6,7 @@ require Exporter;
 @EXPORT = qw(getLanguage);
 
 
-BEGIN
-{
+BEGIN {
     %langNameHash = ();
 
     # ISO 639-1 Language Codes (and variants)
@@ -214,52 +213,51 @@ BEGIN
     $langNameHash{"zh-latn"}   = "Chinese (Latin transcription)";
     $langNameHash{"zu"}        = "Zulu";
 
+    $langNameHash{"xx"}        = "unknown language";
+
 
     # Three letter codes
 
-    $langNameHash{"grc"}       = "Greek (classical)";
-    $langNameHash{"grc-latn"}  = "Greek (classical, Latin transcription)";
-
-    $langNameHash{"bik"}        = "Bicolano or Bikol";
-    $langNameHash{"bis"}        = "Bisayan (unspecified)";
-    $langNameHash{"ceb"}        = "Cebuano";
-    $langNameHash{"crb"}        = "Chavacano, Chabacano or Zamboangue&ntilde;o";
-    $langNameHash{"hil"}        = "Hiligaynon";
-    $langNameHash{"ilo"}        = "Ilocano, Iloko or Ilokano";
-    $langNameHash{"pag"}        = "Pangasin&aacute;n";
-    $langNameHash{"pam"}        = "Kapampangan";
-    $langNameHash{"war"}        = "W&aacute;ray-W&aacute;ray";
-    $langNameHash{"phi"}        = "Philippine (Other)";
-    $langNameHash{"ifu"}        = "Ifugao";
-
-    $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
-    $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
-    $langNameHash{"sit-ao-mongsen"} = "Ao Naga, Mongsen dialect";
-    $langNameHash{"sit-ao-chongli"} = "Ao Naga, Chongli dialect";
-    $langNameHash{"sit-sema"}       = "Sema Naga";
-    $langNameHash{"sit-angami"}     = "Angami Naga";
+    $langNameHash{"bik"}            = "Bicolano or Bikol";
+    $langNameHash{"bis"}            = "Bisayan (unspecified)";
+    $langNameHash{"ceb"}            = "Cebuano";
+    $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
+    $langNameHash{"gad"}            = "Gaddang";
+    $langNameHash{"grc"}            = "Greek (classical)";
+    $langNameHash{"grc-latn"}       = "Greek (classical, Latin transcription)";
+    $langNameHash{"haw"}            = "Hawaiian";
+    $langNameHash{"hil"}            = "Hiligaynon";
+    $langNameHash{"ifu"}            = "Ifugao";
+    $langNameHash{"ilo"}            = "Ilocano, Iloko or Ilokano";
+    $langNameHash{"kha"}            = "Khasi";
+    $langNameHash{"kij"}            = "Kilivila";
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
+    $langNameHash{"pag"}            = "Pangasin&aacute;n";
+    $langNameHash{"pam"}            = "Kapampangan";
+    $langNameHash{"phi"}            = "Philippine (Other)";
+    $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
+    $langNameHash{"sit-angami"}     = "Angami Naga";
+    $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
+    $langNameHash{"sit-ao-chongli"} = "Ao Naga, Chongli dialect";
+    $langNameHash{"sit-ao-mongsen"} = "Ao Naga, Mongsen dialect";
+    $langNameHash{"sit-sema"}       = "Sema Naga";
+    $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
 
-    $langNameHash{"haw"}        = "Hawaiian";
-    $langNameHash{"kha"}        = "Khasi";
+    $langNameHash{"und"}            = "undetermined language";
 
-    $langNameHash{"gad"}        = "Gaddang";
 
-    $langNameHash{"xx"}         = "unknown language";
-    $langNameHash{"und"}        = "undetermined language";
+    # Ad-hoc codes
 
-    $langNameHash{"obab"}       = "Old Babylonian (Latin transcription)";
+    $langNameHash{"obab"}      = "Old Babylonian (Latin transcription)";
 }
 
 
-sub getLanguage($)
-{
+sub getLanguage($) {
     my $code = shift;
     my $language = $langNameHash{$code};
-    if (defined $language)
-    {
+    if (defined $language) {
         $language = "Language with code $code";
     }
     return $langNameHash{$code};

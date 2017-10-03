@@ -173,8 +173,8 @@
 
         <!-- <xsl:message>ANALYZING: <xsl:value-of select="$name"/></xsl:message> -->
         <xsl:choose>
-            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?$')">
-                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?$">
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?\]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?\]?$">
                     <xsl:matching-substring>
                         <contributor>
                             <!--
@@ -189,8 +189,8 @@
                     </xsl:matching-substring>
                 </xsl:analyze-string>
             </xsl:when>
-            <xsl:when test="matches($name, '^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?$')">
-                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?$">
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?\]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?[&ndash;-]([0-9]+)[)]?\]?$">
                     <xsl:matching-substring>
                         <contributor>
                             <name><xsl:value-of select="regex-group(1)"/></name>
@@ -199,8 +199,8 @@
                     </xsl:matching-substring>
                 </xsl:analyze-string>
             </xsl:when>
-            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?$')">
-                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?$">
+            <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?\]?$')">
+                <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-][)]?\]?$">
                     <xsl:matching-substring>
                         <contributor>
                             <name><xsl:value-of select="regex-group(1)"/></name>

@@ -197,7 +197,10 @@
         <xd:short>Convert a rendition element to a CSS rule.</xd:short>
         <xd:detail>
             <p>Convert a rendition element to a CSS rule. Rendition elements with a
-            selector attribute, the scope attribute will be ignored.</p>
+            <code>@selector</code> attribute, the scope attribute will be ignored. Note that the
+            <code>@selector</code> attribute may be expressed in terms of source (TEI) elements,
+            and in that case may need to be translated in target (e.g. HTML) terms. For now,
+            this is ignored.</p>
         </xd:detail>
     </xd:doc>
 
@@ -216,7 +219,9 @@
         <xd:short>Convert a rendition element to a CSS rule.</xd:short>
         <xd:detail>
             <p>Convert a rendition element to a CSS rule. For rendition elements without
-            a selector attribute, the id attribute will be converted to class selecter.</p>
+            a <code>@selector</code> attribute, the <code>@id</code> attribute will be converted 
+            to a class selecter. If present, the <code>@scope</code> attribute will be translated
+            to a CSS pseudo-element.</p>
         </xd:detail>
     </xd:doc>
 
@@ -438,8 +443,8 @@
                 <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:if test="normalize-space($node/@rendition) != ''">
-                <!-- TODO: verify presence of rendition elements given -->
-                <xsl:value-of select="$node/@rendition"/>
+                <!-- TODO: verify presence of rendition element ids given -->
+                <xsl:value-of select="replace($node/@rendition, '#', '')"/>
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
@@ -578,7 +583,7 @@
     <xd:doc>
         <xd:short>Low priority default template for copying css styles.</xd:short>
         <xd:detail>Low priority default template for copying css styles from the
-         <code>@style</code> attribute in css mode. Note that we exclude the column element in another
+         <code>@style</code> attribute in style mode. Note that we exclude the column element in another
          template.</xd:detail>
     </xd:doc>
 

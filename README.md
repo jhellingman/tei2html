@@ -33,13 +33,13 @@ not be expected that an arbitrary TEI file renders well with those scripts (alth
 reasonable in any case.)
 
 If you need modifications, extensions of these scripts, or need to have other TEI/XML/XSLT related work 
-done, please be in touch with me on how I can help (at a fee).
+done, please be in touch with me on how I can help.
 
 ## Directories
 
   * samples: contains a number of sample files (of books posted to Project Gutenberg; I am in the process of adding all
     my TEI master files to GitHub: see https://github.com/GutenbergSource for many more examples).
-  * sandbox: contains experimental code.
+  * sandbox: contains experimental code, better ignored if you don't want to play around.
   * schemas: contains schema definition for a number of supplementary XML formats.
   * style: contains CSS stylesheets, used by the generated HTML and ePub results.
   * test: contains a test TEI file, complete with the generated output in XML, HTML and ePub format. This
