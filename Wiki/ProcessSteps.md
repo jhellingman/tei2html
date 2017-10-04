@@ -9,11 +9,19 @@ Most of my TEI files are in (old-school) SGML format with the '.tei' extension. 
 
 ## Step 1.1: Convert transcriptions to SGML entities. ##
 
-Some of my TEI files include snippets of non-Latin script in various transcription formats. These need to be converted to SGML entities (either named or numeric) before we can actually transform to XML. For this, I use a 'patc' tool that will change such transcriptions. For each transcription, a separate run is needed. The 'tei2html.pl' script will check for such transcriptions, and run the right patc tool as needed.
+Some of my TEI files include snippets of non-Latin script in various transcription formats. These need to be converted to SGML entities (either named or numeric) before we can actually transform to XML. For this, I use a 'patc' tool that will change such transcriptions. For each transcription, a separate run is needed. The `tei2html.pl` script will check for such transcriptions, and run the right patc tool as needed. (For most text, this is not relevant.)
 
 ## Step 1.2: Convert to XML. ##
 
-The actual SGML to XML conversion is achieved by running the SX tool.
+The actual SGML to XML conversion is achieved by running the James Clark's SX tool.
+
+## Step 1.3: Normalize case. ##
+
+Use Sebastian Rahtz' `tei2tei.xsl` stylesheet to use the proper casing for TEI elements. After this step, the TEI should be valid TEI (according to TEI P4) in XML form. The `tei2html` stylesheets should be able to deal with the text now.
+
+## Step 1.5: Convert to TEI P5. (Optional) ##
+
+Use Sebastian Rahtz' `p4top5.xsl` stylesheet to convert the TEI P4 to TEI P5. The `tei2html` stylesheets should still be able to deal with the text, although I've not extensively tested this. The main distinction is that `div0` elements will have been changed to `div1` elements, and all underlying numbered `divX` elements have been 'elevated,' which impacts the appearance and breaking up into chunks when generating ePubs.
 
 # Step 2: Run Saxon to generate HTML #
 
@@ -21,8 +29,16 @@ Now that we have XML, we can apply the XSLT transformation on it. This will resu
 
 ## Step 2.1: Normalize tables ##
 
-Table handling in TEI and HTML is complicated. To deal with them correctly, we have a separate XSLT stylesheet that adds row and column numbers to cells in tables (leaving the rest of the XML untouched). With those numbers present, styling can be applied to tables more reliable. This script will also warn you when you have tables where the number of (effective, after dealing with spans) columns is not the same for each row.
+Table handling in TEI and HTML is complicated. To deal with them correctly, we have a separate XSLT stylesheet (`normalize-table.xsl`) that adds row and column numbers to cells in tables (leaving the rest of the XML untouched). With those numbers present, styling can be applied to tables more reliable. This script will also warn you when you have tables where the number of (effective, after dealing with cells that span multiple rows or cells) columns is not the same for each row.
 
 ## Step 2.2: Transform to HTML ##
 
-After the tables have been normalised, we're ready to transform to HTML. This is done now.
+After the tables have been normalised, we're ready to transform to HTML. This is done by the main XSLT stylesheet `tei2html.xsl`, which pulls in the various partial stylesheets.
+
+## Step 2.3: Transform to ePub ##
+
+Similar to the convertion to HTML, the convertion to ePub 3.0 is done with the XSLT stylesheet `tei2epub.xsl`, which re-uses most of the stylesheets used by `tei2html.xsl`. The results of this transform are placed in a directory which mirrors the internal structure of an ePub archive.
+
+## Step 2.4: Package ePub ##
+
+In a final step, the ePub files are compressed into a single zip file, following the conventions of an ePub container.
