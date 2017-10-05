@@ -22,12 +22,13 @@ The guiding principles are:
   * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that `tei2html` needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
   * The `@rend`, `@style` and `@rendition` attributes in tags are intended as formatting indications only. Ignoring them fully or partially should not render a text incomprehensible.
 
-The design decisions is:
+The design decisions are:
 
   * The `@rend` attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are also used for effects that are not supported by CSS, and are thus not copied verbatim.
   * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
+  * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `<rendition>` elements. Note that currently no translation of the `@selector` attribute of the `<rendition>` element takes place.
 
-As a result of these design decisions, a document can be neatly formatted in CSS with minimal rendering information 'poluting' the TEI master file.
+As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'poluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline CSS is generated.
 
 
 ## SGML versus XML ##
@@ -38,7 +39,7 @@ Although XML is simpler, and many more tools can deal with it, SGML is somewhat 
 
 Of course, you can work directly in XML instead of SGML. Working in XML directly has a number of benefits as well:
 
-  1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 2.0).
+  1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 2.0 directly).
   2. No initial conversion tool required.
   3. Can use embedded namespaces for other XML schemas.
   4. Can use one or more of the various XML authoring tools available.
@@ -46,7 +47,7 @@ Of course, you can work directly in XML instead of SGML. Working in XML directly
 
 ## Considerations for Output Formats ##
 
-TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the `@rend` attribute can be used to record those aspects.
+TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the `@rend`, `@style` and `@rendition` attributes can be used to record those aspects.
 
 For many uses, a TEI file is not the most desirable format. For reading, it is far more convenient to have it available in some more presentation-oriented format. With `tei2html`, a TEI document can be converted to various output formats, which are:
 
@@ -72,7 +73,7 @@ In a few other cases, the transformation may not result in entirely correct resu
 
 For XML files actually used by the XSLT stylesheets, any character encoding supported by XML/XSLT works. For SGML, the options are more limited.
 
-However, the pre-processing scripts in Perl can only deal with either pure 7-bit ASCII or the ISO 8859-1 character set. All characters outside those ranges are represented by character entities.
+Also, the pre-processing scripts in Perl can only deal with either pure 7-bit ASCII or the ISO 8859-1 character set. All characters outside those ranges are to be represented by character entities.
 
 Use entities from the following sets:
 
