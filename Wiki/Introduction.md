@@ -20,7 +20,7 @@ The guiding principles are:
 
   * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself. Unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
   * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that `tei2html` needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
-  * The `@rend` attribute in tags are intended as formatting hints only. Ignoring them fully or partially should not render a text incomprehensible.
+  * The `@rend`, `@style` and `@rendition` attributes in tags are intended as formatting indications only. Ignoring them fully or partially should not render a text incomprehensible.
 
 The design decisions is:
 
