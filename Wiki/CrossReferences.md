@@ -58,7 +58,7 @@ When an HTML version is available, it should also be possible to directly link i
 
 > http://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
 
-So the reader can consult the referred text with a single action.
+So the reader can consult the referred text with a single action (except that Project Gutenberg redirects such deep links on the first attempt).
 
 It would even be better if we could link into all books, even if they are not yet digitized, using their OpenLibrary work id and some generic vocabulary to access locations inside works. Ultimately resolving such links requires some kind of resolving server with access to a database that can find copies of the work. Think urls that looks like these
 
