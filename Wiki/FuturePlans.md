@@ -4,8 +4,8 @@ I intend, when possible, to add the following to the tei2html tool-set.
 
   * Support for Customization
   * Support for PDF output via Prince-XML. (Mostly done)
-  * Support for ePub output. (Mostly done)
-  * Support for XHTML output. (Partly done, for ePub).
+  * Support for ePub output. (DONE)
+  * Support for XHTML output. (DONE, for ePub).
 
 
 ## Support TEI P5 ##
