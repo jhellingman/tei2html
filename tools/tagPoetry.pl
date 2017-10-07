@@ -2,44 +2,29 @@
 
 $poetrymode = 0;
 
-while (<>)
-{
+while (<>) {
     $line = $_;
-    if ($line =~ /\/\*/)
-    {
+    if ($line =~ /\/\*/) {
         $poetrymode = 1;
         print "<lg>\n";
-
-    }
-    elsif ($line =~ /\*\//)
-    {
+    } elsif ($line =~ /\*\//) {
         $poetrymode = 0;
         print "</lg>\n";
-    }
-    elsif ($poetrymode == 0)
-    {
+    } elsif ($poetrymode == 0) {
         print $line;
-    }
-    else
-    {
+    } else {
         # blank line in poetry mode:
-        if ($line =~ /^\s*$/)
-        {
+        if ($line =~ /^\s*$/) {
             print "</lg>\n\n<lg>\n";
-        }
-        else
-        {
+        } else {
             # count white space before
             $line =~ /^(\s*)(.*)$/;
             $spaces = $1;
             $line = $2;
             $n = length($spaces);
-            if ($n == 0)
-            {
+            if ($n == 0) {
                 print "    <l>$line\n";
-            }
-            else
-            {
+            } else {
                 print "    $spaces<l rend=\"indent($n)\">$line\n";
             }
         }

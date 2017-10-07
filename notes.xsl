@@ -18,8 +18,8 @@
     >
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to handle footnotes.</xd:short>
-        <xd:detail>This stylesheet contains templates to handle footnotes in TEI files.</xd:detail>
+        <xd:short>Stylesheet to handle notes.</xd:short>
+        <xd:detail>This stylesheet contains templates to handle notes in TEI files.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -29,7 +29,7 @@
 
     <xd:doc>
         <xd:short>Handle marginal notes.</xd:short>
-        <xd:detail>Marginal notes should go to the margin. The actual placement in handled through CSS.</xd:detail>
+        <xd:detail>Marginal notes should go to the margin. The actual placement is handled through CSS.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='margin']">
@@ -39,6 +39,7 @@
         </span>
     </xsl:template>
 
+
     <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage -->
     <xsl:template match="margin">
         <span class="marginnote">
@@ -46,6 +47,7 @@
             <xsl:apply-templates/>
         </span>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
@@ -457,6 +459,7 @@
         </div>
     </xsl:template>
 
+
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="collect-apparatus">
         <tmp:span id="{f:generate-id(.)}">
             <xsl:attribute name="rend" select="@rend"/>
@@ -467,10 +470,12 @@
         </tmp:span>
     </xsl:template>
 
+
     <xsl:template match="note[@place='apparatus' and p]" mode="collect-apparatus">
         <xsl:apply-templates select="*[1]" mode="collect-apparatus-first"/>
         <xsl:apply-templates select="*[position() > 1]" mode="collect-apparatus"/>
     </xsl:template>
+
 
     <xsl:template match="p" mode="collect-apparatus-first">
         <tmp:span id="{f:generate-id(ancestor::note[1])}">
@@ -482,6 +487,7 @@
         </tmp:span>
     </xsl:template>
 
+
     <xsl:template match="p" mode="collect-apparatus">
         <tmp:br/>
         <tmp:span>
@@ -492,6 +498,7 @@
             </xsl:for-each>
         </tmp:span>
     </xsl:template>
+
 
     <xsl:template match="tmp:span">
         <span class="apparatus-note">
