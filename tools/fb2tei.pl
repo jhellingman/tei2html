@@ -8,27 +8,21 @@ my $toolsdir        = $Bin;                                 # location of tools
 my $xsldir          = $toolsdir . "/..";                    # location of xsl stylesheets
 my $saxon           = "java -jar " . $toolsdir . "/lib/saxon9he.jar ";
 
-
 my $filename = $ARGV[0];
 $filename =~ /^(.*)\.fb2$/;
 my $basename    = $1;
-
 
 system ("$saxon $filename $xsldir/fb2tei.xsl > $basename.xml");
 
 # convert extracted .hex files to binary
 my @files = <*.hex>;
-foreach my $file (@files) 
-{
+foreach my $file (@files) {
     convertFile($file);
 }
 
-
 system ("perl -S tei2html.pl -h $basename.xml");
 
-
-sub convertFile($)
-{
+sub convertFile($) {
     my $filename = shift;
 
     open INFILE, $filename or die "Unable to open file: $filename"; 

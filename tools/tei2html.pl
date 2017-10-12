@@ -15,11 +15,8 @@ use SgmlSupport qw/utf2numericEntities translateEntity/;
 # Configuration
 
 my $toolsdir        = $Bin;                                 # location of tools
-my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
 my $xsldir          = $toolsdir . "/..";                    # location of xsl stylesheets
-my $tmpdir          = "C:\\Temp";                           # place to drop temporary files
-my $bindir          = "C:\\Bin";
-
+my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
 my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
 
 my $java            = "java";
@@ -30,17 +27,16 @@ my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  
 #==============================================================================
 # Arguments
 
-my $makeTXT             = 0;
-my $makeHTML            = 0;
-my $makePDF             = 0;
-my $makeEPUB            = 0;
+my $makeText            = 0;
+my $makeHtml            = 0;
+my $makePdf             = 0;
+my $makeEpub            = 0;
 my $makeReport          = 0;
 my $makeP5              = 0;
 my $makeXML             = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
-my $force               = 0;
 my $showHelp            = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css";
@@ -48,16 +44,17 @@ my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
 my $makeZip             = 0;
 my $noTranscription     = 0;
+my $force               = 0;
 my $debug               = 0;
 
 GetOptions(
-    't' => \$makeTXT,
+    't' => \$makeText,
     'T' => \$noTranscription,
-    'h' => \$makeHTML,
-    'e' => \$makeEPUB,
+    'h' => \$makeHtml,
+    'e' => \$makeEpub,
     'k' => \$makeKwic,
     'D' => \$debug,
-    'p' => \$makePDF,
+    'p' => \$makePdf,
     '5' => \$makeP5,
     'r' => \$makeReport,
     'x' => \$makeXML,
@@ -111,23 +108,21 @@ if ($showHelp) {
     exit(0);
 }
 
-if ($makeTXT == 0 && $makeHTML == 0 && $makePDF == 0 && $makeEPUB == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
+if ($makeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
     # Revert to old default:
-    $makeTXT = 1;
-    $makeHTML = 1;
+    $makeText = 1;
+    $makeHtml = 1;
     $makeReport = 1;
 }
 
-if ($makeHTML == 1 || $makePDF == 1 || $makeEPUB == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1) {
+if ($makeHtml == 1 || $makePdf == 1 || $makeEpub == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1) {
     $makeXML = 1;
 }
 
 #==============================================================================
 
 
-my $nsgmlresult = 0;
 
-my $tmpdir = $ENV{'TEMP'};
 my $tmpBase = 'tmp';
 my $tmpCount = 0;
 
@@ -160,11 +155,11 @@ sub processFile($) {
     }
 
     $filename =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
-    my $basename    = $1;
-    my $version     = $3;
+    my $basename = $1;
+    my $version  = $3;
 
     if ($version >= 1.0) {
-        $makeTXT = 0;
+        $makeText = 0;
     }
 
     print "Processing TEI-file '$basename' version $version\n";
@@ -173,7 +168,7 @@ sub processFile($) {
     extractEntities($filename);
 
     if ($makeXML && $filename =~ /\.tei$/) {
-        sgml2xml($filename, $basename . ".xml");
+        tei2xml($filename, $basename . ".xml");
     }
 
     if ($runChecks) {
@@ -186,8 +181,8 @@ sub processFile($) {
         system ("$saxon $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
     }
 
-    # convert from TEI P4 to TEI P5 (experimental)
     if ($makeP5 != 0) {
+        print "Convert from TEI P4 to TEI P5 (experimental)\n";
         system ("$saxon $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
     }
 
@@ -198,7 +193,165 @@ sub processFile($) {
     # system ("$saxon $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     collectImageInfo();
+    $makeHtml   && makeHtml($basename);
+    $makePdf    && makePdf($basename);
+    $makeEpub   && makeEpub($basename);
+    $makeText   && makeText($filename, $basename);
+    $makeReport && makeReport($basename);
 
+    if ($makeKwic == 1) {
+        print "Generate a KWIC index (this may take some time)...\n";
+        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
+    }
+
+    if ($makeZip == 1 && $pgNumber > 0) {
+        print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
+        makeZip($basename);
+    }
+
+    print "=== Done! ==================================================================\n";
+}
+
+
+sub makeHtml($) {
+    my $basename = shift;
+    my $xmlFile = $basename . ".xml";
+    my $htmlFile = $basename . ".html";
+
+    if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
+        print "Skipping convertion to HTML ($htmlFile newer than $xmlFile).\n";
+        return;
+    }
+
+    my $tmpFile = temporaryFile('html', '.html');
+    my $saxonParameters = determineSaxonParameters();
+    print "Create HTML version...\n";
+    system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
+    system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
+    system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
+    $debug || unlink($tmpFile);
+}
+
+
+sub makePdf($) {
+    my $basename = shift;
+    my $xmlFile = $basename . ".xml";
+    my $pdfFile = $basename . ".pdf";
+
+    my $tmpFile1 = temporaryFile('pdf', '.html');
+    my $tmpFile2 = temporaryFile('pdf', '.html');
+    my $saxonParameters = determineSaxonParameters();
+
+    # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
+    print "Create PDF version...\n";
+    system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters optionPrinceMarkup=\"Yes\" > $tmpFile1");
+    system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
+    system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
+    system ("$prince $basename-prince.html $pdfFile");
+
+    $debug || unlink($tmpFile1);
+    $debug || unlink($tmpFile2);
+}
+
+
+sub makeEpub() {
+    my $basename = shift;
+    my $xmlFile = $basename . ".xml";
+    my $epubFile = $basename . ".epub";
+
+    if ($force == 0 && isNewer($epubFile, $xmlFile)) {
+        print "Skipping convertion to ePub ($epubFile newer than $xmlFile).\n";
+        return;
+    }
+
+    my $tmpFile = temporaryFile('epub', '.html');
+    my $saxonParameters = determineSaxonParameters();
+    print "Create ePub version...\n";
+    system ("mkdir epub");
+    copyImages("epub/images");
+    copyAudio("epub/audio");
+    copyFonts("epub/fonts");
+
+    system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
+
+    system ("del $epubFile");
+    chdir "epub";
+    system ("zip -Xr9Dq ../$epubFile mimetype");
+    system ("zip -Xr9Dq ../$epubFile * -x mimetype");
+    chdir "..";
+
+    system ("$epubcheck $epubFile 2> $basename-epubcheck.err");
+    $debug || unlink($tmpFile);
+    $debug || remove_tree("epub")
+}
+
+
+sub makeText($$) {
+    my $filename = shift;
+    my $basename = shift;
+
+    my $tmpFile1 = temporaryFile('txt', '.txt');
+    my $tmpFile2 = temporaryFile('txt', '.txt');
+
+    print "Create text version...\n";
+    system ("perl $toolsdir/extractNotes.pl $filename");
+    system ("cat $filename.out $filename.notes > $tmpFile1");
+    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
+
+    if ($useUnicode == 1) {
+        # Use our own script to wrap lines, as fmt cannot deal with unicode text.
+        system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
+    } else {
+        # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
+        system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
+    }
+    system ("gutcheck $basename.txt > $basename.gutcheck");
+    system ("jeebies $basename.txt > $basename.jeebies");
+
+    # Check the version in the Processed directory as well.
+    if (-f "Processed\\$basename.txt") {
+        system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
+    }
+
+    $debug || unlink("$filename.out");
+    $debug || unlink("$filename.notes");
+    $debug || unlink($tmpFile1);
+    $debug || unlink($tmpFile2);
+
+    # check for required manual intervetions
+    my $containsError = system ("grep -q \"\\[ERROR:\" $basename.txt");
+    if ($containsError == 0) {
+        print "NOTE: Please check $basename.txt for [ERROR: ...] messages.\n";
+    }
+    my $containsTable = system ("grep -q \"TABLE\" $basename.txt");
+    if ($containsTable == 0) {
+        print "NOTE: Please check $basename.txt for TABLEs.\n";
+    }
+    my $containsFigure = system ("grep -q \"FIGURE\" $basename.txt");
+    if ($containsFigure == 0) {
+        print "NOTE: Please check $basename.txt for FIGUREs.\n";
+    }
+}
+
+
+sub makeReport($) {
+    my $basename = shift;
+
+    my $tmpFile = temporaryFile('report', '.html');
+    print "Report on word usage...\n";
+    system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
+    system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
+    $debug || unlink($tmpFile);
+
+    # Create a text heat map.
+    if (-f "heatmap.xml") {
+        print "Create text heat map...\n";
+        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style/heatmap.css\" > $basename-heatmap.html");
+    }
+}
+
+
+sub determineSaxonParameters() {
     my $pwd = `pwd`;
     chop($pwd);
     $pwd =~ s/\\/\//g;
@@ -234,136 +387,14 @@ sub processFile($) {
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
-    if ($makeHTML == 1) {
-        if ($force == 0 && isNewer($basename . ".html", $basename . ".xml")) {
-            print "Skipping convertion to HTML ($basename.html newer than $xmlfilename).\n";
-        } else {
-            my $tmpFile = temporaryFile('html', '.html');
-            print "Create HTML version...\n";
-            system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam basename=\"$basename\" > $tmpFile");
-            system ("perl $toolsdir/wipeids.pl $tmpFile > $basename.html");
-            system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $basename.html");
-            $debug || unlink($tmpFile);
-        }
-    }
-
-    if ($makePDF == 1) {
-        my $tmpFile1 = temporaryFile('pdf', '.html');
-        my $tmpFile2 = temporaryFile('pdf', '.html');
-
-        # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
-        print "Create PDF version...\n";
-        system ("$saxon $xmlfilename $xsldir/tei2html.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam optionPrinceMarkup=\"Yes\" > $tmpFile1");
-        system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
-        system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
-        system ("$prince $basename-prince.html $basename.pdf");
-
-        $debug || unlink($tmpFile1);
-        $debug || unlink($tmpFile2);
-    }
-
-    if ($makeEPUB == 1) {
-        my $tmpFile = temporaryFile('epub', '.html');
-        print "Create ePub version...\n";
-        system ("mkdir epub");
-        copyImages("epub/images");
-        copyAudio("epub/audio");
-        copyFonts("epub/fonts");
-
-        system ("$saxon $xmlfilename $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $customOption $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"$basename\" > $tmpFile");
-
-        system ("del $basename.epub");
-        chdir "epub";
-        system ("zip -Xr9Dq ../$basename.epub mimetype");
-        system ("zip -Xr9Dq ../$basename.epub * -x mimetype");
-        chdir "..";
-
-        system ("$epubcheck $basename.epub 2> $basename-epubcheck.err");
-        $debug || unlink($tmpFile);
-        $debug || remove_tree("epub")
-    }
-
-    if ($makeTXT == 1) {
-        my $tmpFile1 = temporaryFile('txt', '.txt');
-        my $tmpFile2 = temporaryFile('txt', '.txt');
-
-        print "Create text version...\n";
-        system ("perl $toolsdir/extractNotes.pl $filename");
-        system ("cat $filename.out $filename.notes > $tmpFile1");
-        system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
-
-        if ($useUnicode == 1) {
-            # Use our own script to wrap lines, as fmt cannot deal with unicode text.
-            system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-        } else {
-            # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-            system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
-        }
-        system ("gutcheck $basename.txt > $basename.gutcheck");
-        system ("$bindir\\jeebies $basename.txt > $basename.jeebies");
-
-        # Check the version in the Processed directory as well.
-        if (-f "Processed\\$basename.txt") {
-            system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
-        }
-
-        $debug || unlink("$filename.out");
-        $debug || unlink("$filename.notes");
-        $debug || unlink($tmpFile1);
-        $debug || unlink($tmpFile2);
-
-        # check for required manual intervetions
-        my $containsError = system ("grep -q \"\\[ERROR:\" $basename.txt");
-        if ($containsError == 0) {
-            print "NOTE: Please check $basename.txt for [ERROR: ...] messages.\n";
-        }
-        my $containsTable = system ("grep -q \"TABLE\" $basename.txt");
-        if ($containsTable == 0) {
-            print "NOTE: Please check $basename.txt for TABLEs.\n";
-        }
-        my $containsFigure = system ("grep -q \"FIGURE\" $basename.txt");
-        if ($containsFigure == 0) {
-            print "NOTE: Please check $basename.txt for FIGUREs.\n";
-        }
-    }
-
-    if ($makeReport == 1) {
-        my $tmpFile = temporaryFile('report', '.html');
-        print "Report on word usage...\n";
-        system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
-        system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
-        $debug || unlink($tmpFile);
-
-        # Create a text heat map.
-        if (-f "heatmap.xml") {
-            print "Create text heat map...\n";
-            system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style/heatmap.css\" > $basename-heatmap.html");
-        }
-    }
-
-    if ($makeKwic == 1) {
-        print "Generate a KWIC index (this may take some time)...\n";
-        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
-    }
-
-    if ($makeZip == 1 && $pgNumber > 0) {
-        print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
-        makeZip($basename);
-    }
-
-    print "=== Done! ==================================================================\n";
-
-    if ($nsgmlresult != 0) {
-        print "WARNING: NSGML found validation errors in $filename.\n";
-    }
+    return "$customOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
 }
 
 
 #
 # makeZip -- Prepare a zip file for (re-)submission to Project Gutenberg.
 #
-sub makeZip($)
-{
+sub makeZip($) {
     my $basename = shift;
 
     if (!-f $pgNumber) {
@@ -529,7 +560,7 @@ sub runChecks($) {
         system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
         $debug || unlink ($newname);
 
-        sgml2xml($tmpFile, $basename . "-pos.xml");
+        tei2xml($tmpFile, $basename . "-pos.xml");
         $newname = $basename . "-pos.xml";
         $debug || unlink($tmpFile);
         $debug || unlink($tmpFile . ".err");
@@ -544,9 +575,109 @@ sub runChecks($) {
 
 
 #
-# sgml2xml -- convert a file from SGML TEI to XML, also converting various notations if needed.
+# isNewer -- determine whether the first file exists and is newer than the second file
 #
-sub sgml2xml($$) {
+sub isNewer($$) {
+    my $file1 = shift;
+    my $file2 = shift;
+
+    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
+}
+
+
+#
+# temporaryFile -- create a temporary file
+#
+sub temporaryFile($$) {
+    my $phase = shift;
+    my $extension = shift;
+    $tmpCount++;
+    return $tmpBase . "-" . $tmpCount . "-" . $phase . $extension;
+}
+
+
+#
+# collectImageInfo -- collect some information about images in the imageinfo.xml file.
+#
+# add -c to called script arguments to also collect contour information with this script.
+#
+sub collectImageInfo() {
+    if (-d "images") {
+        print "Collect image dimensions...\n";
+        system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
+    } elsif (-d "Processed/images") {
+        print "Collect image dimensions...\n";
+        system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
+    }
+}
+
+
+#
+# copyImages -- copy image files for use in ePub.
+#
+sub copyImages($) {
+    my $destination = shift;
+
+    if (-d $destination) {
+        # Destination exists, prevent copying into it.
+        print "Warning: Destination exists; not copying images again\n";
+        return;
+    }
+
+    if (-d "images") {
+        system ("cp -r -u images " . $destination);
+    } elsif (-d "Processed/images") {
+        system ("cp -r -u Processed/images " . $destination);
+    }
+
+    # Remove redundant icon images (not used in the ePub)
+    if (-f "epub\\images\\book.png") {
+        system ("del epub\\images\\book.png");
+    }
+    if (-f "epub\\images\\card.png") {
+        system ("del epub\\images\\card.png");
+    }
+    if (-f "epub\\images\\external.png") {
+        system ("del epub\\images\\external.png");
+    }
+    if (-f "epub\\images\\new-cover-tn.jpg") {
+        system ("del epub\\images\\new-cover-tn.jpg");
+    }
+}
+
+
+#
+# copyAudio -- copy audio files for use in ePub.
+#
+sub copyAudio($) {
+    my $destination = shift;
+
+    if (-d "audio") {
+        system ("cp -r -u audio " . $destination);
+    } elsif (-d "Processed/audio") {
+        system ("cp -r -u Processed/audio " . $destination);
+    }
+}
+
+
+#
+# copyFonts -- copy fonts files for use in ePub.
+#
+sub copyFonts($) {
+    my $destination = shift;
+
+    if (-d "fonts") {
+        system ("cp -r -u fonts " . $destination);
+    } elsif (-d "Processed/fonts") {
+        system ("cp -r -u Processed/fonts " . $destination);
+    }
+}
+
+
+#
+# tei2xml -- convert a file from SGML TEI to XML, also converting various notations if needed.
+#
+sub tei2xml($$) {
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
@@ -575,7 +706,10 @@ sub sgml2xml($$) {
     $tmpFile0 = transcribe($tmpFile0);
 
     print "Check SGML...\n";
-    $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
+    my $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
+    if ($nsgmlresult != 0) {
+        print "WARNING: NSGML found validation errors in $sgmlFile.\n";
+    }
     system ("rm $sgmlFile.nsgml");
 
     my $tmpFile1 = temporaryFile('hide-entities', '.tei');
@@ -584,10 +718,14 @@ sub sgml2xml($$) {
     my $tmpFile4 = temporaryFile('ucs', '.xml');
 
     print "Convert SGML to XML...\n";
+    
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
     system ("sx -c $catalog -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
+    
+    # apply proper case to tags.
     system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
+
     # restore entities
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
@@ -622,17 +760,6 @@ sub transcribe($) {
         $currentFile = transcribeNotation($currentFile, "<CO>",  "Coptic",                "$patcdir/coptic/co2sgml.pat");
     }
     return $currentFile;
-}
-
-
-#
-# isNewer -- determine whether the first file exists and is newer than the second file
-#
-sub isNewer($$) {
-    my $file1 = shift;
-    my $file2 = shift;
-
-    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
 }
 
 
@@ -690,87 +817,4 @@ sub transcribeNotation($$$$) {
         $currentFile = $tmpFile;
     }
     return $currentFile;
-}
-
-
-#
-# collectImageInfo -- collect some information about images in the imageinfo.xml file.
-#
-# add -c to called script arguments to also collect contour information with this script.
-#
-sub collectImageInfo() {
-    if (-d "images") {
-        print "Collect image dimensions...\n";
-        system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
-    } elsif (-d "Processed/images") {
-        print "Collect image dimensions...\n";
-        system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
-    }
-}
-
-#
-# copyImages -- copy image files for use in ePub.
-#
-sub copyImages($) {
-    my $destination = shift;
-
-    if (-d $destination) {
-        # Destination exists, prevent copying into it.
-        print "Warning: Destination exists; not copying images again\n";
-        return;
-    }
-
-    if (-d "images") {
-        system ("cp -r -u images " . $destination);
-    } elsif (-d "Processed/images") {
-        system ("cp -r -u Processed/images " . $destination);
-    }
-
-    # Remove redundant icon images (not used in the ePub)
-    if (-f "epub\\images\\book.png") {
-        system ("del epub\\images\\book.png");
-    }
-    if (-f "epub\\images\\card.png") {
-        system ("del epub\\images\\card.png");
-    }
-    if (-f "epub\\images\\external.png") {
-        system ("del epub\\images\\external.png");
-    }
-    if (-f "epub\\images\\new-cover-tn.jpg") {
-        system ("del epub\\images\\new-cover-tn.jpg");
-    }
-}
-
-#
-# copyAudio -- copy audio files for use in ePub.
-#
-sub copyAudio($) {
-    my $destination = shift;
-
-    if (-d "audio") {
-        system ("cp -r -u audio " . $destination);
-    } elsif (-d "Processed/audio") {
-        system ("cp -r -u Processed/audio " . $destination);
-    }
-}
-
-#
-# copyFonts -- copy fonts files for use in ePub.
-#
-sub copyFonts($) {
-    my $destination = shift;
-
-    if (-d "fonts") {
-        system ("cp -r -u fonts " . $destination);
-    } elsif (-d "Processed/fonts") {
-        system ("cp -r -u Processed/fonts " . $destination);
-    }
-}
-
-
-sub temporaryFile($) {
-    my $phase = shift;
-    my $extension = shift;
-    $tmpCount++;
-    return $tmpBase . "-" . $tmpCount . "-" . $phase . $extension;
 }

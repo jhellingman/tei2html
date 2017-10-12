@@ -21,13 +21,12 @@ my $imagesConverted = 0;
 
 sub list_recursively($);
 
-sub list_recursively($)
-{
+
+sub list_recursively($) {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory))
-    {
+    unless (opendir(DIRECTORY, $directory)) {
         print "Cannot open directory $directory!\n";
         exit;
     }
@@ -37,26 +36,20 @@ sub list_recursively($)
 
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory\\$file")
-        {
+    foreach my $file (@files) {
+        if (-f "$directory\\$file") {
             handle_file("$directory\\$file");
-        }
-        elsif (-d "$directory\\$file")
-        {
+        } elsif (-d "$directory\\$file") {
             list_recursively("$directory\\$file");
         }
     }
 }
 
 
-sub handle_file($)
-{
+sub handle_file($) {
     my ($file) = @_;
 
-    if ($file =~ m/^(.*)\.(png|jpg|jpeg|gif)$/)
-    {
+    if ($file =~ m/^(.*)\.(png|jpg|jpeg|gif)$/) {
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
@@ -67,16 +60,11 @@ sub handle_file($)
         print "Compressing image: $file\n";
         my $originalSize = -s $file;
 
-        if ($extension eq 'png') 
-        {
+        if ($extension eq 'png') {
             my $returnCode = system ("$pngout /y \"$file\" \"$file\" 1>>$logFile");
-        }
-        elsif ($extension eq 'jpg' or $extension eq 'jpeg') 
-        {
+        } elsif ($extension eq 'jpg' or $extension eq 'jpeg') {
             my $returnCode = system ("$jpegoptim --strip-all \"$file\" 1>>$logFile");
-        }
-        elsif ($extension eq 'gif')
-        {
+        } elsif ($extension eq 'gif') {
             my $returnCode = system ("$gifsicle -O2 --batch \"$file\" 1>>$logFile");
         }
 
@@ -89,22 +77,19 @@ sub handle_file($)
 }
 
 
-sub main()
-{
+sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 
     print "Number of images:          $imagesConverted\n";
-	if ($errorCount > 0)
-	{
-		print "Number of errors:          $errorCount\n";
-	}
-	if ($imagesConverted > 0)
-	{
-		print "Original size of images:   $totalOriginalSize bytes\n";
-		print "New size of images:        $totalResultSize bytes\n";
-		print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
-	}
+    if ($errorCount > 0) {
+        print "Number of errors:          $errorCount\n";
+    }
+    if ($imagesConverted > 0) {
+        print "Original size of images:   $totalOriginalSize bytes\n";
+        print "New size of images:        $totalResultSize bytes\n";
+        print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+    }
 }
 
 

@@ -9,11 +9,9 @@ my $encoding = 'latin-1';
 my $infile = $ARGV[0]; 
 open(INPUTFILE, $infile) || die("Could not open input file $infile");
 
-while (<INPUTFILE>)
-{
+while (<INPUTFILE>) {
     my $remainder = $_;
-    while ($remainder =~ /<sc>(.*?)<\/sc>/)
-    {
+    while ($remainder =~ /<sc>(.*?)<\/sc>/) {
         print $`;
         $remainder = $';
         my $smallcaps = decode($encoding, $1);
