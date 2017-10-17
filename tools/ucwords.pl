@@ -8,6 +8,7 @@ use open ':utf8';
 
 require Encode;
 use Unicode::Normalize;
+use Getopt::Long;
 use DBI;
 
 use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
@@ -24,11 +25,15 @@ use LanguageNames qw/getLanguage/;
 # Global settings
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
-my $useHeatmap = 0;     # Set to 1 to generate a heat-map document.
+my $makeHeatmap = 0;    # Set to 1 to generate a heat-map document.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
 
+GetOptions(
+    'v' => \$verbose,
+    'd' => \$useDatabase,
+    'm' => \$makeHeatmap);
 
 # Hashes to collect information
 my %wordHash = ();
@@ -124,7 +129,7 @@ report();
 # reportSQL();
 # reportXML();
 
-if ($useHeatmap) {
+if ($makeHeatmap) {
     heatMapDocument();
 }
 

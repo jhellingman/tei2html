@@ -8,6 +8,7 @@ use File::Temp qw(mktemp);
 use File::Path qw(make_path remove_tree);
 use FindBin qw($Bin);
 use Getopt::Long;
+use Cwd qw(abs_path);
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
@@ -15,7 +16,7 @@ use SgmlSupport qw/utf2numericEntities translateEntity/;
 # Configuration
 
 my $toolsdir        = $Bin;                                 # location of tools
-my $xsldir          = $toolsdir . "/..";                    # location of xsl stylesheets
+my $xsldir          = abs_path($toolsdir . "/..");          # location of xsl stylesheets
 my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
 my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
 
@@ -29,6 +30,7 @@ my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  
 
 my $makeText            = 0;
 my $makeHtml            = 0;
+my $makeHeatMap         = 0;
 my $makePdf             = 0;
 my $makeEpub            = 0;
 my $makeReport          = 0;
@@ -51,6 +53,7 @@ GetOptions(
     't' => \$makeText,
     'T' => \$noTranscription,
     'h' => \$makeHtml,
+    'm' => \$makeHeatMap,
     'e' => \$makeEpub,
     'k' => \$makeKwic,
     'D' => \$debug,
@@ -338,15 +341,18 @@ sub makeReport($) {
     my $basename = shift;
 
     my $tmpFile = temporaryFile('report', '.html');
+    my $options = $debug ? " -v " : "";
+    $options .= $makeHeatMap ? " -m " : "";
+
     print "Report on word usage...\n";
-    system ("perl $toolsdir/ucwords.pl $basename.xml > $tmpFile");
+    system ("perl $toolsdir/ucwords.pl $options $basename.xml > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
     $debug || unlink($tmpFile);
 
     # Create a text heat map.
     if (-f "heatmap.xml") {
         print "Create text heat map...\n";
-        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:style/heatmap.css\" > $basename-heatmap.html");
+        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:$xsldir/style/heatmap.css\" > $basename-heatmap.html");
     }
 }
 
