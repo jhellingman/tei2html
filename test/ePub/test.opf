@@ -8,21 +8,21 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2017-09-30T11:14:28Z</meta>
+      <meta property="dcterms:modified">2017-10-12T20:03:59Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
-      <dc:creator id="xd28e7metadata">Author of Work (Birth-year—Death-year)</dc:creator>
-      <meta property="role" refines="#xd28e7metadata" scheme="marc:relators">aut</meta>
-      <dc:creator id="xd28e9metadata">A. U. Thor</dc:creator>
-      <meta property="role" refines="#xd28e9metadata" scheme="marc:relators">aut</meta>
-      <meta property="file-as" refines="#xd28e9metadata">Thor, A. U.</meta>
-      <dc:creator id="xd28e11metadata">W. Riter</dc:creator>
-      <meta property="role" refines="#xd28e11metadata" scheme="marc:relators">aut</meta>
-      <meta property="file-as" refines="#xd28e11metadata">Riter, W.</meta>
-      <dc:contributor id="xd28e15metadata">T. R. Anscriber</dc:contributor>
-      <meta property="role" refines="#xd28e15metadata" scheme="marc:relators">trc</meta>
-      <meta property="file-as" refines="#xd28e15metadata">Anscriber, T. R.</meta>
+      <dc:creator id="xd29e7metadata">Author of Work (Birth-year—Death-year)</dc:creator>
+      <meta property="role" refines="#xd29e7metadata" scheme="marc:relators">aut</meta>
+      <dc:creator id="xd29e9metadata">A. U. Thor</dc:creator>
+      <meta property="role" refines="#xd29e9metadata" scheme="marc:relators">aut</meta>
+      <meta property="file-as" refines="#xd29e9metadata">Thor, A. U.</meta>
+      <dc:creator id="xd29e11metadata">W. Riter</dc:creator>
+      <meta property="role" refines="#xd29e11metadata" scheme="marc:relators">aut</meta>
+      <meta property="file-as" refines="#xd29e11metadata">Riter, W.</meta>
+      <dc:contributor id="xd29e15metadata">T. R. Anscriber</dc:contributor>
+      <meta property="role" refines="#xd29e15metadata" scheme="marc:relators">trc</meta>
+      <meta property="file-as" refines="#xd29e15metadata">Anscriber, T. R.</meta>
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA.</dc:publisher>
       <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
       <dc:language>en-US</dc:language>
@@ -66,15 +66,15 @@
       <item id="backmatter" href="test-backmatter.xhtml" media-type="application/xhtml+xml"/>
       <item properties="cover-image" id="cover-image" href="images/cover500.jpg"
             media-type="image/jpeg"/>
-      <item id="xd28e184" href="images/hg2101.png" media-type="image/png"/>
+      <item id="xd29e184" href="images/hg2101.png" media-type="image/png"/>
       <item id="test" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="tarsier1" href="images/tarsier.jpg" media-type="image/jpeg"/>
-      <item id="xd28e414" href="images/initial-A.gif" media-type="image/gif"/>
-      <item id="xd28e482" href="images/Ornament.gif" media-type="image/gif"/>
-      <item id="xd28e724" href="images/bracket3.gif" media-type="image/gif"/>
+      <item id="xd29e414" href="images/initial-A.gif" media-type="image/gif"/>
+      <item id="xd29e482" href="images/Ornament.gif" media-type="image/gif"/>
+      <item id="xd29e724" href="images/bracket3.gif" media-type="image/gif"/>
       <item id="test1wrapper" href="test-test1.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch1overlay" href="test.smil" media-type="application/smil+xml"/>
-      <item id="xd40e11" href="audio/test.mp3" media-type="audio/mpeg"/>
+      <item id="xd41e11" href="audio/test.mp3" media-type="audio/mpeg"/>
       <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
       <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
       <item id="tn3" href="images/thumbs/hg2101.png" media-type="image/png"/>
@@ -105,9 +105,9 @@
    <guide>
       <reference type="cover" title="Cover Image" href="cover.xhtml"/>
       <reference type="toc" title="Table of Contents" href="test-frontmatter-2.xhtml#toc"/>
-      <reference type="title-page" title="Title Page" href="test-frontmatter-2.xhtml#xd28e113"/>
+      <reference type="title-page" title="Title Page" href="test-frontmatter-2.xhtml#xd29e113"/>
       <reference type="index" title="Index" href="test-index.xhtml#index"/>
       <reference type="text" title="Text" href="test-bk1-1.xhtml#bk1"/>
-      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd28e1704"/>
+      <reference type="colophon" title="Colophon" href="test-backmatter.xhtml#xd29e1704"/>
    </guide>
 </package>

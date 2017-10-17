@@ -410,6 +410,7 @@
 
     <xsl:template name="headPicture">
         <xsl:variable name="context" select="." as="element(head)"/>
+
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <div class="figure">
                 <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
@@ -433,7 +434,9 @@
         <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">
             <xsl:copy-of select="f:logWarning('{1} paragraphs found to be placed above the division head.', (xs:string(count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']))))"/>
         </xsl:if>
-        <xsl:apply-templates select="../p/figure[f:rend-value(@rend, 'position') = 'abovehead']"/>
+        <xsl:if test="not(preceding-sibling::head)">
+            <xsl:apply-templates select="../p/figure[f:rend-value(@rend, 'position') = 'abovehead']"/>
+        </xsl:if>
     </xsl:template>
 
 

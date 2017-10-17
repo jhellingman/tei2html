@@ -167,6 +167,10 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </itemGroup>
 </xsl:template>
 
+<xsl:template match="itemgroup/list">
+ <xsl:apply-templates/>
+</xsl:template>
+
 <xsl:template match="castitem">
 <castItem>
  <xsl:apply-templates select="@*"/>
@@ -1238,6 +1242,8 @@ $Date: 2001/05/26 $ $Author: rahtz $
 <!-- <xsl:template match="cell/@rows[. = '1']"/> -->
 <!-- <xsl:template match="cell/@cols[. = '1']"/> -->
 <xsl:template match="note/@anchored[. = 'yes']"/>
+<xsl:template match="editor/@role[. = 'editor']"/>
+<xsl:template match="list/@type[. = 'simple']"/>
 
 
 </xsl:stylesheet>

@@ -721,7 +721,7 @@ sub tei2xml($$) {
     
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
-    system ("sx -c $catalog -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
+    system ("sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
     
     # apply proper case to tags.
     system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
