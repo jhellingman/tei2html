@@ -249,8 +249,7 @@ span.num, span.corr, span.abbr, span.trans, span.measure, abbr
     margin: 0;
 }
 
-.figureHead, .noteref, .marginnote, p.legend, .versenum, .rightnote,  .pagenum, .linenum, .pagenum a
-{
+.figureHead, .noteref, .marginnote, p.legend, .verseNum, .rightnote,  .pagenum, .linenum, .pagenum a {
     color: black;
 }
 

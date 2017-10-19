@@ -808,7 +808,7 @@ span.hemistich {
  visibility: hidden;
 }
 
-.versenum {
+.verseNum {
  font-weight: bold;
 }
 
@@ -909,7 +909,7 @@ p.byline {
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum,
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum,
  .stage {
  color: #001FA4;
 }
