@@ -337,6 +337,8 @@
             <role code="dsr" message="msgDesigner">Designer</role>
             <role code="edt" message="msgEditor">Editor</role>
             <role code="ill" message="msgIllustrator">Illustrator</role>
+            <role code="ill" message="msgIllustrator">Illustration</role>
+            <role code="ill" message="msgIllustrator">Illustrations</role>
             <role code="lyr" message="msgLyricist">Lyricist</role>
             <role code="mdc" message="msgMetadataContact">Metadata contact</role>
             <role code="mus" message="msgMusician">Musician</role>
