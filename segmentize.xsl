@@ -38,7 +38,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="segmentize">
+    <xsl:template mode="segmentize" match="/">
         <xsl:variable name="segments">
             <segment>
                 <xsl:apply-templates mode="segments"/>

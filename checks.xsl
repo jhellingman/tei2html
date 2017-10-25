@@ -50,6 +50,24 @@
 
     <xsl:variable name="root" select="/"/>
 
+    <xsl:variable name="segments">
+        <xsl:apply-templates mode="segmentize" select="/"/>
+    </xsl:variable>
+
+    <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
+    <xsl:variable name="issues">
+        <i:issues>
+            <xsl:apply-templates mode="info" select="/"/>
+            <xsl:apply-templates mode="checks" select="/"/>
+            <xsl:apply-templates mode="check-ids" select="/"/>
+
+            <!-- Check textual issues on segments -->
+
+            <xsl:apply-templates mode="checks" select="$segments//segment"/>
+        </i:issues>
+    </xsl:variable>
+
+
     <xsl:template match="divGen[@type='checks']">
         <xsl:apply-templates select="/" mode="checks"/>
     </xsl:template>
@@ -70,25 +88,8 @@
     </xd:doc>
 
     <xsl:template match="/">
-
-        <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
-        <xsl:variable name="issues">
-            <i:issues>
-                <xsl:apply-templates mode="info" select="."/>
-                <xsl:apply-templates mode="checks" select="."/>
-                <xsl:apply-templates mode="check-ids" select="."/>
-
-                <!-- Check textual issues on segments -->
-                <xsl:variable name="segments">
-                    <xsl:call-template name="segmentize"/>
-                </xsl:variable>
-                <xsl:apply-templates mode="checks" select="$segments//segment"/>
-            </i:issues>
-        </xsl:variable>
-
         <xsl:apply-templates mode="report" select="$issues"/>
     </xsl:template>
-
 
 
     <xsl:template mode="info" match="titleStmt/title">
@@ -312,7 +313,7 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage'" as="xs:string*"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisements'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'" as="xs:string*"/>
     <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'" as="xs:string*"/>

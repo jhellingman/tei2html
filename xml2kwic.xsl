@@ -92,7 +92,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Generate the HTML output.</xd:short>
         <xd:detail>Generate the HTML output.</xd:detail>
@@ -205,7 +204,7 @@
 
     <xsl:template name="build-kwic">
         <xsl:variable name="segments">
-            <xsl:call-template name="segmentize"/>
+            <xsl:apply-templates mode="segmentize" select="/"/>
         </xsl:variable>
 
         <xsl:choose>
