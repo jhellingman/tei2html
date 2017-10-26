@@ -5,8 +5,9 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
     xmlns:s="http://gutenberg.ph/segments"
+    xmlns:k="http://gutenberg.ph/kwic"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs s"
+    exclude-result-prefixes="f fn xd xs s k"
     >
 
     <xd:doc type="stylesheet">
@@ -208,6 +209,12 @@
             <xsl:apply-templates mode="segmentize" select="/"/>
         </xsl:variable>
 
+        <!--
+        <xsl:call-template name="output-segments">
+            <xsl:with-param name="segments" select="$segments"/>
+        </xsl:call-template>
+        -->
+
         <xsl:choose>
             <xsl:when test="$keyword != ''">
 
@@ -223,10 +230,10 @@
 
                 <!-- Build KWIC for all words in document -->
                 <xsl:variable name="matches">
-                    <xsl:apply-templates mode="multi-kwic" select="$segments//w"/>
+                    <xsl:apply-templates mode="multi-kwic" select="$segments//k:w"/>
                 </xsl:variable>
 
-                <xsl:for-each-group select="$matches/match" group-by="@form">
+                <xsl:for-each-group select="$matches/k:match" group-by="@form">
                     <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
                     <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}-]+$')">
                         <xsl:call-template name="report-matches2">
@@ -242,7 +249,7 @@
     <xsl:template name="report-matches2">
         <xsl:param name="matches" as="element()*"/>
 
-        <xsl:variable name="keyword" select="$matches[1]/word"/>
+        <xsl:variable name="keyword" select="$matches[1]/k:word"/>
 
         <h2>
             <span class="cnt">Word:</span><xsl:text> </xsl:text>
@@ -252,7 +259,7 @@
 
         <xsl:variable name="variant-count">
             <xsl:variable name="groups">
-                <xsl:for-each-group select="$matches" group-by="./word">.</xsl:for-each-group>
+                <xsl:for-each-group select="$matches" group-by="./k:word">.</xsl:for-each-group>
             </xsl:variable>
             <xsl:value-of select="string-length($groups)"/>
         </xsl:variable>
@@ -263,19 +270,19 @@
 
         <xsl:if test="$variant-count &gt; 1">
             <p><span class="cnt">Variants:</span>
-                <xsl:for-each-group select="$matches" group-by="./word">
+                <xsl:for-each-group select="$matches" group-by="./k:word">
                     <xsl:sort select="count(current-group())" order="descending"/>
 
-                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/word"/></b>
+                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
                     <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
                 </xsl:for-each-group>
             </p>
         </xsl:if>
 
         <xsl:variable name="variants">
-            <xsl:for-each-group select="$matches" group-by="./word">
+            <xsl:for-each-group select="$matches" group-by="./k:word">
                 <xsl:sort select="count(current-group())" order="descending"/>
-                    <w><xsl:value-of select="current-group()[1]/word"/></w>
+                    <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
             </xsl:for-each-group>
         </xsl:variable>
 
@@ -288,8 +295,8 @@
             </tr>
 
             <xsl:apply-templates mode="output" select="$matches">
-                <xsl:with-param name="variants" tunnel="yes" select="$variants/w"/>
-                <xsl:sort select="fn:lower-case(f:strip_diacritics(following))" order="ascending"/>
+                <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
+                <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -312,11 +319,11 @@
         <xsl:param name="keyword"/>
 
         <xsl:variable name="matches">
-            <matches>
-                <xsl:apply-templates mode="single-kwic" select="$segments//w">
+            <k:matches>
+                <xsl:apply-templates mode="single-kwic" select="$segments//k:w">
                     <xsl:with-param name="keyword" select="$keyword"/>
                 </xsl:apply-templates>
-            </matches>
+            </k:matches>
         </xsl:variable>
 
         <xsl:apply-templates mode="output" select="$matches"/>
@@ -328,7 +335,7 @@
         <xd:detail>Output an HTML table for the matches.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="output" match="matches">
+    <xsl:template mode="output" match="k:matches">
 
         <table>
             <tr>
@@ -339,7 +346,7 @@
             </tr>
 
             <xsl:apply-templates mode="#current">
-                <xsl:sort select="fn:lower-case(f:strip_diacritics(following))" order="ascending"/>
+                <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -350,7 +357,7 @@
         <xd:detail>Output an HTML table-row for a match.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="output" match="match">
+    <xsl:template mode="output" match="k:match">
         <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
 
         <tr>
@@ -358,13 +365,13 @@
                 <xsl:attribute name="class" select="'ix'"/>
             </xsl:if>
             <td class="pre">
-                <xsl:apply-templates mode="#current" select="preceding"/>
+                <xsl:apply-templates mode="#current" select="k:preceding"/>
             </td>
-            <td class="match var{index-of($variants, string(word))}">
-                <xsl:apply-templates mode="#current" select="word"/>
+            <td class="match var{index-of($variants, string(k:word))}">
+                <xsl:apply-templates mode="#current" select="k:word"/>
             </td>
             <td class="post">
-                <xsl:apply-templates mode="#current" select="following"/>
+                <xsl:apply-templates mode="#current" select="k:following"/>
             </td>
             <td class="pn">
                 <xsl:value-of select="@page"/>
@@ -416,15 +423,15 @@
         <xd:detail>Find a matching word, when a word is found, the preceding and following contexts are kept with the match.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="single-kwic" match="w">
+    <xsl:template mode="single-kwic" match="k:w">
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
-            <match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
-                <word><xsl:apply-templates mode="context" select="."/></word>
-                <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
-            </match>
+            <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
+                <k:preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:word><xsl:apply-templates mode="context" select="."/></k:word>
+                <k:following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+            </k:match>
         </xsl:if>
     </xsl:template>
 
@@ -434,13 +441,13 @@
         <xd:detail>For every word the preceding and following contexts are kept with the match.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="multi-kwic" match="w">
+    <xsl:template mode="multi-kwic" match="k:w">
         <xsl:if test="not(f:is-stopword(., @xml:lang))">
-            <match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></preceding>
-                <word><xsl:apply-templates mode="context" select="."/></word>
-                <following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></following>
-            </match>
+            <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
+                <k:preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:word><xsl:apply-templates mode="context" select="."/></k:word>
+                <k:following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+            </k:match>
         </xsl:if>
     </xsl:template>
 
@@ -455,7 +462,7 @@
         <xd:detail>Copy matching words and non-words in the context, taking care to apply the correct text style.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="context" match="w|nw">
+    <xsl:template mode="context" match="k:w|k:nw">
         <xsl:choose>
             <xsl:when test="@style = 'i'"><i><xsl:value-of select="."/></i></xsl:when>
             <xsl:when test="@style = 'b'"><b><xsl:value-of select="."/></b></xsl:when>
@@ -521,28 +528,32 @@
 
     <xsl:template name="analyze-text">
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
-        <!-- <xsl:variable name="parent" select="name(ancestor-or-self::*[1])"/> -->
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
         <xsl:variable name="inIndex" select="if (ancestor-or-self::*[@type='Index']) then 'true' else 'false'"/>
 
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
             <xsl:matching-substring>
-                <w>
+                <k:w>
                     <xsl:attribute name="xml:lang" select="$lang"/>
-                    <!-- <xsl:attribute name="parent" select="$parent"/> -->
-                    <xsl:attribute name="style" select="$style"/>
+                    <xsl:if test="$style != ''">
+                        <xsl:attribute name="style" select="$style"/>
+                    </xsl:if>
                     <xsl:attribute name="page" select="$page"/>
-                    <xsl:attribute name="inIndex" select="$inIndex"/>
+                    <xsl:if test="$inIndex = 'true'">
+                        <xsl:attribute name="inIndex" select="$inIndex"/>
+                    </xsl:if>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
                     <xsl:value-of select="."/>
-                </w>
+                </k:w>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <nw>
-                    <xsl:attribute name="style" select="$style"/>
+                <k:nw>
+                    <xsl:if test="$style != ''">
+                        <xsl:attribute name="style" select="$style"/>
+                    </xsl:if>
                     <xsl:value-of select="."/>
-                </nw>
+                </k:nw>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:template>
