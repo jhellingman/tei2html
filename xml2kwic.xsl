@@ -4,8 +4,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:s="http://gutenberg.ph/segments"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs"
+    exclude-result-prefixes="f fn xd xs s"
     >
 
     <xd:doc type="stylesheet">
@@ -405,7 +406,7 @@
         <xd:detail>Find a match in a segment.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="single-kwic" match="segment">
+    <xsl:template mode="single-kwic" match="s:segment">
         <xsl:apply-templates mode="#current" select="."/>
     </xsl:template>
 

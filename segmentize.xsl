@@ -4,8 +4,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:s="http://gutenberg.ph/segments"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs"
+    exclude-result-prefixes="f fn xd xs s"
     >
 
     <xd:doc type="stylesheet">
@@ -40,14 +41,14 @@
 
     <xsl:template mode="segmentize" match="/">
         <xsl:variable name="segments">
-            <segment>
+            <s:segment>
                 <xsl:apply-templates mode="segments"/>
-            </segment>
+            </s:segment>
         </xsl:variable>
 
-        <segments>
+        <s:segments>
             <xsl:apply-templates mode="flatten-segments" select="$segments"/>
-        </segments>
+        </s:segments>
     </xsl:template>
 
 
@@ -57,18 +58,18 @@
         the segment elements are retained.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="flatten-segments" match="segment">
+    <xsl:template mode="flatten-segments" match="s:segment">
         <xsl:param name="attributes"/>
 
-        <xsl:for-each-group select="node()" group-adjacent="not(self::segment)">
+        <xsl:for-each-group select="node()" group-adjacent="not(self::s:segment)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
 
                     <!-- Sequence of non-segment elements -->
-                    <segment>
+                    <s:segment>
                         <xsl:copy-of select="$attributes"/>
                         <xsl:copy-of select="current-group()"/>
-                    </segment>
+                    </s:segment>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- Sequence of segment elements -->
@@ -138,13 +139,13 @@
     <xsl:template mode="segment-notes" match="note">
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
 
-        <segment sourceElement="{name()}">
+        <s:segment sourceElement="{name()}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
             </xsl:if>
             <xsl:apply-templates mode="segments"/>
-        </segment>
+        </s:segment>
     </xsl:template>
 
 
@@ -168,13 +169,13 @@
 
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
 
-        <segment sourceElement="{name()}">
+        <s:segment sourceElement="{name()}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
             </xsl:if>
             <xsl:apply-templates mode="#current"/>
-        </segment>
+        </s:segment>
     </xsl:template>
 
 

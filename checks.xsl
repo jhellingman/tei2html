@@ -30,8 +30,9 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
     xmlns:i="http://gutenberg.ph/issues"
+    xmlns:s="http://gutenberg.ph/segments"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="i f xhtml xs xd"
+    exclude-result-prefixes="i f xhtml xs xd s"
     version="2.0"
     >
 
@@ -63,9 +64,13 @@
 
             <!-- Check textual issues on segments -->
 
-            <xsl:apply-templates mode="checks" select="$segments//segment"/>
+            <xsl:apply-templates mode="checks" select="$segments//s:segment"/>
         </i:issues>
     </xsl:variable>
+
+
+    <!-- ignore textual content in those modes -->
+    <xsl:template mode="info checks check-ids" match="text()" priority="-1"/>
 
 
     <xsl:template match="divGen[@type='checks']">
@@ -76,7 +81,7 @@
     <xd:doc>
         <xd:short>Determine potential problems in a TEI file.</xd:short>
         <xd:detail>
-            <p>Issues are collected in two phases. First, usign the mode <code>checks</code>, all
+            <p>Issues are collected in two phases. First, using the mode <code>checks</code>, all
             issues are stored in a variable <code>issues</code>; then, the contents of this
             variable are processed using the mode <code>report</code>.</p>
 
@@ -88,6 +93,15 @@
     </xd:doc>
 
     <xsl:template match="/">
+        <!--
+        <xsl:call-template name="output-segments">
+            <xsl:with-param name="segments" select="$segments"/>
+        </xsl:call-template>
+
+        <xsl:call-template name="output-issues">
+            <xsl:with-param name="issues" select="$issues"/>
+        </xsl:call-template>
+        -->
         <xsl:apply-templates mode="report" select="$issues"/>
     </xsl:template>
 
@@ -100,6 +114,22 @@
     <xsl:template mode="info" match="titleStmt/author">
         <i:issue pos="{@pos}" code="A02" target="{f:generate-id(.)}" level="Info" element="{name(.)}">Author: <xsl:value-of select="."/>.</i:issue>
         <xsl:apply-templates mode="info"/>
+    </xsl:template>
+
+
+    <xsl:template name="output-issues">
+        <xsl:param name="issues" as="node()"/>
+
+        <xsl:result-document
+                doctype-public=""
+                doctype-system=""
+                href="issues.xml"
+                method="xml"
+                indent="yes"
+                encoding="UTF-8">
+            <xsl:message>INFO:    Generated file: issues.xml.</xsl:message>
+            <xsl:copy-of select="$issues"/>
+        </xsl:result-document>
     </xsl:template>
 
 
@@ -617,7 +647,7 @@
 
     <!-- Text level checks, run on segments -->
 
-    <xsl:template mode="checks" match="segment">
+    <xsl:template mode="checks" match="s:segment">
 
         <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                                         'Warning', 'P01', 'Space before punctuation mark')"/>
         <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
