@@ -97,12 +97,17 @@
         <xsl:call-template name="output-segments">
             <xsl:with-param name="segments" select="$segments"/>
         </xsl:call-template>
-
         <xsl:call-template name="output-issues">
             <xsl:with-param name="issues" select="$issues"/>
         </xsl:call-template>
         -->
         <xsl:apply-templates mode="report" select="$issues"/>
+    </xsl:template>
+
+
+    <!-- Make sure periods in abbreviations are not reported (replace them by ___P___; replace them back later) -->
+    <xsl:template match="abbr" mode="segments">
+        <xsl:value-of select="replace(., '\.', '___P___')"/>
     </xsl:template>
 
 
@@ -492,7 +497,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'itemNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
+    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
@@ -710,20 +715,21 @@
         <!-- Remove anything not a pairing punctuation mark -->
         <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;&laquo;&raquo;&bdquo;]', '')"/>
 
-        <xsl:variable name="head" select="if (string-length($string) &lt; 40) then $string else concat(substring($string, 1, 37), '...')"/>
-
         <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
-                <i:issue pos="{@pos}" code="P11" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
+                <i:issue pos="{@pos}" code="P11" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
             <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&laquo;&bdquo;]+$')">
                 <xsl:if test="not(starts-with($next, $unclosed))">
-                    <i:issue pos="{@pos}" code="P12" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. Current: <xsl:value-of select="$head"/> Next: <xsl:value-of select="substring($next, 1, 40)"/></i:issue>
+                    <i:issue pos="{@pos}" code="P12" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. 
+                        Current: <xsl:value-of select="f:tail-chars($string)"/>
+                        Next: <xsl:value-of select="f:head-chars($next)"/>
+                    </i:issue>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue pos="{@pos}" code="P13" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="$head"/></i:issue>
+                <i:issue pos="{@pos}" code="P13" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -802,6 +808,20 @@
                 <xsl:sequence select="substring($string, $start, 40)"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:head-chars" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
+        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else concat(substring($string, 1, 37), '...')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:tail-chars" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
+        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else concat('...', substring($string, string-length($string) - 37, 37))"/>
     </xsl:function>
 
 

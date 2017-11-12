@@ -81,8 +81,6 @@
             <xsl:otherwise><xsl:value-of select="false()"/></xsl:otherwise>
         </xsl:choose>
 
-
-
         <!-- Image that appears in a list of illustrations -->
         <!-- Correction that appears in a list of corrections -->
         <!-- External reference that appears in a list of exteral references -->

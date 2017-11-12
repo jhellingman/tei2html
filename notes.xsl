@@ -5,7 +5,6 @@
     <!ENTITY uparrow    "&#8593;">
 
 ]>
-
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"

@@ -1,4 +1,9 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY ldquo      "&#x201C;">
+    <!ENTITY rdquo      "&#x201D;">
+
+]>
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -19,8 +24,8 @@
         of generated files, and cross-references both internal to a part
         and to other parts.</p>
 
-        <p>To accomplish this, we use the "splitter" mode to obtain the parts,
-        and hand through an "action" parameter to select the appropriate
+        <p>To accomplish this, we use the &ldquo;splitter&rdquo; mode to obtain the parts,
+        and hand through an &ldquo;action&rdquo; parameter to select the appropriate
         action once we land in the part to be handled. Once arrived at the
         level we wish to split at, we call the appropriate template to
         handle the content.</p>
@@ -49,6 +54,11 @@
     </xsl:template>
 
 
+    <xd:doc mode="splitter">
+        <xd:short>Mode used to split divisions into files for ePub.</xd:short>
+    </xd:doc>
+
+
     <xd:doc>
         <xd:short>Split text element.</xd:short>
         <xd:detail>Split the top-level <code>text</code> element (not to be confused with a text node) of a TEI file.</xd:detail>
@@ -74,13 +84,12 @@
             <xsl:with-param name="action" select="$action"/>
             <xsl:with-param name="node" select="$node"/>
         </xsl:apply-templates>
-
     </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Split body element.</xd:short>
-        <xd:detail>Split the body element of a TEI file on div0 elements.</xd:detail>
+        <xd:short>Split <code>body</code> element.</xd:short>
+        <xd:detail>Split the <code>body</code> element of a TEI file on <code>div0</code> elements.</xd:detail>
     </xd:doc>
 
     <xsl:template match="body[div0]" mode="splitter">
@@ -95,9 +104,9 @@
 
 
     <xd:doc>
-        <xd:short>Split elements on div1 elements.</xd:short>
-        <xd:detail>Split div0, front, back, and body elements of a TEI file on div1 elements. Here we can either have
-        a sequence of non-div1 elements (we split no further) or a sequence of div1 elements (we may need to split further).</xd:detail>
+        <xd:short>Split elements on <code>div1</code> elements.</xd:short>
+        <xd:detail>Split <code>div0</code>, <code>front</code>, <code>back</code>, and <code>body</code> elements of a TEI file on <code>div1</code> elements. Here we can either have
+        a sequence of non-<code>div1</code> elements (we split no further) or a sequence of <code>div1</code> elements (we may need to split further).</xd:detail>
     </xd:doc>
 
     <xsl:template match="div0 | front | back | body[div1]" mode="splitter">
@@ -127,9 +136,9 @@
 
 
     <xd:doc>
-        <xd:short>Split elements on (unnumbered) div elements.</xd:short>
-        <xd:detail>Split front, back, and body elements of a TEI file on div elements. Here we can either have
-        a sequence of non-div elements (we split no further) or a sequence of div elements (we may need to split further).</xd:detail>
+        <xd:short>Split elements on (unnumbered) <code>div</code> elements.</xd:short>
+        <xd:detail>Split <code>front</code>, <code>back</code>, and <code>body</code> elements of a TEI file on <code>div</code> elements. Here we can either have
+        a sequence of non-<code>div</code> elements (we split no further) or a sequence of <code>div</code> elements (we may need to split further).</xd:detail>
     </xd:doc>
 
     <xsl:template match="front[div] | back[div] | body[div]" mode="splitter">
@@ -194,7 +203,6 @@
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
-
     </xsl:template>
 
 
@@ -262,6 +270,8 @@
     </xsl:template>
 
 
+    <!--========= Filename =========-->
+
     <xd:doc>
         <xd:short>Determine the filename of a div-fragment.</xd:short>
         <xd:detail>Determine the filename of the file that contains a certain node.</xd:detail>
@@ -287,7 +297,6 @@
         <xsl:if test="(generate-id(..) = generate-id($node)) and position() = 1">
             <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
         </xsl:if>
-
     </xsl:template>
 
 
@@ -305,6 +314,8 @@
         </xsl:if>
     </xsl:template>
 
+
+    <!--========= Manifest =========-->
 
     <xd:doc>
         <xd:short>Generate an OPF manifest entry for a div-fragment.</xd:short>
@@ -367,6 +378,8 @@
     </xsl:template>
 
 
+    <!--========= Spine =========-->
+
     <xd:doc>
         <xd:short>Generate a spine entry for a div-fragment.</xd:short>
         <xd:detail>Generate a spine entry for a div-fragment.</xd:detail>
@@ -396,7 +409,11 @@
     </xsl:template>
 
 
-    <!-- content -->
+    <!--========= Content =========-->
+
+    <xd:doc>
+        <xd:short>Generate the content for a div-fragment.</xd:short>
+    </xd:doc>
 
     <xsl:template name="content.div-fragment">
         <xsl:param name="nodes" as="node()*"/>
@@ -404,7 +421,7 @@
         <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
+            <xsl:copy-of select="f:logInfo('Generated file [{3}.{4}]: {1}/{2}.', ($path, $filename, name(..), string(position())))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
@@ -439,19 +456,20 @@
                 </body>
             </html>
         </xsl:result-document>
-
     </xsl:template>
 
 
-    <xsl:template name="content.div">
+    <xd:doc>
+        <xd:short>Generate the content for a division.</xd:short>
+    </xd:doc>
 
+    <xsl:template name="content.div">
         <xsl:variable name="filename" select="f:generate-filename(.)" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:copy-of select="f:logInfo('Generated file: {1}/{2}.', ($path, $filename))"/>
+            <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, $filename, name(.)))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
-
                 <body>
                     <div>
                         <xsl:call-template name="set-class-attribute-for-body"/>
@@ -460,9 +478,10 @@
                 </body>
             </html>
         </xsl:result-document>
-
     </xsl:template>
 
+
+    <!--========= Utility functions =========-->
 
     <xd:doc>
         <xd:short>Generate a filename.</xd:short>
@@ -529,7 +548,11 @@
     </xsl:function>
 
 
-    <!-- Determine the class for the body, based on whether it is part of the front matter, body text or back matter of the book -->
+    <xd:doc>
+        <xd:short>Determine the class for the body.</xd:short>
+        <xd:detail>Determine the class for the body, based on whether it is part of the front matter, body text or back matter of the book.</xd:detail>
+    </xd:doc>
+
     <xsl:template name="set-class-attribute-for-body">
         <xsl:attribute name="class">
             <xsl:choose>

@@ -1620,6 +1620,7 @@ BEGIN {
     $ent{"eringb"}      = "e" . chr(0x0325); # e with ring below
     $ent{"nringb"}      = "n" . chr(0x0325); # n with ring below
     $ent{"mringb"}      = "m" . chr(0x0325); # m with ring below
+    $ent{"rringb"}      = "r" . chr(0x0325); # r with ring below
 
     $ent{"gcomma"}      = "g" . chr(0x0326); # g with comma below
 
@@ -1659,6 +1660,7 @@ BEGIN {
 
     $ent{"ubowb"}       = "u" . chr(0x032F); # u with bow below (inverted breve)
     $ent{"ebowb"}       = "e" . chr(0x032F); # e with bow below (inverted breve)
+    $ent{"ibowb"}       = "i" . chr(0x032F); # i with bow below (inverted breve)
 
     $ent{"icircb"}      = "i" . chr(0x032D); # i with circumflex below
 
