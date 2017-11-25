@@ -1043,8 +1043,10 @@ sub entities2iso88591($) {
     $a =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
     $a =~ s/\&ast;/*/g; # asterix
 
-    $a =~ s/\&there4;/./g;  # Therefor (three dots in triangular arrangement) used as abbreviation dot.
+    $a =~ s/\&there4;/./g;      # Therefor (three dots in triangular arrangement) used as abbreviation dot.
     $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
+    $a =~ s/\&wwelsh;/6/g;      # Old-Welsh w (looks like 6)
+    $a =~ s/\&\#x204A;/7/g;     # Tironian et (looks like 7)
 
     # Rough Greek transcription
 

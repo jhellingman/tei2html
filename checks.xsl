@@ -17,10 +17,11 @@
     <!ENTITY frac14     "&#x00BC;">
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
+    <!ENTITY hellip     "&#x2026;">
 
-    <!ENTITY raquo     "&#187;">
-    <!ENTITY laquo     "&#171;">
-    <!ENTITY bdquo     "&#8222;">
+    <!ENTITY raquo      "&#187;">
+    <!ENTITY laquo      "&#171;">
+    <!ENTITY bdquo      "&#8222;">
 
 ]>
 <xsl:stylesheet
@@ -31,8 +32,9 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:i="http://gutenberg.ph/issues"
     xmlns:s="http://gutenberg.ph/segments"
+    xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="i f xhtml xs xd s"
+    exclude-result-prefixes="i f xhtml xs xd s tmp"
     version="2.0"
     >
 
@@ -41,7 +43,7 @@
         <xd:detail><p>This stylesheet performs a number of checks on a TEI file, to help find potential issues with both the text and tagging.</p>
         <p>Since the standard XSLT processor does not provide line and column information to report errors on, this stylesheet expects that all
         elements are provided with a <code>pos</code> element that contains the line and column the element appears on in the source file. This element
-        should have the format <code>line:column</code>. A small Perl script (<code>addPositionInfo.pl</code>) is available to add those attributes to 
+        should have the format <code>line:column</code>. A small Perl script (<code>addPositionInfo.pl</code>) is available to add those attributes to
         elements as a pre-processing step.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
@@ -85,7 +87,7 @@
             issues are stored in a variable <code>issues</code>; then, the contents of this
             variable are processed using the mode <code>report</code>.</p>
 
-            <p>Several textual issues are verified on a flattened representation of the text, 
+            <p>Several textual issues are verified on a flattened representation of the text,
             collected in the variable <code>segments</code>. A segment roughly corresponds to
             a paragraph, but without further internal structure. Furthermore, list-items,
             table-cells, headers, etc., are also treated as segments.</p>
@@ -110,7 +112,6 @@
         <xsl:value-of select="replace(., '\.', '___P___')"/>
     </xsl:template>
 
-
     <xsl:template mode="info" match="titleStmt/title">
         <i:issue pos="{@pos}" code="A01" target="{f:generate-id(.)}" level="Info" element="{name(.)}">Title: <xsl:value-of select="."/>.</i:issue>
         <xsl:apply-templates mode="info"/>
@@ -120,7 +121,6 @@
         <i:issue pos="{@pos}" code="A02" target="{f:generate-id(.)}" level="Info" element="{name(.)}">Author: <xsl:value-of select="."/>.</i:issue>
         <xsl:apply-templates mode="info"/>
     </xsl:template>
-
 
     <xsl:template name="output-issues">
         <xsl:param name="issues" as="node()"/>
@@ -302,6 +302,17 @@
     </xsl:template>
 
 
+    <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD -->
+    <xsl:template mode="checks" match="front/pb[not(preceding::titlePage)] | body/pb | back/pb">
+        <i:issue pos="{@pos}" code="T14" target="{f:generate-id(.)}" level="Error" element="{name(.)}">pb element directly under front, body, or back.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="text/pb">
+        <i:issue pos="{@pos}" code="T15" target="{f:generate-id(.)}" level="Error" element="{name(.)}">pb element directly under text.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
     <xd:doc>
         <xd:short>Check the numbering of divisions.</xd:short>
     </xd:doc>
@@ -348,10 +359,10 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisements'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
-    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter'" as="xs:string*"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter', 'Poem', 'Story', 'Article', 'Letter'" as="xs:string*"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
@@ -596,11 +607,11 @@
         <xsl:for-each-group select="//*[@target]" group-by="@target">
             <xsl:variable name="target" select="./@target" as="xs:string"/>
             <xsl:if test="not(//*[@id=$target])">
-                <i:issue 
-                    pos="{./@pos}" 
-                    code="I01" 
+                <i:issue
+                    pos="{./@pos}"
+                    code="I01"
                     target="{f:generate-id(.)}"
-                    level="Error" 
+                    level="Error"
                     element="{name(.)}">Element <xsl:value-of select="name(.)"/>: target-attribute value <xsl:value-of select="./@target"/> not present as id.</i:issue>
             </xsl:if>
         </xsl:for-each-group>
@@ -613,11 +624,11 @@
             <xsl:for-each select="tokenize(@rendition, ' ')">
                 <xsl:variable name="id" select="." as="xs:string"/>
                 <xsl:if test="not($root//rendition[@id=$id])">
-                    <i:issue 
-                        pos="{$node/@pos}" 
-                        code="I02" 
+                    <i:issue
+                        pos="{$node/@pos}"
+                        code="I02"
                         target="{f:generate-id($node)}"
-                        level="Error" 
+                        level="Error"
                         element="{$name}">Element <xsl:value-of select="$name"/>: rendition element <xsl:value-of select="."/> not present.</i:issue>
                 </xsl:if>
             </xsl:for-each>
@@ -628,10 +639,10 @@
         <xsl:for-each-group select="//*[@who]" group-by="@who">
             <xsl:variable name="who" select="./@who" as="xs:string"/>
             <xsl:if test="not(//role[@id=$who])">
-                <i:issue 
-                    pos="{./@pos}" 
+                <i:issue
+                    pos="{./@pos}"
                     code="I03" target="{f:generate-id(.)}"
-                    level="Error" 
+                    level="Error"
                     element="{name(.)}">Element <xsl:value-of select="name(.)"/>: who-attribute value <xsl:value-of select="./@who"/> not present as id of role.</i:issue>
             </xsl:if>
         </xsl:for-each-group>
@@ -640,10 +651,10 @@
         <xsl:for-each select="//language">
             <xsl:variable name="id" select="@id" as="xs:string"/>
             <xsl:if test="not(//*[@lang=$id])">
-                <i:issue 
-                    pos="{./@pos}" 
+                <i:issue
+                    pos="{./@pos}"
                     code="I04" target="{f:generate-id(.)}"
-                    level="Warning" 
+                    level="Warning"
                     element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
             </xsl:if>
         </xsl:for-each>
@@ -654,22 +665,31 @@
 
     <xsl:template mode="checks" match="s:segment">
 
-        <xsl:copy-of select="f:should-not-contain(., '\s+[.,:;!?]',                                         'Warning', 'P01', 'Space before punctuation mark')"/>
-        <xsl:copy-of select="f:should-not-contain(., '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
-        <xsl:copy-of select="f:should-not-contain(., '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',                  'Warning', 'P03', 'Space after opening punctuation mark')"/>
+        <!-- prevent false positives for ellipses. -->
+        <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
-        <xsl:copy-of select="f:should-not-contain(., ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',      'Warning', 'P04', 'Missing space after comma')"/>
-        <xsl:copy-of select="f:should-not-contain(., '\.[^\s&nbsp;.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]', 'Warning', 'P05', 'Missing space after period')"/>
+        <!-- Handle common abbreviations -->
+        <xsl:variable name="segment" select="f:handle-abbreviations($segment, $en.abbreviations.sorted)"/>
 
-        <xsl:copy-of select="f:should-not-contain(., '[&mdash;&ndash;]-',                                   'Warning', 'P06', 'Em-dash or en-dash followed by dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., '[&mdash;-]&ndash;',                                   'Warning', 'P07', 'Em-dash or dash followed by en-dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., '[&ndash;-]&mdash;',                                   'Warning', 'P08', 'En-dash or dash followed by em-dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., '--',                                                  'Warning', 'P09', 'Two dashes should be en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[.,:;!?]',                                         'Warning', 'P01', 'Space before punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',                  'Warning', 'P03', 'Space after opening punctuation mark')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., '[:;!?][^\s&mdash;&rdquo;&raquo;&rsquo;)\]]',          'Warning', 'P10', 'Missing space after punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',      'Warning', 'P04', 'Missing space after comma')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\.[^\s&nbsp;.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]', 'Warning', 'P05', 'Missing space after period')"/>
+
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;&ndash;]-',                                   'Warning', 'P06', 'Em-dash or en-dash followed by dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;-]&ndash;',                                   'Warning', 'P07', 'Em-dash or dash followed by en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&ndash;-]&mdash;',                                   'Warning', 'P08', 'En-dash or dash followed by em-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '--',                                                  'Warning', 'P09', 'Two dashes should be en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '''',                                                  'Warning', 'P14', 'Straight single quote')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '&quot;',                                              'Warning', 'P15', 'Straight double quote')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                                   'Warning', 'P16', 'Hash-sign')"/>
+
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[:;!?][^\s&mdash;&rdquo;&raquo;&rsquo;&hellip;!)\]?]', 'Warning', 'P10', 'Missing space after punctuation mark')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
-            <xsl:with-param name="string" select="."/>
+            <xsl:with-param name="string" select="$segment"/>
             <xsl:with-param name="next" select="string(following-sibling::*[1])"/>
         </xsl:call-template>
 
@@ -677,21 +697,77 @@
     </xsl:template>
 
 
+    <xsl:variable name="en.abbreviations">
+        <!-- Please only list very common abbreviations here: others should be marked as abbr anyway. -->
+        <tmp:abbrs>
+            <tmp:abbr>i.e.</tmp:abbr>
+            <tmp:abbr>I.e.</tmp:abbr>
+            <tmp:abbr>e.g.</tmp:abbr>
+            <tmp:abbr>E.g.</tmp:abbr>
+            <tmp:abbr>A.D.</tmp:abbr>
+            <tmp:abbr>B.C.</tmp:abbr>
+            <tmp:abbr>P.M.</tmp:abbr>
+            <tmp:abbr>A.M.</tmp:abbr>
+            <tmp:abbr>p.m.</tmp:abbr>
+            <tmp:abbr>a.m.</tmp:abbr>
+        </tmp:abbrs>
+    </xsl:variable>
+
+    <xsl:variable name="en.abbreviations.sorted">
+        <xsl:for-each select="$en.abbreviations/tmp:abbrs/*">
+            <xsl:sort select="string-length(.)" data-type="number" order="descending"/>
+            <tmp:abbr>
+                <xsl:copy-of select="."/>
+            </tmp:abbr>
+        </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:function name="f:handle-abbreviations" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="patterns"/>
+        <xsl:value-of select="f:handle-abbreviation-n($string, $patterns, count($patterns/tmp:abbr))"/>
+    </xsl:function>
+
+    <xsl:function name="f:handle-abbreviation-n" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="patterns"/>
+        <xsl:param name="n"/>
+
+        <xsl:variable name="old" select="$patterns/tmp:abbr[$n]"/>
+        <xsl:variable name="new" select="replace($old, '\.', '_')"/>
+        <xsl:variable name="pattern" select="replace($old, '\.', '\\.')"/>
+
+        <xsl:variable name="result" as="xs:string">
+            <xsl:choose>
+                <xsl:when test="$n > 0">
+                    <xsl:value-of select="replace(f:handle-abbreviation-n($string, $patterns, $n - 1), $pattern, $new)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$string"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$result"/>
+    </xsl:function>
+
+
     <xsl:function name="f:should-not-contain">
         <xsl:param name="node" as="node()"/>
+        <xsl:param name="segment" as="xs:string"/>
         <xsl:param name="pattern" as="xs:string"/>
         <xsl:param name="level" as="xs:string"/>
         <xsl:param name="code" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
 
-        <xsl:if test="matches($node, $pattern)">
-            <i:issue 
-                pos="{$node/@pos}" 
-                level="{$level}" 
-                code="{$code}" 
+        <xsl:if test="matches($segment, $pattern)">
+            <i:issue
+                pos="{$node/@pos}"
+                level="{$level}"
+                code="{$code}"
                 target="{f:generate-id($node)}"
                 element="{$node/@sourceElement}">
-                    <xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($node, $pattern)"/></i:issue>
+                    <xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($segment, $pattern)"/></i:issue>
         </xsl:if>
     </xsl:function>
 
@@ -703,7 +779,7 @@
         <xd:detail>
             <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the
             right single quote character (&rsquo;) is not being used for the apostrophe (hint: temporarily change those to
-            something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, &ldquo;&rdquo;, 
+            something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, &ldquo;&rdquo;,
             and &laquo;&raquo;.</p>
         </xd:detail>
     </xd:doc>
@@ -722,7 +798,7 @@
             </xsl:when>
             <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&laquo;&bdquo;]+$')">
                 <xsl:if test="not(starts-with($next, $unclosed))">
-                    <i:issue pos="{@pos}" code="P12" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph. 
+                    <i:issue pos="{@pos}" code="P12" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph.
                         Current: <xsl:value-of select="f:tail-chars($string)"/>
                         Next: <xsl:value-of select="f:head-chars($next)"/>
                     </i:issue>

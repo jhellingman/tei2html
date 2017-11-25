@@ -334,6 +334,7 @@
             <role code="cmm" message="msgCommentator">Commentator</role>
             <role code="dsr" message="msgDesigner">Designer</role>
             <role code="edt" message="msgEditor">Editor</role>
+            <role code="egr" message="msgEngraver">Engraver</role>
             <role code="ill" message="msgIllustrator">Illustrator</role>
             <role code="ill" message="msgIllustrator">Illustration</role>
             <role code="ill" message="msgIllustrator">Illustrations</role>

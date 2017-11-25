@@ -20,9 +20,11 @@ use open ':utf8';
 
 my $force = 0;          # Force generation of XML files, even if up-to-date.
 my $makeHtml = 0;       # Generate HTML files.
+my $makeChecks = 0;     
 
 GetOptions(
     'f' => \$force,
+    'v' => \$makeChecks,
     'h' => \$makeHtml);
 
 my $totalFiles = 0;
@@ -134,6 +136,7 @@ sub handleTeiFile($) {
     logMessage("File:       $fileName$suffix");
     print XMLFILE "    <file>\n";
     print XMLFILE "      <name>$fileName$suffix</name>\n";
+    print XMLFILE "      <baseName>$baseName</baseName>\n";
     if (defined ($version)) {
         logMessage("Version:    $version");
         print XMLFILE "      <version>$version</version>\n";
@@ -161,9 +164,11 @@ sub handleTeiFile($) {
     my $wordsFileName = $filePath . "$baseName-words.html";
 
     if (!$excluded{$baseName} == 1 && defined($version)) {
+        my $checksFileName = $filePath . "$baseName-$version-checks.html";
         if ($force != 0
                 || !-e $xmlFileName
                 || !-e $wordsFileName
+                || !-e $checksFileName
                 || ($makeHtml != 0 && !-e $htmlFileName)
                 || isNewer($fullName, $xmlFileName)) {
             my $cwd = getcwd;
@@ -172,9 +177,9 @@ sub handleTeiFile($) {
                 # system ("perl -S process.pl");
             } else {
                 if ($makeHtml != 0) {
-                    system ("perl -S tei2html.pl -h -r -f $fileName$suffix");
+                    system ("perl -S tei2html.pl -h -r -v -f $fileName$suffix");
                 } else {
-                    system ("perl -S tei2html.pl -x -r -f $fileName$suffix");
+                    system ("perl -S tei2html.pl -x -r -v -f $fileName$suffix");
                 }
             }
             chdir ($cwd);
@@ -189,9 +194,12 @@ sub handleTeiFile($) {
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
 
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
+                my $authorKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author/@key');
                 my $editors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor');
+                my $editorKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor/@key');
                 my $respRoles = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/resp');
                 my $respNames = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/name');
+                my $respNameKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/name/@key');
 
                 my $originalDate = $xpath->find('/TEI.2/teiHeader/fileDesc/sourceDesc/bibl/date[1]');
                 my $pageCount = $xpath->find('count(//pb[not(ancestor::note)])');
@@ -208,6 +216,10 @@ sub handleTeiFile($) {
 
                 logMessage("Title:      $title");
                 print XMLFILE "    <title>" . escapeXml($title) . "</title>\n";
+
+                if ($authorKeys->size() == 0) {
+                    print "TODO: Missing author key(s) in $fullName\n";
+                }
 
                 for my $author ($authors->get_nodelist()) {
                     logMessage("Author:     " . $author->string_value());
