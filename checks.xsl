@@ -359,10 +359,10 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisement', 'Advertisements', 'Glossary'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter', 'Poem', 'Story', 'Article', 'Letter'" as="xs:string*"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Glossary', 'Vocabulary', 'Advertisement', 'Advertisements'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
