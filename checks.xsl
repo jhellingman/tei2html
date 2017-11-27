@@ -49,7 +49,11 @@
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="configuration.xsl"/>
+    <xsl:include href="log.xsl"/>
     <xsl:include href="segmentize.xsl"/>
+
+    <xsl:variable name="outputformat" select="'html'"/>
 
     <xsl:variable name="root" select="/"/>
 
@@ -669,7 +673,7 @@
         <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
         <!-- Handle common abbreviations -->
-        <xsl:variable name="segment" select="f:handle-abbreviations($segment, $en.abbreviations.sorted)"/>
+        <xsl:variable name="segment" select="f:handle-abbreviations($segment)"/>
 
         <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[.,:;!?]',                                         'Warning', 'P01', 'Space before punctuation mark')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
@@ -697,34 +701,23 @@
     </xsl:template>
 
 
-    <xsl:variable name="en.abbreviations">
-        <!-- Please only list very common abbreviations here: others should be marked as abbr anyway. -->
+    <xsl:function name="f:get-abbreviations">
+        <xsl:variable name="abbreviations" select="f:getSetting('text.abbr')"/>
         <tmp:abbrs>
-            <tmp:abbr>i.e.</tmp:abbr>
-            <tmp:abbr>I.e.</tmp:abbr>
-            <tmp:abbr>e.g.</tmp:abbr>
-            <tmp:abbr>E.g.</tmp:abbr>
-            <tmp:abbr>A.D.</tmp:abbr>
-            <tmp:abbr>B.C.</tmp:abbr>
-            <tmp:abbr>P.M.</tmp:abbr>
-            <tmp:abbr>A.M.</tmp:abbr>
-            <tmp:abbr>p.m.</tmp:abbr>
-            <tmp:abbr>a.m.</tmp:abbr>
+            <xsl:analyze-string select="$abbreviations" regex="; *">
+                <xsl:non-matching-substring>
+                    <tmp:abbr>
+                        <xsl:value-of select="."/>
+                    </tmp:abbr>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
         </tmp:abbrs>
-    </xsl:variable>
+    </xsl:function>
 
-    <xsl:variable name="en.abbreviations.sorted">
-        <xsl:for-each select="$en.abbreviations/tmp:abbrs/*">
-            <xsl:sort select="string-length(.)" data-type="number" order="descending"/>
-            <tmp:abbr>
-                <xsl:copy-of select="."/>
-            </tmp:abbr>
-        </xsl:for-each>
-    </xsl:variable>
 
     <xsl:function name="f:handle-abbreviations" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:param name="patterns"/>
+        <xsl:variable name="patterns" select="f:get-abbreviations()"/>
         <xsl:value-of select="f:handle-abbreviation-n($string, $patterns, count($patterns/tmp:abbr))"/>
     </xsl:function>
 

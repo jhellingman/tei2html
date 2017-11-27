@@ -163,6 +163,8 @@ sub processFile($) {
 
     if ($version >= 1.0) {
         $makeText = 0;
+    } else {
+        $runChecks  = 1;
     }
 
     print "Processing TEI-file '$basename' version $version\n";
@@ -572,7 +574,7 @@ sub runChecks($) {
         $debug || unlink($tmpFile . ".err");
     }
 
-    system ("$saxon \"$newname\" $xsldir/checks.xsl > \"$basename-checks.html\"");
+    system ("$saxon \"$newname\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$basename-checks.html\"");
     if ($filename ne $transcribedFile) {
         $debug || unlink ($transcribedFile);
     }
