@@ -1,4 +1,4 @@
-# Perl script to test the the checks.xsl stylesheet with Saxon.
+# Perl script to test the checks.xsl stylesheet with Saxon.
 
 use strict;
 

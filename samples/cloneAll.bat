@@ -18,6 +18,7 @@ git clone https://github.com/GutenbergSource/20391-Andriessen-De-Prins-en-Johan-
 git clone https://github.com/GutenbergSource/30735-Reuther-Bedenkingen-tegen-de-leer-van-Darwin.git
 git clone https://github.com/GutenbergSource/50677-Simons-Beowulf-Angelsaksisch-Volksepos.git
 git clone https://github.com/GutenbergSource/41681-Anonymous-Breton-Legends.git
+git clone https://github.com/GutenbergSource/50715-De-Tribus-Impostoribus.git
 git clone https://github.com/GutenbergSource/16119-Wolf-Doctrina-Christiana-The-first-book-printed-in-the-Philippines-Manila-1593.git
 git clone https://github.com/GutenbergSource/50675-Anoniem-Geschiedenis-van-een-Neger.git
 git clone https://github.com/GutenbergSource/52075-Anoniem-Historie-van-het-huis-van-Adriaan.git
@@ -133,6 +134,7 @@ git clone https://github.com/GutenbergSource/21848-Rizal-Noli-me-tangere-Filippi
 git clone https://github.com/GutenbergSource/48438-Rizal-Own-Story-of-His-Life.git
 git clone https://github.com/GutenbergSource/35899-Rizal-The-Philippines-a-Century-Hence.git
 git clone https://github.com/GutenbergSource/10676-Rizal-The-Reign-of-Greed.git
+git clone https://github.com/GutenbergSource/6737-Rizal-The-Social-Cancer.git
 git clone https://github.com/GutenbergSource/52550-Robertson-Short-History-of-Christianity.git
 git clone https://github.com/GutenbergSource/51793-52160-Robertson-Short-History-of-Freethought.git
 git clone https://github.com/GutenbergSource/51793-52160-Robertson-Short-History-of-Freethought.git
@@ -155,12 +157,15 @@ git clone https://github.com/GutenbergSource/49474-Thayer-Pedal-and-Path.git
 git clone https://github.com/GutenbergSource/53612-Toergenev-Vaders-en-Zonen.git
 git clone https://github.com/GutenbergSource/53393-Good-Natuurkunde-in-de-Huiskamer.git
 git clone https://github.com/GutenbergSource/53476-Vries-Yellowstone-park.git
+git clone https://github.com/GutenbergSource/27335-De-Vries-te-Winkel-Grondbeginselen-der-Nederlandsche-Spelling.git
+git clone https://github.com/GutenbergSource/22722-De-Vries-te-Winkel-Woordenlijst-Nederlandsche-taal.git
 git clone https://github.com/GutenbergSource/2564-Walker-Wanderings-Among-South-Sea-Savages.git
 git clone https://github.com/GutenbergSource/28525-Wells-Het-Geld-van-Robinson-Crusoe.git
 git clone https://github.com/GutenbergSource/40429-Wells-Robinson-Crusoes-Money.git
 git clone https://github.com/GutenbergSource/34513-Wheeler-A-Biographical-Dictionary-of-Freethinkers.git
 git clone https://github.com/GutenbergSource/56000-Elliot-Schetsen-uit-de-Dierenwereld.git
 git clone https://github.com/GutenbergSource/50638-de-Wit-Orpheus-in-de-Dessa.git
+git clone https://github.com/GutenbergSource/36077-Winkler-De-Nederlandsche-geslachtsnamen.git
 git clone https://github.com/GutenbergSource/30658-Witte-Kamerplanten.git
 git clone https://github.com/GutenbergSource/53962-Zimmermann-Anthroposophie-im-Umriss.git
 git clone https://github.com/GutenbergSource/55488-Zola-Zijn-Excellentie-Eugene-Rougon.git

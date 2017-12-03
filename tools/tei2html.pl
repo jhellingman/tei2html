@@ -220,7 +220,7 @@ sub processFile($) {
 
 sub makeHtml($) {
     my $basename = shift;
-    my $xmlFile = $basename . ".xml";
+    my $xmlFile = $basename . "-normalized.xml";
     my $htmlFile = $basename . ".html";
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
@@ -240,7 +240,7 @@ sub makeHtml($) {
 
 sub makePdf($) {
     my $basename = shift;
-    my $xmlFile = $basename . ".xml";
+    my $xmlFile = $basename . "-normalized.xml";
     my $pdfFile = $basename . ".pdf";
 
     my $tmpFile1 = temporaryFile('pdf', '.html');
@@ -261,7 +261,7 @@ sub makePdf($) {
 
 sub makeEpub() {
     my $basename = shift;
-    my $xmlFile = $basename . ".xml";
+    my $xmlFile = $basename . "-normalized.xml";
     my $epubFile = $basename . ".epub";
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
