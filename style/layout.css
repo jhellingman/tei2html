@@ -256,7 +256,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden {
+.pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
     text-decoration: none;
 }
 

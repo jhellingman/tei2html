@@ -293,6 +293,8 @@
     </xsl:template>
 
 
+
+
     <xd:doc>
         <xd:short>Check page numbering.</xd:short>
     </xd:doc>
@@ -301,10 +303,8 @@
         <xsl:call-template name="sequence-in-order">
             <xsl:with-param name="elements" select="//pb"/>
         </xsl:call-template>
-
         <xsl:next-match/>
     </xsl:template>
-
 
     <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD -->
     <xsl:template mode="checks" match="front/pb[not(preceding::titlePage)] | body/pb | back/pb">
@@ -317,11 +317,30 @@
         <xsl:next-match/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Check presence of cover and title page.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="front" priority="2">
+        <!-- Do we have a cover that will be recognized as such? -->
+        <xsl:if test="not(div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image'])">
+            <i:issue pos="{@pos}" code="E01" target="{f:generate-id(.)}" level="Error" element="{name(.)}">No cover defined (div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']).</i:issue>
+        </xsl:if>
+
+        <!-- Do we have a title-page that will be recognized as such? -->
+        <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
+            <i:issue pos="{@pos}" code="E02" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Check the numbering of divisions.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="checks" match="front | body | back">
+    <xsl:template mode="checks" match="front | body | back" priority="1">
 
         <xsl:if test="not(name() = 'body')">
             <xsl:call-template name="check-id-present"/>
@@ -341,7 +360,7 @@
 
     <!-- Types of titleParts -->
 
-    <xsl:variable name="expectedTitlePartTypes" select="'main', 'sub', 'series'"/>
+    <xsl:variable name="expectedTitlePartTypes" select="'main', 'sub', 'series', 'volume'"/>
 
     <xsl:template mode="checks" match="titlePart[@type and not(@type = $expectedTitlePartTypes)]">
         <i:issue pos="{@pos}" code="T01" target="{f:generate-id(.)}" level="Error" element="{name(.)}">Unexpected type for titlePart: <xsl:value-of select="@type"/></i:issue>
@@ -512,7 +531,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
+    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'keyRef', 'keyNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
@@ -679,7 +698,7 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',                  'Warning', 'P03', 'Space after opening punctuation mark')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]',      'Warning', 'P04', 'Missing space after comma')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;&hellip;0-9)\]]', 'Warning', 'P04', 'Missing space after comma')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '\.[^\s&nbsp;.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]', 'Warning', 'P05', 'Missing space after period')"/>
 
         <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;&ndash;]-',                                   'Warning', 'P06', 'Em-dash or en-dash followed by dash')"/>
@@ -689,6 +708,7 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '''',                                                  'Warning', 'P14', 'Straight single quote')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '&quot;',                                              'Warning', 'P15', 'Straight double quote')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                                   'Warning', 'P16', 'Hash-sign')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                                         'Warning', 'P17', 'Unhandled fraction')"/>
 
         <xsl:copy-of select="f:should-not-contain(., $segment, '[:;!?][^\s&mdash;&rdquo;&raquo;&rsquo;&hellip;!)\]?]', 'Warning', 'P10', 'Missing space after punctuation mark')"/>
 

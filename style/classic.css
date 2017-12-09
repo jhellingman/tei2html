@@ -31,7 +31,7 @@ p.byline {
 	color: #AAAAAA;
 }
 
-a.hidden:hover, a.noteref:hover {
+a.hidden:hover, a.noteref:hover, a.pseudonoteref:hover {
 	color: red;
 }
 
