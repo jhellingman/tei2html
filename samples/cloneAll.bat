@@ -65,13 +65,19 @@ git clone https://github.com/GutenbergSource/28120-Ebers-Eene-Egyptische-Konings
 git clone https://github.com/GutenbergSource/42861-Ebers-Homo-sum.git
 git clone https://github.com/GutenbergSource/42867-Ebers-Klea-en-Irene.git
 git clone https://github.com/GutenbergSource/50008-Endle-The-Kacharis.git
+git clone https://github.com/GutenbergSource/56144-Jackson-Folklore-Notes-Gujarat.git
+git clone https://github.com/GutenbergSource/8299-Fansler-Filipino-Popular-Tales.git
 git clone https://github.com/GutenbergSource/47025-Feuerbach-The-Essence-of-Christianity.git
 git clone https://github.com/GutenbergSource/19585-Flammarion-De-Wereld-voor-de-Schepping-van-den-Mensch.git
 git clone https://github.com/GutenbergSource/22815-Foreman-The-Philippine-Islands.git
 git clone https://github.com/GutenbergSource/30347-Gironiere-Adventures-in-the-Philippine-Islands.git
 git clone https://github.com/GutenbergSource/21804-Gironiere-Aventures-d-un-gentilhomme-Breton.git
 git clone https://github.com/GutenbergSource/48737-Harvey-Turkish-Harems-and-Circassian-Homes.git
+git clone https://github.com/GutenbergSource/24116-Heijermans-Diamantstad.git
+git clone https://github.com/GutenbergSource/20060-Falkland-Gevleugelde-Daden.git
+git clone https://github.com/GutenbergSource/34154-Falkland-Schetsen-Eerste-bundel.git
 git clone https://github.com/GutenbergSource/50018-Heimans-Willem-Roda.git
+git clone https://github.com/GutenbergSource/25495-Heimburg-Liesje-van-den-Lompenmolen.git
 git clone https://github.com/GutenbergSource/27836-Hendrix-Het-Geldersch-Byenboek.git
 git clone https://github.com/GutenbergSource/48871-Hitt-Manual-for-the-Solution-of-Military-Ciphers.git
 git clone https://github.com/GutenbergSource/53926-Hoogewerff-Jacob-Martens.git
@@ -93,6 +99,12 @@ git clone https://github.com/GutenbergSource/55820-Kieviet-Jongens-van-Oudt-Holl
 git clone https://github.com/GutenbergSource/29712-Kieviet-Uit-het-leven-van-Dik-Trom.git
 git clone https://github.com/GutenbergSource/3639-Knight-Diary-of-a-pedestrian-in-Cashmere-and-Thibet.git
 git clone https://github.com/GutenbergSource/52414-Leatherbee-The-Christian-Mythology.git
+git clone https://github.com/GutenbergSource/24467-Lennep-De-Pleegzoon.git
+git clone https://github.com/GutenbergSource/29369-Lennep-Merkwaardige-Kasteelen-in-Nederland-2.git
+git clone https://github.com/GutenbergSource/44863-Lennep-Galerij-van-beroemde-Nederlanders.git
+git clone https://github.com/GutenbergSource/19161-Lennep-De-Roos-van-Dekama.git
+git clone https://github.com/GutenbergSource/30171-Lennep-Vertellingen-van-vroeger-en-later-tijd.git
+git clone https://github.com/GutenbergSource/40417-Lennep-Zeemans-woordeboek.git
 git clone https://github.com/GutenbergSource/6712-Limburg-Brouwer-Akbar-Een-Oostersche-Roman.git
 git clone https://github.com/GutenbergSource/40155-Limburg-Brouwer-Akbar-An-Eastern-Romance.git
 git clone https://github.com/GutenbergSource/38064-Lloyd-Aw-aw-tam-Indian-Nights.git
@@ -106,6 +118,7 @@ git clone https://github.com/GutenbergSource/50534-Lucas-The-Three-Impostors.git
 git clone https://github.com/GutenbergSource/51492-53568-Lynch-Armenia-Travels-and-Studies.git
 git clone https://github.com/GutenbergSource/51492-53568-Lynch-Armenia-Travels-and-Studies.git
 git clone https://github.com/GutenbergSource/56034-Mackinlay-Folklore-of-Scottish-Lochs-and-Springs.git
+git clone https://github.com/GutenbergSource/20189-MacMicking-Recollections-of-Manilla-and-the-Philippines.git
 git clone https://github.com/GutenbergSource/55822-Malinowski-Argonauts-of-the-Western-Pacific.git
 git clone https://github.com/GutenbergSource/47757-McGregor-Manual-of-Philippine-Birds.git
 git clone https://github.com/GutenbergSource/50631-McIlrath-On-Wheels-Around-the-World.git
@@ -118,6 +131,7 @@ git clone https://github.com/GutenbergSource/46024-Beyer-Origin-Myths-among-the-
 git clone https://github.com/GutenbergSource/53755-Playfair-Taleef-Shereef.git
 git clone https://github.com/GutenbergSource/53755-Playfair-Taleef-Shereef.git
 git clone https://github.com/GutenbergSource/28932-Rasmussen-Eskimo-Folk-Tales.git
+git clone https://github.com/GutenbergSource/20329-Reed-Negritos-of-Zambales.git
 git clone https://github.com/GutenbergSource/46737-Remsburg-The-Bible.git
 git clone https://github.com/GutenbergSource/46986-Remsburg-The-Christ.git
 git clone https://github.com/GutenbergSource/55025-55989-Rhys-Celtic-Folklore.git
@@ -151,6 +165,8 @@ git clone https://github.com/GutenbergSource/55521-Stein-Albrecht-Duerer.git
 git clone https://github.com/GutenbergSource/53493-Steiner-Philosophie-der-Freiheit.git
 git clone https://github.com/GutenbergSource/53592-Steiner-Friedrich-Nietzsche.git
 git clone https://github.com/GutenbergSource/53569-Steiner-Goethes-Weltanschauung.git
+git clone https://github.com/GutenbergSource/41503-Beecher-Stowe-De-slavernij.git
+git clone https://github.com/GutenbergSource/27124-Beecher-Stowe-De-Negerhut.git
 git clone https://github.com/GutenbergSource/37442-Swift-Gullivers-Reizen.git
 git clone https://github.com/GutenbergSource/54485-Seaborn-Symzonia-Voyage-of-Discovery.git
 git clone https://github.com/GutenbergSource/49474-Thayer-Pedal-and-Path.git

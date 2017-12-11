@@ -348,7 +348,8 @@
         <msg:message name="na">Nauru</msg:message>
         <msg:message name="ne">Nepali</msg:message>
         <msg:message name="nl">Dutch</msg:message>
-        <msg:message name="nl-1900">Dutch (Old Spelling)</msg:message>
+        <msg:message name="nl-1800">Dutch (Spelling Siegenbeek)</msg:message>
+        <msg:message name="nl-1900">Dutch (Spelling De Vries-Te Winkel)</msg:message>
         <msg:message name="no">Norwegian</msg:message>
         <msg:message name="oc">Occitan</msg:message>
         <msg:message name="om">Oromo</msg:message>
@@ -1185,7 +1186,8 @@
         <msg:message name="la-x-bio">Latijn (Biologische naamgeving)</msg:message>
         <msg:message name="ms">Maleis</msg:message>
         <msg:message name="nl">Nederlands</msg:message>
-        <msg:message name="nl-1900">Nederlands (Oude Spelling)</msg:message>
+        <msg:message name="nl-1800">Nederlands (Spelling Siegenbeek)</msg:message>
+        <msg:message name="nl-1900">Nederlands (Spelling De Vries-Te Winkel)</msg:message>
         <msg:message name="pt">Portugees</msg:message>
         <msg:message name="pt-br">Portugees (Brazilië)</msg:message>
         <msg:message name="pt-pt">Portugees (Portugal)</msg:message>
