@@ -787,13 +787,24 @@
 
     <xsl:template mode="checks" match="text()"/>
 
+
+    <!-- Support variables for matching-punctuation tests -->
+    <xsl:variable name="pairs" select="concat(f:getSetting('text.parentheses'), f:getSetting('text.quotes'))"/>
+    <xsl:variable name="pair-sequence" select="f:split-string($pairs)"/>
+    <xsl:variable name="opener" select="$pair-sequence[position() mod 2 = 1]"/>
+    <xsl:variable name="closer" select="$pair-sequence[position() mod 2 = 0]"/>
+    <xsl:variable name="open-quotation-marks" select="string-join(f:split-string(f:getSetting('text.quotes'))[position() mod 2 = 1], '')"/>
+    <xsl:variable name="opener-string" select="string-join($opener, '')"/>
+    <xsl:variable name="closer-string" select="string-join($closer, '')"/>
+
+
     <xd:doc>
         <xd:short>Verify paired punctuation marks match.</xd:short>
         <xd:detail>
             <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the
             right single quote character (&rsquo;) is not being used for the apostrophe (hint: temporarily change those to
-            something else). The paired punctuation marks supported are [], (), {}, &lsquo;&rsquo;, &ldquo;&rdquo;,
-            and &laquo;&raquo;.</p>
+            something else). The paired punctuation marks supported are taken from the configuration values <code>text.parentheses</code> and 
+            <code>text.quotes</code>.</p>
         </xd:detail>
     </xd:doc>
 
@@ -801,15 +812,14 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="next" as="xs:string"/>
 
-        <!-- Remove anything not a pairing punctuation mark -->
-        <xsl:variable name="pairs" select="replace($string, '[^\[\](){}&lsquo;&rsquo;&rdquo;&ldquo;&laquo;&raquo;&bdquo;]', '')"/>
+        <xsl:copy-of select="f:logDebug('QUOTES: {1} - {2}', ($opener-string, $closer-string))"/>
 
-        <xsl:variable name="unclosed" select="f:unclosed-pairs($pairs, '')"/>
+        <xsl:variable name="unclosed" select="f:unclosed-pairs(f:keep-only($string, $pairs), '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
                 <i:issue pos="{@pos}" code="P11" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
-            <xsl:when test="matches($unclosed, '^[&lsquo;&ldquo;&laquo;&bdquo;]+$')">
+            <xsl:when test="f:contains-only($unclosed, $open-quotation-marks)">
                 <xsl:if test="not(starts-with($next, $unclosed))">
                     <i:issue pos="{@pos}" code="P12" target="{f:generate-id(.)}" level="Warning" element="{./@sourceElement}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph.
                         Current: <xsl:value-of select="f:tail-chars($string)"/>
@@ -824,15 +834,32 @@
     </xsl:template>
 
 
-    <!-- The following two variables should list the openers and matching closers in the same order -->
-    <!-- The current values work well for my 19th century Dutch books that use: &raquo;...&rdquo; -->
+    <xsl:function name="f:keep-only" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="chars" as="xs:string"/>
 
-    <xsl:variable name="opener" select="'(', '[', '{', '&lsquo;', '&ldquo;', '&laquo;', '&bdquo;'"/>
-    <xsl:variable name="closer" select="')', ']', '}', '&rsquo;', '&rdquo;', '&raquo;', '&rdquo;'"/>
-    <xsl:variable name="opener-string" select="string-join($opener, '')"/>
-    <xsl:variable name="closer-string" select="string-join($closer, '')"/>
+        <xsl:value-of select="translate($string, translate($string, $chars, ''), '')"/>
+    </xsl:function>
 
-    <xsl:variable name="open-quotation-marks" select="'&lsquo;&ldquo;&laquo;&bdquo;'" as="xs:string"/>
+
+    <xsl:function name="f:contains-only" as="xs:boolean">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="chars" as="xs:string"/>
+
+        <xsl:value-of select="string-length(translate($string, translate($string, $chars, ''), '')) = string-length($string)"/>
+    </xsl:function>
+
+
+
+    <xsl:function name="f:split-string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:analyze-string select="$string" regex=".">
+            <xsl:matching-substring>
+                <xsl:sequence select="."/>
+            </xsl:matching-substring>
+        </xsl:analyze-string>
+    </xsl:function>
+
 
     <xd:doc>
         <xd:short>Find unclosed pairs of paired punctuation marks.</xd:short>
@@ -871,7 +898,6 @@
             <xsl:text>line </xsl:text><xsl:value-of select="$line"/> column <xsl:value-of select="$column"/>
         </xsl:if>
     </xsl:function>
-
 
 
     <xsl:function name="f:match-position" as="xs:integer">
@@ -984,7 +1010,6 @@
 
         <xsl:sequence select="(1, 5, 10, 50, 100, 500, 1000)[index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'), upper-case($character))]"/>
     </xsl:function>
-
 
 
     <xsl:function name="f:generate-id" as="xs:string">

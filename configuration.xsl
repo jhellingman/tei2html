@@ -6,6 +6,9 @@
     <!ENTITY lsquo      "&#x2018;">
     <!ENTITY rdquo      "&#x201D;">
     <!ENTITY rsquo      "&#x2019;">
+    <!ENTITY raquo      "&#187;">
+    <!ENTITY laquo      "&#171;">
+    <!ENTITY bdquo      "&#8222;">
 
 ]><!--
 
@@ -72,10 +75,9 @@
 
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image. -->
 
-            <text.openQuote1>&ldquo;</text.openQuote1>                      <!-- First level open quotation mark -->
-            <text.openQuote2>&lsquo;</text.openQuote2>                      <!-- Second level open quotation mark -->
-            <text.closeQuote1>&rdquo;</text.closeQuote1>                    <!-- First level close quotation mark -->
-            <text.closeQuote2>&rsquo;</text.closeQuote2>                    <!-- Second level close quotation mark -->
+            <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
+            <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->
+
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
 
