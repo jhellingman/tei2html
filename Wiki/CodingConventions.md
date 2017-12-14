@@ -60,13 +60,14 @@ handled in a special way when processing the TEI file.
 | `p`                   | `figTop`               | The paragraph will be placed on the top-center of a figure. |
 | `p`                   | `figTopLeft`           | The paragraph will be placed on the top-left of a figure. |
 | `p`                   | `figTopRight`          | The paragraph will be placed on the top-right of a figure. |
-| `ref`                 | `endnoteref`           | The reference refers to an end foot-note. |
-| `ref`                 | `noteref`              | The reference refers to a foot-note (The generated foot-note number of the note referred to is used in the output). |
+| `ref`                 | `endnoteref`           | The reference refers to an end-note. |
+| `ref`                 | `noteref`              | The reference refers to a footnote (The generated footnote number of the note referred to is used in the output; this is intended to be used when a note reference marker is used multiple times to refer to the same footnote, not when referring to a footnote otherwise). |
 | `ref`                 | `pageref`              | The reference refers to a page (by number; the ref is supposed to only include the actual number referred to). |
 | `title`               | `pgshort`              | The title is a short title for Project Gutenberg purposes. |
 | `titlePart`           | `main`                 | The title part is the main title. |
 | `titlePart`           | `series`               | The title part is a series title. |
 | `titlePart`           | `sub`                  | The title part is a sub-title. |
+| `titlePart`           | `volume`               | The title part is a volume label (e.g. 'Volume II'). |
 
 
 | **TEI element**       | **`@place` value**     | **Notes**                  |
