@@ -327,7 +327,7 @@
                 <xsl:if test="@col + @cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logWarning('Column position not specified: using simple heuristic to determine borders.', ())"/>
+                <xsl:copy-of select="f:logWarning('Table {1}, Column position not specified: using simple heuristic to determine borders.', (f:generate-id(ancestor::table[1])))"/>
                 <xsl:if test="not(preceding-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
                 <xsl:if test="not(following-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
             </xsl:otherwise>

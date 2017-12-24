@@ -691,26 +691,32 @@
         <!-- prevent false positives for ellipses. -->
         <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
+        <xsl:variable name="space-after-opener-pattern" select="concat('[\[(', $open-quotation-marks, ']\s+')" as="xs:string"/>
+        <xsl:variable name="space-before-closer-pattern" select="concat('\s+[\])', $close-quotation-marks, ']')" as="xs:string"/>
+        <xsl:variable name="space-after-comma-pattern" select="concat(',[^\s&nbsp;&mdash;&hellip;', $close-quotation-marks, '0-9)\]]')" as="xs:string"/>
+        <xsl:variable name="space-after-period-pattern" select="concat('\.[^\s&nbsp;.,:;&mdash;', $close-quotation-marks, '0-9)\]]')" as="xs:string"/>
+        <xsl:variable name="space-after-punctuation-pattern" select="concat('[:;!?][^\s&mdash;&hellip;!', $close-quotation-marks, ')\]]')" as="xs:string"/>
+
         <!-- Handle common abbreviations -->
         <xsl:variable name="segment" select="f:handle-abbreviations($segment)"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[.,:;!?]',                                         'Warning', 'P01', 'Space before punctuation mark')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[)&rdquo;&rsquo;]',                                'Warning', 'P02', 'Space before closing punctuation mark')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[(&lsquo;&ldquo;&laquo;&bdquo;]\s+',                  'Warning', 'P03', 'Space after opening punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[.,:;!?]',                       'Warning', 'P01', 'Space before punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-before-closer-pattern,        'Warning', 'P02', 'Space before closing punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-opener-pattern,         'Warning', 'P03', 'Space after opening punctuation mark')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, ',[^\s&nbsp;&mdash;&rdquo;&raquo;&rsquo;&hellip;0-9)\]]', 'Warning', 'P04', 'Missing space after comma')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '\.[^\s&nbsp;.,:;&mdash;&rdquo;&raquo;&rsquo;0-9)\]]', 'Warning', 'P05', 'Missing space after period')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-comma-pattern,          'Warning', 'P04', 'Missing space after comma')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-period-pattern,         'Warning', 'P05', 'Missing space after period')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;&ndash;]-',                                   'Warning', 'P06', 'Em-dash or en-dash followed by dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;-]&ndash;',                                   'Warning', 'P07', 'Em-dash or dash followed by en-dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[&ndash;-]&mdash;',                                   'Warning', 'P08', 'En-dash or dash followed by em-dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '--',                                                  'Warning', 'P09', 'Two dashes should be en-dash')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '''',                                                  'Warning', 'P14', 'Straight single quote')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '&quot;',                                              'Warning', 'P15', 'Straight double quote')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                                   'Warning', 'P16', 'Hash-sign')"/>
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                                         'Warning', 'P17', 'Unhandled fraction')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;&ndash;]-',                 'Warning', 'P06', 'Em-dash or en-dash followed by dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;-]&ndash;',                 'Warning', 'P07', 'Em-dash or dash followed by en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&ndash;-]&mdash;',                 'Warning', 'P08', 'En-dash or dash followed by em-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '--',                                'Warning', 'P09', 'Two dashes should be en-dash')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '''',                                'Warning', 'P14', 'Straight single quote')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '&quot;',                            'Warning', 'P15', 'Straight double quote')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                 'Warning', 'P16', 'Hash-sign')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                       'Warning', 'P17', 'Unhandled fraction')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, '[:;!?][^\s&mdash;&rdquo;&raquo;&rsquo;&hellip;!)\]?]', 'Warning', 'P10', 'Missing space after punctuation mark')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-punctuation-pattern,    'Warning', 'P10', 'Missing space after punctuation mark')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="$segment"/>
@@ -794,6 +800,7 @@
     <xsl:variable name="opener" select="$pair-sequence[position() mod 2 = 1]"/>
     <xsl:variable name="closer" select="$pair-sequence[position() mod 2 = 0]"/>
     <xsl:variable name="open-quotation-marks" select="string-join(f:split-string(f:getSetting('text.quotes'))[position() mod 2 = 1], '')"/>
+    <xsl:variable name="close-quotation-marks" select="string-join(f:split-string(f:getSetting('text.quotes'))[position() mod 2 = 0], '')"/>
     <xsl:variable name="opener-string" select="string-join($opener, '')"/>
     <xsl:variable name="closer-string" select="string-join($closer, '')"/>
 
