@@ -66,7 +66,7 @@
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
         <xsl:call-template name="colophonMetadata"/>
-        <xsl:call-template name="catalogEntries"/>
+        <!-- <xsl:call-template name="catalogEntries"/> -->
 
         <xsl:if test="f:isValid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc)">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
@@ -115,6 +115,7 @@
 
             <xsl:call-template name="keywords"/>
             <xsl:call-template name="classification"/>
+            <xsl:call-template name="catalogReferences"/>
         </table>
     </xsl:template>
 
@@ -153,6 +154,27 @@
                     <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
                 </xsl:if>
             </td>
+        </tr>
+    </xsl:function>
+
+    <xsl:function name="f:metadata-line-as-url">
+        <xsl:param name="key" as="xs:string"/>
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="url" as="xs:string?"/>
+
+        <tr>
+            <td><b><xsl:value-of select="if ($key = '') then '' else concat($key, ':')"/></b></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="f:isValid($url)">
+                        <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$value"/></a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$value"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+            <td/>
         </tr>
     </xsl:function>
 
@@ -313,6 +335,49 @@
     </xsl:function>
 
 
+    <xsl:template name="catalogReferences">
+        <xsl:apply-templates select="//idno[@type = 'PGnum'][f:isValid(.)]" mode="catalogReferences"/>
+        <xsl:apply-templates select="//idno[@type != 'PGnum'][f:isValid(.)]" mode="catalogReferences">
+            <xsl:sort select="@type"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='PGnum']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgProjectGutenberg'), ., concat('https://www.gutenberg.org/ebooks/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='LCCN']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryOfCongress'), ., concat('https://lccn.loc.gov/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='VIAF']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., concat('http://viaf.org/viaf/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='OLN']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryBook'), ., concat('https://openlibrary.org/books/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='OLW']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryWork'), ., concat('https://openlibrary.org/works/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='OCLC']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOclcWorldCat'), ., concat('https://www.worldcat.org/oclc/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='LibThing']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryThing'), ., concat('https://www.librarything.com/work/', .))"/>
+    </xsl:template>
+
+    <xsl:template mode="catalogReferences" match="idno[@type='PGSrc']">
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgGitHub'), ., concat('https://github.com/GutenbergSource/', .))"/>
+    </xsl:template>
+
+    <!-- Ignore other types of idno's -->
+    <xsl:template mode="catalogReferences" match="idno"/>
+
+
     <!--====================================================================-->
     <!-- List of Corrections -->
 
@@ -321,7 +386,7 @@
         <xd:detail>
             <p>Generate a list of corrections made to the text, as indicated by <code>corr</code>-elements. Identical
             corrections are grouped together. The page numbers link back to the <code>corr</code>-element as it
-            appears in the text.</p>
+            appears in the text (except when there are too many).</p>
         </xd:detail>
     </xd:doc>
 
@@ -365,52 +430,89 @@
             <xsl:for-each-group select="$corrections/tmp:choice" group-by="concat(tmp:sic, '@@@', tmp:corr)">
                 <tr>
                     <td class="width20">
-                        <xsl:for-each select="current-group()">
-                            <xsl:if test="position() != 1">
-                                <xsl:text>, </xsl:text>
-                            </xsl:if>
-                            <a class="pageref" href="{@href}"><xsl:value-of select="@page"/></a>
-                        </xsl:for-each>
+                        <xsl:call-template name="correctionTablePageReferences"/>
                     </td>
-
                     <td class="width40 bottom">
-                        <xsl:choose>
-                            <xsl:when test="tmp:sic != ''">
-                                <xsl:apply-templates select="tmp:sic"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                [<i><xsl:value-of select="f:message('msgNotInSource')"/></i>]
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:call-template name="correctionTableSourceText"/>
                     </td>
-
                     <td class="width40 bottom">
-                        <xsl:choose>
-                            <xsl:when test="tmp:corr != ''">
-                                <xsl:apply-templates select="tmp:corr"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                [<i><xsl:value-of select="f:message('msgDeleted')"/></i>]
-                            </xsl:otherwise>
-                        </xsl:choose>
+                        <xsl:call-template name="correctionTableCorrectedText"/>
                     </td>
-
                     <xsl:if test="f:isSet('colophon.showEditDistance')">
                         <td class="bottom">
-                            <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
-                            <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))" as="xs:integer"/>
-                            <xsl:value-of select="$editDistance"/>
-                            <xsl:if test="$editDistance != $normalizedEditDistance">
-                                <xsl:text> / </xsl:text>
-                                <xsl:value-of select="$normalizedEditDistance"/>
-                            </xsl:if>
+                            <xsl:call-template name="correctionTableEditDistance"/>
                         </td>
                     </xsl:if>
-
                 </tr>
             </xsl:for-each-group>
-
         </table>
+    </xsl:template>
+
+
+    <xsl:template name="correctionTablePageReferences">
+        <xsl:choose>
+            <xsl:when test="count(current-group()) &gt; number(f:getSetting('colophon.maxCorrectionCount'))">
+
+                <xsl:variable name="params">
+                    <params>
+                        <param name="count"><xsl:value-of select="count(current-group())"/></param>
+                    </params>
+                </xsl:variable>
+
+                <i>
+                    <xsl:attribute name="title">
+                        <xsl:call-template name="FormatMessage">
+                            <xsl:with-param name="name" select="'msgCountOccurrences'"/>
+                            <xsl:with-param name="params" select="$params"/>
+                        </xsl:call-template>
+                    </xsl:attribute>
+                    <xsl:value-of select="f:message('msgPassim')"/>.
+                </i>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:for-each select="current-group()">
+                    <xsl:if test="position() != 1">
+                        <xsl:text>, </xsl:text>
+                    </xsl:if>
+                    <a class="pageref" href="{@href}"><xsl:value-of select="@page"/></a>
+                </xsl:for-each>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="correctionTableSourceText">
+        <xsl:choose>
+            <xsl:when test="tmp:sic != ''">
+                <xsl:apply-templates select="tmp:sic"/>
+            </xsl:when>
+            <xsl:otherwise>
+                [<i><xsl:value-of select="f:message('msgNotInSource')"/></i>]
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="correctionTableCorrectedText">
+        <xsl:choose>
+            <xsl:when test="tmp:corr != ''">
+                <xsl:apply-templates select="tmp:corr"/>
+            </xsl:when>
+            <xsl:otherwise>
+                [<i><xsl:value-of select="f:message('msgDeleted')"/></i>]
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="correctionTableEditDistance">
+        <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
+        <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))" as="xs:integer"/>
+        <xsl:value-of select="$editDistance"/>
+        <xsl:if test="$editDistance != $normalizedEditDistance">
+            <xsl:text> / </xsl:text>
+            <xsl:value-of select="$normalizedEditDistance"/>
+        </xsl:if>
     </xsl:template>
 
 

@@ -38,11 +38,22 @@
 
         -->
 
+        <msg:message name="msgPassim">Passim</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
         <msg:message name="msgExpansion">Expansion</msg:message>
         <msg:message name="msgExpansionNotAvailable">Expansion not available</msg:message>
         <msg:message name="msgLinkToInternetArchive">Link to the Internet Archive</msg:message>
+
+        <msg:message name="msgProjectGutenberg">Project Gutenberg</msg:message>
+        <msg:message name="msgLibraryOfCongress">Library of Congress</msg:message>
+        <msg:message name="msgLibraryThing">LibraryThing</msg:message>
+        <msg:message name="msgViaf">Virtual International Authority File</msg:message>
+        <msg:message name="msgOpenLibraryBook">Open Library (Book)</msg:message>
+        <msg:message name="msgOpenLibraryWork">Open Library (Work)</msg:message>
+        <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
+        <msg:message name="msgGitHub">GitHub</msg:message>
 
         <msg:message name="msgTitle">Title</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -735,8 +746,8 @@
 
     <msg:messages xml:lang="de">
 
-	    <msg:message name="msgLinkToBible">Link zu zitierte Stelle in Bibel</msg:message>
-	    <msg:message name="msgEditDistance">Edit-Distanz</msg:message>
+        <msg:message name="msgLinkToBible">Link zu zitierte Stelle in Bibel</msg:message>
+        <msg:message name="msgEditDistance">Edit-Distanz</msg:message>
         <msg:message name="msgAbbreviationOverview">Übersicht der Abkürzungen im Text.</msg:message>
         <msg:message name="msgExpansion">Ersetzung</msg:message>
         <msg:message name="msgExpansionNotAvailable">Ersetzung nicht verfügbar</msg:message>
@@ -950,6 +961,11 @@
 
     <msg:messages xml:lang="nl">
 
+        <msg:message name="msgPassim">Passim</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count"/> gevallen</msg:message>
+        <msg:message name="msgOpenLibraryBook">Open Library (Boek)</msg:message>
+        <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
+		
         <msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
         <msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
 
@@ -957,7 +973,7 @@
         <msg:message name="msgAbbreviationOverview">Overzicht van gebruikte afkortingen.</msg:message>
         <msg:message name="msgExpansion">Uitgeschreven</msg:message>
         <msg:message name="msgExpansionNotAvailable">Uitgeschreven vorm niet beschikbaar</msg:message>
-		<msg:message name="msgReturnToSourceLocation">Terug naar plaats in bron</msg:message>
+        <msg:message name="msgReturnToSourceLocation">Terug naar plaats in bron</msg:message>
 
         <msg:message name="msgTitle">Titel</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -974,7 +990,7 @@
         <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
         <msg:message name="msgOriginalSpine">Originele Rug</msg:message>
-		
+        
         <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
         <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
         <msg:message name="msgAuthorOfPostface">Auteur van naschrift</msg:message>
