@@ -65,8 +65,7 @@ p.tb, hr.tb, .par.tb {
  text-align: center;
 }
 
-p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument
- {
+p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
  font-size: 0.9em;
  line-height: 1.2em;
  text-indent: 0;
@@ -253,7 +252,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden {
+.pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
  text-decoration: none;
 }
 
@@ -909,8 +908,7 @@ p.byline {
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum,
- .stage {
+.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum, .stage {
  color: #001FA4;
 }
 
