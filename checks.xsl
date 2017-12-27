@@ -171,6 +171,9 @@
     color: #D8000C;
     background-color: #FFD2D2;
 }
+.trivial {
+    color: gray;
+}
                 </style>
             </head>
             <body>
@@ -199,7 +202,8 @@
             <xsl:choose>
                 <xsl:when test="$issue/@level = 'Info'">1</xsl:when>
                 <xsl:when test="$issue/@level = 'Error'">2</xsl:when>
-                <xsl:otherwise>3</xsl:otherwise>
+                <xsl:when test="$issue/@level = 'Warning'">3</xsl:when>
+                <xsl:otherwise>4</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
@@ -270,7 +274,7 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:template mode="checks" match="titleStmt/respStmt/name[not(@ref)]" priority="2">
+    <xsl:template mode="checks" match="titleStmt/respStmt[resp != 'Transcription']/name[not(@ref)]" priority="2">
         <i:issue pos="{@pos}" code="H08" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">No @ref attribute present for name <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
@@ -600,7 +604,7 @@
             <xsl:when test="name($first) = 'div2' and not($first/@type=('Section', 'Appendix'))"/>
 
             <xsl:when test="not($first/@n)">
-                <i:issue pos="{$first/@pos}" code="N01" target="{f:generate-id($first)}" level="Warning" element="{name($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
+                <i:issue pos="{$first/@pos}" code="N01" target="{f:generate-id($first)}" level="Trivial" element="{name($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
             </xsl:when>
 
             <xsl:when test="not(f:is-number($first/@n) or f:is-roman($first/@n))">

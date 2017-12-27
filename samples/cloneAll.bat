@@ -12,6 +12,7 @@ git clone https://github.com/GutenbergSource/44086-Allan-Het-eiland-Wieringen.gi
 git clone https://github.com/GutenbergSource/55539-Allen-Korean-Tales.git
 git clone https://github.com/GutenbergSource/17080-Alphen-Proeve-van-kleine-gedigten.git
 git clone https://github.com/GutenbergSource/30892-Alvarez-y-Tejero-De-las-Islas-Filipinas.git
+git clone https://github.com/GutenbergSource/12370-Dihlavi-Bagh-O-Bahar.git
 git clone https://github.com/GutenbergSource/25580-Andersen-Andersens-Sproken-en-Vertellingen.git
 git clone https://github.com/GutenbergSource/53506-Anderson-Kachari-Folk-Tales.git
 git clone https://github.com/GutenbergSource/20391-Andriessen-De-Prins-en-Johan-de-Witt.git
@@ -22,7 +23,9 @@ git clone https://github.com/GutenbergSource/50715-De-Tribus-Impostoribus.git
 git clone https://github.com/GutenbergSource/16119-Wolf-Doctrina-Christiana-The-first-book-printed-in-the-Philippines-Manila-1593.git
 git clone https://github.com/GutenbergSource/50675-Anoniem-Geschiedenis-van-een-Neger.git
 git clone https://github.com/GutenbergSource/52075-Anoniem-Historie-van-het-huis-van-Adriaan.git
+git clone https://github.com/GutenbergSource/37828-Aristofanes-De-Ridders.git
 git clone https://github.com/GutenbergSource/51763-Asbjornsen-Noorsche-Volksvertellingen.git
+git clone https://github.com/GutenbergSource/25946-Austen-Gevoel-en-Verstand.git
 git clone https://github.com/GutenbergSource/51002-Pang-Yuk-Korean-Folk-Tales.git
 git clone https://github.com/GutenbergSource/52596-Baudis-Czech-Folk-Tales.git
 git clone https://github.com/GutenbergSource/54412-Been-Maerten-Harpertszoon-Tromp.git
@@ -38,6 +41,11 @@ git clone https://github.com/GutenbergSource/54652-Campbell-History-of-Gujarat.g
 git clone https://github.com/GutenbergSource/52479-Carelsen-Natuurfantazieen.git
 git clone https://github.com/GutenbergSource/55387-Carpenter-One-Hundred-Proofs.git
 git clone https://github.com/GutenbergSource/50189-Clifford-The-Scientific-Basis-of-Morals.git
+git clone https://github.com/GutenbergSource/29371-Collard-De-handel-in-blanke-slavinnen.git
+git clone https://github.com/GutenbergSource/28580-Conger-An-Ohio-Woman-in-the-Philippines.git
+git clone https://github.com/GutenbergSource/40686-Conway-Demonology-and-Devil-lore.git
+git clone https://github.com/GutenbergSource/40686-Conway-Demonology-and-Devil-lore.git
+git clone https://github.com/GutenbergSource/41115-Conway-Solomon-and-Solomonic-Literature.git
 git clone https://github.com/GutenbergSource/55575-Conybeare-The-Historical-Christ.git
 git clone https://github.com/GutenbergSource/29814-Couperus-De-Komedianten.git
 git clone https://github.com/GutenbergSource/29837-Couperus-De-verliefde-ezel.git
@@ -165,6 +173,7 @@ git clone https://github.com/GutenbergSource/55521-Stein-Albrecht-Duerer.git
 git clone https://github.com/GutenbergSource/53493-Steiner-Philosophie-der-Freiheit.git
 git clone https://github.com/GutenbergSource/53592-Steiner-Friedrich-Nietzsche.git
 git clone https://github.com/GutenbergSource/53569-Steiner-Goethes-Weltanschauung.git
+git clone https://github.com/GutenbergSource/56157-Stewart-Nether-Lochaber.git
 git clone https://github.com/GutenbergSource/41503-Beecher-Stowe-De-slavernij.git
 git clone https://github.com/GutenbergSource/27124-Beecher-Stowe-De-Negerhut.git
 git clone https://github.com/GutenbergSource/37442-Swift-Gullivers-Reizen.git
