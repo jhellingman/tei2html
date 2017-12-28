@@ -12,6 +12,7 @@ use Date::Format;
 use File::Basename;
 use File::stat;
 use File::Temp;
+use File::chdir;
 use Getopt::Long;
 use XML::XPath;
 
@@ -20,12 +21,14 @@ use open ':utf8';
 
 my $force = 0;          # Force generation of XML files, even if up-to-date.
 my $makeHtml = 0;       # Generate HTML files.
-my $makeChecks = 0;     
+my $makeChecks = 0;
+my $download = 0;       # Download posted files from Project Gutenberg.
 
 GetOptions(
     'f' => \$force,
     'v' => \$makeChecks,
-    'h' => \$makeHtml);
+    'h' => \$makeHtml,
+    'd' => \$download);
 
 my $totalFiles = 0;
 my $totalPages = 0;
@@ -246,6 +249,10 @@ sub handleTeiFile($) {
                 print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
                 print XMLFILE "    <pgsource>$pgSrc</pgsource>\n";
 
+                if ($download == 1 && isValid($pgNum->string_value())) {
+                    downloadFromPG($pgNum, $filePath);
+                }
+
                 my $repo = $pgSrc->string_value();
                 if (isValid($repo)) {
                     print GITFILE "git clone https://github.com/GutenbergSource/$pgSrc.git\n";
@@ -325,6 +332,36 @@ sub handleTeiFile($) {
     }
 
     print XMLFILE "  </book>\n";
+}
+
+
+sub downloadFromPG($$) {
+    my $pgNum = shift;
+    my $path = shift;
+
+    # Construct destination path:
+    my $destinationPath = $path . "\\Processed";
+
+    my $textFile = $pgNum . ".txt";
+    my $text8File = $pgNum . "-8.txt";
+    my $htmlFile = $pgNum . "-h.htm";
+
+    my $textUrl = "http://www.gutenberg.org/files/" . $pgNum . "/" . $textFile;
+    my $text8Url = "http://www.gutenberg.org/files/" . $pgNum . "/" . $text8File;
+    my $htmlUrl = "http://www.gutenberg.org/files/" . $pgNum . "/" . $pgNum . "-h/" . $htmlFile;
+
+    {
+        local $CWD = $destinationPath;
+        if (!-e $textFile) {
+            system ("wget $textUrl");
+        }
+        if (!-e $text8File) {
+            system ("wget $text8Url");
+        }
+        if (!-e $htmlFile) {
+            system ("wget $htmlUrl");
+        }
+    }
 }
 
 
