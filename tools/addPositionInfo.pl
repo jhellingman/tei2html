@@ -15,18 +15,19 @@ while (<INPUTFILE>) {
     $lineNumber++;
     my $column = 0;
 
-    while ($remainder =~ m/<([a-z][a-z0-9.:_-]*)(.*?)>/i) {
+    while ($remainder =~ m/<([a-z][a-z0-9.:_-]*)(.*?)(\/?)>/i) {
         my $before = $`;
         my $tag = $1;
         my $attrs = $2;
+        my $slash = $3;
         $remainder = $';
         $column += length "$before";
 
         $attrs = "$attrs pos='$lineNumber:$column'";
-        print "$before<$tag$attrs>";
+        print "$before<$tag$attrs$slash>";
 
         # Do not count length of added POS attribute, as it is not in the source.
-        $column += length "<$tag$attrs>";
+        $column += length "<$tag$attrs$slash>";
     }
     print $remainder;
 }

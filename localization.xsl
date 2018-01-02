@@ -27,10 +27,10 @@
 
     <xd:doc>
         <xd:short>Localization language.</xd:short>
-        <xd:detail>The language and specific locale to use, e.g. 'de-AT'.</xd:detail>
+        <xd:detail>The language and specific locale to use, e.g. 'en-US'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="language" select="/TEI.2/@lang | /*:TEI/@xml:lang" as="xs:string"/>
+    <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else 'en-US'" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Localization base-language.</xd:short>

@@ -676,13 +676,15 @@
 
         <!-- @id of language not being used in the text -->
         <xsl:for-each select="//language">
-            <xsl:variable name="id" select="@id" as="xs:string"/>
-            <xsl:if test="not(//*[@lang=$id])">
-                <i:issue
-                    pos="{./@pos}"
-                    code="I04" target="{f:generate-id(.)}"
-                    level="Warning"
-                    element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
+            <xsl:if test="@id">
+                <xsl:variable name="id" select="@id" as="xs:string"/>
+                <xsl:if test="not(//*[@lang=$id])">
+                    <i:issue
+                        pos="{./@pos}"
+                        code="I04" target="{f:generate-id(.)}"
+                        level="Warning"
+                        element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
+                </xsl:if>
             </xsl:if>
         </xsl:for-each>
 

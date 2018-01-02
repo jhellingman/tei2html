@@ -161,10 +161,16 @@ sub processFile($) {
     my $basename = $1;
     my $version  = $3;
 
+    if ($basename eq '') {
+        $filename =~ /^(.+)\.(tei|xml)$/;
+        $basename = $1;
+        $version = "0.0";
+    }
+
     if ($version >= 1.0) {
         $makeText = 0;
     } else {
-        $runChecks  = 1;
+       $runChecks = 1;
     }
 
     print "Processing TEI-file '$basename' version $version\n";
