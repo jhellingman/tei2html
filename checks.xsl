@@ -249,7 +249,7 @@
         <i:issue pos="{@pos}" code="H02" target="{f:generate-id(.)}" level="Error" element="{name(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
     </xsl:template>
 
-    <xsl:template mode="checks" match="titleStmt/author[not(@key)]" priority="1">
+    <xsl:template mode="checks" match="titleStmt/author[not(@key) and . != 'Anonymous']" priority="1">
         <i:issue pos="{@pos}" code="H03" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">No @key attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
@@ -264,7 +264,7 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:template mode="checks" match="titleStmt/author[not(@ref)]" priority="2">
+    <xsl:template mode="checks" match="titleStmt/author[not(@ref) and . != 'Anonymous']" priority="2">
         <i:issue pos="{@pos}" code="H06" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">No @ref attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>

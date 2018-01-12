@@ -382,7 +382,7 @@
         <msg:message name="sa">Sanskrit</msg:message>
         <msg:message name="sa-latn">Sanskrit (Latin transcription)</msg:message>
         <msg:message name="sd">Sindhi</msg:message>
-        <msg:message name="sg">Sangro</msg:message>
+        <msg:message name="sg">Sango</msg:message>
         <msg:message name="sh">Serbo-Croatian</msg:message>
         <msg:message name="si">Singhalese</msg:message>
         <msg:message name="si-latn">Singhalese (Latin transcription)</msg:message>
@@ -395,12 +395,12 @@
         <msg:message name="sr">Serbian</msg:message>
         <msg:message name="ss">Siswati</msg:message>
         <msg:message name="st">Sesotho</msg:message>
-        <msg:message name="su">Sudanese</msg:message>
+        <msg:message name="su">Sundanese</msg:message>
         <msg:message name="sv">Swedish</msg:message>
         <msg:message name="sw">Swahili</msg:message>
         <msg:message name="ta">Tamil</msg:message>
         <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
-        <msg:message name="te">Tegulu</msg:message>
+        <msg:message name="te">Telugu</msg:message>
         <msg:message name="tg">Tajik</msg:message>
         <msg:message name="th">Thai</msg:message>
         <msg:message name="ti">Tigrinya</msg:message>
@@ -684,7 +684,7 @@
         <msg:message name="fmtFullDate"><msg:param name="day"/> <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
-        <!-- Language designations: ID's are based on the offical ISO codes -->
+        <!-- Language designations: ID's are based on the official ISO codes -->
 
         <!-- ISO 639 two letter codes -->
         <msg:message name="de">Allemand</msg:message>
@@ -965,7 +965,18 @@
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> gevallen</msg:message>
         <msg:message name="msgOpenLibraryBook">Open Library (Boek)</msg:message>
         <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
-		
+
+        <msg:message name="msgLinkToInternetArchive">Link naar het Internet Archive</msg:message>
+        <msg:message name="msgVirtualInternationalAuthorityFile">Gerelateerde ingang in het Virtual International Authority File</msg:message>
+        <msg:message name="msgProjectGutenberg">Project Gutenberg</msg:message>
+        <msg:message name="msgLibraryOfCongress">Library of Congress</msg:message>
+        <msg:message name="msgLibraryThing">LibraryThing</msg:message>
+        <msg:message name="msgViaf">Virtual International Authority File</msg:message>
+        <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
+        <msg:message name="msgGitHub">GitHub</msg:message>
+
+
+
         <msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
         <msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
 
@@ -990,7 +1001,7 @@
         <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
         <msg:message name="msgOriginalSpine">Originele Rug</msg:message>
-        
+
         <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
         <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
         <msg:message name="msgAuthorOfPostface">Auteur van naschrift</msg:message>
@@ -1177,11 +1188,36 @@
 
         <msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
-        <!-- Language designations: ID's are based on the offical ISO codes -->
+        <!-- Language designations: ID's are based on the official ISO codes -->
 
+        <msg:message name="aa">Afar</msg:message>
+        <msg:message name="ab">Abchazisch</msg:message>
+        <msg:message name="af">Afrikaans</msg:message>
+        <msg:message name="am">Amhaars</msg:message>
         <msg:message name="ar">Arabisch</msg:message>
         <msg:message name="ar-latn">Arabisch (Latijnse transcriptie)</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
+        <msg:message name="as">Assamees</msg:message>
+        <msg:message name="ay">Aymara</msg:message>
+        <msg:message name="az">Azerbeidzjaans</msg:message>
+        <msg:message name="ba">Basjkiers</msg:message>
+        <msg:message name="be">Wit-Russisch</msg:message>
+        <msg:message name="bg">Bulgaars</msg:message>
+        <msg:message name="bh">Bihari</msg:message>
+        <msg:message name="bi">Bislama</msg:message>
+        <msg:message name="bn">Bengaals</msg:message>
+        <msg:message name="bo">Tibetaans</msg:message>
+        <msg:message name="br">Bretons</msg:message>
+        <msg:message name="ca">Catalaans</msg:message>
+        <msg:message name="co">Corsicaans</msg:message>
+        <msg:message name="cs">Tsjechisch</msg:message>
+        <msg:message name="cy">Welsh</msg:message>
+        <msg:message name="da">Deens</msg:message>
+        <msg:message name="dz">Dzongkha</msg:message>
+        <msg:message name="eo">Esperanto</msg:message>
+        <msg:message name="et">Estisch</msg:message>
+        <msg:message name="eu">Baskisch</msg:message>
+        <msg:message name="fa">Perzisch</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="el">Grieks</msg:message>
         <msg:message name="el-latn">Grieks (Latijnse transcriptie)</msg:message>
@@ -1191,7 +1227,37 @@
         <msg:message name="es">Spaans</msg:message>
         <msg:message name="es-es">Spaans (Spanje)</msg:message>
         <msg:message name="fi">Fins</msg:message>
+        <msg:message name="fj">Fiji</msg:message>
+        <msg:message name="fo">Faeröers</msg:message>
         <msg:message name="fr">Frans</msg:message>
+        <msg:message name="fy">Fries</msg:message>
+        <msg:message name="ga">Iers</msg:message>
+        <msg:message name="gd">Schots-Gaelisch</msg:message>
+        <msg:message name="gl">Galicisch</msg:message>
+        <msg:message name="gn">Guaraní</msg:message>
+        <msg:message name="gu">Gujarati</msg:message>
+        <msg:message name="ha">Hausa</msg:message>
+        <msg:message name="hi">Hindi</msg:message>
+        <msg:message name="hr">Kroatisch</msg:message>
+        <msg:message name="hu">Hongaars</msg:message>
+        <msg:message name="hy">Armeneens</msg:message>
+        <msg:message name="ia">Interlingua</msg:message>
+        <msg:message name="ie">Interlingue</msg:message>
+        <msg:message name="ik">Inupiak</msg:message>
+        <msg:message name="in">Indonesisch</msg:message>
+        <msg:message name="is">IJslands</msg:message>
+        <msg:message name="iw">Ivriet</msg:message>
+        <msg:message name="ji">Jiddisch</msg:message>
+        <msg:message name="jw">Javaans</msg:message>
+        <msg:message name="ka">Georgisch</msg:message>
+        <msg:message name="kk">Kazachs</msg:message>
+        <msg:message name="kl">Groenlands</msg:message>
+        <msg:message name="km">Cambodjaans</msg:message>
+        <msg:message name="kn">Kannada</msg:message>
+        <msg:message name="ko">Koreaans</msg:message>
+        <msg:message name="ks">Kasjmiri</msg:message>
+        <msg:message name="ku">Koerdisch</msg:message>
+        <msg:message name="ky">Kirgizisch</msg:message>
         <msg:message name="grc">Grieks (Klassiek)</msg:message>
         <msg:message name="grc-latn">Grieks (Klassiek; Latijnse transcriptie)</msg:message>
         <msg:message name="he">Hebreeuws</msg:message>
@@ -1200,21 +1266,97 @@
         <msg:message name="ja">Japans</msg:message>
         <msg:message name="la">Latijn</msg:message>
         <msg:message name="la-x-bio">Latijn (Biologische naamgeving)</msg:message>
+        <msg:message name="ln">Lingala</msg:message>
+        <msg:message name="lo">Laotiaans</msg:message>
+        <msg:message name="lt">Litouws</msg:message>
+        <msg:message name="lv">Lets</msg:message>
+        <msg:message name="mg">Malagasi</msg:message>
+        <msg:message name="mi">Maori</msg:message>
+        <msg:message name="mk">Macedonisch</msg:message>
+        <msg:message name="ml">Malayalam</msg:message>
+        <msg:message name="mn">Mongools</msg:message>
+        <msg:message name="mo">Moldavisch</msg:message>
+        <msg:message name="mr">Marathi</msg:message>
         <msg:message name="ms">Maleis</msg:message>
+        <msg:message name="mt">Maltees</msg:message>
+        <msg:message name="my">Birmaans</msg:message>
+        <msg:message name="na">Nauruaans</msg:message>
+        <msg:message name="ne">Nepalees</msg:message>
         <msg:message name="nl">Nederlands</msg:message>
         <msg:message name="nl-1800">Nederlands (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Nederlands (Spelling De Vries-Te Winkel)</msg:message>
+        <msg:message name="no">Noors</msg:message>
+        <msg:message name="oc">Occitaans</msg:message>
+        <msg:message name="om">Oromo</msg:message>
+        <msg:message name="or">Oriya</msg:message>
+        <msg:message name="pa">Punjabi</msg:message>
+        <msg:message name="pl">Pools</msg:message>
+        <msg:message name="ps">Pasjtoe</msg:message>
         <msg:message name="pt">Portugees</msg:message>
         <msg:message name="pt-br">Portugees (Brazilië)</msg:message>
         <msg:message name="pt-pt">Portugees (Portugal)</msg:message>
+        <msg:message name="qu">Quechua</msg:message>
+        <msg:message name="rm">Reto-Romaans</msg:message>
+        <msg:message name="rn">Kirundi</msg:message>
+        <msg:message name="ro">Roemeens</msg:message>
         <msg:message name="ru">Russisch</msg:message>
         <msg:message name="ru-1900">Russisch (Oude Spelling)</msg:message>
         <msg:message name="ru-latn">Russisch (Latijnse transcriptie)</msg:message>
+        <msg:message name="rw">Kinyarwanda</msg:message>
         <msg:message name="sa">Sanskriet</msg:message>
         <msg:message name="sa-latn">Sanskriet (Latijnse transcriptie)</msg:message>
+        <msg:message name="sd">Sindhi</msg:message>
+        <msg:message name="sg">Sango</msg:message>
+        <msg:message name="sh">Servo-Kroatisch</msg:message>
+        <msg:message name="si">Singalees</msg:message>
+        <msg:message name="si-latn">Singalees (Latijnse transcriptie)</msg:message>
+        <msg:message name="sk">Slowaaks</msg:message>
+        <msg:message xml:lang="nl-be" name="sk">Slovaaks</msg:message>
+        <msg:message name="sl">Sloveens</msg:message>
+        <msg:message name="sm">Samoaans</msg:message>
+        <msg:message name="sn">Shona</msg:message>
+        <msg:message name="so">Somalisch</msg:message>
+        <msg:message name="sq">Albanees</msg:message>
+        <msg:message name="sr">Servisch</msg:message>
+        <msg:message name="ss">Swazi</msg:message>
+        <msg:message name="st">Zuid-Sotho</msg:message>
+        <msg:message name="su">Soendanees</msg:message>
+        <msg:message name="sv">Zweeds</msg:message>
+        <msg:message name="sw">Swahili</msg:message>
+        <msg:message name="ta">Tamil</msg:message>
+        <msg:message name="ta-latn">Tamil (Latijnse transcriptie)</msg:message>
+        <msg:message name="te">Telugu</msg:message>
+        <msg:message name="tg">Tadzjieks</msg:message>
+        <msg:message name="th">Thai</msg:message>
+        <msg:message name="ti">Tigrinya</msg:message>
+        <msg:message name="tk">Turkmeens</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
+        <msg:message name="tn">Tswana</msg:message>
+        <msg:message name="to">Tongaans</msg:message>
+        <msg:message name="tr">Turks</msg:message>
+        <msg:message name="ts">Tsonga</msg:message>
+        <msg:message name="tt">Tataars</msg:message>
+        <msg:message name="tw">Twi</msg:message>
+        <msg:message name="uk">Oekraïens</msg:message>
         <msg:message name="ur">Urdu</msg:message>
+        <msg:message name="uz">Oezbeeks</msg:message>
+        <msg:message name="vi">Vietnamees</msg:message>
+        <msg:message name="vo">Volapük</msg:message>
+        <msg:message name="wo">Wolof</msg:message>
+        <msg:message name="xh">Xhosa</msg:message>
+        <msg:message name="yo">Yoruba</msg:message>
         <msg:message name="zh">Chinees</msg:message>
+        <msg:message name="zu">Zoeloe</msg:message>
+        <msg:message name="bik">Bicol</msg:message>
+        <msg:message name="crb">Chavacano</msg:message>
+        <msg:message name="hil">Hiligaynon</msg:message>
+        <msg:message name="ilo">Ilokano</msg:message>
+        <msg:message name="kha">Khasi</msg:message>
+        <msg:message name="pag">Pangasinan</msg:message>
+        <msg:message name="pam">Pampanga</msg:message>
+        <msg:message name="war">Waray-Waray</msg:message>
+
+
 
         <!-- Creating a list of items -->
         <msg:message name="msgAnd">en</msg:message>
@@ -1229,9 +1371,11 @@
 
         <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit boek download.</msg:message>
 
+        <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op http://www.pgdp.net.</msg:message>
+
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopieeren, weggeven of hergebruiken onder de voorwaarden van de Project Gutenberg Licentie <a href="#pglicense">achterin dit eBoek</a> (Engelstalig) of on-line op <a href='http://www.gutenberg.org/'>www.gutenberg.org</a></p>
+            <p class="smallprint">Dit eBoek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopi&#x00EB;ren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eBoek (Engelstalig) of on-line op <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eBoek gebruikt.</p>
             <p class="smallprint">Titel:  <msg:param name="title"/>.</p>
             <p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
             <p class="smallprint">Publicatiedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
@@ -1241,11 +1385,16 @@
 
         <msg:message name="msgPGFooter">
             <p name="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dit bestand moet <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip heten.</p>
-            <p class="smallprint">Dit en de bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
+            <p class="smallprint">Dit bestand zou <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip moeten heten.</p>
+            <p class="smallprint">Dit en alle bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
             <p class="smallprint">http://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Geproduceerd door <msg:param name="transcriber"/>.</p>
-            <p class="smallprint">Omdat we werken produceren van gedrukte edities in het publiek domein, betekent dat dat niemand in de Verenigde Staten een auteursrecht op deze werken heeft. De Stichting (en u!) mag deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopi&#x00EB;ren en verspreiden in de Verenigde Staten. Speciale regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopi&#x00EB;ren en verspreiden van Project Gutenberg&tm; electronische werken om het PROJECT GUTENBERG&tm; concept en merkrecht te beschermen. Project Gutenberg is een geregistreerd merk, en mag niet worden gebruikt als u geld in rekening brent voor kopie&#x00EB;n van dit eBoek. Als u geen geld voor kopi&#x00EB;en van dit eBoek in rekening brengt, dan is het erg makkelijk u aan deze regels te houden. U mag dit eBoek gebruiken voor bijna elke toepassing, zoals het maken van afgeleide werken, voorstellingen, en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;U mag practisch ALLES doen met eBoeken in het publieke domein. Herdistributie, en in het bijzonder commerci&#x00EB;le herdistributie, is onderworpen aan de licentie op het merk. De volledige licentie is om juridische redenen niet vertaald, en volgt hieronder in het Engels.</p>
+
+            <p class="smallprint">Aangepaste versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
+
+            <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en u!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopi&#x00EB;ren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopi&#x00EB;ren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag niet worden gebruikt tenzij u hiervoor specifiek toestemming heeft gekregen. Als u niets rekent voor kopie&#x00EB;n van dit eBoek, dan is het zeer eenvoudig u aan deze regels te houden. U mag dit eBoek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;U mag vrijwel ALLES doen met eBoeken in het publiek domein. Verspreiding, en in het bijzonder commerci&#x00EB;le verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
+
+            <p class="smallprint">De volledige licentie is om juridische redenen niet vertaald en volgt hieronder in het Engels.</p>
         </msg:message>
 
     </msg:messages>
