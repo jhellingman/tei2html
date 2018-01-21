@@ -200,10 +200,10 @@
 
             <xsl:choose>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '{'">
-                    <xsl:call-template name="cell-with-left-brace"/>
+                    <xsl:copy-of select="f:outputImage(concat('images/lbrace', @rows, '.png'), '{')"/>
                 </xsl:when>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
-                    <xsl:call-template name="cell-with-right-brace"/>
+                    <xsl:copy-of select="f:outputImage(concat('images/rbrace', @rows, '.png'), '}')"/>
                 </xsl:when>
                 <xsl:when test="@role='sum'">
                     <span class="sum">
@@ -215,21 +215,6 @@
                 </xsl:otherwise>
             </xsl:choose>
         </td>
-    </xsl:template>
-
-
-    <xsl:template name="cell-with-left-brace">
-        <xsl:call-template name="insertimage2">
-            <xsl:with-param name="alt" select="''"/>
-            <xsl:with-param name="filename" select="concat('images/lbrace', @rows, '.png')"/>
-        </xsl:call-template>
-    </xsl:template>
-
-    <xsl:template name="cell-with-right-brace">
-        <xsl:call-template name="insertimage2">
-            <xsl:with-param name="alt" select="''"/>
-            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
-        </xsl:call-template>
     </xsl:template>
 
 
@@ -283,11 +268,8 @@
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
-            <xsl:call-template name="insertimage2">
-                <xsl:with-param name="alt" select="''"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'image'), '')"/>
         </xsl:if>
-
     </xsl:template>
 
 

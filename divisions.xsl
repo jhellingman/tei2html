@@ -414,21 +414,14 @@
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <div class="figure">
                 <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
-                <xsl:call-template name="insertimage2">
-                    <xsl:with-param name="alt">
+                <xsl:variable name="alt">
                     <xsl:choose>
-                        <xsl:when test="f:has-rend-value(@rend, 'image-alt')">
-                            <xsl:value-of select="f:rend-value(@rend, 'image-alt')"/>
-                        </xsl:when>
-                        <xsl:when test=". != ''">
-                            <xsl:value-of select="."/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="f:message('msgOrnament')"/>
-                        </xsl:otherwise>
+                        <xsl:when test="f:has-rend-value(@rend, 'image-alt')"><xsl:value-of select="f:rend-value(@rend, 'image-alt')"/></xsl:when>
+                        <xsl:when test=". != ''"><xsl:value-of select="."/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="f:message('msgOrnament')"/></xsl:otherwise>
                     </xsl:choose>
-                    </xsl:with-param>
-                </xsl:call-template>
+                </xsl:variable>
+                <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'image'), $alt)"/>
             </div>
         </xsl:if>
         <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">

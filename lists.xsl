@@ -233,11 +233,7 @@
                             </xsl:if>
                             <xsl:if test="$contentBefore or $this/@rend='braceBefore'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:call-template name="insertimage2">
-                                        <xsl:with-param name="alt" select="'{'"/>
-                                        <xsl:with-param name="format" select="'.png'"/>
-                                        <xsl:with-param name="filename" select="concat('images/lbrace', $count, '.png')"/>
-                                    </xsl:call-template>
+                                    <xsl:copy-of select="f:outputImage(concat('images/lbrace', $count, '.png'), '{')"/>
                                 </td>
                             </xsl:if>
                         </xsl:if>
@@ -245,11 +241,7 @@
                         <xsl:if test="position() = 1">
                             <xsl:if test="$contentAfter or $this/@rend='braceAfter'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:call-template name="insertimage2">
-                                        <xsl:with-param name="alt" select="'}'"/>
-                                        <xsl:with-param name="format" select="'.png'"/>
-                                        <xsl:with-param name="filename" select="concat('images/rbrace', $count, '.png')"/>
-                                    </xsl:call-template>
+                                    <xsl:copy-of select="f:outputImage(concat('images/rbrace', $count, '.png'), '}')"/>
                                 </td>
                             </xsl:if>
                             <xsl:if test="$contentAfter">

@@ -355,11 +355,7 @@
                         <td><xsl:apply-templates select="." mode="castGroupTable"/></td>
                         <xsl:if test="position() = 1">
                             <td rowspan="{$count}" class="castGroupBrace">
-                                <xsl:call-template name="insertimage2">
-                                    <xsl:with-param name="alt" select="'}'"/>
-                                    <xsl:with-param name="format" select="'.png'"/>
-                                    <xsl:with-param name="filename" select="concat('images/rbrace', $count, '.png')"/>
-                                </xsl:call-template>
+                                <xsl:copy-of select="f:outputImage(concat('images/rbrace', $count, '.png'), '}')"/>
                             </td>
                             <td rowspan="{$count}"><xsl:apply-templates select="$this/head" mode="castGroupTable"/></td>
                         </xsl:if>

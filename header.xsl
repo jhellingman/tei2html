@@ -105,7 +105,7 @@
 
         <!-- Link to cover page -->
         <xsl:if test="//figure[@id='cover-image']">
-            <link rel="coverpage" href="{f:getimagefilename(//figure[@id='cover-image'][1], '.jpg')}"/>
+            <link rel="coverpage" href="{f:determine-image-filename(//figure[@id='cover-image'][1], '.jpg')}"/>
         </xsl:if>
 
         <!-- Insert Dublin Core metadata -->

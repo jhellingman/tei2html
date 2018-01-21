@@ -7,6 +7,9 @@
     <!ENTITY ldquo      "&#x201C;">
     <!ENTITY lsquo      "&#x2018;">
     <!ENTITY rsquo      "&#x2019;">
+    <!ENTITY bdquo      "&#x201E;">
+    <!ENTITY laquo      "&#xAB;">
+    <!ENTITY raquo      "&#xBB;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY mdash      "&#x2014;">
     <!ENTITY prime      "&#x2032;">
@@ -607,34 +610,32 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
-                <xsl:choose>
-                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
-                        <xsl:value-of select="substring(.,1,2)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="substring(.,1,1)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="f:replacedInitial(.)"/>
             </span>
-            <xsl:apply-templates mode="eat-initial"/>
+            <xsl:apply-templates mode="remove-initial"/>
         </xsl:element>
     </xsl:template>
+
+
+    <xsl:function name="f:replacedInitial" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:value-of select="if (substring($text, 1, 1) = ('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')) then substring($text, 1, 2) else substring($text, 1, 1)"/>
+    </xsl:function>
 
 
     <xsl:template name="initial-image-with-float">
         <xsl:variable name="context" select="." as="element(p)"/>
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:call-template name="insertimage2">
-                <xsl:with-param name="filename" select="substring-before(substring-after(@rend, 'initial-image('), ')')"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'initial-image'), f:replacedInitial(.))"/>
         </div>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>first</xsl:text>
             </xsl:attribute>
-            <xsl:apply-templates mode="eat-initial"/>
+            <xsl:apply-templates mode="remove-initial"/>
         </xsl:element>
     </xsl:template>
 
@@ -713,12 +714,12 @@
     </xsl:template>
 
 
-    <xd:doc mode="eat-initial">
+    <xd:doc mode="remove-initial">
         <xd:short>Mode to remove the first letter (and any preceding quotation marks) from a paragraph.</xd:short>
     </xd:doc>
 
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
-    <xsl:template match="text()" mode="eat-initial">
+    <xsl:template match="text()" mode="remove-initial">
         <xsl:choose>
             <xsl:when test="position() = 1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;')">
                 <xsl:value-of select="substring(.,3)"/>
@@ -733,13 +734,13 @@
     </xsl:template>
 
 
-    <xsl:template match="*" mode="eat-initial">
+    <xsl:template match="*" mode="remove-initial">
         <xsl:choose>
             <xsl:when test="position() > 1">
                 <xsl:apply-templates select="."/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="." mode="eat-initial"/>
+                <xsl:apply-templates select="." mode="remove-initial"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -772,7 +773,7 @@
             </span>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>
-                <xsl:apply-templates mode="eat-initial"/>
+                <xsl:apply-templates mode="remove-initial"/>
             </span>
         </xsl:element>
     </xsl:template>
