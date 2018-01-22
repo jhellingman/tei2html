@@ -243,6 +243,8 @@
 
 <p rend="align(center)">[align(center)] &lorem;</p>
 
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">A simple test of a decorative initial. <hi>Some italics</hi> and some more text: &lorem;</p>
+
 <p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
 
 <p rend="align(justify)">[align(justify)] &lorem;</p>

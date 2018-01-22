@@ -88,11 +88,11 @@
                <text>Chapter VII Text Divisions</text>
             </navLabel>
             <content src="test-ch07.xhtml"/>
-            <navPoint playOrder="13" class="section" id="xd29e1366">
+            <navPoint playOrder="13" class="section" id="xd29e1372">
                <navLabel>
                   <text>Division at Level 2</text>
                </navLabel>
-               <content src="test-ch07.xhtml#xd29e1366"/>
+               <content src="test-ch07.xhtml#xd29e1372"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="14" class="chapter" id="ch08">
@@ -125,29 +125,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="19" class="section" id="xd29e1676">
+         <navPoint playOrder="19" class="section" id="xd29e1682">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1676"/>
+            <content src="test-index.xhtml#xd29e1682"/>
          </navPoint>
-         <navPoint playOrder="20" class="section" id="xd29e1681">
+         <navPoint playOrder="20" class="section" id="xd29e1687">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1681"/>
+            <content src="test-index.xhtml#xd29e1687"/>
          </navPoint>
-         <navPoint playOrder="21" class="section" id="xd29e1686">
+         <navPoint playOrder="21" class="section" id="xd29e1692">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1686"/>
+            <content src="test-index.xhtml#xd29e1692"/>
          </navPoint>
-         <navPoint playOrder="22" class="section" id="xd29e1691">
+         <navPoint playOrder="22" class="section" id="xd29e1697">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1691"/>
+            <content src="test-index.xhtml#xd29e1697"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="23" class="contents" id="toc">
@@ -156,11 +156,11 @@
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="24" class="colophon" id="xd29e1704">
+      <navPoint playOrder="24" class="colophon" id="xd29e1710">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd29e1704"/>
+         <content src="test-backmatter.xhtml#xd29e1710"/>
       </navPoint>
    </navMap>
 </ncx>

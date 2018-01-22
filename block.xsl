@@ -623,6 +623,12 @@
         <xsl:value-of select="if (substring($text, 1, 1) = ('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')) then substring($text, 1, 2) else substring($text, 1, 1)"/>
     </xsl:function>
 
+    <xsl:function name="f:removeInitial" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:value-of select="if (substring($text, 1, 1) = ('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')) then substring($text, 3) else substring($text, 2)"/>
+    </xsl:function>
+
 
     <xsl:template name="initial-image-with-float">
         <xsl:variable name="context" select="." as="element(p)"/>
@@ -721,27 +727,16 @@
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="remove-initial">
         <xsl:choose>
-            <xsl:when test="position() = 1 and (substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;')">
-                <xsl:value-of select="substring(.,3)"/>
-            </xsl:when>
-            <xsl:when test="position() = 1">
-                <xsl:value-of select="substring(.,2)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
+            <xsl:when test="position() > 1"><xsl:value-of select="."/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="f:removeInitial(.)"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
 
     <xsl:template match="*" mode="remove-initial">
         <xsl:choose>
-            <xsl:when test="position() > 1">
-                <xsl:apply-templates select="."/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates select="." mode="remove-initial"/>
-            </xsl:otherwise>
+            <xsl:when test="position() > 1"><xsl:apply-templates select="."/></xsl:when>
+            <xsl:otherwise><xsl:apply-templates select="." mode="remove-initial"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -761,15 +756,7 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>dc initdropcap</xsl:attribute>
-                <xsl:choose>
-                    <!-- Handle opening quotation marks and apostrophes as part of the drop cap -->
-                    <xsl:when test="substring(.,1,1) = '&ldquo;' or substring(.,1,1) = '&lsquo;' or substring(.,1,1) = '&rsquo;'">
-                        <xsl:value-of select="substring(.,1,2)"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="substring(.,1,1)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="f:replacedInitial(.)"/>
             </span>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>

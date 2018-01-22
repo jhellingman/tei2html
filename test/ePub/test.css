@@ -963,47 +963,47 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd29e578 {
+.xd29e584 {
 text-align:right;
 }
 
-.xd29e752 {
+.xd29e758 {
 color:red; background-color:yellow;
 }
 
-.xd29e753 {
+.xd29e759 {
 color:green; text-align:right;
 }
 
-.xd29e754 {
+.xd29e760 {
 color:blue; text-align:right;
 }
 
-.xd29e791 {
+.xd29e797 {
 text-align:left; width:40%; padding:4px;
 }
 
-.xd29e792 {
+.xd29e798 {
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd29e1002 {
+.xd29e1008 {
 background-color:green;
 }
 
-.xd29e795 {
+.xd29e801 {
 border-top:2px solid black;
 }
 
-.xd29e812 {
+.xd29e818 {
 border-top:1px solid black;
 }
 
-.xd29e843 {
+.xd29e849 {
 border-bottom:2px solid black;
 }
 
-.xd29e1003 {
+.xd29e1009 {
 background-color:white;
 }
 
@@ -1057,11 +1057,11 @@ text-align:center;
 }
 
         
-.xd29e418 {
+.xd29e423 {
 text-align:justify;
 }
 
-.xd29e433 {
+.xd29e439 {
 text-align:center;
 }
 
@@ -1069,7 +1069,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd29e543 {
+.xd29e549 {
 text-align:right;
 }
 
@@ -1077,11 +1077,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd29e724 {
+.xd29e730 {
 vertical-align:middle; width:2px;
 }
 
-.xd29e725 {
+.xd29e731 {
 vertical-align:middle;
 }
 
@@ -1089,19 +1089,19 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd29e737 {
+.xd29e743 {
 width:25%;
 }
 
-.xd29e739 {
+.xd29e745 {
 width:75%;
 }
 
-.xd29e778 {
+.xd29e784 {
 text-align:center;
 }
 
-.xd29e783 {
+.xd29e789 {
 text-align:left;
 }
 
@@ -1121,19 +1121,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd29e1033 {
+.xd29e1039 {
 background-color:yellow;
 }
 
-.xd29e1051 {
+.xd29e1057 {
 background-color:blue;
 }
 
-.xd29e1060 {
+.xd29e1066 {
 background-color:orange;
 }
 
-.xd29e1070 {
+.xd29e1076 {
 background-color:red;
 }
 
@@ -1161,51 +1161,51 @@ width:480px;
 width:480px;
 }
 
-.xd29e1183 {
+.xd29e1189 {
 font-style:italic;
 }
 
-.xd29e1216 {
+.xd29e1222 {
 list-style-type:disc;
 }
 
-.xd29e1246 {
+.xd29e1252 {
 list-style-type:upper-roman;
 }
 
-.xd29e1258 {
+.xd29e1264 {
 list-style-type:lower-roman;
 }
 
-.xd29e1280 {
+.xd29e1286 {
 list-style-type:disc;
 }
 
-.xd29e1303 {
+.xd29e1309 {
 list-style-type:disc;
 }
 
-.xd29e1406 {
+.xd29e1412 {
 text-align:center;
 }
 
-.xd29e1411 {
+.xd29e1417 {
 text-indent:1em;
 }
 
-.xd29e1417 {
+.xd29e1423 {
 text-indent:2em;
 }
 
-.xd29e1421 {
+.xd29e1427 {
 text-indent:3em;
 }
 
-.xd29e1425 {
+.xd29e1431 {
 text-indent:10em;
 }
 
-.xd29e1427 {
+.xd29e1433 {
 font-style:italic;
 }
 
@@ -1243,6 +1243,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd29e1609 {
+.xd29e1615 {
 color:red
 }
