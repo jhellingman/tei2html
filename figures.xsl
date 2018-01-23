@@ -285,15 +285,22 @@
 
         <!-- Create a special CSS rule for setting the width of this image -->
         <xsl:variable name="file" select="f:determine-image-filename(., $format)" as="xs:string"/>
+        <xsl:copy-of select="f:outputImageWidthCss(., $file)"/>
+    </xsl:template>
+
+
+    <xsl:function name="f:outputImageWidthCss">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
 
         <xsl:if test="$width != ''">
-.<xsl:value-of select="f:generate-id(.)"/>width {
+.<xsl:value-of select="f:generate-id($node)"/>width {
 width:<xsl:value-of select="$width"/>;
 }
 </xsl:if>
+    </xsl:function>
 
-    </xsl:template>
 
 
     <xd:doc>
@@ -502,7 +509,18 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template match="figure[graphic]">
-        <div class="figAnnotation">
+        <div>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="class">
+                <xsl:text>figure </xsl:text>
+                <xsl:if test="count(graphic) = 1">
+                    <xsl:variable name="file" select="graphic[1]/@url"/>
+                    <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(graphic[1])"/><xsl:text>width</xsl:text></xsl:if>
+                </xsl:if>
+            </xsl:variable>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -510,8 +528,16 @@ width:<xsl:value-of select="$width"/>;
 
     <xsl:template match="graphic">
         <xsl:if test="f:isSet('includeImages')">
-            <xsl:copy-of select="f:outputImage(@url, if (../figDesc) then figDesc else '')"/>
+            <xsl:copy-of select="f:outputImage(@url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:template match="graphic" mode="css">
+        <xsl:if test="f:isSet('includeImages')">
+            <xsl:copy-of select="f:outputImageWidthCss(., @url)"/>
+        </xsl:if>
+    </xsl:template>
+
 
 </xsl:stylesheet>

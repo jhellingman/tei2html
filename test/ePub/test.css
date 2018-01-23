@@ -967,43 +967,39 @@ font-size: xx-large; color: red
 text-align:right;
 }
 
-.xd29e758 {
+.td3\.k1 {
 color:red; background-color:yellow;
 }
 
-.xd29e759 {
+.td3\.k2 {
 color:green; text-align:right;
 }
 
-.xd29e760 {
-color:blue; text-align:right;
-}
-
-.xd29e797 {
+.tda\.k1 {
 text-align:left; width:40%; padding:4px;
 }
 
-.xd29e798 {
+.tda\.k2 {
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd29e1008 {
+.xd29e1006 {
 background-color:green;
 }
 
-.xd29e801 {
+.tda\.r1 {
 border-top:2px solid black;
 }
 
-.xd29e818 {
+.tda\.r3 {
 border-top:1px solid black;
 }
 
-.xd29e849 {
+.tda\.r7 {
 border-bottom:2px solid black;
 }
 
-.xd29e1009 {
+.xd29e1007 {
 background-color:white;
 }
 
@@ -1097,11 +1093,11 @@ width:25%;
 width:75%;
 }
 
-.xd29e784 {
+.td3\.c5\.2 {
 text-align:center;
 }
 
-.xd29e789 {
+.td3\.c6\.2 {
 text-align:left;
 }
 
@@ -1121,35 +1117,35 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd29e1039 {
+.xd29e1037 {
 background-color:yellow;
 }
 
-.xd29e1057 {
+.xd29e1055 {
 background-color:blue;
 }
 
-.xd29e1066 {
+.xd29e1064 {
 background-color:orange;
 }
 
-.xd29e1076 {
+.xd29e1074 {
 background-color:red;
 }
 
-.testwidth {
+.figTest1width {
 width:80px;
 }
 
-.test1 {
+.figTest2 {
 width:100px;
 }
 
-.test1width {
+.figTest2width {
 width:80px;
 }
 
-.test2width {
+.figTest3width {
 width:80px;
 }
 
@@ -1161,51 +1157,55 @@ width:480px;
 width:480px;
 }
 
-.xd29e1189 {
+.xd29e1179width {
+width:480px;
+}
+
+.xd29e1200 {
 font-style:italic;
 }
 
-.xd29e1222 {
+.xd29e1233 {
 list-style-type:disc;
 }
 
-.xd29e1252 {
+.xd29e1263 {
 list-style-type:upper-roman;
 }
 
-.xd29e1264 {
+.xd29e1275 {
 list-style-type:lower-roman;
 }
 
-.xd29e1286 {
+.xd29e1297 {
 list-style-type:disc;
 }
 
-.xd29e1309 {
+.xd29e1320 {
 list-style-type:disc;
-}
-
-.xd29e1412 {
-text-align:center;
-}
-
-.xd29e1417 {
-text-indent:1em;
 }
 
 .xd29e1423 {
+text-align:center;
+}
+
+.xd29e1428 {
+text-indent:1em;
+}
+
+.xd29e1434 {
 text-indent:2em;
 }
 
-.xd29e1427 {
+.xd29e1438 {
 text-indent:3em;
 }
 
-.xd29e1431 {
+.xd29e1442 {
 text-indent:10em;
 }
 
-.xd29e1433 {
+.lg2\.2 {
 font-style:italic;
 }
 
@@ -1243,6 +1243,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd29e1615 {
+.xd29e1626 {
 color:red
 }

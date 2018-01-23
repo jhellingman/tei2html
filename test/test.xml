@@ -138,7 +138,7 @@
 <head type="label">Chapter I</head>
 <head>Inline Text Elements</head>
 
-<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb2" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb2" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure id="hg2101" rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table id="tableStyles">
 <row><cell><hi>&quickbrown;</hi>    			</cell><cell>Italic</cell></row>
@@ -157,7 +157,7 @@
 
 <p>&ldquo;&lsquo;A sample of double quotation marks.&rsquo;&rdquo;</p>
 
-<lg>
+<lg id="lg1">
     <l>&ldquo;Lines of verse</l>
     <l>Using hanging punctuation</l>
     <l>Are shown here.&rdquo;</l>
@@ -173,7 +173,7 @@
 
 <p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation using class(hangqqq). &lorem;&rdquo;&rsquo;</p></q>
 
-<p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="test2">figure</ref>.</p>
+<p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="figTest2">figure</ref>.</p>
 
 <p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>.</p>
 
@@ -233,7 +233,7 @@
 
 </div2>
 <div2>
-<head>Some Further Tests of Paragrapns</head>
+<head>Some Further Tests of Paragraphs</head>
 
 <p rend="align(left)">[align(left)] &lorem;</p>
 
@@ -487,33 +487,31 @@
 <p>
 <table id="tableDemo3" rend="width(40%) align(center)">
     <head>Head above table.</head>
-    <column rend="color(red) background-color(yellow)"/>
-    <column rend="color(green) align(right)"/>
-    <column rend="color(blue) align(right)"/>
-    <column/>
-    <row role="label">
-        <cell>Name</cell>
-        <cell rend="align(right)">Age</cell>
+    <column id="td3.k1" rend="color(red) background-color(yellow)"/>
+    <column id="td3.k2" rend="color(green) align(right)"/>
+    <row id="td3.r1" role="label">
+        <cell id="td3.c1.1">Name</cell>
+        <cell id="td3.c1.2" rend="align(right)">Age</cell>
     </row>
-    <row role="unit">
-        <cell></cell>
-        <cell rend="align(right)">Years</cell>
+    <row id="td3.r2" role="unit">
+        <cell id="td3.c2.1"></cell>
+        <cell id="td3.c2.2" rend="align(right)">Years</cell>
     </row>
-    <row>
-        <cell>Jeroen</cell>
-        <cell>40</cell>
+    <row id="td3.r3">
+        <cell id="td3.c3.1">Jeroen</cell>
+        <cell id="td3.c3.2">40</cell>
     </row>
-    <row>
-        <cell>Rodelyn</cell>
-        <cell>30</cell>
+    <row id="td3.r4">
+        <cell id="td3.c4.1">Rodelyn</cell>
+        <cell id="td3.c4.2">30</cell>
     </row>
-    <row>
-        <cell>Joshua</cell>
-        <cell rend="align(center)">7</cell>
+    <row id="td3.r5">
+        <cell id="td3.c5.1">Joshua</cell>
+        <cell id="td3.c5.2" rend="align(center)">7</cell>
     </row>
-    <row>
-        <cell>Raphael</cell>
-        <cell rend="align(left)">3</cell>
+    <row id="td3.r6">
+        <cell id="td3.c6.1">Raphael</cell>
+        <cell id="td3.c6.2" rend="align(left)">3</cell>
     </row>
 </table>
 </p>
@@ -523,51 +521,51 @@
 
 <p>
 <table id="tableDemoAlign" rend="width(40%) border-collapse(collapse)">
-    <column rend="align(left) width(40%) padding(4px)"/>
-    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
-    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
-    <column rend="align(right) border-left(1px solid black) padding(4px)"/>
-    <row role="label" rend="border-top(2px solid black)">
-        <cell>Name</cell>
-        <cell>Length</cell>
-        <cell>Weight</cell>
-        <cell>Notes</cell>
+    <column id="tda.k1" rend="align(left) width(40%) padding(4px)"/>
+    <column id="tda.k2" rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <column id="tda.k3" rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <column id="tda.k4" rend="align(right) border-left(1px solid black) padding(4px)"/>
+    <row id="tda.r1" role="label" rend="border-top(2px solid black)">
+        <cell id="tda.c1.1">Name</cell>
+        <cell id="tda.c1.2">Length</cell>
+        <cell id="tda.c1.3">Weight</cell>
+        <cell id="tda.c1.4">Notes</cell>
     </row>
-    <row role="unit">
-        <cell></cell>
-        <cell>Meters</cell>
-        <cell>Kilograms</cell>
-        <cell> </cell>
+    <row id="tda.r2" role="unit">
+        <cell id="tda.c2.1"></cell>
+        <cell id="tda.c2.2">Meters</cell>
+        <cell id="tda.c2.3">Kilograms</cell>
+        <cell id="tda.c2.4"> </cell>
     </row>
-    <row rend="border-top(1px solid black)">
-        <cell>Jeroen</cell>
-        <cell>1.80</cell>
-        <cell>86</cell>
-        <cell></cell>
+    <row id="tda.r3" rend="border-top(1px solid black)">
+        <cell id="tda.c3.1">Jeroen</cell>
+        <cell id="tda.c3.2">1.80</cell>
+        <cell id="tda.c3.3">86</cell>
+        <cell id="tda.c3.4"></cell>
     </row>
-    <row>
-        <cell>Rodelyn</cell>
-        <cell>&mdash;</cell>
-        <cell>&mdash;</cell>
-        <cell>No Info.</cell>
+    <row id="tda.r4">
+        <cell id="tda.c4.1">Rodelyn</cell>
+        <cell id="tda.c4.2">&mdash;</cell>
+        <cell id="tda.c4.3">&mdash;</cell>
+        <cell id="tda.c4.4">No Info.</cell>
     </row>
-    <row>
-        <cell>Joshua</cell>
-        <cell>1.20</cell>
-        <cell></cell>
-        <cell></cell>
+    <row id="tda.r5">
+        <cell id="tda.c5.1">Joshua</cell>
+        <cell id="tda.c5.2">1.20</cell>
+        <cell id="tda.c5.3"></cell>
+        <cell id="tda.c5.4"></cell>
     </row>
-    <row>
-        <cell>Raphael</cell>
-        <cell>1.00</cell>
-        <cell></cell>
-        <cell></cell>
+    <row id="tda.r6">
+        <cell id="tda.c6.1">Raphael</cell>
+        <cell id="tda.c6.2">1.00</cell>
+        <cell id="tda.c6.3"></cell>
+        <cell id="tda.c6.4"></cell>
     </row>
-    <row rend="border-bottom(2px solid black)">
-        <cell><hi>Total</hi></cell>
-        <cell role="sum">4.00</cell>
-        <cell></cell>
-        <cell></cell>
+    <row id="tda.r7" rend="border-bottom(2px solid black)">
+        <cell id="tda.c7.1"><hi>Total</hi></cell>
+        <cell id="tda.c7.2" role="sum">4.00</cell>
+        <cell id="tda.c7.3"/>
+        <cell id="tda.c7.4"/>
     </row>
 </table>
 </p>
@@ -767,12 +765,12 @@
 <p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>
 
-<figure id="test" rend="image(images/test.jpg)">
+<figure id="figTest1" rend="image(images/test.jpg)">
     <head>This is the heading</head>
     <p>This is the description.</p>
 </figure>
 
-<figure id="test1" rend="width(100px) float(left) image(images/test.jpg) link(images/test.jpg)">
+<figure id="figTest2" rend="width(100px) float(left) image(images/test.jpg) link(images/test.jpg)">
     <head>Tarsier</head>
 
     <p>This is a somewhat longer test to verify we can limit the size of an image box.</p>
@@ -782,7 +780,7 @@
 </p>
 
 
-<figure id="test2" rend="image(images/test.jpg) float(right) link(http://www.bohol.ph/)">
+<figure id="figTest3" rend="image(images/test.jpg) float(right) link(http://www.bohol.ph/)">
     <head>The <hi>Philippine</hi> Tarsier</head>
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
@@ -817,6 +815,19 @@
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
 </figure>
 
+
+<p>Figures following the P5 model.</p>
+
+
+<figure id="figTest4">
+	<head>The <hi>Philippine</hi> Tarsier</head>
+	
+	<graphic url="images/tarsier.jpg"/>
+	
+	<figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+	
+	<p>A descriptive paragraph below the figure. This text is purposely long enough to be wider than the picture it belongs to.</p>
+</figure>
 
 
 </div1>
@@ -958,28 +969,28 @@
 <head>Text Divisions</head>
 
 
-<div2>
+<div2 id="ch07.1">
 <head>Division at Level 2</head>
 
 <p>Text in division at level 3. &lorem;</p>
 
 
-<div3>
+<div3 id="ch07.1.1">
 <head>Division at Level 3</head>
 
 <p>Text in division at level 3. &lorem;</p>
 
-<div4>
+<div4 id="ch07.1.1.1">
 <head>Division at Level 4</head>
 
 <p>Text in division at level 4. &lorem;</p>
 
-<div5>
+<div5 id="ch07.1.1.1.1">
 <head>Division at Level 5</head>
 
 <p>Text in division at level 5. &lorem;</p>
 
-<div6>
+<div6 id="ch07.1.1.1.1.1">
 <head>Division at Level 6</head>
 
 <p>Text in division at level 6. &lorem;</p>
@@ -1000,10 +1011,10 @@
 
 <p>(An index reference to a <index level1="Footnote"/>footnote here as well.)</p>
 
-<lg>
+<lg id="lg2">
 <head rend="align(center)">Three stanzas in a row</head>
 
-<lg type="Group">
+<lg id="lg2.1" type="Group">
 <l>This is a rule of verse</l>
 <l rend="indent(1)">This is another <pb n="5" id="pb5"/>rule of verse</l>
 <l>This is a rule of verse</l>
@@ -1014,7 +1025,7 @@
 <l rend="indent(10)">This is another rule of verse</l></lg>
 
 
-<lg type="Group" rend="font(italic)">
+<lg id="lg2.2" type="Group" rend="font(italic)">
 <l>This is a rule of verse in italics</l>
 <l rend="indent(1)">This is another rule of <index level1="Poetry"/>verse</l>
 <l>This is a rule of verse</l>
@@ -1025,7 +1036,7 @@
 <l rend="indent(10)">This is another rule of verse</l></lg>
 
 
-<lg type="Group" rend="font(italic)">
+<lg id="lg2.3" type="Group" rend="font(italic)">
 <l n="1">This is a rule of verse in italics</l>
 <l n="2" rend="indent(1)">This is another rule of verse</l>
 <l n="3">This is a rule of verse</l>
@@ -1046,7 +1057,7 @@
 
 <p>Another piece of verse with line-numbers:</p>
 
-<lg type="Group" rend="font(italic)">
+<lg id="lg3" type="Group" rend="font(italic)">
 <l n="1">This is a rule of verse in italics</l>
 <l n="2" rend="indent(1)">This is another rule of verse</l>
 <l n="3">This is a rule of verse</l>
@@ -1111,7 +1122,7 @@
 
 <p>Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
 
-<lg>
+<lg id="lg5">
     <l>Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</l>
 </lg>
 
