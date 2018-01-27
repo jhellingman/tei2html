@@ -727,16 +727,19 @@
     <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
     <xsl:template match="text()" mode="remove-initial">
         <xsl:choose>
-            <xsl:when test="position() > 1"><xsl:value-of select="."/></xsl:when>
-            <xsl:otherwise><xsl:value-of select="f:removeInitial(.)"/></xsl:otherwise>
+            <xsl:when test="position() = 1"><xsl:value-of select="f:removeInitial(.)"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
 
     <xsl:template match="*" mode="remove-initial">
         <xsl:choose>
-            <xsl:when test="position() > 1"><xsl:apply-templates select="."/></xsl:when>
-            <xsl:otherwise><xsl:apply-templates select="." mode="remove-initial"/></xsl:otherwise>
+            <xsl:when test="position() = 1">
+                <xsl:copy-of select="f:logWarning('Skipping processing of {1} element while removing initial from paragraph with decorative initial.', (name(.)))"/>
+                <xsl:apply-templates mode="remove-initial"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:apply-templates select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 

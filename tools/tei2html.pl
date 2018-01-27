@@ -48,6 +48,7 @@ my $makeZip             = 0;
 my $noTranscription     = 0;
 my $force               = 0;
 my $debug               = 0;
+my $profile             = 0;
 
 GetOptions(
     't' => \$makeText,
@@ -58,6 +59,7 @@ GetOptions(
     'k' => \$makeKwic,
     'D' => \$debug,
     'p' => \$makePdf,
+    'P' => \$profile,
     '5' => \$makeP5,
     'r' => \$makeReport,
     'x' => \$makeXML,
@@ -370,6 +372,11 @@ sub determineSaxonParameters() {
     chop($pwd);
     $pwd =~ s/\\/\//g;
 
+    my $profileOption = "";
+    if ($profile == 1) {
+        $profileOption = " -TP:profile.html ";
+    }
+
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path as a parameter.
     my $fileImageParam = "";
     if (-f "imageinfo.xml") {
@@ -401,7 +408,7 @@ sub determineSaxonParameters() {
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
-    return "$customOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
+    return "$customOption $profileOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
 }
 
 
