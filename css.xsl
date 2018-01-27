@@ -268,7 +268,7 @@
         <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
         <xsl:variable name="css">
-            <xsl:analyze-string select="$rend" regex="([a-z][a-z-0-9]*)\((.*?)\)" flags="i">
+            <xsl:analyze-string select="$rend" regex="([a-z][a-z0-9-]*)\((.*?)\)" flags="i">
                 <xsl:matching-substring>
                     <xsl:value-of select="f:translate-rend-ladder-step(regex-group(1), regex-group(2), $name)"/>
                 </xsl:matching-substring>
