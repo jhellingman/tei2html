@@ -508,6 +508,15 @@ width:<xsl:value-of select="$width"/>;
         </xd:detail>
     </xd:doc>
 
+
+    <xsl:template match="figure[figure]">
+        <div class="compositeFigure">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+
     <xsl:template match="figure[graphic]">
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -539,5 +548,10 @@ width:<xsl:value-of select="$width"/>;
         </xsl:if>
     </xsl:template>
 
+    <xsl:function name="f:countGraphic" as="xs:integer">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:value-of select="count($node//graphic) - count($node//note[@place='foot' or not(@place)]//graphic)"/>
+    </xsl:function>
 
 </xsl:stylesheet>
