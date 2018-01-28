@@ -42,10 +42,16 @@
     <!-- Plain Text -->
 
     <xsl:template match="text()">
-        <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes(.) else ."/>
+        <xsl:value-of select="f:process-text(.)"/>
+    </xsl:template>
+
+
+    <xsl:function name="f:process-text" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+        <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
         <xsl:variable name="text" select="if (f:isSet('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
         <xsl:value-of select="$text"/>
-    </xsl:template>
+    </xsl:function>
 
 
     <xsl:function name="f:handle-quotes" as="xs:string">
@@ -91,8 +97,11 @@
         <xd:detail>Italic text, indicated with the <code>@rend</code> attribute value <code>it</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='it' or @rend='italic'] | i">
-        <i><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></i>
+    <xsl:template match="hi[@rend='it' or @rend='italic'] | i" mode="#default remove-initial">
+        <i>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </i>
     </xsl:template>
 
     <xd:doc>
@@ -100,8 +109,11 @@
         <xd:detail>Bold text, indicated with the <code>@rend</code> attribute value <code>b</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='b' or @rend='bold'] | b">
-        <b><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></b>
+    <xsl:template match="hi[@rend='b' or @rend='bold'] | b" mode="#default remove-initial">
+        <b>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </b>
     </xsl:template>
 
     <xd:doc>
@@ -109,8 +121,10 @@
         <xd:detail>Superscript text, indicated with the <code>@rend</code> attribute value <code>sup</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sup'] | sup">
-        <sup><xsl:apply-templates/></sup>
+    <xsl:template match="hi[@rend='sup'] | sup" mode="#default remove-initial">
+        <sup>
+            <xsl:apply-templates mode="#current"/>
+        </sup>
     </xsl:template>
 
     <xd:doc>
@@ -118,8 +132,10 @@
         <xd:detail>Subscript text, indicated with the <code>@rend</code> attribute value <code>sub</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sub'] | sub">
-        <sub><xsl:apply-templates/></sub>
+    <xsl:template match="hi[@rend='sub'] | sub" mode="#default remove-initial">
+        <sub>
+            <xsl:apply-templates mode="#current"/>
+        </sub>
     </xsl:template>
 
     <!-- Mapped to defined CSS classes: sc = small caps; uc = upper case; ex = letterspaced; rm = roman; tt = typewriter type -->
@@ -129,8 +145,11 @@
         <xd:detail>Caps and small-caps text, indicated with the <code>@rend</code> attribute value <code>sc</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sc'] | sc">
-        <span class="sc"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='sc'] | sc" mode="#default remove-initial">
+        <span class="sc">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -138,8 +157,11 @@
         <xd:detail>Uppercase text, indicated with the <code>@rend</code> attribute value <code>uc</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='uc']">
-        <span class="uc"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='uc']" mode="#default remove-initial">
+        <span class="uc">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -147,8 +169,11 @@
         <xd:detail>Letterspace (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='ex'] | g">
-        <span class="ex"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='ex'] | g" mode="#default remove-initial">
+        <span class="ex">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+         </span>
     </xsl:template>
 
     <xd:doc>
@@ -156,8 +181,11 @@
         <xd:detail>Upright (in an italic context) text, indicated with the <code>@rend</code> attribute value <code>rm</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='rm'] | rm">
-        <span class="rm"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='rm'] | rm" mode="#default remove-initial">
+        <span class="rm">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -165,8 +193,11 @@
         <xd:detail>Type-writer (monospaced) text, indicated with the <code>@rend</code> attribute value <code>tt</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='tt'] | tt">
-        <span class="tt"><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='tt'] | tt" mode="#default remove-initial">
+        <span class="tt">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -174,8 +205,10 @@
         <xd:detail>Underlined text, indicated with the <code>@rend</code> attribute value <code>underline</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='underline'] | u">
-        <span class="underline"><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='underline'] | u" mode="#default remove-initial">
+        <span class="underline">
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -183,8 +216,10 @@
         <xd:detail>Overlined text, indicated with the <code>@rend</code> attribute value <code>overline</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='overline']">
-        <span class="overline"><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='overline']" mode="#default remove-initial">
+        <span class="overline">
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -192,8 +227,10 @@
         <xd:detail>Text spanned with a wide tilde, indicated with the <code>@rend</code> attribute value <code>overtilde</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='overtilde']">
-        <span class="overtilde"><xsl:apply-templates/></span>
+    <xsl:template match="hi[@rend='overtilde']" mode="#default remove-initial">
+        <span class="overtilde">
+            <xsl:apply-templates mode="#current"/>
+        </span>
     </xsl:template>
 
     <xd:doc>
@@ -201,7 +238,7 @@
         <xd:detail>Highlighted text with other values for the <code>@rend</code> attribute.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi">
+    <xsl:template match="hi" mode="#default remove-initial">
         <xsl:choose>
             <!-- Test covers any potential rendition ladder -->
             <xsl:when test="contains(@rend, '(') or @style or @rendition">
@@ -209,13 +246,13 @@
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
                     <xsl:copy-of select="f:set-class-attribute(.)"/>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates mode="#current"/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
                 <i>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates/>
+                    <xsl:apply-templates mode="#current"/>
                 </i>
             </xsl:otherwise>
         </xsl:choose>
@@ -226,11 +263,11 @@
         <xd:detail>Use another font for Greek script passages.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="foreign[@lang='el' or @lang='grc']">
+    <xsl:template match="foreign[@lang='el' or @lang='grc']" mode="#default remove-initial">
         <span>
             <xsl:copy-of select="f:set-class-attribute-with(., 'Greek')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
 
@@ -239,11 +276,11 @@
         <xd:detail>Use another font for Arabic script passages.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="foreign[@lang='ar']">
+    <xsl:template match="foreign[@lang='ar']" mode="#default remove-initial">
         <span>
             <xsl:copy-of select="f:set-class-attribute-with(., 'Arabic')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
 
@@ -252,11 +289,11 @@
         <xd:detail>Foreign phrases are not styled by default, but we do set the language on them.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="foreign">
+    <xsl:template match="foreign" mode="#default remove-initial">
         <span>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
 

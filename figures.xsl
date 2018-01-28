@@ -548,6 +548,7 @@ width:<xsl:value-of select="$width"/>;
         </xsl:if>
     </xsl:template>
 
+
     <xsl:function name="f:countGraphic" as="xs:integer">
         <xsl:param name="node" as="node()"/>
 

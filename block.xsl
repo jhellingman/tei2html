@@ -612,7 +612,8 @@
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
                 <xsl:value-of select="f:replacedInitial(.)"/>
             </span>
-            <xsl:apply-templates mode="remove-initial"/>
+            <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
+            <xsl:apply-templates select="node()[position() > 1]"/>
         </xsl:element>
     </xsl:template>
 
@@ -641,7 +642,8 @@
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>first</xsl:text>
             </xsl:attribute>
-            <xsl:apply-templates mode="remove-initial"/>
+            <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
+            <xsl:apply-templates select="node()[position() > 1]"/>
         </xsl:element>
     </xsl:template>
 
@@ -722,16 +724,39 @@
 
     <xd:doc mode="remove-initial">
         <xd:short>Mode to remove the first letter (and any preceding quotation marks) from a paragraph.</xd:short>
+        <xd:detail>This mode is also used with the <code>hi</code> element in <code>inline.xsl</code>, where it
+        is used as an additional possible mode. This code is tricky, as it wants to deal with text nodes that
+        may be embedded in multiple surrounding elements, but only the first one.</xd:detail>
     </xd:doc>
 
-    <!-- We need to adjust the text() matching template to remove the first character from the paragraph -->
+    <xd:doc>
+        <xd:short>Remove the first letter of a paragraph.</xd:short>
+        <xd:detail>Remove the first letter of a paragraph. Mind, this means we want to remove the first letter
+        of this text node only if it is the first text node in a paragraph. To verify this, it is not enough
+        to just look at the <code>position()</code> (as it may be nested several levels deep), But actually will
+        have to determine what text is part of the current paragraph and also before the current node.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="text()" mode="remove-initial">
+        <!-- Get text of the current paragraph before the current node: we only want to remove the intial if this is empty. -->
+        <xsl:variable name="paragraph-sofar" select="(./preceding::node()[./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
+        <xsl:copy-of select="f:logDebug('paragraph so-far: {1}', ($paragraph-sofar))"/>
+
         <xsl:choose>
-            <xsl:when test="position() = 1"><xsl:value-of select="f:removeInitial(.)"/></xsl:when>
+            <xsl:when test="string-length($paragraph-sofar) = 0 and position() = 1">
+                <xsl:copy-of select="f:logDebug('removing initial letter from: {1}', (.))"/>
+                <xsl:value-of select="f:process-text(f:removeInitial(.))"/>
+             </xsl:when>
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Remove the first letter of a paragraph (intermediate element).</xd:short>
+        <xd:detail>While removing the first letter of a paragraph, we may enocounter an
+        intermediate element. We currently do handle <code>hi</code> and <code>foreign</code> elements;
+        warn for all other types of elements when we encounter them.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="*" mode="remove-initial">
         <xsl:choose>
@@ -763,7 +788,8 @@
             </span>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>
-                <xsl:apply-templates mode="remove-initial"/>
+                <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
+                <xsl:apply-templates select="node()[position() > 1]"/>
             </span>
         </xsl:element>
     </xsl:template>

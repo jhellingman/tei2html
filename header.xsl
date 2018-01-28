@@ -32,7 +32,13 @@
 
     <xsl:template match="TEI.2 | TEI">
         <xsl:comment>
-            <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text><xsl:value-of select="f:utc-timestamp()"/><xsl:text>. </xsl:text>
+            <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text>
+            <xsl:value-of select="f:utc-timestamp()"/>
+            <xsl:text> using </xsl:text>
+            <xsl:copy-of select="system-property('xsl:product-name')"/>
+            <xsl:text> </xsl:text>
+            <xsl:copy-of select="system-property('xsl:product-version')"/>
+            <xsl:text>. </xsl:text>
         </xsl:comment>
 
         <xsl:text> <!-- insert extra new-line for PG -->
