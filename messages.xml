@@ -997,7 +997,6 @@
         <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>
         <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
-        <msg:message name="msgAuthorOfPreface">Auteur van voorwoord</msg:message>
         <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
         <msg:message name="msgOriginalSpine">Originele Rug</msg:message>
@@ -1014,7 +1013,6 @@
         <msg:message name="msgAssociatedName">Gerelateerde naam</msg:message>
         <msg:message name="msgAuthorOfForeword">Auteur van inleiding</msg:message>
         <msg:message name="msgAuthorOfPreface">Auteur van voorwoord</msg:message>
-        <msg:message name="msgAuthor">Auteur</msg:message>
         <msg:message name="msgBookProducer">Producent van boek</msg:message>
         <msg:message name="msgCollaborator">Medewerker</msg:message>
         <msg:message name="msgCommentator">Commentator</msg:message>
@@ -1032,8 +1030,6 @@
         <msg:message name="msgReviewer">Recensent</msg:message>
         <msg:message name="msgSponsor">Sponsor</msg:message>
         <msg:message name="msgThesisAdvisor">Scriptiebegeleider</msg:message>
-        <msg:message name="msgTranscriber">Transcribent</msg:message>
-        <msg:message name="msgTranslator">Vertaler</msg:message>
 
         <msg:message name="msgAdaptor">Bewerker</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
