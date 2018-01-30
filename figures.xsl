@@ -522,10 +522,9 @@ width:<xsl:value-of select="$width"/>;
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
-                <xsl:if test="count(graphic) = 1">
-                    <xsl:variable name="file" select="graphic[1]/@url"/>
-                    <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
-                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(graphic[1])"/><xsl:text>width</xsl:text></xsl:if>
+                <xsl:variable name="widestImage" select="f:widestImage(graphic/@url)"/>
+                <xsl:if test="$imageInfo/img:images/img:image[@path=$widestImage]/@width != ''">
+                    <xsl:value-of select="f:generate-id(graphic[@url = $widestImage][1])"/><xsl:text>width</xsl:text>
                 </xsl:if>
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
@@ -533,6 +532,19 @@ width:<xsl:value-of select="$width"/>;
             <xsl:apply-templates/>
         </div>
     </xsl:template>
+
+
+    <xsl:function name="f:widestImage" as="xs:string?">
+        <xsl:param name="files" as="xs:string*"/>
+        <xsl:variable name="maxWidth" select="f:maxWidth($imageInfo/img:images/img:image[@path=$files]/@width)" as="xs:string?"/>
+        <xsl:value-of select="$imageInfo/img:images/img:image[@path=$files and @width=$maxWidth][1]/@path"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:maxWidth" as="xs:string">
+        <xsl:param name="widths" as="xs:string*"/>
+        <xsl:value-of select="concat(max(for $width in $widths return translate($width, 'px', '')), 'px')"/>
+     </xsl:function>
 
 
     <xsl:template match="graphic">

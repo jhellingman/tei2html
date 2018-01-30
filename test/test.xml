@@ -830,6 +830,18 @@
 </figure>
 
 
+<figure id="figTest5">
+	<head>A test with multiple graphic elements in a single figure.</head>
+	
+	<graphic id="grph1" url="images/hg2101.png"/>
+	<p>Some hieroglyphs.</p>
+	
+	<graphic id="grph2" url="images/initial-A.gif"/>
+	
+	<p>A decorative initial letter A.</p>
+</figure>
+
+
 </div1>
 <div1 id="ch6" n="VI">
 <head type="label">Chapter VI</head>

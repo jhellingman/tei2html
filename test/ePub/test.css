@@ -1161,47 +1161,51 @@ width:480px;
 width:480px;
 }
 
-.xd29e1200 {
+.grph2width {
+width:128px;
+}
+
+.xd29e1209 {
 font-style:italic;
 }
 
-.xd29e1233 {
+.xd29e1242 {
 list-style-type:disc;
 }
 
-.xd29e1263 {
+.xd29e1272 {
 list-style-type:upper-roman;
 }
 
-.xd29e1275 {
+.xd29e1284 {
 list-style-type:lower-roman;
 }
 
-.xd29e1297 {
+.xd29e1306 {
 list-style-type:disc;
 }
 
-.xd29e1320 {
+.xd29e1329 {
 list-style-type:disc;
 }
 
-.xd29e1423 {
+.xd29e1432 {
 text-align:center;
 }
 
-.xd29e1428 {
+.xd29e1437 {
 text-indent:1em;
 }
 
-.xd29e1434 {
+.xd29e1443 {
 text-indent:2em;
 }
 
-.xd29e1438 {
+.xd29e1447 {
 text-indent:3em;
 }
 
-.xd29e1442 {
+.xd29e1451 {
 text-indent:10em;
 }
 
@@ -1243,6 +1247,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd29e1626 {
+.xd29e1635 {
 color:red
 }
