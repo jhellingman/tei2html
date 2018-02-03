@@ -528,7 +528,6 @@ width:<xsl:value-of select="$width"/>;
                 </xsl:if>
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-
             <xsl:apply-templates/>
         </div>
     </xsl:template>

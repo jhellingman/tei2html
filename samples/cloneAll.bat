@@ -42,6 +42,7 @@ git clone https://github.com/GutenbergSource/54412-Been-Maerten-Harpertszoon-Tro
 git clone https://github.com/GutenbergSource/45414-Bell-Handbook-of-Freethought.git
 git clone https://github.com/GutenbergSource/53611-Beresford-Goslings.git
 git clone https://github.com/GutenbergSource/53028-Beresford-The-Hampdenshire-Wonder.git
+git clone https://github.com/GutenbergSource/33641-Betz-Marathon.git
 git clone https://github.com/GutenbergSource/46024-Beyer-Origin-Myths-among-the-Mountain-Peoples-of-the-Philippines.git
 git clone https://github.com/GutenbergSource/8468-Bilderdijk-De-ondergang-der-Eerste-Wareld.git
 git clone https://github.com/GutenbergSource/50148-Bird-Looking-Forward.git
@@ -100,7 +101,11 @@ git clone https://github.com/GutenbergSource/37497-Couperus-The-Tour.git
 git clone https://github.com/GutenbergSource/54637-Courtney-Cornish-Feasts-and-Folk-lore.git
 git clone https://github.com/GutenbergSource/10770-Craig-The-Former-Philippines-Thru-Foreign-Eyes.git
 git clone https://github.com/GutenbergSource/6867-Craig-Lineage-Life-and-Labors-of-Jose-Rizal.git
+git clone https://github.com/GutenbergSource/26483-Cremer-Betuwsche-Novellen.git
+git clone https://github.com/GutenbergSource/25138-Cremer-Dokter-Helmond-en-zijn-vrouw.git
+git clone https://github.com/GutenbergSource/28175-Cremer-De-Lelie-van-s-Gravenhage.git
 git clone https://github.com/GutenbergSource/30229-Dante-Dantes-Hel.git
+git clone https://github.com/GutenbergSource/37790-Davidis-Keukenboek.git
 git clone https://github.com/GutenbergSource/53915-Davies-Folk-Lore-of-West-and-Mid-Wales.git
 git clone https://github.com/GutenbergSource/50363-Defauconpret-Vijftien-Dagen-te-Londen.git
 git clone https://github.com/GutenbergSource/43213-Dioscorides-Anno-2070.git
@@ -249,7 +254,9 @@ git clone https://github.com/GutenbergSource/42991-42997-Thurston-Castes-and-Tri
 git clone https://github.com/GutenbergSource/42991-42997-Thurston-Castes-and-Tribes-of-Southern-India.git
 git clone https://github.com/GutenbergSource/42991-42997-Thurston-Castes-and-Tribes-of-Southern-India.git
 git clone https://github.com/GutenbergSource/42991-42997-Thurston-Castes-and-Tribes-of-Southern-India.git
+git clone https://github.com/GutenbergSource/35690-Thurston-Omens-and-Superstitions-of-Southern-India.git
 git clone https://github.com/GutenbergSource/53612-Toergenev-Vaders-en-Zonen.git
+git clone https://github.com/GutenbergSource/13214-Tolstoi-Anna-Karenina.git
 git clone https://github.com/GutenbergSource/53393-Good-Natuurkunde-in-de-Huiskamer.git
 git clone https://github.com/GutenbergSource/11205-Verne-20.000-Mijlen-onder-Zee-Oostelijk-Halfrond.git
 git clone https://github.com/GutenbergSource/11393-Verne-20.000-Mijlen-onder-Zee-Westelijk-Halfrond.git
