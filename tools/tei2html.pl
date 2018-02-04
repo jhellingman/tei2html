@@ -213,8 +213,9 @@ sub processFile($) {
     $makeReport && makeReport($basename);
 
     if ($makeKwic == 1) {
+        my $saxonParameters = determineSaxonParameters();
         print "Generate a KWIC index (this may take some time)...\n";
-        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl > $basename-kwic.html");
+        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl $saxonParameters > $basename-kwic.html");
     }
 
     if ($makeZip == 1 && $pgNumber > 0) {

@@ -100,95 +100,97 @@
     </xd:doc>
 
     <xsl:template match="/">
-        <head>
-            <meta charset="UTF-8"/>
-            <title>KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
-            <style>
-
-                table {
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .tag {
-                    font-size: xx-small;
-                    color: grey;
-                }
-
-                .cnt {
-                    font-size: small;
-                    color: grey;
-                }
-
-                .pre, .pn {
-                    text-align: right;
-                }
-
-                .lang {
-                    padding-left: 2em;
-                    font-weight: bold;
-                    color: blue;
-                }
-
-                th.ph {
-                    font-size: small;
-                    color: gray;
-                }
-
-                .match {
-                    font-weight: bold;
-                    color: #D10000;
-                }
-
-                .sc {
-                    font-variant: small-caps;
-                }
-
-                .uc {
-                    text-transform: uppercase;
-                }
-
-                .ex {
-                    letter-spacing: 0.2em;
-                }
-
-                .var2 {
-                    background-color: #80FFEE;
-                }
-
-                .var3 {
-                    background-color: #BFFF80;
-                }
-
-                .var4 {
-                    background-color: #FFFF80;
-                }
-
-                .var5 {
-                    background-color: #FFD780;
-                }
-
-                .var6, .var7, .var8, .var9, .var10, .var11, .var12 {
-                    background-color: #FF8080;
-                    color: black;
-                }
-
-                .ix {
-                    background-color: yellow;
-                }
-
-            </style>
-        </head>
         <html>
-            <h1>
-                KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
+            <head>
+                <meta charset="UTF-8"/>
+                <title>KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/></title>
+                <style>
 
-                <xsl:if test="$keyword != ''">
-                    (<xsl:value-of select="$keyword"/>)
-                </xsl:if>
-            </h1>
+                    table {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
 
-            <xsl:call-template name="build-kwic"/>
+                    .tag {
+                        font-size: xx-small;
+                        color: grey;
+                    }
+
+                    .cnt {
+                        font-size: small;
+                        color: grey;
+                    }
+
+                    .pre, .pn {
+                        text-align: right;
+                    }
+
+                    .lang {
+                        padding-left: 2em;
+                        font-weight: bold;
+                        color: blue;
+                    }
+
+                    th.ph {
+                        font-size: small;
+                        color: gray;
+                    }
+
+                    .match {
+                        font-weight: bold;
+                        color: #D10000;
+                    }
+
+                    .sc {
+                        font-variant: small-caps;
+                    }
+
+                    .uc {
+                        text-transform: uppercase;
+                    }
+
+                    .ex {
+                        letter-spacing: 0.2em;
+                    }
+
+                    .var2 {
+                        background-color: #80FFEE;
+                    }
+
+                    .var3 {
+                        background-color: #BFFF80;
+                    }
+
+                    .var4 {
+                        background-color: #FFFF80;
+                    }
+
+                    .var5 {
+                        background-color: #FFD780;
+                    }
+
+                    .var6, .var7, .var8, .var9, .var10, .var11, .var12 {
+                        background-color: #FF8080;
+                        color: black;
+                    }
+
+                    .ix {
+                        background-color: yellow;
+                    }
+
+                </style>
+            </head>
+            <body>
+                <h1>
+                    KWIC for <xsl:value-of select="*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']"/>
+
+                    <xsl:if test="$keyword != ''">
+                        (<xsl:value-of select="$keyword"/>)
+                    </xsl:if>
+                </h1>
+
+                <xsl:call-template name="build-kwic"/>
+            </body>
         </html>
     </xsl:template>
 

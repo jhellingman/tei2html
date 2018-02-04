@@ -1751,6 +1751,10 @@ BEGIN {
     $ent{"oslashcirc"}  = chr(0x00f8) . chr(0x0302); # o slash and circumflex
 
     $ent{"ubrevacu"}    = chr(0x016D) . chr(0x0301); # u with breve and acute
+    $ent{"Ebrevacu"}    = chr(0x0114) . chr(0x0301); # E with breve and acute
+    $ent{"ebrevacu"}    = chr(0x0115) . chr(0x0301); # e with breve and acute
+    $ent{"Obrevacu"}    = chr(0x014E) . chr(0x0301); # O with breve and acute
+    $ent{"obrevacu"}    = chr(0x014F) . chr(0x0301); # o with breve and acute
 
     $ent{"amacrgra"}    = chr(0x0101) . chr(0x0300); # a with macron and grave
     $ent{"emacrgra"}    = chr(0x0113) . chr(0x0300); # e with macron and grave
