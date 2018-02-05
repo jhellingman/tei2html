@@ -10,7 +10,7 @@ my $PAGE_SEPARATOR = /\n-*File: 0*([0-9]+)\.(png|jpg)-*\n/;
 my $IMAGE_URL_FORMAT = "https://www.pgdp.net/c/tools/project_manager/displayimage.php?project=%s&imagefile=%03u.png";
 
 
-my $style = <<EOF;
+my $style = <<'EOF';
 <style>
 
 .hm td { width: 16px; height: 16px; font-size: xx-small; color: gray; text-align: center; vertical-align: middle; }

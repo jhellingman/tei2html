@@ -41,6 +41,32 @@ my %excluded = (
     );
 
 
+my $preGetRepoCode = <<'EOF';
+
+use strict;
+use Cwd;
+use File::chdir;
+
+EOF
+
+my $postGetRepoCode = <<'EOF';
+
+sub getRepo($) {
+    my $repo = shift;
+
+    if (!-e $repo) {
+        system ("git clone https://github.com/GutenbergSource/$repo.git\n");
+    } elsif (-d $repo) {
+        my $cwd = getcwd;
+        chdir ($repo);
+        system ("git pull\n");
+        chdir $cwd;
+    }
+}
+
+EOF
+
+
 sub listRecursively($);
 sub main();
 
@@ -51,11 +77,12 @@ main();
 sub main() {
     my $reportFile = "pgreport.txt";
     my $xmlFile = "pgreport.xml";
-    my $gitFile = "cloneAll.bat";
+    my $gitFile = "getRepos.pl";
 
     open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
     open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
     open(GITFILE, "> $gitFile") || die("Could not open $gitFile");
+    print GITFILE $preGetRepoCode;
 
     my $directory = $ARGV[0];
     if (! defined $directory) {
@@ -74,6 +101,7 @@ sub main() {
     logTotals();
 
     close REPORTFILE;
+    print GITFILE $postGetRepoCode;
     close GITFILE;
 }
 
@@ -255,7 +283,7 @@ sub handleTeiFile($) {
 
                 my $repo = $pgSrc->string_value();
                 if (isValid($repo)) {
-                    print GITFILE "git clone https://github.com/GutenbergSource/$pgSrc.git\n";
+                    print GITFILE "getRepo('$pgSrc');\n";
                 }
                 print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
                 if (isValid($projectId->string_value())) {
