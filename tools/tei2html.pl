@@ -201,6 +201,7 @@ sub processFile($) {
 
     # extract metadata
     system ("$saxon $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
+    system ("$saxon $xmlfilename $xsldir/tei2readme.xsl > README.md");
 
     # create PGTEI version
     # system ("$saxon $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
