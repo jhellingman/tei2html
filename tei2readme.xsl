@@ -46,9 +46,6 @@
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
-            <xsl:if test="text/@lang">
-                <dc:language><xsl:value-of select="text/@lang"/></dc:language>
-            </xsl:if>
             <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
             <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>

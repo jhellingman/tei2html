@@ -6,12 +6,16 @@
 
 use strict;
 use File::Basename;
+use File::Copy;
 
-my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm
+my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm 
+my $optipng = "optipng.exe";            # also https://pngquant.org/ and http://optipng.sourceforge.net/
+
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
+my $jpegtran = "jpegtran.exe";          # http://www.kokkonen.net/tjko/projects.html https://github.com/mozilla/mozjpeg
+
 my $gifsicle = "gifsicle.exe";          # see http://www.lcdf.org/gifsicle/
 my $temp = "C:\\Temp";
-my $logFile = "optimg.log";
 
 my $errorCount = 0;
 my $totalOriginalSize = 0;
@@ -55,17 +59,20 @@ sub handle_file($) {
         my $base = basename($file, '.' . $extension);
         my $dirname = dirname($file);
 
-        my $newfile = $dirname . '\\' . $base . '-copy.' . $extension;
+        my $newfile = $dirname . '\\' . $base . '-optimized.' . $extension;
 
-        print "Compressing image: $file\n";
+        print "----- Optimizing image: $file\n";
         my $originalSize = -s $file;
 
         if ($extension eq 'png') {
-            my $returnCode = system ("$pngout /y \"$file\" \"$file\" 1>>$logFile");
+            # my $returnCode = system ("$pngout /y \"$file\" \"$file\"");
+            my $returnCode = system ("$optipng -o5 -strip all \"$file\" 2>>\&1");
         } elsif ($extension eq 'jpg' or $extension eq 'jpeg') {
-            my $returnCode = system ("$jpegoptim --strip-all \"$file\" 1>>$logFile");
+            # my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
+            my $returnCode = system ("$jpegtran -copy none \"$file\" 1>>\"$newfile\"");
+            move($newfile, $file);
         } elsif ($extension eq 'gif') {
-            my $returnCode = system ("$gifsicle -O2 --batch \"$file\" 1>>$logFile");
+            my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
         }
 
         my $resultSize = -s $file;
