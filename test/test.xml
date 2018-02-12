@@ -535,13 +535,13 @@
         <cell id="tda.c2.1"></cell>
         <cell id="tda.c2.2">Meters</cell>
         <cell id="tda.c2.3">Kilograms</cell>
-        <cell id="tda.c2.4"> </cell>
+        <cell id="tda.c2.4"/>
     </row>
     <row id="tda.r3" rend="border-top(1px solid black)">
         <cell id="tda.c3.1">Jeroen</cell>
         <cell id="tda.c3.2">1.80</cell>
         <cell id="tda.c3.3">86</cell>
-        <cell id="tda.c3.4"></cell>
+        <cell id="tda.c3.4"/>
     </row>
     <row id="tda.r4">
         <cell id="tda.c4.1">Rodelyn</cell>
@@ -552,14 +552,14 @@
     <row id="tda.r5">
         <cell id="tda.c5.1">Joshua</cell>
         <cell id="tda.c5.2">1.20</cell>
-        <cell id="tda.c5.3"></cell>
-        <cell id="tda.c5.4"></cell>
+        <cell id="tda.c5.3"/>
+        <cell id="tda.c5.4"/>
     </row>
     <row id="tda.r6">
         <cell id="tda.c6.1">Raphael</cell>
         <cell id="tda.c6.2">1.00</cell>
-        <cell id="tda.c6.3"></cell>
-        <cell id="tda.c6.4"></cell>
+        <cell id="tda.c6.3"/>
+        <cell id="tda.c6.4"/>
     </row>
     <row id="tda.r7" rend="border-bottom(2px solid black)">
         <cell id="tda.c7.1"><hi>Total</hi></cell>
@@ -587,8 +587,7 @@
         <cell>Quantity.</cell>
     </row>
     <row role="unit">
-        
-        <cell></cell>
+        <cell/>
         <cell>kg</cell>
     </row>
     <row>
@@ -751,8 +750,36 @@
 </table>
 </p>
 
+<div2>
+<head>Tables with repeated rows using ditto marks.</head>
+
+<p>The custom way: using a special <gi>ditto</gi> element:</p>
+
+<p>
+<table id="demoDitto1">
+<row><cell>Number of apples</cell><cell>23</cell></row>
+<row><cell><ditto>Number of</ditto> bananas</cell><cell>34</cell></row>
+<row><cell><ditto>Number of</ditto> pears</cell><cell>45</cell></row>
+<row><cell><ditto>Number of</ditto> pineapples</cell><cell>56</cell></row>
+<row><cell><ditto mark="»">Number of</ditto> oranges</cell><cell>67</cell></row>
+</table>
+</p>
+
+<p>The P5 way: using a <gi>seg</gi> element with an <att>copyOf</att> attribute</p>
+
+<p rend="ditto-mark(+)">
+<table id="demoDitto2" rend="ditto-mark(»)">
+<row><cell><seg id="dt1">Number of</seg> apples</cell><cell>23</cell></row>
+<row><cell><seg copyOf="dt1">  ,,   ,,</seg> bananas</cell><cell>34</cell></row>
+<row><cell><seg copyOf="dt1">  ,,   ,,</seg> pears</cell><cell>45</cell></row>
+<row><cell><seg copyOf="dt1">  ,,   ,,</seg> pineapples</cell><cell>56</cell></row>
+<row><cell><seg copyOf="dt1">  ,,   ,,</seg> oranges</cell><cell>67</cell></row>
+</table>
+</p>
 
 
+
+</div2>
 </div1>
 <div1 id="ch05" n="V" type="Chapter">
 <head type="label" rend="image(images/Ornament.gif)">Chapter V</head>

@@ -70,97 +70,103 @@
                <text>Chapter IV Tables</text>
             </navLabel>
             <content src="test-ch04-1.xhtml"/>
+            <navPoint playOrder="10" class="section" id="xd29e1085">
+               <navLabel>
+                  <text>Tables with repeated rows using ditto marks.</text>
+               </navLabel>
+               <content src="test-ch04-3.xhtml#xd29e1085"/>
+            </navPoint>
          </navPoint>
-         <navPoint playOrder="10" class="chapter" id="ch05">
+         <navPoint playOrder="11" class="chapter" id="ch05">
             <navLabel>
                <text>Chapter V Figures</text>
             </navLabel>
             <content src="test-ch05.xhtml"/>
          </navPoint>
-         <navPoint playOrder="11" class="chapter" id="ch6">
+         <navPoint playOrder="12" class="chapter" id="ch6">
             <navLabel>
                <text>Chapter VI Lists</text>
             </navLabel>
             <content src="test-ch6.xhtml"/>
          </navPoint>
-         <navPoint playOrder="12" class="chapter" id="ch07">
+         <navPoint playOrder="13" class="chapter" id="ch07">
             <navLabel>
                <text>Chapter VII Text Divisions</text>
             </navLabel>
             <content src="test-ch07.xhtml"/>
-            <navPoint playOrder="13" class="section" id="ch07.1">
+            <navPoint playOrder="14" class="section" id="ch07.1">
                <navLabel>
                   <text>Division at Level 2</text>
                </navLabel>
                <content src="test-ch07.xhtml#ch07.1"/>
             </navPoint>
          </navPoint>
-         <navPoint playOrder="14" class="chapter" id="ch08">
+         <navPoint playOrder="15" class="chapter" id="ch08">
             <navLabel>
                <text>Chapter VIII Poetry</text>
             </navLabel>
             <content src="test-ch08.xhtml"/>
          </navPoint>
-         <navPoint playOrder="15" class="chapter" id="alignFirst">
+         <navPoint playOrder="16" class="chapter" id="alignFirst">
             <navLabel>
                <text>Chapter IX Text Alignments</text>
             </navLabel>
             <content src="test-alignFirst.xhtml"/>
          </navPoint>
-         <navPoint playOrder="16" class="chapter" id="usingStyle">
+         <navPoint playOrder="17" class="chapter" id="usingStyle">
             <navLabel>
                <text>Hoofdstuk X Using @style and @rendition attributes</text>
             </navLabel>
             <content src="test-usingStyle.xhtml"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="17" class="chapter" id="test-toc">
+      <navPoint playOrder="18" class="chapter" id="test-toc">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-test-toc.xhtml"/>
       </navPoint>
-      <navPoint playOrder="18" class="chapter" id="index">
+      <navPoint playOrder="19" class="chapter" id="index">
          <navLabel>
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="19" class="section" id="xd29e1702">
+         <navPoint playOrder="20" class="section" id="xd29e1793">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1702"/>
+            <content src="test-index.xhtml#xd29e1793"/>
          </navPoint>
-         <navPoint playOrder="20" class="section" id="xd29e1707">
+         <navPoint playOrder="21" class="section" id="xd29e1798">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1707"/>
+            <content src="test-index.xhtml#xd29e1798"/>
          </navPoint>
-         <navPoint playOrder="21" class="section" id="xd29e1712">
+         <navPoint playOrder="22" class="section" id="xd29e1803">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1712"/>
+            <content src="test-index.xhtml#xd29e1803"/>
          </navPoint>
-         <navPoint playOrder="22" class="section" id="xd29e1717">
+         <navPoint playOrder="23" class="section" id="xd29e1808">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1717"/>
+            <content src="test-index.xhtml#xd29e1808"/>
          </navPoint>
       </navPoint>
-      <navPoint playOrder="23" class="contents" id="toc">
+      <navPoint playOrder="24" class="contents" id="toc">
          <navLabel>
             <text>Table of Contents</text>
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="24" class="colophon" id="xd29e1730">
+      <navPoint playOrder="25" class="colophon" id="xd29e1821">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd29e1730"/>
+         <content src="test-backmatter.xhtml#xd29e1821"/>
       </navPoint>
    </navMap>
 </ncx>

@@ -702,13 +702,28 @@
     <xd:doc>
         <xd:short>Segments.</xd:short>
         <xd:detail>Segments are used in text-analysis. We also use them for synchronizing
-        LibreVox spoken version with the text.</xd:detail>
+        audio with the text.</xd:detail>
     </xd:doc>
 
     <xsl:template match="seg">
         <span class="seg">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+
+    <xsl:template match="seg[@copyOf]">
+        <span class="seg">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:choose>
+                <xsl:when test="f:isSet('useDittoMarks')">
+                    <xsl:apply-templates select="//seg[@id = current()/@copyOf]" mode="ditto"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="//seg[@id = current()/@copyOf]"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </span>
     </xsl:template>
 
@@ -739,14 +754,15 @@
 
 
     <xsl:template mode="ditto" match="text()">
-        <xsl:call-template name="use_ditto_marks"/>
+        <xsl:copy-of select="f:useDittoMarks(.)"/>
     </xsl:template>
 
 
-    <xsl:template name="use_ditto_marks">
+    <xsl:function name="f:useDittoMarks">
+        <xsl:param name="node" as="node()*"/>
+
         <!-- Split the text-content of the ditto on space boundaries -->
-        <xsl:variable name="context" select="."/>
-        <xsl:for-each select="tokenize(., '\s+')">
+        <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
                     <xsl:copy-of select="f:logWarning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
@@ -759,19 +775,19 @@
                         <span class="s">
                             <!-- Handle most common in-line style elements. -->
                             <xsl:choose>
-                                <xsl:when test="$context/parent::hi[@rend='b' or @rend='bold']">
+                                <xsl:when test="$node/parent::hi[@rend='b' or @rend='bold']">
                                     <b><xsl:value-of select="."/></b>
                                 </xsl:when>
-                                <xsl:when test="$context/parent::hi[@rend='sup']">
+                                <xsl:when test="$node/parent::hi[@rend='sup']">
                                     <sup><xsl:value-of select="."/></sup>
                                 </xsl:when>
-                                <xsl:when test="$context/parent::hi[@rend='sub']">
+                                <xsl:when test="$node/parent::hi[@rend='sub']">
                                     <sub><xsl:value-of select="."/></sub>
                                 </xsl:when>
-                                <xsl:when test="$context/parent::hi[@rend='sc']">
+                                <xsl:when test="$node/parent::hi[@rend='sc']">
                                     <span class="sc"><xsl:value-of select="."/></span>
                                 </xsl:when>
-                                <xsl:when test="$context/parent::hi">
+                                <xsl:when test="$node/parent::hi">
                                     <i><xsl:value-of select="."/></i>
                                 </xsl:when>
                                 <xsl:otherwise>
@@ -780,17 +796,28 @@
                             </xsl:choose>
                         </span>
                         <!-- No ditto marks for parts that are superscripted or subscripted -->
-                        <xsl:if test="not($context/parent::hi[@rend='sub' or @rend='sup'])">
+                        <xsl:if test="not($node/parent::hi[@rend='sub' or @rend='sup'])">
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
                             <span class="d"><span class="i">
-                                <xsl:value-of select="if ($context/ancestor::ditto/@mark) then $context/ancestor::ditto/@mark else f:getSetting('dittoMark')"/>
+                                <xsl:value-of select="f:determineDittoMark($node)"/>
                             </span></span>
                         </xsl:if>
                     </span>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
-    </xsl:template>
+    </xsl:function>
+
+
+    <xsl:function name="f:determineDittoMark" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:value-of select="if ($node/ancestor::ditto/@mark) 
+            then $node/ancestor::ditto/@mark 
+            else if ($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')])
+                 then f:rend-value($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
+                 else f:getSetting('dittoMark')"/>
+    </xsl:function>
 
 
 </xsl:stylesheet>

@@ -843,6 +843,33 @@ span.hemistich {
 
   
 
+ 
+
+span.ditto {
+ display: inline-block;
+ vertical-align: middle;
+ text-align: center;
+}
+
+span.ditto span.s {
+ height: 0;
+ visibility: hidden;
+ line-height: 0;
+}
+
+span.ditto span.d {
+ display: block;
+ text-align: center;
+ line-height: 8pt;
+}
+
+span.ditto span.i {
+ position: relative;
+ top: -2px;
+}
+
+  
+
 table.alignedtext, table.alignedverse {
  border-collapse: collapse;
 }
@@ -983,7 +1010,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd29e1006 {
+.xd29e1005 {
 background-color:green;
 }
 
@@ -999,7 +1026,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd29e1007 {
+.xd29e1006 {
 background-color:white;
 }
 
@@ -1117,20 +1144,28 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd29e1037 {
+.xd29e1036 {
 background-color:yellow;
 }
 
-.xd29e1055 {
+.xd29e1054 {
 background-color:blue;
 }
 
-.xd29e1064 {
+.xd29e1063 {
 background-color:orange;
 }
 
-.xd29e1074 {
+.xd29e1073 {
 background-color:red;
+}
+
+.xd29e1138 {
+ditto-mark:+;
+}
+
+.demoDitto2 {
+ditto-mark:»;
 }
 
 .figTest1width {
@@ -1157,7 +1192,7 @@ width:480px;
 width:480px;
 }
 
-.xd29e1179width {
+.xd29e1270width {
 width:480px;
 }
 
@@ -1165,47 +1200,47 @@ width:480px;
 width:128px;
 }
 
-.xd29e1209 {
+.xd29e1300 {
 font-style:italic;
 }
 
-.xd29e1242 {
+.xd29e1333 {
 list-style-type:disc;
 }
 
-.xd29e1272 {
+.xd29e1363 {
 list-style-type:upper-roman;
 }
 
-.xd29e1284 {
+.xd29e1375 {
 list-style-type:lower-roman;
 }
 
-.xd29e1306 {
+.xd29e1397 {
 list-style-type:disc;
 }
 
-.xd29e1329 {
+.xd29e1420 {
 list-style-type:disc;
 }
 
-.xd29e1432 {
+.xd29e1523 {
 text-align:center;
 }
 
-.xd29e1437 {
+.xd29e1528 {
 text-indent:1em;
 }
 
-.xd29e1443 {
+.xd29e1534 {
 text-indent:2em;
 }
 
-.xd29e1447 {
+.xd29e1538 {
 text-indent:3em;
 }
 
-.xd29e1451 {
+.xd29e1542 {
 text-indent:10em;
 }
 
@@ -1247,6 +1282,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd29e1635 {
+.xd29e1726 {
 color:red
 }

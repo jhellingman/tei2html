@@ -5,3 +5,5 @@ For further samples, see https://github.com/GutenbergSource.
 The perl scrip `getRepos.pl` can be used to clone (or update) all GitHub repositories with texts submitted to Project Gutenberg.
 This script is automatically generated from the metadata of the files, and will be updated when more texts are added.
 
+For an example on how to include media overlays in ePub output using TEI (with only minimal additional markup) and SMIL files, 
+look at https://github.com/GutenbergSource/20820-Rama-Larawan.
