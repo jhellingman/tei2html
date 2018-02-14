@@ -127,7 +127,7 @@
             <xsl:value-of select="f:css-stylesheet('style/intralinear.css')"/>
         </xsl:if>
 
-        <xsl:if test="//ditto">
+        <xsl:if test="//ditto or //seg[@copyOf]">
             <xsl:value-of select="f:css-stylesheet('style/special.css')"/>
         </xsl:if>
 
@@ -448,6 +448,7 @@
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
+        <xsl:copy-of select="f:logDebug('Generate class {1} with rend attribute {2}.', (normalize-space($class), $rend))"/>
     </xsl:function>
 
 

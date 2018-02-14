@@ -442,6 +442,7 @@
                     <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
                     <xsl:value-of select="f:hanging-punctuation-class(.)"/>
                 </xsl:variable>
+                <xsl:copy-of select="f:logDebug('Generate paragraph with class {1}.', ($class))"/>
                 <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
                 <xsl:if test="@n and f:isSet('showParagraphNumbers')">
