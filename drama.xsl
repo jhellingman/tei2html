@@ -357,7 +357,7 @@
                             <td rowspan="{$count}" class="castGroupBrace">
                                 <xsl:copy-of select="f:outputImage(concat('images/rbrace', $count, '.png'), '}')"/>
                             </td>
-                            <td rowspan="{$count}"><xsl:apply-templates select="$this/head" mode="castGroupTable"/></td>
+                            <td rowspan="{$count}"><xsl:apply-templates select="$this/*[self::head or self::roleDesc]" mode="castGroupTable"/></td>
                         </xsl:if>
                     </tr>
                 </xsl:for-each>
@@ -366,6 +366,13 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head" mode="castGroupTable">
+        <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="castGroup/roleDesc" mode="castGroupTable">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
