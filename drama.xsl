@@ -343,14 +343,14 @@
         to add significant presentation-oriented tagging to the TEI source files. See also the stylesheet for <code>itemGroup</code> in list.xsl.</p></xd:detail>
     </xd:doc>
 
-    <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']">
+    <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']" mode="#default castGroupTable">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
-            <xsl:variable name="count" select="count(castItem)"/>
+            <xsl:variable name="count" select="count(.//castItem)"/>
             <xsl:variable name="this" select="."/>
             <table class="castGroupTable">
-                <xsl:for-each select="castItem">
+                <xsl:for-each select="castItem | castGroup">
                     <tr>
                         <td><xsl:apply-templates select="." mode="castGroupTable"/></td>
                         <xsl:if test="position() = 1">

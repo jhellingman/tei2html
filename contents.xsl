@@ -558,7 +558,7 @@
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <ul>
-                <xsl:apply-templates mode="genloi" select="//figure[head]"/>
+                <xsl:apply-templates select="//figure[head and not(./ancestor::figure)]" mode="genloi"/>
             </ul>
         </div>
     </xsl:template>
@@ -572,6 +572,11 @@
         <li id="loi.{f:generate-id(.)}">
             <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
             <xsl:call-template name="generate-toc-entry"/>
+            <xsl:if test=".//figure[head]">
+                <ul>
+                    <xsl:apply-templates select=".//figure[head]" mode="genloi"/>
+                </ul>
+            </xsl:if>
         </li>
     </xsl:template>
 
@@ -921,5 +926,21 @@
         </xsl:if>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- proto-Bibliography, to help build a bibliography from bibl-elements. -->
+
+    <xsl:template match="divGen[@type='protoBibliography']">
+        <xsl:if test="//bibl">
+            <h3 class="main"><xsl:value-of select="f:message('msgBibliography')"/></h3>
+
+            <ul>
+                <xsl:for-each select="//bibl">
+                    <xsl:sort select="."/>
+                    <li><xsl:apply-templates select="."/></li>
+                </xsl:for-each>
+            </ul>
+        </xsl:if>
+    </xsl:template>
 
 </xsl:stylesheet>
