@@ -716,12 +716,17 @@
     <xsl:template match="seg[@copyOf]">
         <span class="seg">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="copyOf" select="@copyOf"/>
             <xsl:choose>
+                <xsl:when test="not(//seg[@id = current()/@copyOf])">
+                    <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
+                    <xsl:apply-templates/>
+                </xsl:when>
                 <xsl:when test="f:isSet('useDittoMarks')">
-                    <xsl:apply-templates select="//seg[@id = current()/@copyOf]" mode="ditto"/>
+                    <xsl:apply-templates select="//seg[@id = $copyOf]" mode="ditto"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="//seg[@id = current()/@copyOf]"/>
+                    <xsl:apply-templates select="//seg[@id = $copyOf]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </span>

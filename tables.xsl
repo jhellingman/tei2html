@@ -240,13 +240,14 @@
     <xd:doc>
         <xd:short>Determine cell rendering.</xd:short>
         <xd:detail>
-            <p>Determine how to render a cell, using a class attribute with multiple values; we may need to supply up to five class names for rendering:</p>
+            <p>Determine how to render a cell, using a class attribute with multiple values; we may need to supply multiple class names for rendering:</p>
 
             <ol>
                 <li>one based on the <code>@role</code> attribute,</li>
                 <li>one based on the column-level <code>@rend</code> attribute,</li>
                 <li>one based on the row-level <code>@rend</code> attribute, and</li>
                 <li>one based on the cell-level <code>@rend</code> attribute.</li>
+                <li>one based on the presence of a left or right brace as the content of a multi-row cell.</li>
                 <li>one to four, based on the position of the cell in the table; the following classes can appear:
                         for data-cells: <code>cellTop cellRight cellBottom cellLeft</code>;
                         for header-cells: <code>cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft</code>.</li>
@@ -261,6 +262,8 @@
             <xsl:if test="@role and not(@role='data' or @role='sum')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:if test="@rows > 1">rowspan </xsl:if>
             <xsl:if test="@cols > 1">colspan </xsl:if>
+            <xsl:if test="@rows &gt; 1 and normalize-space(.) = '{'">leftbrace </xsl:if>
+            <xsl:if test="@rows &gt; 1 and normalize-space(.) = '}'">rightbrace </xsl:if>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>

@@ -73,7 +73,7 @@
 
     <xsl:template match="availability">
         <xsl:if test="f:isValid(.)">
-            <xsl:variable name="availability"><xsl:apply-templates mode="availability"/></xsl:variable>
+            <xsl:variable name="availability"><xsl:apply-templates mode="text"/></xsl:variable>
             <xsl:text>| Availability | </xsl:text><xsl:value-of select="normalize-space(string($availability))"/><xsl:text> |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -95,19 +95,19 @@
     <xsl:template match="note" mode="descriptions">
         <!-- Filter out empty descriptions and our template default placeholder -->
         <xsl:if test="f:isValid(.)">
-            <xsl:variable name="description"><xsl:apply-templates mode="availability"/></xsl:variable>
+            <xsl:variable name="description"><xsl:apply-templates mode="text"/></xsl:variable>
             <xsl:text>| Description | </xsl:text><xsl:value-of select="normalize-space(string($description))"/><xsl:text> |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="*"/>
 
-    <xsl:template match="xref" mode="#default descriptions availability">
+    <xsl:template match="xref" mode="text">
         <xsl:text>[</xsl:text><xsl:value-of select="."/><xsl:text>]</xsl:text>
         <xsl:text>(</xsl:text><xsl:value-of select="@url"/><xsl:text>)</xsl:text>
     </xsl:template>
 
-    <xsl:template match="text()" mode="#default descriptions availability">
+    <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
 

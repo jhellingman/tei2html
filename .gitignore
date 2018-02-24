@@ -76,3 +76,4 @@ test/htmlprofile.html
 test/epubprofile.html
 messages.po
 messages.csv
+messages-with-missing.xml

@@ -566,4 +566,14 @@ width:<xsl:value-of select="$width"/>;
         <xsl:value-of select="count($node//graphic) - count($node//note[@place='foot' or not(@place)]//graphic)"/>
     </xsl:function>
 
+
+    <xsl:function name="f:containsFigure" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <!-- $node contains a figure element (either directly or within some other element, but excluding
+             elements that get lifted out of the context of this node (for example: footnotes) -->
+        <xsl:value-of select="count($node//figure) - count($node//note[not(@place) or @place='foot']//figure) > 0"/>
+    </xsl:function>
+
+
+
 </xsl:stylesheet>

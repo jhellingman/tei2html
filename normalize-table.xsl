@@ -34,9 +34,9 @@
         adjusted to the TEI table model and expanded with code to detect non-well-formed
         tables.</p>
 
-        <p>An additional step is added to enable alignment on the decimal separator, which
-        is not supported in HTML. This is achieved by splitting the cells in two, one
-        for the integer, and one for the fractional part of the number.</p>
+        <p>An additional step is used to align columns on the decimal separator, which
+        is not supported in HTML. This is achieved by splitting the cells in two parts, the
+        integer, and the fractional part of the number.</p>
         </xd:detail>
     </xd:doc>
 
@@ -241,7 +241,7 @@
     <xd:doc>
         <xd:short>Cleanup a cell as last phase of normalization.</xd:short>
         <xd:detail>
-            <p>Cleanup a cell as last phase of normalization. Drop spanned cells introduced int he process
+            <p>Cleanup a cell as last phase of normalization. Drop spanned cells introduced in the process
             and restore the <code>@cols</code> and <code>@rows</code> attributes. Add the <code>@col</code> and <code>@row</code> attribute
             by counting siblings.</p>
         </xd:detail>
