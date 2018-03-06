@@ -82,11 +82,16 @@
         <xsl:value-of select="concat(upper-case($level), ': ', f:formatString($message, $params))"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Format a string with numbered parameters.</xd:short>
+        <xd:detail>Format a string. Replace parameter-placeholders in the message string like {1} {2} {3} to the matching value in the <code>$param</code> sequence.</xd:detail>
+    </xd:doc>
+
     <xsl:function name="f:formatString" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
 
-        <!-- replace parameters in the message string like {1} {2} {3} to the matching value in the $param sequence -->
         <xsl:variable name="formatted">
             <xsl:analyze-string select="$message" regex="\{{([0-9]+)\}}">
                 <xsl:matching-substring>

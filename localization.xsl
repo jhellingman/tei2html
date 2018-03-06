@@ -47,15 +47,6 @@
     <xsl:variable name="defaultlanguage" select="'en'" as="xs:string"/>
 
     <xd:doc>
-        <xd:short>Find a localized message (short form).</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:_" as="xs:string">
-        <xsl:param name="name" as="xs:string"/>
-        <xsl:value-of select="f:message($name)"/>
-    </xsl:function> 
-
-    <xd:doc>
         <xd:short>Find a localized message.</xd:short>
         <xd:detail>Function to find a localized message in the <code>messages.xml</code> file. This function will first try to find the message
         in the exact locale, then in the base-language, and, if this also fails, in the default locale.</xd:detail>
@@ -63,67 +54,38 @@
 
     <xsl:function name="f:message" as="xs:string">
         <xsl:param name="name" as="xs:string"/>
-            <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
-            <xsl:choose>
-                <xsl:when test="$msg[lang($language)][1]">
-                    <xsl:apply-templates select="$msg[lang($language)][1]"/>
-                    <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($language, $name, $msg[lang($language)][1]))"/>
-                </xsl:when>
-                <xsl:when test="$msg[lang($baselanguage)][1]">
-                    <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
-                    <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($baselanguage, $name, $msg[lang($baselanguage)][1]))"/>
-                </xsl:when>
-                <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                    <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
-                    <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
-                    <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultlanguage, $name, $msg[lang($defaultlanguage)][1]))"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                    <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
-                </xsl:otherwise>
-            </xsl:choose>
-    </xsl:function> 
-
-    <xd:doc>
-        <xd:short>Find a localized message.</xd:short>
-        <xd:detail>Template to find a localized message in the <code>messages.xml</code> file. This template will first try to find the message
-        in the exact locale, then in the base-language, and, if this also fails, in the default locale.</xd:detail>
-    </xd:doc>
-
-    <xsl:template name="GetMessage">
-        <xsl:param name="name" select="'msgError'" as="xs:string"/>
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
-                <xsl:apply-templates select="$msg[lang($language)][1]"/>
+                <xsl:apply-templates select="$msg[lang($language)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($language, $name, $msg[lang($language)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($baselanguage)][1]">
-                <xsl:apply-templates select="$msg[lang($baselanguage)][1]"/>
+                <xsl:apply-templates select="$msg[lang($baselanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($baselanguage, $name, $msg[lang($baselanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
                 <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
-                <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]"/>
+                <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultlanguage, $name, $msg[lang($defaultlanguage)][1]))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                    <xsl:text>[### </xsl:text><xsl:value-of select="$name"/><xsl:text> ###]</xsl:text>
+                <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:function> 
+
 
     <xd:doc>
         <xd:short>Format a localized message.</xd:short>
-        <xd:detail>Template to find and format a localized message in the <code>messages.xml</code> file. This template will first try to find the message
+        <xd:detail>Function to find and format a localized message in the <code>messages.xml</code> file. This function will first try to find the message
         in the exact locale, then in the base-language, and, if this also fails, in the default locale. After finding it, it will apply the given
         parameters to it.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="FormatMessage">
-        <xsl:param name="name" select="'msgError'" as="xs:string"/>
+    <xsl:function name="f:formatMessage">
+        <xsl:param name="name" as="xs:string"/>
         <xsl:param name="params" as="document-node()"/>
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
         <xsl:choose>
@@ -145,10 +107,15 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                    <xsl:text>[### </xsl:text><xsl:value-of select="$name"/><xsl:text> ###]</xsl:text>
+                <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Handle a localized message.</xd:short>
+    </xd:doc>
 
     <xsl:template match="msg:message" mode="formatMessage">
         <xsl:param name="params" as="document-node()?"/>
@@ -157,15 +124,22 @@
         </xsl:apply-templates>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Copy element in a localized message.</xd:short>
+        <xd:detail>The element is supposed to be suitable for the output format, that is HTML or XHTML.</xd:detail>
+    </xd:doc>
+
     <xsl:template match="*" mode="formatMessage">
         <xsl:param name="params" as="document-node()?"/>
-            <xsl:copy>
-                <xsl:copy-of select="@*"/>
-                <xsl:apply-templates mode="formatMessage">
-                    <xsl:with-param name="params" select="$params"/>
-                </xsl:apply-templates>
-            </xsl:copy>
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates mode="formatMessage">
+                <xsl:with-param name="params" select="$params"/>
+            </xsl:apply-templates>
+        </xsl:copy>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Insert a parameter in a localized message.</xd:short>

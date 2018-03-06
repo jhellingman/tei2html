@@ -103,10 +103,7 @@
                     <param name="language"><xsl:value-of select="f:message(/*[self::TEI.2 or self::TEI]/@lang)"/></param>
                 </params>
             </xsl:variable>
-            <xsl:call-template name="FormatMessage">
-                <xsl:with-param name="name" select="'msgPGHeader'"/>
-                <xsl:with-param name="params" select="$params"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:formatMessage('msgPGHeader', $params)"/>
         </div>
         <p/>
     </xsl:template>
@@ -135,10 +132,7 @@
                 </params>
             </xsl:variable>
             <p/>
-            <xsl:call-template name="FormatMessage">
-                <xsl:with-param name="name" select="'msgPGFooter'"/>
-                <xsl:with-param name="params" select="$params"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:formatMessage('msgPGFooter', $params)"/>
             <xsl:call-template name="PGLicense"/>
         </div>
     </xsl:template>
@@ -146,10 +140,7 @@
 
     <xsl:template name="PGLicense">
         <xsl:variable name="params"><params/></xsl:variable>
-        <xsl:call-template name="FormatMessage">
-            <xsl:with-param name="name" select="'msgPGLicense'"/>
-            <xsl:with-param name="params" select="$params"/>
-        </xsl:call-template>
+        <xsl:copy-of select="f:formatMessage('msgPGLicense', $params)"/>
     </xsl:template>
 
 

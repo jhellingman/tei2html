@@ -77,3 +77,5 @@ test/epubprofile.html
 messages.po
 messages.csv
 messages-with-missing.xml
+test/htmltrace.txt
+test/epubtrace.txt

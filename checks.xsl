@@ -49,8 +49,8 @@
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:include href="configuration.xsl"/>
     <xsl:include href="log.xsl"/>
+    <xsl:include href="configuration.xsl"/>
     <xsl:include href="segmentize.xsl"/>
 
     <xsl:variable name="outputformat" select="'html'"/>

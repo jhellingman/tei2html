@@ -42,7 +42,9 @@
             <table>
                 <tr>
                     <th width="20%">Message ID</th>
-                    <th width="80%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th></tr>
+                    <th width="30%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
+                    <th widht="50%">Disambiguation</th>
+                </tr>
                 <xsl:apply-templates select="//msg:message" mode="missing"/>
             </table>
 
@@ -50,8 +52,8 @@
             <table>
                 <tr>
                     <th width="20%">Message ID</th>
-                    <th width="40%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
-                    <th width="40%">Message in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></th>
+                    <th width="30%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
+                    <th width="50%">Message in <xsl:value-of select="//msg:message[@name=$destlang and lang('en')]"/></th>
                 </tr>
                 <xsl:apply-templates select="//msg:message" mode="review"/>
             </table>
@@ -70,9 +72,10 @@
                         <xsl:choose>
                         <xsl:when test="string-length($value) &lt; 2000">
                             <td><xsl:apply-templates select="$value" mode="cp"/></td>
+                            <td><xsl:value-of select="@help"/></td>
                         </xsl:when>
                         <xsl:otherwise>
-                            <td><i class="missing">long message omitted</i></td>
+                            <td colspan="2"><i class="missing">long message omitted</i></td>
                         </xsl:otherwise>
                     </xsl:choose>
                 </tr>

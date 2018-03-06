@@ -414,24 +414,11 @@
 
         <span class="gap">
             <xsl:if test="f:isSet('useMouseOverPopups')">
-                <xsl:attribute name="title">
-                    <xsl:choose>
-                        <xsl:when test="@extent">
-                            <xsl:call-template name="FormatMessage">
-                                <xsl:with-param name="name" select="'msgMissingTextWithExtentReason'"/>
-                                <xsl:with-param name="params" select="$params"/>
-                            </xsl:call-template>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="FormatMessage">
-                                <xsl:with-param name="name" select="'msgMissingTextWithReason'"/>
-                                <xsl:with-param name="params" select="$params"/>
-                            </xsl:call-template>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:attribute>
+                <xsl:attribute name="title" select="if (@extent) 
+                                                    then f:formatMessage('msgMissingTextWithExtentReason', $params) 
+                                                    else f:formatMessage('msgMissingTextWithReason', $params)"/>
             </xsl:if>
-            [<i><xsl:value-of select="f:message('msgMissingText')"/></i>]
+            <xsl:text>[</xsl:text><i><xsl:value-of select="f:message('msgMissingText')"/></i><xsl:text>]</xsl:text>
         </span>
     </xsl:template>
 

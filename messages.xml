@@ -37,8 +37,16 @@
                 msgOrange.color
 
         -->
-
-        <msg:message name="msgPassim">Passim</msg:message>
+		
+		<msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
+		<msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
+		<msg:message name="msgForeword" help="A part of a book before the main text not written by the author. Typically written by an authority to introduce the book and explain why the reader should read the book.">Foreword</msg:message>
+		<msg:message name="msgPreface" help="A part of a book before the main text  written by the author. Explains how the book came about.">Preface</msg:message>
+		<msg:message name="msgIntroduction" help="A part of a book before the main text written by the author. Provides a short overview of the contents.">Introduction</msg:message>
+		<msg:message name="msgAfterword" help="A part of a book after the main text written similar to a foreword. May be used to respond to critical remarks made about a previous edition.">Afterword</msg:message>
+		<msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
+		
+        <msg:message name="msgPassim" help="Used in references to indicate a word or phrase occurs many times in the work referenced.">Passim</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
@@ -450,11 +458,11 @@
 
         <msg:message name="msgNotCopyrightedUS">This book is not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this book.</msg:message>
 
-        <msg:message name="msgAndThePgdpTeam">and the Online Distributed Proofreading Team at http://www.pgdp.net.</msg:message>
+        <msg:message name="msgAndThePgdpTeam">and the Online Distributed Proofreading Team at https://www.pgdp.net.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with <a href="#pglicense">this eBook</a> or online at <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>. If you are not located in the United States, you&apos;ll have to check the laws of the country where you are located before using this ebook.</p>
+            <p class="smallprint">This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with <a href="#pglicense">this eBook</a> or online at <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. If you are not located in the United States, you&apos;ll have to check the laws of the country where you are located before using this ebook.</p>
             <p class="smallprint">Title: <msg:param name="title"/>.</p>
             <p class="smallprint">Author: <msg:param name="authors"/>.</p>
             <p class="smallprint">Release Date: <msg:param name="releasedate"/> [EBook #<msg:param name="pgnum"/>]</p>
@@ -467,7 +475,7 @@
 
             <p class="smallprint">This file should be named <msg:param name="pgnum"/>-h.html or <msg:param name="pgnum"/>-h.zip.</p>
             <p class="smallprint">This and all associated files of various formats will be found in:</p>
-            <p class="smallprint">http://www.gutenberg.org/<msg:param name="pgpath"/></p>
+            <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Produced by <msg:param name="transcriber"/>.</p>
 
             <p class="smallprint">Updated editions will replace the previous one&#x2014;the old editions will be renamed.</p>
@@ -481,7 +489,7 @@
 
             <p class="smallprint">PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK</p>
 
-            <p class="smallprint">To protect the Project Gutenberg&tm; mission of promoting the free distribution of electronic works, by using or distributing this work (or any other work associated in any way with the phrase &ldquo;Project Gutenberg&rdquo;), you agree to comply with all the terms of the Full Project Gutenberg&tm; License (available with this file or online at <a href='http://gutenberg.org/license'>http://gutenberg.org/license</a>).</p>
+            <p class="smallprint">To protect the Project Gutenberg&tm; mission of promoting the free distribution of electronic works, by using or distributing this work (or any other work associated in any way with the phrase &ldquo;Project Gutenberg&rdquo;), you agree to comply with all the terms of the Full Project Gutenberg&tm; License (available with this file or on-line at <a href='https://gutenberg.org/license'>https://gutenberg.org/license</a>).</p>
 
             <h3 id="pglicence.s1" class="smallprint">Section 1. General Terms of Use and Redistributing Project Gutenberg&tm; electronic works</h3>
 
@@ -497,7 +505,7 @@
 
             <p id="pglicence.s1E1" class="smallprint">1.E.1. The following sentence, with active links to, or other immediate access to, the full Project Gutenberg&tm; License must appear prominently whenever any copy of a Project Gutenberg&tm; work (any work on which the phrase &ldquo;Project Gutenberg&rdquo; appears, or with which the phrase &ldquo;Project Gutenberg&rdquo; is associated) is accessed, displayed, performed, viewed, copied or distributed:</p>
 
-                <blockquote><p class="smallprint">This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <a href="http://www.gutenberg.org/">www.gutenberg.org</a>. If you are not located in the United States, you&apos;ll have to check the laws of the country where you are located before using this ebook.</p></blockquote>
+                <blockquote><p class="smallprint">This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at <a href="https://www.gutenberg.org/">www.gutenberg.org</a>. If you are not located in the United States, you&apos;ll have to check the laws of the country where you are located before using this ebook.</p></blockquote>
 
             <p id="pglicence.s1E2" class="smallprint">1.E.2. If an individual Project Gutenberg&tm; electronic work is derived from texts not protected by U.S. copyright law (does not contain a notice indicating that it is posted with permission of the copyright holder), the work can be copied and distributed to anyone in the United States without paying any fees or charges. If you are redistributing or providing access to a work with the phrase &ldquo;Project Gutenberg&rdquo; associated with or appearing on the work, you must comply either with the requirements of paragraphs 1.E.1 through 1.E.7 or obtain permission for the use of the work and the Project Gutenberg&tm; trademark as set forth in paragraphs 1.E.8 or 1.E.9.</p>
 
@@ -507,7 +515,7 @@
 
             <p id="pglicence.s1E5" class="smallprint">1.E.5. Do not copy, display, perform, distribute or redistribute this electronic work, or any part of this electronic work, without prominently displaying the sentence set forth in paragraph <a href="#pglicence.s1E1">1.E.1</a> with active links or immediate access to the full terms of the Project Gutenberg&tm; License.</p>
 
-            <p id="pglicence.s1E6" class="smallprint">1.E.6. You may convert to and distribute this work in any binary, compressed, marked up, nonproprietary or proprietary form, including any word processing or hypertext form. However, if you provide access to or distribute copies of a Project Gutenberg&tm; work in a format other than &ldquo;Plain Vanilla ASCII&rdquo; or other format used in the official version posted on the official Project Gutenberg&tm; web site (www.gutenberg.org), you must, at no additional cost, fee or expense to the user, provide a copy, a means of exporting a copy, or a means of obtaining a copy upon request, of the work in its original &ldquo;Plain Vanilla ASCII&rdquo; or other form. Any alternate format must include the full Project Gutenberg&tm; License as specified in paragraph <a href="#pglicence.s1E1">1.E.1</a>.</p>
+            <p id="pglicence.s1E6" class="smallprint">1.E.6. You may convert to and distribute this work in any binary, compressed, marked up, non-proprietary or proprietary form, including any word processing or hypertext form. However, if you provide access to or distribute copies of a Project Gutenberg&tm; work in a format other than &ldquo;Plain Vanilla ASCII&rdquo; or other format used in the official version posted on the official Project Gutenberg&tm; web site (<a href="https://www.gutenberg.org/">www.gutenberg.org</a>), you must, at no additional cost, fee or expense to the user, provide a copy, a means of exporting a copy, or a means of obtaining a copy upon request, of the work in its original &ldquo;Plain Vanilla ASCII&rdquo; or other form. Any alternate format must include the full Project Gutenberg&tm; License as specified in paragraph <a href="#pglicence.s1E1">1.E.1</a>.</p>
 
             <p id="pglicence.s1E7" class="smallprint">1.E.7. Do not charge a fee for access to, viewing, displaying, performing, copying or distributing any Project Gutenberg&tm; works unless you comply with paragraph 1.E.8 or 1.E.9.</p>
 
@@ -544,14 +552,14 @@
 
             <p class="smallprint">Project Gutenberg&tm; is synonymous with the free distribution of electronic works in formats readable by the widest variety of computers including obsolete, old, middle-aged and new computers. It exists because of the efforts of hundreds of volunteers and donations from people in all walks of life.</p>
 
-            <p class="smallprint">Volunteers and financial support to provide volunteers with the assistance they need are critical to reaching Project Gutenberg&tm;&apos;s goals and ensuring that the Project Gutenberg&tm; collection will remain freely available for generations to come. In 2001, the Project Gutenberg Literary Archive Foundation was created to provide a secure and permanent future for Project Gutenberg&tm; and future generations. To learn more about the Project Gutenberg Literary Archive Foundation and how your efforts and donations can help, see Sections 3 and 4 and the Foundation information page at <a href="http://www.gutenberg.org">www.gutenberg.org</a> Section 3. Information about the Project Gutenberg Literary Archive Foundation.</p>
+            <p class="smallprint">Volunteers and financial support to provide volunteers with the assistance they need are critical to reaching Project Gutenberg&tm;&apos;s goals and ensuring that the Project Gutenberg&tm; collection will remain freely available for generations to come. In 2001, the Project Gutenberg Literary Archive Foundation was created to provide a secure and permanent future for Project Gutenberg&tm; and future generations. To learn more about the Project Gutenberg Literary Archive Foundation and how your efforts and donations can help, see Sections 3 and 4 and the Foundation information page at <a href="https://www.gutenberg.org">www.gutenberg.org</a> Section 3. Information about the Project Gutenberg Literary Archive Foundation.</p>
 
 
             <h3 id="pglicence.s3">Section 3. Information about the Project Gutenberg Literary Archive Foundation</h3>
 
             <p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non profit 501(c)(3) educational corporation organized under the laws of the state of Mississippi and granted tax exempt status by the Internal Revenue Service. The Foundation&apos;s EIN or federal tax identification number is 64-6221541. Contributions to the Project Gutenberg Literary Archive Foundation are tax deductible to the full extent permitted by U.S. federal laws and your state&apos;s laws.</p>
 
-            <p class="smallprint">The Foundation&apos;s principal office is in Fairbanks, Alaska, with the mailing address: PO Box 750175, Fairbanks, AK 99775, but its volunteers and employees are scattered throughout numerous locations. Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up to date contact information can be found at the Foundation&apos;s web site and official page at <a href="http://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
+            <p class="smallprint">The Foundation&apos;s principal office is in Fairbanks, Alaska, with the mailing address: PO Box 750175, Fairbanks, AK 99775, but its volunteers and employees are scattered throughout numerous locations. Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up to date contact information can be found at the Foundation&apos;s web site and official page at <a href="https://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
 
             <p class="smallprint">For additional contact information:</p>
 
@@ -566,13 +574,13 @@
 
             <p class="smallprint">Project Gutenberg&tm; depends upon and cannot survive without wide spread public support and donations to carry out its mission of increasing the number of public domain and licensed works that can be freely distributed in machine readable form accessible by the widest array of equipment including outdated equipment. Many small donations ($1 to $5,000) are particularly important to maintaining tax exempt status with the IRS.</p>
 
-            <p class="smallprint">The Foundation is committed to complying with the laws regulating charities and charitable donations in all 50 states of the United States. Compliance requirements are not uniform and it takes a considerable effort, much paperwork and many fees to meet and keep up with these requirements. We do not solicit donations in locations where we have not received written confirmation of compliance. To SEND DONATIONS or determine the status of compliance for any particular state visit <a href="http://www.gutenberg.org/donate">www.gutenberg.org/donate</a>.</p>
+            <p class="smallprint">The Foundation is committed to complying with the laws regulating charities and charitable donations in all 50 states of the United States. Compliance requirements are not uniform and it takes a considerable effort, much paperwork and many fees to meet and keep up with these requirements. We do not solicit donations in locations where we have not received written confirmation of compliance. To SEND DONATIONS or determine the status of compliance for any particular state visit <a href="https://www.gutenberg.org/donate">www.gutenberg.org/donate</a>.</p>
 
             <p class="smallprint">While we cannot and do not solicit contributions from states where we have not met the solicitation requirements, we know of no prohibition against accepting unsolicited donations from donors in such states who approach us with offers to donate.</p>
 
             <p class="smallprint">International donations are gratefully accepted, but we cannot make any statements concerning tax treatment of donations received from outside the United States. U.S. laws alone swamp our small staff.</p>
 
-            <p class="smallprint">Please check the Project Gutenberg Web pages for current donation methods and addresses. Donations are accepted in a number of other ways including checks, online payments and credit card donations. To donate, please visit: <a href="http://www.gutenberg.org/donate">www.gutenberg.org/donate</a>.</p>
+            <p class="smallprint">Please check the Project Gutenberg Web pages for current donation methods and addresses. Donations are accepted in a number of other ways including checks, on-line payments and credit card donations. To donate, please visit: <a href="https://www.gutenberg.org/donate">www.gutenberg.org/donate</a>.</p>
 
 
             <h3 id="pglicence.s5">Section 5. General Information About Project Gutenberg&tm; electronic works.</h3>
@@ -581,7 +589,7 @@
 
             <p class="smallprint">Project Gutenberg&tm; eBooks are often created from several printed editions, all of which are confirmed as not protected by copyright in the U.S. unless a copyright notice is included. Thus, we do not necessarily keep eBooks in compliance with any particular paper edition.</p>
 
-            <p class="smallprint">Most people start at our Web site which has the main PG search facility: <a href="http://www.gutenberg.org/">www.gutenberg.org</a></p>
+            <p class="smallprint">Most people start at our Web site which has the main PG search facility: <a href="https://www.gutenberg.org/">www.gutenberg.org</a></p>
 
             <p class="smallprint">This Web site includes information about Project Gutenberg&tm;, including how to make donations to the Project Gutenberg Literary Archive Foundation, how to help produce our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
         </msg:message>
@@ -730,7 +738,7 @@
             <p class="smallprint">Ce livre électronique est destiné à l&apos;usage de tous, gratuitement
             et pratiquement sans aucune restriction. Vous pouvez le copier, le donner ou le réutiliser
             selon les termes de la licence du Projet Gutenberg incluse <a href="#pglicense">dans ce livre</a>
-            ou présente en ligne sur <a href='http://www.gutenberg.org/'>www.gutenberg.org</a></p>
+            ou présente en ligne sur <a href='https://www.gutenberg.org/'>www.gutenberg.org</a></p>
             <p class="smallprint">Titre: <msg:param name="title"/>.</p>
             <p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
             <p class="smallprint">Date de publication électronique: <msg:param name="releasedate"/> [EBook Number: <msg:param name="pgnum"/>]</p>
@@ -770,7 +778,7 @@
         <msg:message name="msgAdvertisement">Anzeige</msg:message>
         <msg:message name="msgAdvertisements">Anzeigen</msg:message>
         <msg:message name="msgAnd">und</msg:message>
-        <msg:message name="msgAndThePgdpTeam">und das Online Distributed Proofreading Team auf http://www.pgdp.net.</msg:message>
+        <msg:message name="msgAndThePgdpTeam">und das Online Distributed Proofreading Team auf https://www.pgdp.net/.</msg:message>
         <msg:message name="msgApparatusNote">Textkritischen Notiz</msg:message>
         <msg:message name="msgApparatusNotes">Textkritischen Notizen</msg:message>
         <msg:message name="msgAppendices">Appendizes</msg:message>
@@ -945,7 +953,7 @@
 
         <msg:message name="msgPGHeader">
             <p>Das Project Gutenberg E-buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dieses E-buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#pglicense">dieses Buches</a> oder online unter <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
+            <p class="smallprint">Dieses E-buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#pglicense">dieses Buches</a> oder online unter <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
             <p class="smallprint">Titel: <msg:param name="title"/>.</p>
             <p class="smallprint">Autor: <msg:param name="authors"/>.</p>
             <p class="smallprint">Publikationsdatum: <msg:param name="releasedate"/> [E-buch Nummer: <msg:param name="pgnum"/>]</p>
@@ -1367,11 +1375,11 @@
 
         <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit boek download.</msg:message>
 
-        <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op http://www.pgdp.net.</msg:message>
+        <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op https://www.pgdp.net/.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dit eBoek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopi&#x00EB;ren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eBoek (Engelstalig) of on-line op <a href='http://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eBoek gebruikt.</p>
+            <p class="smallprint">Dit eBoek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopi&#x00EB;ren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eBoek (Engelstalig) of on-line op <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eBoek gebruikt.</p>
             <p class="smallprint">Titel:  <msg:param name="title"/>.</p>
             <p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
             <p class="smallprint">Publicatiedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
@@ -1383,7 +1391,7 @@
             <p name="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dit bestand zou <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip moeten heten.</p>
             <p class="smallprint">Dit en alle bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
-            <p class="smallprint">http://www.gutenberg.org/<msg:param name="pgpath"/></p>
+            <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Geproduceerd door <msg:param name="transcriber"/>.</p>
 
             <p class="smallprint">Aangepaste versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
@@ -1663,7 +1671,7 @@
 
         <msg:message name="msgPGHeader">
             <p>La versión digital de Project Gutenberg de <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Este libro digital es para el uso de cualquier persona en cualquier lugar sin costo y casi sin restricciones de ningún tipo. Lo puede copiar, regalar o volver a usar bajo los términos de la Licencia de Project Gutenberg incluida con <a href="#pglicense">este libro digital</a> o en línea en <a href="http://www.gutenberg.org/">www.gutenberg.org</a> </p>
+            <p class="smallprint">Este libro digital es para el uso de cualquier persona en cualquier lugar sin costo y casi sin restricciones de ningún tipo. Lo puede copiar, regalar o volver a usar bajo los términos de la Licencia de Project Gutenberg incluida con <a href="#pglicense">este libro digital</a> o en línea en <a href="https://www.gutenberg.org/">www.gutenberg.org</a> </p>
             <p class="smallprint">Título: <msg:param name="title"/>.</p>
             <p class="smallprint">Autor(es): <msg:param name="authors"/>.</p>
             <p class="smallprint">Fecha de publicación: <msg:param name="releasedate"/> [Libro digital n.º <msg:param name="pgnum"/>]</p>
@@ -1675,7 +1683,7 @@
             <p name="smallprint">Fin de la versión de Project Gutenberg de <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Este archivo debe tener el nombre <msg:param name="pgnum"/>-h.html o <msg:param name="pgnum"/>-h.zip.</p>
             <p class="smallprint">Este y todos los archivos asociados en distintos formatos formatos se encontrarán en:</p>
-            <p class="smallprint">http://www.gutenberg.org/<msg:param name="pgpath"/></p>
+            <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Producido por <msg:param name="transcriber"/>.</p>
             <p class="smallprint">Las ediciones actualizadas sustituirán a las ediciones previas. Las ediciones anteriores recibirán nombres nuevos.</p>
             <p class="smallprint">Estas obras se crean a partir de ediciones impresas de dominio público, lo que significa que nadie es dueño de los derechos de autor de estas obras en los Estados Unidos, así que la Fundación (¡y usted!) puede copiarlas y distribuirlas en los Estados Unidos sin necesidad de permiso y sin pagar derechos de autor. Algunas reglas especiales, establecidas en la sección de Términos de Uso Generales de esta licencia, se aplican a la copia y distribución de las obras digitales de Proyect Gutenberg&#8482; para proteger el concepto y la marca registrada de PROJECT GUTENBERG&#8482;. Project Gutenberg&#8482; es una marca registrada, y no puede usarse si cobra por los libros digitales, a menos que reciba permiso específico. Si no cobra nada por las copias de este libro digital, cumplir con las reglas es muy fácil. Puede usar este libro digital para casi cualquier propósito, como para la creación de obras derivadas, informes, espectáculos e investigación. Puede modificarlo, imprimirlo y regalaro: se puede hacer casi CUALQUIER COSA con los libros digitales de dominio público. La redistribución está sujeta a la licencia de la marca registrada, especialmente en el caso de redistribución comercial. Por razones legales la licencia completa no ha sido traducida, y se encuentra a continuación en inglés.</p>

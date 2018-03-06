@@ -46,17 +46,17 @@
                <text>Chapter II Block-level Text Elements</text>
             </navLabel>
             <content src="test-ch2.xhtml"/>
-            <navPoint playOrder="6" class="section" id="xd29e380">
+            <navPoint playOrder="6" class="section" id="xd29e384">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd29e380"/>
+               <content src="test-ch2.xhtml#xd29e384"/>
             </navPoint>
-            <navPoint playOrder="7" class="section" id="xd29e404">
+            <navPoint playOrder="7" class="section" id="xd29e408">
                <navLabel>
                   <text>Some Further Tests of Paragraphs</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd29e404"/>
+               <content src="test-ch2.xhtml#xd29e408"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="8" class="chapter" id="ch03">
@@ -70,11 +70,11 @@
                <text>Chapter IV Tables</text>
             </navLabel>
             <content src="test-ch04-1.xhtml"/>
-            <navPoint playOrder="10" class="section" id="xd29e1085">
+            <navPoint playOrder="10" class="section" id="xd29e1089">
                <navLabel>
                   <text>Tables with repeated rows using ditto marks.</text>
                </navLabel>
-               <content src="test-ch04-3.xhtml#xd29e1085"/>
+               <content src="test-ch04-3.xhtml#xd29e1089"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="11" class="chapter" id="ch05">
@@ -131,29 +131,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="20" class="section" id="xd29e1793">
+         <navPoint playOrder="20" class="section" id="xd29e1797">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1793"/>
+            <content src="test-index.xhtml#xd29e1797"/>
          </navPoint>
-         <navPoint playOrder="21" class="section" id="xd29e1798">
+         <navPoint playOrder="21" class="section" id="xd29e1802">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1798"/>
+            <content src="test-index.xhtml#xd29e1802"/>
          </navPoint>
-         <navPoint playOrder="22" class="section" id="xd29e1803">
+         <navPoint playOrder="22" class="section" id="xd29e1807">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1803"/>
+            <content src="test-index.xhtml#xd29e1807"/>
          </navPoint>
-         <navPoint playOrder="23" class="section" id="xd29e1808">
+         <navPoint playOrder="23" class="section" id="xd29e1812">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd29e1808"/>
+            <content src="test-index.xhtml#xd29e1812"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="24" class="contents" id="toc">
@@ -162,11 +162,11 @@
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="25" class="colophon" id="xd29e1821">
+      <navPoint playOrder="25" class="colophon" id="xd29e1825">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd29e1821"/>
+         <content src="test-backmatter.xhtml#xd29e1825"/>
       </navPoint>
    </navMap>
 </ncx>

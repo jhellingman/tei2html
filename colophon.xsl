@@ -461,10 +461,7 @@
 
                 <i>
                     <xsl:attribute name="title">
-                        <xsl:call-template name="FormatMessage">
-                            <xsl:with-param name="name" select="'msgCountOccurrences'"/>
-                            <xsl:with-param name="params" select="$params"/>
-                        </xsl:call-template>
+                        <xsl:copy-of select="f:formatMessage('msgCountOccurrences', $params)"/>
                     </xsl:attribute>
                     <xsl:value-of select="f:message('msgPassim')"/>.
                 </i>
