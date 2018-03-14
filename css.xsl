@@ -1,5 +1,9 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
 
+    <!ENTITY lf         "&#x0A;">
+    <!ENTITY cr         "&#x0D;">
+
+]>
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -165,7 +169,9 @@
     <xsl:template name="custom-css-stylesheets">
         <xsl:if test="$customCssFile">
             <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-            <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
+            <!-- <xsl:value-of select="'&lf;//&lt;![CDATA[&lf;'" disable-output-escaping="yes"/> -->
+            <xsl:value-of select="f:css-stylesheet($customCssFile, .)" disable-output-escaping="yes"/>
+            <!-- <xsl:value-of select="'&lf;//]]&gt;&lf;'" disable-output-escaping="yes"/> -->
         </xsl:if>
 
         <xsl:if test="//pgStyleSheet">

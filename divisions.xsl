@@ -1,5 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
 
+    <!ENTITY divBodyContent "preceding-sibling::p or self::p or self::div or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div5 or self::div6">
+
+]>
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -302,15 +305,15 @@
 
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
-                <!-- TODO: this fails when a division immediately contains a division -->
-                <xsl:if test="*[not(preceding-sibling::p or self::p)]">
+                <!-- Complex repeated Xpath expression placed in entity. -->
+                <xsl:if test="*[not(&divBodyContent;)]">
                     <div class="divHead">
-                        <xsl:apply-templates select="*[not(preceding-sibling::p or self::p)]"/>
+                        <xsl:apply-templates select="*[not(&divBodyContent;)]"/>
                     </div>
                 </xsl:if>
-                <xsl:if test="*[preceding-sibling::p or self::p]">
+                <xsl:if test="*[&divBodyContent;]">
                     <div class="divBody">
-                        <xsl:apply-templates select="*[preceding-sibling::p or self::p]"/>
+                        <xsl:apply-templates select="*[&divBodyContent;]"/>
                     </div>
                 </xsl:if>
             </xsl:otherwise>

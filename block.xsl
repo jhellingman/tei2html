@@ -125,6 +125,7 @@
         <br/><b><xsl:apply-templates/></b>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
         <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).

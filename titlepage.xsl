@@ -1,10 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to format a title page, to be imported in tei2html.xsl.
-
--->
-
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
@@ -21,8 +15,13 @@
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <!--====================================================================-->
-    <!-- Title Page -->
+    <xd:doc mode="titlePage">
+        <xd:short>Mode used for processing elements on a title-page.</xd:short>
+    </xd:doc>
+
+    <xd:doc>
+        <xd:short>Format the Title-Page.</xd:short>
+    </xd:doc>
 
     <xsl:template match="titlePage">
         <div>
@@ -118,18 +117,6 @@
 
     <xsl:template match="lb" mode="titlePage">
         <br/>
-    </xsl:template>
-
-    <xsl:template match="hi" mode="titlePage">
-        <i><xsl:apply-templates mode="titlePage"/></i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sc']" mode="titlePage">
-        <span class="sc"><xsl:apply-templates/></span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sup']" mode="titlePage">
-        <sup><xsl:apply-templates/></sup>
     </xsl:template>
 
     <xsl:template match="seg" mode="titlePage">
