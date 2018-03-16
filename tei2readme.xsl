@@ -15,6 +15,13 @@
     exclude-result-prefixes="f xd xs"
     version="2.0">
 
+    <xsl:variable name="outputformat" select="markdown"/>
+
+    <xsl:include href="log.xsl"/>
+    <xsl:include href="configuration.xsl"/>
+    <xsl:include href="localization.xsl"/>
+    <xsl:include href="references-func.xsl"/>
+
     <xsl:output
         method="text"
         indent="yes"
@@ -104,7 +111,7 @@
 
     <xsl:template match="xref" mode="text">
         <xsl:text>[</xsl:text><xsl:value-of select="."/><xsl:text>]</xsl:text>
-        <xsl:text>(</xsl:text><xsl:value-of select="@url"/><xsl:text>)</xsl:text>
+        <xsl:text>(</xsl:text><xsl:value-of select="f:translate-xref-url(@url, 'en')"/><xsl:text>)</xsl:text>
     </xsl:template>
 
     <xsl:template match="text()">

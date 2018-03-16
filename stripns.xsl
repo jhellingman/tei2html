@@ -20,9 +20,9 @@
 
     <xd:doc>
         <xd:short>Remove the TEI namespace from the top-level TEI element.</xd:short>
-        <xd:detail>Remove the TEI namespace from the top-level TEI element; when we detect
-        we have a TEI document in the TEI namespace, we copy the entire document, while
-        stripping the namespace, and process the result.</xd:detail>
+        <xd:detail>When we detect we have a TEI document in the TEI namespace, we copy the entire document, while
+        stripping the namespace, and process the result. This enables us to process both documents in the
+        TEI namespace and in the default namespace with the same stylesheet.</xd:detail>
     </xd:doc>
 
     <xsl:template match="tei:TEI">

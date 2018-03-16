@@ -61,6 +61,16 @@ sub cleanText($) {
         # Eliminate trailing spaces:
         $line =~ s/\s+$//;
 
+        # Handle Dutch low-opening quotes
+        $line =~ s/^[„]/"/g;
+        $line =~ s/^,,([a-zA-Z])/"\1/g;
+        $line =~ s/ [„]/ "/g;
+        $line =~ s/ ,,([a-zA-Z])/ "\1/g;
+
+        # Handle spacing around punctuation marks
+        $line =~ s/ ([.,;!?]) /\1 /g;
+        $line =~ s/ ?-- ?/--/g;
+
         print OUTPUTFILE $line . "\n";
     }
     close(INPUTFILE);
