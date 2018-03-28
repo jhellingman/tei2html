@@ -1,4 +1,5 @@
-# Preface #
+
+# Introduction #
 
 The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the tei2html stylesheets kick-in.
 
@@ -10,7 +11,6 @@ Whether TEI is useful for you depends on your needs. If you are occasionally pro
 
 Originally, `tei2html` was developed to produce beautiful new editions of public domain texts for Project Gutenberg, but it can also be used for other TEI files.
 
-# Introduction #
 
 ## Guiding Principles ##
 
@@ -20,11 +20,11 @@ The guiding principles are:
 
   * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself. Unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
   * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that `tei2html` needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
-  * The `@rend`, `@style` and `@rendition` attributes in tags are intended as formatting indications only. Ignoring them fully or partially should not render a text incomprehensible.
+  * The `@rend`, `@style` and `@rendition` attributes in tags are intended as formatting indications only. Ignoring them fully or partially should not render a text incomprehensible. (Note that the TEI standard itself prescribes that these attributes should be used to indicate the formatting of the source, rather than the desired output.)
 
 The design decisions are:
 
-  * The `@rend` attribute values are designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are also used for effects that are not supported by CSS, and are thus not copied verbatim.
+  * The `@rend` attribute values are "rendition ladders" designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are also used for effects that are not supported by CSS, and are thus not copied verbatim.
   * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
   * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `<rendition>` elements. Note that currently no translation of the `@selector` attribute of the `<rendition>` element takes place.
 
@@ -33,11 +33,11 @@ As a result of these design decisions, a document can be neatly formatted with C
 
 ## SGML versus XML ##
 
-XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.
+Originally, TEI was defined in SGML. Since version P4, this TEI has moved on to XML. XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.
 
-Although XML is simpler, and many more tools can deal with it, SGML is somewhat easier to type due to its more relaxed syntax rules. You don't need to use quotes on all attribute values, nor need to provide close tags for all elements. For this reason, I normally produce my files in SGML. The conversion to XML is straightforward, and can (almost always) be fully automated. Since I am used to SGML, the examples in this document will be valid SGML snippets, but not necessarily well-formed XML.
+Although XML is simpler, and far more tools can deal with it, SGML is somewhat easier to type due to its more relaxed syntax rules. You don't need to use quotes on all attribute values, nor need to provide close tags for all elements. For this reason, I normally produce my files in SGML. The conversion to XML is straightforward, and can (almost always) be fully automated. Since I am used to SGML, the examples in this document will be valid SGML snippets, but not necessarily well-formed XML.
 
-Of course, you can work directly in XML instead of SGML. Working in XML directly has a number of benefits as well:
+Of course, you can work directly in XML instead of SGML, and the stylesheets are supposed to work with the P4 and P5 incarnations of TEI as well (although not all elements, even those of P3, are supported). Working in XML directly has a number of benefits as well:
 
   1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 2.0 directly).
   2. No initial conversion tool required.
