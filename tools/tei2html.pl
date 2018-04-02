@@ -589,11 +589,15 @@ sub runChecks($) {
         $debug || unlink($tmpFile . ".err");
     }
 
-    system ("$saxon \"$newname\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$basename-checks.html\"");
+    my $xmlfilename = temporaryFile('checks', '.xml');
+    system ("$saxon \"$newname\" $xsldir/normalize-table.xsl > $xmlfilename");
+
+    system ("$saxon \"$xmlfilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$basename-checks.html\"");
     if ($filename ne $transcribedFile) {
         $debug || unlink ($transcribedFile);
     }
     $debug || unlink ($newname);
+    $debug || unlink ($xmlfilename);
 }
 
 

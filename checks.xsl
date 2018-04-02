@@ -297,6 +297,71 @@
     </xsl:template>
 
 
+    <xsl:template match="cell[@role='sum']" mode="checks">
+
+        <!--
+        <xsl:if test="not(f:isNumber(.))">
+            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">The cell-contents &ldquo;<xsl:value-of select="."/>&rdquo;, marked as a sum, is not numeric.</i:issue>
+        </xsl:if>
+        -->
+        <xsl:if test="not(f:hasNumber(.))">
+            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Error" element="{name(.)}">The cell-contents &ldquo;<xsl:value-of select="."/>&rdquo;, marked as a sum, does not contain a number.</i:issue>
+        </xsl:if>
+
+        <xsl:variable name="indicatedSum" select="f:extractNumber(.)"/>
+
+        <!-- Collect the cells in column above -->
+        <xsl:variable name="col" select="if (@col) then @col else count(preceding-sibling::cell)"/>
+        <xsl:variable name="row" select="if (@row) then @row + 1 else count(../preceding-sibling::row) + 1"/>
+        <xsl:variable name="cells" select="if (@col) 
+            then ../../row/cell[@row &lt; $row][@col = $col][not(@role='sum')]
+            else ../../row[position() &lt; $row]/cell[position() = $col][not(@role='sum')]"/>
+        <xsl:variable name="numbers" as="xs:double*">
+            <xsl:for-each select="$cells"><xsl:sequence select="f:extractNumber(.)"/></xsl:for-each>
+        </xsl:variable>
+        <xsl:variable name="calculatedSum" select="sum($numbers)"/>
+
+        <!-- Take precision into account -->
+        <xsl:if test="abs($indicatedSum - $calculatedSum) > 0.00000000000001">
+            <i:issue pos="{@pos}" code="T2" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">The indicated sum <xsl:value-of select="$indicatedSum"/> (<xsl:value-of select="normalize-space(.)"/>) differs from the calculated sum <xsl:value-of select="$calculatedSum"/>.</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:function name="f:extractNumber" as="xs:double">
+        <xsl:param name="node"/>
+        <xsl:variable name="value"><xsl:apply-templates select="$node" mode="removeNotes"/></xsl:variable>
+        <xsl:value-of select="f:parseNumber($value)"/>
+    </xsl:function>
+
+    <xsl:function name="f:isNumber" as="xs:boolean">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:value-of select="matches($value, f:getSetting('math.numberPattern'))"/>
+    </xsl:function>
+
+    <xsl:function name="f:hasNumber" as="xs:boolean">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
+        <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
+        <xsl:variable name="value" select="translate($value, translate($value, '.+-0123456789', ''), '')"/>
+        <xsl:value-of select="$value castable as xs:double"/>
+    </xsl:function>
+
+    <xsl:function name="f:parseNumber" as="xs:double">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
+        <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
+        <xsl:variable name="value" select="translate($value, translate($value, '.+-0123456789', ''), '')"/>
+        <xsl:value-of select="if ($value castable as xs:double) then number($value) else 0.0"/>
+    </xsl:function>
+
+    <xsl:template match="@*|node()" mode="removeNotes">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="removeNotes"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="note" mode="removeNotes"/>
 
 
     <xd:doc>

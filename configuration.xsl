@@ -91,6 +91,10 @@
             <colophon.showExternalReferences>true</colophon.showExternalReferences>   <!-- Show a section on external references in the colophon. -->
             <colophon.maxCorrectionCount>20</colophon.maxCorrectionCount>   <!-- Maximum number of indentical corrections that will be listed individually in the list of corrections. -->
 
+            <math.decimalSeparator>.</math.decimalSeparator>
+            <math.thousandsSeparator>,</math.thousandsSeparator>
+            <math.numberPattern>^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]+)?$</math.numberPattern>
+
             <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
             <output format="html">
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
