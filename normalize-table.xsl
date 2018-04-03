@@ -31,8 +31,8 @@
 
         <p>The normalizing code is based on sample code found on-line
         <a href="http://andrewjwelch.com/code/xslt/table/table-normalization.html">here</a>. This has been
-        adjusted to the TEI table model and expanded with code to detect non-well-formed
-        tables.</p>
+        adjusted to the TEI table model and expanded with code to detect non-rectangular
+        tables and to deal with nested tables.</p>
 
         <p>An additional step is used to align columns on the decimal separator, which
         is not supported in HTML. This is achieved by splitting the cells in two parts, the
@@ -67,8 +67,15 @@
         </xsl:variable>
 
         <!-- Step 4: split columns for decimal alignment -->
-        <xsl:apply-templates select="$clean-table" mode="split-columns"/>
+        <xsl:variable name="split-table">
+            <xsl:apply-templates select="$clean-table" mode="split-columns"/>
+        </xsl:variable>
 
+        <!-- Step 5: recurse for nested tables (but make sure not to start with the top-level table) -->
+        <xsl:element name="table" namespace="">
+            <xsl:copy-of select="$split-table/table/@*"/>
+            <xsl:apply-templates select="$split-table/table/node()" mode="normalize-table"/>
+        </xsl:element>
     </xsl:template>
 
 
@@ -88,7 +95,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="@*|node()" mode="normalize-table-colspans normalize-table-rowspans normalize-table-final split-columns">
+    <xsl:template match="@*|node()" mode="normalize-table normalize-table-colspans normalize-table-rowspans normalize-table-final split-columns recurse-normalize-table">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()" mode="#current"/>
         </xsl:copy>
