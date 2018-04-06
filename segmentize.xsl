@@ -137,9 +137,13 @@
     </xd:doc>
 
     <xsl:template mode="segment-notes" match="note">
-        <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
 
-        <s:segment sourceElement="{name()}">
+        <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
+        <xsl:variable name="page" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
+        </xsl:variable>
+
+        <s:segment sourceElement="{name()}" sourcePage="{$page}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
@@ -165,11 +169,14 @@
     </xd:doc>
 
     <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
-    <xsl:template mode="segments" match="p | head | cell | l | item | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
+    <xsl:template mode="segments" match="p | seg | head | cell | l | item | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
 
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
+        <xsl:variable name="page" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
+        </xsl:variable>
 
-        <s:segment sourceElement="{name()}">
+        <s:segment sourceElement="{name()}" sourcePage="{$page}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>

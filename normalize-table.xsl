@@ -144,6 +144,7 @@
         </xsl:element>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Normalize the row-spans in a table.</xd:short>
         <xd:detail>
@@ -182,7 +183,7 @@
             </xsl:apply-templates>
         </xsl:variable>
 
-        <!-- Warn for potential data-loss if table is not well-formed -->
+        <!-- Warn for potential data-loss if table is not rectangular -->
         <xsl:if test="count($normalizedCells/cell) &lt; count($currentRow/cell) + count($previousRow/cell[@rows &gt; 1])">
             <xsl:message>ERROR:   Table '<xsl:value-of select="$currentRow/../@id"/>' not rectangular at row <xsl:value-of select="count($currentRow/preceding-sibling::row) + 1"/>. Extra cells will be lost!</xsl:message>
         </xsl:if>
@@ -217,7 +218,6 @@
         <xsl:variable name="currentCell" select="$currentRow/cell[$currentPosition]"/>
         <xsl:copy-of select="$currentCell"/>
     </xsl:template>
-
 
 
     <xd:doc>
@@ -494,6 +494,7 @@
                       then f:rend-value($rend-text, 'decimal-separator')
                       else $default-decimal-separator"/>
     </xsl:function>
+
 
     <xd:doc>
         <xd:short>Determine the pattern to be used to recognize numbers.</xd:short>
