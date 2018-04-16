@@ -424,7 +424,7 @@
             </tr>
 
             <xsl:variable name="corrections">
-                <xsl:apply-templates select="//corr[not(parent::choice)] | //choice[corr]" mode="collectCorrections"/>
+                <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collectCorrections"/>
             </xsl:variable>
 
             <xsl:for-each-group select="$corrections/tmp:choice" group-by="concat(tmp:sic, '@@@', tmp:corr)">

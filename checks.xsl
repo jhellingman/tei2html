@@ -305,13 +305,16 @@
     </xsl:template>
 
 
-    <xsl:template match="cell[@role='sum']" mode="checks">
-
-        <!--
-        <xsl:if test="not(f:isNumber(.))">
-            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Warning" element="{name(.)}">The cell-contents &ldquo;<xsl:value-of select="."/>&rdquo;, marked as a sum, is not numeric.</i:issue>
+    <xsl:template match="seg[@copyOf]" mode="checks">
+        <xsl:if test="not(//*[@id = current()/@copyOf])">
+            <i:issue pos="{@pos}" code="H12" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @copyOf attribute of seg element has no matching @id.</i:issue>
         </xsl:if>
-        -->
+        <xsl:next-match/>
+    </xsl:template>
+
+
+    <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
+
         <xsl:variable name="value"><xsl:apply-templates select="." mode="removeExtraContent"/></xsl:variable>
         <xsl:if test="not(f:hasNumber($value))">
             <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The cell-contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a sum, is not recognized as a number.</i:issue>
@@ -319,20 +322,24 @@
 
         <xsl:variable name="indicatedSum" select="f:extractNumber(.)"/>
 
-        <!-- Collect the cells in column above -->
+        <!-- Collect the cells above in same column; make sure to exclude rows and cells marked labels or units, as well as the sum itself. -->
         <xsl:variable name="col" select="if (@col) then @col else count(preceding-sibling::cell)"/>
         <xsl:variable name="row" select="if (@row) then @row + 1 else count(../preceding-sibling::row) + 1"/>
         <xsl:variable name="cells" select="if (@col) 
-            then ../../row/cell[@row &lt; $row][@col = $col][not(@role='sum')]
-            else ../../row[position() &lt; $row]/cell[position() = $col][not(@role='sum')]"/>
+            then ../../row[not(@role='label' or @role='unit')]/cell[@row &lt; $row][@col = $col][not(@role=current()/@role)][not(@role='label' or @role='unit')]
+            else ../../row[position() &lt; $row][not(@role='label' or @role='unit')]/cell[position() = $col][not(@role=current()/@role)][not(@role='label' or @role='unit')]"/>
         <xsl:variable name="numbers" as="xs:double*">
             <xsl:for-each select="$cells"><xsl:sequence select="f:extractNumber(.)"/></xsl:for-each>
         </xsl:variable>
-        <xsl:variable name="calculatedSum" select="sum($numbers)"/>
+        <xsl:variable name="calculatedSum" select="if (@role='sum') 
+                                                   then sum($numbers) 
+                                                   else if (@role='avg') 
+                                                        then avg($numbers) 
+                                                        else f:subtr($numbers)"/>
 
         <!-- Take precision into account -->
-        <xsl:if test="abs($indicatedSum - $calculatedSum) > 0.00000000000001">
-            <i:issue pos="{@pos}" code="T2" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">The indicated sum <xsl:value-of select="$indicatedSum"/> (<xsl:value-of select="normalize-space($value)"/>) differs from the calculated sum <xsl:value-of select="$calculatedSum"/>.</i:issue>
+        <xsl:if test="abs($indicatedSum - $calculatedSum) > 0.0000000000001">
+            <i:issue pos="{@pos}" code="T2" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">The indicated <xsl:value-of select="@role"/>: <xsl:value-of select="$indicatedSum"/> (<xsl:value-of select="normalize-space($value)"/>) differs from the calculated <xsl:value-of select="@role"/>: <xsl:value-of select="$calculatedSum"/>.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -362,6 +369,13 @@
         <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
         <xsl:variable name="value" select="translate($value, translate($value, '.+-0123456789', ''), '')"/>
         <xsl:value-of select="if ($value castable as xs:double) then number($value) else 0.0"/>
+    </xsl:function>
+
+    <xsl:function name="f:subtr" as="xs:double">
+        <xsl:param name="values" as="xs:double*"/>
+        <xsl:variable name="head" as="xs:double" select="if ($values[1]) then $values[1] else 0.0"/>
+        <xsl:variable name="tail" select="$values[position() != 1]"/>
+        <xsl:value-of select="$head - sum($tail)"/>
     </xsl:function>
 
     <xsl:template match="@*|node()" mode="removeExtraContent">
@@ -641,7 +655,6 @@
         <i:issue pos="{@pos}" code="X01" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
-
 
     <!-- Correction corrects nothing -->
 
