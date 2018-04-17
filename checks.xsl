@@ -313,29 +313,53 @@
     </xsl:template>
 
 
+    <xsl:template match="cell[@role='sumCurrency']" mode="checks">
+
+        <!-- Sum a currency split over two columns, e.g., dollars and cents, using 1 dollar = 100 cents.
+             The cell we match is the dollar amount; the cents are assumed to be in the next cell -->
+
+        <xsl:variable
+            name="indicatedSum"
+            select="f:extractNumber(.)
+                    + (f:extractNumber(following-sibling::cell[1]) div 100.0)"/>
+        <xsl:variable
+            name="calculatedSum"
+            select="f:columnAggregate(., 'sum')
+                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 100.0)"/>
+
+    </xsl:template>
+
+
+    <xsl:template match="cell[@role='sumSterling']" mode="checks">
+
+        <!-- Sum a sterling amount split over three columns, i.e., pounds, shillings, and pence,
+             using 1 pound = 20 shillings or 240 pence. The cell we match is the amount in pounds;
+             the shillings and pence are assumed to be in the next two cells. -->
+
+        <xsl:variable
+            name="indicatedSum"
+            select="f:extractNumber(.)
+                    + (f:extractNumber(following-sibling::cell[1]) div 20.0)
+                    + (f:extractNumber(following-sibling::cell[2]) div 240.0)"/>
+        <xsl:variable
+            name="calculatedSum"
+            select="f:columnAggregate(., 'sum')
+                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 20.0)
+                    + (f:columnAggregate(following-sibling::cell[2], 'sum') div 240.0)"/>
+
+    </xsl:template>
+
+
+
     <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
 
         <xsl:variable name="value"><xsl:apply-templates select="." mode="removeExtraContent"/></xsl:variable>
         <xsl:if test="not(f:hasNumber($value))">
-            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The cell-contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a sum, is not recognized as a number.</i:issue>
+            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The cell-contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="@role"/>, is not recognized as a number.</i:issue>
         </xsl:if>
 
         <xsl:variable name="indicatedSum" select="f:extractNumber(.)"/>
-
-        <!-- Collect the cells above in same column; make sure to exclude rows and cells marked labels or units, as well as the sum itself. -->
-        <xsl:variable name="col" select="if (@col) then @col else count(preceding-sibling::cell)"/>
-        <xsl:variable name="row" select="if (@row) then @row + 1 else count(../preceding-sibling::row) + 1"/>
-        <xsl:variable name="cells" select="if (@col) 
-            then ../../row[not(@role='label' or @role='unit')]/cell[@row &lt; $row][@col = $col][not(@role=current()/@role)][not(@role='label' or @role='unit')]
-            else ../../row[position() &lt; $row][not(@role='label' or @role='unit')]/cell[position() = $col][not(@role=current()/@role)][not(@role='label' or @role='unit')]"/>
-        <xsl:variable name="numbers" as="xs:double*">
-            <xsl:for-each select="$cells"><xsl:sequence select="f:extractNumber(.)"/></xsl:for-each>
-        </xsl:variable>
-        <xsl:variable name="calculatedSum" select="if (@role='sum') 
-                                                   then sum($numbers) 
-                                                   else if (@role='avg') 
-                                                        then avg($numbers) 
-                                                        else f:subtr($numbers)"/>
+        <xsl:variable name="calculatedSum" select="f:columnAggregate(., @role)"/>
 
         <!-- Take precision into account -->
         <xsl:if test="abs($indicatedSum - $calculatedSum) > 0.0000000000001">
@@ -343,6 +367,26 @@
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
+
+
+    <xsl:function name="f:columnAggregate">
+        <xsl:param name="cell" as="element(cell)"/>
+        <xsl:param name="role" as="xs:string"/>
+
+        <xsl:variable name="col" select="if ($cell/@col) then $cell/@col else count($cell/preceding-sibling::cell)"/>
+        <xsl:variable name="row" select="if ($cell/@row) then $cell/@row + 1 else count($cell/../preceding-sibling::row) + 1"/>
+        <xsl:variable name="cells" select="if ($cell/@col)
+            then $cell/../../row[not(@role='label' or @role='unit')]/cell[@row &lt; $row][@col = $col][not(@role=$cell/@role)][not(@role='label' or @role='unit')]
+            else $cell/../../row[position() &lt; $row][not(@role='label' or @role='unit')]/cell[position() = $col][not(@role=$cell/@role)][not(@role='label' or @role='unit')]"/>
+        <xsl:variable name="numbers" as="xs:double*">
+            <xsl:for-each select="$cells"><xsl:sequence select="f:extractNumber(.)"/></xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="if ($role='sum')
+                              then sum($numbers)
+                              else if ($role='avg')
+                                   then avg($numbers)
+                                   else f:subtr($numbers)"/>
+    </xsl:function>
 
     <xsl:function name="f:extractNumber" as="xs:double">
         <xsl:param name="node"/>
@@ -757,7 +801,7 @@
             <xsl:if test="not(//role[@id=$who])">
                 <i:issue
                     pos="{./@pos}"
-                    code="I03" 
+                    code="I03"
                     target="{f:generate-id(.)}"
                     level="Error"
                     page="{f:getPage(.)}"
@@ -772,7 +816,7 @@
                 <xsl:if test="not(//*[@lang=$id])">
                     <i:issue
                         pos="{./@pos}"
-                        code="I04" 
+                        code="I04"
                         target="{f:generate-id(.)}"
                         level="Warning"
                         page="{f:getPage(.)}"
@@ -910,7 +954,7 @@
         <xd:detail>
             <p>Verify paired punctuation marks, such as parenthesis match and are not wrongly nested. This assumes that the
             right single quote character (&rsquo;) is not being used for the apostrophe (hint: temporarily change those to
-            something else). The paired punctuation marks supported are taken from the configuration values <code>text.parentheses</code> and 
+            something else). The paired punctuation marks supported are taken from the configuration values <code>text.parentheses</code> and
             <code>text.quotes</code>.</p>
         </xd:detail>
     </xd:doc>
@@ -924,22 +968,22 @@
         <xsl:variable name="unclosed" select="f:unclosed-pairs(f:keep-only($string, $pairs), '')"/>
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
-                <i:issue 
-                    pos="{@pos}" 
-                    code="P11" 
-                    target="{f:generate-id(.)}" 
-                    level="Warning" 
-                    element="{./@sourceElement}" 
+                <i:issue
+                    pos="{@pos}"
+                    code="P11"
+                    target="{f:generate-id(.)}"
+                    level="Warning"
+                    element="{./@sourceElement}"
                     page="{./@sourcePage}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
             <xsl:when test="f:contains-only($unclosed, $open-quotation-marks)">
                 <xsl:if test="not(starts-with($next, $unclosed))">
-                    <i:issue 
-                        pos="{@pos}" 
-                        code="P12" 
-                        target="{f:generate-id(.)}" 
-                        level="Warning" 
-                        element="{./@sourceElement}" 
+                    <i:issue
+                        pos="{@pos}"
+                        code="P12"
+                        target="{f:generate-id(.)}"
+                        level="Warning"
+                        element="{./@sourceElement}"
                         page="{./@sourcePage}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph.
                         Current: <xsl:value-of select="f:tail-chars($string)"/>
                         Next: <xsl:value-of select="f:head-chars($next)"/>
@@ -947,12 +991,12 @@
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue 
-                    pos="{@pos}" 
-                    code="P13" 
-                    target="{f:generate-id(.)}" 
-                    level="Warning" 
-                    element="{./@sourceElement}" 
+                <i:issue
+                    pos="{@pos}"
+                    code="P13"
+                    target="{f:generate-id(.)}"
+                    level="Warning"
+                    element="{./@sourceElement}"
                     page="{./@sourcePage}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
         </xsl:choose>
