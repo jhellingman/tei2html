@@ -318,6 +318,9 @@
         <!-- Sum a currency split over two columns, e.g., dollars and cents, using 1 dollar = 100 cents.
              The cell we match is the dollar amount; the cents are assumed to be in the next cell -->
 
+        <xsl:copy-of select="f:reportNonNumber(.)"/>
+        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
+
         <xsl:variable
             name="indicatedSum"
             select="f:extractNumber(.)
@@ -327,6 +330,8 @@
             select="f:columnAggregate(., 'sum')
                     + (f:columnAggregate(following-sibling::cell[1], 'sum') div 100.0)"/>
 
+        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+
     </xsl:template>
 
 
@@ -335,6 +340,10 @@
         <!-- Sum a sterling amount split over three columns, i.e., pounds, shillings, and pence,
              using 1 pound = 20 shillings or 240 pence. The cell we match is the amount in pounds;
              the shillings and pence are assumed to be in the next two cells. -->
+
+        <xsl:copy-of select="f:reportNonNumber(.)"/>
+        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
+        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[2])"/>
 
         <xsl:variable
             name="indicatedSum"
@@ -347,27 +356,54 @@
                     + (f:columnAggregate(following-sibling::cell[1], 'sum') div 20.0)
                     + (f:columnAggregate(following-sibling::cell[2], 'sum') div 240.0)"/>
 
+        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+
     </xsl:template>
 
 
 
     <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
 
-        <xsl:variable name="value"><xsl:apply-templates select="." mode="removeExtraContent"/></xsl:variable>
-        <xsl:if test="not(f:hasNumber($value))">
-            <i:issue pos="{@pos}" code="T1" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The cell-contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="@role"/>, is not recognized as a number.</i:issue>
-        </xsl:if>
-
+        <xsl:copy-of select="f:reportNonNumber(.)"/>
         <xsl:variable name="indicatedSum" select="f:extractNumber(.)"/>
         <xsl:variable name="calculatedSum" select="f:columnAggregate(., @role)"/>
+        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
 
-        <!-- Take precision into account -->
-        <xsl:if test="abs($indicatedSum - $calculatedSum) > 0.0000000000001">
-            <i:issue pos="{@pos}" code="T2" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">The indicated <xsl:value-of select="@role"/>: <xsl:value-of select="$indicatedSum"/> (<xsl:value-of select="normalize-space($value)"/>) differs from the calculated <xsl:value-of select="@role"/>: <xsl:value-of select="$calculatedSum"/>.</i:issue>
-        </xsl:if>
         <xsl:next-match/>
     </xsl:template>
 
+    <xsl:function name="f:reportNonNumber">
+        <xsl:param name="cell" as="element(cell)"/>
+        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
+        <xsl:if test="not(f:hasNumber($value))">
+            <i:issue 
+                pos="{$cell/@pos}" 
+                code="T1" 
+                target="{f:generate-id($cell)}" 
+                level="Error" 
+                element="{name($cell)}" 
+                page="{f:getPage($cell)}">The cell contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="$cell/@role"/>, is not recognized as a number.</i:issue>
+        </xsl:if>
+    </xsl:function>
+
+    <xsl:function name="f:reportDifference">
+        <xsl:param name="cell" as="element(cell)"/>
+        <xsl:param name="first" as="xs:double"/>
+        <xsl:param name="second" as="xs:double"/>
+
+        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
+        <!-- Take precision into account -->
+        <xsl:if test="abs($first - $second) > 0.0000000000001">
+            <i:issue 
+                pos="{$cell/@pos}" 
+                code="T2" 
+                target="{f:generate-id($cell)}" 
+                level="Warning" 
+                element="{name($cell)}" 
+                page="{f:getPage($cell)}">The indicated <xsl:value-of select="$cell/@role"/>: <xsl:value-of select="$first"/> (<xsl:value-of select="normalize-space($value)"/>) differs from the calculated <xsl:value-of select="$cell/@role"/>: <xsl:value-of select="$second"/>.</i:issue>
+        </xsl:if>
+
+    </xsl:function>
 
     <xsl:function name="f:columnAggregate">
         <xsl:param name="cell" as="element(cell)"/>
