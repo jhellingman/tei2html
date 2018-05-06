@@ -369,6 +369,7 @@
         <msg:message name="nl">Dutch</msg:message>
         <msg:message name="nl-1800">Dutch (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Dutch (Spelling De Vries-Te Winkel)</msg:message>
+        <msg:message name="nl-za-1920">Dutch (Simplified spelling; South Africa)</msg:message>
         <msg:message name="no">Norwegian</msg:message>
         <msg:message name="oc">Occitan</msg:message>
         <msg:message name="om">Oromo</msg:message>
@@ -1289,6 +1290,7 @@
         <msg:message name="nl">Nederlands</msg:message>
         <msg:message name="nl-1800">Nederlands (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Nederlands (Spelling De Vries-Te Winkel)</msg:message>
+        <msg:message name="nl-za-1920">Nederlands (Vereenvoudigde spelling; Zuid-Afrika)</msg:message>
         <msg:message name="no">Noors</msg:message>
         <msg:message name="oc">Occitaans</msg:message>
         <msg:message name="om">Oromo</msg:message>

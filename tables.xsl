@@ -205,7 +205,7 @@
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
                     <xsl:copy-of select="f:outputImage(concat('images/rbrace', @rows, '.png'), '}')"/>
                 </xsl:when>
-                <xsl:when test="@role=('sum', 'subtr', 'avg', 'sumCurrency', 'sumFraction')">
+                <xsl:when test="@role=('sum', 'subtr', 'avg', 'sumCurrency', 'sumFraction', 'sumSterling', 'sumPeso')">
                     <span class="sum">
                         <xsl:apply-templates/>
                     </span>

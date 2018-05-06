@@ -130,6 +130,7 @@ BEGIN {
     $langNameHash{"nl-1700"}   = "Dutch (18th century)";
     $langNameHash{"nl-1800"}   = "Dutch (19th century)";
     $langNameHash{"nl-1900"}   = "Dutch (spelling De Vries-Te Winkel)";
+    $langNameHash{"nl-za-1920"} = "Dutch (Simplified spelling; South Africa)";
     $langNameHash{"nl-ach"}    = "Dutch (Achterhoek)";
     $langNameHash{"nl-be"}     = "Dutch (Belgium)";
     $langNameHash{"nl-dia"}    = "Dutch (unspecified dialect)";

@@ -252,12 +252,19 @@ sub handleHighlighted($) {
 
 sub parseTable($) {
     my $table = shift;
+    my $tableHead = '';
     while (<>) {
         my $line = $_;
+        if ($line =~ /<head>(.*?)<\/head>/) {
+            $tableHead = $1;
+        }
         $table .= $line;
         if ($line =~ /<\/table>/) {
             my @result = handleTable($table);
             my @wrappedTable = sizeTableColumns($pageWidth - 1, @result);
+            if ($tableHead ne '') {
+                print handleLine($tableHead) . "\n\n";
+            }
             printTable(@wrappedTable);
             return;
         }
@@ -802,8 +809,6 @@ sub handleDitto($) {
     my $string = shift;
 
     print STDERR $string;
-
-
 }
 
 

@@ -361,6 +361,31 @@
     </xsl:template>
 
 
+    <xsl:template match="cell[@role='sumPeso']" mode="checks">
+
+        <!-- Sum a Peso/Tomin/Grano amount split over three columns,
+             using 1 peso = 8 tomins or 8 * 12 = 96 granos. The cell we match is the amount in pesos;
+             the tomins and granos are assumed to be in the next two cells. -->
+
+        <xsl:copy-of select="f:reportNonNumber(.)"/>
+        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
+        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[2])"/>
+
+        <xsl:variable
+            name="indicatedSum"
+            select="f:extractNumber(.)
+                    + (f:extractNumber(following-sibling::cell[1]) div 8.0)
+                    + (f:extractNumber(following-sibling::cell[2]) div 96.0)"/>
+        <xsl:variable
+            name="calculatedSum"
+            select="f:columnAggregate(., 'sum')
+                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 8.0)
+                    + (f:columnAggregate(following-sibling::cell[2], 'sum') div 96.0)"/>
+
+        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+
+    </xsl:template>
+
 
     <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
 
@@ -400,7 +425,7 @@
                 target="{f:generate-id($cell)}" 
                 level="Warning" 
                 element="{name($cell)}" 
-                page="{f:getPage($cell)}">The indicated <xsl:value-of select="$cell/@role"/>: <xsl:value-of select="$first"/> (<xsl:value-of select="normalize-space($value)"/>) differs from the calculated <xsl:value-of select="$cell/@role"/>: <xsl:value-of select="$second"/>.</i:issue>
+                page="{f:getPage($cell)}">Verify value &ldquo;<xsl:value-of select="normalize-space($value)"/>&rdquo;: [<xsl:value-of select="$cell/@role"/>] <xsl:value-of select="$first"/> not equal to <xsl:value-of select="$second"/> (difference: <xsl:value-of select="$first - $second"/>).</i:issue>
         </xsl:if>
 
     </xsl:function>
