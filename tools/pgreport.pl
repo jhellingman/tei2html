@@ -13,6 +13,7 @@ use File::Basename;
 use File::stat;
 use File::Temp;
 use File::chdir;
+use File::Compare;
 use Getopt::Long;
 use XML::XPath;
 
@@ -30,6 +31,10 @@ GetOptions(
     'h' => \$makeHtml,
     'd' => \$download);
 
+my $gitRepoLocation = "D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/";
+
+
+# Counters
 my $totalFiles = 0;
 my $totalPages = 0;
 my $totalWords = 0;
@@ -284,6 +289,15 @@ sub handleTeiFile($) {
                 my $repo = $pgSrc->string_value();
                 if (isValid($repo)) {
                     print GITFILE "getRepo('$pgSrc');\n";
+
+                    # Check: is git repo up-to-date?
+                    my $localFile = "$fileName$suffix";
+                    my $gitRepoFile = $gitRepoLocation . $pgSrc . "/" . $localFile;
+                    if (compare($gitRepoFile, $fullName) != 0) {
+                        print "COMPARE: Git repo differs: $localFile <> $gitRepoFile\n";
+                        print "         Size in Git:  " . (-s $gitRepoFile) . " bytes\n";
+                        print "         Size locally: " . (-s $fullName) . " bytes\n";
+                    }
                 }
                 print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
                 if (isValid($projectId->string_value())) {
@@ -338,7 +352,6 @@ sub handleTeiFile($) {
                 logError("Problem parsing $imageInfoFileName");
             };
         }
-
 
         # words-file
         my $wordsFileName = $filePath . "$baseName-words.html";

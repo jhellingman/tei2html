@@ -143,7 +143,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
-                        <xsl:copy-of select="f:logWarning('No head for division {1}; this and underlying divisions will be omitted from the table of contents.', (@id))"/>
+                        <xsl:copy-of select="f:logWarning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
@@ -411,7 +411,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
-                        <xsl:copy-of select="f:logWarning('No head for division {1}; this and underlying divisions will be omitted from the table of contents.', (@id))"/>
+                        <xsl:copy-of select="f:logWarning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
