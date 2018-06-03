@@ -498,7 +498,7 @@
 
     <xsl:template mode="checks" match="/">
         <xsl:call-template name="sequence-in-order">
-            <xsl:with-param name="elements" select="//pb"/>
+            <xsl:with-param name="elements" select="//pb[not(ancestor::note)]"/>
         </xsl:call-template>
         <xsl:next-match/>
     </xsl:template>
@@ -511,6 +511,27 @@
 
     <xsl:template mode="checks" match="text/pb">
         <i:issue pos="{@pos}" code="T15" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">pb element directly under text.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+
+    <xsl:template mode="checks" match="note">
+        <xsl:if test=".//pb">
+            <!-- first pb should be preceding pb + 1 in main text -->
+            <xsl:variable name="n1" select="(.//pb/@n)[1]"/>
+            <xsl:variable name="n0" select="./preceding::pb[1]/@n"/>
+            <xsl:variable name="v1" select="if (f:is-roman($n1)) then f:from-roman($n1) else $n1"/>
+            <xsl:variable name="v0" select="if (f:is-roman($n0)) then f:from-roman($n0) else $n0"/>
+
+            <xsl:if test="f:is-number($v0) and f:is-number($v1) and ($v1 != $v0 + 1)">
+                <i:issue pos="{@pos}" code="S01" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue> 
+            </xsl:if>
+
+            <xsl:call-template name="sequence-in-order">
+                <xsl:with-param name="elements" select=".//pb"/>
+            </xsl:call-template>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -656,17 +677,20 @@
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
+
     <xsl:template name="check-div-type-present">
         <xsl:if test="not(@type)">
             <i:issue pos="{@pos}" code="T07" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No type specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
+
     <xsl:template name="check-id-present">
         <xsl:if test="not(@id)">
             <i:issue pos="{@pos}" code="T08" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No id specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
+
 
     <xsl:template mode="checks" match="div1">
         <xsl:call-template name="check-div-type-present"/>
@@ -678,6 +702,7 @@
 
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
 
     <xsl:template mode="checks" match="div2">
         <xsl:call-template name="check-div-type-present"/>
@@ -708,6 +733,7 @@
         <xsl:if test="not(following::divGen[@type='apparatus'])">
             <i:issue pos="{@pos}" code="T10" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No &lt;divGen type="apparatus"&gt; following apparatus note.</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
 
@@ -723,6 +749,7 @@
         <xsl:if test="@type and not(@type = $expectedStageTypes)">
             <i:issue pos="{@pos}" code="T11" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for stage instruction: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
 
@@ -736,6 +763,7 @@
 
     <xsl:template mode="checks" match="ab[@type and not(@type = $expectedAbTypes)]">
         <i:issue pos="{@pos}" code="T12" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for &lt;ab&gt; (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -750,6 +778,7 @@
 
     <xsl:template mode="checks" match="abbr[@type and not(@type = $expectedAbbrTypes)]">
         <i:issue pos="{@pos}" code="T13" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for &lt;abbr&gt; (abbreviation) element: <xsl:value-of select="@type"/></i:issue>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 

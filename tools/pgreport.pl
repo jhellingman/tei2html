@@ -222,6 +222,7 @@ sub handleTeiFile($) {
         }
 
         my $coverImageFile = "cover.jpg";
+        my $titlePageImageFile = "titlepage.png";
         if (-e $xmlFileName) {
             # Use eval, so we can recover from fatal parse errors in XML:XPath.
             eval {
@@ -324,6 +325,17 @@ sub handleTeiFile($) {
                     print XMLFILE "    <cover>$coverImageFile</cover>\n";
                 }
 
+                # Find out whether we have a title-page image:
+                my $titlePageImage = $xpath->find('//figure[@id="titlepage-image"]')->string_value();
+                if ($titlePageImage ne "") {
+                    my $titlePageImageRend = $xpath->find('//figure[@id="titlepage-image"]/@rend')->string_value();
+                    if ($titlePageImageRend =~ /image\((.*?)\)/) {
+                        $titlePageImageFile = $1;
+                    }
+                    logMessage("Title Page: $titlePageImageFile");
+                    print XMLFILE "    <titlePage>$titlePageImageFile</titlePage>\n";
+                }
+
                 1;
             } or do {
                 logMessage("Note:       Problem parsing $xmlFileName.");
@@ -345,6 +357,11 @@ sub handleTeiFile($) {
                 my $coverHeight = $xpath->find('//image[@path="' . $coverImageFile . '"]/@height');
                 logMessage("Cover size: $coverWidth by $coverHeight");
                 print XMLFILE "    <coverSize><width>$coverWidth</width><height>$coverHeight</height></coverSize>\n";
+
+                my $titlePageWidth = $xpath->find('//image[@path="' . $titlePageImageFile . '"]/@width');
+                my $titlePageHeight = $xpath->find('//image[@path="' . $titlePageImageFile . '"]/@height');
+                logMessage("Title page size: $titlePageWidth by $titlePageHeight");
+                print XMLFILE "    <titlePageSize><width>$titlePageWidth</width><height>$titlePageHeight</height></titlePageSize>\n";
 
                 1;
             } or do {

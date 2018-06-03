@@ -246,9 +246,12 @@
 
     <xsl:template match="figure[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
         <xsl:if test="f:isSet('includeImages')">
-            <xsl:call-template name="insertimage">
-                <xsl:with-param name="format" select="'.png'"/>
-            </xsl:call-template>
+            <span>
+                <xsl:copy-of select="f:set-class-attribute(.)"/>
+                <xsl:call-template name="insertimage">
+                    <xsl:with-param name="format" select="'.png'"/>
+                </xsl:call-template>
+            </span>
         </xsl:if>
     </xsl:template>
 
