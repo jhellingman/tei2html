@@ -31,12 +31,10 @@ sub main()
     list_recursively($ARGV[0]);
 
     print "Number of archives:        $archivesConverted\n";
-    if ($errorCount > 0)
-    {
+    if ($errorCount > 0) {
         print "Number of errors:          $errorCount\n";
     }
-    if ($archivesConverted > 0)
-    {
+    if ($archivesConverted > 0) {
         print "Original size of archives: $totalOriginalSize bytes (" . formatBytes($totalOriginalSize) . ")\n";
         print "New size of archives:      $totalResultSize bytes (" . formatBytes($totalResultSize) . ")\n";
         my $savedBytes = $totalOriginalSize - $totalResultSize;
@@ -47,13 +45,11 @@ sub main()
 
 sub list_recursively($);
 
-sub list_recursively($)
-{
+sub list_recursively($) {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory))
-    {
+    unless (opendir(DIRECTORY, $directory)) {
         logError("Cannot open directory $directory!");
         exit;
     }
@@ -63,70 +59,56 @@ sub list_recursively($)
 
     closedir(DIRECTORY);
 
-    foreach my $file (@files)
-    {
-        if (-f "$directory/$file")
-        {
+    foreach my $file (@files) {
+        if (-f "$directory/$file") {
             handle_file("$directory/$file");
-        }
-        elsif (-d "$directory/$file")
-        {
+        } elsif (-d "$directory/$file") {
             list_recursively("$directory/$file");
         }
     }
 }
 
 
-sub handle_file($)
-{
+sub handle_file($) {
     my ($file) = @_;
 
-    if ($file =~ m/^(.*)\.(zip|rar|tar|tar\.gz)$/)
-    {
+    if ($file =~ m/^(.*)\.(zip|rar|tar|tar\.gz)$/) {
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
         my $outputArchive = "$outputPath/$path.7z";
 
 		if (-e "$outputArchive") {
-				my $inputTimestamp = stat($file)->mtime;
-                my $outputTimestamp =  stat($outputArchive)->mtime;
-				if ($inputTimestamp > $outputTimestamp) {
-					logMessage("Deleting outdated converted archive: $outputArchive");
-					unlink $outputArchive;
-				}			
+            my $inputTimestamp = stat($file)->mtime;
+            my $outputTimestamp =  stat($outputArchive)->mtime;
+            if ($inputTimestamp > $outputTimestamp) {
+                logMessage("Deleting outdated converted archive: $outputArchive");
+                unlink $outputArchive;
+            }			
 		}
 
-        if (-e "$outputArchive")
-        {
+        if (-e "$outputArchive") {
             logMessage("Skipping $file: output \"$outputArchive\" exists.");
             # No early return as we are still counting the sizes (probably results from a previous run)
-        }
-        else
-        {
+        } else {
             logMessage("Converting: $file.");
 
             my $tmpDir = File::Temp->newdir();
             my $tmpDirName = $tmpDir->dirname;
 
             my $returnCode = system ("$sevenZip x -aou -r \"$file\" -o$tmpDirName 1>>$logFile");
-            if ($returnCode != 0)
-            {
+            if ($returnCode != 0) {
                 logError("7z returned $returnCode while extracting $file.");
-            }
-            else
-            {
+            } else {
                 my $packDir = $tmpDirName;
 
                 # Sometimes, an archive contains a single folder with the same name as the archive
                 # itself, and everything else is stored inside that folder. In that case, we
                 # include the contents of the folder, but not the folder itself.
-                if (-d "$tmpDirName/$base")
-                {
+                if (-d "$tmpDirName/$base") {
                     my @files = <$tmpDirName/$base>;
                     my $fileCount = @files;
-                    if ($fileCount == 1)
-                    {
+                    if ($fileCount == 1) {
                         logMessage("Lifting contents from single top-level directory '$base'.");
                         $packDir = "$tmpDirName/$base";
                     }
@@ -140,8 +122,7 @@ sub handle_file($)
                 # 5. Unpack contained archives into their own directory, taking care
                 #    not to create unneccessary directory levels.
 
-                if (1 == 0)
-                {
+                if (1 == 0) {
                     # Further compress images in the archive if possible
                     system ("perl optimg.pl \"$packDir\" 1>>$logFile");
                 }
@@ -151,8 +132,7 @@ sub handle_file($)
 
                 # print "Creating output archive: $path.7z\n";
                 my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir/* 1>>$logFile");
-                if ($returnCode != 0)
-                {
+                if ($returnCode != 0) {
                     logError("7z returned $returnCode while creating $outputArchive.");
                 }
                 
@@ -171,21 +151,18 @@ sub handle_file($)
     }
 }
 
-sub logError($)
-{
+sub logError($) {
     my $logMessage = shift;
     $errorCount++;
     print STDERR "ERROR: $logMessage\n";
 }
 
-sub logMessage($)
-{
+sub logMessage($) {
     my $logMessage = shift;
     print "$logMessage\n";
 }
 
-sub formatBytes($)
-{
+sub formatBytes($) {
     my $num = shift;
     my $kb = 1024;
     my $mb = (1024 * 1024);
