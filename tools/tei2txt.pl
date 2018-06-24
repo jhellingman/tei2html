@@ -936,6 +936,7 @@ sub entities2iso88591($) {
 
     $a =~ s/\&eemacr;/ee/g;
     $a =~ s/\&oomacr;/oo/g;
+    $a =~ s/\&aemacr;/ae/g;
 
     $a =~ s/\&osupe;/ö/g;
     $a =~ s/\&usupe;/ü/g;

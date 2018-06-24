@@ -84,6 +84,10 @@
 
     </xsl:function>
 
+    <xsl:template match="language/@id" mode="import-document">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+
     <xsl:template match="@id" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>

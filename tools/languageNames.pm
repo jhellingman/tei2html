@@ -166,6 +166,7 @@ BEGIN {
     $langNameHash{"sg"}        = "Sangro";
     $langNameHash{"sh"}        = "Serbo-Croatian";
     $langNameHash{"si"}        = "Sinhalese";
+    $langNameHash{"si-latn"}   = "Sinhalese (Latin transcription)";
     $langNameHash{"sk"}        = "Slovak";
     $langNameHash{"sl"}        = "Slovenian";
     $langNameHash{"sm"}        = "Samoan";
@@ -183,6 +184,7 @@ BEGIN {
     $langNameHash{"ta"}        = "Tamil";
     $langNameHash{"ta-latn"}   = "Tamil (Latin transcription)";
     $langNameHash{"te"}        = "Telugu";
+    $langNameHash{"te-latn"}   = "Telugu (Latin transcription)";
     $langNameHash{"tg"}        = "Tajik";
     $langNameHash{"th"}        = "Thai";
     $langNameHash{"ti"}        = "Tigrinya";

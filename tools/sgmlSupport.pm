@@ -1490,6 +1490,10 @@ BEGIN {
 
     $ent{"jbreve"}      = "j" . chr(0x0306); # j with breve
     $ent{"Jbreve"}      = "J" . chr(0x0306); # J with breve
+    $ent{"mbreve"}      = "m" . chr(0x0306); # m with breve
+    $ent{"Mbreve"}      = "M" . chr(0x0306); # M with breve
+    $ent{"nbreve"}      = "n" . chr(0x0306); # n with breve
+    $ent{"Nbreve"}      = "N" . chr(0x0306); # N with breve
     $ent{"sbreve"}      = "s" . chr(0x0306); # s with breve
     $ent{"Sbreve"}      = "S" . chr(0x0306); # S with breve
     $ent{"vbreve"}      = "v" . chr(0x0306); # v with breve

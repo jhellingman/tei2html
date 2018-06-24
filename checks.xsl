@@ -1254,7 +1254,7 @@
     <xsl:function name="f:is-number" as="xs:boolean">
         <xsl:param name="string"/>
 
-        <xsl:sequence select="matches($string, '^[\d]+$', 'i')"/>
+        <xsl:sequence select="matches(string($string), '^[\d]+$', 'i')"/>
     </xsl:function>
 
 
