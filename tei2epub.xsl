@@ -17,7 +17,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xd"
+    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    exclude-result-prefixes="f xd msg"
     version="2.0"
     >
 
@@ -88,8 +89,9 @@
 
     <xsl:param name="basename" select="'book'"/>
     <xsl:param name="path" select="'ePub'"/>
+    <xsl:param name="epubversion" select="'3.0.1'"/>        <!-- Values: '3.1' or '3.0.1' -->
 
-    <xsl:param name="optionPrinceMarkup" select="'No'"/>
+    <xsl:param name="optionPrinceMarkup" select="'No'"/>    <!-- Should always be 'No' for ePub -->
 
     <!--====================================================================-->
 

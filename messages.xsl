@@ -1,9 +1,11 @@
 <xsl:transform
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     version="1.0"
-    exclude-result-prefixes="msg xd">
+    exclude-result-prefixes="msg xd xhtml">
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -19,7 +21,7 @@
     </xd:doc>
 
     <xsl:param name="srclang" select="'en'"/>
-    <xsl:param name="destlang" select="'nl'"/>
+    <xsl:param name="destlang" select="'es'"/>
 
     <xsl:strip-space elements="*"/>
 

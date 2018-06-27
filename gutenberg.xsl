@@ -20,7 +20,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f"
+    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    exclude-result-prefixes="f xd msg"
     version="2.0"
     >
 

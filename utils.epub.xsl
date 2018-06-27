@@ -136,4 +136,19 @@
         </xsl:result-document>
     </xsl:template>
 
+
+    <xsl:function name="f:isEpub30" as="xs:boolean">
+        <xsl:value-of select="$epubversion = '3.0' or $epubversion = '3.0.1'"/>
+    </xsl:function>
+
+    <xsl:function name="f:isEpub31" as="xs:boolean">
+        <xsl:value-of select="$epubversion = '3.1'"/>
+    </xsl:function>
+
+    <xsl:function name="f:epubMainVersion" as="xs:string">
+        <xsl:value-of select="substring($epubversion, 1,3)"/>
+    </xsl:function>
+
+
+
 </xsl:stylesheet>

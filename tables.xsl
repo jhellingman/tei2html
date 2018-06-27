@@ -376,10 +376,10 @@
     <xd:doc>
         <xd:short>N-up a table.</xd:short>
         <xd:detail>
-            <p>Render a table in n-up format, that is, using n times the number of
-            columns and 1/n-th the number of rows; repeating the heading-rows on top.
+            <p>Render a table in N-up format, that is, using n times the number of
+            columns and 1/N-th the number of rows; repeating the heading-rows on top.
             Note that this may fail if rows are spanned. The case of number
-            of data-rows not divisible by n is handled (the last column will just be partially-filled.)</p>
+            of data-rows not divisible by N is handled (the last column will just be partially-filled.)</p>
         </xd:detail>
     </xd:doc>
 
@@ -429,7 +429,8 @@
                                     <xsl:if test="$i &gt; 1 and position() = 1">
                                         <td class="cellDoubleUp"/>
                                     </xsl:if>
-                                    <xsl:apply-templates select="."/>
+                                    <!-- Prevent duplication of auto-generated ids by using a copy for all but the first repeat -->
+                                    <xsl:apply-templates select="if ($i = 1) then . else copy-of(.)"/>
                                 </xsl:for-each>
                             </xsl:for-each>
                         </tr>

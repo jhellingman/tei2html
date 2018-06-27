@@ -50,7 +50,7 @@
 
             <package>
                 <xsl:attribute name="version">
-                    <xsl:value-of select="'3.0'"/>
+                    <xsl:value-of select="f:epubMainVersion()"/>
                 </xsl:attribute>
                 <xsl:attribute name="unique-identifier">epub-id</xsl:attribute>
 
@@ -151,7 +151,6 @@
             <!-- Retrieve additional metadata for audio overlays from SMIL files -->
             <xsl:call-template name="metadata-smil"/>
 
-
             <!-- Insert additional metadata given verbatim in a file -->
             <xsl:if test="$opfMetadataFile">
                 <xsl:copy-of select="f:logInfo('Reading extra OPF metadata from: {1}.', ($opfMetadataFile))"/>
@@ -189,14 +188,23 @@
         <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
 
         <dc:creator id="{$id}">
+            <xsl:if test="f:isEpub31()">
+                <xsl:attribute name="opf:role">aut</xsl:attribute>
+                <xsl:attribute name="opf:scheme">marc:relators</xsl:attribute>
+                <xsl:if test="@key">
+                    <xsl:attribute name="opf:file-as"><xsl:value-of select="@key"/></xsl:attribute>
+                </xsl:if>
+            </xsl:if>
             <xsl:value-of select="."/>
         </dc:creator>
 
-        <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
+        <xsl:if test="f:isEpub30()">
+            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
 
-        <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
-        <xsl:if test="@key">
-            <meta property="file-as" refines="#{$id}"><xsl:value-of select="@key"/></meta>
+            <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
+            <xsl:if test="@key">
+                <meta property="file-as" refines="#{$id}"><xsl:value-of select="@key"/></meta>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -213,14 +221,23 @@
         <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
 
         <dc:contributor id="{$id}">
+            <xsl:if test="f:isEpub31()">
+                <xsl:attribute name="opf:role"><xsl:value-of select="f:translateRespCode(resp)"/></xsl:attribute>
+                <xsl:attribute name="opf:scheme">marc:relators</xsl:attribute>
+                <xsl:if test="name/@key">
+                    <xsl:attribute name="opf:file-as"><xsl:value-of select="name/@key"/></xsl:attribute>
+                </xsl:if>
+            </xsl:if>
             <xsl:value-of select="name"/>
         </dc:contributor>
 
-        <xsl:if test="resp">
-            <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translateRespCode(resp)"/></meta>
-        </xsl:if>
-        <xsl:if test="name/@key">
-            <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
+        <xsl:if test="f:isEpub30()">
+            <xsl:if test="resp">
+                <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translateRespCode(resp)"/></meta>
+            </xsl:if>
+            <xsl:if test="name/@key">
+                <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
@@ -258,23 +275,25 @@
     <xd:doc>
         <xd:short>Generate metadata related to media-overlays.</xd:short>
         <xd:detail>
-            <p>Generate metadata related to media-overlays. Derive the durations from the references SMIL files.</p>
+            <p>Generate metadata related to media-overlays. Derive the durations from the referenced SMIL files.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="metadata-smil">
         <xsl:if test="//*[f:has-rend-value(@rend, 'media-overlay')]">
-            <!-- Add up the durations for each audio fragment -->
-            <xsl:for-each select="//*[f:has-rend-value(@rend, 'media-overlay')]">
-                <xsl:variable name="durations">
-                    <xsl:variable name="filename" select="f:rend-value(@rend, 'media-overlay')"/>
-                    <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
-                </xsl:variable>
+            <xsl:if test="f:isEpub30()">
+                <!-- Add up the durations for each audio fragment -->
+                <xsl:for-each select="//*[f:has-rend-value(@rend, 'media-overlay')]">
+                    <xsl:variable name="durations">
+                        <xsl:variable name="filename" select="f:rend-value(@rend, 'media-overlay')"/>
+                        <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
+                    </xsl:variable>
 
-                <meta property="media:duration" refines="#{@id}overlay">
-                    <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
-                </meta>
-            </xsl:for-each>
+                    <meta property="media:duration" refines="#{@id}overlay">
+                        <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                    </meta>
+                </xsl:for-each>
+            </xsl:if>
 
             <!-- Find total duration -->
             <xsl:variable name="durations">
@@ -443,6 +462,17 @@
             <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/>overlay</xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/smil+xml</xsl:attribute>
+            <xsl:if test="f:isEpub31()">
+
+                <!-- Retrieve duration from smil file -->
+                <xsl:variable name="durations">
+                    <xsl:apply-templates select="document($filename, .)" mode="metadata-smil"/>
+                </xsl:variable>
+
+                <xsl:attribute name="duration">
+                    <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                </xsl:attribute>
+            </xsl:if>
         </item>
 
         <!-- Handle the .smil file itself for further entries -->

@@ -80,3 +80,4 @@ messages-with-missing.xml
 test/htmltrace.txt
 test/epubtrace.txt
 dependencies.txt
+sandbox/

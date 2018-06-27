@@ -25,7 +25,7 @@
         <xd:detail>This stylesheet is the main entry point for the TEI to HTML conversion. It contains no
         templates itself, but collects all stylesheets, and sets a number of global variables.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <xsl:include href="utils.xsl"/>

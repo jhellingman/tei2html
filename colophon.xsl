@@ -7,7 +7,8 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f tmp xs xd"
+    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    exclude-result-prefixes="f tmp xs xd msg"
     version="2.0"
     >
 
