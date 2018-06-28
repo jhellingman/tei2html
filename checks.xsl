@@ -24,17 +24,19 @@
     <!ENTITY bdquo      "&#8222;">
 
 ]>
+
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:f="urn:stylesheet-functions"
     xmlns:i="http://gutenberg.ph/issues"
+    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:s="http://gutenberg.ph/segments"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="i f xhtml xs xd s tmp"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="i f msg s tmp xd xhtml xs"
     version="2.0"
     >
 

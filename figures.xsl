@@ -7,12 +7,13 @@
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0"
-    exclude-result-prefixes="f img xd xs"
+    exclude-result-prefixes="f img xd xhtml xs"
     >
 
     <xd:doc type="stylesheet">

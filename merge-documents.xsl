@@ -26,7 +26,7 @@
         <xd:param name="location">The location of the file to be imported.</xd:param>
         <xd:param name="basenode">Node to disambiguate relative locations.</xd:param>
         <xd:param name="prefix">The prefix to add to all ids in this document.</xd:param>
-        <xd:param name="keepPrefix">List space-separated prefixes of ids that should <i>not</i> be prefixed.</xd:param>
+        <xd:param name="keepPrefix">List of space-separated prefixes of ids that should <i>not</i> be prefixed.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:import-document">
@@ -84,9 +84,18 @@
 
     </xsl:function>
 
+    <xd:doc>
+        <xd:short>Do not mess with language ids.</xd:short>
+    </xd:doc>
+
     <xsl:template match="language/@id" mode="import-document">
         <xsl:copy-of select="."/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Translate ids in <code>@id</code> attribute.</xd:short>
+    </xd:doc>
 
     <xsl:template match="@id" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
@@ -98,6 +107,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Translate ids in <code>@target</code> attributes.</xd:short>
+    </xd:doc>
+
     <xsl:template match="@target" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>
@@ -107,6 +120,10 @@
         </xsl:attribute>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Copy all other nodes.</xd:short>
+    </xd:doc>
 
     <xsl:template match="node()|@*" mode="import-document">
         <xsl:param name="prefix" as="xs:string"/>

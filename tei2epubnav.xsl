@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE xsl:stylesheet>
 
-    <xsl:stylesheet
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:epub="http://www.idpf.org/2007/ops"
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:f="urn:stylesheet-functions"
-        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd"
-        version="2.0">
+<xsl:stylesheet
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:epub="http://www.idpf.org/2007/ops"
+    xmlns:f="urn:stylesheet-functions"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="f xd xhtml"
+    version="2.0">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to create an ePub3 navigation document.</xd:short>
@@ -44,7 +46,6 @@
             </html>
         </xsl:result-document>
     </xsl:template>
-
 
 
     <xd:doc>
@@ -191,6 +192,5 @@
             </ol>
         </nav>
     </xsl:template>
-
 
 </xsl:stylesheet>

@@ -1,11 +1,14 @@
+<!DOCTYPE xsl:stylesheet>
+
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     version="2.0"
-    exclude-result-prefixes="f xs xd">
+    exclude-result-prefixes="f xd xhtml xs">
 
     <xsl:output indent="no" omit-xml-declaration="yes"/>
 

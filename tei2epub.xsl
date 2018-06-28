@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet to convert TEI to ePub
-
-    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with a
-    CSS stylesheet. Please contact me if you have problems with this stylesheet,
-    or have improvements or bug fixes to contribute.
-
-    This file is made available under the GNU General Public License, version 3.0 or later.
-
--->
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    exclude-result-prefixes="f xd msg"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="f msg xd xhtml"
     version="2.0"
     >
 

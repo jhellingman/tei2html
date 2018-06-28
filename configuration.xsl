@@ -10,20 +10,15 @@
     <!ENTITY laquo      "&#171;">
     <!ENTITY bdquo      "&#8222;">
 
-]><!--
-
-    Stylesheet to handle configuration.
-
-    This file is made available under the GNU General Public License, version 3.0 or later.
-
--->
+]>
 
 <xsl:stylesheet
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xs xd"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="f xd xhtml xs"
     version="2.0"
     >
 
@@ -47,30 +42,30 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <debug>false</debug>                                        <!-- Use debug mode. -->
-            <logLevel>INFO WARNING ERROR DEBUG</logLevel>               <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
-            <defaultStylesheet>style/arctic.css</defaultStylesheet>     <!-- Stylesheet to include. -->
-            <useCommonStylesheets>true</useCommonStylesheets>           <!-- Use the build-in stylesheets (for screen) -->
-            <useCommonPrintStylesheets>true</useCommonPrintStylesheets> <!-- Use the build-in stylesheets (for print media) -->
-            <inlineStylesheet>true</inlineStylesheet>                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
-            <numberTocEntries>true</numberTocEntries>                   <!-- Provide numbers with TOC entries. -->
-            <showPageNumbers>true</showPageNumbers>                     <!-- Show page numbers in the right margin -->
-            <showParagraphNumbers>false</showParagraphNumbers>          <!-- Output paragraph numbers, using the value of the @n attribute. -->
-            <includePGHeaders>false</includePGHeaders>                  <!-- Include Project Gutenberg headers and footers. -->
-            <includeImages>true</includeImages>                         <!-- Include images in the generated output. -->
-            <includeAlignedDivisions>true</includeAlignedDivisions>     <!-- Include divisions indicated by "align-with-document()" -->
-            <defaultTocEntries>false</defaultTocEntries>                <!-- Use generic heads in entries in the TOC, if no head is present -->
-            <useDittoMarks>true</useDittoMarks>                         <!-- Use ditto marks where items are marked with the DITTO tag. -->
-            <dittoMark>,,</dittoMark>                                   <!-- The symbol to use as a ditto mark. -->
-            <generateFacsimile>false</generateFacsimile>                <!-- Output section with and links to facsimile images if required information is present. -->
-            <facsimilePath>page-images</facsimilePath>                  <!-- Path where page images for a facsimile edition is present. -->
-            <useRegularizedUnits>false</useRegularizedUnits>            <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
-                                                                             pop-up; true: regularized in text, original in pop-up) -->
-            <outputExternalLinks>always</outputExternalLinks>           <!-- Generate external links, possible values: always | never | colophon -->
-            <outputExternalLinksTable>false</outputExternalLinksTable>  <!-- Place external links in a separate table in the colophon. -->
-            <useHangingPunctuation>false</useHangingPunctuation>        <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
-            <useFootnoteReturnArrow>true</useFootnoteReturnArrow>       <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
-            <textCriticalNoteSymbol>&deg;</textCriticalNoteSymbol>      <!-- Note marker used with text-critical notes (coded with place=apparatus) at location in text. -->
+            <debug>false</debug>                                            <!-- Use debug mode. -->
+            <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
+            <defaultStylesheet>style/arctic.css</defaultStylesheet>         <!-- Stylesheet to include. -->
+            <useCommonStylesheets>true</useCommonStylesheets>               <!-- Use the build-in stylesheets (for screen) -->
+            <useCommonPrintStylesheets>true</useCommonPrintStylesheets>     <!-- Use the build-in stylesheets (for print media) -->
+            <inlineStylesheet>true</inlineStylesheet>                       <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
+            <numberTocEntries>true</numberTocEntries>                       <!-- Provide numbers with TOC entries. -->
+            <showPageNumbers>true</showPageNumbers>                         <!-- Show page numbers in the right margin -->
+            <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
+            <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
+            <includeImages>true</includeImages>                             <!-- Include images in the generated output. -->
+            <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
+            <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->
+            <useDittoMarks>true</useDittoMarks>                             <!-- Use ditto marks where items are marked with the DITTO tag. -->
+            <dittoMark>,,</dittoMark>                                       <!-- The symbol to use as a ditto mark. -->
+            <generateFacsimile>false</generateFacsimile>                    <!-- Output section with and links to facsimile images if required information is present. -->
+            <facsimilePath>page-images</facsimilePath>                      <!-- Path where page images for a facsimile edition is present. -->
+            <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
+                                                                                 pop-up; true: regularized in text, original in pop-up) -->
+            <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
+            <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
+            <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
+            <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
+            <textCriticalNoteSymbol>&deg;</textCriticalNoteSymbol>          <!-- Note marker used with text-critical notes (coded with place=apparatus) at location in text. -->
             <textCriticalNoteReturnSymbol>&deg;</textCriticalNoteReturnSymbol> <!-- Note marker used with text-critical notes (coded with place=apparatus) in apparatus, to return to text. -->
 
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image. -->

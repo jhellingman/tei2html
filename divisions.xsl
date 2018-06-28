@@ -3,14 +3,15 @@
     <!ENTITY divBodyContent "preceding-sibling::p or self::p or self::div or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div5 or self::div6">
 
 ]>
+
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xhtml xs xd"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="f xd xhtml xs"
     version="2.0"
     >
 

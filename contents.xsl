@@ -7,13 +7,13 @@
 
 <xsl:stylesheet
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary-nodes"
+    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:tmp="urn:temporary-nodes"
-    exclude-result-prefixes="f tmp xhtml xs xd"
+    exclude-result-prefixes="f tmp xd xhtml xs"
     version="2.0"
     >
 
