@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 <!DOCTYPE xsl:stylesheet>
-<!--
 
-    Stylesheets to convert TEI to HTML
-
-    Developed by Jeroen Hellingman <jeroen@bohol.ph>, to be used together with
-    CSS stylesheets. Please contact me if you have problems with this stylesheet,
-    or have improvements or bug fixes to contribute.
-
-    This file is made available under the GNU General Public License, version 3.0 or later.
-
--->
-
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
-    version="2.0"
-    >
+    exclude-result-prefixes="xd">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document to HTML.</xd:short>

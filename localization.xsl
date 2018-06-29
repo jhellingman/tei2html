@@ -1,6 +1,6 @@
 <!DOCTYPE xsl:stylesheet>
 
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
@@ -8,9 +8,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f msg xd xhtml xs"
-    version="2.0"
-    >
+    exclude-result-prefixes="f msg xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to handle the localization of messages in XSLT.</xd:short>
@@ -19,12 +17,14 @@
         <xd:copyright>2014, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+
     <xd:doc>
         <xd:short>Localized messages.</xd:short>
         <xd:detail>Node tree of document following the <code>messages.xsd</code> schema. The actual messages are pulled from this structure.</xd:detail>
     </xd:doc>
 
     <xsl:variable name="messages" select="document('messages.xml')/msg:repository"/>
+
 
     <xd:doc>
         <xd:short>Localization language.</xd:short>
@@ -33,6 +33,7 @@
 
     <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else 'en-US'" as="xs:string"/>
 
+
     <xd:doc>
         <xd:short>Localization base-language.</xd:short>
         <xd:detail>The language without the locale, e.g. 'de'.</xd:detail>
@@ -40,12 +41,14 @@
 
     <xsl:variable name="baselanguage" select="if (contains($language, '-')) then substring-before($language, '-') else $language" as="xs:string"/>
 
+
     <xd:doc>
         <xd:short>Localization default language.</xd:short>
         <xd:detail>The default language, to be used when no message is available in the specified language. (A warning will be issued in this case.)</xd:detail>
     </xd:doc>
 
     <xsl:variable name="defaultlanguage" select="'en'" as="xs:string"/>
+
 
     <xd:doc>
         <xd:short>Find a localized message.</xd:short>
@@ -116,13 +119,18 @@
 
     <xd:doc>
         <xd:short>Handle a localized message.</xd:short>
+        <xd:detail>Apply the parameters to the selected message. Make sure that we drop namespaces inherited from the
+        <code>messages.xml</code> file from the message loaded.</xd:detail>
     </xd:doc>
 
     <xsl:template match="msg:message" mode="formatMessage">
         <xsl:param name="params" as="document-node()?"/>
-        <xsl:apply-templates mode="formatMessage">
-            <xsl:with-param name="params" select="$params"/>
-        </xsl:apply-templates>
+        <xsl:variable name="formattedMessage">
+            <xsl:apply-templates mode="formatMessage">
+                <xsl:with-param name="params" select="$params"/>
+            </xsl:apply-templates>
+        </xsl:variable>
+        <xsl:copy-of select="$formattedMessage" copy-namespaces="no"/>
     </xsl:template>
 
 
@@ -161,6 +169,11 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Output a space in the localized message.</xd:short>
+    </xd:doc>
 
     <xsl:template match="space" mode="formatMessage">
         <xsl:text> </xsl:text>

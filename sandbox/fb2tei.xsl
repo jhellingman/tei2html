@@ -7,16 +7,13 @@
 ]>
 <xsl:stylesheet 
     version="2.0"
-
     xmlns:f="urn:stylesheet-functions"
     xmlns:fb2="http://www.gribuser.ru/xml/fictionbook/2.0"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xlink="http://www.w3.org/1999/xlink"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-
-    exclude-result-prefixes="f fb2 xd xlink xs"
-    >
+    exclude-result-prefixes="f fb2 xd xlink xs">
 
     <xd:doc type="stylesheet">
         <xd:short>XSLT stylesheet to convert a fictionbook format text to TEI.</xd:short>

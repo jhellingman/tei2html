@@ -25,7 +25,7 @@
 
 ]>
 
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:i="http://gutenberg.ph/issues"
@@ -36,9 +36,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="i f msg s tmp xd xhtml xs"
-    version="2.0"
-    >
+    exclude-result-prefixes="i f msg s tmp xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to perform various checks on a TEI file.</xd:short>

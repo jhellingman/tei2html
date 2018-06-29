@@ -1,12 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
-<xsl:stylesheet
+
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xd"
-    version="2.0"
-    >
+    exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
         <xd:short>Format title pages.</xd:short>

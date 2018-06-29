@@ -1,5 +1,6 @@
-<xsl:stylesheet
-    version="2.0"
+<!DOCTYPE xsl:stylesheet>
+
+<xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -7,8 +8,7 @@
     xmlns:s="http://gutenberg.ph/segments"
     xmlns:k="http://gutenberg.ph/kwic"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs s k"
-    >
+    exclude-result-prefixes="f fn xd xs s k">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to produce a KWIC from a TEI document</xd:short>

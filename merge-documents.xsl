@@ -1,12 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
 
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f xs xd"
-    version="2.0">
+    exclude-result-prefixes="f xs xd">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to support merging two or more TEI documents.</xd:short>

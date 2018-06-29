@@ -1,12 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
 
-<xsl:transform
+<xsl:transform version="1.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="1.0"
     exclude-result-prefixes="msg xd xhtml">
 
     <xsl:output

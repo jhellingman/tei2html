@@ -6,8 +6,7 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:s="http://gutenberg.ph/segments"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs s"
-    >
+    exclude-result-prefixes="f fn xd xs s">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to segmentize a TEI document</xd:short>

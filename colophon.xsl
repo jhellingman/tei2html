@@ -1,5 +1,5 @@
 <!DOCTYPE xsl:stylesheet>
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
@@ -8,9 +8,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f msg tmp xd xhtml xs"
-    version="2.0"
-    >
+    exclude-result-prefixes="f msg tmp xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a colophon.</xd:short>
@@ -851,7 +849,10 @@
                         <xsl:value-of select="name(.)"/>
                     </td>
                     <td>
-                        <xsl:apply-templates select="." mode="languageFragments"/>
+                        <xsl:variable name="fragment">
+                            <xsl:apply-templates select="." mode="languageFragments"/>
+                        </xsl:variable>
+                        <xsl:copy-of select="f:copy-without-ids($fragment)"/>
                     </td>
                 </tr>
             </xsl:for-each-group>

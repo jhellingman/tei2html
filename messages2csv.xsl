@@ -5,13 +5,12 @@
     <!ENTITY crlf       "&#x0D;&#x0A;">
 ]>
 
-<xsl:transform
+<xsl:transform version="2.0"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    version="2.0"
     exclude-result-prefixes="f msg xd xs">
 
     <xsl:output

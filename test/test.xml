@@ -582,7 +582,7 @@
     <column/>
     <column rend="text-align(right)"/>
     <row role="label">
-        <cell rows="2">No.</cell>
+        <cell rows="2" rend="color(red)">No.</cell>
         <cell>Type.</cell>
         <cell>Quantity.</cell>
     </row>
@@ -597,7 +597,7 @@
     </row>
     <row>
         <cell>2</cell>
-        <cell>Bananas</cell>
+        <cell rend="color(yellow) background-color(black)">Bananas</cell>
         <cell>22.8</cell>
     </row>
     <row>

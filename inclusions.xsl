@@ -7,8 +7,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs"
-    >
+    exclude-result-prefixes="f xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to include external files into TEI documents.</xd:short>

@@ -1,15 +1,13 @@
 <!DOCTYPE xsl:stylesheet>
 
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs"
-    version="2.0"
-    >
+    exclude-result-prefixes="f xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to translate the TEI table model to HTML tables.</xd:short>
@@ -431,8 +429,11 @@
                                     <xsl:if test="$i &gt; 1 and position() = 1">
                                         <td class="cellDoubleUp"/>
                                     </xsl:if>
-                                    <!-- Prevent duplication of auto-generated ids by using a copy for all but the first repeat -->
-                                    <xsl:apply-templates select="if ($i = 1) then . else copy-of(.)"/>
+                                    <!-- Prevent duplication of ids by stripping them for all but the first repeat -->
+                                    <xsl:variable name="cellHtml">
+                                        <xsl:apply-templates select="."/>
+                                    </xsl:variable>
+                                    <xsl:copy-of select="if ($i = 1) then $cellHtml else f:copy-without-ids($cellHtml)"/>
                                 </xsl:for-each>
                             </xsl:for-each>
                         </tr>

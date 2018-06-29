@@ -1,13 +1,12 @@
 <!DOCTYPE xsl:stylesheet>
-<xsl:stylesheet
+
+<xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xs xd"
-    version="2.0"
-    >
+    exclude-result-prefixes="f xs xd">
 
 
     <xd:doc type="stylesheet">
@@ -104,6 +103,26 @@
         <xsl:param name="position" as="xs:integer"/>
         <xsl:value-of select="concat(f:generate-id($node), '-', $position)"/>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Copy a node-tree while stripping al ids.</xd:short>
+        <xd:detail>Copy a node-tree while stripping al ids. This allows us content from the source document multiple times, 
+        without having duplicate ids (which we normally copy from the source document, if present) in the output.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:copy-without-ids">
+        <xsl:param name="nodes"/>
+        <xsl:apply-templates select="$nodes" mode="copy-without-ids"/>
+    </xsl:function>
+
+    <xsl:template match="@id" mode="copy-without-ids"/>
+
+    <xsl:template match="@*|node()" mode="copy-without-ids">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="copy-without-ids"/>
+        </xsl:copy>
+    </xsl:template>
 
 
     <!--====================================================================-->

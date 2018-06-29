@@ -4,8 +4,7 @@
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs"
-    >
+    exclude-result-prefixes="f fn xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to produce a word frequency list (per language) from any XML document</xd:short>
