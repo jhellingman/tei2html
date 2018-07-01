@@ -57,7 +57,9 @@
                 <xsl:call-template name="metadata"/>
                 <xsl:call-template name="manifest"/>
                 <xsl:call-template name="spine"/>
-                <xsl:call-template name="guide"/>
+                <xsl:if test="f:isEpub30()">
+                    <xsl:call-template name="guide"/>
+                </xsl:if>
             </package>
         </xsl:result-document>
     </xsl:template>
@@ -80,7 +82,9 @@
                     <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
 
                     <dc:identifier id="epub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-                    <meta refines="#epub-id" property="identifier-type">uuid</meta>
+                    <xsl:if test="f:isEpub30()">
+                        <meta refines="#epub-id" property="identifier-type">uuid</meta>
+                    </xsl:if>
                     <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
                 </xsl:when>
                 <xsl:otherwise>
@@ -97,7 +101,9 @@
                     <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
                 </dc:identifier>
-                <meta refines="#pgnum" property="identifier-type">uri</meta>
+                <xsl:if test="f:isEpub30()">
+                    <meta refines="#pgnum" property="identifier-type">uri</meta>
+                </xsl:if>
             </xsl:if>
 
             <!-- Metadata from the titleStmt and publicationStmt -->

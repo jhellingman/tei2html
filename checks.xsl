@@ -183,6 +183,13 @@
                 </style>
             </head>
             <body>
+
+                <p>Found
+                    <xsl:value-of select="count(i:issue[@level='Error'])"/> errors,
+                    <xsl:value-of select="count(i:issue[@level='Warning'])"/> warnings,
+                    <xsl:value-of select="count(i:issue[@level='Trivial'])"/> minor issues, and
+                    <xsl:value-of select="count(i:issue[@level='Info'])"/> informational lines.</p>
+
                 <table>
                     <tr>
                         <th>Level</th>
@@ -401,12 +408,12 @@
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
         <xsl:if test="not(f:hasNumber($value))">
-            <i:issue 
-                pos="{$cell/@pos}" 
-                code="T1" 
-                target="{f:generate-id($cell)}" 
-                level="Error" 
-                element="{name($cell)}" 
+            <i:issue
+                pos="{$cell/@pos}"
+                code="T1"
+                target="{f:generate-id($cell)}"
+                level="Error"
+                element="{name($cell)}"
                 page="{f:getPage($cell)}">The cell contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="$cell/@role"/>, is not recognized as a number.</i:issue>
         </xsl:if>
     </xsl:function>
@@ -419,12 +426,12 @@
         <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
         <!-- Take precision into account -->
         <xsl:if test="abs($first - $second) > 0.0000000000001">
-            <i:issue 
-                pos="{$cell/@pos}" 
-                code="T2" 
-                target="{f:generate-id($cell)}" 
-                level="Warning" 
-                element="{name($cell)}" 
+            <i:issue
+                pos="{$cell/@pos}"
+                code="T2"
+                target="{f:generate-id($cell)}"
+                level="Warning"
+                element="{name($cell)}"
                 page="{f:getPage($cell)}">Verify value &ldquo;<xsl:value-of select="normalize-space($value)"/>&rdquo;: [<xsl:value-of select="$cell/@role"/>] <xsl:value-of select="$first"/> not equal to <xsl:value-of select="$second"/> (difference: <xsl:value-of select="$first - $second"/>).</i:issue>
         </xsl:if>
 
@@ -524,7 +531,7 @@
             <xsl:variable name="v0" select="if (f:is-roman($n0)) then f:from-roman($n0) else $n0"/>
 
             <xsl:if test="f:is-number($v0) and f:is-number($v1) and ($v1 != $v0 + 1)">
-                <i:issue pos="{@pos}" code="S01" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue> 
+                <i:issue pos="{@pos}" code="S01" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue>
             </xsl:if>
 
             <xsl:call-template name="sequence-in-order">
@@ -549,6 +556,18 @@
         <!-- Do we have a title-page that will be recognized as such? -->
         <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
             <i:issue pos="{@pos}" code="E02" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Check presence of generated colophon.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="back" priority="2">
+        <xsl:if test="not(.//divGen[@type='Colophon'])">
+            <i:issue pos="{@pos}" code="E03" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No generated colophon in backmatter (divGen type="Colophon").</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>

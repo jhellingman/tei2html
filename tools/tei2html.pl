@@ -33,6 +33,7 @@ my $makeHtml            = 0;
 my $makeHeatMap         = 0;
 my $makePdf             = 0;
 my $makeEpub            = 0;
+my $epubVersion         = "3.0.1";
 my $makeReport          = 0;
 my $makeP5              = 0;
 my $makeXML             = 0;
@@ -71,7 +72,8 @@ GetOptions(
     'C=s' => \$configurationFile,
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
-    'w=i' => \$pageWidth);
+    'w=i' => \$pageWidth,
+    'epubversion=s' => \$epubVersion);
 
 my $filename = $ARGV[0];
 
@@ -122,6 +124,10 @@ if ($makeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $make
 
 if ($makeHtml == 1 || $makePdf == 1 || $makeEpub == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1) {
     $makeXML = 1;
+}
+
+if ($debug) {
+    print "Called with params: $ARGV\n";
 }
 
 #==============================================================================
@@ -287,7 +293,7 @@ sub makeEpub() {
     copyAudio("epub/audio");
     copyFonts("epub/fonts");
 
-    system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
+    system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
 
     system ("del $epubFile");
     chdir "epub";
@@ -321,7 +327,7 @@ sub makeText($$) {
         system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
     }
     system ("gutcheck $basename.txt > $basename.gutcheck");
-    system ("jeebies $basename.txt > $basename.jeebies");
+    system ("C:\\Bin\\jeebies $basename.txt > $basename.jeebies");
 
     # Check the version in the Processed directory as well.
     if (-f "Processed\\$basename.txt") {
