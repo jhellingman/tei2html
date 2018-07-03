@@ -873,6 +873,7 @@
         <!-- @target points to existing @id -->
         <xsl:for-each-group select="//*[@target]" group-by="@target">
             <xsl:variable name="target" select="./@target" as="xs:string"/>
+            <xsl:variable name="target" select="f:stripHash($target)"/>
             <xsl:if test="not(//*[@id=$target])">
                 <i:issue
                     pos="{./@pos}"
@@ -991,6 +992,12 @@
                 </xsl:non-matching-substring>
             </xsl:analyze-string>
         </tmp:abbrs>
+    </xsl:function>
+
+
+    <xsl:function name="f:stripHash" as="xs:string">
+        <xsl:param name="target" as="xs:string"/>
+        <xsl:value-of select="if (substring($target, 1, 1) = '#') then substring($target, 2) else $target"/>
     </xsl:function>
 
 

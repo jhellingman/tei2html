@@ -19,6 +19,7 @@
 
     <xsl:include href="log.xsl"/>
     <xsl:include href="rend.xsl"/>
+    <xsl:include href="stripns.xsl"/>
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to normalize TEI tables.</xd:short>

@@ -21,6 +21,7 @@
     <xsl:include href="configuration.xsl"/>
     <xsl:include href="localization.xsl"/>
     <xsl:include href="references-func.xsl"/>
+    <xsl:include href="stripns.xsl"/>
 
     <xsl:output
         method="text"

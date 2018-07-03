@@ -80,7 +80,7 @@
 
   <!-- change of name, or replaced by another element -->
   <xsl:template match="teiCorpus.2">
-    <teiCorpus xmlns="http://www.tei-c.org/ns/1.0">
+    <teiCorpus>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </teiCorpus>
   </xsl:template>
@@ -92,35 +92,35 @@
   </xsl:template>
 
   <xsl:template match="witList">
-    <listWit xmlns="http://www.tei-c.org/ns/1.0">
+    <listWit>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </listWit>
   </xsl:template>
 
 
   <xsl:template match="TEI.2">
-    <TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <TEI>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </TEI>
   </xsl:template>
 
   <xsl:template match="xref">
-    <ref xmlns="http://www.tei-c.org/ns/1.0">
+    <ref>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </ref>
   </xsl:template>
 
 
   <xsl:template match="xptr">
-    <ptr xmlns="http://www.tei-c.org/ns/1.0">
+    <ptr>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </ptr>
   </xsl:template>
 
 
   <xsl:template match="figure[@url]">
-    <figure xmlns="http://www.tei-c.org/ns/1.0">
-      <graphic xmlns="http://www.tei-c.org/ns/1.0">
+    <figure>
+      <graphic>
         <xsl:copy-of select="@*"/>
       </graphic>
       <xsl:apply-templates/>
@@ -133,8 +133,8 @@
   <xsl:template match="figure/@entity"/>
 
   <xsl:template match="figure[@entity]">
-    <figure xmlns="http://www.tei-c.org/ns/1.0">
-      <graphic xmlns="http://www.tei-c.org/ns/1.0" url="{unparsed-entity-uri(@entity)}">
+    <figure>
+      <graphic url="{unparsed-entity-uri(@entity)}">
         <xsl:apply-templates select="@*"/>
       </graphic>
       <xsl:apply-templates/>
@@ -142,13 +142,13 @@
   </xsl:template>
 
   <xsl:template match="event">
-    <incident xmlns="http://www.tei-c.org/ns/1.0">
+    <incident>
       <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
     </incident>
   </xsl:template>
 
   <xsl:template match="state">
-    <refState xmlns="http://www.tei-c.org/ns/1.0">
+    <refState>
       <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
     </refState>
   </xsl:template>
@@ -156,7 +156,7 @@
 
   <!-- lost elements -->
   <xsl:template match="dateRange">
-    <date xmlns="http://www.tei-c.org/ns/1.0">
+    <date>
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </date>
   </xsl:template>
@@ -291,7 +291,7 @@
   </xsl:template>
 
   <xsl:template match="editionStmt/editor">
-    <respStmt xmlns="http://www.tei-c.org/ns/1.0">
+    <respStmt>
       <resp><xsl:value-of select="@role"/></resp>
       <name><xsl:apply-templates/></name>
     </respStmt>
@@ -300,33 +300,33 @@
   <!-- header -->
 
   <xsl:template match="teiHeader">
-    <teiHeader xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()"/>
 
       <xsl:if test="not(revisionDesc) and (@date.created or @date.updated)">
-        <revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
+        <revisionDesc>
           <xsl:if test="@date.updated">
-            <change xmlns="http://www.tei-c.org/ns/1.0">
+            <change>
               <label>updated</label>
-              <date xmlns="http://www.tei-c.org/ns/1.0">
+              <date>
                 <xsl:value-of select="@date.updated"/>
               </date>
-              <label xmlns="http://www.tei-c.org/ns/1.0">Date edited</label>
+              <label>Date edited</label>
             </change>
           </xsl:if>
           <xsl:if test="@date.created">
-            <change xmlns="http://www.tei-c.org/ns/1.0">
+            <change>
               <label>created</label>
-              <date xmlns="http://www.tei-c.org/ns/1.0">
+              <date>
                 <xsl:value-of select="@date.created"/>
               </date>
-              <label xmlns="http://www.tei-c.org/ns/1.0">Date created</label>
+              <label>Date created</label>
             </change>
           </xsl:if>
         </revisionDesc>
       </xsl:if>
       <!--
-      <change when="{$today}"  xmlns="http://www.tei-c.org/ns/1.0">Converted to TEI P5 XML by p4top5.xsl
+      <change when="{$today}" >Converted to TEI P5 XML by p4top5.xsl
       written by Sebastian
       Rahtz at Oxford University Computing Services.</change>
       </revisionDesc>
@@ -336,17 +336,17 @@
   </xsl:template>
 
   <xsl:template match="revisionDesc">
-    <revisionDesc xmlns="http://www.tei-c.org/ns/1.0">
+    <revisionDesc>
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()"/>
     </revisionDesc>
   </xsl:template>
 
   <xsl:template match="publicationStmt">
-    <publicationStmt xmlns="http://www.tei-c.org/ns/1.0">
+    <publicationStmt>
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()"/>
       <!--
-      <availability xmlns="http://www.tei-c.org/ns/1.0">
-      <p xmlns="http://www.tei-c.org/ns/1.0">Licensed under <ptr xmlns="http://www.tei-c.org/ns/1.0" target="http://creativecommons.org/licenses/by-sa/2.0/uk/"/></p>
+      <availability>
+      <p>Licensed under <ptr target="http://creativecommons.org/licenses/by-sa/2.0/uk/"/></p>
       </availability>
       -->
     </publicationStmt>
@@ -362,7 +362,7 @@
   <!-- tagsDecl has a compulsory namespace child now -->
   <xsl:template match="tagsDecl">
     <xsl:if test="*">
-      <tagsDecl xmlns="http://www.tei-c.org/ns/1.0">
+      <tagsDecl>
         <namespace name="http://www.tei-c.org/ns/1.0">
           <xsl:apply-templates select="*|comment()|processing-instruction"/>
         </namespace>
@@ -380,44 +380,44 @@
 
   <!-- start creating the new choice element -->
   <xsl:template match="corr[@sic]">
-    <choice xmlns="http://www.tei-c.org/ns/1.0">
-      <corr xmlns="http://www.tei-c.org/ns/1.0">
+    <choice>
+      <corr>
         <xsl:value-of select="text()"/>
       </corr>
-      <sic xmlns="http://www.tei-c.org/ns/1.0">
+      <sic>
         <xsl:value-of select="@sic"/>
       </sic>
     </choice>
   </xsl:template>
 
   <xsl:template match="sic[@corr]">
-    <choice xmlns="http://www.tei-c.org/ns/1.0">
-      <sic xmlns="http://www.tei-c.org/ns/1.0">
+    <choice>
+      <sic>
         <xsl:value-of select="text()"/>
       </sic>
-      <corr xmlns="http://www.tei-c.org/ns/1.0">
+      <corr>
         <xsl:value-of select="@corr"/>
       </corr>
     </choice>
   </xsl:template>
 
   <xsl:template match="abbr[@expan]">
-    <choice xmlns="http://www.tei-c.org/ns/1.0">
-      <abbr xmlns="http://www.tei-c.org/ns/1.0">
+    <choice>
+      <abbr>
         <xsl:value-of select="text()"/>
       </abbr>
-      <expan xmlns="http://www.tei-c.org/ns/1.0">
+      <expan>
         <xsl:value-of select="@expan"/>
       </expan>
     </choice>
   </xsl:template>
 
   <xsl:template match="expan[@abbr]">
-    <choice xmlns="http://www.tei-c.org/ns/1.0">
-      <expan xmlns="http://www.tei-c.org/ns/1.0">
+    <choice>
+      <expan>
         <xsl:value-of select="text()"/>
       </expan>
-      <abbr xmlns="http://www.tei-c.org/ns/1.0">
+      <abbr>
         <xsl:value-of select="@abbr"/>
       </abbr>
     </choice>
@@ -425,7 +425,7 @@
 
   <!-- special consideration for <change> element -->
   <xsl:template match="change">
-    <change xmlns="http://www.tei-c.org/ns/1.0">
+    <change>
 
       <xsl:apply-templates select="date"/>
 
@@ -435,7 +435,7 @@
         </label>
       </xsl:if>
       <xsl:for-each select="respStmt/name">
-        <name xmlns="http://www.tei-c.org/ns/1.0">
+        <name>
           <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
         </name>
       </xsl:for-each>
@@ -447,22 +447,20 @@
 
 
   <xsl:template match="respStmt[resp]">
-    <respStmt xmlns="http://www.tei-c.org/ns/1.0">
+    <respStmt>
       <xsl:choose>
         <xsl:when test="resp/name">
-          <resp xmlns="http://www.tei-c.org/ns/1.0">
+          <resp>
             <xsl:value-of select="resp/text()"/>
           </resp>
           <xsl:for-each select="resp/name">
-            <name xmlns="http://www.tei-c.org/ns/1.0">
+            <name>
               <xsl:apply-templates/>
             </name>
           </xsl:for-each>
         </xsl:when>
         <xsl:otherwise>
           <xsl:apply-templates/>
-          <name xmlns="http://www.tei-c.org/ns/1.0">
-          </name>
         </xsl:otherwise>
       </xsl:choose>
     </respStmt>
@@ -471,7 +469,7 @@
   <xsl:template match="q/@direct"/>
 
   <xsl:template match="q">
-    <q xmlns="http://www.tei-c.org/ns/1.0">
+    <q>
       <xsl:apply-templates select="@*|*|comment()|processing-instruction()|text()"/>
     </q>
   </xsl:template>
@@ -659,7 +657,7 @@
   </xsl:template>
 
   <xsl:template match="div0">
-    <div1 xmlns="http://www.tei-c.org/ns/1.0">
+    <div1>
         <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </div1>
   </xsl:template>

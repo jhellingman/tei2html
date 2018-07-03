@@ -25,6 +25,8 @@
         indent="yes"
         encoding="UTF-8"/>
 
+    <xsl:include href="stripns.xsl"/>
+
     <xsl:template match="/">
         <xsl:apply-templates/>
     </xsl:template>

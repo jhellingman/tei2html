@@ -196,7 +196,7 @@ sub processFile($) {
 
     my $xmlfilename = "$basename-normalized.xml";
     if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml")) {
-        print "Add col and row attributes to tables...\n";
+        print "Normalize tables and add col and row attributes to cells...\n";
         system ("$saxon $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
     }
 
@@ -206,7 +206,9 @@ sub processFile($) {
     }
 
     # extract metadata
+    print "Extract metadata to metadata.xml...\n";
     system ("$saxon $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
+    print "Extract metadata to README.md...\n";
     system ("$saxon $xmlfilename $xsldir/tei2readme.xsl > README.md");
 
     # create PGTEI version
