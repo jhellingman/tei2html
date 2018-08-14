@@ -53,7 +53,6 @@ my $profile             = 0;
 
 GetOptions(
     't' => \$makeText,
-    'T' => \$noTranscription,
     'h' => \$makeHtml,
     'm' => \$makeHeatMap,
     'e' => \$makeEpub,
@@ -73,7 +72,10 @@ GetOptions(
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
     'w=i' => \$pageWidth,
-    'epubversion=s' => \$epubVersion);
+    'debug' => \$debug,
+    'epubversion=s' => \$epubVersion,
+    'notranscription' => \$noTranscription,
+    'help' => \$showHelp);
 
 my $filename = $ARGV[0];
 
