@@ -422,14 +422,113 @@
     </xd:doc>
 
     <xsl:template match="p">
-        <xsl:call-template name="handle-paragraph"/>
+        <xsl:call-template name="handle-paragraph-old"/>
+    </xsl:template>
+
+    <xsl:template name="handle-paragraph-new">
+        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
+            <xsl:call-template name="split-paragraph"/>
+        </xsl:if>
     </xsl:template>
 
 
-    <xsl:template name="handle-paragraph">
+    <xd:doc>
+        <xd:short>Split a paragraph.</xd:short>
+        <xd:detail>Split a paragraph. Since the HTML paragraph cannot contain a number of elements
+        that the TEI paragraph does allow, we will need to split TEI paragraphs, such that we generate
+        valid HTML output. (Under development: the old model uses output escaping tricks to achieve
+        the same result. TODO: integrate handling of paragraphs in footnotes.)</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="split-paragraph">
+        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:copy-of select="f:logDebug('Splitting paragraph...', ())"/>
+        <xsl:for-each-group select="*|text()" group-adjacent="f:isHtmlParagraphContent(.)">
+            <xsl:choose>
+                <xsl:when test="current-grouping-key()">
+                    <xsl:copy-of select="f:logDebug('Paragraph fragment {1}.', (string(position())))"/>
+                    <xsl:call-template name="handle-paragraph-fragment">
+                        <xsl:with-param name="p" select="$context"/>
+                        <xsl:with-param name="fragment" select="current-group()"/>
+                        <xsl:with-param name="position" select="position()"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy-of select="f:logDebug('Non-paragraph fragment {1}.', (string(position())))"/>
+                    <xsl:apply-templates select="current-group()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each-group>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Determine HTML paragraph content.</xd:short>
+        <xd:detail>Determine whether a node can be converted to valid HTML paragraph content (if not,
+        this means we will have to lift those nodes from the paragraph).</xd:detail>
+        <xd:param name="node">The element of which the condition needs to be determined.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:isHtmlParagraphContent" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:variable name="isHtmlParagraphContent" as="xs:boolean" 
+            select="not(    $node/self::milestone[@unit='theme' or @unit='tb']
+                         or $node/self::q
+                         or $node/self::letter
+                         or $node/self::list
+                         or $node/self::figure[not(f:rend-value(@rend, 'position') = ('inline', 'abovehead'))]
+                         or $node/self::table[not(f:rend-value(@rend, 'position') = 'inline')]
+                        )"/>
+        <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if(name($node)) then name($node) else concat('TEXT: ', $node), string($isHtmlParagraphContent)))"/>
+        <xsl:value-of select="$isHtmlParagraphContent"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Handle a paragraph fragment.</xd:short>
+        <xd:detail>Handle a paragraph fragment.</xd:detail>
+        <xd:param name="p">The p element of which we are handling a fragment.</xd:param>
+        <xd:param name="fragment">The fragment (sequence of nodes) to handle.</xd:param>
+        <xd:param name="position">The number of the fragment.</xd:param>
+    </xd:doc>
+
+    <xsl:template name="handle-paragraph-fragment">
+        <xsl:param name="p"/>
+        <xsl:param name="fragment"/>
+        <xsl:param name="position"/>
+
+        <xsl:if test="$fragment">
+            <xsl:element name="{$p.element}">
+                <xsl:attribute name="id" select="concat(f:generate-id($p), if ($position > 1 ) then concat('.', $position) else '')"/>
+                <xsl:copy-of select="f:generate-lang-attribute($p/@lang)"/>
+                <xsl:variable name="class">
+                    <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
+                    <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                    <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
+                    <xsl:if test="ancestor::note[$p/@place='foot' or $p/@place='undefined' or not($p/@place)]"><xsl:text>footnote </xsl:text></xsl:if>
+                    <!-- propagate the @type attribute to the class -->
+                    <xsl:if test="@type"><xsl:value-of select="$p/@type"/><xsl:text> </xsl:text></xsl:if>
+                    <xsl:if test="$position = 1 and f:is-first-paragraph($p)">first </xsl:if>
+                    <xsl:value-of select="if ($position = 1) then f:hanging-punctuation-class($p) else ''"/>
+                </xsl:variable>
+                <xsl:copy-of select="f:logDebug('Generate paragraph with class {1}.', ($class))"/>
+                <xsl:copy-of select="f:set-class-attribute-with($p, $class)"/>
+
+                <xsl:if test="$position = 1 and $p/@n and f:isSet('showParagraphNumbers')">
+                    <span class="parnum"><xsl:value-of select="$p/@n"/>.<xsl:text> </xsl:text></span>
+                </xsl:if>
+
+                <xsl:apply-templates select="$fragment"/>
+            </xsl:element>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="handle-paragraph-old">
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
-
             <xsl:element name="{$p.element}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 

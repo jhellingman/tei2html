@@ -121,12 +121,7 @@
 
     <xsl:template match="note[p]" mode="footnotes">
         <xsl:element name="{$p.element}">
-            <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
-                <xsl:text>footnote </xsl:text>
-            </xsl:variable>
-            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-
+            <xsl:call-template name="footnote-class-lang"/>
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
             <xsl:if test="count(*) = 1">
@@ -145,16 +140,26 @@
 
     <xsl:template match="note" mode="footnotes">
         <xsl:element name="{$p.element}">
-            <xsl:variable name="class">
-                <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
-                <xsl:text>footnote </xsl:text>
-            </xsl:variable>
-            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-
+            <xsl:call-template name="footnote-class-lang"/>
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
             <xsl:call-template name="footnote-return-arrow"/>
         </xsl:element>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Set the class and lang attributes of a footnote-paragraph.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="footnote-class-lang">
+        <xsl:variable name="context" select="." as="element(note)"/>
+        <xsl:variable name="class">
+            <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+            <xsl:text>footnote </xsl:text>
+        </xsl:variable>
+        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+        <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
     </xsl:template>
 
 
@@ -164,7 +169,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-marker">
-        <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
+        <xsl:variable name="context" select="." as="element(note)"/>
         <span class="label">
             <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
                 <xsl:call-template name="footnote-number"/>
