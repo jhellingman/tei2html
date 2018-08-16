@@ -51,9 +51,9 @@
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
         <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves
-        footnotes to the end of the <code>div1</code> element they appear in (but be careful to avoid this in
-        <code>div1</code> elements embedded in quoted texts). Optionally, we place the text of the footnote in-line as well,
-        for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
+        footnotes to the end of the <code>div1</code> element they appear in (but is careful to avoid this in
+        <code>div1</code> elements embedded in quoted texts). Optionally, it can place the text of the footnote
+        in-line as well, for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='foot' or @place='unspecified' or not(@place)]">
@@ -120,12 +120,15 @@
     </xd:doc>
 
     <xsl:template match="note[p]" mode="footnotes">
+        <xsl:variable name="before"><xsl:call-template name="footnote-marker"/></xsl:variable>
+        <xsl:variable name="after"><xsl:call-template name="footnote-return-arrow"/></xsl:variable>
+
         <xsl:element name="{$p.element}">
             <xsl:call-template name="footnote-class-lang"/>
-            <xsl:call-template name="footnote-marker"/>
+            <xsl:copy-of select="$before"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
             <xsl:if test="count(*) = 1">
-                <xsl:call-template name="footnote-return-arrow"/>
+                <xsl:copy-of select="$after"/>
             </xsl:if>
         </xsl:element>
         <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
@@ -185,6 +188,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-return-arrow">
+        <xsl:variable name="context" select="." as="element()"/>
         <xsl:if test="f:isSet('useFootnoteReturnArrow')">
             <xsl:text>&nbsp;</xsl:text>
             <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
@@ -202,6 +206,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-number">
+        <xsl:variable name="context" select="." as="element(note)"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
                 <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
@@ -283,12 +288,12 @@
                  If that is the case, we only include the apparatus notes after the previous one! -->
             <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
             <xsl:variable name="notes" select="if ($id)
-                        then preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id] 
+                        then preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]
                         else preceding::note[@place='apparatus']"/>
 
             <h2 class="main"><xsl:value-of select="if (count($notes) &lt;= 1) then f:message('msgApparatusNote') else f:message('msgApparatusNotes')"/></h2>
 
-            <xsl:call-template name="handle-apparatus-notes"> 
+            <xsl:call-template name="handle-apparatus-notes">
                 <xsl:with-param name="notes" select="$notes"/>
                 <xsl:with-param name="rend" select="@rend"/>
             </xsl:call-template>
@@ -433,7 +438,7 @@
         on the same line, start a new line for the following paragraphs of that note, and have the following note follow the
         last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, indicating where
         the paragraph breaks should remain, and then group them back into paragraphs.</p>
-    
+
         <p>As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
         original notes, as to keep cross references working.</p></xd:detail>
     </xd:doc>

@@ -452,6 +452,7 @@
                         <xsl:with-param name="p" select="$context"/>
                         <xsl:with-param name="fragment" select="current-group()"/>
                         <xsl:with-param name="position" select="position()"/>
+                        <xsl:with-param name="isLast" select="position() = last()"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -481,7 +482,9 @@
                          or $node/self::figure[not(f:rend-value(@rend, 'position') = ('inline', 'abovehead'))]
                          or $node/self::table[not(f:rend-value(@rend, 'position') = 'inline')]
                         )"/>
-        <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if(name($node)) then name($node) else concat('TEXT: ', $node), string($isHtmlParagraphContent)))"/>
+        <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))
+                                                              then name($node)
+                                                              else concat('TEXT: ', substring($node, 1, 10)), string($isHtmlParagraphContent)))"/>
         <xsl:value-of select="$isHtmlParagraphContent"/>
     </xsl:function>
 
@@ -492,12 +495,25 @@
         <xd:param name="p">The p element of which we are handling a fragment.</xd:param>
         <xd:param name="fragment">The fragment (sequence of nodes) to handle.</xd:param>
         <xd:param name="position">The number of the fragment.</xd:param>
+        <xd:param name="isLast">The current fragment is the last fragment.</xd:param>
+        <xd:param name="class">Additional class to use (tunneled).</xd:param>
+        <xd:param name="before">Additional material to place in front of the first fragment (tunneled).</xd:param>
+        <xd:param name="after">Additional material to place after the last fragment (tunneled).</xd:param>
     </xd:doc>
 
     <xsl:template name="handle-paragraph-fragment">
         <xsl:param name="p"/>
         <xsl:param name="fragment"/>
-        <xsl:param name="position"/>
+        <xsl:param name="position" as="xs:integer"/>
+        <xsl:param name="isLast" as="xs:boolean"/>
+
+        <xsl:param name="class" tunnel="yes" as="xs:string?"/>
+        <xsl:param name="before" tunnel="yes"/>
+        <xsl:param name="after" tunnel="yes"/>
+
+        <xsl:variable name="isFirst" as="xs:boolean" select="$position = 1"/>
+
+        <xsl:copy-of select="f:logInfo('position: {1}; isLast: {2}.', (string($position), string($isLast)))"/>
 
         <xsl:if test="$fragment">
             <xsl:element name="{$p.element}">
@@ -510,17 +526,21 @@
                     <xsl:if test="ancestor::note[$p/@place='foot' or $p/@place='undefined' or not($p/@place)]"><xsl:text>footnote </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
                     <xsl:if test="@type"><xsl:value-of select="$p/@type"/><xsl:text> </xsl:text></xsl:if>
-                    <xsl:if test="$position = 1 and f:is-first-paragraph($p)">first </xsl:if>
-                    <xsl:value-of select="if ($position = 1) then f:hanging-punctuation-class($p) else ''"/>
+                    <xsl:if test="$isFirst and f:is-first-paragraph($p)">first </xsl:if>
+                    <xsl:value-of select="if ($isFirst) then f:hanging-punctuation-class($p) else ''"/>
+                    <xsl:if test="$class"><xsl:value-of select="$class"/> </xsl:if>
                 </xsl:variable>
                 <xsl:copy-of select="f:logDebug('Generate paragraph with class {1}.', ($class))"/>
                 <xsl:copy-of select="f:set-class-attribute-with($p, $class)"/>
 
-                <xsl:if test="$position = 1 and $p/@n and f:isSet('showParagraphNumbers')">
-                    <span class="parnum"><xsl:value-of select="$p/@n"/>.<xsl:text> </xsl:text></span>
+                <xsl:if test="$isFirst">
+                    <xsl:if test="$before"><xsl:copy-of select="$before"/></xsl:if>
+                    <xsl:if test="$p/@n and f:isSet('showParagraphNumbers')">
+                        <span class="parnum"><xsl:value-of select="$p/@n"/>.<xsl:text> </xsl:text></span>
+                    </xsl:if>
                 </xsl:if>
-
                 <xsl:apply-templates select="$fragment"/>
+                <xsl:if test="$isLast and $after"><xsl:copy-of select="$after"/></xsl:if>
             </xsl:element>
         </xsl:if>
     </xsl:template>

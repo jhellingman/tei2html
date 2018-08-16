@@ -154,6 +154,7 @@
         <xsl:variable name="parent_does_not_contain_ditto" select="not($element/parent::p[.//ditto] or $element/parent::note[.//ditto])" as="xs:boolean"/>
 
         <xsl:value-of select="$output_p and $parent_p and $parent_does_not_contain_ditto"/>
+        <!--<xsl:value-of select="false()"/>-->
     </xsl:function>
 
     <xsl:template name="closepar">
