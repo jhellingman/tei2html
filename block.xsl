@@ -20,6 +20,8 @@
     <!ENTITY frac34     "&#x00BE;">
     <!ENTITY asterism   "&#x2042;">
 
+    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
+
 ]>
 
 <xsl:stylesheet version="2.0"
@@ -44,7 +46,8 @@
         <xd:short>Default mode; generates HTML output.</xd:short>
     </xd:doc>
 
-    <!-- Page Breaks -->
+
+    <!--=== Page Breaks ====================================================-->
 
     <xd:doc>
         <xd:short>Handle a page-break.</xd:short>
@@ -94,39 +97,6 @@
 
 
     <xd:doc>
-        <xd:short>Formswork, for now just ignore, except if is to be placed in the margin.</xd:short>
-    </xd:doc>
-
-    <xsl:template match="fw">
-        <xsl:copy-of select="f:logDebug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
-    </xsl:template>
-
-    <xsl:template match="fw[@place='margin']">
-        <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
-        <span class="fwMargin">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="fw[@place='margin']/list">
-        <xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template match="fw[@place='margin']/list/item" priority="2">
-        <br/><xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template match="fw[@place='margin']/list/item[1]" priority="1">
-        <b><xsl:apply-templates/><br/>&mdash;</b>
-    </xsl:template>
-
-    <xsl:template match="fw[@place='margin']/list/item[2]" priority="1">
-        <br/><b><xsl:apply-templates/></b>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
         <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).
         Otherwise, just generate an anchor element.</xd:detail>
@@ -170,10 +140,45 @@
     </xsl:template>
 
 
-    <!-- Thematic Breaks -->
+    <!--=== Formswork ======================================================-->
 
     <xd:doc>
-        <xd:short>Handle a milestone.</xd:short>
+        <xd:short>Formswork, for now just ignore, except if is to be placed in the margin.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="fw">
+        <xsl:copy-of select="f:logDebug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']">
+        <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
+        <span class="fwMargin">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list/item" priority="2">
+        <br/><xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list/item[1]" priority="1">
+        <b><xsl:apply-templates/><br/>&mdash;</b>
+    </xsl:template>
+
+    <xsl:template match="fw[@place='margin']/list/item[2]" priority="1">
+        <br/><b><xsl:apply-templates/></b>
+    </xsl:template>
+
+
+    <!--=== Thematic Breaks ================================================-->
+
+    <xd:doc>
+        <xd:short>Handle a milestone (thematic break).</xd:short>
         <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates
         slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
     </xd:doc>
@@ -236,8 +241,6 @@
     </xsl:template>
 
 
-    <!-- Arguments -->
-
     <xd:doc>
         <xd:short>Handle an argument.</xd:short>
         <xd:detail>Handle an argument (a short summary of contents at the start of a chapter).</xd:detail>
@@ -250,8 +253,6 @@
         </div>
     </xsl:template>
 
-
-    <!-- Epigraphs -->
 
     <xd:doc>
         <xd:short>Handle an epigraph.</xd:short>
@@ -279,11 +280,9 @@
     </xsl:template>
 
 
-    <!-- Trailers -->
-
     <xd:doc>
-        <xd:short>Handle an trailer.</xd:short>
-        <xd:detail>Handle an trailer (a short phrase at the end of a chapter or book).</xd:detail>
+        <xd:short>Handle a trailer.</xd:short>
+        <xd:detail>Handle a trailer (a short phrase at the end of a chapter or book).</xd:detail>
     </xd:doc>
 
     <xsl:template match="trailer">
@@ -295,10 +294,8 @@
     </xsl:template>
 
 
-    <!-- Blockquotes -->
-
     <xd:doc>
-        <xd:short>Handle an block-quote.</xd:short>
+        <xd:short>Handle a block-quote.</xd:short>
         <xd:detail>Handle a block-quote (a quote normally set off from the text by some extra space and indentation).</xd:detail>
     </xd:doc>
 
@@ -345,21 +342,21 @@
         superfluous structure.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[@type='foot' or not(@type)]//q/text">
+    <xsl:template match="note[&isFootnote;]//q/text">
         <div class="nestedtext">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[@type='foot' or not(@type)]//q/text/body">
+    <xsl:template match="note[&isFootnote;]//q/text/body">
         <div class="nestedbody">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[@type='foot' or not(@type)]//q/text/body/div1">
+    <xsl:template match="note[&isFootnote;]//q/text/body/div1">
         <div class="nesteddiv1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -367,7 +364,7 @@
     </xsl:template>
 
 
-    <!-- Letters, with openers, closers, etc. -->
+    <!--=== Letters, with openers, closers, etc. ===========================-->
 
     <xd:doc>
         <xd:short>Handle a cited letter.</xd:short>
@@ -414,7 +411,7 @@
     </xsl:template>
 
 
-    <!-- Paragraphs -->
+    <!--=== Paragraphs =====================================================-->
 
     <xd:doc>
         <xd:short>Handle a paragraph.</xd:short>
@@ -452,7 +449,7 @@
                         <xsl:with-param name="p" select="$context"/>
                         <xsl:with-param name="fragment" select="current-group()"/>
                         <xsl:with-param name="position" select="position()"/>
-                        <xsl:with-param name="isLast" select="position() = last()"/>
+                        <xsl:with-param name="last" select="last()"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -494,26 +491,27 @@
         <xd:detail>Handle a paragraph fragment.</xd:detail>
         <xd:param name="p">The p element of which we are handling a fragment.</xd:param>
         <xd:param name="fragment">The fragment (sequence of nodes) to handle.</xd:param>
-        <xd:param name="position">The number of the fragment.</xd:param>
-        <xd:param name="isLast">The current fragment is the last fragment.</xd:param>
-        <xd:param name="class">Additional class to use (tunneled).</xd:param>
-        <xd:param name="before">Additional material to place in front of the first fragment (tunneled).</xd:param>
-        <xd:param name="after">Additional material to place after the last fragment (tunneled).</xd:param>
+        <xd:param name="position">The current fragment number.</xd:param>
+        <xd:param name="last">The number of the fragments in the paragraph.</xd:param>
+        <xd:param name="class">Additional class to use.</xd:param>
+        <xd:param name="before">Additional material to place in front of the first fragment.</xd:param>
+        <xd:param name="after">Additional material to place after the last fragment.</xd:param>
     </xd:doc>
 
     <xsl:template name="handle-paragraph-fragment">
         <xsl:param name="p"/>
         <xsl:param name="fragment"/>
         <xsl:param name="position" as="xs:integer"/>
-        <xsl:param name="isLast" as="xs:boolean"/>
+        <xsl:param name="last" as="xs:integer"/>
 
         <xsl:param name="class" tunnel="yes" as="xs:string?"/>
         <xsl:param name="before" tunnel="yes"/>
         <xsl:param name="after" tunnel="yes"/>
 
         <xsl:variable name="isFirst" as="xs:boolean" select="$position = 1"/>
+        <xsl:variable name="isLast" as="xs:boolean" select="$position = $last"/>
 
-        <xsl:copy-of select="f:logInfo('position: {1}; isLast: {2}.', (string($position), string($isLast)))"/>
+        <xsl:copy-of select="f:logInfo('position: {1}; last: {2}.', (string($position), string($last)))"/>
 
         <xsl:if test="$fragment">
             <xsl:element name="{$p.element}">
@@ -599,7 +597,7 @@
     </xsl:function>
 
 
-    <!-- Hanging punctuation -->
+    <!--=== Hanging punctuation ============================================-->
 
     <xd:doc>
         <xd:short>Determine a class for a paragraph if it starts with quotation marks.</xd:short>
@@ -667,7 +665,7 @@
     </xsl:template>
 
 
-    <!-- Decorative Initials -->
+    <!--=== Decorative Initials ============================================-->
 
     <xd:doc>
         <xd:short>Start a paragraph with a decorative initial.</xd:short>
@@ -871,6 +869,7 @@
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Remove the first letter of a paragraph (intermediate element).</xd:short>

@@ -4,6 +4,8 @@
     <!ENTITY nbsp       "&#160;">
     <!ENTITY uparrow    "&#8593;">
 
+    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
+
 ]>
 
 <xsl:stylesheet version="2.0"
@@ -52,34 +54,13 @@
         <xd:short>Handle footnotes.</xd:short>
         <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves
         footnotes to the end of the <code>div1</code> element they appear in (but is careful to avoid this in
-        <code>div1</code> elements embedded in quoted texts). Optionally, it can place the text of the footnote
-        in-line as well, for use by the print stylesheet. In browsers this inline text will be hidden.</xd:detail>
+        <code>div1</code> elements embedded in quoted texts).</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='foot' or @place='unspecified' or not(@place)]">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[&isFootnote;]">
         <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
-        <!-- No explicit request for footnote division -->
-        <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
-            <!-- TODO: this doesn't work properly yet, so disabled. -->
-            <xsl:if test="$optionPrinceMarkup = 'XXX'">
-                <xsl:choose>
-                    <xsl:when test="p">
-                        <div class="displayfootnote">
-                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                            <xsl:apply-templates/>
-                        </div>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <span class="displayfootnote">
-                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                            <xsl:apply-templates/>
-                        </span>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:if>
-        </xsl:if>
     </xsl:template>
 
 
@@ -91,7 +72,7 @@
 
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="." as="element()"/>
-        <xsl:param name="notes" select="$div//note[@place='foot' or @place='unspecified' or not(@place)]" as="element(note)*"/>
+        <xsl:param name="notes" select="$div//note[&isFootnote;]" as="element(note)*"/>
 
         <!-- No explicit request for a notes division -->
         <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
@@ -201,7 +182,8 @@
 
     <xd:doc>
         <xd:short>Calculate the footnote number.</xd:short>
-        <xd:detail>Calculate the footnote number. This number is based on the position of the note in the <code>div</code>, <code>div0</code> or <code>div1</code> element it occurs in.
+        <xd:detail>Calculate the footnote number. This number is based on the position of the note 
+        in the <code>div</code>, <code>div0</code> or <code>div1</code> element it occurs in.
         Take care to ignore <code>div1</code> elements that appear in embedded quoted text.</xd:detail>
     </xd:doc>
 
@@ -209,13 +191,13 @@
         <xsl:variable name="context" select="." as="element(note)"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
-                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
+                <xsl:number level="any" count="note[&isFootnote;]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
             </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
-                <xsl:number level="any" count="note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[(&isFootnote;) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:number level="any" count="note[@place='foot' or @place='unspecified' or not(@place)]" from="div1[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[&isFootnote;]" from="div1[not(ancestor::q)]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -261,10 +243,10 @@
 
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
-        <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with attribute <code>place="apparatus"</code>). These notes are only
-        included when a <code>divGen</code> element is present, calling for their rendition; a text can include
-        multiple <code>divGen</code> elements, in which case only the text-critical notes after the preceding one
-        are included.</xd:detail>
+        <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with 
+        attribute <code>place="apparatus"</code>). These notes are only included when a <code>divGen</code> 
+        element is present, calling for their rendition; a text can include multiple <code>divGen</code> 
+        elements, in which case only the text-critical notes after the preceding one are included.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
