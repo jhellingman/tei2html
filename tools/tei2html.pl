@@ -72,6 +72,7 @@ GetOptions(
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
     'w=i' => \$pageWidth,
+    'pagewidth=i' => \$pageWidth,
     'debug' => \$debug,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
