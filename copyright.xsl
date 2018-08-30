@@ -194,7 +194,7 @@
                 <rule lifePlusYears="70" fromDeathDate="1994-01-01"/>
                 <rule lifePlusYears="50"/>
             </jurisdiction>
-            <jurisdiction code="CI" name="C&ocirc;te d&quot;Ivoire"><rule lifePlusYears="99"/></jurisdiction>
+            <jurisdiction code="CI" name="C&ocirc;te d&rsquo;Ivoire"><rule lifePlusYears="99"/></jurisdiction>
             <jurisdiction code="CK" name="Cook Islands" see="NZ"/>
             <jurisdiction code="CL" name="Chile"><rule lifePlusYears="70"/></jurisdiction>
             <jurisdiction code="CM" name="Cameroon"><rule lifePlusYears="50"/></jurisdiction>
