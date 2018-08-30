@@ -424,7 +424,9 @@
             <ul>
                 <li>The class generated for the rendition ladder and any explicit classes provided in the <code>@rend</code> attribute.</li>
                 <li>The class generated for the <code>@style</code> attribute.</li>
-                <li>The classes explicitly provided in the <code>@rendition</code> attribute.</li>
+                <li>The classes explicitly provided in the <code>@rendition</code> attribute. Note that some works use a prefix
+                on the ids of the rendition elements. This can be provided in the configuration file (<code>rendition.id.prefix</code>);
+                the default value is the empty string..</li>
             </ul>
         </xd:detail>
         <xd:param name="node">The node for which a class is to be generated.</xd:param>
@@ -449,8 +451,11 @@
                 <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:if test="normalize-space($node/@rendition) != ''">
-                <!-- TODO: verify presence of rendition element ids given -->
-                <xsl:value-of select="replace($node/@rendition, '#', '')"/>
+                <xsl:variable name="renditionId" select="concat(f:getSetting('rendition.id.prefix'), replace($node/@rendition, '#', ''))"/>
+                <xsl:if test="not($node/ancestor::node()[last()]//tagsDecl/rendition[@id = $renditionId or @xml:id = $renditionId])">
+                    <xsl:copy-of select="f:logWarning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
+                </xsl:if>
+                <xsl:value-of select="$renditionId"/>
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
