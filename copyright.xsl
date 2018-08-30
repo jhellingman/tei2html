@@ -4,6 +4,7 @@
     <!ENTITY eacute     "&#x00E9;">
     <!ENTITY ocirc      "&#x00F4;">
     <!ENTITY ccedil     "&#x00E7;">
+    <!ENTITY rsquo      "&#x2019;">
 
 ]>
 <xsl:stylesheet version="2.0"
