@@ -52,15 +52,29 @@
 
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
-        <xd:detail>Handle footnotes. Unless there is an explicit request for a footnote section, tei2html moves
-        footnotes to the end of the <code>div1</code> element they appear in (but is careful to avoid this in
-        <code>div1</code> elements embedded in quoted texts).</xd:detail>
+        <xd:detail>Handle footnotes. This template handles the placement of the footnote marker
+        only. Unless there is an explicit request for a footnote section, tei2html moves the 
+        footnote content to the end of the <code>div1</code> element they appear in (but is careful 
+        to avoid this in <code>div1</code> elements embedded in quoted texts).</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[&isFootnote;]">
         <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle duplicated footnotes.</xd:short>
+        <xd:detail>Handle duplicated footnotes. This template handles the placement of the footnote marker
+        only. Als see the handling of <code>ref</code> elements with <code>@type="noteref"</code> for
+        an alternative representation of the same situation.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@sameAs]" priority="1">
+        <xsl:variable name="targetNode" select="key('id', replace(@sameAs, '#', ''))[1]"/>
+        <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
     </xsl:template>
 
 
@@ -72,7 +86,7 @@
 
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="." as="element()"/>
-        <xsl:param name="notes" select="$div//note[&isFootnote;]" as="element(note)*"/>
+        <xsl:param name="notes" select="$div//note[&isFootnote;][not(@sameAs)]" as="element(note)*"/>
 
         <!-- No explicit request for a notes division -->
         <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
@@ -191,13 +205,13 @@
         <xsl:variable name="context" select="." as="element(note)"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
-                <xsl:number level="any" count="note[&isFootnote;]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
+                <xsl:number level="any" count="note[&isFootnote;][not(@sameAs)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
             </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
-                <xsl:number level="any" count="note[(&isFootnote;) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[(&isFootnote;) and not(@sameAs) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:number level="any" count="note[&isFootnote;]" from="div1[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[&isFootnote;][not(@sameAs)]" from="div1[not(ancestor::q)]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

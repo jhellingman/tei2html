@@ -1,4 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
+
+]>
 
 <xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
@@ -59,7 +63,7 @@
 
     <xsl:template match="TEI.2//ref[@target]">
         <xsl:call-template name="handleInternalReference">
-            <xsl:with-param name="target" select="@target"/>
+            <xsl:with-param name="target" select="replace(@target, '#', '')"/>
         </xsl:call-template>
     </xsl:template>
 
@@ -133,7 +137,7 @@
     <xsl:function name="f:insideFootnote">
         <xsl:param name="targetNode" as="node()"/>
 
-        <xsl:value-of select="$targetNode/ancestor-or-self::note[@place='foot' or @place='unspecified' or not(@place)]"/>
+        <xsl:value-of select="$targetNode/ancestor-or-self::note[&isFootnote;]"/>
     </xsl:function>
 
     <xd:doc>

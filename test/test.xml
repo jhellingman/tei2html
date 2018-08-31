@@ -73,6 +73,7 @@
 		<tagsDecl>
 			<rendition id="red">color: red;</rendition>
 			<rendition id="green">color: green;</rendition>
+			<rendition id="ul">text-decoration: underline;</rendition>
 			<rendition selector="#blue">color: blue;</rendition>
 			<rendition id="large-letter" scope="first-letter">font-size: xx-large; color: red</rendition>
 		</tagsDecl>
@@ -297,7 +298,7 @@
         <cell>6<note place="foot" id="n1" n="*">This is a <index level1="Footnote"/>footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell>
     </row>
     <row>
-        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without such a special treatment!)</cell>
+        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without<note sameAs="n1"/> such a special treatment!)</cell>
     </row>
 </table>
 </p>
@@ -1197,7 +1198,9 @@
 
 <p>This is a test of using <hi style="color:red">CSS</hi> in <hi style="color:red">@style</hi> attributes.</p>
 
-<p>This is a test of using <hi rendition="green">CSS</hi> using <hi rendition="green">@rendition</hi> attributes.</p>
+<p>This is a test of using <hi rendition="green">CSS</hi> using <hi rendition="green">@rendition</hi> attributes referencing rendition elements in the TeiHeader.</p>
+
+<p>This is a further test with <hi rendition="red ul">red and underlined text</hi>.</p>
 
 <p>This is a test of using <hi id="blue">CSS</hi> using a style defined in a rendition element: CSS before should be blue.</p>
 

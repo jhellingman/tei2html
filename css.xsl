@@ -451,11 +451,15 @@
                 <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:if test="normalize-space($node/@rendition) != ''">
-                <xsl:variable name="renditionId" select="concat(f:getSetting('rendition.id.prefix'), replace($node/@rendition, '#', ''))"/>
-                <xsl:if test="not($node/ancestor::node()[last()]//tagsDecl/rendition[@id = $renditionId or @xml:id = $renditionId])">
-                    <xsl:copy-of select="f:logWarning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
-                </xsl:if>
-                <xsl:value-of select="$renditionId"/>
+                <xsl:variable name="prefix" select="f:getSetting('rendition.id.prefix')"/>
+                <xsl:for-each select="tokenize($node/@rendition, ' ')">
+                    <xsl:variable name="renditionId" select="concat($prefix, replace(., '#', ''))"/>
+                    <xsl:if test="not($node/ancestor::node()[last()]//tagsDecl/rendition[@id = $renditionId or @xml:id = $renditionId])">
+                        <xsl:copy-of select="f:logWarning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
+                    </xsl:if>
+                    <xsl:value-of select="$renditionId"/>
+                    <xsl:text> </xsl:text>
+                </xsl:for-each>
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
