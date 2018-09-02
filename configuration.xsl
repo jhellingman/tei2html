@@ -63,8 +63,10 @@
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
             <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
-            <textCriticalNoteSymbol>&deg;</textCriticalNoteSymbol>          <!-- Note marker used with text-critical notes (coded with place=apparatus) at location in text. -->
-            <textCriticalNoteReturnSymbol>&deg;</textCriticalNoteReturnSymbol> <!-- Note marker used with text-critical notes (coded with place=apparatus) in apparatus, to return to text. -->
+
+            <notes.apparatus.textMarker>&deg;</notes.apparatus.textMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
+            <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
+            <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block -->
 
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image. -->
 
