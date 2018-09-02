@@ -258,15 +258,16 @@
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
         <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with 
-        attribute <code>place="apparatus"</code>). These notes are only included when a <code>divGen</code> 
-        element is present, calling for their rendition; a text can include multiple <code>divGen</code> 
-        elements, in which case only the text-critical notes after the preceding one are included.</xd:detail>
+        attribute <code>@place="apparatus"</code>) by placing a marker in the text. These notes are only 
+        included when a <code>divGen</code> element is present, calling for their rendition; a text can 
+        include multiple <code>divGen</code> elements, in which case only the text-critical notes after 
+        the preceding one are included.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
         <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
-            <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
+            <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
         </a>
     </xsl:template>
 
@@ -296,51 +297,47 @@
         </div>
     </xsl:template>
 
-
     <xd:doc>
-        <xd:short>Generate the notes for a text-critical apparatus in one or two columns.</xd:short>
-        <xd:detail>Render the text-critical notes in one or two columns. The splitting works under the assumption
-        that the average length of each note is about the same. A smarter way of balancing the two
-        columns can only be achieved when actually rendering the columns (in the browser or otherwise).</xd:detail>
+        <xd:short>Generate the notes for a text-critical apparatus.</xd:short>
+        <xd:detail>Render the text-critical notes as. This template just selects
+        the format to use, based on the configuration.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handle-apparatus-notes-xx">
+    <xsl:template name="handle-apparatus-notes">
         <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
+        <xsl:variable name="format" select="f:getSetting('notes.apparatus.format')"/>
+
         <xsl:choose>
-            <xsl:when test="f:rend-value($rend, 'columns') = '2' and count($notes) &gt; 1">
-                <xsl:variable name="halfway" select="ceiling(count($notes) div 2)"/>
-                <table class="apparataus">
-                    <tr>
-                        <td class="first">
-                            <xsl:for-each select="$notes[position() &lt; $halfway + 1]">
-                                <xsl:apply-templates select="." mode="apparatus"/>
-                            </xsl:for-each>
-                        </td>
-                        <td class="second">
-                            <xsl:for-each select="$notes[position() &gt; $halfway]">
-                                <xsl:apply-templates select="." mode="apparatus"/>
-                            </xsl:for-each>
-                        </td>
-                    </tr>
-                </table>
+            <xsl:when test="$format = 'paragraphs'">
+                <xsl:call-template name="handle-apparatus-notes-paragraphs">
+                    <xsl:with-param name="notes" select="$notes"/>
+                    <xsl:with-param name="rend" select="$rend"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:for-each select="$notes">
-                    <xsl:apply-templates select="." mode="apparatus"/>
-                </xsl:for-each>
+                <xsl:if test="$format != 'block'">
+                    <xsl:copy-of select="f:logError('Invalid configuration value for &quot;notes.apparatus.format&quot;: {1}.', ($format))"/>
+                </xsl:if>
+                <xsl:call-template name="handle-apparatus-notes-block">
+                    <xsl:with-param name="notes" select="$notes"/>
+                    <xsl:with-param name="rend" select="$rend"/>
+                </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-
     <xd:doc>
-        <xd:short>Split a sequence of notes into columns (row-mayor; table).</xd:short>
-        <xd:detail>Split a sequence of notes into columns, using a table; order will be: [1, 2], [3, 4].</xd:detail>
+        <xd:short>Format apparatus notes as separate paragraphs.</xd:short>
+        <xd:detail>Render the text-critical notes as separate paragraphs in one or more columns. 
+        This uses a table; the order of the notes will be: [1, 2], [3, 4], ... The splitting works 
+        under the assumption that the average length of each note is about the same. A smarter way 
+        of balancing the two columns can only be achieved when actually rendering the columns (in 
+        the browser or otherwise), using the CSS3 multi-column feature.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handle-apparatus-notes-xxx">
+    <xsl:template name="handle-apparatus-notes-paragraphs">
         <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
@@ -418,28 +415,29 @@
         <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
     </xsl:template>
 
+
     <xsl:template name="apparatus-note-marker">
         <span class="label">
             <a class="apparatusnote" href="{f:generate-href(.)}src">
-                <xsl:value-of select="f:getSetting('textCriticalNoteSymbol')"/>
+                <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
             </a>
         </span>
     </xsl:template>
 
 
     <xd:doc>
-        <xd:short>Format apparatus notes as a single paragraph.</xd:short>
-        <xd:detail><p>Format apparatus notes as a single paragraph. A complicating factor here is that some of the notes do contain
-        paragraphs, and we want to preserve the paragraph breaks, having a multi-paragraph note following the preceding note
-        on the same line, start a new line for the following paragraphs of that note, and have the following note follow the
-        last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, indicating where
-        the paragraph breaks should remain, and then group them back into paragraphs.</p>
+        <xd:short>Format apparatus notes as a single block.</xd:short>
+        <xd:detail><p>Format apparatus notes as a single block. A complicating factor here is that some of the notes do contain
+        paragraphs, and we want to preserve those paragraph breaks, having a multi-paragraph note following the preceding note
+        on the same line, start a new line for the following paragraphs of that note, and then have the following note follow the
+        last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, 
+        indicating where the paragraph breaks should remain, and then group them back into paragraphs.</p>
 
         <p>As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
         original notes, as to keep cross references working.</p></xd:detail>
     </xd:doc>
 
-    <xsl:template name="handle-apparatus-notes">
+    <xsl:template name="handle-apparatus-notes-block">
         <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
@@ -512,11 +510,12 @@
                 <a class="apparatusnote">
                     <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
-                    <xsl:value-of select="f:getSetting('textCriticalNoteReturnSymbol')"/>
+                    <xsl:value-of select="f:getSetting('notes.apparatus.noteMarker')"/>
                 </a>
             </xsl:if>
             <xsl:apply-templates/>
         </span>
+        <xsl:text> </xsl:text>
     </xsl:template>
 
     <xsl:template match="tmp:br"/>
