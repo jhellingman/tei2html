@@ -1,6 +1,8 @@
 
 
-Support for mathematical formulas
+## Support for mathematical formulas
+
+(Future feature for `tei2html`)
 
 Notation: `<formula id=f1 notation="TeX">$$E = mc^2$$</formula>`
 
@@ -19,3 +21,8 @@ Resources:
 3. https://tex.stackexchange.com/questions/255470/compile-tex-directly-into-svg-using-the-command-line
 
 Solution depends on MathJax library (https://www.mathjax.org/), run locally in node.js.
+
+See also:
+
+1. http://blog.teamtreehouse.com/install-node-js-npm-windows
+
