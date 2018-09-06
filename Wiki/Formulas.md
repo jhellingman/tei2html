@@ -34,4 +34,6 @@ Tooling:
 Baseline alignment issue, various approaches
 
 1. https://tex.stackexchange.com/questions/44486/pixel-perfect-vertical-alignment-of-image-rendered-tex-snippets/45621
+2. https://www.princexml.com/forum/topic/2971/using-mathjax-with-princexml
+
 
