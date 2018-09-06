@@ -14,15 +14,10 @@ Processing:
 
 Naming scheme `formula-<ID>.tex`, etc. and `formula-<ID>.svg`.
 
-Resources:
+Tooling:
 
-1. https://www.npmjs.com/package/tex-equation-to-svg
-2. https://dvisvgm.de/
-3. https://tex.stackexchange.com/questions/255470/compile-tex-directly-into-svg-using-the-command-line
+1. install [Node.js](https://nodejs.org/en/). Make sure to install both node.js and npm.
+2. install [Mathjax-node](https://github.com/mathjax/mathjax-node) using `npm install -g mathjax-node`.
+3. install [Mathjax-node-cli](https://github.com/mathjax/mathjax-node-cli) using `npm install -g mathjax-node-cli`.
 
-Solution depends on MathJax library (https://www.mathjax.org/), run locally in node.js.
-
-See also:
-
-1. http://blog.teamtreehouse.com/install-node-js-npm-windows
 
