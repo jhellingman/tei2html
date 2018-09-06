@@ -2,7 +2,7 @@
 
 Support for mathematical formulas
 
-Notation: <formula id=f1 notation="TeX">$$E = mc^2$$</formula>
+Notation: `<formula id=f1 notation="TeX">$$E = mc^2$$</formula>`
 
 Processing:
 
@@ -10,7 +10,7 @@ Processing:
 2. Use another script to convert all these files to SVG files (Perl, node.js, etc)
 3. Use main XSLT transform to include the SVG files as images (or inline)
 
-Naming scheme formula-<ID>.tex, etc. and formula-<ID>.svg.
+Naming scheme `formula-<ID>.tex`, etc. and `formula-<ID>.svg`.
 
 Resources:
 
