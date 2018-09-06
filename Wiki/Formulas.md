@@ -4,7 +4,7 @@
 
 (Future feature for `tei2html`)
 
-Notation: `<formula id=f1 notation="TeX">$$E = mc^2$$</formula>`
+TEI notation: `<formula id=f1 notation="TeX">$$E = mc^2$$</formula>` (see [TEI guidelines](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR))
 
 Processing:
 
