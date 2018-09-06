@@ -7,7 +7,7 @@
 
 Use the suggested TEI notation: `<formula id=f1 notation="TeX">$$E = mc^2$$</formula>` (see [TEI guidelines](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR))
 
-Meet Project Gutenberg rules, that is convert to HTML and ePub without any dynamic content (that is, no javascript, no external fonts or dependencies of non-standard software, etc.)
+Meet Project Gutenberg rules, that is convert to HTML and ePub without any dynamic content (that is, no javascript, no external fonts or dependencies on non-standard software, etc.)
 
 Look as good as normal (dynamic) MathJax output.
 
