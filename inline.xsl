@@ -803,6 +803,7 @@
                             </span></span>
                         </xsl:if>
                     </span>
+                    <xsl:text> </xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
@@ -817,6 +818,41 @@
             else if ($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')])
                  then f:rend-value($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
                  else f:getSetting('dittoMark')"/>
+    </xsl:function>
+
+
+    <!-- Mathematical formula -->
+
+    <xsl:template match="formula[@notation='TeX']">
+
+        <xsl:variable name="filename" select="concat('formula-', @id)"/>
+        <xsl:variable name="texString" select="f:stripMathDelimiters(.)"/>
+
+        <xsl:result-document
+                href="formula/{$filename}.tex"
+                method="text"
+                encoding="UTF-8">
+            <xsl:copy-of select="f:logInfo('Generated file: formula/{1}.tex.', ($filename))"/>
+            <xsl:value-of select="$texString"/>
+        </xsl:result-document>
+
+        <img src="formula/{$filename}.svg" title="{$texString}"/>
+
+    </xsl:template>
+
+
+    <xsl:function name="f:stripMathDelimiters" as="xs:string">
+        <xsl:param name="texString" as="xs:string"/>
+
+        <xsl:variable name="texString" select="replace($texString, '^[$]+' ,'')"/>
+        <xsl:variable name="texString" select="replace($texString, '[$]+$' ,'')"/>
+        <xsl:value-of select="normalize-space($texString)"/>
+    </xsl:function>
+
+    <xsl:function name="f:isDisplayMath" as="xs:boolean">
+        <xsl:param name="texString" as="xs:string"/>
+
+        <xsl:value-of select="substring($texString, 1, 2) = '$$'"/>
     </xsl:function>
 
 

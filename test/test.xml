@@ -1207,8 +1207,17 @@
 <p rendition="large-letter">This is a test of using CSS using a style defined in a rendition element. The first letter of this paragraph should be large and red.</p>
 
 </div1>
+<div1 id="ch11" n="XI">
+<head>Mathematical Formula</head>
 
+<p>This is an experimental feature. To include a mathematical formula, just type 
+<formula id="f1" notation="TeX">$E = mc^2$</formula> to get Einstein&rsquo;s famous equation.</p>
 
+<p>Similarly, to get the time-dependent Schrödinger equation, you can type 
+<formula id="f2" notation="TeX">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
+and impress your friends.</p>
+
+</div1>
 </div0>
 </body>
 <back id="back">
