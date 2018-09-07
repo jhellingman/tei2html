@@ -825,19 +825,24 @@
 
     <xsl:template match="formula[@notation='TeX']">
 
-        <xsl:variable name="filename" select="concat('formula-', @id)"/>
+        <xsl:variable name="position" select="if (f:isDisplayMath(.)) then 'display' else 'inline'"/>
+        <xsl:variable name="basename" select="concat(concat($position, '-'), f:generate-id(.))"/>
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)"/>
 
-        <xsl:result-document
-                href="formula/{$filename}.tex"
-                method="text"
-                encoding="UTF-8">
-            <xsl:copy-of select="f:logInfo('Generated file: formula/{1}.tex.', ($filename))"/>
-            <xsl:value-of select="$texString"/>
-        </xsl:result-document>
+        <span>
+            <xsl:copy-of select="f:set-class-attribute-with(., concat($position, '-math'))"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
-        <img src="formula/{$filename}.svg" title="{$texString}"/>
+            <xsl:result-document
+                    href="formula/{$basename}.tex"
+                    method="text"
+                    encoding="UTF-8">
+                <xsl:copy-of select="f:logInfo('Generated file: formula/{1}.tex.', ($basename))"/>
+                <xsl:value-of select="$texString"/>
+            </xsl:result-document>
 
+            <img src="formula/{$basename}.svg" title="{$texString}"/>
+        </span>
     </xsl:template>
 
 
@@ -848,6 +853,7 @@
         <xsl:variable name="texString" select="replace($texString, '[$]+$' ,'')"/>
         <xsl:value-of select="normalize-space($texString)"/>
     </xsl:function>
+
 
     <xsl:function name="f:isDisplayMath" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>

@@ -1276,6 +1276,14 @@ display:none;
 .alignSecond {
 display:none;
 }
+
+.f1 {
+vertical-align:-1.9px;
+}
+
+.f2 {
+vertical-align:-14px;
+}
 @media handheld {
 
 

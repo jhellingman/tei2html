@@ -1211,10 +1211,10 @@
 <head>Mathematical Formula</head>
 
 <p>This is an experimental feature. To include a mathematical formula, just type 
-<formula id="f1" notation="TeX">$E = mc^2$</formula> to get Einstein&rsquo;s famous equation.</p>
+<formula id="f1" notation="TeX" rend="vertical-align(-1.9px)">$E = mc^2$</formula> to get Einstein&rsquo;s famous equation.</p>
 
 <p>Similarly, to get the time-dependent Schrödinger equation, you can type 
-<formula id="f2" notation="TeX">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
+<formula id="f2" notation="TeX" rend="vertical-align(-14px)">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
 and impress your friends.</p>
 
 </div1>
