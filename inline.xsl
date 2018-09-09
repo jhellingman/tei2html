@@ -712,16 +712,18 @@
         <span class="seg">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="copyOf" select="@copyOf"/>
+            <xsl:variable name="copy" select="//seg[@id = $copyOf]"/>
             <xsl:choose>
-                <xsl:when test="not(//seg[@id = current()/@copyOf])">
+                <xsl:when test="not($copy)">
                     <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
                 <xsl:when test="f:isSet('useDittoMarks')">
-                    <xsl:apply-templates select="//seg[@id = $copyOf]" mode="ditto"/>
+                    <xsl:variable name="copy" select="if ($copy//corr) then f:stripCorrElements($copy) else $copy"/>
+                    <xsl:apply-templates select="$copy" mode="ditto"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="//seg[@id = $copyOf]"/>
+                    <xsl:apply-templates select="$copy"/>
                 </xsl:otherwise>
             </xsl:choose>
         </span>
@@ -742,9 +744,11 @@
     </xd:doc>
 
     <xsl:template match="ditto">
+        <xsl:copy-of select="f:logWarning('Depricated element ditto used (please use seg).', ())"/>
         <xsl:choose>
             <xsl:when test="f:isSet('useDittoMarks')">
-                <xsl:apply-templates mode="ditto"/>
+                <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>
+                <xsl:apply-templates select="$node" mode="ditto"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates/>
@@ -803,6 +807,7 @@
                             </span></span>
                         </xsl:if>
                     </span>
+                    <!-- Don't forget to reinsert the space we split on -->
                     <xsl:text> </xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
@@ -821,6 +826,28 @@
     </xsl:function>
 
 
+    <xsl:function name="f:stripCorrElements">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:apply-templates select="$node" mode="stripCorrElements"/>
+    </xsl:function>
+
+    <xsl:template match="@*|node()" mode="stripCorrElements">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="stripCorrElements"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="corr" mode="stripCorrElements">
+        <xsl:apply-templates select="@*|node()" mode="stripCorrElements"/>
+    </xsl:template>
+
+    <xsl:template match="choice[corr]" mode="stripCorrElements">
+        <xsl:apply-templates select="corr" mode="stripCorrElements"/>
+    </xsl:template>
+
+
+    <!--====================================================================-->
     <!-- Mathematical formula -->
 
     <xsl:template match="formula[@notation='TeX']">

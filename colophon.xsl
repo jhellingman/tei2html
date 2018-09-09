@@ -899,30 +899,29 @@
     <xsl:key name="elements" match="*" use="name()"/>
 
     <xsl:template match="divGen[@type='TagUsage']">
-        <div class="transcribernote">
 
-            <xsl:variable name="tagUsage">
-                <tmp:tags>
-                    <xsl:for-each-group select="//*" group-by="name()">
-                        <xsl:sort select="lower-case(name())"/>
-                        <xsl:variable name="tagName" select="name()"/>
-                        <tmp:tag name="{$tagName}" count="{count(current-group())}">
-                            <xsl:for-each-group select="//*[name() = $tagName]/@*" group-by="name()">
-                                <xsl:sort select="lower-case(name())"/>
-                                <xsl:variable name="attrName" select="name()"/>
-                                <tmp:attr name="{$attrName}" count="{count(current-group())}">
-                                    <xsl:for-each-group select="//*[name() = $tagName]/@*[name() = $attrName]" group-by=".">
-                                        <tmp:value value="{.}" count="{count(current-group())}"/>
-                                    </xsl:for-each-group>
-                                </tmp:attr>
-                            </xsl:for-each-group>
-                        </tmp:tag>
-                    </xsl:for-each-group>
-                </tmp:tags>
-            </xsl:variable>
+        <xsl:variable name="tagUsage">
+            <tmp:tags>
+                <xsl:for-each-group select="//*" group-by="name()">
+                    <xsl:sort select="lower-case(name())"/>
+                    <xsl:variable name="tagName" select="name()"/>
+                    <tmp:tag name="{$tagName}" count="{count(current-group())}">
+                        <xsl:for-each-group select="//*[name() = $tagName]/@*" group-by="name()">
+                            <xsl:sort select="lower-case(name())"/>
+                            <xsl:variable name="attrName" select="name()"/>
+                            <tmp:attr name="{$attrName}" count="{count(current-group())}">
+                                <xsl:for-each-group select="//*[name() = $tagName]/@*[name() = $attrName]" group-by=".">
+                                    <tmp:value value="{.}" count="{count(current-group())}"/>
+                                </xsl:for-each-group>
+                            </tmp:attr>
+                        </xsl:for-each-group>
+                    </tmp:tag>
+                </xsl:for-each-group>
+            </tmp:tags>
+        </xsl:variable>
 
+        <div class="transcribernote tagsUsage">
             <h2 class="main"><xsl:value-of select="f:message('msgTagUsageOverview')"/></h2>
-
             <table>
                 <tr>
                     <th rowspan="2"><xsl:value-of select="f:message('msgElement')"/></th>
@@ -938,21 +937,24 @@
                     <tr>
                         <td><xsl:value-of select="@name"/></td>
                         <td><xsl:value-of select="@count"/></td>
-                        <xsl:call-template name="tag-usage-attr-values"><xsl:with-param name="node" select="tmp:attr[1]"/></xsl:call-template>
+                        <xsl:call-template name="tag-usage-attr-values">
+                            <xsl:with-param name="node" select="tmp:attr[1]"/>
+                        </xsl:call-template>
                     </tr>
-
                     <xsl:for-each select="tmp:attr[position() > 1]">
                         <tr>
                             <td/>
                             <td/>
-                            <xsl:call-template name="tag-usage-attr-values"><xsl:with-param name="node" select="."/></xsl:call-template>
+                            <xsl:call-template name="tag-usage-attr-values">
+                                <xsl:with-param name="node" select="."/>
+                            </xsl:call-template>
                         </tr>
                     </xsl:for-each>
                 </xsl:for-each>
             </table>
-
         </div>
     </xsl:template>
+
 
     <xsl:template name="tag-usage-attr-values">
         <xsl:param name="node"/>
@@ -965,7 +967,7 @@
         <td><xsl:value-of select="$node/@count"/></td>
         <td>
             <xsl:for-each select="$node/tmp:value">
-                &quot;<xsl:value-of select="@value"/>&quot;
+                <span class="tagUsageValue"><xsl:value-of select="@value"/></span>
                 <xsl:if test="@count &gt; 1">
                     <xsl:text> </xsl:text><i><xsl:value-of select="@count"/></i>
                 </xsl:if>
@@ -973,7 +975,6 @@
             </xsl:for-each>
         </td>
     </xsl:template>
-
 
 
 </xsl:stylesheet>
