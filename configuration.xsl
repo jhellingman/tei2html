@@ -93,6 +93,9 @@
             <math.thousandsSeparator>,</math.thousandsSeparator>
             <math.numberPattern>^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]+)?$</math.numberPattern>
 
+            <math.mathJax.enable>false</math.mathJax.enable>
+            <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- options, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
+
             <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
             <output format="html">
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->

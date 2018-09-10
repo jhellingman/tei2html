@@ -856,20 +856,31 @@
         <xsl:variable name="basename" select="concat(concat($position, '-'), f:generate-id(.))"/>
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)"/>
 
-        <span>
-            <xsl:copy-of select="f:set-class-attribute-with(., concat($position, '-math'))"/>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+        <xsl:result-document
+                href="formula/{$basename}.tex"
+                method="text"
+                encoding="UTF-8">
+            <xsl:copy-of select="f:logInfo('Generated file: formula/{1}.tex.', ($basename))"/>
+            <xsl:value-of select="$texString"/>
+        </xsl:result-document>
 
-            <xsl:result-document
-                    href="formula/{$basename}.tex"
-                    method="text"
-                    encoding="UTF-8">
-                <xsl:copy-of select="f:logInfo('Generated file: formula/{1}.tex.', ($basename))"/>
-                <xsl:value-of select="$texString"/>
-            </xsl:result-document>
-
-            <img src="formula/{$basename}.svg" title="{$texString}"/>
-        </span>
+        <xsl:choose>
+            <xsl:when test="f:isSet('math.mathJax.enable')">
+                <span>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\('"/>
+                    <xsl:value-of select="$texString"/>
+                    <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
+                </span>
+            </xsl:when>
+            <xsl:otherwise>
+                <span>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-class-attribute-with(., concat($position, '-math'))"/>
+                    <img src="formula/{$basename}.svg" title="{$texString}"/>
+                </span>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

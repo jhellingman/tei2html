@@ -445,6 +445,16 @@ p.smallprint, li.smallprint, .par.smallprint {
  font-size: 80%;
 }
 
+.tagsUsage th, .tagsUsage td {
+ vertical-align: top;
+}
+
+.tagsUsage span.tagUsageValue {
+ background-color: beige;
+ border: 1px dotted black;
+ padding: 1px 4px;
+}
+
   
 
 .titlePage {
@@ -1278,11 +1288,11 @@ display:none;
 }
 
 .f1 {
-vertical-align:-1.9px;
+vertical-align:-0.284ex;
 }
 
 .f2 {
-vertical-align:-14px;
+vertical-align:-1.963ex;
 }
 @media handheld {
 

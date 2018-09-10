@@ -137,6 +137,13 @@
             </meta>
         </xsl:for-each>
 
+        <!-- Link in MathJax script -->
+        <xsl:if test="f:isSet('math.mathJax.enable') and //formula[@notation='TeX']">
+            <script type="text/javascript" async="async"
+              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config={f:getSetting('math.mathJax.configuration')}">
+            </script>
+        </xsl:if>
+
     </xsl:template>
 
 
