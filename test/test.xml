@@ -77,6 +77,10 @@
 			<rendition selector="#blue">color: blue;</rendition>
 			<rendition id="large-letter" scope="first-letter">font-size: xx-large; color: red</rendition>
 		</tagsDecl>
+		 <listPrefixDef>
+			<prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
+			<prefixDef ident="tei" matchPattern="(.+)" replacementPattern="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-$1.html"/>
+		 </listPrefixDef>
       </encodingDesc>
       <profileDesc>
          <langUsage>
@@ -181,7 +185,7 @@
 <p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="https://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>.</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="https://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gen 1:1">Bible</xref>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <xref url="wiki:Text_Encoding_Initiative">TEI</xref> or <xref url="tei:prefixDef">prefixDef</xref>.)</p>
 
 
 

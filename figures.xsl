@@ -550,14 +550,17 @@ width:<xsl:value-of select="$width"/>;
 
     <xsl:template match="graphic">
         <xsl:if test="f:isSet('includeImages')">
-            <xsl:copy-of select="f:outputImage(@url, if (../figDesc) then ../figDesc else '')"/>
+            <!-- handle both P3 @url and P5 @target convention -->
+            <xsl:variable name="url" select="if (@url) then @url else @target"/>
+            <xsl:copy-of select="f:outputImage($url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="graphic" mode="css">
         <xsl:if test="f:isSet('includeImages')">
-            <xsl:copy-of select="f:outputImageWidthCss(., @url)"/>
+            <xsl:variable name="url" select="if (@url) then @url else @target"/>
+            <xsl:copy-of select="f:outputImageWidthCss(., $url)"/>
         </xsl:if>
     </xsl:template>
 

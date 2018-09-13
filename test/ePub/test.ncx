@@ -24,11 +24,11 @@
          </navLabel>
          <content src="cover.xhtml#cover"/>
       </navPoint>
-      <navPoint playOrder="2" class="titlepage" id="xd31e115">
+      <navPoint playOrder="2" class="titlepage" id="xd31e121">
          <navLabel>
             <text>Title Page</text>
          </navLabel>
-         <content src="test-frontmatter-2.xhtml#xd31e115"/>
+         <content src="test-frontmatter-2.xhtml#xd31e121"/>
       </navPoint>
       <navPoint playOrder="3" class="part" id="bk1">
          <navLabel>
@@ -46,17 +46,17 @@
                <text>Chapter II Block-level Text Elements</text>
             </navLabel>
             <content src="test-ch2.xhtml"/>
-            <navPoint playOrder="6" class="section" id="xd31e386">
+            <navPoint playOrder="6" class="section" id="xd31e398">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd31e386"/>
+               <content src="test-ch2.xhtml#xd31e398"/>
             </navPoint>
-            <navPoint playOrder="7" class="section" id="xd31e410">
+            <navPoint playOrder="7" class="section" id="xd31e422">
                <navLabel>
                   <text>Some Further Tests of Paragraphs</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd31e410"/>
+               <content src="test-ch2.xhtml#xd31e422"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="8" class="chapter" id="ch03">
@@ -70,11 +70,11 @@
                <text>Chapter IV Tables</text>
             </navLabel>
             <content src="test-ch04-1.xhtml"/>
-            <navPoint playOrder="10" class="section" id="xd31e1093">
+            <navPoint playOrder="10" class="section" id="xd31e1105">
                <navLabel>
                   <text>Tables with repeated rows using ditto marks.</text>
                </navLabel>
-               <content src="test-ch04-3.xhtml#xd31e1093"/>
+               <content src="test-ch04-3.xhtml#xd31e1105"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="11" class="chapter" id="ch05">
@@ -137,29 +137,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="21" class="section" id="xd31e1819">
+         <navPoint playOrder="21" class="section" id="xd31e1831">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd31e1819"/>
+            <content src="test-index.xhtml#xd31e1831"/>
          </navPoint>
-         <navPoint playOrder="22" class="section" id="xd31e1824">
+         <navPoint playOrder="22" class="section" id="xd31e1836">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd31e1824"/>
+            <content src="test-index.xhtml#xd31e1836"/>
          </navPoint>
-         <navPoint playOrder="23" class="section" id="xd31e1829">
+         <navPoint playOrder="23" class="section" id="xd31e1841">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd31e1829"/>
+            <content src="test-index.xhtml#xd31e1841"/>
          </navPoint>
-         <navPoint playOrder="24" class="section" id="xd31e1834">
+         <navPoint playOrder="24" class="section" id="xd31e1846">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd31e1834"/>
+            <content src="test-index.xhtml#xd31e1846"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="25" class="contents" id="toc">
@@ -168,11 +168,11 @@
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="26" class="colophon" id="xd31e1847">
+      <navPoint playOrder="26" class="colophon" id="xd31e1859">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd31e1847"/>
+         <content src="test-backmatter.xhtml#xd31e1859"/>
       </navPoint>
    </navMap>
 </ncx>

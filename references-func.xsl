@@ -85,6 +85,10 @@
         </xsl:choose>
     </xsl:function>
 
+
+    <xsl:variable name="prefixDefs" select="//listPrefixDef/prefixDef" as="element(prefixDef)*"/>
+
+
     <xd:doc>
         <xd:short>Translate a URL to an HTML href attribute.</xd:short>
         <xd:detail>
@@ -110,6 +114,7 @@
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
         <xd:param name="lang" type="string">The language of the resource to link to (if applicable).</xd:param>
     </xd:doc>
+
 
     <xsl:function name="f:translate-xref-url">
         <xsl:param name="url" as="xs:string"/>
@@ -210,11 +215,37 @@
                 <xsl:value-of select="$url"/>
             </xsl:when>
 
+            <!-- Expand prefixes defined in //listPrefixDef/prefixDef -->
+            <xsl:when test="substring-before($url, ':') = $prefixDefs/@ident">
+                <xsl:value-of select="f:applyPrefixDef($url, $prefixDefs[@ident = substring-before($url, ':')][1])"/>
+            </xsl:when>
+
             <xsl:otherwise>
                 <xsl:copy-of select="f:logWarning('URL &quot;{1}&quot; not understood.', ($url))"/>
                 <xsl:value-of select="$url"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Apply a prefixDef to a short url.</xd:short>
+        <xd:detail>
+            <p>Apply a prefixDef to a short url. This directly feeds the match pattern and replacement pattern into
+            the XSLT function, so may lead to a run-time error if those values in the document are not valid.</p>
+        </xd:detail>
+        <xd:param name="url" type="string">The URL to be expanded.</xd:param>
+        <xd:param name="prefixDef" type="element(prefixDef)">The applicable prefixDef element.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:applyPrefixDef" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="prefixDef" as="element(prefixDef)"/>
+        <xsl:variable name="locator" select="substring-after($url, ':')" as="xs:string"/>
+
+        <xsl:copy-of select="f:logDebug('URL {1}; pattern: {2}; replacement: {3}.', ($url, $prefixDef/@matchPattern, $prefixDef/@replacementPattern))"/>
+
+        <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $prefixDef/@replacementPattern)"/>
     </xsl:function>
 
 </xsl:stylesheet>

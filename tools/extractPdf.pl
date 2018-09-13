@@ -8,13 +8,19 @@ use strict;
 use File::Basename;
 
 my $pdfimages = "pdfimages.exe"; # See http://www.foolabs.com/xpdf/download.html
+my $pdftopng = "pdftopng.exe";
 my $pdfcount = 1000;
+my $resolutionDpi = 300;
 
 sub list_recursively($);
 
 sub list_recursively($) {
     my ($directory) = @_;
     my @files = (  );
+
+    if (not $directory) {
+        $directory = ".";
+    }
 
     unless (opendir(DIRECTORY, $directory)) {
         print "Cannot open directory $directory!\n";
@@ -50,8 +56,8 @@ sub handle_file($) {
 
         if ($extension eq 'pdf') {
             $pdfcount++;
-            # print "$pdfimages -j $file $pdfcount\n";
-            my $returnCode = system ("$pdfimages -j \"$file\" $pdfcount");
+            my $returnCode = system ("$pdftopng -r $resolutionDpi $file $pdfcount");
+            # my $returnCode = system ("$pdfimages -j -list \"$file\" $pdfcount");
         }
     }
 }

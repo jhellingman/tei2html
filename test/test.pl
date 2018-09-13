@@ -52,6 +52,12 @@ system ("$saxon -TP:epubprofile.html test-normalized.xml $xsldir/tei2epub.xsl $f
 # system ("$saxon -T -traceout:htmltrace.txt test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
 # system ("$saxon -T -traceout:epubtrace.txt  test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
+print "Convert to P5 and repeat the exercise...\n";
+system ("$saxon test.xml $xsldir/p4top5.xsl > test-p5.xml");
+system ("$saxon test-p5.xml $xsldir/normalize-table.xsl > test-normalized-p5.xml");
+system ("$saxon test-normalized-p5.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test-p5.html");
+
+
 system ("del test.epub");
 chdir "epub";
 system ("zip -Xr9Dq ../test.epub mimetype");
