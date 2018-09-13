@@ -4,7 +4,7 @@ TEI P5 contains a [facsimile element](http://www.tei-c.org/release/doc/tei-p5-do
 
 Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with our ebook, so we have two types of facsimiles: external images and internal images.
 
-TEI actually offers two ways of referring to scanned facsimile images, on is using the `@facs` attribute on the `pb` element, the other is using `graphic` elements in a separate `facsimile` section. When using the latter option, the `@facs` attributes on the `pb` elements can also (and should) refer to those `graphic` elements.
+TEI actually offers two ways of referring to scanned facsimile images, one is using the `@facs` attribute on the `pb` element, the other is using `graphic` elements in a separate `facsimile` section. When using the latter option, the `@facs` attributes on the `pb` elements can also (and should) refer to those `graphic` elements.
 
 # Facsimile Element #
 
@@ -12,7 +12,7 @@ The `facsimile` element is a top-level element, that describes a series of page 
 
 ```
    <facsimile>
-      <graphic id=facs123 url="p123.gif"/>
+      <graphic id=facs123 url="p123.png"/>
    </facsimile>
 ```
 
@@ -21,7 +21,7 @@ The `facsimile` element is a top-level element, that describes a series of page 
 The `@facs` attribute on `pb` elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images sub-directory, for example).
 
 ```
-  <pb n=123 facs="p123.gif"/>
+  <pb n=123 facs="p123.png"/>
 ```
 
 Lets call this "direct" facsimile links.
@@ -34,7 +34,7 @@ Alternatively, it can link to an element in the `facsimile` element, for example
 
 Lets call this "indirect" facsimile links.
 
-This later case also allows to point to zones within a page, but that is currently out-of-scope for tei2html.
+This later case also allows to point to zones within a page, but that is currently out-of-scope for `tei2html`.
 
 The two ways should not be combined. Currently, the code only allows the "direct" way of linking to page images.
 
@@ -48,7 +48,7 @@ Generate links from HTML output to wrapper file. `[DONE]`
 
 Use location in text version defined by that `pb`-element to generate structural navigation aid (breadcrumbs) `[DONE]`
 
-Non-transcribed pages cannot be included (or should encode additional `pb`-elements)
+Non-transcribed pages cannot be included (or we should encode additional `pb`-elements for those pages).
 
 ### Indirect ###
 
@@ -108,7 +108,7 @@ Titles are indicated as follows as bread-crumbs:
 
 Each of these elements are active links, and will link back to those pages (content or facsimile view, to be decided)
 
-Issue: current code removes unused anchors in HTML, using a Perl script, that needs to be modified, as anchors used by those 'external' HTML files are not recognized.
+Issue: current code removes unused anchors in HTML post-XSLT-transform, using a Perl script, that needs to be modified, as anchors used by those 'external' HTML files are not recognized.
 
 Issue: our current conventions put the `pb` just before the `div#`s. This will lead to the wrong header above the page-image for the first page of a section. Need to add check for case that `pb` element is (almost) last element of a `div#`.
 
