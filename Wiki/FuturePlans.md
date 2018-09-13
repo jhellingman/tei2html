@@ -7,6 +7,10 @@ I intend, when possible, to add the following to the tei2html tool-set.
   * Support for ePub output. (DONE)
   * Support for XHTML output. (DONE, for ePub).
 
+## Tidbits ##
+
+* Update extractPDF with latest version of tools and option to extract to png format.
+* support for `<prefixDef>`
 
 ## Support TEI P5 ##
 

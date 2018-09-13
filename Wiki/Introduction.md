@@ -105,4 +105,20 @@ _Future plan_
 `&linefil;`
 `&spacefil;`
 
-These are roughly equivalent to TEX's special glue values.
+These are roughly equivalent to TeX's special glue values.
+
+Note: a better approach will be to use the `<space>` tag, with appropriate rendering information, e.g.
+
+```
+<space @rend="leader(dotted)"/>
+```
+
+or 
+
+```
+<space dim="horizontal" @rend="leader(' &ndash; ')"/>
+```
+
+As long the leader CSS this is not directly supported by browsers, we can use the method outlined here to render this in HTML: https://www.w3.org/Style/Examples/007/leaders.en.html
+
+
