@@ -6,243 +6,235 @@
     xmlns="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="tei edate">
 
-  <!--
-       P4 to P5 converter
+    <!--
+         P4 to P5 converter
+  
+         Sebastian Rahtz <sebastian.rahtz@oucs.ox.ac.uk>
+  
+         $Date: 2007-11-01 16:33:34 +0000 (Thu, 01 Nov 2007) $  $Id: p4top5.xsl 3927 2007-11-01 16:33:34Z rahtz $
+  
+         Copyright 2007 TEI Consortium
+  
+         Permission is hereby granted, free of charge, to any person obtaining
+         a copy of this software and any associated documentation files (the
+         ``Software''), to deal in the Software without restriction, including
+         without limitation the rights to use, copy, modify, merge, publish,
+         distribute, sublicense, and/or sell copies of the Software, and to
+         permit persons to whom the Software is furnished to do so, subject to
+         the following conditions:
+  
+         The above copyright notice and this permission notice shall be included
+         in all copies or substantial portions of the Software.
+    -->
 
-       Sebastian Rahtz <sebastian.rahtz@oucs.ox.ac.uk>
+    <xsl:output
+        method="xml"
+        encoding="utf-8"
+        cdata-section-elements="tei:eg"
+        omit-xml-declaration="yes"/>
 
-       $Date: 2007-11-01 16:33:34 +0000 (Thu, 01 Nov 2007) $  $Id: p4top5.xsl 3927 2007-11-01 16:33:34Z rahtz $
+    <xsl:variable name="processor">
+        <xsl:value-of select="system-property('xsl:vendor')"/>
+    </xsl:variable>
 
-       Copyright 2007 TEI Consortium
+    <xsl:variable name="today">
+        <xsl:choose>
+            <xsl:when test="function-available('edate:date-time')">
+                <xsl:value-of select="edate:date-time()"/>
+            </xsl:when>
+            <xsl:when test="contains($processor, 'SAXON')">
+                <xsl:value-of select="Date:toString(Date:new())" xmlns:Date="/java.util.Date"/>
+            </xsl:when>
+            <xsl:otherwise>0000-00-00</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
-       Permission is hereby granted, free of charge, to any person obtaining
-       a copy of this software and any associated documentation gfiles (the
-       ``Software''), to deal in the Software without restriction, including
-       without limitation the rights to use, copy, modify, merge, publish,
-       distribute, sublicense, and/or sell copies of the Software, and to
-       permit persons to whom the Software is furnished to do so, subject to
-       the following conditions:
+    <xsl:variable name="uc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+    <xsl:variable name="lc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
 
-       The above copyright notice and this permission notice shall be included
-       in all copies or substantial portions of the Software.
-  -->
+    <xsl:template match="*">
+        <xsl:choose>
+            <xsl:when test="namespace-uri()=''">
+                <xsl:element name="{local-name(.)}">
+                    <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+                </xsl:element>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
-  <xsl:output
-      method="xml"
-      encoding="utf-8"
-      cdata-section-elements="tei:eg"
-      omit-xml-declaration="yes"/>
+    <xsl:template match="@*|processing-instruction()|comment()">
+        <xsl:copy/>
+    </xsl:template>
 
-  <xsl:variable name="processor">
-    <xsl:value-of select="system-property('xsl:vendor')"/>
-  </xsl:variable>
-
-  <xsl:variable name="today">
-    <xsl:choose>
-      <xsl:when test="function-available('edate:date-time')">
-        <xsl:value-of select="edate:date-time()"/>
-      </xsl:when>
-      <xsl:when test="contains($processor, 'SAXON')">
-        <xsl:value-of select="Date:toString(Date:new())" xmlns:Date="/java.util.Date"/>
-      </xsl:when>
-      <xsl:otherwise>0000-00-00</xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
-
-  <xsl:variable name="uc">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
-  <xsl:variable name="lc">abcdefghijklmnopqrstuvwxyz</xsl:variable>
-
-  <xsl:template match="*">
-    <xsl:choose>
-      <xsl:when test="namespace-uri()=''">
-        <xsl:element namespace="http://www.tei-c.org/ns/1.0" name="{local-name(.)}">
-          <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-        </xsl:element>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:copy>
-          <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-        </xsl:copy>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-
-  <xsl:template match="@*|processing-instruction()|comment()">
-    <xsl:copy/>
-  </xsl:template>
-
-
-  <xsl:template match="text()">
-    <xsl:value-of select="."/>
-  </xsl:template>
+    <xsl:template match="text()">
+        <xsl:value-of select="."/>
+    </xsl:template>
 
 
-  <!-- change of name, or replaced by another element -->
-  <xsl:template match="teiCorpus.2">
-    <teiCorpus>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </teiCorpus>
-  </xsl:template>
+    <!-- change of name, or replaced by another element -->
+    <xsl:template match="teiCorpus.2">
+        <teiCorpus>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </teiCorpus>
+    </xsl:template>
 
-  <xsl:template match="witness/@sigil">
-    <xsl:attribute name="xml:id">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
-
-  <xsl:template match="witList">
-    <listWit>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </listWit>
-  </xsl:template>
-
-
-  <xsl:template match="TEI.2">
-    <TEI>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </TEI>
-  </xsl:template>
-
-  <xsl:template match="xref">
-    <ref>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </ref>
-  </xsl:template>
-
-
-  <xsl:template match="xptr">
-    <ptr>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </ptr>
-  </xsl:template>
-
-
-  <xsl:template match="figure[@url]">
-    <figure>
-      <graphic>
-        <xsl:copy-of select="@*"/>
-      </graphic>
-      <xsl:apply-templates/>
-    </figure>
-  </xsl:template>
-
-
-  <xsl:template match="figure/@url"/>
-
-  <xsl:template match="figure/@entity"/>
-
-  <xsl:template match="figure[@entity]">
-    <figure>
-      <graphic url="{unparsed-entity-uri(@entity)}">
-        <xsl:apply-templates select="@*"/>
-      </graphic>
-      <xsl:apply-templates/>
-    </figure>
-  </xsl:template>
-
-  <xsl:template match="event">
-    <incident>
-      <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
-    </incident>
-  </xsl:template>
-
-  <xsl:template match="state">
-    <refState>
-      <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
-    </refState>
-  </xsl:template>
-
-
-  <!-- lost elements -->
-  <xsl:template match="dateRange">
-    <date>
-      <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
-    </date>
-  </xsl:template>
-
-
-  <xsl:template match="dateRange/@from">
-    <xsl:copy-of select="."/>
-  </xsl:template>
-
-  <xsl:template match="dateRange/@to">
-    <xsl:copy-of select="."/>
-  </xsl:template>
-
-  <xsl:template match="language">
-    <xsl:element namespace="http://www.tei-c.org/ns/1.0" name="language">
-      <xsl:if test="@id">
-        <xsl:attribute name="ident">
-            <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:apply-templates select="*|processing-instruction()|comment()|text()"/>
-    </xsl:element>
-  </xsl:template>
-
-  <!-- attributes lost -->
-  <!-- dropped from TEI. Added as new change records later -->
-  <xsl:template match="@date.created"/>
-
-  <xsl:template match="@date.updated"/>
-
-  <!-- dropped from TEI. No replacement -->
-  <xsl:template match="refsDecl/@doctype"/>
-
-  <!-- attributes changed name -->
-
-  <xsl:template match="date/@value">
-    <xsl:attribute name="when">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
-
-
-  <xsl:template match="@url">
-    <xsl:attribute name="target">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
-
-
-  <xsl:template match="@doc">
-    <xsl:attribute name="target">
-      <xsl:value-of select="unparsed-entity-uri(.)"/>
-    </xsl:attribute>
-  </xsl:template>
-
-
-  <xsl:template match="@id">
-    <xsl:choose>
-      <xsl:when test="parent::lang">
-        <xsl:attribute name="ident">
-          <xsl:value-of select="."/>
-        </xsl:attribute>
-      </xsl:when>
-      <xsl:otherwise>
+    <xsl:template match="witness/@sigil">
         <xsl:attribute name="xml:id">
-          <xsl:value-of select="."/>
+            <xsl:value-of select="."/>
         </xsl:attribute>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
+    </xsl:template>
+
+    <xsl:template match="witList">
+        <listWit>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </listWit>
+    </xsl:template>
+
+    <xsl:template match="TEI.2">
+        <TEI>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </TEI>
+    </xsl:template>
+
+    <xsl:template match="xref">
+        <ref>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </ref>
+    </xsl:template>
+
+    <xsl:template match="xptr">
+        <ptr>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </ptr>
+    </xsl:template>
 
 
-  <xsl:template match="@lang">
-    <xsl:attribute name="xml:lang">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
+    <xsl:template match="figure[@url]">
+        <figure>
+            <graphic>
+                <xsl:copy-of select="@*"/>
+            </graphic>
+            <xsl:apply-templates/>
+        </figure>
+    </xsl:template>
+
+    <xsl:template match="figure/@url"/>
+
+    <xsl:template match="figure/@entity"/>
+
+    <xsl:template match="figure[@entity]">
+        <figure>
+            <graphic url="{unparsed-entity-uri(@entity)}">
+                <xsl:apply-templates select="@*"/>
+            </graphic>
+            <xsl:apply-templates/>
+        </figure>
+    </xsl:template>
+
+    <xsl:template match="event">
+        <incident>
+            <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
+        </incident>
+    </xsl:template>
+
+    <xsl:template match="state">
+        <refState>
+            <xsl:apply-templates select="@*|*|text()|comment()|processing-instruction()"/>
+        </refState>
+    </xsl:template>
 
 
-  <xsl:template match="change/@date"/>
+    <!-- lost elements -->
+    <xsl:template match="dateRange">
+        <date>
+            <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+        </date>
+    </xsl:template>
 
-  <xsl:template match="date/@certainty">
-    <xsl:attribute name="cert">
-      <xsl:value-of select="."/>
-    </xsl:attribute>
-  </xsl:template>
+    <xsl:template match="dateRange/@from">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+
+    <xsl:template match="dateRange/@to">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+
+    <xsl:template match="language">
+        <xsl:element name="language">
+            <xsl:if test="@id">
+                <xsl:attribute name="ident">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*|processing-instruction()|comment()|text()"/>
+        </xsl:element>
+    </xsl:template>
+
+
+    <!-- attributes lost -->
+    <!-- dropped from TEI. Added as new change records later -->
+    <xsl:template match="@date.created"/>
+
+    <xsl:template match="@date.updated"/>
+
+
+    <!-- dropped from TEI. No replacement -->
+    <xsl:template match="refsDecl/@doctype"/>
+
+
+    <!-- attributes changed name -->
+
+    <xsl:template match="date/@value">
+        <xsl:attribute name="when">
+            <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template match="@url">
+        <xsl:attribute name="target">
+            <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template match="@doc">
+        <xsl:attribute name="target">
+            <xsl:value-of select="unparsed-entity-uri(.)"/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template match="@id">
+        <xsl:choose>
+            <xsl:when test="parent::lang">
+                <xsl:attribute name="ident">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="@lang">
+        <xsl:attribute name="xml:lang">
+            <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <xsl:template match="change/@date"/>
+
+    <xsl:template match="date/@certainty">
+        <xsl:attribute name="cert">
+            <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
 
   <!-- all pointing attributes preceded by # -->
 
@@ -359,13 +351,10 @@
     </xsl:attribute>
   </xsl:template>
 
-  <!-- tagsDecl has a compulsory namespace child now -->
   <xsl:template match="tagsDecl">
     <xsl:if test="*">
       <tagsDecl>
-        <namespace name="http://www.tei-c.org/ns/1.0">
           <xsl:apply-templates select="*|comment()|processing-instruction"/>
-        </namespace>
       </tagsDecl>
     </xsl:if>
   </xsl:template>
@@ -651,7 +640,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:element name="{$divName}" namespace="http://www.tei-c.org/ns/1.0">
+    <xsl:element name="{$divName}">
       <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </xsl:element>
   </xsl:template>

@@ -18,10 +18,6 @@ sub list_recursively($) {
     my ($directory) = @_;
     my @files = (  );
 
-    if (not $directory) {
-        $directory = ".";
-    }
-
     unless (opendir(DIRECTORY, $directory)) {
         print "Cannot open directory $directory!\n";
         exit;
@@ -65,7 +61,16 @@ sub handle_file($) {
 
 sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
-    list_recursively($ARGV[0]);
+    my $file = $ARGV[0];
+
+    if (not $file) {
+        $file = ".";
+    }
+    if (-d $file) {
+        list_recursively($file);
+    } else {
+        handle_file($file);
+    }
 }
 
 

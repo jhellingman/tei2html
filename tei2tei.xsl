@@ -2,53 +2,55 @@
 <!--
 $Date: 2001/05/26 $ $Author: rahtz $
 
- XSLT script for cleaning up the results of applying
-   sx -xlower -xcomment -xempty -xndata
- to a TEI SGML file. It does an identity transform, but
- TEI element names are put back to
- their proper XML mixed case. Attributes which have the default
- values are removed. No DOCTYPE declaration is output!!!
+XSLT script for cleaning up the results of applying
 
- If you do not want UTF-8 output, change the xsl:output. If your
- input encoding was not dealt with properly by SX, you are probably
- in trouble!
+    sx -xlower -xcomment -xempty -xndata
 
- Sebastian Rahtz <sebastian.rahtz@oucs.ox.ac.uk>
+to a TEI SGML file. It does an identity transform, but TEI element
+names are put back to their proper XML mixed case. Attributes
+which have the default values are removed. No DOCTYPE declaration
+is output!!!
 
- May 2001
+If you do not want UTF-8 output, change the xsl:output. If your
+input encoding was not dealt with properly by SX, you are probably
+in trouble!
 
- Copyright 2001 TEI Consortium
+Sebastian Rahtz <sebastian.rahtz@oucs.ox.ac.uk>
 
- Permission is hereby granted, free of charge, to any person obtaining
- a copy of this software and any associated documentation gfiles (the
- ``Software''), to deal in the Software without restriction, including
- without limitation the rights to use, copy, modify, merge, publish,
- distribute, sublicense, and/or sell copies of the Software, and to
- permit persons to whom the Software is furnished to do so, subject to
- the following conditions:
- 
- The above copyright notice and this permission notice shall be included
- in all copies or substantial portions of the Software.
+May 2001
+
+Copyright 2001 TEI Consortium
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and any associated documentation files (the
+``Software''), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
 -->
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  version="1.0">
+
+<xsl:stylesheet
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    version="1.0">
 
 <xsl:output
-  cdata-section-elements="eg" 
-  indent="no" 
-  method="xml"
-  omit-xml-declaration="yes" />
+    cdata-section-elements="eg"
+    indent="no"
+    method="xml"
+    omit-xml-declaration="yes"/>
 
 <xsl:template match="*">
- <xsl:copy>
-  <xsl:apply-templates 
-      select="*|@*|processing-instruction()|comment()|text()"/>
- </xsl:copy>
+    <xsl:copy>
+        <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
+    </xsl:copy>
 </xsl:template>
 
 <xsl:template match="@*|processing-instruction()">
-  <xsl:copy/>
+    <xsl:copy/>
 </xsl:template>
 
 <xsl:template match="text()">
@@ -56,38 +58,38 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </xsl:template>
 
 <xsl:template match="tei.2">
-<TEI.2>
- <xsl:apply-templates select="@*"/>
- <xsl:apply-templates/>
-</TEI.2>
+    <TEI.2>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </TEI.2>
 </xsl:template>
 
 <xsl:template match="tei">
-<TEI>
- <xsl:apply-templates select="@*"/>
- <xsl:apply-templates/>
-</TEI>
+    <TEI>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </TEI>
 </xsl:template>
 
 <xsl:template match="addname">
-<addName>
- <xsl:apply-templates select="@*"/>
- <xsl:apply-templates/>
-</addName>
+    <addName>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </addName>
 </xsl:template>
 
 <xsl:template match="addspan">
-<addSpan>
- <xsl:apply-templates select="@*"/>
- <xsl:apply-templates/>
-</addSpan>
+    <addSpan>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </addSpan>
 </xsl:template>
 
 <xsl:template match="addrline">
-<addrLine>
- <xsl:apply-templates select="@*"/>
- <xsl:apply-templates/>
-</addrLine>
+    <addrLine>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </addrLine>
 </xsl:template>
 
 <xsl:template match="altgrp">
@@ -1039,195 +1041,166 @@ $Date: 2001/05/26 $ $Author: rahtz $
 </witStart>
 </xsl:template>
 
+
+<!-- Attributes -->
+
 <xsl:template match="@tei">
- <xsl:attribute name="TEI"><xsl:value-of select="."/></xsl:attribute>
+    <xsl:attribute name="TEI"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@adjfrom">
- <xsl:attribute name="adjFrom"><xsl:value-of
- select="."/></xsl:attribute>
+     <xsl:attribute name="adjFrom"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@adjto">
- <xsl:attribute name="adjTo"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="adjTo"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@assertedvalue">
- <xsl:attribute name="assertedValue"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="assertedValue"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@basetype">
- <xsl:attribute name="baseType"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="baseType"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@copyof">
- <xsl:attribute name="copyOf"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="copyOf"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@depptr">
- <xsl:attribute name="depPtr"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="depPtr"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@entityloc">
- <xsl:attribute name="entityLoc"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="entityLoc"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@entitystd">
- <xsl:attribute name="entityStd"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="entityStd"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@fval">
- <xsl:attribute name="fVal"><xsl:value-of select="."/></xsl:attribute>
+    <xsl:attribute name="fVal"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@grpptr">
- <xsl:attribute name="grpPtr"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="grpPtr"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@indegree">
- <xsl:attribute name="inDegree"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="inDegree"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@mutexcl">
- <xsl:attribute name="mutExcl"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="mutExcl"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@outdegree">
- <xsl:attribute name="outDegree"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="outDegree"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@sameas">
- <xsl:attribute name="sameAs"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="sameAs"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@targfunc">
- <xsl:attribute name="targFunc"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="targFunc"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@targorder">
-  <xsl:if test="not(. = 'u' or . = 'U')">
- <xsl:attribute name="targOrder"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'u' or . = 'U')">
+        <xsl:attribute name="targOrder"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@targtype">
- <xsl:attribute name="targType"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="targType"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@targetend">
- <xsl:attribute name="targetEnd"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="targetEnd"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@valueto">
- <xsl:attribute name="valueTo"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="valueTo"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@varseq">
- <xsl:attribute name="varSeq"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="varSeq"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@wscale">
- <xsl:attribute name="wScale"><xsl:value-of
- select="."/></xsl:attribute>
+    <xsl:attribute name="wScale"><xsl:value-of select="."/></xsl:attribute>
 </xsl:template>
 
 <xsl:template match="@teiform"/>
 
 <xsl:template match="@opt">
-  <xsl:if test="not(. = 'n' or . = 'N')">
- <xsl:attribute name="opt"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'n' or . = 'N')">
+        <xsl:attribute name="opt"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@to">
-  <xsl:if test="not(. = 'ditto' or . = 'DITTO')">
- <xsl:attribute name="to"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'ditto' or . = 'DITTO')">
+        <xsl:attribute name="to"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@from">
-  <xsl:if test="not(. = 'root' or . = 'ROOT')">
- <xsl:attribute name="from"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'root' or . = 'ROOT')">
+        <xsl:attribute name="from"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@default">
-  <xsl:if test="not(. = 'no' or . = 'NO')">
- <xsl:attribute name="default"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'no' or . = 'NO')">
+        <xsl:attribute name="default"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@part">
-  <xsl:if test="not(. = 'n' or . = 'N')">
- <xsl:attribute name="part"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'n' or . = 'N')">
+        <xsl:attribute name="part"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@full">
-  <xsl:if test="not(. = 'yes' or . = 'YES')">
- <xsl:attribute name="full"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'yes' or . = 'YES')">
+        <xsl:attribute name="full"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@status">
-  <xsl:if test="not(. = 'unremarkable' or . = 'UNREMARKABLE')">
- <xsl:attribute name="status"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'unremarkable' or . = 'UNREMARKABLE')">
+        <xsl:attribute name="status"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@place">
-  <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
- <xsl:attribute name="place"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
+        <xsl:attribute name="place"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@direct">
-  <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
- <xsl:attribute name="direct"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'unspecified' or . = 'UNSPECIFIED')">
+        <xsl:attribute name="direct"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@sample">
-  <xsl:if test="not(. = 'complete' or . = 'COMPLETE')">
- <xsl:attribute name="sample"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'complete' or . = 'COMPLETE')">
+        <xsl:attribute name="sample"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="@org">
-  <xsl:if test="not(. = 'uniform' or . = 'UNIFORM')">
- <xsl:attribute name="org"><xsl:value-of
- select="."/></xsl:attribute>
-</xsl:if>
+    <xsl:if test="not(. = 'uniform' or . = 'UNIFORM')">
+        <xsl:attribute name="org"><xsl:value-of select="."/></xsl:attribute>
+    </xsl:if>
 </xsl:template>
-
 
 <xsl:template match="@lang">
     <xsl:attribute name="lang"><xsl:value-of select="."/></xsl:attribute>
@@ -1244,6 +1217,34 @@ $Date: 2001/05/26 $ $Author: rahtz $
 <xsl:template match="note/@anchored[. = 'yes']"/>
 <xsl:template match="editor/@role[. = 'editor']"/>
 <xsl:template match="list/@type[. = 'simple']"/>
+
+
+<!-- Additional elements -->
+
+<xsl:template match="listprefixdef">
+    <listPrefixDef>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </listPrefixDef>
+</xsl:template>
+
+<xsl:template match="prefixdef">
+    <prefixDef>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </prefixDef>
+</xsl:template>
+
+
+<!-- Additional attributes -->
+
+<xsl:template match="@matchpattern">
+    <xsl:attribute name="matchPattern"><xsl:value-of select="."/></xsl:attribute>
+</xsl:template>
+
+<xsl:template match="@replacementpattern">
+    <xsl:attribute name="replacementPattern"><xsl:value-of select="."/></xsl:attribute>
+</xsl:template>
 
 
 </xsl:stylesheet>
