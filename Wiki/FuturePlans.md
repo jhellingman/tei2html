@@ -9,8 +9,8 @@ I intend, when possible, to add the following to the tei2html tool-set.
 
 ## Tidbits ##
 
-* Update extractPDF with latest version of tools and option to extract to png format.
-* support for `<prefixDef>`
+* Update extractPDF with latest version of tools and option to extract to png format. (DONE)
+* support for `<prefixDef>` (DONE)
 
 ## Support TEI P5 ##
 
