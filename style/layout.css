@@ -459,4 +459,12 @@ p.smallprint, li.smallprint, .par.smallprint {
     padding: 1px 4px;
 }
 
+
+span.displayMath {
+    display: block;
+    text-align: center;
+    margin: 2ex auto;
+}
+
+
 /***** End of layout.css *****/

@@ -1219,7 +1219,7 @@
 
 <p>Similarly, to get the time-dependent Schrödinger equation, you can type
 <formula id="f2" notation="TeX" rend="vertical-align(-1.963ex)">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
-and impress your friends.</p>
+and impress your friends. Okay, lets do one more for the heck of it: <formula id="f3" notation="TeX" rend="vertical-align(-2.382ex)">$$i\hbar\frac{\partial}{\partial t} \Psi(\mathbf{r},t) = \left [ \frac{-\hbar^2}{2\mu}\nabla^2 + V(\mathbf{r},t)\right ] \Psi(\mathbf{r},t)$$</formula> If you want to learn more about these, go to <xref url="wp:Schrödinger_equation">Wikipedia</xref>.</p>
 
 </div1>
 </div0>

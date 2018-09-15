@@ -852,8 +852,7 @@
 
     <xsl:template match="formula[@notation='TeX']">
 
-        <xsl:variable name="position" select="if (f:isDisplayMath(.)) then 'display' else 'inline'"/>
-        <xsl:variable name="basename" select="concat(concat($position, '-'), f:generate-id(.))"/>
+        <xsl:variable name="basename" select="f:formulaBasename(.)"/>
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)"/>
 
         <xsl:result-document
@@ -876,12 +875,26 @@
             <xsl:otherwise>
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:copy-of select="f:set-class-attribute-with(., concat($position, '-math'))"/>
+                    <xsl:copy-of select="f:set-class-attribute-with(., concat(f:formulaPosition(.), 'Math'))"/>
                     <img src="formula/{$basename}.svg" title="{$texString}"/>
                 </span>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:formulaBasename" as="xs:string">
+        <xsl:param name="formula" as="element(formula)"/>
+
+        <xsl:value-of select="concat(concat(f:formulaPosition($formula), '-'), f:generate-id($formula))"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:formulaPosition" as="xs:string">
+        <xsl:param name="formula" as="element(formula)"/>
+
+        <xsl:value-of select="if (f:isDisplayMath($formula)) then 'display' else 'inline'"/>
+    </xsl:function>
 
 
     <xsl:function name="f:stripMathDelimiters" as="xs:string">

@@ -455,6 +455,14 @@ p.smallprint, li.smallprint, .par.smallprint {
  padding: 1px 4px;
 }
 
+
+span.displayMath {
+ display: block;
+ text-align: center;
+ margin: 2ex auto;
+}
+
+
   
 
 .titlePage {
@@ -1293,6 +1301,10 @@ vertical-align:-0.284ex;
 
 .f2 {
 vertical-align:-1.963ex;
+}
+
+.f3 {
+vertical-align:-2.382ex;
 }
 @media handheld {
 

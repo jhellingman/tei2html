@@ -364,6 +364,9 @@
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'image')]" mode="manifest"/>
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'link')]" mode="manifest-links"/>
 
+                <!-- Formulas -->
+                <xsl:apply-templates select="//formula[@notation = 'TeX']" mode="manifest"/>
+
                 <!-- Automatically inserted illustrations in tables (i.e. braces for cells that span more than one row and contain only a brace) -->
                 <xsl:apply-templates select="//cell" mode="manifest-braces"/>
 
@@ -419,6 +422,17 @@
             <xsl:call-template name="manifest-image-item">
                 <xsl:with-param name="filename" select="$filename"/>
             </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="formula[@notation = 'TeX']" mode="manifest">
+        <xsl:if test="not(f:isSet('math.mathJax.enable'))">
+            <item>
+                <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
+                <xsl:attribute name="href">formula/<xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>
+                <xsl:attribute name="media-type">image/svg+xml</xsl:attribute>
+            </item>
         </xsl:if>
     </xsl:template>
 
