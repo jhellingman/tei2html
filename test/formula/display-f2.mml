@@ -1,0 +1,38 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" alttext="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle">
+  <mi>i</mi>
+  <mi class="MJX-variant">ℏ<!-- ℏ --></mi>
+  <mfrac>
+    <mi mathvariant="normal">∂<!-- ∂ --></mi>
+    <mrow>
+      <mi mathvariant="normal">∂<!-- ∂ --></mi>
+      <mi>t</mi>
+    </mrow>
+  </mfrac>
+  <mo fence="false" stretchy="false">|</mo>
+  <mi mathvariant="normal">Ψ<!-- Ψ --></mi>
+  <mo stretchy="false">(</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mi mathvariant="bold">r</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi>t</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩<!-- ⟩ --></mo>
+  <mo>=</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mover>
+      <mi>H</mi>
+      <mo stretchy="false">^<!-- ^ --></mo>
+    </mover>
+  </mrow>
+  <mo fence="false" stretchy="false">|</mo>
+  <mi mathvariant="normal">Ψ<!-- Ψ --></mi>
+  <mo stretchy="false">(</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mi mathvariant="bold">r</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi>t</mi>
+  <mo stretchy="false">)</mo>
+  <mo fence="false" stretchy="false">⟩<!-- ⟩ --></mo>
+</math>

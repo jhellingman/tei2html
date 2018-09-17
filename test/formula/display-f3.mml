@@ -1,0 +1,58 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" alttext="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis">
+  <mi>i</mi>
+  <mi class="MJX-variant">ℏ<!-- ℏ --></mi>
+  <mfrac>
+    <mi mathvariant="normal">∂<!-- ∂ --></mi>
+    <mrow>
+      <mi mathvariant="normal">∂<!-- ∂ --></mi>
+      <mi>t</mi>
+    </mrow>
+  </mfrac>
+  <mi mathvariant="normal">Ψ<!-- Ψ --></mi>
+  <mo stretchy="false">(</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mi mathvariant="bold">r</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi>t</mi>
+  <mo stretchy="false">)</mo>
+  <mo>=</mo>
+  <mrow>
+    <mo>[</mo>
+    <mfrac>
+      <mrow>
+        <mo>−<!-- − --></mo>
+        <msup>
+          <mi class="MJX-variant">ℏ<!-- ℏ --></mi>
+          <mn>2</mn>
+        </msup>
+      </mrow>
+      <mrow>
+        <mn>2</mn>
+        <mi>μ<!-- μ --></mi>
+      </mrow>
+    </mfrac>
+    <msup>
+      <mi mathvariant="normal">∇<!-- ∇ --></mi>
+      <mn>2</mn>
+    </msup>
+    <mo>+</mo>
+    <mi>V</mi>
+    <mo stretchy="false">(</mo>
+    <mrow class="MJX-TeXAtom-ORD">
+      <mi mathvariant="bold">r</mi>
+    </mrow>
+    <mo>,</mo>
+    <mi>t</mi>
+    <mo stretchy="false">)</mo>
+    <mo>]</mo>
+  </mrow>
+  <mi mathvariant="normal">Ψ<!-- Ψ --></mi>
+  <mo stretchy="false">(</mo>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mi mathvariant="bold">r</mi>
+  </mrow>
+  <mo>,</mo>
+  <mi>t</mi>
+  <mo stretchy="false">)</mo>
+</math>

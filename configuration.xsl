@@ -93,8 +93,9 @@
             <math.thousandsSeparator>,</math.thousandsSeparator>
             <math.numberPattern>^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]+)?$</math.numberPattern>
 
-            <math.mathJax.enable>false</math.mathJax.enable>
-            <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- options, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
+            <math.mathJax.enable>false</math.mathJax.enable>                        <!-- Use mathJax (javascript) in generated document. -->
+            <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- MathJax; MML; SVG; SVG+IMG -->
+            <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- options for MathJax format, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
 
             <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html" and "epub". -->
             <output format="html">
@@ -105,6 +106,7 @@
                 <useMouseOverPopups>false</useMouseOverPopups>
                 <outputExternalLinks>always</outputExternalLinks>
                 <outputExternalLinksTable>true</outputExternalLinksTable>
+                <math.mathJax.format>MML</math.mathJax.format>
             </output>
         </tei2html.config>
     </xsl:variable>

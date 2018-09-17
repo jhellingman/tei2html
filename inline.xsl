@@ -864,6 +864,7 @@
         </xsl:result-document>
 
         <xsl:choose>
+            <!-- Dynamic mathJax -->
             <xsl:when test="f:isSet('math.mathJax.enable')">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -872,12 +873,35 @@
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
                 </span>
             </xsl:when>
-            <xsl:otherwise>
+            <!-- Precomputed MML inline -->
+            <xsl:when test="f:getSetting('math.mathJax.format') = 'MML'">
+                <span class="{concat(f:formulaPosition(.), 'Math')}">
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:variable name="mmlFile" select="concat(concat('formula/', $basename), '.mml')" as="xs:string"/>
+                    <xsl:copy-of select="f:logInfo('Including file: {1}.', ($mmlFile))"/>
+                    <xsl:copy-of select="document($mmlFile, .)/*"/>
+                </span>
+            </xsl:when>
+            <!-- Precomputed SVG inline -->
+            <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG'">
+                <span class="{concat(f:formulaPosition(.), 'Math')}">
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:variable name="svgFile" select="concat(concat('formula/', $basename), '.svg')" as="xs:string"/>
+                    <xsl:copy-of select="f:logInfo('Including file: {1}.', ($svgFile))"/>
+                    <xsl:copy-of select="document($svgFile, .)/*"/>
+                </span>
+            </xsl:when>
+            <!-- Precomputed SVG as img -->
+            <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
+                <!-- TODO: grab vertical-offset from SVG file -->
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:set-class-attribute-with(., concat(f:formulaPosition(.), 'Math'))"/>
                     <img src="formula/{$basename}.svg" title="{$texString}"/>
                 </span>
+                </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:logError('Unknown way of including math formula: {1}.', (f:getSetting('math.mathJax.format')))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

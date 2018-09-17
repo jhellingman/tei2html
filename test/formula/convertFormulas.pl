@@ -37,6 +37,7 @@ sub handleFile($) {
 
         my $svgFile = $dirname . '\\' . $base . '.svg';
         my $htmlFile = $dirname . '\\' . $base . '.html';
+        my $mmlFile = $dirname . '\\' . $base . '.mml';
 
         print "Converting TeX formula: $file\n";
 
@@ -52,6 +53,7 @@ sub handleFile($) {
         # print  ("tex2svg $inlineMode \"$formula\" > $svgFile");
         system ("tex2svg $inlineMode \"$formula\" > $svgFile");
         system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile");
+        system ("tex2mml $inlineMode \"$formula\" > $mmlFile");
     }
 }
 
