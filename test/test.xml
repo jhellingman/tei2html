@@ -1215,11 +1215,14 @@
 <head>Mathematical Formula</head>
 
 <p>This is an experimental feature. To include a mathematical formula, just type
-<formula id="f1" notation="TeX" rend="vertical-align(-0.284ex)">$E = mc^2$</formula> to get Einstein&rsquo;s famous equation.</p>
+<formula id="f1" notation="TeX">$E = mc^2$</formula> to get Einstein&rsquo;s famous equation.</p>
 
 <p>Similarly, to get the time-dependent Schrödinger equation, you can type
-<formula id="f2" notation="TeX" rend="vertical-align(-1.963ex)">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
-and impress your friends. Okay, lets do one more for the heck of it: <formula id="f3" notation="TeX" rend="vertical-align(-2.382ex)">$$i\hbar\frac{\partial}{\partial t} \Psi(\mathbf{r},t) = \left [ \frac{-\hbar^2}{2\mu}\nabla^2 + V(\mathbf{r},t)\right ] \Psi(\mathbf{r},t)$$</formula> If you want to learn more about these, go to <xref url="wp:Schrödinger_equation">Wikipedia</xref>.</p>
+<formula id="f2" notation="TeX">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
+and impress your friends. Okay, lets do one more for the heck of it: <formula id="f3" notation="TeX">$$i\hbar\frac{\partial}{\partial t} \Psi(\mathbf{r},t) = \left [ \frac{-\hbar^2}{2\mu}\nabla^2 + V(\mathbf{r},t)\right ] \Psi(\mathbf{r},t)$$</formula> If you want to learn more about these, go to <xref url="wp:Schrödinger_equation">Wikipedia</xref>.</p>
+
+<p>When <formula id="f4" notation="TeX">$a \ne 0$</formula>, there are two solutions to <formula id="f5" notation="TeX">$ax^2 + bx + c = 0$</formula> and they are
+<formula id="f6" notation="TeX">$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</formula></p>
 
 </div1>
 </div0>

@@ -427,7 +427,7 @@
 
 
     <xsl:template match="formula[@notation = 'TeX']" mode="manifest">
-        <xsl:if test="not(f:isSet('math.mathJax.enable')) and f:getSetting('math.mathJax.format') = 'SVG+IMG'">
+        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
             <item>
                 <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
                 <xsl:attribute name="href">formula/<xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>

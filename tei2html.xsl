@@ -34,6 +34,7 @@
     <xsl:include href="divisions.xsl"/>
     <xsl:include href="tables.xsl"/>
     <xsl:include href="lists.xsl"/>
+    <xsl:include href="formulas.xsl"/>
     <xsl:include href="figures.xsl"/>
     <xsl:include href="colophon.xsl"/>
     <xsl:include href="gutenberg.xsl"/>
