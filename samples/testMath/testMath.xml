@@ -1,0 +1,48 @@
+<TEI.2 lang="en" xml:lang="en"><teiHeader type="text" status="new"><fileDesc><titleStmt><title>Sample MathJax Equations</title></titleStmt><publicationStmt><publisher>Project Gutenberg</publisher><pubPlace>Urbana, Illinois, USA.</pubPlace><idno type="LCCN">#####</idno><idno type="OLN">#####</idno><idno type="OLW">#####</idno><idno type="OCLC">#####</idno><idno type="LibThing">#####</idno><idno type="PGclearance">#####</idno><idno type="PGDPProjectId">#####</idno><idno type="PGSrc">#####</idno><idno type="epub-id">urn:uuid:def802a2-77bb-4d37-9bf6-7ba81fa7d423</idno><idno type="PGnum">#####</idno><date>#####</date><availability><p>Samples taken from https://www.tuhh.de/MathJax/test/examples.html
+</p></availability></publicationStmt><notesStmt><note type="Description">Sample MathJax Equations</note></notesStmt><sourceDesc><bibl><author>#####</author>
+<title>Sample MathJax Equations</title>
+<date>#####</date></bibl></sourceDesc></fileDesc><encodingDesc><p/></encodingDesc><profileDesc><langUsage><language id="en">English</language><language id="en-us">English (United States)</language><language id="en-uk">English (United Kingdom)</language><language id="de">German</language><language id="fr">French</language><language id="la">Latin</language></langUsage><textClass><keywords><list><item>#####</item></list></keywords></textClass></profileDesc><revisionDesc><list><item>2018-09-19 Started.
+    </item></list></revisionDesc></teiHeader><text rend="stylesheet(style/classic.css)"><body><div1 type="Chapter"><head>Sample MathJax Equations</head><div2 type="Section"><head>The Lorenz Equations</head><p><formula id="f1" notation="TeX">$$
+\begin{align}
+\dot{x} &amp; = \sigma(y-x) \\
+\dot{y} &amp; = \rho x - y - xz \\
+\dot{z} &amp; = -\beta z + xy
+\end{align}
+$$</formula>
+</p></div2><div2 type="Section"><head>The Cauchy-Schwarz Inequality</head><p><formula id="f2" notation="TeX">$$
+\left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
+ \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+$$</formula>
+</p></div2><div2 type="Section"><head>A Cross Product Formula</head><p><formula id="f3" notation="TeX">$$
+  \mathbf{V}_1 \times \mathbf{V}_2 =
+   \begin{vmatrix}
+    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+    \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \\
+    \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \\
+   \end{vmatrix}
+$$</formula>
+
+</p></div2><div2 type="Section"><head>The probability of getting <formula id="f4.1" notation="TeX">$k$</formula> heads when flipping <formula id="f4.2" notation="TeX">$n$</formula> coins is:</head><p><formula id="f4" notation="TeX">$$P(E) = {n \choose k} p^k (1-p)^{ n-k}$$</formula>
+</p></div2><div2 type="Section"><head>An Identity of Ramanujan</head><p><formula id="f5" notation="TeX">$$
+   \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
+     1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+      {1+\frac{e^{-8\pi}} {1+\ldots} } } }
+$$</formula>
+</p></div2><div2 type="Section"><head>A Rogers-Ramanujan Identity</head><p><formula id="f6" notation="TeX">$$
+  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+    \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+     \quad\quad \text{for $|q|&lt;1$}.
+$$</formula>
+</p></div2><div2 type="Section"><head>Maxwell&#8217;s Equations</head><p><formula id="f7" notation="TeX">$$
+\begin{align}
+  \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
+  \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+  \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+  \nabla \cdot \vec{\mathbf{B}} &amp; = 0
+\end{align}
+$$</formula>
+</p></div2><div2 type="Section"><head>In-line Mathematics</head><p>Finally, while display equations look good for a page of samples, the
+ability to mix math and text in a paragraph is also important.  This
+expression <formula id="f8" notation="TeX">$\sqrt{3x-1}+(1+x)^2$</formula> is an example of an inline equation.  As
+you see, MathJax equations can be used this way as well, without unduly
+disturbing the spacing between lines.</p></div2></div1></body></text></TEI.2>

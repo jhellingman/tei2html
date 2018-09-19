@@ -2,6 +2,7 @@
 
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
+    <!ENTITY nbsp       "&#160;">
 
 ]>
 
@@ -20,6 +21,15 @@
         <xd:detail>This stylesheet contains templates for handling mathematical formulas in TeX format.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2018, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
+
+    <xd:doc>
+        <xd:short>Handle a formula in TeX notation.</xd:short>
+        <xd:detail>
+            <p>Handle a formula in TeX notation. For proper rendering, this will require <b>two</b> runs of
+            <code>tei2html</code>: one to output the TeX formula in a small file. Then, after generating
+            the matching MathML or SVG files, another run to include those generated files in the output.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template match="formula[@notation='TeX']">
@@ -57,7 +67,8 @@
                 <span class="{concat(f:formulaPosition(.), 'Math')}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:logInfo('Including file: {1}.', ($mmlFile))"/>
-                    <xsl:copy-of select="document($mmlFile, .)/*"/>
+                    <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
+                    <xsl:copy-of select="f:stripComments(document($mmlFile, .)/*)"/>
                 </span>
             </xsl:when>
             <!-- Precomputed SVG inline -->
@@ -82,6 +93,10 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Define CSS rules for formulas in TeX notation.</xd:short>
+    </xd:doc>
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
@@ -128,6 +143,24 @@
 
         <xsl:value-of select="substring($texString, 1, 2) = '$$'"/>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Strip all comment nodes from a node-tree.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:stripComments">
+        <xsl:param name="node"/>
+        <xsl:apply-templates select="$node" mode="stripComments"/>
+    </xsl:function>
+
+    <xsl:template match="node()|@*" mode="stripComments">
+        <xsl:copy>
+            <xsl:apply-templates select="node()|@*" mode="stripComments"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="comment()" mode="stripComments" priority="1"/>
 
 
 </xsl:stylesheet>
