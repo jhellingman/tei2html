@@ -35,10 +35,9 @@
     <xsl:template match="formula[@notation='TeX']">
 
         <xsl:variable name="basename" select="f:formulaBasename(.)" as="xs:string"/>
-        <xsl:variable name="path" select="concat('formulas/', $basename)" as="xs:string"/>
-        <xsl:variable name="texFile" select="concat($path, '.tex')" as="xs:string"/>
-        <xsl:variable name="mmlFile" select="concat($path, '.mml')" as="xs:string"/>
-        <xsl:variable name="svgFile" select="concat($path, '.svg')" as="xs:string"/>
+        <xsl:variable name="texFile" select="concat($basename, '.tex')" as="xs:string"/>
+        <xsl:variable name="mmlFile" select="concat($basename, '.mml')" as="xs:string"/>
+        <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
 
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
         <xsl:variable name="svgTitle" select="document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
@@ -68,7 +67,7 @@
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:logInfo('Including file: {1}.', ($mmlFile))"/>
                     <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
-                    <xsl:copy-of select="f:stripComments(document($mmlFile, .)/*)"/>
+                    <xsl:apply-templates select="document($mmlFile, .)/*" mode="stripComments"/>
                 </span>
             </xsl:when>
             <!-- Precomputed SVG inline -->
@@ -102,13 +101,17 @@
         <xsl:next-match/>
         <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
             <xsl:variable name="basename" select="f:formulaBasename(.)"/>
-            <xsl:variable name="svgFile" select="concat(concat('formulas/', $basename), '.svg')" as="xs:string"/>
+            <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
             <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
+            <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
+            <xsl:variable name="height" select="document($svgFile, .)/svg:svg/@height"/>
 
             <xsl:if test="$style">
                 <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
                 <xsl:text>#</xsl:text><xsl:value-of select="f:generate-id(.)"/><xsl:text> {&lf;</xsl:text>
-                <xsl:value-of select="$style"/> 
+                <xsl:value-of select="$style"/>
+                <xsl:text>&lf;width:</xsl:text><xsl:value-of select="$width"/><xsl:text>;</xsl:text>
+                <xsl:text>&lf;height:</xsl:text><xsl:value-of select="$height"/><xsl:text>;</xsl:text>
                 <xsl:text>&lf;}&lf;</xsl:text>
             </xsl:if>
         </xsl:if>
@@ -118,7 +121,7 @@
     <xsl:function name="f:formulaBasename" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
-        <xsl:value-of select="concat(concat(f:formulaPosition($formula), '-'), f:generate-id($formula))"/>
+        <xsl:value-of select="concat('formulas/', f:formulaPosition($formula), '-', f:generate-id($formula))"/>
     </xsl:function>
 
 
@@ -148,11 +151,6 @@
     <xd:doc>
         <xd:short>Strip all comment nodes from a node-tree.</xd:short>
     </xd:doc>
-
-    <xsl:function name="f:stripComments">
-        <xsl:param name="node"/>
-        <xsl:apply-templates select="$node" mode="stripComments"/>
-    </xsl:function>
 
     <xsl:template match="node()|@*" mode="stripComments">
         <xsl:copy>

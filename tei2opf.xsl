@@ -430,7 +430,7 @@
         <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
             <item>
                 <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
-                <xsl:attribute name="href">formula/<xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>
+                <xsl:attribute name="href"><xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>
                 <xsl:attribute name="media-type">image/svg+xml</xsl:attribute>
             </item>
         </xsl:if>

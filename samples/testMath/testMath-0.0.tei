@@ -99,7 +99,7 @@ $$</formula>
 
 
 <div2>
-<head>The probability of getting <formula notation="TeX" id=f4.1>$k$</formula> heads when flipping <formula notation="TeX" id=f4.2>$n$</formula> coins is:</head>
+<head>The probability of getting <formula notation="TeX" id=f41>$k$</formula> heads when flipping <formula notation="TeX" id=f42>$n$</formula> coins is:</head>
 
 <p><formula notation="TeX" id=f4>$$P(E) = {n \choose k} p^k (1-p)^{ n-k}$$</formula>
 

@@ -50,6 +50,7 @@ my $noTranscription     = 0;
 my $force               = 0;
 my $debug               = 0;
 my $profile             = 0;
+my $noTidy              = 0;
 
 GetOptions(
     't' => \$makeText,
@@ -76,7 +77,8 @@ GetOptions(
     'debug' => \$debug,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
-    'help' => \$showHelp);
+    'help' => \$showHelp,
+    'notidy'=> \$noTidy);
 
 my $filename = $ARGV[0];
 
@@ -254,7 +256,9 @@ sub makeHtml($) {
     print "Create HTML version...\n";
     system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
-    system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
+    if ($noTidy == 0) {
+        system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
+    }
     $debug || unlink($tmpFile);
 }
 
@@ -295,6 +299,7 @@ sub makeEpub() {
     print "Create ePub version...\n";
     system ("mkdir epub");
     copyImages("epub/images");
+    copyFormulas("epub/formulas");
     copyAudio("epub/audio");
     copyFonts("epub/fonts");
 
@@ -685,6 +690,19 @@ sub copyImages($) {
 
 
 #
+# copyFormulas -- copy formula svg-files for use in ePub.
+#
+sub copyFormulas($) {
+    my $destination = shift;
+
+    if (-d "formulas") {
+        system ("cp -r -u formulas " . $destination);
+    } elsif (-d "Processed/formulas") {
+        system ("cp -r -u Processed/formulas " . $destination);
+    }
+}
+
+#
 # copyAudio -- copy audio files for use in ePub.
 #
 sub copyAudio($) {
@@ -756,11 +774,11 @@ sub tei2xml($$) {
     my $tmpFile4 = temporaryFile('ucs', '.xml');
 
     print "Convert SGML to XML...\n";
-    
+
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
     system ("sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
-    
+
     # apply proper case to tags.
     system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
 

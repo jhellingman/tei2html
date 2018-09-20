@@ -81,3 +81,11 @@ test/htmltrace.txt
 test/epubtrace.txt
 dependencies.txt
 sandbox/
+samples/testMath/formulas/
+samples/testMath/README.md
+samples/testMath/testMath.zip
+samples/testMath/testMath.txt
+samples/testMath/testMath.jeebies
+samples/testMath/testMath.gutcheck
+samples/testMath/testMath-words.html
+samples/testMath/testMath-0.0-checks.html
