@@ -61,7 +61,7 @@
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
                 </span>
             </xsl:when>
-            <!-- Precomputed MML inline -->
+            <!-- Static MML inline -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'MML'">
                 <span class="{concat(f:formulaPosition(.), 'Math')}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -70,7 +70,7 @@
                     <xsl:apply-templates select="document($mmlFile, .)/*" mode="stripComments"/>
                 </span>
             </xsl:when>
-            <!-- Precomputed SVG inline -->
+            <!-- Static SVG inline -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG'">
                 <span class="{concat(f:formulaPosition(.), 'Math')}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -78,11 +78,12 @@
                     <xsl:copy-of select="document($svgFile, .)/*"/>
                 </span>
             </xsl:when>
-            <!-- Precomputed SVG as img -->
+            <!-- Static SVG as img -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
                 <span>
                     <xsl:copy-of select="f:set-class-attribute-with(., concat(f:formulaPosition(.), 'Math'))"/>
                     <img src="{$svgFile}" title="{$description}">
+                        <!-- CSS will set size and vertical offset from SVG file based on ID, which needs to be on the img tag. -->
                         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     </img>
                 </span>

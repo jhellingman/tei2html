@@ -38,6 +38,7 @@ sub handleFile($) {
         my $svgFile = $dirname . '\\' . $base . '.svg';
         my $htmlFile = $dirname . '\\' . $base . '.html';
         my $mmlFile = $dirname . '\\' . $base . '.mml';
+        my $pngFile = $dirname . '\\' . $base . '.png';
 
         print "Converting TeX formula: $file\n";
 
@@ -50,10 +51,13 @@ sub handleFile($) {
 
         my $inlineMode = startsWith($base, "inline") ? "--inline" : "";
 
-        # print  ("tex2svg $inlineMode \"$formula\" > $svgFile");
+        # see https://github.com/mathjax/mathjax-node-cli
         system ("tex2svg $inlineMode \"$formula\" > $svgFile");
         system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile");
         system ("tex2mml $inlineMode \"$formula\" > $mmlFile");
+
+        # see https://github.com/shakiba/svgexport
+        system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\"");
     }
 }
 
