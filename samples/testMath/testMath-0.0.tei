@@ -70,13 +70,13 @@
 <div2 type=Section>
 <head>The Lorenz Equations</head>
 
-<p><formula notation="TeX" id=f1>$$
+<p><formula notation="TeX" id=f1>
 \begin{align}
 \dot{x} &amp; = \sigma(y-x) \\
 \dot{y} &amp; = \rho x - y - xz \\
 \dot{z} &amp; = -\beta z + xy
 \end{align}
-$$</formula>
+</formula>
 
 <div2>
 <head>The Cauchy-Schwarz Inequality</head>
@@ -124,14 +124,14 @@ $$</formula>
 <div2>
 <head>Maxwell&apos;s Equations</head>
 
-<p><formula notation="TeX" id=f7>$$
+<p><formula notation="TeX" id=f7>
 \begin{align}
   \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
   \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
   \nabla \cdot \vec{\mathbf{B}} &amp; = 0
 \end{align}
-$$</formula>
+</formula>
 
 <div2>
 <head>In-line Mathematics</head>

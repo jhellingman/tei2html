@@ -81,9 +81,10 @@
             <!-- Precomputed SVG as img -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
                 <span>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:set-class-attribute-with(., concat(f:formulaPosition(.), 'Math'))"/>
-                    <img src="{$svgFile}" title="{$description}"/>
+                    <img src="{$svgFile}" title="{$description}">
+                        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    </img>
                 </span>
                 </xsl:when>
             <xsl:otherwise>
@@ -144,7 +145,8 @@
     <xsl:function name="f:isDisplayMath" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>
 
-        <xsl:value-of select="substring($texString, 1, 2) = '$$'"/>
+        <xsl:variable name="texString" select="normalize-space($texString)"/>
+        <xsl:value-of select="starts-with($texString, '$$') or starts-with($texString, '\begin{align}')"/>
     </xsl:function>
 
 

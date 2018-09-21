@@ -2,13 +2,11 @@
 </p></availability></publicationStmt><notesStmt><note type="Description">Sample MathJax Equations</note></notesStmt><sourceDesc><bibl><author>#####</author>
 <title>Sample MathJax Equations</title>
 <date>#####</date></bibl></sourceDesc></fileDesc><encodingDesc><p/></encodingDesc><profileDesc><langUsage><language id="en">English</language><language id="en-us">English (United States)</language><language id="en-uk">English (United Kingdom)</language><language id="de">German</language><language id="fr">French</language><language id="la">Latin</language></langUsage><textClass><keywords><list><item>#####</item></list></keywords></textClass></profileDesc><revisionDesc><list><item>2018-09-19 Started.
-    </item></list></revisionDesc></teiHeader><text rend="stylesheet(style/classic.css)"><body><div1 type="Chapter"><head>Sample MathJax Equations</head><div2 type="Section"><head>The Lorenz Equations</head><p><formula id="f1" notation="TeX">$$
-\begin{align}
+    </item></list></revisionDesc></teiHeader><text rend="stylesheet(style/classic.css)"><body><div1 type="Chapter"><head>Sample MathJax Equations</head><div2 type="Section"><head>The Lorenz Equations</head><p><formula id="f1" notation="TeX">\begin{align}
 \dot{x} &amp; = \sigma(y-x) \\
 \dot{y} &amp; = \rho x - y - xz \\
 \dot{z} &amp; = -\beta z + xy
-\end{align}
-$$</formula>
+\end{align}</formula>
 </p></div2><div2 type="Section"><head>The Cauchy-Schwarz Inequality</head><p><formula id="f2" notation="TeX">$$
 \left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
  \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
@@ -33,14 +31,12 @@ $$</formula>
     \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
      \quad\quad \text{for $|q|&lt;1$}.
 $$</formula>
-</p></div2><div2 type="Section"><head>Maxwell&#8217;s Equations</head><p><formula id="f7" notation="TeX">$$
-\begin{align}
+</p></div2><div2 type="Section"><head>Maxwell&#8217;s Equations</head><p><formula id="f7" notation="TeX">\begin{align}
   \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
   \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
   \nabla \cdot \vec{\mathbf{B}} &amp; = 0
-\end{align}
-$$</formula>
+\end{align}</formula>
 </p></div2><div2 type="Section"><head>In-line Mathematics</head><p>Finally, while display equations look good for a page of samples, the
 ability to mix math and text in a paragraph is also important.  This
 expression <formula id="f8" notation="TeX">$\sqrt{3x-1}+(1+x)^2$</formula> is an example of an inline equation.  As
