@@ -36,6 +36,8 @@ while (<INPUTFILE>) {
         $currentPageSize = 0;
         $previousPage = $currentPage;
         $currentPage = getAttrVal("n", $attrs);
+        my $facs = getAttrVal("facs", $attrs);
+        $facs = $facs ? " facs=\"$facs\"" : "";
 
         my $cp = isroman($currentPage) ? arabic($currentPage) : $currentPage;
         my $pp = isroman($previousPage) ? arabic($previousPage) : $previousPage;
@@ -48,7 +50,7 @@ while (<INPUTFILE>) {
             if ($useRoman eq "R") {
                 $newCurrentPage = uc(roman($newCurrentPage));
             }
-            print "$before<pb id=pb$newCurrentPage n=$newCurrentPage>";
+            print "$before<pb id=pb$newCurrentPage n=$newCurrentPage$facs>";
         } else {
             print "$before<pb$attrs>";
         }

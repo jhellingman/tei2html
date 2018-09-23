@@ -27,7 +27,7 @@
     <xsl:template match="text">
         <xsl:apply-templates/>
 
-        <xsl:if test="f:isSet('generateFacsimile')">
+        <xsl:if test="f:isSet('facsimile.enable')">
             <xsl:apply-templates select="//pb[@facs]" mode="facsimile"/>
         </xsl:if>
     </xsl:template>

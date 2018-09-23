@@ -16,7 +16,7 @@
         <code>pb</code>-elements.</p>
 
         <p>The stylesheet generates page-image wrapper pages and will take into account the
-        case that pb-elements can be placed at the very end of a division (so that the next
+        case that <code>pb</code>-elements can be placed at the very end of a division (so that the next
         page will begin a new division), even though, strictly speaking, the page-break
         is still part of the previous division.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
@@ -68,7 +68,7 @@
 
 
 <xsl:template match="pb" mode="css">
-    <xsl:if test="@facs and not(starts-with(@facs, '#'))">
+    <xsl:if test="f:isSet('facsimile.enable') and @facs and not(starts-with(@facs, '#'))">
         <xsl:if test="not(preceding::pb[@facs])">
             <xsl:call-template name="main-facsimile-css"/>
         </xsl:if>
@@ -89,7 +89,7 @@
     <xd:detail>The name is derived from the generated id, which in turn uses the element id, if present.</xd:detail>
 </xd:doc>
 
-<xsl:function name="f:facsimile-filename" as="xs:string">
+<xsl:function name="f:facsimile-wrapper-filename" as="xs:string">
     <xsl:param name="node" as="node()"/>
 
     <xsl:variable name="filename">
@@ -103,23 +103,26 @@
 
 
 <xd:doc>
-    <xd:short>Get the path where facsimile images are stored from the configuration.</xd:short>
+    <xd:short>Get the filename and path where facsimile images are stored from the configuration.</xd:short>
     <xd:detail>In this same location, page-image wrapper files will be generated for a digital facsimile.</xd:detail>
 </xd:doc>
 
-<xsl:function name="f:facsimile-path" as="xs:string">
-    <xsl:sequence select="f:getSetting('facsimilePath')"/>
+<xsl:function name="f:facsimile-wrapper-full-filename" as="xs:string">
+    <xsl:param name="node" as="node()"/>
+
+    <xsl:value-of select="concat(f:getSetting('facsimile.path'), '/', f:facsimile-wrapper-filename($node))"/>
 </xsl:function>
 
 
 <xd:doc>
-    <xd:short>Handle a pb-element with a @facs-attribute.</xd:short>
-    <xd:detail>Handle a pb-element with a @facs-attribute, but only if this refers directly to
+    <xd:short>Handle a <code>pb</code>-element with a <code>@facs</code>-attribute.</xd:short>
+    <xd:detail>Handle a <code>pb</code>-element with a <code>@facs</code>-attribute, but only if this refers directly to
     a page-image (otherwise, it will be handled by the graphic element referred to).</xd:detail>
 </xd:doc>
 
 <xsl:template match="pb" mode="facsimile">
     <xsl:if test="@facs and not(starts-with(@facs, '#'))">
+        <!-- For the first one only -->
         <xsl:if test="not(preceding::pb[@facs])">
             <xsl:call-template name="facsimile-css"/>
         </xsl:if>
@@ -136,13 +139,13 @@
 </xd:doc>
 
 <xsl:template name="facsimile-css">
-    <xsl:variable name="facsimile-css-file" select="concat(f:facsimile-path(), '/facsimile.css')"/>
+    <xsl:variable name="facsimile-css-file" select="concat(f:getSetting('facsimile.path'), '/facsimile.css')"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
         <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-css-file))"/>
-body {
+        <xsl:text>body {
     text-align: center;
-}
+}</xsl:text>
     </xsl:result-document>
 </xsl:template>
 
@@ -153,7 +156,7 @@ body {
 </xd:doc>
 
 <xsl:template name="facsimile-wrapper">
-    <xsl:variable name="facsimile-file" select="concat(f:facsimile-path(), concat('/', f:facsimile-filename(.)))"/>
+    <xsl:variable name="facsimile-file" select="f:facsimile-wrapper-full-filename(.)"/>
 
     <xsl:result-document href="{$facsimile-file}">
         <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-file))"/>
@@ -263,7 +266,7 @@ body {
     <!-- Note: some pb elements do not have a @facs attribute, typically those in footnotes; we can ignore those. -->
     <div class="pager-navigation">
         <xsl:if test="preceding::pb[@facs]">
-            <a href="{f:facsimile-filename(preceding::pb[@facs][1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
+            <a href="{f:facsimile-wrapper-filename(preceding::pb[@facs][1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
             <xsl:text> | </xsl:text>
         </xsl:if>
 
@@ -275,7 +278,7 @@ body {
 
         <xsl:if test="following::pb[@facs]">
             <xsl:text> | </xsl:text>
-            <a href="{f:facsimile-filename(following::pb[@facs][1])}"><xsl:value-of select="f:message('msgNext')"/></a>
+            <a href="{f:facsimile-wrapper-filename(following::pb[@facs][1])}"><xsl:value-of select="f:message('msgNext')"/></a>
         </xsl:if>
     </div>
 </xsl:template>
@@ -284,7 +287,7 @@ body {
 <xsl:template name="pager-navigation-graphic">
     <div class="pager-navigation">
         <xsl:if test="preceding::graphic">
-            <a href="{f:facsimile-filename(preceding::graphic[1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
+            <a href="{f:facsimile-wrapper-filename(preceding::graphic[1])}"><xsl:value-of select="f:message('msgPrevious')"/></a>
             <xsl:text> | </xsl:text>
         </xsl:if>
 
@@ -296,7 +299,7 @@ body {
 
         <xsl:if test="following::graphic">
             <xsl:text> | </xsl:text>
-            <a href="{f:facsimile-filename(following::graphic[1])}"><xsl:value-of select="f:message('msgNext')"/></a>
+            <a href="{f:facsimile-wrapper-filename(following::graphic[1])}"><xsl:value-of select="f:message('msgNext')"/></a>
         </xsl:if>
     </div>
 </xsl:template>

@@ -449,17 +449,6 @@ p.smallprint, li.smallprint, .par.smallprint {
     font-size: 80%;
 }
 
-.tagsUsage th, .tagsUsage td {
-    vertical-align: top;
-}
-
-.tagsUsage span.tagUsageValue {
-    background-color: beige;
-    border: 1px dotted black;
-    padding: 1px 4px;
-}
-
-
 span.displayMath {
     display: block;
     text-align: center;

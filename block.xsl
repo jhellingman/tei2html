@@ -59,7 +59,7 @@
     <xsl:template match="pb">
         <xsl:choose>
             <!-- Don't show page breaks when they appear in a marginal note -->
-            <xsl:when test="ancestor::note[@place = 'margin']">
+            <xsl:when test="ancestor::note[@place = ('margin', 'left', 'right')]">
                 <xsl:call-template name="pb-anchor"/>
             </xsl:when>
             <!-- In HTML, we do not allow a span element at the top-level, so wrap it into a paragraph. -->
@@ -110,23 +110,62 @@
                 <xsl:value-of select="@n"/>
             </a>
             <xsl:text>]</xsl:text>
-            <xsl:if test="f:isSet('generateFacsimile') and ./@facs">
-                <xsl:text>&nbsp;</xsl:text>
-                <xsl:choose>
-                    <xsl:when test="starts-with(@facs, '#')">
-                        <xsl:variable name="id" select="substring(@facs, 2)"/>
-                        <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
-                        <xsl:if test="$graphic">
-                            <a href="{f:facsimile-path()}/{f:facsimile-filename($graphic)}" class="facslink" title="{f:message('msgPageImage')}"/>
-                        </xsl:if>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <a href="{f:facsimile-path()}/{f:facsimile-filename(.)}" class="facslink" title="{f:message('msgPageImage')}"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+            <xsl:if test="f:isSet('facsimile.enable') and ./@facs">
+                <xsl:call-template name="pb-facsimile-link"/>
             </xsl:if>
          </span>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generate a link to the page-image with a page-break.</xd:short>
+        <xd:detail>Generate a link to the page-image with a page-break if the page-break indicates a
+        facsimile (<code>@facs</code>-attribute).</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="pb-facsimile-link">
+        <xsl:variable name="context" select="." as="element(pb)"/>
+        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+
+        <xsl:text>&nbsp;</xsl:text>
+        <xsl:choose>
+            <xsl:when test="starts-with(@facs, '#')">
+                <xsl:variable name="id" select="substring(@facs, 2)"/>
+                <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
+                <xsl:if test="$graphic">
+                    <xsl:copy-of select="if (f:isSet('facsimile.external')) then f:facsimile-direct-link($graphic/@url) else f:facsimile-wrapper-link($graphic)"/>
+                </xsl:if>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="if (f:isSet('facsimile.external')) then f:facsimile-direct-link(@facs) else f:facsimile-wrapper-link(.)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:function name="f:facsimile-wrapper-link">
+        <xsl:param name="node" as="node()"/>
+        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+
+        <a href="{f:facsimile-wrapper-full-filename($node)}" class="facslink" title="{f:message('msgPageImage')}">
+            <xsl:if test="$target">
+                <xsl:attribute name="target" select="$target"/>
+            </xsl:if>
+        </a>
+    </xsl:function>
+
+
+    <xsl:function name="f:facsimile-direct-link">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:variable name="url" select="f:translate-xref-url($url, 'xx')"/>
+        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+
+        <a href="{$url}" class="facslink" title="{f:message('msgPageImage')}">
+            <xsl:if test="$target">
+                <xsl:attribute name="target" select="$target"/>
+            </xsl:if>
+        </a>
+    </xsl:function>
 
 
     <xd:doc>
@@ -150,7 +189,7 @@
         <xsl:copy-of select="f:logDebug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']">
+    <xsl:template match="fw[@place=('margin', 'left', 'right')]">
         <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -158,19 +197,19 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']/list">
+    <xsl:template match="fw[@place=('margin', 'left', 'right')]/list">
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']/list/item" priority="2">
+    <xsl:template match="fw[@place=('margin', 'left', 'right')]/list/item" priority="2">
         <br/><xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']/list/item[1]" priority="1">
+    <xsl:template match="fw[@place=('margin', 'left', 'right')]/list/item[1]" priority="1">
         <b><xsl:apply-templates/><br/>&mdash;</b>
     </xsl:template>
 
-    <xsl:template match="fw[@place='margin']/list/item[2]" priority="1">
+    <xsl:template match="fw[@place=('margin', 'left', 'right')]/list/item[2]" priority="1">
         <br/><b><xsl:apply-templates/></b>
     </xsl:template>
 
@@ -471,7 +510,7 @@
     <xsl:function name="f:isHtmlParagraphContent" as="xs:boolean">
         <xsl:param name="node"/>
 
-        <xsl:variable name="isHtmlParagraphContent" as="xs:boolean" 
+        <xsl:variable name="isHtmlParagraphContent" as="xs:boolean"
             select="not(    $node/self::milestone[@unit='theme' or @unit='tb']
                          or $node/self::q
                          or $node/self::letter

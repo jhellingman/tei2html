@@ -33,7 +33,7 @@
         <xd:detail>Marginal notes should go to the margin. The actual placement is handled through CSS.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='margin']">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('margin', 'left', 'right')]">
         <span class="marginnote">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>

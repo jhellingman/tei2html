@@ -1,0 +1,10 @@
+
+.tagUsage th, .tagUsage td {
+    vertical-align: top;
+}
+
+.tagUsage span.tagUsageValue {
+    background-color: #f5f5dc;
+    border: 1px dotted black;
+    padding: 1px 4px;
+}

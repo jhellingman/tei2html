@@ -893,6 +893,15 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Prevent <code>q</code>-elements from being rendered with <code>&lt;p&gt;</code> appearing in the language fragment overview.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="q" mode="languageFragments">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Tag Usage -->
 
@@ -920,7 +929,7 @@
             </tmp:tags>
         </xsl:variable>
 
-        <div class="transcribernote tagsUsage">
+        <div class="transcribernote tagUsage">
             <h2 class="main"><xsl:value-of select="f:message('msgTagUsageOverview')"/></h2>
             <table>
                 <tr>

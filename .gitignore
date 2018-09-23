@@ -89,3 +89,6 @@ samples/testMath/testMath.jeebies
 samples/testMath/testMath.gutcheck
 samples/testMath/testMath-words.html
 samples/testMath/testMath-0.0-checks.html
+messages.xlsx
+messages-with-missing-de-translations.xml
+samples/testMath/testMath.html

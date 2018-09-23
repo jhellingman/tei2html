@@ -55,14 +55,18 @@
             <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->
             <useDittoMarks>true</useDittoMarks>                             <!-- Use ditto marks where items are marked with the DITTO tag. -->
             <dittoMark>,,</dittoMark>                                       <!-- The symbol to use as a ditto mark. -->
-            <generateFacsimile>false</generateFacsimile>                    <!-- Output section with and links to facsimile images if required information is present. -->
-            <facsimilePath>page-images</facsimilePath>                      <!-- Path where page images for a facsimile edition is present. -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
             <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
+
+            <facsimile.enable>false</facsimile.enable>                      <!-- Output section with and links to facsimile images if required information is present. -->
+            <facsimile.wrapper.enable>true</facsimile.wrapper.enable>       <!-- Generate HTML wrapper files for the images, and link to these. -->
+            <facsimile.path>page-images</facsimile.path>                    <!-- Path where the wrapper files will be generated. -->
+            <facsimile.external>false</facsimile.external>                  <!-- TODO: Set to true if the URL points to an external location. -->
+            <facsimile.target></facsimile.target>                           <!-- TODO: Value of the target attribute of generated URLs (leave empty for default; _blank, _top, _parent, _self). -->
 
             <notes.apparatus.textMarker>&deg;</notes.apparatus.textMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
             <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
@@ -72,13 +76,10 @@
 
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->
-
             <text.insertQuotes>false</text.insertQuotes>                    <!-- Insert quotation marks around <q> markup [TODO] based on first four pairs in setting <text.quotes> -->
-
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
-
-            <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr>   <!-- Common abbreviations, list separated by semi-colons. -->
+            <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
 
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
             <rendition.id.prefix></rendition.id.prefix>                     <!-- Prefix used for rendition IDs. -->
