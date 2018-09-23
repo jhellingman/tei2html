@@ -88,7 +88,7 @@ while (<INPUTFILE>) {
             print "WARNING: (almost) empty note '$noteText' on page $pageNumber (n=$noteNumber)\n";
         }
 
-        if ($notePlace eq "margin") {
+        if ($notePlace eq "margin" || $notePlace eq "left" || $notePlace eq "right") {
             print OUTPUTFILE "[$noteText] ";
         } else {
             $seqNumber++;
