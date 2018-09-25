@@ -6,6 +6,12 @@ Often scans are already available at some place on the web, and we may wish to p
 
 TEI actually offers two ways of referring to scanned facsimile images, one is using the `@facs` attribute on the `pb` element, the other is using `graphic` elements in a separate `facsimile` section. When using the latter option, the `@facs` attributes on the `pb` elements can also (and should) refer to those `graphic` elements.
 
+The facsimile files themselves can be either hosted locally (on a file-system under our control) or remotely (with a third party). In the former case, we can generate self-contained ePubs with all the files on-board, in the later case, we have to make do with external references.
+
+Finally, we can refer directly to the facsimiles, or generate an HTML wrapper that includes the facsimile (which is assumed to be an image in a supported format here). The HTML wrapper will be required if we include the facsimile images in an ePub file.
+
+All combined, this gives a number of options to take into account when dealing with facsimile editions.
+
 # Facsimile Element #
 
 The `facsimile` element is a top-level element, that describes a series of page images, and can stand independently of the transcribed text. This allows to specify just the metadata (in the Header) and the scans, to produce a digital facsimile.
