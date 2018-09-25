@@ -23,33 +23,45 @@
         <xd:copyright>2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+
+    <xsl:key name="formula" match="formula[@notation='TeX']" use="normalize-space(.)"/>
+
+
     <xd:doc>
         <xd:short>Handle a formula in TeX notation.</xd:short>
         <xd:detail>
             <p>Handle a formula in TeX notation. For proper rendering, this will require <b>two</b> runs of
             <code>tei2html</code>: one to output the TeX formula in a small file. Then, after generating
-            the matching MathML or SVG files, another run to include those generated files in the output.</p>
+            the matching MathML or SVG files, another run to include those generated files in the output.
+            Care is taken to export identical formulas only once, re-using the same file for subsequent 
+            occurances of the same formula.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template match="formula[@notation='TeX']">
 
-        <xsl:variable name="basename" select="f:formulaBasename(.)" as="xs:string"/>
+        <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
+        <xsl:variable name="isFirstInstance" select="generate-id(.) = generate-id($firstInstance)"/>
+
+        <xsl:variable name="basename" select="f:formulaBasename($firstInstance)" as="xs:string"/>
         <xsl:variable name="texFile" select="concat($basename, '.tex')" as="xs:string"/>
         <xsl:variable name="mmlFile" select="concat($basename, '.mml')" as="xs:string"/>
         <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
 
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
+        <xsl:variable name="mathClass" select="concat(f:formulaPosition(.), 'Math')" as="xs:string"/>
         <xsl:variable name="svgTitle" select="document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
         <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
-        <xsl:result-document
-                href="{$texFile}"
-                method="text"
-                encoding="UTF-8">
-            <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($texFile))"/>
-            <xsl:value-of select="$texString"/>
-        </xsl:result-document>
+        <xsl:if test="$isFirstInstance">
+            <xsl:result-document
+                    href="{$texFile}"
+                    method="text"
+                    encoding="UTF-8">
+                <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($texFile))"/>
+                <xsl:value-of select="$texString"/>
+            </xsl:result-document>
+        </xsl:if>
 
         <xsl:choose>
             <!-- Dynamic mathJax -->
@@ -63,7 +75,7 @@
             </xsl:when>
             <!-- Static MML inline -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'MML'">
-                <span class="{concat(f:formulaPosition(.), 'Math')}">
+                <span class="{$mathClass}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:logInfo('Including file: {1}.', ($mmlFile))"/>
                     <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
@@ -72,7 +84,7 @@
             </xsl:when>
             <!-- Static SVG inline -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG'">
-                <span class="{concat(f:formulaPosition(.), 'Math')}">
+                <span class="{$mathClass}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:logInfo('Including file: {1}.', ($svgFile))"/>
                     <xsl:copy-of select="document($svgFile, .)/*"/>
@@ -81,7 +93,7 @@
             <!-- Static SVG as img -->
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
                 <span>
-                    <xsl:copy-of select="f:set-class-attribute-with(., concat(f:formulaPosition(.), 'Math'))"/>
+                    <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>
                     <img src="{$svgFile}" title="{$description}">
                         <!-- CSS will set size and vertical offset from SVG file based on ID, which needs to be on the img tag. -->
                         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -101,8 +113,9 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
+        <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
         <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
-            <xsl:variable name="basename" select="f:formulaBasename(.)"/>
+            <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
             <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
             <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
             <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
@@ -147,7 +160,10 @@
         <xsl:param name="texString" as="xs:string"/>
 
         <xsl:variable name="texString" select="normalize-space($texString)"/>
-        <xsl:value-of select="starts-with($texString, '$$') or starts-with($texString, '\begin{align}')"/>
+        <xsl:value-of select="starts-with($texString, '$$') or
+                              starts-with($texString, '\begin{align}') or
+                              starts-with($texString, '\begin{eqnarray*}') or 
+                              starts-with($texString, '\begin{equation}')"/>
     </xsl:function>
 
 
