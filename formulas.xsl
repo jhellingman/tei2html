@@ -94,8 +94,9 @@
             <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
                 <span>
                     <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>
-                    <img src="{$svgFile}" title="{$description}">
-                        <!-- CSS will set size and vertical offset from SVG file based on ID, which needs to be on the img tag. -->
+                    <img src="{$svgFile}" title="{$description}" class="{f:generate-id($firstInstance)}frml">
+                        <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
+                             ID of the first instance. This class needs to be on the img tag. -->
                         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     </img>
                 </span>
@@ -113,22 +114,24 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
-        <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
         <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
-            <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
-            <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
-            <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
-            <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
-            <xsl:variable name="height" select="document($svgFile, .)/svg:svg/@height"/>
+            <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
+            <xsl:if test="generate-id(.) = generate-id($firstInstance)">
+                <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
+                <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
+                <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
+                <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
+                <xsl:variable name="height" select="document($svgFile, .)/svg:svg/@height"/>
 
-            <xsl:if test="$style">
-                <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
-                <xsl:text>#</xsl:text><xsl:value-of select="f:generate-id(.)"/><xsl:text> {&lf;</xsl:text>
-                <xsl:value-of select="$style"/>
-                <xsl:text>&lf;width:</xsl:text><xsl:value-of select="$width"/><xsl:text>;</xsl:text>
-                <xsl:text>&lf;height:</xsl:text><xsl:value-of select="$height"/><xsl:text>;</xsl:text>
-                <xsl:text>&lf;}&lf;</xsl:text>
-            </xsl:if>
+                <xsl:if test="$style">
+                    <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
+                    <xsl:text>.</xsl:text><xsl:value-of select="f:generate-id(.)"/><xsl:text>frml {&lf;</xsl:text>
+                    <xsl:value-of select="$style"/>
+                    <xsl:text>&lf;width:</xsl:text><xsl:value-of select="$width"/><xsl:text>;</xsl:text>
+                    <xsl:text>&lf;height:</xsl:text><xsl:value-of select="$height"/><xsl:text>;</xsl:text>
+                    <xsl:text>&lf;}&lf;</xsl:text>
+                </xsl:if>
+            </xls:if>
         </xsl:if>
     </xsl:template>
 
