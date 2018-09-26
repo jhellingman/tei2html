@@ -428,11 +428,14 @@
 
     <xsl:template match="formula[@notation = 'TeX']" mode="manifest">
         <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
-            <item>
-                <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
-                <xsl:attribute name="href"><xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>
-                <xsl:attribute name="media-type">image/svg+xml</xsl:attribute>
-            </item>
+            <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
+            <xsl:if test="generate-id(.) = generate-id($firstInstance)">
+                <item>
+                    <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
+                    <xsl:attribute name="href"><xsl:value-of select="f:formulaBasename(.)"/>.svg</xsl:attribute>
+                    <xsl:attribute name="media-type">image/svg+xml</xsl:attribute>
+                </item>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 

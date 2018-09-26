@@ -52,12 +52,12 @@ sub handleFile($) {
         my $inlineMode = startsWith($base, "inline") ? "--inline" : "";
 
         # see https://github.com/mathjax/mathjax-node-cli
-        system ("tex2svg $inlineMode \"$formula\" > $svgFile");
-        system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile");
-        system ("tex2mml $inlineMode \"$formula\" > $mmlFile");
+        if (!-e $svgFile) { system ("tex2svg $inlineMode \"$formula\" > $svgFile"); }
+        if (!-e $htmlFile) { system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile"); }
+        if (!-e $mmlFile) { system ("tex2mml $inlineMode \"$formula\" > $mmlFile"); }
 
         # see https://github.com/shakiba/svgexport
-        system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\"");
+        if (!-e $pngFile) { system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\""); }
     }
 }
 

@@ -131,7 +131,7 @@
                     <xsl:text>&lf;height:</xsl:text><xsl:value-of select="$height"/><xsl:text>;</xsl:text>
                     <xsl:text>&lf;}&lf;</xsl:text>
                 </xsl:if>
-            </xls:if>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
 
