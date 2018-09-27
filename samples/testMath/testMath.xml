@@ -2,12 +2,12 @@
 </p></availability></publicationStmt><notesStmt><note type="Description">Sample MathJax Equations</note></notesStmt><sourceDesc><bibl><author>#####</author>
 <title>Sample MathJax Equations</title>
 <date>#####</date></bibl></sourceDesc></fileDesc><encodingDesc><p/></encodingDesc><profileDesc><langUsage><language id="en">English</language><language id="en-us">English (United States)</language><language id="en-uk">English (United Kingdom)</language><language id="de">German</language><language id="fr">French</language><language id="la">Latin</language></langUsage><textClass><keywords><list><item>#####</item></list></keywords></textClass></profileDesc><revisionDesc><list><item>2018-09-19 Started.
-    </item></list></revisionDesc></teiHeader><text rend="stylesheet(style/classic.css)"><body><div1 type="Chapter"><head>Sample MathJax Equations</head><div2 type="Section"><head>The Lorenz Equations</head><p><formula id="f1" notation="TeX">\begin{align}
+    </item></list></revisionDesc></teiHeader><text rend="stylesheet(style/classic.css)"><body><div1 type="Chapter"><head>Sample MathJax Equations</head><div2 type="Section"><head>The Lorenz Equations</head><p><formula id="f1" n="1" notation="TeX">\begin{align}
 \dot{x} &amp; = \sigma(y-x) \\
 \dot{y} &amp; = \rho x - y - xz \\
 \dot{z} &amp; = -\beta z + xy
 \end{align}</formula>
-</p></div2><div2 type="Section"><head>The Cauchy-Schwarz Inequality</head><p><formula id="f2" notation="TeX">$$
+</p></div2><div2 type="Section"><head>The Cauchy-Schwarz Inequality</head><p><formula id="f2" n="2" notation="TeX">$$
 \left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
  \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
 $$</formula>
@@ -21,12 +21,12 @@ $$</formula>
 $$</formula>
 
 </p></div2><div2 type="Section"><head>The probability of getting <formula id="f41" notation="TeX">$k$</formula> heads when flipping <formula id="f42" notation="TeX">$n$</formula> coins is:</head><p><formula id="f4" notation="TeX">$$P(E) = {n \choose k} p^k (1-p)^{ n-k}$$</formula>
-</p></div2><div2 type="Section"><head>An Identity of Ramanujan</head><p><formula id="f5" notation="TeX">$$
+</p></div2><div2 type="Section"><head>An Identity of Ramanujan</head><p><formula id="f5" n="5a" notation="TeX">$$
    \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
      1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
       {1+\frac{e^{-8\pi}} {1+\ldots} } } }
 $$</formula>
-</p></div2><div2 type="Section"><head>A Rogers-Ramanujan Identity</head><p><formula id="f6" notation="TeX">$$
+</p></div2><div2 type="Section"><head>A Rogers-Ramanujan Identity</head><p><formula id="f6" n="5b" notation="TeX">$$
   1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
     \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
      \quad\quad \text{for $|q|&lt;1$}.

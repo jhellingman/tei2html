@@ -405,8 +405,15 @@
 
     <xsl:function name="f:generate-css-class-selector" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:value-of select="replace(f:generate-class-name($node), '\.', '\\.')"/>
+        <xsl:value-of select="f:escapeForCssClassSelector(f:generate-class-name($node))"/>
     </xsl:function>
+
+
+    <xsl:function name="f:escapeForCssClassSelector" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:value-of select="replace($string, '\.', '\\.')"/>
+    </xsl:function>
+
 
 
     <xd:doc>

@@ -70,7 +70,7 @@
 <div2 type=Section>
 <head>The Lorenz Equations</head>
 
-<p><formula notation="TeX" id=f1>
+<p><formula notation="TeX" id=f1 n=1>
 \begin{align}
 \dot{x} &amp; = \sigma(y-x) \\
 \dot{y} &amp; = \rho x - y - xz \\
@@ -81,7 +81,7 @@
 <div2>
 <head>The Cauchy-Schwarz Inequality</head>
 
-<p><formula notation="TeX" id=f2>$$
+<p><formula notation="TeX" id=f2 n=2>$$
 \left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq
  \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
 $$</formula>
@@ -106,7 +106,7 @@ $$</formula>
 <div2>
 <head>An Identity of Ramanujan</head>
 
-<p><formula notation="TeX" id=f5>$$
+<p><formula notation="TeX" id=f5 n=5a>$$
    \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
      1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
       {1+\frac{e^{-8\pi}} {1+\ldots} } } }
@@ -115,7 +115,7 @@ $$</formula>
 <div2>
 <head>A Rogers-Ramanujan Identity</head>
 
-<p><formula notation="TeX" id=f6>$$
+<p><formula notation="TeX" id=f6 n=5b>$$
   1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
     \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
      \quad\quad \text{for $|q|<1$}.
