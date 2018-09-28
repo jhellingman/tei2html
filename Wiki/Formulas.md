@@ -66,4 +66,4 @@ Often, the same formula appears multiple times in the same document. It makes se
 
 Numbered equations have a label (between parentheses) set flush-right. Here we use the label encoded on `@n` attribute, format it, and place it flush right. The configuration setting ``math.label.position`` (with possible values ``left`` and ``right``) can be used to determine whether the label should go to the left or right edge of the text. (note that to maintain centering, a label will be generated on both sides of the display formula in any case, and either the right or the left will be made invisible.)
 
-Since we cannot have further mark-up in the values of attributes, we use a 'light' markup syntax to use italics and bold on labels. To get 1*a*, type ``1_a_``; to get 2**b**, type ``2*b*``. Parenthesis can be supplied, based on the setting ``math.label.before`` and ``math.label.after``.
+Since we cannot have further mark-up in the values of attributes, we use a 'light' markup syntax to use italics and bold on labels. To get 1*a*, type ``1_a_``; to get 2**b**, type ``2__b__``. Parenthesis can be supplied, based on the setting ``math.label.before`` and ``math.label.after``.
