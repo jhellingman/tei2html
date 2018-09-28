@@ -469,7 +469,25 @@ span.labeledMath span.mathLabel {
     display: table-cell;
     vertical-align: middle;
     text-align: right;
-    width: 0;
+}
+
+span.phantom {
+    color: white;
+    visibility: hidden;
+}
+
+span.labeledMath span.leftMathLabel {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+    white-space: nowrap;
+}
+
+span.labeledMath span.rightMathLabel {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+    white-space: nowrap;
 }
 
 

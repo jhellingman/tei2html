@@ -29,9 +29,9 @@
 </notesStmt>
 <sourceDesc>
 <bibl>
-<author>#####</author>
+<author>Jeroen Hellingman</author>
 <title>Sample MathJax Equations</title>
-<date>#####</date>
+<date>2018</date>
 </bibl>
 </sourceDesc>
 </fileDesc>
@@ -51,7 +51,7 @@
     <textClass>
         <keywords>
             <list>
-                <item>#####</item>
+                <item>Mathematics</item>
             </list>
         </keywords>
     </textClass>
@@ -66,6 +66,9 @@
 <body>
 <div1 type=Chapter>
 <head>Sample MathJax Equations</head>
+
+<p>The following sample equations have been borrowed from <xref url="https://www.tuhh.de/MathJax/test/examples.html">https://www.tuhh.de/MathJax/test/examples.html</xref>.
+
 
 <div2 type=Section>
 <head>The Lorenz Equations</head>
@@ -106,7 +109,7 @@ $$</formula>
 <div2>
 <head>An Identity of Ramanujan</head>
 
-<p><formula notation="TeX" id=f5 n=5a>$$
+<p><formula notation="TeX" id=f5 n="5_a_">$$
    \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} =
      1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
       {1+\frac{e^{-8\pi}} {1+\ldots} } } }
@@ -115,7 +118,7 @@ $$</formula>
 <div2>
 <head>A Rogers-Ramanujan Identity</head>
 
-<p><formula notation="TeX" id=f6 n=5b>$$
+<p><formula notation="TeX" id=f6 n="5_b_">$$
   1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
     \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
      \quad\quad \text{for $|q|<1$}.
@@ -124,7 +127,7 @@ $$</formula>
 <div2>
 <head>Maxwell&apos;s Equations</head>
 
-<p><formula notation="TeX" id=f7>
+<p><formula notation="TeX" id=f7 n="5__*__">
 \begin{align}
   \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\
   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
@@ -136,16 +139,9 @@ $$</formula>
 <div2>
 <head>In-line Mathematics</head>
 
-<p>Finally, while display equations look good for a page of samples, the
-ability to mix math and text in a paragraph is also important.  This
-expression <formula notation="TeX" id=f8>$\sqrt{3x-1}+(1+x)^2$</formula> is an example of an inline equation.  As
-you see, MathJax equations can be used this way as well, without unduly
-disturbing the spacing between lines.</p>
-
-
+<p>Finally, while display equations look good for a page of samples, the ability to mix math and text in a paragraph is also important.  This expression <formula notation="TeX" id=f8>$\sqrt{3x-1}+(1+x)^2$</formula> is an example of an inline equation. As you see, MathJax equations can be used this way as well, without unduly disturbing the spacing between lines.</p>
 
 
 </body>
 </text>
 </TEI.2>
-

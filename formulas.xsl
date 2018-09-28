@@ -14,7 +14,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:svg="http://www.w3.org/2000/svg"
-    exclude-result-prefixes="f xd xhtml xs">
+    exclude-result-prefixes="f xd xhtml xs svg">
 
     <xd:doc type="stylesheet">
         <xd:short>Templates for mathematical formulas</xd:short>
@@ -77,6 +77,8 @@
             </xsl:result-document>
         </xsl:if>
 
+        <xsl:copy-of select="f:placeMathLabel(., 'left')"/>
+
         <span>
             <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -109,30 +111,56 @@
                     <xsl:copy-of select="f:logError('Unknown format for math formulas: {1}.', (f:getSetting('math.mathJax.format')))"/>
                 </xsl:otherwise>
             </xsl:choose>
+        </span>      
 
-            <xsl:if test="@n and f:isDisplayMath(.)">
-                <span class="mathLabel">
-                    <xsl:copy-of select="f:formatMathLabel(@n)"/>
-                </span>
-            </xsl:if>
-        </span>
+        <xsl:copy-of select="f:placeMathLabel(., 'right')"/>
+
     </xsl:template>
 
+   
+    <xsl:function name="f:placeMathLabel">
+        <xsl:param name="formula" as="element(formula)"/>
+        <xsl:param name="position" as="xs:string"/>
 
-    <xsl:function name="f:formatMathLabel">
+        <xsl:if test="$formula/@n and f:isDisplayMath($formula)">
+            <span class="{concat(if ($position != f:getSetting('math.label.position')) 
+                                    then 'phantom ' 
+                                    else '', 
+                                 $position, 
+                                 'MathLabel')}">
+                <xsl:copy-of select="f:formatMathLabel($formula/@n)"/>
+            </span>
+        </xsl:if>
+    </xsl:function>
+
+
+    <xsl:function name="f:formatMathLabel" as="node()*">
         <xsl:param name="label" as="xs:string"/>
 
-        <!-- between parentheses, numbers upright, letters italic -->
-        <xsl:text>(</xsl:text>
-        <xsl:analyze-string select="$label" regex="[A-Za-z]+">
+        <xsl:value-of select="f:getSetting('math.label.before')"/>
+        <xsl:copy-of select="f:convertMarkdown($label)"/>
+        <xsl:value-of select="f:getSetting('math.label.after')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:convertMarkdown" as="node()*">
+        <xsl:param name="markdown" as="xs:string"/>
+
+        <xsl:analyze-string select="$markdown" flags="x" regex="(__(.*?)__) | (_(.*?)_)">
             <xsl:matching-substring>
-                <i><xsl:value-of select="."/></i>
+                <xsl:choose>
+                    <xsl:when test="regex-group(1)">
+                        <b><xsl:sequence select="f:convertMarkdown(regex-group(2))"/></b>
+                    </xsl:when>
+                    <xsl:when test="regex-group(3)">
+                        <i><xsl:sequence select="f:convertMarkdown(regex-group(4))"/></i>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <xsl:value-of select="."/>
             </xsl:non-matching-substring>
-        </xsl:analyze-string> 
-        <xsl:text>)</xsl:text>
+        </xsl:analyze-string>
     </xsl:function>
 
 

@@ -50,7 +50,7 @@ my $noTranscription     = 0;
 my $force               = 0;
 my $debug               = 0;
 my $profile             = 0;
-my $noTidy              = 0;
+my $useTidy              = 0;
 
 GetOptions(
     't' => \$makeText,
@@ -78,7 +78,7 @@ GetOptions(
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
     'help' => \$showHelp,
-    'notidy'=> \$noTidy);
+    'tidy'=> \$useTidy);
 
 my $filename = $ARGV[0];
 
@@ -256,7 +256,7 @@ sub makeHtml($) {
     print "Create HTML version...\n";
     system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
-    if ($noTidy == 0) {
+    if ($useTidy != 0) {
         system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
     }
     $debug || unlink($tmpFile);
