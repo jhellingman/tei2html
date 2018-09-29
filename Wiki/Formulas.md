@@ -62,6 +62,10 @@ Some articles about finding the baseline (that didn't contain the obvious soluti
 
 Often, the same formula appears multiple times in the same document. It makes sense to only generate a single SVG file for each formula, and include it multiple times.
 
+#### Trivial math
+
+Often, a single letter or digit is (rightly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically.
+
 #### Labeled equations
 
 Numbered equations have a label (between parentheses) set flush-right. Here we use the label encoded on `@n` attribute, format it, and place it flush right. The configuration setting ``math.label.position`` (with possible values ``left`` and ``right``) can be used to determine whether the label should go to the left or right edge of the text. (note that to maintain centering, a label will be generated on both sides of the display formula in any case, and either the right or the left will be made invisible.)
