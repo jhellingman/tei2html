@@ -55,6 +55,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Handle a formula in TeX notation (2).</xd:short>
+    </xd:doc>
+
     <xsl:template name="handleFormula">
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
 
@@ -64,7 +68,7 @@
         <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
 
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
-        <xsl:variable name="svgTitle" select="document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
+        <xsl:variable name="svgTitle" select="if (f:isTrivialMath(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
         <xsl:variable name="mathClass" select="concat(f:formulaPosition(.), 'Math')" as="xs:string"/>
         <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
@@ -123,7 +127,11 @@
 
     </xsl:template>
 
-   
+
+    <xd:doc>
+        <xd:short>Render the equation label in HTML.</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:placeMathLabel">
         <xsl:param name="formula" as="element(formula)"/>
         <xsl:param name="position" as="xs:string"/>
@@ -140,6 +148,10 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Format the label for an equation (derived from the <code>@n</code>-attribute.</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:formatMathLabel" as="node()*">
         <xsl:param name="label" as="xs:string"/>
 
@@ -148,6 +160,10 @@
         <xsl:value-of select="f:getSetting('math.label.after')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Convert very simple Markdown to HTML.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:convertMarkdown" as="node()*">
         <xsl:param name="markdown" as="xs:string"/>
@@ -198,6 +214,10 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Determine the basename (for generated filenames) of a formula.</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:formulaBasename" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
@@ -205,12 +225,20 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine the formula position (either inline or display).</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:formulaPosition" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
         <xsl:value-of select="if (f:isDisplayMath($formula)) then 'display' else 'inline'"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Remove the math-delimiters (dollar signs) from an TeX equation.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:stripMathDelimiters" as="xs:string">
         <xsl:param name="texString" as="xs:string"/>
@@ -220,6 +248,10 @@
         <xsl:value-of select="normalize-space($texString)"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine whether an equation is display math.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:isDisplayMath" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>
@@ -232,13 +264,21 @@
     </xsl:function>
 
 
-    
+    <xd:doc>
+        <xd:short>Determine whether an equation is trivial (i.e. can easily be rendered in HTML).</xd:short>
+    </xd:doc>
+
     <xsl:function name="f:isTrivialMath" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>
 
         <!-- Trivial math: math that contains just digits or Latin letters with optionally a prime or double prime. -->
         <xsl:value-of select="matches(f:stripMathDelimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Render trivial math in HTML.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:handleTrivialMath" as="node()*">
         <xsl:param name="texString" as="xs:string"/>
@@ -257,6 +297,10 @@
         </xsl:analyze-string>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Replace ASCII apostrophes with primes and double primes.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:replacePrimes" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
