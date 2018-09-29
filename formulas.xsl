@@ -3,6 +3,8 @@
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
     <!ENTITY nbsp       "&#160;">
+    <!ENTITY prime      "&#8242;">
+    <!ENTITY Prime      "&#8243;">
 
 ]>
 
@@ -67,7 +69,7 @@
         <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
-        <xsl:if test="generate-id(.) = generate-id($firstInstance)">
+        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:isTrivialMath(.))">
             <xsl:result-document
                     href="{$texFile}"
                     method="text"
@@ -89,6 +91,10 @@
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\('"/>
                     <xsl:value-of select="$texString"/>
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
+                </xsl:when>
+                 <!-- Trivial math we can handle ourselves. -->
+                <xsl:when test="f:isTrivialMath($texString)">
+                    <xsl:copy-of select="f:handleTrivialMath($texString)"/>
                 </xsl:when>
                 <!-- Static MML inline -->
                 <xsl:when test="f:getSetting('math.mathJax.format') = 'MML'">
@@ -170,7 +176,7 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
-        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
+        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG' and not(f:isTrivialMath(.))">
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
@@ -223,6 +229,39 @@
                               starts-with($texString, '\begin{align}') or
                               starts-with($texString, '\begin{eqnarray*}') or 
                               starts-with($texString, '\begin{equation}')"/>
+    </xsl:function>
+
+
+    
+    <xsl:function name="f:isTrivialMath" as="xs:boolean">
+        <xsl:param name="texString" as="xs:string"/>
+
+        <!-- Trivial math: math that contains just digits or Latin letters with optionally a prime or double prime. -->
+        <xsl:value-of select="matches(f:stripMathDelimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
+    </xsl:function>
+
+    <xsl:function name="f:handleTrivialMath" as="node()*">
+        <xsl:param name="texString" as="xs:string"/>
+        <xsl:variable name="texString" select="f:stripMathDelimiters($texString)"/>
+
+        <!-- digits upright and letters italic -->
+        <xsl:analyze-string select="$texString" regex="[a-zA-Z]+'*">
+            <xsl:matching-substring>
+                <i>
+                    <xsl:value-of select="f:replacePrimes(.)"/>
+                </i>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="f:replacePrimes(.)"/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:function>
+
+
+    <xsl:function name="f:replacePrimes" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:value-of select="replace(replace($string, '''''', '&Prime;'), '''', '&prime;')"/>
     </xsl:function>
 
 

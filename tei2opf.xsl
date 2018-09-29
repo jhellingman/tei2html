@@ -427,7 +427,7 @@
 
 
     <xsl:template match="formula[@notation = 'TeX']" mode="manifest">
-        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
+        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG' and not(f:isTrivialMath(.))">
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <item>
