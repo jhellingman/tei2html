@@ -17,11 +17,11 @@ The Project Gutenberg prohibition on active content make the direct use of MathJ
 
 The process consists of three steps:
 
-1. Run XSLT to export all formulas into separate `.tex` files. This is done during normal processing.
+1. Run `tei2html` to let XSLT export all formulas into separate `.tex` files in a directory `formulas`. This is done during normal processing.
 2. Use the tool `convertFormulas.pl` to convert all these files to SVG files (and MathML).
-3. Run XSLT again to include the generated SVG files as images (or inline) in the resulting file.
+3. Run `tei2html` again (if needed with the `-f` option) to include the generated SVG files as images (or inline) in the resulting file, and use metrics from the SVG files to generate proper CSS.
 
-The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`.
+The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`. The name is important, as the convertion script uses that to determine the MathJax option to use will converting the file to SVG, etc.
 
 The script `convertFormulas.pl` will convert these files to files named `(inline|display)-<ID>.svg`. This script will use node.js with mathjax-node-cli to produce HTML, SVG, and MathML files from the exported formulas.
 
@@ -45,14 +45,6 @@ The following configuration options have been added:
 1. install [Node.js](https://nodejs.org/en/). Make sure to install both node.js and npm.
 2. install [Mathjax-node](https://github.com/mathjax/mathjax-node) using `npm install -g mathjax-node`.
 3. install [Mathjax-node-cli](https://github.com/mathjax/mathjax-node-cli) using `npm install -g mathjax-node-cli`.
-
-### Usage
-
-To convert a TEI file to HTML or ePub,
-
-* Run `tei2html` as normal. This will create a directory `formulas` with all the extracted formulas.
-* Run `perl convertFormulas.pl` in the `formulas` directory. This will convert the extracted formulas to SVG, etc.
-* Run `tei2html` again (if needed with the `-f` option). This will now read the generated SVG files, and use information from them for proper CSS generation and include those files, depending on the configuration.
 
 ### Implementation details
 
