@@ -48,6 +48,7 @@
         </xsl:choose>
     </xsl:function>
 
+
     <xd:doc>
         <xd:short>Translate a URL to an HTML title attribute.</xd:short>
         <xd:detail>
@@ -109,6 +110,8 @@
                 <tr><td>bib:<i>[book ch:vs@version]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
                 <tr><td>mailto:<i>[email address]</i></td>      <td>Link to an email address.</td></tr>
             </table>
+
+            <p>In addition to these defaults, the patterns defined in the <code>//listPrefixDef/prefixDef</code> will be handled here.</p>
 
         </xd:detail>
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
