@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-    <xsl:stylesheet
+    <xsl:stylesheet version="2.0"
         xmlns="http://www.idpf.org/2007/opf"
         xmlns:dc="http://purl.org/dc/elements/1.1/"
         xmlns:dcterms="http://purl.org/dc/terms/"
@@ -11,8 +11,7 @@
         xmlns:smil="http://www.w3.org/ns/SMIL"
         xmlns:f="urn:stylesheet-functions"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd xs smil"
-        version="2.0">
+        exclude-result-prefixes="f xd xs smil">
 
 
     <xd:doc type="stylesheet">

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-    <xsl:stylesheet
+    <xsl:stylesheet version="2.0"
         xmlns="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:f="urn:stylesheet-functions"
-        exclude-result-prefixes="f xd xs"
-        version="2.0">
+        exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document to an NCX file, used in ePub 2.0.</xd:short>

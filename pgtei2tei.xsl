@@ -19,11 +19,10 @@
 
 ]>
 
-<xsl:stylesheet
+<xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd"
-    version="2.0">
+    exclude-result-prefixes="xd">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document with unnumbered div elements to numbered div elements.</xd:short>

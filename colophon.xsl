@@ -5,7 +5,7 @@
     <!ENTITY rsquo      "&#x2019;">
 
 ]>
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
