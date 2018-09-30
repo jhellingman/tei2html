@@ -1154,7 +1154,7 @@
 
 
 </div1>
-<div1 id="alignSecond" n="IX" rend="display(none)" lang="nl">
+<div1 id="alignSecond" n="IX_a_" rend="display(none)" lang="nl">
 <head type="label">Hoofdstuk IX</head>
 <head>Tekstsynchronisatie</head>
 
@@ -1197,7 +1197,7 @@
 </div1>
 
 <div1 id="usingStyle" n="X">
-<head type="label">Hoofdstuk X</head>
+<head type="label">Chapter X</head>
 <head>Using @style and @rendition attributes</head>
 
 <p>This is a test of using <hi style="color:red">CSS</hi> in <hi style="color:red">@style</hi> attributes.</p>
@@ -1220,6 +1220,10 @@
 <p>Similarly, to get the time-dependent Schrödinger equation, you can type
 <formula id="f2" notation="TeX">$$i \hbar \frac{\partial}{\partial t}\vert\Psi(\mathbf{r},t)\rangle = \hat H\vert\Psi(\mathbf{r},t)\rangle$$</formula>
 and impress your friends. Okay, lets do one more for the heck of it: <formula id="f3" notation="TeX" n="2_a_">$$i\hbar\frac{\partial}{\partial t} \Psi(\mathbf{r},t) = \left [ \frac{-\hbar^2}{2\mu}\nabla^2 + V(\mathbf{r},t)\right ] \Psi(\mathbf{r},t)$$</formula> If you want to learn more about these, go to <xref url="wp:Schrödinger_equation">Wikipedia</xref>.</p>
+
+</div1>
+<div1 id="ch11a" n="XI_a_">
+<head>Mathematical Formula (Part II)</head>
 
 <p>When <formula id="f4" notation="TeX">$a \ne 0$</formula>, there are two solutions to <formula id="f5" notation="TeX">$ax^2 + bx + c = 0$</formula> and they are
 <formula id="f6" notation="TeX">$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</formula></p>

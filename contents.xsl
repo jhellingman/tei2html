@@ -224,7 +224,7 @@
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
         <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
-            <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
+            <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a href="{f:generate-href(.)}">
             <xsl:call-template name="generate-single-head"/>
@@ -433,7 +433,7 @@
         </xsl:if>
         <td class="tocDivNum">
             <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
-                <xsl:value-of select="@n"/><xsl:text>. </xsl:text>
+                <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>
         <td class="tocDivTitle" colspan="{($maxlevel + 1) - $curlevel}">

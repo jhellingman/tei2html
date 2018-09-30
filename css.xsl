@@ -213,7 +213,7 @@
             <p>Convert a rendition element to a CSS rule. Rendition elements with a
             <code>@selector</code> attribute, the scope attribute will be ignored. Note that the
             <code>@selector</code> attribute may be expressed in terms of source (TEI) elements,
-            and in that case may need to be translated in target (e.g. HTML) terms. For now,
+            and in that case may need to be translated in target (<i>i.e.</i> HTML) terms. For now,
             this is ignored.</p>
         </xd:detail>
     </xd:doc>
@@ -269,7 +269,7 @@
         <xd:short>Translate the <code>@rend</code> attributes to CSS.</xd:short>
         <xd:detail><p>Translate the <code>@rend</code> attributes, specified in a rendition-ladder syntax, to CSS.</p>
 
-        <p>rendition-ladder syntax consists of a series of keys followed by the value between parentheses, e.g.,
+        <p>rendition-ladder syntax consists of a series of keys followed by the value between parentheses, <i>e.g.</i>,
         <code>font-size(large) color(red)</code>.</p></xd:detail>
         <xd:param name="rend">The <code>@rend</code> attribute to be translated.</xd:param>
         <xd:param name="name">The name of the element carrying this attribute.</xd:param>
@@ -675,7 +675,7 @@
 
 
     <xd:doc>
-        <xd:short>Ignore content in CSS modes.</xd:short>
+        <xd:short>Ignore document text() nodes in CSS modes.</xd:short>
     </xd:doc>
 
     <xsl:template match="text()" mode="css css-handheld style"/>
