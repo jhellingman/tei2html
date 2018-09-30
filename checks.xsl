@@ -984,10 +984,10 @@
     <xsl:function name="f:get-abbreviations">
         <xsl:variable name="abbreviations" select="f:getSetting('text.abbr')"/>
         <tmp:abbrs>
-            <xsl:analyze-string select="$abbreviations" regex="; *">
+            <xsl:analyze-string select="$abbreviations" regex=";">
                 <xsl:non-matching-substring>
                     <tmp:abbr>
-                        <xsl:value-of select="."/>
+                        <xsl:value-of select="normalize-space(.)"/>
                     </tmp:abbr>
                 </xsl:non-matching-substring>
             </xsl:analyze-string>

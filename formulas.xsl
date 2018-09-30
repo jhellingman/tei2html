@@ -35,7 +35,7 @@
             <p>Handle a formula in TeX notation. For proper rendering, this will require <b>two</b> runs of
             <code>tei2html</code>: one to output the TeX formula in a small file. Then, after generating
             the matching MathML or SVG files, another run to include those generated files in the output.
-            Care is taken to export identical formulas only once, re-using the same file for subsequent 
+            Care is taken to export identical formulas only once, re-using the same file for subsequent
             occurances of the same formula.</p>
         </xd:detail>
     </xd:doc>
@@ -66,6 +66,7 @@
         <xsl:variable name="texFile" select="concat($basename, '.tex')" as="xs:string"/>
         <xsl:variable name="mmlFile" select="concat($basename, '.mml')" as="xs:string"/>
         <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
+        <xsl:variable name="pngFile" select="concat($basename, '.png')" as="xs:string"/>
 
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
         <xsl:variable name="svgTitle" select="if (f:isTrivialMath(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
@@ -117,11 +118,16 @@
                          ID of the first instance. This class needs to be on the img tag. -->
                     <img src="{$svgFile}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
+                <xsl:when test="f:getSetting('math.mathJax.format') = 'PNG'">
+                    <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
+                         ID of the first instance. This class needs to be on the img tag. -->
+                    <img src="{$pngFile}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:logError('Unknown format for math formulas: {1}.', (f:getSetting('math.mathJax.format')))"/>
                 </xsl:otherwise>
             </xsl:choose>
-        </span>      
+        </span>
 
         <xsl:copy-of select="f:placeMathLabel(., 'right')"/>
 
@@ -137,10 +143,10 @@
         <xsl:param name="position" as="xs:string"/>
 
         <xsl:if test="$formula/@n and f:isDisplayMath($formula)">
-            <span class="{concat(if ($position != f:getSetting('math.label.position')) 
-                                    then 'phantom ' 
-                                    else '', 
-                                 $position, 
+            <span class="{concat(if ($position != f:getSetting('math.label.position'))
+                                    then 'phantom '
+                                    else '',
+                                 $position,
                                  'MathLabel')}">
                 <xsl:copy-of select="f:formatMathLabel($formula/@n)"/>
             </span>
@@ -192,7 +198,7 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
-        <xsl:if test="f:getSetting('math.mathJax.format') = 'SVG+IMG' and not(f:isTrivialMath(.))">
+        <xsl:if test="f:getSetting('math.mathJax.format') = ('SVG+IMG', 'PNG') and not(f:isTrivialMath(.))">
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
@@ -259,7 +265,7 @@
         <xsl:variable name="texString" select="normalize-space($texString)"/>
         <xsl:value-of select="starts-with($texString, '$$') or
                               starts-with($texString, '\begin{align}') or
-                              starts-with($texString, '\begin{eqnarray*}') or 
+                              starts-with($texString, '\begin{eqnarray*}') or
                               starts-with($texString, '\begin{equation}')"/>
     </xsl:function>
 

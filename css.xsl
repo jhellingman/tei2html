@@ -119,6 +119,10 @@
             <xsl:value-of select="f:css-stylesheet('style/figure.css')"/>
         </xsl:if>
 
+        <xsl:if test="//formula">
+            <xsl:value-of select="f:css-stylesheet('style/formulas.css')"/>
+        </xsl:if>
+
         <xsl:if test="//table">
             <xsl:value-of select="f:css-stylesheet('style/table.css')"/>
         </xsl:if>

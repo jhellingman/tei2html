@@ -449,46 +449,4 @@ p.smallprint, li.smallprint, .par.smallprint {
     font-size: 80%;
 }
 
-span.displayMath {
-    display: block;
-    text-align: center;
-    margin: 2ex auto;
-}
-
-span.labeledMath {
-    display: table;
-    width: 100%;
-    margin: 2ex 0;
-}
-
-span.labeledMath span.displayMath {
-    display: table-cell;
-}
-
-span.labeledMath span.mathLabel {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
-}
-
-span.phantom {
-    color: white;
-    visibility: hidden;
-}
-
-span.labeledMath span.leftMathLabel {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: left;
-    white-space: nowrap;
-}
-
-span.labeledMath span.rightMathLabel {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: right;
-    white-space: nowrap;
-}
-
-
 /***** End of layout.css *****/
