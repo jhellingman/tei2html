@@ -4,7 +4,7 @@ The `tei2html` code has a range of dependencies on third-party software. This pa
 
 ## Saxon ##
 
-An XSLT 2.0 processor is required for tei2html, any XSLT 2.0 processor should work, however, I've developed these stylesheets with Saxon (the freely available version Saxon HE).
+An XSLT 3.0 processor is required for tei2html, any XSLT 3.0 processor should work, however, I've developed these stylesheets with Saxon (using the freely available version Saxon HE).
 
 You should download a reasonable recent version of Saxon. For example the Saxon SA product from [saxonica.com](http://www.saxonica.com/products.html).
 
