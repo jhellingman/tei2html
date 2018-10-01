@@ -4,11 +4,11 @@ The `tei2html` code has a range of dependencies on third-party software. This pa
 
 ## Saxon ##
 
-An XSLT 2.0 processor is required for tei2html, any XSLT 2.0 processor should work, however, I've developed these stylesheets with Saxon.
+An XSLT 2.0 processor is required for tei2html, any XSLT 2.0 processor should work, however, I've developed these stylesheets with Saxon (the freely available version Saxon HE).
 
 You should download a reasonable recent version of Saxon. For example the Saxon SA product from [saxonica.com](http://www.saxonica.com/products.html).
 
-The perl scripts assume that saxon9he.jar is placed in the tools/lib/ subdirectory.
+The perl scripts assume that `saxon9he.jar` is placed in the tools/lib/ subdirectory.
 
 ## Java ##
 
@@ -58,7 +58,7 @@ To compress ePub files, you will need a zip utility. `tei2html` uses [info-zip](
 
 _optional, only needed when you use the transcription schemes I use in SGML._
 
-Patc (pattern changer) is a small utility in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
+Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
 
 ## epubcheck ##
 
@@ -66,4 +66,4 @@ _optional, only needed if you want to check generated ePubs_
 
 Epubcheck is a tool to validate epub books, it can be obtained from: https://github.com/IDPF/epubcheck
 
-This tool also requires Java; the scripts assume you use epubcheck-3.0.1.jar, placed in the tools/lib subdirectory.
+This tool also requires Java; the scripts assume you use `epubcheck-3.0.1.jar`, placed in the tools/lib subdirectory.
