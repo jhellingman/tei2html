@@ -131,7 +131,7 @@
                         <xsl:call-template name="generate-toc-entry"/>
                         <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
                             <xsl:element name="{$list-element}">
-                                <xsl:apply-templates select="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
+                                <xsl:apply-templates select="./div | ./div0 | ./div1 | ./div2 | ./div3 | ./div4 | ./div5 | ./div6" mode="gentoc">
                                     <xsl:with-param name="maxlevel" select="$maxlevel"/>
                                     <xsl:with-param name="list-element" select="$list-element"/>
                                 </xsl:apply-templates>
@@ -172,7 +172,7 @@
 
     <xsl:function name="f:contains-div" as="xs:boolean">
         <xsl:param name="div" as="node()"/>
-        <xsl:value-of select="if ($div/div or $div/div0 or $div/div1 or $div/div2 or $div/div3 or $div/div4 or $div/div5 or $div/div6) then 1 else 0"/>
+        <xsl:sequence select="if ($div/div or $div/div0 or $div/div1 or $div/div2 or $div/div3 or $div/div4 or $div/div5 or $div/div6) then true() else false()"/>
     </xsl:function>
 
 
@@ -401,7 +401,7 @@
                         </xsl:call-template>
                     </tr>
                     <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
-                        <xsl:apply-templates select="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc-table">
+                        <xsl:apply-templates select="./div | ./div0 | ./div1 | ./div2 | ./div3 | ./div4 | ./div5 | ./div6" mode="gentoc-table">
                             <xsl:with-param name="maxlevel" select="$maxlevel"/>
                             <xsl:with-param name="curlevel" select="$curlevel + 1"/>
                         </xsl:apply-templates>

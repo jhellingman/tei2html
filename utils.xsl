@@ -417,7 +417,7 @@
 
     <xsl:function name="f:isRendered" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
-        <xsl:value-of select="not($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none'])"/>
+        <xsl:sequence select="not($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none'])"/>
     </xsl:function>
 
 </xsl:stylesheet>

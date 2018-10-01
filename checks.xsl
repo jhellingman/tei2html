@@ -464,7 +464,7 @@
 
     <xsl:function name="f:isNumber" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
-        <xsl:value-of select="matches($value, f:getSetting('math.numberPattern'))"/>
+        <xsl:sequence select="matches($value, f:getSetting('math.numberPattern'))"/>
     </xsl:function>
 
     <xsl:function name="f:hasNumber" as="xs:boolean">
@@ -1132,7 +1132,7 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="chars" as="xs:string"/>
 
-        <xsl:value-of select="string-length(translate($string, translate($string, $chars, ''), '')) = string-length($string)"/>
+        <xsl:sequence select="string-length(translate($string, translate($string, $chars, ''), '')) = string-length($string)"/>
     </xsl:function>
 
 

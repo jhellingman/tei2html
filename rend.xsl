@@ -30,7 +30,7 @@
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="key" as="xs:string"/>
 
-        <xsl:value-of select="matches($rend, concat('(^|\W)', $key, '\(.+?\)'), 'i')"/>
+        <xsl:sequence select="matches($rend, concat('(^|\W)', $key, '\(.+?\)'), 'i')"/>
     </xsl:function>
 
 

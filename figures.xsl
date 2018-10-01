@@ -431,17 +431,17 @@ width:<xsl:value-of select="$width"/>;
 
     <xsl:function name="f:hasPositionAnnotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:value-of select="f:positionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:positionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:hasTopPositionAnnotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:value-of select="f:topPositionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:topPositionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:hasBottomPositionAnnotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:value-of select="f:bottomPositionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:bottomPositionAnnotation($rend) != ''"/>
     </xsl:function>
 
     <xsl:function name="f:positionAnnotation" as="xs:string">
@@ -568,7 +568,7 @@ width:<xsl:value-of select="$width"/>;
     <xsl:function name="f:countGraphic" as="xs:integer">
         <xsl:param name="node" as="node()"/>
 
-        <xsl:value-of select="count($node//graphic) - count($node//note[@place='foot' or not(@place)]//graphic)"/>
+        <xsl:sequence select="count($node//graphic) - count($node//note[@place='foot' or not(@place)]//graphic)"/>
     </xsl:function>
 
 
@@ -576,7 +576,7 @@ width:<xsl:value-of select="$width"/>;
         <xsl:param name="node" as="node()"/>
         <!-- $node contains a figure element (either directly or within some other element, but excluding
              elements that get lifted out of the context of this node (for example: footnotes) -->
-        <xsl:value-of select="count($node//figure) - count($node//note[not(@place) or @place='foot']//figure) > 0"/>
+        <xsl:sequence select="count($node//figure) - count($node//note[not(@place) or @place='foot']//figure) > 0"/>
     </xsl:function>
 
 

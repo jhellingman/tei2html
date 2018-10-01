@@ -14,7 +14,7 @@
     <!-- stub function used by log.xsl -->
     <xsl:function name="f:isSet" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
-        <xsl:value-of select="true()"/>
+        <xsl:sequence select="true()"/>
     </xsl:function>
 
     <xsl:include href="log.xsl"/>

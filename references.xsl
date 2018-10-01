@@ -151,7 +151,7 @@
     <xsl:function name="f:insideChoice" as="xs:boolean">
         <xsl:param name="targetNode" as="node()"/>
 
-        <xsl:value-of select="if ($targetNode/ancestor::choice) then true() else false()"/>
+        <xsl:sequence select="if ($targetNode/ancestor::choice) then true() else false()"/>
     </xsl:function>
 
 

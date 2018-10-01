@@ -278,7 +278,7 @@
         <xsl:param name="texString" as="xs:string"/>
 
         <!-- Trivial math: math that contains just digits or Latin letters with optionally a prime or double prime. -->
-        <xsl:value-of select="matches(f:stripMathDelimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
+        <xsl:sequence select="matches(f:stripMathDelimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
     </xsl:function>
 
 
