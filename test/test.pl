@@ -67,4 +67,4 @@ chdir "..";
 system ("$epubcheck test.epub 2> test-epubcheck.err");
 
 system ("$saxon test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionPrinceMarkup=\"Yes\" > test-prince.html");
-system ("$prince test-prince.html test.pdf");
+system ("$prince test-prince.html -o test.pdf");

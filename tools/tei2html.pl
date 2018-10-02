@@ -21,9 +21,13 @@ my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc t
 my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
 
 my $java            = "java";
-my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
-my $saxon           = "$java -Xss1024k -jar " . $toolsdir . "/lib/saxon9he.jar ";         # (see http://saxon.sourceforge.net/)
-my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # (see https://github.com/IDPF/epubcheck)
+my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";   # see https://www.princexml.com/
+my $saxon           = "$java -Xss1024k -jar " . $toolsdir . "/lib/saxon9he.jar ";       # see http://saxon.sourceforge.net/
+my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";          # see https://github.com/IDPF/epubcheck
+my $jeebies         = "C:\\Bin\\jeebies";                                               # see http://gutcheck.sourceforge.net/
+my $gutcheck        = "gutcheck";
+my $nsgmls          = "nsgmls";                                                         # see http://www.jclark.com/sp/
+my $sx              = "sx";
 
 #==============================================================================
 # Arguments
@@ -336,12 +340,12 @@ sub makeText($$) {
         # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
         system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
     }
-    system ("gutcheck $basename.txt > $basename.gutcheck");
-    system ("C:\\Bin\\jeebies $basename.txt > $basename.jeebies");
+    system ("$gutcheck $basename.txt > $basename.gutcheck");
+    system ("$jeebies $basename.txt > $basename.jeebies");
 
     # Check the version in the Processed directory as well.
     if (-f "Processed\\$basename.txt") {
-        system ("gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
+        system ("$gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
     }
 
     $debug || unlink("$filename.out");
@@ -762,7 +766,7 @@ sub tei2xml($$) {
     $tmpFile0 = transcribe($tmpFile0);
 
     print "Check SGML...\n";
-    my $nsgmlresult = system ("nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
+    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
     if ($nsgmlresult != 0) {
         print "WARNING: NSGML found validation errors in $sgmlFile.\n";
     }
@@ -777,7 +781,7 @@ sub tei2xml($$) {
 
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
-    system ("sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
+    system ("$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
 
     # apply proper case to tags.
     system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
