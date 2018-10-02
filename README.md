@@ -37,6 +37,7 @@ done, please be in touch with me on how I can help.
 
 ## Directories
 
+  * Wiki: wiki-pages that give some instructions and background documentation.
   * samples: contains a number of sample files (of books posted to Project Gutenberg; I am in the process of adding all
     my TEI master files to GitHub: see https://github.com/GutenbergSource for many more examples).
   * sandbox: contains experimental code, better ignored if you don't want to play around.
