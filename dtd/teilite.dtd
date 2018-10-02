@@ -1,0 +1,3059 @@
+<!-- TEI DTD  generated on 2002 04 12 -->
+
+<!--
+ ** Copyright 2002 Text Encoding Initiative Consortium.
+ **
+ ** This is the compiled version of TEI Lite, a view of the
+ ** the TEI DTD, as documented in TEU U5, and is copyrighted.
+ ** 
+ ** **** THIS IS A GENERATED FILE: DO NOT EDIT IT ****
+ **
+ ** If you want to change this DTD, please do so by modifying
+ ** the extension files TEILITEX.DTD and TEILITEX.ENT and then
+ ** recompiling. Use the pizzachef (available on the web at
+ ** http://www.hcu.ox.ac.uk/TEI/pizza.html) or maketeidtd.
+ **
+ ** This SGML version was created by maketeidtd using the driver
+ ** file TEILITE.DEC 
+ **
+ ** All files referenced here are available from 
+ ** http://www.tei-c.org/TEI/Lite/DTD/
+-->
+
+<!ENTITY aacute SDATA "[aacute]" >
+<!ENTITY Aacute SDATA "[Aacute]" >
+<!ENTITY acirc SDATA "[acirc ]" >
+<!ENTITY Acirc SDATA "[Acirc ]" >
+<!ENTITY agrave SDATA "[agrave]" >
+<!ENTITY Agrave SDATA "[Agrave]" >
+<!ENTITY aring SDATA "[aring ]" >
+<!ENTITY Aring SDATA "[Aring ]" >
+<!ENTITY atilde SDATA "[atilde]" >
+<!ENTITY Atilde SDATA "[Atilde]" >
+<!ENTITY auml SDATA "[auml  ]" >
+<!ENTITY Auml SDATA "[Auml  ]" >
+<!ENTITY aelig SDATA "[aelig ]" >
+<!ENTITY AElig SDATA "[AElig ]" >
+<!ENTITY ccedil SDATA "[ccedil]" >
+<!ENTITY Ccedil SDATA "[Ccedil]" >
+<!ENTITY eth SDATA "[eth   ]" >
+<!ENTITY ETH SDATA "[ETH   ]" >
+<!ENTITY eacute SDATA "[eacute]" >
+<!ENTITY Eacute SDATA "[Eacute]" >
+<!ENTITY ecirc SDATA "[ecirc ]" >
+<!ENTITY Ecirc SDATA "[Ecirc ]" >
+<!ENTITY egrave SDATA "[egrave]" >
+<!ENTITY Egrave SDATA "[Egrave]" >
+<!ENTITY euml SDATA "[euml  ]" >
+<!ENTITY Euml SDATA "[Euml  ]" >
+<!ENTITY iacute SDATA "[iacute]" >
+<!ENTITY Iacute SDATA "[Iacute]" >
+<!ENTITY icirc SDATA "[icirc ]" >
+<!ENTITY Icirc SDATA "[Icirc ]" >
+<!ENTITY igrave SDATA "[igrave]" >
+<!ENTITY Igrave SDATA "[Igrave]" >
+<!ENTITY iuml SDATA "[iuml  ]" >
+<!ENTITY Iuml SDATA "[Iuml  ]" >
+<!ENTITY ntilde SDATA "[ntilde]" >
+<!ENTITY Ntilde SDATA "[Ntilde]" >
+<!ENTITY oacute SDATA "[oacute]" >
+<!ENTITY Oacute SDATA "[Oacute]" >
+<!ENTITY ocirc SDATA "[ocirc ]" >
+<!ENTITY Ocirc SDATA "[Ocirc ]" >
+<!ENTITY ograve SDATA "[ograve]" >
+<!ENTITY Ograve SDATA "[Ograve]" >
+<!ENTITY oslash SDATA "[oslash]" >
+<!ENTITY Oslash SDATA "[Oslash]" >
+<!ENTITY otilde SDATA "[otilde]" >
+<!ENTITY Otilde SDATA "[Otilde]" >
+<!ENTITY ouml SDATA "[ouml  ]" >
+<!ENTITY Ouml SDATA "[Ouml  ]" >
+<!ENTITY szlig SDATA "[szlig ]" >
+<!ENTITY thorn SDATA "[thorn ]" >
+<!ENTITY THORN SDATA "[THORN ]" >
+<!ENTITY uacute SDATA "[uacute]" >
+<!ENTITY Uacute SDATA "[Uacute]" >
+<!ENTITY ucirc SDATA "[ucirc ]" >
+<!ENTITY Ucirc SDATA "[Ucirc ]" >
+<!ENTITY ugrave SDATA "[ugrave]" >
+<!ENTITY Ugrave SDATA "[Ugrave]" >
+<!ENTITY uuml SDATA "[uuml  ]" >
+<!ENTITY Uuml SDATA "[Uuml  ]" >
+<!ENTITY yacute SDATA "[yacute]" >
+<!ENTITY Yacute SDATA "[Yacute]" >
+<!ENTITY yuml SDATA "[yuml  ]" >
+<!ENTITY abreve SDATA "[abreve]" >
+<!ENTITY Abreve SDATA "[Abreve]" >
+<!ENTITY amacr SDATA "[amacr ]" >
+<!ENTITY Amacr SDATA "[Amacr ]" >
+<!ENTITY aogon SDATA "[aogon ]" >
+<!ENTITY Aogon SDATA "[Aogon ]" >
+<!ENTITY cacute SDATA "[cacute]" >
+<!ENTITY Cacute SDATA "[Cacute]" >
+<!ENTITY ccaron SDATA "[ccaron]" >
+<!ENTITY Ccaron SDATA "[Ccaron]" >
+<!ENTITY ccirc SDATA "[ccirc ]" >
+<!ENTITY Ccirc SDATA "[Ccirc ]" >
+<!ENTITY cdot SDATA "[cdot  ]" >
+<!ENTITY Cdot SDATA "[Cdot  ]" >
+<!ENTITY dcaron SDATA "[dcaron]" >
+<!ENTITY Dcaron SDATA "[Dcaron]" >
+<!ENTITY dstrok SDATA "[dstrok]" >
+<!ENTITY Dstrok SDATA "[Dstrok]" >
+<!ENTITY ecaron SDATA "[ecaron]" >
+<!ENTITY Ecaron SDATA "[Ecaron]" >
+<!ENTITY edot SDATA "[edot  ]" >
+<!ENTITY Edot SDATA "[Edot  ]" >
+<!ENTITY emacr SDATA "[emacr ]" >
+<!ENTITY Emacr SDATA "[Emacr ]" >
+<!ENTITY eogon SDATA "[eogon ]" >
+<!ENTITY Eogon SDATA "[Eogon ]" >
+<!ENTITY gacute SDATA "[gacute]" >
+<!ENTITY gbreve SDATA "[gbreve]" >
+<!ENTITY Gbreve SDATA "[Gbreve]" >
+<!ENTITY Gcedil SDATA "[Gcedil]" >
+<!ENTITY gcirc SDATA "[gcirc ]" >
+<!ENTITY Gcirc SDATA "[Gcirc ]" >
+<!ENTITY gdot SDATA "[gdot  ]" >
+<!ENTITY Gdot SDATA "[Gdot  ]" >
+<!ENTITY hcirc SDATA "[hcirc ]" >
+<!ENTITY Hcirc SDATA "[Hcirc ]" >
+<!ENTITY hstrok SDATA "[hstrok]" >
+<!ENTITY Hstrok SDATA "[Hstrok]" >
+<!ENTITY Idot SDATA "[Idot  ]" >
+<!ENTITY Imacr SDATA "[Imacr ]" >
+<!ENTITY imacr SDATA "[imacr ]" >
+<!ENTITY ijlig SDATA "[ijlig ]" >
+<!ENTITY IJlig SDATA "[IJlig ]" >
+<!ENTITY inodot SDATA "[inodot]" >
+<!ENTITY iogon SDATA "[iogon ]" >
+<!ENTITY Iogon SDATA "[Iogon ]" >
+<!ENTITY itilde SDATA "[itilde]" >
+<!ENTITY Itilde SDATA "[Itilde]" >
+<!ENTITY jcirc SDATA "[jcirc ]" >
+<!ENTITY Jcirc SDATA "[Jcirc ]" >
+<!ENTITY kcedil SDATA "[kcedil]" >
+<!ENTITY Kcedil SDATA "[Kcedil]" >
+<!ENTITY kgreen SDATA "[kgreen]" >
+<!ENTITY lacute SDATA "[lacute]" >
+<!ENTITY Lacute SDATA "[Lacute]" >
+<!ENTITY lcaron SDATA "[lcaron]" >
+<!ENTITY Lcaron SDATA "[Lcaron]" >
+<!ENTITY lcedil SDATA "[lcedil]" >
+<!ENTITY Lcedil SDATA "[Lcedil]" >
+<!ENTITY lmidot SDATA "[lmidot]" >
+<!ENTITY Lmidot SDATA "[Lmidot]" >
+<!ENTITY lstrok SDATA "[lstrok]" >
+<!ENTITY Lstrok SDATA "[Lstrok]" >
+<!ENTITY nacute SDATA "[nacute]" >
+<!ENTITY Nacute SDATA "[Nacute]" >
+<!ENTITY eng SDATA "[eng   ]" >
+<!ENTITY ENG SDATA "[ENG   ]" >
+<!ENTITY napos SDATA "[napos ]" >
+<!ENTITY ncaron SDATA "[ncaron]" >
+<!ENTITY Ncaron SDATA "[Ncaron]" >
+<!ENTITY ncedil SDATA "[ncedil]" >
+<!ENTITY Ncedil SDATA "[Ncedil]" >
+<!ENTITY odblac SDATA "[odblac]" >
+<!ENTITY Odblac SDATA "[Odblac]" >
+<!ENTITY Omacr SDATA "[Omacr ]" >
+<!ENTITY omacr SDATA "[omacr ]" >
+<!ENTITY oelig SDATA "[oelig ]" >
+<!ENTITY OElig SDATA "[OElig ]" >
+<!ENTITY racute SDATA "[racute]" >
+<!ENTITY Racute SDATA "[Racute]" >
+<!ENTITY rcaron SDATA "[rcaron]" >
+<!ENTITY Rcaron SDATA "[Rcaron]" >
+<!ENTITY rcedil SDATA "[rcedil]" >
+<!ENTITY Rcedil SDATA "[Rcedil]" >
+<!ENTITY sacute SDATA "[sacute]" >
+<!ENTITY Sacute SDATA "[Sacute]" >
+<!ENTITY scaron SDATA "[scaron]" >
+<!ENTITY Scaron SDATA "[Scaron]" >
+<!ENTITY scedil SDATA "[scedil]" >
+<!ENTITY Scedil SDATA "[Scedil]" >
+<!ENTITY scirc SDATA "[scirc ]" >
+<!ENTITY Scirc SDATA "[Scirc ]" >
+<!ENTITY tcaron SDATA "[tcaron]" >
+<!ENTITY Tcaron SDATA "[Tcaron]" >
+<!ENTITY tcedil SDATA "[tcedil]" >
+<!ENTITY Tcedil SDATA "[Tcedil]" >
+<!ENTITY tstrok SDATA "[tstrok]" >
+<!ENTITY Tstrok SDATA "[Tstrok]" >
+<!ENTITY ubreve SDATA "[ubreve]" >
+<!ENTITY Ubreve SDATA "[Ubreve]" >
+<!ENTITY udblac SDATA "[udblac]" >
+<!ENTITY Udblac SDATA "[Udblac]" >
+<!ENTITY umacr SDATA "[umacr ]" >
+<!ENTITY Umacr SDATA "[Umacr ]" >
+<!ENTITY uogon SDATA "[uogon ]" >
+<!ENTITY Uogon SDATA "[Uogon ]" >
+<!ENTITY uring SDATA "[uring ]" >
+<!ENTITY Uring SDATA "[Uring ]" >
+<!ENTITY utilde SDATA "[utilde]" >
+<!ENTITY Utilde SDATA "[Utilde]" >
+<!ENTITY wcirc SDATA "[wcirc ]" >
+<!ENTITY Wcirc SDATA "[Wcirc ]" >
+<!ENTITY ycirc SDATA "[ycirc ]" >
+<!ENTITY Ycirc SDATA "[Ycirc ]" >
+<!ENTITY Yuml SDATA "[Yuml  ]" >
+<!ENTITY zacute SDATA "[zacute]" >
+<!ENTITY Zacute SDATA "[Zacute]" >
+<!ENTITY zcaron SDATA "[zcaron]" >
+<!ENTITY Zcaron SDATA "[Zcaron]" >
+<!ENTITY zdot SDATA "[zdot  ]" >
+<!ENTITY Zdot SDATA "[Zdot  ]" >
+<!ENTITY half SDATA "[half  ]" >
+<!ENTITY frac12 SDATA "[frac12]" >
+<!ENTITY frac14 SDATA "[frac14]" >
+<!ENTITY frac34 SDATA "[frac34]" >
+<!ENTITY frac18 SDATA "[frac18]" >
+<!ENTITY frac38 SDATA "[frac38]" >
+<!ENTITY frac58 SDATA "[frac58]" >
+<!ENTITY frac78 SDATA "[frac78]" >
+<!ENTITY sup1 SDATA "[sup1  ]" >
+<!ENTITY sup2 SDATA "[sup2  ]" >
+<!ENTITY sup3 SDATA "[sup3  ]" >
+<!ENTITY plus SDATA "[plus  ]" >
+<!ENTITY plusmn SDATA "[plusmn]" >
+<!ENTITY lt SDATA "[lt    ]" >
+<!ENTITY equals SDATA "[equals]" >
+<!ENTITY gt SDATA "[gt    ]" >
+<!ENTITY divide SDATA "[divide]" >
+<!ENTITY times SDATA "[times ]" >
+<!ENTITY curren SDATA "[curren]" >
+<!ENTITY pound SDATA "[pound ]" >
+<!ENTITY dollar SDATA "[dollar]" >
+<!ENTITY cent SDATA "[cent  ]" >
+<!ENTITY yen SDATA "[yen   ]" >
+<!ENTITY num SDATA "[num   ]" >
+<!ENTITY percnt SDATA "[percnt]" >
+<!ENTITY amp SDATA "[amp   ]" >
+<!ENTITY ast SDATA "[ast   ]" >
+<!ENTITY commat SDATA "[commat]" >
+<!ENTITY lsqb SDATA "[lsqb  ]" >
+<!ENTITY bsol SDATA "[bsol  ]" >
+<!ENTITY rsqb SDATA "[rsqb  ]" >
+<!ENTITY lcub SDATA "[lcub  ]" >
+<!ENTITY horbar SDATA "[horbar]" >
+<!ENTITY verbar SDATA "[verbar]" >
+<!ENTITY rcub SDATA "[rcub  ]" >
+<!ENTITY micro SDATA "[micro ]" >
+<!ENTITY ohm SDATA "[ohm   ]" >
+<!ENTITY deg SDATA "[deg   ]" >
+<!ENTITY ordm SDATA "[ordm  ]" >
+<!ENTITY ordf SDATA "[ordf  ]" >
+<!ENTITY sect SDATA "[sect  ]" >
+<!ENTITY para SDATA "[para  ]" >
+<!ENTITY middot SDATA "[middot]" >
+<!ENTITY larr SDATA "[larr  ]" >
+<!ENTITY rarr SDATA "[rarr  ]" >
+<!ENTITY uarr SDATA "[uarr  ]" >
+<!ENTITY darr SDATA "[darr  ]" >
+<!ENTITY copy SDATA "[copy  ]" >
+<!ENTITY reg SDATA "[reg   ]" >
+<!ENTITY trade SDATA "[trade ]" >
+<!ENTITY brvbar SDATA "[brvbar]" >
+<!ENTITY not SDATA "[not   ]" >
+<!ENTITY sung SDATA "[sung  ]" >
+<!ENTITY excl SDATA "[excl  ]" >
+<!ENTITY iexcl SDATA "[iexcl ]" >
+<!ENTITY quot SDATA "[quot  ]" >
+<!ENTITY apos SDATA "[apos  ]" >
+<!ENTITY lpar SDATA "[lpar  ]" >
+<!ENTITY rpar SDATA "[rpar  ]" >
+<!ENTITY comma SDATA "[comma ]" >
+<!ENTITY lowbar SDATA "[lowbar]" >
+<!ENTITY hyphen SDATA "[hyphen]" >
+<!ENTITY period SDATA "[period]" >
+<!ENTITY sol SDATA "[sol   ]" >
+<!ENTITY colon SDATA "[colon ]" >
+<!ENTITY semi SDATA "[semi  ]" >
+<!ENTITY quest SDATA "[quest ]" >
+<!ENTITY iquest SDATA "[iquest]" >
+<!ENTITY laquo SDATA "[laquo ]" >
+<!ENTITY raquo SDATA "[raquo ]" >
+<!ENTITY lsquo SDATA "[lsquo ]" >
+<!ENTITY rsquo SDATA "[rsquo ]" >
+<!ENTITY ldquo SDATA "[ldquo ]" >
+<!ENTITY rdquo SDATA "[rdquo ]" >
+<!ENTITY nbsp SDATA "[nbsp  ]" >
+<!ENTITY shy SDATA "[shy   ]" >
+<!ENTITY emsp SDATA "[emsp  ]" >
+<!ENTITY ensp SDATA "[ensp  ]" >
+<!ENTITY emsp13 SDATA "[emsp3 ]" >
+<!ENTITY emsp14 SDATA "[emsp4 ]" >
+<!ENTITY numsp SDATA "[numsp ]" >
+<!ENTITY puncsp SDATA "[puncsp]" >
+<!ENTITY thinsp SDATA "[thinsp]" >
+<!ENTITY hairsp SDATA "[hairsp]" >
+<!ENTITY mdash SDATA "[mdash ]" >
+<!ENTITY ndash SDATA "[ndash ]" >
+<!ENTITY dash SDATA "[dash  ]" >
+<!ENTITY blank SDATA "[blank ]" >
+<!ENTITY hellip SDATA "[hellip]" >
+<!ENTITY nldr SDATA "[nldr  ]" >
+<!ENTITY frac13 SDATA "[frac13]" >
+<!ENTITY frac23 SDATA "[frac23]" >
+<!ENTITY frac15 SDATA "[frac15]" >
+<!ENTITY frac25 SDATA "[frac25]" >
+<!ENTITY frac35 SDATA "[frac35]" >
+<!ENTITY frac45 SDATA "[frac45]" >
+<!ENTITY frac16 SDATA "[frac16]" >
+<!ENTITY frac56 SDATA "[frac56]" >
+<!ENTITY incare SDATA "[incare]" >
+<!ENTITY block SDATA "[block ]" >
+<!ENTITY uhblk SDATA "[uhblk ]" >
+<!ENTITY lhblk SDATA "[lhblk ]" >
+<!ENTITY blk14 SDATA "[blk14 ]" >
+<!ENTITY blk12 SDATA "[blk12 ]" >
+<!ENTITY blk34 SDATA "[blk34 ]" >
+<!ENTITY marker SDATA "[marker]" >
+<!ENTITY cir SDATA "[cir   ]" >
+<!ENTITY squ SDATA "[squ   ]" >
+<!ENTITY rect SDATA "[rect  ]" >
+<!ENTITY utri SDATA "[utri  ]" >
+<!ENTITY dtri SDATA "[dtri  ]" >
+<!ENTITY star SDATA "[star  ]" >
+<!ENTITY bull SDATA "[bull  ]" >
+<!ENTITY squf SDATA "[squf  ]" >
+<!ENTITY utrif SDATA "[utrif ]" >
+<!ENTITY dtrif SDATA "[dtrif ]" >
+<!ENTITY ltrif SDATA "[ltrif ]" >
+<!ENTITY rtrif SDATA "[rtrif ]" >
+<!ENTITY clubs SDATA "[clubs ]" >
+<!ENTITY diams SDATA "[diams ]" >
+<!ENTITY hearts SDATA "[hearts]" >
+<!ENTITY spades SDATA "[spades]" >
+<!ENTITY malt SDATA "[malt  ]" >
+<!ENTITY dagger SDATA "[dagger]" >
+<!ENTITY Dagger SDATA "[Dagger]" >
+<!ENTITY check SDATA "[check ]" >
+<!ENTITY cross SDATA "[ballot]" >
+<!ENTITY sharp SDATA "[sharp ]" >
+<!ENTITY flat SDATA "[flat  ]" >
+<!ENTITY male SDATA "[male  ]" >
+<!ENTITY female SDATA "[female]" >
+<!ENTITY phone SDATA "[phone ]" >
+<!ENTITY telrec SDATA "[telrec]" >
+<!ENTITY copysr SDATA "[copysr]" >
+<!ENTITY caret SDATA "[caret ]" >
+<!ENTITY lsquor SDATA "[lsquor]" >
+<!ENTITY ldquor SDATA "[ldquor]" >
+<!ENTITY fflig SDATA "[fflig ]" >
+<!ENTITY filig SDATA "[filig ]" >
+<!ENTITY fjlig SDATA "[fjlig ]" >
+<!ENTITY ffilig SDATA "[ffilig]" >
+<!ENTITY ffllig SDATA "[ffllig]" >
+<!ENTITY fllig SDATA "[fllig ]" >
+<!ENTITY mldr SDATA "[mldr  ]" >
+<!ENTITY rdquor SDATA "[rdquor]" >
+<!ENTITY rsquor SDATA "[rsquor]" >
+<!ENTITY vellip SDATA "[vellip]" >
+<!ENTITY hybull SDATA "[hybull]" >
+<!ENTITY loz SDATA "[loz   ]" >
+<!ENTITY lozf SDATA "[lozf  ]" >
+<!ENTITY ltri SDATA "[ltri  ]" >
+<!ENTITY rtri SDATA "[rtri  ]" >
+<!ENTITY starf SDATA "[starf ]" >
+<!ENTITY natur SDATA "[natur ]" >
+<!ENTITY rx SDATA "[rx    ]" >
+<!ENTITY sext SDATA "[sext  ]" >
+<!ENTITY target SDATA "[target]" >
+<!ENTITY dlcrop SDATA "[dlcrop]" >
+<!ENTITY drcrop SDATA "[drcrop]" >
+<!ENTITY ulcrop SDATA "[ulcrop]" >
+<!ENTITY urcrop SDATA "[urcrop]" >
+
+<!NOTATION cgm PUBLIC "ISO 8632:1987//NOTATION Computer Graphics Metafile//EN" >
+<!NOTATION png PUBLIC "-//TEI//NOTATION IETF RFC2083 Portable Network Graphics//EN" >
+<!NOTATION jpeg PUBLIC "ISO DIS 10918//NOTATION JPEG Graphics Format//EN" >
+<!NOTATION tiff PUBLIC "-//TEI//NOTATION Aldus Tagged Image File Format//EN" >
+<!NOTATION gif PUBLIC "-//TEI//NOTATION Compuserve Graphics Interchange Format//EN" >
+<!NOTATION sgml PUBLIC "ISO 8879:1986//NOTATION Standard Generalized Markup Language//EN" >
+<!NOTATION wsd PUBLIC "-//TEI P3-1994//NOTATION Writing System Declaration//EN" >
+
+<!ELEMENT TEI.2 - O 
+	(teiHeader, text) >
+<!ATTLIST TEI.2 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "TEI.2" >
+
+<!ELEMENT gi - O 
+	(#PCDATA) >
+<!ATTLIST gi 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEI (yes | no) "yes"
+	TEIform CDATA "gi" >
+
+<!ELEMENT eg - - 
+	(#PCDATA) >
+<!ATTLIST eg 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "eg" >
+
+<!ELEMENT code - O 
+	(#PCDATA) >
+<!ATTLIST code 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED >
+
+<!ELEMENT ident - O 
+	(#PCDATA) >
+<!ATTLIST ident 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED >
+
+<!ELEMENT kw - O 
+	(#PCDATA) >
+<!ATTLIST kw 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED >
+
+<!ELEMENT teiHeader - - 
+	(fileDesc, encodingDesc*, profileDesc*, revisionDesc?) >
+<!ATTLIST teiHeader 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA "text"
+	creator CDATA #IMPLIED
+	status (new | update) "new"
+	date.created CDATA #IMPLIED
+	date.updated CDATA #IMPLIED
+	TEIform CDATA "teiHeader" >
+
+<!ELEMENT fileDesc - - 
+	(titleStmt, editionStmt?, extent?, publicationStmt, seriesStmt?, 
+	notesStmt?, sourceDesc+) >
+<!ATTLIST fileDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "fileDesc" >
+
+<!ELEMENT titleStmt - O 
+	(title+, (author | editor | sponsor | funder | principal 
+	| respStmt)*) >
+<!ATTLIST titleStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "titleStmt" >
+
+<!ELEMENT sponsor - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST sponsor 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "sponsor" >
+
+<!ELEMENT funder - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST funder 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "funder" >
+
+<!ELEMENT principal - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST principal 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "principal" >
+
+<!ELEMENT editionStmt - O 
+	((edition, respStmt*) | p+) >
+<!ATTLIST editionStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "editionStmt" >
+
+<!ELEMENT edition - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST edition 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "edition" >
+
+<!ELEMENT extent - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST extent 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "extent" >
+
+<!ELEMENT publicationStmt - O 
+	((p, (anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)+ | ((publisher | distributor | authority | pubPlace 
+	| address | idno | availability | date), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)+) >
+<!ATTLIST publicationStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "publicationStmt" >
+
+<!ELEMENT distributor - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST distributor 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "distributor" >
+
+<!ELEMENT authority - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST authority 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "authority" >
+
+<!ELEMENT idno - O 
+	(#PCDATA) >
+<!ATTLIST idno 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "idno" >
+
+<!ELEMENT availability - O 
+	(p)+ >
+<!ATTLIST availability 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	status (free | unknown | restricted) "unknown"
+	TEIform CDATA "availability" >
+
+<!ELEMENT seriesStmt - O 
+	((title+, (idno | respStmt)*) | p+) >
+<!ATTLIST seriesStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "seriesStmt" >
+
+<!ELEMENT notesStmt - O 
+	(note)+ >
+<!ATTLIST notesStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "notesStmt" >
+
+<!ELEMENT sourceDesc - - 
+	(p | bibl | biblFull | listBibl)+ >
+<!ATTLIST sourceDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "sourceDesc" >
+
+<!ELEMENT encodingDesc - - 
+	(projectDesc*, samplingDecl*, editorialDecl*, tagsDecl?, 
+	refsDecl*, classDecl*, p*) >
+<!ATTLIST encodingDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "encodingDesc" >
+
+<!ELEMENT projectDesc - O 
+	(p)+ >
+<!ATTLIST projectDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "projectDesc" >
+
+<!ELEMENT samplingDecl - O 
+	(p)+ >
+<!ATTLIST samplingDecl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "samplingDecl" >
+
+<!ELEMENT editorialDecl - O 
+	(p)+ >
+<!ATTLIST editorialDecl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "editorialDecl" >
+
+<!ELEMENT tagsDecl - O 
+	(rendition*, tagUsage*) >
+<!ATTLIST tagsDecl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "tagsDecl" >
+
+<!ELEMENT tagUsage - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST tagUsage 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	gi CDATA #REQUIRED
+	occurs CDATA #IMPLIED
+	ident CDATA #IMPLIED
+	render IDREF #IMPLIED
+	TEIform CDATA "tagUsage" >
+
+<!ELEMENT rendition - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST rendition 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "rendition" >
+
+<!ELEMENT refsDecl - O 
+	(p)+ >
+<!ATTLIST refsDecl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	doctype CDATA "TEI.2"
+	TEIform CDATA "refsDecl" >
+
+<!ELEMENT classDecl - - 
+	(taxonomy)+ >
+<!ATTLIST classDecl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "classDecl" >
+
+<!ELEMENT taxonomy - - 
+	(category+ | ((bibl | biblFull), category*)) >
+<!ATTLIST taxonomy 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "taxonomy" >
+
+<!ELEMENT category - - 
+	(catDesc, category*) >
+<!ATTLIST category 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "category" >
+
+<!ELEMENT catDesc - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi)* >
+<!ATTLIST catDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "catDesc" >
+
+<!ELEMENT profileDesc - - 
+	(creation?, langUsage*, textClass*) >
+<!ATTLIST profileDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "profileDesc" >
+
+<!ELEMENT creation - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST creation 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "creation" >
+
+<!ELEMENT langUsage - O 
+	(p | language)+ >
+<!ATTLIST langUsage 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "langUsage" >
+
+<!ELEMENT language - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST language 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	wsd ENTITY #IMPLIED
+	usage CDATA #IMPLIED
+	TEIform CDATA "language" >
+
+<!ELEMENT textClass - - 
+	(classCode | catRef | keywords)* >
+<!ATTLIST textClass 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "textClass" >
+
+<!ELEMENT keywords - O 
+	(term+ | list) >
+<!ATTLIST keywords 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	scheme IDREF #IMPLIED
+	TEIform CDATA "keywords" >
+
+<!ELEMENT classCode - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST classCode 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	scheme IDREF #IMPLIED
+	TEIform CDATA "classCode" >
+
+<!ELEMENT catRef - O 
+	EMPTY >
+<!ATTLIST catRef 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	target IDREFS #REQUIRED
+	scheme IDREF #IMPLIED
+	TEIform CDATA "catRef" >
+
+<!ELEMENT revisionDesc - - 
+	(list | change+) >
+<!ATTLIST revisionDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "revisionDesc" >
+
+<!ELEMENT change - O 
+	(date, respStmt+, item) >
+<!ATTLIST change 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "change" >
+
+<!ELEMENT p - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST p 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "p" >
+
+<!ELEMENT foreign - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST foreign 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "foreign" >
+
+<!ELEMENT emph - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST emph 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "emph" >
+
+<!ELEMENT hi - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST hi 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "hi" >
+
+<!ELEMENT q - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST q 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	direct (y | n | unspecified) "unspecified"
+	who CDATA #IMPLIED
+	TEIform CDATA "q" >
+
+<!ELEMENT cit - - 
+	(q | bibl | biblFull | ptr | ref | xptr | xref | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)+ >
+<!ATTLIST cit 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "cit" >
+
+<!ELEMENT soCalled - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST soCalled 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "soCalled" >
+
+<!ELEMENT term - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST term 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "term" >
+
+<!ELEMENT mentioned - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST mentioned 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "mentioned" >
+
+<!ELEMENT gloss - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST gloss 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	target IDREF #IMPLIED
+	TEIform CDATA "gloss" >
+
+<!ELEMENT name - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST name 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	key CDATA #IMPLIED
+	reg CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "name" >
+
+<!ELEMENT rs - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST rs 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	key CDATA #IMPLIED
+	reg CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "rs" >
+
+<!ELEMENT num - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST num 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	value CDATA #IMPLIED
+	TEIform CDATA "num" >
+
+<!ELEMENT date - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST date 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	calendar CDATA #IMPLIED
+	value CDATA #IMPLIED
+	certainty CDATA #IMPLIED
+	TEIform CDATA "date" >
+
+<!ELEMENT time - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST time 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	value CDATA #IMPLIED
+	type (am | pm | 24hour | descriptive) #IMPLIED
+	zone CDATA #IMPLIED
+	TEIform CDATA "time" >
+
+<!ELEMENT abbr - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST abbr 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	expan CDATA #IMPLIED
+	resp IDREF #IMPLIED
+	cert CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "abbr" >
+
+<!ELEMENT sic - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST sic 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	corr CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	cert CDATA #IMPLIED
+	TEIform CDATA "sic" >
+
+<!ELEMENT corr - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST corr 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	sic CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	cert CDATA #IMPLIED
+	TEIform CDATA "corr" >
+
+<!ELEMENT reg - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST reg 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	orig CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	TEIform CDATA "reg" >
+
+<!ELEMENT orig - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST orig 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	reg CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	TEIform CDATA "orig" >
+
+<!ELEMENT gap - O 
+	EMPTY >
+<!ATTLIST gap 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	desc CDATA #IMPLIED
+	reason CDATA #IMPLIED
+	resp IDREF #IMPLIED
+	hand IDREF #IMPLIED
+	agent CDATA #IMPLIED
+	extent CDATA #IMPLIED
+	TEIform CDATA "gap" >
+
+<!ELEMENT add - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST add 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	place CDATA #IMPLIED
+	resp IDREF #IMPLIED
+	cert CDATA #IMPLIED
+	hand IDREF #IMPLIED
+	TEIform CDATA "add" >
+
+<!ELEMENT del - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST del 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	status CDATA "unremarkable"
+	resp IDREF #IMPLIED
+	cert CDATA #IMPLIED
+	hand IDREF #IMPLIED
+	TEIform CDATA "del" >
+
+<!ELEMENT unclear - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST unclear 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	reason CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	cert CDATA #IMPLIED
+	hand IDREF #IMPLIED
+	agent CDATA #IMPLIED
+	TEIform CDATA "unclear" >
+
+<!ELEMENT address - O 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, ((addrLine, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)+ | (name, (anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*)*)) >
+<!ATTLIST address 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "address" >
+
+<!ELEMENT addrLine - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST addrLine 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "addrLine" >
+
+<!ELEMENT ptr - O 
+	EMPTY >
+<!ATTLIST ptr 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	crdate CDATA #IMPLIED
+	targType CDATA #IMPLIED
+	targOrder (Y | N | U) "U"
+	evaluate (all | one | none) #IMPLIED
+	target IDREFS #REQUIRED
+	TEIform CDATA "ptr" >
+
+<!ELEMENT ref - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST ref 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	crdate CDATA #IMPLIED
+	targType CDATA #IMPLIED
+	targOrder (Y | N | U) "U"
+	evaluate (all | one | none) #IMPLIED
+	target IDREFS #IMPLIED
+	TEIform CDATA "ref" >
+
+<!ELEMENT list - - 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (head, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?, ((item, (anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*)* | (label, 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, item, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)+)) >
+<!ATTLIST list 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA "simple"
+	TEIform CDATA "list" >
+
+<!ELEMENT item - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST item 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "item" >
+
+<!ELEMENT label - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST label 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "label" >
+
+<!ELEMENT head - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST head 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "head" >
+
+<!ELEMENT note - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST note 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	place CDATA "unspecified"
+	anchored (yes | no) "yes"
+	target IDREFS #IMPLIED
+	targetEnd IDREFS #IMPLIED
+	TEIform CDATA "note" >
+
+<!ELEMENT index - O 
+	EMPTY >
+<!ATTLIST index 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	index CDATA #IMPLIED
+	level1 CDATA #REQUIRED
+	level2 CDATA #IMPLIED
+	level3 CDATA #IMPLIED
+	level4 CDATA #IMPLIED
+	TEIform CDATA "index" >
+
+<!ELEMENT divGen - O 
+	EMPTY >
+<!ATTLIST divGen 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "divGen" >
+
+<!ELEMENT milestone - O 
+	EMPTY >
+<!ATTLIST milestone 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	ed CDATA #IMPLIED
+	unit CDATA #REQUIRED
+	TEIform CDATA "milestone" >
+
+<!ELEMENT pb - O 
+	EMPTY >
+<!ATTLIST pb 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	ed CDATA #IMPLIED
+	TEIform CDATA "pb" >
+
+<!ELEMENT lb - O 
+	EMPTY >
+<!ATTLIST lb 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	ed CDATA #IMPLIED
+	TEIform CDATA "lb" >
+
+<!ELEMENT bibl - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | author | biblScope | edition | editor | extent 
+	| idno | imprint | note | pubPlace | publisher | respStmt 
+	| anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)* >
+<!ATTLIST bibl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "bibl" >
+
+<!ELEMENT biblFull - O 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, titleStmt, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*, (editionStmt, (anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*)?, (extent, 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)?, publicationStmt, (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*, (seriesStmt, (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)?, 
+	(notesStmt, (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)?, (sourceDesc, (anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST biblFull 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "biblFull" >
+
+<!ELEMENT listBibl - - 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (head, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?, (bibl | biblFull), (bibl | biblFull 
+	| anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (trailer, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?) >
+<!ATTLIST listBibl 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	default (YES | NO) "NO"
+	TEIform CDATA "listBibl" >
+
+<!ELEMENT author - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST author 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "author" >
+
+<!ELEMENT editor - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST editor 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	role CDATA "editor"
+	TEIform CDATA "editor" >
+
+<!ELEMENT respStmt - O 
+	(resp | name | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)+ >
+<!ATTLIST respStmt 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "respStmt" >
+
+<!ELEMENT resp - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST resp 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "resp" >
+
+<!ELEMENT title - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST title 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	level (a | m | j | s | u) #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "title" >
+
+<!ELEMENT imprint - O 
+	(pubPlace | publisher | date | biblScope | anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST imprint 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "imprint" >
+
+<!ELEMENT publisher - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST publisher 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "publisher" >
+
+<!ELEMENT biblScope - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST biblScope 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "biblScope" >
+
+<!ELEMENT pubPlace - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST pubPlace 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	key CDATA #IMPLIED
+	reg CDATA #IMPLIED
+	TEIform CDATA "pubPlace" >
+
+<!ELEMENT l - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST l 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	part (Y | N | I | M | F) "N"
+	TEIform CDATA "l" >
+
+<!ELEMENT lg - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (l | lg), 
+	(l | lg | anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*, ((byline | closer | dateline | epigraph 
+	| salute | signed | trailer), (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST lg 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	TEIform CDATA "lg" >
+
+<!ELEMENT sp - O 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (speaker, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?, ((p | l | lg | ab | seg | stage), 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)+) >
+<!ATTLIST sp 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	who IDREFS #IMPLIED
+	TEIform CDATA "sp" >
+
+<!ELEMENT speaker - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST speaker 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "speaker" >
+
+<!ELEMENT stage - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | ab | l 
+	| lg | p | sp | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)* >
+<!ATTLIST stage 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "stage" >
+
+<!ELEMENT text - - 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (front, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?, (body | group), (anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)*, (back, 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)?) >
+<!ATTLIST text 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	decls IDREFS #IMPLIED
+	TEIform CDATA "text" >
+
+<!ELEMENT body - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, ((((eg | bibl 
+	| biblFull | ab | l | lg | p | sp | cit | q | label | list 
+	| listBibl | note | stage), (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)+, (divGen, (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)*, 
+	((div, (div | divGen | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*) | (div0, (div0 | divGen | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*) 
+	| (div1, (div1 | divGen | anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*))?) | ((divGen, (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)*, 
+	((div, (div | divGen | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*) | (div0, (div0 | divGen | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*) 
+	| (div1, (div1 | divGen | anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)))), ((byline | closer 
+	| dateline | epigraph | salute | signed | trailer), (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST body 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	decls IDREFS #IMPLIED
+	TEIform CDATA "body" >
+
+<!ELEMENT group - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (text | group), 
+	(text | group | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*, ((byline | closer | dateline | 
+	epigraph | salute | signed | trailer), (anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST group 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	decls IDREFS #IMPLIED
+	TEIform CDATA "group" >
+
+<!ELEMENT div - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div | divGen), 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)+ | (((eg | bibl | biblFull | ab | l | lg | p | sp 
+	| cit | q | label | list | listBibl | note | stage), (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)+, 
+	((div | divGen), (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)*)), ((byline | closer | dateline 
+	| epigraph | salute | signed | trailer), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST div 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div" >
+
+<!ELEMENT div0 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div1 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div1 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div0 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div0" >
+
+<!ELEMENT div1 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div2 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div2 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div1 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div1" >
+
+<!ELEMENT div2 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div3 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div3 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div2 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div2" >
+
+<!ELEMENT div3 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div4 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div4 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div3 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div3" >
+
+<!ELEMENT div4 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div5 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div5 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div4 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div4" >
+
+<!ELEMENT div5 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div6 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div6 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div5 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div5" >
+
+<!ELEMENT div6 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, (((div7 | 
+	divGen), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+ | (((eg | bibl | biblFull | ab | l 
+	| lg | p | sp | cit | q | label | list | listBibl | note 
+	| stage), (anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*)+, ((div7 | divGen), (anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)*)*)), 
+	((byline | closer | dateline | epigraph | salute | signed 
+	| trailer), (anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)*)*) >
+<!ATTLIST div6 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div6" >
+
+<!ELEMENT div7 - O 
+	((argument | byline | dateline | docAuthor | docDate | epigraph 
+	| head | opener | salute | signed | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*, ((eg | bibl 
+	| biblFull | ab | l | lg | p | sp | cit | q | label | list 
+	| listBibl | note | stage), (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)+, ((byline | closer 
+	| dateline | epigraph | salute | signed | trailer), (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)*) >
+<!ATTLIST div7 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	org (composite | uniform) "uniform"
+	sample (initial | medial | final | unknown | complete) "complete"
+	part (Y | N | I | M | F) "N"
+	decls IDREFS #IMPLIED
+	TEIform CDATA "div7" >
+
+<!ELEMENT trailer - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST trailer 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "trailer" >
+
+<!ELEMENT byline - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | docAuthor | anchor | gap | index | interp | 
+	interpGrp | lb | milestone | pb)* >
+<!ATTLIST byline 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "byline" >
+
+<!ELEMENT dateline - O 
+	(#PCDATA | date | time | name | address | anchor | gap | 
+	index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST dateline 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "dateline" >
+
+<!ELEMENT argument - - 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, head?, ((eg | bibl | biblFull | ab | l | lg | p 
+	| sp | cit | q | label | list | listBibl | note | stage), 
+	(anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*)*) >
+<!ATTLIST argument 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "argument" >
+
+<!ELEMENT epigraph - - 
+	((eg | bibl | biblFull | ab | l | lg | p | sp | cit | q 
+	| label | list | listBibl | note | stage), (anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)*)* >
+<!ATTLIST epigraph 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "epigraph" >
+
+<!ELEMENT opener - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | argument | byline | dateline | epigraph | salute 
+	| signed | anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)* >
+<!ATTLIST opener 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "opener" >
+
+<!ELEMENT closer - O 
+	(#PCDATA | signed | dateline | salute | ident | code | kw 
+	| abbr | address | date | name | num | rs | time | add | 
+	corr | del | orig | reg | sic | unclear | formula | emph 
+	| foreign | gloss | hi | mentioned | soCalled | term | title 
+	| ptr | ref | xptr | xref | s | seg | gi | anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST closer 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "closer" >
+
+<!ELEMENT salute - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST salute 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "salute" >
+
+<!ELEMENT signed - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST signed 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "signed" >
+
+<!ELEMENT front - O 
+	((divGen | titlePage | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*, (((argument | byline | docAuthor 
+	| docDate | docEdition | docImprint | docTitle | epigraph 
+	| head | titlePart), (argument | byline | docAuthor | docDate 
+	| docEdition | docImprint | docTitle | epigraph | head | 
+	titlePart | titlePage | anchor | gap | index | interp | 
+	interpGrp | lb | milestone | pb)*) | (div, (div | divGen 
+	| titlePage | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*) | (div1, (div1 | divGen | titlePage 
+	| anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*))?) >
+<!ATTLIST front 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	decls IDREFS #IMPLIED
+	TEIform CDATA "front" >
+
+<!ELEMENT titlePage - O 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (byline | docAuthor | docDate | docEdition | docImprint 
+	| docTitle | epigraph | figure | titlePart), (byline | docAuthor 
+	| docDate | docEdition | docImprint | docTitle | epigraph 
+	| figure | titlePart | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*) >
+<!ATTLIST titlePage 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	TEIform CDATA "titlePage" >
+
+<!ELEMENT docTitle - O 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (titlePart, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)+) >
+<!ATTLIST docTitle 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "docTitle" >
+
+<!ELEMENT titlePart - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST titlePart 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA "main"
+	TEIform CDATA "titlePart" >
+
+<!ELEMENT docAuthor - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST docAuthor 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "docAuthor" >
+
+<!ELEMENT docEdition - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST docEdition 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "docEdition" >
+
+<!ELEMENT docImprint - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | pubPlace | docDate | publisher | anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST docImprint 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "docImprint" >
+
+<!ELEMENT docDate - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST docDate 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	value CDATA #IMPLIED
+	TEIform CDATA "docDate" >
+
+<!ELEMENT back - O 
+	((divGen | titlePage | anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*, (((argument | byline | dateline 
+	| docAuthor | docDate | epigraph | head | opener | salute 
+	| signed), (argument | byline | dateline | docAuthor | docDate 
+	| epigraph | head | opener | salute | signed | titlePage 
+	| anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*) | (div, (div | divGen | titlePage | anchor | gap 
+	| index | interp | interpGrp | lb | milestone | pb)*) | 
+	(div1, (div1 | divGen | titlePage | anchor | gap | index 
+	| interp | interpGrp | lb | milestone | pb)*))?, (trailer 
+	| closer)*) >
+<!ATTLIST back 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	decls IDREFS #IMPLIED
+	TEIform CDATA "back" >
+
+<!ELEMENT xref - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST xref 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	crdate CDATA #IMPLIED
+	targType CDATA #IMPLIED
+	targOrder (Y | N | U) "U"
+	evaluate (all | one | none) #IMPLIED
+	doc ENTITY #IMPLIED
+	from CDATA "ROOT"
+	to CDATA "DITTO"
+	TEIform CDATA "xref" >
+
+<!ELEMENT xptr - O 
+	EMPTY >
+<!ATTLIST xptr 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	crdate CDATA #IMPLIED
+	targType CDATA #IMPLIED
+	targOrder (Y | N | U) "U"
+	evaluate (all | one | none) #IMPLIED
+	doc ENTITY #IMPLIED
+	from CDATA "ROOT"
+	to CDATA "DITTO"
+	TEIform CDATA "xptr" >
+
+<!ELEMENT anchor - O 
+	EMPTY >
+<!ATTLIST anchor 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	subtype CDATA #IMPLIED
+	TEIform CDATA "anchor" >
+
+<!ELEMENT seg - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST seg 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	function CDATA #IMPLIED
+	part (Y | N | I | M | F) "N"
+	subtype CDATA #IMPLIED
+	TEIform CDATA "seg" >
+
+<!ELEMENT ab - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST ab 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	subtype CDATA #IMPLIED
+	part (Y | N | I | M | F) "N"
+	TEIform CDATA "ab" >
+
+<!ELEMENT interp - O 
+	EMPTY >
+<!ATTLIST interp 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	type CDATA #IMPLIED
+	inst IDREFS #IMPLIED
+	value CDATA #REQUIRED
+	TEIform CDATA "interp" >
+
+<!ELEMENT interpGrp - - 
+	(interp)* >
+<!ATTLIST interpGrp 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	resp CDATA #IMPLIED
+	type CDATA #IMPLIED
+	inst IDREFS #IMPLIED
+	TEIform CDATA "interpGrp" >
+
+<!ELEMENT s - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | anchor | gap | index | interp | interpGrp | 
+	lb | milestone | pb)* >
+<!ATTLIST s 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	type CDATA #IMPLIED
+	function CDATA #IMPLIED
+	part (Y | N | I | M | F) "N"
+	TEIform CDATA "s" >
+
+<!ELEMENT table - - 
+	((head | anchor | gap | index | interp | interpGrp | lb 
+	| milestone | pb)*, (row, (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)+) >
+<!ATTLIST table 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	rows CDATA #IMPLIED
+	cols CDATA #IMPLIED
+	TEIform CDATA "table" >
+
+<!ELEMENT row - O 
+	((cell | table), (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)+ >
+<!ATTLIST row 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	role CDATA "data"
+	TEIform CDATA "row" >
+
+<!ELEMENT cell - O 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST cell 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	role CDATA "data"
+	rows CDATA "1"
+	cols CDATA "1"
+	TEIform CDATA "cell" >
+
+<!ELEMENT formula - - 
+	(#PCDATA) >
+<!ATTLIST formula 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	notation CDATA #REQUIRED
+	TEIform CDATA "formula" >
+
+<!ELEMENT figure - - 
+	((anchor | gap | index | interp | interpGrp | lb | milestone 
+	| pb)*, (head, (anchor | gap | index | interp | interpGrp 
+	| lb | milestone | pb)*)?, (p, (anchor | gap | index | interp 
+	| interpGrp | lb | milestone | pb)*)*, (figDesc, (anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)*)?, 
+	(text, (anchor | gap | index | interp | interpGrp | lb | 
+	milestone | pb)*)?) >
+<!ATTLIST figure 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	entity ENTITY #IMPLIED
+	TEIform CDATA "figure" >
+
+<!ELEMENT figDesc - - 
+	(#PCDATA | ident | code | kw | abbr | address | date | name 
+	| num | rs | time | add | corr | del | orig | reg | sic 
+	| unclear | formula | emph | foreign | gloss | hi | mentioned 
+	| soCalled | term | title | ptr | ref | xptr | xref | s 
+	| seg | gi | eg | bibl | biblFull | figure | cit | q | label 
+	| list | listBibl | note | stage | table | text | anchor 
+	| gap | index | interp | interpGrp | lb | milestone | pb)* >
+<!ATTLIST figDesc 
+	corresp IDREFS #IMPLIED
+	next IDREF #IMPLIED
+	prev IDREF #IMPLIED
+	ana IDREFS #IMPLIED
+	id ID #IMPLIED
+	n CDATA #IMPLIED
+	lang IDREF #IMPLIED
+	rend CDATA #IMPLIED
+	TEIform CDATA "figDesc" >
+

@@ -1,0 +1,42 @@
+<!-- TEILiteX.dtd:  TEI.extensions.dtd file for TEI Lite      --> 
+<!-- Define some additions for the phrase level tags          -->
+<!-- Revisions:                                               -->
+<!-- 2002-01-21 : LB add type attribute for consistency       -->
+<!-- 2001-12-07 : LB : parameterize for P4                    -->
+<!-- 1995-02-17 : CMSMcQ : make file after agreements w/LB    -->
+
+<!ENTITY % gi 'INCLUDE' >
+<![ %gi; [
+<!ELEMENT %n.gi;        %om.RO;  (#PCDATA)                          >
+<!ATTLIST %n.gi;             %a.global;
+          TEI                (yes | no)          "yes"
+          TEIform            CDATA               'gi'           >
+]]>
+
+<!ENTITY % eg 'INCLUDE' >
+<![ %eg; [
+<!ELEMENT %n.eg;        %om.RR;  (#PCDATA)                          >
+<!ATTLIST %n.eg;             %a.global;
+          TEIform            CDATA               'eg'           >
+]]>
+
+<!ENTITY % code 'INCLUDE' >
+<![ %code; [
+<!ELEMENT code          %om.RO;  (#PCDATA)                          >
+<!ATTLIST code               %a.global;                         >
+]]>
+
+<!ENTITY % ident 'INCLUDE' >
+<![ %ident; [
+<!ELEMENT ident         %om.RO;  (#PCDATA)                          >
+<!ATTLIST ident              %a.global;                         
+          type               CDATA #IMPLIED         >
+]]>
+
+<!ENTITY % kw 'INCLUDE' >
+<![ %kw; [
+<!ELEMENT kw            %om.RO;  (#PCDATA)                          >
+<!ATTLIST kw                 %a.global;                         
+          type          CDATA #IMPLIED     >
+]]>
+

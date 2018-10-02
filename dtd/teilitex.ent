@@ -1,0 +1,361 @@
+<!-- The Pocket TEI:  modification file for 'TEI Lite'        -->
+ 
+<!-- This file shows how TEI Lite is derived from the TEI     -->
+<!-- main DTD.                                                -->
+ 
+<!-- Revisions:                                               -->
+<!-- 2001-12-07 : LB : Further tweaks for P4: 
+                       make entity inclusion conditional      -->
+<!-- 2001-10-21 : LB     : minor tweaks for inclusion in P4X  -->
+<!-- 1995-06-25 : CMSMcQ : Version 1.6.  Add notations, ISO   -->
+<!--                       entity sets for characters         -->
+<!--                       Add eg to x.common                 -->
+<!-- 1995-06-08 : CMSMcQ : Version 1.5.  Add divGen to front  -->
+<!-- 1995-02-28 : CMSMcQ : Version 1.4.  Add biblFull at the  -->
+<!--                       request of David Seaman            -->
+<!-- 1995-02-17 : CMSMcQ : Version 1.3.  Add ident, code ...  -->
+<!--                       (and add teilitex.dtd)             -->
+<!-- 1995-01-27 : CMSMcQ : Version 1.2?  LB changes of 23 Jan -->
+<!-- 1995-01-21 : CMSMcQ : first cut at selection             -->
+<!-- 1995-01-21 : CMSMcQ : made file from skelmods.ent        -->
+
+<!-- Changes to element classes (for new elements)            -->
+<!ENTITY % x.data      'ident | code | kw |'                    >
+<!ENTITY % x.inter     'eg |'                                   >
+<!ENTITY % x.common    'eg |'                                   >
+
+<!ENTITY % a.linking '
+          corresp            IDREFS              #IMPLIED
+          next               IDREF               #IMPLIED
+          prev               IDREF               #IMPLIED'      >
+ 
+
+<!ENTITY % TEI.2 'INCLUDE' >
+<!ENTITY % teiCorpus.2                'IGNORE' >
+ 
+<!-- ******************************************************** -->
+<!-- I.  Core tag sets.                                       -->
+<!-- ******************************************************** -->
+ 
+<!-- Chapter 5:  TEI Header ********************************* -->
+<!-- File:  TEIHDR2.DTD -->
+<!ENTITY % teiHeader    'INCLUDE' >
+<!ENTITY % fileDesc     'INCLUDE' >
+<!ENTITY % titleStmt    'INCLUDE' >
+<!ENTITY % sponsor      'INCLUDE' > <!-- ? -->
+<!ENTITY % funder       'INCLUDE' > <!-- ? -->
+<!ENTITY % principal    'INCLUDE' > <!-- ? -->
+<!ENTITY % editionStmt  'INCLUDE' > <!-- ? -->
+<!ENTITY % edition      'INCLUDE' >
+<!ENTITY % extent       'INCLUDE' >
+<!ENTITY % publicationStmt 'INCLUDE' >
+<!ENTITY % distributor  'INCLUDE' >
+<!ENTITY % authority    'INCLUDE' >
+<!ENTITY % idno         'INCLUDE' >
+<!ENTITY % availability 'INCLUDE' >
+<!ENTITY % seriesStmt   'INCLUDE' >
+<!ENTITY % notesStmt    'INCLUDE' >
+<!ENTITY % sourceDesc   'INCLUDE' >
+<!ENTITY % scriptStmt                  'IGNORE' >
+<!ENTITY % recordingStmt               'IGNORE' >
+<!ENTITY % recording                   'IGNORE' >
+<!ENTITY % equipment                   'IGNORE' >
+<!ENTITY % broadcast                   'IGNORE' >
+<!ENTITY % encodingDesc  'INCLUDE' >
+<!ENTITY % projectDesc   'INCLUDE' >
+<!ENTITY % samplingDecl  'INCLUDE' >
+<!ENTITY % editorialDecl 'INCLUDE' >
+<!ENTITY % correction                  'IGNORE' >
+<!ENTITY % normalization               'IGNORE' >
+<!ENTITY % quotation                   'IGNORE' >
+<!ENTITY % hyphenation                 'IGNORE' >
+<!ENTITY % segmentation                'IGNORE' >
+<!ENTITY % stdVals                     'IGNORE' >
+<!ENTITY % interpretation              'IGNORE' >
+<!ENTITY % tagsDecl      'INCLUDE' >
+<!ENTITY % tagUsage      'INCLUDE' >
+<!ENTITY % rendition     'INCLUDE' >
+<!ENTITY % refsDecl      'INCLUDE' >
+<!ENTITY % step                        'IGNORE' > <!-- ? -->
+<!ENTITY % state                       'IGNORE' >
+<!ENTITY % classDecl     'INCLUDE' >
+<!ENTITY % taxonomy      'INCLUDE' >
+<!ENTITY % category      'INCLUDE' >
+<!ENTITY % catDesc       'INCLUDE' >
+<!ENTITY % fsdDecl                     'IGNORE' >
+<!ENTITY % metDecl                     'IGNORE' >
+<!ENTITY % symbol                      'IGNORE' >
+<!ENTITY % variantEncoding             'IGNORE' >
+<!ENTITY % profileDesc  'INCLUDE' >
+<!ENTITY % creation     'INCLUDE' >
+<!ENTITY % langUsage    'INCLUDE' >
+<!ENTITY % language     'INCLUDE' >
+<!ENTITY % textClass    'INCLUDE' >
+<!ENTITY % keywords     'INCLUDE' >
+<!ENTITY % classCode    'INCLUDE' >
+<!ENTITY % catRef       'INCLUDE' >
+<!ENTITY % revisionDesc 'INCLUDE' >
+<!ENTITY % change       'INCLUDE' >
+ 
+<!-- Chapter 6:  Elements Available in All TEI Documents **** -->
+<!-- File:  TEICORE2.DTD -->
+<!ENTITY % p            'INCLUDE' >
+<!ENTITY % foreign      'INCLUDE' >
+<!ENTITY % emph         'INCLUDE' >
+<!ENTITY % hi           'INCLUDE' >
+<!ENTITY % distinct                    'IGNORE' > <!-- ? LB -->
+<!ENTITY % q            'INCLUDE' >
+<!ENTITY % quote                       'IGNORE' > <!-- ? LB -->
+<!ENTITY % cit          'INCLUDE' >
+<!ENTITY % soCalled     'INCLUDE' >
+<!ENTITY % term         'INCLUDE' >
+<!ENTITY % mentioned    'INCLUDE' >
+<!ENTITY % gloss        'INCLUDE' >
+<!ENTITY % name         'INCLUDE' >
+<!ENTITY % rs           'INCLUDE' >
+<!ENTITY % num          'INCLUDE' >
+<!ENTITY % measure                     'IGNORE' >
+<!ENTITY % date         'INCLUDE' >
+<!ENTITY % dateRange                   'IGNORE' >
+<!ENTITY % time         'INCLUDE' >
+<!ENTITY % timeRange                   'IGNORE' >
+<!ENTITY % abbr         'INCLUDE' >
+<!ENTITY % expan                       'IGNORE' >
+<!ENTITY % sic          'INCLUDE' >
+<!ENTITY % corr         'INCLUDE' >
+<!ENTITY % reg          'INCLUDE' > <!-- as agreed 95-02-17 -->
+<!ENTITY % orig         'INCLUDE' > <!-- as agreed 95-02-17 -->
+<!ENTITY % gap          'INCLUDE' >
+<!ENTITY % add          'INCLUDE' > <!-- ? revisit at next revision -->
+<!ENTITY % del          'INCLUDE' > <!-- ? revisit at next revision -->
+<!ENTITY % unclear      'INCLUDE' >
+<!ENTITY % address      'INCLUDE' >
+<!ENTITY % addrLine     'INCLUDE' >
+<!ENTITY % street                      'IGNORE' >
+<!ENTITY % postCode                    'IGNORE' >
+<!ENTITY % postBox                     'IGNORE' >
+<!ENTITY % ptr          'INCLUDE' >
+<!ENTITY % ref          'INCLUDE' >
+<!ENTITY % list         'INCLUDE' >
+<!ENTITY % item         'INCLUDE' >
+<!ENTITY % label        'INCLUDE' >
+<!ENTITY % head         'INCLUDE' >
+<!ENTITY % headLabel                   'IGNORE' >
+<!ENTITY % headItem                    'IGNORE' >
+<!ENTITY % note         'INCLUDE' >
+<!ENTITY % index        'INCLUDE' >
+<!ENTITY % divGen       'INCLUDE' >
+<!ENTITY % milestone    'INCLUDE' >
+<!ENTITY % pb           'INCLUDE' >
+<!ENTITY % lb           'INCLUDE' >
+<!ENTITY % cb                          'IGNORE' >
+<!ENTITY % bibl         'INCLUDE' >
+<!ENTITY % biblStruct                  'IGNORE' >
+<!ENTITY % biblFull     'INCLUDE' >   
+<!ENTITY % listBibl     'INCLUDE' >
+<!ENTITY % analytic                    'IGNORE' >
+<!ENTITY % monogr                      'IGNORE' >
+<!ENTITY % series                      'IGNORE' >
+<!ENTITY % author       'INCLUDE' >
+<!ENTITY % editor       'INCLUDE' >
+<!ENTITY % respStmt     'INCLUDE' >
+<!ENTITY % resp         'INCLUDE' >
+<!ENTITY % title        'INCLUDE' >
+<!ENTITY % meeting                     'IGNORE' >
+<!ENTITY % imprint      'INCLUDE' >
+<!ENTITY % publisher    'INCLUDE' >
+<!ENTITY % biblScope    'INCLUDE' >
+<!ENTITY % pubPlace     'INCLUDE' >
+<!ENTITY % l            'INCLUDE' >
+<!ENTITY % lg           'INCLUDE' >
+<!ENTITY % sp           'INCLUDE' >
+<!ENTITY % speaker      'INCLUDE' >
+<!ENTITY % stage        'INCLUDE' >
+ 
+<!-- Chapter 7:  Default Text Structure ********************* -->
+<!-- File:  TEISTR2.DTD -->
+<!ENTITY % text         'INCLUDE' >
+<!ENTITY % body         'INCLUDE' >
+<!ENTITY % group        'INCLUDE' >
+<!ENTITY % div          'INCLUDE' >
+<!ENTITY % div0         'INCLUDE' >
+<!ENTITY % div1         'INCLUDE' >
+<!ENTITY % div2         'INCLUDE' >
+<!ENTITY % div3         'INCLUDE' >
+<!ENTITY % div4         'INCLUDE' >
+<!ENTITY % div5         'INCLUDE' >
+<!ENTITY % div6         'INCLUDE' >
+<!ENTITY % div7         'INCLUDE' >
+<!ENTITY % trailer      'INCLUDE' >
+<!ENTITY % byline       'INCLUDE' >
+<!ENTITY % dateline     'INCLUDE' >
+<!ENTITY % argument     'INCLUDE' >
+<!ENTITY % epigraph     'INCLUDE' >
+<!ENTITY % opener       'INCLUDE' >
+<!ENTITY % closer       'INCLUDE' >
+<!ENTITY % salute       'INCLUDE' >
+<!ENTITY % signed       'INCLUDE' >
+ 
+<!-- File:  TEIFRON2.DTD -->
+<!ENTITY % front        'INCLUDE' >
+<!ENTITY % titlePage    'INCLUDE' >
+<!ENTITY % docTitle     'INCLUDE' >
+<!ENTITY % titlePart    'INCLUDE' >
+<!ENTITY % docAuthor    'INCLUDE' >
+<!ENTITY % imprimatur                  'IGNORE' >
+<!ENTITY % docEdition   'INCLUDE' >
+<!ENTITY % docImprint   'INCLUDE' >
+<!ENTITY % docDate      'INCLUDE' >
+ 
+<!-- File:  TEIBACK2.DTD -->
+<!ENTITY % back         'INCLUDE' >
+ 
+ 
+<!-- ******************************************************** -->
+<!-- II.  Base tag sets.                                      -->
+<!-- II.A.  DTD files                                         -->
+<!-- ******************************************************** -->
+ 
+<!-- Chapter 8:  Prose * (included) ************************* -->
+<!-- File:  TEIPROS2.DTD -->
+ 
+<!-- Chapter 9:  Verse * (excluded) ************************* -->
+<!-- Chapter 10:  Drama * (excluded) ************************ -->
+<!-- Chapter 11:  Transcriptions of Speech * (excluded) ***** -->
+<!-- Chapter 12:  Print Dictionaries * (excluded) *********** -->
+<!-- Chapter 13:  Terminological Data * (excluded) ********** -->
+<!-- * Mixed Bases * (excluded) ***************************** -->
+ 
+<!-- ******************************************************** -->
+<!-- III.  Additional tag sets.                               -->
+<!-- ******************************************************** -->
+ 
+<!-- Chapter 14:  Linking, Segmentation, and Alignment ****** -->
+<!-- File:  TEILINK2.ENT -->
+<!-- File:  TEILINK2.DTD -->
+<!ENTITY % link                        'IGNORE' > <!-- ? -->
+<!ENTITY % linkGrp                     'IGNORE' > <!-- ? -->
+<!ENTITY % xref         'INCLUDE' >
+<!ENTITY % xptr         'INCLUDE' >
+<!ENTITY % seg          'INCLUDE' >
+<!ENTITY % anchor       'INCLUDE' >
+<!ENTITY % when                        'IGNORE' >
+<!ENTITY % timeline                    'IGNORE' >
+<!ENTITY % join                        'IGNORE' >
+<!ENTITY % joinGrp                     'IGNORE' >
+<!ENTITY % alt                         'IGNORE' >
+<!ENTITY % altGrp                      'IGNORE' >
+ 
+<!-- Chapter 15:  Simple Analytic Mechanisms **************** -->
+<!-- File:  TEIANA2.ENT -->
+<!-- File:  TEIANA2.DTD -->
+<!ENTITY % span                        'IGNORE' > <!-- ? -->
+<!ENTITY % spanGrp                     'IGNORE' >
+<!ENTITY % interp       'INCLUDE' >
+<!ENTITY % interpGrp    'INCLUDE' >
+<!ENTITY % s            'INCLUDE' >
+<!ENTITY % cl                          'IGNORE' >
+<!ENTITY % phr                         'IGNORE' >
+<!ENTITY % w                           'IGNORE' >
+<!ENTITY % m                           'IGNORE' >
+<!ENTITY % c                           'IGNORE' >
+ 
+<!-- Chapter 16:  Feature Structures * (excluded) *********** -->
+<!-- Chapter 17:  Certainty and Responsibility * (excluded) * -->
+<!-- Chapter 18:  Transcription of Primary Sources * (excl) * -->
+<!-- Chapter 19:  Critical Apparatus * (excluded) *********** -->
+<!-- Chapter 20:  Names and Dates * (excluded) ************** -->
+<!-- Chapter 21:  Graphs, Networks, and Trees * (excluded) ** -->
+ 
+<!-- Chapter 22:  Tables, Formulae, and Graphics ************ -->
+<!-- File:  TEIFIG2.ENT -->
+<!-- ENTITY % formulaNotations 'CDATA'                             -->
+<!-- ENTITY % formulaContent 'CDATA'                               -->
+ 
+<!-- File:  TEIFIG2.DTD -->
+<!ENTITY % table        'INCLUDE' >
+<!ENTITY % row          'INCLUDE' >
+<!ENTITY % cell         'INCLUDE' >
+<!ENTITY % formula      'INCLUDE' >
+<!ENTITY % figure       'INCLUDE' >
+<!ENTITY % figDesc      'INCLUDE' >
+ 
+<!-- Chapter 23:  Language Corpora * (excluded) ************* -->
+ 
+<!-- Chapter 27:  Tag Set Documentation ********************* -->
+<!-- These tags are not used, but several tags taken from     -->
+<!-- or inspired by this tag set are included as an extension -->
+<!-- to help make teilite usable for technical documentation. -->
+ 
+<!-- File:  TEITSD2.DTD -->
+<!ENTITY % eg           'INCLUDE' >
+<!ENTITY % code         'INCLUDE' >
+<!ENTITY % ident        'INCLUDE' >
+<!ENTITY % kw           'INCLUDE' >
+
+<!-- and, as sugar for <ident type=gi> ... -->
+<!ENTITY % gi           'INCLUDE' > 
+ 
+<!-- ******************************************************** -->
+<!-- End of skeleton file for derived DTDs ****************** -->
+<!-- ******************************************************** -->
+
+<!-- Entity sets and Notations for TEI Lite -->
+
+<!-- Files with names like iso-foo contain the XML Unicode declarations
+     Files with names like isofoo  contain the ISO SGML declarations
+   We rely on the value of %TEI.XML to choose the right one...
+-->
+
+<![%TEI.XML;[
+<!ENTITY % ISOlat1 PUBLIC "-//TEI//ENTITIES Unicode values for ISO 8879 Added Latin 1//EN"
+   "iso-lat1.ent">
+<!ENTITY % ISOlat2 PUBLIC "-//TEI//ENTITIES Unicode values for ISO 8879 Added Latin 2//EN"
+   "iso-lat2.ent">
+<!ENTITY % ISOnum  PUBLIC "-//TEI//ENTITIES Unicode values for ISO 8879 Numeric and Special Graphic//EN"
+   "iso-num.ent">
+<!ENTITY % ISOpub  PUBLIC "-//TEI//ENTITIES Unicode values for ISO 8879 Publishing//EN"
+   "iso-pub.ent">
+]]>
+
+<!ENTITY % ISOlat1 PUBLIC "ISO 8879-1986//ENTITIES Added Latin 1//EN"
+   "isolat1.ent">
+
+<!ENTITY % ISOlat2 PUBLIC "ISO 8879-1986//ENTITIES Added Latin 2//EN"
+   "isolat2.ent">
+
+<!ENTITY % ISOnum   PUBLIC   "ISO 8879-1986//ENTITIES Numeric and Special Graphic//EN"
+   "isonum.ent">
+
+<!ENTITY % ISOpub  PUBLIC "ISO 8879-1986//ENTITIES Publishing//EN"
+   "isopub.ent">
+
+
+%ISOlat1; 
+%ISOlat2; 
+%ISOnum;
+%ISOpub; 
+
+
+<!NOTATION cgm PUBLIC
+    'ISO 8632:1987//NOTATION Computer Graphics Metafile//EN'>
+<!NOTATION png PUBLIC
+  '-//TEI//NOTATION IETF RFC2083 Portable Network Graphics//EN' >
+<!NOTATION jpeg PUBLIC
+  'ISO DIS 10918//NOTATION JPEG Graphics Format//EN' >
+<!NOTATION tiff PUBLIC
+   '-//TEI//NOTATION Aldus Tagged Image File Format//EN'>
+<!NOTATION gif PUBLIC
+  '-//TEI//NOTATION Compuserve Graphics Interchange Format//EN' >
+<!NOTATION sgml PUBLIC
+  'ISO 8879:1986//NOTATION Standard Generalized Markup Language//EN' >
+<!NOTATION wsd  PUBLIC
+  '-//TEI P3-1994//NOTATION Writing System Declaration//EN' >
+
+
+<!--
+<!ENTITY % usrmods 
+  PUBLIC   "-//TEI U5-1995//DTD TEI Lite 1.0 Extensions//EN">
+%usrmods
+-->
+<!-- end of TEI Lite DTD -->
