@@ -2,10 +2,10 @@ SGMLDECL "teisgml.dec"
 
 
 PUBLIC "-//TEI//DTD TEI Lite 1.6//EN"
-       "teilite.dtd"
+       "teilitejh.dtd"
 
 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN"
-       "teilite.dtd"
+       "teilitejh.dtd"
 
 
 PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"
