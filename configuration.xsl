@@ -47,7 +47,6 @@
             <useCommonPrintStylesheets>true</useCommonPrintStylesheets>     <!-- Use the build-in stylesheets (for print media) -->
             <inlineStylesheet>true</inlineStylesheet>                       <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
             <numberTocEntries>true</numberTocEntries>                       <!-- Provide numbers with TOC entries. -->
-            <showPageNumbers>true</showPageNumbers>                         <!-- Show page numbers in the right margin -->
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
             <includeImages>true</includeImages>                             <!-- Include images in the generated output. -->
@@ -61,6 +60,10 @@
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
             <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
+
+            <pageNumbers.show>true</pageNumbers.show>                       <!-- Show page numbers in the right margin -->
+            <pageNumbers.before>[</pageNumbers.before>                      <!-- String to place before the page number in the right margin -->
+            <pageNumbers.after>]</pageNumbers.after>                        <!-- String to place after the page number in the right margin -->
 
             <facsimile.enable>false</facsimile.enable>                      <!-- Output section with and links to facsimile images if required information is present. -->
             <facsimile.wrapper.enable>true</facsimile.wrapper.enable>       <!-- Generate HTML wrapper files for the images, and link to these. -->
@@ -105,10 +108,12 @@
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
             </output>
             <output format="epub">
-                <showPageNumbers>false</showPageNumbers>
                 <useMouseOverPopups>false</useMouseOverPopups>
                 <outputExternalLinks>always</outputExternalLinks>
                 <outputExternalLinksTable>true</outputExternalLinksTable>
+
+                <pageNumbers.show>false</pageNumbers.show>
+
                 <math.mathJax.format>MML</math.mathJax.format>
             </output>
         </tei2html.config>

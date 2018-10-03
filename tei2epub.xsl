@@ -31,6 +31,7 @@
     <xsl:include href="titlepage.xsl"/>
     <xsl:include href="block.xsl"/>
     <xsl:include href="notes.xsl"/>
+    <xsl:include href="numbers.xsl"/>
     <xsl:include href="drama.xsl"/>
     <xsl:include href="contents.xsl"/>
     <xsl:include href="index.xsl"/>

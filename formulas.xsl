@@ -169,6 +169,13 @@
 
     <xd:doc>
         <xd:short>Convert very simple Markdown to HTML.</xd:short>
+        <xd:detail>
+            <p>Simple Markdown is used to indicate italics and bold where limited styling information
+            is desirable in attribute values. This is mainly on the <code>@n</code> attribute on
+            page-breaks, divisions, list items, formulas, etc. To indicate <i>italic</i>, the text
+            is placed between underscores, <code>_like this_</code>, and to indicate <b>bold</b>, double
+            underscores are used <code>__like this__</code>.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:function name="f:convertMarkdown" as="node()*">

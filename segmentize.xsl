@@ -105,6 +105,15 @@
 
     <xsl:template mode="segments" match="teiHeader"/>
 
+
+    <xd:doc>
+        <xd:short>Ignore the TeX Formulas.</xd:short>
+        <xd:detail>Ignore the TeX Formulas, we cannot deal with that notation.</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="formula[@notation='TeX']"/>
+
+
     <xd:doc>
         <xd:short>Ignore notes.</xd:short>
         <xd:detail>Ignore notes. Notes will be lifted from their context, and handled separately.</xd:detail>

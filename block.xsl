@@ -86,7 +86,7 @@
     <xsl:template name="pb">
         <xsl:variable name="context" select="." as="element(pb)"/>
         <xsl:choose>
-            <xsl:when test="@n and f:isSet('showPageNumbers')">
+            <xsl:when test="@n and f:isSet('pageNumbers.show')">
                 <xsl:call-template name="pb-margin"/>
             </xsl:when>
             <xsl:otherwise>
@@ -105,11 +105,11 @@
     <xsl:template name="pb-margin">
         <xsl:variable name="context" select="." as="element(pb)"/>
         <span class="pagenum">
-            <xsl:text>[</xsl:text>
+            <xsl:value-of select="f:getSetting('pageNumbers.before')"/>
             <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
-                <xsl:value-of select="@n"/>
+                <xsl:copy-of select="f:convertMarkdown(@n)"/>
             </a>
-            <xsl:text>]</xsl:text>
+            <xsl:value-of select="f:getSetting('pageNumbers.after')"/>
             <xsl:if test="f:isSet('facsimile.enable') and ./@facs">
                 <xsl:call-template name="pb-facsimile-link"/>
             </xsl:if>

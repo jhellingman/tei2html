@@ -68,24 +68,21 @@
     </xd:doc>
 
     <xsl:template match="index[@level1]" mode="collectEntries">
-        <tmp:entry href="{f:generate-href(.)}">
-            <xsl:attribute name="level1"><xsl:value-of select="@level1"/></xsl:attribute>
-            <xsl:attribute name="level2"><xsl:value-of select="@level2"/></xsl:attribute>
-            <xsl:attribute name="level3"><xsl:value-of select="@level3"/></xsl:attribute>
-            <xsl:attribute name="level4"><xsl:value-of select="@level4"/></xsl:attribute>
-            <xsl:attribute name="index"><xsl:value-of select="@index"/></xsl:attribute>
-            <xsl:attribute name="page">
-                <xsl:choose>
-                    <xsl:when test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
-                        <xsl:value-of select="preceding::pb[1]/@n"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>###</xsl:text>
-                        <xsl:copy-of select="f:logWarning('No valid page number found preceding index entry ({1}).', (@level1))"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-        </tmp:entry>
+        <xsl:variable name="n" select="preceding::pb[1]/@n"/>
+        <xsl:if test="not($n) or $n = ''">
+            <xsl:copy-of select="f:logWarning('No page number found preceding index entry ({1}).', (@level1))"/>
+        </xsl:if>
+
+        <tmp:entry 
+            href="{f:generate-href(.)}"
+            level1="{@level1}" 
+            level2="{@level2}" 
+            level3="{@level3}" 
+            level4="{@level4}"
+            index="{@index}"
+            label="{if ($n and $n != '') then $n else '###'}"
+            number="{if ($n and $n != '') then f:headAsNumber($n) else 0}"
+        />
     </xsl:template>
 
 
@@ -120,9 +117,9 @@
         <!-- Group to suppress duplicate page numbers -->
         <xsl:variable name="pages">
             <tmp:pages>
-                <xsl:for-each-group select="current-group()" group-by="@page">
-                    <xsl:copy-of select="f:logDebug('Index page: {2} {1}.', (@href, @page))"/>
-                    <tmp:page href="{@href}" page="{@page}"/>
+                <xsl:for-each-group select="current-group()" group-by="@label">
+                    <xsl:copy-of select="f:logDebug('Index page: {1} {2} ({3}).', (@href, @label, @number))"/>
+                    <tmp:page href="{@href}" label="{@label}" number="{@number}"/>
                 </xsl:for-each-group>
             </tmp:pages>
         </xsl:variable>
@@ -130,27 +127,29 @@
         <!-- Group to consolidate consecutive page numbers, i.e., 1, 2, 3, 4 becomes 1-4 -->
         <xsl:variable name="pages">
             <tmp:pages>
-                <xsl:for-each-group select="$pages//tmp:page" group-adjacent="@page = preceding::tmp:page[1]/@page + 1 or @page = following::tmp:page[1]/@page - 1">
+                <xsl:for-each-group select="$pages//tmp:page" group-adjacent="@number = preceding::tmp:page[1]/@number + 1 or @number = following::tmp:page[1]/@number - 1">
                     <xsl:choose>
                         <xsl:when test="current-grouping-key()">
                             <xsl:variable name="range">
                                 <tmp:pages>
                                     <xsl:for-each select="current-group()">
-                                        <tmp:page href="{@href}" page="{@page}"/>
+                                        <tmp:page href="{@href}" label="{@label}" number="{@number}"/>
                                     </xsl:for-each>
                                 </tmp:pages>
                             </xsl:variable>
-                            <xsl:copy-of select="f:logDebug('Page range: {1}-{2}.', ($range//tmp:page[1]/@page, $range//tmp:page[last()]/@page))"/>
+                            <xsl:copy-of select="f:logDebug('Page range: {1}-{2}.', ($range//tmp:page[1]/@label, $range//tmp:page[last()]/@label))"/>
                             <tmp:range
-                                firstPage="{$range//tmp:page[1]/@page}"
+                                firstNumber="{$range//tmp:page[1]/@number}"
+                                firstLabel="{$range//tmp:page[1]/@label}"
                                 firstHref="{$range//tmp:page[1]/@href}"
-                                lastPage="{$range//tmp:page[last()]/@page}"
+                                lastNumber="{$range//tmp:page[last()]/@number}"
+                                lastLabel="{$range//tmp:page[last()]/@label}"
                                 lastHref="{$range//tmp:page[last()]/@href}"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="current-group()">
-                                <xsl:copy-of select="f:logDebug('Single page: {1}.', (@page))"/>
-                                <tmp:page href="{@href}" page="{@page}"/>
+                                <xsl:copy-of select="f:logDebug('Single page: {1}.', (@label))"/>
+                                <tmp:page href="{@href}" label="{@label}" number="{@number}"/>
                             </xsl:for-each>
                         </xsl:otherwise>
                   </xsl:choose>
@@ -164,25 +163,47 @@
                 <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
                 <xsl:otherwise>, </xsl:otherwise>
             </xsl:choose>
-            <xsl:copy-of select="f:logDebug('Output page: {1} : {2}.', (@page, @href))"/>
+            <xsl:copy-of select="f:logDebug('Output page: {1} : {2}.', (@label, @href))"/>
             <xsl:apply-templates select="." mode="index"/>
         </xsl:for-each>
     </xsl:template>
 
 
     <xsl:template match="tmp:page" mode="index">
-        <a href="{@href}"><xsl:value-of select="@page"/></a>
+        <a href="{@href}"><xsl:copy-of select="f:convertMarkdown(@label)"/></a>
     </xsl:template>
 
 
-    <xsl:template match="tmp:range[@firstPage = @lastPage - 1]" mode="index">
-        <a href="{@firstHref}"><xsl:value-of select="@firstPage"/></a>, <a href="{@lastHref}"><xsl:value-of select="@lastPage"/></a>
+    <xsl:template match="tmp:range[@firstNumber = @lastNumber - 1]" mode="index">
+        <a href="{@firstHref}"><xsl:copy-of select="f:convertMarkdown(@firstLabel)"/></a>, <a href="{@lastHref}"><xsl:copy-of select="f:convertMarkdown(@lastLabel)"/></a>
     </xsl:template>
 
 
     <xsl:template match="tmp:range" mode="index">
-        <a href="{@firstHref}"><xsl:value-of select="@firstPage"/></a>&ndash;<a href="{@lastHref}"><xsl:value-of select="@lastPage"/></a>
+        <a href="{@firstHref}"><xsl:copy-of select="f:convertMarkdown(@firstLabel)"/></a>&ndash;<a href="{@lastHref}"><xsl:copy-of select="f:convertMarkdown(@lastLabel)"/></a>
     </xsl:template>
+
+
+    <xsl:function name="f:headAsNumber" as="xs:integer">
+        <xsl:param name="n" as="xs:string"/>
+
+        <xsl:variable name="i">
+            <!-- Since we tie to the start, this regular expression will only match once. -->
+            <xsl:analyze-string select="$n" flags="x" regex="(^[0-9]+) | (^M{{0,4}}(CM|CD|D?C{{0,3}})(XC|XL|L?X{{0,3}})(IX|IV|V?I{{0,3}}))">
+                <xsl:matching-substring>
+                    <xsl:choose>
+                        <xsl:when test="regex-group(1)">
+                            <xsl:sequence select="regex-group(1)"/>
+                        </xsl:when>
+                        <xsl:when test="regex-group(2)">
+                            <xsl:sequence select="f:from-roman(regex-group(2))"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+        <xsl:value-of select="$i"/>
+    </xsl:function>
 
 
     <xd:doc>

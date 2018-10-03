@@ -1050,7 +1050,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd32e553 {
+.xd33e555 {
 text-align:right;
 }
 
@@ -1070,7 +1070,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd32e964 {
+.xd33e966 {
 background-color:green;
 }
 
@@ -1086,47 +1086,47 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd32e965 {
+.xd33e967 {
 background-color:white;
 }
 
-.xd32e107 {
+.xd33e107 {
 font-style:italic;
 }
 
-.xd32e116 {
+.xd33e116 {
 background-color:yellow;
 }
 
-.xd32e149 {
+.xd33e149 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd32e162 {
+.xd33e162 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd32e385 {
+.xd33e387 {
 text-align:left;
 }
 
-.xd32e388 {
+.xd33e390 {
 text-align:right;
 }
 
-.xd32e390 {
+.xd33e392 {
 text-align:center;
 }
 
 
-.xd32e392 {
+.xd33e394 {
     background: url(images/initial-A.gif) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd32e392init {
+.xd33e394init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1140,11 +1140,11 @@ text-align:center;
 }
 
         
-.xd32e400 {
+.xd33e402 {
 text-align:justify;
 }
 
-.xd32e415 {
+.xd33e417 {
 text-align:center;
 }
 
@@ -1152,7 +1152,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd32e519 {
+.xd33e521 {
 text-align:right;
 }
 
@@ -1160,11 +1160,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd32e696 {
+.xd33e698 {
 vertical-align:middle; width:2px;
 }
 
-.xd32e697 {
+.xd33e699 {
 vertical-align:middle;
 }
 
@@ -1172,11 +1172,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd32e708 {
+.xd33e710 {
 width:25%;
 }
 
-.xd32e710 {
+.xd33e712 {
 width:75%;
 }
 
@@ -1196,11 +1196,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd32e826 {
+.xd33e828 {
 color:red;
 }
 
-.xd32e846 {
+.xd33e848 {
 color:yellow; background-color:black;
 }
 
@@ -1212,23 +1212,23 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd32e995 {
+.xd33e997 {
 background-color:yellow;
 }
 
-.xd32e1013 {
+.xd33e1015 {
 background-color:blue;
 }
 
-.xd32e1022 {
+.xd33e1024 {
 background-color:orange;
 }
 
-.xd32e1032 {
+.xd33e1034 {
 background-color:red;
 }
 
-.xd32e1092 {
+.xd33e1094 {
 ditto-mark:+;
 }
 
@@ -1260,7 +1260,7 @@ width:480px;
 width:480px;
 }
 
-.xd32e1207width {
+.xd33e1209width {
 width:480px;
 }
 
@@ -1268,47 +1268,47 @@ width:480px;
 width:128px;
 }
 
-.xd32e1226 {
+.xd33e1228 {
 font-style:italic;
 }
 
-.xd32e1250 {
+.xd33e1252 {
 list-style-type:disc;
 }
 
-.xd32e1266 {
+.xd33e1268 {
 list-style-type:upper-roman;
 }
 
-.xd32e1275 {
+.xd33e1277 {
 list-style-type:lower-roman;
 }
 
-.xd32e1288 {
+.xd33e1290 {
 list-style-type:disc;
 }
 
-.xd32e1300 {
+.xd33e1302 {
 list-style-type:disc;
 }
 
-.xd32e1369 {
+.xd33e1371 {
 text-align:center;
 }
 
-.xd32e1374 {
+.xd33e1376 {
 text-indent:1em;
 }
 
-.xd32e1380 {
+.xd33e1382 {
 text-indent:2em;
 }
 
-.xd32e1384 {
+.xd33e1386 {
 text-indent:3em;
 }
 
-.xd32e1388 {
+.xd33e1390 {
 text-indent:10em;
 }
 
@@ -1330,12 +1330,12 @@ display:none;
 @media handheld {
 
 
-.xd32e392 {
+.xd33e394 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd32e392init {
+.xd33e394init {
     float: none;
     width: auto;
     height: auto;
@@ -1350,6 +1350,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd32e1561 {
+.xd33e1563 {
 color:red
 }
