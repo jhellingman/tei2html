@@ -111,7 +111,20 @@
         <xd:detail>Ignore the TeX Formulas, we cannot deal with that notation.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="segments" match="formula[@notation='TeX']"/>
+    <xsl:template mode="segments" match="formula[@notation='TeX']">
+        <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
+        <xsl:variable name="page" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
+        </xsl:variable>
+
+        <s:segment sourceElement="{name()}" sourcePage="{$page}">
+            <xsl:copy-of select="@*"/>
+            <xsl:if test="not(@lang)">
+                <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
+            </xsl:if>
+            <xsl:text>[TeX-formula]</xsl:text>
+        </s:segment>
+    </xsl:template>
 
 
     <xd:doc>
