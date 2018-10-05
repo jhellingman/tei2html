@@ -264,6 +264,23 @@ ul {
     list-style-type: none;
 }
 
+.splitlisttable {
+    margin-left: 0;
+}
+
+li.numberedItem {
+    text-indent: -3em;
+}
+
+li span.itemNumber {
+    float: left;
+    position: relative;
+    left: -3.5em;
+    width: 3em;
+    display: inline-block;
+    text-align: right;
+}
+
 .advertisment {
     background-color: #FFFEE0;
     border: black 1px dotted;

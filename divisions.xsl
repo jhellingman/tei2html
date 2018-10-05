@@ -53,6 +53,13 @@
         </div>
     </xsl:template>
 
+    
+    <xsl:template name="pgComment">
+        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:isSet('includePGComments')">
+            <xsl:comment><xsl:value-of select="f:message('msgPGComment')"/></xsl:comment>
+        </xsl:if>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Divisions and Headings -->
@@ -71,6 +78,7 @@
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="generate-label"/>
+            <xsl:call-template name="pgComment"/>
 
             <xsl:apply-templates/>
 
@@ -140,6 +148,7 @@
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="generate-label"/>
+                <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="handleDiv"/>
 
                 <xsl:if test="not(f:has-rend-value(@rend, 'align-with') or f:has-rend-value(@rend, 'align-with-document'))">
@@ -178,6 +187,7 @@
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
+                <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="generate-label">
                     <xsl:with-param name="headingLevel" select="'h2'"/>
                 </xsl:call-template>
@@ -197,6 +207,7 @@
             <div class="{name()}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
+                <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="handleDiv"/>
             </div>
         </xsl:if>

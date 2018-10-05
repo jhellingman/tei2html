@@ -40,13 +40,14 @@
     <xsl:function name="f:generate-stable-id" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
-        <xsl:variable name="first" select="$node/ancestor-or-self::*[@id][1]"/>
-        <xsl:variable name="baseid" select="if ($first) then $first/@id else 'ROOT'"/>
-        <xsl:variable name="name" select="local-name($node)"/>
-        <xsl:variable name="count" select="count($first//*[local-name() = $name] except $node/following::*[local-name() = $name])"/>
+        <xsl:variable name="base" select="$node/ancestor-or-self::*[@id][1]"/>
+        <xsl:variable name="base" select="if ($base) then $base else ($node/ancestor-or-self::*)[1]"/>
+        <xsl:variable name="baseid" select="if ($base/@id) then $base/@id else ''" as="xs:string"/>
+        <xsl:variable name="name" select="local-name($node)" as="xs:string"/>
+        <xsl:variable name="count" select="count($base//*[local-name() = $name] except $node/following::*[local-name() = $name])"/>
         <xsl:variable name="id" select="concat($baseid, '_', $name, '_', $count)"/>
 
-        <xsl:copy-of select="f:logInfo('Generated ID: {1}.', ($id))"/>
+        <xsl:copy-of select="f:logInfo('Generated ID: {1} from {2}-th [{3}] child of [{4}].', ($id, string($count), $name, local-name($base)))"/>
 
         <xsl:value-of select="$id"/>
     </xsl:function>

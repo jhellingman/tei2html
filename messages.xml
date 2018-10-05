@@ -468,6 +468,8 @@
 
         <msg:message name="msgNotCopyrightedUS">This book is not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this book.</msg:message>
 
+        <msg:message name="msgPGComment">This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.</msg:message>
+
         <msg:message name="msgAndThePgdpTeam">and the Online Distributed Proofreading Team at https://www.pgdp.net.</msg:message>
 
         <msg:message name="msgPGHeader">

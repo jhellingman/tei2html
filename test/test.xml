@@ -941,8 +941,8 @@
 <list rend="list-style-type(lower-roman)" type="ordered" lang="nl">
     <item>Een</item>
     <item>Twee</item>
-    <item n="48">Drie</item>
-    <item>Vier</item>
+    <item n="48">Achtenveertig</item>
+    <item>Negenenveertig</item>
 </list>
 
 <p>A list without bullets or numbers:</p>

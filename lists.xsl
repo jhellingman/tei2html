@@ -51,10 +51,7 @@
 
     <xsl:function name="f:determine-list-type" as="xs:string">
         <xsl:param name="type" as="xs:string?"/>
-        <xsl:choose>
-            <xsl:when test="$type = 'ordered'">ol</xsl:when>
-            <xsl:otherwise>ul</xsl:otherwise>
-        </xsl:choose>
+        <xsl:value-of select="if ($type = 'ordered') then 'ol' else 'ul'"/>
     </xsl:function>
 
 
@@ -262,20 +259,38 @@
 
     <xd:doc>
         <xd:short>Format the contents of a list item.</xd:short>
-        <xd:detail>Format the contents of a list item.</xd:detail>
+        <xd:detail>Format the contents of a list item. Since the item numbering abilities of HTML are
+        limited, we supply our own item number mechanism, using a span, and
+        only when the number is supplied on the item or in an <code>&lt;ab type="itemNum"&gt;</code> element.</xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-item">
         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-        <xsl:copy-of select="f:set-class-attribute(.)"/>
-        <xsl:if test="@n and ($outputformat != 'epub')">
-            <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
-            <xsl:attribute name="value">
-                <xsl:value-of select="@n"/>
-            </xsl:attribute>
-        </xsl:if>
+        <xsl:copy-of select="f:set-class-attribute-with(., if (not(..[@type = 'ordered']) and (@n or ./ab[@type='itemNum'][position() = 1])) then 'numberedItem' else '')"/>
+
+        <xsl:choose>
+            <!-- For ordered lists, the numbers are supplied by the browser -->
+            <xsl:when test="..[@type = 'ordered']">
+                <xsl:if test="@n and ($outputformat != 'epub')">
+                    <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="@n"/>
+                    </xsl:attribute>
+                </xsl:if>
+            </xsl:when>
+            <!-- For unordered lists, we (optionally) supply the numbers -->
+            <xsl:when test="./ab[@type='itemNum'][position() = 1]">
+                <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
+            </xsl:when>
+            <xsl:when test="@n">
+                <span class="itemNumber"><xsl:copy-of select="f:convertMarkdown(@n)"/></span>
+            </xsl:when>
+        </xsl:choose>
         <xsl:apply-templates/>
     </xsl:template>
+
+
+    <xsl:template match="ab[@type='itemNum'][position() = 1]"/>
 
 
 </xsl:stylesheet>

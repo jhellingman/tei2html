@@ -295,7 +295,7 @@
             <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             <span class="tocPageNum">
                 <a class="pageref" href="{f:generate-href(.)}">
-                    <xsl:value-of select="preceding::pb[1]/@n"/>
+                    <xsl:copy-of select="f:convertMarkdown(preceding::pb[1]/@n)"/>
                 </a>
             </span>
         </xsl:if>
@@ -451,7 +451,7 @@
     <xsl:template name="insert-toc-page-number-table">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <a class="pageref" href="{f:generate-href(.)}">
-                <xsl:value-of select="preceding::pb[1]/@n"/>
+                <xsl:copy-of select="f:convertMarkdown(preceding::pb[1]/@n)"/>
             </a>
         </xsl:if>
     </xsl:template>

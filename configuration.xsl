@@ -49,6 +49,7 @@
             <numberTocEntries>true</numberTocEntries>                       <!-- Provide numbers with TOC entries. -->
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
+            <includePGComments>true</includePGComments>                    <!-- Include references to Project Gutenberg in comments. -->
             <includeImages>true</includeImages>                             <!-- Include images in the generated output. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->

@@ -402,6 +402,7 @@
         </xsl:if>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Generate the contents of the list of corrections.</xd:short>
         <xd:detail>
@@ -476,7 +477,7 @@
                     <xsl:if test="position() != 1">
                         <xsl:text>, </xsl:text>
                     </xsl:if>
-                    <a class="pageref" href="{@href}"><xsl:value-of select="@page"/></a>
+                    <a class="pageref" href="{@href}"><xsl:copy-of select="f:convertMarkdown(@page)"/></a>
                 </xsl:for-each>
             </xsl:otherwise>
         </xsl:choose>
@@ -715,7 +716,7 @@
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
                                 <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
-                                    <xsl:value-of select="f:find-page-number(.)"/>
+                                    <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                                 </a>
                             </xsl:for-each>
                         </td>
@@ -847,7 +848,7 @@
                                         <xsl:attribute name="href" select="f:generate-href(.)"/>
                                     </xsl:otherwise>
                                 </xsl:choose>
-                                <xsl:value-of select="f:find-page-number(.)"/>
+                                <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                             </a>
                         </xsl:for-each>
                     </td>
