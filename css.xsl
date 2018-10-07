@@ -107,8 +107,9 @@
             </xsl:choose>
         </xsl:variable>
 
-        <!-- Standard CSS stylesheet. -->
+        <!-- Standard CSS stylesheets. -->
         <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
+        <xsl:value-of select="f:css-stylesheet('style/list.css')"/>
 
         <!-- Stylesheets for various types of elements, only included when needed. -->
         <xsl:if test="//titlePage">

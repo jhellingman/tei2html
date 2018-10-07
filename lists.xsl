@@ -135,7 +135,7 @@
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
         <xsl:variable name="node" select="."/>
 
-        <table class="splitlisttable">
+        <table class="splitListTable">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) idiv $rows">
@@ -162,7 +162,7 @@
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
         <xsl:variable name="node" select="."/>
 
-        <table class="splitlisttable">
+        <table class="splitListTable">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) mod $columns">
@@ -205,11 +205,13 @@
     <xd:doc>
         <xd:short>Format a group of items.</xd:short>
         <xd:detail>Format a group of list items. Sometimes, lists are encountered with braces that group items. The (non-standard)
-        element <code>itemGroup</code> provides an easy shortcut to encode them and achieve the graphic result.
-        See also the stylesheet for <code>castGroup</code> in drama.xsl.</xd:detail>
+        element <code>itemGroup</code> provides an easy shortcut to encode them and achieve the graphic result. Note that this
+        is different from a nested list, in that item groups remain at the same level. An alternative approach would be using an
+        embedded table or nested list.
+        See also the stylesheet for <code>castGroup</code> in <code>drama.xsl</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="itemGroup">
+    <xsl:template match="itemGroup | list[@type='itemGroup']">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup')"/>
@@ -234,7 +236,9 @@
                                 </td>
                             </xsl:if>
                         </xsl:if>
-                        <td><xsl:apply-templates select="." mode="itemGroupTable"/></td>
+                        <td>
+                            <xsl:apply-templates select="." mode="itemGroupTable"/>
+                        </td>
                         <xsl:if test="position() = 1">
                             <xsl:if test="$contentAfter or $this/@rend='braceAfter'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
@@ -253,7 +257,7 @@
 
 
     <xsl:template match="item" mode="itemGroupTable">
-        <xsl:apply-templates/>
+        <xsl:call-template name="handle-item"/>
     </xsl:template>
 
 

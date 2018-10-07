@@ -260,48 +260,12 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     text-decoration: none;
 }
 
-ul {
-    list-style-type: none;
-}
-
-.splitlisttable {
-    margin-left: 0;
-}
-
-li.numberedItem {
-    text-indent: -3em;
-}
-
-li span.itemNumber {
-    float: left;
-    position: relative;
-    left: -3.5em;
-    width: 3em;
-    display: inline-block;
-    text-align: right;
-}
-
 .advertisment {
     background-color: #FFFEE0;
     border: black 1px dotted;
     color: #000;
     margin: 2em 5%;
     padding: 1em;
-}
-
-.itemGroupTable {
-    border-collapse: collapse;
-    margin-left: 0;
-}
-
-.itemGroupTable td {
-    padding: 0;
-    margin: 0;
-    vertical-align: middle;
-}
-
-.itemGroupBrace {
-    padding: 0 0.5em !important;
 }
 
 /***** Footnotes and other notes *****/
