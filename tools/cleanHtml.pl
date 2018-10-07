@@ -10,5 +10,7 @@ while (<>) {
 
     $a =~ s/<br\/>/<br>/g;
 
+    $a =~ s/<style><\/style>//g;
+
     print $a;
 }

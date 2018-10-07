@@ -5,7 +5,7 @@
     <!ENTITY crlf       "&#x0D;&#x0A;">
 
 ]>
-<xsl:stylesheet
+<xsl:stylesheet version="3.0"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -13,7 +13,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
     exclude-result-prefixes="f xd xs"
-    version="2.0">
+    >
 
     <xsl:variable name="outputformat" select="markdown"/>
 
@@ -49,7 +49,7 @@
     </xsl:template>
 
 
-    <xsl:template match="TEI.2 | TEI">
+    <xsl:template match="TEI.2 | TEI" expand-text="yes">
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
@@ -58,61 +58,56 @@
             <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
             <xsl:if test="f:isValid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
-                <xsl:text>| PG Ebook Number | </xsl:text>[<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>](https://www.gutenberg.org/ebooks/<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>)<xsl:text> |&lf;</xsl:text>
+                <xsl:text>| PG Ebook Number | [{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}](https://www.gutenberg.org/ebooks/{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}) |&lf;</xsl:text>
             </xsl:if>
     </xsl:template>
 
-    <xsl:template match="title">
-        <xsl:text>| Title | </xsl:text><xsl:value-of select="normalize-space(.)"/><xsl:text> |&lf;</xsl:text>
+    <xsl:template match="title" expand-text="yes">
+        <xsl:text>| Title | {normalize-space(.)} |&lf;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="author">
-        <xsl:text>| Author | </xsl:text><xsl:value-of select="normalize-space(.)"/><xsl:text> |&lf;</xsl:text>
+    <xsl:template match="author" expand-text="yes">
+        <xsl:text>| Author | {normalize-space(.)} |&lf;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="publicationStmt">
-        <xsl:text>| Publisher | </xsl:text><xsl:value-of select="publisher"/>
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="pubPlace"/>
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="date"/><xsl:text> |&lf;</xsl:text>
-        <xsl:text>| Publication date | </xsl:text><xsl:value-of select="date"/><xsl:text> |&lf;</xsl:text>
+    <xsl:template match="publicationStmt" expand-text="yes">
+        <xsl:text>| Publisher | {publisher}, {pubPlace}, {date} |&lf;</xsl:text>
+        <xsl:text>| Publication date | {date} |&lf;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="availability">
+    <xsl:template match="availability" expand-text="yes">
         <xsl:if test="f:isValid(.)">
             <xsl:variable name="availability"><xsl:apply-templates mode="text"/></xsl:variable>
-            <xsl:text>| Availability | </xsl:text><xsl:value-of select="normalize-space(string($availability))"/><xsl:text> |&lf;</xsl:text>
+            <xsl:text>| Availability | {normalize-space(string($availability))} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="item" mode="keywords">
+    <xsl:template match="item" mode="keywords" expand-text="yes">
         <!-- Filter out empty subjects and our template default placeholder -->
         <xsl:if test="f:isValid(.)">
-            <xsl:text>| Keyword | </xsl:text><xsl:value-of select="normalize-space(.)"/><xsl:text> |&lf;</xsl:text>
+            <xsl:text>| Keyword | {normalize-space(.)} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="name" mode="contributors">
+    <xsl:template match="name" mode="contributors" expand-text="yes">
         <!-- Filter out empty contributors and our template default placeholder -->
         <xsl:if test="f:isValid(.)">
-            <xsl:text>| Contributor | </xsl:text><xsl:value-of select="normalize-space(.)"/><xsl:text> |&lf;</xsl:text>
+            <xsl:text>| Contributor | {normalize-space(.)} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="note" mode="descriptions">
+    <xsl:template match="note" mode="descriptions" expand-text="yes">
         <!-- Filter out empty descriptions and our template default placeholder -->
         <xsl:if test="f:isValid(.)">
             <xsl:variable name="description"><xsl:apply-templates mode="text"/></xsl:variable>
-            <xsl:text>| Description | </xsl:text><xsl:value-of select="normalize-space(string($description))"/><xsl:text> |&lf;</xsl:text>
+            <xsl:text>| Description | {normalize-space(string($description))} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="*"/>
 
-    <xsl:template match="xref" mode="text">
-        <xsl:text>[</xsl:text><xsl:value-of select="."/><xsl:text>]</xsl:text>
-        <xsl:text>(</xsl:text><xsl:value-of select="f:translate-xref-url(@url, 'en')"/><xsl:text>)</xsl:text>
+    <xsl:template match="xref" mode="text" expand-text="yes">
+        <xsl:text>[{.}]({f:translate-xref-url(@url, 'en')})</xsl:text>
     </xsl:template>
 
     <xsl:template match="text()">

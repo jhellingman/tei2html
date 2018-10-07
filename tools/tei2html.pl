@@ -54,7 +54,7 @@ my $noTranscription     = 0;
 my $force               = 0;
 my $debug               = 0;
 my $profile             = 0;
-my $useTidy              = 0;
+my $useTidy             = 0;
 
 GetOptions(
     't' => \$makeText,
@@ -262,6 +262,11 @@ sub makeHtml($) {
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
     if ($useTidy != 0) {
         system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
+    } else {
+        my $tmpFile2 = temporaryFile('html', '.html');
+        system ("perl $toolsdir/cleanHtml.pl $htmlFile > $tmpFile2");
+        unlink($htmlFile);
+        system ("mv $tmpFile2 $htmlFile");
     }
     $debug || unlink($tmpFile);
 }
