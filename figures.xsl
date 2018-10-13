@@ -55,7 +55,7 @@
                 <xsl:copy-of select="f:logWarning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="concat('images/', $node/@id, $defaultformat)"/>
+                <xsl:value-of select="'images/' || $node/@id || $defaultformat"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -314,13 +314,15 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template match="figure">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:if test="f:isSet('includeImages')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
                 <xsl:call-template name="closepar"/>
             </xsl:if>
             <div class="figure">
-                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
 
                 <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
                 <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
@@ -330,7 +332,7 @@ width:<xsl:value-of select="$width"/>;
                     <xsl:if test="f:rend-value(@rend, 'float') = 'left'">floatLeft </xsl:if>
                     <xsl:if test="f:rend-value(@rend, 'float') = 'right'">floatRight </xsl:if>
 
-                    <!-- Add the class that sets the width, if the width is known -->
+                    <!-- Add the class that sets the width, if the width is known. -->
                     <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:variable>
                 <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
@@ -512,16 +514,20 @@ width:<xsl:value-of select="$width"/>;
 
 
     <xsl:template match="figure[figure]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="compositeFigure">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
 
     <xsl:template match="figure[graphic]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
                 <xsl:variable name="widestImage" select="f:widestImage(graphic/@url)"/>
@@ -544,7 +550,7 @@ width:<xsl:value-of select="$width"/>;
 
     <xsl:function name="f:maxWidth" as="xs:string">
         <xsl:param name="widths" as="xs:string*"/>
-        <xsl:value-of select="concat(max(for $width in $widths return translate($width, 'px', '')), 'px')"/>
+        <xsl:value-of select="max(for $width in $widths return translate($width, 'px', '')) || 'px'"/>
      </xsl:function>
 
 

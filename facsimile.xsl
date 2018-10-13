@@ -110,7 +110,7 @@
 <xsl:function name="f:facsimile-wrapper-full-filename" as="xs:string">
     <xsl:param name="node" as="node()"/>
 
-    <xsl:value-of select="concat(f:getSetting('facsimile.path'), '/', f:facsimile-wrapper-filename($node))"/>
+    <xsl:value-of select="f:getSetting('facsimile.path') || '/' || f:facsimile-wrapper-filename($node)"/>
 </xsl:function>
 
 
@@ -139,7 +139,7 @@
 </xd:doc>
 
 <xsl:template name="facsimile-css">
-    <xsl:variable name="facsimile-css-file" select="concat(f:getSetting('facsimile.path'), '/facsimile.css')"/>
+    <xsl:variable name="facsimile-css-file" select="f:getSetting('facsimile.path') || '/facsimile.css'"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
         <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-css-file))"/>
@@ -253,7 +253,7 @@
 <xsl:template name="facsimile-navigation-graphic">
     <div class="facsimile-navigation">
         <xsl:call-template name="pager-navigation-graphic"/>
-        <xsl:variable name="value" select="concat('#', @id)"/>
+        <xsl:variable name="value" select="'#' || @id"/>
         <xsl:call-template name="breadcrumb-navigation">
             <xsl:with-param name="pb" select="//pb[@facs = $value][1]"/>
         </xsl:call-template>

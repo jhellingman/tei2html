@@ -222,7 +222,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="concat($level, $issue/@code)"/>
+        <xsl:value-of select="$level || $issue/@code"/>
     </xsl:function>
 
 
@@ -945,11 +945,11 @@
         <!-- prevent false positives for ellipses. -->
         <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
-        <xsl:variable name="space-after-opener-pattern" select="concat('[\[(', $open-quotation-marks, ']\s+')" as="xs:string"/>
-        <xsl:variable name="space-before-closer-pattern" select="concat('\s+[\])', $close-quotation-marks, ']')" as="xs:string"/>
-        <xsl:variable name="space-after-comma-pattern" select="concat(',[^\s&nbsp;&mdash;&hellip;', $close-quotation-marks, '0-9)\]]')" as="xs:string"/>
-        <xsl:variable name="space-after-period-pattern" select="concat('\.[^\s&nbsp;.,:;&mdash;', $close-quotation-marks, '0-9)\]]')" as="xs:string"/>
-        <xsl:variable name="space-after-punctuation-pattern" select="concat('[:;!?][^\s&mdash;&hellip;!', $close-quotation-marks, ')\]]')" as="xs:string"/>
+        <xsl:variable name="space-after-opener-pattern" select="'[\[(' || $open-quotation-marks || ']\s+'" as="xs:string"/>
+        <xsl:variable name="space-before-closer-pattern" select="'\s+[\])' || $close-quotation-marks || ']'" as="xs:string"/>
+        <xsl:variable name="space-after-comma-pattern" select="',[^\s&nbsp;&mdash;&hellip;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
+        <xsl:variable name="space-after-period-pattern" select="'\.[^\s&nbsp;.,:;&mdash;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
+        <xsl:variable name="space-after-punctuation-pattern" select="'[:;!?][^\s&mdash;&hellip;!' || $close-quotation-marks || ')\]]'" as="xs:string"/>
 
         <!-- Handle common abbreviations -->
         <xsl:variable name="segment" select="f:handle-abbreviations($segment)"/>
@@ -1057,7 +1057,7 @@
 
 
     <!-- Support variables for matching-punctuation tests -->
-    <xsl:variable name="pairs" select="concat(f:getSetting('text.parentheses'), f:getSetting('text.quotes'))"/>
+    <xsl:variable name="pairs" select="f:getSetting('text.parentheses') || f:getSetting('text.quotes')"/>
     <xsl:variable name="pair-sequence" select="f:split-string($pairs)"/>
     <xsl:variable name="opener" select="$pair-sequence[position() mod 2 = 1]"/>
     <xsl:variable name="closer" select="$pair-sequence[position() mod 2 = 0]"/>
@@ -1169,10 +1169,10 @@
         <xsl:sequence select="if (not($head))
                               then $stack
                               else if ($head = $opener)
-                                   then f:unclosed-pairs($tail, concat($head, $stack))
+                                   then f:unclosed-pairs($tail, $head || $stack)
                                    else if ($head = $expect)
                                         then f:unclosed-pairs($tail, substring($stack, 2))
-                                        else concat(concat(concat('Unexpected closing punctuation: ', $head), if ($stack) then ' open: ' else ''), f:reverse($stack))"/>
+                                        else 'Unexpected closing punctuation: ' || $head || (if ($stack) then ' open: ' else '') || f:reverse($stack)"/>
     </xsl:function>
 
 
@@ -1216,14 +1216,14 @@
     <xsl:function name="f:head-chars" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
-        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else concat(substring($string, 1, 37), '...')"/>
+        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else substring($string, 1, 37) || '...'"/>
     </xsl:function>
 
 
     <xsl:function name="f:tail-chars" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
-        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else concat('...', substring($string, string-length($string) - 37, 37))"/>
+        <xsl:sequence select="if (string-length($string) &lt; 40) then $string else '...' || substring($string, string-length($string) - 37, 37)"/>
     </xsl:function>
 
 
@@ -1236,7 +1236,7 @@
 
     <xsl:function name="f:generate-id" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:value-of select="if ($node/@id) then $node/@id else concat('x', generate-id($node))"/>
+        <xsl:value-of select="if ($node/@id) then $node/@id else 'x' || generate-id($node)"/>
     </xsl:function>
 
 </xsl:stylesheet>

@@ -62,10 +62,12 @@
     </xd:doc>
 
     <xsl:template name="handleLg">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(lg)"/>
+
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:variable name="class">
                 <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg or parent::sp">lg<xsl:text> </xsl:text></xsl:if>
@@ -117,8 +119,10 @@
     </xd:doc>
 
     <xsl:template match="l">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
 
             <xsl:variable name="class">
                 <xsl:text>line </xsl:text>
@@ -147,7 +151,9 @@
     </xd:doc>
 
     <xsl:template match="lb[@ed]">
-        <a id="{f:generate-id(.)}"/>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <a id="{f:generate-id(., $id-prefix)}"/>
     </xsl:template>
 
 
@@ -157,7 +163,9 @@
     </xd:doc>
 
     <xsl:template match="lb">
-        <br id="{f:generate-id(.)}"/>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <br id="{f:generate-id(., $id-prefix)}"/>
     </xsl:template>
 
 
@@ -238,8 +246,10 @@
     </xd:doc>
 
     <xsl:template mode="alignedverse" match="l">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'line')"/>
             <xsl:apply-templates select="*|text()"/>
         </xsl:element>
@@ -250,8 +260,10 @@
     <!-- Drama -->
 
     <xsl:template match="sp">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'sp')"/>
             <xsl:apply-templates/>
         </div>
@@ -259,8 +271,10 @@
 
     <!-- Speaker -->
     <xsl:template match="speaker">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'speaker')"/>
             <xsl:apply-templates/>
         </xsl:element>
@@ -268,24 +282,30 @@
 
     <!-- Stage directions -->
     <xsl:template match="stage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage alignright')"/>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
     <xsl:template match="stage[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </span>
@@ -293,24 +313,30 @@
 
     <!-- Cast lists -->
     <xsl:template match="castList">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <ul>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates/>
         </ul>
     </xsl:template>
 
     <xsl:template match="castList/head">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <li>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
 
     <xsl:template match="castGroup">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <li>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:apply-templates select="head"/>
             <ul class="castGroup">
@@ -320,15 +346,19 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <b>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </b>
     </xsl:template>
 
     <xsl:template match="castItem">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <li>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castitem')"/>
             <xsl:apply-templates/>
         </li>
@@ -343,8 +373,10 @@
     </xd:doc>
 
     <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable']" mode="#default castGroupTable">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <li>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
             <xsl:variable name="count" select="count(.//castItem)"/>
             <xsl:variable name="this" select="."/>
@@ -354,7 +386,7 @@
                         <td><xsl:apply-templates select="." mode="castGroupTable"/></td>
                         <xsl:if test="position() = 1">
                             <td rowspan="{$count}" class="castGroupBrace">
-                                <xsl:copy-of select="f:outputImage(concat('images/rbrace', $count, '.png'), '}')"/>
+                                <xsl:copy-of select="f:outputImage('images/rbrace' || $count || '.png', '}')"/>
                             </td>
                             <td rowspan="{$count}"><xsl:apply-templates select="$this/*[self::head or self::roleDesc]" mode="castGroupTable"/></td>
                         </xsl:if>
@@ -365,15 +397,19 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head" mode="castGroupTable">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
     <xsl:template match="castGroup/roleDesc" mode="castGroupTable">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

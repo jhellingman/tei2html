@@ -131,7 +131,7 @@
                     <xsl:when test="contains($url, '#')">
                         <xsl:variable name="number" select="substring-before(substring-after($url, ':'), '#')"/>
                         <xsl:variable name="anchor" select="substring-after($url, '#')"/>
-                        <xsl:value-of select="concat('https://www.gutenberg.org/files/', $number, '/', $number, '-h/', $number, '-h.htm#', $anchor)"/>
+                        <xsl:value-of select="'https://www.gutenberg.org/files/' || $number || '/' || $number || '-h/' || $number || '-h.htm#' || $anchor"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>

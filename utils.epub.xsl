@@ -28,7 +28,7 @@
     <xsl:function name="f:generate-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:value-of select="concat(f:determine-filename($target), '#', f:generate-id($target))"/>
+        <xsl:value-of select="f:determine-filename($target) || '#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -71,7 +71,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
+        <xsl:value-of select="$targetfile || '#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -87,7 +87,7 @@
         <xsl:param name="target" as="element()"/>
 
         <xsl:variable name="targetfile" select="f:determine-filename(($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1])"/>
-        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target))"/>
+        <xsl:value-of select="$targetfile || '#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -115,7 +115,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="concat($targetfile, '#', f:generate-id($target), 'ext')"/>
+        <xsl:value-of select="$targetfile || '#' || f:generate-id($target) || 'ext'"/>
     </xsl:function>
 
 

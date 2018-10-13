@@ -75,7 +75,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
+                <xsl:value-of select="'[### ' || $name || ' ###]'"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function> 
@@ -111,7 +111,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                <xsl:value-of select="concat('[### ', $name, ' ###]')"/>
+                <xsl:value-of select="'[### ' || $name || ' ###]'"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

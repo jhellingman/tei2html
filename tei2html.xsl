@@ -82,4 +82,15 @@
 
     <!--====================================================================-->
 
+    <xd:doc>
+        <xd:short>Main stylesheet for HTML generation.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="/">
+        <xsl:apply-templates>
+            <xsl:with-param name="id-prefix" select="''" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+
 </xsl:stylesheet>

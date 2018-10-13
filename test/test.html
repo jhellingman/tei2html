@@ -1,6 +1,6 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2018-10-05T10:49:34Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2018-10-13T14:08:57Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd29e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
@@ -278,48 +278,12 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  text-decoration: none;
 }
 
-ul {
- list-style-type: none;
-}
-
-.splitlisttable {
- margin-left: 0;
-}
-
-li.numberedItem {
- text-indent: -3em;
-}
-
-li span.itemNumber {
- float: left;
- position: relative;
- left: -3.5em;
- width: 3em;
- display: inline-block;
- text-align: right;
-}
-
 .advertisment {
  background-color: #FFFEE0;
  border: black 1px dotted;
  color: #000;
  margin: 2em 5%;
  padding: 1em;
-}
-
-.itemGroupTable {
- border-collapse: collapse;
- margin-left: 0;
-}
-
-.itemGroupTable td {
- padding: 0;
- margin: 0;
- vertical-align: middle;
-}
-
-.itemGroupBrace {
- padding: 0 0.5em !important;
 }
 
  
@@ -484,7 +448,43 @@ p.smallprint, li.smallprint, .par.smallprint {
  font-size: 80%;
 }
 
-  
+ 
+ul {
+ list-style-type: none;
+}
+
+.splitListTable {
+ margin-left: 0;
+}
+
+li.numberedItem, td.numberedItem {
+ text-indent: -3em;
+}
+
+li span.itemNumber {
+ float: left;
+ position: relative;
+ left: -3.5em;
+ width: 3em;
+ display: inline-block;
+ text-align: right;
+}
+
+.itemGroupTable {
+ border-collapse: collapse;
+ margin-left: 0;
+}
+
+.itemGroupTable td {
+ padding: 0;
+ margin: 0;
+ vertical-align: middle;
+}
+
+.itemGroupBrace {
+ padding: 0 0.5em !important;
+}
+ 
 
 .titlePage {
  border: #DDDDDD 2px solid;
@@ -2583,7 +2583,7 @@ color:red
                      <li id="xd29e1250">Four</li>
                   </ol>
                   <p id="xd29e1251">We can split a list into two columns, by putting columns(2) in the rend attribute.</p>
-                  <table class="splitlisttable" id="xd29e1252">
+                  <table class="splitListTable" id="xd29e1252">
                      <tr>
                         <td>
                            <ul class="xd29e1252">
@@ -2605,7 +2605,7 @@ color:red
                         </td>
                      </tr>
                   </table>
-                  <table class="splitlisttable" id="xd29e1263" lang="nl">
+                  <table class="splitListTable" id="xd29e1263" lang="nl">
                      <tr>
                         <td>
                            <ol>
@@ -2621,7 +2621,7 @@ color:red
                         </td>
                      </tr>
                   </table>
-                  <table class="splitlisttable" id="xd29e1268" lang="nl">
+                  <table class="splitListTable" id="xd29e1268" lang="nl">
                      <tr>
                         <td>
                            <ol class="xd29e1268">
@@ -2652,7 +2652,7 @@ color:red
                      <li id="xd29e1288">Vier</li>
                   </ul>
                   <p id="xd29e1289">Similarly, we can split it in three columns as well, using columns(3).</p>
-                  <table class="splitlisttable" id="xd29e1290">
+                  <table class="splitListTable" id="xd29e1290">
                      <tr>
                         <td>
                            <ul class="xd29e1290">
@@ -2679,7 +2679,7 @@ color:red
                      </tr>
                   </table>
                   <p id="xd29e1301">And in a different order, by using item-order(row-first).</p>
-                  <table class="splitlisttable" id="xd29e1302">
+                  <table class="splitListTable" id="xd29e1302">
                      <tr>
                         <td>
                            <ul class="xd29e1302">
@@ -2713,11 +2713,11 @@ color:red
                      <li id="xd29e1318" class="itemGroup">
                         <table class="itemGroupTable">
                            <tr>
-                              <td>Four</td>
+                              <td id="xd29e1320">Four</td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/rbrace2.png" alt="}"></img></td>
                            </tr>
                            <tr>
-                              <td>Five</td>
+                              <td id="xd29e1322">Five</td>
                            </tr>
                         </table>
                      </li>
@@ -2729,14 +2729,14 @@ color:red
                                  This <i id="xd29e1327">italic</i> text will go first
                                  </td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/lbrace2.png" alt="{"></img></td>
-                              <td>Seven</td>
+                              <td id="xd29e1329">Seven</td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/rbrace2.png" alt="}"></img></td>
                               <td rowspan="2">
                                  This <b id="xd29e1333">bold</b> text will go last.
                                  </td>
                            </tr>
                            <tr>
-                              <td>Eight</td>
+                              <td id="xd29e1331">Eight</td>
                            </tr>
                         </table>
                      </li>
@@ -3015,7 +3015,7 @@ color:red
                   <tr>
                      <td class="first" lang="en-US"></td>
                      <td class="second">
-                        <h2 id="xd1622e5" class="main">Nogmaals een test</h2>
+                        <h2 id="xd1627e5" class="main">Nogmaals een test</h2>
                      </td>
                   </tr>
                   <tr>
@@ -3024,8 +3024,8 @@ color:red
                            is pulled-in from another source.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
-                        <p id="xd1622e10">Deze alinea staat in een externe bron.</p>
+                        <p id="xd1627e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
+                        <p id="xd1627e10">Deze alinea staat in een externe bron.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3033,7 +3033,7 @@ color:red
                         <p id="xd29e1543">The paragraphs will be numbered using the <i id="xd29e1545">n</i> attribute.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e12">De alinea's worden genummerd met het <i id="xd1622e14">n</i> attribuut.</p>
+                        <p id="xd1627e12">De alinea's worden genummerd met het <i id="xd1627e14">n</i> attribuut.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3041,8 +3041,8 @@ color:red
                         <p id="xd29e1547">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e17">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
-                        <p id="xd1622e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd1627e17">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
+                        <p id="xd1627e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3050,7 +3050,7 @@ color:red
                         <p id="xd29e1549">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd1627e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3059,7 +3059,7 @@ color:red
                         <p id="xd29e1553">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e26">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd1627e26">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3067,7 +3067,7 @@ color:red
                         <p id="xd29e1555">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1622e29">En de laatste alinea.</p>
+                        <p id="xd1627e29">En de laatste alinea.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3094,15 +3094,15 @@ color:red
                </div>
                <div class="divBody">
                   <p id="xd29e1591" class="first">This is an experimental feature. To include a mathematical formula, just type
-                     <span class="inlineMath" id="f1"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1596src" href="#xd29e1596">1</a> famous equation.</p>
+                     <span id="f1" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1596src" href="#xd29e1596">1</a> famous equation.</p>
                   <p id="xd29e1602">Similarly, to get the time-dependent Schrödinger equation, you can type
-                     <span class="displayMath" id="f2"><img src="formulas/display-f2.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" class="f2frml"></img></span>
-                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span class="displayMath" id="f3"><img src="formulas/display-f3.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1610" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
+                     <span id="f2" class="displayMath"><img src="formulas/display-f2.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" class="f2frml"></img></span>
+                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span id="f3" class="displayMath"><img src="formulas/display-f3.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1610" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
                   <div class="footnote-body">
-                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1596" href="#xd29e1596src">1</a></span> That is <span class="inlineMath" id="f1n"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
+                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1596" href="#xd29e1596src">1</a></span> That is <span id="f1n" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
                         resize, matching the x-height of the surrounding text.&nbsp;<a class="fnarrow" href="#xd29e1596src">&#x2191;</a></p>
                   </div>
                </div>
@@ -3111,8 +3111,8 @@ color:red
                   <h2 id="xd29e1614" class="main">Mathematical Formula (Part II)</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1615" class="first">When <span class="inlineMath" id="f4"><img src="formulas/inline-f4.svg" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span class="inlineMath" id="f5"><img src="formulas/inline-f5.svg" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
-                     <span class="displayMath" id="f6"><img src="formulas/display-f6.svg" title="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" class="f6frml"></img></span></p>
+                  <p id="xd29e1615" class="first">When <span id="f4" class="inlineMath"><img src="formulas/inline-f4.svg" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span id="f5" class="inlineMath"><img src="formulas/inline-f5.svg" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
+                     <span id="f6" class="displayMath"><img src="formulas/display-f6.svg" title="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" class="f6frml"></img></span></p>
                </div>
             </div>
          </div>
@@ -3631,7 +3631,7 @@ color:red
                         <td><a class="pageref" href="#xd29e1263">3</a>, <a class="pageref" href="#xd29e1284">3</a></td>
                         <td>list</td>
                         <td>
-                           <table class="splitlisttable" lang="nl">
+                           <table class="splitListTable" lang="nl">
                               <tr>
                                  <td>
                                     <ol>
@@ -3653,7 +3653,7 @@ color:red
                         <td><a class="pageref" href="#xd29e1268">3</a></td>
                         <td>list</td>
                         <td>
-                           <table class="splitlisttable" lang="nl">
+                           <table class="splitListTable" lang="nl">
                               <tr>
                                  <td>
                                     <ol class="xd29e1268">

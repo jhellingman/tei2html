@@ -23,6 +23,8 @@
     </xd:doc>
 
     <xsl:template match="list">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:call-template name="closepar"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
@@ -33,7 +35,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:copy-of select="f:set-class-attribute(.)"/>
                     <xsl:apply-templates/>
                 </xsl:element>
@@ -89,10 +91,11 @@
     </xd:doc>
 
     <xsl:template name="splitlist-rows-table">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <table>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) idiv $columns">
                 <tr>
                     <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
@@ -108,12 +111,13 @@
     </xd:doc>
 
     <xsl:template name="splitlist-cols-table">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
 
         <table>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) mod $rows">
                 <tr>
                     <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
@@ -129,6 +133,7 @@
     </xd:doc>
 
     <xsl:template name="splitlist-cols">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
@@ -136,7 +141,7 @@
         <xsl:variable name="node" select="."/>
 
         <table class="splitListTable">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) idiv $rows">
                     <td>
@@ -157,13 +162,14 @@
     </xd:doc>
 
     <xsl:template name="splitlist-rows">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
         <xsl:variable name="node" select="."/>
 
         <table class="splitListTable">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) mod $columns">
                     <td>
@@ -212,8 +218,10 @@
     </xd:doc>
 
     <xsl:template match="itemGroup | list[@type='itemGroup']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <li>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup')"/>
 
             <xsl:variable name="this" select="."/>
@@ -232,7 +240,7 @@
                             </xsl:if>
                             <xsl:if test="$contentBefore or $this/@rend='braceBefore'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:copy-of select="f:outputImage(concat('images/lbrace', $count, '.png'), '{')"/>
+                                    <xsl:copy-of select="f:outputImage('images/lbrace' || $count || '.png', '{')"/>
                                 </td>
                             </xsl:if>
                         </xsl:if>
@@ -242,7 +250,7 @@
                         <xsl:if test="position() = 1">
                             <xsl:if test="$contentAfter or $this/@rend='braceAfter'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:copy-of select="f:outputImage(concat('images/rbrace', $count, '.png'), '}')"/>
+                                    <xsl:copy-of select="f:outputImage('images/rbrace' || $count || '.png', '}')"/>
                                 </td>
                             </xsl:if>
                             <xsl:if test="$contentAfter">
@@ -269,7 +277,9 @@
     </xd:doc>
 
     <xsl:template name="handle-item">
-        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
         <xsl:copy-of select="f:set-class-attribute-with(., if (not(..[@type = 'ordered']) and (@n or ./ab[@type='itemNum'][position() = 1])) then 'numberedItem' else '')"/>
 
         <xsl:choose>

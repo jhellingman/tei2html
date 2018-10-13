@@ -1396,6 +1396,8 @@
 
         <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op https://www.pgdp.net/.</msg:message>
 
+        <msg:message name="msgPGComment">Dit book is geproduceerd door Project Gutenberg en is vrijelijk beschikbaar op https://www.gutenberg.org/.</msg:message>
+
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dit eBoek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopi&#x00EB;ren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eBoek (Engelstalig) of on-line op <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eBoek gebruikt.</p>

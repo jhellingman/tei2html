@@ -45,7 +45,7 @@
         <xsl:variable name="baseid" select="if ($base/@id) then $base/@id else ''" as="xs:string"/>
         <xsl:variable name="name" select="local-name($node)" as="xs:string"/>
         <xsl:variable name="count" select="count($base//*[local-name() = $name] except $node/following::*[local-name() = $name])"/>
-        <xsl:variable name="id" select="concat($baseid, '_', $name, '_', $count)"/>
+        <xsl:variable name="id" select="$baseid || '_' || $name || '_' || $count"/>
 
         <xsl:copy-of select="f:logInfo('Generated ID: {1} from {2}-th [{3}] child of [{4}].', ($id, string($count), $name, local-name($base)))"/>
 
@@ -65,7 +65,15 @@
 
     <xsl:function name="f:generate-id" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:value-of select="if ($node/@id) then $node/@id else concat('x', generate-id($node))"/>
+        <xsl:value-of select="if ($node/@id) then $node/@id else 'x' || generate-id($node)"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:generate-id" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="id-prefix" as="xs:string"/>
+
+        <xsl:value-of select="$id-prefix || (if ($node/@id) then $node/@id else 'x' || generate-id($node))"/>
     </xsl:function>
 
 
@@ -84,7 +92,7 @@
         <!-- Image that appears in a list of illustrations -->
         <!-- Correction that appears in a list of corrections -->
         <!-- External reference that appears in a list of exteral references -->
-        <!-- Footnote? -->
+        <!-- Footnotes -->
 
     </xsl:function>
 
@@ -102,7 +110,7 @@
     <xsl:function name="f:generate-nth-id" as="xs:string">
         <xsl:param name="node" as="element()"/>
         <xsl:param name="position" as="xs:integer"/>
-        <xsl:value-of select="concat(f:generate-id($node), '-', $position)"/>
+        <xsl:value-of select="f:generate-id($node) || '-' || $position"/>
     </xsl:function>
 
 
@@ -261,10 +269,16 @@
     <xsl:function name="f:set-lang-id-attributes" as="attribute()*">
         <xsl:param name="node" as="element()"/>
 
-        <xsl:attribute name="id" select="f:generate-id($node)"/>
-        <xsl:copy-of select="f:generate-lang-attribute($node/@lang)"/>
+        <xsl:copy-of select="f:set-lang-id-attributes($node, '')"/>
     </xsl:function>
 
+    <xsl:function name="f:set-lang-id-attributes" as="attribute()*">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="id-prefix" as="xs:string"/>
+
+        <xsl:attribute name="id" select="f:generate-id($node, $id-prefix)"/>
+        <xsl:copy-of select="f:generate-lang-attribute($node/@lang)"/>
+    </xsl:function>
 
 
     <!--====================================================================-->

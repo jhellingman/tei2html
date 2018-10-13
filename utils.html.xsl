@@ -36,7 +36,7 @@
     <xsl:function name="f:generate-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:value-of select="concat('#', f:generate-id($target))"/>
+        <xsl:value-of select="'#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -73,7 +73,7 @@
     <xd:doc>
         <xd:short>Generate a href-attribute to the xref-table in the colophon.</xd:short>
         <xd:detail>
-            <p>xref table href attributes are the same as normal hrefs in
+            <p>The xref-table href attributes are the same as normal hrefs in
          single file operation, followed by 'ext'.</p>
         </xd:detail>
     </xd:doc>
@@ -81,7 +81,7 @@
     <xsl:function name="f:generate-xref-table-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:value-of select="concat(f:generate-href($target), 'ext')"/>
+        <xsl:value-of select="f:generate-href($target) || 'ext'"/>
     </xsl:function>
 
 

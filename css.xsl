@@ -30,7 +30,7 @@
         <xd:short>Key to quickly find <code>@rend</code> attributes on elements.</xd:short>
     </xd:doc>
 
-    <xsl:key name="rend" match="*" use="concat(name(), ':', @rend)"/>
+    <xsl:key name="rend" match="*" use="name() || ':' || @rend"/>
 
 
     <xd:doc>
@@ -384,7 +384,7 @@
 
     <xsl:function name="f:generate-class-name" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:value-of select="f:generate-id(key('rend', concat(name($node), ':', $node/@rend), root($node))[1])"/>
+        <xsl:value-of select="f:generate-id(key('rend', name($node) || ':' || $node/@rend, root($node))[1])"/>
     </xsl:function>
 
 
@@ -469,7 +469,7 @@
             <xsl:if test="normalize-space($node/@rendition) != ''">
                 <xsl:variable name="prefix" select="f:getSetting('rendition.id.prefix')"/>
                 <xsl:for-each select="tokenize($node/@rendition, ' ')">
-                    <xsl:variable name="renditionId" select="concat($prefix, replace(., '#', ''))"/>
+                    <xsl:variable name="renditionId" select="$prefix || replace(., '#', '')"/>
                     <xsl:if test="not($node/ancestor::node()[last()]//tagsDecl/rendition[@id = $renditionId or @xml:id = $renditionId])">
                         <xsl:copy-of select="f:logWarning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
                     </xsl:if>
@@ -513,7 +513,7 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="class" as="xs:string"/>
 
-        <xsl:variable name="class" select="normalize-space(concat($class, ' ', f:generate-class($node)))"/>
+        <xsl:variable name="class" select="normalize-space($class || ' ' || f:generate-class($node))"/>
         <xsl:if test="$class != ''">
             <xsl:attribute name="class" select="$class"/>
         </xsl:if>
@@ -632,7 +632,7 @@
     </xd:doc>
 
     <xsl:template name="generate-css-rule">
-        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
+        <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
             <xsl:variable name="css-properties" select="normalize-space(f:translate-rend-ladder(@rend, name()))"/>
             <xsl:if test="$css-properties != ''">
                 <!-- Use the id of the first element with this rend attribute as a class selector -->
@@ -740,8 +740,8 @@
                 <xsl:when test="ends-with($uri, '.xml') and unparsed-text-available($uri)">
                     <xsl:value-of select="document($uri)/*/node()"/>
                 </xsl:when>
-                <xsl:when test="unparsed-text-available(concat($uri, '.xml'))">
-                    <xsl:value-of select="document(concat($uri, '.xml'))/*/node()"/>
+                <xsl:when test="unparsed-text-available($uri || '.xml')">
+                    <xsl:value-of select="document($uri || '.xml')/*/node()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:logError('Unable to find CSS stylesheet: {1}', ($uri))"/>

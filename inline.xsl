@@ -87,7 +87,12 @@
     </xd:doc>
 
     <xsl:template match="emph">
-        <i><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></i>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <i>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:apply-templates/>
+        </i>
     </xsl:template>
 
     <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscript; sub = subscript -->
@@ -98,8 +103,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='it' or @rend='italic'] | i" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <i>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </i>
     </xsl:template>
@@ -110,8 +117,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='b' or @rend='bold'] | b" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <b>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </b>
     </xsl:template>
@@ -146,8 +155,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='sc'] | sc" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="sc">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -158,8 +169,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='uc']" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="uc">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -170,8 +183,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='ex'] | g" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="ex">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
          </span>
     </xsl:template>
@@ -182,8 +197,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='rm'] | rm" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="rm">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -194,8 +211,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='tt'] | tt" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="tt">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -239,11 +258,13 @@
     </xd:doc>
 
     <xsl:template match="hi" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:choose>
             <!-- Test covers any potential rendition ladder -->
             <xsl:when test="contains(@rend, '(') or @style or @rendition">
                 <span>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->
                     <xsl:copy-of select="f:set-class-attribute(.)"/>
                     <xsl:apply-templates mode="#current"/>
@@ -251,7 +272,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <i>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:apply-templates mode="#current"/>
                 </i>
             </xsl:otherwise>
@@ -264,9 +285,11 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='el' or @lang='grc']" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'Greek')"/>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -277,9 +300,11 @@
     </xd:doc>
 
     <xsl:template match="foreign[@lang='ar']" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'Arabic')"/>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -290,9 +315,11 @@
     </xd:doc>
 
     <xsl:template match="foreign" mode="#default remove-initial titlePage">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
@@ -307,7 +334,9 @@
     </xd:doc>
 
     <xsl:template match="anchor">
-        <a id="{f:generate-id(.)}"><xsl:apply-templates/></a>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <a id="{f:generate-id(., $id-prefix)}"><xsl:apply-templates/></a>
     </xsl:template>
 
 
@@ -342,6 +371,8 @@
     </xd:doc>
 
     <xsl:template name="handle-correction">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:param name="sic" xs:as="node()*"/>
         <xsl:param name="corr" xs:as="node()*"/>
 
@@ -360,13 +391,13 @@
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
             <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
                 <span>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$msgNotInSource"/>
                     </xsl:attribute>
@@ -375,11 +406,11 @@
             </xsl:when>
             <!-- Don't generate an empty span, as that will be purged by some HTML tools -->
             <xsl:when test="not($corr) or $corr = ''">
-                <a id="{f:generate-id(.)}"/>
+                <a id="{f:generate-id(., $id-prefix)}"/>
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:attribute name="title">
                         <xsl:value-of select="$msgSource"/><xsl:text>: </xsl:text><xsl:value-of select="$sicString"/>
                     </xsl:attribute>
@@ -433,11 +464,13 @@
     </xd:doc>
 
     <xsl:template match="space">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:variable name="quantity" select="if (@quantity) then @quantity else 1"/>
         <span>
             <xsl:attribute name="class">
                 <xsl:text>space </xsl:text>
-                <xsl:value-of select="f:generate-id(.)"/><xsl:text>space</xsl:text>
+                <xsl:value-of select="f:generate-id(., $id-prefix)"/><xsl:text>space</xsl:text>
             </xsl:attribute>
             <!-- Insert a zero-width space to prevent tidy from removing up this span. -->
             <xsl:text>&zwsp;</xsl:text>
@@ -470,8 +503,10 @@
     </xd:doc>
 
     <xsl:template match="abbr">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <abbr>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:if test="@type">
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
@@ -511,8 +546,10 @@
     <!-- Numbers -->
 
     <xsl:template match="num">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="num">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@value"/>
@@ -533,8 +570,10 @@
     </xd:doc>
 
     <xsl:template match="trans">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="trans">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
@@ -571,8 +610,10 @@
     </xd:doc>
 
     <xsl:template match="choice[reg/@type='trans']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="trans">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="reg"/>
@@ -600,10 +641,12 @@
     <!-- Measurements with metric equivalent -->
 
     <xsl:template match="measure">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:choose>
             <xsl:when test="f:isSet('useRegularizedUnits')">
                 <span class="measure">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:if test="f:isSet('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="."/>
@@ -614,7 +657,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <span class="measure">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:if test="f:isSet('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="./@reg"/>
@@ -631,8 +674,10 @@
     <!-- Currency amounts (in future with modern PPP equivalent) -->
 
     <xsl:template match="amount">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="measure">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="./@unit"/>
@@ -649,13 +694,15 @@
     <!-- Arbitrary Blocks (special hooks for rendering) -->
 
     <xsl:template match="ab">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:if test="not(@rend='hide')">
             <!-- If the item is to go flush right, add some space to avoid a colission in HTML. -->
             <xsl:if test="@type='tocPageNum' or @type='flushright' or @type='adPrice'">
                 <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             </xsl:if>
             <span>
-                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                 <xsl:variable name="class">
                     <xsl:value-of select="@type"/>
                 </xsl:variable>
@@ -670,15 +717,19 @@
     <!-- Bibliographic elements -->
 
     <xsl:template match="bibl">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="bibl">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
     <xsl:template match="cit">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="cit">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -693,8 +744,10 @@
     </xd:doc>
 
     <xsl:template match="seg">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="seg">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -709,8 +762,10 @@
     </xd:doc>
 
     <xsl:template match="seg[@copyOf]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="seg">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:variable name="copyOf" select="@copyOf"/>
             <xsl:variable name="copy" select="//seg[@id = $copyOf]"/>
             <xsl:choose>

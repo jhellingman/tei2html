@@ -103,10 +103,11 @@
     </xd:doc>
 
     <xsl:template name="pb-margin">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(pb)"/>
         <span class="pagenum">
             <xsl:value-of select="f:getSetting('pageNumbers.before')"/>
-            <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
+            <a id="{f:generate-id(., $id-prefix)}" href="{f:generate-href(.)}">
                 <xsl:copy-of select="f:convertMarkdown(@n)"/>
             </a>
             <xsl:value-of select="f:getSetting('pageNumbers.after')"/>
@@ -174,8 +175,9 @@
     </xd:doc>
 
     <xsl:template name="pb-anchor">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(pb)"/>
-        <a id="{f:generate-id(.)}"/>
+        <a id="{f:generate-id(., $id-prefix)}"/>
     </xsl:template>
 
 
@@ -190,9 +192,11 @@
     </xsl:template>
 
     <xsl:template match="fw[@place=('margin', 'left', 'right')]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -223,6 +227,8 @@
     </xd:doc>
 
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+        
         <xsl:call-template name="closepar"/>
         <xsl:choose>
             <xsl:when test="contains(@rend, 'dots')">
@@ -251,7 +257,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <hr class="tb" id="{f:generate-id(.)}"/>
+                <hr class="tb" id="{f:generate-id(., $id-prefix)}"/>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>
@@ -259,11 +265,13 @@
 
 
     <xsl:template name="generate-tb-par">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="context" select="." as="element(milestone)"/>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">tb</xsl:attribute>
-            <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
+            <xsl:attribute name="id"><xsl:value-of select="f:generate-id(., $id-prefix)"/></xsl:attribute>
             <xsl:value-of select="$string"/>
         </xsl:element>
     </xsl:template>
@@ -276,7 +284,9 @@
     </xd:doc>
 
     <xsl:template match="milestone">
-        <a id="{f:generate-id(.)}"/>
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <a id="{f:generate-id(., $id-prefix)}"/>
     </xsl:template>
 
 
@@ -286,8 +296,10 @@
     </xd:doc>
 
     <xsl:template match="argument">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="argument">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -299,8 +311,10 @@
     </xd:doc>
 
     <xsl:template match="epigraph">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="epigraph">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -312,8 +326,10 @@
     </xd:doc>
 
     <xsl:template match="epigraph[parent::titlePage]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span class="epigraph">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -325,8 +341,10 @@
     </xd:doc>
 
     <xsl:template match="trailer">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'trailer')"/>
             <xsl:apply-templates/>
         </xsl:element>
@@ -339,9 +357,11 @@
     </xd:doc>
 
     <xsl:template match="q">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:call-template name="closepar"/>
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'q')"/>
             <xsl:apply-templates/>
         </div>
@@ -350,9 +370,11 @@
 
 
     <xsl:template match="q[@rend = 'block']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:call-template name="closepar"/>
         <blockquote>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
             <xsl:apply-templates/>
         </blockquote>
@@ -366,8 +388,10 @@
     </xd:doc>
 
     <xsl:template match="q[parent::cit]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'epigraph')"/>
             <xsl:apply-templates/>
         </span>
@@ -382,22 +406,28 @@
     </xd:doc>
 
     <xsl:template match="note[&isFootnote;]//q/text">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="nestedtext">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[&isFootnote;]//q/text/body">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="nestedbody">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[&isFootnote;]//q/text/body/div1">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="nesteddiv1">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -411,9 +441,11 @@
     </xd:doc>
 
     <xsl:template match="letter">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:call-template name="closepar"/>
         <blockquote class="letter">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:apply-templates/>
         </blockquote>
         <xsl:call-template name="reopenpar"/>
@@ -520,7 +552,7 @@
                         )"/>
         <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))
                                                               then name($node)
-                                                              else concat('TEXT: ', substring($node, 1, 10)), string($isHtmlParagraphContent)))"/>
+                                                              else 'TEXT: ' || substring($node, 1, 10), string($isHtmlParagraphContent)))"/>
         <xsl:value-of select="$isHtmlParagraphContent"/>
     </xsl:function>
 
@@ -538,6 +570,8 @@
     </xd:doc>
 
     <xsl:template name="handle-paragraph-fragment">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:param name="p"/>
         <xsl:param name="fragment"/>
         <xsl:param name="position" as="xs:integer"/>
@@ -554,7 +588,7 @@
 
         <xsl:if test="$fragment">
             <xsl:element name="{$p.element}">
-                <xsl:attribute name="id" select="concat(f:generate-id($p), if ($position > 1 ) then concat('.', $position) else '')"/>
+                <xsl:attribute name="id" select="f:generate-id($p, $id-prefix) || (if ($position > 1 ) then '.' || $position else '')"/>
                 <xsl:copy-of select="f:generate-lang-attribute($p/@lang)"/>
                 <xsl:variable name="class">
                     <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
@@ -584,10 +618,12 @@
 
 
     <xsl:template name="handle-paragraph-old">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:element name="{$p.element}">
-                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
 
                 <xsl:variable name="class">
                     <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
@@ -759,9 +795,11 @@
 
 
     <xsl:template name="initial-image-with-css">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:variable name="context" select="." as="element(p)"/>
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>
@@ -790,9 +828,11 @@
 
 
     <xsl:template name="initial-image-with-float">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(p)"/>
+
         <div class="figure floatLeft">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'initial-image'), f:replacedInitial(.))"/>
         </div>
         <xsl:element name="{$p.element}">
@@ -815,7 +855,7 @@
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css">
-        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
+        <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
 
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
@@ -858,7 +898,7 @@
 
     <!-- Override decorative initials for handheld devices. -->
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css-handheld">
-        <xsl:if test="generate-id() = generate-id(key('rend', concat(name(), ':', @rend))[1])">
+        <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
 
 .<xsl:value-of select="f:generate-css-class-selector(.)"/> {
     background-image: none;
@@ -935,8 +975,10 @@
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>

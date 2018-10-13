@@ -190,7 +190,7 @@
 
     <xsl:template match="author" mode="metadata">
 
-        <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
+        <xsl:variable name="id" select="f:generate-id(.) || 'metadata'"/>
 
         <dc:creator id="{$id}">
             <xsl:if test="f:isEpub31()">
@@ -223,7 +223,7 @@
 
     <xsl:template match="respStmt" mode="metadata">
 
-        <xsl:variable name="id" select="concat(f:generate-id(.), 'metadata')"/>
+        <xsl:variable name="id" select="f:generate-id(.) || 'metadata'"/>
 
         <dc:contributor id="{$id}">
             <xsl:if test="f:isEpub31()">
@@ -599,9 +599,9 @@
         <xsl:variable name="time">
             <xsl:value-of select="$hours"/>
             <xsl:text>:</xsl:text>
-            <xsl:value-of select="if ($minutes &lt; 10) then concat('0', $minutes) else $minutes"/>
+            <xsl:value-of select="if ($minutes &lt; 10) then '0' || $minutes else $minutes"/>
             <xsl:text>:</xsl:text>
-            <xsl:value-of select="if ($seconds &lt; 10) then concat('0', $seconds) else $seconds"/>
+            <xsl:value-of select="if ($seconds &lt; 10) then '0' || $seconds else $seconds"/>
         </xsl:variable>
 
         <xsl:value-of select="$time"/>
@@ -645,7 +645,7 @@
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '{']" mode="manifest-braces">
         <xsl:call-template name="manifest-image-item">
-            <xsl:with-param name="filename" select="concat('images/lbrace', @rows, '.png')"/>
+            <xsl:with-param name="filename" select="'images/lbrace' || @rows || '.png'"/>
             <xsl:with-param name="how" select="'brace'"/>
         </xsl:call-template>
     </xsl:template>
@@ -653,7 +653,7 @@
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '}']" mode="manifest-braces">
         <xsl:call-template name="manifest-image-item">
-            <xsl:with-param name="filename" select="concat('images/rbrace', @rows, '.png')"/>
+            <xsl:with-param name="filename" select="'images/rbrace' || @rows || '.png'"/>
             <xsl:with-param name="how" select="'brace'"/>
         </xsl:call-template>
     </xsl:template>
@@ -743,7 +743,7 @@
 
             <!-- Only for local images: add the generated HTML wrapper to the spine -->
             <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
-                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="{concat(f:generate-id(.), 'wrapper')}"/>
+                <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="{f:generate-id(.) || 'wrapper'}"/>
             </xsl:if>
         </xsl:if>
     </xsl:template>

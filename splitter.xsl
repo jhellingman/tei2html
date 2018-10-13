@@ -491,7 +491,7 @@
     <xsl:function name="f:generate-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
 
-        <xsl:value-of select="if ($node/@id = 'cover') then 'cover.xhtml' else concat($basename, '-', f:generate-id($node), '.xhtml')"/>
+        <xsl:value-of select="if ($node/@id = 'cover') then 'cover.xhtml' else $basename || '-' || f:generate-id($node) || '.xhtml'"/>
     </xsl:function>
 
 
@@ -507,7 +507,7 @@
 
         <xsl:value-of select="if ($node/@id = 'cover' and $position = 1)
                               then 'cover.xhtml'
-                              else concat($basename, '-', f:generate-id($node), '-', $position, '.xhtml')"/>
+                              else $basename || '-' || f:generate-id($node) || '-' || $position || '.xhtml'"/>
     </xsl:function>
 
 
@@ -544,7 +544,7 @@
     <xsl:function name="f:determine-url" as="xs:string">
         <xsl:param name="node" as="element()"/>
 
-        <xsl:value-of select="concat(f:determine-filename($node), '#', f:generate-id($node))"/>
+        <xsl:value-of select="f:determine-filename($node) || '#' || f:generate-id($node)"/>
     </xsl:function>
 
 

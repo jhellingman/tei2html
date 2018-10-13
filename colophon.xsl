@@ -36,8 +36,10 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='Colophon']">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <div class="transcribernote">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
 
             <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
 
@@ -152,7 +154,7 @@
         <xsl:param name="urlText" as="xs:string"/>
 
         <tr>
-            <td><b><xsl:value-of select="if ($key = '') then '' else concat($key, ':')"/></b></td>
+            <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td><xsl:value-of select="$value"/></td>
             <td>
                 <xsl:if test="f:isValid($url)">
@@ -168,7 +170,7 @@
         <xsl:param name="url" as="xs:string?"/>
 
         <tr>
-            <td><b><xsl:value-of select="if ($key = '') then '' else concat($key, ':')"/></b></td>
+            <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td>
                 <xsl:choose>
                     <xsl:when test="f:isValid($url)">
@@ -188,7 +190,7 @@
         <xsl:param name="value" as="xs:string"/>
 
         <tr>
-            <td><b><xsl:value-of select="if ($key = '') then '' else concat($key, ':')"/></b></td>
+            <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td><xsl:value-of select="$value"/></td>
             <td/>
         </tr>
@@ -289,35 +291,35 @@
     </xsl:function>
 
     <xsl:template mode="catalogEntries" match="idno[@type='PGnum']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgPgCatalogEntry'), concat('https://www.gutenberg.org/ebooks/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgPgCatalogEntry'), 'https://www.gutenberg.org/ebooks/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='LCCN']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryOfCongressCatalogEntry'), concat('https://lccn.loc.gov/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryOfCongressCatalogEntry'), 'https://lccn.loc.gov/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='VIAF']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgVirtualInternationalAuthorityFile'), concat('http://viaf.org/viaf/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgVirtualInternationalAuthorityFile'), 'http://viaf.org/viaf/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='OLN']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogEntry'), concat('https://openlibrary.org/books/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogEntry'), 'https://openlibrary.org/books/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='OLW']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogWorkEntry'), concat('https://openlibrary.org/works/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogWorkEntry'), 'https://openlibrary.org/works/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='OCLC']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOclcCatalogEntry'), concat('https://www.worldcat.org/oclc/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgOclcCatalogEntry'), 'https://www.worldcat.org/oclc/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='LibThing']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryThingEntry'), concat('https://www.librarything.com/work/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryThingEntry'), 'https://www.librarything.com/work/' || ., .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogEntries" match="idno[@type='PGSrc']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgGitHubRepository'), concat('https://github.com/GutenbergSource/', .), .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgGitHubRepository'), 'https://github.com/GutenbergSource/' || ., .)"/>
     </xsl:template>
 
     <!-- Ignore other types of idno's -->
@@ -332,7 +334,7 @@
             <td><b><xsl:value-of select="f:message('msgCatalogEntry')"/>:</b></td>
             <td colspan="2">
                 <xsl:value-of select="$name"/>:
-                <a class="catlink" href="{concat($baseUrl, $id)}">
+                <a class="catlink" href="{$baseUrl || $id}">
                     <xsl:value-of select="$id"/>
                 </a>
             </td>
@@ -348,35 +350,35 @@
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='PGnum']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgProjectGutenberg'), ., concat('https://www.gutenberg.org/ebooks/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgProjectGutenberg'), ., 'https://www.gutenberg.org/ebooks/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='LCCN']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryOfCongress'), ., concat('https://lccn.loc.gov/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryOfCongress'), ., 'https://lccn.loc.gov/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='VIAF']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., concat('http://viaf.org/viaf/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., 'http://viaf.org/viaf/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='OLN']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryBook'), ., concat('https://openlibrary.org/books/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryBook'), ., 'https://openlibrary.org/books/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='OLW']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryWork'), ., concat('https://openlibrary.org/works/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryWork'), ., 'https://openlibrary.org/works/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='OCLC']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOclcWorldCat'), ., concat('https://www.worldcat.org/oclc/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOclcWorldCat'), ., 'https://www.worldcat.org/oclc/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='LibThing']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryThing'), ., concat('https://www.librarything.com/work/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryThing'), ., 'https://www.librarything.com/work/' || .)"/>
     </xsl:template>
 
     <xsl:template mode="catalogReferences" match="idno[@type='PGSrc']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgGitHub'), ., concat('https://github.com/GutenbergSource/', .))"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgGitHub'), ., 'https://github.com/GutenbergSource/' || .)"/>
     </xsl:template>
 
     <!-- Ignore other types of idno's -->
@@ -433,7 +435,7 @@
                 <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collectCorrections"/>
             </xsl:variable>
 
-            <xsl:for-each-group select="$corrections/tmp:choice" group-by="concat(tmp:sic, '@@@', tmp:corr)">
+            <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
                 <tr>
                     <td class="width20">
                         <xsl:call-template name="correctionTablePageReferences"/>
@@ -560,6 +562,8 @@
     </xd:doc>
 
     <xsl:template name="corr-href-attribute">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:choose>
             <xsl:when test="f:insideFootnote(.)">
                 <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
@@ -612,7 +616,7 @@
                 </xsl:for-each>
             </xsl:variable>
 
-            <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="concat(tmp:abbr, '@@@', tmp:expan)">
+            <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="tmp:abbr || '@@@' || tmp:expan">
                 <xsl:sort select="lower-case(tmp:abbr)" data-type="text" order="ascending"/>
                 <tr>
                     <td class="bottom">
@@ -698,6 +702,7 @@
     </xd:doc>
 
     <xsl:template name="externalReferenceTable">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
 
         <!-- TODO: make this table also work for P5 href elements -->
         <xsl:if test="//xref[@url]">
@@ -715,7 +720,7 @@
                                 <xsl:if test="position() != 1">
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
-                                <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
+                                <a class="pageref" id="{f:generate-id(., $id-prefix)}ext" href="{f:generate-href(.)}">
                                     <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                                 </a>
                             </xsl:for-each>

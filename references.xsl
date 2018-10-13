@@ -69,8 +69,10 @@
 
 
     <xsl:template name="handleInternalReference">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="target" as="xs:string"/>
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
+
         <xsl:choose>
 
             <xsl:when test="not($targetNode)">
@@ -97,7 +99,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
 
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
                     </xsl:if>
@@ -185,13 +187,14 @@
 
 
     <xsl:template name="handleExternalReference">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
             <xsl:when test="f:isSet('outputExternalLinksTable')">
                 <xsl:choose>
                     <xsl:when test="//divGen[@type='Colophon']">
-                        <a id="{f:generate-id(.)}" href="{f:generate-xref-table-href(.)}">
+                        <a id="{f:generate-id(., $id-prefix)}" href="{f:generate-xref-table-href(.)}">
                             <xsl:apply-templates/>
                         </a>
                     </xsl:when>
@@ -224,10 +227,11 @@
     </xd:doc>
 
     <xsl:template name="handle-xref">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="url" as="xs:string"/>
 
         <a>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:attribute name="class">
                 <xsl:value-of select="f:translate-xref-class($url)"/>
                 <xsl:text> </xsl:text>

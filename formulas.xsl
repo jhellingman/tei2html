@@ -60,17 +60,19 @@
     </xd:doc>
 
     <xsl:template name="handleFormula">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
 
         <xsl:variable name="basename" select="f:formulaBasename($firstInstance)" as="xs:string"/>
-        <xsl:variable name="texFile" select="concat($basename, '.tex')" as="xs:string"/>
-        <xsl:variable name="mmlFile" select="concat($basename, '.mml')" as="xs:string"/>
-        <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
-        <xsl:variable name="pngFile" select="concat($basename, '.png')" as="xs:string"/>
+        <xsl:variable name="texFile" select="$basename || '.tex'" as="xs:string"/>
+        <xsl:variable name="mmlFile" select="$basename || '.mml'" as="xs:string"/>
+        <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
+        <xsl:variable name="pngFile" select="$basename || '.png'" as="xs:string"/>
 
         <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
         <xsl:variable name="svgTitle" select="if (f:isTrivialMath(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
-        <xsl:variable name="mathClass" select="concat(f:formulaPosition(.), 'Math')" as="xs:string"/>
+        <xsl:variable name="mathClass" select="f:formulaPosition(.) || 'Math'" as="xs:string"/>
         <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
@@ -87,8 +89,8 @@
         <xsl:copy-of select="f:placeMathLabel(., 'left')"/>
 
         <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <xsl:choose>
                 <!-- Dynamic mathJax -->
@@ -143,11 +145,7 @@
         <xsl:param name="position" as="xs:string"/>
 
         <xsl:if test="$formula/@n and f:isDisplayMath($formula)">
-            <span class="{concat(if ($position != f:getSetting('math.label.position'))
-                                    then 'phantom '
-                                    else '',
-                                 $position,
-                                 'MathLabel')}">
+            <span class="{(if ($position != f:getSetting('math.label.position')) then 'phantom ' else '') || $position || 'MathLabel'}">
                 <xsl:copy-of select="f:formatMathLabel($formula/@n)"/>
             </span>
         </xsl:if>
@@ -209,7 +207,7 @@
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
-                <xsl:variable name="svgFile" select="concat($basename, '.svg')" as="xs:string"/>
+                <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
                 <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
                 <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
                 <xsl:variable name="height" select="document($svgFile, .)/svg:svg/@height"/>
@@ -234,7 +232,7 @@
     <xsl:function name="f:formulaBasename" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
-        <xsl:value-of select="concat('formulas/', f:formulaPosition($formula), '-', f:generate-id($formula))"/>
+        <xsl:value-of select="'formulas/' || f:formulaPosition($formula) || '-' || f:generate-id($formula)"/>
     </xsl:function>
 
 

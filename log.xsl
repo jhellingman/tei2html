@@ -79,7 +79,7 @@
         <xsl:param name="level" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:value-of select="concat(upper-case($level), ': ', f:formatString($message, $params))"/>
+        <xsl:value-of select="upper-case($level) || ': ' || f:formatString($message, $params)"/>
     </xsl:function>
 
 
