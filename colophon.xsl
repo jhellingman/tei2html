@@ -815,11 +815,13 @@
     </xd:doc>
 
     <xsl:template name="languageFragments">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
+        <xsl:variable name="id" select="f:generate-id(., $id-prefix) || $lang"/>
 
-        <table class="languageFragmentTable">
+        <table class="languageFragmentTable" id="{$id}">
             <tr>
                 <th><xsl:value-of select="f:message('msgPage')"/></th>
                 <th><xsl:value-of select="f:message('msgElement')"/></th>
@@ -862,7 +864,9 @@
                     </td>
                     <td>
                         <xsl:variable name="fragment">
-                            <xsl:apply-templates select="." mode="languageFragments"/>
+                            <xsl:apply-templates select="." mode="languageFragments">
+                                <xsl:with-param name="id-prefix" select="$id || '.'" tunnel="yes"/>
+                            </xsl:apply-templates>
                         </xsl:variable>
                         <xsl:copy-of select="f:copy-without-ids($fragment)"/>
                     </td>

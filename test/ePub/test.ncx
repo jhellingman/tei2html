@@ -143,29 +143,29 @@
             <text>Index</text>
          </navLabel>
          <content src="test-index.xhtml"/>
-         <navPoint playOrder="22" class="section" id="xd33e1668">
+         <navPoint playOrder="22" class="section" id="xd33e1678">
             <navLabel>
                <text>A.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd33e1668"/>
+            <content src="test-index.xhtml#xd33e1678"/>
          </navPoint>
-         <navPoint playOrder="23" class="section" id="xd33e1671">
+         <navPoint playOrder="23" class="section" id="xd33e1681">
             <navLabel>
                <text>B.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd33e1671"/>
+            <content src="test-index.xhtml#xd33e1681"/>
          </navPoint>
-         <navPoint playOrder="24" class="section" id="xd33e1674">
+         <navPoint playOrder="24" class="section" id="xd33e1684">
             <navLabel>
                <text>C.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd33e1674"/>
+            <content src="test-index.xhtml#xd33e1684"/>
          </navPoint>
-         <navPoint playOrder="25" class="section" id="xd33e1677">
+         <navPoint playOrder="25" class="section" id="xd33e1687">
             <navLabel>
                <text>D.</text>
             </navLabel>
-            <content src="test-index.xhtml#xd33e1677"/>
+            <content src="test-index.xhtml#xd33e1687"/>
          </navPoint>
       </navPoint>
       <navPoint playOrder="26" class="contents" id="toc">
@@ -174,11 +174,11 @@
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="27" class="colophon" id="xd33e1689">
+      <navPoint playOrder="27" class="colophon" id="xd33e1699">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd33e1689"/>
+         <content src="test-backmatter.xhtml#xd33e1699"/>
       </navPoint>
    </navMap>
 </ncx>

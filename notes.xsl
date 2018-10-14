@@ -42,6 +42,15 @@
         </span>
     </xsl:template>
 
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('cut-in-left', 'cut-in-right')]">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+
+        <span class="{@place}-note">
+            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
 
     <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage -->
     <xsl:template match="margin">

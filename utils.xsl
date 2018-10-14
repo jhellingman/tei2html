@@ -116,7 +116,7 @@
 
     <xd:doc>
         <xd:short>Copy a node-tree while stripping al ids.</xd:short>
-        <xd:detail>Copy a node-tree while stripping al ids. This allows us content from the source document multiple times, 
+        <xd:detail>Copy a node-tree while stripping al ids. This allows us to use content from the source document multiple times, 
         without having duplicate ids (which we normally copy from the source document, if present) in the output.</xd:detail>
     </xd:doc>
 
@@ -130,6 +130,33 @@
     <xsl:template match="@*|node()" mode="copy-without-ids">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()" mode="copy-without-ids"/>
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Copy a node-tree while prefixing all ids.</xd:short>
+        <xd:detail>Copy a node-tree while prefixing al ids with a given prefix. This allows us to use content from the source document multiple times, 
+        without having duplicate ids (which we normally copy from the source document, if present) in the output.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:copy-with-id-prefix">
+        <xsl:param name="nodes"/>
+        <xsl:param name="id-prefix" as="xs:string"/>
+
+        <xsl:apply-templates select="$nodes" mode="copy-with-id-prefix">
+            <xsl:with-param name="id-prefix" select="$id-prefix" as="xs:string" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+
+    <xsl:template match="@id" mode="copy-with-id-prefix">
+        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
+        <xsl:attribute name="id" select="$id-prefix || ."/>
+    </xsl:template>
+
+    <xsl:template match="@*|node()" mode="copy-with-id-prefix">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="copy-with-id-prefix"/>
         </xsl:copy>
     </xsl:template>
 

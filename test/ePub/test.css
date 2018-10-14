@@ -1008,7 +1008,7 @@ p.byline {
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum, .stage {
+.figureHead, .noteref, .pseudonoteref, .marginnote, .cut-in-note-left, .cut-in-note-right, p.legend, .verseNum, .stage {
  color: #001FA4;
 }
 
@@ -1277,7 +1277,7 @@ width:480px;
 width:480px;
 }
 
-.xd33e1209width {
+.xd33e1219width {
 width:480px;
 }
 
@@ -1285,47 +1285,47 @@ width:480px;
 width:128px;
 }
 
-.xd33e1228 {
+.xd33e1238 {
 font-style:italic;
 }
 
-.xd33e1252 {
+.xd33e1262 {
 list-style-type:disc;
 }
 
-.xd33e1268 {
+.xd33e1278 {
 list-style-type:upper-roman;
 }
 
-.xd33e1277 {
+.xd33e1287 {
 list-style-type:lower-roman;
 }
 
-.xd33e1290 {
+.xd33e1300 {
 list-style-type:disc;
 }
 
-.xd33e1302 {
+.xd33e1312 {
 list-style-type:disc;
 }
 
-.xd33e1371 {
+.xd33e1381 {
 text-align:center;
 }
 
-.xd33e1376 {
+.xd33e1386 {
 text-indent:1em;
 }
 
-.xd33e1382 {
+.xd33e1392 {
 text-indent:2em;
 }
 
-.xd33e1386 {
+.xd33e1396 {
 text-indent:3em;
 }
 
-.xd33e1390 {
+.xd33e1400 {
 text-indent:10em;
 }
 
@@ -1367,6 +1367,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd33e1563 {
+.xd33e1573 {
 color:red
 }

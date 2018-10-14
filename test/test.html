@@ -1,6 +1,6 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2018-10-13T14:08:57Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2018-10-14T14:50:15Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd29e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
@@ -1029,6 +1029,31 @@ body {
  text-align: left;
 }
 
+.cut-in-left-note {
+ font-size: 0.8em;
+ left: 1%;
+ line-height: 1.2em;
+ float: left;
+ text-indent: 0;
+ width: 14%;
+ text-align: left;
+ padding: 0.8em;
+ padding-left: 0;
+}
+
+.cut-in-right-note {
+ font-size: 0.8em;
+ left: 1%;
+ line-height: 1.2em;
+ float: right;
+ text-indent: 0;
+ width: 14%;
+ text-align: right;
+ padding: 0.8em;
+ padding-right: 0;
+}
+
+
 span.tocPageNum, span.flushright {
  position: absolute;
  right: 16%;
@@ -1091,7 +1116,7 @@ p.byline {
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum, .stage {
+.figureHead, .noteref, .pseudonoteref, .marginnote, .cut-in-note-left, .cut-in-note-right, p.legend, .verseNum, .stage {
  color: #001FA4;
 }
 
@@ -1363,7 +1388,7 @@ width:480px;
 width:480px;
 }
 
-.xd29e1209width {
+.xd29e1219width {
 width:480px;
 }
 
@@ -1371,47 +1396,47 @@ width:480px;
 width:128px;
 }
 
-.xd29e1228 {
+.xd29e1238 {
 font-style:italic;
 }
 
-.xd29e1252 {
+.xd29e1262 {
 list-style-type:disc;
 }
 
-.xd29e1268 {
+.xd29e1278 {
 list-style-type:upper-roman;
 }
 
-.xd29e1277 {
+.xd29e1287 {
 list-style-type:lower-roman;
 }
 
-.xd29e1290 {
+.xd29e1300 {
 list-style-type:disc;
 }
 
-.xd29e1302 {
+.xd29e1312 {
 list-style-type:disc;
 }
 
-.xd29e1371 {
+.xd29e1381 {
 text-align:center;
 }
 
-.xd29e1376 {
+.xd29e1386 {
 text-indent:1em;
 }
 
-.xd29e1382 {
+.xd29e1392 {
 text-indent:2em;
 }
 
-.xd29e1386 {
+.xd29e1396 {
 text-indent:3em;
 }
 
-.xd29e1390 {
+.xd29e1400 {
 text-indent:10em;
 }
 
@@ -1489,7 +1514,7 @@ height:6.176ex;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd29e1563 {
+.xd29e1573 {
 color:red
 }
 </style>
@@ -2502,30 +2527,39 @@ color:red
                   <p id="xd29e1145" class="dropcap firstlinecaps">Lorem ipsum dolor sit amet, consectetur <span id="xd29e1147" lang="de">Deutsch</span> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                      Ut enim ad minim veniam, quis nostrud exercitation ullamco<span class="marginnote" id="xd29e1150">This is a small side note to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <span id="xd29e1153" class="xd29e149">Gebrochene Buchstaben</span> Excepteur sint<a class="noteref" id="xd29e1156src" href="#xd29e1156">1</a> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                     est laborum.
-                     </p>
+                     est laborum.</p>
+                  <p id="xd29e1159">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                     ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                     ullamco<span class="cut-in-left-note" id="xd29e1161">This is a small note cut-in to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  <p id="xd29e1164">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                     ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                     ullamco<span class="cut-in-right-note" id="xd29e1166">This is a small note cut-in to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                     in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                     cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                   <div class="figure figTest1width" id="figTest1"><img src="images/test.jpg" alt="This is the heading" width="80" height="80"></img><p class="figureHead">This is the heading</p>
-                     <p id="xd29e1161" class="first">This is the description.</p>
+                     <p id="xd29e1171" class="first">This is the description.</p>
                   </div>
                   <div class="figure floatLeft figTest2width figTest2" id="figTest2"><a href="images/test.jpg"><img src="images/test.jpg" alt="Tarsier" width="80" height="80"></img></a><p class="figureHead">Tarsier</p>
-                     <p id="xd29e1164" class="first">This is a somewhat longer test to verify we can limit the size of an image box.</p>
+                     <p id="xd29e1174" class="first">This is a somewhat longer test to verify we can limit the size of an image box.</p>
                   </div>
-                  <p id="xd29e1165">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                  <p id="xd29e1175">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
                      sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
                      id est laborum.
                      </p>
-                  <div class="figure floatRight figTest3width" id="figTest3"><a href="https://www.bohol.ph/"><img src="images/test.jpg" alt="A picture of the Philippine tarsier in a tree." width="80" height="80"></img></a><p class="figureHead">The <i id="xd29e1169">Philippine</i> Tarsier</p>
+                  <div class="figure floatRight figTest3width" id="figTest3"><a href="https://www.bohol.ph/"><img src="images/test.jpg" alt="A picture of the Philippine tarsier in a tree." width="80" height="80"></img></a><p class="figureHead">The <i id="xd29e1179">Philippine</i> Tarsier</p>
                   </div>
-                  <p id="xd29e1172">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                  <p id="xd29e1182">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
                      sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
                      id est laborum.</p>
-                  <p id="xd29e1173">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                  <p id="xd29e1184">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                      reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
@@ -2533,19 +2567,19 @@ color:red
                      id est laborum.</p>
                   <div class="figure tarsier1width" id="tarsier1">
                      <div class="figAnnotation tarsier1width"><span class="figTopLeft">Top Left</span><span class="figTop">Top</span><span class="figTopRight">Top Right</span></div><img src="images/tarsier.jpg" alt="A picture of the Philippine tarsier in a tree." width="480" height="326"></img><div class="figAnnotation tarsier1width"><span class="figBottomLeft">Bottom Left</span><span class="figBottom">Bottom</span><span class="figBottomRight">Bottom Right</span></div>
-                     <p class="figureHead">The <i id="xd29e1177">Philippine</i> Tarsier</p>
+                     <p class="figureHead">The <i id="xd29e1188">Philippine</i> Tarsier</p>
                   </div>
                   <div class="figure tarsier2width" id="tarsier2">
                      <div class="figAnnotation tarsier2width"><span class="figTopLeft">A very long piece of text in the top left to test its behaviour.</span><span class="figTop">&nbsp;</span></div><img src="images/tarsier.jpg" alt="A picture of the Philippine tarsier in a tree." width="480" height="326"></img><div class="figAnnotation tarsier2width"><span class="figTop">&nbsp;</span><span class="figBottomRight">A very long piece of text in the bottom right to test its behaviour.</span></div>
-                     <p class="figureHead">The <i id="xd29e1196">Philippine</i> Tarsier</p>
+                     <p class="figureHead">The <i id="xd29e1206">Philippine</i> Tarsier</p>
                   </div>
-                  <p id="xd29e1203">Figures following the P5 model.</p>
-                  <div id="figTest4" class="figure xd29e1209width">
-                     <p class="figureHead">The <i id="xd29e1207">Philippine</i> Tarsier</p><img src="images/tarsier.jpg" alt="A picture of the Philippine tarsier in a tree." width="480" height="326"></img><p id="xd29e1211">A descriptive paragraph below the figure. This text is purposely long enough to be
+                  <p id="xd29e1213">Figures following the P5 model.</p>
+                  <div id="figTest4" class="figure xd29e1219width">
+                     <p class="figureHead">The <i id="xd29e1217">Philippine</i> Tarsier</p><img src="images/tarsier.jpg" alt="A picture of the Philippine tarsier in a tree." width="480" height="326"></img><p id="xd29e1221">A descriptive paragraph below the figure. This text is purposely long enough to be
                         wider than the picture it belongs to.</p>
                   </div>
                   <div id="figTest5" class="figure grph2width">
-                     <p class="figureHead">A test with multiple graphic elements in a single figure.</p><img src="images/hg2101.png" alt=""></img><p id="xd29e1215">Some hieroglyphs.</p><img src="images/initial-A.gif" alt="" width="128" height="143"></img><p id="xd29e1217">A decorative initial letter A.</p>
+                     <p class="figureHead">A test with multiple graphic elements in a single figure.</p><img src="images/hg2101.png" alt=""></img><p id="xd29e1225">Some hieroglyphs.</p><img src="images/initial-A.gif" alt="" width="128" height="143"></img><p id="xd29e1227">A decorative initial letter A.</p>
                   </div>
                </div>
                <div class="footnotes">
@@ -2556,213 +2590,213 @@ color:red
                </div>
             </div>
             <div id="ch6" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                  <h2 id="xd29e1219" class="label">Chapter VI</h2>
-                  <h2 id="xd29e1221" class="main">Lists</h2>
+                  <h2 id="xd29e1229" class="label">Chapter VI</h2>
+                  <h2 id="xd29e1231" class="main">Lists</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1222" class="first">In this section, the various types of lists are demonstrated.</p>
-                  <p id="xd29e1223">First, we start with a simple, unnumbered list. List items can contain all the normal
+                  <p id="xd29e1232" class="first">In this section, the various types of lists are demonstrated.</p>
+                  <p id="xd29e1233">First, we start with a simple, unnumbered list. List items can contain all the normal
                      in-line elements, such as notes, corrections, etc.</p>
-                  <ul id="xd29e1224">
-                     <li id="xd29e1225">One</li>
-                     <li id="xd29e1226">Two</li>
-                     <li id="xd29e1227">Three</li>
-                     <li id="xd29e1228" class="xd29e1228">Four</li>
-                     <li id="xd29e1230">Five<span class="pagenum">[<a id="pb3" href="#pb3">3</a>]</span></li>
-                     <li id="xd29e1233">Six<a class="noteref" id="xd29e1235src" href="#xd29e1235">1</a></li>
-                     <li id="xd29e1239"><span class="corr" id="xd29e1240" title="Source: Zeven">Seven</span></li>
-                     <li id="xd29e1242">Eight</li>
-                     <li id="xd29e1243">Nine</li>
-                     <li id="xd29e1244">Ten</li>
+                  <ul id="xd29e1234">
+                     <li id="xd29e1235">One</li>
+                     <li id="xd29e1236">Two</li>
+                     <li id="xd29e1237">Three</li>
+                     <li id="xd29e1238" class="xd29e1238">Four</li>
+                     <li id="xd29e1240">Five<span class="pagenum">[<a id="pb3" href="#pb3">3</a>]</span></li>
+                     <li id="xd29e1243">Six<a class="noteref" id="xd29e1245src" href="#xd29e1245">1</a></li>
+                     <li id="xd29e1249"><span class="corr" id="xd29e1250" title="Source: Zeven">Seven</span></li>
+                     <li id="xd29e1252">Eight</li>
+                     <li id="xd29e1253">Nine</li>
+                     <li id="xd29e1254">Ten</li>
                   </ul>
-                  <p id="xd29e1245">By specifying the type of the list as ordered, it becomes a numbered list.</p>
-                  <ol id="xd29e1246">
-                     <li id="xd29e1247">One</li>
-                     <li id="xd29e1248">Two</li>
-                     <li id="xd29e1249">Three</li>
-                     <li id="xd29e1250">Four</li>
+                  <p id="xd29e1255">By specifying the type of the list as ordered, it becomes a numbered list.</p>
+                  <ol id="xd29e1256">
+                     <li id="xd29e1257">One</li>
+                     <li id="xd29e1258">Two</li>
+                     <li id="xd29e1259">Three</li>
+                     <li id="xd29e1260">Four</li>
                   </ol>
-                  <p id="xd29e1251">We can split a list into two columns, by putting columns(2) in the rend attribute.</p>
-                  <table class="splitListTable" id="xd29e1252">
+                  <p id="xd29e1261">We can split a list into two columns, by putting columns(2) in the rend attribute.</p>
+                  <table class="splitListTable" id="xd29e1262">
                      <tr>
                         <td>
-                           <ul class="xd29e1252">
-                              <li id="xd29e1253">One</li>
-                              <li id="xd29e1254">Two</li>
-                              <li id="xd29e1255">Three</li>
-                              <li id="xd29e1256">Four</li>
-                              <li id="xd29e1257">Five</li>
+                           <ul class="xd29e1262">
+                              <li id="xd29e1263">One</li>
+                              <li id="xd29e1264">Two</li>
+                              <li id="xd29e1265">Three</li>
+                              <li id="xd29e1266">Four</li>
+                              <li id="xd29e1267">Five</li>
                            </ul>
                         </td>
                         <td>
-                           <ul class="xd29e1252">
-                              <li id="xd29e1258">Six</li>
-                              <li id="xd29e1259">Seven</li>
-                              <li id="xd29e1260">Eight</li>
-                              <li id="xd29e1261">Nine</li>
-                              <li id="xd29e1262">Ten</li>
+                           <ul class="xd29e1262">
+                              <li id="xd29e1268">Six</li>
+                              <li id="xd29e1269">Seven</li>
+                              <li id="xd29e1270">Eight</li>
+                              <li id="xd29e1271">Nine</li>
+                              <li id="xd29e1272">Ten</li>
                            </ul>
                         </td>
                      </tr>
                   </table>
-                  <table class="splitListTable" id="xd29e1263" lang="nl">
+                  <table class="splitListTable" id="xd29e1273" lang="nl">
                      <tr>
                         <td>
                            <ol>
-                              <li id="xd29e1264">Een</li>
-                              <li id="xd29e1265">Twee</li>
+                              <li id="xd29e1274">Een</li>
+                              <li id="xd29e1275">Twee</li>
                            </ol>
                         </td>
                         <td>
                            <ol>
-                              <li id="xd29e1266">Drie</li>
-                              <li id="xd29e1267">Vier</li>
+                              <li id="xd29e1276">Drie</li>
+                              <li id="xd29e1277">Vier</li>
                            </ol>
                         </td>
                      </tr>
                   </table>
-                  <table class="splitListTable" id="xd29e1268" lang="nl">
+                  <table class="splitListTable" id="xd29e1278" lang="nl">
                      <tr>
                         <td>
-                           <ol class="xd29e1268">
-                              <li id="xd29e1269" value="5">Vijf</li>
-                              <li id="xd29e1271">Zes</li>
+                           <ol class="xd29e1278">
+                              <li id="xd29e1279" value="5">Vijf</li>
+                              <li id="xd29e1281">Zes</li>
                            </ol>
                         </td>
                         <td>
-                           <ol class="xd29e1268">
-                              <li id="xd29e1272" value="7">Zeven</li>
-                              <li id="xd29e1274">Acht</li>
+                           <ol class="xd29e1278">
+                              <li id="xd29e1282" value="7">Zeven</li>
+                              <li id="xd29e1284">Acht</li>
                            </ol>
                         </td>
                      </tr>
                   </table>
-                  <p id="xd29e1276">A list with lower case roman numerals, using the n-attribute to set the number value.:</p>
-                  <ol id="xd29e1277" lang="nl" class="xd29e1277">
-                     <li id="xd29e1278">Een</li>
-                     <li id="xd29e1279">Twee</li>
-                     <li id="xd29e1280" value="48">Achtenveertig</li>
-                     <li id="xd29e1282">Negenenveertig</li>
+                  <p id="xd29e1286">A list with lower case roman numerals, using the n-attribute to set the number value.:</p>
+                  <ol id="xd29e1287" lang="nl" class="xd29e1287">
+                     <li id="xd29e1288">Een</li>
+                     <li id="xd29e1289">Twee</li>
+                     <li id="xd29e1290" value="48">Achtenveertig</li>
+                     <li id="xd29e1292">Negenenveertig</li>
                   </ol>
-                  <p id="xd29e1283">A list without bullets or numbers:</p>
-                  <ul id="xd29e1284" lang="nl">
-                     <li id="xd29e1285">Een</li>
-                     <li id="xd29e1286">Twee</li>
-                     <li id="xd29e1287">Drie</li>
-                     <li id="xd29e1288">Vier</li>
+                  <p id="xd29e1293">A list without bullets or numbers:</p>
+                  <ul id="xd29e1294" lang="nl">
+                     <li id="xd29e1295">Een</li>
+                     <li id="xd29e1296">Twee</li>
+                     <li id="xd29e1297">Drie</li>
+                     <li id="xd29e1298">Vier</li>
                   </ul>
-                  <p id="xd29e1289">Similarly, we can split it in three columns as well, using columns(3).</p>
-                  <table class="splitListTable" id="xd29e1290">
+                  <p id="xd29e1299">Similarly, we can split it in three columns as well, using columns(3).</p>
+                  <table class="splitListTable" id="xd29e1300">
                      <tr>
                         <td>
-                           <ul class="xd29e1290">
-                              <li id="xd29e1291">One</li>
-                              <li id="xd29e1292">Two</li>
-                              <li id="xd29e1293">Three</li>
-                              <li id="xd29e1294">Four</li>
+                           <ul class="xd29e1300">
+                              <li id="xd29e1301">One</li>
+                              <li id="xd29e1302">Two</li>
+                              <li id="xd29e1303">Three</li>
+                              <li id="xd29e1304">Four</li>
                            </ul>
                         </td>
                         <td>
-                           <ul class="xd29e1290">
-                              <li id="xd29e1295">Five</li>
-                              <li id="xd29e1296">Six</li>
-                              <li id="xd29e1297">Seven</li>
-                              <li id="xd29e1298">Eight</li>
+                           <ul class="xd29e1300">
+                              <li id="xd29e1305">Five</li>
+                              <li id="xd29e1306">Six</li>
+                              <li id="xd29e1307">Seven</li>
+                              <li id="xd29e1308">Eight</li>
                            </ul>
                         </td>
                         <td>
-                           <ul class="xd29e1290">
-                              <li id="xd29e1299">Nine</li>
-                              <li id="xd29e1300">Ten</li>
+                           <ul class="xd29e1300">
+                              <li id="xd29e1309">Nine</li>
+                              <li id="xd29e1310">Ten</li>
                            </ul>
                         </td>
                      </tr>
                   </table>
-                  <p id="xd29e1301">And in a different order, by using item-order(row-first).</p>
-                  <table class="splitListTable" id="xd29e1302">
+                  <p id="xd29e1311">And in a different order, by using item-order(row-first).</p>
+                  <table class="splitListTable" id="xd29e1312">
                      <tr>
                         <td>
-                           <ul class="xd29e1302">
-                              <li id="xd29e1303">One</li>
-                              <li id="xd29e1306">Four</li>
-                              <li id="xd29e1309">Seven</li>
-                              <li id="xd29e1312">Ten</li>
+                           <ul class="xd29e1312">
+                              <li id="xd29e1313">One</li>
+                              <li id="xd29e1316">Four</li>
+                              <li id="xd29e1319">Seven</li>
+                              <li id="xd29e1322">Ten</li>
                            </ul>
                         </td>
                         <td>
-                           <ul class="xd29e1302">
-                              <li id="xd29e1304">Two</li>
-                              <li id="xd29e1307">Five</li>
-                              <li id="xd29e1310">Eight</li>
+                           <ul class="xd29e1312">
+                              <li id="xd29e1314">Two</li>
+                              <li id="xd29e1317">Five</li>
+                              <li id="xd29e1320">Eight</li>
                            </ul>
                         </td>
                         <td>
-                           <ul class="xd29e1302">
-                              <li id="xd29e1305">Three</li>
-                              <li id="xd29e1308">Six</li>
-                              <li id="xd29e1311">Nine</li>
+                           <ul class="xd29e1312">
+                              <li id="xd29e1315">Three</li>
+                              <li id="xd29e1318">Six</li>
+                              <li id="xd29e1321">Nine</li>
                            </ul>
                         </td>
                      </tr>
                   </table>
-                  <p id="xd29e1313">A list with grouping</p>
-                  <ul id="xd29e1314">
-                     <li id="xd29e1315">One</li>
-                     <li id="xd29e1316">Two</li>
-                     <li id="xd29e1317">Three</li>
-                     <li id="xd29e1318" class="itemGroup">
+                  <p id="xd29e1323">A list with grouping</p>
+                  <ul id="xd29e1324">
+                     <li id="xd29e1325">One</li>
+                     <li id="xd29e1326">Two</li>
+                     <li id="xd29e1327">Three</li>
+                     <li id="xd29e1328" class="itemGroup">
                         <table class="itemGroupTable">
                            <tr>
-                              <td id="xd29e1320">Four</td>
+                              <td id="xd29e1330">Four</td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/rbrace2.png" alt="}"></img></td>
                            </tr>
                            <tr>
-                              <td id="xd29e1322">Five</td>
+                              <td id="xd29e1332">Five</td>
                            </tr>
                         </table>
                      </li>
-                     <li id="xd29e1324">Six</li>
-                     <li id="xd29e1325" class="itemGroup">
+                     <li id="xd29e1334">Six</li>
+                     <li id="xd29e1335" class="itemGroup">
                         <table class="itemGroupTable">
                            <tr>
                               <td rowspan="2">
-                                 This <i id="xd29e1327">italic</i> text will go first
+                                 This <i id="xd29e1337">italic</i> text will go first
                                  </td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/lbrace2.png" alt="{"></img></td>
-                              <td id="xd29e1329">Seven</td>
+                              <td id="xd29e1339">Seven</td>
                               <td rowspan="2" class="itemGroupBrace"><img src="images/rbrace2.png" alt="}"></img></td>
                               <td rowspan="2">
-                                 This <b id="xd29e1333">bold</b> text will go last.
+                                 This <b id="xd29e1343">bold</b> text will go last.
                                  </td>
                            </tr>
                            <tr>
-                              <td id="xd29e1331">Eight</td>
+                              <td id="xd29e1341">Eight</td>
                            </tr>
                         </table>
                      </li>
-                     <li id="xd29e1336">Nine</li>
-                     <li id="xd29e1337">Ten</li>
+                     <li id="xd29e1346">Nine</li>
+                     <li id="xd29e1347">Ten</li>
                   </ul>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
                   <div class="footnote-body">
-                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1235" href="#xd29e1235src">1</a></span> This is a <a id="xd29e1237"></a>footnote to list-item six.&nbsp;<a class="fnarrow" href="#xd29e1235src">&#x2191;</a></p>
+                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1245" href="#xd29e1245src">1</a></span> This is a <a id="xd29e1247"></a>footnote to list-item six.&nbsp;<a class="fnarrow" href="#xd29e1245src">&#x2191;</a></p>
                   </div>
                </div>
             </div>
             <div id="ch07" class="div1 chapter"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
                   <div class="figure"><img src="images/Ornament.gif" alt="Chapter VII"></img></div>
-                  <h2 id="xd29e1339" class="label">Chapter VII</h2>
-                  <h2 id="xd29e1341" class="main">Text Divisions</h2>
+                  <h2 id="xd29e1349" class="label">Chapter VII</h2>
+                  <h2 id="xd29e1351" class="main">Text Divisions</h2>
                   <p><span class="pagenum">[<a id="pb4" href="#pb4">4</a>]</span></p>
                </div>
                <div class="divBody">
                   <div id="ch07.1" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                        <h3 id="xd29e1343" class="main">Division at Level 2</h3>
+                        <h3 id="xd29e1353" class="main">Division at Level 2</h3>
                      </div>
                      <div class="divBody">
-                        <p id="xd29e1344" class="first">Text in division at level 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        <p id="xd29e1354" class="first">Text in division at level 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -2770,10 +2804,10 @@ color:red
                            officia deserunt mollit anim id est laborum.</p>
                         <div class="div3" id="ch07.1.1"><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.-->
                            <div class="divHead">
-                              <h4 id="xd29e1346" class="main">Division at Level 3</h4>
+                              <h4 id="xd29e1356" class="main">Division at Level 3</h4>
                            </div>
                            <div class="divBody">
-                              <p id="xd29e1347" class="first">Text in division at level 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                              <p id="xd29e1357" class="first">Text in division at level 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                                  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -2781,10 +2815,10 @@ color:red
                                  officia deserunt mollit anim id est laborum.</p>
                               <div class="div4" id="ch07.1.1.1"><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.-->
                                  <div class="divHead">
-                                    <h5 id="xd29e1349" class="main">Division at Level 4</h5>
+                                    <h5 id="xd29e1359" class="main">Division at Level 4</h5>
                                  </div>
                                  <div class="divBody">
-                                    <p id="xd29e1350" class="first">Text in division at level 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    <p id="xd29e1360" class="first">Text in division at level 4. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -2792,10 +2826,10 @@ color:red
                                        officia deserunt mollit anim id est laborum.</p>
                                     <div class="div5" id="ch07.1.1.1.1"><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.-->
                                        <div class="divHead">
-                                          <h6 id="xd29e1352" class="main">Division at Level 5</h6>
+                                          <h6 id="xd29e1362" class="main">Division at Level 5</h6>
                                        </div>
                                        <div class="divBody">
-                                          <p id="xd29e1353" class="first">Text in division at level 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                          <p id="xd29e1363" class="first">Text in division at level 5. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                                              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -2803,10 +2837,10 @@ color:red
                                              officia deserunt mollit anim id est laborum.</p>
                                           <div class="div6" id="ch07.1.1.1.1.1"><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.-->
                                              <div class="divHead">
-                                                <h6 id="xd29e1355" class="main">Division at Level 6</h6>
+                                                <h6 id="xd29e1365" class="main">Division at Level 6</h6>
                                              </div>
                                              <div class="divBody">
-                                                <p id="xd29e1356" class="first">Text in division at level 6. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                <p id="xd29e1366" class="first">Text in division at level 6. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -2825,60 +2859,60 @@ color:red
                </div>
             </div>
             <div id="ch08" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                  <h2 id="xd29e1359" class="label">Chapter VIII</h2>
-                  <h2 id="xd29e1361" class="main">Poetry</h2>
+                  <h2 id="xd29e1369" class="label">Chapter VIII</h2>
+                  <h2 id="xd29e1371" class="main">Poetry</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1362" class="first">This section is to test the rendering of <a id="xd29e1364"></a>poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza's
+                  <p id="xd29e1372" class="first">This section is to test the rendering of <a id="xd29e1374"></a>poetry by the TEI stylesheet. The entire poem should appear centered, with all stanza's
                      aligned. Note that the technique used to center an entire block of text does not work
                      in IE.</p>
-                  <p id="xd29e1366">(An index reference to a <a id="xd29e1368"></a>footnote here as well.)</p>
+                  <p id="xd29e1376">(An index reference to a <a id="xd29e1378"></a>footnote here as well.)</p>
                   <div id="lg2" class="lgouter">
-                     <h4 class="xd29e1371">Three stanzas in a row</h4>
+                     <h4 class="xd29e1381">Three stanzas in a row</h4>
                      <div id="lg2.1" class="lg">
-                        <p id="xd29e1374" class="line">This is a rule of verse</p>
-                        <p id="xd29e1376" class="line xd29e1376">This is another <span class="pagenum">[<a id="pb5" href="#pb5">5</a>]</span>rule of verse</p>
-                        <p id="xd29e1380" class="line">This is a rule of verse</p>
-                        <p id="xd29e1382" class="line xd29e1382">This is another rule of verse</p>
                         <p id="xd29e1384" class="line">This is a rule of verse</p>
-                        <p id="xd29e1386" class="line xd29e1386">This is another rule of verse</p>
-                        <p id="xd29e1388" class="line">This is a rule of verse</p>
-                        <p id="xd29e1390" class="line xd29e1390">This is another rule of verse</p>
+                        <p id="xd29e1386" class="line xd29e1386">This is another <span class="pagenum">[<a id="pb5" href="#pb5">5</a>]</span>rule of verse</p>
+                        <p id="xd29e1390" class="line">This is a rule of verse</p>
+                        <p id="xd29e1392" class="line xd29e1392">This is another rule of verse</p>
+                        <p id="xd29e1394" class="line">This is a rule of verse</p>
+                        <p id="xd29e1396" class="line xd29e1396">This is another rule of verse</p>
+                        <p id="xd29e1398" class="line">This is a rule of verse</p>
+                        <p id="xd29e1400" class="line xd29e1400">This is another rule of verse</p>
                      </div>
                      <div id="lg2.2" class="lg lg2.2">
-                        <p id="xd29e1393" class="line">This is a rule of verse in italics</p>
-                        <p id="xd29e1395" class="line xd29e1376">This is another rule of <a id="xd29e1397"></a>verse</p>
-                        <p id="xd29e1399" class="line">This is a rule of verse</p>
-                        <p id="xd29e1401" class="line xd29e1382">This is another rule of <a id="xd29e1403"></a>verse</p>
-                        <p id="xd29e1405" class="line">This is a rule of verse</p>
-                        <p id="xd29e1407" class="line xd29e1386">This is another rule of verse</p>
+                        <p id="xd29e1403" class="line">This is a rule of verse in italics</p>
+                        <p id="xd29e1405" class="line xd29e1386">This is another rule of <a id="xd29e1407"></a>verse</p>
                         <p id="xd29e1409" class="line">This is a rule of verse</p>
-                        <p id="xd29e1411" class="line xd29e1390">This is another rule of verse</p>
+                        <p id="xd29e1411" class="line xd29e1392">This is another rule of <a id="xd29e1413"></a>verse</p>
+                        <p id="xd29e1415" class="line">This is a rule of verse</p>
+                        <p id="xd29e1417" class="line xd29e1396">This is another rule of verse</p>
+                        <p id="xd29e1419" class="line">This is a rule of verse</p>
+                        <p id="xd29e1421" class="line xd29e1400">This is another rule of verse</p>
                      </div>
                      <div id="lg2.3" class="lg lg2.2">
-                        <p id="xd29e1414" class="line"><span class="lineNum">1</span>This is a rule of verse in italics</p>
-                        <p id="xd29e1416" class="line xd29e1376"><span class="lineNum">2</span>This is another rule of verse</p>
-                        <p id="xd29e1418" class="line"><span class="lineNum">3</span>This is a rule of verse</p>
-                        <p id="xd29e1420" class="line xd29e1376"><span class="lineNum">4</span>This is <span class="corr" id="xd29e1422" title="Source: Correction in verse">another</span> rule of verse</p>
-                        <p id="xd29e1425" class="line"><span class="lineNum">5</span>This is a rule of verse</p>
-                        <p id="xd29e1427" class="line xd29e1376"><span class="lineNum">6</span>This is another rule of verse</p>
-                        <p id="xd29e1429" class="line"><span class="lineNum">7</span>This is a rule of verse</p>
-                        <p id="xd29e1431" class="line xd29e1390"><span class="lineNum">8</span>This is another rule of verse<a class="noteref" id="xd29e1433src" href="#xd29e1433">1</a></p>
+                        <p id="xd29e1424" class="line"><span class="lineNum">1</span>This is a rule of verse in italics</p>
+                        <p id="xd29e1426" class="line xd29e1386"><span class="lineNum">2</span>This is another rule of verse</p>
+                        <p id="xd29e1428" class="line"><span class="lineNum">3</span>This is a rule of verse</p>
+                        <p id="xd29e1430" class="line xd29e1386"><span class="lineNum">4</span>This is <span class="corr" id="xd29e1432" title="Source: Correction in verse">another</span> rule of verse</p>
+                        <p id="xd29e1435" class="line"><span class="lineNum">5</span>This is a rule of verse</p>
+                        <p id="xd29e1437" class="line xd29e1386"><span class="lineNum">6</span>This is another rule of verse</p>
+                        <p id="xd29e1439" class="line"><span class="lineNum">7</span>This is a rule of verse</p>
+                        <p id="xd29e1441" class="line xd29e1400"><span class="lineNum">8</span>This is another rule of verse<a class="noteref" id="xd29e1443src" href="#xd29e1443">1</a></p>
                      </div>
                   </div>
-                  <p id="xd29e1448" class="first">Note that the <a id="xd29e1450"></a>footnote includes some verse, to which we can link <a href="#footnoteverse" id="xd29e1452">here</a>, and elsewhere in the document.</p>
-                  <p id="xd29e1455">Another piece of verse with line-numbers:</p>
+                  <p id="xd29e1458" class="first">Note that the <a id="xd29e1460"></a>footnote includes some verse, to which we can link <a href="#footnoteverse" id="xd29e1462">here</a>, and elsewhere in the document.</p>
+                  <p id="xd29e1465">Another piece of verse with line-numbers:</p>
                   <div id="lg3" class="lgouter lg2.2">
-                     <p id="xd29e1457" class="line"><span class="lineNum">1</span>This is a rule of verse in italics</p>
-                     <p id="xd29e1459" class="line xd29e1376"><span class="lineNum">2</span>This is another rule of verse</p>
-                     <p id="xd29e1461" class="line"><span class="lineNum">3</span>This is a rule of verse</p>
-                     <p id="xd29e1463" class="line xd29e1376"><span class="lineNum">4</span>This is <span class="corr" id="xd29e1465" title="Source: Correction in verse">another</span> rule of verse</p>
-                     <p id="xd29e1468" class="line"><span class="lineNum">5</span>This is a rule of verse</p>
-                     <p id="xd29e1470" class="line xd29e1376"><span class="lineNum">6</span>This is another rule of verse</p>
-                     <p id="xd29e1472" class="line"><span class="lineNum">7</span>This is a rule of verse</p>
-                     <p id="xd29e1474" class="line xd29e1390"><span class="lineNum">8</span>This is another rule of verse</p>
+                     <p id="xd29e1467" class="line"><span class="lineNum">1</span>This is a rule of verse in italics</p>
+                     <p id="xd29e1469" class="line xd29e1386"><span class="lineNum">2</span>This is another rule of verse</p>
+                     <p id="xd29e1471" class="line"><span class="lineNum">3</span>This is a rule of verse</p>
+                     <p id="xd29e1473" class="line xd29e1386"><span class="lineNum">4</span>This is <span class="corr" id="xd29e1475" title="Source: Correction in verse">another</span> rule of verse</p>
+                     <p id="xd29e1478" class="line"><span class="lineNum">5</span>This is a rule of verse</p>
+                     <p id="xd29e1480" class="line xd29e1386"><span class="lineNum">6</span>This is another rule of verse</p>
+                     <p id="xd29e1482" class="line"><span class="lineNum">7</span>This is a rule of verse</p>
+                     <p id="xd29e1484" class="line xd29e1400"><span class="lineNum">8</span>This is another rule of verse</p>
                   </div>
-                  <p id="xd29e1476" class="first">Two verses, aligned:</p>
+                  <p id="xd29e1486" class="first">Two verses, aligned:</p>
                   <table class="alignedverse">
                      <tr>
                         <td class="lineNumbers"></td>
@@ -2888,37 +2922,37 @@ color:red
                      <tr>
                         <td class="lineNumbers"><span class="lineNum">1</span></td>
                         <td class="first">
-                           <p id="xd29e1479" class="line">Frère Jacques, frère Jacques,</p>
+                           <p id="xd29e1489" class="line">Frère Jacques, frère Jacques,</p>
                         </td>
                         <td class="second">
-                           <p id="xd29e1489" class="line">Are you sleeping, are you sleeping,</p>
+                           <p id="xd29e1499" class="line">Are you sleeping, are you sleeping,</p>
                         </td>
                      </tr>
                      <tr>
                         <td class="lineNumbers"><span class="lineNum">2</span></td>
                         <td class="first">
-                           <p id="xd29e1481" class="line">Dormez-vous ? Dormez-vous ?</p>
+                           <p id="xd29e1491" class="line">Dormez-vous ? Dormez-vous ?</p>
                         </td>
                         <td class="second">
-                           <p id="xd29e1491" class="line">Brother John? Brother John?</p>
+                           <p id="xd29e1501" class="line">Brother John? Brother John?</p>
                         </td>
                      </tr>
                      <tr>
                         <td class="lineNumbers"></td>
                         <td class="first">
-                           <p id="xd29e1483" class="line">Sonnez les matines ! Sonnez les matines !</p>
+                           <p id="xd29e1493" class="line">Sonnez les matines ! Sonnez les matines !</p>
                         </td>
                         <td class="second">
-                           <p id="xd29e1493" class="line">Morning bells are ringing! Morning bells are ringing!</p>
+                           <p id="xd29e1503" class="line">Morning bells are ringing! Morning bells are ringing!</p>
                         </td>
                      </tr>
                      <tr>
                         <td class="lineNumbers"><span class="lineNum">4</span></td>
                         <td class="first">
-                           <p id="xd29e1485" class="line xd29e1382">Ding, daing, dong. Ding, daing, dong.</p>
+                           <p id="xd29e1495" class="line xd29e1392">Ding, daing, dong. Ding, daing, dong.</p>
                         </td>
                         <td class="second">
-                           <p id="xd29e1495" class="line xd29e1382">Ding, dang, dong. Ding, dang, dong.</p>
+                           <p id="xd29e1505" class="line xd29e1392">Ding, dang, dong. Ding, dang, dong.</p>
                         </td>
                      </tr>
                   </table>
@@ -2926,14 +2960,14 @@ color:red
                <div class="footnotes">
                   <hr class="fnsep"></hr>
                   <div class="footnote-body">
-                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1433" href="#xd29e1433src">1</a></span> To add verse in a <a id="xd29e1436"></a>footnote, the lg element needs to be enclosed with a q element. This is a requirement
+                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1443" href="#xd29e1443src">1</a></span> To add verse in a <a id="xd29e1446"></a>footnote, the lg element needs to be enclosed with a q element. This is a requirement
                         of the TEI DTD.</p>
-                     <div class="nestedtext" id="xd29e1440">
-                        <div class="nestedbody" id="xd29e1441">
+                     <div class="nestedtext" id="xd29e1450">
+                        <div class="nestedbody" id="xd29e1451">
                            <div class="nesteddiv1" id="quotedPoetry">
                               <div id="footnoteverse" class="lgouter footnote lg2.2">
-                                 <p id="xd29e1444" class="line">This is a rule of verse in italics in a footnote</p>
-                                 <p id="xd29e1446" class="line xd29e1376">This is another rule of verse in a footnote</p>
+                                 <p id="xd29e1454" class="line">This is a rule of verse in italics in a footnote</p>
+                                 <p id="xd29e1456" class="line xd29e1386">This is another rule of verse in a footnote</p>
                               </div>
                            </div>
                         </div>
@@ -2944,65 +2978,65 @@ color:red
             <div id="alignFirst" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><table class="alignedtext">
                   <tr>
                      <td class="first" lang="en-US">
-                        <h2 id="xd29e1498" class="label">Chapter IX</h2>
-                        <h2 id="xd29e1500" class="main">Text Alignments</h2>
+                        <h2 id="xd29e1508" class="label">Chapter IX</h2>
+                        <h2 id="xd29e1510" class="main">Text Alignments</h2>
                      </td>
                      <td class="second" lang="nl">
-                        <h2 id="xd29e1519" class="label">Hoofdstuk IX</h2>
-                        <h2 id="xd29e1521" class="main">Tekstsynchronisatie</h2>
+                        <h2 id="xd29e1529" class="label">Hoofdstuk IX</h2>
+                        <h2 id="xd29e1531" class="main">Tekstsynchronisatie</h2>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1501" class="first">This is a test of printing translated paragraphs side-by-side</p>
+                        <p id="xd29e1511" class="first">This is a test of printing translated paragraphs side-by-side</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1522" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
+                        <p id="xd29e1532" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1503">The paragraphs will be numbered using the <i id="xd29e1505">n</i> attribute.</p>
+                        <p id="xd29e1513">The paragraphs will be numbered using the <i id="xd29e1515">n</i> attribute.</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1524">De alinea's worden genummerd met het <i id="xd29e1526">n</i> attribuut.</p>
+                        <p id="xd29e1534">De alinea's worden genummerd met het <i id="xd29e1536">n</i> attribuut.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1507">That way, the style sheet knows which paragraphs belong together.</p>
+                        <p id="xd29e1517">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1528">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
-                        <p id="xd29e1530">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd29e1538">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
+                        <p id="xd29e1540">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                         <div id="lg5" class="lgouter">
-                           <p id="xd29e1532" class="line">Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</p>
+                           <p id="xd29e1542" class="line">Hebban olla vogala nestas hagunnan hinase hic enda thu. Wat unbidan we nu.</p>
                         </div>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1509">This makes it easy to verify translations.</p>
+                        <p id="xd29e1519">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1534" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd29e1544" class="first">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1511">An extra paragraph, with the translation next to it.</p>
-                        <p id="xd29e1513">And yet another paragraph.</p>
+                        <p id="xd29e1521">An extra paragraph, with the translation next to it.</p>
+                        <p id="xd29e1523">And yet another paragraph.</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1536">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd29e1546">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1515">And the final paragraph.</p>
+                        <p id="xd29e1525">And the final paragraph.</p>
                      </td>
                      <td class="second" lang="nl">
-                        <p id="xd29e1538">En de laatste alinea.</p>
+                        <p id="xd29e1548">En de laatste alinea.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3015,59 +3049,59 @@ color:red
                   <tr>
                      <td class="first" lang="en-US"></td>
                      <td class="second">
-                        <h2 id="xd1627e5" class="main">Nogmaals een test</h2>
+                        <h2 id="xd1629e5" class="main">Nogmaals een test</h2>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1541" class="first">This is a test of printing translated paragraphs side-by-side, this time the translation
+                        <p id="xd29e1551" class="first">This is a test of printing translated paragraphs side-by-side, this time the translation
                            is pulled-in from another source.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
-                        <p id="xd1627e10">Deze alinea staat in een externe bron.</p>
+                        <p id="xd1629e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea's</p>
+                        <p id="xd1629e10">Deze alinea staat in een externe bron.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1543">The paragraphs will be numbered using the <i id="xd29e1545">n</i> attribute.</p>
+                        <p id="xd29e1553">The paragraphs will be numbered using the <i id="xd29e1555">n</i> attribute.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e12">De alinea's worden genummerd met het <i id="xd1627e14">n</i> attribuut.</p>
+                        <p id="xd1629e12">De alinea's worden genummerd met het <i id="xd1629e14">n</i> attribuut.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1547">That way, the style sheet knows which paragraphs belong together.</p>
+                        <p id="xd29e1557">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e17">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
-                        <p id="xd1627e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd1629e17">Op die manier weet de stylesheet welke alinea's bij elkaar horen.</p>
+                        <p id="xd1629e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1549">This makes it easy to verify translations.</p>
+                        <p id="xd29e1559">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd1629e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1551">An extra paragraph, with the translation next to it.</p>
-                        <p id="xd29e1553">And yet another paragraph.</p>
+                        <p id="xd29e1561">An extra paragraph, with the translation next to it.</p>
+                        <p id="xd29e1563">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e26">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd1629e26">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
                      <td class="first" lang="en-US">
-                        <p id="xd29e1555">And the final paragraph.</p>
+                        <p id="xd29e1565">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd1627e29">En de laatste alinea.</p>
+                        <p id="xd1629e29">En de laatste alinea.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3077,41 +3111,41 @@ color:red
                </table>
             </div>
             <div id="usingStyle" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                  <h2 id="xd29e1558" class="label">Chapter X</h2>
-                  <h2 id="xd29e1560" class="main">Using @style and @rendition attributes</h2>
+                  <h2 id="xd29e1568" class="label">Chapter X</h2>
+                  <h2 id="xd29e1570" class="main">Using @style and @rendition attributes</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1561" class="first">This is a test of using <span id="xd29e1563" class="xd29e1563">CSS</span> in <span id="xd29e1566" class="xd29e1563">@style</span> attributes.</p>
-                  <p id="xd29e1569">This is a test of using <span id="xd29e1571" class="green">CSS</span> using <span id="xd29e1574" class="green">@rendition</span> attributes referencing rendition elements in the TeiHeader.</p>
-                  <p id="xd29e1577">This is a further test with <span id="xd29e1579" class="red ul">red and underlined text</span>.</p>
-                  <p id="xd29e1582">This is a test of using <i id="blue">CSS</i> using a style defined in a rendition element: CSS before should be blue.</p>
-                  <p id="xd29e1587" class="large-letter">This is a test of using CSS using a style defined in a rendition element. The first
+                  <p id="xd29e1571" class="first">This is a test of using <span id="xd29e1573" class="xd29e1573">CSS</span> in <span id="xd29e1576" class="xd29e1573">@style</span> attributes.</p>
+                  <p id="xd29e1579">This is a test of using <span id="xd29e1581" class="green">CSS</span> using <span id="xd29e1584" class="green">@rendition</span> attributes referencing rendition elements in the TeiHeader.</p>
+                  <p id="xd29e1587">This is a further test with <span id="xd29e1589" class="red ul">red and underlined text</span>.</p>
+                  <p id="xd29e1592">This is a test of using <i id="blue">CSS</i> using a style defined in a rendition element: CSS before should be blue.</p>
+                  <p id="xd29e1597" class="large-letter">This is a test of using CSS using a style defined in a rendition element. The first
                      letter of this paragraph should be large and red.</p>
                </div>
             </div>
             <div id="ch11" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                  <h2 id="xd29e1590" class="main">Mathematical Formula</h2>
+                  <h2 id="xd29e1600" class="main">Mathematical Formula</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1591" class="first">This is an experimental feature. To include a mathematical formula, just type
-                     <span id="f1" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1596src" href="#xd29e1596">1</a> famous equation.</p>
-                  <p id="xd29e1602">Similarly, to get the time-dependent Schrödinger equation, you can type
+                  <p id="xd29e1601" class="first">This is an experimental feature. To include a mathematical formula, just type
+                     <span id="f1" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1606src" href="#xd29e1606">1</a> famous equation.</p>
+                  <p id="xd29e1612">Similarly, to get the time-dependent Schrödinger equation, you can type
                      <span id="f2" class="displayMath"><img src="formulas/display-f2.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" class="f2frml"></img></span>
-                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span id="f3" class="displayMath"><img src="formulas/display-f3.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1610" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
+                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span id="f3" class="displayMath"><img src="formulas/display-f3.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1620" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
                   <div class="footnote-body">
-                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1596" href="#xd29e1596src">1</a></span> That is <span id="f1n" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
-                        resize, matching the x-height of the surrounding text.&nbsp;<a class="fnarrow" href="#xd29e1596src">&#x2191;</a></p>
+                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1606" href="#xd29e1606src">1</a></span> That is <span id="f1n" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
+                        resize, matching the x-height of the surrounding text.&nbsp;<a class="fnarrow" href="#xd29e1606src">&#x2191;</a></p>
                   </div>
                </div>
             </div>
             <div id="ch11a" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                  <h2 id="xd29e1614" class="main">Mathematical Formula (Part II)</h2>
+                  <h2 id="xd29e1624" class="main">Mathematical Formula (Part II)</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1615" class="first">When <span id="f4" class="inlineMath"><img src="formulas/inline-f4.svg" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span id="f5" class="inlineMath"><img src="formulas/inline-f5.svg" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
+                  <p id="xd29e1625" class="first">When <span id="f4" class="inlineMath"><img src="formulas/inline-f4.svg" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span id="f5" class="inlineMath"><img src="formulas/inline-f5.svg" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
                      <span id="f6" class="displayMath"><img src="formulas/display-f6.svg" title="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" class="f6frml"></img></span></p>
                </div>
             </div>
@@ -3119,11 +3153,11 @@ color:red
       </div>
       <div class="back" id="back">
          <div id="test-toc" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-               <h2 id="xd29e1627" class="main">Table of Contents</h2>
+               <h2 id="xd29e1637" class="main">Table of Contents</h2>
             </div>
             <div class="divBody">
-               <p id="xd29e1628" class="first">The below table of contents is manually created, however, specially formatted.</p>
-               <table class="tocList" id="xd29e1629" lang="nl">
+               <p id="xd29e1638" class="first">The below table of contents is manually created, however, specially formatted.</p>
+               <table class="tocList" id="xd29e1639" lang="nl">
                   <tr>
                      <td class="tocDivNum"></td>
                      <td class="tocDivTitle" colspan="7">      Introductie   </td>
@@ -3141,7 +3175,7 @@ color:red
                   </tr>
                   <tr>
                      <td class="tocDivNum">III</td>
-                     <td class="tocDivTitle" colspan="7">      <span class="corr" id="xd29e1650" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
+                     <td class="tocDivTitle" colspan="7">      <span class="corr" id="xd29e1660" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
                      <td class="tocPageNum">35</td>
                   </tr>
                   <tr>
@@ -3158,43 +3192,43 @@ color:red
             </div>
          </div>
          <div id="index" lang="nl" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-               <h2 id="xd29e1666" class="main">Index</h2>
-               <div class="transcribernote indextoc" id="xd29e1667"><a href="#xd29e1669">A</a> | <a href="#xd29e1672">B</a> | <a href="#xd29e1675">C</a> | <a href="#xd29e1678">D</a></div>
+               <h2 id="xd29e1676" class="main">Index</h2>
+               <div class="transcribernote indextoc" id="xd29e1677"><a href="#xd29e1679">A</a> | <a href="#xd29e1682">B</a> | <a href="#xd29e1685">C</a> | <a href="#xd29e1688">D</a></div>
             </div>
             <div class="divBody">
-               <div id="xd29e1668" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                     <h3 id="xd29e1669" class="main">A.</h3>
+               <div id="xd29e1678" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
+                     <h3 id="xd29e1679" class="main">A.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd29e1670" class="first">A is een aapje.</p>
+                     <p id="xd29e1680" class="first">A is een aapje.</p>
                   </div>
                </div>
-               <div id="xd29e1671" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                     <h3 id="xd29e1672" class="main">B.</h3>
+               <div id="xd29e1681" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
+                     <h3 id="xd29e1682" class="main">B.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd29e1673" class="first">B is een Boom.</p>
+                     <p id="xd29e1683" class="first">B is een Boom.</p>
                   </div>
                </div>
-               <div id="xd29e1674" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                     <h3 id="xd29e1675" class="main">C.</h3>
+               <div id="xd29e1684" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
+                     <h3 id="xd29e1685" class="main">C.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd29e1676" class="first">C is een Cent.</p>
+                     <p id="xd29e1686" class="first">C is een Cent.</p>
                   </div>
                </div>
-               <div id="xd29e1677" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-                     <h3 id="xd29e1678" class="main">D.</h3>
+               <div id="xd29e1687" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
+                     <h3 id="xd29e1688" class="main">D.</h3>
                   </div>
                   <div class="divBody">
-                     <p id="xd29e1679" class="first">D is een Drommedaris.
-                        <br id="xd29e1681"></br>en een Duizendpoot.</p>
+                     <p id="xd29e1689" class="first">D is een Drommedaris.
+                        <br id="xd29e1691"></br>en een Duizendpoot.</p>
                   </div>
                </div>
             </div>
          </div>
          <div id="backmatter" class="div1"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
-               <div class="div1" id="xd29e1684">
+               <div class="div1" id="xd29e1694">
                   <h2 class="main">List of Illustrations</h2>
                   <table>
                      <tr>
@@ -3229,19 +3263,19 @@ color:red
                      </tr>
                   </table>
                </div>
-               <div class="div1" id="xd29e1685">
+               <div class="div1" id="xd29e1695">
                   <h2 class="main">Index</h2>
                   <p>Chapter headings  <a href="#xd29e424">2<i>a</i></a></p>
-                  <p>Footnote  <a href="#xd29e365">2<i>a</i></a>&#x2013;<a href="#xd29e1436">5</a>; in quoted material <a href="#xd29e362">2<i>a</i></a></p>
+                  <p>Footnote  <a href="#xd29e365">2<i>a</i></a>&#x2013;<a href="#xd29e1446">5</a>; in quoted material <a href="#xd29e362">2<i>a</i></a></p>
                   <p>ornaments  <a href="#xd29e1139">2<i>a</i></a></p>
                   <p>Paragraph  <a href="#xd29e358">2<i>a</i></a></p>
-                  <p>Poetry  <a href="#xd29e1364">4</a>, <a href="#xd29e1397">5</a></p>
+                  <p>Poetry  <a href="#xd29e1374">4</a>, <a href="#xd29e1407">5</a></p>
                   <p>Project Gutenberg  <a href="#xd29e304">2<i>a</i></a></p>
                   <p>rend attribute  <a href="#xd29e1143">2<i>a</i></a></p>
                   <p>Stylesheet  <a href="#xd29e130">###</a></p>
                   <p>XSLT  <a href="#xd29e128">###</a></p>
                </div>
-               <div class="div1" id="xd29e1687">
+               <div class="div1" id="xd29e1697">
                   <h2 class="main">Table of Contents</h2>
                   <table>
                      <tr>
@@ -3363,7 +3397,7 @@ color:red
                      </tr>
                   </table>
                </div>
-               <div class="div1" id="xd29e1688">
+               <div class="div1" id="xd29e1698">
                   <h2 class="main">List of Illustrations</h2>
                   <ul>
                      <li id="loi.figTest1"><a href="#figTest1">This is the heading</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPageNum"><a class="pageref" href="#figTest1">2<i>a</i></a></span></li>
@@ -3375,7 +3409,7 @@ color:red
                      <li id="loi.figTest5"><a href="#figTest5">A test with multiple graphic elements in a single figure.</a>&nbsp;&nbsp;&nbsp;&nbsp; <span class="tocPageNum"><a class="pageref" href="#figTest5">2<i>a</i></a></span></li>
                   </ul>
                </div>
-               <div class="transcribernote" id="xd29e1689">
+               <div class="transcribernote" id="xd29e1699">
                   <h2 class="main">Colophon</h2>
                   <h3 class="main">Availability</h3>
                   <p id="xd29e30" class="first">Details of the copyright status of the work go here. Most Project Gutenberg texts
@@ -3515,19 +3549,19 @@ color:red
                         <td class="bottom">4</td>
                      </tr>
                      <tr>
-                        <td class="width20"><a class="pageref" href="#xd29e1240">3</a></td>
+                        <td class="width20"><a class="pageref" href="#xd29e1250">3</a></td>
                         <td class="width40 bottom">Zeven</td>
                         <td class="width40 bottom">Seven</td>
                         <td class="bottom">1</td>
                      </tr>
                      <tr>
-                        <td class="width20"><a class="pageref" href="#xd29e1422">5</a>, <a class="pageref" href="#xd29e1465">5</a></td>
+                        <td class="width20"><a class="pageref" href="#xd29e1432">5</a>, <a class="pageref" href="#xd29e1475">5</a></td>
                         <td class="width40 bottom">Correction in verse</td>
                         <td class="width40 bottom">another</td>
                         <td class="bottom">16</td>
                      </tr>
                      <tr>
-                        <td class="width20"><a class="pageref" href="#xd29e1650">5</a></td>
+                        <td class="width20"><a class="pageref" href="#xd29e1660">5</a></td>
                         <td class="width40 bottom">Vierde</td>
                         <td class="width40 bottom">Derde</td>
                         <td class="bottom">2</td>
@@ -3553,7 +3587,7 @@ color:red
                <div class="transcribernote">
                   <h2 class="main">Overview of fragments in foreign languages</h2>
                   <h3 class="main">German</h3>
-                  <table class="languageFragmentTable">
+                  <table class="languageFragmentTable" id="xd29e1147de">
                      <tr>
                         <th>Page</th>
                         <th>Element</th>
@@ -3566,7 +3600,7 @@ color:red
                      </tr>
                   </table>
                   <h3 class="main">English</h3>
-                  <table class="languageFragmentTable">
+                  <table class="languageFragmentTable" id="xd29e36en">
                      <tr>
                         <th>Page</th>
                         <th>Element</th>
@@ -3583,7 +3617,7 @@ color:red
                      </tr>
                   </table>
                   <h3 class="main">French</h3>
-                  <table class="languageFragmentTable">
+                  <table class="languageFragmentTable" id="xd29e337fr">
                      <tr>
                         <th>Page</th>
                         <th>Element</th>
@@ -3606,7 +3640,7 @@ color:red
                      </tr>
                   </table>
                   <h3 class="main">Dutch</h3>
-                  <table class="languageFragmentTable">
+                  <table class="languageFragmentTable" id="xd29e297nl">
                      <tr>
                         <th>Page</th>
                         <th>Element</th>
@@ -3628,7 +3662,7 @@ color:red
                         <td><a lang="nl" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a></td>
                      </tr>
                      <tr>
-                        <td><a class="pageref" href="#xd29e1263">3</a>, <a class="pageref" href="#xd29e1284">3</a></td>
+                        <td><a class="pageref" href="#xd29e1273">3</a>, <a class="pageref" href="#xd29e1294">3</a></td>
                         <td>list</td>
                         <td>
                            <table class="splitListTable" lang="nl">
@@ -3650,19 +3684,19 @@ color:red
                         </td>
                      </tr>
                      <tr>
-                        <td><a class="pageref" href="#xd29e1268">3</a></td>
+                        <td><a class="pageref" href="#xd29e1278">3</a></td>
                         <td>list</td>
                         <td>
                            <table class="splitListTable" lang="nl">
                               <tr>
                                  <td>
-                                    <ol class="xd29e1268">
+                                    <ol class="xd29e1278">
                                        <li value="5">Vijf</li>
                                        <li>Zes</li>
                                     </ol>
                                  </td>
                                  <td>
-                                    <ol class="xd29e1268">
+                                    <ol class="xd29e1278">
                                        <li value="7">Zeven</li>
                                        <li>Acht</li>
                                     </ol>
@@ -3672,10 +3706,10 @@ color:red
                         </td>
                      </tr>
                      <tr>
-                        <td><a class="pageref" href="#xd29e1277">3</a></td>
+                        <td><a class="pageref" href="#xd29e1287">3</a></td>
                         <td>list</td>
                         <td>
-                           <ol lang="nl" class="xd29e1277">
+                           <ol lang="nl" class="xd29e1287">
                               <li>Een</li>
                               <li>Twee</li>
                               <li value="48">Achtenveertig</li>
@@ -3689,7 +3723,7 @@ color:red
                         <td></td>
                      </tr>
                      <tr>
-                        <td><a class="pageref" href="#xd29e1629">5</a></td>
+                        <td><a class="pageref" href="#xd29e1639">5</a></td>
                         <td>list</td>
                         <td>
                            <table class="tocList" lang="nl">
@@ -3732,7 +3766,7 @@ color:red
                         <td>
                            <div lang="nl" class="div1 index"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
                                  <h2 class="main">Index</h2>
-                                 <div class="transcribernote indextoc"><a href="#xd29e1669">A</a> | <a href="#xd29e1672">B</a> | <a href="#xd29e1675">C</a> | <a href="#xd29e1678">D</a></div>
+                                 <div class="transcribernote indextoc"><a href="#xd29e1679">A</a> | <a href="#xd29e1682">B</a> | <a href="#xd29e1685">C</a> | <a href="#xd29e1688">D</a></div>
                               </div>
                               <div class="divBody">
                                  <div class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><!--This book has been produced by Project Gutenberg and is freely available from https://www.gutenberg.org/.--><div class="divHead">
@@ -4667,10 +4701,10 @@ color:red
                      </tr>
                      <tr>
                         <td>note</td>
-                        <td>21</td>
+                        <td>23</td>
                         <td><b>@anchored</b></td>
-                        <td>21</td>
-                        <td><span class="tagUsageValue">yes</span> <i>21</i> </td>
+                        <td>23</td>
+                        <td><span class="tagUsageValue">yes</span> <i>23</i> </td>
                      </tr>
                      <tr>
                         <td></td>
@@ -4690,8 +4724,8 @@ color:red
                         <td></td>
                         <td></td>
                         <td><b>@place</b></td>
-                        <td>21</td>
-                        <td><span class="tagUsageValue">unspecified</span> <i>12</i> <span class="tagUsageValue">foot</span> <i>8</i> <span class="tagUsageValue">margin</span> </td>
+                        <td>23</td>
+                        <td><span class="tagUsageValue">unspecified</span> <i>12</i> <span class="tagUsageValue">foot</span> <i>8</i> <span class="tagUsageValue">margin</span> <span class="tagUsageValue">cut-in-left</span> <span class="tagUsageValue">cut-in-right</span> </td>
                      </tr>
                      <tr>
                         <td></td>
@@ -4730,7 +4764,7 @@ color:red
                      </tr>
                      <tr>
                         <td>p</td>
-                        <td>146</td>
+                        <td>148</td>
                         <td><b>@id</b></td>
                         <td>1</td>
                         <td><span class="tagUsageValue">loon</span> </td>
