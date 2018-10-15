@@ -34,19 +34,15 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('margin', 'left', 'right')]">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span class="marginnote">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('cut-in-left', 'cut-in-right')]">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span class="{@place}-note">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -54,10 +50,8 @@
 
     <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage -->
     <xsl:template match="margin">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span class="marginnote">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
@@ -72,9 +66,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[&isFootnote;]">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
-        <a class="noteref" id="{f:generate-id(., $id-prefix)}src" href="{f:generate-footnote-href(.)}">
+        <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
@@ -182,11 +174,10 @@
     </xd:doc>
 
     <xsl:template name="footnote-marker">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(note)"/>
 
         <span class="label">
-            <a class="noteref" id="{f:generate-id(., $id-prefix)}" href="{f:generate-href(.)}src">
+            <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
                 <xsl:call-template name="footnote-number"/>
             </a>
         </span>
@@ -260,9 +251,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-paragraph">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
-        <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
         <xsl:variable name="class">
             <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
             <xsl:text>footnote </xsl:text>
@@ -284,9 +273,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
-        <a class="apparatusnote" id="{f:generate-id(., $id-prefix)}src" href="{f:generate-apparatus-note-href(.)}">
+        <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
         </a>
@@ -299,10 +286,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='apparatus']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <!-- Determine whether we already have seen a divGen for apparatus notes, by finding its id.
                  If that is the case, we only include the apparatus notes after the previous one! -->
@@ -361,7 +346,6 @@
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes-paragraphs">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
@@ -371,7 +355,7 @@
             <xsl:when test="$columns &gt; 1 and count($notes) &gt; 1">
                 <xsl:variable name="rows" select="ceiling(count($notes) div $columns)"/>
                 <table class="cols{$columns}">
-                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <tr>
                         <xsl:for-each-group select="$notes" group-by="(position() - 1) idiv number($rows)">
                             <td>
@@ -398,8 +382,6 @@
     </xd:doc>
 
     <xsl:template match="note[@place='apparatus' and not(p)]" mode="apparatus">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
@@ -407,7 +389,7 @@
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="apparatus-note-marker"/>
             <xsl:text> </xsl:text>
             <xsl:apply-templates/>
@@ -423,10 +405,8 @@
     </xd:doc>
 
     <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>footnote apparatus</xsl:text>

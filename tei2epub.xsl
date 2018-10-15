@@ -118,9 +118,7 @@
         <xsl:apply-templates mode="opf"/>
         <xsl:apply-templates mode="ncx"/>
         <xsl:apply-templates mode="ePubNav"/>
-        <xsl:apply-templates>
-            <xsl:with-param name="id-prefix" select="''" tunnel="yes"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates/>
     </xsl:template>
 
 

@@ -29,8 +29,6 @@
     </xd:doc>
 
     <xsl:template match="TEI.2 | TEI">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:comment>
             <xsl:text> This HTML file has been automatically generated from an XML source on </xsl:text>
             <xsl:value-of select="f:utc-timestamp()"/>
@@ -45,7 +43,7 @@
         </xsl:text>
 
         <html>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-html-header"/>
 
             <body>

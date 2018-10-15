@@ -69,14 +69,6 @@
     </xsl:function>
 
 
-    <xsl:function name="f:generate-id" as="xs:string">
-        <xsl:param name="node" as="element()"/>
-        <xsl:param name="id-prefix" as="xs:string"/>
-
-        <xsl:value-of select="$id-prefix || (if ($node/@id) then $node/@id else 'x' || generate-id($node))"/>
-    </xsl:function>
-
-
     <xsl:function name="f:needs-id" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
 
@@ -290,20 +282,12 @@
 
     <xd:doc>
         <xd:short>Generate both a lang and an id attribute.</xd:short>
-        <xd:detail> </xd:detail>
     </xd:doc>
 
     <xsl:function name="f:set-lang-id-attributes" as="attribute()*">
         <xsl:param name="node" as="element()"/>
 
-        <xsl:copy-of select="f:set-lang-id-attributes($node, '')"/>
-    </xsl:function>
-
-    <xsl:function name="f:set-lang-id-attributes" as="attribute()*">
-        <xsl:param name="node" as="element()"/>
-        <xsl:param name="id-prefix" as="xs:string"/>
-
-        <xsl:attribute name="id" select="f:generate-id($node, $id-prefix)"/>
+        <xsl:attribute name="id" select="f:generate-id($node)"/>
         <xsl:copy-of select="f:generate-lang-attribute($node/@lang)"/>
     </xsl:function>
 

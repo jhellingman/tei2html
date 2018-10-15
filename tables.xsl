@@ -49,12 +49,10 @@
     </xd:doc>
 
     <xsl:template match="table" mode="render-table">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:choose>
             <xsl:when test="f:rend-value(@rend, 'position') = 'inline' or f:rend-value(@rend, 'class')  = 'intralinear'">
                 <span class="table">
-                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </span>
@@ -62,7 +60,7 @@
             <xsl:otherwise>
                 <xsl:call-template name="closepar"/>
                 <div class="table">
-                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </div>
@@ -144,10 +142,8 @@
     </xd:doc>
 
     <xsl:template mode="tablecaption" match="head">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <h4 class="tablecaption">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <!-- TODO: improve handling of table/@rend attribute here -->
             <xsl:if test="f:rend-value(../@rend, 'align') = 'center'">
@@ -176,14 +172,12 @@
     </xd:doc>
 
     <xsl:template match="row">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <tr>
             <xsl:if test="f:determine-row-class(.) != ''">
                 <xsl:attribute name="class"><xsl:value-of select="f:determine-row-class(.)"/></xsl:attribute>
             </xsl:if>
 
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
@@ -199,10 +193,8 @@
     </xd:doc>
 
     <xsl:template match="cell">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <td>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="cell-span"/>
             <xsl:call-template name="cell-rend"/>
 

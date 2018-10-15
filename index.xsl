@@ -42,10 +42,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='Index' or @type='index']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
             <xsl:copy-of select="f:logInfo('Generating Index', ())"/>
@@ -216,10 +214,8 @@
     </xd:doc>
 
     <xsl:template match="index">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <a>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </a>
     </xsl:template>
@@ -241,9 +237,7 @@
 
 
     <xsl:template name="genindextoc">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
-        <div class="transcribernote indextoc" id="{f:generate-id(., $id-prefix)}">
+        <div class="transcribernote indextoc" id="{f:generate-id(.)}">
             <xsl:apply-templates select="../div2/head | ../div3/head | ../div/head" mode="genindextoc"/>
         </div>
     </xsl:template>

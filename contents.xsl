@@ -56,10 +56,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='toc']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
             <xsl:call-template name="toc-body-table"/>
         </div>
@@ -470,10 +468,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='toca']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
             <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/front/div1"/>
@@ -556,10 +552,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='loi']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <ul>
                 <xsl:apply-templates select="//figure[head and not(./ancestor::figure)]" mode="genloi"/>
@@ -572,10 +566,8 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="genloi">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <!-- TODO: make id unique for each occurrence of <divGen type="loi"> -->
-        <li id="loi.{f:generate-id(., $id-prefix)}">
+        <li id="loi.{f:generate-id(.)}">
             <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
             <xsl:call-template name="generate-toc-entry"/>
             <xsl:if test=".//figure[head]">
@@ -601,10 +593,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='gallery' or @type='Gallery']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
             <table>
                 <xsl:call-template name="splitrows">
@@ -709,13 +699,11 @@
     </xd:doc>
 
     <xsl:template match="list[@type='tocList']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:choose>
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
                 <table class="tocList">
-                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tocList"/>
                 </table>
             </xsl:when>
@@ -782,14 +770,12 @@
     </xd:doc>
 
     <xsl:template match="list[@type='determinationTable']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:call-template name="closepar"/>
         <xsl:choose>
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='determinationTable'])">
                 <table class="tocList">
-                    <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="determinationTable"/>
                 </table>
             </xsl:when>
@@ -802,11 +788,10 @@
     </xsl:template>
 
     <xsl:template mode="determinationTable" match="item">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="depth" select="count(ancestor::list[@type='determinationTable']) - 1"/>
 
         <tr>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <!-- Use padding cell if needed to indent nested contents -->
             <xsl:if test="$depth > 0">
                 <td>
@@ -856,12 +841,9 @@
 
     <!-- collect footnotes in a separate section, sorted by div1 -->
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="div1 notes">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgNotes')"/></h2>
-
             <xsl:call-template name="footnotes-body"/>
         </div>
     </xsl:template>

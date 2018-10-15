@@ -314,15 +314,13 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template match="figure">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:if test="f:isSet('includeImages')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
                 <xsl:call-template name="closepar"/>
             </xsl:if>
             <div class="figure">
-                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
                 <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
                 <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
@@ -514,20 +512,16 @@ width:<xsl:value-of select="$width"/>;
 
 
     <xsl:template match="figure[figure]">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="compositeFigure">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
 
     <xsl:template match="figure[graphic]">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
                 <xsl:variable name="widestImage" select="f:widestImage(graphic/@url)"/>

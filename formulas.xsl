@@ -60,8 +60,6 @@
     </xd:doc>
 
     <xsl:template name="handleFormula">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
 
         <xsl:variable name="basename" select="f:formulaBasename($firstInstance)" as="xs:string"/>
@@ -89,7 +87,7 @@
         <xsl:copy-of select="f:placeMathLabel(., 'left')"/>
 
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>
 
             <xsl:choose>

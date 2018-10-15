@@ -24,100 +24,80 @@
     </xd:doc>
 
     <xsl:template match="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'titlePage')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docTitle" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'docTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'mainTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='sub']" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'subTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='series' or @type='Series']" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'seriesTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='volume' or @type='Volume']" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'volumeTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="byline" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'byline')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docAuthor" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'docAuthor')"/>
             <xsl:apply-templates mode="titlePage"/>
         </span>
     </xsl:template>
 
     <xsl:template match="docImprint" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'docImprint')"/>
             <xsl:apply-templates mode="titlePage"/>
         </div>
     </xsl:template>
 
     <xsl:template match="docDate" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'docDate')"/>
             <xsl:apply-templates mode="titlePage"/>
         </span>
@@ -140,10 +120,8 @@
     </xsl:template>
 
     <xsl:template match="seg" mode="titlePage">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <span class="seg">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

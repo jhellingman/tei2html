@@ -33,28 +33,22 @@
     </xsl:template>
 
     <xsl:template match="front">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="front">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="body">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="body">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="back">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="back">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -80,10 +74,8 @@
     </xd:doc>
 
     <xsl:template match="div0">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="generate-label"/>
             <xsl:call-template name="pgComment"/>
@@ -125,9 +117,7 @@
     </xd:doc>
 
     <xsl:template match="div1[@type='TranscriberNote']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
-        <div class="transcribernote" id="{f:generate-id(., $id-prefix)}">
+        <div class="transcribernote" id="{f:generate-id(.)}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
@@ -140,8 +130,6 @@
     </xd:doc>
 
     <xsl:template match="div1">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:if test="$outputformat = 'html'">
             <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
             <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
@@ -156,7 +144,7 @@
 
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div>
-                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="generate-label"/>
@@ -194,11 +182,9 @@
     </xd:doc>
 
     <xsl:template match="div2">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div>
-                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="pgComment"/>
@@ -217,11 +203,9 @@
     </xd:doc>
 
     <xsl:template match="div3 | div4 | div5 | div6">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div class="{name()}">
-                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="handleDiv"/>
@@ -252,12 +236,10 @@
     <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
 
     <xsl:template match="div">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:variable name="level" select="f:divLevel(.) + 1"/>
             <div>
-                <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:if test="$level &lt; 3">
                     <xsl:call-template name="generate-toc-link"/>
@@ -353,19 +335,15 @@
     <!-- remaining headers and bylines -->
 
     <xsl:template match="head">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <h4>
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
 
     <xsl:template match="byline">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:element name="{$p.element}">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:text>byline</xsl:text>
@@ -417,10 +395,9 @@
     </xd:doc>
 
     <xsl:template name="headText">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:variable name="context" select="." as="element(head)"/>
 
-        <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
         <xsl:variable name="class">
             <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>

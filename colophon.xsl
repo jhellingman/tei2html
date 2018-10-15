@@ -36,10 +36,8 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='Colophon']">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <div class="transcribernote">
-            <xsl:copy-of select="f:set-lang-id-attributes(., $id-prefix)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
 
@@ -562,8 +560,6 @@
     </xd:doc>
 
     <xsl:template name="corr-href-attribute">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
-
         <xsl:choose>
             <xsl:when test="f:insideFootnote(.)">
                 <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
@@ -702,7 +698,6 @@
     </xd:doc>
 
     <xsl:template name="externalReferenceTable">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
 
         <!-- TODO: make this table also work for P5 href elements -->
         <xsl:if test="//xref[@url]">
@@ -720,7 +715,7 @@
                                 <xsl:if test="position() != 1">
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
-                                <a class="pageref" id="{f:generate-id(., $id-prefix)}ext" href="{f:generate-href(.)}">
+                                <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
                                     <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                                 </a>
                             </xsl:for-each>
@@ -815,11 +810,10 @@
     </xd:doc>
 
     <xsl:template name="languageFragments">
-        <xsl:param name="id-prefix" as="xs:string" tunnel="yes"/>
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
-        <xsl:variable name="id" select="f:generate-id(., $id-prefix) || $lang"/>
+        <xsl:variable name="id" select="f:generate-id(.) || $lang"/>
 
         <table class="languageFragmentTable" id="{$id}">
             <tr>
@@ -864,9 +858,7 @@
                     </td>
                     <td>
                         <xsl:variable name="fragment">
-                            <xsl:apply-templates select="." mode="languageFragments">
-                                <xsl:with-param name="id-prefix" select="$id || '.'" tunnel="yes"/>
-                            </xsl:apply-templates>
+                            <xsl:apply-templates select="." mode="languageFragments"/>
                         </xsl:variable>
                         <xsl:copy-of select="f:copy-without-ids($fragment)"/>
                     </td>
