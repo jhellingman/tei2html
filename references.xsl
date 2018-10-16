@@ -1,9 +1,4 @@
-<!DOCTYPE xsl:stylesheet [
-
-    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
-
-]>
-
+<!DOCTYPE xsl:stylesheet>
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
@@ -138,7 +133,7 @@
     <xsl:function name="f:insideFootnote">
         <xsl:param name="targetNode" as="node()"/>
 
-        <xsl:value-of select="$targetNode/ancestor-or-self::note[&isFootnote;]"/>
+        <xsl:value-of select="$targetNode/ancestor-or-self::note[f:isFootnote(.)]"/>
     </xsl:function>
 
     <xd:doc>

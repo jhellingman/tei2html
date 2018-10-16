@@ -395,7 +395,7 @@
 
     <xsl:template match="text" mode="manifest">
         <xsl:apply-templates mode="splitter">
-            <xsl:with-param name="action" select="'manifest'"/>
+            <xsl:with-param name="splitter-action" select="'manifest'" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -730,7 +730,7 @@
 
     <xsl:template match="text" mode="spine">
         <xsl:apply-templates mode="splitter">
-            <xsl:with-param name="action" select="'spine'"/>
+            <xsl:with-param name="splitter-action" select="'spine'" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
 

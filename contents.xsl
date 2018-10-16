@@ -2,7 +2,6 @@
 
     <!ENTITY nbsp       "&#160;">
     <!ENTITY ndash      "&#x2013;">
-
 ]>
 
 <xsl:stylesheet version="3.0"
@@ -882,10 +881,10 @@
 
     <xsl:template match="div0" mode="divgen-footnotes">
         <!-- Only mention the part if it has footnotes (not in the chapters) -->
-        <xsl:if test=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]">
+        <xsl:if test=".//note[f:isFootnote(.) and not(ancestor::div1)]">
             <div class="div2 notes">
                 <xsl:call-template name="footnote-sectionhead"/>
-                <xsl:apply-templates select=".//note[(@place='foot' or @place='unspecified' or not(@place)) and not(ancestor::div1)]" mode="footnotes"/>
+                <xsl:apply-templates select=".//note[f:isFootnote(.) and not(ancestor::div1)]" mode="footnotes"/>
             </div>
         </xsl:if>
         <xsl:apply-templates select="div1[not(ancestor::q)]" mode="divgen-footnotes"/>
@@ -894,10 +893,10 @@
 
     <xsl:template match="div1" mode="divgen-footnotes">
         <!-- Only mention the chapter if it has footnotes -->
-        <xsl:if test=".//note[@place='foot' or @place='unspecified' or not(@place)]">
+        <xsl:if test=".//note[f:isFootnote(.)]">
             <div class="div2 notes">
                 <xsl:call-template name="footnote-sectionhead"/>
-                <xsl:apply-templates select=".//note[@place='foot' or @place='unspecified' or not(@place)]" mode="footnotes"/>
+                <xsl:apply-templates select=".//note[f:isFootnote(.)]" mode="footnotes"/>
             </div>
         </xsl:if>
     </xsl:template>

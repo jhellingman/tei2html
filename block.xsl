@@ -19,9 +19,6 @@
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
     <!ENTITY asterism   "&#x2042;">
-
-    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
-
 ]>
 
 <xsl:stylesheet version="3.0"
@@ -381,21 +378,21 @@
         superfluous structure.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[&isFootnote;]//q/text">
+    <xsl:template match="note[f:isFootnote(.)]//q/text">
         <div class="nestedtext">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[&isFootnote;]//q/text/body">
+    <xsl:template match="note[f:isFootnote(.)]//q/text/body">
         <div class="nestedbody">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[&isFootnote;]//q/text/body/div1">
+    <xsl:template match="note[f:isFootnote(.)]//q/text/body/div1">
         <div class="nesteddiv1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>

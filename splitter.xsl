@@ -33,7 +33,7 @@
         <p>The following actions are supported:</p>
 
         <table>
-            <tr><td>[empty]     </td><td>Generate the (named) files with the content.</td></tr>
+            <tr><td>content     </td><td>Generate the (named) files with the content.</td></tr>
             <tr><td>filename    </td><td>Generate the name of the file that contains the (transformed) element represented in $node.</td></tr>
             <tr><td>manifest    </td><td>Generate the manifest (ODF) for ePub.</td></tr>
             <tr><td>spine       </td><td>Generate the spine (ODF) for ePub.</td></tr>
@@ -50,7 +50,9 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text" priority="2">
-        <xsl:apply-templates mode="splitter"/>
+        <xsl:apply-templates mode="splitter">
+            <xsl:with-param name="splitter-action" select="'content'" tunnel="yes"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
@@ -62,28 +64,12 @@
     <xd:doc>
         <xd:short>Split text element.</xd:short>
         <xd:detail>Split the top-level <code>text</code> element (not to be confused with a text node) of a TEI file.</xd:detail>
-            <xd:param name="action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
-            <xd:param name="node">Node of which we want to know in which output file it will end-up (only relevant in <code>filename</code>-mode).</xd:param>
     </xd:doc>
 
     <xsl:template match="text" mode="splitter">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-
-        <xsl:apply-templates select="front" mode="splitter">
-            <xsl:with-param name="action" select="$action"/>
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:apply-templates>
-
-        <xsl:apply-templates select="body" mode="splitter">
-            <xsl:with-param name="action" select="$action"/>
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:apply-templates>
-
-        <xsl:apply-templates select="back" mode="splitter">
-            <xsl:with-param name="action" select="$action"/>
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="front" mode="splitter"/>
+        <xsl:apply-templates select="body" mode="splitter"/>
+        <xsl:apply-templates select="back" mode="splitter"/>
     </xsl:template>
 
 
@@ -93,13 +79,7 @@
     </xd:doc>
 
     <xsl:template match="body[div0]" mode="splitter">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-
-        <xsl:apply-templates select="div0" mode="splitter">
-            <xsl:with-param name="action" select="$action"/>
-            <xsl:with-param name="node" select="$node"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="div0" mode="splitter"/>
     </xsl:template>
 
 
@@ -110,25 +90,17 @@
     </xd:doc>
 
     <xsl:template match="div0 | front | back | body[div1]" mode="splitter">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-
         <xsl:for-each-group select="node()" group-adjacent="not(self::div1)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
                     <!-- Sequence of non-div1 elements -->
                     <xsl:call-template name="div-fragment">
-                        <xsl:with-param name="action" select="$action"/>
-                        <xsl:with-param name="node" select="$node"/>
-                        <xsl:with-param name="nodes" select="current-group()"/>
+                        <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- Sequence of div1 elements -->
-                    <xsl:apply-templates select="current-group()" mode="splitter">
-                        <xsl:with-param name="action" select="$action"/>
-                        <xsl:with-param name="node" select="$node"/>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="current-group()" mode="splitter"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each-group>
@@ -142,25 +114,17 @@
     </xd:doc>
 
     <xsl:template match="front[div] | back[div] | body[div]" mode="splitter">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-
         <xsl:for-each-group select="node()" group-adjacent="not(self::div)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
                     <!-- Sequence of non-div elements -->
                     <xsl:call-template name="div-fragment">
-                        <xsl:with-param name="action" select="$action"/>
-                        <xsl:with-param name="node" select="$node"/>
-                        <xsl:with-param name="nodes" select="current-group()"/>
+                        <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
                     <!-- Sequence of div elements -->
-                    <xsl:apply-templates select="current-group()" mode="splitter">
-                        <xsl:with-param name="action" select="$action"/>
-                        <xsl:with-param name="node" select="$node"/>
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="current-group()" mode="splitter"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each-group>
@@ -170,37 +134,27 @@
     <xd:doc>
         <xd:short>Handle a fragment of a div0, div1, or div element.</xd:short>
         <xd:detail>Handle a fragment of a div0, div1, or div element. What we do depends on the action parameter being passed.</xd:detail>
-        <xd:param name="action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
-        <xd:param name="node">Node of which we want to know in which output file it will end-up (only relevant in <code>filename</code>-mode).</xd:param>
-        <xd:param name="nodes">The nodes that make up the fragment.</xd:param>
+        <xd:param name="splitter-action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
     </xd:doc>
 
     <xsl:template name="div-fragment">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-        <xsl:param name="nodes" as="node()*"/>
+        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
         <xsl:choose>
-            <xsl:when test="$action = 'filename'">
-                <xsl:call-template name="filename.div-fragment">
-                    <xsl:with-param name="node" select="$node"/>
-                    <xsl:with-param name="nodes" select="$nodes"/>
-                </xsl:call-template>
+            <xsl:when test="$splitter-action = 'filename'">
+                <xsl:call-template name="filename.div-fragment"/>
             </xsl:when>
-            <xsl:when test="$action = 'manifest'">
-                <xsl:call-template name="manifest.div-fragment">
-                    <xsl:with-param name="nodes" select="$nodes"/>
-                </xsl:call-template>
+            <xsl:when test="$splitter-action = 'manifest'">
+                <xsl:call-template name="manifest.div-fragment"/>
             </xsl:when>
-            <xsl:when test="$action = 'spine'">
-                <xsl:call-template name="spine.div-fragment">
-                    <xsl:with-param name="nodes" select="$nodes"/>
-                </xsl:call-template>
+            <xsl:when test="$splitter-action = 'spine'">
+                <xsl:call-template name="spine.div-fragment"/>
+            </xsl:when>
+            <xsl:when test="$splitter-action = 'content'">
+                <xsl:call-template name="content.div-fragment"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="content.div-fragment">
-                    <xsl:with-param name="nodes" select="$nodes"/>
-                </xsl:call-template>
+                <xsl:copy-of select="f:logError('Unknown splitter-action {1} in div-fragment.', ($splitter-action))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -212,9 +166,6 @@
     </xd:doc>
 
     <xsl:template match="div1 | div" mode="splitter">
-        <xsl:param name="action" select="''" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
-
         <xsl:choose>
             <xsl:when test="processing-instruction(epubsplit)">
                 <xsl:for-each-group select="node()" group-adjacent="not(self::processing-instruction(epubsplit))">
@@ -222,19 +173,14 @@
                         <xsl:when test="current-grouping-key()">
                             <!-- Sequence of non-div1 or div elements -->
                             <xsl:call-template name="div-fragment">
-                                <xsl:with-param name="action" select="$action"/>
-                                <xsl:with-param name="node" select="$node"/>
-                                <xsl:with-param name="nodes" select="current-group()"/>
+                                <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
                             </xsl:call-template>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:for-each-group>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="choose-splitter-action">
-                    <xsl:with-param name="action" select="$action"/>
-                    <xsl:with-param name="node" select="$node"/>
-                </xsl:call-template>
+                <xsl:call-template name="choose-splitter-action"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -243,28 +189,27 @@
     <xd:doc>
         <xd:short>Select the appropriate action.</xd:short>
         <xd:detail>Select the appropriate action for the node.</xd:detail>
-        <xd:param name="action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
-        <xd:param name="node">Node of which we want to know in which output file it will end-up (only relevant in <code>filename</code>-mode).</xd:param>
+        <xd:param name="splitter-action">A coded action string, which indicates what end-result we expect from the splitter.</xd:param>
     </xd:doc>
 
     <xsl:template name="choose-splitter-action">
-        <xsl:param name="action" as="xs:string"/>
-        <xsl:param name="node" as="node()?"/>
+        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
         <xsl:choose>
-            <xsl:when test="$action = 'filename'">
-                <xsl:call-template name="filename.div">
-                    <xsl:with-param name="node" select="$node"/>
-                </xsl:call-template>
+            <xsl:when test="$splitter-action = 'filename'">
+                <xsl:call-template name="filename.div"/>
             </xsl:when>
-            <xsl:when test="$action = 'manifest'">
+            <xsl:when test="$splitter-action = 'manifest'">
                 <xsl:call-template name="manifest.div"/>
             </xsl:when>
-            <xsl:when test="$action = 'spine'">
+            <xsl:when test="$splitter-action = 'spine'">
                 <xsl:call-template name="spine.div"/>
             </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="$splitter-action = 'content'">
                 <xsl:call-template name="content.div"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:logError('Unknown splitter-action {1} in choose-splitter-action.', ($splitter-action))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -278,23 +223,20 @@
     </xd:doc>
 
     <xsl:template name="filename.div-fragment">
-        <xsl:param name="node" as="element()"/>
-        <xsl:param name="nodes" as="node()*"/>
+        <xsl:param name="splitter-target-node" as="element()" tunnel="yes"/>
+        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
 
         <xsl:param name="position" select="position()"/> <!-- that is, position of context group -->
 
         <!-- Does any of the nodes contains the node sought after? -->
-        <xsl:for-each select="$nodes">
-            <!--<xsl:message>INFO:    Locating node in: <xsl:value-of select="name()"/>[<xsl:value-of select="$position"/>]. Count: <xsl:value-of select="count(.)"/>/<xsl:value-of select="count($node)"/>.</xsl:message>
-            <xsl:message>Content: <xsl:value-of select="$node"/>.</xsl:message>-->
-
-            <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
+        <xsl:for-each select="$splitter-candidate-nodes">
+            <xsl:if test="descendant-or-self::*[generate-id() = generate-id($splitter-target-node)]">
                 <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
             </xsl:if>
         </xsl:for-each>
 
         <!-- Handle the case where we are referring to the div0 element itself (our parent) -->
-        <xsl:if test="(generate-id(..) = generate-id($node)) and position() = 1">
+        <xsl:if test="(generate-id(..) = generate-id($splitter-target-node)) and $position = 1">
             <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
         </xsl:if>
     </xsl:template>
@@ -306,10 +248,10 @@
     </xd:doc>
 
     <xsl:template name="filename.div">
-        <xsl:param name="node" as="element()"/>
+        <xsl:param name="splitter-target-node" as="element()" tunnel="yes"/>
 
         <!-- Does this div1 or (unnumbered) div contain the node sought after? -->
-        <xsl:if test="descendant-or-self::*[generate-id() = generate-id($node)]">
+        <xsl:if test="descendant-or-self::*[generate-id() = generate-id($splitter-target-node)]">
             <xsl:value-of select="f:generate-filename(.)"/>
         </xsl:if>
     </xsl:template>
@@ -324,7 +266,7 @@
     </xd:doc>
 
     <xsl:template name="manifest.div-fragment">
-        <xsl:param name="nodes" as="node()*"/>
+        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
 
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id" select="f:generate-id(.)"/>
@@ -338,7 +280,7 @@
 
             <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
             <xsl:variable name="media-overlays">
-                <xsl:for-each select="$nodes">
+                <xsl:for-each select="$splitter-candidate-nodes">
                     <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
                         <xsl:value-of select="$id"/>
                     </xsl:if>
@@ -386,8 +328,6 @@
     </xd:doc>
 
     <xsl:template name="spine.div-fragment">
-        <xsl:param name="nodes" as="node()*"/>
-
         <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
             <xsl:attribute name="idref">
                 <xsl:value-of select="f:generate-nth-id(.., position())"/>
@@ -416,7 +356,7 @@
     </xd:doc>
 
     <xsl:template name="content.div-fragment">
-        <xsl:param name="nodes" as="node()*"/>
+        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
 
         <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
 
@@ -433,23 +373,23 @@
                                     <xsl:call-template name="generate-label">
                                         <xsl:with-param name="div" select=".."/>
                                     </xsl:call-template>
-                                    <xsl:apply-templates select="$nodes"/>
+                                    <xsl:apply-templates select="$splitter-candidate-nodes"/>
 
                                     <xsl:if test="parent::div0">
                                         <xsl:call-template name="insert-footnotes">
-                                            <xsl:with-param name="notes" select="$nodes//note[@place='foot' or @place='unspecified' or not(@place)]"/>
+                                            <xsl:with-param name="notes" select="$splitter-candidate-nodes//note[f:isFootnote(.)]"/>
                                         </xsl:call-template>
                                     </xsl:if>
                                 </div>
                             </xsl:when>
                             <xsl:when test="(parent::div1 or parent::div) and position() = last()">
-                                <xsl:apply-templates select="$nodes"/>
+                                <xsl:apply-templates select="$splitter-candidate-nodes"/>
                                 <xsl:call-template name="insert-footnotes">
                                     <xsl:with-param name="div" select=".."/>
                                 </xsl:call-template>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:apply-templates select="$nodes"/>
+                                <xsl:apply-templates select="$splitter-candidate-nodes"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </div>
@@ -525,13 +465,14 @@
 
         <xsl:variable name="filename">
             <xsl:apply-templates select="root($node)/*[self::TEI.2 or self::TEI]/text" mode="splitter">
-                <xsl:with-param name="node" select="$node"/>
-                <xsl:with-param name="action" select="'filename'"/>
+                <xsl:with-param name="splitter-target-node" select="$node" tunnel="yes"/>
+                <xsl:with-param name="splitter-action" select="'filename'" tunnel="yes"/>
             </xsl:apply-templates>
         </xsl:variable>
 
         <xsl:value-of select="if ($filename = '')
-            then f:logError('Unable to determine filename for {1} with generated id: {2} (in: {3}; {4})', (name($node), f:generate-id($node), name($node/ancestor::*[@id][1]), $node/ancestor::*[@id][1]/@id))
+            then f:logError('Unable to determine filename for {1} with generated id: {2} (in: {3}; {4})', 
+                                (name($node), f:generate-id($node), name($node/ancestor::*[@id][1]), $node/ancestor::*[@id][1]/@id))
             else $filename"/>
     </xsl:function>
 

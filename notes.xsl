@@ -3,9 +3,6 @@
     <!ENTITY deg        "&#176;">
     <!ENTITY nbsp       "&#160;">
     <!ENTITY uparrow    "&#8593;">
-
-    <!ENTITY isFootnote "@place='foot' or @place='unspecified' or not(@place)">
-
 ]>
 
 <xsl:stylesheet version="3.0"
@@ -25,6 +22,31 @@
         <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+
+    <xd:doc>
+        <xd:short>Determine whether a note is a footnote</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:isFootnote" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('foot', 'unspecified') or not($note/@place)"/>
+    </xsl:function>
+
+    <xsl:function name="f:isMarginNote" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('margin', 'left', 'right')"/>
+    </xsl:function>
+
+    <xsl:function name="f:isCutinNote" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('cut-in-left', 'cut-in-right')"/>
+    </xsl:function>
+
+    <xsl:function name="f:isApparatusNote" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('apparatus')"/>
+    </xsl:function>
+
     <!--====================================================================-->
     <!-- Notes -->
 
@@ -33,14 +55,14 @@
         <xd:detail>Marginal notes should go to the margin. The actual placement is handled through CSS.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('margin', 'left', 'right')]">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:isMarginNote(.)]">
         <span class="marginnote">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place = ('cut-in-left', 'cut-in-right')]">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:isCutinNote(.)]">
         <span class="{@place}-note">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -65,7 +87,7 @@
         to avoid this in <code>div1</code> elements embedded in quoted texts).</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[&isFootnote;]">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:isFootnote(.)]">
         <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
@@ -93,10 +115,10 @@
 
     <xsl:template name="insert-footnotes">
         <xsl:param name="div" select="." as="element()"/>
-        <xsl:param name="notes" select="$div//note[&isFootnote;][not(@sameAs)]" as="element(note)*"/>
+        <xsl:param name="notes" select="$div//note[f:isFootnote(.)][not(@sameAs)]" as="element(note)*"/>
 
         <!-- No explicit request for a notes division -->
-        <xsl:if test="not(//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])">
+        <xsl:if test="not(//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')])">
             <!-- Division is not part of quoted text -->
             <xsl:if test="$div[not(ancestor::q)]">
                 <!-- We actually do have notes -->
@@ -213,13 +235,13 @@
         <xsl:variable name="context" select="." as="element(note)"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
-                <xsl:number level="any" count="note[&isFootnote;][not(@sameAs)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
+                <xsl:number level="any" count="note[f:isFootnote(.)][not(@sameAs)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
             </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
-                <xsl:number level="any" count="note[(&isFootnote;) and not(@sameAs) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[f:isFootnote(.) and not(@sameAs) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:number level="any" count="note[&isFootnote;][not(@sameAs)]" from="div1[not(ancestor::q)]"/>
+                <xsl:number level="any" count="note[f:isFootnote(.)][not(@sameAs)]" from="div1[not(ancestor::q)]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -256,7 +278,7 @@
             <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
             <xsl:text>footnote </xsl:text>
             <xsl:if test="preceding-sibling::p">cont </xsl:if>
-            <xsl:if test="ancestor::note[@place='apparatus']">apparatus</xsl:if>
+            <xsl:if test="ancestor::note[f:isApparatusNote(.)]">apparatus</xsl:if>
         </xsl:variable>
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
         <xsl:apply-templates/>
@@ -272,7 +294,7 @@
         the preceding one are included.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@place='apparatus']">
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:isApparatusNote(.)]">
         <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
             <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
@@ -293,8 +315,8 @@
                  If that is the case, we only include the apparatus notes after the previous one! -->
             <xsl:variable name="id" select="generate-id(preceding::divGen[@type='apparatus'][1])"/>
             <xsl:variable name="notes" select="if ($id)
-                        then preceding::note[@place='apparatus'][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]
-                        else preceding::note[@place='apparatus']"/>
+                        then preceding::note[f:isApparatusNote(.)][generate-id(preceding::divGen[@type='apparatus'][1]) = $id]
+                        else preceding::note[f:isApparatusNote(.)]"/>
 
             <h2 class="main"><xsl:value-of select="if (count($notes) &lt;= 1) then f:message('msgApparatusNote') else f:message('msgApparatusNotes')"/></h2>
 

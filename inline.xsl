@@ -714,7 +714,7 @@
     <xsl:template match="seg[@copyOf]">
         <span class="seg">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:variable name="copyOf" select="@copyOf"/>
+            <xsl:variable name="copyOf" select="if (starts-with(@copyOf, '#')) then substring(@copyOf, 2) else @copyOf"/>
             <xsl:variable name="copy" select="//seg[@id = $copyOf]"/>
             <xsl:choose>
                 <xsl:when test="not($copy)">
