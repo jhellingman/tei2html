@@ -48,8 +48,20 @@
 
     <xsl:function name="f:process-text" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
+
+        <xsl:variable name="text" select="if (f:isSet('text.curlyApos')) then f:curly-apos($text) else $text"/>
         <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
         <xsl:variable name="text" select="if (f:isSet('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:curly-apos" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+    
+        <xsl:variable name="text" as="xs:string" select="replace($text, '''', '&rsquo;')"/>
+
         <xsl:value-of select="$text"/>
     </xsl:function>
 
@@ -57,6 +69,7 @@
     <xsl:function name="f:handle-quotes" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
     
+        <xsl:variable name="text" as="xs:string" select="replace($text, '''', '&rsquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&lsquo;&ldquo;', '&lsquo;&hairsp;&ldquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&rsquo;&rdquo;', '&rsquo;&hairsp;&rdquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&ldquo;&lsquo;', '&ldquo;&hairsp;&lsquo;')"/>

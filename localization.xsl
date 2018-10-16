@@ -31,7 +31,7 @@
         <xd:detail>The language and specific locale to use, e.g. 'en-US'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else 'en-US'" as="xs:string"/>
+    <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else f:getSetting('language')" as="xs:string"/>
 
 
     <xd:doc>
@@ -47,7 +47,7 @@
         <xd:detail>The default language, to be used when no message is available in the specified language. (A warning will be issued in this case.)</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="defaultlanguage" select="'en'" as="xs:string"/>
+    <xsl:variable name="defaultlanguage" select="f:getSetting('defaultlanguage')" as="xs:string"/>
 
 
     <xd:doc>

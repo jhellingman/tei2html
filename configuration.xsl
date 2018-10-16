@@ -42,6 +42,12 @@
         <tei2html.config>
             <debug>false</debug>                                            <!-- Use debug mode. -->
             <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
+
+            <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly) -->
+            <defaultlanguage>en-US</defaultlanguage>                        <!-- Default language for localization -->
+
+            <lb.preserve>true</lb.preserve>                                 <!-- Preserve linebreaks indicate with the lb element. -->
+
             <defaultStylesheet>style/arctic.css</defaultStylesheet>         <!-- Stylesheet to include. -->
             <useCommonStylesheets>true</useCommonStylesheets>               <!-- Use the build-in stylesheets (for screen) -->
             <useCommonPrintStylesheets>true</useCommonPrintStylesheets>     <!-- Use the build-in stylesheets (for print media) -->
@@ -49,7 +55,7 @@
             <numberTocEntries>true</numberTocEntries>                       <!-- Provide numbers with TOC entries. -->
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
-            <includePGComments>true</includePGComments>                    <!-- Include references to Project Gutenberg in comments. -->
+            <includePGComments>true</includePGComments>                     <!-- Include references to Project Gutenberg in comments. -->
             <includeImages>true</includeImages>                             <!-- Include images in the generated output. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->
@@ -81,6 +87,7 @@
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->
             <text.insertQuotes>false</text.insertQuotes>                    <!-- Insert quotation marks around <q> markup [TODO] based on first four pairs in setting <text.quotes> -->
+            <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->

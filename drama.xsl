@@ -158,7 +158,14 @@
     </xd:doc>
 
     <xsl:template match="lb">
-        <br id="{f:generate-id(.)}"/>
+        <xsl:choose>
+            <xsl:when test="f:isSet('lb.preserve')">
+                <br id="{f:generate-id(.)}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <a id="{f:generate-id(.)}"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
