@@ -81,7 +81,7 @@
     </xd:doc>
 
     <xsl:template name="pb">
-        <xsl:variable name="context" select="." as="element(pb)"/>
+        <xsl:context-item as="element(pb)" use="required"/>
         <xsl:choose>
             <xsl:when test="@n and f:isSet('pageNumbers.show')">
                 <xsl:call-template name="pb-margin"/>
@@ -100,7 +100,7 @@
     </xd:doc>
 
     <xsl:template name="pb-margin">
-        <xsl:variable name="context" select="." as="element(pb)"/>
+        <xsl:context-item as="element(pb)" use="required"/>
         <span class="pagenum">
             <xsl:value-of select="f:getSetting('pageNumbers.before')"/>
             <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
@@ -121,7 +121,7 @@
     </xd:doc>
 
     <xsl:template name="pb-facsimile-link">
-        <xsl:variable name="context" select="." as="element(pb)"/>
+        <xsl:context-item as="element(pb)" use="required"/>
         <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
 
         <xsl:text>&nbsp;</xsl:text>
@@ -171,7 +171,7 @@
     </xd:doc>
 
     <xsl:template name="pb-anchor">
-        <xsl:variable name="context" select="." as="element(pb)"/>
+        <xsl:context-item as="element(pb)" use="required"/>
         <a id="{f:generate-id(.)}"/>
     </xsl:template>
 
@@ -256,8 +256,8 @@
 
 
     <xsl:template name="generate-tb-par">
+        <xsl:context-item as="element(milestone)" use="required"/>
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="context" select="." as="element(milestone)"/>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">tb</xsl:attribute>
             <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
@@ -459,7 +459,7 @@
     </xsl:template>
 
     <xsl:template name="handle-paragraph-new">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:call-template name="split-paragraph"/>
         </xsl:if>
@@ -475,14 +475,15 @@
     </xd:doc>
 
     <xsl:template name="split-paragraph">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
+        <xsl:variable name="p" select="." as="element(p)"/>
         <xsl:copy-of select="f:logDebug('Splitting paragraph...', ())"/>
         <xsl:for-each-group select="*|text()" group-adjacent="f:isHtmlParagraphContent(.)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
                     <xsl:copy-of select="f:logDebug('Paragraph fragment {1}.', (string(position())))"/>
                     <xsl:call-template name="handle-paragraph-fragment">
-                        <xsl:with-param name="p" select="$context"/>
+                        <xsl:with-param name="p" select="$p"/>
                         <xsl:with-param name="fragment" select="current-group()"/>
                         <xsl:with-param name="position" select="position()"/>
                         <xsl:with-param name="last" select="last()"/>
@@ -581,7 +582,7 @@
 
 
     <xsl:template name="handle-paragraph-old">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:element name="{$p.element}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -681,7 +682,7 @@
     </xd:doc>
 
     <xsl:template name="hangOpenPunctuation">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
         <!-- First child node is a text node that starts with punctuation -->
         <xsl:variable name="first" select="text()[1]"/>
 
@@ -756,7 +757,7 @@
 
 
     <xsl:template name="initial-image-with-css">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:attribute name="class">
@@ -787,7 +788,7 @@
 
 
     <xsl:template name="initial-image-with-float">
-        <xsl:variable name="context" select="." as="element(p)"/>
+        <xsl:context-item as="element(p)" use="required"/>
 
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

@@ -62,7 +62,7 @@
     </xd:doc>
 
     <xsl:template name="handleLg">
-        <xsl:variable name="context" select="." as="element(lg)"/>
+        <xsl:context-item as="element(lg)" use="required"/>
 
         <xsl:call-template name="closepar"/>
         <div>
@@ -85,7 +85,7 @@
     </xd:doc>
 
     <xsl:template name="handleAlignedLg">
-        <xsl:variable name="context" select="." as="element(lg)"/>
+        <xsl:context-item as="element(lg)" use="required"/>
         <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
         <xsl:copy-of select="f:logInfo('Align verse {1} with verse {2}.', (@id, $otherid))"/>
         <xsl:call-template name="align-verses">

@@ -180,7 +180,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-class-lang">
-        <xsl:variable name="context" select="." as="element(note)"/>
+        <xsl:context-item as="element(note)" use="required"/>
         <xsl:variable name="class">
             <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
             <xsl:text>footnote </xsl:text>
@@ -196,7 +196,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-marker">
-        <xsl:variable name="context" select="." as="element(note)"/>
+        <xsl:context-item as="element(note)" use="required"/>
 
         <span class="label">
             <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
@@ -213,7 +213,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-return-arrow">
-        <xsl:variable name="context" select="." as="element()"/>
+        <xsl:context-item as="element()" use="required"/>
         <xsl:if test="f:isSet('useFootnoteReturnArrow')">
             <xsl:text>&nbsp;</xsl:text>
             <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
@@ -232,7 +232,7 @@
     </xd:doc>
 
     <xsl:template name="footnote-number">
-        <xsl:variable name="context" select="." as="element(note)"/>
+        <xsl:context-item as="element(note)" use="required"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
                 <xsl:number level="any" count="note[f:isFootnote(.)][not(@sameAs)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>

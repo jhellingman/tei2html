@@ -80,7 +80,7 @@
     </xd:doc>
 
     <xsl:template name="inner-table">
-        <xsl:variable name="context" select="." as="element(table)"/>
+        <xsl:context-item as="element(table)" use="required"/>
 
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'columns')">
@@ -104,7 +104,7 @@
     </xd:doc>
 
     <xsl:template name="normal-table">
-        <xsl:variable name="context" select="." as="element(table)"/>
+        <xsl:context-item as="element(table)" use="required"/>
 
         <table>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
@@ -226,7 +226,7 @@
     </xd:doc>
 
     <xsl:template name="cell-span">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <xsl:if test="@cols and (@cols > 1)">
             <xsl:attribute name="colspan"><xsl:value-of select="@cols"/></xsl:attribute>
@@ -256,7 +256,7 @@
     </xd:doc>
 
     <xsl:template name="cell-rend">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <xsl:variable name="class">
             <xsl:if test="@role and not(@role='data' or @role='sum')"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
@@ -278,7 +278,7 @@
 
     <!-- Find rendering information for the current row (our parent) -->
     <xsl:template name="cell-rend-row">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <xsl:if test="../@rend">
             <xsl:value-of select="f:generate-class-name(..)"/>
@@ -288,7 +288,7 @@
 
     <!-- Find rendering information for the current column -->
     <xsl:template name="cell-rend-col">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <xsl:variable name="position">
             <xsl:call-template name="find-column-number"/>
@@ -300,7 +300,7 @@
 
     <!-- Find relative postion of cell in table -->
     <xsl:template name="cell-pos-class">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <!-- A cell is considered part of the table head if it has a @role of label or unit -->
         <xsl:variable name="prefix" select="if (..[@role='label' or @role='unit']) then 'cellHead' else 'cell'"/>
@@ -337,7 +337,7 @@
 
     <!-- Find the column number of the current cell -->
     <xsl:template name="find-column-number">
-        <xsl:variable name="context" select="." as="element(cell)"/>
+        <xsl:context-item as="element(cell)" use="required"/>
 
         <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
         <!-- If we have the @col attribute, we will use this value -->
@@ -384,7 +384,7 @@
     </xd:doc>
 
     <xsl:template name="n-up-table">
-        <xsl:variable name="context" select="." as="element(table)"/>
+        <xsl:context-item as="element(table)" use="required"/>
 
         <xsl:variable name="n" as="xs:integer">
             <xsl:value-of select="number(substring-before(substring-after(@rend, 'columns('), ')'))"/>

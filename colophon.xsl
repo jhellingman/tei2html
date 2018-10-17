@@ -66,7 +66,7 @@
     </xd:doc>
 
     <xsl:template name="colophonBody">
-        <xsl:variable name="context" select="." as="element(divGen)"/>
+        <xsl:context-item as="element(divGen)" use="required"/>
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
