@@ -760,7 +760,7 @@
     </xd:doc>
 
     <xsl:template match="ditto">
-        <xsl:copy-of select="f:logWarning('Depricated element ditto used (please use seg).', ())"/>
+        <xsl:copy-of select="f:logWarning('Deprecated element ditto used (please use seg).', ())"/>
         <xsl:choose>
             <xsl:when test="f:isSet('useDittoMarks')">
                 <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>

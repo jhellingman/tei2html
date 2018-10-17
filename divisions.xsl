@@ -1,6 +1,6 @@
 <!DOCTYPE xsl:stylesheet [
 
-    <!ENTITY divBodyContent "preceding-sibling::p or self::p or self::div or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div5 or self::div6">
+    <!ENTITY divBodyContent "preceding-sibling::p or self::p or self::div or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div5 or self::div6 or self::divGen">
 
 ]>
 
@@ -298,7 +298,7 @@
                 <xsl:copy-of select="f:logInfo('Align division {1} with division {2}.', (@id, $otherid))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
-                    <xsl:with-param name="b" select="//*[@id=$otherid]"/>
+                    <xsl:with-param name="b" select="//*[@id = $otherid]"/>
                 </xsl:call-template>
             </xsl:when>
 
@@ -309,7 +309,7 @@
                 <xsl:copy-of select="f:logInfo('Align division {1} with external document {2}.', (@id, $target))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
-                    <xsl:with-param name="b" select="document($document, .)//*[@id=$otherid]"/>
+                    <xsl:with-param name="b" select="document($document, .)//*[@id = $otherid]"/>
                 </xsl:call-template>
             </xsl:when>
 

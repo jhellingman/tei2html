@@ -44,7 +44,7 @@
 
     <xsl:function name="f:isApparatusNote" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
-        <xsl:sequence select="$note/@place = ('apparatus')"/>
+        <xsl:sequence select="$note/@place = 'apparatus'"/>
     </xsl:function>
 
     <!--====================================================================-->
@@ -346,14 +346,14 @@
                     <xsl:with-param name="rend" select="$rend"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="$format != 'block'">
-                    <xsl:copy-of select="f:logError('Invalid configuration value for &quot;notes.apparatus.format&quot;: {1}.', ($format))"/>
-                </xsl:if>
+            <xsl:when test="$format = 'block'">
                 <xsl:call-template name="handle-apparatus-notes-block">
                     <xsl:with-param name="notes" select="$notes"/>
                     <xsl:with-param name="rend" select="$rend"/>
                 </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:logError('Invalid configuration value for &quot;notes.apparatus.format&quot;: {1}.', ($format))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
