@@ -1,9 +1,4 @@
-<!DOCTYPE xsl:stylesheet [
-
-    <!ENTITY divBodyContent "preceding-sibling::p or self::p or self::div or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div5 or self::div6 or self::divGen">
-
-]>
-
+<!DOCTYPE xsl:stylesheet>
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
@@ -53,12 +48,28 @@
         </div>
     </xsl:template>
 
-    
+
     <xsl:template name="pgComment">
         <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:isSet('includePGComments')">
             <xsl:comment><xsl:value-of select="f:message('msgPGComment')"/></xsl:comment>
         </xsl:if>
     </xsl:template>
+
+    <xsl:function name="f:isBodyContent" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:sequence select="$node/preceding-sibling::p
+                              or $node/self::p
+                              or $node/self::div
+                              or $node/self::div1
+                              or $node/self::div2
+                              or $node/self::div3
+                              or $node/self::div4
+                              or $node/self::div5
+                              or $node/self::div5
+                              or $node/self::div6
+                              or $node/self::divGen"/>
+    </xsl:function>
 
 
     <!--====================================================================-->
@@ -316,14 +327,14 @@
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
                 <!-- Complex repeated Xpath expression placed in entity. -->
-                <xsl:if test="*[not(&divBodyContent;)]">
+                <xsl:if test="*[not(f:isBodyContent(.))]">
                     <div class="divHead">
-                        <xsl:apply-templates select="*[not(&divBodyContent;)]"/>
+                        <xsl:apply-templates select="*[not(f:isBodyContent(.))]"/>
                     </div>
                 </xsl:if>
-                <xsl:if test="*[&divBodyContent;]">
+                <xsl:if test="*[f:isBodyContent(.)]">
                     <div class="divBody">
-                        <xsl:apply-templates select="*[&divBodyContent;]"/>
+                        <xsl:apply-templates select="*[f:isBodyContent(.)]"/>
                     </div>
                 </xsl:if>
             </xsl:otherwise>
@@ -413,11 +424,11 @@
         <xd:short>Handle an image placed above a head.</xd:short>
         <xd:detail>
             <p>Handle an image placed above a head, typically a decorative illustration.</p>
-        
-            <p>There are two ways to indicate such images. 1. Use the <code>@rend</code> attribute on the 
+
+            <p>There are two ways to indicate such images. 1. Use the <code>@rend</code> attribute on the
             head with a rendition element <code>image(image.jpg)</code> and 2. Place a <code>@rend</code>
-            attribute on a figure in the division, with a rendition element <code>position(abovehead)</code>. 
-            The first method is appropriate for decorative images without accompanying text, the second can 
+            attribute on a figure in the division, with a rendition element <code>position(abovehead)</code>.
+            The first method is appropriate for decorative images without accompanying text, the second can
             be used if a title and legend needs to appear with the image.</p>
         </xd:detail>
     </xd:doc>
