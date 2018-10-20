@@ -1,8 +1,8 @@
 <!DOCTYPE xsl:stylesheet [
 
-    <!ENTITY tab        "&#x09;">
-    <!ENTITY lf         "&#x0A;">
-    <!ENTITY cr         "&#x0D;">
+    <!ENTITY tab        "&#x0009;">
+    <!ENTITY lf         "&#x000A;">
+    <!ENTITY cr         "&#x000D;">
     <!ENTITY deg        "&#176;">
     <!ENTITY lsquo      "&#x2018;">
     <!ENTITY rsquo      "&#x2019;">
@@ -42,8 +42,97 @@
     <!-- Plain Text -->
 
     <xsl:template match="text()">
-        <xsl:value-of select="f:process-text(.)"/>
+
+        <xsl:variable name="text" select="if (f:isSet('lb.hyphen.remove')) then f:remove-eol-hyphens(.) else ."/>
+
+        <xsl:value-of select="f:process-text($text)"/>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Remove end-of-line hyphens.</xd:short>
+        <xd:detail><p>Remove end-of-line hyphens. This function works when the eol-hyphens are encoded
+        following the DFA conventions, that is, <code>lb</code>-elements are placed directly
+        at the end of each line, and <code>pb</code>-elements follow these; furthermore, for hyphens
+        to be removed, a special character is used (in the case DFA texts, the not-sign).</p>
+        
+        <p>With end-of-line hyphens we have three options. (In the examples below, | stands for the line-break.)</p>
+
+        <ol>
+            <li>The hyphen should be removed and any white-space closed up to form a single word (e.g. re-|moved becomes removed).</li>
+            <li>The hyphen should stay but white-space closed up to form a word with a hyphen (e.g. well-|known person becomes well-known person).</li>
+            <li>The hyphen should stay as well as the white-space, to form a word of which a part is ellided (e.g. three-|or fourfold becomes three- or fourfold).</li>
+        </ol>
+
+        <p>This code handles the first three cases. For the last case, you need to take care to keep a space, e.g. three- |or fourfold.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:remove-eol-hyphens" as="xs:string">
+        <xsl:param name="node" as="text()"/>
+
+        <!-- Establish the previous and next text nodes, separated by a line-break. Page-breaks and empty text nodes may come in-between, but
+             nothing else. -->
+
+        <xsl:variable name="previous" select="
+            ($node/preceding-sibling::node()
+                [not(self::pb)]
+                [not(self::text()[normalize-space(.) = ''])]
+                [1]
+                [self::lb])/preceding-sibling::node()[1][self::text()]"/>
+        <xsl:variable name="next" select="
+            ($node/following-sibling::node()[1][self::lb])/following-sibling::node()
+                [not(self::pb)]
+                [not(self::text()[normalize-space(.) = ''])]
+                [1]
+                [self::text()]"/>
+
+        <!-- Strip initial space when preceding line ends with hyphen -->
+        <xsl:variable name="result" as="xs:string">
+            <xsl:choose>
+                <xsl:when test="$previous and (f:ends-with-removable-hyphen($previous) or f:ends-with-hyphen($previous)) and normalize-space($node) = ''">
+                    <!-- text-node before lb ended with a (removable) hyphen: remove empty text node -->
+                    <xsl:value-of select="''"/>
+                </xsl:when>
+                <xsl:when test="$previous and (f:ends-with-removable-hyphen($previous) or f:ends-with-hyphen($previous))">
+                    <!-- text-node before lb ended with a (removable) hyphen: remove any initial spaces present -->
+                    <xsl:value-of select="replace($node, '^\s+', '')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$node"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <!-- Strip hyphen at end of line -->
+        <xsl:choose>
+            <xsl:when test="$next and f:ends-with-removable-hyphen($node)">
+                <!-- we have a text-node after the lb: remove the removable hyphen -->
+                <!-- <xsl:message expand-text="yes">EOL: {$node}</xsl:message> -->
+                <xsl:value-of select="substring($result, 1, string-length($result) - 1)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$result"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:ends-with-removable-hyphen" as="xs:boolean">
+        <xsl:param name="node" as="text()"/>
+
+        <xsl:sequence select="$node 
+                      and $node/following-sibling::node()[1][self::lb] 
+                      and ends-with($node, f:getSetting('lb.removable.hyphen'))"/>
+    </xsl:function>
+
+    <xsl:function name="f:ends-with-hyphen" as="xs:boolean">
+        <xsl:param name="node" as="text()"/>
+
+        <xsl:sequence select="$node 
+                      and $node/following-sibling::node()[1][self::lb] 
+                      and ends-with($node, f:getSetting('lb.hyphen'))"/>
+    </xsl:function>
 
 
     <xsl:function name="f:process-text" as="xs:string">
@@ -69,7 +158,6 @@
     <xsl:function name="f:handle-quotes" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
     
-        <xsl:variable name="text" as="xs:string" select="replace($text, '''', '&rsquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&lsquo;&ldquo;', '&lsquo;&hairsp;&ldquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&rsquo;&rdquo;', '&rsquo;&hairsp;&rdquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&ldquo;&lsquo;', '&ldquo;&hairsp;&lsquo;')"/>

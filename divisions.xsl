@@ -55,22 +55,6 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:function name="f:isBodyContent" as="xs:boolean">
-        <xsl:param name="node"/>
-
-        <xsl:sequence select="$node/preceding-sibling::p
-                              or $node/self::p
-                              or $node/self::div
-                              or $node/self::div1
-                              or $node/self::div2
-                              or $node/self::div3
-                              or $node/self::div4
-                              or $node/self::div5
-                              or $node/self::div5
-                              or $node/self::div6
-                              or $node/self::divGen"/>
-    </xsl:function>
-
 
     <!--====================================================================-->
     <!-- Divisions and Headings -->
@@ -326,7 +310,6 @@
 
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
-                <!-- Complex repeated Xpath expression placed in entity. -->
                 <xsl:if test="*[not(f:isBodyContent(.))]">
                     <div class="divHead">
                         <xsl:apply-templates select="*[not(f:isBodyContent(.))]"/>
@@ -340,6 +323,23 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:isBodyContent" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:sequence select="$node/preceding-sibling::p
+                              or $node/self::p
+                              or $node/self::div
+                              or $node/self::div1
+                              or $node/self::div2
+                              or $node/self::div3
+                              or $node/self::div4
+                              or $node/self::div5
+                              or $node/self::div5
+                              or $node/self::div6
+                              or $node/self::divGen"/>
+    </xsl:function>
 
 
     <!--====================================================================-->
