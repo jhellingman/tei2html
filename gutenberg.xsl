@@ -94,7 +94,7 @@
     </xd:doc>
 
     <xsl:template name="PGHeader">
-        <div class="transcribernote">
+        <div class="transcribernote" id="pgheader">
             <xsl:variable name="params">
                 <params>
                     <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
@@ -121,7 +121,7 @@
     </xd:doc>
 
     <xsl:template name="PGFooter">
-        <div class="transcribernote">
+        <div class="transcribernote" id="pgfooter">
             <xsl:variable name="idno" select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/>
             <xsl:variable name="params">
                 <params>

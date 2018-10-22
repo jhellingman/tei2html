@@ -355,6 +355,16 @@
                      href="{$basename}.css"
                      media-type="text/css"/>
 
+                <!-- PG Header & Footer -->
+                <xsl:if test="f:isSet('includePGHeaders')">
+                    <item id="pgheader" 
+                        href="pgheader.xhtml"
+                        media-type="application/xhtml+xml"/>
+                    <item id="pgfooter" 
+                        href="pgfooter.xhtml"
+                        media-type="application/xhtml+xml"/>
+                </xsl:if>
+    
                 <!-- Content Parts -->
                 <xsl:apply-templates select="text" mode="manifest"/>
 
@@ -729,7 +739,7 @@
 
 
     <xsl:template match="text" mode="spine">
-        <xsl:apply-templates mode="splitter">
+        <xsl:apply-templates mode="splitter" select=".">
             <xsl:with-param name="splitter-action" select="'spine'" tunnel="yes"/>
         </xsl:apply-templates>
     </xsl:template>
