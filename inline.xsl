@@ -54,7 +54,7 @@
         <xd:detail><p>Remove end-of-line hyphens. This function works when the eol-hyphens are encoded
         following the DFA conventions, that is, <code>lb</code>-elements are placed directly
         at the end of each line, and <code>pb</code>-elements follow these; furthermore, for hyphens
-        to be removed, a special character is used (in the case DFA texts, the not-sign).</p>
+        to be removed, a special character is used (in the case of DTA texts, the not-sign).</p>
         
         <p>With end-of-line hyphens we have three options. (In the examples below, | stands for the line-break.)</p>
 
