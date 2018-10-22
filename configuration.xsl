@@ -49,7 +49,7 @@
 
             <lb.preserve>true</lb.preserve>                                 <!-- Preserve linebreaks indicate with the lb element. -->
             <lb.hyphen.remove>false</lb.hyphen.remove>                      <!-- Remove hyphens before line-breaks. -->
-            <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DFA convention). -->
+            <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
             <defaultStylesheet>style/arctic.css</defaultStylesheet>         <!-- Stylesheet to include. -->
