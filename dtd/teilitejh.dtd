@@ -1479,6 +1479,7 @@ table | text)*)))>
      anchored (yes | no) "yes"
      target IDREFS #IMPLIED
      targetEnd IDREFS #IMPLIED
+     sameAs IDREFS #IMPLIED
      TEIform CDATA "note" >
 
 <!--  6.8.2:  Index Entries                                    -->

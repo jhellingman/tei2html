@@ -508,14 +508,7 @@
     </xd:doc>
 
     <xsl:template match="gap">
-        <xsl:variable name="params">
-            <params>
-                <param name="extent"><xsl:value-of select="@extent"/></param>
-                <param name="unit"><xsl:value-of select="@unit"/></param>
-                <param name="reason"><xsl:value-of select="@reason"/></param>
-            </params>
-        </xsl:variable>
-
+        <xsl:variable name="params" select="map{'extent': @extent, 'unit': @unit, 'reason': @reason}"/>
         <span class="gap">
             <xsl:if test="f:isSet('useMouseOverPopups')">
                 <xsl:attribute name="title" select="if (@extent) 

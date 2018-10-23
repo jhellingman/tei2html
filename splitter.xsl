@@ -77,66 +77,6 @@
     </xsl:template>
 
 
-    <xsl:template name="epubPGHeader">
-        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
-
-        <xsl:if test="f:isSet('includePGHeaders')">
-            <xsl:choose>
-                <xsl:when test="$splitter-action = 'spine'">
-                    <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgheader"/>
-                </xsl:when>
-                <xsl:when test="$splitter-action = 'content'">
-                    <xsl:result-document href="{$path}/pgheader.xhtml">
-                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgheader.xhtml', name(.)))"/>
-                        <html>
-                            <xsl:call-template name="generate-html-header"/>
-                            <body>
-                                <xsl:variable name="header"><xsl:call-template name="PGHeader"/></xsl:variable>
-                                <xsl:apply-templates select="$header" mode="adjust-pg-footer-links"/>
-                            </body>
-                        </html>
-                    </xsl:result-document>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:if>
-    </xsl:template>
-
-
-    <xsl:template name="epubPGFooter">
-        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
-
-        <xsl:if test="f:isSet('includePGHeaders')">
-            <xsl:choose>
-                <xsl:when test="$splitter-action = 'spine'">
-                    <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgfooter"/>
-                </xsl:when>
-                <xsl:when test="$splitter-action = 'content'">
-                    <xsl:result-document href="{$path}/pgfooter.xhtml">
-                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgfooter.xhtml', name(.)))"/>
-                        <html>
-                            <xsl:call-template name="generate-html-header"/>
-                            <body>
-                                <xsl:variable name="footer"><xsl:call-template name="PGFooter"/></xsl:variable>
-                                <xsl:apply-templates select="$footer" mode="adjust-pg-footer-links"/>
-                            </body>
-                        </html>
-                    </xsl:result-document>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="xhtml:a/@href[starts-with(., '#pglicense')]" mode="adjust-pg-footer-links">
-        <xsl:attribute name="href" select="'pgfooter.xhtml' || ."/>
-    </xsl:template>
-
-    <xsl:template match="@*|node()" mode="adjust-pg-footer-links">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()" mode="#current"/>
-        </xsl:copy>
-    </xsl:template>
-
-
     <xd:doc>
         <xd:short>Split <code>body</code> element.</xd:short>
         <xd:detail>Split the <code>body</code> element of a TEI file on <code>div0</code> elements.</xd:detail>
@@ -566,6 +506,83 @@
                 <xsl:otherwise>body</xsl:otherwise>
             </xsl:choose>
         </xsl:attribute>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Output the Project Gutenberg header.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="epubPGHeader">
+        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
+
+        <xsl:if test="f:isSet('includePGHeaders')">
+            <xsl:choose>
+                <xsl:when test="$splitter-action = 'spine'">
+                    <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgheader"/>
+                </xsl:when>
+                <xsl:when test="$splitter-action = 'content'">
+                    <xsl:result-document href="{$path}/pgheader.xhtml">
+                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgheader.xhtml', name(.)))"/>
+                        <html>
+                            <xsl:call-template name="generate-html-header"/>
+                            <body>
+                                <xsl:variable name="header"><xsl:call-template name="PGHeader"/></xsl:variable>
+                                <xsl:apply-templates select="$header" mode="adjust-pg-footer-links"/>
+                            </body>
+                        </html>
+                    </xsl:result-document>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Output the Project Gutenberg footer.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="epubPGFooter">
+        <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
+
+        <xsl:if test="f:isSet('includePGHeaders')">
+            <xsl:choose>
+                <xsl:when test="$splitter-action = 'spine'">
+                    <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgfooter"/>
+                </xsl:when>
+                <xsl:when test="$splitter-action = 'content'">
+                    <xsl:result-document href="{$path}/pgfooter.xhtml">
+                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgfooter.xhtml', name(.)))"/>
+                        <html>
+                            <xsl:call-template name="generate-html-header"/>
+                            <body>
+                                <xsl:variable name="footer"><xsl:call-template name="PGFooter"/></xsl:variable>
+                                <xsl:apply-templates select="$footer" mode="adjust-pg-footer-links"/>
+                            </body>
+                        </html>
+                    </xsl:result-document>
+                </xsl:when>
+            </xsl:choose>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xd:doc mode="adjust-pg-footer-links">
+        <xd:short>Mode used to adjust links in the PG footer and header in the ePub.</xd:short>
+    </xd:doc>
+
+    <xd:doc>
+        <xd:short>Replace links in the header and footer with links to the correct file in the ePub.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="xhtml:a/@href[starts-with(., '#pglicense')]" mode="adjust-pg-footer-links">
+        <xsl:attribute name="href" select="'pgfooter.xhtml' || ."/>
+    </xsl:template>
+
+    <xsl:template match="@*|node()" mode="adjust-pg-footer-links">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="#current"/>
+        </xsl:copy>
     </xsl:template>
 
 

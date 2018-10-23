@@ -75,7 +75,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                <xsl:value-of select="'[### ' || $name || ' ###]'"/>
+                <xsl:text expand-text="yes">[### {$name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function> 
@@ -90,31 +90,34 @@
 
     <xsl:function name="f:formatMessage">
         <xsl:param name="name" as="xs:string"/>
-        <xsl:param name="params" as="document-node()"/>
+        <xsl:param name="params" as="map(xs:string, item()*)"/>
+
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
+
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params"/>
+                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:when test="$msg[lang($baselanguage)][1]">
                 <xsl:apply-templates select="$msg[lang($baselanguage)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params"/>
+                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
                 <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params"/>
+                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
-                <xsl:value-of select="'[### ' || $name || ' ###]'"/>
+                <xsl:text expand-text="yes">[### {$name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+
 
 
     <xd:doc>
@@ -124,15 +127,11 @@
     </xd:doc>
 
     <xsl:template match="msg:message" mode="formatMessage">
-        <xsl:param name="params" as="document-node()?"/>
         <xsl:variable name="formattedMessage">
-            <xsl:apply-templates mode="formatMessage">
-                <xsl:with-param name="params" select="$params"/>
-            </xsl:apply-templates>
+            <xsl:apply-templates mode="formatMessage"/>
         </xsl:variable>
         <xsl:copy-of select="$formattedMessage" copy-namespaces="no"/>
     </xsl:template>
-
 
     <xd:doc>
         <xd:short>Copy element in a localized message.</xd:short>
@@ -140,32 +139,27 @@
     </xd:doc>
 
     <xsl:template match="*" mode="formatMessage">
-        <xsl:param name="params" as="document-node()?"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:apply-templates mode="formatMessage">
-                <xsl:with-param name="params" select="$params"/>
-            </xsl:apply-templates>
+            <xsl:apply-templates mode="formatMessage"/>
         </xsl:copy>
     </xsl:template>
 
-
     <xd:doc>
         <xd:short>Insert a parameter in a localized message.</xd:short>
-        <xd:detail>Template to insert a parameter in a localized message. The parameter is being looked-up in the list of parameters supplied
+        <xd:detail>Template to insert a parameter in a localized message. The parameter is looked-up in the list of parameters supplied
         to the FormatMessage template invocation. If no parameter was supplied, but the message requires one, a warning will be issued.</xd:detail>
     </xd:doc>
 
     <xsl:template match="msg:param" mode="formatMessage">
-        <xsl:param name="params" as="document-node()?"/>
-        <xsl:variable name="name" select="@name"/>
+        <xsl:param name="params" as="map(xs:string, item()*)" tunnel="yes"/>
         <xsl:choose>
-            <xsl:when test="$params//*[@name=$name]">
-                <xsl:value-of select="$params//*[@name=$name]"/>
+            <xsl:when test="$params(@name)">
+                <xsl:value-of select="$params(@name)"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('No value specified for parameter {1}.', (@name))"/>
-                <xsl:text>[### </xsl:text><xsl:value-of select="@name"/><xsl:text> ###]</xsl:text>
+                <xsl:text expand-text="yes">[### {@name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -178,6 +172,5 @@
     <xsl:template match="space" mode="formatMessage">
         <xsl:text> </xsl:text>
     </xsl:template>
-
 
 </xsl:stylesheet>

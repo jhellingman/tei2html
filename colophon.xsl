@@ -458,16 +458,9 @@
     <xsl:template name="correctionTablePageReferences">
         <xsl:choose>
             <xsl:when test="count(current-group()) &gt; number(f:getSetting('colophon.maxCorrectionCount'))">
-
-                <xsl:variable name="params">
-                    <params>
-                        <param name="count"><xsl:value-of select="count(current-group())"/></param>
-                    </params>
-                </xsl:variable>
-
                 <i>
                     <xsl:attribute name="title">
-                        <xsl:copy-of select="f:formatMessage('msgCountOccurrences', $params)"/>
+                        <xsl:copy-of select="f:formatMessage('msgCountOccurrences', map{'count': count(current-group())})"/>
                     </xsl:attribute>
                     <xsl:value-of select="f:message('msgPassim')"/>.
                 </i>

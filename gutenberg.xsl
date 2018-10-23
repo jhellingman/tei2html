@@ -95,16 +95,13 @@
 
     <xsl:template name="PGHeader">
         <div class="transcribernote" id="pgheader">
-            <xsl:variable name="params">
-                <params>
-                    <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                    <param name="authors"><xsl:call-template name="combine-authors"/></param>
-                    <param name="releasedate"><xsl:value-of select="//publicationStmt/date"/></param>
-                    <param name="pgnum"><xsl:value-of select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/></param>
-                    <param name="language"><xsl:value-of select="f:message(/*[self::TEI.2 or self::TEI]/@lang)"/></param>
-                </params>
-            </xsl:variable>
-            <xsl:copy-of select="f:formatMessage('msgPGHeader', $params)"/>
+            <xsl:variable name="authors"><xsl:call-template name="combine-authors"/></xsl:variable>
+            <xsl:copy-of select="f:formatMessage('msgPGHeader', map{
+                'title': //titleStmt/title,
+                'authors': $authors,
+                'releasedate': //publicationStmt/date,
+                'pgnum': //publicationStmt/idno[@type='pgnum' or @type='PGnum'],
+                'language': f:message(/*[self::TEI.2 or self::TEI]/@lang)})"/>
         </div>
         <p/>
     </xsl:template>
@@ -123,25 +120,23 @@
     <xsl:template name="PGFooter">
         <div class="transcribernote" id="pgfooter">
             <xsl:variable name="idno" select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/>
-            <xsl:variable name="params">
-                <params>
-                    <param name="title"><xsl:value-of select="//titleStmt/title"/></param>
-                    <param name="authors"><xsl:call-template name="combine-authors"/></param>
-                    <param name="transcriber"><xsl:call-template name="combine-transcribers"/></param>
-                    <param name="pgnum"><xsl:value-of select="$idno"/></param>
-                    <param name="pgpath"><xsl:value-of select="substring($idno, 1, 1)"/>/<xsl:value-of select="substring($idno, 2, 1)"/>/<xsl:value-of select="substring($idno, 3, 1)"/>/<xsl:value-of select="substring($idno, 4, 1)"/>/<xsl:value-of select="$idno"/>/</param>
-                </params>
-            </xsl:variable>
+            <xsl:variable name="authors"><xsl:call-template name="combine-authors"/></xsl:variable>
+            <xsl:variable name="transcriber"><xsl:call-template name="combine-transcribers"/></xsl:variable>
+            <xsl:variable name="pgpath" expand-text="yes">{substring($idno, 1, 1)}/{substring($idno, 2, 1)}/{substring($idno, 3, 1)}/{substring($idno, 4, 1)}/{$idno}/</xsl:variable>
             <p/>
-            <xsl:copy-of select="f:formatMessage('msgPGFooter', $params)"/>
+            <xsl:copy-of select="f:formatMessage('msgPGFooter', map{
+                'title': //titleStmt/title,
+                'authors': $authors,
+                'transcriber': $transcriber,
+                'pgnum': //publicationStmt/idno[@type='pgnum' or @type='PGnum'],
+                'pgpath': $pgpath})"/>
             <xsl:call-template name="PGLicense"/>
         </div>
     </xsl:template>
 
 
     <xsl:template name="PGLicense">
-        <xsl:variable name="params"><params/></xsl:variable>
-        <xsl:copy-of select="f:formatMessage('msgPGLicense', $params)"/>
+        <xsl:copy-of select="f:formatMessage('msgPGLicense', map{})"/>
     </xsl:template>
 
 
