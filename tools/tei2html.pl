@@ -230,6 +230,8 @@ sub processFile($) {
     $makeText   && makeText($filename, $basename);
     $makeReport && makeReport($basename);
 
+    makeQrCode();
+
     if ($makeKwic == 1) {
         my $saxonParameters = determineSaxonParameters();
         print "Generate a KWIC index (this may take some time)...\n";
@@ -244,6 +246,19 @@ sub processFile($) {
     print "=== Done! ==================================================================\n";
 }
 
+sub makeQrCode() {
+
+    my $imageDir = '.';
+    if (-d "images") {
+        $imageDir = "images";
+    } elsif (-d "Processed/images") {
+        $imageDir = "Processed/images";
+    }
+
+    if ($pgNumber > 0) {
+        system("qrcode -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
+    }
+}
 
 sub makeHtml($) {
     my $basename = shift;
