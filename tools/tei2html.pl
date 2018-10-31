@@ -247,16 +247,17 @@ sub processFile($) {
 }
 
 sub makeQrCode() {
-
-    my $imageDir = '.';
-    if (-d "images") {
-        $imageDir = "images";
-    } elsif (-d "Processed/images") {
-        $imageDir = "Processed/images";
-    }
-
     if ($pgNumber > 0) {
-        system("qrcode -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
+        my $imageDir = '.';
+        if (-d "images") {
+            $imageDir = "images";
+        } elsif (-d "Processed/images") {
+            $imageDir = "Processed/images";
+        }
+
+        if (not -e "$imageDir/qrcode.png") {
+            system("qrcode -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
+        }
     }
 }
 
