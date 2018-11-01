@@ -40,6 +40,8 @@
 
         -->
 		
+		<msg:message name="msgQrCode">QR-code</msg:message>
+		<msg:message name="msgQrCodePgUrl">QR-code of Project Gutenberg URL</msg:message>
 		<msg:message name="msgTagUsageOverview">Overview of TEI Elements Used</msg:message>
 		<msg:message name="msgAttributes">Attributes</msg:message>
 		<msg:message name="msgOccurrences">Occurrences</msg:message>
@@ -981,6 +983,8 @@
 
     <msg:messages xml:lang="nl">
 
+		<msg:message name="msgQrCode">QR-code</msg:message>
+		<msg:message name="msgQrCodePgUrl">QR-code van Project Gutenberg URL</msg:message>
 		<msg:message name="msgTagUsageOverview">Overzicht van gebruikte TEI elementen</msg:message>
 		<msg:message name="msgAttributes">Attributen</msg:message>		
 		<msg:message name="msgOccurrences">Aantal</msg:message>

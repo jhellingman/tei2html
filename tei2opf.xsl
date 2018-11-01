@@ -11,7 +11,8 @@
         xmlns:smil="http://www.w3.org/ns/SMIL"
         xmlns:f="urn:stylesheet-functions"
         xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        exclude-result-prefixes="f xd xs smil">
+        xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
+        exclude-result-prefixes="f xd xs smil img">
 
 
     <xd:doc type="stylesheet">
@@ -364,7 +365,14 @@
                         href="pgfooter.xhtml"
                         media-type="application/xhtml+xml"/>
                 </xsl:if>
-    
+
+                <!-- QR-code -->
+                <xsl:if test="//divGen[@type='Colophon'] and $imageInfo/img:images/img:image[@path='images/qrcode.png']">
+                    <item id="qrcode"
+                        href="images/qrcode.png"
+                        media-type="image/png"/>
+                </xsl:if>
+
                 <!-- Content Parts -->
                 <xsl:apply-templates select="text" mode="manifest"/>
 

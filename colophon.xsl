@@ -9,12 +9,13 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+    xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f msg tmp xd xhtml xs">
+    exclude-result-prefixes="f msg img tmp xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a colophon.</xd:short>
@@ -96,15 +97,19 @@
         </xsl:if>
     </xsl:template>
 
+
     <xsl:template match="encodingDesc">
         <xsl:apply-templates/>
     </xsl:template>
 
+
     <!-- Ignore the classDecl inside the encodingDesc -->
     <xsl:template match="encodingDesc/classDecl"/>
 
+
     <!-- Ignore the tagsDecl inside the encodingDesc -->
     <xsl:template match="encodingDesc/tagsDecl"/>
+
 
     <xsl:template name="colophonMetadata">
         <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
@@ -121,6 +126,7 @@
             <xsl:call-template name="keywords"/>
             <xsl:call-template name="classification"/>
             <xsl:call-template name="catalogReferences"/>
+            <xsl:call-template name="qrCode"/>
         </table>
     </xsl:template>
 
@@ -145,6 +151,7 @@
         </xsl:for-each>
     </xsl:template>
 
+
     <xsl:function name="f:metadata-line-with-url">
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="value" as="xs:string"/>
@@ -161,6 +168,7 @@
             </td>
         </tr>
     </xsl:function>
+
 
     <xsl:function name="f:metadata-line-as-url">
         <xsl:param name="key" as="xs:string"/>
@@ -183,6 +191,7 @@
         </tr>
     </xsl:function>
 
+
     <xsl:function name="f:metadata-line">
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="value" as="xs:string"/>
@@ -199,21 +208,26 @@
         <xsl:apply-templates mode="colophonSourceDesc"/>
     </xsl:template>
 
+
     <xsl:template match="bibl" mode="colophonSourceDesc">
         <xsl:apply-templates mode="colophonSourceDesc"/>
     </xsl:template>
+
 
     <xsl:template match="publisher" mode="colophonSourceDesc">
         <xsl:copy-of select="f:metadata-line(f:message('msgSourcePublisher'), .)"/>
     </xsl:template>
 
+
     <xsl:template match="pubPlace" mode="colophonSourceDesc">
         <xsl:copy-of select="f:metadata-line(f:message('msgSourcePubPlace'), .)"/>
     </xsl:template>
 
+
     <xsl:template match="date[f:isValid(.)]" mode="colophonSourceDesc">
         <xsl:copy-of select="f:metadata-line(f:message('msgSourcePublicationDate'), .)"/>
     </xsl:template>
+
 
     <!-- Ignore other items in sourceDesc for colophon -->
     <xsl:template match="*" mode="colophonSourceDesc"/>
@@ -275,6 +289,7 @@
         </xsl:if>
     </xsl:template>
 
+
     <xsl:function name="f:catalog-entry-line">
         <xsl:param name="name" as="xs:string"/>
         <xsl:param name="url" as="xs:string"/>
@@ -288,40 +303,50 @@
         </tr>
     </xsl:function>
 
+
     <xsl:template mode="catalogEntries" match="idno[@type='PGnum']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgPgCatalogEntry'), 'https://www.gutenberg.org/ebooks/' || ., .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogEntries" match="idno[@type='LCCN']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryOfCongressCatalogEntry'), 'https://lccn.loc.gov/' || ., .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogEntries" match="idno[@type='VIAF']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgVirtualInternationalAuthorityFile'), 'http://viaf.org/viaf/' || ., .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogEntries" match="idno[@type='OLN']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogEntry'), 'https://openlibrary.org/books/' || ., .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogEntries" match="idno[@type='OLW']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgOpenLibraryCatalogWorkEntry'), 'https://openlibrary.org/works/' || ., .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogEntries" match="idno[@type='OCLC']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgOclcCatalogEntry'), 'https://www.worldcat.org/oclc/' || ., .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogEntries" match="idno[@type='LibThing']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgLibraryThingEntry'), 'https://www.librarything.com/work/' || ., .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogEntries" match="idno[@type='PGSrc']">
         <xsl:copy-of select="f:catalog-entry-line(f:message('msgGitHubRepository'), 'https://github.com/GutenbergSource/' || ., .)"/>
     </xsl:template>
 
+
     <!-- Ignore other types of idno's -->
     <xsl:template mode="catalogEntries" match="idno"/>
+
 
     <xsl:function name="f:catalog-entry">
         <xsl:param name="name" as="xs:string"/>
@@ -347,40 +372,66 @@
         </xsl:apply-templates>
     </xsl:template>
 
+
     <xsl:template mode="catalogReferences" match="idno[@type='PGnum']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgProjectGutenberg'), ., 'https://www.gutenberg.org/ebooks/' || .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogReferences" match="idno[@type='LCCN']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryOfCongress'), ., 'https://lccn.loc.gov/' || .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogReferences" match="idno[@type='VIAF']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., 'http://viaf.org/viaf/' || .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogReferences" match="idno[@type='OLN']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryBook'), ., 'https://openlibrary.org/books/' || .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogReferences" match="idno[@type='OLW']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOpenLibraryWork'), ., 'https://openlibrary.org/works/' || .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogReferences" match="idno[@type='OCLC']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgOclcWorldCat'), ., 'https://www.worldcat.org/oclc/' || .)"/>
     </xsl:template>
 
+
     <xsl:template mode="catalogReferences" match="idno[@type='LibThing']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryThing'), ., 'https://www.librarything.com/work/' || .)"/>
     </xsl:template>
+
 
     <xsl:template mode="catalogReferences" match="idno[@type='PGSrc']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgGitHub'), ., 'https://github.com/GutenbergSource/' || .)"/>
     </xsl:template>
 
+
     <!-- Ignore other types of idno's -->
     <xsl:template mode="catalogReferences" match="idno"/>
+
+
+
+    <xsl:template name="qrCode">
+        <xsl:if test="$imageInfo/img:images/img:image[@path='images/qrcode.png']">
+            <tr>
+                <td><b><xsl:value-of select="f:message('msgQrCode')"/>:</b></td>
+                <td colspan="2">
+                    <xsl:call-template name="insertimage2">
+                        <xsl:with-param name="alt" select="f:message('msgQrCodePgUrl')" as="xs:string"/>
+                        <xsl:with-param name="format" select="'.png'" as="xs:string"/>
+                        <xsl:with-param name="filename" select="'images/qrcode.png'"/>
+                    </xsl:call-template>
+                </td>
+            </tr>
+        </xsl:if>
+    </xsl:template>
 
 
     <!--====================================================================-->
@@ -563,6 +614,7 @@
         </xsl:choose>
     </xsl:template>
 
+
     <!--====================================================================-->
     <!-- Abbreviations -->
 
@@ -682,6 +734,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Generate the contents of the external references.</xd:short>
@@ -901,6 +954,7 @@
     <!-- Tag Usage -->
 
     <xsl:key name="elements" match="*" use="name()"/>
+
 
     <xsl:template match="divGen[@type='TagUsage']">
 

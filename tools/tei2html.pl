@@ -324,7 +324,7 @@ sub makeEpub() {
     print "Create ePub version...\n";
     system ("mkdir epub");
     copyImages("epub/images");
-    copyFormulas("epub/formulas");
+    # copyFormulas("epub/formulas"); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
     copyAudio("epub/audio");
     copyFonts("epub/fonts");
 
