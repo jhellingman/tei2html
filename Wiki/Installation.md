@@ -4,11 +4,11 @@ The `tei2html` code has a range of dependencies on third-party software. This pa
 
 ## Saxon ##
 
-An XSLT 3.0 processor is required for tei2html, any XSLT 3.0 processor should work, however, I've developed these stylesheets with Saxon (using the freely available version Saxon HE).
+An XSLT 3.0 processor is required for `tei2html`, any XSLT 3.0 processor should work, however, I've developed these stylesheets with Saxon (using the freely available version Saxon HE).
 
 You should download a reasonable recent version of Saxon. For example the Saxon SA product from [saxonica.com](http://www.saxonica.com/products.html).
 
-The perl scripts assume that `saxon9he.jar` is placed in the tools/lib/ subdirectory.
+The perl scripts assume that `saxon9he.jar` is placed in the `tools/lib/` subdirectory.
 
 ## Java ##
 
@@ -38,21 +38,32 @@ Some errors might be shown during this process, but in my configuration it still
 
 ### Packages used ###
 
+TODO.
+
 ## SX, NSGML ##
 
-_optional, only needed you want to use SGML._
+_optional, only needed you want to use SGML as source format._
 
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since XSLT only supports XML, you will need both those two tools to be able to work with SGML. They can be downloaded from [James Clark website](http://www.jclark.com/). For windows, get [sp 1.3.4](ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip).
 
-To enable SX and NSGML to understand your document types, you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named tools/pubtext/CATALOG.
+To enable SX and NSGML to understand your document types, you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named `tools/pubtext/CATALOG`.
 
-You will then add the teilite.dtd to the CATALOG. This DTD can be found here: http://www.tei-c.org/Vault/P4/Lite/DTD/
+You will need to add the `teilite.dtd` to the CATALOG. This DTD can be found here: http://www.tei-c.org/Vault/P4/Lite/DTD/
 
 A short explanation of Catalog files can be found in the SP documentation on James Clark's website referenced above.
 
 ## ZIP ##
 
 To compress ePub files, you will need a zip utility. `tei2html` uses [info-zip](http://www.info-zip.org/Zip.html) to handle the peculiar requirements of the ePub format. (See e.g. [this blog entry on creating ePub files](http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html).)
+
+## Node.js ##
+
+_optional, only needed when you use mathematical formulas in TeX notation._
+
+To convert mathematical formulas in TeX format to a format that can be included in static HTML pages, you will need to install the following:
+
+  * Node.js (see the [node.js website](https://nodejs.org/en/)).
+  * mathjax-node-cli ([source at GitHub](https://github.com/mathjax/mathjax-node-cli), most conveniently installed by using `npm` after installing Node.js.
 
 ## Patc ##
 
