@@ -102,7 +102,7 @@
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
+            <xsl:apply-templates mode="gentoc" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
@@ -205,8 +205,8 @@
                 <xsl:when test="$type = 'Cover'"><xsl:value-of select="f:message('msgCover')"/></xsl:when>
                 <xsl:when test="$type = 'Imprint'"><xsl:value-of select="f:message('msgImprint')"/></xsl:when>
                 <xsl:when test="$type = 'TitlePage'"><xsl:value-of select="f:message('msgTitlePage')"/></xsl:when>
-                <xsl:when test="$type = 'Ad'"><xsl:value-of select="f:message('msgAdvertisement')"/></xsl:when>
-                <xsl:when test="$type = 'Ads'"><xsl:value-of select="f:message('msgAdvertisements')"/></xsl:when>
+                <xsl:when test="$type = 'Advertisement'"><xsl:value-of select="f:message('msgAdvertisement')"/></xsl:when>
+                <xsl:when test="$type = 'Advertisements'"><xsl:value-of select="f:message('msgAdvertisements')"/></xsl:when>
             </xsl:choose>
         </xsl:variable>
 
@@ -377,7 +377,7 @@
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type='Ads') and not(@type='Advertisment')]">
+            <xsl:apply-templates mode="gentoc-table" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
         </table>
@@ -473,7 +473,7 @@
 
             <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/front/div1"/>
             <xsl:apply-templates mode="gentoca" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else /*[self::TEI.2 or self::TEI]/text/body/div1"/>
-            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/back/div1[not(@type='Ads') and not(@type='Advertisment')]"/>
+            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/back/div1[not(@type = ('Advertisement', 'Advertisements'))]"/>
         </div>
     </xsl:template>
 

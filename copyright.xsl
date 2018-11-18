@@ -127,6 +127,7 @@
         </xsl:choose>
     </xsl:function>
 
+
     <xd:doc>
         <xd:short>Copyright Jurisdictions</xd:short>
         <xd:detail>A list of jurisdictions giving the copyright terms in force in those

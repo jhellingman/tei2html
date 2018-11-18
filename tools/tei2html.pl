@@ -12,6 +12,10 @@ use Cwd qw(abs_path);
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
+my $home = $ENV{'TEI2HTML_HOME'};
+my $javaHome = $ENV{'JAVA_HOME'};
+my $javaOptions = '-Xmx1024m -Xss1024k';
+
 #==============================================================================
 # Configuration
 
@@ -20,9 +24,9 @@ my $xsldir          = abs_path($toolsdir . "/..");          # location of xsl st
 my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
 my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
 
-my $java            = "java";
+my $java            = "java $javaOptions";
 my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";   # see https://www.princexml.com/
-my $saxon           = "$java -Xss1024k -jar " . $toolsdir . "/lib/saxon9he.jar ";       # see http://saxon.sourceforge.net/
+my $saxon           = "$java -jar " . $toolsdir . "/lib/saxon9he.jar ";                 # see http://saxon.sourceforge.net/
 my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";          # see https://github.com/IDPF/epubcheck
 my $jeebies         = "C:\\Bin\\jeebies";                                               # see http://gutcheck.sourceforge.net/
 my $gutcheck        = "gutcheck";
@@ -223,6 +227,7 @@ sub processFile($) {
     # create PGTEI version
     # system ("$saxon $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
+    makeQrCode();
     collectImageInfo();
     $makeHtml   && makeHtml($basename);
     $makePdf    && makePdf($basename);
@@ -230,7 +235,6 @@ sub processFile($) {
     $makeText   && makeText($filename, $basename);
     $makeReport && makeReport($basename);
 
-    makeQrCode();
 
     if ($makeKwic == 1) {
         my $saxonParameters = determineSaxonParameters();
@@ -256,7 +260,8 @@ sub makeQrCode() {
         }
 
         if (not -e "$imageDir/qrcode.png") {
-            system("qrcode -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
+            # Generate a QR code with a transparant background.
+            system("qrcode -l '#0000' -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
         }
     }
 }

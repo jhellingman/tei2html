@@ -260,7 +260,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     text-decoration: none;
 }
 
-.advertisment {
+.advertisement, .advertisements {
     background-color: #FFFEE0;
     border: black 1px dotted;
     color: #000;

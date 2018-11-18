@@ -10,11 +10,14 @@ use File::Copy;
 
 my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm 
 my $optipng = "optipng.exe";            # also https://pngquant.org/ and http://optipng.sourceforge.net/
-
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
 my $jpegtran = "jpegtran.exe";          # http://www.kokkonen.net/tjko/projects.html https://github.com/mozilla/mozjpeg
+my $zopflipng = "zopflipng.exe";        # https://github.com/imagemin/zopflipng-bin/tree/master/vendor
+my $gifsicle = "gifsicle.exe";          # see http://www.lcdf.org/gifsicle/   (WARNING: might corrupt some images!)
 
-my $gifsicle = "gifsicle.exe";          # see http://www.lcdf.org/gifsicle/
+# For benchmarks see: https://css-ig.net/png-tools-overview#overview
+# https://github.com/fhanau/Efficient-Compression-Tool
+
 my $temp = "C:\\Temp";
 
 my $errorCount = 0;
@@ -53,7 +56,7 @@ sub list_recursively($) {
 sub handle_file($) {
     my ($file) = @_;
 
-    if ($file =~ m/^(.*)\.(png|jpg|jpeg|gif)$/) {
+    if ($file =~ m/^(.*)\.(png|jpg|jpeg)$/) {
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
@@ -65,14 +68,27 @@ sub handle_file($) {
         my $originalSize = -s $file;
 
         if ($extension eq 'png') {
-            # my $returnCode = system ("$pngout /y \"$file\" \"$file\"");
-            my $returnCode = system ("$optipng -o5 -strip all \"$file\" 2>>\&1");
+            # my $returnCode = system ("$pngout /y \"$file\" \"$file\""); (OLDEST)
+            # my $returnCode = system ("$optipng -o5 -strip all \"$file\" 2>>\&1"); (SOMEWHAT BETTER)
+
+            my $returnCode = system ("$zopflipng -m \"$file\" \"$newfile\"");
+
+            if (-s $file > -s $newfile) {
+                move($newfile, $file);
+            } else {
+                unlink $newfile;
+            }
         } elsif ($extension eq 'jpg' or $extension eq 'jpeg') {
             # my $returnCode = system ("$jpegoptim --strip-all \"$file\"");
             my $returnCode = system ("$jpegtran -copy none \"$file\" 1>>\"$newfile\"");
-            move($newfile, $file);
-        } elsif ($extension eq 'gif') {
-            my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
+
+            if (-s $file > -s $newfile) {
+                move($newfile, $file);
+            } else {
+                unlink $newfile;
+            }
+        # } elsif ($extension eq 'gif') {
+        #     my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
         }
 
         my $resultSize = -s $file;

@@ -1,4 +1,4 @@
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -133,6 +133,14 @@
     </xd:doc>
 
     <xsl:template mode="segments" match="note"/>
+
+
+    <xd:doc>
+        <xd:short>Ignore seg-elements that are copied.</xd:short>
+        <xd:detail>Ignore seg-elements that are copied. The (presented) content of these is identical to content elsewhere; the actual content is typically only ditto marks.</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="seg[@copyOf]"/>
 
 
     <xd:doc mode="segment-notes">
