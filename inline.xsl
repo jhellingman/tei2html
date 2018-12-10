@@ -201,7 +201,7 @@
         <xd:detail>Italic text, indicated with the <code>@rend</code> attribute value <code>it</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='it' or @rend='italic'] | i" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='it' or @rend='italic'] | i | em" mode="#default remove-initial titlePage">
         <i>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -213,7 +213,7 @@
         <xd:detail>Bold text, indicated with the <code>@rend</code> attribute value <code>b</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='b' or @rend='bold'] | b" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='b' or @rend='bold'] | b | strong" mode="#default remove-initial titlePage">
         <b>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>

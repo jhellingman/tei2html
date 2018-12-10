@@ -358,6 +358,8 @@
 
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:getSetting('css.frakturFont')"/>'; </xsl:when>
+                <xsl:when test="$property='font' and $value='blackletter'">font-family:'<xsl:value-of select="f:getSetting('css.blackletterFont')"/>'; </xsl:when>
+
                 <xsl:when test="$property='font' and $value='italic'">font-style:italic; </xsl:when>
 
                 <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>; </xsl:when>

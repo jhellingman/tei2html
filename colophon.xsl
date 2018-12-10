@@ -74,9 +74,9 @@
         <xsl:call-template name="colophonMetadata"/>
         <!-- <xsl:call-template name="catalogEntries"/> -->
 
-        <xsl:if test="f:isValid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc)">
+        <xsl:if test="f:isValid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p[1])">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
-            <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc"/>
+            <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p"/>
         </xsl:if>
 
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>

@@ -248,13 +248,13 @@
 
 <p rend="align(center)">[align(center)] &lorem;</p>
 
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">A simple test of a decorative initial. <hi>Some italics</hi> and some more text: &lorem;</p>
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">A simple test of a decorative initial. <hi>Some italics</hi> and some more text: &lorem;</p>
 
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&lorem;<note place="foot">&lorem;</note></p>
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">&lorem;<note place="foot">&lorem;</note></p>
 
 <p rend="align(justify)">[align(justify)] &lorem;</p>
 
-<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.gif)">&ldquo;&lorem;&rdquo;<note place="foot">&lorem;</note></p>
+<p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">&ldquo;&lorem;&rdquo;<note place="foot">&lorem;</note></p>
 
 
 <p>Test of entity declaration: 23&prime; is 23 minutes.</p>
@@ -281,7 +281,7 @@
 
 </div1>
 <div1 id="ch04" n="IV" type="Chapter" rend="label(no)">
-<head type="label" rend="image(images/Ornament.gif)">Chapter IV</head>
+<head type="label" rend="image(images/Ornament.png)">Chapter IV</head>
 <head>Tables</head>
 
 
@@ -464,7 +464,7 @@
 <table id="tableDemoBracket" rend="summary(A small table to demonstrate bracket images.) align(center)">
     <row>
         <cell>Gadgets</cell>
-        <cell rows="2" rend="image(images/bracket3.gif) vertical-align(middle) width(2px)"></cell>
+        <cell rows="2" rend="image(images/bracket3.png) vertical-align(middle) width(2px)"></cell>
         <cell rows="2" rend="vertical-align(middle)">Both 1</cell>
     </row>
     <row>
@@ -787,7 +787,7 @@
 </div2>
 </div1>
 <div1 id="ch05" n="V" type="Chapter">
-<head type="label" rend="image(images/Ornament.gif)">Chapter V</head>
+<head type="label" rend="image(images/Ornament.png)">Chapter V</head>
 <head>Figures</head>
 
 
@@ -871,7 +871,7 @@
     <graphic id="grph1" url="images/hg2101.png"/>
     <p>Some hieroglyphs.</p>
 
-    <graphic id="grph2" url="images/initial-A.gif"/>
+    <graphic id="grph2" url="images/initial-A.png"/>
 
     <p>A decorative initial letter A.</p>
 </figure>
@@ -1012,7 +1012,7 @@
 
 </div1>
 <div1 id="ch07" n="VII" type="Chapter">
-<head type="label" rend="image(images/Ornament.gif)">Chapter VII</head>
+<head type="label" rend="image(images/Ornament.png)">Chapter VII</head>
 <head>Text Divisions</head>
 
 
