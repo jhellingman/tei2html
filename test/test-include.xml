@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div3>
+	<head>Languages written in a different script.</head>
+	<p id="russian">First included paragraph (some Russian: русский язык).</p>
+	<p id="greek">Second included paragraph (some Greek: ελληνική γλώσσα).</p>
+	<p id="sanskrit">Third included paragraph (some Sanskrit: संस्कृतम्).</p>
+</div3>

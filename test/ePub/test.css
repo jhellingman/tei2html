@@ -256,7 +256,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  text-decoration: none;
 }
 
-.advertisment {
+.advertisement, .advertisements {
  background-color: #FFFEE0;
  border: black 1px dotted;
  color: #000;
@@ -1067,7 +1067,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd33e555 {
+.xd33e565 {
 text-align:right;
 }
 
@@ -1087,7 +1087,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd33e966 {
+.xd33e976 {
 background-color:green;
 }
 
@@ -1103,7 +1103,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd33e967 {
+.xd33e977 {
 background-color:white;
 }
 
@@ -1123,31 +1123,31 @@ font-family:'Walbaum-Fraktur';
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd33e387 {
+.xd33e397 {
 text-align:left;
 }
 
-.xd33e390 {
+.xd33e400 {
 text-align:right;
 }
 
-.xd33e392 {
+.xd33e402 {
 text-align:center;
 }
 
 
-.xd33e394 {
-    background: url(images/initial-A.gif) no-repeat top left;
+.xd33e404 {
+    background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd33e394init {
+.xd33e404init {
     float: left;
     width: 90px;
     height: 95px;
-    background: url(images/initial-A.gif) no-repeat;
+    background: url(images/initial-A.png) no-repeat;
     
         background-position: 0px -45px;
     
@@ -1157,11 +1157,11 @@ text-align:center;
 }
 
         
-.xd33e402 {
+.xd33e412 {
 text-align:justify;
 }
 
-.xd33e417 {
+.xd33e427 {
 text-align:center;
 }
 
@@ -1169,7 +1169,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd33e521 {
+.xd33e531 {
 text-align:right;
 }
 
@@ -1177,11 +1177,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd33e698 {
+.xd33e708 {
 vertical-align:middle; width:2px;
 }
 
-.xd33e699 {
+.xd33e709 {
 vertical-align:middle;
 }
 
@@ -1189,11 +1189,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd33e710 {
+.xd33e720 {
 width:25%;
 }
 
-.xd33e712 {
+.xd33e722 {
 width:75%;
 }
 
@@ -1213,11 +1213,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd33e828 {
+.xd33e838 {
 color:red;
 }
 
-.xd33e848 {
+.xd33e858 {
 color:yellow; background-color:black;
 }
 
@@ -1229,23 +1229,23 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd33e997 {
+.xd33e1007 {
 background-color:yellow;
 }
 
-.xd33e1015 {
+.xd33e1025 {
 background-color:blue;
 }
 
-.xd33e1024 {
+.xd33e1034 {
 background-color:orange;
 }
 
-.xd33e1034 {
+.xd33e1044 {
 background-color:red;
 }
 
-.xd33e1094 {
+.xd33e1104 {
 ditto-mark:+;
 }
 
@@ -1277,55 +1277,51 @@ width:480px;
 width:480px;
 }
 
-.xd33e1219width {
+.xd33e1229width {
 width:480px;
 }
 
-.grph2width {
-width:128px;
-}
-
-.xd33e1238 {
+.xd33e1248 {
 font-style:italic;
 }
 
-.xd33e1262 {
+.xd33e1272 {
 list-style-type:disc;
 }
 
-.xd33e1278 {
+.xd33e1288 {
 list-style-type:upper-roman;
 }
 
-.xd33e1287 {
+.xd33e1297 {
 list-style-type:lower-roman;
 }
 
-.xd33e1300 {
+.xd33e1310 {
 list-style-type:disc;
 }
 
-.xd33e1312 {
+.xd33e1322 {
 list-style-type:disc;
 }
 
-.xd33e1381 {
+.xd33e1391 {
 text-align:center;
 }
 
-.xd33e1386 {
+.xd33e1396 {
 text-indent:1em;
 }
 
-.xd33e1392 {
+.xd33e1402 {
 text-indent:2em;
 }
 
-.xd33e1396 {
+.xd33e1406 {
 text-indent:3em;
 }
 
-.xd33e1400 {
+.xd33e1410 {
 text-indent:10em;
 }
 
@@ -1347,12 +1343,12 @@ display:none;
 @media handheld {
 
 
-.xd33e394 {
+.xd33e404 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd33e394init {
+.xd33e404init {
     float: none;
     width: auto;
     height: auto;
@@ -1367,6 +1363,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd33e1573 {
+.xd33e1583 {
 color:red
 }

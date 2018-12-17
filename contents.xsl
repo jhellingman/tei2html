@@ -9,10 +9,11 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:tmp="urn:temporary-nodes"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f tmp xd xhtml xs">
+    exclude-result-prefixes="f tmp xd xi xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate tables of contents.</xd:short>
@@ -910,19 +911,32 @@
 
 
     <!--====================================================================-->
-    <!-- Included material (alternative for xml:include) -->
+    <!-- Included material (alternative for xi:include) -->
 
     <xsl:template match="divGen[@type='Inclusion']">
-        <!-- Material to be included should be rendered here; material is given on an url parameter -->
-        <xsl:if test="@url">
-            <xsl:variable name="target" select="@url"/>
-            <xsl:variable name="document" select="substring-before($target, '#')"/>
-            <xsl:variable name="otherid" select="substring-after($target, '#')"/>
-
-            <xsl:apply-templates select="document($document, .)//*[@id=$otherid]"/>
-        </xsl:if>
+        <!-- Material to be included should be rendered here; material is given on a url parameter -->
+        <xsl:choose>
+            <xsl:when test="@url">
+                <xsl:variable name="document" select="substring-before(@url, '#')"/>
+                <xsl:variable name="fragmentId" select="substring-after(@url, '#')"/>
+                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)"/>
+            </xsl:when>
+            <xsl:when test="f:has-rend-value(@rend, 'include')">
+                <xsl:variable name="url" select="f:rend-value(@rend, 'include')"/>
+                <xsl:variable name="document" select="substring-before($url, '#')"/>
+                <xsl:variable name="fragmentId" select="substring-after($url, '#')"/>
+                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
+
+    <xsl:template match="xi:include">
+        <!-- Material to be included should be rendered here; material is given on an href parameter -->
+        <xsl:if test="@href">
+            <xsl:apply-templates select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)"/>
+        </xsl:if>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- proto-Bibliography, to help build a bibliography from bibl-elements. -->

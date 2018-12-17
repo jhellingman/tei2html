@@ -347,6 +347,9 @@
                 <xsl:when test="$property='dropcap'"/>
                 <xsl:when test="$property='dropcap-offset'"/>
 
+                <!-- divGen related special handling. -->
+                <xsl:when test="$name = 'divGen' and $property = 'include'"/>
+
                 <!-- Figure related special handling. -->
                 <xsl:when test="$name = 'figure' and $property = 'float'"/>
 
