@@ -229,15 +229,11 @@ sub handleTeiFile($) {
                 my $xpath = XML::XPath->new(filename => $xmlFileName);
 
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
-
+                my $titleNfc = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title/@nfc');
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
-                my $authorKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author/@key');
                 my $editors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor');
-                my $editorKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor/@key');
                 my $respRoles = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/resp');
                 my $respNames = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/name');
-                my $respNameKeys = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/name/@key');
-
                 my $originalDate = $xpath->find('/TEI.2/teiHeader/fileDesc/sourceDesc/bibl/date[1]');
                 my $pageCount = $xpath->find('count(//pb[not(ancestor::note)])');
                 my $pgNum = $xpath->find('/TEI.2/teiHeader/fileDesc/publicationStmt/idno[@type="PGnum"]');
@@ -252,23 +248,30 @@ sub handleTeiFile($) {
                 my $keywords = $xpath->find('/TEI.2/teiHeader/profileDesc/textClass/keywords/list/item');
 
                 logMessage("Title:      $title");
-                print XMLFILE "    <title>" . escapeXml($title) . "</title>\n";
 
-                if ($authorKeys->size() == 0) {
-                    print "TODO: Missing author key(s) in $fullName\n";
+                my $nfcAttr = ' nfc="0"';
+                if ($titleNfc) {
+                    $nfcAttr = ' nfc="' . escapeXml($titleNfc) . '"';
                 }
+                print XMLFILE "    <title$nfcAttr>" . escapeXml($title) . "</title>\n";
 
                 for my $author ($authors->get_nodelist()) {
                     logMessage("Author:     " . $author->string_value());
-                    print XMLFILE "    <author>" . escapeXml($author->string_value()) . "</author>\n";
+                    my $keyAttr = getAttr('key', $author);
+                    my $refAttr = getAttr('ref', $author);
+                    print XMLFILE "    <author$keyAttr$refAttr>" . escapeXml($author->string_value()) . "</author>\n";
                 }
                 for my $editor ($editors->get_nodelist()) {
                     logMessage("Editor:     " . $editor->string_value());
-                    print XMLFILE "    <editor>" . escapeXml($editor->string_value()) . "</editor>\n";
+                    my $keyAttr = getAttr('key', $editor);
+                    my $refAttr = getAttr('ref', $editor);
+                    print XMLFILE "    <editor$keyAttr$refAttr>" . escapeXml($editor->string_value()) . "</editor>\n";
                 }
                 for my $respName ($respNames->get_nodelist()) {
                     logMessage("Contributor:     " . $respName->string_value());
-                    print XMLFILE "    <contributor>" . escapeXml($respName->string_value()) . "</contributor>\n";
+                    my $keyAttr = getAttr('key', $respName);
+                    my $refAttr = getAttr('ref', $respName);
+                    print XMLFILE "    <contributor$keyAttr$refAttr>" . escapeXml($respName->string_value()) . "</contributor>\n";
                 }
 
                 logMessage("Orig. Date: $originalDate");
@@ -420,6 +423,19 @@ sub downloadFromPG($$) {
             system ("wget $htmlUrl");
         }
     }
+}
+
+
+sub getAttr($$) {
+    my $attr = shift;
+    my $node = shift;
+    my $value = $node->find('@' . $attr);
+    my $valueAttr = '';
+    if ($value->size() > 0) {
+        $valueAttr = escapeXml($value->string_value());
+        $valueAttr = " $attr=\"" . $valueAttr . '"';
+    }
+    return $valueAttr;
 }
 
 
