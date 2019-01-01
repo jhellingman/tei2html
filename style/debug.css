@@ -1,23 +1,43 @@
 
-/* Show borders of tables */
+/* color scheme 
+
+http://paletton.com/#uid=72O1i0kp+uDfZMYljBdt9o2vWg0
+
+tables / lists -- greens : #7BEA75 #4FD848 #2DC625 #159B0E #056700
+poetry / drama -- blues  : #867EDD #5C52C0 #3D33AA #261C85 #130C59
+figures -- reds          : #FE7F82 #FD5559 #F22D33 #BE1115 #7E0003
+divisions -- yellows     : #FFE280 #FFD955 #F4C82E #C09811 #806300
+
+*/
+
+
+/* Show borders of tables and lists */
 
 table {
-    border: 1px dotted gray;
-    background-color: #E0F7FF;
+    border: 2px dotted #2DC625;
+    background-color: #7BEA75;
 }
 
 td {
-    border: 1px dotted blue;
+    border: 1px dotted #159B0E;
 }
 
 th {
-    border: 1px dotted red;
+    border: 1px dotted #159B0E;
+    background-color: #4FD848;
 }
 
 ol, ul {
-    border: 1px dotted gray;
-    background-color: #E7FFE0;
+    border: 2px dotted #056700;
+    background-color: #7BEA75;
 }
+
+li {
+    border: 1px dotted #159B0E;
+}
+
+/* Show borders on divisions */
+
 
 
 

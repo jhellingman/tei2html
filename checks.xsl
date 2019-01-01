@@ -104,10 +104,10 @@
         <xsl:call-template name="output-segments">
             <xsl:with-param name="segments" select="$segments"/>
         </xsl:call-template>
+        -->
         <xsl:call-template name="output-issues">
             <xsl:with-param name="issues" select="$issues"/>
         </xsl:call-template>
-        -->
         <xsl:apply-templates mode="report" select="$issues"/>
     </xsl:template>
 
@@ -785,7 +785,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'keyRef', 'keyNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
+    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'keyNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
@@ -813,7 +813,7 @@
     </xsl:template>
 
 
-    <!-- Elements not valid in TEI, but sometimes abused -->
+    <!-- Elements not valid in TEI, but sometimes abused while producing a text from HTML. -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt">
         <i:issue pos="{@pos}" code="X01" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
@@ -827,6 +827,21 @@
             <i:issue pos="{@pos}" code="C01" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+
+    <!-- Figures -->
+
+    <xsl:template mode="checks" match="figure[@url]">
+        <i:issue pos="{@pos}" code="F01" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"></xsl:value-of>&rdquo;.</i:issue>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="figure">
+        <xsl:if test="not(head) and not(figDesc)">
+            <i:issue pos="{@pos}" code="F02" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">Figure without head of figDesc will not have alt attribute in output.</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
     </xsl:template>
 
 

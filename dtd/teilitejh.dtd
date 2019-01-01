@@ -1684,6 +1684,7 @@ note | figure | stage | table | text)*)>
      prev IDREF #IMPLIED
      id ID #IMPLIED
      n CDATA #IMPLIED
+     nfc CDATA #IMPLIED
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
      level (a | m | j | s | u) #IMPLIED

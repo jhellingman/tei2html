@@ -186,7 +186,7 @@
         <xd:detail>Handle high-level structure. These are typically further divided in segments, so we need not introduce a segment for them.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="segments" match="front | back | body | div0 | div1 | div2 | div3 | div4 | div5 | div6 | lg | table | row | sp">
+    <xsl:template mode="segments" match="front | back | body | div0 | div1 | div2 | div3 | div4 | div5 | div6 | div7 | table | row">
         <xsl:apply-templates mode="#current"/>
     </xsl:template>
 
@@ -197,7 +197,7 @@
     </xd:doc>
 
     <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
-    <xsl:template mode="segments" match="p | seg | head | cell | l | item | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
+    <xsl:template mode="segments" match="p | seg | head | cell | item | lg | sp | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
 
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:variable name="page" as="xs:string">
@@ -211,6 +211,13 @@
             </xsl:if>
             <xsl:apply-templates mode="#current"/>
         </s:segment>
+    </xsl:template>
+
+    <!-- Introduce spaces around certain (relatively low level) elements. -->
+    <xsl:template mode="segments" match="l">
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates mode="#current"/>
+        <xsl:text> </xsl:text>
     </xsl:template>
 
 

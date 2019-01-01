@@ -55,7 +55,7 @@
         following the DFA conventions, that is, <code>lb</code>-elements are placed directly
         at the end of each line, and <code>pb</code>-elements follow these; furthermore, for hyphens
         to be removed, a special character is used (in the case of DTA texts, the not-sign).</p>
-        
+
         <p>With end-of-line hyphens we have three options. (In the examples below, | stands for the line-break.)</p>
 
         <ol>
@@ -121,16 +121,16 @@
     <xsl:function name="f:ends-with-removable-hyphen" as="xs:boolean">
         <xsl:param name="node" as="text()"/>
 
-        <xsl:sequence select="$node 
-                      and $node/following-sibling::node()[1][self::lb] 
+        <xsl:sequence select="$node
+                      and $node/following-sibling::node()[1][self::lb]
                       and ends-with($node, f:getSetting('lb.removable.hyphen'))"/>
     </xsl:function>
 
     <xsl:function name="f:ends-with-hyphen" as="xs:boolean">
         <xsl:param name="node" as="text()"/>
 
-        <xsl:sequence select="$node 
-                      and $node/following-sibling::node()[1][self::lb] 
+        <xsl:sequence select="$node
+                      and $node/following-sibling::node()[1][self::lb]
                       and ends-with($node, f:getSetting('lb.hyphen'))"/>
     </xsl:function>
 
@@ -148,7 +148,7 @@
 
     <xsl:function name="f:curly-apos" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
-    
+
         <xsl:variable name="text" as="xs:string" select="replace($text, '''', '&rsquo;')"/>
 
         <xsl:value-of select="$text"/>
@@ -157,7 +157,7 @@
 
     <xsl:function name="f:handle-quotes" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
-    
+
         <xsl:variable name="text" as="xs:string" select="replace($text, '&lsquo;&ldquo;', '&lsquo;&hairsp;&ldquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&rsquo;&rdquo;', '&rsquo;&hairsp;&rdquo;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&ldquo;&lsquo;', '&ldquo;&hairsp;&lsquo;')"/>
@@ -169,14 +169,15 @@
 
     <xsl:function name="f:handle-ellipses" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
-    
+
+        <!-- Four periods become a period followed by an ellipsis. -->
+        <xsl:variable name="text" as="xs:string" select="replace($text, '\.\.\.\.', '.&hellip;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '\.\.\.', '&hellip;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '(\w)&hellip;', '$1&hairsp;&hellip;')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, '&hellip;(\w)', '&hellip;&hairsp;$1')"/>
 
         <xsl:value-of select="$text"/>
     </xsl:function>
-
 
 
     <!--====================================================================-->
@@ -511,8 +512,8 @@
         <xsl:variable name="params" select="map{'extent': @extent, 'unit': @unit, 'reason': @reason}"/>
         <span class="gap">
             <xsl:if test="f:isSet('useMouseOverPopups')">
-                <xsl:attribute name="title" select="if (@extent) 
-                                                    then f:formatMessage('msgMissingTextWithExtentReason', $params) 
+                <xsl:attribute name="title" select="if (@extent)
+                                                    then f:formatMessage('msgMissingTextWithExtentReason', $params)
                                                     else f:formatMessage('msgMissingTextWithReason', $params)"/>
             </xsl:if>
             <xsl:text>[</xsl:text><i><xsl:value-of select="f:message('msgMissingText')"/></i><xsl:text>]</xsl:text>
@@ -523,7 +524,7 @@
     <xd:doc>
         <xd:short>Handle a space.</xd:short>
         <xd:detail><p>The <code>space</code> element indicated that some (extra-wide) space has been inserted. The
-        <code>@unit</code> and <code>@quantity</code> attributes can be used to give an indication of the size of the 
+        <code>@unit</code> and <code>@quantity</code> attributes can be used to give an indication of the size of the
         space.</p>
 
         <p>In HTML, a space is rendered with a zero-width space and appropriately sized padding, applied via CSS.</p></xd:detail>
@@ -594,7 +595,7 @@
     <xsl:function name="f:findExpansion" as="xs:string">
         <xsl:param name="abbr" as="element()"/>
 
-        <xsl:value-of select="if ($abbr/@expan != '') 
+        <xsl:value-of select="if ($abbr/@expan != '')
             then $abbr/@expan
             else if (root($abbr)//abbr[. = $abbr and ./@expan != ''])
                  then (root($abbr)//abbr[. = $abbr and ./@expan != '']/@expan)[1]
@@ -801,7 +802,7 @@
         <xd:short>Segments with ditto marks.</xd:short>
         <xd:detail>When ditto marks are used in the source text, they are marked as a segment, and
         the attribute <code>@copyOf</code> is used to point to the segment that contains the full
-        text. Tei2html will emulate the appearance of the ditto marks, or replace them with the 
+        text. Tei2html will emulate the appearance of the ditto marks, or replace them with the
         full text depending on the value of the setting <code>useDittoMarks</code>.</xd:detail>
     </xd:doc>
 
@@ -915,8 +916,8 @@
     <xsl:function name="f:determineDittoMark" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
-        <xsl:value-of select="if ($node/ancestor::ditto/@mark) 
-            then $node/ancestor::ditto/@mark 
+        <xsl:value-of select="if ($node/ancestor::ditto/@mark)
+            then $node/ancestor::ditto/@mark
             else if ($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')])
                  then f:rend-value($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
                  else f:getSetting('dittoMark')"/>
