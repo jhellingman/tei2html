@@ -359,6 +359,9 @@
                 <xsl:when test="$name = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
                 <xsl:when test="$name = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="$value"/>em; </xsl:when>
 
+                <!-- Line-breaks with indents need to be handled specially, so should be removed here. -->
+                <xsl:when test="$name='lb' and $property='indent'"/>
+
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:getSetting('css.frakturFont')"/>'; </xsl:when>
                 <xsl:when test="$property='font' and $value='blackletter'">font-family:'<xsl:value-of select="f:getSetting('css.blackletterFont')"/>'; </xsl:when>

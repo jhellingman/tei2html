@@ -161,11 +161,23 @@
         <xsl:choose>
             <xsl:when test="f:isSet('lb.preserve')">
                 <br id="{f:generate-id(.)}"/>
+                <xsl:if test="f:has-rend-value(@rend, 'indent')">
+                    <span class="indent{f:generate-id(.)}"/>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <a id="{f:generate-id(.)}"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="lb" mode="css">
+        <xsl:if test="f:isSet('lb.preserve') and f:has-rend-value(@rend, 'indent')">
+.indent<xsl:value-of select="f:generate-id(.)"/> {
+    padding-left: <xsl:value-of select="f:rend-value(@rend, 'indent')"/>;
+}
+</xsl:if>
+        <xsl:next-match/>
     </xsl:template>
 
 
