@@ -357,9 +357,9 @@
                      margin: 0px auto, the table is centered, while
                      display: table shrinks the bounding box to the content -->
                 <xsl:when test="$name = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
-                <xsl:when test="$name = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="$value"/>em; </xsl:when>
+                <xsl:when test="$name = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
-                <!-- Line-breaks with indents need to be handled specially, so should be removed here. -->
+                <!-- Line-breaks with indents need to be handled specially (drama.xsl), so should be removed here. -->
                 <xsl:when test="$name='lb' and $property='indent'"/>
 
                 <!-- Properties related to special font usage -->
@@ -370,9 +370,9 @@
 
                 <xsl:when test="$property='align'">text-align:<xsl:value-of select="$value"/>; </xsl:when>
                 <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>; </xsl:when>
-                <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="$value"/>em; </xsl:when>
+                <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
-                <!-- Assume the rest is valid CSS -->
+                <!-- Assume the rest can straightforwardly be translated to CSS -->
                 <xsl:otherwise>
                     <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/><xsl:text>; </xsl:text>
                 </xsl:otherwise>
@@ -380,6 +380,18 @@
         </xsl:variable>
 
         <xsl:value-of select="$css"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Handle indent values without a unit (assume em).</xd:short>
+        <xd:detail>Use without units should be deprecated, but historically we have a lot of texts specifying an indent as
+        just a number, which is here assumed to mean a value in ems.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:indent-value" as="xs:string">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:value-of select="if (matches($value, '^[0-9]+(\.[0-9]+)?$')) then $value || 'em' else $value"/>
     </xsl:function>
 
 
