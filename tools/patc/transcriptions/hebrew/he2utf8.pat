@@ -56,4 +56,16 @@
 "S/"     p "שׁ"    % shin dot
 "S\\"    p "שׂ"    % sin dot
 
+"´"     p "׳"		% geresh
+"\""    p "״"     	% gershayim
+
+"'="     p "ﬡ"      % wide alef
+"d="     p "ﬢ"      % wide dalet
+"h="     p "ﬣ"      % wide he
+"k="     p "ﬤ"      % wide kaf
+"l="     p "ﬥ"      % wide lamed
+"m/="    p "ﬦ"      % wide final mem
+"r="     p "ﬧ"      % wide resh
+"t="     p "ﬨ"      % wide tav
+
 @end

@@ -57,4 +57,16 @@
 "S/"     p "&heshin;&heshindot;"    % שׁ
 "S\\"    p "&heshin;&hesindot;"     % שׂ
 
+"´"     p "&#x05F3;"    		% ׳
+"\""    p "&#x05F4;"     		% ״
+
+"'="     p "&#xFB21;"      		% wide alef
+"d="     p "&#xFB22;"      		% wide dalet
+"h="     p "&#xFB23;"      		% wide he
+"k="     p "&#xFB24;"      		% wide kaf
+"l="     p "&#xFB25;"      		% wide lamed
+"m/="    p "&#xFB26;"      		% wide final mem
+"r="     p "&#xFB27;"      		% wide resh
+"t="     p "&#xFB28;"      		% wide tav
+
 @end
