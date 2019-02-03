@@ -56,8 +56,8 @@
 "S/"     p "שׁ"    % shin dot
 "S\\"    p "שׂ"    % sin dot
 
-"´"     p "׳"		% geresh
-"\""    p "״"     	% gershayim
+"#"      p "׳"		% geresh
+"\""     p "״"     	% gershayim
 
 "'="     p "ﬡ"      % wide alef
 "d="     p "ﬢ"      % wide dalet

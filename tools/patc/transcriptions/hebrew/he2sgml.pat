@@ -57,8 +57,8 @@
 "S/"     p "&heshin;&heshindot;"    % שׁ
 "S\\"    p "&heshin;&hesindot;"     % שׂ
 
-"´"     p "&#x05F3;"    		% ׳
-"\""    p "&#x05F4;"     		% ״
+"#"      p "&#x05F3;"    		% ׳
+"\""     p "&#x05F4;"     		% ״
 
 "'="     p "&#xFB21;"      		% wide alef
 "d="     p "&#xFB22;"      		% wide dalet
