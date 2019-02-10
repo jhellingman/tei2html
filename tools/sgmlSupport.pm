@@ -1473,6 +1473,8 @@ BEGIN {
     $ent{"sdntack"}     = "s" . chr(0x031E); # s with down tack below
 
     $ent{"aemacr"}      = chr(0x00E6) . chr(0x0304); # ae ligature with macron
+    $ent{"AEmacr"}      = chr(0x00C6) . chr(0x0304); # AE ligature with macron
+
     $ent{"aemacracu"}   = chr(0x00E6) . chr(0x0304) . chr(0x0301); # ae ligatures with macron and acute
 
     $ent{"gmacr"}       = "g" . chr(0x0304); # g with macron
@@ -1503,7 +1505,10 @@ BEGIN {
     $ent{"zbreve"}      = "z" . chr(0x0306); # z with breve
     $ent{"Zbreve"}      = "Z" . chr(0x0306); # Z with breve
 
+    $ent{"nbrevdotb"}   = "n" . chr(0x0306) . chr(0x0323); # n with breve and dot b
     $ent{"zbrevdotb"}   = "z" . chr(0x0306) . chr(0x0323); # z with breve and dot b
+
+    $ent{"nchndrb"}     = "n" . chr(0x0310); # n with chandrabindu
 
     $ent{"adota"}       = "a" . chr(0x0307); # a with dot above
     $ent{"Adota"}       = "A" . chr(0x0307); # A with dot above
@@ -1707,6 +1712,8 @@ BEGIN {
     # Requiring wide combining diacritics
     $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve
 
+    $ent{"aewmacr"}      = "a" . chr(0x035E) . "e"; # two letters ae with wide macron (aemacr is for ligature!)
+    $ent{"AEwmacr"}      = "a" . chr(0x035E) . "e"; # two letters AE with wide macron
     $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron
     $ent{"eemacr"}      = "e" . chr(0x035E) . "e"; # ee with wide macron
     $ent{"mmmacr"}      = "m" . chr(0x035E) . "m"; # mm with wide macron

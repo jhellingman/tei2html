@@ -59,6 +59,12 @@
 "#"      p "׳"		% geresh
 "\""     p "״"     	% gershayim
 
+"{.}"    p "."		% 
+"{:}"    p ":"		% 
+"{'}"    p "'"     	% 
+"{\"}"   p "\""   	% 
+"{/}"    p "/"   	% 
+
 "'="     p "ﬡ"      % wide alef
 "d="     p "ﬢ"      % wide dalet
 "h="     p "ﬣ"      % wide he

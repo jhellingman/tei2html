@@ -1019,6 +1019,11 @@ sub entities2iso88591($) {
 
     $a =~ s/\&aoacute;/aó/g;
 
+    $a =~ s/\&aewmacr;/ae/g;
+    $a =~ s/\&AEmacr;/Æ/g;
+    $a =~ s/\&nbrevdotb;/n/g;
+    $a =~ s/\&nchndrb;/n/g;         # n chandrabindu
+
     $a =~ s/\&cslash;/¢/g;
     $a =~ s/\&grchi;/x/g;
     $a =~ s/\&omactil;/o/g;
