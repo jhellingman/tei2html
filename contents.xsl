@@ -702,10 +702,12 @@
         <xsl:choose>
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
+                <xsl:call-template name="closepar"/>
                 <table class="tocList">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tocList"/>
                 </table>
+                <xsl:call-template name="reopenpar"/>
             </xsl:when>
             <!-- Nested list, part of table generated for outermost list -->
             <xsl:otherwise>
