@@ -1,6 +1,6 @@
 # tei2html
 
-A collection of XSLT 2.0 style sheets to transform a document encoded in according to the TEILite DTD to HTML. 
+A collection of XSLT 3.0 style sheets to transform a document encoded in according to the TEILite DTD to HTML. 
 They have been specifically developed to create a monolithic (single) HTML document for posting on 
 [Project Gutenberg](http://www.gutenberg.org/), but are also capable of generating ePub files from the same 
 source with a similar look and feel. In line with the type of material Project Gutenberg deals with, these 
