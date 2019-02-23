@@ -839,7 +839,7 @@
 
     <xsl:template mode="checks" match="figure">
         <xsl:if test="not(head) and not(figDesc)">
-            <i:issue pos="{@pos}" code="F02" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">Figure without head of figDesc will not have alt attribute in output.</i:issue>
+            <i:issue pos="{@pos}" code="F02" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">Figure without head or figDesc will not have alt attribute in output.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -930,6 +930,19 @@
             </xsl:for-each>
         </xsl:for-each-group>
 
+        <!-- @sameAs points to existing @id on element -->
+        <xsl:for-each-group select="//*[@sameAs]" group-by="@sameAs">
+            <xsl:variable name="sameAs" select="./@sameAs" as="xs:string"/>
+            <xsl:if test="not(//*[@id=$sameAs])">
+                <i:issue
+                    pos="{./@pos}"
+                    code="I05"
+                    target="{f:generate-id(.)}"
+                    level="Error"
+                    page="{f:getPage(.)}"
+                    element="{name(.)}">Element <xsl:value-of select="name(.)"/>: sameAs-attribute value <xsl:value-of select="./@sameAs"/> not present as id of any element.</i:issue>
+            </xsl:if>
+        </xsl:for-each-group>
 
         <!-- @who points to existing @id on role -->
         <xsl:for-each-group select="//*[@who]" group-by="@who">
