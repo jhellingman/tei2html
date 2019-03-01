@@ -810,18 +810,19 @@
         <span class="seg">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="copyOf" select="if (starts-with(@copyOf, '#')) then substring(@copyOf, 2) else @copyOf"/>
-            <xsl:variable name="copy" select="//seg[@id = $copyOf]"/>
+            <xsl:variable name="source" select="$root//seg[@id = $copyOf]"/>
             <xsl:choose>
-                <xsl:when test="not($copy)">
+                <xsl:when test="not($source)">
                     <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
                 <xsl:when test="f:isSet('useDittoMarks')">
-                    <xsl:variable name="copy" select="if ($copy//corr) then f:stripCorrElements($copy) else $copy"/>
-                    <xsl:apply-templates select="$copy" mode="ditto"/>
+                    <!-- TODO: Handle the case where this is a doubled-up table, and the row appears on the top line -->
+                    <xsl:variable name="source" select="if ($source//corr) then f:stripCorrElements($source) else $source"/>
+                    <xsl:apply-templates select="$source" mode="ditto"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:apply-templates select="$copy"/>
+                    <xsl:apply-templates select="$source"/>
                 </xsl:otherwise>
             </xsl:choose>
         </span>

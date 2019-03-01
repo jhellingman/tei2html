@@ -315,7 +315,7 @@
 
     <xsl:template match="seg[@copyOf]" mode="checks">
         <xsl:if test="not(//*[@id = current()/@copyOf])">
-            <i:issue pos="{@pos}" code="H12" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @copyOf attribute of seg element has no matching @id.</i:issue>
+            <i:issue pos="{@pos}" code="H12" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @copyOf attribute &ldquo;<xsl:value-of select="@copyOf"/>&rdquo; of seg element has no matching @id.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -553,6 +553,19 @@
         <xsl:next-match/>
     </xsl:template>
 
+    <xsl:template mode="checks" match="note[not(@sameAs)]">
+        <xsl:if test="not(.) or . = ''">
+            <i:issue pos="{@pos}" code="S03" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Empty note.</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="note[@sameAs]">
+        <xsl:if test=". != ''">
+            <i:issue pos="{@pos}" code="S04" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Note with @sameAs attribute must be empty.</i:issue>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
 
     <xd:doc>
         <xd:short>Check presence of cover and title page.</xd:short>
