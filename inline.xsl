@@ -787,7 +787,7 @@
     <xd:doc>
         <xd:short>Segments.</xd:short>
         <xd:detail>Segments are used in text-analysis. We also use them for synchronizing
-        audio with the text.</xd:detail>
+        audio with the text and for indicating texts repeated by ditto-marks in tables, etc.</xd:detail>
     </xd:doc>
 
     <xsl:template match="seg">
@@ -803,7 +803,7 @@
         <xd:detail>When ditto marks are used in the source text, they are marked as a segment, and
         the attribute <code>@copyOf</code> is used to point to the segment that contains the full
         text. Tei2html will emulate the appearance of the ditto marks, or replace them with the
-        full text depending on the value of the setting <code>useDittoMarks</code>.</xd:detail>
+        full text depending on the value of the setting <code>ditto.enable</code>.</xd:detail>
     </xd:doc>
 
     <xsl:template match="seg[@copyOf]">
@@ -816,10 +816,12 @@
                     <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
-                <xsl:when test="f:isSet('useDittoMarks')">
+                <xsl:when test="f:isSet('ditto.enable')">
                     <!-- TODO: Handle the case where this is a doubled-up table, and the row appears on the top line -->
                     <xsl:variable name="source" select="if ($source//corr) then f:stripCorrElements($source) else $source"/>
-                    <xsl:apply-templates select="$source" mode="ditto"/>
+                    <xsl:apply-templates select="$source" mode="ditto">
+                        <xsl:with-param name="context" select="." tunnel="yes"/>
+                    </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="$source"/>
@@ -845,9 +847,11 @@
     <xsl:template match="ditto">
         <xsl:copy-of select="f:logWarning('Deprecated element ditto used (please use seg).', ())"/>
         <xsl:choose>
-            <xsl:when test="f:isSet('useDittoMarks')">
+            <xsl:when test="f:isSet('ditto.enable')">
                 <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>
-                <xsl:apply-templates select="$node" mode="ditto"/>
+                <xsl:apply-templates select="$node" mode="ditto">
+                    <xsl:with-param name="context" select="." as="node()" tunnel="yes"/>
+                </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates/>
@@ -857,14 +861,17 @@
 
 
     <xsl:template mode="ditto" match="text()">
-        <xsl:copy-of select="f:useDittoMarks(.)"/>
+        <xsl:param name="context" as="node()" tunnel="yes"/>
+        <xsl:copy-of select="f:generateDittoMarks(., $context)"/>
     </xsl:template>
 
 
-    <xsl:function name="f:useDittoMarks">
+    <xsl:function name="f:generateDittoMarks">
         <xsl:param name="node" as="node()*"/>
+        <xsl:param name="context" as="node()"/>
 
-        <!-- Split the text-content of the ditto on space boundaries -->
+        <!-- Split the text-content of the segment on space boundaries -->
+        <!-- TODO: add ditto-repeat with values "word" or "segment" to determine how often the mark will be repeated. -->
         <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
@@ -877,6 +884,7 @@
                     <span class="ditto">
                         <span class="s">
                             <!-- Handle most common in-line style elements. -->
+                            <!-- TODO: replace with straightforward processing of the respective elements in the ditto-mode. -->
                             <xsl:choose>
                                 <xsl:when test="$node/parent::hi[@rend='b' or @rend='bold']">
                                     <b><xsl:value-of select="."/></b>
@@ -890,6 +898,9 @@
                                 <xsl:when test="$node/parent::hi[@rend='sc']">
                                     <span class="sc"><xsl:value-of select="."/></span>
                                 </xsl:when>
+                                <xsl:when test="$node/parent::hi[@rend='ex']">
+                                    <span class="ex"><xsl:value-of select="."/></span>
+                                </xsl:when>
                                 <xsl:when test="$node/parent::hi">
                                     <i><xsl:value-of select="."/></i>
                                 </xsl:when>
@@ -902,7 +913,7 @@
                         <xsl:if test="not($node/parent::hi[@rend='sub' or @rend='sup'])">
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
                             <span class="d"><span class="i">
-                                <xsl:value-of select="f:determineDittoMark($node)"/>
+                                <xsl:value-of select="f:determineDittoMark($context)"/>
                             </span></span>
                         </xsl:if>
                     </span>
@@ -917,11 +928,11 @@
     <xsl:function name="f:determineDittoMark" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
-        <xsl:value-of select="if ($node/ancestor::ditto/@mark)
-            then $node/ancestor::ditto/@mark
-            else if ($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')])
-                 then f:rend-value($node/ancestor::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
-                 else f:getSetting('dittoMark')"/>
+        <xsl:value-of select="if ($node/ancestor-or-self::ditto/@mark)
+            then $node/ancestor-or-self::ditto/@mark
+            else if ($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-mark')])
+                 then f:rend-value($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
+                 else f:getSetting('ditto.mark')"/>
     </xsl:function>
 
 

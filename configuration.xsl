@@ -63,14 +63,16 @@
             <includeImages>true</includeImages>                             <!-- Include images in the generated output. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->
-            <useDittoMarks>true</useDittoMarks>                             <!-- Use ditto marks where items are marked with the DITTO tag. -->
-            <dittoMark>,,</dittoMark>                                       <!-- The symbol to use as a ditto mark. -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
             <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
+
+            <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto or seg[@copyOf] elements. -->
+            <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
+            <ditto.repeat>word</ditto.repeat>                               <!-- TODO: How often to use a ditto mark, possible values: word | segment. May also be overridden by rend attribute ditto-repeat() -->
 
             <pageNumbers.show>true</pageNumbers.show>                       <!-- Show page numbers in the right margin -->
             <pageNumbers.before>[</pageNumbers.before>                      <!-- String to place before the page number in the right margin -->
