@@ -86,6 +86,8 @@
 
     <!--====================================================================-->
 
+    <xsl:variable name="root" select="/"/>
+
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output[not(@name)]/@encoding"/>
     <xsl:variable name="outputmethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>

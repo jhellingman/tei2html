@@ -28,6 +28,10 @@ foreach my $line (@lines) {
         my $attrs = $1;
         my $content = $2;
 
+        if ($attrs ne "") {
+            print STDERR "\nWARN:  line $lineNumber: non-empty attributes: <ditto $attrs>";
+        }
+
         my $id = $mapDittoToId{$content};
         if ($id eq "") {
             $segNumber++;
@@ -36,7 +40,7 @@ foreach my $line (@lines) {
             $mapIdToDitto{$id} = $content;
 
             # seek backwards for content above.
-            for (my $i = $lineNumber - 1; $i > $lineNumber - 5 && $i > 0; $i--) {
+            for (my $i = $lineNumber - 1; $i > $lineNumber - 15 && $i > 0; $i--) {
                 my $seekLine = $lines[$i];
                 my $start = index($seekLine, $content);
                 if ($start != -1) {
@@ -45,12 +49,12 @@ foreach my $line (@lines) {
                     $mapIdToFound{$id} = 1;
                     $mapIdToWordCount{$id} = countWords($content);
 
-                    print STDERR "INFO:  line $i: s$id = $content ($mapIdToWordCount{$id})\n";
+                    print STDERR "\nINFO:  line $i: s$id = $content ($mapIdToWordCount{$id})";
                     $i = 0;
                 }
             }
             if (not $mapIdToFound{$id}) {
-                print STDERR "ERROR: line $lineNumber: content for s$id not found: [$content]\n";
+                print STDERR "\nERROR: line $lineNumber: content for s$id not found: [$content]";
             }
         }
         # print STDERR "<seg copyOf=s$id>,,</seg>\n";
