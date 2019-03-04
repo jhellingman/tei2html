@@ -816,8 +816,20 @@
                     <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
+                <xsl:when test="f:isSet('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+                    <span class="ditto">
+                        <span class="s">
+                            <xsl:apply-templates select="$source"/>
+                        </span>
+                        <span class="d">
+                            <span class="i">
+                                <xsl:value-of select="f:determineDittoMark(.)"/>
+                            </span>
+                        </span>
+                    </span>
+                </xsl:when>
                 <xsl:when test="f:isSet('ditto.enable')">
-                    <!-- TODO: Handle the case where this is a doubled-up table, and the row appears on the top line -->
+                    <!-- TODO: Handle the case where this is in a doubled-up table or list, and the row appears on the top line -->
                     <xsl:variable name="source" select="if ($source//corr) then f:stripCorrElements($source) else $source"/>
                     <xsl:apply-templates select="$source" mode="ditto">
                         <xsl:with-param name="context" select="." tunnel="yes"/>
@@ -847,6 +859,18 @@
     <xsl:template match="ditto">
         <xsl:copy-of select="f:logWarning('Deprecated element ditto used (please use seg).', ())"/>
         <xsl:choose>
+            <xsl:when test="f:isSet('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+                <span class="ditto">
+                    <span class="s">
+                        <xsl:apply-templates/>
+                    </span>
+                    <span class="d">
+                        <span class="i">
+                            <xsl:value-of select="f:determineDittoMark(.)"/>
+                        </span>
+                    </span>
+                </span>
+            </xsl:when>
             <xsl:when test="f:isSet('ditto.enable')">
                 <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>
                 <xsl:apply-templates select="$node" mode="ditto">
@@ -912,9 +936,11 @@
                         <!-- No ditto marks for parts that are superscripted or subscripted -->
                         <xsl:if test="not($node/parent::hi[@rend='sub' or @rend='sup'])">
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
-                            <span class="d"><span class="i">
-                                <xsl:value-of select="f:determineDittoMark($context)"/>
-                            </span></span>
+                            <span class="d">
+                                <span class="i">
+                                    <xsl:value-of select="f:determineDittoMark($context)"/>
+                                </span>
+                            </span>
                         </xsl:if>
                     </span>
                     <!-- Don't forget to reinsert the space we split on -->
@@ -922,6 +948,17 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
+    </xsl:function>
+
+
+    <xsl:function name="f:determineDittoRepeat" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:value-of select="if ($node/ancestor-or-self::ditto/@repeat)
+            then $node/ancestor-or-self::ditto/@repeat
+            else if ($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-repeat')])
+                 then f:rend-value($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-repeat')][1]/@rend, 'ditto-repeat')
+                 else f:getSetting('ditto.repeat')"/>
     </xsl:function>
 
 
