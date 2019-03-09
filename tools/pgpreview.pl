@@ -25,14 +25,13 @@ sub main() {
     my $paragraph = "";
 
     while (<INPUTFILE>) {
-        my $line = $_;
+        my $line = trim($_);
 
-        if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
+        if ($line =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
             print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
             print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
             $paragraph = "";
-        } elsif ($line ne "\n") {
-            chomp($line);
+        } elsif ($line ne "") {
             $paragraph .= " " . $line;
         } else {
             if ($paragraph ne "") {
@@ -83,7 +82,7 @@ sub handleParagraph($$) {
     $paragraph =~ s/<foreign lang=grc>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
 
     # Replace illustration markup:
-    $paragraph =~ s/\[Ill?ustration:? (.*)\]/<span class=figure>\n[Illustration: \1\n<\/span>/g;
+    $paragraph =~ s/\[Ill?ustration:? ?(.*)\]/<span class=figure>[Illustration: \1]<\/span>/g;
 
     # Replace footnote indicators:
     $paragraph =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
@@ -151,3 +150,9 @@ sub printHtmlTail() {
     print "</body></html>";
 }
 
+
+sub trim($) {
+    my $s = shift; 
+    $s =~ s/^\s+|\s+$//g;
+    return $s;
+}

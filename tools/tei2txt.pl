@@ -3,7 +3,7 @@
 use strict;
 
 use Getopt::Long;
-use POSIX qw/floor/;
+use POSIX qw/floor ceil/;
 
 use SgmlSupport qw/getAttrVal sgml2utf/;
 
@@ -140,9 +140,6 @@ while (<>) {
         print "------\n";
     }
 
-    # handle ditto tags.
-
-
     # indicate tables for manual processing.
     if ($a =~ /<table.*?>/) {
         print "\n[**TODO: Verify table]\n";
@@ -167,6 +164,8 @@ sub handleLine($) {
     } else {
         $a = entities2iso88591($a);
     }
+
+    $a = handleSegments($a);
 
     $a = handleHighlighted($a);
 
@@ -231,6 +230,17 @@ sub spaces($) {
     return $result;
 }
 
+
+sub noBreakSpaces($) {
+    my $n = shift;
+    my $result = "";
+    for (my $i = 0; $i < $n; $i++) {
+        $result .= " ";
+    }
+    return $result;
+}
+
+
 sub handleHighlighted($) {
     my $remainder = shift;
 
@@ -249,6 +259,63 @@ sub handleHighlighted($) {
     }
     return $a . $remainder;
 }
+
+
+my %mapIdToContent;
+
+sub handleSegments($) {
+    my $remainder = shift;
+
+    my $a = "";
+    while ($remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
+        my $attrs = $1;
+        my $content = $2;
+        $remainder = $';
+
+        my $id = getAttrVal("id", $attrs);
+        my $copyOf = getAttrVal("copyOf", $attrs);
+        if ($id ne "") {
+            $mapIdToContent{$id} = $content;
+            $a .= $content;
+        } elsif ($copyOf ne "") {
+            if (not $mapIdToContent{$copyOf}) {
+                print STDERR "ERROR: <seg id=$copyOf> not found.\n";
+                $a .= $content;
+            }
+            else {
+                $a .= useDittoMarks($mapIdToContent{$copyOf});
+            }
+        }
+        else {
+            $a .= $content;
+        }
+    }
+    return $a . $remainder;
+}
+
+sub useDittoMarks($) {
+    my $string = shift;
+    my $result = "";
+    $string = handleLine($string);
+
+    my @words = split(/(\s+)/, $string);
+    foreach my $word (@words) {
+        if ($word =~ /\s+/) {
+            $result .= $word;
+        } else {
+            $result .= useDittoMark($word);
+        }
+    }
+    return $result;
+}
+
+sub useDittoMark($) {
+    my $string = shift;
+    my $spacesBefore = floor((length($string) - 2) / 2.0);
+    my $spacesAfter = ceil((length($string) - 2) / 2.0);
+    return noBreakSpaces($spacesBefore) . ',,' . noBreakSpaces($spacesAfter);
+}
+
 
 sub parseTable($) {
     my $table = shift;

@@ -768,6 +768,23 @@
 
     <msg:messages xml:lang="de">
 
+		<msg:message name="msgQrCode">QR-Code</msg:message>
+		<msg:message name="msgQrCodePgUrl">QR-Code der URL von Project Gutenberg</msg:message>
+		<msg:message name="msgTagUsageOverview">Übersicht der verwendeten TEI-Elemente</msg:message>
+		<msg:message name="msgAttributes">Attribute</msg:message>
+		<msg:message name="msgOccurrences">Vorkommen</msg:message>
+		<msg:message name="msgOccurrences.abbr">Vork.</msg:message>
+		<msg:message name="msgValues">Werte</msg:message>
+	
+	    <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
+        <msg:message name="msgLibraryOfCongress">Kongressbibliothek</msg:message>
+        <msg:message name="msgLibraryThing">LibraryThing</msg:message>
+        <msg:message name="msgViaf">Virtual International Authority File</msg:message>
+        <msg:message name="msgOpenLibraryBook">Open Library (Buch)</msg:message>
+        <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
+        <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
+        <msg:message name="msgGitHub">GitHub</msg:message>
+	
         <msg:message name="msgLinkToBible">Link zu zitierte Stelle in Bibel</msg:message>
         <msg:message name="msgEditDistance">Edit-Distanz</msg:message>
         <msg:message name="msgAbbreviationOverview">Übersicht der Abkürzungen im Text.</msg:message>

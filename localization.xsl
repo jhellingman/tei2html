@@ -48,7 +48,7 @@
     </xd:doc>
 
     <xsl:variable name="defaultlanguage" select="f:getSetting('defaultlanguage')" as="xs:string"/>
-
+    <xsl:variable name="defaultbaselanguage" select="if (contains($defaultlanguage, '-')) then substring-before($defaultlanguage, '-') else $defaultlanguage" as="xs:string"/>
 
     <xd:doc>
         <xd:short>Find a localized message.</xd:short>
@@ -72,6 +72,11 @@
                 <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultlanguage, $name, $msg[lang($defaultlanguage)][1]))"/>
+            </xsl:when>
+            <xsl:when test="$msg[lang($defaultbaselanguage)][1]">
+                <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultbaselanguage))"/>
+                <xsl:apply-templates select="$msg[lang($defaultbaselanguage)][1]" mode="formatMessage"/>
+                <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultbaselanguage, $name, $msg[lang($defaultbaselanguage)][1]))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>

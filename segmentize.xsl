@@ -136,11 +136,30 @@
 
 
     <xd:doc>
-        <xd:short>Ignore seg-elements that are copied.</xd:short>
-        <xd:detail>Ignore seg-elements that are copied. The (presented) content of these is identical to content elsewhere; the actual content is typically only ditto marks.</xd:detail>
+        <xd:short>Ignore sic elements in choice.</xd:short>
+        <xd:detail>Ignore sic elements in choice. These are typically erroneous text, and should be ignored.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="segments" match="seg[@copyOf]"/>
+    <xsl:template mode="segments" match="choice/sic"/>
+
+
+    <xd:doc>
+        <xd:short>Ignore forms work elements.</xd:short>
+        <xd:detail>Ignore forms work elements. These are typically running headers, and should be handled seperately (TODO).</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="fw"/>
+
+
+    <xd:doc>
+        <xd:short>Insert seg-elements that are copied.</xd:short>
+        <xd:detail>Insert seg-elements that are copied. The (presented) content of these is identical to content elsewhere; the actual content is typically only ditto marks.</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="seg[@copyOf]">
+        <xsl:variable name="copyOf" select="@copyOf"/>
+        <xsl:apply-templates mode="segments" select="seg[@id=$copyOf]"/>
+    </xsl:template>
 
 
     <xd:doc mode="segment-notes">

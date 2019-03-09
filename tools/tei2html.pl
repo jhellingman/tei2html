@@ -191,7 +191,7 @@ sub processFile($) {
     if ($version >= 1.0) {
         $makeText = 0;
     } else {
-       $runChecks = 1;
+        $runChecks = 1;
     }
 
     print "Processing TEI-file '$basename' version $version\n";

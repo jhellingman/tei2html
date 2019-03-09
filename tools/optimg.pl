@@ -5,8 +5,12 @@
 #
 
 use strict;
+
 use File::Basename;
 use File::Copy;
+use File::stat;
+use Time::localtime;
+use Getopt::Long;
 
 my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm 
 my $optipng = "optipng.exe";            # also https://pngquant.org/ and http://optipng.sourceforge.net/
@@ -25,6 +29,12 @@ my $totalOriginalSize = 0;
 my $totalResultSize = 0;
 my $imagesConverted = 0;
 
+my $verbose = 0;
+my $maxAgeHours = 24;
+
+GetOptions(
+    'v' => \$verbose,
+    'a=i' => \$maxAgeHours);
 
 sub list_recursively($);
 
@@ -56,6 +66,16 @@ sub list_recursively($) {
 sub handle_file($) {
     my ($file) = @_;
 
+    if ($maxAgeHours != 0) {
+        my $fileTime = stat($file)->mtime;
+        my $prettyFileTime = ctime($fileTime);
+        my $fileAgeSeconds = time() - $fileTime;
+        if ($fileAgeSeconds > ($maxAgeHours * 3600)) {
+            $verbose or print "----- Skipping file: $file, older than $maxAgeHours hours ($prettyFileTime).\n";
+            return;
+        }
+    }
+
     if ($file =~ m/^(.*)\.(png|jpg|jpeg)$/) {
         my $path = $1;
         my $extension = $2;
@@ -64,7 +84,7 @@ sub handle_file($) {
 
         my $newfile = $dirname . '\\' . $base . '-optimized.' . $extension;
 
-        print "----- Optimizing image: $file\n";
+        $verbose or print "----- Optimizing image: $file\n";
         my $originalSize = -s $file;
 
         if ($extension eq 'png') {
@@ -103,6 +123,10 @@ sub handle_file($) {
 sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
+
+    if (!$verbose) {
+        return;
+    }
 
     print "Number of images:          $imagesConverted\n";
     if ($errorCount > 0) {
