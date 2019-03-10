@@ -92,3 +92,6 @@ samples/testMath/testMath-0.0-checks.html
 messages.xlsx
 messages-with-missing-de-translations.xml
 samples/testMath/testMath.html
+test/test-normalized-p5.xml
+test/test-p5.html
+tools/tei2xml.pl

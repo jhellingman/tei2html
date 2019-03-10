@@ -149,6 +149,11 @@ while (<>) {
         print "------\n";
     }
 
+    # handle intra-linear text
+    if ($a =~ m/<INTRA(.*?)>/) {
+        handleIntra();
+    }
+
     $a = handleLine($a);
 
     print $a;
@@ -317,11 +322,24 @@ sub useDittoMark($) {
 }
 
 
+sub centerStringInWidth($$) {
+    my $string = shift;
+    my $width = shift;
+    my $spacesBefore = floor(($width - length($string)) / 2.0);
+    my $spacesAfter = ceil(($width - length($string)) / 2.0);
+    return spaces($spacesBefore) . $string . spaces($spacesAfter);
+}
+
+
+
 sub parseTable($) {
     my $table = shift;
     my $tableHead = '';
     while (<>) {
         my $line = $_;
+
+        $line = handleSegments($line);
+
         if ($line =~ /<head>(.*?)<\/head>/) {
             $tableHead = $1;
         }
@@ -864,18 +882,109 @@ sub trim($) {
     return $string;
 }
 
-sub handleDittos($) {
+#
+# handleIntra: handle so-called intra-lineair text, by approaching
+# it in plain text.
+#
+sub handleIntra() {
+
+    print "[** BEGIN INTRA --------------------------]\n";
+
+    while (<>) {
+        my $line = $_;
+        if ($line =~ m/<\/INTRA>/) {
+            print "[** END INTRA --------------------------]\n";
+            return;
+        }
+        chomp($line);
+
+        $line = hideFootnoteMarkers($line);
+
+        # Lines look like this:  "normal text [top text|bottom text] normal text."
+        my $normalTexts = $line;
+        $normalTexts =~ s/\[\|([^|]+?)\]/<BREAK>/g;
+        $normalTexts =~ s/\[([^|]+?)\|\]/<BREAK>/g;
+        $normalTexts =~ s/\[([^|]+?)\|([^|]+?)\]/<BREAK>/g;
+
+        my @normals = split(/<BREAK>/, $normalTexts);
+        my @tops = $line =~ /\[([^|]*)\|[^|]*\]/g;
+        my @bottoms = $line =~ /\[[^|]*\|([^|]*)\]/g;
+
+        my $normalCount = scalar @normals;
+        my $topCount = scalar @tops;
+        my $bottomCount = scalar @bottoms;
+
+        my $start = handleLine($normals[0]);
+        my $topLine = $start;
+        my $bottomLine = spaces(length($start));
+
+        for (my $i = 0; $i < $normalCount; $i++) {
+
+            my $t = handleLine($tops[$i]);
+            my $b = handleLine($bottoms[$i]);
+            my $n = handleLine($normals[$i + 1]);
+
+            my $nWidth = length($n);
+            my $tbWidth = max(length $t, length $b);
+
+            # Append the next top + bottom phrase pair.
+            my $topPhrase    .= centerStringInWidth($t, $tbWidth);
+            my $bottomPhrase .= centerStringInWidth($b, $tbWidth);
+
+            if (length($topLine . $topPhrase) > $pageWidth) {
+                print restoreFootnoteMarkers($topLine) . "\n";
+                print restoreFootnoteMarkers($bottomLine) . "\n\n";
+                $topLine = "";
+                $bottomLine = "";
+            }
+
+            $topLine .= $topPhrase;
+            $bottomLine .= $bottomPhrase;
+
+            # Append the next middle piece.
+            if (length($topLine . $n) > $pageWidth) {
+                print restoreFootnoteMarkers($topLine) . "\n";
+                print restoreFootnoteMarkers($bottomLine) . "\n\n";
+                $topLine = "";
+                $bottomLine = "";
+                $n = ltrim($n);
+                $nWidth = length($n);
+            }
+            $topLine .= $n;
+            $bottomLine .= spaces($nWidth);
+
+        }
+        print restoreFootnoteMarkers($topLine) . "\n";
+        print restoreFootnoteMarkers($bottomLine) . "\n\n";
+    }
+}
+
+
+sub ltrim($) {
     my $string = shift;
-
-    $string =~ s/<ditto>(.*?)<\/ditto>/handleDitto($1)/eg;
-
+    $string =~ s/^\s+//g;
     return $string;
 }
 
-sub handleDitto($) {
-    my $string = shift;
 
-    print STDERR $string;
+sub hideFootnoteMarkers($) {
+    my $string = shift;
+    $string =~ s/\[([0-9]+)\]/{$1}/g;
+    return $string;
+}
+
+
+sub restoreFootnoteMarkers($) {
+    my $string = shift;
+    $string =~ s/\{([0-9]+)\}/[$1]/g;
+    return $string;
+}
+
+
+sub max($$) {
+    my $a = shift;
+    my $b = shift;
+    return $a > $b ? $a : $b;
 }
 
 
