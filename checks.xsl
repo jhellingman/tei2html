@@ -23,6 +23,8 @@
     <!ENTITY laquo      "&#171;">
     <!ENTITY bdquo      "&#8222;">
 
+    <!ENTITY blackCircle      "&#x25CF;">
+
 ]>
 
 <xsl:stylesheet version="3.0"
@@ -118,9 +120,9 @@
     </xsl:function>
 
 
-    <!-- Make sure periods in abbreviations are not reported (replace them by ___P___; replace them back later) -->
+    <!-- Make sure periods in abbreviations are not reported (replace them by &blackCircle;; replace them back later) -->
     <xsl:template match="abbr" mode="segments">
-        <xsl:value-of select="replace(., '\.', '___P___')"/>
+        <xsl:value-of select="replace(., '\.', '&blackCircle;')"/>
     </xsl:template>
 
     <xsl:template mode="info" match="titleStmt/title">
@@ -240,7 +242,7 @@
             <td><xsl:value-of select="@page"/></td>
             <td><xsl:value-of select="@element"/></td>
             <td><xsl:value-of select="@target"/></td>
-            <td><xsl:value-of select="."/></td>
+            <td><xsl:value-of select="replace(., '&blackCircle;', '.')"/></td>
         </tr>
     </xsl:template>
 
@@ -996,14 +998,17 @@
         <!-- prevent false positives for ellipses. -->
         <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
+        <!-- Name some complex regular expressions. -->
         <xsl:variable name="space-after-opener-pattern" select="'[\[(' || $open-quotation-marks || ']\s+'" as="xs:string"/>
         <xsl:variable name="space-before-closer-pattern" select="'\s+[\])' || $close-quotation-marks || ']'" as="xs:string"/>
         <xsl:variable name="space-after-comma-pattern" select="',[^\s&nbsp;&mdash;&hellip;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
         <xsl:variable name="space-after-period-pattern" select="'\.[^\s&nbsp;.,:;&mdash;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
         <xsl:variable name="space-after-punctuation-pattern" select="'[:;!?][^\s&mdash;&hellip;!' || $close-quotation-marks || ')\]]'" as="xs:string"/>
 
-        <!-- Handle common abbreviations -->
-        <xsl:variable name="segment" select="f:handle-abbreviations($segment)"/>
+        <xsl:copy-of select="f:spaced-abbreviations(., $segment)"/>
+
+        <!-- Hide common abbreviations (so they won't cause false positives). -->
+        <xsl:variable name="segment" select="f:hide-abbreviations($segment)"/>
 
         <xsl:copy-of select="f:should-not-contain(., $segment, '\s+[.,:;!?]',                       'Warning', 'P01', 'Space before punctuation mark')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, $space-before-closer-pattern,        'Warning', 'P02', 'Space before closing punctuation mark')"/>
@@ -1033,45 +1038,59 @@
     </xsl:template>
 
 
-    <xsl:function name="f:get-abbreviations">
-        <xsl:variable name="abbreviations" select="f:getSetting('text.abbr')"/>
-        <tmp:abbrs>
-            <xsl:analyze-string select="$abbreviations" regex=";">
-                <xsl:non-matching-substring>
-                    <tmp:abbr>
-                        <xsl:value-of select="normalize-space(.)"/>
-                    </tmp:abbr>
-                </xsl:non-matching-substring>
-            </xsl:analyze-string>
-        </tmp:abbrs>
-    </xsl:function>
-
-
     <xsl:function name="f:stripHash" as="xs:string">
         <xsl:param name="target" as="xs:string"/>
         <xsl:value-of select="if (substring($target, 1, 1) = '#') then substring($target, 2) else $target"/>
     </xsl:function>
 
 
-    <xsl:function name="f:handle-abbreviations" as="xs:string">
-        <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="patterns" select="f:get-abbreviations()"/>
-        <xsl:value-of select="f:handle-abbreviation-n($string, $patterns, count($patterns/tmp:abbr))"/>
+
+    <xsl:variable name="common-abbreviations" select="f:get-abbreviations()"/>
+
+
+    <xsl:function name="f:get-abbreviations">
+        <xsl:variable name="abbreviations" select="f:getSetting('text.abbr')"/>
+        <xsl:variable name="abbrs">
+            <tmp:abbrs>
+                <xsl:analyze-string select="$abbreviations" regex=";" flags="s">
+                    <xsl:non-matching-substring>
+                        <tmp:abbr><xsl:value-of select="normalize-space(.)"/></tmp:abbr>
+                    </xsl:non-matching-substring>
+                </xsl:analyze-string>
+            </tmp:abbrs>
+        </xsl:variable>
+
+        <!-- TODO: also collect explicitly marked abbreviations in source -->
+
+        <!-- Sort by length, longest first, then alphabetical, case-insensitive, then capitals first -->
+        <tmp:abbrs>
+            <xsl:for-each select="$abbrs//tmp:abbr">
+                <xsl:sort select="string-length(.)" data-type="number" order="descending"/>
+                <xsl:sort select="lower-case(.)" data-type="text" order="ascending"/>
+                <xsl:sort select="." data-type="text" order="ascending"/>
+                <tmp:abbr><xsl:value-of select="."/></tmp:abbr>
+            </xsl:for-each>
+        </tmp:abbrs>
     </xsl:function>
 
-    <xsl:function name="f:handle-abbreviation-n" as="xs:string">
+
+    <xsl:function name="f:hide-abbreviations" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:param name="patterns"/>
+        <xsl:value-of select="f:hide-abbreviation($string, count($common-abbreviations/tmp:abbr))"/>
+    </xsl:function>
+
+    <xsl:function name="f:hide-abbreviation" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
         <xsl:param name="n"/>
 
-        <xsl:variable name="old" select="$patterns/tmp:abbr[$n]"/>
-        <xsl:variable name="new" select="replace($old, '\.', '_')"/>
+        <xsl:variable name="old" select="$common-abbreviations/tmp:abbr[$n]"/>
+        <xsl:variable name="new" select="replace($old, '\.', '&blackCircle;')"/>
         <xsl:variable name="pattern" select="replace($old, '\.', '\\.')"/>
 
         <xsl:variable name="result" as="xs:string">
             <xsl:choose>
                 <xsl:when test="$n > 0">
-                    <xsl:value-of select="replace(f:handle-abbreviation-n($string, $patterns, $n - 1), $pattern, $new)"/>
+                    <xsl:value-of select="replace(f:hide-abbreviation($string, $n - 1), $pattern, $new)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$string"/>
@@ -1080,6 +1099,37 @@
         </xsl:variable>
 
         <xsl:value-of select="$result"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:spaced-abbreviations" as="node()*">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:for-each select="$common-abbreviations/tmp:abbr">
+            <xsl:copy-of select="f:spaced-abbreviation($node, $string, .)"/>
+        </xsl:for-each>
+    </xsl:function>
+
+    <xsl:function name="f:spaced-abbreviation" as="node()?">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="abbr" as="xs:string"/>
+
+        <xsl:if test="matches($abbr, '[A-Za-z-]+\.[A-Za-z-]+\.')">
+            <xsl:variable name="pattern" select="replace($abbr, '\.', '\\.\\s+')"/>
+            <xsl:variable name="pattern" select="replace($pattern, '\\s[+]$', '')"/>
+
+            <xsl:if test="matches($string, $pattern)">
+                <i:issue
+                    pos="{$node/@pos}"
+                    level="Warning"
+                    code="P19"
+                    target="{f:generate-id($node)}"
+                    page="{$node/@sourcePage}"
+                    element="{$node/@sourceElement}">
+                        Spaced abbreviation <xsl:value-of select="$abbr"/> in: <xsl:value-of select="f:match-fragment($string, $pattern)"/></i:issue>
+            </xsl:if>
+        </xsl:if>
     </xsl:function>
 
 
@@ -1266,14 +1316,12 @@
 
     <xsl:function name="f:head-chars" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
         <xsl:sequence select="if (string-length($string) &lt; 40) then $string else substring($string, 1, 37) || '...'"/>
     </xsl:function>
 
 
     <xsl:function name="f:tail-chars" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="replace($string, '___P___', '.')"/>
         <xsl:sequence select="if (string-length($string) &lt; 40) then $string else '...' || substring($string, string-length($string) - 37, 37)"/>
     </xsl:function>
 

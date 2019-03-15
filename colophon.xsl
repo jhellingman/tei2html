@@ -955,6 +955,12 @@
 
     <xsl:key name="elements" match="*" use="name()"/>
 
+    <xd:doc>
+        <xd:short>Generate an overview of TEI tag usage.</xd:short>
+        <xd:detail>
+            <p>Generate a table of TEI tag and attribute usage. The tags and attributes are ordered by name.</p>
+        </xd:detail>
+    </xd:doc>
 
     <xsl:template match="divGen[@type='TagUsage']">
 
