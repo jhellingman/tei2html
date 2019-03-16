@@ -1712,8 +1712,8 @@ BEGIN {
     # Requiring wide combining diacritics
     $ent{"oobreve"}     = "o" . chr(0x035D) . "o"; # oo with wide breve
 
-    $ent{"aewmacr"}      = "a" . chr(0x035E) . "e"; # two letters ae with wide macron (aemacr is for ligature!)
-    $ent{"AEwmacr"}      = "a" . chr(0x035E) . "e"; # two letters AE with wide macron
+    $ent{"aewmacr"}     = "a" . chr(0x035E) . "e"; # two letters ae with wide macron (aemacr is for ligature!)
+    $ent{"AEwmacr"}     = "a" . chr(0x035E) . "e"; # two letters AE with wide macron
     $ent{"oomacr"}      = "o" . chr(0x035E) . "o"; # oo with wide macron
     $ent{"eemacr"}      = "e" . chr(0x035E) . "e"; # ee with wide macron
     $ent{"mmmacr"}      = "m" . chr(0x035E) . "m"; # mm with wide macron
@@ -1795,6 +1795,8 @@ BEGIN {
     $ent{"emacrtild"}   = chr(0x0113) . chr(0x0303); # e with macron and tilde
     $ent{"Imacrtild"}   = chr(0x012A) . chr(0x0303); # I with macron and tilde
     $ent{"imacrtild"}   = chr(0x012B) . chr(0x0303); # i with macron and tilde
+    $ent{"Omacrtild"}   = chr(0x014C) . chr(0x0303); # O with macron and tilde
+    $ent{"omacrtild"}   = chr(0x014D) . chr(0x0303); # o with macron and tilde
     $ent{"Umacrtild"}   = chr(0x016A) . chr(0x0303); # U with macron and tilde
     $ent{"umacrtild"}   = chr(0x016B) . chr(0x0303); # u with macron and tilde
 

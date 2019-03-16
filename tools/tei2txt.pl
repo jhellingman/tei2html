@@ -1160,6 +1160,13 @@ sub entities2iso88591($) {
     $a =~ s/\&omacracu;/ó/g;
     $a =~ s/\&umacracu;/ú/g;
 
+    $a =~ s/\&ebrevacu;/é/g;
+    $a =~ s/\&imacrtild;/i/g;
+    $a =~ s/\&Emacrtild;/E/g;
+    $a =~ s/\&emacrtild;/e/g;
+    $a =~ s/\&Amacrtild;/Ã/g;
+    $a =~ s/\&amacrtild;/ã/g;
+
     $a =~ s/\&longs;/s/g;
     $a =~ s/\&prime;/'/g;
     $a =~ s/\&Prime;/''/g;
@@ -1204,6 +1211,8 @@ sub entities2iso88591($) {
     $a =~ s/\&grchi;/x/g;
     $a =~ s/\&omactil;/o/g;
     $a =~ s/\&ebreacu;/e/g;
+    $a =~ s/\&obrevacu;/o/g;
+    $a =~ s/\&umacrtild;/u/g;
     $a =~ s/\&amacacu;/a/g;
     $a =~ s/\&nringb;/n/g;
     $a =~ s/\&ymacr;/y/g;

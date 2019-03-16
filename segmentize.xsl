@@ -144,6 +144,17 @@
 
 
     <xd:doc>
+        <xd:short>Insert space between orig and reg in choice.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="choice[orig]">
+        <xsl:apply-templates mode="segments" select="orig"/>
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates mode="segments" select="reg"/>
+    </xsl:template>
+
+
+    <xd:doc>
         <xd:short>Ignore forms work elements.</xd:short>
         <xd:detail>Ignore forms work elements. These are typically running headers, and should be handled seperately (TODO).</xd:detail>
     </xd:doc>

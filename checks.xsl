@@ -1057,10 +1057,11 @@
                         <tmp:abbr><xsl:value-of select="normalize-space(.)"/></tmp:abbr>
                     </xsl:non-matching-substring>
                 </xsl:analyze-string>
+                <xsl:for-each-group select="$root//abbr" group-by=".">
+                    <tmp:abbr><xsl:value-of select="."/></tmp:abbr>
+                </xsl:for-each-group>
             </tmp:abbrs>
         </xsl:variable>
-
-        <!-- TODO: also collect explicitly marked abbreviations in source -->
 
         <!-- Sort by length, longest first, then alphabetical, case-insensitive, then capitals first -->
         <tmp:abbrs>
