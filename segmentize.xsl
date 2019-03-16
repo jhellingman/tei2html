@@ -227,7 +227,7 @@
     </xd:doc>
 
     <!-- For HTML use: "p | h1 | h2 | h3 | h4 | h5 | h6 | li | th | td" -->
-    <xsl:template mode="segments" match="p | seg | head | cell | item | lg | sp | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
+    <xsl:template mode="segments" match="p | seg | head | cell | item | castItem | lg | sp | titlePage | stage | speaker | docTitle | titlePart | byline | docAuthor | docImprint">
 
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:variable name="page" as="xs:string">
