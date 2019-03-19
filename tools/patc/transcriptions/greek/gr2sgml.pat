@@ -3,9 +3,9 @@
 
 @patterns 0
 
-"<EL>"      1 "<foreign lang=el>"
+"<EL>"      1 "<foreign lang='el'>"
 "<ELA>"     1 ""
-"<GR>"      1 "<foreign lang=grc>"
+"<GR>"      1 "<foreign lang='grc'>"
 "<GRA>"     1 ""
 
 @patterns 1
@@ -22,9 +22,9 @@
 "<b>"               p "<b>"
 "<sc>"              p "<sc>"
 "<hi>"              p "<hi>"
-"<hi rend=ex>"      p "<hi rend=ex>"
-"<hi rend=sc>"      p "<hi rend=sc>"
-"<hi rend=bold>"    p "<hi rend=bold>"
+"<hi rend=ex>"      p "<hi rend='ex'>"
+"<hi rend=sc>"      p "<hi rend='sc'>"
+"<hi rend=bold>"    p "<hi rend='bold'>"
 "</g>"              p "</g>"
 "</b>"              p "</b>"
 "</sc>"             p "</sc>"

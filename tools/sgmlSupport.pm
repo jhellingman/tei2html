@@ -475,7 +475,6 @@ BEGIN {
     $ent{"lpar"}        = chr(0x0028);  #  LEFT PARENTHESIS
     $ent{"lrarr2"}      = chr(0x21C6);  #  LEFTWARDS ARROW OVER RIGHTWARDS ARROW
     $ent{"lrhar2"}      = chr(0x21CB);  #  LEFTWARDS HARPOON OVER RIGHTWARDS HARPOON
-    $ent{"lrm"}         = chr(0x200E);  #  LEFT-TO-RIGHT MARK
     $ent{"lsaquo"}      = chr(0x2039);  #  SINGLE LEFT-POINTING ANGLE QUOTATION MARK
     $ent{"lsh"}         = chr(0x21B0);  #  UPWARDS ARROW WITH TIP LEFTWARDS
     $ent{"lsim"}        = chr(0x2272);  #  LESS-THAN OR EQUIVALENT TO
@@ -687,7 +686,6 @@ BEGIN {
     $ent{"ring"}        = chr(0x02DA);  #  RING ABOVE
     $ent{"rlarr2"}      = chr(0x21C4);  #  RIGHTWARDS ARROW OVER LEFTWARDS ARROW
     $ent{"rlhar2"}      = chr(0x21CC);  #  RIGHTWARDS HARPOON OVER LEFTWARDS HARPOON
-    $ent{"rlm"}         = chr(0x200F);  #  RIGHT-TO-LEFT MARK
     $ent{"rpar"}        = chr(0x0029);  #  RIGHT PARENTHESIS
     $ent{"rsaquo"}      = chr(0x203A);  #  SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
     $ent{"rsh"}         = chr(0x21B1);  #  UPWARDS ARROW WITH TIP RIGHTWARDS
@@ -898,6 +896,7 @@ BEGIN {
     $ent{"zhcy"}        = chr(0x0436);  #  CYRILLIC SMALL LETTER ZHE
     $ent{"zwj"}         = chr(0x200D);  #  ZERO WIDTH JOINER
     $ent{"zwnj"}        = chr(0x200C);  #  ZERO WIDTH NON-JOINER
+
 
     ###############################################################################
     ## GREEK ENTITIES REMAPPED:
@@ -1231,6 +1230,31 @@ BEGIN {
     $ent{"Abregr"}      = chr(0x0391) . chr(0x0306); # ")A"
 
     $ent{"jgr"}         = chr(0x03f3); # Greek j.
+
+
+    ###############################################################################
+    ## DIRECTIONAL CHARACTERS
+    ##
+    ## See https://www.w3.org/International/questions/qa-bidi-unicode-controls.en
+    ##
+    ## Implicit Directional Marks
+    $ent{"lrm"}         = chr(0x200E);  #  LEFT-TO-RIGHT MARK
+    $ent{"rlm"}         = chr(0x200F);  #  RIGHT-TO-LEFT MARK
+    $ent{"alm"}         = chr(0x061C);  #  ARABIC LETTER MARK
+
+    ## Explicit Directional Embeddings 
+    $ent{"lre"}         = chr(0x202A);  #  LEFT-TO-RIGHT EMBEDDING
+    $ent{"rlm"}         = chr(0x202B);  #  RIGHT-TO-LEFT EMBEDDING
+    $ent{"lro"}         = chr(0x202D);  #  LEFT-TO-RIGHT OVERRIDE
+    $ent{"rlo"}         = chr(0x202E);  #  RIGHT-TO-LEFT OVERRIDE
+    $ent{"pdf"}         = chr(0x200C);  #  POP DIRECTIONAL FORMATTING
+
+    ## Explicit Directional Isolates
+    $ent{"lri"}         = chr(0x2066);  #  LEFT-TO-RIGHT ISOLATE
+    $ent{"rli"}         = chr(0x2067);  #  RIGHT-TO-LEFT ISOLATE
+    $ent{"fsi"}         = chr(0x2068);  #  FIRST STRONG ISOLATE
+    $ent{"pdi"}         = chr(0x2069);  #  POP DIRECTIONAL ISOLATE
+
 
     ###############################################################################
     # Hebrew

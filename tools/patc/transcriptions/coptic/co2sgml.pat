@@ -3,7 +3,7 @@
 
 @patterns 0
 
-"<CO>"      1 "<foreign lang=cop>"
+"<CO>"      1 "<foreign lang='cop'>"
 "<COA>"     1 ""
 
 

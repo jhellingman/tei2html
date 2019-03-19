@@ -7,8 +7,8 @@
 @patterns 0
 
 "<CYT>"     1 "<foreign>"
-"<RUT>"     1 "<foreign lang=ru-Latn>"
-"<RUXT>"    1 "<foreign lang=ru-Latn>"
+"<RUT>"     1 "<foreign lang='ru-Latn'>"
+"<RUXT>"    1 "<foreign lang='ru-Latn'>"
 "<RUAT>"    1 ""
 
 @patterns 1

@@ -6,11 +6,11 @@
 
 @patterns 0
 
-"<ELT>"     1 "<foreign lang=el-latn>"
-"<ELT>mp"   1 "<foreign lang=el-latn>b"
-"<ELT>Mp"   1 "<foreign lang=el-latn>B"
-"<ELT>nt"   1 "<foreign lang=el-latn>&dbarb;"
-"<ELT>Nt"   1 "<foreign lang=el-latn>&Dbarb;"
+"<ELT>"     1 "<foreign lang='el-latn'>"
+"<ELT>mp"   1 "<foreign lang='el-latn'>b"
+"<ELT>Mp"   1 "<foreign lang='el-latn'>B"
+"<ELT>nt"   1 "<foreign lang='el-latn'>&dbarb;"
+"<ELT>Nt"   1 "<foreign lang='el-latn'>&Dbarb;"
 
 "<ELTA>"    1 ""
 "<ELTA>mp"  1 "b"
@@ -19,11 +19,11 @@
 "<ELTA>Nt"  1 "&Dbarb;"
 
 
-"<GRT>"     1 "<foreign lang=grc-latn>"
-"<GRT>mp"   1 "<foreign lang=grc-latn>b"
-"<GRT>Mp"   1 "<foreign lang=grc-latn>B"
-"<GRT>nt"   1 "<foreign lang=grc-latn>&dbarb;"
-"<GRT>Nt"   1 "<foreign lang=grc-latn>&Dbarb;"
+"<GRT>"     1 "<foreign lang='grc-latn'>"
+"<GRT>mp"   1 "<foreign lang='grc-latn'>b"
+"<GRT>Mp"   1 "<foreign lang='grc-latn'>B"
+"<GRT>nt"   1 "<foreign lang='grc-latn'>&dbarb;"
+"<GRT>Nt"   1 "<foreign lang='grc-latn'>&Dbarb;"
 
 "<GRTA>"    1 ""
 "<GRTA>mp"  1 "b"
@@ -48,9 +48,9 @@
 "<b>"               p "<b>"
 "<sc>"              p "<sc>"
 "<hi>"              p "<hi>"
-"<hi rend=ex>"      p "<hi rend=ex>"
-"<hi rend=sc>"      p "<hi rend=sc>"
-"<hi rend=bold>"    p "<hi rend=bold>"
+"<hi rend=ex>"      p "<hi rend='ex'>"
+"<hi rend=sc>"      p "<hi rend='sc'>"
+"<hi rend=bold>"    p "<hi rend='bold'>"
 "</g>"              p "</g>"
 "</b>"              p "</b>"
 "</sc>"             p "</sc>"

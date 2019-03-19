@@ -1,13 +1,14 @@
 
 @patterns 0
 
-"<HE>"  1 "<foreign lang=he>"
-"<HE2>" 1 ""
+"<HE>"  1 "<foreign lang='he'>&rlm;"
+"<HE2>" 1 "&rlm;"
 
 @rpatterns 1
 
 "</HE>"  0 "&lrm;</foreign>"
 "</HE2>" 0 "&lrm;"
+"<"		 2 "<"
 
 " "      p " "                  % space.
 
@@ -74,5 +75,11 @@
 "m/="    p "&#xFB26;"      		% wide final mem
 "r="     p "&#xFB27;"      		% wide resh
 "t="     p "&#xFB28;"      		% wide tav
+
+"\n"	p "\n"
+
+@patterns 2
+
+">"		1 ">"
 
 @end
