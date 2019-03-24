@@ -131,7 +131,7 @@
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="factor" as="xs:double"/>
 
-        <xsl:copy-of select="f:logDebug('Adjusting dimensions in rend attribute: {1}.', ($rend))"/>
+        <!-- <xsl:copy-of select="f:logDebug('Adjusting dimensions in rend attribute: {1}.', ($rend))"/> -->
 
         <xsl:variable name="dimension" select="f:rend-value($rend, $key)"/>
         <xsl:choose>

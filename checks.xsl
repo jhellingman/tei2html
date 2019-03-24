@@ -645,7 +645,7 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisement', 'Advertisements', 'Glossary'" as="xs:string*"/>
+    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisement', 'Advertisements', 'Glossary', 'Errata'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter', 'Poem', 'Story', 'Article', 'Letter'" as="xs:string*"/>
     <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Glossary', 'Vocabulary', 'Advertisement', 'Advertisements'" as="xs:string*"/>
@@ -774,11 +774,12 @@
 
 
     <!-- Do we have a following divGen[@type='apparatus'] for this note? -->
-    <xsl:template mode="checks" match="note[@place='apparatus']">
+    <xsl:template mode="checks" match="note[@place='apparatus']" priority="1">
         <xsl:if test="not(following::divGen[@type='apparatus'])">
             <i:issue pos="{@pos}" code="T10" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No &lt;divGen type="apparatus"&gt; following apparatus note.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
+        <xsl:next-match/>
     </xsl:template>
 
 
@@ -800,7 +801,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'keyNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
+    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'parNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'lineNumRef', 'textRef', 'keyNum', 'intra', 'top', 'bottom'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
