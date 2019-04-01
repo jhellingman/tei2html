@@ -286,6 +286,19 @@
         </xsl:element>
     </xsl:template>
 
+    <!-- When a speaker immediately followed by an inline stage instruction, join them together. -->
+    <xsl:template match="speaker[f:followedByInlineStage(.)]">
+        <xsl:element name="{$p.element}">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <span>
+                <xsl:copy-of select="f:set-class-attribute-with(., 'speaker')"/>
+                <xsl:apply-templates/>
+            </span>
+            <xsl:text> </xsl:text>
+            <xsl:apply-templates select="./following-sibling::node()[1][self::stage[f:isInline(.)]]" mode="inline-stage"/>
+        </xsl:element>
+    </xsl:template>
+
     <!-- Stage directions -->
     <xsl:template match="stage">
         <xsl:element name="{$p.element}">
@@ -303,13 +316,35 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="stage[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
+    <xsl:template match="stage[f:isInline(.)]">
+        <xsl:if test="not(f:precededBySpeaker(.))">
+            <xsl:apply-templates select="." mode="inline-stage"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="stage[f:isInline(.)]" mode="inline-stage">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
+
+    <xsl:function name="f:followedByInlineStage" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="boolean($node/following-sibling::node()[1][self::stage[f:isInline(.)]])"/>
+    </xsl:function>
+
+    <xsl:function name="f:precededBySpeaker" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="boolean($node/preceding-sibling::node()[1][self::speaker])"/>
+    </xsl:function>
+
+    <xsl:function name="f:isInline" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline'"/>
+    </xsl:function>
+
 
     <!-- Cast lists -->
     <xsl:template match="castList">

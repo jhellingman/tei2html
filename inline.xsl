@@ -71,8 +71,7 @@
     <xsl:function name="f:remove-eol-hyphens" as="xs:string">
         <xsl:param name="node" as="text()"/>
 
-        <!-- Establish the previous and next text nodes, separated by a line-break. Page-breaks and empty text nodes may come in-between, but
-             nothing else. -->
+        <!-- Establish the previous and next text nodes, separated by a line-break. Page-breaks and empty text nodes may come in-between, but nothing else. -->
 
         <xsl:variable name="previous" select="
             ($node/preceding-sibling::node()
