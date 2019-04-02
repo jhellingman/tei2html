@@ -64,7 +64,7 @@
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
             <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separated -->
-            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span">
+            <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span | ancestor::stage | ancestor::castList">
                 <xsl:call-template name="pb"/>
             </xsl:when>
             <xsl:otherwise>
