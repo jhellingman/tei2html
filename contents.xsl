@@ -921,13 +921,13 @@
             <xsl:when test="@url">
                 <xsl:variable name="document" select="substring-before(@url, '#')"/>
                 <xsl:variable name="fragmentId" select="substring-after(@url, '#')"/>
-                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)"/>
+                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)/*"/>
             </xsl:when>
             <xsl:when test="f:has-rend-value(@rend, 'include')">
                 <xsl:variable name="url" select="f:rend-value(@rend, 'include')"/>
                 <xsl:variable name="document" select="substring-before($url, '#')"/>
                 <xsl:variable name="fragmentId" select="substring-after($url, '#')"/>
-                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)"/>
+                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)/*"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -936,7 +936,7 @@
     <xsl:template match="xi:include">
         <!-- Material to be included should be rendered here; material is given on an href parameter -->
         <xsl:if test="@href">
-            <xsl:apply-templates select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)"/>
+            <xsl:apply-templates select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)/*"/>
         </xsl:if>
     </xsl:template>
 

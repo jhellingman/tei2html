@@ -35,34 +35,34 @@
             <text>Tei2html Test Document</text>
          </navLabel>
          <content src="test-bk1-1.xhtml"/>
-         <navPoint playOrder="4" class="chapter" id="ch1">
+         <navPoint playOrder="4" class="chapter" id="ch01">
             <navLabel>
                <text>Chapter I Inline Text Elements</text>
             </navLabel>
-            <content src="test-ch1.xhtml"/>
+            <content src="test-ch01.xhtml"/>
             <navPoint playOrder="5" class="section" id="xd33e330">
                <navLabel>
                   <text>Different ways of including files.</text>
                </navLabel>
-               <content src="test-ch1.xhtml#xd33e330"/>
+               <content src="test-ch01.xhtml#xd33e330"/>
             </navPoint>
          </navPoint>
-         <navPoint playOrder="6" class="chapter" id="ch2">
+         <navPoint playOrder="6" class="chapter" id="ch02">
             <navLabel>
                <text>Chapter II Block-level Text Elements</text>
             </navLabel>
-            <content src="test-ch2.xhtml"/>
+            <content src="test-ch02.xhtml"/>
             <navPoint playOrder="7" class="section" id="xd33e377">
                <navLabel>
                   <text>Letters, Closers, and Openers</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd33e377"/>
+               <content src="test-ch02.xhtml#xd33e377"/>
             </navPoint>
             <navPoint playOrder="8" class="section" id="xd33e395">
                <navLabel>
                   <text>Some Further Tests of Paragraphs</text>
                </navLabel>
-               <content src="test-ch2.xhtml#xd33e395"/>
+               <content src="test-ch02.xhtml#xd33e395"/>
             </navPoint>
          </navPoint>
          <navPoint playOrder="9" class="chapter" id="ch03">
@@ -89,11 +89,11 @@
             </navLabel>
             <content src="test-ch05.xhtml"/>
          </navPoint>
-         <navPoint playOrder="13" class="chapter" id="ch6">
+         <navPoint playOrder="13" class="chapter" id="ch06">
             <navLabel>
                <text>Chapter VI Lists</text>
             </navLabel>
-            <content src="test-ch6.xhtml"/>
+            <content src="test-ch06.xhtml"/>
          </navPoint>
          <navPoint playOrder="14" class="chapter" id="ch07">
             <navLabel>
@@ -180,11 +180,17 @@
          </navLabel>
          <content src="test-frontmatter-2.xhtml#toc"/>
       </navPoint>
-      <navPoint playOrder="28" class="colophon" id="xd33e1709">
+      <navPoint playOrder="28" class="contents" id="loi">
+         <navLabel>
+            <text>List of Illustrations</text>
+         </navLabel>
+         <content src="test-backmatter-2.xhtml#loi"/>
+      </navPoint>
+      <navPoint playOrder="29" class="colophon" id="colophon">
          <navLabel>
             <text>Colophon</text>
          </navLabel>
-         <content src="test-backmatter.xhtml#xd33e1709"/>
+         <content src="test-backmatter-2.xhtml#colophon"/>
       </navPoint>
    </navMap>
 </ncx>

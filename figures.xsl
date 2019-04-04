@@ -243,7 +243,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="figure[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']">
+    <xsl:template match="figure[f:isInline(.)]">
         <xsl:if test="f:isSet('includeImages')">
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
@@ -271,7 +271,7 @@
     </xsl:template>
 
 
-    <xsl:template match="figure[@rend='inline' or f:rend-value(@rend, 'position') = 'inline']" mode="css">
+    <xsl:template match="figure[f:isInline(.)]" mode="css">
         <xsl:if test="f:isSet('includeImages')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule">

@@ -514,7 +514,7 @@
                          or $node/self::letter
                          or $node/self::list
                          or $node/self::figure[not(f:rend-value(@rend, 'position') = ('inline', 'abovehead'))]
-                         or $node/self::table[not(f:rend-value(@rend, 'position') = 'inline')]
+                         or $node/self::table[not(f:isInline(.))]
                         )"/>
         <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))
                                                               then name($node)

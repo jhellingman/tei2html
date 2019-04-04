@@ -139,7 +139,7 @@
 
 
 
-<div1 id="ch1" n="I" type="Chapter" rend="media-overlay(test.smil)">
+<div1 id="ch01" n="I" type="Chapter" rend="media-overlay(test.smil)">
 <head type="label">Chapter I</head>
 <head>Inline Text Elements</head>
 
@@ -191,21 +191,21 @@
 <head>Different ways of including files.</head>
 
 <p>The following paragraph should include some Russian.</p>
-<divGen type="Inclusion" url="test-include.xml#russian"/>
+<divGen id="inc1" type="Inclusion" url="test-include.xml#russian"/>
 
 <p>The following paragraph should include some Greek.</p>
-<xi:include href="test-include.xml" xpointer="greek"/>
+<xi:include id="inc2" href="test-include.xml" xpointer="greek"/>
 
 <p>The following paragraph should include some Sanskrit.</p>
-<divGen type="Inclusion" rend="include(test-include.xml#sanskrit)"/>
+<divGen id="inc3" type="Inclusion" rend="include(test-include.xml#sanskrit)"/>
 
 <p>The following includes the entire file.</p>
 
-<xi:include href="test-include.xml"/>
+<xi:include id="inc4" href="test-include.xml"/>
 
 </div2>
 </div1>
-<div1 id="ch2" n="II" type="Chapter">
+<div1 id="ch02" n="II" type="Chapter">
 <head type="label">Chapter II</head>
 <head>Block-level Text Elements</head>
 
@@ -893,7 +893,7 @@
 
 
 </div1>
-<div1 id="ch6" n="VI">
+<div1 id="ch06" n="VI">
 <head type="label">Chapter VI</head>
 <head>Lists</head>
 
@@ -1195,7 +1195,6 @@
 <p n="7">En de laatste alinea.</p>
 
 </div1>
-
 <div1 id="alignThird" rend="align-with-document(test-alignment.xml#test)">
 
 <p n="1">This is a test of printing translated paragraphs side-by-side, this time the translation is pulled-in from another source.</p>
@@ -1212,8 +1211,8 @@
 
 <p n="7">And the final paragraph.</p>
 
-</div1>
 
+</div1>
 <div1 id="usingStyle" n="X">
 <head type="label">Chapter X</head>
 <head>Using @style and @rendition attributes</head>
@@ -1249,7 +1248,7 @@ and impress your friends. Okay, lets do one more for the heck of it: <formula id
 </div1>
 </div0>
 </body>
-<back id="back">
+<back id="backmatter">
 <div1 id="test-toc">
 <head>Table of Contents</head>
 
@@ -1269,7 +1268,7 @@ and impress your friends. Okay, lets do one more for the heck of it: <formula id
 <div1 id="index" type="Index" lang="nl">
 <head>Index</head>
 
-<divGen type="IndexToc"/>
+<divGen id="ixToc" type="IndexToc"/>
 
 <div2>
 <head>A.</head>
@@ -1297,28 +1296,27 @@ and impress your friends. Okay, lets do one more for the heck of it: <formula id
 
 </div2>
 </div1>
-<div1 id="backmatter">
 
-<divGen type="Gallery"/>
 
-<divGen type="Index"/>
+<divGen id="gal" type="Gallery"/>
+
+<divGen id="ix" type="Index"/>
 
 <!-- <divGen type="Footnotes"/> -->
 
-<divGen type="toc" rend="tocMaxLevel(3)"/>
+<divGen id="toc2" type="toc" rend="tocMaxLevel(3)"/>
 
-<divGen type="loi"/>
+<divGen id="loi" type="loi"/>
 
-<divGen type="Colophon"/>
+<divGen id="colophon" type="Colophon"/>
 
-<divGen type="LanguageFragments"/>
+<divGen id="lf" type="LanguageFragments"/>
 
-<divGen type="TagUsage"/>
+<divGen id="tu" type="TagUsage"/>
 
-<divGen type="pgfooter"/>
+<divGen id="pgf" type="pgfooter"/>
 
 
-</div1>
 </back>
 </text>
 </TEI.2>

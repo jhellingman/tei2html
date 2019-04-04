@@ -446,4 +446,19 @@
         <xsl:sequence select="not($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none'])"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine whether an element is rendered inline in the output.</xd:short>
+        <xd:detail>
+            <p>Determine whether an element is rendered inline (that is, not as a block-level element) in the output, based on the presence of <code>position(inline)</code> in the <code>@rend</code>
+            attribute of this element.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:isInline" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline'"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>

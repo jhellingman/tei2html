@@ -435,7 +435,9 @@
     <xsl:function name="f:generate-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
 
-        <xsl:value-of select="if ($node/@id = 'cover') then 'cover.xhtml' else $basename || '-' || f:generate-id($node) || '.xhtml'"/>
+        <xsl:value-of select="if ($node/@id = 'cover') 
+                              then 'cover.xhtml' 
+                              else $basename || '-' || f:generate-id($node) || '.xhtml'"/>
     </xsl:function>
 
 

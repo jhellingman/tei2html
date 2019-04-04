@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2018-12-17T20:36:03Z</meta>
+      <meta property="dcterms:modified">2019-04-04T18:46:01Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -33,7 +33,7 @@
       <dc:date>2009-12-13</dc:date>
       <dc:description>A document intended to test the various features available in the Tei2html software.</dc:description>
       <meta name="cover" content="cover-image"/>
-      <meta property="media:duration" refines="#ch1overlay">0:00:24</meta>
+      <meta property="media:duration" refines="#ch01overlay">0:00:24</meta>
       <meta property="media:duration">0:00:24</meta>
       <meta property="media:active-class">epub-media-overlay-active</meta>
       <meta property="media:narrator">Loon</meta>
@@ -52,11 +52,11 @@
       <item id="bk1-1"
             href="test-bk1-1.xhtml"
             media-type="application/xhtml+xml"/>
-      <item id="ch1"
-            href="test-ch1.xhtml"
+      <item id="ch01"
+            href="test-ch01.xhtml"
             media-type="application/xhtml+xml"
-            media-overlay="ch1overlay"/>
-      <item id="ch2" href="test-ch2.xhtml" media-type="application/xhtml+xml"/>
+            media-overlay="ch01overlay"/>
+      <item id="ch02" href="test-ch02.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch03" href="test-ch03.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch04-1"
             href="test-ch04-1.xhtml"
@@ -65,7 +65,7 @@
             href="test-ch04-3.xhtml"
             media-type="application/xhtml+xml"/>
       <item id="ch05" href="test-ch05.xhtml" media-type="application/xhtml+xml"/>
-      <item id="ch6" href="test-ch6.xhtml" media-type="application/xhtml+xml"/>
+      <item id="ch06" href="test-ch06.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch07" href="test-ch07.xhtml" media-type="application/xhtml+xml"/>
       <item id="ch08" href="test-ch08.xhtml" media-type="application/xhtml+xml"/>
       <item id="alignFirst"
@@ -90,8 +90,8 @@
       <item id="index"
             href="test-index.xhtml"
             media-type="application/xhtml+xml"/>
-      <item id="backmatter"
-            href="test-backmatter.xhtml"
+      <item id="backmatter-2"
+            href="test-backmatter-2.xhtml"
             media-type="application/xhtml+xml"/>
       <item properties="cover-image"
             id="cover-image"
@@ -108,7 +108,7 @@
       <item id="figTest2wrapper"
             href="test-figTest2.xhtml"
             media-type="application/xhtml+xml"/>
-      <item id="ch1overlay" href="test.smil" media-type="application/smil+xml"/>
+      <item id="ch01overlay" href="test.smil" media-type="application/smil+xml"/>
       <item id="xd52e11" href="audio/test.mp3" media-type="audio/mpeg"/>
       <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
       <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
@@ -119,13 +119,13 @@
       <itemref linear="no" idref="cover"/>
       <itemref linear="yes" idref="frontmatter-2"/>
       <itemref linear="yes" idref="bk1-1"/>
-      <itemref linear="yes" idref="ch1"/>
-      <itemref linear="yes" idref="ch2"/>
+      <itemref linear="yes" idref="ch01"/>
+      <itemref linear="yes" idref="ch02"/>
       <itemref linear="yes" idref="ch03"/>
       <itemref linear="yes" idref="ch04-1"/>
       <itemref linear="yes" idref="ch04-3"/>
       <itemref linear="yes" idref="ch05"/>
-      <itemref linear="yes" idref="ch6"/>
+      <itemref linear="yes" idref="ch06"/>
       <itemref linear="yes" idref="ch07"/>
       <itemref linear="yes" idref="ch08"/>
       <itemref linear="yes" idref="alignFirst"/>
@@ -136,7 +136,7 @@
       <itemref linear="yes" idref="ch11a"/>
       <itemref linear="yes" idref="test-toc"/>
       <itemref linear="yes" idref="index"/>
-      <itemref linear="yes" idref="backmatter"/>
+      <itemref linear="yes" idref="backmatter-2"/>
       <itemref linear="no" idref="figTest2wrapper"/>
    </spine>
    <guide>
@@ -144,6 +144,9 @@
       <reference type="toc"
                  title="Table of Contents"
                  href="test-frontmatter-2.xhtml#toc"/>
+      <reference type="loi"
+                 title="List of Illustrations"
+                 href="test-backmatter-2.xhtml#loi"/>
       <reference type="title-page"
                  title="Title Page"
                  href="test-frontmatter-2.xhtml#xd33e103"/>
@@ -151,6 +154,6 @@
       <reference type="text" title="Text" href="test-bk1-1.xhtml#bk1"/>
       <reference type="colophon"
                  title="Colophon"
-                 href="test-backmatter.xhtml#xd33e1709"/>
+                 href="test-backmatter-2.xhtml#colophon"/>
    </guide>
 </package>

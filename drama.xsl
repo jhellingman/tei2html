@@ -340,11 +340,6 @@
         <xsl:sequence select="boolean($node/preceding-sibling::node()[1][self::speaker])"/>
     </xsl:function>
 
-    <xsl:function name="f:isInline" as="xs:boolean">
-        <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline'"/>
-    </xsl:function>
-
 
     <!-- Cast lists -->
     <xsl:template match="castList">
