@@ -346,7 +346,7 @@
     </xsl:template>
 
 
-    <xsl:template match="q[@rend = 'block']">
+    <xsl:template match="q[f:isBlock(.)]">
         <xsl:call-template name="closepar"/>
         <blockquote>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -513,7 +513,7 @@
                          or $node/self::q
                          or $node/self::letter
                          or $node/self::list
-                         or $node/self::figure[not(f:rend-value(@rend, 'position') = ('inline', 'abovehead'))]
+                         or $node/self::figure[not(f:isInline(.) or f:rend-value(@rend, 'position') = 'abovehead')]
                          or $node/self::table[not(f:isInline(.))]
                         )"/>
         <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))

@@ -451,14 +451,31 @@
         <xd:short>Determine whether an element is rendered inline in the output.</xd:short>
         <xd:detail>
             <p>Determine whether an element is rendered inline (that is, not as a block-level element) in the output, based on the presence of <code>position(inline)</code> in the <code>@rend</code>
-            attribute of this element.</p>
+            attribute of this element. Note that this only takes into account the <code>@rend</code> attribute, not the default value for <code>display</code> of an HTML element in the output.</p>
         </xd:detail>
     </xd:doc>
 
+    <!-- TODO: deprecate use of 'position' for inline. -->
+
     <xsl:function name="f:isInline" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline'"/>
+        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline' or f:rend-value($node/@rend, 'display') = 'inline'"/>
     </xsl:function>
 
+    <xsl:function name="f:isBlock" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="$node/@rend = 'block' or f:rend-value($node/@rend, 'display') = 'block'"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:isHidden" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="$node/@rend = 'hide' or f:rend-value($node/@rend, 'visibility') = 'hidden'"/>
+    </xsl:function>
+
+    <xsl:function name="f:isNotDisplayed" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="f:rend-value($node/@rend, 'display') = 'none'"/>
+    </xsl:function>
 
 </xsl:stylesheet>

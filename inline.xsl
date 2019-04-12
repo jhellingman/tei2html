@@ -894,7 +894,6 @@
         <xsl:param name="context" as="node()"/>
 
         <!-- Split the text-content of the segment on space boundaries -->
-        <!-- TODO: add ditto-repeat with values "word" or "segment" to determine how often the mark will be repeated. -->
         <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
