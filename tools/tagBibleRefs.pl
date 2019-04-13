@@ -36,7 +36,7 @@ my %books = (
 "Ex"                        => "Exodus",
 "Ex."                       => "Exodus",
 "Ezek."                     => "Ezekiel",
-"Ez."						=> "Ezekiel",
+"Ez."                       => "Ezekiel",
 "Ez"                        => "Ezekiel",
 "Ezra"                      => "Ezra",
 "Ezr"                       => "Ezra",
@@ -429,6 +429,7 @@ my %abbreviations = (
 "ti"                        => "Ti"
 );
 
+# http://www.beneiavraham.com/many-chapters-book-bible/
 
 my %chapterCounts = (
 "gn"    => 50,
@@ -437,7 +438,67 @@ my %chapterCounts = (
 "nm"    => 36,
 "dt"    => 34,
 "jo"    => 24,
-"jd"    => 21
+"jd"    => 21,
+"ru"    => 4,
+"1 sm"  => 31,
+"2 sm"  => 24,
+"1 kgs" => 22,
+"2 kgs" => 25,
+"1 chr" => 29,
+"2 chr" => 36,
+"ezr"   => 10,
+"neh"   => 13,
+"est"   => 10,
+"jb"    => 42,
+"ps"    => 150,
+"prv"   => 31,
+"eccl"  => 12,
+"sg"    => 8,
+"is"    => 66,
+"jer"   => 52,
+"lam"   => 5,
+"ez"    => 48,
+"dn"    => 12,
+"hos"   => 14,
+"jl"    => 3,
+"am"    => 9,
+"ob"    => 1,
+"jon"   => 4,
+"mi"    => 7,
+"na"    => 3,
+"hb"    => 3,
+"zep"   => 3,
+"hg"    => 2,
+"zec"   => 14,
+"mal"   => 4,
+
+"mt"    => 28,
+"mk"    => 16,
+"lk"    => 24,
+"jn"    => 21,
+"acts"  => 28,
+"rom"   => 16,
+"1 cor" => 16,
+"2 cor" => 13,
+"gal"   => 6,
+"eph"   => 6,
+"phil"  => 4,
+"col"   => 4,
+"1 thes" => 5,
+"2 thes" => 3,
+"1 tm"  => 6,
+"2 tm"  => 4,
+"ti"    => 3,
+"phlm"  => 1,
+"heb"   => 13,
+"jas"   => 5,
+"1 pt"  => 5,
+"2 pt"  => 3,
+"1 jn"  => 5,
+"2 jn"  => 1,
+"3 jn"  => 1,
+"jude"  => 1,
+"re"    => 22
 );
 
 
@@ -448,22 +509,18 @@ main();
 
 
 
-sub buildRegularExpression()
-{
+sub buildRegularExpression() {
     my @listBooks = ();
-    foreach my $book (keys %books)
-    {
+    foreach my $book (keys %books) {
         push (@listBooks, $book);
         push (@listBooks, $books{$book});
     }
     my @sortedBooks = uniq(sort(@listBooks));
 
     my $booksPattern = "";
-    for (my $i = 0; $i < $#sortedBooks; $i++)
-    {
+    for (my $i = 0; $i < $#sortedBooks; $i++) {
         my $book = $sortedBooks[$i];
-        if ($i > 0)
-        {
+        if ($i > 0) {
             $booksPattern .= "|";
         }
         $booksPattern .= "(?:$book)";
@@ -494,23 +551,19 @@ sub uniq {
 
 # test();
 
-sub test
-{
+sub test {
     print "TESTING...\n\n";
     print tagRefs("See Gen. xxvi 23 for this and Exod. 12 : 4 for that\n");
 }
 
 
-sub main()
-{
+sub main() {
     my $file = $ARGV[0];
     open(INPUTFILE, $file) || die("Could not open input file $file");
 
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $remainder = $_;
-        while ($remainder =~ m/$tagPattern/)
-        {
+        while ($remainder =~ m/$tagPattern/) {
             my $fragment = $`;
             my $tag = $&;
             $remainder = $';
@@ -524,13 +577,11 @@ sub main()
 }
 
 
-sub tagRefs($)
-{
+sub tagRefs($) {
     my $remainder = shift;
 
     my $result = "";
-    while ($remainder =~ m/$refPattern/)
-    {
+    while ($remainder =~ m/$refPattern/) {
         my $before = $`;
         my $match = $&;
         my $book = $1;
@@ -548,8 +599,7 @@ sub tagRefs($)
 }
 
 
-sub tagRef
-{
+sub tagRef {
     my $match = shift;
     my $book = shift;
     my $chapter = shift;
@@ -559,35 +609,35 @@ sub tagRef
     # print STDERR "MATCH: $match\n";
     # print STDERR "BOOK: $book CHAPTER: $chapter VERSE: $verse\n";
 
-    if (isroman($chapter))
-    {
+    if (isroman($chapter)) {
         $chapter = arabic($chapter);
     }
 
-    if ($abbreviations{lc $book})
-    {
+    if ($abbreviations{lc $book}) {
         $book = $abbreviations{lc $book}
     }
 
-    if ((lc($book) eq "ps" && $chapter > 150) || (lc($book) ne "ps" && $chapter > 66))
-    {
-        print STDERR "CHAPTER number out of range in match '$match' (book: '$book', chapter: $chapter)\n";
+    # Books with just a single chapter (ob, phlm, 2 jn, 3 jn, jude) omit the chapter number.
+    if (exists $chapterCounts{lc $book} && $chapter > $chapterCounts{lc $book} && $chapterCounts{lc $book} != 1) {
+        print STDERR "WARNING: No chapter $chapter in $book for [$match] ($book has " . $chapterCounts{lc $book} . " chapters)\n";
+        return $match;
+    }
+    if (!exists $chapterCounts{lc $book} && $chapter > 25) {
+        print STDERR "WARNING: Large chapter number in match '$match' (book: '$book', chapter: $chapter)\n";
         return $match;
     }
 
-    if ($book ne "")
-    {
-        if ($verse == 0)
-        {
+    if ($book ne "") {
+        if ($verse == 0) {
+            # print STDERR "DEBUG: $match => $book $chapter\n";
             return "<xref url=\"bib:$book $chapter\">$match</xref>";
         }
-        if ($range == 0)
-        {
+        if ($range == 0) {
+            # print STDERR "DEBUG: $match => $book $chapter:$verse\n";
             return "<xref url=\"bib:$book $chapter:$verse\">$match</xref>";
         }
+        # print STDERR "DEBUG: $match => $book $chapter:$verse-$range\n";
         return "<xref url=\"bib:$book $chapter:$verse-$range\">$match</xref>";
-
     }
     return $match;
 }
-
