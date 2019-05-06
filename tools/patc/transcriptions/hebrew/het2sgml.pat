@@ -97,6 +97,8 @@
 "{'}"    p "'"     	% 
 "{\"}"   p "\""   	% 
 "{/}"    p "/"   	% 
+"{[}"    p "["   	% 
+"{]}"    p "]"   	% 
 "--"     p "&mdash;"
 
 "\n"	p "\n"
@@ -129,16 +131,16 @@
 "Y"     e "unknown Hebrew transcription Y"
 "Z"     e "unknown Hebrew transcription Z"
 
-"0"     e "digit 0 in Hebrew transcription"
-"1"     e "digit 1 in Hebrew transcription"
-"2"     e "digit 2 in Hebrew transcription"
-"3"     e "digit 3 in Hebrew transcription"
-"4"     e "digit 4 in Hebrew transcription"
-"5"     e "digit 5 in Hebrew transcription"
-"6"     e "digit 6 in Hebrew transcription"
-"7"     e "digit 7 in Hebrew transcription"
-"8"     e "digit 8 in Hebrew transcription"
-"9"     e "digit 9 in Hebrew transcription"
+"0"     p "0"
+"1"     p "1"
+"2"     p "2"
+"3"     p "3"
+"4"     p "4"
+"5"     p "5"
+"6"     p "6"
+"7"     p "7"
+"8"     p "8"
+"9"     p "9"
 
 @patterns 2
 
