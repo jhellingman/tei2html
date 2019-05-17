@@ -26,6 +26,7 @@ use LanguageNames qw/getLanguage/;
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
 my $makeHeatmap = 0;    # Set to 1 to generate a heat-map document.
+my $retrograd = 0;      # Set to 1 to generate a retrograd wordlist.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -33,6 +34,7 @@ my $docAuthor = "Author";
 GetOptions(
     'v' => \$verbose,
     'd' => \$useDatabase,
+    'r' => \$retrograd,
     'm' => \$makeHeatmap);
 
 # Hashes to collect information
@@ -473,6 +475,9 @@ sub sortLanguageWords($) {
 
     foreach my $word (@wordList) {
         my $key = NormalizeForLanguage($word, $language);
+        if ($retrograd == 1) {
+            $key = reverse($key);
+        }
         $word = "$key!$word";
     }
     @wordList = sort @wordList;
@@ -573,6 +578,9 @@ sub printReportHeader() {
     print "\n<head><title>Word Usage Report for $docTitle ($infile)</title>";
     print "\n<style>\n";
     print "body { margin-left: 30px; }\n";
+    if ($retrograd == 1) {
+        print "body { text-align: right; }\n";
+    }
     print "p { margin: 0px; }\n";
     print ".cnt { color: gray; font-size: smaller; }\n";
     print ".err { color: red; font-weight: bold; }\n";
@@ -750,6 +758,10 @@ sub reportWord($$) {
     my $unShyWord = $word;
     $unShyWord =~ s/\xad/|/g;
 
+    if ($count > 1 && $retrograd == 1) {
+        print "<span class=cnt>$count</span> ";
+    }
+
     if ($known == 0) {
         my $heatMapClass = lookupHeatMapClass($count);
 
@@ -766,7 +778,7 @@ sub reportWord($$) {
         }
     }
 
-    if ($count > 1) {
+    if ($count > 1 && $retrograd == 0) {
         print "<span class=cnt>$count</span> ";
     }
 }

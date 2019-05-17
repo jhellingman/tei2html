@@ -135,7 +135,7 @@ sub printHtmlHead() {
     print ".remark { background-color: #FFB442; }\n";
     print ".greek { background-color: #fcb0b080; font-family: Asteria, Palatino Linotype, sans serif; }\n";
     print ":lang(ar) { background-color: #80FF8080; font-family: Scheherazade, serif; font-size: 24pt; line-height: 24pt; }\n";
-    print ":lang(he) { background-color: #80FFFF80; font-family: Ezra SIL, serif; font-size: 24pt; line-height: 24pt; }\n";
+    print ":lang(he) { background-color: #80FFFF80; font-family: 'Ezra SIL', serif; font-size: 24pt; line-height: 24pt; }\n";
     print ":lang(syc) { background-color: #fda6ff;; font-family: 'Serto Jerusalem';, serif; font-size: 24pt; line-height: 24pt; }\n";
     print ".sc { font-variant:small-caps; }\n";
     print ".ex { letter-spacing:0.2em; background-color: #FFFF80; }\n";
