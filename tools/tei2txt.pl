@@ -273,9 +273,12 @@ sub handleSegments($) {
 
     my $a = "";
     while ($remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
+        my $before = $`;
         my $attrs = $1;
         my $content = $2;
         $remainder = $';
+        
+        $a .= $before;
 
         my $id = getAttrVal("id", $attrs);
         my $copyOf = getAttrVal("copyOf", $attrs);
@@ -361,10 +364,10 @@ sub parseTable($) {
 sub handleTable($) {
     my $table = shift;
     # $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
-    $table =~ /<table(.*?)>(.*?)<\/table>/ms;
-    my $tableContent = $2;
+    $table =~ /<table\b.*?>(.*?)<\/table>/ms;
+    my $tableContent = $1;
 
-    my @rows = split(/<row.*?>/ms, $tableContent);
+    my @rows = split(/<row\b.*?>/ms, $tableContent);
 
     # First element in result is empty, so drop it
     shift @rows;
