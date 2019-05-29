@@ -204,6 +204,23 @@
         </xsl:if>
     </xsl:template>
 
+
+    <xsl:function name="f:showDebugTags">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:if test="f:isSet('debug')">
+            <span class="showtags">
+                <xsl:text>&lt;</xsl:text>
+                <xsl:value-of select="name($node)"/>
+                <xsl:if test="$node/@id">
+                    <xsl:text> id='</xsl:text><xsl:value-of select="$node/@id"/><xsl:text>'</xsl:text>
+                </xsl:if>
+                <xsl:text>&gt;</xsl:text>
+            </span>
+        </xsl:if>
+    </xsl:function>
+
+
     <!--====================================================================-->
     <!-- Language tagging -->
 

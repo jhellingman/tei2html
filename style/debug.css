@@ -10,6 +10,18 @@ divisions -- yellows     : #FFE280 #FFD955 #F4C82E #C09811 #806300
 
 */
 
+.showtags {
+    position: absolute;
+    left: 2px;
+    border: 1px solid gray;
+    margin: 1px;
+    padding: 2px 6px;
+    color: gray;
+    background-color: #DDD;
+    font-family: monospace;
+    font-size: x-small;
+    width: 12%;
+}
 
 /* Show borders of tables and lists */
 

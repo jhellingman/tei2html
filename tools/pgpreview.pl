@@ -133,15 +133,22 @@ sub printHtmlHead() {
     print "BODY { font-size: 16pt; line-height: 18pt; }\n";
     print ".figure { background-color: #FFFF5C; }\n";
     print ".remark { background-color: #FFB442; }\n";
-    print ".greek { background-color: #fcb0b080; font-family: Asteria, Palatino Linotype, sans serif; }\n";
-    print ":lang(ar) { background-color: #80FF8080; font-family: Scheherazade, serif; font-size: 24pt; line-height: 24pt; }\n";
-    print ":lang(he) { background-color: #80FFFF80; font-family: 'Ezra SIL', serif; font-size: 24pt; line-height: 24pt; }\n";
-    print ":lang(syc) { background-color: #fda6ff;; font-family: 'Serto Jerusalem';, serif; font-size: 24pt; line-height: 24pt; }\n";
+
+    # print ".greek { background-color: #fcb0b080; font-family: Asteria, Palatino Linotype, sans serif; }\n";
+    # print ":lang(ar) { background-color: #80FF8080; font-family: Scheherazade, serif; font-size: 24pt; line-height: 24pt; }\n";
+    # print ":lang(he) { background-color: #80FFFF80; font-family: Shlomo, 'Ezra SIL', serif; font-size: 24pt; line-height: 24pt; }\n";
+    # print ":lang(syc) { background-color: #fda6ff; font-family: 'Serto Jerusalem', serif; font-size: 24pt; line-height: 24pt; }\n";
+
+    print ":lang(ar) { font-family: Scheherazade, serif; }\n";
+    print ":lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }\n";
+    print ":lang(syc) { font-family: 'Serto Jerusalem', serif; }\n";
+    print ":lang(grc) { font-family: 'Galatia SIL', serif; }\n";
+
     print ".sc { font-variant:small-caps; }\n";
     print ".ex { letter-spacing:0.2em; background-color: #FFFF80; }\n";
     print ".error { background-color: #FF8566; font-weight: bold; }\n";
     print ".xref { background-color: #FFFF8C; }\n";
-    print "code { font-weight: bold; color: gray; }\n";
+    print "code { font-weight: bold; color: gray; display: none; }\n";
     print "</style>\n";
     print "</head>\n";
     print "<body>\n";

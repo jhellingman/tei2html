@@ -36,6 +36,7 @@
     </xd:doc>
 
     <xsl:template match="table">
+        <xsl:copy-of select="f:showDebugTags(.)"/>
         <xsl:apply-templates select="." mode="render-table"/>
     </xsl:template>
 

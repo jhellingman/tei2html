@@ -1,3 +1,4 @@
+
 body {
 	background: #FFFFFF;
 	font-family: "Times New Roman", Times, serif;
@@ -47,3 +48,11 @@ table {
 .tablecaption {
 	text-align: center;
 }
+
+:lang(ar) { font-family: Scheherazade, serif; }
+
+:lang(he), :lang(yi) { font-family: Shlomo, 'Ezra SIL', serif; }
+
+:lang(syc) { font-family: 'Serto Jerusalem';, serif; }
+
+:lang(grc) { font-family: 'Galatia SIL', serif; }
