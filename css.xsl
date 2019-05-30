@@ -39,6 +39,19 @@
 
     <xsl:key name="style" match="*" use="@style"/>
 
+    <xsl:variable name="css2properties" as="xs:string*">
+        <xsl:sequence select="('azimuth', 'background-attachment', 'background-color', 'background-image', 'background-position', 'background-repeat', 'background', 'border-collapse', 'border-color',
+            'border-spacing', 'border-style', 'border-top', 'border-right', 'border-bottom', 'border-left', 'border-top-color', 'border-right-color', 'border-bottom-color',
+            'border-left-color', 'border-top-style', 'border-right-style', 'border-bottom-style', 'border-left-style', 'border-top-width', 'border-right-width', 'border-bottom-width',
+            'border-left-width', 'border-width', 'border', 'bottom', 'caption-side', 'clear', 'clip', 'color', 'content', 'counter-increment', 'counter-reset', 'cue-after',
+            'cue-before', 'cue', 'cursor', 'direction', 'display', 'elevation', 'empty-cells', 'float', 'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight',
+            'font', 'height', 'left', 'letter-spacing', 'line-height', 'list-style-image', 'list-style-position', 'list-style-type', 'list-style', 'margin-right', 'margin-left',
+            'margin-top', 'margin-bottom', 'margin', 'max-height', 'max-width', 'min-height', 'min-width', 'orphans', 'outline-color', 'outline-style', 'outline-width', 'outline',
+            'overflow', 'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'padding', 'page-break-after', 'page-break-before', 'page-break-inside', 'pause-after',
+            'pause-before', 'pause', 'pitch-range', 'pitch', 'play-during', 'position', 'quotes', 'richness', 'right', 'speak-header', 'speak-numeral', 'speak-punctuation', 'speak',
+            'speech-rate', 'stress', 'table-layout', 'text-align', 'text-decoration', 'text-indent', 'text-transform', 'top', 'unicode-bidi', 'vertical-align', 'visibility',
+            'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index')"/>
+    </xsl:variable>
 
     <xd:doc>
         <xd:short>Embed CSS stylesheets.</xd:short>
@@ -200,7 +213,7 @@
 /* CSS rules generated from @rend attributes in TEI file */
 </xsl:text>
         <xsl:apply-templates select="/" mode="css"/>
-        
+
         <xsl:text>
 /* CSS rules copied from @style attributes in TEI file */
 </xsl:text>
@@ -234,7 +247,7 @@
         <xd:short>Convert a rendition element to a CSS rule.</xd:short>
         <xd:detail>
             <p>Convert a rendition element to a CSS rule. For rendition elements without
-            a <code>@selector</code> attribute, the <code>@id</code> attribute will be converted 
+            a <code>@selector</code> attribute, the <code>@id</code> attribute will be converted
             to a class selecter. If present, the <code>@scope</code> attribute will be translated
             to a CSS pseudo-element.</p>
         </xd:detail>
@@ -313,39 +326,39 @@
                 <!-- Drop properties without values -->
                 <xsl:when test="normalize-space($value)=''"/>
 
-                <!-- Properties handled otherwise -->
-                <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
-                <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
-                <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
-                <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
-                <xsl:when test="$property='image'"/>                <!-- in-line image -->
-                <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
-                <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
-                <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
-                <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
-                <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
-                <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
-                <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
-                <xsl:when test="$property='position'"/>             <!-- position in text -->
-                <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
-                <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
+                <!-- Non-CSS properties handled otherwise -->
                 <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
                 <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
-                <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
-                <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
-                <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
+                <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
+                <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
+                <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
                 <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
+                <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
+                <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
+                <xsl:when test="$property='image'"/>                <!-- in-line image -->
+                <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
+                <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
+                <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
+                <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
+                <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
+                <xsl:when test="$property='position'"/>             <!-- position in text -->
+                <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
+                <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
+                <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
+                <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
+                <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
+                <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
 
-                <!-- Properties used to render verse -->
+                <!-- Non-CSS properties used to render verse -->
                 <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
 
-                <!-- Properties related to decorative initials -->
+                <!-- Non-CSS properties related to decorative initials -->
+                <xsl:when test="$property='dropcap'"/>
+                <xsl:when test="$property='dropcap-offset'"/>
+                <xsl:when test="$property='initial-height'"/>
                 <xsl:when test="$property='initial-image'"/>
                 <xsl:when test="$property='initial-offset'"/>
                 <xsl:when test="$property='initial-width'"/>
-                <xsl:when test="$property='initial-height'"/>
-                <xsl:when test="$property='dropcap'"/>
-                <xsl:when test="$property='dropcap-offset'"/>
 
                 <!-- divGen related special handling. -->
                 <xsl:when test="$name = 'divGen' and $property = 'include'"/>
@@ -372,8 +385,17 @@
                 <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>; </xsl:when>
                 <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
+                <!-- Filter out CSS3 stuff (for Project Gutenberg submissions) -->
+                <xsl:when test="f:getSetting('css.support') = '2' and
+                    $property = ('writing-mode')">
+                    <xsl:copy-of select="f:logInfo('Ignoring CCS3 property ''{1}''', $property)"/>
+                </xsl:when>
+
                 <!-- Assume the rest can straightforwardly be translated to CSS -->
                 <xsl:otherwise>
+                    <xsl:if test="not($property = $css2properties)">
+                        <xsl:copy-of select="f:logWarning('''{1}'' is not a CSS2.1 property', $property)"/>
+                    </xsl:if>
                     <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/><xsl:text>; </xsl:text>
                 </xsl:otherwise>
             </xsl:choose>

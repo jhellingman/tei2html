@@ -98,6 +98,7 @@
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
 
+            <css.support>2</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3 -->
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
             <css.blackletterFont>UnifrakturMaguntia</css.blackletterFont>   <!-- The font to use when font(blackletter) is specified. -->
             <rendition.id.prefix></rendition.id.prefix>                     <!-- Prefix used for rendition IDs. -->
