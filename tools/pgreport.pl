@@ -390,6 +390,31 @@ sub handleTeiFile($) {
                 close WORDSFILE;
             }
         }
+
+        # Issues file
+        my $issuesFileName = $filePath . "issues.xml";
+        if (-e $issuesFileName) {
+            # Use eval, so we can recover from fatal parse errors in XML:XPath.
+            eval {
+                my $xpath = XML::XPath->new(filename => $issuesFileName);
+
+                my $errorCount = $xpath->find('count(//i:issue[@level=\'Error\'])');
+                my $warningCount = $xpath->find('count(//i:issue[@level=\'Warning\'])');
+                my $trivialCount = $xpath->find('count(//i:issue[@level=\'Trivial\'])');
+
+                logMessage("Errors:     $errorCount");
+                logMessage("Warnings:   $warningCount");
+                logMessage("Trivials:   $trivialCount");
+
+                print XMLFILE "    <errors>" . $errorCount . "</errors>\n";
+                print XMLFILE "    <warnings>" . $warningCount . "</warnings>\n";
+                print XMLFILE "    <trivials>" . $trivialCount . "</trivials>\n";
+
+            } or do {
+                logMessage("Note:       Problem parsing $issuesFileName.");
+                logError("Problem parsing $issuesFileName");
+            };
+        }
     }
 
     print XMLFILE "  </book>\n";
