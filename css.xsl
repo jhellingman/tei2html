@@ -335,6 +335,8 @@
                 <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
                 <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
                 <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
+                <xsl:when test="$property='ditto-mark'"/>           <!-- Ditto mark to be used in tables, default: ,, -->
+                <xsl:when test="$property='ditto-repeat'"/>         <!-- How often ditto mark will be repeated in tables: word (default) or segment -->
                 <xsl:when test="$property='image'"/>                <!-- in-line image -->
                 <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
                 <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
