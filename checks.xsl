@@ -575,12 +575,12 @@
 
     <xsl:template mode="checks" match="front" priority="2">
         <!-- Do we have a cover that will be recognized as such? -->
-        <xsl:if test="not(div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image'])">
+        <xsl:if test="not(div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']) and not(./div[@type='Cover' and @id='cover']/p/figure[@id='cover-image'])">
             <i:issue pos="{@pos}" code="E01" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No cover defined (div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']).</i:issue>
         </xsl:if>
 
         <!-- Do we have a title-page that will be recognized as such? -->
-        <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
+        <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']) and not(./div[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
             <i:issue pos="{@pos}" code="E02" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
         </xsl:if>
         <xsl:next-match/>
