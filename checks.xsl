@@ -912,6 +912,19 @@
 
     <xsl:template mode="check-ids" match="text">
 
+        <!-- Do we have a front, body, and back element? -->
+        <xsl:if test="not(front)">
+            <i:issue pos="{@pos}" code="E04" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No front element!</i:issue>
+        </xsl:if>
+
+        <xsl:if test="not(body)">
+            <i:issue pos="{@pos}" code="E05" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No body element!</i:issue>
+        </xsl:if>
+
+        <xsl:if test="not(back)">
+            <i:issue pos="{@pos}" code="E06" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No back element!</i:issue>
+        </xsl:if>
+
         <!-- @target points to existing @id -->
         <xsl:for-each-group select="//*[@target]" group-by="@target">
             <xsl:variable name="target" select="./@target" as="xs:string"/>
