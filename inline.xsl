@@ -141,7 +141,28 @@
         <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
         <xsl:variable name="text" select="if (f:isSet('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
 
+        <xsl:variable name="text" select="f:no-break-initials($text)"/>
+
         <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:no-break-initials" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:variable name="result" as="xs:string*">
+            <xsl:analyze-string select="$text" regex="(\p{{Lu}}\p{{M}}?\. ){{2,}}">
+                <xsl:matching-substring>
+                    <!-- Do not replace the final space -->
+                    <xsl:value-of select="replace(replace(., ' ', '&nbsp;'), '&nbsp;$', ' ')"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                  <xsl:value-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+
+        <xsl:value-of select="string-join($result, '')"/>
     </xsl:function>
 
 

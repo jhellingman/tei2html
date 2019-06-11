@@ -267,7 +267,7 @@
         <i:issue pos="{@pos}" code="H02" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
     </xsl:template>
 
-    <xsl:template mode="checks" match="titleStmt/author[not(@key) and . != 'Anonymous']" priority="1">
+    <xsl:template mode="checks" match="titleStmt/author[not(@key) and not(. = ('Anonymous', 'Anoniem'))]" priority="1">
         <i:issue pos="{@pos}" code="H03" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @key attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
@@ -282,7 +282,7 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:template mode="checks" match="titleStmt/author[not(@ref) and . != 'Anonymous']" priority="2">
+    <xsl:template mode="checks" match="titleStmt/author[not(@ref) and not(. = ('Anonymous', 'Anoniem'))]" priority="2">
         <i:issue pos="{@pos}" code="H06" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @ref attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
@@ -567,6 +567,35 @@
             <i:issue pos="{@pos}" code="S04" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Note with @sameAs attribute must be empty.</i:issue>
         </xsl:if>
         <xsl:next-match/>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Check presence of various elements.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="checks" match="text">
+
+        <!-- Do we have a front, body, and back element? -->
+        <xsl:if test="not(front)">
+            <i:issue pos="{@pos}" code="E04" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No front element!</i:issue>
+        </xsl:if>
+
+        <xsl:if test="not(body)">
+            <i:issue pos="{@pos}" code="E05" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No body element!</i:issue>
+        </xsl:if>
+
+        <xsl:if test="not(back)">
+            <i:issue pos="{@pos}" code="E06" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No back element!</i:issue>
+        </xsl:if>
+
+        <xsl:if test="not(//divGen[@type='toc'] or //div[@id='toc'] or //div1[@id='toc'])">
+            <i:issue pos="{@pos}" code="E07" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No table of contents present.</i:issue>
+        </xsl:if>
+
+        <xsl:if test="//divGen[@type='toc'] and (//div[@id='toc'] or //div1[@id='toc'])">
+            <i:issue pos="{@pos}" code="E08" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Both genererated and original ToC present.</i:issue>
+        </xsl:if>
+
     </xsl:template>
 
     <xd:doc>
@@ -911,19 +940,6 @@
     <!-- Check ids referenced but not present -->
 
     <xsl:template mode="check-ids" match="text">
-
-        <!-- Do we have a front, body, and back element? -->
-        <xsl:if test="not(front)">
-            <i:issue pos="{@pos}" code="E04" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No front element!</i:issue>
-        </xsl:if>
-
-        <xsl:if test="not(body)">
-            <i:issue pos="{@pos}" code="E05" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No body element!</i:issue>
-        </xsl:if>
-
-        <xsl:if test="not(back)">
-            <i:issue pos="{@pos}" code="E06" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No back element!</i:issue>
-        </xsl:if>
 
         <!-- @target points to existing @id -->
         <xsl:for-each-group select="//*[@target]" group-by="@target">
