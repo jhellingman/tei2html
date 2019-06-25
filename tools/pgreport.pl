@@ -297,7 +297,7 @@ sub handleTeiFile($) {
                     # Check: is git repo up-to-date?
                     my $localFile = "$fileName$suffix";
                     my $gitRepoFile = $gitRepoLocation . $pgSrc . "/" . $localFile;
-                    if (compare($gitRepoFile, $fullName) != 0) {
+                    if (defined ($gitRepoFile) && compare($gitRepoFile, $fullName) != 0) {
                         print "COMPARE: Git repo differs: $localFile <> $gitRepoFile\n";
                         print "         Size in Git:  " . (-s $gitRepoFile) . " bytes\n";
                         print "         Size locally: " . (-s $fullName) . " bytes\n";
@@ -339,6 +339,8 @@ sub handleTeiFile($) {
                     print XMLFILE "    <titlePage>$titlePageImageFile</titlePage>\n";
                 }
 
+                $xpath->cleanup();
+
                 1;
             } or do {
                 logMessage("Note:       Problem parsing $xmlFileName.");
@@ -365,6 +367,8 @@ sub handleTeiFile($) {
                 my $titlePageHeight = $xpath->find('//image[@path="' . $titlePageImageFile . '"]/@height');
                 logMessage("Title page size: $titlePageWidth by $titlePageHeight");
                 print XMLFILE "    <titlePageSize><width>$titlePageWidth</width><height>$titlePageHeight</height></titlePageSize>\n";
+
+                $xpath->cleanup();
 
                 1;
             } or do {
@@ -410,6 +414,9 @@ sub handleTeiFile($) {
                 print XMLFILE "    <warnings>" . $warningCount . "</warnings>\n";
                 print XMLFILE "    <trivials>" . $trivialCount . "</trivials>\n";
 
+                $xpath->cleanup();
+
+                1;
             } or do {
                 logMessage("Note:       Problem parsing $issuesFileName.");
                 logError("Problem parsing $issuesFileName");
