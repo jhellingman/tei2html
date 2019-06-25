@@ -1,4 +1,9 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY prime       "&#x2032;">
+    <!ENTITY tcomma      "&#x02BB;">
+
+]>
 
 <xsl:stylesheet version="2.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -237,7 +242,7 @@
 
                 <xsl:for-each-group select="$matches/k:match" group-by="@form">
                     <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
-                    <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}-]+$')">
+                    <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}&prime;-]+$')">
                         <xsl:call-template name="report-matches2">
                             <xsl:with-param name="matches" select="current-group()"/>
                         </xsl:call-template>
@@ -488,7 +493,7 @@
 
     <xsl:function name="f:words" as="xs:string*">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:analyze-string select="$string" regex="{'[\p{L}\p{N}\p{M}-]+'}">
+        <xsl:analyze-string select="$string" regex="{'[\p{L}\p{N}\p{M}&prime;-]+'}">
             <xsl:matching-substring>
                 <xsl:sequence select="."/>
             </xsl:matching-substring>
@@ -499,13 +504,14 @@
     <xd:doc>
         <xd:short>Remove diacritics from a string.</xd:short>
         <xd:detail>Remove diacritics form a string to produce a string suitable for sorting purposes. This function
-        use the Unicode NFD normalization form to separate diacritics from the letters carrying them, and might
+        uses the Unicode NFD normalization form to separate diacritics from the letters carrying them, and might
         result too much being removed in some scripts (in particular Indic scripts).</xd:detail>
         <xd:param name="string">The string to processed.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:strip_diacritics" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&tcomma;&prime;-]', '')"/>
         <xsl:value-of select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
     </xsl:function>
 
@@ -534,7 +540,7 @@
         <xsl:variable name="style" select="f:find-text-style(.)"/>
         <xsl:variable name="inIndex" select="if (ancestor-or-self::*[@type='Index']) then 'true' else 'false'"/>
 
-        <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}-]+'}">
+        <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}&prime;-]+'}">
             <xsl:matching-substring>
                 <k:w>
                     <xsl:attribute name="xml:lang" select="$lang"/>
