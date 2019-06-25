@@ -27,6 +27,7 @@ my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
 my $makeHeatmap = 0;    # Set to 1 to generate a heat-map document.
 my $retrograd = 0;      # Set to 1 to generate a retrograd wordlist.
+my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
 my $idbook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -35,6 +36,7 @@ GetOptions(
     'v' => \$verbose,
     'd' => \$useDatabase,
     'r' => \$retrograd,
+    'i' => \$ignoreLanguage,
     'm' => \$makeHeatmap);
 
 # Hashes to collect information
@@ -1273,6 +1275,10 @@ sub popLang($) {
 sub pushLang($$) {
     my $tag = shift;
     my $lang = shift;
+
+    if ($ignoreLanguage == 1) {
+        $lang = 'EN';
+    }
 
     $langHash{$lang}++;
     $langStackSize++;
