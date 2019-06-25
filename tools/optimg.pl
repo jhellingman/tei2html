@@ -30,11 +30,21 @@ my $totalResultSize = 0;
 my $imagesConverted = 0;
 
 my $verbose = 0;
+my $help = 0;
 my $maxAgeHours = 24;
 
 GetOptions(
     'v' => \$verbose,
+    'h' => \$help,
     'a=i' => \$maxAgeHours);
+
+if ($help == 1) {
+    print "optimg.pl [options] directory\n\n";
+    print "    -v     : be verbose\n";
+    print "    -h     : print help\n";
+    print "    -a=#   : max age in hours of files to compress (0 = always compress)\n";
+    exit;
+}
 
 sub list_recursively($);
 
