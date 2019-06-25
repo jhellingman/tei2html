@@ -430,4 +430,25 @@ p.smallprint, li.smallprint, .par.smallprint {
     font-size: 80%;
 }
 
+
+/* Musical time indicator (e.g. 3/4 -> bold 3 above 4) */
+
+span.musictime {
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+}
+
+span.musictime, span.musictime span.top, span.musictime span.bottom {
+    padding: 1px 0.5px;
+    font-size: xx-small;
+    font-weight: bold;
+    line-height: 0.7em;
+}
+
+span.musictime span.bottom {
+    display: block;
+}
+
+
 /***** End of layout.css *****/
