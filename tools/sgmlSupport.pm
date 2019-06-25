@@ -1238,22 +1238,22 @@ BEGIN {
     ## See https://www.w3.org/International/questions/qa-bidi-unicode-controls.en
     ##
     ## Implicit Directional Marks
-    $ent{"lrm"}         = chr(0x200E);  #  LEFT-TO-RIGHT MARK
-    $ent{"rlm"}         = chr(0x200F);  #  RIGHT-TO-LEFT MARK
-    $ent{"alm"}         = chr(0x061C);  #  ARABIC LETTER MARK
+    $ent{"lrm"}         = chr(0x200E);  # LEFT-TO-RIGHT MARK
+    $ent{"rlm"}         = chr(0x200F);  # RIGHT-TO-LEFT MARK
+    $ent{"alm"}         = chr(0x061C);  # ARABIC LETTER MARK
 
     ## Explicit Directional Embeddings 
-    $ent{"lre"}         = chr(0x202A);  #  LEFT-TO-RIGHT EMBEDDING
-    $ent{"rlm"}         = chr(0x202B);  #  RIGHT-TO-LEFT EMBEDDING
-    $ent{"lro"}         = chr(0x202D);  #  LEFT-TO-RIGHT OVERRIDE
-    $ent{"rlo"}         = chr(0x202E);  #  RIGHT-TO-LEFT OVERRIDE
-    $ent{"pdf"}         = chr(0x200C);  #  POP DIRECTIONAL FORMATTING
+    $ent{"lre"}         = chr(0x202A);  # LEFT-TO-RIGHT EMBEDDING
+    $ent{"rlm"}         = chr(0x202B);  # RIGHT-TO-LEFT EMBEDDING
+    $ent{"lro"}         = chr(0x202D);  # LEFT-TO-RIGHT OVERRIDE
+    $ent{"rlo"}         = chr(0x202E);  # RIGHT-TO-LEFT OVERRIDE
+    $ent{"pdf"}         = chr(0x200C);  # POP DIRECTIONAL FORMATTING
 
     ## Explicit Directional Isolates
-    $ent{"lri"}         = chr(0x2066);  #  LEFT-TO-RIGHT ISOLATE
-    $ent{"rli"}         = chr(0x2067);  #  RIGHT-TO-LEFT ISOLATE
-    $ent{"fsi"}         = chr(0x2068);  #  FIRST STRONG ISOLATE
-    $ent{"pdi"}         = chr(0x2069);  #  POP DIRECTIONAL ISOLATE
+    $ent{"lri"}         = chr(0x2066);  # LEFT-TO-RIGHT ISOLATE
+    $ent{"rli"}         = chr(0x2067);  # RIGHT-TO-LEFT ISOLATE
+    $ent{"fsi"}         = chr(0x2068);  # FIRST STRONG ISOLATE
+    $ent{"pdi"}         = chr(0x2069);  # POP DIRECTIONAL ISOLATE
 
 
     ###############################################################################
@@ -1605,6 +1605,7 @@ BEGIN {
     $ent{"glhringa"}     = "g" . chr(0x0351); # g with left half ring above
 
     $ent{"adotb"}       = "a" . chr(0x0323); # a with dot below
+    $ent{"Adotb"}       = "A" . chr(0x0323); # A with dot below
     $ent{"cdotb"}       = "c" . chr(0x0323); # c with dot below
     $ent{"Cdotb"}       = "C" . chr(0x0323); # C with dot below
     $ent{"edotb"}       = "e" . chr(0x0323); # e with dot below
@@ -1700,29 +1701,39 @@ BEGIN {
     $ent{"ptildeb"}     = "p" . chr(0x0330); # p with tilde below
 
     $ent{"abarb"}       = "a" . chr(0x0331); # a with macron below
+    $ent{"Abarb"}       = "A" . chr(0x0331); # A with macron below
     $ent{"bbarb"}       = "b" . chr(0x0331); # b with macron below
     $ent{"Bbarb"}       = "B" . chr(0x0331); # B with macron below
     $ent{"cbarb"}       = "c" . chr(0x0331); # c with macron below
-    $ent{"dbarb"}       = "d" . chr(0x0331); # d with macron below
-    $ent{"Dbarb"}       = "D" . chr(0x0331); # D with macron below
+    $ent{"Cbarb"}       = "C" . chr(0x0331); # C with macron below
+    $ent{"dbarb"}       = chr(7695); # d with macron below
+    $ent{"Dbarb"}       = chr(7694); # D with macron below
     $ent{"ebarb"}       = "e" . chr(0x0331); # e with macron below
     $ent{"Ebarb"}       = "E" . chr(0x0331); # E with macron below
-    $ent{"hbarb"}       = "h" . chr(0x0331); # h with macron below
+    $ent{"gbarb"}       = "g" . chr(0x0331); # g with macron below
+    $ent{"Gbarb"}       = "G" . chr(0x0331); # G with macron below
+    $ent{"hbarb"}       = chr(7830); # h with macron below
+    $ent{"Hbarb"}       = "H" . chr(0x0331); # H with macron below
     $ent{"ibarb"}       = "i" . chr(0x0331); # i with macron below
+    $ent{"Ibarb"}       = "I" . chr(0x0331); # I with macron below
     $ent{"kbarb"}       = "k" . chr(0x0331); # k with macron below
     $ent{"Kbarb"}       = "K" . chr(0x0331); # K with macron below
-    $ent{"lbarb"}       = "l" . chr(0x0331); # l with macron below
+    $ent{"lbarb"}       = chr(7739); # l with macron below
+    $ent{"Lbarb"}       = chr(7738); # L with macron below
     $ent{"mbarb"}       = "m" . chr(0x0331); # m with macron below
-    $ent{"nbarb"}       = "n" . chr(0x0331); # n with macron below
+    $ent{"Mbarb"}       = "M" . chr(0x0331); # M with macron below
+    $ent{"nbarb"}       = chr(7753); # n with macron below
     $ent{"Nbarb"}       = "N" . chr(0x0331); # N with macron below
     $ent{"obarb"}       = "o" . chr(0x0331); # o with macron below
     $ent{"Obarb"}       = "O" . chr(0x0331); # O with macron below
     $ent{"pbarb"}       = "p" . chr(0x0331); # p with macron below
     $ent{"Pbarb"}       = "P" . chr(0x0331); # P with macron below
-    $ent{"tbarb"}       = "t" . chr(0x0331); # t with macron below
-    $ent{"Tbarb"}       = "T" . chr(0x0331); # T with macron below
-    $ent{"zbarb"}       = "z" . chr(0x0331); # z with macron below
-    $ent{"Zbarb"}       = "Z" . chr(0x0331); # Z with macron below
+    $ent{"sbarb"}       = "s" . chr(0x0331); # s with macron below
+    $ent{"Sbarb"}       = "S" . chr(0x0331); # S with macron below
+    $ent{"tbarb"}       = chr(7791); # t with macron below
+    $ent{"Tbarb"}       = chr(7790); # T with macron below
+    $ent{"zbarb"}       = chr(7829); # z with macron below
+    $ent{"Zbarb"}       = chr(7828); # Z with macron below
 
     $ent{"asupe"}       = "a" . chr(0x0364); # a with small e above
     $ent{"osupe"}       = "o" . chr(0x0364); # o with small e above
@@ -1924,74 +1935,74 @@ BEGIN {
     }
 
     # Duplicate entities from above.
-    $ent{"peso"}        = chr(0x20B1);  #  Peso sign
-    $ent{"euro"}        = chr(0x20AC);  #  Euro sign
-    $ent{"vardollar"}   = '$';          #  Variant dollar sign (with diagonal slashes)
-    $ent{"florin"}      = chr(0x0192);  #  LATIN SMALL LETTER F WITH HOOK
+    $ent{"peso"}        = chr(0x20B1);  # Peso sign
+    $ent{"euro"}        = chr(0x20AC);  # Euro sign
+    $ent{"vardollar"}   = '$';          # Variant dollar sign (with diagonal slashes)
+    $ent{"florin"}      = chr(0x0192);  # LATIN SMALL LETTER F WITH HOOK
 
-    $ent{"apos"}        = chr(0x2019); # LEFT SINGLE QUOTATION MARK
+    $ent{"apos"}        = chr(0x2019);  # LEFT SINGLE QUOTATION MARK
     $ent{"commal"}      = ",";          # (comma used as letter)
 
-    $ent{"lsquor"}      = chr(0x201A);  #  SINGLE LOW-9 QUOTATION MARK
-    $ent{"rdquor"}      = chr(0x201C);  #  LEFT DOUBLE QUOTATION MARK
-    $ent{"rsquor"}      = chr(0x2018);  #  LEFT SINGLE QUOTATION MARK
-    $ent{"ldquor"}      = chr(0x201E);  #  DOUBLE LOW-9 QUOTATION MARK
-    $ent{"idagger"}     = chr(0x2020);  #  inverted DAGGER (not Unicode, so using dagger!)
-    $ent{"perp"}        = chr(0x22A5);  #  UP TACK
+    $ent{"lsquor"}      = chr(0x201A);  # SINGLE LOW-9 QUOTATION MARK
+    $ent{"rdquor"}      = chr(0x201C);  # LEFT DOUBLE QUOTATION MARK
+    $ent{"rsquor"}      = chr(0x2018);  # LEFT SINGLE QUOTATION MARK
+    $ent{"ldquor"}      = chr(0x201E);  # DOUBLE LOW-9 QUOTATION MARK
+    $ent{"idagger"}     = chr(0x2020);  # inverted DAGGER (not Unicode, so using dagger!)
+    $ent{"perp"}        = chr(0x22A5);  # UP TACK
     $ent{"Tinv"}        = chr(0x22A5);  # UP TACK (Inversed T)
-    $ent{"alefsym"}     = chr(0x2135);  #  ALEF SYMBOL
-    $ent{"mldr"}        = chr(0x2026);  #  HORIZONTAL ELLIPSIS
-    $ent{"die"}         = chr(0x00A8);  #  DIAERESIS
-    $ent{"Dot"}         = chr(0x00A8);  #  DIAERESIS
-    $ent{"sbsol"}       = chr(0x005C);  #  REVERSE SOLIDUS
-    $ent{"samalg"}      = chr(0x2210);  #  N-ARY COPRODUCT
-    $ent{"amalg"}       = chr(0x2210);  #  N-ARY COPRODUCT
-    $ent{"prop"}        = chr(0x221D);  #  PROPORTIONAL TO
-    $ent{"spar"}        = chr(0x2225);  #  PARALLEL TO
-    $ent{"nspar"}       = chr(0x2226);  #  NOT PARALLEL TO
-    $ent{"thksim"}      = chr(0x223C);  #  TILDE OPERATOR
-    $ent{"thkap"}       = chr(0x2248);  #  ALMOST EQUAL TO
-    $ent{"asymp"}       = chr(0x2248);  #  ALMOST EQUAL TO
-    $ent{"subE"}        = chr(0x2286);  #  SUBSET OF OR EQUAL TO
-    $ent{"supE"}        = chr(0x2287);  #  SUPERSET OF OR EQUAL TO
-    $ent{"nsubE"}       = chr(0x2288);  #  NEITHER A SUBSET OF NOR EQUAL TO
-    $ent{"nsupE"}       = chr(0x2289);  #  NEITHER A SUPERSET OF NOR EQUAL TO
-    $ent{"vsubnE"}      = chr(0x228A);  #  SUBSET OF WITH NOT EQUAL TO
-    $ent{"subnE"}       = chr(0x228A);  #  SUBSET OF WITH NOT EQUAL TO
-    $ent{"vsupnE"}      = chr(0x228B);  #  SUPERSET OF WITH NOT EQUAL TO
-    $ent{"supnE"}       = chr(0x228B);  #  SUPERSET OF WITH NOT EQUAL TO
-    $ent{"vsubne"}      = chr(0x228A);  #  SUBSET OF WITH NOT EQUAL TO
-    $ent{"vsupne"}      = chr(0x228B);  #  SUPERSET OF WITH NOT EQUAL TO
-    $ent{"ssetmn"}      = chr(0x2216);  #  SET MINUS
-    $ent{"nges"}        = chr(0x2271);  #  NEITHER GREATER-THAN NOR EQUAL TO
-    $ent{"nles"}        = chr(0x2270);  #  NEITHER LESS-THAN NOR EQUAL TO
-    $ent{"gvnE"}        = chr(0x2269);  #  GREATER-THAN BUT NOT EQUAL TO
-    $ent{"gnE"}         = chr(0x2269);  #  GREATER-THAN BUT NOT EQUAL TO
-    $ent{"lnE"}         = chr(0x2268);  #  LESS-THAN BUT NOT EQUAL TO
-    $ent{"lvnE"}        = chr(0x2268);  #  LESS-THAN BUT NOT EQUAL TO
-    $ent{"les"}         = chr(0x2264);  #  LESS-THAN OR EQUAL TO
-    $ent{"ges"}         = chr(0x2265);  #  GREATER-THAN OR EQUAL TO
-    $ent{"vprime"}      = chr(0x2032);  #  PRIME
-    $ent{"bbar"}        = chr(0x0180);  #  b with stroke through stem
-    $ent{"ayin"}        = chr(0x02BF);  #  modifier letter left half ring
-    $ent{"cupre"}       = chr(0x227C);  #  PRECEDES OR EQUAL TO
-    $ent{"sccue"}       = chr(0x227D);  #  SUCCEEDS OR EQUAL TO
-    $ent{"sfrown"}      = chr(0x2322);  #  FROWN
-    $ent{"ssmile"}      = chr(0x2323);  #  SMILE
-    $ent{"half"}        = chr(0x00BD);  #  VULGAR FRACTION ONE HALF
-    $ent{"iff"}         = chr(0x21D4);  #  LEFT RIGHT DOUBLE ARROW
+    $ent{"alefsym"}     = chr(0x2135);  # ALEF SYMBOL
+    $ent{"mldr"}        = chr(0x2026);  # HORIZONTAL ELLIPSIS
+    $ent{"die"}         = chr(0x00A8);  # DIAERESIS
+    $ent{"Dot"}         = chr(0x00A8);  # DIAERESIS
+    $ent{"sbsol"}       = chr(0x005C);  # REVERSE SOLIDUS
+    $ent{"samalg"}      = chr(0x2210);  # N-ARY COPRODUCT
+    $ent{"amalg"}       = chr(0x2210);  # N-ARY COPRODUCT
+    $ent{"prop"}        = chr(0x221D);  # PROPORTIONAL TO
+    $ent{"spar"}        = chr(0x2225);  # PARALLEL TO
+    $ent{"nspar"}       = chr(0x2226);  # NOT PARALLEL TO
+    $ent{"thksim"}      = chr(0x223C);  # TILDE OPERATOR
+    $ent{"thkap"}       = chr(0x2248);  # ALMOST EQUAL TO
+    $ent{"asymp"}       = chr(0x2248);  # ALMOST EQUAL TO
+    $ent{"subE"}        = chr(0x2286);  # SUBSET OF OR EQUAL TO
+    $ent{"supE"}        = chr(0x2287);  # SUPERSET OF OR EQUAL TO
+    $ent{"nsubE"}       = chr(0x2288);  # NEITHER A SUBSET OF NOR EQUAL TO
+    $ent{"nsupE"}       = chr(0x2289);  # NEITHER A SUPERSET OF NOR EQUAL TO
+    $ent{"vsubnE"}      = chr(0x228A);  # SUBSET OF WITH NOT EQUAL TO
+    $ent{"subnE"}       = chr(0x228A);  # SUBSET OF WITH NOT EQUAL TO
+    $ent{"vsupnE"}      = chr(0x228B);  # SUPERSET OF WITH NOT EQUAL TO
+    $ent{"supnE"}       = chr(0x228B);  # SUPERSET OF WITH NOT EQUAL TO
+    $ent{"vsubne"}      = chr(0x228A);  # SUBSET OF WITH NOT EQUAL TO
+    $ent{"vsupne"}      = chr(0x228B);  # SUPERSET OF WITH NOT EQUAL TO
+    $ent{"ssetmn"}      = chr(0x2216);  # SET MINUS
+    $ent{"nges"}        = chr(0x2271);  # NEITHER GREATER-THAN NOR EQUAL TO
+    $ent{"nles"}        = chr(0x2270);  # NEITHER LESS-THAN NOR EQUAL TO
+    $ent{"gvnE"}        = chr(0x2269);  # GREATER-THAN BUT NOT EQUAL TO
+    $ent{"gnE"}         = chr(0x2269);  # GREATER-THAN BUT NOT EQUAL TO
+    $ent{"lnE"}         = chr(0x2268);  # LESS-THAN BUT NOT EQUAL TO
+    $ent{"lvnE"}        = chr(0x2268);  # LESS-THAN BUT NOT EQUAL TO
+    $ent{"les"}         = chr(0x2264);  # LESS-THAN OR EQUAL TO
+    $ent{"ges"}         = chr(0x2265);  # GREATER-THAN OR EQUAL TO
+    $ent{"vprime"}      = chr(0x2032);  # PRIME
+    $ent{"bbar"}        = chr(0x0180);  # b with stroke through stem
+    $ent{"ayin"}        = chr(0x02BF);  # modifier letter left half ring
+    $ent{"cupre"}       = chr(0x227C);  # PRECEDES OR EQUAL TO
+    $ent{"sccue"}       = chr(0x227D);  # SUCCEEDS OR EQUAL TO
+    $ent{"sfrown"}      = chr(0x2322);  # FROWN
+    $ent{"ssmile"}      = chr(0x2323);  # SMILE
+    $ent{"half"}        = chr(0x00BD);  # VULGAR FRACTION ONE HALF
+    $ent{"iff"}         = chr(0x21D4);  # LEFT RIGHT DOUBLE ARROW
 
     # Arrows and shapes
-    $ent{"xcirc"}       = chr(0x25CB);  #  WHITE CIRCLE
-    $ent{"xdtri"}       = chr(0x25BD);  #  WHITE DOWN-POINTING TRIANGLE
-    $ent{"xharr"}       = chr(0x2194);  #  LEFT RIGHT ARROW
-    $ent{"xhArr"}       = chr(0x2194);  #  LEFT RIGHT ARROW
-    $ent{"xlArr"}       = chr(0x21D0);  #  LEFTWARDS DOUBLE ARROW
-    $ent{"xrArr"}       = chr(0x21D2);  #  RIGHTWARDS DOUBLE ARROW
-    $ent{"xutri"}       = chr(0x25B3);  #  WHITE UP-POINTING TRIANGLE
-    $ent{"squ"}         = chr(0x25A1);  #  WHITE SQUARE
-    $ent{"bullet"}      = chr(0x2022);  #  Bullet
-    $ent{"maltese"}     = chr(0x2720);  #  Maltese cross
+    $ent{"xcirc"}       = chr(0x25CB);  # WHITE CIRCLE
+    $ent{"xdtri"}       = chr(0x25BD);  # WHITE DOWN-POINTING TRIANGLE
+    $ent{"xharr"}       = chr(0x2194);  # LEFT RIGHT ARROW
+    $ent{"xhArr"}       = chr(0x2194);  # LEFT RIGHT ARROW
+    $ent{"xlArr"}       = chr(0x21D0);  # LEFTWARDS DOUBLE ARROW
+    $ent{"xrArr"}       = chr(0x21D2);  # RIGHTWARDS DOUBLE ARROW
+    $ent{"xutri"}       = chr(0x25B3);  # WHITE UP-POINTING TRIANGLE
+    $ent{"squ"}         = chr(0x25A1);  # WHITE SQUARE
+    $ent{"bullet"}      = chr(0x2022);  # Bullet
+    $ent{"maltese"}     = chr(0x2720);  # Maltese cross
 
     # Metrical symbols
     $ent{"metlong"}     = chr(0x2013);  # metrical long symbol (= EN DASH)
@@ -2000,108 +2011,108 @@ BEGIN {
     $ent{"metbreak"}    = chr(0x201E);  # metrical break (= DOUBLE LOW-9 QUOTATION MARK)
 
     # Greek letters
-    $ent{"sigmav"}      = chr(0x03C2);  #  GREEK SMALL LETTER FINAL SIGMA
-    $ent{"sigmaf"}      = chr(0x03C2);  #  GREEK SMALL LETTER FINAL SIGMA
-    $ent{"thetav"}      = chr(0x03D1);  #  GREEK THETA SYMBOL
-    $ent{"gammad"}      = chr(0x03DC);  #  GREEK LETTER DIGAMMA
-    $ent{"phis"}        = chr(0x03C6);  #  GREEK SMALL LETTER PHI
+    $ent{"sigmav"}      = chr(0x03C2);  # GREEK SMALL LETTER FINAL SIGMA
+    $ent{"sigmaf"}      = chr(0x03C2);  # GREEK SMALL LETTER FINAL SIGMA
+    $ent{"thetav"}      = chr(0x03D1);  # GREEK THETA SYMBOL
+    $ent{"gammad"}      = chr(0x03DC);  # GREEK LETTER DIGAMMA
+    $ent{"phis"}        = chr(0x03C6);  # GREEK SMALL LETTER PHI
 
-    $ent{"Alpha"}       = chr(0x0391);  #  GREEK CAPITAL LETTER ALPHA
-    $ent{"Beta"}        = chr(0x0392);  #  GREEK CAPITAL LETTER BETA
-    $ent{"Gamma"}       = chr(0x0393);  #  GREEK CAPITAL LETTER GAMMA
-    $ent{"Delta"}       = chr(0x0394);  #  GREEK CAPITAL LETTER DELTA
-    $ent{"Epsilon"}     = chr(0x0395);  #  GREEK CAPITAL LETTER EPSILON
-    $ent{"Zeta"}        = chr(0x0396);  #  GREEK CAPITAL LETTER ZETA
-    $ent{"Eta"}         = chr(0x0397);  #  GREEK CAPITAL LETTER ETA
-    $ent{"Theta"}       = chr(0x0398);  #  GREEK CAPITAL LETTER THETA
-    $ent{"Iota"}        = chr(0x0399);  #  GREEK CAPITAL LETTER IOTA
-    $ent{"Kappa"}       = chr(0x039A);  #  GREEK CAPITAL LETTER KAPPA
-    $ent{"Lambda"}      = chr(0x039B);  #  GREEK CAPITAL LETTER LAMDA
-    $ent{"Mu"}          = chr(0x039C);  #  GREEK CAPITAL LETTER MU
-    $ent{"Nu"}          = chr(0x039D);  #  GREEK CAPITAL LETTER NU
-    $ent{"Xi"}          = chr(0x039E);  #  GREEK CAPITAL LETTER XI
-    $ent{"Omicron"}     = chr(0x039F);  #  GREEK CAPITAL LETTER OMICRON
-    $ent{"Pi"}          = chr(0x03A0);  #  GREEK CAPITAL LETTER PI
-    $ent{"Rho"}         = chr(0x03A1);  #  GREEK CAPITAL LETTER RHO
-    $ent{"Sigma"}       = chr(0x03A3);  #  GREEK CAPITAL LETTER SIGMA
-    $ent{"Tau"}         = chr(0x03A4);  #  GREEK CAPITAL LETTER TAU
-    $ent{"Upsilon"}     = chr(0x03A5);  #  GREEK CAPITAL LETTER UPSILON
-    $ent{"Upsi"}        = chr(0x03A5);  #  GREEK CAPITAL LETTER UPSILON
-    $ent{"Phi"}         = chr(0x03A6);  #  GREEK CAPITAL LETTER PHI
-    $ent{"Chi"}         = chr(0x03A7);  #  GREEK CAPITAL LETTER CHI
-    $ent{"Psi"}         = chr(0x03A8);  #  GREEK CAPITAL LETTER PSI
-    $ent{"Omega"}       = chr(0x03A9);  #  GREEK CAPITAL LETTER OMEGA
-    $ent{"alpha"}       = chr(0x03B1);  #  GREEK SMALL LETTER ALPHA
-    $ent{"beta"}        = chr(0x03B2);  #  GREEK SMALL LETTER BETA
-    $ent{"gamma"}       = chr(0x03B3);  #  GREEK SMALL LETTER GAMMA
-    $ent{"delta"}       = chr(0x03B4);  #  GREEK SMALL LETTER DELTA
-    $ent{"epsilon"}     = chr(0x03B5);  #  GREEK SMALL LETTER EPSILON
-    $ent{"epsi"}        = chr(0x03B5);  #  GREEK SMALL LETTER EPSILON
-    $ent{"zeta"}        = chr(0x03B6);  #  GREEK SMALL LETTER ZETA
-    $ent{"eta"}         = chr(0x03B7);  #  GREEK SMALL LETTER ETA
-    $ent{"thetas"}      = chr(0x03B8);  #  GREEK SMALL LETTER THETA
-    $ent{"theta"}       = chr(0x03B8);  #  GREEK SMALL LETTER THETA
-    $ent{"iota"}        = chr(0x03B9);  #  GREEK SMALL LETTER IOTA
-    $ent{"kappa"}       = chr(0x03BA);  #  GREEK SMALL LETTER KAPPA
-    $ent{"lambda"}      = chr(0x03BB);  #  GREEK SMALL LETTER LAMDA
-    $ent{"mu"}          = chr(0x03BC);  #  GREEK SMALL LETTER MU
-    $ent{"nu"}          = chr(0x03BD);  #  GREEK SMALL LETTER NU
-    $ent{"xi"}          = chr(0x03BE);  #  GREEK SMALL LETTER XI
-    $ent{"omicron"}     = chr(0x03BF);  #  GREEK SMALL LETTER OMICRON
-    $ent{"pi"}          = chr(0x03C0);  #  GREEK SMALL LETTER PI
-    $ent{"rho"}         = chr(0x03C1);  #  GREEK SMALL LETTER RHO
-    $ent{"sigma"}       = chr(0x03C3);  #  GREEK SMALL LETTER SIGMA
-    $ent{"tau"}         = chr(0x03C4);  #  GREEK SMALL LETTER TAU
-    $ent{"upsilon"}     = chr(0x03C5);  #  GREEK SMALL LETTER UPSILON
-    $ent{"upsi"}        = chr(0x03C5);  #  GREEK SMALL LETTER UPSILON
-    $ent{"phi"}         = chr(0x03C6);  #  GREEK SMALL LETTER PHI
-    $ent{"chi"}         = chr(0x03C7);  #  GREEK SMALL LETTER CHI
-    $ent{"psi"}         = chr(0x03C8);  #  GREEK SMALL LETTER PSI
-    $ent{"omega"}       = chr(0x03C9);  #  GREEK SMALL LETTER OMEGA
+    $ent{"Alpha"}       = chr(0x0391);  # GREEK CAPITAL LETTER ALPHA
+    $ent{"Beta"}        = chr(0x0392);  # GREEK CAPITAL LETTER BETA
+    $ent{"Gamma"}       = chr(0x0393);  # GREEK CAPITAL LETTER GAMMA
+    $ent{"Delta"}       = chr(0x0394);  # GREEK CAPITAL LETTER DELTA
+    $ent{"Epsilon"}     = chr(0x0395);  # GREEK CAPITAL LETTER EPSILON
+    $ent{"Zeta"}        = chr(0x0396);  # GREEK CAPITAL LETTER ZETA
+    $ent{"Eta"}         = chr(0x0397);  # GREEK CAPITAL LETTER ETA
+    $ent{"Theta"}       = chr(0x0398);  # GREEK CAPITAL LETTER THETA
+    $ent{"Iota"}        = chr(0x0399);  # GREEK CAPITAL LETTER IOTA
+    $ent{"Kappa"}       = chr(0x039A);  # GREEK CAPITAL LETTER KAPPA
+    $ent{"Lambda"}      = chr(0x039B);  # GREEK CAPITAL LETTER LAMDA
+    $ent{"Mu"}          = chr(0x039C);  # GREEK CAPITAL LETTER MU
+    $ent{"Nu"}          = chr(0x039D);  # GREEK CAPITAL LETTER NU
+    $ent{"Xi"}          = chr(0x039E);  # GREEK CAPITAL LETTER XI
+    $ent{"Omicron"}     = chr(0x039F);  # GREEK CAPITAL LETTER OMICRON
+    $ent{"Pi"}          = chr(0x03A0);  # GREEK CAPITAL LETTER PI
+    $ent{"Rho"}         = chr(0x03A1);  # GREEK CAPITAL LETTER RHO
+    $ent{"Sigma"}       = chr(0x03A3);  # GREEK CAPITAL LETTER SIGMA
+    $ent{"Tau"}         = chr(0x03A4);  # GREEK CAPITAL LETTER TAU
+    $ent{"Upsilon"}     = chr(0x03A5);  # GREEK CAPITAL LETTER UPSILON
+    $ent{"Upsi"}        = chr(0x03A5);  # GREEK CAPITAL LETTER UPSILON
+    $ent{"Phi"}         = chr(0x03A6);  # GREEK CAPITAL LETTER PHI
+    $ent{"Chi"}         = chr(0x03A7);  # GREEK CAPITAL LETTER CHI
+    $ent{"Psi"}         = chr(0x03A8);  # GREEK CAPITAL LETTER PSI
+    $ent{"Omega"}       = chr(0x03A9);  # GREEK CAPITAL LETTER OMEGA
+    $ent{"alpha"}       = chr(0x03B1);  # GREEK SMALL LETTER ALPHA
+    $ent{"beta"}        = chr(0x03B2);  # GREEK SMALL LETTER BETA
+    $ent{"gamma"}       = chr(0x03B3);  # GREEK SMALL LETTER GAMMA
+    $ent{"delta"}       = chr(0x03B4);  # GREEK SMALL LETTER DELTA
+    $ent{"epsilon"}     = chr(0x03B5);  # GREEK SMALL LETTER EPSILON
+    $ent{"epsi"}        = chr(0x03B5);  # GREEK SMALL LETTER EPSILON
+    $ent{"zeta"}        = chr(0x03B6);  # GREEK SMALL LETTER ZETA
+    $ent{"eta"}         = chr(0x03B7);  # GREEK SMALL LETTER ETA
+    $ent{"thetas"}      = chr(0x03B8);  # GREEK SMALL LETTER THETA
+    $ent{"theta"}       = chr(0x03B8);  # GREEK SMALL LETTER THETA
+    $ent{"iota"}        = chr(0x03B9);  # GREEK SMALL LETTER IOTA
+    $ent{"kappa"}       = chr(0x03BA);  # GREEK SMALL LETTER KAPPA
+    $ent{"lambda"}      = chr(0x03BB);  # GREEK SMALL LETTER LAMDA
+    $ent{"mu"}          = chr(0x03BC);  # GREEK SMALL LETTER MU
+    $ent{"nu"}          = chr(0x03BD);  # GREEK SMALL LETTER NU
+    $ent{"xi"}          = chr(0x03BE);  # GREEK SMALL LETTER XI
+    $ent{"omicron"}     = chr(0x03BF);  # GREEK SMALL LETTER OMICRON
+    $ent{"pi"}          = chr(0x03C0);  # GREEK SMALL LETTER PI
+    $ent{"rho"}         = chr(0x03C1);  # GREEK SMALL LETTER RHO
+    $ent{"sigma"}       = chr(0x03C3);  # GREEK SMALL LETTER SIGMA
+    $ent{"tau"}         = chr(0x03C4);  # GREEK SMALL LETTER TAU
+    $ent{"upsilon"}     = chr(0x03C5);  # GREEK SMALL LETTER UPSILON
+    $ent{"upsi"}        = chr(0x03C5);  # GREEK SMALL LETTER UPSILON
+    $ent{"phi"}         = chr(0x03C6);  # GREEK SMALL LETTER PHI
+    $ent{"chi"}         = chr(0x03C7);  # GREEK SMALL LETTER CHI
+    $ent{"psi"}         = chr(0x03C8);  # GREEK SMALL LETTER PSI
+    $ent{"omega"}       = chr(0x03C9);  # GREEK SMALL LETTER OMEGA
 
-    $ent{"b.Gamma"}     = chr(0x0393);  #  GREEK CAPITAL LETTER GAMMA
-    $ent{"b.Delta"}     = chr(0x0394);  #  GREEK CAPITAL LETTER DELTA
-    $ent{"b.Theta"}     = chr(0x0398);  #  GREEK CAPITAL LETTER THETA
-    $ent{"b.Lambda"}    = chr(0x039B);  #  GREEK CAPITAL LETTER LAMDA
-    $ent{"b.Xi"}        = chr(0x039E);  #  GREEK CAPITAL LETTER XI
-    $ent{"b.Pi"}        = chr(0x03A0);  #  GREEK CAPITAL LETTER PI
-    $ent{"b.Sigma"}     = chr(0x03A3);  #  GREEK CAPITAL LETTER SIGMA
-    $ent{"b.Upsi"}      = chr(0x03A5);  #  GREEK CAPITAL LETTER UPSILON
-    $ent{"b.Phi"}       = chr(0x03A6);  #  GREEK CAPITAL LETTER PHI
-    $ent{"b.Psi"}       = chr(0x03A8);  #  GREEK CAPITAL LETTER PSI
-    $ent{"b.Omega"}     = chr(0x03A9);  #  GREEK CAPITAL LETTER OMEGA
-    $ent{"b.alpha"}     = chr(0x03B1);  #  GREEK SMALL LETTER ALPHA
-    $ent{"b.beta"}      = chr(0x03B2);  #  GREEK SMALL LETTER BETA
-    $ent{"b.gamma"}     = chr(0x03B3);  #  GREEK SMALL LETTER GAMMA
-    $ent{"b.delta"}     = chr(0x03B4);  #  GREEK SMALL LETTER DELTA
-    $ent{"b.epsiv"}     = chr(0x03B5);  #  GREEK SMALL LETTER EPSILON
-    $ent{"b.epsis"}     = chr(0x03B5);  #  GREEK SMALL LETTER EPSILON
-    $ent{"b.epsi"}      = chr(0x03B5);  #  GREEK SMALL LETTER EPSILON
-    $ent{"b.zeta"}      = chr(0x03B6);  #  GREEK SMALL LETTER ZETA
-    $ent{"b.eta"}       = chr(0x03B7);  #  GREEK SMALL LETTER ETA
-    $ent{"b.thetas"}    = chr(0x03B8);  #  GREEK SMALL LETTER THETA
-    $ent{"b.iota"}      = chr(0x03B9);  #  GREEK SMALL LETTER IOTA
-    $ent{"b.kappa"}     = chr(0x03BA);  #  GREEK SMALL LETTER KAPPA
-    $ent{"b.lambda"}    = chr(0x03BB);  #  GREEK SMALL LETTER LAMDA
-    $ent{"b.mu"}        = chr(0x03BC);  #  GREEK SMALL LETTER MU
-    $ent{"b.nu"}        = chr(0x03BD);  #  GREEK SMALL LETTER NU
-    $ent{"b.xi"}        = chr(0x03BE);  #  GREEK SMALL LETTER XI
-    $ent{"b.pi"}        = chr(0x03C0);  #  GREEK SMALL LETTER PI
-    $ent{"b.rho"}       = chr(0x03C1);  #  GREEK SMALL LETTER RHO
-    $ent{"b.sigmav"}    = chr(0x03C2);  #  GREEK SMALL LETTER FINAL SIGMA
-    $ent{"b.sigma"}     = chr(0x03C3);  #  GREEK SMALL LETTER SIGMA
-    $ent{"b.tau"}       = chr(0x03C4);  #  GREEK SMALL LETTER TAU
-    $ent{"b.upsi"}      = chr(0x03C5);  #  GREEK SMALL LETTER UPSILON
-    $ent{"b.phis"}      = chr(0x03C6);  #  GREEK SMALL LETTER PHI
-    $ent{"b.chi"}       = chr(0x03C7);  #  GREEK SMALL LETTER CHI
-    $ent{"b.psi"}       = chr(0x03C8);  #  GREEK SMALL LETTER PSI
-    $ent{"b.omega"}     = chr(0x03CE);  #  GREEK SMALL LETTER OMEGA WITH TONOS
-    $ent{"b.thetav"}    = chr(0x03D1);  #  GREEK THETA SYMBOL
-    $ent{"b.phiv"}      = chr(0x03D5);  #  GREEK PHI SYMBOL
-    $ent{"b.piv"}       = chr(0x03D6);  #  GREEK PI SYMBOL
-    $ent{"b.gammad"}    = chr(0x03DC);  #  GREEK LETTER DIGAMMA
-    $ent{"b.kappav"}    = chr(0x03F0);  #  GREEK KAPPA SYMBOL
-    $ent{"b.rhov"}      = chr(0x03F1);  #  GREEK RHO SYMBOL
+    $ent{"b.Gamma"}     = chr(0x0393);  # GREEK CAPITAL LETTER GAMMA
+    $ent{"b.Delta"}     = chr(0x0394);  # GREEK CAPITAL LETTER DELTA
+    $ent{"b.Theta"}     = chr(0x0398);  # GREEK CAPITAL LETTER THETA
+    $ent{"b.Lambda"}    = chr(0x039B);  # GREEK CAPITAL LETTER LAMDA
+    $ent{"b.Xi"}        = chr(0x039E);  # GREEK CAPITAL LETTER XI
+    $ent{"b.Pi"}        = chr(0x03A0);  # GREEK CAPITAL LETTER PI
+    $ent{"b.Sigma"}     = chr(0x03A3);  # GREEK CAPITAL LETTER SIGMA
+    $ent{"b.Upsi"}      = chr(0x03A5);  # GREEK CAPITAL LETTER UPSILON
+    $ent{"b.Phi"}       = chr(0x03A6);  # GREEK CAPITAL LETTER PHI
+    $ent{"b.Psi"}       = chr(0x03A8);  # GREEK CAPITAL LETTER PSI
+    $ent{"b.Omega"}     = chr(0x03A9);  # GREEK CAPITAL LETTER OMEGA
+    $ent{"b.alpha"}     = chr(0x03B1);  # GREEK SMALL LETTER ALPHA
+    $ent{"b.beta"}      = chr(0x03B2);  # GREEK SMALL LETTER BETA
+    $ent{"b.gamma"}     = chr(0x03B3);  # GREEK SMALL LETTER GAMMA
+    $ent{"b.delta"}     = chr(0x03B4);  # GREEK SMALL LETTER DELTA
+    $ent{"b.epsiv"}     = chr(0x03B5);  # GREEK SMALL LETTER EPSILON
+    $ent{"b.epsis"}     = chr(0x03B5);  # GREEK SMALL LETTER EPSILON
+    $ent{"b.epsi"}      = chr(0x03B5);  # GREEK SMALL LETTER EPSILON
+    $ent{"b.zeta"}      = chr(0x03B6);  # GREEK SMALL LETTER ZETA
+    $ent{"b.eta"}       = chr(0x03B7);  # GREEK SMALL LETTER ETA
+    $ent{"b.thetas"}    = chr(0x03B8);  # GREEK SMALL LETTER THETA
+    $ent{"b.iota"}      = chr(0x03B9);  # GREEK SMALL LETTER IOTA
+    $ent{"b.kappa"}     = chr(0x03BA);  # GREEK SMALL LETTER KAPPA
+    $ent{"b.lambda"}    = chr(0x03BB);  # GREEK SMALL LETTER LAMDA
+    $ent{"b.mu"}        = chr(0x03BC);  # GREEK SMALL LETTER MU
+    $ent{"b.nu"}        = chr(0x03BD);  # GREEK SMALL LETTER NU
+    $ent{"b.xi"}        = chr(0x03BE);  # GREEK SMALL LETTER XI
+    $ent{"b.pi"}        = chr(0x03C0);  # GREEK SMALL LETTER PI
+    $ent{"b.rho"}       = chr(0x03C1);  # GREEK SMALL LETTER RHO
+    $ent{"b.sigmav"}    = chr(0x03C2);  # GREEK SMALL LETTER FINAL SIGMA
+    $ent{"b.sigma"}     = chr(0x03C3);  # GREEK SMALL LETTER SIGMA
+    $ent{"b.tau"}       = chr(0x03C4);  # GREEK SMALL LETTER TAU
+    $ent{"b.upsi"}      = chr(0x03C5);  # GREEK SMALL LETTER UPSILON
+    $ent{"b.phis"}      = chr(0x03C6);  # GREEK SMALL LETTER PHI
+    $ent{"b.chi"}       = chr(0x03C7);  # GREEK SMALL LETTER CHI
+    $ent{"b.psi"}       = chr(0x03C8);  # GREEK SMALL LETTER PSI
+    $ent{"b.omega"}     = chr(0x03CE);  # GREEK SMALL LETTER OMEGA WITH TONOS
+    $ent{"b.thetav"}    = chr(0x03D1);  # GREEK THETA SYMBOL
+    $ent{"b.phiv"}      = chr(0x03D5);  # GREEK PHI SYMBOL
+    $ent{"b.piv"}       = chr(0x03D6);  # GREEK PI SYMBOL
+    $ent{"b.gammad"}    = chr(0x03DC);  # GREEK LETTER DIGAMMA
+    $ent{"b.kappav"}    = chr(0x03F0);  # GREEK KAPPA SYMBOL
+    $ent{"b.rhov"}      = chr(0x03F1);  # GREEK RHO SYMBOL
 
 }
 
@@ -2169,10 +2180,12 @@ sub sgml2utf_common {
             $char = chr(hex($1));
         } elsif ($entity =~ /#([0-9]+)/) {
             $char = chr($1);
-        } elsif ($entity =~ /frac([0-9])([0-9]+)$/) {
+        } elsif ($entity =~ /^frac([0-9])([0-9]+)$/) {
             $char = handleFraction($1, $2, $result, $source);
-        } elsif ($entity =~ /frac([0-9]+)-([0-9]+)$/) {
+        } elsif ($entity =~ /^frac([0-9]+)-([0-9]+)$/) {
             $char = handleFraction($1, $2, $result, $source);
+        } elsif ($entity =~ /^time([0-9])([0-9]+)$/) {
+            $char = handleMusicalTime($1, $2);
         } else {
             $char = "&" . $entity . ";";
             print STDERR "ERROR:   unmapped SGML entity: $char\n";
@@ -2194,6 +2207,13 @@ sub handleFraction {
     my $rightBoundary = ($before =~ /^\s/) ? '' : chr(0x200B);
 
     return  $leftBoundary . $numerator . chr(0x2044) . $denominator . $rightBoundary;
+}
+
+sub handleMusicalTime {
+    my $top = shift;
+    my $bottom = shift;
+
+    return  '<ab type="musictime"><ab type="top">' . $top . '</ab><ab type="bottom">' .  $bottom . '</ab></ab>';
 }
 
 
