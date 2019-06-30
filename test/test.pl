@@ -46,8 +46,10 @@ if (-f "opf-metadata.xml") {
 print "Add col and row attributes to tables...\n";
 system ("$saxon test.xml $xsldir/normalize-table.xsl > test-normalized.xml");
 
-system ("$saxon -TP:htmlprofile.html test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
+# system ("$saxon -TP:htmlprofile.html test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
 system ("$saxon -TP:epubprofile.html test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
+
+exit;
 
 # system ("$saxon -T -traceout:htmltrace.txt test-normalized.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
 # system ("$saxon -T -traceout:epubtrace.txt  test-normalized.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");

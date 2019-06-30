@@ -66,7 +66,7 @@
 
                 <!-- Footnotes to div1 elements are found in the last fragment of the div1 -->
                 <xsl:otherwise>
-                    <xsl:value-of select="f:determine-filename($target/ancestor::div1[not(ancestor::q)]/*[position() = last()])"/>
+                    <xsl:value-of select="f:determine-filename(($target/ancestor::div1[not(ancestor::q)]/*)[last()])"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

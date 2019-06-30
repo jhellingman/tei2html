@@ -1244,7 +1244,7 @@ BEGIN {
 
     ## Explicit Directional Embeddings 
     $ent{"lre"}         = chr(0x202A);  # LEFT-TO-RIGHT EMBEDDING
-    $ent{"rlm"}         = chr(0x202B);  # RIGHT-TO-LEFT EMBEDDING
+    $ent{"rle"}         = chr(0x202B);  # RIGHT-TO-LEFT EMBEDDING
     $ent{"lro"}         = chr(0x202D);  # LEFT-TO-RIGHT OVERRIDE
     $ent{"rlo"}         = chr(0x202E);  # RIGHT-TO-LEFT OVERRIDE
     $ent{"pdf"}         = chr(0x200C);  # POP DIRECTIONAL FORMATTING
