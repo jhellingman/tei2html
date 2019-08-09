@@ -511,7 +511,7 @@
 
     <xsl:function name="f:strip_diacritics" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="fn:replace($string, '[&tcomma;&prime;-]', '')"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
         <xsl:value-of select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
     </xsl:function>
 

@@ -894,6 +894,7 @@ BEGIN {
     $ent{"zgr"}         = chr(0x03B6);  #  GREEK SMALL LETTER ZETA
     $ent{"ZHcy"}        = chr(0x0416);  #  CYRILLIC CAPITAL LETTER ZHE
     $ent{"zhcy"}        = chr(0x0436);  #  CYRILLIC SMALL LETTER ZHE
+    $ent{"zwsp"}        = chr(0x200B);  #  ZERO WIDTH SPACE
     $ent{"zwj"}         = chr(0x200D);  #  ZERO WIDTH JOINER
     $ent{"zwnj"}        = chr(0x200C);  #  ZERO WIDTH NON-JOINER
 
@@ -1318,6 +1319,7 @@ BEGIN {
     $ent{"etilde"}      = chr(0x1EBD); # e with tilde
     $ent{"Ytilde"}      = chr(0x1EF8); # Y with tilde
     $ent{"ytilde"}      = chr(0x1EF9); # y with tilde
+    $ent{"ctilde"}      = "c" . chr(0x0303); # c with tilde
 
     $ent{"Ebreve"}      = chr(0x114); # E with breve
     $ent{"ebreve"}      = chr(0x115); # e with breve

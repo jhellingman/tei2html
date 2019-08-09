@@ -184,6 +184,7 @@
         <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
         <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
         <msg:message name="msgLinkToBible">Link to cited location in Bible</msg:message>
+        <msg:message name="msgLinkToQuran">Link to cited location in Quran</msg:message>
         <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
         <msg:message name="msgLinkToMap">Link to location on map</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>

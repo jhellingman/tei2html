@@ -38,6 +38,7 @@
             <xsl:when test="starts-with($url, 'wp:')">wplink</xsl:when>
             <xsl:when test="starts-with($url, 'loc:')">loclink</xsl:when>
             <xsl:when test="starts-with($url, 'bib:')">biblink</xsl:when>
+            <xsl:when test="starts-with($url, 'qur:')">qurlink</xsl:when>
             <xsl:when test="starts-with($url, 'tia:')">tialink</xsl:when>
 
             <xsl:when test="starts-with($url, 'https:')">seclink</xsl:when>
@@ -70,6 +71,7 @@
             <xsl:when test="starts-with($url, 'wp:')"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
             <xsl:when test="starts-with($url, 'loc:')"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
             <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'qur:')"><xsl:value-of select="f:message('msgLinkToQuran')"/></xsl:when>
             <xsl:when test="starts-with($url, 'tia:')"><xsl:value-of select="f:message('msgLinkToInternetArchive')"/></xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
 
@@ -108,6 +110,7 @@
                 <tr><td>tia:<i>[string]</i></td>                <td>Link to an Internet Archive item.</td></tr>
                 <tr><td>loc:<i>[coordinates]</i></td>           <td>Link to a geographical location (currently uses Google Maps).</td></tr>
                 <tr><td>bib:<i>[book ch:vs@version]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
+                <tr><td>qur:<i>[surah:verse]</i></td>           <td>Link to a verse in the Quran (currently uses the quran.com).</td></tr>
                 <tr><td>mailto:<i>[email address]</i></td>      <td>Link to an email address.</td></tr>
             </table>
 
@@ -194,6 +197,18 @@
                 <xsl:text>https://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri($location)"/>
                 <xsl:if test="$version != ''">
                     <xsl:text>&amp;version=</xsl:text><xsl:value-of select="iri-to-uri($version)"/>
+                </xsl:if>
+            </xsl:when>
+
+            <!-- Link to Quran citation -->
+            <xsl:when test="starts-with($url, 'qur:')">
+                <xsl:variable name="location" select="substring-after($url, ':')"/>
+                <xsl:variable name="surah" select="substring-before($location, ':')"/>
+                <xsl:variable name="verse" select="substring-after($location, ':')"/>
+
+                <xsl:text>https://www.quran.com/</xsl:text><xsl:value-of select="iri-to-uri($surah)"/>
+                <xsl:if test="$verse">
+                    <xsl:text>/</xsl:text><xsl:value-of select="iri-to-uri($verse)"/>
                 </xsl:if>
             </xsl:when>
 

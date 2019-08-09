@@ -118,8 +118,8 @@ if ($showHelp) {
     print "    f         Force generation of output file, even if it is newer than input.\n";
     print "    z         Produce ZIP file for Project Guteberg submission (IN DEVELOPMENT).\n";
     print "    q         Print this help and exit.\n";
-    print "    T         Don't use transcription schemes.\n";
-    print "    D         Debug mode.\n";
+    print "    notranscription      Don't use transcription schemes.\n";
+    print "    debug                Debug mode.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -189,7 +189,7 @@ sub processFile($) {
     }
 
     if ($version >= 1.0) {
-        # $makeText = 0;
+        $makeText = 0;
     } else {
         $runChecks = 1;
     }
@@ -856,13 +856,15 @@ sub addTranscriptions($) {
     my $currentFile = shift;
 
     # Check for presence of Greek or Cyrillic
-    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<RUX>\" $currentFile");
+    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<RUX>\\|<SR>\" $currentFile");
     if ($containsGreek == 0) {
         my $tmpFile1 = temporaryFile('greek', '.xml');
         my $tmpFile2 = temporaryFile('greek', '.xml');
         my $tmpFile3 = temporaryFile('greek', '.xml');
         my $tmpFile4 = temporaryFile('greek', '.xml');
         my $tmpFile5 = temporaryFile('greek', '.xml');
+        my $tmpFile6 = temporaryFile('greek', '.xml');
+        my $tmpFile7 = temporaryFile('greek', '.xml');
 
         print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
@@ -870,13 +872,17 @@ sub addTranscriptions($) {
         system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
         system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile3 $tmpFile4");
         system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile4 $tmpFile5");
+        system ("patc -p $patcdir/cyrillic/srt2sgml.pat $tmpFile5 $tmpFile6");
+        system ("patc -p $patcdir/cyrillic/sr2sgml.pat $tmpFile6 $tmpFile7");
 
         $debug || unlink($tmpFile1);
         $debug || unlink($tmpFile2);
         $debug || unlink($tmpFile3);
         $debug || unlink($tmpFile4);
+        $debug || unlink($tmpFile5);
+        $debug || unlink($tmpFile6);
         $debug || unlink($currentFile);
-        $currentFile = $tmpFile5;
+        $currentFile = $tmpFile7;
     }
     return $currentFile;
 }

@@ -384,40 +384,49 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Greek passages.</xd:short>
-        <xd:detail>Use another font for Greek script passages.</xd:detail>
-    </xd:doc>
-
-    <xsl:template match="foreign[@lang='el' or @lang='grc']" mode="#default remove-initial titlePage">
-        <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'Greek')"/>
-            <xsl:apply-templates mode="#current"/>
-        </span>
-    </xsl:template>
-
-    <xd:doc>
-        <xd:short>Arabic passages.</xd:short>
-        <xd:detail>Use another font for Arabic script passages.</xd:detail>
-    </xd:doc>
-
-    <xsl:template match="foreign[@lang='ar']" mode="#default remove-initial titlePage">
-        <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'Arabic')"/>
-            <xsl:apply-templates mode="#current"/>
-        </span>
-    </xsl:template>
-
-    <xd:doc>
         <xd:short>Foreign phrases.</xd:short>
-        <xd:detail>Foreign phrases are not styled by default, but we do set the language on them.</xd:detail>
+        <xd:detail>Foreign phrases are not styled by default, but we do set the language (and script) on them.
+        See <a href="https://en.wikipedia.org/wiki/ISO_15924">ISO-15924</a> for script codes.</xd:detail>
     </xd:doc>
 
     <xsl:template match="foreign" mode="#default remove-initial titlePage">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:set-class-attribute(.)"/>
+
+            <xsl:choose>
+                <xsl:when test="@lang=('ar')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'arab')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('ur', 'fa', 'ps')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'aran')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('as', 'bn')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'beng')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('ru', 'bg', 'sb')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'cyrl')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('hi', 'ma', 'sa')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'deva')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('el', 'grc')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'grek')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('he', 'yi')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'hebr')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('syc')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'syrc')"/>
+                </xsl:when>
+                <xsl:when test="@lang=('tm')">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'taml')"/>
+                </xsl:when>
+
+                <xsl:otherwise>
+                    <xsl:copy-of select="f:set-class-attribute(.)"/>
+                </xsl:otherwise>
+            </xsl:choose>
+
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>

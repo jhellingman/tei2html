@@ -62,6 +62,7 @@ sub handleParagraph($) {
         $paragraph =~ s/<CY>(.*?)<\/CY>/<choice><orig><CY>\1<\/CY><\/orig><reg type=\"trans\"><CYT>\1<\/CYT><\/reg><\/choice>/g;
         $paragraph =~ s/<RU>(.*?)<\/RU>/<choice><orig><RU>\1<\/RU><\/orig><reg type=\"trans\"><RUT>\1<\/RUT><\/reg><\/choice>/g;
         $paragraph =~ s/<RUX>(.*?)<\/RUX>/<choice><orig><RUX>\1<\/RUX><\/orig><reg type=\"trans\"><RUXT>\1<\/RUXT><\/reg><\/choice>/g;
+        $paragraph =~ s/<SR>(.*?)<\/SR>/<choice><orig><SR>\1<\/SR><\/orig><reg type=\"trans\"><SRT>\1<\/SRT><\/reg><\/choice>/g;
     }
 
     return $paragraph;
