@@ -745,7 +745,7 @@ sub reportWord($$) {
 
     # Count how many times a word with this frequency occurs:
     $countCountHash{$count}++;
-    
+
     my $compoundWord = "";
     my $known = isKnownWord($word, $language);
     if ($known == 0) {
@@ -1497,32 +1497,34 @@ sub StripDiacritics($) {
     my $string = shift;
 
     for ($string) {
-        $_ = NFD($_);       ##  decompose (Unicode Normalization Form D)
-        s/\pM//g;           ##  strip combining characters
+        $_ = NFD($_);       ## decompose (Unicode Normalization Form D)
+        s/\pM//g;           ## strip combining characters
 
         # additional normalizations: (see https://en.wikipedia.org/wiki/Typographic_ligature)
-        s/\x{00df}/ss/g;    ##  German eszet “ß” -> “ss”
-        s/\x{1E9E}/SS/g;    ##  German capital eszet “ß” -> “SS”
-        s/\x{00c6}/AE/g;    ##  Æ
-        s/\x{00e6}/ae/g;    ##  æ
-        s/\x{0132}/IJ/g;    ##  Dutch IJ
-        s/\x{0133}/ij/g;    ##  Dutch ij
-        s/\x{0152}/OE/g;    ##  Œ
-        s/\x{0153}/oe/g;    ##  œ
+        s/\x{00df}/ss/g;    ## German eszet “ß” -> “ss”
+        s/\x{1E9E}/SS/g;    ## German capital eszet “ß” -> “SS”
+        s/\x{00c6}/AE/g;    ## Æ
+        s/\x{00e6}/ae/g;    ## æ
+        s/\x{0132}/IJ/g;    ## Dutch IJ
+        s/\x{0133}/ij/g;    ## Dutch ij
+        s/\x{0152}/OE/g;    ## Œ
+        s/\x{0153}/oe/g;    ## œ
 
-        s/\x{A734}/AO/g;   ##  Ligature AO
-        s/\x{A735}/ao/g;   ##  ligature ao
+        s/\x{A734}/AO/g;    ## Ligature AO
+        s/\x{A735}/ao/g;    ## ligature ao
 
-        s/\x{1EFA}/LL/g;   ##  ligature Ll (older Welsh)
-        s/\x{1EFB}/ll/g;   ##  Ligature ll (older Welsh)
+        s/\x{1EFA}/LL/g;    ## ligature Ll (older Welsh)
+        s/\x{1EFB}/ll/g;    ## Ligature ll (older Welsh)
 
-        s/\x{00AD}//g;          ## soft-hyphen
-        s/\x{2032}//g;          ## prime
-        s/`//g;                 ## back-tick
-        s/\x{02bb}//g;          ## 'Okina (Hawaiian glottal stop)
-        s/\x{02bc}//g;          ## Modifier letter apostrophe
-        s/\x{02bf}//g;          ## Modifier letter left half ring (Ayin)
-        s/\x{02be}//g;          ## Modifier letter right half ring (Hamza)
+        s/\x{00AD}//g;      ## soft-hyphen
+        s/\x{2032}//g;      ## prime
+        s/`//g;             ## back-tick
+        s/\x{02bb}//g;      ## 'Okina (Hawaiian glottal stop)
+        s/\x{02bc}//g;      ## Modifier letter apostrophe
+        s/\x{02bf}//g;      ## Modifier letter left half ring (Ayin)
+        s/\x{02be}//g;      ## Modifier letter right half ring (Hamza)
+
+        s/\x{0640}//g;      ## Arabic tatweel
 
         tr/\x{00d0}\x{0110}\x{00f0}\x{0111}\x{0126}\x{0127}/DDddHh/; # ÐÐðdHh
         tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/; # i??L?l

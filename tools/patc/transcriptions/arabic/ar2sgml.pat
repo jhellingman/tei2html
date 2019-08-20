@@ -15,6 +15,7 @@
 @rpatterns 1
 
 "&"         2 "&"           % copy entity.
+"<"         3 "<"           % copy tag.
 
 "</AR>"     0 "&lrm;</foreign>"
 "<AR>"      e "<AR> om Arabic mode!!!"
@@ -58,45 +59,45 @@
 
 "b"         p "&#x0628;"    % ARABIC LETTER BEH
 "=b"        p "&#x0628;"    %
-"0b"        p "&#x0628;"    % dotless b -> U+066E ARABIC LETTER DOTLESS BEH
+"0b"        p "&#x066E;"    % dotless b -> U+066E ARABIC LETTER DOTLESS BEH
 
 "t"         p "&#x062A;"    % ARABIC LETTER TEH
-"0t"        p "&#x062A;"    % dotless t -> U+066E ARABIC LETTER DOTLESS BEH
+"0t"        p "&#x066E;"    % dotless t -> U+066E ARABIC LETTER DOTLESS BEH
 
 "th"        p "&#x062B;"    % ARABIC LETTER THEH
-"0th"       p "&#x062B;"    % dotless th -> U+066E ARABIC LETTER DOTLESS BEH
+"0th"       p "&#x066E;"    % dotless th -> U+066E ARABIC LETTER DOTLESS BEH
 
 "p"         p "&#x067E;"    % ARABIC LETTER PEH
-"0p"        p "&#x067E;"    % dotless p -> U+066E ARABIC LETTER DOTLESS BEH
+"0p"        p "&#x066E;"    % dotless p -> U+066E ARABIC LETTER DOTLESS BEH
 
 "j"         p "&#x062C;"    % ARABIC LETTER JEEM
-"0j"        p "&#x062C;"    % dotless j -> U+062D ARABIC LETTER HAH
+"0j"        p "&#x062D;"    % dotless j -> U+062D ARABIC LETTER HAH
 
 "H"         p "&#x062D;"    % ARABIC LETTER HAH
 
 "kh"        p "&#x062E;"    % ARABIC LETTER KHAH
-"0kh"       p "&#x062E;"    % dotless kh -> U+062D ARABIC LETTER HAH
+"0kh"       p "&#x062D;"    % dotless kh -> U+062D ARABIC LETTER HAH
 
 "ch"        p "&#x0686;"    % ARABIC LETTER TCHEH
-"0ch"       p "&#x0686;"    % dotless ch -> U+062D ARABIC LETTER HAH
+"0ch"       p "&#x062D;"    % dotless ch -> U+062D ARABIC LETTER HAH
 
 "d"         p "&#x062F;"    % ARABIC LETTER DAL
 
 "dh"        p "&#x0630;"    % ARABIC LETTER THAL
-"0dh"       p "&#x0630;"    % dotless dh -> U+062F ARABIC LETTER DAL
+"0dh"       p "&#x062F;"    % dotless dh -> U+062F ARABIC LETTER DAL
 
 "r"         p "&#x0631;"    % ARABIC LETTER REH
 
 "z"         p "&#x0632;"    % ARABIC LETTER ZAIN
-"0z"        p "&#x0632;"    % dotless z -> U+0631 ARABIC LETTER REH
+"0z"        p "&#x0631;"    % dotless z -> U+0631 ARABIC LETTER REH
 
 "zh"        p "&#x0698;"    % ARABIC LETTER JEH
-"0zh"       p "&#x0698;"    % dotless zh -> U+0631 ARABIC LETTER REH
+"0zh"       p "&#x0631;"    % dotless zh -> U+0631 ARABIC LETTER REH
 
 "s"         p "&#x0633;"    % ARABIC LETTER SEEN
 
 "sh"        p "&#x0634;"    % ARABIC LETTER SHEEN
-"0sh"       p "&#x0634;"    % dotless sh -> U+0633 ARABIC LETTER SEEN
+"0sh"       p "&#x0633;"    % dotless sh -> U+0633 ARABIC LETTER SEEN
 
 "*sh"       p "&#x069C;"    % ARABIC LETTER SEEN WITH THREE DOTS BELOW AND THREE DOTS ABOVE
 
@@ -105,26 +106,26 @@
 "*S"        P "&#x069E;"    % ARABIC LETTER SAD WITH THREE DOTS ABOVE
 
 "D"         p "&#x0636;"    % ARABIC LETTER DAD
-"0D"        p "&#x0636;"    % dotless D -> U+0635 ARABIC LETTER SAD
+"0D"        p "&#x0635;"    % dotless D -> U+0635 ARABIC LETTER SAD
 
 "T"         p "&#x0637;"    % ARABIC LETTER TAH
 
 "Z"         p "&#x0638;"    % ARABIC LETTER ZAH
-"0Z"        p "&#x0638;"    % dotless Z -> U+0637 ARABIC LETTER TAH
+"0Z"        p "&#x0637;"    % dotless Z -> U+0637 ARABIC LETTER TAH
 
 "`"         p "&#x0639;"    % ARABIC LETTER AIN
 
 "gh"        p "&#x063A;"    % ARABIC LETTER GHAIN
-"0gh"       p "&#x063A;"    % dotless gh -> U+063A ARABIC LETTER AIN
+"0gh"       p "&#x0639;"    % dotless gh -> U+0639 ARABIC LETTER AIN
 
 "f"         p "&#x0641;"    % ARABIC LETTER FEH
 "=f"        p "&#x0641;"    %
-"0f"        p "&#x0641;"    % dotless f -> U+06A1 ARABIC LETTER DOTLESS FEH
+"0f"        p "&#x06A1;"    % dotless f -> U+06A1 ARABIC LETTER DOTLESS FEH
 "*f"        p "&#x06A2;"    % ARABIC LETTER FEH WITH DOT MOVED BELOW
 
 "q"         p "&#x0642;"    % ARABIC LETTER QAF
 "=q"        p "&#x0642;"    %
-"0q"        p "&#x0642;"    % dotless q -> U+066F ARABIC LETTER DOTLESS QAF
+"0q"        p "&#x066F;"    % dotless q -> U+066F ARABIC LETTER DOTLESS QAF
 "*q"        p "&#x06A7;"    % ARABIC LETTER QAF WITH DOT ABOVE
 "*Q"        p "&#x06A8;"    % ARABIC LETTER QAF WITH THREE DOTS ABOVE
 
@@ -141,7 +142,7 @@
 
 "n"         p "&#x0646;"    % ARABIC LETTER NOON
 "=n"        p "&#x0646;"    %
-"0n"        p "&#x0646;"    % dotless n -> U+06BA ARABIC LETTER NOON GHUNNA
+"0n"        p "&#x06BA;"    % dotless n -> U+06BA ARABIC LETTER NOON GHUNNA
 "'n"        p "&#x06BA;"    % ARABIC LETTER NOON GHUNNA    Urdu: noon ghunna. (nuun without dot)
 
 "h"         p "&#x0647;"    % ARABIC LETTER HEH                 normally typed as -h except when initial
@@ -149,7 +150,7 @@
 "'h"        p "&#x06BE;"    % ARABIC LETTER HEH DOACHASHMEE     Urdu: do-chasmi heh.
 
 "\"h"       p "&#x0629;"    % ARABIC LETTER TEH MARBUTA
-"0\"h"      p "&#x0629;"    % dotless teh marbuta -> ? U+06C1 ARABIC LETTER HEH GOAL
+"0\"h"      p "&#x06C1;"    % dotless teh marbuta -> ? U+06C1 ARABIC LETTER HEH GOAL
 "\"t"       p "&#x0629;"    %
 "0\"t"      p "&#x0629;"    %
 
@@ -163,7 +164,7 @@
 "'u"        p "&#x0624;"    % ARABIC LETTER WAW WITH HAMZA ABOVE
 "I"         p "&#x0649;"    % ARABIC LETTER ALEF MAKSURA
 "y"         p "&#x064A;"    % ARABIC LETTER YEH
-"0y"        p "&#x064A;"    % dotless y -> U+649 ARABIC LETTER ALEF MAKSURA
+"0y"        p "&#x0649;"    % dotless y -> U+0649 ARABIC LETTER ALEF MAKSURA
 "'y"        p "&#x0626;"    % ARABIC LETTER YEH WITH HAMZA ABOVE
 "||"        p "&#x0621;"    % ARABIC LETTER HAMZA
 
@@ -227,7 +228,14 @@
 
 " "         e "space in entity!"
 
+"</AR>"     e "</AR> in copy-entity mode!"
+"</ARA>"    e "</ARA> in copy-entity mode!"
+
+@patterns 3 % copy tag in Arabic mode
+
+">"         1 ">"
+
+"</AR>"     e "</AR> in copy-tag mode!"
+"</ARA>"    e "</ARA> in copy-tag mode!"
+
 @end
-
-
-

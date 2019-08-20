@@ -9,6 +9,7 @@
 @rpatterns 1
 
 "&"			2 "&"		% copy entity.
+"<"         3 "<"       % copy tag.
 
 "</AR>"		0 "</AR>"
 "<AR>"		e "<AR> in Arabic mode!!!"
@@ -165,5 +166,14 @@
 
 " "			e "space in entity!!!"
 
-@end
+"</AR>"     e "</AR> in copy-entity mode!"
+"</ARA>"    e "</ARA> in copy-entity mode!"
 
+@patterns 3 % copy tag in Arabic mode
+
+">"         1 ">"
+
+"</AR>"     e "</AR> in copy-tag mode!"
+"</ARA>"    e "</ARA> in copy-tag mode!"
+
+@end
