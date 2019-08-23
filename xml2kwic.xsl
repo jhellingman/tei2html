@@ -150,12 +150,21 @@
                         font-variant: small-caps;
                     }
 
+                    .asc {
+                        font-variant: small-caps;
+                        text-transform: lowercase;
+                    }
+
                     .uc {
                         text-transform: uppercase;
                     }
 
                     .ex {
                         letter-spacing: 0.2em;
+                    }
+
+                    .tt {
+                        font-family: monospace;
                     }
 
                     .var2 {
@@ -477,8 +486,10 @@
             <xsl:when test="@style = 'sub'"><sub><xsl:value-of select="."/></sub></xsl:when>
 
             <xsl:when test="@style = 'sc'"><span class="sc"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@style = 'asc'"><span class="asc"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'uc'"><span class="uc"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'ex'"><span class="ex"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@style = 'tt'"><span class="tt"><xsl:value-of select="."/></span></xsl:when>
 
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
@@ -587,6 +598,8 @@
                 <xsl:when test="$rend = 'ex'">ex</xsl:when>
                 <xsl:when test="$rend = 'uc'">uc</xsl:when>
                 <xsl:when test="$rend = 'sc'">sc</xsl:when>
+                <xsl:when test="$rend = 'asc'">asc</xsl:when>
+                <xsl:when test="$rend = 'tt'">tt</xsl:when>
                 <xsl:otherwise>i</xsl:otherwise>
             </xsl:choose>
         </xsl:if>

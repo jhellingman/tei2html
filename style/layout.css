@@ -157,6 +157,11 @@ span.measure {
     font-variant: small-caps;
 }
 
+.asc {
+    font-variant: small-caps;
+    text-transform: lowercase;
+}
+
 .uc {
     text-transform: uppercase;
 }

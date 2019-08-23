@@ -153,6 +153,11 @@ span.measure {
  font-variant: small-caps;
 }
 
+.asc {
+ font-variant: small-caps;
+ text-transform: lowercase;
+}
+
 .uc {
  text-transform: uppercase;
 }
@@ -425,6 +430,27 @@ p.smallprint, li.smallprint, .par.smallprint {
  color: #666666;
  font-size: 80%;
 }
+
+
+ 
+
+span.musictime {
+ vertical-align: middle;
+ display: inline-block;
+ text-align: center;
+}
+
+span.musictime, span.musictime span.top, span.musictime span.bottom {
+ padding: 1px 0.5px;
+ font-size: xx-small;
+ font-weight: bold;
+ line-height: 0.7em;
+}
+
+span.musictime span.bottom {
+ display: block;
+}
+
 
  
 ul {
@@ -1067,7 +1093,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd33e565 {
+.xd33e575 {
 text-align:right;
 }
 
@@ -1087,7 +1113,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd33e976 {
+.xd33e986 {
 background-color:green;
 }
 
@@ -1103,7 +1129,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd33e977 {
+.xd33e987 {
 background-color:white;
 }
 
@@ -1115,35 +1141,35 @@ font-style:italic;
 background-color:yellow;
 }
 
-.xd33e149 {
+.xd33e159 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd33e162 {
+.xd33e171 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
-.xd33e397 {
+.xd33e407 {
 text-align:left;
 }
 
-.xd33e400 {
+.xd33e410 {
 text-align:right;
 }
 
-.xd33e402 {
+.xd33e412 {
 text-align:center;
 }
 
 
-.xd33e404 {
+.xd33e414 {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd33e404init {
+.xd33e414init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1157,11 +1183,11 @@ text-align:center;
 }
 
         
-.xd33e412 {
+.xd33e422 {
 text-align:justify;
 }
 
-.xd33e427 {
+.xd33e437 {
 text-align:center;
 }
 
@@ -1169,7 +1195,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd33e531 {
+.xd33e541 {
 text-align:right;
 }
 
@@ -1177,11 +1203,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd33e708 {
+.xd33e718 {
 vertical-align:middle; width:2px;
 }
 
-.xd33e709 {
+.xd33e719 {
 vertical-align:middle;
 }
 
@@ -1189,11 +1215,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd33e720 {
+.xd33e730 {
 width:25%;
 }
 
-.xd33e722 {
+.xd33e732 {
 width:75%;
 }
 
@@ -1213,11 +1239,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd33e838 {
+.xd33e848 {
 color:red;
 }
 
-.xd33e858 {
+.xd33e868 {
 color:yellow; background-color:black;
 }
 
@@ -1229,28 +1255,20 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd33e1007 {
+.xd33e1017 {
 background-color:yellow;
 }
 
-.xd33e1025 {
+.xd33e1035 {
 background-color:blue;
 }
 
-.xd33e1034 {
+.xd33e1044 {
 background-color:orange;
 }
 
-.xd33e1044 {
+.xd33e1054 {
 background-color:red;
-}
-
-.xd33e1104 {
-ditto-mark:+;
-}
-
-.demoDitto2 {
-ditto-mark:»;
 }
 
 .figTest1width {
@@ -1277,51 +1295,51 @@ width:480px;
 width:480px;
 }
 
-.xd33e1229width {
+.xd33e1243width {
 width:480px;
 }
 
-.xd33e1248 {
+.xd33e1262 {
 font-style:italic;
 }
 
-.xd33e1272 {
+.xd33e1286 {
 list-style-type:disc;
 }
 
-.xd33e1288 {
+.xd33e1302 {
 list-style-type:upper-roman;
 }
 
-.xd33e1297 {
+.xd33e1311 {
 list-style-type:lower-roman;
 }
 
-.xd33e1310 {
+.xd33e1324 {
 list-style-type:disc;
 }
 
-.xd33e1322 {
+.xd33e1336 {
 list-style-type:disc;
 }
 
-.xd33e1391 {
+.xd33e1405 {
 text-align:center;
 }
 
-.xd33e1396 {
+.xd33e1410 {
 text-indent:1em;
 }
 
-.xd33e1402 {
+.xd33e1416 {
 text-indent:2em;
 }
 
-.xd33e1406 {
+.xd33e1420 {
 text-indent:3em;
 }
 
-.xd33e1410 {
+.xd33e1424 {
 text-indent:10em;
 }
 
@@ -1343,12 +1361,12 @@ display:none;
 @media handheld {
 
 
-.xd33e404 {
+.xd33e414 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd33e404init {
+.xd33e414init {
     float: none;
     width: auto;
     height: auto;
@@ -1363,6 +1381,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd33e1583 {
+.xd33e1597 {
 color:red
 }

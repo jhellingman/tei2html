@@ -13,7 +13,8 @@ my $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);"
 
 my $tagPattern = "<[^<]*?>";
 my $transPattern = "<(AR|CY|GR|SA|UR)>.*?<[/](AR|CY|GR|SA|UR)>";
-my $skipPattern = "(($transPattern)|($tagPattern))";
+my $formulaPattern = "<formula.*?>.*?<[/]formula>";
+my $skipPattern = "(($transPattern)|($formulaPattern)|($tagPattern))";
 
 curlyQuoteText();
 

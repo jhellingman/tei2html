@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2019-04-04T18:46:01Z</meta>
+      <meta property="dcterms:modified">2019-08-23T21:26:12Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -100,16 +100,17 @@
       <item id="hg2101" href="images/hg2101.png" media-type="image/png"/>
       <item id="figTest1" href="images/test.jpg" media-type="image/jpeg"/>
       <item id="tarsier1" href="images/tarsier.jpg" media-type="image/jpeg"/>
+      <item id="grasses" href="images/p081.png" media-type="image/png"/>
       <item id="figTest4" href="images/figTest4.jpg" media-type="image/jpeg"/>
       <item id="figTest5" href="images/figTest5.jpg" media-type="image/jpeg"/>
-      <item id="xd33e404" href="images/initial-A.png" media-type="image/png"/>
-      <item id="xd33e470" href="images/Ornament.png" media-type="image/png"/>
-      <item id="xd33e708" href="images/bracket3.png" media-type="image/png"/>
+      <item id="xd33e414" href="images/initial-A.png" media-type="image/png"/>
+      <item id="xd33e480" href="images/Ornament.png" media-type="image/png"/>
+      <item id="xd33e718" href="images/bracket3.png" media-type="image/png"/>
       <item id="figTest2wrapper"
             href="test-figTest2.xhtml"
             media-type="application/xhtml+xml"/>
       <item id="ch01overlay" href="test.smil" media-type="application/smil+xml"/>
-      <item id="xd52e11" href="audio/test.mp3" media-type="audio/mpeg"/>
+      <item id="xd190e11" href="audio/test.mp3" media-type="audio/mpeg"/>
       <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
       <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
       <item id="tn3" href="images/thumbs/hg2101.png" media-type="image/png"/>

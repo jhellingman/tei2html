@@ -143,7 +143,7 @@
 <head type="label">Chapter I</head>
 <head>Inline Text Elements</head>
 
-<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb2" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi>, some <hi rend="font(fraktur)">fraktur</hi>, and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure id="hg2101" rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
+<p rend="class(dropcap)">This is a sample paragraph, with<pb id="pb2" n="2"/> some <hi rend="italic">italic</hi> and <hi rend="bold">bold</hi> text. We continue the test with some <hi rend="sc">Small Caps</hi> and, in contrast, some <hi rend="asc">All Small Caps</hi> used for acronyms such as <hi rend="asc">HTML</hi> or abbreviations as <hi rend="asc">P.M.</hi>; some <hi rend="font(fraktur)">fraktur</hi>; and some <hi rend="ex">letterspaced</hi> text.<note place="foot" n="*">This is a footnote with some <hi rend="italic">italics</hi>.</note> As you can see, the preceding sentence is followed by a footnote. <hi rend="font-size(14pt) color(red) background-color(yellow)">We can <hi rend="uc">shout</hi> in big red letters.</hi> We also have a reference to the <ref target="ch05">next chapter</ref>. It is very well possible to include some text in hieroglyphs, <figure id="hg2101" rend="position(inline) image(images/hg2101.png)"><figDesc>Inline Hieroglyphs</figDesc></figure> using in-line images as shown here.</p>
 
 <table id="tableStyles">
 <row><cell><hi>&quickbrown;</hi>                </cell><cell>Italic</cell></row>
@@ -863,6 +863,19 @@
     <p rend="position(figBottomRight)">A very long piece of text in the bottom right to test its behaviour.</p>
 
     <figDesc>A picture of the Philippine tarsier in a tree.</figDesc>
+</figure>
+
+
+<figure id="grasses" rend="image(images/p081.png)">
+    <head>Some grasses.</head>
+
+    <p rend="position(figOverlay)">I. Trilgras. 
+	II. Reukgras.
+	III. Dravik.
+	IV. Timothee.
+	V. Mannagras.
+	VI. Witbol.
+	VII. Struisgras.</p>
 </figure>
 
 

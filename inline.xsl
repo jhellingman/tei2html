@@ -263,7 +263,7 @@
         </sub>
     </xsl:template>
 
-    <!-- Mapped to defined CSS classes: sc = small caps; uc = upper case; ex = letterspaced; rm = roman; tt = typewriter type -->
+    <!-- Mapped to defined CSS classes: sc = small caps; asc = all small caps; uc = upper case; ex = letterspaced; rm = roman; tt = typewriter type -->
 
     <xd:doc>
         <xd:short>Caps and small-caps text.</xd:short>
@@ -272,6 +272,18 @@
 
     <xsl:template match="hi[@rend='sc'] | sc" mode="#default remove-initial titlePage">
         <span class="sc">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </span>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>All small-caps text.</xd:short>
+        <xd:detail>All small-caps text, indicated with the <code>@rend</code> attribute value <code>asc</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='asc'] | asc" mode="#default remove-initial titlePage">
+        <span class="asc">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>

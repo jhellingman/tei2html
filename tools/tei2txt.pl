@@ -1097,6 +1097,7 @@ sub entities2iso88591($) {
     $a =~ s/\&hellip;/.../g;
     $a =~ s/\&thinsp;/ /g;
     $a =~ s/\&nbsp;/ /g;
+    $a =~ s/\&zwsp;//g;
     $a =~ s/\&pound;/£/g;
     $a =~ s/\&dollar;/\$/g;
     $a =~ s/\&deg;/°/g;
