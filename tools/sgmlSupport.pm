@@ -899,6 +899,44 @@ BEGIN {
     $ent{"zwnj"}        = chr(0x200C);  #  ZERO WIDTH NON-JOINER
 
 
+    # Vietnamese
+
+    $ent{"Ohorn"}        = chr(0x01A0);  #  LATIN CAPITAL LETTER O WITH HORN
+    $ent{"ohorn"}        = chr(0x01A1);  #  LATIN SMALL LETTER O WITH HORN
+    $ent{"Ohogr"}        = chr(0x1EDC);  #  LATIN CAPITAL LETTER O WITH HORN AND GRAVE
+    $ent{"ohogr"}        = chr(0x1EDD);  #  LATIN SMALL LETTER O WITH HORN AND GRAVE
+    $ent{"Ohoac"}        = chr(0x1EDA);  #  LATIN CAPITAL LETTER O WITH HORN AND ACUTE
+    $ent{"ohoac"}        = chr(0x1EDB);  #  LATIN SMALL LETTER O WITH HORN AND ACUTE
+    $ent{"Ohohk"}        = chr(0x1EDE);  #  LATIN CAPITAL LETTER O WITH HORN AND HOOK ABOVE
+    $ent{"ohohk"}        = chr(0x1EDF);  #  LATIN SMALL LETTER O WITH HORN AND HOOK ABOVE
+    $ent{"Ohotl"}        = chr(0x1EE0);  #  LATIN CAPITAL LETTER O WITH HORN AND TILDE
+    $ent{"ohotl"}        = chr(0x1EE1);  #  LATIN SMALL LETTER O WITH HORN AND TILDE
+    $ent{"Ohodb"}        = chr(0x1EE2);  #  LATIN CAPITAL LETTER O WITH HORN AND DOT BELOW
+    $ent{"ohodb"}        = chr(0x1EE3);  #  LATIN SMALL LETTER O WITH HORN AND DOT BELOW
+
+    $ent{"Uhorn"}        = chr(0x01AF);  #  LATIN CAPITAL LETTER U WITH HORN
+    $ent{"uhorn"}        = chr(0x01B0);  #  LATIN SMALL LETTER U WITH HORN
+    $ent{"Uhogr"}        = chr(0x1EEA);  #  LATIN CAPITAL LETTER U WITH HORN AND GRAVE
+    $ent{"uhogr"}        = chr(0x1EEB);  #  LATIN SMALL LETTER U WITH HORN AND GRAVE
+    $ent{"Uhoac"}        = chr(0x1EE8);  #  LATIN CAPITAL LETTER U WITH HORN AND ACUTE
+    $ent{"uhoac"}        = chr(0x1EE9);  #  LATIN SMALL LETTER U WITH HORN AND ACUTE
+    $ent{"Uhohk"}        = chr(0x1EEC);  #  LATIN CAPITAL LETTER U WITH HORN AND HOOK ABOVE
+    $ent{"uhohk"}        = chr(0x1EED);  #  LATIN SMALL LETTER U WITH HORN AND HOOK ABOVE
+    $ent{"Uhotl"}        = chr(0x1EEE);  #  LATIN CAPITAL LETTER U WITH HORN AND TILDE
+    $ent{"uhotl"}        = chr(0x1EEF);  #  LATIN SMALL LETTER U WITH HORN AND TILDE
+    $ent{"Uhodb"}        = chr(0x1EF0);  #  LATIN CAPITAL LETTER U WITH HORN AND DOT BELOW
+    $ent{"uhodb"}        = chr(0x1EF1);  #  LATIN SMALL LETTER U WITH HORN AND DOT BELOW
+
+    $ent{"Abrgr"}        = chr(0x1EB0);  #  LATIN CAPITAL LETTER A WITH BREVE AND GRAVE
+    $ent{"abrgr"}        = chr(0x1EB1);  #  LATIN SMALL LETTER A WITH BREVE AND GRAVE
+
+    $ent{"Acihk"}        = chr(0x1EA8);  #  LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE
+    $ent{"acihk"}        = chr(0x1EA9);  #  LATIN SMALL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE
+
+    $ent{"Ocihk"}        = chr(0x1ED4);  #  LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
+    $ent{"ocihk"}        = chr(0x1ED5);  #  LATIN SMALL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
+
+
     ###############################################################################
     ## GREEK ENTITIES REMAPPED:
 

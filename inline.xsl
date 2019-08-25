@@ -404,44 +404,30 @@
     <xsl:template match="foreign" mode="#default remove-initial titlePage">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-
-            <xsl:choose>
-                <xsl:when test="@lang=('ar')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'arab')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('ur', 'fa', 'ps')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'aran')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('as', 'bn')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'beng')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('ru', 'bg', 'sb')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'cyrl')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('hi', 'ma', 'sa')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'deva')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('el', 'grc')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'grek')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('he', 'yi')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'hebr')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('syc')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'syrc')"/>
-                </xsl:when>
-                <xsl:when test="@lang=('tm')">
-                    <xsl:copy-of select="f:set-class-attribute-with(., 'taml')"/>
-                </xsl:when>
-
-                <xsl:otherwise>
-                    <xsl:copy-of select="f:set-class-attribute(.)"/>
-                </xsl:otherwise>
-            </xsl:choose>
-
+            <xsl:variable name="script" select="f:map-language-to-script(@lang)"/>
+            <xsl:copy-of select="if ($script) 
+                                 then f:set-class-attribute-with(., $script) 
+                                 else f:set-class-attribute(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
+
+
+    <xsl:function name="f:map-language-to-script" as="xs:string?">
+        <xsl:param name="lang" as="xs:string?"/>
+        <xsl:choose>
+            <xsl:when test="$lang=('ar')">arab</xsl:when>
+            <xsl:when test="$lang=('ur', 'fa', 'ps')">aran</xsl:when>
+            <xsl:when test="$lang=('as', 'bn')">beng</xsl:when>
+            <xsl:when test="$lang=('ru', 'bg', 'sb')">cyrl</xsl:when>
+            <xsl:when test="$lang=('hi', 'ma', 'sa')">deva</xsl:when>
+            <xsl:when test="$lang=('el', 'grc')">grek</xsl:when>
+            <xsl:when test="$lang=('he', 'yi')">hebr</xsl:when>
+            <xsl:when test="$lang=('syc')">syrc</xsl:when>
+            <xsl:when test="$lang=('tm')">taml</xsl:when>
+            <xsl:otherwise></xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 
     <!--====================================================================-->

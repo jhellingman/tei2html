@@ -11,6 +11,12 @@
 "<URA>"     1 ""
 "</URA>"    e "</URA> in Roman mode!"
 
+"<FA>"      1 "<foreign lang=fa>"
+"</FA>"     e "</FA> in Roman mode!"
+
+"<FAA>"     1 ""
+"</FAA>"    e "</FAA> in Roman mode!"
+
 
 @rpatterns 1
 
@@ -18,10 +24,17 @@
 "<"         3 "<"           % copy tag.
 
 "</UR>"     0 "&lrm;</foreign>"
-"<UR>"      e "<UR> om Arabic (Urdu) mode!!!"
+"<UR>"      e "<UR> om Arabic (Urdu/Farsi) mode!!!"
 
 "</URA>"    0 "&lrm;"
-"<URA>"     e "<URA> om Arabic (Urdu) mode!!!"
+"<URA>"     e "<URA> om Arabic (Urdu/Farsi) mode!!!"
+
+"</FA>"     0 "&lrm;</foreign>"
+"<FA>"      e "<FA> om Arabic (Urdu/Farsi) mode!!!"
+
+"</FAA>"    0 "&lrm;"
+"<FAA>"     e "<FAA> om Arabic (Urdu/Farsi) mode!!!"
+
 
 "-"         f               % hyphen disambiguates encoding, should disappear
 "--"        p "&mdash;"
@@ -231,6 +244,8 @@
 
 "</UR>"     e "</UR> in copy-entity mode!"
 "</URA>"    e "</URA> in copy-entity mode!"
+"</FA>"     e "</FA> in copy-entity mode!"
+"</FAA>"    e "</FAA> in copy-entity mode!"
 
 @patterns 3 % copy tag in Arabic mode
 
@@ -238,5 +253,7 @@
 
 "</UR>"     e "</UR> in copy-tag mode!"
 "</URA>"    e "</URA> in copy-tag mode!"
+"</FA>"     e "</FA> in copy-tag mode!"
+"</FAA>"    e "</FAA> in copy-tag mode!"
 
 @end

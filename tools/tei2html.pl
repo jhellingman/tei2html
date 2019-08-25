@@ -835,6 +835,7 @@ sub transcribe($) {
 
         $currentFile = transcribeNotation($currentFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
         $currentFile = transcribeNotation($currentFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, "<FA>",  "Farsi",                 "$patcdir/arabic/ur2sgml.pat");
         $currentFile = transcribeNotation($currentFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
         $currentFile = transcribeNotation($currentFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
         $currentFile = transcribeNotation($currentFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
