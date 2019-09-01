@@ -402,6 +402,42 @@
 
 
     <xd:doc>
+        <xd:short>Output a match (in right-to-left script).</xd:short>
+        <xd:detail>Output an HTML table-row for a match, using special processing to deal with bidirectional text.</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="output" match="k:match[k:word/k:w/@dir='rtl']">
+        <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
+
+        <tr>
+            <xsl:if test="@inIndex = 'true'">
+                <xsl:attribute name="class" select="'ix'"/>
+            </xsl:if>
+            <td class="pre">
+                <xsl:apply-templates mode="drop-rtl-at-end" select="k:preceding"/>
+                <xsl:apply-templates mode="copy-rtl-at-start" select="k:following"/>
+            </td>
+            <td class="match var{index-of($variants, string(k:word))}">
+                <xsl:apply-templates mode="#current" select="k:word"/>
+            </td>
+            <td class="post">
+                <xsl:apply-templates mode="copy-rtl-at-end" select="k:preceding"/>
+                <xsl:apply-templates mode="drop-rtl-at-start" select="k:following"/>
+            </td>
+            <td class="pn">
+                <xsl:value-of select="@page"/>
+            </td>
+            <xsl:if test="@xml:lang != $defaultlang">
+                <td class="lang">
+                    <xsl:value-of select="@xml:lang"/>
+                </td>
+            </xsl:if>
+        </tr>
+
+    </xsl:template>
+
+
+    <xd:doc>
         <xd:short>Output font styles.</xd:short>
     </xd:doc>
 
@@ -417,6 +453,96 @@
     <xsl:template mode="output" match="span">
         <span class="{@class}"><xsl:value-of select="."/></span>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Reorder multi-directional scripts.</xd:short>
+        <xd:detail>
+            <p>Reorder multi-directional scripts, such that the display order is correct. Based on
+            the idea presented in the article <hi><a href="https://www.sketchengine.eu/wp-content/uploads/2015/03/Displaying_Bidirectional_Text_2007.pdf">Displaying Bidirectional Text Concordances in KWICformat</a></hi>.</p>
+
+            <p>The normal assumption here is that the text runs from left to right (e.g. Latin script); we also assume that a single word is either RTL or LTR.</p>
+
+            <ol>
+                <li>If the keyword contains no right-to-left (RTL) characters, no further processing is needed.</li>
+                <li>Find a sequence of RTL tokens from the end of the preceding context, and remove it.</li>
+                <li>Find a sequence of RTL tokens from the beginning of the following context, and remove it.</li>
+                <li>Move the stripped sequences to the opposite side of the opposite context.</li>
+            </ol>
+
+            <p>This is handled using the modes drop-rtl-at-end, copy-rtl-at-end, drop-rtl-at-start, and copy-rtl-at-start when generating the output.</p>
+        </xd:detail>
+    </xd:doc>
+
+
+    <xsl:template mode="drop-rtl-at-end" match="k:w[@dir='ltr']" priority="1">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-end" match="k:w[following-sibling::k:w[@dir='ltr']]" priority="2">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-end" match="k:nw[preceding-sibling::k:w[1][@dir!='rtl'] or following-sibling::k:w[@dir='ltr']]" priority="3">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-end" match="k:nw|k:w"/>
+
+
+    <xsl:template mode="copy-rtl-at-end" match="k:w[@dir='ltr']" priority="1"/>
+
+    <xsl:template mode="copy-rtl-at-end" match="k:w[following-sibling::k:w[@dir='ltr']]" priority="2"/>
+
+    <xsl:template mode="copy-rtl-at-end" match="k:nw[preceding-sibling::k:w[1][@dir!='rtl'] or following-sibling::k:w[@dir='ltr']]" priority="3"/>
+
+    <xsl:template mode="copy-rtl-at-end" match="k:nw|k:w">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+
+    <xsl:template mode="drop-rtl-at-start" match="k:w[@dir='ltr']" priority="1">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-start" match="k:w[preceding-sibling::k:w[@dir='ltr']]" priority="2">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-start" match="k:nw[following-sibling::k:w[1][@dir!='rtl'] or preceding-sibling::k:w[@dir='ltr']]" priority="3">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+    <xsl:template mode="drop-rtl-at-start" match="k:nw|k:w"/>
+
+
+    <xsl:template mode="copy-rtl-at-start" match="k:w[@dir='ltr']" priority="1"/>
+
+    <xsl:template mode="copy-rtl-at-start" match="k:w[preceding-sibling::k:w[@dir='ltr']]" priority="2"/>
+
+    <xsl:template mode="copy-rtl-at-start" match="k:nw[following-sibling::k:w[1][@dir!='rtl'] or preceding-sibling::k:w[@dir='ltr']]" priority="3"/>
+
+    <xsl:template mode="copy-rtl-at-start" match="k:nw|k:w">
+        <xsl:apply-templates mode="output" select="."/>
+    </xsl:template>
+
+
+    <!-- Not all Unicode regular expressions are supported (https://www.regular-expressions.info/unicode.html), also,
+         for this tool, we use a simplified approximation of handling bidirectional script. -->
+
+    <xsl:function name="f:isRightToLeft" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Right_to_Left}|\p{Bidi_Class:Arabic_Letter}')"/> -->
+        <!-- <xsl:sequence select="matches($word, '\p{Letter}') and matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}')"/> -->
+        <xsl:sequence select="matches($word, '\p{L}') and matches($word, '[&#x0590;-&#x07BF;]')"/>
+    </xsl:function>
+
+    <xsl:function name="f:isLeftToRight" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Left_To_Right}')"/> -->
+        <!-- <xsl:sequence select="matches($word, '\p{Letter}') and not(matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}'))"/> -->
+        <xsl:sequence select="matches($word, '\p{L}') and not(matches($word, '[&#x0590;-&#x07BF;]'))"/>
+    </xsl:function>
 
 
     <xd:doc mode="single-kwic">
@@ -444,9 +570,9 @@
 
         <xsl:if test="$keyword = @form">
             <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <k:preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
-                <k:word><xsl:apply-templates mode="context" select="."/></k:word>
-                <k:following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:word><xsl:copy-of select="."/></k:word>
+                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
             </k:match>
         </xsl:if>
     </xsl:template>
@@ -454,15 +580,21 @@
 
     <xd:doc>
         <xd:short>Collect preceding and following contexts.</xd:short>
-        <xd:detail>For every word the preceding and following contexts are kept with the match.</xd:detail>
+        <xd:detail>
+            <p>For every word the preceding and following contexts are kept with the match.</p>
+            
+            <p>A significant improvement in speed and memory usage can be obtained here by already rendering the preceding
+            and following context, instead of doing this during the output phase. This is not done, as it complicated the
+            handling of bidirectional text. For large files, please run Saxon with sufficient memory (java -Xms3072m -Xmx3072m).</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template mode="multi-kwic" match="k:w">
         <xsl:if test="not(f:is-stopword(., @xml:lang))">
             <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <k:preceding><xsl:apply-templates mode="context" select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
-                <k:word><xsl:apply-templates mode="context" select="."/></k:word>
-                <k:following><xsl:apply-templates mode="context" select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:word><xsl:copy-of select="."/></k:word>
+                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
             </k:match>
         </xsl:if>
     </xsl:template>
@@ -478,8 +610,9 @@
         <xd:detail>Copy matching words and non-words in the context, taking care to apply the correct text style.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="context" match="k:w|k:nw">
+    <xsl:template mode="output" match="k:w|k:nw">
         <xsl:choose>
+            <xsl:when test="normalize-space(.) = ''"><xsl:value-of select="."/></xsl:when>
             <xsl:when test="@style = 'i'"><i><xsl:value-of select="."/></i></xsl:when>
             <xsl:when test="@style = 'b'"><b><xsl:value-of select="."/></b></xsl:when>
             <xsl:when test="@style = 'sup'"><sup><xsl:value-of select="."/></sup></xsl:when>
@@ -563,6 +696,7 @@
                         <xsl:attribute name="inIndex" select="$inIndex"/>
                     </xsl:if>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
+                    <xsl:attribute name="dir" select="if (f:isRightToLeft(.)) then 'rtl' else 'ltr'"/>
                     <xsl:value-of select="."/>
                 </k:w>
             </xsl:matching-substring>

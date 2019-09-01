@@ -14,7 +14,7 @@ use SgmlSupport qw/utf2numericEntities translateEntity/;
 
 my $home = $ENV{'TEI2HTML_HOME'};
 my $javaHome = $ENV{'JAVA_HOME'};
-my $javaOptions = '-Xmx1024m -Xss1024k';
+my $javaOptions = '-Xms3072m -Xmx3072m -Xss1024k ';
 
 #==============================================================================
 # Configuration

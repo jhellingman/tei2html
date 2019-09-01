@@ -936,6 +936,9 @@ BEGIN {
     $ent{"Ocihk"}        = chr(0x1ED4);  #  LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
     $ent{"ocihk"}        = chr(0x1ED5);  #  LATIN SMALL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
 
+    $ent{"Ociac"}        = chr(0x1ED0);  #  LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE
+    $ent{"ociac"}        = chr(0x1ED1);  #  LATIN SMALL LETTER O WITH CIRCUMFLEX AND ACUTE
+
 
     ###############################################################################
     ## GREEK ENTITIES REMAPPED:
