@@ -70,6 +70,7 @@
                     </s:segment>
                 </xsl:when>
                 <xsl:otherwise>
+
                     <!-- Sequence of segment elements -->
                     <xsl:for-each select="current-group()">
                         <xsl:apply-templates select="." mode="#current">
@@ -243,12 +244,11 @@
         </s:segment>
     </xsl:template>
 
-    <!-- Introduce spaces around certain (relatively low level) elements. -->
+    <!-- Introduce spaces around lines of verse. -->
     <xsl:template mode="segments" match="l">
         <xsl:text> </xsl:text>
         <xsl:apply-templates mode="#current"/>
         <xsl:text> </xsl:text>
     </xsl:template>
-
 
 </xsl:stylesheet>

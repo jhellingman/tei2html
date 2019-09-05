@@ -12,8 +12,8 @@ my $wordPattern = "($letter)+(([-']|&apos;)($letter)+)*";
 my $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
 my $tagPattern = "<[^<]*?>";
-my $transPattern = "<(AR|CY|GR|SA|UR)>.*?<[/](AR|CY|GR|SA|UR)>";
-my $formulaPattern = "<formula.*?>.*?<[/]formula>";
+my $transPattern = "<(AR|CY|GR|SA|UR|HE)>.*?<\\/(AR|CY|GR|SA|UR|HE)>";
+my $formulaPattern = "<formula.*?>.*?<\\/formula>";
 my $skipPattern = "(($transPattern)|($formulaPattern)|($tagPattern))";
 
 curlyQuoteText();
@@ -26,10 +26,10 @@ sub curlyQuoteText() {
 
         while ($remainder =~ /$skipPattern/) {
             my $fragment = $`;
-            my $tag = $1;
+            my $skip = $1;
             $remainder = $';
             print curlyQuoteFragment($fragment);
-            print $tag;
+            print $skip;
         }
         print curlyQuoteFragment($remainder);
     }
@@ -94,9 +94,9 @@ sub disambiguateSingleQuotes($) {
 sub disambiguateSingleQuotesWithTags($) {
     my $fragment = shift;
 
-    # Arround <hi>...</hi> markup:
-    $fragment =~ s/( <hi\b.*?>)'($letter)/\1\&lsquo;\2/gi;
-    $fragment =~ s/( )'(<hi\b.*?>$letter)/\1\&lsquo;\2/gi;
+    # Around <hi>...</hi> markup:
+    $fragment =~ s/( <hi\b[^<>]*?>)'($letter)/\1\&lsquo;\2/gi;
+    $fragment =~ s/( )'(<hi\b[^<>]*?>$letter)/\1\&lsquo;\2/gi;
 
     $fragment =~ s/($letter<\/hi>)'( )/\1\&rsquo;\2/gi;
     $fragment =~ s/($letter)'(<\/hi> )/\1\&rsquo;\2/gi;

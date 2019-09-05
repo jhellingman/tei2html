@@ -167,6 +167,11 @@
                         font-family: monospace;
                     }
 
+                    .green {
+                        color: green;
+                        font-weight: bold;
+                    }
+
                     .var2 {
                         background-color: #80FFEE;
                     }
@@ -226,9 +231,9 @@
         </xsl:variable>
 
         <!--
-        <xsl:call-template name="output-segments">
-            <xsl:with-param name="segments" select="$segments"/>
-        </xsl:call-template>
+            <xsl:call-template name="output-segments">
+                <xsl:with-param name="segments" select="$segments"/>
+            </xsl:call-template>
         -->
 
         <xsl:choose>
@@ -624,6 +629,8 @@
             <xsl:when test="@style = 'ex'"><span class="ex"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'tt'"><span class="tt"><xsl:value-of select="."/></span></xsl:when>
 
+            <xsl:when test="@style = 'green'"><span class="green"><xsl:value-of select="."/></span></xsl:when>
+
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -668,6 +675,15 @@
 
     <xsl:template mode="segments" match="text()">
         <xsl:call-template name="analyze-text"/>
+    </xsl:template>
+
+
+    <!-- Introduce slashes between lines of verse, overrides template in segmentize.xsl. -->
+    <xsl:template mode="segments" match="l" priority="2">
+        <xsl:if test="preceding-sibling::l">
+            <k:nw style="green"><xsl:text> / </xsl:text></k:nw>
+        </xsl:if>
+        <xsl:apply-templates mode="#current"/>
     </xsl:template>
 
 
@@ -721,19 +737,30 @@
 
     <xsl:function name="f:find-text-style" as="xs:string?">
         <xsl:param name="node" as="node()"/>
-        <xsl:variable name="hi" select="$node/ancestor-or-self::hi[1]"/>
+        <xsl:variable name="hi" select="$node/ancestor-or-self::*[local-name(.) = ('hi', 'i', 'b', 'ex', 'sc', 'asc', 'uc', 'tt', 'sup', 'sub')][1]"/>
         <!-- Ignore hi elements if we are in a note, and the hi is outside the note -->
         <xsl:if test="$hi and not($hi/descendant::note)">
             <xsl:variable name="rend" select="$hi/@rend"/>
+            <xsl:variable name="name" select="local-name($hi)"/>
             <xsl:choose>
-                <xsl:when test="$rend = 'bold'">b</xsl:when>
-                <xsl:when test="$rend = 'sup'">sup</xsl:when>
-                <xsl:when test="$rend = 'sub'">sub</xsl:when>
-                <xsl:when test="$rend = 'ex'">ex</xsl:when>
-                <xsl:when test="$rend = 'uc'">uc</xsl:when>
-                <xsl:when test="$rend = 'sc'">sc</xsl:when>
+                <xsl:when test="$name = 'asc'">asc</xsl:when>
+                <xsl:when test="$name = 'b'">b</xsl:when>
+                <xsl:when test="$name = 'ex'">ex</xsl:when>
+                <xsl:when test="$name = 'sc'">sc</xsl:when>
+                <xsl:when test="$name = 'sub'">sub</xsl:when>
+                <xsl:when test="$name = 'sup'">sup</xsl:when>
+                <xsl:when test="$name = 'tt'">tt</xsl:when>
+                <xsl:when test="$name = 'uc'">uc</xsl:when>
+
                 <xsl:when test="$rend = 'asc'">asc</xsl:when>
+                <xsl:when test="$rend = 'bold'">b</xsl:when>
+                <xsl:when test="$rend = 'ex'">ex</xsl:when>
+                <xsl:when test="$rend = 'sc'">sc</xsl:when>
+                <xsl:when test="$rend = 'sub'">sub</xsl:when>
+                <xsl:when test="$rend = 'sup'">sup</xsl:when>
                 <xsl:when test="$rend = 'tt'">tt</xsl:when>
+                <xsl:when test="$rend = 'uc'">uc</xsl:when>
+
                 <xsl:otherwise>i</xsl:otherwise>
             </xsl:choose>
         </xsl:if>
