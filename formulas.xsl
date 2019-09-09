@@ -116,12 +116,12 @@
                 <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
-                    <img src="{$svgFile}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
+                    <img src="{$svgFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
                 <xsl:when test="f:getSetting('math.mathJax.format') = 'PNG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
-                    <img src="{$pngFile}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
+                    <img src="{$pngFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:logError('Unknown format for math formulas: {1}.', (f:getSetting('math.mathJax.format')))"/>

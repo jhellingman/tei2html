@@ -1,0 +1,68 @@
+# idElement.pl -- give lg-elements ids based on de page and number they have
+
+use strict;
+
+my $inputFile = $ARGV[0];
+my $pageNumber = 0;
+my $lgNumber = 0;
+
+open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+
+print STDERR "Adding ids to lg-elements in $inputFile\n";
+
+while (<INPUTFILE>) {
+    my $remainder = $_;
+    while ($remainder =~ m/(<pb\b(.*?)>)/) {
+        my $before = $`;
+        my $pbTag = $1;
+        my $pbAttrs = $2;
+        $remainder = $';
+
+        idElement($before, $pageNumber);
+        $lgNumber = 0;
+        $pageNumber = getAttrVal("n", $pbAttrs);
+        print $pbTag;
+    }
+    idElement($remainder, $pageNumber);
+}
+
+sub idElement($$) {
+    my $remainder = shift;
+    my $pageNumber = shift;
+
+    while ($remainder =~ m/(<lg\b(.*?)>)/) {
+        my $before = $`;
+        my $tag = $1;
+        my $attrs = $2;
+        $remainder = $';
+
+        my $id = getAttrVal("id", $attrs);
+        my $newTag = $tag;
+        if ($id eq '') {
+            $lgNumber++;
+            $newTag = "<lg id=lg$pageNumber.$lgNumber$attrs>";
+        }
+
+        print STDERR "$tag    ->    $newTag\n";
+        print $before;
+        print $newTag;
+    }
+    print $remainder;
+}
+
+
+#
+# getAttrVal: Get an attribute value from a tag (if the attribute is present)
+#
+sub getAttrVal($$) {
+    my $attrName = shift;
+    my $attrs = shift;
+    my $attrVal = "";
+
+    if ($attrs =~ /$attrName\s*=\s*([\w-]+)/i) {
+        $attrVal = $1;
+    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
+        $attrVal = $1;
+    }
+    return $attrVal;
+}

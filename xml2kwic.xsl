@@ -172,6 +172,13 @@
                         font-weight: bold;
                     }
 
+                    .notemark {
+                        color: green;
+                        font-weight: bold;
+                        vertical-align: super;
+                        font-size: smaller;
+                    }
+
                     .var2 {
                         background-color: #80FFEE;
                     }
@@ -630,6 +637,7 @@
             <xsl:when test="@style = 'tt'"><span class="tt"><xsl:value-of select="."/></span></xsl:when>
 
             <xsl:when test="@style = 'green'"><span class="green"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@style = 'notemark'"><span class="notemark"><xsl:value-of select="."/></span></xsl:when>
 
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
@@ -678,12 +686,25 @@
     </xsl:template>
 
 
-    <!-- Introduce slashes between lines of verse, overrides template in segmentize.xsl. -->
+    <xd:doc>
+        <xd:short>Introduce slashes between lines of verse.</xd:short>
+        <xd:detail>Introduce slashes between lines of verse, overrides template in segmentize.xsl.</xd:detail>
+    </xd:doc>
+
     <xsl:template mode="segments" match="l" priority="2">
         <xsl:if test="preceding-sibling::l">
             <k:nw style="green"><xsl:text> / </xsl:text></k:nw>
         </xsl:if>
         <xsl:apply-templates mode="#current"/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Show note-markers.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="note" priority="2">
+        <k:nw style="notemark"><xsl:value-of select="@n"/></k:nw>
     </xsl:template>
 
 
