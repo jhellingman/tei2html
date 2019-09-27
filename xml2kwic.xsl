@@ -172,6 +172,11 @@
                         font-weight: bold;
                     }
 
+                    .ref {
+                        color: blue;
+                        text-decoration: underline;
+                    }
+
                     .notemark {
                         color: green;
                         font-weight: bold;
@@ -623,12 +628,27 @@
     </xd:doc>
 
     <xsl:template mode="output" match="k:w|k:nw">
+
         <xsl:choose>
+            <xsl:when test="@ref and normalize-space(.) = ''"><span class="ref"><xsl:value-of select="."/></span></xsl:when>
+
             <xsl:when test="normalize-space(.) = ''"><xsl:value-of select="."/></xsl:when>
+
+            <xsl:when test="@ref and @style = 'i'"><i class="ref"><xsl:value-of select="."/></i></xsl:when>
+            <xsl:when test="@ref and @style = 'b'"><b class="ref"><xsl:value-of select="."/></b></xsl:when>
+            <xsl:when test="@ref and @style = 'sup'"><sup class="ref"><xsl:value-of select="."/></sup></xsl:when>
+            <xsl:when test="@ref and @style = 'sub'"><sub class="ref"><xsl:value-of select="."/></sub></xsl:when>
+
             <xsl:when test="@style = 'i'"><i><xsl:value-of select="."/></i></xsl:when>
             <xsl:when test="@style = 'b'"><b><xsl:value-of select="."/></b></xsl:when>
             <xsl:when test="@style = 'sup'"><sup><xsl:value-of select="."/></sup></xsl:when>
             <xsl:when test="@style = 'sub'"><sub><xsl:value-of select="."/></sub></xsl:when>
+
+            <xsl:when test="@ref and @style = 'sc'"><span class="sc ref"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@ref and @style = 'asc'"><span class="asc ref"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@ref and @style = 'uc'"><span class="uc ref"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@ref and @style = 'ex'"><span class="ex ref"><xsl:value-of select="."/></span></xsl:when>
+            <xsl:when test="@ref and @style = 'tt'"><span class="tt ref"><xsl:value-of select="."/></span></xsl:when>
 
             <xsl:when test="@style = 'sc'"><span class="sc"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'asc'"><span class="asc"><xsl:value-of select="."/></span></xsl:when>
@@ -638,6 +658,8 @@
 
             <xsl:when test="@style = 'green'"><span class="green"><xsl:value-of select="."/></span></xsl:when>
             <xsl:when test="@style = 'notemark'"><span class="notemark"><xsl:value-of select="."/></span></xsl:when>
+
+            <xsl:when test="@ref"><span class="ref"><xsl:value-of select="."/></span></xsl:when>
 
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
@@ -720,6 +742,8 @@
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
         <xsl:variable name="inIndex" select="if (ancestor-or-self::*[@type='Index']) then 'true' else 'false'"/>
+        <xsl:variable name="inReference" select="if (ancestor-or-self::ref[@target] or ancestor-or-self::xref[@url]) then 'true' else 'false'"/>
+        <xsl:variable name="reference" select="if (ancestor-or-self::ref[@target]) then '#' || ancestor-or-self::ref[@target] else ancestor-or-self::xref[@url]"/>
 
         <xsl:analyze-string select="." regex="{'[\p{L}\p{N}\p{M}&prime;-]+'}">
             <xsl:matching-substring>
@@ -731,6 +755,9 @@
                     <xsl:attribute name="page" select="$page"/>
                     <xsl:if test="$inIndex = 'true'">
                         <xsl:attribute name="inIndex" select="$inIndex"/>
+                    </xsl:if>
+                    <xsl:if test="$inReference = 'true'">
+                        <xsl:attribute name="ref" select="$reference"/>
                     </xsl:if>
                     <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
                     <xsl:attribute name="dir" select="if (f:isRightToLeft(.)) then 'rtl' else 'ltr'"/>

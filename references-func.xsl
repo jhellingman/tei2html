@@ -3,11 +3,13 @@
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary-nodes"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+    exclude-result-prefixes="f tmp map xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Functions to handle cross-references.</xd:short>
@@ -20,7 +22,7 @@
     <xd:doc>
         <xd:short>Translate a URL to an HTML class.</xd:short>
         <xd:detail>
-            <p>Translate a URL to an HTML class, so URL dependent styling can be applied. See the documentation for <code>f:translate-xref-url</code> 
+            <p>Translate a URL to an HTML class, so URL dependent styling can be applied. See the documentation for <code>f:translate-xref-url</code>
             for short-hand url notations supported.</p>
         </xd:detail>
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
@@ -53,38 +55,38 @@
     <xd:doc>
         <xd:short>Translate a URL to an HTML title attribute.</xd:short>
         <xd:detail>
-            <p>Translate a URL to an HTML title attribute. See the documentation for <code>f:translate-xref-url</code> 
+            <p>Translate a URL to an HTML title attribute. See the documentation for <code>f:translate-xref-url</code>
             for short-hand url notations supported. Note that these titles will be localized in the main document language.</p>
         </xd:detail>
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:translate-xref-title" as="xs:string">
+    <xsl:function name="f:translate-xref-title" as="xs:string" expand-text="yes">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="starts-with($url, 'pg:')"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'pgi:')"><xsl:value-of select="f:message('msgLinkToPg')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'oclc:')"><xsl:value-of select="f:message('msgLinkToWorldCat')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'oln:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'olw:')"><xsl:value-of select="f:message('msgLinkToOpenLibrary')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'wp:')"><xsl:value-of select="f:message('msgLinkToWikipedia')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'loc:')"><xsl:value-of select="f:message('msgLinkToMap')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'bib:')"><xsl:value-of select="f:message('msgLinkToBible')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'qur:')"><xsl:value-of select="f:message('msgLinkToQuran')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'tia:')"><xsl:value-of select="f:message('msgLinkToInternetArchive')"/></xsl:when>
-            <xsl:when test="starts-with($url, 'mailto:')"><xsl:value-of select="f:message('msgEmailLink')"/></xsl:when>
+            <xsl:when test="starts-with($url, 'pg:')">{f:message('msgLinkToPg')}</xsl:when>
+            <xsl:when test="starts-with($url, 'pgi:')">{f:message('msgLinkToPg')}</xsl:when>
+            <xsl:when test="starts-with($url, 'oclc:')">{f:message('msgLinkToWorldCat')}</xsl:when>
+            <xsl:when test="starts-with($url, 'oln:')">{f:message('msgLinkToOpenLibrary')}</xsl:when>
+            <xsl:when test="starts-with($url, 'olw:')">{f:message('msgLinkToOpenLibrary')}</xsl:when>
+            <xsl:when test="starts-with($url, 'wp:')">{f:message('msgLinkToWikipedia')}</xsl:when>
+            <xsl:when test="starts-with($url, 'loc:')">{f:message('msgLinkToMap')}</xsl:when>
+            <xsl:when test="starts-with($url, 'bib:')">{f:titleForBibleLink($url)}</xsl:when>
+            <xsl:when test="starts-with($url, 'qur:')">{f:titleForQuranLink($url)}</xsl:when>
+            <xsl:when test="starts-with($url, 'tia:')">{f:message('msgLinkToInternetArchive')}</xsl:when>
+            <xsl:when test="starts-with($url, 'mailto:')">{f:message('msgEmailLink')}</xsl:when>
 
             <xsl:when test="starts-with($url, 'audio/')">
                 <xsl:choose>
-                    <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')"><xsl:value-of select="f:message('msgLinkToMidiFile')"/></xsl:when>
-                    <xsl:when test="ends-with($url, '.mp3')"><xsl:value-of select="f:message('msgLinkToMp3File')"/></xsl:when>
-                    <xsl:when test="ends-with($url, '.ly')"><xsl:value-of select="f:message('msgLinkToLilypondFile')"/></xsl:when>
-                    <xsl:when test="ends-with($url, '.mscz')"><xsl:value-of select="f:message('msgLinkToMuseScoreFile')"/></xsl:when>
-                    <xsl:otherwise><xsl:value-of select="f:message('msgAudioLink')"/></xsl:otherwise>
+                    <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')">{f:message('msgLinkToMidiFile')}</xsl:when>
+                    <xsl:when test="ends-with($url, '.mp3')">{f:message('msgLinkToMp3File')}</xsl:when>
+                    <xsl:when test="ends-with($url, '.ly')">{f:message('msgLinkToLilypondFile')}</xsl:when>
+                    <xsl:when test="ends-with($url, '.mscz')">{f:message('msgLinkToMuseScoreFile')}</xsl:when>
+                    <xsl:otherwise>{f:message('msgAudioLink')}</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:otherwise><xsl:value-of select="f:message('msgExternalLink')"/></xsl:otherwise>
+            <xsl:otherwise>{f:message('msgExternalLink')}</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 
@@ -110,7 +112,7 @@
                 <tr><td>tia:<i>[string]</i></td>                <td>Link to an Internet Archive item.</td></tr>
                 <tr><td>loc:<i>[coordinates]</i></td>           <td>Link to a geographical location (currently uses Google Maps).</td></tr>
                 <tr><td>bib:<i>[book ch:vs@version]</i></td>    <td>Link to a verse in the Bible (currently uses the Bible gateway, selects the language of the main text, if available).</td></tr>
-                <tr><td>qur:<i>[surah:verse]</i></td>           <td>Link to a verse in the Quran (currently uses the quran.com).</td></tr>
+                <tr><td>qur:<i>[surah.verse]</i></td>           <td>Link to a verse in the Quran (currently uses quranwow.com).</td></tr>
                 <tr><td>mailto:<i>[email address]</i></td>      <td>Link to an email address.</td></tr>
             </table>
 
@@ -139,7 +141,7 @@
                     <xsl:otherwise>
                         <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
                     </xsl:otherwise>
-                </xsl:choose> 
+                </xsl:choose>
             </xsl:when>
 
             <!-- Link to OCLC (worldcat) catalog entry -->
@@ -177,39 +179,12 @@
 
             <!-- Link to Bible citation -->
             <xsl:when test="starts-with($url, 'bib:')">
-                <xsl:variable name="version">
-                    <xsl:choose>
-                        <xsl:when test="contains($url, '@')"><xsl:value-of select="substring-after($url, '@')"/></xsl:when>
-                        <xsl:when test="$lang = 'en'">NRSV</xsl:when>
-                        <xsl:when test="$lang = 'fr'">LSG</xsl:when>
-                        <xsl:when test="$lang = 'de'">LUTH1545</xsl:when>
-                        <xsl:when test="$lang = 'es'">RVR1995</xsl:when>
-                        <xsl:when test="$lang = 'nl'">HTB</xsl:when> <!-- unfortunately, only version available in Dutch -->
-                        <xsl:when test="$lang = 'la'">VULGATE</xsl:when>
-                        <xsl:otherwise>
-                            <xsl:copy-of select="f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:variable name="url" select="if (contains($url, '@')) then substring-before($url, '@') else $url"/>
-                <xsl:variable name="location" select="substring-after($url, ':')"/>
-
-                <xsl:text>https://www.biblegateway.com/passage/?search=</xsl:text><xsl:value-of select="iri-to-uri($location)"/>
-                <xsl:if test="$version != ''">
-                    <xsl:text>&amp;version=</xsl:text><xsl:value-of select="iri-to-uri($version)"/>
-                </xsl:if>
+                <xsl:value-of select="f:urlForBibleLink($url, $lang)"/>
             </xsl:when>
 
             <!-- Link to Quran citation -->
             <xsl:when test="starts-with($url, 'qur:')">
-                <xsl:variable name="location" select="substring-after($url, ':')"/>
-                <xsl:variable name="surah" select="substring-before($location, ':')"/>
-                <xsl:variable name="verse" select="substring-after($location, ':')"/>
-
-                <xsl:text>https://www.quran.com/</xsl:text><xsl:value-of select="iri-to-uri($surah)"/>
-                <xsl:if test="$verse">
-                    <xsl:text>/</xsl:text><xsl:value-of select="iri-to-uri($verse)"/>
-                </xsl:if>
+                <xsl:value-of select="f:urlForQuranLink($url)"/>
             </xsl:when>
 
             <!-- Link to secure website (or https://) -->
@@ -265,5 +240,209 @@
 
         <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $prefixDef/@replacementPattern)"/>
     </xsl:function>
+
+
+
+    <xsl:variable name="bibleRefPattern" select="'^bib:((?:[0-3] )?[A-Za-z]+)(?: ([0-9]+)(?:[:]([0-9]+)(?:[-]([0-9]+))?)?)?(?:[@]([A-Za-z0-9;]+))?$'"/>
+
+    <xsl:variable name="bibleBooks" select="map{
+        'gn'     : 'Genesis',
+        'ex'     : 'Exodus',
+        'lv'     : 'Leviticus',
+        'nm'     : 'Numbers',
+        'dt'     : 'Deuteronomy',
+        'jo'     : 'Joshua',
+        'jdg'    : 'Judges',
+        'ru'     : 'Ruth',
+        '1 sm'   : '1 Samuel',
+        '2 sm'   : '2 Samuel',
+        '1 kgs'  : '1 Kings',
+        '2 kgs'  : '2 Kings',
+        '1 chr'  : '1 Chronicles',
+        '2 chr'  : '2 Chronicles',
+        'ezr'    : 'Ezra',
+        'neh'    : 'Nehemiah',
+        'est'    : 'Esther',
+        'jb'     : 'Job',
+        'ps'     : 'Psalm',
+        'prv'    : 'Proverbs',
+        'eccl'   : 'Ecclesiastes',
+        'sg'     : 'Song of Solomon',
+        'is'     : 'Isaiah',
+        'jer'    : 'Jeremiah',
+        'lam'    : 'Lamentations',
+        'ez'     : 'Ezekiel',
+        'dn'     : 'Daniel',
+        'hos'    : 'Hosea',
+        'jl'     : 'Joel',
+        'am'     : 'Amos',
+        'ob'     : 'Obadiah',
+        'jon'    : 'Jonah',
+        'mi'     : 'Micah',
+        'na'     : 'Nahum',
+        'hb'     : 'Habakkuk',
+        'zep'    : 'Zephaniah',
+        'hg'     : 'Haggai',
+        'zec'    : 'Zechariah',
+        'mal'    : 'Malachi',
+
+        'mt'     : 'Matthew',
+        'mk'     : 'Mark',
+        'lk'     : 'Luke',
+        'jn'     : 'John',
+        'acts'   : 'Acts of the Apostles',
+        'rom'    : 'Romans',
+        '1 cor'  : '1 Corinthians',
+        '2 cor'  : '2 Corinthians',
+        'gal'    : 'Galatians',
+        'eph'    : 'Ephesians',
+        'phil'   : 'Philippians',
+        'col'    : 'Colossians',
+        '1 thes' : '1 Thessalonians',
+        '2 thes' : '2 Thessalonians',
+        '1 tm'   : '1 Timothy',
+        '2 tm'   : '2 Timothy',
+        'ti'     : 'Titus',
+        'phlm'   : 'Philemon',
+        'heb'    : 'Hebrews',
+        'jas'    : 'James',
+        '1 pt'   : '1 Peter',
+        '2 pt'   : '2 Peter',
+        '1 jn'   : '1 John',
+        '2 jn'   : '2 John',
+        '3 jn'   : '3 John',
+        'jude'   : 'Jude',
+        're'     : 'Revelation',            'rev'     : 'Revelation'
+    }"/>
+
+
+    <xsl:function name="f:titleForBibleLink" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
+        <xsl:variable name="book" select="$urlParts[1]"/>
+        <xsl:variable name="chapter" select="$urlParts[2]"/>
+        <xsl:variable name="verse" select="$urlParts[3]"/>
+        <xsl:variable name="toVerse" select="$urlParts[4]"/>
+        <xsl:variable name="edition" select="$urlParts[5]"/>
+
+        <xsl:variable name="bookTitle" select="map:get($bibleBooks, lower-case($book))"/>
+
+        <xsl:if test="not($bookTitle) or $bookTitle = ''">
+            <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="bookTitle" select="if ($bookTitle != '') then $bookTitle else $book"/>
+
+        <!-- <xsl:message expand-text="yes">{f:logInfo('Found Bible reference &quot;{1}&quot; = BK: {2} CH: {3} V: {4} TO: {5} ED: {6} = {7}', ($url, $book, $chapter, $verse, $toVerse, $edition, $bookTitle))}</xsl:message> -->
+
+        <xsl:value-of select="f:formatMessage(
+                if ($toVerse)
+                then 'msgLinkToBibleBookChapterVerseToVerse'
+                else if ($verse)
+                     then 'msgLinkToBibleBookChapterVerse'
+                     else if ($chapter)
+                          then 'msgLinkToBibleBookChapter'
+                          else 'msgLinkToBibleBook',
+                map{'book': $bookTitle, 'chapter': $chapter, 'verse': $verse, 'toVerse': $toVerse})"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:analyze-bible-reference" as="node()">
+        <xsl:param name="url" as="xs:string"/>
+
+        <tmp:bibleReference>
+            <xsl:analyze-string
+                    select="$url"
+                    regex="{$bibleRefPattern}">
+                <xsl:matching-substring>
+                    <tmp:book><xsl:value-of select="regex-group(1)"/></tmp:book>
+                    <tmp:chapter><xsl:value-of select="regex-group(2)"/></tmp:chapter>
+                    <tmp:verse><xsl:value-of select="regex-group(3)"/></tmp:verse>
+                    <tmp:toVerse><xsl:value-of select="regex-group(4)"/></tmp:toVerse>
+                    <tmp:edition><xsl:value-of select="regex-group(5)"/></tmp:edition>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <tmp:error>
+                        <xsl:value-of select="$url"/>
+                    </tmp:error>
+                </xsl:non-matching-substring>
+          </xsl:analyze-string>
+        </tmp:bibleReference>
+    </xsl:function>
+
+
+    <xsl:function name="f:urlForBibleLink" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:if test="not(matches($url, $bibleRefPattern))">
+            <xsl:message expand-text="yes">{f:logError('Invalid reference to Bible: {1}.', ($url))}</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="version">
+            <xsl:choose>
+                <xsl:when test="contains($url, '@')"><xsl:value-of select="substring-after($url, '@')"/></xsl:when>
+                <xsl:when test="$lang = 'en'">NRSV</xsl:when>
+                <xsl:when test="$lang = 'fr'">LSG</xsl:when>
+                <xsl:when test="$lang = 'de'">LUTH1545</xsl:when>
+                <xsl:when test="$lang = 'es'">RVR1995</xsl:when>
+                <xsl:when test="$lang = 'nl'">HTB</xsl:when> <!-- unfortunately, only version available in Dutch -->
+                <xsl:when test="$lang = 'la'">VULGATE</xsl:when>
+                <xsl:otherwise>
+                    <xsl:message expand-text="yes">{f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))}</xsl:message>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="url" select="if (contains($url, '@')) then substring-before($url, '@') else $url"/>
+        <xsl:variable name="location" select="substring-after($url, ':')"/>
+
+        <xsl:text expand-text="yes">https://www.biblegateway.com/passage/?search={iri-to-uri($location)}{if ($version != '') then '&amp;version=' || iri-to-uri($version) else ''}</xsl:text>
+    </xsl:function>
+
+
+    <xsl:variable name="quranRefPattern" select="'^qur:([0-9]+)(?:[:.]([0-9]+)(?:[-]([0-9]+))?)?$'"/>
+
+
+    <xsl:function name="f:titleForQuranLink" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:variable name="urlParts" select="tokenize(replace($url, $quranRefPattern, '$1,$2,$3'), ',')"/>
+        <xsl:variable name="chapter" select="$urlParts[1]"/>
+        <xsl:variable name="verse" select="$urlParts[2]"/>
+        <xsl:variable name="toVerse" select="$urlParts[3]"/>
+
+        <xsl:value-of select="f:formatMessage(
+                if ($toVerse)
+                then 'msgLinkToQuranChapterVerseToVerse'
+                else if ($verse)
+                     then 'msgLinkToQuranChapterVerse'
+                     else 'msgLinkToQuranChapter'
+                     ,
+                map{'chapter': $chapter, 'verse': $verse, 'toVerse': $toVerse})"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:urlForQuranLink" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:if test="not(matches($url, $quranRefPattern))">
+            <xsl:message expand-text="yes">{f:logError('Invalid reference to Quran: {1}.', ($url))}</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="urlParts" select="tokenize(replace($url, $quranRefPattern, '$1,$2,$3'), ',')"/>
+        <xsl:variable name="chapter" select="$urlParts[1]"/>
+        <xsl:variable name="verse" select="$urlParts[2]"/>
+        <xsl:variable name="toVerse" select="$urlParts[3]"/>
+
+        <!-- Alternative sites:
+
+            <xsl:text expand-text="yes">https://www.quran.com/{iri-to-uri($chapter)}{if ($verse) then '/' || iri-to-uri($verse) else ''}</xsl:text>
+            <xsl:text expand-text="yes">https://al-quran.info/#{iri-to-uri($chapter)}{if ($verse) then ':' || iri-to-uri($verse) else ''}</xsl:text>
+        -->
+
+        <xsl:text expand-text="yes">https://www.quranwow.com/#/ch/{iri-to-uri($chapter)}/t1/ar-allah/t2/en-pickthall/v/{if ($verse) then iri-to-uri($verse) else '1'}</xsl:text>
+    </xsl:function>
+
 
 </xsl:stylesheet>

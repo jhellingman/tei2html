@@ -869,13 +869,22 @@
     </xsl:template>
 
 
-    <xsl:template mode="checks" match="hi[@rend='sc'] | asc">
+    <xsl:template mode="checks" match="hi[@rend='sc'] | sc">
         <xsl:if test="string(.) = upper-case(string(.))">
             <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Small caps style used for all-caps text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
+
+    <xsl:template mode="checks" match="hi[@rend='sc'] | sc">
+        <xsl:if test="string(.) = lower-case(string(.))">
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+        <xsl:next-match/>
+    </xsl:template>
+
 
 
     <!-- Correction corrects nothing -->

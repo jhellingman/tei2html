@@ -183,9 +183,19 @@
         <msg:message name="msgKeywords">Keywords</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
         <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
-        <msg:message name="msgLinkToBible">Link to cited location in Bible</msg:message>
-        <msg:message name="msgLinkToQuran">Link to cited location in Quran</msg:message>
-        <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
+		
+        <msg:message name="msgLinkToBible">Reference to the Bible</msg:message>		
+        <msg:message name="msgLinkToBibleBook">Reference to the Bible: <msg:param name="book"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Reference to the Bible: <msg:param name="book"/>, chapter <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+		
+        <msg:message name="msgLinkToQuran">Reference to the Quran</msg:message>		
+		<msg:message name="msgLinkToQuranChapter">Reference to the Quran: chapter <msg:param name="chapter"/></msg:message>
+		<msg:message name="msgLinkToQuranChapterVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/></msg:message>		
+ 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/> to <msg:param name="toVerse"/></msg:message>	
+		
+       <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
         <msg:message name="msgLinkToMap">Link to location on map</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
         <msg:message name="msgLinkToMp3File">Download MP3 file</msg:message>

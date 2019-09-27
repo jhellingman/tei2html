@@ -67,7 +67,7 @@ span.tocPageNum, span.flushright {
 
 /* External Links are decorated with little icons in the HTML version: */
 
-.pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
+.pglink, .catlink, .exlink, .wplink, .biblink, .qurlink, .seclink {
     background-repeat: no-repeat;
     background-position: right center;
 }
@@ -82,7 +82,7 @@ span.tocPageNum, span.flushright {
     padding-right: 17px;
 }
 
-.exlink, .wplink, .biblink, .seclink {
+.exlink, .wplink, .biblink, .qurlink, .seclink {
     background-image: url(images/external.png);
     padding-right: 13px;
 }
@@ -95,6 +95,6 @@ span.tocPageNum, span.flushright {
     background-color: #FFFFDC;
 }
 
-.exlink:hover, .wplink:hover, .biblink:hover {
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover {
     background-color: #FFDCDC;
 }

@@ -63,6 +63,8 @@ my %books = (
 "Jo"                        => "Joshua",
 "Judg."                     => "Judges",
 "Jgs"                       => "Judges",
+"Jdg"                       => "Judges",
+"Jd"                        => "Judges",
 "1 Kings"                   => "1 Kings",
 "1 Kgs"                     => "1 Kings",
 "2 Kings"                   => "2 Kings",
@@ -174,6 +176,7 @@ my %books = (
 "Phil"                      => "Philippians",
 "Rev."                      => "Revelation",
 "Rv"                        => "Revelation",
+"Re"                        => "Revelation",
 "Rom."                      => "Romans",
 "Rom"                       => "Romans",
 "1 Thess."                  => "1 Thessalonians",
@@ -253,9 +256,9 @@ my %abbreviations = (
 "joshua"                    => "Jo",
 "josh."                     => "Jo",
 "jo"                        => "Jo",
-"judges"                    => "Jgs",
-"judg."                     => "Jgs",
-"jgs"                       => "Jgs",
+"judges"                    => "Jdg",
+"judg."                     => "Jdg",
+"jgs"                       => "Jgd",
 "1 kings"                   => "1 Kgs",
 "1 kgs"                     => "1 Kgs",
 "2 kings"                   => "2 Kgs",
@@ -599,15 +602,12 @@ sub tagRefs($) {
 }
 
 
-sub tagRef {
+sub tagRef($$$$$) {
     my $match = shift;
     my $book = shift;
     my $chapter = shift;
     my $verse = shift;
     my $range = shift;
-
-    # print STDERR "MATCH: $match\n";
-    # print STDERR "BOOK: $book CHAPTER: $chapter VERSE: $verse\n";
 
     if (isroman($chapter)) {
         $chapter = arabic($chapter);
@@ -626,6 +626,8 @@ sub tagRef {
         print STDERR "WARNING: Large chapter number in match '$match' (book: '$book', chapter: $chapter)\n";
         return $match;
     }
+
+    print STDERR "REF: $match     -->     $book $chapter : $verse\n";
 
     if ($book ne "") {
         if ($verse == 0) {
