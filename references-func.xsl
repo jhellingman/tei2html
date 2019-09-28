@@ -267,7 +267,7 @@
         'ps'     : 'Psalm',
         'prv'    : 'Proverbs',
         'eccl'   : 'Ecclesiastes',
-        'sg'     : 'Song of Solomon',
+        'song'   : 'Song of Solomon',
         'is'     : 'Isaiah',
         'jer'    : 'Jeremiah',
         'lam'    : 'Lamentations',
@@ -285,6 +285,18 @@
         'hg'     : 'Haggai',
         'zec'    : 'Zechariah',
         'mal'    : 'Malachi',
+
+        'bar'    : 'Baruch',
+        'sir'    : 'Ecclesiasticus',
+        '1 esd'  : '1 Esdras',
+        '2 esd'  : '2 Esdras',
+        'jdt'    : 'Judith',
+        '1 mc'   : '1 Maccabees',
+        '2 mc'   : '2 Maccabees',
+        'manasseh' : 'Manasseh',
+        'sus'    : 'Susanna',
+        'tb'     : 'Tobit',
+        'ws'     : 'Wisdom of Solomon',
 
         'mt'     : 'Matthew',
         'mk'     : 'Mark',
@@ -312,8 +324,8 @@
         '2 jn'   : '2 John',
         '3 jn'   : '3 John',
         'jude'   : 'Jude',
-        're'     : 'Revelation',            'rev'     : 'Revelation'
-    }"/>
+        're'     : 'Revelation'
+        }"/>
 
 
     <xsl:function name="f:titleForBibleLink" as="xs:string">
@@ -326,7 +338,7 @@
         <xsl:variable name="toVerse" select="$urlParts[4]"/>
         <xsl:variable name="edition" select="$urlParts[5]"/>
 
-        <xsl:variable name="bookTitle" select="map:get($bibleBooks, lower-case($book))"/>
+        <xsl:variable name="bookTitle" select="f:message('bible.' || map:get($bibleBooks, lower-case($book)))"/>
 
         <xsl:if test="not($bookTitle) or $bookTitle = ''">
             <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
@@ -348,28 +360,14 @@
     </xsl:function>
 
 
-    <xsl:function name="f:analyze-bible-reference" as="node()">
-        <xsl:param name="url" as="xs:string"/>
-
-        <tmp:bibleReference>
-            <xsl:analyze-string
-                    select="$url"
-                    regex="{$bibleRefPattern}">
-                <xsl:matching-substring>
-                    <tmp:book><xsl:value-of select="regex-group(1)"/></tmp:book>
-                    <tmp:chapter><xsl:value-of select="regex-group(2)"/></tmp:chapter>
-                    <tmp:verse><xsl:value-of select="regex-group(3)"/></tmp:verse>
-                    <tmp:toVerse><xsl:value-of select="regex-group(4)"/></tmp:toVerse>
-                    <tmp:edition><xsl:value-of select="regex-group(5)"/></tmp:edition>
-                </xsl:matching-substring>
-                <xsl:non-matching-substring>
-                    <tmp:error>
-                        <xsl:value-of select="$url"/>
-                    </tmp:error>
-                </xsl:non-matching-substring>
-          </xsl:analyze-string>
-        </tmp:bibleReference>
-    </xsl:function>
+    <xsl:variable name="bibleTranslations" select="map{
+        'en': 'NRSV',
+        'fr': 'LSG',
+        'de': 'LUTH1545',
+        'es': 'RVR1995',
+        'nl': 'HTB',
+        'la': 'VULGATE'
+        }"/>
 
 
     <xsl:function name="f:urlForBibleLink" as="xs:string">
@@ -377,27 +375,35 @@
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:if test="not(matches($url, $bibleRefPattern))">
-            <xsl:message expand-text="yes">{f:logError('Invalid reference to Bible: {1}.', ($url))}</xsl:message>
+            <xsl:message expand-text="yes">{f:logError('Unrecognized reference to Bible: {1}.', ($url))}</xsl:message>
         </xsl:if>
 
-        <xsl:variable name="version">
-            <xsl:choose>
-                <xsl:when test="contains($url, '@')"><xsl:value-of select="substring-after($url, '@')"/></xsl:when>
-                <xsl:when test="$lang = 'en'">NRSV</xsl:when>
-                <xsl:when test="$lang = 'fr'">LSG</xsl:when>
-                <xsl:when test="$lang = 'de'">LUTH1545</xsl:when>
-                <xsl:when test="$lang = 'es'">RVR1995</xsl:when>
-                <xsl:when test="$lang = 'nl'">HTB</xsl:when> <!-- unfortunately, only version available in Dutch -->
-                <xsl:when test="$lang = 'la'">VULGATE</xsl:when>
-                <xsl:otherwise>
-                    <xsl:message expand-text="yes">{f:logWarning('No link to text in language &quot;{1}&quot;.', ($lang))}</xsl:message>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="url" select="if (contains($url, '@')) then substring-before($url, '@') else $url"/>
-        <xsl:variable name="location" select="substring-after($url, ':')"/>
+        <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
+        <xsl:variable name="book" select="$urlParts[1]"/>
+        <xsl:variable name="chapter" select="$urlParts[2]"/>
+        <xsl:variable name="verse" select="$urlParts[3]"/>
+        <xsl:variable name="toVerse" select="$urlParts[4]"/>
+        <xsl:variable name="edition" select="$urlParts[5]"/>
 
-        <xsl:text expand-text="yes">https://www.biblegateway.com/passage/?search={iri-to-uri($location)}{if ($version != '') then '&amp;version=' || iri-to-uri($version) else ''}</xsl:text>
+        <xsl:if test="not(map:get($bibleBooks, lower-case($book)))">
+            <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="edition" select="if ($edition) then ($edition) else map:get($bibleTranslations, $lang)"/>
+        <xsl:if test="not($edition)">
+            <xsl:message expand-text="yes">{f:logWarning('No edition of Bible text known in language &quot;{1}&quot;.', ($lang))}</xsl:message>
+        </xsl:if>
+
+        <xsl:variable name="reference" as="xs:string" select="
+            $book || (if ($chapter) 
+                then ' ' || $chapter || (if ($verse)
+                    then ':' || $verse || (if ($toVerse)
+                        then '-' || $toVerse
+                        else '')
+                    else '')
+                else '')"/>
+
+        <xsl:text expand-text="yes">https://www.biblegateway.com/passage/?search={iri-to-uri($reference)}{if ($edition != '') then '&amp;version=' || iri-to-uri($edition) else ''}</xsl:text>
     </xsl:function>
 
 

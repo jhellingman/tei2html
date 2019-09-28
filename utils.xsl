@@ -232,7 +232,7 @@
     <xsl:function name="f:get-current-lang" as="xs:string">
         <xsl:param name="node" as="node()"/>
         <xsl:variable name="current-lang" select="($node/ancestor-or-self::*/@lang)[last()]"/>
-        <xsl:value-of select="if ($current-lang) then $current-lang else f:get-document-lang($node)"/>
+        <xsl:value-of select="if ($current-lang) then $current-lang else f:get-document-lang()"/>
     </xsl:function>
 
 
@@ -241,8 +241,7 @@
     </xd:doc>
 
     <xsl:function name="f:get-document-lang" as="xs:string">
-        <xsl:param name="node" as="node()"/>
-        <xsl:value-of select="$node/*[self::TEI.2 or self::TEI]/@lang"/>
+        <xsl:value-of select="$root/*[self::TEI.2 or self::TEI]/@lang"/>
     </xsl:function>
 
 

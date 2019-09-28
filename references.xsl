@@ -233,7 +233,7 @@
                 <xsl:value-of select="f:translate-xref-title($url)"/>
             </xsl:attribute>
             <xsl:attribute name="href">
-                <xsl:value-of select="f:translate-xref-url($url, substring(/*[self::TEI.2 or self::TEI]/@lang, 1, 2))"/>
+                <xsl:value-of select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
             </xsl:attribute>
             <xsl:if test="@rel">
                 <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>

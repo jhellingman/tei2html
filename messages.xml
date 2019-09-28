@@ -190,12 +190,92 @@
         <msg:message name="msgLinkToBibleBookChapterVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
 		
+		<msg:message name="bible.Genesis">Genesis</msg:message>
+        <msg:message name="bible.Exodus">Exodus</msg:message>
+        <msg:message name="bible.Leviticus">Leviticus</msg:message>
+        <msg:message name="bible.Numbers">Numbers</msg:message>
+        <msg:message name="bible.Deuteronomy">Deuteronomy</msg:message>
+        <msg:message name="bible.Joshua">Joshua</msg:message>
+        <msg:message name="bible.Judges">Judges</msg:message>
+        <msg:message name="bible.Ruth">Ruth</msg:message>
+        <msg:message name="bible.1 Samuel">1 Samuel</msg:message>
+        <msg:message name="bible.2 Samuel">2 Samuel</msg:message>
+        <msg:message name="bible.1 Kings">1 Kings</msg:message>
+        <msg:message name="bible.2 Kings">2 Kings</msg:message>
+        <msg:message name="bible.1 Chronicles">1 Chronicles</msg:message>
+        <msg:message name="bible.2 Chronicles">2 Chronicles</msg:message>
+        <msg:message name="bible.Ezra">Ezra</msg:message>
+        <msg:message name="bible.Nehemiah">Nehemiah</msg:message>
+        <msg:message name="bible.Esther">Esther</msg:message>
+        <msg:message name="bible.Job">Job</msg:message>
+        <msg:message name="bible.Psalm">Psalm</msg:message>
+        <msg:message name="bible.Proverbs">Proverbs</msg:message>
+        <msg:message name="bible.Ecclesiastes">Ecclesiastes</msg:message>
+        <msg:message name="bible.Song of Solomon">Song of Solomon</msg:message>
+        <msg:message name="bible.Isaiah">Isaiah</msg:message>
+        <msg:message name="bible.Jeremiah">Jeremiah</msg:message>
+        <msg:message name="bible.Lamentations">Lamentations</msg:message>
+        <msg:message name="bible.Ezekiel">Ezekiel</msg:message>
+        <msg:message name="bible.Daniel">Daniel</msg:message>
+        <msg:message name="bible.Hosea">Hosea</msg:message>
+        <msg:message name="bible.Joel">Joel</msg:message>
+        <msg:message name="bible.Amos">Amos</msg:message>
+        <msg:message name="bible.Obadiah">Obadiah</msg:message>
+        <msg:message name="bible.Jonah">Jonah</msg:message>
+        <msg:message name="bible.Micah">Micah</msg:message>
+        <msg:message name="bible.Nahum">Nahum</msg:message>
+        <msg:message name="bible.Habakkuk">Habakkuk</msg:message>
+        <msg:message name="bible.Zephaniah">Zephaniah</msg:message>
+        <msg:message name="bible.Haggai">Haggai</msg:message>
+        <msg:message name="bible.Zechariah">Zechariah</msg:message>
+        <msg:message name="bible.Malachi">Malachi</msg:message>
+
+        <msg:message name="bible.Baruch">Baruch</msg:message>
+        <msg:message name="bible.Ecclesiasticus">Ecclesiasticus</msg:message>
+        <msg:message name="bible.1 Esdras">1 Esdras</msg:message>
+        <msg:message name="bible.2 Esdras">2 Esdras</msg:message>
+        <msg:message name="bible.Judith">Judith</msg:message>
+        <msg:message name="bible.1 Maccabees">1 Maccabees</msg:message>
+        <msg:message name="bible.2 Maccabees">2 Maccabees</msg:message>
+        <msg:message name="bible.Manasseh">Manasseh</msg:message>
+        <msg:message name="bible.Susanna">Susanna</msg:message>
+        <msg:message name="bible.Tobit">Tobit</msg:message>
+        <msg:message name="bible.Wisdom of Solomon">Wisdom of Solomon</msg:message>
+		
+        <msg:message name="bible.Matthew">Matthew</msg:message>
+        <msg:message name="bible.Mark">Mark</msg:message>
+        <msg:message name="bible.Luke">Luke</msg:message>
+        <msg:message name="bible.John">John</msg:message>
+        <msg:message name="bible.Acts of the Apostles">Acts of the Apostles</msg:message>
+        <msg:message name="bible.Romans">Romans</msg:message>
+        <msg:message name="bible.1 Corinthians">1 Corinthians</msg:message>
+        <msg:message name="bible.2 Corinthians">2 Corinthians</msg:message>
+        <msg:message name="bible.Galatians">Galatians</msg:message>
+        <msg:message name="bible.Ephesians">Ephesians</msg:message>
+        <msg:message name="bible.Philippians">Philippians</msg:message>
+        <msg:message name="bible.Colossians">Colossians</msg:message>
+        <msg:message name="bible.1 Thessalonians">1 Thessalonians</msg:message>
+        <msg:message name="bible.2 Thessalonians">2 Thessalonians</msg:message>
+        <msg:message name="bible.1 Timothy">1 Timothy</msg:message>
+        <msg:message name="bible.2 Timothy">2 Timothy</msg:message>
+        <msg:message name="bible.Titus">Titus</msg:message>
+        <msg:message name="bible.Philemon">Philemon</msg:message>
+        <msg:message name="bible.Hebrews">Hebrews</msg:message>
+        <msg:message name="bible.James">James</msg:message>
+        <msg:message name="bible.1 Peter">1 Peter</msg:message>
+        <msg:message name="bible.2 Peter">2 Peter</msg:message>
+        <msg:message name="bible.1 John">1 John</msg:message>
+        <msg:message name="bible.2 John">2 John</msg:message>
+        <msg:message name="bible.3 John">3 John</msg:message>
+        <msg:message name="bible.Jude">Jude</msg:message>
+        <msg:message name="bible.Revelation">Revelation</msg:message>
+		
         <msg:message name="msgLinkToQuran">Reference to the Quran</msg:message>		
 		<msg:message name="msgLinkToQuranChapter">Reference to the Quran: chapter <msg:param name="chapter"/></msg:message>
 		<msg:message name="msgLinkToQuranChapterVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/></msg:message>		
  		<msg:message name="msgLinkToQuranChapterVerseToVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/> to <msg:param name="toVerse"/></msg:message>	
 		
-       <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
+        <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
         <msg:message name="msgLinkToMap">Link to location on map</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
         <msg:message name="msgLinkToMp3File">Download MP3 file</msg:message>
@@ -874,6 +954,90 @@
         <msg:message name="msgLinkToWorldCat">Link zu WorldCat Katalogseite</msg:message>
         <msg:message name="msgListOfIllustrations">Liste der Abbildungen</msg:message>
         <msg:message name="msgListOfTables">Liste der Tabellen</msg:message>
+		
+		
+        <msg:message name="msgLinkToBible">Verweis auf die Bibel</msg:message>		
+        <msg:message name="msgLinkToBibleBook">Verweis auf die Bibel: <msg:param name="book"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Verweis auf die Bibel: <msg:param name="book"/>, Kapitel <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Verweis auf die Bibel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Verweis auf die Bibel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+		
+		<msg:message name="bible.Genesis">1. Mose</msg:message>
+        <msg:message name="bible.Exodus">2. Mose</msg:message>
+        <msg:message name="bible.Leviticus">3. Mose</msg:message>
+        <msg:message name="bible.Numbers">4. Mose</msg:message>
+        <msg:message name="bible.Deuteronomy">5. Mose</msg:message>
+        <msg:message name="bible.Joshua">Josua</msg:message>
+        <msg:message name="bible.Judges">Richter</msg:message>
+        <msg:message name="bible.Ruth">Rut</msg:message>
+        <msg:message name="bible.1 Samuel">1. Samuel</msg:message>
+        <msg:message name="bible.2 Samuel">2. Samuel</msg:message>
+        <msg:message name="bible.1 Kings">1. Könige</msg:message>
+        <msg:message name="bible.2 Kings">2. Könige</msg:message>
+        <msg:message name="bible.1 Chronicles">1. Chronik</msg:message>
+        <msg:message name="bible.2 Chronicles">2. Chronik</msg:message>
+        <msg:message name="bible.Ezra">Esra</msg:message>
+        <msg:message name="bible.Nehemiah">Nehemia</msg:message>
+        <msg:message name="bible.Esther">Ester</msg:message>
+        <msg:message name="bible.Job">Ijob</msg:message>
+        <msg:message name="bible.Psalm">Psalmen </msg:message>
+        <msg:message name="bible.Proverbs">Sprichwörter</msg:message>
+        <msg:message name="bible.Ecclesiastes">Kohelet</msg:message>
+        <msg:message name="bible.Song of Solomon">Hoheslied</msg:message>
+        <msg:message name="bible.Isaiah">Jesaja</msg:message>
+        <msg:message name="bible.Jeremiah">Jeremia</msg:message>
+        <msg:message name="bible.Lamentations">Klagelieder Jeremias</msg:message>
+        <msg:message name="bible.Ezekiel">Ezechiel</msg:message>
+        <msg:message name="bible.Daniel">Daniel</msg:message>
+        <msg:message name="bible.Hosea">Hosea</msg:message>
+        <msg:message name="bible.Joel">Joel</msg:message>
+        <msg:message name="bible.Amos">Amos</msg:message>
+        <msg:message name="bible.Obadiah">Obadja</msg:message>
+        <msg:message name="bible.Jonah">Jona</msg:message>
+        <msg:message name="bible.Micah">Micha</msg:message>
+        <msg:message name="bible.Nahum">Nahum</msg:message>
+        <msg:message name="bible.Habakkuk">Habakuk</msg:message>
+        <msg:message name="bible.Zephaniah">Zefanja</msg:message>
+        <msg:message name="bible.Haggai">Haggai</msg:message>
+        <msg:message name="bible.Zechariah">Sacharja</msg:message>
+        <msg:message name="bible.Malachi">Maleachi</msg:message>
+
+        <msg:message name="bible.Matthew">Matthäus</msg:message>
+        <msg:message name="bible.Mark">Markus</msg:message>
+        <msg:message name="bible.Luke">Lukas</msg:message>
+        <msg:message name="bible.John">Johannes</msg:message>
+        <msg:message name="bible.Acts of the Apostles">Apostelgeschichte</msg:message>
+        <msg:message name="bible.Romans">Römer</msg:message>
+        <msg:message name="bible.1 Corinthians">1. Korinther</msg:message>
+        <msg:message name="bible.2 Corinthians">2. Korinther</msg:message>
+        <msg:message name="bible.Galatians">Galater</msg:message>
+        <msg:message name="bible.Ephesians">Epheser</msg:message>
+        <msg:message name="bible.Philippians">Philipper</msg:message>
+        <msg:message name="bible.Colossians">Kolosser</msg:message>
+        <msg:message name="bible.1 Thessalonians">1. Thessalonicher</msg:message>
+        <msg:message name="bible.2 Thessalonians">2. Thessalonicher</msg:message>
+        <msg:message name="bible.1 Timothy">1. Timotheus</msg:message>
+        <msg:message name="bible.2 Timothy">2. Timotheus</msg:message>
+        <msg:message name="bible.Titus">Titus</msg:message>
+        <msg:message name="bible.Philemon">Philemon</msg:message>
+        <msg:message name="bible.Hebrews">Hebräer</msg:message>
+        <msg:message name="bible.James">Jakobus</msg:message>
+        <msg:message name="bible.1 Peter">1. Petrus</msg:message>
+        <msg:message name="bible.2 Peter">2. Petrus</msg:message>
+        <msg:message name="bible.1 John">1. Johannes</msg:message>
+        <msg:message name="bible.2 John">2. Johannes</msg:message>
+        <msg:message name="bible.3 John">3. Johannes</msg:message>
+        <msg:message name="bible.Jude">Judas</msg:message>
+        <msg:message name="bible.Revelation">Offenbarung</msg:message>
+		
+        <msg:message name="msgLinkToQuran">Verweis auf den Koran</msg:message>		
+		<msg:message name="msgLinkToQuranChapter">Verweis auf den Koran: Kapitel <msg:param name="chapter"/></msg:message>
+		<msg:message name="msgLinkToQuranChapterVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/></msg:message>		
+ 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/> bis <msg:param name="toVerse"/></msg:message>	
+		
+		
+		
+		
         <msg:message name="msgLocation">Position</msg:message>
         <msg:message name="msgLocations">Positionen</msg:message>
         <msg:message name="msgName">Name</msg:message>
@@ -1149,6 +1313,98 @@
         <msg:message name="msgKeywords">Trefwoorden</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress cataloguspagina</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
+		
+		<msg:message name="msgLinkToBible">Referentie naar de Bijbel</msg:message>		
+        <msg:message name="msgLinkToBibleBook">Referentie naar de Bijbel: <msg:param name="book"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Referentie naar de Bijbel: <msg:param name="book"/>, hoofdstuk <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Referentie naar de Bijbel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Referentie naar de Bijbel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+		
+		<msg:message name="bible.Genesis">Genesis</msg:message>
+        <msg:message name="bible.Exodus">Exodus</msg:message>
+        <msg:message name="bible.Leviticus">Leviticus</msg:message>
+        <msg:message name="bible.Numbers">Numeri</msg:message>
+        <msg:message name="bible.Deuteronomy">Deuteronomium</msg:message>
+        <msg:message name="bible.Joshua">Jozua</msg:message>
+        <msg:message name="bible.Judges">Richteren</msg:message>
+        <msg:message name="bible.Ruth">Ruth</msg:message>
+        <msg:message name="bible.1 Samuel">1 Samuel</msg:message>
+        <msg:message name="bible.2 Samuel">2 Samuel</msg:message>
+        <msg:message name="bible.1 Kings">1 Koningen</msg:message>
+        <msg:message name="bible.2 Kings">2 Koningen</msg:message>
+        <msg:message name="bible.1 Chronicles">1 Kronieken</msg:message>
+        <msg:message name="bible.2 Chronicles">2 Kronieken</msg:message>
+        <msg:message name="bible.Ezra">Ezra</msg:message>
+        <msg:message name="bible.Nehemiah">Nehemia</msg:message>
+        <msg:message name="bible.Esther">Ester</msg:message>
+        <msg:message name="bible.Job">Job</msg:message>
+        <msg:message name="bible.Psalm">Psalmen</msg:message>
+        <msg:message name="bible.Proverbs">Spreuken</msg:message>
+        <msg:message name="bible.Ecclesiastes">Prediker</msg:message>
+        <msg:message name="bible.Song of Solomon">Hooglied</msg:message>
+        <msg:message name="bible.Isaiah">Jesaja</msg:message>
+        <msg:message name="bible.Jeremiah">Jeremia</msg:message>
+        <msg:message name="bible.Lamentations">Klaagliederen</msg:message>
+        <msg:message name="bible.Ezekiel">Ezechiël</msg:message>
+        <msg:message name="bible.Daniel">Daniël</msg:message>
+        <msg:message name="bible.Hosea">Hosea</msg:message>
+        <msg:message name="bible.Joel">Joël</msg:message>
+        <msg:message name="bible.Amos">Amos</msg:message>
+        <msg:message name="bible.Obadiah">Obadja</msg:message>
+        <msg:message name="bible.Jonah">Jona</msg:message>
+        <msg:message name="bible.Micah">Micha</msg:message>
+        <msg:message name="bible.Nahum">Nahum</msg:message>
+        <msg:message name="bible.Habakkuk">Habakuk</msg:message>
+        <msg:message name="bible.Zephaniah">Sefanja</msg:message>
+        <msg:message name="bible.Haggai">Haggai</msg:message>
+        <msg:message name="bible.Zechariah">Zacharia</msg:message>
+        <msg:message name="bible.Malachi">Maleachi</msg:message>
+
+        <msg:message name="bible.Baruch">Baruch</msg:message>
+        <msg:message name="bible.Ecclesiasticus">Wijsheid van Jezus Sirach</msg:message>
+        <msg:message name="bible.1 Esdras">1 Ezra</msg:message>
+        <msg:message name="bible.2 Esdras">2 Ezra</msg:message>
+        <msg:message name="bible.Judith">Judit</msg:message>
+        <msg:message name="bible.1 Maccabees">1 Makkabeeën</msg:message>
+        <msg:message name="bible.2 Maccabees">2 Makkabeeën</msg:message>
+        <msg:message name="bible.Manasseh">Het gebed van Manasse</msg:message>
+        <msg:message name="bible.Susanna">Susanna</msg:message>
+        <msg:message name="bible.Tobit">Tobit</msg:message>
+        <msg:message name="bible.Wisdom of Solomon">De wijsheid van Salomo</msg:message>
+
+        <msg:message name="bible.Matthew">Matteüs</msg:message>
+        <msg:message name="bible.Mark">Marcus</msg:message>
+        <msg:message name="bible.Luke">Lucas</msg:message>
+        <msg:message name="bible.John">Johannes</msg:message>
+        <msg:message name="bible.Acts of the Apostles">Handelingen</msg:message>
+        <msg:message name="bible.Romans">Romeinen</msg:message>
+        <msg:message name="bible.1 Corinthians">1 Korintiërs</msg:message>
+        <msg:message name="bible.2 Corinthians">2 Korintiërs</msg:message>
+        <msg:message name="bible.Galatians">Galaten</msg:message>
+        <msg:message name="bible.Ephesians">Efeziërs</msg:message>
+        <msg:message name="bible.Philippians">Filippenzen</msg:message>
+        <msg:message name="bible.Colossians">Kolossenzen</msg:message>
+        <msg:message name="bible.1 Thessalonians">1 Tessalonicenzen</msg:message>
+        <msg:message name="bible.2 Thessalonians">2 Tessalonicenzen</msg:message>
+        <msg:message name="bible.1 Timothy">1 Timoteüs</msg:message>
+        <msg:message name="bible.2 Timothy">2 Timoteüs</msg:message>
+        <msg:message name="bible.Titus">Titus</msg:message>
+        <msg:message name="bible.Philemon">Filemon</msg:message>
+        <msg:message name="bible.Hebrews">Hebreeën</msg:message>
+        <msg:message name="bible.James">Jakobus</msg:message>
+        <msg:message name="bible.1 Peter">1 Petrus</msg:message>
+        <msg:message name="bible.2 Peter">2 Petrus</msg:message>
+        <msg:message name="bible.1 John">1 Johannes</msg:message>
+        <msg:message name="bible.2 John">2 Johannes</msg:message>
+        <msg:message name="bible.3 John">3 Johannes</msg:message>
+        <msg:message name="bible.Jude">Judas</msg:message>
+        <msg:message name="bible.Revelation">Openbaring van Johannes</msg:message>
+		
+        <msg:message name="msgLinkToQuran">Referentie naar de Koran</msg:message>		
+		<msg:message name="msgLinkToQuranChapter">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/></msg:message>
+		<msg:message name="msgLinkToQuranChapterVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/></msg:message>		
+ 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/> tot <msg:param name="toVerse"/></msg:message>	
+		
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
         <msg:message name="msgLinkToMap">Link naar locatie op kaart</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI-bestand</msg:message>
