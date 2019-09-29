@@ -75,6 +75,14 @@ p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  margin: 1.58em 10%;
 }
 
+td.tocDivNum {
+ vertical-align: top;
+}
+
+td.tocPageNum {
+ vertical-align: bottom;
+}
+
 .opener, .address {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
@@ -412,6 +420,11 @@ td.innerContainer {
  font-size: 80%;
  margin: 2em 5%;
  padding: 1em;
+}
+
+.missingTarget {
+ text-decoration: line-through;
+ color: red;
 }
 
 .correctiontable {

@@ -1,6 +1,6 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2019-08-23T21:26:02Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2019-09-29T20:42:09Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd29e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
@@ -95,6 +95,14 @@ p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
 
 p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  margin: 1.58em 10%;
+}
+
+td.tocDivNum {
+ vertical-align: top;
+}
+
+td.tocPageNum {
+ vertical-align: bottom;
 }
 
 .opener, .address {
@@ -434,6 +442,11 @@ td.innerContainer {
  font-size: 80%;
  margin: 2em 5%;
  padding: 1em;
+}
+
+.missingTarget {
+ text-decoration: line-through;
+ color: red;
 }
 
 .correctiontable {
@@ -1088,7 +1101,7 @@ span.tocPageNum, span.flushright {
 
  
 
-.pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
+.pglink, .catlink, .exlink, .wplink, .biblink, .qurlink, .seclink {
  background-repeat: no-repeat;
  background-position: right center;
 }
@@ -1103,7 +1116,7 @@ span.tocPageNum, span.flushright {
  padding-right: 17px;
 }
 
-.exlink, .wplink, .biblink, .seclink {
+.exlink, .wplink, .biblink, .qurlink, .seclink {
  background-image: url(images/external.png);
  padding-right: 13px;
 }
@@ -1116,7 +1129,7 @@ span.tocPageNum, span.flushright {
  background-color: #FFFFDC;
 }
 
-.exlink:hover, .wplink:hover, .biblink:hover {
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover {
  background-color: #FFDCDC;
 }body {
  background: #FFFFFF;
@@ -1783,7 +1796,7 @@ color:red
                   <p id="xd29e298">Test of the choice element as used for transcription: <span class="trans" id="xd29e300" title="Transcription">Original</span>.</p>
                   <p id="xd29e305">Books created with these stylesheet include: <a id="xd29e307" lang="nl" class="pglink xd29e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a> by Camille Flammarion, and <i id="xd29e310"><a id="xd29e311" lang="nl" class="pglink xd29e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></i> by Louis  Couperus (note how this last links points to chapter XIX of the book).
                      Books will be posted at <a id="xd29e314"></a><a id="xd29e315" class="seclink xd29e38" title="External link" href="https://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example:
-                     <a id="xd29e318" class="catlink xd29e38" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/books/OL11170298M">OLN</a> and <a id="xd29e321" class="catlink xd29e38" title="Link to WorldCat catalog page" href="https://www.worldcat.org/oclc/618671">OCLC</a>. The code knows short-hand notations for references to such common things as <a id="xd29e325" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> (even in <a id="xd29e328" lang="nl" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a>) and the <a id="xd29e331" class="biblink xd29e38" title="Link to cited location in Bible" href="https://www.biblegateway.com/passage/?search=gen%201:1&amp;version=NRSV">Bible</a>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <a id="xd29e334" class="exlink xd29e38" title="External link" href="https://en.wikipedia.org/wiki/Text_Encoding_Initiative">TEI</a> or <a id="xd29e337" class="exlink xd29e38" title="External link" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html">prefixDef</a>.)</p>
+                     <a id="xd29e318" class="catlink xd29e38" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/books/OL11170298M">OLN</a> and <a id="xd29e321" class="catlink xd29e38" title="Link to WorldCat catalog page" href="https://www.worldcat.org/oclc/618671">OCLC</a>. The code knows short-hand notations for references to such common things as <a id="xd29e325" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> (even in <a id="xd29e328" lang="nl" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a>) and the <a id="xd29e331" class="biblink xd29e38" title="Reference to the Bible: Genesis 1:1" href="https://www.biblegateway.com/passage/?search=gn%201:1&amp;version=NRSV">Bible</a>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <a id="xd29e334" class="exlink xd29e38" title="External link" href="https://en.wikipedia.org/wiki/Text_Encoding_Initiative">TEI</a> or <a id="xd29e337" class="exlink xd29e38" title="External link" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html">prefixDef</a>.)</p>
                   <div id="xd29e340" class="div2"><span class="pagenum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd29e341" class="main">Different ways of including files.</h3>
                      </div>
@@ -1795,9 +1808,9 @@ color:red
                         <p id="xd29e346">The following paragraph should include some Sanskrit.</p>
                         <p id="sanskrit">Third included paragraph (some Sanskrit: &#x938;&#x902;&#x938;&#x94d;&#x915;&#x943;&#x924;&#x92e;&#x94d;).</p>
                         <p id="xd29e348">The following includes the entire file.</p>
-                        <div class="div3" id="xd354e1">
+                        <div class="div3" id="xd51e1">
                            <div class="divHead">
-                              <h4 id="xd354e3" class="main">Languages written in a different script.</h4>
+                              <h4 id="xd51e3" class="main">Languages written in a different script.</h4>
                            </div>
                            <div class="divBody">
                               <p id="russian" class="first">First included paragraph (some Russian: &#x440;&#x443;&#x441;&#x441;&#x43a;&#x438;&#x439; &#x44f;&#x437;&#x44b;&#x43a;).</p>
@@ -3178,15 +3191,15 @@ color:red
                </div>
                <div class="divBody">
                   <p id="xd29e1625" class="first">This is an experimental feature. To include a mathematical formula, just type
-                     <span id="f1" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1630src" href="#xd29e1630">1</a> famous equation.</p>
+                     <span id="f1" class="inlineMath"><img src="formulas/inline-f1.svg" alt="upper E equals m c squared" title="upper E equals m c squared" class="f1frml"></img></span> to get Einstein&#x2019;s<a class="noteref" id="xd29e1630src" href="#xd29e1630">1</a> famous equation.</p>
                   <p id="xd29e1636">Similarly, to get the time-dependent Schrödinger equation, you can type
-                     <span id="f2" class="displayMath"><img src="formulas/display-f2.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" class="f2frml"></img></span>
-                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span id="f3" class="displayMath"><img src="formulas/display-f3.svg" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1644" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
+                     <span id="f2" class="displayMath"><img src="formulas/display-f2.svg" alt="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction StartAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle equals ModifyingAbove upper H With caret EndAbsoluteValue normal upper Psi left-parenthesis bold r comma t right-parenthesis mathematical right-angle" class="f2frml"></img></span>
+                     and impress your friends. Okay, lets do one more for the heck of it: <span class="labeledMath"><span class="phantom leftMathLabel">(2<i>a</i>)</span><span id="f3" class="displayMath"><img src="formulas/display-f3.svg" alt="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" title="i italic h over two pi StartFraction partial-differential Over partial-differential t EndFraction normal upper Psi left-parenthesis bold r comma t right-parenthesis equals left-bracket StartFraction minus italic h over two pi squared Over 2 mu EndFraction nabla squared plus upper V left-parenthesis bold r comma t right-parenthesis right-bracket normal upper Psi left-parenthesis bold r comma t right-parenthesis" class="f3frml"></img></span><span class="rightMathLabel">(2<i>a</i>)</span></span> If you want to learn more about these, go to <a id="xd29e1644" class="wplink xd29e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Wikipedia</a>.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"></hr>
                   <div class="footnote-body">
-                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1630" href="#xd29e1630src">1</a></span> That is <span id="f1n" class="inlineMath"><img src="formulas/inline-f1.svg" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
+                     <p class="footnote"><span class="label"><a class="noteref" id="xd29e1630" href="#xd29e1630src">1</a></span> That is <span id="f1n" class="inlineMath"><img src="formulas/inline-f1.svg" alt="upper E equals m c squared" title="upper E equals m c squared" class="f1frml"></img></span> again, to test handling of duplicate formulas and to demonstrate how they neatly
                         resize, matching the x-height of the surrounding text.&nbsp;<a class="fnarrow" href="#xd29e1630src">&#x2191;</a></p>
                   </div>
                </div>
@@ -3195,8 +3208,8 @@ color:red
                   <h2 id="xd29e1648" class="main">Mathematical Formula (Part II)</h2>
                </div>
                <div class="divBody">
-                  <p id="xd29e1649" class="first">When <span id="f4" class="inlineMath"><img src="formulas/inline-f4.svg" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span id="f5" class="inlineMath"><img src="formulas/inline-f5.svg" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
-                     <span id="f6" class="displayMath"><img src="formulas/display-f6.svg" title="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" class="f6frml"></img></span></p>
+                  <p id="xd29e1649" class="first">When <span id="f4" class="inlineMath"><img src="formulas/inline-f4.svg" alt="a not-equals 0" title="a not-equals 0" class="f4frml"></img></span>, there are two solutions to <span id="f5" class="inlineMath"><img src="formulas/inline-f5.svg" alt="a x squared plus b x plus c equals 0" title="a x squared plus b x plus c equals 0" class="f5frml"></img></span> and they are
+                     <span id="f6" class="displayMath"><img src="formulas/display-f6.svg" alt="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" title="x equals StartFraction negative b plus-or-minus StartRoot b squared minus 4 a c EndRoot Over 2 a EndFraction period" class="f6frml"></img></span></p>
                </div>
             </div>
          </div>
@@ -4347,10 +4360,10 @@ color:red
                </tr>
                <tr>
                   <td>divGen</td>
-                  <td>12</td>
+                  <td>13</td>
                   <td><b>@id</b></td>
-                  <td>12</td>
-                  <td><span class="tagUsageValue">toc</span> <span class="tagUsageValue">inc1</span> <span class="tagUsageValue">inc3</span> <span class="tagUsageValue">ixToc</span> <span class="tagUsageValue">gal</span> <span class="tagUsageValue">ix</span> <span class="tagUsageValue">toc2</span> <span class="tagUsageValue">loi</span> <span class="tagUsageValue">colophon</span> <span class="tagUsageValue">lf</span> <span class="tagUsageValue">tu</span> <span class="tagUsageValue">pgf</span> </td>
+                  <td>13</td>
+                  <td><span class="tagUsageValue">toc</span> <span class="tagUsageValue">inc1</span> <span class="tagUsageValue">inc3</span> <span class="tagUsageValue">ixToc</span> <span class="tagUsageValue">gal</span> <span class="tagUsageValue">ix</span> <span class="tagUsageValue">toc2</span> <span class="tagUsageValue">loi</span> <span class="tagUsageValue">colophon</span> <span class="tagUsageValue">lf</span> <span class="tagUsageValue">tu</span> <span class="tagUsageValue">refs</span> <span class="tagUsageValue">pgf</span> </td>
                </tr>
                <tr>
                   <td></td>
@@ -4363,8 +4376,8 @@ color:red
                   <td></td>
                   <td></td>
                   <td><b>@type</b></td>
-                  <td>12</td>
-                  <td><span class="tagUsageValue">toc</span> <i>2</i> <span class="tagUsageValue">Inclusion</span> <i>2</i> <span class="tagUsageValue">IndexToc</span> <span class="tagUsageValue">Gallery</span> <span class="tagUsageValue">Index</span> <span class="tagUsageValue">loi</span> <span class="tagUsageValue">Colophon</span> <span class="tagUsageValue">LanguageFragments</span> <span class="tagUsageValue">TagUsage</span> <span class="tagUsageValue">pgfooter</span> </td>
+                  <td>13</td>
+                  <td><span class="tagUsageValue">toc</span> <i>2</i> <span class="tagUsageValue">Inclusion</span> <i>2</i> <span class="tagUsageValue">IndexToc</span> <span class="tagUsageValue">Gallery</span> <span class="tagUsageValue">Index</span> <span class="tagUsageValue">loi</span> <span class="tagUsageValue">Colophon</span> <span class="tagUsageValue">LanguageFragments</span> <span class="tagUsageValue">TagUsage</span> <span class="tagUsageValue">References</span> <span class="tagUsageValue">pgfooter</span> </td>
                </tr>
                <tr>
                   <td></td>
@@ -5262,10 +5275,116 @@ color:red
                   <td></td>
                   <td><b>@url</b></td>
                   <td>13</td>
-                  <td><span class="tagUsageValue">https://www.gnu.org/copyleft/gpl.html</span> <span class="tagUsageValue">https://www.gutenberg.org/</span> <i>2</i> <span class="tagUsageValue">pg:19585</span> <span class="tagUsageValue">pg:37578#ch19</span> <span class="tagUsageValue">oln:OL11170298M</span> <span class="tagUsageValue">oclc:618671</span> <span class="tagUsageValue">wp:wikipedia</span> <span class="tagUsageValue">wp:Nederlands</span> <span class="tagUsageValue">bib:gen 1:1</span> <span class="tagUsageValue">wiki:Text_Encoding_Initiative</span> <span class="tagUsageValue">tei:prefixDef</span> <span class="tagUsageValue">wp:Schrödinger_equation</span> </td>
+                  <td><span class="tagUsageValue">https://www.gnu.org/copyleft/gpl.html</span> <span class="tagUsageValue">https://www.gutenberg.org/</span> <i>2</i> <span class="tagUsageValue">pg:19585</span> <span class="tagUsageValue">pg:37578#ch19</span> <span class="tagUsageValue">oln:OL11170298M</span> <span class="tagUsageValue">oclc:618671</span> <span class="tagUsageValue">wp:wikipedia</span> <span class="tagUsageValue">wp:Nederlands</span> <span class="tagUsageValue">bib:gn 1:1</span> <span class="tagUsageValue">wiki:Text_Encoding_Initiative</span> <span class="tagUsageValue">tei:prefixDef</span> <span class="tagUsageValue">wp:Schrödinger_equation</span> </td>
                </tr>
             </table>
          </div>
+         <table class="internalReferenceTable">
+            <tr>
+               <th>Page</th>
+               <th>Text</th>
+               <th>Target</th>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e178ext" href="#xd29e178">2</a></td>
+               <td><a href="#ch05" id="xd29e178">next chapter</a></td>
+               <td>ch05</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e457ext" href="#xd29e457">2<i>a</i></a></td>
+               <td><a href="#ch05" id="xd29e457">chapter</a></td>
+               <td>ch05</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e269ext" href="#xd29e269">2<i>a</i></a></td>
+               <td><a href="#figTest2" id="xd29e269">figure</a></td>
+               <td>figTest2</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e1486ext" href="#xd29e1486">5</a></td>
+               <td><a href="#footnoteverse" id="xd29e1486">here</a></td>
+               <td>footnoteverse</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e460ext" href="#xd29e460">2<i>a</i></a></td>
+               <td><a href="#inside-n1" id="xd29e460">element inside it</a></td>
+               <td>inside-n1</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e454ext" href="#xd29e454">2<i>a</i></a></td>
+               <td><a href="#n1" id="xd29e454">footnote</a></td>
+               <td>n1</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e518ext" href="#xd29e518">2<i>a</i></a></td>
+               <td><a class="pseudonoteref" href="#n1">2</a></td>
+               <td>n1</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e521ext" href="#xd29e521">2<i>a</i></a></td>
+               <td><a href="#n1" id="xd29e521">the same footnote</a></td>
+               <td>n1</td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e266ext" href="#xd29e266">2<i>a</i></a></td>
+               <td>page 2</td>
+               <td><span class="missingTarget">pb002</span></td>
+            </tr>
+         </table>
+         <table class="externalReferenceTable">
+            <tr>
+               <th>Page</th>
+               <th>URL</th>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e331ext" href="#xd29e331">2<i>a</i></a></td>
+               <td><a href="https://www.biblegateway.com/passage/?search=gn%201:1&amp;version=NRSV" class="biblink">https://www.biblegateway.com/passage/?search=gn%201:1&amp;version=NRSV</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e32ext" href="#xd29e32">N.A.</a></td>
+               <td><a href="https://www.gnu.org/copyleft/gpl.html" class="seclink">https://www.gnu.org/copyleft/gpl.html</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e38ext" href="#xd29e38">N.A.</a>, <a class="pageref" id="xd29e315ext" href="#xd29e315">2<i>a</i></a></td>
+               <td><a href="https://www.gutenberg.org/" class="seclink">https://www.gutenberg.org/</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e321ext" href="#xd29e321">2<i>a</i></a></td>
+               <td><a href="https://www.worldcat.org/oclc/618671" class="catlink">https://www.worldcat.org/oclc/618671</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e318ext" href="#xd29e318">2<i>a</i></a></td>
+               <td><a href="https://openlibrary.org/books/OL11170298M" class="catlink">https://openlibrary.org/books/OL11170298M</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e307ext" href="#xd29e307">2<i>a</i></a></td>
+               <td><a href="https://www.gutenberg.org/ebooks/19585" class="pglink">https://www.gutenberg.org/ebooks/19585</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e311ext" href="#xd29e311">2<i>a</i></a></td>
+               <td><a href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19" class="pglink">https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e337ext" href="#xd29e337">2<i>a</i></a></td>
+               <td><a href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html" class="exlink">https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e334ext" href="#xd29e334">2<i>a</i></a></td>
+               <td><a href="https://en.wikipedia.org/wiki/Text_Encoding_Initiative" class="exlink">https://en.wikipedia.org/wiki/Text_Encoding_Initiative</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e328ext" href="#xd29e328">2<i>a</i></a></td>
+               <td><a href="https://en.wikipedia.org/wiki/Nederlands" class="wplink">https://en.wikipedia.org/wiki/Nederlands</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e1644ext" href="#xd29e1644">5</a></td>
+               <td><a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation" class="wplink">https://en.wikipedia.org/wiki/Schrödinger_equation</a></td>
+            </tr>
+            <tr>
+               <td><a class="pageref" id="xd29e325ext" href="#xd29e325">2<i>a</i></a></td>
+               <td><a href="https://en.wikipedia.org/wiki/wikipedia" class="wplink">https://en.wikipedia.org/wiki/wikipedia</a></td>
+            </tr>
+         </table>
          <div class="transcribernote" id="pgfooter">
             <p></p>
             

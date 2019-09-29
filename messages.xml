@@ -331,6 +331,7 @@
         <msg:message name="msgTable">Table</msg:message>
         <msg:message name="msgTableOfContents">Table of Contents</msg:message>
         <msg:message name="msgTables">Tables</msg:message>
+		<msg:message name="msgTarget">Target</msg:message>
         <msg:message name="msgText">Text</msg:message>
         <msg:message name="msgTitlePage">Title Page</msg:message>
         <msg:message name="msgToc">Contents</msg:message>
@@ -1458,6 +1459,7 @@
         <msg:message name="msgTable">Tabel</msg:message>
         <msg:message name="msgTableOfContents">Inhoudsopgave</msg:message>
         <msg:message name="msgTables">Tabellen</msg:message>
+		<msg:message name="msgTarget">Doel</msg:message>
         <msg:message name="msgText">Tekst</msg:message>
         <msg:message name="msgTitlePage">Titelpagina</msg:message>
         <msg:message name="msgToc">Inhoud</msg:message>

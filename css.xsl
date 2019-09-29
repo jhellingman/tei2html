@@ -574,10 +574,10 @@
 
         <!-- We need to collect the column-related rendering rules first,
              so they can be overridden by later cell rendering rules -->
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//column[@rend]" mode="css-column"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-column"/>
 
         <!-- Then follow the row-related rendering rules -->
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//row[@rend]" mode="css-row"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-row"/>
 
         <!-- Handle the rest of the document (including table cells) -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="css"/>
@@ -598,10 +598,10 @@
 
         <!-- We need to collect the column-related rendering rules first,
              so they can be overridden by later cell rendering rules -->
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//column[@style]" mode="style-column"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-column"/>
 
         <!-- Then follow the row-related rendering rules -->
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text//row[@style]" mode="style-row"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-row"/>
 
         <!-- Handle the rest of the document (including table cells) -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="style"/>
@@ -617,6 +617,7 @@
 
     <xsl:template match="row[@rend]" mode="css-row">
         <xsl:call-template name="generate-css-rule"/>
+        <xsl:apply-templates mode="css-row"/>
     </xsl:template>
 
     <xsl:template match="column[@style]" mode="style-column">
@@ -625,6 +626,7 @@
 
     <xsl:template match="row[@style]" mode="style-row">
         <xsl:call-template name="generate-style-rule"/>
+        <xsl:apply-templates mode="style-row"/>
     </xsl:template>
 
 
@@ -723,7 +725,7 @@
         <xd:short>Ignore document text() nodes in CSS modes.</xd:short>
     </xd:doc>
 
-    <xsl:template match="text()" mode="css css-handheld style"/>
+    <xsl:template match="text()" mode="css css-row css-column css-handheld style style-row style-column"/>
 
 
     <xd:doc>

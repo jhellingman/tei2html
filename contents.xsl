@@ -913,30 +913,30 @@
 
 
     <!--====================================================================-->
-    <!-- Included material (alternative for xi:include) -->
+    <!-- Included material (alternative for xi:include); also take care relevant CSS styles are generated. -->
 
-    <xsl:template match="divGen[@type='Inclusion']">
+    <xsl:template match="divGen[@type='Inclusion']" mode="#default css style css-column css-row style-column style-row">
         <!-- Material to be included should be rendered here; material is given on a url parameter -->
         <xsl:choose>
             <xsl:when test="@url">
                 <xsl:variable name="document" select="substring-before(@url, '#')"/>
                 <xsl:variable name="fragmentId" select="substring-after(@url, '#')"/>
-                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)/*"/>
+                <xsl:apply-templates mode="#current" select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)/*"/>
             </xsl:when>
             <xsl:when test="f:has-rend-value(@rend, 'include')">
                 <xsl:variable name="url" select="f:rend-value(@rend, 'include')"/>
                 <xsl:variable name="document" select="substring-before($url, '#')"/>
                 <xsl:variable name="fragmentId" select="substring-after($url, '#')"/>
-                <xsl:apply-templates select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)/*"/>
+                <xsl:apply-templates mode="#current" select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)/*"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
 
-    <xsl:template match="xi:include">
+    <xsl:template match="xi:include" mode="#default css style css-column css-row style-column style-row">
         <!-- Material to be included should be rendered here; material is given on an href parameter -->
         <xsl:if test="@href">
-            <xsl:apply-templates select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)/*"/>
+            <xsl:apply-templates mode="#current" select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)/*"/>
         </xsl:if>
     </xsl:template>
 

@@ -577,6 +577,9 @@
 
     <xsl:template mode="checks" match="text">
 
+        <!-- No double ids?-->
+        <xsl:apply-templates select="//*[@id]" mode="doubleIds"/>
+
         <!-- Do we have a front, body, and back element? -->
         <xsl:if test="not(front)">
             <i:issue pos="{@pos}" code="E04" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No front element!</i:issue>
@@ -599,6 +602,16 @@
         </xsl:if>
 
     </xsl:template>
+
+    <xsl:key name="id" match="*[@id]" use="@id"/> 
+
+
+    <xsl:template match="*[@id]" mode="doubleIds">
+        <xsl:if test="count(key('id', @id)) &gt; 1">
+            <i:issue pos="{@pos}" code="E09" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Same id used more than once.</i:issue>
+        </xsl:if>
+    </xsl:template>
+
 
     <xd:doc>
         <xd:short>Check presence of cover and title page.</xd:short>
@@ -877,7 +890,8 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:template mode="checks" match="hi[@rend='sc'] | sc">
+
+    <xsl:template mode="checks" match="hi[@rend='sc'] | sc" priority="2">
         <xsl:if test="string(.) = lower-case(string(.))">
             <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
         </xsl:if>

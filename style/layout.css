@@ -426,6 +426,11 @@ td.innerContainer {
     padding: 1em;
 }
 
+.missingTarget {
+    text-decoration: line-through;
+    color: red;
+}
+
 .correctiontable {
     width: 75%;
 }

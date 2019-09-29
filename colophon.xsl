@@ -714,6 +714,12 @@
     <!--====================================================================-->
     <!-- External References -->
 
+
+    <xsl:template match="divGen[@type='References']">
+        <xsl:call-template name="internalReferenceTable"/>
+        <xsl:call-template name="externalReferenceTable"/>
+    </xsl:template>
+
     <xd:doc>
         <xd:short>Generate a table of external references.</xd:short>
         <xd:detail>
@@ -747,7 +753,6 @@
 
         <!-- TODO: make this table also work for P5 href elements -->
         <xsl:if test="//xref[@url]">
-
             <table class="externalReferenceTable">
                 <tr>
                     <th><xsl:value-of select="f:message('msgPage')"/></th>
@@ -767,7 +772,7 @@
                             </xsl:for-each>
                         </td>
                         <td>
-                            <xsl:variable name="url" select="f:translate-xref-url(@url, substring(/*[self::TEI.2 or self::TEI]/@lang, 1, 2))"/>
+                            <xsl:variable name="url" select="f:translate-xref-url(@url, substring(f:get-document-lang(), 1, 2))"/>
                             <xsl:choose>
                                 <xsl:when test="f:getSetting('outputExternalLinks') != 'never'">
                                     <a href="{$url}" class="{f:translate-xref-class(@url)}"><xsl:value-of select="$url"/></a>
@@ -779,6 +784,42 @@
                         </td>
                     </tr>
                 </xsl:for-each-group>
+            </table>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template name="internalReferenceTable">
+        <xsl:if test="//ref[@target]">
+            <table class="internalReferenceTable">
+                <tr>
+                    <th><xsl:value-of select="f:message('msgPage')"/></th>
+                    <th><xsl:value-of select="f:message('msgText')"/></th>
+                    <th><xsl:value-of select="f:message('msgTarget')"/></th>
+                </tr>
+                <xsl:for-each select="//ref[@target]">
+                    <xsl:sort select="@target"/>
+                    <tr>
+                        <td>
+                            <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
+                                <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
+                            </a>
+                        </td>
+                        <td>
+                            <xsl:apply-templates select="."/>
+                        </td>
+                        <td>
+                            <xsl:choose>
+                                <xsl:when test="key('id', @target)[1]">
+                                    <xsl:value-of select="@target"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="missingTarget"><xsl:value-of select="@target"/></span>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                    </tr>
+                </xsl:for-each>
             </table>
         </xsl:if>
     </xsl:template>
@@ -1039,6 +1080,5 @@
             </xsl:for-each>
         </td>
     </xsl:template>
-
 
 </xsl:stylesheet>

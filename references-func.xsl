@@ -31,21 +31,24 @@
     <xsl:function name="f:translate-xref-class" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
-        <xsl:choose>
-            <xsl:when test="starts-with($url, 'pg:')">pglink</xsl:when>
-            <xsl:when test="starts-with($url, 'pgi:')">pgilink</xsl:when>
-            <xsl:when test="starts-with($url, 'oclc:')">catlink</xsl:when>
-            <xsl:when test="starts-with($url, 'oln:')">catlink</xsl:when>
-            <xsl:when test="starts-with($url, 'olw:')">catlink</xsl:when>
-            <xsl:when test="starts-with($url, 'wp:')">wplink</xsl:when>
-            <xsl:when test="starts-with($url, 'loc:')">loclink</xsl:when>
-            <xsl:when test="starts-with($url, 'bib:')">biblink</xsl:when>
-            <xsl:when test="starts-with($url, 'qur:')">qurlink</xsl:when>
-            <xsl:when test="starts-with($url, 'tia:')">tialink</xsl:when>
+        <xsl:variable name="linkClasses" select="map{
+            'bib':    'biblink',
+            'ftp':    'ftplink',
+            'https':  'seclink',
+            'loc':    'loclink',
+            'mailto': 'maillink',
+            'oclc':   'catlink',
+            'oln':    'catlink',
+            'olw':    'catlink',
+            'pg':     'pglink',
+            'pgi':    'pgilink',
+            'qur':    'qurlink',
+            'wp':     'wplink'
+            }"/>
 
-            <xsl:when test="starts-with($url, 'https:')">seclink</xsl:when>
-            <xsl:when test="starts-with($url, 'ftp:')">ftplink</xsl:when>
-            <xsl:when test="starts-with($url, 'mailto:')">maillink</xsl:when>
+        <xsl:variable name="protocol" select="if (contains($url, ':')) then substring-before($url, ':') else ''"/>
+        <xsl:choose>
+            <xsl:when test="map:get($linkClasses, $protocol)"><xsl:value-of select="map:get($linkClasses, $protocol)"/></xsl:when>
             <xsl:when test="starts-with($url, 'audio/')">audiolink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
@@ -132,16 +135,7 @@
 
             <!-- Link to Project Gutenberg book -->
             <xsl:when test="starts-with($url, 'pg:') or starts-with($url, 'pgi:')">
-                <xsl:choose>
-                    <xsl:when test="contains($url, '#')">
-                        <xsl:variable name="number" select="substring-before(substring-after($url, ':'), '#')"/>
-                        <xsl:variable name="anchor" select="substring-after($url, '#')"/>
-                        <xsl:value-of select="'https://www.gutenberg.org/files/' || $number || '/' || $number || '-h/' || $number || '-h.htm#' || $anchor"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="f:translateProjectGutenbergUrl($url)"/>
             </xsl:when>
 
             <!-- Link to OCLC (worldcat) catalog entry -->
@@ -241,6 +235,21 @@
         <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $prefixDef/@replacementPattern)"/>
     </xsl:function>
 
+
+    <xsl:function name="f:translateProjectGutenbergUrl" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:choose>
+            <xsl:when test="contains($url, '#')">
+                <xsl:variable name="number" select="substring-before(substring-after($url, ':'), '#')"/>
+                <xsl:variable name="anchor" select="substring-after($url, '#')"/>
+                <xsl:value-of select="'https://www.gutenberg.org/files/' || $number || '/' || $number || '-h/' || $number || '-h.htm#' || $anchor"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text expand-text="yes">https://www.gutenberg.org/ebooks/{substring-after($url, ':')}</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 
     <xsl:variable name="bibleRefPattern" select="'^bib:((?:[0-3] )?[A-Za-z]+)(?: ([0-9]+)(?:[:]([0-9]+)(?:[-]([0-9]+))?)?)?(?:[@]([A-Za-z0-9;]+))?$'"/>
@@ -360,16 +369,6 @@
     </xsl:function>
 
 
-    <xsl:variable name="bibleTranslations" select="map{
-        'en': 'NRSV',
-        'fr': 'LSG',
-        'de': 'LUTH1545',
-        'es': 'RVR1995',
-        'nl': 'HTB',
-        'la': 'VULGATE'
-        }"/>
-
-
     <xsl:function name="f:urlForBibleLink" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
@@ -388,6 +387,15 @@
         <xsl:if test="not(map:get($bibleBooks, lower-case($book)))">
             <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
+
+        <xsl:variable name="bibleTranslations" select="map{
+            'en': 'NRSV',
+            'fr': 'LSG',
+            'de': 'LUTH1545',
+            'es': 'RVR1995',
+            'nl': 'HTB',
+            'la': 'VULGATE'
+            }"/>
 
         <xsl:variable name="edition" select="if ($edition) then ($edition) else map:get($bibleTranslations, $lang)"/>
         <xsl:if test="not($edition)">
