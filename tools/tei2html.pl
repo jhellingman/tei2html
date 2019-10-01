@@ -37,14 +37,15 @@ my $sx              = "sx";
 # Arguments
 
 my $makeText            = 0;
+my $explicitMakeText    = 0;
 my $makeHtml            = 0;
 my $makeHeatMap         = 0;
 my $makePdf             = 0;
 my $makeEpub            = 0;
 my $epubVersion         = "3.0.1";
-my $makeReport          = 0;
-my $makeP5              = 0;
+my $makeWordlist        = 0;
 my $makeXML             = 0;
+my $makeP5              = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
@@ -61,7 +62,7 @@ my $profile             = 0;
 my $useTidy             = 0;
 
 GetOptions(
-    't' => \$makeText,
+    't' => \$explicitMakeText,
     'h' => \$makeHtml,
     'm' => \$makeHeatMap,
     'e' => \$makeEpub,
@@ -69,9 +70,9 @@ GetOptions(
     'D' => \$debug,
     'p' => \$makePdf,
     'P' => \$profile,
-    '5' => \$makeP5,
-    'r' => \$makeReport,
     'x' => \$makeXML,
+    '5' => \$makeP5,
+    'r' => \$makeWordlist,
     'v' => \$runChecks,
     'u' => \$useUnicode,
     'f' => \$force,
@@ -128,15 +129,12 @@ if ($showHelp) {
     exit(0);
 }
 
-if ($makeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $makeReport == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
+if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $makeWordlist == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
     # Revert to old default:
     $makeText = 1;
     $makeHtml = 1;
-    $makeReport = 1;
-}
-
-if ($makeHtml == 1 || $makePdf == 1 || $makeEpub == 1 || $makeReport == 1 || $makeKwic == 1 || $makeP5 == 1) {
-    $makeXML = 1;
+    $makeWordlist = 1;
+    $runChecks = 1;
 }
 
 if ($debug) {
@@ -144,7 +142,6 @@ if ($debug) {
 }
 
 #==============================================================================
-
 
 
 my $tmpBase = 'tmp';
@@ -178,20 +175,23 @@ sub processFile($) {
         die "File: '$filename' is not a .TEI file\n";
     }
 
-    $filename =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
+    $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
     my $basename = $1;
-    my $version  = $3;
+    my $version = $2;
+    my $format = $3;
 
     if ($basename eq '') {
         $filename =~ /^(.+)\.(tei|xml)$/;
         $basename = $1;
         $version = "0.0";
+        $format = $2;
     }
 
     if ($version >= 1.0) {
         $makeText = 0;
-    } else {
-        $runChecks = 1;
+    }
+    if ($explicitMakeText = 1) {
+        $makeText = 1;
     }
 
     print "Processing TEI-file '$basename' version $version\n";
@@ -199,47 +199,51 @@ sub processFile($) {
     extractMetadata($filename);
     extractEntities($filename);
 
-    if ($makeXML && $filename =~ /\.tei$/) {
-        tei2xml($filename, $basename . ".xml");
+    my $xmlFilename = $format eq 'tei' ? $basename . ".xml" : $filename;
+    if ($format eq 'tei') {
+        tei2xml($filename, $xmlFilename);
     }
 
     if ($runChecks) {
         runChecks($filename);
     }
 
-    my $xmlfilename = "$basename-normalized.xml";
-    if ($force != 0 || !isNewer($xmlfilename, $basename . ".xml")) {
+    my $normalizedXmlFilename = "$basename-normalized.xml";
+    if ($force != 0 || isNewer($filename, $normalizedXmlFilename)) {
         print "Normalize tables and add col and row attributes to cells...\n";
-        system ("$saxon $basename.xml $xsldir/normalize-table.xsl > $xmlfilename");
+        system ("$saxon $xmlFilename $xsldir/normalize-table.xsl > $normalizedXmlFilename");
     }
 
-    if ($makeP5 != 0) {
+    if ($makeP5 != 0 && ($force != 0 || isNewer($filename, "$basename-p5.xml"))) {
         print "Convert from TEI P4 to TEI P5 (experimental)\n";
-        system ("$saxon $xmlfilename $xsldir/p4top5.xsl > $basename-p5.xml");
+        system ("$saxon $normalizedXmlFilename $xsldir/p4top5.xsl > $basename-p5.xml");
     }
 
-    # extract metadata
-    print "Extract metadata to metadata.xml...\n";
-    system ("$saxon $xmlfilename $xsldir/tei2dc.xsl > metadata.xml");
-    print "Extract metadata to README.md...\n";
-    system ("$saxon $xmlfilename $xsldir/tei2readme.xsl > README.md");
+    if ($force != 0 || isNewer($filename, 'metadata.xml')) {
+        print "Extract metadata to metadata.xml...\n";
+        system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+    }
+
+    if ($force != 0 || isNewer($filename, 'README.md')) {
+        print "Extract metadata to README.md...\n";
+        system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
+    }
 
     # create PGTEI version
-    # system ("$saxon $xmlfilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    # system ("$saxon $normalizedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     makeQrCode();
     collectImageInfo();
-    $makeHtml   && makeHtml($basename);
-    $makePdf    && makePdf($basename);
-    $makeEpub   && makeEpub($basename);
-    $makeText   && makeText($filename, $basename);
-    $makeReport && makeReport($basename);
+    $makeHtml && makeHtml($basename, $normalizedXmlFilename, $basename . '.html');
+    $makePdf && makePdf($basename, $normalizedXmlFilename, $basename . '.pdf');
+    $makeEpub && makeEpub($basename, $normalizedXmlFilename, $basename . '.epub');
+    $makeText && makeText($basename, $filename, $basename . '.txt');
+    $makeWordlist && makeWordlist($normalizedXmlFilename, $basename . '-words.html');
 
-
-    if ($makeKwic == 1) {
+    if ($makeKwic == 1 && ($force != 0 || isNewer($filename, "$basename-kwic.html"))) {
         my $saxonParameters = determineSaxonParameters();
         print "Generate a KWIC index (this may take some time)...\n";
-        system ("$saxon $basename.xml $xsldir/xml2kwic.xsl $saxonParameters > $basename-kwic.html");
+        system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters > $basename-kwic.html");
     }
 
     if ($makeZip == 1 && $pgNumber > 0) {
@@ -268,8 +272,8 @@ sub makeQrCode() {
 
 sub makeHtml($) {
     my $basename = shift;
-    my $xmlFile = $basename . "-normalized.xml";
-    my $htmlFile = $basename . ".html";
+    my $xmlFile = shift;
+    my $htmlFile = shift;
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         print "Skipping convertion to HTML ($htmlFile newer than $xmlFile).\n";
@@ -295,8 +299,13 @@ sub makeHtml($) {
 
 sub makePdf($) {
     my $basename = shift;
-    my $xmlFile = $basename . "-normalized.xml";
-    my $pdfFile = $basename . ".pdf";
+    my $xmlFile = shift;
+    my $pdfFile = shift;
+
+    if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
+        print "Skipping convertion to PDF ($pdfFile newer than $xmlFile).\n";
+        return;
+    }
 
     my $tmpFile1 = temporaryFile('pdf', '.html');
     my $tmpFile2 = temporaryFile('pdf', '.html');
@@ -316,8 +325,8 @@ sub makePdf($) {
 
 sub makeEpub() {
     my $basename = shift;
-    my $xmlFile = $basename . "-normalized.xml";
-    my $epubFile = $basename . ".epub";
+    my $xmlFile = shift;
+    my $epubFile = shift;
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
         print "Skipping convertion to ePub ($epubFile newer than $xmlFile).\n";
@@ -348,8 +357,14 @@ sub makeEpub() {
 
 
 sub makeText($$) {
-    my $filename = shift;
     my $basename = shift;
+    my $filename = shift;
+    my $textFile = shift;
+
+    if ($force == 0 && isNewer($textFile, $filename)) {
+        print "Skipping convertion to text file ($textFile newer than $filename).\n";
+        return;
+    }
 
     my $tmpFile1 = temporaryFile('txt', '.txt');
     my $tmpFile2 = temporaryFile('txt', '.txt');
@@ -361,17 +376,17 @@ sub makeText($$) {
 
     if ($useUnicode == 1) {
         # Use our own script to wrap lines, as fmt cannot deal with unicode text.
-        system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
+        system ("perl -S wraplines.pl $tmpFile2 > $textFile");
     } else {
         # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-        system ("fmt -sw$pageWidth $tmpFile2 > $basename.txt");
+        system ("fmt -sw$pageWidth $tmpFile2 > $textFile");
     }
-    system ("$gutcheck $basename.txt > $basename.gutcheck");
-    system ("$jeebies $basename.txt > $basename.jeebies");
+    system ("$gutcheck $textFile > $basename.gutcheck");
+    system ("$jeebies $textFile > $basename.jeebies");
 
     # Check the version in the Processed directory as well.
-    if (-f "Processed\\$basename.txt") {
-        system ("$gutcheck Processed\\$basename.txt > $basename-final.gutcheck");
+    if (-f "Processed\\$textFile") {
+        system ("$gutcheck Processed\\$textFile > $basename-final.gutcheck");
     }
 
     $debug || unlink("$filename.out");
@@ -380,37 +395,43 @@ sub makeText($$) {
     $debug || unlink($tmpFile2);
 
     # check for required manual intervetions
-    my $containsError = system ("grep -q \"\\[ERROR:\" $basename.txt");
+    my $containsError = system ("grep -q \"\\[ERROR:\" $textFile");
     if ($containsError == 0) {
-        print "NOTE: Please check $basename.txt for [ERROR: ...] messages.\n";
+        print "NOTE: Please check $textFile for [ERROR: ...] messages.\n";
     }
-    my $containsTable = system ("grep -q \"TABLE\" $basename.txt");
+    my $containsTable = system ("grep -q \"TABLE\" $textFile");
     if ($containsTable == 0) {
-        print "NOTE: Please check $basename.txt for TABLEs.\n";
+        print "NOTE: Please check $textFile for TABLEs.\n";
     }
-    my $containsFigure = system ("grep -q \"FIGURE\" $basename.txt");
+    my $containsFigure = system ("grep -q \"FIGURE\" $textFile");
     if ($containsFigure == 0) {
-        print "NOTE: Please check $basename.txt for FIGUREs.\n";
+        print "NOTE: Please check $textFile for FIGUREs.\n";
     }
 }
 
 
-sub makeReport($) {
-    my $basename = shift;
+sub makeWordlist($) {
+    my $xmlFile = shift;
+    my $wordlistFile = shift;
+
+    if ($force == 0 && isNewer($wordlistFile, $xmlFile)) {
+        print "Skipping creation of word list ($wordlistFile newer than $xmlFile).\n";
+        return;
+    }
 
     my $tmpFile = temporaryFile('report', '.html');
     my $options = $debug ? " -v " : "";
     $options .= $makeHeatMap ? " -m " : "";
 
     print "Report on word usage...\n";
-    system ("perl $toolsdir/ucwords.pl $options $basename.xml > $tmpFile");
-    system ("perl $toolsdir/ent2ucs.pl $tmpFile > $basename-words.html");
+    system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
+    system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
     $debug || unlink($tmpFile);
 
     # Create a text heat map.
     if (-f "heatmap.xml") {
         print "Create text heat map...\n";
-        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:$xsldir/style/heatmap.css\" > $basename-heatmap.html");
+        system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:$xsldir/style/heatmap.css\" > heatmap.html");
     }
 }
 
@@ -611,50 +632,57 @@ sub extractEntities($) {
 #
 sub runChecks($) {
     my $filename = shift;
-    print "Running checks on $filename.\n";
 
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $basename = $1;
-    my $extension = $2;
-    my $newname = $basename . "-pos." . $extension;
+    my $format = $2;
+    my $checkFilename = $basename . "-checks.html";
+    
+    if ($force == 0 && isNewer($checkFilename, $filename)) {
+        print "Skipping run checks because '$checkFilename' is newer than '$filename'.\n";
+        return;
+    }
+    print "Run checks on $filename.\n";
 
     my $transcribedFile = transcribe($filename);
 
-    system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$newname\"");
+    my $positionInfoFilename = $basename . "-pos." . $format;
 
-    if ($extension eq "tei") {
+    system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
+
+    if ($format eq "tei") {
         my $tmpFile = temporaryFile('checks', '.tei');
 
         # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
-        system ("sed \"s/\&apos;/\\&mlapos;/g\" < $newname > $tmpFile");
-        $debug || unlink ($newname);
+        system ("sed \"s/\&apos;/\\&mlapos;/g\" < $positionInfoFilename > $tmpFile");
+        $debug || unlink ($positionInfoFilename);
 
         tei2xml($tmpFile, $basename . "-pos.xml");
-        $newname = $basename . "-pos.xml";
+        $positionInfoFilename = $basename . "-pos.xml";
         $debug || unlink($tmpFile);
         $debug || unlink($tmpFile . ".err");
     }
 
     my $xmlfilename = temporaryFile('checks', '.xml');
-    system ("$saxon \"$newname\" $xsldir/normalize-table.xsl > $xmlfilename");
+    system ("$saxon \"$positionInfoFilename\" $xsldir/normalize-table.xsl > $xmlfilename");
 
-    system ("$saxon \"$xmlfilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$basename-checks.html\"");
+    system ("$saxon \"$xmlfilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
     if ($filename ne $transcribedFile) {
         $debug || unlink ($transcribedFile);
     }
-    $debug || unlink ($newname);
+    $debug || unlink ($positionInfoFilename);
     $debug || unlink ($xmlfilename);
 }
 
 
 #
-# isNewer -- determine whether the first file exists and is newer than the second file
+# isNewer -- determine whether the derived file exists and is newer than the source file
 #
 sub isNewer($$) {
-    my $file1 = shift;
-    my $file2 = shift;
+    my $derivedFile = shift;
+    my $sourceFile = shift;
 
-    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
+    return (-e $derivedFile && -e $sourceFile && stat($derivedFile)->mtime > stat($sourceFile)->mtime);
 }
 
 
@@ -768,7 +796,7 @@ sub tei2xml($$) {
     my $xmlFile = shift;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
-        print "Skipping convertion to XML ($xmlFile newer than $sgmlFile).\n";
+        print "Skipping convertion to XML because '$xmlFile' is newer than '$sgmlFile'.\n";
         return;
     }
 
@@ -796,7 +824,7 @@ sub tei2xml($$) {
     if ($nsgmlresult != 0) {
         print "WARNING: NSGML found validation errors in $sgmlFile.\n";
     }
-    system ("rm $sgmlFile.nsgml");
+    $debug || unlink("$sgmlFile.nsgml");
 
     my $tmpFile1 = temporaryFile('hide-entities', '.tei');
     my $tmpFile2 = temporaryFile('sx', '.xml');
