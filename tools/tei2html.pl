@@ -46,6 +46,7 @@ my $epubVersion         = "3.0.1";
 my $makeWordlist        = 0;
 my $makeXML             = 0;
 my $makeP5              = 0;
+my $makePGTEI           = 0;
 my $makeKwic            = 0;
 my $runChecks           = 0;
 my $useUnicode          = 0;
@@ -172,8 +173,9 @@ sub processFile($) {
     my $filename = shift;
 
     if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
-        die "File: '$filename' is not a .TEI file\n";
+        die "File: '$filename' doesn't look like a TEI file\n";
     }
+    print "Processing TEI file $filename\n";
 
     $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
     my $basename = $1;
@@ -190,61 +192,38 @@ sub processFile($) {
     if ($version >= 1.0) {
         $makeText = 0;
     }
-    if ($explicitMakeText = 1) {
+    if ($explicitMakeText == 1) {
         $makeText = 1;
     }
 
-    print "Processing TEI-file '$basename' version $version\n";
-
     extractMetadata($filename);
     extractEntities($filename);
+
+    makeQrCode($pgNumber);
+    collectImageInfo();
 
     my $xmlFilename = $format eq 'tei' ? $basename . ".xml" : $filename;
     if ($format eq 'tei') {
         tei2xml($filename, $xmlFilename);
     }
 
-    if ($runChecks) {
-        runChecks($filename);
-    }
-
     my $normalizedXmlFilename = "$basename-normalized.xml";
-    if ($force != 0 || isNewer($filename, $normalizedXmlFilename)) {
-        print "Normalize tables and add col and row attributes to cells...\n";
-        system ("$saxon $xmlFilename $xsldir/normalize-table.xsl > $normalizedXmlFilename");
-    }
+    normalizeXml($xmlFilename, $normalizedXmlFilename);
 
-    if ($makeP5 != 0 && ($force != 0 || isNewer($filename, "$basename-p5.xml"))) {
-        print "Convert from TEI P4 to TEI P5 (experimental)\n";
-        system ("$saxon $normalizedXmlFilename $xsldir/p4top5.xsl > $basename-p5.xml");
-    }
+    makeMetadata($normalizedXmlFilename);
+    makeReadme($normalizedXmlFilename);
 
-    if ($force != 0 || isNewer($filename, 'metadata.xml')) {
-        print "Extract metadata to metadata.xml...\n";
-        system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
-    }
-
-    if ($force != 0 || isNewer($filename, 'README.md')) {
-        print "Extract metadata to README.md...\n";
-        system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
-    }
-
-    # create PGTEI version
-    # system ("$saxon $normalizedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
-
-    makeQrCode();
-    collectImageInfo();
-    $makeHtml && makeHtml($basename, $normalizedXmlFilename, $basename . '.html');
-    $makePdf && makePdf($basename, $normalizedXmlFilename, $basename . '.pdf');
-    $makeEpub && makeEpub($basename, $normalizedXmlFilename, $basename . '.epub');
-    $makeText && makeText($basename, $filename, $basename . '.txt');
+    $runChecks && runChecks($filename);
     $makeWordlist && makeWordlist($normalizedXmlFilename, $basename . '-words.html');
 
-    if ($makeKwic == 1 && ($force != 0 || isNewer($filename, "$basename-kwic.html"))) {
-        my $saxonParameters = determineSaxonParameters();
-        print "Generate a KWIC index (this may take some time)...\n";
-        system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters > $basename-kwic.html");
-    }
+    $makeHtml && makeHtml($basename, $normalizedXmlFilename, $basename . '.html');
+    $makeEpub && makeEpub($basename, $normalizedXmlFilename, $basename . '.epub');
+    $makePdf && makePdf($basename, $normalizedXmlFilename, $basename . '.pdf');
+    $makeKwic && makeKwic($normalizedXmlFilename, $basename . '-kwic.html');
+    $makeText && makeText($basename, $filename, $basename . '.txt');
+
+    $makeP5 && makeP5($normalizedXmlFilename, $basename . "-p5.xml");
+    $makePGTEI && system ("$saxon $normalizedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     if ($makeZip == 1 && $pgNumber > 0) {
         print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
@@ -254,7 +233,73 @@ sub processFile($) {
     print "=== Done! ==================================================================\n";
 }
 
-sub makeQrCode() {
+
+sub normalizeXml($$) {
+    my $xmlFilename = shift;
+    my $normalizedXmlFilename = shift;
+
+    if ($force == 0 && isNewer($normalizedXmlFilename, $xmlFilename)) {
+        print "Skipping convertion to normalized XML ($normalizedXmlFilename newer than $xmlFilename).\n";
+        return;
+    }
+
+    print "Normalize tables and add col and row attributes to cells...\n";
+    system ("$saxon $xmlFilename $xsldir/normalize-table.xsl > $normalizedXmlFilename");
+}
+
+
+sub makeP5($$) {
+    my $xmlFilename = shift;
+    my $p5XmlFilename = shift;
+
+    if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
+        print "Skipping convertion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
+        return;
+    }
+
+    print "Convert from TEI P4 to TEI P5 (experimental)\n";
+    system ("$saxon $xmlFilename $xsldir/p4top5.xsl > $p5XmlFilename");
+}
+
+
+sub makeMetadata($) {
+    my $normalizedXmlFilename = shift;
+
+    if ($force != 0 || isNewer($filename, 'metadata.xml')) {
+        print "Extract metadata to metadata.xml...\n";
+        system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+    }
+}
+
+
+sub makeReadme($) {
+    my $normalizedXmlFilename = shift;
+
+    if ($force != 0 || isNewer($filename, 'README.md')) {
+        print "Extract metadata to README.md...\n";
+        system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
+    }
+}
+
+
+sub makeKwic($$) {
+    my $xmlFilename = shift;
+    my $kwicFilename = shift;
+
+    if ($force == 0 && isNewer($kwicFilename, $xmlFilename)) {
+        print "Skipping creation of KWIC ($kwicFilename newer than $xmlFilename).\n";
+        return;
+    }
+
+    my $saxonParameters = determineSaxonParameters();
+    print "Generate a KWIC index (this may take some time)...\n";
+    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters > $kwicFilename");
+}
+
+
+sub makeQrCode($) {
+    my $pgNumber = shift;
+
     if ($pgNumber > 0) {
         my $imageDir = '.';
         if (-d "images") {
@@ -269,6 +314,7 @@ sub makeQrCode() {
         }
     }
 }
+
 
 sub makeHtml($) {
     my $basename = shift;
@@ -796,7 +842,7 @@ sub tei2xml($$) {
     my $xmlFile = shift;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
-        print "Skipping convertion to XML because '$xmlFile' is newer than '$sgmlFile'.\n";
+        print "Skipping convertion to XML ('$xmlFile' newer than '$sgmlFile').\n";
         return;
     }
 
