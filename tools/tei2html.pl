@@ -699,8 +699,11 @@ sub runChecks($) {
     if ($format eq "tei") {
         my $tmpFile = temporaryFile('checks', '.tei');
 
-        # turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;
-        system ("sed \"s/\&apos;/\\&mlapos;/g\" < $positionInfoFilename > $tmpFile");
+        # Hide a number of entities for the checks, so matching pairs of punctuation can be
+        # verified. The trick used is that unmatched parentheses and brackets can be represented
+        # by their SGML entities, and those entities will be mapped to alternative characters
+        # for the test only. Similary, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
+        system ("perl -S precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
         $debug || unlink ($positionInfoFilename);
 
         tei2xml($tmpFile, $basename . "-pos.xml");

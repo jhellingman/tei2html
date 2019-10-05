@@ -242,7 +242,7 @@
             <td><xsl:value-of select="@page"/></td>
             <td><xsl:value-of select="@element"/></td>
             <td><xsl:value-of select="@target"/></td>
-            <td><xsl:value-of select="replace(., '&blackCircle;', '.')"/></td>
+            <td><xsl:value-of select="f:replaced-to-normal-symbols(.)"/></td>
         </tr>
     </xsl:template>
 
@@ -1414,5 +1414,14 @@
         <xsl:param name="node" as="element()"/>
         <xsl:value-of select="if ($node/@id) then $node/@id else 'x' || generate-id($node)"/>
     </xsl:function>
+
+
+    <xsl:function name="f:replaced-to-normal-symbols" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:sequence select="translate($string, 
+            '&#xFF08;&#xFF09;&#xFF3B;&#xFF3D;&#xFF5B;&#xFF5B;&#xFF03;&blackCircle;', 
+            '()[]{}#.')"/>
+    </xsl:function>
+
 
 </xsl:stylesheet>

@@ -1108,6 +1108,13 @@ sub entities2iso88591($) {
     $a =~ s/\&rbrace;/}/g;
     $a =~ s/\&lbrace;/{/g;
 
+    $a =~ s/\&lpar;/(/g;
+    $a =~ s/\&rpar;/)/g;
+    $a =~ s/\&lsqb;/[/g;
+    $a =~ s/\&rsqb;/]/g;
+    $a =~ s/\&lcub;/{/g;
+    $a =~ s/\&rcub;/}/g;
+    $a =~ s/\&num;/#/g;
 
     # my additions
     $a =~ s/\&eringb;/e/g;
@@ -1247,6 +1254,13 @@ sub entities2iso88591($) {
     $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
     $a =~ s/\&wwelsh;/6/g;      # Old-Welsh w (looks like 6)
     $a =~ s/\&\#x204A;/7/g;     # Tironian et (looks like 7)
+
+
+    # Small caps letters
+
+    $a =~ s/\&Dsc;/D/g;     
+    $a =~ s/\&Ysc;/Y/g;     
+
 
     # Rough Greek transcription
 

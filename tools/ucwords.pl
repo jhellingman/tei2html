@@ -1536,6 +1536,67 @@ sub StripDiacritics($) {
 
 
 #
+# StripPoints -- map Arabic letters to their "undotted" versions.
+#
+sub StripPoints($) {
+    my $string = shift;
+
+    for ($string) {
+        # U+0628 BEH; U+062A TEH; U+062B THEH; U+067E PEH; U+0679 TTEH  ->  U+066E DOTLESS BEH
+        s/\x{0628}/\x{066E}/g;
+        s/\x{062A}/\x{066E}/g;
+        s/\x{062B}/\x{066E}/g;
+        s/\x{067E}/\x{066E}/g;
+        s/\x{0679}/\x{066E}/g;
+
+        # U+062C JEEM; U+062E KHAH; U+0686 TCHEH  ->  U+062D HAH
+        s/\x{062C}/\x{062D}/g;
+        s/\x{062E}/\x{062D}/g;
+        s/\x{0686}/\x{062D}/g;
+    
+        # U+0630 THAL; U+0688 DDAL  ->  U+062F DAL
+        s/\x{0630}/\x{062F}/g;
+        s/\x{0688}/\x{062F}/g;
+
+        # U+0632 ZAIN; U+0698 JEH; U+0691 RREH  ->  U+0631 REH
+        s/\x{0632}/\x{0631}/g;
+        s/\x{0698}/\x{0631}/g;
+        s/\x{0691}/\x{0631}/g;
+
+        # U+0634 SHEEN; U+069C SEEN WITH THREE DOTS BELOW AND THREE DOTS ABOVE ->  U+0633 SEEN
+        s/\x{0634}/\x{0633}/g;
+        s/\x{069C}/\x{0633}/g;
+
+        # U+069E SAD WITH THREE DOTS ABOVE; U+0636 DAD  ->  U+0635 SAD
+        s/\x{069E}/\x{0635}/g;
+        s/\x{0636}/\x{0635}/g;
+
+        # U+0638 ZAH  ->  U+0637 TAH
+        s/\x{0638}/\x{0637}/g;
+
+        # U+063A GHAIN  ->  U+0639 AIN
+        s/\x{063A}/\x{0639}/g;
+
+        # U+0641 FEH; U+06A2 FEH WITH DOT MOVED BELOW  ->  U+06A1 DOTLESS FEH
+        s/\x{0641}/\x{06A1}/g;
+        s/\x{06A2}/\x{06A1}/g;
+
+        # U+0642 QAF; U+06A7 QAF WITH DOT ABOVE; U+06A8 QAF WITH THREE DOTS ABOVE  ->  U+066F DOTLESS QAF
+        s/\x{0642}/\x{066F}/g;
+        s/\x{06A7}/\x{066F}/g;
+        s/\x{06A8}/\x{066F}/g;
+
+        # U+06AE KAF WITH THREE DOTS BELOW  ->  U+0643 KAF
+        s/\x{06AE}/\x{0643}/g;
+
+        # U+0646 NOON  ->  U+06BA NOON GHUNNA    
+        s/\x{0646}/\x{06BA}/g;
+    }
+    return $string;
+}
+
+
+#
 # Normalize
 #
 sub Normalize($) {
@@ -1555,6 +1616,9 @@ sub NormalizeForLanguage($$) {
     my $lang = shift;
     if ($lang eq 'ceb') {
         return CebuanoNormalize($string);
+    }
+    if ($lang eq 'ar' or $lang eq 'ur' or $lang eq 'fa') {
+        $string = StripPoints($string);
     }
     return Normalize($string);
 }
