@@ -201,10 +201,14 @@
 
             <xsl:choose>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '{'">
-                    <xsl:copy-of select="f:outputImage('images/lbrace' || @rows || '.png', '{')"/>
+                    <xsl:if test="not(f:has-rend-value(@rend, 'image'))">
+                        <xsl:copy-of select="f:outputImage('images/lbrace' || @rows || '.png', '{')"/>
+                    </xsl:if>
                 </xsl:when>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
-                    <xsl:copy-of select="f:outputImage('images/rbrace' || @rows || '.png', '}')"/>
+                    <xsl:if test="not(f:has-rend-value(@rend, 'image'))">
+                        <xsl:copy-of select="f:outputImage('images/rbrace' || @rows || '.png', '}')"/>
+                    </xsl:if>
                 </xsl:when>
                 <xsl:when test="f:isSumCell(.)">
                     <span class="sum">

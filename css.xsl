@@ -464,7 +464,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Generate a CSS selector for a style.</xd:short>
         <xd:detail>Generate a CSS selector name for a style. This is the same value as calculated
