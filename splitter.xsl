@@ -99,7 +99,7 @@
                 <xsl:when test="current-grouping-key()">
                     <!-- Sequence of non-div1 elements -->
                     <xsl:call-template name="div-fragment">
-                        <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
+                        <xsl:with-param name="splitter-fragment-nodes" select="current-group()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -123,7 +123,7 @@
                 <xsl:when test="current-grouping-key()">
                     <!-- Sequence of non-div elements -->
                     <xsl:call-template name="div-fragment">
-                        <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
+                        <xsl:with-param name="splitter-fragment-nodes" select="current-group()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -165,7 +165,7 @@
 
 
     <xd:doc>
-        <xd:short>Split elements a <code>div1</code> or <code>div</code> element.</xd:short>
+        <xd:short>Split a <code>div1</code> or <code>div</code> element.</xd:short>
         <xd:detail>Split a <code>div1</code> or (unnumbered) <code>div</code> element of a TEI file on the <code>epubsplit</code> processing instruction.</xd:detail>
     </xd:doc>
 
@@ -177,7 +177,7 @@
                         <xsl:when test="current-grouping-key()">
                             <!-- Sequence of non-div1 or div elements -->
                             <xsl:call-template name="div-fragment">
-                                <xsl:with-param name="splitter-candidate-nodes" select="current-group()" tunnel="yes"/>
+                                <xsl:with-param name="splitter-fragment-nodes" select="current-group()" tunnel="yes"/>
                             </xsl:call-template>
                         </xsl:when>
                     </xsl:choose>
@@ -223,24 +223,20 @@
 
     <xd:doc>
         <xd:short>Determine the filename of a div-fragment.</xd:short>
-        <xd:detail>Determine the filename of the file that contains a certain node.</xd:detail>
+        <xd:detail>Determine the filename of the file that contains a certain node. We traverse the document tree, as it will be split, and
+        look for the specific node the target node appears in. Only in that case, we generate the filename; in all other cases this template
+        will generate nothing. The end result is a string containing the filename of the file the target node appears in.</xd:detail>
     </xd:doc>
 
     <xsl:template name="filename.div-fragment">
         <xsl:param name="splitter-target-node" as="element()" tunnel="yes"/>
-        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
+        <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
         <xsl:param name="position" select="position()"/> <!-- that is, position of context group -->
+        <xsl:param name="target-id" select="generate-id($splitter-target-node)"/>
 
-        <!-- Does any of the nodes contains the node sought after? -->
-        <xsl:for-each select="$splitter-candidate-nodes">
-            <xsl:if test="descendant-or-self::*[generate-id() = generate-id($splitter-target-node)]">
-                <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
-            </xsl:if>
-        </xsl:for-each>
-
-        <!-- Handle the case where we are referring to the div0 element itself (our parent) -->
-        <xsl:if test="(generate-id(..) = generate-id($splitter-target-node)) and $position = 1">
+        <xsl:if test="($position = 1 and generate-id(..) = $target-id)
+                      or (some $node in $splitter-fragment-nodes satisfies $node/descendant-or-self::*[generate-id() = $target-id])">
             <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
         </xsl:if>
     </xsl:template>
@@ -270,7 +266,7 @@
     </xd:doc>
 
     <xsl:template name="manifest.div-fragment">
-        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
+        <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id" select="f:generate-id(.)"/>
@@ -284,7 +280,7 @@
 
             <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
             <xsl:variable name="media-overlays">
-                <xsl:for-each select="$splitter-candidate-nodes">
+                <xsl:for-each select="$splitter-fragment-nodes">
                     <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
                         <xsl:value-of select="$id"/>
                     </xsl:if>
@@ -360,7 +356,7 @@
     </xd:doc>
 
     <xsl:template name="content.div-fragment">
-        <xsl:param name="splitter-candidate-nodes" as="node()*" tunnel="yes"/>
+        <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
         <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
 
@@ -377,23 +373,23 @@
                                     <xsl:call-template name="generate-label">
                                         <xsl:with-param name="div" select=".."/>
                                     </xsl:call-template>
-                                    <xsl:apply-templates select="$splitter-candidate-nodes"/>
+                                    <xsl:apply-templates select="$splitter-fragment-nodes"/>
 
                                     <xsl:if test="parent::div0">
                                         <xsl:call-template name="insert-footnotes">
-                                            <xsl:with-param name="notes" select="$splitter-candidate-nodes//note[f:isFootnote(.)]"/>
+                                            <xsl:with-param name="notes" select="$splitter-fragment-nodes//note[f:isFootnote(.)]"/>
                                         </xsl:call-template>
                                     </xsl:if>
                                 </div>
                             </xsl:when>
                             <xsl:when test="(parent::div1 or parent::div) and position() = last()">
-                                <xsl:apply-templates select="$splitter-candidate-nodes"/>
+                                <xsl:apply-templates select="$splitter-fragment-nodes"/>
                                 <xsl:call-template name="insert-footnotes">
                                     <xsl:with-param name="div" select=".."/>
                                 </xsl:call-template>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:apply-templates select="$splitter-candidate-nodes"/>
+                                <xsl:apply-templates select="$splitter-fragment-nodes"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </div>
