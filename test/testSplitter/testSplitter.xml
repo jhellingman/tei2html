@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN" "../../dtd/teixlite.dtd">
+<TEI.2 lang="en-US">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Tei2html Test Splitter</title>
+            <author>Author</author>
+         </titleStmt>
+	  </fileDesc>
+   </teiHeader>
+<text>
+<body>
+<div0 id="bk1"><head>Tei2html Test Splitter</head>
+
+<p>Test some cross references: 
+<ref target="bk1">bk1</ref>, 
+<ref target="ch1">ch1</ref>, 
+<ref target="ch1.1">ch1.1</ref>, 
+<ref target="ch1.1.1">ch1.1.1</ref>, 
+<ref target="ch1.1.1.1">ch1.1.1.1</ref>, 
+<ref target="ch1.1.1.1.1">ch1.1.1.1.1</ref>, 
+<ref target="ch1.1.1.1.1.1">ch1.1.1.1.1.1</ref>, 
+<ref target="ch1.2">ch1.2</ref>, 
+<ref target="ch1.2.1">ch1.2.1</ref>;
+<ref target="tx1">tx1</ref>, 
+<ref target="tx1.1">tx1.1</ref>, 
+<ref target="tx1.1.1">tx1.1.1</ref>, 
+<ref target="tx1.1.1.1">tx1.1.1.1</ref>, 
+<ref target="tx1.1.1.1.1">tx1.1.1.1.1</ref>, 
+<ref target="tx1.1.1.1.1.1">tx1.1.1.1.1.1</ref>, 
+<ref target="tx1.2">tx1.2</ref>, 
+<ref target="tx1.2.1">tx1.2.1</ref>,
+<ref target="tx1.3">tx1.3</ref>, 
+<ref target="tx1.3.1">tx1.3.1</ref>.
+</p>
+
+<div1 id="ch1">
+<head>Division at level 1</head>
+
+<p id="tx1">Text in division at level 1.</p>
+
+<div2 id="ch1.1">
+<head>Division at Level 2</head>
+
+<p id="tx1.1">Text in division at level 2.</p>
+
+<div3 id="ch1.1.1">
+<head>Division at Level 3</head>
+
+<p id="tx1.1.1">Text in division at level 3.</p>
+
+<div4 id="ch1.1.1.1">
+<head>Division at Level 4</head>
+
+<p id="tx1.1.1.1">Text in division at level 4.</p>
+
+<div5 id="ch1.1.1.1.1">
+<head>Division at Level 5</head>
+
+<p id="tx1.1.1.1.1">Text in division at level 5.</p>
+
+<div6 id="ch1.1.1.1.1.1">
+<head>Division at Level 6</head>
+
+<p id="tx1.1.1.1.1.1">Text in division at level 6.</p>
+
+<p>Test some cross references: 
+<ref target="bk1">bk1</ref>, 
+<ref target="ch1">ch1</ref>, 
+<ref target="ch1.1">ch1.1</ref>, 
+<ref target="ch1.1.1">ch1.1.1</ref>, 
+<ref target="ch1.1.1.1">ch1.1.1.1</ref>, 
+<ref target="ch1.1.1.1.1">ch1.1.1.1.1</ref>, 
+<ref target="ch1.1.1.1.1.1">ch1.1.1.1.1.1</ref>, 
+<ref target="ch1.2">ch1.2</ref>, 
+<ref target="ch1.2.1">ch1.2.1</ref>;
+<ref target="tx1">tx1</ref>, 
+<ref target="tx1.1">tx1.1</ref>, 
+<ref target="tx1.1.1">tx1.1.1</ref>, 
+<ref target="tx1.1.1.1">tx1.1.1.1</ref>, 
+<ref target="tx1.1.1.1.1">tx1.1.1.1.1</ref>, 
+<ref target="tx1.1.1.1.1.1">tx1.1.1.1.1.1</ref>, 
+<ref target="tx1.2">tx1.2</ref>, 
+<ref target="tx1.2.1">tx1.2.1</ref>,
+<ref target="tx1.3">tx1.3</ref>, 
+<ref target="tx1.3.1">tx1.3.1</ref>.
+</p>
+
+</div6>
+</div5>
+</div4>
+</div3>
+</div2>
+<?epubsplit?>
+<div2 id="ch1.2">
+<head>Another division at Level 2</head>
+
+<p id="tx1.2">Text in second division at level 2.</p>
+
+<div3 id="ch1.2.1">
+<head>Another division at Level 3</head>
+
+<p id="tx1.2.1">Text in second division at level 3.</p>
+</div3>
+</div2>
+
+<?epubsplit?>
+<div2 id="ch1.3">
+<head>Third division at Level 2</head>
+
+<p id="tx1.3">Text in second division at level 2.</p>
+
+<div3 id="ch1.3.1">
+<head>Third division at Level 3</head>
+
+<p id="tx1.3.1">Text in second division at level 3.</p>
+</div3>
+</div2>
+</div1>
+</div0>
+</body>
+</text>
+</TEI.2>

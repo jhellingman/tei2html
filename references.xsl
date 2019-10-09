@@ -68,18 +68,15 @@
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
 
         <xsl:choose>
-
             <xsl:when test="not($targetNode)">
                 <xsl:copy-of select="f:logWarning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
-            
             <xsl:when test="@type='noteref'">
                 <!-- Special case: reference to footnote, used when the content of the reference 
                      needs to be rendered as a footnote reference mark -->
                 <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
             </xsl:when>
-
             <xsl:otherwise>
                 <a>
                     <xsl:choose>
@@ -87,7 +84,6 @@
                         <xsl:when test="f:insideFootnote($targetNode)">
                             <xsl:attribute name="href" select="f:generate-footnote-href($targetNode)"/>
                         </xsl:when>
-
                         <xsl:otherwise>
                             <xsl:attribute name="href" select="f:generate-href($targetNode)"/>
                         </xsl:otherwise>
@@ -130,10 +126,10 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:insideFootnote">
+    <xsl:function name="f:insideFootnote" as="xs:boolean">
         <xsl:param name="targetNode" as="node()"/>
 
-        <xsl:value-of select="$targetNode/ancestor-or-self::note[f:isFootnote(.)]"/>
+        <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:isFootnote(.)]) then true() else false()"/>
     </xsl:function>
 
     <xd:doc>

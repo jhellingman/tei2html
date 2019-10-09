@@ -142,6 +142,7 @@
     </xd:doc>
 
     <xsl:template name="div-fragment">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
         <xsl:choose>
@@ -173,14 +174,12 @@
         <xsl:choose>
             <xsl:when test="processing-instruction(epubsplit)">
                 <xsl:for-each-group select="node()" group-adjacent="not(self::processing-instruction(epubsplit))">
-                    <xsl:choose>
-                        <xsl:when test="current-grouping-key()">
-                            <!-- Sequence of non-div1 or div elements -->
-                            <xsl:call-template name="div-fragment">
-                                <xsl:with-param name="splitter-fragment-nodes" select="current-group()" tunnel="yes"/>
-                            </xsl:call-template>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:if test="current-grouping-key()">
+                        <!-- Sequence of elements -->
+                        <xsl:call-template name="div-fragment">
+                            <xsl:with-param name="splitter-fragment-nodes" select="current-group()" tunnel="yes"/>
+                        </xsl:call-template>
+                    </xsl:if>
                 </xsl:for-each-group>
             </xsl:when>
             <xsl:otherwise>
@@ -197,6 +196,7 @@
     </xd:doc>
 
     <xsl:template name="choose-splitter-action">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
         <xsl:choose>
@@ -229,15 +229,19 @@
     </xd:doc>
 
     <xsl:template name="filename.div-fragment">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-target-node" as="element()" tunnel="yes"/>
         <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
-        <xsl:param name="position" select="position()"/> <!-- that is, position of context group -->
-        <xsl:param name="target-id" select="generate-id($splitter-target-node)"/>
+        <xsl:variable name="position" select="position()"/> <!-- that is, position of context group -->
+        <xsl:variable name="target-id" select="generate-id($splitter-target-node)"/>
 
+        <!-- Is our parent or does this fragment contain the node sought after? -->
         <xsl:if test="($position = 1 and generate-id(..) = $target-id)
-                      or (some $node in $splitter-fragment-nodes satisfies $node/descendant-or-self::*[generate-id() = $target-id])">
+                      or (some $node in $splitter-fragment-nodes 
+                          satisfies generate-id($node) = $target-id or $node//*[generate-id() = $target-id])">
             <xsl:value-of select="f:generate-nth-filename(.., $position)"/>
+            <!-- <xsl:message expand-text="yes">DEBUG: Found fragment {$position}: {name($splitter-target-node)}#{$splitter-target-node/@id} in {f:generate-nth-filename(.., $position)}</xsl:message> -->
         </xsl:if>
     </xsl:template>
 
@@ -248,11 +252,15 @@
     </xd:doc>
 
     <xsl:template name="filename.div">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-target-node" as="element()" tunnel="yes"/>
 
-        <!-- Does this div1 or (unnumbered) div contain the node sought after? -->
-        <xsl:if test="descendant-or-self::*[generate-id() = generate-id($splitter-target-node)]">
+        <xsl:variable name="target-id" select="generate-id($splitter-target-node)"/>
+
+        <!-- Is this or does this element contain the node sought after? -->
+        <xsl:if test="generate-id(.) = $target-id or .//*[generate-id() = $target-id]">
             <xsl:value-of select="f:generate-filename(.)"/>
+            <!-- <xsl:message expand-text="yes">DEBUG: Found element: {name($splitter-target-node)}#{$splitter-target-node/@id} in {f:generate-filename(.)}</xsl:message> -->
         </xsl:if>
     </xsl:template>
 
@@ -266,6 +274,7 @@
     </xd:doc>
 
     <xsl:template name="manifest.div-fragment">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
         <item xmlns="http://www.idpf.org/2007/opf">
@@ -307,6 +316,7 @@
     </xd:doc>
 
     <xsl:template name="manifest.div">
+        <xsl:context-item as="element()" use="required"/>
         <item xmlns="http://www.idpf.org/2007/opf">
             <xsl:variable name="id" select="f:generate-id(.)"/>
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
@@ -328,6 +338,7 @@
     </xd:doc>
 
     <xsl:template name="spine.div-fragment">
+        <xsl:context-item as="element()" use="required"/>
         <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes">
             <xsl:attribute name="idref">
                 <xsl:value-of select="f:generate-nth-id(.., position())"/>
@@ -342,6 +353,7 @@
     </xd:doc>
 
     <xsl:template name="spine.div">
+        <xsl:context-item as="element()" use="required"/>
         <!-- filter out the cover, as we have placed it first already -->
         <xsl:if test="@id != 'cover'">
             <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="{f:generate-id(.)}"/>
@@ -356,6 +368,7 @@
     </xd:doc>
 
     <xsl:template name="content.div-fragment">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="splitter-fragment-nodes" as="node()*" tunnel="yes"/>
 
         <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
@@ -404,6 +417,7 @@
     </xd:doc>
 
     <xsl:template name="content.div">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:variable name="filename" select="f:generate-filename(.)" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
@@ -473,7 +487,7 @@
         </xsl:variable>
 
         <xsl:value-of select="if ($filename = '')
-            then f:logError('Unable to determine filename for {1} with generated id: {2} (in: {3}; {4})', 
+            then f:logError('Unable to determine filename for {1} with generated id: {2} (parent: {3}; id: {4})', 
                                 (name($node), f:generate-id($node), name($node/ancestor::*[@id][1]), $node/ancestor::*[@id][1]/@id))
             else $filename"/>
     </xsl:function>

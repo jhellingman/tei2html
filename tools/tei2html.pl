@@ -59,6 +59,7 @@ my $makeZip             = 0;
 my $noTranscription     = 0;
 my $force               = 0;
 my $debug               = 0;
+my $trace               = 0;
 my $profile             = 0;
 my $useTidy             = 0;
 
@@ -68,9 +69,7 @@ GetOptions(
     'm' => \$makeHeatMap,
     'e' => \$makeEpub,
     'k' => \$makeKwic,
-    'D' => \$debug,
     'p' => \$makePdf,
-    'P' => \$profile,
     'x' => \$makeXML,
     '5' => \$makeP5,
     'r' => \$makeWordlist,
@@ -85,6 +84,8 @@ GetOptions(
     'w=i' => \$pageWidth,
     'pagewidth=i' => \$pageWidth,
     'debug' => \$debug,
+    'trace' => \$trace,
+    'profile' => \$profile,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
     'help' => \$showHelp,
@@ -122,6 +123,8 @@ if ($showHelp) {
     print "    q         Print this help and exit.\n";
     print "    notranscription      Don't use transcription schemes.\n";
     print "    debug                Debug mode.\n";
+    print "    trace                Trace mode.\n";
+    print "    profile              Profile mode.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -487,11 +490,6 @@ sub determineSaxonParameters() {
     chop($pwd);
     $pwd =~ s/\\/\//g;
 
-    my $profileOption = "";
-    if ($profile == 1) {
-        $profileOption = " -TP:profile.html ";
-    }
-
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path as a parameter.
     my $fileImageParam = "";
     if (-f "imageinfo.xml") {
@@ -523,7 +521,17 @@ sub determineSaxonParameters() {
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
-    return "$customOption $profileOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
+    my $traceArguments = "";
+    if ($trace == 1) {
+        $traceArguments = " -T -traceout:trace.txt ";
+    }
+
+    my $profileArguments = "";
+    if ($profile == 1) {
+        $profileArguments = " -TP:profile.html ";
+    }
+
+    return "$traceArguments $profileArguments $customOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
 }
 
 
