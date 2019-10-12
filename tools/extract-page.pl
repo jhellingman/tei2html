@@ -1,6 +1,7 @@
 # extract-page.pl
 
 use strict;
+use warnings;
 use FindBin qw($Bin);
 
 my $saxon           = "java -jar " . $Bin . "/lib/saxon9he.jar ";

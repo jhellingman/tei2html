@@ -1,6 +1,7 @@
 # pgpp.pl
 
 use strict;
+use warnings;
 use SgmlSupport qw/pgdp2sgml/;
 
 

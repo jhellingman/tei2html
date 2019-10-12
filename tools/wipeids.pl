@@ -1,6 +1,7 @@
 # wipeIds.pl -- wipe superfluous ids from an HTML document.
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 open (INPUTFILE, $inputFile) || die("Could not open $inputFile");

@@ -1,6 +1,7 @@
 # catpars.pl -- remove line-breaks in paragraphs.
 
 use strict;
+use warnings;
 
 my $infile = $ARGV[0];
 open(INPUTFILE, $infile) || die("Could not open input file $infile");

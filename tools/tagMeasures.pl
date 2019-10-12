@@ -1,6 +1,7 @@
 # tagMeasures.pl -- Tag measures appearing in documents.
 
 use strict;
+use warnings;
 use Getopt::Long;
 
 my $lang             = "en";
@@ -231,9 +232,9 @@ sub tagFahrenheit($$$) {
 
     my $cleanNumber = cleanNumber($number);
 
-    my $celcius = "Celcius";
+    my $celsius = "Celsius";
     if ($unit eq "F.") {
-        $celcius = "C.";
+        $celsius = "C.";
     }
 
     my $reg = round(($cleanNumber - 32) * 5/9);
@@ -241,7 +242,7 @@ sub tagFahrenheit($$$) {
     if ($showUnit == 0) {
         return "<measure reg=\"$reg°\">$number</measure>";
     }
-    return "<measure reg=\"$reg° $celcius\">$number $unit</measure>";
+    return "<measure reg=\"$reg° $celsius\">$number $unit</measure>";
 }
 
 

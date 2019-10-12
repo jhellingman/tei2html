@@ -1,10 +1,11 @@
 # extractNotes.pl -- extract notes from TEI tagged files
 #
-# Extract occurances of footnotes in TEI tagged files to a separate foot-note file, with links back to the
+# Extract occurrences of footnotes in TEI tagged files to a separate foot-note file, with links back to the
 # original note locations. This code depends on valid TEI following a few formatting conventions (i.e. tags 
 # are always on a single line).
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 my $outputFile = $inputFile . ".out";

@@ -1,6 +1,7 @@
 # addPositionInfo.pl -- add linenumber and column info to SGML/XML files
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 

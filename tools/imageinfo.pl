@@ -1,6 +1,7 @@
 # imageinfo.pl -- Collect information about images into an XML file for processing by XSLT.
 
 use strict;
+use warnings;
 
 use Image::Magick;
 use File::Basename;

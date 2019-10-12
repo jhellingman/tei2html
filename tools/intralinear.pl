@@ -1,6 +1,7 @@
 # intralinear.pl -- convert intralinear text to ab-elements.
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 

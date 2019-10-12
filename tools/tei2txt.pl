@@ -1,6 +1,7 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use strict;
+use warnings;
 
 use Getopt::Long;
 use POSIX qw/floor ceil/;

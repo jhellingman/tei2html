@@ -1,6 +1,7 @@
 # pgprepare.pl -- prepare a directory of text files for PGDP.
 
 use strict;
+use warnings;
 
 use Getopt::Long;
 use File::Copy;

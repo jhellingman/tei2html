@@ -1,6 +1,7 @@
 # transcribe.pl -- Replace Greek and Cyrillic with Latin transcription.
 
 use strict;
+use warnings;
 
 use File::stat;
 use File::Temp qw(mktemp);

@@ -4,6 +4,7 @@
 # 2. chapter number derived from n attribute of <div#>
 
 use strict;
+use warnings;
 use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $inputFile   = $ARGV[0];

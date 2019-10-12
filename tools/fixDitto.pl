@@ -1,6 +1,7 @@
 # fixDitto.pl -- convert non-standard <ditto> notation to <seg> notation, finding a source seg to copy, where possible.
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 

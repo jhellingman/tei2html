@@ -1,9 +1,12 @@
 # poetry.pl
 
-$poetrymode = 0;
+use strict;
+use warnings;
+
+my $poetrymode = 0;
 
 while (<>) {
-    $line = $_;
+    my $line = $_;
     if ($line =~ /\/\*/) {
         $poetrymode = 1;
         print "<lg>\n";
@@ -19,9 +22,9 @@ while (<>) {
         } else {
             # count white space before
             $line =~ /^(\s*)(.*)$/;
-            $spaces = $1;
+            my $spaces = $1;
             $line = $2;
-            $n = length($spaces);
+            my $n = length($spaces);
             if ($n == 0) {
                 print "    <l>$line\n";
             } else {

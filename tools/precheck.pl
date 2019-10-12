@@ -4,12 +4,15 @@
 # Hide intentionally unmatched pairs        &lpar;   &rpar;   &lsqb;   &rsqb;   &lcub;   &rcub;
 # by mapping them to the full-width block:  &#xFF08; &#xFF09; &#xFF3B; &#xFF3D; &#xFF5B; &#xFF5B;
 
-# Hide special characters intetionally 'hidden' by entities.
+# Hide special characters intentionally 'hidden' by entities.
 # &num; -> #xFF03;
+
+use strict;
+use warnings;
 
 while (<>) {
 
-    $a = $_;
+    my $a = $_;
 
     $a =~ s/\&apos;/\&mlapos;/g;    # modifier letter apostrophe
 
@@ -23,7 +26,6 @@ while (<>) {
     $a =~ s/\&rcub;/\&#xFF5B;/g;    # right curly bracket
 
     $a =~ s/\&num;/\&#xFF03;/g;     # number sign
-
 
     print $a;
 }

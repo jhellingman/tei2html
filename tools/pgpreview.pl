@@ -1,6 +1,7 @@
 # pgpreview.pl -- Create simple HTML preview of proofed pages.
 
 use strict;
+use warnings;
 
 use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 

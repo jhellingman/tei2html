@@ -4,6 +4,7 @@
 # 2. average size of pages with large deviations
 
 use strict;
+use warnings;
 use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $inputFile   = $ARGV[0];

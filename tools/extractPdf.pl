@@ -5,6 +5,7 @@
 #
 
 use strict;
+use warnings;
 use File::Basename;
 
 my $pdfimages = "pdfimages.exe"; # See http://www.foolabs.com/xpdf/download.html

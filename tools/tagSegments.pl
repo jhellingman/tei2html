@@ -1,5 +1,7 @@
 
 use strict;
+use warnings;
+
 
 # Segementize a TEI file
 
@@ -39,8 +41,6 @@ use strict;
 # 2. Segmentize
 # 3. Merge tags back into text.
 
-
-
 my $mark = "<sb>";
 
 my $tagPattern = "(<.*?>)";
@@ -51,8 +51,7 @@ my $liftedTagMark = "___";
 my $liftedTagCounter = 1;
 my %liftedTags = ();
 
-my %abbreviations =
-(
+my %abbreviations = (
     "Dr."       => "Dokter",
     "Ing."      => "Ingenieur",
     "Prof."     => "Professor",
@@ -135,27 +134,21 @@ my %abbreviations =
 # m.i.v
     "m.i.v."        => "met ingang van",
 # v.w.t
-
-
-
 );
 
 
-sub test()
-{
+sub test() {
     # testLiftInlineTags();
     # testTagSegments();
     testFixNesting();
     exit;
 }
 
-sub assertEquals($$)
-{
+sub assertEquals($$) {
     my $expected = shift;
     my $actual = shift;
 
-    if ($expected ne $actual)
-    {
+    if ($expected ne $actual) {
         print "  ERROR: Strings not equal!\n";
         print "         Expected: $expected\n";
         print "         Actual:   $actual\n";
@@ -163,8 +156,7 @@ sub assertEquals($$)
 }
 
 
-sub testFixNesting()
-{
+sub testFixNesting() {
     print "TEST: fixNesting()\n";
 
     my $input       = "<seg>Dit is <hi>gewoon eenvoudig.</hi></seg>";
@@ -181,12 +173,10 @@ sub testFixNesting()
     $expected   = "<seg>Dit is <hi rend='sc'><hi>fout genest.</hi></hi></seg> <seg><hi rend='sc'><hi>Dat</hi> snap</hi> je wel.</seg>";
     $output = fixNesting($input);
     assertEquals($expected, $output);
-
 }
 
 
-sub testLiftInlineTags()
-{
+sub testLiftInlineTags() {
     print "TEST: liftInlineTags()\n";
 
     my $input    = "Dit is een korte test<pb n=23>. Hiermee tonen<lb> we <corr sic='an'>aan</corr> dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.";
@@ -198,8 +188,7 @@ sub testLiftInlineTags()
 }
 
 
-sub testTagSegments()
-{
+sub testTagSegments() {
     print "TEST: tagSegments()\n\n";
 
     my $input    = "Dit is een korte test. Hiermee tonen we aan dat we zinnen in stukken kunnen breken! Zie je dit? Het werkt.";
@@ -235,23 +224,19 @@ sub testTagSegments()
 }
 
 
-sub main
-{
+sub main {
     my $file = $ARGV[0];
 
-    if (!defined($file) || $file eq '')
-    {
+    if (!defined($file) || $file eq '') {
         test();
     }
 
     open(INPUTFILE, $file) || die("Could not open input file $file");
 
     # Skip upto start of actual text.
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $line = $_;
-        if ($line =~ /<text(.*?)>/)
-        {
+        if ($line =~ /<text(.*?)>/) {
             print $line;
             last;
         }
@@ -259,14 +244,12 @@ sub main
     }
 
 	my $text = "";
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $line = $_;
 
         # Skip trailing material. (That is, the checklist I tend to add there.)
 		# Follow convention that final </text> is on its own line.
-        if ($line =~ /^<\/text>/)
-        {
+        if ($line =~ /^<\/text>/) {
 			print processText($text);
             print $line;
 			$text = "";
@@ -278,23 +261,19 @@ sub main
 			print processText($text);
 			print $line;
 			$text = "";
-		}
-		else
-		{
+		} else {
 			$text .= $line;
 		}
     }
 
 	# Handle what is left-over.
-	if ($text ne "") 
-	{
+	if ($text ne "") {
 		print processText($text);
 	}
 
 
     # Copy whatever is remaining in the file.
-    while (<INPUTFILE>)
-    {
+    while (<INPUTFILE>) {
         my $line = $_;
         print $line;
     }
@@ -304,13 +283,11 @@ sub main
 
 
 
-sub processText($)
-{
+sub processText($) {
 	my $remainder = shift;
 	$remainder = liftInlineTags($remainder);
 	my $result = "";
-	while ($remainder =~ /$tagPattern/)
-	{
+	while ($remainder =~ /$tagPattern/) {
 		my $before = $`;
 		my $tag = $1;
 		$remainder = $';
@@ -327,8 +304,7 @@ sub processText($)
 }
 
 
-sub liftInlineTags($)
-{
+sub liftInlineTags($) {
     my $line = shift;
 
     $line = liftRegex("<GR>(.*?)<\\/GR>", $line);
@@ -336,8 +312,7 @@ sub liftInlineTags($)
 
     my $remainder = $line;
     my $result = "";
-    while ($remainder =~ m/(<\/?(hi|pb|lb|corr|abbr|ref|xref)(.*?)>)/)
-    {
+    while ($remainder =~ m/(<\/?(hi|pb|lb|corr|abbr|ref|xref)(.*?)>)/) {
         my $before = $`;
         my $tag = $1;
         $remainder = $';
@@ -350,13 +325,11 @@ sub liftInlineTags($)
 }
 
 
-sub liftRegex($$)
-{
+sub liftRegex($$) {
     my $regex = shift;
     my $remainder = shift;
     my $result = "";
-    while ($remainder =~ m/($regex)/)
-    {
+    while ($remainder =~ m/($regex)/) {
         my $before = $`;
         my $lifted = $1;
         $remainder = $';
@@ -369,13 +342,11 @@ sub liftRegex($$)
 }
 
 
-sub restoreInlineTags($)
-{
+sub restoreInlineTags($) {
     my $line = shift;
     my $remainder = $line;
     my $result = "";
-    while ($remainder =~ m/$liftedTagMark([0-9]+)$liftedTagMark/)
-    {
+    while ($remainder =~ m/$liftedTagMark([0-9]+)$liftedTagMark/) {
         my $before = $`;
         my $tagNumber = $1;
         $remainder = $';
@@ -392,8 +363,7 @@ sub restoreInlineTags($)
 
 
 # Fix the nesting of <seg> tags relative to <hi> tags.
-sub fixNesting($)
-{
+sub fixNesting($) {
     my $line = shift;
 
     my $remainder = $line;
@@ -403,8 +373,7 @@ sub fixNesting($)
     my $maxStackSize = 0;
     my %tagStack = ();
 
-    while ($remainder =~ m/<(\/?(?:hi|seg|ref))(.*?)>/)
-    {
+    while ($remainder =~ m/<(\/?(?:hi|seg|ref))(.*?)>/) {
         my $before = $`;
         my $tag = $1;
         my $attrs = $2;
@@ -413,28 +382,20 @@ sub fixNesting($)
         my $fullTag = "<$tag$attrs>";
         my $resultTag = $fullTag;
 
-        if ($tag eq "hi" || $tag eq "ref")
-        {
+        if ($tag eq "hi" || $tag eq "ref") {
             $tagStack{$stackSize} = $fullTag;
             $stackSize++;
-            if ($stackSize > $maxStackSize)
-            {
+            if ($stackSize > $maxStackSize) {
                 $maxStackSize = $stackSize;
             }
-        }
-        elsif ($tag eq "/hi" || $tag eq "/ref")
-        {
+        } elsif ($tag eq "/hi" || $tag eq "/ref") {
             $stackSize--;
-        }
-        elsif ($tag eq "seg" || $tag eq "/seg")
-        {
-            if ($stackSize > 0)
-            {
+        } elsif ($tag eq "seg" || $tag eq "/seg") {
+            if ($stackSize > 0) {
                 # close all <hi> tags on the stack, and reopen.
                 my $stackPointer = $stackSize;
                 $resultTag = "";
-                while ($stackPointer > 0)
-                {
+                while ($stackPointer > 0) {
 					my $closeTag = $tagStack{$stackPointer - 1} =~ /^<ref/ ? "</ref>" : "</hi>";
 
                     $resultTag .= $closeTag;
@@ -442,8 +403,7 @@ sub fixNesting($)
                 }
                 $resultTag .= $fullTag;
 
-                while ($stackPointer <= $stackSize)
-                {
+                while ($stackPointer <= $stackSize) {
                     $resultTag .= $tagStack{$stackPointer};
                     $stackPointer++;
                 }
@@ -454,8 +414,7 @@ sub fixNesting($)
     $result .= $remainder;
 
     # Eliminate pointless <hi> </hi> sequences (cannot see italic spaces anyway).
-    for (my $i = $maxStackSize; $i > 0; $i--)
-    {
+    for (my $i = $maxStackSize; $i > 0; $i--) {
         $result =~ s/<hi([^>]*?)>(\s*)<\/hi>/\2/g;
         $result =~ s/<ref([^>]*?)>(\s*)<\/ref>/\2/g;
     }
@@ -465,8 +424,7 @@ sub fixNesting($)
 
 
 
-sub findSegmentBreaks($)
-{
+sub findSegmentBreaks($) {
     my $text = shift;
 
     my $alphaNum = "(?:[\\p{IsAlnum}]|\\&[A-Za-z](?:breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);)";
@@ -489,41 +447,31 @@ sub findSegmentBreaks($)
     my @words = split(/(\s+)/, $text);
     my $i;
     my $result = "";
-    for ($i = 0; $i < (scalar(@words) - 1); $i++)
-    {
+    for ($i = 0; $i < (scalar(@words) - 1); $i++) {
         my $word = $words[$i];
         my $nextWord = defined($words[$i + 2]) ? $words[$i + 2] : '';
         my $thirdWord = defined($words[$i + 4]) ? $words[$i + 4] : '';
 
         # Does the 'word' end with a ;, but is not an SGML entity?
-        if ($word =~ /;$/ && !($word =~ /\&[A-Za-z0-9]+;$/))
-        {
+        if ($word =~ /;$/ && !($word =~ /\&[A-Za-z0-9]+;$/)) {
             $result .= $word . $mark;
-        }
-        elsif ($word =~ /(($alphaNum|\&apos;|[\.\-])+)($punctuationClose*)(\.+)$/)
-        {
+        } elsif ($word =~ /(($alphaNum|\&apos;|[\.\-])+)($punctuationClose*)(\.+)$/) {
             # Is the word an abbreviation or a (set of) initials?
-            if (isAbbreviation($word) || $word =~ /^($upperCaseLetter\.)+$/)
-            {
+            if (isAbbreviation($word) || $word =~ /^($upperCaseLetter\.)+$/) {
                 $result .= $word;
             }
             # Does the following 'word' start with a sentence starter?
-            elsif ($nextWord =~ /^$upperCaseLetter/)
-            {
+            elsif ($nextWord =~ /^$upperCaseLetter/) {
                 $result .= $word . $mark;
             }
             # Do we have the Dutch special case ('t Was or 'n Huis)?
-            elsif ($nextWord =~ /^$dutchSpecial$/ && $thirdWord =~ /^$upperCaseLetter/)
-            {
+            elsif ($nextWord =~ /^$dutchSpecial$/ && $thirdWord =~ /^$upperCaseLetter/) {
                 $result .= $word . $mark;
-            }
-            else
-            {
+            } else {
                 $result .= $word;
             }
         }
-        else
-        {
+        else {
             $result .= $word;
         }
     }
@@ -533,8 +481,7 @@ sub findSegmentBreaks($)
 }
 
 
-sub tagSegments($)
-{
+sub tagSegments($) {
     my $text = shift;
     $text = findSegmentBreaks($text);
 
@@ -543,14 +490,10 @@ sub tagSegments($)
     my @sentences = split(/<sb>(\s+)/, $text);
 
     my $result = "";
-    foreach my $sentence (@sentences)
-    {
-        if ($sentence !~ /^\s+$/)
-        {
+    foreach my $sentence (@sentences) {
+        if ($sentence !~ /^\s+$/) {
             $result .= startSegment() . $sentence . endSegment();
-        }
-        else
-        {
+        } else {
             $result .= $sentence;
         }
     }
@@ -565,32 +508,27 @@ sub tagSegments($)
 }
 
 
-sub startSegment()
-{
+sub startSegment() {
     my $counter = $segmentCounter;
     $segmentCounter++;
     return "<seg id=\"seg$counter\">";
 }
 
 
-sub endSegment()
-{
+sub endSegment() {
     return "</seg>";
 }
 
 
-sub isAbbreviation($)
-{
+sub isAbbreviation($) {
     my $word = shift;
     return exists($abbreviations{$word});
 }
 
 
-sub isAbbreviationBeforeNumber($)
-{
+sub isAbbreviationBeforeNumber($) {
     return 0;
 }
-
 
 
 main();

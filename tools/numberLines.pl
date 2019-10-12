@@ -9,6 +9,7 @@
 
 
 use strict;
+use warnings;
 
 my $inputFile   = $ARGV[0];
 

@@ -1,6 +1,7 @@
 # tei2html.pl -- process a TEI file.
 
 use strict;
+use warnings;
 
 use File::Copy;
 use File::stat;
@@ -123,7 +124,7 @@ if ($showHelp) {
     print "    v         Run a number of checks, and produce a report.\n";
     print "    u         Use Unicode output (in the text version).\n";
     print "    f         Force generation of output file, even if it is newer than input.\n";
-    print "    z         Produce ZIP file for Project Guteberg submission (IN DEVELOPMENT).\n";
+    print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n";
     print "    q         Print this help and exit.\n";
     print "    notranscription      Don't use transcription schemes.\n";
     print "    debug                Debug mode.\n";
@@ -248,7 +249,7 @@ sub normalizeXml($$) {
     my $normalizedXmlFilename = shift;
 
     if ($force == 0 && isNewer($normalizedXmlFilename, $xmlFilename)) {
-        print "Skipping convertion to normalized XML ($normalizedXmlFilename newer than $xmlFilename).\n";
+        print "Skipping conversion to normalized XML ($normalizedXmlFilename newer than $xmlFilename).\n";
         return;
     }
 
@@ -263,7 +264,7 @@ sub makeP5($$) {
     my $p5XmlFilename = $basename . "-p5.xml";
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
-        print "Skipping convertion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
+        print "Skipping conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
         return;
     }
 
@@ -343,7 +344,7 @@ sub makeQrCode($) {
         }
 
         if (not -e "$imageDir/qrcode.png") {
-            # Generate a QR code with a transparant background.
+            # Generate a QR code with a transparent background.
             system("qrcode -l '#0000' -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
         }
     }
@@ -356,7 +357,7 @@ sub makeHtml($$) {
     my $htmlFile = $basename . '.html';
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
-        print "Skipping convertion to HTML ($htmlFile newer than $xmlFile).\n";
+        print "Skipping conversion to HTML ($htmlFile newer than $xmlFile).\n";
         return;
     }
 
@@ -383,7 +384,7 @@ sub makePdf($$) {
     my $pdfFile =  $basename . '.pdf';
 
     if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
-        print "Skipping convertion to PDF ($pdfFile newer than $xmlFile).\n";
+        print "Skipping conversion to PDF ($pdfFile newer than $xmlFile).\n";
         return;
     }
 
@@ -409,7 +410,7 @@ sub makeEpub($$) {
     my $epubFile = $basename . '.epub';
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
-        print "Skipping convertion to ePub ($epubFile newer than $xmlFile).\n";
+        print "Skipping conversion to ePub ($epubFile newer than $xmlFile).\n";
         return;
     }
 
@@ -442,7 +443,7 @@ sub makeText($$) {
     my $textFile = $basename . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
-        print "Skipping convertion to text file ($textFile newer than $filename).\n";
+        print "Skipping conversion to text file ($textFile newer than $filename).\n";
         return;
     }
 
@@ -474,7 +475,7 @@ sub makeText($$) {
     $debug || unlink($tmpFile1);
     $debug || unlink($tmpFile2);
 
-    # check for required manual intervetions
+    # check for required manual interventions
     my $containsError = system ("grep -q \"\\[ERROR:\" $textFile");
     if ($containsError == 0) {
         print "NOTE: Please check $textFile for [ERROR: ...] messages.\n";
@@ -579,6 +580,7 @@ sub makeZip($) {
 
     if (!-d $pgNumber) {
         print "Failed to create directory $pgNumber, not making zip file.\n";
+        return;
     }
 
     # Copy text version to final location
@@ -598,6 +600,9 @@ sub makeZip($) {
             mkdir $htmlDirectory;
         }
         copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
+
+        # TODO: append PG header and footer.
+
         copyImages("$htmlDirectory/images");
     }
 
@@ -885,7 +890,7 @@ sub tei2xml($$) {
     my $xmlFile = shift;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
-        print "Skipping convertion to XML ('$xmlFile' newer than '$sgmlFile').\n";
+        print "Skipping conversion to XML ('$xmlFile' newer than '$sgmlFile').\n";
         return;
     }
 

@@ -1,6 +1,7 @@
 # fb2tei.pl -- covert fictionbook to TEI.
 
 use strict;
+use warnings;
 use MIME::Base64;
 use FindBin qw($Bin);
 

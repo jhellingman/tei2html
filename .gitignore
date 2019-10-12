@@ -95,3 +95,4 @@ samples/testMath/testMath.html
 test/test-normalized-p5.xml
 test/test-p5.html
 tools/tei2xml.pl
+_Deparsed_XSubs.pm

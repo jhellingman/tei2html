@@ -1,5 +1,7 @@
 # fixNotes.pl -- fix (renumber) notes in text files
 
+use strict;
+use warnings;
 $inputFile          = $ARGV[0];
 $firstNoteNumber    = $ARGV[1];
 

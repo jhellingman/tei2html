@@ -1,6 +1,7 @@
 # Perl run the extract-segs.xsl stylesheet on a directory with Saxon.
 
 use strict;
+use warnings;
 use FindBin qw($Bin);
 use File::Basename;
 

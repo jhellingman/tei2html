@@ -1,6 +1,7 @@
 # divn2div.pl -- change from numbered to unnumbered TEI divs.
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 

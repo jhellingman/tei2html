@@ -1,6 +1,7 @@
 # idElement.pl -- give lg-elements ids based on de page and number they have
 
 use strict;
+use warnings;
 
 my $inputFile = $ARGV[0];
 my $pageNumber = 0;

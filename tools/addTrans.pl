@@ -8,6 +8,7 @@
 #
 
 use strict;
+use warnings;
 
 my $useHtml = 1;
 

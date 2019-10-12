@@ -1,6 +1,7 @@
 # tagBibleRefs.pl -- Tag Bible references appearing in documents.
 
 use strict;
+use warnings;
 use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $tagPattern = "<(.*?)>";

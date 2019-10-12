@@ -1,6 +1,7 @@
 # ucwords.pl -- Unicode based perl script for collecting words from an XML file.
 
 use strict;
+use warnings;
 
 use utf8;
 binmode(STDOUT, ":utf8");
@@ -26,7 +27,7 @@ use LanguageNames qw/getLanguage/;
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
 my $makeHeatmap = 0;    # Set to 1 to generate a heat-map document.
-my $retrograd = 0;      # Set to 1 to generate a retrograd wordlist.
+my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
 my $idbook = 1;
 my $docTitle = "Title";

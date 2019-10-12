@@ -1,8 +1,9 @@
 #
-# fixAnchors.pl -- provide Anchors with sequential numbers per page in TEI tagged files
+# fixAnchors.pl -- provide anchors with sequential numbers per page in TEI tagged files
 #
 
 use strict;
+use warnings;
 use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $inputFile   = $ARGV[0];
@@ -26,7 +27,7 @@ while (<INPUTFILE>) {
         print "<pb$1>";
         $currentAnchor = 1;
         $currentPage = getAttrVal("n", $attrs);
-        my $currentPage = isroman($currentPage) ? arabic($currentPage) : $currentPage;
+        $currentPage = isroman($currentPage) ? arabic($currentPage) : $currentPage;
     }
     handleAnchors($remainder);
 }

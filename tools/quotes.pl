@@ -1,6 +1,7 @@
 # quotes.pl -- Do smart quotes stuff.
 
 use strict;
+use warnings;
 
 my $accLetter = "(?:\\&[A-Za-z](?:acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
 my $ligLetter = "(?:\\&[A-Za-z]{2}lig;)";
