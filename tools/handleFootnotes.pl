@@ -1,6 +1,7 @@
 # handleFootnotes.pl
 
 use strict;
+use warnings;
 use Data::Dumper;
 
 main();
