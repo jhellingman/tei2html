@@ -39,9 +39,18 @@
     </xd:doc>
 
     <xsl:param name="keyword" select="''"/>
-    <xsl:param name="filterlang" select="''"/>
 
-    <xsl:variable name="defaultlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
+    <xd:doc>
+        <xd:short>The language(s) to generate a KWIC for.</xd:short>
+        <xd:detail>The language(s) to generate a KWIC for. If omitted, a KWIC will be generated for all languages
+        in the document. Use ISO-639 codes separated by spaces.</xd:detail>
+    </xd:doc>
+
+    <xsl:param name="select-language" select="''"/>
+
+    <xsl:variable name="select-language-sequence" select="tokenize($select-language, ' ')"/>
+
+    <xsl:variable name="default-language" select="/*[self::TEI.2 or self::TEI]/@lang"/>
 
 
     <xd:doc>
@@ -50,7 +59,7 @@
         The preceding and following contexts are counted separately.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="contextSize" select="16"/>
+    <xsl:param name="context-size" select="16"/>
 
 
     <xd:doc>
@@ -409,7 +418,7 @@
             <td class="pn">
                 <xsl:value-of select="@page"/>
             </td>
-            <xsl:if test="@xml:lang != $defaultlang">
+            <xsl:if test="@xml:lang != $default-language">
                 <td class="lang">
                     <xsl:value-of select="@xml:lang"/>
                 </td>
@@ -444,7 +453,7 @@
             <td class="pn">
                 <xsl:value-of select="@page"/>
             </td>
-            <xsl:if test="@xml:lang != $defaultlang">
+            <xsl:if test="@xml:lang != $default-language">
                 <td class="lang">
                     <xsl:value-of select="@xml:lang"/>
                 </td>
@@ -544,7 +553,7 @@
     </xsl:template>
 
 
-    <!-- Not all Unicode regular expressions are supported (https://www.regular-expressions.info/unicode.html), also,
+    <!-- Not all Unicode regular expressions are supported in XSLT (https://www.regular-expressions.info/unicode.html), also,
          for this tool, we use a simplified approximation of handling bidirectional script. -->
 
     <xsl:function name="f:isRightToLeft" as="xs:boolean">
@@ -587,9 +596,9 @@
 
         <xsl:if test="$keyword = @form">
             <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $context-size]"/></k:preceding>
                 <k:word><xsl:copy-of select="."/></k:word>
-                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $context-size]"/></k:following>
             </k:match>
         </xsl:if>
     </xsl:template>
@@ -607,11 +616,11 @@
     </xd:doc>
 
     <xsl:template mode="multi-kwic" match="k:w">
-        <xsl:if test="not(f:is-stopword(., @xml:lang))">
+        <xsl:if test="not(f:is-stopword(., @xml:lang)) and f:is-selected-language(@xml:lang)">
             <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
-                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $contextSize]"/></k:preceding>
+                <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $context-size]"/></k:preceding>
                 <k:word><xsl:copy-of select="."/></k:word>
-                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $contextSize]"/></k:following>
+                <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $context-size]"/></k:following>
             </k:match>
         </xsl:if>
     </xsl:template>
@@ -829,17 +838,20 @@
         <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
         <xsl:variable name="word" select="lower-case($word)"/>
 
-        <xsl:choose>
-            <xsl:when test="$baselang = 'en'">
-                <xsl:sequence select="$word = $en-stopwords-sequence"/>
-            </xsl:when>
-            <xsl:when test="$baselang = 'nl'">
-                <xsl:sequence select="$word = $nl-stopwords-sequence"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="false()"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:sequence select="if ($baselang = 'en') 
+                              then $word = $en-stopwords-sequence
+                              else if ($baselang = 'nl')
+                                   then $word = $nl-stopwords-sequence
+                                   else false()"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-selected-language" as="xs:boolean">
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
+
+        <xsl:sequence select="$select-language = '' or $baselang = $select-language-sequence"/>
     </xsl:function>
 
 </xsl:stylesheet>

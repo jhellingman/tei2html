@@ -8,8 +8,6 @@ my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxo
 my $filename = $ARGV[0];
 my $keyword = $ARGV[1];
 
-if ($keyword eq '') {
-    system ("$saxon \"$filename\" $xsldir/xml2kwic.xsl");
-} else {
-    system ("$saxon  \"$filename\" $xsldir/xml2kwic.xsl keyword=\"$keyword\"");
-}
+my $keywordArgument = $keyword eq '' ? '' : "keyword=\"$keyword\""
+
+system ("$saxon \"$filename\" $xsldir/xml2kwic.xsl $keywordArgument");

@@ -62,6 +62,8 @@ my $debug               = 0;
 my $trace               = 0;
 my $profile             = 0;
 my $useTidy             = 0;
+my $kwicLanguages       = "";
+my $kwicWords           = "";
 
 GetOptions(
     't' => \$explicitMakeText,
@@ -88,6 +90,8 @@ GetOptions(
     'profile' => \$profile,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
+    'kwiclang=s' => \$kwicLanguages,
+    'kwicword=s' => \$kwicWords,
     'help' => \$showHelp,
     'tidy'=> \$useTidy);
 
@@ -125,6 +129,8 @@ if ($showHelp) {
     print "    debug                Debug mode.\n";
     print "    trace                Trace mode.\n";
     print "    profile              Profile mode.\n";
+    print "    kwiclang             Languages to be shown in KWIC.\n";
+    print "    kwicword             Words to be shown in KWIC.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -217,15 +223,15 @@ sub processFile($) {
     makeReadme($normalizedXmlFilename);
 
     $runChecks && runChecks($filename);
-    $makeWordlist && makeWordlist($normalizedXmlFilename, $basename . '-words.html');
+    $makeWordlist && makeWordlist($basename, $normalizedXmlFilename);
 
-    $makeHtml && makeHtml($basename, $normalizedXmlFilename, $basename . '.html');
-    $makeEpub && makeEpub($basename, $normalizedXmlFilename, $basename . '.epub');
-    $makePdf && makePdf($basename, $normalizedXmlFilename, $basename . '.pdf');
-    $makeKwic && makeKwic($normalizedXmlFilename, $basename . '-kwic.html');
-    $makeText && makeText($basename, $filename, $basename . '.txt');
+    $makeHtml && makeHtml($basename, $normalizedXmlFilename);
+    $makeEpub && makeEpub($basename, $normalizedXmlFilename);
+    $makePdf  && makePdf($basename,  $normalizedXmlFilename);
+    $makeKwic && makeKwic($basename, $normalizedXmlFilename);
+    $makeText && makeText($basename, $filename);
+    $makeP5   && makeP5($basename, $normalizedXmlFilename);
 
-    $makeP5 && makeP5($normalizedXmlFilename, $basename . "-p5.xml");
     $makePGTEI && system ("$saxon $normalizedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     if ($makeZip == 1 && $pgNumber > 0) {
@@ -252,8 +258,9 @@ sub normalizeXml($$) {
 
 
 sub makeP5($$) {
+    my $basename = shift;
     my $xmlFilename = shift;
-    my $p5XmlFilename = shift;
+    my $p5XmlFilename = $basename . "-p5.xml";
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
         print "Skipping convertion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
@@ -286,8 +293,9 @@ sub makeReadme($) {
 
 
 sub makeKwic($$) {
+    my $basename = shift;
     my $xmlFilename = shift;
-    my $kwicFilename = shift;
+    my $kwicFilename = determineKwicFilename($basename);
 
     if ($force == 0 && isNewer($kwicFilename, $xmlFilename)) {
         print "Skipping creation of KWIC ($kwicFilename newer than $xmlFilename).\n";
@@ -295,8 +303,31 @@ sub makeKwic($$) {
     }
 
     my $saxonParameters = determineSaxonParameters();
+
+    my $kwicLanguagesParameter = ($kwicLanguages eq '') ? '' : "select-language=\"$kwicLanguages\"";
+    my $kwicKeywordParameter = ($kwicWords eq '') ? '' : "keyword=\"$kwicWords\"";
+
     print "Generate a KWIC index (this may take some time)...\n";
-    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters > $kwicFilename");
+    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicKeywordParameter > $kwicFilename");
+}
+
+
+sub determineKwicFilename($) {
+    my $basename = shift;
+
+    my $nameFragment = $kwicLanguages;
+    $nameFragment =~ tr/ /-/;
+    if ($nameFragment ne '') {
+        $nameFragment = '-' . $nameFragment;
+    }
+
+    my $nameFragment2 = $kwicWords;
+    $nameFragment2 =~ tr/ /-/;
+    if ($nameFragment2 ne '') {
+        $nameFragment2 = '-' . $nameFragment2;
+    }
+
+    return $basename . $nameFragment . $nameFragment2 . '-kwic.html';
 }
 
 
@@ -319,10 +350,10 @@ sub makeQrCode($) {
 }
 
 
-sub makeHtml($) {
+sub makeHtml($$) {
     my $basename = shift;
     my $xmlFile = shift;
-    my $htmlFile = shift;
+    my $htmlFile = $basename . '.html';
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         print "Skipping convertion to HTML ($htmlFile newer than $xmlFile).\n";
@@ -346,10 +377,10 @@ sub makeHtml($) {
 }
 
 
-sub makePdf($) {
+sub makePdf($$) {
     my $basename = shift;
     my $xmlFile = shift;
-    my $pdfFile = shift;
+    my $pdfFile =  $basename . '.pdf';
 
     if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
         print "Skipping convertion to PDF ($pdfFile newer than $xmlFile).\n";
@@ -372,10 +403,10 @@ sub makePdf($) {
 }
 
 
-sub makeEpub() {
+sub makeEpub($$) {
     my $basename = shift;
     my $xmlFile = shift;
-    my $epubFile = shift;
+    my $epubFile = $basename . '.epub';
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
         print "Skipping convertion to ePub ($epubFile newer than $xmlFile).\n";
@@ -408,7 +439,7 @@ sub makeEpub() {
 sub makeText($$) {
     my $basename = shift;
     my $filename = shift;
-    my $textFile = shift;
+    my $textFile = $basename . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
         print "Skipping convertion to text file ($textFile newer than $filename).\n";
@@ -459,9 +490,10 @@ sub makeText($$) {
 }
 
 
-sub makeWordlist($) {
+sub makeWordlist($$) {
+    my $basename = shift;
     my $xmlFile = shift;
-    my $wordlistFile = shift;
+    my $wordlistFile = $basename . '-words.html';
 
     if ($force == 0 && isNewer($wordlistFile, $xmlFile)) {
         print "Skipping creation of word list ($wordlistFile newer than $xmlFile).\n";
@@ -575,7 +607,7 @@ sub makeZip($) {
 
 
 #
-# extractMetadata -- try to extract some metadata from TEI file.
+# extractMetadata -- try to extract some metadata from the TEI file.
 #
 sub extractMetadata($) {
     my $file = shift;
