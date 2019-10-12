@@ -10,8 +10,6 @@ use open ':utf8';
 require Encode;
 use Unicode::Normalize;
 use Getopt::Long;
-use DBI;
-
 use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 use SgmlSupport qw/getAttrVal sgml2utf/;
@@ -25,20 +23,27 @@ use LanguageNames qw/getLanguage/;
 
 # Global settings
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
-my $useDatabase = 0;    # Set to 1 to store the word statistics in a database.
-my $makeHeatmap = 0;    # Set to 1 to generate a heat-map document.
+my $makeHeatMap = 0;    # Set to 1 to generate a heat-map document.
 my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
-my $idbook = 1;
+my $idBook = 1;
 my $docTitle = "Title";
 my $docAuthor = "Author";
 
 GetOptions(
     'v' => \$verbose,
-    'd' => \$useDatabase,
     'r' => \$retrograd,
     'i' => \$ignoreLanguage,
-    'm' => \$makeHeatmap);
+    'm' => \$makeHeatMap);
+
+if (!defined $ARGV[0]) {
+    die "usage: ucwords.pl -imrv <filename>";
+}
+
+my $inputFile = $ARGV[0];
+
+# Constants
+my $tagPattern = "<(.*?)>";
 
 # Hashes to collect information
 my %wordHash = ();
@@ -74,13 +79,8 @@ my $wordCount = 0;
 my $numberCount = 0;
 my $nonWordCount = 0;
 my $charCount = 0;
-my $uniqCount = 0;
-my $nonCount = 0;
-my $varCount = 0;
 my $langCount = 0;
 my $langStackSize = 0;
-
-my $totalWords = 0;
 
 my $grandTotalWords = 0;
 my $grandTotalUniqWords = 0;
@@ -95,47 +95,19 @@ my $unknownTotalWords = 0;
 my $unknownUniqWords = 0;
 
 
-# Constants
-my $tagPattern = "<(.*?)>";
-
-my $infile = $ARGV[0];
+main();
 
 
-# Information about currently processed document
-my $defaultLang = "en";
-if ($infile eq "-l") {
-    $defaultLang = $ARGV[1];
-    pushLang("NULL", $defaultLang);
-    $infile = $ARGV[2];
-}
+sub main {
+    # loadScannoFile("en");
+    collectWords();
+    loadGoodBadWords();
 
-# Database Handle
-my $dbh = 0;
-
-# Prepared SQL queries
-my $sthAddWord = 0;
-my $sthGetWordCount = 0;
-
-
-
-# loadScannoFile("en");
-
-collectWords();
-
-loadGoodBadWords();
-
-if ($useDatabase) {
-    initDatabase();
-    addBook($idbook, $docTitle, $docAuthor, $infile);
-}
-
-report();
-
-# reportSQL();
-# reportXML();
-
-if ($makeHeatmap) {
-    heatMapDocument();
+    report();
+    # reportXML();
+    if ($makeHeatMap) {
+        makeHeatMap();
+    }
 }
 
 
@@ -148,8 +120,8 @@ if ($makeHeatmap) {
 #
 # heatMapDocument
 #
-sub heatMapDocument() {
-    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+sub makeHeatMap() {
+    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
     open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
 
     while (<INPUTFILE>) {
@@ -256,11 +228,12 @@ sub heatMapNonWord($) {
     $xmlWord =~ s/>/\&gt;/g;
     $xmlWord =~ s/\&/\&amp;/g;
 
-    if ($nonWordHash{$word} < 5) {
+    my $count = defined $nonWordHash{$word} ? $nonWordHash{$word} : 0;
+    if ($count < 5) {
         print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
-    } elsif ($nonWordHash{$word} < 25) {
+    } elsif ($count < 25) {
         print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
-    } elsif ($nonWordHash{$word} < 100) {
+    } elsif ($count < 100) {
         print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
     } else {
         print HEATMAPFILE $xmlWord;
@@ -359,8 +332,8 @@ sub heatMapPair() {
 
 
 sub loadDocument($) {
-    my $infile = shift;
-    open (INPUTFILE, $infile) || die("ERROR: Could not open input file $infile");
+    my $inputFile = shift;
+    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
     while (<INPUTFILE>) {
         push (@lines, $_);
     }
@@ -372,7 +345,7 @@ sub loadDocument($) {
 # collectWords
 #
 sub collectWords() {
-    loadDocument($infile);
+    loadDocument($inputFile);
 
     foreach my $line (@lines) {
         my $remainder = $line;
@@ -384,8 +357,7 @@ sub collectWords() {
             $docAuthor = sgml2utf($1);
         }
         if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/) {
-            $idbook = $1;
-            # $useDatabase = 1;
+            $idBook = $1;
         }
         if ($remainder =~ /<\/teiHeader>/) {
             $headerWordCount = $wordCount;
@@ -504,7 +476,7 @@ sub reportLanguageWordsXML($) {
 
     print USAGEFILE "\n<words xml:lang=\"$language\">\n";
 
-    loadDict($language);
+    loadDictionary($language);
 
     my $previousKey = "";
     foreach my $item (@wordList) {
@@ -577,8 +549,9 @@ sub reportLanguagePairs($) {
 # printReportHeader
 #
 sub printReportHeader() {
-    print "<html>";
-    print "\n<head><title>Word Usage Report for $docTitle ($infile)</title>";
+    print "<html lang=\"en\">";
+    print "\n<head>";
+    print "\n<title>Word Usage Report for $docTitle ($inputFile)</title>";
     print "\n<style>\n";
     print "body { margin-left: 30px; }\n";
     if ($retrograd == 1) {
@@ -603,9 +576,9 @@ sub printReportHeader() {
     print ".q6 { background-color: red; font-weight: bold;}\n";
 
     print "</style>\n";
-    print "\n<head><body>";
+    print "\n</head><body>";
 
-    print "\n<h1>Word Usage Report for $docTitle ($infile)</h1>";
+    print "\n<h1>Word Usage Report for $docTitle ($inputFile)</h1>";
 }
 
 
@@ -641,9 +614,8 @@ sub reportWordStatistics() {
 sub reportWords($) {
     my $language = shift;
 
-    my $prevWord = "";
-    my $prevKey  = "";
-    my $prevLetter = "";
+    my $prevKey  = '';
+    my $prevLetter = '';
 
     $uniqWords = 0;
     $totalWords = 0;
@@ -651,7 +623,7 @@ sub reportWords($) {
     $unknownUniqWords = 0;
 
     print "\n\n\n<h2>Word frequencies in " . getLanguage(lc($language)) . "</h2>\n";
-    loadDict($language);
+    loadDictionary($language);
 
     foreach my $item (@wordList) {
         my ($key, $word) = split(/!/, $item, 2);
@@ -674,21 +646,15 @@ sub reportWords($) {
 }
 
 
-
-
 sub reportSQL() {
     open (SQLFILE, ">usage.sql") || die("Could not create output file 'usage.sql'");
 
-
-    print SQLFILE "DELETE FROM WORDS WHERE idbook = $idbook\n";
-    print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idbook\n";
-
-    print SQLFILE "INSERT INTO BOOKS ($idbook, \"$docTitle\", \"$docAuthor\")\n";
-
+    print SQLFILE "DELETE FROM WORDS WHERE idbook = $idBook\n";
+    print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idBook\n";
+    print SQLFILE "INSERT INTO BOOKS ($idBook, \"$docTitle\", \"$docAuthor\")\n";
     print SQLFILE "\n\n\n";
 
     reportWordsSQL();
-
     close SQLFILE;
 }
 
@@ -722,9 +688,8 @@ sub reportWordSQL($$) {
     my $language = shift;
 
     my $count = $wordHash{$language}{$word};
-    print SQLFILE "INSERT INTO WORDS ($idbook, \"$word\", \"$language\", $count)\n";
+    print SQLFILE "INSERT INTO WORDS ($idBook, \"$word\", \"$language\", $count)\n";
 }
-
 
 
 #
@@ -735,10 +700,6 @@ sub reportWord($$) {
     my $language = shift;
     my $count = $wordHash{$language}{$word};
 
-    if ($useDatabase) {
-        addWord($idbook, $word, $language, $count);
-    }
-
     $uniqWords++;
     $totalWords += $count;
     $grandTotalUniqWords++;
@@ -747,15 +708,15 @@ sub reportWord($$) {
     # Count how many times a word with this frequency occurs:
     $countCountHash{$count}++;
 
-    my $compoundWord = "";
-    my $known = isKnownWord($word, $language);
-    if ($known == 0) {
-        $compoundWord = compoundWord($word, $language);
+    my $isCompoundWord = 0;
+    my $isKnownWord = isKnownWord($word, $language);
+    if ($isKnownWord == 0) {
+        $isCompoundWord = isCompoundWord($word, $language);
         $unknownUniqWords++;
         $unknownTotalWords += $count;
     }
 
-    my $goodOrBad = $badWordsHash{$word} == 1 ? "bw" : $goodWordsHash{$word} == 1 ? "gw" : "";
+    my $goodOrBad = defined $badWordsHash{$word} ? "bw" : defined $goodWordsHash{$word} ? "gw" : "";
 
     # Make SHY character visible
     my $unShyWord = $word;
@@ -765,32 +726,47 @@ sub reportWord($$) {
         print "<span class=cnt>$count</span> ";
     }
 
-    if ($known == 0) {
+    my $class = '';
+    if ($isKnownWord == 0) {
         my $heatMapClass = lookupHeatMapClass($count);
 
-        if ($compoundWord ne "") {
-            print "<span class='$heatMapClass comp $goodOrBad'>$compoundWord</span> ";
+        if ($isCompoundWord == 1) {
+            $class = "$heatMapClass comp $goodOrBad";
         } else {
-            print "<span class='$heatMapClass $goodOrBad'>$unShyWord</span> ";
+            $class = "$heatMapClass $goodOrBad";
         }
     } else {
         if ($count < 3) {
-            print "<span class='$goodOrBad'>$unShyWord</span> ";
+            $class = $goodOrBad;
         } else {
-            print "<span class='freq $goodOrBad'>$unShyWord</span> ";
+            $class = "freq $goodOrBad";
         }
     }
+    print "<span" . composeClassAttribute($class) . ">$unShyWord</span> ";
 
     if ($count > 1 && $retrograd == 0) {
         print "<span class=cnt>$count</span> ";
     }
 }
 
+sub composeClassAttribute($) {
+    my $class = shift;
+
+    $class =~ s/^\s+|\s+$//g;
+    if ($class eq '') {
+        return '';
+    }
+    if ($class =~ /^[a-zA-Z]+$/) {
+        return " class=$class";
+    }
+    return " class='$class'"
+}
+
 
 #
-# compoundWord
+# isCompoundWord
 #
-sub compoundWord($$) {
+sub isCompoundWord($$) {
     my $word = shift;
     my $language = shift;
     my $start = 4;
@@ -800,20 +776,22 @@ sub compoundWord($$) {
     for (my $i = $start; $i < $end; $i++) {
         my $before = substr($word, 0, $i);
         my $after = substr($word, $i);
-        if (isKnownWord($before, $language) == 1 && isKnownWord(ucfirst($after), $language) == 1) {
+        if (isKnownWord($before, $language) && isKnownWord(ucfirst($after), $language)) {
             # print STDERR "[$before|$after] ";
-            return "$word";
+            return 1;
         }
     }
 
     my @parts = split(/-/, $word);
-    foreach my $part (@parts) {
-        if (!isKnownWord($part, $language)) {
-            return "";
+    if (@parts > 1) {
+        foreach my $part (@parts) {
+            if (!isKnownWord($part, $language)) {
+                return 0;
+            }
         }
+        return 1;
     }
-
-    return $word;
+    return 0;
 }
 
 
@@ -822,14 +800,14 @@ sub compoundWord($$) {
 #
 sub isKnownWord($$) {
     my $word = shift;
-    my $lang = shift;
+    my $language = shift;
 
-    if ($dictHash{$lang}{lc($word)} != 1) {
-        if ($dictHash{$lang}{$word} != 1) {
-            return 0;
+    if (defined $dictHash{$language}) {
+        if (defined $dictHash{$language}{lc($word)} || defined $dictHash{$language}{$word}) {
+            return 1;
         }
     }
-    return 1;
+    return 0;
 }
 
 
@@ -938,14 +916,14 @@ sub reportCompositeChars() {
 
         my $count = $compositeCharHash{$compositeChar};
 
-        my $ords = "";
+        my $ordinals = '';
         my @chars = split(//, $compositeChar);
         foreach my $char (@chars) {
-            $ords .= " " . ord($char);
+            $ordinals .= ' ' . ord($char);
         }
 
         $grandTotalCompositeCharacters += $count;
-        print "<tr><td>$compositeChar<td align=right><small>$ords</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
+        print "<tr><td>$compositeChar<td align=right><small>$ordinals</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
     }
     print "</table>\n";
 }
@@ -1329,31 +1307,31 @@ sub loadScannoFile($) {
 #
 # loadDict: load a dictionary for a language;
 #
-sub loadDict($) {
-    my $lang = shift;
-    if ($lang eq "xx") {
+sub loadDictionary($) {
+    my $language = shift;
+    if ($language eq "xx") {
         return;
     }
-    if (!openDictionary("$lang.dic")) {
-        $lang =~ /-/;
-        my $shortlang = $`;
-        if ($shortlang eq "" || !openDictionary("$shortlang.dic")) {
-            $verbose && print STDERR "WARNING: Could not open dictionary for " . getLanguage($lang) . "\n";
+    if (!openDictionary("$language.dic")) {
+        $language =~ /-/;
+        my $baseLanguage = $`;
+        if (!defined $baseLanguage || $baseLanguage eq '' || !openDictionary("$baseLanguage.dic")) {
+            $verbose && print STDERR "WARNING: Could not open dictionary for " . getLanguage($language) . "\n";
             return;
         }
     }
 
     my $count = 0;
     while (<DICTFILE>) {
-        my $dictword =  $_;
-        $dictword =~ s/\n//g;
-        $dictHash{$lang}{$dictword} = 1;
+        my $dictionaryWord =  $_;
+        $dictionaryWord =~ s/\n//g;
+        $dictHash{$language}{$dictionaryWord} = 1;
         $count++;
     }
-    $verbose && print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($lang) . " with $count words\n";
+    $verbose && print STDERR "NOTICE:  Loaded dictionary for " . getLanguage($language) . " with $count words\n";
     close(DICTFILE);
 
-    loadCustomDictionary($lang);
+    loadCustomDictionary($language);
 }
 
 
@@ -1361,18 +1339,17 @@ sub loadDict($) {
 # loadCustomDictionary
 #
 sub loadCustomDictionary($) {
-    my $lang = shift;
-    my $file = "custom-$lang.dic";
+    my $language = shift;
+    my $file = "custom-$language.dic";
     if (openDictionary($file)) {
         my $count = 0;
         while (<DICTFILE>) {
-            my $dictword =  $_;
-            $dictword =~ s/\n//g;
-            $dictHash{$lang}{$dictword} = 1;
+            my $dictionaryWord =  $_;
+            $dictionaryWord =~ s/\n//g;
+            $dictHash{$language}{$dictionaryWord} = 1;
             $count++;
         }
-        $verbose && print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($lang) . " with $count words\n";
-
+        $verbose && print STDERR "NOTICE:  Loaded custom dictionary for " . getLanguage($language) . " with $count words\n";
         close(DICTFILE);
     }
 }
@@ -1478,16 +1455,25 @@ sub printSequence() {
 # isInSequence
 #
 sub isInSequence($$) {
-    my $a = shift;
-    my $b = shift;
-    if ($a eq "SENTINEL") {
+    my $first = shift;
+    my $second = shift;
+
+    if ($first eq "SENTINEL") {
         return 0;
     }
-    if (isroman($a)) {
-        return (arabic($a) == arabic($b) - 1);
-    } else {
-        return $a == $b - 1;
+
+    if (isroman($first) and isroman($second)) {
+        return (arabic($first) == arabic($second) - 1);
+    } elsif (isNumber($first) and isNumber($second)) {
+        return $first == $second - 1;
     }
+    return 0;
+}
+
+
+sub isNumber {
+    my $s = shift;
+    return $s =~ /^[0-9]+$/
 }
 
 
@@ -1675,110 +1661,5 @@ sub SimilarityNormalize($) {
     $string =~ tr/ABEFCGJILMWKHNXDOQPRSZTUVYaecouvwbhkdfjygqpltirnmszx/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz/;
 
     return lc($string);
-}
-
-
-#####################################
-#
-# Database support functions
-#
-# See http://cpan.uwinnipeg.ca/htdocs/DBI/DBI.html#Outline_Usage for details of DBI usage.
-#
-
-#
-# InitDatabase
-#
-sub initDatabase() {
-    # database information
-    my $db = "words";
-    my $host = "localhost";
-    my $userid = "root";
-    my $passwd = "my49sql";
-    my $connectionInfo = "dbi:mysql:$db;$host";
-
-    # make connection to database
-    $dbh = DBI->connect($connectionInfo, $userid, $passwd, { RaiseError => 1, AutoCommit => 1 });
-
-    initQueries();
-}
-
-
-#
-# initQueries()
-#
-sub initQueries() {
-    my $queryAddWord = "INSERT INTO word (idbook, word, language, count) VALUES (?, ?, ?, ?)";
-    $sthAddWord = $dbh->prepare($queryAddWord);
-
-    my $queryGetWordCount = "SELECT sum(count) AS wordcount, count(*) AS doccount FROM word WHERE word=? AND language=?";
-    $sthGetWordCount = $dbh->prepare($queryGetWordCount);
-}
-
-
-#
-# addWord($$$$)
-#
-sub addWord($$$$) {
-    my $idbook = shift;
-    my $word = shift;
-    my $language = shift;
-    my $count = shift;
-
-    $word = substr($word, 0, 64);
-    $language = substr($language, 0, 8);
-
-    # print "$idbook, $word, $language, $count\n";
-    $sthAddWord->execute($idbook, $word, $language, $count);
-}
-
-
-#
-# getWordCount
-#
-sub getWordCount($$) {
-    my $word = shift;
-    my $language = shift;
-    $sthGetWordCount->execute($word, $language);
-
-    my $wordcount;
-    my $doccount;
-
-    $sthGetWordCount->bind_columns(\$wordcount, \$doccount);
-
-    if ($sthGetWordCount->fetch()) {
-        return ($wordcount, $doccount);
-    } else {
-        return (0, 0);
-    }
-}
-
-
-#
-# addBook
-#
-sub addBook($$$) {
-    my $idbook = shift;
-    my $title = shift;
-    my $author = shift;
-    my $filename = shift;
-
-    $title = substr($title, 0, 128);
-    $author = substr($author, 0, 128);
-    $filename = substr($filename, 0, 128);
-
-    # Do we already have the book?
-    my $sth = $dbh->prepare("SELECT idbook FROM book WHERE idbook = ?");
-    $sth->execute($idbook);
-    $sth->bind_columns(\$idbook);
-    if ($sth->fetch()) {
-        # We already have this book, remove it from the database.
-        $sth = $dbh->prepare("DELETE FROM word WHERE idbook = ?");
-        $sth->execute($idbook);
-        $sth = $dbh->prepare("DELETE FROM book WHERE idbook = ?");
-        $sth->execute($idbook);
-    }
-
-    $sth = $dbh->prepare("INSERT INTO book (idbook, title, author, file) VALUES (?, ?, ?, ?)");
-    $sth->execute($idbook, $title, $author, $filename);
 }
 

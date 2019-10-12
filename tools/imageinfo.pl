@@ -7,7 +7,6 @@ use Image::Magick;
 use File::Basename;
 use Getopt::Long;
 
-
 my $whiteLevel = 10;
 my $stepSize = 10;
 my $needContour = 0;
@@ -19,26 +18,25 @@ GetOptions (
     's' => \$stripPath,
     'd=i' => \$dropPath);
 
-my $directory = $ARGV[0];
-
-if (!$directory) {
-    $directory = ".";
+my $directory = '.';
+if (defined $ARGV[0]) {
+    $directory = $ARGV[0];
 }
-
 
 my %seenImageHash = ();
 
-print "<images xmlns=\"http://www.gutenberg.ph/2006/schemas/imageinfo\">";
+main();
 
-listRecursively($directory);
-
-print "\n</images>";
-
+sub main {
+    print "<images xmlns=\"http://www.gutenberg.ph/2006/schemas/imageinfo\">";
+    listRecursively($directory);
+    print "\n</images>";
+}
 
 #
 # listRecursively -- list a directory tree to find all images in it.
 #
-sub listRecursively($) {
+sub listRecursively {
     my $directory = shift;
     my @files = (  );
 
@@ -65,11 +63,10 @@ sub listRecursively($) {
 #
 sub handleImage($) {
     my $imageFile = shift;
-    my $fileFormat;
-    my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $fileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($imageFile);
+
+    my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $statFileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($imageFile);
     my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
     my $fileDate = sprintf "%4d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min , $sec;
-
 
     my $imagePath = $imageFile;
     if ($stripPath == 1) {
@@ -94,7 +91,6 @@ sub handleImage($) {
         $image->Read($imageFile);
 
         # collect contour information
-
         my @leftBoundary;
         my @rightBoundary;
 

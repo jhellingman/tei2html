@@ -13,8 +13,6 @@ use Cwd qw(abs_path);
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
-my $home = $ENV{'TEI2HTML_HOME'};
-my $javaHome = $ENV{'JAVA_HOME'};
 my $javaOptions = '-Xms3072m -Xmx3072m -Xss1024k ';
 
 #==============================================================================
@@ -69,7 +67,6 @@ my $kwicWords           = "";
 GetOptions(
     't' => \$explicitMakeText,
     'h' => \$makeHtml,
-    'm' => \$makeHeatMap,
     'e' => \$makeEpub,
     'k' => \$makeKwic,
     'p' => \$makePdf,
@@ -89,6 +86,7 @@ GetOptions(
     'debug' => \$debug,
     'trace' => \$trace,
     'profile' => \$profile,
+    'heatmap' => \$makeHeatMap,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
     'kwiclang=s' => \$kwicLanguages,
@@ -96,8 +94,10 @@ GetOptions(
     'help' => \$showHelp,
     'tidy'=> \$useTidy);
 
-my $filename = $ARGV[0];
-
+my $inputFile = '';
+if (defined $ARGV[0]) {
+    $inputFile = $ARGV[0];
+}
 
 # Metadata
 
@@ -109,7 +109,7 @@ my $language = "";
 my $releaseDate = "";
 
 
-if ($showHelp) {
+if ($showHelp == 1) {
     print "tei2html.pl -- process a TEI file to produce text, HTML, and ePub output\n\n";
     print "Usage: tei2html.pl [-thekprxvufzH] <inputfile.tei>\n\n";
     print "Options:\n";
@@ -130,8 +130,9 @@ if ($showHelp) {
     print "    debug                Debug mode.\n";
     print "    trace                Trace mode.\n";
     print "    profile              Profile mode.\n";
-    print "    kwiclang             Languages to be shown in KWIC.\n";
-    print "    kwicword             Words to be shown in KWIC.\n";
+    print "    heatmap              Generate a heatmap version.\n";
+    print "    kwiclang=<languages> Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
+    print "    kwicword=<words>     Words to be shown in KWIC, separate words by spaces.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -148,31 +149,35 @@ if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 
     $runChecks = 1;
 }
 
-if ($debug) {
+if ($debug == 1) {
     print "Called with params: $ARGV\n";
 }
 
 #==============================================================================
 
-
 my $tmpBase = 'tmp';
 my $tmpCount = 0;
 
+processFiles();
 
-if ($filename eq "") {
-    my ($directory) = ".";
-    my @files = ( );
-    opendir(DIRECTORY, $directory) or die "Cannot open directory $directory!\n";
-    @files = readdir(DIRECTORY);
-    closedir(DIRECTORY);
 
-    foreach my $file (@files) {
-        if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/) {
-            processFile($file);
+sub processFiles {
+    if ($inputFile eq '') {
+        my ($directory) = ".";
+        my @files = ();
+        opendir(DIRECTORY, $directory) or die "Cannot open directory $directory!\n";
+        @files = readdir(DIRECTORY);
+        closedir(DIRECTORY);
+
+        foreach my $file (@files) {
+            if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/) {
+                processFile($file);
+            }
         }
     }
-} else {
-    processFile($filename);
+    else {
+        processFile($inputFile);
+    }
 }
 
 
@@ -276,7 +281,7 @@ sub makeP5($$) {
 sub makeMetadata($) {
     my $normalizedXmlFilename = shift;
 
-    if ($force != 0 || isNewer($filename, 'metadata.xml')) {
+    if ($force != 0 || isNewer($inputFile, 'metadata.xml')) {
         print "Extract metadata to metadata.xml...\n";
         system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
     }
@@ -286,7 +291,7 @@ sub makeMetadata($) {
 sub makeReadme($) {
     my $normalizedXmlFilename = shift;
 
-    if ($force != 0 || isNewer($filename, 'README.md')) {
+    if ($force != 0 || isNewer($inputFile, 'README.md')) {
         print "Extract metadata to README.md...\n";
         system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
     }
@@ -316,19 +321,19 @@ sub makeKwic($$) {
 sub determineKwicFilename($) {
     my $basename = shift;
 
-    my $nameFragment = $kwicLanguages;
-    $nameFragment =~ tr/ /-/;
-    if ($nameFragment ne '') {
-        $nameFragment = '-' . $nameFragment;
+    my $namePartLanguage = $kwicLanguages;
+    $namePartLanguage =~ tr/ /-/;
+    if ($namePartLanguage ne '') {
+        $namePartLanguage = '-' . $namePartLanguage;
     }
 
-    my $nameFragment2 = $kwicWords;
-    $nameFragment2 =~ tr/ /-/;
-    if ($nameFragment2 ne '') {
-        $nameFragment2 = '-' . $nameFragment2;
+    my $namePartWord = $kwicWords;
+    $namePartWord =~ tr/ /-/;
+    if ($namePartWord ne '') {
+        $namePartWord = '-' . $namePartWord;
     }
 
-    return $basename . $nameFragment . $nameFragment2 . '-kwic.html';
+    return $basename . $namePartLanguage . $namePartWord . '-kwic.html';
 }
 
 

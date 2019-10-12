@@ -14,7 +14,7 @@ my $useHtml = 1;
 
 main();
 
-sub main() {
+sub main {
     my $file = $ARGV[0];
 
     if ($file eq "-x") {
@@ -54,16 +54,16 @@ sub handleParagraph($) {
     my $paragraph = shift;
 
     if ($useHtml == 1) {
-        $paragraph =~ s/<GR>(.*?)<\/GR>/<span class=trans title=\"<GRTA>\1<\/GRTA>\"><GR>\1<\/GR><\/span>/g;
-        $paragraph =~ s/<CY>(.*?)<\/CY>/<span class=trans title=\"<CYTA>\1<\/CYTA>\"><CY>\1<\/CY><\/span>/g;
-        $paragraph =~ s/<RU>(.*?)<\/RU>/<span class=trans title=\"<RUTA>\1<\/RUTA>\"><RU>\1<\/RU><\/span>/g;
-        $paragraph =~ s/<RUX>(.*?)<\/RUX>/<span class=trans title=\"<RUTA>\1<\/RUTA>\"><RUX>\1<\/RUX><\/span>/g;
+        $paragraph =~ s/<GR>(.*?)<\/GR>/<span class=trans title=\"<GRTA>$1<\/GRTA>\"><GR>$1<\/GR><\/span>/g;
+        $paragraph =~ s/<CY>(.*?)<\/CY>/<span class=trans title=\"<CYTA>$1<\/CYTA>\"><CY>$1<\/CY><\/span>/g;
+        $paragraph =~ s/<RU>(.*?)<\/RU>/<span class=trans title=\"<RUTA>$1<\/RUTA>\"><RU>$1<\/RU><\/span>/g;
+        $paragraph =~ s/<RUX>(.*?)<\/RUX>/<span class=trans title=\"<RUTA>$1<\/RUTA>\"><RUX>$1<\/RUX><\/span>/g;
     } else {
-        $paragraph =~ s/<GR>(.*?)<\/GR>/<choice><orig><GR>\1<\/GR><\/orig><reg type=\"trans\"><GRT>\1<\/GRT><\/reg><\/choice>/g;
-        $paragraph =~ s/<CY>(.*?)<\/CY>/<choice><orig><CY>\1<\/CY><\/orig><reg type=\"trans\"><CYT>\1<\/CYT><\/reg><\/choice>/g;
-        $paragraph =~ s/<RU>(.*?)<\/RU>/<choice><orig><RU>\1<\/RU><\/orig><reg type=\"trans\"><RUT>\1<\/RUT><\/reg><\/choice>/g;
-        $paragraph =~ s/<RUX>(.*?)<\/RUX>/<choice><orig><RUX>\1<\/RUX><\/orig><reg type=\"trans\"><RUXT>\1<\/RUXT><\/reg><\/choice>/g;
-        $paragraph =~ s/<SR>(.*?)<\/SR>/<choice><orig><SR>\1<\/SR><\/orig><reg type=\"trans\"><SRT>\1<\/SRT><\/reg><\/choice>/g;
+        $paragraph =~ s/<GR>(.*?)<\/GR>/<choice><orig><GR>$1<\/GR><\/orig><reg type=\"trans\"><GRT>$1<\/GRT><\/reg><\/choice>/g;
+        $paragraph =~ s/<CY>(.*?)<\/CY>/<choice><orig><CY>$1<\/CY><\/orig><reg type=\"trans\"><CYT>$1<\/CYT><\/reg><\/choice>/g;
+        $paragraph =~ s/<RU>(.*?)<\/RU>/<choice><orig><RU>$1<\/RU><\/orig><reg type=\"trans\"><RUT>$1<\/RUT><\/reg><\/choice>/g;
+        $paragraph =~ s/<RUX>(.*?)<\/RUX>/<choice><orig><RUX>$1<\/RUX><\/orig><reg type=\"trans\"><RUXT>$1<\/RUXT><\/reg><\/choice>/g;
+        $paragraph =~ s/<SR>(.*?)<\/SR>/<choice><orig><SR>$1<\/SR><\/orig><reg type=\"trans\"><SRT>$1<\/SRT><\/reg><\/choice>/g;
     }
 
     return $paragraph;
