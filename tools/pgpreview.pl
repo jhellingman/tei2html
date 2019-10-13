@@ -9,7 +9,7 @@ use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 main();
 
 
-sub main() {
+sub main {
     my $file = $ARGV[0];
     my $useExtensions = 0;
 
@@ -59,62 +59,62 @@ sub handleParagraph($$) {
     $paragraph = pgdp2sgml($paragraph, $useExtensions);
 
     # Replace dashes in number ranges by en-dashes
-    $paragraph =~ s/([0-9])-([0-9])/\1\&ndash;\2/g;
+    $paragraph =~ s/([0-9])-([0-9])/$1\&ndash;$2/g;
 
     # Replace two dashes by em-dashes
     $paragraph =~ s/ *---? */\&mdash;/g;
 
     $paragraph = sgml2utf($paragraph);
 
-    # Tag proofer remarks:
-    $paragraph =~ s/(\[\*.*?\])/<span class=remark>\1<\/span>/g;
+    # Tag proofreader remarks:
+    $paragraph =~ s/(\[\*.*?\])/<span class=remark>$1<\/span>/g;
 
     # Tag Greek sections (original)
-    $paragraph =~ s/(\[GR:.*?\])/<span class=greek>\1<\/span>/g;
+    $paragraph =~ s/(\[GR:.*?\])/<span class=greek>$1<\/span>/g;
+
+    # Tag incorrect Greek sections (WRONG!!!)
+    $paragraph =~ s/(\[Greek:?.*?\])/<span class=error>$1<\/span>/g;
 
     # Tag Greek sections (WRONG!!!)
-    $paragraph =~ s/(\[Greek:?.*?\])/<span class=error>\1<\/span>/g;
-
-    # Tag Greek sections (WRONG!!!)
-    $paragraph =~ s/(\[G[Rr].*?\])/<span class=error>\1<\/span>/g;
+    $paragraph =~ s/(\[G[Rr].*?\])/<span class=error>$1<\/span>/g;
 
     # Tag Greek sections (after processing)
-    $paragraph =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
-    $paragraph =~ s/<foreign lang=grc>(.*?)<\/foreign>/<span class=greek>\1<\/span>/g;
+    $paragraph =~ s/<foreign lang=el>(.*?)<\/foreign>/<span class=greek>$1<\/span>/g;
+    $paragraph =~ s/<foreign lang=grc>(.*?)<\/foreign>/<span class=greek>$1<\/span>/g;
 
     # Replace illustration markup:
-    $paragraph =~ s/\[Ill?ustration:? ?(.*)\]/<span class=figure>[Illustration: \1]<\/span>/g;
+    $paragraph =~ s/\[Ill?ustration:? ?(.*)\]/<span class=figure>[Illustration: $1]<\/span>/g;
 
     # Replace footnote indicators:
-    $paragraph =~ s/\[([0-9]+)\]/<sup>\1<\/sup>/g;
+    $paragraph =~ s/\[([0-9]+)\]/<sup>$1<\/sup>/g;
 
     # Replace superscripts
-    $paragraph =~ s/\^\{(.*?)\}/<sup>\1<\/sup>/g;
-    $paragraph =~ s/\^([a-zA-Z0-9\*])/<sup>\1<\/sup>/g;
+    $paragraph =~ s/\^\{(.*?)\}/<sup>$1<\/sup>/g;
+    $paragraph =~ s/\^([a-zA-Z0-9\*])/<sup>$1<\/sup>/g;
 
     # Replace subscripts
-    $paragraph =~ s/_\{(.*?)\}/<sub>\1<\/sub>/g;
-    $paragraph =~ s/_([a-zA-Z0-9\*])/<sub>\1<\/sub>/g;
+    $paragraph =~ s/_\{(.*?)\}/<sub>$1<\/sub>/g;
+    $paragraph =~ s/_([a-zA-Z0-9\*])/<sub>$1<\/sub>/g;
 
     # Replace other formatting
-    $paragraph =~ s/<sc>(.*?)<\/sc>/<span class=sc>\1<\/span>/g;
-    $paragraph =~ s/<g>(.*?)<\/g>/<span class=ex>\1<\/span>/g;
+    $paragraph =~ s/<sc>(.*?)<\/sc>/<span class=sc>$1<\/span>/g;
+    $paragraph =~ s/<g>(.*?)<\/g>/<span class=ex>$1<\/span>/g;
 
     $paragraph =~ s/<tb>/<hr>/g;
 
     # Anything else between braces is probably wrong:
-    $paragraph =~ s/(\^?\{.*?\})/<span class=error>\1<\/span>/g;
+    $paragraph =~ s/(\^?\{.*?\})/<span class=error>$1<\/span>/g;
 
     # Remaining non-numeric entities are wrong
-    $paragraph =~ s/(\&[^0-9]*?;)/<span class=error>\1<\/span>/g;
+    $paragraph =~ s/(\&[^0-9]*?;)/<span class=error>$1<\/span>/g;
 
     # Remaining short things between brackets are probably wrong
-    $paragraph =~ s/(\[[^\]]{0,4}\])/<span class=error>\1<\/span>/g;
+    $paragraph =~ s/(\[[^\]]{0,4}\])/<span class=error>$1<\/span>/g;
 
 
     $paragraph = utf2sgml($paragraph);
 
-    # Trim superflous spaces
+    # Trim superfluous spaces
     $paragraph =~ s/[\t ]+/ /g;
     $paragraph =~ s/^ +//;
     $paragraph =~ s/ +$//;
@@ -127,32 +127,29 @@ sub handleParagraph($$) {
 
 
 sub printHtmlHead() {
-    print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
-    print "<html>\n";
-    print "<title>DP Preview</title>\n";
-    print "<style type='text/css'>\n";
-    print "BODY { font-size: 16pt; line-height: 18pt; }\n";
-    print ".figure { background-color: #FFFF5C; }\n";
-    print ".remark { background-color: #FFB442; }\n";
+    print <<"EOF";
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang='en'>
+    <head>
+    <title>DP Preview</title>
+    <style type='text/css'>
+        BODY { font-size: 16pt; line-height: 18pt; }
+        .figure { background-color: #FFFF5C; }
+        .remark { background-color: #FFB442; }
+        .sc { font-variant:small-caps; }
+        .ex { letter-spacing:0.2em; background-color: #FFFF80; }
+        .error { background-color: #FF8566; font-weight: bold; }
+        .xref { background-color: #FFFF8C; }
+        .code { font-weight: bold; color: gray; display: none; }
 
-    # print ".greek { background-color: #fcb0b080; font-family: Asteria, Palatino Linotype, sans serif; }\n";
-    # print ":lang(ar) { background-color: #80FF8080; font-family: Scheherazade, serif; font-size: 24pt; line-height: 24pt; }\n";
-    # print ":lang(he) { background-color: #80FFFF80; font-family: Shlomo, 'Ezra SIL', serif; font-size: 24pt; line-height: 24pt; }\n";
-    # print ":lang(syc) { background-color: #fda6ff; font-family: 'Serto Jerusalem', serif; font-size: 24pt; line-height: 24pt; }\n";
-
-    print ":lang(ar) { font-family: Scheherazade, serif; }\n";
-    print ":lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }\n";
-    print ":lang(syc) { font-family: 'Serto Jerusalem', serif; }\n";
-    print ":lang(grc) { font-family: 'Galatia SIL', serif; }\n";
-
-    print ".sc { font-variant:small-caps; }\n";
-    print ".ex { letter-spacing:0.2em; background-color: #FFFF80; }\n";
-    print ".error { background-color: #FF8566; font-weight: bold; }\n";
-    print ".xref { background-color: #FFFF8C; }\n";
-    print "code { font-weight: bold; color: gray; display: none; }\n";
-    print "</style>\n";
-    print "</head>\n";
-    print "<body>\n";
+        :lang(ar) { font-family: Scheherazade, serif; }
+        :lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }
+        :lang(syc) { font-family: 'Serto Jerusalem', serif; }
+        :lang(grc) { font-family: 'Galatia SIL', serif; }
+    </style>
+    </head>
+    <body>
+EOF
 }
 
 

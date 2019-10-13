@@ -6,10 +6,9 @@ use warnings;
 use Getopt::Long;
 use File::Copy;
 
-my $directory = $ARGV[0];
-
-if (!$directory) {
-    $directory = ".";
+my $directory = '.';
+if (defined $ARGV[0]) {
+    $directory = $ARGV[0];
 }
 
 listRecursively($directory);
@@ -17,7 +16,7 @@ listRecursively($directory);
 #
 # listRecursively -- list a directory tree to find all text files in it.
 #
-sub listRecursively($) {
+sub listRecursively {
     my $directory = shift;
     my @files = (  );
 
@@ -54,7 +53,7 @@ sub cleanText($) {
         # Normalize spaces (including non-breaking spaces):
         $line =~ s/(\s|\xA0)+/ /g;
 
-        # Deal with spaced elipses:
+        # Deal with spaced ellipses:
         $line =~ s/ \. \. \. \. / .... /g;
         $line =~ s/ \. \. \. / ... /g;
         $line =~ s/ \. \. / .. /g;
@@ -64,12 +63,12 @@ sub cleanText($) {
 
         # Handle Dutch low-opening quotes
         $line =~ s/^[„]/"/g;
-        $line =~ s/^,,([a-zA-Z])/"\1/g;
+        $line =~ s/^,,([a-zA-Z])/"$1/g;
         $line =~ s/ [„]/ "/g;
-        $line =~ s/ ,,([a-zA-Z])/ "\1/g;
+        $line =~ s/ ,,([a-zA-Z])/ "$1/g;
 
         # Handle spacing around punctuation marks
-        $line =~ s/ ([.,;!?]) /\1 /g;
+        $line =~ s/ ([.,;!?]) /$1 /g;
         $line =~ s/ ?-- ?/--/g;
 
         print OUTPUTFILE $line . "\n";
