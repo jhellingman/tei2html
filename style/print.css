@@ -131,7 +131,7 @@ div.titlePage
 
     color: black;
     background: white;
-    border: white 0px solid;
+    border: white 0 solid;
 }
 
 h1.docTitle
@@ -177,7 +177,6 @@ h2.normal
     content: counter(footnote);
     font-size: 83%;
     vertical-align: super;
-    line-height: none;
 }
 
 .pseudonoteref              /* render references to footnotes similar to note markers */
@@ -185,7 +184,6 @@ h2.normal
     content: target-counter(attr(href), footnote);
     font-size: 83%;
     vertical-align: super;
-    line-height: none;
 }
 
 /* Suppress display of generated endnotes in HTML */
@@ -236,14 +234,14 @@ span.abbr, abbr {
 
 span.num, span.corr, span.abbr, span.trans, span.measure, abbr
 {
-    border-bottom: 0px;
+    border-bottom: 0;
     text-decoration: none;
 }
 
 .transcribernote
 {
-    background-color: transparant;
-    border: white 0pt solid;
+    background-color: transparent;
+    border: white 0 solid;
     font-size: 7pt;
     line-height: 1.2em;
     margin: 0;

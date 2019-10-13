@@ -62,10 +62,7 @@ h4, .h4 {
 }
 
 p.tb, hr.tb, .par.tb {
-    margin-top: 1.6em;
-    margin-bottom: 1.6em;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 1.6em auto;
     text-align: center;
 }
 
@@ -256,8 +253,8 @@ p.firstlinecaps:first-line, .par.firstlinecaps:first-line {
 p.dropcap:first-letter, .par.dropcap:first-letter {
     float: left;
     clear: left;
-    margin: 0em 0.05em 0 0;
-    padding: 0px;
+    margin: 0 0.05em 0 0;
+    padding: 0;
     line-height: 0.8em;
     font-size: 420%;
     vertical-align: super;
@@ -364,12 +361,12 @@ td.tocDivTitle {
 }
 
 p.tocPart, .par.tocPart {
-    margin: 1.58em 0%;
+    margin: 1.58em 0;
     font-variant: small-caps;
 }
 
 p.tocChapter, .par.tocChapter {
-    margin: 1.58em 0%;
+    margin: 1.58em 0;
 }
 
 p.tocSection, .par.tocSection {

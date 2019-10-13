@@ -33,11 +33,11 @@ p {
 }
 
 p.first, p.tocChapter {
-	text-indent: 0em;
+	text-indent: 0;
 }
 
 p.byline {
-	text-indent: 0em;
+	text-indent: 0;
 }
 
 .figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum, .stage {

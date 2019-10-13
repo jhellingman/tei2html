@@ -87,7 +87,7 @@ table.verticalBorderInside .cellBottom {
 }
 
 table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft {
-    border-left: 0px solid black;
+    border-left: 0 solid black;
 }
 
 /* Table with borders on all edges, outer edges somewhat fatter. */
@@ -189,7 +189,7 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 
 /* Cell inserted when tables are doubled-up, to separate the columns */
 .cellDoubleUp {
-    border: 0px solid black !important;
+    border: 0 solid black !important;
     width: 1em;
 }
 
