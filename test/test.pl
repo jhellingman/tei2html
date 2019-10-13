@@ -1,6 +1,7 @@
 # Perl script to test the the tei2html.xsl stylesheet with Saxon.
 
 use strict;
+use warnings;
 
 use FindBin qw($Bin);
 

@@ -1,4 +1,5 @@
 use strict;
+use warnings;
 
 my $xsldir = ".";
 my $saxon2 = "java.exe -jar tools\\lib\\saxon9he.jar ";
