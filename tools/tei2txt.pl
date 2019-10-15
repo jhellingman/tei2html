@@ -1,7 +1,7 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use strict;
-use warnings;
+# use warnings;
 
 use Getopt::Long;
 use POSIX qw/floor ceil/;
@@ -72,40 +72,40 @@ my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "",     "");
 #
 
 while (<>) {
-    my $a = $_;
+    my $line = $_;
 
     # remove TeiHeader
-    if ($a =~ /<[Tt]ei[Hh]eader/) {
-        $a = $';
-        while ($a !~ /<\/[Tt]ei[Hh]eader>/) {
-            $a = <>;
+    if ($line =~ /<[Tt]ei[Hh]eader/) {
+        $line = $';
+        while ($line !~ /<\/[Tt]ei[Hh]eader>/) {
+            $line = <>;
         }
-        $a =~ /<\/[Tt]ei[Hh]eader>/;
-        $a = $';
+        $line =~ /<\/[Tt]ei[Hh]eader>/;
+        $line = $';
     }
 
     # remove forme works (<fw>...</fw>). (multiple can occur in a single line.)
-    while ($a =~ /<fw\b(.*?)>/) {
+    while ($line =~ /<fw\b(.*?)>/) {
         my $before = $`;
-        $a = $';
-        while ($a !~ /<\/fw>/) {
-            $a = <>;
+        $line = $';
+        while ($line !~ /<\/fw>/) {
+            $line = <>;
         }
-        $a =~ /<\/fw>/;
-        $a = $before . $';
+        $line =~ /<\/fw>/;
+        $line = $before . $';
     }
 
     # drop comments from text (replace with single space).
-    $a =~ s/\s*<!--.*?-->\s*/ /g;
+    $line =~ s/\s*<!--.*?-->\s*/ /g;
     # warn for remaining comments
-    $a =~ s/<!--/[**ERROR: unhandled comment start]/g;
+    $line =~ s/<!--/[**ERROR: unhandled comment start]/g;
 
     # warn for notes (which should have been handled in a separate process)
-    $a =~ s/<note\b.*?>/[**ERROR: unhandled note start tag]/g;
-    $a =~ s/<\/note\b.*?>/[**ERROR: unhandled note end tag]/g;
+    $line =~ s/<note\b.*?>/[**ERROR: unhandled note start tag]/g;
+    $line =~ s/<\/note\b.*?>/[**ERROR: unhandled note end tag]/g;
 
     # generate part headings
-    if ($a =~ /<(div0.*?)>/) {
+    if ($line =~ /<(div0.*?)>/) {
         my $tag = $1;
         my $partNumber = getAttrVal("n", $tag);
         if ($partNumber ne "") {
@@ -114,7 +114,7 @@ while (<>) {
     }
 
     # generate chapter headings
-    if ($a =~ /<(div1.*?)>/) {
+    if ($line =~ /<(div1.*?)>/) {
         my $tag = $1;
         my $chapterNumber = getAttrVal("n", $tag);
         if ($chapterNumber ne "") {
@@ -123,7 +123,7 @@ while (<>) {
     }
 
     # generate section headings
-    if ($a =~ /<(div2.*?)>/) {
+    if ($line =~ /<(div2.*?)>/) {
         my $tag = $1;
         my $sectionNumber = getAttrVal("n", $tag);
         if ($sectionNumber ne "") {
@@ -132,82 +132,82 @@ while (<>) {
     }
 
     # generate figure headings
-    if ($a =~ /<(figure.*?)>/) {
+    if ($line =~ /<(figure.*?)>/) {
         my $tag = $1;
         my $figureNumber = getAttrVal("n", $tag);
         print "\n------\nFIGURE $figureNumber\n";
     }
-    if ($a =~ /<\/figure>/) {
+    if ($line =~ /<\/figure>/) {
         print "------\n";
     }
 
     # indicate tables for manual processing.
-    if ($a =~ /<table.*?>/) {
+    if ($line =~ /<table.*?>/) {
         print "\n[**TODO: Verify table]\n";
-        parseTable($a);
+        parseTable($line);
     }
-    if ($a =~ /<\/table>/) {
+    if ($line =~ /<\/table>/) {
         print "------\n";
     }
 
     # handle intra-linear text
-    if ($a =~ m/<INTRA(.*?)>/) {
+    if ($line =~ m/<INTRA(.*?)>/) {
         handleIntra();
     }
 
-    $a = handleLine($a);
+    $line = handleLine($line);
 
-    print $a;
+    print $line;
 }
 
 
 sub handleLine($) {
-    my $a = shift;
+    my $line = shift;
 
     # convert entities
     if ($useUnicode == 1) {
-        $a = sgml2utf($a);
+        $line = sgml2utf($line);
     } else {
-        $a = entities2iso88591($a);
+        $line = entities2iso88591($line);
     }
 
-    $a = handleSegments($a);
+    $line = handleSegments($line);
 
-    $a = handleHighlighted($a);
+    $line = handleHighlighted($line);
 
     # handle cell boundaries (non should remain if tables are parsed correctly)
-    $a =~ s/<cell(.*?)>/|/g;
+    $line =~ s/<cell(.*?)>/|/g;
 
     # drop page-breaks (<pb>) as they interfere with the following processing.
-    $a =~ s/<pb\b(.*?)>//g;
+    $line =~ s/<pb\b(.*?)>//g;
 
     # handle <choice><sic>...</sic><corr>...</corr></choice> and <choice><corr>...</corr><sic>...</sic></choice>
-    $a =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
-    $a =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
+    $line =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
+    $line =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
 
     # handle numbered lines of verse
-    if ($a =~ /( +)<l\b(.*?)>/) {
+    if ($line =~ /( +)<l\b(.*?)>/) {
         my $prefix = $`;
         my $remainder = $';
         my $spaces = $1;
         my $attrs = $2;
-        my $n = getAttrVal("n", $attrs);
-        if ($n) {
-            my $need = length($spaces) - length($n);
-            my $need = $need < 1 ? 1 : $need;
-            $a = $prefix . $n . spaces($need) . $remainder;
+        my $number = getAttrVal("n", $attrs);
+        if (defined $number) {
+            my $need = length($spaces) - length($number);
+            $need = $need < 1 ? 1 : $need;
+            $line = $prefix . $number . spaces($need) . $remainder;
         }
     }
 
     # remove any remaining tags
-    $a =~ s/<.*?>//g;
+    $line =~ s/<.*?>//g;
 
     # Some problematic entities from Wolff.
-    $a =~ s/\&larr;/<-/g;   # Left Arrow
-    $a =~ s/\&rarr;/->/g;   # Right Arrow
+    $line =~ s/\&larr;/<-/g;   # Left Arrow
+    $line =~ s/\&rarr;/->/g;   # Right Arrow
 
     # warn for entities that slipped through.
-    if ($a =~ /\&([a-zA-Z0-9._-]+);/) {
+    if ($line =~ /\&([a-zA-Z0-9._-]+);/) {
         my $ent = $1;
         if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp")) {
             print "\n[**ERROR: Contains unhandled entity &$ent;]\n";
@@ -215,15 +215,15 @@ sub handleLine($) {
     }
 
     # remove the last remaining entities
-    $a =~ s/\&gt;/>/g;
-    $a =~ s/\&lt;/</g;
-    $a =~ s/\&amp;/&/g;
+    $line =~ s/\&gt;/>/g;
+    $line =~ s/\&lt;/</g;
+    $line =~ s/\&amp;/&/g;
 
     # warn for anything that slipped through.
     # BUG: if for example &c; should appear in the output, a bug will be reported
     # $a =~ s/\&\w+;/[ERROR: unhandled $&]/g;
 
-    return $a;
+    return $line;
 }
 
 
@@ -272,34 +272,34 @@ my %mapIdToContent;
 sub handleSegments($) {
     my $remainder = shift;
 
-    my $a = "";
+    my $result = "";
     while ($remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
         my $before = $`;
         my $attrs = $1;
         my $content = $2;
         $remainder = $';
         
-        $a .= $before;
+        $result .= $before;
 
         my $id = getAttrVal("id", $attrs);
         my $copyOf = getAttrVal("copyOf", $attrs);
         if ($id ne "") {
             $mapIdToContent{$id} = $content;
-            $a .= $content;
+            $result .= $content;
         } elsif ($copyOf ne "") {
             if (not $mapIdToContent{$copyOf}) {
                 print STDERR "ERROR: <seg id=$copyOf> not found.\n";
-                $a .= $content;
+                $result .= $content;
             }
             else {
-                $a .= useDittoMarks($mapIdToContent{$copyOf});
+                $result .= useDittoMarks($mapIdToContent{$copyOf});
             }
         }
         else {
-            $a .= $content;
+            $result .= $content;
         }
     }
-    return $a . $remainder;
+    return $result . $remainder;
 }
 
 sub useDittoMarks($) {
@@ -579,9 +579,9 @@ sub minimumCellHeightGivenWidth($$) {
     my $cell = shift;
 
     # Just break lines greedily.
-    my $line = shift;
+    my $cellContent = shift;
     my $maxLength = shift;
-    my @lines = split("\n", $line);
+    my @lines = split("\n", $cellContent);
 
     my $height = 0;
     foreach my $line (@lines) {
@@ -626,7 +626,7 @@ sub nextShorterLineWidth($$$) {
     my @widths = ();
     my $n = 0;
     foreach my $word (@words) {
-        $widths[$n] = length ($word);
+        $widths[$n] = length($word);
         $n++;
     }
 
@@ -762,9 +762,9 @@ sub printCenterSpacing($) {
 
 
 sub wrapLines($$) {
-    my $line = shift;
+    my $paragraph = shift;
     my $maxLength = shift;
-    my @lines = split("\n", $line);
+    my @lines = split("\n", $paragraph);
 
     my @result = ();
     foreach my $line (@lines) {
@@ -915,8 +915,6 @@ sub handleIntra() {
         my @bottoms = $line =~ /\[[^|]*\|([^|]*)\]/g;
 
         my $normalCount = scalar @normals;
-        my $topCount = scalar @tops;
-        my $bottomCount = scalar @bottoms;
 
         my $start = handleLine($normals[0]);
         my $topLine = $start;
@@ -924,16 +922,16 @@ sub handleIntra() {
 
         for (my $i = 0; $i < $normalCount; $i++) {
 
-            my $t = handleLine($tops[$i]);
-            my $b = handleLine($bottoms[$i]);
+            my $top = handleLine($tops[$i]);
+            my $bottom = handleLine($bottoms[$i]);
             my $n = handleLine($normals[$i + 1]);
 
             my $nWidth = length($n);
-            my $tbWidth = max(length $t, length $b);
+            my $tbWidth = max(length $top, length $bottom);
 
             # Append the next top + bottom phrase pair.
-            my $topPhrase    .= centerStringInWidth($t, $tbWidth);
-            my $bottomPhrase .= centerStringInWidth($b, $tbWidth);
+            my $topPhrase    .= centerStringInWidth($top, $tbWidth);
+            my $bottomPhrase .= centerStringInWidth($bottom, $tbWidth);
 
             if (length($topLine . $topPhrase) > $pageWidth) {
                 print restoreFootnoteMarkers($topLine) . "\n";
@@ -986,9 +984,9 @@ sub restoreFootnoteMarkers($) {
 
 
 sub max($$) {
-    my $a = shift;
-    my $b = shift;
-    return $a > $b ? $a : $b;
+    my $first = shift;
+    my $second = shift;
+    return $first > $second ? $first : $second;
 }
 
 
@@ -996,347 +994,347 @@ sub max($$) {
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
 #
 sub entities2iso88591($) {
-    my $a = shift;
+    my $string = shift;
 
     # soft-hyphen:
-    $a =~ s/\&shy;/\x{00AD}/g;
+    $string =~ s/\&shy;/\x{00AD}/g;
 
     # change supported accented letters:
-    $a =~ s/\&aacute;/á/g;
-    $a =~ s/\&Aacute;/Á/g;
-    $a =~ s/\&agrave;/à/g;
-    $a =~ s/\&Agrave;/À/g;
-    $a =~ s/\&acirc;/â/g;
-    $a =~ s/\&Acirc;/Â/g;
-    $a =~ s/\&atilde;/ã/g;
-    $a =~ s/\&Atilde;/Ã/g;
-    $a =~ s/\&auml;/ä/g;
-    $a =~ s/\&Auml;/Ä/g;
-    $a =~ s/\&aring;/å/g;
-    $a =~ s/\&Aring;/Å/g;
-    $a =~ s/\&aelig;/æ/g;
-    $a =~ s/\&AElig;/Æ/g;
+    $string =~ s/\&aacute;/á/g;
+    $string =~ s/\&Aacute;/Á/g;
+    $string =~ s/\&agrave;/à/g;
+    $string =~ s/\&Agrave;/À/g;
+    $string =~ s/\&acirc;/â/g;
+    $string =~ s/\&Acirc;/Â/g;
+    $string =~ s/\&atilde;/ã/g;
+    $string =~ s/\&Atilde;/Ã/g;
+    $string =~ s/\&auml;/ä/g;
+    $string =~ s/\&Auml;/Ä/g;
+    $string =~ s/\&aring;/å/g;
+    $string =~ s/\&Aring;/Å/g;
+    $string =~ s/\&aelig;/æ/g;
+    $string =~ s/\&AElig;/Æ/g;
 
-    $a =~ s/\&ccedil;/ç/g;
-    $a =~ s/\&Ccedil;/Ç/g;
+    $string =~ s/\&ccedil;/ç/g;
+    $string =~ s/\&Ccedil;/Ç/g;
 
-    $a =~ s/\&eacute;/é/g;
-    $a =~ s/\&Eacute;/É/g;
-    $a =~ s/\&egrave;/è/g;
-    $a =~ s/\&Egrave;/È/g;
-    $a =~ s/\&ecirc;/ê/g;
-    $a =~ s/\&Ecirc;/Ê/g;
-    $a =~ s/\&euml;/ë/g;
-    $a =~ s/\&Euml;/Ë/g;
+    $string =~ s/\&eacute;/é/g;
+    $string =~ s/\&Eacute;/É/g;
+    $string =~ s/\&egrave;/è/g;
+    $string =~ s/\&Egrave;/È/g;
+    $string =~ s/\&ecirc;/ê/g;
+    $string =~ s/\&Ecirc;/Ê/g;
+    $string =~ s/\&euml;/ë/g;
+    $string =~ s/\&Euml;/Ë/g;
 
-    $a =~ s/\&iacute;/í/g;
-    $a =~ s/\&Iacute;/Í/g;
-    $a =~ s/\&igrave;/ì/g;
-    $a =~ s/\&Igrave;/Ì/g;
-    $a =~ s/\&icirc;/î/g;
-    $a =~ s/\&Icirc;/Î/g;
-    $a =~ s/\&iuml;/ï/g;
-    $a =~ s/\&Iuml;/Ï/g;
+    $string =~ s/\&iacute;/í/g;
+    $string =~ s/\&Iacute;/Í/g;
+    $string =~ s/\&igrave;/ì/g;
+    $string =~ s/\&Igrave;/Ì/g;
+    $string =~ s/\&icirc;/î/g;
+    $string =~ s/\&Icirc;/Î/g;
+    $string =~ s/\&iuml;/ï/g;
+    $string =~ s/\&Iuml;/Ï/g;
 
-    $a =~ s/\&ntilde;/ñ/g;
-    $a =~ s/\&Ntilde;/Ñ/g;
+    $string =~ s/\&ntilde;/ñ/g;
+    $string =~ s/\&Ntilde;/Ñ/g;
 
-    $a =~ s/\&oacute;/ó/g;
-    $a =~ s/\&Oacute;/Ó/g;
-    $a =~ s/\&ograve;/ò/g;
-    $a =~ s/\&Ograve;/Ò/g;
-    $a =~ s/\&ocirc;/ô/g;
-    $a =~ s/\&Ocirc;/Ô/g;
-    $a =~ s/\&otilde;/õ/g;
-    $a =~ s/\&Otilde;/Õ/g;
-    $a =~ s/\&ouml;/ö/g;
-    $a =~ s/\&Ouml;/Ö/g;
-    $a =~ s/\&oslash;/ø/g;
-    $a =~ s/\&Oslash;/Ø/g;
+    $string =~ s/\&oacute;/ó/g;
+    $string =~ s/\&Oacute;/Ó/g;
+    $string =~ s/\&ograve;/ò/g;
+    $string =~ s/\&Ograve;/Ò/g;
+    $string =~ s/\&ocirc;/ô/g;
+    $string =~ s/\&Ocirc;/Ô/g;
+    $string =~ s/\&otilde;/õ/g;
+    $string =~ s/\&Otilde;/Õ/g;
+    $string =~ s/\&ouml;/ö/g;
+    $string =~ s/\&Ouml;/Ö/g;
+    $string =~ s/\&oslash;/ø/g;
+    $string =~ s/\&Oslash;/Ø/g;
 
-    $a =~ s/\&uacute;/ú/g;
-    $a =~ s/\&Uacute;/Ú/g;
-    $a =~ s/\&ugrave;/ù/g;
-    $a =~ s/\&Ugrave;/Ù/g;
-    $a =~ s/\&ucirc;/û/g;
-    $a =~ s/\&Ucirc;/Û/g;
-    $a =~ s/\&uuml;/ü/g;
-    $a =~ s/\&Uuml;/Ü/g;
+    $string =~ s/\&uacute;/ú/g;
+    $string =~ s/\&Uacute;/Ú/g;
+    $string =~ s/\&ugrave;/ù/g;
+    $string =~ s/\&Ugrave;/Ù/g;
+    $string =~ s/\&ucirc;/û/g;
+    $string =~ s/\&Ucirc;/Û/g;
+    $string =~ s/\&uuml;/ü/g;
+    $string =~ s/\&Uuml;/Ü/g;
 
-    $a =~ s/\&yacute;/ý/g;
-    $a =~ s/\&Yacute;/Ý/g;
-    $a =~ s/\&yuml;/ÿ/g;
+    $string =~ s/\&yacute;/ý/g;
+    $string =~ s/\&Yacute;/Ý/g;
+    $string =~ s/\&yuml;/ÿ/g;
 
-    $a =~ s/\&fnof;/ƒ/g;
-    $a =~ s/\&pound;/£/g;
-    $a =~ s/\&deg;/°/g;
-    $a =~ s/\&ordf;/ª/g;
-    $a =~ s/\&ordm;/º/g;
-    $a =~ s/\&dagger;/†/g;
-    $a =~ s/\&para;/¶/g;
-    $a =~ s/\&sect;/§/g;
-    $a =~ s/\&iquest;/¿/g;
+    $string =~ s/\&fnof;/ƒ/g;
+    $string =~ s/\&pound;/£/g;
+    $string =~ s/\&deg;/°/g;
+    $string =~ s/\&ordf;/ª/g;
+    $string =~ s/\&ordm;/º/g;
+    $string =~ s/\&dagger;/†/g;
+    $string =~ s/\&para;/¶/g;
+    $string =~ s/\&sect;/§/g;
+    $string =~ s/\&iquest;/¿/g;
 
-    $a =~ s/\&laquo;/«/g;
-    $a =~ s/\&raquo;/»/g;
+    $string =~ s/\&laquo;/«/g;
+    $string =~ s/\&raquo;/»/g;
 
     # remove accented and special letters
-    $a =~ s/\&eth;/dh/g;
-    $a =~ s/\&ETH;/Dh/g;
-    $a =~ s/\&thorn;/th/g;
-    $a =~ s/\&THORN;/Th/g;
-    $a =~ s/\&mdash;/--/g;
-    $a =~ s/\&ndash;/-/g;
-    $a =~ s/\&longdash;/----/g;
-    $a =~ s/\&supndash;/-/g;
-    $a =~ s/\&ldquo;/"/g;
-    $a =~ s/\&bdquo;/"/g;
-    $a =~ s/\&rdquo;/"/g;
-    $a =~ s/\&lsquo;/'/g;
-    $a =~ s/\&rsquo;/'/g;
-    $a =~ s/\&sbquo;/'/g;
-    $a =~ s/\&hellip;/.../g;
-    $a =~ s/\&thinsp;/ /g;
-    $a =~ s/\&nbsp;/ /g;
-    $a =~ s/\&zwsp;//g;
-    $a =~ s/\&pound;/£/g;
-    $a =~ s/\&dollar;/\$/g;
-    $a =~ s/\&deg;/°/g;
-    $a =~ s/\&dagger;/†/g;
-    $a =~ s/\&para;/¶/g;
-    $a =~ s/\&sect;/§/g;
-    $a =~ s/\&commat;/@/g;
-    $a =~ s/\&rbrace;/}/g;
-    $a =~ s/\&lbrace;/{/g;
+    $string =~ s/\&eth;/dh/g;
+    $string =~ s/\&ETH;/Dh/g;
+    $string =~ s/\&thorn;/th/g;
+    $string =~ s/\&THORN;/Th/g;
+    $string =~ s/\&mdash;/--/g;
+    $string =~ s/\&ndash;/-/g;
+    $string =~ s/\&longdash;/----/g;
+    $string =~ s/\&supndash;/-/g;
+    $string =~ s/\&ldquo;/"/g;
+    $string =~ s/\&bdquo;/"/g;
+    $string =~ s/\&rdquo;/"/g;
+    $string =~ s/\&lsquo;/'/g;
+    $string =~ s/\&rsquo;/'/g;
+    $string =~ s/\&sbquo;/'/g;
+    $string =~ s/\&hellip;/.../g;
+    $string =~ s/\&thinsp;/ /g;
+    $string =~ s/\&nbsp;/ /g;
+    $string =~ s/\&zwsp;//g;
+    $string =~ s/\&pound;/£/g;
+    $string =~ s/\&dollar;/\$/g;
+    $string =~ s/\&deg;/°/g;
+    $string =~ s/\&dagger;/†/g;
+    $string =~ s/\&para;/¶/g;
+    $string =~ s/\&sect;/§/g;
+    $string =~ s/\&commat;/@/g;
+    $string =~ s/\&rbrace;/}/g;
+    $string =~ s/\&lbrace;/{/g;
 
-    $a =~ s/\&lpar;/(/g;
-    $a =~ s/\&rpar;/)/g;
-    $a =~ s/\&lsqb;/[/g;
-    $a =~ s/\&rsqb;/]/g;
-    $a =~ s/\&lcub;/{/g;
-    $a =~ s/\&rcub;/}/g;
-    $a =~ s/\&num;/#/g;
+    $string =~ s/\&lpar;/(/g;
+    $string =~ s/\&rpar;/)/g;
+    $string =~ s/\&lsqb;/[/g;
+    $string =~ s/\&rsqb;/]/g;
+    $string =~ s/\&lcub;/{/g;
+    $string =~ s/\&rcub;/}/g;
+    $string =~ s/\&num;/#/g;
 
     # my additions
-    $a =~ s/\&eringb;/e/g;
-    $a =~ s/\&oubb;/ö/g;
-    $a =~ s/\&oudb;/ö/g;
+    $string =~ s/\&eringb;/e/g;
+    $string =~ s/\&oubb;/ö/g;
+    $string =~ s/\&oudb;/ö/g;
 
-    $a =~ s/\&eemacr;/ee/g;
-    $a =~ s/\&oomacr;/oo/g;
-    $a =~ s/\&aemacr;/ae/g;
+    $string =~ s/\&eemacr;/ee/g;
+    $string =~ s/\&oomacr;/oo/g;
+    $string =~ s/\&aemacr;/ae/g;
 
-    $a =~ s/\&osupe;/ö/g;
-    $a =~ s/\&usupe;/ü/g;
+    $string =~ s/\&osupe;/ö/g;
+    $string =~ s/\&usupe;/ü/g;
 
-    $a =~ s/\&flat;/-flat/g;
-    $a =~ s/\&sharp;/-sharp/g;
-    $a =~ s/\&natur;/-natural/g;
-    $a =~ s/\&Sun;/[Sun]/g;
+    $string =~ s/\&flat;/-flat/g;
+    $string =~ s/\&sharp;/-sharp/g;
+    $string =~ s/\&natur;/-natural/g;
+    $string =~ s/\&Sun;/[Sun]/g;
 
-    $a =~ s/\&chbarb;/ch/g;
-    $a =~ s/\&Chbarb;/Ch/g;
-    $a =~ s/\&CHbarb;/CH/g;
+    $string =~ s/\&chbarb;/ch/g;
+    $string =~ s/\&Chbarb;/Ch/g;
+    $string =~ s/\&CHbarb;/CH/g;
 
-    $a =~ s/\&ghbarb;/gh/g;
-    $a =~ s/\&Ghbarb;/Gh/g;
-    $a =~ s/\&GHbarb;/GH/g;
+    $string =~ s/\&ghbarb;/gh/g;
+    $string =~ s/\&Ghbarb;/Gh/g;
+    $string =~ s/\&GHbarb;/GH/g;
 
-    $a =~ s/\&khbarb;/kh/g;
-    $a =~ s/\&Khbarb;/Kh/g;
-    $a =~ s/\&KHbarb;/KH/g;
+    $string =~ s/\&khbarb;/kh/g;
+    $string =~ s/\&Khbarb;/Kh/g;
+    $string =~ s/\&KHbarb;/KH/g;
 
-    $a =~ s/\&shbarb;/sh/g;
-    $a =~ s/\&Shbarb;/Sh/g;
-    $a =~ s/\&SHbarb;/SH/g;
+    $string =~ s/\&shbarb;/sh/g;
+    $string =~ s/\&Shbarb;/Sh/g;
+    $string =~ s/\&SHbarb;/SH/g;
 
-    $a =~ s/\&suptack;/s/g;
-    $a =~ s/\&sdntack;/s/g;
+    $string =~ s/\&suptack;/s/g;
+    $string =~ s/\&sdntack;/s/g;
 
-    $a =~ s/\&zhbarb;/zh/g;
-    $a =~ s/\&Zhbarb;/Zh/g;
-    $a =~ s/\&ZHbarb;/ZH/g;
+    $string =~ s/\&zhbarb;/zh/g;
+    $string =~ s/\&Zhbarb;/Zh/g;
+    $string =~ s/\&ZHbarb;/ZH/g;
 
-    $a =~ s/\&ayin;/`/g;
-    $a =~ s/\&hamza;/'/g;
+    $string =~ s/\&ayin;/`/g;
+    $string =~ s/\&hamza;/'/g;
 
-    $a =~ s/\&amacrdotb;/a/g;
+    $string =~ s/\&amacrdotb;/a/g;
 
-    $a =~ s/\&oumlcirc;/ö/g;
+    $string =~ s/\&oumlcirc;/ö/g;
 
-    $a =~ s/\&imacacu;/í/g;
-    $a =~ s/\&omacacu;/ó/g;
+    $string =~ s/\&imacacu;/í/g;
+    $string =~ s/\&omacacu;/ó/g;
 
-    $a =~ s/\&amacracu;/á/g;
-    $a =~ s/\&emacracu;/é/g;
-    $a =~ s/\&omacracu;/ó/g;
-    $a =~ s/\&umacracu;/ú/g;
+    $string =~ s/\&amacracu;/á/g;
+    $string =~ s/\&emacracu;/é/g;
+    $string =~ s/\&omacracu;/ó/g;
+    $string =~ s/\&umacracu;/ú/g;
 
-    $a =~ s/\&ebrevacu;/é/g;
-    $a =~ s/\&imacrtild;/i/g;
-    $a =~ s/\&Emacrtild;/E/g;
-    $a =~ s/\&emacrtild;/e/g;
-    $a =~ s/\&Amacrtild;/Ã/g;
-    $a =~ s/\&amacrtild;/ã/g;
+    $string =~ s/\&ebrevacu;/é/g;
+    $string =~ s/\&imacrtild;/i/g;
+    $string =~ s/\&Emacrtild;/E/g;
+    $string =~ s/\&emacrtild;/e/g;
+    $string =~ s/\&Amacrtild;/Ã/g;
+    $string =~ s/\&amacrtild;/ã/g;
 
-    $a =~ s/\&longs;/s/g;
-    $a =~ s/\&prime;/'/g;
-    $a =~ s/\&Prime;/''/g;
-    $a =~ s/\&times;/×/g;
-    $a =~ s/\&plusm;/±/g;
-    $a =~ s/\&divide;/÷/g;
-    $a =~ s/\&plusmn;/±/g;
-    $a =~ s/\&peso;/P/g;
-    $a =~ s/\&Peso;/P/g;
-    $a =~ s/\&ngtilde;/ng/g;
-    $a =~ s/\&Ngtilde;/Ng/g;
-    $a =~ s/\&NGtilde;/NG/g;
-    $a =~ s/\&mring;/m/g;
-    $a =~ s/\&Mring;/M/g;
-    $a =~ s/\&apos;/'/g;
-    $a =~ s/\&rhring;/`/g;
-    $a =~ s/\&mlapos;/'/g;
-    $a =~ s/\&okina;/`/g;
-    $a =~ s/\&tcomma;/`/g;
-    $a =~ s/\&sup([0-9a-zA-Z]);/$1/g;
-    $a =~ s/\&supth;/th/g;
-    $a =~ s/\&iexcl;/¡/g;
-    $a =~ s/\&iquest;/¿/g;
-    $a =~ s/\&lb;/lb/g;
-    $a =~ s/\&dotfil;/.../g;
-    $a =~ s/\&dotfiller;/........./g;
-    $a =~ s/\&middot;/·/g;
-    $a =~ s/\&aeacute;/æ/g;
-    $a =~ s/\&AEacute;/Æ/g;
-    $a =~ s/\&oeacute;/oe/g;
-    $a =~ s/\&dstrok;/d/g;
-    $a =~ s/\&Dstrok;/D/g;
+    $string =~ s/\&longs;/s/g;
+    $string =~ s/\&prime;/'/g;
+    $string =~ s/\&Prime;/''/g;
+    $string =~ s/\&times;/×/g;
+    $string =~ s/\&plusm;/±/g;
+    $string =~ s/\&divide;/÷/g;
+    $string =~ s/\&plusmn;/±/g;
+    $string =~ s/\&peso;/P/g;
+    $string =~ s/\&Peso;/P/g;
+    $string =~ s/\&ngtilde;/ng/g;
+    $string =~ s/\&Ngtilde;/Ng/g;
+    $string =~ s/\&NGtilde;/NG/g;
+    $string =~ s/\&mring;/m/g;
+    $string =~ s/\&Mring;/M/g;
+    $string =~ s/\&apos;/'/g;
+    $string =~ s/\&rhring;/`/g;
+    $string =~ s/\&mlapos;/'/g;
+    $string =~ s/\&okina;/`/g;
+    $string =~ s/\&tcomma;/`/g;
+    $string =~ s/\&sup([0-9a-zA-Z]);/$1/g;
+    $string =~ s/\&supth;/th/g;
+    $string =~ s/\&iexcl;/¡/g;
+    $string =~ s/\&iquest;/¿/g;
+    $string =~ s/\&lb;/lb/g;
+    $string =~ s/\&dotfil;/.../g;
+    $string =~ s/\&dotfiller;/........./g;
+    $string =~ s/\&middot;/·/g;
+    $string =~ s/\&aeacute;/æ/g;
+    $string =~ s/\&AEacute;/Æ/g;
+    $string =~ s/\&oeacute;/oe/g;
+    $string =~ s/\&dstrok;/d/g;
+    $string =~ s/\&Dstrok;/D/g;
 
-    $a =~ s/\&aoacute;/aó/g;
+    $string =~ s/\&aoacute;/aó/g;
 
-    $a =~ s/\&aewmacr;/ae/g;
-    $a =~ s/\&AEmacr;/Æ/g;
-    $a =~ s/\&nbrevdotb;/n/g;
-    $a =~ s/\&nchndrb;/n/g;         # n chandrabindu
+    $string =~ s/\&aewmacr;/ae/g;
+    $string =~ s/\&AEmacr;/Æ/g;
+    $string =~ s/\&nbrevdotb;/n/g;
+    $string =~ s/\&nchndrb;/n/g;         # n chandrabindu
 
-    $a =~ s/\&cslash;/¢/g;
-    $a =~ s/\&grchi;/x/g;
-    $a =~ s/\&omactil;/o/g;
-    $a =~ s/\&ebreacu;/e/g;
-    $a =~ s/\&obrevacu;/o/g;
-    $a =~ s/\&umacrtild;/u/g;
-    $a =~ s/\&amacacu;/a/g;
-    $a =~ s/\&nringb;/n/g;
-    $a =~ s/\&ymacr;/y/g;
-    $a =~ s/\&eng;/ng/g;
-    $a =~ s/\&Rs;/Rs/g;     # Rupee sign.
-    $a =~ s/\&tb;/\n\n/g;   # Thematic Break;
+    $string =~ s/\&cslash;/¢/g;
+    $string =~ s/\&grchi;/x/g;
+    $string =~ s/\&omactil;/o/g;
+    $string =~ s/\&ebreacu;/e/g;
+    $string =~ s/\&obrevacu;/o/g;
+    $string =~ s/\&umacrtild;/u/g;
+    $string =~ s/\&amacacu;/a/g;
+    $string =~ s/\&nringb;/n/g;
+    $string =~ s/\&ymacr;/y/g;
+    $string =~ s/\&eng;/ng/g;
+    $string =~ s/\&Rs;/Rs/g;     # Rupee sign.
+    $string =~ s/\&tb;/\n\n/g;   # Thematic Break;
 
-    $a =~ s/\&diamond;/*/g;
-    $a =~ s/\&triangle;/[triangle]/g;
-    $a =~ s/\&bullet;/·/g;
+    $string =~ s/\&diamond;/*/g;
+    $string =~ s/\&triangle;/[triangle]/g;
+    $string =~ s/\&bullet;/·/g;
 
-    $a =~ s/CI\&Crev;/M/g;  # roman numeral CI reverse C -> M
-    $a =~ s/I\&Crev;/D/g;   # roman numeral I reverse C -> D
+    $string =~ s/CI\&Crev;/M/g;  # roman numeral CI reverse C -> M
+    $string =~ s/I\&Crev;/D/g;   # roman numeral I reverse C -> D
 
-    $a =~ s/\&ptildeb;/p/g;
-    $a =~ s/\&special;/[symbol]/g;
+    $string =~ s/\&ptildeb;/p/g;
+    $string =~ s/\&special;/[symbol]/g;
 
-    $a =~ s/\&florin;/f/g;  # florin sign
-    $a =~ s/\&apos;/'/g;    # apostrophe
-    $a =~ s/\&emsp;/  /g;   # em-space
-    $a =~ s/\&male;/[male]/g;   # male
-    $a =~ s/\&female;/[female]/g;   # female
-    $a =~ s/\&Lambda;/[Lambda]/g;   # Greek capital letter lambda
-    $a =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
-    $a =~ s/\&ast;/*/g; # asterix
+    $string =~ s/\&florin;/f/g;  # florin sign
+    $string =~ s/\&apos;/'/g;    # apostrophe
+    $string =~ s/\&emsp;/  /g;   # em-space
+    $string =~ s/\&male;/[male]/g;   # male
+    $string =~ s/\&female;/[female]/g;   # female
+    $string =~ s/\&Lambda;/[Lambda]/g;   # Greek capital letter lambda
+    $string =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
+    $string =~ s/\&ast;/*/g; # asterix
 
-    $a =~ s/\&there4;/./g;      # Therefor (three dots in triangular arrangement) used as abbreviation dot.
-    $a =~ s/\&maltese;/[+]/g;   # Maltese Cross
-    $a =~ s/\&wwelsh;/6/g;      # Old-Welsh w (looks like 6)
-    $a =~ s/\&\#x204A;/7/g;     # Tironian et (looks like 7)
+    $string =~ s/\&there4;/./g;      # Therefor (three dots in triangular arrangement) used as abbreviation dot.
+    $string =~ s/\&maltese;/[+]/g;   # Maltese Cross
+    $string =~ s/\&wwelsh;/6/g;      # Old-Welsh w (looks like 6)
+    $string =~ s/\&\#x204A;/7/g;     # Tironian et (looks like 7)
 
 
     # Small caps letters
 
-    $a =~ s/\&Dsc;/D/g;     
-    $a =~ s/\&Ysc;/Y/g;     
+    $string =~ s/\&Dsc;/D/g;
+    $string =~ s/\&Ysc;/Y/g;
 
 
     # Rough Greek transcription
 
-    $a =~ s/\&Alpha;/A/g;       #  GREEK CAPITAL LETTER ALPHA
-    $a =~ s/\&Beta;/B/g;        #  GREEK CAPITAL LETTER BETA
-    $a =~ s/\&Gamma;/G/g;       #  GREEK CAPITAL LETTER GAMMA
-    $a =~ s/\&Delta;/D/g;       #  GREEK CAPITAL LETTER DELTA
-    $a =~ s/\&Epsilon;/E/g;     #  GREEK CAPITAL LETTER EPSILON
-    $a =~ s/\&Zeta;/Z/g;        #  GREEK CAPITAL LETTER ZETA
-    $a =~ s/\&Eta;/Ê/g;         #  GREEK CAPITAL LETTER ETA
-    $a =~ s/\&Theta;/Th/g;      #  GREEK CAPITAL LETTER THETA
-    $a =~ s/\&Iota;/I/g;        #  GREEK CAPITAL LETTER IOTA
-    $a =~ s/\&Kappa;/K/g;       #  GREEK CAPITAL LETTER KAPPA
-    $a =~ s/\&Lambda;/L/g;      #  GREEK CAPITAL LETTER LAMDA
-    $a =~ s/\&Mu;/M/g;          #  GREEK CAPITAL LETTER MU
-    $a =~ s/\&Nu;/N/g;          #  GREEK CAPITAL LETTER NU
-    $a =~ s/\&Xi;/X/g;          #  GREEK CAPITAL LETTER XI
-    $a =~ s/\&Omicron;/O/g;     #  GREEK CAPITAL LETTER OMICRON
-    $a =~ s/\&Pi;/P/g;          #  GREEK CAPITAL LETTER PI
-    $a =~ s/\&Rho;/R/g;         #  GREEK CAPITAL LETTER RHO
-    $a =~ s/\&Sigma;/S/g;       #  GREEK CAPITAL LETTER SIGMA
-    $a =~ s/\&Tau;/T/g;         #  GREEK CAPITAL LETTER TAU
-    $a =~ s/\&Upsilon;/U/g;     #  GREEK CAPITAL LETTER UPSILON
-    $a =~ s/\&Upsi;/U/g;        #  GREEK CAPITAL LETTER UPSILON
-    $a =~ s/\&Phi;/F/g;         #  GREEK CAPITAL LETTER PHI
-    $a =~ s/\&Chi;/Ch/g;        #  GREEK CAPITAL LETTER CHI
-    $a =~ s/\&Psi;/Ps/g;        #  GREEK CAPITAL LETTER PSI
-    $a =~ s/\&Omega;/Ô/g;       #  GREEK CAPITAL LETTER OMEGA
+    $string =~ s/\&Alpha;/A/g;       #  GREEK CAPITAL LETTER ALPHA
+    $string =~ s/\&Beta;/B/g;        #  GREEK CAPITAL LETTER BETA
+    $string =~ s/\&Gamma;/G/g;       #  GREEK CAPITAL LETTER GAMMA
+    $string =~ s/\&Delta;/D/g;       #  GREEK CAPITAL LETTER DELTA
+    $string =~ s/\&Epsilon;/E/g;     #  GREEK CAPITAL LETTER EPSILON
+    $string =~ s/\&Zeta;/Z/g;        #  GREEK CAPITAL LETTER ZETA
+    $string =~ s/\&Eta;/Ê/g;         #  GREEK CAPITAL LETTER ETA
+    $string =~ s/\&Theta;/Th/g;      #  GREEK CAPITAL LETTER THETA
+    $string =~ s/\&Iota;/I/g;        #  GREEK CAPITAL LETTER IOTA
+    $string =~ s/\&Kappa;/K/g;       #  GREEK CAPITAL LETTER KAPPA
+    $string =~ s/\&Lambda;/L/g;      #  GREEK CAPITAL LETTER LAMDA
+    $string =~ s/\&Mu;/M/g;          #  GREEK CAPITAL LETTER MU
+    $string =~ s/\&Nu;/N/g;          #  GREEK CAPITAL LETTER NU
+    $string =~ s/\&Xi;/X/g;          #  GREEK CAPITAL LETTER XI
+    $string =~ s/\&Omicron;/O/g;     #  GREEK CAPITAL LETTER OMICRON
+    $string =~ s/\&Pi;/P/g;          #  GREEK CAPITAL LETTER PI
+    $string =~ s/\&Rho;/R/g;         #  GREEK CAPITAL LETTER RHO
+    $string =~ s/\&Sigma;/S/g;       #  GREEK CAPITAL LETTER SIGMA
+    $string =~ s/\&Tau;/T/g;         #  GREEK CAPITAL LETTER TAU
+    $string =~ s/\&Upsilon;/U/g;     #  GREEK CAPITAL LETTER UPSILON
+    $string =~ s/\&Upsi;/U/g;        #  GREEK CAPITAL LETTER UPSILON
+    $string =~ s/\&Phi;/F/g;         #  GREEK CAPITAL LETTER PHI
+    $string =~ s/\&Chi;/Ch/g;        #  GREEK CAPITAL LETTER CHI
+    $string =~ s/\&Psi;/Ps/g;        #  GREEK CAPITAL LETTER PSI
+    $string =~ s/\&Omega;/Ô/g;       #  GREEK CAPITAL LETTER OMEGA
 
-    $a =~ s/\&alpha;/a/g;       #  GREEK SMALL LETTER ALPHA
-    $a =~ s/\&beta;/b/g;        #  GREEK SMALL LETTER BETA
-    $a =~ s/\&gamma;/g/g;       #  GREEK SMALL LETTER GAMMA
-    $a =~ s/\&delta;/d/g;       #  GREEK SMALL LETTER DELTA
-    $a =~ s/\&epsilon;/e/g;     #  GREEK SMALL LETTER EPSILON
-    $a =~ s/\&epsi;/e/g;        #  GREEK SMALL LETTER EPSILON
-    $a =~ s/\&zeta;/z/g;        #  GREEK SMALL LETTER ZETA
-    $a =~ s/\&eta;/ê/g;         #  GREEK SMALL LETTER ETA
-    $a =~ s/\&thetas;/th/g;     #  GREEK SMALL LETTER THETA
-    $a =~ s/\&theta;/th/g;      #  GREEK SMALL LETTER THETA
-    $a =~ s/\&iota;/i/g;        #  GREEK SMALL LETTER IOTA
-    $a =~ s/\&kappa;/k/g;       #  GREEK SMALL LETTER KAPPA
-    $a =~ s/\&lambda;/l/g;      #  GREEK SMALL LETTER LAMDA
-    $a =~ s/\&mu;/m/g;          #  GREEK SMALL LETTER MU
-    $a =~ s/\&nu;/n/g;          #  GREEK SMALL LETTER NU
-    $a =~ s/\&xi;/x/g;          #  GREEK SMALL LETTER XI
-    $a =~ s/\&omicron;/o/g;     #  GREEK SMALL LETTER OMICRON
-    $a =~ s/\&pi;/p/g;          #  GREEK SMALL LETTER PI
-    $a =~ s/\&rho;/r/g;         #  GREEK SMALL LETTER RHO
-    $a =~ s/\&sigma;/s/g;       #  GREEK SMALL LETTER SIGMA
-    $a =~ s/\&tau;/t/g;         #  GREEK SMALL LETTER TAU
-    $a =~ s/\&upsilon;/u/g;     #  GREEK SMALL LETTER UPSILON
-    $a =~ s/\&upsi;/u/g;        #  GREEK SMALL LETTER UPSILON
-    $a =~ s/\&phi;/f/g;         #  GREEK SMALL LETTER PHI
-    $a =~ s/\&chi;/ch/g;        #  GREEK SMALL LETTER CHI
-    $a =~ s/\&psi;/ps/g;        #  GREEK SMALL LETTER PSI
-    $a =~ s/\&omega;/ô/g;       #  GREEK SMALL LETTER OMEGA
+    $string =~ s/\&alpha;/a/g;       #  GREEK SMALL LETTER ALPHA
+    $string =~ s/\&beta;/b/g;        #  GREEK SMALL LETTER BETA
+    $string =~ s/\&gamma;/g/g;       #  GREEK SMALL LETTER GAMMA
+    $string =~ s/\&delta;/d/g;       #  GREEK SMALL LETTER DELTA
+    $string =~ s/\&epsilon;/e/g;     #  GREEK SMALL LETTER EPSILON
+    $string =~ s/\&epsi;/e/g;        #  GREEK SMALL LETTER EPSILON
+    $string =~ s/\&zeta;/z/g;        #  GREEK SMALL LETTER ZETA
+    $string =~ s/\&eta;/ê/g;         #  GREEK SMALL LETTER ETA
+    $string =~ s/\&thetas;/th/g;     #  GREEK SMALL LETTER THETA
+    $string =~ s/\&theta;/th/g;      #  GREEK SMALL LETTER THETA
+    $string =~ s/\&iota;/i/g;        #  GREEK SMALL LETTER IOTA
+    $string =~ s/\&kappa;/k/g;       #  GREEK SMALL LETTER KAPPA
+    $string =~ s/\&lambda;/l/g;      #  GREEK SMALL LETTER LAMDA
+    $string =~ s/\&mu;/m/g;          #  GREEK SMALL LETTER MU
+    $string =~ s/\&nu;/n/g;          #  GREEK SMALL LETTER NU
+    $string =~ s/\&xi;/x/g;          #  GREEK SMALL LETTER XI
+    $string =~ s/\&omicron;/o/g;     #  GREEK SMALL LETTER OMICRON
+    $string =~ s/\&pi;/p/g;          #  GREEK SMALL LETTER PI
+    $string =~ s/\&rho;/r/g;         #  GREEK SMALL LETTER RHO
+    $string =~ s/\&sigma;/s/g;       #  GREEK SMALL LETTER SIGMA
+    $string =~ s/\&tau;/t/g;         #  GREEK SMALL LETTER TAU
+    $string =~ s/\&upsilon;/u/g;     #  GREEK SMALL LETTER UPSILON
+    $string =~ s/\&upsi;/u/g;        #  GREEK SMALL LETTER UPSILON
+    $string =~ s/\&phi;/f/g;         #  GREEK SMALL LETTER PHI
+    $string =~ s/\&chi;/ch/g;        #  GREEK SMALL LETTER CHI
+    $string =~ s/\&psi;/ps/g;        #  GREEK SMALL LETTER PSI
+    $string =~ s/\&omega;/ô/g;       #  GREEK SMALL LETTER OMEGA
 
     # Common abbreviations in small-caps -> upper case.
-    $a =~ s/\&BC;/B.C./g;       #  Before Christ
-    $a =~ s/\&AD;/A.D./g;       #  Anno Domino
-    $a =~ s/\&AH;/A.H./g;       #  Anno Heriga
-    $a =~ s/\&AM;/A.M./g;       #  Anno Mundi / Ante Meridian
-    $a =~ s/\&PM;/P.M./g;       #  Post Meridian
+    $string =~ s/\&BC;/B.C./g;       #  Before Christ
+    $string =~ s/\&AD;/A.D./g;       #  Anno Domino
+    $string =~ s/\&AH;/A.H./g;       #  Anno Heriga
+    $string =~ s/\&AM;/A.M./g;       #  Anno Mundi / Ante Meridian
+    $string =~ s/\&PM;/P.M./g;       #  Post Meridian
 
     # strip accents from remaining entities
-    $a =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;
-    $a =~ s/\&([a-zA-Z]{2})lig;/$1/g;
-    $a =~ s/([0-9])\&frac([0-9])([0-9]*);/$1 $2\/$3/g;  # fraction preceded by number
-    $a =~ s/\&frac([0-9])([0-9]*);/$1\/$2/g; # other fractions
-    $a =~ s/\&frac([0-9])-([0-9]*);/$1\/$2/g; # other fractions
-    $a =~ s/\&frac([0-9]+)-([0-9]*);/$1\/$2/g; # other fractions
+    $string =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;
+    $string =~ s/\&([a-zA-Z]{2})lig;/$1/g;
+    $string =~ s/([0-9])\&frac([0-9])([0-9]*);/$1 $2\/$3/g;  # fraction preceded by number
+    $string =~ s/\&frac([0-9])([0-9]*);/$1\/$2/g; # other fractions
+    $string =~ s/\&frac([0-9])-([0-9]*);/$1\/$2/g; # other fractions
+    $string =~ s/\&frac([0-9]+)-([0-9]*);/$1\/$2/g; # other fractions
 
-    $a =~ s/\&time([0-9])([0-9]*);/$1\/$2/g; # musical time; handle as fraction.
+    $string =~ s/\&time([0-9])([0-9]*);/$1\/$2/g; # musical time; handle as fraction.
 
-    $a =~ s/\&\#x0361;//g; # non-spacing bow.
+    $string =~ s/\&\#x0361;//g; # non-spacing bow.
 
-    return $a;
+    return $string;
 }
