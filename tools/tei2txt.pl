@@ -22,10 +22,8 @@ if ($useUnicode == 1) {
     use open ':utf8';
 }
 
-my $tagPattern = "<(.*?)>";
 my $italicStart = "_";
 my $italicEnd = "_";
-
 
 if ($useItalics == 1) {
     $italicStart = "_";
@@ -250,20 +248,20 @@ sub noBreakSpaces($) {
 sub handleHighlighted($) {
     my $remainder = shift;
 
-    my $a = "";
+    my $result = "";
     while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/) {
         my $attrs = $1;
         my $rend = getAttrVal("rend", $attrs);
         if ($rend eq "sup") {
-            $a .= $` . $2;
+            $result .= $` . $2;
         } elsif ($rend eq "sc" || $rend eq "expanded") {
-            $a .= $` . $2;
+            $result .= $` . $2;
         } else {
-            $a .= $` . $italicStart . $2 . $italicEnd;
+            $result .= $` . $italicStart . $2 . $italicEnd;
         }
         $remainder = $';
     }
-    return $a . $remainder;
+    return $result . $remainder;
 }
 
 
@@ -384,10 +382,10 @@ sub handleRow($) {
     my $row = shift;
     my @items = split(/<cell\b(.*?)>/ms, $row);
     my @cells = ();
-    my @colspans = ();
-    my @rowspans = ();
+    my @colSpans = ();
+    my @rowSpans = ();
 
-    # every second item contains tag; first cell is empty.
+    # Every second item contains tag; first cell is empty.
     for (my $i = 0; $i <= $#items; $i++) {
         my $item = $items[$i];
         if ($i % 2 == 0) {
@@ -399,8 +397,8 @@ sub handleRow($) {
             $cols = $cols eq "" ? 1 : $cols;
             $rows = $rows eq "" ? 1 : $rows;
 
-            push @colspans, $cols;
-            push @rowspans, $rows;
+            push @colSpans, $cols;
+            push @rowSpans, $rows;
         }
     }
 
@@ -489,33 +487,24 @@ sub sizeTableColumns($@) {
         length($borderLeft[$borderStyle]) +
         length($borderRight[$borderStyle]);
 
-    ##print STDERR "\nTOTAL WIDTH: $finalWidth - $borderAdjustment for $columns columns";
-
     $finalWidth -= $borderAdjustment;
 
     if ($minimalWidth > $finalWidth) {
         print STDERR "WARNING: Table cannot be fitted into " . ($finalWidth + $borderAdjustment) . " columns! Need " . ($minimalWidth + $borderAdjustment) . " columns.\n";
     }
 
-    # Now we need to distribute the remaining width, by adding it to the most needy column
-
+    # Now we need to distribute the remaining width, by adding it to the most needy column.
     # Calculate entitlements (how much every column is supposed to have, based on its area)
-    ##print STDERR "\n\nEstablishing column widths (rows: $#rows; columns: $columns; width: $finalWidth; area: $totalArea)";
     my @entitlement = ();
     my @fillFactor = ();
     for my $j (0 .. $columns - 1) {
         my $fraction = sqrt($columnArea[$j]) / sqrt($totalArea);
         $entitlement[$j] = $finalWidth * $fraction;
-        ##print STDERR "\nColumn $j: ";
-        my $pfraction = floor($fraction * 100.0)/100.0;
-        my $pentitlement = floor($entitlement[$j]);
-        ##print STDERR "\n    width: $finalColumnWidths[$j];\n    area: $desiredColumnWidths[$j]\n    fraction: $pfraction; \n    entitlement: $pentitlement";
         if ($finalColumnWidths[$j] >= $desiredColumnWidths[$j]) {
             $fillFactor[$j] = 1.0;
         } else {
             $fillFactor[$j] = $finalColumnWidths[$j] / $entitlement[$j];
         }
-        ##print STDERR "\n    fill factor: $fillFactor[$j]";
     }
 
     # Add spaces to columns with the lowest fill factor, recalculating it as we go;
@@ -555,8 +544,6 @@ sub sizeTableColumns($@) {
             my @newCell = ();
             my $cellHeight = $#{$rows[$i][$j]};
 
-            ## print STDERR "\nCOLUMN $j: wrapping to $finalColumnWidths[$j]";
-
             for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
                 if ($line eq "") {
@@ -574,110 +561,6 @@ sub sizeTableColumns($@) {
 }
 
 
-sub minimumCellHeightGivenWidth($$) {
-    my $width = shift;
-    my $cell = shift;
-
-    # Just break lines greedily.
-    my $cellContent = shift;
-    my $maxLength = shift;
-    my @lines = split("\n", $cellContent);
-
-    my $height = 0;
-    foreach my $line (@lines) {
-        $height += minimumLineHeightGivenWidth($line, $width);
-    }
-    return $height;
-}
-
-
-sub minimumLineHeightGivenWidth($$) {
-    my $line = shift;
-    my $width = shift;
-
-    my @words = split(/\s+/, $line);
-
-    my $height = 1;
-    my $currentWidth = 0;
-    foreach my $word (@words) {
-        my $wordWidth = length ($word);
-        $currentWidth += $wordWidth;
-        if ($currentWidth > $width) {
-            $height++;
-            $currentWidth = $wordWidth;
-        } else {
-            if ($currentWidth != 0) {
-                $currentWidth++;
-            }
-        }
-    }
-    return $height;
-}
-
-
-sub nextShorterLineWidth($$$) {
-    my $line = shift;
-    my $width = shift;
-    my $height = shift;
-
-    my @words = split(/\s+/, $line);
-
-    # Find word widths (should be stored)
-    my @widths = ();
-    my $n = 0;
-    foreach my $word (@words) {
-        $widths[$n] = length($word);
-        $n++;
-    }
-
-    # find line starting words;
-    my $i = 0;
-    my $lastLine = 0;
-    my @lineStart = ();
-    $lineStart[0] = 0;
-    my $currentWidth = 0;
-    foreach my $word (@words) {
-        $currentWidth += $widths[$i];
-        if ($currentWidth > $width) {
-            $lastLine++;
-            $lineStart[$lastLine] = $i;
-            $currentWidth = $widths[$i];
-        } else {
-            if ($currentWidth != 0) {
-                $currentWidth++;
-            }
-        }
-    }
-
-    # We have split the line with the original width. Now
-    # merge last line into previous line.
-
-    my @minWidth = ();
-    my $lineLength = $widths[$n - 1];
-    for (my $w = $n - 1; $w > $lineStart[$lastLine - 2]; $w--) {
-        $minWidth[$w] = max($width, $lineLength);
-        $lineLength = $lineLength + 1 + $widths[$w - 1];
-    }
-
-    for (my $L = $lastLine - 3; $L >= 0; $L--) {
-        my $nlw = $lineStart[$L + 1];
-        $lineLength = $widths[$lineStart[$L]];
-        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++) {
-            $lineLength = $widths[$w] + 1 + $lineLength;
-        }
-        for (my $w = $lineStart[$L] + 1; $w < $lineStart[$L + 1] -1 ;$w++) {
-            while ($minWidth[$nlw] > $lineLength && $nlw < $lineStart[$L + 2]) {
-                $lineLength = $lineLength + 1 + $widths[$nlw];
-                $nlw++;
-            }
-            $minWidth[$w] = min($minWidth[$nlw - 1], $lineLength);
-            $lineLength = $lineLength - (1 + $widths[$w]);
-        }
-    }
-    return $minWidth[0];
-}
-
-
 sub totalTableWidth(@) {
     my @columnWidths = @_;
 
@@ -686,7 +569,6 @@ sub totalTableWidth(@) {
         $totalTableWidth += $columnWidths[$i];
         $totalTableWidth += $i < $#columnWidths ? length($innerCross[$borderStyle]) : length($borderRight[$borderStyle]);
     }
-    ##print STDERR "totalTableWidth: $totalTableWidth\n";
     return $totalTableWidth;
 }
 
