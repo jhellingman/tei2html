@@ -1,7 +1,6 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use strict;
-# use warnings;
 
 use Getopt::Long;
 use POSIX qw/floor ceil/;
@@ -581,6 +580,7 @@ sub printTable(@) {
     my @rowHeights = ();
 
     for my $i (0 .. $#rows) {
+        $rowHeights[$i] = 0;
         for my $j (0 .. $#{$rows[$i]}) {
             my $cellHeight = $#{$rows[$i][$j]};
             for my $k (0 .. $cellHeight) {

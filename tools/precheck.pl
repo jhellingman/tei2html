@@ -12,20 +12,20 @@ use warnings;
 
 while (<>) {
 
-    my $a = $_;
+    my $line = $_;
 
-    $a =~ s/\&apos;/\&mlapos;/g;    # modifier letter apostrophe
+    $line =~ s/\&apos;/\&mlapos;/g;    # modifier letter apostrophe
 
-    $a =~ s/\&lpar;/\&#xFF08;/g;    # left parenthesis
-    $a =~ s/\&rpar;/\&#xFF09;/g;    # right parenthesis
+    $line =~ s/\&lpar;/\&#xFF08;/g;    # left parenthesis
+    $line =~ s/\&rpar;/\&#xFF09;/g;    # right parenthesis
 
-    $a =~ s/\&lsqb;/\&#xFF3B;/g;    # left square bracket
-    $a =~ s/\&rsqb;/\&#xFF3D;/g;    # right square bracket
+    $line =~ s/\&lsqb;/\&#xFF3B;/g;    # left square bracket
+    $line =~ s/\&rsqb;/\&#xFF3D;/g;    # right square bracket
 
-    $a =~ s/\&lcub;/\&#xFF5B;/g;    # left curly bracket
-    $a =~ s/\&rcub;/\&#xFF5B;/g;    # right curly bracket
+    $line =~ s/\&lcub;/\&#xFF5B;/g;    # left curly bracket
+    $line =~ s/\&rcub;/\&#xFF5B;/g;    # right curly bracket
 
-    $a =~ s/\&num;/\&#xFF03;/g;     # number sign
+    $line =~ s/\&num;/\&#xFF03;/g;     # number sign
 
-    print $a;
+    print $line;
 }

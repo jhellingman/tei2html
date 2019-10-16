@@ -3,17 +3,17 @@
 use strict;
 use warnings;
 
-my $poetrymode = 0;
+my $poetryMode = 0;
 
 while (<>) {
     my $line = $_;
     if ($line =~ /\/\*/) {
-        $poetrymode = 1;
+        $poetryMode = 1;
         print "<lg>\n";
     } elsif ($line =~ /\*\//) {
-        $poetrymode = 0;
+        $poetryMode = 0;
         print "</lg>\n";
-    } elsif ($poetrymode == 0) {
+    } elsif ($poetryMode == 0) {
         print $line;
     } else {
         # blank line in poetry mode:

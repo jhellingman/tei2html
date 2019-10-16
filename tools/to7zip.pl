@@ -22,12 +22,11 @@ my $archivesConverted = 0;
 my $outputPath = "to7zip-output";
 my $logFile = "to7zip.log";
 
-sub main();
 
 main();
 
-sub main()
-{
+
+sub main {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 

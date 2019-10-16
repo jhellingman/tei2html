@@ -105,7 +105,7 @@ sub main {
 
     report();
     # reportXML();
-    if ($makeHeatMap) {
+    if ($makeHeatMap == 1) {
         makeHeatMap();
     }
 }

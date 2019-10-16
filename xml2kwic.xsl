@@ -33,7 +33,7 @@
     <xsl:include href="segmentize.xsl"/>
 
     <xd:doc>
-        <xd:short>The keyword to generate a KWIC for.</xd:short>
+        <xd:short>The keyword(s) to generate a KWIC for.</xd:short>
         <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
         in the document.</xd:detail>
     </xd:doc>
@@ -260,10 +260,10 @@
         <xsl:choose>
             <xsl:when test="$keyword != ''">
 
-                <!-- Build KWIC for searched word(s) -->
+                <!-- Build KWIC for searched word(s) only -->
                 <xsl:variable name="keywords" select="tokenize(fn:lower-case(f:strip_diacritics($keyword)), '\s+')"/>
 
-                <xsl:call-template name="report-matches">
+                <xsl:call-template name="report-single-match">
                     <xsl:with-param name="keyword" select="$keywords"/>
                     <xsl:with-param name="segments" select="$segments"/>
                 </xsl:call-template>
@@ -278,7 +278,7 @@
                 <xsl:for-each-group select="$matches/k:match" group-by="@form">
                     <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
                     <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}&prime;-]+$')">
-                        <xsl:call-template name="report-matches2">
+                        <xsl:call-template name="report-multiple-matches">
                             <xsl:with-param name="matches" select="current-group()"/>
                         </xsl:call-template>
                     </xsl:if>
@@ -288,7 +288,7 @@
     </xsl:template>
 
 
-    <xsl:template name="report-matches2">
+    <xsl:template name="report-multiple-matches">
         <xsl:param name="matches" as="element()*"/>
 
         <xsl:variable name="keyword" select="$matches[1]/k:word"/>
@@ -356,11 +356,11 @@
         <xd:param name="keyword">The keyword for which the KWIC is generated.</xd:param>
     </xd:doc>
 
-    <xsl:template name="report-matches">
+    <xsl:template name="report-single-match">
         <xsl:param name="segments"/>
         <xsl:param name="keyword"/>
 
-        <xsl:variable name="matches">
+        <xsl:variable name="matchlist">
             <k:matches>
                 <xsl:apply-templates mode="single-kwic" select="$segments//k:w">
                     <xsl:with-param name="keyword" select="$keyword"/>
@@ -368,7 +368,43 @@
             </k:matches>
         </xsl:variable>
 
-        <xsl:apply-templates mode="output" select="$matches"/>
+        <xsl:variable name="matches" select="$matchlist/k:matches/k:match"/>
+
+        <h2>
+            <span class="cnt">Query:</span><xsl:text> </xsl:text>
+            <xsl:value-of select="$keyword"/><xsl:text> </xsl:text>
+            <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+        </h2>
+
+        <xsl:variable name="variant-count">
+            <xsl:variable name="groups">
+                <xsl:for-each-group select="$matches" group-by="./k:word">.</xsl:for-each-group>
+            </xsl:variable>
+            <xsl:value-of select="string-length($groups)"/>
+        </xsl:variable>
+
+        <xsl:if test="$variant-count &gt; 1">
+            <p><span class="cnt">Variants:</span>
+                <xsl:for-each-group select="$matches" group-by="./k:word">
+                    <xsl:sort select="count(current-group())" order="descending"/>
+
+                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
+                    <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                </xsl:for-each-group>
+            </p>
+        </xsl:if>
+
+        <xsl:variable name="variants">
+            <xsl:for-each-group select="$matches" group-by="./k:word">
+                <xsl:sort select="count(current-group())" order="descending"/>
+                    <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
+            </xsl:for-each-group>
+        </xsl:variable>
+
+        <xsl:apply-templates mode="output" select="$matchlist">
+            <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
+            <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
