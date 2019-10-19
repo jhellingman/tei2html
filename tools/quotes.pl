@@ -5,12 +5,10 @@ use warnings;
 
 my $accLetter = "(?:\\&[A-Za-z](?:acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
 my $ligLetter = "(?:\\&[A-Za-z]{2}lig;)";
-my $latin1Letter = "ÁáÀàÂâÄäÃãÅåÇçÉéÈèÊêËëÍíÌìÎîÏïÑñÓóÒòÔôÖöÕõØøÚúÙùÛûÜüİıÆæĞğŞşÿß";
 my $specLetter = "(?:\\&eth;|\\&ETH;|\\&thorn;|\\&THORN;|\\&alif;|\\&ayn;|\\&prime;)";
 my $letter = "(?:\\w|[ÁáÀàÂâÄäÃãÅåÇçÉéÈèÊêËëÍíÌìÎîÏïÑñÓóÒòÔôÖöÕõØøÚúÙùÛûÜüİıÆæĞğŞşÿß]|$accLetter|$ligLetter|$specLetter)";
 
 my $wordPattern = "($letter)+(([-']|&apos;)($letter)+)*";
-my $nonLetter = "\\&(amp|ldquo|rdquo|lsquo|mdash|hellips|gt|lt|frac[0-9][0-9]);";
 
 my $tagPattern = "<[^<]*?>";
 my $transPattern = "<(AR|CY|GR|SA|UR|HE)>.*?<\\/(AR|CY|GR|SA|UR|HE)>";
@@ -19,7 +17,7 @@ my $skipPattern = "(($transPattern)|($formulaPattern)|($tagPattern))";
 
 curlyQuoteText();
 
-sub curlyQuoteText() {
+sub curlyQuoteText {
     while (<>) {
         my $remainder = $_;
 
@@ -36,7 +34,7 @@ sub curlyQuoteText() {
     }
 }
 
-sub curlyQuoteFragment($) {
+sub curlyQuoteFragment {
     my $fragment = shift;
 
     # open quotes
@@ -48,7 +46,7 @@ sub curlyQuoteFragment($) {
     return disambiguateSingleQuotes($fragment);
 }
 
-sub disambiguateSingleQuotes($) {
+sub disambiguateSingleQuotes {
     my $fragment = shift;
 
     # Around em-dash:
@@ -92,7 +90,7 @@ sub disambiguateSingleQuotes($) {
 }
 
 
-sub disambiguateSingleQuotesWithTags($) {
+sub disambiguateSingleQuotesWithTags {
     my $fragment = shift;
 
     # Around <hi>...</hi> markup:

@@ -25,8 +25,6 @@ print NOTESFILE "\n\nNOTES\n\n";
 
 my %mapNoteIdToSeqNumber;
 
-my $prevPageNumber = "";
-
 while (<INPUTFILE>) {
     my $line = $_;
     my $remainder = $line;
@@ -120,16 +118,16 @@ while (<INPUTFILE>) {
 }
 
 
-sub getAttrVal($$) {
+sub getAttrVal {
     my $attrName = shift;
     my $attrs = shift;
-    my $attrVal = "";
 
     if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
+        return $1;
     }
-    return $attrVal;
+    if ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
+        return $1;
+    }
+    return '';
 }
 
