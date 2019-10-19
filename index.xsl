@@ -237,7 +237,7 @@
 
 
     <xsl:template name="genindextoc">
-        <div class="transcribernote indextoc" id="{f:generate-id(.)}">
+        <div class="transcriberNote indexToc" id="{f:generate-id(.)}">
             <xsl:apply-templates select="../div2/head | ../div3/head | ../div/head" mode="genindextoc"/>
         </div>
     </xsl:template>

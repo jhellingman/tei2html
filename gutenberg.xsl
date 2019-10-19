@@ -94,7 +94,7 @@
     </xd:doc>
 
     <xsl:template name="PGHeader">
-        <div class="transcribernote" id="pgheader">
+        <div class="transcriberNote" id="pgheader">
             <xsl:variable name="authors"><xsl:call-template name="combine-authors"/></xsl:variable>
             <xsl:copy-of select="f:formatMessage('msgPGHeader', map{
                 'title': //titleStmt/title,

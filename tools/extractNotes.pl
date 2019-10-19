@@ -65,15 +65,15 @@ while (<INPUTFILE>) {
             if ($remainder =~ m/<(\/?note)\b(.*?)>([ ]*)/) {
                 my $beforeTag = $`;
                 my $noteTag = $1;
-                my $attributes = $2;
+                my $innerAttributes = $2;
                 $followingSpace = $3;
                 $remainder = $';
 
                 if ($noteTag eq "note") {
                     $nestingLevel++;
                     $noteText .= $beforeTag . " ((";
-                    my $noteNumber = getAttrVal("n", $attributes);
-                    print "WARNING: Nested note $noteNumber on page $pageNumber rendered in-line (check for '((')\n";
+                    my $innerNoteNumber = getAttrVal("n", $innerAttributes);
+                    print "WARNING: Nested note $innerNoteNumber on page $pageNumber rendered in-line (check for '((')\n";
                 } elsif ($noteTag eq "\/note") {
                     if ($nestingLevel == 0) {
                         $endFound = 1;

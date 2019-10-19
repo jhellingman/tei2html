@@ -15,11 +15,9 @@ my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
 
 my $logFile = "checkArchives.log";
 
-sub main();
-
 main();
 
-sub main() {
+sub main {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 }
@@ -54,10 +52,10 @@ sub handle_file($) {
     my ($file) = @_;
 
     if ($file =~ m/^(.*)\.(7z)$/) {
-        my $returnCode = system ("$sevenZip t \"$file\" 1>>$logFile");
+        system ("$sevenZip t \"$file\" 1>>$logFile");
     }
 
     if ($file =~ m/^(.*)\.(zip)$/) {
-        my $returnCode = system ("$zip -T \"$file\" 1>>$logFile");
+        system ("$zip -T \"$file\" 1>>$logFile");
     }
 }

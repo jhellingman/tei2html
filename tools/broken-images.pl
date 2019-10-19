@@ -53,7 +53,7 @@ sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     my $file = $ARGV[0];
 
-    if (not $file) {
+    if (!defined $file) {
         $file = ".";
     }
     if (-d $file) {

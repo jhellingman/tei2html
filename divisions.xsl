@@ -113,7 +113,7 @@
     </xd:doc>
 
     <xsl:template match="div1[@type='TranscriberNote']">
-        <div class="transcribernote" id="{f:generate-id(.)}">
+        <div class="transcriberNote" id="{f:generate-id(.)}">
             <xsl:apply-templates/>
         </div>
     </xsl:template>

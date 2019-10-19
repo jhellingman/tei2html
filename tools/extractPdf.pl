@@ -42,19 +42,12 @@ sub list_recursively($) {
 sub handle_file($) {
     my ($file) = @_;
     if ($file =~ m/^(.*)\.(pdf)$/) {
-        my $path = $1;
         my $extension = $2;
-        my $base = basename($file, '.' . $extension);
-        my $dirname = dirname($file);
-
-        my $newfile = $dirname . '\\' . $base . '-copy.' . $extension;
-
         print "Extracting images from PDF: $file\n";
-
         if ($extension eq 'pdf') {
             $pdfcount++;
-            my $returnCode = system ("$pdftopng -r $resolutionDpi $file $pdfcount");
-            # my $returnCode = system ("$pdfimages -j -list \"$file\" $pdfcount");
+            system ("$pdftopng -r $resolutionDpi $file $pdfcount");
+            # system ("$pdfimages -j -list \"$file\" $pdfcount");
         }
     }
 }
@@ -64,7 +57,7 @@ sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     my $file = $ARGV[0];
 
-    if (not $file) {
+    if (!defined $file) {
         $file = ".";
     }
     if (-d $file) {

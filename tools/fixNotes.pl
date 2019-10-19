@@ -2,22 +2,22 @@
 
 use strict;
 use warnings;
-$inputFile          = $ARGV[0];
-$firstNoteNumber    = $ARGV[1];
+my $inputFile          = $ARGV[0];
+my $firstNoteNumber    = $ARGV[1];
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-print STDERR "Verifying and remnumbering notes in $inputFile\n";
+print STDERR "Verifying and renumbering notes in $inputFile\n";
 
-$nPreviousNoteNumber = 0;
-$nNewNoteNumber = $firstNoteNumber;
+my $nPreviousNoteNumber = 0;
+my $nNewNoteNumber = $firstNoteNumber;
 
 while (<INPUTFILE>) {
-    $line = $_;
-    $remainder = $line;
+    my $line = $_;
+    my $remainder = $line;
     while ($remainder =~ m/\[([0-9]*)\]/) {
-        $before = $`;
-        $nOriginalNoteNumber = $1;
+        my $before = $`;
+        my $nOriginalNoteNumber = $1;
         $remainder = $';
 
         print STDERR "Seen [$nOriginalNoteNumber]\n";

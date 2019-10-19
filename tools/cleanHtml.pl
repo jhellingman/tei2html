@@ -1,17 +1,19 @@
+
 use strict;
 use warnings;
+
 while (<>) {
 
-    $a = $_;
+    my $line = $_;
 
-    $a =~ s/<\/link>//g;
-    $a =~ s/<\/meta>//g;
-    $a =~ s/<\/img>//g;
-    $a =~ s/<\/hr>//g;
+    $line =~ s/<\/link>//g;
+    $line =~ s/<\/meta>//g;
+    $line =~ s/<\/img>//g;
+    $line =~ s/<\/hr>//g;
 
-    $a =~ s/<br\/>/<br>/g;
+    $line =~ s/<br\/>/<br>/g;
 
-    $a =~ s/<style><\/style>//g;
+    $line =~ s/<style><\/style>//g;
 
-    print $a;
+    print $line;
 }

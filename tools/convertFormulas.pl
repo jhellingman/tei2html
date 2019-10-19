@@ -71,7 +71,7 @@ sub startsWith($) {
 sub main() {
     my $file = $ARGV[0];
 
-    if (not $file) {
+    if (!defined $file) {
         $file = ".";
     }
     if (-d $file) {

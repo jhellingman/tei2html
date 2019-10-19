@@ -27,7 +27,7 @@ while (<INPUTFILE>) {
         my $close = $previousLevel - $level;
         $previousLevel = $level;
         for ( ; $close >= 0; $close--) {
-            print "</div>";
+            print $before . "</div>";
         }
         print "<div$attrs>";
     }

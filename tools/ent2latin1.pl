@@ -2,95 +2,95 @@ use strict;
 use warnings;
 while (<>) {
 
-    $a = $_;
+    my $line = $_;
 
-    $a =~ s/\&iexcl;/¡/g;
-    $a =~ s/\&iquest;/¿/g;
-    $a =~ s/\&raquo;/»/g;
-    $a =~ s/\&laquo;/«/g;
+    $line =~ s/\&iexcl;/¡/g;
+    $line =~ s/\&iquest;/¿/g;
+    $line =~ s/\&raquo;/»/g;
+    $line =~ s/\&laquo;/«/g;
 
-    $a =~ s/\&pm;/±/g;
-    $a =~ s/\&mult;/×/g;
-    $a =~ s/\&div;/÷/g;
+    $line =~ s/\&pm;/±/g;
+    $line =~ s/\&mult;/×/g;
+    $line =~ s/\&div;/÷/g;
 
-    $a =~ s/\&cent;/¢/g;
-    $a =~ s/\&pound;/£/g;
-    $a =~ s/\&yen;/¥/g;
+    $line =~ s/\&cent;/¢/g;
+    $line =~ s/\&pound;/£/g;
+    $line =~ s/\&yen;/¥/g;
 
-    $a =~ s/\&sect;/§/g;
+    $line =~ s/\&sect;/§/g;
 
-    $a =~ s/\&Aacute;/Á/g;
-    $a =~ s/\&aacute;/á/g;
-    $a =~ s/\&Agrave;/À/g;
-    $a =~ s/\&agrave;/à/g;
-    $a =~ s/\&Acirc;/Â/g;
-    $a =~ s/\&acirc;/â/g;
-    $a =~ s/\&Auml;/Ä/g;
-    $a =~ s/\&auml;/ä/g;
-    $a =~ s/\&Atilde;/Ã/g;
-    $a =~ s/\&atilde;/ã/g;
-    $a =~ s/\&Aring;/Å/g;
-    $a =~ s/\&aring;/å/g;
-    $a =~ s/\&AElig;/Æ/g;
-    $a =~ s/\&aelig;/æ/g;
+    $line =~ s/\&Aacute;/Á/g;
+    $line =~ s/\&aacute;/á/g;
+    $line =~ s/\&Agrave;/À/g;
+    $line =~ s/\&agrave;/à/g;
+    $line =~ s/\&Acirc;/Â/g;
+    $line =~ s/\&acirc;/â/g;
+    $line =~ s/\&Auml;/Ä/g;
+    $line =~ s/\&auml;/ä/g;
+    $line =~ s/\&Atilde;/Ã/g;
+    $line =~ s/\&atilde;/ã/g;
+    $line =~ s/\&Aring;/Å/g;
+    $line =~ s/\&aring;/å/g;
+    $line =~ s/\&AElig;/Æ/g;
+    $line =~ s/\&aelig;/æ/g;
 
-    $a =~ s/\&Ccedil;/Ç/g;
-    $a =~ s/\&ccedil;/ç/g;
+    $line =~ s/\&Ccedil;/Ç/g;
+    $line =~ s/\&ccedil;/ç/g;
 
-    $a =~ s/\&ETH;/Ð/g;
-    $a =~ s/\&eth;/ð/g;
+    $line =~ s/\&ETH;/Ð/g;
+    $line =~ s/\&eth;/ð/g;
 
-    $a =~ s/\&Eacute;/É/g;
-    $a =~ s/\&eacute;/é/g;
-    $a =~ s/\&Egrave;/È/g;
-    $a =~ s/\&egrave;/è/g;
-    $a =~ s/\&Ecirc;/Ê/g;
-    $a =~ s/\&ecirc;/ê/g;
-    $a =~ s/\&Euml;/Ë/g;
-    $a =~ s/\&euml;/ë/g;
+    $line =~ s/\&Eacute;/É/g;
+    $line =~ s/\&eacute;/é/g;
+    $line =~ s/\&Egrave;/È/g;
+    $line =~ s/\&egrave;/è/g;
+    $line =~ s/\&Ecirc;/Ê/g;
+    $line =~ s/\&ecirc;/ê/g;
+    $line =~ s/\&Euml;/Ë/g;
+    $line =~ s/\&euml;/ë/g;
 
-    $a =~ s/\&Iacute;/Í/g;
-    $a =~ s/\&iacute;/í/g;
-    $a =~ s/\&Igrave;/Ì/g;
-    $a =~ s/\&igrave;/ì/g;
-    $a =~ s/\&Icirc;/Î/g;
-    $a =~ s/\&icirc;/î/g;
-    $a =~ s/\&Iuml;/Ï/g;
-    $a =~ s/\&iuml;/ï/g;
+    $line =~ s/\&Iacute;/Í/g;
+    $line =~ s/\&iacute;/í/g;
+    $line =~ s/\&Igrave;/Ì/g;
+    $line =~ s/\&igrave;/ì/g;
+    $line =~ s/\&Icirc;/Î/g;
+    $line =~ s/\&icirc;/î/g;
+    $line =~ s/\&Iuml;/Ï/g;
+    $line =~ s/\&iuml;/ï/g;
 
-    $a =~ s/\&Ntilde;/Ñ/g;
-    $a =~ s/\&ntilde;/ñ/g;
+    $line =~ s/\&Ntilde;/Ñ/g;
+    $line =~ s/\&ntilde;/ñ/g;
 
-    $a =~ s/\&Oacute;/Ó/g;
-    $a =~ s/\&oacute;/ó/g;
-    $a =~ s/\&Ograve;/Ò/g;
-    $a =~ s/\&ograve;/ò/g;
-    $a =~ s/\&Ocirc;/Ô/g;
-    $a =~ s/\&ocirc;/ô/g;
-    $a =~ s/\&Ouml;/Ö/g;
-    $a =~ s/\&ouml;/ö/g;
-    $a =~ s/\&Otilde;/Õ/g;
-    $a =~ s/\&otilde;/õ/g;
-    $a =~ s/\&Oslash;/Ø/g;
-    $a =~ s/\&oslash;/ø/g;
+    $line =~ s/\&Oacute;/Ó/g;
+    $line =~ s/\&oacute;/ó/g;
+    $line =~ s/\&Ograve;/Ò/g;
+    $line =~ s/\&ograve;/ò/g;
+    $line =~ s/\&Ocirc;/Ô/g;
+    $line =~ s/\&ocirc;/ô/g;
+    $line =~ s/\&Ouml;/Ö/g;
+    $line =~ s/\&ouml;/ö/g;
+    $line =~ s/\&Otilde;/Õ/g;
+    $line =~ s/\&otilde;/õ/g;
+    $line =~ s/\&Oslash;/Ø/g;
+    $line =~ s/\&oslash;/ø/g;
 
-    $a =~ s/\&szlig;/ß/g;
+    $line =~ s/\&szlig;/ß/g;
 
-    $a =~ s/\&THORN;/Þ/g;
-    $a =~ s/\&thorn;/þ/g;
+    $line =~ s/\&THORN;/Þ/g;
+    $line =~ s/\&thorn;/þ/g;
 
-    $a =~ s/\&Uacute;/Ú/g;
-    $a =~ s/\&uacute;/ú/g;
-    $a =~ s/\&Ugrave;/Ù/g;
-    $a =~ s/\&ugrave;/ù/g;
-    $a =~ s/\&Ucirc;/Û/g;
-    $a =~ s/\&ucirc;/û/g;
-    $a =~ s/\&Uuml;/Ü/g;
-    $a =~ s/\&uuml;/ü/g;
+    $line =~ s/\&Uacute;/Ú/g;
+    $line =~ s/\&uacute;/ú/g;
+    $line =~ s/\&Ugrave;/Ù/g;
+    $line =~ s/\&ugrave;/ù/g;
+    $line =~ s/\&Ucirc;/Û/g;
+    $line =~ s/\&ucirc;/û/g;
+    $line =~ s/\&Uuml;/Ü/g;
+    $line =~ s/\&uuml;/ü/g;
 
-    $a =~ s/\&Yacute;/Ý/g;
-    $a =~ s/\&yacute;/ý/g;
-    $a =~ s/\&yuml;/ÿ/g;
+    $line =~ s/\&Yacute;/Ý/g;
+    $line =~ s/\&yacute;/ý/g;
+    $line =~ s/\&yuml;/ÿ/g;
 
-    print $a;
+    print $line;
 }

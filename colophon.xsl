@@ -37,7 +37,7 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='Colophon']">
-        <div class="transcribernote">
+        <div class="transcriberNote">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
             <h2 class="main"><xsl:value-of select="f:message('msgColophon')"/></h2>
@@ -467,7 +467,7 @@
     <xsl:template name="correctionTable">
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
-        <table class="correctiontable">
+        <table class="correctionTable">
             <xsl:if test="$outputformat != 'epub'">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
             </xsl:if>

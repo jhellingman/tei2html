@@ -34,7 +34,7 @@ foreach my $line (@lines) {
         }
 
         my $id = $mapDittoToId{$content};
-        if ($id eq "") {
+        if (!defined $id) {
             $segNumber++;
             $id = $segNumber;
             $mapDittoToId{$content} = $id;
@@ -70,20 +70,20 @@ foreach my $line (@lines) {
     print "$line\n";
 }
 
-sub countWords($) {
+sub countWords {
     my $text = shift;
     my $count;
     $count++ while $text =~ /\S+/g;
     return $count;
 }
 
-sub repeat($$) {
+sub repeat {
     my $symbol = shift;
     my $count = shift;
     return trim("$symbol " x $count);
 }
 
-sub trim($) { 
+sub trim {
     my $string = shift; 
     $string =~ s/^\s+|\s+$//g; 
     return $string 
