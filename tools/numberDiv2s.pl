@@ -5,7 +5,8 @@
 
 use strict;
 use warnings;
-use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+use Roman;                      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile   = $ARGV[0];
 
@@ -19,14 +20,14 @@ while (<INPUTFILE>) {
 
     if ($line =~ /<div1(.*?)>/) {
         my $attrs = $1;
-        my $newDivNumber = getAttrVal("n", $attrs);
-        if ($newDivNumber ne "") {
+        my $newDivNumber = getAttrVal('n', $attrs);
+        if ($newDivNumber ne '') {
             $newDivNumber = isroman($newDivNumber) ? arabic($newDivNumber) : $newDivNumber;
         } else {
-            $newDivNumber = getAttrVal("id", $attrs);
+            $newDivNumber = getAttrVal('id', $attrs);
         }
 
-        $div1Number = $newDivNumber ne "" ? $newDivNumber : $div1Number++;
+        $div1Number = $newDivNumber ne '' ? $newDivNumber : $div1Number++;
 
         $div2Number = 0;
         print STDERR "DIV1:$div1Number\n";
@@ -40,9 +41,9 @@ while (<INPUTFILE>) {
         $remainder = $';
         $div2Number++;
 
-        my $currentNumber = getAttrVal("n", $attrs);
-        if ($currentNumber eq "") {
-            $currentNumber = ($div1Number ne "" && $div1Number ne "0") ? "$div1Number.$div2Number" : $div2Number;
+        my $currentNumber = getAttrVal('n', $attrs);
+        if ($currentNumber eq '') {
+            $currentNumber = ($div1Number ne '' && $div1Number ne '0') ? "$div1Number.$div2Number" : $div2Number;
             $attrs = $attrs . " id=$currentNumber";
         }
         print STDERR "DIV2:$currentNumber\n";
@@ -55,21 +56,4 @@ while (<INPUTFILE>) {
 sub isnum($) {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
-}
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }

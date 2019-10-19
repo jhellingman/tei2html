@@ -5,7 +5,9 @@
 
 use strict;
 use warnings;
-use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+
+use Roman;                          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile   = $ARGV[0];
 my $firstChange = $ARGV[1];
@@ -36,9 +38,9 @@ while (<INPUTFILE>) {
         $numberOfPages++;
         $currentPageSize = 0;
         $previousPage = $currentPage;
-        $currentPage = getAttrVal("n", $attrs);
-        my $facs = getAttrVal("facs", $attrs);
-        $facs = $facs ? " facs=\"$facs\"" : "";
+        $currentPage = getAttrVal('n', $attrs);
+        my $facs = getAttrVal('facs', $attrs);
+        $facs = $facs ? " facs=\"$facs\"" : '';
 
         my $cp = isroman($currentPage) ? arabic($currentPage) : $currentPage;
         my $pp = isroman($previousPage) ? arabic($previousPage) : $previousPage;
@@ -48,7 +50,7 @@ while (<INPUTFILE>) {
         }
         if ($seenFirst && isnum($currentPage)) {
             my $newCurrentPage = $currentPage + $offset;
-            if ($useRoman eq "R") {
+            if ($useRoman eq 'R') {
                 $newCurrentPage = uc(roman($newCurrentPage));
             }
             print "$before<pb id=pb$newCurrentPage n=$newCurrentPage$facs>";
@@ -72,19 +74,3 @@ print STDERR "NOTE: Total size of pages:   $totalPageSize\n";
 my $averagePageSize = $totalPageSize/$numberOfPages;
 print STDERR "NOTE: Average size of page:  $averagePageSize\n";
 
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
-}

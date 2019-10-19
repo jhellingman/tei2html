@@ -7,9 +7,11 @@
 use strict;
 use warnings;
 
+use SgmlSupport qw/getAttrVal/;
+
 my $inputFile = $ARGV[0];
-my $outputFile = $inputFile . ".out";
-my $notesFile = $inputFile . ".notes";
+my $outputFile = $inputFile . '.out';
+my $notesFile = $inputFile . '.notes';
 
 my $noteNumber = 0;
 my $seqNumber = 0;
@@ -42,23 +44,23 @@ while (<INPUTFILE>) {
         $remainder = $';
         my $noteText = '';
 
-        $noteNumber = getAttrVal("n", $attributes);
-        my $notePlace = getAttrVal("place", $attributes);
-        my $sameAs = getAttrVal("sameAs", $attributes);
-        my $id = getAttrVal("id", $attributes);
+        $noteNumber = getAttrVal('n', $attributes);
+        my $notePlace = getAttrVal('place', $attributes);
+        my $sameAs = getAttrVal('sameAs', $attributes);
+        my $id = getAttrVal('id', $attributes);
 
         print OUTPUTFILE $beforeNote;
 
         # match the last <pb> tag before the note
         if ($beforeNote =~ /.*<(pb\b.*?)>/) {
             my $tag = $1;
-            $pageNumber = getAttrVal("n", $tag);
+            $pageNumber = getAttrVal('n', $tag);
         }
 
         # Find the end of the note
         my $nestingLevel = 0;
         my $endFound = 0;
-        my $followingSpace = "";
+        my $followingSpace = '';
         while ($endFound == 0) {
             if ($remainder =~ m/<(\/?note)\b(.*?)>([ ]*)/) {
                 my $beforeTag = $`;
@@ -67,12 +69,12 @@ while (<INPUTFILE>) {
                 $followingSpace = $3;
                 $remainder = $';
 
-                if ($noteTag eq "note") {
+                if ($noteTag eq 'note') {
                     $nestingLevel++;
-                    $noteText .= $beforeTag . " ((";
-                    my $innerNoteNumber = getAttrVal("n", $innerAttributes);
+                    $noteText .= $beforeTag . ' ((';
+                    my $innerNoteNumber = getAttrVal('n', $innerAttributes);
                     print "WARNING: Nested note $innerNoteNumber on page $pageNumber rendered in-line (check for '((')\n";
-                } elsif ($noteTag eq "\/note") {
+                } elsif ($noteTag eq '/note') {
                     if ($nestingLevel == 0) {
                         $endFound = 1;
                         $noteText .= $beforeTag;
@@ -87,14 +89,14 @@ while (<INPUTFILE>) {
             }
         }
 
-        if ($noteText =~ /^\W*$/ and $sameAs eq "") {
+        if ($noteText =~ /^\W*$/ and $sameAs eq '') {
             print "WARNING: (almost) empty note '$noteText' on page $pageNumber (n=$noteNumber)\n";
         }
 
         if ($sameAs ne "") {
             # Lookup sequence number of original note.
             print OUTPUTFILE "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
-        } elsif ($notePlace eq "margin" || $notePlace eq "left" || $notePlace eq "right") {
+        } elsif ($notePlace eq 'margin' || $notePlace eq 'left' || $notePlace eq 'right') {
             print OUTPUTFILE "[$noteText] ";
         } else {
             $seqNumber++;
@@ -111,23 +113,8 @@ while (<INPUTFILE>) {
     # match the last <pb> tag after the note (or on the line if there is no note).
     if ($remainder =~ /.*<(pb.*?)>/) {
         my $tag = $1;
-        $pageNumber = getAttrVal("n", $tag);
+        $pageNumber = getAttrVal('n', $tag);
     }
 
     print OUTPUTFILE $remainder;
 }
-
-
-sub getAttrVal {
-    my $attrName = shift;
-    my $attrs = shift;
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        return $1;
-    }
-    if ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        return $1;
-    }
-    return '';
-}
-

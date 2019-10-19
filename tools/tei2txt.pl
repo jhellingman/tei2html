@@ -21,15 +21,15 @@ if ($useUnicode == 1) {
     use open ':utf8';
 }
 
-my $italicStart = "_";
-my $italicEnd = "_";
+my $italicStart = '_';
+my $italicEnd = '_';
 
 if ($useItalics == 1) {
-    $italicStart = "_";
-    $italicEnd = "_";
+    $italicStart = '_';
+    $italicEnd = '_';
 } else {
-    $italicStart = "";
-    $italicEnd = "";
+    $italicStart = '';
+    $italicEnd = '';
 }
 
 
@@ -44,24 +44,24 @@ if ($useItalics == 1) {
 
 my $borderStyle = 0;
 
-my @borderTopLeft       = ("",      "+=",   "==",   "/=",   "",     "");
-my @borderTopLine       = ("",      "=",    "=",    "=",    "=",    "=");
-my @borderTopCross      = ("",      "=+=",  "===",  "===",  "===",  "===");
-my @borderTopRight      = ("",      "=+",   "==",   "=\\",  "",     "");
+my @borderTopLeft       = ('',      '+=',   '==',   '/=',   '',     '');
+my @borderTopLine       = ('',      '=',    '=',    '=',    '=',    '=');
+my @borderTopCross      = ('',      '=+=',  '===',  '===',  '===',  '===');
+my @borderTopRight      = ('',      '=+',   '==',   '=\\',  '',     '');
 
-my @borderLeft          = ("",      "| ",   "| ",   "| ",   "",     "");
-my @borderLeftCross     = ("",      "+-",   "|-",   "|-",   "",     "");
-my @borderRight         = ("",      " |",   " |",   " |",   "",     "");
-my @borderRightCross    = ("",      "-+",   "-|",   "-|",   "",     "");
+my @borderLeft          = ('',      '| ',   '| ',   '| ',   '',     '');
+my @borderLeftCross     = ('',      '+-',   '|-',   '|-',   '',     '');
+my @borderRight         = ('',      ' |',   ' |',   ' |',   '',     '');
+my @borderRightCross    = ('',      '-+',   '-|',   '-|',   '',     '');
 
-my @innerVertical       = ("   ",   " | ",  " | ",  " | ",  "   ",  " | ");
-my @innerCross          = ("   ",   "-+-",  "-+-",  "-+-",  "   ",  "-+-");
-my @innerHorizontal     = ("",      "-",    "-",    "-",    "",     "-");
+my @innerVertical       = ('   ',   ' | ',  ' | ',  ' | ',  '   ',  ' | ');
+my @innerCross          = ('   ',   '-+-',  '-+-',  '-+-',  '   ',  '-+-');
+my @innerHorizontal     = ('',      '-',    '-',    '-',    '',     '-');
 
-my @borderBottomLeft    = ("",      "+=",   "==",   "\\=",  "",     "");
-my @borderBottomLine    = ("",      "=",    "=",    "=",    "=",    "=");
-my @borderBottomCross   = ("",      "=+=",  "===",  "===",  "===",  "===");
-my @borderBottomRight   = ("",      "=+",   "==",   "=/",   "",     "");
+my @borderBottomLeft    = ('',      '+=',   '==',   '\\=',  '',     '');
+my @borderBottomLine    = ('',      '=',    '=',    '=',    '=',    '=');
+my @borderBottomCross   = ('',      '=+=',  '===',  '===',  '===',  '===');
+my @borderBottomRight   = ('',      '=+',   '==',   '=/',   '',     '');
 
 
 #
@@ -104,8 +104,8 @@ while (<>) {
     # generate part headings
     if ($line =~ /<(div0.*?)>/) {
         my $tag = $1;
-        my $partNumber = getAttrVal("n", $tag);
-        if ($partNumber ne "") {
+        my $partNumber = getAttrVal('n', $tag);
+        if ($partNumber ne '') {
             print "\nPART $partNumber\n";
         }
     }
@@ -113,8 +113,8 @@ while (<>) {
     # generate chapter headings
     if ($line =~ /<(div1.*?)>/) {
         my $tag = $1;
-        my $chapterNumber = getAttrVal("n", $tag);
-        if ($chapterNumber ne "") {
+        my $chapterNumber = getAttrVal('n', $tag);
+        if ($chapterNumber ne '') {
             print "\nCHAPTER $chapterNumber\n";
         }
     }
@@ -122,8 +122,8 @@ while (<>) {
     # generate section headings
     if ($line =~ /<(div2.*?)>/) {
         my $tag = $1;
-        my $sectionNumber = getAttrVal("n", $tag);
-        if ($sectionNumber ne "") {
+        my $sectionNumber = getAttrVal('n', $tag);
+        if ($sectionNumber ne '') {
             print "\nSECTION $sectionNumber\n";
         }
     }
@@ -131,7 +131,7 @@ while (<>) {
     # generate figure headings
     if ($line =~ /<(figure.*?)>/) {
         my $tag = $1;
-        my $figureNumber = getAttrVal("n", $tag);
+        my $figureNumber = getAttrVal('n', $tag);
         print "\n------\nFIGURE $figureNumber\n";
     }
     if ($line =~ /<\/figure>/) {
@@ -188,7 +188,7 @@ sub handleLine($) {
         my $remainder = $';
         my $spaces = $1;
         my $attrs = $2;
-        my $number = getAttrVal("n", $attrs);
+        my $number = getAttrVal('n', $attrs);
         if (defined $number) {
             my $need = length($spaces) - length($number);
             $need = $need < 1 ? 1 : $need;
@@ -206,7 +206,7 @@ sub handleLine($) {
     # warn for entities that slipped through.
     if ($line =~ /\&([a-zA-Z0-9._-]+);/) {
         my $ent = $1;
-        if (!($ent eq "gt" || $ent eq "lt" || $ent eq "amp")) {
+        if (!($ent eq 'gt' || $ent eq 'lt' || $ent eq 'amp')) {
             print "\n[**ERROR: Contains unhandled entity &$ent;]\n";
         }
     }
@@ -226,9 +226,9 @@ sub handleLine($) {
 
 sub spaces($) {
     my $n = shift;
-    my $result = "";
+    my $result = '';
     for (my $i = 0; $i < $n; $i++) {
-        $result .= " ";
+        $result .= ' ';
     }
     return $result;
 }
@@ -236,9 +236,9 @@ sub spaces($) {
 
 sub noBreakSpaces($) {
     my $n = shift;
-    my $result = "";
+    my $result = '';
     for (my $i = 0; $i < $n; $i++) {
-        $result .= " ";
+        $result .= ' ';
     }
     return $result;
 }
@@ -247,13 +247,13 @@ sub noBreakSpaces($) {
 sub handleHighlighted($) {
     my $remainder = shift;
 
-    my $result = "";
+    my $result = '';
     while ($remainder =~ /<hi(.*?)>(.*?)<\/hi>/) {
         my $attrs = $1;
-        my $rend = getAttrVal("rend", $attrs);
-        if ($rend eq "sup") {
+        my $rend = getAttrVal('rend', $attrs);
+        if ($rend eq 'sup') {
             $result .= $` . $2;
-        } elsif ($rend eq "sc" || $rend eq "expanded") {
+        } elsif ($rend eq 'sc' || $rend eq 'expanded') {
             $result .= $` . $2;
         } else {
             $result .= $` . $italicStart . $2 . $italicEnd;
@@ -269,7 +269,7 @@ my %mapIdToContent;
 sub handleSegments($) {
     my $remainder = shift;
 
-    my $result = "";
+    my $result = '';
     while ($remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
         my $before = $`;
         my $attrs = $1;
@@ -278,13 +278,14 @@ sub handleSegments($) {
         
         $result .= $before;
 
-        my $id = getAttrVal("id", $attrs);
-        my $copyOf = getAttrVal("copyOf", $attrs);
-        if ($id ne "") {
+        my $id = getAttrVal('id', $attrs);
+        my $copyOf = getAttrVal('copyOf', $attrs);
+        if ($id ne '') {
+            print STDERR "DEBUG: adding $id=$content.\n";
             $mapIdToContent{$id} = $content;
             $result .= $content;
-        } elsif ($copyOf ne "") {
-            if (not $mapIdToContent{$copyOf}) {
+        } elsif ($copyOf ne '') {
+            if (!defined $mapIdToContent{$copyOf}) {
                 print STDERR "ERROR: <seg id=$copyOf> not found.\n";
                 $result .= $content;
             }
@@ -301,7 +302,7 @@ sub handleSegments($) {
 
 sub useDittoMarks($) {
     my $string = shift;
-    my $result = "";
+    my $result = '';
     $string = handleLine($string);
 
     my @words = split(/(\s+)/, $string);
@@ -390,11 +391,11 @@ sub handleRow($) {
         if ($i % 2 == 0) {
             push @cells, $item;
         } else {
-            my $cols = getAttrVal("cols", $item);
-            my $rows = getAttrVal("rows", $item);
+            my $cols = getAttrVal('cols', $item);
+            my $rows = getAttrVal('rows', $item);
 
-            $cols = $cols eq "" ? 1 : $cols;
-            $rows = $rows eq "" ? 1 : $rows;
+            $cols = $cols eq '' ? 1 : $cols;
+            $rows = $rows eq '' ? 1 : $rows;
 
             push @colSpans, $cols;
             push @rowSpans, $rows;
@@ -545,9 +546,9 @@ sub sizeTableColumns($@) {
 
             for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
-                if ($line eq "") {
+                if ($line eq '') {
                     # Handle empty lines directly.
-                    push (@newCell, "");
+                    push (@newCell, '');
                 } else {
                     my $wrappedLine = wrapLine($line, $finalColumnWidths[$j]);
                     push (@newCell, split("\n", $wrappedLine));
@@ -662,7 +663,7 @@ sub wrapLine($$) {
 
     my @words = split(/\s+/, $line);
 
-    my $result = "";
+    my $result = '';
     my $currentLength = 0;
     foreach my $word (@words) {
         my $wordLength = length ($word);
@@ -680,7 +681,7 @@ sub wrapLine($$) {
         } else {
             if ($currentLength != 0) {
                 $currentLength++;
-                $result .= " ";
+                $result .= ' ';
             }
             $currentLength += $wordLength;
         }
@@ -702,7 +703,7 @@ sub wrapLine($$) {
 sub repeat($$) {
     my $char = shift;
     my $count = shift;
-    my $result = "";
+    my $result = '';
     for (my $j = 0; $j < $count; $j++) {
         $result .= $char;
     }
@@ -818,8 +819,8 @@ sub handleIntra() {
             if (length($topLine . $topPhrase) > $pageWidth) {
                 print restoreFootnoteMarkers($topLine) . "\n";
                 print restoreFootnoteMarkers($bottomLine) . "\n\n";
-                $topLine = "";
-                $bottomLine = "";
+                $topLine = '';
+                $bottomLine = '';
             }
 
             $topLine .= $topPhrase;
@@ -829,8 +830,8 @@ sub handleIntra() {
             if (length($topLine . $n) > $pageWidth) {
                 print restoreFootnoteMarkers($topLine) . "\n";
                 print restoreFootnoteMarkers($bottomLine) . "\n\n";
-                $topLine = "";
-                $bottomLine = "";
+                $topLine = '';
+                $bottomLine = '';
                 $n = ltrim($n);
                 $nWidth = length($n);
             }

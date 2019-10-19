@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use Data::Dumper;
+use SgmlSupport qw/getAttrVal/;
 
 main();
 
@@ -10,15 +11,15 @@ my $pageNumber = 0;
 
 sub main() {
 
-    my $page = "";
+    my $page = '';
 
     while (<>) {
         my $line = $_;
         $page .= $line;
         if ($line =~ /<pb\b(.*?)>/) {
-            $pageNumber = getAttrVal("n", $1);
+            $pageNumber = getAttrVal('n', $1);
             handlePage($page);
-            $page = "";
+            $page = '';
         }
     }
     handlePage($page);
@@ -71,18 +72,4 @@ sub natatime ($@) {
     return sub {
         return splice @list, 0, $n;
     }
-}
-
-
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }

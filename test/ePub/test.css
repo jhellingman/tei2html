@@ -403,13 +403,13 @@ td.innerContainer {
  font-size: 80%;
 }
 
-.indextoc {
+.indexToc {
  text-align: center;
 }
 
  
 
-.transcribernote {
+.transcriberNote {
  background-color: #DDE;
  border: black 1px dotted;
  color: #000;
@@ -424,7 +424,7 @@ td.innerContainer {
  color: red;
 }
 
-.correctiontable {
+.correctionTable {
  width: 75%;
 }
 
@@ -471,11 +471,12 @@ ul {
  margin-left: 0;
 }
 
-li.numberedItem, td.numberedItem {
+.numberedItem {
  text-indent: -3em;
+ margin-left: 3em;
 }
 
-li span.itemNumber {
+.numberedItem .itemNumber {
  float: left;
  position: relative;
  left: -3.5em;

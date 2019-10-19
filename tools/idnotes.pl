@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
 my $pageNumber = 0;
@@ -21,7 +22,7 @@ while (<INPUTFILE>) {
 
         idNotes($before, $pageNumber);
         $appNoteNumber = 0;
-        $pageNumber = getAttrVal("n", $pbAttrs);
+        $pageNumber = getAttrVal('n', $pbAttrs);
         print $pbTag;
     }
     idNotes($remainder, $pageNumber);
@@ -37,11 +38,11 @@ sub idNotes($$) {
         my $noteAttrs = $2;
         $remainder = $';
 
-        my $noteNumber = getAttrVal("n", $noteAttrs);
-        my $notePlace = getAttrVal("place", $noteAttrs);
-        my $noteId = getAttrVal("id", $noteAttrs);
-        my $noteLang = getAttrVal("lang", $noteAttrs);
-        my $noteLangAttr = $noteLang ne "" ? " lang=\"$noteLang\"" : "";
+        my $noteNumber = getAttrVal('n', $noteAttrs);
+        my $notePlace = getAttrVal('place', $noteAttrs);
+        my $noteId = getAttrVal('id', $noteAttrs);
+        my $noteLang = getAttrVal('lang', $noteAttrs);
+        my $noteLangAttr = $noteLang ne '' ? " lang=\"$noteLang\"" : '';
         my $newNoteTag = $noteTag;
         if ($noteNumber =~ m/([0-9]+|[A-Z])/ and $noteId eq '' and ($notePlace eq '' or $notePlace eq 'foot')) {
             $newNoteTag = "<note n=$noteNumber id=n$pageNumber.$noteNumber$noteLangAttr>";
@@ -56,21 +57,4 @@ sub idNotes($$) {
         print $newNoteTag;
     }
     print $remainder;
-}
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*([\w-]+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }

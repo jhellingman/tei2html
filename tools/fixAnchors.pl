@@ -4,7 +4,9 @@
 
 use strict;
 use warnings;
-use Roman;          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+
+use Roman;                          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile   = $ARGV[0];
 my $currentPage = 0;
@@ -26,7 +28,7 @@ while (<INPUTFILE>) {
         handleAnchors($before);
         print "<pb$1>";
         $currentAnchor = 1;
-        $currentPage = getAttrVal("n", $attrs);
+        $currentPage = getAttrVal('n', $attrs);
         $currentPage = isroman($currentPage) ? arabic($currentPage) : $currentPage;
     }
     handleAnchors($remainder);
@@ -56,21 +58,4 @@ sub handleAnchors($) {
 sub isnum($) {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
-}
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }

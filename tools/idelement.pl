@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
 my $pageNumber = 0;
@@ -21,7 +22,7 @@ while (<INPUTFILE>) {
 
         idElement($before, $pageNumber);
         $lgNumber = 0;
-        $pageNumber = getAttrVal("n", $pbAttrs);
+        $pageNumber = getAttrVal('n', $pbAttrs);
         print $pbTag;
     }
     idElement($remainder, $pageNumber);
@@ -37,7 +38,7 @@ sub idElement($$) {
         my $attrs = $2;
         $remainder = $';
 
-        my $id = getAttrVal("id", $attrs);
+        my $id = getAttrVal('id', $attrs);
         my $newTag = $tag;
         if ($id eq '') {
             $lgNumber++;
@@ -49,21 +50,4 @@ sub idElement($$) {
         print $newTag;
     }
     print $remainder;
-}
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*([\w-]+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }

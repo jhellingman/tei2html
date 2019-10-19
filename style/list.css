@@ -7,11 +7,12 @@ ul {
     margin-left: 0;
 }
 
-li.numberedItem, td.numberedItem {
+.numberedItem {
     text-indent: -3em;
+    margin-left: 3em;
 }
 
-li span.itemNumber {
+.numberedItem .itemNumber {
     float: left;
     position: relative;
     left: -3.5em;

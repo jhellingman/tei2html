@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use SgmlSupport qw/getAttrVal/;
 
 if (!defined $ARGV[0]) {
     die "Usage: intralinear.pl -x <filename>"
@@ -17,7 +18,7 @@ sub main {
 
     print "\n\n<!-- DO NOT EDIT: DERIVED FILE!!! -->\n\n\n";
 
-    my @langs = ( "xx", "en" );
+    my @langs = ( 'xx', 'en' );
     my $mode = 0;
 
     while (<INPUTFILE>) {
@@ -25,16 +26,16 @@ sub main {
 
         if ($line =~ m/<INTRA(.*?)>/) {
             my $attrs = $1;
-            my $langs = getAttrVal("langs", $attrs);
+            my $langs = getAttrVal('langs', $attrs);
             if ($langs ne '') {
                 @langs = split(' ', $langs);
             }
-            $line = "";
+            $line = '';
             $mode = 1;
         }
 
         if ($line =~ m/<\/INTRA>/) {
-            $line = "";
+            $line = '';
             $mode = 0;
         }
 
@@ -46,19 +47,4 @@ sub main {
 
         print $line;
     }
-}
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        return $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        return $1;
-    }
-    return '';
 }

@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
 open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
@@ -15,7 +16,7 @@ while (<INPUTFILE>) {
     while ($remainder =~ m/<(.*?)>/) {
         my $tag = $1;
         $remainder = $';
-        my $href = getAttrVal("href", $tag);
+        my $href = getAttrVal('href', $tag);
 
         if ($href =~ m/^#([a-z][a-z0-9._-]*)$/i) {
             my $ref = $1;
@@ -24,7 +25,7 @@ while (<INPUTFILE>) {
 
         # Handle IDs referenced in in-line CSS.
         if ($tag =~ m/^style\b/i) {
-            my $css = "";
+            my $css = '';
 
             # parse CSS rules for ID selectors until </style>
             while (<INPUTFILE>) {
@@ -52,14 +53,14 @@ open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
 # Remove all unused IDs.
 while (<INPUTFILE>) {
     my $remainder = $_;
-    my $output = "";
+    my $output = '';
     while ($remainder =~ m/<(.*?)>/) {
         $output .= $`;
         my $tag = $1;
         $remainder = $';
-        my $id = getAttrVal("id", $tag);
+        my $id = getAttrVal('id', $tag);
 
-        if ($id ne "") {
+        if ($id ne '') {
             if (!$refHash{$id}) {
                 $tag =~ s/id=\"$id\"//;
             }
@@ -95,20 +96,3 @@ while (<INPUTFILE>) {
 }
 
 close INPUTFILE;
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
-}

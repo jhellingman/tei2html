@@ -207,8 +207,8 @@ sub heatMapTag($$) {
     } else {
         $tag =~ /^([a-zA-Z0-9_.-]+)/;
         my $element = $1;
-        my $lang = getAttrVal("lang", $tag);
-        if ($lang ne "") {
+        my $lang = getAttrVal('lang', $tag);
+        if ($lang ne '') {
             pushLang($element, $lang);
         } else {
             pushLang($element, getLang());
@@ -282,17 +282,17 @@ sub heatMapWord($$$$) {
 sub lookupHeatMapClass($) {
     my $count = shift;
     if ($count < 2) {
-        return "q5";
+        return 'q5';
     } elsif ($count < 3) {
-        return "q4";
+        return 'q4';
     } elsif ($count < 5) {
-        return "q3";
+        return 'q3';
     } elsif ($count < 8) {
-        return "q2";
+        return 'q2';
     } elsif ($count < 100) {
-        return "q1";
+        return 'q1';
     } else {
-        return "";
+        return '';
     }
 }
 
@@ -478,12 +478,12 @@ sub reportLanguageWordsXML($) {
 
     loadDictionary($language);
 
-    my $previousKey = "";
+    my $previousKey = '';
     foreach my $item (@wordList) {
         my ($key, $word) = split(/!/, $item, 2);
 
-        if ($key ne $previousKey)  {
-            if ($previousKey ne "") {
+        if ($key ne $previousKey) {
+            if ($previousKey ne '') {
                 print USAGEFILE "</wordGroup>\n";
             }
             print USAGEFILE "<wordGroup>";
@@ -497,7 +497,7 @@ sub reportLanguageWordsXML($) {
         $previousKey = $key;
     }
 
-    if ($previousKey ne "") {
+    if ($previousKey ne '') {
         print USAGEFILE "</wordGroup>\n";
     }
 
@@ -716,7 +716,7 @@ sub reportWord($$) {
         $unknownTotalWords += $count;
     }
 
-    my $goodOrBad = defined $badWordsHash{$word} ? "bw" : defined $goodWordsHash{$word} ? "gw" : "";
+    my $goodOrBad = defined $badWordsHash{$word} ? 'bw' : defined $goodWordsHash{$word} ? 'gw' : '';
 
     # Make SHY character visible
     my $unShyWord = $word;
@@ -825,7 +825,7 @@ sub reportNonWords() {
     foreach my $item (@nonWordList) {
         $item =~ s/\0/[NULL]/g;
 
-        if ($item ne "") {
+        if ($item ne '') {
             my $count = $nonWordHash{$item};
             my $length = length($item);
             $item =~ s/ /\&nbsp;/g;
@@ -848,7 +848,7 @@ sub reportNonWordsXML() {
     foreach my $item (@nonWordList) {
         $item =~ s/\0/[NULL]/g;
 
-        if ($item ne "") {
+        if ($item ne '') {
             my $count = $nonWordHash{$item};
             $item =~ s/\&/\&amp;/g;
             $item =~ s/</\&lt;/g;
@@ -941,10 +941,10 @@ sub reportCompositeCharsXML() {
         foreach my $compositeChar (@compositeCharList) {
             my $count = $compositeCharHash{$compositeChar};
 
-            my $ords = "";
+            my $ords = '';
             my @chars = split(//, $compositeChar);
             foreach my $char (@chars) {
-                $ords .= " " . ord($char);
+                $ords .= ' ' . ord($char);
             }
             $compositeChar =~ s/\0/[NULL]/g;
             print USAGEFILE "<composite-character codes=\"$ords\" count=\"$count\">$compositeChar</composite-character>\n";
@@ -962,7 +962,7 @@ sub reportNumbers() {
     print "<h2>Number Frequencies</h2>\n";
     @numberList = sort { $a <=> $b } @numberList;
 
-    print "<p>";
+    print '<p>';
     foreach my $number (@numberList) {
         my $count = $numberHash{$number};
         if ($count > 1) {
@@ -1106,26 +1106,26 @@ sub handleTag($$) {
         $tag =~ /^([a-zA-Z0-9_.-]+)/;
         my $element = $1;
         $tagHash{$element}++;
-        if ($element eq "pb") {
-            my $n = getAttrVal("n", $tag);
+        if ($element eq 'pb') {
+            my $n = getAttrVal('n', $tag);
             push @pageList, $n;
             $pageCount++;
         }
-        my $rend = getAttrVal("rend", $tag);
-        if ($rend ne "") {
+        my $rend = getAttrVal('rend', $tag);
+        if ($rend ne '') {
             $rendHash{$rend}++;
         }
     } else {
         $tag =~ /^([a-zA-Z0-9_.-]+)/;
         my $element = $1;
-        my $lang = getAttrVal("lang", $tag);
-        if ($lang ne "") {
+        my $lang = getAttrVal('lang', $tag);
+        if ($lang ne '') {
             pushLang($element, $lang);
         } else {
             pushLang($element, getLang());
         }
-        my $rend = getAttrVal("rend", $tag);
-        if ($rend ne "") {
+        my $rend = getAttrVal('rend', $tag);
+        if ($rend ne '') {
             $rendHash{$rend}++;
         }
     }
@@ -1142,25 +1142,25 @@ sub handleFragment($) {
 
     my $lang = getLang();
 
-    my $prevWord = "";
+    my $prevWord = '';
 
     # NOTE: we don't use \w and \W here, since it gives some unexpected results.
     # Character codes: 2032 = prime; 00AD = soft hyphen.
     my @words = split(/([^\x{2032}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
     foreach my $word (@words) {
-        if ($word ne "") {
+        if ($word ne '') {
             if ($word =~ /^[^\x{2032}\x{00AD}`\pL\pN\pM*-]+$/) {
                 countNonWord($word);
                 # reset previous word if not separated by more than just some space.
                 if ($word !~ /^[\pZ]+$/) {
-                    $prevWord = "";
+                    $prevWord = '';
                 }
             } elsif ($word =~ /^[0-9]+$/) {
                 countNumber($word);
-                $prevWord = "";
+                $prevWord = '';
             } else {
                 countWord($word, $lang);
-                if ($prevWord ne "") {
+                if ($prevWord ne '') {
                     countPair($prevWord, $word, $lang);
                 }
                 $prevWord = $word;
@@ -1309,7 +1309,7 @@ sub loadScannoFile($) {
 #
 sub loadDictionary($) {
     my $language = shift;
-    if ($language eq "xx") {
+    if ($language eq 'xx') {
         return;
     }
     if (!openDictionary("$language.dic")) {
@@ -1378,7 +1378,7 @@ sub loadGoodBadWords() {
     %goodWordsHash = ();
     %badWordsHash = ();
 
-    if (-e "good_words.txt") {
+    if (-e 'good_words.txt') {
         if (open(GOODWORDSFILE, "<:encoding(iso-8859-1)", "good_words.txt")) {
             my $count = 0;
             while (<GOODWORDSFILE>) {
@@ -1392,7 +1392,7 @@ sub loadGoodBadWords() {
         }
     }
 
-    if (-e "bad_words.txt") {
+    if (-e 'bad_words.txt') {
         if (open(BADWORDSFILE, "<:encoding(iso-8859-1)", "bad_words.txt")) {
             my $count = 0;
             while (<BADWORDSFILE>) {
@@ -1413,25 +1413,25 @@ sub loadGoodBadWords() {
 # printSequence
 #
 sub printSequence() {
-    my $pStart = "SENTINEL";
-    my $pPrevious = "SENTINEL";
-    my $comma = "";
+    my $pStart = 'SENTINEL';
+    my $pPrevious = 'SENTINEL';
+    my $comma = '';
     foreach my $pCurrent (@pageList) {
-        if ($pCurrent eq "") {
-            $pCurrent = "N/A";
+        if ($pCurrent eq '') {
+            $pCurrent = 'N/A';
         }
         if ($pCurrent =~ /n$/) {
             # ignore page-break in footnote.
         } else {
             if (!isInSequence($pPrevious, $pCurrent)) {
-                if ($pStart eq "SENTINEL") {
+                if ($pStart eq 'SENTINEL') {
                     # No range yet
                 } elsif ($pStart eq $pPrevious) {
                     print "$comma$pStart";
-                    $comma = ", ";
+                    $comma = ', ';
                 } else {
                     print "$comma$pStart-$pPrevious";
-                    $comma = ", ";
+                    $comma = ', ';
                 }
                 $pStart = $pCurrent;
             }
@@ -1440,9 +1440,9 @@ sub printSequence() {
     }
 
     # last sequence:
-    if ($pStart eq "SENTINEL") {
+    if ($pStart eq 'SENTINEL') {
         # No range at all
-        print "Empty Sequence."
+        print 'Empty Sequence.'
     } elsif ($pStart eq $pPrevious) {
         print "$comma$pStart.";
     } else {
@@ -1458,7 +1458,7 @@ sub isInSequence($$) {
     my $first = shift;
     my $second = shift;
 
-    if ($first eq "SENTINEL") {
+    if ($first eq 'SENTINEL') {
         return 0;
     }
 

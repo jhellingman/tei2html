@@ -10,10 +10,11 @@
 
 use strict;
 use warnings;
+use SgmlSupport qw/getAttrVal/;
 
 my $inputFile   = $ARGV[0];
 
-my $idPrefix = "v";
+my $idPrefix = 'v';
 my $lineNumber = 0;
 my $addLineNumbers = 0;
 
@@ -48,21 +49,4 @@ while (<INPUTFILE>) {
     } else {
         print $line;
     }
-}
-
-
-#
-# getAttrVal: Get an attribute value from a tag (if the attribute is present)
-#
-sub getAttrVal($$) {
-    my $attrName = shift;
-    my $attrs = shift;
-    my $attrVal = "";
-
-    if ($attrs =~ /$attrName\s*=\s*([\w.]+)/i) {
-        $attrVal = $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
-        $attrVal = $1;
-    }
-    return $attrVal;
 }
