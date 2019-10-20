@@ -665,7 +665,7 @@ sub extractMetadata($) {
     }
     close(PGFILE);
 
-    if (length($mainTitle) <= 26 && $shortTitle != "") {
+    if (length($mainTitle) <= 26 && $shortTitle ne '') {
         $shortTitle = $mainTitle;
     }
 

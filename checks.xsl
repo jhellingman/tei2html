@@ -593,11 +593,11 @@
             <i:issue pos="{@pos}" code="E06" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No back element!</i:issue>
         </xsl:if>
 
-        <xsl:if test="not(//divGen[@type='toc'] or //div[@id='toc'] or //div1[@id='toc'])">
+        <xsl:if test="not(//divGen[@type = ('toc', 'toca')] or //div[@id = 'toc'] or //div1[@id = 'toc'])">
             <i:issue pos="{@pos}" code="E07" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No table of contents present.</i:issue>
         </xsl:if>
 
-        <xsl:if test="//divGen[@type='toc'] and (//div[@id='toc'] or //div1[@id='toc'])">
+        <xsl:if test="//divGen[@type = ('toc', 'toca')] and (//div[@id = 'toc'] or //div1[@id = 'toc'])">
             <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Both genererated and original ToC present.</i:issue>
         </xsl:if>
 

@@ -42,8 +42,7 @@ body {
     text-indent: 0;
     width: 14%;
     text-align: left;
-    padding: 0.8em;
-    padding-left: 0;
+    padding: 0.8em 0.8em 0.8em 0;
 }
 
 .cut-in-right-note {
@@ -54,8 +53,7 @@ body {
     text-indent: 0;
     width: 14%;
     text-align: right;
-    padding: 0.8em;
-    padding-right: 0;
+    padding: 0.8em 0 0.8em 0.8em;
 }
 
 
@@ -63,6 +61,7 @@ span.tocPageNum, span.flushright {
     position: absolute;
     right: 16%;
     top: auto;
+    text-indent: 0;
 }
 
 /* External Links are decorated with little icons in the HTML version: */

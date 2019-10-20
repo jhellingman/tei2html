@@ -31,18 +31,17 @@ GetOptions(
     'h' => \$makeHtml,
     'd' => \$download);
 
-my $gitRepoLocation = "D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/";
+my $gitRepoLocation = 'D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/';
 
 
 # Counters
 my $totalFiles = 0;
-my $totalPages = 0;
 my $totalWords = 0;
 my $totalBytes = 0;
 
 my %excluded = (
-        "TEI-template-NL", 1,
-        "TEI-template-EN", 1
+        'TEI-template-NL', 1,
+        'TEI-template-EN', 1
     );
 
 
@@ -72,17 +71,14 @@ sub getRepo($) {
 EOF
 
 
-sub listRecursively($);
-sub main();
-
 
 main();
 
 
-sub main() {
-    my $reportFile = "pgreport.txt";
-    my $xmlFile = "pgreport.xml";
-    my $gitFile = "getRepos.pl";
+sub main {
+    my $reportFile = 'pgreport.txt';
+    my $xmlFile = 'pgreport.xml';
+    my $gitFile = 'getRepos.pl';
 
     open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
     open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
@@ -91,7 +87,7 @@ sub main() {
 
     my $directory = $ARGV[0];
     if (! defined $directory) {
-        $directory = ".";
+        $directory = '.';
     }
 
     print XMLFILE "<?xml version=\"1.0\"?>\n";
@@ -119,7 +115,7 @@ sub logTotals() {
 }
 
 
-sub listRecursively($) {
+sub listRecursively {
     my ($directory) = @_;
     my @files = (  );
 
@@ -134,10 +130,11 @@ sub listRecursively($) {
     closedir(DIRECTORY);
 
     foreach my $file (@files) {
-        if (-f "$directory\\$file") {
-            handleFile("$directory\\$file");
-        } elsif (-d "$directory\\$file") {
-            listRecursively("$directory\\$file");
+        my $path = $directory . '/' . $file;
+        if (-f $path) {
+            handleFile($path);
+        } elsif (-d $path) {
+            listRecursively($path);
         }
     }
 }
@@ -188,10 +185,10 @@ sub handleTeiFile($) {
     $totalFiles++;
     $totalBytes += $fileSize;
 
-    my $processScript = $filePath . "process.pl";
+    my $processScript = $filePath . 'process.pl';
     my $specialProcessing = 0;
     if (-e $processScript) {
-        logMessage("Note:       process.pl present; files in this directory may require special processing.");
+        logMessage('Note:       process.pl present; files in this directory may require special processing.');
         $specialProcessing = 1;
     }
 
@@ -250,7 +247,7 @@ sub handleTeiFile($) {
                 logMessage("Title:      $title");
 
                 my $nfcAttr = ' nfc="0"';
-                if ($titleNfc) {
+                if (defined $titleNfc) {
                     $nfcAttr = ' nfc="' . escapeXml($titleNfc) . '"';
                 }
                 print XMLFILE "    <title$nfcAttr>" . escapeXml($title) . "</title>\n";
@@ -319,7 +316,7 @@ sub handleTeiFile($) {
 
                 # Find out whether we have a cover image:
                 my $coverImage = $xpath->find('//figure[@id="cover-image"]')->string_value();
-                if ($coverImage ne "") {
+                if ($coverImage ne '') {
                     my $coverImageRend = $xpath->find('//figure[@id="cover-image"]/@rend')->string_value();
                     if ($coverImageRend =~ /image\((.*?)\)/) {
                         $coverImageFile = $1;
@@ -330,7 +327,7 @@ sub handleTeiFile($) {
 
                 # Find out whether we have a title-page image:
                 my $titlePageImage = $xpath->find('//figure[@id="titlepage-image"]')->string_value();
-                if ($titlePageImage ne "") {
+                if ($titlePageImage ne '') {
                     my $titlePageImageRend = $xpath->find('//figure[@id="titlepage-image"]/@rend')->string_value();
                     if ($titlePageImageRend =~ /image\((.*?)\)/) {
                         $titlePageImageFile = $1;
@@ -433,15 +430,15 @@ sub downloadFromPG($$) {
     my $path = shift;
 
     # Construct destination path:
-    my $destinationPath = $path . "\\Processed";
+    my $destinationPath = $path . '/Processed';
 
-    my $textFile = $pgNum . ".txt";
-    my $text8File = $pgNum . "-8.txt";
-    my $htmlFile = $pgNum . "-h.htm";
+    my $textFile = $pgNum . '.txt';
+    my $text8File = $pgNum . '-8.txt';
+    my $htmlFile = $pgNum . '-h.htm';
 
-    my $textUrl = "http://www.gutenberg.org/files/" . $pgNum . "/" . $textFile;
-    my $text8Url = "http://www.gutenberg.org/files/" . $pgNum . "/" . $text8File;
-    my $htmlUrl = "http://www.gutenberg.org/files/" . $pgNum . "/" . $pgNum . "-h/" . $htmlFile;
+    my $textUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $textFile;
+    my $text8Url = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $text8File;
+    my $htmlUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $pgNum . '-h/' . $htmlFile;
 
     {
         local $CWD = $destinationPath;
@@ -497,7 +494,7 @@ sub logMessage($) {
 
 sub isValid($) {
     my $value = shift;
-    return defined $value && $value ne "" && $value ne "#####";
+    return defined $value && $value ne '' && $value ne '#####';
 }
 
 
@@ -507,9 +504,9 @@ sub formatBytes($) {
     my $mb = (1024 * 1024);
     my $gb = (1024 * 1024 * 1024);
 
-    ($num > $gb) ? return sprintf("%d GB", $num / $gb) :
-    ($num > $mb) ? return sprintf("%d MB", $num / $mb) :
-    ($num > $kb) ? return sprintf("%d KB", $num / $kb) :
+    ($num > $gb) ? return sprintf('%d GB', $num / $gb) :
+    ($num > $mb) ? return sprintf('%d MB', $num / $mb) :
+    ($num > $kb) ? return sprintf('%d KB', $num / $kb) :
     return $num . ' B';
 }
 
