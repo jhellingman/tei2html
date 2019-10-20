@@ -281,7 +281,7 @@ sub makeP5($$) {
 sub makeMetadata($) {
     my $normalizedXmlFilename = shift;
 
-    if ($force != 0 || isNewer($inputFile, 'metadata.xml')) {
+    if ($force != 0 || isNewer($normalizedXmlFilename, 'metadata.xml')) {
         print "Extract metadata to metadata.xml...\n";
         system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
     }
@@ -291,7 +291,7 @@ sub makeMetadata($) {
 sub makeReadme($) {
     my $normalizedXmlFilename = shift;
 
-    if ($force != 0 || isNewer($inputFile, 'README.md')) {
+    if ($force != 0 || isNewer($normalizedXmlFilename, 'README.md')) {
         print "Extract metadata to README.md...\n";
         system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
     }
@@ -471,8 +471,8 @@ sub makeText($$) {
     system ("$jeebies $textFile > $basename.jeebies");
 
     # Check the version in the Processed directory as well.
-    if (-f "Processed\\$textFile") {
-        system ("$gutcheck Processed\\$textFile > $basename-final.gutcheck");
+    if (-f "Processed/$textFile") {
+        system ("$gutcheck Processed/$textFile > $basename-final.gutcheck");
     }
 
     $debug || unlink("$filename.out");
@@ -831,17 +831,17 @@ sub copyImages($) {
     }
 
     # Remove redundant icon images (not used in the ePub)
-    if (-f "epub\\images\\book.png") {
-        system ("del epub\\images\\book.png");
+    if (-f "epub/images/book.png") {
+        system ("rm epub/images/book.png");
     }
-    if (-f "epub\\images\\card.png") {
-        system ("del epub\\images\\card.png");
+    if (-f "epub/images/card.png") {
+        system ("rm epub/images/card.png");
     }
-    if (-f "epub\\images\\external.png") {
-        system ("del epub\\images\\external.png");
+    if (-f "epub/images/external.png") {
+        system ("rm epub/images/external.png");
     }
-    if (-f "epub\\images\\new-cover-tn.jpg") {
-        system ("del epub\\images\\new-cover-tn.jpg");
+    if (-f "epub/images/new-cover-tn.jpg") {
+        system ("rm epub/images/new-cover-tn.jpg");
     }
 }
 
