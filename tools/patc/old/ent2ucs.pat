@@ -288,7 +288,7 @@
 "&hehatafqamats;"	p "&#x05B3;"
 "&hehiriq;"			p "&#x05B4;"
 "&hetsere;"			p "&#x05B5;"
-"&heseqol;"			p "&#x05B6;"
+"&hesegol;"			p "&#x05B6;"
 "&hepatah;"			p "&#x05B7;"
 "&heqamats;"		p "&#x05B8;"
 "&heholam;"			p "&#x05B9;"

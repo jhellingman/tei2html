@@ -46,7 +46,7 @@
 "o:"     p "&hehatafqamats;"    % ֳ
 "i"      p "&hehiriq;"          % ִ
 "E"      p "&hetsere;"          % ֵ
-"e"      p "&heseqol;"          % ֶ
+"e"      p "&hesegol;"          % ֶ
 "a"      p "&hepatah;"          % ַ
 "o"      p "&heqamats;"         % ָ
 "O"      p "&heholam;"          % ֹ
