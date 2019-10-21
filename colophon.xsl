@@ -766,7 +766,7 @@
                                 <xsl:if test="position() != 1">
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
-                                <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
+                                <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-safe-href(.)}">
                                     <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                                 </a>
                             </xsl:for-each>
@@ -801,7 +801,7 @@
                     <xsl:sort select="@target"/>
                     <tr>
                         <td>
-                            <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-href(.)}">
+                            <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-safe-href(.)}">
                                 <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                             </a>
                         </td>
@@ -915,27 +915,7 @@
                             <xsl:if test="position() != 1">
                                 <xsl:text>, </xsl:text>
                             </xsl:if>
-                            <a class="pageref">
-                                <xsl:choose>
-                                    <xsl:when test="f:insideFootnote(.)">
-                                        <xsl:choose>
-                                            <xsl:when test="f:insideChoice(.)">
-                                                <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
-                                                <xsl:attribute name="href" select="f:generate-footnote-href(./ancestor::*[not(f:insideChoice(.))][1])"/>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:when>
-                                    <xsl:when test="f:insideChoice(.)">
-                                        <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
-                                        <xsl:attribute name="href" select="f:generate-href(./ancestor::*[not(f:insideChoice(.))][1])"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:attribute name="href" select="f:generate-href(.)"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                            <a class="pageref" href="{f:generate-safe-href(.)}">
                                 <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
                             </a>
                         </xsl:for-each>

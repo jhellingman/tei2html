@@ -25,6 +25,20 @@
 
 
     <xd:doc>
+        <xd:short>Generate an href attribute savely.</xd:short>
+        <xd:detail>
+            <p>For HTML version, same as basic generate-href.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:generate-safe-href" as="xs:string">
+        <xsl:param name="target" as="element()"/>
+
+        <xsl:value-of select="f:generate-href($target)"/>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Generate a href-attribute.</xd:short>
         <xd:detail>
             <p>href attributes need to point to the correct file and element, depending on whether we generate 

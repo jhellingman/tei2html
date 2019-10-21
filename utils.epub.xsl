@@ -12,8 +12,42 @@
         <xd:short>ePub-specific utility templates and functions, used by tei2epub</xd:short>
         <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2epub only.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2017, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2019, Jeroen Hellingman</xd:copyright>
     </xd:doc>
+
+
+    <xd:doc>
+        <xd:short>Generate an href attribute savely.</xd:short>
+        <xd:detail>
+            <p>This function generates a href to the appropriate file, depening on where in the
+            source file the element references to appears.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:generate-safe-href" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:choose>
+            <xsl:when test="f:insideFootnote($node)">
+                <xsl:choose>
+                    <xsl:when test="f:insideChoice($node)">
+                        <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
+                        <xsl:sequence select="f:generate-footnote-href($node/ancestor::*[not(f:insideChoice(.))][1])"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:sequence select="f:generate-footnote-href($node)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:when test="f:insideChoice($node)">
+                <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
+                <xsl:sequence select="f:generate-href($node/ancestor::*[not(f:insideChoice(.))][1])"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="f:generate-href($node)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
 
 
     <xd:doc>
@@ -55,8 +89,8 @@
         <xsl:variable name="targetfile">
             <xsl:choose>
                 <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
-                <xsl:when test="root($target)//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody']">
-                    <xsl:value-of select="f:determine-filename((root($target)//divGen[@type='Footnotes' or @type='footnotes' or @type='footnotesBody'])[1])"/>
+                <xsl:when test="root($target)//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')]">
+                    <xsl:value-of select="f:determine-filename((root($target)//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')])[1])"/>
                 </xsl:when>
 
                 <!-- Footnotes to div0 elements (i.e., those not in a div1) are in the same fragment as the note itself -->
