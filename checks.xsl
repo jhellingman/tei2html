@@ -1092,13 +1092,26 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '[&mdash;-]&ndash;',                 'Warning', 'P07', 'Em-dash or dash followed by en-dash')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[&ndash;-]&mdash;',                 'Warning', 'P08', 'En-dash or dash followed by em-dash')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '--',                                'Warning', 'P09', 'Two dashes should be en-dash')"/>
+
+        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-punctuation-pattern,    'Warning', 'P10', 'Missing space after punctuation mark')"/>
+
         <xsl:copy-of select="f:should-not-contain(., $segment, '''',                                'Warning', 'P14', 'Straight single quote')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '&quot;',                            'Warning', 'P15', 'Straight double quote')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                 'Warning', 'P16', 'Hash-sign')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                       'Warning', 'P17', 'Unhandled fraction')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[|]',                               'Warning', 'P18', 'Vertical Bar')"/>
 
-        <xsl:copy-of select="f:should-not-contain(., $segment, $space-after-punctuation-pattern,    'Warning', 'P10', 'Missing space after punctuation mark')"/>
+        <xsl:variable name="final-sigma-mid-word-pattern" select="'&#x03C2;\p{L}'" as="xs:string"/>
+        <xsl:variable name="sigma-end-word-pattern" select="'&#x03C3;\P{L}'" as="xs:string"/>
+
+        <xsl:copy-of select="f:should-not-contain(., $segment, $final-sigma-mid-word-pattern,       'Warning', 'P19', 'Final sigma in middle of word')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $sigma-end-word-pattern,             'Warning', 'P20', 'Non-final sigma at end of word')"/>
+
+        <xsl:variable name="final-hebrew-letter-mid-word-pattern" select="'[&#x05DA;&#x05DD;&#x05DF;&#x05E3;&#x05E5;]\p{M}*\p{L}'" as="xs:string"/>  <!-- Final Kaf, Mem, Nun, Pe, Tsadi -->
+        <xsl:variable name="non-final-hebrew-letter-end-word-pattern" select="'[&#x05DB;&#x05DE;&#x05E0;&#x05E4;&#x05E6;]\p{M}*[^\p{L}\p{M}]'" as="xs:string"/>  <!-- Non-final Kaf, Mem, Nun, Pe, Tsadi -->
+
+        <xsl:copy-of select="f:should-not-contain(., $segment, $final-hebrew-letter-mid-word-pattern, 'Warning', 'P21', 'Final Hebrew letter in middle of word')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, $non-final-hebrew-letter-end-word-pattern, 'Warning', 'P22', 'Non-final Hebrew letter at end of word')"/>
 
         <xsl:call-template name="match-punctuation-pairs">
             <xsl:with-param name="string" select="$segment"/>
