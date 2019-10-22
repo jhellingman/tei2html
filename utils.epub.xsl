@@ -25,28 +25,13 @@
     </xd:doc>
 
     <xsl:function name="f:generate-safe-href" as="xs:string">
-        <xsl:param name="node" as="node()"/>
+        <xsl:param name="target" as="node()"/>
 
-        <xsl:choose>
-            <xsl:when test="f:insideFootnote($node)">
-                <xsl:choose>
-                    <xsl:when test="f:insideChoice($node)">
-                        <!-- Typical scenario: non-Latin text with automatically added transliteration in footnote. -->
-                        <xsl:sequence select="f:generate-footnote-href($node/ancestor::*[not(f:insideChoice(.))][1])"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:sequence select="f:generate-footnote-href($node)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:when test="f:insideChoice($node)">
-                <!-- Typical scenario: non-Latin text with automatically added transliteration. -->
-                <xsl:sequence select="f:generate-href($node/ancestor::*[not(f:insideChoice(.))][1])"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:sequence select="f:generate-href($node)"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <!-- When the target is inside a choice element, it may not be rendered in the output: point at the first ancestor not inside the choice. -->
+        <xsl:variable name="target" select="if (f:inside-choice($target)) then $target/ancestor::*[not(f:inside-choice(.))][1] else $target" as="node()"/>
+
+        <!-- When the target is inside a footnote, it may end up in a different file, so some special handling applies. -->
+        <xsl:sequence select="if (f:inside-footnote($target)) then f:generate-footnote-href($target) else f:generate-href($target)"/>
     </xsl:function>
 
 

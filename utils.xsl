@@ -338,6 +338,31 @@
 
 
     <xd:doc>
+        <xd:short>Determine the level of the division (by counting its parents or looking at its name).</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:div-level" as="xs:integer">
+        <xsl:param name="div" as="node()"/>
+
+        <xsl:choose>
+            <xsl:when test="local-name($div) = 'div'">
+                <xsl:choose>
+                    <xsl:when test="$div/ancestor::q">
+                        <xsl:value-of select="count($div/ancestor::div[ancestor::q])"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="count($div/ancestor::div)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="substring(local-name($div), 4)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Get the current UTC-time in a string.</xd:short>
         <xd:detail>
             <p>Get the current UTC-time in a string, format "YYYY-MM-DDThh:mm:ssZ"</p>

@@ -34,7 +34,10 @@
     <xsl:function name="f:generate-safe-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:value-of select="f:generate-href($target)"/>
+        <!-- When the target is inside a choice element, it may not be rendered in the output: point at the first ancestor not inside the choice. -->
+        <xsl:variable name="target" select="if (f:inside-choice($target)) then $target/ancestor::*[not(f:inside-choice(.))][1] else $target" as="node()"/>
+
+        <xsl:sequence select="f:generate-href($target)"/>
     </xsl:function>
 
 

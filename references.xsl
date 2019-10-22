@@ -78,17 +78,7 @@
                 <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
             </xsl:when>
             <xsl:otherwise>
-                <a>
-                    <xsl:choose>
-                        <!-- $target is a footnote or inside footnote -->
-                        <xsl:when test="f:insideFootnote($targetNode)">
-                            <xsl:attribute name="href" select="f:generate-footnote-href($targetNode)"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:attribute name="href" select="f:generate-href($targetNode)"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-
+                <a href="{f:generate-safe-href($targetNode)}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
@@ -126,7 +116,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:insideFootnote" as="xs:boolean">
+    <xsl:function name="f:inside-footnote" as="xs:boolean">
         <xsl:param name="targetNode" as="node()"/>
 
         <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:isFootnote(.)]) then true() else false()"/>
@@ -140,7 +130,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:insideChoice" as="xs:boolean">
+    <xsl:function name="f:inside-choice" as="xs:boolean">
         <xsl:param name="targetNode" as="node()"/>
 
         <xsl:sequence select="if ($targetNode/ancestor::choice) then true() else false()"/>

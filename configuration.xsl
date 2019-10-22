@@ -15,6 +15,7 @@
 
 <xsl:stylesheet version="3.0"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -144,29 +145,30 @@
 
 
     <xd:doc>
+        <xd:short>Combine the file-specific and default configuration into a map for easy access.</xd:short>
+        <xd:detail>
+            <p>Combine the file-specific and default configuration into a map. The configuration file is specified in the variable <code>$configurationFile</code> 
+            (default: <code>tei2html.config</code>).</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:variable name="configuration-map" as="map(xs:string, xs:string)" 
+        select="map:merge(
+                    (f:convert-configuration($default-configuration/tei2html.config), f:convert-configuration($configuration/tei2html.config)),
+                    map{'duplicates' : 'use-last'})"/>
+
+
+    <xd:doc>
         <xd:short>Get a value from the configuration.</xd:short>
         <xd:detail>
-            <p>Get a value from the configuration. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, obtain
+            <p>Get a value from the configuration-map. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, obtain
             the value from the default configuration included in this stylesheet. If that too fails, a message is logged to the console.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:function name="f:getSetting" as="xs:string">
-        <xsl:param name="name" as="xs:string"/>
-
-        <!-- Get the value from the current configuration -->
-        <xsl:variable name="value" select="$configuration/tei2html.config/output[@format=$outputformat]/*[name()=$name]"/>
-        <xsl:variable name="value" select="if ($value) then $value else $configuration/tei2html.config/*[name()=$name]"/>
-
-        <!-- If not found: get the value from the default configuration -->
-        <xsl:variable name="value" select="if ($value) then $value else $default-configuration/tei2html.config/output[@format=$outputformat]/*[name()=$name]"/>
-        <xsl:variable name="value" select="if ($value) then $value else $default-configuration/tei2html.config/*[name()=$name]"/>
-
-        <xsl:if test="not($value)">
-            <xsl:copy-of select="f:logError('Cannot get configuration value: {1}.', ($name))"/>
-        </xsl:if>
-
-        <xsl:sequence select="$value"/>
+        <xsl:param name="key" as="xs:string"/>
+        <xsl:sequence select="if (map:contains($configuration-map, $key)) then map:get($configuration-map, $key) else ''"/>
     </xsl:function>
 
 
@@ -175,10 +177,38 @@
     </xd:doc>
 
     <xsl:function name="f:isSet" as="xs:boolean">
-        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="key" as="xs:string"/>
+        <xsl:sequence select="f:getSetting($key) = 'true'"/>
+    </xsl:function>
 
-        <xsl:variable name="value" select="f:getSetting($name)"/>
-        <xsl:sequence select="if ($value = 'true') then true() else false()"/>
+
+    <xd:doc>
+        <xd:short>Combine configuration into a single map with the currently active values.</xd:short>
+        <xd:detail>
+            <p>Combine the generic and format-specific configuration into a single map, giving the format-specific configuration preference if it is set.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:convert-configuration" as="map(xs:string, xs:string)">
+        <xsl:param name="configuration" as="element()"/>
+
+        <xsl:variable name="base" as="map(xs:string, xs:string)">
+            <xsl:map>
+                <xsl:for-each select="$configuration/*[not(self::output)]">
+                    <xsl:map-entry key="local-name(.)" select="string(.)"/>
+                </xsl:for-each>
+            </xsl:map>
+        </xsl:variable>
+
+        <xsl:variable name="specific" as="map(xs:string, xs:string)">
+            <xsl:map>
+                <xsl:for-each select="$configuration/output[@format=$outputformat]/*">
+                    <xsl:map-entry key="local-name(.)" select="string(.)"/>
+                </xsl:for-each>
+            </xsl:map>
+        </xsl:variable>
+
+        <xsl:sequence select="map:merge(($base, $specific), map{'duplicates' : 'use-last'})"/>
     </xsl:function>
 
 </xsl:stylesheet>

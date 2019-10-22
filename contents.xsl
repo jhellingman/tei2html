@@ -177,23 +177,6 @@
 
 
     <xd:doc>
-        <xd:short>Determine the level of the division (by counting its parents or looking at its name).</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:div-level" as="xs:integer">
-        <xsl:param name="div" as="node()"/>
-        <xsl:choose>
-            <xsl:when test="local-name($div) = 'div'">
-                <xsl:value-of select="count($div/ancestor::div)"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="substring(local-name($div), 4)"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
-
-
-    <xd:doc>
         <xd:short>Lookup a default head based on the division type for an entry in the table of contents.</xd:short>
     </xd:doc>
 

@@ -237,7 +237,7 @@
     <xsl:template match="div">
         <xsl:copy-of select="f:showDebugTags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
-            <xsl:variable name="level" select="f:divLevel(.) + 1"/>
+            <xsl:variable name="level" select="f:div-level(.) + 1"/>
             <div>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -257,7 +257,7 @@
 
 
     <xsl:template match="div/head">
-        <xsl:variable name="level" select="f:divLevel(.)"/>
+        <xsl:variable name="level" select="f:div-level(.)"/>
         <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
 
         <xsl:call-template name="headPicture"/>
@@ -269,19 +269,6 @@
         </xsl:if>
     </xsl:template>
 
-
-    <xsl:function name="f:divLevel" as="xs:integer">
-        <xsl:param name="node" as="node()"/>
-
-        <xsl:choose>
-            <xsl:when test="$node/ancestor::q">
-                <xsl:value-of select="count($node/ancestor::div[ancestor::q])"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="count($node/ancestor::div)"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
 
     <!--====================================================================-->
     <!-- Generic division content handling -->
@@ -315,14 +302,14 @@
 
             <xsl:otherwise>
                 <!-- Wrap heading part and content part of division in separate divs -->
-                <xsl:if test="*[not(f:isBodyContent(.))]">
+                <xsl:if test="*[not(f:is-body-content(.))]">
                     <div class="divHead">
-                        <xsl:apply-templates select="*[not(f:isBodyContent(.))]"/>
+                        <xsl:apply-templates select="*[not(f:is-body-content(.))]"/>
                     </div>
                 </xsl:if>
-                <xsl:if test="*[f:isBodyContent(.)]">
+                <xsl:if test="*[f:is-body-content(.)]">
                     <div class="divBody">
-                        <xsl:apply-templates select="*[f:isBodyContent(.)]"/>
+                        <xsl:apply-templates select="*[f:is-body-content(.)]"/>
                     </div>
                 </xsl:if>
             </xsl:otherwise>
@@ -330,7 +317,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:isBodyContent" as="xs:boolean">
+    <xsl:function name="f:is-body-content" as="xs:boolean">
         <xsl:param name="node"/>
 
         <xsl:sequence select="$node/preceding-sibling::p
@@ -478,7 +465,7 @@
     <xsl:template name="generate-div-class">
         <xsl:param name="div" select="name()"/>
 
-        <xsl:variable name="div" select="if ($div = 'div') then 'div' || f:divLevel(.) + 1 else $div"/>
+        <xsl:variable name="div" select="if ($div = 'div') then 'div' || f:div-level(.) + 1 else $div"/>
 
         <xsl:variable name="class">
             <xsl:value-of select="$div"/><xsl:text> </xsl:text>

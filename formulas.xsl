@@ -212,7 +212,7 @@
 
                 <xsl:if test="$style">
                     <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
-                    <xsl:text>.</xsl:text><xsl:value-of select="f:escapeForCssClassSelector(f:generate-id(.))"/><xsl:text>frml {&lf;</xsl:text>
+                    <xsl:text>.</xsl:text><xsl:value-of select="f:escape-css-selector(f:generate-id(.))"/><xsl:text>frml {&lf;</xsl:text>
                     <xsl:value-of select="$style"/>
                     <xsl:text>&lf;width:</xsl:text><xsl:value-of select="$width"/><xsl:text>;</xsl:text>
                     <xsl:text>&lf;height:</xsl:text><xsl:value-of select="$height"/><xsl:text>;</xsl:text>

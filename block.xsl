@@ -478,7 +478,7 @@
         <xsl:context-item as="element(p)" use="required"/>
         <xsl:variable name="p" select="." as="element(p)"/>
         <xsl:copy-of select="f:logDebug('Splitting paragraph...', ())"/>
-        <xsl:for-each-group select="*|text()" group-adjacent="f:isHtmlParagraphContent(.)">
+        <xsl:for-each-group select="*|text()" group-adjacent="f:is-html-paragraph-content(.)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
                     <xsl:copy-of select="f:logDebug('Paragraph fragment {1}.', (string(position())))"/>
@@ -505,10 +505,10 @@
         <xd:param name="node">The element of which the condition needs to be determined.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:isHtmlParagraphContent" as="xs:boolean">
+    <xsl:function name="f:is-html-paragraph-content" as="xs:boolean">
         <xsl:param name="node"/>
 
-        <xsl:variable name="isHtmlParagraphContent" as="xs:boolean"
+        <xsl:variable name="is-html-paragraph-content" as="xs:boolean"
             select="not(    $node/self::milestone[@unit='theme' or @unit='tb']
                          or $node/self::q
                          or $node/self::letter
@@ -518,8 +518,8 @@
                         )"/>
         <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))
                                                               then name($node)
-                                                              else 'TEXT: ' || substring($node, 1, 10), string($isHtmlParagraphContent)))"/>
-        <xsl:value-of select="$isHtmlParagraphContent"/>
+                                                              else 'TEXT: ' || substring($node, 1, 10), string($is-html-paragraph-content)))"/>
+        <xsl:value-of select="$is-html-paragraph-content"/>
     </xsl:function>
 
 
@@ -766,7 +766,7 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
-                <xsl:value-of select="f:replacedInitial(.)"/>
+                <xsl:value-of select="f:replaced-initial(.)"/>
             </span>
             <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
             <xsl:apply-templates select="node()[position() > 1]"/>
@@ -774,13 +774,13 @@
     </xsl:template>
 
 
-    <xsl:function name="f:replacedInitial" as="xs:string">
+    <xsl:function name="f:replaced-initial" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:value-of select="if (substring($text, 1, 1) = ('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')) then substring($text, 1, 2) else substring($text, 1, 1)"/>
     </xsl:function>
 
-    <xsl:function name="f:removeInitial" as="xs:string">
+    <xsl:function name="f:remove-initial" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:value-of select="if (substring($text, 1, 1) = ('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')) then substring($text, 3) else substring($text, 2)"/>
@@ -792,7 +792,7 @@
 
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'initial-image'), f:replacedInitial(.))"/>
+            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'initial-image'), f:replaced-initial(.))"/>
         </div>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">
@@ -902,7 +902,7 @@
         <xsl:choose>
             <xsl:when test="string-length($paragraph-sofar) = 0 and position() = 1">
                 <xsl:copy-of select="f:logDebug('removing initial letter from: {1}', (.))"/>
-                <xsl:value-of select="f:process-text(f:removeInitial(.))"/>
+                <xsl:value-of select="f:process-text(f:remove-initial(.))"/>
              </xsl:when>
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>
@@ -942,7 +942,7 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>dc initdropcap</xsl:attribute>
-                <xsl:value-of select="f:replacedInitial(.)"/>
+                <xsl:value-of select="f:replaced-initial(.)"/>
             </span>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>

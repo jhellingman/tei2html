@@ -605,7 +605,7 @@
 
     <xsl:template name="corr-href-attribute">
         <xsl:choose>
-            <xsl:when test="f:insideFootnote(.)">
+            <xsl:when test="f:inside-footnote(.)">
                 <xsl:attribute name="href" select="f:generate-footnote-href(.)"/>
             </xsl:when>
             <xsl:otherwise>
