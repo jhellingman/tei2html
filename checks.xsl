@@ -114,7 +114,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:getPage" as="xs:string?">
+    <xsl:function name="f:get-page" as="xs:string?">
         <xsl:param name="node" as="node()"/>
         <xsl:value-of select="($node/preceding::pb[@n]/@n)[last()]"/>
     </xsl:function>
@@ -126,12 +126,12 @@
     </xsl:template>
 
     <xsl:template mode="info" match="titleStmt/title">
-        <i:issue pos="{@pos}" code="A01" category="Metadata" target="{f:generate-id(.)}" level="Info" element="{name(.)}" page="{f:getPage(.)}">Title: <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="A01" category="Metadata" target="{f:generate-id(.)}" level="Info" element="{name(.)}" page="{f:get-page(.)}">Title: <xsl:value-of select="."/>.</i:issue>
         <xsl:apply-templates mode="info"/>
     </xsl:template>
 
     <xsl:template mode="info" match="titleStmt/author">
-        <i:issue pos="{@pos}" code="A02" category="Metadata" target="{f:generate-id(.)}" level="Info" element="{name(.)}" page="{f:getPage(.)}">Author: <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="A02" category="Metadata" target="{f:generate-id(.)}" level="Info" element="{name(.)}" page="{f:get-page(.)}">Author: <xsl:value-of select="."/>.</i:issue>
         <xsl:apply-templates mode="info"/>
     </xsl:template>
 
@@ -257,78 +257,78 @@
     </xd:doc>
 
     <xsl:template mode="checks" match="publicationStmt[not(idno[@type='epub-id'])]">
-        <i:issue pos="{@pos}" code="H01" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No ePub-id present.</i:issue>
+        <i:issue pos="{@pos}" code="H01" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No ePub-id present.</i:issue>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
     <xsl:variable name="guidFormat" select="'^(urn:uuid:([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$'"/>
 
     <xsl:template mode="checks" match="idno[@type='epub-id'][not(matches(., $guidFormat))]">
-        <i:issue pos="{@pos}" code="H02" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+        <i:issue pos="{@pos}" code="H02" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/author[not(@key) and not(. = ('Anonymous', 'Anoniem'))]" priority="1">
-        <i:issue pos="{@pos}" code="H03" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @key attribute present for author <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H03" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @key attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/editor[not(@key)]" priority="1">
-        <i:issue pos="{@pos}" code="H04" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @key attribute present for editor <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H04" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @key attribute present for editor <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/respStmt/name[not(@key)]" priority="1">
-        <i:issue pos="{@pos}" code="H05" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @key attribute present for name <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H05" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @key attribute present for name <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/author[not(@ref) and not(. = ('Anonymous', 'Anoniem'))]" priority="2">
-        <i:issue pos="{@pos}" code="H06" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @ref attribute present for author <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H06" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @ref attribute present for author <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/editor[not(@ref)]" priority="2">
-        <i:issue pos="{@pos}" code="H07" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @ref attribute present for editor <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H07" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @ref attribute present for editor <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/respStmt[resp != 'Transcription']/name[not(@ref)]" priority="2">
-        <i:issue pos="{@pos}" code="H08" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No @ref attribute present for name <xsl:value-of select="."/>.</i:issue>
+        <i:issue pos="{@pos}" code="H08" category="Header" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No @ref attribute present for name <xsl:value-of select="."/>.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:variable name="viafUrlFormat" select="'^https://viaf\.org/viaf/[0-9]+/$'"/>
 
     <xsl:template mode="checks" match="titleStmt/author[@ref and not(matches(@ref, $viafUrlFormat))]">
-        <i:issue pos="{@pos}" code="H09" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on author <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <i:issue pos="{@pos}" code="H09" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on author <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/editor[@ref and not(matches(@ref, $viafUrlFormat))]">
-        <i:issue pos="{@pos}" code="H10" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on editor <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <i:issue pos="{@pos}" code="H10" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on editor <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/respStmt/name[@ref and not(matches(@ref, $viafUrlFormat))]">
-        <i:issue pos="{@pos}" code="H11" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on name <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
+        <i:issue pos="{@pos}" code="H11" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">The @ref attribute &ldquo;<xsl:value-of select="@ref"/>&rdquo; on name <xsl:value-of select="."/> is not a valid viaf.org url.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
 
     <xsl:template match="seg[@copyOf]" mode="checks">
         <xsl:if test="not(//*[@id = current()/@copyOf])">
-            <i:issue pos="{@pos}" code="H12" category="Reference" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">The @copyOf attribute &ldquo;<xsl:value-of select="@copyOf"/>&rdquo; of seg element has no matching @id.</i:issue>
+            <i:issue pos="{@pos}" code="H12" category="Reference" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">The @copyOf attribute &ldquo;<xsl:value-of select="@copyOf"/>&rdquo; of seg element has no matching @id.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template match="ref[@type='noteref']" mode="checks">
-        <i:issue pos="{@pos}" code="H13" category="Reference" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">A ref with @type noteref is better replaced with a note with a @sameAs attribute.</i:issue>
+        <i:issue pos="{@pos}" code="H13" category="Reference" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">A ref with @type noteref is better replaced with a note with a @sameAs attribute.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template match="ditto" mode="checks">
-        <i:issue pos="{@pos}" code="H14" category="Compliance" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">The non-standard ditto element is better replaced with a seg with a @copyOf attribute.</i:issue>
+        <i:issue pos="{@pos}" code="H14" category="Compliance" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">The non-standard ditto element is better replaced with a seg with a @copyOf attribute.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
@@ -338,19 +338,19 @@
         <!-- Sum a currency split over two columns, e.g., dollars and cents, using 1 dollar = 100 cents.
              The cell we match is the dollar amount; the cents are assumed to be in the next cell -->
 
-        <xsl:copy-of select="f:reportNonNumber(.)"/>
-        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
+        <xsl:copy-of select="f:report-non-number(.)"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
 
         <xsl:variable
             name="indicatedSum"
-            select="f:extractNumber(.)
-                    + (f:extractNumber(following-sibling::cell[1]) div 100.0)"/>
+            select="f:extract-number(.)
+                    + (f:extract-number(following-sibling::cell[1]) div 100.0)"/>
         <xsl:variable
             name="calculatedSum"
-            select="f:columnAggregate(., 'sum')
-                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 100.0)"/>
+            select="f:column-aggregate(., 'sum')
+                    + (f:column-aggregate(following-sibling::cell[1], 'sum') div 100.0)"/>
 
-        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+        <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
 
     </xsl:template>
 
@@ -361,22 +361,22 @@
              using 1 pound = 20 shillings or 240 pence. The cell we match is the amount in pounds;
              the shillings and pence are assumed to be in the next two cells. -->
 
-        <xsl:copy-of select="f:reportNonNumber(.)"/>
-        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
-        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[2])"/>
+        <xsl:copy-of select="f:report-non-number(.)"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[2])"/>
 
         <xsl:variable
             name="indicatedSum"
-            select="f:extractNumber(.)
-                    + (f:extractNumber(following-sibling::cell[1]) div 20.0)
-                    + (f:extractNumber(following-sibling::cell[2]) div 240.0)"/>
+            select="f:extract-number(.)
+                    + (f:extract-number(following-sibling::cell[1]) div 20.0)
+                    + (f:extract-number(following-sibling::cell[2]) div 240.0)"/>
         <xsl:variable
             name="calculatedSum"
-            select="f:columnAggregate(., 'sum')
-                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 20.0)
-                    + (f:columnAggregate(following-sibling::cell[2], 'sum') div 240.0)"/>
+            select="f:column-aggregate(., 'sum')
+                    + (f:column-aggregate(following-sibling::cell[1], 'sum') div 20.0)
+                    + (f:column-aggregate(following-sibling::cell[2], 'sum') div 240.0)"/>
 
-        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+        <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
 
     </xsl:template>
 
@@ -387,40 +387,40 @@
              using 1 peso = 8 tomins or 8 * 12 = 96 granos. The cell we match is the amount in pesos;
              the tomins and granos are assumed to be in the next two cells. -->
 
-        <xsl:copy-of select="f:reportNonNumber(.)"/>
-        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[1])"/>
-        <xsl:copy-of select="f:reportNonNumber(following-sibling::cell[2])"/>
+        <xsl:copy-of select="f:report-non-number(.)"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[2])"/>
 
         <xsl:variable
             name="indicatedSum"
-            select="f:extractNumber(.)
-                    + (f:extractNumber(following-sibling::cell[1]) div 8.0)
-                    + (f:extractNumber(following-sibling::cell[2]) div 96.0)"/>
+            select="f:extract-number(.)
+                    + (f:extract-number(following-sibling::cell[1]) div 8.0)
+                    + (f:extract-number(following-sibling::cell[2]) div 96.0)"/>
         <xsl:variable
             name="calculatedSum"
-            select="f:columnAggregate(., 'sum')
-                    + (f:columnAggregate(following-sibling::cell[1], 'sum') div 8.0)
-                    + (f:columnAggregate(following-sibling::cell[2], 'sum') div 96.0)"/>
+            select="f:column-aggregate(., 'sum')
+                    + (f:column-aggregate(following-sibling::cell[1], 'sum') div 8.0)
+                    + (f:column-aggregate(following-sibling::cell[2], 'sum') div 96.0)"/>
 
-        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+        <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
 
     </xsl:template>
 
 
     <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
 
-        <xsl:copy-of select="f:reportNonNumber(.)"/>
-        <xsl:variable name="indicatedSum" select="f:extractNumber(.)"/>
-        <xsl:variable name="calculatedSum" select="f:columnAggregate(., @role)"/>
-        <xsl:copy-of select="f:reportDifference(., $indicatedSum, $calculatedSum)"/>
+        <xsl:copy-of select="f:report-non-number(.)"/>
+        <xsl:variable name="indicatedSum" select="f:extract-number(.)"/>
+        <xsl:variable name="calculatedSum" select="f:column-aggregate(., @role)"/>
+        <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
 
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:function name="f:reportNonNumber">
+    <xsl:function name="f:report-non-number">
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
-        <xsl:if test="not(f:hasNumber($value))">
+        <xsl:if test="not(f:has-number($value))">
             <i:issue
                 pos="{$cell/@pos}"
                 code="T1"
@@ -428,11 +428,11 @@
                 target="{f:generate-id($cell)}"
                 level="Error"
                 element="{name($cell)}"
-                page="{f:getPage($cell)}">The cell contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="$cell/@role"/>, is not recognized as a number.</i:issue>
+                page="{f:get-page($cell)}">The cell contents &ldquo;<xsl:value-of select="$value"/>&rdquo;, marked as a <xsl:value-of select="$cell/@role"/>, is not recognized as a number.</i:issue>
         </xsl:if>
     </xsl:function>
 
-    <xsl:function name="f:reportDifference">
+    <xsl:function name="f:report-difference">
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:param name="first" as="xs:double"/>
         <xsl:param name="second" as="xs:double"/>
@@ -447,12 +447,12 @@
                 target="{f:generate-id($cell)}"
                 level="Warning"
                 element="{name($cell)}"
-                page="{f:getPage($cell)}">Verify value &ldquo;<xsl:value-of select="normalize-space($value)"/>&rdquo;: [<xsl:value-of select="$cell/@role"/>] <xsl:value-of select="$first"/> not equal to <xsl:value-of select="$second"/> (difference: <xsl:value-of select="$first - $second"/>).</i:issue>
+                page="{f:get-page($cell)}">Verify value &ldquo;<xsl:value-of select="normalize-space($value)"/>&rdquo;: [<xsl:value-of select="$cell/@role"/>] <xsl:value-of select="$first"/> not equal to <xsl:value-of select="$second"/> (difference: <xsl:value-of select="$first - $second"/>).</i:issue>
         </xsl:if>
 
     </xsl:function>
 
-    <xsl:function name="f:columnAggregate">
+    <xsl:function name="f:column-aggregate">
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:param name="role" as="xs:string"/>
 
@@ -462,7 +462,7 @@
             then $cell/../../row[not(@role='label' or @role='unit')]/cell[@row &lt; $row][@col = $col][not(@role=$cell/@role)][not(@role='label' or @role='unit')]
             else $cell/../../row[position() &lt; $row][not(@role='label' or @role='unit')]/cell[position() = $col][not(@role=$cell/@role)][not(@role='label' or @role='unit')]"/>
         <xsl:variable name="numbers" as="xs:double*">
-            <xsl:for-each select="$cells"><xsl:sequence select="f:extractNumber(.)"/></xsl:for-each>
+            <xsl:for-each select="$cells"><xsl:sequence select="f:extract-number(.)"/></xsl:for-each>
         </xsl:variable>
         <xsl:value-of select="if ($role='sum')
                               then sum($numbers)
@@ -471,18 +471,18 @@
                                    else f:subtr($numbers)"/>
     </xsl:function>
 
-    <xsl:function name="f:extractNumber" as="xs:double">
+    <xsl:function name="f:extract-number" as="xs:double">
         <xsl:param name="node"/>
         <xsl:variable name="value"><xsl:apply-templates select="$node" mode="removeExtraContent"/></xsl:variable>
-        <xsl:value-of select="f:parseNumber($value)"/>
+        <xsl:value-of select="f:parse-number($value)"/>
     </xsl:function>
 
-    <xsl:function name="f:isNumber" as="xs:boolean">
+    <xsl:function name="f:is-number" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
         <xsl:sequence select="matches($value, f:getSetting('math.numberPattern'))"/>
     </xsl:function>
 
-    <xsl:function name="f:hasNumber" as="xs:boolean">
+    <xsl:function name="f:has-number" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
         <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
         <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
@@ -490,7 +490,7 @@
         <xsl:value-of select="$value castable as xs:double"/>
     </xsl:function>
 
-    <xsl:function name="f:parseNumber" as="xs:double">
+    <xsl:function name="f:parse-number" as="xs:double">
         <xsl:param name="value" as="xs:string"/>
         <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
         <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
@@ -527,12 +527,12 @@
 
     <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD -->
     <xsl:template mode="checks" match="front/pb[not(preceding::titlePage)] | body/pb | back/pb">
-        <i:issue pos="{@pos}" code="T14" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">pb element directly under front, body, or back.</i:issue>
+        <i:issue pos="{@pos}" code="T14" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">pb element directly under front, body, or back.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="text/pb">
-        <i:issue pos="{@pos}" code="T15" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">pb element directly under text.</i:issue>
+        <i:issue pos="{@pos}" code="T15" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">pb element directly under text.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
@@ -546,7 +546,7 @@
             <xsl:variable name="v0" select="if (f:isRoman($n0)) then f:fromRoman($n0) else $n0"/>
 
             <xsl:if test="f:isInteger($v0) and f:isInteger($v1) and ($v1 != $v0 + 1)">
-                <i:issue pos="{@pos}" code="S01" category="Pagebreaks" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue>
+                <i:issue pos="{@pos}" code="S01" category="Pagebreaks" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue>
             </xsl:if>
 
             <xsl:call-template name="sequence-in-order">
@@ -559,14 +559,14 @@
 
     <xsl:template mode="checks" match="note[not(@sameAs)]">
         <xsl:if test="not(.) or . = ''">
-            <i:issue pos="{@pos}" code="S03" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Empty note.</i:issue>
+            <i:issue pos="{@pos}" code="S03" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Empty note.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="note[@sameAs]">
         <xsl:if test=". != ''">
-            <i:issue pos="{@pos}" code="S04" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Note with @sameAs attribute must be empty.</i:issue>
+            <i:issue pos="{@pos}" code="S04" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Note with @sameAs attribute must be empty.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -582,23 +582,23 @@
 
         <!-- Do we have a front, body, and back element? -->
         <xsl:if test="not(front)">
-            <i:issue pos="{@pos}" code="E04" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No front element!</i:issue>
+            <i:issue pos="{@pos}" code="E04" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No front element!</i:issue>
         </xsl:if>
 
         <xsl:if test="not(body)">
-            <i:issue pos="{@pos}" code="E05" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No body element!</i:issue>
+            <i:issue pos="{@pos}" code="E05" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No body element!</i:issue>
         </xsl:if>
 
         <xsl:if test="not(back)">
-            <i:issue pos="{@pos}" code="E06" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No back element!</i:issue>
+            <i:issue pos="{@pos}" code="E06" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No back element!</i:issue>
         </xsl:if>
 
         <xsl:if test="not(//divGen[@type = ('toc', 'toca')] or //div[@id = 'toc'] or //div1[@id = 'toc'])">
-            <i:issue pos="{@pos}" code="E07" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No table of contents present.</i:issue>
+            <i:issue pos="{@pos}" code="E07" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No table of contents present.</i:issue>
         </xsl:if>
 
         <xsl:if test="//divGen[@type = ('toc', 'toca')] and (//div[@id = 'toc'] or //div1[@id = 'toc'])">
-            <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Both genererated and original ToC present.</i:issue>
+            <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Both genererated and original ToC present.</i:issue>
         </xsl:if>
 
     </xsl:template>
@@ -608,7 +608,7 @@
 
     <xsl:template match="*[@id]" mode="doubleIds">
         <xsl:if test="count(key('id', @id)) &gt; 1">
-            <i:issue pos="{@pos}" code="E09" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Same id used more than once.</i:issue>
+            <i:issue pos="{@pos}" code="E09" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Same id used more than once.</i:issue>
         </xsl:if>
     </xsl:template>
 
@@ -620,12 +620,12 @@
     <xsl:template mode="checks" match="front" priority="2">
         <!-- Do we have a cover that will be recognized as such? -->
         <xsl:if test="not(div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']) and not(./div[@type='Cover' and @id='cover']/p/figure[@id='cover-image'])">
-            <i:issue pos="{@pos}" code="E01" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No cover defined (div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']).</i:issue>
+            <i:issue pos="{@pos}" code="E01" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No cover defined (div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']).</i:issue>
         </xsl:if>
 
         <!-- Do we have a title-page that will be recognized as such? -->
         <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']) and not(./div[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
-            <i:issue pos="{@pos}" code="E02" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
+            <i:issue pos="{@pos}" code="E02" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -637,7 +637,7 @@
 
     <xsl:template mode="checks" match="back" priority="2">
         <xsl:if test="not(.//divGen[@type='Colophon'])">
-            <i:issue pos="{@pos}" code="E03" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No generated colophon in backmatter (divGen type="Colophon").</i:issue>
+            <i:issue pos="{@pos}" code="E03" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No generated colophon in backmatter (divGen type="Colophon").</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -670,7 +670,7 @@
     <xsl:variable name="expectedTitlePartTypes" select="'main', 'sub', 'series', 'volume'"/>
 
     <xsl:template mode="checks" match="titlePart[@type and not(@type = $expectedTitlePartTypes)]">
-        <i:issue pos="{@pos}" code="T01" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for titlePart: <xsl:value-of select="@type"/></i:issue>
+        <i:issue pos="{@pos}" code="T01" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for titlePart: <xsl:value-of select="@type"/></i:issue>
     </xsl:template>
 
 
@@ -683,7 +683,7 @@
     </xd:doc>
 
     <xsl:template mode="checks" match="head[@type and not(@type = $expectedHeadTypes)]">
-        <i:issue pos="{@pos}" code="T02" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for head: <xsl:value-of select="@type"/></i:issue>
+        <i:issue pos="{@pos}" code="T02" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for head: <xsl:value-of select="@type"/></i:issue>
     </xsl:template>
 
 
@@ -701,7 +701,7 @@
     <xsl:template mode="checks" match="front/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedFrontDiv1Types)">
-            <i:issue pos="{@pos}" code="T03" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for frontmatter div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T03" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for frontmatter div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -720,7 +720,7 @@
         <xsl:call-template name="check-div-type-present"/>
         <xsl:call-template name="check-id-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv0Types)">
-            <i:issue pos="{@pos}" code="T04" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for body div0: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T04" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for body div0: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -738,7 +738,7 @@
     <xsl:template mode="checks" match="body/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBodyDiv1Types)">
-            <i:issue pos="{@pos}" code="T05" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for body div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T05" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for body div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -756,7 +756,7 @@
     <xsl:template mode="checks" match="back/div1">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedBackDiv1Types)">
-            <i:issue pos="{@pos}" code="T06" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for backmatter div1: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T06" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for backmatter div1: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
 
         <xsl:call-template name="sequence-in-order">
@@ -769,14 +769,14 @@
 
     <xsl:template name="check-div-type-present">
         <xsl:if test="not(@type)">
-            <i:issue pos="{@pos}" code="T07" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No type specified for <xsl:value-of select="name()"/></i:issue>
+            <i:issue pos="{@pos}" code="T07" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No type specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template name="check-id-present">
         <xsl:if test="not(@id)">
-            <i:issue pos="{@pos}" code="T08" category="IDs" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">No id specified for <xsl:value-of select="name()"/></i:issue>
+            <i:issue pos="{@pos}" code="T08" category="IDs" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No id specified for <xsl:value-of select="name()"/></i:issue>
         </xsl:if>
     </xsl:template>
 
@@ -811,7 +811,7 @@
     <xsl:template mode="checks" match="divGen">
         <xsl:call-template name="check-div-type-present"/>
         <xsl:if test="not(@type = $expectedDivGenTypes)">
-            <i:issue pos="{@pos}" code="T09" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for &lt;divGen&gt;: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T09" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for &lt;divGen&gt;: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -820,7 +820,7 @@
     <!-- Do we have a following divGen[@type='apparatus'] for this note? -->
     <xsl:template mode="checks" match="note[@place='apparatus']" priority="1">
         <xsl:if test="not(following::divGen[@type='apparatus'])">
-            <i:issue pos="{@pos}" code="T10" category="Types" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">No &lt;divGen type="apparatus"&gt; following apparatus note.</i:issue>
+            <i:issue pos="{@pos}" code="T10" category="Types" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No &lt;divGen type="apparatus"&gt; following apparatus note.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -837,7 +837,7 @@
 
     <xsl:template mode="checks" match="stage">
         <xsl:if test="@type and not(@type = $expectedStageTypes)">
-            <i:issue pos="{@pos}" code="T11" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for stage instruction: <xsl:value-of select="@type"/></i:issue>
+            <i:issue pos="{@pos}" code="T11" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for stage instruction: <xsl:value-of select="@type"/></i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -852,7 +852,7 @@
     </xd:doc>
 
     <xsl:template mode="checks" match="ab[@type and not(@type = $expectedAbTypes)]">
-        <i:issue pos="{@pos}" code="T12" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for &lt;ab&gt; (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
+        <i:issue pos="{@pos}" code="T12" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for &lt;ab&gt; (arbitrary block) element: <xsl:value-of select="@type"/></i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
@@ -867,7 +867,7 @@
     </xd:doc>
 
     <xsl:template mode="checks" match="abbr[@type and not(@type = $expectedAbbrTypes)]">
-        <i:issue pos="{@pos}" code="T13" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Unexpected type for &lt;abbr&gt; (abbreviation) element: <xsl:value-of select="@type"/></i:issue>
+        <i:issue pos="{@pos}" code="T13" category="Types" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Unexpected type for &lt;abbr&gt; (abbreviation) element: <xsl:value-of select="@type"/></i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
@@ -876,7 +876,7 @@
     <!-- Elements not valid in TEI, but sometimes abused while producing a text from HTML. -->
 
     <xsl:template mode="checks" match="i | b | sc | uc | tt | asc">
-        <i:issue pos="{@pos}" code="X01" category="Compliance" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:getPage(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
+        <i:issue pos="{@pos}" code="X01" category="Compliance" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
@@ -884,7 +884,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='sc'] | sc">
         <xsl:if test="string(.) = upper-case(string(.))">
-            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Small caps style used for all-caps text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Small caps style used for all-caps text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -893,7 +893,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='sc'] | sc" priority="2">
         <xsl:if test="string(.) = lower-case(string(.))">
-            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -905,7 +905,7 @@
 
     <xsl:template mode="checks" match="corr">
         <xsl:if test="string(.) = string(@sic)">
-            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
+            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -914,13 +914,13 @@
     <!-- Figures -->
 
     <xsl:template mode="checks" match="figure[@url]">
-        <i:issue pos="{@pos}" code="F01" category="Compliance" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:getPage(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"></xsl:value-of>&rdquo;.</i:issue>
+        <i:issue pos="{@pos}" code="F01" category="Compliance" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"></xsl:value-of>&rdquo;.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="figure">
         <xsl:if test="not(head) and not(figDesc)">
-            <i:issue pos="{@pos}" code="F02" category="Figures" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:getPage(.)}">Figure without head or figDesc will not have alt attribute in output.</i:issue>
+            <i:issue pos="{@pos}" code="F02" category="Figures" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">Figure without head or figDesc will not have alt attribute in output.</i:issue>
         </xsl:if>
         <xsl:next-match/>
     </xsl:template>
@@ -951,22 +951,22 @@
             <xsl:when test="name($first) = 'div2' and not($first/@type=('Section', 'Appendix'))"/>
 
             <xsl:when test="not($first/@n)">
-                <i:issue pos="{$first/@pos}" code="N01" category="Numbering" target="{f:generate-id($first)}" level="Trivial" element="{name($first)}" page="{f:getPage($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
+                <i:issue pos="{$first/@pos}" code="N01" category="Numbering" target="{f:generate-id($first)}" level="Trivial" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
             </xsl:when>
 
             <xsl:when test="not(f:isInteger($first/@n) or f:isRoman($first/@n))">
-                <i:issue pos="{$first/@pos}" code="N02" category="Numbering" target="{f:generate-id($first)}" level="Warning" element="{name($first)}" page="{f:getPage($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute <xsl:value-of select="$first/@n"/> not numeric.</i:issue>
+                <i:issue pos="{$first/@pos}" code="N02" category="Numbering" target="{f:generate-id($first)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute <xsl:value-of select="$first/@n"/> not numeric.</i:issue>
             </xsl:when>
 
             <xsl:when test="f:isRoman($first/@n) and f:isRoman($second/@n)">
                 <xsl:if test="not(f:fromRoman($second/@n) = f:fromRoman($first/@n) + 1)">
-                    <i:issue pos="{$second/@pos}" code="S01" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:getPage($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
+                    <i:issue pos="{$second/@pos}" code="S01" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
 
             <xsl:when test="f:isInteger($first/@n) and f:isInteger($second/@n)">
                 <xsl:if test="not($second/@n = $first/@n + 1)">
-                    <i:issue pos="{$second/@pos}" code="S02" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:getPage($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
+                    <i:issue pos="{$second/@pos}" code="S02" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
         </xsl:choose>
@@ -980,7 +980,7 @@
         <!-- @target points to existing @id -->
         <xsl:for-each-group select="//*[@target]" group-by="@target">
             <xsl:variable name="target" select="./@target" as="xs:string"/>
-            <xsl:variable name="target" select="f:stripHash($target)"/>
+            <xsl:variable name="target" select="f:strip-hash($target)"/>
             <xsl:if test="not(//*[@id=$target])">
                 <i:issue
                     pos="{./@pos}"
@@ -988,7 +988,7 @@
                     category="References"
                     target="{f:generate-id(.)}"
                     level="Error"
-                    page="{f:getPage(.)}"
+                    page="{f:get-page(.)}"
                     element="{name(.)}">Element <xsl:value-of select="name(.)"/>: target-attribute value <xsl:value-of select="./@target"/> not present as id.</i:issue>
             </xsl:if>
         </xsl:for-each-group>
@@ -1007,7 +1007,7 @@
                         category="References"
                         target="{f:generate-id($node)}"
                         level="Error"
-                        page="{f:getPage($node)}"
+                        page="{f:get-page($node)}"
                         element="{$name}">Element <xsl:value-of select="$name"/>: rendition element <xsl:value-of select="."/> not present.</i:issue>
                 </xsl:if>
             </xsl:for-each>
@@ -1023,7 +1023,7 @@
                     category="References"
                     target="{f:generate-id(.)}"
                     level="Error"
-                    page="{f:getPage(.)}"
+                    page="{f:get-page(.)}"
                     element="{name(.)}">Element <xsl:value-of select="name(.)"/>: sameAs-attribute value <xsl:value-of select="./@sameAs"/> not present as id of any element.</i:issue>
             </xsl:if>
         </xsl:for-each-group>
@@ -1038,7 +1038,7 @@
                     category="References"
                     target="{f:generate-id(.)}"
                     level="Error"
-                    page="{f:getPage(.)}"
+                    page="{f:get-page(.)}"
                     element="{name(.)}">Element <xsl:value-of select="name(.)"/>: who-attribute value <xsl:value-of select="./@who"/> not present as id of role.</i:issue>
             </xsl:if>
         </xsl:for-each-group>
@@ -1054,7 +1054,7 @@
                         category="References"
                         target="{f:generate-id(.)}"
                         level="Warning"
-                        page="{f:getPage(.)}"
+                        page="{f:get-page(.)}"
                         element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
                 </xsl:if>
             </xsl:if>
@@ -1122,7 +1122,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:stripHash" as="xs:string">
+    <xsl:function name="f:strip-hash" as="xs:string">
         <xsl:param name="target" as="xs:string"/>
         <xsl:value-of select="if (substring($target, 1, 1) = '#') then substring($target, 2) else $target"/>
     </xsl:function>
