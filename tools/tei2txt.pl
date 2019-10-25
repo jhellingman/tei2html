@@ -281,7 +281,6 @@ sub handleSegments($) {
         my $id = getAttrVal('id', $attrs);
         my $copyOf = getAttrVal('copyOf', $attrs);
         if ($id ne '') {
-            print STDERR "DEBUG: adding $id=$content.\n";
             $mapIdToContent{$id} = $content;
             $result .= $content;
         } elsif ($copyOf ne '') {

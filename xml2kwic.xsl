@@ -21,7 +21,7 @@
         in the document in their context in alphabetical order. The output can become rather big, as a rule-of-thumb,
         30 to 40 times the size of the original. Furthermore, the processing time can be considerable.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2019, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <xsl:output
@@ -292,11 +292,14 @@
         <xsl:param name="matches" as="element()*"/>
 
         <xsl:variable name="keyword" select="$matches[1]/k:word"/>
+        <xsl:variable name="baseword" select="fn:lower-case(f:strip_diacritics($keyword))"/>
 
         <h2>
             <span class="cnt">Word:</span><xsl:text> </xsl:text>
-            <xsl:value-of select="$keyword"/><xsl:text> </xsl:text>
-            <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+            <xsl:value-of select="$baseword"/><xsl:text> </xsl:text>
+            <xsl:if test="count($matches) &gt; 1">
+                <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+            </xsl:if>
         </h2>
 
         <xsl:variable name="variant-count">
@@ -306,17 +309,15 @@
             <xsl:value-of select="string-length($groups)"/>
         </xsl:variable>
 
-        <xsl:if test="$keyword != fn:lower-case(f:strip_diacritics($keyword))">
-            <p><xsl:text>Normalized word: </xsl:text><xsl:value-of select="fn:lower-case(f:strip_diacritics($keyword))"/><xsl:text> </xsl:text></p>
-        </xsl:if>
-
-        <xsl:if test="$variant-count &gt; 1">
-            <p><span class="cnt">Variants:</span>
+        <xsl:if test="$variant-count &gt; 1 or $baseword != $keyword">
+            <p><span class="cnt"><xsl:value-of select="if ($variant-count &gt; 1) then 'Variants' else 'Variant'"/>:</span>
                 <xsl:for-each-group select="$matches" group-by="./k:word">
                     <xsl:sort select="count(current-group())" order="descending"/>
 
                     <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
-                    <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                    <xsl:if test="count(current-group()) &gt; 1">
+                        <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                    </xsl:if>
                 </xsl:for-each-group>
             </p>
         </xsl:if>
@@ -373,7 +374,9 @@
         <h2>
             <span class="cnt">Query:</span><xsl:text> </xsl:text>
             <xsl:value-of select="$keyword"/><xsl:text> </xsl:text>
-            <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+            <xsl:if test="count($matches) &gt; 1">
+                <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+            </xsl:if>
         </h2>
 
         <xsl:variable name="variant-count">
@@ -384,12 +387,14 @@
         </xsl:variable>
 
         <xsl:if test="$variant-count &gt; 1">
-            <p><span class="cnt">Variants:</span>
+            <p><span class="cnt"><xsl:value-of select="if ($variant-count &gt; 1) then 'Variants' else 'Variant'"/>:</span>
                 <xsl:for-each-group select="$matches" group-by="./k:word">
                     <xsl:sort select="count(current-group())" order="descending"/>
 
                     <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
-                    <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                    <xsl:if test="count(current-group()) &gt; 1">
+                        <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                    </xsl:if>
                 </xsl:for-each-group>
             </p>
         </xsl:if>
@@ -738,7 +743,7 @@
     <xsl:function name="f:strip_diacritics" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
-        <xsl:value-of select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
+        <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
     </xsl:function>
 
 

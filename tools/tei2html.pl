@@ -163,7 +163,7 @@ processFiles();
 
 sub processFiles {
     if ($inputFile eq '') {
-        my ($directory) = ".";
+        my ($directory) = '.';
         my @files = ();
         opendir(DIRECTORY, $directory) or die "Cannot open directory $directory!\n";
         @files = readdir(DIRECTORY);
@@ -200,8 +200,12 @@ sub processFile($) {
     if ($basename eq '') {
         $filename =~ /^(.+)\.(tei|xml)$/;
         $basename = $1;
-        $version = "0.0";
+        $version = '0.0';
         $format = $2;
+    }
+
+    if (!defined $version) {
+        $version = '0.0';
     }
 
     if ($version >= 1.0) {
@@ -217,7 +221,7 @@ sub processFile($) {
     makeQrCode($pgNumber);
     collectImageInfo();
 
-    my $xmlFilename = $format eq 'tei' ? $basename . ".xml" : $filename;
+    my $xmlFilename = $format eq 'tei' ? $basename . '.xml' : $filename;
     if ($format eq 'tei') {
         tei2xml($filename, $xmlFilename);
     }
@@ -266,7 +270,7 @@ sub normalizeXml($$) {
 sub makeP5($$) {
     my $basename = shift;
     my $xmlFilename = shift;
-    my $p5XmlFilename = $basename . "-p5.xml";
+    my $p5XmlFilename = $basename . '-p5.xml';
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
         print "Skipping conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
@@ -342,10 +346,10 @@ sub makeQrCode($) {
 
     if ($pgNumber > 0) {
         my $imageDir = '.';
-        if (-d "images") {
-            $imageDir = "images";
-        } elsif (-d "Processed/images") {
-            $imageDir = "Processed/images";
+        if (-d 'images') {
+            $imageDir = 'images';
+        } elsif (-d 'Processed/images') {
+            $imageDir = 'Processed/images';
         }
 
         if (not -e "$imageDir/qrcode.png") {
@@ -422,23 +426,23 @@ sub makeEpub($$) {
     my $tmpFile = temporaryFile('epub', '.html');
     my $saxonParameters = determineSaxonParameters();
     print "Create ePub version...\n";
-    system ("mkdir epub");
-    copyImages("epub/images");
-    # copyFormulas("epub/formulas"); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
-    copyAudio("epub/audio");
-    copyFonts("epub/fonts");
+    system ('mkdir epub');
+    copyImages('epub/images');
+    # copyFormulas('epub/formulas'); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
+    copyAudio('epub/audio');
+    copyFonts('epub/fonts');
 
     system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
 
     system ("del $epubFile");
-    chdir "epub";
+    chdir 'epub';
     system ("zip -Xr9Dq ../$epubFile mimetype");
     system ("zip -Xr9Dq ../$epubFile * -x mimetype");
-    chdir "..";
+    chdir '..';
 
     system ("$epubcheck $epubFile 2> $basename-epubcheck.err");
     $debug || unlink($tmpFile);
-    $debug || remove_tree("epub")
+    $debug || remove_tree('epub')
 }
 
 
@@ -458,7 +462,7 @@ sub makeText($$) {
     print "Create text version...\n";
     system ("perl $toolsdir/extractNotes.pl $filename");
     system ("cat $filename.out $filename.notes > $tmpFile1");
-    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? "-u " : "") . " -w $pageWidth $tmpFile1 > $tmpFile2");
+    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $tmpFile1 > $tmpFile2");
 
     if ($useUnicode == 1) {
         # Use our own script to wrap lines, as fmt cannot deal with unicode text.
@@ -507,8 +511,8 @@ sub makeWordlist($$) {
     }
 
     my $tmpFile = temporaryFile('report', '.html');
-    my $options = $debug ? " -v " : "";
-    $options .= $makeHeatMap ? " -m " : "";
+    my $options = $debug ? ' -v ' : '';
+    $options .= $makeHeatMap ? ' -m ' : '';
 
     print "Report on word usage...\n";
     system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
@@ -516,7 +520,7 @@ sub makeWordlist($$) {
     $debug || unlink($tmpFile);
 
     # Create a text heat map.
-    if (-f "heatmap.xml") {
+    if (-f 'heatmap.xml') {
         print "Create text heat map...\n";
         system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:$xsldir/style/heatmap.css\" > heatmap.html");
     }
@@ -529,44 +533,44 @@ sub determineSaxonParameters() {
     $pwd =~ s/\\/\//g;
 
     # Since the XSLT processor cannot find files easily, we have to provide the imageinfo file with a full path as a parameter.
-    my $fileImageParam = "";
-    if (-f "imageinfo.xml") {
+    my $fileImageParam = '';
+    if (-f 'imageinfo.xml') {
         $fileImageParam = "imageInfoFile=\"file:/$pwd/imageinfo.xml\"";
     }
 
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
-    my $cssFileParam = "";
-    if (-f $customStylesheet || -f $customStylesheet . ".xml") {
+    my $cssFileParam = '';
+    if (-f $customStylesheet || -f $customStylesheet . '.xml') {
         print "Adding custom stylesheet: $customStylesheet ...\n";
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";
     }
 
-    my $configurationFileParam = "";
+    my $configurationFileParam = '';
     if (-f $configurationFile) {
         print "Adding custom configuration: $configurationFile ...\n";
         $configurationFileParam = "configurationFile=\"file:/$pwd/$configurationFile\"";
     }
 
-    my $opfManifestFileParam = "";
-    if (-f "opf-manifest.xml") {
+    my $opfManifestFileParam = '';
+    if (-f 'opf-manifest.xml') {
         print "Adding additional elements for the OPF manifest...\n";
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
-    my $opfMetadataFileParam = "";
-    if (-f "opf-metadata.xml") {
+    my $opfMetadataFileParam = '';
+    if (-f 'opf-metadata.xml') {
         print "Adding additional items to the OPF metadata...\n";
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
-    my $traceArguments = "";
+    my $traceArguments = '';
     if ($trace == 1) {
-        $traceArguments = " -T -traceout:trace.txt ";
+        $traceArguments = ' -T -traceout:trace.txt ';
     }
 
-    my $profileArguments = "";
+    my $profileArguments = '';
     if ($profile == 1) {
-        $profileArguments = " -TP:profile.html ";
+        $profileArguments = ' -TP:profile.html ';
     }
 
     return "$traceArguments $profileArguments $customOption $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam ";
@@ -590,21 +594,21 @@ sub makeZip($) {
 
     # Copy text version to final location
 
-    my $textFilename = "Processed/" . $basename . ".txt";
+    my $textFilename = 'Processed/' . $basename . '.txt';
 
     if (-f $textFilename) {
-        copy($textFilename, $pgNumber . "/" . $pgNumber . ".txt");
+        copy($textFilename, $pgNumber . '/' . $pgNumber . '.txt');
 
         # TODO: append PG header and footer.
     }
 
     # Copy HTML version to final location
-    if (-f $basename . ".html") {
-        my $htmlDirectory = $pgNumber . "/" . $pgNumber . "-h";
+    if (-f $basename . '.html') {
+        my $htmlDirectory = $pgNumber . '/' . $pgNumber . '-h';
         if (!-f $htmlDirectory) {
             mkdir $htmlDirectory;
         }
-        copy($basename . ".html", $htmlDirectory . "/" . $pgNumber . ".html");
+        copy($basename . '.html', $htmlDirectory . '/' . $pgNumber . '.html');
 
         # TODO: append PG header and footer.
 
@@ -732,7 +736,7 @@ sub runChecks($) {
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $basename = $1;
     my $format = $2;
-    my $checkFilename = $basename . "-checks.html";
+    my $checkFilename = $basename . '-checks.html';
     
     if ($force == 0 && isNewer($checkFilename, $filename)) {
         print "Skipping run checks because '$checkFilename' is newer than '$filename'.\n";
@@ -742,11 +746,11 @@ sub runChecks($) {
 
     my $transcribedFile = transcribe($filename);
 
-    my $positionInfoFilename = $basename . "-pos." . $format;
+    my $positionInfoFilename = $basename . '-pos.' . $format;
 
     system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
 
-    if ($format eq "tei") {
+    if ($format eq 'tei') {
         my $tmpFile = temporaryFile('checks', '.tei');
 
         # Hide a number of entities for the checks, so matching pairs of punctuation can be
@@ -756,10 +760,10 @@ sub runChecks($) {
         system ("perl -S precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
         $debug || unlink ($positionInfoFilename);
 
-        tei2xml($tmpFile, $basename . "-pos.xml");
-        $positionInfoFilename = $basename . "-pos.xml";
+        tei2xml($tmpFile, $basename . '-pos.xml');
+        $positionInfoFilename = $basename . '-pos.xml';
         $debug || unlink($tmpFile);
-        $debug || unlink($tmpFile . ".err");
+        $debug || unlink($tmpFile . '.err');
     }
 
     my $xmlfilename = temporaryFile('checks', '.xml');
@@ -792,7 +796,7 @@ sub temporaryFile($$) {
     my $phase = shift;
     my $extension = shift;
     $tmpCount++;
-    return $tmpBase . "-" . $tmpCount . "-" . $phase . $extension;
+    return $tmpBase . '-' . $tmpCount . '-' . $phase . $extension;
 }
 
 
@@ -802,10 +806,10 @@ sub temporaryFile($$) {
 # add -c to called script arguments to also collect contour information with this script.
 #
 sub collectImageInfo() {
-    if (-d "images") {
+    if (-d 'images') {
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
-    } elsif (-d "Processed/images") {
+    } elsif (-d 'Processed/images') {
         print "Collect image dimensions...\n";
         system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
     }
@@ -824,24 +828,21 @@ sub copyImages($) {
         return;
     }
 
-    if (-d "images") {
-        system ("cp -r -u images " . $destination);
-    } elsif (-d "Processed/images") {
-        system ("cp -r -u Processed/images " . $destination);
+    if (-d 'images') {
+        system ('cp -r -u images ' . $destination);
+    } elsif (-d 'Processed/images') {
+        system ('cp -r -u Processed/images ' . $destination);
     }
 
     # Remove redundant icon images (not used in the ePub)
-    if (-f "epub/images/book.png") {
-        system ("rm epub/images/book.png");
+    if (-f 'epub/images/book.png') {
+        system ('rm epub/images/book.png');
     }
-    if (-f "epub/images/card.png") {
-        system ("rm epub/images/card.png");
+    if (-f 'epub/images/card.png') {
+        system ('rm epub/images/card.png');
     }
-    if (-f "epub/images/external.png") {
-        system ("rm epub/images/external.png");
-    }
-    if (-f "epub/images/new-cover-tn.jpg") {
-        system ("rm epub/images/new-cover-tn.jpg");
+    if (-f 'epub/images/external.png') {
+        system ('rm epub/images/external.png');
     }
 }
 
@@ -852,10 +853,10 @@ sub copyImages($) {
 sub copyFormulas($) {
     my $destination = shift;
 
-    if (-d "formulas") {
-        system ("cp -r -u formulas " . $destination);
-    } elsif (-d "Processed/formulas") {
-        system ("cp -r -u Processed/formulas " . $destination);
+    if (-d 'formulas') {
+        system ('cp -r -u formulas ' . $destination);
+    } elsif (-d 'Processed/formulas') {
+        system ('cp -r -u Processed/formulas ' . $destination);
     }
 }
 
@@ -865,10 +866,10 @@ sub copyFormulas($) {
 sub copyAudio($) {
     my $destination = shift;
 
-    if (-d "audio") {
-        system ("cp -r -u audio " . $destination);
-    } elsif (-d "Processed/audio") {
-        system ("cp -r -u Processed/audio " . $destination);
+    if (-d 'audio') {
+        system ('cp -r -u audio ' . $destination);
+    } elsif (-d 'Processed/audio') {
+        system ('cp -r -u Processed/audio ' . $destination);
     }
 }
 
@@ -879,10 +880,10 @@ sub copyAudio($) {
 sub copyFonts($) {
     my $destination = shift;
 
-    if (-d "fonts") {
-        system ("cp -r -u fonts " . $destination);
-    } elsif (-d "Processed/fonts") {
-        system ("cp -r -u Processed/fonts " . $destination);
+    if (-d 'fonts') {
+        system ('cp -r -u fonts ' . $destination);
+    } elsif (-d 'Processed/fonts') {
+        system ('cp -r -u Processed/fonts ' . $destination);
     }
 }
 
@@ -960,18 +961,18 @@ sub transcribe($) {
     if ($noTranscription == 0) {
         $currentFile = addTranscriptions($currentFile);
 
-        $currentFile = transcribeNotation($currentFile, "<AR>",  "Arabic",                "$patcdir/arabic/ar2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, "<UR>",  "Urdu",                  "$patcdir/arabic/ur2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, "<FA>",  "Farsi",                 "$patcdir/arabic/ur2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, "<AS>",  "Assamese",              "$patcdir/indic/as2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, "<BN>",  "Bengali",               "$patcdir/indic/bn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, "<HE>",  "Hebrew",                "$patcdir/hebrew/he2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, "<SA>",  "Sanskrit (Devanagari)", "$patcdir/indic/dn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, "<HI>",  "Hindi (Devanagari)",    "$patcdir/indic/dn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, "<TL>",  "Tagalog (Baybayin)",    "$patcdir/tagalog/tagalog.pat");
-        $currentFile = transcribeNotation($currentFile, "<TA>",  "Tamil",                 "$patcdir/indic/ta2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, "<SY>",  "Syriac",                "$patcdir/syriac/sy2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, "<CO>",  "Coptic",                "$patcdir/coptic/co2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<AR>',  'Arabic',                "$patcdir/arabic/ar2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<UR>',  'Urdu',                  "$patcdir/arabic/ur2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<FA>',  'Farsi',                 "$patcdir/arabic/ur2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<AS>',  'Assamese',              "$patcdir/indic/as2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, '<BN>',  'Bengali',               "$patcdir/indic/bn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, '<HE>',  'Hebrew',                "$patcdir/hebrew/he2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<SA>',  'Sanskrit (Devanagari)', "$patcdir/indic/dn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, '<HI>',  'Hindi (Devanagari)',    "$patcdir/indic/dn2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, '<TL>',  'Tagalog (Baybayin)',    "$patcdir/tagalog/tagalog.pat");
+        $currentFile = transcribeNotation($currentFile, '<TA>',  'Tamil',                 "$patcdir/indic/ta2ucs.pat");
+        $currentFile = transcribeNotation($currentFile, '<SY>',  'Syriac',                "$patcdir/syriac/sy2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<CO>',  'Coptic',                "$patcdir/coptic/co2sgml.pat");
     }
     return $currentFile;
 }
