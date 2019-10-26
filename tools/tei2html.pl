@@ -337,7 +337,7 @@ sub determineKwicFilename($) {
         $namePartWord = '-' . $namePartWord;
     }
 
-    return $basename . $namePartLanguage . $namePartWord . '-kwic.html';
+    return $basename . '-kwic' . $namePartLanguage . $namePartWord . '.html';
 }
 
 

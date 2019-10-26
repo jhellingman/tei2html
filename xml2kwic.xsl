@@ -302,46 +302,36 @@
             </xsl:if>
         </h2>
 
-        <xsl:variable name="variant-count">
-            <xsl:variable name="groups">
-                <xsl:for-each-group select="$matches" group-by="./k:word">.</xsl:for-each-group>
-            </xsl:variable>
-            <xsl:value-of select="string-length($groups)"/>
-        </xsl:variable>
+        <xsl:variable name="variant-count" select="f:count-variants($matches)"/>
 
         <xsl:if test="$variant-count &gt; 1 or $baseword != $keyword">
-            <p><span class="cnt"><xsl:value-of select="if ($variant-count &gt; 1) then 'Variants' else 'Variant'"/>:</span>
-                <xsl:for-each-group select="$matches" group-by="./k:word">
-                    <xsl:sort select="count(current-group())" order="descending"/>
-
-                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
-                    <xsl:if test="count(current-group()) &gt; 1">
-                        <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
-                    </xsl:if>
-                </xsl:for-each-group>
-            </p>
+            <xsl:copy-of select="f:output-variants($matches, $variant-count)"/>
         </xsl:if>
 
         <xsl:variable name="variants">
             <xsl:for-each-group select="$matches" group-by="./k:word">
                 <xsl:sort select="count(current-group())" order="descending"/>
-                    <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
+                <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
             </xsl:for-each-group>
         </xsl:variable>
 
         <table>
-            <tr>
-                <th/>
-                <th/>
-                <th/>
-                <th class="pn">Page</th>
-            </tr>
-
+            <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="output" select="$matches">
                 <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
                 <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
+    </xsl:template>
+
+
+    <xsl:template name="table-headers">
+        <tr>
+            <th/>
+            <th/>
+            <th/>
+            <th class="pn">Page</th>
+        </tr>
     </xsl:template>
 
 
@@ -379,30 +369,16 @@
             </xsl:if>
         </h2>
 
-        <xsl:variable name="variant-count">
-            <xsl:variable name="groups">
-                <xsl:for-each-group select="$matches" group-by="./k:word">.</xsl:for-each-group>
-            </xsl:variable>
-            <xsl:value-of select="string-length($groups)"/>
-        </xsl:variable>
+        <xsl:variable name="variant-count" select="f:count-variants($matches)"/>
 
         <xsl:if test="$variant-count &gt; 1">
-            <p><span class="cnt"><xsl:value-of select="if ($variant-count &gt; 1) then 'Variants' else 'Variant'"/>:</span>
-                <xsl:for-each-group select="$matches" group-by="./k:word">
-                    <xsl:sort select="count(current-group())" order="descending"/>
-
-                    <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
-                    <xsl:if test="count(current-group()) &gt; 1">
-                        <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
-                    </xsl:if>
-                </xsl:for-each-group>
-            </p>
+            <xsl:copy-of select="f:output-variants($matches, $variant-count)"/>
         </xsl:if>
 
         <xsl:variable name="variants">
             <xsl:for-each-group select="$matches" group-by="./k:word">
                 <xsl:sort select="count(current-group())" order="descending"/>
-                    <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
+                <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
             </xsl:for-each-group>
         </xsl:variable>
 
@@ -413,21 +389,41 @@
     </xsl:template>
 
 
+    <xsl:function name="f:count-variants" as="xs:integer">
+        <xsl:param name="matches"/>
+
+        <xsl:variable name="groups">
+            <xsl:for-each-group select="$matches" group-by="./k:word">.</xsl:for-each-group>
+        </xsl:variable>
+        <xsl:sequence select="string-length($groups)"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:output-variants">
+        <xsl:param name="matches"/>
+        <xsl:param name="variant-count" as="xs:integer"/>
+
+        <p><span class="cnt"><xsl:value-of select="if ($variant-count &gt; 1) then 'Variants' else 'Variant'"/>:</span>
+            <xsl:for-each-group select="$matches" group-by="./k:word">
+                <xsl:sort select="count(current-group())" order="descending"/>
+
+                <xsl:text> </xsl:text><b class="var{position()}"><xsl:value-of select="current-group()[1]/k:word"/></b>
+                <xsl:if test="count(current-group()) &gt; 1">
+                    <xsl:text> </xsl:text><span class="cnt"><xsl:value-of select="count(current-group())"/></span>
+                </xsl:if>
+            </xsl:for-each-group>
+        </p>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Output matches.</xd:short>
         <xd:detail>Output an HTML table for the matches.</xd:detail>
     </xd:doc>
 
     <xsl:template mode="output" match="k:matches">
-
         <table>
-            <tr>
-                <th/>
-                <th/>
-                <th/>
-                <th class="pn">Page</th>
-            </tr>
-
+            <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="#current">
                 <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
             </xsl:apply-templates>
@@ -500,7 +496,6 @@
                 </td>
             </xsl:if>
         </tr>
-
     </xsl:template>
 
 
