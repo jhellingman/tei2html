@@ -32,6 +32,8 @@
 
     <xsl:include href="segmentize.xsl"/>
 
+    <xsl:param name="output-segments" select="false()"/>
+
     <xd:doc>
         <xd:short>The keyword(s) to generate a KWIC for.</xd:short>
         <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
@@ -251,11 +253,11 @@
             <xsl:apply-templates mode="segmentize" select="/"/>
         </xsl:variable>
 
-        <!--
+        <xsl:if test="$output-segments">
             <xsl:call-template name="output-segments">
                 <xsl:with-param name="segments" select="$segments"/>
             </xsl:call-template>
-        -->
+        </xsl:if>
 
         <xsl:choose>
             <xsl:when test="$keyword != ''">
@@ -644,7 +646,7 @@
         <xd:short>Collect preceding and following contexts.</xd:short>
         <xd:detail>
             <p>For every word the preceding and following contexts are kept with the match.</p>
-            
+
             <p>A significant improvement in speed and memory usage can be obtained here by already rendering the preceding
             and following context, instead of doing this during the output phase. This is not done, as it complicated the
             handling of bidirectional text. For large files, please run Saxon with sufficient memory (java -Xms3072m -Xmx3072m).</p>
@@ -731,7 +733,7 @@
         <xd:short>Remove diacritics from a string.</xd:short>
         <xd:detail>Remove diacritics form a string to produce a string suitable for sorting purposes. This function
         uses the Unicode NFD normalization form to separate diacritics from the letters carrying them, and might
-        result too much being removed in some scripts (in particular Indic scripts).</xd:detail>
+        result too much being removed in some scripts (in particular Indic scripts, where vowel-signs are stripped).</xd:detail>
         <xd:param name="string">The string to processed.</xd:param>
     </xd:doc>
 
@@ -744,7 +746,7 @@
 
     <xd:doc>
         <xd:short>Analyze text nodes.</xd:short>
-        <xd:detail>Split segments into words (using the <code>segments</code> mode of segmentize.xsl,
+        <xd:detail>Split segments into words (using the <code>segments</code> mode of <code>segmentize.xsl</code>,
         so this happens during segmenting the text).</xd:detail>
     </xd:doc>
 
@@ -755,7 +757,7 @@
 
     <xd:doc>
         <xd:short>Introduce slashes between lines of verse.</xd:short>
-        <xd:detail>Introduce slashes between lines of verse, overrides template in segmentize.xsl.</xd:detail>
+        <xd:detail>Introduce slashes between lines of verse, overrides template in <code>segmentize.xsl</code>.</xd:detail>
     </xd:doc>
 
     <xsl:template mode="segments" match="l" priority="2">
@@ -763,6 +765,20 @@
             <k:nw style="green"><xsl:text> / </xsl:text></k:nw>
         </xsl:if>
         <xsl:apply-templates mode="#current"/>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Put transliteration between brackets.</xd:short>
+        <xd:detail>Introduce brackets around transliterations, normally represented in <code>choice</code> elements;
+        overrides template in <code>segmentize.xsl</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template mode="segments" match="choice[orig]" priority="2">
+        <xsl:apply-templates mode="segments" select="orig"/>
+        <k:nw style="green"><xsl:text> [</xsl:text></k:nw>
+        <xsl:apply-templates mode="segments" select="reg"/>
+        <k:nw style="green"><xsl:text>] </xsl:text></k:nw>
     </xsl:template>
 
 
@@ -874,7 +890,7 @@
         <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
         <xsl:variable name="word" select="lower-case($word)"/>
 
-        <xsl:sequence select="if ($baselang = 'en') 
+        <xsl:sequence select="if ($baselang = 'en')
                               then $word = $en-stopwords-sequence
                               else if ($baselang = 'nl')
                                    then $word = $nl-stopwords-sequence

@@ -20,7 +20,7 @@
 
         <xsl:sequence select="if ($a = '') then string-length($b)
             else if ($b = '') then string-length($a)
-            else f:calculateLevenshteinDistance(
+            else f:calculate-levenshtein-distance(
                 string-to-codepoints($a),
                 string-to-codepoints($b),
                 string-length($a),
@@ -28,7 +28,7 @@
                 (1, 0, 1), 2)"/>
     </xsl:function>
 
-    <xsl:function name="f:calculateLevenshteinDistance" as="xs:integer">
+    <xsl:function name="f:calculate-levenshtein-distance" as="xs:integer">
         <xsl:param name="chars1" as="xs:integer*"/>
         <xsl:param name="chars2" as="xs:integer*"/>
         <xsl:param name="length1" as="xs:integer"/>
@@ -54,7 +54,7 @@
         </xsl:variable>
 
         <xsl:sequence select="if ($total = $length1 + $length2) then exactly-one($diag)
-            else f:calculateLevenshteinDistance($chars1, $chars2, $length1, $length2, $diag, $total + 1)"/>
+            else f:calculate-levenshtein-distance($chars1, $chars2, $length1, $length2, $diag, $total + 1)"/>
     </xsl:function>
 
 </xsl:stylesheet>

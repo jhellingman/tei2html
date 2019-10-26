@@ -80,10 +80,10 @@
 
             <!-- Include footnotes in the div0, if not done so earlier -->
 
-            <xsl:if test=".//note[f:isFootnote(.) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
+            <xsl:if test=".//note[f:is-footnote(.) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
                 <div class="footnotes">
                     <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select=".//note[f:isFootnote(.) and not(ancestor::div1)]"/>
+                    <xsl:apply-templates mode="footnotes" select=".//note[f:is-footnote(.) and not(ancestor::div1)]"/>
                 </div>
             </xsl:if>
         </div>
@@ -130,10 +130,10 @@
         <xsl:if test="$outputformat = 'html'">
             <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
             <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
-                <xsl:if test="..//note[f:isFootnote(.) and not(ancestor::div1)]">
+                <xsl:if test="..//note[f:is-footnote(.) and not(ancestor::div1)]">
                     <div class="footnotes">
                         <hr class="fnsep"/>
-                        <xsl:apply-templates mode="footnotes" select="..//note[f:isFootnote(.) and not(ancestor::div1)]"/>
+                        <xsl:apply-templates mode="footnotes" select="..//note[f:is-footnote(.) and not(ancestor::div1)]"/>
                     </div>
                 </xsl:if>
             </xsl:if>

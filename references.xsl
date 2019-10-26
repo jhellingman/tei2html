@@ -119,7 +119,7 @@
     <xsl:function name="f:inside-footnote" as="xs:boolean">
         <xsl:param name="targetNode" as="node()"/>
 
-        <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:isFootnote(.)]) then true() else false()"/>
+        <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:is-footnote(.)]) then true() else false()"/>
     </xsl:function>
 
     <xd:doc>

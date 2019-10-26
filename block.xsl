@@ -378,21 +378,21 @@
         superfluous structure.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[f:isFootnote(.)]//q/text">
+    <xsl:template match="note[f:is-footnote(.)]//q/text">
         <div class="nestedtext">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[f:isFootnote(.)]//q/text/body">
+    <xsl:template match="note[f:is-footnote(.)]//q/text/body">
         <div class="nestedbody">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
-    <xsl:template match="note[f:isFootnote(.)]//q/text/body/div1">
+    <xsl:template match="note[f:is-footnote(.)]//q/text/body/div1">
         <div class="nesteddiv1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>

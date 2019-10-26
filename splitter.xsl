@@ -390,7 +390,7 @@
 
                                     <xsl:if test="parent::div0">
                                         <xsl:call-template name="insert-footnotes">
-                                            <xsl:with-param name="notes" select="$splitter-fragment-nodes//note[f:isFootnote(.)]"/>
+                                            <xsl:with-param name="notes" select="$splitter-fragment-nodes//note[f:is-footnote(.)]"/>
                                         </xsl:call-template>
                                     </xsl:if>
                                 </div>
