@@ -12,7 +12,7 @@
     <xsl:output indent="no" omit-xml-declaration="yes"/>
 
     <!-- stub function used by log.xsl -->
-    <xsl:function name="f:isSet" as="xs:boolean">
+    <xsl:function name="f:is-set" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
         <xsl:sequence select="true()"/>
     </xsl:function>

@@ -87,7 +87,7 @@
     <xsl:template name="handleAlignedLg">
         <xsl:context-item as="element(lg)" use="required"/>
         <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
-        <xsl:copy-of select="f:logInfo('Align verse {1} with verse {2}.', (@id, $otherid))"/>
+        <xsl:copy-of select="f:log-info('Align verse {1} with verse {2}.', (@id, $otherid))"/>
         <xsl:call-template name="align-verses">
             <xsl:with-param name="a" select="."/>
             <xsl:with-param name="b" select="//*[@id=$otherid]"/>
@@ -159,7 +159,7 @@
 
     <xsl:template match="lb">
         <xsl:choose>
-            <xsl:when test="f:isSet('lb.preserve')">
+            <xsl:when test="f:is-set('lb.preserve')">
                 <br id="{f:generate-id(.)}"/>
                 <xsl:if test="f:has-rend-value(@rend, 'indent')">
                     <span class="indent{f:generate-id(.)}"/>
@@ -172,7 +172,7 @@
     </xsl:template>
 
     <xsl:template match="lb" mode="css">
-        <xsl:if test="f:isSet('lb.preserve') and f:has-rend-value(@rend, 'indent')">
+        <xsl:if test="f:is-set('lb.preserve') and f:has-rend-value(@rend, 'indent')">
 .indent<xsl:value-of select="f:generate-id(.)"/> {
     padding-left: <xsl:value-of select="f:indent-value(f:rend-value(@rend, 'indent'))"/>;
 }
@@ -203,9 +203,9 @@
 
         <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
 
-        <xsl:copy-of select="f:logInfo('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
+        <xsl:copy-of select="f:log-info('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
         <xsl:if test="count($a/*) != count($b/*)">
-            <xsl:copy-of select="f:logWarning('Number of elements in verses to align does not match!', ())"/>
+            <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
         </xsl:if>
 
         <table class="alignedverse">
@@ -287,7 +287,7 @@
     </xsl:template>
 
     <!-- When a speaker immediately followed by an inline stage instruction, join them together. -->
-    <xsl:template match="speaker[f:followedByInlineStage(.)]">
+    <xsl:template match="speaker[f:followed-by-inline-stage(.)]">
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <span>
@@ -317,7 +317,7 @@
     </xsl:template>
 
     <xsl:template match="stage[f:isInline(.)]">
-        <xsl:if test="not(f:precededBySpeaker(.))">
+        <xsl:if test="not(f:preceded-by-speaker(.))">
             <xsl:apply-templates select="." mode="inline-stage"/>
         </xsl:if>
     </xsl:template>
@@ -330,12 +330,12 @@
         </span>
     </xsl:template>
 
-    <xsl:function name="f:followedByInlineStage" as="xs:boolean">
+    <xsl:function name="f:followed-by-inline-stage" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="boolean($node/following-sibling::node()[1][self::stage[f:isInline(.)]])"/>
     </xsl:function>
 
-    <xsl:function name="f:precededBySpeaker" as="xs:boolean">
+    <xsl:function name="f:preceded-by-speaker" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="boolean($node/preceding-sibling::node()[1][self::speaker])"/>
     </xsl:function>

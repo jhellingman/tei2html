@@ -136,7 +136,7 @@
                 href="{$path}/mimetype"
                 method="text"
                 encoding="UTF-8">
-            <xsl:copy-of select="f:logInfo('Generated file: {1}/mimetype.', ($path))"/>
+            <xsl:copy-of select="f:log-info('Generated file: {1}/mimetype.', ($path))"/>
             <xsl:text>application/epub+zip</xsl:text>
         </xsl:result-document>
     </xsl:template>
@@ -151,7 +151,7 @@
 
     <xsl:template name="container">
         <xsl:result-document format="xml" href="{$path}/META-INF/container.xml">
-            <xsl:copy-of select="f:logInfo('Generated container file: {1}/META-INF/container.xml.', ($path))"/>
+            <xsl:copy-of select="f:log-info('Generated container file: {1}/META-INF/container.xml.', ($path))"/>
             <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
                <rootfiles>
                   <rootfile full-path="{$basename}.opf" media-type="application/oebps-package+xml"/>
@@ -185,7 +185,7 @@
                 href="{$path}/cover.xhtml"
                 method="xml"
                 encoding="UTF-8">
-            <xsl:copy-of select="f:logInfo('Generated cover file: {1}/cover.xhtml.', ($path))"/>
+            <xsl:copy-of select="f:log-info('Generated cover file: {1}/cover.xhtml.', ($path))"/>
         </xsl:result-document>
     </xsl:template>
 

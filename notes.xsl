@@ -214,7 +214,7 @@
 
     <xsl:template name="footnote-return-arrow">
         <xsl:context-item as="element()" use="required"/>
-        <xsl:if test="f:isSet('useFootnoteReturnArrow')">
+        <xsl:if test="f:is-set('useFootnoteReturnArrow')">
             <xsl:text>&nbsp;</xsl:text>
             <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
             <a class="fnarrow" href="{f:generate-href(ancestor-or-self::note[1])}src">
@@ -297,7 +297,7 @@
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-apparatus-note(.)]">
         <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
-            <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
+            <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
         </a>
     </xsl:template>
 
@@ -337,7 +337,7 @@
         <xsl:param name="notes" as="element(note)*"/>
         <xsl:param name="rend" as="xs:string?"/>
 
-        <xsl:variable name="format" select="f:getSetting('notes.apparatus.format')"/>
+        <xsl:variable name="format" select="f:get-setting('notes.apparatus.format')"/>
 
         <xsl:choose>
             <xsl:when test="$format = 'paragraphs'">
@@ -353,7 +353,7 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('Invalid configuration value for &quot;notes.apparatus.format&quot;: {1}.', ($format))"/>
+                <xsl:copy-of select="f:log-error('Invalid configuration value for &quot;notes.apparatus.format&quot;: {1}.', ($format))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -449,7 +449,7 @@
     <xsl:template name="apparatus-note-marker">
         <span class="label">
             <a class="apparatusnote" href="{f:generate-href(.)}src">
-                <xsl:value-of select="f:getSetting('notes.apparatus.textMarker')"/>
+                <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
             </a>
         </span>
     </xsl:template>
@@ -540,7 +540,7 @@
                 <a class="apparatusnote">
                     <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
-                    <xsl:value-of select="f:getSetting('notes.apparatus.noteMarker')"/>
+                    <xsl:value-of select="f:get-setting('notes.apparatus.noteMarker')"/>
                 </a>
             </xsl:if>
             <xsl:apply-templates/>

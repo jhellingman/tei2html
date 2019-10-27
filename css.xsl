@@ -62,7 +62,7 @@
 
     <xsl:template name="embed-css-stylesheets">
 
-        <xsl:if test="f:isSet('useCommonStylesheets')">
+        <xsl:if test="f:is-set('useCommonStylesheets')">
             <style type="text/css">
                 <xsl:call-template name="common-css-stylesheets"/>
 
@@ -72,7 +72,7 @@
         </xsl:if>
 
         <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="f:isSet('useCommonPrintStylesheets') and $optionPrinceMarkup = 'Yes'">
+        <xsl:if test="f:is-set('useCommonPrintStylesheets') and $optionPrinceMarkup = 'Yes'">
             <style type="text/css" media="print">
                 <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
@@ -96,7 +96,7 @@
                 href="{$path}/{$basename}.css"
                 method="text"
                 encoding="UTF-8">
-            <xsl:copy-of select="f:logInfo('Generated CSS stylesheet: {1}/{2}.css', ($path, $basename))"/>
+            <xsl:copy-of select="f:log-info('Generated CSS stylesheet: {1}/{2}.css', ($path, $basename))"/>
             <xsl:call-template name="common-css-stylesheets"/>
             <xsl:call-template name="custom-css-stylesheets"/>
         </xsl:result-document>
@@ -116,7 +116,7 @@
                 <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
                     <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:getSetting('defaultStylesheet')"/></xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="f:get-setting('defaultStylesheet')"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
@@ -172,7 +172,7 @@
         </xsl:if>
 
         <!-- Debugging CSS stylesheet. -->
-        <xsl:if test="f:isSet('debug')">
+        <xsl:if test="f:is-set('debug')">
             <xsl:value-of select="f:css-stylesheet('style/debug.css')"/>
         </xsl:if>
 
@@ -276,7 +276,7 @@
     </xd:doc>
 
     <xsl:template match="rendition" mode="rendition">
-        <xsl:copy-of select="f:logWarning('Rendition element without id or selector: {1}', (rendition))"/>
+        <xsl:copy-of select="f:log-warning('Rendition element without id or selector: {1}', (rendition))"/>
     </xsl:template>
 
     <xd:doc>
@@ -378,8 +378,8 @@
                 <xsl:when test="$name='lb' and $property='indent'"/>
 
                 <!-- Properties related to special font usage -->
-                <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:getSetting('css.frakturFont')"/>'; </xsl:when>
-                <xsl:when test="$property='font' and $value='blackletter'">font-family:'<xsl:value-of select="f:getSetting('css.blackletterFont')"/>'; </xsl:when>
+                <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:get-setting('css.frakturFont')"/>'; </xsl:when>
+                <xsl:when test="$property='font' and $value='blackletter'">font-family:'<xsl:value-of select="f:get-setting('css.blackletterFont')"/>'; </xsl:when>
 
                 <xsl:when test="$property='font' and $value='italic'">font-style:italic; </xsl:when>
 
@@ -388,15 +388,15 @@
                 <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
                 <!-- Filter out CSS3 stuff (for Project Gutenberg submissions) -->
-                <xsl:when test="f:getSetting('css.support') = '2' and
+                <xsl:when test="f:get-setting('css.support') = '2' and
                     $property = ('writing-mode')">
-                    <xsl:copy-of select="f:logInfo('Ignoring CCS3 property ''{1}''', $property)"/>
+                    <xsl:copy-of select="f:log-info('Ignoring CCS3 property ''{1}''', $property)"/>
                 </xsl:when>
 
                 <!-- Assume the rest can straightforwardly be translated to CSS -->
                 <xsl:otherwise>
                     <xsl:if test="not($property = $css2properties)">
-                        <xsl:copy-of select="f:logWarning('''{1}'' is not a CSS2.1 property', $property)"/>
+                        <xsl:copy-of select="f:log-warning('''{1}'' is not a CSS2.1 property', $property)"/>
                     </xsl:if>
                     <xsl:value-of select="$property"/>:<xsl:value-of select="$value"/><xsl:text>; </xsl:text>
                 </xsl:otherwise>
@@ -510,11 +510,11 @@
                 <xsl:text> </xsl:text>
             </xsl:if>
             <xsl:if test="normalize-space($node/@rendition) != ''">
-                <xsl:variable name="prefix" select="f:getSetting('rendition.id.prefix')"/>
+                <xsl:variable name="prefix" select="f:get-setting('rendition.id.prefix')"/>
                 <xsl:for-each select="tokenize($node/@rendition, ' ')">
                     <xsl:variable name="renditionId" select="$prefix || replace(., '#', '')"/>
                     <xsl:if test="not($node/ancestor::node()[last()]//tagsDecl/rendition[@id = $renditionId or @xml:id = $renditionId])">
-                        <xsl:copy-of select="f:logWarning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
+                        <xsl:copy-of select="f:log-warning('Reference to non-existing rendition element with id: {1}', ($renditionId))"/>
                     </xsl:if>
                     <xsl:value-of select="$renditionId"/>
                     <xsl:text> </xsl:text>
@@ -522,7 +522,7 @@
             </xsl:if>
         </xsl:variable>
         <xsl:value-of select="normalize-space($class)"/>
-        <xsl:copy-of select="f:logDebug('Generate class {1} with rend attribute {2}.', (normalize-space($class), $rend))"/>
+        <xsl:copy-of select="f:log-debug('Generate class {1} with rend attribute {2}.', (normalize-space($class), $rend))"/>
     </xsl:function>
 
 
@@ -775,7 +775,7 @@
         <xsl:param name="uri" as="xs:string"/>
         <xsl:variable name="uri" select="normalize-space($uri)" as="xs:string"/>
 
-        <xsl:copy-of select="f:logInfo('Including CSS stylesheet: {1}', ($uri))"/>
+        <xsl:copy-of select="f:log-info('Including CSS stylesheet: {1}', ($uri))"/>
 
         <xsl:variable name="css">
             <xsl:choose>
@@ -789,7 +789,7 @@
                     <xsl:value-of select="document($uri || '.xml')/*/node()"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="f:logError('Unable to find CSS stylesheet: {1}', ($uri))"/>
+                    <xsl:copy-of select="f:log-error('Unable to find CSS stylesheet: {1}', ($uri))"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

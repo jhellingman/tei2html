@@ -50,13 +50,13 @@
                 <xsl:text> <!-- insert extra new-line for PG -->
                 </xsl:text>
 
-                <xsl:if test="f:isSet('includePGHeaders')">
+                <xsl:if test="f:is-set('includePGHeaders')">
                     <xsl:call-template name="PGHeader"/>
                 </xsl:if>
 
                 <xsl:apply-templates/>
 
-                <xsl:if test="f:isSet('includePGHeaders')">
+                <xsl:if test="f:is-set('includePGHeaders')">
                     <xsl:call-template name="PGFooter"/>
                 </xsl:if>
             </body>
@@ -137,9 +137,9 @@
         </xsl:for-each>
 
         <!-- Link in MathJax script -->
-        <xsl:if test="f:getSetting('math.mathJax.format') = 'MathJax' and //formula[@notation='TeX']">
+        <xsl:if test="f:get-setting('math.mathJax.format') = 'MathJax' and //formula[@notation='TeX']">
             <script type="text/javascript" async="async"
-              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config={f:getSetting('math.mathJax.configuration')}">
+              src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config={f:get-setting('math.mathJax.configuration')}">
             </script>
         </xsl:if>
 
@@ -157,7 +157,7 @@
 
     <xsl:template name="include-stylesheets">
         <xsl:choose>
-            <xsl:when test="not(f:isSet('inlineStylesheet')) or $outputformat = 'epub'">
+            <xsl:when test="not(f:is-set('inlineStylesheet')) or $outputformat = 'epub'">
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
 
@@ -182,7 +182,7 @@
 
     <!-- Suppress PGTei extensions -->
     <xsl:template match="pgExtensions">
-        <xsl:copy-of select="f:logWarning('This stylesheet does not support the Project Gutenberg PGTEI extensions.', ())"/>
+        <xsl:copy-of select="f:log-warning('This stylesheet does not support the Project Gutenberg PGTEI extensions.', ())"/>
     </xsl:template>
 
 </xsl:stylesheet>

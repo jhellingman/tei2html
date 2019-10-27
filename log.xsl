@@ -16,66 +16,66 @@
         <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:function name="f:logError">
+    <xsl:function name="f:log-error">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('error', $message, $params)"/>
+        <xsl:copy-of select="f:log-message('error', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:formatError" as="xs:string">
+    <xsl:function name="f:format-error" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('error', $message, $params)"/>
+        <xsl:copy-of select="f:format-log-message('error', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:logWarning">
+    <xsl:function name="f:log-warning">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('warning', $message, $params)"/>
+        <xsl:copy-of select="f:log-message('warning', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:formatWarning" as="xs:string">
+    <xsl:function name="f:format-warning" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('warning', $message, $params)"/>
+        <xsl:copy-of select="f:format-log-message('warning', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:logInfo">
+    <xsl:function name="f:log-info">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:logMessage('info', $message, $params)"/>
+        <xsl:copy-of select="f:log-message('info', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:formatInfo" as="xs:string">
+    <xsl:function name="f:format-info" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('info', $message, $params)"/>
+        <xsl:copy-of select="f:format-log-message('info', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:logDebug">
+    <xsl:function name="f:log-debug">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:if test="f:isSet('debug')">
-            <xsl:copy-of select="f:logMessage('debug', $message, $params)"/>
+        <xsl:if test="f:is-set('debug')">
+            <xsl:copy-of select="f:log-message('debug', $message, $params)"/>
         </xsl:if>
     </xsl:function>
 
-    <xsl:function name="f:formatDebug" as="xs:string">
+    <xsl:function name="f:format-debug" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:copy-of select="f:formatLogMessage('debug', $message, $params)"/>
+        <xsl:copy-of select="f:format-log-message('debug', $message, $params)"/>
     </xsl:function>
 
-    <xsl:function name="f:logMessage">
+    <xsl:function name="f:log-message">
         <xsl:param name="level" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
 
-        <xsl:variable name="formatted" select="f:formatLogMessage($level, $message, $params)"/>
+        <xsl:variable name="formatted" select="f:format-log-message($level, $message, $params)"/>
         <xsl:message><xsl:value-of select="$formatted"/></xsl:message>
     </xsl:function>
 
-    <xsl:function name="f:formatLogMessage" as="xs:string">
+    <xsl:function name="f:format-log-message" as="xs:string">
         <xsl:param name="level" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>

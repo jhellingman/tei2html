@@ -188,7 +188,7 @@
 
             <!-- Link to non-secure website (http://) -->
             <xsl:when test="starts-with($url, 'http:') or starts-with($url, 'https:') or starts-with($url, 'mailto:')">
-                <xsl:copy-of select="f:logWarning('Link to non-secure HTTP website ({1}).', ($url))"/>
+                <xsl:copy-of select="f:log-warning('Link to non-secure HTTP website ({1}).', ($url))"/>
                 <xsl:value-of select="$url"/>
             </xsl:when>
 
@@ -208,7 +208,7 @@
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:copy-of select="f:logWarning('URL &quot;{1}&quot; not understood.', ($url))"/>
+                <xsl:copy-of select="f:log-warning('URL &quot;{1}&quot; not understood.', ($url))"/>
                 <xsl:value-of select="$url"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -230,7 +230,7 @@
         <xsl:param name="prefixDef" as="element(prefixDef)"/>
         <xsl:variable name="locator" select="substring-after($url, ':')" as="xs:string"/>
 
-        <xsl:copy-of select="f:logDebug('URL {1}; pattern: {2}; replacement: {3}.', ($url, $prefixDef/@matchPattern, $prefixDef/@replacementPattern))"/>
+        <xsl:copy-of select="f:log-debug('URL {1}; pattern: {2}; replacement: {3}.', ($url, $prefixDef/@matchPattern, $prefixDef/@replacementPattern))"/>
 
         <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $prefixDef/@replacementPattern)"/>
     </xsl:function>
@@ -350,14 +350,14 @@
         <xsl:variable name="bookTitle" select="f:message('bible.' || map:get($bibleBooks, lower-case($book)))"/>
 
         <xsl:if test="not($bookTitle) or $bookTitle = ''">
-            <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
+            <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="bookTitle" select="if ($bookTitle != '') then $bookTitle else $book"/>
 
-        <!-- <xsl:message expand-text="yes">{f:logInfo('Found Bible reference &quot;{1}&quot; = BK: {2} CH: {3} V: {4} TO: {5} ED: {6} = {7}', ($url, $book, $chapter, $verse, $toVerse, $edition, $bookTitle))}</xsl:message> -->
+        <!-- <xsl:message expand-text="yes">{f:log-info('Found Bible reference &quot;{1}&quot; = BK: {2} CH: {3} V: {4} TO: {5} ED: {6} = {7}', ($url, $book, $chapter, $verse, $toVerse, $edition, $bookTitle))}</xsl:message> -->
 
-        <xsl:value-of select="f:formatMessage(
+        <xsl:value-of select="f:format-message(
                 if ($toVerse)
                 then 'msgLinkToBibleBookChapterVerseToVerse'
                 else if ($verse)
@@ -374,7 +374,7 @@
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:if test="not(matches($url, $bibleRefPattern))">
-            <xsl:message expand-text="yes">{f:logError('Unrecognized reference to Bible: {1}.', ($url))}</xsl:message>
+            <xsl:message expand-text="yes">{f:log-error('Unrecognized reference to Bible: {1}.', ($url))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
@@ -385,7 +385,7 @@
         <xsl:variable name="edition" select="$urlParts[5]"/>
 
         <xsl:if test="not(map:get($bibleBooks, lower-case($book)))">
-            <xsl:message expand-text="yes">{f:logError('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
+            <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="bibleTranslations" select="map{
@@ -399,7 +399,7 @@
 
         <xsl:variable name="edition" select="if ($edition) then ($edition) else map:get($bibleTranslations, $lang)"/>
         <xsl:if test="not($edition)">
-            <xsl:message expand-text="yes">{f:logWarning('No edition of Bible text known in language &quot;{1}&quot;.', ($lang))}</xsl:message>
+            <xsl:message expand-text="yes">{f:log-warning('No edition of Bible text known in language &quot;{1}&quot;.', ($lang))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="reference" as="xs:string" select="
@@ -426,7 +426,7 @@
         <xsl:variable name="verse" select="$urlParts[2]"/>
         <xsl:variable name="toVerse" select="$urlParts[3]"/>
 
-        <xsl:value-of select="f:formatMessage(
+        <xsl:value-of select="f:format-message(
                 if ($toVerse)
                 then 'msgLinkToQuranChapterVerseToVerse'
                 else if ($verse)
@@ -441,7 +441,7 @@
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:if test="not(matches($url, $quranRefPattern))">
-            <xsl:message expand-text="yes">{f:logError('Invalid reference to Quran: {1}.', ($url))}</xsl:message>
+            <xsl:message expand-text="yes">{f:log-error('Invalid reference to Quran: {1}.', ($url))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="urlParts" select="tokenize(replace($url, $quranRefPattern, '$1,$2,$3'), ',')"/>

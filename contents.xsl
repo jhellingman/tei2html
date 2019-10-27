@@ -41,7 +41,7 @@
     </xd:doc>
 
     <xsl:template match="divGen">
-        <xsl:copy-of select="f:logWarning('divGen element without or with unknown type: {1}.', (@type))"/>
+        <xsl:copy-of select="f:log-warning('divGen element without or with unknown type: {1}.', (@type))"/>
     </xsl:template>
 
 
@@ -141,7 +141,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
-                        <xsl:copy-of select="f:logWarning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
+                        <xsl:copy-of select="f:log-warning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
@@ -157,7 +157,7 @@
         <xsl:param name="div" as="node()"/>
 
         <xsl:variable name="defaultHead">
-            <xsl:if test="f:isSet('defaultTocEntries')">
+            <xsl:if test="f:is-set('defaultTocEntries')">
                 <xsl:value-of select="f:default-toc-head($div/@type)"/>
             </xsl:if>
         </xsl:variable>
@@ -206,7 +206,7 @@
         <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
-        <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
+        <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
             <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a href="{f:generate-href(.)}">
@@ -392,7 +392,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:if test="f:rend-value(@rend, 'toc') != 'none'">
-                        <xsl:copy-of select="f:logWarning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
+                        <xsl:copy-of select="f:log-warning('No head for {1} {2}; this and underlying divisions will be omitted from the table of contents.', (name(.), @id))"/>
                     </xsl:if>
                 </xsl:otherwise>
             </xsl:choose>
@@ -415,7 +415,7 @@
             </td>
         </xsl:if>
         <td class="tocDivNum">
-            <xsl:if test="@n and f:isSet('numberTocEntries') and $show-div-numbers">
+            <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
                 <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>

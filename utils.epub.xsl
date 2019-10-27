@@ -129,7 +129,7 @@
                     <xsl:value-of select="f:determine-filename((root($target)//divGen[@type='Colophon'])[1])"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="f:logError('No colophon for cross-reference table in document', ())"/>
+                    <xsl:copy-of select="f:log-error('No colophon for cross-reference table in document', ())"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -146,7 +146,7 @@
     <xsl:template name="copy-xml-file">
         <xsl:param name="filename" as="xs:string"/>
 
-        <xsl:copy-of select="f:logInfo('Copying XML file: {1} to: {2}.', ($filename, $path))"/>
+        <xsl:copy-of select="f:log-info('Copying XML file: {1} to: {2}.', ($filename, $path))"/>
 
         <xsl:result-document format="xml-noindent" href="{$path}/{$filename}">
             <xsl:copy-of select="document($filename, .)"/>

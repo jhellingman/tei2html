@@ -69,7 +69,7 @@
 
         <xsl:choose>
             <xsl:when test="not($targetNode)">
-                <xsl:copy-of select="f:logWarning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
+                <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:when test="@type='noteref'">
@@ -170,7 +170,7 @@
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="f:isSet('outputExternalLinksTable')">
+            <xsl:when test="f:is-set('outputExternalLinksTable')">
                 <xsl:choose>
                     <xsl:when test="//divGen[@type='Colophon']">
                         <a id="{f:generate-id(.)}" href="{f:generate-xref-table-href(.)}">
@@ -183,8 +183,8 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:getSetting('outputExternalLinks') = 'always' 
-                            or (f:getSetting('outputExternalLinks') = 'colophon' and ancestor::teiHeader)">
+            <xsl:when test="f:get-setting('outputExternalLinks') = 'always' 
+                            or (f:get-setting('outputExternalLinks') = 'colophon' and ancestor::teiHeader)">
                 <xsl:call-template name="handle-xref">
                     <xsl:with-param name="url" select="$url"/>
                 </xsl:call-template>

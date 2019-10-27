@@ -159,7 +159,7 @@
                 <xsl:call-template name="content.div-fragment"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('Unknown splitter-action {1} in div-fragment.', ($splitter-action))"/>
+                <xsl:copy-of select="f:log-error('Unknown splitter-action {1} in div-fragment.', ($splitter-action))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -213,7 +213,7 @@
                 <xsl:call-template name="content.div"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('Unknown splitter-action {1} in choose-splitter-action.', ($splitter-action))"/>
+                <xsl:copy-of select="f:log-error('Unknown splitter-action {1} in choose-splitter-action.', ($splitter-action))"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -303,7 +303,7 @@
 
             <!-- Warn for extra media overlays -->
             <xsl:if test="$media-overlays[2]">
-                <xsl:copy-of select="f:logError('Ignoring second media-overlay for single file (id: {1}).', ($media-overlays[2]))"/>
+                <xsl:copy-of select="f:log-error('Ignoring second media-overlay for single file (id: {1}).', ($media-overlays[2]))"/>
             </xsl:if>
         </item>
     </xsl:template>
@@ -374,7 +374,7 @@
         <xsl:variable name="filename" select="f:generate-nth-filename(.., position())" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:copy-of select="f:logInfo('Generated file [{3}.{4}]: {1}/{2}.', ($path, $filename, name(..), string(position())))"/>
+            <xsl:copy-of select="f:log-info('Generated file [{3}.{4}]: {1}/{2}.', ($path, $filename, name(..), string(position())))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
@@ -421,7 +421,7 @@
         <xsl:variable name="filename" select="f:generate-filename(.)" as="xs:string"/>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, $filename, name(.)))"/>
+            <xsl:copy-of select="f:log-info('Generated file [{3}]: {1}/{2}.', ($path, $filename, name(.)))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
@@ -487,7 +487,7 @@
         </xsl:variable>
 
         <xsl:value-of select="if ($filename = '')
-            then f:logError('Unable to determine filename for {1} with generated id: {2} (parent: {3}; id: {4})', 
+            then f:log-error('Unable to determine filename for {1} with generated id: {2} (parent: {3}; id: {4})', 
                                 (name($node), f:generate-id($node), name($node/ancestor::*[@id][1]), $node/ancestor::*[@id][1]/@id))
             else $filename"/>
     </xsl:function>
@@ -528,14 +528,14 @@
     <xsl:template name="epubPGHeader">
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
-        <xsl:if test="f:isSet('includePGHeaders')">
+        <xsl:if test="f:is-set('includePGHeaders')">
             <xsl:choose>
                 <xsl:when test="$splitter-action = 'spine'">
                     <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgheader"/>
                 </xsl:when>
                 <xsl:when test="$splitter-action = 'content'">
                     <xsl:result-document href="{$path}/pgheader.xhtml">
-                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgheader.xhtml', name(.)))"/>
+                        <xsl:copy-of select="f:log-info('Generated file [{3}]: {1}/{2}.', ($path, 'pgheader.xhtml', name(.)))"/>
                         <html>
                             <xsl:call-template name="generate-html-header"/>
                             <body>
@@ -557,14 +557,14 @@
     <xsl:template name="epubPGFooter">
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
-        <xsl:if test="f:isSet('includePGHeaders')">
+        <xsl:if test="f:is-set('includePGHeaders')">
             <xsl:choose>
                 <xsl:when test="$splitter-action = 'spine'">
                     <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgfooter"/>
                 </xsl:when>
                 <xsl:when test="$splitter-action = 'content'">
                     <xsl:result-document href="{$path}/pgfooter.xhtml">
-                        <xsl:copy-of select="f:logInfo('Generated file [{3}]: {1}/{2}.', ($path, 'pgfooter.xhtml', name(.)))"/>
+                        <xsl:copy-of select="f:log-info('Generated file [{3}]: {1}/{2}.', ($path, 'pgfooter.xhtml', name(.)))"/>
                         <html>
                             <xsl:call-template name="generate-html-header"/>
                             <body>

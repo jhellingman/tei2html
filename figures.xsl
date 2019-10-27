@@ -52,7 +52,7 @@
             </xsl:when>
             <xsl:when test="$node/@url">
                 <xsl:value-of select="$node/@url"/>
-                <xsl:copy-of select="f:logWarning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
+                <xsl:copy-of select="f:log-warning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="'images/' || $node/@id || $defaultformat"/>
@@ -122,7 +122,7 @@
             <xsl:value-of select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px')"/>
         </xsl:variable>
         <xsl:if test="$width = ''">
-            <xsl:copy-of select="f:logWarning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
+            <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
         </xsl:if>
     </xsl:function>
 
@@ -169,19 +169,19 @@
         <xsl:variable name="fileSize" select="$imageInfo/img:images/img:image[@path=$file]/@filesize"/>
 
         <xsl:if test="$width = ''">
-            <xsl:copy-of select="f:logWarning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
         </xsl:if>
         <xsl:if test="$width != '' and number($width) > 720">
-            <xsl:copy-of select="f:logWarning('Image {1} width more than 720 pixels ({2} px).', ($file, $width))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} width more than 720 pixels ({2} px).', ($file, $width))"/>
         </xsl:if>
         <xsl:if test="$height != '' and number($height) > 720">
-            <xsl:copy-of select="f:logWarning('Image {1} height more than 720 pixels ({2} px).', ($file, $height))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} height more than 720 pixels ({2} px).', ($file, $height))"/>
         </xsl:if>
         <xsl:if test="$fileSize != '' and number($fileSize) > 102400">
-            <xsl:copy-of select="f:logWarning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024))))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024))))"/>
         </xsl:if>
         <xsl:if test="$alt = ''">
-            <xsl:copy-of select="f:logWarning('Image {1} has no alt-text defined.', ($file))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined.', ($file))"/>
         </xsl:if>
 
         <img src="{$file}">
@@ -222,7 +222,7 @@
         </xsl:variable>
 
         <xsl:result-document href="{$path}/{$filename}">
-            <xsl:copy-of select="f:logInfo('Generated image wrapper file: {1}/{2}.', ($path, $filename))"/>
+            <xsl:copy-of select="f:log-info('Generated image wrapper file: {1}/{2}.', ($path, $filename))"/>
             <html>
                 <xsl:call-template name="generate-html-header"/>
                 <body>
@@ -245,7 +245,7 @@
 
     <xsl:template match="figure[f:isInline(.)]">
         <xsl:copy-of select="f:showDebugTags(.)"/>
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
                 <xsl:call-template name="insertimage">
@@ -264,7 +264,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule"/>
             <xsl:apply-templates mode="css"/>
@@ -273,7 +273,7 @@
 
 
     <xsl:template match="figure[f:isInline(.)]" mode="css">
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule">
                 <xsl:with-param name="format" select="'.png'"/>
@@ -316,7 +316,7 @@ width:<xsl:value-of select="$width"/>;
 
     <xsl:template match="figure">
         <xsl:copy-of select="f:showDebugTags(.)"/>
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
                 <xsl:call-template name="closepar"/>
@@ -551,7 +551,7 @@ width:<xsl:value-of select="$width"/>;
 
 
     <xsl:template match="graphic">
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <!-- handle both P3 @url and P5 @target convention -->
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
             <xsl:copy-of select="f:outputImage($url, if (../figDesc) then ../figDesc else '')"/>
@@ -560,7 +560,7 @@ width:<xsl:value-of select="$width"/>;
 
 
     <xsl:template match="graphic" mode="css">
-        <xsl:if test="f:isSet('includeImages')">
+        <xsl:if test="f:is-set('includeImages')">
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
             <xsl:copy-of select="f:outputImageWidthCss(., $url)"/>
         </xsl:if>

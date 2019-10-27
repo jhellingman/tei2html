@@ -47,7 +47,7 @@
         <xsl:variable name="count" select="count($base//*[local-name() = $name] except $node/following::*[local-name() = $name])"/>
         <xsl:variable name="id" select="$baseid || '_' || $name || '_' || $count"/>
 
-        <xsl:copy-of select="f:logInfo('Generated ID: {1} from {2}-th [{3}] child of [{4}].', ($id, string($count), $name, local-name($base)))"/>
+        <xsl:copy-of select="f:log-info('Generated ID: {1} from {2}-th [{3}] child of [{4}].', ($id, string($count), $name, local-name($base)))"/>
 
         <xsl:value-of select="$id"/>
     </xsl:function>
@@ -208,7 +208,7 @@
     <xsl:function name="f:showDebugTags">
         <xsl:param name="node" as="node()"/>
 
-        <xsl:if test="f:isSet('debug')">
+        <xsl:if test="f:is-set('debug')">
             <span class="showtags">
                 <xsl:text>&lt;</xsl:text>
                 <xsl:value-of select="name($node)"/>
@@ -330,7 +330,7 @@
             <xsl:when test="$type='part'"><xsl:value-of select="f:message('msgPart')"/></xsl:when>
             <xsl:when test="$type='book'"><xsl:value-of select="f:message('msgBook')"/></xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logWarning('Division type: {1} not understood.', ($type))"/>
+                <xsl:copy-of select="f:log-warning('Division type: {1} not understood.', ($type))"/>
                 <xsl:value-of select="''"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -447,7 +447,7 @@
         <xsl:param name="resp" as="xs:string"/>
 
         <xsl:variable name="message" select="$contributorRoles//*[.=$resp]/@message"/>
-        <xsl:copy-of select="f:logDebug('Translating contributor role: {1} to {2}', ($resp, $message))"/>
+        <xsl:copy-of select="f:log-debug('Translating contributor role: {1} to {2}', ($resp, $message))"/>
         <xsl:value-of select="if ($message) then f:message($message) else f:message('msgUnknown')"/>
     </xsl:function>
 
@@ -455,7 +455,7 @@
         <xsl:param name="resp" as="xs:string"/>
 
         <xsl:variable name="code" select="$contributorRoles//*[.=$resp]/@code"/>
-        <xsl:copy-of select="f:logDebug('Translating contributor role: {1} to {2}', ($resp, $code))"/>
+        <xsl:copy-of select="f:log-debug('Translating contributor role: {1} to {2}', ($resp, $code))"/>
         <xsl:value-of select="if ($code) then $code else 'oth'"/>
     </xsl:function>
 

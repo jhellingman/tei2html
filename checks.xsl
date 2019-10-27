@@ -479,21 +479,21 @@
 
     <xsl:function name="f:is-number" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
-        <xsl:sequence select="matches($value, f:getSetting('math.numberPattern'))"/>
+        <xsl:sequence select="matches($value, f:get-setting('math.numberPattern'))"/>
     </xsl:function>
 
     <xsl:function name="f:has-number" as="xs:boolean">
         <xsl:param name="value" as="xs:string"/>
-        <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
-        <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
+        <xsl:variable name="value" select="translate($value, f:get-setting('math.thousandsSeparator'), '')"/>
+        <xsl:variable name="value" select="translate($value, f:get-setting('math.decimalSeparator'), '.')"/>
         <xsl:variable name="value" select="translate($value, translate($value, '.+-0123456789', ''), '')"/>
         <xsl:value-of select="$value castable as xs:double"/>
     </xsl:function>
 
     <xsl:function name="f:parse-number" as="xs:double">
         <xsl:param name="value" as="xs:string"/>
-        <xsl:variable name="value" select="translate($value, f:getSetting('math.thousandsSeparator'), '')"/>
-        <xsl:variable name="value" select="translate($value, f:getSetting('math.decimalSeparator'), '.')"/>
+        <xsl:variable name="value" select="translate($value, f:get-setting('math.thousandsSeparator'), '')"/>
+        <xsl:variable name="value" select="translate($value, f:get-setting('math.decimalSeparator'), '.')"/>
         <xsl:variable name="value" select="translate($value, translate($value, '.+-0123456789', ''), '')"/>
         <xsl:value-of select="if ($value castable as xs:double) then number($value) else 0.0"/>
     </xsl:function>
@@ -1101,6 +1101,9 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                       'Warning', 'P17', 'Unhandled fraction')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[|]',                               'Warning', 'P18', 'Vertical Bar')"/>
 
+
+        <xsl:variable name="$nfd-segment" select="fn:normalize-unicode($segment, 'NFD')" as="xs:string"/>
+
         <!-- Greek script checks -->
         <xsl:variable name="final-sigma-mid-word-pattern" select="'&#x03C2;\p{L}'" as="xs:string"/>
         <xsl:variable name="sigma-end-word-pattern" select="'&#x03C3;\P{L}'" as="xs:string"/>
@@ -1137,7 +1140,7 @@
 
 
     <xsl:function name="f:get-abbreviations">
-        <xsl:variable name="abbreviations" select="f:getSetting('text.abbr')"/>
+        <xsl:variable name="abbreviations" select="f:get-setting('text.abbr')"/>
         <xsl:variable name="abbrs">
             <tmp:abbrs>
                 <xsl:analyze-string select="$abbreviations" regex=";" flags="s">
@@ -1249,12 +1252,12 @@
 
 
     <!-- Support variables for matching-punctuation tests -->
-    <xsl:variable name="pairs" select="f:getSetting('text.parentheses') || f:getSetting('text.quotes')"/>
+    <xsl:variable name="pairs" select="f:get-setting('text.parentheses') || f:get-setting('text.quotes')"/>
     <xsl:variable name="pair-sequence" select="f:split-string($pairs)"/>
     <xsl:variable name="opener" select="$pair-sequence[position() mod 2 = 1]"/>
     <xsl:variable name="closer" select="$pair-sequence[position() mod 2 = 0]"/>
-    <xsl:variable name="open-quotation-marks" select="string-join(f:split-string(f:getSetting('text.quotes'))[position() mod 2 = 1], '')"/>
-    <xsl:variable name="close-quotation-marks" select="string-join(f:split-string(f:getSetting('text.quotes'))[position() mod 2 = 0], '')"/>
+    <xsl:variable name="open-quotation-marks" select="string-join(f:split-string(f:get-setting('text.quotes'))[position() mod 2 = 1], '')"/>
+    <xsl:variable name="close-quotation-marks" select="string-join(f:split-string(f:get-setting('text.quotes'))[position() mod 2 = 0], '')"/>
     <xsl:variable name="opener-string" select="string-join($opener, '')"/>
     <xsl:variable name="closer-string" select="string-join($closer, '')"/>
 
@@ -1273,7 +1276,7 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="next" as="xs:string"/>
 
-        <xsl:copy-of select="f:logDebug('QUOTES: {1} - {2}', ($opener-string, $closer-string))"/>
+        <xsl:copy-of select="f:log-debug('QUOTES: {1} - {2}', ($opener-string, $closer-string))"/>
 
         <xsl:variable name="unclosed" select="f:unclosed-pairs(f:keep-only($string, $pairs), '')"/>
         <xsl:choose>

@@ -83,7 +83,7 @@
     <xsl:template name="pb">
         <xsl:context-item as="element(pb)" use="required"/>
         <xsl:choose>
-            <xsl:when test="@n and f:isSet('pageNumbers.show')">
+            <xsl:when test="@n and f:is-set('pageNumbers.show')">
                 <xsl:call-template name="pb-margin"/>
             </xsl:when>
             <xsl:otherwise>
@@ -102,12 +102,12 @@
     <xsl:template name="pb-margin">
         <xsl:context-item as="element(pb)" use="required"/>
         <span class="pagenum">
-            <xsl:value-of select="f:getSetting('pageNumbers.before')"/>
+            <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
             <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
                 <xsl:copy-of select="f:convertMarkdown(@n)"/>
             </a>
-            <xsl:value-of select="f:getSetting('pageNumbers.after')"/>
-            <xsl:if test="f:isSet('facsimile.enable') and ./@facs">
+            <xsl:value-of select="f:get-setting('pageNumbers.after')"/>
+            <xsl:if test="f:is-set('facsimile.enable') and ./@facs">
                 <xsl:call-template name="pb-facsimile-link"/>
             </xsl:if>
          </span>
@@ -122,7 +122,7 @@
 
     <xsl:template name="pb-facsimile-link">
         <xsl:context-item as="element(pb)" use="required"/>
-        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+        <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
         <xsl:text>&nbsp;</xsl:text>
         <xsl:choose>
@@ -130,11 +130,11 @@
                 <xsl:variable name="id" select="substring(@facs, 2)"/>
                 <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
                 <xsl:if test="$graphic">
-                    <xsl:copy-of select="if (f:isSet('facsimile.external')) then f:facsimile-direct-link($graphic/@url) else f:facsimile-wrapper-link($graphic)"/>
+                    <xsl:copy-of select="if (f:is-set('facsimile.external')) then f:facsimile-direct-link($graphic/@url) else f:facsimile-wrapper-link($graphic)"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="if (f:isSet('facsimile.external')) then f:facsimile-direct-link(@facs) else f:facsimile-wrapper-link(.)"/>
+                <xsl:copy-of select="if (f:is-set('facsimile.external')) then f:facsimile-direct-link(@facs) else f:facsimile-wrapper-link(.)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -142,7 +142,7 @@
 
     <xsl:function name="f:facsimile-wrapper-link">
         <xsl:param name="node" as="node()"/>
-        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+        <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
         <a href="{f:facsimile-wrapper-full-filename($node)}" class="facslink" title="{f:message('msgPageImage')}">
             <xsl:if test="$target">
@@ -155,7 +155,7 @@
     <xsl:function name="f:facsimile-direct-link">
         <xsl:param name="url" as="xs:string"/>
         <xsl:variable name="url" select="f:translate-xref-url($url, 'xx')"/>
-        <xsl:variable name="target" select="f:getSetting('facsimile.target')"/>
+        <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
         <a href="{$url}" class="facslink" title="{f:message('msgPageImage')}">
             <xsl:if test="$target">
@@ -183,11 +183,11 @@
     </xd:doc>
 
     <xsl:template match="fw">
-        <xsl:copy-of select="f:logDebug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
+        <xsl:copy-of select="f:log-debug('Ignoring fw element on page {1}.', (./preceding::pb[1]/@n))"/>
     </xsl:template>
 
     <xsl:template match="fw[@place=('margin', 'left', 'right')]">
-        <xsl:copy-of select="f:logDebug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
+        <xsl:copy-of select="f:log-debug('Placing fw element in margin on page {1}.', (./preceding::pb[1]/@n))"/>
         <span class="fwMargin">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -477,11 +477,11 @@
     <xsl:template name="split-paragraph">
         <xsl:context-item as="element(p)" use="required"/>
         <xsl:variable name="p" select="." as="element(p)"/>
-        <xsl:copy-of select="f:logDebug('Splitting paragraph...', ())"/>
+        <xsl:copy-of select="f:log-debug('Splitting paragraph...', ())"/>
         <xsl:for-each-group select="*|text()" group-adjacent="f:is-html-paragraph-content(.)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
-                    <xsl:copy-of select="f:logDebug('Paragraph fragment {1}.', (string(position())))"/>
+                    <xsl:copy-of select="f:log-debug('Paragraph fragment {1}.', (string(position())))"/>
                     <xsl:call-template name="handle-paragraph-fragment">
                         <xsl:with-param name="p" select="$p"/>
                         <xsl:with-param name="fragment" select="current-group()"/>
@@ -490,7 +490,7 @@
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="f:logDebug('Non-paragraph fragment {1}.', (string(position())))"/>
+                    <xsl:copy-of select="f:log-debug('Non-paragraph fragment {1}.', (string(position())))"/>
                     <xsl:apply-templates select="current-group()"/>
                 </xsl:otherwise>
             </xsl:choose>
@@ -516,7 +516,7 @@
                          or $node/self::figure[not(f:isInline(.) or f:rend-value(@rend, 'position') = 'abovehead')]
                          or $node/self::table[not(f:isInline(.))]
                         )"/>
-        <xsl:copy-of select="f:logInfo('Test [{1}] : {2}.', ( if (name($node))
+        <xsl:copy-of select="f:log-info('Test [{1}] : {2}.', ( if (name($node))
                                                               then name($node)
                                                               else 'TEXT: ' || substring($node, 1, 10), string($is-html-paragraph-content)))"/>
         <xsl:value-of select="$is-html-paragraph-content"/>
@@ -548,7 +548,7 @@
         <xsl:variable name="isFirst" as="xs:boolean" select="$position = 1"/>
         <xsl:variable name="isLast" as="xs:boolean" select="$position = $last"/>
 
-        <xsl:copy-of select="f:logInfo('position: {1}; last: {2}.', (string($position), string($last)))"/>
+        <xsl:copy-of select="f:log-info('position: {1}; last: {2}.', (string($position), string($last)))"/>
 
         <xsl:if test="$fragment">
             <xsl:element name="{$p.element}">
@@ -565,12 +565,12 @@
                     <xsl:value-of select="if ($isFirst) then f:hanging-punctuation-class($p) else ''"/>
                     <xsl:if test="$class"><xsl:value-of select="$class"/> </xsl:if>
                 </xsl:variable>
-                <xsl:copy-of select="f:logDebug('Generate paragraph with class {1}.', ($class))"/>
+                <xsl:copy-of select="f:log-debug('Generate paragraph with class {1}.', ($class))"/>
                 <xsl:copy-of select="f:set-class-attribute-with($p, $class)"/>
 
                 <xsl:if test="$isFirst">
                     <xsl:if test="$before"><xsl:copy-of select="$before"/></xsl:if>
-                    <xsl:if test="$p/@n and f:isSet('showParagraphNumbers')">
+                    <xsl:if test="$p/@n and f:is-set('showParagraphNumbers')">
                         <span class="parnum"><xsl:value-of select="$p/@n"/>.<xsl:text> </xsl:text></span>
                     </xsl:if>
                 </xsl:if>
@@ -597,10 +597,10 @@
                     <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
                     <xsl:value-of select="f:hanging-punctuation-class(.)"/>
                 </xsl:variable>
-                <xsl:copy-of select="f:logDebug('Generate paragraph with class {1}.', ($class))"/>
+                <xsl:copy-of select="f:log-debug('Generate paragraph with class {1}.', ($class))"/>
                 <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
-                <xsl:if test="@n and f:isSet('showParagraphNumbers')">
+                <xsl:if test="@n and f:is-set('showParagraphNumbers')">
                     <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 <xsl:apply-templates/>
@@ -647,7 +647,7 @@
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="not(f:isSet('useHangingPunctuation'))"><xsl:text> </xsl:text></xsl:when>
+            <xsl:when test="not(f:is-set('useHangingPunctuation'))"><xsl:text> </xsl:text></xsl:when>
 
             <!-- Longer sequences should go first! -->
             <xsl:when test="starts-with($text, '&ldquo;&lsquo;')">indent-hang-large</xsl:when>
@@ -897,11 +897,11 @@
     <xsl:template match="text()" mode="remove-initial">
         <!-- Get text of the current paragraph before the current node: we only want to remove the intial if this is empty. -->
         <xsl:variable name="paragraph-sofar" select="(./preceding::node()[./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
-        <xsl:copy-of select="f:logDebug('paragraph so-far: {1}', ($paragraph-sofar))"/>
+        <xsl:copy-of select="f:log-debug('paragraph so-far: {1}', ($paragraph-sofar))"/>
 
         <xsl:choose>
             <xsl:when test="string-length($paragraph-sofar) = 0 and position() = 1">
-                <xsl:copy-of select="f:logDebug('removing initial letter from: {1}', (.))"/>
+                <xsl:copy-of select="f:log-debug('removing initial letter from: {1}', (.))"/>
                 <xsl:value-of select="f:process-text(f:remove-initial(.))"/>
              </xsl:when>
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
@@ -919,7 +919,7 @@
     <xsl:template match="*" mode="remove-initial">
         <xsl:choose>
             <xsl:when test="position() = 1">
-                <xsl:copy-of select="f:logWarning('Skipping processing of {1} element while removing initial from paragraph with decorative initial.', (name(.)))"/>
+                <xsl:copy-of select="f:log-warning('Skipping processing of {1} element while removing initial from paragraph with decorative initial.', (name(.)))"/>
                 <xsl:apply-templates mode="remove-initial"/>
             </xsl:when>
             <xsl:otherwise><xsl:apply-templates select="."/></xsl:otherwise>

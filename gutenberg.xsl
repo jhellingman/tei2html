@@ -96,7 +96,7 @@
     <xsl:template name="PGHeader">
         <div class="transcriberNote" id="pgheader">
             <xsl:variable name="authors"><xsl:call-template name="combine-authors"/></xsl:variable>
-            <xsl:copy-of select="f:formatMessage('msgPGHeader', map{
+            <xsl:copy-of select="f:format-message('msgPGHeader', map{
                 'title': //titleStmt/title,
                 'authors': $authors,
                 'releasedate': //publicationStmt/date,
@@ -124,7 +124,7 @@
             <xsl:variable name="transcriber"><xsl:call-template name="combine-transcribers"/></xsl:variable>
             <xsl:variable name="pgpath" expand-text="yes">{substring($idno, 1, 1)}/{substring($idno, 2, 1)}/{substring($idno, 3, 1)}/{substring($idno, 4, 1)}/{$idno}/</xsl:variable>
             <p/>
-            <xsl:copy-of select="f:formatMessage('msgPGFooter', map{
+            <xsl:copy-of select="f:format-message('msgPGFooter', map{
                 'title': //titleStmt/title,
                 'authors': $authors,
                 'transcriber': $transcriber,
@@ -136,7 +136,7 @@
 
 
     <xsl:template name="PGLicense">
-        <xsl:copy-of select="f:formatMessage('msgPGLicense', map{})"/>
+        <xsl:copy-of select="f:format-message('msgPGLicense', map{})"/>
     </xsl:template>
 
 

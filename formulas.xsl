@@ -79,7 +79,7 @@
                     href="{$texFile}"
                     method="text"
                     encoding="UTF-8">
-                <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($texFile))"/>
+                <xsl:copy-of select="f:log-info('Generated file: {1}.', ($texFile))"/>
                 <xsl:value-of select="$texString"/>
             </xsl:result-document>
         </xsl:if>
@@ -92,7 +92,7 @@
 
             <xsl:choose>
                 <!-- Dynamic mathJax -->
-                <xsl:when test="f:getSetting('math.mathJax.format') = 'MathJax'">
+                <xsl:when test="f:get-setting('math.mathJax.format') = 'MathJax'">
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\('"/>
                     <xsl:value-of select="$texString"/>
                     <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
@@ -102,29 +102,29 @@
                     <xsl:copy-of select="f:handleTrivialMath($texString)"/>
                 </xsl:when>
                 <!-- Static MML inline -->
-                <xsl:when test="f:getSetting('math.mathJax.format') = 'MML'">
-                    <xsl:copy-of select="f:logInfo('Including file: {1}.', ($mmlFile))"/>
+                <xsl:when test="f:get-setting('math.mathJax.format') = 'MML'">
+                    <xsl:copy-of select="f:log-info('Including file: {1}.', ($mmlFile))"/>
                     <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
                     <xsl:apply-templates select="document($mmlFile, .)/*" mode="stripComments"/>
                 </xsl:when>
                 <!-- Static SVG inline -->
-                <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG'">
-                    <xsl:copy-of select="f:logInfo('Including file: {1}.', ($svgFile))"/>
+                <xsl:when test="f:get-setting('math.mathJax.format') = 'SVG'">
+                    <xsl:copy-of select="f:log-info('Including file: {1}.', ($svgFile))"/>
                     <xsl:copy-of select="document($svgFile, .)/*"/>
                 </xsl:when>
                 <!-- Static SVG as img -->
-                <xsl:when test="f:getSetting('math.mathJax.format') = 'SVG+IMG'">
+                <xsl:when test="f:get-setting('math.mathJax.format') = 'SVG+IMG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
                     <img src="{$svgFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
-                <xsl:when test="f:getSetting('math.mathJax.format') = 'PNG'">
+                <xsl:when test="f:get-setting('math.mathJax.format') = 'PNG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
                     <img src="{$pngFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:copy-of select="f:logError('Unknown format for math formulas: {1}.', (f:getSetting('math.mathJax.format')))"/>
+                    <xsl:copy-of select="f:log-error('Unknown format for math formulas: {1}.', (f:get-setting('math.mathJax.format')))"/>
                 </xsl:otherwise>
             </xsl:choose>
         </span>
@@ -143,7 +143,7 @@
         <xsl:param name="position" as="xs:string"/>
 
         <xsl:if test="$formula/@n and f:isDisplayMath($formula)">
-            <span class="{(if ($position != f:getSetting('math.label.position')) then 'phantom ' else '') || $position || 'MathLabel'}">
+            <span class="{(if ($position != f:get-setting('math.label.position')) then 'phantom ' else '') || $position || 'MathLabel'}">
                 <xsl:copy-of select="f:formatMathLabel($formula/@n)"/>
             </span>
         </xsl:if>
@@ -157,9 +157,9 @@
     <xsl:function name="f:formatMathLabel" as="node()*">
         <xsl:param name="label" as="xs:string"/>
 
-        <xsl:value-of select="f:getSetting('math.label.before')"/>
+        <xsl:value-of select="f:get-setting('math.label.before')"/>
         <xsl:copy-of select="f:convertMarkdown($label)"/>
-        <xsl:value-of select="f:getSetting('math.label.after')"/>
+        <xsl:value-of select="f:get-setting('math.label.after')"/>
     </xsl:function>
 
 
@@ -201,7 +201,7 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
-        <xsl:if test="f:getSetting('math.mathJax.format') = ('SVG+IMG', 'PNG') and not(f:isTrivialMath(.))">
+        <xsl:if test="f:get-setting('math.mathJax.format') = ('SVG+IMG', 'PNG') and not(f:isTrivialMath(.))">
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>

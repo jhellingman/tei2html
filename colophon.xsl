@@ -82,16 +82,16 @@
         <h3 class="main"><xsl:value-of select="f:message('msgRevisionHistory')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/revisionDesc"/>
 
-        <xsl:if test="f:isSet('colophon.showExternalReferences')">
+        <xsl:if test="f:is-set('colophon.showExternalReferences')">
             <xsl:call-template name="externalReferences"/>
         </xsl:if>
 
-        <xsl:if test="f:isSet('colophon.showCorrections') and //corr">
+        <xsl:if test="f:is-set('colophon.showCorrections') and //corr">
             <h3 class="main"><xsl:value-of select="f:message('msgCorrections')"/></h3>
             <xsl:call-template name="correctionTable"/>
         </xsl:if>
 
-        <xsl:if test="f:isSet('colophon.showAbbreviations') and //abbr">
+        <xsl:if test="f:is-set('colophon.showAbbreviations') and //abbr">
             <h3 class="main"><xsl:value-of select="f:message('msgAbbreviations')"/></h3>
             <xsl:call-template name="abbreviationTable"/>
         </xsl:if>
@@ -475,7 +475,7 @@
                 <th><xsl:value-of select="f:message('msgPage')"/></th>
                 <th><xsl:value-of select="f:message('msgSource')"/></th>
                 <th><xsl:value-of select="f:message('msgCorrection')"/></th>
-                <xsl:if test="f:isSet('colophon.showEditDistance')">
+                <xsl:if test="f:is-set('colophon.showEditDistance')">
                     <th><xsl:value-of select="f:message('msgEditDistance')"/></th>
                 </xsl:if>
             </tr>
@@ -495,7 +495,7 @@
                     <td class="width40 bottom">
                         <xsl:call-template name="correctionTableCorrectedText"/>
                     </td>
-                    <xsl:if test="f:isSet('colophon.showEditDistance')">
+                    <xsl:if test="f:is-set('colophon.showEditDistance')">
                         <td class="bottom">
                             <xsl:call-template name="correctionTableEditDistance"/>
                         </td>
@@ -508,10 +508,10 @@
 
     <xsl:template name="correctionTablePageReferences">
         <xsl:choose>
-            <xsl:when test="count(current-group()) &gt; number(f:getSetting('colophon.maxCorrectionCount'))">
+            <xsl:when test="count(current-group()) &gt; number(f:get-setting('colophon.maxCorrectionCount'))">
                 <i>
                     <xsl:attribute name="title">
-                        <xsl:copy-of select="f:formatMessage('msgCountOccurrences', map{'count': count(current-group())})"/>
+                        <xsl:copy-of select="f:format-message('msgCountOccurrences', map{'count': count(current-group())})"/>
                     </xsl:attribute>
                     <xsl:value-of select="f:message('msgPassim')"/>.
                 </i>
@@ -735,7 +735,7 @@
 
             <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
 
-            <xsl:if test="f:isSet('outputExternalLinksTable')">
+            <xsl:if test="f:is-set('outputExternalLinksTable')">
                 <xsl:call-template name="externalReferenceTable"/>
             </xsl:if>
         </xsl:if>
@@ -774,7 +774,7 @@
                         <td>
                             <xsl:variable name="url" select="f:translate-xref-url(@url, substring(f:get-document-lang(), 1, 2))"/>
                             <xsl:choose>
-                                <xsl:when test="f:getSetting('outputExternalLinks') != 'never'">
+                                <xsl:when test="f:get-setting('outputExternalLinks') != 'never'">
                                     <a href="{$url}" class="{f:translate-xref-class(@url)}"><xsl:value-of select="$url"/></a>
                                 </xsl:when>
                                 <xsl:otherwise>

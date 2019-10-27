@@ -31,7 +31,7 @@
         <xd:detail>The language and specific locale to use, e.g. 'en-US'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else f:getSetting('language')" as="xs:string"/>
+    <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else f:get-setting('language')" as="xs:string"/>
 
 
     <xd:doc>
@@ -47,7 +47,7 @@
         <xd:detail>The default language, to be used when no message is available in the specified language. (A warning will be issued in this case.)</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="defaultlanguage" select="f:getSetting('defaultlanguage')" as="xs:string"/>
+    <xsl:variable name="defaultlanguage" select="f:get-setting('defaultlanguage')" as="xs:string"/>
     <xsl:variable name="defaultbaselanguage" select="if (contains($defaultlanguage, '-')) then substring-before($defaultlanguage, '-') else $defaultlanguage" as="xs:string"/>
 
     <xd:doc>
@@ -62,24 +62,24 @@
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
                 <xsl:apply-templates select="$msg[lang($language)][1]" mode="formatMessage"/>
-                <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($language, $name, $msg[lang($language)][1]))"/>
+                <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($language, $name, $msg[lang($language)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($baselanguage)][1]">
                 <xsl:apply-templates select="$msg[lang($baselanguage)][1]" mode="formatMessage"/>
-                <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($baselanguage, $name, $msg[lang($baselanguage)][1]))"/>
+                <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($baselanguage, $name, $msg[lang($baselanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage"/>
-                <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultlanguage, $name, $msg[lang($defaultlanguage)][1]))"/>
+                <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($defaultlanguage, $name, $msg[lang($defaultlanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultbaselanguage)][1]">
-                <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultbaselanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultbaselanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultbaselanguage)][1]" mode="formatMessage"/>
-                <xsl:copy-of select="f:logDebug('{1}: {2} = {3}', ($defaultbaselanguage, $name, $msg[lang($defaultbaselanguage)][1]))"/>
+                <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($defaultbaselanguage, $name, $msg[lang($defaultbaselanguage)][1]))"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
+                <xsl:copy-of select="f:log-error('Unknown message {1}.', ($name))"/>
                 <xsl:text expand-text="yes">[### {$name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
@@ -93,7 +93,7 @@
         parameters to it.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:formatMessage">
+    <xsl:function name="f:format-message">
         <xsl:param name="name" as="xs:string"/>
         <xsl:param name="params" as="map(xs:string, item()*)"/>
 
@@ -111,13 +111,13 @@
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultlanguage)][1]">
-                <xsl:copy-of select="f:logWarning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultlanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultlanguage)][1]" mode="formatMessage">
                     <xsl:with-param name="params" select="$params" tunnel="yes"/>
                 </xsl:apply-templates>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('Unknown message {1}.', ($name))"/>
+                <xsl:copy-of select="f:log-error('Unknown message {1}.', ($name))"/>
                 <xsl:text expand-text="yes">[### {$name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
@@ -163,7 +163,7 @@
                 <xsl:value-of select="$params(@name)"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:logError('No value specified for parameter {1}.', (@name))"/>
+                <xsl:copy-of select="f:log-error('No value specified for parameter {1}.', (@name))"/>
                 <xsl:text expand-text="yes">[### {@name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>

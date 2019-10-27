@@ -37,7 +37,7 @@
 
 
 <xsl:template match="surface">
-    <xsl:copy-of select="f:logWarning('tei2html does not support the surface element.', ())"/>
+    <xsl:copy-of select="f:log-warning('tei2html does not support the surface element.', ())"/>
     <xsl:apply-templates/>
 </xsl:template>
 
@@ -68,7 +68,7 @@
 
 
 <xsl:template match="pb" mode="css">
-    <xsl:if test="f:isSet('facsimile.enable') and @facs and not(starts-with(@facs, '#'))">
+    <xsl:if test="f:is-set('facsimile.enable') and @facs and not(starts-with(@facs, '#'))">
         <xsl:if test="not(preceding::pb[@facs])">
             <xsl:call-template name="main-facsimile-css"/>
         </xsl:if>
@@ -110,7 +110,7 @@
 <xsl:function name="f:facsimile-wrapper-full-filename" as="xs:string">
     <xsl:param name="node" as="node()"/>
 
-    <xsl:value-of select="f:getSetting('facsimile.path') || '/' || f:facsimile-wrapper-filename($node)"/>
+    <xsl:value-of select="f:get-setting('facsimile.path') || '/' || f:facsimile-wrapper-filename($node)"/>
 </xsl:function>
 
 
@@ -139,10 +139,10 @@
 </xd:doc>
 
 <xsl:template name="facsimile-css">
-    <xsl:variable name="facsimile-css-file" select="f:getSetting('facsimile.path') || '/facsimile.css'"/>
+    <xsl:variable name="facsimile-css-file" select="f:get-setting('facsimile.path') || '/facsimile.css'"/>
 
     <xsl:result-document href="{$facsimile-css-file}" method="text" encoding="UTF-8">
-        <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-css-file))"/>
+        <xsl:copy-of select="f:log-info('Generated file: {1}.', ($facsimile-css-file))"/>
         <xsl:text>body {
     text-align: center;
 }</xsl:text>
@@ -159,7 +159,7 @@
     <xsl:variable name="facsimile-file" select="f:facsimile-wrapper-full-filename(.)"/>
 
     <xsl:result-document href="{$facsimile-file}">
-        <xsl:copy-of select="f:logInfo('Generated file: {1}.', ($facsimile-file))"/>
+        <xsl:copy-of select="f:log-info('Generated file: {1}.', ($facsimile-file))"/>
         <xsl:call-template name="facsimile-html"/>
     </xsl:result-document>
 </xsl:template>
@@ -350,7 +350,7 @@
     <!-- Get the highest-level division of which the pb is at the end -->
     <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div($pb)[1]"/>
     <xsl:if test="$ending-div">
-        <xsl:copy-of select="f:logWarning('page-break {1} is at the end of a division, so will use next division.', ($pb/@n))"/>
+        <xsl:copy-of select="f:log-warning('page-break {1} is at the end of a division, so will use next division.', ($pb/@n))"/>
     </xsl:if>
 
     <xsl:choose>

@@ -166,7 +166,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:getSetting" as="xs:string">
+    <xsl:function name="f:get-setting" as="xs:string">
         <xsl:param name="key" as="xs:string"/>
         <xsl:sequence select="if (map:contains($configuration-map, $key)) then map:get($configuration-map, $key) else ''"/>
     </xsl:function>
@@ -176,9 +176,9 @@
         <xd:short>Get a boolean value from the configuration.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:isSet" as="xs:boolean">
+    <xsl:function name="f:is-set" as="xs:boolean">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:sequence select="f:getSetting($key) = 'true'"/>
+        <xsl:sequence select="f:get-setting($key) = 'true'"/>
     </xsl:function>
 
 

@@ -23,17 +23,17 @@
     </xd:doc>
 
 
-    <xsl:function name="f:inCopyright" as="xs:boolean">
+    <xsl:function name="f:in-copyright" as="xs:boolean">
         <xsl:param name="jurisdiction" as="xs:string"/>
         <xsl:param name="teiHeader" as="element(teiHeader)"/>
 
-        <xsl:variable name="termInYears" select="f:copyrightTermInYears($jurisdiction)"/>
+        <xsl:variable name="termInYears" select="f:copyright-term-in-years($jurisdiction)"/>
 
-        <xsl:value-of select="f:lastContributorDeath($teiHeader) > year-from-date(current-date()) - ($termInYears + 1)"/>
+        <xsl:value-of select="f:last-contributor-death($teiHeader) > year-from-date(current-date()) - ($termInYears + 1)"/>
     </xsl:function>
 
 
-    <xsl:function name="f:copyrightTermInYears" as="xs:integer">
+    <xsl:function name="f:copyright-term-in-years" as="xs:integer">
         <xsl:param name="code" as="xs:string"/>
 
         <!--
@@ -55,19 +55,19 @@
     </xsl:function>
 
 
-    <xsl:function name="f:lastContributorDeath">
+    <xsl:function name="f:last-contributor-death">
         <xsl:param name="teiHeader" as="element(teiHeader)"/>
 
         <xsl:variable name="contributors">
             <contributors>
                 <xsl:for-each select="$teiHeader/fileDesc/titleStmt/author">
-                    <xsl:copy-of select="f:parseNameWithDates(.)"/>
+                    <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
                 <xsl:for-each select="$teiHeader/fileDesc/titleStmt/editor">
-                    <xsl:copy-of select="f:parseNameWithDates(.)"/>
+                    <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
                 <xsl:for-each select="$teiHeader/fileDesc/titleStmt/respStmt/name">
-                    <xsl:copy-of select="f:parseNameWithDates(.)"/>
+                    <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
             </contributors>
         </xsl:variable>
@@ -78,7 +78,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:parseNameWithDates">
+    <xsl:function name="f:parse-name-with-dates">
         <xsl:param name="name" as="xs:string"/>
 
         <!-- <xsl:message>ANALYZING: <xsl:value-of select="$name"/></xsl:message> -->

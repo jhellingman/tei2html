@@ -43,7 +43,7 @@
 
     <xsl:template match="text()">
 
-        <xsl:variable name="text" select="if (f:isSet('lb.hyphen.remove')) then f:remove-eol-hyphens(.) else ."/>
+        <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) then f:remove-eol-hyphens(.) else ."/>
 
         <xsl:value-of select="f:process-text($text)"/>
     </xsl:template>
@@ -122,7 +122,7 @@
 
         <xsl:sequence select="$node
                       and $node/following-sibling::node()[1][self::lb]
-                      and ends-with($node, f:getSetting('lb.removable.hyphen'))"/>
+                      and ends-with($node, f:get-setting('lb.removable.hyphen'))"/>
     </xsl:function>
 
     <xsl:function name="f:ends-with-hyphen" as="xs:boolean">
@@ -130,16 +130,16 @@
 
         <xsl:sequence select="$node
                       and $node/following-sibling::node()[1][self::lb]
-                      and ends-with($node, f:getSetting('lb.hyphen'))"/>
+                      and ends-with($node, f:get-setting('lb.hyphen'))"/>
     </xsl:function>
 
 
     <xsl:function name="f:process-text" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
 
-        <xsl:variable name="text" select="if (f:isSet('text.curlyApos')) then f:curly-apos($text) else $text"/>
-        <xsl:variable name="text" select="if (f:isSet('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
-        <xsl:variable name="text" select="if (f:isSet('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+        <xsl:variable name="text" select="if (f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
+        <xsl:variable name="text" select="if (f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
+        <xsl:variable name="text" select="if (f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
 
         <xsl:variable name="text" select="f:no-break-initials($text)"/>
 
@@ -490,7 +490,7 @@
 
         <xsl:choose>
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
-            <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:isSet('useMouseOverPopups'))">
+            <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:is-set('useMouseOverPopups'))">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates select="$corr"/>
@@ -538,10 +538,10 @@
     <xsl:template match="gap">
         <xsl:variable name="params" select="map{'extent': @extent, 'unit': @unit, 'reason': @reason}"/>
         <span class="gap">
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title" select="if (@extent)
-                                                    then f:formatMessage('msgMissingTextWithExtentReason', $params)
-                                                    else f:formatMessage('msgMissingTextWithReason', $params)"/>
+                                                    then f:format-message('msgMissingTextWithExtentReason', $params)
+                                                    else f:format-message('msgMissingTextWithReason', $params)"/>
             </xsl:if>
             <xsl:text>[</xsl:text><i><xsl:value-of select="f:message('msgMissingText')"/></i><xsl:text>]</xsl:text>
         </span>
@@ -600,7 +600,7 @@
             <xsl:if test="@type">
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:variable name="expan" select="f:findExpansion(.)" as="xs:string"/>
                 <xsl:if test="$expan != ''">
                     <xsl:attribute name="title">
@@ -638,7 +638,7 @@
     <xsl:template match="num">
         <span class="num">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="@value"/>
                 </xsl:attribute>
@@ -660,7 +660,7 @@
     <xsl:template match="trans">
         <span class="trans">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="f:message('msgTranscription')"/><xsl:text>: </xsl:text><xsl:value-of select="@trans"/>
                 </xsl:attribute>
@@ -698,7 +698,7 @@
     <xsl:template match="choice[reg/@type='trans']">
         <span class="trans">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="reg"/>
                 </xsl:attribute>
@@ -726,10 +726,10 @@
 
     <xsl:template match="measure">
         <xsl:choose>
-            <xsl:when test="f:isSet('useRegularizedUnits')">
+            <xsl:when test="f:is-set('useRegularizedUnits')">
                 <span class="measure">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:if test="f:isSet('useMouseOverPopups')">
+                    <xsl:if test="f:is-set('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="."/>
                         </xsl:attribute>
@@ -740,7 +740,7 @@
             <xsl:otherwise>
                 <span class="measure">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:if test="f:isSet('useMouseOverPopups')">
+                    <xsl:if test="f:is-set('useMouseOverPopups')">
                         <xsl:attribute name="title">
                             <xsl:value-of select="./@reg"/>
                         </xsl:attribute>
@@ -758,7 +758,7 @@
     <xsl:template match="amount">
         <span class="measure">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:if test="f:isSet('useMouseOverPopups')">
+            <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="./@unit"/>
                     <xsl:text> </xsl:text>
@@ -840,10 +840,10 @@
             <xsl:variable name="source" select="$root//seg[@id = $copyOf]"/>
             <xsl:choose>
                 <xsl:when test="not($source)">
-                    <xsl:copy-of select="f:logError('Segment with @id=''{1}'' not found', ($copyOf))"/>
+                    <xsl:copy-of select="f:log-error('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
-                <xsl:when test="f:isSet('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+                <xsl:when test="f:is-set('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
                     <span class="ditto">
                         <span class="s">
                             <xsl:apply-templates select="$source"/>
@@ -855,7 +855,7 @@
                         </span>
                     </span>
                 </xsl:when>
-                <xsl:when test="f:isSet('ditto.enable')">
+                <xsl:when test="f:is-set('ditto.enable')">
                     <!-- TODO: Handle the case where this is in a doubled-up table or list, and the row appears on the top line -->
                     <xsl:variable name="source" select="if ($source//corr) then f:stripCorrElements($source) else $source"/>
                     <xsl:apply-templates select="$source" mode="ditto">
@@ -884,9 +884,9 @@
     </xd:doc>
 
     <xsl:template match="ditto">
-        <xsl:copy-of select="f:logWarning('Deprecated element ditto used (please use seg).', ())"/>
+        <xsl:copy-of select="f:log-warning('Deprecated element ditto used (please use seg).', ())"/>
         <xsl:choose>
-            <xsl:when test="f:isSet('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+            <xsl:when test="f:is-set('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
                 <span class="ditto">
                     <span class="s">
                         <xsl:apply-templates/>
@@ -898,7 +898,7 @@
                     </span>
                 </span>
             </xsl:when>
-            <xsl:when test="f:isSet('ditto.enable')">
+            <xsl:when test="f:is-set('ditto.enable')">
                 <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>
                 <xsl:apply-templates select="$node" mode="ditto">
                     <xsl:with-param name="context" select="." as="node()" tunnel="yes"/>
@@ -925,7 +925,7 @@
         <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
                 <xsl:when test="matches(., '^[.,:;!]$')">
-                    <xsl:copy-of select="f:logWarning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
+                    <xsl:copy-of select="f:log-warning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
                     <span class="ditto">
                         <span class="s"><xsl:value-of select="."/></span>
                     </span>
@@ -984,7 +984,7 @@
             then $node/ancestor-or-self::ditto/@repeat
             else if ($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-repeat')])
                  then f:rend-value($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-repeat')][1]/@rend, 'ditto-repeat')
-                 else f:getSetting('ditto.repeat')"/>
+                 else f:get-setting('ditto.repeat')"/>
     </xsl:function>
 
 
@@ -995,7 +995,7 @@
             then $node/ancestor-or-self::ditto/@mark
             else if ($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-mark')])
                  then f:rend-value($node/ancestor-or-self::*[f:has-rend-value(./@rend, 'ditto-mark')][1]/@rend, 'ditto-mark')
-                 else f:getSetting('ditto.mark')"/>
+                 else f:get-setting('ditto.mark')"/>
     </xsl:function>
 
 

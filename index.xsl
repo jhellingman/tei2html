@@ -46,7 +46,7 @@
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgIndex')"/></h2>
 
-            <xsl:copy-of select="f:logInfo('Generating Index', ())"/>
+            <xsl:copy-of select="f:log-info('Generating Index', ())"/>
 
             <!-- Collect all index entries into a temporary node structure and add page numbers to them. -->
             <xsl:variable name="index">
@@ -70,7 +70,7 @@
     <xsl:template match="index[@level1]" mode="collectEntries">
         <xsl:variable name="n" select="preceding::pb[1]/@n"/>
         <xsl:if test="not($n) or $n = ''">
-            <xsl:copy-of select="f:logWarning('No page number found preceding index entry ({1}).', (@level1))"/>
+            <xsl:copy-of select="f:log-warning('No page number found preceding index entry ({1}).', (@level1))"/>
         </xsl:if>
 
         <tmp:entry 
@@ -118,7 +118,7 @@
         <xsl:variable name="pages">
             <tmp:pages>
                 <xsl:for-each-group select="current-group()" group-by="@label">
-                    <xsl:copy-of select="f:logDebug('Index page: {1} {2} ({3}).', (@href, @label, @number))"/>
+                    <xsl:copy-of select="f:log-debug('Index page: {1} {2} ({3}).', (@href, @label, @number))"/>
                     <tmp:page href="{@href}" label="{@label}" number="{@number}"/>
                 </xsl:for-each-group>
             </tmp:pages>
@@ -137,7 +137,7 @@
                                     </xsl:for-each>
                                 </tmp:pages>
                             </xsl:variable>
-                            <xsl:copy-of select="f:logDebug('Page range: {1}-{2}.', ($range//tmp:page[1]/@label, $range//tmp:page[last()]/@label))"/>
+                            <xsl:copy-of select="f:log-debug('Page range: {1}-{2}.', ($range//tmp:page[1]/@label, $range//tmp:page[last()]/@label))"/>
                             <tmp:range
                                 firstNumber="{$range//tmp:page[1]/@number}"
                                 firstLabel="{$range//tmp:page[1]/@label}"
@@ -148,7 +148,7 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:for-each select="current-group()">
-                                <xsl:copy-of select="f:logDebug('Single page: {1}.', (@label))"/>
+                                <xsl:copy-of select="f:log-debug('Single page: {1}.', (@label))"/>
                                 <tmp:page href="{@href}" label="{@label}" number="{@number}"/>
                             </xsl:for-each>
                         </xsl:otherwise>
@@ -163,7 +163,7 @@
                 <xsl:when test="position() = 1"><xsl:text> </xsl:text></xsl:when>
                 <xsl:otherwise>, </xsl:otherwise>
             </xsl:choose>
-            <xsl:copy-of select="f:logDebug('Output page: {1} : {2}.', (@label, @href))"/>
+            <xsl:copy-of select="f:log-debug('Output page: {1} : {2}.', (@label, @href))"/>
             <xsl:apply-templates select="." mode="index"/>
         </xsl:for-each>
     </xsl:template>

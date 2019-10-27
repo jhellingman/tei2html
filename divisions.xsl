@@ -22,7 +22,7 @@
     <xsl:template match="text">
         <xsl:apply-templates/>
 
-        <xsl:if test="f:isSet('facsimile.enable')">
+        <xsl:if test="f:is-set('facsimile.enable')">
             <xsl:apply-templates select="//pb[@facs]" mode="facsimile"/>
         </xsl:if>
     </xsl:template>
@@ -50,7 +50,7 @@
 
 
     <xsl:template name="pgComment">
-        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:isSet('includePGComments')">
+        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:is-set('includePGComments')">
             <xsl:comment><xsl:value-of select="f:message('msgPGComment')"/></xsl:comment>
         </xsl:if>
     </xsl:template>
@@ -282,18 +282,18 @@
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
-                <xsl:copy-of select="f:logInfo('Align division {1} with division {2}.', (@id, $otherid))"/>
+                <xsl:copy-of select="f:log-info('Align division {1} with division {2}.', (@id, $otherid))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="//*[@id = $otherid]"/>
                 </xsl:call-template>
             </xsl:when>
 
-            <xsl:when test="f:isSet('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with-document')">
+            <xsl:when test="f:is-set('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with-document')">
                 <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherid" select="substring-after($target, '#')"/>
-                <xsl:copy-of select="f:logInfo('Align division {1} with external document {2}.', (@id, $target))"/>
+                <xsl:copy-of select="f:log-info('Align division {1} with external document {2}.', (@id, $target))"/>
                 <xsl:call-template name="align-paragraphs">
                     <xsl:with-param name="a" select="."/>
                     <xsl:with-param name="b" select="document($document, .)//*[@id = $otherid]"/>
@@ -442,7 +442,7 @@
             </div>
         </xsl:if>
         <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">
-            <xsl:copy-of select="f:logWarning('{1} paragraphs found to be placed above the division head.', (xs:string(count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']))))"/>
+            <xsl:copy-of select="f:log-warning('{1} paragraphs found to be placed above the division head.', (xs:string(count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']))))"/>
         </xsl:if>
         <xsl:if test="not(preceding-sibling::head)">
             <xsl:apply-templates select="../p/figure[f:rend-value(@rend, 'position') = 'abovehead']"/>
