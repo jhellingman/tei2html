@@ -95,14 +95,14 @@
         <dc:rights>
             <xsl:value-of select="."/>
             <xsl:choose>
-                <xsl:when test="f:inCopyright('EU', $TEI/teiHeader)">
+                <xsl:when test="f:in-copyright('EU', $TEI/teiHeader)">
                     <xsl:text>(Based on the available metadata, this work is likely to be subject to copyright in jurisdictions where copyright lasts for life plus 70 years until at least 1 January </xsl:text>
-                    <xsl:value-of select="f:lastContributorDeath($TEI/teiHeader) + 71"/>
+                    <xsl:value-of select="f:last-contributor-death($TEI/teiHeader) + 71"/>
                     <xsl:text>.)</xsl:text>
                 </xsl:when>
-                <xsl:when test="f:inCopyright('Bern', $TEI/teiHeader)">
+                <xsl:when test="f:in-copyright('Bern', $TEI/teiHeader)">
                     <xsl:text>(Based on the available metadata, this work is likely to be subject to copyright in jurisdictions where copyright lasts for life plus 50 years until at least 1 January </xsl:text>
-                    <xsl:value-of select="f:lastContributorDeath($TEI/teiHeader) + 51"/>
+                    <xsl:value-of select="f:last-contributor-death($TEI/teiHeader) + 51"/>
                     <xsl:text>.)</xsl:text>
                 </xsl:when>
             </xsl:choose>
