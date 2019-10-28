@@ -104,7 +104,7 @@
         <span class="pagenum">
             <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
             <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
-                <xsl:copy-of select="f:convertMarkdown(@n)"/>
+                <xsl:copy-of select="f:convert-markdown(@n)"/>
             </a>
             <xsl:value-of select="f:get-setting('pageNumbers.after')"/>
             <xsl:if test="f:is-set('facsimile.enable') and ./@facs">
@@ -792,7 +792,7 @@
 
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'initial-image'), f:replaced-initial(.))"/>
+            <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'initial-image'), f:replaced-initial(.))"/>
         </div>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">

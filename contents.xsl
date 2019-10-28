@@ -207,7 +207,7 @@
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
         <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
-            <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
+            <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a href="{f:generate-href(.)}">
             <xsl:call-template name="generate-single-head"/>
@@ -278,7 +278,7 @@
             <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             <span class="tocPageNum">
                 <a class="pageref" href="{f:generate-href(.)}">
-                    <xsl:copy-of select="f:convertMarkdown(preceding::pb[1]/@n)"/>
+                    <xsl:copy-of select="f:convert-markdown(preceding::pb[1]/@n)"/>
                 </a>
             </span>
         </xsl:if>
@@ -416,7 +416,7 @@
         </xsl:if>
         <td class="tocDivNum">
             <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
-                <xsl:copy-of select="f:convertMarkdown(@n)"/><xsl:text>. </xsl:text>
+                <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>
         <td class="tocDivTitle" colspan="{($maxlevel + 1) - $curlevel}">
@@ -434,7 +434,7 @@
     <xsl:template name="insert-toc-page-number-table">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <a class="pageref" href="{f:generate-href(.)}">
-                <xsl:copy-of select="f:convertMarkdown(preceding::pb[1]/@n)"/>
+                <xsl:copy-of select="f:convert-markdown(preceding::pb[1]/@n)"/>
             </a>
         </xsl:if>
     </xsl:template>

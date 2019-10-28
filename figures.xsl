@@ -145,7 +145,7 @@
         <xsl:variable name="alt" select="if (figDesc) then figDesc else $alt" as="xs:string"/>
         <xsl:variable name="file" select="if ($filename != '') then $filename else f:determine-image-filename(., $format)" as="xs:string"/>
 
-        <xsl:copy-of select="f:outputImage($file, $alt)"/>
+        <xsl:copy-of select="f:output-image($file, $alt)"/>
     </xsl:template>
 
 
@@ -160,7 +160,7 @@
         <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:outputImage">
+    <xsl:function name="f:output-image">
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
 
@@ -288,11 +288,11 @@
 
         <!-- Create a special CSS rule for setting the width of this image -->
         <xsl:variable name="file" select="f:determine-image-filename(., $format)" as="xs:string"/>
-        <xsl:copy-of select="f:outputImageWidthCss(., $file)"/>
+        <xsl:copy-of select="f:output-image-width-css(., $file)"/>
     </xsl:template>
 
 
-    <xsl:function name="f:outputImageWidthCss">
+    <xsl:function name="f:output-image-width-css">
         <xsl:param name="node" as="node()"/>
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
@@ -359,8 +359,8 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template name="figure-head-top">
-        <xsl:if test="head[f:positionAnnotation(@rend) = 'figTop']">
-            <xsl:apply-templates select="head[f:positionAnnotation(@rend) = 'figTop']" mode="figAnnotation"/>
+        <xsl:if test="head[f:position-annotation(@rend) = 'figTop']">
+            <xsl:apply-templates select="head[f:position-annotation(@rend) = 'figTop']" mode="figAnnotation"/>
         </xsl:if>
     </xsl:template>
 
@@ -370,7 +370,7 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template name="figure-annotations-top">
-        <xsl:if test="p[f:hasTopPositionAnnotation(@rend)]">
+        <xsl:if test="p[f:has-top-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
             <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
@@ -381,16 +381,16 @@ width:<xsl:value-of select="$width"/>;
                     <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopLeft']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figTopLeft']">
                     <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft' or f:rend-value(@rend, 'position') = 'figTopLeft']" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTop']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figTop']">
                     <span class="figTop"><xsl:apply-templates select="p[@type='figTop' or f:rend-value(@rend, 'position') = 'figTop']" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figTop'])">
+                <xsl:if test="not(p[f:position-annotation(@rend) = 'figTop'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figTopRight']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figTopRight']">
                     <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight' or f:rend-value(@rend, 'position') = 'figTopRight']" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
@@ -403,7 +403,7 @@ width:<xsl:value-of select="$width"/>;
     </xd:doc>
 
     <xsl:template name="figure-annotations-bottom">
-        <xsl:if test="p[f:hasBottomPositionAnnotation(@rend)]">
+        <xsl:if test="p[f:has-bottom-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
             <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
@@ -414,16 +414,16 @@ width:<xsl:value-of select="$width"/>;
                     <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
                 </xsl:attribute>
 
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomLeft']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figBottomLeft']">
                     <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft' or f:rend-value(@rend, 'position') = 'figBottomLeft']" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottom']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figBottom']">
                     <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom' or f:rend-value(@rend, 'position') = 'figBottom']" mode="figAnnotation"/></span>
                 </xsl:if>
-                <xsl:if test="not(p[f:positionAnnotation(@rend) = 'figBottom'])">
+                <xsl:if test="not(p[f:position-annotation(@rend) = 'figBottom'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
-                <xsl:if test="p[f:positionAnnotation(@rend) = 'figBottomRight']">
+                <xsl:if test="p[f:position-annotation(@rend) = 'figBottomRight']">
                     <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight' or f:rend-value(@rend, 'position') = 'figBottomRight']" mode="figAnnotation"/></span>
                 </xsl:if>
             </div>
@@ -431,41 +431,41 @@ width:<xsl:value-of select="$width"/>;
     </xsl:template>
 
 
-    <xsl:function name="f:hasPositionAnnotation" as="xs:boolean">
+    <xsl:function name="f:has-position-annotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:sequence select="f:positionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:position-annotation($rend) != ''"/>
     </xsl:function>
 
-    <xsl:function name="f:hasTopPositionAnnotation" as="xs:boolean">
+    <xsl:function name="f:has-top-position-annotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:sequence select="f:topPositionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:top-position-annotation($rend) != ''"/>
     </xsl:function>
 
-    <xsl:function name="f:hasBottomPositionAnnotation" as="xs:boolean">
+    <xsl:function name="f:has-bottom-position-annotation" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:sequence select="f:bottomPositionAnnotation($rend) != ''"/>
+        <xsl:sequence select="f:bottom-position-annotation($rend) != ''"/>
     </xsl:function>
 
-    <xsl:function name="f:positionAnnotation" as="xs:string">
+    <xsl:function name="f:position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
         <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight'
                                 or $position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
     </xsl:function>
 
-    <xsl:function name="f:topPositionAnnotation" as="xs:string">
+    <xsl:function name="f:top-position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
         <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight') then $position else ''"/>
     </xsl:function>
 
-    <xsl:function name="f:bottomPositionAnnotation" as="xs:string">
+    <xsl:function name="f:bottom-position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
         <xsl:value-of select="if ($position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
     </xsl:function>
 
-    <xsl:template match="figure/head[not(f:hasPositionAnnotation(@rend))]">
+    <xsl:template match="figure/head[not(f:has-position-annotation(@rend))]">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
@@ -474,22 +474,22 @@ width:<xsl:value-of select="$width"/>;
         <xd:short>Figure heads that should go above are handled elsewhere.</xd:short>
     </xd:doc>
 
-    <xsl:template match="figure/head[f:hasPositionAnnotation(@rend)]"/>
+    <xsl:template match="figure/head[f:has-position-annotation(@rend)]"/>
 
 
     <xd:doc>
         <xd:short>Paragraphs that are placed around a picture with an explicit position are handled elsewhere.</xd:short>
     </xd:doc>
 
-    <xsl:template match="p[f:hasPositionAnnotation(@rend)]"/>
+    <xsl:template match="p[f:has-position-annotation(@rend)]"/>
 
 
-    <xsl:template match="figure/head[f:hasPositionAnnotation(@rend)]" mode="figAnnotation">
+    <xsl:template match="figure/head[f:has-position-annotation(@rend)]" mode="figAnnotation">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
 
-    <xsl:template match="p[f:hasPositionAnnotation(@rend)]" mode="figAnnotation">
+    <xsl:template match="p[f:has-position-annotation(@rend)]" mode="figAnnotation">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -526,7 +526,7 @@ width:<xsl:value-of select="$width"/>;
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
-                <xsl:variable name="widestImage" select="f:widestImage(graphic/@url)"/>
+                <xsl:variable name="widestImage" select="f:widest-image(graphic/@url)"/>
                 <xsl:if test="$imageInfo/img:images/img:image[@path=$widestImage]/@width != ''">
                     <xsl:value-of select="f:generate-id(graphic[@url = $widestImage][1])"/><xsl:text>width</xsl:text>
                 </xsl:if>
@@ -537,14 +537,14 @@ width:<xsl:value-of select="$width"/>;
     </xsl:template>
 
 
-    <xsl:function name="f:widestImage" as="xs:string?">
+    <xsl:function name="f:widest-image" as="xs:string?">
         <xsl:param name="files" as="xs:string*"/>
-        <xsl:variable name="maxWidth" select="f:maxWidth($imageInfo/img:images/img:image[@path=$files]/@width)" as="xs:string?"/>
+        <xsl:variable name="maxWidth" select="f:max-width($imageInfo/img:images/img:image[@path=$files]/@width)" as="xs:string?"/>
         <xsl:value-of select="$imageInfo/img:images/img:image[@path=$files and @width=$maxWidth][1]/@path"/>
     </xsl:function>
 
 
-    <xsl:function name="f:maxWidth" as="xs:string">
+    <xsl:function name="f:max-width" as="xs:string">
         <xsl:param name="widths" as="xs:string*"/>
         <xsl:value-of select="max(for $width in $widths return translate($width, 'px', '')) || 'px'"/>
      </xsl:function>
@@ -554,7 +554,7 @@ width:<xsl:value-of select="$width"/>;
         <xsl:if test="f:is-set('includeImages')">
             <!-- handle both P3 @url and P5 @target convention -->
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
-            <xsl:copy-of select="f:outputImage($url, if (../figDesc) then ../figDesc else '')"/>
+            <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>
     </xsl:template>
 
@@ -562,19 +562,19 @@ width:<xsl:value-of select="$width"/>;
     <xsl:template match="graphic" mode="css">
         <xsl:if test="f:is-set('includeImages')">
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
-            <xsl:copy-of select="f:outputImageWidthCss(., $url)"/>
+            <xsl:copy-of select="f:output-image-width-css(., $url)"/>
         </xsl:if>
     </xsl:template>
 
 
-    <xsl:function name="f:countGraphic" as="xs:integer">
+    <xsl:function name="f:count-graphics" as="xs:integer">
         <xsl:param name="node" as="node()"/>
 
         <xsl:sequence select="count($node//graphic) - count($node//note[@place='foot' or not(@place)]//graphic)"/>
     </xsl:function>
 
 
-    <xsl:function name="f:containsFigure" as="xs:boolean">
+    <xsl:function name="f:contains-figure" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
         <!-- $node contains a figure element (either directly or within some other element, but excluding
              elements that get lifted out of the context of this node (for example: footnotes) -->

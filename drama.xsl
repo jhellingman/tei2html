@@ -404,7 +404,7 @@
                         <td><xsl:apply-templates select="." mode="castGroupTable"/></td>
                         <xsl:if test="position() = 1">
                             <td rowspan="{$count}" class="castGroupBrace">
-                                <xsl:copy-of select="f:outputImage('images/rbrace' || $count || '.png', '}')"/>
+                                <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
                             </td>
                             <td rowspan="{$count}"><xsl:apply-templates select="$this/*[self::head or self::roleDesc]" mode="castGroupTable"/></td>
                         </xsl:if>

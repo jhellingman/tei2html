@@ -1102,7 +1102,7 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '[|]',                               'Warning', 'P18', 'Vertical Bar')"/>
 
 
-        <xsl:variable name="$nfd-segment" select="fn:normalize-unicode($segment, 'NFD')" as="xs:string"/>
+        <xsl:variable name="nfd-segment" select="normalize-unicode($segment, 'NFD')" as="xs:string"/>
 
         <!-- Greek script checks -->
         <xsl:variable name="final-sigma-mid-word-pattern" select="'&#x03C2;\p{L}'" as="xs:string"/>

@@ -232,7 +232,7 @@
                             </xsl:if>
                             <xsl:if test="$contentBefore or $this/@rend='braceBefore'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:copy-of select="f:outputImage('images/lbrace' || $count || '.png', '{')"/>
+                                    <xsl:copy-of select="f:output-image('images/lbrace' || $count || '.png', '{')"/>
                                 </td>
                             </xsl:if>
                         </xsl:if>
@@ -242,7 +242,7 @@
                         <xsl:if test="position() = 1">
                             <xsl:if test="$contentAfter or $this/@rend='braceAfter'">
                                 <td rowspan="{$count}" class="itemGroupBrace">
-                                    <xsl:copy-of select="f:outputImage('images/rbrace' || $count || '.png', '}')"/>
+                                    <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
                                 </td>
                             </xsl:if>
                             <xsl:if test="$contentAfter">
@@ -287,7 +287,7 @@
                 <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>
             <xsl:when test="@n">
-                <span class="itemNumber"><xsl:copy-of select="f:convertMarkdown(@n)"/></span>
+                <span class="itemNumber"><xsl:copy-of select="f:convert-markdown(@n)"/></span>
             </xsl:when>
         </xsl:choose>
         <xsl:apply-templates/>

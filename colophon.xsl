@@ -521,7 +521,7 @@
                     <xsl:if test="position() != 1">
                         <xsl:text>, </xsl:text>
                     </xsl:if>
-                    <a class="pageref" href="{@href}"><xsl:copy-of select="f:convertMarkdown(@page)"/></a>
+                    <a class="pageref" href="{@href}"><xsl:copy-of select="f:convert-markdown(@page)"/></a>
                 </xsl:for-each>
             </xsl:otherwise>
         </xsl:choose>
@@ -767,7 +767,7 @@
                                     <xsl:text>, </xsl:text>
                                 </xsl:if>
                                 <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-safe-href(.)}">
-                                    <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
+                                    <xsl:copy-of select="f:convert-markdown(f:find-page-number(.))"/>
                                 </a>
                             </xsl:for-each>
                         </td>
@@ -802,7 +802,7 @@
                     <tr>
                         <td>
                             <a class="pageref" id="{f:generate-id(.)}ext" href="{f:generate-safe-href(.)}">
-                                <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
+                                <xsl:copy-of select="f:convert-markdown(f:find-page-number(.))"/>
                             </a>
                         </td>
                         <td>
@@ -916,7 +916,7 @@
                                 <xsl:text>, </xsl:text>
                             </xsl:if>
                             <a class="pageref" href="{f:generate-safe-href(.)}">
-                                <xsl:copy-of select="f:convertMarkdown(f:find-page-number(.))"/>
+                                <xsl:copy-of select="f:convert-markdown(f:find-page-number(.))"/>
                             </a>
                         </xsl:for-each>
                     </td>

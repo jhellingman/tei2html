@@ -850,7 +850,7 @@
                         </span>
                         <span class="d">
                             <span class="i">
-                                <xsl:copy-of select="f:convertMarkdown(f:determineDittoMark(.))"/>
+                                <xsl:copy-of select="f:convert-markdown(f:determineDittoMark(.))"/>
                             </span>
                         </span>
                     </span>
@@ -893,7 +893,7 @@
                     </span>
                     <span class="d">
                         <span class="i">
-                            <xsl:copy-of select="f:convertMarkdown(f:determineDittoMark(.))"/>
+                            <xsl:copy-of select="f:convert-markdown(f:determineDittoMark(.))"/>
                         </span>
                     </span>
                 </span>
@@ -964,7 +964,7 @@
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
                             <span class="d">
                                 <span class="i">
-                                    <xsl:copy-of select="f:convertMarkdown(f:determineDittoMark($context))"/>
+                                    <xsl:copy-of select="f:convert-markdown(f:determineDittoMark($context))"/>
                                 </span>
                             </span>
                         </xsl:if>

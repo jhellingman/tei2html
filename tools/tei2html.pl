@@ -779,13 +779,13 @@ sub runChecks($) {
 
 
 #
-# isNewer -- determine whether the derived file exists and is newer than the source file
+# isNewer -- determine whether the derived file exists, is not empty, and is newer than the source file
 #
 sub isNewer($$) {
     my $derivedFile = shift;
     my $sourceFile = shift;
 
-    return (-e $derivedFile && -e $sourceFile && stat($derivedFile)->mtime > stat($sourceFile)->mtime);
+    return (-e $derivedFile && -s $derivedFile != 0 && -e $sourceFile && stat($derivedFile)->mtime > stat($sourceFile)->mtime);
 }
 
 

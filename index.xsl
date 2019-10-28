@@ -170,17 +170,17 @@
 
 
     <xsl:template match="tmp:page" mode="index">
-        <a href="{@href}"><xsl:copy-of select="f:convertMarkdown(@label)"/></a>
+        <a href="{@href}"><xsl:copy-of select="f:convert-markdown(@label)"/></a>
     </xsl:template>
 
 
     <xsl:template match="tmp:range[@firstNumber = @lastNumber - 1]" mode="index">
-        <a href="{@firstHref}"><xsl:copy-of select="f:convertMarkdown(@firstLabel)"/></a>, <a href="{@lastHref}"><xsl:copy-of select="f:convertMarkdown(@lastLabel)"/></a>
+        <a href="{@firstHref}"><xsl:copy-of select="f:convert-markdown(@firstLabel)"/></a>, <a href="{@lastHref}"><xsl:copy-of select="f:convert-markdown(@lastLabel)"/></a>
     </xsl:template>
 
 
     <xsl:template match="tmp:range" mode="index">
-        <a href="{@firstHref}"><xsl:copy-of select="f:convertMarkdown(@firstLabel)"/></a>&ndash;<a href="{@lastHref}"><xsl:copy-of select="f:convertMarkdown(@lastLabel)"/></a>
+        <a href="{@firstHref}"><xsl:copy-of select="f:convert-markdown(@firstLabel)"/></a>&ndash;<a href="{@lastHref}"><xsl:copy-of select="f:convert-markdown(@lastLabel)"/></a>
     </xsl:template>
 
 

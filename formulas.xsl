@@ -42,7 +42,7 @@
 
     <xsl:template match="formula[@notation='TeX']">
         <xsl:choose>
-            <xsl:when test="@n and f:isDisplayMath(.)">
+            <xsl:when test="@n and f:is-display-math(.)">
                 <!-- When we have a label, wrap in an extra span, so we can properly align the number with CSS -->
                 <span class="labeledMath">
                     <xsl:call-template name="handleFormula"/>
@@ -62,19 +62,19 @@
     <xsl:template name="handleFormula">
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
 
-        <xsl:variable name="basename" select="f:formulaBasename($firstInstance)" as="xs:string"/>
+        <xsl:variable name="basename" select="f:formula-basename($firstInstance)" as="xs:string"/>
         <xsl:variable name="texFile" select="$basename || '.tex'" as="xs:string"/>
         <xsl:variable name="mmlFile" select="$basename || '.mml'" as="xs:string"/>
         <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
         <xsl:variable name="pngFile" select="$basename || '.png'" as="xs:string"/>
 
-        <xsl:variable name="texString" select="f:stripMathDelimiters(.)" as="xs:string"/>
-        <xsl:variable name="svgTitle" select="if (f:isTrivialMath(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
-        <xsl:variable name="mathClass" select="f:formulaPosition(.) || 'Math'" as="xs:string"/>
+        <xsl:variable name="texString" select="f:strip-math-delimiters(.)" as="xs:string"/>
+        <xsl:variable name="svgTitle" select="if (f:is-trivial-math(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
+        <xsl:variable name="mathClass" select="f:formula-position(.) || 'Math'" as="xs:string"/>
         <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
-        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:isTrivialMath(.))">
+        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.))">
             <xsl:result-document
                     href="{$texFile}"
                     method="text"
@@ -84,7 +84,7 @@
             </xsl:result-document>
         </xsl:if>
 
-        <xsl:copy-of select="f:placeMathLabel(., 'left')"/>
+        <xsl:copy-of select="f:place-math-label(., 'left')"/>
 
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -93,19 +93,19 @@
             <xsl:choose>
                 <!-- Dynamic mathJax -->
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'MathJax'">
-                    <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\('"/>
+                    <xsl:value-of select="if (f:is-display-math(.)) then '$$' else '\('"/>
                     <xsl:value-of select="$texString"/>
-                    <xsl:value-of select="if (f:isDisplayMath(.)) then '$$' else '\)'"/>
+                    <xsl:value-of select="if (f:is-display-math(.)) then '$$' else '\)'"/>
                 </xsl:when>
                  <!-- Trivial math we can handle ourselves. -->
-                <xsl:when test="f:isTrivialMath($texString)">
-                    <xsl:copy-of select="f:handleTrivialMath($texString)"/>
+                <xsl:when test="f:is-trivial-math($texString)">
+                    <xsl:copy-of select="f:handle-trivial-math($texString)"/>
                 </xsl:when>
                 <!-- Static MML inline -->
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'MML'">
                     <xsl:copy-of select="f:log-info('Including file: {1}.', ($mmlFile))"/>
                     <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
-                    <xsl:apply-templates select="document($mmlFile, .)/*" mode="stripComments"/>
+                    <xsl:apply-templates select="document($mmlFile, .)/*" mode="strip-comments"/>
                 </xsl:when>
                 <!-- Static SVG inline -->
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'SVG'">
@@ -129,7 +129,7 @@
             </xsl:choose>
         </span>
 
-        <xsl:copy-of select="f:placeMathLabel(., 'right')"/>
+        <xsl:copy-of select="f:place-math-label(., 'right')"/>
 
     </xsl:template>
 
@@ -138,13 +138,13 @@
         <xd:short>Render the equation label in HTML.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:placeMathLabel">
+    <xsl:function name="f:place-math-label">
         <xsl:param name="formula" as="element(formula)"/>
         <xsl:param name="position" as="xs:string"/>
 
-        <xsl:if test="$formula/@n and f:isDisplayMath($formula)">
+        <xsl:if test="$formula/@n and f:is-display-math($formula)">
             <span class="{(if ($position != f:get-setting('math.label.position')) then 'phantom ' else '') || $position || 'MathLabel'}">
-                <xsl:copy-of select="f:formatMathLabel($formula/@n)"/>
+                <xsl:copy-of select="f:format-math-label($formula/@n)"/>
             </span>
         </xsl:if>
     </xsl:function>
@@ -154,11 +154,11 @@
         <xd:short>Format the label for an equation (derived from the <code>@n</code>-attribute.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:formatMathLabel" as="node()*">
+    <xsl:function name="f:format-math-label" as="node()*">
         <xsl:param name="label" as="xs:string"/>
 
         <xsl:value-of select="f:get-setting('math.label.before')"/>
-        <xsl:copy-of select="f:convertMarkdown($label)"/>
+        <xsl:copy-of select="f:convert-markdown($label)"/>
         <xsl:value-of select="f:get-setting('math.label.after')"/>
     </xsl:function>
 
@@ -174,17 +174,17 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:convertMarkdown" as="node()*">
+    <xsl:function name="f:convert-markdown" as="node()*">
         <xsl:param name="markdown" as="xs:string"/>
 
         <xsl:analyze-string select="$markdown" flags="x" regex="(__(.*?)__) | (_(.*?)_)">
             <xsl:matching-substring>
                 <xsl:choose>
                     <xsl:when test="regex-group(1)">
-                        <b><xsl:sequence select="f:convertMarkdown(regex-group(2))"/></b>
+                        <b><xsl:sequence select="f:convert-markdown(regex-group(2))"/></b>
                     </xsl:when>
                     <xsl:when test="regex-group(3)">
-                        <i><xsl:sequence select="f:convertMarkdown(regex-group(4))"/></i>
+                        <i><xsl:sequence select="f:convert-markdown(regex-group(4))"/></i>
                     </xsl:when>
                 </xsl:choose>
             </xsl:matching-substring>
@@ -201,10 +201,10 @@
 
     <xsl:template match="formula[@notation='TeX']" mode="css">
         <xsl:next-match/>
-        <xsl:if test="f:get-setting('math.mathJax.format') = ('SVG+IMG', 'PNG') and not(f:isTrivialMath(.))">
+        <xsl:if test="f:get-setting('math.mathJax.format') = ('SVG+IMG', 'PNG') and not(f:is-trivial-math(.))">
             <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
-                <xsl:variable name="basename" select="f:formulaBasename($firstInstance)"/>
+                <xsl:variable name="basename" select="f:formula-basename($firstInstance)"/>
                 <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
                 <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
                 <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
@@ -227,10 +227,10 @@
         <xd:short>Determine the basename (for generated filenames) of a formula.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:formulaBasename" as="xs:string">
+    <xsl:function name="f:formula-basename" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
-        <xsl:value-of select="'formulas/' || f:formulaPosition($formula) || '-' || f:generate-id($formula)"/>
+        <xsl:value-of select="'formulas/' || f:formula-position($formula) || '-' || f:generate-id($formula)"/>
     </xsl:function>
 
 
@@ -238,10 +238,10 @@
         <xd:short>Determine the formula position (either inline or display).</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:formulaPosition" as="xs:string">
+    <xsl:function name="f:formula-position" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
-        <xsl:value-of select="if (f:isDisplayMath($formula)) then 'display' else 'inline'"/>
+        <xsl:value-of select="if (f:is-display-math($formula)) then 'display' else 'inline'"/>
     </xsl:function>
 
 
@@ -249,7 +249,7 @@
         <xd:short>Remove the math-delimiters (dollar signs) from an TeX equation.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:stripMathDelimiters" as="xs:string">
+    <xsl:function name="f:strip-math-delimiters" as="xs:string">
         <xsl:param name="texString" as="xs:string"/>
 
         <xsl:variable name="texString" select="replace($texString, '^[$]+' ,'')"/>
@@ -262,7 +262,7 @@
         <xd:short>Determine whether an equation is display math.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:isDisplayMath" as="xs:boolean">
+    <xsl:function name="f:is-display-math" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>
 
         <xsl:variable name="texString" select="normalize-space($texString)"/>
@@ -277,11 +277,11 @@
         <xd:short>Determine whether an equation is trivial (i.e. can easily be rendered in HTML).</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:isTrivialMath" as="xs:boolean">
+    <xsl:function name="f:is-trivial-math" as="xs:boolean">
         <xsl:param name="texString" as="xs:string"/>
 
         <!-- Trivial math: math that contains just digits or Latin letters with optionally a prime or double prime. -->
-        <xsl:sequence select="matches(f:stripMathDelimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
+        <xsl:sequence select="matches(f:strip-math-delimiters($texString), '^[0-9a-zA-Z]+''*$')"/>
     </xsl:function>
 
 
@@ -289,19 +289,19 @@
         <xd:short>Render trivial math in HTML.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:handleTrivialMath" as="node()*">
+    <xsl:function name="f:handle-trivial-math" as="node()*">
         <xsl:param name="texString" as="xs:string"/>
-        <xsl:variable name="texString" select="f:stripMathDelimiters($texString)"/>
+        <xsl:variable name="texString" select="f:strip-math-delimiters($texString)"/>
 
         <!-- digits upright and letters italic -->
         <xsl:analyze-string select="$texString" regex="[a-zA-Z]+'*">
             <xsl:matching-substring>
                 <i>
-                    <xsl:value-of select="f:replacePrimes(.)"/>
+                    <xsl:value-of select="f:replace-primes(.)"/>
                 </i>
             </xsl:matching-substring>
             <xsl:non-matching-substring>
-                <xsl:value-of select="f:replacePrimes(.)"/>
+                <xsl:value-of select="f:replace-primes(.)"/>
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:function>
@@ -311,7 +311,7 @@
         <xd:short>Replace ASCII apostrophes with primes and double primes.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:replacePrimes" as="xs:string">
+    <xsl:function name="f:replace-primes" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
 
         <xsl:value-of select="replace(replace($string, '''''', '&Prime;'), '''', '&prime;')"/>
@@ -322,13 +322,13 @@
         <xd:short>Strip all comment nodes from a node-tree.</xd:short>
     </xd:doc>
 
-    <xsl:template match="node()|@*" mode="stripComments">
+    <xsl:template match="node()|@*" mode="strip-comments">
         <xsl:copy>
-            <xsl:apply-templates select="node()|@*" mode="stripComments"/>
+            <xsl:apply-templates select="node()|@*" mode="strip-comments"/>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="comment()" mode="stripComments" priority="1"/>
+    <xsl:template match="comment()" mode="strip-comments" priority="1"/>
 
 
 </xsl:stylesheet>

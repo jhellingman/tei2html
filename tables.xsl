@@ -202,12 +202,12 @@
             <xsl:choose>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '{'">
                     <xsl:if test="not(f:has-rend-value(@rend, 'image'))">
-                        <xsl:copy-of select="f:outputImage('images/lbrace' || @rows || '.png', '{')"/>
+                        <xsl:copy-of select="f:output-image('images/lbrace' || @rows || '.png', '{')"/>
                     </xsl:if>
                 </xsl:when>
                 <xsl:when test="@rows &gt; 1 and normalize-space(.) = '}'">
                     <xsl:if test="not(f:has-rend-value(@rend, 'image'))">
-                        <xsl:copy-of select="f:outputImage('images/rbrace' || @rows || '.png', '}')"/>
+                        <xsl:copy-of select="f:output-image('images/rbrace' || @rows || '.png', '}')"/>
                     </xsl:if>
                 </xsl:when>
                 <xsl:when test="f:isSumCell(.)">
@@ -276,7 +276,7 @@
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
-            <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'image'), '')"/>
+            <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'image'), '')"/>
         </xsl:if>
     </xsl:template>
 

@@ -438,7 +438,7 @@
                         <xsl:otherwise><xsl:value-of select="f:message('msgOrnament')"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                <xsl:copy-of select="f:outputImage(f:rend-value(@rend, 'image'), $alt)"/>
+                <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'image'), $alt)"/>
             </div>
         </xsl:if>
         <xsl:if test="count(../p/figure[f:rend-value(@rend, 'position') = 'abovehead']) > 1">
