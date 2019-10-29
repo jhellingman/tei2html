@@ -196,7 +196,7 @@
                             <xsl:sequence select="regex-group(1)"/>
                         </xsl:when>
                         <xsl:when test="regex-group(2)">
-                            <xsl:sequence select="f:fromRoman(regex-group(2))"/>
+                            <xsl:sequence select="f:from-roman(regex-group(2))"/>
                         </xsl:when>
                     </xsl:choose>
                 </xsl:matching-substring>

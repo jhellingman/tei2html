@@ -263,7 +263,7 @@
             <xsl:when test="$keyword != ''">
 
                 <!-- Build KWIC for searched word(s) only -->
-                <xsl:variable name="keywords" select="tokenize(fn:lower-case(f:strip_diacritics($keyword)), '\s+')"/>
+                <xsl:variable name="keywords" select="tokenize(fn:lower-case(f:strip-diacritics-and-marks($keyword)), '\s+')"/>
 
                 <xsl:call-template name="report-single-match">
                     <xsl:with-param name="keyword" select="$keywords"/>
@@ -294,7 +294,7 @@
         <xsl:param name="matches" as="element()*"/>
 
         <xsl:variable name="keyword" select="$matches[1]/k:word"/>
-        <xsl:variable name="baseword" select="fn:lower-case(f:strip_diacritics($keyword))"/>
+        <xsl:variable name="baseword" select="fn:lower-case(f:strip-diacritics-and-marks($keyword))"/>
 
         <h2>
             <span class="cnt">Word:</span><xsl:text> </xsl:text>
@@ -321,7 +321,7 @@
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="output" select="$matches">
                 <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-                <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
+                <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -386,7 +386,7 @@
 
         <xsl:apply-templates mode="output" select="$matchlist">
             <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-            <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
+            <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -427,7 +427,7 @@
         <table>
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="#current">
-                <xsl:sort select="fn:lower-case(f:strip_diacritics(k:following))" order="ascending"/>
+                <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -594,14 +594,14 @@
     <!-- Not all Unicode regular expressions are supported in XSLT (https://www.regular-expressions.info/unicode.html), also,
          for this tool, we use a simplified approximation of handling bidirectional script. -->
 
-    <xsl:function name="f:isRightToLeft" as="xs:boolean">
+    <xsl:function name="f:is-right-to-left" as="xs:boolean">
         <xsl:param name="word" as="xs:string"/>
         <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Right_to_Left}|\p{Bidi_Class:Arabic_Letter}')"/> -->
         <!-- <xsl:sequence select="matches($word, '\p{Letter}') and matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}')"/> -->
         <xsl:sequence select="matches($word, '\p{L}') and matches($word, '[&#x0590;-&#x07BF;]')"/>
     </xsl:function>
 
-    <xsl:function name="f:isLeftToRight" as="xs:boolean">
+    <xsl:function name="f:is-left-to-right" as="xs:boolean">
         <xsl:param name="word" as="xs:string"/>
         <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Left_To_Right}')"/> -->
         <!-- <xsl:sequence select="matches($word, '\p{Letter}') and not(matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}'))"/> -->
@@ -737,7 +737,7 @@
         <xd:param name="string">The string to processed.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:strip_diacritics" as="xs:string">
+    <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
         <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
@@ -820,8 +820,8 @@
                     <xsl:if test="$inReference = 'true'">
                         <xsl:attribute name="ref" select="$reference"/>
                     </xsl:if>
-                    <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
-                    <xsl:attribute name="dir" select="if (f:isRightToLeft(.)) then 'rtl' else 'ltr'"/>
+                    <xsl:attribute name="form" select="fn:lower-case(f:strip-diacritics-and-marks(.))"/>
+                    <xsl:attribute name="dir" select="if (f:is-right-to-left(.)) then 'rtl' else 'ltr'"/>
                     <xsl:value-of select="."/>
                 </k:w>
             </xsl:matching-substring>

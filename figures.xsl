@@ -243,7 +243,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="figure[f:isInline(.)]">
+    <xsl:template match="figure[f:is-inline(.)]">
         <xsl:copy-of select="f:showDebugTags(.)"/>
         <xsl:if test="f:is-set('includeImages')">
             <span>
@@ -272,7 +272,7 @@
     </xsl:template>
 
 
-    <xsl:template match="figure[f:isInline(.)]" mode="css">
+    <xsl:template match="figure[f:is-inline(.)]" mode="css">
         <xsl:if test="f:is-set('includeImages')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule">
@@ -296,12 +296,13 @@
         <xsl:param name="node" as="node()"/>
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+        <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id($node) || 'width')"/>
 
-        <xsl:if test="$width != ''">
-.<xsl:value-of select="f:generate-id($node)"/>width {
-width:<xsl:value-of select="$width"/>;
-}
-</xsl:if>
+        <xsl:if test="$width != ''"><xsl:text expand-text="yes">
+.{$selector} {{
+width:{$width};
+}}
+</xsl:text></xsl:if>
     </xsl:function>
 
 

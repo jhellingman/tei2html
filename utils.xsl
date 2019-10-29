@@ -383,7 +383,7 @@
         <xd:param name="value" type="string">The value to be tested.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:isValid" as="xs:boolean">
+    <xsl:function name="f:is-valid" as="xs:boolean">
         <xsl:param name="value" as="xs:string?"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>
@@ -468,7 +468,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:stripDiacritics" as="xs:string">
+    <xsl:function name="f:strip-diacritics" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:value-of select="replace(normalize-unicode($string, 'NFKD'), '\p{M}' ,'')"/>
     </xsl:function>
@@ -498,23 +498,25 @@
 
     <!-- TODO: deprecate use of 'position' for inline. -->
 
-    <xsl:function name="f:isInline" as="xs:boolean">
+    <xsl:function name="f:is-inline" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline' or f:rend-value($node/@rend, 'display') = 'inline'"/>
     </xsl:function>
 
-    <xsl:function name="f:isBlock" as="xs:boolean">
+
+    <xsl:function name="f:is-block" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="$node/@rend = 'block' or f:rend-value($node/@rend, 'display') = 'block'"/>
     </xsl:function>
 
 
-    <xsl:function name="f:isHidden" as="xs:boolean">
+    <xsl:function name="f:is-hidden" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="$node/@rend = 'hide' or f:rend-value($node/@rend, 'visibility') = 'hidden'"/>
     </xsl:function>
 
-    <xsl:function name="f:isNotDisplayed" as="xs:boolean">
+
+    <xsl:function name="f:is-not-displayed" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="f:rend-value($node/@rend, 'display') = 'none'"/>
     </xsl:function>

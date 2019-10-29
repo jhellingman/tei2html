@@ -51,7 +51,7 @@
 
     <xsl:template match="table" mode="render-table">
         <xsl:choose>
-            <xsl:when test="f:isInline(.) or f:rend-value(@rend, 'class')  = 'intralinear'">
+            <xsl:when test="f:is-inline(.) or f:rend-value(@rend, 'class')  = 'intralinear'">
                 <span class="table">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>

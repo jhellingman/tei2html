@@ -295,7 +295,7 @@
                 <xsl:apply-templates/>
             </span>
             <xsl:text> </xsl:text>
-            <xsl:apply-templates select="./following-sibling::node()[1][self::stage[f:isInline(.)]]" mode="inline-stage"/>
+            <xsl:apply-templates select="./following-sibling::node()[1][self::stage[f:is-inline(.)]]" mode="inline-stage"/>
         </xsl:element>
     </xsl:template>
 
@@ -316,13 +316,13 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="stage[f:isInline(.)]">
+    <xsl:template match="stage[f:is-inline(.)]">
         <xsl:if test="not(f:preceded-by-speaker(.))">
             <xsl:apply-templates select="." mode="inline-stage"/>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="stage[f:isInline(.)]" mode="inline-stage">
+    <xsl:template match="stage[f:is-inline(.)]" mode="inline-stage">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>
@@ -332,7 +332,7 @@
 
     <xsl:function name="f:followed-by-inline-stage" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="boolean($node/following-sibling::node()[1][self::stage[f:isInline(.)]])"/>
+        <xsl:sequence select="boolean($node/following-sibling::node()[1][self::stage[f:is-inline(.)]])"/>
     </xsl:function>
 
     <xsl:function name="f:preceded-by-speaker" as="xs:boolean">

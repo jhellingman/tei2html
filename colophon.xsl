@@ -74,7 +74,7 @@
         <xsl:call-template name="colophonMetadata"/>
         <!-- <xsl:call-template name="catalogEntries"/> -->
 
-        <xsl:if test="f:isValid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p[1])">
+        <xsl:if test="f:is-valid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p[1])">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
             <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p"/>
         </xsl:if>
@@ -162,7 +162,7 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td><xsl:value-of select="$value"/></td>
             <td>
-                <xsl:if test="f:isValid($url)">
+                <xsl:if test="f:is-valid($url)">
                     <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
                 </xsl:if>
             </td>
@@ -179,7 +179,7 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:isValid($url)">
+                    <xsl:when test="f:is-valid($url)">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$value"/></a>
                     </xsl:when>
                     <xsl:otherwise>
@@ -224,7 +224,7 @@
     </xsl:template>
 
 
-    <xsl:template match="date[f:isValid(.)]" mode="colophonSourceDesc">
+    <xsl:template match="date[f:is-valid(.)]" mode="colophonSourceDesc">
         <xsl:copy-of select="f:metadata-line(f:message('msgSourcePublicationDate'), .)"/>
     </xsl:template>
 
@@ -278,11 +278,11 @@
     </xd:doc>
 
     <xsl:template name="catalogEntries">
-        <xsl:if test="//idno[f:isValid(.)]">
-            <h3><xsl:value-of select="if (count(//idno[f:isValid(.)]) > 1) then f:message('msgCatalogEntries') else f:message('msgCatalogEntry')"/></h3>
+        <xsl:if test="//idno[f:is-valid(.)]">
+            <h3><xsl:value-of select="if (count(//idno[f:is-valid(.)]) > 1) then f:message('msgCatalogEntries') else f:message('msgCatalogEntry')"/></h3>
             <table class="catalogEntries">
-                <xsl:apply-templates select="//idno[@type = 'PGnum'][f:isValid(.)]" mode="catalogEntries"/>
-                <xsl:apply-templates select="//idno[@type != 'PGnum'][f:isValid(.)]" mode="catalogEntries">
+                <xsl:apply-templates select="//idno[@type = 'PGnum'][f:is-valid(.)]" mode="catalogEntries"/>
+                <xsl:apply-templates select="//idno[@type != 'PGnum'][f:is-valid(.)]" mode="catalogEntries">
                     <xsl:sort select="@type"/>
                 </xsl:apply-templates>
             </table>
@@ -366,8 +366,8 @@
 
 
     <xsl:template name="catalogReferences">
-        <xsl:apply-templates select="//idno[@type = 'PGnum'][f:isValid(.)]" mode="catalogReferences"/>
-        <xsl:apply-templates select="//idno[@type != 'PGnum'][f:isValid(.)]" mode="catalogReferences">
+        <xsl:apply-templates select="//idno[@type = 'PGnum'][f:is-valid(.)]" mode="catalogReferences"/>
+        <xsl:apply-templates select="//idno[@type != 'PGnum'][f:is-valid(.)]" mode="catalogReferences">
             <xsl:sort select="@type"/>
         </xsl:apply-templates>
     </xsl:template>
@@ -554,7 +554,7 @@
 
     <xsl:template name="correctionTableEditDistance">
         <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
-        <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:stripDiacritics(tmp:sic), f:stripDiacritics(tmp:corr))" as="xs:integer"/>
+        <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:strip-diacritics(tmp:sic), f:strip-diacritics(tmp:corr))" as="xs:integer"/>
         <xsl:value-of select="$editDistance"/>
         <xsl:if test="$editDistance != $normalizedEditDistance">
             <xsl:text> / </xsl:text>

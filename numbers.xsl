@@ -19,14 +19,14 @@
     </xd:doc>
 
 
-    <xsl:function name="f:isInteger" as="xs:boolean" visibility="public">
+    <xsl:function name="f:is-integer" as="xs:boolean" visibility="public">
         <xsl:param name="string"/>
 
         <xsl:sequence select="matches(string($string), '^[\d]+$', 'i')"/>
     </xsl:function>
 
 
-    <xsl:function name="f:isRoman" as="xs:boolean" visibility="public">
+    <xsl:function name="f:is-roman" as="xs:boolean" visibility="public">
         <xsl:param name="string"/>
 
         <xsl:sequence select="string-length($string) != 0 and matches($string, '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$', 'i')"/>
@@ -43,14 +43,14 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:fromRoman" as="xs:integer" visibility="public">
+    <xsl:function name="f:from-roman" as="xs:integer" visibility="public">
         <xsl:param name="roman" as="xs:string"/>
 
-        <xsl:sequence select="f:fromRomanImplementation($roman, 0)"/>
+        <xsl:sequence select="f:from-roman-implementation($roman, 0)"/>
     </xsl:function>
 
 
-    <xsl:function name="f:fromRomanImplementation" as="xs:integer" visibility="private">
+    <xsl:function name="f:from-roman-implementation" as="xs:integer" visibility="private">
         <xsl:param name="roman" as="xs:string"/>
         <xsl:param name="value" as="xs:integer"/>
 
@@ -62,22 +62,22 @@
             </xsl:when>
 
             <xsl:when test="$length = 1">
-                <xsl:sequence select="$value + f:romanValue($roman)"/>
+                <xsl:sequence select="$value + f:roman-value($roman)"/>
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:variable name="headValue" select="f:romanValue(substring($roman, 1, 1))"/>
+                <xsl:variable name="headValue" select="f:roman-value(substring($roman, 1, 1))"/>
                 <xsl:variable name="tail" select="substring($roman, 2, $length - 1)"/>
 
-                <xsl:sequence select="if ($headValue &lt; f:romanValue(substring($roman, 2, 1)))
-                    then f:fromRomanImplementation($tail, $value - $headValue)
-                    else f:fromRomanImplementation($tail, $value + $headValue)"/>
+                <xsl:sequence select="if ($headValue &lt; f:roman-value(substring($roman, 2, 1)))
+                    then f:from-roman-implementation($tail, $value - $headValue)
+                    else f:from-roman-implementation($tail, $value + $headValue)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 
 
-    <xsl:function name="f:romanValue" as="xs:integer" visibility="private">
+    <xsl:function name="f:roman-value" as="xs:integer" visibility="private">
         <xsl:param name="character" as="xs:string"/>
 
         <xsl:sequence select="(1, 5, 10, 50, 100, 500, 1000)[index-of(('I', 'V', 'X', 'L', 'C', 'D', 'M'), upper-case($character))]"/>

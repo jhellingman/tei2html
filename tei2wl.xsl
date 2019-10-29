@@ -54,7 +54,7 @@
 </xsl:function>
 
 
-<xsl:function name="f:strip_diacritics" as="xs:string">
+<xsl:function name="f:strip-diacritics" as="xs:string">
     <xsl:param name="string" as="xs:string"/>
     <xsl:value-of select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
 </xsl:function>
@@ -67,7 +67,7 @@
         <xsl:if test=". != ''">
             <w>
                 <xsl:attribute name="xml:lang" select="$lang"/>
-                <xsl:attribute name="form" select="fn:lower-case(f:strip_diacritics(.))"/>
+                <xsl:attribute name="form" select="fn:lower-case(f:strip-diacritics(.))"/>
                 <xsl:value-of select="."/>
             </w>
         </xsl:if>

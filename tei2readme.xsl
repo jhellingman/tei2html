@@ -57,7 +57,7 @@
             <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
             <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
-            <xsl:if test="f:isValid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
+            <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
                 <xsl:text>| PG Ebook Number | [{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}](https://www.gutenberg.org/ebooks/{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}) |&lf;</xsl:text>
             </xsl:if>
     </xsl:template>
@@ -76,7 +76,7 @@
     </xsl:template>
 
     <xsl:template match="availability" expand-text="yes">
-        <xsl:if test="f:isValid(.)">
+        <xsl:if test="f:is-valid(.)">
             <xsl:variable name="availability"><xsl:apply-templates mode="text"/></xsl:variable>
             <xsl:text>| Availability | {normalize-space(string($availability))} |&lf;</xsl:text>
         </xsl:if>
@@ -84,21 +84,21 @@
 
     <xsl:template match="item" mode="keywords" expand-text="yes">
         <!-- Filter out empty subjects and our template default placeholder -->
-        <xsl:if test="f:isValid(.)">
+        <xsl:if test="f:is-valid(.)">
             <xsl:text>| Keyword | {normalize-space(.)} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="name" mode="contributors" expand-text="yes">
         <!-- Filter out empty contributors and our template default placeholder -->
-        <xsl:if test="f:isValid(.)">
+        <xsl:if test="f:is-valid(.)">
             <xsl:text>| Contributor | {normalize-space(.)} |&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="note" mode="descriptions" expand-text="yes">
         <!-- Filter out empty descriptions and our template default placeholder -->
-        <xsl:if test="f:isValid(.)">
+        <xsl:if test="f:is-valid(.)">
             <xsl:variable name="description"><xsl:apply-templates mode="text"/></xsl:variable>
             <xsl:text>| Description | {normalize-space(string($description))} |&lf;</xsl:text>
         </xsl:if>
@@ -122,7 +122,7 @@
         <xd:param name="value" type="string">The value to be tested.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:isValid" as="xs:boolean">
+    <xsl:function name="f:is-valid" as="xs:boolean">
         <xsl:param name="value"/>
         <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
     </xsl:function>

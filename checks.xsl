@@ -542,10 +542,10 @@
             <!-- first pb should be preceding pb + 1 in main text -->
             <xsl:variable name="n1" select="(.//pb/@n)[1]"/>
             <xsl:variable name="n0" select="./preceding::pb[1]/@n"/>
-            <xsl:variable name="v1" select="if (f:isRoman($n1)) then f:fromRoman($n1) else $n1"/>
-            <xsl:variable name="v0" select="if (f:isRoman($n0)) then f:fromRoman($n0) else $n0"/>
+            <xsl:variable name="v1" select="if (f:is-roman($n1)) then f:from-roman($n1) else $n1"/>
+            <xsl:variable name="v0" select="if (f:is-roman($n0)) then f:from-roman($n0) else $n0"/>
 
-            <xsl:if test="f:isInteger($v0) and f:isInteger($v1) and ($v1 != $v0 + 1)">
+            <xsl:if test="f:is-integer($v0) and f:is-integer($v1) and ($v1 != $v0 + 1)">
                 <i:issue pos="{@pos}" code="S01" category="Pagebreaks" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Page break in note <xsl:value-of select="@n"/>: page <xsl:value-of select="$n1"/>: out-of-sequence (preceding <xsl:value-of select="$n0"/>).</i:issue>
             </xsl:if>
 
@@ -954,17 +954,17 @@
                 <i:issue pos="{$first/@pos}" code="N01" category="Numbering" target="{f:generate-id($first)}" level="Trivial" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/> without number.</i:issue>
             </xsl:when>
 
-            <xsl:when test="not(f:isInteger($first/@n) or f:isRoman($first/@n))">
+            <xsl:when test="not(f:is-integer($first/@n) or f:is-roman($first/@n))">
                 <i:issue pos="{$first/@pos}" code="N02" category="Numbering" target="{f:generate-id($first)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute <xsl:value-of select="$first/@n"/> not numeric.</i:issue>
             </xsl:when>
 
-            <xsl:when test="f:isRoman($first/@n) and f:isRoman($second/@n)">
-                <xsl:if test="not(f:fromRoman($second/@n) = f:fromRoman($first/@n) + 1)">
+            <xsl:when test="f:is-roman($first/@n) and f:is-roman($second/@n)">
+                <xsl:if test="not(f:from-roman($second/@n) = f:from-roman($first/@n) + 1)">
                     <i:issue pos="{$second/@pos}" code="S01" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
             </xsl:when>
 
-            <xsl:when test="f:isInteger($first/@n) and f:isInteger($second/@n)">
+            <xsl:when test="f:is-integer($first/@n) and f:is-integer($second/@n)">
                 <xsl:if test="not($second/@n = $first/@n + 1)">
                     <i:issue pos="{$second/@pos}" code="S02" category="Numbering" target="{f:generate-id($second)}" level="Warning" element="{name($first)}" page="{f:get-page($first)}">Element <xsl:value-of select="name($first)"/>: n-attribute value <xsl:value-of select="$second/@n"/> out-of-sequence. (preceding: <xsl:value-of select="$first/@n"/>)</i:issue>
                 </xsl:if>
