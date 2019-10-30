@@ -81,7 +81,7 @@
             level4="{@level4}"
             index="{@index}"
             label="{if ($n and $n != '') then $n else '###'}"
-            number="{if ($n and $n != '') then f:headAsNumber($n) else 0}"
+            number="{if ($n and $n != '') then f:head-as-number($n) else 0}"
         />
     </xsl:template>
 
@@ -184,7 +184,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:headAsNumber" as="xs:integer">
+    <xsl:function name="f:head-as-number" as="xs:integer">
         <xsl:param name="n" as="xs:string"/>
 
         <xsl:variable name="i">

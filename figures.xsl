@@ -244,7 +244,7 @@
     </xd:doc>
 
     <xsl:template match="figure[f:is-inline(.)]">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:is-set('includeImages')">
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
@@ -316,7 +316,7 @@ width:{$width};
     </xd:doc>
 
     <xsl:template match="figure">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:is-set('includeImages')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->

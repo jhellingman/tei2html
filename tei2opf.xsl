@@ -50,7 +50,7 @@
 
             <package>
                 <xsl:attribute name="version">
-                    <xsl:value-of select="f:epubMainVersion()"/>
+                    <xsl:value-of select="f:epub-main-version()"/>
                 </xsl:attribute>
                 <xsl:attribute name="unique-identifier">epub-id</xsl:attribute>
 
@@ -228,7 +228,7 @@
 
         <dc:contributor id="{$id}">
             <xsl:if test="f:isEpub31()">
-                <xsl:attribute name="opf:role"><xsl:value-of select="f:translateRespCode(resp)"/></xsl:attribute>
+                <xsl:attribute name="opf:role"><xsl:value-of select="f:translate-resp-code(resp)"/></xsl:attribute>
                 <xsl:attribute name="opf:scheme">marc:relators</xsl:attribute>
                 <xsl:if test="name/@key">
                     <xsl:attribute name="opf:file-as"><xsl:value-of select="name/@key"/></xsl:attribute>
@@ -239,7 +239,7 @@
 
         <xsl:if test="f:isEpub30()">
             <xsl:if test="resp">
-                <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translateRespCode(resp)"/></meta>
+                <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translate-resp-code(resp)"/></meta>
             </xsl:if>
             <xsl:if test="name/@key">
                 <meta property="file-as" refines="#{$id}"><xsl:value-of select="name/@key"/></meta>
@@ -296,7 +296,7 @@
                     </xsl:variable>
 
                     <meta property="media:duration" refines="#{@id}overlay">
-                        <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                        <xsl:value-of select="f:seconds-to-time(sum($durations/*))"/>
                     </meta>
                 </xsl:for-each>
             </xsl:if>
@@ -309,7 +309,7 @@
                 </xsl:for-each>
             </xsl:variable>
             <meta property="media:duration">
-                <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                <xsl:value-of select="f:seconds-to-time(sum($durations/*))"/>
             </meta>
 
             <!-- Add further required tag if media overlays are present -->
@@ -319,8 +319,8 @@
 
 
     <xsl:template match="smil:audio[@src]" mode="metadata-smil">
-        <xsl:variable name="clipBegin" select="f:timeToSeconds(@clipBegin)"/>
-        <xsl:variable name="clipEnd" select="f:timeToSeconds(@clipEnd)"/>
+        <xsl:variable name="clipBegin" select="f:time-to-seconds(@clipBegin)"/>
+        <xsl:variable name="clipEnd" select="f:time-to-seconds(@clipEnd)"/>
         <xsl:variable name="duration" select="$clipEnd - $clipBegin"/>
 
         <duration><xsl:value-of select="$duration"/></duration>
@@ -426,7 +426,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="manifest">
-        <xsl:if test="f:isRendered(.)">
+        <xsl:if test="f:is-rendered(.)">
             <xsl:variable name="filename">
                 <xsl:choose>
                     <xsl:when test="f:has-rend-value(@rend, 'image')">
@@ -518,7 +518,7 @@
                 </xsl:variable>
 
                 <xsl:attribute name="duration">
-                    <xsl:value-of select="f:secondsToTime(sum($durations/*))"/>
+                    <xsl:value-of select="f:seconds-to-time(sum($durations/*))"/>
                 </xsl:attribute>
             </xsl:if>
         </item>
@@ -586,7 +586,7 @@
         <xd:short>Calculate the number of seconds in a duration expressed as hh:mm:ss.sss.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:timeToSeconds" as="xs:double">
+    <xsl:function name="f:time-to-seconds" as="xs:double">
         <xsl:param name="time" as="xs:string"/>
 
         <!-- 00:00:00.000 -->
@@ -606,7 +606,7 @@
         <xd:short>Convert a number of seconds to a duration expressed as hh:mm:ss.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:secondsToTime" as="xs:string">
+    <xsl:function name="f:seconds-to-time" as="xs:string">
         <xsl:param name="seconds" as="xs:double"/>
 
         <xsl:variable name="hours" select="floor($seconds div 3600)"/>

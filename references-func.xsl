@@ -75,8 +75,8 @@
             <xsl:when test="starts-with($url, 'olw:')">{f:message('msgLinkToOpenLibrary')}</xsl:when>
             <xsl:when test="starts-with($url, 'wp:')">{f:message('msgLinkToWikipedia')}</xsl:when>
             <xsl:when test="starts-with($url, 'loc:')">{f:message('msgLinkToMap')}</xsl:when>
-            <xsl:when test="starts-with($url, 'bib:')">{f:titleForBibleLink($url)}</xsl:when>
-            <xsl:when test="starts-with($url, 'qur:')">{f:titleForQuranLink($url)}</xsl:when>
+            <xsl:when test="starts-with($url, 'bib:')">{f:title-for-bible-link($url)}</xsl:when>
+            <xsl:when test="starts-with($url, 'qur:')">{f:title-for-quran-link($url)}</xsl:when>
             <xsl:when test="starts-with($url, 'tia:')">{f:message('msgLinkToInternetArchive')}</xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')">{f:message('msgEmailLink')}</xsl:when>
 
@@ -135,7 +135,7 @@
 
             <!-- Link to Project Gutenberg book -->
             <xsl:when test="starts-with($url, 'pg:') or starts-with($url, 'pgi:')">
-                <xsl:value-of select="f:translateProjectGutenbergUrl($url)"/>
+                <xsl:value-of select="f:translate-project-gutenberg-url($url)"/>
             </xsl:when>
 
             <!-- Link to OCLC (worldcat) catalog entry -->
@@ -173,12 +173,12 @@
 
             <!-- Link to Bible citation -->
             <xsl:when test="starts-with($url, 'bib:')">
-                <xsl:value-of select="f:urlForBibleLink($url, $lang)"/>
+                <xsl:value-of select="f:url-for-bible-link($url, $lang)"/>
             </xsl:when>
 
             <!-- Link to Quran citation -->
             <xsl:when test="starts-with($url, 'qur:')">
-                <xsl:value-of select="f:urlForQuranLink($url)"/>
+                <xsl:value-of select="f:url-for-quran-link($url)"/>
             </xsl:when>
 
             <!-- Link to secure website (or https://) -->
@@ -236,7 +236,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:translateProjectGutenbergUrl" as="xs:string">
+    <xsl:function name="f:translate-project-gutenberg-url" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
@@ -337,7 +337,7 @@
         }"/>
 
 
-    <xsl:function name="f:titleForBibleLink" as="xs:string">
+    <xsl:function name="f:title-for-bible-link" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
@@ -369,7 +369,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:urlForBibleLink" as="xs:string">
+    <xsl:function name="f:url-for-bible-link" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
@@ -418,7 +418,7 @@
     <xsl:variable name="quranRefPattern" select="'^qur:([0-9]+)(?:[:.]([0-9]+)(?:[-]([0-9]+))?)?$'"/>
 
 
-    <xsl:function name="f:titleForQuranLink" as="xs:string">
+    <xsl:function name="f:title-for-quran-link" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:variable name="urlParts" select="tokenize(replace($url, $quranRefPattern, '$1,$2,$3'), ',')"/>
@@ -437,7 +437,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:urlForQuranLink" as="xs:string">
+    <xsl:function name="f:url-for-quran-link" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:if test="not(matches($url, $quranRefPattern))">

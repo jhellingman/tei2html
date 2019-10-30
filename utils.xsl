@@ -205,7 +205,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:showDebugTags">
+    <xsl:function name="f:show-debug-tags">
         <xsl:param name="node" as="node()"/>
 
         <xsl:if test="f:is-set('debug')">
@@ -443,7 +443,7 @@
         </roles>
     </xsl:variable>
 
-    <xsl:function name="f:translateResp" as="xs:string">
+    <xsl:function name="f:translate-resp" as="xs:string">
         <xsl:param name="resp" as="xs:string"/>
 
         <xsl:variable name="message" select="$contributorRoles//*[.=$resp]/@message"/>
@@ -451,7 +451,7 @@
         <xsl:value-of select="if ($message) then f:message($message) else f:message('msgUnknown')"/>
     </xsl:function>
 
-    <xsl:function name="f:translateRespCode" as="xs:string">
+    <xsl:function name="f:translate-resp-code" as="xs:string">
         <xsl:param name="resp" as="xs:string"/>
 
         <xsl:variable name="code" select="$contributorRoles//*[.=$resp]/@code"/>
@@ -482,7 +482,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:isRendered" as="xs:boolean">
+    <xsl:function name="f:is-rendered" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
         <xsl:sequence select="not($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none'])"/>
     </xsl:function>

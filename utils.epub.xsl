@@ -162,7 +162,7 @@
         <xsl:sequence select="$epubversion = '3.1'"/>
     </xsl:function>
 
-    <xsl:function name="f:epubMainVersion" as="xs:string">
+    <xsl:function name="f:epub-main-version" as="xs:string">
         <xsl:value-of select="substring($epubversion, 1,3)"/>
     </xsl:function>
 

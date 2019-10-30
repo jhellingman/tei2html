@@ -147,7 +147,7 @@
         <!-- Other contributors -->
         <xsl:for-each select="//titleStmt/respStmt[resp != 'Transcription']">
             <xsl:sort select="name/@key"/>
-            <xsl:copy-of select="f:metadata-line-with-url(f:translateResp(resp), name, name/@ref, f:message('msgInfo'))"/>
+            <xsl:copy-of select="f:metadata-line-with-url(f:translate-resp(resp), name, name/@ref, f:message('msgInfo'))"/>
         </xsl:for-each>
     </xsl:template>
 

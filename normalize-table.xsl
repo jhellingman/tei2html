@@ -382,10 +382,10 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[normalize-space(.) != ''][1]), f:determineNumberPattern(.))]">
+    <xsl:template mode="split-cell" match="cell[matches(normalize-space(text()[normalize-space(.) != ''][1]), f:determine-number-pattern(.))]">
         <xsl:variable name="text" select="normalize-space(text()[normalize-space(.) != ''][1])" as="xs:string"/>
 
-        <xsl:variable name="number-pattern" select="f:determineNumberPattern(.)"/>
+        <xsl:variable name="number-pattern" select="f:determine-number-pattern(.)"/>
 
         <xsl:variable name="integer" select="replace($text, $number-pattern, '$2')"/>
         <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7')"/>
@@ -482,7 +482,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:determineDecimalSeparator" as="xs:string">
+    <xsl:function name="f:determine-decimal-separator" as="xs:string">
         <xsl:param name="cell" as="element(cell)"/>
 
         <xsl:variable name="rend-cell"  select="$cell/@rend"/>
@@ -503,10 +503,10 @@
         <xd:short>Determine the pattern to be used to recognize numbers.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:determineNumberPattern" as="xs:string">
+    <xsl:function name="f:determine-number-pattern" as="xs:string">
         <xsl:param name="cell" as="element(cell)"/>
 
-        <xsl:value-of select="if (f:determineDecimalSeparator($cell) = ',')
+        <xsl:value-of select="if (f:determine-decimal-separator($cell) = ',')
             then $number-pattern-comma
             else $number-pattern-period"/>
     </xsl:function>

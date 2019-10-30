@@ -69,7 +69,7 @@
     </xd:doc>
 
     <xsl:template match="div0">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-div-class"/>
@@ -126,7 +126,7 @@
     </xd:doc>
 
     <xsl:template match="div1">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="$outputformat = 'html'">
             <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
             <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
@@ -179,7 +179,7 @@
     </xd:doc>
 
     <xsl:template match="div2">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -201,7 +201,7 @@
     </xd:doc>
 
     <xsl:template match="div3 | div4 | div5 | div6">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <div class="{name()}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -235,7 +235,7 @@
     <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
 
     <xsl:template match="div">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:variable name="level" select="f:div-level(.) + 1"/>
             <div>

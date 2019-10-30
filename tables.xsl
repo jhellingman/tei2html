@@ -36,7 +36,7 @@
     </xd:doc>
 
     <xsl:template match="table">
-        <xsl:copy-of select="f:showDebugTags(.)"/>
+        <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:apply-templates select="." mode="render-table"/>
     </xsl:template>
 
@@ -119,12 +119,12 @@
 
             <xsl:choose>
                 <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML -->
-                <xsl:when test="row[1][f:isHeaderRow(.)]">
+                <xsl:when test="row[1][f:is-header-row(.)]">
                     <thead>
-                        <xsl:apply-templates select="*[not(preceding-sibling::row[not(f:isHeaderRow(.))] or self::row[not(f:isHeaderRow(.))])]"/>
+                        <xsl:apply-templates select="*[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
                     </thead>
                     <tbody>
-                        <xsl:apply-templates select="*[preceding-sibling::row[not(f:isHeaderRow(.))] or self::row[not(f:isHeaderRow(.))]]"/>
+                        <xsl:apply-templates select="*[preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))]]"/>
                     </tbody>
                 </xsl:when>
                 <xsl:otherwise>
@@ -210,7 +210,7 @@
                         <xsl:copy-of select="f:output-image('images/rbrace' || @rows || '.png', '}')"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="f:isSumCell(.)">
+                <xsl:when test="f:is-sum-cell(.)">
                     <span class="sum">
                         <xsl:apply-templates/>
                     </span>
@@ -308,7 +308,7 @@
         <xsl:context-item as="element(cell)" use="required"/>
 
         <!-- A cell is considered part of the table head if it has a @role of label or unit -->
-        <xsl:variable name="prefix" select="if (f:isHeaderRow(..)) then 'cellHead' else 'cell'"/>
+        <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cellHead' else 'cell'"/>
 
         <xsl:choose>
             <!-- Do we have the @col attribute on the table, then we can use those attributes -->
@@ -324,9 +324,9 @@
         </xsl:choose>
 
         <xsl:choose>
-            <xsl:when test="f:isHeaderRow(..)">
+            <xsl:when test="f:is-header-row(..)">
                 <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellHeadTop </xsl:text></xsl:if>
-                <xsl:if test="not(../following-sibling::row[f:isHeaderRow(.)])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
+                <xsl:if test="not(../following-sibling::row[f:is-header-row(.)])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
@@ -378,12 +378,12 @@
     </xsl:function>
 
 
-    <xsl:function name="f:isHeaderRow" as="xs:boolean">
+    <xsl:function name="f:is-header-row" as="xs:boolean">
         <xsl:param name="row" as="element(row)"/>
         <xsl:sequence select="$row/@role = ('label', 'unit')"/>
     </xsl:function>
 
-    <xsl:function name="f:isSumCell" as="xs:boolean">
+    <xsl:function name="f:is-sum-cell" as="xs:boolean">
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:sequence select="$cell/@role = ('sum', 'subtr', 'avg', 'sumCurrency', 'sumFraction', 'sumSterling', 'sumPeso')"/>
     </xsl:function>
@@ -411,10 +411,10 @@
         </xsl:variable>
 
         <!-- Get labels and units first (simplified model, see templates dealing with a normal-table for more complex situation). -->
-        <xsl:variable name="headers" select="row[not(preceding-sibling::row[not(f:isHeaderRow(.))] or self::row[not(f:isHeaderRow(.))])]"/>
+        <xsl:variable name="headers" select="row[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
 
         <!-- Get remainder of data  -->
-        <xsl:variable name="rows" select="row[preceding-sibling::row[not(f:isHeaderRow(.))] or self::row[not(f:isHeaderRow(.))]]"/>
+        <xsl:variable name="rows" select="row[preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))]]"/>
 
         <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
 

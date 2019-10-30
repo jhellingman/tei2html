@@ -79,7 +79,7 @@
         <xsl:param name="level" as="xs:string"/>
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
-        <xsl:value-of select="upper-case($level) || ': ' || f:formatString($message, $params)"/>
+        <xsl:value-of select="upper-case($level) || ': ' || f:format-string($message, $params)"/>
     </xsl:function>
 
 
@@ -88,7 +88,7 @@
         <xd:detail>Format a string. Replace parameter-placeholders in the message string like {1} {2} {3} to the matching value in the <code>$param</code> sequence.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:formatString" as="xs:string">
+    <xsl:function name="f:format-string" as="xs:string">
         <xsl:param name="message" as="xs:string"/>
         <xsl:param name="params" as="xs:string*"/>
 
