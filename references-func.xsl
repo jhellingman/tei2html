@@ -204,7 +204,7 @@
 
             <!-- Expand prefixes defined in //listPrefixDef/prefixDef -->
             <xsl:when test="substring-before($url, ':') = $prefixDefs/@ident">
-                <xsl:value-of select="f:applyPrefixDef($url, $prefixDefs[@ident = substring-before($url, ':')][1])"/>
+                <xsl:value-of select="f:apply-prefix-def($url, $prefixDefs[@ident = substring-before($url, ':')][1])"/>
             </xsl:when>
 
             <xsl:otherwise>
@@ -225,7 +225,7 @@
         <xd:param name="prefixDef" type="element(prefixDef)">The applicable prefixDef element.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:applyPrefixDef" as="xs:string">
+    <xsl:function name="f:apply-prefix-def" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
         <xsl:param name="prefixDef" as="element(prefixDef)"/>
         <xsl:variable name="locator" select="substring-after($url, ':')" as="xs:string"/>

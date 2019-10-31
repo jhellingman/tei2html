@@ -601,7 +601,7 @@
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
             <xsl:if test="f:is-set('useMouseOverPopups')">
-                <xsl:variable name="expan" select="f:findExpansion(.)" as="xs:string"/>
+                <xsl:variable name="expan" select="f:find-expansion(.)" as="xs:string"/>
                 <xsl:if test="$expan != ''">
                     <xsl:attribute name="title">
                         <xsl:value-of select="$expan"/>
@@ -619,7 +619,7 @@
         might provide the expansion.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:findExpansion" as="xs:string">
+    <xsl:function name="f:find-expansion" as="xs:string">
         <xsl:param name="abbr" as="element()"/>
 
         <xsl:value-of select="if ($abbr/@expan != '')
@@ -843,21 +843,21 @@
                     <xsl:copy-of select="f:log-error('Segment with @id=''{1}'' not found', ($copyOf))"/>
                     <xsl:apply-templates/>
                 </xsl:when>
-                <xsl:when test="f:is-set('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+                <xsl:when test="f:is-set('ditto.enable') and f:determine-ditto-repeat(.) = 'segment'">
                     <span class="ditto">
                         <span class="s">
                             <xsl:apply-templates select="$source"/>
                         </span>
                         <span class="d">
                             <span class="i">
-                                <xsl:copy-of select="f:convert-markdown(f:determineDittoMark(.))"/>
+                                <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark(.))"/>
                             </span>
                         </span>
                     </span>
                 </xsl:when>
                 <xsl:when test="f:is-set('ditto.enable')">
                     <!-- TODO: Handle the case where this is in a doubled-up table or list, and the row appears on the top line -->
-                    <xsl:variable name="source" select="if ($source//corr) then f:stripCorrElements($source) else $source"/>
+                    <xsl:variable name="source" select="if ($source//corr) then f:strip-corr-elements($source) else $source"/>
                     <xsl:apply-templates select="$source" mode="ditto">
                         <xsl:with-param name="context" select="." tunnel="yes"/>
                     </xsl:apply-templates>
@@ -886,20 +886,20 @@
     <xsl:template match="ditto">
         <xsl:copy-of select="f:log-warning('Deprecated element ditto used (please use seg).', ())"/>
         <xsl:choose>
-            <xsl:when test="f:is-set('ditto.enable') and f:determineDittoRepeat(.) = 'segment'">
+            <xsl:when test="f:is-set('ditto.enable') and f:determine-ditto-repeat(.) = 'segment'">
                 <span class="ditto">
                     <span class="s">
                         <xsl:apply-templates/>
                     </span>
                     <span class="d">
                         <span class="i">
-                            <xsl:copy-of select="f:convert-markdown(f:determineDittoMark(.))"/>
+                            <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark(.))"/>
                         </span>
                     </span>
                 </span>
             </xsl:when>
             <xsl:when test="f:is-set('ditto.enable')">
-                <xsl:variable name="node" select="if (.//corr) then f:stripCorrElements(.) else ."/>
+                <xsl:variable name="node" select="if (.//corr) then f:strip-corr-elements(.) else ."/>
                 <xsl:apply-templates select="$node" mode="ditto">
                     <xsl:with-param name="context" select="." as="node()" tunnel="yes"/>
                 </xsl:apply-templates>
@@ -913,11 +913,11 @@
 
     <xsl:template mode="ditto" match="text()">
         <xsl:param name="context" as="node()" tunnel="yes"/>
-        <xsl:copy-of select="f:generateDittoMarks(., $context)"/>
+        <xsl:copy-of select="f:generate-ditto-marks(., $context)"/>
     </xsl:template>
 
 
-    <xsl:function name="f:generateDittoMarks">
+    <xsl:function name="f:generate-ditto-marks">
         <xsl:param name="node" as="node()*"/>
         <xsl:param name="context" as="node()"/>
 
@@ -964,7 +964,7 @@
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
                             <span class="d">
                                 <span class="i">
-                                    <xsl:copy-of select="f:convert-markdown(f:determineDittoMark($context))"/>
+                                    <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark($context))"/>
                                 </span>
                             </span>
                         </xsl:if>
@@ -977,7 +977,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:determineDittoRepeat" as="xs:string">
+    <xsl:function name="f:determine-ditto-repeat" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
         <xsl:value-of select="if ($node/ancestor-or-self::ditto/@repeat)
@@ -988,7 +988,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:determineDittoMark" as="xs:string">
+    <xsl:function name="f:determine-ditto-mark" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
         <xsl:value-of select="if ($node/ancestor-or-self::ditto/@mark)
@@ -999,7 +999,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:stripCorrElements">
+    <xsl:function name="f:strip-corr-elements">
         <xsl:param name="node" as="node()"/>
 
         <xsl:apply-templates select="$node" mode="stripCorrElements"/>

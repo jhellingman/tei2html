@@ -57,7 +57,7 @@
                 <xsl:call-template name="metadata"/>
                 <xsl:call-template name="manifest"/>
                 <xsl:call-template name="spine"/>
-                <xsl:if test="f:isEpub30()">
+                <xsl:if test="f:is-epub30()">
                     <xsl:call-template name="guide"/>
                 </xsl:if>
             </package>
@@ -82,7 +82,7 @@
                     <xsl:variable name="epub-id"><xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'epub-id']"/></xsl:variable>
 
                     <dc:identifier id="epub-id"><xsl:value-of select="$epub-id"/></dc:identifier>
-                    <xsl:if test="f:isEpub30()">
+                    <xsl:if test="f:is-epub30()">
                         <meta refines="#epub-id" property="identifier-type">uuid</meta>
                     </xsl:if>
                     <meta property="dcterms:modified"><xsl:value-of select="f:utc-timestamp()"/></meta>
@@ -101,7 +101,7 @@
                     <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
                 </dc:identifier>
-                <xsl:if test="f:isEpub30()">
+                <xsl:if test="f:is-epub30()">
                     <meta refines="#pgnum" property="identifier-type">uri</meta>
                 </xsl:if>
             </xsl:if>
@@ -194,7 +194,7 @@
         <xsl:variable name="id" select="f:generate-id(.) || 'metadata'"/>
 
         <dc:creator id="{$id}">
-            <xsl:if test="f:isEpub31()">
+            <xsl:if test="f:is-epub31()">
                 <xsl:attribute name="opf:role">aut</xsl:attribute>
                 <xsl:attribute name="opf:scheme">marc:relators</xsl:attribute>
                 <xsl:if test="@key">
@@ -204,7 +204,7 @@
             <xsl:value-of select="."/>
         </dc:creator>
 
-        <xsl:if test="f:isEpub30()">
+        <xsl:if test="f:is-epub30()">
             <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="'aut'"/></meta>
 
             <!-- Assume we use the key attribute to store the sort-key; this is not strictly valid: the key could also be a key into some database. -->
@@ -227,7 +227,7 @@
         <xsl:variable name="id" select="f:generate-id(.) || 'metadata'"/>
 
         <dc:contributor id="{$id}">
-            <xsl:if test="f:isEpub31()">
+            <xsl:if test="f:is-epub31()">
                 <xsl:attribute name="opf:role"><xsl:value-of select="f:translate-resp-code(resp)"/></xsl:attribute>
                 <xsl:attribute name="opf:scheme">marc:relators</xsl:attribute>
                 <xsl:if test="name/@key">
@@ -237,7 +237,7 @@
             <xsl:value-of select="name"/>
         </dc:contributor>
 
-        <xsl:if test="f:isEpub30()">
+        <xsl:if test="f:is-epub30()">
             <xsl:if test="resp">
                 <meta property="role" refines="#{$id}" scheme="marc:relators"><xsl:value-of select="f:translate-resp-code(resp)"/></meta>
             </xsl:if>
@@ -287,7 +287,7 @@
 
     <xsl:template name="metadata-smil">
         <xsl:if test="//*[f:has-rend-value(@rend, 'media-overlay')]">
-            <xsl:if test="f:isEpub30()">
+            <xsl:if test="f:is-epub30()">
                 <!-- Add up the durations for each audio fragment -->
                 <xsl:for-each select="//*[f:has-rend-value(@rend, 'media-overlay')]">
                     <xsl:variable name="durations">
@@ -510,7 +510,7 @@
             <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/>overlay</xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$filename"/></xsl:attribute>
             <xsl:attribute name="media-type">application/smil+xml</xsl:attribute>
-            <xsl:if test="f:isEpub31()">
+            <xsl:if test="f:is-epub31()">
 
                 <!-- Retrieve duration from smil file -->
                 <xsl:variable name="durations">

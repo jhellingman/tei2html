@@ -174,7 +174,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:needsclosepar" as="xs:boolean">
+    <xsl:function name="f:needs-close-par" as="xs:boolean">
         <xsl:param name="element" as="element()"/>
 
         <xsl:variable name="output_p" select="$p.element = 'p'" as="xs:boolean"/>
@@ -187,7 +187,7 @@
 
     <xsl:template name="closepar">
         <!-- insert </p> to close current paragraph as tables in paragraphs are illegal in HTML -->
-        <xsl:if test="f:needsclosepar(.)">
+        <xsl:if test="f:needs-close-par(.)">
             <xsl:text disable-output-escaping="yes">&lt;/p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>
@@ -199,7 +199,7 @@
     </xd:doc>
 
     <xsl:template name="reopenpar">
-        <xsl:if test="f:needsclosepar(.)">
+        <xsl:if test="f:needs-close-par(.)">
             <xsl:text disable-output-escaping="yes">&lt;p&gt;</xsl:text>
         </xsl:if>
     </xsl:template>

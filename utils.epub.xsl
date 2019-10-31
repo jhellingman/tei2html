@@ -154,11 +154,11 @@
     </xsl:template>
 
 
-    <xsl:function name="f:isEpub30" as="xs:boolean">
+    <xsl:function name="f:is-epub30" as="xs:boolean">
         <xsl:sequence select="$epubversion = '3.0' or $epubversion = '3.0.1'"/>
     </xsl:function>
 
-    <xsl:function name="f:isEpub31" as="xs:boolean">
+    <xsl:function name="f:is-epub31" as="xs:boolean">
         <xsl:sequence select="$epubversion = '3.1'"/>
     </xsl:function>
 
