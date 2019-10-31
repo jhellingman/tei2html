@@ -1,19 +1,20 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2018-09-29T16:49:50Z using SAXON HE 9.8.0.7 . -->
+<!-- This HTML file has been automatically generated from an XML source on 2019-10-31T20:43:28Z using SAXON HE 9.9.0.1 . -->
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Sample MathJax Equations</title>
-<meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"></meta>
-<meta name="author" content=""></meta>
-<link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/"></link>
-<meta name="DC.Creator" content=""></meta>
-<meta name="DC.Title" content="Sample MathJax Equations"></meta>
-<meta name="DC.Language" content="en"></meta>
-<meta name="DC.Format" content="text/html"></meta>
-<meta name="DC.Publisher" content="Project Gutenberg"></meta>
-<meta name="DC:Subject" content="Mathematics"></meta><style type="text/css">
+<meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html">
+<meta name="author" content="">
+<link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/">
+<meta name="DC.Creator" content="">
+<meta name="DC.Title" content="Sample MathJax Equations">
+<meta name="DC.Language" content="en">
+<meta name="DC.Format" content="text/html">
+<meta name="DC.Publisher" content="Project Gutenberg">
+<meta name="DC:Subject" content="Mathematics">
+<style type="text/css">
 body {
 font-family: "Times New Roman", Times, serif;
 font-size: 100%;
@@ -60,10 +61,7 @@ text-align: right;
 text-align: justify;
 }
 p.tb, hr.tb, .par.tb {
-margin-top: 1.6em;
-margin-bottom: 1.6em;
-margin-left: auto;
-margin-right: auto;
+margin: 1.6em auto;
 text-align: center;
 }
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
@@ -73,6 +71,12 @@ text-indent: 0;
 }
 p.argument, p.tocArgument, .par.argument, .par.tocArgument {
 margin: 1.58em 10%;
+}
+td.tocDivNum {
+vertical-align: top;
+}
+td.tocPageNum {
+vertical-align: bottom;
 }
 .opener, .address {
 margin-top: 1.6em;
@@ -133,6 +137,10 @@ letter-spacing: 0.2em;
 .sc {
 font-variant: small-caps;
 }
+.asc {
+font-variant: small-caps;
+text-transform: lowercase;
+}
 .uc {
 text-transform: uppercase;
 }
@@ -166,7 +174,7 @@ width: 45%;
 .aligncenter {
 text-align: center;
 }
-h1, h2 {
+h1, h2, .h1, .h2 {
 font-size: 1.44em;
 line-height: 1.5em;
 }
@@ -198,8 +206,8 @@ text-indent: -0.71em;
 p.dropcap:first-letter, .par.dropcap:first-letter {
 float: left;
 clear: left;
-margin: 0em 0.05em 0 0;
-padding: 0px;
+margin: 0 0.05em 0 0;
+padding: 0;
 line-height: 0.8em;
 font-size: 420%;
 vertical-align: super;
@@ -212,27 +220,12 @@ margin: 1.58em 5%;
 .pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
 text-decoration: none;
 }
-ul {
-list-style-type: none;
-}
-.advertisment {
+.advertisement, .advertisements {
 background-color: #FFFEE0;
 border: black 1px dotted;
 color: #000;
 margin: 2em 5%;
 padding: 1em;
-}
-.itemGroupTable {
-border-collapse: collapse;
-margin-left: 0;
-}
-.itemGroupTable td {
-padding: 0;
-margin: 0;
-vertical-align: middle;
-}
-.itemGroupBrace {
-padding: 0 0.5em !important;
 }
 .footnotes .body, .footnotes .div1 {
 padding: 0;
@@ -298,11 +291,11 @@ td.tocDivTitle {
 width: auto;
 }
 p.tocPart, .par.tocPart {
-margin: 1.58em 0%;
+margin: 1.58em 0;
 font-variant: small-caps;
 }
 p.tocChapter, .par.tocChapter {
-margin: 1.58em 0%;
+margin: 1.58em 0;
 }
 p.tocSection, .par.tocSection {
 margin: 0.7em 5%;
@@ -330,10 +323,10 @@ margin: 0;
 .index {
 font-size: 80%;
 }
-.indextoc {
+.indexToc {
 text-align: center;
 }
-.transcribernote {
+.transcriberNote {
 background-color: #DDE;
 border: black 1px dotted;
 color: #000;
@@ -342,7 +335,11 @@ font-size: 80%;
 margin: 2em 5%;
 padding: 1em;
 }
-.correctiontable {
+.missingTarget {
+text-decoration: line-through;
+color: red;
+}
+.correctionTable {
 width: 75%;
 }
 .width20 {
@@ -354,6 +351,50 @@ width: 40%;
 p.smallprint, li.smallprint, .par.smallprint {
 color: #666666;
 font-size: 80%;
+}
+span.musictime {
+vertical-align: middle;
+display: inline-block;
+text-align: center;
+}
+span.musictime, span.musictime span.top, span.musictime span.bottom {
+padding: 1px 0.5px;
+font-size: xx-small;
+font-weight: bold;
+line-height: 0.7em;
+}
+span.musictime span.bottom {
+display: block;
+}
+ul {
+list-style-type: none;
+}
+.splitListTable {
+margin-left: 0;
+}
+.numberedItem {
+text-indent: -3em;
+margin-left: 3em;
+}
+.numberedItem .itemNumber {
+float: left;
+position: relative;
+left: -3.5em;
+width: 3em;
+display: inline-block;
+text-align: right;
+}
+.itemGroupTable {
+border-collapse: collapse;
+margin-left: 0;
+}
+.itemGroupTable td {
+padding: 0;
+margin: 0;
+vertical-align: middle;
+}
+.itemGroupBrace {
+padding: 0 0.5em !important;
 }
 span.displayMath {
 display: block;
@@ -412,12 +453,33 @@ text-indent: 0;
 width: 14%;
 text-align: left;
 }
+.cut-in-left-note {
+font-size: 0.8em;
+left: 1%;
+line-height: 1.2em;
+float: left;
+text-indent: 0;
+width: 14%;
+text-align: left;
+padding: 0.8em 0.8em 0.8em 0;
+}
+.cut-in-right-note {
+font-size: 0.8em;
+left: 1%;
+line-height: 1.2em;
+float: right;
+text-indent: 0;
+width: 14%;
+text-align: right;
+padding: 0.8em 0 0.8em 0.8em;
+}
 span.tocPageNum, span.flushright {
 position: absolute;
 right: 16%;
 top: auto;
+text-indent: 0;
 }
-.pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
+.pglink, .catlink, .exlink, .wplink, .biblink, .qurlink, .seclink {
 background-repeat: no-repeat;
 background-position: right center;
 }
@@ -429,7 +491,7 @@ padding-right: 18px;
 background-image: url(images/card.png);
 padding-right: 17px;
 }
-.exlink, .wplink, .biblink, .seclink {
+.exlink, .wplink, .biblink, .qurlink, .seclink {
 background-image: url(images/external.png);
 padding-right: 13px;
 }
@@ -439,9 +501,10 @@ background-color: #DCFFDC;
 .catlink:hover {
 background-color: #FFFFDC;
 }
-.exlink:hover, .wplink:hover, .biblink:hover {
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover {
 background-color: #FFDCDC;
-}body {
+}
+body {
 background: #FFFFFF;
 font-family: "Times New Roman", Times, serif;
 }
@@ -479,9 +542,16 @@ margin-right: auto;
 }
 .tablecaption {
 text-align: center;
-}.pagenum, .linenum {
+}
+.arab { font-family: Scheherazade, serif; }
+.aran { font-family: 'Awami Nastaliq', serif; }
+.grek { font-family: 'Galatia SIL', serif; }
+.hebr { font-family: Shlomo, 'Ezra SIL', serif; }
+.syrc { font-family: 'Serto Jerusalem', serif; }
+.pagenum, .linenum {
 speak: none;
-}</style><style type="text/css">
+}</style>
+<style type="text/css">
 /* CSS rules generated from @rend attributes in TEI file */
 /* Extracted style from SVG file "formulas/display-f1.svg" */
 .f1frml {
@@ -534,7 +604,8 @@ height:3.009ex;
 @media handheld {
 }
 /* CSS rules copied from @style attributes in TEI file */
-</style></head>
+</style>
+</head>
 <body>
 <div class="body">
 <div class="div1 chapter">
@@ -542,14 +613,14 @@ height:3.009ex;
 <h2 class="main">Sample MathJax Equations</h2>
 </div>
 <div class="divBody">
-<p class="first">The following sample equations have been borrowed from <a class="seclink xd28e83" title="External link" href="https://www.tuhh.de/MathJax/test/examples.html">https://www.tuhh.de/MathJax/test/examples.html</a>.
+<p class="first">The following sample equations have been borrowed from <a class="seclink xd29e72" title="External link" href="https://www.tuhh.de/MathJax/test/examples.html">https://www.tuhh.de/MathJax/test/examples.html</a>.
 </p>
 <div class="div2 section">
 <div class="divHead">
 <h3 class="main">The Lorenz Equations</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(1)</span><span class="displayMath"><img src="formulas/display-f1.svg" title="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" class="f1frml"></img></span><span class="rightMathLabel">(1)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(1)</span><span class="displayMath"><img src="formulas/display-f1.svg" alt="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" title="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" class="f1frml"></span><span class="rightMathLabel">(1)</span></span>
 </p>
 </div>
 </div>
@@ -558,7 +629,7 @@ height:3.009ex;
 <h3 class="main">The Cauchy-Schwarz Inequality</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(2)</span><span class="displayMath"><img src="formulas/display-f2.svg" title="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" class="f2frml"></img></span><span class="rightMathLabel">(2)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(2)</span><span class="displayMath"><img src="formulas/display-f2.svg" alt="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" title="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" class="f2frml"></span><span class="rightMathLabel">(2)</span></span>
 </p>
 </div>
 </div>
@@ -567,17 +638,16 @@ height:3.009ex;
 <h3 class="main">A Cross Product Formula</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="displayMath"><img src="formulas/display-f3.svg" title="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" class="f3frml"></img></span>
+<p class="first"><span class="displayMath"><img src="formulas/display-f3.svg" alt="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" title="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" class="f3frml"></span>
 </p>
 </div>
 </div>
 <div class="div2 section">
 <div class="divHead">
-<h3 class="main">The probability of getting <span class="inlineMath"><i>k</i></span> heads when flipping <span class="inlineMath"><i>n</i></span> coins is:
-</h3>
+<h3 class="main">The probability of getting <span class="inlineMath"><i>k</i></span> heads when flipping <span class="inlineMath"><i>n</i></span> coins is:</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="displayMath"><img src="formulas/display-f4.svg" title="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" class="f4frml"></img></span>
+<p class="first"><span class="displayMath"><img src="formulas/display-f4.svg" alt="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" title="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" class="f4frml"></span>
 </p>
 </div>
 </div>
@@ -586,7 +656,7 @@ height:3.009ex;
 <h3 class="main">An Identity of Ramanujan</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>a</i>)</span><span class="displayMath"><img src="formulas/display-f5.svg" title="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" class="f5frml"></img></span><span class="rightMathLabel">(5<i>a</i>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>a</i>)</span><span class="displayMath"><img src="formulas/display-f5.svg" alt="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" title="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" class="f5frml"></span><span class="rightMathLabel">(5<i>a</i>)</span></span>
 </p>
 </div>
 </div>
@@ -595,7 +665,7 @@ height:3.009ex;
 <h3 class="main">A Rogers-Ramanujan Identity</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>b</i>)</span><span class="displayMath"><img src="formulas/display-f6.svg" title="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" class="f6frml"></img></span><span class="rightMathLabel">(5<i>b</i>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>b</i>)</span><span class="displayMath"><img src="formulas/display-f6.svg" alt="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" title="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" class="f6frml"></span><span class="rightMathLabel">(5<i>b</i>)</span></span>
 </p>
 </div>
 </div>
@@ -604,7 +674,7 @@ height:3.009ex;
 <h3 class="main">Maxwell&#x2019;s Equations</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<b>*</b>)</span><span class="displayMath"><img src="formulas/display-f7.svg" title="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" class="f7frml"></img></span><span class="rightMathLabel">(5<b>*</b>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<b>*</b>)</span><span class="displayMath"><img src="formulas/display-f7.svg" alt="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" title="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" class="f7frml"></span><span class="rightMathLabel">(5<b>*</b>)</span></span>
 </p>
 </div>
 </div>
@@ -614,9 +684,8 @@ height:3.009ex;
 </div>
 <div class="divBody">
 <p class="first">Finally, while display equations look good for a page of samples, the ability to mix
-math and text in a paragraph is also important. This expression <span class="inlineMath"><img src="formulas/inline-f8.svg" title="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" class="f8frml"></img></span> is an example of an inline equation. As you see, MathJax equations can be used this
-way as well, without unduly disturbing the spacing between lines.
-</p>
+math and text in a paragraph is also important. This expression <span class="inlineMath"><img src="formulas/inline-f8.svg" alt="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" title="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" class="f8frml"></span> is an example of an inline equation. As you see, MathJax equations can be used this
+way as well, without unduly disturbing the spacing between lines.</p>
 </div>
 </div>
 </div>

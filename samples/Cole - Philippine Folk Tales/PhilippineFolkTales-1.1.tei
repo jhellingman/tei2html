@@ -9,7 +9,8 @@
 <fileDesc>
 <titleStmt>
 <title>Philippine Folk Tales</title>
-<author sortkey="Cole, Mabel Cook">Mabel Cook Cole</author>
+<author key="Cole, Mabel Cook" ref="https://viaf.org/viaf/9049512/">Mabel Cook Cole</author>
+<respStmt><resp>Transcription</resp> <name key="Hellingman, Jeroen">Jeroen Hellingman</name></respStmt>
 </titleStmt>
 <publicationStmt>
 <publisher>Project Gutenberg</publisher>
@@ -22,11 +23,11 @@
 <availability>
 <p>&availability.en;
 
-<p>This eBook is produced by Jeroen Hellingman and the Online Distributed Proofreading Team at <xref url="http://www.pgdp.net/">www.pgdp.net</xref>.
+<p>This eBook is produced by Jeroen Hellingman and the Online Distributed Proofreading Team at <xref url="https://www.pgdp.net/">www.pgdp.net</xref>.
 
 <p>gbn0406211926: Mabel Cook Cole, Philippine Folk Tales. Jeroen Hellingman &lt;jeroen@bohol.ph&gt;. 1916c. 6/24/2004. ok.
 
-<p>A copy of this work is available at the <xref url="http://www.archive.org/details/philippinefolkta00colerich">Internet Archive</xref>.
+<p>A copy of this work is available at the <xref url="https://www.archive.org/details/philippinefolkta00colerich">Internet Archive</xref>.
 
 </availability>
 </publicationStmt>
@@ -74,10 +75,10 @@
 </figure>
 
 
-<div1 id=tp type=TitlePage>
+<div1 id=titlepage type=TitlePage>
 
 
-<p><figure id=titlepage rend="image(images/titlepage.gif)">
+<p><figure id=titlepage-image rend="image(images/titlepage.png)">
 <figDesc>Original Title Page.</figDesc>
 </figure>
 
@@ -382,7 +383,7 @@
 
 <pb n=11 id=pb11><p>One night not long after this Aponibolinayen told her husband that she wanted to go with him the next day when he made light in the sky.
 
-<p>&ldquo;Oh, no, you cannot,&rdquo; said the Sun, &ldquo;for it is very hot up there,<note n=1>Compare with the story of Ph&aelig;ton in Bulfinch, <hi>The Age of Fable</hi>, p. 50.</note> and you cannot stand the heat.&rdquo;
+<p>&ldquo;Oh, no, you cannot,&rdquo; said the Sun, &ldquo;for it is very hot up there,<note n=1>Compare with the story of Phæton in Bulfinch, <hi>The Age of Fable</hi>, p. 50.</note> and you cannot stand the heat.&rdquo;
 
 <p>&ldquo;We will take many blankets and pillows,&rdquo; said the woman, &ldquo;and when the heat becomes very great, I will hide under them.&rdquo;
 
@@ -3011,84 +3012,84 @@ said to the people, &ldquo;Let us sit down and rest.&rdquo;
 <p>The vowel sounds in the following pronunciations are those used in Webster&apos;s dictionary.
 
 <list rend="columns(2)">
-<item><hi>Adasen</hi>, a-d&auml;&prime;sen
+<item><hi>Adasen</hi>, a-dä&prime;sen
 <item><hi>Aguio</hi>, a&prime;ge-o
-<item><hi>Alan</hi>, &auml;&prime;l&auml;n
-<item><hi>Alokotan</hi>, &auml;-l&omacr;-k&omacr;-t&auml;n&prime;
-<item><hi>Aponibalagen</hi>, ap&omacr;-n&emacr;-b&auml;-l&auml;-g&ebreve;n&prime;
-<item><hi>Aponibolinayen</hi>, ap&omacr;-n&emacr;-b&omacr;-l&ebreve;-n&auml;&prime;yen
+<item><hi>Alan</hi>, ä&prime;län
+<item><hi>Alokotan</hi>, ä-l&omacr;-k&omacr;-tän&prime;
+<item><hi>Aponibalagen</hi>, ap&omacr;-n&emacr;-bä-lä-g&ebreve;n&prime;
+<item><hi>Aponibolinayen</hi>, ap&omacr;-n&emacr;-b&omacr;-l&ebreve;-nä&prime;yen
 <item><hi>Aponitolau</hi>, apo-ne-t&omacr;&prime;lou
-<item><hi>Bagbagak</hi>, b&auml;g-b&auml;-g&auml;k&prime;
+<item><hi>Bagbagak</hi>, bäg-bä-gäk&prime;
 <item><hi>Bagobo</hi>, ba-g&omacr;&prime;b&omacr;
-<item><hi>Balatama</hi>, b&auml;-l&auml;-t&auml;&prime;ma
-<item><hi>Bangan</hi>, b&auml;n&prime;g&auml;n
-<item><hi>Bantugan</hi>, b&auml;n-too&prime;gan
+<item><hi>Balatama</hi>, bä-lä-tä&prime;ma
+<item><hi>Bangan</hi>, bän&prime;gän
+<item><hi>Bantugan</hi>, bän-too&prime;gan
 <item><hi>Benito</hi>, be-n&emacr;&prime;t&omacr;
-<item><hi>Bilaan</hi>, be-l&auml;&prime;an
+<item><hi>Bilaan</hi>, be-lä&prime;an
 <item><hi>Bita</hi>, b&emacr;&prime;ta
 <item><hi>Bontoc</hi>, bon&prime;tok
 <item><hi>Bukidnon</hi>, boo-kid&prime;n&omacr;n
-<item><hi>Bulanawan</hi>, boo-l&abreve;-n&auml;&prime;wan
-<item><hi>Caalang</hi>, k&auml;-&auml;&prime;l&auml;ng
-<item><hi>Cabildo</hi>, k&auml;-b&ibreve;l&prime;d&omacr;
+<item><hi>Bulanawan</hi>, boo-l&abreve;-nä&prime;wan
+<item><hi>Caalang</hi>, kä-ä&prime;läng
+<item><hi>Cabildo</hi>, kä-b&ibreve;l&prime;d&omacr;
 <item><hi>Cibolan</hi>, ci-b&omacr;&prime;lan
 <item><hi>Dalonagan</hi>, da-l&omacr;-n&amacr;&prime;gan
-<item><hi>Danepan</hi>, d&auml;-n&emacr;-pan&prime;
+<item><hi>Danepan</hi>, dä-n&emacr;-pan&prime;
 <item><hi>Dapilisan</hi>, da-p&emacr;-l&emacr;&prime;san
 <item><hi>Dayapan</hi>, d&imacr;-a-pan
-<item><hi>Dinawagen</hi>, d&emacr;-n&auml;-w&auml;&prime;gen
+<item><hi>Dinawagen</hi>, d&emacr;-nä-wä&prime;gen
 <item><hi><corr sic=Dodedog>Dogedog</corr></hi>, d&omacr;g-e-d&omacr;g
 <item><hi>Domayco</hi>, d&omacr;-m&imacr;&prime;k&omacr;
-<item><hi>Dumalawi</hi>, doo-m&auml;-l&auml;-w&emacr;&prime;
+<item><hi>Dumalawi</hi>, doo-mä-lä-w&emacr;&prime;
 <item><hi>Epogow</hi>, &emacr;-p&omacr;-gou&prime;
-<item><hi>Gawigawen</hi>, g&auml;-w&emacr;-g&auml;&prime;wen
+<item><hi>Gawigawen</hi>, gä-w&emacr;-gä&prime;wen
 <item><hi>Gaygayoma</hi>, g&imacr;-g&imacr;-&omacr;&prime;ma
 <item><hi>Gotgotapa</hi>, g&omacr;t-g&omacr;-ta&prime;pa
 <item><hi>Igorot</hi>, &ibreve;g-&omacr;-r&omacr;t&prime;
-<item><hi>Ilocano</hi>, &ibreve;l-&omacr;-k&auml;&prime;n&omacr;
+<item><hi>Ilocano</hi>, &ibreve;l-&omacr;-kä&prime;n&omacr;
 <item><hi>Ilocos Norte</hi>, il-o&prime;kos no&prime;rte
-<item><hi>Indarapatra</hi>, in-d&auml;-r&auml;-p&auml;&prime;tra
+<item><hi>Indarapatra</hi>, in-dä-rä-pä&prime;tra
 <item><hi>Ini-init</hi>, &emacr;-n&ibreve;-&emacr;&prime;n&ibreve;t
 <item><hi>Kabigat</hi>, ka-be-gat&prime;
-<item><hi>Kaboniyan</hi>, k&auml;-b&omacr;-n&emacr;-yan&prime;
+<item><hi>Kaboniyan</hi>, kä-b&omacr;-n&emacr;-yan&prime;
 <item><hi>Kadaklan</hi>, ka-dak-lan&prime;
-<item><hi>Kadalayapan</hi>, k&auml;-d&auml;-l&auml;-y&auml;&prime;pan
-<item><hi>Kadayadawan</hi>, k&auml;-d&auml;-y&auml;-d&auml;&prime;wan
-<item><hi>Kanag</hi>, k&auml;&prime;n&auml;g
+<item><hi>Kadalayapan</hi>, kä-dä-lä-yä&prime;pan
+<item><hi>Kadayadawan</hi>, kä-dä-yä-dä&prime;wan
+<item><hi>Kanag</hi>, kä&prime;näg
 <item><hi>Komow</hi>, ko&prime;mou
 <item><hi>Kurita</hi>, ku-r&emacr;&prime;ta
-<item><hi>Langgona</hi>, l&auml;ng-g&omacr;&prime;na
+<item><hi>Langgona</hi>, läng-g&omacr;&prime;na
 <item><hi>Ligi</hi>, l&emacr;&prime;g&emacr;
 <item><hi>Limokon</hi>, l&emacr;-m&omacr;&prime;k&omacr;n
-<item><hi>Lumabet</hi>, loo-m&auml;&prime;bet
-<item><hi>Lumawig</hi>, loo-m&auml;&prime;wig
-<item><hi>Magbangal</hi>, m&auml;g-b&auml;ng&prime;al
-<item><hi>Magindanau</hi>, m&auml;-g&ibreve;n-d&auml;&prime;nou
+<item><hi>Lumabet</hi>, loo-mä&prime;bet
+<item><hi>Lumawig</hi>, loo-mä&prime;wig
+<item><hi>Magbangal</hi>, mäg-bäng&prime;al
+<item><hi>Magindanau</hi>, mä-g&ibreve;n-dä&prime;nou
 <item><hi>Magosang</hi>, ma-g&omacr;&prime;sang
-<item><hi>Magsawi</hi>, m&auml;g-s&auml;-w&emacr;&prime;
-<item><hi>Magsingal</hi>, m&auml;g&prime;s&ibreve;n-g&auml;l
-<item><hi>Manama</hi>, m&auml;n-&auml;&prime;ma
-<item><hi>Mandaya</hi>, m&auml;n-d&imacr;&prime;ya
-<item><hi>Mansumandig</hi>, m&auml;n-su-m&auml;n-dig
+<item><hi>Magsawi</hi>, mäg-sä-w&emacr;&prime;
+<item><hi>Magsingal</hi>, mäg&prime;s&ibreve;n-gäl
+<item><hi>Manama</hi>, män-ä&prime;ma
+<item><hi>Mandaya</hi>, män-d&imacr;&prime;ya
+<item><hi>Mansumandig</hi>, män-su-män-dig
 <item><hi>Mayinit</hi>, m&imacr;-&ibreve;&prime;n&ibreve;t
 <item><hi>Mayo</hi>, m&imacr;&prime;yo
 <pb n=218 id=pb218><item><hi>Mindanao</hi>, min-da-nou&prime;
 <item><hi>Nalpangan</hi>, nal-pan-gan&prime;
-<item><hi>Pilar</hi>, p&emacr;&prime;l&auml;r&prime;
+<item><hi>Pilar</hi>, p&emacr;&prime;lär&prime;
 <item><hi>Samoki</hi>, s&abreve;-m&omacr;&prime;ki
-<item><hi>Sayen</hi>, s&auml;-yen&prime;
-<item><hi>Siagon</hi>, s&euml;-&auml;&prime;gon
+<item><hi>Sayen</hi>, sä-yen&prime;
+<item><hi>Siagon</hi>, së-ä&prime;gon
 <item><hi>Silit</hi>, s&emacr;&prime;l&emacr;t
 <item><hi>Sinag</hi>, s&emacr;&prime;nag
 <item><hi>Sogsogot</hi>, s&omacr;g-s&omacr;-got&prime;
-<item><hi>Subanun</hi>, soo-b&auml;&prime;nun
+<item><hi>Subanun</hi>, soo-bä&prime;nun
 <item><hi>Sulayman</hi>, soo-l&imacr;&prime;man
 <item><hi>Tagalog</hi>, ta-ga&prime;log
 <item><hi>Tarabusaw</hi>, ta-ra-boo&prime;sou
 <item><hi>Tikgi</hi>, t&ibreve;k&prime;ge
-<item><hi>Timaco</hi>, t&ibreve;-m&auml;&prime;k&omacr;
+<item><hi>Timaco</hi>, t&ibreve;-mä&prime;k&omacr;
 <item><hi>Tinguian</hi>, t&ibreve;ng-g&ibreve;-an&prime;
-<item><hi>Toglai</hi>, t&omacr;g-l&auml;&prime;&emacr;
+<item><hi>Toglai</hi>, t&omacr;g-lä&prime;&emacr;
 <item><hi>Toglibon</hi>, t&omacr;g-l&emacr;&prime;b&omacr;n
 <item><hi>Visayan</hi>, vi-s&imacr;&prime;yan
 </list>
