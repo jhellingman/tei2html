@@ -696,6 +696,14 @@
 
 
     <xd:doc>
+        <xd:short>Ignore those abbreviations that are stand-ins for dictionary lemmas (to avoid a huge
+        list of irrelevant abbreviations).</xd:short>
+    </xd:doc>
+
+    <xsl:template match="abbr[@type = 'lemma']" mode="collectAbbreviations"/>
+
+
+    <xd:doc>
         <xd:short>Convert an abbreviation in a <code>choice</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
@@ -729,11 +737,11 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="externalReferences">
+    <xsl:template name="externalReferences" expand-text="yes">
         <xsl:if test="//xref[@url] | /TEI//ref[not(starts-with(@target, '#'))]">
-            <h3 class="main"><xsl:value-of select="f:message('msgExternalReferences')"/></h3>
+            <h3 class="main">{f:message('msgExternalReferences')}</h3>
 
-            <p><xsl:value-of select="f:message('msgExternalReferencesDisclaimer')"/></p>
+            <p>{f:message('msgExternalReferencesDisclaimer')}</p>
 
             <xsl:if test="f:is-set('outputExternalLinksTable')">
                 <xsl:call-template name="externalReferenceTable"/>

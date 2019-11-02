@@ -1148,7 +1148,7 @@
                         <tmp:abbr><xsl:value-of select="normalize-space(.)"/></tmp:abbr>
                     </xsl:non-matching-substring>
                 </xsl:analyze-string>
-                <xsl:for-each-group select="$root//abbr" group-by=".">
+                <xsl:for-each-group select="$root//abbr[not(@type) or @type != 'lemma']" group-by=".">
                     <tmp:abbr><xsl:value-of select="."/></tmp:abbr>
                 </xsl:for-each-group>
             </tmp:abbrs>
