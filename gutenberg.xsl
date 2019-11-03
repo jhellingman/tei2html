@@ -118,7 +118,7 @@
     </xd:doc>
 
     <xsl:template name="PGFooter">
-        <div class="transcribernote" id="pgfooter">
+        <div class="transcriberNote" id="pgfooter">
             <xsl:variable name="idno" select="//publicationStmt/idno[@type='pgnum' or @type='PGnum']"/>
             <xsl:variable name="authors"><xsl:call-template name="combine-authors"/></xsl:variable>
             <xsl:variable name="transcriber"><xsl:call-template name="combine-transcribers"/></xsl:variable>

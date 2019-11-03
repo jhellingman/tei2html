@@ -868,7 +868,7 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='LanguageFragments']">
-        <div class="transcribernote">
+        <div class="transcriberNote">
             <h2 class="main"><xsl:value-of select="f:message('msgOverviewForeignFragments')"/></h2>
 
             <xsl:variable name="mainlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
@@ -1013,7 +1013,7 @@
             </tmp:tags>
         </xsl:variable>
 
-        <div class="transcribernote tagUsage">
+        <div class="transcriberNote tagUsage">
             <h2 class="main"><xsl:value-of select="f:message('msgTagUsageOverview')"/></h2>
             <table>
                 <tr>

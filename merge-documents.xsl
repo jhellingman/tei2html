@@ -53,7 +53,7 @@
         <xd:param name="keepPrefixes">Prefixes of ids that should <i>not</i> be prefixed.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:combine-id">
+    <xsl:function name="f:combine-id" as="xs:string">
         <xsl:param name="id" as="xs:string"/>
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>
@@ -66,9 +66,9 @@
         <xsl:message>RESULT: <xsl:value-of select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>.</xsl:message>
         -->
 
-        <xsl:value-of select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>
-
+        <xsl:sequence select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>
     </xsl:function>
+
 
     <xsl:function name="f:starts-with-any" as="xs:boolean">
         <xsl:param name="id" as="xs:string"/>
@@ -79,8 +79,7 @@
         <xsl:message>RESULT: <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) > 1"/>.</xsl:message>
         -->
 
-        <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt;= 1"/>
-
+        <xsl:sequence select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt;= 1"/>
     </xsl:function>
 
     <xd:doc>
@@ -115,6 +114,34 @@
         <xsl:param name="keepPrefixes" as="xs:string*"/>
 
         <xsl:attribute name="target">
+            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefixes)"/>
+        </xsl:attribute>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Translate ids in <code>@sameAs</code> attributes.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="@sameAs" mode="import-document">
+        <xsl:param name="prefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
+
+        <xsl:attribute name="sameAs">
+            <xsl:value-of select="f:combine-id(., $prefix, $keepPrefixes)"/>
+        </xsl:attribute>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Translate ids in <code>@copyOf</code> attributes.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="@copyOf" mode="import-document">
+        <xsl:param name="prefix" as="xs:string"/>
+        <xsl:param name="keepPrefixes" as="xs:string*"/>
+
+        <xsl:attribute name="copyOf">
             <xsl:value-of select="f:combine-id(., $prefix, $keepPrefixes)"/>
         </xsl:attribute>
     </xsl:template>
