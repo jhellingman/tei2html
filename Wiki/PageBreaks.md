@@ -74,5 +74,5 @@ When creating new paged output, we will have to deal with yet another set of iss
     
     * **common entry** 12, 23-25, 45.
     
-    which is not really supported by most current index generating tools, and is pretty hard to do as well. (`tei2html` does this when refering to pre-existing page-numbers, but this is not very useful for paged output.)
+    which is not really supported by most current index generating tools, and is pretty hard to do as well. (`tei2html` does this when referring to pre-existing page-numbers, but this is not very useful for paged output.)
 

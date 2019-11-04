@@ -419,7 +419,7 @@
 
     <xsl:function name="f:report-non-number">
         <xsl:param name="cell" as="element(cell)"/>
-        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
+        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="remove-extra-content"/></xsl:variable>
         <xsl:if test="not(f:has-number($value))">
             <i:issue
                 pos="{$cell/@pos}"
@@ -437,7 +437,7 @@
         <xsl:param name="first" as="xs:double"/>
         <xsl:param name="second" as="xs:double"/>
 
-        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="removeExtraContent"/></xsl:variable>
+        <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="remove-extra-content"/></xsl:variable>
         <!-- Take precision into account -->
         <xsl:if test="abs($first - $second) > 0.0000000000001">
             <i:issue
@@ -473,7 +473,7 @@
 
     <xsl:function name="f:extract-number" as="xs:double">
         <xsl:param name="node"/>
-        <xsl:variable name="value"><xsl:apply-templates select="$node" mode="removeExtraContent"/></xsl:variable>
+        <xsl:variable name="value"><xsl:apply-templates select="$node" mode="remove-extra-content"/></xsl:variable>
         <xsl:value-of select="f:parse-number($value)"/>
     </xsl:function>
 
@@ -505,13 +505,13 @@
         <xsl:value-of select="$head - sum($tail)"/>
     </xsl:function>
 
-    <xsl:template match="@*|node()" mode="removeExtraContent">
+    <xsl:template match="@*|node()" mode="remove-extra-content">
         <xsl:copy>
-            <xsl:apply-templates mode="removeExtraContent"/>
+            <xsl:apply-templates mode="remove-extra-content"/>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="note" mode="removeExtraContent"/>
+    <xsl:template match="note" mode="remove-extra-content"/>
 
 
     <xd:doc>

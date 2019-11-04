@@ -10,7 +10,7 @@ Most of the interaction on the command line is with small Perl scripts that star
 
 Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly. Perl should be able to find the place where you've located your scripts (when running perl with the -S option.)
 
-The various .jar files (for saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
+The various `.jar` files (for saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
 
 # Running interactively #
 

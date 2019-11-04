@@ -10,7 +10,7 @@ Simple rendering attribute values provide single keywords to provide a rendering
 
 | **Element** | **Recognized `@rend` values** |
 |:------------|:------------------------------|
-| `hi`      | italic (_default_) bold sc sup sub ex |
+| `hi`      | italic (_default_) bold sc asc sup sub ex |
 | `figure`  | center (_default_) left right inline |
 | `p`       | block center left (_default_) right indent noindent |
 | `q`       | block |

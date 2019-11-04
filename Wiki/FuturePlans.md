@@ -124,7 +124,7 @@ Most of the work is done. Some improvements to the CSS stylesheets are still req
   1. New metadata using DCTERMS.
   1. HTML5 features.
 
-## Running on a webserver ##
+## Running on a web server ##
 
 See the [XSLT2Processor](http://sourceforge.net/projects/xslt2processor/) project.
 

@@ -17,7 +17,7 @@ The new model allows multiple graphics in a figure and specifies the attribute `
 
 ## Adjustments to Code ##
 
-The current code should remain functional for exsisting texts.
+The current code should remain functional for existing texts.
 
-* When a single `graphic` element appears in a figure, behavior should be the same as an P3 style `figure` with an attribbute, that is, the width of the block is the width of the image. (DONE)
+* When a single `graphic` element appears in a figure, behavior should be the same as an P3 style `figure` with an attribute, that is, the width of the block is the width of the image. (DONE)
 * When multiple `graphic` elements appear, the images should be rendered under each other; the width of the entire block being the widest of these images.

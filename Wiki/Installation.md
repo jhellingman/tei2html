@@ -42,7 +42,7 @@ TODO.
 
 ## SX, NSGML ##
 
-_optional, only needed you want to use SGML as source format._
+_Optional, only needed you want to use SGML as source format._
 
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since XSLT only supports XML, you will need both those two tools to be able to work with SGML. They can be downloaded from [James Clark website](http://www.jclark.com/). For windows, get [sp 1.3.4](ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip).
 
@@ -58,7 +58,7 @@ To compress ePub files, you will need a zip utility. `tei2html` uses [info-zip](
 
 ## Node.js ##
 
-_optional, only needed when you use mathematical formulas in TeX notation._
+_Optional, only needed when you use mathematical formulas in TeX notation._
 
 To convert mathematical formulas in TeX format to a format that can be included in static HTML pages, you will need to install the following:
 
@@ -67,13 +67,13 @@ To convert mathematical formulas in TeX format to a format that can be included 
 
 ## Patc ##
 
-_optional, only needed when you use the transcription schemes I use in SGML._
+_Optional, only needed when you use the transcription schemes I use in SGML._
 
 Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
 
 ## epubcheck ##
 
-_optional, only needed if you want to check generated ePubs_
+_Optional, only needed if you want to check generated ePubs._
 
 Epubcheck is a tool to validate epub books, it can be obtained from: https://github.com/IDPF/epubcheck
 

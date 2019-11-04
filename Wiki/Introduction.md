@@ -66,7 +66,7 @@ _Nesting of cross-references and anchors._ In HTML, it is not possible to nest a
 
 _Nesting of paragraphs._ In HTML, it is not possible to nest paragraphs. In most cases, the transformation software will take this in account, and close (and re-open) open paragraphs in HTML when needed.
 
-In a few other cases, the transformation may not result in entirely correct results. Always validate the end result with tools such as tidy or epubcheck.
+In a few other cases, the transformation may not result in entirely correct results. Always validate the end result with tools such as `tidy` or `epubcheck`.
 
 
 ## Special Characters in SGML files ##

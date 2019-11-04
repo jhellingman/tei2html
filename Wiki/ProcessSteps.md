@@ -37,7 +37,7 @@ After the tables have been normalised, we're ready to transform to HTML. This is
 
 ## Step 2.3: Transform to ePub ##
 
-Similar to the convertion to HTML, the convertion to ePub 3.0 is done with the XSLT stylesheet `tei2epub.xsl`, which re-uses most of the stylesheets used by `tei2html.xsl`. The results of this transform are placed in a directory which mirrors the internal structure of an ePub archive.
+Similar to the conversion to HTML, the conversion to ePub 3.0 is done with the XSLT stylesheet `tei2epub.xsl`, which re-uses most of the stylesheets used by `tei2html.xsl`. The results of this transform are placed in a directory which mirrors the internal structure of an ePub archive.
 
 ## Step 2.4: Package ePub ##
 

@@ -481,7 +481,7 @@
             </tr>
 
             <xsl:variable name="corrections">
-                <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collectCorrections"/>
+                <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collect-corrections"/>
             </xsl:variable>
 
             <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
@@ -567,7 +567,7 @@
         <xd:short>Convert a traditional <code>corr</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
-    <xsl:template match="corr" mode="collectCorrections">
+    <xsl:template match="corr" mode="collect-corrections">
         <tmp:choice>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
@@ -585,7 +585,7 @@
         <xd:short>Convert a correction in a <code>tmp:choice</code> element to a temporary choice element.</xd:short>
     </xd:doc>
 
-    <xsl:template match="choice" mode="collectCorrections">
+    <xsl:template match="choice" mode="collect-corrections">
         <tmp:choice>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
@@ -641,7 +641,7 @@
             </tr>
 
             <xsl:variable name="abbreviations">
-                <xsl:apply-templates select="//abbr[not(parent::choice)] | //choice[abbr]" mode="collectAbbreviations"/>
+                <xsl:apply-templates select="//abbr[not(parent::choice)] | //choice[abbr]" mode="collect-abbreviations"/>
             </xsl:variable>
 
             <xsl:variable name="abbreviations">
@@ -683,7 +683,7 @@
         <xd:short>Convert a traditional <code>abbr</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
-    <xsl:template match="abbr" mode="collectAbbreviations">
+    <xsl:template match="abbr" mode="collect-abbreviations">
         <tmp:choice>
             <tmp:abbr>
                 <xsl:copy-of select="* | text()"/>
@@ -700,14 +700,14 @@
         list of irrelevant abbreviations).</xd:short>
     </xd:doc>
 
-    <xsl:template match="abbr[@type = 'lemma']" mode="collectAbbreviations"/>
+    <xsl:template match="abbr[@type = 'lemma']" mode="collect-abbreviations"/>
 
 
     <xd:doc>
         <xd:short>Convert an abbreviation in a <code>choice</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
-    <xsl:template match="choice" mode="collectAbbreviations">
+    <xsl:template match="choice" mode="collect-abbreviations">
         <tmp:choice>
             <tmp:abbr>
                 <xsl:copy-of select="abbr/* | abbr/text()"/>
@@ -877,7 +877,7 @@
 
                 <xsl:variable name="lang" select="@lang"/>
                 <h3 class="main"><xsl:value-of select="f:message($lang)"/></h3>
-                <xsl:call-template name="languageFragments">
+                <xsl:call-template name="language-fragments">
                     <xsl:with-param name="lang" select="$lang"/>
                 </xsl:call-template>
 
@@ -886,7 +886,7 @@
     </xsl:template>
 
 
-    <xd:doc mode="languageFragments">
+    <xd:doc mode="language-fragments">
         <xd:short>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments.</xd:short>
         <xd:detail>
             <p>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments. This takes
@@ -904,7 +904,7 @@
         <xd:param name="lang" type="string">The code of the language to handle.</xd:param>
     </xd:doc>
 
-    <xsl:template name="languageFragments">
+    <xsl:template name="language-fragments">
         <xsl:param name="lang" as="xs:string"/>
 
         <xsl:variable name="fragments" select="//*[@lang=$lang]"/>
@@ -933,7 +933,7 @@
                     </td>
                     <td>
                         <xsl:variable name="fragment">
-                            <xsl:apply-templates select="." mode="languageFragments"/>
+                            <xsl:apply-templates select="." mode="language-fragments"/>
                         </xsl:variable>
                         <xsl:copy-of select="f:copy-without-ids($fragment)"/>
                     </td>
@@ -947,7 +947,7 @@
         <xd:short>Handle elements as usual by default.</xd:short>
     </xd:doc>
 
-    <xsl:template match="*" mode="languageFragments">
+    <xsl:template match="*" mode="language-fragments">
         <xsl:apply-templates select="."/>
     </xsl:template>
 
@@ -956,7 +956,7 @@
         <xd:short>Prevent notes from being rendered as raised numerals in the language fragment overview.</xd:short>
     </xd:doc>
 
-    <xsl:template match="note" mode="languageFragments">
+    <xsl:template match="note" mode="language-fragments">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -965,7 +965,7 @@
         <xd:short>Prevent cells from being rendered as extra <code>tb</code> elements in the language fragment overview.</xd:short>
     </xd:doc>
 
-    <xsl:template match="cell" mode="languageFragments">
+    <xsl:template match="cell" mode="language-fragments">
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -974,7 +974,7 @@
         <xd:short>Prevent <code>q</code>-elements from being rendered with <code>&lt;p&gt;</code> appearing in the language fragment overview.</xd:short>
     </xd:doc>
 
-    <xsl:template match="q" mode="languageFragments">
+    <xsl:template match="q" mode="language-fragments">
         <xsl:apply-templates/>
     </xsl:template>
 

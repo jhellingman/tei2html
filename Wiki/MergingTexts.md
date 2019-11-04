@@ -19,7 +19,7 @@ This will collect the content, and put it together into a single TEI file.
 
 Most of the hard work happens in the creation of the galley file. For this a number of support functions will be needed.
 
-_Change Ids_ To prefent id-clashes, the ids in both source TEI files need to be changed. This is done best by prefixing them with a unique string for each volume.
+_Change Ids_ To prevent id-clashes, the ids in both source TEI files need to be changed. This is done best by prefixing them with a unique string for each volume.
 
 However, not all ids should be treated as such, as that would break inter-volume cross references. To prevent this, such inter-volume cross references should already have the prefix when they are referred to in other volumes, and the software should be smart enough not to add the prefix once more.
 

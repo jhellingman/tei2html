@@ -79,6 +79,7 @@ BEGIN {
     $langNameHash{"ht"}        = "Haitian Creole";
     $langNameHash{"hu"}        = "Hungarian";
     $langNameHash{"hy"}        = "Armenian";
+    $langNameHash{"hy-latn"}   = "Armenian (Latin transcription)";
     $langNameHash{"ia"}        = "Interlingua";
     $langNameHash{"id"}        = "Indonesian";
     $langNameHash{"ie"}        = "Interlingue";
@@ -221,6 +222,8 @@ BEGIN {
 
     # Three letter codes
 
+    $langNameHash{"akk"}            = "Akkadian";
+    $langNameHash{"akk-latn"}       = "Akkadian (Latin transcription)";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
     $langNameHash{"ceb"}            = "Cebuano";
@@ -237,6 +240,8 @@ BEGIN {
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
+    $langNameHash{"ota"}            = "Ottoman Turkish";
+    $langNameHash{"ota-latn"}       = "Ottoman Turkish (Latin transcription)";
     $langNameHash{"pag"}            = "Pangasin&aacute;n";
     $langNameHash{"pam"}            = "Kapampangan";
     $langNameHash{"phi"}            = "Philippine (Other)";
@@ -250,10 +255,6 @@ BEGIN {
 
     $langNameHash{"und"}            = "undetermined language";
 
-
-    # Ad-hoc codes
-
-    $langNameHash{"obab"}      = "Old Babylonian (Latin transcription)";
 }
 
 

@@ -70,7 +70,7 @@ The first `idno` gives the number the text has in the Project Gutenberg collecti
 
 CSS3 defines hanging punctuation, however, it is not supported by any browser. (http://www.w3schools.com/cssref/css3_pr_hanging-punctuation.asp)
 
-None of the work-arounds so-far have been satisfactory.
+None of the workarounds so-far have been satisfactory.
 
 See: http://dabblet.com/gist/9623025
 

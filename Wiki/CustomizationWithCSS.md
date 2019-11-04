@@ -4,7 +4,7 @@ Since many details of the layout of the output (For both HTML and PDF) are defin
 
 Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `@rend` attributes in the source document.
 
-Order of precendence of renditions:
+Order of precedence of renditions:
 
 1. CSS derived from `@style` attribute on element.
 2. CSS derived from `@style` attribute on row (for table cells only).
