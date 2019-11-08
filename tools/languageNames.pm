@@ -44,6 +44,8 @@ BEGIN {
     $langNameHash{"el-latn"}   = "Greek (Latin transcription)";
     $langNameHash{"en"}        = "English";
     $langNameHash{"en-1200"}   = "English (13th century)";
+    $langNameHash{"en-1300"}   = "English (14th century)";
+    $langNameHash{"en-1400"}   = "English (15th century)";
     $langNameHash{"en-1500"}   = "English (16th century)";
     $langNameHash{"en-1600"}   = "English (17th century)";
     $langNameHash{"en-1700"}   = "English (18th century)";
@@ -61,6 +63,7 @@ BEGIN {
     $langNameHash{"fj"}        = "Fiji";
     $langNameHash{"fo"}        = "Faeroese";
     $langNameHash{"fr"}        = "French";
+    $langNameHash{"fr-1400"}   = "French (15th century)";
     $langNameHash{"fy"}        = "Frisian";
     $langNameHash{"fy-wwo"}    = "Frisian (Westerwold)";
     $langNameHash{"ga"}        = "Irish";
