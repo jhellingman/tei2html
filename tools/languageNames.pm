@@ -94,6 +94,7 @@ BEGIN {
     $langNameHash{"iu"}        = "Inuktitut";
     $langNameHash{"ja"}        = "Japanese";
     $langNameHash{"jp-hira"}   = "Japanese (Hiragana)";
+    $langNameHash{"jp-kana"}   = "Japanese (Katakana)";
     $langNameHash{"jp-latn"}   = "Japanese (Latin transcription)";
     $langNameHash{"jv"}        = "Javanese";
     $langNameHash{"ka"}        = "Georgian";
@@ -231,6 +232,8 @@ BEGIN {
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
     $langNameHash{"ceb"}            = "Cebuano";
     $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
+    $langNameHash{"dak"}            = "Dakota";
+    $langNameHash{"esx"}            = "Eskimo-Aleut languages";
     $langNameHash{"gad"}            = "Gaddang";
     $langNameHash{"grc"}            = "Greek (classical)";
     $langNameHash{"grc-latn"}       = "Greek (classical, Latin transcription)";
@@ -238,16 +241,20 @@ BEGIN {
     $langNameHash{"hil"}            = "Hiligaynon";
     $langNameHash{"ifu"}            = "Ifugao";
     $langNameHash{"ilo"}            = "Ilocano, Iloko or Ilokano";
+    $langNameHash{"kar"}            = "Karen";
     $langNameHash{"kha"}            = "Khasi";
     $langNameHash{"kij"}            = "Kilivila";
+    $langNameHash{"lad"}            = "Ladino";
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
+    $langNameHash{"nah"}            = "Nahuatl (Aztec)";
     $langNameHash{"ota"}            = "Ottoman Turkish";
     $langNameHash{"ota-latn"}       = "Ottoman Turkish (Latin transcription)";
     $langNameHash{"pag"}            = "Pangasin&aacute;n";
     $langNameHash{"pam"}            = "Kapampangan";
     $langNameHash{"phi"}            = "Philippine (Other)";
+    $langNameHash{"rue"}            = "Rusyn";
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
     $langNameHash{"sit-angami"}     = "Angami Naga";
     $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
@@ -255,6 +262,8 @@ BEGIN {
     $langNameHash{"sit-ao-mongsen"} = "Ao Naga, Mongsen dialect";
     $langNameHash{"sit-sema"}       = "Sema Naga";
     $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
+    $langNameHash{"win"}            = "Winnebago";
+    $langNameHash{"yua"}            = "Yucatec Maya";
 
     $langNameHash{"und"}            = "undetermined language";
 

@@ -8,7 +8,7 @@
 "</HE>"	0 "</foreign>"
 "<"		2 "<"
 
-" "	     p " "		 % space.
+" "	     p " "		% space.
 
 "'"      p "א"      % alef
 "b"      p "ב"      % bet
@@ -78,8 +78,14 @@
 
 "\n"	p "\n"
 
+"&"		3 "&"
+
 @patterns 2
 
 ">"		1 ">"
+
+@patterns 3
+
+";"		1 ";"
 
 @end
