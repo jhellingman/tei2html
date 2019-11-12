@@ -93,9 +93,9 @@ BEGIN {
     $langNameHash{"it"}        = "Italian";
     $langNameHash{"iu"}        = "Inuktitut";
     $langNameHash{"ja"}        = "Japanese";
-    $langNameHash{"jp-hira"}   = "Japanese (Hiragana)";
-    $langNameHash{"jp-kana"}   = "Japanese (Katakana)";
-    $langNameHash{"jp-latn"}   = "Japanese (Latin transcription)";
+    $langNameHash{"ja-hira"}   = "Japanese (Hiragana)";
+    $langNameHash{"ja-kana"}   = "Japanese (Katakana)";
+    $langNameHash{"ja-latn"}   = "Japanese (Latin transcription)";
     $langNameHash{"jv"}        = "Javanese";
     $langNameHash{"ka"}        = "Georgian";
     $langNameHash{"ka-latn"}   = "Georgian (Latin transcription)";
