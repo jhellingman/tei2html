@@ -567,7 +567,7 @@
         <xd:short>Convert a traditional <code>corr</code> element to a <code>tmp:choice</code> element.</xd:short>
     </xd:doc>
 
-    <xsl:template match="corr" mode="collect-corrections">
+    <xsl:template match="corr[not(f:in-transliteration(.))]" mode="collect-corrections">
         <tmp:choice>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
@@ -583,9 +583,12 @@
 
     <xd:doc>
         <xd:short>Convert a correction in a <code>tmp:choice</code> element to a temporary choice element.</xd:short>
+
+        <xd:detail>Ignore corrections nested inside <code>reg[@type='trans']</code> elements, as those will not displayed
+        in the output, and thus cannot be referenced.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="choice" mode="collect-corrections">
+    <xsl:template match="choice[not(f:in-transliteration(.))]" mode="collect-corrections">
         <tmp:choice>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
@@ -597,6 +600,16 @@
             </tmp:sic>
          </tmp:choice>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Determine whether a node is inside (automatically added) transliteration.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:in-transliteration" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <xsl:sequence select="boolean($node/ancestor::reg[@type='trans'])"/>
+    </xsl:function>
 
 
     <xd:doc>

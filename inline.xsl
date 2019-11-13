@@ -692,7 +692,7 @@
         <xd:short>Handle a choice (for transcription).</xd:short>
         <xd:detail>A <code>choice</code> element containing a <code>reg</code> and an <code>orig</code> element, with <code>@type="trans"</code> are used
         to represent transcriptions, and translated to HTML pop-ups. These <code>choice</code>-elements are typically introduced by a script automatically
-        adding transcriptions to Greek fragments.</xd:detail>
+        adding transcriptions to Greek or Cyrillic fragments.</xd:detail>
     </xd:doc>
 
     <xsl:template match="choice[reg/@type='trans']">
@@ -700,12 +700,22 @@
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
-                    <xsl:value-of select="reg"/>
+                    <xsl:apply-templates select="reg" mode="remove-nested-choice"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="orig"/>
         </span>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Remove nested choice elements from regularized text.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="choice[corr]" mode="remove-nested-choice">
+        <xsl:apply-templates select="corr" mode="remove-nested-choice"/>
+    </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle a choice (for corrections).</xd:short>

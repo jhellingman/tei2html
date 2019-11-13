@@ -78,7 +78,7 @@
 "nj"        p "nj"          % 0x045A    CYRILLIC SMALL LETTER NJE
 "o"         p "o"           % 0x043E    CYRILLIC SMALL LETTER O
 "p"         p "p"           % 0x043F    CYRILLIC SMALL LETTER PE
-"r"         p "p"           % 0x0440    CYRILLIC SMALL LETTER ER
+"r"         p "r"           % 0x0440    CYRILLIC SMALL LETTER ER
 "s"         p "s"           % 0x0441    CYRILLIC SMALL LETTER ES
 "t"         p "t"           % 0x0442    CYRILLIC SMALL LETTER TE
 "tsh"       p "&#x0107;"    % 0x045B    CYRILLIC SMALL LETTER TSHE
