@@ -17,6 +17,7 @@
     <!ENTITY frac14     "&#x00BC;">
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
+    <!ENTITY hairsp     "&#x200A;">
     <!ENTITY hellip     "&#x2026;">
 
     <!ENTITY raquo      "&#187;">
@@ -1278,7 +1279,9 @@
 
         <xsl:copy-of select="f:log-debug('QUOTES: {1} - {2}', ($opener-string, $closer-string))"/>
 
+        <xsl:variable name="unspacedNext" select="translate($next, ' &tab;&cr;&lf;&nbsp;&hairsp;', '')" as="xs:string"/>
         <xsl:variable name="unclosed" select="f:unclosed-pairs(f:keep-only($string, $pairs), '')"/>
+
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
                 <i:issue
@@ -1291,7 +1294,7 @@
                     page="{./@sourcePage}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
             </xsl:when>
             <xsl:when test="f:contains-only($unclosed, $open-quotation-marks)">
-                <xsl:if test="not(starts-with($next, $unclosed))">
+                <xsl:if test="not(starts-with($unspacedNext, f:reverse($unclosed)))">
                     <i:issue
                         pos="{@pos}"
                         code="P12"
@@ -1425,7 +1428,6 @@
 
     <xsl:function name="f:reverse" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-
         <xsl:sequence select="codepoints-to-string(reverse(string-to-codepoints($string)))"/>
     </xsl:function>
 
