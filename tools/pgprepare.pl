@@ -68,7 +68,10 @@ sub cleanText($) {
         $line =~ s/ ,,([a-zA-Z])/ "$1/g;
 
         # Handle spacing around punctuation marks
-        $line =~ s/ ([.,;!?]) /$1 /g;
+        $line =~ s/ ([.,;!?])(\s)/$1$2/g;
+        $line =~ s/ ([.,;!?]")(\s)/$1$2/g;
+        $line =~ s/ ([.,;!?])$/$1/g;
+        $line =~ s/ ([.,;!?]")$/$1/g;
         $line =~ s/ ?-- ?/--/g;
 
         print OUTPUTFILE $line . "\n";

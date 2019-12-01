@@ -12,7 +12,7 @@ use SgmlSupport qw/getAttrVal/;
 my $inputFile   = $ARGV[0];
 my $firstChange = $ARGV[1];
 my $offset      = $ARGV[2];
-my $useRoman    = $ARGV[3];
+my $useRoman    = defined $ARGV[3] ? $ARGV[3] : '';
 
 my $previousPage = 0;
 my $currentPage = 0;
@@ -63,7 +63,7 @@ while (<INPUTFILE>) {
 }
 
 
-sub isnum($) {
+sub isnum {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
 }

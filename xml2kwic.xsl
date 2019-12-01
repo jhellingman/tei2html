@@ -55,6 +55,18 @@
     <xsl:variable name="default-language" select="/*[self::TEI.2 or self::TEI]/@lang"/>
 
 
+    <xsl:param name="case-sensitive" select="'false'" as="xs:string"/>
+
+
+    <!-- Values: 'following', 'preceding', 'document' -->
+    <xsl:param name="sort-order" select="'following'"/>
+
+
+    <xsl:param name="mixup" select="''"/>
+
+    <xsl:variable name="mixup-sequence" select="tokenize($mixup, ' ')"/>
+
+
     <xd:doc>
         <xd:short>The length of the context to show.</xd:short>
         <xd:detail>The length of the context to show. This counts both words and non-words (spaces and punctuation marks).
@@ -263,7 +275,7 @@
             <xsl:when test="$keyword != ''">
 
                 <!-- Build KWIC for searched word(s) only -->
-                <xsl:variable name="keywords" select="tokenize(fn:lower-case(f:strip-diacritics-and-marks($keyword)), '\s+')"/>
+                <xsl:variable name="keywords" select="tokenize(f:normalize-string($keyword), '\s+')"/>
 
                 <xsl:call-template name="report-single-match">
                     <xsl:with-param name="keyword" select="$keywords"/>
@@ -294,7 +306,7 @@
         <xsl:param name="matches" as="element()*"/>
 
         <xsl:variable name="keyword" select="$matches[1]/k:word"/>
-        <xsl:variable name="baseword" select="fn:lower-case(f:strip-diacritics-and-marks($keyword))"/>
+        <xsl:variable name="baseword" select="f:normalize-string($keyword)"/>
 
         <h2>
             <span class="cnt">Word:</span><xsl:text> </xsl:text>
@@ -321,7 +333,7 @@
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="output" select="$matches">
                 <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-                <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
+                <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -386,7 +398,7 @@
 
         <xsl:apply-templates mode="output" select="$matchlist">
             <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-            <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
+            <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -427,7 +439,7 @@
         <table>
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="#current">
-                <xsl:sort select="fn:lower-case(f:strip-diacritics-and-marks(k:following))" order="ascending"/>
+                <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>
@@ -648,7 +660,7 @@
             <p>For every word the preceding and following contexts are kept with the match.</p>
 
             <p>A significant improvement in speed and memory usage can be obtained here by already rendering the preceding
-            and following context, instead of doing this during the output phase. This is not done, as it complicated the
+            and following context, instead of doing this during the output phase. This is not done, as it complicates the
             handling of bidirectional text. For large files, please run Saxon with sufficient memory (java -Xms3072m -Xmx3072m).</p>
         </xd:detail>
     </xd:doc>
@@ -730,6 +742,20 @@
 
 
     <xd:doc>
+        <xd:short>Normalize a word, based on the current settings.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:normalize-string" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:variable name="string" select="if ($case-sensitive = 'true') then $string else lower-case($string)"/>
+        <xsl:variable name="string" select="f:strip-diacritics-and-marks($string)"/>
+        <xsl:variable name="string" select="f:normalize-mixup-characters($string)"/>
+        <xsl:sequence select="$string"/>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Remove diacritics from a string.</xd:short>
         <xd:detail>Remove diacritics form a string to produce a string suitable for sorting purposes. This function
         uses the Unicode NFD normalization form to separate diacritics from the letters carrying them, and might
@@ -741,6 +767,27 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
         <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:normalize-mixup-characters" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <!-- replace all potentially mixed-up characters in the list whith the first in the sequence -->
+        <xsl:sequence select="if ($mixup-sequence[2])
+            then f:multi-replace($string, $mixup-sequence[position() > 1], $mixup-sequence[1])
+            else $string"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:multi-replace" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+        <xsl:param name="patterns" as="xs:string*"/>
+        <xsl:param name="replacement" as="xs:string"/>
+
+        <xsl:sequence select="if ($patterns[1])
+            then replace(f:multi-replace($string, $patterns[position() > 1], $replacement), $patterns[1], $replacement)
+            else $string"/>
     </xsl:function>
 
 
@@ -820,7 +867,7 @@
                     <xsl:if test="$inReference = 'true'">
                         <xsl:attribute name="ref" select="$reference"/>
                     </xsl:if>
-                    <xsl:attribute name="form" select="fn:lower-case(f:strip-diacritics-and-marks(.))"/>
+                    <xsl:attribute name="form" select="f:normalize-string(.)"/>
                     <xsl:attribute name="dir" select="if (f:is-right-to-left(.)) then 'rtl' else 'ltr'"/>
                     <xsl:value-of select="."/>
                 </k:w>
@@ -904,6 +951,13 @@
         <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
 
         <xsl:sequence select="$select-language = '' or $baselang = $select-language-sequence"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:contains-mixup-character" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+
+        <xsl:sequence select="if ($mixup = '') then true() else contains(f:strip-diacritics-and-marks($word), $mixup-sequence[1])"/>
     </xsl:function>
 
 </xsl:stylesheet>

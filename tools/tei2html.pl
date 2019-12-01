@@ -63,6 +63,8 @@ my $profile             = 0;
 my $useTidy             = 0;
 my $kwicLanguages       = "";
 my $kwicWords           = "";
+my $kwicCaseSensitive   = "no";
+my $kwicMixup           = "";
 
 GetOptions(
     't' => \$explicitMakeText,
@@ -91,6 +93,8 @@ GetOptions(
     'notranscription' => \$noTranscription,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
+    'kwiccase=s' => \$kwicCaseSensitive,
+    'kwicmixup=s' => \$kwicMixup,
     'help' => \$showHelp,
     'tidy'=> \$useTidy);
 
@@ -133,6 +137,8 @@ if ($showHelp == 1) {
     print "    heatmap              Generate a heatmap version.\n";
     print "    kwiclang=<languages> Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
     print "    kwicword=<words>     Words to be shown in KWIC, separate words by spaces.\n";
+    print "    kwiccase=<yes/no>    Be case-sensitive in KWIC.\n";
+    print "    kwicmixup=<string>   Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -316,9 +322,11 @@ sub makeKwic($$) {
 
     my $kwicLanguagesParameter = ($kwicLanguages eq '') ? '' : "select-language=\"$kwicLanguages\"";
     my $kwicKeywordParameter = ($kwicWords eq '') ? '' : "keyword=\"$kwicWords\"";
+    my $kwicMixupParameter = ($kwicMixup eq '') ? '' : "mixup=\"$kwicMixup\"";
+    my $kwicCaseSensitiveParameter = ($kwicCaseSensitive eq 'yes' or $kwicCaseSensitive eq 'true') ? 'case-sensitive=true' : '';
 
     print "Generate a KWIC index (this may take some time)...\n";
-    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicKeywordParameter > $kwicFilename");
+    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter > $kwicFilename");
 }
 
 

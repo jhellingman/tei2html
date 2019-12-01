@@ -27,15 +27,15 @@ while (<INPUTFILE>) {
 }
 
 
-sub reorderAttributes($) {
+sub reorderAttributes {
     my $attrs = shift;
 
-    my $idValue = "";
+    my $idValue = '';
     my %attrHash = ();
 
     while ($attrs =~ /=/) {
-        my $key = "";
-        my $value = "";
+        my $key = '';
+        my $value = '';
         if ($attrs =~ /^\s*([a-z][a-z0-9._-]*)\s*=\s*([a-z0-9.:_-]+)/i) {
             $key = $1;
             $value = $2;
@@ -50,15 +50,15 @@ sub reorderAttributes($) {
         }
 
         # id attribute should always come first.
-        if ($key eq "id") {
+        if ($key eq 'id') {
             $idValue = $value;
         } else {
             $attrHash{$key} = $value;
         }
     }
 
-    my $result = "";
-    if ($idValue ne "") {
+    my $result = '';
+    if ($idValue ne '') {
         $result = " id=" . optionalQuotes($idValue);
     }
 
@@ -66,13 +66,13 @@ sub reorderAttributes($) {
 
     @attrList = sort {lc($a) cmp lc($b)} @attrList;
     foreach my $attr (@attrList) {
-        $result .= " " . $attr . "=" . optionalQuotes($attrHash{$attr});
+        $result .= ' ' . $attr . '=' . optionalQuotes($attrHash{$attr});
     }
     return $result;
 }
 
 
-sub trim($) {
+sub trim {
     my $string = shift;
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
@@ -80,7 +80,7 @@ sub trim($) {
 }
 
 
-sub optionalQuotes($) {
+sub optionalQuotes {
     my $value = shift;
 
     if ($value =~ /^[a-z0-9.:_-]+$/i) {
