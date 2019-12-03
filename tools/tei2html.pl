@@ -93,7 +93,7 @@ GetOptions(
     'notranscription' => \$noTranscription,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
-    'kwiccase=s' => \$kwicCaseSensitive,
+    'kwiccasesensitive=s' => \$kwicCaseSensitive,
     'kwicmixup=s' => \$kwicMixup,
     'help' => \$showHelp,
     'tidy'=> \$useTidy);
@@ -345,7 +345,13 @@ sub determineKwicFilename($) {
         $namePartWord = '-' . $namePartWord;
     }
 
-    return $basename . '-kwic' . $namePartLanguage . $namePartWord . '.html';
+    my $namePartMixup = $kwicMixup;
+    $namePartMixup =~ tr/ /-/;
+    if ($namePartMixup ne '') {
+        $namePartMixup = '-mixup-' . $namePartMixup;
+    }
+
+    return $basename . '-kwic' . $namePartLanguage . $namePartWord . $namePartMixup . '.html';
 }
 
 

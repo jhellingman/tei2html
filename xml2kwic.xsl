@@ -307,36 +307,45 @@
 
         <xsl:variable name="keyword" select="$matches[1]/k:word"/>
         <xsl:variable name="baseword" select="f:normalize-string($keyword)"/>
-
-        <h2>
-            <span class="cnt">Word:</span><xsl:text> </xsl:text>
-            <xsl:value-of select="$baseword"/><xsl:text> </xsl:text>
-            <xsl:if test="count($matches) &gt; 1">
-                <span class="cnt"><xsl:value-of select="count($matches)"/></span>
-            </xsl:if>
-        </h2>
-
         <xsl:variable name="variant-count" select="f:count-variants($matches)"/>
 
-        <xsl:if test="$variant-count &gt; 1 or $baseword != $keyword">
-            <xsl:copy-of select="f:output-variants($matches, $variant-count)"/>
+        <xsl:if test="f:keep-mixup-match($baseword, $variant-count)">
+            <h2>
+                <span class="cnt">Word:</span><xsl:text> </xsl:text>
+                <xsl:value-of select="$baseword"/><xsl:text> </xsl:text>
+                <xsl:if test="count($matches) &gt; 1">
+                    <span class="cnt"><xsl:value-of select="count($matches)"/></span>
+                </xsl:if>
+            </h2>
+
+            <xsl:if test="$variant-count &gt; 1 or $baseword != $keyword">
+                <xsl:copy-of select="f:output-variants($matches, $variant-count)"/>
+            </xsl:if>
+
+            <xsl:variable name="variants">
+                <xsl:for-each-group select="$matches" group-by="./k:word">
+                    <xsl:sort select="count(current-group())" order="descending"/>
+                    <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
+                </xsl:for-each-group>
+            </xsl:variable>
+
+            <table>
+                <xsl:call-template name="table-headers"/>
+                <xsl:apply-templates mode="output" select="$matches">
+                    <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
+                    <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
+                </xsl:apply-templates>
+            </table>
         </xsl:if>
-
-        <xsl:variable name="variants">
-            <xsl:for-each-group select="$matches" group-by="./k:word">
-                <xsl:sort select="count(current-group())" order="descending"/>
-                <k:w><xsl:value-of select="current-group()[1]/k:word"/></k:w>
-            </xsl:for-each-group>
-        </xsl:variable>
-
-        <table>
-            <xsl:call-template name="table-headers"/>
-            <xsl:apply-templates mode="output" select="$matches">
-                <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-                <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
-            </xsl:apply-templates>
-        </table>
     </xsl:template>
+
+
+    <xsl:function name="f:keep-mixup-match" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <xsl:param name="variant-count" as="xs:integer"/>
+
+        <xsl:sequence select="$mixup = '' or ($variant-count > 1 and contains($word, $mixup-sequence[1]))"/>
+    </xsl:function>
 
 
     <xsl:template name="table-headers">
