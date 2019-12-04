@@ -57,6 +57,8 @@
 
     <xsl:param name="case-sensitive" select="'false'" as="xs:string"/>
 
+    <xsl:param name="use-normalized-form" select="'true'" as="xs:string"/>
+
 
     <!-- Values: 'following', 'preceding', 'document' -->
     <xsl:param name="sort-order" select="'following'"/>
@@ -759,6 +761,8 @@
 
         <xsl:variable name="string" select="if ($case-sensitive = 'true') then $string else lower-case($string)"/>
         <xsl:variable name="string" select="f:strip-diacritics-and-marks($string)"/>
+        <xsl:variable name="string" select="f:normalize-ligatures($string)"/>
+        <xsl:variable name="string" select="f:normalize-special-letters($string)"/>
         <xsl:variable name="string" select="f:normalize-mixup-characters($string)"/>
         <xsl:sequence select="$string"/>
     </xsl:function>
@@ -776,6 +780,48 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
         <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:normalize-ligatures" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x00df;', 'ss')"/> <!-- German eszet -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x1E9E;', 'SS')"/> <!-- German capital eszet -->
+        
+        <xsl:variable name="string" select="fn:replace($string, '&#x00c6;', 'AE')"/> <!-- AE ligature -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00e6;', 'ae')"/> <!-- ae ligature -->
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x0132;', 'IJ')"/> <!-- Dutch IJ -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0133;', 'ij')"/> <!-- Dutch ij -->
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x0152;', 'OE')"/> <!-- OE ligature -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0153;', 'oe')"/> <!-- oe ligature -->
+
+        <xsl:variable name="string" select="fn:replace($string, '&#xA734;', 'AO')"/> <!-- Ligature AO (Old Icelandic) -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xA735;', 'ao')"/> <!-- Ligature ao (Old Icelandic) -->
+        
+        <xsl:variable name="string" select="fn:replace($string, '&#x1EFA;', 'LL')"/> <!-- ligature Ll (older Welsh) -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x1EFB;', 'll')"/> <!-- Ligature ll (older Welsh) -->
+
+        <xsl:sequence select="$string"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:normalize-special-letters" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x00D0;', 'D')"/> <!-- U+00D0 LATIN CAPITAL LETTER ETH -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00F0;', 'd')"/> <!-- U+00F0 LATIN SMALL LETTER ETH -->
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x0110;', 'D')"/> <!-- U+0110 LATIN CAPITAL LETTER D WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0111;', 'd')"/> <!-- U+0111 LATIN SMALL LETTER D WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0126;', 'H')"/> <!-- U+0126 LATIN CAPITAL LETTER H WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0127;', 'h')"/> <!-- U+0127 LATIN SMALL LETTER H WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0141;', 'L')"/> <!-- U+0141 LATIN CAPITAL LETTER L WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0142;', 'h')"/> <!-- U+0142 LATIN SMALL LETTER L WITH STROKE -->
+
+        <xsl:sequence select="$string"/>
     </xsl:function>
 
 
