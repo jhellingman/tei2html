@@ -788,19 +788,17 @@
 
         <xsl:variable name="string" select="fn:replace($string, '&#x00df;', 'ss')"/> <!-- German eszet -->
         <xsl:variable name="string" select="fn:replace($string, '&#x1E9E;', 'SS')"/> <!-- German capital eszet -->
-        
         <xsl:variable name="string" select="fn:replace($string, '&#x00c6;', 'AE')"/> <!-- AE ligature -->
         <xsl:variable name="string" select="fn:replace($string, '&#x00e6;', 'ae')"/> <!-- ae ligature -->
 
         <xsl:variable name="string" select="fn:replace($string, '&#x0132;', 'IJ')"/> <!-- Dutch IJ -->
         <xsl:variable name="string" select="fn:replace($string, '&#x0133;', 'ij')"/> <!-- Dutch ij -->
-
         <xsl:variable name="string" select="fn:replace($string, '&#x0152;', 'OE')"/> <!-- OE ligature -->
         <xsl:variable name="string" select="fn:replace($string, '&#x0153;', 'oe')"/> <!-- oe ligature -->
 
         <xsl:variable name="string" select="fn:replace($string, '&#xA734;', 'AO')"/> <!-- Ligature AO (Old Icelandic) -->
         <xsl:variable name="string" select="fn:replace($string, '&#xA735;', 'ao')"/> <!-- Ligature ao (Old Icelandic) -->
-        
+
         <xsl:variable name="string" select="fn:replace($string, '&#x1EFA;', 'LL')"/> <!-- ligature Ll (older Welsh) -->
         <xsl:variable name="string" select="fn:replace($string, '&#x1EFB;', 'll')"/> <!-- Ligature ll (older Welsh) -->
 
@@ -811,15 +809,20 @@
     <xsl:function name="f:normalize-special-letters" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
 
-        <xsl:variable name="string" select="fn:replace($string, '&#x00D0;', 'D')"/> <!-- U+00D0 LATIN CAPITAL LETTER ETH -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x00F0;', 'd')"/> <!-- U+00F0 LATIN SMALL LETTER ETH -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00D8;', 'O')"/> <!-- Latin capital letter O with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00F8;', 'o')"/> <!-- Latin small letter o with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00D0;', 'D')"/> <!-- Latin capital letter Eth -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x00F0;', 'd')"/> <!-- Latin small letter eth -->
 
-        <xsl:variable name="string" select="fn:replace($string, '&#x0110;', 'D')"/> <!-- U+0110 LATIN CAPITAL LETTER D WITH STROKE -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x0111;', 'd')"/> <!-- U+0111 LATIN SMALL LETTER D WITH STROKE -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x0126;', 'H')"/> <!-- U+0126 LATIN CAPITAL LETTER H WITH STROKE -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x0127;', 'h')"/> <!-- U+0127 LATIN SMALL LETTER H WITH STROKE -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x0141;', 'L')"/> <!-- U+0141 LATIN CAPITAL LETTER L WITH STROKE -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x0142;', 'h')"/> <!-- U+0142 LATIN SMALL LETTER L WITH STROKE -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0110;', 'D')"/> <!-- Latin capital letter D with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0111;', 'd')"/> <!-- Latin small letter d with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0126;', 'H')"/> <!-- Latin capital letter H with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0127;', 'h')"/> <!-- Latin small letter h with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0141;', 'L')"/> <!-- Latin capital letter L with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0142;', 'l')"/> <!-- Latin small letter l with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0166;', 'T')"/> <!-- Latin capital letter T with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x0167;', 't')"/> <!-- Latin small letter t with stroke -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x017F;', 's')"/> <!-- Latin small letter long s -->
 
         <xsl:sequence select="$string"/>
     </xsl:function>
