@@ -65,6 +65,7 @@ my $kwicLanguages       = "";
 my $kwicWords           = "";
 my $kwicCaseSensitive   = "no";
 my $kwicMixup           = "";
+my $kwicVariants        = 1;
 
 GetOptions(
     't' => \$explicitMakeText,
@@ -95,6 +96,7 @@ GetOptions(
     'kwicword=s' => \$kwicWords,
     'kwiccasesensitive=s' => \$kwicCaseSensitive,
     'kwicmixup=s' => \$kwicMixup,
+    'kwicvariants=i' => \$kwicVariants,
     'help' => \$showHelp,
     'tidy'=> \$useTidy);
 
@@ -130,15 +132,16 @@ if ($showHelp == 1) {
     print "    f         Force generation of output file, even if it is newer than input.\n";
     print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n";
     print "    q         Print this help and exit.\n";
-    print "    notranscription      Don't use transcription schemes.\n";
-    print "    debug                Debug mode.\n";
-    print "    trace                Trace mode.\n";
-    print "    profile              Profile mode.\n";
-    print "    heatmap              Generate a heatmap version.\n";
-    print "    kwiclang=<languages> Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
-    print "    kwicword=<words>     Words to be shown in KWIC, separate words by spaces.\n";
-    print "    kwiccase=<yes/no>    Be case-sensitive in KWIC.\n";
-    print "    kwicmixup=<string>   Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
+    print "    notranscription       Don't use transcription schemes.\n";
+    print "    debug                 Debug mode.\n";
+    print "    trace                 Trace mode.\n";
+    print "    profile               Profile mode.\n";
+    print "    heatmap               Generate a heatmap version.\n";
+    print "    kwiclang=<languages>  Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
+    print "    kwicword=<words>      Words to be shown in KWIC, separate words by spaces.\n";
+    print "    kwiccase=<yes/no>     Be case-sensitive in KWIC.\n";
+    print "    kwicmixup=<string>    Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
+    print "    kwicvariants=<number> Report only words with at least this many variant spellings.\n";
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
@@ -324,9 +327,10 @@ sub makeKwic($$) {
     my $kwicKeywordParameter = ($kwicWords eq '') ? '' : "keyword=\"$kwicWords\"";
     my $kwicMixupParameter = ($kwicMixup eq '') ? '' : "mixup=\"$kwicMixup\"";
     my $kwicCaseSensitiveParameter = ($kwicCaseSensitive eq 'yes' or $kwicCaseSensitive eq 'true') ? 'case-sensitive=true' : '';
+    my $kwicVariantsParameter = ($kwicVariants > 1) ? "min-variant-count=\"$kwicVariants\"" : '';
 
     print "Generate a KWIC index (this may take some time)...\n";
-    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter > $kwicFilename");
+    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter $kwicVariantsParameter > $kwicFilename");
 }
 
 
@@ -351,7 +355,12 @@ sub determineKwicFilename($) {
         $namePartMixup = '-mixup-' . $namePartMixup;
     }
 
-    return $basename . '-kwic' . $namePartLanguage . $namePartWord . $namePartMixup . '.html';
+    my $namePartVariants = '';
+    if ($kwicVariants > 1) {
+        $namePartVariants = '-variants-' . $kwicVariants;
+    }
+
+    return $basename . '-kwic' . $namePartLanguage . $namePartWord . $namePartMixup . $namePartVariants . '.html';
 }
 
 

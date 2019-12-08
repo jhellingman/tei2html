@@ -257,7 +257,7 @@
 
 
     <xsl:template match="div/head">
-        <xsl:variable name="level" select="f:div-level(.)"/>
+        <xsl:variable name="level" select="f:div-level(..) + 1" as="xs:integer"/>
         <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
 
         <xsl:call-template name="headPicture"/>

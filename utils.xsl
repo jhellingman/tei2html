@@ -355,8 +355,12 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="local-name($div) = ('div0', 'div1', 'div2', 'div3', 'div4', 'div5', 'div6')">
                 <xsl:value-of select="substring(local-name($div), 4)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:log-error('Node {1} is not a division.', (local-name($div)))"/>
+                <xsl:value-of select="1"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>

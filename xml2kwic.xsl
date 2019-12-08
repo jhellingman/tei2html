@@ -59,10 +59,19 @@
 
     <xsl:param name="use-normalized-form" select="'true'" as="xs:string"/>
 
+    <xsl:param name="min-variant-count" select="1" as="xs:integer"/>
+
 
     <!-- Values: 'following', 'preceding', 'document' -->
     <xsl:param name="sort-order" select="'following'"/>
 
+
+    <xd:doc>
+        <xd:short>Sort potentially mixed-up characters together.</xd:short>
+        <xd:detail>Sort (sequences of) characters that are often mixed-up (such as b and h, or rn and m) together. 
+        The resulting KWIC will only include words that include the mixed-up characters and appear in at least two 
+        variants.</xd:detail>
+    </xd:doc>
 
     <xsl:param name="mixup" select="''"/>
 
@@ -91,6 +100,12 @@
     <xsl:param name="en-stopwords" select="'@/Bin/dic/en.dic'"/>
     <xsl:param name="nl-stopwords" select="'@/Bin/dic/nl.dic'"/>
     -->
+
+    <xsl:variable name="stopwords" as="map(xs:string, xs:string)" select='map {
+        "EN" : "a about an are as at be by for from how I in is it of on or that the this to was what when where who will with",
+        "NL" : "aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had hebben hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou"
+        }'/>
+
 
     <xsl:variable name="en-stopwords-sequence" select="f:load-stopwords($en-stopwords)"/>
     <xsl:variable name="nl-stopwords-sequence" select="f:load-stopwords($nl-stopwords)"/>
@@ -311,7 +326,7 @@
         <xsl:variable name="baseword" select="f:normalize-string($keyword)"/>
         <xsl:variable name="variant-count" select="f:count-variants($matches)"/>
 
-        <xsl:if test="f:keep-mixup-match($baseword, $variant-count)">
+        <xsl:if test="f:should-report-match($baseword, $variant-count)">
             <h2>
                 <span class="cnt">Word:</span><xsl:text> </xsl:text>
                 <xsl:value-of select="$baseword"/><xsl:text> </xsl:text>
@@ -342,11 +357,13 @@
     </xsl:template>
 
 
-    <xsl:function name="f:keep-mixup-match" as="xs:boolean">
+    <xsl:function name="f:should-report-match" as="xs:boolean">
         <xsl:param name="word" as="xs:string"/>
         <xsl:param name="variant-count" as="xs:integer"/>
 
-        <xsl:sequence select="$mixup = '' or ($variant-count > 1 and contains($word, $mixup-sequence[1]))"/>
+        <xsl:sequence select="if ($mixup = '') 
+                                  then $variant-count >= $min-variant-count
+                                  else ($variant-count >= 2 and contains($word, $mixup-sequence[1]))"/>
     </xsl:function>
 
 
