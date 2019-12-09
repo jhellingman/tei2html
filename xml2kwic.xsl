@@ -854,15 +854,22 @@
             else $string"/>
     </xsl:function>
 
+    <xd:doc>
+        <xd:short>Replace the occurences of multiple patterns in a string with a single replacement.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:multi-replace" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="patterns" as="xs:string*"/>
         <xsl:param name="replacement" as="xs:string"/>
 
-        <xsl:sequence select="if ($patterns[1])
-            then replace(f:multi-replace($string, $patterns[position() > 1], $replacement), $patterns[1], $replacement)
-            else $string"/>
+        <xsl:iterate select="$patterns">
+            <xsl:param name="string" select="$string" as="xs:string"/>
+            <xsl:on-completion select="$string"/>
+            <xsl:next-iteration>
+                <xsl:with-param name="string" select="replace($string, ., $replacement)"/>
+            </xsl:next-iteration>
+        </xsl:iterate>
     </xsl:function>
 
 

@@ -13,7 +13,7 @@ use Cwd qw(abs_path);
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
-my $javaOptions = '-Xms3072m -Xmx3072m -Xss1024k ';
+my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 
 #==============================================================================
 # Configuration

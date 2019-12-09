@@ -10,12 +10,15 @@ The KWIC generator should:
   * Indicate the page on which they appear.
   * Indicate the (tagged) language of the keyword.
   * Be able to show words in italics (and other font-styles).
-  * Segmentize text to have meaningful contexts.
+  * Break up a text into Segments text to have meaningful contexts.
   * Ignore other tags in the text.
   * Handle text in footnotes correctly.
   * Present the resulting KWIC in HTML.
   * Work with all Unicode supported scripts.
   * Ignore case and accent variants (but they should be preserved and signalled).
+  * Ignore differences between common ligatures and loose characters (such as _æ_ and _ae_)
+  * Optionally ignore differences between look-alike characters or sequences (such as _b_ and _h_, or _rn_ and _m_)
+  * Optionally only show words of which more than one variant appears after ignoring minor differences.
 
 # Development #
 
@@ -30,6 +33,21 @@ Having done this for one word, it is fairly easy to iterate over all words in th
 Generating a KWIC unfortunately consumes a considerable amount of memory, so some tuning is required to be able to handle large texts. KWIC indexes tend to get fairly big: a 2 megabyte text can result in a 80 megabyte KWIC index, especially if no stop-word-list is used to remove the most common words.
 
 The result is `xml2kwic.xsl`, about 500 lines of XSLT code (including documentation comments), that produces a KWIC index from a TEI file in a few seconds. This can be used in two modes. In the first, a KWIC is generated for every word in the document (including such common words as 'the' or 'a'), in the second, a word or list of words is provided to the script, and a KWIC of only those words is build: handy for example to compare the usage of two different spellings or synonyms.
+
+The XSLT script currently accepts the following parameters:
+
+- `keyword`: one or more keywords to generate a KWIC for.
+- `select-language`: one or more (space separated) codes of languages to generate a KWIC for.
+- `case-sensitive`: should casing be folded to lowercase (one of true or false).
+- `min-variant-count`: the minimum number of variants required for a word to be reported upon.
+- `mixup`: a number of (space separated) symbols that need to be treated as equal.
+- `context-size`: the size of the context being shown in the report-out.
+
+Calling the script has been integrated into `tei2html.pl`.
+
+A particularly useful way of generating a kwic is with:
+
+```tei2html -k --kwicvariants=2 --kwiccasesensitive=true```
 
 # Having fun with KWIC #
 
