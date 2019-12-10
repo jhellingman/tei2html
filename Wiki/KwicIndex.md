@@ -10,13 +10,14 @@ The KWIC generator should:
   * Indicate the page on which they appear.
   * Indicate the (tagged) language of the keyword.
   * Be able to show words in italics (and other font-styles).
-  * Break up a text into Segments text to have meaningful contexts.
+  * Break up a text into segments to have meaningful contexts.
   * Ignore other tags in the text.
   * Handle text in footnotes correctly.
   * Present the resulting KWIC in HTML.
   * Work with all Unicode supported scripts.
   * Ignore case and accent variants (but they should be preserved and signalled).
   * Ignore differences between common ligatures and loose characters (such as _æ_ and _ae_)
+  * Properly handle a mixture of left-to-right and right-to-left scripts (as Hebrew and Arabic).
   * Optionally ignore differences between look-alike characters or sequences (such as _b_ and _h_, or _rn_ and _m_)
   * Optionally only show words of which more than one variant appears after ignoring minor differences.
 

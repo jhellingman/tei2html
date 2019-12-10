@@ -31,7 +31,7 @@ while (<INPUTFILE>) {
 }
 
 
-sub stripNewline($) {
+sub stripNewline {
     my $str = shift;
     $str =~ s/\n/ /g;
     return $str;
