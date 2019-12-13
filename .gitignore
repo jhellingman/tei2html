@@ -97,3 +97,6 @@ test/test-p5.html
 tools/tei2xml.pl
 _Deparsed_XSubs.pm
 samples/testMath/issues.xml
+xspec/xspec/kwic-compiled.xsl
+xspec/xspec/kwic-result.html
+xspec/xspec/kwic-result.xml

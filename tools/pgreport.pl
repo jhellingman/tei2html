@@ -107,7 +107,7 @@ sub main {
 }
 
 
-sub logTotals() {
+sub logTotals {
     logMessage("---------------------");
     logMessage("Files:      $totalFiles");
     logMessage("Words:      $totalWords");
@@ -140,7 +140,7 @@ sub listRecursively {
 }
 
 
-sub handleFile($) {
+sub handleFile {
     my ($file) = @_;
     if ($file =~ m/^(.*)\.(tei)$/) {
         handleTeiFile($file);
@@ -148,7 +148,7 @@ sub handleFile($) {
 }
 
 
-sub handleTeiFile($) {
+sub handleTeiFile {
     my $fullName = shift;
 
     my $fileSize = -s $fullName;
@@ -212,7 +212,7 @@ sub handleTeiFile($) {
                 if ($makeHtml != 0) {
                     system ("perl -S tei2html.pl -h -r -v -f $fileName$suffix");
                 } else {
-                    system ("perl -S tei2html.pl -x -r -v -f $fileName$suffix");
+                    system ("perl -S tei2html.pl -x -r -v -f -k --kwicvariants=2 --kwiccasesensitive=true $fileName$suffix");
                 }
             }
             chdir ($cwd);
@@ -425,7 +425,7 @@ sub handleTeiFile($) {
 }
 
 
-sub downloadFromPG($$) {
+sub downloadFromPG {
     my $pgNum = shift;
     my $path = shift;
 
@@ -455,7 +455,7 @@ sub downloadFromPG($$) {
 }
 
 
-sub getAttr($$) {
+sub getAttr {
     my $attr = shift;
     my $node = shift;
     my $value = $node->find('@' . $attr);
@@ -468,7 +468,7 @@ sub getAttr($$) {
 }
 
 
-sub escapeXml($) {
+sub escapeXml {
     my $data = shift;
 
     $data =~ s/&/&amp;/sg;
@@ -480,25 +480,25 @@ sub escapeXml($) {
 }
 
 
-sub logError($) {
+sub logError {
     my $message = shift;
     print STDERR "ERROR: $message\n";
 }
 
 
-sub logMessage($) {
+sub logMessage {
     my $message = shift;
     print REPORTFILE "$message\n";
 }
 
 
-sub isValid($) {
+sub isValid {
     my $value = shift;
     return defined $value && $value ne '' && $value ne '#####';
 }
 
 
-sub formatBytes($) {
+sub formatBytes {
     my $num = shift;
     my $kb = 1024;
     my $mb = (1024 * 1024);
@@ -514,7 +514,7 @@ sub formatBytes($) {
 #
 # isNewer -- determine whether the first file exists and is newer than the second file
 #
-sub isNewer($$) {
+sub isNewer {
     my $file1 = shift;
     my $file2 = shift;
 

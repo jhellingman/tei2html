@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../xml2kwic.xsl"
+               version="3.0">
+
+   <x:scenario label="When determining the direction of a left-to-right word">
+      <x:call function="f:is-right-to-left">
+         <x:param select="'Latin'"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the direction of a left-to-right word">
+      <x:call function="f:is-left-to-right">
+         <x:param select="'Latin'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+
+   <x:scenario label="When normalizing ligatures">
+      <x:call function="f:normalize-ligatures">
+         <x:param select="'Just normal letters'"/>
+      </x:call>
+      <x:expect label="will return the original string" select="'Just normal letters'"/>
+   </x:scenario>
+
+   <x:scenario label="When normalizing ligatures">
+      <x:call function="f:normalize-ligatures">
+         <x:param select="'Various kinds of ligatures: &#x00df;, &#x00e6;'"/>
+      </x:call>
+      <x:expect label="will return the string with ligatures converted" select="'Various kinds of ligatures: ss, ae'"/>
+   </x:scenario>
+
+</x:description>
