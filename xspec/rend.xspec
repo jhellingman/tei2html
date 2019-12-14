@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+   <x:scenario label="When determining an empty rend value from an empty string">
+      <x:call function="f:has-rend-value">
+         <x:param select="''"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a rend value from an empty string">
+      <x:call function="f:has-rend-value">
+         <x:param select="''"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a rend value from a string that doesn't contain the rend value">
+      <x:call function="f:has-rend-value">
+         <x:param select="'font-family(Times)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a rend value from a string that does contain the rend value">
+      <x:call function="f:has-rend-value">
+         <x:param select="'color(red)'"/>
+         <x:param select="'color'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a rend value from a string that does contain the rend value">
+      <x:call function="f:has-rend-value">
+         <x:param select="'font-size(12pt)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining an rend value from a string that does contain the rend value">
+      <x:call function="f:has-rend-value">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+</x:description>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../levenshtein.xsl"
+               version="3.0">
+
+   <x:scenario label="When determining the levenstein distance between empty strings">
+      <x:call function="f:levenshtein">
+         <x:param select="''"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect label="will return 0" select="0"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the levenstein distance between identical strings">
+      <x:call function="f:levenshtein">
+         <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
+         <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
+      </x:call>
+      <x:expect label="will return 0" select="0"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the levenstein distance between an empty and a non-empty string">
+      <x:call function="f:levenshtein">
+         <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect label="will return the length of the string" select="24"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the levenstein distance between two completely different strings">
+      <x:call function="f:levenshtein">
+         <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
+         <x:param select="'bbbbbbbbbbbbbbbbbbbbbbbb'"/>
+      </x:call>
+      <x:expect label="will return the sum of the lengths of the string" select="24"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the levenstein distance between two strings differing in one place">
+      <x:call function="f:levenshtein">
+         <x:param select="'abababababababababababab'"/>
+         <x:param select="'abababababababababababa'"/>
+      </x:call>
+      <x:expect label="will return 1" select="1"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the levenstein distance between two strings differing in one place">
+      <x:call function="f:levenshtein">
+         <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
+         <x:param select="'aaaaaaabaaaaaaaaaaaaaaaa'"/>
+      </x:call>
+      <x:expect label="will return 1" select="1"/>
+   </x:scenario>
+
+</x:description>
