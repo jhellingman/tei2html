@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- emph --> 
+
+   <x:scenario label="When rendering an emph element">
+      <x:context>
+         <emph>Test!</emph>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated id attribute">
+          <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering an emph element with language tag">
+      <x:context>
+         <emph lang="en">Test!</emph>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated id attribute and language tag">
+          <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
+      </x:expect>
+   </x:scenario>
+
+
+    <!-- strong --> 
+
+   <x:scenario label="When rendering a strong element">
+      <x:context>
+         <strong>Test!</strong>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated id attribute">
+          <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
+      </x:expect>
+   </x:scenario>
+
+
+    <!-- hi --> 
+
+   <x:scenario label="When rendering a hi element">
+      <x:context>
+         <hi lang="en">Test!</hi>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated id attribute">
+          <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a hi element with rend attribute it">
+      <x:context>
+         <hi rend="it">Test!</hi>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated class and id attribute">
+          <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a hi element with a more complex rendering attribute">
+      <x:context>
+         <hi rend="font-style(italic)">Test!</hi>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated class and id attribute">
+          <span xmlns="http://www.w3.org/1999/xhtml" class="..." id="...">Test!</span>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a hi element with a more complex rendering attribute in css mode">
+      <x:context mode="css">
+         <hi rend="font-style(italic) color(red)">Test!</hi>
+      </x:context>
+      <x:expect label="will result in CSS with a generated class selector and translated rendering attribute"
+                test="contains(normalize-space(/text()), '{ font-style:italic; color:red; }')">
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a hi element rendering element bold">
+      <x:context>
+         <hi rend="bold">Test!</hi>
+      </x:context>
+      <x:expect label="will result in HTML italics with a generated id attribute">
+          <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
+      </x:expect>
+   </x:scenario>
+
+
+
+
+</x:description>

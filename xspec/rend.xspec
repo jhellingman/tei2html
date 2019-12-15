@@ -5,6 +5,8 @@
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
+    <!-- f:has-rend-value --> 
+
    <x:scenario label="When determining an empty rend value from an empty string">
       <x:call function="f:has-rend-value">
          <x:param select="''"/>
@@ -51,6 +53,41 @@
          <x:param select="'font-size'"/>
       </x:call>
       <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+
+    <!-- f:rend-value --> 
+
+   <x:scenario label="When retrieving a rend value from an empty string">
+      <x:call function="f:rend-value">
+         <x:param select="''"/>
+         <x:param select="'color'"/>
+      </x:call>
+      <x:expect label="will return an empty string" select="''"/>
+   </x:scenario>
+
+   <x:scenario label="When retrieving a rend value from a string containing the value">
+      <x:call function="f:rend-value">
+         <x:param select="'color(red)'"/>
+         <x:param select="'color'"/>
+      </x:call>
+      <x:expect label="will return the rend value" select="'red'"/>
+   </x:scenario>
+
+   <x:scenario label="When retrieving a rend value from a string containing the value">
+      <x:call function="f:rend-value">
+         <x:param select="'font-size(12pt)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return the rend value" select="'12pt'"/>
+   </x:scenario>
+
+   <x:scenario label="When retrieving a rend value from a string containing the value">
+      <x:call function="f:rend-value">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return the rend value" select="'12pt'"/>
    </x:scenario>
 
 </x:description>
