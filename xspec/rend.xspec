@@ -90,4 +90,92 @@
       <x:expect label="will return the rend value" select="'12pt'"/>
    </x:scenario>
 
+
+    <!-- f:remove-rend-value --> 
+
+   <x:scenario label="When removing a rend value from a string containing the value">
+      <x:call function="f:remove-rend-value">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return the remaining rend value" select="'font-family(Times) font-style(italic)'"/>
+   </x:scenario>
+
+   <x:scenario label="When removing a rend value from a string not containing the value">
+      <x:call function="f:remove-rend-value">
+         <x:param select="'font-family(Times) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return the remaining rend values" select="'font-family(Times) font-style(italic)'"/>
+   </x:scenario>
+
+   <x:scenario label="When removing a rend value from a string where it is the only value">
+      <x:call function="f:remove-rend-value">
+         <x:param select="'font-size(12pt)'"/>
+         <x:param select="'font-size'"/>
+      </x:call>
+      <x:expect label="will return the empty string" select="''"/>
+   </x:scenario>
+
+
+    <!-- f:add-rend-value --> 
+
+   <x:scenario label="When adding a rend value to a string containing the value">
+      <x:call function="f:add-rend-value">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+         <x:param select="'15pt'"/>
+      </x:call>
+      <x:expect label="will return the original rend values with the updated value at the end" select="'font-family(Times) font-style(italic) font-size(15pt)'"/>
+   </x:scenario>
+
+   <x:scenario label="When adding a rend value to a string not containing the value">
+      <x:call function="f:add-rend-value">
+         <x:param select="'font-family(Times) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+         <x:param select="'15pt'"/>
+      </x:call>
+      <x:expect label="will return the original rend values with the updated value at the end" select="'font-family(Times) font-style(italic) font-size(15pt)'"/>
+   </x:scenario>
+
+   <x:scenario label="When adding a rend value to an empty string">
+      <x:call function="f:add-rend-value">
+         <x:param select="''"/>
+         <x:param select="'font-size'"/>
+         <x:param select="'15pt'"/>
+      </x:call>
+      <x:expect label="will return the rend value" select="'font-size(15pt)'"/>
+   </x:scenario>
+
+
+    <!-- f:adjust-dimension --> 
+
+   <x:scenario label="When adjusting a rend value with a factor in a string containing the value">
+      <x:call function="f:adjust-dimension">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+         <x:param select="2.0"/>
+      </x:call>
+      <x:expect label="will return the original rend values with the updated value at the end" select="'font-family(Times) font-style(italic) font-size(24pt)'"/>
+   </x:scenario>
+
+   <x:scenario label="When adjusting a rend value with a factor in a string containing the value">
+      <x:call function="f:adjust-dimension">
+         <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+         <x:param select="0.3333333333333333"/>
+      </x:call>
+      <x:expect label="will return the original rend values with the updated value at the end" select="'font-family(Times) font-style(italic) font-size(4pt)'"/>
+   </x:scenario>
+
+   <x:scenario label="When adjusting a rend value with a factor in a string not containing the value">
+      <x:call function="f:adjust-dimension">
+         <x:param select="'font-family(Times) font-style(italic)'"/>
+         <x:param select="'font-size'"/>
+         <x:param select="2.0"/>
+      </x:call>
+      <x:expect label="will return the original rend values" select="'font-family(Times) font-style(italic)'"/>
+   </x:scenario>
+
+
 </x:description>
