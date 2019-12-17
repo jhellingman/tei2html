@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- f:generate-stable-id --> 
+
+   <x:scenario label="When determining a stable id for a nested element">
+      <x:call function="f:generate-stable-id">
+         <x:param select="//hi">
+            <text id="base">
+                <div1>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return a valid id" select="'base_hi_1'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a stable id for a nested element">
+      <x:call function="f:generate-stable-id">
+         <x:param select="(//hi)[2]">
+            <text id="base">
+                <div1>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return a valid id" select="'base_hi_2'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining a stable id for a nested element">
+      <x:call function="f:generate-stable-id">
+         <x:param select="(//hi)[2]">
+            <text id="base">
+                <div1>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p id="parent">
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return a valid id" select="'parent_hi_1'"/>
+   </x:scenario>
+
+
+</x:description>
