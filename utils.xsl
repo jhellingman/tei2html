@@ -192,6 +192,7 @@
         </xsl:if>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Re-open a <code>p</code>-element in the output.</xd:short>
         <xd:detail>Re-open a previously closed <code>p</code>-element in the output.
