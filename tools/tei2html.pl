@@ -13,24 +13,28 @@ use Cwd qw(abs_path);
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
-my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
-
 #==============================================================================
 # Configuration
 
-my $toolsdir        = $Bin;                                 # location of tools
-my $xsldir          = abs_path($toolsdir . "/..");          # location of xsl stylesheets
-my $patcdir         = $toolsdir . "/patc/transcriptions";   # location of patc transcription files.
-my $catalog         = $toolsdir . "/pubtext/CATALOG";       # location of SGML catalog (required for nsgmls and sx)
+my $home = $ENV{'TEI2HTML_HOME'};
+my $saxonHome = $ENV{'SAXON_HOME'};
+my $princeHome = $ENV{'PRINCE_HOME'};
 
-my $java            = "java $javaOptions";
-my $prince          = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";   # see https://www.princexml.com/
-my $saxon           = "$java -jar " . $toolsdir . "/lib/saxon9he.jar ";                 # see http://saxon.sourceforge.net/
-my $epubcheck       = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";          # see https://github.com/IDPF/epubcheck
-my $jeebies         = "C:\\Bin\\jeebies";                                               # see http://gutcheck.sourceforge.net/
-my $gutcheck        = "gutcheck";
-my $nsgmls          = "nsgmls";                                                         # see http://www.jclark.com/sp/
-my $sx              = "sx";
+my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
+
+my $toolsdir  = $home . "/tools";                    # location of tools
+my $xsldir    = abs_path($toolsdir . "/..");         # location of xsl stylesheets
+my $patcdir   = $toolsdir . "/patc/transcriptions";  # location of patc transcription files.
+my $catalog   = $toolsdir . "/pubtext/CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+
+my $java      = "java $javaOptions";
+my $prince    = $princeHome . "/Engine/bin/prince.exe";                   # see https://www.princexml.com/
+my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see http://saxon.sourceforge.net/
+my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
+my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
+my $gutcheck  = "gutcheck";
+my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/
+my $sx        = "sx";
 
 #==============================================================================
 # Arguments
