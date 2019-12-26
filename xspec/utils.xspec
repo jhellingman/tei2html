@@ -65,4 +65,78 @@
    </x:scenario>
 
 
+    <!-- f:generate-id --> 
+
+   <x:scenario label="When determining an id for an element with an explicit id">
+      <x:call function="f:generate-id">
+         <x:param select="(//hi)[2]">
+            <text id="base">
+                <div1>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi id="explicit-id">target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the same id" select="'explicit-id'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining an id for an element without an explicit id">
+      <x:call function="f:generate-id">
+         <x:param select="(//hi)[2]">
+            <text id="base">
+                <div1>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                    <p>
+                        <hi>target</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return a newly generated starting with x" test="starts-with(., 'x')"/>/>
+   </x:scenario>
+
+    <!-- f:needs-id --> 
+
+   <x:scenario label="When determining wether an element needs an id, when indeed it needs one">
+      <x:call function="f:needs-id">
+         <x:param select="(//p)[2]">
+            <text id="base">
+                <div1>
+                    <p><ref target="target">link</ref></p>
+                    <p id="target">target</p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>/>
+   </x:scenario>
+
+   <x:scenario label="When determining wether an element needs an id, when it doesn't need one">
+      <x:call function="f:needs-id">
+         <x:param select="(//p)[2]">
+            <text id="base">
+                <div1>
+                    <p>no link</p>
+                    <p id="target">target</p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>/>
+   </x:scenario>
+
 </x:description>
