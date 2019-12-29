@@ -452,19 +452,13 @@
         will show the original text.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="corr">
+    <xsl:template match="corr" mode="#default titlePage">
         <xsl:call-template name="handle-correction">
             <xsl:with-param name="sic" select="@sic"/>
             <xsl:with-param name="corr" select="./node()"/>
         </xsl:call-template>
     </xsl:template>
 
-    <xsl:template match="corr" mode="titlePage">
-        <xsl:call-template name="handle-correction">
-            <xsl:with-param name="sic" select="@sic"/>
-            <xsl:with-param name="corr" select="./node()"/>
-        </xsl:call-template>
-    </xsl:template>
 
     <xd:doc>
         <xd:short>Handle Corrections.</xd:short>

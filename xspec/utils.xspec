@@ -5,7 +5,7 @@
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
-    <!-- f:generate-stable-id --> 
+    <!-- f:generate-stable-id -->
 
    <x:scenario label="When determining a stable id for a nested element">
       <x:call function="f:generate-stable-id">
@@ -65,7 +65,7 @@
    </x:scenario>
 
 
-    <!-- f:generate-id --> 
+    <!-- f:generate-id -->
 
    <x:scenario label="When determining an id for an element with an explicit id">
       <x:call function="f:generate-id">
@@ -106,10 +106,10 @@
             </text>
          </x:param>
       </x:call>
-      <x:expect label="will return a newly generated starting with x" test="starts-with(., 'x')"/>/>
+      <x:expect label="will return a newly generated starting with x" test="starts-with(., 'x')"/>
    </x:scenario>
 
-    <!-- f:needs-id --> 
+    <!-- f:needs-id -->
 
    <x:scenario label="When determining wether an element needs an id, when indeed it needs one">
       <x:call function="f:needs-id">
@@ -122,7 +122,7 @@
             </text>
          </x:param>
       </x:call>
-      <x:expect label="will return true" select="true()"/>/>
+      <x:expect label="will return true" select="true()"/>
    </x:scenario>
 
    <x:scenario label="When determining wether an element needs an id, when it doesn't need one">
@@ -136,7 +136,82 @@
             </text>
          </x:param>
       </x:call>
-      <x:expect label="will return false" select="false()"/>/>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+    <!-- f:copy-without-ids -->
+
+   <x:scenario label="When copying without ids">
+      <x:call function="f:copy-without-ids">
+         <x:param select="/">
+            <text id="base">
+                <div1 id="div1">
+                    <p id="first.p">
+                        <hi>First</hi>
+                    </p>
+                    <p id="parent">
+                        <hi id="second.hi">Second</hi>
+                    </p>
+                    <p id="third.p">
+                        <hi>Third</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the same tree without ids">
+        <text>
+            <div1>
+                <p>
+                    <hi>First</hi>
+                </p>
+                <p>
+                    <hi>Second</hi>
+                </p>
+                <p>
+                    <hi>Third</hi>
+                </p>
+            </div1>
+        </text>
+      </x:expect>
+   </x:scenario>
+
+    <!-- f:copy-with-id-prefix -->
+
+   <x:scenario label="When copying with id-prefix">
+      <x:call function="f:copy-with-id-prefix">
+         <x:param select="/">
+            <text id="base">
+                <div1 id="div1">
+                    <p id="first.p">
+                        <hi>First</hi>
+                    </p>
+                    <p id="parent">
+                        <hi id="second.hi">Second</hi>
+                    </p>
+                    <p id="third.p">
+                        <hi>Third</hi>
+                    </p>
+                </div1>
+            </text>
+         </x:param>
+         <x:param select="'prefix.'"/>
+      </x:call>
+      <x:expect label="will return the same tree with all ids prefixes">
+            <text id="prefix.base">
+                <div1 id="prefix.div1">
+                    <p id="prefix.first.p">
+                        <hi>First</hi>
+                    </p>
+                    <p id="prefix.parent">
+                        <hi id="prefix.second.hi">Second</hi>
+                    </p>
+                    <p id="prefix.third.p">
+                        <hi>Third</hi>
+                    </p>
+                </div1>
+            </text>
+      </x:expect>
    </x:scenario>
 
 </x:description>

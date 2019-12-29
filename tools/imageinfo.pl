@@ -7,6 +7,9 @@ use Image::Magick;
 use File::Basename;
 use Getopt::Long;
 
+# Override buggy windows version of stat; see https://metacpan.org/release/Win32-UTCFileTime
+use Win32::UTCFileTime qw(:DEFAULT $ErrStr);
+
 my $whiteLevel = 10;
 my $stepSize = 10;
 my $needContour = 0;

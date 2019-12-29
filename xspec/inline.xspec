@@ -5,6 +5,9 @@
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
+    <!-- Define variable used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
     <!-- emph --> 
 
    <x:scenario label="When rendering an emph element">
@@ -86,6 +89,30 @@
    </x:scenario>
 
 
+    <!-- corr --> 
 
+   <x:scenario label="When rendering a corr element">
+      <x:context>
+         <corr sic="mistake">correction</corr>
+      </x:context>
+      <x:expect label="will result in a HTML span with a pop-up title">
+        <span xmlns="http://www.w3.org/1999/xhtml"
+              class="corr"
+              id="..."
+              title="Source: mistake">correction</span>
+        </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a corr element in mode 'titlePage'">
+      <x:context mode="titlePage">
+         <corr sic="mistake">correction</corr>
+      </x:context>
+      <x:expect label="will result in a HTML span with a pop-up title">
+        <span xmlns="http://www.w3.org/1999/xhtml"
+              class="corr"
+              id="..."
+              title="Source: mistake">correction</span>
+        </x:expect>
+   </x:scenario>
 
 </x:description>
