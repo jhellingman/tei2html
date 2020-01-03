@@ -95,7 +95,7 @@
       <x:expect label="will return an expanded HTML link to that target">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="link.pg" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/12345">Link to PG ebook.</a></li>
-           <li id="..."><a id="link.pg.ch5" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/12345/12345-h/12345-h.htm#ch5">Link to chapter in PG ebook.</a></li>
+           <li id="..."><a id="link.pg.ch05" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/12345/12345-h/12345-h.htm#ch05">Link to chapter in PG ebook.</a></li>
         </ul>
       </x:expect>
    </x:scenario>

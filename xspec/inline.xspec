@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
 
+    <!ENTITY zwsp       "&#x200B;">
+
+]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
@@ -95,7 +99,7 @@
       <x:context>
          <corr sic="mistake">correction</corr>
       </x:context>
-      <x:expect label="will result in a HTML span with a pop-up title">
+      <x:expect label="will result in an HTML span with a pop-up title">
         <span xmlns="http://www.w3.org/1999/xhtml"
               class="corr"
               id="..."
@@ -107,12 +111,55 @@
       <x:context mode="titlePage">
          <corr sic="mistake">correction</corr>
       </x:context>
-      <x:expect label="will result in a HTML span with a pop-up title">
+      <x:expect label="will result in an HTML span with a pop-up title">
         <span xmlns="http://www.w3.org/1999/xhtml"
               class="corr"
               id="..."
               title="Source: mistake">correction</span>
         </x:expect>
    </x:scenario>
+
+
+    <!-- gap --> 
+
+   <x:scenario label="When rendering a gap element">
+      <x:context>
+        <gap id="a" reason="just testing"/>
+        <gap id="b" extent="6" unit="char" reason="just testing"/>
+      </x:context>
+      <x:expect label="will result in an HTML span with a pop-up title">
+        <span xmlns="http://www.w3.org/1999/xhtml"
+              class="gap"
+              title="Missing text, for the following reason: just testing.">[<i>missing text</i>]</span>
+        <span xmlns="http://www.w3.org/1999/xhtml"
+              class="gap"
+              title="Missing 6 char, for the following reason: just testing.">[<i>missing text</i>]</span>
+        </x:expect>
+   </x:scenario>
+
+
+    <!-- space --> 
+
+   <x:scenario label="When rendering a space element">
+      <x:context>
+        <space id="a"/>
+        <space id="b" quantity="6" unit="char"/>
+      </x:context>
+      <x:expect label="will result in an HTML span with a pop-up title">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="space aspace">&zwsp;</span>
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="space bspace">&zwsp;</span>
+        </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a space element in CSS">
+      <x:context mode="css">
+        <space id="a"/>
+        <space id="b" quantity="6" unit="char"/>
+      </x:context>
+      <x:expect label="will result in CSS to render the space-width correctly"  test="normalize-space(.) = '.aspace { padding-left: 1em } .bspace { padding-left: 3em }'"/>
+   </x:scenario>
+
 
 </x:description>
