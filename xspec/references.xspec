@@ -125,7 +125,7 @@
       <x:context>
         <list>
             <item><xref id="link.jd" url="bib:Jdg 1:19">Chariots of iron.</xref></item>
-            <item><xref id="link.hb" url="bib:Heb 6:18">Impossible to lie.</xref></item>
+            <item><xref id="link.hb" url="bib:Heb 6:18@KJV">Impossible to lie.</xref></item>
             <item><xref id="link.lk" url="bib:Lk 1:37">Nothing is impossible.</xref></item>
             <item><xref id="link.mc" url="bib:1 Mc 1:2">Killed every king.</xref></item>
             <item><xref id="link.xx" url="bib:Xxx 1:2">(dead link).</xref></item>
@@ -146,7 +146,7 @@
               <a id="link.hb"
                  class="biblink link.jd"
                  title="Reference to the Bible: Hebrews 6:18"
-                 href="https://www.biblegateway.com/passage/?search=Heb%206:18&amp;version=NRSV">Impossible to lie.</a>
+                 href="https://www.biblegateway.com/passage/?search=Heb%206:18&amp;version=KJV">Impossible to lie.</a>
            </li>
            <li id="...">
               <a id="link.lk"
