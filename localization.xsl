@@ -50,6 +50,13 @@
     <xsl:variable name="defaultlanguage" select="f:get-setting('defaultlanguage')" as="xs:string"/>
     <xsl:variable name="defaultbaselanguage" select="if (contains($defaultlanguage, '-')) then substring-before($defaultlanguage, '-') else $defaultlanguage" as="xs:string"/>
 
+
+    <xsl:function name="f:is-message-available" as="xs:boolean">
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:sequence select="f:message($name) != '[### ' || $name || ' ###]'"/>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Find a localized message.</xd:short>
         <xd:detail>Function to find a localized message in the <code>messages.xml</code> file. This function will first try to find the message

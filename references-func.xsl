@@ -40,6 +40,7 @@
             'oclc':   'catlink',
             'oln':    'catlink',
             'olw':    'catlink',
+            'lccn':   'catlink',
             'pg':     'pglink',
             'pgi':    'pgilink',
             'qur':    'qurlink',
@@ -73,12 +74,14 @@
             <xsl:when test="starts-with($url, 'oclc:')">{f:message('msgLinkToWorldCat')}</xsl:when>
             <xsl:when test="starts-with($url, 'oln:')">{f:message('msgLinkToOpenLibrary')}</xsl:when>
             <xsl:when test="starts-with($url, 'olw:')">{f:message('msgLinkToOpenLibrary')}</xsl:when>
+            <xsl:when test="starts-with($url, 'lccn:')">{f:message('msgLinkToLibraryOfCongress')}</xsl:when>
             <xsl:when test="starts-with($url, 'wp:')">{f:message('msgLinkToWikipedia')}</xsl:when>
             <xsl:when test="starts-with($url, 'loc:')">{f:message('msgLinkToMap')}</xsl:when>
             <xsl:when test="starts-with($url, 'bib:')">{f:title-for-bible-link($url)}</xsl:when>
             <xsl:when test="starts-with($url, 'qur:')">{f:title-for-quran-link($url)}</xsl:when>
             <xsl:when test="starts-with($url, 'tia:')">{f:message('msgLinkToInternetArchive')}</xsl:when>
             <xsl:when test="starts-with($url, 'mailto:')">{f:message('msgEmailLink')}</xsl:when>
+            <xsl:when test="starts-with($url, 'ftp:')">{f:message('msgFtpLink')}</xsl:when>
 
             <xsl:when test="starts-with($url, 'audio/')">
                 <xsl:choose>
@@ -111,6 +114,7 @@
                 <tr><td>oclc:<i>[id]</i></td>                   <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
                 <tr><td>oln:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the item level).</td></tr>
                 <tr><td>olw:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
+                <tr><td>lccn:<i>[id]</i></td>                   <td>Link to an Library of Congress catalog entry.</td></tr>
                 <tr><td>wp:<i>[string]</i></td>                 <td>Link to a Wikipedia article.</td></tr>
                 <tr><td>tia:<i>[string]</i></td>                <td>Link to an Internet Archive item.</td></tr>
                 <tr><td>loc:<i>[coordinates]</i></td>           <td>Link to a geographical location (currently uses Google Maps).</td></tr>
@@ -151,6 +155,11 @@
             <!-- Link to Open Library catalog entry (abstract work level) -->
             <xsl:when test="starts-with($url, 'olw:')">
                 <xsl:text>https://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+            </xsl:when>
+
+            <!-- Link to Library of Congress catalog entry -->
+            <xsl:when test="starts-with($url, 'lccn:')">
+                <xsl:text>https://lccn.loc.gov/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
             </xsl:when>
 
             <!-- Link to Wikipedia article -->
@@ -194,6 +203,11 @@
 
             <!-- Link to email address (mailto:) -->
             <xsl:when test="starts-with($url, 'mailto:')">
+                <xsl:value-of select="$url"/>
+            </xsl:when>
+
+            <!-- Link to FTP server (ftp:) -->
+            <xsl:when test="starts-with($url, 'ftp:')">
                 <xsl:value-of select="$url"/>
             </xsl:when>
 
@@ -347,13 +361,12 @@
         <xsl:variable name="toVerse" select="$urlParts[4]"/>
         <xsl:variable name="edition" select="$urlParts[5]"/>
 
-        <xsl:variable name="bookTitle" select="f:message('bible.' || map:get($bibleBooks, lower-case($book)))"/>
-
-        <xsl:if test="not($bookTitle) or $bookTitle = ''">
+        <xsl:variable name="messageId" select="'bible.' || map:get($bibleBooks, lower-case($book))"/>
+        <xsl:if test="not(f:is-message-available($messageId))">
             <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
 
-        <xsl:variable name="bookTitle" select="if ($bookTitle != '') then $bookTitle else $book"/>
+        <xsl:variable name="bookTitle" select="if (f:is-message-available($messageId)) then f:message($messageId) else f:message('msgUnknownBibleBook')"/>
 
         <!-- <xsl:message expand-text="yes">{f:log-info('Found Bible reference &quot;{1}&quot; = BK: {2} CH: {3} V: {4} TO: {5} ED: {6} = {7}', ($url, $book, $chapter, $verse, $toVerse, $edition, $bookTitle))}</xsl:message> -->
 

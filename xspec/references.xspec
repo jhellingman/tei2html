@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <x:param name="root" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <listPrefixDef>
+                <prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
+                <prefixDef ident="tei" matchPattern="(.+)" replacementPattern="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-$1.html"/>
+                <prefixDef ident="complex" matchPattern="([a-z]+)-([0-9]+)" replacementPattern="https://example.com/$1/$2.html"/>
+            </listPrefixDef>
+        </TEI.2>
+    </x:param>
+
+    <!-- Redefine global variable used in references.xsl -->
+    <x:param name="prefixDefs" select="$root//listPrefixDef/prefixDef" as="element(prefixDef)*"/>
+
+
+    <!-- various types of references -->
+
+   <x:scenario label="When creating a reference to a local target (P3 TEI without fragment identifiers)">
+      <x:context select="/TEI.2/list">
+        <TEI.2>
+            <list>
+                <item><ref target="localtarget">Local link.</ref></item>
+                <item><ref target="missingtarget">Missing link.</ref></item>
+                <item id="localtarget">Local target.</item>
+            </list>
+        </TEI.2>
+      </x:context>
+      <x:expect label="will return a HTML link">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
+           <li id="...">Missing link.</li>
+           <li id="localtarget">Local target.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a local target (P5 TEI with fragment identifiers)">
+      <x:context select="/TEI/list">
+        <TEI>
+            <list>
+                <item><ref target="#localtarget">Local link.</ref></item>
+                <item><ref target="#missingtarget">Missing link.</ref></item>
+                <item id="localtarget">Local target.</item>
+            </list>
+        </TEI>
+      </x:context>
+      <x:expect label="will return a HTML link">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
+           <li id="...">Missing link.</li>
+           <li id="localtarget">Local target.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a external target">
+      <x:context>
+        <list>
+            <item><xref id="link.http" url="http://www.example.com/">External HTTP link.</xref></item>
+            <item><xref id="link.https" url="https://www.example.com/">External HTTPS link.</xref></item>
+            <item><xref id="link.mailto" url="mailto:user@example.com">Email address.</xref></item>
+            <item><xref id="link.ftp" url="ftp://ftp.example.com/dir/file.tar.gz">FTP site.</xref></item>
+        </list>
+      </x:context>
+      <!-- Note how the class contains link.http in each case; this is an artifact of the class determination, based on a key() on @rend -->
+      <x:expect label="will return a HTML link to that target">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..."><a id="link.http" class="exlink link.http" title="External link" href="http://www.example.com/">External HTTP link.</a></li>
+           <li id="..."><a id="link.https" class="seclink link.http" title="External link" href="https://www.example.com/">External HTTPS link.</a></li>
+           <li id="..."><a id="link.mailto" class="maillink link.http" title="Send email message" href="mailto:user@example.com">Email address.</a></li>
+           <li id="..."><a id="link.ftp" class="ftplink link.http" title="Link to FTP server" href="ftp://ftp.example.com/dir/file.tar.gz">FTP site.</a></li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a external target using a shortcut notation (Project Gutenberg)">
+      <x:context>
+        <list>
+            <item><xref id="link.pg" url="pg:12345">Link to PG ebook.</xref></item>
+            <item><xref id="link.pg.ch5" url="pg:12345#ch5">Link to chapter in PG ebook.</xref></item>
+        </list>
+      </x:context>
+      <x:expect label="will return an expanded HTML link to that target">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..."><a id="link.pg" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/12345">Link to PG ebook.</a></li>
+           <li id="..."><a id="link.pg.ch5" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/12345/12345-h/12345-h.htm#ch5">Link to chapter in PG ebook.</a></li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a external target using a shortcut notation (Library catalogues)">
+      <x:context>
+        <list>
+            <item><xref id="link.oclc" url="oclc:OL18716720M">XSLT programmer's reference (WorldCat)</xref></item>
+            <item><xref id="link.oln" url="oln:OL18716720M">XSLT programmer's reference (OpenLibrary edition).</xref></item>
+            <item><xref id="link.olw" url="olw:OL5961288W">XSLT programmer's reference (OpenLibrary work).</xref></item>
+            <item><xref id="link.lccn" url="lccn:2002392953">XSLT programmer's reference (Library of Congress).</xref></item>
+        </list>
+      </x:context>
+      <x:expect label="will return an expanded HTML link to that target">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+            <li id="..."><a id="link.oclc" class="catlink link.oclc" title="Link to WorldCat catalog page" href="https://www.worldcat.org/oclc/OL18716720M">XSLT programmer&#x2019;s reference (WorldCat)</a></li>
+            <li id="..."><a id="link.oln" class="catlink link.oclc" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/books/OL18716720M">XSLT programmer&#x2019;s reference (OpenLibrary edition).</a></li>
+            <li id="..."><a id="link.olw" class="catlink link.oclc" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/work/OL5961288W">XSLT programmer&#x2019;s reference (OpenLibrary work).</a></li>
+            <li id="..."><a id="link.lccn" class="catlink link.oclc" title="Link to Library of Congress record" href="https://lccn.loc.gov/2002392953">XSLT programmer&#x2019;s reference (Library of Congress).</a></li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a external target using a shortcut notation (Bible and Quran)">
+      <x:context>
+        <list>
+            <item><xref id="link.jd" url="bib:Jdg 1:19">Chariots of iron.</xref></item>
+            <item><xref id="link.hb" url="bib:Heb 6:18">Impossible to lie.</xref></item>
+            <item><xref id="link.lk" url="bib:Lk 1:37">Nothing is impossible.</xref></item>
+            <item><xref id="link.mc" url="bib:1 Mc 1:2">Killed every king.</xref></item>
+            <item><xref id="link.xx" url="bib:Xxx 1:2">(dead link).</xref></item>
+            <item><xref id="link.re" url="bib:Re 19:1-12">Revelation 19:1-12.</xref></item>
+            <item><xref id="link.q1" url="qur:1:1">Quran verse.</xref></item>
+            <item><xref id="link.q2" url="qur:2:42">True or False.</xref></item>
+        </list>
+      </x:context>
+      <x:expect label="will return an expanded HTML link to that target">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">
+              <a id="link.jd"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Judges 1:19"
+                 href="https://www.biblegateway.com/passage/?search=Jdg%201:19&amp;version=NRSV">Chariots of iron.</a>
+           </li>
+           <li id="...">
+              <a id="link.hb"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Hebrews 6:18"
+                 href="https://www.biblegateway.com/passage/?search=Heb%206:18&amp;version=NRSV">Impossible to lie.</a>
+           </li>
+           <li id="...">
+              <a id="link.lk"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Luke 1:37"
+                 href="https://www.biblegateway.com/passage/?search=Lk%201:37&amp;version=NRSV">Nothing is impossible.</a>
+           </li>
+           <li id="...">
+              <a id="link.mc"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: 1 Maccabees 1:2"
+                 href="https://www.biblegateway.com/passage/?search=1%20Mc%201:2&amp;version=NRSV">Killed every king.</a>
+           </li>
+           <li id="...">
+              <a id="link.xx"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Unknown Book 1:2"
+                 href="https://www.biblegateway.com/passage/?search=Xxx%201:2&amp;version=NRSV">(dead link).</a>
+           </li>
+           <li id="...">
+              <a id="link.re"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Revelation 19:1-12"
+                 href="https://www.biblegateway.com/passage/?search=Re%2019:1-12&amp;version=NRSV">Revelation 19:1-12.</a>
+           </li>
+           <li id="...">
+              <a id="link.q1"
+                 class="qurlink link.jd"
+                 title="Reference to the Quran: chapter 1, verse 1"
+                 href="https://www.quranwow.com/#/ch/1/t1/ar-allah/t2/en-pickthall/v/1">Quran verse.</a>
+           </li>
+           <li id="...">
+              <a id="link.q2"
+                 class="qurlink link.jd"
+                 title="Reference to the Quran: chapter 2, verse 42"
+                 href="https://www.quranwow.com/#/ch/2/t1/ar-allah/t2/en-pickthall/v/42">True or False.</a>
+           </li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a external target using a shortcut notation (using prefixDefs)">
+      <x:context>
+        <list>
+            <item><xref id="link.wiki" url="wiki:tei">Link using internally defined schema wiki.</xref></item>
+            <item><xref id="link.tei" url="tei:list">Link using internally defined schema tei.</xref></item>
+            <item><xref id="link.complex" url="complex:abc-123">Link with multiple elements in prefixDef.</xref></item>
+        </list>
+      </x:context>
+      <x:expect label="will return an expanded HTML link to that target">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">
+              <a id="link.wiki"
+                 class="exlink link.wiki"
+                 title="External link"
+                 href="https://en.wikipedia.org/wiki/tei">Link using internally defined schema wiki.</a>
+           </li>
+           <li id="...">
+              <a id="link.tei"
+                 class="exlink link.wiki"
+                 title="External link"
+                 href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-list.html">Link using internally defined schema tei.</a>
+           </li>
+            <li id="...">
+              <a id="link.complex"
+                 class="exlink link.wiki"
+                 title="External link"
+                 href="https://example.com/abc/123.html">Link with multiple elements in prefixDef.</a>
+           </li>
+         </ul>
+      </x:expect>
+   </x:scenario>
+
+
+</x:description>

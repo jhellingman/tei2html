@@ -47,8 +47,9 @@
 		<msg:message name="msgOccurrences">Occurrences</msg:message>
 		<msg:message name="msgOccurrences.abbr">Occ.</msg:message>
 		<msg:message name="msgValues">Values</msg:message>
+		<msg:message name="msgFtpLink">Link to FTP server</msg:message>
+		<msg:message name="msgLinkToLibraryOfCongress">Link to Library of Congress record</msg:message>
 
-		
 		<msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
 		<msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
 		<msg:message name="msgForeword" help="A part of a book before the main text not written by the author. Typically written by an authority to introduce the book and explain why the reader should read the book.">Foreword</msg:message>
@@ -269,6 +270,7 @@
         <msg:message name="bible.3 John">3 John</msg:message>
         <msg:message name="bible.Jude">Jude</msg:message>
         <msg:message name="bible.Revelation">Revelation</msg:message>
+        <msg:message name="msgUnknownBibleBook">Unknown Book</msg:message>
 		
         <msg:message name="msgLinkToQuran">Reference to the Quran</msg:message>		
 		<msg:message name="msgLinkToQuranChapter">Reference to the Quran: chapter <msg:param name="chapter"/></msg:message>
