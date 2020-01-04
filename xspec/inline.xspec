@@ -5,161 +5,159 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
-               xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
     <!-- Define variable used in localization.xsl -->
     <x:param name="language" as="xs:string" select="'en'"/>
 
-    <!-- emph --> 
+    <!-- emph -->
 
-   <x:scenario label="When rendering an emph element">
-      <x:context>
-         <emph>Test!</emph>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated id attribute">
-          <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
-      </x:expect>
-   </x:scenario>
-
-   <x:scenario label="When rendering an emph element with language tag">
-      <x:context>
-         <emph lang="en">Test!</emph>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated id attribute and language tag">
-          <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
-      </x:expect>
-   </x:scenario>
-
-
-    <!-- strong --> 
-
-   <x:scenario label="When rendering a strong element">
-      <x:context>
-         <strong>Test!</strong>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated id attribute">
-          <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
-      </x:expect>
-   </x:scenario>
-
-
-    <!-- hi --> 
-
-   <x:scenario label="When rendering a hi element">
-      <x:context>
-         <hi lang="en">Test!</hi>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated id attribute">
-          <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
-      </x:expect>
-   </x:scenario>
-
-   <x:scenario label="When rendering a hi element with rend attribute it">
-      <x:context>
-         <hi rend="it">Test!</hi>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated class and id attribute">
-          <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
-      </x:expect>
-   </x:scenario>
-
-   <x:scenario label="When rendering a hi element with a more complex rendering attribute">
-      <x:context>
-         <hi rend="font-style(italic)">Test!</hi>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated class and id attribute">
-          <span xmlns="http://www.w3.org/1999/xhtml" class="..." id="...">Test!</span>
-      </x:expect>
-   </x:scenario>
-
-   <x:scenario label="When rendering a hi element with a more complex rendering attribute in css mode">
-      <x:context mode="css">
-         <hi rend="font-style(italic) color(red)">Test!</hi>
-      </x:context>
-      <x:expect label="will result in CSS with a generated class selector and translated rendering attribute"
-                test="contains(normalize-space(/text()), '{ font-style:italic; color:red; }')">
-      </x:expect>
-   </x:scenario>
-
-   <x:scenario label="When rendering a hi element rendering element bold">
-      <x:context>
-         <hi rend="bold">Test!</hi>
-      </x:context>
-      <x:expect label="will result in HTML italics with a generated id attribute">
-          <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
-      </x:expect>
-   </x:scenario>
-
-
-    <!-- corr --> 
-
-   <x:scenario label="When rendering a corr element">
-      <x:context>
-         <corr sic="mistake">correction</corr>
-      </x:context>
-      <x:expect label="will result in an HTML span with a pop-up title">
-        <span xmlns="http://www.w3.org/1999/xhtml"
-              class="corr"
-              id="..."
-              title="Source: mistake">correction</span>
+    <x:scenario label="When rendering an emph element">
+        <x:context>
+            <emph>Test!</emph>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated id attribute">
+            <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
         </x:expect>
-   </x:scenario>
+    </x:scenario>
 
-   <x:scenario label="When rendering a corr element in mode 'titlePage'">
-      <x:context mode="titlePage">
-         <corr sic="mistake">correction</corr>
-      </x:context>
-      <x:expect label="will result in an HTML span with a pop-up title">
-        <span xmlns="http://www.w3.org/1999/xhtml"
-              class="corr"
-              id="..."
-              title="Source: mistake">correction</span>
+    <x:scenario label="When rendering an emph element with language tag">
+        <x:context>
+            <emph lang="en">Test!</emph>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated id attribute and language tag">
+            <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
         </x:expect>
-   </x:scenario>
+    </x:scenario>
 
 
-    <!-- gap --> 
+    <!-- strong -->
 
-   <x:scenario label="When rendering a gap element">
-      <x:context>
-        <gap id="a" reason="just testing"/>
-        <gap id="b" extent="6" unit="char" reason="just testing"/>
-      </x:context>
-      <x:expect label="will result in an HTML span with a pop-up title">
-        <span xmlns="http://www.w3.org/1999/xhtml"
-              class="gap"
-              title="Missing text, for the following reason: just testing.">[<i>missing text</i>]</span>
-        <span xmlns="http://www.w3.org/1999/xhtml"
-              class="gap"
-              title="Missing 6 char, for the following reason: just testing.">[<i>missing text</i>]</span>
+    <x:scenario label="When rendering a strong element">
+        <x:context>
+            <strong>Test!</strong>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated id attribute">
+            <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
         </x:expect>
-   </x:scenario>
+    </x:scenario>
 
 
-    <!-- space --> 
+    <!-- hi -->
 
-   <x:scenario label="When rendering a space element">
-      <x:context>
-        <space id="a"/>
-        <space id="b" quantity="6" unit="char"/>
-      </x:context>
-      <x:expect label="will result in an HTML span with a pop-up title">
+    <x:scenario label="When rendering a hi element">
+        <x:context>
+            <hi lang="en">Test!</hi>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated id attribute">
+            <i xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">Test!</i>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a hi element with rend attribute it">
+        <x:context>
+            <hi rend="it">Test!</hi>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated class and id attribute">
+            <i xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</i>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a hi element with a more complex rendering attribute">
+        <x:context>
+            <hi rend="font-style(italic)">Test!</hi>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated class and id attribute">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="..." id="...">Test!</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a hi element with a more complex rendering attribute in css mode">
+        <x:context mode="css">
+            <hi rend="font-style(italic) color(red)">Test!</hi>
+        </x:context>
+        <x:expect label="will result in CSS with a generated class selector and translated rendering attribute"
+                  test="contains(normalize-space(/text()), '{ font-style:italic; color:red; }')">
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a hi element rendering element bold">
+        <x:context>
+            <hi rend="bold">Test!</hi>
+        </x:context>
+        <x:expect label="will result in HTML italics with a generated id attribute">
+            <b xmlns="http://www.w3.org/1999/xhtml" id="...">Test!</b>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- corr -->
+
+    <x:scenario label="When rendering a corr element">
+        <x:context>
+            <corr sic="mistake">correction</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  id="..."
+                  title="Source: mistake">correction</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a corr element in mode 'titlePage'">
+        <x:context mode="titlePage">
+            <corr sic="mistake">correction</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  id="..."
+                  title="Source: mistake">correction</span>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- gap -->
+
+    <x:scenario label="When rendering a gap element">
+        <x:context>
+            <gap id="a" reason="just testing"/>
+            <gap id="b" extent="6" unit="char" reason="just testing"/>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="gap"
+                  title="Missing text, for the following reason: just testing.">[<i>missing text</i>]</span>
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="gap"
+                  title="Missing 6 char, for the following reason: just testing.">[<i>missing text</i>]</span>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- space -->
+
+    <x:scenario label="When rendering a space element">
+        <x:context>
+            <space id="a"/>
+            <space id="b" quantity="6" unit="char"/>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title">
             <span xmlns="http://www.w3.org/1999/xhtml"
                   class="space aspace">&zwsp;</span>
             <span xmlns="http://www.w3.org/1999/xhtml"
                   class="space bspace">&zwsp;</span>
         </x:expect>
-   </x:scenario>
+    </x:scenario>
 
-   <x:scenario label="When rendering a space element in CSS">
-      <x:context mode="css">
-        <space id="a"/>
-        <space id="b" quantity="6" unit="char"/>
-      </x:context>
-      <x:expect label="will result in CSS to render the space-width correctly"  test="normalize-space(.) = '.aspace { padding-left: 1em } .bspace { padding-left: 3em }'"/>
+    <x:scenario label="When rendering a space element in CSS">
+        <x:context mode="css">
+            <space id="a"/>
+            <space id="b" quantity="6" unit="char"/>
+        </x:context>
+        <x:expect label="will result in CSS to render the space-width correctly"  test="normalize-space(.) = '.aspace { padding-left: 1em } .bspace { padding-left: 3em }'"/>
    </x:scenario>
-
 
 </x:description>

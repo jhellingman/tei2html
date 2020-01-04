@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY zwsp       "&#x200B;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- pb -->
+
+    <x:scenario label="When rendering a pb (page-break) element">
+        <x:context>
+            <pb n="1" id="pb1"/>
+        </x:context>
+        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+            <p xmlns="http://www.w3.org/1999/xhtml">
+                <span class="pagenum">[<a id="pb1" href="#pb1">1</a>]</span>
+            </p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a pb (page-break) element inside a paragraph">
+        <x:context>
+            <p>In a <pb n="1" id="pb2"/> paragraph.</p>
+        </x:context>
+        <x:expect label="will result a HTML span of class pagenum without a wrapping paragraph">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <span class="pagenum">[<a id="pb2" href="#pb2">1</a>]</span> paragraph.</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a pb (page-break) element inside a marginal note">
+        <x:context>
+            <p>
+                <note place="margin">In a <pb n="1" id="pb3"/> marginal note.</note>
+            </p>
+        </x:context>
+        <x:expect label="will result a HTML anchor only">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <a id="pb3"/> marginal note.</p>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

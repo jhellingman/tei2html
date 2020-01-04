@@ -3,9 +3,7 @@
 
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:include href="../utils.xsl"/>
     <xsl:include href="../utils.html.xsl"/>
