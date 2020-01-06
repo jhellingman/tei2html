@@ -32,6 +32,13 @@
     <xd:doc type="string">Name of custom configuration file.</xd:doc>
     <xsl:param name="configurationFile"/>
 
+    <xd:doc type="string">Custom configuration (if available read from file else empty).</xd:doc>
+    <xsl:variable name="custom-configuration" select="if ($configurationFile) then document($configurationFile, /) else $empty-configuration"/>
+
+    <xsl:variable name="empty-configuration">
+        <tei2html.config/>
+    </xsl:variable>
+
     <xd:doc>
         <xd:short>The default configuration.</xd:short>
         <xd:detail>
@@ -138,14 +145,7 @@
 
 
     <xd:doc>
-        <xd:short>Load the file-specific configuration from the place where the file resides.</xd:short>
-    </xd:doc>
-
-    <xsl:variable name="configuration" select="if ($configurationFile) then document($configurationFile, /) else $default-configuration"/>
-
-
-    <xd:doc>
-        <xd:short>Combine the file-specific and default configuration into a map for easy access.</xd:short>
+        <xd:short>Combine the custom and default configuration into a single map for easy access.</xd:short>
         <xd:detail>
             <p>Combine the file-specific and default configuration into a map. The configuration file is specified in the variable <code>$configurationFile</code> 
             (default: <code>tei2html.config</code>).</p>
@@ -154,7 +154,7 @@
 
     <xsl:variable name="configuration-map" as="map(xs:string, xs:string)" 
         select="map:merge(
-                    (f:convert-configuration($default-configuration/tei2html.config), f:convert-configuration($configuration/tei2html.config)),
+                    (f:convert-configuration($default-configuration/tei2html.config), f:convert-configuration($custom-configuration/tei2html.config)),
                     map{'duplicates' : 'use-last'})"/>
 
 

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY zwsp       "&#x200B;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <!-- Redefine global variables used in configuration.xsl -->
+    <x:param name="custom-configuration" as="document-node(element(tei2html.config))" select="self::document-node()">
+        <tei2html.config>
+            <facsimile.enable>true</facsimile.enable>
+            <facsimile.wrapper.enable>true</facsimile.wrapper.enable>
+            <facsimile.path>page-images</facsimile.path>
+            <facsimile.external>false</facsimile.external>
+            <facsimile.target></facsimile.target>
+        </tei2html.config>
+    </x:param>
+
+    <x:param name="author" as="xs:string" select="'An Author'"/>
+
+    <x:param name="title" as="xs:string" select="'The Title'"/>
+
+    <!-- pb (from block.xsl) -->
+
+    <x:scenario label="When rendering a pb (page-break) element with a facs attribute">
+        <x:context>
+            <pb n="4" id="pb4" facs="image/p004.jpg"/>
+        </x:context>
+        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+            <p xmlns="http://www.w3.org/1999/xhtml">
+                <span class="pagenum">[<a id="pb4" href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
+            </p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a pb (page-break) element with a facs attribute (CSS mode)">
+        <x:context mode="css">
+            <pb n="4" id="pb4" facs="image/p004.jpg"/>
+        </x:context>
+        <x:expect label="will result in CSS with a generated class selector and relevant rendering attributes (i.e. icon)"
+                  test="contains(normalize-space(/text()), '.facslink { background-image: url(images/page-image.png); padding-right: 10px; }')"/>
+    </x:scenario>
+
+    <!-- facsimile -->
+
+    <!--
+    <x:scenario label="When rendering a facsimile element">
+        <x:context>
+            <facsimile>
+                <graphic id="f001" url="p001.gif"/>
+                <graphic id="f002" url="p002.gif"/>
+            </facsimile>
+        </x:context>
+        <x:expect label="will result a external document">
+            TODO: xspec doesn't support external documents!
+        </x:expect>
+    </x:scenario>
+    -->
+
+    <x:scenario label="When rendering a graphic element">
+        <x:context>
+            <graphic n="1" id="f001" url="p001.png"/>
+        </x:context>
+        <x:call template="facsimile-html">
+        </x:call>
+        <x:expect label="will result an HTML wrapper document embedding the image">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+               <head>
+                  <title>An Author, The Title, Page 1</title>
+                  <link rel="stylesheet" type="text/css" href="facsimile.css"/>
+               </head>
+               <body>
+                  <div class="facsimile-head">
+                     <h2>An Author, <i>The Title</i>, Page 1</h2>
+                  </div>
+                  <div class="facsimile-navigation">
+                     <div class="pager-navigation">Page 1</div>
+                     <div class="breadcrumb-navigation"/>
+                  </div>
+                  <div class="facsimile-image">
+                     <img src="p001.png" alt="Page Image 1"/>
+                  </div>
+               </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a pb element">
+        <x:context>
+            <pb n="3" id="pb3" facs="image/p003.jpg"/>
+        </x:context>
+        <x:call template="facsimile-html">
+        </x:call>
+        <x:expect label="will result an HTML wrapper document embedding the image">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+               <head>
+                  <title>An Author, The Title, Page 3</title>
+                  <link rel="stylesheet" type="text/css" href="facsimile.css"/>
+               </head>
+               <body>
+                  <div class="facsimile-head">
+                     <h2>An Author, <i>The Title</i>, Page 3</h2>
+                  </div>
+                  <div class="facsimile-navigation">
+                     <div class="pager-navigation">Page 3</div>
+                     <div class="breadcrumb-navigation">
+                        <a href="../book.html#pb3">Page 3</a>
+                     </div>
+                  </div>
+                  <div class="facsimile-image">
+                     <img src="image/p003.jpg" alt="Page Image 3"/>
+                  </div>
+               </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a graphic element as part of a sequence">
+        <x:context select="/TEI.2/graphic[2]">
+            <TEI.2>
+                <graphic n="1" id="f001" url="p001.png"/>
+                <graphic n="2" id="f002" url="p002.png"/>
+                <graphic n="3" id="f003" url="p003.png"/>
+            </TEI.2>
+        </x:context>
+        <x:call template="facsimile-html">
+        </x:call>
+        <x:expect label="will result an HTML wrapper document embedding the image and linking to the previous and next image">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+               <head>
+                  <title>An Author, The Title, Page 2</title>
+                  <link rel="stylesheet" type="text/css" href="facsimile.css"/>
+               </head>
+               <body>
+                  <div class="facsimile-head">
+                     <h2>An Author, <i>The Title</i>, Page 2</h2>
+                  </div>
+                  <div class="facsimile-navigation">
+                     <div class="pager-navigation">
+                        <a href="page-f001.html">Previous</a> | Page 2 | <a href="page-f003.html">Next</a>
+                     </div>
+                     <div class="breadcrumb-navigation"/>
+                  </div>
+                  <div class="facsimile-image">
+                     <img src="p002.png" alt="Page Image 2"/>
+                  </div>
+               </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+
+</x:description>

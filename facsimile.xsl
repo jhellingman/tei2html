@@ -25,8 +25,8 @@
 
     <!--
         <facsimile>
-            <graphic id="f001" url="p001.gif"/>
-            <graphic id="f002" url="p002.gif"/>
+            <graphic id="f001" url="p001.png"/>
+            <graphic id="f002" url="p002.png"/>
         </facsimile>
     -->
 
