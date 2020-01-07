@@ -159,4 +159,84 @@
     </x:scenario>
 
 
+    <x:scenario label="When rendering a pb element as part of a sequence">
+        <x:context select="/TEI.2/pb[2]">
+            <TEI.2>
+                <pb n="1" id="pb1" facs="image/p001.jpg"/>
+                <pb n="2" id="pb2" facs="image/p002.jpg"/>
+                <pb n="3" id="pb3" facs="image/p003.jpg"/>
+            </TEI.2>
+        </x:context>
+        <x:call template="facsimile-html">
+        </x:call>
+        <x:expect label="will result an HTML wrapper document embedding the image and linking to the previous and next image">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+               <head>
+                  <title>An Author, The Title, Page 2</title>
+                  <link rel="stylesheet" type="text/css" href="facsimile.css" />
+               </head>
+               <body>
+                  <div class="facsimile-head">
+                     <h2>An Author, <i>The Title</i>, Page 2</h2>
+                  </div>
+                  <div class="facsimile-navigation">
+                     <div class="pager-navigation">
+                        <a href="page-pb1.html">Previous</a> | Page 2 | <a href="page-pb3.html">Next</a>
+                     </div>
+                     <div class="breadcrumb-navigation">
+                        <a href="../book.html#pb2">Page 2</a>
+                     </div>
+                  </div>
+                  <div class="facsimile-image">
+                     <img src="image/p002.jpg" alt="Page Image 2"/>
+                  </div>
+               </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a pb element as part of a document with sub-divisions">
+        <x:context select="//pb[@id='pb2']">
+            <TEI.2>
+                <div1 id="div1" type="Chapter" n="1">
+                    <head>Chapter Title</head>
+                    <p>Blah blah blah <pb n="1" id="pb1" facs="image/p001.jpg"/> blah blah.</p>
+                    <div2 id="div1.1" type="Section" n="a">
+                        <head>Section Title</head>
+                        <p>Blah blah blah <pb n="2" id="pb2" facs="image/p002.jpg"/> blah blah.</p>
+                        <p>Blah blah blah <pb n="3" id="pb3" facs="image/p003.jpg"/> blah blah.</p>
+                    </div2>
+                </div1>
+            </TEI.2>
+        </x:context>
+        <x:call template="facsimile-html">
+        </x:call>
+        <x:expect label="will result an HTML wrapper document embedding the image and linking to the previous and next image as well as the hierarchy of divisions">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+               <head>
+                  <title>An Author, The Title, Page 2</title>
+                  <link rel="stylesheet" type="text/css" href="facsimile.css" />
+               </head>
+               <body>
+                  <div class="facsimile-head">
+                     <h2>An Author, <i>The Title</i>, Page 2</h2>
+                  </div>
+                  <div class="facsimile-navigation">
+                     <div class="pager-navigation">
+                        <a href="page-pb1.html">Previous</a> | Page 2 | <a href="page-pb3.html">Next</a>
+                     </div>
+                     <div class="breadcrumb-navigation">
+                        <a href="../book.html#div1">Chapter Title</a> > <a href="../book.html#div1.1">Section Title</a> > <a href="../book.html#pb2">Page 2</a>
+                     </div>
+                  </div>
+                  <div class="facsimile-image">
+                     <img src="image/p002.jpg" alt="Page Image 2"/>
+                  </div>
+               </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+
 </x:description>
