@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x:description [
 
+        <!ENTITY nbsp       "&#160;">
         <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY asterism   "&#x2042;">
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
@@ -64,6 +66,8 @@
         </x:expect>
     </x:scenario>
 
+    <!-- see facsimile.xspec for more specific tests of these features -->
+
     <x:scenario label="When rendering a pb (page-break) element with a facs attribute">
         <x:context>
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
@@ -72,6 +76,54 @@
             <p xmlns="http://www.w3.org/1999/xhtml">
                 <span class="pagenum">[<a id="pb4" href="#pb4">4</a>]</span>
             </p>
+        </x:expect>
+    </x:scenario>
+
+    <!-- milestone -->
+
+    <x:scenario label="When rendering a tb inside a div">
+        <x:context>
+            <div>
+                <p>Blah blah.</p>
+                <milestone unit="tb"/>
+                <milestone unit="tb" rend="dots"/>
+                <milestone unit="tb" rend="stars"/>
+                <milestone unit="tb" rend="star"/>
+                <milestone unit="tb" rend="asterism"/>
+                <milestone unit="tb" rend="space"/>
+                <p>Blah blah.</p>
+            </div>
+        </x:context>
+        <x:expect label="will result extra paragraphs representing the thematic break">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Blah blah.</p>
+                  <hr class="tb" id="..." />
+                  <p class="tb" id="...">. . . . . . . . . . . . . . . . . . . . .</p>
+                  <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+                  <p class="tb" id="...">*</p>
+                  <p class="tb" id="...">&asterism;</p>
+                  <p class="tb" id="..."/>
+                  <p id="...">Blah blah.</p>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario pending="no support for ugly escaping hack" label="When rendering a tb inside a paragraph">
+        <x:context>
+            <div>
+                <p>Blah blah. <milestone unit="tb"/> Blah blah.</p>
+            </div>
+        </x:context>
+        <x:expect label="will result extra paragraphs representing the thematic break">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">...</p>
+                  <hr class="tb" id="..." />
+                  <p>...</p>
+               </div>
+            </div>
         </x:expect>
     </x:scenario>
 
