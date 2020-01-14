@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="extract-page.xsl"
+               version="3.0">
+
+    <x:param name="n" select="12"/>
+
+   <x:scenario label="When extracting a page">
+      <x:call function="f:extract-page-by-position">
+         <x:param name="text">
+            <TEI>
+                <front>...</front>
+                <body>
+                    <div1>
+                        <head>Blah</head>
+                        <p>Blah blah <pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/> blah</hi> blah.</p>
+                    </div1>
+                </body>
+                <back>...</back>
+            </TEI>
+        </x:param>
+         <x:param name="page" select="1"/>
+      </x:call>
+      <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
+            <TEI>
+                <body>
+                    <div1>
+                        <p><pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                    </div1>
+                </body>
+            </TEI>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When extracting a page with footnotes">
+      <x:call function="f:extract-page-by-position">
+         <x:param name="text">
+            <TEI>
+                <front>...</front>
+                <body>
+                    <div1>
+                        <head>Blah</head>
+                        <p>Blah<note n="1">Note note note.</note> blah <pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah<note n="2">Note note note.</note> blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/> blah</hi> blah.</p>
+                    </div1>
+                </body>
+                <back>...</back>
+            </TEI>
+        </x:param>
+         <x:param name="page" select="1"/>
+      </x:call>
+      <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
+            <TEI>
+                <body>
+                    <div1>
+                        <p><pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah<note n="2">Note note note.</note> blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                    </div1>
+                </body>
+            </TEI>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When extracting a page with a footnote spanning two pages">
+      <x:call function="f:extract-page-by-position">
+         <x:param name="text">
+            <TEI>
+                <front>...</front>
+                <body>
+                    <div1>
+                        <head>Blah</head>
+                        <p>Blah blah <pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah<note n="2">Note note note <pb/>note note.</note> blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/> blah</hi> blah.</p>
+                    </div1>
+                </body>
+                <back>...</back>
+            </TEI>
+        </x:param>
+         <x:param name="page" select="1"/>
+      </x:call>
+      <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
+            <TEI>
+                <body>
+                    <div1>
+                        <p><pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah<note n="2">Note note note <pb/></note> blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                    </div1>
+                </body>
+            </TEI>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When extracting a page with a footnote spanning two pages on the page before">
+      <x:call function="f:extract-page-by-position">
+         <x:param name="text">
+            <TEI>
+                <front>...</front>
+                <body>
+                    <div1>
+                        <head>Blah</head>
+                        <p>Blah blah <pb n="11"/> blah<note n="2">Note note note <pb/>note note.</note> blah.</p>
+                    </div1>
+                    <div1>
+                        <head>Blah</head>
+                        <p>Blah blah <pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/> blah</hi> blah.</p>
+                    </div1>
+                </body>
+                <back>...</back>
+            </TEI>
+        </x:param>
+         <x:param name="page" select="2"/>
+      </x:call>
+      <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
+            <TEI>
+                <body>
+                    <div1>
+                        <p><pb n="12"/> blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah blah blah blah.</p>
+                    </div1>
+                    <div1>
+                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                    </div1>
+                </body>
+            </TEI>
+      </x:expect>
+   </x:scenario>
+
+
+<!--
+Extracting a fragment between milestones from a complex structure.
+
+I am looking for a template which allows me to extract a single page, as marked by milestone
+elements <pb n="12"/> from a complex structure. Note that the milestone elements may occur in 
+different parents. I want all the parent nodes, and everything between the <pb n="12"/> and the next 
+<pb/> element
+
+For example, when applying the extract method with as parameter "12" on the following sample
+
+
+
+It should return:
+
+
+The idea is that it will copy only elements that are a ancestor of either <pb/> and follow
+the first <pb/> and precede the second <pb/>. The problem I face is formulating a nice XPath to select
+those elements.
+
+-->
+
+
+</x:description>

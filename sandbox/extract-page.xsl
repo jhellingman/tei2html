@@ -5,7 +5,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="f xs xd"
-    version="2.0">
+    version="3.0">
 
     <xd:doc type="stylesheet">
         <xd:short>Extract page from a TEI document.</xd:short>
@@ -13,7 +13,7 @@
             <p>This stylesheet extracts a page from a TEI document, that is, all content between two pb-elements.</p>
 
             <p>This is somewhat more complicated than it appears at first because page-break elements are milestones, that
-            do not follow any particular structure, and 
+            do not follow any particular structure, and
             sometimes footnotes spread out over more than one page, and we only want the content that actually occurs on
             the page indicated, that is, including any parts of footnotes on a previous page that are carried over to
             the page being extracted, and excluding parts of footnotes that have been carried over to following pages.</p>
@@ -28,8 +28,8 @@
     </xd:doc>
 
 
-    <xsl:output 
-        method="xml" 
+    <xsl:output
+        method="xml"
         indent="yes"
         encoding="utf-8"/>
 
@@ -53,6 +53,110 @@
     <xsl:variable name="q">
         <xsl:value-of select="$p + 1"/>
     </xsl:variable>
+
+
+    <xsl:function name="f:extract-page-by-position">
+        <xsl:param name="text" as="node()"/>
+        <xsl:param name="page" as="xs:integer"/>
+
+        <xsl:copy-of select="f:extract-page($text, ($text//pb[not(f:inside-footnote(.))])[position() = $page])"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:extract-page" as="node()">
+        <xsl:param name="text" as="node()"/>
+        <xsl:param name="first" as="element(pb)"/>
+
+        <xsl:variable name="last" select="$first/following::pb[not(f:inside-footnote(.))][1]"/>
+
+        <xsl:apply-templates select="$text" mode="f-extract-page">
+            <xsl:with-param name="first" select="$first" tunnel="yes"/>
+            <xsl:with-param name="last" select="$last" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+
+
+    <xsl:template mode="f-extract-page" match="* | node()">
+            <xsl:param name="first" as="element(pb)" tunnel="yes"/>
+            <xsl:param name="last" as="element(pb)?" tunnel="yes"/>
+
+        <!-- Current node is same as or after first -->
+        <xsl:variable name="after-first" select=". >> $first or . is $first"/>
+
+        <!-- Current node is same as or before last -->
+        <xsl:variable name="not-after-next" select="if ($last) then . &lt;&lt; $last or . is $last else true()"/>
+
+        <!-- Current node contains first -->
+        <xsl:variable name="contains-first" select=".//pb[. is $first]"/>
+
+        <!-- Current node is inside a footnote on this page, but after a pb inside the footnote -->
+        <xsl:variable name="in-footnote-overflow" select="if ($after-first and $not-after-next and f:inside-footnote(.)) then f:in-footnote-overflow(.) else false()"/>
+
+        <!-- Current node is inside a footnote on a previous page, and after a pb in the footnote, making it overflow to this page -->
+        <xsl:variable name="in-preceding-footnote-overflow" select="if (. &lt;&lt; first and f:inside-footnote(.)) then f:in-preceding-footnote-overflow(., $first) else false()"/>
+
+        <!-- Current node contains a footnote content that overflows into this page -->
+
+
+        <!-- Copy elements and text on given page -->
+        <xsl:choose>
+            <xsl:when test="($after-first and $not-after-next or $contains-first) and not($in-footnote-overflow)">
+                <xsl:copy>
+                    <xsl:copy-of select="@*"/>
+                    <xsl:apply-templates mode="f-extract-page"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates mode="f-extract-page"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:function name="f:in-preceding-footnote-overflow" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <xsl:param name="first" as="element(pb)"/>
+
+        <xsl:variable name="parent-footnote" as="element(note)" select="$node/ancestor-or-self::note[f:is-footnote(.)][1]"/>
+
+        <!-- how many pb between $parent-footnote and $first? -->
+        <xsl:variable name="count-pb" select="count(($parent-footnote/following::pb)[not(f:inside-footnote(.))][. &lt;&lt; $first])"/>
+        <xsl:variable name="inner-first" as="element(pb)?" select="$parent-footnote//pb[$count-pb]"/>
+        <xsl:variable name="inner-last" as="element(pb)?" select="$parent-footnote//pb[$count-pb + 1]"/>
+
+        <xsl:variable name="after-inner-first" select="if ($inner-first) then $node >> $inner-first else false()"/>
+        <xsl:variable name="not-after-inner-last" select="if ($inner-last) then $node &lt;&lt; $inner-last or $node is $inner-last else true()"/>
+
+        <xsl:sequence select="$after-inner-first and $not-after-inner-last"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:in-footnote-overflow" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:variable name="parent-footnote" as="element(note)" select="$node/ancestor-or-self::note[f:is-footnote(.)][1]"/>
+        <xsl:variable name="last" as="element(pb)?" select="$parent-footnote//pb[1]"/>
+
+        <xsl:sequence select="if ($last) then $node >> $last else false()"/>
+    </xsl:function>
+
+
+
+
+    <!-- From notes.xsl -->
+    <xsl:function name="f:is-footnote" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('foot', 'unspecified') or not($note/@place)"/>
+    </xsl:function>
+
+    <!-- From references.xsl -->
+    <xsl:function name="f:inside-footnote" as="xs:boolean">
+        <xsl:param name="targetNode" as="node()"/>
+
+        <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:is-footnote(.)]) then true() else false()"/>
+    </xsl:function>
+
+
 
 
     <xsl:template match="/">
@@ -131,7 +235,7 @@
     </xsl:template>
 
     <xsl:template mode="cleanup" match="fnpb/@p | pb/@p"/>
- 
+
 
 
 
@@ -212,66 +316,5 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <xsl:template name="sample">
-
-Extracting a fragment between milestones from a complex structure.
-
-I am looking for a template which allows me to extract a single page, as marked by milestone
-elements <pb n="12"/> from a complex structure. Note that the milestone elements may occur in 
-different parents. I want all the parent nodes, and everything between the <pb n="12"/> and the next 
-<pb/> element
-
-For example, when applying the extract method with as parameter "12" on the following sample
-
-<TEI>
-    <front>...</front>
-    <body>
-        <div1>
-            <head>Blah</head>
-            Blah blah <pb n="12"/> blah blah.
-        </div1>
-        <div1>
-            Blah blah blah blah.
-        </div1>
-        <div1>
-            Blah <hi>blah <pb n="13"/> blah</hi> blah.
-        </div1>
-    </body>
-    <back>...</back>
-</TEI>
-
-It should return:
-
-<TEI.2>
-    <body>
-        <div1>
-            <pb n="12"/> blah blah.
-        </div1>
-        <div1>
-            Blah blah blah blah.
-        </div1>
-        <div1>
-            Blah <hi>blah <pb n="13"/></hi>
-        </div1>
-    </body>
-</TEI.2>
-
-The idea is that it will copy only elements that are a ancestor of either <pb/> and follow
-the first <pb/> and precede the second <pb/>. The problem I face is formulating a nice XPath to select
-those elements.
-
-    </xsl:template>
 
 </xsl:stylesheet>
