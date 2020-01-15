@@ -80,27 +80,23 @@
             <xsl:param name="first" as="element(pb)" tunnel="yes"/>
             <xsl:param name="last" as="element(pb)?" tunnel="yes"/>
 
-        <!-- Current node is same as or after first -->
-        <xsl:variable name="after-first" select=". >> $first or . is $first"/>
-
-        <!-- Current node is same as or before last -->
-        <xsl:variable name="not-after-next" select="if ($last) then . &lt;&lt; $last or . is $last else true()"/>
-
-        <!-- Current node contains first -->
-        <xsl:variable name="contains-first" select=".//pb[. is $first]"/>
+        <xsl:variable name="after-first" as="xs:boolean" select=". >> $first or . is $first"/>
+        <xsl:variable name="not-after-next" as="xs:boolean" select="if ($last) then . &lt;&lt; $last or . is $last else true()"/>
+        <xsl:variable name="contains-first" as="xs:boolean" select="if (.//pb[. is $first]) then true() else false()"/>
+        <xsl:variable name="include" as="xs:boolean" select="$after-first and $not-after-next or $contains-first"/>
 
         <!-- Current node is inside a footnote on this page, but after a pb inside the footnote -->
-        <xsl:variable name="in-footnote-overflow" select="if ($after-first and $not-after-next and f:inside-footnote(.)) then f:in-footnote-overflow(.) else false()"/>
+        <xsl:variable name="in-footnote-overflow" as="xs:boolean" select="if ($include and f:inside-footnote(.)) then f:in-footnote-overflow(.) else false()"/>
 
         <!-- Current node is inside a footnote on a previous page, and after a pb in the footnote, making it overflow to this page -->
-        <xsl:variable name="in-preceding-footnote-overflow" select="if (. &lt;&lt; first and f:inside-footnote(.)) then f:in-preceding-footnote-overflow(., $first) else false()"/>
+        <xsl:variable name="in-preceding-footnote-overflow" as="xs:boolean" select="if (. &lt;&lt; first and f:inside-footnote(.)) then f:in-preceding-footnote-overflow(., $first) else false()"/>
 
-        <!-- Current node contains a footnote content that overflows into this page -->
+        <!-- Current node contains footnote content that overflows into this page -->
 
 
         <!-- Copy elements and text on given page -->
         <xsl:choose>
-            <xsl:when test="($after-first and $not-after-next or $contains-first) and not($in-footnote-overflow)">
+            <xsl:when test="$include and not($in-footnote-overflow)">
                 <xsl:copy>
                     <xsl:copy-of select="@*"/>
                     <xsl:apply-templates mode="f-extract-page"/>
@@ -121,8 +117,8 @@
 
         <!-- how many pb between $parent-footnote and $first? -->
         <xsl:variable name="count-pb" select="count(($parent-footnote/following::pb)[not(f:inside-footnote(.))][. &lt;&lt; $first])"/>
-        <xsl:variable name="inner-first" as="element(pb)?" select="$parent-footnote//pb[$count-pb]"/>
-        <xsl:variable name="inner-last" as="element(pb)?" select="$parent-footnote//pb[$count-pb + 1]"/>
+        <xsl:variable name="inner-first" as="element(pb)?" select="$parent-footnote//pb[$count-pb + 1]"/>
+        <xsl:variable name="inner-last" as="element(pb)?" select="$parent-footnote//pb[$count-pb + 2]"/>
 
         <xsl:variable name="after-inner-first" select="if ($inner-first) then $node >> $inner-first else false()"/>
         <xsl:variable name="not-after-inner-last" select="if ($inner-last) then $node &lt;&lt; $inner-last or $node is $inner-last else true()"/>

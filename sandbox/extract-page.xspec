@@ -5,7 +5,9 @@
                stylesheet="extract-page.xsl"
                version="3.0">
 
+
     <x:param name="n" select="12"/>
+
 
    <x:scenario label="When extracting a page">
       <x:call function="f:extract-page-by-position">
@@ -27,7 +29,7 @@
                 <back>...</back>
             </TEI>
         </x:param>
-         <x:param name="page" select="1"/>
+        <x:param name="page" select="1"/>
       </x:call>
       <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
             <TEI>
@@ -67,7 +69,7 @@
                 <back>...</back>
             </TEI>
         </x:param>
-         <x:param name="page" select="1"/>
+        <x:param name="page" select="1"/>
       </x:call>
       <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
             <TEI>
@@ -107,7 +109,7 @@
                 <back>...</back>
             </TEI>
         </x:param>
-         <x:param name="page" select="1"/>
+        <x:param name="page" select="1"/>
       </x:call>
       <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
             <TEI>
@@ -151,7 +153,7 @@
                 <back>...</back>
             </TEI>
         </x:param>
-         <x:param name="page" select="2"/>
+        <x:param name="page" select="2"/>
       </x:call>
       <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
             <TEI>
@@ -171,26 +173,83 @@
    </x:scenario>
 
 
-<!--
-Extracting a fragment between milestones from a complex structure.
+    <x:scenario label="When finding preceding footnote overflow content">
+        <x:variable name="text" as="element(TEI)">
+            <TEI>
+                <p>Begin <pb id="pb1" n="1"/> page 1<note id="n1" n="1">note 1. (on <hi id="n1.1">page</hi> 1) <pb id="pb1.2"/>(on <hi id="n1.2">page</hi> 2) <pb id="pb1.3"/>(on <hi id="n1.3">page</hi> 3) <pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note> end.</p>
+                <p>Begin <pb id="pb2" n="2"/> page 2<note id="n2" n="1">note 2. (on <hi id="n2.2">page</hi> 2) <pb id="pb2.3"/>(on <hi id="n2.3">page</hi> 3) <pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note> end.</p>
+                <p>Begin <pb id="pb3" n="3"/> page 3<note id="n3" n="1">note 3. (on <hi id="n3.3">page</hi> 3) <pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note> end.</p>
+                <p>Begin <pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
+                <p>Begin <pb id="pb5" n="5"/> page 5<note id="n5" n="1">note 5.</note> end.</p>
+                <p>Begin <pb id="pb6" n="6"/> page 6<note id="n6" n="1">note 6.</note> end.</p>
+                <p>Begin <pb id="pb7" n="7"/> page 7<note id="n7" n="1">note 7.</note> end.</p>
+                <p>Begin <pb id="pb8" n="8"/> page 8<note id="n8" n="1">note 8.</note> end.</p>
+                <p>Begin <pb id="pb9" n="9"/> page 9<note id="n9" n="1">note 9.</note> end.</p>
+            </TEI>
+        </x:variable>
 
-I am looking for a template which allows me to extract a single page, as marked by milestone
-elements <pb n="12"/> from a complex structure. Note that the milestone elements may occur in 
-different parents. I want all the parent nodes, and everything between the <pb n="12"/> and the next 
-<pb/> element
+        <x:scenario label="When element is in a footnote">
+            <x:call function="f:inside-footnote">
+                <x:param name="targetNode" select="$text//*[@id='n1.4']"/>
+            </x:call>
+            <x:expect label="will result in true" select="true()"/>
+        </x:scenario>
 
-For example, when applying the extract method with as parameter "12" on the following sample
+        <x:scenario label="When element is not in a footnote">
+            <x:call function="f:inside-footnote">
+                <x:param name="targetNode" select="$text//*[@id='pb9']"/>
+            </x:call>
+            <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
 
+        <x:scenario label="When part of note 1 is on page 1 while testing for page 3">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.1']"/>
+                <x:param name="page" select="$text//*[@id='pb3']"/>
+            </x:call>
+            <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
 
+        <x:scenario label="When part of note 1 is on page 2 while testing for page 3">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.2']"/>
+                <x:param name="page" select="$text//*[@id='pb3']"/>
+            </x:call>
+            <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
 
-It should return:
+        <x:scenario label="When part of note 1 is on page 3 while testing for page 3">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.3']"/>
+                <x:param name="page" select="$text//*[@id='pb3']"/>
+            </x:call>
+            <x:expect label="will result in true" select="true()"/>
+        </x:scenario>
 
+        <x:scenario label="When part of note 1 is on page 4 while testing for page 3">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.4']"/>
+                <x:param name="page" select="$text//*[@id='pb3']"/>
+            </x:call>
+            <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
 
-The idea is that it will copy only elements that are a ancestor of either <pb/> and follow
-the first <pb/> and precede the second <pb/>. The problem I face is formulating a nice XPath to select
-those elements.
+        <x:scenario label="When part of note 1 is on page 4 while testing for page 4">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.4']"/>
+                <x:param name="page" select="$text//*[@id='pb4']"/>
+            </x:call>
+            <x:expect label="will result in true" select="true()"/>
+        </x:scenario>
 
--->
+        <x:scenario label="When part of note 1 is on page 4 while testing for page 5">
+            <x:call function="f:in-preceding-footnote-overflow">
+                <x:param name="node" select="$text//*[@id='n1.4']"/>
+                <x:param name="page" select="$text//*[@id='pb5']"/>
+            </x:call>
+            <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
 
+    </x:scenario>
 
 </x:description>
