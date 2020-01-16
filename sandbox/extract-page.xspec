@@ -41,7 +41,7 @@
                         <p>Blah blah blah blah.</p>
                     </div1>
                     <div1>
-                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                        <p>Blah <hi>blah </hi></p>
                     </div1>
                 </body>
             </TEI>
@@ -81,7 +81,7 @@
                         <p>Blah<note n="2">Note note note.</note> blah blah blah.</p>
                     </div1>
                     <div1>
-                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                        <p>Blah <hi>blah </hi></p>
                     </div1>
                 </body>
             </TEI>
@@ -118,10 +118,10 @@
                         <p><pb n="12"/> blah blah.</p>
                     </div1>
                     <div1>
-                        <p>Blah<note n="2">Note note note <pb/></note> blah blah blah.</p>
+                        <p>Blah<note n="2">Note note note </note> blah blah blah.</p>
                     </div1>
                     <div1>
-                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                        <p>Blah <hi>blah </hi></p>
                     </div1>
                 </body>
             </TEI>
@@ -137,7 +137,7 @@
                 <body>
                     <div1>
                         <head>Blah</head>
-                        <p>Blah blah <pb n="11"/> blah<note n="2">Note note note <pb/>note note.</note> blah.</p>
+                        <p>Blah blah <pb n="11"/> blah<note n="2">Note note note (on page 11) <pb/>note note (on page 12).</note> blah.</p>
                     </div1>
                     <div1>
                         <head>Blah</head>
@@ -155,9 +155,10 @@
         </x:param>
         <x:param name="page" select="2"/>
       </x:call>
-      <x:expect label="will result in a fragment with just the elements on that page (and any wrapping element)">
+      <x:expect label="will result in a fragment with just the elements on that page, any wrapping element, and the content of the footnote overflowing to this page">
             <TEI>
                 <body>
+                    <note n="2"><pb/>note note (on page 12).</note>
                     <div1>
                         <p><pb n="12"/> blah blah.</p>
                     </div1>
@@ -165,7 +166,7 @@
                         <p>Blah blah blah blah.</p>
                     </div1>
                     <div1>
-                        <p>Blah <hi>blah <pb n="13"/></hi></p>
+                        <p>Blah <hi>blah </hi></p>
                     </div1>
                 </body>
             </TEI>
@@ -248,6 +249,54 @@
                 <x:param name="page" select="$text//*[@id='pb5']"/>
             </x:call>
             <x:expect label="will result in false" select="false()"/>
+        </x:scenario>
+
+        <x:scenario label="When extracting a page with a footnotes spanning multiple pages on the page before">
+            <x:call function="f:extract-page">
+                <x:param name="text" select="$text"/>
+                <x:param name="page" select="$text//*[@id='pb4']"/>
+            </x:call>
+            <x:expect label="will result in a page (with all overflowing fragments)">
+                <TEI xmlns:f="urn:stylesheet-functions">
+                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
+                    <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
+                    <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
+                    <p>Begin </p>
+                </TEI>
+            </x:expect>
+        </x:scenario>
+
+        <x:scenario label="When extracting a page by position with a footnotes spanning multiple pages on the page before">
+            <x:call function="f:extract-page-by-position">
+                <x:param name="text" select="$text"/>
+                <x:param name="page" select="4"/>
+            </x:call>
+            <x:expect label="will result in a page (with all overflowing fragments)">
+                <TEI xmlns:f="urn:stylesheet-functions">
+                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
+                    <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
+                    <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
+                    <p>Begin </p>
+                </TEI>
+            </x:expect>
+        </x:scenario>
+
+        <x:scenario label="When extracting a page by number with a footnotes spanning multiple pages on the page before">
+            <x:call function="f:extract-page-by-number">
+                <x:param name="text" select="$text"/>
+                <x:param name="page" select="'4'"/>
+            </x:call>
+            <x:expect label="will result in a page (with all overflowing fragments)">
+                <TEI xmlns:f="urn:stylesheet-functions">
+                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
+                    <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
+                    <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
+                    <p>Begin </p>
+                </TEI>
+            </x:expect>
         </x:scenario>
 
     </x:scenario>
