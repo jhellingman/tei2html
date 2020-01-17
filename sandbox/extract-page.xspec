@@ -177,7 +177,7 @@
     <x:scenario label="When finding preceding footnote overflow content">
         <x:variable name="text" as="element(TEI)">
             <TEI>
-                <p>Begin <pb id="pb1" n="1"/> page 1<note id="n1" n="1">note 1. (on <hi id="n1.1">page</hi> 1) <pb id="pb1.2"/>(on <hi id="n1.2">page</hi> 2) <pb id="pb1.3"/>(on <hi id="n1.3">page</hi> 3) <pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note> end.</p>
+                <p>Begin <pb id="pb1" n="1"/> page 1<note id="n1" n="1"><hi rend="bold">note 1. (on <hi id="n1.1">page</hi> 1) <pb id="pb1.2"/>(on <hi id="n1.2">page</hi> 2) <pb id="pb1.3"/>(on <hi id="n1.3">page</hi> 3) <pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</hi></note> end.</p>
                 <p>Begin <pb id="pb2" n="2"/> page 2<note id="n2" n="1">note 2. (on <hi id="n2.2">page</hi> 2) <pb id="pb2.3"/>(on <hi id="n2.3">page</hi> 3) <pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note> end.</p>
                 <p>Begin <pb id="pb3" n="3"/> page 3<note id="n3" n="1">note 3. (on <hi id="n3.3">page</hi> 3) <pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note> end.</p>
                 <p>Begin <pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
@@ -258,7 +258,7 @@
             </x:call>
             <x:expect label="will result in a page (with all overflowing fragments)">
                 <TEI xmlns:f="urn:stylesheet-functions">
-                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n1" n="1"><hi rend="bold"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</hi></note>
                     <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
                     <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
                     <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
@@ -274,7 +274,7 @@
             </x:call>
             <x:expect label="will result in a page (with all overflowing fragments)">
                 <TEI xmlns:f="urn:stylesheet-functions">
-                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n1" n="1"><hi rend="bold"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</hi></note>
                     <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
                     <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
                     <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>
@@ -290,7 +290,7 @@
             </x:call>
             <x:expect label="will result in a page (with all overflowing fragments)">
                 <TEI xmlns:f="urn:stylesheet-functions">
-                    <note id="n1" n="1"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</note>
+                    <note id="n1" n="1"><hi rend="bold"><pb id="pb1.4"/>(on <hi id="n1.4">page</hi> 4)</hi></note>
                     <note id="n2" n="1"><pb id="pb2.4"/>(on <hi id="n2.4">page</hi> 4)</note>
                     <note id="n3" n="1"><pb id="pb3.4"/>(on <hi id="n3.4">page</hi> 4) </note>
                     <p><pb id="pb4" n="4"/> page 4<note id="n4" n="1">note 4.</note> end.</p>

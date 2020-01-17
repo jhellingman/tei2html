@@ -138,8 +138,9 @@
 
         <xsl:variable name="after-inner-first" select="if ($inner-first) then $node >> $inner-first or $node is $inner-first else false()"/>
         <xsl:variable name="not-after-inner-last" select="if ($inner-last) then $node &lt;&lt; $inner-last else true()"/>
+        <xsl:variable name="contains-first" as="xs:boolean" select="if ($node//pb[. is $inner-first]) then true() else false()"/>
 
-        <xsl:sequence select="$after-inner-first and $not-after-inner-last"/>
+        <xsl:sequence select="($after-inner-first and $not-after-inner-last) or $contains-first"/>
     </xsl:function>
 
 
