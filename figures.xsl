@@ -44,7 +44,7 @@
     </xd:doc>
 
     <xsl:function name="f:determine-image-filename" as="xs:string">
-        <xsl:param name="node" as="node()"/>
+        <xsl:param name="node" as="element()"/>
         <xsl:param name="defaultformat" as="xs:string"/>
         <xsl:choose>
             <xsl:when test="f:has-rend-value($node/@rend, 'image')">
@@ -74,6 +74,7 @@
 
 
     <xsl:template name="insertimage">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="alt" select="''" as="xs:string"/>
         <xsl:param name="format" select="'.jpg'" as="xs:string"/>
 
@@ -112,16 +113,24 @@
 
 
     <xd:doc>
-        <xd:short>Verify an image linked to is actually present in the imageinfo file.</xd:short>
+        <xd:short>Verify an image linked to is present in the imageinfo file.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:is-image-present" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:sequence select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px') != ''"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Show a warning if an image linked to is note present in the imageinfo file.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:verify-linked-image">
         <xsl:param name="url" as="xs:string"/>
 
-        <xsl:variable name="width">
-            <xsl:value-of select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px')"/>
-        </xsl:variable>
-        <xsl:if test="$width = ''">
+        <xsl:if test="f:is-image-present($url)">
             <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
         </xsl:if>
     </xsl:function>
@@ -138,6 +147,7 @@
     </xd:doc>
 
     <xsl:template name="insertimage2">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="alt" select="''" as="xs:string"/>
         <xsl:param name="format" select="'.jpg'" as="xs:string"/>
         <xsl:param name="filename" select="''" as="xs:string"/>
@@ -203,6 +213,7 @@
     </xd:doc>
 
     <xsl:template name="generate-image-wrapper">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="imagefile" as="xs:string"/>
 
         <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:variable>
@@ -245,7 +256,7 @@
 
     <xsl:template match="figure[f:is-inline(.)]">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
                 <xsl:call-template name="insertimage">
@@ -264,7 +275,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule"/>
             <xsl:apply-templates mode="css"/>
@@ -273,7 +284,7 @@
 
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:call-template name="generate-image-width-css-rule">
                 <xsl:with-param name="format" select="'.png'"/>
@@ -284,6 +295,7 @@
 
 
     <xsl:template name="generate-image-width-css-rule">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:param name="format" select="'.jpg'"/>
 
         <!-- Create a special CSS rule for setting the width of this image -->
@@ -317,7 +329,7 @@ width:{$width};
 
     <xsl:template match="figure">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
                 <xsl:call-template name="closepar"/>
@@ -360,6 +372,8 @@ width:{$width};
     </xd:doc>
 
     <xsl:template name="figure-head-top">
+        <xsl:context-item as="element()" use="required"/>
+
         <xsl:if test="head[f:position-annotation(@rend) = 'figTop']">
             <xsl:apply-templates select="head[f:position-annotation(@rend) = 'figTop']" mode="figAnnotation"/>
         </xsl:if>
@@ -371,6 +385,8 @@ width:{$width};
     </xd:doc>
 
     <xsl:template name="figure-annotations-top">
+        <xsl:context-item as="element()" use="required"/>
+
         <xsl:if test="p[f:has-top-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
@@ -404,6 +420,8 @@ width:{$width};
     </xd:doc>
 
     <xsl:template name="figure-annotations-bottom">
+        <xsl:context-item as="element()" use="required"/>
+
         <xsl:if test="p[f:has-bottom-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
@@ -552,7 +570,7 @@ width:{$width};
 
 
     <xsl:template match="graphic">
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <!-- handle both P3 @url and P5 @target convention -->
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
             <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
@@ -561,7 +579,7 @@ width:{$width};
 
 
     <xsl:template match="graphic" mode="css">
-        <xsl:if test="f:is-set('includeImages')">
+        <xsl:if test="f:is-set('images.include')">
             <xsl:variable name="url" select="if (@url) then @url else @target"/>
             <xsl:copy-of select="f:output-image-width-css(., $url)"/>
         </xsl:if>

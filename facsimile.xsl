@@ -198,7 +198,7 @@
 <xsl:template name="facsimile-html-head">
     <head>
         <title>
-            <!-- TODO: neat method to render title for this and similar cases -->
+            <!-- TODO: neat function to render title for this and similar cases -->
             <xsl:value-of select="$author"/>
             <xsl:text>, </xsl:text>
             <xsl:value-of select="$title"/>
@@ -306,9 +306,9 @@
 
 
 <xd:doc>
-    <xd:short>Find out in which div-elements a given pd-element is at the end.</xd:short>
-    <xd:detail>Find out in which div-elements a given pd-element is at the end, which means, there is no content following it.
-    This is done in the following steps:
+    <xd:short>Find out in whether a pd-element is at the end of a division.</xd:short>
+    <xd:detail>Find out in whether a pd-element is at the end of a division, which means no content is following it.
+    This is done using the following steps:
 
     <ol>
         <li>Select all relevant (div-element) ancestors.</li>
@@ -320,7 +320,7 @@
 </xd:doc>
 
 <xsl:function name="f:is-pb-at-end-of-div">
-    <xsl:param name="pb"/>
+    <xsl:param name="pb" as="element(pb)?"/>
 
     <xsl:variable name="div-parent" select="($pb/ancestor::front | $pb/ancestor::body | $pb/ancestor::back | $pb/ancestor::div0 | $pb/ancestor::div1 | $pb/ancestor::div2 | $pb/ancestor::div3)"/>
 
@@ -345,7 +345,7 @@
 </xd:doc>
 
 <xsl:template name="breadcrumb-navigation">
-    <xsl:param name="pb" select="."/>
+    <xsl:param name="pb" select="." as="element(pb)?"/>
 
     <!-- Get the highest-level division of which the pb is at the end -->
     <xsl:variable name="ending-div" select="f:is-pb-at-end-of-div($pb)[1]"/>
