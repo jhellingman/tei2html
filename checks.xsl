@@ -108,11 +108,26 @@
             <xsl:with-param name="segments" select="$segments"/>
         </xsl:call-template>
         -->
+
+        <xsl:variable name="unique-issues">
+            <i:issues>
+                <xsl:for-each-group select="$issues//i:issue" group-by="f:issue-grouping-key(.)">
+                    <xsl:copy-of select="."/>
+                </xsl:for-each-group>
+            </i:issues>
+        </xsl:variable>
+
         <xsl:call-template name="output-issues">
-            <xsl:with-param name="issues" select="$issues"/>
+            <xsl:with-param name="issues" select="$unique-issues"/>
         </xsl:call-template>
-        <xsl:apply-templates mode="report" select="$issues"/>
+        <xsl:apply-templates mode="report" select="$unique-issues"/>
     </xsl:template>
+
+
+    <xsl:function name="f:issue-grouping-key" as="xs:string">
+        <xsl:param name="issue" as="element(i:issue)"/>
+        <xsl:sequence select="$issue/@pos || ':' || $issue/@target || ':' || string($issue)"/>
+    </xsl:function>
 
 
     <xsl:function name="f:get-page" as="xs:string?">
@@ -266,6 +281,7 @@
 
     <xsl:template mode="checks" match="idno[@type='epub-id'][not(matches(., $guidFormat))]">
         <i:issue pos="{@pos}" code="H02" category="Header" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+        <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="titleStmt/author[not(@key) and not(. = ('Anonymous', 'Anoniem'))]" priority="1">
@@ -523,17 +539,22 @@
         <xsl:call-template name="sequence-in-order">
             <xsl:with-param name="elements" select="//pb[not(ancestor::note)]"/>
         </xsl:call-template>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
     <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD -->
     <xsl:template mode="checks" match="front/pb[not(preceding::titlePage)] | body/pb | back/pb">
         <i:issue pos="{@pos}" code="T14" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">pb element directly under front, body, or back.</i:issue>
+
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
     <xsl:template mode="checks" match="text/pb">
         <i:issue pos="{@pos}" code="T15" category="Pagebreaks" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">pb element directly under text.</i:issue>
+
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -562,6 +583,7 @@
         <xsl:if test="not(.) or . = ''">
             <i:issue pos="{@pos}" code="S03" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Empty note.</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -569,6 +591,7 @@
         <xsl:if test=". != ''">
             <i:issue pos="{@pos}" code="S04" category="Notes" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Note with @sameAs attribute must be empty.</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -602,6 +625,7 @@
             <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Both genererated and original ToC present.</i:issue>
         </xsl:if>
 
+        <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
     <xsl:key name="id" match="*[@id]" use="@id"/> 
@@ -628,6 +652,7 @@
         <xsl:if test="not(div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']) and not(./div[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image'])">
             <i:issue pos="{@pos}" code="E02" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -640,6 +665,7 @@
         <xsl:if test="not(.//divGen[@type='Colophon'])">
             <i:issue pos="{@pos}" code="E03" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No generated colophon in backmatter (divGen type="Colophon").</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -693,7 +719,7 @@
     <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisement', 'Advertisements', 'Glossary', 'Errata'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
     <xsl:variable name="expectedBodyDiv1Types" select="'Chapter', 'Poem', 'Story', 'Article', 'Letter'" as="xs:string*"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Glossary', 'Vocabulary', 'Advertisement', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Conclusion', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Glossary', 'Vocabulary', 'Advertisement', 'Advertisements'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
@@ -876,7 +902,7 @@
 
     <!-- Elements not valid in TEI, but sometimes abused while producing a text from HTML. -->
 
-    <xsl:template mode="checks" match="i | b | sc | uc | tt | asc">
+    <xsl:template mode="checks" match="i | b | g | sc | uc | tt | asc">
         <i:issue pos="{@pos}" code="X01" category="Compliance" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -892,21 +918,36 @@
     </xsl:template>
 
 
-    <xsl:template mode="checks" match="hi[@rend='sc'] | sc" priority="2">
+    <xsl:template mode="checks" match="hi[@rend='asc'] | asc" priority="2">
         <xsl:if test="string(.) = lower-case(string(.))">
-            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">All small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
 
+    <xsl:template mode="checks" match="hi[@rend='ex'] | g">
+        <xsl:if test="contains(lower-case(string(.)), 'ij')">
+            <i:issue pos="{@pos}" code="Y01" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Letterspaced text contains diagraph ij: <xsl:value-of select="string(.)"/>.</i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+        <xsl:next-match/>
+    </xsl:template>
+
 
     <!-- Correction corrects nothing -->
 
-    <xsl:template mode="checks" match="corr">
+    <xsl:template mode="checks" match="corr[@sic]">
         <xsl:if test="string(.) = string(@sic)">
             <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
+
+    <xsl:template mode="checks" match="corr[sic]">
+        <xsl:if test="string(corr) = string(sic)">
+            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="string(corr)"></xsl:value-of>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -916,6 +957,7 @@
 
     <xsl:template mode="checks" match="figure[@url]">
         <i:issue pos="{@pos}" code="F01" category="Compliance" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"></xsl:value-of>&rdquo;.</i:issue>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
@@ -923,6 +965,7 @@
         <xsl:if test="not(head) and not(figDesc)">
             <i:issue pos="{@pos}" code="F02" category="Figures" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">Figure without head or figDesc will not have alt attribute in output.</i:issue>
         </xsl:if>
+        <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
 
