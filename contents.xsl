@@ -304,40 +304,6 @@
 
     <xsl:template match="ab[@type='lineNum']" mode="tochead"/>
 
-    <xd:doc>
-        <xd:short>Handle text styles in chapter heads.</xd:short>
-    </xd:doc>
-
-    <xsl:template match="hi" mode="tochead">
-        <i>
-            <xsl:apply-templates mode="tochead"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='italic']" mode="tochead">
-        <i>
-            <xsl:apply-templates mode="tochead"/>
-        </i>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='bold']" mode="tochead">
-        <b>
-            <xsl:apply-templates mode="tochead"/>
-        </b>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sc']" mode="tochead">
-        <span class="sc">
-            <xsl:apply-templates mode="tochead"/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="hi[@rend='sup']" mode="tochead">
-        <sup>
-            <xsl:apply-templates mode="tochead"/>
-        </sup>
-    </xsl:template>
-
 
     <!--====================================================================-->
     <!-- Same as above, but now modified to have the toc placed in table -->

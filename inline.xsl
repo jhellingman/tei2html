@@ -208,21 +208,21 @@
         <xd:detail>Emphasized text rendered as italics.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="emph">
+    <xsl:template match="emph" mode="#default remove-initial titlePage tochead">
         <i>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
+            <xsl:apply-templates mode="#current"/>
         </i>
     </xsl:template>
 
-    <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscript; sub = subscript -->
+    <!-- Mapped to HTML elements: it = italic; b = bold; sup = superscript; sub = subscript; others handled as CSS class on span element. -->
 
     <xd:doc>
         <xd:short>Italic text.</xd:short>
         <xd:detail>Italic text, indicated with the <code>@rend</code> attribute value <code>it</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='it' or @rend='italic'] | i | em" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='it' or @rend='italic'] | i | em" mode="#default remove-initial titlePage tochead">
         <i>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -234,7 +234,7 @@
         <xd:detail>Bold text, indicated with the <code>@rend</code> attribute value <code>b</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='b' or @rend='bold'] | b | strong" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='b' or @rend='bold'] | b | strong" mode="#default remove-initial titlePage tochead">
         <b>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -246,7 +246,7 @@
         <xd:detail>Superscript text, indicated with the <code>@rend</code> attribute value <code>sup</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sup'] | sup" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='sup'] | sup" mode="#default remove-initial titlePage tochead">
         <sup>
             <xsl:apply-templates mode="#current"/>
         </sup>
@@ -257,7 +257,7 @@
         <xd:detail>Subscript text, indicated with the <code>@rend</code> attribute value <code>sub</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sub'] | sub" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='sub'] | sub" mode="#default remove-initial titlePage tochead">
         <sub>
             <xsl:apply-templates mode="#current"/>
         </sub>
@@ -270,7 +270,7 @@
         <xd:detail>Caps and small-caps text, indicated with the <code>@rend</code> attribute value <code>sc</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='sc'] | sc" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='sc'] | sc" mode="#default remove-initial titlePage tochead">
         <span class="sc">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -282,7 +282,7 @@
         <xd:detail>All small-caps text, indicated with the <code>@rend</code> attribute value <code>asc</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='asc'] | asc" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='asc'] | asc" mode="#default remove-initial titlePage tochead">
         <span class="asc">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -294,7 +294,7 @@
         <xd:detail>Uppercase text, indicated with the <code>@rend</code> attribute value <code>uc</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='uc']" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='uc']" mode="#default remove-initial titlePage tochead">
         <span class="uc">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -306,7 +306,7 @@
         <xd:detail>Letterspace (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='ex'] | g" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='ex'] | g" mode="#default remove-initial titlePage tochead">
         <span class="ex">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -318,7 +318,7 @@
         <xd:detail>Upright (in an italic context) text, indicated with the <code>@rend</code> attribute value <code>rm</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='rm'] | rm" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='rm'] | rm" mode="#default remove-initial titlePage tochead">
         <span class="rm">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -330,7 +330,7 @@
         <xd:detail>Type-writer (monospaced) text, indicated with the <code>@rend</code> attribute value <code>tt</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='tt'] | tt" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='tt'] | tt" mode="#default remove-initial titlePage tochead">
         <span class="tt">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
@@ -342,7 +342,7 @@
         <xd:detail>Underlined text, indicated with the <code>@rend</code> attribute value <code>underline</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='underline'] | u" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='underline'] | u" mode="#default remove-initial titlePage tochead">
         <span class="underline">
             <xsl:apply-templates mode="#current"/>
         </span>
@@ -353,7 +353,7 @@
         <xd:detail>Overlined text, indicated with the <code>@rend</code> attribute value <code>overline</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='overline']" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='overline']" mode="#default remove-initial titlePage tochead">
         <span class="overline">
             <xsl:apply-templates mode="#current"/>
         </span>
@@ -364,7 +364,7 @@
         <xd:detail>Text spanned with a wide tilde, indicated with the <code>@rend</code> attribute value <code>overtilde</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi[@rend='overtilde']" mode="#default remove-initial titlePage">
+    <xsl:template match="hi[@rend='overtilde']" mode="#default remove-initial titlePage tochead">
         <span class="overtilde">
             <xsl:apply-templates mode="#current"/>
         </span>
@@ -375,9 +375,9 @@
         <xd:detail>Highlighted text with other values for the <code>@rend</code> attribute.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="hi" mode="#default remove-initial titlePage">
+    <xsl:template match="hi" mode="#default remove-initial titlePage tochead">
         <xsl:choose>
-            <!-- Test covers any potential rendition ladder -->
+            <!-- Does this hi contain an explicit rendering or style value -->
             <xsl:when test="contains(@rend, '(') or @style or @rendition">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -401,7 +401,7 @@
         See <a href="https://en.wikipedia.org/wiki/ISO_15924">ISO-15924</a> for script codes.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="foreign" mode="#default remove-initial titlePage">
+    <xsl:template match="foreign" mode="#default remove-initial titlePage tochead">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="script" select="f:map-language-to-script(@lang)"/>
