@@ -9,7 +9,7 @@ main();
 
 my $pageNumber = 0;
 
-sub main() {
+sub main {
 
     my $page = '';
 
@@ -26,8 +26,7 @@ sub main() {
 }
 
 
-sub handlePage($) {
-
+sub handlePage {
     my $page = shift;
     my @matches = $page =~ /\[Footnote ([0-9]+|[A-Z]): (.*?)\]\n/smg;
 
@@ -46,8 +45,7 @@ sub handlePage($) {
 }
 
 
-sub moveNoteInline($$$) {
-
+sub moveNoteInline {
     my $page = shift;
     my $number = shift;
     my $note = shift;
@@ -65,7 +63,7 @@ sub moveNoteInline($$$) {
 }
 
 
-sub natatime ($@) {
+sub natatime {
     my $n = shift;
     my @list = @_;
 

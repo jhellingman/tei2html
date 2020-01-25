@@ -26,18 +26,20 @@ my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $makeHeatMap = 0;    # Set to 1 to generate a heat-map document.
 my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
-my $idBook = 1;
+my $xmlReport = 0;      # Set to 1 to generate a report in xml.
+my $idBook = 0;
 my $docTitle = "Title";
 my $docAuthor = "Author";
 
 GetOptions(
     'v' => \$verbose,
+    'x' => \$xmlReport,
     'r' => \$retrograd,
     'i' => \$ignoreLanguage,
     'm' => \$makeHeatMap);
 
 if (!defined $ARGV[0]) {
-    die "usage: ucwords.pl -imrv <filename>";
+    die "usage: ucwords.pl -imrvx <filename>";
 }
 
 my $inputFile = $ARGV[0];
@@ -100,11 +102,13 @@ main();
 
 sub main {
     # loadScannoFile("en");
-    collectWords();
+    collectWords($inputFile);
     loadGoodBadWords();
 
     report();
-    # reportXML();
+    if ($xmlReport == 1) {
+        reportXML();
+    }
     if ($makeHeatMap == 1) {
         makeHeatMap();
     }
@@ -327,11 +331,11 @@ sub heatMapPair() {
 
 ####################################################
 #
-# Collecting the words from the text.
+# Collect words from the text.
 #
 
 
-sub loadDocument($) {
+sub loadDocument {
     my $inputFile = shift;
     open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
     while (<INPUTFILE>) {
@@ -344,7 +348,8 @@ sub loadDocument($) {
 #
 # collectWords
 #
-sub collectWords() {
+sub collectWords {
+    my $inputFile = shift;
     loadDocument($inputFile);
 
     foreach my $line (@lines) {
@@ -401,12 +406,12 @@ sub report() {
 }
 
 
-sub reportXML() {
+sub reportXML {
     open (USAGEFILE, ">usage.xml") || die("Could not create output file 'usage.xml'");
 
     print USAGEFILE "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-    print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"http://www.gutenberg.ph/xslt/usage.xsl\"?>";
-    print USAGEFILE "<usage>\n";
+    # print USAGEFILE "<?xml-stylesheet type=\"text/xsl\" href=\"http://www.gutenberg.ph/xslt/usage.xsl\"?>";
+    print USAGEFILE "<usage" . ($idBook != 0 ? " idBook='$idBook'" : "") .  ">\n";
 
     reportWordsXML();
     reportNonWordsXML();

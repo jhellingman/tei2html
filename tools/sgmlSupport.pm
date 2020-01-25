@@ -1802,6 +1802,20 @@ BEGIN {
     $ent{'Zhbarb'}      = 'Z' . chr(0x035F) . 'h'; # Zh with double macron below
     $ent{'ZHbarb'}      = 'Z' . chr(0x035F) . 'H'; # ZH with double macron below
 
+    $ent{'Ecibb'}       = chr(0x00CA) . chr(0x0331); # E with circumflex and macron below
+    $ent{'ecibb'}       = chr(0x00EA) . chr(0x0331); # e with circumflex and macron below
+    $ent{'icibrb'}      = chr(0x00EE) . chr(0x032E); # i with circumflex and breve below
+    $ent{'idtmac'}      = 'i' . chr(0x0307) . chr(0x0304); # i with dot and macron above
+    $ent{'Oacbb'}       = chr(0x00D3) . chr(0x0331); # O with acute and macron below
+    $ent{'oacbb'}       = chr(0x00F3) . chr(0x0331); # o with acute and macron below
+    $ent{'oacub'}       = chr(0x00F3) . chr(0x0324); # o with acute and diaresis below
+    $ent{'ocibb'}       = chr(0x00F4) . chr(0x0331); # o with circumflex and macron below
+    $ent{'Omacbb'}      = chr(0x014C) . chr(0x0331); # O with macron and macron below
+    $ent{'omacbb'}      = chr(0x014D) . chr(0x0331); # o with macron and macron below
+
+    $ent{'iabrevb'}     = 'i' . chr(0x035C) . 'a'; # ia with doube breve below
+
+
     $ent{'ngtilde'}     = 'n' . chr(0x0360) . 'g'; # ng with double tilde
     $ent{'Ngtilde'}     = 'N' . chr(0x0360) . 'g'; # Ng with double tilde
     $ent{'NGtilde'}     = 'N' . chr(0x0360) . 'G'; # NG with double tilde
