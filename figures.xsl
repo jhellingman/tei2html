@@ -83,11 +83,8 @@
 
     <xsl:template name="insertimage">
         <xsl:context-item as="element()" use="required"/>
-        <xsl:param name="alt" select="''" as="xs:string"/>
-        <xsl:param name="defaultformat" select="'.jpg'" as="xs:string"/>
-
-        <xsl:variable name="alt" select="f:determine-image-alt-text(., $alt)" as="xs:string"/>
-        <xsl:variable name="filename" select="f:determine-image-filename(., $defaultformat)"/>
+        <xsl:param name="alt" as="xs:string"/>
+        <xsl:param name="filename" as="xs:string"/>
 
         <!-- Should we link to an external image? -->
         <xsl:choose>
@@ -97,7 +94,7 @@
                 <a>
                     <xsl:choose>
                         <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
-                            <!-- cannot directly link to image file in ePub, need to generate wrapper html and link to that. -->
+                            <!-- cannot directly link to image file in ePub, so generate wrapper html and link to that. -->
                             <xsl:call-template name="generate-image-wrapper">
                                 <xsl:with-param name="imagefile" select="$url"/>
                             </xsl:call-template>
@@ -239,10 +236,15 @@
     <xsl:template match="figure[f:is-inline(.)]">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:is-set('images.include')">
+
+            <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
+            <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
                 <xsl:call-template name="insertimage">
-                    <xsl:with-param name="defaultformat" select="'.png'"/>
+                    <xsl:with-param name="filename" select="$filename"/>
+                    <xsl:with-param name="alt" select="$alt"/>
                 </xsl:call-template>
             </span>
         </xsl:if>
@@ -257,32 +259,26 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
+
+        <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
+
         <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
-            <xsl:call-template name="generate-image-width-css-rule"/>
+            <xsl:copy-of select="f:output-image-width-css(., $file)"/>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">
+
+        <xsl:variable name="file" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+
         <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
-            <xsl:call-template name="generate-image-width-css-rule">
-                <xsl:with-param name="format" select="'.png'"/>
-            </xsl:call-template>
+            <xsl:copy-of select="f:output-image-width-css(., $file)"/>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
-    </xsl:template>
-
-
-    <xsl:template name="generate-image-width-css-rule">
-        <xsl:context-item as="element()" use="required"/>
-        <xsl:param name="format" select="'.jpg'"/>
-
-        <!-- Create a special CSS rule for setting the width of this image -->
-        <xsl:variable name="file" select="f:determine-image-filename(., $format)" as="xs:string"/>
-        <xsl:copy-of select="f:output-image-width-css(., $file)"/>
     </xsl:template>
 
 
@@ -311,6 +307,10 @@ width:{$width};
 
     <xsl:template match="figure">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
+
+        <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
+
         <xsl:if test="f:is-set('images.include')">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
@@ -336,7 +336,8 @@ width:{$width};
                 <xsl:call-template name="figure-annotations-top"/>
 
                 <xsl:call-template name="insertimage">
-                    <xsl:with-param name="alt" select="if (figDesc) then figDesc else (if (head) then head else '')"/>
+                    <xsl:with-param name="filename" select="$filename"/>
+                    <xsl:with-param name="alt" select="$alt"/>
                 </xsl:call-template>
 
                 <xsl:call-template name="figure-annotations-bottom"/>
