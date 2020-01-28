@@ -61,6 +61,14 @@
     </xsl:function>
 
 
+    <xsl:function name="f:determine-image-alt-text" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="default" as="xs:string"/>
+
+        <xsl:sequence select="if ($node/figDesc) then $node/figDesc else (if ($node/head) then $node/head else $default)"/>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Insert an image in the output (step 1).</xd:short>
         <xd:detail>
@@ -69,14 +77,17 @@
             <p>This template generates the elements surrounding the actual image tag in the output.</p>
         </xd:detail>
         <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
-        <xd:param name="format" type="string">The default file-extension of the image file.</xd:param>
+        <xd:param name="defaultformat" type="string">The default file-extension of the image file.</xd:param>
     </xd:doc>
 
 
     <xsl:template name="insertimage">
         <xsl:context-item as="element()" use="required"/>
         <xsl:param name="alt" select="''" as="xs:string"/>
-        <xsl:param name="format" select="'.jpg'" as="xs:string"/>
+        <xsl:param name="defaultformat" select="'.jpg'" as="xs:string"/>
+
+        <xsl:variable name="alt" select="f:determine-image-alt-text(., $alt)" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(., $defaultformat)"/>
 
         <!-- Should we link to an external image? -->
         <xsl:choose>
@@ -96,17 +107,11 @@
                             <xsl:attribute name="href"><xsl:value-of select="$url"/></xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:call-template name="insertimage2">
-                        <xsl:with-param name="alt" select="$alt" as="xs:string"/>
-                        <xsl:with-param name="format" select="$format" as="xs:string"/>
-                    </xsl:call-template>
+                    <xsl:copy-of select="f:output-image($filename, $alt)"/>
                 </a>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="insertimage2">
-                    <xsl:with-param name="alt" select="$alt" as="xs:string"/>
-                    <xsl:with-param name="format" select="$format" as="xs:string"/>
-                </xsl:call-template>
+                <xsl:copy-of select="f:output-image($filename, $alt)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -134,29 +139,6 @@
             <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
         </xsl:if>
     </xsl:function>
-
-
-    <xd:doc>
-        <xd:short>Insert an image in the output (step 2).</xd:short>
-        <xd:detail>
-            <p>Insert the actual <code>img</code>-element in the output HTML.</p>
-        </xd:detail>
-        <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
-        <xd:param name="format" type="string">The default file-extension of the image file.</xd:param>
-        <xd:param name="filename" type="string">The name of the image file (may be left empty).</xd:param>
-    </xd:doc>
-
-    <xsl:template name="insertimage2">
-        <xsl:context-item as="element()" use="required"/>
-        <xsl:param name="alt" select="''" as="xs:string"/>
-        <xsl:param name="format" select="'.jpg'" as="xs:string"/>
-        <xsl:param name="filename" select="''" as="xs:string"/>
-
-        <xsl:variable name="alt" select="if (figDesc) then figDesc else $alt" as="xs:string"/>
-        <xsl:variable name="file" select="if ($filename != '') then $filename else f:determine-image-filename(., $format)" as="xs:string"/>
-
-        <xsl:copy-of select="f:output-image($file, $alt)"/>
-    </xsl:template>
 
 
     <xd:doc>
@@ -260,7 +242,7 @@
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
                 <xsl:call-template name="insertimage">
-                    <xsl:with-param name="format" select="'.png'"/>
+                    <xsl:with-param name="defaultformat" select="'.png'"/>
                 </xsl:call-template>
             </span>
         </xsl:if>

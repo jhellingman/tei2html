@@ -423,11 +423,7 @@
             <tr>
                 <td><b><xsl:value-of select="f:message('msgQrCode')"/>:</b></td>
                 <td colspan="2">
-                    <xsl:call-template name="insertimage2">
-                        <xsl:with-param name="alt" select="f:message('msgQrCodePgUrl')" as="xs:string"/>
-                        <xsl:with-param name="format" select="'.png'" as="xs:string"/>
-                        <xsl:with-param name="filename" select="'images/qrcode.png'"/>
-                    </xsl:call-template>
+                    <xsl:copy-of select="f:output-image('images/qrcode.png', f:message('msgQrCodePgUrl'))"/>
                 </td>
             </tr>
         </xsl:if>

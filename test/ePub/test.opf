@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2019-10-31T20:30:42Z</meta>
+      <meta property="dcterms:modified">2020-01-28T19:28:42Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/123456789</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -110,7 +110,7 @@
             href="test-figTest2.xhtml"
             media-type="application/xhtml+xml"/>
       <item id="ch01overlay" href="test.smil" media-type="application/smil+xml"/>
-      <item id="xd190e11" href="audio/test.mp3" media-type="audio/mpeg"/>
+      <item id="xd191e11" href="audio/test.mp3" media-type="audio/mpeg"/>
       <item id="tn1" href="images/thumbs/tarsier.jpg" media-type="image/jpeg"/>
       <item id="tn2" href="images/thumbs/cover500.jpg" media-type="image/jpeg"/>
       <item id="tn3" href="images/thumbs/hg2101.png" media-type="image/png"/>
