@@ -1,10 +1,17 @@
 
+# XSLT Domain #
 
-# Use of the `@type` attribute #
+In the XSLT domain, the main naming convention uses dashes, so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use *camelCase*.
+
+# TEI Domain #
+
+In the TEI domain, the main naming convention is *camelCase*, so for names primarily used in a TEI context, we follow that.
+
+## Use of the `@type` attribute ##
 
 The `@type` attribute can indicate a sub-class or special use of a certain element.
 
-## Special values ##
+### Special values ###
 
 The following table gives special values for the `@type` attribute in various contexts. These are
 handled in a special way when processing the TEI file.
