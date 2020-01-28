@@ -81,7 +81,7 @@
     </xd:doc>
 
 
-    <xsl:template name="insertimage">
+    <xsl:template name="output-image-with-optional-link">
         <xsl:context-item as="element()" use="required"/>
         <xsl:param name="alt" as="xs:string"/>
         <xsl:param name="filename" as="xs:string"/>
@@ -196,20 +196,7 @@
         <xsl:param name="imagefile" as="xs:string"/>
 
         <xsl:variable name="filename"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:variable>
-
-        <xsl:variable name="alt">
-            <xsl:choose>
-                <xsl:when test="figDesc">
-                    <xsl:value-of select="figDesc"/>
-                </xsl:when>
-                <xsl:when test="head">
-                    <xsl:value-of select="head"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="''"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:variable name="alt" select="f:determine-image-alt-text(., '')"/>
 
         <xsl:result-document href="{$path}/{$filename}">
             <xsl:copy-of select="f:log-info('Generated image wrapper file: {1}/{2}.', ($path, $filename))"/>
@@ -242,7 +229,7 @@
 
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
-                <xsl:call-template name="insertimage">
+                <xsl:call-template name="output-image-with-optional-link">
                     <xsl:with-param name="filename" select="$filename"/>
                     <xsl:with-param name="alt" select="$alt"/>
                 </xsl:call-template>
@@ -260,11 +247,11 @@
 
     <xsl:template match="figure" mode="css">
 
-        <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
 
         <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
-            <xsl:copy-of select="f:output-image-width-css(., $file)"/>
+            <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
     </xsl:template>
@@ -272,11 +259,11 @@
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">
 
-        <xsl:variable name="file" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
 
         <xsl:if test="f:is-set('images.include')">
             <xsl:call-template name="generate-css-rule"/>
-            <xsl:copy-of select="f:output-image-width-css(., $file)"/>
+            <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
     </xsl:template>
@@ -284,8 +271,8 @@
 
     <xsl:function name="f:output-image-width-css">
         <xsl:param name="node" as="node()"/>
-        <xsl:param name="file" as="xs:string"/>
-        <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+        <xsl:param name="filename" as="xs:string"/>
+        <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$filename]/@width" as="xs:string?"/>
         <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id($node) || 'width')"/>
 
         <xsl:if test="$width != ''"><xsl:text expand-text="yes">
@@ -294,7 +281,6 @@ width:{$width};
 }}
 </xsl:text></xsl:if>
     </xsl:function>
-
 
 
     <xd:doc>
@@ -335,7 +321,7 @@ width:{$width};
                 <xsl:call-template name="figure-head-top"/>
                 <xsl:call-template name="figure-annotations-top"/>
 
-                <xsl:call-template name="insertimage">
+                <xsl:call-template name="output-image-with-optional-link">
                     <xsl:with-param name="filename" select="$filename"/>
                     <xsl:with-param name="alt" select="$alt"/>
                 </xsl:call-template>
