@@ -1099,6 +1099,13 @@ sub entities2iso88591($) {
     $string =~ s/\&nbrevdotb;/n/g;
     $string =~ s/\&nchndrb;/n/g;         # n chandrabindu
 
+    $string =~ s/\&iabrevb;/ia/g;        # ia with breve below
+    $string =~ s/\&oacbb;/o/g;           # o with acute and bar below
+    $string =~ s/\&ocibb;/o/g;           # o with circumflex and bar below
+    $string =~ s/\&omacbb;/o/g;          # o with macron and bar below
+    $string =~ s/\&icibrb;/i/g;          # i with circumflex and breve below
+    $string =~ s/\&idtmac;/i/g;          # i with dot and macron above
+
     $string =~ s/\&cslash;/¢/g;
     $string =~ s/\&grchi;/x/g;
     $string =~ s/\&omactil;/o/g;
@@ -1127,7 +1134,6 @@ sub entities2iso88591($) {
     $string =~ s/\&emsp;/  /g;   # em-space
     $string =~ s/\&male;/[male]/g;   # male
     $string =~ s/\&female;/[female]/g;   # female
-    $string =~ s/\&Lambda;/[Lambda]/g;   # Greek capital letter lambda
     $string =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
     $string =~ s/\&ast;/*/g; # asterix
 

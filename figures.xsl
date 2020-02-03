@@ -61,11 +61,56 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine the alternate text for an image.</xd:short>
+        <xd:param name="node" type="node()">The figure or graphic element for which the alternate text needs to be determined.</xd:param>
+        <xd:param name="default" type="string">The default alternate text.</xd:param>
+    </xd:doc>
+
     <xsl:function name="f:determine-image-alt-text" as="xs:string">
         <xsl:param name="node" as="element()"/>
         <xsl:param name="default" as="xs:string"/>
 
         <xsl:sequence select="if ($node/figDesc) then $node/figDesc else (if ($node/head) then $node/head else $default)"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Determine whether an image should be included in the output.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:is-image-included" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:variable name="is-image-included" select="f:is-set('images.include') and (f:is-image-present($url) or not(f:is-set('images.requireInfo')))"/>
+        <xsl:if test="not($is-image-included)">
+            <xsl:copy-of select="f:log-warning('Image {1} will not be included in output file!', ($url))"/>
+        </xsl:if>
+        <xsl:sequence select="$is-image-included"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Verify an image is present in the imageinfo file.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:is-image-present" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:sequence select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px') != ''"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Verify an image is present in the imageinfo file and show a warning otherwise.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:verify-linked-image">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:if test="f:is-image-present($url)">
+            <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
+        </xsl:if>
     </xsl:function>
 
 
@@ -112,30 +157,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
-
-    <xd:doc>
-        <xd:short>Verify an image linked to is present in the imageinfo file.</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:is-image-present" as="xs:boolean">
-        <xsl:param name="url" as="xs:string"/>
-
-        <xsl:sequence select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px') != ''"/>
-    </xsl:function>
-
-
-    <xd:doc>
-        <xd:short>Show a warning if an image linked to is note present in the imageinfo file.</xd:short>
-    </xd:doc>
-
-    <xsl:function name="f:verify-linked-image">
-        <xsl:param name="url" as="xs:string"/>
-
-        <xsl:if test="f:is-image-present($url)">
-            <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
-        </xsl:if>
-    </xsl:function>
 
 
     <xd:doc>
@@ -222,11 +243,11 @@
 
     <xsl:template match="figure[f:is-inline(.)]">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="f:is-set('images.include')">
 
-            <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
-            <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+        <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
 
+        <xsl:if test="f:is-image-included($filename)">
             <span>
                 <xsl:copy-of select="f:set-class-attribute(.)"/>
                 <xsl:call-template name="output-image-with-optional-link">
@@ -246,10 +267,9 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-
         <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
 
-        <xsl:if test="f:is-set('images.include')">
+        <xsl:if test="f:is-image-included($filename)">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
             <xsl:apply-templates mode="css"/>
@@ -258,10 +278,9 @@
 
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">
-
         <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
 
-        <xsl:if test="f:is-set('images.include')">
+        <xsl:if test="f:is-image-included($filename)">
             <xsl:call-template name="generate-css-rule"/>
             <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
             <xsl:apply-templates mode="css"/>
@@ -297,7 +316,7 @@ width:{$width};
         <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
         <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
 
-        <xsl:if test="f:is-set('images.include')">
+        <xsl:if test="f:is-image-included($filename)">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
                 <!-- figure will be rendered outside a paragraph context if position is abovehead. -->
                 <xsl:call-template name="closepar"/>
@@ -539,17 +558,18 @@ width:{$width};
 
 
     <xsl:template match="graphic">
-        <xsl:if test="f:is-set('images.include')">
-            <!-- handle both P3 @url and P5 @target convention -->
-            <xsl:variable name="url" select="if (@url) then @url else @target"/>
+        <!-- handle both P3 @url and P5 @target convention -->
+        <xsl:variable name="url" select="if (@url) then @url else @target"/>
+        
+        <xsl:if test="f:is-image-included($url)">
             <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="graphic" mode="css">
-        <xsl:if test="f:is-set('images.include')">
-            <xsl:variable name="url" select="if (@url) then @url else @target"/>
+        <xsl:variable name="url" select="if (@url) then @url else @target"/>
+        <xsl:if test="f:is-image-included($url)">
             <xsl:copy-of select="f:output-image-width-css(., $url)"/>
         </xsl:if>
     </xsl:template>

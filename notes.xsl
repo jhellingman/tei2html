@@ -98,7 +98,7 @@
         <xd:short>Handle duplicated footnotes.</xd:short>
         <xd:detail>Handle duplicated footnotes. This template handles the placement of the footnote marker
         only. Als see the handling of <code>ref</code> elements with <code>@type="noteref"</code> for
-        an alternative representation of the same situation.</xd:detail>
+        an alternative (depricated) representation of the same situation.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@sameAs]" priority="1">
