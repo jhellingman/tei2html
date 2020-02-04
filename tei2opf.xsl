@@ -442,6 +442,8 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template match="figure[figure]" mode="manifest"/>
+
 
     <xd:doc>
         <xd:short>Generate a manifest entry for formula images.</xd:short>
@@ -765,6 +767,8 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
+
+    <xsl:template match="figure[figure]" mode="spine-links"/>
 
 
     <!--== guides ==========================================================-->

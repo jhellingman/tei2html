@@ -1142,6 +1142,10 @@ border-bottom:2px solid black;
 background-color:white;
 }
 
+.cover-imagewidth {
+width:500px;
+}
+
 .xd33e107 {
 font-style:italic;
 }
@@ -1156,6 +1160,10 @@ font-family:'Walbaum-Fraktur';
 
 .xd33e171 {
 font-size:14pt; color:red; background-color:yellow;
+}
+
+.hg2101width {
+width:96px;
 }
 
 .xd33e407 {
@@ -1304,8 +1312,8 @@ width:480px;
 width:480px;
 }
 
-.xd33e1243width {
-width:480px;
+.grasseswidth {
+width:580px;
 }
 
 .xd33e1262 {

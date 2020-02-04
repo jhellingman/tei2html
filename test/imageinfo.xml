@@ -1,11 +1,52 @@
 <images xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo">
-    <image path="images/initial-A.gif" filesize="3009" filedate="2006-02-05 23:17:04" width="128px" height="143px">
-        <leftBoundary level="10" step="10px">27, 8, 6, 18, 2, 2, 9, 12, 5, 8, 9, 13, 28, 37, 44</leftBoundary>
-        <rightBoundary level="10" step="10px">34, 2, 7, 9, 24, 42, 40, 40, 41, 41, 44, 49, 64, 73, 81</rightBoundary>
-    </image>
-    <image path="images/test.jpg" filesize="3080" filedate="2005-03-13 00:02:35" width="80px" height="80px">
-        <leftBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</leftBoundary>
-        <rightBoundary level="10" step="10px">0, 0, 0, 0, 0, 0, 0, 0</rightBoundary>
-    </image>
-    <image path="images/tarsier.jpg" width="480px" height="326px"/>
+<image path="images/audio.png" filesize="192" filedate="2018-12-08 16:25:16" width="13px" height="12px">
+</image>
+<image path="images/book.png" filesize="218" filedate="2010-02-11 21:03:56" width="16px" height="16px">
+</image>
+<image path="images/bracket-left.png" filesize="155" filedate="2018-12-08 16:25:16" width="6px" height="33px">
+</image>
+<image path="images/bracket.png" filesize="156" filedate="2018-12-08 16:25:16" width="6px" height="33px">
+</image>
+<image path="images/bracket3.png" filesize="158" filedate="2018-12-08 16:25:17" width="6px" height="49px">
+</image>
+<image path="images/card.png" filesize="230" filedate="2018-12-08 16:25:17" width="16px" height="11px">
+</image>
+<image path="images/cover500.jpg" filesize="131998" filedate="2018-12-08 16:25:17" width="500px" height="700px">
+</image>
+<image path="images/document.png" filesize="161" filedate="2018-12-08 16:25:17" width="10px" height="12px">
+</image>
+<image path="images/external.png" filesize="159" filedate="2018-12-08 16:25:17" width="12px" height="12px">
+</image>
+<image path="images/hg2101.png" filesize="579" filedate="2018-12-08 16:25:18" width="96px" height="29px">
+</image>
+<image path="images/initial-A.png" filesize="2785" filedate="2018-12-08 16:25:21" width="128px" height="143px">
+</image>
+<image path="images/lbrace2.png" filesize="168" filedate="2018-12-08 16:25:21" width="12px" height="40px">
+</image>
+<image path="images/Ornament.png" filesize="534" filedate="2018-12-08 16:25:22" width="303px" height="18px">
+</image>
+<image path="images/p081.png" filesize="52015" filedate="2019-07-14 11:29:38" width="580px" height="720px">
+</image>
+<image path="images/page-image.png" filesize="131" filedate="2018-12-08 16:25:22" width="10px" height="12px">
+</image>
+<image path="images/qrcode.png" filesize="1015" filedate="2020-02-04 09:52:48" width="148px" height="148px">
+</image>
+<image path="images/rbrace2.png" filesize="166" filedate="2018-12-08 16:25:22" width="12px" height="40px">
+</image>
+<image path="images/tarsier.jpg" filesize="52439" filedate="2018-12-08 16:25:23" width="480px" height="326px">
+</image>
+<image path="images/test.jpg" filesize="2757" filedate="2010-02-11 21:04:54" width="80px" height="80px">
+</image>
+<image path="images/thumbs/cover500.jpg" filesize="2919" filedate="2011-09-26 05:15:56" width="71px" height="100px">
+</image>
+<image path="images/thumbs/tarsier1.jpg" filesize="3454" filedate="2018-12-08 16:25:23" width="100px" height="68px">
+</image>
+<image path="images/thumbs/tarsier2.jpg" filesize="3454" filedate="2018-12-08 16:25:23" width="100px" height="68px">
+</image>
+<image path="images/thumbs/test.jpg" filesize="2757" filedate="2010-02-11 21:04:54" width="80px" height="80px">
+</image>
+<image path="images/thumbs/test1.jpg" filesize="2757" filedate="2010-02-11 21:04:54" width="80px" height="80px">
+</image>
+<image path="images/thumbs/test2.jpg" filesize="2757" filedate="2010-02-11 21:04:54" width="80px" height="80px">
+</image>
 </images>

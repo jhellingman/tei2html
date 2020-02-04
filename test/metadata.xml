@@ -6,9 +6,10 @@
       <dc:creator>Author of Work (Birth-year—Death-year)</dc:creator>
       <dc:creator>A. U. Thor</dc:creator>
       <dc:creator>W. Riter</dc:creator>
+      <dc:creator>E. Ditor</dc:creator>
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA., 2009-12-13</dc:publisher>
       <dc:date>2009-12-13</dc:date>
-      <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See http://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
+      <dc:rights>Details of the copyright status of the work go here. Most Project Gutenberg texts will be in the public domain in the US. This test file itself is released under the GNU General Public License, version 3.0, or any later version. See https://www.gnu.org/copyleft/gpl.html.Typically, the following text will be used:This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at www.gutenberg.org.</dc:rights>
       <dc:subject>TEI (Text Encoding Initiative)</dc:subject>
       <dc:subject>XSLT</dc:subject>
       <dc:subject>HTML</dc:subject>

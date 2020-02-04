@@ -455,21 +455,20 @@ width:{$width};
 
     <xsl:function name="f:position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
-        <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight'
-                                or $position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
+        <xsl:variable name="position" select="f:rend-value($rend, 'position')"/>
+        <xsl:value-of select="if ($position = ('figTopLeft', 'figTop', 'figTopRight', 'figBottomLeft', 'figBottom', 'figBottomRight')) then $position else ''"/>
     </xsl:function>
 
     <xsl:function name="f:top-position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
-        <xsl:value-of select="if ($position = 'figTopLeft' or $position = 'figTop' or $position = 'figTopRight') then $position else ''"/>
+        <xsl:variable name="position" select="f:rend-value($rend, 'position')"/>
+        <xsl:value-of select="if ($position = ('figTopLeft', 'figTop', 'figTopRight')) then $position else ''"/>
     </xsl:function>
 
     <xsl:function name="f:bottom-position-annotation" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:variable name="position" select="substring-before(substring-after($rend, 'position('), ')')"/>
-        <xsl:value-of select="if ($position = 'figBottomLeft' or $position = 'figBottom' or $position = 'figBottomRight') then $position else ''"/>
+        <xsl:variable name="position" select="f:rend-value($rend, 'position')"/>
+        <xsl:value-of select="if ($position = ('figBottomLeft', 'figBottom', 'figBottomRight')) then $position else ''"/>
     </xsl:function>
 
     <xsl:template match="figure/head[not(f:has-position-annotation(@rend))]">
@@ -521,7 +520,8 @@ width:{$width};
 
 
     <xsl:template match="figure[figure]">
-        <div class="compositeFigure">
+        <div>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'compositeFigure')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
@@ -530,6 +530,7 @@ width:{$width};
 
     <xsl:template match="figure[graphic]">
         <div>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'compositeFigure')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
@@ -564,6 +565,15 @@ width:{$width};
         <xsl:if test="f:is-image-included($url)">
             <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="figure[figure]" mode="css">
+        <!-- outer figure typically has no image attached to it -->
+        <xsl:if test="@rend">
+            <xsl:call-template name="generate-css-rule"/>
+        </xsl:if>
+        <xsl:apply-templates mode="css"/>
     </xsl:template>
 
 

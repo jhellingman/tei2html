@@ -969,6 +969,9 @@
         <xsl:next-match/>
     </xsl:template>
 
+    <xsl:template mode="checks" match="figure[figure]">
+        <xsl:apply-templates mode="checks"/>
+    </xsl:template>
 
     <!-- Generic sequence -->
 
