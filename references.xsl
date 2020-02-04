@@ -94,21 +94,6 @@
 
 
     <xd:doc>
-        <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
-        <xd:detail>
-            <p>Make explicit references to a footnote (marked <code>noteref</code>) look exactly 
-            the same as automatically generated footnote references.</p>
-        </xd:detail>
-    </xd:doc>
-
-    <xsl:template match="note" mode="noterefnumber">
-        <a class="pseudonoteref" href="{f:generate-footnote-href(.)}">
-            <xsl:call-template name="footnote-number"/>
-        </a>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Is a node a footnote or inside a footnote?</xd:short>
         <xd:detail>
             <p>This function determines whether a node is a footnote or inside a footnote. This is important,

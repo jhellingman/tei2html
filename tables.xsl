@@ -51,7 +51,7 @@
 
     <xsl:template match="table" mode="render-table">
         <xsl:choose>
-            <xsl:when test="f:is-inline(.) or f:rend-value(@rend, 'class')  = 'intralinear'">
+            <xsl:when test="f:is-inline(.) or f:rend-value(@rend, 'class') = 'intralinear'">
                 <span class="table">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="tablecaption" select="head"/>
@@ -92,6 +92,15 @@
                 <xsl:call-template name="normal-table"/>
             </xsl:otherwise>
         </xsl:choose>
+
+        <xsl:if test=".//note[f:is-table-note(.)][not(@sameAs)]">
+            <div class="footnotes">
+                <xsl:apply-templates select=".//note[f:is-table-note(.)][not(@sameAs)]" mode="footnotes">
+                    <!-- Retain the order of markers, irrespective of the order of encoding the table -->
+                    <xsl:sort select="@n"/>
+                </xsl:apply-templates>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 

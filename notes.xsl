@@ -47,6 +47,12 @@
         <xsl:sequence select="$note/@place = 'apparatus'"/>
     </xsl:function>
 
+    <xsl:function name="f:is-table-note" as="xs:boolean">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:sequence select="$note/@place = ('table')"/>
+    </xsl:function>
+
+
     <!--====================================================================-->
     <!-- Notes -->
 
@@ -200,7 +206,10 @@
 
         <span class="label">
             <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
-                <xsl:call-template name="footnote-number"/>
+                <xsl:choose>
+                    <xsl:when test="f:is-footnote(.)"><xsl:call-template name="footnote-number"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
+                </xsl:choose>
             </a>
         </span>
         <xsl:text> </xsl:text>
@@ -286,6 +295,40 @@
 
 
     <xd:doc>
+        <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
+        <xd:detail>
+            <p>Make explicit references to a footnote (marked with <code>@sameAs</code> or 
+            <code>@type="noteref"</code>) look exactly the same as automatically generated 
+            footnote references.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="note[f:is-footnote(.)]" mode="noterefnumber">
+        <a class="pseudonoteref" href="{f:generate-footnote-href(.)}">
+            <xsl:call-template name="footnote-number"/>
+        </a>
+    </xsl:template>
+
+
+    <!--==== TABLE NOTES ====-->
+
+    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-table-note(.)]">
+        <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
+            <xsl:value-of select="@n"/>
+        </a>
+    </xsl:template>
+
+    <xsl:template match="note[f:is-table-note(.)]" mode="noterefnumber">
+        <!-- @sameAs references must be in the same table -->
+        <a class="pseudonoteref" href="{f:generate-href(.)}">
+            <xsl:value-of select="@n"/>
+        </a>
+    </xsl:template>
+
+
+    <!--==== APPARATUS NOTES ====-->
+
+    <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
         <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with 
         attribute <code>@place="apparatus"</code>) by placing a marker in the text. These notes are only 
@@ -357,6 +400,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Format apparatus notes as separate paragraphs.</xd:short>
@@ -447,6 +491,7 @@
 
 
     <xsl:template name="apparatus-note-marker">
+        <xsl:context-item as="element(note)" use="required"/>
         <span class="label">
             <a class="apparatusnote" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
