@@ -336,6 +336,9 @@ sub centerStringInWidth($$) {
 sub parseTable($) {
     my $table = shift;
     my $tableHead = '';
+
+    # print STDERR "DEBUG: Parsing table: $table.\n";
+
     while (<>) {
         my $line = $_;
 
@@ -362,8 +365,11 @@ sub parseTable($) {
 sub handleTable($) {
     my $table = shift;
     # $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
-    $table =~ /<table\b.*?>(.*?)<\/table>/ms;
-    my $tableContent = $1;
+    $table =~ /<table\b(.*?)>(.*?)<\/table>/ms;
+    my $tableAttributes = $1;
+    my $tableContent = $2;
+
+    # print STDERR "DEBUG: Handling table ID: " . getAttrVal('id', $tableAttributes) . "\n";
 
     my @rows = split(/<row\b.*?>/ms, $tableContent);
 
@@ -383,6 +389,8 @@ sub handleRow($) {
     my @cells = ();
     my @colSpans = ();
     my @rowSpans = ();
+
+    # print STDERR "DEBUG: Handling row\n";
 
     # Every second item contains tag; first cell is empty.
     for (my $i = 0; $i <= $#items; $i++) {
@@ -409,6 +417,7 @@ sub handleRow($) {
         $cell = handleLine(trim($cell));
         push @result, [ handleCell($cell) ];
     }
+
     return @result;
 }
 

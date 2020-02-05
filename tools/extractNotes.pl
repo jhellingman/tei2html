@@ -93,17 +93,17 @@ while (<INPUTFILE>) {
             print "WARNING: (almost) empty note '$noteText' on page $pageNumber (n=$noteNumber)\n";
         }
 
-        if ($sameAs ne "") {
+        if ($sameAs ne '') {
             # Lookup sequence number of original note.
             print OUTPUTFILE "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
-        } elsif ($notePlace eq 'margin' || $notePlace eq 'left' || $notePlace eq 'right') {
+        } elsif ($notePlace eq 'margin' || $notePlace eq 'left' || $notePlace eq 'right' || $notePlace eq 'cut-in-left' || $notePlace eq 'cut-in-right') {
             print OUTPUTFILE "[$noteText] ";
         } else {
             $seqNumber++;
             print OUTPUTFILE " [$seqNumber]$followingSpace";
             print NOTESFILE "[$seqNumber] $noteText\n\n";
 
-            if ($id ne "") {
+            if ($id ne '') {
                 # Store sequence number of this note.
                 $mapNoteIdToSeqNumber{$id} = $seqNumber;
             }
