@@ -147,18 +147,15 @@
     <xd:doc>
         <xd:short>Handle a table caption.</xd:short>
         <xd:detail>
-            <p>The HTML caption element is not correctly handled in some browsers, so lift them out and make them headers.</p>
+            <p>The HTML caption element is not correctly handled in some browsers, so lift table headers out and make them HTML h4 elements.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template mode="tablecaption" match="head">
-        <h4 class="tablecaption">
+        <h4>
+            <xsl:variable name="class" select="if (f:rend-value(../@rend, 'align') = 'center') then 'aligncenter' else '' || 'tablecaption'"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-
-            <!-- TODO: improve handling of table/@rend attribute here -->
-            <xsl:if test="f:rend-value(../@rend, 'align') = 'center'">
-                <xsl:attribute name="class">aligncenter</xsl:attribute>
-            </xsl:if>
             <xsl:apply-templates/>
         </h4>
     </xsl:template>
