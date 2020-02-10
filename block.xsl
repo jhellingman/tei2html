@@ -59,11 +59,11 @@
             <xsl:when test="ancestor::note[@place = ('margin', 'left', 'right')]">
                 <xsl:call-template name="pb-anchor"/>
             </xsl:when>
-            <!-- In HTML, we do not allow a span element at the top-level, so wrap it into a paragraph. -->
+            <!-- HTML does not allow a span element at the top-level, so wrap it in a paragraph. -->
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
-            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separated -->
+            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separate -->
             <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span | ancestor::stage | ancestor::castList">
                 <xsl:call-template name="pb"/>
             </xsl:when>
