@@ -94,7 +94,7 @@
       <x:expect label="will return an expanded HTML link to that target">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="link.pg" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/12345">Link to PG ebook.</a></li>
-           <li id="..."><a id="link.pg.ch05" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/12345/12345-h/12345-h.htm#ch05">Link to chapter in PG ebook.</a></li>
+           <li id="..."><a id="link.pg.ch5" class="pglink link.pg" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/12345/12345-h/12345-h.htm#ch5">Link to chapter in PG ebook.</a></li>
         </ul>
       </x:expect>
    </x:scenario>
@@ -120,7 +120,7 @@
    </x:scenario>
 
 
-   <x:scenario label="When creating a reference to a external target using a shortcut notation (Bible and Quran)">
+   <x:scenario label="When creating references to external targets using a shortcut notation (Bible and Quran)">
       <x:context>
         <list>
             <item><xref id="link.jd" url="bib:Jdg 1:19">Chariots of iron.</xref></item>
@@ -133,7 +133,7 @@
             <item><xref id="link.q2" url="qur:2:42">True or False.</xref></item>
         </list>
       </x:context>
-      <x:expect label="will return an expanded HTML link to that target">
+      <x:expect label="will return expanded HTML links to those target (and some warnings on the console)">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="...">
               <a id="link.jd"

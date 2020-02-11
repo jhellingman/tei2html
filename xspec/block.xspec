@@ -127,4 +127,115 @@
         </x:expect>
     </x:scenario>
 
+    <!-- p -->
+
+    <x:scenario label="When rendering a single TEI paragraph">
+        <x:context>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in a HTML parapgraph">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="..."
+               class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two TEI paragraphs">
+        <x:context>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in two HTML parapgraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="..."
+               class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="...">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a rendering attribute">
+        <x:context>
+            <p rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in a HTML parapgraph with an additional class">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="xd89e1"
+               class="first xd89e1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a rendering attribute (CSS mode)">
+        <x:context mode="css">
+            <p rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="and will result in CSS-class">
+.xd96e1 {
+text-indent:2em;
+}
+</x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a decorative initial">
+        <x:context>
+            <p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="xd101e1"
+               class="xd101e1">
+               <span class="xd101e1init">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a decorative initial (CSS mode)">
+        <x:context mode="css">
+            <p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
+
+.xd106e1 {
+    background: url(images/initial-A.png) no-repeat top left;
+    
+        padding-top: 45px;
+    
+}
+
+.xd106e1init {
+    float: left;
+    width: 90px;
+    height: 95px;
+    background: url(images/initial-A.png) no-repeat;
+    
+        background-position: 0px -45px;
+    
+    text-align: right;
+    color: white;
+    font-size: 1px;
+}
+
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a single TEI paragraph with a table at the end">
+        <x:context>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <table><row><cell>First.</cell><cell>Second.</cell></row></table></p>
+        </x:context>
+        <x:expect label="will result in two HTML parapgraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="xd114e1" class="first">...</p>
+            <div class="table" id="...">
+                <table>
+                    <tr id="...">
+                        <td id="..." class="cellLeft cellTop cellBottom">First.</td>
+                        <td id="..." class="cellRight cellTop cellBottom">Second.</td>
+                    </tr>
+                </table>
+            </div>
+            <p></p>
+        </x:expect>
+    </x:scenario>
+
+
 </x:description>
