@@ -1,5 +1,6 @@
 <!DOCTYPE stylesheet [
 <!ENTITY nbsp  "&#160;" >
+<!ENTITY cr    "&#x0d;" >
 <!ENTITY lf    "&#x0a;" >
 ]>
 
@@ -9,13 +10,15 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:tmp="urn:temporary-items"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs">
+    exclude-result-prefixes="f fn xd xs tmp">
 
+<!--
   <xsl:output 
     method="text"
     indent="no"/>
-
+-->
 
 <!-- tei2txt.xslt - stylesheet to convert TEI files to plain text format -->
 
@@ -73,23 +76,7 @@
 </xsl:template>
 
 
-<xsl:template mode="text" match="l">
-    <xsl:variable name="line">
-        <xsl:apply-templates mode="text"/>
-    </xsl:variable>
 
-    <xsl:variable name="indent" select="4"/>
-
-    <xsl:variable name="lines">
-        <xsl:apply-templates select="f:lines($line, $lineWidth - $indent)"/>
-    </xsl:variable>
-
-    <xsl:for-each select="$lines">
-        <!--<xsl:text>&lf;</xsl:text>-->
-        <xsl:value-of select="f:spaces($indent)"/>
-        <xsl:value-of select="."/>
-    </xsl:for-each>
-</xsl:template>
 
 
 
@@ -110,23 +97,6 @@
 
 
 
-<xsl:template mode="text" match="p">
-    <xsl:call-template name="wordwrap"/>
-</xsl:template>
-
-
-
-<xsl:template name="wordwrap">
-    <xsl:variable name="text">
-        <xsl:apply-templates mode="text"/>
-    </xsl:variable>
-
-    <xsl:text>&lf;</xsl:text>
-    <xsl:apply-templates select="f:wordwrap2($text, $lineWidth)"/>
-</xsl:template>
-
-
-
 
 <xsl:template mode="text" match="hi">
     <xsl:value-of select="$italicStart"/>
@@ -142,26 +112,6 @@
     <xsl:text>] </xsl:text>
 </xsl:template>
 
-
-<!-- MODE: notes -->
-
-<xsl:template mode="notes" match="note">
-    <xsl:text>&lf;[Footnote </xsl:text>
-    <xsl:number count="note" level="any"/>
-    <!-- <xsl:value-of select="@n"/> -->
-    <xsl:text>: </xsl:text>
-
-    <xsl:choose>
-        <xsl:when test="p">
-            <xsl:apply-templates mode="text"/>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:call-template name="wordwrap"/>
-        </xsl:otherwise>
-    </xsl:choose>
-
-    <xsl:text>]&lf;</xsl:text>
-</xsl:template>
 
 
 
@@ -203,67 +153,78 @@
 </xsl:function>
 
 
-<xsl:function name="f:lines">
-    <xsl:param name="paragraph" as="xs:string"/>
-    <xsl:param name="width" as="xs:integer"/>
-
-    <!-- Insert <lb> milestone tags -->
-    <xsl:variable name="result" select="f:wordwrap2($paragraph, $width)"/>
-
-    <!-- wrap each line in a <line> tag -->
-    <xsl:for-each-group select="$result" group-ending-with="lb">
-      <line>
-      <xsl:for-each select="current-group()">
-        <xsl:copy>
-          <xsl:apply-templates/>
-        </xsl:copy>
-      </xsl:for-each>
-      </line>
-    </xsl:for-each-group>
-</xsl:function>
 
 
-<xsl:function name="f:wordwrap" as="node()*">
+
+
+
+<xsl:function name="f:word-wrap" as="xs:string">
     <xsl:param name="text" as="xs:string"/>
-    <xsl:param name="width" as="xs:integer"/>
+    <xsl:param name="max-width" as="xs:integer"/>
 
-    <xsl:value-of select="f:wordwrap($text, $width, 0)"/>
+    <!-- break string up in words and spaces -->
+    <xsl:variable name="words">
+        <xsl:analyze-string select="$text" regex="\s">
+            <xsl:matching-substring>
+                <tmp:space text="{.}" width="{f:unicode-character-count(.)}"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <tmp:word text="{.}" width="{f:unicode-character-count(.)}"/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:variable>
+
+    <!-- greedily output words and spaces as long as they fit -->
+    <xsl:iterate select="$words/*">
+        <xsl:param name="text" select="''" as="xs:string"/>
+        <xsl:param name="width" select="0" as="xs:integer"/>
+
+        <xsl:on-completion>
+            <xsl:sequence select="$text"/>
+        </xsl:on-completion> 
+
+        <xsl:variable name="pos" select="position()"/>
+
+        <xsl:variable name="newWidth" select="if (f:word-wrap-break($words, $width, $pos, $max-width))
+            then 0
+            else xs:integer($width + @width)" as="xs:integer"/>
+
+        <xsl:variable name="newText" select="if (f:word-wrap-break($words, $width, $pos, $max-width))
+            then $text || '&#x0a;'
+            else $text || @text" as="xs:string"/>
+
+        <xsl:next-iteration>
+            <xsl:with-param name="text" select="$newText"/>
+            <xsl:with-param name="width" select="$newWidth"/>
+        </xsl:next-iteration>
+    </xsl:iterate>
+</xsl:function>
+
+<xsl:function name="f:word-wrap-break" as="xs:boolean">
+    <xsl:param name="words"/>
+    <xsl:param name="width" as="xs:integer"/>
+    <xsl:param name="pos" as="xs:integer"/>
+    <xsl:param name="max-width" as="xs:integer"/>
+
+    <xsl:sequence select="$width > 0 
+        and local-name($words/*[$pos]) = 'space'
+        and $words/*[$pos + 1]
+        and $width + $words/*[$pos]/@width + $words/*[$pos + 1]/@width > $max-width"/>
+</xsl:function>
+
+<xsl:function name="f:unicode-character-count" as="xs:integer">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:sequence select="string-length(f:strip-diacritics($string))"/>
+</xsl:function>
+
+<xsl:function name="f:strip-diacritics" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:sequence select="replace(normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
 </xsl:function>
 
 
-<xsl:function name="f:wordwrap" as="node()*">
-    <xsl:param name="text" as="xs:string"/>
-    <xsl:param name="width" as="xs:integer"/>
-    <xsl:param name="used" as="xs:integer"/>
 
-    <xsl:variable name="word" select="substring-before($text, ' ')"/>
-    <xsl:variable name="length" select="string-length($word) + (if ($used = 0) then 0 else 1)"/>
 
-    <xsl:choose>
-        <!-- Paragraph ended, output final <lb> -->
-        <xsl:when test="string-length($text) = 0">
-            <xsl:text>&lf;</xsl:text>
-        </xsl:when>
-        <!-- Word is longer than line width, put on its own line, tolerate it sticking out -->
-        <xsl:when test="$length &gt; $width">
-            <xsl:if test="$used != 0"><xsl:text>&lf;</xsl:text></xsl:if>
-            <xsl:value-of select="$word"/>
-            <xsl:text>&lf;</xsl:text>
-            <xsl:value-of select="f:wordwrap(substring-after($text, ' '), $width, $used + $length)"/>
-        </xsl:when>
-        <!-- Word doesn't fit on line-so-far; start a new one -->
-        <xsl:when test="$used + $length &gt; $width">
-            <xsl:text>&lf;</xsl:text>
-            <xsl:value-of select="f:wordwrap($text, $width, 0)"/>
-        </xsl:when>
-        <!-- Word fits on line-so-far -->
-        <xsl:otherwise>
-            <xsl:if test="$used != 0"><xsl:text> </xsl:text></xsl:if>
-            <xsl:value-of select="$word"/>
-            <xsl:value-of select="f:wordwrap(substring-after($text, ' '), $width, $used + $length)"/>
-        </xsl:otherwise>
-    </xsl:choose>
-</xsl:function>
 
 
 <xsl:function name="f:head" as="xs:string">
@@ -274,51 +235,6 @@
     <xsl:value-of select="$head"/>
 </xsl:function>
 
-
-
-<xsl:function name="f:wordwrap2" as="node()*">
-    <xsl:param name="text" as="xs:string"/>
-    <xsl:param name="maxwidth" as="xs:integer"/>
-
-    <xsl:value-of select="f:wordwrap2(tokenize($text, ' '), $maxwidth, 0)"/>
-</xsl:function>
-
-
-
-<xsl:function name="f:wordwrap2" as="node()*">
-    <xsl:param name="words" as="xs:string*"/>
-    <xsl:param name="maxwidth" as="xs:integer"/>
-    <xsl:param name="used" as="xs:integer"/>
-
-    <xsl:variable name="word" select="$words[1]"/>
-    <xsl:variable name="tail" select="$words[position() &gt; 1]"/>
-    <xsl:variable name="length" select="string-length($word) + (if ($used = 0) then 0 else 1)"/>
-
-    <xsl:choose>
-        <!-- Paragraph ended, output final <lb> -->
-        <xsl:when test="not($word)">
-            <xsl:text>&lf;</xsl:text>
-        </xsl:when>
-        <!-- Word is longer than line width, put on its own line, tolerate it sticking out -->
-        <xsl:when test="$length &gt; $maxwidth">
-            <xsl:if test="$used != 0"><xsl:text>&lf;</xsl:text></xsl:if>
-            <xsl:value-of select="$word"/>
-            <xsl:text>&lf;</xsl:text>
-            <xsl:value-of select="f:wordwrap2($tail, $maxwidth, $used + $length)"/>
-        </xsl:when>
-        <!-- Word doesn't fit on line-so-far; start a new one -->
-        <xsl:when test="$used + $length &gt; $maxwidth">
-            <xsl:text>&lf;</xsl:text>
-            <xsl:value-of select="f:wordwrap2($words, $maxwidth, 0)"/>
-        </xsl:when>
-        <!-- Word fits on line-so-far -->
-        <xsl:otherwise>
-            <xsl:if test="$used != 0"><xsl:text> </xsl:text></xsl:if>
-            <xsl:value-of select="$word"/>
-            <xsl:value-of select="f:wordwrap2($tail, $maxwidth, $used + $length)"/>
-        </xsl:otherwise>
-    </xsl:choose>
-</xsl:function>
 
 
 
