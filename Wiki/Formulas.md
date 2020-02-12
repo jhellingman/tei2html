@@ -65,7 +65,7 @@ Often, the same formula appears multiple times in the same document. It makes se
 
 #### Trivial math
 
-Very often, a single letter or digit is (correctly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically.
+Very often, a single letter or digit is (correctly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically. Be aware that in this case, the appearance of letters in such trivial equations may differ from those in more complex equations, due to differences in font rendering and the way SVG is handled by browsers.
 
 #### Labeled equations
 
