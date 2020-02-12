@@ -1,6 +1,6 @@
 # Using the `@rend` attribute #
 
-The `@rend` attribute is a simple hook into the TEI structure to document or specify rendering features. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
+The `@rend` attribute is a simple hook into the TEI structure to document or specify how features are rendered. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
 
 Note that according to the TEI Guidelines, the rendering attributes are intended to describe the presentation of the source material, and are not to prescribe any presentation of the output. Since the intention here is to faithfully reproduce text, this distinction is not really important for `tei2html`.
 
@@ -25,7 +25,7 @@ A slightly more powerful mechanism is provided by so called 'rendering ladders',
 In most cases, rendition ladders are one-on-one translated to equivalent CSS rules. For example, the following snippet of TEI:
 
 ```
-<p rend="font-style(italic)text-align(left)">A left-aligned paragraph in italics.</p>
+<p rend="font-style(italic) text-align(left)">A left-aligned paragraph in italics.</p>
 ```
 
 Will be translated to the following HTML:
@@ -63,7 +63,7 @@ The following keys and values are supported: (Note that this list is not exhaust
 
 ### Using `@style` and `@rendition` ###
 
-As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. See the [TEI guidelines on rendition attributes](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html).
+As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. `tei2html` assumes that is CSS. See the [TEI guidelines on rendition attributes](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html). Unlike the values of `@rend`, the specified CSS values are not interpreted at all, but passed to the output CSS directly.
 
 Implementation notes:
 
