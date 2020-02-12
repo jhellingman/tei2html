@@ -18,17 +18,17 @@ The Project Gutenberg prohibition on active content make the direct use of MathJ
 The process consists of three steps:
 
 1. Run `tei2html` to let XSLT export all formulas into separate `.tex` files in a directory `formulas`. This is done during normal processing.
-2. Use the tool `convertFormulas.pl` to convert all these files to SVG files (and MathML).
+2. Run the perl script `convertFormulas.pl` to convert all these files to SVG files (and MathML).
 3. Run `tei2html` again (if needed with the `-f` option) to include the generated SVG files as images (or inline) in the resulting file, and use metrics from the SVG files to generate proper CSS.
 
-The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`. The name is important, as the convertion script uses that to determine the MathJax option to use will converting the file to SVG, etc.
+The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`. The name is important, as the convertion script uses that to determine the correct MathJax option to use when converting the file to SVG, etc.
 
 The script `convertFormulas.pl` will convert these files to files named `(inline|display)-<ID>.svg`. This script will use node.js with mathjax-node-cli to produce HTML, SVG, and MathML files from the exported formulas.
 
 
 ### Configuration
 
-The following configuration options have been added:
+The following configuration options are available:
 
 * `math.mathJax.format` determines the way mathJax is used to generate math. Possible values:
   * `MathJax`: use MathJax dynamically (loading javascript libraries)
@@ -65,7 +65,7 @@ Often, the same formula appears multiple times in the same document. It makes se
 
 #### Trivial math
 
-Often, a single letter or digit is (rightly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically.
+Very often, a single letter or digit is (correctly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically.
 
 #### Labeled equations
 
@@ -75,5 +75,7 @@ Since we cannot have further mark-up in the values of attributes, we use a 'ligh
 
 ### Open Issues
 
-1. _Line breaks._ Currently, we see linebreaks directly after the HTML ``<span>``, even when punctuation marks directly follow the math. We will probably have to wrap the entire formula and the following punctuation in a no-wrap ``<span>`` to prevent this. A simple work-around is to put the final punctuation inside the equation.
-2. _Punctuation after labeled display math._ Some books place punctuation after the label to end a sentence or phrase. With the current implementation, this is very tricky to emulate. Just placing the punctuation after the formula is the most logical from a semantic point of view, but will require a lot of effort. Just place the punctuation within the displayed equation.
+1. _Unexpected Line breaks._ Currently, we see linebreaks directly after the HTML ``<span>``, even when punctuation marks directly follow the math. We will probably have to wrap the entire formula and the following punctuation in a no-wrap ``<span>`` to prevent this. A simple work-around is to put the final punctuation inside the equation.
+2. _Punctuation after labeled display math._ Some books place punctuation after the label to end a sentence or phrase. With the current implementation, this is very tricky to emulate. Placing the punctuation after the formula is the most logical from a semantic point of view, but will require a lot of effort. As a work-around place this punctuation within the displayed equation.
+3. _No line-breaks._ Since HTML is unable to break SVG into lines, math formulas will not be broken into lines. You may consider breaking very long formulas into multiple fragments as a measure of last resort.
+
