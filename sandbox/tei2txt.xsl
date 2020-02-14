@@ -4,8 +4,7 @@
 <!ENTITY lf    "&#x0a;" >
 ]>
 
-
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
@@ -95,9 +94,6 @@
 
 
 
-
-
-
 <xsl:template mode="text" match="hi">
     <xsl:value-of select="$italicStart"/>
     <xsl:apply-templates mode="text"/>
@@ -105,14 +101,30 @@
 </xsl:template>
 
 
-<xsl:template mode="text" match="note">
-    <xsl:text> [</xsl:text>
-    <xsl:number count="note" level="any"/>
-    <!-- <xsl:value-of select="@n"/> -->
-    <xsl:text>] </xsl:text>
+
+
+
+
+<xsl:template match="p">
+    <xsl:variable name="text">
+        <xsl:apply-templates/>
+    </xsl:variable>
+    <xsl:copy-of select="f:break-into-lines($text, $lineWidth)"/>
 </xsl:template>
 
 
+<xsl:template match="note">
+    <xsl:text>[</xsl:text>
+    <xsl:number count="note" level="any"/>
+    <!-- <xsl:value-of select="@n"/> -->
+    <xsl:text>]</xsl:text>
+</xsl:template>
+
+<xsl:template match="choice/corr">
+    <xsl:apply-templates/>
+</xsl:template>
+
+<xsl:template match="choice/sic"/>
 
 
 <!-- FUNCTIONS -->
@@ -154,6 +166,51 @@
 
 
 
+<xsl:function name="f:break-into-lines" as="element(line)*">
+    <xsl:param name="text" as="xs:string"/>
+    <xsl:param name="max-width" as="xs:integer"/>
+
+    <!-- break string up in words and spaces -->
+    <xsl:variable name="words">
+        <xsl:analyze-string select="$text" regex="\s">
+            <xsl:matching-substring>
+                <tmp:space text="{.}" width="{f:unicode-character-count(.)}"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <tmp:word text="{.}" width="{f:unicode-character-count(.)}"/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:variable>
+
+    <!-- greedily output words and spaces as long as they fit -->
+    <xsl:iterate select="$words/*">
+        <xsl:param name="text" select="''" as="xs:string"/>
+        <xsl:param name="width" select="0" as="xs:integer"/>
+
+        <xsl:on-completion>
+            <line><xsl:value-of select="$text"/></line>
+        </xsl:on-completion> 
+
+        <xsl:variable name="pos" select="position()"/>
+
+        <xsl:if test="f:word-wrap-break($words, $width, $pos, $max-width)">
+            <line><xsl:value-of select="$text"/></line>
+        </xsl:if>
+
+        <xsl:variable name="newWidth" select="if (f:word-wrap-break($words, $width, $pos, $max-width))
+            then 0
+            else xs:integer($width + @width)" as="xs:integer"/>
+
+        <xsl:variable name="newText" select="if (f:word-wrap-break($words, $width, $pos, $max-width))
+            then ''
+            else $text || @text" as="xs:string"/>
+
+        <xsl:next-iteration>
+            <xsl:with-param name="text" select="$newText"/>
+            <xsl:with-param name="width" select="$newWidth"/>
+        </xsl:next-iteration>
+    </xsl:iterate>
+</xsl:function>
 
 
 

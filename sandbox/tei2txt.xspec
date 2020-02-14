@@ -7,6 +7,7 @@
 
     <x:variable name="lorem" select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'" as="xs:string"/>
 
+
     <x:scenario label="When wrapping a line of text">
         <x:call function="f:word-wrap">
             <x:param name="text" select="'The quick brown fox jumps over the lazy dog and then the quick brown fox jumps over the lazy dog again.'" as="xs:string"/>
@@ -17,6 +18,7 @@
             select="'The quick brown&#x0a;fox jumps over&#x0a;the lazy dog and&#x0a;then the quick&#x0a;brown fox jumps&#x0a;over the lazy&#x0a;dog again.'"/>
     </x:scenario>
 
+
     <x:scenario label="When wrapping a longer line of text">
         <x:call function="f:word-wrap">
             <x:param name="text" select="$lorem" as="xs:string"/>
@@ -26,5 +28,83 @@
             label="will result in a wrapped line" 
             select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod&#x0a;tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim&#x0a;veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea&#x0a;commodo consequat. Duis aute irure dolor in reprehenderit in voluptate&#x0a;velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint&#x0a;occaecat cupidatat non proident, sunt in culpa qui officia deserunt&#x0a;mollit anim id est laborum.'"/>
     </x:scenario>
+
+
+    <x:scenario label="When wrapping a longer line of text">
+        <x:call function="f:break-into-lines">
+            <x:param name="text" select="$lorem" as="xs:string"/>
+            <x:param name="max-width" select="72" as="xs:integer"/>
+        </x:call>
+        <x:expect label="will result in a wrapped line">
+            <line>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</line>
+            <line>tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</line>
+            <line>veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea</line>
+            <line>commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</line>
+            <line>velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint</line>
+            <line>occaecat cupidatat non proident, sunt in culpa qui officia deserunt</line>
+            <line>mollit anim id est laborum.</line>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="lineWidth" select="72"/>
+
+    <x:variable name="p.lorem">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </x:variable>
+
+    <x:scenario label="When wrapping a paragraph">
+        <x:context select="$p.lorem"/>
+        <x:expect label="will result in a wrapped lines">
+            <line>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</line>
+            <line>tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</line>
+            <line>veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea</line>
+            <line>commodo consequat. Duis aute irure dolor in reprehenderit in voluptate</line>
+            <line>velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint</line>
+            <line>occaecat cupidatat non proident, sunt in culpa qui officia deserunt</line>
+            <line>mollit anim id est laborum.</line>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When wrapping a paragraph with a footnote">
+        <x:context>
+            <p>Lorem ipsum<note n="*">note</note> dolor sit amet.</p>
+        </x:context>
+        <x:expect label="will result in a wrapped lines with a footnote marker">
+            <line>Lorem ipsum[1] dolor sit amet.</line>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When wrapping a paragraph with two footnotes">
+        <x:context>
+            <p>Lorem ipsum<note n="*">note 1</note> dolor<note n="**">note 2</note> sit amet.</p>
+        </x:context>
+        <x:expect label="will result in a wrapped lines with two footnote markers">
+            <line>Lorem ipsum[1] dolor[2] sit amet.</line>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When wrapping a paragraph with a correction">
+        <x:context>
+            <p>Lorem <corr sic="upsim">ipsum</corr> dolor sit amet.</p>
+        </x:context>
+        <x:expect label="will result in a wrapped lines with just the corrected text">
+            <line>Lorem ipsum dolor sit amet.</line>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When wrapping a paragraph with a correction (using choice)">
+        <x:context>
+            <p>Lorem <choice><sic>upsim</sic><corr>ipsum</corr></choice> dolor sit amet.</p>
+        </x:context>
+        <x:expect label="will result in a wrapped lines with just the corrected text">
+            <line>Lorem ipsum dolor sit amet.</line>
+        </x:expect>
+    </x:scenario>
+
 
 </x:description>
