@@ -5,6 +5,7 @@
                stylesheet="tei2txt.xsl"
                version="3.0">
 
+
     <x:variable name="lorem" select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'" as="xs:string"/>
 
 
@@ -13,8 +14,8 @@
             <x:param name="text" select="'The quick brown fox jumps over the lazy dog and then the quick brown fox jumps over the lazy dog again.'" as="xs:string"/>
             <x:param name="max-width" select="16" as="xs:integer"/>
         </x:call>
-        <x:expect 
-            label="will result in a wrapped line" 
+        <x:expect
+            label="will result in a wrapped line"
             select="'The quick brown&#x0a;fox jumps over&#x0a;the lazy dog and&#x0a;then the quick&#x0a;brown fox jumps&#x0a;over the lazy&#x0a;dog again.'"/>
     </x:scenario>
 
@@ -24,8 +25,8 @@
             <x:param name="text" select="$lorem" as="xs:string"/>
             <x:param name="max-width" select="72" as="xs:integer"/>
         </x:call>
-        <x:expect 
-            label="will result in a wrapped line" 
+        <x:expect
+            label="will result in a wrapped line"
             select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod&#x0a;tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim&#x0a;veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea&#x0a;commodo consequat. Duis aute irure dolor in reprehenderit in voluptate&#x0a;velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint&#x0a;occaecat cupidatat non proident, sunt in culpa qui officia deserunt&#x0a;mollit anim id est laborum.'"/>
     </x:scenario>
 
@@ -48,6 +49,15 @@
 
 
     <x:param name="lineWidth" select="72"/>
+
+    <x:scenario label="When wrapping an empty paragraph">
+        <x:context>
+            <p/>
+        </x:context>
+        <x:expect label="will result in a single empty line">
+            <line/>
+        </x:expect>
+    </x:scenario>
 
     <x:variable name="p.lorem">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -106,5 +116,22 @@
         </x:expect>
     </x:scenario>
 
+
+    <x:scenario label="When wrapping a paragraph with a line-break">
+        <x:context>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,<lb/><lb/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <hi rend="bold">aliquip ex ea <hi>commodo consequat.<lb/> Duis aute</hi> irure dolor in reprehenderit</hi> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,<lb/> sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </x:context>
+        <x:expect label="will result in a wrapped lines with the line-breaks preserved">
+            <line>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</line>
+            <line/>
+            <line>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</line>
+            <line>enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</line>
+            <line>aliquip ex ea commodo consequat.</line>
+            <line>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</line>
+            <line>dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non</line>
+            <line>proident,</line>
+            <line>sunt in culpa qui officia deserunt mollit anim id est laborum.</line>
+        </x:expect>
+    </x:scenario>
 
 </x:description>

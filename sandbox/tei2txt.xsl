@@ -13,99 +13,85 @@
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     exclude-result-prefixes="f fn xd xs tmp">
 
-<!--
-  <xsl:output 
-    method="text"
-    indent="no"/>
--->
 
 <!-- tei2txt.xslt - stylesheet to convert TEI files to plain text format -->
 
 <xsl:param name="lineWidth" select="72"/>
-<xsl:param name="italicStart" select="_"/>
-<xsl:param name="italicEnd" select="_"/>
 
+<!--
+Lift the lb elements to the paragraph level, closing and reopening all
+elements as they appear in the paragraph (similar to the pb handling in extract-page.xsl) 
+-->
 
-<xsl:template match="text">
-    <xsl:apply-templates select="." mode="text"/>
+<xsl:template mode="extract-partial-paragraph" match="* | node()">
+        <xsl:param name="start" as="element()?" tunnel="yes"/>
+        <xsl:param name="end" as="element()?" tunnel="yes"/>
 
-    <xsl:value-of select="f:underline('NOTES')"/>
-    <xsl:apply-templates select="." mode="notes"/>
+    <xsl:variable name="after-start" as="xs:boolean" select=". >> $start or . is $start"/>
+    <xsl:variable name="not-after-end" as="xs:boolean" select="if ($end) then $end >> . else true()"/>
+    <xsl:variable name="contains-start" as="xs:boolean" select="if (.//*[. is $start]) then true() else false()"/>
+    <xsl:variable name="include" select="($after-start and $not-after-end) or $contains-start"/>
+
+    <!-- TODO: need to exclude footnotes from traversal (best done in separate template) -->
+
+    <xsl:choose>
+        <xsl:when test="$include">
+            <xsl:copy>
+                <xsl:copy-of select="@*"/>
+                <xsl:apply-templates mode="extract-partial-paragraph"/>
+            </xsl:copy>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:apply-templates mode="extract-partial-paragraph"/>
+        </xsl:otherwise>
+    </xsl:choose>
 </xsl:template>
 
 
-<xsl:template match="lb" mode="text">
-    <xsl:text>&lf;</xsl:text>
-</xsl:template>
+<xsl:function name="f:preprocess-paragraph">
+    <xsl:param name="p" as="element(p)"/>
 
+    <xsl:choose>
+        <xsl:when test="$p[//lb]">
+            <!-- Get the material until the first lb -->
+            <xsl:apply-templates select="$p" mode="extract-partial-paragraph">
+                    <xsl:with-param name="start" select="$p" tunnel="yes"/>
+                    <xsl:with-param name="end" select="($p//lb)[1]" tunnel="yes"/>
+            </xsl:apply-templates>
 
+            <!-- Iterate over the following lb's to get the material between them -->
+            <xsl:iterate select="$p//lb">
+                <xsl:param name="start" select="($p//lb)[1]" as="element()?"/>
+                <xsl:param name="end" select="($p//lb)[2]" as="element()?"/>
 
+                <xsl:apply-templates select="$p" mode="extract-partial-paragraph">
+                    <xsl:with-param name="start" select="$start" tunnel="yes"/>
+                    <xsl:with-param name="end" select="$end" tunnel="yes"/>
+                </xsl:apply-templates>
 
-
-<!-- MODE: text -->
-
-<xsl:template mode="text" match="div0 | div1">
-    <xsl:value-of select="f:repeat('&lf;', 5)"/>
-    <xsl:apply-templates mode="text"/>
-</xsl:template>
-
-<xsl:template mode="text" match="div2 | div3 | div4 | div5">
-    <xsl:value-of select="f:repeat('&lf;', 3)"/>
-    <xsl:apply-templates mode="text"/>
-</xsl:template>
-
-<xsl:template mode="text" match="table">
-    <xsl:apply-templates mode="text"/>
-</xsl:template>
-
-<xsl:template mode="text" match="row">
-    <xsl:text>&lf;</xsl:text>
-    <xsl:apply-templates mode="text"/>
-</xsl:template>
-
-<xsl:template mode="text" match="cell">
-    <xsl:apply-templates mode="text"/>
-    <xsl:text> </xsl:text>
-</xsl:template>
-
-<xsl:template mode="text" match="lg">
-    <xsl:text>&lf;</xsl:text>
-    <xsl:apply-templates mode="text"/>
-    <xsl:text>&lf;</xsl:text>
-</xsl:template>
-
-
-
-
-
-
-<xsl:template mode="text" match="head">
-    <xsl:variable name="head">
-        <xsl:apply-templates mode="text"/>
-    </xsl:variable>
-
-    <!-- Assume heads fit on a single line (certainly not always valid!) -->
-
-    <xsl:value-of select="f:underline($head)"/>
-</xsl:template>
-
-
-
-
-
-
-<xsl:template mode="text" match="hi">
-    <xsl:value-of select="$italicStart"/>
-    <xsl:apply-templates mode="text"/>
-    <xsl:value-of select="$italicEnd"/>
-</xsl:template>
-
-
-
-
+                <xsl:next-iteration>
+                    <xsl:with-param name="start" select="$end"/>
+                    <xsl:with-param name="end" select="($end/following::lb)[1]"/>
+                </xsl:next-iteration>
+            </xsl:iterate>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:copy-of select="$p"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:function>
 
 
 <xsl:template match="p">
+    <xsl:variable name="split-paragraph">
+        <xsl:copy-of select="f:preprocess-paragraph(.)"/>
+    </xsl:variable>
+
+    <xsl:apply-templates select="$split-paragraph" mode="split-paragraph"/>
+</xsl:template>
+
+
+<xsl:template match="p" mode="split-paragraph">
     <xsl:variable name="text">
         <xsl:apply-templates/>
     </xsl:variable>
@@ -127,48 +113,15 @@
 <xsl:template match="choice/sic"/>
 
 
-<!-- FUNCTIONS -->
-
-
-<xsl:function name="f:underline">
-    <xsl:param name="string" as="xs:string"/>
-
-    <xsl:value-of select="f:underline($string, '-')"/>
-</xsl:function>
-
-<xsl:function name="f:underline">
-    <xsl:param name="string" as="xs:string"/>
-    <xsl:param name="with" as="xs:string"/>
-
-    <xsl:value-of select="$string"/>
-    <xsl:text>&lf;</xsl:text>
-    <xsl:value-of select="f:repeat($with, string-length($string))"/>
-    <xsl:text>&lf;</xsl:text>
-</xsl:function>
-
-
-<xsl:function name="f:spaces">
-    <xsl:param name="count" as="xs:integer"/>
-
-    <xsl:value-of select="f:repeat(' ', $count)"/>
-</xsl:function>
-
-
-<xsl:function name="f:repeat">
-    <xsl:param name="character" as="xs:string"/>
-    <xsl:param name="count" as="xs:integer"/>
-
-    <xsl:if test="$count &gt; 0">
-        <xsl:value-of select="$character"/>
-        <xsl:value-of select="f:repeat($character, $count - 1)"/>
-    </xsl:if>
-</xsl:function>
 
 
 
 <xsl:function name="f:break-into-lines" as="element(line)*">
     <xsl:param name="text" as="xs:string"/>
     <xsl:param name="max-width" as="xs:integer"/>
+
+    <!-- strip initial space from string -->
+    <xsl:variable name="text" select="replace($text, '^\s+', '')"/>
 
     <!-- break string up in words and spaces -->
     <xsl:variable name="words">
@@ -278,22 +231,6 @@
     <xsl:param name="string" as="xs:string"/>
     <xsl:sequence select="replace(normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
 </xsl:function>
-
-
-
-
-
-
-<xsl:function name="f:head" as="xs:string">
-    <xsl:param name="text" as="xs:string"/>
-
-    <xsl:variable name="head" select="substring-before($text, ' ')"/>
-
-    <xsl:value-of select="$head"/>
-</xsl:function>
-
-
-
 
 
 </xsl:stylesheet>
