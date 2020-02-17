@@ -82,7 +82,7 @@ handled in a special way when processing the TEI file.
 | `note`                | `apparatus`            | The note is part of a critical apparatus. |
 | `note`                | `foot`                 | The note is a footnote (*default*). |
 | `note`                | `margin`               | The note is a marginal note. |
-
+| `note`                | `table`                | The note appears directly under the table it appears in. |
 
 | **TEI element**       | **`@unit` value**      | **Notes**                  |
 |:----------------------|:-----------------------|:---------------------------|
