@@ -7,12 +7,12 @@ The `tei2html` code has a range of dependencies on third-party software. This pa
 
 An XSLT 3.0 processor is required for `tei2html`, any XSLT 3.0 processor should work, however, I've developed these stylesheets with Saxon (using the freely available version Saxon HE).
 
-You should download a reasonable recent version of Saxon. For example the Saxon SA product from [saxonica.com](http://www.saxonica.com/products.html).
+You should download a reasonable recent version of Saxon-HE product from [saxonica.com](http://www.saxonica.com/products.html). I will take care `tei2html` will continue to work with the free versions of Saxon, no matter how tempting the additional features in the paid versions are (such as higher order functions, binary file handling, etc.)
 
 
 ## Java ##
 
-Saxon requires Java.
+Saxon-HE requires Java.
 
 Make sure that the java executables can be found on the path.
 
@@ -78,7 +78,7 @@ Patc (pattern changer) is a small utility written in C to do multiple find-and-r
 
 _Optional, only needed if you want to check generated ePubs._
 
-Epubcheck is a tool to validate epub books, it can be obtained from: https://github.com/IDPF/epubcheck
+Epubcheck is a tool to validate epub books, it can be obtained from: https://github.com/IDPF/epubcheck. Note that `tei2html` doesn't automatically generate correct ePubs: you can still do a lot of things that make ePubs non-conform, for example by including CSS3 constructs, or referring to resources in CSS and not including them in the ePub spine manually.
 
 This tool also requires Java; the scripts assume you use `epubcheck-3.0.1.jar`, placed in the tools/lib subdirectory.
 
@@ -87,8 +87,7 @@ This tool also requires Java; the scripts assume you use `epubcheck-3.0.1.jar`, 
 
 _Optional, only needed if you want generated PDF output._
 
-Note that Prince is a commercial product; a free version can be used for strictly private purposes, and downloaded from: https://www.princexml.com/.
-
+Note that Prince is a commercial product; a free version can be used for strictly private purposes, and downloaded from: https://www.princexml.com/. The free version does include a small icon on the first page to promote Prince. Shouldn't be a big nuisance.
 
 
 # Configuration #
