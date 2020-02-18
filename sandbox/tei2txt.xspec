@@ -117,10 +117,25 @@
     </x:scenario>
 
 
-    <x:scenario label="When wrapping a paragraph with a line-break">
-        <x:context>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,<lb/><lb/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <hi rend="bold">aliquip ex ea <hi>commodo consequat.<lb/> Duis aute</hi> irure dolor in reprehenderit</hi> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,<lb/> sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </x:context>
+    <x:variable name="p.lorem.breaks">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,<lb/><lb/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <hi rend="bold">aliquip ex ea <hi>commodo consequat.<lb/> Duis aute</hi> irure dolor in reprehenderit</hi> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,<lb/> sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </x:variable>
+
+    <x:scenario label="When wrapping a paragraph with line-breaks">
+        <x:call function="f:preprocess-paragraph">
+            <x:param select="$p.lorem.breaks"/>
+        </x:call>
+        <x:expect label="will result in multiple paragraphs broken on the line-breaks and with nested elements closed and reopened">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+            <p><lb/></p>
+            <p><lb/> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <hi rend="bold">aliquip ex ea <hi>commodo consequat.</hi></hi></p>
+            <p><hi rend="bold"><hi><lb/> Duis aute</hi> irure dolor in reprehenderit</hi> in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,</p>
+            <p><lb/> sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When wrapping a paragraph with line-breaks">
+        <x:context select="$p.lorem.breaks"/>
         <x:expect label="will result in a wrapped lines with the line-breaks preserved">
             <line>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</line>
             <line/>
