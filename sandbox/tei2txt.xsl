@@ -48,6 +48,13 @@ elements as they appear in the paragraph (similar to the pb handling in extract-
 </xsl:template>
 
 
+<xd:doc>
+    <xd:short>Break a paragraph on line-breaks.</xd:short>
+    <xd:detail>Break a paragraph on line-breaks, regardless off how deeply nested in the paragraph
+    the line-breaks occur. Close and re-open any elements that contain the line-break.</xd:detail>
+    <xd:param name="p">The paragraph to be broken-up.</xd:param>
+</xd:doc>
+
 <xsl:function name="f:preprocess-paragraph">
     <xsl:param name="p" as="element(p)"/>
 
@@ -102,19 +109,72 @@ elements as they appear in the paragraph (similar to the pb handling in extract-
 <xsl:template match="note">
     <xsl:text>[</xsl:text>
     <xsl:number count="note" level="any"/>
-    <!-- <xsl:value-of select="@n"/> -->
     <xsl:text>]</xsl:text>
 </xsl:template>
+
 
 <xsl:template match="choice/corr">
     <xsl:apply-templates/>
 </xsl:template>
 
+
 <xsl:template match="choice/sic"/>
 
 
+<!--======= lift-from-paragraph =======-->
+
+<!-- 
+
+The main use case for this is to deal with sloppy TEI, where </p> tags have not been
+used before an element that is not supposed to go into a paragraph. In TEI, this is
+valid, in HTML it is not. The assumption is that such non-nestable items are only
+present as direct childeren of the paragraph, so deeper nested items will not be
+lifted out of the paragraph.
+
+TODO:
+
+* Strip leading spaces from first text node in following paragraphs
+* Handle other items that should be lifted (q, lg, figure, list, etc.)
+* Process rendering ladders, such that paragraph initial things (like drop-caps) will not be repeated
+* Add a class to subsequent generated paragraphs, to indicate they are follow-up paragraphs.
+
+-->
+
+<xsl:template match="node() | @*" mode="lift-from-paragraph">
+    <xsl:copy-of select="."/>
+</xsl:template>
+
+<xsl:template match="p[f:contains-liftable-item(.)]" mode="lift-from-paragraph">
+    <xsl:copy>
+        <xsl:copy-of select="@*"/>
+        <xsl:copy-of select="*[f:is-liftable-item(.)][1]/preceding-sibling::node()"/>
+    </xsl:copy>
+    <xsl:copy-of select="*[f:is-liftable-item(.)][1]"/>
+    <xsl:variable name="remainder">
+        <xsl:copy>
+            <!-- prevent duplications of ids -->
+            <xsl:copy-of select="@*[local-name(.) != 'id']"/>
+            <xsl:copy-of select="*[f:is-liftable-item(.)][1]/following-sibling::node()" />
+        </xsl:copy>
+    </xsl:variable>
+    <xsl:if test="$remainder/p[element()] or normalize-space($remainder) != ''">
+        <xsl:apply-templates select="$remainder" mode="lift-from-paragraph" />
+    </xsl:if>
+</xsl:template>
 
 
+<xsl:function name="f:is-liftable-item" as="xs:boolean">
+    <xsl:param name="node" as="node()"/>
+    <xsl:sequence select="if ($node/self::table) then true() else false()"/>
+</xsl:function>
+
+<xsl:function name="f:contains-liftable-item" as="xs:boolean">
+    <xsl:param name="node" as="node()"/>
+    <xsl:sequence select="if ($node/*[f:is-liftable-item(.)]) then true() else false()"/>
+</xsl:function>
+
+
+<!--======= f:break-into-lines =======-->
 
 <xsl:function name="f:break-into-lines" as="element(line)*">
     <xsl:param name="text" as="xs:string"/>
@@ -166,7 +226,7 @@ elements as they appear in the paragraph (similar to the pb handling in extract-
 </xsl:function>
 
 
-
+<!--======= f:word-wrap =======-->
 
 <xsl:function name="f:word-wrap" as="xs:string">
     <xsl:param name="text" as="xs:string"/>
