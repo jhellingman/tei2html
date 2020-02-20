@@ -134,9 +134,13 @@ lifted out of the paragraph.
 TODO:
 
 * Strip leading spaces from first text node in following paragraphs
+* Generate an id, to make sure the id is based on the original p element.
 * Handle other items that should be lifted (q, lg, figure, list, etc.)
 * Process rendering ladders, such that paragraph initial things (like drop-caps) will not be repeated
 * Add a class to subsequent generated paragraphs, to indicate they are follow-up paragraphs.
+
+To make this work without introducing complex code, it is best to run this
+in a separate process in a pipeline of XSL transformations.
 
 -->
 
@@ -147,6 +151,7 @@ TODO:
 <xsl:template match="p[f:contains-liftable-item(.)]" mode="lift-from-paragraph">
     <xsl:copy>
         <xsl:copy-of select="@*"/>
+        <xsl:if test="not(@id)"><xsl:attribute name="id" select="generate-id(.)"/></xsl:if>
         <xsl:copy-of select="*[f:is-liftable-item(.)][1]/preceding-sibling::node()"/>
     </xsl:copy>
     <xsl:copy-of select="*[f:is-liftable-item(.)][1]"/>
@@ -154,14 +159,13 @@ TODO:
         <xsl:copy>
             <!-- prevent duplications of ids -->
             <xsl:copy-of select="@*[local-name(.) != 'id']"/>
-            <xsl:copy-of select="*[f:is-liftable-item(.)][1]/following-sibling::node()" />
+            <xsl:copy-of select="*[f:is-liftable-item(.)][1]/following-sibling::node()"/>
         </xsl:copy>
     </xsl:variable>
-    <xsl:if test="$remainder/p[element()] or normalize-space($remainder) != ''">
+    <xsl:if test="$remainder/p/element() or normalize-space($remainder) != ''">
         <xsl:apply-templates select="$remainder" mode="lift-from-paragraph" />
     </xsl:if>
 </xsl:template>
-
 
 <xsl:function name="f:is-liftable-item" as="xs:boolean">
     <xsl:param name="node" as="node()"/>

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY lorem         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.">
+
+]>
 
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:f="urn:stylesheet-functions"
@@ -6,7 +11,7 @@
                version="3.0">
 
 
-    <x:variable name="lorem" select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'" as="xs:string"/>
+    <x:variable name="lorem" select="'&lorem;'" as="xs:string"/>
 
 
     <x:scenario label="When wrapping a line of text">
@@ -60,7 +65,7 @@
     </x:scenario>
 
     <x:variable name="p.lorem">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>&lorem;</p>
     </x:variable>
 
     <x:scenario label="When wrapping a paragraph">
@@ -181,6 +186,29 @@
     </x:scenario>
 
 
+    <x:variable name="p.lorem.table-and-pb-at-end">
+        <p rend="font-size(large)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<note>test</note> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+            <table><row><cell>cell</cell></row></table>
+        <pb n="2" id="pb2"/></p>
+    </x:variable>
+
+    <x:scenario label="When lifting a non-paragraph item from the end of a paragraph, followed by a page-break">
+        <x:context select="$p.lorem.table-and-pb-at-end" mode="lift-from-paragraph"/>
+        <x:expect label="will result in a paragraph followed by the lifted item, and a paragraph with the page-break">
+            <p rend="font-size(large)" id="...">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<note>test</note> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+            </p>
+            <table>
+               <row>
+                  <cell>cell</cell>
+               </row>
+            </table>
+            <p rend="font-size(large)"><pb n="2" id="pb2"/></p>
+        </x:expect>
+    </x:scenario>
+
+
     <x:variable name="p.lorem.table-in-middle">
         <p rend="font-size(large)" id="p.lorem.table-in-middle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<note>test</note> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
@@ -207,5 +235,43 @@
     </x:scenario>
 
 
+    <x:variable name="p.lorem.tables-in-middle">
+        <p rend="font-size(large)" id="p.lorem.table-in-middle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<note>test</note> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+        <table><row><cell>cell</cell></row></table>
+
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        
+        <table><row><cell>cell</cell></row></table>
+
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </x:variable>
+
+    <x:scenario label="When lifting multiple non-paragraphs items from the middle of a paragraph">
+        <x:context select="$p.lorem.tables-in-middle" mode="lift-from-paragraph"/>
+        <x:expect label="will result in the lifted items between paragraphs">
+            <p rend="font-size(large)" id="p.lorem.table-in-middle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<note>test</note> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+        </p>
+            <table>
+               <row>
+                  <cell>cell</cell>
+               </row>
+            </table>
+            <p rend="font-size(large)" id="...">
+
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        
+        </p>
+            <table>
+               <row>
+                  <cell>cell</cell>
+               </row>
+            </table>
+            <p rend="font-size(large)">
+
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </x:expect>
+    </x:scenario>
 
 </x:description>
