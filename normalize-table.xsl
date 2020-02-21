@@ -9,17 +9,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="f xd xhtml xs">
 
-    <xsl:output indent="no" omit-xml-declaration="yes"/>
-
-    <!-- stub function used by log.xsl -->
-    <xsl:function name="f:is-set" as="xs:boolean">
-        <xsl:param name="value" as="xs:string"/>
-        <xsl:sequence select="true()"/>
-    </xsl:function>
-
-    <xsl:include href="log.xsl"/>
-    <xsl:include href="rend.xsl"/>
-    <xsl:include href="stripns.xsl"/>
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to normalize TEI tables.</xd:short>
@@ -43,13 +32,6 @@
         </xd:detail>
     </xd:doc>
 
-
-    <xsl:template match="@TEIform" mode="#all"/>
-
-
-    <xsl:template match="table">
-        <xsl:apply-templates select="." mode="normalize-table"/>
-    </xsl:template>
 
 
     <xsl:template match="table" mode="normalize-table">

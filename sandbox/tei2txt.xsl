@@ -20,7 +20,7 @@
 
 <!--
 Lift the lb elements to the paragraph level, closing and reopening all
-elements as they appear in the paragraph (similar to the pb handling in extract-page.xsl) 
+elements as they appear in the paragraph (similar to the pb handling in extract-page.xsl)
 -->
 
 <xsl:template mode="extract-partial-paragraph" match="* | node()">
@@ -123,13 +123,14 @@ elements as they appear in the paragraph (similar to the pb handling in extract-
 
 <!--======= lift-from-paragraph =======-->
 
-<!-- 
+<!--
 
-The main use case for this is to deal with sloppy TEI, where </p> tags have not been
-used before an element that is not supposed to go into a paragraph. In TEI, this is
-valid, in HTML it is not. The assumption is that such non-nestable items are only
-present as direct childeren of the paragraph, so deeper nested items will not be
-lifted out of the paragraph.
+The main use case for this is to deal with the differences between the TEI and HTML
+paragraph models. Several types of elements that TEI allows in a paragraph are
+not not supposed to go into a paragraph in HTML. For this implementation, the assumption
+is that such non-nestable items are only present as direct childeren of the paragraph,
+so deeper nested items will not be lifted out of the paragraph. (Coded will added
+to signal such cases on transformation.)
 
 TODO:
 
@@ -206,7 +207,7 @@ in a separate process in a pipeline of XSL transformations.
 
         <xsl:on-completion>
             <line><xsl:value-of select="$text"/></line>
-        </xsl:on-completion> 
+        </xsl:on-completion>
 
         <xsl:variable name="pos" select="position()"/>
 
@@ -255,7 +256,7 @@ in a separate process in a pipeline of XSL transformations.
 
         <xsl:on-completion>
             <xsl:sequence select="$text"/>
-        </xsl:on-completion> 
+        </xsl:on-completion>
 
         <xsl:variable name="pos" select="position()"/>
 
@@ -280,7 +281,7 @@ in a separate process in a pipeline of XSL transformations.
     <xsl:param name="pos" as="xs:integer"/>
     <xsl:param name="max-width" as="xs:integer"/>
 
-    <xsl:sequence select="$width > 0 
+    <xsl:sequence select="$width > 0
         and local-name($words/*[$pos]) = 'space'
         and $words/*[$pos + 1]
         and $width + $words/*[$pos]/@width + $words/*[$pos + 1]/@width > $max-width"/>

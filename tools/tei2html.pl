@@ -239,23 +239,23 @@ sub processFile($) {
         tei2xml($filename, $xmlFilename);
     }
 
-    my $normalizedXmlFilename = "$basename-normalized.xml";
-    normalizeXml($xmlFilename, $normalizedXmlFilename);
+    my $preprocessedXmlFilename = "$basename-preprocessed.xml";
+    preprocessXml($xmlFilename, $preprocessedXmlFilename);
 
-    makeMetadata($normalizedXmlFilename);
-    makeReadme($normalizedXmlFilename);
+    makeMetadata($preprocessedXmlFilename);
+    makeReadme($preprocessedXmlFilename);
 
     $runChecks && runChecks($filename);
-    $makeWordlist && makeWordlist($basename, $normalizedXmlFilename);
+    $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
-    $makeHtml && makeHtml($basename, $normalizedXmlFilename);
-    $makeEpub && makeEpub($basename, $normalizedXmlFilename);
-    $makePdf  && makePdf($basename,  $normalizedXmlFilename);
-    $makeKwic && makeKwic($basename, $normalizedXmlFilename);
+    $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
+    $makeEpub && makeEpub($basename, $preprocessedXmlFilename);
+    $makePdf  && makePdf($basename,  $preprocessedXmlFilename);
+    $makeKwic && makeKwic($basename, $preprocessedXmlFilename);
     $makeText && makeText($basename, $filename);
-    $makeP5   && makeP5($basename, $normalizedXmlFilename);
+    $makeP5   && makeP5($basename, $preprocessedXmlFilename);
 
-    $makePGTEI && system ("$saxon $normalizedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     if ($makeZip == 1 && $pgNumber > 0) {
         print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
@@ -266,17 +266,17 @@ sub processFile($) {
 }
 
 
-sub normalizeXml($$) {
+sub preprocessXml($$) {
     my $xmlFilename = shift;
-    my $normalizedXmlFilename = shift;
+    my $preprocessedXmlFilename = shift;
 
-    if ($force == 0 && isNewer($normalizedXmlFilename, $xmlFilename)) {
-        print "Skipping conversion to normalized XML ($normalizedXmlFilename newer than $xmlFilename).\n";
+    if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename)) {
+        print "Skipping conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).\n";
         return;
     }
 
-    print "Normalize tables and add col and row attributes to cells...\n";
-    system ("$saxon $xmlFilename $xsldir/normalize-table.xsl > $normalizedXmlFilename");
+    print "Preprocess the TEI file for easier conversion to HTML...\n";
+    system ("$saxon $xmlFilename $xsldir/preprocess.xsl > $preprocessedXmlFilename");
 }
 
 
@@ -296,21 +296,21 @@ sub makeP5($$) {
 
 
 sub makeMetadata($) {
-    my $normalizedXmlFilename = shift;
+    my $xmlFilename = shift;
 
-    if ($force != 0 || isNewer($normalizedXmlFilename, 'metadata.xml')) {
+    if ($force != 0 || isNewer($xmlFilename, 'metadata.xml')) {
         print "Extract metadata to metadata.xml...\n";
-        system ("$saxon $normalizedXmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+        system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
     }
 }
 
 
 sub makeReadme($) {
-    my $normalizedXmlFilename = shift;
+    my $xmlFilename = shift;
 
-    if ($force != 0 || isNewer($normalizedXmlFilename, 'README.md')) {
+    if ($force != 0 || isNewer($xmlFilename, 'README.md')) {
         print "Extract metadata to README.md...\n";
-        system ("$saxon $normalizedXmlFilename $xsldir/tei2readme.xsl > README.md");
+        system ("$saxon $xmlFilename $xsldir/tei2readme.xsl > README.md");
     }
 }
 
