@@ -33,6 +33,16 @@
     </xd:doc>
 
 
+    <!-- stub function used by log.xsl -->
+    <xsl:function name="f:is-set" as="xs:boolean">
+        <xsl:param name="value" as="xs:string"/>
+        <xsl:sequence select="true()"/>
+    </xsl:function>
+
+
+    <xsl:include href="log.xsl"/>
+    <xsl:include href="rend.xsl"/>
+
 
     <xsl:template match="table" mode="normalize-table">
 

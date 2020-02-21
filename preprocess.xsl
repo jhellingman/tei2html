@@ -11,14 +11,7 @@
 
     <xsl:output indent="no" omit-xml-declaration="yes"/>
 
-    <!-- stub function used by log.xsl -->
-    <xsl:function name="f:is-set" as="xs:boolean">
-        <xsl:param name="value" as="xs:string"/>
-        <xsl:sequence select="true()"/>
-    </xsl:function>
 
-    <xsl:include href="log.xsl"/>
-    <xsl:include href="rend.xsl"/>
     <xsl:include href="stripns.xsl"/>
     <xsl:include href="normalize-table.xsl"/>
 

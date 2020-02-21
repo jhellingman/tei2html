@@ -605,7 +605,7 @@
         <xsl:apply-templates select="//*[@id]" mode="doubleIds"/>
 
         <!-- Do we have a front, body, and back element? -->
-        <xsl:if test="not(front)">
+        <xsl:if test="not(front) and not(ancestor::q)">
             <i:issue pos="{@pos}" code="E04" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No front element!</i:issue>
         </xsl:if>
 
@@ -613,7 +613,7 @@
             <i:issue pos="{@pos}" code="E05" category="Structure" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">No body element!</i:issue>
         </xsl:if>
 
-        <xsl:if test="not(back)">
+        <xsl:if test="not(back) and not(ancestor::q)">
             <i:issue pos="{@pos}" code="E06" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">No back element!</i:issue>
         </xsl:if>
 
@@ -627,6 +627,7 @@
 
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
 
     <xsl:key name="id" match="*[@id]" use="@id"/> 
 
