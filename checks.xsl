@@ -424,7 +424,7 @@
     </xsl:template>
 
 
-    <xsl:template match="cell[@role='sum' or @role='subtr' or @role='avg']" mode="checks">
+    <xsl:template match="cell[@role=('sum', 'subtr', 'avg')]" mode="checks">
 
         <xsl:copy-of select="f:report-non-number(.)"/>
         <xsl:variable name="indicatedSum" select="f:extract-number(.)"/>

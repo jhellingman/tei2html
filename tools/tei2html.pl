@@ -203,7 +203,7 @@ sub processFile($) {
     if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
         die "File: '$filename' doesn't look like a TEI file\n";
     }
-    print "Processing TEI file $filename\n";
+    print "Process TEI file $filename\n";
 
     $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
     my $basename = $1;
@@ -245,7 +245,7 @@ sub processFile($) {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $runChecks && runChecks($filename);
+    $runChecks && runChecks($preprocessedXmlFilename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
     $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
@@ -271,11 +271,11 @@ sub preprocessXml($$) {
     my $preprocessedXmlFilename = shift;
 
     if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename)) {
-        print "Skipping conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).\n";
+        print "Skip conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).\n";
         return;
     }
 
-    print "Preprocess the TEI file for easier conversion to HTML...\n";
+    print "Preprocess TEI file...\n";
     system ("$saxon $xmlFilename $xsldir/preprocess.xsl > $preprocessedXmlFilename");
 }
 
@@ -286,11 +286,11 @@ sub makeP5($$) {
     my $p5XmlFilename = $basename . '-p5.xml';
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
-        print "Skipping conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
+        print "Skip conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
         return;
     }
 
-    print "Convert from TEI P4 to TEI P5 (experimental)\n";
+    print "Convert to TEI P5 (experimental)\n";
     system ("$saxon $xmlFilename $xsldir/p4top5.xsl > $p5XmlFilename");
 }
 
@@ -321,7 +321,7 @@ sub makeKwic($$) {
     my $kwicFilename = determineKwicFilename($basename);
 
     if ($force == 0 && isNewer($kwicFilename, $xmlFilename)) {
-        print "Skipping creation of KWIC ($kwicFilename newer than $xmlFilename).\n";
+        print "Skip creation of KWIC ($kwicFilename newer than $xmlFilename).\n";
         return;
     }
 
@@ -393,7 +393,7 @@ sub makeHtml($$) {
     my $htmlFile = $basename . '.html';
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
-        print "Skipping conversion to HTML ($htmlFile newer than $xmlFile).\n";
+        print "Skip conversion to HTML ($htmlFile newer than $xmlFile).\n";
         return;
     }
 
@@ -420,7 +420,7 @@ sub makePdf($$) {
     my $pdfFile =  $basename . '.pdf';
 
     if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
-        print "Skipping conversion to PDF ($pdfFile newer than $xmlFile).\n";
+        print "Skip conversion to PDF ($pdfFile newer than $xmlFile).\n";
         return;
     }
 
@@ -446,7 +446,7 @@ sub makeEpub($$) {
     my $epubFile = $basename . '.epub';
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
-        print "Skipping conversion to ePub ($epubFile newer than $xmlFile).\n";
+        print "Skip conversion to ePub ($epubFile newer than $xmlFile).\n";
         return;
     }
 
@@ -479,7 +479,7 @@ sub makeText($$) {
     my $textFile = $basename . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
-        print "Skipping conversion to text file ($textFile newer than $filename).\n";
+        print "Skip conversion to text file ($textFile newer than $filename).\n";
         return;
     }
 
@@ -533,7 +533,7 @@ sub makeWordlist($$) {
     my $wordlistFile = $basename . '-words.html';
 
     if ($force == 0 && isNewer($wordlistFile, $xmlFile)) {
-        print "Skipping creation of word list ($wordlistFile newer than $xmlFile).\n";
+        print "Skip creation of word list ($wordlistFile newer than $xmlFile).\n";
         return;
     }
 
@@ -568,25 +568,25 @@ sub determineSaxonParameters() {
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
     my $cssFileParam = '';
     if (-f $customStylesheet || -f $customStylesheet . '.xml') {
-        print "Adding custom stylesheet: $customStylesheet ...\n";
+        print "Add custom stylesheet: $customStylesheet ...\n";
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";
     }
 
     my $configurationFileParam = '';
     if (-f $configurationFile) {
-        print "Adding custom configuration: $configurationFile ...\n";
+        print "Add custom configuration: $configurationFile ...\n";
         $configurationFileParam = "configurationFile=\"file:/$pwd/$configurationFile\"";
     }
 
     my $opfManifestFileParam = '';
     if (-f 'opf-manifest.xml') {
-        print "Adding additional elements for the OPF manifest...\n";
+        print "Add additional elements for the OPF manifest...\n";
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
     my $opfMetadataFileParam = '';
     if (-f 'opf-metadata.xml') {
-        print "Adding additional items to the OPF metadata...\n";
+        print "Add additional items to the OPF metadata...\n";
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
@@ -615,7 +615,7 @@ sub makeZip($) {
     }
 
     if (!-d $pgNumber) {
-        print "Failed to create directory $pgNumber, not making zip file.\n";
+        print "Failed to create directory $pgNumber, will not make zip file.\n";
         return;
     }
 
@@ -766,7 +766,7 @@ sub runChecks($) {
     my $checkFilename = $basename . '-checks.html';
     
     if ($force == 0 && isNewer($checkFilename, $filename)) {
-        print "Skipping run checks because '$checkFilename' is newer than '$filename'.\n";
+        print "Skip run checks because '$checkFilename' is newer than '$filename'.\n";
         return;
     }
     print "Run checks on $filename.\n";
@@ -851,7 +851,7 @@ sub copyImages($) {
 
     if (-d $destination) {
         # Destination exists, prevent copying into it.
-        print "Warning: Destination exists; not copying images again\n";
+        print "Warning: Destination exists; will not copy images again\n";
         return;
     }
 
@@ -916,14 +916,14 @@ sub copyFonts($) {
 
 
 #
-# tei2xml -- convert a file from SGML TEI to XML, also converting various notations if needed.
+# tei2xml -- convert a file from SGML TEI to XML, also convert various notations if needed.
 #
 sub tei2xml($$) {
     my $sgmlFile = shift;
     my $xmlFile = shift;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
-        print "Skipping conversion to XML ('$xmlFile' newer than '$sgmlFile').\n";
+        print "Skip conversion to XML ('$xmlFile' newer than '$sgmlFile').\n";
         return;
     }
 
@@ -1058,7 +1058,7 @@ sub transcribeNotation($$$$) {
     if ($containsNotation == 0) {
         my $tmpFile = temporaryFile('notation', '.xml');
 
-        print "Converting $name transcription...\n";
+        print "Convert $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
 
         $debug || unlink($currentFile);

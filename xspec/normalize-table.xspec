@@ -4,10 +4,10 @@
                stylesheet="../normalize-table.xsl"
                version="3.0">
 
-    <!-- table -->
+   <!-- table -->
 
    <x:scenario label="When normalizing a table with spanned cells">
-      <x:context>
+      <x:context mode="normalize-table">
         <table id="table_one"
                rend="summary(A small table to demonstrate tables in TEI) class(verticalBorderInside)">
             <column/>
@@ -51,7 +51,7 @@
    </x:scenario>
 
    <x:scenario label="When normalizing a table with spanned cells, even for a nested table">
-      <x:context>
+      <x:context mode="normalize-table">
         <table id="table_two">
             <column/>
             <column/>
