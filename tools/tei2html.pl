@@ -245,7 +245,7 @@ sub processFile($) {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $runChecks && runChecks($preprocessedXmlFilename);
+    $runChecks && runChecks($xmlFilename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
     $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
@@ -793,15 +793,15 @@ sub runChecks($) {
         $debug || unlink($tmpFile . '.err');
     }
 
-    my $xmlfilename = temporaryFile('checks', '.xml');
-    system ("$saxon \"$positionInfoFilename\" $xsldir/normalize-table.xsl > $xmlfilename");
+    my $xmlFilename = temporaryFile('checks', '.xml');
+    system ("$saxon \"$positionInfoFilename\" $xsldir/preprocess.xsl > $xmlFilename");
 
-    system ("$saxon \"$xmlfilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
+    system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
     if ($filename ne $transcribedFile) {
         $debug || unlink ($transcribedFile);
     }
     $debug || unlink ($positionInfoFilename);
-    $debug || unlink ($xmlfilename);
+    $debug || unlink ($xmlFilename);
 }
 
 
