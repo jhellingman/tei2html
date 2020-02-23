@@ -1671,8 +1671,6 @@
         <msg:message name="pam">Pampanga</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
 
-
-
         <!-- Creating a list of items -->
         <msg:message name="msgAnd">en</msg:message>
         <msg:message name="msgOr">of</msg:message>
@@ -1715,6 +1713,17 @@
         </msg:message>
 
     </msg:messages>
+
+
+    <!--==#############################################################==-->
+    <!-- Afrikaans translation -->
+	
+	<msg:messages xml:lang="af" fallback="nl">
+
+        <msg:message name="af">Afrikaans</msg:message>
+
+		
+	</msg:messages>
 
     <!--==#############################################################==-->
     <!-- Cebuano translation -->
