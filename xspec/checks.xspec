@@ -133,4 +133,54 @@
     </x:scenario>
 
 
+   <x:scenario label="When verifying the sums in a table with decimal columns which is correct">
+      <x:context mode="checks">
+        <table id="table_decimal_correct">
+            <row>
+                <cell col="1" row="1">1</cell>
+                <cell col="2" row="1">.9</cell>
+            </row>
+            <row>
+                <cell col="1" row="2">3</cell>
+                <cell col="2" row="2">.9</cell>
+            </row>
+            <row>
+                <cell col="1" row="3" role="sumDecimal">5</cell>
+                <cell col="2" row="3" role="sumFraction">.8</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return no error messages"></x:expect>
+   </x:scenario>
+
+   <x:scenario label="When verifying the sums in a table with decimal columns which is incorrect">
+      <x:context mode="checks">
+        <table id="table_decimal_incorrect">
+            <row>
+                <cell col="1" row="1">1</cell>
+                <cell col="2" row="1">.9</cell>
+            </row>
+            <row>
+                <cell col="1" row="2">3</cell>
+                <cell col="2" row="2">.9</cell>
+            </row>
+            <row>
+                <cell col="1" row="3" role="sumDecimal">4</cell>
+                <cell col="2" row="3" role="sumFraction">.8</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return relevant error messages">
+        <i:issue xmlns:i="http://gutenberg.ph/issues"
+                 pos=""
+                 code="T2"
+                 category="Table"
+                 target="..."
+                 level="Warning"
+                 element="cell"
+                 page="">Verify value “4”: [sumDecimal] 4.8 not equal to 5.8 (difference: -1).</i:issue>
+      </x:expect>
+   </x:scenario>
+
+
 </x:description>

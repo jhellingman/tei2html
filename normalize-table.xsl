@@ -387,20 +387,26 @@
 
         <!-- Generate the cell for the integer part -->
         <xsl:element name="cell" namespace="">
-            <xsl:copy-of select="@*[not(name() = ('col', 'rend'))]"/>
+            <xsl:copy-of select="@*[not(name() = ('col', 'rend', 'role'))]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalIntegerPart')"/>
+            <xsl:if test="@role">
+                <xsl:attribute name="role" select="if (@role = 'sum') then 'sumDecimal' else @role"/>
+            </xsl:if>
             <xsl:apply-templates select="*[not(preceding-sibling::text()[normalize-space(.) != ''])]"/>
             <xsl:value-of select="$integer"/>
         </xsl:element>
 
         <!-- Generate the cell for the fractional part -->
         <xsl:element name="cell" namespace="">
-            <xsl:copy-of select="@*[not(name() = ('col', 'cols', 'rend'))]"/>
+            <xsl:copy-of select="@*[not(name() = ('col', 'cols', 'rend', 'role'))]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col) + 1"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalFractionPart')"/>
             <xsl:if test="@cols">
                 <xsl:attribute name="cols" select="f:new-cols-value(../.., xs:integer(@col + 1), @cols)"/>
+            </xsl:if>
+            <xsl:if test="@role">
+                <xsl:attribute name="role" select="if (@role = 'sum') then 'sumFraction' else @role"/>
             </xsl:if>
             <xsl:value-of select="$fraction"/>
             <xsl:apply-templates select="(*|text())[preceding-sibling::text()[normalize-space(.) != '']]"/>

@@ -368,7 +368,29 @@
                     + (f:column-aggregate(following-sibling::cell[1], 'sum') div 100.0)"/>
 
         <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
+    </xsl:template>
 
+
+    <xsl:template match="cell[@role='sumDecimal']" mode="checks">
+
+        <!-- Difference with above is that the number in the second column is preceded by a decimal separator.
+             This is also introduced when tables are normalized and used the align(decimal) rendition. -->
+
+        <xsl:copy-of select="f:report-non-number(.)"/>
+        <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
+
+        <xsl:variable
+            name="indicatedSum"
+            select="f:extract-number(.)
+                    + (f:extract-number(following-sibling::cell[1]))"/>
+        <xsl:variable
+            name="calculatedSum"
+            select="f:column-aggregate(., 'sum')
+                    + (f:column-aggregate(following-sibling::cell[1], 'sum'))"/>
+
+        <!-- <xsl:message expand-text="yes">Indicated: {$indicatedSum}; caluclated: {$calculatedSum}</xsl:message> -->
+
+        <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
     </xsl:template>
 
 

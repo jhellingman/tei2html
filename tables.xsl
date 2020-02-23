@@ -391,7 +391,7 @@
 
     <xsl:function name="f:is-sum-cell" as="xs:boolean">
         <xsl:param name="cell" as="element(cell)"/>
-        <xsl:sequence select="$cell/@role = ('sum', 'subtr', 'avg', 'sumCurrency', 'sumFraction', 'sumSterling', 'sumPeso')"/>
+        <xsl:sequence select="$cell/@role = ('sum', 'subtr', 'avg', 'sumCurrency', 'sumDecimal', 'sumFraction', 'sumSterling', 'sumPeso')"/>
     </xsl:function>
 
 

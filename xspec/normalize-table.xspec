@@ -123,4 +123,61 @@
       </x:expect>
    </x:scenario>
 
+
+    <x:param name="document-root">
+        <TEI.2/>
+    </x:param>
+
+   <x:scenario label="When normalizing a table with a column marked as aligned on the decimal separator">
+      <x:context mode="normalize-table">
+        <table id="table_with_decimal">
+            <column/>
+            <column rend="align(decimal) width(20%) background-color(yellow)"/>
+            <column/>
+            <row>
+                <cell>Row 1</cell>
+                <cell>12.9</cell>
+                <cell>After 1</cell>
+            </row>
+            <row>
+                <cell>Row 2</cell>
+                <cell>24.16</cell>
+                <cell>After 2</cell>
+            </row>
+            <row>
+                <cell>Row with sum</cell>
+                <cell role="sum">37.06</cell>
+                <cell>After totals</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return in a table with the cells split on the decimal separator, and an extra column introduced.">
+        <table id="table_with_decimal" rows="3" headrows="0" cols="4">
+           <column/>
+           <column rend="background-color(yellow) width(10%)"/>
+           <column rend="background-color(yellow) width(10%)"/>
+           <column/>
+           <row>
+              <cell row="1" col="1">Row 1</cell>
+              <cell row="1" col="2" rend="class(alignDecimalIntegerPart)">12</cell>
+              <cell row="1" col="3" rend="class(alignDecimalFractionPart)">.9</cell>
+              <cell row="1" col="4">After 1</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">Row 2</cell>
+              <cell row="2" col="2" rend="class(alignDecimalIntegerPart)">24</cell>
+              <cell row="2" col="3" rend="class(alignDecimalFractionPart)">.16</cell>
+              <cell row="2" col="4">After 2</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">Row with sum</cell>
+              <cell row="3" role="sumDecimal" col="2" rend="class(alignDecimalIntegerPart)">37</cell>
+              <cell row="3" role="sumFraction" col="3" rend="class(alignDecimalFractionPart)">.06</cell>
+              <cell row="3" col="4">After totals</cell>
+           </row>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+
 </x:description>
