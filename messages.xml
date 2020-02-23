@@ -1721,8 +1721,11 @@
 	<msg:messages xml:lang="af" fallback="nl">
 
         <msg:message name="af">Afrikaans</msg:message>
-
-		
+		<msg:message name="msgPage">Bladsy</msg:message>
+		<msg:message name="msgToc">Inhoud</msg:message>
+		<msg:message name="msgAbbreviation">Afkorting</msg:message>
+		<msg:message name="msgAbbreviations">Afkortings</msg:message>
+	
 	</msg:messages>
 
     <!--==#############################################################==-->

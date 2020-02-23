@@ -67,7 +67,9 @@
         <xsl:param name="name" as="xs:string"/>
 
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
-        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baselanguage)])[1]/@fallback" as="xs:string"/>
+        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baselanguage)])[1]/@fallback" as="xs:string?"/>
+
+        <xsl:variable name="fallbackLanguage" select="if ($fallbackLanguage) then $fallbackLanguage else $defaultlanguage" as="xs:string"/>
 
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">
@@ -113,7 +115,9 @@
         <xsl:param name="params" as="map(xs:string, item()*)"/>
 
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
-        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baselanguage)])[1]/@fallback" as="xs:string"/>
+        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baselanguage)])[1]/@fallback" as="xs:string?"/>
+
+        <xsl:variable name="fallbackLanguage" select="if ($fallbackLanguage) then $fallbackLanguage else $defaultlanguage"/>
 
         <xsl:choose>
             <xsl:when test="$msg[lang($language)][1]">

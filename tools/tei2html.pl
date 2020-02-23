@@ -245,7 +245,7 @@ sub processFile($) {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $runChecks && runChecks($xmlFilename);
+    $runChecks && runChecks($filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
     $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
