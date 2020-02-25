@@ -74,15 +74,6 @@
     </xsl:template>
 
 
-    <xsl:template match="@*|node()">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
-    </xsl:template>
-
-
-    <!-- Templates to normalize a table -->
-
     <xd:doc>
         <xd:short>Copy untouched elements when normalizing a table.</xd:short>
         <xd:detail>

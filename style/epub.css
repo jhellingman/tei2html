@@ -40,7 +40,7 @@ p.byline {
 	text-indent: 0;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum, .stage {
+.figureHead, .noteref, .pseudonoteref, .marginnote, .right-marginnote, p.legend, .verseNum, .stage {
 	color: black;
 }
 

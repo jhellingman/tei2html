@@ -62,7 +62,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-margin-note(.)]">
-        <span class="marginnote">
+        <span class="{if (@place = 'right') then 'right-marginnote' else 'marginnote'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>

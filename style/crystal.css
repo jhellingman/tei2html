@@ -76,7 +76,7 @@ h1, h2 {
 	font-weight: normal;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum {
+.figureHead, .noteref, .pseudonoteref, .marginnote, .right-marginnote, p.legend, .verseNum {
 	color: #660000;
 }
 

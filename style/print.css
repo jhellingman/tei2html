@@ -12,13 +12,11 @@ HTML versions posted to Project Gutenberg.
 
 @media print {
 
-@page
-{
+@page {
     size: demy-octavo;
     margin: 27mm 16mm 27mm 16mm;
 
-    @footnotes
-    {
+    @footnotes {
         padding-top: 8pt;
         margin: 0 10%;
     }
@@ -26,8 +24,7 @@ HTML versions posted to Project Gutenberg.
     counter-reset: footnote;
 }
 
-@page coverpage
-{
+@page coverpage {
     margin: 0;
     @top-left { content: normal }
     @top-right { content: normal }
@@ -37,8 +34,7 @@ HTML versions posted to Project Gutenberg.
 }
 
 
-@page titlepage
-{
+@page titlepage {
     @top-left { content: normal }
     @top-right { content: normal }
     @bottom-left { content: normal }
@@ -46,53 +42,41 @@ HTML versions posted to Project Gutenberg.
     @bottom-right { content: normal }
 }
 
-
-@page :left
-{
-    @bottom-left
-    {
+@page :left {
+    @bottom-left {
         content: counter(page);
         margin: 0 10%;
     }
 
-    @top-left
-    {
+    @top-left {
         content: string(header, first);
         font-style: italic;
         margin: 0 10%;
     }
 }
 
-@page :right
-{
-    @bottom-right
-    {
+@page :right {
+    @bottom-right {
         content: counter(page);
         margin: 0 10%;
     }
 
-    @top-right
-    {
+    @top-right {
         content: string(header, first);
         font-style: italic;
         margin: 0 10%;
     }
 }
 
-
-@page frontmatter :left
-{
-    @bottom-left
-    {
+@page frontmatter :left {
+    @bottom-left {
         content: counter(page, lower-roman);
         margin: 0 10%;
     }
 }
 
-@page frontmatter :right
-{
-    @bottom-right
-    {
+@page frontmatter :right {
+    @bottom-right {
         content: counter(page, lower-roman);
         margin: 0 10%;
     }
@@ -101,61 +85,51 @@ HTML versions posted to Project Gutenberg.
 
 /* ==== DOCUMENT LEVEL FORMATTING ==== */
 
-:root
-{
+:root {
     color: black;
     background: white;
     font-size: 10pt;
 }
 
-body
-{
+body {
     margin: 0 10%;
     text-align: justify;
 }
 
-div.front
-{
+div.front {
     page: frontmatter
 }
 
-div.body
-{
+div.body {
     counter-reset: page 1;
 }
 
-div.titlePage
-{
+div.titlePage {
     page: titlepage;
     page-break-after: always;
-
     color: black;
     background: white;
     border: white 0 solid;
 }
 
-h1.docTitle
-{
+h1.docTitle {
     string-set: doctitle content();
 }
 
 
-div.div1
-{
+div.div1 {
     page-break-after: always;
 }
 
 
-h2.normal
-{
+h2.normal {
     string-set: header content();
 }
 
 
 /* ==== FOOTNOTES ==== */
 
-.displayfootnote
-{
+.displayfootnote {
     display: prince-footnote;
     counter-increment: footnote;
     footnote-style-position: inside;
@@ -167,20 +141,18 @@ h2.normal
     text-align: justify;
 }
 
-::footnote-marker
-{
+::footnote-marker {
     footnote-style-position: inside;
 }
 
-::footnote-call
-{
+::footnote-call {
     content: counter(footnote);
     font-size: 83%;
     vertical-align: super;
 }
 
-.pseudonoteref              /* render references to footnotes similar to note markers */
-{
+/* render references to footnotes similar to note markers */
+.pseudonoteref {
     content: target-counter(attr(href), footnote);
     font-size: 83%;
     vertical-align: super;
@@ -188,20 +160,17 @@ h2.normal
 
 /* Suppress display of generated endnotes in HTML */
 
-div.footnotes
-{
+div.footnotes {
     display: none;          /* Suppress the display of the generated footnote sections */
 }
 
-.noteref
-{
+.noteref {
     display: none;          /* Suppress the display of the generated footnote numbers */
 }
 
 /* ==== LINKS ==== */
 
-a:link, a:visited
-{
+a:link, a:visited {
     color: black;
     background: transparent;
     text-decoration: none;
@@ -211,19 +180,16 @@ a:link, a:visited
 
 /* Also use the .par class, as we do not use p in the HTML generated for Prince */
 
-p, .par
-{
+p, .par {
     margin: 0;
     text-indent: 1em;
 }
 
-p.first, p.tocChapter, p.byline, .par.first, .par.tocChapter, .par.byline
-{
+p.first, p.tocChapter, p.byline, .par.first, .par.tocChapter, .par.byline {
     text-indent: 0em;
 }
 
-h1, h2, h3, h4, h5, h6
-{
+h1, h2, h3, h4, h5, h6 {
     color: black;
     text-align: left;
 }
@@ -232,14 +198,12 @@ span.abbr, abbr {
     white-space: nowrap;
 }
 
-span.num, span.corr, span.abbr, span.trans, span.measure, abbr
-{
+span.num, span.corr, span.abbr, span.trans, span.measure, abbr {
     border-bottom: 0;
     text-decoration: none;
 }
 
-.transcriberNote
-{
+.transcriberNote {
     background-color: transparent;
     border: white 0 solid;
     font-size: 7pt;
@@ -247,12 +211,11 @@ span.num, span.corr, span.abbr, span.trans, span.measure, abbr
     margin: 0;
 }
 
-.figureHead, .noteref, .marginnote, p.legend, .verseNum, .rightnote,  .pagenum, .linenum, .pagenum a {
+.figureHead, .noteref, .marginnote, .right-marginnote, p.legend, .verseNum, .rightnote, .pagenum, .linenum, .pagenum a {
     color: black;
 }
 
-hr
-{
+hr {
     border: 0;
     color: black;
     background-color: black;
@@ -261,8 +224,7 @@ hr
 }
 
 /* add margins to various text elements */
-.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp
-{
+.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp {
     padding: 0;
     margin-top: 1.58em;
     margin-bottom: 1.58em;
@@ -270,14 +232,13 @@ hr
 
 /* ==== PAGE NUMBERS ==== */
 
-
-a.pageref           /* Replace references with pagenumbers with actual pagenumbers */
-{
+/* Replace references with pagenumbers with actual pagenumbers */
+a.pageref {
     content: target-counter(attr(href), page);
 }
 
-.pagenum            /* Suppress marginal pagenumbers (using display: none will break references!) */
-{
+/* Suppress marginal pagenumbers (using display: none will break references!) */
+.pagenum {
     visibility: hidden;
 }
 
@@ -290,19 +251,16 @@ h4 { prince-bookmark-level: 4 }
 h5 { prince-bookmark-level: 5 }
 h6 { prince-bookmark-level: 6 }
 
-h1.label, h2.label, h3.label, h4.label, h5.label, h6.label
-{
+h1.label, h2.label, h3.label, h4.label, h5.label, h6.label {
     prince-bookmark-level: none;
 }
 
-div.titlePage > h2
-{
+div.titlePage > h2 {
     prince-bookmark-level: none;
 }
 
 
-.pglink, .catlink, .exlink, .wplink, .biblink, .seclink
-{
+.pglink, .catlink, .exlink, .wplink, .biblink, .seclink {
     background-image: none;
     padding-right: 0;
 }

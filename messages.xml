@@ -1721,17 +1721,45 @@
 	<msg:messages xml:lang="af" fallback="nl">
 
         <msg:message name="af">Afrikaans</msg:message>
+        <msg:message name="en">Engels</msg:message>
+        <msg:message name="de">Duits</msg:message>
+        <msg:message name="es">Spaans</msg:message>
+
 		<msg:message name="msgPage">Bladsy</msg:message>
 		<msg:message name="msgToc">Inhoud</msg:message>
 		<msg:message name="msgAbbreviation">Afkorting</msg:message>
 		<msg:message name="msgAbbreviations">Afkortings</msg:message>
-	
+		<msg:message name="msgAbbreviationOverview">Oorsig van afkortings gebruik.</msg:message>
+		<msg:message name="msgAuthor">Skrywer</msg:message>
+		<msg:message name="msgAvailability">Beskikbaarheid</msg:message>
+		<msg:message name="msgColophon">Kolofon</msg:message>
+		<msg:message name="msgCorrection">Regstelling</msg:message>
+		<msg:message name="msgCorrections">Regstellings</msg:message>
+		<msg:message name="msgCorrectionsAppliedToText">Die volgende regstellings is aan die teks gemaak:</msg:message>
+		<msg:message name="msgCorrectionsOverview">Oorsig van regstellings aan die teks.</msg:message>
+		<msg:message name="msgDeleted">Verwyder</msg:message>
+		<msg:message name="msgEditDistance">Redigeerafstand</msg:message>
+		<msg:message name="msgExpansion">Uitbreiding</msg:message>
+		<msg:message name="msgExternalLink">Eksterne skakel</msg:message>
+		<msg:message name="msgExternalReferences">Eksterne verwysings</msg:message>
+		<msg:message name="msgExternalReferencesDisclaimer">Hierdie Project Gutenberg-e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
+		<msg:message name="msgInfo">Info</msg:message>
+		<msg:message name="msgLanguage">Taal</msg:message>
+		<msg:message name="msgMetadata">Metadata</msg:message>
+		<msg:message name="msgNotInSource">Nie in die bron nie</msg:message>
+		<msg:message name="msgRevisionHistory">Hersieningsgeskiedenis</msg:message>
+		<msg:message name="msgSource">Bron</msg:message>
+		<msg:message name="msgSourcePublicationDate">Oorspronklike publikasiedatum</msg:message>
+		<msg:message name="msgTitle">Titel</msg:message>
+		<msg:message name="msgURL">URL</msg:message>
+		<msg:message name="msgNotApplicable">Nie van toepassing nie</msg:message>
+		
 	</msg:messages>
 
     <!--==#############################################################==-->
     <!-- Cebuano translation -->
 
-    <msg:messages xml:lang="ceb">
+    <msg:messages xml:lang="ceb" fallback="tl">
         <msg:message name="msgContents">Sulod</msg:message>
         <msg:message name="msgToc">Sulod</msg:message>
         <msg:message name="msgPage">Panid</msg:message>
