@@ -81,7 +81,8 @@ handled in a special way when processing the TEI file.
 |:----------------------|:-----------------------|:---------------------------|
 | `note`                | `apparatus`            | The note is part of a critical apparatus. |
 | `note`                | `foot`                 | The note is a footnote (*default*). |
-| `note`                | `margin`               | The note is a marginal note. |
+| `note`                | `margin`, `left`, `right` | The note is a marginal note (set to the left or right of the text block). |
+| `note`                | `cut-in-left`, `cut-in-right` | The note is a *cut-in* note (set inside the text block). |
 | `note`                | `table`                | The note appears directly under the table it appears in. |
 
 | **TEI element**       | **`@unit` value**      | **Notes**                  |
