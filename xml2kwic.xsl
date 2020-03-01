@@ -224,6 +224,10 @@
                         font-size: smaller;
                     }
 
+                    .var1 {
+                        background-color: white;
+                    }
+
                     .var2 {
                         background-color: #80FFEE;
                     }
@@ -247,6 +251,18 @@
 
                     .ix {
                         background-color: yellow;
+                    }
+
+                    .nt {
+                        background-color: #ffccff;
+                    }
+
+                    .fig {
+                        background-color: #d9ffb3;
+                    }
+
+                    .tbl {
+                        background-color: #ccffff;
                     }
 
                 </style>
@@ -482,9 +498,11 @@
         <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
 
         <tr>
-            <xsl:if test="@inIndex = 'true'">
-                <xsl:attribute name="class" select="'ix'"/>
-            </xsl:if>
+            <xsl:if test="@category = 'index'"><xsl:attribute name="class" select="'ix'"/></xsl:if>
+            <xsl:if test="@category = 'note'"><xsl:attribute name="class" select="'nt'"/></xsl:if>
+            <xsl:if test="@category = 'figure'"><xsl:attribute name="class" select="'fig'"/></xsl:if>
+            <xsl:if test="@category = 'table'"><xsl:attribute name="class" select="'tbl'"/></xsl:if>
+
             <td class="pre">
                 <xsl:apply-templates mode="#current" select="k:preceding"/>
             </td>
@@ -515,9 +533,11 @@
         <xsl:param name="variants" tunnel="yes" as="xs:string*"/>
 
         <tr>
-            <xsl:if test="@inIndex = 'true'">
-                <xsl:attribute name="class" select="'ix'"/>
-            </xsl:if>
+            <xsl:if test="@category = 'index'"><xsl:attribute name="class" select="'ix'"/></xsl:if>
+            <xsl:if test="@category = 'note'"><xsl:attribute name="class" select="'nt'"/></xsl:if>
+            <xsl:if test="@category = 'figure'"><xsl:attribute name="class" select="'fig'"/></xsl:if>
+            <xsl:if test="@category = 'table'"><xsl:attribute name="class" select="'tbl'"/></xsl:if>
+
             <td class="pre">
                 <xsl:apply-templates mode="drop-rtl-at-end" select="k:preceding"/>
                 <xsl:apply-templates mode="copy-rtl-at-start" select="k:following"/>
@@ -673,7 +693,7 @@
         <xsl:param name="keyword" required="yes"/>
 
         <xsl:if test="$keyword = @form">
-            <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
+            <k:match form="{@form}" page="{@page}" category="{@category}" xml:lang="{@xml:lang}">
                 <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $context-size]"/></k:preceding>
                 <k:word><xsl:copy-of select="."/></k:word>
                 <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $context-size]"/></k:following>
@@ -695,7 +715,7 @@
 
     <xsl:template mode="multi-kwic" match="k:w">
         <xsl:if test="not(f:is-stopword(., @xml:lang)) and f:is-selected-language(@xml:lang)">
-            <k:match form="{@form}" page="{@page}" inIndex="{@inIndex}" xml:lang="{@xml:lang}">
+            <k:match form="{@form}" page="{@page}" category="{@category}" xml:lang="{@xml:lang}">
                 <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $context-size]"/></k:preceding>
                 <k:word><xsl:copy-of select="."/></k:word>
                 <k:following><xsl:copy-of select="following-sibling::*[position() &lt; $context-size]"/></k:following>
@@ -931,7 +951,7 @@
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
-        <xsl:variable name="inIndex" select="if (ancestor-or-self::*[@type='Index']) then 'true' else 'false'"/>
+        <xsl:variable name="category" select="f:category(.)"/>
         <xsl:variable name="inReference" select="if (ancestor-or-self::ref[@target] or ancestor-or-self::xref[@url]) then 'true' else 'false'"/>
         <xsl:variable name="reference" select="if (ancestor-or-self::ref[@target]) then '#' || ancestor-or-self::ref[@target] else ancestor-or-self::xref[@url]"/>
 
@@ -943,8 +963,8 @@
                         <xsl:attribute name="style" select="$style"/>
                     </xsl:if>
                     <xsl:attribute name="page" select="$page"/>
-                    <xsl:if test="$inIndex = 'true'">
-                        <xsl:attribute name="inIndex" select="$inIndex"/>
+                    <xsl:if test="$category != ''">
+                        <xsl:attribute name="category" select="$category"/>
                     </xsl:if>
                     <xsl:if test="$inReference = 'true'">
                         <xsl:attribute name="ref" select="$reference"/>
@@ -964,6 +984,21 @@
             </xsl:non-matching-substring>
         </xsl:analyze-string>
     </xsl:template>
+
+    
+    <xsl:function name="f:category" as="xs:string">
+        <xsl:param name="node" as="node()"/>
+
+        <xsl:sequence select="if ($node/ancestor-or-self::*[@type='Index'])
+                              then 'index' 
+                              else if ($node/ancestor-or-self::figure)
+                                   then 'figure'
+                                   else if ($node/ancestor-or-self::note)
+                                        then 'note'
+                                        else if ($node/ancestor-or-self::table)
+                                             then 'table'
+                                             else ''"/>
+    </xsl:function>
 
 
     <xd:doc>
