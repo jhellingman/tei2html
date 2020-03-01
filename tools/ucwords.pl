@@ -27,6 +27,7 @@ my $makeHeatMap = 0;    # Set to 1 to generate a heat-map document.
 my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
 my $xmlReport = 0;      # Set to 1 to generate a report in xml.
+my $csvReport = 0;      # Set to 1 to generate a report in plain text (CSV).
 my $idBook = 0;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -36,6 +37,7 @@ GetOptions(
     'x' => \$xmlReport,
     'r' => \$retrograd,
     'i' => \$ignoreLanguage,
+    'c' => \$csvReport,
     'm' => \$makeHeatMap);
 
 if (!defined $ARGV[0]) {
@@ -108,6 +110,9 @@ sub main {
     report();
     if ($xmlReport == 1) {
         reportXML();
+    }
+    if ($csvReport == 1) {
+        reportCSV();
     }
     if ($makeHeatMap == 1) {
         makeHeatMap();
@@ -422,6 +427,12 @@ sub reportXML {
     print USAGEFILE "</usage>\n";
 }
 
+sub reportCSV {
+    open (CSVFILE, ">words.csv") || die("Could not create output file 'words.csv'");
+    reportWordsCSV();
+    close (CSVFILE);
+}
+
 
 #
 # sortWords
@@ -442,6 +453,16 @@ sub reportWordsXML() {
     my @languageList = keys %wordHash;
     foreach my $language (@languageList) {
         reportLanguageWordsXML($language);
+    }
+}
+
+#
+# reportWordsCSV
+#
+sub reportWordsCSV() {
+    my @languageList = keys %wordHash;
+    foreach my $language (@languageList) {
+        reportLanguageWordsCSV($language);
     }
 }
 
@@ -507,6 +528,27 @@ sub reportLanguageWordsXML($) {
     }
 
     print USAGEFILE "</words>\n";
+}
+
+
+#
+# reportLanguageWordsCSV
+#
+sub reportLanguageWordsCSV($) {
+    my $language = shift;
+    my @wordList = keys %{$wordHash{$language}};
+
+    foreach my $word (@wordList) {
+        my $key = NormalizeForLanguage($word, $language);
+        $word = "$key!$word";
+    }
+    @wordList = sort @wordList;
+
+    foreach my $item (@wordList) {
+        my ($key, $word) = split(/!/, $item, 2);
+        my $count = $wordHash{$language}{$word};
+        print CSVFILE "$key\t$word\t$language\t$count\n";
+    }
 }
 
 
