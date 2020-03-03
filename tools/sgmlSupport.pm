@@ -927,6 +927,11 @@ BEGIN {
     $ent{'Ociac'}        = chr(0x1ED0);  #  LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE
     $ent{'ociac'}        = chr(0x1ED1);  #  LATIN SMALL LETTER O WITH CIRCUMFLEX AND ACUTE
 
+    $ent{'dclick'}       = chr(0x01C0);  #  LATIN LETTER DENTAL CLICK
+    $ent{'lclick'}       = chr(0x01C1);  #  LATIN LETTER LATERAL CLICK
+    $ent{'aclick'}       = chr(0x01C2);  #  LATIN LETTER ALVEOLAR CLICK
+    $ent{'rclick'}       = chr(0x01C3);  #  LATIN LETTER RETROFLEX CLICK
+
 
     ###############################################################################
     ## GREEK ENTITIES REMAPPED:
