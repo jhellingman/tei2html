@@ -361,9 +361,9 @@ my %abbreviations = (
 
 "acts of the apostles"      => "Acts",
 "acts"                      => "Acts",
-"revelation"                => "Rev",
-"apoc."                     => "Rev",
-"apocalypse"                => "Rev",
+"revelation"                => "Re",
+"apoc."                     => "Re",
+"apocalypse"                => "Re",
 "colossians"                => "Col",
 "col."                      => "Col",
 "col"                       => "Col",
@@ -413,8 +413,8 @@ my %abbreviations = (
 "philippians"               => "Phil",
 "phil."                     => "Phil",
 "phil"                      => "Phil",
-"rev."                      => "Rev",
-"rv"                        => "Rev",
+"rev."                      => "Re",
+"rv"                        => "Re",
 "romans"                    => "Rom",
 "rom."                      => "Rom",
 "rom"                       => "Rom",
@@ -516,7 +516,7 @@ main();
 
 
 
-sub buildRegularExpression() {
+sub buildRegularExpression {
     my @listBooks = ();
     foreach my $book (keys %books) {
         push (@listBooks, $book);
@@ -564,7 +564,7 @@ sub test {
 }
 
 
-sub main() {
+sub main {
     my $file = $ARGV[0];
     open(INPUTFILE, $file) || die("Could not open input file $file");
 
@@ -631,18 +631,18 @@ sub tagRef($$$$$) {
         return $match;
     }
 
-    print STDERR "REF: $match     -->     $book $chapter : $verse\n";
+    # print STDERR "REF: $match     -->     $book $chapter : $verse\n";
 
     if ($book ne "") {
-        if ($verse == 0) {
-            # print STDERR "DEBUG: $match => $book $chapter\n";
+        if (!defined $verse or $verse == 0) {
+            print STDERR "REFERENCE: $match => $book $chapter\n";
             return "<xref url=\"bib:$book $chapter\">$match</xref>";
         }
-        if ($range == 0) {
-            # print STDERR "DEBUG: $match => $book $chapter:$verse\n";
+        if (!defined $range or $range == 0) {
+            print STDERR "REFERENCE: $match => $book $chapter:$verse\n";
             return "<xref url=\"bib:$book $chapter:$verse\">$match</xref>";
         }
-        # print STDERR "DEBUG: $match => $book $chapter:$verse-$range\n";
+        print STDERR "REFERENCE: $match => $book $chapter:$verse-$range\n";
         return "<xref url=\"bib:$book $chapter:$verse-$range\">$match</xref>";
     }
     return $match;

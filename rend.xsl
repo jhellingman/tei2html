@@ -105,7 +105,7 @@
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="value" as="xs:string"/>
 
-        <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $value, ')'))"/>
+        <xsl:value-of select="normalize-space(f:remove-rend-value($rend, $key) || ' ' || $key || '(' || $value || ')')"/>
     </xsl:function>
 
 
@@ -117,8 +117,39 @@
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="class" as="xs:string"/>
 
-        <xsl:variable name="new-class" select="normalize-space(concat(f:rend-value($rend, 'class'), ' ', $class))"/>
-        <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, 'class'), ' class(', $new-class, ')'))"/>
+        <xsl:variable name="new-class" select="normalize-space(f:rend-value($rend, 'class') || ' ' || $class)"/>
+
+        <!-- Remove possible duplicates -->
+        <xsl:variable name="classes" select="tokenize($new-class, ' ')"/>
+        <xsl:variable name="new-class">
+            <xsl:for-each-group select="$classes" group-by=".">
+                <xsl:sequence select="."/>
+            </xsl:for-each-group>
+        </xsl:variable>
+
+        <xsl:value-of select="normalize-space(f:remove-rend-value($rend, 'class') || ' class(' || $new-class || ')')"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Remove a class from the class key in a rendition ladder.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:remove-class" as="xs:string">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="class" as="xs:string"/>
+
+        <xsl:variable name="new-class" select="normalize-space(f:rend-value($rend, 'class'))"/>
+
+        <!-- Remove the indicated class -->
+        <xsl:variable name="classes" select="tokenize($new-class, ' ')"/>
+        <xsl:variable name="new-class">
+            <xsl:for-each select="$classes[. != $class]">
+                <xsl:sequence select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:value-of select="normalize-space(f:remove-rend-value($rend, 'class') || ' class(' || $new-class || ')')"/>
     </xsl:function>
 
 

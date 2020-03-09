@@ -121,62 +121,6 @@ elements as they appear in the paragraph (similar to the pb handling in extract-
 <xsl:template match="choice/sic"/>
 
 
-<!--======= lift-from-paragraph =======-->
-
-<!--
-
-The main use case for this is to deal with the differences between the TEI and HTML
-paragraph models. Several types of elements that TEI allows in a paragraph are
-not not supposed to go into a paragraph in HTML. For this implementation, the assumption
-is that such non-nestable items are only present as direct childeren of the paragraph,
-so deeper nested items will not be lifted out of the paragraph. (Coded will added
-to signal such cases on transformation.)
-
-TODO:
-
-* Strip leading spaces from first text node in following paragraphs
-* Generate an id, to make sure the id is based on the original p element.
-* Handle other items that should be lifted (q, lg, figure, list, etc.)
-* Process rendering ladders, such that paragraph initial things (like drop-caps) will not be repeated
-* Add a class to subsequent generated paragraphs, to indicate they are follow-up paragraphs.
-
-To make this work without introducing complex code, it is best to run this
-in a separate process in a pipeline of XSL transformations.
-
--->
-
-<xsl:template match="node() | @*" mode="lift-from-paragraph">
-    <xsl:copy-of select="."/>
-</xsl:template>
-
-<xsl:template match="p[f:contains-liftable-item(.)]" mode="lift-from-paragraph">
-    <xsl:copy>
-        <xsl:copy-of select="@*"/>
-        <xsl:if test="not(@id)"><xsl:attribute name="id" select="generate-id(.)"/></xsl:if>
-        <xsl:copy-of select="*[f:is-liftable-item(.)][1]/preceding-sibling::node()"/>
-    </xsl:copy>
-    <xsl:copy-of select="*[f:is-liftable-item(.)][1]"/>
-    <xsl:variable name="remainder">
-        <xsl:copy>
-            <!-- prevent duplications of ids -->
-            <xsl:copy-of select="@*[local-name(.) != 'id']"/>
-            <xsl:copy-of select="*[f:is-liftable-item(.)][1]/following-sibling::node()"/>
-        </xsl:copy>
-    </xsl:variable>
-    <xsl:if test="$remainder/p/element() or normalize-space($remainder) != ''">
-        <xsl:apply-templates select="$remainder" mode="lift-from-paragraph" />
-    </xsl:if>
-</xsl:template>
-
-<xsl:function name="f:is-liftable-item" as="xs:boolean">
-    <xsl:param name="node" as="node()"/>
-    <xsl:sequence select="if ($node/self::table) then true() else false()"/>
-</xsl:function>
-
-<xsl:function name="f:contains-liftable-item" as="xs:boolean">
-    <xsl:param name="node" as="node()"/>
-    <xsl:sequence select="if ($node/*[f:is-liftable-item(.)]) then true() else false()"/>
-</xsl:function>
 
 
 <!--======= f:break-into-lines =======-->
