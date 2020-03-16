@@ -573,14 +573,16 @@
 
         <!-- We need to collect the column-related rendering rules first,
              so they can be overridden by later cell rendering rules -->
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css-column"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-column"/>
 
         <!-- Then follow the row-related rendering rules -->
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css-row"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-row"/>
 
         <!-- Handle the rest of the document (including table cells) -->
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="css"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css"/>
+        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="css"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css"/>
 
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-handheld"/>
