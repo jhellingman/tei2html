@@ -855,6 +855,9 @@
     <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
         padding-top: <xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/>;
     </xsl:if>
+    <xsl:if test="f:has-rend-value(@rend, 'dropcap-height')">
+        height: <xsl:value-of select="f:rend-value(@rend, 'dropcap-height')"/>;
+    </xsl:if>
     font-size: <xsl:value-of select="f:rend-value(@rend, 'dropcap')"/>;
     margin-left: 0;
     margin-bottom: 5px;

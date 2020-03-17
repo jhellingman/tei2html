@@ -356,6 +356,7 @@
 
                 <!-- Non-CSS properties related to decorative initials -->
                 <xsl:when test="$property='dropcap'"/>
+                <xsl:when test="$property='dropcap-height'"/>
                 <xsl:when test="$property='dropcap-offset'"/>
                 <xsl:when test="$property='initial-height'"/>
                 <xsl:when test="$property='initial-image'"/>

@@ -25,19 +25,16 @@ The main use case for this is to deal with the differences between the TEI and H
 paragraph models. Several types of elements that TEI allows in a paragraph are
 not not supposed to go into a paragraph in HTML. For this implementation, the assumption
 is that such non-nestable items are only present as direct childeren of the paragraph,
-so deeper nested items will not be lifted out of the paragraph. (Coded will added
-to signal such cases on transformation.)
+so deeper nested items will not be lifted out of the paragraph. (Code will added
+to signal such cases during transformation.)
 
-TODO:
-
-* Strip leading spaces from first text node in following paragraphs
-* [NOT NEEDED: PRE-PROCESSING] Generate an id, to make sure the id is based on the original p element.
-* [DONE] Handle other items that should be lifted (q, lg, figure, list, etc.)
-* [DONE] Process rendering ladders, such that paragraph initial things (like drop-caps) will not be repeated
-* [DONE] Add a class to subsequent generated paragraphs, to indicate they are follow-up paragraphs.
+* Handle items that should be lifted (q, lg, figure, list, etc.)
+* Strip leading spaces from the initial text node in following paragraph fragments.
+* Process rendering ladders, such that paragraph initial things (like drop-caps) will not be repeated
+* Add a class to subsequent generated paragraphs, to indicate they are follow-up paragraphs.
 
 To make this work without introducing complex code, it is best to run this
-in a separate process in a pipeline of XSL transformations.
+in a separate pre-processing step in a pipeline of XSL transformations.
 
 -->
 
@@ -56,11 +53,15 @@ in a separate process in a pipeline of XSL transformations.
             <!-- prevent duplication of id by dropping them from the copy -->
             <xsl:copy-of select="@*[not(local-name(.) = ('id', 'rend'))]"/>
             <xsl:copy-of select="f:adjust-rend-attribute-for-following-fragments(@rend)"/>
-            <xsl:copy-of select="*[f:is-liftable-item(.)][1]/following-sibling::node()"/>
+            <!-- remove leading spaces from the first child node if that is a text node -->
+            <xsl:variable name="first" select="(*[f:is-liftable-item(.)][1]/following-sibling::node())[1]"/>
+            <xsl:variable name="first" select="if ($first instance of text()) then replace($first, '^\s+', '') else $first"/>
+            <xsl:copy-of select="$first"/>
+            <xsl:copy-of select="(*[f:is-liftable-item(.)][1]/following-sibling::node())[position() > 1]"/>
         </xsl:copy>
     </xsl:variable>
     <xsl:if test="$remainder/p/element() or normalize-space($remainder) != ''">
-        <xsl:apply-templates select="$remainder" mode="lift-from-paragraph" />
+        <xsl:apply-templates select="$remainder" mode="lift-from-paragraph"/>
     </xsl:if>
 </xsl:template>
 
@@ -72,6 +73,9 @@ in a separate process in a pipeline of XSL transformations.
     <xsl:variable name="rend" select="f:remove-rend-value($rend, 'initial-width')"/>
     <xsl:variable name="rend" select="f:remove-rend-value($rend, 'initial-height')"/>
     <xsl:variable name="rend" select="f:remove-rend-value($rend, 'initial-image')"/>
+    <xsl:variable name="rend" select="f:remove-rend-value($rend, 'dropcap')"/>
+    <xsl:variable name="rend" select="f:remove-rend-value($rend, 'dropcap-height')"/>
+    <xsl:variable name="rend" select="f:remove-rend-value($rend, 'dropcap-offset')"/>
 
     <xsl:variable name="rend" select="f:remove-class($rend, 'dropcap')"/>
 
@@ -117,13 +121,5 @@ in a separate process in a pipeline of XSL transformations.
     <xsl:sequence select="false()"/>
 </xsl:function>
 
-
-<!--
-<xsl:function name="f:rend-value" as="xs:string">
-    <xsl:param name="node" as="node()?"/>
-    <xsl:param name="name" as="xs:string"/>
-    <xsl:sequence select="'dummy'"/>
-</xsl:function>
--->
 
 </xsl:stylesheet>
