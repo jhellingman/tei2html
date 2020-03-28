@@ -102,13 +102,13 @@
 
 
     <xd:doc>
-        <xd:short>Verify an image is present in the imageinfo file and show a warning otherwise.</xd:short>
+        <xd:short>Warn if an image linked to is not present in the imageinfo file.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:verify-linked-image">
+    <xsl:function name="f:warn-missing-linked-image">
         <xsl:param name="url" as="xs:string"/>
 
-        <xsl:if test="f:is-image-present($url)">
+        <xsl:if test="not(f:is-image-present($url))">
             <xsl:copy-of select="f:log-warning('Linked image {1} not in image-info file {2}.', ($url, normalize-space($imageInfoFile)))"/>
         </xsl:if>
     </xsl:function>
@@ -135,7 +135,7 @@
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'link')">
                 <xsl:variable name="url" select="f:rend-value(@rend, 'link')"/>
-                <xsl:copy-of select="f:verify-linked-image($url)"/>
+                <xsl:copy-of select="f:warn-missing-linked-image($url)"/>
                 <a>
                     <xsl:choose>
                         <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">

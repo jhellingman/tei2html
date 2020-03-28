@@ -2181,7 +2181,7 @@ sub getAttrVal {
     my $attrName = shift;
     my $attrs = shift;
 
-    if ($attrs =~ /$attrName\s*=\s*(\w+)/i) {
+    if ($attrs =~ /$attrName\s*=\s*([\w-]+)/i) {
         return $1;
     } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
         return $1;
