@@ -1277,7 +1277,7 @@ BEGIN {
     $ent{'rlm'}         = chr(0x200F);  # RIGHT-TO-LEFT MARK
     $ent{'alm'}         = chr(0x061C);  # ARABIC LETTER MARK
 
-    ## Explicit Directional Embeddings 
+    ## Explicit Directional Embeddings
     $ent{'lre'}         = chr(0x202A);  # LEFT-TO-RIGHT EMBEDDING
     $ent{'rle'}         = chr(0x202B);  # RIGHT-TO-LEFT EMBEDDING
     $ent{'lro'}         = chr(0x202D);  # LEFT-TO-RIGHT OVERRIDE
@@ -1340,6 +1340,24 @@ BEGIN {
 
     $ent{'heshindot'}       = chr(0x5C1);   # SHINDOT
     $ent{'hesindot'}        = chr(0x5C2);   # SINDOT
+
+    ###############################################################################
+
+    # Astrological signs followed by the text variant selector.
+
+    $ent{'Sun'}         = chr(0x2609) . chr(0xFE0E);
+    $ent{'Moon'}        = chr(0x263D) . chr(0xFE0E);
+    $ent{'Mercury'}     = chr(0x263F) . chr(0xFE0E);
+    $ent{'Venus'}       = chr(0x2640) . chr(0xFE0E);
+    $ent{'Earth'}       = chr(0x2295) . chr(0xFE0E);
+    $ent{'Earth2'}      = chr(0x2641) . chr(0xFE0E);
+    $ent{'Mars'}        = chr(0x2642) . chr(0xFE0E);
+    $ent{'Jupiter'}     = chr(0x2643) . chr(0xFE0E);
+    $ent{'Saturn'}      = chr(0x2644) . chr(0xFE0E);
+    $ent{'Uranus'}      = chr(0x2645) . chr(0xFE0E);
+    $ent{'Uranus2'}     = chr(0x26E2) . chr(0xFE0E);
+    $ent{'Neptune'}     = chr(0x2646) . chr(0xFE0E);
+    $ent{'Pluto'}       = chr(0x2647) . chr(0xFE0E);
 
     ###############################################################################
 
@@ -1906,7 +1924,7 @@ BEGIN {
 
     # Special dashes
     $ent{'longdash'}    = chr(0x2014) . chr(0x2014); # long dash: two em-dashes.
-    
+
     $ent{'special'}     = '[#]';                     # Unknown symbol.
 
     # Spaces and dots
@@ -1965,7 +1983,7 @@ BEGIN {
     $ent{'availability.nl'} = "Dit eBoek is voor kosteloos gebruik door iedereen overal, met vrijwel geen beperkingen van welke soort dan ook. U mag het kopi&#xEB;ren, weggeven of hergebruiken onder de voorwaarden van de Project Gutenberg Licentie in dit eBoek of on-line op <xref url='https://www.gutenberg.org/'>www.gutenberg.org</xref>.";
 
     # Common abbreviations in small-caps.
-    
+
     $ent{'BC'} = '<hi rend="asc">b.c.</hi>';
     $ent{'AD'} = '<hi rend="asc">a.d.</hi>';
     $ent{'AH'} = '<hi rend="asc">a.h.</hi>';
