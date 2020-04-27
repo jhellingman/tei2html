@@ -156,21 +156,21 @@
 
     <x:scenario label="When rendering a TEI paragraph with a rendering attribute">
         <x:context>
-            <p rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="test_p_rend" rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="will result in a HTML parapgraph with an additional class">
             <p xmlns="http://www.w3.org/1999/xhtml"
-               id="xd89e1"
-               class="first xd89e1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
+               id="test_p_rend"
+               class="first test_p_rend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
         </x:expect>
     </x:scenario>
 
     <x:scenario label="When rendering a TEI paragraph with a rendering attribute (CSS mode)">
         <x:context mode="css">
-            <p rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="test_p_rend" rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="and will result in CSS-class">
-.xd96e1 {
+.test_p_rend {
 text-indent:2em;
 }
 </x:expect>
@@ -178,30 +178,30 @@ text-indent:2em;
 
     <x:scenario label="When rendering a TEI paragraph with a decorative initial">
         <x:context>
-            <p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
             <p xmlns="http://www.w3.org/1999/xhtml"
-               id="xd101e1"
-               class="xd101e1">
-               <span class="xd101e1init">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
+               id="test_p_initial"
+               class="test_p_initial">
+               <span class="test_p_initialinit">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
         </x:expect>
     </x:scenario>
 
     <x:scenario label="When rendering a TEI paragraph with a decorative initial (CSS mode)">
         <x:context mode="css">
-            <p rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="test_p_initial_css" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
 
-.xd106e1 {
+.test_p_initial_css {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd106e1init {
+.test_p_initial_cssinit {
     float: left;
     width: 90px;
     height: 95px;

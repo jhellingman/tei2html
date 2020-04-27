@@ -74,6 +74,12 @@ sub cleanText($) {
         $line =~ s/ ([.,;!?]")$/$1/g;
         $line =~ s/ ?-- ?/--/g;
 
+        # Handle unwanted characters:
+        $line =~ s/[•]/./g;
+        $line =~ s/[„]/"/g;
+        $line =~ s/[€]/E/g;
+        $line =~ s/[™]/"/g;
+
         print OUTPUTFILE $line . "\n";
     }
     close(INPUTFILE);
