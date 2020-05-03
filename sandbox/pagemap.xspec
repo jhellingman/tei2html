@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="pagemap.xsl"
+               version="3.0">
+
+   <x:scenario label="When expanding a pagemap">
+      <x:context mode="expand-page-map">
+        <pageMap>
+            <page type="cover" facs="page-images/000.png"/>
+            <pageRange from="1" to="4"  s="1" n="%R" target="p.%r"  type="text" facs="page-images/%00s.png"/>
+            <pageRange from="1" to="12" s="5" n="%n" target="p%00n" type="text" facs="page-images/%00s.png"/>
+            <page type="cover" facs="page-images/017.png"/>
+        </pageMap>
+      </x:context>
+      <x:expect label="will result in an expanded pagemap">
+            <pageMap xmlns:f="urn:stylesheet-functions">
+                <page type="cover" facs="page-images/000.png"/>
+
+                <page n="I" facs="page-images/001.png" type="text" target="p.i"/>
+                <page n="II" facs="page-images/002.png" type="text" target="p.ii"/>
+                <page n="III" facs="page-images/003.png" type="text" target="p.iii"/>
+                <page n="IV" facs="page-images/004.png" type="text" target="p.iv"/>
+
+                <page n="1" facs="page-images/005.png" type="text" target="p001"/>
+                <page n="2" facs="page-images/006.png" type="text" target="p002"/>
+                <page n="3" facs="page-images/007.png" type="text" target="p003"/>
+                <page n="4" facs="page-images/008.png" type="text" target="p004"/>
+                <page n="5" facs="page-images/009.png" type="text" target="p005"/>
+                <page n="6" facs="page-images/010.png" type="text" target="p006"/>
+                <page n="7" facs="page-images/011.png" type="text" target="p007"/>
+                <page n="8" facs="page-images/012.png" type="text" target="p008"/>
+                <page n="9" facs="page-images/013.png" type="text" target="p009"/>
+                <page n="10" facs="page-images/014.png" type="text" target="p010"/>
+                <page n="11" facs="page-images/015.png" type="text" target="p011"/>
+                <page n="12" facs="page-images/016.png" type="text" target="p012"/>
+
+                <page type="cover" facs="page-images/017.png"/>
+            </pageMap>
+      </x:expect>
+   </x:scenario>
+
+</x:description>
