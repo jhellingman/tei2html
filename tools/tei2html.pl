@@ -838,7 +838,7 @@ sub collectImageInfo() {
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     } elsif (-d 'Processed/images') {
         print "Collect image dimensions...\n";
-        system ("perl $toolsdir/imageinfo.pl -s Processed/images > imageinfo.xml");
+        system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
     }
 }
 

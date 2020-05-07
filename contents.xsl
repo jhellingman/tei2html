@@ -532,12 +532,9 @@
 
     <xd:doc>
         <xd:short>Generate a thumbnail gallery.</xd:short>
-
         <xd:detail>
             <p>Generate a gallery of thumbnail images. This template assumes that for each image, a thumbnail is
-            available, and will use that image in a gallery, linking to the original (full-size) image. The name
-            of the thumbnail image file is assumed to be the same as the full-size image, but is located in
-            a subdirectory <code>/thumbs/</code>.</p>
+            available, and will use that image in a gallery, linking to the original (full-size) image.</p>
         </xd:detail>
     </xd:doc>
 
@@ -569,30 +566,28 @@
     </xsl:template>
 
 
-    <xsl:template name="get-thumbnail-image">
-        <xsl:choose>
-            <!-- Derive name for thumbnail from image file name -->
-            <xsl:when test="f:has-rend-value(@rend, 'image')">
-                <xsl:variable name="image">
-                    <xsl:value-of select="f:rend-value(@rend, 'image')"/>
-                </xsl:variable>
-                <xsl:value-of select="substring-before($image, '/')"/>
-                <xsl:text>/thumbs/</xsl:text>
-                <xsl:value-of select="substring-after($image, '/')"/>
-            </xsl:when>
-            <!-- Derive name for thumbnail from image id -->
-            <xsl:otherwise>images/thumbs/<xsl:value-of select="@id"/>.jpg</xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
+    <xd:doc>
+        <xd:short>Determine the filename of the thumbnail image.</xd:short>
+        <xd:detail>
+            <p>The name of the thumbnail image file is assumed to be the same as the full-size image, 
+            but is located in a subdirectory <code>thumbs</code> of the directory it appears in.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:determine-thumbnail-filename" as="xs:string">
+        <xsl:param name="node" as="element(figure)"/>
+
+        <xsl:variable name="filename" select="f:determine-image-filename($node, '.jpg')"/>
+        <xsl:variable name="file" select="tokenize($filename, '/')[last()]"/>
+        <xsl:variable name="path" select="substring($filename, 1, string-length($filename) - string-length($file))"/>
+        <xsl:sequence select="$path || 'thumbs/' || $file"/>
+    </xsl:function>
 
 
     <xsl:template match="figure" mode="gallery">
         <td class="galleryFigure">
             <a href="{f:generate-href(.)}">
-                <img>
-                    <xsl:attribute name="src"><xsl:call-template name="get-thumbnail-image"/></xsl:attribute>
-                    <xsl:attribute name="alt"><xsl:value-of select="head"/></xsl:attribute>
-                </img>
+                <xsl:copy-of select="f:output-image(f:determine-thumbnail-filename(.), f:determine-image-alt-text(., ''))"/>
             </a>
         </td>
     </xsl:template>
