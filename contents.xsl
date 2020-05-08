@@ -236,7 +236,7 @@
 
             <!-- Handle case where we only have a label as head -->
             <xsl:when test="head[@type='label'] and not(head[2])">
-                <xsl:apply-templates mode="tochead" select="head"/>
+                <xsl:apply-templates select="head" mode="toc-head"/>
             </xsl:when>
 
             <xsl:when test="head">
@@ -253,7 +253,7 @@
                         </xsl:when>
                         <!-- Include the head given -->
                         <xsl:otherwise>
-                            <xsl:apply-templates mode="tochead"/>
+                            <xsl:apply-templates mode="toc-head"/>
                             <xsl:if test="following-sibling::head">
                                 <xsl:text> </xsl:text>
                             </xsl:if>
@@ -289,7 +289,7 @@
         <xd:short>Ignore notes that occur in heads in the toc.</xd:short>
     </xd:doc>
 
-    <xsl:template match="note" mode="tochead"/>
+    <xsl:template match="note" mode="toc-head"/>
 
 
     <xd:doc>
@@ -300,9 +300,9 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="ab[@type='divNum']" mode="tochead"/>
+    <xsl:template match="ab[@type='divNum']" mode="toc-head"/>
 
-    <xsl:template match="ab[@type='lineNum']" mode="tochead"/>
+    <xsl:template match="ab[@type='lineNum']" mode="toc-head"/>
 
 
     <!--====================================================================-->
@@ -433,7 +433,7 @@
             <xsl:if test="head[@type='label']">
                 <p class="tocChapter">
                     <a href="{f:generate-href(.)}">
-                        <xsl:apply-templates select="head[@type='label']" mode="tochead"/>
+                        <xsl:apply-templates select="head[@type='label']" mode="toc-head"/>
                     </a>
                     <xsl:if test="not(head[not(@type)])">
                         <xsl:call-template name="insert-toc-page-number"/>
@@ -443,14 +443,14 @@
             <xsl:if test="head[not(@type)]">
                 <p class="tocChapter">
                     <a href="{f:generate-href(.)}">
-                        <xsl:apply-templates select="head[not(@type)]" mode="tochead"/>
+                        <xsl:apply-templates select="head[not(@type)]" mode="toc-head"/>
                     </a>
                     <xsl:call-template name="insert-toc-page-number"/>
                 </p>
             </xsl:if>
             <xsl:if test="argument">
                 <p class="tocArgument">
-                    <xsl:apply-templates select="argument" mode="tochead"/>
+                    <xsl:apply-templates select="argument" mode="toc-head"/>
                 </p>
             </xsl:if>
         </xsl:if>
@@ -560,7 +560,7 @@
                 <xsl:apply-templates select=". | following::figure[position() &lt; $columns]" mode="gallery"/>
             </tr>
             <tr>
-                <xsl:apply-templates select=". | following::figure[position() &lt; $columns]" mode="gallery-captions"/>
+                <xsl:apply-templates select=". | following::figure[position() &lt; $columns]" mode="gallery-caption"/>
             </tr>
         </xsl:for-each>
     </xsl:template>
@@ -593,27 +593,12 @@
     </xsl:template>
 
 
-    <xsl:template match="figure" mode="gallery-captions">
+    <xsl:template match="figure" mode="gallery-caption">
         <td class="galleryCaption">
             <a href="{f:generate-href(.)}">
-                <xsl:apply-templates select="head" mode="gallery-captions"/>
+                <xsl:apply-templates select="head" mode="toc-head"/>
             </a>
         </td>
-    </xsl:template>
-
-
-    <xsl:template match="head" mode="gallery-captions">
-        <xsl:apply-templates mode="gallery-captions"/>
-    </xsl:template>
-
-
-    <xsl:template match="hi" mode="gallery-captions">
-        <i><xsl:apply-templates mode="gallery-captions"/></i>
-    </xsl:template>
-
-
-    <xsl:template match="hi[@rend='ex']" mode="gallery-captions">
-        <xsl:apply-templates mode="gallery-captions"/>
     </xsl:template>
 
 
