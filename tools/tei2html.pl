@@ -1000,8 +1000,25 @@ sub transcribe($) {
         $currentFile = transcribeNotation($currentFile, '<TA>',  'Tamil',                 "$patcdir/indic/ta2ucs.pat");
         $currentFile = transcribeNotation($currentFile, '<SY>',  'Syriac',                "$patcdir/syriac/sy2sgml.pat");
         $currentFile = transcribeNotation($currentFile, '<CO>',  'Coptic',                "$patcdir/coptic/co2sgml.pat");
+
+        my $containsTibetan = system ("grep -q -e \"<BO>\" $currentFile");
+        if ($containsTibetan == 0) {
+            $currentFile = convertWylie($currentFile);
+        }
     }
     return $currentFile;
+}
+
+
+sub convertWylie() {
+    my $currentFile = shift;
+    my $tmpFile = temporaryFile('wylie', '.xml');
+
+    print "Convert Tibetan transcription...\n";
+    system ("perl $toolsdir/convertWylie.pl $currentFile > $tmpFile");
+
+    my $debug || unlink($currentFile);
+    return $tmpFile;
 }
 
 

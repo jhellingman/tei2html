@@ -927,6 +927,9 @@ BEGIN {
     $ent{'Ociac'}        = chr(0x1ED0);  #  LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE
     $ent{'ociac'}        = chr(0x1ED1);  #  LATIN SMALL LETTER O WITH CIRCUMFLEX AND ACUTE
 
+
+    # African clicks
+
     $ent{'dclick'}       = chr(0x01C0);  #  LATIN LETTER DENTAL CLICK
     $ent{'lclick'}       = chr(0x01C1);  #  LATIN LETTER LATERAL CLICK
     $ent{'aclick'}       = chr(0x01C2);  #  LATIN LETTER ALVEOLAR CLICK
@@ -1440,7 +1443,7 @@ BEGIN {
 
     $ent{'schwa'}       = chr(0x0259);  # LETTER SCHWA
     $ent{'schwaacu'}    = chr(0x0259) . chr(0x0301); # LETTER SCHWA with acute
-    $ent{'schwacirc'}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with acute
+    $ent{'schwacirc'}   = chr(0x0259) . chr(0x0302); # LETTER SCHWA with circumflex
 
     $ent{'ezh'}         = chr(0x0292);  # letter ezh
     $ent{'EZH'}         = chr(0x01B7);  # letter Ezh
@@ -1470,6 +1473,21 @@ BEGIN {
     $ent{'lowacute'}    = chr(0x02CF);  # MODIFIER LETTER LOW ACUTE ACCENT
 
     $ent{'N'}           = 'N'; # Capital letter N (used with special meaning in Wolff's dictionary.)
+
+
+    # Tibetan transcription as used in Jäschke's dictionary
+
+    $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper (dasia) -> mapped to spacing symbol!
+    $ent{'cgrave'}      = 'c' . chr(0x0300);                    # c with grave
+    $ent{'cgrasa'}      = 'c' . chr(0x0300) . chr(0x02BD);      # c with grave and spiritus asper  -> mapped to spacing symbol!
+    $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave
+    $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
+    $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
+
+    # Tibetan transcription as used in Das' dictionary
+
+    $ent{'ncirc'}       = 'n' . chr(0x0302);                    # n with circumflex
+    $ent{'rbarb'}       = 'r' . chr(0x0331);                    # a with macron below
 
     # Combining letters (placed above the base letter)
 
@@ -1688,7 +1706,10 @@ BEGIN {
     $ent{'zdotb'}       = 'z' . chr(0x0323); # z with dot below
     $ent{'Zdotb'}       = 'Z' . chr(0x0323); # Z with dot below
 
+    $ent{'aumlb'}       = 'a' . chr(0x0324); # a with diaresis below
+    $ent{'eumlb'}       = 'e' . chr(0x0324); # e with diaresis below
     $ent{'humlb'}       = 'h' . chr(0x0324); # h with diaresis below
+    $ent{'iumlb'}       = 'i' . chr(0x0324); # i with diaresis below
     $ent{'lumlb'}       = 'l' . chr(0x0324); # l with diaresis below
     $ent{'Lumlb'}       = 'L' . chr(0x0324); # L with diaresis below
     $ent{'oumlb'}       = 'o' . chr(0x0324); # o with diaresis below

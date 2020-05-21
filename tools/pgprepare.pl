@@ -46,6 +46,7 @@ sub cleanText($) {
 
     open(INPUTFILE, $textFile) || die("Could not open file $textFile for reading.");
     open(OUTPUTFILE, "> $textFile.tmp") || die("Could not open $textFile.tmp for writing.");
+    binmode(OUTPUTFILE, ":utf8");
 
     while (<INPUTFILE>) {
         my $line = $_;
