@@ -1483,6 +1483,21 @@ BEGIN {
     $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave
     $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
     $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
+    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
+    $ent{'tsadb'}       = 't' . chr(0x0323) . chr(0x02BD);      # t with spiritus asper and dot below -> mapped to spacing symbol!
+    $ent{'sgradb'}      = 's' . chr(0x0300) . chr(0x0323);      # s with grave and dot below
+
+    $ent{'amaumb'}      = 'a' . chr(0x0304) . chr(0x0324);      # a with macron and umlaut below
+    $ent{'emaumb'}      = 'e' . chr(0x0304) . chr(0x0324);      # e with macron and umlaut below
+    $ent{'imaumb'}      = 'i' . chr(0x0304) . chr(0x0324);      # i with macron and umlaut below
+    $ent{'omaumb'}      = 'o' . chr(0x0304) . chr(0x0324);      # o with macron and umlaut below
+    $ent{'umaumb'}      = 'u' . chr(0x0304) . chr(0x0324);      # u with macron and umlaut below
+
+    $ent{'Amaumb'}      = 'A' . chr(0x0304) . chr(0x0324);      # A with macron and umlaut below
+    $ent{'Emaumb'}      = 'E' . chr(0x0304) . chr(0x0324);      # E with macron and umlaut below
+    $ent{'Imaumb'}      = 'I' . chr(0x0304) . chr(0x0324);      # I with macron and umlaut below
+    $ent{'Omaumb'}      = 'O' . chr(0x0304) . chr(0x0324);      # O with macron and umlaut below
+    $ent{'Umaumb'}      = 'U' . chr(0x0304) . chr(0x0324);      # U with macron and umlaut below
 
     # Tibetan transcription as used in Das' dictionary
 
@@ -1809,6 +1824,8 @@ BEGIN {
     $ent{'Sbarb'}       = 'S' . chr(0x0331); # S with macron below
     $ent{'tbarb'}       = chr(7791); # t with macron below
     $ent{'Tbarb'}       = chr(7790); # T with macron below
+    $ent{'ubarb'}       = 'u' . chr(0x0331); # u with macron below
+    $ent{'Ubarb'}       = 'U' . chr(0x0331); # U with macron below
     $ent{'zbarb'}       = chr(7829); # z with macron below
     $ent{'Zbarb'}       = chr(7828); # Z with macron below
 
