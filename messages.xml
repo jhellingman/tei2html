@@ -1732,6 +1732,9 @@
 		<msg:message name="msgAbbreviationOverview">Oorsig van afkortings gebruik.</msg:message>
 		<msg:message name="msgAuthor">Skrywer</msg:message>
 		<msg:message name="msgAvailability">Beskikbaarheid</msg:message>
+		<msg:message name="msgNote">Nota</msg:message>
+		<msg:message name="msgNotes">Notas</msg:message>		
+		<msg:message name="msgIllustrator">Illustrator</msg:message>	
 		<msg:message name="msgColophon">Kolofon</msg:message>
 		<msg:message name="msgCorrection">Regstelling</msg:message>
 		<msg:message name="msgCorrections">Regstellings</msg:message>

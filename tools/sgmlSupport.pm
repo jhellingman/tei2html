@@ -1475,17 +1475,39 @@ BEGIN {
     $ent{'N'}           = 'N'; # Capital letter N (used with special meaning in Wolff's dictionary.)
 
 
-    # Tibetan transcription as used in Jäschke's dictionary
+    # Tibetan transcription as used in Jäschke's dictionary and grammar
 
     $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper (dasia) -> mapped to spacing symbol!
     $ent{'cgrave'}      = 'c' . chr(0x0300);                    # c with grave
-    $ent{'cgrasa'}      = 'c' . chr(0x0300) . chr(0x02BD);      # c with grave and spiritus asper  -> mapped to spacing symbol!
     $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave
+
+    $ent{'cgrasa'}      = 'c' . chr(0x0300) . chr(0x02BD);      # c with grave and spiritus asper  -> mapped to spacing symbol!
+    $ent{'jgrasa'}      = 'j' . chr(0x0300) . chr(0x02BD);      # j with grave and spiritus asper  -> mapped to spacing symbol!
+    
     $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
     $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
     $ent{'cspas'}       = 'c' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
+
     $ent{'tsadb'}       = 't' . chr(0x0323) . chr(0x02BD);      # t with spiritus asper and dot below -> mapped to spacing symbol!
+    $ent{'dsadb'}       = 'd' . chr(0x0323) . chr(0x02BD);      # d with spiritus asper and dot below -> mapped to spacing symbol!
+
     $ent{'sgradb'}      = 's' . chr(0x0300) . chr(0x0323);      # s with grave and dot below
+
+    $ent{'Kspas'}       = 'K' . chr(0x02BD);                    # K with spiritus asper (dasia) -> mapped to spacing symbol!
+    $ent{'Cgrave'}      = 'C' . chr(0x0300);                    # C with grave
+    $ent{'Jgrave'}      = 'J' . chr(0x0300);                    # J with grave
+
+    $ent{'Cgrasa'}      = 'C' . chr(0x0300) . chr(0x02BD);      # C with grave and spiritus asper  -> mapped to spacing symbol!
+    $ent{'Jgrasa'}      = 'J' . chr(0x0300) . chr(0x02BD);      # J with grave and spiritus asper  -> mapped to spacing symbol!
+    
+    $ent{'Tspas'}       = 'T' . chr(0x02BD);                    # T with spiritus asper -> mapped to spacing symbol!
+    $ent{'Pspas'}       = 'P' . chr(0x02BD);                    # P with spiritus asper -> mapped to spacing symbol!
+    $ent{'Cspas'}       = 'C' . chr(0x02BD);                    # C with spiritus asper -> mapped to spacing symbol!
+
+    $ent{'Tsadb'}       = 'T' . chr(0x0323) . chr(0x02BD);      # T with spiritus asper and dot below -> mapped to spacing symbol!
+    $ent{'Dsadb'}       = 'D' . chr(0x0323) . chr(0x02BD);      # D with spiritus asper and dot below -> mapped to spacing symbol!
+    
+    $ent{'Sgradb'}      = 'S' . chr(0x0300) . chr(0x0323);      # S with grave and dot below
 
     $ent{'amaumb'}      = 'a' . chr(0x0304) . chr(0x0324);      # a with macron and umlaut below
     $ent{'emaumb'}      = 'e' . chr(0x0304) . chr(0x0324);      # e with macron and umlaut below
@@ -2467,7 +2489,7 @@ sub pgdp2sgml {
     # Accents above:
     $string =~ s/\[\/([a-zA-Z])\]/\&$1acute;/g;         # acute
     $string =~ s/\[\'([a-zA-Z])\]/\&$1acute;/g;         # acute
-    $string =~ s/\[\x{00b4}([a-zA-Z])\]/\&$1acute;/g;           # acute (wrong encoding!)
+    $string =~ s/\[\x{00b4}([a-zA-Z])\]/\&$1acute;/g;   # acute (wrong encoding!)
     $string =~ s/\[\\([a-zA-Z])\]/\&$1grave;/g;         # grave
     $string =~ s/\[`([a-zA-Z])\]/\&$1grave;/g;          # grave
     $string =~ s/\[\^([a-zA-Z])\]/\&$1circ;/g;          # circumflex
@@ -2478,12 +2500,24 @@ sub pgdp2sgml {
     $string =~ s/\[\.([a-zA-Z])\]/\&$1dota;/g;          # dot above
     $string =~ s/\[[>v]([a-zA-Z])\]/\&$1caron;/g;       # caron / hajek
 
+    $string =~ s/\[,([a-zA-Z])\]/\&$1spas;/g;           # spiritus asper (rough breathing)
+
     # Accents below:
     $string =~ s/\[([a-zA-Z])\.\]/\&$1dotb;/g;          # dot below
     $string =~ s/\[([a-zA-Z])=\]/\&$1barb;/g;           # bar (or macron) below
     $string =~ s/\[([a-zA-Z]),\]/\&$1cedil;/g;          # cedilla
     $string =~ s/\[([a-zA-Z])\)]/\&$1breveb;/g;         # breve below
     $string =~ s/\[([a-zA-Z])\^]/\&$1circb;/g;          # circumflex below
+
+    $string =~ s/\[([a-zA-Z]):]/\&$1umlb;/g;            # umlaut below
+
+    # Multiple accents above and below:
+    $string =~ s/\[=([a-zA-Z]):\]/\&$1maumb;/g;         # macron and umlaut below
+    $string =~ s/\[`([a-zA-Z])\.\]/\&$1gradb;/g;        # grave and dot below
+    $string =~ s/\[,([a-zA-Z])\.\]/\&$1sadb;/g;         # spiritus asper and dot below
+
+    # Multiple accents both above:
+    $string =~ s/\[`,([a-zA-Z])\]/\&$1grasa;/g;         # grave and spiritus asper (rough breathing)
 
     # Ligatures
     $string =~ s/\[ae\]/\&aelig;/g;                     # ae ligature
