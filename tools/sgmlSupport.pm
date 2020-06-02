@@ -1486,7 +1486,10 @@ BEGIN {
     
     $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
     $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
-    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
+    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol!
+    $ent{'gspas'}       = 'g' . chr(0x02BD);                    # g with spiritus asper -> mapped to spacing symbol!
+    $ent{'dspas'}       = 'd' . chr(0x02BD);                    # d with spiritus asper -> mapped to spacing symbol!
+    $ent{'bspas'}       = 'b' . chr(0x02BD);                    # b with spiritus asper -> mapped to spacing symbol!
 
     $ent{'tsadb'}       = 't' . chr(0x0323) . chr(0x02BD);      # t with spiritus asper and dot below -> mapped to spacing symbol!
     $ent{'dsadb'}       = 'd' . chr(0x0323) . chr(0x02BD);      # d with spiritus asper and dot below -> mapped to spacing symbol!
@@ -1503,6 +1506,9 @@ BEGIN {
     $ent{'Tspas'}       = 'T' . chr(0x02BD);                    # T with spiritus asper -> mapped to spacing symbol!
     $ent{'Pspas'}       = 'P' . chr(0x02BD);                    # P with spiritus asper -> mapped to spacing symbol!
     $ent{'Cspas'}       = 'C' . chr(0x02BD);                    # C with spiritus asper -> mapped to spacing symbol!
+    $ent{'Gspas'}       = 'G' . chr(0x02BD);                    # G with spiritus asper -> mapped to spacing symbol!
+    $ent{'Dspas'}       = 'D' . chr(0x02BD);                    # D with spiritus asper -> mapped to spacing symbol!
+    $ent{'Bspas'}       = 'B' . chr(0x02BD);                    # B with spiritus asper -> mapped to spacing symbol!
 
     $ent{'Tsadb'}       = 'T' . chr(0x0323) . chr(0x02BD);      # T with spiritus asper and dot below -> mapped to spacing symbol!
     $ent{'Dsadb'}       = 'D' . chr(0x0323) . chr(0x02BD);      # D with spiritus asper and dot below -> mapped to spacing symbol!
@@ -2508,7 +2514,6 @@ sub pgdp2sgml {
     $string =~ s/\[([a-zA-Z]),\]/\&$1cedil;/g;          # cedilla
     $string =~ s/\[([a-zA-Z])\)]/\&$1breveb;/g;         # breve below
     $string =~ s/\[([a-zA-Z])\^]/\&$1circb;/g;          # circumflex below
-
     $string =~ s/\[([a-zA-Z]):]/\&$1umlb;/g;            # umlaut below
 
     # Multiple accents above and below:
