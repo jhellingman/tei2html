@@ -1527,6 +1527,21 @@ BEGIN {
     $ent{'Omaumb'}      = 'O' . chr(0x0304) . chr(0x0324);      # O with macron and umlaut below
     $ent{'Umaumb'}      = 'U' . chr(0x0304) . chr(0x0324);      # U with macron and umlaut below
 
+    $ent{'aacumb'}      = 'a' . chr(0x0301) . chr(0x0324);      # a with acute and umlaut below
+    $ent{'eacumb'}      = 'e' . chr(0x0302) . chr(0x0324);      # e with acute and umlaut below
+    $ent{'iacumb'}      = 'i' . chr(0x0302) . chr(0x0324);      # i with acute and umlaut below
+    $ent{'oacumb'}      = 'o' . chr(0x0302) . chr(0x0324);      # o with acute and umlaut below
+    $ent{'uacumb'}      = 'u' . chr(0x0302) . chr(0x0324);      # u with acute and umlaut below
+
+    $ent{'Aacumb'}      = 'A' . chr(0x0301) . chr(0x0324);      # A with acute and umlaut below
+    $ent{'Eacumb'}      = 'E' . chr(0x0302) . chr(0x0324);      # E with acute and umlaut below
+    $ent{'Iacumb'}      = 'I' . chr(0x0302) . chr(0x0324);      # I with acute and umlaut below
+    $ent{'Oacumb'}      = 'O' . chr(0x0302) . chr(0x0324);      # O with acute and umlaut below
+    $ent{'Uacumb'}      = 'U' . chr(0x0302) . chr(0x0324);      # U with acute and umlaut below
+
+    $ent{'abreac'}      = chr(0x0103) . chr(0x0301);            # a with breve and acute
+
+
     # Tibetan transcription as used in Das' dictionary
 
     $ent{'ncirc'}       = 'n' . chr(0x0302);                    # n with circumflex
@@ -1543,14 +1558,23 @@ BEGIN {
 
     # Requiring combining diacritics
 
-    $ent{'mgrave'}      = 'm' . chr(0x0300); # m with grave
-    $ent{'sgrave'}      = 's' . chr(0x0300); # s with grave
-    $ent{'Sgrave'}      = 'S' . chr(0x0300); # S with grave
-    $ent{'ygrave'}      = 'y' . chr(0x0300); # y with grave
-    $ent{'Ygrave'}      = 'Y' . chr(0x0300); # Y with grave
     $ent{'dgrave'}      = 'd' . chr(0x0300); # d with grave
     $ent{'lgrave'}      = 'l' . chr(0x0300); # l with grave
+    $ent{'mgrave'}      = 'm' . chr(0x0300); # m with grave
+    $ent{'ngrave'}      = 'n' . chr(0x0300); # n with grave
+    $ent{'rgrave'}      = 'r' . chr(0x0300); # r with grave
+    $ent{'sgrave'}      = 's' . chr(0x0300); # s with grave
+    $ent{'ygrave'}      = 'y' . chr(0x0300); # y with grave
     $ent{'zgrave'}      = 'z' . chr(0x0300); # z with grave
+
+    $ent{'Dgrave'}      = 'D' . chr(0x0300); # D with grave
+    $ent{'Lgrave'}      = 'L' . chr(0x0300); # L with grave
+    $ent{'Mgrave'}      = 'M' . chr(0x0300); # M with grave
+    $ent{'Ngrave'}      = 'N' . chr(0x0300); # N with grave
+    $ent{'Rgrave'}      = 'R' . chr(0x0300); # R with grave
+    $ent{'Sgrave'}      = 'S' . chr(0x0300); # S with grave
+    $ent{'Ygrave'}      = 'Y' . chr(0x0300); # Y with grave
+    $ent{'Zgrave'}      = 'Z' . chr(0x0300); # Z with grave
 
     $ent{'kacute'}      = 'k' . chr(0x0301); # k with acute
     $ent{'oeacute'}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
@@ -1684,6 +1708,8 @@ BEGIN {
     $ent{'Udota'}       = 'U' . chr(0x0307); # U with dot above
     $ent{'vdota'}       = 'v' . chr(0x0307); # v with dot above
     $ent{'Vdota'}       = 'V' . chr(0x0307); # V with dot above
+    $ent{'xdota'}       = 'x' . chr(0x0307); # x with dot above
+    $ent{'Xdota'}       = 'X' . chr(0x0307); # X with dot above
     $ent{'ydota'}       = 'y' . chr(0x0307); # y with dot above
     $ent{'Ydota'}       = 'Y' . chr(0x0307); # Y with dot above
     $ent{'zdota'}       = 'z' . chr(0x0307); # z with dot above
@@ -2523,6 +2549,7 @@ sub pgdp2sgml {
 
     # Multiple accents both above:
     $string =~ s/\[`,([a-zA-Z])\]/\&$1grasa;/g;         # grave and spiritus asper (rough breathing)
+    $string =~ s/\['\)([a-zA-Z])\]/\&$1breac;/g;        # breve and acute
 
     # Ligatures
     $string =~ s/\[ae\]/\&aelig;/g;                     # ae ligature
