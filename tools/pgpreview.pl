@@ -4,18 +4,20 @@ use strict;
 use warnings;
 
 use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
-
+use HTML::Entities;
 
 main();
 
 
 sub main {
     my $file = $ARGV[0];
+    my $projectName = $ARGV[1];
     my $useExtensions = 0;
 
-    if ($file eq "-x") {
+    if ($file eq '-x') {
         $useExtensions = 1;
         $file = $ARGV[1];
+        $projectName = $ARGV[2];
         print STDERR "USING EXTENSIONS FOR FRANCK!\n";
     }
 
@@ -30,20 +32,24 @@ sub main {
 
         if ($line =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
             print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
-            print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
-            $paragraph = "";
-        } elsif ($line ne "") {
-            $paragraph .= " " . $line;
+            if ($projectName ne '') {
+                print "<hr>\n<b>File: <a href='https://www.pgdp.net/c/tools/project_manager/displayimage.php?project=$projectName&imagefile=$1.png&showreturnlink=1&preload=next&percent=100&jumpto=$1.png'>$1.png</a></b>\n<hr>\n";
+            } else {
+                print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
+            }
+            $paragraph = '';
+        } elsif ($line ne '') {
+            $paragraph .= ' ' . $line;
         } else {
             if ($paragraph ne "") {
                 print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
             }
-            $paragraph = "";
+            $paragraph = '';
         }
     }
 
-    if ($paragraph ne "") {
-        print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
+    if ($paragraph ne '') {
+        print "\n\n<p>" . encode_entities(handleParagraph($paragraph, $useExtensions));
     }
 
     printHtmlTail();
@@ -55,6 +61,9 @@ sub main {
 sub handleParagraph($$) {
     my $paragraph = shift;
     my $useExtensions = shift;
+
+    # Remove over-zealous numeric entities
+    $paragraph =~ s/\&\#39;/'/g;
 
     $paragraph = pgdp2sgml($paragraph, $useExtensions);
 
@@ -105,8 +114,8 @@ sub handleParagraph($$) {
     # Anything else between braces is probably wrong:
     $paragraph =~ s/(\^?\{.*?\})/<span class=error>$1<\/span>/g;
 
-    # Remaining non-numeric entities are wrong
-    $paragraph =~ s/(\&[^0-9]*?;)/<span class=error>$1<\/span>/g;
+    # Remaining non-numeric entities are wrong (use negative look-ahead assertion)
+    $paragraph =~ s/(\&(?!\#x?[0-9A-Za-z]{1,6}).*?;)/<span class=error>$1<\/span>/g;
 
     # Remaining short things between brackets are probably wrong
     $paragraph =~ s/(\[[^\]]{0,4}\])/<span class=error>$1<\/span>/g;
@@ -133,7 +142,7 @@ sub printHtmlHead() {
     <head>
     <title>DP Preview</title>
     <style type='text/css'>
-        BODY { font-size: 16pt; line-height: 18pt; }
+        BODY { font-size: 16pt; line-height: 22pt; font-family: 'Charis SIL'; }
         .figure { background-color: #FFFF5C; }
         .remark { background-color: #FFB442; }
         .sc { font-variant:small-caps; }
@@ -142,6 +151,7 @@ sub printHtmlHead() {
         .xref { background-color: #FFFF8C; }
         .code { font-weight: bold; color: gray; display: none; }
 
+        :lang(bo) { font-family: 'Qomolangma-Sarchung', 'Babelstone Tibetan', serif; font-size: x-large; }
         :lang(ar) { font-family: Scheherazade, serif; }
         :lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }
         :lang(syc) { font-family: 'Serto Jerusalem', serif; }

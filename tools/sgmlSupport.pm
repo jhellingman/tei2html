@@ -5,9 +5,12 @@ package SgmlSupport;
 
 use base 'Exporter';
 
+use Unicode::Normalize;
+use HTML::Entities;
+
 our $VERSION = '1.00';
 our @ISA = qw(Exporter);
-our @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity);
+our @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity handlePgdpAccents);
 
 BEGIN {
 
@@ -1259,7 +1262,6 @@ BEGIN {
     $ent{'ckgr'}        = chr(0x0387); # "&middot;"
     $ent{'qmgr'}        = chr(0x037e); # ";"
 
-
     # additional entities not in TEI
 
     $ent{'amacgr'}      = chr(0x03b1) . chr(0x0304); # "\\=a"
@@ -1292,6 +1294,34 @@ BEGIN {
     $ent{'rli'}         = chr(0x2067);  # RIGHT-TO-LEFT ISOLATE
     $ent{'fsi'}         = chr(0x2068);  # FIRST STRONG ISOLATE
     $ent{'pdi'}         = chr(0x2069);  # POP DIRECTIONAL ISOLATE
+
+    ###############################################################################
+    ## Combining diacritics
+
+    $ent{'cgj'}         = chr(0x034F);  # COMBINING GRAPHEME JOINER
+
+    $ent{'c_grave'}     = chr(0x0300);  # COMBINING GRAVE ACCENT
+    $ent{'c_acute'}     = chr(0x0301);  # COMBINING ACUTE ACCENT
+    $ent{'c_circ'}      = chr(0x0302);  # COMBINING CIRCUMFLEX ACCENT
+    $ent{'c_tilde'}     = chr(0x0303);  # COMBINING TILDE
+    $ent{'c_macr'}      = chr(0x0304);  # COMBINING MACRON
+    $ent{'c_overline'}  = chr(0x0305);  # COMBINING OVERLINE
+    $ent{'c_breve'}     = chr(0x0306);  # COMBINING BREVE
+    $ent{'c_dota'}      = chr(0x0307);  # COMBINING DOT ABOVE
+    $ent{'c_uml'}       = chr(0x0308);  # COMBINING DIAERESIS
+    $ent{'c_hook'}      = chr(0x0309);  # COMBINING HOOK ABOVE
+    $ent{'c_ring'}      = chr(0x030A);  # COMBINING RING ABOVE
+    $ent{'c_dblac'}     = chr(0x030B);  # COMBINING DOUBLE ACUTE ACCENT
+    $ent{'c_caron'}     = chr(0x030C);  # COMBINING CARON
+    $ent{'c_vert'}      = chr(0x030D);  # COMBINING VERTICAL LINE ABOVE
+    $ent{'c_dbvert'}    = chr(0x030E);  # COMBINING DOUBLE VERTICAL LINE ABOVE
+    $ent{'c_dbgrav'}    = chr(0x030F);  # COMBINING DOUBLE GRAVE ACCENT
+    $ent{'c_chdbnd'}    = chr(0x0310);  # COMBINING CANDRABINDU
+    $ent{'c_ibreve'}    = chr(0x0311);  # COMBINING INVERTED BREVE
+    $ent{'c_tcomma'}    = chr(0x0312);  # COMBINING TURNED COMMA ABOVE
+    $ent{'c_comma'}     = chr(0x0313);  # COMBINING COMMA ABOVE
+    $ent{'c_rcomma'}    = chr(0x0314);  # COMBINING REVERSED COMMA ABOVE
+    $ent{'c_commar'}    = chr(0x0315);  # COMBINING COMMA ABOVE RIGHT
 
 
     ###############################################################################
@@ -1346,7 +1376,7 @@ BEGIN {
 
     ###############################################################################
 
-    # Astrological signs followed by the text variant selector.
+    # Astrological signs (followed by the text variant selector).
 
     $ent{'Sun'}         = chr(0x2609) . chr(0xFE0E);
     $ent{'Moon'}        = chr(0x263D) . chr(0xFE0E);
@@ -1541,7 +1571,6 @@ BEGIN {
 
     $ent{'abreac'}      = chr(0x0103) . chr(0x0301);            # a with breve and acute
 
-
     # Tibetan transcription as used in Das' dictionary
 
     $ent{'ncirc'}       = 'n' . chr(0x0302);                    # n with circumflex
@@ -1554,7 +1583,7 @@ BEGIN {
     $ent{'rcomb'}      = chr(0x036c); # combining r above
 
     ###############################################################################
-    # things not in Unicode (as a single character)
+    # Things not in Unicode (as a single character)
 
     # Requiring combining diacritics
 
@@ -2617,5 +2646,155 @@ sub pgdp2sgml {
 
     return $string;
 }
+
+
+sub handlePgdpAccents() {
+    my $line = shift;
+    return NFC(handlePgdpWideAccents(handlePgdpNormalAccents($line)));
+}
+
+
+sub handlePgdpWideAccents() {
+    my $line = shift;
+
+    $line = NFD($line);
+
+    my $abovePattern = "(['/`\\\\=~()-]*)";
+
+    # Unicode \p{M} pattern doesn't work in Perl:
+    # my $basePattern = "([a-zA-Z]\p{M}*)([a-zA-Z]\p{M}*)"; 
+    my $basePattern = "([a-zA-Z][\x{300}-\x{36F}]*)([a-zA-Z][\x{300}-\x{36F}]*)";
+    my $belowPattern = "([=)-]*)";
+
+    my $pattern = "\\[" . $abovePattern . $basePattern . $belowPattern . "\\]";
+
+    $line =~ s/$pattern/convertWideAccent($1,$2,$3,$4)/ge;
+    return $line;
+}
+
+
+sub convertWideAccent() {
+    my $above = shift;
+    my $base1 = shift;
+    my $base2 = shift;
+    my $below = shift;
+
+    if ($base1 eq 'i') {
+        $base1 = "\x{131}";
+    }
+    if ($base2 eq 'i') {
+        $base2 = "\x{131}";
+    }
+
+    my %aboveAccents = (
+        "`"         => "\x{300}\x{34F}",   # acute (needs CGJ to avoid reordering in NFC)
+        "\\"        => "\x{300}\x{34F}",   # acute 
+        "'"         => "\x{301}\x{34F}",   # grave 
+        "/"         => "\x{301}\x{34F}",   # grave 
+
+        ")"         => "\x{35D}",   # wide breve
+        "="         => "\x{35E}",   # wide macron
+        "-"         => "\x{35E}",   # wide macron
+        "~"         => "\x{360}",   # wide tilde
+        "("         => "\x{361}",   # wide inverted breve
+    );
+
+    my %belowAccents = (
+        ")"         => "\x{35C}",   # wide breve
+        "="         => "\x{35F}",   # wide macron
+        "-"         => "\x{35F}",   # wide macron
+    );
+
+    my @aboves = split(//, $above);
+    foreach my $a (@aboves) {
+        $a = $aboveAccents{$a};
+    }
+    $above = join('', @aboves);
+
+    my @belows = split(//, $below);
+    foreach my $b (@belows) {
+        $b = $belowAccents{$b};
+    }
+    $below = join('', @belows);
+
+    return $base1 . $below . reverse($above) . $base2;
+}
+
+
+sub handlePgdpNormalAccents() {
+    my $line = shift;
+
+    $line = NFD($line);
+
+    my $abovePattern = "(['`\"/\\\\?*:.^)(v=~-]*)";
+    my $basePattern = "([a-zA-Z][\x{300}-\x{36F}]*)";
+    my $belowPattern = "([.\":*,v^)(~=<>-]*)";
+
+    my $pattern = "\\[" . $abovePattern . $basePattern . $belowPattern . "\\]";
+
+    $line =~ s/$pattern/convertAccent($1,$2,$3)/ge;
+    return $line;
+}
+
+
+sub convertAccent() {
+    my $above = shift;
+    my $base = shift;
+    my $below = shift;
+
+    my %aboveAccents = (
+        "`"         => "\x{300}",   # acute
+        "\\"        => "\x{300}",   # acute
+        "'"         => "\x{301}",   # grave
+        "/"         => "\x{301}",   # grave
+        "^"         => "\x{302}",   # circumflex
+        "~"         => "\x{303}",   # tilde
+        "="         => "\x{304}",   # macron
+        "-"         => "\x{304}",   # macron
+        ")"         => "\x{306}",   # breve
+        "."         => "\x{307}",   # dot
+        "\""        => "\x{308}",   # diaeresis
+        ":"         => "\x{308}",   # diaeresis
+        "?"         => "\x{309}",   # hook
+        "*"         => "\x{30A}",   # ring
+        "v"         => "\x{30C}",   # caron
+        "("         => "\x{311}",   # inverted breve
+        ","         => "\x{312}"    # cedilla
+    );
+
+    # dot diaeresis(2) ring cedilla caron circumflex breve inverted-breve tilde macron(2)
+
+    my %belowAccents = (
+        "."         => "\x{323}",   # dot
+        "\""        => "\x{324}",   # diaeresis
+        ":"         => "\x{324}",   # diaeresis
+        "*"         => "\x{325}",   # ring
+        ","         => "\x{327}",   # cedilla
+        "v"         => "\x{32C}",   # caron
+        "^"         => "\x{32D}",   # circumflex
+        ")"         => "\x{32E}",   # breve
+        "("         => "\x{32F}",   # inverted breve
+        "~"         => "\x{330}",   # tilde 
+        "="         => "\x{331}",   # macron
+        "-"         => "\x{331}",   # macron
+    );
+
+    my @aboves = split(//, $above);
+    my @belows = split(//, $below);
+
+    foreach my $a (@aboves) {
+        $a = $aboveAccents{$a};
+    }
+
+    foreach my $b (@belows) {
+        $b = $belowAccents{$b};
+    }
+
+    $above = join('', @aboves);
+    $below = join('', @belows);
+
+    return $base . $below . reverse($above);
+}
+
 
 1;

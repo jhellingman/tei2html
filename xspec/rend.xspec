@@ -148,10 +148,10 @@
    </x:scenario>
 
 
-    <!-- f:adjust-dimension --> 
+    <!-- f:adjust-rend-dimension --> 
 
    <x:scenario label="When adjusting a rend value with a factor in a string containing the value">
-      <x:call function="f:adjust-dimension">
+      <x:call function="f:adjust-rend-dimension">
          <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
          <x:param select="'font-size'"/>
          <x:param select="2.0"/>
@@ -160,7 +160,7 @@
    </x:scenario>
 
    <x:scenario label="When adjusting a rend value with a factor in a string containing the value">
-      <x:call function="f:adjust-dimension">
+      <x:call function="f:adjust-rend-dimension">
          <x:param select="'font-family(Times) font-size(12pt) font-style(italic)'"/>
          <x:param select="'font-size'"/>
          <x:param select="0.3333333333333333"/>
@@ -169,7 +169,7 @@
    </x:scenario>
 
    <x:scenario label="When adjusting a rend value with a factor in a string not containing the value">
-      <x:call function="f:adjust-dimension">
+      <x:call function="f:adjust-rend-dimension">
          <x:param select="'font-family(Times) font-style(italic)'"/>
          <x:param select="'font-size'"/>
          <x:param select="2.0"/>

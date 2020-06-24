@@ -97,6 +97,10 @@
 
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->
+            <images.scale>1.0</images.scale>                                <!-- Image scale factor: 1.0 is normal size; 0.5 is half size; 2.0 is double size. -->
+            <images.maxSize>256</images.maxSize>                            <!-- Warn if image is large than this number of kilobytes. -->
+            <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels. -->
+            <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels. -->
 
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->

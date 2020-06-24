@@ -95,9 +95,9 @@
     </xd:doc>
 
     <xsl:function name="f:is-image-present" as="xs:boolean">
-        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="file" as="xs:string"/>
 
-        <xsl:sequence select="substring-before($imageInfo/img:images/img:image[@path=$url]/@width, 'px') != ''"/>
+        <xsl:sequence select="f:image-file-size($file) != ''"/>
     </xsl:function>
 
 
@@ -174,9 +174,9 @@
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
 
-        <xsl:variable name="width" select="substring-before($imageInfo/img:images/img:image[@path=$file]/@width, 'px')"/>
-        <xsl:variable name="height" select="substring-before($imageInfo/img:images/img:image[@path=$file]/@height, 'px')"/>
-        <xsl:variable name="fileSize" select="$imageInfo/img:images/img:image[@path=$file]/@filesize"/>
+        <xsl:variable name="width" select="substring-before(f:image-width($file), 'px')"/>
+        <xsl:variable name="height" select="substring-before(f:image-height($file), 'px')"/>
+        <xsl:variable name="fileSize" select="f:image-file-size($file)"/>
 
         <xsl:if test="$width = ''">
             <xsl:copy-of select="f:log-warning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
@@ -290,8 +290,8 @@
 
     <xsl:function name="f:output-image-width-css">
         <xsl:param name="node" as="node()"/>
-        <xsl:param name="filename" as="xs:string"/>
-        <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$filename]/@width" as="xs:string?"/>
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
         <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id($node) || 'width')"/>
 
         <xsl:if test="$width != ''"><xsl:text expand-text="yes">
@@ -299,6 +299,25 @@
 width:{$width};
 }}
 </xsl:text></xsl:if>
+    </xsl:function>
+
+
+    <xsl:function name="f:image-width">
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+        <xsl:sequence select="f:adjust-dimension($width, number(f:get-setting('images.scale')))"/>
+    </xsl:function>
+
+    <xsl:function name="f:image-height">
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:variable name="height" select="$imageInfo/img:images/img:image[@path=$file]/@height" as="xs:string?"/>
+        <xsl:sequence select="f:adjust-dimension($height, number(f:get-setting('images.scale')))"/>
+    </xsl:function>
+
+    <xsl:function name="f:image-file-size">
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:variable name="fileSize" select="$imageInfo/img:images/img:image[@path=$file]/@filesize"/>
+        <xsl:sequence select="$fileSize"/>
     </xsl:function>
 
 
@@ -325,7 +344,7 @@ width:{$width};
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
 
                 <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-                <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+                <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
 
                 <xsl:variable name="class">
                     <xsl:text>figure </xsl:text>
@@ -378,7 +397,7 @@ width:{$width};
         <xsl:if test="p[f:has-top-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-            <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+            <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
 
             <div>
                 <xsl:attribute name="class">
@@ -413,7 +432,7 @@ width:{$width};
         <xsl:if test="p[f:has-bottom-position-annotation(@rend)]">
 
             <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-            <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
+            <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
 
             <div>
                 <xsl:attribute name="class">
@@ -535,7 +554,7 @@ width:{$width};
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
                 <xsl:variable name="widestImage" select="f:widest-image(graphic/@url)"/>
-                <xsl:if test="$imageInfo/img:images/img:image[@path=$widestImage]/@width != ''">
+                <xsl:if test="f:image-width($widestImage) != ''">
                     <xsl:value-of select="f:generate-id(graphic[@url = $widestImage][1])"/><xsl:text>width</xsl:text>
                 </xsl:if>
             </xsl:variable>

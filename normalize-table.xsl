@@ -279,7 +279,7 @@
     <xsl:template mode="split-columns" match="column[f:rend-value(@rend, 'align') = 'decimal']">
 
         <xsl:variable name="rend" select="f:remove-rend-value(@rend, 'align')" as="xs:string"/>
-        <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)"/>
+        <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)"/>
 
         <xsl:element name="column" namespace="">
             <xsl:copy-of select="@*[not(name() = 'rend')]"/>
@@ -374,7 +374,7 @@
         <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7')"/>
 
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
-        <xsl:variable name="rend" select="f:adjust-dimension($rend, 'width', 0.5)" as="xs:string"/>
+        <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)" as="xs:string"/>
 
         <!-- Generate the cell for the integer part -->
         <xsl:element name="cell" namespace="">

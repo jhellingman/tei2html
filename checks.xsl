@@ -70,6 +70,7 @@
         <i:issues>
             <xsl:apply-templates mode="info" select="/"/>
             <xsl:apply-templates mode="checks" select="/"/>
+            <!-- <xsl:apply-templates mode="check-langs" select="/"/> -->
             <xsl:apply-templates mode="check-ids" select="/"/>
 
             <!-- Check textual issues on segments -->
@@ -263,6 +264,25 @@
     </xsl:template>
 
 
+
+
+    <xsl:template match="*[@lang]" mode="check-langs">
+        <xsl:if test="(ancestor::*[@lang])[1] = @lang">
+            <i:issue 
+                pos="{@pos}" 
+                code="L1" 
+                category="Compliance" 
+                target="{f:generate-id(.)}" 
+                level="Warning" 
+                element="{name(.)}" 
+                page="{f:get-page(.)}">Unnecessary @lang attribute.</i:issue>
+        </xsl:if>
+        <xsl:apply-templates mode="check-langs"/>
+    </xsl:template>
+
+
+
+
     <xd:doc mode="checks">
         <xd:short>Mode for collecting issues in a simple intermediate structure.</xd:short>
     </xd:doc>
@@ -348,6 +368,9 @@
         <i:issue pos="{@pos}" code="H14" category="Compliance" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">The non-standard ditto element is better replaced with a seg with a @copyOf attribute.</i:issue>
         <xsl:next-match/>
     </xsl:template>
+
+
+
 
 
     <xsl:template match="cell[@role='sumCurrency']" mode="checks">
@@ -1245,22 +1268,26 @@
         <xsl:param name="string" as="xs:string"/>
         <xsl:param name="n"/>
 
-        <xsl:variable name="old" select="$common-abbreviations/tmp:abbr[$n]"/>
-        <xsl:variable name="new" select="replace($old, '\.', '&blackCircle;')"/>
-        <xsl:variable name="pattern" select="replace($old, '\.', '\\.')"/>
+        <!-- <xsl:copy-of select="f:log-info('N: {1}; STRING: {2}', (string($n), $string))"/> -->
 
-        <xsl:variable name="result" as="xs:string">
-            <xsl:choose>
-                <xsl:when test="$n > 0">
+        <xsl:choose>
+            <xsl:when test="$n &gt; 0">
+                <xsl:variable name="result" as="xs:string">
+                    <xsl:variable name="old" select="$common-abbreviations/tmp:abbr[$n]"/>
+                    <xsl:variable name="new" select="replace($old, '\.', '&blackCircle;')"/>
+                    <xsl:variable name="pattern" select="replace($old, '([.+])', '[$1]')"/>
+
+                    <!-- <xsl:copy-of select="f:log-info('OLD: {1}; NEW: {2}; PATTERN: {3}', ($old, $new, $pattern))"/> -->
+
                     <xsl:value-of select="replace(f:hide-abbreviation($string, $n - 1), $pattern, $new)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$string"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+                </xsl:variable>
 
-        <xsl:value-of select="$result"/>
+                <xsl:value-of select="$result"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$string"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
 

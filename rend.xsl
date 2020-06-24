@@ -157,7 +157,7 @@
         <xd:short>Adjust the given dimension in a rendition ladder by multiplying it with a factor.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:adjust-dimension" as="xs:string?">
+    <xsl:function name="f:adjust-rend-dimension" as="xs:string?">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="factor" as="xs:double"/>
@@ -168,11 +168,11 @@
         <xsl:choose>
             <xsl:when test="$dimension != ''">
                 <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z%]+)'" as="xs:string"/>
-                <xsl:variable name="count" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
+                <xsl:variable name="value" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
                 <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
-                <xsl:variable name="new-value" select="concat($count * $factor, $unit)" as="xs:string"/>
+                <xsl:variable name="new-value" select="concat($value * $factor, $unit)" as="xs:string"/>
 
-                <xsl:copy-of select="f:log-debug('Value of {1}: {2}{3} becomes {4}.', ($key, xs:string($count), $unit, $new-value))"/>
+                <xsl:copy-of select="f:log-debug('Value of {1}: {2}{3} becomes {4}.', ($key, xs:string($value), $unit, $new-value))"/>
 
                 <xsl:value-of select="normalize-space(concat(f:remove-rend-value($rend, $key), ' ', $key, '(', $new-value, ')'))"/>
             </xsl:when>
@@ -181,5 +181,32 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Adjust the given dimension by multiplying it with a factor.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:adjust-dimension" as="xs:string?">
+        <xsl:param name="dimension" as="xs:string"/>
+        <xsl:param name="factor" as="xs:double"/>
+
+        <xsl:choose>
+            <xsl:when test="$dimension != ''">
+                <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z%]+)'" as="xs:string"/>
+                <xsl:variable name="value" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
+                <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
+                <xsl:variable name="new-dimension" select="concat($value * $factor, $unit)" as="xs:string"/>
+
+                <xsl:copy-of select="f:log-debug('Dimension {1} becomes {2}.', ($dimension, $new-dimension))"/>
+
+                <xsl:value-of select="$new-dimension"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$dimension"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
 
 </xsl:stylesheet>
