@@ -95,6 +95,7 @@
             <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
             <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block -->
 
+            <images.path></images.path>                                     <!-- Prefix of path to images, relative to HTML file -->
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->
             <images.scale>1.0</images.scale>                                <!-- Image scale factor: 1.0 is normal size; 0.5 is half size; 2.0 is double size. -->

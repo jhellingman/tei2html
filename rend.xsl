@@ -188,7 +188,7 @@
     </xd:doc>
 
     <xsl:function name="f:adjust-dimension" as="xs:string?">
-        <xsl:param name="dimension" as="xs:string"/>
+        <xsl:param name="dimension" as="xs:string?"/>
         <xsl:param name="factor" as="xs:double"/>
 
         <xsl:choose>

@@ -156,6 +156,7 @@ sub printHtmlHead() {
         :lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }
         :lang(syc) { font-family: 'Serto Jerusalem', serif; }
         :lang(grc) { font-family: 'Galatia SIL', serif; }
+        :lang(sa) { font-family: 'Sanskrit 2003', serif;  }
     </style>
     </head>
     <body>

@@ -97,7 +97,7 @@
     <xsl:function name="f:is-image-present" as="xs:boolean">
         <xsl:param name="file" as="xs:string"/>
 
-        <xsl:sequence select="f:image-file-size($file) != ''"/>
+        <xsl:sequence select="boolean($imageInfo/img:images/img:image[@path=$file])"/>
     </xsl:function>
 
 
@@ -302,19 +302,19 @@ width:{$width};
     </xsl:function>
 
 
-    <xsl:function name="f:image-width">
+    <xsl:function name="f:image-width" as="xs:string?">
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
         <xsl:sequence select="f:adjust-dimension($width, number(f:get-setting('images.scale')))"/>
     </xsl:function>
 
-    <xsl:function name="f:image-height">
+    <xsl:function name="f:image-height" as="xs:string?">
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="height" select="$imageInfo/img:images/img:image[@path=$file]/@height" as="xs:string?"/>
         <xsl:sequence select="f:adjust-dimension($height, number(f:get-setting('images.scale')))"/>
     </xsl:function>
 
-    <xsl:function name="f:image-file-size">
+    <xsl:function name="f:image-file-size" as="xs:string?">
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="fileSize" select="$imageInfo/img:images/img:image[@path=$file]/@filesize"/>
         <xsl:sequence select="$fileSize"/>
