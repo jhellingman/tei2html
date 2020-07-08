@@ -157,7 +157,7 @@
         <xsl:param name="div" as="node()"/>
 
         <xsl:variable name="defaultHead">
-            <xsl:if test="f:is-set('defaultTocEntries')">
+            <xsl:if test="f:is-set('toc.defaultEntries')">
                 <xsl:value-of select="f:default-toc-head($div/@type)"/>
             </xsl:if>
         </xsl:variable>
@@ -206,7 +206,7 @@
         <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
-        <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
+        <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers">
             <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a href="{f:generate-href(.)}">
@@ -381,7 +381,7 @@
             </td>
         </xsl:if>
         <td class="tocDivNum">
-            <xsl:if test="@n and f:is-set('numberTocEntries') and $show-div-numbers">
+            <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers">
                 <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>

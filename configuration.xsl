@@ -26,7 +26,7 @@
         <xd:short>TEI stylesheet to handle configurations.</xd:short>
         <xd:detail>This stylesheet is used to handle configurable options in the tei2html stylesheets.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2020, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
     <xd:doc type="string">Name of custom configuration file.</xd:doc>
@@ -60,16 +60,13 @@
             <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
-            <defaultStylesheet>style/arctic.css</defaultStylesheet>         <!-- Stylesheet to include. -->
-            <useCommonStylesheets>true</useCommonStylesheets>               <!-- Use the build-in stylesheets (for screen) -->
-            <useCommonPrintStylesheets>true</useCommonPrintStylesheets>     <!-- Use the build-in stylesheets (for print media) -->
-            <inlineStylesheet>true</inlineStylesheet>                       <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
-            <numberTocEntries>true</numberTocEntries>                       <!-- Provide numbers with TOC entries. -->
+            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with TOC entries. -->
+            <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present -->
+
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
             <includePGComments>false</includePGComments>                    <!-- Include references to Project Gutenberg in comments. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
-            <defaultTocEntries>false</defaultTocEntries>                    <!-- Use generic heads in entries in the TOC, if no head is present -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
@@ -79,7 +76,7 @@
 
             <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto or seg[@copyOf] elements. -->
             <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
-            <ditto.repeat>word</ditto.repeat>                               <!-- TODO: How often to use a ditto mark, possible values: word | segment. May also be overridden by rend attribute ditto-repeat() -->
+            <ditto.repeat>word</ditto.repeat>                               <!-- How often to use a ditto mark, possible values: word | segment. May also be overridden by rend attribute ditto-repeat() -->
 
             <pageNumbers.show>true</pageNumbers.show>                       <!-- Show page numbers in the right margin -->
             <pageNumbers.before>[</pageNumbers.before>                      <!-- String to place before the page number in the right margin -->
@@ -111,9 +108,14 @@
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
 
+            <css.stylesheet>style/arctic.css</css.stylesheet>               <!-- Default CSS stylesheet to include. -->
+            <css.useCommon>true</css.useCommon>                             <!-- Use the build-in stylesheets (for screen) -->
+            <css.useCommonPrint>true</css.useCommonPrint>                   <!-- Use the build-in stylesheets (for print media) -->
+            <css.inline>true</css.inline>                                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
             <css.support>2</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3 -->
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
             <css.blackletterFont>UnifrakturMaguntia</css.blackletterFont>   <!-- The font to use when font(blackletter) is specified. -->
+
             <rendition.id.prefix></rendition.id.prefix>                     <!-- Prefix used for rendition IDs. -->
 
             <colophon.showEditDistance>true</colophon.showEditDistance>     <!-- Show the Levenshtein edit distance in the list of corrections made in the colophon. -->

@@ -157,7 +157,7 @@
 
     <xsl:template name="include-stylesheets">
         <xsl:choose>
-            <xsl:when test="not(f:is-set('inlineStylesheet')) or $outputformat = 'epub'">
+            <xsl:when test="not(f:is-set('css.inline')) or $outputformat = 'epub'">
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
 

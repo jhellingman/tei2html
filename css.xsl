@@ -62,7 +62,7 @@
 
     <xsl:template name="embed-css-stylesheets">
 
-        <xsl:if test="f:is-set('useCommonStylesheets')">
+        <xsl:if test="f:is-set('css.useCommon')">
             <style type="text/css">
                 <xsl:call-template name="common-css-stylesheets"/>
 
@@ -72,7 +72,7 @@
         </xsl:if>
 
         <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="f:is-set('useCommonPrintStylesheets') and $optionPrinceMarkup = 'Yes'">
+        <xsl:if test="f:is-set('css.useCommonPrint') and $optionPrinceMarkup = 'Yes'">
             <style type="text/css" media="print">
                 <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
@@ -116,7 +116,7 @@
                 <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
                     <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
                 </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:get-setting('defaultStylesheet')"/></xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="f:get-setting('css.stylesheet')"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
