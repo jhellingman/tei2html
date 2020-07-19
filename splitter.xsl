@@ -528,7 +528,7 @@
     <xsl:template name="epubPGHeader">
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
-        <xsl:if test="f:is-set('includePGHeaders')">
+        <xsl:if test="f:is-set('pg.includeHeaders')">
             <xsl:choose>
                 <xsl:when test="$splitter-action = 'spine'">
                     <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgheader"/>
@@ -557,7 +557,7 @@
     <xsl:template name="epubPGFooter">
         <xsl:param name="splitter-action" as="xs:string" tunnel="yes"/>
 
-        <xsl:if test="f:is-set('includePGHeaders')">
+        <xsl:if test="f:is-set('pg.includeHeaders')">
             <xsl:choose>
                 <xsl:when test="$splitter-action = 'spine'">
                     <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="pgfooter"/>

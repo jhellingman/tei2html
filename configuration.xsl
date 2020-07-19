@@ -63,9 +63,10 @@
             <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with TOC entries. -->
             <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present -->
 
+            <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->
+            <pg.includeComments>false</pg.includeComments>                  <!-- Include references to Project Gutenberg in comments. -->
+
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
-            <includePGHeaders>false</includePGHeaders>                      <!-- Include Project Gutenberg headers and footers. -->
-            <includePGComments>false</includePGComments>                    <!-- Include references to Project Gutenberg in comments. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->

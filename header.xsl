@@ -50,13 +50,13 @@
                 <xsl:text> <!-- insert extra new-line for PG -->
                 </xsl:text>
 
-                <xsl:if test="f:is-set('includePGHeaders')">
+                <xsl:if test="f:is-set('pg.includeHeaders')">
                     <xsl:call-template name="PGHeader"/>
                 </xsl:if>
 
                 <xsl:apply-templates/>
 
-                <xsl:if test="f:is-set('includePGHeaders')">
+                <xsl:if test="f:is-set('pg.includeHeaders')">
                     <xsl:call-template name="PGFooter"/>
                 </xsl:if>
             </body>

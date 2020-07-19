@@ -357,7 +357,7 @@
                      media-type="text/css"/>
 
                 <!-- PG Header & Footer -->
-                <xsl:if test="f:is-set('includePGHeaders')">
+                <xsl:if test="f:is-set('pg.includeHeaders')">
                     <item id="pgheader" 
                         href="pgheader.xhtml"
                         media-type="application/xhtml+xml"/>

@@ -50,7 +50,7 @@
 
 
     <xsl:template name="pgComment">
-        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:is-set('includePGComments')">
+        <xsl:if test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher[. = 'Project Gutenberg'] and f:is-set('pg.includeComments')">
             <xsl:comment><xsl:value-of select="f:message('msgPGComment')"/></xsl:comment>
         </xsl:if>
     </xsl:template>
