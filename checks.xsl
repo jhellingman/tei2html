@@ -1193,7 +1193,8 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, '#',                                 'Warning', 'P16', 'Hash-sign')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[0-9]/[0-9]',                       'Warning', 'P17', 'Unhandled fraction')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, '[|]',                               'Warning', 'P18', 'Vertical Bar')"/>
-
+        <xsl:copy-of select="f:should-not-contain(., $segment, 'O[.,][0-9]',                        'Warning', 'P19', 'Capital Oh for zero')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, 'l[.,][0-9]',                        'Warning', 'P19', 'Lower-case el for one')"/>
 
         <xsl:variable name="nfd-segment" select="normalize-unicode($segment, 'NFD')" as="xs:string"/>
 
