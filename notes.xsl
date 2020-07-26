@@ -223,7 +223,7 @@
 
     <xsl:template name="footnote-return-arrow">
         <xsl:context-item as="element()" use="required"/>
-        <xsl:if test="f:is-set('useFootnoteReturnArrow')">
+        <xsl:if test="f:is-set('notes.foot.returnArrow')">
             <xsl:text>&nbsp;</xsl:text>
             <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
             <a class="fnarrow" href="{f:generate-href(ancestor-or-self::note[1])}src">

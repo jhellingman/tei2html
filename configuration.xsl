@@ -73,7 +73,6 @@
             <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
             <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
-            <useFootnoteReturnArrow>true</useFootnoteReturnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
 
             <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto or seg[@copyOf] elements. -->
             <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
@@ -89,6 +88,7 @@
             <facsimile.external>false</facsimile.external>                  <!-- TODO: Set to true if the URL points to an external location. -->
             <facsimile.target></facsimile.target>                           <!-- TODO: Value of the target attribute of generated URLs (leave empty for default; _blank, _top, _parent, _self). -->
 
+            <notes.foot.returnArrow>true</notes.foot.returnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
             <notes.apparatus.textMarker>&deg;</notes.apparatus.textMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
             <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
             <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block -->
@@ -161,10 +161,23 @@
     </xd:doc>
 
     <xsl:variable name="configuration-map" as="map(xs:string, xs:string)" 
-        select="map:merge(
-                    (f:convert-configuration($default-configuration/tei2html.config), f:convert-configuration($custom-configuration/tei2html.config)),
-                    map{'duplicates' : 'use-last'})"/>
+        select="f:merge-configuration(
+                    f:convert-configuration($default-configuration/tei2html.config),
+                    f:convert-configuration($custom-configuration/tei2html.config))"/>
 
+    <xsl:function name="f:merge-configuration" as="map(xs:string, xs:string)">
+        <xsl:param name="default" as="map(xs:string, xs:string)"/>
+        <xsl:param name="override" as="map(xs:string, xs:string)"/>
+
+        <xsl:for-each select="map:keys($default)">
+            <xsl:variable name="key" select="." as="xs:string"/>
+            <xsl:if test="map:get($default, $key) = map:get($override, $key)">
+                <xsl:message expand-text="true">INFO: Overriden configuration value of key '{$key}' same as default.</xsl:message>
+            </xsl:if>
+        </xsl:for-each>
+
+        <xsl:sequence select="map:merge(($default, $override), map{'duplicates' : 'use-last'})"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Get a value from the configuration.</xd:short>

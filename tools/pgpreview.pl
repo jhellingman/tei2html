@@ -151,7 +151,7 @@ sub printHtmlHead() {
         .xref { background-color: #FFFF8C; }
         .code { font-weight: bold; color: gray; display: none; }
 
-        :lang(bo) { font-family: 'Qomolangma-Sarchung', 'Babelstone Tibetan', serif; font-size: x-large; }
+        :lang(bo) { font-family: 'Yagpo Tibetan Uni', 'Qomolangma-Sarchung', 'Babelstone Tibetan', serif; }
         :lang(ar) { font-family: Scheherazade, serif; }
         :lang(he) { font-family: Shlomo, 'Ezra SIL', serif; font-size: 80% }
         :lang(syc) { font-family: 'Serto Jerusalem', serif; }
