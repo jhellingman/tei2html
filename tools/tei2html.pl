@@ -154,6 +154,14 @@ if ($showHelp == 1) {
     exit(0);
 }
 
+
+# Dependencies between files:
+#
+# (Processed/)?images/*.(jpg|png) -> imageinfo.xml
+# *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-preprocessed.xml -> *.html, *.epub, readme.md, metadata.xml
+# *(-[0-9].[0-9]+).tei -> *.txt
+
+
 if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $makeWordlist == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
     # Revert to old default:
     $makeText = 1;
@@ -223,6 +231,17 @@ sub processFile($) {
 
     if ($version >= 1.0) {
         $makeText = 0;
+
+        # Warn about "processed" files being out-of-date.
+        if (isNewer($filename, "Processed/$basename.xml")) {
+            print "WARNING: Processed xml version is out-of-date or missing!\n";
+        }
+        if (isNewer($filename, "Processed/$basename.html")) {
+            print "WARNING: Processed HTML version is out-of-date or missing!\n";
+        }
+        if (isNewer($filename, "Processed/$basename.epub")) {
+            print "WARNING: Processed ePub version is out-of-date or missing!\n";
+        }
     }
     if ($explicitMakeText == 1) {
         $makeText = 1;
@@ -298,20 +317,26 @@ sub makeP5($$) {
 sub makeMetadata($) {
     my $xmlFilename = shift;
 
-    if ($force != 0 || isNewer($xmlFilename, 'metadata.xml')) {
-        print "Extract metadata to metadata.xml...\n";
-        system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+    if ($force == 0 && isNewer('metadata.xml', $xmlFilename)) {
+        print "Skip extract metadata because 'metadata.xml' is newer than '$xmlFilename'.\n";
+        return;
     }
+
+    print "Extract metadata to metadata.xml...\n";
+    system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
 }
 
 
 sub makeReadme($) {
     my $xmlFilename = shift;
 
-    if ($force != 0 || isNewer($xmlFilename, 'README.md')) {
-        print "Extract metadata to README.md...\n";
-        system ("$saxon $xmlFilename $xsldir/tei2readme.xsl > README.md");
+    if ($force == 0 && isNewer('README.md', $xmlFilename)) {
+        print "Skip create readme because 'README.md' is newer than '$xmlFilename'.\n";
+        return;
     }
+
+    print "Extract metadata to README.md...\n";
+    system ("$saxon $xmlFilename $xsldir/tei2readme.xsl > README.md");
 }
 
 
@@ -830,14 +855,12 @@ sub temporaryFile($$) {
 #
 # collectImageInfo -- collect some information about images in the imageinfo.xml file.
 #
-# add -c to called script arguments to also collect contour information with this script.
-#
 sub collectImageInfo() {
     if (-d 'images') {
-        print "Collect image dimensions...\n";
+        print "Collect image dimensions from 'images'...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     } elsif (-d 'Processed/images') {
-        print "Collect image dimensions...\n";
+        print "Collect image dimensions  from 'Processed/images'...\n";
         system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
     }
 }

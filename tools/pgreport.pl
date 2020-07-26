@@ -212,7 +212,7 @@ sub handleTeiFile {
                 if ($makeHtml != 0) {
                     system ("perl -S tei2html.pl -h -r -v -f $fileName$suffix");
                 } else {
-                    system ("perl -S tei2html.pl -x -r -v -f -k --kwicvariants=2 --kwiccasesensitive=true $fileName$suffix");
+                    system ("perl -S tei2html.pl -x -r -v -f $fileName$suffix");
                 }
             }
             chdir ($cwd);

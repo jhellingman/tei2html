@@ -18,7 +18,6 @@ my $optipng = "optipng.exe";            # also https://pngquant.org/ and http://
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
 my $jpegtran = "jpegtran.exe";          # http://www.kokkonen.net/tjko/projects.html https://github.com/mozilla/mozjpeg
 my $zopflipng = "zopflipng.exe";        # https://github.com/imagemin/zopflipng-bin/tree/master/vendor
-my $gifsicle = "gifsicle.exe";          # see http://www.lcdf.org/gifsicle/   (WARNING: might corrupt some images!)
 
 # For benchmarks see: https://css-ig.net/png-tools-overview#overview
 # https://github.com/fhanau/Efficient-Compression-Tool
@@ -32,7 +31,7 @@ my $imagesConverted = 0;
 
 my $verbose = 0;
 my $help = 0;
-my $maxAgeHours = 24;
+my $maxAgeHours = 8;
 
 GetOptions(
     'v' => \$verbose,
@@ -43,7 +42,7 @@ if ($help == 1) {
     print "optimg.pl [options] directory\n\n";
     print "    -v     : be verbose\n";
     print "    -h     : print help\n";
-    print "    -a=#   : max age in hours of files to compress (0 = always compress)\n";
+    print "    -a=#   : max age in hours of files to compress (default 8; 0 = always compress)\n";
     exit;
 }
 
@@ -118,8 +117,6 @@ sub handle_file($) {
             } else {
                 unlink $newfile;
             }
-        # } elsif ($extension eq 'gif') {
-        #     my $returnCode = system ("$gifsicle -O2 --batch \"$file\"");
         }
 
         my $resultSize = -s $file;

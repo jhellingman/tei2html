@@ -72,9 +72,10 @@
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
             <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
-            <useHangingPunctuation>false</useHangingPunctuation>            <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
 
-            <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto or seg[@copyOf] elements. -->
+            <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
+
+            <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto (deprecated) or seg[@copyOf] elements. -->
             <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
             <ditto.repeat>word</ditto.repeat>                               <!-- How often to use a ditto mark, possible values: word | segment. May also be overridden by rend attribute ditto-repeat() -->
 

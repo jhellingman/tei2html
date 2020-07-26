@@ -12,12 +12,10 @@ use Win32::UTCFileTime qw(:DEFAULT $ErrStr);
 
 my $whiteLevel = 10;
 my $stepSize = 10;
-my $needContour = 0;
 my $stripPath = 0;
 my $dropPath = 0;
 
 GetOptions (
-    'c' => \$needContour,
     's' => \$stripPath,
     'd=i' => \$dropPath);
 
@@ -35,6 +33,7 @@ sub main {
     listRecursively($directory);
     print "\n</images>";
 }
+
 
 #
 # listRecursively -- list a directory tree to find all images in it.
@@ -88,76 +87,7 @@ sub handleImage($) {
     my $image = Image::Magick->new;
     my ($width, $height, $fileSize, $fileFormat) = $image->Ping($imageFile);
 
-    print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\">";
-
-    if ($needContour != 0) {
-        $image->Read($imageFile);
-
-        # collect contour information
-        my @leftBoundary;
-        my @rightBoundary;
-
-        for (my $y = 0; $y < $height; $y++) {
-            $leftBoundary[$y] = 0;
-            for (my $x = 0; $x < $width; $x++) {
-                my ($r, $g, $b, $a) = split(",", $image->Get("pixel[$x,$y]"));
-
-                if (isWhite($r, $g, $b)) {
-                    $leftBoundary[$y]++;
-                } else {
-                    last;
-                }
-            }
-        }
-
-        for (my $y = 0; $y < $height; $y++) {
-            $rightBoundary[$y] = 0;
-            for (my $x = 0; $x < $width; $x++) {
-                my $str = "pixel[" . ($width - $x - 1) . ",$y]";
-                my ($r, $g, $b, $a) = split(",", $image->Get($str));
-                if (isWhite($r, $g, $b)) {
-                    $rightBoundary[$y]++;
-                } else {
-                    last;
-                }
-            }
-        }
-
-        print "\n<leftBoundary level=\"$whiteLevel\" step=\"${stepSize}px\">";
-        for (my $y = 0; $y < $height; $y += $stepSize) {
-            my $max = $leftBoundary[$y];
-            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++) {
-                $max = $max < $leftBoundary[$y2] ? $max : $leftBoundary[$y2];
-            }
-            print ($y == 0 ? "$max" : ", $max");
-        }
-        print "</leftBoundary>";
-
-        print "\n<rightBoundary level=\"$whiteLevel\" step=\"${stepSize}px\">";
-        for (my $y = 0; $y < $height; $y += $stepSize) {
-            my $max = $rightBoundary[$y];
-            for (my $y2 = $y; $y2 < $y + $stepSize && $y2 < $height; $y2++) {
-                $max = $max < $rightBoundary[$y2] ? $max : $rightBoundary[$y2];
-            }
-            print ($y == 0 ? "$max" : ", $max");
-        }
-        print "</rightBoundary>";
-    }
-
-    print "\n</image>";
-}
-
-
-#
-# isWhite -- determine whether a pixel is white enough.
-#
-sub isWhite($$$) {
-    my ($r, $g, $b) = @_;
-
-    my $gray =  0.299 * $r + 0.587 * $g + 0.114 * $b;
-    $gray = $gray / 256;
-
-    return $gray > 255 - $whiteLevel;
+    print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\"/>";
 }
 
 
