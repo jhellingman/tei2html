@@ -1,68 +1,35 @@
 <images xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo">
-<image path="images/book.png" filesize="219" filedate="2018-12-01 13:16:48" width="16px" height="16px">
-</image>
-<image path="images/card.png" filesize="230" filedate="2018-12-01 13:16:48" width="16px" height="11px">
-</image>
-<image path="images/external.png" filesize="151" filedate="2018-11-02 19:19:11" width="12px" height="12px">
-</image>
-<image path="images/front.jpg" filesize="64232" filedate="2018-11-02 19:19:11" width="469px" height="720px">
-</image>
-<image path="images/p026-1.jpg" filesize="59693" filedate="2018-11-02 19:19:11" width="537px" height="332px">
-</image>
-<image path="images/p026-2.jpg" filesize="40832" filedate="2018-11-02 19:19:11" width="536px" height="332px">
-</image>
-<image path="images/p027.jpg" filesize="100484" filedate="2018-11-02 19:19:11" width="504px" height="720px">
-</image>
-<image path="images/p040-1.jpg" filesize="55090" filedate="2018-11-02 19:19:12" width="535px" height="328px">
-</image>
-<image path="images/p040-2.jpg" filesize="54629" filedate="2018-11-02 19:19:12" width="535px" height="329px">
-</image>
-<image path="images/p041-1.jpg" filesize="46777" filedate="2018-11-02 19:19:12" width="534px" height="328px">
-</image>
-<image path="images/p041-2.jpg" filesize="40328" filedate="2018-11-02 19:19:12" width="532px" height="329px">
-</image>
-<image path="images/p056-1.jpg" filesize="47454" filedate="2018-11-02 19:19:12" width="536px" height="332px">
-</image>
-<image path="images/p056-2.jpg" filesize="47424" filedate="2018-11-02 19:19:12" width="536px" height="331px">
-</image>
-<image path="images/p057-1.jpg" filesize="45592" filedate="2018-11-02 19:19:12" width="534px" height="328px">
-</image>
-<image path="images/p057-2.jpg" filesize="48796" filedate="2018-11-02 19:19:12" width="533px" height="325px">
-</image>
-<image path="images/p068-1.jpg" filesize="39896" filedate="2018-11-02 19:19:12" width="540px" height="329px">
-</image>
-<image path="images/p068-2.jpg" filesize="41490" filedate="2018-11-02 19:19:12" width="534px" height="333px">
-</image>
-<image path="images/p069-1.jpg" filesize="41871" filedate="2018-11-02 19:19:13" width="535px" height="344px">
-</image>
-<image path="images/p069-2.jpg" filesize="42950" filedate="2018-11-02 19:19:13" width="531px" height="349px">
-</image>
-<image path="images/p090-1.jpg" filesize="51036" filedate="2018-11-02 19:19:13" width="536px" height="334px">
-</image>
-<image path="images/p090-2.jpg" filesize="42152" filedate="2018-11-02 19:19:13" width="533px" height="330px">
-</image>
-<image path="images/p091-1.jpg" filesize="42573" filedate="2018-11-02 19:19:13" width="532px" height="329px">
-</image>
-<image path="images/p091-2.jpg" filesize="48503" filedate="2018-11-02 19:19:13" width="533px" height="331px">
-</image>
-<image path="images/p124.jpg" filesize="130067" filedate="2018-11-02 19:19:13" width="508px" height="720px">
-</image>
-<image path="images/p125.jpg" filesize="69871" filedate="2018-11-02 19:19:13" width="720px" height="446px">
-</image>
-<image path="images/p160-1.jpg" filesize="47607" filedate="2018-11-02 19:19:13" width="535px" height="332px">
-</image>
-<image path="images/p160-2.jpg" filesize="38319" filedate="2018-11-02 19:19:13" width="536px" height="329px">
-</image>
-<image path="images/p161.jpg" filesize="99087" filedate="2018-11-02 19:19:13" width="720px" height="491px">
-</image>
-<image path="images/p196.jpg" filesize="65395" filedate="2018-11-02 19:19:13" width="503px" height="720px">
-</image>
-<image path="images/p197-1.jpg" filesize="46152" filedate="2018-11-02 19:19:13" width="532px" height="325px">
-</image>
-<image path="images/p197-2.jpg" filesize="41220" filedate="2018-11-02 19:19:13" width="531px" height="328px">
-</image>
-<image path="images/qrcode.png" filesize="267" filedate="2018-12-01 13:16:59" width="148px" height="148px">
-</image>
-<image path="images/titlepage.png" filesize="9385" filedate="2018-12-01 13:17:02" width="423px" height="720px">
-</image>
+<image path="images/book.png" filesize="219" filedate="2018-12-01 13:16:48" width="16px" height="16px"/>
+<image path="images/card.png" filesize="230" filedate="2018-12-01 13:16:48" width="16px" height="11px"/>
+<image path="images/external.png" filesize="151" filedate="2018-11-02 19:19:11" width="12px" height="12px"/>
+<image path="images/front.jpg" filesize="64232" filedate="2018-11-02 19:19:11" width="469px" height="720px"/>
+<image path="images/p026-1.jpg" filesize="59693" filedate="2018-11-02 19:19:11" width="537px" height="332px"/>
+<image path="images/p026-2.jpg" filesize="40832" filedate="2018-11-02 19:19:11" width="536px" height="332px"/>
+<image path="images/p027.jpg" filesize="100484" filedate="2018-11-02 19:19:11" width="504px" height="720px"/>
+<image path="images/p040-1.jpg" filesize="55090" filedate="2018-11-02 19:19:12" width="535px" height="328px"/>
+<image path="images/p040-2.jpg" filesize="54629" filedate="2018-11-02 19:19:12" width="535px" height="329px"/>
+<image path="images/p041-1.jpg" filesize="46777" filedate="2018-11-02 19:19:12" width="534px" height="328px"/>
+<image path="images/p041-2.jpg" filesize="40328" filedate="2018-11-02 19:19:12" width="532px" height="329px"/>
+<image path="images/p056-1.jpg" filesize="47454" filedate="2018-11-02 19:19:12" width="536px" height="332px"/>
+<image path="images/p056-2.jpg" filesize="47424" filedate="2018-11-02 19:19:12" width="536px" height="331px"/>
+<image path="images/p057-1.jpg" filesize="45592" filedate="2018-11-02 19:19:12" width="534px" height="328px"/>
+<image path="images/p057-2.jpg" filesize="48796" filedate="2018-11-02 19:19:12" width="533px" height="325px"/>
+<image path="images/p068-1.jpg" filesize="39896" filedate="2018-11-02 19:19:12" width="540px" height="329px"/>
+<image path="images/p068-2.jpg" filesize="41490" filedate="2018-11-02 19:19:12" width="534px" height="333px"/>
+<image path="images/p069-1.jpg" filesize="41871" filedate="2018-11-02 19:19:13" width="535px" height="344px"/>
+<image path="images/p069-2.jpg" filesize="42950" filedate="2018-11-02 19:19:13" width="531px" height="349px"/>
+<image path="images/p090-1.jpg" filesize="51036" filedate="2018-11-02 19:19:13" width="536px" height="334px"/>
+<image path="images/p090-2.jpg" filesize="42152" filedate="2018-11-02 19:19:13" width="533px" height="330px"/>
+<image path="images/p091-1.jpg" filesize="42573" filedate="2018-11-02 19:19:13" width="532px" height="329px"/>
+<image path="images/p091-2.jpg" filesize="48503" filedate="2018-11-02 19:19:13" width="533px" height="331px"/>
+<image path="images/p124.jpg" filesize="130067" filedate="2018-11-02 19:19:13" width="508px" height="720px"/>
+<image path="images/p125.jpg" filesize="69871" filedate="2018-11-02 19:19:13" width="720px" height="446px"/>
+<image path="images/p160-1.jpg" filesize="47607" filedate="2018-11-02 19:19:13" width="535px" height="332px"/>
+<image path="images/p160-2.jpg" filesize="38319" filedate="2018-11-02 19:19:13" width="536px" height="329px"/>
+<image path="images/p161.jpg" filesize="99087" filedate="2018-11-02 19:19:13" width="720px" height="491px"/>
+<image path="images/p196.jpg" filesize="65395" filedate="2018-11-02 19:19:13" width="503px" height="720px"/>
+<image path="images/p197-1.jpg" filesize="46152" filedate="2018-11-02 19:19:13" width="532px" height="325px"/>
+<image path="images/p197-2.jpg" filesize="41220" filedate="2018-11-02 19:19:13" width="531px" height="328px"/>
+<image path="images/qrcode.png" filesize="267" filedate="2018-12-01 13:16:59" width="148px" height="148px"/>
+<image path="images/titlepage.png" filesize="9385" filedate="2018-12-01 13:17:02" width="423px" height="720px"/>
 </images>

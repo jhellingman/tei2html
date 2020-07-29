@@ -232,15 +232,32 @@ sub processFile($) {
     if ($version >= 1.0) {
         $makeText = 0;
 
-        # Warn about "processed" files being out-of-date.
+        # Warn about processed files missing
+        if (! -e "Processed/$basename.xml") {
+            print "WARNING: Processed xml version is missing!\n";
+            $makeXML = 1;
+        }
+        if (! -e "Processed/$basename.html") {
+            print "WARNING: Processed HTML version is missing!\n";
+            $makeHtml = 1;
+        }
+        if (! -e "Processed/$basename.epub") {
+            print "WARNING: Processed ePub version is missing!\n";
+            $makeEpub = 1;
+        }
+
+        # Warn about processed files being out-of-date.
         if (isNewer($filename, "Processed/$basename.xml")) {
-            print "WARNING: Processed xml version is out-of-date or missing!\n";
+            print "WARNING: Processed xml version is out-of-date!\n";
+            $makeXML = 1;
         }
         if (isNewer($filename, "Processed/$basename.html")) {
-            print "WARNING: Processed HTML version is out-of-date or missing!\n";
+            print "WARNING: Processed HTML version is out-of-date!\n";
+            $makeHtml = 1;
         }
         if (isNewer($filename, "Processed/$basename.epub")) {
-            print "WARNING: Processed ePub version is out-of-date or missing!\n";
+            print "WARNING: Processed ePub version is out-of-date!\n";
+            $makeEpub = 1;
         }
     }
     if ($explicitMakeText == 1) {

@@ -20,19 +20,24 @@ use XML::XPath;
 binmode(STDOUT, ":utf8");
 use open ':utf8';
 
-my $force = 0;          # Force generation of XML files, even if up-to-date.
+my $force = 0;          # regenerate XML files.
+my $forceMore = 0;      # regenerate XML files, even if they appear up-to-date.
 my $makeHtml = 0;       # Generate HTML files.
 my $makeChecks = 0;
 my $download = 0;       # Download posted files from Project Gutenberg.
 
 GetOptions(
     'f' => \$force,
+    'm' => \$forceMore,
     'v' => \$makeChecks,
     'h' => \$makeHtml,
     'd' => \$download);
 
 my $gitRepoLocation = 'D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/';
 
+if ($forceMore != 0) {
+    $force = 1;
+}
 
 # Counters
 my $totalFiles = 0;
@@ -209,10 +214,11 @@ sub handleTeiFile {
             if ($specialProcessing == 1) {
                 # system ("perl -S process.pl");
             } else {
+                my $forceFlag = $forceMore == 0 ? '' : ' -f ';
                 if ($makeHtml != 0) {
-                    system ("perl -S tei2html.pl -h -r -v -f $fileName$suffix");
+                    system ("perl -S tei2html.pl -h -r -v $forceFlag $fileName$suffix");
                 } else {
-                    system ("perl -S tei2html.pl -x -r -v -f $fileName$suffix");
+                    system ("perl -S tei2html.pl -x -r -v $forceFlag $fileName$suffix");
                 }
             }
             chdir ($cwd);
