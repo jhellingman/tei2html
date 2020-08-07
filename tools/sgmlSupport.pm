@@ -1508,6 +1508,10 @@ BEGIN {
     # Tibetan transcription as used in Jäschke's dictionary and grammar
 
     $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper (dasia) -> mapped to spacing symbol!
+    $ent{'hspas'}       = 'h' . chr(0x02BD);                    # h with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
+    $ent{'espas'}       = 'e' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
+    $ent{'ospas'}       = 'o' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
+
     $ent{'cgrave'}      = 'c' . chr(0x0300);                    # c with grave
     $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave
 
@@ -1683,6 +1687,8 @@ BEGIN {
     $ent{'rmacr'}       = 'r' . chr(0x0304); # r with macron
     $ent{'vmacr'}       = 'v' . chr(0x0304); # v with macron
     $ent{'Dmacr'}       = 'D' . chr(0x0304); # D with macron
+    $ent{'xmacr'}       = 'x' . chr(0x0304); # x with macron
+    $ent{'Xmacr'}       = 'X' . chr(0x0304); # X with macron
 
     $ent{'jbreve'}      = 'j' . chr(0x0306); # j with breve
     $ent{'Jbreve'}      = 'J' . chr(0x0306); # J with breve
@@ -1698,6 +1704,8 @@ BEGIN {
     $ent{'Ybreve'}      = 'Y' . chr(0x0306); # Y with breve
     $ent{'zbreve'}      = 'z' . chr(0x0306); # z with breve
     $ent{'Zbreve'}      = 'Z' . chr(0x0306); # Z with breve
+    $ent{'xbreve'}      = 'x' . chr(0x0306); # x with breve
+    $ent{'Xbreve'}      = 'X' . chr(0x0306); # X with breve
 
     $ent{'nbrevdotb'}   = 'n' . chr(0x0306) . chr(0x0323); # n with breve and dot b
     $ent{'zbrevdotb'}   = 'z' . chr(0x0306) . chr(0x0323); # z with breve and dot b
@@ -1745,6 +1753,7 @@ BEGIN {
     $ent{'Zdota'}       = 'Z' . chr(0x0307); # z with dot above
 
     $ent{'ruml'}        = 'r' . chr(0x0308); # r with diaresis
+    $ent{'xuml'}        = 'x' . chr(0x0308); # r with diaresis
 
     $ent{'ering'}       = 'e' . chr(0x030A); # e with ring
     $ent{'mring'}       = 'm' . chr(0x030A); # m with ring
@@ -1959,10 +1968,34 @@ BEGIN {
 
     $ent{'iabrevb'}     = 'i' . chr(0x035C) . 'a'; # ia with doube breve below
 
-
     $ent{'ngtilde'}     = 'n' . chr(0x0360) . 'g'; # ng with double tilde
     $ent{'Ngtilde'}     = 'N' . chr(0x0360) . 'g'; # Ng with double tilde
     $ent{'NGtilde'}     = 'N' . chr(0x0360) . 'G'; # NG with double tilde
+
+    # More JASCHKE:
+    $ent{'etilbarb'}    = chr(0x1EBD) . chr(0x0331); # e with tilde and bar below (JASCHKE)
+    $ent{'otilbarb'}    = chr(0x00F5) . chr(0x0331); # o with tilde and bar below (JASCHKE)
+    $ent{'otilumlb'}    = chr(0x00F5) . chr(0x0324); # o with tilde and umlaut below (JASCHKE)
+    $ent{'scaracu'}   = chr(0x0161) . chr(0x0301);        # s with caron and acute (JASCHKE)
+    $ent{'Scaracu'}   = chr(0x0160) . chr(0x0301);        # S with caron and acute (JASCHKE)
+    $ent{'zcaracu'}   = 'z' . chr(0x030C) . chr(0x0301);  # z with caron and acute (JASCHKE)
+    $ent{'Zcaracu'}   = 'Z' . chr(0x030C) . chr(0x0301);  # Z with caron and acute (JASCHKE)
+    $ent{'ccaracu'}   = 'c' . chr(0x030C) . chr(0x0301);  # c with caron and acute (JASCHKE)
+    $ent{'Ccaracu'}   = 'C' . chr(0x030C) . chr(0x0301);  # C with caron and acute (JASCHKE)
+    $ent{'jcaracu'}   = 'j' . chr(0x030C) . chr(0x0301);  # j with caron and acute (JASCHKE)
+    $ent{'Jcaracu'}   = 'J' . chr(0x030C) . chr(0x0301);  # J with caron and acute (JASCHKE)
+    $ent{'omacracu'}    = chr(0x014D) . chr(0x0301);  # o with macron and acute (JASCHKE)
+    $ent{'obrevbarb'}   = chr(0x014F) . chr(0x0331);  # o with breve and bar below (JASCHKE)
+    $ent{'obrevumlb'}   = chr(0x014F) . chr(0x0324);  # o with breve and umlaut below (JASCHKE)
+    $ent{'ebrevumlb'}   = chr(0x0115) . chr(0x0324);  # e with breve and umlaut below (JASCHKE)
+    $ent{'oacubrevumlb'}   = chr(0x014F) . chr(0x0301) . chr(0x0324);  # o with breve and acute and umlaut below (JASCHKE)
+    $ent{'sbrevdotb'}   = 's' . chr(0x0306) . chr(0x0323);  # s with breve and dot below (JASCHKE)
+    $ent{'eacubarb'}    = chr(0x00e9) . chr(0x0331);  # e with acute and bar below (JASCHKE)
+    $ent{'eacudotb'}    = chr(0x00e9) . chr(0x0323);  # e with acute and dot below (JASCHKE)
+    $ent{'oacuumlb'}    = chr(0x00F3) . chr(0x0324);  # o with acute and umlaut below (JASCHKE)
+    $ent{'emacracu'}    = chr(0x0113) . chr(0x0301);  # e with macron and acute (JASCHKE)
+    $ent{'emacrbarb'}    = chr(0x0113) . chr(0x0331);  # e with macron and bar below (JASCHKE)
+    $ent{'emacracubarb'}    = chr(0x0113) . chr(0x0301) . chr(0x0331);  # e with macron and acute and bar below (JASCHKE)
 
     $ent{'Voline'}      = 'V' . chr(0x0305); # V with overline
     $ent{'Xoline'}      = 'X' . chr(0x0305); # V with overline
@@ -2625,6 +2658,30 @@ sub pgdp2sgml {
     $string =~ s/\[\^\"([a-zA-Z])\]/\&$1umlcirc;/g;     # dieresis and circumflex
 
     $string =~ s/\[``([a-zA-Z])\]/\&$1dgrave;/g;        # double grave
+
+    # More JASCHKE:
+    $string =~ s/\[:x]/\&xuml;/g;                       # x umlaut (JASCHKE)
+    $string =~ s/\[~e=]/\&etilbarb;/g;                  # e with tilde and bar below (JASCHKE)
+    $string =~ s/\[~o=]/\&otilbarb;/g;                  # o with tilde and bar below (JASCHKE)
+    $string =~ s/\[~o:]/\&otilumlb;/g;                  # o with tilde and umlaut below (JASCHKE)
+    $string =~ s/\['=o]/\&omacracu;/g;                  #  o with macron and acute (JASCHKE)
+    $string =~ s/\['=a]/\&amacracu;/g;                  #  a with macron and acute (JASCHKE)
+    $string =~ s/\[=e=]/\&emacrbarb;/g;                 # e with macron and bar below (JASCHKE)
+    $string =~ s/\['=e=]/\&emacracubarb;/g;             # e with macron and acute and bar below (JASCHKE)
+    $string =~ s/\[\)o=]/\&obrevbarb;/g;                #  o with breve and bar below (JASCHKE)
+    $string =~ s/\[\)o:]/\&obrevumlb;/g;                #  o with breve and umlaut below (JASCHKE)
+    $string =~ s/\[\)e:]/\&ebrevumlb;/g;                #  e with breve and umlaut below (JASCHKE)
+    $string =~ s/\['\)o:]/\&oacubrevumlb;/g;            #  o with breve and acute and umlaut below (JASCHKE)
+    $string =~ s/\['vs]/\&scaracu;/g;                   # s with caron and acute (JASCHKE)
+    $string =~ s/\['vz]/\&zcaracu;/g;                   # z with caron and acute (JASCHKE)
+    $string =~ s/\['vc]/\&ccaracu;/g;                   # c with caron and acute (JASCHKE)
+    $string =~ s/\['vj]/\&jcaracu;/g;                   # j with caron and acute (JASCHKE)
+    $string =~ s/\[\)s\.]/\&sbrevdotb;/g;               # s with breve and dot below (JASCHKE)
+    $string =~ s/\[\x{00e9}=\]/\&eacubarb;/g;           # e with acute and bar below (JASCHKE)
+    $string =~ s/\['=e\]/\&emacracu;/g;                 # e with macron and acute (JASCHKE)
+    $string =~ s/\[\x{00e9}\.\]/\&eacudotb;/g;          # e with acute and dot below (JASCHKE)
+    $string =~ s/\['o:\]/\&oacuumlb;/g;                 # o with acute and umlaut below (JASCHKE)
+
 
     # Guilder sign
     $string =~ s/\[f\]/\&florin;/g;                     # guilder sign.

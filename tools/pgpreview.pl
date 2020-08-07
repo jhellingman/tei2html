@@ -3,11 +3,17 @@
 use strict;
 use warnings;
 
+use Getopt::Long;
 use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 use HTML::Entities;
 
 main();
 
+my $utf8 = 0;       # Input file is utf8.
+
+GetOptions(
+    'u' => \$utf8
+    );
 
 sub main {
     my $file = $ARGV[0];
@@ -22,6 +28,9 @@ sub main {
     }
 
     open(INPUTFILE, $file) || die("Could not open input file $file");
+    if ($utf8 != 0) {
+        binmode(INPUTFILE, ":utf8");
+    }
 
     printHtmlHead();
 
