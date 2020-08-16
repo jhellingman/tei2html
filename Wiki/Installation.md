@@ -28,19 +28,17 @@ If you are using the provided Perl scripts to glue things together, you'll need 
 
 My advise is to download [Strawberry Perl](http://strawberryperl.com/). For Windows, use either the 32 or 64 bits version, to match your system.
 
-*Note* Upgrading perl does not work properly: please saveguard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
+*Note* Upgrading Strawberry Perl does not work properly: please saveguard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
 
 *Note* ImageMagick is very picky about the version of Perl it works with. Use a 5.20.x version, not an earlier or later version.
 
 After installing Perl, install [ImageMagick](http://www.imagemagick.org/script/index.php), again, matching the 32 or 64 bits version of your system. When installing, make sure to also tick the option to install the C headers.
 
-After that, run `cpan -force install Image::Magick` to get the required packages in Perl.
-
-Some errors may show up during this process, but in my configuration it still worked.
+After that, run `cpan -force install Image::Magick` to get the required packages in Perl. Some errors will show up during this process, but in my configuration it still worked.
 
 ### Packages used ###
 
-TODO.
+* Image::Magick
 
 
 ## SX, NSGML ##
