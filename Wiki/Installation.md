@@ -39,7 +39,16 @@ After that, run `cpan -force install Image::Magick` to get the required packages
 ### Packages used ###
 
 * Image::Magick
-
+* Lingua::BO::Wylie
+* HTML::Entities;
+* Text::Levenshtein::XS 
+* Statistics::Descriptive
+* File::Basename
+* Getopt::Long
+* Image::Info 
+* MIME::Base64
+* XML::XPath
+* Unicode::Normalize
 
 ## SX, NSGML ##
 
