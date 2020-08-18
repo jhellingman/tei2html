@@ -17,8 +17,9 @@ GetOptions(
     'w=i' => \$pageWidth);
 
 if ($useUnicode == 1) {
-    binmode(STDOUT, ":utf8");
-    use open ':utf8';
+    binmode(STDOUT, ":encoding(UTF-8)");
+    # use open ':utf8';
+    use open ':encoding(UTF-8)'
 }
 
 my $italicStart = '_';
@@ -94,6 +95,7 @@ while (<>) {
 
     # drop comments from text (replace with single space).
     $line =~ s/\s*<!--.*?-->\s*/ /g;
+
     # warn for remaining comments
     $line =~ s/<!--/[**ERROR: unhandled comment start]/g;
 
@@ -138,7 +140,7 @@ while (<>) {
         print "------\n";
     }
 
-    # indicate tables for manual processing.
+    # mark tables for manual verification.
     if ($line =~ /<table.*?>/) {
         print "\n[**TODO: Verify table]\n";
         parseTable($line);

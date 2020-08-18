@@ -7,18 +7,22 @@ use Getopt::Long;
 use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 use HTML::Entities;
 
-main();
-
 my $utf8 = 0;       # Input file is utf8.
 
 GetOptions(
     'u' => \$utf8
     );
 
+main();
+
 sub main {
     my $file = $ARGV[0];
     my $projectName = $ARGV[1];
     my $useExtensions = 0;
+
+    if (!defined $projectName && $file =~ /^(projectID[0-9a-f]+)/) {
+        $projectName = $1;
+    }
 
     if ($file eq '-x') {
         $useExtensions = 1;
@@ -150,6 +154,7 @@ sub printHtmlHead() {
 <html lang='en'>
     <head>
     <title>DP Preview</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style type='text/css'>
         BODY { font-size: 16pt; line-height: 22pt; font-family: 'Charis SIL'; }
         .figure { background-color: #FFFF5C; }

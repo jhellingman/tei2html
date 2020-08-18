@@ -2365,29 +2365,29 @@ sub getAttrVal {
 # Map SGML entities to Unicode in UTF-8
 #
 # Usage:
-#   sgml2utf8($string)
+#   sgml2utf($string)
 # Parameter:
 #   $string: the string to be converted to UTF-8.
 
 sub sgml2utf {
-    my $source = shift;
-    return sgml2utf_common($source, 0);
+    my $string = shift;
+    return sgml2utf_common($string, 0);
 }
 
 sub sgml2utf_html {
-    my $source = shift;
-    return sgml2utf_common($source, 1);
+    my $string = shift;
+    return sgml2utf_common($string, 1);
 }
 
 sub sgml2utf_common {
-    my $source = shift;
+    my $remainder = shift;
     my $forHtml = shift;
     my $result = '';
 
-    while ($source =~ /\&(#?[a-z0-9._-]+);/i) {
+    while ($remainder =~ /\&(#?[a-z0-9._-]+);/i) {
         $result .= $`;
         my $entity = $1;
-        $source = $';
+        $remainder = $';
 
         my $char = '';
         if ($forHtml == 1 && $entity eq 'lt') {
@@ -2405,9 +2405,9 @@ sub sgml2utf_common {
         } elsif ($entity =~ /#([0-9]+)/) {
             $char = chr($1);
         } elsif ($entity =~ /^frac([0-9])([0-9]+)$/) {
-            $char = handleFraction($1, $2, $result, $source);
+            $char = handleFraction($1, $2, $result, $remainder);
         } elsif ($entity =~ /^frac([0-9]+)-([0-9]+)$/) {
-            $char = handleFraction($1, $2, $result, $source);
+            $char = handleFraction($1, $2, $result, $remainder);
         } elsif ($entity =~ /^time([0-9])([0-9]+)$/) {
             $char = handleMusicalTime($1, $2);
         } else {
@@ -2416,7 +2416,7 @@ sub sgml2utf_common {
         }
         $result .= $char;
     }
-    $result .= $source;
+    $result .= $remainder;
     return $result;
 }
 
