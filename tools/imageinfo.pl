@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Image::Magick;
+use Image::Size;
 use File::Basename;
 use Getopt::Long;
 
@@ -84,8 +84,8 @@ sub handleImage($) {
     }
     $seenImageHash{$imagePath} = 1;
 
-    my $image = Image::Magick->new;
-    my ($width, $height, $fileSize, $fileFormat) = $image->Ping($imageFile);
+    my ($width, $height) = imgsize($imageFile);
+    my $fileSize = -s $imageFile;
 
     print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\"/>";
 }
