@@ -104,7 +104,11 @@ main();
 
 sub main {
     # loadScannoFile("en");
-    collectWords($inputFile);
+    if (-d $inputFile) {
+        listRecursively($inputFile);
+    } else {
+        collectWords($inputFile);
+    }
     loadGoodBadWords();
 
     report();
@@ -120,234 +124,46 @@ sub main {
 }
 
 
-#################################################
-#
-# Heatmap related functions
-#
+sub listRecursively {
+    my ($directory) = @_;
+    my @files = (  );
 
-
-#
-# heatMapDocument
-#
-sub makeHeatMap() {
-    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
-    open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
-
-    while (<INPUTFILE>) {
-        my $remainder = $_;
-        while ($remainder =~ /$tagPattern/) {
-            my $fragment = $`;
-            my $tag = $1;
-            $remainder = $';
-            heatMapFragment($fragment);
-            heatMapTag($tag, $remainder);
-            print HEATMAPFILE "<" . sgml2utf($tag) . ">";
-        }
-        heatMapFragment($remainder);
+    if (-f $directory) {
+        handleFile($directory);
+        return;
     }
 
-    close (HEATMAPFILE);
-    close (INPUTFILE);
-}
+    unless (opendir(DIRECTORY, $directory)) {
+        logError("Cannot open directory $directory!");
+        exit;
+    }
+    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
+    closedir(DIRECTORY);
 
-
-#
-# heatMapFragment: split a text fragment into words and create a heat map
-# from it.
-#
-sub heatMapFragment($) {
-    my $fragment = shift;
-    $fragment = sgml2utf($fragment);
-
-    my $lang = getLang();
-
-    my $prevWord = "";
-
-    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
-    my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
-
-    my $size = @words;
-    for (my $i = 0; $i < $size; $i++) {
-        # cannot use foreach, as we look ahead.
-        my $word = $words[$i];
-
-        if ($word ne "") {
-            if ($word =~ /^[^\pL\pN\pM-]+$/) {
-                heatMapNonWord($word);
-                # reset previous word if separated from this word by more than just a space.
-                if ($word !~ /^[\pZ]+$/) {
-                    $prevWord = "";
-                }
-            } elsif ($word =~ /^[0-9]+$/) {
-                heatMapNumber($word);
-                $prevWord = "";
-            } else {
-                # we have a word.
-                my $nextWord = "";
-
-                if (exists($words[$i + 2]) && $words[$i + 1] =~ /^[\pZ]+$/ && $words[$i + 2] =~ /^[\pL\pN\pM-]+$/) {
-                    $nextWord = $words[$i + 2];
-                }
-                heatMapWord($word, $lang, $prevWord, $nextWord);
-                $prevWord = $word;
-            }
+    foreach my $file (@files) {
+        my $path = $directory . '/' . $file;
+        if (-f $path) {
+            handleFile($path);
+        } elsif (-d $path) {
+            listRecursively($path);
         }
     }
 }
 
 
-#
-# heatMapTag: push/pop an XML tag on the tag-stack. (non-counting variant of handleTag)
-#
-sub heatMapTag($$) {
-    my $tag = shift;
-    my $remainder = shift;
-
-    # end tag or start tag?
-    if ($tag =~ /^!/) {
-        # Comment, don't care.
-    }
-    elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/) {
-        my $element = $1;
-        popLang($element, $remainder);
-    } elsif ($tag =~ /\/$/) {
-        # Empty element
-        $tag =~ /^([a-zA-Z0-9_.-]+)/;
-    } else {
-        $tag =~ /^([a-zA-Z0-9_.-]+)/;
-        my $element = $1;
-        my $lang = getAttrVal('lang', $tag);
-        if ($lang ne '') {
-            pushLang($element, $lang);
-        } else {
-            pushLang($element, getLang());
-        }
+sub handleFile {
+    my ($file) = @_;
+    if ($file =~ m/^(.*)\.(xml)$/) {
+        print STDERR "Reading words from file: $file\n";
+        collectWords($file);
     }
 }
-
-
-#
-# heatMapNonWord
-#
-sub heatMapNonWord($) {
-    my $word = shift;
-    my $xmlWord = $word;
-
-    $xmlWord =~ s/</\&lt;/g;
-    $xmlWord =~ s/>/\&gt;/g;
-    $xmlWord =~ s/\&/\&amp;/g;
-
-    my $count = defined $nonWordHash{$word} ? $nonWordHash{$word} : 0;
-    if ($count < 5) {
-        print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
-    } elsif ($count < 25) {
-        print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
-    } elsif ($count < 100) {
-        print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
-    } else {
-        print HEATMAPFILE $xmlWord;
-    }
-}
-
-
-#
-# heatMapNumber
-#
-sub heatMapNumber($) {
-    my $word = shift;
-    print HEATMAPFILE $word;
-}
-
-
-#
-# heatMapWord
-#
-sub heatMapWord($$$$) {
-    my $word = shift;
-    my $dummy = shift;
-    my $prevWord = shift;
-    my $nextWord = shift;
-    my $lang = getLang();
-
-    # print STDERR "HEATMAP: [$prevWord] $word [$nextWord]\n";
-
-    if (!isKnownWord($word, $lang)) {
-        my $count = $wordHash{$lang}{$word};
-        if ($count < 100) {
-            my $type = lookupHeatMapClass($count);
-            print HEATMAPFILE "<ab type=\"$type\">$word</ab>";
-        } else {
-            print HEATMAPFILE $word;
-        }
-    } else {
-        heatMapScanno($word, $prevWord, $nextWord);
-    }
-}
-
-
-#
-# lookupHeatMapClass
-#
-sub lookupHeatMapClass($) {
-    my $count = shift;
-    if ($count < 2) {
-        return 'q5';
-    } elsif ($count < 3) {
-        return 'q4';
-    } elsif ($count < 5) {
-        return 'q3';
-    } elsif ($count < 8) {
-        return 'q2';
-    } elsif ($count < 100) {
-        return 'q1';
-    } else {
-        return '';
-    }
-}
-
-
-#
-# heatMapScanno
-#
-sub heatMapScanno($$$) {
-    my $word = shift;
-    my $prevWord = shift;
-    my $nextWord = shift;
-    my $lang = getLang();
-
-    if (exists($scannoHash{":$word:"})) {
-        print HEATMAPFILE "<ab type=\"h3\">$word</ab>";
-    } else {
-        print HEATMAPFILE $word;
-    }
-}
-
-
-#
-# heatMapPair()
-#
-sub heatMapPair() {
-    # my $word = shift;
-
-    # print HEATMAPFILE $word;
-}
-
 
 
 ####################################################
 #
 # Collect words from the text.
 #
-
-
-sub loadDocument {
-    my $inputFile = shift;
-    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
-    while (<INPUTFILE>) {
-        push (@lines, $_);
-    }
-    close (INPUTFILE);
-}
 
 
 #
@@ -360,10 +176,10 @@ sub collectWords {
     foreach my $line (@lines) {
         my $remainder = $line;
 
-        if ($remainder =~ /<title>(.*?)<\/title>/) {
+        if ($remainder =~ /<title\b.*?>(.*?)<\/title>/) {
             $docTitle = sgml2utf($1);
         }
-        if ($remainder =~ /<author>(.*?)<\/author>/) {
+        if ($remainder =~ /<author\b.*?>(.*?)<\/author>/) {
             $docAuthor = sgml2utf($1);
         }
         if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/) {
@@ -388,11 +204,169 @@ sub collectWords {
 }
 
 
+#
+# loadDocument: load a document into memory.
+#
+sub loadDocument {
+    my $inputFile = shift;
+    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
+    while (<INPUTFILE>) {
+        push (@lines, $_);
+    }
+    close (INPUTFILE);
+}
+
+
+#
+# handleTag: push/pop an XML tag on the tag-stack.
+#
+sub handleTag($$) {
+    my $tag = shift;
+    my $remainder = shift;
+
+    # end tag or start tag?
+    if ($tag =~ /^[!?]/) {
+        # Comment or processing instruction, don't care.
+    } elsif ($tag =~ /^\/([a-zA-Z0-9_.:-]+)/) {
+        my $element = $1;
+        popLang($element, $remainder);
+        $tagHash{$element}++;
+    } elsif ($tag =~ /\/$/) {
+        # Empty element
+        $tag =~ /^([a-zA-Z0-9_.:-]+)/;
+        my $element = $1;
+        $tagHash{$element}++;
+        if ($element eq 'pb') {
+            my $n = getAttrVal('n', $tag);
+            push @pageList, $n;
+            $pageCount++;
+        }
+        my $rend = getAttrVal('rend', $tag);
+        if ($rend ne '') {
+            $rendHash{$rend}++;
+        }
+    } else {
+        $tag =~ /^([a-zA-Z0-9_.:-]+)/;
+        my $element = $1;
+        my $lang = getAttrVal('lang', $tag);
+        if ($lang ne '') {
+            pushLang($element, $lang);
+        } else {
+            pushLang($element, getLang());
+        }
+        my $rend = getAttrVal('rend', $tag);
+        if ($rend ne '') {
+            $rendHash{$rend}++;
+        }
+    }
+}
+
+
+#
+# handleFragment: split a text fragment into words and insert them
+# in the wordlist.
+#
+sub handleFragment($) {
+    my $fragment = shift;
+    $fragment = NFC(sgml2utf($fragment));
+
+    my $lang = getLang();
+
+    my $prevWord = '';
+
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
+    # Character codes: 2032 = prime; 00AD = soft hyphen.
+    my @words = split(/([^\x{2032}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
+    foreach my $word (@words) {
+        if ($word ne '') {
+            if ($word =~ /^[^\x{2032}\x{00AD}`\pL\pN\pM*-]+$/) {
+                countNonWord($word);
+                # reset previous word if not separated by more than just some space.
+                if ($word !~ /^[\pZ]+$/) {
+                    $prevWord = '';
+                }
+            } elsif ($word =~ /^[0-9]+$/) {
+                countNumber($word);
+                $prevWord = '';
+            } else {
+                countWord($word, $lang);
+                if ($prevWord ne '') {
+                    countPair($prevWord, $word, $lang);
+                }
+                $prevWord = $word;
+            }
+        }
+    }
+
+    my @chars = split(//, $fragment);
+    foreach my $char (@chars) {
+        countChar($char);
+    }
+
+    my @compositeChars = split(/(\pL\pM*)/, $fragment);
+    foreach my $compositeChar (@compositeChars) {
+        if ($compositeChar =~ /^\pL\pM*$/) {
+            countCompositeChar($compositeChar)
+        }
+    }
+}
+
+
+#
+# countPair()
+#
+sub countPair($$$) {
+    my $firstWord = shift;
+    my $secondWord = shift;
+    my $language = shift;
+
+    $pairHash{$language}{"$firstWord!$secondWord"}++;
+    # print STDERR "PAIR: $firstWord $secondWord\n";
+}
+
+
+#
+# countWord()
+#
+sub countWord($$) {
+    my $word = shift;
+    my $lang = shift;
+
+    $wordHash{$lang}{$word}++;
+    $wordCount++;
+}
+
+sub countNumber($) {
+    my $number = shift;
+    $numberHash{$number}++;
+    $numberCount++;
+}
+
+sub countNonWord($) {
+    my $nonWord = shift;
+    $nonWordHash{$nonWord}++;
+    $nonWordCount++;
+}
+
+sub countChar($) {
+    my $char = shift;
+    $charHash{$char}++;
+    $charCount++;
+}
+
+sub countCompositeChar($) {
+    my $compositeChar = shift;
+    if (length($compositeChar) > 1) {
+        $compositeCharHash{$compositeChar}++;
+        $compositeChar++;
+    }
+}
+
+
 ####################################################
 #
 # Report the collected statistics.
 #
-
 
 sub report() {
     printReportHeader();
@@ -1134,164 +1108,18 @@ sub reportCountCounts() {
 }
 
 
-#
-# handleTag: push/pop an XML tag on the tag-stack.
-#
-sub handleTag($$) {
-    my $tag = shift;
-    my $remainder = shift;
-
-    # end tag or start tag?
-    if ($tag =~ /^[!?]/) {
-        # Comment or processing instruction, don't care.
-    } elsif ($tag =~ /^\/([a-zA-Z0-9_.-]+)/) {
-        my $element = $1;
-        popLang($element, $remainder);
-        $tagHash{$element}++;
-    } elsif ($tag =~ /\/$/) {
-        # Empty element
-        $tag =~ /^([a-zA-Z0-9_.-]+)/;
-        my $element = $1;
-        $tagHash{$element}++;
-        if ($element eq 'pb') {
-            my $n = getAttrVal('n', $tag);
-            push @pageList, $n;
-            $pageCount++;
-        }
-        my $rend = getAttrVal('rend', $tag);
-        if ($rend ne '') {
-            $rendHash{$rend}++;
-        }
-    } else {
-        $tag =~ /^([a-zA-Z0-9_.-]+)/;
-        my $element = $1;
-        my $lang = getAttrVal('lang', $tag);
-        if ($lang ne '') {
-            pushLang($element, $lang);
-        } else {
-            pushLang($element, getLang());
-        }
-        my $rend = getAttrVal('rend', $tag);
-        if ($rend ne '') {
-            $rendHash{$rend}++;
-        }
-    }
-}
-
-
-#
-# handleFragment: split a text fragment into words and insert them
-# in the wordlist.
-#
-sub handleFragment($) {
-    my $fragment = shift;
-    $fragment = NFC(sgml2utf($fragment));
-
-    my $lang = getLang();
-
-    my $prevWord = '';
-
-    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
-    # Character codes: 2032 = prime; 00AD = soft hyphen.
-    my @words = split(/([^\x{2032}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
-    foreach my $word (@words) {
-        if ($word ne '') {
-            if ($word =~ /^[^\x{2032}\x{00AD}`\pL\pN\pM*-]+$/) {
-                countNonWord($word);
-                # reset previous word if not separated by more than just some space.
-                if ($word !~ /^[\pZ]+$/) {
-                    $prevWord = '';
-                }
-            } elsif ($word =~ /^[0-9]+$/) {
-                countNumber($word);
-                $prevWord = '';
-            } else {
-                countWord($word, $lang);
-                if ($prevWord ne '') {
-                    countPair($prevWord, $word, $lang);
-                }
-                $prevWord = $word;
-            }
-        }
-    }
-
-    my @chars = split(//, $fragment);
-    foreach my $char (@chars) {
-        countChar($char);
-    }
-
-    my @compositeChars = split(/(\pL\pM*)/, $fragment);
-    foreach my $compositeChar (@compositeChars) {
-        if ($compositeChar =~ /^\pL\pM*$/) {
-            countCompositeChar($compositeChar)
-        }
-    }
-}
-
-
-#
-# countPair()
-#
-sub countPair($$$) {
-    my $firstWord = shift;
-    my $secondWord = shift;
-    my $language = shift;
-
-    $pairHash{$language}{"$firstWord!$secondWord"}++;
-    # print STDERR "PAIR: $firstWord $secondWord\n";
-}
-
-
-#
-# countWord()
-#
-sub countWord($$) {
-    my $word = shift;
-    my $lang = shift;
-
-    $wordHash{$lang}{$word}++;
-    $wordCount++;
-}
-
-sub countNumber($) {
-    my $number = shift;
-    $numberHash{$number}++;
-    $numberCount++;
-}
-
-sub countNonWord($) {
-    my $nonWord = shift;
-    $nonWordHash{$nonWord}++;
-    $nonWordCount++;
-}
-
-sub countChar($) {
-    my $char = shift;
-    $charHash{$char}++;
-    $charCount++;
-}
-
-sub countCompositeChar($) {
-    my $compositeChar = shift;
-    if (length($compositeChar) > 1) {
-        $compositeCharHash{$compositeChar}++;
-        $compositeChar++;
-    }
-}
-
-
 #==============================================================================
 #
 # popLang: pop from the tag-stack when a tag is closed.
 #
-sub popLang($) {
+sub popLang($$) {
     my $tag = shift;
     my $remainder = shift;
 
     if ($langStackSize > 0 && $tag eq $stackTag[$langStackSize]) {
         $langStackSize--;
     } else {
-        die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened; remainder: $remainder)");
+        die("ERROR: XML not well-formed (found closing tag '$tag' that was not opened; remainder: '$remainder;')");
     }
 }
 
@@ -1316,7 +1144,8 @@ sub pushLang($$) {
 # getLang: get the current language
 #
 sub getLang() {
-    return $stackLang[$langStackSize];
+    my $lang = $stackLang[$langStackSize];
+    return (defined $lang) ? $lang : 'UNK';
 }
 
 
@@ -1453,6 +1282,220 @@ sub loadGoodBadWords() {
         }
     }
 }
+
+
+#################################################
+#
+# Heatmap related functions
+#
+
+
+#
+# heatMapDocument
+#
+sub makeHeatMap() {
+    open (INPUTFILE, $inputFile) || die("ERROR: Could not open input file $inputFile");
+    open (HEATMAPFILE, ">heatmap.xml") || die("Could not create output file 'heatmap.xml'");
+
+    while (<INPUTFILE>) {
+        my $remainder = $_;
+        while ($remainder =~ /$tagPattern/) {
+            my $fragment = $`;
+            my $tag = $1;
+            $remainder = $';
+            heatMapFragment($fragment);
+            heatMapTag($tag, $remainder);
+            print HEATMAPFILE "<" . sgml2utf($tag) . ">";
+        }
+        heatMapFragment($remainder);
+    }
+
+    close (HEATMAPFILE);
+    close (INPUTFILE);
+}
+
+
+#
+# heatMapFragment: split a text fragment into words and create a heat map
+# from it.
+#
+sub heatMapFragment($) {
+    my $fragment = shift;
+    $fragment = sgml2utf($fragment);
+
+    my $lang = getLang();
+
+    my $prevWord = "";
+
+    # NOTE: we don't use \w and \W here, since it gives some unexpected results.
+    my @words = split(/([^\pL\pN\pM-]+)/, $fragment);
+
+    my $size = @words;
+    for (my $i = 0; $i < $size; $i++) {
+        # cannot use foreach, as we look ahead.
+        my $word = $words[$i];
+
+        if ($word ne "") {
+            if ($word =~ /^[^\pL\pN\pM-]+$/) {
+                heatMapNonWord($word);
+                # reset previous word if separated from this word by more than just a space.
+                if ($word !~ /^[\pZ]+$/) {
+                    $prevWord = "";
+                }
+            } elsif ($word =~ /^[0-9]+$/) {
+                heatMapNumber($word);
+                $prevWord = "";
+            } else {
+                # we have a word.
+                my $nextWord = "";
+
+                if (exists($words[$i + 2]) && $words[$i + 1] =~ /^[\pZ]+$/ && $words[$i + 2] =~ /^[\pL\pN\pM-]+$/) {
+                    $nextWord = $words[$i + 2];
+                }
+                heatMapWord($word, $lang, $prevWord, $nextWord);
+                $prevWord = $word;
+            }
+        }
+    }
+}
+
+
+#
+# heatMapTag: push/pop an XML tag on the tag-stack. (non-counting variant of handleTag)
+#
+sub heatMapTag($$) {
+    my $tag = shift;
+    my $remainder = shift;
+
+    # end tag or start tag?
+    if ($tag =~ /^!/) {
+        # Comment, don't care.
+    }
+    elsif ($tag =~ /^\/([a-zA-Z0-9_.:-]+)/) {
+        my $element = $1;
+        popLang($element, $remainder);
+    } elsif ($tag =~ /\/$/) {
+        # Empty element
+        $tag =~ /^([a-zA-Z0-9_.:-]+)/;
+    } else {
+        $tag =~ /^([a-zA-Z0-9_.:-]+)/;
+        my $element = $1;
+        my $lang = getAttrVal('lang', $tag);
+        if ($lang ne '') {
+            pushLang($element, $lang);
+        } else {
+            pushLang($element, getLang());
+        }
+    }
+}
+
+
+#
+# heatMapNonWord
+#
+sub heatMapNonWord($) {
+    my $word = shift;
+    my $xmlWord = $word;
+
+    $xmlWord =~ s/</\&lt;/g;
+    $xmlWord =~ s/>/\&gt;/g;
+    $xmlWord =~ s/\&/\&amp;/g;
+
+    my $count = defined $nonWordHash{$word} ? $nonWordHash{$word} : 0;
+    if ($count < 5) {
+        print HEATMAPFILE "<ab type=\"p3\">$xmlWord</ab>";
+    } elsif ($count < 25) {
+        print HEATMAPFILE "<ab type=\"p2\">$xmlWord</ab>";
+    } elsif ($count < 100) {
+        print HEATMAPFILE "<ab type=\"p1\">$xmlWord</ab>";
+    } else {
+        print HEATMAPFILE $xmlWord;
+    }
+}
+
+
+#
+# heatMapNumber
+#
+sub heatMapNumber($) {
+    my $word = shift;
+    print HEATMAPFILE $word;
+}
+
+
+#
+# heatMapWord
+#
+sub heatMapWord($$$$) {
+    my $word = shift;
+    my $dummy = shift;
+    my $prevWord = shift;
+    my $nextWord = shift;
+    my $lang = getLang();
+
+    # print STDERR "HEATMAP: [$prevWord] $word [$nextWord]\n";
+
+    if (!isKnownWord($word, $lang)) {
+        my $count = $wordHash{$lang}{$word};
+        if ($count < 100) {
+            my $type = lookupHeatMapClass($count);
+            print HEATMAPFILE "<ab type=\"$type\">$word</ab>";
+        } else {
+            print HEATMAPFILE $word;
+        }
+    } else {
+        heatMapScanno($word, $prevWord, $nextWord);
+    }
+}
+
+
+#
+# lookupHeatMapClass
+#
+sub lookupHeatMapClass($) {
+    my $count = shift;
+    if ($count < 2) {
+        return 'q5';
+    } elsif ($count < 3) {
+        return 'q4';
+    } elsif ($count < 5) {
+        return 'q3';
+    } elsif ($count < 8) {
+        return 'q2';
+    } elsif ($count < 100) {
+        return 'q1';
+    } else {
+        return '';
+    }
+}
+
+
+#
+# heatMapScanno
+#
+sub heatMapScanno($$$) {
+    my $word = shift;
+    my $prevWord = shift;
+    my $nextWord = shift;
+    my $lang = getLang();
+
+    if (exists($scannoHash{":$word:"})) {
+        print HEATMAPFILE "<ab type=\"h3\">$word</ab>";
+    } else {
+        print HEATMAPFILE $word;
+    }
+}
+
+
+#
+# heatMapPair()
+#
+sub heatMapPair() {
+    # my $word = shift;
+
+    # print HEATMAPFILE $word;
+}
+
 
 
 #==============================================================================
