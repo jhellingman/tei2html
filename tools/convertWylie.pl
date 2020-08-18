@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Lingua::BO::Wylie;
+use Lingua::BO::Wylie;  # Download tool from https://www.thlib.org/reference/transliteration/wyconverter.php
 use HTML::Entities;
 
 # binmode(STDOUT, ":utf8");
