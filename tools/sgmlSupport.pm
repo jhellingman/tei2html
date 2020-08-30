@@ -1973,29 +1973,30 @@ BEGIN {
     $ent{'NGtilde'}     = 'N' . chr(0x0360) . 'G'; # NG with double tilde
 
     # More JASCHKE:
-    $ent{'etilbarb'}    = chr(0x1EBD) . chr(0x0331); # e with tilde and bar below (JASCHKE)
-    $ent{'otilbarb'}    = chr(0x00F5) . chr(0x0331); # o with tilde and bar below (JASCHKE)
-    $ent{'otilumlb'}    = chr(0x00F5) . chr(0x0324); # o with tilde and umlaut below (JASCHKE)
-    $ent{'scaracu'}   = chr(0x0161) . chr(0x0301);        # s with caron and acute (JASCHKE)
-    $ent{'Scaracu'}   = chr(0x0160) . chr(0x0301);        # S with caron and acute (JASCHKE)
-    $ent{'zcaracu'}   = 'z' . chr(0x030C) . chr(0x0301);  # z with caron and acute (JASCHKE)
-    $ent{'Zcaracu'}   = 'Z' . chr(0x030C) . chr(0x0301);  # Z with caron and acute (JASCHKE)
-    $ent{'ccaracu'}   = 'c' . chr(0x030C) . chr(0x0301);  # c with caron and acute (JASCHKE)
-    $ent{'Ccaracu'}   = 'C' . chr(0x030C) . chr(0x0301);  # C with caron and acute (JASCHKE)
-    $ent{'jcaracu'}   = 'j' . chr(0x030C) . chr(0x0301);  # j with caron and acute (JASCHKE)
-    $ent{'Jcaracu'}   = 'J' . chr(0x030C) . chr(0x0301);  # J with caron and acute (JASCHKE)
-    $ent{'omacracu'}    = chr(0x014D) . chr(0x0301);  # o with macron and acute (JASCHKE)
-    $ent{'obrevbarb'}   = chr(0x014F) . chr(0x0331);  # o with breve and bar below (JASCHKE)
-    $ent{'obrevumlb'}   = chr(0x014F) . chr(0x0324);  # o with breve and umlaut below (JASCHKE)
-    $ent{'ebrevumlb'}   = chr(0x0115) . chr(0x0324);  # e with breve and umlaut below (JASCHKE)
+    $ent{'etilbarb'}    = chr(0x1EBD) . chr(0x0331);        # e with tilde and bar below (JASCHKE)
+    $ent{'otilbarb'}    = chr(0x00F5) . chr(0x0331);        # o with tilde and bar below (JASCHKE)
+    $ent{'otilumlb'}    = chr(0x00F5) . chr(0x0324);        # o with tilde and umlaut below (JASCHKE)
+    $ent{'scaracu'}     = chr(0x0161) . chr(0x0301);        # s with caron and acute (JASCHKE)
+    $ent{'Scaracu'}     = chr(0x0160) . chr(0x0301);        # S with caron and acute (JASCHKE)
+    $ent{'zcaracu'}     = 'z' . chr(0x030C) . chr(0x0301);  # z with caron and acute (JASCHKE)
+    $ent{'Zcaracu'}     = 'Z' . chr(0x030C) . chr(0x0301);  # Z with caron and acute (JASCHKE)
+    $ent{'ccaracu'}     = 'c' . chr(0x030C) . chr(0x0301);  # c with caron and acute (JASCHKE)
+    $ent{'Ccaracu'}     = 'C' . chr(0x030C) . chr(0x0301);  # C with caron and acute (JASCHKE)
+    $ent{'jcaracu'}     = 'j' . chr(0x030C) . chr(0x0301);  # j with caron and acute (JASCHKE)
+    $ent{'Jcaracu'}     = 'J' . chr(0x030C) . chr(0x0301);  # J with caron and acute (JASCHKE)
+    $ent{'omacracu'}    = chr(0x014D) . chr(0x0301);        # o with macron and acute (JASCHKE)
+    $ent{'obrevbarb'}   = chr(0x014F) . chr(0x0331);        # o with breve and bar below (JASCHKE)
+    $ent{'obrevumlb'}   = chr(0x014F) . chr(0x0324);        # o with breve and umlaut below (JASCHKE)
+    $ent{'ebrevumlb'}   = chr(0x0115) . chr(0x0324);        # e with breve and umlaut below (JASCHKE)
     $ent{'oacubrevumlb'}   = chr(0x014F) . chr(0x0301) . chr(0x0324);  # o with breve and acute and umlaut below (JASCHKE)
     $ent{'sbrevdotb'}   = 's' . chr(0x0306) . chr(0x0323);  # s with breve and dot below (JASCHKE)
-    $ent{'eacubarb'}    = chr(0x00e9) . chr(0x0331);  # e with acute and bar below (JASCHKE)
-    $ent{'eacudotb'}    = chr(0x00e9) . chr(0x0323);  # e with acute and dot below (JASCHKE)
-    $ent{'oacuumlb'}    = chr(0x00F3) . chr(0x0324);  # o with acute and umlaut below (JASCHKE)
-    $ent{'emacracu'}    = chr(0x0113) . chr(0x0301);  # e with macron and acute (JASCHKE)
-    $ent{'emacrbarb'}    = chr(0x0113) . chr(0x0331);  # e with macron and bar below (JASCHKE)
+    $ent{'eacubarb'}    = chr(0x00e9) . chr(0x0331);        # e with acute and bar below (JASCHKE)
+    $ent{'eacudotb'}    = chr(0x00e9) . chr(0x0323);        # e with acute and dot below (JASCHKE)
+    $ent{'oacuumlb'}    = chr(0x00F3) . chr(0x0324);        # o with acute and umlaut below (JASCHKE)
+    $ent{'emacracu'}    = chr(0x0113) . chr(0x0301);        # e with macron and acute (JASCHKE)
+    $ent{'emacrbarb'}   = chr(0x0113) . chr(0x0331);        # e with macron and bar below (JASCHKE)
     $ent{'emacracubarb'}    = chr(0x0113) . chr(0x0301) . chr(0x0331);  # e with macron and acute and bar below (JASCHKE)
+    $ent{'scardotb'}    = chr(0x0161) . chr(0x0323);        # s with caron and dot below (JASCHKE)
 
     $ent{'Voline'}      = 'V' . chr(0x0305); # V with overline
     $ent{'Xoline'}      = 'X' . chr(0x0305); # V with overline
@@ -2681,6 +2682,7 @@ sub pgdp2sgml {
     $string =~ s/\['=e\]/\&emacracu;/g;                 # e with macron and acute (JASCHKE)
     $string =~ s/\[\x{00e9}\.\]/\&eacudotb;/g;          # e with acute and dot below (JASCHKE)
     $string =~ s/\['o:\]/\&oacuumlb;/g;                 # o with acute and umlaut below (JASCHKE)
+    $string =~ s/\[vs.\]/\&scardotb;/g;                 # s with caron and dot below (JASCHKE)
 
 
     # Guilder sign

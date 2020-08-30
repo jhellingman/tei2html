@@ -20,7 +20,6 @@ open(INPUTFILE, '<:encoding(UTF-8)', $file) || die("Could not open input file $f
 
 while (<INPUTFILE>) {
 
-
     # Replace ampersands (if they are not likely to start entities):
     $_ =~ s/\& /\&amp; /g;
     $_ =~ s/\&$/\&amp;/g;

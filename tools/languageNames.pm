@@ -265,8 +265,8 @@ BEGIN {
     $langNameHash{"win"}            = "Winnebago";
     $langNameHash{"yua"}            = "Yucatec Maya";
 
+    $langNameHash{"zxx"}            = "No linguistic content / Not applicable";
     $langNameHash{"und"}            = "undetermined language";
-
 }
 
 

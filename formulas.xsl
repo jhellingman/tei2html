@@ -252,9 +252,11 @@
     <xsl:function name="f:strip-math-delimiters" as="xs:string">
         <xsl:param name="texString" as="xs:string"/>
 
-        <xsl:variable name="texString" select="replace($texString, '^[$]+' ,'')"/>
-        <xsl:variable name="texString" select="replace($texString, '[$]+$' ,'')"/>
-        <xsl:value-of select="normalize-space($texString)"/>
+        <xsl:variable name="texString" select="replace($texString, '^[$]+', '')"/>
+        <xsl:variable name="texString" select="replace($texString, '[$]+$', '')"/>
+
+        <!-- cannot use normalize-space(), initial space is sometimes relevant. -->
+        <xsl:value-of select="replace($texString, '\s+', ' ')"/>
     </xsl:function>
 
 
