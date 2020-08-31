@@ -132,8 +132,22 @@
             </xsl:if>
 
             <xsl:if test="f:has-rend-value(@rend, 'hemistich')">
+                <xsl:variable name="value" select="f:rend-value(@rend, 'hemistich')"/>
                 <span class="hemistich">
-                    <xsl:value-of select="f:rend-value(@rend, 'hemistich')"/>
+                    <xsl:choose>
+                        <xsl:when test="starts-with($value, '#')">
+                            <!-- Hemistich value gives ID of content to use width of -->
+                            <xsl:variable name="target" select="substring($value, 2)"/>
+                            <xsl:variable name="content">
+                                <xsl:apply-templates select="//*[@id=$target]/node()"/>
+                            </xsl:variable>
+                            <xsl:copy-of select="f:copy-without-ids($content)"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <!-- Hemistich value gives literal string content to use width of -->
+                            <xsl:value-of select="f:rend-value(@rend, 'hemistich')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:text> </xsl:text>
                 </span>
             </xsl:if>

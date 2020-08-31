@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY nbsp       "&#160;">
+        <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY asterism   "&#x2042;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- l -->
+
+    <x:scenario label="When rendering a l (line of verse) element">
+        <x:context>
+            <l>A line of verse</l>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with the proper class">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a l (line of verse) element with an indent">
+        <x:context>
+            <l id="test-indent" rend="indent(2)">A line of verse</l>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with the proper classes">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line test-indent">A line of verse</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a l (line of verse) element with an indent in CSS mode">
+        <x:context mode="css">
+            <l id="test-indent" rend="indent(2)">A line of verse</l>
+        </x:context>
+        <x:expect label="will result a CSS rule with the right properties">
+.test-indent {
+text-indent:2em;
+}
+</x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two lines of verse">
+        <x:context>
+            <l>A line of verse</l>
+            <l>Another line of verse</l>
+        </x:context>
+        <x:expect label="will result in two HTML paragraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">Another line of verse</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two lines of verse with a hemistich (by Id)">
+        <x:context>
+            <l id="first-line">A line of verse</l>
+            <l rend="hemistich(#first-line)">and a hemistich</l>
+        </x:context>
+        <x:expect label="will result in two HTML paragraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse </span>and a hemistich</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two lines of verse with a hemistich (by literal string value)">
+        <x:context>
+            <l id="first-line">A line of verse</l>
+            <l rend="hemistich(A line of verse)">and a hemistich</l>
+        </x:context>
+        <x:expect label="will result in two HTML paragraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse </span>and a hemistich</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two lines of verse with a hemistich (by Id, with formatting)">
+        <x:context>
+            <l id="first-line">A <hi>line</hi> of verse</l>
+            <l rend="hemistich(#first-line)">and a hemistich</l>
+        </x:context>
+        <x:expect label="will result in two HTML paragraphs, no ids will be generated in copied content">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A <i id="...">line</i> of verse</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A <i>line</i> of verse </span>and a hemistich</p>
+        </x:expect>
+    </x:scenario>
+
+</x:description>
