@@ -1225,7 +1225,7 @@
 
     <xsl:function name="f:strip-hash" as="xs:string">
         <xsl:param name="target" as="xs:string"/>
-        <xsl:value-of select="if (starts-with($target, '#') then substring($target, 2) else $target"/>
+        <xsl:value-of select="if (starts-with($target, '#')) then substring($target, 2) else $target"/>
     </xsl:function>
 
 

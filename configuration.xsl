@@ -84,10 +84,9 @@
             <pageNumbers.after>]</pageNumbers.after>                        <!-- String to place after the page number in the right margin -->
 
             <facsimile.enable>false</facsimile.enable>                      <!-- Output section with and links to facsimile images if required information is present. -->
-            <facsimile.wrapper.enable>true</facsimile.wrapper.enable>       <!-- Generate HTML wrapper files for the images, and link to these. -->
-            <facsimile.path>page-images</facsimile.path>                    <!-- Path where the wrapper files will be generated. -->
-            <facsimile.external>false</facsimile.external>                  <!-- TODO: Set to true if the URL points to an external location. -->
-            <facsimile.target></facsimile.target>                           <!-- TODO: Value of the target attribute of generated URLs (leave empty for default; _blank, _top, _parent, _self). -->
+            <facsimile.wrapper.enable>true</facsimile.wrapper.enable>       <!-- Generate HTML wrapper files for the images, and link to these instead of to the image. -->
+            <facsimile.path>page-images</facsimile.path>                    <!-- Path where the HTML wrapper files will be generated. -->
+            <facsimile.target></facsimile.target>                           <!-- Value of the target attribute of generated links in HTML (leave empty for default; _blank, _top, _parent, _self). -->
 
             <notes.foot.returnArrow>true</notes.foot.returnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
             <notes.apparatus.textMarker>&deg;</notes.apparatus.textMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->

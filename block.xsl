@@ -130,11 +130,11 @@
                 <xsl:variable name="id" select="substring(@facs, 2)"/>
                 <xsl:variable name="graphic" select="//graphic[@id = $id]"/>
                 <xsl:if test="$graphic">
-                    <xsl:copy-of select="if (f:is-set('facsimile.external')) then f:facsimile-direct-link($graphic/@url) else f:facsimile-wrapper-link($graphic)"/>
+                    <xsl:copy-of select="if (f:is-set('facsimile.wrapper.enable')) then f:facsimile-wrapper-link($graphic) else f:facsimile-direct-link($graphic/@url)"/>
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="if (f:is-set('facsimile.external')) then f:facsimile-direct-link(@facs) else f:facsimile-wrapper-link(.)"/>
+                <xsl:copy-of select="if (f:is-set('facsimile.wrapper.enable')) then f:facsimile-wrapper-link(.) else f:facsimile-direct-link(@facs)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -154,7 +154,7 @@
 
     <xsl:function name="f:facsimile-direct-link">
         <xsl:param name="url" as="xs:string"/>
-        <xsl:variable name="url" select="f:translate-xref-url($url, 'xx')"/>
+        <xsl:variable name="url" select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
         <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
         <a href="{$url}" class="facslink" title="{f:message('msgPageImage')}">
@@ -219,7 +219,7 @@
         slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="milestone[@unit='theme' or @unit='tb']">        
+    <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
         <xsl:choose>
             <xsl:when test="contains(@rend, 'dots')">

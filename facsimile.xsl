@@ -122,7 +122,7 @@
 
 <xsl:template match="pb" mode="facsimile">
     <xsl:if test="@facs and not(starts-with(@facs, '#'))">
-        <!-- For the first one only -->
+        <!-- For the first pb only -->
         <xsl:if test="not(preceding::pb[@facs])">
             <xsl:call-template name="facsimile-css"/>
         </xsl:if>
@@ -447,16 +447,16 @@
             <xsl:when test="@url">
                 <img src="{@url}" alt="{f:message('msgPageImage')} {@n}"/>
             </xsl:when>
-            <!-- pb-element that references a graphic-element elsewhere -->
+            <!-- pb-element @facs attribute that references a graphic-element elsewhere -->
             <xsl:when test="starts-with(@facs, '#')">
                 <!-- TODO: warning message if graphic not present -->
                 <xsl:if test="//graphic[@id = substring(@facs, 2)]">
                     <img src="{//graphic[@id = substring(@facs, 2)][1]//@url}" alt="{f:message('msgPageImage')} {@n}"/>
                 </xsl:if>
             </xsl:when>
-            <!-- pb-element that directly references an image file -->
+            <!-- pb-element @facs attribute that directly references an image file -->
             <xsl:otherwise>
-                <img src="{@facs}" alt="{f:message('msgPageImage')} {@n}"/>
+                <img src="{f:translate-xref-url(@facs, substring(f:get-document-lang(), 1, 2))}" alt="{f:message('msgPageImage')} {@n}"/>
             </xsl:otherwise>
         </xsl:choose>
     </div>

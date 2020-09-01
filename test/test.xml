@@ -77,10 +77,10 @@
             <rendition selector="#blue">color: blue;</rendition>
             <rendition id="large-letter" scope="first-letter">font-size: xx-large; color: red</rendition>
         </tagsDecl>
-         <listPrefixDef>
-            <prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
+        <listPrefixDef>
+			<prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
             <prefixDef ident="tei" matchPattern="(.+)" replacementPattern="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-$1.html"/>
-         </listPrefixDef>
+        </listPrefixDef>
       </encodingDesc>
       <profileDesc>
          <langUsage>

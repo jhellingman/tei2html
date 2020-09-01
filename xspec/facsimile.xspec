@@ -11,6 +11,9 @@
 
     <!-- Redefine global variables used in localization.xsl -->
     <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <!-- Redefine global variables used in configuration.xsl -->
     <x:param name="custom-configuration" as="document-node(element(tei2html.config))" select="self::document-node()">
@@ -18,7 +21,6 @@
             <facsimile.enable>true</facsimile.enable>
             <facsimile.wrapper.enable>true</facsimile.wrapper.enable>
             <facsimile.path>page-images</facsimile.path>
-            <facsimile.external>false</facsimile.external>
             <facsimile.target></facsimile.target>
         </tei2html.config>
     </x:param>
@@ -26,6 +28,9 @@
     <x:param name="author" as="xs:string" select="'An Author'"/>
 
     <x:param name="title" as="xs:string" select="'The Title'"/>
+
+    <!-- Redefine global variable used in references-func.xsl -->
+    <x:param name="prefixDefs"/>
 
     <!-- pb (from block.xsl) -->
 
