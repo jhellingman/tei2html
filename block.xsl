@@ -141,6 +141,7 @@
 
 
     <xsl:function name="f:facsimile-wrapper-link">
+        <!-- Parameter node can be either a pb or a graphic element -->
         <xsl:param name="node" as="node()"/>
         <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 

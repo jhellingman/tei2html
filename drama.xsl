@@ -56,8 +56,8 @@
 
     <xd:doc>
         <xd:short>Format a normal lg element.</xd:short>
-        <xd:detail>Format an lg element. top-level lg elements get class=lgouter, nested lg elements get class=lg. 
-        This we use (using CSS) to center the entire poem on the screen, and still keep the left side 
+        <xd:detail>Format an lg element. top-level lg elements get class=lgouter, nested lg elements get class=lg.
+        This we use (using CSS) to center the entire poem on the screen, and still keep the left side
         of all stanzas aligned.</xd:detail>
     </xd:doc>
 
@@ -111,10 +111,10 @@
     <xd:doc>
         <xd:short>Format a line of verse.</xd:short>
         <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistich.
-        A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place it at the proper
-        location. A hemistich is handled by adding a span with the class hemistich, which is supposed to contain the text
-        of the previous line of the hemistichs, and leaves it to the CSS stylesheet to color that text white, so that
-        it is rendered invisible (and the current of the hemistich shows up indented the correct way).</xd:detail>
+        A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place
+        it at the proper location. A hemistich is handled by adding a span with the class <code>hemistich</code>,
+        which is supposed to contain the text of the previous line of the hemistich, and leaves it to the CSS
+        stylesheet to hide that text and the current line of the hemistich shows up indented the correct way).</xd:detail>
     </xd:doc>
 
     <xsl:template match="l">
@@ -132,29 +132,43 @@
             </xsl:if>
 
             <xsl:if test="f:has-rend-value(@rend, 'hemistich')">
-                <xsl:variable name="value" select="f:rend-value(@rend, 'hemistich')"/>
                 <span class="hemistich">
-                    <xsl:choose>
-                        <xsl:when test="starts-with($value, '#')">
-                            <!-- Hemistich value gives ID of content to use width of -->
-                            <xsl:variable name="target" select="substring($value, 2)"/>
-                            <xsl:variable name="content">
-                                <xsl:apply-templates select="//*[@id=$target]/node()"/>
-                            </xsl:variable>
-                            <xsl:copy-of select="f:copy-without-ids($content)"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <!-- Hemistich value gives literal string content to use width of -->
-                            <xsl:value-of select="f:rend-value(@rend, 'hemistich')"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:text> </xsl:text>
+                    <xsl:copy-of select="f:handle-hemistich-value(.)"/>
                 </span>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
 
+    <xsl:function name="f:handle-hemistich-value">
+        <xsl:param name="node" as="element()"/>
+        <xsl:variable name="value" select="f:rend-value($node/@rend, 'hemistich')" as="xs:string"/>
+        <xsl:choose>
+            <xsl:when test="starts-with($value, '#')">
+                <!-- Hemistich value gives ID of element with content to use -->
+                <xsl:variable name="target-id" select="substring($value, 2)" as="xs:string"/>
+                <xsl:variable name="target-node" select="root($node)//*[@id=$target-id]"/>
+                <xsl:variable name="content">
+                    <!-- We can have a hemistich that recursively builds up from previous hemistiches -->
+                    <xsl:if test="f:has-rend-value($target-node/@rend, 'hemistich')">
+                        <xsl:copy-of select="f:handle-hemistich-value($target-node)"/>
+                    </xsl:if>
+                    <xsl:apply-templates select="$target-node/node()"/>
+                </xsl:variable>
+
+                <xsl:if test="not($content)">
+                    <xsl:copy-of select="f:log-error('Element referenced in hemistich not found (id={1})', ($target-id))"/>
+                </xsl:if>
+
+                <xsl:copy-of select="f:copy-without-ids($content)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Hemistich value gives the literal string content to use width of -->
+                <xsl:value-of select="f:rend-value($node/@rend, 'hemistich')"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:text> </xsl:text>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Format an edition-specific line-break.</xd:short>
@@ -401,7 +415,7 @@
     <xd:doc>
         <xd:short>Render a castGroup with a brace on the right.</xd:short>
         <xd:detail><p>Render a castGroup as a table with a brace on the right, followed by some description common to all the castItems in the group, which text is to be encoded in the head. This assumes an image file named <code>rbrace<i>N</i></code> is present, where <i>N</i> is the number of castItems in the castGroup.</p>
-        
+
         <p>This was specially implemented to render the cast-lists, as found in the works of Shakespeare, in the same way as in the original work, without having
         to add significant presentation-oriented tagging to the TEI source files. See also the stylesheet for <code>itemGroup</code> in list.xsl.</p></xd:detail>
     </xd:doc>

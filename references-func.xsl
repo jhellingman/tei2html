@@ -221,6 +221,11 @@
                 <xsl:value-of select="f:apply-prefix-def($url, $prefixDefs[@ident = substring-before($url, ':')][1])"/>
             </xsl:when>
 
+            <!-- Link is a relative path -->
+            <xsl:when test="not(contains($url, ':'))">
+                <xsl:value-of select="$url"/>
+            </xsl:when>
+
             <xsl:otherwise>
                 <xsl:copy-of select="f:log-warning('URL &quot;{1}&quot; not understood.', ($url))"/>
                 <xsl:value-of select="$url"/>

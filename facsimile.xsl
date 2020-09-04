@@ -443,7 +443,7 @@
 <xsl:template name="facsimile-image">
     <div class="facsimile-image">
         <xsl:choose>
-            <!-- graphic-element that references an image file -->
+            <!-- graphic-element that references an image file using the @url attribute -->
             <xsl:when test="@url">
                 <img src="{@url}" alt="{f:message('msgPageImage')} {@n}"/>
             </xsl:when>
