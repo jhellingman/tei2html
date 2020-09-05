@@ -148,19 +148,28 @@
                 <!-- Hemistich value gives ID of element with content to use -->
                 <xsl:variable name="target-id" select="substring($value, 2)" as="xs:string"/>
                 <xsl:variable name="target-node" select="root($node)//*[@id=$target-id]"/>
-                <xsl:variable name="content">
-                    <!-- We can have a hemistich that recursively builds up from previous hemistiches -->
-                    <xsl:if test="f:has-rend-value($target-node/@rend, 'hemistich')">
-                        <xsl:copy-of select="f:handle-hemistich-value($target-node)"/>
-                    </xsl:if>
-                    <xsl:apply-templates select="$target-node/node()"/>
-                </xsl:variable>
+                <xsl:choose>
+                    <xsl:when test="$node/@id = $target-id">
+                        <xsl:copy-of select="f:log-error('Element referenced itself in hemistich (id={1})', ($target-id))"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:variable name="content">
+                            <!-- We can have a hemistich that recursively builds up from previous hemistiches; note
+                                 also that we sometimes refer to a part of a previous line (to exclude stage directions, etc.), so we need to recurse from the line itself. -->
+                            <xsl:variable name="hemistich-line" select="$target-node/ancestor-or-self::l"/>
+                            <xsl:if test="f:has-rend-value($hemistich-line/@rend, 'hemistich')">
+                                <xsl:copy-of select="f:handle-hemistich-value($hemistich-line)"/>
+                            </xsl:if>
+                            <xsl:apply-templates select="$target-node/node()"/>
+                        </xsl:variable>
 
-                <xsl:if test="not($content)">
-                    <xsl:copy-of select="f:log-error('Element referenced in hemistich not found (id={1})', ($target-id))"/>
-                </xsl:if>
+                        <xsl:if test="not($content)">
+                            <xsl:copy-of select="f:log-error('Element referenced in hemistich not found (id={1})', ($target-id))"/>
+                        </xsl:if>
 
-                <xsl:copy-of select="f:copy-without-ids($content)"/>
+                        <xsl:copy-of select="f:copy-without-ids($content)"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <!-- Hemistich value gives the literal string content to use width of -->
