@@ -59,7 +59,7 @@ The following keys and values are supported: (Note that this list is not exhaust
 | `figure` | `float`  | The place to float in image, table, etc. Possible values: left, right. | `<figure rend="float(left)">` |
 | `table`, `list` | `columns` | Set the element in multiple columns. May be applied to tables and lists. |  `<list rend="columns(2)">...</list>` |
 | _Any_ | `class` | Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. | `<p rend="class(myClass)">` |
-
+| `l` | `hemistich` | Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. | `<l rend="hemistich(^1)">`, `<l rend="hemistich(#vs21)">`, `<l rend="hemistich(Content)">` |
 
 ### Using `@style` and `@rendition` ###
 

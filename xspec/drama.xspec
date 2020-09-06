@@ -98,5 +98,17 @@ text-indent:2em;
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering three lines of verse with a 'recursive' hemistich (by Id, with formatting, using previous-line (^) notation)">
+        <x:context>
+            <l id="hs1">First,</l>
+            <l id="hs2" rend="hemistich(^1)"><hi>second</hi>, and</l>
+            <l id="hs3" rend="hemistich(^1)">third.</l>
+        </x:context>
+        <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+        </x:expect>
+    </x:scenario>
 
 </x:description>

@@ -144,6 +144,22 @@
         <xsl:param name="node" as="element()"/>
         <xsl:variable name="value" select="f:rend-value($node/@rend, 'hemistich')" as="xs:string"/>
         <xsl:choose>
+            <xsl:when test="starts-with($value, '^')">
+                <!-- Hemistich value points to n lines above (normally one) -->
+                <xsl:variable name="n" select="xs:integer(substring($value, 2))" as="xs:integer"/>
+                <xsl:variable name="target-node" select="$node/preceding::l[$n]"/>
+                <xsl:variable name="content">
+                    <!-- We can have a hemistich that recursively builds up from previous hemistiches. -->
+                    <xsl:if test="f:has-rend-value($target-node/@rend, 'hemistich')">
+                        <xsl:copy-of select="f:handle-hemistich-value($target-node)"/>
+                    </xsl:if>
+                    <xsl:apply-templates select="$target-node/node()"/>
+                </xsl:variable>
+                <xsl:if test="not($content)">
+                    <xsl:copy-of select="f:log-error('No previous line found for hemistich', ())"/>
+                </xsl:if>
+                <xsl:copy-of select="f:copy-without-ids($content)"/>
+            </xsl:when>
             <xsl:when test="starts-with($value, '#')">
                 <!-- Hemistich value gives ID of element with content to use -->
                 <xsl:variable name="target-id" select="substring($value, 2)" as="xs:string"/>
