@@ -287,6 +287,10 @@
             </xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
 
+            <xsl:if test="f:containsMathML($splitter-fragment-nodes)">
+                <xsl:attribute name="properties" select="'mathml'"/>
+            </xsl:if>
+
             <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
             <xsl:variable name="media-overlays">
                 <xsl:for-each select="$splitter-fragment-nodes">
@@ -323,12 +327,23 @@
             <xsl:attribute name="href"><xsl:value-of select="f:generate-filename(.)"/></xsl:attribute>
             <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
 
+            <xsl:if test="f:containsMathML(.)">
+                <xsl:attribute name="properties" select="'mathml'"/>
+            </xsl:if>
+
             <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">
                 <xsl:attribute name="media-overlay"><xsl:value-of select="$id"/>overlay</xsl:attribute>
             </xsl:if>
         </item>
     </xsl:template>
 
+
+    <xsl:function name="f:containsMathML" as="xs:boolean">
+        <xsl:param name="nodes" as="node()*"/>
+
+        <xsl:sequence select="f:get-setting('math.mathJax.format') = 'MML'
+            and (some $node in $nodes satisfies $node//formula[@notation='TeX'][not(f:is-trivial-math(.))])"/>
+    </xsl:function>
 
     <!--========= Spine =========-->
 

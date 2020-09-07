@@ -83,7 +83,7 @@
     <xsl:template name="pb">
         <xsl:context-item as="element(pb)" use="required"/>
         <xsl:choose>
-            <xsl:when test="@n and f:is-set('pageNumbers.show')">
+            <xsl:when test="@n and f:is-set('pageNumbers.show') or (@facs and f:is-set('facsimile.enable'))">
                 <xsl:call-template name="pb-margin"/>
             </xsl:when>
             <xsl:otherwise>
@@ -95,19 +95,22 @@
 
     <xd:doc>
         <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
-        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute).
-        Otherwise, just generate an anchor element.</xd:detail>
+        <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute), or,
+        if available, a link to the facsimile.</xd:detail>
     </xd:doc>
 
     <xsl:template name="pb-margin">
         <xsl:context-item as="element(pb)" use="required"/>
-        <span class="pagenum">
-            <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
-            <a id="{f:generate-id(.)}" href="{f:generate-href(.)}">
-                <xsl:copy-of select="f:convert-markdown(@n)"/>
-            </a>
-            <xsl:value-of select="f:get-setting('pageNumbers.after')"/>
-            <xsl:if test="f:is-set('facsimile.enable') and ./@facs">
+        <span class="pagenum" id="{f:generate-id(.)}">
+            <xsl:if test="@n and f:is-set('pageNumbers.show')">
+                <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
+                <a href="{f:generate-href(.)}">
+                    <xsl:copy-of select="f:convert-markdown(@n)"/>
+                </a>
+                <xsl:value-of select="f:get-setting('pageNumbers.after')"/>
+            </xsl:if>
+
+            <xsl:if test="@facs and f:is-set('facsimile.enable')">
                 <xsl:call-template name="pb-facsimile-link"/>
             </xsl:if>
          </span>

@@ -40,7 +40,7 @@
         </x:context>
         <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pagenum">[<a id="pb4" href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
+                <span class="pagenum" id="pb4">[<a href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
             </p>
         </x:expect>
     </x:scenario>
