@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY uparrow    "&#8593;">
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Define variable used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
+
+    <!-- notes -->
+
+    <x:scenario label="When rendering an footnote element in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="foot" id="n.1">Text of footnote.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote at the end of the div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering multiple footnote elements in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="foot" id="n.1">Text of footnote 1.</note> and more text.</p>
+                        <p>Surrounding text<note place="foot" id="n.2">Text of footnote 2.</note> and more text.</p>
+                        <p>Surrounding text<note place="foot" id="n.3">Text of footnote 3.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in multiple footnotes at the end of the div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteref" id="n.2src" href="#n.2">2</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">3</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                     </p>
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.2" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src">&uparrow;</a>
+                     </p>
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.3" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src">&uparrow;</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a footnote referenced twice in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note id="n.1">Text of footnote 1.</note> and more text.</p>
+                        <p>Surrounding text<note sameAs="n.1">Ignored text.</note> and more text.</p>
+                        <p>Surrounding text<note id="n.3">Text of footnote 3.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in only a single instance of the footnote referenced twice">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="pseudonoteref" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">2</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                     </p>
+                     <p class="footnote">
+                        <span class="label"><a class="noteref" id="n.3" href="#n.3src">2</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src">&uparrow;</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+</x:description>

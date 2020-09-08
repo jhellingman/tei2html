@@ -145,8 +145,8 @@
         <xsl:variable name="value" select="f:rend-value($node/@rend, 'hemistich')" as="xs:string"/>
         <xsl:choose>
             <xsl:when test="starts-with($value, '^')">
-                <!-- Hemistich value points to n lines above (normally one) -->
-                <xsl:variable name="n" select="xs:integer(substring($value, 2))" as="xs:integer"/>
+                <!-- Hemistich value points to n lines above (one if parameter is empty) -->
+                <xsl:variable name="n" select="if ($value = '^') then 1 else xs:integer(substring($value, 2))" as="xs:integer"/>
                 <xsl:variable name="target-node" select="$node/preceding::l[$n]"/>
                 <xsl:variable name="content">
                     <!-- We can have a hemistich that recursively builds up from previous hemistiches. -->
