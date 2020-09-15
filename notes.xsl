@@ -104,12 +104,14 @@
         <xd:short>Handle duplicated footnotes.</xd:short>
         <xd:detail>Handle duplicated footnotes. This template handles the placement of the footnote marker
         only. Als see the handling of <code>ref</code> elements with <code>@type="noteref"</code> for
-        an alternative (depricated) representation of the same situation.</xd:detail>
+        an alternative (deprecated) representation of the same situation.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@sameAs]" priority="1">
-        <xsl:variable name="targetNode" select="key('id', replace(@sameAs, '#', ''))[1]"/>
-        <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
+        <xsl:variable name="targetNote" select="key('id', replace(@sameAs, '#', ''))[1]"/>
+        <xsl:apply-templates select="$targetNote" mode="noterefnumber">
+            <xsl:with-param name="sourceNote" select="."/>
+        </xsl:apply-templates>
     </xsl:template>
 
 
@@ -218,17 +220,37 @@
 
     <xd:doc>
         <xd:short>Place a footnote return arrow.</xd:short>
-        <xd:detail>Place a footnote return arrow after the footnote.</xd:detail>
+        <xd:detail>Place a footnote return arrow after the footnote. If the footnote is referenced multiple times,
+        next to the footnotes, back-references to each location are generated using lower-case letters.</xd:detail>
     </xd:doc>
 
     <xsl:template name="footnote-return-arrow">
         <xsl:context-item as="element()" use="required"/>
+
+        <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
+        <xsl:variable name="note" select="ancestor-or-self::note[1]" as="element(note)"/>
+        <xsl:variable name="id" select="$note/@id"/>
+
         <xsl:if test="f:is-set('notes.foot.returnArrow')">
             <xsl:text>&nbsp;</xsl:text>
-            <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
-            <a class="fnarrow" href="{f:generate-href(ancestor-or-self::note[1])}src">
-                <xsl:text>&uparrow;</xsl:text>
-            </a>
+            <xsl:choose>
+                <!-- Do we have multiple reference to this footnote? -->
+                <xsl:when test="root(.)//note[@sameAs=$id]">
+                    <span class="fnarrow">&uparrow;&nbsp;</span>
+                    <a class="fnreturn" href="{f:generate-href($note)}src">a</a>
+                    <xsl:for-each select="root(.)//note[@sameAs=$id]">
+                        <xsl:text> </xsl:text>
+                        <a class="fnreturn" href="{f:generate-href(.)}src">
+                            <xsl:number value="position() + 1" format="a"/>
+                        </a>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <a class="fnarrow" href="{f:generate-href($note)}src">
+                        <xsl:text>&uparrow;</xsl:text>
+                    </a>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 
@@ -304,7 +326,8 @@
     </xd:doc>
 
     <xsl:template match="note[f:is-footnote(.)]" mode="noterefnumber">
-        <a class="pseudonoteref" href="{f:generate-footnote-href(.)}">
+        <xsl:param name="sourceNote" as="element(note)"/>
+        <a class="pseudonoteref" id="{f:generate-id($sourceNote)}src" href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
@@ -319,8 +342,9 @@
     </xsl:template>
 
     <xsl:template match="note[f:is-table-note(.)]" mode="noterefnumber">
+        <xsl:param name="sourceNote" as="element(note)"/>
         <!-- @sameAs references must be in the same table -->
-        <a class="pseudonoteref" href="{f:generate-href(.)}">
+        <a class="pseudonoteref" id="{f:generate-id($sourceNote)}src" href="{f:generate-href(.)}">
             <xsl:value-of select="@n"/>
         </a>
     </xsl:template>

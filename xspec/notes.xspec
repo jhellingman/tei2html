@@ -119,7 +119,7 @@
                 <text>
                     <div1>
                         <p>Surrounding text<note id="n.1">Text of footnote 1.</note> and more text.</p>
-                        <p>Surrounding text<note sameAs="n.1">Ignored text.</note> and more text.</p>
+                        <p>Surrounding text<note id="n.1b" sameAs="n.1">Ignored text.</note> and more text.</p>
                         <p>Surrounding text<note id="n.3">Text of footnote 2.</note> and more text.</p>
                     </div1>
                 </text>
@@ -129,14 +129,18 @@
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
-                  <p id="...">Surrounding text<a class="pseudonoteref" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="pseudonoteref" id="n.1bsrc" href="#n.1">1</a> and more text.</p>
                   <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">2</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
                      <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                        <span class="label">
+                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
+                            <a class="fnreturn" href="#n.1src">a</a>
+                            <x:text> </x:text>
+                            <a class="fnreturn" href="#n.1bsrc">b</a>
                      </p>
                      <p class="footnote">
                         <span class="label"><a class="noteref" id="n.3" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src">&uparrow;</a>
