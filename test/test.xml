@@ -317,7 +317,7 @@
         <cell>6<note place="foot" id="n1" n="*">This is a <index level1="Footnote"/>footnote with some <hi rend="bold">bold</hi>, and an element with an id inside it <ab id="inside-n1">here</ab>.</note></cell>
     </row>
     <row>
-        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<ref target="n1" type="noteref">ignored text</ref> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without<note sameAs="n1"/> such a special treatment!)</cell>
+        <cell cols="2">7: A cell spanning no less than two columns. This should work out fine, even with a <index level1="Footnote"/>footnote<note sameAs="n1">ignored text</note> in it. (note how the footnote reference mark actually is the same as in a cell above, we can also reference to <ref target="n1">the same footnote</ref> without<note sameAs="n1"/> such a special treatment!)</cell>
     </row>
 </table>
 </p>

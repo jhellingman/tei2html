@@ -72,11 +72,6 @@
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
-            <xsl:when test="@type='noteref'">
-                <!-- Special case: reference to footnote, used when the content of the reference 
-                     needs to be rendered as a footnote reference mark -->
-                <xsl:apply-templates select="$targetNode" mode="noterefnumber"/>
-            </xsl:when>
             <xsl:otherwise>
                 <a href="{f:generate-safe-href($targetNode)}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

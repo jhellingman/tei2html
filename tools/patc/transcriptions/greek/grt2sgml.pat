@@ -55,6 +55,13 @@
 "</sc>"             p "</sc>"
 "</hi>"             p "</hi>"
 
+"<choice>"          p "<choice>"
+"<sic>"             p "<sic>"
+"<corr>"            p "<corr>"
+"</choice>"         p "</choice>"
+"</sic>"            p "</sic>"
+"</corr>"           p "</corr>"
+
 "&"         2 "&"
 
 "a"         p "a"

@@ -409,11 +409,11 @@
         <xsl:context-item as="element(table)" use="required"/>
 
         <xsl:variable name="n" as="xs:integer">
-            <xsl:value-of select="number(substring-before(substring-after(@rend, 'columns('), ')'))"/>
+            <xsl:value-of select="number(f:rend-value(@rend, 'columns'))"/>
         </xsl:variable>
 
         <xsl:variable name="item-order" as="xs:string">
-            <xsl:value-of select="substring-before(substring-after(@rend, 'item-order('), ')')"/>
+            <xsl:value-of select="f:rend-value(@rend, 'item-order')"/>
         </xsl:variable>
 
         <!-- Get labels and units first (simplified model, see templates dealing with a normal-table for more complex situation). -->

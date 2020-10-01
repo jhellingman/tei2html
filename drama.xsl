@@ -86,7 +86,7 @@
 
     <xsl:template name="handleAlignedLg">
         <xsl:context-item as="element(lg)" use="required"/>
-        <xsl:variable name="otherid" select="substring-before(substring-after(@rend, 'align-with('), ')')"/>
+        <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
         <xsl:copy-of select="f:log-info('Align verse {1} with verse {2}.', (@id, $otherid))"/>
         <xsl:call-template name="align-verses">
             <xsl:with-param name="a" select="."/>
@@ -113,7 +113,7 @@
         <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistich.
         A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place
         it at the proper location. A hemistich is handled by adding a span with the class <code>hemistich</code>,
-        which is supposed to contain the text of the previous line of the hemistich, and leaves it to the CSS
+        which is supposed to contain the text of the previous part of the hemistich, and leaves it to the CSS
         stylesheet to hide that text and the current line of the hemistich shows up indented the correct way).</xd:detail>
     </xd:doc>
 
@@ -158,6 +158,9 @@
                 <xsl:if test="not($content)">
                     <xsl:copy-of select="f:log-error('No previous line found for hemistich', ())"/>
                 </xsl:if>
+                <xsl:if test="$content//stage or $content//ab">
+                    <xsl:copy-of select="f:log-warning('Hemistich contains stage instruction or ab', ())"/>
+                </xsl:if>
                 <xsl:copy-of select="f:copy-without-ids($content)"/>
             </xsl:when>
             <xsl:when test="starts-with($value, '#')">
@@ -178,11 +181,12 @@
                             </xsl:if>
                             <xsl:apply-templates select="$target-node/node()"/>
                         </xsl:variable>
-
                         <xsl:if test="not($content)">
                             <xsl:copy-of select="f:log-error('Element referenced in hemistich not found (id={1})', ($target-id))"/>
                         </xsl:if>
-
+                        <xsl:if test="$content//stage or $content//ab">
+                            <xsl:copy-of select="f:log-warning('Hemistich contains stage instruction or ab', ())"/>
+                        </xsl:if>
                         <xsl:copy-of select="f:copy-without-ids($content)"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -194,6 +198,17 @@
         </xsl:choose>
         <xsl:text> </xsl:text>
     </xsl:function>
+
+
+    <!-- See block.xsl for called templates -->
+    <xsl:template match="l[f:has-rend-value(@rend, 'initial-image')]">
+        <xsl:call-template name="handle-initial-image"/>
+    </xsl:template>
+
+    <xsl:template match="l[f:has-rend-value(@rend, 'initial-image')]" mode="css">
+        <xsl:call-template name="handle-initial-image-css"/>
+    </xsl:template>
+
 
     <xd:doc>
         <xd:short>Format an edition-specific line-break.</xd:short>
@@ -354,6 +369,9 @@
 
     <!-- Stage directions -->
     <xsl:template match="stage">
+        <xsl:if test="parent::l or parent::p">
+            <xsl:copy-of select="f:log-warning('Non-inline stage instruction part of line or paragraph: {1}', (.))"/>
+        </xsl:if>
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage')"/>

@@ -21,6 +21,9 @@
 "\n\n"      0 "</GR>\n\n"
 "<br>"      p "</GR><br><GR>"
 
+"<g>"		p "</GR><g><GR>"
+"</g>"		p "</GR></g><GR>"
+
 "'"         p "&apos;"
 
 "a"         p "a"
@@ -97,6 +100,36 @@
 "a)="       p ">=a"
 "A)="       p ">=A"
 
+%----------------------------
+% Extra h for ( is superflous
+"ha(|"      p "<a|"
+"Ha(|"      p "<A|"
+"ha(/|"     p "<'a|"
+"Ha(/|"     p "<'A|"
+"ha(\\|"    p "<`a|"
+"Ha(\\|"    p "<`A|"
+"ha(=|"     p "<=a|"
+"Ha(=|"     p "<=A|"
+
+"ha|("      p "<a|"
+"Ha|("      p "<A|"
+"ha|(/"     p "<'a|"
+"Ha|(/"     p "<'A|"
+"ha|(\\"    p "<`a|"
+"Ha|(\\"    p "<`A|"
+"ha|(="     p "<=a|"
+"Ha|(="     p "<=A|"
+
+"ha("       p "<a"
+"Ha("       p "<A"
+"ha(/"      p "<'a"
+"Ha(/"      p "<'A"
+"ha(\\"     p "<`a"
+"Ha(\\"     p "<`A"
+"ha(="      p "<=a"
+"Ha(="      p "<=A"
+%----------------------------
+
 "b"         p "b"
 "B"         p "B"
 
@@ -130,6 +163,18 @@
 "E(="       p "<=E"
 "e)="       p ">=e"
 "E)="       p ">=E"
+
+%----------------------------
+% Extra h for ( is superflous
+"he("        p "<e"
+"He("        p "<E"
+"he(/"       p "<'e"
+"He(/"       p "<'E"
+"he(\\"      p "<`e"
+"He(\\"      p "<`E"
+"he(="       p "<=e"
+"He(="       p "<=E"
+%----------------------------
 
 "z"         p "z"
 "Z"         p "Z"
@@ -208,6 +253,36 @@
 "ê)="       p ">=h"
 "Ê)="       p ">=H"
 
+%----------------------------
+% Extra h for ( is superflous
+"hê(|"      p "<h|"
+"Hê(|"      p "<H|"
+"hê(/|"     p "<'h|"
+"Hê(/|"     p "<'H|"
+"hê(\\|"    p "<`h|"
+"Hê(\\|"    p "<`H|"
+"hê(=|"     p "<=h|"
+"Hê(=|"     p "<=H|"
+
+"hê|("      p "<h|"
+"Hê|("      p "<H|"
+"hê|(/"     p "<'h|"
+"Hê|(/"     p "<'H|"
+"hê|(\\"    p "<`h|"
+"Hê|(\\"    p "<`H|"
+"hê|(="     p "<=h|"
+"Hê|(="     p "<=H|"
+
+"hê("       p "<h"
+"Hê("       p "<H"
+"hê(/"      p "<'h"
+"Hê(/"      p "<'H"
+"hê(\\"     p "<`h"
+"Hê(\\"     p "<`H"
+"hê(="      p "<=h"
+"Hê(="      p "<=H"
+%----------------------------
+
 "th"        p "j"
 "Th"        p "J"
 "TH"        p "J"
@@ -242,6 +317,19 @@
 "i+\\"      p "`\"i"
 "i+/"       p "'\"i"
 "i+="       p "=\"i"
+
+%----------------------------
+% Extra h for ( is superflous
+"hi("        p "<i"
+"Hi("        p "<I"
+"hi(/"       p "<'i"
+"Hi(/"       p "<'I"
+"hi(\\"      p "<`i"
+"Hi(\\"      p "<`I"
+"hi(="       p "<=i"
+"Hi(="       p "<=I"
+%----------------------------
+
 
 "k"         p "k"
 "K"         p "K"
@@ -283,6 +371,18 @@
 "o)="       p ">=o"
 "O)="       p ">=O"
 
+%----------------------------
+% Extra h for ( is superflous
+"ho("        p "<o"
+"Ho("        p "<O"
+"ho(/"       p "<'o"
+"Ho(/"       p "<'O"
+"ho(\\"      p "<`o"
+"Ho(\\"      p "<`O"
+"ho(="       p "<=o"
+"Ho(="       p "<=O"
+%----------------------------
+
 "p"         p "p"
 "P"         p "P"
 
@@ -292,6 +392,12 @@
 "R("        p "<R"
 "r)"        p ">r"
 "R)"        p ">R"
+
+%----------------------------
+% Extra h for ( is superflous
+"rh("       p "<r"
+"Rh("       p "<R"
+%----------------------------
 
 "s"         p "s"
 "S"         p "S"
@@ -328,6 +434,18 @@
 "u)="       p ">=u"
 "U)="       p ">=U"
 
+%----------------------------
+% Extra h for ( is superflous
+"hu("        p "<u"
+"Hu("        p "<U"
+"hu(/"       p "<'u"
+"Hu(/"       p "<'U"
+"hu(\\"      p "<`u"
+"Hu(\\"      p "<`U"
+"hu(="       p "<=u"
+"Hu(="       p "<=U"
+%----------------------------
+
 "u+"        p "\"u"
 "U+"        p "\"U"
 "u+\\"      p "`\"u"
@@ -358,6 +476,18 @@
 "Y(="       p "<=U"
 "y)="       p ">=u"
 "Y)="       p ">=U"
+
+%----------------------------
+% Extra h for ( is superflous
+"hy("        p "<u"
+"Hy("        p "<U"
+"hy(/"       p "<'u"
+"Hy(/"       p "<'U"
+"hy(\\"      p "<`u"
+"Hy(\\"      p "<`U"
+"hy(="       p "<=u"
+"Hy(="       p "<=U"
+%----------------------------
 
 "y+"        p "\"u"
 "Y+"        p "\"U"
@@ -453,6 +583,36 @@
 "ô)="       p ">=w"
 "Ô)="       p ">=W"
 
+%----------------------------
+% Extra h for ( is superflous
+"hô(|"      p "<w|"
+"Hô(|"      p "<W|"
+"hô(/|"     p "<'w|"
+"Hô(/|"     p "<'W|"
+"hô(\\|"    p "<`w|"
+"Hô(\\|"    p "<`W|"
+"hô(=|"     p "<=w|"
+"Hô(=|"     p "<=W|"
+
+"hô|("      p "<w|"
+"Hô|("      p "<W|"
+"hô|(/"     p "<'w|"
+"Hô|(/"     p "<'W|"
+"hô|(\\"    p "<`w|"
+"Hô|(\\"    p "<`W|"
+"hô|(="     p "<=w|"
+"Hô|(="     p "<=W|"
+
+"hô("       p "<w"
+"Hô("       p "<W"
+"hô(/"      p "<'w"
+"Hô(/"      p "<'W"
+"hô(\\"     p "<`w"
+"Hô(\\"     p "<`W"
+"hô(="      p "<=w"
+"Hô(="      p "<=W"
+%----------------------------
+
 %% Vowels with macrons (TODO: combinations of macron with other accents, [=a])/, [=i]/, etc. Use Unicode combining accents.)
 %% sometimes mistakes for the "circumflex"
 
@@ -489,12 +649,24 @@
 
 "v"         p "&digamma;"
 "[f]"       p "&digamma;"
-"[j]"       p "&jgr;";
-"[(]"       p "&lpar;";
-"[)]"       p "&rpar;";
+"[j]"       p "&jgr;"
+"[(]"       p "&lpar;"
+"[)]"       p "&rpar;"
+"&lpar;"    p "&lpar;"
+"&rpar;"    p "&rpar;"
+"&mdash;"   p "&mdash;"
+
+% Greek question mark and semicolon.
+";"			p "&middot;"
+"?"			p ";"
 
 "[^*]"      p "[^*]";   %% FRANCK: raised asterisk.
 
+
+%% NG combination
+
+"NG"        p "GG"
+"ng"        p "gg"
 
 %% warn for illegal characters
 
@@ -507,6 +679,11 @@
 "j"         p "</GR><span class=error>j</span><GR>"
 "J"         p "</GR><span class=error>J</span><GR>"
 "["         p "</GR><span class=error>[</span><GR>"
+
+"Q"         p "</GR><span class=error>Q</span><GR>"
+"q"         p "</GR><span class=error>q</span><GR>"
+"H"         p "</GR><span class=error>H</span><GR>"
+"h"         p "</GR><span class=error>h</span><GR>"
 
 "("         p "</GR><span class=error>(</span><GR>"
 ")"         p "</GR><span class=error>)</span><GR>"

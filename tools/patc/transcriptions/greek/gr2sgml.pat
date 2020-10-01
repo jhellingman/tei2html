@@ -30,6 +30,13 @@
 "</sc>"             p "</sc>"
 "</hi>"             p "</hi>"
 
+"<choice>"          p "<choice>"
+"<sic>"             p "<sic>"
+"<corr>"            p "<corr>"
+"</choice>"         p "</choice>"
+"</sic>"            p "</sic>"
+"</corr>"           p "</corr>"
+
 "a"         p "&agr;"
 "A"         p "&Agr;"
 "a|"        p "&aiotgr;"

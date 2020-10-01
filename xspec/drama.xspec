@@ -4,6 +4,7 @@
         <!ENTITY nbsp       "&#160;">
         <!ENTITY zwsp       "&#x200B;">
         <!ENTITY asterism   "&#x2042;">
+        <!ENTITY rsquo      "&#x2019;">
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
@@ -123,5 +124,45 @@ text-indent:2em;
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
         </x:expect>
     </x:scenario>
+
+    <x:scenario label="When rendering a fragment of drama with a speaker">
+        <x:context>
+            <sp who="hamlet">
+            <speaker>Hamlet</speaker>
+                <l>To be, or not to be, that is the question:</l>
+                <l>Whether &rsquo;tis nobler in the mind to suffer</l>
+            </sp>
+        </x:context>
+        <x:expect label="will result in a div, with paragraphs for each line.">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="sp">
+               <p id="..." class="speaker">Hamlet</p>
+               <p id="..." class="line">To be, or not to be, that is the question:</p>
+               <p id="..." class="line">Whether &rsquo;tis nobler in the mind to suffer</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a fragment of drama with a speaker and stage instruction following speaker">
+        <x:context>
+            <sp who="hamlet">
+            <speaker>Hamlet</speaker> <stage rend="inline">(to himself)</stage>
+                <l>To be, or not to be, that is the question:</l>
+                <l>Whether &rsquo;tis nobler in the mind to suffer</l>
+            </sp>
+        </x:context>
+        <x:expect label="will result in a div, with paragraphs for each line, and stage instruction combined with speaker.">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="sp">
+               <p id="...">
+                    <span class="speaker">Hamlet</span>
+                    <x:text> </x:text>
+                    <span id="..." class="stage">(to himself)</span>
+               </p>
+               <p id="..." class="line">To be, or not to be, that is the question:</p>
+               <p id="..." class="line">Whether &rsquo;tis nobler in the mind to suffer</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
 
 </x:description>

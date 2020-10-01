@@ -113,6 +113,12 @@
             <xsl:if test="@facs and f:is-set('facsimile.enable')">
                 <xsl:call-template name="pb-facsimile-link"/>
             </xsl:if>
+
+            <xsl:if test="not(@facs) and f:is-set('debug.facsimile')">
+                <xsl:text> </xsl:text>
+                <xsl:variable name="page" select="substring(string(1000 + @n), 2)"/>
+                <a href="https://www.pgdp.net/c/tools/page_browser.php?project={//idno[@type='PGDPProjectId']}&amp;imagefile={$page}.png">DP</a>
+            </xsl:if>
          </span>
     </xsl:template>
 
@@ -627,6 +633,13 @@
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]">
+        <xsl:call-template name="handle-initial-image"/>
+    </xsl:template>
+
+
+    <!-- Can also be called for lines of verse, see drama.xsl -->
+    <xsl:template name="handle-initial-image">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:choose>
             <xsl:when test="$optionPrinceMarkup = 'Yes' or $outputformat = 'epub'">
                 <xsl:call-template name="initial-image-with-float"/>
@@ -639,11 +652,12 @@
 
 
     <xsl:template name="initial-image-with-css">
-        <xsl:context-item as="element(p)" use="required"/>
+        <xsl:context-item as="element()" use="required"/>
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                <xsl:if test="self::l"><xsl:text>line </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>
             </xsl:attribute>
             <span>
@@ -670,7 +684,7 @@
 
 
     <xsl:template name="initial-image-with-float">
-        <xsl:context-item as="element(p)" use="required"/>
+        <xsl:context-item as="element()" use="required"/>
 
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -679,6 +693,7 @@
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
+                <xsl:if test="self::l"><xsl:text>line </xsl:text></xsl:if>
                 <xsl:text>first</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
@@ -696,6 +711,11 @@
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css">
+        <xsl:call-template name="handle-initial-image-css"/>
+    </xsl:template>
+
+    <xsl:template name="handle-initial-image-css">
+        <xsl:context-item as="element()" use="required"/>
         <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
 
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>

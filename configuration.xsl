@@ -49,8 +49,10 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <debug>false</debug>                                            <!-- Use debug mode. -->
+            <debug>false</debug>                                            <!-- Use debug mode. -->            
             <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
+
+            <debug.facsimile>false</debug.facsimile>
 
             <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly) -->
             <defaultlanguage>en-US</defaultlanguage>                        <!-- Default language for localization -->
