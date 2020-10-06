@@ -380,6 +380,9 @@
     </xsl:template>
 
     <xsl:template match="stage[@type='exit']">
+        <xsl:if test="parent::l or parent::p">
+            <xsl:copy-of select="f:log-warning('Non-inline stage instruction part of line or paragraph: {1}', (.))"/>
+        </xsl:if>
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'stage alignright')"/>
@@ -424,7 +427,7 @@
     <xsl:template match="castList/head">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'casthead')"/>
             <h4><xsl:apply-templates/></h4>
         </li>
     </xsl:template>
@@ -453,6 +456,20 @@
             <xsl:copy-of select="f:set-class-attribute-with(., 'castitem')"/>
             <xsl:apply-templates/>
         </li>
+    </xsl:template>
+
+    <xsl:template match="role">
+        <span class="role">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="roleDesc">
+        <span class="roleDesc">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </span>
     </xsl:template>
 
     <xd:doc>

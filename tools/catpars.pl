@@ -11,7 +11,7 @@ my $mode = "normal";    # normal | concat
 while (<INPUTFILE>) {
     my $line = $_;
     if ($mode eq "normal") {
-        if ($line =~ /^(<pb\b([^>]*)>)?(<q\b([^>]*)>)?<p\b([^>]*)>/) {
+        if ($line =~ /^(<speaker\b[^>]*>.*<\/speaker> +)?(<pb\b([^>]*)>)?(<q\b([^>]*)>)?<p\b([^>]*)>/) {
             print stripNewline($line);
             $mode = "concat";
         } else {
