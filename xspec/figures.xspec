@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY zwsp       "&#x200B;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <x:param name="imageInfo">
+        <imageInfo>
+            <img:images xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo">
+                <img:image path="images/fig_01.jpg" filesize="166" filedate="2018-12-16 12:14:56" width="12px" height="40px"/>
+                <img:image path="images/fig_02.jpg" filesize="166" filedate="2018-12-16 12:14:56" width="20px" height="30px"/>
+                <img:image path="images/fig_03.png" filesize="166" filedate="2018-12-16 12:14:56" width="30px" height="40px"/>
+                <img:image path="images/fig_04.png" filesize="166" filedate="2018-12-16 12:14:56" width="10px" height="15px"/>
+            </img:images>
+        </imageInfo>
+    </x:param>
+
+
+    <x:scenario label="When rendering a figure element">
+        <x:context>
+            <figure id="fig_01"></figure>
+        </x:context>
+        <x:expect label="will result in an HTML div with img inside">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
+               <img src="images/fig_01.jpg" alt="" width="12" height="40"/>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a figure element with a description">
+        <x:context>
+            <figure id="fig_02">
+                <figDesc>Description.</figDesc>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML div with img inside, and the description as alt text.">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_02width" id="fig_02">
+               <img src="images/fig_02.jpg" alt="Description." width="20" height="30"/>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a figure element with a description">
+        <x:context>
+            <figure id="fig_03" rend="image(images/fig_03.png)">
+                <head>Heading of picture.</head>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML div with img inside, and the heading as alt text.">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_03width" id="fig_03">
+               <img src="images/fig_03.png" alt="Heading of picture." width="30" height="40"/>
+               <p class="figureHead">Heading of picture.</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a figure element with inline">
+        <x:context>
+            <figure id="fig_04" rend="inline">
+                <figDesc>Description.</figDesc>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
+            <span xmlns="http://www.w3.org/1999/xhtml">
+               <img src="images/fig_04.png" alt="Description." width="10" height="15"/>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a figure element with inline">
+        <x:context>
+            <figure id="fig_05" rend="image(images/fig_01.jpg) position(inline)">
+                <figDesc>Description.</figDesc>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
+            <span xmlns="http://www.w3.org/1999/xhtml">
+               <img src="images/fig_01.jpg" alt="Description." width="12" height="40"/>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+
+</x:description>
