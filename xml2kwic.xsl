@@ -4,9 +4,9 @@
     <!ENTITY tcomma      "&#x02BB;">
 
 ]>
-
 <xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
@@ -88,54 +88,35 @@
 
 
     <xd:doc>
-        <xd:short>Stop-words (per language).</xd:short>
-        <xd:detail>Stop-words will be ignored when generating the KWIC. Stop-words can be provided in a single string, separated
-        by a space. Internally this will be converted to a sequence.</xd:detail>
+        <xd:short>The name of the file that contains stopwords.</xd:short>
     </xd:doc>
 
-    <xsl:param name="en-stopwords" select="'a about an are as at be by for from how I in is it of on or that the this to was what when where who will with'"/>
-    <xsl:param name="nl-stopwords" select="'aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had hebben hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou'"/>
+    <xsl:param name="stopword-file" select="'stopwords.xml'" as="xs:string"/>
 
-    <!--
-    <xsl:param name="en-stopwords" select="'@/Bin/dic/en.dic'"/>
-    <xsl:param name="nl-stopwords" select="'@/Bin/dic/nl.dic'"/>
-    -->
-
-    <xsl:variable name="stopwords" as="map(xs:string, xs:string)" select='map {
-        "EN" : "a about an are as at be by for from how I in is it of on or that the this to was what when where who will with",
-        "NL" : "aan al alles als altijd andere ben bij daar dan dat de der deze die dit doch doen door dus een eens en er ge geen geweest haar had hebben hem het hier hij hoe hun iemand iets ik in is ja je kan kon kunnen maar me meer men met mij mijn moet na naar niet niets nog nu of om omdat onder ons ook op over reeds te tegen toch toen tot u uit uw van veel voor want waren was wat werd wezen wie wil worden wordt zal ze zelf zich zij zijn zo zonder zou"
-        }'/>
-
-
-    <xsl:variable name="en-stopwords-sequence" select="f:load-stopwords($en-stopwords)"/>
-    <xsl:variable name="nl-stopwords-sequence" select="f:load-stopwords($nl-stopwords)"/>
+    <xsl:variable name="stopwords" as="map(xs:string, xs:string*)">
+        <xsl:map>
+            <xsl:for-each select="document($stopword-file)//words">
+                <xsl:map-entry key="xs:string(@lang)" select="tokenize(., ' ')"/>
+            </xsl:for-each>
+        </xsl:map>
+    </xsl:variable>
 
 
     <xd:doc>
-        <xd:short>Load stop-words.</xd:short>
-        <xd:detail>Function to load stop-words, either from a string, or from a file, if the string starts
-        with an @-sign.</xd:detail>
+        <xd:short>Determine whether a word is a stop-word.</xd:short>
+        <xd:detail>Determine whether a word appears in the list of stop-words for a given language.</xd:detail>
+        <xd:param name="word">The word to test.</xd:param>
+        <xd:param name="lang">The (declared) language of the word (used to select the stop-word list).</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:load-stopwords" as="xs:string*">
-        <xsl:param name="source"/>
+    <xsl:function name="f:is-stopword" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:sequence select="if (substring($source, 1, 1) = '@') then f:load-dictionary(substring($source, 2)) else tokenize($source, ' ')"/>
-    </xsl:function>
+        <xsl:variable name="lang" select="if (not(exists(map:get($stopwords, $lang))) and contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
+        <xsl:variable name="word" select="lower-case($word)"/>
 
-
-    <xd:doc>
-        <xd:short>Load dictionary from a file.</xd:short>
-        <xd:detail>Load a dictionary from a file, assumed to have one word per line, and encoded
-        in the iso-8859-1 character set.</xd:detail>
-    </xd:doc>
-
-    <xsl:function name="f:load-dictionary" as="xs:string*">
-        <xsl:param name="filename"/>
-
-        <xsl:message>Loading stop-words from file: <xsl:value-of select="$filename"/></xsl:message>
-        <xsl:variable name="file-contents" as="xs:string" select="unparsed-text($filename, 'iso-8859-1')"/>
-        <xsl:sequence select="tokenize($file-contents, '\r?\n')"/>
+        <xsl:sequence select="map:get($stopwords, $lang) = $word"/>
     </xsl:function>
 
 
@@ -1037,28 +1018,6 @@
                 <xsl:otherwise>i</xsl:otherwise>
             </xsl:choose>
         </xsl:if>
-    </xsl:function>
-
-
-    <xd:doc>
-        <xd:short>Determine whether a word is a stop-word.</xd:short>
-        <xd:detail>Determine whether a word appears in a list of stop-words for a particular language.</xd:detail>
-        <xd:param name="word">The word to test.</xd:param>
-        <xd:param name="lang">The language of the word (used to select the stop-word list).</xd:param>
-    </xd:doc>
-
-    <xsl:function name="f:is-stopword" as="xs:boolean">
-        <xsl:param name="word" as="xs:string"/>
-        <xsl:param name="lang" as="xs:string"/>
-
-        <xsl:variable name="baselang" select="if (contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
-        <xsl:variable name="word" select="lower-case($word)"/>
-
-        <xsl:sequence select="if ($baselang = 'en')
-                              then $word = $en-stopwords-sequence
-                              else if ($baselang = 'nl')
-                                   then $word = $nl-stopwords-sequence
-                                   else false()"/>
     </xsl:function>
 
 
