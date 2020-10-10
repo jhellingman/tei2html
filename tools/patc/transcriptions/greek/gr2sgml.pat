@@ -31,11 +31,15 @@
 "</hi>"             p "</hi>"
 
 "<choice>"          p "<choice>"
-"<sic>"             p "<sic>"
-"<corr>"            p "<corr>"
 "</choice>"         p "</choice>"
+"<sic>"             p "<sic>"
 "</sic>"            p "</sic>"
+"<corr>"            p "<corr>"
 "</corr>"           p "</corr>"
+"<abbr>"            p "<abbr>"
+"</abbr>"           p "</abbr>"
+"<expan>"           p "<expan>"
+"</expan>"          p "</expan>"
 
 "a"         p "&agr;"
 "A"         p "&Agr;"

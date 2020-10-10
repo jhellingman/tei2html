@@ -181,8 +181,12 @@ sub handleLine($) {
     $line =~ s/<pb\b(.*?)>//g;
 
     # handle <choice><sic>...</sic><corr>...</corr></choice> and <choice><corr>...</corr><sic>...</sic></choice>
-    $line =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
     $line =~ s/<choice\b(.*?)><corr>(.*?)<\/corr><sic>(.*?)<\/sic><\/choice>/$2/g;
+    $line =~ s/<choice\b(.*?)><sic>(.*?)<\/sic><corr>(.*?)<\/corr><\/choice>/$3/g;
+
+    # similar for abbr / expan.
+    $line =~ s/<choice\b(.*?)><abbr>(.*?)<\/abbr><expan>(.*?)<\/expan><\/choice>/$2/g;
+    $line =~ s/<choice\b(.*?)><expan>(.*?)<\/expan><abbr>(.*?)<\/abbr><\/choice>/$3/g;
 
     # handle numbered lines of verse
     if ($line =~ /( +)<l\b(.*?)>/) {

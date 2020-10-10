@@ -151,5 +151,132 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a footnote that contains a paragraph">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note id="n.1"><p>Text of footnote 1.</p></note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote with the paragraph">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label">
+                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a footnote that contains two paragraphs">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note id="n.1"><p>Text of first paragraph.</p><p>Text of second paragraph.</p></note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote with both paragraphs">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label">
+                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of first paragraph.</p>
+                            <p id="..." class="footnote cont">Text of second paragraph.&nbsp;<a class="fnarrow" href="#n.1src">&uparrow;</a>
+                     </p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a footnote that ends with a table">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note id="n.1"><table><row><cell>first cell</cell><cell>second cell</cell></row></table></note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote with a table, but without the return arrow.">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label">
+                            <a class="noteref" id="n.1" href="#n.1src">1</a>
+                        </span> &lt;/p&gt;<div class="table" id="...">
+                        <table>
+                          <tr id="...">
+                             <td id="..." class="cellLeft cellTop cellBottom">first cell</td>
+                             <td id="..." class="cellRight cellTop cellBottom">second cell</td>
+                          </tr>
+                        </table>
+                     </div>&lt;p&gt;</p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a footnote that ends with a list">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note id="n.1"><p>
+                            <list>
+                                <item>first cell</item>
+                                <item>second cell</item>
+                            </list></p></note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote with a list, but without the return arrow.">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                     <p class="footnote">
+                        <span class="label">
+                            <a class="noteref" id="n.1" href="#n.1src">1</a>
+                        </span> &lt;/p&gt;<ul id="...">
+                            <li id="...">first cell</li>
+                            <li id="...">second cell</li>
+                        </ul>&lt;p&gt;</p>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
 
 </x:description>

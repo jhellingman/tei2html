@@ -98,7 +98,7 @@
         <x:context>
             <corr sic="mistake">correction</corr>
         </x:context>
-        <x:expect label="will result in an HTML span with a pop-up title">
+        <x:expect label="will result in an HTML span with a pop-up title showing the original mistake.">
             <span xmlns="http://www.w3.org/1999/xhtml"
                   class="corr"
                   id="..."
@@ -118,6 +118,49 @@
         </x:expect>
     </x:scenario>
 
+
+    <!-- abbr -->
+
+    <x:scenario label="When rendering a abbr element">
+        <x:context>
+            <abbr expan="for example">e.g.</abbr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title with the expansion.">
+            <abbr xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."
+                  title="for example">e.g.</abbr>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering two the same abbr elements, of which the second has no expan attribute">
+        <x:context>
+            <abbr expan="for example">e.g.</abbr>
+            <abbr>e.g.</abbr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title with the expansion on both.">
+            <abbr xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."
+                  title="for example">e.g.</abbr>
+            <abbr xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."
+                  title="for example">e.g.</abbr>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a two choice elements containing an abbr element, of which the second has no expan element">
+        <x:context>
+            <choice><abbr>e.g.</abbr><expan>for example</expan></choice>
+            <choice><abbr>e.g.</abbr></choice>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title with the expansion.">
+            <abbr xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."
+                  title="for example">e.g.</abbr>
+            <abbr xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."
+                  title="for example">e.g.</abbr>
+        </x:expect>
+    </x:scenario>
 
     <!-- gap -->
 

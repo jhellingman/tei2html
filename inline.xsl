@@ -588,23 +588,51 @@
         will show the expanded text taken from the <code>@expan</code> attribute (if available).</xd:detail>
     </xd:doc>
 
-    <xsl:template match="abbr">
+
+    <xsl:template match="abbr" mode="#default titlePage">
+        <xsl:call-template name="handle-abbreviation">
+            <xsl:with-param name="abbr" select="./node()"/>
+            <xsl:with-param name="expan" select="@expan"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template match="choice[abbr]">
+        <xsl:call-template name="handle-abbreviation">
+            <xsl:with-param name="abbr" select="abbr/node()"/>
+            <xsl:with-param name="expan" select="expan/node()"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template name="handle-abbreviation">
+        <xsl:param name="abbr" xs:as="node()*"/>
+        <xsl:param name="expan" xs:as="node()*"/>
+
+        <xsl:variable name="expanString" as="xs:string?">
+            <xsl:for-each select="$expan">
+                <xsl:value-of select="."/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:variable name="expanString" select="if (not($expanString) or $expanString = '') then f:find-expansion($abbr) else $expanString"/>
+
         <abbr>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="@type">
                 <xsl:attribute name="class" select="@type"/>
             </xsl:if>
             <xsl:if test="f:is-set('useMouseOverPopups')">
-                <xsl:variable name="expan" select="f:find-expansion(.)" as="xs:string"/>
-                <xsl:if test="$expan != ''">
+                <xsl:if test="$expanString != ''">
                     <xsl:attribute name="title">
-                        <xsl:value-of select="$expan"/>
+                        <xsl:value-of select="$expanString"/>
                     </xsl:attribute>
                 </xsl:if>
             </xsl:if>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="$abbr"/>
         </abbr>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Find the expansion of an abbreviation.</xd:short>
@@ -614,7 +642,7 @@
     </xd:doc>
 
     <xsl:function name="f:find-expansion" as="xs:string">
-        <xsl:param name="abbr" as="element()"/>
+        <xsl:param name="abbr" as="node()"/>
 
         <xsl:value-of select="if ($abbr/@expan != '')
             then $abbr/@expan
@@ -622,7 +650,7 @@
                  then (root($abbr)//abbr[. = $abbr and ./@expan != '']/@expan)[1]
                  else if (root($abbr)//choice[abbr = $abbr and expan != ''])
                       then (root($abbr)//choice[abbr = $abbr and expan != '']/expan)[1]
-                      else ''"/>
+                      else 'XX'"/>
     </xsl:function>
 
 
@@ -708,6 +736,10 @@
 
     <xsl:template match="choice[corr]" mode="remove-nested-choice">
         <xsl:apply-templates select="corr" mode="remove-nested-choice"/>
+    </xsl:template>
+
+    <xsl:template match="choice[abbr]" mode="remove-nested-choice">
+        <xsl:apply-templates select="abbr" mode="remove-nested-choice"/>
     </xsl:template>
 
 

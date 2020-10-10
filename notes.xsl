@@ -151,15 +151,14 @@
     </xd:doc>
 
     <xsl:template match="note[p]" mode="footnotes">
-        <xsl:variable name="before"><xsl:call-template name="footnote-marker"/></xsl:variable>
-        <xsl:variable name="after"><xsl:call-template name="footnote-return-arrow"/></xsl:variable>
-
         <xsl:element name="{$p.element}">
             <xsl:call-template name="footnote-class-lang"/>
-            <xsl:copy-of select="$before"/>
+            <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates select="*[1]" mode="footfirst"/>
             <xsl:if test="count(*) = 1">
-                <xsl:copy-of select="$after"/>
+                <xsl:if test="not(f:last-child-is-block-element(./p))">
+                    <xsl:call-template name="footnote-return-arrow"/>
+                </xsl:if>
             </xsl:if>
         </xsl:element>
         <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
@@ -177,9 +176,23 @@
             <xsl:call-template name="footnote-class-lang"/>
             <xsl:call-template name="footnote-marker"/>
             <xsl:apply-templates/>
-            <xsl:call-template name="footnote-return-arrow"/>
+
+            <!-- Don't put a return arrow after a block-element (table, list, lg), since it goes
+                 to a new line and thus takes up too much space -->
+            <xsl:if test="not(f:last-child-is-block-element(.))">
+                <xsl:call-template name="footnote-return-arrow"/>
+            </xsl:if>
         </xsl:element>
     </xsl:template>
+
+
+    <xsl:function name="f:last-child-is-block-element" as="xs:boolean">
+        <xsl:param name="element" as="element()"/>
+        <xsl:variable name="lastChild" select="($element/node())[last()]"/>
+        <xsl:sequence select="exists($lastChild/self::table) 
+                              or exists($lastChild/self::list) 
+                              or exists($lastChild/self::lg)"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -217,6 +230,11 @@
     </xsl:template>
 
 
+    <xsl:template match="note" mode="footnote-return-arrow">
+        <xsl:call-template name="footnote-return-arrow"/>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Place a footnote return arrow.</xd:short>
         <xd:detail>Place a footnote return arrow after the footnote. If the footnote is referenced multiple times,
@@ -225,12 +243,12 @@
 
     <xsl:template name="footnote-return-arrow">
         <xsl:context-item as="element()" use="required"/>
-
-        <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
-        <xsl:variable name="note" select="ancestor-or-self::note[1]" as="element(note)"/>
-        <xsl:variable name="id" select="$note/@id"/>
-
         <xsl:if test="f:is-set('notes.foot.returnArrow')">
+
+            <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
+            <xsl:variable name="note" select="ancestor-or-self::note[1]" as="element(note)"/>
+            <xsl:variable name="id" select="$note/@id"/>
+
             <xsl:text>&nbsp;</xsl:text>
             <xsl:choose>
                 <!-- Do we have multiple reference to this footnote? -->
@@ -292,7 +310,9 @@
     <xsl:template match="p" mode="footlast">
         <xsl:element name="{$p.element}">
             <xsl:call-template name="footnote-paragraph"/>
-            <xsl:call-template name="footnote-return-arrow"/>
+            <xsl:if test="not(f:last-child-is-block-element(.))">
+                <xsl:call-template name="footnote-return-arrow"/>
+            </xsl:if>
         </xsl:element>
     </xsl:template>
 
