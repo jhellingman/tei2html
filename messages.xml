@@ -186,11 +186,12 @@
         <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
 		
         <msg:message name="msgLinkToBible">Reference to the Bible</msg:message>		
-        <msg:message name="msgLinkToBibleBook">Reference to the Bible: <msg:param name="book"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapter">Reference to the Bible: <msg:param name="book"/>, chapter <msg:param name="chapter"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+        <msg:message name="msgLinkToBibleBook">Reference to the Bible: <msg:param name="bookTitle"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Reference to the Bible: <msg:param name="bookTitle"/>, chapter <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
 		
+		<msg:message name="bible.">Unknown Bible book</msg:message>
 		<msg:message name="bible.Genesis">Genesis</msg:message>
         <msg:message name="bible.Exodus">Exodus</msg:message>
         <msg:message name="bible.Leviticus">Leviticus</msg:message>
@@ -549,6 +550,7 @@
         <msg:message name="pag">Pangasinan</msg:message>
         <msg:message name="pam">Kapampangan</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
+        <msg:message name="zxx">Not applicable</msg:message>
 
         <!-- Creating a list of items -->
         <msg:message name="msgAnd">and</msg:message>
@@ -960,11 +962,12 @@
 		
 		
         <msg:message name="msgLinkToBible">Verweis auf die Bibel</msg:message>		
-        <msg:message name="msgLinkToBibleBook">Verweis auf die Bibel: <msg:param name="book"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapter">Verweis auf die Bibel: <msg:param name="book"/>, Kapitel <msg:param name="chapter"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerse">Verweis auf die Bibel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Verweis auf die Bibel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+        <msg:message name="msgLinkToBibleBook">Verweis auf die Bibel: <msg:param name="bookTitle"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Verweis auf die Bibel: <msg:param name="bookTitle"/>, Kapitel <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
 		
+		<msg:message name="bible.">Unbekanntes Bibelbuch</msg:message>
 		<msg:message name="bible.Genesis">1. Mose</msg:message>
         <msg:message name="bible.Exodus">2. Mose</msg:message>
         <msg:message name="bible.Leviticus">3. Mose</msg:message>
@@ -1318,11 +1321,12 @@
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
 		
 		<msg:message name="msgLinkToBible">Referentie naar de Bijbel</msg:message>		
-        <msg:message name="msgLinkToBibleBook">Referentie naar de Bijbel: <msg:param name="book"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapter">Referentie naar de Bijbel: <msg:param name="book"/>, hoofdstuk <msg:param name="chapter"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerse">Referentie naar de Bijbel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Referentie naar de Bijbel: <msg:param name="book"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+        <msg:message name="msgLinkToBibleBook">Referentie naar de Bijbel: <msg:param name="bookTitle"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapter">Referentie naar de Bijbel: <msg:param name="bookTitle"/>, hoofdstuk <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
 		
+		<msg:message name="bible.">Onbekend Bijbelboek</msg:message>
 		<msg:message name="bible.Genesis">Genesis</msg:message>
         <msg:message name="bible.Exodus">Exodus</msg:message>
         <msg:message name="bible.Leviticus">Leviticus</msg:message>
@@ -1670,6 +1674,7 @@
         <msg:message name="pag">Pangasinan</msg:message>
         <msg:message name="pam">Pampanga</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
+        <msg:message name="zxx">Niet van toepassing</msg:message>
 
         <!-- Creating a list of items -->
         <msg:message name="msgAnd">en</msg:message>

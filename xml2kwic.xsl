@@ -113,10 +113,10 @@
         <xsl:param name="word" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:variable name="lang" select="if (not(exists(map:get($stopwords, $lang))) and contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
+        <xsl:variable name="lang" select="if (not(exists($stopwords($lang))) and contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
         <xsl:variable name="word" select="lower-case($word)"/>
 
-        <xsl:sequence select="map:get($stopwords, $lang) = $word"/>
+        <xsl:sequence select="$stopwords($lang) = $word"/>
     </xsl:function>
 
 

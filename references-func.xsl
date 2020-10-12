@@ -49,7 +49,7 @@
 
         <xsl:variable name="protocol" select="if (contains($url, ':')) then substring-before($url, ':') else ''"/>
         <xsl:choose>
-            <xsl:when test="map:get($linkClasses, $protocol)"><xsl:value-of select="map:get($linkClasses, $protocol)"/></xsl:when>
+            <xsl:when test="$linkClasses($protocol)"><xsl:value-of select="$linkClasses($protocol)"/></xsl:when>
             <xsl:when test="starts-with($url, 'audio/')">audiolink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
@@ -271,6 +271,14 @@
     </xsl:function>
 
 
+    <!-- Bible references have the following format:
+            'bib:'<book> <chapter>(':'<verse>('-'<verse>)?)?('@'<edition>)?
+
+         Further variants used:
+            'bib:'<book> <chapter>'-'<chapter>('@'<edition>)?
+            'bib:'<book> <chapter>':'<verse>'-'<chapter>':'<verse>('@'<edition>)?
+    -->
+
     <xsl:variable name="bibleRefPattern" select="'^bib:((?:[0-3] )?[A-Za-z]+)(?: ([0-9]+)(?:[:]([0-9]+)(?:[-]([0-9]+))?)?)?(?:[@]([A-Za-z0-9;]+))?$'"/>
 
     <xsl:variable name="bibleBooks" select="map{
@@ -321,7 +329,7 @@
         'jdt'    : 'Judith',
         '1 mc'   : '1 Maccabees',
         '2 mc'   : '2 Maccabees',
-        'manasseh' : 'Manasseh',
+        'man'    : 'Manasseh',
         'sus'    : 'Susanna',
         'tb'     : 'Tobit',
         'ws'     : 'Wisdom of Solomon',
@@ -355,35 +363,59 @@
         're'     : 'Revelation'
         }"/>
 
+    <xsl:variable name="bibleTranslations" select="map{
+        'en': 'NRSV',
+        'fr': 'LSG',
+        'de': 'LUTH1545',
+        'es': 'RVR1995',
+        'nl': 'HTB',
+        'la': 'VULGATE'
+        }"/>
 
-    <xsl:function name="f:title-for-bible-link" as="xs:string">
+
+    <xsl:function name="f:validate-bible-link" as="xs:boolean">
         <xsl:param name="url" as="xs:string"/>
+        <xsl:sequence select="matches($url, $bibleRefPattern)"/>
+    </xsl:function>
 
-        <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
-        <xsl:variable name="book" select="$urlParts[1]"/>
-        <xsl:variable name="chapter" select="$urlParts[2]"/>
-        <xsl:variable name="verse" select="$urlParts[3]"/>
-        <xsl:variable name="toVerse" select="$urlParts[4]"/>
-        <xsl:variable name="edition" select="$urlParts[5]"/>
 
-        <xsl:variable name="messageId" select="'bible.' || map:get($bibleBooks, lower-case($book))"/>
-        <xsl:if test="not(f:is-message-available($messageId))">
+    <xsl:function name="f:tokenize-bible-ref" as="map(xs:string, xs:string?)">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:variable name="parts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
+
+        <xsl:variable name="book" select="$parts[1]"/>
+        <xsl:variable name="messageId" select="'bible.' || $bibleBooks(lower-case($book))"/>
+        <xsl:if test="not($bibleBooks(lower-case($book)))">
             <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="bookTitle" select="if (f:is-message-available($messageId)) then f:message($messageId) else f:message('msgUnknownBibleBook')"/>
 
-        <!-- <xsl:message expand-text="yes">{f:log-info('Found Bible reference &quot;{1}&quot; = BK: {2} CH: {3} V: {4} TO: {5} ED: {6} = {7}', ($url, $book, $chapter, $verse, $toVerse, $edition, $bookTitle))}</xsl:message> -->
+        <xsl:map>
+            <xsl:map-entry key="'book'" select="$parts[1]"/>
+            <xsl:map-entry key="'chapter'" select="$parts[2]"/>
+            <xsl:map-entry key="'verse'" select="$parts[3]"/>
+            <xsl:map-entry key="'toVerse'" select="$parts[4]"/>
+            <xsl:map-entry key="'edition'" select="$parts[5]"/>
+            <xsl:map-entry key="'bookTitle'" select="$bookTitle"/>
+        </xsl:map>
+    </xsl:function>
+
+
+    <xsl:function name="f:title-for-bible-link" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:variable name="parts" select="f:tokenize-bible-ref($url)" as="map(xs:string, xs:string?)"/>
 
         <xsl:value-of select="f:format-message(
-                if ($toVerse)
+                if ($parts('toVerse'))
                 then 'msgLinkToBibleBookChapterVerseToVerse'
-                else if ($verse)
+                else if ($parts('verse'))
                      then 'msgLinkToBibleBookChapterVerse'
-                     else if ($chapter)
+                     else if ($parts('chapter'))
                           then 'msgLinkToBibleBookChapter'
                           else 'msgLinkToBibleBook',
-                map{'book': $bookTitle, 'chapter': $chapter, 'verse': $verse, 'toVerse': $toVerse})"/>
+                $parts)"/>
     </xsl:function>
 
 
@@ -391,45 +423,44 @@
         <xsl:param name="url" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:if test="not(matches($url, $bibleRefPattern))">
+        <xsl:if test="not(f:validate-bible-link($url))">
             <xsl:message expand-text="yes">{f:log-error('Unrecognized reference to Bible: {1}.', ($url))}</xsl:message>
         </xsl:if>
 
-        <xsl:variable name="urlParts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
-        <xsl:variable name="book" select="$urlParts[1]"/>
-        <xsl:variable name="chapter" select="$urlParts[2]"/>
-        <xsl:variable name="verse" select="$urlParts[3]"/>
-        <xsl:variable name="toVerse" select="$urlParts[4]"/>
-        <xsl:variable name="edition" select="$urlParts[5]"/>
+        <xsl:variable name="parts" select="f:tokenize-bible-ref($url)" as="map(xs:string, xs:string?)"/>
 
-        <xsl:if test="not(map:get($bibleBooks, lower-case($book)))">
-            <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
-        </xsl:if>
-
-        <xsl:variable name="bibleTranslations" select="map{
-            'en': 'NRSV',
-            'fr': 'LSG',
-            'de': 'LUTH1545',
-            'es': 'RVR1995',
-            'nl': 'HTB',
-            'la': 'VULGATE'
-            }"/>
-
-        <xsl:variable name="edition" select="if ($edition) then ($edition) else map:get($bibleTranslations, $lang)"/>
+        <xsl:variable name="edition" select="if ($parts('edition')) then ($parts('edition')) else $bibleTranslations($lang)"/>
         <xsl:if test="not($edition)">
             <xsl:message expand-text="yes">{f:log-warning('No edition of Bible text known in language &quot;{1}&quot;.', ($lang))}</xsl:message>
         </xsl:if>
 
         <xsl:variable name="reference" as="xs:string" select="
-            $book || (if ($chapter) 
-                then ' ' || $chapter || (if ($verse)
-                    then ':' || $verse || (if ($toVerse)
-                        then '-' || $toVerse
+            $parts('book') || (if ($parts('chapter')) 
+                then ' ' || $parts('chapter') || (if ($parts('verse'))
+                    then ':' || $parts('verse') || (if ($parts('toVerse'))
+                        then '-' || $parts('toVerse')
                         else '')
                     else '')
                 else '')"/>
 
-        <xsl:text expand-text="yes">https://www.biblegateway.com/passage/?search={iri-to-uri($reference)}{if ($edition != '') then '&amp;version=' || iri-to-uri($edition) else ''}</xsl:text>
+        <!-- Alternative sites 
+        
+             https://biblehub.com/text/john/3-31.htm
+
+             https://www.skepticsannotatedbible.com/
+             SKAB: https://www.skepticsannotatedbible.com/col/1.html#3
+
+
+             https://www.academic-bible.com/, see: https://www.academic-bible.com/en/online-bibles/hyperlinks-to-bible-text/
+             www.academic-bible.com/bible-text/Gn2.2/LXX/
+             https://www.bibelwissenschaft.de/bibelstelle/Jes/
+             https://www.die-bibel.de/bibeln/online-bibeln/lesen/LU17/MAT.1/Matth%C3%A4us-1
+             https://www.die-bibel.de/bibeln/online-bibeln/lesen/LXX/LV.2.2
+             https://www.bibelwissenschaft.de/bibelstelle/Gn2-3/
+
+        -->
+
+        <xsl:text expand-text="yes">https://classic.biblegateway.com/passage/?search={iri-to-uri($reference)}{if ($edition != '') then '&amp;version=' || iri-to-uri($edition) else ''}</xsl:text>
     </xsl:function>
 
 

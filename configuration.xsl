@@ -173,7 +173,7 @@
 
         <xsl:for-each select="map:keys($default)">
             <xsl:variable name="key" select="." as="xs:string"/>
-            <xsl:if test="map:get($default, $key) = map:get($override, $key)">
+            <xsl:if test="$default($key) = $override($key)">
                 <xsl:message expand-text="true">INFO: Overriden configuration value of key '{$key}' same as default.</xsl:message>
             </xsl:if>
         </xsl:for-each>
@@ -191,7 +191,7 @@
 
     <xsl:function name="f:get-setting" as="xs:string">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:sequence select="if (map:contains($configuration-map, $key)) then map:get($configuration-map, $key) else ''"/>
+        <xsl:sequence select="if (map:contains($configuration-map, $key)) then $configuration-map($key) else ''"/>
     </xsl:function>
 
 

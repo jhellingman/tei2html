@@ -102,6 +102,7 @@
         <xsl:sequence select="if ($targetNode/ancestor-or-self::note[f:is-footnote(.)]) then true() else false()"/>
     </xsl:function>
 
+
     <xd:doc>
         <xd:short>Is a node inside a choice-element?</xd:short>
         <xd:detail>
@@ -175,6 +176,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Handle an external cross-reference (2).</xd:short>
