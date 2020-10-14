@@ -271,15 +271,15 @@
     </xsl:function>
 
 
-    <!-- Bible references have the following format:
+    <!-- Bible references have the following formats:
             'bib:'<book> <chapter>(':'<verse>('-'<verse>)?)?('@'<edition>)?
-
-         Further variants used:
             'bib:'<book> <chapter>'-'<chapter>('@'<edition>)?
             'bib:'<book> <chapter>':'<verse>'-'<chapter>':'<verse>('@'<edition>)?
     -->
 
     <xsl:variable name="bibleRefPattern" select="'^bib:((?:[0-3] )?[A-Za-z]+)(?: ([0-9]+)(?:[:]([0-9]+)(?:[-]([0-9]+))?)?)?(?:[@]([A-Za-z0-9;]+))?$'"/>
+    <xsl:variable name="bibleRefChapterRangePattern" select="'^bib:((?:[0-3] )?[A-Za-z]+) ([0-9]+)[-]([0-9]+)(?:[@]([A-Za-z0-9;]+))?$'"/>
+    <xsl:variable name="bibleRefChapterVerseRangePattern" select="'^bib:((?:[0-3] )?[A-Za-z]+) ([0-9]+)[:]([0-9]+)[-]([0-9]+)[:]([0-9]+)(?:[@]([A-Za-z0-9;]+))?$'"/>
 
     <xsl:variable name="bibleBooks" select="map{
         'gn'     : 'Genesis',
@@ -375,21 +375,45 @@
 
     <xsl:function name="f:validate-bible-link" as="xs:boolean">
         <xsl:param name="url" as="xs:string"/>
-        <xsl:sequence select="matches($url, $bibleRefPattern)"/>
+        <xsl:sequence select="matches($url, $bibleRefPattern) 
+                              or matches($url, $bibleRefChapterRangePattern) 
+                              or matches($url, $bibleRefChapterVerseRangePattern)"/>
     </xsl:function>
 
 
     <xsl:function name="f:tokenize-bible-ref" as="map(xs:string, xs:string?)">
         <xsl:param name="url" as="xs:string"/>
-        <xsl:variable name="parts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
 
-        <xsl:variable name="book" select="$parts[1]"/>
+        <xsl:choose>
+            <xsl:when test="matches($url, $bibleRefPattern)">
+                <xsl:sequence select="f:tokenize-common-bible-ref($url)"/>
+            </xsl:when>
+            <xsl:when test="matches($url, $bibleRefChapterRangePattern)">
+                <xsl:sequence select="f:tokenize-bible-ref-chapter-range($url)"/>
+            </xsl:when>
+            <xsl:when test="matches($url, $bibleRefChapterVerseRangePattern)">
+                <xsl:sequence select="f:tokenize-bible-ref-chapter-verse-range($url)"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:localize-bible-book-title" as="xs:string">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="book" as="xs:string?"/>
+
         <xsl:variable name="messageId" select="'bible.' || $bibleBooks(lower-case($book))"/>
         <xsl:if test="not($bibleBooks(lower-case($book)))">
             <xsl:message expand-text="yes">{f:log-error('Unknown Bible book &quot;{2}&quot; in reference &quot;{1}&quot;', ($url, $book))}</xsl:message>
         </xsl:if>
 
-        <xsl:variable name="bookTitle" select="if (f:is-message-available($messageId)) then f:message($messageId) else f:message('msgUnknownBibleBook')"/>
+        <xsl:sequence select="if (f:is-message-available($messageId)) then f:message($messageId) else f:message('msgUnknownBibleBook')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:tokenize-common-bible-ref" as="map(xs:string, xs:string?)">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:variable name="parts" select="tokenize(replace($url, $bibleRefPattern, '$1,$2,$3,$4,$5'), ',')"/>
 
         <xsl:map>
             <xsl:map-entry key="'book'" select="$parts[1]"/>
@@ -397,25 +421,57 @@
             <xsl:map-entry key="'verse'" select="$parts[3]"/>
             <xsl:map-entry key="'toVerse'" select="$parts[4]"/>
             <xsl:map-entry key="'edition'" select="$parts[5]"/>
-            <xsl:map-entry key="'bookTitle'" select="$bookTitle"/>
+            <xsl:map-entry key="'bookTitle'" select="f:localize-bible-book-title($url, $parts[1])"/>
         </xsl:map>
     </xsl:function>
 
+    <xsl:function name="f:tokenize-bible-ref-chapter-range" as="map(xs:string, xs:string?)">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:variable name="parts" select="tokenize(replace($url, $bibleRefChapterRangePattern, '$1,$2,$3,$4'), ',')"/>
+
+        <xsl:map>
+            <xsl:map-entry key="'book'" select="$parts[1]"/>
+            <xsl:map-entry key="'chapter'" select="$parts[2]"/>
+            <xsl:map-entry key="'toChapter'" select="$parts[3]"/>
+            <xsl:map-entry key="'edition'" select="$parts[4]"/>
+            <xsl:map-entry key="'bookTitle'" select="f:localize-bible-book-title($url, $parts[1])"/>
+        </xsl:map>
+    </xsl:function>
+
+    <xsl:function name="f:tokenize-bible-ref-chapter-verse-range" as="map(xs:string, xs:string?)">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:variable name="parts" select="tokenize(replace($url, $bibleRefChapterVerseRangePattern, '$1,$2,$3,$4,$5,6'), ',')"/>
+
+        <xsl:map>
+            <xsl:map-entry key="'book'" select="$parts[1]"/>
+            <xsl:map-entry key="'chapter'" select="$parts[2]"/>
+            <xsl:map-entry key="'verse'" select="$parts[3]"/>
+            <xsl:map-entry key="'toChapter'" select="$parts[4]"/>
+            <xsl:map-entry key="'toVerse'" select="$parts[5]"/>
+            <xsl:map-entry key="'edition'" select="$parts[6]"/>
+            <xsl:map-entry key="'bookTitle'" select="f:localize-bible-book-title($url, $parts[1])"/>
+        </xsl:map>
+    </xsl:function>
 
     <xsl:function name="f:title-for-bible-link" as="xs:string">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:variable name="parts" select="f:tokenize-bible-ref($url)" as="map(xs:string, xs:string?)"/>
 
-        <xsl:value-of select="f:format-message(
-                if ($parts('toVerse'))
-                then 'msgLinkToBibleBookChapterVerseToVerse'
-                else if ($parts('verse'))
-                     then 'msgLinkToBibleBookChapterVerse'
-                     else if ($parts('chapter'))
-                          then 'msgLinkToBibleBookChapter'
-                          else 'msgLinkToBibleBook',
-                $parts)"/>
+        <xsl:variable name="messageTemplate" select="
+            if ($parts('chapter') and $parts('toChapter') and $parts('verse') and $parts('toVerse'))
+            then 'msgLinkToBibleBookChapterVerseToChapterVerse'
+            else if ($parts('chapter') and $parts('toChapter'))
+                 then 'msgLinkToBibleBookChapterToChapter'
+                 else if ($parts('chapter') and $parts('verse') and $parts('toVerse'))
+                      then 'msgLinkToBibleBookChapterVerseToVerse'
+                      else if ($parts('chapter') and $parts('verse'))
+                           then 'msgLinkToBibleBookChapterVerse'
+                           else if ($parts('chapter'))
+                                then 'msgLinkToBibleBookChapter'
+                                else 'msgLinkToBibleBook'"/>
+
+        <xsl:value-of select="f:format-message($messageTemplate, $parts)"/>
     </xsl:function>
 
 
@@ -434,14 +490,18 @@
             <xsl:message expand-text="yes">{f:log-warning('No edition of Bible text known in language &quot;{1}&quot;.', ($lang))}</xsl:message>
         </xsl:if>
 
-        <xsl:variable name="reference" as="xs:string" select="
-            $parts('book') || (if ($parts('chapter')) 
-                then ' ' || $parts('chapter') || (if ($parts('verse'))
-                    then ':' || $parts('verse') || (if ($parts('toVerse'))
-                        then '-' || $parts('toVerse')
-                        else '')
-                    else '')
-                else '')"/>
+        <xsl:variable name="reference" select="
+            if ($parts('chapter') and $parts('toChapter') and $parts('verse') and $parts('toVerse'))
+            then $parts('book') || ' ' || $parts('chapter') || ':' || $parts('verse') || '-' || $parts('toChapter') || ':' || $parts('toVerse')
+            else if ($parts('chapter') and $parts('toChapter'))
+                 then $parts('book') || ' ' || $parts('chapter') || '-' || $parts('toChapter')
+                 else if ($parts('chapter') and $parts('verse') and $parts('toVerse'))
+                      then $parts('book') || ' ' || $parts('chapter') || ':' || $parts('verse') || '-' || $parts('toVerse')
+                      else if ($parts('chapter') and $parts('verse'))
+                           then $parts('book') || ' ' || $parts('chapter') || ':' || $parts('verse')
+                           else if ($parts('chapter'))
+                                then $parts('book') || ' ' || $parts('chapter')
+                                else $parts('book')"/>
 
         <!-- Alternative sites 
         
