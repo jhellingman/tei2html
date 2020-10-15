@@ -95,7 +95,12 @@ while (<INPUTFILE>) {
 
         if ($sameAs ne '') {
             # Lookup sequence number of original note.
-            print OUTPUTFILE "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
+            my $seqNumber = $mapNoteIdToSeqNumber{$sameAs};
+            if (defined $seqNumber) {
+                print OUTPUTFILE "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
+            } else {
+                print STDERR "WARNING: Note with id $sameAs not found (assumed to be earlier in the text.)\n";
+            }
         } elsif ($notePlace eq 'margin' || $notePlace eq 'left' || $notePlace eq 'right' || $notePlace eq 'cut-in-left' || $notePlace eq 'cut-in-right') {
             print OUTPUTFILE "[$noteText] ";
         } else {

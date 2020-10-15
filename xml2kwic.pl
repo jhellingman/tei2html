@@ -1,4 +1,4 @@
-# Perl script to test the the tei2wl.xsl stylesheet with Saxon.
+# Perl script to run the tei2wl.xsl stylesheet with Saxon.
 
 use strict;
 use warnings;

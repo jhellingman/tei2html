@@ -125,7 +125,9 @@
         <list>
             <item><xref id="link.jd" url="bib:Jdg 1:19">Chariots of iron.</xref></item>
             <item><xref id="link.hb" url="bib:Heb 6:18@KJV">Impossible to lie.</xref></item>
+            <item><xref id="link.lk" url="bib:Lk 1-2">Nothing is impossible.</xref></item>
             <item><xref id="link.lk" url="bib:Lk 1:37">Nothing is impossible.</xref></item>
+            <item><xref id="link.lk" url="bib:Lk 1:37-2:12">Nothing is impossible.</xref></item>
             <item><xref id="link.mc" url="bib:1 Mc 1:2">Killed every king.</xref></item>
             <item><xref id="link.xx" url="bib:Xxx 1:2">(dead link).</xref></item>
             <item><xref id="link.re" url="bib:Re 19:1-12">Revelation 19:1-12.</xref></item>
@@ -133,43 +135,55 @@
             <item><xref id="link.q2" url="qur:2:42">True or False.</xref></item>
         </list>
       </x:context>
-      <x:expect label="will return expanded HTML links to those target (and some warnings on the console)">
+      <x:expect label="will return expanded HTML links to those targets (and some warnings on the console)">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="...">
               <a id="link.jd"
                  class="biblink link.jd"
                  title="Reference to the Bible: Judges 1:19"
-                 href="https://www.biblegateway.com/passage/?search=Jdg%201:19&amp;version=NRSV">Chariots of iron.</a>
+                 href="https://classic.biblegateway.com/passage/?search=Jdg%201:19&amp;version=NRSV">Chariots of iron.</a>
            </li>
            <li id="...">
               <a id="link.hb"
                  class="biblink link.jd"
                  title="Reference to the Bible: Hebrews 6:18"
-                 href="https://www.biblegateway.com/passage/?search=Heb%206:18&amp;version=KJV">Impossible to lie.</a>
+                 href="https://classic.biblegateway.com/passage/?search=Heb%206:18&amp;version=KJV">Impossible to lie.</a>
+           </li>
+           <li id="...">
+              <a id="link.lk"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Luke, chapter 1-2"
+                 href="https://classic.biblegateway.com/passage/?search=Lk%201-2&amp;version=NRSV">Nothing is impossible.</a>
            </li>
            <li id="...">
               <a id="link.lk"
                  class="biblink link.jd"
                  title="Reference to the Bible: Luke 1:37"
-                 href="https://www.biblegateway.com/passage/?search=Lk%201:37&amp;version=NRSV">Nothing is impossible.</a>
+                 href="https://classic.biblegateway.com/passage/?search=Lk%201:37&amp;version=NRSV">Nothing is impossible.</a>
+           </li>
+           <li id="...">
+              <a id="link.lk"
+                 class="biblink link.jd"
+                 title="Reference to the Bible: Luke 1:37-2:12"
+                 href="https://classic.biblegateway.com/passage/?search=Lk%201:37-2:12&amp;version=6">Nothing is impossible.</a>
            </li>
            <li id="...">
               <a id="link.mc"
                  class="biblink link.jd"
                  title="Reference to the Bible: 1 Maccabees 1:2"
-                 href="https://www.biblegateway.com/passage/?search=1%20Mc%201:2&amp;version=NRSV">Killed every king.</a>
+                 href="https://classic.biblegateway.com/passage/?search=1%20Mc%201:2&amp;version=NRSV">Killed every king.</a>
            </li>
            <li id="...">
               <a id="link.xx"
                  class="biblink link.jd"
-                 title="Reference to the Bible: Unknown Book 1:2"
-                 href="https://www.biblegateway.com/passage/?search=Xxx%201:2&amp;version=NRSV">(dead link).</a>
+                 title="Reference to the Bible: Unknown Bible book 1:2"
+                 href="https://classic.biblegateway.com/passage/?search=Xxx%201:2&amp;version=NRSV">(dead link).</a>
            </li>
            <li id="...">
               <a id="link.re"
                  class="biblink link.jd"
                  title="Reference to the Bible: Revelation 19:1-12"
-                 href="https://www.biblegateway.com/passage/?search=Re%2019:1-12&amp;version=NRSV">Revelation 19:1-12.</a>
+                 href="https://classic.biblegateway.com/passage/?search=Re%2019:1-12&amp;version=NRSV">Revelation 19:1-12.</a>
            </li>
            <li id="...">
               <a id="link.q1"

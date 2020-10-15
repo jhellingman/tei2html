@@ -1,6 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
 
-<xsl:stylesheet version="3.0"
+    <!ENTITY rsquo      "&#x2019;">
+
+]><xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:tmp="urn:temporary-nodes"
@@ -270,6 +272,67 @@
         </xsl:choose>
     </xsl:function>
 
+
+    <!-- References to the plays of Shakespeare have the following format:
+            'shaks:'<play> <act>('.'<scene>('.'<line>)?)?('@'<edition>)?
+
+         (See https://internetshakespeare.uvic.ca/Foyer/guidelines/abbreviations/)
+    -->
+
+    <xsl:variable name="playsShakespeare" select="map{
+        '1H4'   : 'The First Part of King Henry the Fourth',
+        '1H6'   : 'The First Part of King Henry the Sixth',
+        '2H4'   : 'The Second Part of King Henry the Fourth',
+        '2H6'   : 'The Second Part of King Henry the Sixth',
+        '3H6'   : 'The Third Part of King Henry the Sixth',
+        'Ado'   : 'Much Ado About Nothing',
+        'Ant'   : 'Antony and Cleopatra',
+        'AWW'   : 'All&rsquo;s Well That Ends Well',
+        'AYL'   : 'As You Like It',
+        'Cor'   : 'Coriolanus',
+        'Cym'   : 'Cymbeline',
+        'Edw'   : 'Edward III',
+        'Err'   : 'The Comedy of Errors',
+        'H5'    : 'King Henry the Fifth',
+        'H8'    : 'King Henry the Eighth',
+        'Ham'   : 'Hamlet',
+        'JC'    : 'Julius Caesar',
+        'Jn'    : 'King John',
+        'LC'    : 'A Lover&rsquo;s Complaint',
+        'LLL'   : 'Love&rsquo;s Labour&rsquo;s Lost',
+        'Lr'    : 'King Lear',
+        'Luc'   : 'The Rape of Lucrece',
+        'Mac'   : 'Macbeth',
+        'MM'    : 'Measure for Measure',
+        'MND'   : 'A Midsummer Night&rsquo;s Dream',
+        'MV'    : 'The Merchant of Venice',
+        'Oth'   : 'Othello',
+        'Per'   : 'Pericles',
+        'PhT'   : 'The Phoenix and Turtle',
+        'PP'    : 'The Passionate Pilgrim',
+        'R2'    : 'King Richard the Second',
+        'R3'    : 'King Richard the Third',
+        'Rom'   : 'Romeo and Juliet',
+        'Shr'   : 'The Taming of the Shrew',
+        'Son'   : 'Sonnets',
+        'STM'   : 'Sir Thomas More',
+        'TGV'   : 'The Two Gentlemen of Verona',
+        'Tim'   : 'Timon of Athens',
+        'Tit'   : 'Titus Andronicus',
+        'Tmp'   : 'The Tempest',
+        'TN'    : 'Twelfth Night',
+        'TNK'   : 'The Two Noble Kinsmen',
+        'Tro'   : 'Troilus and Cressida',
+        'Ven'   : 'Venus and Adonis',
+        'Wiv'   : 'The Merry Wives of Windsor',
+        'WT'    : 'The Winter&rsquo;s Tale'
+        }"/>
+
+    <xsl:variable name="editionsShakespeare" select="map{
+        'F1'    : 'First Folio ed. (1623)',
+        'F2'    : 'Second Folio ed. (1632)',
+        'Q'     : 'Quarto ed.'
+        }"/>
 
     <!-- Bible references have the following formats:
             'bib:'<book> <chapter>(':'<verse>('-'<verse>)?)?('@'<edition>)?
