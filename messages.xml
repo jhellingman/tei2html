@@ -873,6 +873,7 @@
 		<msg:message name="msgOccurrences">Vorkommen</msg:message>
 		<msg:message name="msgOccurrences.abbr">Vork.</msg:message>
 		<msg:message name="msgValues">Werte</msg:message>
+		<msg:message name="msgTranslator">Übersetzer</msg:message>
 	
 	    <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
         <msg:message name="msgLibraryOfCongress">Kongressbibliothek</msg:message>

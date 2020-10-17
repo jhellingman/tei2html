@@ -60,6 +60,7 @@ my $configurationFile   = "tei2html.config";
 my $pageWidth           = 72;
 my $makeZip             = 0;
 my $noTranscription     = 0;
+my $noTranscriptionPopups = 0;
 my $force               = 0;
 my $debug               = 0;
 my $trace               = 0;
@@ -96,6 +97,7 @@ GetOptions(
     'heatmap' => \$makeHeatMap,
     'epubversion=s' => \$epubVersion,
     'notranscription' => \$noTranscription,
+    'notranscriptionpopups' => \$noTranscriptionPopups,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
     'kwiccasesensitive=s' => \$kwicCaseSensitive,
@@ -137,6 +139,7 @@ if ($showHelp == 1) {
     print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n";
     print "    q         Print this help and exit.\n";
     print "    notranscription       Don't use transcription schemes.\n";
+    print "    notranscriptionpopups Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
     print "    debug                 Debug mode.\n";
     print "    trace                 Trace mode.\n";
     print "    profile               Profile mode.\n";
@@ -525,12 +528,17 @@ sub makeText($$) {
         return;
     }
 
+    my $transcribedFile = $filename;
+    if ($useUnicode == 1) {
+        $transcribedFile = transcribe($filename, 1);
+    }
+
     my $tmpFile1 = temporaryFile('txt', '.txt');
     my $tmpFile2 = temporaryFile('txt', '.txt');
 
-    print "Create text version...\n";
-    system ("perl $toolsdir/extractNotes.pl $filename");
-    system ("cat $filename.out $filename.notes > $tmpFile1");
+    print "Create text version from $transcribedFile...\n";
+    system ("perl $toolsdir/extractNotes.pl $transcribedFile");
+    system ("cat $transcribedFile.out $transcribedFile.notes > $tmpFile1");
     system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $tmpFile1 > $tmpFile2");
 
     if ($useUnicode == 1) {
@@ -548,8 +556,12 @@ sub makeText($$) {
         system ("$gutcheck Processed/$textFile > $basename-final.gutcheck");
     }
 
-    $debug || unlink("$filename.out");
-    $debug || unlink("$filename.notes");
+    if ($filename ne $transcribedFile) {
+        $debug || unlink ($transcribedFile);
+    }
+
+    $debug || unlink("$transcribedFile.out");
+    $debug || unlink("$transcribedFile.notes");
     $debug || unlink($tmpFile1);
     $debug || unlink($tmpFile2);
 
@@ -813,7 +825,7 @@ sub runChecks($) {
     }
     print "Run checks on $filename.\n";
 
-    my $transcribedFile = transcribe($filename);
+    my $transcribedFile = transcribe($filename, $noTranscriptionPopups);
 
     my $positionInfoFilename = $basename . '-pos.' . $format;
 
@@ -831,8 +843,8 @@ sub runChecks($) {
 
         tei2xml($tmpFile, $basename . '-pos.xml');
         $positionInfoFilename = $basename . '-pos.xml';
-        $debug || unlink($tmpFile);
-        $debug || unlink($tmpFile . '.err');
+        $debug || unlink ($tmpFile);
+        $debug || unlink ($tmpFile . '.err');
     }
 
     my $xmlFilename = temporaryFile('checks', '.xml');
@@ -984,7 +996,7 @@ sub tei2xml($$) {
         $tmpFile0 = $tmpFileA;
     }
 
-    $tmpFile0 = transcribe($tmpFile0);
+    $tmpFile0 = transcribe($tmpFile0, $noTranscriptionPopups);
 
     print "Check SGML...\n";
     my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
@@ -1022,11 +1034,20 @@ sub tei2xml($$) {
 #
 # transcribe -- transcribe foreign scripts in special notations to entities.
 #
-sub transcribe($) {
+sub transcribe($$) {
     my $currentFile = shift;
+    my $noPopups = shift;
 
     if ($noTranscription == 0) {
-        $currentFile = addTranscriptions($currentFile);
+        if ($noPopups == 0) {
+            $currentFile = addTranscriptions($currentFile);
+        } else {
+            $currentFile = transcribeNotation($currentFile, '<EL>',  'Greek',                 "$patcdir/greek/gr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<GR>',  'Greek (classical)',     "$patcdir/greek/gr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<CY>',  'Cyrillic',              "$patcdir/cyrillic/cy2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<RU>',  'Russian',               "$patcdir/cyrillic/cy2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<SR>',  'Serbian',               "$patcdir/cyrillic/sr2sgml.pat");
+        }
 
         $currentFile = transcribeNotation($currentFile, '<AR>',  'Arabic',                "$patcdir/arabic/ar2sgml.pat");
         $currentFile = transcribeNotation($currentFile, '<UR>',  'Urdu',                  "$patcdir/arabic/ur2sgml.pat");
@@ -1071,13 +1092,13 @@ sub addTranscriptions($) {
     # Check for presence of Greek or Cyrillic
     my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<RUX>\\|<SR>\" $currentFile");
     if ($containsGreek == 0) {
-        my $tmpFile1 = temporaryFile('greek', '.xml');
-        my $tmpFile2 = temporaryFile('greek', '.xml');
-        my $tmpFile3 = temporaryFile('greek', '.xml');
-        my $tmpFile4 = temporaryFile('greek', '.xml');
-        my $tmpFile5 = temporaryFile('greek', '.xml');
-        my $tmpFile6 = temporaryFile('greek', '.xml');
-        my $tmpFile7 = temporaryFile('greek', '.xml');
+        my $tmpFile1 = temporaryFile('transcribe', '.xml');
+        my $tmpFile2 = temporaryFile('transcribe', '.xml');
+        my $tmpFile3 = temporaryFile('transcribe', '.xml');
+        my $tmpFile4 = temporaryFile('transcribe', '.xml');
+        my $tmpFile5 = temporaryFile('transcribe', '.xml');
+        my $tmpFile6 = temporaryFile('transcribe', '.xml');
+        my $tmpFile7 = temporaryFile('transcribe', '.xml');
 
         print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");

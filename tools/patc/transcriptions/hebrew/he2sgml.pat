@@ -8,7 +8,7 @@
 
 "</HE>"  0 "&lrm;</foreign>"
 "</HE2>" 0 "&lrm;"
-"<"		 2 "<"
+"<"      2 "<"
 
 " "      p " "                  % space.
 
@@ -40,49 +40,49 @@
 "S"      p "&heshin;"           % ש
 "t"      p "&hetav;"            % ת
 
-"^e"     p "&hesheva;"          % ְ
-"e:"     p "&hehatafsegol;"     % ֱ
-"a:"     p "&hehatafpatah;"     % ֲ
-"o:"     p "&hehatafqamats;"    % ֳ
-"i"      p "&hehiriq;"          % ִ
-"E"      p "&hetsere;"          % ֵ
-"e"      p "&hesegol;"          % ֶ
-"a"      p "&hepatah;"          % ַ
-"o"      p "&heqamats;"         % ָ
-"O"      p "&heholam;"          % ֹ
-"u"      p "&hequbuts;"         % ֻ
-"."      p "&hedagesh;"         % ּ
+"^e"     p "&hesheva;"          %  ְ
+"e:"     p "&hehatafsegol;"     %  ֱ
+"a:"     p "&hehatafpatah;"     %  ֲ
+"o:"     p "&hehatafqamats;"    %  ֳ
+"i"      p "&hehiriq;"          %  ִ
+"E"      p "&hetsere;"          %  ֵ
+"e"      p "&hesegol;"          %  ֶ
+"a"      p "&hepatah;"          %  ַ
+"o"      p "&heqamats;"         %  ָ
+"O"      p "&heholam;"          %  ֹ
+"u"      p "&hequbuts;"         %  ֻ
+"."      p "&hedagesh;"         %  ּ
 
 "_"      p "&hemaqaf;"          % ־
 
 "S/"     p "&heshin;&heshindot;"    % שׁ
 "S\\"    p "&heshin;&hesindot;"     % שׂ
 
-"#"      p "&#x05F3;"    		% ׳
-"\""     p "&#x05F4;"     		% ״
+"#"      p "&#x05F3;"           % ׳
+"\""     p "&#x05F4;"           % ״
 
-"{.}"    p "."		% 
-"{,}"    p ","		% 
-"{:}"    p ":"		% 
-"{'}"    p "'"     	% 
-"{\"}"   p "\""   	% 
-"{/}"    p "/"   	% 
-"{[}"    p "["   	% 
-"{]}"    p "]"   	% 
-"{(}"    p "("   	% 
-"{)}"    p ")"   	% 
+"{.}"    p "."
+"{,}"    p ","
+"{:}"    p ":"
+"{'}"    p "'"
+"{\"}"   p "\""
+"{/}"    p "/"
+"{[}"    p "["
+"{]}"    p "]"
+"{(}"    p "("
+"{)}"    p ")"
 "--"     p "&mdash;"
 
-"'="     p "&#xFB21;"      		% wide alef
-"d="     p "&#xFB22;"      		% wide dalet
-"h="     p "&#xFB23;"      		% wide he
-"k="     p "&#xFB24;"      		% wide kaf
-"l="     p "&#xFB25;"      		% wide lamed
-"m/="    p "&#xFB26;"      		% wide final mem
-"r="     p "&#xFB27;"      		% wide resh
-"t="     p "&#xFB28;"      		% wide tav
+"'="     p "&#xFB21;"           % wide alef
+"d="     p "&#xFB22;"           % wide dalet
+"h="     p "&#xFB23;"           % wide he
+"k="     p "&#xFB24;"           % wide kaf
+"l="     p "&#xFB25;"           % wide lamed
+"m/="    p "&#xFB26;"           % wide final mem
+"r="     p "&#xFB27;"           % wide resh
+"t="     p "&#xFB28;"           % wide tav
 
-"\n"	p "\n"
+"\n"    p "\n"
 
 % unused characters should give error message
 
@@ -123,14 +123,14 @@
 "8"     p "8"
 "9"     p "9"
 
-"&"		3 "&"
+"&"     3 "&"
 
 @patterns 2
 
-">"		1 ">"
+">"     1 ">"
 
 @patterns 3
 
-";"		1 ";"
+";"     1 ";"
 
 @end
