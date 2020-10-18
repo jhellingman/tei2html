@@ -543,7 +543,8 @@ sub makeText($$) {
 
     if ($useUnicode == 1) {
         # Use our own script to wrap lines, as fmt cannot deal with unicode text.
-        system ("perl -S wraplines.pl $tmpFile2 > $textFile");
+        # system ("perl -S wraplines.pl $tmpFile2 > $textFile");
+        system ("perl -S wrapLinesUnicode.pl -w=$pageWidth $tmpFile2 > $textFile");
     } else {
         # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
         system ("fmt -sw$pageWidth $tmpFile2 > $textFile");
