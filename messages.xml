@@ -40,7 +40,7 @@
 
         -->
 		
-		<msg:message name="msgQrCode">QR-code</msg:message>
+		<msg:message name="msgQrCode" help="A QR code is a black and white graphic that contains computer-readable data.">QR-code</msg:message>
 		<msg:message name="msgQrCodePgUrl">QR-code of Project Gutenberg URL</msg:message>
 		<msg:message name="msgTagUsageOverview">Overview of TEI Elements Used</msg:message>
 		<msg:message name="msgAttributes">Attributes</msg:message>
@@ -62,8 +62,8 @@
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
-        <msg:message name="msgExpansion">Expansion</msg:message>
-        <msg:message name="msgExpansionNotAvailable">Expansion not available</msg:message>
+        <msg:message name="msgExpansion" help="An expansion is the fully written form of an abbreviation.">Expansion</msg:message>
+        <msg:message name="msgExpansionNotAvailable" help="An expansion is the fully written form of an abbreviation.">Expansion not available</msg:message>
         <msg:message name="msgLinkToInternetArchive">Link to the Internet Archive</msg:message>
 
         <msg:message name="msgProjectGutenberg">Project Gutenberg</msg:message>
@@ -1730,13 +1730,22 @@
     <!--==#############################################################==-->
     <!-- Afrikaans translation -->
 	
-	<msg:messages xml:lang="af" fallback="nl">
+	<msg:messages xml:lang="af" fallback="en">
 
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="en">Engels</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="es">Spaans</msg:message>
 
+		<msg:message name="msgListOfIllustrations">Lys van illustrasies</msg:message>
+		<msg:message name="msgGuide">Wegwyser</msg:message>
+		<msg:message name="msgBodyMatter">Hoofteks</msg:message>
+		<msg:message name="msgCover">Omslag</msg:message>
+		<msg:message name="msgTableOfContents">Inhoudsopgawe</msg:message>
+		<msg:message name="msgNext">Volgende</msg:message>
+		<msg:message name="msgText">Teks</msg:message>
+		<msg:message name="msgKeywords">Sleutelwoorde</msg:message>
+		<msg:message name="msgTitlePage">Titelblad</msg:message>
 		<msg:message name="msgPage">Bladsy</msg:message>
 		<msg:message name="msgToc">Inhoud</msg:message>
 		<msg:message name="msgAbbreviation">Afkorting</msg:message>
@@ -1766,7 +1775,7 @@
 		<msg:message name="msgSource">Bron</msg:message>
 		<msg:message name="msgSourcePublicationDate">Oorspronklike publikasiedatum</msg:message>
 		<msg:message name="msgTitle">Titel</msg:message>
-		<msg:message name="msgURL">URL</msg:message>
+		<msg:message name="msgUrl">URL</msg:message>
 		<msg:message name="msgNotApplicable">Nie van toepassing nie</msg:message>
 		
 	</msg:messages>

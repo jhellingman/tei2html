@@ -22,7 +22,7 @@
     </xd:doc>
 
     <xsl:param name="srclang" select="'en'"/>
-    <xsl:param name="destlang" select="'es'"/>
+    <xsl:param name="destlang" select="'nl'"/>
 
     <xsl:strip-space elements="*"/>
 
