@@ -11,9 +11,9 @@
                rows="6"
                headrows="2"
                cols="3">
-            <column/>
-            <column/>
-            <column rend="text-align(right)"/>
+            <column id="c1"/>
+            <column id="c2"/>
+            <column id="c3" rend="text-align(right)"/>
             <row id="r1" role="label">
                 <cell id="c1.1" row="1" cols="1" rows="2" role="data" col="1">No.</cell>
                 <cell id="c1.2" row="1" cols="1" rows="1" role="data" col="2">Type.</cell>
@@ -61,14 +61,14 @@
                     <td id="c1.2"
                         class="cellHeadTop">Type.</td>
                     <td id="c1.3"
-                        class="xd32e4 cellHeadRight cellHeadTop">Quantity.</td>
+                        class="c3 cellHeadRight cellHeadTop">Quantity.</td>
                  </tr>
                  <tr class="unit"
                      id="r2">
                     <td id="c2.2"
                         class="cellHeadBottom" />
                     <td id="c2.3"
-                        class="xd32e4 cellHeadRight cellHeadBottom">kg</td>
+                        class="c3 cellHeadRight cellHeadBottom">kg</td>
                  </tr>
               </thead>
               <tbody>
@@ -77,21 +77,21 @@
                         class="cellLeft">1</td>
                     <td id="c2.2">Apples</td>
                     <td id="c3.3"
-                        class="xd32e4 cellRight">12.4</td>
+                        class="c3 cellRight">12.4</td>
                  </tr>
                  <tr id="r4">
                     <td id="c4.1"
                         class="cellLeft">2</td>
                     <td id="c4.2">Bananas</td>
                     <td id="c4.3"
-                        class="xd32e4 cellRight">22.8</td>
+                        class="c3 cellRight">22.8</td>
                  </tr>
                  <tr id="r5">
                     <td id="c5.1"
                         class="cellLeft">3</td>
                     <td id="c5.2">Melon</td>
                     <td id="c5.3"
-                        class="xd32e4 cellRight">4.6</td>
+                        class="c3 cellRight">4.6</td>
                  </tr>
                  <tr id="r6">
                     <td id="c6.1"
@@ -99,7 +99,7 @@
                     <td id="c6.2"
                         class="cellBottom">Grapes</td>
                     <td id="c6.3"
-                        class="xd32e4 cellRight cellBottom">9.2</td>
+                        class="c3 cellRight cellBottom">9.2</td>
                  </tr>
               </tbody>
            </table>

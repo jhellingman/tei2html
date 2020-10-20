@@ -88,8 +88,8 @@
     <xd:doc>
         <xd:short>Handle footnotes.</xd:short>
         <xd:detail>Handle footnotes. This template handles the placement of the footnote marker
-        only. Unless there is an explicit request for a footnote section, tei2html moves the 
-        footnote content to the end of the <code>div1</code> element they appear in (but is careful 
+        only. Unless there is an explicit request for a footnote section, tei2html moves the
+        footnote content to the end of the <code>div1</code> element they appear in (but is careful
         to avoid this in <code>div1</code> elements embedded in quoted texts).</xd:detail>
     </xd:doc>
 
@@ -189,9 +189,10 @@
     <xsl:function name="f:last-child-is-block-element" as="xs:boolean">
         <xsl:param name="element" as="element()"/>
         <xsl:variable name="lastChild" select="($element/node())[last()]"/>
-        <xsl:sequence select="exists($lastChild/self::table) 
-                              or exists($lastChild/self::list) 
-                              or exists($lastChild/self::lg)"/>
+        <xsl:sequence select="exists($lastChild/self::table)
+                              or exists($lastChild/self::list)
+                              or exists($lastChild/self::lg)
+                              or exists($lastChild/self::q)"/>
     </xsl:function>
 
 
@@ -274,7 +275,7 @@
 
     <xd:doc>
         <xd:short>Calculate the footnote number.</xd:short>
-        <xd:detail>Calculate the footnote number. This number is based on the position of the note 
+        <xd:detail>Calculate the footnote number. This number is based on the position of the note
         in the <code>div</code>, <code>div0</code> or <code>div1</code> element it occurs in.
         Take care to ignore <code>div1</code> elements that appear in embedded quoted text.</xd:detail>
     </xd:doc>
@@ -338,8 +339,8 @@
     <xd:doc>
         <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
         <xd:detail>
-            <p>Make explicit references to a footnote (marked with <code>@sameAs</code> or 
-            <code>@type="noteref"</code>) look exactly the same as automatically generated 
+            <p>Make explicit references to a footnote (marked with <code>@sameAs</code> or
+            <code>@type="noteref"</code>) look exactly the same as automatically generated
             footnote references.</p>
         </xd:detail>
     </xd:doc>
@@ -373,10 +374,10 @@
 
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
-        <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with 
-        attribute <code>@place="apparatus"</code>) by placing a marker in the text. These notes are only 
-        included when a <code>divGen</code> element is present, calling for their rendition; a text can 
-        include multiple <code>divGen</code> elements, in which case only the text-critical notes after 
+        <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with
+        attribute <code>@place="apparatus"</code>) by placing a marker in the text. These notes are only
+        included when a <code>divGen</code> element is present, calling for their rendition; a text can
+        include multiple <code>divGen</code> elements, in which case only the text-critical notes after
         the preceding one are included.</xd:detail>
     </xd:doc>
 
@@ -447,10 +448,10 @@
 
     <xd:doc>
         <xd:short>Format apparatus notes as separate paragraphs.</xd:short>
-        <xd:detail>Render the text-critical notes as separate paragraphs in one or more columns. 
-        This uses a table; the order of the notes will be: [1, 2], [3, 4], ... The splitting works 
-        under the assumption that the average length of each note is about the same. A smarter way 
-        of balancing the two columns can only be achieved when actually rendering the columns (in 
+        <xd:detail>Render the text-critical notes as separate paragraphs in one or more columns.
+        This uses a table; the order of the notes will be: [1, 2], [3, 4], ... The splitting works
+        under the assumption that the average length of each note is about the same. A smarter way
+        of balancing the two columns can only be achieved when actually rendering the columns (in
         the browser or otherwise), using the CSS3 multi-column feature.</xd:detail>
     </xd:doc>
 
@@ -548,7 +549,7 @@
         <xd:detail><p>Format apparatus notes as a single block. A complicating factor here is that some of the notes do contain
         paragraphs, and we want to preserve those paragraph breaks, having a multi-paragraph note following the preceding note
         on the same line, start a new line for the following paragraphs of that note, and then have the following note follow the
-        last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list, 
+        last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list,
         indicating where the paragraph breaks should remain, and then group them back into paragraphs.</p>
 
         <p>As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the

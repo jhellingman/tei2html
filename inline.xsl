@@ -615,7 +615,7 @@
             </xsl:for-each>
         </xsl:variable>
 
-        <xsl:variable name="expanString" select="if (not($expanString) or $expanString = '') then f:find-expansion($abbr) else $expanString"/>
+        <xsl:variable name="expanString" select="if (not($expanString) or $expanString = '') then f:find-expansion($abbr[1]) else $expanString"/>
 
         <abbr>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
