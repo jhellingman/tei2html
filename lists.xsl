@@ -214,7 +214,8 @@
     <xsl:template match="itemGroup | list[@type='itemGroup']">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup')"/>
+            <xsl:variable name="numberedItemClass" select="if (item/ab[@type='itemNum']) then ' numberedItem' else ''" as="xs:string"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup' || $numberedItemClass)"/>
 
             <xsl:variable name="this" select="."/>
             <xsl:variable name="count" select="count(item)"/>
