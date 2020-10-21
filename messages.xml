@@ -49,6 +49,8 @@
 		<msg:message name="msgValues">Values</msg:message>
 		<msg:message name="msgFtpLink">Link to FTP server</msg:message>
 		<msg:message name="msgLinkToLibraryOfCongress">Link to Library of Congress record</msg:message>
+		<msg:message name="msgReturnToNoteInText">Return to note in text.</msg:message>
+		<msg:message name="msgReturnToNoteMarkInText">Return to note <msg:param name="mark"/> in text.</msg:message>
 
 		<msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
 		<msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
@@ -874,7 +876,9 @@
 		<msg:message name="msgOccurrences.abbr">Vork.</msg:message>
 		<msg:message name="msgValues">Werte</msg:message>
 		<msg:message name="msgTranslator">Übersetzer</msg:message>
-	
+		<msg:message name="msgReturnToNoteInText">Zurück zur Note im Text.</msg:message>
+		<msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
+
 	    <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
         <msg:message name="msgLibraryOfCongress">Kongressbibliothek</msg:message>
         <msg:message name="msgLibraryThing">LibraryThing</msg:message>
@@ -1193,6 +1197,8 @@
 		<msg:message name="msgOccurrences">Aantal</msg:message>
 		<msg:message name="msgOccurrences.abbr">Aant.</msg:message>
 		<msg:message name="msgValues">Waarden</msg:message>
+		<msg:message name="msgReturnToNoteInText">Ga terug naar noot in tekst.</msg:message>
+		<msg:message name="msgReturnToNoteMarkInText">Ga terug naar noot <msg:param name="mark"/> in tekst.</msg:message>
 
         <msg:message name="msgPassim">Passim</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> gevallen</msg:message>

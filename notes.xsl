@@ -221,14 +221,22 @@
 
         <span class="label">
             <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
-                <xsl:choose>
-                    <xsl:when test="f:is-footnote(.)"><xsl:call-template name="footnote-number"/></xsl:when>
-                    <xsl:otherwise><xsl:value-of select="@n"/></xsl:otherwise>
-                </xsl:choose>
+                <xsl:value-of select="f:note-marker(.)"/>
             </a>
         </span>
         <xsl:text> </xsl:text>
     </xsl:template>
+
+
+    <xsl:function name="f:note-marker" as="xs:string">
+        <xsl:param name="note" as="element(note)"/>
+
+        <xsl:sequence select="if (f:is-footnote($note))
+                              then f:footnote-number($note)
+                              else if ($note/@n)
+                                   then $note/@n
+                                   else ''"/>
+    </xsl:function>
 
 
     <xsl:template match="note" mode="footnote-return-arrow">
@@ -249,22 +257,32 @@
             <!-- Take care to pick the first ancestor for the href, to work correctly with nested footnotes. -->
             <xsl:variable name="note" select="ancestor-or-self::note[1]" as="element(note)"/>
             <xsl:variable name="id" select="$note/@id"/>
+            <xsl:variable name="mark" select="f:note-marker($note)"/>
 
             <xsl:text>&nbsp;</xsl:text>
             <xsl:choose>
                 <!-- Do we have multiple reference to this footnote? -->
                 <xsl:when test="root(.)//note[@sameAs=$id]">
                     <span class="fnarrow">&uparrow;&nbsp;</span>
-                    <a class="fnreturn" href="{f:generate-href($note)}src">a</a>
+                    <a class="fnreturn" href="{f:generate-href($note)}src"
+                       title="{f:format-message('msgReturnToNoteMarkInText', map{'mark': $mark || '(a)'})}">
+                        <xsl:text>a</xsl:text>
+                    </a>
                     <xsl:for-each select="root(.)//note[@sameAs=$id]">
-                        <xsl:text> </xsl:text>
-                        <a class="fnreturn" href="{f:generate-href(.)}src">
+                        <xsl:variable name="letter">
                             <xsl:number value="position() + 1" format="a"/>
+                        </xsl:variable>
+
+                        <xsl:text> </xsl:text>
+                        <a class="fnreturn" href="{f:generate-href(.)}src"
+                           title="{f:format-message('msgReturnToNoteMarkInText', map{'mark': $mark || '(' || $letter || ')'})}">
+                            <xsl:value-of select="$letter"/>
                         </a>
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
-                    <a class="fnarrow" href="{f:generate-href($note)}src">
+                    <a class="fnarrow" href="{f:generate-href($note)}src"
+                       title="{f:format-message('msgReturnToNoteMarkInText', map{'mark': $mark})}">
                         <xsl:text>&uparrow;</xsl:text>
                     </a>
                 </xsl:otherwise>
@@ -294,6 +312,14 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:footnote-number">
+        <xsl:param name="note" as="element(note)"/>
+        <xsl:for-each select="$note">
+            <xsl:call-template name="footnote-number"/>
+        </xsl:for-each>
+    </xsl:function>
 
 
     <xsl:template match="*" mode="footfirst footlast">
