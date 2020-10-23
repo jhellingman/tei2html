@@ -120,7 +120,7 @@
             <xsl:copy-of select="f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
+            <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>
@@ -225,8 +225,25 @@
                     <xsl:apply-templates/>
                 </xsl:otherwise>
             </xsl:choose>
+            <!-- <xsl:copy-of select="f:handle-last-cell-in-footnote(.)"/> -->
         </td>
     </xsl:template>
+
+
+    <!-- TODO: this should also be inside the last paragraph in the cell, if the cell has paragraphs -->
+    <xsl:function name="f:handle-last-cell-in-footnote">
+        <xsl:param name="cell" as="element(cell)"/>
+        <xsl:variable name="row" as="element(row)" select="$cell/parent::row"/>
+        <xsl:if test="not($cell/following-sibling::cell) and not($row/following-sibling::row)">
+            <!-- We are a table in a footnote, the table is the last element of the footnote, and this is the last cell of the table -->
+            <xsl:if test="f:inside-footnote($cell)">
+                <xsl:variable name="note" select="$cell/ancestor::note[f:is-footnote(.)][1]"/>
+                <xsl:if test="f:last-child-is-block-element($note)">
+                    <xsl:apply-templates select="$note" mode="footnote-return-arrow"/>
+                </xsl:if>
+            </xsl:if>
+        </xsl:if>
+    </xsl:function>
 
 
     <xd:doc>
@@ -428,7 +445,7 @@
             <xsl:copy-of select="f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="f:has-rend-value(@rend, 'summary') and $outputformat != 'epub'">
+            <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>

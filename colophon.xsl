@@ -464,7 +464,7 @@
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
         <table class="correctionTable">
-            <xsl:if test="$outputformat != 'epub'">
+            <xsl:if test="not(f:is-epub())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
             </xsl:if>
             <tr>
@@ -641,7 +641,7 @@
         <p><xsl:value-of select="f:message('msgAbbreviationOverview')"/></p>
 
         <table class="abbreviationtable">
-            <xsl:if test="$outputformat != 'epub'">
+            <xsl:if test="not(f:is-epub())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgAbbreviationOverview')"/></xsl:attribute>
             </xsl:if>
             <tr>

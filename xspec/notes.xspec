@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x:description [
     <!ENTITY nbsp       "&#160;">
+    <!ENTITY deg        "&#176;">
     <!ENTITY uparrow    "&#8593;">
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
@@ -34,9 +35,11 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
-                     </p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -65,15 +68,21 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
-                     </p>
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.2" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
-                     </p>
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.3" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
-                     </p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                     <div id="n.2">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                     <div id="n.3">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
+                         </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -102,12 +111,16 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
-                     </p>
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.3" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
-                     </p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                     <div id="n.3">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                         </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -136,16 +149,20 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label">
-                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
-                            <a class="fnreturn" href="#n.1src" title="Return to note 1(a) in text.">a</a>
-                            <x:text> </x:text>
-                            <a class="fnreturn" href="#n.1bsrc" title="Return to note 1(b) in text.">b</a>
-                     </p>
-                     <p class="footnote">
-                        <span class="label"><a class="noteref" id="n.3" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
-                     </p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label">
+                                <a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
+                                <a class="fnreturn" href="#n.1src" title="Return to note 1(a) in text.">a</a>
+                                <x:text> </x:text>
+                                <a class="fnreturn" href="#n.1bsrc" title="Return to note 1(b) in text.">b</a>
+                         </p>
+                     </div>
+                     <div id="n.3">
+                         <p class="footnote">
+                            <span class="label"><a class="noteref" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                         </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -170,10 +187,12 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label">
-                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
-                     </p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label">
+                                <a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -198,11 +217,13 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
+                    <div id="n.1">
                      <p class="footnote">
                         <span class="label">
-                            <a class="noteref" id="n.1" href="#n.1src">1</a></span> Text of first paragraph.</p>
+                            <a class="noteref" href="#n.1src">1</a></span> Text of first paragraph.</p>
                             <p id="..." class="footnote cont">Text of second paragraph.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                      </p>
+                     </div>
                   </div>
                </div>
             </div>
@@ -227,17 +248,19 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                     <p class="footnote">
-                        <span class="label">
-                            <a class="noteref" id="n.1" href="#n.1src">1</a>
-                        </span> &lt;/p&gt;<div class="table" id="...">
-                        <table>
-                          <tr id="...">
-                             <td id="..." class="cellLeft cellTop cellBottom">first cell</td>
-                             <td id="..." class="cellRight cellTop cellBottom">second cell</td>
-                          </tr>
-                        </table>
-                     </div>&lt;p&gt;</p>
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="label">
+                                <a class="noteref" href="#n.1src">1</a>
+                            </span> &lt;/p&gt;<div class="table" id="...">
+                            <table>
+                              <tr id="...">
+                                 <td id="..." class="cellLeft cellTop cellBottom">first cell</td>
+                                 <td id="..." class="cellRight cellTop cellBottom">second cell</td>
+                              </tr>
+                            </table>
+                         </div>&lt;p&gt;</p>                  
+                    </div>
                   </div>
                </div>
             </div>
@@ -266,18 +289,74 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
+                    <div id="n.1">
                      <p class="footnote">
                         <span class="label">
-                            <a class="noteref" id="n.1" href="#n.1src">1</a>
+                            <a class="noteref" href="#n.1src">1</a>
                         </span> &lt;/p&gt;<ul id="...">
                             <li id="...">first cell</li>
                             <li id="...">second cell</li>
                         </ul>&lt;p&gt;</p>
+                     </div>
                   </div>
                </div>
             </div>
         </x:expect>
     </x:scenario>
 
+
+
+
+    <x:scenario label="When rendering an apparatus note in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus note.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a no notes at the end of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note.">&deg;</a> and more text.</p>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering an apparatus note in a div1 with an explicit call for apparatus">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus note.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in apparatus notes when called of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note.">&deg;</a> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Note</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus note.</span>
+                   <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
 
 </x:description>

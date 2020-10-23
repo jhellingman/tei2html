@@ -438,8 +438,8 @@
 
     <xsl:function name="f:validate-bible-link" as="xs:boolean">
         <xsl:param name="url" as="xs:string"/>
-        <xsl:sequence select="matches($url, $bibleRefPattern) 
-                              or matches($url, $bibleRefChapterRangePattern) 
+        <xsl:sequence select="matches($url, $bibleRefPattern)
+                              or matches($url, $bibleRefChapterRangePattern)
                               or matches($url, $bibleRefChapterVerseRangePattern)"/>
     </xsl:function>
 
@@ -457,6 +457,9 @@
             <xsl:when test="matches($url, $bibleRefChapterVerseRangePattern)">
                 <xsl:sequence select="f:tokenize-bible-ref-chapter-verse-range($url)"/>
             </xsl:when>
+            <xsl:otherwise>
+                <xsl:sequence select="map{}"/>
+            </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
 
@@ -566,8 +569,8 @@
                                 then $parts('book') || ' ' || $parts('chapter')
                                 else $parts('book')"/>
 
-        <!-- Alternative sites 
-        
+        <!-- Alternative sites
+
              https://biblehub.com/text/john/3-31.htm
 
              https://www.skepticsannotatedbible.com/

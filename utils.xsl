@@ -526,4 +526,15 @@
         <xsl:sequence select="f:rend-value($node/@rend, 'display') = 'none'"/>
     </xsl:function>
 
+
+
+    <xsl:function name="f:is-epub" as="xs:boolean">
+        <xsl:sequence select="$outputformat = 'epub'"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-html" as="xs:boolean">
+        <xsl:sequence select="$outputformat = 'html'"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>

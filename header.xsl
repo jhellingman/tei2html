@@ -97,7 +97,7 @@
     <xsl:template name="generate-metadata">
 
         <xsl:choose>
-            <xsl:when test="$outputformat = 'epub'">
+            <xsl:when test="f:is-epub()">
                 <meta charset="{$encoding}"/>
             </xsl:when>
             <xsl:otherwise>
@@ -157,12 +157,12 @@
 
     <xsl:template name="include-stylesheets">
         <xsl:choose>
-            <xsl:when test="not(f:is-set('css.inline')) or $outputformat = 'epub'">
+            <xsl:when test="not(f:is-set('css.inline')) or f:is-epub()">
                 <!-- Provide a link to the external stylesheet -->
                 <link href="{$basename}.css" rel="stylesheet" type="text/css"/>
 
                 <!-- For ePub, the stylesheets are generated elsewhere; for HTML we still have to call the generating template. -->
-                <xsl:if test="$outputformat = 'html'">
+                <xsl:if test="f:is-html()">
                     <xsl:call-template name="external-css-stylesheets"/>
                 </xsl:if>
             </xsl:when>

@@ -163,11 +163,11 @@
         </xsl:if>
 
         <!-- Format-specific stylesheets. -->
-        <xsl:if test="$outputformat = 'epub'">
+        <xsl:if test="f:is-epub()">
             <xsl:value-of select="f:css-stylesheet('style/layout-epub.css')"/>
         </xsl:if>
 
-        <xsl:if test="$outputformat = 'html'">
+        <xsl:if test="f:is-html()">
             <xsl:value-of select="f:css-stylesheet('style/layout-html.css')"/>
         </xsl:if>
 

@@ -138,7 +138,7 @@
                 <xsl:copy-of select="f:warn-missing-linked-image($url)"/>
                 <a>
                     <xsl:choose>
-                        <xsl:when test="$outputformat = 'epub' and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
+                        <xsl:when test="f:is-epub() and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
                             <!-- cannot directly link to image file in ePub, so generate wrapper html and link to that. -->
                             <xsl:call-template name="generate-image-wrapper">
                                 <xsl:with-param name="imagefile" select="$url"/>

@@ -127,7 +127,7 @@
 
     <xsl:template match="div1">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="$outputformat = 'html'">
+        <xsl:if test="f:is-html()">
             <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
             <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
                 <xsl:if test="..//note[f:is-footnote(.) and not(ancestor::div1)]">
@@ -481,7 +481,7 @@
     </xd:doc>
 
     <xsl:template name="generate-toc-link">
-        <xsl:if test="$outputformat = 'html'"><!-- TODO: improve ePub version of navigational aids -->
+        <xsl:if test="f:is-html()"><!-- TODO: improve ePub version of navigational aids -->
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
                 <!-- If we have an element with id 'toc', include a link to it (except in quoted material) -->
                 <span class="pagenum">

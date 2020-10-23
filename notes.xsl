@@ -13,7 +13,8 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f tmp xd xhtml xs">
+    xmlns:epub="http://www.idpf.org/2007/ops"
+    exclude-result-prefixes="epub f tmp xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to handle notes.</xd:short>
@@ -24,7 +25,7 @@
 
 
     <xd:doc>
-        <xd:short>Determine whether a note is a footnote</xd:short>
+        <xd:short>Determine whether a note is a footnote.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:is-footnote" as="xs:boolean">
@@ -95,6 +96,9 @@
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-footnote(.)]">
         <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
+            <xsl:if test="f:is-epub()">
+                <xsl:attribute name="epub:type" select="'noteref'"/>
+            </xsl:if>
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
@@ -151,18 +155,24 @@
     </xd:doc>
 
     <xsl:template match="note[p]" mode="footnotes">
-        <xsl:element name="{$p.element}">
-            <xsl:call-template name="footnote-class-lang"/>
-            <xsl:call-template name="footnote-marker"/>
-            <xsl:apply-templates select="*[1]" mode="footfirst"/>
-            <xsl:if test="count(*) = 1">
-                <xsl:if test="not(f:last-child-is-block-element(./p))">
-                    <xsl:call-template name="footnote-return-arrow"/>
-                </xsl:if>
+        <div>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:if test="f:is-epub()">
+                <xsl:attribute name="epub:type" select="'footnote'"/>
             </xsl:if>
-        </xsl:element>
-        <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
-        <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
+            <xsl:element name="{$p.element}">
+                <xsl:call-template name="footnote-class-lang"/>
+                <xsl:call-template name="footnote-marker"/>
+                <xsl:apply-templates select="*[1]" mode="footfirst"/>
+                <xsl:if test="count(*) = 1">
+                    <xsl:if test="not(f:last-child-is-block-element(./p))">
+                        <xsl:call-template name="footnote-return-arrow"/>
+                    </xsl:if>
+                </xsl:if>
+            </xsl:element>
+            <xsl:apply-templates select="*[position() > 1 and position() != last()]" mode="footnotes"/>
+            <xsl:apply-templates select="*[position() > 1 and position() = last()]" mode="footlast"/>
+        </div>
     </xsl:template>
 
 
@@ -172,17 +182,23 @@
     </xd:doc>
 
     <xsl:template match="note" mode="footnotes">
-        <xsl:element name="{$p.element}">
-            <xsl:call-template name="footnote-class-lang"/>
-            <xsl:call-template name="footnote-marker"/>
-            <xsl:apply-templates/>
-
-            <!-- Don't put a return arrow after a block-element (table, list, lg), since it goes
-                 to a new line and thus takes up too much space -->
-            <xsl:if test="not(f:last-child-is-block-element(.))">
-                <xsl:call-template name="footnote-return-arrow"/>
+        <div>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:if test="f:is-epub()">
+                <xsl:attribute name="epub:type" select="'footnote'"/>
             </xsl:if>
-        </xsl:element>
+            <xsl:element name="{$p.element}">
+                <xsl:call-template name="footnote-class-lang"/>
+                <xsl:call-template name="footnote-marker"/>
+                <xsl:apply-templates/>
+
+                <!-- Don't put a return arrow after a block-element (table, list, lg), since it goes
+                     to a new line and thus takes up too much space -->
+                <xsl:if test="not(f:last-child-is-block-element(.))">
+                    <xsl:call-template name="footnote-return-arrow"/>
+                </xsl:if>
+            </xsl:element>
+        </div>
     </xsl:template>
 
 
@@ -213,14 +229,15 @@
 
     <xd:doc>
         <xd:short>Place a footnote marker.</xd:short>
-        <xd:detail>Place a footnote marker in front of the footnote.</xd:detail>
+        <xd:detail>Place a footnote marker in front of the footnote, linking back
+        to the location of the footnote in the text.</xd:detail>
     </xd:doc>
 
     <xsl:template name="footnote-marker">
         <xsl:context-item as="element(note)" use="required"/>
 
         <span class="label">
-            <a class="noteref" id="{f:generate-id(.)}" href="{f:generate-href(.)}src">
+            <a class="noteref" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:note-marker(.)"/>
             </a>
         </span>
@@ -302,17 +319,32 @@
         <xsl:context-item as="element(note)" use="required"/>
         <xsl:choose>
             <xsl:when test="ancestor::div">
-                <xsl:number level="any" count="note[f:is-footnote(.)][not(@sameAs)]" from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
+                <xsl:number
+                    level="any"
+                    count="note[f:is-footnote(.)][not(@sameAs)]"
+                    from="div[not(ancestor::q) and (parent::front or parent::body or parent::back)]"/>
             </xsl:when>
             <xsl:when test="not(ancestor::div1[not(ancestor::q)])">
-                <xsl:number level="any" count="note[f:is-footnote(.) and not(@sameAs) and not(ancestor::div1[not(ancestor::q)])]" from="div0[not(ancestor::q)]"/>
+                <xsl:number
+                    level="any"
+                    count="note[f:is-footnote(.) and not(@sameAs) and not(ancestor::div1[not(ancestor::q)])]"
+                    from="div0[not(ancestor::q)]"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:number level="any" count="note[f:is-footnote(.)][not(@sameAs)]" from="div1[not(ancestor::q)]"/>
+                <xsl:number
+                    level="any"
+                    count="note[f:is-footnote(.)][not(@sameAs)]"
+                    from="div1[not(ancestor::q)]"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Calculate the footnote number.</xd:short>
+        <xd:detail>wrap the named template <code>footnote-number</code> in a function, so we can
+        easily call it.</xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:footnote-number">
         <xsl:param name="note" as="element(note)"/>
@@ -374,6 +406,9 @@
     <xsl:template match="note[f:is-footnote(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
         <a class="pseudonoteref" id="{f:generate-id($sourceNote)}src" href="{f:generate-footnote-href(.)}">
+            <xsl:if test="f:is-epub()">
+                <xsl:attribute name="epub:type" select="'noteref'"/>
+            </xsl:if>
             <xsl:call-template name="footnote-number"/>
         </a>
     </xsl:template>
@@ -524,7 +559,6 @@
                 <xsl:text>footnote apparatus </xsl:text>
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="apparatus-note-marker"/>
             <xsl:text> </xsl:text>
@@ -536,8 +570,8 @@
 
     <xd:doc>
         <xd:short>Handle text-critical apparatus notes with embedded paragraphs.</xd:short>
-        <xd:detail>Insert a footnote with embedded paragraphs. These need to be handled slightly differently
-        from footnotes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
+        <xd:detail>Insert an apparatus note with embedded paragraphs. These need to be handled slightly differently
+        from apparatus notes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
     </xd:doc>
 
     <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">

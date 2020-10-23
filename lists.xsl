@@ -276,7 +276,7 @@
         <xsl:choose>
             <!-- For ordered lists, the numbers are supplied by the browser -->
             <xsl:when test="..[@type = 'ordered']">
-                <xsl:if test="@n and ($outputformat != 'epub')">
+                <xsl:if test="@n and not(f:is-epub())">
                     <!-- The value attribute is no longer valid in HTML5, so exclude it for ePub3 -->
                     <xsl:attribute name="value">
                         <xsl:value-of select="@n"/>
