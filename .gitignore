@@ -94,3 +94,4 @@ test/testMath/testMath.jeebies
 test/testMath/testMath.txt
 test/test-preprocessed-p5.xml
 test/test-preprocessed.xml
+.vscode/tasks.json

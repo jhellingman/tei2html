@@ -477,8 +477,9 @@
 
     <xd:doc>
         <xd:short>Generate the notes for a text-critical apparatus.</xd:short>
-        <xd:detail>Render the text-critical notes as. This template just selects
-        the format to use, based on the configuration.</xd:detail>
+        <xd:detail>Render the text-critical notes. This template just selects
+        the format to use, based on the configuration and calls the appropriate
+        template.</xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes">

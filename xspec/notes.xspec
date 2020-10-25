@@ -359,4 +359,102 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering multi apparatus notes in a div1 with an explicit call for apparatus">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus note 1.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.2">Text of apparatus note 2.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.3">Text of apparatus note 3.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a single paragraph of apparatus notes when called of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note 1.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.2src" href="#n.2"
+                    title="Text of apparatus note 2.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.3src" href="#n.3"
+                    title="Text of apparatus note 3.">&deg;</a> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Notes</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 1.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.2">
+                        <a class="apparatusnote" href="#n.2src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 2.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.3">
+                        <a class="apparatusnote" href="#n.3src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 3.</span>
+                     <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering multi apparatus notes in a div1 with an explicit call for apparatus">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus note 1.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.2"><p>Text of multi-paragraph apparatus note 2.</p>
+                            <p>Second paragraph of multi-paragraph apparatus note 2.</p></note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.3">Text of apparatus note 3.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a two paragraphs of apparatus notes when called of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note 1.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.2src" href="#n.2"
+                    title="Text of multi-paragraph apparatus note 2.Second paragraph of multi-paragraph apparatus note 2.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.3src" href="#n.3"
+                    title="Text of apparatus note 3.">&deg;</a> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Notes</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 1.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.2">
+                        <a class="apparatusnote" href="#n.2src"
+                           title="Return to source location">&deg;</a>Text of multi-paragraph apparatus note 2.</span>
+                     <x:text> </x:text>
+                   </p>
+                   <p class="apparatus">
+                     <span class="apparatus-note">Second paragraph of multi-paragraph apparatus note 2.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.3">
+                        <a class="apparatusnote" href="#n.3src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 3.</span>
+                     <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
 </x:description>
