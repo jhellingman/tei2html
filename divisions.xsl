@@ -484,7 +484,7 @@
         <xsl:if test="f:is-html()"><!-- TODO: improve ePub version of navigational aids -->
             <xsl:if test="//*[@id='toc'] and not(ancestor::q)">
                 <!-- If we have an element with id 'toc', include a link to it (except in quoted material) -->
-                <span class="pagenum">
+                <span class="pageNum">
                     <xsl:text>[</xsl:text>
                     <a>
                         <!-- Link to entry for current division if available to make navigation back easier -->

@@ -262,7 +262,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
+.pageNum a, a.noteRef:hover, a.pseudoNoteRef:hover, a.hidden:hover, a.hidden {
  text-decoration: none;
 }
 
@@ -300,7 +300,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  vertical-align: 0.25em;
 }
 
-a.noteref, a.pseudonoteref {
+a.noteRef, a.pseudoNoteRef {
  font-size: 80%;
  text-decoration: none;
  vertical-align: 0.25em;
@@ -1057,15 +1057,15 @@ p.byline {
  margin-bottom: 2em;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, .right-marginnote, .cut-in-note-left, .cut-in-note-right, p.legend, .verseNum, .stage {
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, .cut-in-note-left, .cut-in-note-right, p.legend, .verseNum, .stage {
  color: #001FA4;
 }
 
-.rightnote, .pagenum, .linenum, .pagenum a {
+.rightnote, .pageNum, .lineNum, .pageNum a {
  color: #AAAAAA;
 }
 
-a.hidden:hover, a.noteref:hover {
+a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
  color: red;
 }
 

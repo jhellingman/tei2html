@@ -76,15 +76,15 @@ h1, h2 {
 	font-weight: normal;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, .right-marginnote, p.legend, .verseNum {
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
 	color: #660000;
 }
 
-.rightnote, .pagenum, .linenum, .pagenum a {
+.rightnote, .pageNum, .lineNum, .pageNum a {
 	color: #AAAAAA;
 }
 
-a.hidden:hover, a.noteref:hover, a.pseudonoteref:hover {
+a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
 	color: red;
 }
 

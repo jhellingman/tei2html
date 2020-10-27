@@ -152,7 +152,7 @@ h2.normal {
 }
 
 /* render references to footnotes similar to note markers */
-.pseudonoteref {
+.pseudoNoteRef {
     content: target-counter(attr(href), footnote);
     font-size: 83%;
     vertical-align: super;
@@ -164,7 +164,7 @@ div.footnotes {
     display: none;          /* Suppress the display of the generated footnote sections */
 }
 
-.noteref {
+.noteRef {
     display: none;          /* Suppress the display of the generated footnote numbers */
 }
 
@@ -211,7 +211,7 @@ span.num, span.corr, span.abbr, span.trans, span.measure, abbr {
     margin: 0;
 }
 
-.figureHead, .noteref, .marginnote, .right-marginnote, p.legend, .verseNum, .rightnote, .pagenum, .linenum, .pagenum a {
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum, .rightnote, .pageNum, .lineNum, .pageNum a {
     color: black;
 }
 
@@ -232,13 +232,13 @@ hr {
 
 /* ==== PAGE NUMBERS ==== */
 
-/* Replace references with pagenumbers with actual pagenumbers */
+/* Replace references with page numbers with actual page numbers */
 a.pageref {
     content: target-counter(attr(href), page);
 }
 
-/* Suppress marginal pagenumbers (using display: none will break references!) */
-.pagenum {
+/* Suppress marginal page numbers (using display: none will break references!) */
+.pageNum {
     visibility: hidden;
 }
 

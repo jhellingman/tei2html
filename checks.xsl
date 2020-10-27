@@ -359,8 +359,8 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <xsl:template match="ref[@type='noteref']" mode="checks">
-        <i:issue pos="{@pos}" code="H13" category="Reference" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">A ref with @type noteref is better replaced with a note with a @sameAs attribute.</i:issue>
+    <xsl:template match="ref[@type='noteRef']" mode="checks">
+        <i:issue pos="{@pos}" code="H13" category="Reference" target="{f:generate-id(.)}" level="Trivial" element="{name(.)}" page="{f:get-page(.)}">A ref with @type noteRef is better replaced with a note with a @sameAs attribute.</i:issue>
         <xsl:next-match/>
     </xsl:template>
 
@@ -1136,11 +1136,11 @@
             </xsl:if>
         </xsl:for-each-group>
 
-        <!-- @id of language not being used in the text -->
+        <!-- @ident or @id of language not being used in the text -->
         <xsl:for-each select="//language">
-            <xsl:if test="@id">
-                <xsl:variable name="id" select="@id" as="xs:string"/>
-                <xsl:if test="not(//*[@lang=$id])">
+            <xsl:if test="@id or @ident">
+                <xsl:variable name="ident" select="if (@ident) then @ident else @id" as="xs:string"/>
+                <xsl:if test="not(//*[@lang=$ident]) and not(//*[@xml:lang=$ident])">
                     <i:issue
                         pos="{./@pos}"
                         code="I04"
@@ -1148,7 +1148,7 @@
                         target="{f:generate-id(.)}"
                         level="Warning"
                         page="{f:get-page(.)}"
-                        element="{name(.)}">Language <xsl:value-of select="$id"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
+                        element="{name(.)}">Language <xsl:value-of select="$ident"/> (<xsl:value-of select="."/>) declared but not used.</i:issue>
                 </xsl:if>
             </xsl:if>
         </xsl:for-each>

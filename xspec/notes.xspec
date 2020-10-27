@@ -30,14 +30,14 @@
         <x:expect label="will result in a footnote at the end of the div1">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -61,26 +61,26 @@
         <x:expect label="will result in multiple footnotes at the end of the div1">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
-                  <p id="...">Surrounding text<a class="noteref" id="n.2src" href="#n.2">2</a> and more text.</p>
-                  <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">3</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteRef" id="n.2src" href="#n.2">2</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteRef" id="n.3src" href="#n.3">3</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.2">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -104,21 +104,21 @@
         <x:expect label="will result in only two footnotes, numbered correctly">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                   <p id="...">Surrounding text<span class="marginnote" id="n.2">Text of marginal note.</span> and more text.</p>
-                  <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">2</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteRef" id="n.3src" href="#n.3">2</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -142,9 +142,9 @@
         <x:expect label="will result in only a single instance of the footnote referenced twice">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
-                  <p id="...">Surrounding text<a class="pseudonoteref" id="n.1bsrc" href="#n.1">1</a> and more text.</p>
-                  <p id="...">Surrounding text<a class="noteref" id="n.3src" href="#n.3">2</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="pseudoNoteRef" id="n.1bsrc" href="#n.1">1</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="noteRef" id="n.3src" href="#n.3">2</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
@@ -152,7 +152,7 @@
                     <div id="n.1">
                          <p class="footnote">
                             <span class="label">
-                                <a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
+                                <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
                                 <a class="fnreturn" href="#n.1src" title="Return to note 1(a) in text.">a</a>
                                 <x:text> </x:text>
                                 <a class="fnreturn" href="#n.1bsrc" title="Return to note 1(b) in text.">b</a>
@@ -160,7 +160,7 @@
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteref" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="label"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -182,7 +182,7 @@
         <x:expect label="will result in a footnote with the paragraph">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
@@ -190,7 +190,7 @@
                     <div id="n.1">
                          <p class="footnote">
                             <span class="label">
-                                <a class="noteref" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                                <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -212,7 +212,7 @@
         <x:expect label="will result in a footnote with both paragraphs">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
@@ -220,7 +220,7 @@
                     <div id="n.1">
                      <p class="footnote">
                         <span class="label">
-                            <a class="noteref" href="#n.1src">1</a></span> Text of first paragraph.</p>
+                            <a class="noteRef" href="#n.1src">1</a></span> Text of first paragraph.</p>
                             <p id="..." class="footnote cont">Text of second paragraph.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                      </p>
                      </div>
@@ -243,7 +243,7 @@
         <x:expect label="will result in a footnote with a table, but without the return arrow.">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
@@ -251,7 +251,7 @@
                     <div id="n.1">
                          <p class="footnote">
                             <span class="label">
-                                <a class="noteref" href="#n.1src">1</a>
+                                <a class="noteRef" href="#n.1src">1</a>
                             </span> &lt;/p&gt;<div class="table" id="...">
                             <table>
                               <tr id="...">
@@ -284,7 +284,7 @@
         <x:expect label="will result in a footnote with a list, but without the return arrow.">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
-                  <p id="..." class="first">Surrounding text<a class="noteref" id="n.1src" href="#n.1">1</a> and more text.</p>
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
                <div class="footnotes">
                   <hr class="fnsep"/>
@@ -292,7 +292,7 @@
                     <div id="n.1">
                      <p class="footnote">
                         <span class="label">
-                            <a class="noteref" href="#n.1src">1</a>
+                            <a class="noteRef" href="#n.1src">1</a>
                         </span> &lt;/p&gt;<ul id="...">
                             <li id="...">first cell</li>
                             <li id="...">second cell</li>

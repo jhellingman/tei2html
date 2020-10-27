@@ -304,9 +304,9 @@
 
 
 <!-- Page breaks -->
-<!-- <span class="pagenum"><a name="Page_6" id="Page_6">[Pg 6]</a></span> -->
+<!-- <span class="pageNum"><a name="Page_6" id="Page_6">[Pg 6]</a></span> -->
 
-<xsl:template match="html:span[@class='pagenum']">
+<xsl:template match="html:span[@class='pageNum']">
     <pb id="{html:a/@id}"/>
 </xsl:template>
 

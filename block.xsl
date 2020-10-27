@@ -101,7 +101,7 @@
 
     <xsl:template name="pb-margin">
         <xsl:context-item as="element(pb)" use="required"/>
-        <span class="pagenum" id="{f:generate-id(.)}">
+        <span class="pageNum" id="{f:generate-id(.)}">
             <xsl:if test="@n and f:is-set('pageNumbers.show')">
                 <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
                 <a href="{f:generate-href(.)}">

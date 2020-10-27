@@ -40,11 +40,11 @@ p.byline {
 	text-indent: 0;
 }
 
-.figureHead, .noteref, .pseudonoteref, .marginnote, .right-marginnote, p.legend, .verseNum, .stage {
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum, .stage {
 	color: black;
 }
 
-.rightnote, .pagenum, .linenum, .pagenum a {
+.rightnote, .pageNum, .lineNum, .pageNum a {
 	color: black;
 }
 
@@ -57,7 +57,7 @@ sub, sup {
 	line-height: 0;
 }
 
-.lg .linenum, .sp .linenum {
+.lg .liNenum, .sp .liNenum {
 	left: 1.58em;
 	color: black;
 }

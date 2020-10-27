@@ -8,7 +8,7 @@ body, a.hidden {
 	color: black;
 }
 
-h1, h2, h3, h4, h5, h6, .noteref, .pseudonoteref, .marginnote, .right-marginnote, p.legend {
+h1, h2, h3, h4, h5, h6, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend {
 	color: #880000; /* #880000; brownish red */
 }
 
@@ -16,6 +16,6 @@ h1, h2, h3, h4, h5, h6, .noteref, .pseudonoteref, .marginnote, .right-marginnote
 	color: #AC8D70; /* #AC8D70; sepia */
 }
 
-a.navline:hover, a.hidden:hover, a.noteref:hover {
+a.navline:hover, a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
 	color: #D25C00; /* #D25C00; orange brown */
 }

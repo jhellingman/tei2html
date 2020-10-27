@@ -54,6 +54,19 @@
     </xsl:template>
 
 
+    <xsl:template match="div[l]">
+        <div>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="class">
+                <xsl:text>lgouter </xsl:text>
+                <xsl:if test="ancestor::note[f:is-footnote(.)]">footnote<xsl:text> </xsl:text></xsl:if>
+            </xsl:variable>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Format a normal lg element.</xd:short>
         <xd:detail>Format an lg element. top-level lg elements get class=lgouter, nested lg elements get class=lg.
@@ -70,7 +83,7 @@
             <xsl:variable name="class">
                 <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg or parent::sp">lg<xsl:text> </xsl:text></xsl:if>
-                <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]">footnote<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="ancestor::note[f:is-footnote(.)]">footnote<xsl:text> </xsl:text></xsl:if>
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <xsl:apply-templates/>
@@ -113,8 +126,8 @@
         <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistich.
         A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place
         it at the proper location. A hemistich is handled by adding a span with the class <code>hemistich</code>,
-        which is supposed to contain the text of the previous part of the hemistich, and leaves it to the CSS
-        stylesheet to hide that text and the current line of the hemistich shows up indented the correct way).</xd:detail>
+        which will contain the text of the previous part of the hemistich, and leaves it to the CSS
+        to hide that text such that the current line of the hemistich shows up indented the correct way).</xd:detail>
     </xd:doc>
 
     <xsl:template match="l">
@@ -128,7 +141,7 @@
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
             <xsl:if test="@n">
-                <span class="lineNum"><xsl:value-of select="@n"/></span>
+                <span class="lineNum"><xsl:value-of select="@n"/><xsl:text> </xsl:text></span>
             </xsl:if>
 
             <xsl:if test="f:has-rend-value(@rend, 'hemistich')">
@@ -284,10 +297,10 @@
                         <td class="lineNumbers">
                             <xsl:choose>
                                 <xsl:when test="@n">
-                                    <span class="lineNum"><xsl:value-of select="@n"/></span>
+                                    <span class="lineNum"><xsl:value-of select="@n"/><xsl:text> </xsl:text></span>
                                 </xsl:when>
                                 <xsl:when test="$b/*[$position]/@n">
-                                    <span class="lineNum"><xsl:value-of select="$b/*[$position]/@n"/></span>
+                                    <span class="lineNum"><xsl:value-of select="$b/*[$position]/@n"/><xsl:text> </xsl:text></span>
                                 </xsl:when>
                             </xsl:choose>
                         </td>

@@ -39,9 +39,9 @@
         <x:context>
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pagenum" id="pb4">[<a href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
+                <span class="pageNum" id="pb4">[<a href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
             </p>
         </x:expect>
     </x:scenario>

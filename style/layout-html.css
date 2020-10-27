@@ -12,7 +12,7 @@ body {
 
 /* page numbers, placed in right margin */
 
-.pagenum {
+.pageNum {
     display: inline;
     font-size: 70%;
     font-style: normal;

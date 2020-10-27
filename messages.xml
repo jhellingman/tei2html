@@ -85,6 +85,7 @@
         <msg:message name="msgSourcePublisher">Original publisher</msg:message>
         <msg:message name="msgSourcePubPlace">Original publication place</msg:message>
         <msg:message name="msgSourcePublicationDate">Original publication date</msg:message>
+		<msg:message name="msgPublicationDate">Publication date</msg:message>
         <msg:message name="msgCatalogEntry">Catalog entry</msg:message>
         <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
@@ -903,6 +904,7 @@
         <msg:message name="msgSourcePublisher">Herausgeber des Originals</msg:message>
         <msg:message name="msgSourcePubPlace">Veröffentlichungsort des Originals</msg:message>
         <msg:message name="msgSourcePublicationDate">Veröffentlichungsdatum des Originals</msg:message>
+		<msg:message name="msgPublicationDate">Veröffentlichungsdatum</msg:message>
         <msg:message name="msgCatalogEntry">Katalogeintrag</msg:message>
         <msg:message name="msgCatalogEntries">Katalogeinträge</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Autor der Einleitung</msg:message>
@@ -1233,6 +1235,7 @@
         <msg:message name="msgSourcePublisher">Oorspronkelijke uitgever</msg:message>
         <msg:message name="msgSourcePubPlace">Oorspronkelijke plaats van uitgifte</msg:message>
         <msg:message name="msgSourcePublicationDate">Oorspronkelijke uitgiftedatum</msg:message>
+		<msg:message name="msgPublicationDate">Uitgiftedatum</msg:message>
         <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>
         <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
@@ -1780,6 +1783,7 @@
 		<msg:message name="msgRevisionHistory">Hersieningsgeskiedenis</msg:message>
 		<msg:message name="msgSource">Bron</msg:message>
 		<msg:message name="msgSourcePublicationDate">Oorspronklike publikasiedatum</msg:message>
+		<msg:message name="msgPublicationDate">Publikasiedatum</msg:message>
 		<msg:message name="msgTitle">Titel</msg:message>
 		<msg:message name="msgUrl">URL</msg:message>
 		<msg:message name="msgNotApplicable">Nie van toepassing nie</msg:message>

@@ -119,6 +119,8 @@
 
             <xsl:call-template name="contributors"/>
 
+            <xsl:apply-templates select="//publicationStmt/date" mode="publicationDate"/>
+
             <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message(lower-case($language)))"/>
 
             <xsl:apply-templates select="//sourceDesc" mode="colophonSourceDesc"/>
@@ -128,6 +130,11 @@
             <xsl:call-template name="catalogReferences"/>
             <xsl:call-template name="qrCode"/>
         </table>
+    </xsl:template>
+
+
+    <xsl:template mode="publicationDate" match="publicationStmt/date">
+        <xsl:copy-of select="f:metadata-line(f:message('msgPublicationDate'), .)"/>
     </xsl:template>
 
 
@@ -376,7 +383,6 @@
     <xsl:template mode="catalogReferences" match="idno[@type='PGnum']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgProjectGutenberg'), ., 'https://www.gutenberg.org/ebooks/' || .)"/>
     </xsl:template>
-
 
     <xsl:template mode="catalogReferences" match="idno[@type='LCCN']">
         <xsl:copy-of select="f:metadata-line-as-url(f:message('msgLibraryOfCongress'), ., 'https://lccn.loc.gov/' || .)"/>

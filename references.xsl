@@ -78,8 +78,8 @@
                     <xsl:if test="@type='pageref'">
                         <xsl:attribute name="class">pageref</xsl:attribute>
                     </xsl:if>
-                    <xsl:if test="@type='endnoteref'">
-                        <xsl:attribute name="class">noteref</xsl:attribute>
+                    <xsl:if test="@type='endNoteRef'">
+                        <xsl:attribute name="class">noteRef</xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates/>
                 </a>

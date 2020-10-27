@@ -28,9 +28,9 @@
         <x:context>
             <pb n="1" id="pb1"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pagenum" id="pb1">[<a href="#pb1">1</a>]</span>
+                <span class="pageNum" id="pb1">[<a href="#pb1">1</a>]</span>
             </p>
         </x:expect>
     </x:scenario>
@@ -39,9 +39,9 @@
         <x:context>
             <pb n="1_b_" id="pb1b"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pagenum" id="pb1b">[<a href="#pb1b">1<i>b</i></a>]</span>
+                <span class="pageNum" id="pb1b">[<a href="#pb1b">1<i>b</i></a>]</span>
             </p>
         </x:expect>
     </x:scenario>
@@ -50,8 +50,8 @@
         <x:context>
             <p>In a <pb n="2" id="pb2"/> paragraph.</p>
         </x:context>
-        <x:expect label="will result a HTML span of class pagenum without a wrapping paragraph">
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <span class="pagenum" id="pb2">[<a href="#pb2">2</a>]</span> paragraph.</p>
+        <x:expect label="will result a HTML span of class pageNum without a wrapping paragraph">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <span class="pageNum" id="pb2">[<a href="#pb2">2</a>]</span> paragraph.</p>
         </x:expect>
     </x:scenario>
 
@@ -72,9 +72,9 @@
         <x:context>
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pagenum, embedded in a paragraph">
+        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pagenum" id="pb4">[<a href="#pb4">4</a>]</span>
+                <span class="pageNum" id="pb4">[<a href="#pb4">4</a>]</span>
             </p>
         </x:expect>
     </x:scenario>

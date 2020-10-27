@@ -95,7 +95,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-footnote(.)]">
-        <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
+        <a class="noteRef" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'noteref'"/>
             </xsl:if>
@@ -237,7 +237,7 @@
         <xsl:context-item as="element(note)" use="required"/>
 
         <span class="label">
-            <a class="noteref" href="{f:generate-href(.)}src">
+            <a class="noteRef" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:note-marker(.)"/>
             </a>
         </span>
@@ -398,14 +398,14 @@
         <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
         <xd:detail>
             <p>Make explicit references to a footnote (marked with <code>@sameAs</code> or
-            <code>@type="noteref"</code>) look exactly the same as automatically generated
+            <code>@type="noteRef"</code>) look exactly the same as automatically generated
             footnote references.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template match="note[f:is-footnote(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
-        <a class="pseudonoteref" id="{f:generate-id($sourceNote)}src" href="{f:generate-footnote-href(.)}">
+        <a class="pseudoNoteRef" id="{f:generate-id($sourceNote)}src" href="{f:generate-footnote-href(.)}">
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'noteref'"/>
             </xsl:if>
@@ -417,7 +417,7 @@
     <!--==== TABLE NOTES ====-->
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-table-note(.)]">
-        <a class="noteref" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
+        <a class="noteRef" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:value-of select="@n"/>
         </a>
     </xsl:template>
@@ -425,7 +425,7 @@
     <xsl:template match="note[f:is-table-note(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
         <!-- @sameAs references must be in the same table -->
-        <a class="pseudonoteref" id="{f:generate-id($sourceNote)}src" href="{f:generate-href(.)}">
+        <a class="pseudoNoteRef" id="{f:generate-id($sourceNote)}src" href="{f:generate-href(.)}">
             <xsl:value-of select="@n"/>
         </a>
     </xsl:template>

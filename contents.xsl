@@ -199,7 +199,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an entry in a table of contents, including its number and pagenumber.</xd:short>
+        <xd:short>Generate an entry in a table of contents, including its division number and page number.</xd:short>
     </xd:doc>
 
     <xsl:template name="generate-toc-entry">

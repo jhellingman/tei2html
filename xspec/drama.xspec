@@ -236,7 +236,7 @@ text-indent:2em;
             </castList>
         </x:context>
         <x:expect label="will result in a list that contains a table with a brace to the right.">
-            <ul xmlns="http://www.w3.org/1999/xhtml" id="xd183e1" class="castlist">
+            <ul xmlns="http://www.w3.org/1999/xhtml" id="..." class="castlist">
                <li id="..." class="castitem"><span class="role" id="hendrik">Koning <span class="sc" id="...">Hendrik de Vierde</span></span>.</li>
                <li id="..." class="castlist">
                   <table class="castGroupTable">

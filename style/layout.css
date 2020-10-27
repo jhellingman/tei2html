@@ -266,7 +266,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     margin: 1.58em 5%;
 }
 
-.pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
+.pageNum a, a.noteRef:hover, a.pseudoNoteRef:hover, a.hidden:hover, a.hidden {
     text-decoration: none;
 }
 
@@ -304,7 +304,7 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     vertical-align: 0.25em;
 }
 
-a.noteref, a.pseudonoteref {
+a.noteRef, a.pseudoNoteRef {
     font-size: 80%;
     text-decoration: none;
     vertical-align: 0.25em;
