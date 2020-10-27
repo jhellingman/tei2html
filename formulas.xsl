@@ -86,6 +86,10 @@
 
         <xsl:copy-of select="f:place-math-label(., 'left')"/>
 
+        <xsl:if test="f:get-setting('math.keepTexInComment')">
+            <xsl:comment expand-text="yes"> {normalize-space(.)} </xsl:comment>
+        </xsl:if>
+
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., $mathClass)"/>

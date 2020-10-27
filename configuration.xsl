@@ -133,6 +133,7 @@
             <math.label.position>right</math.label.position>
             <math.label.before>(</math.label.before>
             <math.label.after>)</math.label.after>
+            <math.keepTexInComment>true</math.keepTexInComment>
     
             <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- Options: MathJax; MML; SVG; SVG+IMG -->
             <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- Options for MathJax format, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
