@@ -483,7 +483,7 @@
             <!-- Take data from each part -->
             <tbody>
                 <xsl:choose>
-                    <xsl:when test="$item-order = 'row-first'">
+                    <xsl:when test="$item-order = 'column-major'">
                         <xsl:for-each-group select="$rows" group-by="(position() - 1) idiv $n">
                             <tr>
                                 <xsl:for-each select="current-group()/cell">

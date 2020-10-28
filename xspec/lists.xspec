@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY nbsp       "&#160;">
+        <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY asterism   "&#x2042;">
+        <!ENTITY rsquo      "&#x2019;">
+        <!ENTITY lf         "&#x000A;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <x:param name="imageInfo">
+        <imageInfo>
+            <img:images xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo">
+                <img:image path="images/rbrace2.png" filesize="166" filedate="2018-12-16 12:14:56" width="12px" height="40px"/>
+                <img:image path="images/lbrace2.png" filesize="166" filedate="2018-12-16 12:14:56" width="12px" height="40px"/>
+            </img:images>
+        </imageInfo>
+    </x:param>
+
+   <x:scenario label="When rendering a list element">
+      <x:context>
+        <list>
+            <item>First item.</item>
+            <item>Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML unordered list">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">First item.</li>
+           <li id="...">Second item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering an ordered list element">
+      <x:context>
+        <list type="ordered">
+            <item>First item.</item>
+            <item>Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML ordered list">
+        <ol xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">First item.</li>
+           <li id="...">Second item.</li>
+        </ol>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element with @n attributes on items">
+      <x:context>
+        <list>
+            <item n="1">First item.</item>
+            <item n="2">Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML unordered list with the numbers in a span">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">1</span> First item.</li>
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">2</span> Second item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering an ordered list element with @n attributes on items">
+      <x:context>
+        <list type="ordered">
+            <item n="1">First item.</item>
+            <item n="2">Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML ordered list with the numbers as attribute">
+        <ol xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li value="1" id="...">First item.</li>
+           <li value="2" id="...">Second item.</li>
+        </ol>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element with marked item numbers">
+      <x:context>
+        <list>
+            <item><ab type="itemNum">1.</ab> First item.</item>
+            <item><ab type="itemNum">2.</ab> Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML unordered list with the item numbers in a span">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">1.</span> First item.</li>
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">2.</span> Second item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element in two columns">
+      <x:context>
+        <list rend="columns(2)">
+            <item>First item.</item>
+            <item>Second item.</item>
+            <item>Third item.</item>
+            <item>Fourth item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML table containing two unordered lists">
+        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" id="...">
+           <tr>
+              <td>
+                 <ul>
+                    <li id="...">First item.</li>
+                    <li id="...">Second item.</li>
+                 </ul>
+              </td>
+              <td>
+                 <ul>
+                    <li id="...">Third item.</li>
+                    <li id="...">Fourth item.</li>
+                 </ul>
+              </td>
+           </tr>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element in two columns with column-major specified">
+      <x:context>
+        <list rend="columns(2) item-order(column-major)">
+            <item>First item.</item>
+            <item>Second item.</item>
+            <item>Third item.</item>
+            <item>Fourth item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML table containing two unordered lists, with the first two items in the left column, and the last two in the right column">
+        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" id="...">
+           <tr>
+              <td>
+                 <ul>
+                    <li id="...">First item.</li>
+                    <li id="...">Third item.</li>
+                 </ul>
+              </td>
+              <td>
+                 <ul>
+                    <li id="...">Second item.</li>
+                    <li id="...">Fourth item.</li>
+                 </ul>
+              </td>
+           </tr>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element with an itemGroup (self invented element)">
+      <x:context>
+        <list>
+            <item>First item.</item>
+            <item>Second item.</item>
+            <itemGroup>
+                <item>First grouped item.</item>
+                <item>Second grouped item.</item>
+            </itemGroup>
+            <item>Third item.</item>
+            <item>Fourth item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML list with the itemGroup embedded as a table">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">First item.</li>
+           <li id="...">Second item.</li>
+           <li id="..." class="itemGroup">
+              <table class="itemGroupTable">
+                 <tr>
+                    <td id="...">First grouped item.</td>
+                 </tr>
+                 <tr>
+                    <td id="...">Second grouped item.</td>
+                 </tr>
+              </table>
+           </li>
+           <li id="...">Third item.</li>
+           <li id="...">Fourth item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element with an itemGroup (self invented element)">
+      <x:context>
+        <list>
+            <item>First item.</item>
+            <item>Second item.</item>
+            <itemGroup>
+                Something before
+                <item>First grouped item.</item>
+                <item>Second grouped item.</item>
+                Something after
+            </itemGroup>
+            <item>Third item.</item>
+            <item>Fourth item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML list with the itemGroup embedded as a table, preceded and followed by braces and the material before and after.">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">First item.</li>
+           <li id="...">Second item.</li>
+           <li id="..." class="itemGroup">
+              <table class="itemGroupTable">
+                 <tr>
+                    <td rowspan="2">
+                        <x:text>&lf;                Something before&lf;                </x:text>
+                        </td>
+                    <td rowspan="2" class="itemGroupBrace">
+                       <img src="images/lbrace2.png" alt="{{" width="12" height="40" />
+                    </td>
+                    <td id="...">First grouped item.</td>
+                    <td rowspan="2" class="itemGroupBrace">
+                       <img src="images/rbrace2.png" alt="}}" width="12" height="40" />
+                    </td>
+                    <td rowspan="2">
+                        <x:text>&lf;                Something after&lf;            </x:text>
+                    </td>
+                 </tr>
+                 <tr>
+                    <td id="...">Second grouped item.</td>
+                 </tr>
+              </table>
+           </li>
+           <li id="...">Third item.</li>
+           <li id="...">Fourth item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list element with an an embedded list of type itemGroup (TEI-conform construct to achieve the same as above)">
+      <x:context>
+        <list>
+            <item>First item.</item>
+            <item>Second item.</item>
+            <list type="itemGroup">
+                <head>Something before</head>
+                <item>First grouped item.</item>
+                <item>Second grouped item.</item>
+                <trailer>Something after</trailer>
+            </list>
+            <item>Third item.</item>
+            <item>Fourth item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML list with the itemGroup embedded as a table, preceded and followed by braces and the material before and after.">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="...">First item.</li>
+           <li id="...">Second item.</li>
+           <li id="..." class="itemGroup">
+              <table class="itemGroupTable">
+                 <tr>
+                    <td rowspan="2">Something before</td>
+                    <td rowspan="2" class="itemGroupBrace">
+                       <img src="images/lbrace2.png" alt="{{" width="12" height="40" />
+                    </td>
+                    <td id="...">First grouped item.</td>
+                    <td rowspan="2" class="itemGroupBrace">
+                       <img src="images/rbrace2.png" alt="}}" width="12" height="40" />
+                    </td>
+                    <td rowspan="2">Something after</td>
+                 </tr>
+                 <tr>
+                    <td id="...">Second grouped item.</td>
+                 </tr>
+              </table>
+           </li>
+           <li id="...">Third item.</li>
+           <li id="...">Fourth item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+</x:description>

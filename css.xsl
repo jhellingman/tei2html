@@ -339,7 +339,7 @@
                 <xsl:when test="$property='ditto-repeat'"/>         <!-- How often ditto mark will be repeated in tables: word (default) or segment -->
                 <xsl:when test="$property='image'"/>                <!-- in-line image -->
                 <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
-                <xsl:when test="$property='item-order'"/>           <!-- way to split a list into multiple columns: row-first or column-first (default) -->
+                <xsl:when test="$property='item-order'"/>           <!-- way to split a list or table into multiple columns: row-mayor (default) or column-mayor -->
                 <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
                 <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
                 <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->

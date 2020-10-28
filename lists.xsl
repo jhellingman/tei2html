@@ -69,7 +69,7 @@
         </xsl:variable>
 
         <xsl:choose>
-            <xsl:when test="$item-order = 'row-first'">
+            <xsl:when test="$item-order = 'column-major'">
                 <xsl:call-template name="splitlist-rows">
                     <xsl:with-param name="columns" select="$columns"/>
                 </xsl:call-template>
@@ -124,7 +124,7 @@
 
 
     <xd:doc>
-        <xd:short>Split a list into columns (column-first; table with lists).</xd:short>
+        <xd:short>Split a list into columns (row-mayor; table with lists).</xd:short>
         <xd:detail>Split a list into columns, using a table; order will be: [1, 2], [3, 4].</xd:detail>
     </xd:doc>
 
@@ -152,7 +152,7 @@
 
 
     <xd:doc>
-        <xd:short>Split a list into columns (row-first; table with lists).</xd:short>
+        <xd:short>Split a list into columns (column-major; table with lists).</xd:short>
         <xd:detail>Split a list into columns, using a table; order will be: [1, 3], [2, 4].</xd:detail>
     </xd:doc>
 
@@ -211,7 +211,7 @@
         See also the stylesheet for <code>castGroup</code> in <code>drama.xsl</code>.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="itemGroup | list[@type='itemGroup']">
+    <xsl:template match="itemGroup">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="numberedItemClass" select="if (item/ab[@type='itemNum']) then ' numberedItem' else ''" as="xs:string"/>
@@ -256,6 +256,47 @@
         </li>
     </xsl:template>
 
+    <!-- TEI conforming variant of the above -->
+    <xsl:template match="list[@type='itemGroup']">
+        <li>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="numberedItemClass" select="if (item/ab[@type='itemNum']) then ' numberedItem' else ''" as="xs:string"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup' || $numberedItemClass)"/>
+
+            <xsl:variable name="this" select="."/>
+            <xsl:variable name="count" select="count(item)"/>
+
+            <table class="itemGroupTable">
+                <xsl:for-each select="item">
+                    <tr>
+                        <xsl:if test="position() = 1">
+                            <xsl:if test="$this/head">
+                                <td rowspan="{$count}"><xsl:apply-templates select="$this/head/node()"/></td>
+                            </xsl:if>
+                            <xsl:if test="$this/head or $this/@rend='braceBefore'">
+                                <td rowspan="{$count}" class="itemGroupBrace">
+                                    <xsl:copy-of select="f:output-image('images/lbrace' || $count || '.png', '{')"/>
+                                </td>
+                            </xsl:if>
+                        </xsl:if>
+                        <td>
+                            <xsl:apply-templates select="." mode="itemGroupTable"/>
+                        </td>
+                        <xsl:if test="position() = 1">
+                            <xsl:if test="$this/trailer or $this/@rend='braceAfter'">
+                                <td rowspan="{$count}" class="itemGroupBrace">
+                                    <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
+                                </td>
+                            </xsl:if>
+                            <xsl:if test="$this/trailer">
+                                <td rowspan="{$count}"><xsl:apply-templates select="$this/trailer/node()"/></td>
+                            </xsl:if>
+                        </xsl:if>
+                    </tr>
+                </xsl:for-each>
+            </table>
+        </li>
+    </xsl:template>
 
     <xsl:template match="item" mode="itemGroupTable">
         <xsl:call-template name="handle-item"/>
@@ -288,7 +329,7 @@
                 <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>
             <xsl:when test="@n">
-                <span class="itemNumber"><xsl:copy-of select="f:convert-markdown(@n)"/></span>
+                <span class="itemNumber"><xsl:copy-of select="f:convert-markdown(@n)"/></span><xsl:text> </xsl:text>
             </xsl:when>
         </xsl:choose>
         <xsl:apply-templates/>

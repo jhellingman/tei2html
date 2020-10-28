@@ -119,7 +119,7 @@
 
             <xsl:call-template name="contributors"/>
 
-            <xsl:apply-templates select="//publicationStmt/date" mode="publicationDate"/>
+            <xsl:apply-templates select="//publicationStmt/date[f:is-valid(.)]" mode="publicationDate"/>
 
             <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message(lower-case($language)))"/>
 
