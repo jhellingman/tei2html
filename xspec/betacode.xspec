@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../betacode.xsl"
+               version="3.0">
+
+    <!-- f:beta-to-unicode -->
+
+   <x:scenario label="When converting Greek in beta-code">
+      <x:call function="f:beta-to-unicode">
+         <x:param select="'E)N O(, OI( PRO/S'' TW=N PRO\S PROI+E/NAI TW=| MAXAI/RA&amp;S MA/XAIRA'''"/>
+      </x:call>
+      <x:expect
+        label="will return a Greek script string in Unicode"
+        select="'ἐν ὁ, οἱ πρόσ'' τῶν πρὸς προϊέναι τῷ μαχαίρᾰς μάχαιρα'''"/>
+   </x:scenario>
+
+</x:description>
