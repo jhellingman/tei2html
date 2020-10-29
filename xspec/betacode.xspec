@@ -13,7 +13,17 @@
       </x:call>
       <x:expect
         label="will return a Greek script string in Unicode"
-        select="'ἐν ὁ, οἱ πρόσ'' τῶν πρὸς προϊέναι τῷ μαχαίρᾰς μάχαιρα'''"/>
+        select="'ἐν ὁ, οἱ πρόσ’ τῶν πρὸς προϊέναι τῷ μαχαίρᾰς μάχαιρα’'"/>
    </x:scenario>
+
+   <x:scenario label="When converting Greek in beta-code (2)">
+      <x:call function="f:beta-to-unicode">
+         <x:param select="'1 mh=nin a)/eide qea\ *phlhi+a/dew *)axilh=os 2 ou)lome/nhn, h(\ muri/) *)axaioi=s a)/lge) e)/qhke, 3 polla\s d) i)fqi/mous yuxa\s *)/ai+di proi/+ayen 4 h(rw/wn, au)tou\s de\ e(lw/ria teu=xe ku/nessin 5 oi)wnoi=si/ te pa=si, *dio\s d) e)telei/eto boulh/, 6 e)c ou(= dh\ ta\ prw=ta diasth/thn e)ri/sante 7 *)atrei/+dhs te a)/nac a)ndrw=n kai\ di=os *)axilleu/s.'"/>
+      </x:call>
+      <x:expect
+        label="will return a Greek script string in Unicode"
+        select="'1 μῆνιν ἄειδε θεὰ Πηληϊάδεω Ἀχιλῆος 2 οὐλομένην, ἣ μυρί’ Ἀχαιοῖς ἄλγἐ ἔθηκε, 3 πολλὰς δ’ ἰφθίμους yυχὰς Ἄϊδι προΐαyεν 4 ἡρώων, αὐτοὺς δὲ ἑλώρια τεῦχε κύνεσσιν 5 οἰωνοῖσί τε πᾶσι, Διὸς δ’ ἐτελείετο βουλή, 6 ἐξ οὗ δὴ τὰ πρῶτα διαστήτην ἐρίσαντε 7 Ἀτρεΐδης τε ἄναξ ἀνδρῶν καὶ δῖος Ἀχιλλεύς.'"/>
+   </x:scenario>
+
 
 </x:description>

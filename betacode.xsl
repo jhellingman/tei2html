@@ -44,14 +44,22 @@
         <!-- 
             regular expression for a single beta-code character:
 
-            upper case letter:      [*][()]?[/\=]?[+]?[a-ik-z][|]?
-            lower case letter:      [a-ik-z][()]?[\/=&]?[+]?[|]?
-            special letter:         s[1-3]
-            sepcial punctuation:    [:]
+            upper case vowel:       ([*][()]?[/=\]?[+]?[aehiouw][|]?)
+            lower case vowel:       ([aehiouw][()]?[/=\&]?[+]?[|]?)
+            upper case rho:         (r[()]?)
+            lower case rho:         ([*][(]?r)
+            upper case consonant:   ([*][bgdzhqklmncpstfxv])
+            lower case consonant:   ([bgdzhqklmncpstfxv])
+            special letter:         (s[1-3])
+            special punctuation:    ([:')])
+
+            combined: (s[1-3])|([*][()]?[/=\]?[+]?[aehiouw][|]?)|([aehiouw][()]?[/=\&]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([bgdzhqklmncpstfxv])|([:')])
+            escaped:  (s[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([bgdzhqklmncpstfxv])|([:')])
         -->
+
         <xsl:variable name="result" as="xs:string*">
             <xsl:analyze-string select="$string"
-                    regex="(s[1-3])|([*][()]?[/=\\&amp;]?[+]?[a-ik-z][|]?)|([a-ik-z][()]?[/=\\&amp;]?[+]?[|]?)|([:])">
+                    regex="(s[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([bgdzhqklmncpstfxv])|([:')])">
                 <xsl:matching-substring>
                     <xsl:value-of select="f:lookup-beta(.)"/>
                 </xsl:matching-substring>
@@ -67,7 +75,7 @@
     <xsl:function name="f:lookup-beta" as="xs:string">
         <xsl:param name="betacode" as="xs:string"/>
 
-        <xsl:sequence select="if ($map($betacode)) then $map($betacode) else '#'"/>
+        <xsl:sequence select="if ($map($betacode)) then $map($betacode) else '###' || $betacode || '###' "/>
     </xsl:function>
 
     <xsl:variable name="map" select="
@@ -368,7 +376,8 @@
             ':' :      '&#x00b7;',
             '''' :     '&#x2019;',
             '-' :      '&#x2010;',
-            '_' :      '&#x2014;'
+            '_' :      '&#x2014;',
+            ')' :      '&#x2019;'
 
         }">      
     </xsl:variable>
