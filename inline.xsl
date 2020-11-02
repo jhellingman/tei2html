@@ -45,6 +45,9 @@
 
         <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) then f:remove-eol-hyphens(.) else ."/>
 
+        <xsl:variable name="text" select="if (f:is-set('beta.convert') and f:get-current-lang(.) = 'grc')
+                                          then f:beta-to-unicode(., f:is-set('beta.caseSensitive')) else ."/>
+
         <xsl:value-of select="f:process-text($text)"/>
     </xsl:template>
 

@@ -7,6 +7,7 @@
 
     <xsl:include href="../utils.xsl"/>
     <xsl:include href="../utils.html.xsl"/>
+    <xsl:include href="../betacode.xsl"/>
     <xsl:include href="../configuration.xsl"/>
     <xsl:include href="../log.xsl"/>
     <xsl:include href="../localization.xsl"/>

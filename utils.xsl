@@ -225,14 +225,15 @@
     <!--====================================================================-->
     <!-- Language tagging -->
 
-
     <xd:doc>
         <xd:short>Determine the natural language used in the indicated node.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:get-current-lang" as="xs:string">
         <xsl:param name="node" as="node()"/>
-        <xsl:variable name="current-lang" select="($node/ancestor-or-self::*/@lang)[last()]"/>
+        <xsl:variable 
+            name="current-lang" 
+            select="($node/ancestor-or-self::*/@lang | $node/ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:value-of select="if ($current-lang) then $current-lang else f:get-document-lang()"/>
     </xsl:function>
 
@@ -242,7 +243,7 @@
     </xd:doc>
 
     <xsl:function name="f:get-document-lang" as="xs:string">
-        <xsl:value-of select="$root/*[self::TEI.2 or self::TEI]/@lang"/>
+        <xsl:value-of select="$root/*[self::TEI.2 or self::TEI]/@lang | $root/*[self::TEI.2 or self::TEI]/@xml:lang"/>
     </xsl:function>
 
 

@@ -26,16 +26,17 @@
 
     <xd:doc>
         <xd:short>Determine whether a note is a footnote.</xd:short>
+        <xd:detail>Note that Perseus texts encode the placement of the note in the <code>@type</code> attribute, hence the complex check.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:is-footnote" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
-        <xsl:sequence select="$note/@place = ('foot', 'unspecified') or not($note/@place)"/>
+        <xsl:sequence select="$note/@place = ('foot', 'unspecified') or (not($note/@place) and not($note/@type = 'margin'))"/>
     </xsl:function>
 
     <xsl:function name="f:is-margin-note" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
-        <xsl:sequence select="$note/@place = ('margin', 'left', 'right')"/>
+        <xsl:sequence select="$note/@place = ('margin', 'left', 'right') or $note/@type = 'margin'"/>
     </xsl:function>
 
     <xsl:function name="f:is-cut-in-note" as="xs:boolean">

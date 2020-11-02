@@ -111,6 +111,9 @@
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
 
+            <beta.convert>false</beta.convert>                              <!-- Interprete beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
+            <beta.caseSensitive>false</beta.caseSensitive>                  <!-- Beta-code is case sensitive (i.e., not using the * notation for capital letters) -->
+
             <css.stylesheet>style/arctic.css</css.stylesheet>               <!-- Default CSS stylesheet to include. -->
             <css.useCommon>true</css.useCommon>                             <!-- Use the build-in stylesheets (for screen) -->
             <css.useCommonPrint>true</css.useCommonPrint>                   <!-- Use the build-in stylesheets (for print media) -->

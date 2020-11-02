@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
+
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <x:param name="root" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="zxx"/>
+    </x:param>
 
     <!-- f:generate-stable-id -->
 
@@ -212,6 +219,72 @@
                 </div1>
             </text>
       </x:expect>
+   </x:scenario>
+
+    <!-- f:get-current-lang -->
+
+   <x:scenario label="When determining the current language">
+      <x:call function="f:get-current-lang">
+         <x:param select="/text/div[2]/p">
+            <text lang="und">
+              <div>
+                 <p lang="en" id="p1">Hello!</p>
+              </div>
+              <div>
+                 <p lang="it" id="p2">Ciao!</p>
+              </div>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return language current at the given node" select="'it'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the current language (specified on ancestor node)">
+      <x:call function="f:get-current-lang">
+         <x:param select="/text/div[2]/p">
+            <text lang="und">
+              <div lang="en">
+                 <p id="p1">Hello!</p>
+              </div>
+              <div lang="it">
+                 <p id="p2">Ciao!</p>
+              </div>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return language current at the given node" select="'it'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the current language (using xml:lang)">
+      <x:call function="f:get-current-lang">
+         <x:param select="/text/div[2]/p">
+            <text xml:lang="und">
+              <div xml:lang="en">
+                 <p id="p1">Hello!</p>
+              </div>
+              <div xml:lang="it">
+                 <p id="p2">Ciao!</p>
+              </div>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return language current at the given node" select="'it'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the current language (none given)">
+      <x:call function="f:get-current-lang">
+         <x:param select="/text/div[2]/p">
+            <text>
+              <div xml:lang="en">
+                 <p id="p1">Hello!</p>
+              </div>
+              <div>
+                 <p id="p2">Ciao!</p>
+              </div>
+            </text>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the document language specified on $root" select="'zxx'"/>
    </x:scenario>
 
 </x:description>
