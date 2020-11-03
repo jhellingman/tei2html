@@ -60,20 +60,22 @@
             upper case vowel:          ([()]?[/=\]?[+]?[AEHIOUW][|]?)
             lower case vowel:       ([aehiouw][()]?[/=\&]?[+]?[|]?)
             upper case rho:         ([*][(]?r)
+            upper case rho:         ([(]?R)
             lower case rho:         (r[()]?)
             upper case consonant:   ([*][bgdzhqklmncpstfxv])
             upper case consonant:      ([BGDZHQKLMNCPSTFXV])
             lower case consonant:   ([bgdzhqklmncpstfxv])
-            special letter:         (s[1-3])
+            upper case sigma        (S[1-3])
+            lower case sigma:       (s[1-3])
             special punctuation:    ([:')])
 
-            combined: (s[1-3])|([*][()]?[/=\]?[+]?[aehiouw][|]?)|([()]?[/=\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\&]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])
-            escaped:  (s[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([()]?[/=\\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])
+            combined: (s[1-3])|(S[1-3])|([*][()]?[/=\]?[+]?[aehiouw][|]?)|([()]?[/=\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\&]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([(]?R)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])
+            escaped:  (s[1-3])|(S[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([()]?[/=\\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([(]?R)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])
         -->
 
         <xsl:variable name="result" as="xs:string*">
             <xsl:analyze-string select="$string"
-                    regex="(s[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([()]?[/=\\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])">
+                    regex="(s[1-3])|(S[1-3])|([*][()]?[/=\\]?[+]?[aehiouw][|]?)|([()]?[/=\\]?[+]?[AEHIOUW][|]?)|([aehiouw][()]?[/=\\&amp;]?[+]?[|]?)|(r[()]?)|([*][(]?r)|([(]?R)|([*][bgdzhqklmncpstfxv])|([BGDZHQKLMNCPSTFXV])|([bgdzhqklmncpstfxv])|([:')])">
                 <xsl:matching-substring>
                     <xsl:value-of select="f:lookup-beta(.)"/>
                 </xsl:matching-substring>
@@ -392,11 +394,7 @@
             '-' :      '&#x2010;',
             '_' :      '&#x2014;',
             ')' :      '&#x2019;'
-
         }">
     </xsl:variable>
-
-
-
 
 </xsl:stylesheet>
