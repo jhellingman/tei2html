@@ -86,11 +86,14 @@
             <div>
                 <p>Blah blah.</p>
                 <milestone unit="tb"/>
+                <milestone id="tb01" unit="tb" rend="border-bottom(1px solid black) width(100%)"/>
                 <milestone unit="tb" rend="dots"/>
                 <milestone unit="tb" rend="stars"/>
                 <milestone unit="tb" rend="star"/>
                 <milestone unit="tb" rend="asterism"/>
                 <milestone unit="tb" rend="space"/>
+                <milestone unit="tb" rend="dotted"/>
+                <milestone unit="tb" rend="dashed"/>
                 <p>Blah blah.</p>
             </div>
         </x:context>
@@ -98,12 +101,15 @@
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
                <div class="divBody">
                   <p id="..." class="first">Blah blah.</p>
-                  <hr class="tb" id="..." />
+                  <hr class="tb" id="..."/>
+                  <hr class="tb tb01" id="..."/>
                   <p class="tb" id="...">. . . . . . . . . . . . . . . . . . . . .</p>
                   <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
                   <p class="tb" id="...">*</p>
                   <p class="tb" id="...">&asterism;</p>
                   <p class="tb" id="..."/>
+                  <hr class="tb dotted" id="..."/>
+                  <hr class="tb dashed" id="..."/>
                   <p id="...">Blah blah.</p>
                </div>
             </div>

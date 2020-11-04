@@ -233,8 +233,9 @@
     <xsl:variable name="milestone-markers" select="
         map {
             'dots'     : '. . . . . . . . . . . . . . . . . . . . .',
-            'stars'    : '*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*',
+            'dashes'   : '- - - - - - - - - - - - - - - - - - - - -',
             'star'     : '*',
+            'stars'    : '*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*',
             'asterism' : '&asterism;',
             'space'    : ''
         }">
@@ -243,13 +244,18 @@
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
         <xsl:choose>
+            <xsl:when test="@rend = ('dotted', 'dashed')">
+                <hr id="{f:generate-id(.)}" class="tb {@rend}"/>
+            </xsl:when>
             <xsl:when test="@rend = map:keys($milestone-markers)">
                 <xsl:call-template name="generate-milestone-paragraph">
                     <xsl:with-param name="string" select="$milestone-markers(@rend)"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <hr class="tb" id="{f:generate-id(.)}"/>
+                <hr id="{f:generate-id(.)}">
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'tb')"/>
+                </hr>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:call-template name="reopenpar"/>

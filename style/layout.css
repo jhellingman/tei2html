@@ -201,12 +201,21 @@ sup {
 
 hr {
     clear: both;
-    height: 1px;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 45%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
     text-align: center;
-    width: 45%;
+}
+
+hr.dotted {
+    border-bottom: 2px dotted black;
+}
+
+hr.dashed {
+    border-bottom: 2px dashed black;
 }
 
 .aligncenter {
