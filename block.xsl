@@ -24,13 +24,14 @@
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
     xmlns:tmp="urn:temporary"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f msg tmp xd xhtml xs">
+    exclude-result-prefixes="f map msg tmp xd xhtml xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to format block-level elements, to be imported in tei2html.xsl.</xd:short>
@@ -229,32 +230,22 @@
         slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
     </xd:doc>
 
+    <xsl:variable name="milestone-markers" select="
+        map {
+            'dots'     : '. . . . . . . . . . . . . . . . . . . . .',
+            'stars'    : '*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*',
+            'star'     : '*',
+            'asterism' : '&asterism;',
+            'space'    : ''
+        }">
+    </xsl:variable>
+
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
         <xsl:choose>
-            <xsl:when test="contains(@rend, 'dots')">
-                <xsl:call-template name="generate-tb-par">
-                    <xsl:with-param name="string" select="'. . . . . . . . . . . . . . . . . . . . .'"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="contains(@rend, 'stars')">
-                <xsl:call-template name="generate-tb-par">
-                    <xsl:with-param name="string" select="'*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*'"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="contains(@rend, 'star')">
-                <xsl:call-template name="generate-tb-par">
-                    <xsl:with-param name="string" select="'*'"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="contains(@rend, 'asterism')">
-                <xsl:call-template name="generate-tb-par">
-                    <xsl:with-param name="string" select="'&asterism;'"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="contains(@rend, 'space')">
-                <xsl:call-template name="generate-tb-par">
-                    <xsl:with-param name="string" select="''"/>
+            <xsl:when test="@rend = map:keys($milestone-markers)">
+                <xsl:call-template name="generate-milestone-paragraph">
+                    <xsl:with-param name="string" select="$milestone-markers(@rend)"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
@@ -265,7 +256,7 @@
     </xsl:template>
 
 
-    <xsl:template name="generate-tb-par">
+    <xsl:template name="generate-milestone-paragraph">
         <xsl:context-item as="element(milestone)" use="required"/>
         <xsl:param name="string" as="xs:string"/>
         <xsl:element name="{$p.element}">
@@ -341,19 +332,62 @@
 
 
     <xd:doc>
-        <xd:short>Handle a block-quote.</xd:short>
-        <xd:detail>Handle a block-quote (a quote normally set off from the text by some extra space and indentation).</xd:detail>
+        <xd:short>Handle quotations.</xd:short>
+        <xd:detail><p>Handle quotations (a quotation is normally set off from the text by some extra space and indentation).</p>
+
+            <p>Note that TEI has a number of closely related elements for encoding quotations, i.e., <code>q</code>,
+            <code>quote</code> and <code>said</code>, as well as a number of related elements, <code>cit</code>, 
+            <code>mentioned</code> and <code>soCalled</code>. Since these elements regard interpretation of the text
+            and have little impact on its rendering, in combination with the fact that by default these stylesheets
+            assume that all characters are encoded (instead of replaced by mark-up), we do little with those elements.</p>
+
+            <p>In my convention, I often use <code>q</code>-element to set off content that wouldn't fit in the TEI content-model
+            otherwise. Typically these are lines of verse in footnotes. In that case it makes sense to use an HTML
+            <code>div</code>.</p>
+            
+            <p>Other conventions use the <code>q</code>-element to replace quotation marks, in which case it makes sense to 
+            use an HTML <code>span</code>, and restore the quotation marks on output. The behavior can be controlled via the 
+            settings <code>q.asDiv</code> and <code>q.insertQuotes</code>.</p>
+        </xd:detail>
     </xd:doc>
 
     <xsl:template match="q">
-        <xsl:call-template name="closepar"/>
-        <div>
+        <xsl:if test="f:is-set('q.asDiv')">
+            <xsl:call-template name="closepar"/>
+        </xsl:if>
+
+        <xsl:element name="{if (f:is-set('q.asDiv')) then 'div' else 'span'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'q')"/>
+
+            <xsl:variable name="quotes" select="f:get-setting('text.quotes')"/>
+            <xsl:if test="f:is-set('q.insertQuotes')">
+                <xsl:value-of select="if (f:quote-nesting-level(.) mod 2 = 1) then substring($quotes, 1, 1) else substring($quotes, 3, 1)"/>
+            </xsl:if>
+
             <xsl:apply-templates/>
-        </div>
-        <xsl:call-template name="reopenpar"/>
+
+            <xsl:if test="f:is-set('q.insertQuotes')">
+                <xsl:value-of select="if (f:quote-nesting-level(.) mod 2 = 1) then substring($quotes, 2, 1) else substring($quotes, 4, 1)"/>
+            </xsl:if>
+        </xsl:element>
+
+        <xsl:if test="f:is-set('q.asDiv')">
+            <xsl:call-template name="reopenpar"/>
+        </xsl:if>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Determine the nesting level of a quotation in a paragraph.</xd:short>
+        <xd:detail>Count from the most direct ancestor that is a block element, for now consider p, note, cell, item, and q[f:is-block(.)];
+             count the number of q ancestors between that and self.</xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:quote-nesting-level">
+        <xsl:param name="q" as="element(q)"/>
+        <xsl:sequence select="count($q/ancestor::q[ancestor::*[name() = ('p', 'note', 'cell', 'item') or f:is-block(.)]]) + 1"/>
+    </xsl:function>
 
 
     <xsl:template match="q[f:is-block(.)]">

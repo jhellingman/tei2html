@@ -105,11 +105,13 @@
 
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->
-            <text.insertQuotes>false</text.insertQuotes>                    <!-- Insert quotation marks around <q> markup [TODO] based on first four pairs in setting <text.quotes> -->
             <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
+
+            <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes> -->
+            <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->
 
             <beta.convert>false</beta.convert>                              <!-- Interprete beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
             <beta.caseSensitive>false</beta.caseSensitive>                  <!-- Beta-code is case sensitive (i.e., not using the * notation for capital letters) -->

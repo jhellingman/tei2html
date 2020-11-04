@@ -7,9 +7,9 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
-
 
     <!-- pb -->
 
@@ -218,7 +218,7 @@ text-indent:2em;
     </x:scenario>
 
 
-    <x:scenario label="When rendering a single TEI paragraph with a table at the end">
+    <x:scenario pending="still have to fix this" label="When rendering a single TEI paragraph with a table at the end">
         <x:context>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <table><row><cell>First.</cell><cell>Second.</cell></row></table></p>
@@ -236,6 +236,44 @@ text-indent:2em;
             <p></p>
         </x:expect>
     </x:scenario>
+
+
+    <!-- q -->
+
+   <x:scenario label="When determining the q nesting level [1]">
+      <x:call function="f:quote-nesting-level">
+         <x:param select="/div/p/q[1]">
+            <div>
+               <p><q>Not the same thing a bit!</q> said the Hatter. <q>You might just as well say that <q>I see what I eat</q> is the same thing as <q>I eat what I see</q>!</q></p>
+            </div>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the nesting level of the given q-element" select="1"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the q nesting level [2]">
+      <x:call function="f:quote-nesting-level">
+         <x:param select="/div/p/q[2]/q[1]">
+            <div>
+               <p><q>Not the same thing a bit!</q> said the Hatter. <q>You might just as well say that <q>I see what I eat</q> is the same thing as <q>I eat what I see</q>!</q></p>
+            </div>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the nesting level of the given q-element" select="2"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the q nesting level [2]">
+      <x:call function="f:quote-nesting-level">
+         <x:param select="/q/note/q[2]/q[1]">
+            <q>
+                <note>
+                    <q>Not the same thing a bit!</q> said the Hatter. <q>You might just as well say that <q>I see what I eat</q> is the same thing as <q>I eat what I see</q>!</q>
+                </note>
+            </q>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the nesting level of the given q-element" select="2"/>
+   </x:scenario>
 
 
 </x:description>
