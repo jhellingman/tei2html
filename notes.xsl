@@ -236,8 +236,7 @@
 
     <xsl:template name="footnote-marker">
         <xsl:context-item as="element(note)" use="required"/>
-
-        <span class="label">
+        <span class="fnlabel">
             <a class="noteRef" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:note-marker(.)"/>
             </a>
@@ -598,7 +597,7 @@
 
     <xsl:template name="apparatus-note-marker">
         <xsl:context-item as="element(note)" use="required"/>
-        <span class="label">
+        <span class="fnlabel">
             <a class="apparatusnote" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
             </a>

@@ -323,7 +323,10 @@
 </p>
 
 
-<p>We can also place tables in footnotes.<note n="3" place="foot"><p>Just adding a table in a <index level1="Footnote"/>footnote:</p>
+<p>We can also place tables<note n="x"><table>
+<row><cell>First row, first cell</cell><cell>First row, second cell</cell></row>
+<row><cell>Second row, first cell</cell><cell>Second row, second cell</cell></row>
+</table></note> in footnotes.<note n="3" place="foot"><p>This is an example of a table in a <index level1="Footnote"/>footnote:</p>
 
 <p><table id="tableDemo2" rend="width(40%) align(center)">
     <head>Head above table.</head>

@@ -53,10 +53,6 @@ p.dropcap:first-letter {
 	font-weight: bold;
 }
 
-sub, sup {
-	line-height: 0;
-}
-
 .lg .liNenum, .sp .liNenum {
 	left: 1.58em;
 	color: black;

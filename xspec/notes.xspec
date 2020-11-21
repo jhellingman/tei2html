@@ -37,7 +37,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -70,17 +70,17 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.2">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -113,12 +113,12 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -151,7 +151,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label">
+                            <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
                                 <a class="fnreturn" href="#n.1src" title="Return to note 1(a) in text.">a</a>
                                 <x:text> </x:text>
@@ -160,7 +160,7 @@
                      </div>
                      <div id="n.3">
                          <p class="footnote">
-                            <span class="label"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
+                            <span class="fnlabel"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
                   </div>
@@ -189,7 +189,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label">
+                            <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
@@ -219,7 +219,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                      <p class="footnote">
-                        <span class="label">
+                        <span class="fnlabel">
                             <a class="noteRef" href="#n.1src">1</a></span> Text of first paragraph.</p>
                             <p id="..." class="footnote cont">Text of second paragraph.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                      </p>
@@ -250,7 +250,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                          <p class="footnote">
-                            <span class="label">
+                            <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a>
                             </span> &lt;/p&gt;<div class="table" id="...">
                             <table>
@@ -291,7 +291,7 @@
                   <div class="footnote-body">
                     <div id="n.1">
                      <p class="footnote">
-                        <span class="label">
+                        <span class="fnlabel">
                             <a class="noteRef" href="#n.1src">1</a>
                         </span> &lt;/p&gt;<ul id="...">
                             <li id="...">first cell</li>

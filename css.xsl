@@ -121,6 +121,7 @@
         </xsl:variable>
 
         <!-- Standard CSS stylesheets. -->
+        <xsl:value-of select="f:css-stylesheet('style/normalize.css')"/>
         <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
         <xsl:value-of select="f:css-stylesheet('style/list.css')"/>
 

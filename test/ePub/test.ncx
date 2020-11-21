@@ -24,11 +24,11 @@
          </navLabel>
          <content src="cover.xhtml#cover"/>
       </navPoint>
-      <navPoint playOrder="2" class="titlepage" id="xd33e103">
+      <navPoint playOrder="2" class="titlepage" id="xd34e103">
          <navLabel>
             <text>Title Page</text>
          </navLabel>
-         <content src="test-frontmatter-2.xhtml#xd33e103"/>
+         <content src="test-frontmatter-2.xhtml#xd34e103"/>
       </navPoint>
       <navPoint playOrder="3" class="part" id="bk1">
          <navLabel>

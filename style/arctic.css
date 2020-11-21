@@ -38,7 +38,3 @@ p.dropcap:first-letter {
     color: #001FA4;
     font-weight: bold;
 }
-
-sub, sup {
-    line-height: 0;
-}

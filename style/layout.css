@@ -179,10 +179,6 @@ span.measure {
     text-decoration: underline;
 }
 
-sup {
-    line-height: 6pt;
-}
-
 /* overline is actually a bit too high; overtilde is approximated with overline */
 
 .overline, .overtilde {
@@ -314,9 +310,13 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
 }
 
 a.noteRef, a.pseudoNoteRef {
-    font-size: 80%;
+    font-size: 67%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.5em;
     text-decoration: none;
-    vertical-align: 0.25em;
+    margin-left: 0.1em;
 }
 
 .displayfootnote {
@@ -341,11 +341,12 @@ p.footnote, .par.footnote {
     margin-top: 0.5em;
 }
 
-p.footnote .label, .par.footnote .label {
-    float: left;
-    width: 2em;
-    height: 12pt;
-    display: block;
+p.footnote .fnlabel, .par.footnote .fnlabel {
+    float: left; /* use float to position next to block elements */
+    min-width: 1.0em;
+    margin-left: -0.1em; /* compensate margin-left in a.noteRef rule */
+    padding-top: 0.9em;
+    padding-right: 0.4em;
 }
 
 .apparatusnote {
