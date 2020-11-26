@@ -5,51 +5,51 @@
 */
 
 .titlePage {
-	border: #DDDDDD 2px solid;
-	margin: 3em 0 7em 0;
-	padding: 5em 10% 6em 10%;
-	text-align: center;
+    border: #DDDDDD 2px solid;
+    margin: 3em 0 7em 0;
+    padding: 5em 10% 6em 10%;
+    text-align: center;
 }
 
 .titlePage .docTitle {
-	line-height: 3.5em;
-	margin: 2em 0 2em 0;
-	font-weight: bold;
+    line-height: 3.5em;
+    margin: 2em 0 2em 0;
+    font-weight: bold;
 }
 
 .titlePage .docTitle .mainTitle {
-	font-size: 1.8em;
+    font-size: 1.8em;
 }
 
 .titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle,
-	.titlePage .docTitle .volumeTitle {
-	font-size: 1.44em;
+    .titlePage .docTitle .volumeTitle {
+    font-size: 1.44em;
 }
 
 .titlePage .byline {
-	margin: 2em 0 2em 0;
-	font-size: 1.2em;
-	line-height: 1.72em;
+    margin: 2em 0 2em 0;
+    font-size: 1.2em;
+    line-height: 1.72em;
 }
 
 .titlePage .byline .docAuthor {
-	font-size: 1.2em;
-	font-weight: bold;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .titlePage .figure {
-	margin: 2em auto;
+    margin: 2em auto;
 }
 
 .titlePage .docImprint {
-	margin: 4em 0 0 0;
-	font-size: 1.2em;
-	line-height: 1.72em;
+    margin: 4em 0 0 0;
+    font-size: 1.2em;
+    line-height: 1.72em;
 }
 
 .titlePage .docImprint .docDate {
-	font-size: 1.2em;
-	font-weight: bold;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 /* End of titlepage.css */

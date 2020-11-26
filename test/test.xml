@@ -172,11 +172,17 @@
 
 <p><hi rend="bold">&ldquo;A sample of quotation marks in bold, including the marks.&rdquo;</hi></p>
 
-<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation using class(hangq). &lorem;&rsquo;</p>
+<q rend="block"><p rend="class(hangq)">&lsquo;Test of hanging punctuation using <tt>class(hangq)</tt>.&rsquo;</p>
 
-<p rend="class(hangqq)">&ldquo;Test of hanging punctuation using class(hangqq). &lorem;&rdquo;</p>
+<p rend="class(hangq)">&lsquo;&lorem;&rsquo;</p>
 
-<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation using class(hangqqq). &lorem;&rdquo;&rsquo;</p></q>
+<p rend="class(hangqq)">&ldquo;Test of hanging punctuation using <tt>class(hangqq)</tt>.&rdquo;</p>
+
+<p rend="class(hangqq)">&ldquo;&lorem;&rdquo;</p>
+
+<p rend="class(hangqqq)">&lsquo;&ldquo;Test of hanging punctuation using <tt>class(hangqqq)</tt>.&rdquo;&rsquo;</p>
+
+<p rend="class(hangqqq)">&lsquo;&ldquo;&lorem;&rdquo;&rsquo;</p></q>
 
 <p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="figTest2">figure</ref>.</p>
 
@@ -359,7 +365,7 @@
 </note></p>
 
 
-<p>A table with vertical borders on the inside [class(verticalBorderInside)]:</p>
+<p>A table with vertical borders on the inside <tt>class(verticalBorderInside)</tt>:</p>
 
 <p>
 <table id="tableDemoBorders" rend="summary(A small table to demonstrate tables in TEI) class(verticalBorderInside)">
@@ -398,7 +404,7 @@
 </table>
 </p>
 
-<p>The same table with borders on the outside [class(borderOutside)]:</p>
+<p>The same table with borders on the outside <tt>class(borderOutside)</tt>:</p>
 
 <p>
 <table id="tableDemoBorders2" rend="summary(A small table to demonstrate tables in TEI) class(borderOutside)">
@@ -437,7 +443,7 @@
 </table>
 </p>
 
-<p>The same table with all cell borders shown [class(borderAll)]:</p>
+<p>The same table with all cell borders shown <tt>class(borderAll)</tt>:</p>
 
 <p>
 <table id="tableDemoBorders3" rend="summary(A small table to demonstrate tables in TEI) class(borderAll)">
@@ -491,7 +497,7 @@
 </table>
 </p>
 
-<p>But this table is just indented 2 ems.</p>
+<p>But this table is just indented 2 em.</p>
 
 <p>
 <table id="tableDemoIndent" rend="indent(2)">
@@ -539,8 +545,7 @@
 </table>
 </p>
 
-<p>In the following table, we use a TEI extension, that is, the element column to provide rendering attributes that cover an entire column. Since the HTML colspan and col elements are not widely supported, we translate these to class attributes on each cell in the column.
-</p>
+<p>In the following table, we use a TEI extension, that is, the element <tt>column</tt> to provide rendering attributes that cover an entire column. Since the HTML <tt>colspan</tt> and <tt>col</tt> elements are not widely supported, we translate these to class attributes on each cell in the column.</p>
 
 <p>
 <table id="tableDemoAlign" rend="width(40%) border-collapse(collapse)">
@@ -597,7 +602,7 @@
 <?epubsplit?>
 
 
-<p>Setting a table in 3-up format, by using rend="columns(3)". This makes it possible to set tables more compactly when they are tall and narrow. Note that the border-lines at the bottom are not always correctly drawn.</p>
+<p>Setting a table in 3-up format, by using <tt>rend="columns(3)"</tt>. This makes it possible to set tables more compactly when they are tall and narrow.</p>
 
 <p>
 <table id="tableDemoThreeUp" rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center)">
@@ -651,10 +656,10 @@
 </table>
 </p>
 
-<p>The same table once more, now using item-order(row-first):</p>
+<p>The same table once more, now using <tt>item-order(column-major)</tt>:</p>
 
 <p>
-<table id="tableDemoThreeUp2" rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center) item-order(row-first)">
+<table id="tableDemoThreeUp2" rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center) item-order(column-major)">
     <column/>
     <column/>
     <column rend="text-align(right)"/>
@@ -668,6 +673,96 @@
         <cell></cell>
         <cell>kg</cell>
     </row>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+    <row>
+        <cell>5</cell>
+        <cell>Oranges</cell>
+        <cell>2.4</cell>
+    </row>
+    <row>
+        <cell>6</cell>
+        <cell>Strawberries</cell>
+        <cell>1.0</cell>
+    </row>
+    <row>
+        <cell>7</cell>
+        <cell>Cherries</cell>
+        <cell>4.0</cell>
+    </row>
+</table>
+</p>
+
+<p>The same table once more, now using without a header:</p>
+
+<p>
+<table id="tableDemoThreeUp3" rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
+    <row>
+        <cell>1</cell>
+        <cell>Apples</cell>
+        <cell>12.4</cell>
+    </row>
+    <row>
+        <cell>2</cell>
+        <cell>Bananas</cell>
+        <cell>22.8</cell>
+    </row>
+    <row>
+        <cell>3</cell>
+        <cell>Melon</cell>
+        <cell>4.6</cell>
+    </row>
+    <row>
+        <cell>4</cell>
+        <cell>Grapes</cell>
+        <cell>9.2</cell>
+    </row>
+    <row>
+        <cell>5</cell>
+        <cell>Oranges</cell>
+        <cell>2.4</cell>
+    </row>
+    <row>
+        <cell>6</cell>
+        <cell>Strawberries</cell>
+        <cell>1.0</cell>
+    </row>
+    <row>
+        <cell>7</cell>
+        <cell>Cherries</cell>
+        <cell>4.0</cell>
+    </row>
+</table>
+</p>
+
+<p>The same table a last time, now again using <tt>item-order(column-major)</tt>:</p>
+
+<p>
+<table id="tableDemoThreeUp3" rend="summary(A small table to demonstrate tables in TEI) class(borderAll) columns(3) align(center) item-order(column-major)">
+    <column/>
+    <column/>
+    <column rend="text-align(right)"/>
     <row>
         <cell>1</cell>
         <cell>Apples</cell>
@@ -940,7 +1035,7 @@
     <item>Four</item>
 </list>
 
-<p>We can split a list into two columns, by putting columns(2) in the rend attribute.</p>
+<p>We can split a list into two columns, by putting <tt>columns(2)</tt> in the rend attribute.</p>
 
 <list rend="columns(2) list-style-type(disc)">
     <item>One</item>
@@ -989,7 +1084,7 @@
 </list>
 
 
-<p>Similarly, we can split it in three columns as well, using columns(3).</p>
+<p>Similarly, we can split it in three columns as well, using <tt>columns(3)</tt>.</p>
 
 <list rend="columns(3) list-style-type(disc)">
     <item>One</item>
@@ -1004,9 +1099,9 @@
     <item>Ten</item>
 </list>
 
-<p>And in a different order, by using item-order(row-first).</p>
+<p>And in a different order, by using <tt>item-order(column-major)</tt>.</p>
 
-<list rend="columns(3) item-order(row-first) list-style-type(disc)">
+<list rend="columns(3) item-order(column-major) list-style-type(disc)">
     <item>One</item>
     <item>Two</item>
     <item>Three</item>

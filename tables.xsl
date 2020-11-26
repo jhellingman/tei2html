@@ -333,6 +333,22 @@
         <!-- A cell is considered part of the table head if it has a @role of label or unit -->
         <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cellHead' else 'cell'"/>
 
+        <!-- Some stuff to determine this cell is at the bottom of a column in an N-up table -->
+        <xsl:variable name="parentTable" select="ancestor::table[1]"/>
+        <xsl:variable name="column-count" as="xs:integer" select="xs:integer(f:if-null(f:rend-value($parentTable/@rend, 'columns'), 1))"/>
+        <xsl:variable name="item-order" as="xs:string" select="f:rend-value($parentTable/@rend, 'item-order')"/>
+        <xsl:variable name="row-count" as="xs:integer" select="f:count-data-rows($parentTable)"/>
+        <xsl:variable name="header-count" as="xs:integer" select="f:count-header-rows($parentTable)"/>
+        <xsl:variable name="current-row" as="xs:integer" select="(if (@row) then xs:integer(@row) else count(../preceding-sibling::row)) - $header-count"/>
+        <xsl:variable name="rows-per-colum" select="ceiling($row-count div $column-count)"/>
+
+        <xsl:variable name="is-bottom-cell" as="xs:boolean" select="if ($item-order = 'column-major') 
+            then $current-row > $row-count - $column-count
+            else $current-row mod $rows-per-colum = 0 "/>
+        <xsl:variable name="is-top-cell" as="xs:boolean" select="$header-count = 0 and (if ($item-order = 'column-major') 
+            then $current-row &lt;= $column-count
+            else ($current-row - 1) mod $rows-per-colum = 0)"/>
+
         <xsl:choose>
             <!-- Do we have the @col attribute on the table, then we can use those attributes -->
             <xsl:when test="@col">
@@ -352,8 +368,8 @@
                 <xsl:if test="not(../following-sibling::row[f:is-header-row(.)])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
-                <xsl:if test="not(../following-sibling::row)"><xsl:text>cellBottom </xsl:text></xsl:if>
+                <xsl:if test="$is-top-cell or not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
+                <xsl:if test="$is-bottom-cell or not(../following-sibling::row)"><xsl:text>cellBottom </xsl:text></xsl:if>
             </xsl:otherwise>
         </xsl:choose>
 
@@ -425,20 +441,14 @@
     <xsl:template name="n-up-table">
         <xsl:context-item as="element(table)" use="required"/>
 
-        <xsl:variable name="n" as="xs:integer">
-            <xsl:value-of select="number(f:rend-value(@rend, 'columns'))"/>
-        </xsl:variable>
-
-        <xsl:variable name="item-order" as="xs:string">
-            <xsl:value-of select="f:rend-value(@rend, 'item-order')"/>
-        </xsl:variable>
+        <xsl:variable name="n" as="xs:integer" select="xs:integer(f:rend-value(@rend, 'columns'))"/>
+        <xsl:variable name="item-order" as="xs:string" select="f:rend-value(@rend, 'item-order')"/>
 
         <!-- Get labels and units first (simplified model, see templates dealing with a normal-table for more complex situation). -->
-        <xsl:variable name="headers" select="row[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
+        <xsl:variable name="headers" select="f:get-header-rows(.)"/>
 
         <!-- Get remainder of data  -->
-        <xsl:variable name="rows" select="row[preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))]]"/>
-
+        <xsl:variable name="rows" select="f:get-data-rows(.)"/>
         <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
 
         <table>
@@ -513,5 +523,25 @@
             </tbody>
         </table>
     </xsl:template>
+    
+    <xsl:function name="f:get-header-rows" as="element(row)*">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="$table/row[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
+    </xsl:function>
+
+    <xsl:function name="f:count-header-rows" as="xs:integer">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="if ($table/@headrows) then xs:integer($table/@headrows) else count(f:get-header-rows($table))"/>
+    </xsl:function>
+
+    <xsl:function name="f:get-data-rows" as="element(row)*">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="$table/row[preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))]]"/>
+    </xsl:function>
+
+    <xsl:function name="f:count-data-rows" as="xs:integer">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="if ($table/@rows and $table/@headrows) then xs:integer($table/@rows - $table/@headrows) else count(f:get-data-rows($table))"/>
+    </xsl:function>
 
 </xsl:stylesheet>

@@ -1,50 +1,50 @@
 /* modern.css -- more modern style of formatting books */
 
 body {
-	background: #FFFFFF;
-	font-family: Garamond, Baskerville, 'Baskerville Old Face' , 'Hoefler Text', 'Times New Roman', serif;
+    background: #FFFFFF;
+    font-family: Garamond, Baskerville, 'Baskerville Old Face' , 'Hoefler Text', 'Times New Roman', serif;
 }
 
 body, a.hidden {
-	color: black;
+    color: black;
 }
 
 h1, .h1 {
-	padding-bottom: 5em;
+    padding-bottom: 5em;
 }
 
 h1, h2, .h1, .h2 {
-	text-align: left;
-	font-weight: bold;
+    text-align: left;
+    font-weight: bold;
 }
 
 p.byline {
-	text-align: left;
-	font-style: italic;
-	margin-bottom: 2em;
+    text-align: left;
+    font-style: italic;
+    margin-bottom: 2em;
 }
 
 .figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
-	color: #660000;
+    color: #660000;
 }
 
 .rightnote, .pageNum, .lineNum, .pageNum a {
-	color: #AAAAAA;
+    color: #AAAAAA;
 }
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
-	color: red;
+    color: red;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 table {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tablecaption {
-	text-align: left;
+    text-align: left;
 }

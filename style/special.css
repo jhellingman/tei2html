@@ -13,15 +13,15 @@ span.ditto {
 }
 
 span.ditto span.s {
-	height: 0;
-	visibility: hidden;
-	line-height: 0;
+    height: 0;
+    visibility: hidden;
+    line-height: 0;
 }
 
 span.ditto span.d {
-	display: block;
-	text-align: center;
-	line-height: 8pt;
+    display: block;
+    text-align: center;
+    line-height: 8pt;
 }
 
 span.ditto span.i {

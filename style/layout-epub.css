@@ -5,9 +5,9 @@
 */
 
 .epub-media-overlay-active {
-	background-color: yellow;
+    background-color: yellow;
 }
 
 span.measure {
-	border-bottom: none;
+    border-bottom: none;
 }

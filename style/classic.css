@@ -1,52 +1,52 @@
 
 body {
-	background: #FFFFFF;
-	font-family: "Times New Roman", Times, serif;
+    background: #FFFFFF;
+    font-family: "Times New Roman", Times, serif;
 }
 
 body, a.hidden {
-	color: black;
+    color: black;
 }
 
 h1, .h1 {
-	padding-bottom: 5em;
+    padding-bottom: 5em;
 }
 
 h1, h2, .h1, .h2 {
-	text-align: center;
-	font-variant: small-caps;
-	font-weight: normal;
+    text-align: center;
+    font-variant: small-caps;
+    font-weight: normal;
 }
 
 p.byline {
-	text-align: center;
-	font-style: italic;
-	margin-bottom: 2em;
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 2em;
 }
 
 .figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
-	color: #660000;
+    color: #660000;
 }
 
 .rightnote, .pageNum, .lineNum, .pageNum a {
-	color: #AAAAAA;
+    color: #AAAAAA;
 }
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
-	color: red;
+    color: red;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 table {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tablecaption {
-	text-align: center;
+    text-align: center;
 }
 
 /* Script codes, see ISO-15924 */

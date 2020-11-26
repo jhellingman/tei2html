@@ -5,61 +5,61 @@
 */
 
 div.figure {
-	text-align: center;
+    text-align: center;
 }
 
 .figure {
-	margin-left: auto;
-	margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .floatLeft {
-	float: left;
-	margin: 10px 10px 10px 0;
+    float: left;
+    margin: 10px 10px 10px 0;
 }
 
 .floatRight {
-	float: right;
-	margin: 10px 0 10px 10px;
+    float: right;
+    margin: 10px 0 10px 10px;
 }
 
 p.figureHead, .par.figureHead {
-	font-size: 100%;
-	text-align: center;
+    font-size: 100%;
+    text-align: center;
 }
 
 .figAnnotation {
-	font-size: 80%;
-	position: relative;
-	margin: 0 auto; /* center this */
+    font-size: 80%;
+    position: relative;
+    margin: 0 auto; /* center this */
 }
 
 .figTopLeft, .figBottomLeft {
-	float: left;
+    float: left;
 }
 
 .figTopRight, .figBottomRight {
-	float: right;
+    float: right;
 }
 
 .figure p, .figure .par {
-	font-size: 80%;
-	margin-top: 0;
-	text-align: center;
+    font-size: 80%;
+    margin-top: 0;
+    text-align: center;
 }
 
 img {
-	border-width: 0;
+    border-width: 0;
 }
 
 td.galleryFigure {
-	text-align: center;
-	vertical-align: middle;
+    text-align: center;
+    vertical-align: middle;
 }
 
 td.galleryCaption {
-	text-align: center;
-	vertical-align: top;
+    text-align: center;
+    vertical-align: top;
 }
 
 /* End of figure.css */

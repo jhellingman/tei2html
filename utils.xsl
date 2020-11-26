@@ -396,6 +396,18 @@
 
 
     <xd:doc>
+        <xd:short>Provide a default value when a value is null.</xd:short>
+        <xd:param name="value" type="string">The value to be tested.</xd:param>
+        <xd:param name="default" type="string">The default value.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:if-null">
+        <xsl:param name="value"/>
+        <xsl:param name="default"/>
+        <xsl:sequence select="if (not($value)) then $default else $value"/>
+    </xsl:function>
+
+    <xd:doc>
         <xd:short>List of contributor roles and related OPF-codes and message ids.</xd:short>
         <xd:detail>
             <p>The list used was taken from the OPF Standard, 2.0, section 2.2.6

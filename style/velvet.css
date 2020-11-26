@@ -1,47 +1,48 @@
+
 body {
-	background: black;
-	color: #888888;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 12pt;
+    background: black;
+    color: #888888;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12pt;
 }
 
 body, a.hidden {
-	color: #888888;
+    color: #888888;
 }
 
 .titlePage {
-	color: #FDF1BA;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #FDF1BA;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
-	color: #FDF1BA;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #FDF1BA;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 p.byline {
-	font-style: italic;
-	margin-bottom: 2em;
+    font-style: italic;
+    margin-bottom: 2em;
 }
 
 .figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
-	color: #FDF1BA;
+    color: #FDF1BA;
 }
 
 .rightnote, .pageNum, .lineNum, .pageNum a {
-	color: #555555;
+    color: #555555;
 }
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
-	color: red;
+    color: red;
 }
 
 .titlePage {
-	border: #555555 2px solid;
+    border: #555555 2px solid;
 }
 
 .transcriberNote {
-	background-color: #222;
-	border: #FDF1BA 1px dotted;
-	color: #888;
+    background-color: #222;
+    border: #FDF1BA 1px dotted;
+    color: #888;
 }

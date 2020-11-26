@@ -314,11 +314,11 @@ p.firstlinecaps:first-line, .par.firstlinecaps:first-line {
 }
 
 .hangqq {
- text-indent: -0.40em;
+ text-indent: -0.42em;
 }
 
 .hangqqq {
- text-indent: -0.71em;
+ text-indent: -0.84em; 
 }
 
 p.dropcap:first-letter, .par.dropcap:first-letter {
@@ -375,6 +375,15 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  vertical-align: 0.25em;
 }
 
+a {
+ text-decoration: none;
+}
+
+a:hover {
+ text-decoration: underline;
+ background-color: #e9f5ff;
+}
+
 a.noteRef, a.pseudoNoteRef {
  font-size: 67%;
  line-height: 0;
@@ -382,7 +391,7 @@ a.noteRef, a.pseudoNoteRef {
  vertical-align: baseline;
  top: -0.5em;
  text-decoration: none;
- padding-left: 0.08em;
+ margin-left: 0.1em;
 }
 
 .displayfootnote {
@@ -409,8 +418,8 @@ p.footnote, .par.footnote {
 
 p.footnote .fnlabel, .par.footnote .fnlabel {
  float: left; 
- min-width: 1.2em;
- margin-left: -0.08em; 
+ min-width: 1.0em;
+ margin-left: -0.1em; 
  padding-top: 0.9em;
  padding-right: 0.4em;
 }
@@ -1109,6 +1118,7 @@ table.alignedverse td.lineNumbers {
 span.measure {
  border-bottom: none;
 }
+
 body {
  background: #FFFFFF;
  font-family: "Times New Roman", Times, serif;
@@ -1189,7 +1199,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd34e588 {
+.xd34e606 {
 text-align:right;
 }
 
@@ -1209,7 +1219,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd34e999 {
+.xd34e1153 {
 background-color:green;
 }
 
@@ -1225,7 +1235,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd34e1000 {
+.xd34e1154 {
 background-color:white;
 }
 
@@ -1253,27 +1263,27 @@ font-size:14pt; color:red; background-color:yellow;
 width:96px;
 }
 
-.xd34e407 {
+.xd34e422 {
 text-align:left;
 }
 
-.xd34e410 {
+.xd34e425 {
 text-align:right;
 }
 
-.xd34e412 {
+.xd34e427 {
 text-align:center;
 }
 
 
-.xd34e414 {
+.xd34e429 {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd34e414init {
+.xd34e429init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1287,11 +1297,11 @@ text-align:center;
 }
 
         
-.xd34e422 {
+.xd34e437 {
 text-align:justify;
 }
 
-.xd34e437 {
+.xd34e452 {
 text-align:center;
 }
 
@@ -1299,7 +1309,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd34e554 {
+.xd34e569 {
 text-align:right;
 }
 
@@ -1307,11 +1317,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd34e731 {
+.xd34e755 {
 vertical-align:middle; width:2px;
 }
 
-.xd34e732 {
+.xd34e756 {
 vertical-align:middle;
 }
 
@@ -1319,11 +1329,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd34e743 {
+.xd34e767 {
 width:25%;
 }
 
-.xd34e745 {
+.xd34e769 {
 width:75%;
 }
 
@@ -1343,11 +1353,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd34e861 {
+.xd34e895 {
 color:red;
 }
 
-.xd34e881 {
+.xd34e915 {
 color:yellow; background-color:black;
 }
 
@@ -1359,19 +1369,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd34e1030 {
+.xd34e1184 {
 background-color:yellow;
 }
 
-.xd34e1048 {
+.xd34e1202 {
 background-color:blue;
 }
 
-.xd34e1057 {
+.xd34e1211 {
 background-color:orange;
 }
 
-.xd34e1067 {
+.xd34e1221 {
 background-color:red;
 }
 
@@ -1403,47 +1413,47 @@ width:480px;
 width:580px;
 }
 
-.xd34e1275 {
+.xd34e1429 {
 font-style:italic;
 }
 
-.xd34e1299 {
+.xd34e1456 {
 list-style-type:disc;
 }
 
-.xd34e1315 {
+.xd34e1472 {
 list-style-type:upper-roman;
 }
 
-.xd34e1324 {
+.xd34e1481 {
 list-style-type:lower-roman;
 }
 
-.xd34e1337 {
+.xd34e1497 {
 list-style-type:disc;
 }
 
-.xd34e1349 {
+.xd34e1512 {
 list-style-type:disc;
 }
 
-.xd34e1424 {
+.xd34e1587 {
 text-align:center;
 }
 
-.xd34e1429 {
+.xd34e1592 {
 text-indent:1em;
 }
 
-.xd34e1435 {
+.xd34e1598 {
 text-indent:2em;
 }
 
-.xd34e1439 {
+.xd34e1602 {
 text-indent:3em;
 }
 
-.xd34e1443 {
+.xd34e1606 {
 text-indent:10em;
 }
 
@@ -1465,12 +1475,12 @@ display:none;
 @media handheld {
 
 
-.xd34e414 {
+.xd34e429 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd34e414init {
+.xd34e429init {
     float: none;
     width: auto;
     height: auto;
@@ -1485,6 +1495,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd34e1616 {
+.xd34e1779 {
 color:red
 }

@@ -1,70 +1,70 @@
 /* normalize.css -- based on normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 html {
-  line-height: 1.2;
+    line-height: 1.2;
 }
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 main {
-  display: block;
+    display: block;
 }
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+    font-size: 2em;
+    margin: 0.67em 0;
 }
 
 hr {
-  height: 0;
-  overflow: visible; 
+    height: 0;
+    overflow: visible; 
 }
 
 pre {
-  font-family: monospace, monospace;
-  font-size: 1em; 
+    font-family: monospace, monospace;
+    font-size: 1em; 
 }
 
 a {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 abbr[title] {
-  border-bottom: none;
-  text-decoration: underline; 
-  text-decoration: underline dotted;
+    border-bottom: none;
+    text-decoration: underline; 
+    text-decoration: underline dotted;
 }
 
 b, strong {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 code, kbd, samp {
-  font-family: monospace, monospace; 
-  font-size: 1em; 
+    font-family: monospace, monospace; 
+    font-size: 1em; 
 }
 
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
 
 sub, sup {
-  font-size: 67%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 67%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
 
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
 
 img {
-  border-style: none;
+    border-style: none;
 }
