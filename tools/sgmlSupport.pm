@@ -2130,6 +2130,50 @@ BEGIN {
     $ent{'ohmacgr'}     =  chr(0x03C9) . chr(0x0304);   # Greek omega with macron
     $ent{'OHmacgr'}     =  chr(0x03A9) . chr(0x0304);   # Greek Omega with macron
 
+
+    # Lippincott
+    $ent{'a1'}          =  "a<sup>1</sup>"; # a with figure 1 above
+    $ent{'a2'}          =  "a<sup>2</sup>"; # a with figure 2 above
+    $ent{'a3'}          =  "a<sup>3</sup>"; # a with figure 3 above
+    $ent{'a4'}          =  "a<sup>4</sup>"; # a with figure 4 above
+    $ent{'e1'}          =  "e<sup>1</sup>"; # e with figure 1 above
+    $ent{'e2'}          =  "e<sup>2</sup>"; # e with figure 2 above
+    $ent{'i1'}          =  "i<sup>1</sup>"; # i with figure 1 above
+    $ent{'i2'}          =  "i<sup>2</sup>"; # i with figure 2 above
+    $ent{'o1'}          =  "o<sup>1</sup>"; # o with figure 1 above
+    $ent{'o2'}          =  "o<sup>2</sup>"; # o with figure 2 above
+    $ent{'u1'}          =  "u<sup>1</sup>"; # u with figure 1 above
+    $ent{'u2'}          =  "u<sup>2</sup>"; # u with figure 2 above
+
+    $ent{'supG'}        =  "<sup>G</sup>";  # Superior small caps G
+
+    $ent{'scA'}         =  "<sc>a</sc>";    # Small caps A
+    $ent{'scB'}         =  "<sc>b</sc>";    # Small caps B
+    $ent{'scC'}         =  "<sc>c</sc>";    # Small caps C
+    $ent{'scD'}         =  "<sc>d</sc>";    # Small caps D
+    $ent{'scE'}         =  "<sc>e</sc>";    # Small caps E
+    $ent{'scF'}         =  "<sc>f</sc>";    # Small caps F
+    $ent{'scG'}         =  "<sc>g</sc>";    # Small caps G
+    $ent{'scH'}         =  "<sc>h</sc>";    # Small caps H
+    $ent{'scI'}         =  "<sc>i</sc>";    # Small caps I
+    $ent{'scJ'}         =  "<sc>j</sc>";    # Small caps J
+    $ent{'scK'}         =  "<sc>k</sc>";    # Small caps K
+    $ent{'scL'}         =  "<sc>l</sc>";    # Small caps L
+    $ent{'scM'}         =  "<sc>m</sc>";    # Small caps M
+    $ent{'scN'}         =  "<sc>n</sc>";    # Small caps N
+    $ent{'scO'}         =  "<sc>o</sc>";    # Small caps O
+    $ent{'scP'}         =  "<sc>p</sc>";    # Small caps P
+    $ent{'scQ'}         =  "<sc>q</sc>";    # Small caps Q
+    $ent{'scR'}         =  "<sc>r</sc>";    # Small caps R
+    $ent{'scS'}         =  "<sc>s</sc>";    # Small caps S
+    $ent{'scT'}         =  "<sc>t</sc>";    # Small caps T
+    $ent{'scU'}         =  "<sc>u</sc>";    # Small caps U
+    $ent{'scV'}         =  "<sc>v</sc>";    # Small caps V
+    $ent{'scW'}         =  "<sc>w</sc>";    # Small caps W
+    $ent{'scX'}         =  "<sc>x</sc>";    # Small caps X
+    $ent{'scY'}         =  "<sc>y</sc>";    # Small caps Y
+    $ent{'scZ'}         =  "<sc>z</sc>";    # Small caps Z
+
     ###############################################################################
     # Project Gutenberg boilerplate texts
 
@@ -2683,7 +2727,6 @@ sub pgdp2sgml {
     $string =~ s/\[\x{00e9}\.\]/\&eacudotb;/g;          # e with acute and dot below (JASCHKE)
     $string =~ s/\['o:\]/\&oacuumlb;/g;                 # o with acute and umlaut below (JASCHKE)
     $string =~ s/\[vs.\]/\&scardotb;/g;                 # s with caron and dot below (JASCHKE)
-
 
     # Guilder sign
     $string =~ s/\[f\]/\&florin;/g;                     # guilder sign.
