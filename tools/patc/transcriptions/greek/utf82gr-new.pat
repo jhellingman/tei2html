@@ -309,6 +309,24 @@
 "ὦ"          p ">=w"             % &ohscgr;
 "Ὦ"          p ">=W"             % &OHscgr;
 
+% tonos will become oxia (we don't do modern Greek)
+
+"Ά"          p "'A"             % &Iacugr;
+"Έ"          p "'E"             % &Eacugr;
+"Ή"          p "'H"             % &Eeacugr;
+"Ί"          p "'I"             % &Iacugr;
+"Ό"          p "'O"             % &Oacugr;
+"Ύ"          p "'U"             % &Uacugr;
+"Ώ"          p "'W"             % &Ohacugr;
+
+"ά"          p "'a"             % &iacugr;
+"έ"          p "'e"             % &eacugr;
+"ή"          p "'h"             % &eeacugr;
+"ί"          p "'i"             % &iacugr;
+"ό"          p "'o"             % &oacugr;
+"ύ"          p "'u"             % &uacugr;
+"ώ"          p "'w"             % &ohacugr;
+
 % punctuation marks
 
 "·"          p "·"                  % &ckgr;
@@ -319,8 +337,8 @@
 
 %% additional entities not in TEI
 
-"ᾱ"          p "\=a"               % &amacgr;
-"Ᾱ"          p "\=A"               % &Amacgr;
+"ᾱ"          p "\\=a"              % &amacgr;
+"Ᾱ"          p "\\=A"              % &Amacgr;
 "ᾰ"          p ")a"                % &abregr;
 "Ᾰ"          p ")A"                % &Abregr;
 
