@@ -1,0 +1,28 @@
+
+body {
+    font-family: 'EB Garamond', serif;
+    line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .titlePage {
+    font-family: 'EB Garamond', serif;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .titlePage {
+    text-transform: uppercase;
+}
+
+h5, h6 {
+    font-style: italic;
+}
+
+.transcriberNote {
+    font-family: 'EB Garamond', serif;
+    font-size: 100%;
+}
+
+.hangq { text-indent: -0.24em; }
+.hangqq { text-indent: -0.42em; }
+.hangqqq { text-indent: -0.68em; }
+
+.grek, .cyrl { font-family: 'EB Garamond', serif; }

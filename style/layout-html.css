@@ -27,7 +27,6 @@ body {
     font-size: 0.8em;
     height: 0;
     left: 1%;
-    line-height: 1.2em;
     position: absolute;
     text-indent: 0;
     width: 14%;
@@ -38,7 +37,6 @@ body {
     font-size: 0.8em;
     height: 0;
     right: 7%;
-    line-height: 1.2em;
     position: absolute;
     text-indent: 0;
     text-align: right;
@@ -47,7 +45,6 @@ body {
 .cut-in-left-note {
     font-size: 0.8em;
     left: 1%;
-    line-height: 1.2em;
     float: left;
     text-indent: 0;
     width: 14%;
@@ -58,7 +55,6 @@ body {
 .cut-in-right-note {
     font-size: 0.8em;
     left: 1%;
-    line-height: 1.2em;
     float: right;
     text-indent: 0;
     width: 14%;

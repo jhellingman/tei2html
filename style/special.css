@@ -21,7 +21,7 @@ span.ditto span.s {
 span.ditto span.d {
     display: block;
     text-align: center;
-    line-height: 8pt;
+    line-height: 0.7em;
 }
 
 span.ditto span.i {

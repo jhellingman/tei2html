@@ -420,9 +420,9 @@
         <xsl:param name="lang" as="xs:string?"/>
         <xsl:choose>
             <xsl:when test="$lang=('ar')">arab</xsl:when>
-            <xsl:when test="$lang=('ur', 'fa', 'ps')">aran</xsl:when>
+            <xsl:when test="$lang=('fa', 'ps', 'ur')">aran</xsl:when>
             <xsl:when test="$lang=('as', 'bn')">beng</xsl:when>
-            <xsl:when test="$lang=('ru', 'bg', 'sb')">cyrl</xsl:when>
+            <xsl:when test="$lang=('be', 'bg', 'mk', 'ru', 'rue', 'sr', 'uk')">cyrl</xsl:when>
             <xsl:when test="$lang=('hi', 'ma', 'sa')">deva</xsl:when>
             <xsl:when test="$lang=('el', 'grc')">grek</xsl:when>
             <xsl:when test="$lang=('he', 'yi')">hebr</xsl:when>

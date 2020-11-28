@@ -73,46 +73,51 @@ img {
 body {
  font-family: "Times New Roman", Times, serif;
  font-size: 100%;
- line-height: 1.2em;
  text-align: left;
 }
 
 .div0 {
- padding-top: 5.6em;
+ margin-top: 7.2em;
 }
 
 .div1 {
- padding-top: 4.8em;
+ margin-top: 5.6em;
 }
 
 .div2 {
- padding-top: 3.6em;
+ margin-top: 4.8em;
 }
 
-.div3, .div4, .div5 {
- padding-top: 2.4em;
+.div3 {
+ margin-top: 3.6em;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+.div4 {
+ margin-top: 2.4em;
+}
+
+.div5, .div6, .div7 {
+ margin-top: 1.44em;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
  clear: both;
  font-style: normal;
  text-transform: none;
+ margin-bottom: 1em;
 }
 
 h3, .h3 {
  font-size: 1.2em;
- line-height: 1.2em;
 }
 
 h3.label {
  font-size: 1em;
- line-height: 1.2em;
  margin-bottom: 0;
 }
 
 h4, .h4 {
  font-size: 1em;
- line-height: 1.2em;
 }
 
 .alignleft {
@@ -134,7 +139,6 @@ p.tb, hr.tb, .par.tb {
 
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
  font-size: 0.9em;
- line-height: 1.2em;
  text-indent: 0;
 }
 
@@ -180,7 +184,6 @@ td.tocPageNum {
 
 .epigraph {
  font-size: 0.9em;
- line-height: 1.2em;
  width: 60%;
  margin-left: auto;
 }
@@ -192,8 +195,7 @@ td.tocPageNum {
 
 .trailer {
  clear: both;
- padding-top: 2.4em;
- padding-bottom: 1.6em;
+ margin-top: 3.6em;
 }
 
 span.abbr, abbr {
@@ -286,19 +288,17 @@ hr.dashed {
 
 h1, h2, .h1, .h2 {
  font-size: 1.44em;
- line-height: 1.5em;
+ line-height: 1.5;
 }
 
 h1.label, h2.label {
  font-size: 1.2em;
- line-height: 1.2em;
  margin-bottom: 0;
 }
 
 h5, h6 {
  font-size: 1em;
  font-style: italic;
- line-height: 1em;
 }
 
 p, .par {
@@ -326,14 +326,13 @@ p.dropcap:first-letter, .par.dropcap:first-letter {
  clear: left;
  margin: 0 0.05em 0 0;
  padding: 0;
- line-height: 0.8em;
+ line-height: 0.8;
  font-size: 420%;
  vertical-align: super;
 }
 
 blockquote, p.quote, div.blockquote, div.argument, .par.quote {
  font-size: 0.9em;
- line-height: 1.2em;
  margin: 1.58em 5%;
 }
 
@@ -612,7 +611,7 @@ ul {
 }
 
 .titlePage .docTitle {
- line-height: 3.5em;
+ line-height: 1.7;
  margin: 2em 0 2em 0;
  font-weight: bold;
 }
@@ -629,7 +628,7 @@ ul {
 .titlePage .byline {
  margin: 2em 0 2em 0;
  font-size: 1.2em;
- line-height: 1.72em;
+ line-height: 1.5;
 }
 
 .titlePage .byline .docAuthor {
@@ -644,7 +643,7 @@ ul {
 .titlePage .docImprint {
  margin: 4em 0 0 0;
  font-size: 1.2em;
- line-height: 1.72em;
+ line-height: 1.5;
 }
 
 .titlePage .docImprint .docDate {
@@ -1057,7 +1056,7 @@ span.ditto span.s {
 span.ditto span.d {
  display: block;
  text-align: center;
- line-height: 8pt;
+ line-height: 0.7em;
 }
 
 span.ditto span.i {
@@ -1161,6 +1160,34 @@ p.dropcap:first-letter {
 }
 
 body {
+ font-family: 'EB Garamond', serif;
+ line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .titlePage {
+ font-family: 'EB Garamond', serif;
+}
+
+h1, h2, h3, h4, .h1, .h2, .h3, .titlePage {
+ text-transform: uppercase;
+}
+
+h5, h6 {
+ font-style: italic;
+}
+
+.transcriberNote {
+ font-family: 'EB Garamond', serif;
+ font-size: 100%;
+}
+
+.hangq { text-indent: -0.24em; }
+.hangqq { text-indent: -0.42em; }
+.hangqqq { text-indent: -0.68em; }
+
+.grek, .cyrl { font-family: 'EB Garamond', serif; }
+
+body {
  padding: 1.58em 16%;
 }
 
@@ -1199,7 +1226,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd34e606 {
+.xd34e610 {
 text-align:right;
 }
 
@@ -1219,7 +1246,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd34e1153 {
+.xd34e1157 {
 background-color:green;
 }
 
@@ -1235,7 +1262,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd34e1154 {
+.xd34e1158 {
 background-color:white;
 }
 
@@ -1267,23 +1294,23 @@ width:96px;
 text-align:left;
 }
 
-.xd34e425 {
+.xd34e426 {
 text-align:right;
 }
 
-.xd34e427 {
+.xd34e429 {
 text-align:center;
 }
 
 
-.xd34e429 {
+.xd34e432 {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd34e429init {
+.xd34e432init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1297,11 +1324,11 @@ text-align:center;
 }
 
         
-.xd34e437 {
+.xd34e440 {
 text-align:justify;
 }
 
-.xd34e452 {
+.xd34e456 {
 text-align:center;
 }
 
@@ -1309,7 +1336,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd34e569 {
+.xd34e573 {
 text-align:right;
 }
 
@@ -1317,11 +1344,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd34e755 {
+.xd34e759 {
 vertical-align:middle; width:2px;
 }
 
-.xd34e756 {
+.xd34e760 {
 vertical-align:middle;
 }
 
@@ -1329,11 +1356,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd34e767 {
+.xd34e771 {
 width:25%;
 }
 
-.xd34e769 {
+.xd34e773 {
 width:75%;
 }
 
@@ -1353,11 +1380,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd34e895 {
+.xd34e899 {
 color:red;
 }
 
-.xd34e915 {
+.xd34e919 {
 color:yellow; background-color:black;
 }
 
@@ -1369,19 +1396,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd34e1184 {
+.xd34e1188 {
 background-color:yellow;
 }
 
-.xd34e1202 {
+.xd34e1206 {
 background-color:blue;
 }
 
-.xd34e1211 {
+.xd34e1215 {
 background-color:orange;
 }
 
-.xd34e1221 {
+.xd34e1225 {
 background-color:red;
 }
 
@@ -1413,47 +1440,47 @@ width:480px;
 width:580px;
 }
 
-.xd34e1429 {
+.xd34e1433 {
 font-style:italic;
 }
 
-.xd34e1456 {
+.xd34e1460 {
 list-style-type:disc;
 }
 
-.xd34e1472 {
+.xd34e1476 {
 list-style-type:upper-roman;
 }
 
-.xd34e1481 {
+.xd34e1485 {
 list-style-type:lower-roman;
 }
 
-.xd34e1497 {
+.xd34e1501 {
 list-style-type:disc;
 }
 
-.xd34e1512 {
+.xd34e1516 {
 list-style-type:disc;
 }
 
-.xd34e1587 {
+.xd34e1591 {
 text-align:center;
 }
 
-.xd34e1592 {
+.xd34e1596 {
 text-indent:1em;
 }
 
-.xd34e1598 {
+.xd34e1602 {
 text-indent:2em;
 }
 
-.xd34e1602 {
+.xd34e1606 {
 text-indent:3em;
 }
 
-.xd34e1606 {
+.xd34e1610 {
 text-indent:10em;
 }
 
@@ -1475,12 +1502,12 @@ display:none;
 @media handheld {
 
 
-.xd34e429 {
+.xd34e432 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd34e429init {
+.xd34e432init {
     float: none;
     width: auto;
     height: auto;
@@ -1495,6 +1522,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd34e1779 {
+.xd34e1783 {
 color:red
 }

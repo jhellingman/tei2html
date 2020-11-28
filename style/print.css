@@ -207,7 +207,6 @@ span.num, span.corr, span.abbr, span.trans, span.measure, abbr {
     background-color: transparent;
     border: white 0 solid;
     font-size: 7pt;
-    line-height: 1.2em;
     margin: 0;
 }
 

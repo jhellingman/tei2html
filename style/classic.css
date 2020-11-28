@@ -24,6 +24,10 @@ p.byline {
     margin-bottom: 2em;
 }
 
+.div2 p.byline, .div3 p.byline, .div4 p.byline, .div5 p.byline, .div6 p.byline, .div7 p.byline {
+    text-align: left;
+}
+
 .figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
     color: #660000;
 }

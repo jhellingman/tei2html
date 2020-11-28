@@ -7,46 +7,51 @@
 body {
     font-family: "Times New Roman", Times, serif;
     font-size: 100%;
-    line-height: 1.2em;
     text-align: left;
 }
 
 .div0 {
-    padding-top: 5.6em;
+    margin-top: 7.2em;
 }
 
 .div1 {
-    padding-top: 4.8em;
+    margin-top: 5.6em;
 }
 
 .div2 {
-    padding-top: 3.6em;
+    margin-top: 4.8em;
 }
 
-.div3, .div4, .div5 {
-    padding-top: 2.4em;
+.div3 {
+    margin-top: 3.6em;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+.div4 {
+    margin-top: 2.4em;
+}
+
+.div5, .div6, .div7 {
+    margin-top: 1.44em;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     clear: both;
     font-style: normal;
     text-transform: none;
+    margin-bottom: 1em;
 }
 
 h3, .h3 {
     font-size: 1.2em;
-    line-height: 1.2em;
 }
 
 h3.label {
     font-size: 1em;
-    line-height: 1.2em;
     margin-bottom: 0;
 }
 
 h4, .h4 {
     font-size: 1em;
-    line-height: 1.2em;
 }
 
 .alignleft {
@@ -68,7 +73,6 @@ p.tb, hr.tb, .par.tb {
 
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
     font-size: 0.9em;
-    line-height: 1.2em;
     text-indent: 0;
 }
 
@@ -114,7 +118,6 @@ td.tocPageNum {
 
 .epigraph {
     font-size: 0.9em;
-    line-height: 1.2em;
     width: 60%;
     margin-left: auto;
 }
@@ -126,8 +129,7 @@ td.tocPageNum {
 
 .trailer {
     clear: both;
-    padding-top: 2.4em;
-    padding-bottom: 1.6em;
+    margin-top: 3.6em;
 }
 
 span.abbr, abbr {
@@ -220,19 +222,17 @@ hr.dashed {
 
 h1, h2, .h1, .h2 {
     font-size: 1.44em;
-    line-height: 1.5em;
+    line-height: 1.5;
 }
 
 h1.label, h2.label {
     font-size: 1.2em;
-    line-height: 1.2em;
     margin-bottom: 0;
 }
 
 h5, h6 {
     font-size: 1em;
     font-style: italic;
-    line-height: 1em;
 }
 
 p, .par {
@@ -260,14 +260,13 @@ p.dropcap:first-letter, .par.dropcap:first-letter {
     clear: left;
     margin: 0 0.05em 0 0;
     padding: 0;
-    line-height: 0.8em;
+    line-height: 0.8;
     font-size: 420%;
     vertical-align: super;
 }
 
 blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     font-size: 0.9em;
-    line-height: 1.2em;
     margin: 1.58em 5%;
 }
 

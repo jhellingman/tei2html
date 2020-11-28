@@ -111,14 +111,6 @@
     </xd:doc>
 
     <xsl:template name="common-css-stylesheets">
-        <xsl:variable name="stylesheetname" as="xs:string">
-            <xsl:choose>
-                <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
-                    <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
-                </xsl:when>
-                <xsl:otherwise><xsl:value-of select="f:get-setting('css.stylesheet')"/></xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
 
         <!-- Standard CSS stylesheets. -->
         <xsl:value-of select="f:css-stylesheet('style/normalize.css')"/>
@@ -178,7 +170,21 @@
         </xsl:if>
 
         <!-- Supplement CSS stylesheet. -->
-        <xsl:value-of select="f:css-stylesheet($stylesheetname)"/>
+        <xsl:variable name="stylesheet" as="xs:string">
+            <xsl:choose>
+                <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
+                <xsl:message expand-text="yes">From @rend</xsl:message>
+                    <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
+                </xsl:when>
+                <xsl:otherwise><xsl:value-of select="f:get-setting('css.stylesheet')"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:message expand-text="yes">Style: {$stylesheet}.</xsl:message>
+
+        <xsl:for-each select="tokenize($stylesheet, ',')">
+            <xsl:value-of select="f:css-stylesheet(normalize-space(.))"/>
+        </xsl:for-each>
     </xsl:template>
 
 

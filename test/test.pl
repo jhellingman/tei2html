@@ -32,6 +32,12 @@ if (-f "custom.css") {
     $cssFileParam = "customCssFile=\"file:/$pwd/custom.css\"";
 }
 
+my $configurationFileParam = '';
+if (-f "tei2html.config") {
+    print "Add custom configuration: tei2html.config ...\n";
+    $configurationFileParam = "configurationFile=\"file:/$pwd/tei2html.config\"";
+}
+
 my $opfManifestFileParam = "";
 if (-f "opf-manifest.xml") {
     print "Adding additional elements for the OPF manifest...\n";
@@ -47,16 +53,16 @@ if (-f "opf-metadata.xml") {
 print "Add col and row attributes to tables...\n";
 system ("$saxon test.xml $xsldir/preprocess.xsl > test-preprocessed.xml");
 
-system ("$saxon -TP:htmlprofile.html test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
-system ("$saxon -TP:epubprofile.html test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
+system ("$saxon -TP:htmlprofile.html test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam > test.html");
+system ("$saxon -TP:epubprofile.html test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
-# system ("$saxon -T -traceout:htmltrace.txt test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test.html");
-# system ("$saxon -T -traceout:epubtrace.txt  test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
+# system ("$saxon -T -traceout:htmltrace.txt test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam > test.html");
+# system ("$saxon -T -traceout:epubtrace.txt  test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
 print "Convert to P5 and repeat the exercise...\n";
 system ("$saxon test.xml $xsldir/p4top5.xsl > test-p5.xml");
 system ("$saxon test-p5.xml $xsldir/preprocess.xsl > test-preprocessed-p5.xml");
-system ("$saxon test-preprocessed-p5.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam > test-p5.html");
+system ("$saxon test-preprocessed-p5.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam > test-p5.html");
 
 
 system ("del test.epub");
@@ -67,5 +73,5 @@ chdir "..";
 
 system ("$epubcheck test.epub 2> test-epubcheck.err");
 
-system ("$saxon test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam optionPrinceMarkup=\"Yes\" > test-prince.html");
+system ("$saxon test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam optionPrinceMarkup=\"Yes\" > test-prince.html");
 system ("$prince test-prince.html -o test.pdf");
