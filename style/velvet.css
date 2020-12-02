@@ -2,7 +2,7 @@
 body {
     background: black;
     color: #888888;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
     font-size: 12pt;
 }
 
@@ -12,12 +12,12 @@ body, a.hidden {
 
 .titlePage {
     color: #FDF1BA;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
     color: #FDF1BA;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
 p.byline {

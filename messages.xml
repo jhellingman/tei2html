@@ -39,27 +39,27 @@
                 msgOrange.color
 
         -->
-		
-		<msg:message name="msgQrCode" help="A QR code is a black and white graphic that contains computer-readable data.">QR-code</msg:message>
-		<msg:message name="msgQrCodePgUrl">QR-code of Project Gutenberg URL</msg:message>
-		<msg:message name="msgTagUsageOverview">Overview of TEI Elements Used</msg:message>
-		<msg:message name="msgAttributes">Attributes</msg:message>
-		<msg:message name="msgOccurrences">Occurrences</msg:message>
-		<msg:message name="msgOccurrences.abbr">Occ.</msg:message>
-		<msg:message name="msgValues">Values</msg:message>
-		<msg:message name="msgFtpLink">Link to FTP server</msg:message>
-		<msg:message name="msgLinkToLibraryOfCongress">Link to Library of Congress record</msg:message>
-		<msg:message name="msgReturnToNoteInText">Return to note in text.</msg:message>
-		<msg:message name="msgReturnToNoteMarkInText">Return to note <msg:param name="mark"/> in text.</msg:message>
 
-		<msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
-		<msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
-		<msg:message name="msgForeword" help="A part of a book before the main text not written by the author. Typically written by an authority to introduce the book and explain why the reader should read the book.">Foreword</msg:message>
-		<msg:message name="msgPreface" help="A part of a book before the main text  written by the author. Explains how the book came about.">Preface</msg:message>
-		<msg:message name="msgIntroduction" help="A part of a book before the main text written by the author. Provides a short overview of the contents.">Introduction</msg:message>
-		<msg:message name="msgAfterword" help="A part of a book after the main text written similar to a foreword. May be used to respond to critical remarks made about a previous edition.">Afterword</msg:message>
-		<msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
-		
+        <msg:message name="msgQrCode" help="A QR code is a black and white graphic that contains computer-readable data.">QR-code</msg:message>
+        <msg:message name="msgQrCodePgUrl">QR-code of Project Gutenberg URL</msg:message>
+        <msg:message name="msgTagUsageOverview">Overview of TEI Elements Used</msg:message>
+        <msg:message name="msgAttributes">Attributes</msg:message>
+        <msg:message name="msgOccurrences">Occurrences</msg:message>
+        <msg:message name="msgOccurrences.abbr">Occ.</msg:message>
+        <msg:message name="msgValues">Values</msg:message>
+        <msg:message name="msgFtpLink">Link to FTP server</msg:message>
+        <msg:message name="msgLinkToLibraryOfCongress">Link to Library of Congress record</msg:message>
+        <msg:message name="msgReturnToNoteInText">Return to note in text.</msg:message>
+        <msg:message name="msgReturnToNoteMarkInText">Return to note <msg:param name="mark"/> in text.</msg:message>
+
+        <msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
+        <msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
+        <msg:message name="msgForeword" help="A part of a book before the main text not written by the author. Typically written by an authority to introduce the book and explain why the reader should read the book.">Foreword</msg:message>
+        <msg:message name="msgPreface" help="A part of a book before the main text  written by the author. Explains how the book came about.">Preface</msg:message>
+        <msg:message name="msgIntroduction" help="A part of a book before the main text written by the author. Provides a short overview of the contents.">Introduction</msg:message>
+        <msg:message name="msgAfterword" help="A part of a book after the main text written similar to a foreword. May be used to respond to critical remarks made about a previous edition.">Afterword</msg:message>
+        <msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
+
         <msg:message name="msgPassim" help="Used in references to indicate a word or phrase occurs many times in the work referenced.">Passim</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
@@ -85,7 +85,7 @@
         <msg:message name="msgSourcePublisher">Original publisher</msg:message>
         <msg:message name="msgSourcePubPlace">Original publication place</msg:message>
         <msg:message name="msgSourcePublicationDate">Original publication date</msg:message>
-		<msg:message name="msgPublicationDate">Publication date</msg:message>
+        <msg:message name="msgPublicationDate">Publication date</msg:message>
         <msg:message name="msgCatalogEntry">Catalog entry</msg:message>
         <msg:message name="msgCatalogEntries">Catalog entries</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Author of introduction</msg:message>
@@ -157,6 +157,7 @@
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrections">Corrections</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count"/> corrections have been applied to the text:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overview of corrections applied to the text.</msg:message>
         <msg:message name="msgCover">Cover</msg:message>
         <msg:message name="msgCoverImage">Cover Image</msg:message>
@@ -187,17 +188,17 @@
         <msg:message name="msgKeywords">Keywords</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Related Library of Congress catalog page</msg:message>
         <msg:message name="msgLibraryThingEntry">Related LibraryThing page</msg:message>
-		
-        <msg:message name="msgLinkToBible">Reference to the Bible</msg:message>		
+
+        <msg:message name="msgLinkToBible">Reference to the Bible</msg:message>
         <msg:message name="msgLinkToBibleBook">Reference to the Bible: <msg:param name="bookTitle"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapter">Reference to the Bible: <msg:param name="bookTitle"/>, chapter <msg:param name="chapter"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterToChapter">Reference to the Bible: <msg:param name="bookTitle"/>, chapter <msg:param name="chapter"/>-<msg:param name="toChapter"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
-		<msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
-		<msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Reference to the Bible: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>
 
-		<msg:message name="bible.">Unknown Bible book</msg:message>
-		<msg:message name="bible.Genesis">Genesis</msg:message>
+        <msg:message name="bible.">Unknown Bible book</msg:message>
+        <msg:message name="bible.Genesis">Genesis</msg:message>
         <msg:message name="bible.Exodus">Exodus</msg:message>
         <msg:message name="bible.Leviticus">Leviticus</msg:message>
         <msg:message name="bible.Numbers">Numbers</msg:message>
@@ -248,7 +249,7 @@
         <msg:message name="bible.Susanna">Susanna</msg:message>
         <msg:message name="bible.Tobit">Tobit</msg:message>
         <msg:message name="bible.Wisdom of Solomon">Wisdom of Solomon</msg:message>
-		
+
         <msg:message name="bible.Matthew">Matthew</msg:message>
         <msg:message name="bible.Mark">Mark</msg:message>
         <msg:message name="bible.Luke">Luke</msg:message>
@@ -277,12 +278,12 @@
         <msg:message name="bible.Jude">Jude</msg:message>
         <msg:message name="bible.Revelation">Revelation</msg:message>
         <msg:message name="msgUnknownBibleBook">Unknown Book</msg:message>
-		
-        <msg:message name="msgLinkToQuran">Reference to the Quran</msg:message>		
-		<msg:message name="msgLinkToQuranChapter">Reference to the Quran: chapter <msg:param name="chapter"/></msg:message>
-		<msg:message name="msgLinkToQuranChapterVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/></msg:message>		
- 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/> to <msg:param name="toVerse"/></msg:message>	
-		
+
+        <msg:message name="msgLinkToQuran">Reference to the Quran</msg:message>
+        <msg:message name="msgLinkToQuranChapter">Reference to the Quran: chapter <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerseToVerse">Reference to the Quran: chapter <msg:param name="chapter"/>, verse <msg:param name="verse"/> to <msg:param name="toVerse"/></msg:message>
+
         <msg:message name="msgLinkToLilypondFile">Download Lilypond file</msg:message>
         <msg:message name="msgLinkToMap">Link to location on map</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
@@ -339,7 +340,7 @@
         <msg:message name="msgTable">Table</msg:message>
         <msg:message name="msgTableOfContents">Table of Contents</msg:message>
         <msg:message name="msgTables">Tables</msg:message>
-		<msg:message name="msgTarget">Target</msg:message>
+        <msg:message name="msgTarget">Target</msg:message>
         <msg:message name="msgText">Text</msg:message>
         <msg:message name="msgTitlePage">Title Page</msg:message>
         <msg:message name="msgToc">Contents</msg:message>
@@ -732,6 +733,7 @@
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrections">Corrections</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Les corrections suivantes ont été effectuées:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">Les <msg:param name="count"/> corrections suivantes ont été effectuées:</msg:message>
         <msg:message name="msgCorrectionsOverview">Aperçu des corrections apportées au texte.</msg:message>
         <msg:message name="msgDeleted">Retiré</msg:message>
         <msg:message name="msgEncoding">Encodage</msg:message>
@@ -869,18 +871,18 @@
 
     <msg:messages xml:lang="de">
 
-		<msg:message name="msgQrCode">QR-Code</msg:message>
-		<msg:message name="msgQrCodePgUrl">QR-Code der URL von Project Gutenberg</msg:message>
-		<msg:message name="msgTagUsageOverview">Übersicht der verwendeten TEI-Elemente</msg:message>
-		<msg:message name="msgAttributes">Attribute</msg:message>
-		<msg:message name="msgOccurrences">Vorkommen</msg:message>
-		<msg:message name="msgOccurrences.abbr">Vork.</msg:message>
-		<msg:message name="msgValues">Werte</msg:message>
-		<msg:message name="msgTranslator">Übersetzer</msg:message>
-		<msg:message name="msgReturnToNoteInText">Zurück zur Note im Text.</msg:message>
-		<msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
+        <msg:message name="msgQrCode">QR-Code</msg:message>
+        <msg:message name="msgQrCodePgUrl">QR-Code der URL von Project Gutenberg</msg:message>
+        <msg:message name="msgTagUsageOverview">Übersicht der verwendeten TEI-Elemente</msg:message>
+        <msg:message name="msgAttributes">Attribute</msg:message>
+        <msg:message name="msgOccurrences">Vorkommen</msg:message>
+        <msg:message name="msgOccurrences.abbr">Vork.</msg:message>
+        <msg:message name="msgValues">Werte</msg:message>
+        <msg:message name="msgTranslator">Übersetzer</msg:message>
+        <msg:message name="msgReturnToNoteInText">Zurück zur Note im Text.</msg:message>
+        <msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
 
-	    <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
+        <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
         <msg:message name="msgLibraryOfCongress">Kongressbibliothek</msg:message>
         <msg:message name="msgLibraryThing">LibraryThing</msg:message>
         <msg:message name="msgViaf">Virtual International Authority File</msg:message>
@@ -888,7 +890,7 @@
         <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
         <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
         <msg:message name="msgGitHub">GitHub</msg:message>
-	
+
         <msg:message name="msgLinkToBible">Link zu zitierte Stelle in Bibel</msg:message>
         <msg:message name="msgEditDistance">Edit-Distanz</msg:message>
         <msg:message name="msgAbbreviationOverview">Übersicht der Abkürzungen im Text.</msg:message>
@@ -904,7 +906,7 @@
         <msg:message name="msgSourcePublisher">Herausgeber des Originals</msg:message>
         <msg:message name="msgSourcePubPlace">Veröffentlichungsort des Originals</msg:message>
         <msg:message name="msgSourcePublicationDate">Veröffentlichungsdatum des Originals</msg:message>
-		<msg:message name="msgPublicationDate">Veröffentlichungsdatum</msg:message>
+        <msg:message name="msgPublicationDate">Veröffentlichungsdatum</msg:message>
         <msg:message name="msgCatalogEntry">Katalogeintrag</msg:message>
         <msg:message name="msgCatalogEntries">Katalogeinträge</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Autor der Einleitung</msg:message>
@@ -936,6 +938,7 @@
         <msg:message name="msgCorrection">Korrektur</msg:message>
         <msg:message name="msgCorrections">Korrekturen</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Die folgenden Korrekturen sind am Text angewendet worden:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">Die folgenden <msg:param name="count"/> Korrekturen sind am Text angewendet worden:</msg:message>
         <msg:message name="msgCorrectionsOverview">Übersicht der Korrekturen im Text</msg:message>
         <msg:message name="msgCover">Umslag</msg:message>
         <msg:message name="msgCoverImage">Titelbild</msg:message>
@@ -968,18 +971,18 @@
         <msg:message name="msgLinkToWorldCat">Link zu WorldCat Katalogseite</msg:message>
         <msg:message name="msgListOfIllustrations">Liste der Abbildungen</msg:message>
         <msg:message name="msgListOfTables">Liste der Tabellen</msg:message>
-		
-		
-        <msg:message name="msgLinkToBible">Verweis auf die Bibel</msg:message>		
+
+
+        <msg:message name="msgLinkToBible">Verweis auf die Bibel</msg:message>
         <msg:message name="msgLinkToBibleBook">Verweis auf die Bibel: <msg:param name="bookTitle"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapter">Verweis auf die Bibel: <msg:param name="bookTitle"/>, Kapitel <msg:param name="chapter"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterToChapter">Verweis auf die Bibel: <msg:param name="bookTitle"/>, Kapitel <msg:param name="chapter"/>-<msg:param name="toChapter"/></msg:message>		
+        <msg:message name="msgLinkToBibleBookChapterToChapter">Verweis auf die Bibel: <msg:param name="bookTitle"/>, Kapitel <msg:param name="chapter"/>-<msg:param name="toChapter"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
-		<msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>		
-		
-		<msg:message name="bible.">Unbekanntes Bibelbuch</msg:message>
-		<msg:message name="bible.Genesis">1. Mose</msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Verweis auf die Bibel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>
+
+        <msg:message name="bible.">Unbekanntes Bibelbuch</msg:message>
+        <msg:message name="bible.Genesis">1. Mose</msg:message>
         <msg:message name="bible.Exodus">2. Mose</msg:message>
         <msg:message name="bible.Leviticus">3. Mose</msg:message>
         <msg:message name="bible.Numbers">4. Mose</msg:message>
@@ -1046,15 +1049,15 @@
         <msg:message name="bible.3 John">3. Johannes</msg:message>
         <msg:message name="bible.Jude">Judas</msg:message>
         <msg:message name="bible.Revelation">Offenbarung</msg:message>
-		
-        <msg:message name="msgLinkToQuran">Verweis auf den Koran</msg:message>		
-		<msg:message name="msgLinkToQuranChapter">Verweis auf den Koran: Kapitel <msg:param name="chapter"/></msg:message>
-		<msg:message name="msgLinkToQuranChapterVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/></msg:message>		
- 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/> bis <msg:param name="toVerse"/></msg:message>	
-		
-		
-		
-		
+
+        <msg:message name="msgLinkToQuran">Verweis auf den Koran</msg:message>
+        <msg:message name="msgLinkToQuranChapter">Verweis auf den Koran: Kapitel <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerseToVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/> bis <msg:param name="toVerse"/></msg:message>
+
+
+
+
         <msg:message name="msgLocation">Position</msg:message>
         <msg:message name="msgLocations">Positionen</msg:message>
         <msg:message name="msgName">Name</msg:message>
@@ -1192,15 +1195,15 @@
 
     <msg:messages xml:lang="nl">
 
-		<msg:message name="msgQrCode">QR-code</msg:message>
-		<msg:message name="msgQrCodePgUrl">QR-code van Project Gutenberg URL</msg:message>
-		<msg:message name="msgTagUsageOverview">Overzicht van gebruikte TEI elementen</msg:message>
-		<msg:message name="msgAttributes">Attributen</msg:message>		
-		<msg:message name="msgOccurrences">Aantal</msg:message>
-		<msg:message name="msgOccurrences.abbr">Aant.</msg:message>
-		<msg:message name="msgValues">Waarden</msg:message>
-		<msg:message name="msgReturnToNoteInText">Ga terug naar noot in tekst.</msg:message>
-		<msg:message name="msgReturnToNoteMarkInText">Ga terug naar noot <msg:param name="mark"/> in tekst.</msg:message>
+        <msg:message name="msgQrCode">QR-code</msg:message>
+        <msg:message name="msgQrCodePgUrl">QR-code van Project Gutenberg URL</msg:message>
+        <msg:message name="msgTagUsageOverview">Overzicht van gebruikte TEI elementen</msg:message>
+        <msg:message name="msgAttributes">Attributen</msg:message>
+        <msg:message name="msgOccurrences">Aantal</msg:message>
+        <msg:message name="msgOccurrences.abbr">Aant.</msg:message>
+        <msg:message name="msgValues">Waarden</msg:message>
+        <msg:message name="msgReturnToNoteInText">Ga terug naar noot in tekst.</msg:message>
+        <msg:message name="msgReturnToNoteMarkInText">Ga terug naar noot <msg:param name="mark"/> in tekst.</msg:message>
 
         <msg:message name="msgPassim">Passim</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> gevallen</msg:message>
@@ -1235,7 +1238,7 @@
         <msg:message name="msgSourcePublisher">Oorspronkelijke uitgever</msg:message>
         <msg:message name="msgSourcePubPlace">Oorspronkelijke plaats van uitgifte</msg:message>
         <msg:message name="msgSourcePublicationDate">Oorspronkelijke uitgiftedatum</msg:message>
-		<msg:message name="msgPublicationDate">Uitgiftedatum</msg:message>
+        <msg:message name="msgPublicationDate">Uitgiftedatum</msg:message>
         <msg:message name="msgCatalogEntry">Catalogusvermelding</msg:message>
         <msg:message name="msgCatalogEntries">Catalogusvermeldingen</msg:message>
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
@@ -1303,6 +1306,7 @@
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrections">Verbeteringen</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCover">Omslag</msg:message>
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>
@@ -1333,17 +1337,17 @@
         <msg:message name="msgKeywords">Trefwoorden</msg:message>
         <msg:message name="msgLibraryOfCongressCatalogEntry">Gerelateerde Library of Congress cataloguspagina</msg:message>
         <msg:message name="msgLinkToBible">Link naar geciteerde plaats in de Bijbel</msg:message>
-		
-		<msg:message name="msgLinkToBible">Referentie naar de Bijbel</msg:message>		
+
+        <msg:message name="msgLinkToBible">Referentie naar de Bijbel</msg:message>
         <msg:message name="msgLinkToBibleBook">Referentie naar de Bijbel: <msg:param name="bookTitle"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapter">Referentie naar de Bijbel: <msg:param name="bookTitle"/>, hoofdstuk <msg:param name="chapter"/></msg:message>
-        <msg:message name="msgLinkToBibleBookChapterToChapter">Referentie naar de Bijbel: <msg:param name="bookTitle"/>, hoofdstuk <msg:param name="chapter"/>-<msg:param name="toChapter"/></msg:message>		
+        <msg:message name="msgLinkToBibleBookChapterToChapter">Referentie naar de Bijbel: <msg:param name="bookTitle"/>, hoofdstuk <msg:param name="chapter"/>-<msg:param name="toChapter"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/></msg:message>
         <msg:message name="msgLinkToBibleBookChapterVerseToVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toVerse"/></msg:message>
-		<msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>
-		
-		<msg:message name="bible.">Onbekend Bijbelboek</msg:message>
-		<msg:message name="bible.Genesis">Genesis</msg:message>
+        <msg:message name="msgLinkToBibleBookChapterVerseToChapterVerse">Referentie naar de Bijbel: <msg:param name="bookTitle"/> <msg:param name="chapter"/>:<msg:param name="verse"/>-<msg:param name="toChapter"/>:<msg:param name="toVerse"/></msg:message>
+
+        <msg:message name="bible.">Onbekend Bijbelboek</msg:message>
+        <msg:message name="bible.Genesis">Genesis</msg:message>
         <msg:message name="bible.Exodus">Exodus</msg:message>
         <msg:message name="bible.Leviticus">Leviticus</msg:message>
         <msg:message name="bible.Numbers">Numeri</msg:message>
@@ -1422,12 +1426,12 @@
         <msg:message name="bible.3 John">3 Johannes</msg:message>
         <msg:message name="bible.Jude">Judas</msg:message>
         <msg:message name="bible.Revelation">Openbaring van Johannes</msg:message>
-		
-        <msg:message name="msgLinkToQuran">Referentie naar de Koran</msg:message>		
-		<msg:message name="msgLinkToQuranChapter">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/></msg:message>
-		<msg:message name="msgLinkToQuranChapterVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/></msg:message>		
- 		<msg:message name="msgLinkToQuranChapterVerseToVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/> tot <msg:param name="toVerse"/></msg:message>	
-		
+
+        <msg:message name="msgLinkToQuran">Referentie naar de Koran</msg:message>
+        <msg:message name="msgLinkToQuranChapter">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/></msg:message>
+        <msg:message name="msgLinkToQuranChapterVerseToVerse">Referentie naar de Koran: hoofdstuk <msg:param name="chapter"/>, vers <msg:param name="verse"/> tot <msg:param name="toVerse"/></msg:message>
+
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
         <msg:message name="msgLinkToMap">Link naar locatie op kaart</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI-bestand</msg:message>
@@ -1481,7 +1485,7 @@
         <msg:message name="msgTable">Tabel</msg:message>
         <msg:message name="msgTableOfContents">Inhoudsopgave</msg:message>
         <msg:message name="msgTables">Tabellen</msg:message>
-		<msg:message name="msgTarget">Doel</msg:message>
+        <msg:message name="msgTarget">Doel</msg:message>
         <msg:message name="msgText">Tekst</msg:message>
         <msg:message name="msgTitlePage">Titelpagina</msg:message>
         <msg:message name="msgToc">Inhoud</msg:message>
@@ -1738,57 +1742,58 @@
 
     <!--==#############################################################==-->
     <!-- Afrikaans translation -->
-	
-	<msg:messages xml:lang="af" fallback="en">
+
+    <msg:messages xml:lang="af" fallback="en">
 
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="en">Engels</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="es">Spaans</msg:message>
 
-		<msg:message name="msgListOfIllustrations">Lys van illustrasies</msg:message>
-		<msg:message name="msgGuide">Wegwyser</msg:message>
-		<msg:message name="msgBodyMatter">Hoofteks</msg:message>
-		<msg:message name="msgCover">Omslag</msg:message>
-		<msg:message name="msgTableOfContents">Inhoudsopgawe</msg:message>
-		<msg:message name="msgNext">Volgende</msg:message>
-		<msg:message name="msgText">Teks</msg:message>
-		<msg:message name="msgKeywords">Sleutelwoorde</msg:message>
-		<msg:message name="msgTitlePage">Titelblad</msg:message>
-		<msg:message name="msgPage">Bladsy</msg:message>
-		<msg:message name="msgToc">Inhoud</msg:message>
-		<msg:message name="msgAbbreviation">Afkorting</msg:message>
-		<msg:message name="msgAbbreviations">Afkortings</msg:message>
-		<msg:message name="msgAbbreviationOverview">Oorsig van afkortings gebruik.</msg:message>
-		<msg:message name="msgAuthor">Skrywer</msg:message>
-		<msg:message name="msgAvailability">Beskikbaarheid</msg:message>
-		<msg:message name="msgNote">Nota</msg:message>
-		<msg:message name="msgNotes">Notas</msg:message>		
-		<msg:message name="msgIllustrator">Illustrator</msg:message>	
-		<msg:message name="msgColophon">Kolofon</msg:message>
-		<msg:message name="msgCorrection">Regstelling</msg:message>
-		<msg:message name="msgCorrections">Regstellings</msg:message>
-		<msg:message name="msgCorrectionsAppliedToText">Die volgende regstellings is aan die teks gemaak:</msg:message>
-		<msg:message name="msgCorrectionsOverview">Oorsig van regstellings aan die teks.</msg:message>
-		<msg:message name="msgDeleted">Verwyder</msg:message>
-		<msg:message name="msgEditDistance">Redigeerafstand</msg:message>
-		<msg:message name="msgExpansion">Uitbreiding</msg:message>
-		<msg:message name="msgExternalLink">Eksterne skakel</msg:message>
-		<msg:message name="msgExternalReferences">Eksterne verwysings</msg:message>
-		<msg:message name="msgExternalReferencesDisclaimer">Hierdie Project Gutenberg-e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
-		<msg:message name="msgInfo">Info</msg:message>
-		<msg:message name="msgLanguage">Taal</msg:message>
-		<msg:message name="msgMetadata">Metadata</msg:message>
-		<msg:message name="msgNotInSource">Nie in die bron nie</msg:message>
-		<msg:message name="msgRevisionHistory">Hersieningsgeskiedenis</msg:message>
-		<msg:message name="msgSource">Bron</msg:message>
-		<msg:message name="msgSourcePublicationDate">Oorspronklike publikasiedatum</msg:message>
-		<msg:message name="msgPublicationDate">Publikasiedatum</msg:message>
-		<msg:message name="msgTitle">Titel</msg:message>
-		<msg:message name="msgUrl">URL</msg:message>
-		<msg:message name="msgNotApplicable">Nie van toepassing nie</msg:message>
-		
-	</msg:messages>
+        <msg:message name="msgListOfIllustrations">Lys van illustrasies</msg:message>
+        <msg:message name="msgGuide">Wegwyser</msg:message>
+        <msg:message name="msgBodyMatter">Hoofteks</msg:message>
+        <msg:message name="msgCover">Omslag</msg:message>
+        <msg:message name="msgTableOfContents">Inhoudsopgawe</msg:message>
+        <msg:message name="msgNext">Volgende</msg:message>
+        <msg:message name="msgText">Teks</msg:message>
+        <msg:message name="msgKeywords">Sleutelwoorde</msg:message>
+        <msg:message name="msgTitlePage">Titelblad</msg:message>
+        <msg:message name="msgPage">Bladsy</msg:message>
+        <msg:message name="msgToc">Inhoud</msg:message>
+        <msg:message name="msgAbbreviation">Afkorting</msg:message>
+        <msg:message name="msgAbbreviations">Afkortings</msg:message>
+        <msg:message name="msgAbbreviationOverview">Oorsig van afkortings gebruik.</msg:message>
+        <msg:message name="msgAuthor">Skrywer</msg:message>
+        <msg:message name="msgAvailability">Beskikbaarheid</msg:message>
+        <msg:message name="msgNote">Nota</msg:message>
+        <msg:message name="msgNotes">Notas</msg:message>
+        <msg:message name="msgIllustrator">Illustrator</msg:message>
+        <msg:message name="msgColophon">Kolofon</msg:message>
+        <msg:message name="msgCorrection">Regstelling</msg:message>
+        <msg:message name="msgCorrections">Regstellings</msg:message>
+        <msg:message name="msgCorrectionsAppliedToText">Die volgende regstellings is aan die teks gemaak:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">Die volgende <msg:param name="count"/> regstellings is aan die teks gemaak:</msg:message>
+        <msg:message name="msgCorrectionsOverview">Oorsig van regstellings aan die teks.</msg:message>
+        <msg:message name="msgDeleted">Verwyder</msg:message>
+        <msg:message name="msgEditDistance">Redigeerafstand</msg:message>
+        <msg:message name="msgExpansion">Uitbreiding</msg:message>
+        <msg:message name="msgExternalLink">Eksterne skakel</msg:message>
+        <msg:message name="msgExternalReferences">Eksterne verwysings</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Hierdie Project Gutenberg-e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
+        <msg:message name="msgInfo">Info</msg:message>
+        <msg:message name="msgLanguage">Taal</msg:message>
+        <msg:message name="msgMetadata">Metadata</msg:message>
+        <msg:message name="msgNotInSource">Nie in die bron nie</msg:message>
+        <msg:message name="msgRevisionHistory">Hersieningsgeskiedenis</msg:message>
+        <msg:message name="msgSource">Bron</msg:message>
+        <msg:message name="msgSourcePublicationDate">Oorspronklike publikasiedatum</msg:message>
+        <msg:message name="msgPublicationDate">Publikasiedatum</msg:message>
+        <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgUrl">URL</msg:message>
+        <msg:message name="msgNotApplicable">Nie van toepassing nie</msg:message>
+
+    </msg:messages>
 
     <!--==#############################################################==-->
     <!-- Cebuano translation -->
@@ -1934,43 +1939,43 @@
         <msg:message name="msgSourcePubPlace">Lugar de la edición original</msg:message>
         <msg:message name="msgSourcePublicationDate">Fecha de la edición original</msg:message>
         <msg:message name="msgCatalogEntry">Ficha catalográfica</msg:message>
-        <msg:message name="msgCatalogEntries">Fichas catalográfica</msg:message>		
-        <msg:message name="msgAuthorOfIntroduction">Autor del prólogo </msg:message>		
-        <msg:message name="msgAuthorOfAfterword">Autor del epílogo</msg:message>		
-        <msg:message name="msgAuthorOfColophon">Autor del colofón</msg:message>		
-        <msg:message name="msgAuthorOfPostface">Autor de la nota final</msg:message>		
-        <msg:message name="msgAnnotator">Anotador</msg:message>		
-        <msg:message name="msgBibliographicAntecedent">Antecedente bibliográfico</msg:message>		
-        <msg:message name="msgAuthorInQuotations">Autor entrecomillado</msg:message>		
-        <msg:message name="msgAuthorInTextExtracts">Autor en extractos de texto</msg:message>		
-        <msg:message name="msgArranger">Coordinador</msg:message>		
-        <msg:message name="msgArtist">Artista</msg:message>		
-        <msg:message name="msgAssociatedName">Nombre asociado</msg:message>		
-        <msg:message name="msgAuthorOfForeword">Autor del prólogo </msg:message>		
-        <msg:message name="msgAuthorOfPreface">Autor del prefacio</msg:message>		
-        <msg:message name="msgAuthor">Autor</msg:message>		
-        <msg:message name="msgBookProducer">Editor</msg:message>		
-        <msg:message name="msgCollaborator">Colaborador</msg:message>		
-        <msg:message name="msgContributor">Autor de comunicación </msg:message>		
-        <msg:message name="msgCommentator">Comentarista</msg:message>		
-        <msg:message name="msgDesigner">Diseñador</msg:message>		
-        <msg:message name="msgEditor">Editor</msg:message>		
-        <msg:message name="msgEngraver">Calcógrafo</msg:message>		
-        <msg:message name="msgIllustrator">Ilustrador</msg:message>		
-        <msg:message name="msgLyricist">Letrista</msg:message>		
-        <msg:message name="msgMusician">Músico</msg:message>		
-        <msg:message name="msgNarrator">Narrador</msg:message>		
-        <msg:message name="msgOther">Otro</msg:message>		
-        <msg:message name="msgPhotographer">Fotógrafo</msg:message>		
-        <msg:message name="msgPrinter">Impresor</msg:message>		
-        <msg:message name="msgRedactor">Redactor</msg:message>		
-        <msg:message name="msgReviewer">Corrector</msg:message>		
-        <msg:message name="msgSponsor">Patrocinador</msg:message>		
-        <msg:message name="msgTranscriber">Transcriptor</msg:message>		
-        <msg:message name="msgTranslator">Traductor</msg:message>		
-        <msg:message name="msgAdaptor">Adaptador</msg:message>		
-        <msg:message name="msgIllustrator">Ilustrador</msg:message>		
-        <msg:message name="msgContributor">Autor de comunicación </msg:message>		
+        <msg:message name="msgCatalogEntries">Fichas catalográfica</msg:message>
+        <msg:message name="msgAuthorOfIntroduction">Autor del prólogo </msg:message>
+        <msg:message name="msgAuthorOfAfterword">Autor del epílogo</msg:message>
+        <msg:message name="msgAuthorOfColophon">Autor del colofón</msg:message>
+        <msg:message name="msgAuthorOfPostface">Autor de la nota final</msg:message>
+        <msg:message name="msgAnnotator">Anotador</msg:message>
+        <msg:message name="msgBibliographicAntecedent">Antecedente bibliográfico</msg:message>
+        <msg:message name="msgAuthorInQuotations">Autor entrecomillado</msg:message>
+        <msg:message name="msgAuthorInTextExtracts">Autor en extractos de texto</msg:message>
+        <msg:message name="msgArranger">Coordinador</msg:message>
+        <msg:message name="msgArtist">Artista</msg:message>
+        <msg:message name="msgAssociatedName">Nombre asociado</msg:message>
+        <msg:message name="msgAuthorOfForeword">Autor del prólogo </msg:message>
+        <msg:message name="msgAuthorOfPreface">Autor del prefacio</msg:message>
+        <msg:message name="msgAuthor">Autor</msg:message>
+        <msg:message name="msgBookProducer">Editor</msg:message>
+        <msg:message name="msgCollaborator">Colaborador</msg:message>
+        <msg:message name="msgContributor">Autor de comunicación </msg:message>
+        <msg:message name="msgCommentator">Comentarista</msg:message>
+        <msg:message name="msgDesigner">Diseñador</msg:message>
+        <msg:message name="msgEditor">Editor</msg:message>
+        <msg:message name="msgEngraver">Calcógrafo</msg:message>
+        <msg:message name="msgIllustrator">Ilustrador</msg:message>
+        <msg:message name="msgLyricist">Letrista</msg:message>
+        <msg:message name="msgMusician">Músico</msg:message>
+        <msg:message name="msgNarrator">Narrador</msg:message>
+        <msg:message name="msgOther">Otro</msg:message>
+        <msg:message name="msgPhotographer">Fotógrafo</msg:message>
+        <msg:message name="msgPrinter">Impresor</msg:message>
+        <msg:message name="msgRedactor">Redactor</msg:message>
+        <msg:message name="msgReviewer">Corrector</msg:message>
+        <msg:message name="msgSponsor">Patrocinador</msg:message>
+        <msg:message name="msgTranscriber">Transcriptor</msg:message>
+        <msg:message name="msgTranslator">Traductor</msg:message>
+        <msg:message name="msgAdaptor">Adaptador</msg:message>
+        <msg:message name="msgIllustrator">Ilustrador</msg:message>
+        <msg:message name="msgContributor">Autor de comunicación </msg:message>
 
 
         <msg:message name="msgAbbreviation">Abreviatura</msg:message>

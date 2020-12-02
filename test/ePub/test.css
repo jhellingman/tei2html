@@ -1,7 +1,7 @@
  
 
 html {
- line-height: 1.2;
+ line-height: 1.3;
 }
 
 body {
@@ -71,40 +71,72 @@ img {
  
 
 body {
- font-family: "Times New Roman", Times, serif;
+ font-family: serif;
  font-size: 100%;
  text-align: left;
+ margin-top: 2.4em;
+}
+
+div.front, div.body {
+ margin-bottom: 7.2em;
+}
+
+div.back {
+ margin-bottom: 2.4em;
 }
 
 .div0 {
  margin-top: 7.2em;
+ margin-bottom: 7.2em;
 }
 
 .div1 {
  margin-top: 5.6em;
+ margin-bottom: 5.6em;
 }
 
 .div2 {
  margin-top: 4.8em;
+ margin-bottom: 4.8em;
 }
 
 .div3 {
  margin-top: 3.6em;
+ margin-bottom: 3.6em;
 }
 
 .div4 {
  margin-top: 2.4em;
+ margin-bottom: 2.4em;
 }
 
 .div5, .div6, .div7 {
  margin-top: 1.44em;
+ margin-bottom: 1.44em;
+}
+
+ 
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child, 
+.div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
+ margin-bottom: 0;
+}
+
+ 
+blockquote div.front, blockquote div.body, blockquote div.back {
+ margin-top: 0;
+ margin-bottom: 0;
+}
+
+ 
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child, 
+.divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
+ margin-top: 0;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
  clear: both;
  font-style: normal;
  text-transform: none;
- margin-bottom: 1em;
 }
 
 h3, .h3 {
@@ -1120,7 +1152,7 @@ span.measure {
 
 body {
  background: #FFFFFF;
- font-family: "Times New Roman", Times, serif;
+ font-family: serif;
 }
 
 body, a.hidden {
@@ -1129,12 +1161,12 @@ body, a.hidden {
 
 .titlePage {
  color: #001FA4;
- font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-family: sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
  color: #001FA4;
- font-family: Verdana, Arial, Helvetica, sans-serif;
+ font-family: sans-serif;
 }
 
 p.byline {
@@ -1226,7 +1258,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd34e610 {
+.xd34e625 {
 text-align:right;
 }
 
@@ -1246,7 +1278,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd34e1157 {
+.xd34e1172 {
 background-color:green;
 }
 
@@ -1262,7 +1294,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd34e1158 {
+.xd34e1173 {
 background-color:white;
 }
 
@@ -1290,27 +1322,31 @@ font-size:14pt; color:red; background-color:yellow;
 width:96px;
 }
 
-.xd34e422 {
+.xd34e360 {
+vertical-align:baseline;
+}
+
+.xd34e437 {
 text-align:left;
 }
 
-.xd34e426 {
+.xd34e441 {
 text-align:right;
 }
 
-.xd34e429 {
+.xd34e444 {
 text-align:center;
 }
 
 
-.xd34e432 {
+.xd34e447 {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd34e432init {
+.xd34e447init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1324,11 +1360,11 @@ text-align:center;
 }
 
         
-.xd34e440 {
+.xd34e455 {
 text-align:justify;
 }
 
-.xd34e456 {
+.xd34e471 {
 text-align:center;
 }
 
@@ -1336,7 +1372,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd34e573 {
+.xd34e588 {
 text-align:right;
 }
 
@@ -1344,11 +1380,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd34e759 {
+.xd34e774 {
 vertical-align:middle; width:2px;
 }
 
-.xd34e760 {
+.xd34e775 {
 vertical-align:middle;
 }
 
@@ -1356,11 +1392,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd34e771 {
+.xd34e786 {
 width:25%;
 }
 
-.xd34e773 {
+.xd34e788 {
 width:75%;
 }
 
@@ -1380,11 +1416,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd34e899 {
+.xd34e914 {
 color:red;
 }
 
-.xd34e919 {
+.xd34e934 {
 color:yellow; background-color:black;
 }
 
@@ -1396,19 +1432,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd34e1188 {
+.xd34e1203 {
 background-color:yellow;
 }
 
-.xd34e1206 {
+.xd34e1221 {
 background-color:blue;
 }
 
-.xd34e1215 {
+.xd34e1230 {
 background-color:orange;
 }
 
-.xd34e1225 {
+.xd34e1240 {
 background-color:red;
 }
 
@@ -1440,47 +1476,47 @@ width:480px;
 width:580px;
 }
 
-.xd34e1433 {
+.xd34e1448 {
 font-style:italic;
 }
 
-.xd34e1460 {
+.xd34e1475 {
 list-style-type:disc;
 }
 
-.xd34e1476 {
+.xd34e1491 {
 list-style-type:upper-roman;
 }
 
-.xd34e1485 {
+.xd34e1500 {
 list-style-type:lower-roman;
-}
-
-.xd34e1501 {
-list-style-type:disc;
 }
 
 .xd34e1516 {
 list-style-type:disc;
 }
 
-.xd34e1591 {
-text-align:center;
-}
-
-.xd34e1596 {
-text-indent:1em;
-}
-
-.xd34e1602 {
-text-indent:2em;
+.xd34e1531 {
+list-style-type:disc;
 }
 
 .xd34e1606 {
+text-align:center;
+}
+
+.xd34e1611 {
+text-indent:1em;
+}
+
+.xd34e1617 {
+text-indent:2em;
+}
+
+.xd34e1621 {
 text-indent:3em;
 }
 
-.xd34e1610 {
+.xd34e1625 {
 text-indent:10em;
 }
 
@@ -1502,12 +1538,12 @@ display:none;
 @media handheld {
 
 
-.xd34e432 {
+.xd34e447 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd34e432init {
+.xd34e447init {
     float: none;
     width: auto;
     height: auto;
@@ -1522,6 +1558,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd34e1783 {
+.xd34e1798 {
 color:red
 }

@@ -57,7 +57,7 @@ li {
 
 .t2hdebug, .t2hinfo, .t2hwarning, .t2herror {
     padding: 4px 8px 4px 8px;
-    font-family: "Segoe UI", "Calibri", Helvetica, Arial, sans-serif;
+    font-family: sans-serif;
     font-size: 12px;
 }
 

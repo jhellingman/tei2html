@@ -2,15 +2,11 @@
 
 body {
     background: #FFFFFF;
-    font-family: Garamond, Baskerville, 'Baskerville Old Face' , 'Hoefler Text', 'Times New Roman', serif;
+    font-family: serif;
 }
 
 body, a.hidden {
     color: black;
-}
-
-h1, .h1 {
-    padding-bottom: 5em;
 }
 
 h1, h2, .h1, .h2 {

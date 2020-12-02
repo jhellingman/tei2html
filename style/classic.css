@@ -1,15 +1,11 @@
 
 body {
     background: #FFFFFF;
-    font-family: "Times New Roman", Times, serif;
+    font-family: serif;
 }
 
 body, a.hidden {
     color: black;
-}
-
-h1, .h1 {
-    padding-bottom: 5em;
 }
 
 h1, h2, .h1, .h2 {

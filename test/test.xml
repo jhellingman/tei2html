@@ -193,6 +193,22 @@
 
 <p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="https://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gn 1:1">Bible</xref>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <xref url="wiki:Text_Encoding_Initiative">TEI</xref> or <xref url="tei:prefixDef">prefixDef</xref>.)</p>
 
+
+<div2 id="ch01.0">
+<head>Synthesized characters</head>
+
+<p>Some characters are not available in Unicode. We synthesize them using other characters
+and HTML.</p>
+
+<table>
+	<row>
+		<cell rend="vertical-align(baseline)">Music time symbol</cell>
+		<cell rend="vertical-align(baseline)"><tt>&amp;time44;</tt></cell>
+		<cell rend="vertical-align(baseline)"><ab type="musictime"><ab type="top">4</ab><ab type="bottom">4</ab></ab></cell>
+	</row>
+</table>
+
+</div2>
 <div2 id="ch01.1">
 <head>Different ways of including files.</head>
 

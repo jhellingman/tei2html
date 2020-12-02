@@ -6,7 +6,7 @@
 
 body {
     background: white;
-    font-family: "Times New Roman", Times, serif;
+    font-family: serif;
 }
 
 body, a.hidden {
@@ -14,12 +14,12 @@ body, a.hidden {
 }
 
 .titlePage {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
     color: black;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
 }
 
 p.byline {

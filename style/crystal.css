@@ -1,7 +1,7 @@
 
 body {
     background: #FFFFFF;
-    font-family: "Times New Roman", Times, serif;
+    font-family: serif;
 }
 
 body, a.hidden {
@@ -65,10 +65,6 @@ table {
 td, th {
     border: 1px solid #DDDDDD;
     background-color: #88FF88;
-}
-
-h1 {
-    padding-bottom: 5em;
 }
 
 h1, h2 {
