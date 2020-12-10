@@ -89,6 +89,7 @@ BEGIN {
     $langNameHash{"ii"}        = "Sichuan Yi";
     $langNameHash{"ik"}        = "Inupiak";
     $langNameHash{"io"}        = "Ido";
+    $langNameHash{"iro"}       = "Iroquoian";
     $langNameHash{"is"}        = "Icelandic";
     $langNameHash{"it"}        = "Italian";
     $langNameHash{"iu"}        = "Inuktitut";
@@ -168,6 +169,7 @@ BEGIN {
     $langNameHash{"sa-latn"}   = "Sanskrit (Latin transcription)";
     $langNameHash{"sd"}        = "Sindhi";
     $langNameHash{"sd-latn"}   = "Sindhi (Latin transcription)";
+    $langNameHash{"see"}       = "Seneca";
     $langNameHash{"sg"}        = "Sangro";
     $langNameHash{"sh"}        = "Serbo-Croatian";
     $langNameHash{"si"}        = "Sinhalese";

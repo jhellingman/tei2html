@@ -117,7 +117,7 @@
         <xsl:context-item as="element(table)" use="required"/>
 
         <table>
-            <xsl:copy-of select="f:set-class-attribute(.)"/>
+            <xsl:copy-of select="if (f:is-inline(.)) then f:set-class-attribute-with(., 'inlinetable') else f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">

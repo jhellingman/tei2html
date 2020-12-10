@@ -1396,6 +1396,8 @@ BEGIN {
 
     $ent{'jcaron'}      = 'j' . chr(0x030C); # j with caron
     $ent{'Jcaron'}      = 'J' . chr(0x030C); # J with caron
+    $ent{'ycaron'}      = 'y' . chr(0x030C); # y with caron
+    $ent{'Ycaron'}      = 'Y' . chr(0x030C); # Y with caron
 
     $ent{'ymacr'}       = chr(0x0233); # y with macron
     $ent{'Ymacr'}       = chr(0x0232); # Y with macron
@@ -2013,6 +2015,7 @@ BEGIN {
 
     $ent{'eumlbrev'}    = chr(0x00eb) . chr(0x0306); # e with diaresis and breve
 
+    $ent{'aumlmacr'}    = chr(0x00E4) . chr(0x0304); # a with diaresis and macron
     $ent{'oumlmacr'}    = chr(0x00F6) . chr(0x0304); # o with diaresis and macron
 
     $ent{'uringacu'}    = chr(0x016F) . chr(0x0301); # u with ring and acute
@@ -2130,6 +2133,7 @@ BEGIN {
     $ent{'ohmacgr'}     =  chr(0x03C9) . chr(0x0304);   # Greek omega with macron
     $ent{'OHmacgr'}     =  chr(0x03A9) . chr(0x0304);   # Greek Omega with macron
 
+    $ent{'supn'}        =  chr(0x207F);     # superscript n
 
     # Lippincott
     $ent{'a1'}          =  "a<sup>1</sup>"; # a with figure 1 above

@@ -796,7 +796,7 @@
 
     <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BF;&tcomma;&prime;-]', '')"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&tcomma;&prime;-]', '')"/>
         <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
     </xsl:function>
 
@@ -841,6 +841,8 @@
         <xsl:variable name="string" select="fn:replace($string, '&#x0166;', 'T')"/> <!-- Latin capital letter T with stroke -->
         <xsl:variable name="string" select="fn:replace($string, '&#x0167;', 't')"/> <!-- Latin small letter t with stroke -->
         <xsl:variable name="string" select="fn:replace($string, '&#x017F;', 's')"/> <!-- Latin small letter long s -->
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x207F;', 'n')"/> <!-- Superscript Latin small letter n -->
 
         <xsl:sequence select="$string"/>
     </xsl:function>

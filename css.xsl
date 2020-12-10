@@ -66,8 +66,10 @@
             <style type="text/css">
                 <xsl:call-template name="common-css-stylesheets"/>
 
-                <!-- Standard Aural CSS stylesheet -->
-                <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
+                <xsl:if test="number(f:get-setting('css.support')) &gt; 2">
+                    <!-- Standard Aural CSS stylesheet (uses CSS 3 CSS Speech Module (RC) -->
+                    <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
+                </xsl:if>
             </style>
         </xsl:if>
 

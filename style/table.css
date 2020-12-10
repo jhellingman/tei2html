@@ -29,6 +29,10 @@ span.sum {
     border-top: solid black 1px;
 }
 
+table.inlinetable {
+    display: inline-table;
+}
+
 /* Table border styles */
 
 /* Table with borders on the outside and between the table head and data. */
@@ -194,6 +198,7 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 }
 
 
+/* When a table column aligns on the decimal separator, the preprocessing adds a column with the following classes. Make sure they look as one column. */
 td.alignDecimalIntegerPart {
     text-align: right;
     border-right: none !important;
