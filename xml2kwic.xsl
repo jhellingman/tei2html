@@ -796,7 +796,7 @@
 
     <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&tcomma;&prime;-]', '')"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')"/>
         <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
     </xsl:function>
 

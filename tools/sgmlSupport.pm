@@ -1506,6 +1506,7 @@ BEGIN {
 
     $ent{'N'}           = 'N'; # Capital letter N (used with special meaning in Wolff's dictionary.)
 
+    $ent{'mlprime'}     = chr(0x02B9);  # MODIFIER LETTER PRIME
 
     # Tibetan transcription as used in Jäschke's dictionary and grammar
 

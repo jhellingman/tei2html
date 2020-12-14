@@ -502,9 +502,9 @@
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
-            <!-- Don't generate an empty span, as that will be purged by some HTML tools -->
+            <!-- An empty span will be purged by some HTML tools; however, an anchor element is not allowed inside other anchors. -->
             <xsl:when test="not($corr) or $corr = ''">
-                <a id="{f:generate-id(.)}"/>
+                <span id="{f:generate-id(.)}"/>
             </xsl:when>
             <xsl:otherwise>
                 <span class="corr">

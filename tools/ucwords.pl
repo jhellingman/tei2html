@@ -1596,6 +1596,7 @@ sub StripDiacritics($) {
         s/\x{00AD}//g;      ## soft-hyphen
         s/\x{2032}//g;      ## prime
         s/`//g;             ## back-tick
+        s/\x{02b9}//g;      ## Modifier letter prime
         s/\x{02bb}//g;      ## 'Okina (Hawaiian glottal stop)
         s/\x{02bc}//g;      ## Modifier letter apostrophe
         s/\x{02bf}//g;      ## Modifier letter left half ring (Ayin)

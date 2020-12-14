@@ -1091,6 +1091,7 @@ sub entities2iso88591($) {
     $string =~ s/\&apos;/'/g;
     $string =~ s/\&rhring;/`/g;
     $string =~ s/\&mlapos;/'/g;
+    $string =~ s/\&mlprime;/'/g;
     $string =~ s/\&okina;/`/g;
     $string =~ s/\&tcomma;/`/g;
     $string =~ s/\&sup([0-9a-zA-Z]);/$1/g;

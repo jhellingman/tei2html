@@ -826,7 +826,9 @@ sub runChecks($) {
     }
     print "Run checks on $filename.\n";
 
-    my $transcribedFile = transcribe($filename, $noTranscriptionPopups);
+    my $intraFile = convertIntraNotation($filename);
+
+    my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
     my $positionInfoFilename = $basename . '-pos.' . $format;
 
@@ -852,6 +854,9 @@ sub runChecks($) {
     system ("$saxon \"$positionInfoFilename\" $xsldir/preprocess.xsl > $xmlFilename");
 
     system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
+    if ($filename ne $intraFile) {
+        $debug || unlink ($intraFile);
+    }
     if ($filename ne $transcribedFile) {
         $debug || unlink ($transcribedFile);
     }
@@ -987,15 +992,7 @@ sub tei2xml($$) {
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
 
-    # Convert <INTRA> notation.
-    my $containsIntralinear = system ("grep -q \"<INTRA\" $sgmlFile");
-    if ($containsIntralinear == 0) {
-        my $tmpFileA = temporaryFile('intra', '.tei');
-        print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
-        system ("perl $toolsdir/intralinear.pl $tmpFile0 > $tmpFileA");
-        $debug || unlink($tmpFile0);
-        $tmpFile0 = $tmpFileA;
-    }
+    my $tmpFile0a = convertIntraNotation($tmpFile0);
 
     $tmpFile0 = transcribe($tmpFile0, $noTranscriptionPopups);
 
@@ -1028,9 +1025,25 @@ sub tei2xml($$) {
     $debug || unlink($tmpFile3);
     $debug || unlink($tmpFile2);
     $debug || unlink($tmpFile1);
+    $debug || unlink($tmpFile0a);
     $debug || unlink($tmpFile0);
 }
 
+#
+# convertIntraNotation -- Convert <INTRA> notation.
+#
+sub convertIntraNotation() {
+    my $filename = shift;
+
+    my $containsIntralinear = system ("grep -q \"<INTRA\" $filename");
+    if ($containsIntralinear == 0) {
+        my $tmpFile = temporaryFile('intra', '.tei');
+        print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
+        system ("perl $toolsdir/intralinear.pl $filename > $tmpFile");
+        $filename = $tmpFile;
+    }
+    return $filename;
+}
 
 #
 # transcribe -- transcribe foreign scripts in special notations to entities.

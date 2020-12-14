@@ -100,6 +100,7 @@ BEGIN {
     $langNameHash{"jv"}        = "Javanese";
     $langNameHash{"ka"}        = "Georgian";
     $langNameHash{"ka-latn"}   = "Georgian (Latin transcription)";
+    $langNameHash{"kg"}        = "Kikongo";
     $langNameHash{"kk"}        = "Kazakh";
     $langNameHash{"kl"}        = "Greenlandic";
     $langNameHash{"km"}        = "Cambodian";
