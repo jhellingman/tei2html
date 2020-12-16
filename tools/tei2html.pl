@@ -992,12 +992,12 @@ sub tei2xml($$) {
     print "Convert Latin-1 characters to entities...\n";
     system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
 
-    my $tmpFile0a = convertIntraNotation($tmpFile0);
+    my $intraFile = convertIntraNotation($tmpFile0);
 
-    $tmpFile0 = transcribe($tmpFile0, $noTranscriptionPopups);
+    my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
     print "Check SGML...\n";
-    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $tmpFile0 > $sgmlFile.nsgml");
+    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $transcribedFile > $sgmlFile.nsgml");
     if ($nsgmlresult != 0) {
         print "WARNING: NSGML found validation errors in $sgmlFile.\n";
     }
@@ -1011,7 +1011,7 @@ sub tei2xml($$) {
     print "Convert SGML to XML...\n";
 
     # hide entities for parser
-    system ("sed \"s/\\&/|xxxx|/g\" < $tmpFile0 > $tmpFile1");
+    system ("sed \"s/\\&/|xxxx|/g\" < $transcribedFile > $tmpFile1");
     system ("$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
 
     # apply proper case to tags.
@@ -1025,8 +1025,9 @@ sub tei2xml($$) {
     $debug || unlink($tmpFile3);
     $debug || unlink($tmpFile2);
     $debug || unlink($tmpFile1);
-    $debug || unlink($tmpFile0a);
     $debug || unlink($tmpFile0);
+    $debug || unlink($intraFile);
+    $debug || unlink($transcribedFile);
 }
 
 #
