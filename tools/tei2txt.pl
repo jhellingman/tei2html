@@ -202,6 +202,22 @@ sub handleLine($) {
         }
     }
 
+    # handle references to end-notes like footnotes
+    if ($line =~ /([ .,:;!?]*)<ref\b(.*?)>(.*?)<\/ref>/) {
+        my $prefix = $`;
+        my $remainder = $';
+        my $spaceOrPunctuationBefore = $1;
+        my $attrs = $2;
+        my $content = $3;
+        my $number = getAttrVal('n', $attrs);
+        my $type = getAttrVal('type', $attrs);
+        if (defined $type && lc($type) eq 'endnoteref') {
+            if ($spaceOrPunctuationBefore eq '') { $spaceOrPunctuationBefore = ' '; }
+            if ($content eq '' && defined $number) { $content = $number; }
+            $line = $prefix . $spaceOrPunctuationBefore . '[' . $content . ']' . $remainder;
+        }
+    }
+
     # remove any remaining tags
     $line =~ s/<.*?>//g;
 

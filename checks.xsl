@@ -65,6 +65,19 @@
         <xsl:apply-templates mode="segmentize" select="/"/>
     </xsl:variable>
 
+    <!-- Make sure periods in abbreviations are not reported (replace them by &blackCircle;; replace them back later) -->
+    <xsl:template match="abbr" mode="segments">
+        <xsl:value-of select="replace(., '\.', '&blackCircle;')"/>
+    </xsl:template>
+
+    <!-- Add some space around end-note references to avoid some false positive "no space after punctuation" issues -->
+    <xsl:template match="ref[@type='endNoteRef']" mode="segments">
+        <xsl:text> {</xsl:text>
+        <xsl:apply-templates mode="#current"/>
+        <xsl:text>} </xsl:text>
+    </xsl:template>
+
+
     <!-- Collect issues in structure [issue pos=""]Description of issue[/issue] -->
     <xsl:variable name="issues">
         <i:issues>
@@ -136,11 +149,6 @@
         <xsl:value-of select="($node/preceding::pb[@n]/@n)[last()]"/>
     </xsl:function>
 
-
-    <!-- Make sure periods in abbreviations are not reported (replace them by &blackCircle;; replace them back later) -->
-    <xsl:template match="abbr" mode="segments">
-        <xsl:value-of select="replace(., '\.', '&blackCircle;')"/>
-    </xsl:template>
 
     <xsl:template mode="info" match="titleStmt/title">
         <i:issue pos="{@pos}" code="A01" category="Metadata" target="{f:generate-id(.)}" level="Info" element="{name(.)}" page="{f:get-page(.)}">Title: <xsl:value-of select="."/>.</i:issue>
@@ -575,6 +583,7 @@
 
     <xsl:template match="note" mode="remove-extra-content"/>
 
+    <xsl:template match="ref[@type='endNoteRef']" mode="remove-extra-content"/>
 
     <xd:doc>
         <xd:short>Check page numbering.</xd:short>
@@ -918,7 +927,7 @@
 
     <!-- Types of ab (arbitrary block) elements -->
 
-    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'parNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'lineNumRef', 'textRef', 'keyNum', 'intra', 'top', 'bottom', 'price'" as="xs:string*"/>
+    <xsl:variable name="expectedAbTypes" select="'verseNum', 'lineNum', 'parNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'lineNumRef', 'endNoteNum', 'textRef', 'keyNum', 'intra', 'top', 'bottom', 'price'" as="xs:string*"/>
 
     <xd:doc>
         <xd:short>Check the types of <code>ab</code> elements.</xd:short>
@@ -1018,6 +1027,7 @@
     <xsl:template mode="checks" match="figure[figure]">
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
+
 
     <!-- Generic sequence -->
 
@@ -1154,6 +1164,7 @@
         </xsl:for-each>
 
     </xsl:template>
+
 
     <!-- Text level checks, run on segments -->
 
