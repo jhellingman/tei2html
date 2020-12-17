@@ -85,6 +85,7 @@ div.back {
  margin-bottom: 2.4em;
 }
 
+ 
 .div0 {
  margin-top: 7.2em;
  margin-bottom: 7.2em;
@@ -811,6 +812,10 @@ span.sum {
  border-top: solid black 1px;
 }
 
+table.inlinetable {
+ display: inline-table;
+}
+
  
 
  
@@ -976,6 +981,7 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 }
 
 
+ 
 td.alignDecimalIntegerPart {
  text-align: right;
  border-right: none !important;
