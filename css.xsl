@@ -22,7 +22,7 @@
         the <code>css</code> mode are integrated in the other stylesheets, to keep them together with
         related HTML generating templates.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2020, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -53,25 +53,22 @@
             'voice-family', 'volume', 'white-space', 'widows', 'width', 'word-spacing', 'z-index')"/>
     </xsl:variable>
 
+
     <xd:doc>
         <xd:short>Embed CSS stylesheets.</xd:short>
         <xd:detail>
-            <p>Embed the standard and generated CSS stylesheets in the HTML output.</p>
+            <p>Embed the standard (common) and generated (custom) CSS stylesheets in the HTML output.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="embed-css-stylesheets">
+        <xsl:variable name="css">
+            <xsl:call-template name="generate-css"/>
+        </xsl:variable>
 
-        <xsl:if test="f:is-set('css.useCommon')">
-            <style type="text/css">
-                <xsl:call-template name="common-css-stylesheets"/>
-
-                <xsl:if test="number(f:get-setting('css.support')) &gt; 2">
-                    <!-- Standard Aural CSS stylesheet (uses CSS 3 CSS Speech Module (RC) -->
-                    <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
-                </xsl:if>
-            </style>
-        </xsl:if>
+        <xsl:call-template name="output-embedded-css">
+            <xsl:with-param name="css" select="$css"/>
+        </xsl:call-template>
 
         <!-- Pull in CSS sheet for print (when using Prince). -->
         <xsl:if test="f:is-set('css.useCommonPrint') and $optionPrinceMarkup = 'Yes'">
@@ -79,17 +76,37 @@
                 <xsl:value-of select="f:css-stylesheet('style/print.css')"/>
             </style>
         </xsl:if>
+    </xsl:template>
 
-        <style type="text/css">
-            <xsl:call-template name="custom-css-stylesheets"/>
-        </style>
+
+    <xd:doc>
+        <xd:short>Output embedded CSS stylesheets.</xd:short>
+        <xd:detail>
+            <p>Output embedded CSS stylesheets. Because CSS can include the &gt; symbol
+            (the direct descendant selector), we need to make sure that this is not escaped,
+            that is, place the generated CSS in a CDATA block, and then hide this again in
+            CSS comments for some older browsers.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template name="output-embedded-css">
+        <xsl:param name="css" as="xs:string"/>
+
+        <xsl:text disable-output-escaping="yes">
+            &lt;style type="text/css"&gt; /* &lt;![CDATA[ */
+        </xsl:text>
+        <xsl:value-of select="$css" disable-output-escaping="yes"/>
+        <xsl:text disable-output-escaping="yes">
+            /* ]]&gt; */ &lt;/style&gt;
+        </xsl:text>
     </xsl:template>
 
 
     <xd:doc>
         <xd:short>Collect all CSS used into a single (external) .css file.</xd:short>
         <xd:detail>
-            <p>Collect the standard and generated CSS stylesheets in a single external .css file.</p>
+            <p>Collect the standard and generated CSS stylesheets in a single external .css file.
+            This is typically used when generating an ePub file.</p>
         </xd:detail>
     </xd:doc>
 
@@ -99,9 +116,16 @@
                 method="text"
                 encoding="UTF-8">
             <xsl:copy-of select="f:log-info('Generated CSS stylesheet: {1}/{2}.css', ($path, $basename))"/>
-            <xsl:call-template name="common-css-stylesheets"/>
-            <xsl:call-template name="custom-css-stylesheets"/>
+            <xsl:call-template name="generate-css"/>
         </xsl:result-document>
+    </xsl:template>
+
+
+    <xsl:template name="generate-css">
+        <xsl:if test="f:is-set('css.useCommon')">
+            <xsl:call-template name="common-css-stylesheets"/>
+        </xsl:if>
+        <xsl:call-template name="custom-css-stylesheets"/>
     </xsl:template>
 
 
@@ -114,7 +138,7 @@
 
     <xsl:template name="common-css-stylesheets">
 
-        <!-- Standard CSS stylesheets. -->
+        <!-- Standard CSS stylesheets, always included. -->
         <xsl:value-of select="f:css-stylesheet('style/normalize.css')"/>
         <xsl:value-of select="f:css-stylesheet('style/layout.css')"/>
         <xsl:value-of select="f:css-stylesheet('style/list.css')"/>
@@ -171,7 +195,12 @@
             <xsl:value-of select="f:css-stylesheet('style/debug.css')"/>
         </xsl:if>
 
-        <!-- Supplement CSS stylesheet. -->
+        <!-- Standard Aural CSS stylesheet (uses CSS 3 CSS Speech Module (RC) -->
+        <xsl:if test="f:is-set('useCommonAural')">
+            <xsl:value-of select="f:css-stylesheet('style/aural.css')"/>
+        </xsl:if>
+
+        <!-- Supplement CSS stylesheets as specified in the rend-attribute on the main text element. -->
         <xsl:variable name="stylesheet" as="xs:string">
             <xsl:choose>
                 <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
@@ -197,9 +226,7 @@
     <xsl:template name="custom-css-stylesheets">
         <xsl:if test="$customCssFile">
             <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
-            <!-- <xsl:value-of select="'&lf;//&lt;![CDATA[&lf;'" disable-output-escaping="yes"/> -->
-            <xsl:value-of select="f:css-stylesheet($customCssFile, .)" disable-output-escaping="yes"/>
-            <!-- <xsl:value-of select="'&lf;//]]&gt;&lf;'" disable-output-escaping="yes"/> -->
+            <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
         </xsl:if>
 
         <xsl:if test="//pgStyleSheet">
