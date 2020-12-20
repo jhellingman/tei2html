@@ -1665,8 +1665,12 @@ BEGIN {
     $ent{'rum'}         = chr(0xA775); # rum (r with stroke through flag)
     $ent{'Rum'}         = chr(0xA776); # small capital Rum (r with stroke through tail)
 
-    $ent{'Ysc'}         = chr(0x028F); # small caps Y
+    $ent{'Asc'}         = chr(0x1D00); # small caps A
     $ent{'Dsc'}         = chr(0x1D05); # small caps D
+    $ent{'Esc'}         = chr(0x1D07); # small caps E
+    $ent{'Ysc'}         = chr(0x028F); # small caps Y
+
+    $ent{'Escbreve'}    = chr(0x1D07) . chr(0x0306); # small caps E with breve
 
     $ent{'vdiagstrok'}  = chr(0xA75F); # v with diagonal stroke
 
@@ -2152,6 +2156,7 @@ BEGIN {
 
     $ent{'supG'}        =  "<sup>G</sup>";  # Superior small caps G
 
+    # See '[A-Z]sc' for actual Unicode small caps characters.
     $ent{'scA'}         =  "<sc>a</sc>";    # Small caps A
     $ent{'scB'}         =  "<sc>b</sc>";    # Small caps B
     $ent{'scC'}         =  "<sc>c</sc>";    # Small caps C

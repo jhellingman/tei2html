@@ -349,11 +349,12 @@
             then $current-row &lt;= $column-count
             else ($current-row - 1) mod $rows-per-colum = 0)"/>
 
+        <xsl:variable name="cols" select="if (@cols) then @cols else 1"/>
         <xsl:choose>
             <!-- Do we have the @col attribute on the table, then we can use those attributes -->
             <xsl:when test="@col">
                 <xsl:if test="@col = 1"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
-                <xsl:if test="@col + @cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
+                <xsl:if test="@col + $cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:log-warning('Table {1}, Column position not specified: using simple heuristic to determine borders.', (f:generate-id(ancestor::table[1])))"/>

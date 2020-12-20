@@ -107,4 +107,169 @@
       </x:expect>
    </x:scenario>
 
+
+   <x:scenario label="When rendering a simple table element">
+      <x:context>
+        <table id="simple_table"
+               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rows="3"
+               headrows="0"
+               cols="3">
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">2</cell>
+              <cell row="1" col="2">7</cell>
+              <cell row="1" col="3">6</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">9</cell>
+              <cell row="2" col="2">5</cell>
+              <cell row="2" col="3">1</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">4</cell>
+              <cell row="3" col="2">3</cell>
+              <cell row="3" col="3">8</cell>
+           </row>
+        </table>
+      </x:context>
+      <x:expect label="will result in an HTML table">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             class="table"
+             id="simple_table">
+           <table class="verticalBorderInside"
+                  summary="A straighforward table to demonstrate tables in TEI">
+              <tr id="...">
+                 <td id="..." class="cellLeft cellTop">2</td>
+                 <td id="..." class="cellTop">7</td>
+                 <td id="..." class="cellRight cellTop">6</td>
+              </tr>
+              <tr id="...">
+                 <td id="..." class="cellLeft">9</td>
+                 <td id="xd126e15">5</td>
+                 <td id="xd126e17" class="cellRight">1</td>
+              </tr>
+              <tr id="...">
+                 <td id="..." class="cellLeft cellBottom">4</td>
+                 <td id="..." class="cellBottom">3</td>
+                 <td id="..." class="cellRight cellBottom">8</td>
+              </tr>
+           </table>
+        </div>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When rendering a simple table element in two columns (row-major)">
+      <x:context>
+        <table id="simple_table_2"
+               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
+               rows="3"
+               headrows="0"
+               cols="3">
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">2</cell>
+              <cell row="1" col="2">7</cell>
+              <cell row="1" col="3">6</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">9</cell>
+              <cell row="2" col="2">5</cell>
+              <cell row="2" col="3">1</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">4</cell>
+              <cell row="3" col="2">3</cell>
+              <cell row="3" col="3">8</cell>
+           </row>
+        </table>
+      </x:context>
+      <x:expect label="will result in an HTML table with the table re-arranged in two columns">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             class="table"
+             id="simple_table_2">
+           <table class="verticalBorderInside"
+                  summary="A straighforward table to demonstrate tables in TEI">
+              <tbody>
+                 <tr>
+                    <td id="..." class="cellLeft cellTop">2</td>
+                    <td id="..." class="cellTop">7</td>
+                    <td id="..." class="cellRight cellTop">6</td>
+                    <td class="cellDoubleUp" />
+                    <td id="..." class="cellLeft cellTop cellBottom">4</td>
+                    <td id="..." class="cellTop cellBottom">3</td>
+                    <td id="..." class="cellRight cellTop cellBottom">8</td>
+                 </tr>
+                 <tr>
+                    <td id="..." class="cellLeft cellBottom">9</td>
+                    <td id="..." class="cellBottom">5</td>
+                    <td id="..." class="cellRight cellBottom">1</td>
+                 </tr>
+              </tbody>
+           </table>
+        </div>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When rendering a simple table element in two columns (column-major)">
+      <x:context>
+        <table id="simple_table_2"
+               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2) item-order(column-major)"
+               rows="3"
+               headrows="0"
+               cols="3">
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">2</cell>
+              <cell row="1" col="2">7</cell>
+              <cell row="1" col="3">6</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">9</cell>
+              <cell row="2" col="2">5</cell>
+              <cell row="2" col="3">1</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">4</cell>
+              <cell row="3" col="2">3</cell>
+              <cell row="3" col="3">8</cell>
+           </row>
+        </table>
+      </x:context>
+      <x:expect label="will result in an HTML table with the table re-arranged in two columns">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             class="table"
+             id="simple_table_2">
+           <table class="verticalBorderInside"
+                  summary="A straighforward table to demonstrate tables in TEI">
+              <tbody>
+                 <tr>
+                    <td id="..." class="cellLeft cellTop">2</td>
+                    <td id="..." class="cellTop">7</td>
+                    <td id="..." class="cellRight cellTop">6</td>
+                    <td class="cellDoubleUp" />
+                    <td id="..." class="cellLeft cellTop cellBottom">9</td>
+                    <td id="..." class="cellTop cellBottom">5</td>
+                    <td id="..." class="cellRight cellTop cellBottom">1</td>
+                 </tr>
+                 <tr>
+                    <td id="..." class="cellLeft cellBottom">4</td>
+                    <td id="..." class="cellBottom">3</td>
+                    <td id="..." class="cellRight cellBottom">8</td>
+                 </tr>
+              </tbody>
+           </table>
+        </div>
+      </x:expect>
+   </x:scenario>
+
+
 </x:description>

@@ -21,6 +21,9 @@
         register the cell position in additional attributes. In a final stage, we remove
         the spanned cells again.</p>
 
+        <p>The code assumes that the table being transformed is rectangular. It may behave in 
+        unexpected ways if this is not the case.</p>
+
         <p>The normalizing code is based on sample code found on-line
         <a href="http://andrewjwelch.com/code/xslt/table/table-normalization.html">here</a>. This has been
         adjusted to the TEI table model and expanded with code to detect non-rectangular
@@ -215,10 +218,14 @@
     </xd:doc>
 
     <xsl:template match="table" mode="normalize-table-final">
+
+        <!-- Exceptional condition: if the bottom row of cells all span multiple rows, we need to count those spans. -->
+        <xsl:variable name="additionalRows" select="if (row[last()]/cell[1]/@rows) then row[last()]/cell[1]/@rows - 1 else 0"/>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
             <xsl:attribute name="cols" select="count(row[1]/cell)"/>
-            <xsl:attribute name="rows" select="count(row)"/>
+            <xsl:attribute name="rows" select="count(row) + $additionalRows"/>
+
             <!-- TODO: Count heading rows only at top -->
             <xsl:attribute name="headrows" select="count(row[@role = 'label' or @role = 'unit'])"/>
 

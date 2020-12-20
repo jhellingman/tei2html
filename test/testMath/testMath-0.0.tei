@@ -8,17 +8,8 @@
 <publicationStmt>
 <publisher>Project Gutenberg</publisher>
 <pubPlace>Urbana, Illinois, USA.</pubPlace>
-<idno type=LCCN>#####</idno>
-<idno type=OLN>#####</idno>
-<idno type=OLW>#####</idno>
-<idno type=OCLC>#####</idno>
-<idno type=LibThing>#####</idno>
-<idno type=PGclearance>#####</idno>
-<idno type=PGDPProjectId>#####</idno>
-<idno type=PGSrc>#####</idno>
 <idno type=epub-id>urn:uuid:def802a2-77bb-4d37-9bf6-7ba81fa7d423</idno>
-<idno type=PGnum>#####</idno>
-<date>#####</date>
+<date>2020</date>
 <availability>
 <p>Samples taken from https://www.tuhh.de/MathJax/test/examples.html
 
@@ -42,11 +33,6 @@
 <profileDesc>
     <langUsage>
         <language id=en>English</language>
-        <language id=en-US>English (United States)</language>
-        <language id=en-UK>English (United Kingdom)</language>
-        <language id=de>German</language>
-        <language id=fr>French</language>
-        <language id=la>Latin</language>
     </langUsage>
     <textClass>
         <keywords>

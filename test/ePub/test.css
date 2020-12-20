@@ -538,6 +538,11 @@ td.innerContainer {
  font-size: 80%;
 }
 
+.index p {
+ text-indent: -1em;
+ margin-left: 1em;
+}
+
 .indexToc {
  text-align: center;
 }

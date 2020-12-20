@@ -1,0 +1,99 @@
+<!DOCTYPE TEI.2 PUBLIC "-//TEI//DTD TEI Lite 1.0//EN">
+<TEI.2 lang=en>
+<teiHeader>
+<fileDesc>
+<titleStmt>
+<title>Sample Tables</title>
+</titleStmt>
+<publicationStmt>
+<publisher>Project Gutenberg</publisher>
+<pubPlace>Urbana, Illinois, USA.</pubPlace>
+<idno type=epub-id>urn:uuid:e0f91114-83d6-45e7-b83f-c1d479d9c02a</idno>
+<date>2020</date>
+<availability>
+<p>Samples taken from https://www.tuhh.de/MathJax/test/examples.html
+</availability>
+</publicationStmt>
+<notesStmt>
+    <note type="Description">Sample MathJax Equations</note>
+</notesStmt>
+<sourceDesc>
+<bibl>
+<author>Jeroen Hellingman</author>
+<title>Sample MathJax Equations</title>
+<date>2018</date>
+</bibl>
+</sourceDesc>
+</fileDesc>
+<encodingDesc>
+    <p></p>
+    <tagsDecl>
+        <rendition selector="table">
+            border-collapse: collapse;
+            font-family: sans-serif;
+        </rendition>
+        <rendition selector="td">
+            font-style: italic;
+            text-align: center;
+            vertical-align: middle;
+            width: 1.2em;
+            height: 1.2em;
+        </rendition>
+
+        <rendition selector="td.a">border: 1px solid black;</rendition>
+        <rendition selector="td.A">border: 2px solid black;</rendition>
+
+        <rendition selector="td.t">border-top: 1px solid black;</rendition>
+        <rendition selector="td.T">border-top: 2px solid black;</rendition>
+        <rendition selector="td.r">border-right: 1px solid black;</rendition>
+        <rendition selector="td.R">border-right: 2px solid black;</rendition>
+        <rendition selector="td.b">border-bottom: 1px solid black;</rendition>
+        <rendition selector="td.B">border-bottom: 2px solid black;</rendition>
+        <rendition selector="td.l">border-left: 1px solid black;</rendition>
+        <rendition selector="td.L">border-left: 2px solid black;</rendition>
+
+    </tagsDecl></encodingDesc>
+<profileDesc>
+    <langUsage>
+        <language id=en>English</language>
+    </langUsage>
+</profileDesc>
+</teiHeader>
+<text rend="stylesheet(style/classic.css)">
+<body>
+<div1 type=Chapter>
+<head>Sample Tables</head>
+
+
+<p><table id=magic3 rend="class(borderAll)">
+<row><cell> 2 <cell> 7 <cell> 6
+<row><cell> 9 <cell> 5 <cell> 1
+<row><cell> 4 <cell> 3 <cell> 8
+</table>
+
+
+<p><table id=magic5a>
+<row><cell>                    <cell>                    <cell>                        <cell>                    <cell rend="class(a)">  5 <cell>                    <cell>                        <cell>                    <cell>                
+<row><cell>                    <cell>                    <cell>                        <cell rend="class(a)">  4 <cell rend="class(a)">    <cell rend="class(a)"> 10 <cell>                        <cell>                    <cell>                
+<row><cell>                    <cell>                    <cell rend="class(a T L)">  3 <cell rend="class(a T)">  <cell rend="class(a T)"> 9<cell rend="class(a T)">  <cell rend="class(a T R)"> 15 <cell>                    <cell>                
+<row><cell>                    <cell rend="class(a)">  2 <cell rend="class(a L)">      <cell rend="class(a)">  8 <cell rend="class(a)">    <cell rend="class(a)"> 14 <cell rend="class(a R)">      <cell rend="class(a)"> 20 <cell>                
+<row><cell rend="class(a)">  1 <cell rend="class(a)">    <cell rend="class(a L)">  7   <cell rend="class(a)">    <cell rend="class(a)"> 13 <cell rend="class(a)">    <cell rend="class(a R)"> 19   <cell rend="class(a)">    <cell rend="class(a)"> 25
+<row><cell>                    <cell rend="class(a)">  6 <cell rend="class(a L)">      <cell rend="class(a)"> 12 <cell rend="class(a)">    <cell rend="class(a)"> 18 <cell rend="class(a R)">      <cell rend="class(a)"> 24 <cell>                
+<row><cell>                    <cell>                    <cell rend="class(a B L)"> 11 <cell rend="class(a B)">  <cell rend="class(a B)">17<cell rend="class(a B)">  <cell rend="class(a B R)"> 23 <cell>                    <cell>                
+<row><cell>                    <cell>                    <cell>                        <cell rend="class(a)"> 16 <cell rend="class(a)">    <cell rend="class(a)"> 22 <cell>                        <cell>                    <cell>                
+<row><cell>                    <cell>                    <cell>                        <cell>                    <cell rend="class(a)"> 21 <cell>                    <cell>                        <cell>                    <cell>                
+</table>
+
+
+<p><table id=magic5b rend="class(borderAll)">
+<row><cell>  3 <cell> 16 <cell>  9 <cell> 22 <cell> 15 
+<row><cell> 20 <cell>  8 <cell> 21 <cell> 14 <cell>  2 
+<row><cell>  7 <cell> 25 <cell> 13 <cell>  1 <cell> 19 
+<row><cell> 24 <cell> 12 <cell>  5 <cell> 18 <cell>  6 
+<row><cell> 11 <cell>  4 <cell> 17 <cell> 10 <cell> 23 
+</table>
+
+
+</body>
+</text>
+</TEI.2>
