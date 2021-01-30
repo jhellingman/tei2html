@@ -7,11 +7,17 @@
 use strict;
 use warnings;
 use File::Basename;
+use Getopt::Long;
 
 my $pdfimages = "pdfimages.exe"; # See http://www.foolabs.com/xpdf/download.html
 my $pdftopng = "pdftopng.exe";
 my $pdfcount = 1000;
 my $resolutionDpi = 300;
+my $extractActualImages = 0;
+
+GetOptions(
+    'j' => \$extractActualImages
+    );
 
 sub list_recursively($);
 
@@ -46,8 +52,11 @@ sub handle_file($) {
         print "Extracting images from PDF: $file\n";
         if ($extension eq 'pdf') {
             $pdfcount++;
-            system ("$pdftopng -r $resolutionDpi $file $pdfcount");
-            # system ("$pdfimages -j -list \"$file\" $pdfcount");
+            if ($extractActualImages == 0) {
+                system ("$pdftopng -r $resolutionDpi $file $pdfcount");
+            } else {
+                system ("$pdfimages -j -list \"$file\" $pdfcount");
+            }
         }
     }
 }

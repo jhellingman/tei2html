@@ -9,20 +9,26 @@
 
 use strict;
 use warnings;
+use Getopt::Long;
 
-my $useHtml = 1;
+my $useXml = 0;     # Output as XML (TEI); default is HTML.
+my $utf8 = 0;       # Input file is utf8.
+
+GetOptions(
+    'u' => \$utf8,
+    'x' => \$useXml
+    );
 
 main();
 
 sub main {
     my $file = $ARGV[0];
 
-    if ($file eq "-x") {
-        $useHtml = 0;
-        $file = $ARGV[1];
-    }
-
     open(INPUTFILE, $file) || die("Could not open input file $file");
+    if ($utf8 != 0) {
+        binmode(INPUTFILE, ":utf8");
+        binmode(STDOUT, ":utf8");
+    }
 
     my $paragraph = "";
 
@@ -53,7 +59,7 @@ sub main {
 sub handleParagraph($) {
     my $paragraph = shift;
 
-    if ($useHtml == 1) {
+    if ($useXml == 0) {
         $paragraph =~ s/<GR>(.*?)<\/GR>/<span class=trans title=\"<GRTA>$1<\/GRTA>\"><GR>$1<\/GR><\/span>/g;
         $paragraph =~ s/<CY>(.*?)<\/CY>/<span class=trans title=\"<CYTA>$1<\/CYTA>\"><CY>$1<\/CY><\/span>/g;
         $paragraph =~ s/<RU>(.*?)<\/RU>/<span class=trans title=\"<RUTA>$1<\/RUTA>\"><RU>$1<\/RU><\/span>/g;

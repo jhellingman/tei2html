@@ -62,8 +62,8 @@
     <xsl:param name="min-variant-count" select="1" as="xs:integer"/>
 
 
-    <!-- Values: 'following', 'preceding', 'document' -->
-    <xsl:param name="sort-order" select="'following'"/>
+    <!-- Values: 'following' or 'preceding' -->
+    <xsl:param name="sort-context" select="'following'"/>
 
 
     <xd:doc>
@@ -347,11 +347,33 @@
                 <xsl:call-template name="table-headers"/>
                 <xsl:apply-templates mode="output" select="$matches">
                     <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-                    <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
+                    <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
                 </xsl:apply-templates>
             </table>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:context-sort-key" as="xs:string">
+        <xsl:param name="preceding" as="xs:string"/>
+        <xsl:param name="following" as="xs:string"/>
+        
+        <xsl:choose>
+            <xsl:when test="$sort-context = 'preceding'">
+                <xsl:value-of select="f:reverse(f:normalize-string($preceding))"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="f:normalize-string($following)"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:reverse">
+        <xsl:param name="string" as="xs:string"/>
+        <!-- TODO: split the string with a regular expression, taking into account combining diacritics -->
+        <xsl:sequence select="codepoints-to-string(reverse(string-to-codepoints($string)))"/>
+    </xsl:function>
 
 
     <xsl:function name="f:should-report-match" as="xs:boolean">
@@ -423,7 +445,7 @@
 
         <xsl:apply-templates mode="output" select="$matchlist">
             <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-            <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
+            <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -464,7 +486,7 @@
         <table>
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="#current">
-                <xsl:sort select="f:normalize-string(k:following)" order="ascending"/>
+                <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>

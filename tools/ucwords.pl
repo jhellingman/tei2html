@@ -28,6 +28,7 @@ my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
 my $xmlReport = 0;      # Set to 1 to generate a report in xml.
 my $csvReport = 0;      # Set to 1 to generate a report in plain text (CSV).
+my $sqlReport = 0;      # Set to 1 to generate a report in SQL inserts.
 my $idBook = 0;
 my $docTitle = "Title";
 my $docAuthor = "Author";
@@ -38,6 +39,7 @@ GetOptions(
     'r' => \$retrograd,
     'i' => \$ignoreLanguage,
     'c' => \$csvReport,
+    's' => \$sqlReport,
     'm' => \$makeHeatMap);
 
 if (!defined $ARGV[0]) {
@@ -117,6 +119,9 @@ sub main {
     }
     if ($csvReport == 1) {
         reportCSV();
+    }
+    if ($sqlReport == 1) {
+        reportSQL();
     }
     if ($makeHeatMap == 1) {
         makeHeatMap();
@@ -407,7 +412,6 @@ sub reportCSV {
     close (CSVFILE);
 }
 
-
 #
 # sortWords
 #
@@ -439,7 +443,6 @@ sub reportWordsCSV() {
         reportLanguageWordsCSV($language);
     }
 }
-
 
 #
 # sortLanguageWords
@@ -524,7 +527,6 @@ sub reportLanguageWordsCSV($) {
         print CSVFILE "$key\t$word\t$language\t$count\n";
     }
 }
-
 
 #
 # reportPairs
@@ -666,13 +668,16 @@ sub reportWords($) {
     reportWordStatistics();
 }
 
-
+#
+# reportSQL
+#
 sub reportSQL() {
-    open (SQLFILE, ">usage.sql") || die("Could not create output file 'usage.sql'");
+    open (SQLFILE, ">words.sql") || die("Could not create output file 'words.sql'");
+    binmode(SQLFILE, ":utf8");
 
-    print SQLFILE "DELETE FROM WORDS WHERE idbook = $idBook\n";
-    print SQLFILE "DELETE FROM BOOKS WHERE idbook = $idBook\n";
-    print SQLFILE "INSERT INTO BOOKS ($idBook, \"$docTitle\", \"$docAuthor\")\n";
+    print SQLFILE "DELETE FROM WORD WHERE idbook = $idBook\n";
+    print SQLFILE "DELETE FROM BOOK WHERE idbook = $idBook\n";
+    print SQLFILE "INSERT INTO BOOK ($idBook, \'$docTitle\', \'$docAuthor\')\n";
     print SQLFILE "\n\n\n";
 
     reportWordsSQL();
@@ -707,11 +712,11 @@ sub reportLanguageWordsSQL($) {
 sub reportWordSQL($$) {
     my $word = shift;
     my $language = shift;
+    my $key = NormalizeForLanguage($word, $language);
 
     my $count = $wordHash{$language}{$word};
-    print SQLFILE "INSERT INTO WORDS ($idBook, \"$word\", \"$language\", $count)\n";
+    print SQLFILE "INSERT INTO WORD ($idBook, \'$language\', $count, \'$key\', \'$word\')\n";
 }
-
 
 #
 # reportWord

@@ -1554,4 +1554,27 @@
     </xsl:function>
 
 
+    <xsl:function name="f:is-magic" as="xs:string">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:variable name="n" select="count($table/row)"/>
+        <xsl:variable name="s" select="$n * (($n * $n + 1) div 2)"/>
+
+        <xsl:for-each select="$table/row">
+            <xsl:if test="$n != count(./cell)">
+                Not square
+            </xsl:if>
+        </xsl:for-each>
+
+        <xsl:for-each select="1 to $n">
+            <xsl:if test="$s != sum($table/row[.]/cell)">
+                Row does not add up to constant
+            </xsl:if>
+            <xsl:if test="$s != sum($table/row/cell[.])">
+                Column does not add up to constant
+            </xsl:if>
+        </xsl:for-each>
+
+    </xsl:function>
+
+
 </xsl:stylesheet>

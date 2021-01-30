@@ -61,7 +61,7 @@ sub listRecursively {
 
 
 #
-# handleImage -- find the dimensions and optionally outer contours of an image.
+# handleImage -- find the dimensions of an image.
 #
 sub handleImage($) {
     my $imageFile = shift;

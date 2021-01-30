@@ -12,6 +12,23 @@ our $VERSION = '1.00';
 our @ISA = qw(Exporter);
 our @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity handlePgdpAccents);
 
+
+sub utf2chr {
+    my $string = shift;
+
+    my @chars = split(//, $string);
+    foreach (@chars) {
+        if (ord($_) > 127) {
+            $_ = 'chr(0x' . sprintf('%04X', ord($_)) . ')';
+        }
+        else {
+            $_ = '"' . $_ . '"';
+        }
+    }
+    return join(' . ', @chars);
+}
+
+
 BEGIN {
 
     %ent = ();
@@ -2392,6 +2409,14 @@ BEGIN {
     $ent{'b.kappav'}    = chr(0x03F0);  # GREEK KAPPA SYMBOL
     $ent{'b.rhov'}      = chr(0x03F1);  # GREEK RHO SYMBOL
 
+    # Normalize codes to the NFC form.
+    foreach my $key (keys %ent) {
+        my $nfcValue = NFC($ent{$key});
+        if ($ent{$key} ne $nfcValue) {
+            # print STDERR "    \$ent{'$key'}    = " . utf2chr($nfcValue) . ";\n";
+            $ent{$key} = $nfcValue;
+        }
+    }
 }
 
 

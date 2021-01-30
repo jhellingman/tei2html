@@ -68,6 +68,8 @@ sub getRepo($) {
     } elsif (-d $repo) {
         my $cwd = getcwd;
         chdir ($repo);
+        system ("git clean -f -d -x\n");
+        system ("git reset --hard\n");
         system ("git pull\n");
         chdir $cwd;
     }

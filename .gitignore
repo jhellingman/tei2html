@@ -95,3 +95,16 @@ test/testMath/testMath.txt
 test/test-preprocessed-p5.xml
 test/test-preprocessed.xml
 .vscode/tasks.json
+test/testMath/testMath-preprocessed.xml
+test/testMath/testMath.html
+test/testTable/issues.xml
+test/testTable/metadata.xml
+test/testTable/README.md
+test/testTable/testTable-checks.html
+test/testTable/testTable-preprocessed.xml
+test/testTable/testTable-words.html
+test/testTable/testTable.gutcheck
+test/testTable/testTable.html
+test/testTable/testTable.jeebies
+test/testTable/testTable.txt
+test/testTable/testTable.xml
