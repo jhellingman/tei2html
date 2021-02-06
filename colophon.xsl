@@ -423,13 +423,22 @@
     <xsl:template mode="catalogReferences" match="idno"/>
 
 
+    <xd:doc>
+        <xd:short>Include an image with a QR-code if work is posted to PG.</xd:short>
+    </xd:doc>
 
     <xsl:template name="qrCode">
-        <xsl:if test="$imageInfo/img:images/img:image[@path='images/qrcode.png']">
+        <xsl:variable name="pgNum" select="//idno[@type = 'PGnum'][1]"/>
+        <xsl:variable name="qrImage"
+            select="if (matches($pgNum, '^[0-9]+$') and number($pgNum) &gt; 64449)
+                    then 'images/qr' || $pgNum || '.png'
+                    else 'images/qrcode.png'"/>
+
+        <xsl:if test="f:is-valid($pgNum) and $imageInfo/img:images/img:image[@path=$qrImage]">
             <tr>
                 <td><b><xsl:value-of select="f:message('msgQrCode')"/>:</b></td>
                 <td colspan="2">
-                    <xsl:copy-of select="f:output-image('images/qrcode.png', f:message('msgQrCodePgUrl'))"/>
+                    <xsl:copy-of select="f:output-image($qrImage, f:message('msgQrCodePgUrl'))"/>
                 </td>
             </tr>
         </xsl:if>

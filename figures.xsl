@@ -149,14 +149,29 @@
                             <xsl:attribute name="href"><xsl:value-of select="$url"/></xsl:attribute>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:copy-of select="f:output-image($filename, $alt)"/>
+                    <xsl:copy-of select="f:output-image(., $filename, $alt)"/>
                 </a>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:copy-of select="f:output-image($filename, $alt)"/>
+                <xsl:copy-of select="f:output-image(., $filename, $alt)"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:output-image">
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:param name="alt" as="xs:string"/>
+        <xsl:copy-of select="f:output-image($file, $alt, '', '')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:output-image">
+        <xsl:param name="node" as="element()"/>
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:param name="alt" as="xs:string"/>
+        <xsl:copy-of select="f:output-image($file, $alt, f:rend-value($node/@rend, 'width'), f:rend-value($node/@rend, 'height'))"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -164,18 +179,27 @@
         <xd:detail>
             <p>Generate the actual <code>img</code>-element for the output HTML. This will look-up the height and
             width of the image in the imageinfo, and set the <code>height</code> and <code>width</code> attributes
-            if found. The <code>alt</code> attribute is filled if present.</p>
+            if found. If a dimension is explicitly given, it will override the value in the imageinfo file.
+            The <code>alt</code> attribute is filled if present.</p>
         </xd:detail>
         <xd:param name="file" type="string">The name of the image file.</xd:param>
         <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
+        <xd:param name="width" type="string?">The width of the image, in pixels.</xd:param>
+        <xd:param name="height" type="string?">The height of the image, in pixels.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:output-image">
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
+        <xsl:param name="width" as="xs:string?"/>
+        <xsl:param name="height" as="xs:string?"/>
 
-        <xsl:variable name="width" select="substring-before(f:image-width($file), 'px')"/>
-        <xsl:variable name="height" select="substring-before(f:image-height($file), 'px')"/>
+        <xsl:variable name="width" select="if ($width) then $width else f:image-width($file)"/>
+        <xsl:variable name="height" select="if ($height) then $height else f:image-height($file)"/>
+
+        <xsl:variable name="width" select="substring-before($width, 'px')"/>
+        <xsl:variable name="height" select="substring-before($height, 'px')"/>
+
         <xsl:variable name="fileSize" select="f:image-file-size($file)"/>
 
         <xsl:if test="$width = ''">

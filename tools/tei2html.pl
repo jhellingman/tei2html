@@ -428,9 +428,11 @@ sub makeQrCode($) {
             $imageDir = 'Processed/images';
         }
 
-        if (not -e "$imageDir/qrcode.png") {
+        my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
+
+        if (not -e "$imageDir/$qrImage") {
             # Generate a QR code with a transparent background.
-            system("qrcode -l '#0000' -o $imageDir/qrcode.png https://www.gutenberg.org/ebooks/$pgNumber");
+            system("qrcode -l '#0000' -o $imageDir/$qrImage https://www.gutenberg.org/ebooks/$pgNumber");
         }
     }
 }

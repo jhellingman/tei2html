@@ -16,7 +16,8 @@ my $resolutionDpi = 300;
 my $extractActualImages = 0;
 
 GetOptions(
-    'j' => \$extractActualImages
+    'j' => \$extractActualImages,
+    'r=i' => \$resolutionDpi
     );
 
 sub list_recursively($);
