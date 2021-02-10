@@ -61,6 +61,12 @@
     </xsl:function>
 
 
+    <xsl:function name="f:determine-image-filename" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="f:determine-image-filename($node, if (f:is-inline($node)) then '.png' else '.jpg')"/>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Determine the alternate text for an image.</xd:short>
         <xd:param name="node" type="node()">The figure or graphic element for which the alternate text needs to be determined.</xd:param>
@@ -87,6 +93,12 @@
             <xsl:copy-of select="f:log-warning('Image {1} will not be included in output file!', ($url))"/>
         </xsl:if>
         <xsl:sequence select="$is-image-included"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-image-excluded" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:sequence select="not(f:is-image-included($url))"/>
     </xsl:function>
 
 

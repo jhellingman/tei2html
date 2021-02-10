@@ -528,18 +528,26 @@
     </xsl:function>
 
 
+    <!-- hidden: not visible, but takes up space. If an ancestor is hidden, we are hidden as well. -->
+
     <xsl:function name="f:is-hidden" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="$node/@rend = 'hide' or f:rend-value($node/@rend, 'visibility') = 'hidden'"/>
+        <xsl:sequence select="exists($node/ancestor-or-self::*[f:rend-value(./@rend, 'visibility') = 'hidden'])"/>
     </xsl:function>
 
+
+    <!-- not-displayed: not visible and not taking up space. If an ancestor is not displayed, we are not displayed as well.  -->
+    <!-- Sometimes content marked as hidden is still displayed via the align-with rend attribute! -->
 
     <xsl:function name="f:is-not-displayed" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="f:rend-value($node/@rend, 'display') = 'none'"/>
+        <xsl:sequence select="exists($node/ancestor-or-self::*[f:rend-value(./@rend, 'display') = 'none' and not(f:used-in-align-with(.))])"/>
     </xsl:function>
 
-
+    <xsl:function name="f:used-in-align-with" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="exists($root//*[f:rend-value(./@rend, 'align-with') = $node/@id])"/>
+    </xsl:function>
 
     <xsl:function name="f:is-epub" as="xs:boolean">
         <xsl:sequence select="$outputformat = 'epub'"/>

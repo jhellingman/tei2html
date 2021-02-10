@@ -67,9 +67,19 @@
         <xsl:param name="target" as="xs:string"/>
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
 
+        <xsl:copy-of select="f:log-debug('Looking for id: {1}; found: {2}.', ($target, name($targetNode)))"/>
+
         <xsl:choose>
             <xsl:when test="not($targetNode)">
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="f:is-not-displayed($targetNode)">
+                <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference is not displayed in output.', ($target))"/>
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:when test="f:is-in-excluded-image($targetNode)">
+                <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference is (part of) an unknown image.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
             <xsl:otherwise>
@@ -86,6 +96,13 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:is-in-excluded-image" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:sequence select="exists($node/ancestor-or-self::figure[f:is-image-excluded(f:determine-image-filename(.))])"/>
+    </xsl:function>
 
 
     <xd:doc>
