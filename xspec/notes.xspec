@@ -15,7 +15,7 @@
         <TEI/>
     </x:param>
 
-    <!-- notes -->
+    <!-- footnotes -->
 
     <x:scenario label="When rendering an footnote element in a div1">
         <x:context select="//div1">
@@ -259,7 +259,7 @@
                                  <td id="..." class="cellRight cellTop cellBottom">second cell</td>
                               </tr>
                             </table>
-                         </div>&lt;p&gt;</p>                  
+                         </div>&lt;p&gt;</p>
                     </div>
                   </div>
                </div>
@@ -304,8 +304,46 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a nested footnote element in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="foot" id="n.1">Text of footnote<note id="n.1.1">Nested footnote</note>.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote at the end of the div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote<a class="noteRef" id="n.1.1src" href="#n.1.1">2</a>.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                     <div id="n.1.1">
+                        <p class="footnote">
+                           <span class="fnlabel">
+                              <a class="noteRef"
+                                 href="#n.1.1src">2</a>
+                           </span> Nested footnote&nbsp;<a class="fnarrow"
+                              href="#n.1.1src"
+                              title="Return to note 2 in text.">&uparrow;</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
 
-
+    <!-- apparatus notes -->
 
     <x:scenario label="When rendering an apparatus note in a div1">
         <x:context select="//div1">
@@ -425,7 +463,7 @@
                   <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
                     title="Text of apparatus note 1.">&deg;</a> and more text.</p>
                   <p id="...">Surrounding text<a class="apparatusnote" id="n.2src" href="#n.2"
-                    title="Text of multi-paragraph apparatus note 2.Second paragraph of multi-paragraph apparatus note 2.">&deg;</a> and more text.</p>
+                    title="Text of multi-paragraph apparatus note 2. Second paragraph of multi-paragraph apparatus note 2.">&deg;</a> and more text.</p>
                   <p id="...">Surrounding text<a class="apparatusnote" id="n.3src" href="#n.3"
                     title="Text of apparatus note 3.">&deg;</a> and more text.</p>
                </div>
@@ -449,6 +487,101 @@
                      <span class="apparatus-note" id="n.3">
                         <a class="apparatusnote" href="#n.3src"
                            title="Return to source location">&deg;</a>Text of apparatus note 3.</span>
+                     <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering multi apparatus notes in a div1 with an explicit call for apparatus, and a footnote inside the apparatus note">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus <hi>note</hi> 1.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.2"><p>Text of multi-paragraph<note place="foot" id="n.2.1">A footnote here!</note> apparatus <hi>note</hi> 2.</p>
+                            <p>Second paragraph of multi-paragraph<note id="n.2.2">And a footnote here!</note> apparatus <hi>note</hi> 2.</p></note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.3">Text of apparatus<note id="n.3.1">And the final footnote here!</note> <hi>note</hi> 3.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a two paragraphs of apparatus notes when called of the div, as well as a section of footnotes">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note 1.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.2src" href="#n.2"
+                    title="Text of multi-paragraph apparatus note 2. Second paragraph of multi-paragraph apparatus note 2.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.3src" href="#n.3"
+                    title="Text of apparatus note 3.">&deg;</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep" />
+                  <div class="footnote-body">
+                     <div id="n.2.1">
+                        <p class="footnote">
+                           <span class="fnlabel">
+                              <a class="noteRef"
+                                 href="#n.2.1src">1</a>
+                           </span> A footnote here!&nbsp;<a class="fnarrow"
+                              href="#n.2.1src"
+                              title="Return to note 1 in text.">&uparrow;</a>
+                        </p>
+                     </div>
+                     <div id="n.2.2">
+                        <p class="footnote">
+                           <span class="fnlabel">
+                              <a class="noteRef"
+                                 href="#n.2.2src">2</a>
+                           </span> And a footnote here!&nbsp;<a class="fnarrow"
+                              href="#n.2.2src"
+                              title="Return to note 2 in text.">&uparrow;</a>
+                        </p>
+                     </div>
+                     <div id="n.3.1">
+                        <p class="footnote">
+                           <span class="fnlabel">
+                              <a class="noteRef"
+                                 href="#n.3.1src">3</a>
+                           </span> And the final footnote here!&nbsp;<a class="fnarrow"
+                              href="#n.3.1src"
+                              title="Return to note 3 in text.">&uparrow;</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Notes</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus <i id="...">note</i> 1.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.2">
+                        <a class="apparatusnote" href="#n.2src"
+                           title="Return to source location">&deg;</a>Text of multi-paragraph<a 
+                               class="noteRef"
+                               id="n.2.1src"
+                               href="#n.2.1">1</a> apparatus <i id="...">note</i> 2.</span>
+                     <x:text> </x:text>
+                   </p>
+                   <p class="apparatus">
+                     <span class="apparatus-note">Second paragraph of multi-paragraph<a 
+                           class="noteRef"
+                           id="n.2.2src"
+                           href="#n.2.2">2</a> apparatus <i id="...">note</i> 2.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.3">
+                        <a class="apparatusnote" href="#n.3src"
+                           title="Return to source location">&deg;</a>Text of apparatus<a 
+                               class="noteRef"
+                               id="n.3.1src"
+                               href="#n.3.1">3</a> <i id="...">note</i> 3.</span>
                      <x:text> </x:text>
                    </p>
                </div>

@@ -96,6 +96,11 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-footnote(.)]">
+        <xsl:call-template name="insert-note-ref"/>
+    </xsl:template>
+
+    <xsl:template name="insert-note-ref">
+        <xsl:context-item as="element(note)" use="required"/>
         <a class="noteRef" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'noteref'"/>
@@ -116,6 +121,36 @@
         <xsl:apply-templates select="$targetNote" mode="noterefnumber">
             <xsl:with-param name="sourceNote" select="."/>
         </xsl:apply-templates>
+    </xsl:template>
+
+    <xsl:template name="insert-note-same-as-ref">
+        <xsl:context-item as="element(note)" use="required"/>
+        <xsl:variable name="targetNote" select="key('id', replace(@sameAs, '#', ''))[1]"/>
+        <xsl:apply-templates select="$targetNote" mode="noterefnumber">
+            <xsl:with-param name="sourceNote" select="."/>
+        </xsl:apply-templates>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle footnotes inside collected apparatus material.</xd:short>
+        <xd:detail>When footnotes appear nested inside apparatus nodes, and we collect the apparatus
+        notes into a single block, the <code>note</code> elements are no longer rooted under the <code>TEI</code>
+        element, so the above templates will not match them. This templates resolves that.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="tmp:span//note[f:is-footnote(.)]">
+        <xsl:call-template name="insert-note-ref"/>
+    </xsl:template>
+
+    <xsl:template match="tmp:span//note[@sameAs]" priority="1">
+        <xsl:call-template name="insert-note-same-as-ref"/>
+    </xsl:template>
+
+
+    <xsl:template match="note">
+        <xsl:copy-of select="f:log-warning('unclassified not not handled.', ())"/>
+        <xsl:apply-templates/>
     </xsl:template>
 
 
@@ -444,10 +479,34 @@
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-apparatus-note(.)]">
         <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
-            <xsl:attribute name="title"><xsl:value-of select="."/></xsl:attribute>
+            <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(.)"/></xsl:attribute>
             <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
         </a>
     </xsl:template>
+
+
+    <xsl:function name="f:title-from-note" as="xs:string">
+        <xsl:param name="node" as="element(note)"/>
+        <xsl:variable name="string">
+            <xsl:apply-templates select="$node/node()" mode="title-from-note"/>
+        </xsl:variable>
+        <xsl:sequence select="normalize-space($string)"/>
+    </xsl:function>
+
+    <xsl:template match="*" mode="title-from-note">
+        <xsl:text> </xsl:text>
+        <xsl:apply-templates mode="title-from-note"/>
+    </xsl:template>
+
+    <xsl:template match="text()" mode="title-from-note">
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+    <!-- Ignore nested notes -->
+    <xsl:template match="note" mode="title-from-note"/>
+
+    <!-- Ignore corrected mistakes -->
+    <xsl:template match="choice/sic" mode="title-from-note"/>
 
 
     <xd:doc>
@@ -613,8 +672,8 @@
         last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list,
         indicating where the paragraph breaks should remain, and then group them back into paragraphs.</p>
 
-        <p>As part of this action, we copy elements into a temporary structure, which we also need to use to retain the ids of the
-        original notes, as to keep cross references working.</p></xd:detail>
+        <p>As part of this action, we copy elements into a temporary structure, which we also use to retain the ids of the
+        original notes, so cross references can be resolved.</p></xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes-block">
@@ -697,6 +756,7 @@
         </span>
         <xsl:text> </xsl:text>
     </xsl:template>
+
 
     <xsl:template match="tmp:br"/>
 
