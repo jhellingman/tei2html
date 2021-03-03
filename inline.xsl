@@ -245,6 +245,18 @@
     </xsl:template>
 
     <xd:doc>
+        <xd:short>Bold-italic text.</xd:short>
+        <xd:detail>Bold-italic text, indicated with the <code>@rend</code> attribute value <code>bi</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='bi' or @rend='bold-italic'] | bi" mode="#default remove-initial titlePage toc-head">
+        <hi class="bi">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates mode="#current"/>
+        </hi>
+    </xsl:template>
+
+    <xd:doc>
         <xd:short>Superscript text.</xd:short>
         <xd:detail>Superscript text, indicated with the <code>@rend</code> attribute value <code>sup</code>.</xd:detail>
     </xd:doc>

@@ -40,12 +40,12 @@
             the rendition-ladder notation <code>image()</code>.</p>
         </xd:detail>
         <xd:param name="node" type="node()">The figure or graphic element for which the file name needs to be determined.</xd:param>
-        <xd:param name="defaultformat" type="string">The default file-extension of the image file.</xd:param>
+        <xd:param name="format" type="string">The default file-extension of the image file.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:determine-image-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
-        <xsl:param name="defaultformat" as="xs:string"/>
+        <xsl:param name="format" as="xs:string"/>
         <xsl:choose>
             <xsl:when test="f:has-rend-value($node/@rend, 'image')">
                 <xsl:value-of select="f:rend-value($node/@rend, 'image')"/>
@@ -55,7 +55,7 @@
                 <xsl:copy-of select="f:log-warning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="'images/' || $node/@id || $defaultformat"/>
+                <xsl:value-of select="'images/' || $node/@id || $format"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -281,11 +281,11 @@
         <xsl:copy-of select="f:show-debug-tags(.)"/>
 
         <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
-        <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
         <xsl:if test="f:is-image-included($filename)">
             <span>
-                <xsl:copy-of select="f:set-class-attribute(.)"/>
+                <xsl:copy-of select="f:set-figure-class(.)"/>
                 <xsl:call-template name="output-image-with-optional-link">
                     <xsl:with-param name="filename" select="$filename"/>
                     <xsl:with-param name="alt" select="$alt"/>
@@ -303,7 +303,7 @@
     </xd:doc>
 
     <xsl:template match="figure" mode="css">
-        <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
         <xsl:if test="f:is-image-included($filename)">
             <xsl:call-template name="generate-css-rule"/>
@@ -314,7 +314,7 @@
 
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">
-        <xsl:variable name="filename" select="f:determine-image-filename(., '.png')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
         <xsl:if test="f:is-image-included($filename)">
             <xsl:call-template name="generate-css-rule"/>
@@ -369,7 +369,7 @@ width:{$width};
         <xsl:copy-of select="f:show-debug-tags(.)"/>
 
         <xsl:variable name="alt" select="f:determine-image-alt-text(., '')" as="xs:string"/>
-        <xsl:variable name="filename" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
         <xsl:if test="f:is-image-included($filename)">
             <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
@@ -378,19 +378,7 @@ width:{$width};
             </xsl:if>
             <div class="figure">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-
-                <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-                <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
-
-                <xsl:variable name="class">
-                    <xsl:text>figure </xsl:text>
-                    <xsl:if test="f:rend-value(@rend, 'float') = 'left'">floatLeft </xsl:if>
-                    <xsl:if test="f:rend-value(@rend, 'float') = 'right'">floatRight </xsl:if>
-
-                    <!-- Add the class that sets the width, if the width is known. -->
-                    <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id(.)"/><xsl:text>width</xsl:text></xsl:if>
-                </xsl:variable>
-                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+                <xsl:copy-of select="f:set-figure-class(.)"/>
 
                 <xsl:call-template name="figure-head-top"/>
                 <xsl:call-template name="figure-annotations-top"/>
@@ -408,6 +396,23 @@ width:{$width};
             </xsl:if>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:set-figure-class">
+        <xsl:param name="node" as="element(figure)"/>
+
+        <xsl:variable name="filename" select="f:determine-image-filename($node)" as="xs:string"/>
+        <xsl:variable name="width" select="f:image-width($filename)" as="xs:string?"/>
+        <xsl:variable name="class">
+            <xsl:text>figure </xsl:text>
+            <xsl:if test="f:rend-value($node/@rend, 'float') = 'left'">floatLeft </xsl:if>
+            <xsl:if test="f:rend-value($node/@rend, 'float') = 'right'">floatRight </xsl:if>
+
+            <!-- Add the class that sets the width, if the width is known. -->
+            <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id($node)"/><xsl:text>width</xsl:text></xsl:if>
+        </xsl:variable>
+        <xsl:copy-of select="f:set-class-attribute-with($node, $class)"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -432,8 +437,8 @@ width:{$width};
 
         <xsl:if test="p[f:has-top-position-annotation(@rend)]">
 
-            <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-            <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
+            <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
+            <xsl:variable name="width" select="f:image-width($filename)" as="xs:string?"/>
 
             <div>
                 <xsl:attribute name="class">
@@ -442,16 +447,25 @@ width:{$width};
                 </xsl:attribute>
 
                 <xsl:if test="p[f:position-annotation(@rend) = 'figTopLeft']">
-                    <span class="figTopLeft"><xsl:apply-templates select="p[@type='figTopLeft' or f:rend-value(@rend, 'position') = 'figTopLeft']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figTopLeft'][1], 'figTopLeft')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figTopLeft']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
                 <xsl:if test="p[f:position-annotation(@rend) = 'figTop']">
-                    <span class="figTop"><xsl:apply-templates select="p[@type='figTop' or f:rend-value(@rend, 'position') = 'figTop']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figTop'][1], 'figTop')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figTop']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
                 <xsl:if test="not(p[f:position-annotation(@rend) = 'figTop'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
                 <xsl:if test="p[f:position-annotation(@rend) = 'figTopRight']">
-                    <span class="figTopRight"><xsl:apply-templates select="p[@type='figTopRight' or f:rend-value(@rend, 'position') = 'figTopRight']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figTopRight'][1], 'figTopRight')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figTopRight']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
             </div>
         </xsl:if>
@@ -467,8 +481,8 @@ width:{$width};
 
         <xsl:if test="p[f:has-bottom-position-annotation(@rend)]">
 
-            <xsl:variable name="file" select="f:determine-image-filename(., '.jpg')" as="xs:string"/>
-            <xsl:variable name="width" select="f:image-width($file)" as="xs:string?"/>
+            <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
+            <xsl:variable name="width" select="f:image-width($filename)" as="xs:string?"/>
 
             <div>
                 <xsl:attribute name="class">
@@ -477,16 +491,25 @@ width:{$width};
                 </xsl:attribute>
 
                 <xsl:if test="p[f:position-annotation(@rend) = 'figBottomLeft']">
-                    <span class="figBottomLeft"><xsl:apply-templates select="p[@type='figBottomLeft' or f:rend-value(@rend, 'position') = 'figBottomLeft']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figBottomLeft'][1], 'figBottomLeft')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figBottomLeft']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
                 <xsl:if test="p[f:position-annotation(@rend) = 'figBottom']">
-                    <span class="figBottom"><xsl:apply-templates select="p[@type='figBottom' or f:rend-value(@rend, 'position') = 'figBottom']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figBottom'][1], 'figBottom')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figBottom']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
                 <xsl:if test="not(p[f:position-annotation(@rend) = 'figBottom'])">
                     <span class="figTop"><xsl:text>&nbsp;</xsl:text></span>
                 </xsl:if>
                 <xsl:if test="p[f:position-annotation(@rend) = 'figBottomRight']">
-                    <span class="figBottomRight"><xsl:apply-templates select="p[@type='figBottomRight' or f:rend-value(@rend, 'position') = 'figBottomRight']" mode="figAnnotation"/></span>
+                    <span>
+                        <xsl:copy-of select="f:set-class-attribute-with(p[f:position-annotation(@rend) = 'figBottomRight'][1], 'figBottomRight')"/>
+                        <xsl:apply-templates select="p[f:position-annotation(@rend) = 'figBottomRight']" mode="figAnnotation"/>
+                    </span>
                 </xsl:if>
             </div>
         </xsl:if>

@@ -1,0 +1,33 @@
+A cross-word puzzle can be encoded like this:
+
+[crossword]
+|1|2|3|4|5||6|7|8|9||
+|#|10||||#|11||||#|
+|12|||#|13|14||#|15||16|
+|17||#|18||||19|#|20||
+|21||22||#||#|23|24|||
+||#|25|||||||#||
+|26|27|||#||#|28||29||
+|30||#|31|32||33||#|34||
+|35||36|#|37|||#|38|||
+|#|39||40||#|41|42|||#|
+|43|||||||||||
+[/crossword]
+
+If so desired, you may align things like this (optional, but please don't undo if done in a previous round):
+
+[crossword]
+| 1| 2| 3| 4| 5|  | 6| 7| 8| 9|  |
+|##|10|  |  |  |##|11|  |  |  |##|
+|12|  |  |##|13|14|  |##|15|  |16|
+|17|  |##|18|  |  |  |19|##|20|  |
+|21|  |22|  |##|  |##|23|24|  |  |
+|  |##|25|  |  |  |  |  |  |##|  |
+|26|27|  |  |##|  |##|28|  |29|  |
+|30|  |##|31|32|  |33|  |##|34|  |
+|35|  |36|##|37|  |  |##|38|  |  |
+|##|39|  |40|  |##|41|42|  |  |##|
+|43|  |  |  |  |  |  |  |  |  |  |
+[/crossword]
+
+A little piece of software will convert this (during post-processing) to a nice looking HTML table, something like this: 

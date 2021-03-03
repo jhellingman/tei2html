@@ -67,7 +67,7 @@
             </figure>
         </x:context>
         <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
-            <span xmlns="http://www.w3.org/1999/xhtml">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="figure fig_04width">
                <img src="images/fig_04.png" alt="Description." width="10" height="15"/>
             </span>
         </x:expect>
@@ -80,7 +80,7 @@
             </figure>
         </x:context>
         <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
-            <span xmlns="http://www.w3.org/1999/xhtml">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="figure fig_05width">
                <img src="images/fig_01.jpg" alt="Description." width="12" height="40"/>
             </span>
         </x:expect>

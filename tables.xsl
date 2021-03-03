@@ -330,6 +330,10 @@
     <xsl:template name="cell-pos-class">
         <xsl:context-item as="element(cell)" use="required"/>
 
+        <xsl:if test="name(..) != 'row'">
+            <xsl:copy-of select="f:log-warning('Malformed table inside element {1} with id {2}: cell not in row.', (name(ancestor::*[@id][1]), (ancestor::*[@id][1])/@id))"/>
+        </xsl:if>
+
         <!-- A cell is considered part of the table head if it has a @role of label or unit -->
         <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cellHead' else 'cell'"/>
 

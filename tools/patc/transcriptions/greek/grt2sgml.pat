@@ -42,7 +42,7 @@
 "</GRT>"     0 "</foreign>"
 "</GRTA>"    0 ""
 
-% some TEI tags:
+% some TEI tags commonly found inline:
 "<g>"               p "<g>"
 "<b>"               p "<b>"
 "<sc>"              p "<sc>"

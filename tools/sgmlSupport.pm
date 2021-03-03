@@ -1393,14 +1393,15 @@ BEGIN {
 
     ###############################################################################
 
-    # Astrological signs (followed by the text variant selector).
+    # Astronomical and astrological signs (followed by the text variant selector).
 
     $ent{'Sun'}         = chr(0x2609) . chr(0xFE0E);
-    $ent{'Moon'}        = chr(0x263D) . chr(0xFE0E);
+    $ent{'Moon'}        = chr(0x263D) . chr(0xFE0E); # First quarter
+    $ent{'Moon2'}       = chr(0x263E) . chr(0xFE0E); # Last quarter
     $ent{'Mercury'}     = chr(0x263F) . chr(0xFE0E);
     $ent{'Venus'}       = chr(0x2640) . chr(0xFE0E);
     $ent{'Earth'}       = chr(0x2295) . chr(0xFE0E);
-    $ent{'Earth2'}      = chr(0x2641) . chr(0xFE0E);
+    $ent{'Earth2'}      = chr(0x2641) . chr(0xFE0E); # Alternative: circle with cross on top
     $ent{'Mars'}        = chr(0x2642) . chr(0xFE0E);
     $ent{'Jupiter'}     = chr(0x2643) . chr(0xFE0E);
     $ent{'Saturn'}      = chr(0x2644) . chr(0xFE0E);
@@ -1408,6 +1409,22 @@ BEGIN {
     $ent{'Uranus2'}     = chr(0x26E2) . chr(0xFE0E);
     $ent{'Neptune'}     = chr(0x2646) . chr(0xFE0E);
     $ent{'Pluto'}       = chr(0x2647) . chr(0xFE0E);
+
+    $ent{'Aries'}       = chr(0x2648) . chr(0xFE0E);
+    $ent{'Taurus'}      = chr(0x2649) . chr(0xFE0E);
+    $ent{'Gemini'}      = chr(0x264A) . chr(0xFE0E);
+    $ent{'Cancer'}      = chr(0x264B) . chr(0xFE0E);
+    $ent{'Leo'}         = chr(0x264C) . chr(0xFE0E);
+    $ent{'Virgo'}       = chr(0x264D) . chr(0xFE0E);
+    $ent{'Libra'}       = chr(0x264E) . chr(0xFE0E);
+    $ent{'Scorpius'}    = chr(0x264F) . chr(0xFE0E);
+    $ent{'Sagittarius'} = chr(0x2650) . chr(0xFE0E);
+    $ent{'Capricorn'}   = chr(0x2651) . chr(0xFE0E);
+    $ent{'Aquarius'}    = chr(0x2652) . chr(0xFE0E);
+    $ent{'Pisces'}      = chr(0x2653) . chr(0xFE0E);
+
+    $ent{'Ascending'}   = chr(0x260A) . chr(0xFE0E);
+    $ent{'Descending'}  = chr(0x260B) . chr(0xFE0E);
 
     ###############################################################################
 
@@ -1537,7 +1554,7 @@ BEGIN {
 
     $ent{'cgrasa'}      = 'c' . chr(0x0300) . chr(0x02BD);      # c with grave and spiritus asper  -> mapped to spacing symbol!
     $ent{'jgrasa'}      = 'j' . chr(0x0300) . chr(0x02BD);      # j with grave and spiritus asper  -> mapped to spacing symbol!
-    
+
     $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
     $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
     $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol!
@@ -1556,7 +1573,7 @@ BEGIN {
 
     $ent{'Cgrasa'}      = 'C' . chr(0x0300) . chr(0x02BD);      # C with grave and spiritus asper  -> mapped to spacing symbol!
     $ent{'Jgrasa'}      = 'J' . chr(0x0300) . chr(0x02BD);      # J with grave and spiritus asper  -> mapped to spacing symbol!
-    
+
     $ent{'Tspas'}       = 'T' . chr(0x02BD);                    # T with spiritus asper -> mapped to spacing symbol!
     $ent{'Pspas'}       = 'P' . chr(0x02BD);                    # P with spiritus asper -> mapped to spacing symbol!
     $ent{'Cspas'}       = 'C' . chr(0x02BD);                    # C with spiritus asper -> mapped to spacing symbol!
@@ -1566,7 +1583,7 @@ BEGIN {
 
     $ent{'Tsadb'}       = 'T' . chr(0x0323) . chr(0x02BD);      # T with spiritus asper and dot below -> mapped to spacing symbol!
     $ent{'Dsadb'}       = 'D' . chr(0x0323) . chr(0x02BD);      # D with spiritus asper and dot below -> mapped to spacing symbol!
-    
+
     $ent{'Sgradb'}      = 'S' . chr(0x0300) . chr(0x0323);      # S with grave and dot below
 
     $ent{'amaumb'}      = 'a' . chr(0x0304) . chr(0x0324);      # a with macron and umlaut below
@@ -2114,6 +2131,8 @@ BEGIN {
     $ent{'dots10'}      = '..........';
     $ent{'dots20'}      = '....................';
     $ent{'dotfil'}      = '...'; # Concept of filling characters not supported in Unicode.
+
+    $ent{'qprime'}      = chr(0x2057);          # quadruple prime
 
     # Meteorological symbols (used in Scott's South Pole)
     $ent{'snow'}        = '[snow]';             # symbol for snow
@@ -2799,7 +2818,7 @@ sub handlePgdpWideAccents() {
     my $abovePattern = "(['/`\\\\=~()-]*)";
 
     # Unicode \p{M} pattern doesn't work in Perl:
-    # my $basePattern = "([a-zA-Z]\p{M}*)([a-zA-Z]\p{M}*)"; 
+    # my $basePattern = "([a-zA-Z]\p{M}*)([a-zA-Z]\p{M}*)";
     my $basePattern = "([a-zA-Z][\x{300}-\x{36F}]*)([a-zA-Z][\x{300}-\x{36F}]*)";
     my $belowPattern = "([=)-]*)";
 
@@ -2825,9 +2844,9 @@ sub convertWideAccent() {
 
     my %aboveAccents = (
         "`"         => "\x{300}\x{34F}",   # acute (needs CGJ to avoid reordering in NFC)
-        "\\"        => "\x{300}\x{34F}",   # acute 
-        "'"         => "\x{301}\x{34F}",   # grave 
-        "/"         => "\x{301}\x{34F}",   # grave 
+        "\\"        => "\x{300}\x{34F}",   # acute
+        "'"         => "\x{301}\x{34F}",   # grave
+        "/"         => "\x{301}\x{34F}",   # grave
 
         ")"         => "\x{35D}",   # wide breve
         "="         => "\x{35E}",   # wide macron
@@ -2911,7 +2930,7 @@ sub convertAccent() {
         "^"         => "\x{32D}",   # circumflex
         ")"         => "\x{32E}",   # breve
         "("         => "\x{32F}",   # inverted breve
-        "~"         => "\x{330}",   # tilde 
+        "~"         => "\x{330}",   # tilde
         "="         => "\x{331}",   # macron
         "-"         => "\x{331}",   # macron
     );

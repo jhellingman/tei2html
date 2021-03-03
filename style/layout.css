@@ -189,6 +189,11 @@ span.measure {
 
 /* Font Styles and Colors */
 
+.bi {
+    font-weight: bold;
+    font-style: italic;
+}
+
 .ex {
     letter-spacing: 0.2em;
 }
