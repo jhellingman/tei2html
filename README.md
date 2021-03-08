@@ -1,3 +1,6 @@
+
+![xspec tests workflow](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+
 # tei2html
 
 A collection of XSLT 3.0 style sheets to transform a document encoded in according to the TEILite DTD to HTML. 
