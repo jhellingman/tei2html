@@ -317,9 +317,13 @@ sub handleTeiFile {
                 logMessage("Posted:     $postedDate");
                 print XMLFILE "    <postedDate>$postedDate</postedDate>\n";
 
-                print XMLFILE "    <description>" . escapeXml($description) . "</description>\n";
+                if (isValid($description->string_value())) {
+                    print XMLFILE "    <description>" . escapeXml($description) . "</description>\n";
+                }
                 for my $keyword ($keywords->get_nodelist()) {
-                    print XMLFILE "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
+                    if (isValid($keyword->string_value())) {
+                        print XMLFILE "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
+                    }
                 }
 
                 # Find out whether we have a cover image:

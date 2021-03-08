@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY zwsp       "&#x200B;">
+    <!ENTITY mdash      "&#x2014;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <x:param name="root" select="self::document-node()">
+        <TEI>
+            <seg id="single">single</seg>
+            <seg id="multiple">multiple words in a sentence</seg>
+            <seg id="punctuation">With: punctuation. such, as; these!</seg>
+            <seg id="formatting">With <hi>formatting</hi> such <hi rend="bold">as</hi> this!</seg>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When rendering a single-word segment marked with copyOf">
+        <x:context>
+            <seg copyOf="single"> ,, </seg>
+        </x:context>
+        <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">single</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a multiple-word segment marked with copyOf">
+        <x:context>
+            <seg copyOf="multiple"> ,, ,, ,, ,, ,, </seg>
+        </x:context>
+        <x:expect label="a ditto-span for each word with the original word and a span with the ditto-mark will be created.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">multiple</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">words</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">in</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">a</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">sentence</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a segment with punctuation marked with copyOf">
+        <x:context>
+            <seg copyOf="punctuation"> ,, ,, </seg>
+        </x:context>
+        <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created, but punctuation gets no ditto mark.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">With:</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">punctuation.</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">such,</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">as;</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">these!</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a single-word segment marked with copyOf, using em-dash as a mark">
+        <x:context>
+            <seg rend="ditto-mark(&mdash;)" copyOf="single"> -- </seg>
+        </x:context>
+        <x:expect label="a ditto-span with the original word and a span with the em-dash ditto-mark will be created.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">single</span><span class="d"><span class="i">&mdash;</span></span></span><x:text> </x:text>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a multiple-word segment marked with copyOf, and rendering with ditto-repeat(segment)">
+        <x:context>
+            <seg rend="ditto-mark(&mdash;) ditto-repeat(segment)" copyOf="multiple"> ,, ,, ,, ,, ,, </seg>
+        </x:context>
+        <x:expect label="a ditto-span for the entire phrase and a span with the ditto-mark will be created.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">multiple words in a sentence</span><span class="d"><span class="i">&mdash;</span></span></span>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a segment with formatting marked with copyOf">
+        <x:context>
+            <seg copyOf="formatting"> ,, ,, </seg>
+        </x:context>
+        <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created, but punctuation gets no ditto mark.">
+            <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
+                <span class="ditto"><span class="s">With</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s"><i>formatting</i></span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">such</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s"><b>as</b></span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="s">this!</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+            </span>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

@@ -897,7 +897,7 @@
                 <xsl:when test="f:is-set('ditto.enable') and f:determine-ditto-repeat(.) = 'segment'">
                     <span class="ditto">
                         <span class="s">
-                            <xsl:apply-templates select="$source"/>
+                            <xsl:apply-templates select="$source/*|$source/text()"/>
                         </span>
                         <span class="d">
                             <span class="i">
@@ -975,6 +975,9 @@
         <!-- Split the text-content of the segment on space boundaries -->
         <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
+                <xsl:when test=". = ''">
+                    <xsl:copy-of select="f:log-warning('Ignoring empty node.', ())"/>
+                </xsl:when>
                 <xsl:when test="matches(., '^[.,:;!]$')">
                     <xsl:copy-of select="f:log-warning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>
                     <span class="ditto">
@@ -1001,6 +1004,9 @@
                                 </xsl:when>
                                 <xsl:when test="$node/parent::hi[@rend='ex']">
                                     <span class="ex"><xsl:value-of select="."/></span>
+                                </xsl:when>
+                                <xsl:when test="$node/parent::hi[@rend='bi']">
+                                    <span class="bi"><xsl:value-of select="."/></span>
                                 </xsl:when>
                                 <xsl:when test="$node/parent::hi">
                                     <i><xsl:value-of select="."/></i>
