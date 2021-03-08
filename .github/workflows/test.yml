@@ -1,5 +1,5 @@
 
-name: CI
+name: Xspec tests
 
 on:
   push:
