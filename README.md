@@ -1,5 +1,5 @@
 
-![xspec tests workflow](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+![xspec tests workflow](https://github.com/jhellingman/tei2html/workflows/test.yml/badge.svg)
 
 # tei2html
 
