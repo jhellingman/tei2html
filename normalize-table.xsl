@@ -1,4 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY lsquo      "&#x2018;">
+    <!ENTITY rsquo      "&#x2019;">
+]>
 
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
@@ -450,7 +454,7 @@
         processing document trees generated while processing documents in multiple rounds.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="document-root" select="/"/>
+    <xsl:variable name="root" select="/"/>
 
     <xd:doc>
         <xd:short>The default decimal separator, set to a period (English usage).</xd:short>
@@ -473,25 +477,24 @@
     <xd:doc>
         <xd:short>Determine the decimal separator symbol to be used.</xd:short>
         <xd:detail>
-            <p>Obtain this value from the decimal-separator rendition ladder element. First look at the <code>cell</code>-element itself, 
-            then on the <code>table</code>-element it is in, and finally on the top-level <code>text</code>-element.</p>
+            <p>Obtain this value from the decimal-separator rendition value. First look at the <code>cell</code>-element itself, 
+            then row, then the table. Since the table is &lsquo;unrooted&rsquo; here, we need to look separately at the 
+            root-level for a document-wide setting on the text element. Intermediate locations are currently not
+            supported.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:function name="f:determine-decimal-separator" as="xs:string">
         <xsl:param name="cell" as="element(cell)"/>
 
-        <xsl:variable name="rend-cell"  select="$cell/@rend"/>
-        <xsl:variable name="rend-table" select="$cell/ancestor::table[1]/@rend"/>
-        <xsl:variable name="rend-text"  select="$document-root//text[1]/@rend"/>
+        <xsl:variable name="rend" select="($cell/ancestor-or-self::*/@rend[f:has-rend-value(., 'decimal-separator')])[last()]"/>
+        <xsl:variable name="rend-text"  select="$root//text[1]/@rend"/>
 
-        <xsl:value-of select="if (f:has-rend-value($rend-cell, 'decimal-separator'))
-            then f:rend-value($rend-cell, 'decimal-separator')
-            else if (f:has-rend-value($rend-table, 'decimal-separator'))
-                 then f:rend-value($rend-table, 'decimal-separator')
-                 else if (f:has-rend-value($rend-text, 'decimal-separator'))
-                      then f:rend-value($rend-text, 'decimal-separator')
-                      else $default-decimal-separator"/>
+        <xsl:value-of select="if (f:has-rend-value($rend, 'decimal-separator'))
+            then f:rend-value($rend, 'decimal-separator')
+            else if (f:has-rend-value($rend-text, 'decimal-separator'))
+                 then f:rend-value($rend-text, 'decimal-separator')
+                 else $default-decimal-separator"/>
     </xsl:function>
 
 

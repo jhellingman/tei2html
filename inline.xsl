@@ -250,10 +250,10 @@
     </xd:doc>
 
     <xsl:template match="hi[@rend='bi' or @rend='bold-italic'] | bi" mode="#default remove-initial titlePage toc-head">
-        <hi class="bi">
+        <b><i>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
-        </hi>
+        </i></b>
     </xsl:template>
 
     <xd:doc>
@@ -1006,7 +1006,7 @@
                                     <span class="ex"><xsl:value-of select="."/></span>
                                 </xsl:when>
                                 <xsl:when test="$node/parent::hi[@rend='bi']">
-                                    <span class="bi"><xsl:value-of select="."/></span>
+                                    <b><i><xsl:value-of select="."/></i></b>
                                 </xsl:when>
                                 <xsl:when test="$node/parent::hi">
                                     <i><xsl:value-of select="."/></i>

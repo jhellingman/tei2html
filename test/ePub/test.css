@@ -1269,7 +1269,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd34e625 {
+.xd34e632 {
 text-align:right;
 }
 
@@ -1289,7 +1289,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd34e1172 {
+.xd34e1179 {
 background-color:green;
 }
 
@@ -1305,7 +1305,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd34e1173 {
+.xd34e1180 {
 background-color:white;
 }
 
@@ -1333,31 +1333,31 @@ font-size:14pt; color:red; background-color:yellow;
 width:96px;
 }
 
-.xd34e360 {
+.xd34e367 {
 vertical-align:baseline;
 }
 
-.xd34e437 {
+.xd34e444 {
 text-align:left;
 }
 
-.xd34e441 {
+.xd34e448 {
 text-align:right;
 }
 
-.xd34e444 {
+.xd34e451 {
 text-align:center;
 }
 
 
-.xd34e447 {
+.xd34e454 {
     background: url(images/initial-A.png) no-repeat top left;
     
         padding-top: 45px;
     
 }
 
-.xd34e447init {
+.xd34e454init {
     float: left;
     width: 90px;
     height: 95px;
@@ -1371,11 +1371,11 @@ text-align:center;
 }
 
         
-.xd34e455 {
+.xd34e462 {
 text-align:justify;
 }
 
-.xd34e471 {
+.xd34e478 {
 text-align:center;
 }
 
@@ -1383,7 +1383,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd34e588 {
+.xd34e595 {
 text-align:right;
 }
 
@@ -1391,11 +1391,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd34e774 {
+.xd34e781 {
 vertical-align:middle; width:2px;
 }
 
-.xd34e775 {
+.xd34e782 {
 vertical-align:middle;
 }
 
@@ -1403,11 +1403,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd34e786 {
+.xd34e793 {
 width:25%;
 }
 
-.xd34e788 {
+.xd34e795 {
 width:75%;
 }
 
@@ -1427,11 +1427,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd34e914 {
+.xd34e921 {
 color:red;
 }
 
-.xd34e934 {
+.xd34e941 {
 color:yellow; background-color:black;
 }
 
@@ -1443,19 +1443,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd34e1203 {
+.xd34e1210 {
 background-color:yellow;
 }
 
-.xd34e1221 {
+.xd34e1228 {
 background-color:blue;
 }
 
-.xd34e1230 {
+.xd34e1237 {
 background-color:orange;
 }
 
-.xd34e1240 {
+.xd34e1247 {
 background-color:red;
 }
 
@@ -1487,47 +1487,47 @@ width:480px;
 width:580px;
 }
 
-.xd34e1448 {
+.xd34e1455 {
 font-style:italic;
 }
 
-.xd34e1475 {
+.xd34e1482 {
 list-style-type:disc;
 }
 
-.xd34e1491 {
+.xd34e1498 {
 list-style-type:upper-roman;
 }
 
-.xd34e1500 {
+.xd34e1507 {
 list-style-type:lower-roman;
 }
 
-.xd34e1516 {
+.xd34e1523 {
 list-style-type:disc;
 }
 
-.xd34e1531 {
+.xd34e1538 {
 list-style-type:disc;
 }
 
-.xd34e1606 {
+.xd34e1613 {
 text-align:center;
 }
 
-.xd34e1611 {
+.xd34e1618 {
 text-indent:1em;
 }
 
-.xd34e1617 {
+.xd34e1624 {
 text-indent:2em;
 }
 
-.xd34e1621 {
+.xd34e1628 {
 text-indent:3em;
 }
 
-.xd34e1625 {
+.xd34e1632 {
 text-indent:10em;
 }
 
@@ -1549,12 +1549,12 @@ display:none;
 @media handheld {
 
 
-.xd34e447 {
+.xd34e454 {
     background-image: none;
     padding-top: 0;
 }
 
-.xd34e447init {
+.xd34e454init {
     float: none;
     width: auto;
     height: auto;
@@ -1569,6 +1569,6 @@ display:none;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd34e1798 {
+.xd34e1805 {
 color:red
 }

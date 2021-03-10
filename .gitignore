@@ -19,6 +19,7 @@ ePub/audio/
 ePub/images/
 issues/
 libraries/json2xml/
+target/
 xspec/xspec/
 
 align-paragraphs-output.html

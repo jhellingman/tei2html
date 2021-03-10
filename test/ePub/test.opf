@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2021-02-10T21:25:41Z</meta>
+      <meta property="dcterms:modified">2021-03-10T21:03:12Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/12345</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -108,9 +108,9 @@
       <item id="grasses" href="images/p081.png" media-type="image/png"/>
       <item id="figTest4" href="images/figTest4.jpg" media-type="image/jpeg"/>
       <item id="figTest5" href="images/figTest5.jpg" media-type="image/jpeg"/>
-      <item id="xd34e447" href="images/initial-A.png" media-type="image/png"/>
-      <item id="xd34e514" href="images/Ornament.png" media-type="image/png"/>
-      <item id="xd34e774" href="images/bracket3.png" media-type="image/png"/>
+      <item id="xd34e454" href="images/initial-A.png" media-type="image/png"/>
+      <item id="xd34e521" href="images/Ornament.png" media-type="image/png"/>
+      <item id="xd34e781" href="images/bracket3.png" media-type="image/png"/>
       <item id="figTest2wrapper"
             href="test-figTest2.xhtml"
             media-type="application/xhtml+xml"/>

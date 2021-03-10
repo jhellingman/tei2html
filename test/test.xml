@@ -78,7 +78,7 @@
             <rendition id="large-letter" scope="first-letter">font-size: xx-large; color: red</rendition>
         </tagsDecl>
         <listPrefixDef>
-			<prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
+            <prefixDef ident="wiki" matchPattern="(.+)" replacementPattern="https://en.wikipedia.org/wiki/$1"/>
             <prefixDef ident="tei" matchPattern="(.+)" replacementPattern="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-$1.html"/>
         </listPrefixDef>
       </encodingDesc>
@@ -148,6 +148,7 @@
 <table id="tableStyles">
 <row><cell><hi>&quickbrown;</hi>                </cell><cell>Italic</cell></row>
 <row><cell><hi rend="bold">&quickbrown;</hi>    </cell><cell>Bold</cell></row>
+<row><cell><hi rend="bi">&quickbrown;</hi>      </cell><cell>Bold-italic</cell></row>
 <row><cell><hi rend="sc">&quickbrown;</hi>      </cell><cell>Caps and small-caps</cell></row>
 <row><cell><hi rend="uc">&quickbrown;</hi>      </cell><cell>All-caps</cell></row>
 <row><cell><hi rend="ex">&quickbrown;</hi>      </cell><cell>letter-spaced</cell></row>
@@ -201,11 +202,11 @@
 and HTML.</p>
 
 <table>
-	<row>
-		<cell rend="vertical-align(baseline)">Music time symbol</cell>
-		<cell rend="vertical-align(baseline)"><tt>&amp;time44;</tt></cell>
-		<cell rend="vertical-align(baseline)"><ab type="musictime"><ab type="top">4</ab><ab type="bottom">4</ab></ab></cell>
-	</row>
+    <row>
+        <cell rend="vertical-align(baseline)">Music time symbol</cell>
+        <cell rend="vertical-align(baseline)"><tt>&amp;time44;</tt></cell>
+        <cell rend="vertical-align(baseline)"><ab type="musictime"><ab type="top">4</ab><ab type="bottom">4</ab></ab></cell>
+    </row>
 </table>
 
 </div2>
@@ -984,12 +985,12 @@ and HTML.</p>
     <head>Some grasses.</head>
 
     <p rend="position(figOverlay)">I. Trilgras. 
-	II. Reukgras.
-	III. Dravik.
-	IV. Timothee.
-	V. Mannagras.
-	VI. Witbol.
-	VII. Struisgras.</p>
+    II. Reukgras.
+    III. Dravik.
+    IV. Timothee.
+    V. Mannagras.
+    VI. Witbol.
+    VII. Struisgras.</p>
 </figure>
 
 

@@ -4,6 +4,10 @@
                stylesheet="../normalize-table.xsl"
                version="3.0">
 
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
+
    <!-- table -->
 
    <x:scenario label="When normalizing a straighforward table">
@@ -340,6 +344,42 @@
         </table>
       </x:expect>
    </x:scenario>
+
+
+    <x:scenario label="When normalizing a table with a column marked as aligned on a specified decimal separator">
+        <x:context mode="normalize-table">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)">
+                <column rend="align(decimal)"/>
+                <row>
+                    <cell>1.234,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell>9,876,543.21</cell>
+                </row>
+                <row>
+                    <cell rend="decimal-separator(.)">1,234,567.89</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return in a table with the cells split on correct decimal separator.">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)" rows="3" headrows="0" cols="1">
+                <column/>
+                <column/>
+                <row>
+                    <cell row="1" col="1" rend="class(alignDecimalIntegerPart)">1.234</cell>
+                    <cell row="1" col="2" rend="class(alignDecimalFractionPart)">,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell row="2" col="1" rend="class(alignDecimalIntegerPart)">9,876,543</cell>
+                    <cell row="2" col="2" rend="class(alignDecimalFractionPart)">.21</cell>
+                </row>
+                <row>
+                    <cell row="3" col="1" rend="decimal-separator(.) class(alignDecimalIntegerPart)">1,234,567</cell>
+                    <cell row="3" col="2" rend="decimal-separator(.) class(alignDecimalFractionPart)">.89</cell>
+                </row>
+            </table>
+        </x:expect>
+    </x:scenario>
 
 
 </x:description>
