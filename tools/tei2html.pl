@@ -57,6 +57,7 @@ my $showHelp            = 0;
 my $customOption        = "";
 my $customStylesheet    = "custom.css";
 my $configurationFile   = "tei2html.config";
+my $atSize              = 0;
 my $pageWidth           = 72;
 my $makeZip             = 0;
 my $noTranscription     = 0;
@@ -91,6 +92,7 @@ GetOptions(
     's=s' => \$customOption,
     'c=s' => \$customStylesheet,
     'w=i' => \$pageWidth,
+    'i=i' => \$atSize,
     'pagewidth=i' => \$pageWidth,
     'debug' => \$debug,
     'trace' => \$trace,
@@ -156,6 +158,8 @@ if ($showHelp == 1) {
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
     print "    w=<int>   Set the page width (default: 72 characters).\n";
+    print "    i=<int>   Select the image set in kept in a directory named 'images@<int>' (default: 0)\n";
+    print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
 
     exit(0);
 }
@@ -273,6 +277,7 @@ sub processFile($) {
     extractMetadata($filename);
     extractEntities($filename);
 
+    $atSize > 0 && prepareImages();
     makeQrCode($pgNumber);
     collectImageInfo();
 
@@ -901,9 +906,31 @@ sub collectImageInfo() {
         print "Collect image dimensions from 'images'...\n";
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     } elsif (-d 'Processed/images') {
-        print "Collect image dimensions  from 'Processed/images'...\n";
+        print "Collect image dimensions from 'Processed/images'...\n";
         system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
     }
+}
+
+
+#
+# prepareImages -- copy images in the selected resolution ('@-size') to the main images directory
+#
+sub prepareImages() {
+    my $source = 'Processed/images@' . $atSize;
+    my $destination = 'Processed/images';
+
+    if (!-d $source) {
+        print "Error: Source directory $source does not exist\n";
+        return;
+    }
+
+    if (-d $destination) {
+        # Destination exists, prevent copying into it.
+        print "Warning: Destination exists; will not copy images again\n";
+        return;
+    }
+
+    system ('cp -r -u ' . $source . ' ' . $destination);
 }
 
 
