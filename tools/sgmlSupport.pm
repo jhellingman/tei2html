@@ -2235,6 +2235,20 @@ BEGIN {
     $ent{'AM'} = '<hi rend="asc">a.m.</hi>';
     $ent{'PM'} = '<hi rend="asc">p.m.</hi>';
 
+    # Phantom symbols for proper alignment in tables (rendered with visibility: hidden; in HTML).
+    $ent{'ph.czero'} = '<ab type="phantom">,0</ab>';                     # Phantom comma zero
+    $ent{'ph.deg'}   = '<ab type="phantom">' . chr(0x00B0) . '</ab>';    # Phantom degree sign
+    $ent{'ph.pr'}    = '<ab type="phantom">' . chr(0x2032) . '</ab>';    # Phantom prime
+    $ent{'ph.Pr'}    = '<ab type="phantom">' . chr(0x2033) . '</ab>';    # Phantom double prime
+    $ent{'ph.tpr'}   = '<ab type="phantom">' . chr(0x2034) . '</ab>';    # Phantom triple prime
+    $ent{'ph.qpr'}   = '<ab type="phantom">' . chr(0x2057) . '</ab>';    # Phantom quadruple prime
+    $ent{'ph.supa'}  = '<ab type="phantom"><hi rend="sup">a</hi></ab>';  # Phantom superscript a
+    $ent{'ph.supd'}  = '<ab type="phantom"><hi rend="sup">d</hi></ab>';  # Phantom superscript d
+    $ent{'ph.supm'}  = '<ab type="phantom"><hi rend="sup">m</hi></ab>';  # Phantom superscript m
+    $ent{'ph.suph'}  = '<ab type="phantom"><hi rend="sup">h</hi></ab>';  # Phantom superscript h
+    $ent{'ph.sups'}  = '<ab type="phantom"><hi rend="sup">s</hi></ab>';  # Phantom superscript s
+
+
     %reverse = ();
 
     foreach my $key (keys %ent) {

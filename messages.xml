@@ -881,6 +881,10 @@
         <msg:message name="msgTranslator">Übersetzer</msg:message>
         <msg:message name="msgReturnToNoteInText">Zurück zur Note im Text.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
+        
+        <msg:message name="msgPassim">Passim</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count"/> Fälle</msg:message>
+        <msg:message name="msgContributor">Beiträger</msg:message>
 
         <msg:message name="msgProjectGutenberg">Projekt Gutenberg</msg:message>
         <msg:message name="msgLibraryOfCongress">Kongressbibliothek</msg:message>
