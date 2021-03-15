@@ -46,7 +46,7 @@
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When rendering a figure element with a description">
+    <x:scenario label="When rendering a figure element with a head">
         <x:context>
             <figure id="fig_03" rend="image(images/fig_03.png)">
                 <head>Heading of picture.</head>
@@ -60,26 +60,26 @@
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When rendering a figure element with inline">
+    <x:scenario label="When rendering a figure element with rend='inline'">
         <x:context>
             <figure id="fig_04" rend="inline">
                 <figDesc>Description.</figDesc>
             </figure>
         </x:context>
-        <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
+        <x:expect label="will result in an HTML span with img inside, and the description as alt text.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="figure fig_04width">
                <img src="images/fig_04.png" alt="Description." width="10" height="15"/>
             </span>
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When rendering a figure element with inline">
+    <x:scenario label="When rendering a figure element with rend='position(inline)'">
         <x:context>
             <figure id="fig_05" rend="image(images/fig_01.jpg) position(inline)">
                 <figDesc>Description.</figDesc>
             </figure>
         </x:context>
-        <x:expect label="will result in an HTML span with img inside, and the heading as alt text.">
+        <x:expect label="will result in an HTML span with img inside, and the description as alt text.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="figure fig_05width">
                <img src="images/fig_01.jpg" alt="Description." width="12" height="40"/>
             </span>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY nbsp       "&#160;">
+        <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY asterism   "&#x2042;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <x:param name="sample1" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <front>
+                    <div1 id="preface" type="Preface">
+                        <head>Preface</head>
+                        <p>The preface ...</p>
+                    </div1>
+                </front>
+                <body>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                    </div1>
+                    <div1 id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter ...</p>
+                    </div1>
+                    <div1 id="ch3" n="III">
+                        <head>Chapter III.</head>
+                        <p>The third chapter ...</p>
+                    </div1>
+                </body>
+                <back>
+                    <div1 id="index" type="Index">
+                        <head>Index</head>
+                        <p>The index ...</p>
+                    </div1>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+    <!-- divGen -->
+
+    <x:scenario label="When rendering a divGen element for a toc">
+        <x:context select="$sample1//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocPageNum"/>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum" />
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">II. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocPageNum" />
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">III. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocPageNum" />
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocPageNum" />
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample2" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <front>
+                    <pb n="1"/>
+                    <div1 id="preface" type="Preface">
+                        <head>Preface</head>
+                        <p>The preface ...</p>
+                    </div1>
+                </front>
+                <body>
+                    <pb n="2"/>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                    </div1>
+                    <div1 id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter <pb n="3"/>...</p>
+                    </div1>
+                    <div1 id="ch3" n="III">
+                        <head>Chapter III.</head>
+                        <p>The third chapter ...</p>
+                    </div1>
+                </body>
+                <back>
+                    <div1 id="index" type="Index">
+                        <head>Index</head>
+                        <p>The index <pb n="4"/>...</p>
+                    </div1>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers">
+        <x:context select="$sample2//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">II. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">III. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample3" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <front>
+                    <pb n="1"/>
+                    <div id="preface" type="Preface">
+                        <head>Preface</head>
+                        <p>The preface ...</p>
+                    </div>
+                </front>
+                <body>
+                    <pb n="2"/>
+                    <div id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                    </div>
+                    <div id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter <pb n="3"/>...</p>
+                    </div>
+                    <div id="ch3" n="III">
+                        <head>Chapter III.</head>
+                        <p>The third chapter ...</p>
+                    </div>
+                </body>
+                <back>
+                    <div id="index" type="Index">
+                        <head>Index</head>
+                        <p>The index <pb n="4"/>...</p>
+                    </div>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers, using unnumbered divs">
+        <x:context select="$sample3//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">II. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">III. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum"/>
+                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample4" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <body>
+                    <pb n="2"/>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                        <div2 id="ch1.1" n="1" type="Section">
+                            <head>Section 1.</head>
+                            <p>The first section ...</p>
+                            <div3 id="ch1.1.A" n="A" type="Subsection">
+                                <head>Subsection A.</head>
+                                <p>The first subsection ...</p>
+                                <div4 id="ch1.1.A.a" n="a" type="Subsubsection">
+                                    <head>Subsubsection a.</head>
+                                    <p>The first subsubsection ...</p>
+                                    <div5 id="ch1.1.A.a.i" n="i" type="Subsubsubsection">
+                                        <head>Subsubsubsection i.</head>
+                                        <p>The first subsubsubsection ...</p>
+                                        <div6 id="ch1.1.A.a.i.1" n="1" type="Subsubsubsubsection">
+                                            <head>Subsubsubsubsection 1.</head>
+                                            <p>The first subsubsubsubsection ...</p>
+                                        </div6>
+                                    </div5>
+                                </div4>
+                            </div3>
+                        </div2>
+                    </div1>
+                    <div1 id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter <pb n="3"/>...</p>
+                    </div1>
+                </body>
+                <back>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers, with deeply nested numbered divs">
+        <x:context select="$sample4//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table>
+                    <tr>
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle" colspan="7"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"/>
+                        <td class="tocDivNum">A. </td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"/>
+                        <td class="tocDivNum">a. </td>
+                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"/>
+                        <td class="tocDivNum">i. </td>
+                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">II. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample5" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <body>
+                    <pb n="2"/>
+                    <div id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                        <div id="ch1.1" n="1" type="Section">
+                            <head>Section 1.</head>
+                            <p>The first section ...</p>
+                            <div id="ch1.1.A" n="A" type="Subsection">
+                                <head>Subsection A.</head>
+                                <p>The first subsection ...</p>
+                                <div id="ch1.1.A.a" n="a" type="Subsubsection">
+                                    <head>Subsubsection a.</head>
+                                    <p>The first subsubsection ...</p>
+                                    <div id="ch1.1.A.a.i" n="i" type="Subsubsubsection">
+                                        <head>Subsubsubsection i.</head>
+                                        <p>The first subsubsubsection ...</p>
+                                        <div id="ch1.1.A.a.i.1" n="1" type="Subsubsubsubsection">
+                                            <head>Subsubsubsubsection 1.</head>
+                                            <p>The first subsubsubsubsection ...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter <pb n="3"/>...</p>
+                    </div>
+                </body>
+                <back>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers, with deeply nested unnumbered divs">
+        <x:context select="$sample5//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table>
+                    <tr>
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle" colspan="7"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"/>
+                        <td class="tocDivNum">A. </td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"/>
+                        <td class="tocDivNum">a. </td>
+                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"/>
+                        <td class="tocDivNum">i. </td>
+                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
+                    </tr>
+                    <tr>
+                        <td class="tocDivNum">II. </td>
+                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+</x:description>

@@ -65,6 +65,15 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a hi element with rend attribute bi">
+        <x:context>
+            <hi rend="bi">Test!</hi>
+        </x:context>
+        <x:expect label="will result in HTML bold plus italics with a generated class and id attribute">
+            <b xmlns="http://www.w3.org/1999/xhtml"><i id="...">Test!</i></b>
+        </x:expect>
+    </x:scenario>
+
     <x:scenario label="When rendering a hi element with a more complex rendering attribute">
         <x:context>
             <hi rend="font-style(italic)">Test!</hi>
