@@ -12,6 +12,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2    
       - uses: actions/checkout@v2
       - name: Let maven run the tests
         run: mvn test
