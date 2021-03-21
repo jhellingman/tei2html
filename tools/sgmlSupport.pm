@@ -2235,19 +2235,43 @@ BEGIN {
     $ent{'AM'} = '<hi rend="asc">a.m.</hi>';
     $ent{'PM'} = '<hi rend="asc">p.m.</hi>';
 
-    # Phantom symbols for proper alignment in tables (rendered with visibility: hidden; in HTML).
-    $ent{'ph.czero'} = '<ab type="phantom">,0</ab>';                     # Phantom comma zero
-    $ent{'ph.deg'}   = '<ab type="phantom">' . chr(0x00B0) . '</ab>';    # Phantom degree sign
-    $ent{'ph.pr'}    = '<ab type="phantom">' . chr(0x2032) . '</ab>';    # Phantom prime
-    $ent{'ph.Pr'}    = '<ab type="phantom">' . chr(0x2033) . '</ab>';    # Phantom double prime
-    $ent{'ph.tpr'}   = '<ab type="phantom">' . chr(0x2034) . '</ab>';    # Phantom triple prime
-    $ent{'ph.qpr'}   = '<ab type="phantom">' . chr(0x2057) . '</ab>';    # Phantom quadruple prime
-    $ent{'ph.supa'}  = '<ab type="phantom"><hi rend="sup">a</hi></ab>';  # Phantom superscript a
-    $ent{'ph.supd'}  = '<ab type="phantom"><hi rend="sup">d</hi></ab>';  # Phantom superscript d
-    $ent{'ph.supm'}  = '<ab type="phantom"><hi rend="sup">m</hi></ab>';  # Phantom superscript m
-    $ent{'ph.suph'}  = '<ab type="phantom"><hi rend="sup">h</hi></ab>';  # Phantom superscript h
-    $ent{'ph.sups'}  = '<ab type="phantom"><hi rend="sup">s</hi></ab>';  # Phantom superscript s
+    # More superscripts
+    $ent{'supc'}   = '<hi rend="sup">c</hi>';   # superscript c (cycles)
+    $ent{'supa'}   = '<hi rend="sup">a</hi>';   # superscript a (years)
+    $ent{'supd'}   = '<hi rend="sup">d</hi>';   # superscript d (days)
+    $ent{'supm'}   = '<hi rend="sup">m</hi>';   # superscript m (minutes)
+    $ent{'suph'}   = '<hi rend="sup">h</hi>';   # superscript h (hours)
+    $ent{'sups'}   = '<hi rend="sup">s</hi>';   # superscript s (seconds)
 
+    $ent{'supI'}   = '<hi rend="sup">I</hi>';   # superscript I
+    $ent{'supII'}  = '<hi rend="sup">II</hi>';  # superscript II
+    $ent{'supIII'} = '<hi rend="sup">III</hi>'; # superscript III
+    $ent{'supIV'}  = '<hi rend="sup">IV</hi>';  # superscript IV
+    $ent{'supV'}   = '<hi rend="sup">V</hi>';   # superscript V
+    $ent{'supVI'}  = '<hi rend="sup">VI</hi>';  # superscript VI
+
+    # Phantom symbols for proper alignment in tables (rendered with visibility: hidden; in HTML).
+    $ent{'ph.comma'}  = '<ab type="phantom">,</ab>';                       # Phantom comma
+    $ent{'ph.czero'}  = '<ab type="phantom">,0</ab>';                      # Phantom comma zero
+    $ent{'ph.deg'}    = '<ab type="phantom">' . chr(0x00B0) . '</ab>';     # Phantom degree sign
+    $ent{'ph.pr'}     = '<ab type="phantom">' . chr(0x2032) . '</ab>';     # Phantom prime
+    $ent{'ph.Pr'}     = '<ab type="phantom">' . chr(0x2033) . '</ab>';     # Phantom double prime
+    $ent{'ph.tpr'}    = '<ab type="phantom">' . chr(0x2034) . '</ab>';     # Phantom triple prime
+    $ent{'ph.qpr'}    = '<ab type="phantom">' . chr(0x2057) . '</ab>';     # Phantom quadruple prime
+
+    $ent{'ph.supc'}   = '<ab type="phantom"><hi rend="sup">c</hi></ab>';   # Phantom superscript c (cycles)
+    $ent{'ph.supa'}   = '<ab type="phantom"><hi rend="sup">a</hi></ab>';   # Phantom superscript a (years)
+    $ent{'ph.supd'}   = '<ab type="phantom"><hi rend="sup">d</hi></ab>';   # Phantom superscript d (days)
+    $ent{'ph.supm'}   = '<ab type="phantom"><hi rend="sup">m</hi></ab>';   # Phantom superscript m (minutes)
+    $ent{'ph.suph'}   = '<ab type="phantom"><hi rend="sup">h</hi></ab>';   # Phantom superscript h (hours)
+    $ent{'ph.sups'}   = '<ab type="phantom"><hi rend="sup">s</hi></ab>';   # Phantom superscript s (seconds)
+
+    $ent{'ph.supI'}   = '<ab type="phantom"><hi rend="sup">I</hi></ab>';   # Phantom superscript I
+    $ent{'ph.supII'}  = '<ab type="phantom"><hi rend="sup">II</hi></ab>';  # Phantom superscript II
+    $ent{'ph.supIII'} = '<ab type="phantom"><hi rend="sup">III</hi></ab>'; # Phantom superscript III
+    $ent{'ph.supIV'}  = '<ab type="phantom"><hi rend="sup">IV</hi></ab>';  # Phantom superscript IV
+    $ent{'ph.supV'}   = '<ab type="phantom"><hi rend="sup">V</hi></ab>';   # Phantom superscript V
+    $ent{'ph.supVI'}  = '<ab type="phantom"><hi rend="sup">VI</hi></ab>';  # Phantom superscript VI
 
     %reverse = ();
 
