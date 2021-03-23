@@ -149,7 +149,7 @@
 
 
     <xsl:template match="note">
-        <xsl:copy-of select="f:log-warning('unclassified not not handled.', ())"/>
+        <xsl:copy-of select="f:log-warning('unclassified note not handled.', ())"/>
         <xsl:apply-templates/>
     </xsl:template>
 
