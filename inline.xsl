@@ -393,7 +393,7 @@
     <xsl:template match="hi" mode="#default remove-initial titlePage toc-head">
         <xsl:choose>
             <!-- Does this hi contain an explicit rendering or style value -->
-            <xsl:when test="contains(@rend, '(') or @style or @rendition">
+            <xsl:when test="contains(@rend, '(') or @style or @rendition or f:extract-class-from-rend-ladder(@rend, 'hi') != ''">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <!-- Actual style is put in stylesheet, rendered in CSS mode -->

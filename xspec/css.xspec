@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY nbsp       "&#160;">
+        <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY asterism   "&#x2042;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- presence of rend-attributes results in class attributes on generated elements -->
+
+    <x:scenario label="When converting an element without a rend-attribute (normal mode)">
+        <x:context>
+            <ab id="p0">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID, but no class.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with a rend-attribute (normal mode)">
+        <x:context>
+            <ab id="p0" rend="font-size(large)">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and class.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with a rend-attribute specifying a class (normal mode)">
+        <x:context>
+            <ab id="p0" rend="class(red)">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and the specified class.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with a normal rend-attribute and one specifying a class (normal mode)">
+        <x:context>
+            <ab id="p0" rend="font-size(large) class(red)">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and both the generated and specified classes.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with a normal rend-attribute and one specifying a (bare) class (normal mode)">
+        <x:context>
+            <ab id="p0" rend="font-size(large) red">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and both the generated and specified classes.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with a normal rend-attribute and one specifying a class (normal mode)">
+        <x:context>
+            <ab id="p0" rend="font-size(large) red class(bright)">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and both the generated and specified classes.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="bright red p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an hi-element (normal mode)">
+        <x:context>
+            <hi id="p0">Just some text</hi>
+        </x:context>
+        <x:expect label="will result in an i-element with an ID.">
+            <i xmlns="http://www.w3.org/1999/xhtml" id="p0">Just some text</i>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an hi-element with a bold rend-attribute (normal mode)">
+        <x:context>
+            <hi id="p0" rend="bold">Just some text</hi>
+        </x:context>
+        <x:expect label="will result in an b-element with an ID.">
+            <b xmlns="http://www.w3.org/1999/xhtml" id="p0">Just some text</b>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an hi-element with a non-standard rend-attribute (normal mode)">
+        <x:context>
+            <hi id="p0" rend="class(green)">Just some text</hi>
+        </x:context>
+        <x:expect label="will result in an b-element with an ID.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="green">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an hi-element with a non-standard rend-attribute (normal mode)">
+        <x:context>
+            <hi id="p0" rend="green">Just some text</hi>
+        </x:context>
+        <x:expect label="will result in an b-element with an ID.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="green">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <!-- convert rendition ladders to css -->
+
+    <x:scenario label="When converting a single rendition element to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a single rendition element to CSS with an ID that is invalid in CSS">
+        <x:context mode="css">
+            <p id="p.1" rend="font-size(large)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule with an escaped ID."
+                  test="normalize-space(.) = '.p\.1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting two rendition elements to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large) color(red)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule with two attributes."
+                  test="normalize-space(.) = '.p1 { font-size:large; color:red; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a single rendition element plus a class to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large) class(red)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a for the one element CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a two identical rendition elements to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large)">Just a paragraph</p>
+            <p id="p2" rend="font-size(large)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a single CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a two different rendition elements to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large)">Just a paragraph</p>
+            <p id="p2" rend="font-size(small)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in two CSS rules."
+                  test="normalize-space(.) = '.p1 { font-size:large; } .p2 { font-size:small; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a  rendition elements with special meaning to CSS">
+        <x:context mode="css">
+            <p id="p1" rend="font(italic)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in the converted CSS rule."
+                  test="normalize-space(.) = '.p1 { font-style:italic; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a paragraph with a bare class in CSS mode">
+        <x:context mode="css">
+            <p id="p1" rend="red">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in nothing."
+                  test="empty($x:result)"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a paragraph with a rend attribute and a bare class in CSS mode">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large) red class(bright)">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a paragraph with a rend attribute and a bare class in CSS mode">
+        <x:context mode="css">
+            <p id="p1" rend="font-size(large) red">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+</x:description>

@@ -333,10 +333,63 @@
                 <xsl:matching-substring>
                     <xsl:value-of select="f:translate-rend-ladder-step(regex-group(1), regex-group(2), $name)"/>
                 </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:variable name="fragment" select="normalize-space(.)"/>
+                    <xsl:if test="$fragment != '' and not(matches($fragment, '^[a-zA-Z][a-zA-Z0-9]+$'))">
+                        <xsl:message expand-text="yes">WARNING: part of rendition ladder not understood: '{.}'</xsl:message>
+                    </xsl:if>
+                </xsl:non-matching-substring>
             </xsl:analyze-string>
         </xsl:variable>
 
         <xsl:value-of select="normalize-space($css)"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:extract-class-from-rend-ladder" as="xs:string">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="name" as="xs:string"/>
+
+        <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
+
+        <xsl:variable name="class">
+            <xsl:analyze-string select="$rend" regex="([a-z][a-z0-9-]*)\((.*?)\)" flags="i">
+                <xsl:matching-substring>
+                    <!-- ignore rendition-ladder elements here -->
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:if test="matches(normalize-space(.), '^[a-zA-Z][a-zA-Z0-9]+$')">
+                        <xsl:value-of select="f:filter-class(., $name)"/>
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+
+        <xsl:value-of select="$class"/>
+    </xsl:function>
+
+    <xsl:function name="f:filter-class" as="xs:string">
+        <xsl:param name="class" as="xs:string"/>
+        <xsl:param name="element" as="xs:string"/>
+
+        <xsl:variable name="class">
+            <xsl:choose>
+                <!-- Filter rendition values handled in a special way elsewhere -->
+                <xsl:when test="$class = ('hide', 'display', 'inline')"/>
+
+                <xsl:when test="$element = 'hi' and $class = ('rm', 'it', 'italic', 'b', 'bold', 'sc', 'asc', 'ex', 'g', 'bi', 'tt', 'bold-italic', 'sup', 'sub', 'underline', 'overline', 'overtilde')"/>
+                <xsl:when test="$element = 'q' and $class = 'block'"/>
+                <xsl:when test="$element = 'p' and $class = 'noindent'"/>
+
+                <!-- Assume the rest can be copied to the class-attribute in HTML -->
+                <xsl:otherwise>
+                    <xsl:value-of select="$class"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:value-of select="$class"/>
     </xsl:function>
 
 
@@ -346,13 +399,13 @@
         with a special meaning, so they will not be output as invalid CSS.</xd:detail>
         <xd:param name="property">The name of the property to be filtered.</xd:param>
         <xd:param name="value">The value of this property.</xd:param>
-        <xd:param name="name">The name of the element carrying the rend attribute.</xd:param>
+        <xd:param name="element">The name of the element carrying the rend attribute.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:translate-rend-ladder-step" as="xs:string">
         <xsl:param name="property" as="xs:string"/>
         <xsl:param name="value" as="xs:string"/>
-        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="element" as="xs:string"/>
 
         <xsl:variable name="css">
             <xsl:choose>
@@ -397,19 +450,19 @@
                 <xsl:when test="$property='initial-width'"/>
 
                 <!-- divGen related special handling. -->
-                <xsl:when test="$name = 'divGen' and $property = 'include'"/>
+                <xsl:when test="$element = 'divGen' and $property = 'include'"/>
 
                 <!-- Figure related special handling. -->
-                <xsl:when test="$name = 'figure' and $property = 'float'"/>
+                <xsl:when test="$element = 'figure' and $property = 'float'"/>
 
                 <!-- Table related special handling. With the rule
                      margin: 0px auto, the table is centered, while
                      display: table shrinks the bounding box to the content -->
-                <xsl:when test="$name = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
-                <xsl:when test="$name = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
+                <xsl:when test="$element = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
+                <xsl:when test="$element = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
                 <!-- Line-breaks with indents need to be handled specially (drama.xsl), so should be removed here. -->
-                <xsl:when test="$name='lb' and $property='indent'"/>
+                <xsl:when test="$element='lb' and $property='indent'"/>
 
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:get-setting('css.frakturFont')"/>'; </xsl:when>
@@ -535,6 +588,8 @@
                 <xsl:value-of select="f:rend-value($rend, 'class')"/>
                 <xsl:text> </xsl:text>
             </xsl:if>
+            <xsl:value-of select="f:extract-class-from-rend-ladder($rend, name($node))"/>
+            <xsl:text> </xsl:text>
             <xsl:if test="normalize-space(f:translate-rend-ladder($rend, name($node))) != ''">
                 <xsl:value-of select="f:generate-class-name($node)"/>
                 <xsl:text> </xsl:text>
