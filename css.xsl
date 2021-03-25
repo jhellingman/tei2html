@@ -322,6 +322,9 @@
         <xd:param name="name">The name of the element carrying this attribute.</xd:param>
     </xd:doc>
 
+    <xsl:variable name="rendition-ladder-pattern" select="'([a-z][a-z0-9-]*)\((.*?)\)'"/>
+    <xsl:variable name="class-name-pattern" select="'^[a-zA-Z][a-zA-Z0-9-]+$'"/>
+
     <xsl:function name="f:translate-rend-ladder" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="name" as="xs:string"/>
@@ -329,13 +332,13 @@
         <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
         <xsl:variable name="css">
-            <xsl:analyze-string select="$rend" regex="([a-z][a-z0-9-]*)\((.*?)\)" flags="i">
+            <xsl:analyze-string select="$rend" regex="{$rendition-ladder-pattern}" flags="i">
                 <xsl:matching-substring>
                     <xsl:value-of select="f:translate-rend-ladder-step(regex-group(1), regex-group(2), $name)"/>
                 </xsl:matching-substring>
                 <xsl:non-matching-substring>
                     <xsl:variable name="fragment" select="normalize-space(.)"/>
-                    <xsl:if test="$fragment != '' and not(matches($fragment, '^[a-zA-Z][a-zA-Z0-9]+$'))">
+                    <xsl:if test="$fragment != '' and not(matches($fragment, $class-name-pattern))">
                         <xsl:message expand-text="yes">WARNING: part of rendition ladder not understood: '{.}'</xsl:message>
                     </xsl:if>
                 </xsl:non-matching-substring>
@@ -353,12 +356,12 @@
         <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
         <xsl:variable name="class">
-            <xsl:analyze-string select="$rend" regex="([a-z][a-z0-9-]*)\((.*?)\)" flags="i">
+            <xsl:analyze-string select="$rend" regex="{$rendition-ladder-pattern}" flags="i">
                 <xsl:matching-substring>
                     <!-- ignore rendition-ladder elements here -->
                 </xsl:matching-substring>
                 <xsl:non-matching-substring>
-                    <xsl:if test="matches(normalize-space(.), '^[a-zA-Z][a-zA-Z0-9]+$')">
+                    <xsl:if test="matches(normalize-space(.), $class-name-pattern)">
                         <xsl:value-of select="f:filter-class(., $name)"/>
                         <xsl:text> </xsl:text>
                     </xsl:if>

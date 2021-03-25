@@ -82,11 +82,19 @@
                 <xsl:otherwise>
                     <xsl:analyze-string select="$rend" regex="{$regex}" flags="i">
                         <xsl:matching-substring>
+                            <!-- Keep anything except the rules matching the key -->
                             <xsl:if test="regex-group(1) != $key">
                                 <xsl:value-of select="regex-group(0)"/>
                                 <xsl:text> </xsl:text>
                             </xsl:if>
                         </xsl:matching-substring>
+                        <xsl:non-matching-substring>
+                            <!-- Keep the bare class names in the rendition ladder -->
+                            <xsl:if test="matches(., '^ *[a-zA-Z][a-zA-Z0-9-]+ *$')">
+                                <xsl:value-of select="."/>
+                                <xsl:text> </xsl:text>
+                            </xsl:if>
+                        </xsl:non-matching-substring>
                     </xsl:analyze-string>
                 </xsl:otherwise>
             </xsl:choose>

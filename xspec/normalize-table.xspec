@@ -382,4 +382,75 @@
     </x:scenario>
 
 
+    <x:scenario label="When normalizing a table with a column marked as aligned on a decimal separator with a rend attributes">
+        <x:context mode="normalize-table">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)">
+                <column rend="align(decimal)"/>
+                <row>
+                    <cell rend="color(green)">1.234,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell rend="color(blue)">9,876,543.21</cell>
+                </row>
+                <row>
+                    <cell rend="decimal-separator(.) color(red)">1,234,567.89</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return in a table with the cells split on correct decimal separator.">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)" rows="3" headrows="0" cols="1">
+                <column/>
+                <column/>
+                <row>
+                    <cell row="1" col="1" rend="color(green) class(alignDecimalIntegerPart)">1.234</cell>
+                    <cell row="1" col="2" rend="color(green) class(alignDecimalFractionPart)">,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell row="2" col="1" rend="color(blue) class(alignDecimalIntegerPart)">9,876,543</cell>
+                    <cell row="2" col="2" rend="color(blue) class(alignDecimalFractionPart)">.21</cell>
+                </row>
+                <row>
+                    <cell row="3" col="1" rend="decimal-separator(.) color(red) class(alignDecimalIntegerPart)">1,234,567</cell>
+                    <cell row="3" col="2" rend="decimal-separator(.) color(red) class(alignDecimalFractionPart)">.89</cell>
+                </row>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When normalizing a table with a column marked as aligned on a decimal separator with bare rend attributes">
+        <x:context mode="normalize-table">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)">
+                <column rend="align(decimal)"/>
+                <row>
+                    <cell rend="green">1.234,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell rend="blue">9,876,543.21</cell>
+                </row>
+                <row>
+                    <cell rend="decimal-separator(.) red">1,234,567.89</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return in a table with the cells split on correct decimal separator.">
+            <table id="table_with_decimal_comma" rend="decimal-separator(,)" rows="3" headrows="0" cols="1">
+                <column/>
+                <column/>
+                <row>
+                    <cell row="1" col="1" rend="green class(alignDecimalIntegerPart)">1.234</cell>
+                    <cell row="1" col="2" rend="green class(alignDecimalFractionPart)">,56</cell>
+                </row>
+                <row rend="decimal-separator(.)">
+                    <cell row="2" col="1" rend="blue class(alignDecimalIntegerPart)">9,876,543</cell>
+                    <cell row="2" col="2" rend="blue class(alignDecimalFractionPart)">.21</cell>
+                </row>
+                <row>
+                    <cell row="3" col="1" rend="decimal-separator(.) red class(alignDecimalIntegerPart)">1,234,567</cell>
+                    <cell row="3" col="2" rend="decimal-separator(.) red class(alignDecimalFractionPart)">.89</cell>
+                </row>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
 </x:description>

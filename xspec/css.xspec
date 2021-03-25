@@ -67,6 +67,15 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When converting an element with a normal rend-attribute and one specifying a class (normal mode; different order)">
+        <x:context>
+            <ab id="p0" rend="red font-size(large) class(bright)">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and both the generated and specified classes.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="bright red p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
     <x:scenario label="When converting an hi-element (normal mode)">
         <x:context>
             <hi id="p0">Just some text</hi>
@@ -182,6 +191,14 @@
     <x:scenario label="When rendering a paragraph with a rend attribute and a bare class in CSS mode">
         <x:context mode="css">
             <p id="p1" rend="font-size(large) red">Just a paragraph</p>
+        </x:context>
+        <x:expect label="will result in a CSS rule."
+                  test="normalize-space(.) = '.p1 { font-size:large; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a paragraph with a bare class and a rend attribute in CSS mode">
+        <x:context mode="css">
+            <p id="p1" rend="red font-size(large)">Just a paragraph</p>
         </x:context>
         <x:expect label="will result in a CSS rule."
                   test="normalize-space(.) = '.p1 { font-size:large; }'"/>
