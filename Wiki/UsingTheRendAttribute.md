@@ -6,16 +6,16 @@ Note that according to the TEI Guidelines, the rendering attributes are intended
 
 ## Simple ##
 
-Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient 95 percent of the time. The available rendering keywords are element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.
+Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient most of the time. The pre-defined rendering keywords are often element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.
 
 | **Element** | **Recognized `@rend` values** |
 |:------------|:------------------------------|
-| `hi`      | `italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex` |
-| `figure`  | `center` (_default_) `left` `right` `inline` |
-| `p`       | `block` `center` `left` (_default_) `right` `indent` `noindent` |
-| `q`       | `block` |
-| `list`    | `number` `bullet` `none` (_default_) |
-| _Any_     | _Any_ (_these will be added to the class attribute of the output element in HTML_) |
+| `hi`        | `italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex` |
+| `figure`    | `center` (_default_) `left` `right` `inline` |
+| `p`         | `block` `center` `left` (_default_) `right` `indent` `noindent` |
+| `q`         | `block` |
+| `list`      | `number` `bullet` `none` (_default_) |
+| _Any_       | _Any_ (_these will be added to the class attribute of the output element in HTML_) |
 
 ## Rendition Ladders ##
 
@@ -69,7 +69,7 @@ As an alternative to the `@rend` attribute, the current TEI guidelines also prov
 Implementation notes:
 
 1. Handle the `@style` attribute, and output it as a CSS rule.
-   - generate a unique class-name for the CSS fragment.
+   - generate a unique class name for the CSS fragment.
    - output the value of the `@style` attribute verbatim.
    - remove duplicates, such that identical `@style` attributes are only output once.
    - apply the generated class-name to the relevant output element in HTML.
