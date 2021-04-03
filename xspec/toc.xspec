@@ -55,7 +55,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table>
+                <table summary="Table of Contents">
                     <tr>
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
@@ -128,7 +128,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table>
+                <table summary="Table of Contents">
                     <tr>
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
@@ -202,7 +202,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table>
+                <table summary="Table of Contents">
                     <tr>
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
@@ -281,7 +281,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table>
+                <table summary="Table of Contents">
                     <tr>
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
@@ -375,7 +375,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table>
+                <table summary="Table of Contents">
                     <tr>
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>

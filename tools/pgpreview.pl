@@ -46,7 +46,7 @@ sub main {
         if ($line =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
             print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
             if ($projectName ne '') {
-                print "<hr>\n<b>File: <a href='https://www.pgdp.net/c/tools/project_manager/displayimage.php?project=$projectName&imagefile=$1.png&showreturnlink=1&preload=next&percent=100&jumpto=$1.png'>$1.png</a></b>\n<hr>\n";
+                print "<hr>\n<b>File: <a href='https://www.pgdp.net/c/tools/page_browser.php?mode=image&project=$projectName&imagefile=$1.png'>$1.png</a></b>\n<hr>\n";
             } else {
                 print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
             }

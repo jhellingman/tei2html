@@ -204,7 +204,28 @@
                 <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z%]+)'" as="xs:string"/>
                 <xsl:variable name="value" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
                 <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
-                <xsl:variable name="new-dimension" select="concat($value * $factor, $unit)" as="xs:string"/>
+                <xsl:variable name="new-dimension" select="$value * $factor || $unit" as="xs:string"/>
+
+                <xsl:copy-of select="f:log-debug('Dimension {1} becomes {2}.', ($dimension, $new-dimension))"/>
+
+                <xsl:value-of select="$new-dimension"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$dimension"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:function>
+
+
+    <xsl:function name="f:round-dimension" as="xs:string?">
+        <xsl:param name="dimension" as="xs:string?"/>
+
+        <xsl:choose>
+            <xsl:when test="$dimension != ''">
+                <xsl:variable name="regex" select="'([0-9]+(\.[0-9]+)?)([a-z%]+)'" as="xs:string"/>
+                <xsl:variable name="value" select="xs:double(replace($dimension, $regex, '$1'))" as="xs:double"/>
+                <xsl:variable name="unit" select="replace($dimension, $regex, '$3')" as="xs:string"/>
+                <xsl:variable name="new-dimension" select="round($value) || $unit" as="xs:string"/>
 
                 <xsl:copy-of select="f:log-debug('Dimension {1} becomes {2}.', ($dimension, $new-dimension))"/>
 

@@ -318,7 +318,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <table>
+        <table summary="{f:message('msgTableOfContents')}">
             <xsl:apply-templates mode="gentoc-table" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
             </xsl:apply-templates>
@@ -569,7 +569,7 @@
     <xd:doc>
         <xd:short>Determine the filename of the thumbnail image.</xd:short>
         <xd:detail>
-            <p>The name of the thumbnail image file is assumed to be the same as the full-size image, 
+            <p>The name of the thumbnail image file is assumed to be the same as the full-size image,
             but is located in a subdirectory <code>thumbs</code> of the directory it appears in.</p>
         </xd:detail>
     </xd:doc>
@@ -681,7 +681,7 @@
         <xd:detail>
             <p>Render a determination table (as used in biology books) encoded as an itemized list as a table.</p>
 
-            <p>The code is fairly similar to the code for tables of contents above. This depends on the following 
+            <p>The code is fairly similar to the code for tables of contents above. This depends on the following
             convention being applied to structure the list representing a determination table:</p>
 
             <pre>

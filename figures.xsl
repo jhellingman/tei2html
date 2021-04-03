@@ -211,20 +211,23 @@
 
         <xsl:variable name="width" select="substring-before($width, 'px')"/>
         <xsl:variable name="height" select="substring-before($height, 'px')"/>
-
         <xsl:variable name="fileSize" select="f:image-file-size($file)"/>
+
+        <xsl:variable name="maxWidth" select="f:get-setting('images.maxWidth')"/>
+        <xsl:variable name="maxHeight" select="f:get-setting('images.maxHeight')"/>
+        <xsl:variable name="maxFileSize" select="f:get-setting('images.maxSize')"/>
 
         <xsl:if test="$width = ''">
             <xsl:copy-of select="f:log-warning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
         </xsl:if>
-        <xsl:if test="$width != '' and number($width) > 720">
-            <xsl:copy-of select="f:log-warning('Image {1} width more than 720 pixels ({2} px).', ($file, $width))"/>
+        <xsl:if test="$width != '' and number($width) > xs:double($maxWidth)">
+            <xsl:copy-of select="f:log-warning('Image {1} width more than {3} pixels ({2} px).', ($file, $width, $maxWidth))"/>
         </xsl:if>
-        <xsl:if test="$height != '' and number($height) > 720">
-            <xsl:copy-of select="f:log-warning('Image {1} height more than 720 pixels ({2} px).', ($file, $height))"/>
+        <xsl:if test="$height != '' and number($height) > xs:double($maxHeight)">
+            <xsl:copy-of select="f:log-warning('Image {1} height more than {3} pixels ({2} px).', ($file, $height, $maxHeight))"/>
         </xsl:if>
-        <xsl:if test="$fileSize != '' and number($fileSize) > 102400">
-            <xsl:copy-of select="f:log-warning('Image {1} file-size more than 100 kilobytes ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024))))"/>
+        <xsl:if test="$fileSize != '' and number($fileSize) > xs:double($maxFileSize) * 1024">
+            <xsl:copy-of select="f:log-warning('Image {1} file-size larger than {3} kB ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024)), $maxFileSize))"/>
         </xsl:if>
         <xsl:if test="$alt = ''">
             <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined.', ($file))"/>
@@ -341,13 +344,13 @@ width:{$width};
     <xsl:function name="f:image-width" as="xs:string?">
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="width" select="$imageInfo/img:images/img:image[@path=$file]/@width" as="xs:string?"/>
-        <xsl:sequence select="f:adjust-dimension($width, number(f:get-setting('images.scale')))"/>
+        <xsl:sequence select="f:round-dimension(f:adjust-dimension($width, number(f:get-setting('images.scale'))))"/>
     </xsl:function>
 
     <xsl:function name="f:image-height" as="xs:string?">
         <xsl:param name="file" as="xs:string"/>
         <xsl:variable name="height" select="$imageInfo/img:images/img:image[@path=$file]/@height" as="xs:string?"/>
-        <xsl:sequence select="f:adjust-dimension($height, number(f:get-setting('images.scale')))"/>
+        <xsl:sequence select="f:round-dimension(f:adjust-dimension($height, number(f:get-setting('images.scale'))))"/>
     </xsl:function>
 
     <xsl:function name="f:image-file-size" as="xs:string?">

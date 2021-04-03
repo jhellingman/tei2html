@@ -2252,7 +2252,9 @@ BEGIN {
 
     # Phantom symbols for proper alignment in tables (rendered with visibility: hidden; in HTML).
     $ent{'ph.comma'}  = '<ab type="phantom">,</ab>';                       # Phantom comma
+    $ent{'ph.zero'}   = '<ab type="phantom">0</ab>';                       # Phantom zero
     $ent{'ph.czero'}  = '<ab type="phantom">,0</ab>';                      # Phantom comma zero
+    $ent{'ph.pzero'}  = '<ab type="phantom">.0</ab>';                      # Phantom period zero
     $ent{'ph.deg'}    = '<ab type="phantom">' . chr(0x00B0) . '</ab>';     # Phantom degree sign
     $ent{'ph.pr'}     = '<ab type="phantom">' . chr(0x2032) . '</ab>';     # Phantom prime
     $ent{'ph.Pr'}     = '<ab type="phantom">' . chr(0x2033) . '</ab>';     # Phantom double prime

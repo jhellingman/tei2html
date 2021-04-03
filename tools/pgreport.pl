@@ -23,15 +23,35 @@ use open ':utf8';
 my $force = 0;          # regenerate XML files.
 my $forceMore = 0;      # regenerate XML files, even if they appear up-to-date.
 my $makeHtml = 0;       # Generate HTML files.
+my $makeEpub = 0;       # Generate Epub files.
 my $makeChecks = 0;
 my $download = 0;       # Download posted files from Project Gutenberg.
+my $showHelp            = 0;
 
 GetOptions(
     'f' => \$force,
     'm' => \$forceMore,
     'v' => \$makeChecks,
     'h' => \$makeHtml,
-    'd' => \$download);
+    'e' => \$makeEpub,
+    'd' => \$download,
+    'q' => \$showHelp,
+    'help' => \$showHelp);
+
+if ($showHelp == 1) {
+    print "pgreport.pl -- create a report of all TEI files in a directory-structure.\n\n";
+    print "Usage: pgreport.pl [-fmvhdq] <directory>\n\n";
+    print "Options:\n";
+    print "    f         force: regenerate XML files used to extract information from.\n";
+    print "    m         force more: also force regeneration of HTML files.\n";
+    print "    v         run checks on TEI files.\n";
+    print "    h         Produce derived HTML file for each TEI file.\n";
+    print "    e         Produce derived ePub file for each TEI file.\n";
+    print "    d         Download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
+    print "    q         Print this help and exit.\n";
+
+    exit(0);
+}
 
 my $gitRepoLocation = 'D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/';
 
@@ -217,11 +237,9 @@ sub handleTeiFile {
                 # system ("perl -S process.pl");
             } else {
                 my $forceFlag = $forceMore == 0 ? '' : ' -f ';
-                if ($makeHtml != 0) {
-                    system ("perl -S tei2html.pl -h -r -v $forceFlag $fileName$suffix");
-                } else {
-                    system ("perl -S tei2html.pl -x -r -v $forceFlag $fileName$suffix");
-                }
+                my $htmlFlag = $makeHtml == 0 ? '' : ' -h ';
+                my $epubFlag = $makeEpub == 0 ? '' : ' -e ';
+                system ("perl -S tei2html.pl -x -r -v $htmlFlag $epubFlag $forceFlag $fileName$suffix");
             }
             chdir ($cwd);
         }
