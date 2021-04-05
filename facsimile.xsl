@@ -78,7 +78,8 @@
 
 <xsl:template name="main-facsimile-css">
 .facslink {
-    background-image: url(images/page-image.png);
+    /* background-image: url(images/page-image.png); */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAASklEQVR4AWP4//8/URhM8PDw/Ofm5oZjdD5cIYiDA4A0YSp8//49Msat0MHBAQWDAFQO4UYsgCwTCXsGKEdbExGBDGMjaIRCojAAvTE/VwiWi2sAAAAASUVORK5CYII=);
     padding-right: 10px;
 }
 </xsl:template>

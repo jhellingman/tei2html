@@ -728,7 +728,6 @@ sub extractMetadata($) {
         }
         if ($line =~ /<idno type=\"?PGnum\"?>([0-9]+)<\/idno>/) {
             $pgNumber = $1;
-            next;
         }
         if ($line =~ /<author\b.*?>(.*?)<\/author>/) {
             if ($author eq "") {
@@ -736,23 +735,18 @@ sub extractMetadata($) {
             } else {
                 $author .= ", " . $1;
             }
-            next;
         }
-        if ($line =~ /<date>(.*?)<\/date>/) {
+        if ($line =~ /<date\b.*?>(.*?)<\/date>/) {
             $releaseDate = $1;
-            next;
         }
-        if ($line =~ /<title>(.*?)<\/title>/) {
+        if ($line =~ /<title(?: nfc=\"?[0-9]+\"?)?>(.*?)<\/title>/) {
             $mainTitle = $1;
-            next;
         }
         if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/) {
             $shortTitle = $1;
-            next;
         }
         if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/) {
             $shortTitle = $1;
-            next;
         }
 
         # All relevant metadata should be in or before the publicationStmt.
