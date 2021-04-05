@@ -416,6 +416,12 @@
                 <xsl:value-of select="f:rend-value($node/@rend, 'class')"/>
                 <xsl:text> </xsl:text>
             </xsl:if>
+            <!-- As well as the bare classes in the rendition ladder -->
+            <xsl:variable name="other-classes" select="f:extract-class-from-rend-ladder($node/@rend, 'row')"/>
+            <xsl:if test="$other-classes">
+                <xsl:value-of select="$other-classes"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
         </xsl:variable>
 
         <xsl:value-of select="normalize-space($class)"/>

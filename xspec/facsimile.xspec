@@ -51,7 +51,7 @@
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
         </x:context>
         <x:expect label="will result in CSS with a generated class selector and relevant rendering attributes (i.e. icon)"
-                  test="contains(normalize-space(/text()), '.facslink { background-image: url(images/page-image.png); padding-right: 10px; }')"/>
+                  test="contains(normalize-space(/text()), '.facslink { /* background-image: url(images/page-image.png); */ background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAASklEQVR4AWP4//8/URhM8PDw/Ofm5oZjdD5cIYiDA4A0YSp8//49Msat0MHBAQWDAFQO4UYsgCwTCXsGKEdbExGBDGMjaIRCojAAvTE/VwiWi2sAAAAASUVORK5CYII=); padding-right: 10px; }')"/>
     </x:scenario>
 
     <!-- facsimile -->

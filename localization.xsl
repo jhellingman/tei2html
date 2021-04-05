@@ -63,7 +63,7 @@
         in the exact locale, then in the base-language, then the fall-back language, and, if this also fails, in the default locale.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:message" as="xs:string">
+    <xsl:function name="f:message" as="xs:string" cache="yes">
         <xsl:param name="name" as="xs:string"/>
 
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
@@ -149,7 +149,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Handle a localized message.</xd:short>
         <xd:detail>Apply the parameters to the selected message. Make sure that we drop namespaces inherited from the
@@ -163,6 +162,7 @@
         <xsl:copy-of select="$formattedMessage" copy-namespaces="no"/>
     </xsl:template>
 
+
     <xd:doc>
         <xd:short>Copy element in a localized message.</xd:short>
         <xd:detail>The element is supposed to be suitable for the output format, that is HTML or XHTML.</xd:detail>
@@ -174,6 +174,7 @@
             <xsl:apply-templates mode="formatMessage"/>
         </xsl:copy>
     </xsl:template>
+
 
     <xd:doc>
         <xd:short>Insert a parameter in a localized message.</xd:short>
