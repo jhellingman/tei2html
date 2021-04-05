@@ -3,6 +3,22 @@
 use strict;
 use warnings;
 use File::Basename;
+use Getopt::Long;
+
+my $makeHtml = 0;      # Generate HTML files.
+my $makeSvg = 0;       # Generate SVG files.
+my $makeMml = 0;       # Generate MML files.
+my $makePng = 0;       # Generate PNG files.
+
+GetOptions(
+    'h' => \$makeHtml,
+    's' => \$makeSvg,
+    'm' => \$makeMml,
+    'p' => \$makePng);
+
+if ($makeHtml == 0 && $makeMml == 0 && $makePng == 0) {
+    $makeSvg = 1;
+}
 
 sub listRecursively($);
 
@@ -53,12 +69,12 @@ sub handleFile($) {
         my $inlineMode = startsWith($base, "inline") ? "--inline" : "";
 
         # see https://github.com/mathjax/mathjax-node-cli
-        if (!-e $svgFile) { system ("tex2svg $inlineMode \"$formula\" > $svgFile"); }
-        if (!-e $htmlFile) { system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile"); }
-        if (!-e $mmlFile) { system ("tex2mml $inlineMode \"$formula\" > $mmlFile"); }
+        if ($makeSvg  && !-e $svgFile)  { system ("tex2svg     $inlineMode \"$formula\" > $svgFile"); }
+        if ($makeHtml && !-e $htmlFile) { system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile"); }
+        if ($makeMml  && !-e $mmlFile)  { system ("tex2mml     $inlineMode \"$formula\" > $mmlFile"); }
 
         # see https://github.com/shakiba/svgexport
-        if (!-e $pngFile) { system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\""); }
+        if ($makePng  && !-e $pngFile)  { system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\""); }
     }
 }
 
