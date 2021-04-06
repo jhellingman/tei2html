@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               stylesheet="test-tei2epub.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <x:param name="sample1" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <teiHeader>
+                <fileDesc>
+                    <titleStmt>
+                        <title id="title">The Title</title>
+                        <author id="author">Author Name</author>
+                        <respStmt id="translation"><resp>Translation</resp> <name>Translator Name</name></respStmt>
+                        <respStmt id="contributor"><resp>Contributor</resp> <name>Contributor Name</name></respStmt>
+                        <respStmt id="transcription"><resp>Transcription</resp> <name>Transcriber Name</name></respStmt>
+                    </titleStmt>
+                    <publicationStmt>
+                        <publisher>Publisher</publisher>
+                        <pubPlace>Publication Place</pubPlace>
+                        <idno type="PGnum">12345</idno>
+                        <idno type="ISBN">978-3-16-148410-0</idno>
+                        <date>2021-04-06</date>
+                        <availability>Availability</availability>
+                    </publicationStmt>
+                </fileDesc>
+            </teiHeader>
+            <text>
+                <front id="frontmatter">
+                    <div1 id="preface" type="Preface">
+                        <head>Preface</head>
+                        <p>The preface ...</p>
+                    </div1>
+                </front>
+                <body>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                    </div1>
+                    <div1 id="ch2" n="II">
+                        <head>Chapter II.</head>
+                        <p>The second chapter ...</p>
+                    </div1>
+                    <div1 id="ch3" n="III">
+                        <head>Chapter III.</head>
+                        <p>The third chapter ...</p>
+                    </div1>
+                </body>
+                <back id="backmatter">
+                    <div1 id="index" type="Index">
+                        <head>Index</head>
+                        <p>The index ...</p>
+                    </div1>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+
+    <x:scenario label="When generating the OPF">
+        <x:context select="$sample1/TEI.2"/>
+        <x:call template="metadata"/>
+        <x:expect label="will result in a metadata element">
+            <metadata xmlns="http://www.idpf.org/2007/opf"
+                      xmlns:dc="http://purl.org/dc/elements/1.1/"
+                      xmlns:dcterms="http://purl.org/dc/terms/"
+                      xmlns:opf="http://www.idpf.org/2007/opf"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <dc:identifier id="isbn">978-3-16-148410-0</dc:identifier>
+               <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/12345</dc:identifier>
+               <meta refines="#pgnum"
+                     property="identifier-type">uri</meta>
+               <dc:title>The Title</dc:title>
+               <dc:creator id="authormetadata">Author Name</dc:creator>
+               <meta property="role"
+                     refines="#authormetadata"
+                     scheme="marc:relators">aut</meta>
+               <dc:contributor id="translationmetadata">Translator Name</dc:contributor>
+               <meta property="role"
+                     refines="#translationmetadata"
+                     scheme="marc:relators">trl</meta>
+               <dc:contributor id="contributormetadata">Contributor Name</dc:contributor>
+               <meta property="role"
+                     refines="#contributormetadata"
+                     scheme="marc:relators">clb</meta>
+               <dc:contributor id="transcriptionmetadata">Transcriber Name</dc:contributor>
+               <meta property="role"
+                     refines="#transcriptionmetadata"
+                     scheme="marc:relators">trc</meta>
+               <dc:publisher>Publisher, Publication Place</dc:publisher>
+               <dc:rights>Availability</dc:rights>
+               <dc:language>en</dc:language>
+               <dc:date>2021-04-06</dc:date>
+            </metadata>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When generating the OPF">
+        <x:context select="$sample1/TEI.2"/>
+        <x:call template="manifest"/>
+        <x:expect label="will result in a manifest element">
+            <manifest xmlns="http://www.idpf.org/2007/opf"
+                      xmlns:dc="http://purl.org/dc/elements/1.1/"
+                      xmlns:dcterms="http://purl.org/dc/terms/"
+                      xmlns:opf="http://www.idpf.org/2007/opf"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <item id="ncx"
+                     href="book.ncx"
+                     media-type="application/x-dtbncx+xml" />
+               <item id="epub3toc"
+                     properties="nav"
+                     href="book-nav.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="css"
+                     href="book.css"
+                     media-type="text/css" />
+               <item id="preface"
+                     href="book-preface.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="ch1"
+                     href="book-ch1.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="ch2"
+                     href="book-ch2.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="ch3"
+                     href="book-ch3.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="index"
+                     href="book-index.xhtml"
+                     media-type="application/xhtml+xml" />
+               <item id="backmatter-2"
+                     href="book-backmatter-2.xhtml"
+                     media-type="application/xhtml+xml" />
+            </manifest>
+        </x:expect>
+    </x:scenario>
+
+
+</x:description>

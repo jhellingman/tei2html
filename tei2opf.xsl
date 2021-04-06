@@ -48,22 +48,27 @@
         <xsl:result-document format="opf" href="{$path}/{$basename}.opf">
             <xsl:copy-of select="f:log-info('Generated OPF file: {1}/{2}.opf.', ($path, $basename))"/>
 
-            <package>
-                <xsl:attribute name="version">
-                    <xsl:value-of select="f:epub-main-version()"/>
-                </xsl:attribute>
-                <xsl:attribute name="unique-identifier">epub-id</xsl:attribute>
-
-                <xsl:call-template name="metadata"/>
-                <xsl:call-template name="manifest"/>
-                <xsl:call-template name="spine"/>
-                <xsl:if test="f:is-epub30()">
-                    <xsl:call-template name="guide"/>
-                </xsl:if>
-            </package>
+            <xsl:call-template name="package"/>
         </xsl:result-document>
     </xsl:template>
 
+
+    <xsl:template name="package">
+        <xsl:context-item as="element()" use="required"/>
+        <package>
+            <xsl:attribute name="version">
+                <xsl:value-of select="f:epub-main-version()"/>
+            </xsl:attribute>
+            <xsl:attribute name="unique-identifier">epub-id</xsl:attribute>
+
+            <xsl:call-template name="metadata"/>
+            <xsl:call-template name="manifest"/>
+            <xsl:call-template name="spine"/>
+            <xsl:if test="f:is-epub30()">
+                <xsl:call-template name="guide"/>
+            </xsl:if>
+        </package>
+    </xsl:template>
 
     <!--== metadata ========================================================-->
 
@@ -75,6 +80,7 @@
     </xd:doc>
 
     <xsl:template name="metadata">
+        <xsl:context-item as="element()" use="required"/>
         <metadata>
             <!-- ePub document ids -->
             <xsl:choose>
@@ -338,6 +344,7 @@
     </xd:doc>
 
     <xsl:template name="manifest">
+        <xsl:context-item as="element()" use="required"/>
         <manifest>
             <item id="ncx"
                  href="{$basename}.ncx"
@@ -733,6 +740,7 @@
     <!--== spine ===========================================================-->
 
     <xsl:template name="spine">
+        <xsl:context-item as="element()" use="required"/>
         <spine toc="ncx">
 
             <!-- make sure the cover comes first in the spine -->
@@ -788,6 +796,7 @@
 
 
     <xsl:template name="guide">
+        <xsl:context-item as="element()" use="required"/>
 
         <!-- Include references to specific elements -->
         <guide>
