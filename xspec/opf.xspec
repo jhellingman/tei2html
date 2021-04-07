@@ -23,6 +23,7 @@
                     <publicationStmt>
                         <publisher>Publisher</publisher>
                         <pubPlace>Publication Place</pubPlace>
+                        <idno type="epub-id">urn:uuid:a5e4f789-657a-4fd7-b1f5-4c34122b695c</idno>
                         <idno type="PGnum">12345</idno>
                         <idno type="ISBN">978-3-16-148410-0</idno>
                         <date>2021-04-06</date>
@@ -63,6 +64,8 @@
     </x:param>
 
 
+    <!-- High level tests -->
+
     <x:scenario label="When generating the OPF">
         <x:context select="$sample1/TEI.2"/>
         <x:call template="metadata"/>
@@ -72,6 +75,9 @@
                       xmlns:dcterms="http://purl.org/dc/terms/"
                       xmlns:opf="http://www.idpf.org/2007/opf"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <dc:identifier id="epub-id">urn:uuid:a5e4f789-657a-4fd7-b1f5-4c34122b695c</dc:identifier>
+               <meta refines="#epub-id" property="identifier-type">uuid</meta>
+               <meta property="dcterms:modified">...</meta>
                <dc:identifier id="isbn">978-3-16-148410-0</dc:identifier>
                <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/12345</dc:identifier>
                <meta refines="#pgnum"
@@ -143,5 +149,138 @@
         </x:expect>
     </x:scenario>
 
+
+    <x:scenario label="When generating the OPF">
+        <x:context select="$sample1/TEI.2"/>
+        <x:call template="spine"/>
+        <x:expect label="will result in a spine element">
+            <spine xmlns="http://www.idpf.org/2007/opf"
+                   xmlns:dc="http://purl.org/dc/elements/1.1/"
+                   xmlns:dcterms="http://purl.org/dc/terms/"
+                   xmlns:opf="http://www.idpf.org/2007/opf"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   toc="ncx">
+               <itemref linear="yes"
+                        idref="preface" />
+               <itemref linear="yes"
+                        idref="ch1" />
+               <itemref linear="yes"
+                        idref="ch2" />
+               <itemref linear="yes"
+                        idref="ch3" />
+               <itemref linear="yes"
+                        idref="index" />
+               <itemref linear="yes"
+                        idref="backmatter-2" />
+            </spine>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When generating the OPF">
+        <x:context select="$sample1/TEI.2"/>
+        <x:call template="guide"/>
+        <x:expect label="will result in a spine element">
+            <guide xmlns="http://www.idpf.org/2007/opf"
+                   xmlns:dc="http://purl.org/dc/elements/1.1/"
+                   xmlns:dcterms="http://purl.org/dc/terms/"
+                   xmlns:opf="http://www.idpf.org/2007/opf"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+               <reference type="toc"
+                          title="Table of Contents"
+                          href="book-backmatter-2.xhtml#toc" />
+               <reference type="index"
+                          title="Index"
+                          href="book-index.xhtml#index" />
+               <reference type="preface"
+                          title="Preface"
+                          href="book-preface.xhtml#preface" />
+               <reference type="text"
+                          title="Text"
+                          href="book-ch1.xhtml#ch1" />
+            </guide>
+        </x:expect>
+    </x:scenario>
+
+    <!-- f:time-to-seconds -->
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'00:00:00'"/>
+        </x:call>
+        <x:expect label="will return 0" select="0"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'00:00:01'"/>
+        </x:call>
+        <x:expect label="will return 1" select="1"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'00:01:01'"/>
+        </x:call>
+        <x:expect label="will return 61" select="61"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'01:01:01'"/>
+        </x:call>
+        <x:expect label="will return 3661" select="3661"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'23:59:59'"/>
+        </x:call>
+        <x:expect label="will return 86399" select="86399"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:time-to-seconds">
+            <x:param select="'24:00:00'"/>
+        </x:call>
+        <x:expect label="will return 86400" select="86400"/>
+    </x:scenario>
+
+    <!-- f:seconds-to-time -->
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:seconds-to-time">
+            <x:param select="0"/>
+        </x:call>
+        <x:expect label="will return 0:00:00" select="'0:00:00'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:seconds-to-time">
+            <x:param select="61"/>
+        </x:call>
+        <x:expect label="will return 0:01:01" select="'0:01:01'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:seconds-to-time">
+            <x:param select="3661"/>
+        </x:call>
+        <x:expect label="will return 1:01:01" select="'1:01:01'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:seconds-to-time">
+            <x:param select="86399"/>
+        </x:call>
+        <x:expect label="will return 23:59:59" select="'23:59:59'"/>
+    </x:scenario>
+
+    <x:scenario label="When converting a time to seconds">
+        <x:call function="f:seconds-to-time">
+            <x:param select="86400"/>
+        </x:call>
+        <x:expect label="will return 24:00:00" select="'24:00:00'"/>
+    </x:scenario>
 
 </x:description>
