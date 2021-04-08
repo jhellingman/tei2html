@@ -202,6 +202,82 @@
         </x:expect>
     </x:scenario>
 
+
+    <!-- manifest -->
+
+    <x:scenario label="When handling a figure element">
+        <x:context mode="manifest">
+            <figure id="fig_01"></figure>
+        </x:context>
+        <x:expect label="will result in a manifest entry">
+            <item xmlns="http://www.idpf.org/2007/opf"
+                  xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:opf="http://www.idpf.org/2007/opf"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="fig_01"
+                  href="images/fig_01.jpg"
+                  media-type="image/jpeg"/>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When handling a figure element with explicit image name">
+        <x:context mode="manifest">
+            <figure id="fig_01" rend="image(images/test.png)"></figure>
+        </x:context>
+        <x:expect label="will result in a manifest entry">
+            <item xmlns="http://www.idpf.org/2007/opf"
+                  xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:opf="http://www.idpf.org/2007/opf"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="fig_01"
+                  href="images/test.png"
+                  media-type="image/png"/>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When handling a figure element with a link to an image">
+        <x:context mode="manifest-links">
+            <figure id="fig_01" rend="link(images/test.png)"></figure>
+        </x:context>
+        <x:expect label="will result in a manifest entry for the wrapper and for the linked image itself">
+            <item xmlns="http://www.idpf.org/2007/opf"
+                  xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:opf="http://www.idpf.org/2007/opf"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="fig_01link"
+                  href="images/test.png"
+                  media-type="image/png" />
+            <item xmlns="http://www.idpf.org/2007/opf"
+                  xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:opf="http://www.idpf.org/2007/opf"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="fig_01wrapper"
+                  href="book-fig_01.xhtml"
+                  media-type="application/xhtml+xml"/>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When handling a head element with explicit image name">
+        <x:context mode="manifest">
+            <head id="head" rend="image(images/heading.png)">Heading</head>
+        </x:context>
+        <x:expect label="will result in a manifest entry">
+            <item xmlns="http://www.idpf.org/2007/opf"
+                  xmlns:dc="http://purl.org/dc/elements/1.1/"
+                  xmlns:dcterms="http://purl.org/dc/terms/"
+                  xmlns:opf="http://www.idpf.org/2007/opf"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="head"
+                  href="images/heading.png"
+                  media-type="image/png"/>
+        </x:expect>
+    </x:scenario>
+
+
     <!-- f:time-to-seconds -->
 
     <x:scenario label="When converting a time to seconds">
