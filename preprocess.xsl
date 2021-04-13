@@ -47,4 +47,26 @@
     </xsl:template>
 
 
+    <!-- Two consecutive "phantom"-elements can be merged -->
+
+    <xsl:template match="ab[@type='phantom']" mode="#all">
+        <xsl:variable name="following" select="following-sibling::node()[1]"/>
+        <xsl:variable name="preceding" select="preceding-sibling::node()[1]"/>
+
+        <xsl:choose>
+            <xsl:when test="$following/self::ab[@type='phantom']">
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()" mode="#current"/>
+                    <xsl:apply-templates select="$following/node()" mode="#current"/>
+                </xsl:copy>
+            </xsl:when>
+            <xsl:when test="$preceding/self::ab[@type='phantom']"/>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="@*|node()" mode="#current"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
 </xsl:stylesheet>

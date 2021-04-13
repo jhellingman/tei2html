@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="../preprocess.xsl"
+               version="3.0">
+
+    <!-- ab -->
+
+    <x:scenario label="When preprocessing an ab element">
+        <x:context>
+            <ab type="phantom">Test!</ab>
+        </x:context>
+        <x:expect label="will result in a single ab element">
+            <ab type="phantom">Test!</ab>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When preprocessing two ab elements directly following each other">
+        <x:context xml:space="preserve"><ab type="phantom">Test</ab><ab type="phantom">test!</ab></x:context>
+        <x:expect label="will result in a single ab element with the content combined">
+            <ab type="phantom">Testtest!</ab>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When preprocessing two ab elements following each other with a space between them">
+        <x:context xml:space="preserve"><ab type="phantom">Test</ab> <ab type="phantom">test!</ab></x:context>
+        <x:expect label="will result in a two ab elements with a space between them">
+            <ab type="phantom">Test</ab>
+            <x:text> </x:text>
+            <ab type="phantom">test!</ab>
+        </x:expect>
+    </x:scenario>
+
+</x:description>
