@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <x:param name="language" as="xs:string" select="'en-UK'"/>
+
+    <!-- f:is-message-available -->
+
+   <x:scenario label="When determining whether a non-existing message is available">
+      <x:call function="f:is-message-available">
+         <x:param select="'msgDoesNotExist'"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether an existing message is available">
+      <x:call function="f:is-message-available">
+         <x:param select="'msgBook'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+    <!-- f:message -->
+
+   <x:scenario label="When retrieving a non-existing message">
+      <x:call function="f:message">
+         <x:param select="'msgDoesNotExist'"/>
+      </x:call>
+      <x:expect label="will return the message id surrounded with hash-marks" select="'[### msgDoesNotExist ###]'"/>
+   </x:scenario>
+
+   <x:scenario label="When retrieving a message">
+      <x:call function="f:message">
+         <x:param select="'msgBook'"/>
+      </x:call>
+      <x:expect label="will return the localized message" select="'Book'"/>
+   </x:scenario>
+
+   <x:scenario label="When retrieving a message with a UK spelling">
+      <x:call function="f:message">
+         <x:param select="'msgColor'"/>
+      </x:call>
+      <x:expect label="will return the localized message in the UK spelling" select="'Colour'"/>
+   </x:scenario>
+
+    <!-- f:format-message -->
+
+   <x:scenario label="When formatting a message without parameters">
+      <x:call function="f:format-message">
+         <x:param select="'msgBook'"/>
+         <x:param select="map{}"/>
+      </x:call>
+      <x:expect label="will return the localized message" test="xs:string(.) = 'Book'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with additional parameters">
+      <x:call function="f:format-message">
+         <x:param select="'msgBook'"/>
+         <x:param select="map{'title':'not used'}"/>
+      </x:call>
+      <x:expect label="will return the localized message" test="xs:string(.) = 'Book'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with parameters">
+      <x:call function="f:format-message">
+         <x:param select="'fmtFullDate'"/>
+         <x:param select="map{'day':'Monday','date':'19','month':'April','year':'2021'}"/>
+      </x:call>
+      <x:expect label="will return the localized message" 
+        test="xs:string(.) = 'Monday, 19 April 2021'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with missing parameters">
+      <x:call function="f:format-message">
+         <x:param select="'fmtFullDate'"/>
+         <x:param select="map{'day':'Monday','date':'19','year':'2021'}"/>
+      </x:call>
+      <x:expect label="will return the localized message with the missing parameter name surrounded with hash-marks" 
+        test="xs:string(.) = 'Monday, 19 [### month ###] 2021'"/>
+   </x:scenario>
+
+</x:description>

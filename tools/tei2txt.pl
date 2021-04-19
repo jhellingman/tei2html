@@ -1093,6 +1093,8 @@ sub entities2iso88591($) {
     $string =~ s/\&longs;/s/g;
     $string =~ s/\&prime;/'/g;
     $string =~ s/\&Prime;/''/g;
+    $string =~ s/\&tprime;/'''/g;
+    $string =~ s/\&qprime;/''''/g;
     $string =~ s/\&times;/×/g;
     $string =~ s/\&plusm;/±/g;
     $string =~ s/\&divide;/÷/g;
@@ -1243,6 +1245,46 @@ sub entities2iso88591($) {
     $string =~ s/\&AH;/A.H./g;       #  Anno Heriga
     $string =~ s/\&AM;/A.M./g;       #  Anno Mundi / Ante Meridian
     $string =~ s/\&PM;/P.M./g;       #  Post Meridian
+
+    # Superscript letters and Roman numerals
+    $string =~ s/\&supa;/a/g;        #  superscript a (years)
+    $string =~ s/\&supd;/d/g;        #  superscript d (days)
+    $string =~ s/\&suph;/h/g;        #  superscript h (hours)
+    $string =~ s/\&supm;/m/g;        #  superscript m (minutes)
+    $string =~ s/\&supc;/c/g;        #  superscript c (circles)
+    $string =~ s/\&supI;/I/g;        #  superscript I
+    $string =~ s/\&supII;/II/g;      #  superscript II
+    $string =~ s/\&supIII;/III/g;    #  superscript III
+    $string =~ s/\&supIV;/IV/g;      #  superscript IV
+    $string =~ s/\&supV;/V/g;        #  superscript V
+    $string =~ s/\&supVI;/VI/g;      #  superscript VI
+
+    # Phantom characters (used for easy alignment in tables) 
+    $string =~ s/\&ph\.deg;/ /g;     #  Phantom degree sign
+    $string =~ s/\&ph\.pr;/ /g;      #  Phantom prime
+    $string =~ s/\&ph\.Pr;/ /g;      #  Phantom double prime
+    $string =~ s/\&ph\.tpr;/ /g;     #  Phantom triple prime
+    $string =~ s/\&ph\.qpr;/ /g;     #  Phantom quadruple prime
+    $string =~ s/\&ph\.supa;/ /g;    #  Phantom superscript a (years)
+    $string =~ s/\&ph\.supd;/ /g;    #  Phantom superscript d (days)
+    $string =~ s/\&ph\.suph;/ /g;    #  Phantom superscript h (hours)
+    $string =~ s/\&ph\.supm;/ /g;    #  Phantom superscript m (minutes)
+    $string =~ s/\&ph\.supc;/ /g;    #  Phantom superscript c (circles)
+    $string =~ s/\&ph\.supI;/ /g;    #  Phantom superscript I
+    $string =~ s/\&ph\.supII;/ /g;   #  Phantom superscript II
+    $string =~ s/\&ph\.supIII;/ /g;  #  Phantom superscript III
+    $string =~ s/\&ph\.supIV;/ /g;   #  Phantom superscript IV
+    $string =~ s/\&ph\.supV;/ /g;    #  Phantom superscript V
+    $string =~ s/\&ph\.supVI;/ /g;   #  Phantom superscript VI
+    $string =~ s/\&ph\.comma;/ /g;   #  Phantom comma
+    $string =~ s/\&ph\.period;/ /g;  #  Phantom period
+    $string =~ s/\&ph\.zero;/ /g;    #  Phantom zero
+
+    $string =~ s/\&ph\.czero;/  /g;  #  Phantom comma zero
+    $string =~ s/\&ph\.pzero;/  /g;  #  Phantom period zero
+
+    $string =~ s/\&ph\.czz;/   /g;   #  Phantom comma zero zero
+    $string =~ s/\&ph\.pzz;/   /g;   #  Phantom period zero zero
 
     # strip accents from remaining entities
     $string =~ s/\&([a-zA-Z])(breve|macr|acute|grave|uml|umlb|tilde|circ|cedil|dotb|dot|breveb|caron|comma|barb|circb|bowb|dota);/$1/g;
