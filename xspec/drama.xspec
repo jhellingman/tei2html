@@ -133,6 +133,99 @@ text-indent:2em;
         </x:expect>
     </x:scenario>
 
+
+    <!-- lg -->
+
+    <x:scenario label="When rendering an lg with two lines of verse">
+        <x:context>
+            <lg id="lg">
+                <l id="l1">First,</l>
+                <l id="l2">Second.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in a HTML div with two paragraphs">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
+               <p id="l1" class="line">First,</p>
+               <p id="l2" class="line">Second.</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering an lg with a head and two lines of verse">
+        <x:context>
+            <lg id="lg">
+                <head>The Title.</head>
+                <l id="l1">First,</l>
+                <l id="l2">Second.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in a HTML div with two paragraphs">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
+               <h4>The Title.</h4>
+               <p id="l1" class="line">First,</p>
+               <p id="l2" class="line">Second.</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering nested lg elements with two lines of verse">
+        <x:context>
+            <lg id="lg0">
+                <lg id="lg1">
+                    <l id="l1.1">First,</l>
+                    <l id="l1.2">Second.</l>
+                </lg>
+                <lg id="lg1">
+                    <l id="l2.1">Third,</l>
+                    <l id="l2.2">Fourth.</l>
+                </lg>
+            </lg>
+        </x:context>
+        <x:expect label="will result in nested HTML divs with two paragraphs each">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg0" class="lgouter">
+               <div id="lg1" class="lg">
+                  <p id="l1.1" class="line">First,</p>
+                  <p id="l1.2" class="line">Second.</p>
+               </div>
+               <div id="lg1" class="lg">
+                  <p id="l2.1" class="line">Third,</p>
+                  <p id="l2.2" class="line">Fourth.</p>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering an lg with a head and two lines of verse with the brace-after rendering">
+        <x:context>
+            <lg id="lg" rend="braceAfter">
+                <head>The Title.</head>
+                <l id="l1">First,</l>
+                <l id="l2">Second.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in a HTML table with each line in a row, a brace in the second column, and the head in the third">
+            <table xmlns="http://www.w3.org/1999/xhtml" class="lineGroupTable" id="lg">
+               <tr>
+                  <td>
+                     <p id="l1" class="line">First,</p>
+                  </td>
+                  <td rowSpan="2" class="lineGroupBrace">
+                     <img src="images/rbrace2.png" alt="}}" width="12" height="40"/>
+                  </td>
+                  <td rowSpan="2" class="lineGrouphead">The Title.</td>
+               </tr>
+               <tr>
+                  <td>
+                     <p id="l2" class="line">Second.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- sp -->
+
     <x:scenario label="When rendering a fragment of drama with a speaker">
         <x:context>
             <sp who="hamlet">
@@ -190,6 +283,8 @@ text-indent:2em;
         </x:expect>
     </x:scenario>
 
+    
+    <!-- castList -->
 
     <x:scenario label="When rendering a castlist">
         <x:context>

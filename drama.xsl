@@ -67,6 +67,60 @@
     </xsl:template>
 
 
+    <xsl:template match="lg[@rend='braceAfter']">
+        <table class="lineGroupTable">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="count" select="count(l)"/>
+            <tr>
+                <td>
+                    <xsl:apply-templates select="l[1]"/>
+                </td>
+                <td rowSpan="{$count}" class="lineGroupBrace">
+                    <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
+                </td>
+                <td rowSpan="{$count}" class="lineGrouphead">
+                    <xsl:apply-templates select="head/node()"/>
+                </td>
+            </tr>
+            <xsl:for-each select="l[position() > 1]">
+                <tr>
+                    <td>
+                        <xsl:apply-templates select="."/>
+                    </td>
+                </tr>
+            </xsl:for-each>
+        </table>
+    </xsl:template>
+
+    <xsl:template match="lg[@rend='braceAfter']" mode="css">
+        <xsl:next-match/>
+
+        <xsl:if test="not(preceding::lg[@rend='braceAfter'])">
+            table.lineGroupTable {
+                margin: 0 10%;
+                border-collapse: collapse;
+            }
+
+            table.lineGroupTable p.line {
+                margin: 0;
+                white-space: nowrap;
+            }
+            
+            td.lineGroupBrace {
+                vertical-align: middle;
+            }
+
+            td.lineGroupBrace img {
+                padding: 0 0.5em;
+            }
+
+            td.lineGrouphead {
+                vertical-align: middle;
+            }
+        </xsl:if>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Format a normal lg element.</xd:short>
         <xd:detail>Format an lg element. top-level lg elements get class=lgouter, nested lg elements get class=lg.

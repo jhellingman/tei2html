@@ -276,13 +276,13 @@
 
     <xsl:template match="*[@lang]" mode="check-langs">
         <xsl:if test="(ancestor::*[@lang])[1] = @lang">
-            <i:issue 
-                pos="{@pos}" 
-                code="L1" 
-                category="Compliance" 
-                target="{f:generate-id(.)}" 
-                level="Warning" 
-                element="{name(.)}" 
+            <i:issue
+                pos="{@pos}"
+                code="L1"
+                category="Compliance"
+                target="{f:generate-id(.)}"
+                level="Warning"
+                element="{name(.)}"
                 page="{f:get-page(.)}">Unnecessary @lang attribute.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="check-langs"/>
@@ -683,7 +683,7 @@
     </xsl:template>
 
 
-    <xsl:key name="id" match="*[@id]" use="@id"/> 
+    <xsl:key name="id" match="*[@id]" use="@id"/>
 
 
     <xsl:template match="*[@id]" mode="doubleIds">
@@ -771,10 +771,49 @@
 
     <!-- Types of divisions -->
 
-    <xsl:variable name="expectedFrontDiv1Types" select="'Cover', 'Copyright', 'Epigraph', 'Foreword', 'Introduction', 'Frontispiece', 'Dedication', 'Preface', 'Imprint', 'Introduction', 'Note', 'Motto', 'Contents', 'Bibliography', 'FrenchTitle', 'TitlePage', 'Advertisement', 'Advertisements', 'Glossary', 'Errata'" as="xs:string*"/>
-    <xsl:variable name="expectedBodyDiv0Types" select="'Part', 'Book', 'Issue'" as="xs:string*"/>
-    <xsl:variable name="expectedBodyDiv1Types" select="'Chapter', 'Poem', 'Story', 'Article', 'Letter'" as="xs:string*"/>
-    <xsl:variable name="expectedBackDiv1Types" select="'Cover', 'Spine', 'Notes', 'Index', 'Appendix', 'Bibliography', 'Conclusion', 'Epilogue', 'Contents', 'Imprint', 'Errata', 'Glossary', 'Vocabulary', 'Advertisement', 'Advertisements'" as="xs:string*"/>
+    <xsl:variable name="expectedFrontDiv1Types" as="xs:string*" select="
+        'Advertisement',
+        'Advertisements',
+        'Bibliography',
+        'CastList',
+        'Contents',
+        'Copyright',
+        'Cover',
+        'Dedication',
+        'Epigraph',
+        'Errata',
+        'Foreword',
+        'Frontispiece',
+        'Glossary',
+        'Imprint',
+        'Introduction',
+        'Motto',
+        'Note',
+        'Preface',
+        'FrenchTitle',
+        'TitlePage'
+        "/>
+    <xsl:variable name="expectedBodyDiv0Types" as="xs:string*" select="'Book', 'Issue', 'Part'"/>
+
+    <xsl:variable name="expectedBodyDiv1Types" as="xs:string*" select="'Act', 'Article', 'Chapter', 'Poem', 'Story'"/>
+
+    <xsl:variable name="expectedBackDiv1Types" as="xs:string*" select="
+        'Advertisement',
+        'Advertisements',
+        'Appendix',
+        'Bibliography',
+        'Conclusion',
+        'Contents',
+        'Cover',
+        'Epilogue',
+        'Errata',
+        'Glossary',
+        'Imprint',
+        'Index',
+        'Notes',
+        'Spine',
+        'Vocabulary'
+        "/>
 
     <xd:doc>
         <xd:short>Check the types of <code>div1</code> divisions in frontmatter.</xd:short>
@@ -1548,8 +1587,8 @@
 
     <xsl:function name="f:replaced-to-normal-symbols" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:sequence select="translate($string, 
-            '&#xFF08;&#xFF09;&#xFF3B;&#xFF3D;&#xFF5B;&#xFF5B;&#xFF03;&blackCircle;', 
+        <xsl:sequence select="translate($string,
+            '&#xFF08;&#xFF09;&#xFF3B;&#xFF3D;&#xFF5B;&#xFF5B;&#xFF03;&blackCircle;',
             '()[]{}#.')"/>
     </xsl:function>
 
