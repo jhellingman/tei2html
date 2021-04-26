@@ -58,6 +58,21 @@
 
 
     <xd:doc>
+        <xd:short>HTML counterpart of ePub function to determine the filename.</xd:short>
+        <xd:detail>
+            <p>The HTML counterpart of ePub function to determine the filename (in <code>splitter.xsl</code>)
+            always returns an empty string, because generated HTML output is monolithic.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:determine-filename" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:sequence select="''"/>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Generate a href-attribute for footnotes.</xd:short>
         <xd:detail>
             <p>Footnote href attributes are the same as normal hrefs in

@@ -1402,6 +1402,12 @@ and impress your friends. Okay, lets do one more for the heck of it: <formula id
 <item>      Slot   <ab type="tocPageNum">77</ab></item>
 </list>
 
+<p>The below table of contents is automatically generated, with a maximum depth of 3.</p>
+
+
+<divGen type="toc" rend="tocMaxLevel(3)"/>
+
+
 
 </div1>
 <div1 id="index" type="Index" lang="nl">

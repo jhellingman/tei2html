@@ -2,9 +2,7 @@
 
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
-
 ]>
-
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
@@ -22,7 +20,7 @@
         the <code>css</code> mode are integrated in the other stylesheets, to keep them together with
         related HTML generating templates.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011-2020, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2021, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -92,13 +90,9 @@
     <xsl:template name="output-embedded-css">
         <xsl:param name="css" as="xs:string"/>
 
-        <xsl:text disable-output-escaping="yes">
-            &lt;style type="text/css"&gt; /* &lt;![CDATA[ */
-        </xsl:text>
+        <xsl:text disable-output-escaping="yes">&lf;&lt;style type="text/css"&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
         <xsl:value-of select="$css" disable-output-escaping="yes"/>
-        <xsl:text disable-output-escaping="yes">
-            /* ]]&gt; */ &lt;/style&gt;
-        </xsl:text>
+        <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ &lt;/style&gt;&lf;</xsl:text>
     </xsl:template>
 
 
@@ -235,22 +229,20 @@
         </xsl:if>
 
         <xsl:if test="//tagsDecl/rendition">
-            <xsl:text>
-/* CSS rules generated from rendition elements in TEI file */
-</xsl:text>
+            <xsl:text>&lf;/* CSS rules generated from rendition elements in TEI file */&lf;</xsl:text>
             <xsl:apply-templates select="//tagsDecl/rendition" mode="rendition"/>
         </xsl:if>
 
         <!-- Generate CSS for rend attributes, overrides CSS from stylesheets, so should be last -->
-        <xsl:text>
-/* CSS rules generated from @rend attributes in TEI file */
-</xsl:text>
-        <xsl:apply-templates select="/" mode="css"/>
+        <xsl:if test="//*[@rend]">
+            <xsl:text>&lf;/* CSS rules generated from @rend attributes in TEI file */&lf;</xsl:text>
+            <xsl:apply-templates select="/" mode="css"/>
+        </xsl:if>
 
-        <xsl:text>
-/* CSS rules copied from @style attributes in TEI file */
-</xsl:text>
-        <xsl:apply-templates select="/" mode="style"/>
+        <xsl:if test="//*[@style]">
+            <xsl:text>&lf;/* CSS rules copied from @style attributes in TEI file */&lf;</xsl:text>
+            <xsl:apply-templates select="/" mode="style"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -827,12 +819,9 @@
     </xd:doc>
 
     <xsl:template match="text[not(ancestor::q)]" mode="css-handheld">
-        <xsl:text>@media handheld {
-</xsl:text>
+        <xsl:text>@media handheld {&lf;</xsl:text>
         <xsl:apply-templates select="*" mode="css-handheld"/>
-        <xsl:text>
-}
-</xsl:text>
+        <xsl:text>}&lf;</xsl:text>
     </xsl:template>
 
 

@@ -199,28 +199,22 @@ text-indent:2em;
             <p id="test_p_initial_css" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
-
 .test_p_initial_css {
-    background: url(images/initial-A.png) no-repeat top left;
-    
-        padding-top: 45px;
-    
+background:url(images/initial-A.png) no-repeat top left;
+padding-top:45px;
 }
 
 .test_p_initial_cssinit {
-    float: left;
-    width: 90px;
-    height: 95px;
-    background: url(images/initial-A.png) no-repeat;
-    
-        background-position: 0px -45px;
-    
-    text-align: right;
-    color: white;
-    font-size: 1px;
+float:left;
+width:90px;
+height:95px;
+background:url(images/initial-A.png) no-repeat;
+background-position:0px -45px;
+text-align:right;
+color:white;
+font-size:1px;
 }
-
-        </x:expect>
+</x:expect>
     </x:scenario>
 
 

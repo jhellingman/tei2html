@@ -340,7 +340,7 @@
 
 
     <xd:doc>
-        <xd:short>Determine the level of the division (by counting its parents or looking at its name).</xd:short>
+        <xd:short>Determine the level of the division (either by counting its parents or looking at its name).</xd:short>
     </xd:doc>
 
     <xsl:function name="f:div-level" as="xs:integer">
@@ -353,7 +353,7 @@
                         <xsl:value-of select="count($div/ancestor::div[ancestor::q])"/>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="count($div/ancestor::div)"/>
+                        <xsl:value-of select="count($div/ancestor::div) + 1"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>

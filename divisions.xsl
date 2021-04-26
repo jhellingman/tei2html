@@ -237,7 +237,7 @@
     <xsl:template match="div">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
-            <xsl:variable name="level" select="f:div-level(.) + 1"/>
+            <xsl:variable name="level" select="f:div-level(.)"/>
             <div>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -257,13 +257,13 @@
 
 
     <xsl:template match="div/head">
-        <xsl:variable name="level" select="f:div-level(..) + 1" as="xs:integer"/>
-        <xsl:variable name="level" select="if ($level &gt; 6) then 6 else $level"/>
+        <xsl:variable name="level" select="f:div-level(..)" as="xs:integer"/>
+        <xsl:variable name="level" select="if ($level &gt; 5) then 5 else $level"/>
 
         <xsl:call-template name="headPicture"/>
         <xsl:call-template name="setLabelHeader"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
-            <xsl:element name="h{$level}">
+            <xsl:element name="h{$level + 1}">
                 <xsl:call-template name="headText"/>
             </xsl:element>
         </xsl:if>
@@ -481,7 +481,7 @@
     <xsl:template name="generate-div-class">
         <xsl:param name="div" select="name()"/>
 
-        <xsl:variable name="div" select="if ($div = 'div') then 'div' || f:div-level(.) + 1 else $div"/>
+        <xsl:variable name="div" select="if ($div = 'div') then 'div' || f:div-level(.) else $div"/>
 
         <xsl:variable name="class">
             <xsl:value-of select="$div"/><xsl:text> </xsl:text>
@@ -505,7 +505,16 @@
                     <a>
                         <!-- Link to entry for current division if available to make navigation back easier -->
                         <xsl:variable name="id" select="@id"/>
-                        <xsl:attribute name="href" select="f:generate-href(if (//*[@id='toc']//ref[@target=$id]) then (//*[@id='toc']//ref[@target=$id])[1] else (//*[@id='toc'])[1])"/>
+                        <xsl:variable name="tocEntry" select="(//*[@id='toc']//ref[@target=$id])[1]"/>
+                        <xsl:variable name="divGen" select="(//divGen[@id='toc'][@type='toc'])[1]"/>
+                        <xsl:variable name="maxLevel" select="f:generated-toc-max-level($divGen)"/>
+
+                        <xsl:attribute name="href" select="
+                            if ($tocEntry) 
+                            then f:generate-href($tocEntry)
+                            else if ($divGen and f:included-in-toc(., $maxLevel))
+                                    then f:determine-filename($divGen) || '#' || $id || '.toc'
+                                    else f:generate-href($divGen)"/>
                         <xsl:value-of select="f:message('msgToc')"/>
                      </a>
                      <xsl:text>]</xsl:text>

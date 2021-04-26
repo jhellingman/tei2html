@@ -1349,28 +1349,22 @@ text-align:right;
 text-align:center;
 }
 
-
 .xd34e461 {
-    background: url(images/initial-A.png) no-repeat top left;
-    
-        padding-top: 45px;
-    
+background:url(images/initial-A.png) no-repeat top left;
+padding-top:45px;
 }
 
 .xd34e461init {
-    float: left;
-    width: 90px;
-    height: 95px;
-    background: url(images/initial-A.png) no-repeat;
-    
-        background-position: 0px -45px;
-    
-    text-align: right;
-    color: white;
-    font-size: 1px;
+float:left;
+width:90px;
+height:95px;
+background:url(images/initial-A.png) no-repeat;
+background-position:0px -45px;
+text-align:right;
+color:white;
+font-size:1px;
 }
 
-        
 .xd34e469 {
 text-align:justify;
 }
@@ -1548,23 +1542,20 @@ display:none;
 }
 @media handheld {
 
-
 .xd34e461 {
-    background-image: none;
-    padding-top: 0;
+background-image:none;
+padding-top:0;
 }
 
 .xd34e461init {
-    float: none;
-    width: auto;
-    height: auto;
-    background-image: none;
-    text-align: right;
-    color: inherit;
-    font-size: inherit;
+float:none;
+width:auto;
+height:auto;
+background-image:none;
+text-align:right;
+color:inherit;
+font-size:inherit;
 }
-
-        
 }
 
 /* CSS rules copied from @style attributes in TEI file */

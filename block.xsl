@@ -760,29 +760,29 @@
 
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
-    background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat top left;
-    <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
-        padding-top: <xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
-    </xsl:if>
+            <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text> {&lf;</xsl:text>
+            <xsl:text>background:url(</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-image')"/><xsl:text>) no-repeat top left;&lf;</xsl:text>
+            <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
+                <xsl:text>padding-top:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
+            </xsl:if>
 
-    <xsl:if test="normalize-space($css-properties) != ''">
-        <xsl:value-of select="normalize-space($css-properties)"/>
-    </xsl:if>
-}
+            <xsl:if test="normalize-space($css-properties) != ''">
+                <xsl:value-of select="normalize-space($css-properties)"/>
+            </xsl:if>
+            <xsl:text>}&lf;</xsl:text>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/>init {
-    float: left;
-    width: <xsl:value-of select="f:rend-value(@rend, 'initial-width')"/>;
-    height: <xsl:value-of select="f:rend-value(@rend, 'initial-height')"/>;
-    background: url(<xsl:value-of select="f:rend-value(@rend, 'initial-image')"/>) no-repeat;
-    <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
-        background-position: 0px -<xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/>;
-    </xsl:if>
-    text-align: right;
-    color: white;
-    font-size: 1px;
-}
+            <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text>init {&lf;</xsl:text>
+            <xsl:text>float:left;&lf;</xsl:text>
+            <xsl:text>width:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>
+            <xsl:text>height:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-height')"/><xsl:text>;&lf;</xsl:text>
+            <xsl:text>background:url(</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-image')"/><xsl:text>) no-repeat;&lf;</xsl:text>
+            <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
+                <xsl:text>background-position:0px -</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
+            </xsl:if>
+            <xsl:text>text-align:right;&lf;</xsl:text>
+            <xsl:text>color:white;&lf;</xsl:text>
+            <xsl:text>font-size:1px;&lf;</xsl:text>
+            <xsl:text>}&lf;</xsl:text>
 
         </xsl:if>
         <xsl:apply-templates mode="css"/>
@@ -801,20 +801,20 @@
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css-handheld">
         <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
-    background-image: none;
-    padding-top: 0;
-}
+            <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text> {&lf;</xsl:text>
+            <xsl:text>background-image:none;&lf;</xsl:text>
+            <xsl:text>padding-top:0;&lf;</xsl:text>
+            <xsl:text>}&lf;</xsl:text>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/>init {
-    float: none;
-    width: auto;
-    height: auto;
-    background-image: none;
-    text-align: right;
-    color: inherit;
-    font-size: inherit;
-}
+            <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text>init {&lf;</xsl:text>
+            <xsl:text>float:none;&lf;</xsl:text>
+            <xsl:text>width:auto;&lf;</xsl:text>
+            <xsl:text>height:auto;&lf;</xsl:text>
+            <xsl:text>background-image:none;&lf;</xsl:text>
+            <xsl:text>text-align:right;&lf;</xsl:text>
+            <xsl:text>color:inherit;&lf;</xsl:text>
+            <xsl:text>font-size:inherit;&lf;</xsl:text>
+            <xsl:text>}&lf;</xsl:text>
 
         </xsl:if>
         <xsl:apply-templates mode="css-handheld"/>
@@ -906,31 +906,31 @@
 
         <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/> {
-    text-indent: 0;
+        <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text> {&lf;</xsl:text>
+        <xsl:text>text-indent:0;&lf;</xsl:text>
 
-    <xsl:if test="normalize-space($css-properties) != ''">
-        <xsl:value-of select="normalize-space($css-properties)"/>
-    </xsl:if>
-}
+        <xsl:if test="normalize-space($css-properties) != ''">
+            <xsl:value-of select="normalize-space($css-properties)"/>
+        </xsl:if>
+        <xsl:text>}&lf;</xsl:text>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/>dc {
-    float: left;
-    <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
-        padding-top: <xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/>;
-    </xsl:if>
-    <xsl:if test="f:has-rend-value(@rend, 'dropcap-height')">
-        height: <xsl:value-of select="f:rend-value(@rend, 'dropcap-height')"/>;
-    </xsl:if>
-    font-size: <xsl:value-of select="f:rend-value(@rend, 'dropcap')"/>;
-    margin-left: 0;
-    margin-bottom: 5px;
-    margin-right: 3px;
-}
+        <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text>dc {&lf;</xsl:text>
+        <xsl:text>float:left;&lf;</xsl:text>
+        <xsl:if test="f:has-rend-value(@rend, 'dropcap-offset')">
+            <xsl:text>padding-top:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'dropcap-offset')"/><xsl:text>;&lf;</xsl:text>
+        </xsl:if>
+        <xsl:if test="f:has-rend-value(@rend, 'dropcap-height')">
+            <xsl:text>height:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'dropcap-height')"/><xsl:text>;&lf;</xsl:text>
+        </xsl:if>
+        <xsl:text>font-size:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'dropcap')"/><xsl:text>;&lf;</xsl:text>
+        <xsl:text>margin-left:0;&lf;</xsl:text>
+        <xsl:text>margin-bottom:5px;&lf;</xsl:text>
+        <xsl:text>margin-right:3px;&lf;</xsl:text>
+        <xsl:text>}&lf;</xsl:text>
 
-.<xsl:value-of select="f:generate-css-class-selector(.)"/>adc {
-    /* empty */
-}
+        <xsl:text>.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text>adc {&lf;</xsl:text>
+        <xsl:text>/* empty */&lf;</xsl:text>
+        <xsl:text>}&lf;</xsl:text>
 
     </xsl:template>
 
