@@ -801,7 +801,6 @@ sub extractEntities($) {
         print "<!DOCTYPE TEI.2 PUBLIC \"-//TEI//DTD TEI Lite 1.0//EN\" [\n\n";
         my @entityList = sort keys %entityHash;
         foreach my $entity (@entityList) {
-
             my $translation = utf2numericEntities(translateEntity($entity));
             my $paddedEntity = sprintf "%s%-*s", $entity, 12 - length $entity, ' ';
             my $paddedTranslation = sprintf "\"%s\"%-*s", $translation, 20 - length $translation, ' ';

@@ -331,7 +331,7 @@
                 <xsl:non-matching-substring>
                     <xsl:variable name="fragment" select="normalize-space(.)"/>
                     <xsl:if test="$fragment != '' and not(matches($fragment, $class-name-pattern))">
-                        <xsl:message expand-text="yes">WARNING: part of rendition ladder not understood: '{.}'</xsl:message>
+                        <xsl:message expand-text="yes">WARNING: part of rendition ladder not understood: '{.}' (name='{$name}', rend='{$rend}')</xsl:message>
                     </xsl:if>
                 </xsl:non-matching-substring>
             </xsl:analyze-string>

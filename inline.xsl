@@ -976,7 +976,7 @@
         <xsl:for-each select="tokenize($node, '\s+')">
             <xsl:choose>
                 <xsl:when test=". = ''">
-                    <xsl:copy-of select="f:log-warning('Ignoring empty node.', ())"/>
+                    <xsl:copy-of select="f:log-warning('Ignoring empty node while generating ditto marks.', ())"/>
                 </xsl:when>
                 <xsl:when test="matches(., '^[.,:;!]$')">
                     <xsl:copy-of select="f:log-warning('Stand-alone punctuation mark ({1}) in ditto (will not use ditto mark).', (.))"/>

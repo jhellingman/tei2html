@@ -1250,7 +1250,7 @@
 
         <!-- Greek script checks -->
         <xsl:variable name="final-sigma-mid-word-pattern" select="'&#x03C2;\p{L}'" as="xs:string"/>
-        <xsl:variable name="sigma-end-word-pattern" select="'&#x03C3;\P{L}'" as="xs:string"/>
+        <xsl:variable name="sigma-end-word-pattern" select="'\p{L}\p{M}*&#x03C3;\P{L}'" as="xs:string"/>
         <xsl:variable name="nu-gamma-pattern" select="'[&#x39D;&#x3BD;][&#x393;&#x3B3;]'" as="xs:string"/>
 
         <xsl:copy-of select="f:should-not-contain(., $segment, $final-sigma-mid-word-pattern,       'Warning', 'P19', 'Greek: final sigma &#x03C2; in middle of word')"/>
