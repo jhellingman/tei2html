@@ -8,19 +8,7 @@ The main 'glue' script. This will run the various commands to actually run the `
 
 Syntax: `perl.pl -S tei2html.pl [options] filename`
 
-| **Option** | **Action** |
-|:-----------|:-----------|
-| `-x` | Convert SGML file to XML |
-| `-5` | Convert to TEI P5 format, using tei2tei.xsl |
-| `-h` | Generate HTML |
-| `-e` | Generate ePub |
-| `-t` | Generate plain vanilla ASCII (_needs manual cleanup!_) |
-| `-p` | Generate PDF (_using Prince XML_) |
-| `-r` | Generate word-usage report |
-| `-c` filename | Include additional CSS file |
-| `-v` | Generate a report of common errors that appear in the TEI file |
-
-Default options `-xhtr`.
+For an overview of options, run `perl.pl -S tei2html.pl --help`
 
 ## `ucwords.pl` ##
 
@@ -32,15 +20,7 @@ Syntax: `perl -S ucwords.pl filename`
 
 Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where # is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)
 
-Syntax:
-
-`perl -S fixpb.pl filename start offset`
-
-_filename_: the file of which the page numbers need to be updated
-
-_start_: the first page number that needs to be updated.
-
-_offset_: the offset to be applied to pages after _start_; can be a positive or negative integer.
+For an overview of options, run `perl.pl -S fixpb.pl --help`
 
 ## `catpars.pl` ##
 
@@ -48,16 +28,12 @@ Perl script to unwrap paragraphs, such that they appear on one line. Handle with
 
 ## `quotes.pl` ##
 
-Perl script to replace ASCII double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.
+Perl script to replace ASCII single and double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.
 
 Issues:
 
-  * Open quotes before SGML tags and non-letters go wrong (they become the default: a close quote).
-  * Can only handle double quotes (single quotes are much harder to automate as they need to be disambiguated from apostrophes, but see `aposquote.pl` below.)
-
-## `aposquote.pl` ##
-
-Perl script to replace ASCII single-quotes with curly quotes or apostrophes. Will not handle all cases, and will need manual verification and corrections. (Manually check for ASCII single-quotes, and apply the correct one. Use `tei2html.pl` with the `-v` option to find cases where quotes are still not balanced.)
+  * Open quotes before SGML tags and non-letters may go wrong (they become the default: a close quote).
+  * Manually check for ASCII single-quotes, and apply the correct one. Use `tei2html.pl` with the `-v` option to find cases where quotes are still not balanced
 
 ## `pgpp.pl` ##
 
