@@ -75,40 +75,43 @@ my $kwicMixup           = "";
 my $kwicVariants        = 1;
 
 GetOptions(
-    't' => \$explicitMakeText,
-    'h' => \$makeHtml,
+    '5' => \$makeP5,
     'e' => \$makeEpub,
+    'f' => \$force,
+    'h' => \$makeHtml,
     'k' => \$makeKwic,
     'p' => \$makePdf,
-    'x' => \$makeXML,
-    '5' => \$makeP5,
-    'r' => \$makeWordlist,
-    'v' => \$runChecks,
-    'u' => \$useUnicode,
-    'f' => \$force,
-    'z' => \$makeZip,
     'q' => \$showHelp,
+    'r' => \$makeWordlist,
+    't' => \$explicitMakeText,
+    'u' => \$useUnicode,
+    'v' => \$runChecks,
+    'x' => \$makeXML,
+    'z' => \$makeZip,
+
     'C=s' => \$configurationFile,
-    's=s' => \$customOption,
     'c=s' => \$customStylesheet,
-    'w=i' => \$pageWidth,
     'i=i' => \$atSize,
-    'pagewidth=i' => \$pageWidth,
+    's=s' => \$customOption,
+    'w=i' => \$pageWidth,
+
     'debug' => \$debug,
-    'trace' => \$trace,
-    'profile' => \$profile,
-    'heatmap' => \$makeHeatMap,
     'epubversion=s' => \$epubVersion,
-    'notranscription' => \$noTranscription,
-    'notranscriptionpopups' => \$noTranscriptionPopups,
+    'heatmap' => \$makeHeatMap,
+    'help' => \$showHelp,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
     'kwicsort=s' => \$kwicSort,
     'kwiccasesensitive=s' => \$kwicCaseSensitive,
     'kwicmixup=s' => \$kwicMixup,
     'kwicvariants=i' => \$kwicVariants,
-    'help' => \$showHelp,
-    'tidy'=> \$useTidy);
+    'notranscription' => \$noTranscription,
+    'notranscriptionpopups' => \$noTranscriptionPopups,
+    'pagewidth=i' => \$pageWidth,
+    'profile' => \$profile,
+    'tidy'=> \$useTidy,
+    'trace' => \$trace
+    );
 
 my $inputFile = '';
 if (defined $ARGV[0]) {
@@ -126,27 +129,34 @@ my $releaseDate = "";
 
 
 if ($showHelp == 1) {
-    print "tei2html.pl -- process a TEI file to produce text, HTML, and ePub output\n\n";
-    print "Usage: tei2html.pl [-thekprxvufzH] <inputfile.tei>\n\n";
-    print "Options:\n";
-    print "    t         Produce text output.\n";
-    print "    h         Produce HTML output.\n";
-    print "    e         Produce ePub output.\n";
-    print "    k         Produce KWIC index of text.\n";
-    print "    p         Produce PDF output.\n";
-    print "    r         Produce word-usage report.\n";
-    print "    x         Produce XML output.\n";
+    print "tei2html.pl -- process a TEI file to produce plain text, HTML, and ePub output\n\n";
+
+    print "Usage: tei2html.pl [-options] <inputfile.tei>\n\n";
+
+    print "Options:\n\n";
+
     print "    5         Convert XML output to P5 format.\n";
-    print "    v         Run a number of checks, and produce a report.\n";
-    print "    u         Use Unicode output (in the text version).\n";
+    print "    e         Produce ePub output.\n";
     print "    f         Force generation of output file, even if it is newer than input.\n";
-    print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n";
+    print "    h         Produce HTML output.\n";
+    print "    k         Produce KWIC index.\n";
+    print "    p         Produce PDF output.\n";
     print "    q         Print this help and exit.\n";
-    print "    notranscription                 Don't use transcription schemes.\n";
-    print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
+    print "    r         Produce word-usage report.\n";
+    print "    t         Produce text output.\n";
+    print "    u         Use Unicode output (in the text version).\n";
+    print "    v         Run a number of checks, and produce a report.\n";
+    print "    x         Produce XML output.\n";
+    print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n\n";
+
+    print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
+    print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
+    print "    i=<int>   Select the image set in kept in a directory named 'images@<int>' (default: 0)\n";
+    print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
+    print "    s=<value> Set the custom option (handed to XSLT processor).\n";
+    print "    w=<int>   Set the page width (default: 72 characters).\n\n";
+
     print "    debug                           Debug mode.\n";
-    print "    trace                           Trace mode.\n";
-    print "    profile                         Profile mode.\n";
     print "    heatmap                         Generate a heatmap version.\n";
     print "    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
     print "    kwicword=<words>                Words to be shown in KWIC, separate words by spaces.\n";
@@ -154,12 +164,11 @@ if ($showHelp == 1) {
     print "    kwicsort=<preceding/following>  Sort by (reverse) preceding or following context in KWIC.\n";
     print "    kwicmixup=<string>              Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
     print "    kwicvariants=<number>           Report only words with at least this many variant spellings.\n";
-    print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
-    print "    s=<value> Set the custom option (handed to XSLT processor).\n";
-    print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
-    print "    w=<int>   Set the page width (default: 72 characters).\n";
-    print "    i=<int>   Select the image set in kept in a directory named 'images@<int>' (default: 0)\n";
-    print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
+    print "    notranscription                 Don't use transcription schemes.\n";
+    print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
+    print "    pagewidth=<int>                 Set the page width (default: 72 characters).\n";
+    print "    profile                         Profile mode.\n";
+    print "    trace                           Trace mode.\n";
 
     exit(0);
 }
@@ -823,7 +832,7 @@ sub runChecks($) {
     my $basename = $1;
     my $format = $2;
     my $checkFilename = $basename . '-checks.html';
-    
+
     if ($force == 0 && isNewer($checkFilename, $filename)) {
         print "Skip run checks because '$checkFilename' is newer than '$filename'.\n";
         return;
