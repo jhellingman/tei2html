@@ -75,10 +75,10 @@
                 <td>
                     <xsl:apply-templates select="l[1]"/>
                 </td>
-                <td rowSpan="{$count}" class="lineGroupBrace">
+                <td rowspan="{$count}" class="lineGroupBrace">
                     <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
                 </td>
-                <td rowSpan="{$count}" class="lineGrouphead">
+                <td rowspan="{$count}" class="lineGrouphead">
                     <xsl:apply-templates select="head/node()"/>
                 </td>
             </tr>

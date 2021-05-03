@@ -308,7 +308,10 @@
     <xsl:template name="toc-body-table">
         <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
 
-        <table summary="{f:message('msgTableOfContents')}">
+        <table>
+            <xsl:if test="f:is-html()">
+                <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
+            </xsl:if>
             <xsl:apply-templates mode="gentoc-table" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>

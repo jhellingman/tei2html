@@ -435,10 +435,7 @@
 
     <xsl:template name="qrCode">
         <xsl:variable name="pgNum" select="//idno[@type = 'PGnum'][1]"/>
-        <xsl:variable name="qrImage"
-            select="if (matches($pgNum, '^[0-9]+$') and number($pgNum) &gt; 64449)
-                    then 'images/qr' || $pgNum || '.png'
-                    else 'images/qrcode.png'"/>
+        <xsl:variable name="qrImage" select="f:qrImage($pgNum)"/>
 
         <xsl:if test="f:is-valid($pgNum) and $imageInfo/img:images/img:image[@path=$qrImage]">
             <tr>
@@ -449,6 +446,15 @@
             </tr>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:qrImage" as="xs:string">
+        <xsl:param name="pgNum"/>
+
+        <xsl:sequence select="if (matches($pgNum, '^[0-9]+$') and number($pgNum) &gt; 64449)
+                    then 'images/qr' || $pgNum || '.png'
+                    else 'images/qrcode.png'"/>
+    </xsl:function>
 
 
     <!--====================================================================-->

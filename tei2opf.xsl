@@ -374,9 +374,11 @@
                 </xsl:if>
 
                 <!-- QR-code -->
-                <xsl:if test="//divGen[@type='Colophon'] and $imageInfo/img:images/img:image[@path='images/qrcode.png']">
+                <xsl:variable name="pgNum" select="//idno[@type = 'PGnum'][1]"/>
+                <xsl:variable name="qrImage" select="f:qrImage($pgNum)"/>
+                <xsl:if test="//divGen[@type='Colophon'] and $imageInfo/img:images/img:image[@path=$qrImage]">
                     <item id="qrcode"
-                        href="images/qrcode.png"
+                        href="{$qrImage}"
                         media-type="image/png"/>
                 </xsl:if>
 
@@ -391,8 +393,9 @@
                 <!-- Formulas -->
                 <xsl:apply-templates select="//formula[@notation = 'TeX']" mode="manifest"/>
 
-                <!-- Automatically inserted illustrations in tables (i.e. braces for cells that span more than one row and contain only a brace) -->
+                <!-- Automatically inserted illustrations in tables, etc. (i.e. braces for cells that span more than one row and contain only a brace) -->
                 <xsl:apply-templates select="//cell" mode="manifest-braces"/>
+                <xsl:apply-templates select="//castGroup" mode="manifest-braces"/>
 
                 <!-- Media overlays -->
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'media-overlay')]" mode="manifest"/>
@@ -667,7 +670,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate manifest entries for images of braces automatically inserted in tables.</xd:short>
+        <xd:short>Generate manifest entries for images of braces automatically inserted in tables, etc.</xd:short>
     </xd:doc>
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '{']" mode="manifest-braces">
@@ -687,6 +690,17 @@
 
 
     <xsl:template match="cell" mode="manifest-braces"/>
+
+
+    <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable'][count(./castItem) &gt; 1]" mode="manifest-braces">
+        <xsl:call-template name="manifest-image-item">
+            <xsl:with-param name="filename" select="'images/rbrace' || count(./castItem) || '.png'"/>
+            <xsl:with-param name="how" select="'brace'"/>
+        </xsl:call-template>
+    </xsl:template>
+
+
+    <xsl:template match="castGroup" mode="manifest-braces"/>
 
 
     <xsl:template name="manifest-image-item">
