@@ -449,6 +449,7 @@
 
                 <!-- Figure related special handling. -->
                 <xsl:when test="$element = 'figure' and $property = 'float'"/>
+                <xsl:when test="$element = 'figure' and $property = 'hover-overlay'"/>  <!-- an image that will be swapped with the image when the mouse hovers over it. -->
 
                 <!-- Table related special handling. With the rule
                      margin: 0px auto, the table is centered, while

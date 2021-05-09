@@ -174,7 +174,7 @@
     <xsl:function name="f:output-image">
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
-        <xsl:copy-of select="f:output-image($file, $alt, '', '')"/>
+        <xsl:copy-of select="f:output-image-tag($file, $alt, '', '')"/>
     </xsl:function>
 
 
@@ -182,7 +182,18 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
-        <xsl:copy-of select="f:output-image($file, $alt, f:rend-value($node/@rend, 'width'), f:rend-value($node/@rend, 'height'))"/>
+
+        <xsl:choose>
+            <xsl:when test="f:has-rend-value($node/@rend, 'hover-overlay')">
+                <div class="{f:generate-id($node) || 'overlay'}">
+                    <xsl:copy-of select="f:output-image-tag($file, $alt, $node/@rend, 'img-front')"/>
+                    <xsl:copy-of select="f:output-image-tag(f:rend-value($node/@rend, 'hover-overlay'), $alt, '', 'img-back')"/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:output-image-tag($file, $alt, $node/@rend, '')"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
 
 
@@ -191,20 +202,23 @@
         <xd:detail>
             <p>Generate the actual <code>img</code>-element for the output HTML. This will look-up the height and
             width of the image in the imageinfo, and set the <code>height</code> and <code>width</code> attributes
-            if found. If a dimension is explicitly given, it will override the value in the imageinfo file.
-            The <code>alt</code> attribute is filled if present.</p>
+            if found. If a dimension is explicitly given in the <code>rend</code> parameter, it will override the 
+            value in the imageinfo file. The <code>alt</code> attribute is filled if present.</p>
         </xd:detail>
         <xd:param name="file" type="string">The name of the image file.</xd:param>
         <xd:param name="alt" type="string">The text to be placed on the HTML alt attribute.</xd:param>
-        <xd:param name="width" type="string?">The width of the image, in pixels.</xd:param>
-        <xd:param name="height" type="string?">The height of the image, in pixels.</xd:param>
+        <xd:param name="rend" type="string?">The rendition ladder, as provided on the figure element.</xd:param>
+        <xd:param name="class" type="string?">An additional class to set.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:output-image">
+    <xsl:function name="f:output-image-tag">
         <xsl:param name="file" as="xs:string"/>
         <xsl:param name="alt" as="xs:string"/>
-        <xsl:param name="width" as="xs:string?"/>
-        <xsl:param name="height" as="xs:string?"/>
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="class" as="xs:string?"/>
+
+        <xsl:variable name="width" select="f:rend-value($rend, 'width')"/>
+        <xsl:variable name="height" select="f:rend-value($rend, 'height')"/>
 
         <xsl:variable name="width" select="if ($width) then $width else f:image-width($file)"/>
         <xsl:variable name="height" select="if ($height) then $height else f:image-height($file)"/>
@@ -235,6 +249,7 @@
 
         <img src="{$file}">
             <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
+            <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
             <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
             <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
         </img>
@@ -313,6 +328,38 @@
             <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
+    </xsl:template>
+
+
+    <xsl:template match="figure[f:has-rend-value(./@rend, 'hover-overlay')]" mode="css">
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
+
+        <xsl:variable name="width" select="f:image-width($filename)" as="xs:string?"/>
+        <xsl:variable name="height" select="f:image-height($filename)" as="xs:string?"/>
+        <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id(.) || 'overlay')"/>
+
+        <xsl:if test="f:is-image-included($filename)"><xsl:text expand-text="yes">
+.{$selector} {{
+    width: {$width};
+    height: {$height};
+    position: relative;
+    margin-bottom: 4px;
+}}
+.{$selector} .img-back {{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}}
+.{$selector}:hover .img-back {{
+    display: inline;
+}}
+.{$selector}:hover .img-front {{
+    display: none;
+}}
+</xsl:text></xsl:if>
+        <xsl:next-match/>
     </xsl:template>
 
 
