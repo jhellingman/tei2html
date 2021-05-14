@@ -382,6 +382,7 @@
             and f:rend-value($div/@rend, 'toc') != 'none'
             and f:has-toc-head($div)
             and f:div-level($div) &lt;= $maxlevel
+            and not($div/@type = ('Advertisement', 'Advertisements'))
             "/>
     </xsl:function>
 
