@@ -460,6 +460,7 @@ sub sortLanguageWords($) {
     }
     @wordList = sort @wordList;
     reportWords($language);
+    reportPairsAndSingleWords($language);
     reportLanguagePairs($language);
 }
 
@@ -534,6 +535,7 @@ sub reportLanguageWordsCSV($) {
 sub reportPairs() {
     my @languageList = keys %pairHash;
     foreach my $language (@languageList) {
+        reportPairsAndSingleWords($language);
         reportLanguagePairs($language);
     }
 }
@@ -547,10 +549,10 @@ sub reportLanguagePairs($) {
     my @pairList = keys %{$pairHash{$language}};
     @pairList = sort @pairList;
 
-    print "\n\n\n<h3>Most Common Word Pairs in " . getLanguage(lc($language)) . "</h3>\n";
+    my $report = "\n\n\n<h3>Most common word pairs in " . getLanguage(lc($language)) . "</h3>\n";
 
     my $max = 0;
-    foreach my $pair (sort {$pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList) {
+    foreach my $pair (sort { $pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList) {
         my $count = $pairHash{$language}{$pair};
         if ($count < 10) {
             last;
@@ -559,11 +561,56 @@ sub reportLanguagePairs($) {
         my ($first, $second) = split(/!/, $pair, 2);
 
         # print STDERR "PAIR: $count $pair\n";
-        print "\n<p>$first $second <span class=cnt>$count</span>";
+        $report .= "\n<p>$first $second <span class=cnt>$count</span>";
         $max++;
         if ($max > 100) {
             last;
         }
+    }
+
+    if ($max > 0) {
+        print $report;
+    }
+}
+
+
+# Report cases of words that appear both as single word and as a pair of words
+sub reportPairsAndSingleWords() {
+    my $language = shift;
+    my @pairList = keys %{$pairHash{$language}};
+    @pairList = sort @pairList;
+
+    my $report = "\n\n\n<h3>Single words and matching word pairs in " . getLanguage(lc($language)) . "</h3>\n";
+    $report .= "\n<table>\n";
+    $report .= "\n<tr><th>Single Word</th> <th>Word Pair</th></tr>";
+
+    my $seen = 0;
+    foreach my $pair (sort { lc($a) cmp lc($b) } @pairList) {
+        my ($first, $second) = split(/!/, $pair, 2);
+
+        # concatenated
+        my $word = $first . $second;
+        my $countWord = $wordHash{$language}{$word};
+        if (defined $countWord) {
+            $seen++;
+            my $countPair = $pairHash{$language}{$pair};
+            $report .= "\n<tr><td>$word <span class=cnt>$countWord</span></td> <td>$first $second <span class=cnt>$countPair</span></td></tr>";
+        }
+
+        # concatenated with dash
+        $word = $first . '-' . $second;
+        $countWord = $wordHash{$language}{$word};
+        if (defined $countWord) {
+            $seen++;
+            my $countPair = $pairHash{$language}{$pair};
+            $report .= "\n<tr><td>$word <span class=cnt>$countWord</span></td> <td>$first $second <span class=cnt>$countPair</span></td></tr>";
+        }
+    }
+
+    $report .= "\n</table>\n";
+
+    if ($seen > 0) {
+        print $report;
     }
 }
 
@@ -932,11 +979,13 @@ sub reportCharsXML() {
 sub reportCompositeChars() {
     my @compositeCharList = keys %compositeCharHash;
     @compositeCharList = sort @compositeCharList;
-    print "\n\n<h2>Unicode Composite Character Frequencies</h2>\n";
+
+    my $report = "\n\n<h2>Unicode Composite Character Frequencies</h2>\n";
+    my $seen = 0;
 
     $grandTotalCompositeCharacters = 0;
-    print "<table>\n";
-    print "<tr><th>Character<th>Codes<th>Count\n";
+    $report .= "<table>\n";
+    $report .= "<tr><th>Character<th>Codes<th>Count\n";
     foreach my $compositeChar (@compositeCharList) {
         $compositeChar =~ s/\0/[NULL]/g;
 
@@ -949,9 +998,14 @@ sub reportCompositeChars() {
         }
 
         $grandTotalCompositeCharacters += $count;
-        print "<tr><td>$compositeChar<td align=right><small>$ordinals</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
+        $seen++;
+        $report .= "<tr><td>$compositeChar<td align=right><small>$ordinals</small>&nbsp;&nbsp;&nbsp;<td align=right><b>$count</b>\n";
     }
-    print "</table>\n";
+    $report .= "</table>\n";
+
+    if ($seen > 0) {
+        print $report;
+    }
 }
 
 

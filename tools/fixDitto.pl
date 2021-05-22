@@ -41,7 +41,7 @@ foreach my $line (@lines) {
             $mapIdToDitto{$id} = $content;
 
             # seek backwards for content above.
-            for (my $i = $lineNumber - 1; $i > $lineNumber - 15 && $i > 0; $i--) {
+            for (my $i = $lineNumber - 1; $i > $lineNumber - 40 && $i > 0; $i--) {
                 my $seekLine = $lines[$i];
                 my $start = index($seekLine, $content);
                 if ($start != -1) {
