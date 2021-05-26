@@ -33,7 +33,6 @@ if ($useItalics == 1) {
     $italicEnd = '';
 }
 
-
 #    0.                   1.              2.              3.            4.              5.
 #
 #    No borders, just     +===+===+       =========       /=======\     =========       =========
@@ -141,9 +140,11 @@ while (<>) {
     }
 
     # mark tables for manual verification.
-    if ($line =~ /<table.*?>/) {
+    if ($line =~ /<(table.*?)>/) {
+        my $tag = $1;
         print "\n[**TODO: Verify table]\n";
-        parseTable($line);
+        my $tableId =  getAttrVal('id', $tag);
+        parseTable($line, $tableId);
     }
     if ($line =~ /<\/table>/) {
         print "------\n";
@@ -369,6 +370,7 @@ sub centerStringInWidth($$) {
 
 sub parseTable($) {
     my $table = shift;
+    my $tableId = shift;
     my $tableHead = '';
 
     # print STDERR "DEBUG: Parsing table: $table.\n";
@@ -384,7 +386,7 @@ sub parseTable($) {
         $table .= $line;
         if ($line =~ /<\/table>/) {
             my @result = handleTable($table);
-            my @wrappedTable = sizeTableColumns($pageWidth - 1, @result);
+            my @wrappedTable = sizeTableColumns($pageWidth - 1, $tableId, @result);
             if ($tableHead ne '') {
                 print handleLine($tableHead) . "\n\n";
             }
@@ -469,13 +471,14 @@ sub handleCell($) {
 }
 
 
-sub sizeTableColumns($@) {
+sub sizeTableColumns($$@) {
     # See also: https://developer.mozilla.org/en-US/docs/Table_Layout_Strategy
     # See http://nothings.org/computer/badtable/
     # in particular: http://www.csse.monash.edu.au/~marriott/HurMarMou05.pdf
     # http://www.csse.monash.edu.au/~marriott/HurMarAlb06.pdf
 
     my $finalWidth = shift;
+    my $tableId = shift;
     my @rows = @_;
 
     # Establish minimal column widths (narrowest column width without breaking words)
@@ -532,7 +535,7 @@ sub sizeTableColumns($@) {
     $finalWidth -= $borderAdjustment;
 
     if ($minimalWidth > $finalWidth) {
-        print STDERR "WARNING: Table cannot be fitted into " . ($finalWidth + $borderAdjustment) . " columns! Need " . ($minimalWidth + $borderAdjustment) . " columns.\n";
+        print STDERR "WARNING: Table $tableId cannot be fitted into " . ($finalWidth + $borderAdjustment) . " columns! Need " . ($minimalWidth + $borderAdjustment) . " columns.\n";
     }
 
     # Now we need to distribute the remaining width, by adding it to the most needy column.

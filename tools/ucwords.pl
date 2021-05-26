@@ -593,8 +593,15 @@ sub reportPairsAndSingleWords() {
         my $countWord = $wordHash{$language}{$word};
         if (defined $countWord) {
             $seen++;
+
+            my $classAttribute = '';
+            if (($language eq 'nl' || $language eq 'nl-1900') 
+                 && ($second eq 'en' || $second eq 'de' || $second eq 'den' || $second eq 'ten')) {
+                $classAttribute = ' class=freq';
+            }
+
             my $countPair = $pairHash{$language}{$pair};
-            $report .= "\n<tr><td>$word <span class=cnt>$countWord</span></td> <td>$first $second <span class=cnt>$countPair</span></td></tr>";
+            $report .= "\n<tr$classAttribute><td>$word <span class=cnt>$countWord</span></td> <td>$first $second <span class=cnt>$countPair</span></td></tr>";
         }
 
         # concatenated with dash

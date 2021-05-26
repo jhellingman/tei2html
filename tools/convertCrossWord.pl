@@ -19,7 +19,7 @@ sub main {
         my $line = $_;
 
         if ($line =~ m/\[crossword\]/) {
-            $line = "<table type=\"crossword\">\n";
+            $line = "<table rend=crossword>\n";
             $mode = 1;
         }
 
@@ -28,15 +28,16 @@ sub main {
             $mode = 0;
         }
 
-        #   :       non-bordered cell       <cell rend="blank">
+        #   |~      non-bordered cell       <cell rend=blank>
         #   |       bordered cell           <cell>
-        #   |#      black cell              <cell rend="black">
-        #   |%      shaded cell             <cell rend="shaded">
+        #   |#      black cell              <cell rend=black>
+        #   |%      shaded cell             <cell rend=shaded>
 
         if ($mode == 1) {
-            $line =~ s/[:]/<cell rend=\"blank\">/g;
-            $line =~ s/[|]\s*[#]+/<cell rend=\"black\">/g;
-            $line =~ s/[|]\s*[%]+/<cell rend=\"shaded\">/g;
+            $line =~ s/[:]/<cell rend=blank>/g;
+            $line =~ s/[|]\s*[~]+/<cell rend=blank>/g;
+            $line =~ s/[|]\s*[#]+/<cell rend=black>/g;
+            $line =~ s/[|]\s*[%]+/<cell rend=shaded>/g;
             $line =~ s/[|]\s*\n/\n/g;
             $line =~ s/[|]/<cell>/g;
 

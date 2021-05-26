@@ -15,7 +15,7 @@
 </availability>
 </publicationStmt>
 <notesStmt>
-    <note type="Description">Sample MathJax Equations</note>
+    <note type="Description">Sample Tables in TEI</note>
 </notesStmt>
 <sourceDesc>
 <bibl>
@@ -28,11 +28,11 @@
 <encodingDesc>
     <p></p>
     <tagsDecl>
-        <rendition selector="table">
+        <rendition selector="table.magic">
             border-collapse: collapse;
             font-family: sans-serif;
         </rendition>
-        <rendition selector="td">
+        <rendition selector="table.magic td">
             font-style: italic;
             text-align: center;
             vertical-align: middle;
@@ -52,6 +52,13 @@
         <rendition selector="td.l">border-left: 1px solid black;</rendition>
         <rendition selector="td.L">border-left: 2px solid black;</rendition>
 
+
+        <rendition selector=".crossword">border-collapse: collapse; font-size: xx-small;</rendition>
+        <rendition selector=".crossword td">width: 20px; height: 21px; border: 1px solid black; vertical-align: top;</rendition>
+        <rendition selector=".crossword td.black">background-color: black;</rendition>
+        <rendition selector=".crossword td.blank">border: none;</rendition>
+        <rendition selector=".crossword td.shaded">background-color: #D3D3D3;</rendition>
+
     </tagsDecl></encodingDesc>
 <profileDesc>
     <langUsage>
@@ -64,15 +71,19 @@
 <div1 type=Chapter>
 <head>Sample Tables</head>
 
+<div2 type=Section>
+<head>Magic Squares</head>
 
-<p><table id=magic3 rend="class(borderAll)">
+<p>Some magic squares and their construction.
+
+<p><table id=magic3 rend="borderAll magic">
 <row><cell> 2 <cell> 7 <cell> 6
 <row><cell> 9 <cell> 5 <cell> 1
 <row><cell> 4 <cell> 3 <cell> 8
 </table>
 
 
-<p><table id=magic5a>
+<p><table id=magic5a rend=magic>
 <row><cell>                    <cell>                    <cell>                        <cell>                    <cell rend="class(a)">  5 <cell>                    <cell>                        <cell>                    <cell>                
 <row><cell>                    <cell>                    <cell>                        <cell rend="class(a)">  4 <cell rend="class(a)">    <cell rend="class(a)"> 10 <cell>                        <cell>                    <cell>                
 <row><cell>                    <cell>                    <cell rend="class(a T L)">  3 <cell rend="class(a T)">  <cell rend="class(a T)"> 9<cell rend="class(a T)">  <cell rend="class(a T R)"> 15 <cell>                    <cell>                
@@ -85,7 +96,7 @@
 </table>
 
 
-<p><table id=magic5b rend="class(borderAll)">
+<p><table id=magic5b rend="borderAll magic">
 <row><cell>  3 <cell> 16 <cell>  9 <cell> 22 <cell> 15 
 <row><cell> 20 <cell>  8 <cell> 21 <cell> 14 <cell>  2 
 <row><cell>  7 <cell> 25 <cell> 13 <cell>  1 <cell> 19 
@@ -93,6 +104,66 @@
 <row><cell> 11 <cell>  4 <cell> 17 <cell> 10 <cell> 23 
 </table>
 
+
+<div2>
+<head>Crossword Puzzles</head>
+
+<p><table rend=crossword id=cw1>
+<row><cell>1<cell>2<cell>3<cell>4<cell>5<cell><cell>6<cell>7<cell>8<cell>9<cell>
+<row><cell rend=black><cell>10<cell><cell><cell><cell rend=black><cell>11<cell><cell><cell><cell rend=black>
+<row><cell>12<cell><cell><cell rend=black><cell>13<cell>14<cell><cell rend=black><cell>15<cell><cell>16
+<row><cell>17<cell><cell rend=black><cell>18<cell><cell><cell><cell>19<cell rend=black><cell>20<cell>
+<row><cell>21<cell><cell>22<cell><cell rend=black><cell><cell rend=black><cell>23<cell>24<cell><cell>
+<row><cell><cell rend=black><cell>25<cell><cell><cell><cell><cell><cell><cell rend=black><cell>
+<row><cell>26<cell>27<cell><cell><cell rend=black><cell><cell rend=black><cell>28<cell><cell>29<cell>
+<row><cell>30<cell><cell rend=black><cell>31<cell>32<cell><cell>33<cell><cell rend=black><cell>34<cell>
+<row><cell>35<cell><cell>36<cell rend=black><cell>37<cell><cell><cell rend=black><cell>38<cell><cell>
+<row><cell rend=black><cell>39<cell><cell>40<cell><cell rend=black><cell>41<cell>42<cell><cell><cell rend=black>
+<row><cell>43<cell><cell><cell><cell><cell><cell><cell><cell><cell><cell>
+</table>
+
+<p><table rend=crossword id=cw2>
+<row><cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank><cell> 1<cell rend=blank><cell rend=blank><cell rend=blank><cell> 2<cell rend=blank><cell rend=blank><cell rend=blank><cell> 3<cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell rend=blank><cell> 4<cell>  <cell> 5<cell rend=blank><cell> 6<cell>  <cell> 7<cell rend=blank><cell> 8<cell>  <cell> 9<cell rend=blank><cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell>10<cell>  <cell>  <cell>  <cell rend=black><cell>11<cell>  <cell>  <cell rend=black><cell>12<cell>  <cell>  <cell>13<cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell>14<cell>  <cell rend=black><cell>15<cell>  <cell>16<cell rend=black><cell>  <cell rend=black><cell>17<cell>  <cell>  <cell rend=black><cell>18<cell>19<cell rend=blank>
+<row><cell>20<cell>  <cell>  <cell>21<cell rend=black><cell>22<cell>  <cell>23<cell>  <cell>24<cell>  <cell>  <cell rend=black><cell>25<cell>  <cell>  <cell>  
+<row><cell rend=blank><cell>26<cell>  <cell>  <cell>27<cell>  <cell>  <cell>  <cell rend=black><cell>28<cell>  <cell>  <cell>29<cell>  <cell>  <cell>  <cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell rend=black><cell>30<cell>  <cell>  <cell rend=black><cell>31<cell>32<cell>  <cell rend=black><cell>33<cell>  <cell>  <cell rend=black><cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell>34<cell>35<cell rend=black><cell>36<cell>  <cell>37<cell rend=black><cell>  <cell rend=black><cell>38<cell>  <cell>  <cell rend=black><cell>39<cell>40<cell rend=blank>
+<row><cell>41<cell>  <cell>  <cell>  <cell>  <cell rend=black><cell>42<cell>  <cell>  <cell>  <cell>  <cell rend=black><cell>43<cell>  <cell>  <cell>  <cell>  
+<row><cell rend=blank><cell>44<cell>  <cell rend=black><cell>45<cell>46<cell>  <cell rend=black><cell>  <cell rend=black><cell>47<cell>48<cell>  <cell rend=black><cell>49<cell>  <cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell rend=black><cell>50<cell>  <cell>  <cell rend=black><cell>51<cell>  <cell>52<cell rend=black><cell>53<cell>  <cell>54<cell rend=black><cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell>55<cell>56<cell>  <cell>  <cell>  <cell>57<cell>  <cell rend=black><cell>58<cell>59<cell>  <cell>  <cell>  <cell>60<cell>61<cell rend=blank>
+<row><cell>62<cell>  <cell>  <cell>  <cell rend=black><cell>63<cell>  <cell>  <cell>64<cell>  <cell>  <cell>  <cell rend=black><cell>65<cell>  <cell>  <cell>  
+<row><cell rend=blank><cell>66<cell>  <cell rend=black><cell>67<cell>  <cell>  <cell rend=black><cell>  <cell rend=black><cell>68<cell>  <cell>69<cell rend=black><cell>70<cell>  <cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell>71<cell>72<cell>  <cell>  <cell rend=black><cell>73<cell>  <cell>74<cell rend=black><cell>75<cell>  <cell>76<cell>  <cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell rend=blank><cell>77<cell>  <cell>  <cell rend=blank><cell>78<cell>  <cell>  <cell rend=blank><cell>  <cell>  <cell>  <cell rend=blank><cell rend=blank><cell rend=blank>
+<row><cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank><cell>  <cell rend=blank><cell rend=blank><cell rend=blank><cell>  <cell rend=blank><cell rend=blank><cell rend=blank><cell>  <cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank>
+</table>
+
+
+<p><table rend=crossword id=cw3>
+<row><cell rend=black><cell>  1<cell>  2<cell>  3<cell>  4<cell>  5<cell>  6<cell>   <cell rend=shaded><cell>  7<cell rend=shaded><cell>  8<cell>  9<cell> 10<cell> 11<cell> 12<cell> 13<cell>   <cell rend=black>
+<row><cell> 14<cell rend=black><cell> 15<cell>   <cell>   <cell>   <cell>   <cell rend=shaded><cell> 16<cell>   <cell> 17<cell rend=shaded><cell>   <cell>   <cell>   <cell>   <cell>   <cell rend=black><cell> 19
+<row><cell> 20<cell> 21<cell>   <cell rend=black><cell> 22<cell>   <cell>   <cell> 23<cell>   <cell rend=shaded><cell> 24<cell> 25<cell>   <cell>   <cell>   <cell rend=black><cell> 26<cell> 27<cell>   
+<row><cell> 28<cell>   <cell rend=black><cell> 29<cell>   <cell rend=black><cell> 30<cell>   <cell>   <cell> 31<cell>   <cell>   <cell>   <cell rend=black><cell> 32<cell> 33<cell rend=black><cell> 34<cell>   
+<row><cell> 35<cell>   <cell> 36<cell>   <cell>   <cell> 37<cell rend=black><cell> 38<cell>   <cell>   <cell>   <cell>   <cell rend=black><cell> 39<cell>   <cell>   <cell> 40<cell>   <cell>   
+<row><cell> 41<cell>   <cell>   <cell rend=black><cell> 42<cell>   <cell> 43<cell>   <cell rend=black><cell>   <cell rend=black><cell> 44<cell> 45<cell>   <cell>   <cell rend=black><cell> 46<cell>   <cell>   
+<row><cell> 47<cell>   <cell>   <cell> 48<cell rend=black><cell> 49<cell>   <cell>   <cell> 50<cell rend=black><cell> 51<cell>   <cell>   <cell>   <cell rend=black><cell> 52<cell>   <cell>   <cell>   
+<row><cell>   <cell rend=shaded><cell> 53<cell>   <cell> 54<cell>   <cell>   <cell rend=black><cell> 55<cell> 56<cell>   <cell rend=black><cell> 57<cell>   <cell> 58<cell>   <cell>   <cell rend=shaded><cell>   
+<row><cell rend=shaded><cell> 59<cell>   <cell>   <cell>   <cell rend=black><cell> 60<cell> 61<cell rend=black><cell>   <cell rend=black><cell> 62<cell>   <cell rend=black><cell> 63<cell>   <cell>   <cell> 64<cell rend=shaded>
+<row><cell> 65<cell>   <cell rend=shaded><cell> 66<cell>   <cell>   <cell rend=black><cell> 67<cell>   <cell>   <cell>   <cell>   <cell rend=black><cell> 68<cell>   <cell>   <cell rend=shaded><cell> 69<cell>   
+<row><cell rend=shaded><cell> 70<cell> 71<cell>   <cell>   <cell rend=black><cell> 72<cell>   <cell rend=black><cell>   <cell rend=black><cell> 73<cell> 74<cell rend=black><cell> 75<cell>   <cell> 76<cell>   <cell rend=shaded>
+<row><cell> 77<cell rend=shaded><cell> 78<cell>   <cell>   <cell> 79<cell>   <cell rend=black><cell> 80<cell>   <cell> 81<cell rend=black><cell> 82<cell> 83<cell>   <cell>   <cell>   <cell rend=shaded><cell> 84
+<row><cell> 85<cell> 86<cell>   <cell>   <cell rend=black><cell> 87<cell>   <cell> 88<cell>   <cell rend=black><cell> 89<cell> 90<cell>   <cell>   <cell rend=black><cell> 91<cell>   <cell> 92<cell>   
+<row><cell> 93<cell>   <cell>   <cell rend=black><cell> 94<cell>   <cell>   <cell>   <cell rend=black><cell> 95<cell rend=black><cell> 96<cell>   <cell>   <cell> 97<cell rend=black><cell> 98<cell>   <cell>   
+<row><cell> 99<cell>   <cell>   <cell>100<cell>   <cell>   <cell rend=black><cell>101<cell>102<cell>   <cell>103<cell>   <cell rend=black><cell>104<cell>   <cell>105<cell>   <cell>   <cell>   
+<row><cell>106<cell>   <cell rend=black><cell>107<cell>   <cell rend=black><cell>108<cell>   <cell>   <cell>   <cell>   <cell>   <cell>109<cell rend=black><cell>110<cell>   <cell rend=black><cell>111<cell>   
+<row><cell>112<cell>   <cell>113<cell rend=black><cell>114<cell>115<cell>   <cell>   <cell>   <cell rend=shaded><cell>116<cell>   <cell>   <cell>117<cell>   <cell rend=black><cell>118<cell>   <cell>   
+<row><cell>   <cell rend=black><cell>119<cell>120<cell>   <cell>   <cell>   <cell rend=shaded><cell>121<cell>122<cell>   <cell rend=shaded><cell>123<cell>   <cell>   <cell>124<cell>   <cell rend=black><cell>   
+<row><cell rend=black><cell>125<cell>   <cell>   <cell>   <cell>   <cell>   <cell>   <cell rend=shaded><cell>   <cell rend=shaded><cell>126<cell>   <cell>   <cell>   <cell>   <cell>   <cell>   <cell rend=black>
+</table>
 
 </body>
 </text>
