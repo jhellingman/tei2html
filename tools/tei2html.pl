@@ -178,7 +178,7 @@ if ($showHelp == 1) {
 #
 # (Processed/)?images/*.(jpg|png) -> imageinfo.xml
 # *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-preprocessed.xml -> *.html, *.epub, readme.md, metadata.xml
-# *(-[0-9].[0-9]+).tei -> *.txt
+# *(-[0-9].[0-9]+).tei -> *(-utf8).txt
 
 
 if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 && $makeWordlist == 0 && $makeXML == 0 && $makeKwic == 0 && $runChecks == 0 && $makeP5 == 0) {
@@ -541,7 +541,7 @@ sub makeEpub($$) {
 sub makeText($$) {
     my $basename = shift;
     my $filename = shift;
-    my $textFile = $basename . '.txt';
+    my $textFile = $basename . ($useUnicode == 1 ? '-utf8' : '') . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
         print "Skip conversion to text file ($textFile newer than $filename).\n";

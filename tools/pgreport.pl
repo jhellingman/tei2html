@@ -207,6 +207,13 @@ sub handleTeiFile {
     print XMLFILE "      <date>$fileDate</date>\n";
     logMessage("Path:       $filePath");
     print XMLFILE "      <path>$filePath</path>\n";
+
+    if (-e $filePath . 'Processed/' . $baseName . '-utf8.txt') {
+        print XMLFILE "      <encoding>UTF8</encoding>\n";
+    } else {
+        print XMLFILE "      <encoding>Latin-1</encoding>\n";
+    }
+
     print XMLFILE "    </file>\n";
 
     $totalFiles++;
@@ -220,11 +227,13 @@ sub handleTeiFile {
     }
 
     my $xmlFileName = $filePath . "$baseName.xml";
+    my $textFileName = $filePath . "$baseName.txt";
+    my $utf8TextFileName = $filePath . "$baseName-utf8.txt";
     my $htmlFileName = $filePath . "$baseName.html";
     my $wordsFileName = $filePath . "$baseName-words.html";
+    my $checksFileName = $filePath . "$baseName-$version-checks.html";
 
     if (!$excluded{$baseName} == 1 && defined($version)) {
-        my $checksFileName = $filePath . "$baseName-$version-checks.html";
         if ($force != 0
                 || !-e $xmlFileName
                 || !-e $wordsFileName
@@ -464,10 +473,12 @@ sub downloadFromPG {
 
     my $textFile = $pgNum . '.txt';
     my $text8File = $pgNum . '-8.txt';
+    my $text0File = $pgNum . '-0.txt';
     my $htmlFile = $pgNum . '-h.htm';
 
     my $textUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $textFile;
     my $text8Url = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $text8File;
+    my $text0Url = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $text0File;
     my $htmlUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $pgNum . '-h/' . $htmlFile;
 
     {
@@ -477,6 +488,9 @@ sub downloadFromPG {
         }
         if (!-e $text8File) {
             system ("wget $text8Url");
+        }
+        if (!-e $text0File) {
+            system ("wget $text0Url");
         }
         if (!-e $htmlFile) {
             system ("wget $htmlUrl");

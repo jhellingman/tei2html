@@ -51,6 +51,12 @@ sub main {
                 print "<hr>\n<b>File: $1.png</b>\n<hr>\n";
             }
             $paragraph = '';
+        } elsif ($line =~ m/\[crossword\]/) {
+            if ($paragraph ne "") {
+                print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
+                $paragraph = '';
+            }
+            handleCrossWord();
         } elsif ($line ne '') {
             $paragraph .= ' ' . $line;
         } else {
@@ -70,6 +76,24 @@ sub main {
     close INPUTFILE;
 }
 
+sub handleCrossWord() {
+    print "<table class=crossword>\n";
+    while (<INPUTFILE>) {
+        my $line = $_;
+        if ($line =~ m/\[\/crossword]/) {
+            print "</table>\n";
+            return;
+        }
+        $line =~ s/[:]/<td class=blank>/g;
+        $line =~ s/[|]\s*[~]+/<td class=blank>/g;
+        $line =~ s/[|]\s*[#]+/<td class=black>/g;
+        $line =~ s/[|]\s*[%]+/<td class=shaded>/g;
+        $line =~ s/[|]\s*\n/\n/g;
+        $line =~ s/[|]/<td>/g;
+        $line =~ s/^\s*<td/<tr><td/g;
+        print $line;
+    }
+}
 
 sub handleParagraph($$) {
     my $paragraph = shift;
@@ -164,6 +188,12 @@ sub printHtmlHead() {
         .error { background-color: #FF8566; font-weight: bold; }
         .xref { background-color: #FFFF8C; }
         .code { font-weight: bold; color: gray; display: none; }
+
+        .crossword { border-collapse: collapse; font-size: xx-small; }
+        .crossword td { width: 20px; height: 21px; border: 1px solid black; vertical-align: top; }
+        .crossword td.black { background-color: black; }
+        .crossword td.blank { border: none; }
+        .crossword td.shaded { background-color: #D3D3D3; }
 
         :lang(bo) { font-family: 'Yagpo Tibetan Uni', 'Qomolangma-Sarchung', 'Babelstone Tibetan', serif; }
         :lang(ar) { font-family: Scheherazade, serif; }
