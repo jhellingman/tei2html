@@ -58,6 +58,37 @@
         <rendition selector=".crossword td.blank">border: none;</rendition>
         <rendition selector=".crossword td.shaded">background-color: #D3D3D3;</rendition>
 
+        <rendition selector=".crossword td.solved">
+            font-size: medium;
+            color: white;
+            text-align: center;
+            white-space: nowrap;
+            position: relative;
+            font-style: italic;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+        </rendition>
+
+        <rendition selector=".crossword:hover td.solved">
+            font-size: medium;
+            color: #5a7bff;
+            text-align: center;
+            white-space: nowrap;
+            position: relative;
+            font-style: italic;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+        </rendition>
+
+        <rendition selector=".crossword span.number">
+            font-size: xx-small;
+            position: absolute;
+            color: black;
+            left: 0.5pt;
+            top: 0.5pt;
+            font-style: normal;
+            font-family: serif;
+        </rendition>
+
+
     </tagsDecl></encodingDesc>
 <profileDesc>
     <langUsage>
@@ -121,6 +152,7 @@
 <row><cell>43<cell><cell><cell><cell><cell><cell><cell><cell><cell><cell>
 </table>
 
+
 <p><table rend=crossword id=cw2>
 <row><cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank><cell> 1<cell rend=blank><cell rend=blank><cell rend=blank><cell> 2<cell rend=blank><cell rend=blank><cell rend=blank><cell> 3<cell rend=blank><cell rend=blank><cell rend=blank><cell rend=blank>
 <row><cell rend=blank><cell rend=blank><cell rend=blank><cell> 4<cell>  <cell> 5<cell rend=blank><cell> 6<cell>  <cell> 7<cell rend=blank><cell> 8<cell>  <cell> 9<cell rend=blank><cell rend=blank><cell rend=blank>
@@ -163,6 +195,50 @@
 <row><cell>   <cell rend=black><cell>119<cell>120<cell>   <cell>   <cell>   <cell rend=shaded><cell>121<cell>122<cell>   <cell rend=shaded><cell>123<cell>   <cell>   <cell>124<cell>   <cell rend=black><cell>   
 <row><cell rend=black><cell>125<cell>   <cell>   <cell>   <cell>   <cell>   <cell>   <cell rend=shaded><cell>   <cell rend=shaded><cell>126<cell>   <cell>   <cell>   <cell>   <cell>   <cell>   <cell rend=black>
 </table>
+
+
+<table rend=crossword id=cw4a>
+<row><cell> 1<cell> 2<cell rend=black><cell> 3<cell> 4<cell> 5<cell> 6<cell>  <cell rend=black><cell> 7<cell> 8
+<row><cell> 9<cell>  <cell>10<cell rend=black><cell>11<cell>  <cell>  <cell rend=black><cell>12<cell>  <cell>  
+<row><cell rend=black><cell>13<cell>  <cell>14<cell rend=black><cell>  <cell rend=black><cell>15<cell>  <cell>  <cell rend=black>
+<row><cell>16<cell rend=black><cell>17<cell>  <cell>18<cell>  <cell>19<cell>  <cell>  <cell rend=black><cell>20
+<row><cell>21<cell>22<cell rend=black><cell>23<cell>  <cell>  <cell>  <cell>  <cell rend=black><cell>24<cell>  
+<row><cell>25<cell>  <cell>  <cell>  <cell>  <cell>  <cell>  <cell>  <cell>  <cell>  <cell>  
+<row><cell>26<cell>  <cell rend=black><cell>27<cell>  <cell>  <cell>  <cell>  <cell rend=black><cell>28<cell>  
+<row><cell>  <cell rend=black><cell>29<cell>  <cell>  <cell>  <cell>  <cell>  <cell>30<cell rend=black><cell>  
+<row><cell rend=black><cell>31<cell>  <cell>  <cell rend=black><cell>  <cell rend=black><cell>32<cell>  <cell>33<cell rend=black>
+<row><cell>34<cell>  <cell>  <cell rend=black><cell>35<cell>  <cell>36<cell rend=black><cell>37<cell>  <cell>38
+<row><cell>39<cell>  <cell rend=black><cell>40<cell>  <cell>  <cell>  <cell>  <cell rend=black><cell>41<cell>  
+</table>
+
+<table rend=crossword id=cw4b>
+<row><cell rend=solved><ab type=number>1</ab> H<cell rend=solved><ab type=number>2</ab> E<cell rend=black><cell rend=solved><ab type=number>3</ab> R<cell rend=solved><ab type=number>4</ab> I<cell rend=solved><ab type=number>5</ab> C<cell rend=solved><ab type=number>6</ab> I<cell rend=solved>N<cell rend=black><cell rend=solved><ab type=number>7</ab> A<cell rend=solved><ab type=number>8</ab> M
+<row><cell rend=solved><ab type=number>9</ab> O<cell rend=solved>L<cell rend=solved><ab type=number>10</ab> D<cell rend=black><cell rend=solved><ab type=number>11</ab> N<cell rend=solved>O<cell rend=solved>T<cell rend=black><cell rend=solved><ab type=number>12</ab> H<cell rend=solved>I<cell rend=solved>E
+<row><cell rend=black><cell rend=solved><ab type=number>13</ab> F<cell rend=solved>A<cell rend=solved><ab type=number>14</ab> R<cell rend=black><cell rend=solved>N<cell rend=black><cell rend=solved><ab type=number>15</ab> B<cell rend=solved>A<cell rend=solved>R<cell rend=black>
+<row><cell rend=solved><ab type=number>16</ab> U<cell rend=black><cell rend=solved><ab type=number>17</ab> M<cell rend=solved>U<cell rend=solved><ab type=number>18</ab> S<cell rend=solved>S<cell rend=solved><ab type=number>19</ab> E<cell rend=solved>L<cell rend=solved>S<cell rend=black><cell rend=solved><ab type=number>20</ab> P
+<row><cell rend=solved><ab type=number>21</ab> P<cell rend=solved><ab type=number>22</ab> A<cell rend=black><cell rend=solved><ab type=number>23</ab> M<cell rend=solved>A<cell rend=solved>P<cell rend=solved>L<cell rend=solved>E<cell rend=black><cell rend=solved><ab type=number>24</ab> P<cell rend=solved>O
+<row><cell rend=solved><ab type=number>25</ab> P<cell rend=solved>R<cell rend=solved>O<cell rend=solved>P<cell rend=solved>R<cell rend=solved>I<cell rend=solved>E<cell rend=solved>T<cell rend=solved>O<cell rend=solved>R<cell rend=solved>S
+<row><cell rend=solved><ab type=number>26</ab> E<cell rend=solved>M<cell rend=black><cell rend=solved><ab type=number>27</ab> L<cell rend=solved>A<cell rend=solved>R<cell rend=solved>C<cell rend=solved>H<cell rend=black><cell rend=solved><ab type=number>28</ab> Y<cell rend=solved>E
+<row><cell rend=solved>R<cell rend=black><cell rend=solved><ab type=number>29</ab> S<cell rend=solved>E<cell rend=solved>N<cell rend=solved>A<cell rend=solved>T<cell rend=solved>E<cell rend=solved><ab type=number>30</ab> S<cell rend=black><cell rend=solved>D
+<row><cell rend=black><cell rend=solved><ab type=number>31</ab> W<cell rend=solved>A<cell rend=solved>D<cell rend=black><cell rend=solved>T<cell rend=black><cell rend=solved><ab type=number>32</ab> R<cell rend=solved>A<cell rend=solved><ab type=number>33</ab> N<cell rend=black>
+<row><cell rend=solved><ab type=number>34</ab> G<cell rend=solved>A<cell rend=solved>D<cell rend=black><cell rend=solved><ab type=number>35</ab> L<cell rend=solved>O<cell rend=solved><ab type=number>36</ab> B<cell rend=black><cell rend=solved><ab type=number>37</ab> T<cell rend=solved>O<cell rend=solved><ab type=number>38</ab> T
+<row><cell rend=solved><ab type=number>39</ab> O<cell rend=solved>N<cell rend=black><cell rend=solved><ab type=number>40</ab> P<cell rend=solved>O<cell rend=solved>R<cell rend=solved>E<cell rend=solved>S<cell rend=black><cell rend=solved><ab type=number>41</ab> D<cell rend=solved>O
+</table>
+
+<table rend=crossword id=cw4c>
+<row><cell rend=solved>H <cell rend=solved>E <cell rend=black><cell rend=solved>R <cell rend=solved>I <cell rend=solved>C <cell rend=solved>I <cell rend=solved>N <cell rend=black><cell rend=solved>A <cell rend=solved>M 
+<row><cell rend=solved>O <cell rend=solved>L <cell rend=solved>D <cell rend=black><cell rend=solved>N <cell rend=solved>O <cell rend=solved>T <cell rend=black><cell rend=solved>H <cell rend=solved>I <cell rend=solved>E 
+<row><cell rend=black><cell rend=solved>F <cell rend=solved>A <cell rend=solved>R <cell rend=black><cell rend=solved>N <cell rend=black><cell rend=solved>B <cell rend=solved>A <cell rend=solved>R <cell rend=black>
+<row><cell rend=solved>U <cell rend=black><cell rend=solved>M <cell rend=solved>U <cell rend=solved>S <cell rend=solved>S <cell rend=solved>E <cell rend=solved>L <cell rend=solved>S <cell rend=black><cell rend=solved>P 
+<row><cell rend=solved>P <cell rend=solved>A <cell rend=black><cell rend=solved>M <cell rend=solved>A <cell rend=solved>P <cell rend=solved>L <cell rend=solved>E <cell rend=black><cell rend=solved>P <cell rend=solved>O 
+<row><cell rend=solved>P <cell rend=solved>R <cell rend=solved>O <cell rend=solved>P <cell rend=solved>R <cell rend=solved>I <cell rend=solved>E <cell rend=solved>T <cell rend=solved>O <cell rend=solved>R <cell rend=solved>S 
+<row><cell rend=solved>E <cell rend=solved>M <cell rend=black><cell rend=solved>L <cell rend=solved>A <cell rend=solved>R <cell rend=solved>C <cell rend=solved>H <cell rend=black><cell rend=solved>Y <cell rend=solved>E 
+<row><cell rend=solved>R <cell rend=black><cell rend=solved>S <cell rend=solved>E <cell rend=solved>N <cell rend=solved>A <cell rend=solved>T <cell rend=solved>E <cell rend=solved>S <cell rend=black><cell rend=solved>D 
+<row><cell rend=black><cell rend=solved>W <cell rend=solved>A <cell rend=solved>D <cell rend=black><cell rend=solved>T <cell rend=black><cell rend=solved>R <cell rend=solved>A <cell rend=solved>N <cell rend=black>
+<row><cell rend=solved>G <cell rend=solved>A <cell rend=solved>D <cell rend=black><cell rend=solved>L <cell rend=solved>O <cell rend=solved>B <cell rend=black><cell rend=solved>T <cell rend=solved>O <cell rend=solved>T 
+<row><cell rend=solved>O <cell rend=solved>N <cell rend=black><cell rend=solved>P <cell rend=solved>O <cell rend=solved>R <cell rend=solved>E <cell rend=solved>S <cell rend=black><cell rend=solved>D <cell rend=solved>O 
+</table>
+
 
 </body>
 </text>

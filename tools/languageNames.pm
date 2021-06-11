@@ -235,6 +235,7 @@ BEGIN {
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
     $langNameHash{"ceb"}            = "Cebuano";
     $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
+    $langNameHash{"com"}            = "Comanche";
     $langNameHash{"dak"}            = "Dakota";
     $langNameHash{"esx"}            = "Eskimo-Aleut languages";
     $langNameHash{"gad"}            = "Gaddang";

@@ -42,6 +42,10 @@ sub main {
             $line =~ s/[|]/<cell>/g;
 
             $line =~ s/^\s*<cell/<row><cell/g;
+
+            $line =~ s/<cell> *([0-9]+) *([A-Z]+)/<cell rend=solved><ab type=number>$1<\/ab> $2/g;
+            $line =~ s/<cell> *([A-Z]+)/<cell rend=solved>$1/g;
+
         }
 
         print $line;

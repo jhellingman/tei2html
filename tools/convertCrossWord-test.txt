@@ -30,6 +30,7 @@ If so desired, you may align things like this (optional, but please don't undo i
 |43|  |  |  |  |  |  |  |  |  |  |
 [/crossword]
 
+
 A little piece of software will convert this (during post-processing) to a nice looking HTML table, something like this: 
 
 
@@ -74,4 +75,46 @@ A little piece of software will convert this (during post-processing) to a nice 
 |112|   |113|###|114|115|   |   |   |%%%|116|   |   |117|   |###|118|   |   |
 |   |###|119|120|   |   |   |%%%|121|122|   |%%%|123|   |   |124|   |###|   |
 |###|125|   |   |   |   |   |   |%%%|   |%%%|126|   |   |   |   |   |   |###|
+[/crossword]
+
+[crossword]
+| 1| 2|##| 3| 4| 5| 6|  |##| 7| 8|
+| 9|  |10|##|11|  |  |##|12|  |  |
+|##|13|  |14|##|  |##|15|  |  |##|
+|16|##|17|  |18|  |19|  |  |##|20|
+|21|22|##|23|  |  |  |  |##|24|  |
+|25|  |  |  |  |  |  |  |  |  |  |
+|26|  |##|27|  |  |  |  |##|28|  |
+|  |##|29|  |  |  |  |  |30|##|  |
+|##|31|  |  |##|  |##|32|  |33|##|
+|34|  |  |##|35|  |36|##|37|  |38|
+|39|  |##|40|  |  |  |  |##|41|  |
+[/crossword]
+
+[crossword]
+| 1H| 2E|###| 3R| 4I| 5C| 6I|  N|###| 7A| 8M|
+| 9O|  L|10D|###|11N|  O|  T|###|12H|  I|  E|
+|###|13F|  A|14R|###|  N|###|15B|  A|  R|###|
+|16U|###|17M|  U|18S|  S|19E|  L|  S|###|20P|
+|21P|22A|###|23M|  A|  P|  L|  E|###|24P|  O|
+|25P|  R|  O|  P|  R|  I|  E|  T|  O|  R|  S|
+|26E|  M|###|27L|  A|  R|  C|  H|###|28Y|  E|
+|  R|###|29S|  E|  N|  A|  T|  E|30S|###|  D|
+|###|31W|  A|  D|###|  T|###|32R|  A|33N|###|
+|34G|  A|  D|###|35L|  O|36B|###|37T|  O|38T|
+|39O|  N|###|40P|  O|  R|  E|  S|###|41D|  O|
+[/crossword]
+
+[crossword]
+| H | E |###| R | I | C | I | N |###| A | M |
+| O | L | D |###| N | O | T |###| H | I | E |
+|###| F | A | R |###| N |###| B | A | R |###|
+| U |###| M | U | S | S | E | L | S |###| P |
+| P | A |###| M | A | P | L | E |###| P | O |
+| P | R | O | P | R | I | E | T | O | R | S |
+| E | M |###| L | A | R | C | H |###| Y | E |
+| R |###| S | E | N | A | T | E | S |###| D |
+|###| W | A | D |###| T |###| R | A | N |###|
+| G | A | D |###| L | O | B |###| T | O | T |
+| O | N |###| P | O | R | E | S |###| D | O |
 [/crossword]

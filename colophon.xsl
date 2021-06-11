@@ -451,9 +451,7 @@
     <xsl:function name="f:qrImage" as="xs:string">
         <xsl:param name="pgNum"/>
 
-        <xsl:sequence select="if (matches($pgNum, '^[0-9]+$') and number($pgNum) &gt; 64449)
-                    then 'images/qr' || $pgNum || '.png'
-                    else 'images/qrcode.png'"/>
+        <xsl:sequence select="if (matches($pgNum, '^[0-9]+$')) then 'images/qr' || $pgNum || '.png' else 'images/qrcode.png'"/>
     </xsl:function>
 
 

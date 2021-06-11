@@ -442,11 +442,21 @@ sub makeQrCode($) {
             $imageDir = 'Processed/images';
         }
 
-        my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
+        # my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
+        my $file = $imageDir . '/qr' . $pgNumber . '.png';
 
-        if (not -e "$imageDir/$qrImage") {
+        if (not -e $file) {
             # Generate a QR code with a transparent background.
-            system("qrcode -l '#0000' -o $imageDir/$qrImage https://www.gutenberg.org/ebooks/$pgNumber");
+            system("qrcode -l '#0000' -o $file https://www.gutenberg.org/ebooks/$pgNumber");
+
+            # Optimize the generated QR code.
+            my $newFile = "$imageDir/qrcode-optimized.png";
+            system ("zopflipng.exe -m \"$file\" \"$newFile\"");
+            if (-s "$file" > -s "$newFile") {
+                move($newFile, $file);
+            } else {
+                unlink $newFile;
+            }
         }
     }
 }
