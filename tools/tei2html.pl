@@ -39,40 +39,41 @@ my $sx        = "sx";
 #==============================================================================
 # Arguments
 
-my $makeText            = 0;
-my $explicitMakeText    = 0;
-my $makeHtml            = 0;
-my $makeHeatMap         = 0;
-my $makePdf             = 0;
-my $makeEpub            = 0;
-my $epubVersion         = "3.0.1";
-my $makeWordlist        = 0;
-my $makeXML             = 0;
-my $makeP5              = 0;
-my $makePGTEI           = 0;
-my $makeKwic            = 0;
-my $runChecks           = 0;
-my $useUnicode          = 0;
-my $showHelp            = 0;
+my $atSize              = 0;
+my $clean               = 0;
+my $configurationFile   = "tei2html.config";
 my $customOption        = "";
 my $customStylesheet    = "custom.css";
-my $configurationFile   = "tei2html.config";
-my $atSize              = 0;
-my $pageWidth           = 72;
+my $debug               = 0;
+my $epubVersion         = "3.0.1";
+my $explicitMakeText    = 0;
+my $force               = 0;
+my $kwicCaseSensitive   = "no";
+my $kwicLanguages       = "";
+my $kwicMixup           = "";
+my $kwicSort            = "";
+my $kwicVariants        = 1;
+my $kwicWords           = "";
+my $makeEpub            = 0;
+my $makeHeatMap         = 0;
+my $makeHtml            = 0;
+my $makeKwic            = 0;
+my $makeP5              = 0;
+my $makePdf             = 0;
+my $makePGTEI           = 0;
+my $makeText            = 0;
+my $makeWordlist        = 0;
+my $makeXML             = 0;
 my $makeZip             = 0;
 my $noTranscription     = 0;
 my $noTranscriptionPopups = 0;
-my $force               = 0;
-my $debug               = 0;
-my $trace               = 0;
+my $pageWidth           = 72;
 my $profile             = 0;
+my $runChecks           = 0;
+my $showHelp            = 0;
+my $trace               = 0;
 my $useTidy             = 0;
-my $kwicLanguages       = "";
-my $kwicWords           = "";
-my $kwicSort            = "";
-my $kwicCaseSensitive   = "no";
-my $kwicMixup           = "";
-my $kwicVariants        = 1;
+my $useUnicode          = 0;
 
 GetOptions(
     '5' => \$makeP5,
@@ -95,6 +96,7 @@ GetOptions(
     's=s' => \$customOption,
     'w=i' => \$pageWidth,
 
+    'clean' => \$clean,
     'debug' => \$debug,
     'epubversion=s' => \$epubVersion,
     'heatmap' => \$makeHeatMap,
@@ -156,6 +158,7 @@ if ($showHelp == 1) {
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    w=<int>   Set the page width (default: 72 characters).\n\n";
 
+    print "    clean                           Clean intermediate files normally preserved.\n";
     print "    debug                           Debug mode.\n";
     print "    heatmap                         Generate a heatmap version.\n";
     print "    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
@@ -177,7 +180,7 @@ if ($showHelp == 1) {
 # Dependencies between files:
 #
 # (Processed/)?images/*.(jpg|png) -> imageinfo.xml
-# *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-preprocessed.xml -> *.html, *.epub, readme.md, metadata.xml
+# *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-included.xml -> *-preprocessed.xml -> *.html, *.epub, readme.md, metadata.xml
 # *(-[0-9].[0-9]+).tei -> *(-utf8).txt
 
 
@@ -295,8 +298,11 @@ sub processFile($) {
         tei2xml($filename, $xmlFilename);
     }
 
+    my $includedXmlFilename = "$basename-included.xml";
+    includeXml($xmlFilename, $includedXmlFilename);
+
     my $preprocessedXmlFilename = "$basename-preprocessed.xml";
-    preprocessXml($xmlFilename, $preprocessedXmlFilename);
+    preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
 
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
@@ -318,7 +324,36 @@ sub processFile($) {
         makeZip($basename);
     }
 
+    if ($clean == 1) {
+        unlink $includedXmlFilename;
+        unlink $preprocessedXmlFilename;
+
+        unlink "$basename.gutcheck";
+        unlink "$basename-final.gutcheck";
+        unlink "$basename.jeebies";
+        unlink "$basename-epubcheck.err";
+
+        # unlink "$basename-words.html";
+        unlink "$basename-$version-checks.html";
+        unlink "$basename-$version.tei.err";
+        unlink "issues.xml";
+    }
+
     print "=== Done! ==================================================================\n";
+}
+
+
+sub includeXml($$) {
+    my $xmlFilename = shift;
+    my $includedXmlFilename = shift;
+
+    if ($force == 0 && isNewer($includedXmlFilename, $xmlFilename)) {
+        print "Skip conversion to included XML ($includedXmlFilename newer than $xmlFilename).\n";
+        return;
+    }
+
+    print "Include inclusions in TEI file...\n";
+    system ("$saxon $xmlFilename $xsldir/include.xsl > $includedXmlFilename");
 }
 
 
@@ -527,7 +562,7 @@ sub makeEpub($$) {
 
     my $tmpFile = temporaryFile('epub', '.html');
     my $saxonParameters = determineSaxonParameters();
-    print "Create ePub version...\n";
+    print "Create ePub version from $xmlFile...\n";
     system ('mkdir epub');
     copyImages('epub/images');
     # copyFormulas('epub/formulas'); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
@@ -819,15 +854,33 @@ sub extractEntities($) {
     if (keys %entityHash > 0) {
         print "<!DOCTYPE TEI.2 PUBLIC \"-//TEI//DTD TEI Lite 1.0//EN\" [\n\n";
         my @entityList = sort keys %entityHash;
+        my $maxEntityLength = 1 + length longestString(@entityList);
+        my @translationList = map { utf2numericEntities(translateEntity($_)) } @entityList;
+        my $maxTranslationLength = 1 + length longestString(@translationList);
+
         foreach my $entity (@entityList) {
             my $translation = utf2numericEntities(translateEntity($entity));
-            my $paddedEntity = sprintf "%s%-*s", $entity, 12 - length $entity, ' ';
-            my $paddedTranslation = sprintf "\"%s\"%-*s", $translation, 20 - length $translation, ' ';
+            my $paddedEntity = sprintf "%s%-*s", $entity, $maxEntityLength - length $entity, ' ';
+            my $paddedTranslation = sprintf "\"%s\"%-*s", $translation, $maxTranslationLength - length $translation, ' ';
             my $count = $entityHash{$entity};
-            print "    <!ENTITY $paddedEntity CDATA $paddedTranslation -- $count -->\n";
+            my $paddedCount = sprintf "%-*s %s", 6 - length $count, ' ', $count;
+            print "    <!ENTITY $paddedEntity CDATA $paddedTranslation -- $paddedCount -->\n";
         }
         print "\n]>\n\n";
     }
+}
+
+
+sub longestString {
+    my $max = -1;
+    my $max_ref;
+    for (@_) {
+        if (length > $max) {
+            $max = length;
+            $max_ref = \$_;
+        }
+    }
+    $$max_ref;
 }
 
 

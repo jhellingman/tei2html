@@ -18,7 +18,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to preprocess TEI documents.</xd:short>
-        <xd:detail><p>This stylesheet preprocesses TEI documents, so the final conversion to HTML 
+        <xd:detail><p>This stylesheet preprocesses TEI documents, so the final conversion to HTML
             can be handled more easily.</p>
 
             <p>The following aspects are handled:</p>

@@ -333,8 +333,8 @@
     <xsl:function name="f:generated-toc-max-level" as="xs:integer">
         <xsl:param name="divGen"/>
 
-        <xsl:sequence select="if (f:has-rend-value($divGen/@rend, 'tocMaxLevel')) 
-            then xs:integer(f:rend-value($divGen/@rend, 'tocMaxLevel')) 
+        <xsl:sequence select="if (f:has-rend-value($divGen/@rend, 'tocMaxLevel'))
+            then xs:integer(f:rend-value($divGen/@rend, 'tocMaxLevel'))
             else 7"/>
     </xsl:function>
 
@@ -869,29 +869,40 @@
     <!-- Included material (alternative for xi:include); also take care relevant CSS styles are generated. -->
 
     <xsl:template match="divGen[@type='Inclusion']" mode="#default css style css-column css-row style-column style-row">
-        <!-- Material to be included should be rendered here; material is given on a url parameter -->
-        <xsl:choose>
-            <xsl:when test="@url">
-                <xsl:variable name="document" select="substring-before(@url, '#')"/>
-                <xsl:variable name="fragmentId" select="substring-after(@url, '#')"/>
-                <xsl:apply-templates mode="#current" select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document(@url, .)/*"/>
-            </xsl:when>
-            <xsl:when test="f:has-rend-value(@rend, 'include')">
-                <xsl:variable name="url" select="f:rend-value(@rend, 'include')"/>
-                <xsl:variable name="document" select="substring-before($url, '#')"/>
-                <xsl:variable name="fragmentId" select="substring-after($url, '#')"/>
-                <xsl:apply-templates mode="#current" select="if ($fragmentId) then document($document, .)//*[@id=$fragmentId] else document($url, .)/*"/>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:template>
 
+        <xsl:variable name="url" select="if (@url) then @url else f:rend-value(@rend, 'include')"/>
+        <xsl:if test="$url">
+            <xsl:copy-of select="f:log-info('Including {1}.', ($url))"/>
+            <xsl:variable name="document" select="substring-before($url, '#')"/>
+            <xsl:variable name="fragmentId" select="substring-after($url, '#')"/>
+            <xsl:variable name="content"
+                select="if ($fragmentId)
+                    then document($document, .)//*[@id=$fragmentId]
+                    else document($url, .)/*"/>
+            <xsl:if test="not($content)">
+                <xsl:copy-of select="f:log-error('{1} is empty.', ($url))"/>
+            </xsl:if>
+            <xsl:apply-templates mode="#current" select="$content"/>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template match="xi:include" mode="#default css style css-column css-row style-column style-row">
         <!-- Material to be included should be rendered here; material is given on an href parameter -->
         <xsl:if test="@href">
-            <xsl:apply-templates mode="#current" select="if (@xpointer) then document(@href, .)//*[@id=current()/@xpointer] else document(@href, .)/*"/>
+            <xsl:copy-of select="f:log-info('Including {1}.', (@href))"/>
+            <xsl:variable name="document" select="substring-before(@href, '#')"/>
+            <xsl:variable name="fragmentId" select="substring-after(@href, '#')"/>
+            <xsl:variable name="content"
+                select="if ($fragmentId)
+                    then document($document, .)//*[@id=$fragmentId]
+                    else document(@href, .)/*"/>
+            <xsl:if test="not($content)">
+                <xsl:copy-of select="f:log-error('{1} is empty.', (@href))"/>
+            </xsl:if>
+            <xsl:apply-templates mode="#current" select="$content"/>
         </xsl:if>
     </xsl:template>
+
 
     <!--====================================================================-->
     <!-- proto-Bibliography, to help build a bibliography from bibl-elements. -->
