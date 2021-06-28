@@ -311,19 +311,6 @@
 
 
     <xd:doc>
-        <xd:short>Handle an epigraph on the title page.</xd:short>
-        <xd:detail>When an epigraph appears on the title page, do not to use a <code>div</code> element to enclose it.</xd:detail>
-    </xd:doc>
-
-    <xsl:template match="epigraph[parent::titlePage]">
-        <span class="epigraph">
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-
-    <xd:doc>
         <xd:short>Handle a trailer.</xd:short>
         <xd:detail>Handle a trailer (a short phrase at the end of a chapter or book).</xd:detail>
     </xd:doc>

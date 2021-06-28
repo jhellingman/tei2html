@@ -55,7 +55,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="titlePart[@type='series' or @type='Series']" mode="titlePage">
+    <xsl:template match="titlePart[@type=('series', 'Series')]" mode="titlePage">
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'seriesTitle')"/>
@@ -63,7 +63,7 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="titlePart[@type='volume' or @type='Volume']" mode="titlePage">
+    <xsl:template match="titlePart[@type=('volume', 'Volume')]" mode="titlePage">
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'volumeTitle')"/>
@@ -106,8 +106,8 @@
     <xsl:template match="epigraph" mode="titlePage">
         <div>
             <!-- Wrap epigraph in extra layer for formatting -->
-            <xsl:copy-of select="f:set-class-attribute-with(., 'docImprint')"/>
-            <xsl:apply-templates select="."/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'epigraph')"/>
+            <xsl:apply-templates/>
         </div>
     </xsl:template>
 
