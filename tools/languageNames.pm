@@ -20,6 +20,7 @@ BEGIN {
     $langNameHash{"ar"}        = "Arabic";
     $langNameHash{"ar-latn"}   = "Arabic (Latin transcription)";
     $langNameHash{"as"}        = "Assamese";
+    $langNameHash{"as-latn"}   = "Assamese (Latin transcription)";
     $langNameHash{"ay"}        = "Aymara";
     $langNameHash{"az"}        = "Azerbaijani";
     $langNameHash{"ba"}        = "Bashkir";
@@ -28,6 +29,7 @@ BEGIN {
     $langNameHash{"bh"}        = "Bihari";
     $langNameHash{"bi"}        = "Bislama";
     $langNameHash{"bn"}        = "Bengali (Bangla)";
+    $langNameHash{"bn-latn"}   = "Bengali (Latin transcription)";
     $langNameHash{"bo"}        = "Tibetan";
     $langNameHash{"bo-latn"}   = "Tibetan (Latin transcription)";
     $langNameHash{"br"}        = "Breton";
@@ -233,6 +235,8 @@ BEGIN {
     $langNameHash{"akk-latn"}       = "Akkadian (Latin transcription)";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
+    $langNameHash{"brx"}            = "Bodo langauge";
+    $langNameHash{"brx-latn"}       = "Bodo langauge (Latin transcription)";
     $langNameHash{"ceb"}            = "Cebuano";
     $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
     $langNameHash{"com"}            = "Comanche";

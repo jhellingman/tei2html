@@ -10,8 +10,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="f xd xi xhtml xs">
 
-    <xsl:output indent="no" omit-xml-declaration="yes"/>
-
+    <xsl:output indent="no" method="xml" encoding="utf-8"/>
 
     <!-- stub function used by log.xsl -->
     <xsl:function name="f:is-set" as="xs:boolean">
