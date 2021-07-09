@@ -656,8 +656,9 @@
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
                 <xsl:call-template name="closepar"/>
-                <table class="tocList">
+                <table>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:copy-of select="f:set-class-attribute-with(., 'tocList')"/>
                     <xsl:apply-templates mode="tocList"/>
                 </table>
                 <xsl:call-template name="reopenpar"/>

@@ -68,8 +68,8 @@
 
     <xd:doc>
         <xd:short>Sort potentially mixed-up characters together.</xd:short>
-        <xd:detail>Sort (sequences of) characters that are often mixed-up (such as b and h, or rn and m) together. 
-        The resulting KWIC will only include words that include the mixed-up characters and appear in at least two 
+        <xd:detail>Sort (sequences of) characters that are often mixed-up (such as b and h, or rn and m) together.
+        The resulting KWIC will only include words that include the mixed-up characters and appear in at least two
         variants.</xd:detail>
     </xd:doc>
 
@@ -357,7 +357,7 @@
     <xsl:function name="f:context-sort-key" as="xs:string">
         <xsl:param name="preceding" as="xs:string"/>
         <xsl:param name="following" as="xs:string"/>
-        
+
         <xsl:choose>
             <xsl:when test="$sort-context = 'preceding'">
                 <xsl:value-of select="f:reverse(f:normalize-string($preceding))"/>
@@ -380,7 +380,7 @@
         <xsl:param name="word" as="xs:string"/>
         <xsl:param name="variant-count" as="xs:integer"/>
 
-        <xsl:sequence select="if ($mixup = '') 
+        <xsl:sequence select="if ($mixup = '')
                                   then $variant-count >= $min-variant-count
                                   else ($variant-count >= 2 and contains($word, $mixup-sequence[1]))"/>
     </xsl:function>
@@ -990,12 +990,12 @@
         </xsl:analyze-string>
     </xsl:template>
 
-    
+
     <xsl:function name="f:category" as="xs:string">
         <xsl:param name="node" as="node()"/>
 
         <xsl:sequence select="if ($node/ancestor-or-self::*[@type='Index'])
-                              then 'index' 
+                              then 'index'
                               else if ($node/ancestor-or-self::figure)
                                    then 'figure'
                                    else if ($node/ancestor-or-self::note)

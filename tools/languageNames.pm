@@ -233,6 +233,7 @@ BEGIN {
 
     $langNameHash{"akk"}            = "Akkadian";
     $langNameHash{"akk-latn"}       = "Akkadian (Latin transcription)";
+    $langNameHash{"ang"}            = "Old English";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
     $langNameHash{"brx"}            = "Bodo langauge";
