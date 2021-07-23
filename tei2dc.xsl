@@ -24,8 +24,8 @@
         indent="yes"
         encoding="UTF-8"/>
 
-    <xsl:include href="stripns.xsl"/>
-    <xsl:include href="copyright.xsl"/>
+    <xsl:include href="modules/stripns.xsl"/>
+    <xsl:include href="modules/copyright.xsl"/>
 
     <xsl:template match="/">
         <xsl:apply-templates/>

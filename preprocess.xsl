@@ -11,10 +11,9 @@
 
     <xsl:output indent="no" method="xml" encoding="utf-8"/>
 
-    <xsl:include href="stripns.xsl"/>
-    <xsl:include href="normalize-table.xsl"/>
+    <xsl:include href="modules/stripns.xsl"/>
+    <xsl:include href="modules/normalize-table.xsl"/>
 
-    
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to preprocess TEI documents.</xd:short>

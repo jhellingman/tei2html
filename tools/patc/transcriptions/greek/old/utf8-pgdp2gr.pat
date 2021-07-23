@@ -7,7 +7,6 @@
 "[Greek:"   1 "<GR>"
 "[Greek: "  1 "<GR>"
 
-
 @patterns 2 % skip proofer comments in Greek
 
 "]"         1 "]<GR>"
@@ -489,12 +488,14 @@
 
 "v"         p "&digamma;"
 "[f]"       p "&digamma;"
-"[j]"       p "&jgr;";
-"[(]"       p "&lpar;";
-"[)]"       p "&rpar;";
+"[j]"       p "&jgr;"
+"[(]"       p "&lpar;"
+"[)]"       p "&rpar;"
 
 "[^*]"      p "[^*]";   %% FRANCK: raised asterisk.
 
+";"         p "&middot;"
+"?"         p "&qmgr;"
 
 %% warn for illegal characters
 

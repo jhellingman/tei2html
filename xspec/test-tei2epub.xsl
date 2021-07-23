@@ -18,38 +18,38 @@
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:include href="../utils.xsl"/>
-    <xsl:include href="../utils.epub.xsl"/>
-    <xsl:include href="../betacode.xsl"/>
-    <xsl:include href="../configuration.xsl"/>
-    <xsl:include href="../log.xsl"/>
-    <xsl:include href="../localization.xsl"/>
-    <xsl:include href="../header.xsl"/>
-    <xsl:include href="../inline.xsl"/>
-    <xsl:include href="../rend.xsl"/>
-    <xsl:include href="../css.xsl"/>
-    <xsl:include href="../references.xsl"/>
-    <xsl:include href="../titlepage.xsl"/>
-    <xsl:include href="../block.xsl"/>
-    <xsl:include href="../notes.xsl"/>
-    <xsl:include href="../numbers.xsl"/>
-    <xsl:include href="../drama.xsl"/>
-    <xsl:include href="../contents.xsl"/>
-    <xsl:include href="../index.xsl"/>
-    <xsl:include href="../divisions.xsl"/>
-    <xsl:include href="../splitter.xsl"/>
-    <xsl:include href="../tables.xsl"/>
-    <xsl:include href="../lists.xsl"/>
-    <xsl:include href="../formulas.xsl"/>
-    <xsl:include href="../figures.xsl"/>
-    <xsl:include href="../colophon.xsl"/>
-    <xsl:include href="../gutenberg.xsl"/>
-    <xsl:include href="../facsimile.xsl"/>
-    <xsl:include href="../stripns.xsl"/>
+    <xsl:include href="../modules/utils.xsl"/>
+    <xsl:include href="../modules/utils.epub.xsl"/>
+    <xsl:include href="../modules/betacode.xsl"/>
+    <xsl:include href="../modules/configuration.xsl"/>
+    <xsl:include href="../modules/log.xsl"/>
+    <xsl:include href="../modules/localization.xsl"/>
+    <xsl:include href="../modules/header.xsl"/>
+    <xsl:include href="../modules/inline.xsl"/>
+    <xsl:include href="../modules/rend.xsl"/>
+    <xsl:include href="../modules/css.xsl"/>
+    <xsl:include href="../modules/references.xsl"/>
+    <xsl:include href="../modules/titlepage.xsl"/>
+    <xsl:include href="../modules/block.xsl"/>
+    <xsl:include href="../modules/notes.xsl"/>
+    <xsl:include href="../modules/numbers.xsl"/>
+    <xsl:include href="../modules/drama.xsl"/>
+    <xsl:include href="../modules/contents.xsl"/>
+    <xsl:include href="../modules/index.xsl"/>
+    <xsl:include href="../modules/divisions.xsl"/>
+    <xsl:include href="../modules/splitter.xsl"/>
+    <xsl:include href="../modules/tables.xsl"/>
+    <xsl:include href="../modules/lists.xsl"/>
+    <xsl:include href="../modules/formulas.xsl"/>
+    <xsl:include href="../modules/figures.xsl"/>
+    <xsl:include href="../modules/colophon.xsl"/>
+    <xsl:include href="../modules/gutenberg.xsl"/>
+    <xsl:include href="../modules/facsimile.xsl"/>
+    <xsl:include href="../modules/stripns.xsl"/>
 
-    <xsl:include href="../tei2opf.xsl"/>
-    <xsl:include href="../tei2ncx.xsl"/>
-    <xsl:include href="../tei2epubnav.xsl"/>
+    <xsl:include href="../modules/tei2opf.xsl"/>
+    <xsl:include href="../modules/tei2ncx.xsl"/>
+    <xsl:include href="../modules/tei2epubnav.xsl"/>
 
 
     <xsl:output name="xhtml"

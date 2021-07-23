@@ -52,10 +52,10 @@
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:include href="log.xsl"/>
-    <xsl:include href="configuration.xsl"/>
-    <xsl:include href="segmentize.xsl"/>
-    <xsl:include href="numbers.xsl"/>
+    <xsl:include href="modules/log.xsl"/>
+    <xsl:include href="modules/configuration.xsl"/>
+    <xsl:include href="modules/segmentize.xsl"/>
+    <xsl:include href="modules/numbers.xsl"/>
 
     <xsl:variable name="outputformat" select="'html'"/>
 

@@ -2,7 +2,7 @@
 
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:f="urn:stylesheet-functions"
-               stylesheet="../levenshtein.xsl"
+               stylesheet="../modules/levenshtein.xsl"
                version="3.0">
 
    <x:scenario label="When determining the levenstein distance between empty strings">

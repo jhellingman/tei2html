@@ -5,9 +5,13 @@ use warnings;
 use Lingua::BO::Wylie;  # Download tool from https://www.thlib.org/reference/transliteration/wyconverter.php
 use HTML::Entities;
 
+use SgmlSupport qw/getAttrVal/;
+
 # binmode(STDOUT, ":utf8");
 
 my $wl = new Lingua::BO::Wylie();
+
+my $pageNumber = 0;
 
 main();
 
@@ -18,6 +22,14 @@ sub main {
 
     while (<INPUTFILE>) {
         print handleLine($_);
+
+        if ($_ =~ m/(<pb\b(.*?)>)/) {
+            my $before = $`;
+            my $pbTag = $1;
+            my $pbAttrs = $2;
+            $pageNumber = getAttrVal('n', $pbAttrs);
+            # print STDERR "Page $pageNumber\n";
+        }
     }
 
     close INPUTFILE;

@@ -1276,8 +1276,8 @@ BEGIN {
 
     # punctuation marks
 
-    $ent{'ckgr'}        = chr(0x0387); # "&middot;"
-    $ent{'qmgr'}        = chr(0x037e); # ";"
+    $ent{'ckgr'}        = chr(0x00b7); # Greek Ano Teleia, semicolon. "&middot;" Technically: chr(0x0387), preferred Unicode: U+00B7 
+    $ent{'qmgr'}        = chr(0x037e); # Greek Question mark, looks like semi-colon.
 
     # additional entities not in TEI
 

@@ -30,7 +30,7 @@
         method="xml"
         encoding="utf-8"/>
 
-    <xsl:include href="segmentize.xsl"/>
+    <xsl:include href="modules/segmentize.xsl"/>
 
     <xsl:param name="output-segments" select="false()"/>
 

@@ -9,7 +9,7 @@
    <metadata>
       <dc:identifier id="epub-id">urn:uuid:51F98242-DD7B-11E0-AA64-AB114924019B</dc:identifier>
       <meta refines="#epub-id" property="identifier-type">uuid</meta>
-      <meta property="dcterms:modified">2021-04-26T09:03:04Z</meta>
+      <meta property="dcterms:modified">2021-07-23T15:16:47Z</meta>
       <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/12345</dc:identifier>
       <meta refines="#pgnum" property="identifier-type">uri</meta>
       <dc:title>Main Title of Work Goes Here</dc:title>
@@ -45,7 +45,6 @@
             href="test-nav.xhtml"
             media-type="application/xhtml+xml"/>
       <item id="css" href="test.css" media-type="text/css"/>
-      <item id="qrcode" href="images/qrcode.png" media-type="image/png"/>
       <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
       <item id="frontmatter-2"
             href="test-frontmatter-2.xhtml"

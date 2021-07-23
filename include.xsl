@@ -19,8 +19,8 @@
     </xsl:function>
 
 
-    <xsl:include href="log.xsl"/>
-    <xsl:include href="rend.xsl"/>
+    <xsl:include href="modules/log.xsl"/>
+    <xsl:include href="modules/rend.xsl"/>
 
 
     <xsl:template match="@*|node()">

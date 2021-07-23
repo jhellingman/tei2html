@@ -17,11 +17,11 @@
 
     <xsl:variable name="outputformat" select="markdown"/>
 
-    <xsl:include href="log.xsl"/>
-    <xsl:include href="configuration.xsl"/>
-    <xsl:include href="localization.xsl"/>
-    <xsl:include href="references-func.xsl"/>
-    <xsl:include href="stripns.xsl"/>
+    <xsl:include href="modules/log.xsl"/>
+    <xsl:include href="modules/configuration.xsl"/>
+    <xsl:include href="modules/localization.xsl"/>
+    <xsl:include href="modules/references-func.xsl"/>
+    <xsl:include href="modules/stripns.xsl"/>
 
     <xsl:output
         method="text"
