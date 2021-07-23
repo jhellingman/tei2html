@@ -109,3 +109,7 @@ test/testTable/testTable.html
 test/testTable/testTable.jeebies
 test/testTable/testTable.txt
 test/testTable/testTable.xml
+test/testTable/testTable-included.xml
+test/testMath/testMath-included.xml
+tools/test.txt
+tools/tmp/convertCrossWord-test.tei

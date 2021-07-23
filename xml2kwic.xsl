@@ -91,7 +91,7 @@
         <xd:short>The name of the file that contains stopwords.</xd:short>
     </xd:doc>
 
-    <xsl:param name="stopword-file" select="'stopwords.xml'" as="xs:string"/>
+    <xsl:param name="stopword-file" select="'locale/stopwords.xml'" as="xs:string"/>
 
     <xsl:variable name="stopwords" as="map(xs:string, xs:string*)">
         <xsl:map>
