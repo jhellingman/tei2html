@@ -23,7 +23,7 @@
         <xd:detail>Node tree of document following the <code>messages.xsd</code> schema. The actual messages are pulled from this structure.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="messages" select="document('../messages.xml')/msg:repository"/>
+    <xsl:variable name="messages" select="document('../locale/messages.xml')/msg:repository"/>
 
 
     <xd:doc>
