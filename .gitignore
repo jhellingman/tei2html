@@ -10,8 +10,7 @@
 .idea/
 _Deparsed_XSubs.pm
 
-attic/
-attick/
+bin/
 common/
 doc/
 dtd/
@@ -21,11 +20,12 @@ issues/
 libraries/json2xml/
 target/
 xspec/xspec/
-bin/
 
+.vscode/tasks.json
 align-paragraphs-output.html
 align-paragraphs-output-orig.xml
 audio/test.ogg
+bin/SaxonHE9-9-1-8J/**
 covers/reference250.jpg
 covers/reference500.jpg
 databases/queries.txt
@@ -46,6 +46,7 @@ messages.po
 messages.xlsx
 messages-with-missing.xml
 messages-with-missing-de-translations.xml
+package.json
 Sample ePubs/
 samples/Cole - Philippine Folk Tales/PhilippineFolkTales-pos.xml
 sandbox/
@@ -64,8 +65,33 @@ test/images/stock_book_yellow-16.png
 test/images/stock_book-16.png
 test/images/stock_volume-16.png
 test/testMath/formulas/
+test/testMath/issues.xml
+test/testMath/metadata.xml
+test/testMath/README.md
+test/testMath/testMath.gutcheck
+test/testMath/testMath.html
+test/testMath/testMath.jeebies
+test/testMath/testMath.txt
+test/testMath/testMath-0.0-checks.html
+test/testMath/testMath-included.xml
+test/testMath/testMath-preprocessed.xml
+test/testMath/testMath-words.html
 test/test-normalized-p5.xml
 test/test-p5.html
+test/test-preprocessed.xml
+test/test-preprocessed-p5.xml
+test/testTable/issues.xml
+test/testTable/metadata.xml
+test/testTable/README.md
+test/testTable/testTable.gutcheck
+test/testTable/testTable.html
+test/testTable/testTable.jeebies
+test/testTable/testTable.txt
+test/testTable/testTable.xml
+test/testTable/testTable-checks.html
+test/testTable/testTable-included.xml
+test/testTable/testTable-preprocessed.xml
+test/testTable/testTable-words.html
 test-kwic.html
 test-normalized.xml
 test-odt.xml
@@ -79,31 +105,12 @@ tools/corpus tools/Nederlandsch Woordenlijst/
 tools/corpus tools/out.features
 tools/corpus tools/test/
 tools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
+tools/lib/
 tools/lib/bin/SaxonEE9-9-1-8J/**
-bin/SaxonHE9-9-1-8J/**
-package.json
-test/testMath/testMath-0.0-checks.html
-test/testMath/testMath-words.html
-test/testMath/testMath.gutcheck
-test/testMath/testMath.jeebies
-test/testMath/testMath.txt
-test/test-preprocessed-p5.xml
-test/test-preprocessed.xml
-.vscode/tasks.json
-test/testMath/testMath-preprocessed.xml
-test/testMath/testMath.html
-test/testTable/issues.xml
-test/testTable/metadata.xml
-test/testTable/README.md
-test/testTable/testTable-checks.html
-test/testTable/testTable-preprocessed.xml
-test/testTable/testTable-words.html
-test/testTable/testTable.gutcheck
-test/testTable/testTable.html
-test/testTable/testTable.jeebies
-test/testTable/testTable.txt
-test/testTable/testTable.xml
-test/testTable/testTable-included.xml
-test/testMath/testMath-included.xml
+tools/patc/transcriptions/arabic/Downloaded/arabic.gif
+tools/pubtext/
+tools/tei2xml.pl
 tools/test.txt
 tools/tmp/convertCrossWord-test.tei
+tools/attic/
+
