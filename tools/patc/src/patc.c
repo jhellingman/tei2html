@@ -65,8 +65,8 @@ typedef struct patterntree
 
 /* globals */
 
-FILE *infile  = stdin;
-FILE *outfile = stdout;
+FILE *infile;
+FILE *outfile;
 patterntree pat[NUMPATS];
 
 char *argv0;
@@ -115,6 +115,9 @@ int main(int argc, char** argv)
   char *outfilename = "stdout";
   char *tmp;
   char path[MAXPATH];
+
+  infile = stdin;
+  outfile = stdout;
 
 #ifdef MAC
 	argc = ccommand(&argv);
@@ -375,7 +378,7 @@ static void parsetables(FILE *patfile, char *patfilename)
         }
         else if(strcmp(command, "end") == 0) return;
         else
-        { fprintf(stderr, "Error: unknown command %s in line %ls\n", command, sourceline);
+        { fprintf(stderr, "Error: unknown command %s in line %ld\n", command, sourceline);
           exit(1);
         }
         break;
@@ -426,7 +429,7 @@ static void patc()
     if(len == 0)
     { if(pat[current].r)   /* restrictive? */
       { if(verbose)        /* complain */
-          fprintf(stderr, "Warning: illegal character '%c' near line %d\n", ps[0], linenumber);
+          fprintf(stderr, "Warning: illegal character '%c' near line %ld\n", ps[0], linenumber);
       }
       else /* copy silently */
       { fputc(ps[0], outfile);

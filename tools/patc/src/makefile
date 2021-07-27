@@ -1,17 +1,14 @@
-# compiler
-CC = c:/emx/bin/gcc
-# include directory
-INCLUDE =-Ic:/emx/include
 
 objects = patc.o pstree.o searchfile.o
 
-patc.exe: $(objects)
-    $(CC) -o patc.exe $(objects)
+patc: $(objects)
+	$(CC) -o patc $(objects)
 
 # file dependencies:
 
-patc.o            :   patc.h pstree.h searchfile.h
-pstree.o          :   pstree.h
-searchfile.o	  :   searchfile.h
+patc.o       : patc.c pstree.h searchfile.h
+pstree.o     : pstree.c pstree.h
+searchfile.o : searchfile.h searchfile.c
 
-# end
+clean :
+	-rm $(objects) patc

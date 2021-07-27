@@ -21,6 +21,7 @@ issues/
 libraries/json2xml/
 target/
 xspec/xspec/
+bin/
 
 align-paragraphs-output.html
 align-paragraphs-output-orig.xml
@@ -78,15 +79,8 @@ tools/corpus tools/Nederlandsch Woordenlijst/
 tools/corpus tools/out.features
 tools/corpus tools/test/
 tools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
-tools/lib/
-tools/patc/transcriptions/arabic/arabic.gif
-tools/patc/transcriptions/arabic/Downloaded/arabic.gif
-tools/pubtext/
-tools/tei2xml.pl
-xsltdoc.log
-test/testMath/issues.xml
-test/testMath/metadata.xml
-test/testMath/README.md
+tools/lib/bin/SaxonEE9-9-1-8J/**
+bin/SaxonHE9-9-1-8J/**
 package.json
 test/testMath/testMath-0.0-checks.html
 test/testMath/testMath-words.html
