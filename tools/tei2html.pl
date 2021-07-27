@@ -25,7 +25,7 @@ my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 my $toolsdir  = $home . "/tools";                    # location of tools
 my $xsldir    = abs_path($toolsdir . "/..");         # location of xsl stylesheets
 my $patcdir   = $toolsdir . "/patc/transcriptions";  # location of patc transcription files.
-my $catalog   = $toolsdir . "/pubtext/CATALOG";      # location of SGML catalog (required for nsgmls and sx)
+my $catalog   = $home . "/dtd/CATALOG";              # location of SGML catalog (required for nsgmls and sx)
 
 my $java      = "java $javaOptions";
 my $prince    = $princeHome . "/Engine/bin/prince.exe";                   # see https://www.princexml.com/
