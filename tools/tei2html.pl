@@ -33,8 +33,8 @@ my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see 
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
 my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $nsgmls    = "onsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "osx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 
 #==============================================================================
 # Arguments
@@ -571,7 +571,8 @@ sub makeEpub($$) {
 
     system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
 
-    system ("del $epubFile");
+    print "REMOVING: $epubFile";
+    unlink $epubFile;
     chdir 'epub';
     system ("zip -Xr9Dq ../$epubFile mimetype");
     system ("zip -Xr9Dq ../$epubFile * -x mimetype");

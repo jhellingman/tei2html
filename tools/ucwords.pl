@@ -85,6 +85,7 @@ my $wordCount = 0;
 my $numberCount = 0;
 my $nonWordCount = 0;
 my $charCount = 0;
+my $compositeCharCount = 0;
 my $langCount = 0;
 my $langStackSize = 0;
 
@@ -363,7 +364,7 @@ sub countCompositeChar($) {
     my $compositeChar = shift;
     if (length($compositeChar) > 1) {
         $compositeCharHash{$compositeChar}++;
-        $compositeChar++;
+        $compositeCharCount++;
     }
 }
 
