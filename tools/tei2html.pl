@@ -571,7 +571,6 @@ sub makeEpub($$) {
 
     system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
 
-    print "REMOVING: $epubFile";
     unlink $epubFile;
     chdir 'epub';
     system ("zip -Xr9Dq ../$epubFile mimetype");
