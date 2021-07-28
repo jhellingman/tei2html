@@ -33,8 +33,8 @@ my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see 
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
 my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/
-my $sx        = "sx";
+my $nsgmls    = "onsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "osx";
 
 #==============================================================================
 # Arguments
@@ -908,7 +908,7 @@ sub runChecks($) {
 
     my $positionInfoFilename = $basename . '-pos.' . $format;
 
-    system ("perl -S addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
+    system ("perl $toolsdir/addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
 
     if ($format eq 'tei') {
         my $tmpFile = temporaryFile('checks', '.tei');
@@ -917,7 +917,7 @@ sub runChecks($) {
         # verified. The trick used is that unmatched parentheses and brackets can be represented
         # by their SGML entities, and those entities will be mapped to alternative characters
         # for the test only. Similary, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
-        system ("perl -S precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
+        system ("perl $toolsdir/precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
         $debug || unlink ($positionInfoFilename);
 
         tei2xml($tmpFile, $basename . '-pos.xml');
