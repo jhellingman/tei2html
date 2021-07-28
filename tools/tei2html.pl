@@ -33,8 +33,8 @@ my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see 
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
 my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "onsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = "osx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 
 #==============================================================================
 # Arguments
@@ -325,21 +325,28 @@ sub processFile($) {
     }
 
     if ($clean == 1) {
-        unlink $includedXmlFilename;
-        unlink $preprocessedXmlFilename;
+        removeFile($includedXmlFilename);
+        removeFile($preprocessedXmlFilename);
 
-        unlink "$basename.gutcheck";
-        unlink "$basename-final.gutcheck";
-        unlink "$basename.jeebies";
-        unlink "$basename-epubcheck.err";
+        removeFile("$basename.gutcheck");
+        removeFile("$basename-final.gutcheck");
+        removeFile("$basename.jeebies");
+        removeFile("$basename-epubcheck.err");
 
-        # unlink "$basename-words.html";
-        unlink "$basename-$version-checks.html";
-        unlink "$basename-$version.tei.err";
-        unlink "issues.xml";
+        # removeFile("$basename-words.html");
+        removeFile("$basename-$version-checks.html");
+        removeFile("$basename-$version.tei.err");
+        removeFile("issues.xml");
     }
 
     print "=== Done! ==================================================================\n";
+}
+
+
+sub removeFile($) {
+    my $fileToRemove = shift;
+    print "DEBUG: Removing file: $fileToRemove.\n";
+    $debug || unlink($fileToRemove);
 }
 
 
@@ -490,7 +497,7 @@ sub makeQrCode($) {
             if (-s "$file" > -s "$newFile") {
                 move($newFile, $file);
             } else {
-                unlink $newFile;
+                removeFile($newFile);
             }
         }
     }
@@ -517,10 +524,10 @@ sub makeHtml($$) {
     } else {
         my $tmpFile2 = temporaryFile('html', '.html');
         system ("perl $toolsdir/cleanHtml.pl $htmlFile > $tmpFile2");
-        unlink($htmlFile);
+        removeFile($htmlFile);
         system ("mv $tmpFile2 $htmlFile");
     }
-    $debug || unlink($tmpFile);
+    removeFile($tmpFile);
 }
 
 
@@ -545,8 +552,8 @@ sub makePdf($$) {
     system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
     system ("$prince $basename-prince.html $pdfFile");
 
-    $debug || unlink($tmpFile1);
-    $debug || unlink($tmpFile2);
+    removeFile($tmpFile1);
+    removeFile($tmpFile2);
 }
 
 
@@ -571,14 +578,14 @@ sub makeEpub($$) {
 
     system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
 
-    unlink $epubFile;
+    removeFile($epubFile);
     chdir 'epub';
     system ("zip -Xr9Dq ../$epubFile mimetype");
     system ("zip -Xr9Dq ../$epubFile * -x mimetype");
     chdir '..';
 
     system ("$epubcheck $epubFile 2> $basename-epubcheck.err");
-    $debug || unlink($tmpFile);
+    removeFile($tmpFile);
     $debug || remove_tree('epub')
 }
 
@@ -623,13 +630,13 @@ sub makeText($$) {
     }
 
     if ($filename ne $transcribedFile) {
-        $debug || unlink ($transcribedFile);
+        removeFile($transcribedFile);
     }
 
-    $debug || unlink("$transcribedFile.out");
-    $debug || unlink("$transcribedFile.notes");
-    $debug || unlink($tmpFile1);
-    $debug || unlink($tmpFile2);
+    removeFile("$transcribedFile.out");
+    removeFile("$transcribedFile.notes");
+    removeFile($tmpFile1);
+    removeFile($tmpFile2);
 
     # check for required manual interventions
     my $containsError = system ("grep -q \"\\[ERROR:\" $textFile");
@@ -664,7 +671,7 @@ sub makeWordlist($$) {
     print "Report on word usage...\n";
     system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
-    $debug || unlink($tmpFile);
+    removeFile($tmpFile);
 
     # Create a text heat map.
     if (-f 'heatmap.xml') {
@@ -918,12 +925,12 @@ sub runChecks($) {
         # by their SGML entities, and those entities will be mapped to alternative characters
         # for the test only. Similary, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
         system ("perl $toolsdir/precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
-        $debug || unlink ($positionInfoFilename);
+        removeFile($positionInfoFilename);
 
         tei2xml($tmpFile, $basename . '-pos.xml');
         $positionInfoFilename = $basename . '-pos.xml';
-        $debug || unlink ($tmpFile);
-        $debug || unlink ($tmpFile . '.err');
+        removeFile($tmpFile);
+        removeFile($tmpFile . '.err');
     }
 
     my $xmlFilename = temporaryFile('checks', '.xml');
@@ -931,13 +938,13 @@ sub runChecks($) {
 
     system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
     if ($filename ne $intraFile) {
-        $debug || unlink ($intraFile);
+        removeFile($intraFile);
     }
     if ($filename ne $transcribedFile) {
-        $debug || unlink ($transcribedFile);
+        removeFile($transcribedFile);
     }
-    $debug || unlink ($positionInfoFilename);
-    $debug || unlink ($xmlFilename);
+    removeFile($positionInfoFilename);
+    removeFile($xmlFilename);
 }
 
 
@@ -1099,7 +1106,7 @@ sub tei2xml($$) {
     if ($nsgmlresult != 0) {
         print "WARNING: NSGML found validation errors in $sgmlFile.\n";
     }
-    $debug || unlink("$sgmlFile.nsgml");
+    removeFile("$sgmlFile.nsgml");
 
     my $tmpFile1 = temporaryFile('hide-entities', '.tei');
     my $tmpFile2 = temporaryFile('sx', '.xml');
@@ -1119,13 +1126,13 @@ sub tei2xml($$) {
     system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
 
-    $debug || unlink($tmpFile4);
-    $debug || unlink($tmpFile3);
-    $debug || unlink($tmpFile2);
-    $debug || unlink($tmpFile1);
-    $debug || unlink($tmpFile0);
-    $debug || unlink($intraFile);
-    $debug || unlink($transcribedFile);
+    removeFile($tmpFile4);
+    removeFile($tmpFile3);
+    removeFile($tmpFile2);
+    removeFile($tmpFile1);
+    removeFile($tmpFile0);
+    removeFile($intraFile);
+    removeFile($transcribedFile);
 }
 
 #
@@ -1191,7 +1198,7 @@ sub convertWylie() {
     print "Convert Tibetan transcription...\n";
     system ("perl $toolsdir/convertWylie.pl $currentFile > $tmpFile");
 
-    my $debug || unlink($currentFile);
+    removeFile($currentFile);
     return $tmpFile;
 }
 
@@ -1222,13 +1229,13 @@ sub addTranscriptions($) {
         system ("patc -p $patcdir/cyrillic/srt2sgml.pat $tmpFile5 $tmpFile6");
         system ("patc -p $patcdir/cyrillic/sr2sgml.pat $tmpFile6 $tmpFile7");
 
-        $debug || unlink($tmpFile1);
-        $debug || unlink($tmpFile2);
-        $debug || unlink($tmpFile3);
-        $debug || unlink($tmpFile4);
-        $debug || unlink($tmpFile5);
-        $debug || unlink($tmpFile6);
-        $debug || unlink($currentFile);
+        removeFile($tmpFile1);
+        removeFile($tmpFile2);
+        removeFile($tmpFile3);
+        removeFile($tmpFile4);
+        removeFile($tmpFile5);
+        removeFile($tmpFile6);
+        removeFile($currentFile);
         $currentFile = $tmpFile7;
     }
     return $currentFile;
@@ -1252,7 +1259,7 @@ sub transcribeNotation($$$$) {
         print "Convert $name transcription...\n";
         system ("patc -p $patternFile $currentFile $tmpFile");
 
-        $debug || unlink($currentFile);
+        removeFile($currentFile);
         $currentFile = $tmpFile;
     }
     return $currentFile;
