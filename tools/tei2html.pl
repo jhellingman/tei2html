@@ -33,8 +33,8 @@ my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see 
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
 my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "onsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = "osx";
+my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 
 #==============================================================================
 # Arguments
