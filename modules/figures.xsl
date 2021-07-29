@@ -30,7 +30,7 @@
 
     <xsl:param name="imageInfoFile" as="xs:string?"/>
 
-    <xsl:variable name="imageInfo" select="document(replace(normalize-space($imageInfoFile), '^file:/', ''), .)" as="node()?"/>
+    <xsl:variable name="imageInfo" select="document(f:normalizeFilename($imageInfoFile))" as="node()?"/>
 
     <xd:doc>
         <xd:short>Determine the file name for an image.</xd:short>

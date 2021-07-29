@@ -15,6 +15,7 @@
         <xd:copyright>2011-2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="modules/functions.xsl"/>
     <xsl:include href="modules/utils.xsl"/>
     <xsl:include href="modules/utils.html.xsl"/>
     <xsl:include href="modules/betacode.xsl"/>

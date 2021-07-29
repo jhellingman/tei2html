@@ -40,6 +40,7 @@ For Windows, my advise is to download [Strawberry Perl](http://strawberryperl.co
 * MIME::Base64
 * XML::XPath
 * Unicode::Normalize
+* Roman
 
 If you are missing a package, it can easily be installed using CPAN: `cpan install <package>`.
 
@@ -49,12 +50,14 @@ _Optional, only needed you want to use SGML as source format._
 
 SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since XSLT only supports XML, you will need both those two tools to be able to work with SGML. They can be downloaded from [James Clark website](http://www.jclark.com/). For windows, get [sp 1.3.4](ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip).
 
-To enable SX and NSGML to understand your document types, you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named `tools/pubtext/CATALOG`.
+To enable SX and NSGML to understand your document types, you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named `dtd/CATALOG`.
 
 You will need to add the `teilite.dtd` to the CATALOG. This DTD can be found here: http://www.tei-c.org/Vault/P4/Lite/DTD/
 
 A short explanation of Catalog files can be found in the SP documentation on James Clark's website referenced above.
 
+As an alternative to SX and NSGML, you can use osx and onsgml from the OpenJade Project. These are slightly more up-to-date. You will have to update
+the names in the main `tei2html.pl` script in that case.
 
 ## ZIP ##
 
@@ -75,7 +78,7 @@ To convert mathematical formulas in TeX format to a format that can be included 
 
 _Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML._
 
-Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary.)
+Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary. A make file for use with linux is also included.)
 
 
 ## epubcheck ##

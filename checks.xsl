@@ -52,6 +52,7 @@
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="modules/functions.xsl"/>
     <xsl:include href="modules/log.xsl"/>
     <xsl:include href="modules/configuration.xsl"/>
     <xsl:include href="modules/segmentize.xsl"/>
