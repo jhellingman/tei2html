@@ -24,6 +24,7 @@
         indent="yes"
         encoding="UTF-8"/>
 
+    <xsl:include href="modules/functions.xsl"/>
     <xsl:include href="modules/stripns.xsl"/>
     <xsl:include href="modules/copyright.xsl"/>
 
@@ -138,20 +139,6 @@
     </xsl:template>
 
     <xsl:template match="*"/>
-
-
-    <xd:doc>
-        <xd:short>Determine a string has a valid value.</xd:short>
-        <xd:detail>
-            <p>Determine a string has a valid value, that is, not null, empty or '#####' (copied from utils.xml)</p>
-        </xd:detail>
-        <xd:param name="value" type="string">The value to be tested.</xd:param>
-    </xd:doc>
-
-    <xsl:function name="f:is-valid" as="xs:boolean">
-        <xsl:param name="value"/>
-        <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
-    </xsl:function>
 
 
 </xsl:stylesheet>

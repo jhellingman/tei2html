@@ -33,8 +33,8 @@
     <xsl:param name="configurationFile"/>
 
     <xd:doc type="string">Custom configuration (if available read from file else empty).</xd:doc>
-    <xsl:variable name="custom-configuration" select="if ($configurationFile) 
-                                                      then document(f:normalizeFilename($configurationFile), /) 
+    <xsl:variable name="custom-configuration" select="if ($configurationFile)
+                                                      then document(f:normalizeFilename($configurationFile), /)
                                                       else $empty-configuration"/>
 
     <xsl:variable name="empty-configuration">
@@ -51,7 +51,7 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <debug>false</debug>                                            <!-- Use debug mode. -->            
+            <debug>false</debug>                                            <!-- Use debug mode. -->
             <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
 
             <debug.facsimile>false</debug.facsimile>
@@ -142,7 +142,7 @@
             <math.label.before>(</math.label.before>
             <math.label.after>)</math.label.after>
             <math.keepTexInComment>true</math.keepTexInComment>
-    
+
             <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- Options: MathJax; MML; SVG; SVG+IMG -->
             <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- Options for MathJax format, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
 
@@ -166,12 +166,12 @@
     <xd:doc>
         <xd:short>Combine the custom and default configuration into a single map for easy access.</xd:short>
         <xd:detail>
-            <p>Combine the file-specific and default configuration into a map. The configuration file is specified in the variable <code>$configurationFile</code> 
+            <p>Combine the file-specific and default configuration into a map. The configuration file is specified in the variable <code>$configurationFile</code>
             (default: <code>tei2html.config</code>).</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:variable name="configuration-map" as="map(xs:string, xs:string)" 
+    <xsl:variable name="configuration-map" as="map(xs:string, xs:string)"
         select="f:merge-configuration(
                     f:convert-configuration($default-configuration/tei2html.config),
                     f:convert-configuration($custom-configuration/tei2html.config))"/>

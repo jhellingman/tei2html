@@ -26,4 +26,44 @@
         <xsl:value-of select="replace(normalize-space($filename), '^file:/', '')"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Get the current UTC-time in a string.</xd:short>
+        <xd:detail>
+            <p>Get the current UTC-time in a string, format "YYYY-MM-DDThh:mm:ssZ"</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:utc-timestamp" as="xs:string">
+        <xsl:variable name="utc-timestamp" select="adjust-dateTime-to-timezone(current-dateTime(), xs:dayTimeDuration('PT0H'))"/>
+        <xsl:value-of select="format-dateTime($utc-timestamp, '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Determine a string has a valid value.</xd:short>
+        <xd:detail>
+            <p>Determine a string has a valid value, that is, not null, empty or '#####'</p>
+        </xd:detail>
+        <xd:param name="value" type="string">The value to be tested.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:is-valid" as="xs:boolean">
+        <xsl:param name="value" as="xs:string?"/>
+        <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Provide a default value when a value is null.</xd:short>
+        <xd:param name="value" type="string">The value to be tested.</xd:param>
+        <xd:param name="default" type="string">The default value.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:if-null">
+        <xsl:param name="value"/>
+        <xsl:param name="default"/>
+        <xsl:sequence select="if (not($value)) then $default else $value"/>
+    </xsl:function>
+
 </xsl:stylesheet>

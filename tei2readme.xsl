@@ -17,6 +17,7 @@
 
     <xsl:variable name="outputformat" select="markdown"/>
 
+    <xsl:include href="modules/functions.xsl"/>
     <xsl:include href="modules/log.xsl"/>
     <xsl:include href="modules/configuration.xsl"/>
     <xsl:include href="modules/localization.xsl"/>
@@ -113,18 +114,5 @@
     <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
-
-    <xd:doc>
-        <xd:short>Determine a string has a valid value.</xd:short>
-        <xd:detail>
-            <p>Determine a string has a valid value, that is, not null, empty or '#####' (copied from utils.xml)</p>
-        </xd:detail>
-        <xd:param name="value" type="string">The value to be tested.</xd:param>
-    </xd:doc>
-
-    <xsl:function name="f:is-valid" as="xs:boolean">
-        <xsl:param name="value"/>
-        <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
-    </xsl:function>
 
 </xsl:stylesheet>

@@ -5,6 +5,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+    <xsl:include href="../modules/functions.xsl"/>
     <xsl:include href="../modules/utils.xsl"/>
     <xsl:include href="../modules/utils.html.xsl"/>
     <xsl:include href="../modules/betacode.xsl"/>

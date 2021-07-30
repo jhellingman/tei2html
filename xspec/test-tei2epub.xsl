@@ -18,6 +18,7 @@
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="../modules/functions.xsl"/>
     <xsl:include href="../modules/utils.xsl"/>
     <xsl:include href="../modules/utils.epub.xsl"/>
     <xsl:include href="../modules/betacode.xsl"/>
