@@ -11,7 +11,7 @@ my $letter = "(?:\\w|[ÁáÀàÂâÄäÃãÅåÇçÉéÈèÊêËëÍíÌìÎîÏïÑñÓóÒòÔôÖöÕõØøÚúÙùÛûÜüİıÆæĞğ
 my $wordPattern = "($letter)+(([-']|&apos;)($letter)+)*";
 
 my $tagPattern = "<[^<]*?>";
-my $transPattern = "<(AR|CY|GR|SA|UR|HE)>.*?<\\/(AR|CY|GR|SA|UR|HE)>";
+my $transPattern = "<(AR|CY|GR|SA|UR|HE|SY|DV)>.*?<\\/(AR|CY|GR|SA|UR|HE|SY|DV)>";
 my $formulaPattern = "<formula.*?>.*?<\\/formula>";
 my $skipPattern = "(($transPattern)|($formulaPattern)|($tagPattern))";
 

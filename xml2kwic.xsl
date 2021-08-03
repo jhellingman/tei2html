@@ -866,6 +866,16 @@
 
         <xsl:variable name="string" select="fn:replace($string, '&#x207F;', 'n')"/> <!-- Superscript Latin small letter n -->
 
+        <!-- Hebrew script -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB21;', '&#x05D0;')"/> <!-- Hebrew letter wide alef -> alef -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB22;', '&#x05D3;')"/> <!-- Hebrew letter wide dalet -> dalet -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB23;', '&#x05D4;')"/> <!-- Hebrew letter wide he -> he -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB24;', '&#x05DB;')"/> <!-- Hebrew letter wide kaf -> kaf -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB25;', '&#x05DC;')"/> <!-- Hebrew letter wide lamed -> lamed -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB26;', '&#x05DD;')"/> <!-- Hebrew letter wide final mem -> final mem -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB27;', '&#x05E8;')"/> <!-- Hebrew letter wide resh -> resh -->
+        <xsl:variable name="string" select="fn:replace($string, '&#xFB28;', '&#x05EA;')"/> <!-- Hebrew letter wide tav -> tav -->
+
         <xsl:sequence select="$string"/>
     </xsl:function>
 
