@@ -540,6 +540,7 @@
         <msg:message name="vo">Volapuk</msg:message>
         <msg:message name="wo">Wolof</msg:message>
         <msg:message name="xh">Xhosa</msg:message>
+        <msg:message name="xx">Non-linguistic content</msg:message>
         <msg:message name="yo">Yoruba</msg:message>
         <msg:message name="zh">Chinese</msg:message>
         <msg:message name="zu">Zulu</msg:message>
@@ -555,6 +556,7 @@
         <msg:message name="kha">Khasi</msg:message>
         <msg:message name="pag">Pangasinan</msg:message>
         <msg:message name="pam">Kapampangan</msg:message>
+        <msg:message name="syc">Syriac</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
         <msg:message name="zxx">Not applicable</msg:message>
 
