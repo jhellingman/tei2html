@@ -1,15 +1,15 @@
 
 @patterns 0
 
-"[HE:"	1 "[HE:"
+"[HE:"  1 "[HE:"
 
 @rpatterns 1
 
-"]"		0 "]"
+"]"     0 "]"
 
-" "		p " "	     % space.
-"\n"	p "\n"	     % newline.
-            
+" "     p " "        % space.
+"\n"    p "\n"       % newline.
+
 "א"     p "'"        % alef
 "ב"     p "b"        % bet
 "ג"     p "g"        % gimel
@@ -37,7 +37,7 @@
 "ר"     p "r"        % resh
 "ש"     p "S"        % shin
 "ת"     p "t"        % tav
-          
+
 "ְ"      p "^e"   % sheva
 "ֱ"      p "e:"   % hataf segol
 "ֲ"      p "a:"   % hataf patah
@@ -50,37 +50,38 @@
 "ֹ"      p "O"    % holam
 "ֻ"      p "u"    % qubuts
 "ּ"      p "."    % dagesh
-          
+
 "־"     p "_"      % maqaf
-                  
+
 "שׁ"     p "S/"     % shin dot
 "שׂ"     p "S\\"    % sin dot
-            
-"׳"		p "#"    	% geresh
-"״"     p "\""   	% gershayim
-            
-"."		p "{.}"  	% 
-","		p "{,}"  	%
-":"		p "{:}"  	% 
-"'"     p "{'}"  	% 
-"\""    p "{\"}" 	% 
-"/"     p "{/}"  	% 
-"["     p "{[}"   	% 
-"]"     p "{]}"   	% 
-"("     p "{(}"   	% 
-")"     p "{)}"   	% 
 
-"0"     p "0"   	% 
-"1"     p "1"   	% 
-"2"     p "2"   	% 
-"3"     p "3"   	% 
-"4"     p "4"   	% 
-"5"     p "5"   	% 
-"6"     p "6"   	% 
-"7"     p "7"   	% 
-"8"     p "8"   	% 
-"9"     p "9"   	% 
-          
+"׳"     p "#"       % geresh
+"״"     p "\""      % gershayim
+
+"."     p "{.}"
+"-"     p "{-}"
+","     p "{,}"
+":"     p "{:}"
+"'"     p "{'}"
+"\""    p "{\"}"
+"/"     p "{/}"
+"["     p "{[}"
+"]"     p "{]}"
+"("     p "{(}"
+")"     p "{)}"
+
+"0"     p "0"
+"1"     p "1"
+"2"     p "2"
+"3"     p "3"
+"4"     p "4"
+"5"     p "5"
+"6"     p "6"
+"7"     p "7"
+"8"     p "8"
+"9"     p "9"
+
 "ﬡ"     p "'="      % wide alef
 "ﬢ"     p "d="      % wide dalet
 "ﬣ"     p "h="      % wide he
@@ -90,6 +91,6 @@
 "ﬧ"     p "r="      % wide resh
 "ﬨ"     p "t="      % wide tav
 
-"•"		p "{.}"		% center dot.
+"•"     p "{.}"     % center dot.
 
 @end
