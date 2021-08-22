@@ -252,6 +252,18 @@
                     <xsl:with-param name="string" select="$milestone-markers(@rend)"/>
                 </xsl:call-template>
             </xsl:when>
+            <xsl:when test="f:has-rend-value(@rend, 'image')">
+                <div class="figure">
+                    <xsl:variable name="alt">
+                        <xsl:choose>
+                            <xsl:when test="f:has-rend-value(@rend, 'image-alt')"><xsl:value-of select="f:rend-value(@rend, 'image-alt')"/></xsl:when>
+                            <xsl:when test=". != ''"><xsl:value-of select="."/></xsl:when>
+                            <xsl:otherwise><xsl:value-of select="f:message('msgOrnament')"/></xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'image'), $alt)"/>
+                </div>
+            </xsl:when>
             <xsl:otherwise>
                 <hr id="{f:generate-id(.)}">
                     <xsl:copy-of select="f:set-class-attribute-with(., 'tb')"/>
