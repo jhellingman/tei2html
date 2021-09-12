@@ -147,6 +147,12 @@
                 <meta name="calibre:series_index"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/biblScope"/></meta>
             </xsl:if>
 
+            <xsl:if test="teiHeader/fileDesc/titleStmt/title/@nfc &gt; 0">
+                <xsl:variable name="title" select="teiHeader/fileDesc/titleStmt/title"/>
+                <xsl:variable name="nfc" select="teiHeader/fileDesc/titleStmt/title/@nfc"/>
+                <meta name="calibre:title_sort"><xsl:attribute name="content" select="normalize-space(substring($title, $nfc + 1) || ', ' || substring($title, 1, $nfc))"/></meta>
+            </xsl:if>
+
             <!-- Identify the cover page -->
             <xsl:choose>
                 <xsl:when test="//figure[@id='cover-image']">
@@ -766,6 +772,11 @@
 
             <!-- Handle figures that contain links, as we generate a wrapper file for these -->
             <xsl:apply-templates select="//figure" mode="spine-links"/>
+
+            <!-- Include custom items in the manifest -->
+            <xsl:if test="$opfManifestFile">
+                <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest-file-to-spine"/>
+            </xsl:if>
         </spine>
     </xsl:template>
 
@@ -791,6 +802,11 @@
     </xsl:template>
 
     <xsl:template match="figure[figure]" mode="spine-links"/>
+
+
+    <xsl:template match="opf:item" mode="copy-manifest-file-to-spine">
+        <itemref linear="no" idref="{@id}"/>
+    </xsl:template>
 
 
     <!--== guides ==========================================================-->
