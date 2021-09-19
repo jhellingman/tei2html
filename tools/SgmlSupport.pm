@@ -773,6 +773,8 @@ BEGIN {
     $ent{'sup9'}        = chr(0x2079);  #  SUPERSCRIPT NINE
     $ent{'supe'}        = chr(0x2287);  #  SUPERSET OF OR EQUAL TO
     $ent{'supmin'}      = chr(0x207B);  #  SUPERSCRIPT MINUS
+    $ent{'supi'}        = chr(0x2071);  #  SUPERSCRIPT LATIN SMALL LETTER I
+    $ent{'supw'}        = chr(0x02B7);  #  MODIFIER LETTER SMALL W
     $ent{'supne'}       = chr(0x228B);  #  SUPERSET OF WITH NOT EQUAL TO
     $ent{'szlig'}       = chr(0x00DF);  #  LATIN SMALL LETTER SHARP S
     $ent{'target'}      = chr(0x2316);  #  POSITION INDICATOR
@@ -1496,12 +1498,12 @@ BEGIN {
     $ent{'lhring'}      = chr(0x02BF);  # modifier letter left half ring
     $ent{'hamza'}       = chr(0x02BE);  # hamza
 
-    $ent{'lb'}          = chr(0x2114);  #  L B BAR SYMBOL
+    $ent{'lb'}          = chr(0x2114);  # L B BAR SYMBOL
 
-    $ent{'Peso'}        = chr(0x20B1);  #  Peso sign
-    $ent{'Euro'}        = chr(0x20AC);  #  Euro sign
+    $ent{'Peso'}        = chr(0x20B1);  # Peso sign
+    $ent{'Euro'}        = chr(0x20AC);  # Euro sign
 
-    $ent{'triangle'}    = chr(0x25B3);  #  White triangle
+    $ent{'triangle'}    = chr(0x25B3);  # White triangle
 
     $ent{'asterism'}    = chr(0x2042);  # Asterism
 
@@ -1538,9 +1540,14 @@ BEGIN {
     $ent{'lowgrave'}    = chr(0x02CE);  # MODIFIER LETTER LOW GRAVE ACCENT
     $ent{'lowacute'}    = chr(0x02CF);  # MODIFIER LETTER LOW ACUTE ACCENT
 
-    $ent{'N'}           = 'N'; # Capital letter N (used with special meaning in Wolff's dictionary.)
+    $ent{'N'}           = 'N';          # Capital letter N (used with special meaning in Wolff's dictionary.)
 
     $ent{'mlprime'}     = chr(0x02B9);  # MODIFIER LETTER PRIME
+
+    $ent{'openO'}       = chr(0x0186);  # LATIN CAPITAL LETTER OPEN O
+    $ent{'openo'}       = chr(0x0254);  # LATIN SMALL LETTER OPEN O
+    $ent{'openE'}       = chr(0x0190);  # LATIN CAPITAL LETTER OPEN E
+    $ent{'opene'}       = chr(0x025B);  # LATIN SMALL LETTER OPEN E
 
     # Tibetan transcription as used in Jäschke's dictionary and grammar
 
