@@ -154,6 +154,7 @@ BEGIN {
     $langNameHash{"nn"}        = "Norwegian (Nynorsk)";
     $langNameHash{"no"}        = "Norwegian";
     $langNameHash{"oc"}        = "Occitan";
+    $langNameHash{"oj"}        = "Ojibwa";
     $langNameHash{"om"}        = "Oromo (Afan, Galla)";
     $langNameHash{"or"}        = "Oriya";
     $langNameHash{"pa"}        = "Punjabi";
@@ -233,6 +234,7 @@ BEGIN {
 
     $langNameHash{"akk"}            = "Akkadian";
     $langNameHash{"akk-latn"}       = "Akkadian (Latin transcription)";
+    $langNameHash{"alq"}            = "Algonquian";
     $langNameHash{"ang"}            = "Old English";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
