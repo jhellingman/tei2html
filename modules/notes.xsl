@@ -449,6 +449,21 @@
     </xsl:template>
 
 
+    <xd:doc>
+        <xd:short>Insert a reference to a footnote as a plain footnote number.</xd:short>
+        <xd:detail>
+            <p>Make explicit references to a footnote (<code>@type="noteNumber"</code>) using
+            just the unstyled note-number.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:template match="note[f:is-footnote(.)]" mode="unstyled-note-number">
+        <a href="{f:generate-footnote-href(.)}">
+            <xsl:call-template name="footnote-number"/>
+        </a>
+    </xsl:template> 
+
+
     <!--==== TABLE NOTES ====-->
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-table-note(.)]">

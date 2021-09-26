@@ -82,6 +82,9 @@
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference is (part of) an unknown image.', ($target))"/>
                 <xsl:apply-templates/>
             </xsl:when>
+            <xsl:when test="@type='noteNumber'">
+                <xsl:apply-templates select="$targetNode" mode="unstyled-note-number"/>
+            </xsl:when>
             <xsl:otherwise>
                 <a href="{f:generate-safe-href($targetNode)}">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

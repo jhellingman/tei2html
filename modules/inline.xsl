@@ -20,6 +20,10 @@
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
 
+    <!ENTITY boKa       "&#x0F40;">
+    <!ENTITY boRra      "&#x0F6C;">
+    <!ENTITY boTsheg    "&#x0F0B;">
+
 ]>
 
 <xsl:stylesheet version="3.0"
@@ -48,9 +52,28 @@
         <xsl:variable name="text" select="if (f:is-set('beta.convert') and f:get-current-lang(.) = 'grc')
                                           then f:beta-to-unicode(., f:is-set('beta.caseSensitive')) else ."/>
 
+        <xsl:variable name="text" select="if (f:get-current-lang(.) = 'bo') then f:insert-zwsp-after-tsheg(.) else ."/>
+
         <xsl:value-of select="f:process-text($text)"/>
     </xsl:template>
 
+
+    <xd:doc>
+        <xd:short>Insert a ZWSP after tshegs in Tibetan.</xd:short>
+        <xd:detail><p>Insert a zero-width space after tshegs in Tibetan. Since most browsers do not
+            handle Tibetan line-breaking correctly, we need to help them a little to avoid ugly-looking
+            line-breaks. (High-quality line-breaking will require a dedicated algorithm, this is the best
+            we can do in generic HTML.)</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:insert-zwsp-after-tsheg" as="xs:string">
+        <xsl:param name="text" as="text()"/>
+
+        <xsl:variable name="text" as="xs:string" select="replace($text, '&boTsheg;([&boKa;-&boRra;])', '&boTsheg;&zwsp;$1')"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Remove end-of-line hyphens.</xd:short>

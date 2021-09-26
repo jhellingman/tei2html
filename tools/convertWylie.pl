@@ -43,6 +43,7 @@ sub handleLine($) {
 
 sub convertWylie() {
     my $wylie = shift;
+    # print STDERR "Converting Tibetan: $wylie\n";
     my $unicode = $wl->from_wylie($wylie);
     return "<foreign lang=\"bo\">" . encode_entities($unicode) . "</foreign>";
 }

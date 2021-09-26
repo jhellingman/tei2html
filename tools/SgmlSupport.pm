@@ -1553,21 +1553,21 @@ BEGIN {
 
     $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper (dasia) -> mapped to spacing symbol!
     $ent{'hspas'}       = 'h' . chr(0x02BD);                    # h with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
-    $ent{'espas'}       = 'e' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
-    $ent{'ospas'}       = 'o' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
+    $ent{'espas'}       = 'e' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (Mistake for Greek e with dasia?)
+    $ent{'ospas'}       = 'o' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (Mistake for Greek o with dasia?)
+    $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'jspas'}       = 'j' . chr(0x02BD);                    # j with spiritus asper -> mapped to spacing symbol! (JASCHKE, not actually occuring)
+    $ent{'gspas'}       = 'g' . chr(0x02BD);                    # g with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'dspas'}       = 'd' . chr(0x02BD);                    # d with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'bspas'}       = 'b' . chr(0x02BD);                    # b with spiritus asper -> mapped to spacing symbol! (JASCHKE)
 
     $ent{'cgrave'}      = 'c' . chr(0x0300);                    # c with grave
     $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave
 
     $ent{'cgrasa'}      = 'c' . chr(0x0300) . chr(0x02BD);      # c with grave and spiritus asper  -> mapped to spacing symbol!
     $ent{'jgrasa'}      = 'j' . chr(0x0300) . chr(0x02BD);      # j with grave and spiritus asper  -> mapped to spacing symbol!
-
-    $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol!
-    $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol!
-    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol!
-    $ent{'gspas'}       = 'g' . chr(0x02BD);                    # g with spiritus asper -> mapped to spacing symbol!
-    $ent{'dspas'}       = 'd' . chr(0x02BD);                    # d with spiritus asper -> mapped to spacing symbol!
-    $ent{'bspas'}       = 'b' . chr(0x02BD);                    # b with spiritus asper -> mapped to spacing symbol!
 
     $ent{'tsadb'}       = 't' . chr(0x0323) . chr(0x02BD);      # t with spiritus asper and dot below -> mapped to spacing symbol!
     $ent{'dsadb'}       = 'd' . chr(0x0323) . chr(0x02BD);      # d with spiritus asper and dot below -> mapped to spacing symbol!
@@ -1878,105 +1878,105 @@ BEGIN {
     $ent{'zumlb'}       = 'z' . chr(0x0324); # z with diaresis below
     $ent{'Zumlb'}       = 'Z' . chr(0x0324); # Z with diaresis below
 
-    $ent{'ubrevumlb'}   = 'u' . chr(0x0306) . chr(0x0324); # u with breve and diaresis below
+    $ent{'ubrevumlb'}   = 'u' . chr(0x0306) . chr(0x0324);  # u with breve and diaresis below
 
-    $ent{'oudb'}        = 'o' . chr(0x0324) . chr(0x0323); # o with diaresis below and dot below
-    $ent{'oubb'}        = 'o' . chr(0x0324) . chr(0x0331); # o with diaresis below and macron below
+    $ent{'oudb'}        = 'o' . chr(0x0324) . chr(0x0323);  # o with diaresis below and dot below
+    $ent{'oubb'}        = 'o' . chr(0x0324) . chr(0x0331);  # o with diaresis below and macron below
 
-    $ent{'eringb'}      = 'e' . chr(0x0325); # e with ring below
-    $ent{'nringb'}      = 'n' . chr(0x0325); # n with ring below
-    $ent{'mringb'}      = 'm' . chr(0x0325); # m with ring below
-    $ent{'rringb'}      = 'r' . chr(0x0325); # r with ring below
+    $ent{'eringb'}      = 'e' . chr(0x0325);    # e with ring below
+    $ent{'nringb'}      = 'n' . chr(0x0325);    # n with ring below
+    $ent{'mringb'}      = 'm' . chr(0x0325);    # m with ring below
+    $ent{'rringb'}      = 'r' . chr(0x0325);    # r with ring below
 
-    $ent{'gcomma'}      = 'g' . chr(0x0326); # g with comma below
+    $ent{'gcomma'}      = 'g' . chr(0x0326);    # g with comma below
 
-    $ent{'acedil'}      = 'a' . chr(0x0327); # a with cedille
-    $ent{'Acedil'}      = 'A' . chr(0x0327); # A with cedille
-    $ent{'dcedil'}      = 'd' . chr(0x0327); # d with cedille
-    $ent{'ecedil'}      = 'e' . chr(0x0327); # e with cedille
-    $ent{'Ecedil'}      = 'E' . chr(0x0327); # E with cedille
-    $ent{'icedil'}      = 'i' . chr(0x0327); # i with cedille
-    $ent{'Icedil'}      = 'I' . chr(0x0327); # I with cedille
-    $ent{'icedilacu'}   = 'i' . chr(0x0327) . chr(0x0301); # i with cedille and acute
-    $ent{'ocedil'}      = 'o' . chr(0x0327); # o with cedille
-    $ent{'Ocedil'}      = 'O' . chr(0x0327); # O with cedille
-    $ent{'ucedil'}      = 'u' . chr(0x0327); # u with cedille
-    $ent{'Ucedil'}      = 'U' . chr(0x0327); # U with cedille
-    $ent{'xcedil'}      = 'x' . chr(0x0327); # x with cedille
-    $ent{'zcedil'}      = 'z' . chr(0x0327); # z with cedille
-    $ent{'Zcedil'}      = 'Z' . chr(0x0327); # Z with cedille
+    $ent{'acedil'}      = 'a' . chr(0x0327);    # a with cedille
+    $ent{'Acedil'}      = 'A' . chr(0x0327);    # A with cedille
+    $ent{'dcedil'}      = 'd' . chr(0x0327);    # d with cedille
+    $ent{'ecedil'}      = 'e' . chr(0x0327);    # e with cedille
+    $ent{'Ecedil'}      = 'E' . chr(0x0327);    # E with cedille
+    $ent{'icedil'}      = 'i' . chr(0x0327);    # i with cedille
+    $ent{'Icedil'}      = 'I' . chr(0x0327);    # I with cedille
+    $ent{'icedilacu'}   = 'i' . chr(0x0327) . chr(0x0301);  # i with cedille and acute
+    $ent{'ocedil'}      = 'o' . chr(0x0327);    # o with cedille
+    $ent{'Ocedil'}      = 'O' . chr(0x0327);    # O with cedille
+    $ent{'ucedil'}      = 'u' . chr(0x0327);    # u with cedille
+    $ent{'Ucedil'}      = 'U' . chr(0x0327);    # U with cedille
+    $ent{'xcedil'}      = 'x' . chr(0x0327);    # x with cedille
+    $ent{'zcedil'}      = 'z' . chr(0x0327);    # z with cedille
+    $ent{'Zcedil'}      = 'Z' . chr(0x0327);    # Z with cedille
 
-    $ent{'scircb'}      = 's' . chr(0x032D); # s with circumflex below
-    $ent{'tcircb'}      = 't' . chr(0x032D); # t with circumflex below
-    $ent{'ucircb'}      = 'u' . chr(0x032D); # u with circumflex below
-    $ent{'zcircb'}      = 'z' . chr(0x032D); # z with circumflex below
+    $ent{'scircb'}      = 's' . chr(0x032D);    # s with circumflex below
+    $ent{'tcircb'}      = 't' . chr(0x032D);    # t with circumflex below
+    $ent{'ucircb'}      = 'u' . chr(0x032D);    # u with circumflex below
+    $ent{'zcircb'}      = 'z' . chr(0x032D);    # z with circumflex below
 
-    $ent{'abreveb'}     = 'a' . chr(0x032E); # a with breve below
-    $ent{'Abreveb'}     = 'A' . chr(0x032E); # A with breve below
-    $ent{'ebreveb'}     = 'e' . chr(0x032E); # e with breve below
-    $ent{'Ebreveb'}     = 'E' . chr(0x032E); # E with breve below
-    $ent{'ibreveb'}     = 'i' . chr(0x032E); # i with breve below
-    $ent{'obreveb'}     = 'o' . chr(0x032E); # o with breve below
-    $ent{'Obreveb'}     = 'O' . chr(0x032E); # O with breve below
-    $ent{'tbreveb'}     = 't' . chr(0x032E); # t with breve below
-    $ent{'ubreveb'}     = 'u' . chr(0x032E); # u with breve below
+    $ent{'abreveb'}     = 'a' . chr(0x032E);    # a with breve below
+    $ent{'Abreveb'}     = 'A' . chr(0x032E);    # A with breve below
+    $ent{'ebreveb'}     = 'e' . chr(0x032E);    # e with breve below
+    $ent{'Ebreveb'}     = 'E' . chr(0x032E);    # E with breve below
+    $ent{'ibreveb'}     = 'i' . chr(0x032E);    # i with breve below
+    $ent{'obreveb'}     = 'o' . chr(0x032E);    # o with breve below
+    $ent{'Obreveb'}     = 'O' . chr(0x032E);    # O with breve below
+    $ent{'tbreveb'}     = 't' . chr(0x032E);    # t with breve below
+    $ent{'ubreveb'}     = 'u' . chr(0x032E);    # u with breve below
 
-    $ent{'iibrevb'}     = 'i' . chr(0x032F); # i with inverted breve below
+    $ent{'iibrevb'}     = 'i' . chr(0x032F);    # i with inverted breve below
 
 
-    $ent{'ubowb'}       = 'u' . chr(0x032F); # u with bow below (inverted breve)
-    $ent{'ebowb'}       = 'e' . chr(0x032F); # e with bow below (inverted breve)
-    $ent{'ibowb'}       = 'i' . chr(0x032F); # i with bow below (inverted breve)
+    $ent{'ubowb'}       = 'u' . chr(0x032F);    # u with bow below (inverted breve)
+    $ent{'ebowb'}       = 'e' . chr(0x032F);    # e with bow below (inverted breve)
+    $ent{'ibowb'}       = 'i' . chr(0x032F);    # i with bow below (inverted breve)
 
-    $ent{'icircb'}      = 'i' . chr(0x032D); # i with circumflex below
+    $ent{'icircb'}      = 'i' . chr(0x032D);    # i with circumflex below
 
-    $ent{'ptildeb'}     = 'p' . chr(0x0330); # p with tilde below
+    $ent{'ptildeb'}     = 'p' . chr(0x0330);    # p with tilde below
 
-    $ent{'abarb'}       = 'a' . chr(0x0331); # a with macron below
-    $ent{'Abarb'}       = 'A' . chr(0x0331); # A with macron below
-    $ent{'bbarb'}       = 'b' . chr(0x0331); # b with macron below
-    $ent{'Bbarb'}       = 'B' . chr(0x0331); # B with macron below
-    $ent{'cbarb'}       = 'c' . chr(0x0331); # c with macron below
-    $ent{'Cbarb'}       = 'C' . chr(0x0331); # C with macron below
-    $ent{'dbarb'}       = chr(7695); # d with macron below
-    $ent{'Dbarb'}       = chr(7694); # D with macron below
-    $ent{'ebarb'}       = 'e' . chr(0x0331); # e with macron below
-    $ent{'Ebarb'}       = 'E' . chr(0x0331); # E with macron below
-    $ent{'gbarb'}       = 'g' . chr(0x0331); # g with macron below
-    $ent{'Gbarb'}       = 'G' . chr(0x0331); # G with macron below
-    $ent{'hbarb'}       = chr(7830); # h with macron below
-    $ent{'Hbarb'}       = 'H' . chr(0x0331); # H with macron below
-    $ent{'ibarb'}       = 'i' . chr(0x0331); # i with macron below
-    $ent{'Ibarb'}       = 'I' . chr(0x0331); # I with macron below
-    $ent{'kbarb'}       = 'k' . chr(0x0331); # k with macron below
-    $ent{'Kbarb'}       = 'K' . chr(0x0331); # K with macron below
-    $ent{'lbarb'}       = chr(7739); # l with macron below
-    $ent{'Lbarb'}       = chr(7738); # L with macron below
-    $ent{'mbarb'}       = 'm' . chr(0x0331); # m with macron below
-    $ent{'Mbarb'}       = 'M' . chr(0x0331); # M with macron below
-    $ent{'nbarb'}       = chr(7753); # n with macron below
-    $ent{'Nbarb'}       = 'N' . chr(0x0331); # N with macron below
-    $ent{'obarb'}       = 'o' . chr(0x0331); # o with macron below
-    $ent{'Obarb'}       = 'O' . chr(0x0331); # O with macron below
-    $ent{'pbarb'}       = 'p' . chr(0x0331); # p with macron below
-    $ent{'Pbarb'}       = 'P' . chr(0x0331); # P with macron below
-    $ent{'sbarb'}       = 's' . chr(0x0331); # s with macron below
-    $ent{'Sbarb'}       = 'S' . chr(0x0331); # S with macron below
-    $ent{'tbarb'}       = chr(7791); # t with macron below
-    $ent{'Tbarb'}       = chr(7790); # T with macron below
-    $ent{'ubarb'}       = 'u' . chr(0x0331); # u with macron below
-    $ent{'Ubarb'}       = 'U' . chr(0x0331); # U with macron below
-    $ent{'zbarb'}       = chr(7829); # z with macron below
-    $ent{'Zbarb'}       = chr(7828); # Z with macron below
+    $ent{'abarb'}       = 'a' . chr(0x0331);    # a with macron below
+    $ent{'Abarb'}       = 'A' . chr(0x0331);    # A with macron below
+    $ent{'bbarb'}       = 'b' . chr(0x0331);    # b with macron below
+    $ent{'Bbarb'}       = 'B' . chr(0x0331);    # B with macron below
+    $ent{'cbarb'}       = 'c' . chr(0x0331);    # c with macron below
+    $ent{'Cbarb'}       = 'C' . chr(0x0331);    # C with macron below
+    $ent{'dbarb'}       = chr(7695);            # d with macron below
+    $ent{'Dbarb'}       = chr(7694);            # D with macron below
+    $ent{'ebarb'}       = 'e' . chr(0x0331);    # e with macron below
+    $ent{'Ebarb'}       = 'E' . chr(0x0331);    # E with macron below
+    $ent{'gbarb'}       = 'g' . chr(0x0331);    # g with macron below
+    $ent{'Gbarb'}       = 'G' . chr(0x0331);    # G with macron below
+    $ent{'hbarb'}       = chr(7830);            # h with macron below
+    $ent{'Hbarb'}       = 'H' . chr(0x0331);    # H with macron below
+    $ent{'ibarb'}       = 'i' . chr(0x0331);    # i with macron below
+    $ent{'Ibarb'}       = 'I' . chr(0x0331);    # I with macron below
+    $ent{'kbarb'}       = 'k' . chr(0x0331);    # k with macron below
+    $ent{'Kbarb'}       = 'K' . chr(0x0331);    # K with macron below
+    $ent{'lbarb'}       = chr(7739);            # l with macron below
+    $ent{'Lbarb'}       = chr(7738);            # L with macron below
+    $ent{'mbarb'}       = 'm' . chr(0x0331);    # m with macron below
+    $ent{'Mbarb'}       = 'M' . chr(0x0331);    # M with macron below
+    $ent{'nbarb'}       = chr(7753);            # n with macron below
+    $ent{'Nbarb'}       = 'N' . chr(0x0331);    # N with macron below
+    $ent{'obarb'}       = 'o' . chr(0x0331);    # o with macron below
+    $ent{'Obarb'}       = 'O' . chr(0x0331);    # O with macron below
+    $ent{'pbarb'}       = 'p' . chr(0x0331);    # p with macron below
+    $ent{'Pbarb'}       = 'P' . chr(0x0331);    # P with macron below
+    $ent{'sbarb'}       = 's' . chr(0x0331);    # s with macron below
+    $ent{'Sbarb'}       = 'S' . chr(0x0331);    # S with macron below
+    $ent{'tbarb'}       = chr(7791);            # t with macron below
+    $ent{'Tbarb'}       = chr(7790);            # T with macron below
+    $ent{'ubarb'}       = 'u' . chr(0x0331);    # u with macron below
+    $ent{'Ubarb'}       = 'U' . chr(0x0331);    # U with macron below
+    $ent{'zbarb'}       = chr(7829);            # z with macron below
+    $ent{'Zbarb'}       = chr(7828);            # Z with macron below
 
-    $ent{'asupe'}       = 'a' . chr(0x0364); # a with small e above
-    $ent{'osupe'}       = 'o' . chr(0x0364); # o with small e above
-    $ent{'usupe'}       = 'u' . chr(0x0364); # u with small e above
-    $ent{'Asupe'}       = 'A' . chr(0x0364); # A with small e above
-    $ent{'Osupe'}       = 'O' . chr(0x0364); # O with small e above
-    $ent{'Usupe'}       = 'U' . chr(0x0364); # U with small e above
+    $ent{'asupe'}       = 'a' . chr(0x0364);    # a with small e above
+    $ent{'osupe'}       = 'o' . chr(0x0364);    # o with small e above
+    $ent{'usupe'}       = 'u' . chr(0x0364);    # u with small e above
+    $ent{'Asupe'}       = 'A' . chr(0x0364);    # A with small e above
+    $ent{'Osupe'}       = 'O' . chr(0x0364);    # O with small e above
+    $ent{'Usupe'}       = 'U' . chr(0x0364);    # U with small e above
 
-    $ent{'bstrok'}      = chr(0x0180); # b with stroke through stem
+    $ent{'bstrok'}      = chr(0x0180);          # b with stroke through stem
 
     # Requiring wide combining diacritics
     $ent{'oobreve'}     = 'o' . chr(0x035D) . 'o'; # oo with wide breve
@@ -2045,6 +2045,22 @@ BEGIN {
     $ent{'emacrbarb'}   = chr(0x0113) . chr(0x0331);        # e with macron and bar below (JASCHKE)
     $ent{'emacracubarb'}    = chr(0x0113) . chr(0x0301) . chr(0x0331);  # e with macron and acute and bar below (JASCHKE)
     $ent{'scardotb'}    = chr(0x0161) . chr(0x0323);        # s with caron and dot below (JASCHKE)
+
+    $ent{'aacuumlb'}    = 'a' . chr(0x0301) . chr(0x0324);  # a with acute and umlaut below (JASCHKE)
+    $ent{'eacuumlb'}    = 'e' . chr(0x0301) . chr(0x0324);  # e with acute and umlaut below (JASCHKE)
+    $ent{'iacuumlb'}    = 'i' . chr(0x0301) . chr(0x0324);  # i with acute and umlaut below (JASCHKE)
+    $ent{'oacuumlb'}    = 'o' . chr(0x0301) . chr(0x0324);  # o with acute and umlaut below (JASCHKE)
+    $ent{'uacuumlb'}    = 'u' . chr(0x0301) . chr(0x0324);  # u with acute and umlaut below (JASCHKE)
+    $ent{'Aacuumlb'}    = 'A' . chr(0x0301) . chr(0x0324);  # A with acute and umlaut below (JASCHKE)
+    $ent{'Eacuumlb'}    = 'E' . chr(0x0301) . chr(0x0324);  # E with acute and umlaut below (JASCHKE)
+    $ent{'Iacuumlb'}    = 'I' . chr(0x0301) . chr(0x0324);  # I with acute and umlaut below (JASCHKE)
+    $ent{'Oacuumlb'}    = 'O' . chr(0x0301) . chr(0x0324);  # O with acute and umlaut below (JASCHKE)
+    $ent{'Uacuumlb'}    = 'U' . chr(0x0301) . chr(0x0324);  # U with acute and umlaut below (JASCHKE)
+
+    $ent{'ebreac'}      = 'e' . chr(0x0306) . chr(0x0301);  # e with breve and acute (JASCHKE)
+
+    $ent{'lowarrow'}    = chr(0x02F1);  # Modifier Letter Low Left Arrowhead (JASCHKE)
+    $ent{'lowring'}     = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
 
     $ent{'Voline'}      = 'V' . chr(0x0305); # V with overline
     $ent{'Xoline'}      = 'X' . chr(0x0305); # V with overline
