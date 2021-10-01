@@ -843,7 +843,7 @@
         <xsl:choose>
             <xsl:when test="string-length($paragraph-sofar) = 0 and position() = 1">
                 <xsl:copy-of select="f:log-debug('removing initial letter from: {1}', (.))"/>
-                <xsl:value-of select="f:process-text(f:remove-initial(.))"/>
+                <xsl:value-of select="f:process-text(f:remove-initial(.), f:get-current-lang(.))"/>
              </xsl:when>
             <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
         </xsl:choose>

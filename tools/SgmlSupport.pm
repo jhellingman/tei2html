@@ -1606,18 +1606,21 @@ BEGIN {
     $ent{'Umaumb'}      = 'U' . chr(0x0304) . chr(0x0324);      # U with macron and umlaut below
 
     $ent{'aacumb'}      = 'a' . chr(0x0301) . chr(0x0324);      # a with acute and umlaut below
-    $ent{'eacumb'}      = 'e' . chr(0x0302) . chr(0x0324);      # e with acute and umlaut below
-    $ent{'iacumb'}      = 'i' . chr(0x0302) . chr(0x0324);      # i with acute and umlaut below
-    $ent{'oacumb'}      = 'o' . chr(0x0302) . chr(0x0324);      # o with acute and umlaut below
-    $ent{'uacumb'}      = 'u' . chr(0x0302) . chr(0x0324);      # u with acute and umlaut below
+    $ent{'eacumb'}      = 'e' . chr(0x0301) . chr(0x0324);      # e with acute and umlaut below
+    $ent{'iacumb'}      = 'i' . chr(0x0301) . chr(0x0324);      # i with acute and umlaut below
+    $ent{'oacumb'}      = 'o' . chr(0x0301) . chr(0x0324);      # o with acute and umlaut below
+    $ent{'uacumb'}      = 'u' . chr(0x0301) . chr(0x0324);      # u with acute and umlaut below
 
     $ent{'Aacumb'}      = 'A' . chr(0x0301) . chr(0x0324);      # A with acute and umlaut below
-    $ent{'Eacumb'}      = 'E' . chr(0x0302) . chr(0x0324);      # E with acute and umlaut below
-    $ent{'Iacumb'}      = 'I' . chr(0x0302) . chr(0x0324);      # I with acute and umlaut below
-    $ent{'Oacumb'}      = 'O' . chr(0x0302) . chr(0x0324);      # O with acute and umlaut below
-    $ent{'Uacumb'}      = 'U' . chr(0x0302) . chr(0x0324);      # U with acute and umlaut below
+    $ent{'Eacumb'}      = 'E' . chr(0x0301) . chr(0x0324);      # E with acute and umlaut below
+    $ent{'Iacumb'}      = 'I' . chr(0x0301) . chr(0x0324);      # I with acute and umlaut below
+    $ent{'Oacumb'}      = 'O' . chr(0x0301) . chr(0x0324);      # O with acute and umlaut below
+    $ent{'Uacumb'}      = 'U' . chr(0x0301) . chr(0x0324);      # U with acute and umlaut below
 
     $ent{'abreac'}      = chr(0x0103) . chr(0x0301);            # a with breve and acute
+
+    $ent{'amaacumb'}    = 'a' . chr(0x0304) . chr(0x0301) . chr(0x0324); # a with macron, acute and umlaut below
+
 
     # Tibetan transcription as used in Das' dictionary
 

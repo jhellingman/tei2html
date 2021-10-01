@@ -47,30 +47,48 @@
 
     <xsl:template match="text()">
 
-        <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) then f:remove-eol-hyphens(.) else ."/>
+        <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) 
+                                        then f:remove-eol-hyphens(.) 
+                                        else ."/>
 
-        <xsl:variable name="text" select="if (f:is-set('beta.convert') and f:get-current-lang(.) = 'grc')
-                                          then f:beta-to-unicode(., f:is-set('beta.caseSensitive')) else ."/>
-
-        <xsl:variable name="text" select="if (f:get-current-lang(.) = 'bo') then f:insert-zwsp-after-tsheg(.) else ."/>
-
-        <xsl:value-of select="f:process-text($text)"/>
+        <xsl:value-of select="f:process-text($text, f:get-current-lang(.))"/>
     </xsl:template>
 
 
+    <xsl:function name="f:process-text" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:variable name="text" select="if (f:is-set('beta.convert') and $lang = 'grc')
+                                            then f:beta-to-unicode($text, f:is-set('beta.caseSensitive')) 
+                                            else $text"/>
+        <xsl:variable name="text" select="if ($lang = 'bo') 
+                                            then f:tweak-tibetan-line-breaks($text) 
+                                            else $text"/>
+        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
+        <xsl:variable name="text" select="if (f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
+        <xsl:variable name="text" select="if (f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+
+        <xsl:variable name="text" select="f:no-break-initials($text)"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
     <xd:doc>
-        <xd:short>Insert a ZWSP after tshegs in Tibetan.</xd:short>
-        <xd:detail><p>Insert a zero-width space after tshegs in Tibetan. Since most browsers do not
-            handle Tibetan line-breaking correctly, we need to help them a little to avoid ugly-looking
-            line-breaks. (High-quality line-breaking will require a dedicated algorithm, this is the best
-            we can do in generic HTML.)</p>
+        <xd:short>Tweak Tibetan line-breaks.</xd:short>
+        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a 
+            little to avoid unacceptable results. To do so, we 1. Insert a zero-width space after tshegs in Tibetan. 
+            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm, 
+            this is the best we can do in generic HTML for current browsers.)</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:insert-zwsp-after-tsheg" as="xs:string">
-        <xsl:param name="text" as="text()"/>
+    <xsl:function name="f:tweak-tibetan-line-breaks" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
 
         <xsl:variable name="text" as="xs:string" select="replace($text, '&boTsheg;([&boKa;-&boRra;])', '&boTsheg;&zwsp;$1')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, ' ', '&nbsp;')"/>
 
         <xsl:value-of select="$text"/>
     </xsl:function>
@@ -157,19 +175,6 @@
         <xsl:sequence select="$node
                       and $node/following-sibling::node()[1][self::lb]
                       and ends-with($node, f:get-setting('lb.hyphen'))"/>
-    </xsl:function>
-
-
-    <xsl:function name="f:process-text" as="xs:string">
-        <xsl:param name="text" as="xs:string"/>
-
-        <xsl:variable name="text" select="if (f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
-        <xsl:variable name="text" select="if (f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
-        <xsl:variable name="text" select="if (f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
-
-        <xsl:variable name="text" select="f:no-break-initials($text)"/>
-
-        <xsl:value-of select="$text"/>
     </xsl:function>
 
 
