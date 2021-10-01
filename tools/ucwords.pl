@@ -1642,7 +1642,12 @@ sub StripDiacritics($) {
 
     for ($string) {
         $_ = NFD($_);       ## decompose (Unicode Normalization Form D)
+
+        $_ = MaskIndicVowelSigns($_);
+
         s/\pM//g;           ## strip combining characters
+
+        $_ = RestoreIndicVowelSigns($_);
 
         # additional normalizations: (see https://en.wikipedia.org/wiki/Typographic_ligature)
         s/\x{00df}/ss/g;    ## German eszet to ss
@@ -1678,6 +1683,38 @@ sub StripDiacritics($) {
         tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;
     }
     return $string;
+}
+
+#
+# MaskIndicVowelSigns -- When stripping all diacritics, exclude the Indic vowel signs, by
+# temporarily hiding them as {U+HHHH} codes. The generated word-lists make more sense that 
+# way.
+#
+sub MaskIndicVowelSigns($) {
+    my $string = shift;    
+
+    # Devanagari vowel signs
+    $string =~ s/([\x{093a}\x{093b}\x{093e}-\x{094c}])/ToUPlus($1)/ge;
+
+    # Tibetan dependent vowel signs and subjoined consonants
+    $string =~ s/([\x{0f71}-\x{0f7d}\x{0f90}-\x{0f97}\x{0f99}-\x{0fbc}])/ToUPlus($1)/ge;
+    return $string;
+}
+
+sub RestoreIndicVowelSigns($) {
+    my $string = shift;    
+    $string =~ s/\{U+([0-9A-F]+)\}]/FromUPlus($1)/ge;
+    return $string;
+}
+
+sub ToUPlus($) {
+    my $char = shift;
+    return "{U+" . ord($char) . "}";
+}
+
+sub FromUPlus($) {
+    my $hex = shift;
+    return chr("0x" . $hex);
 }
 
 

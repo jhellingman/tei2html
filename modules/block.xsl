@@ -758,11 +758,15 @@
         <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
 
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
+            <xsl:variable name="scale-factor" select="xs:decimal(f:get-setting('images.scale'))" as="xs:decimal"/>
 
             <xsl:text>&lf;.</xsl:text><xsl:value-of select="f:generate-css-class-selector(.)"/><xsl:text> {&lf;</xsl:text>
             <xsl:text>background:url(</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-image')"/><xsl:text>) no-repeat top left;&lf;</xsl:text>
             <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
                 <xsl:text>padding-top:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
+            </xsl:if>
+            <xsl:if test="$scale-factor != 1.0">
+                <xsl:text>background-size:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>
             </xsl:if>
 
             <xsl:if test="normalize-space($css-properties) != ''">
@@ -777,6 +781,9 @@
             <xsl:text>background:url(</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-image')"/><xsl:text>) no-repeat;&lf;</xsl:text>
             <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
                 <xsl:text>background-position:0px -</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
+            </xsl:if>
+            <xsl:if test="$scale-factor != 1.0">
+                <xsl:text>background-size:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>
             </xsl:if>
             <xsl:text>text-align:right;&lf;</xsl:text>
             <xsl:text>color:white;&lf;</xsl:text>
