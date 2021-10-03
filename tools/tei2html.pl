@@ -485,20 +485,37 @@ sub makeQrCode($) {
         }
 
         # my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
-        my $file = $imageDir . '/qr' . $pgNumber . '.png';
+        makeQrCodeAtSize($pgNumber, $imageDir, 4);
 
-        if (not -e $file) {
-            # Generate a QR code with a transparent background.
-            system("qrcode -l '#0000' -o $file https://www.gutenberg.org/ebooks/$pgNumber");
+        if (-d 'Processed/images@1') {
+            makeQrCodeAtSize($pgNumber, 'Processed/images@1', 4);
+        }
 
-            # Optimize the generated QR code.
-            my $newFile = "$imageDir/qrcode-optimized.png";
-            system ("zopflipng.exe -m \"$file\" \"$newFile\"");
-            if (-s "$file" > -s "$newFile") {
-                move($newFile, $file);
-            } else {
-                removeFile($newFile);
-            }
+        if (-d 'Processed/images@2') {
+            makeQrCodeAtSize($pgNumber, 'Processed/images@2', 8);
+        }
+    }
+}
+
+
+sub makeQrCodeAtSize($$) {
+    my $pgNumber = shift;
+    my $imageDir = shift;
+    my $scale = shift;
+
+    my $file = $imageDir . '/qr' . $pgNumber . '.png';
+
+    if (not -e $file) {
+        # Generate a QR code with a transparent background.
+        system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$pgNumber");
+
+        # Optimize the generated QR code.
+        my $newFile = "$imageDir/qrcode-optimized.png";
+        system ("zopflipng.exe -m \"$file\" \"$newFile\"");
+        if (-s "$file" > -s "$newFile") {
+            move($newFile, $file);
+        } else {
+            removeFile($newFile);
         }
     }
 }

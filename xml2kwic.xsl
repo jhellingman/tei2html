@@ -2,6 +2,8 @@
 
     <!ENTITY prime       "&#x2032;">
     <!ENTITY tcomma      "&#x02BB;">
+    <!ENTITY startMark   "&#xFF08;&#x2D35;">
+    <!ENTITY endMark     "&#x2D35;&#xFF09;">
 
 ]>
 <xsl:stylesheet version="3.0"
@@ -305,7 +307,7 @@
 
                 <xsl:for-each-group select="$matches/k:match" group-by="@form">
                     <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
-                    <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}&prime;-]+$')">
+                    <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}\p{M}&prime;-]+$')">
                         <xsl:call-template name="report-multiple-matches">
                             <xsl:with-param name="matches" select="current-group()"/>
                         </xsl:call-template>
@@ -804,6 +806,7 @@
         <xsl:variable name="string" select="f:normalize-ligatures($string)"/>
         <xsl:variable name="string" select="f:normalize-special-letters($string)"/>
         <xsl:variable name="string" select="f:normalize-mixup-characters($string)"/>
+
         <xsl:sequence select="$string"/>
     </xsl:function>
 
@@ -818,8 +821,61 @@
 
     <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')"/>
-        <xsl:sequence select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')"/>
+
+        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')" as="xs:string"/>
+        <xsl:variable name="string" select="f:mask-indic-vowel-signs($string)" as="xs:string"/>
+        <xsl:variable name="string" select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')" as="xs:string"/>
+        <xsl:variable name="string" select="f:restore-indic-vowel-signs($string)" as="xs:string"/>
+
+        <xsl:sequence select="$string"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:mask-indic-vowel-signs" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <!-- Devanagari vowel signs and virama -->
+        <xsl:variable name="devanagari" select="'&#x093a;&#x093b;&#x093e;-&#x094d;'" as="xs:string"/>
+
+        <!-- Bengali vowel signs and virama -->
+        <xsl:variable name="bengali" select="'&#x09be;-&#x09c4;&#x09c7;-&#x09c8;&#x09cb;-&#x09cd;'" as="xs:string"/>
+
+        <!-- Gujarati vowel signs and virama -->
+        <xsl:variable name="gujarati" select="'&#x0abe;-&#x0ac5;&#x0ac7;-&#x0ac9;&#x0acb;-&#x0acd;'" as="xs:string"/>
+
+        <!-- Tibetan vowel signs and subjoined consonants -->
+        <xsl:variable name="tibetan" select="'&#x0f71;-&#x0f7d;&#x0f90;-&#x0f97;&#x0f99;-&#x0fbc;'" as="xs:string"/>
+
+        <xsl:variable name="result">
+            <xsl:analyze-string select="$string" regex="{'[' || $devanagari || $bengali || $gujarati || $tibetan || ']'}">
+                <xsl:matching-substring>
+                    <xsl:value-of select="'&startMark;' || string-to-codepoints(.) || '&endMark;'"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:value-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+         
+        <xsl:sequence select="string-join($result, '')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:restore-indic-vowel-signs" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:variable name="result">
+            <xsl:analyze-string select="$string" regex="&startMark;([0-9]+)&endMark;">
+                <xsl:matching-substring>
+                    <xsl:value-of select="codepoints-to-string(xs:integer(regex-group(1)))"/>
+                </xsl:matching-substring>
+                <xsl:non-matching-substring>
+                    <xsl:value-of select="."/>
+                </xsl:non-matching-substring>
+            </xsl:analyze-string>
+        </xsl:variable>
+
+        <xsl:sequence select="string-join($result, '')"/>
     </xsl:function>
 
 
