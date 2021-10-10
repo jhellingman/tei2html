@@ -46,12 +46,14 @@
     <!-- Plain Text -->
 
     <xsl:template match="text()">
-
         <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) 
                                         then f:remove-eol-hyphens(.) 
                                         else ."/>
 
-        <xsl:value-of select="f:process-text($text, f:get-current-lang(.))"/>
+        <xsl:variable name="lang" select="f:get-current-lang(.)"/>
+        <xsl:variable name="text" select="f:process-text($text, $lang)"/>
+
+        <xsl:copy-of select="if ($lang = 'bo') then f:tweak-tibetan-line-breaks-wbr($text) else $text"/>
     </xsl:template>
 
 
@@ -62,9 +64,9 @@
         <xsl:variable name="text" select="if (f:is-set('beta.convert') and $lang = 'grc')
                                             then f:beta-to-unicode($text, f:is-set('beta.caseSensitive')) 
                                             else $text"/>
-        <xsl:variable name="text" select="if ($lang = 'bo') 
-                                            then f:tweak-tibetan-line-breaks($text) 
-                                            else $text"/>
+        <!-- <xsl:variable name="text" select="if ($lang = 'bo') 
+                                            then f:tweak-tibetan-line-breaks-zwsp($text) 
+                                            else $text"/> -->
         <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
         <xsl:variable name="text" select="if (f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
         <xsl:variable name="text" select="if (f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
@@ -76,7 +78,7 @@
 
 
     <xd:doc>
-        <xd:short>Tweak Tibetan line-breaks.</xd:short>
+        <xd:short>Tweak Tibetan line-breaks (ZWSP).</xd:short>
         <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a 
             little to avoid unacceptable results. To do so, we 1. Insert a zero-width space after tshegs in Tibetan. 
             2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm, 
@@ -84,13 +86,37 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:tweak-tibetan-line-breaks" as="xs:string">
+    <xsl:function name="f:tweak-tibetan-line-breaks-zwsp" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:variable name="text" as="xs:string" select="replace($text, '&boTsheg;([&boKa;-&boRra;])', '&boTsheg;&zwsp;$1')"/>
         <xsl:variable name="text" as="xs:string" select="replace($text, ' ', '&nbsp;')"/>
 
         <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Tweak Tibetan line-breaks (WBR).</xd:short>
+        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a 
+            little to avoid unacceptable results. To do so, we 1. Insert a &lt;wbr&gt; after tshegs in Tibetan. 
+            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm, 
+            this is the best we can do in generic HTML for current browsers.)</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:tweak-tibetan-line-breaks-wbr">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:variable name="text" as="xs:string" select="replace($text, ' ', '&nbsp;')"/>
+        <xsl:analyze-string select="$text" regex="(&boTsheg;)([&boKa;-&boRra;])">
+            <xsl:matching-substring>
+                <xsl:value-of select="regex-group(1)"/><wbr/><xsl:value-of select="regex-group(2)"/>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="."/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
     </xsl:function>
 
     <xd:doc>
