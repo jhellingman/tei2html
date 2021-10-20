@@ -70,29 +70,28 @@ span.tocPageNum, span.flushright {
     text-indent: 0;
 }
 
-/* External Links are decorated with little icons in the HTML version: */
+/* External Links are decorated with little icons (Unicode Emoji characters) in the HTML version: */
 
-.pglink, .catlink, .exlink, .wplink, .biblink, .qurlink, .seclink {
-    background-repeat: no-repeat;
-    background-position: right center;
+.pglink::after {
+    content: " \01F4D8";
+    font-size: 80%;
+    font-style: normal;
+    font-weight: normal;
 }
 
-.pglink {
-    /* background-image: url(images/book.png); */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAGFBMVEX////n7fGds8VKTVG2yth1p8x+hY0CAgKKw6qxAAAAAXRSTlMAQObYZgAAAHFJREFUeAFFyjEKwkAQQNG/mAsszAGiuUA2C24bwsYLyNjrgLaGgF7fkRR51S8+u9Bld4QmVdXnAofocR3hIrOqvQlJVDW3NPc6eyzb0pWRKpO/BVKdTrf8gfxnPZyHGOXVgq2PKAUIVtbBFyf27dn9AJwCFvKla2UYAAAAAElFTkSuQmCC);
-    padding-right: 18px;
+.catlink::after {
+    content: " \01F4C7";
+    font-size: 80%;
+    font-style: normal;
+    font-weight: normal;
 }
 
-.catlink {
-    /* background-image: url(images/card.png); */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAYAAAB24g05AAAArUlEQVR4AZRP0wEDUAzshO+3C3SdblB3htrGT23btnK1neT+LgcOgLeQy+V4BcYYzpxn4gNup9xdIt1c3IlcBF7NekOYLDbojNeXZ39pBr6h/12ACFisCP3pGvXBCrn2EtHqHI705L0AT1p5C66wdYAhNv6W4Dl6snGIvnd/Evg7gTI0eidw7T2cbdAYXnt7c1NYkxNoIiNst/HCJ6wGgARJwJgGgARIxAgDKMIAFGgj6xet8QUAAAAASUVORK5CYII=);
-    padding-right: 17px;
-}
-
-.exlink, .wplink, .biblink, .qurlink, .seclink {
-    /* background-image: url(images/external.png); */
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAABnRSTlMAAAAAAABupgeRAAAAVElEQVR4AZ3PwQnAMAxD0e6UnbSTdtJOKjjELUaX9qPjwyTXr+C50aJA+SmgCl5UQtBrppyRqxZU3RtoiP1kUBNRBnWE9j+OOKhv2IWqgLqMwr52AztEmszbhbgiAAAAAElFTkSuQmCC);
-    padding-right: 13px;
+.exlink::after, .wplink::after, .biblink::after, .qurlink::after, .seclink::after {
+    content: " \002197\00FE0F";
+    color: blue;
+    font-size: 80%;
+    font-style: normal;
+    font-weight: normal;
 }
 
 .pglink:hover {
@@ -103,6 +102,6 @@ span.tocPageNum, span.flushright {
     background-color: #FFFFDC;
 }
 
-.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover {
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover, .seclin:hover {
     background-color: #FFDCDC;
 }
