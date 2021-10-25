@@ -73,21 +73,21 @@ span.tocPageNum, span.flushright {
 /* External Links are decorated with little icons (Unicode Emoji characters) in the HTML version: */
 
 .pglink::after {
-    content: " \01F4D8";
+    content: "\0000A0\01F4D8";
     font-size: 80%;
     font-style: normal;
     font-weight: normal;
 }
 
 .catlink::after {
-    content: " \01F4C7";
+    content: "\0000A0\01F4C7";
     font-size: 80%;
     font-style: normal;
     font-weight: normal;
 }
 
 .exlink::after, .wplink::after, .biblink::after, .qurlink::after, .seclink::after {
-    content: " \002197\00FE0F";
+    content: "\0000A0\002197\00FE0F";
     color: blue;
     font-size: 80%;
     font-style: normal;
