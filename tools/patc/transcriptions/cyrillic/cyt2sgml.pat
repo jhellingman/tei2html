@@ -161,6 +161,17 @@
 "UX"        p "&Ydota;"     % CYRILLIC CAPITAL LETTER IZHITSA
 "ux"        p "&ydota;"     % CYRILLIC SMALL LETTER IZHITSA
 
+% Entities occassionally used
+
+"&#x466;"   p "IA"
+"&#x467;"   p "ia"
+
+"&#x407;"   p "&Iuml;"
+"&#x457;"   p "&iuml;"
+
+"&#x404;"   p "E"
+"&#x454;"   p "e"
+
 % "DJ"        p "&#x0402;"    % CYRILLIC CAPITAL LETTER DJE (Serbocroatian) 
 % "GJ"        p "&#x0403;"    % CYRILLIC CAPITAL LETTER GJE 
 % "IE"        p "&#x0404;"    % CYRILLIC CAPITAL LETTER UKRAINIAN IE 

@@ -63,6 +63,7 @@ my @borderBottomLine    = ('',      '=',    '=',    '=',    '=',    '=');
 my @borderBottomCross   = ('',      '=+=',  '===',  '===',  '===',  '===');
 my @borderBottomRight   = ('',      '=+',   '==',   '=/',   '',     '');
 
+my @predefinedColumnWidths = ();
 
 #
 # Main program loop
@@ -94,6 +95,14 @@ while (<>) {
 
     # drop comments from text (replace with single space).
     $line =~ s/\s*<!--.*?-->\s*/ /g;
+
+    # Handle predefined column widths (given in a processing instruction)
+    if ($line =~ /<\?tei2txt columnWidths=\"(.*?)\"\?>/) {
+        @predefinedColumnWidths = split('\s+', $1);
+    }
+
+    # drop processing instructions from text (replace with nothing).
+    $line =~ s/\s*<\?.*?\?>\s*//;
 
     # warn for remaining comments
     $line =~ s/<!--/[**ERROR: unhandled comment start]/g;
@@ -583,6 +592,19 @@ sub sizeTableColumns($$@) {
 
     # TODO: optimize the table.
 
+
+    # Allow calculated widths to be overriden by widths specified in a processing instruction
+    if ($#predefinedColumnWidths > 0) {
+        if ($#predefinedColumnWidths != $#finalColumnWidths) {
+            print STDERR "WARNING: Number of predefinedColumnWidths (" 
+                . ($#predefinedColumnWidths + 1)
+                . ") differs from actual number of columns ("
+                . ($#finalColumnWidths + 1)
+                . ")!\n";
+        }
+        @finalColumnWidths = @predefinedColumnWidths;
+    }
+
     # Break lines in cells.
     for my $i (0 .. $#rows) {
         for my $j (0 .. $#{$rows[$i]}) {
@@ -640,6 +662,18 @@ sub printTable(@) {
                 $rowHeights[$i] = $cellHeight;
             }
         }
+    }
+
+    # Allow calculated widths to be overriden by widths specified in a processing instruction
+    if ($#predefinedColumnWidths > 0) {
+        if ($#predefinedColumnWidths != $#columnWidths) {
+            print STDERR "WARNING: Number of predefinedColumnWidths (" 
+                . ($#predefinedColumnWidths + 1)
+                . ") differs from actual number of columns ("
+                . ($#columnWidths + 1)
+                . ")!\n";
+        }
+        @columnWidths = @predefinedColumnWidths;
     }
 
     my $totalTableWidth = totalTableWidth(@columnWidths);

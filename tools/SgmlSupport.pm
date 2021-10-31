@@ -2104,6 +2104,7 @@ BEGIN {
     $ent{'amacracu'}    = chr(0x0101) . chr(0x0301); # a with macron and acute
     $ent{'emacracu'}    = chr(0x0113) . chr(0x0301); # e with macron and acute
     $ent{'imacracu'}    = chr(0x012B) . chr(0x0301); # i with macron and acute
+    $ent{'Imacracu'}    = chr(0x012A) . chr(0x0301); # I with macron and acute
     $ent{'omacracu'}    = chr(0x014D) . chr(0x0301); # o with macron and acute
     $ent{'umacracu'}    = chr(0x016B) . chr(0x0301); # u with macron and acute
     $ent{'Umacracu'}    = chr(0x016A) . chr(0x0301); # U with macron and acute

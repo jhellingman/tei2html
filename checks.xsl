@@ -27,7 +27,6 @@
     <!ENTITY blackCircle      "&#x25CF;">
 
 ]>
-
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
