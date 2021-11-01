@@ -131,9 +131,11 @@
         </xsl:if>
 
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-            <meta name="DC:Subject">
-                <xsl:attribute name="content"><xsl:value-of select="."/></xsl:attribute>
-            </meta>
+            <xsl:if test="f:is-valid(.)">
+                <meta name="DC:Subject">
+                    <xsl:attribute name="content"><xsl:value-of select="."/></xsl:attribute>
+                </meta>
+            </xsl:if>
         </xsl:for-each>
 
         <!-- Link in MathJax script -->

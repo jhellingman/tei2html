@@ -260,12 +260,9 @@
 
     <xsl:template match="rendition[@selector]" mode="rendition">
         <xsl:value-of select="@selector"/>
-        <xsl:text> {
-</xsl:text>
+        <xsl:text> {&lf;</xsl:text>
             <xsl:value-of select="."/>
-        <xsl:text>
-}
-</xsl:text>
+        <xsl:text>&lf;}&lf;</xsl:text>
     </xsl:template>
 
 
@@ -280,20 +277,18 @@
     </xd:doc>
 
     <xsl:template match="rendition[@id]" mode="rendition">
-        <xsl:text>
-.</xsl:text>
-        <xsl:value-of select="@id"/>
-        <xsl:if test="@scope">
-            <!-- Translate scope to CSS pseudo-element -->
-            <xsl:text>::</xsl:text>
-            <xsl:value-of select="@scope"/>
+        <xsl:if test="f:is-valid(@id)">
+            <xsl:text>&lf;.</xsl:text>
+            <xsl:value-of select="@id"/>
+            <xsl:if test="@scope">
+                <!-- Translate scope to CSS pseudo-element -->
+                <xsl:text>::</xsl:text>
+                <xsl:value-of select="@scope"/>
+            </xsl:if>
+            <xsl:text> {&lf;</xsl:text>
+                <xsl:value-of select="."/>
+            <xsl:text>&lf;}&lf;</xsl:text>
         </xsl:if>
-        <xsl:text> {
-</xsl:text>
-            <xsl:value-of select="."/>
-        <xsl:text>
-}
-</xsl:text>
     </xsl:template>
 
 
