@@ -21,6 +21,7 @@ body {
     position: absolute;
     right: 1%;
     text-align: right;
+    letter-spacing: normal;
 }
 
 .marginnote {

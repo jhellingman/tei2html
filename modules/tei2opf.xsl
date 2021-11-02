@@ -102,7 +102,7 @@
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
                 </dc:identifier>
             </xsl:if>
-            <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum']">
+            <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum'])">
                 <dc:identifier id="pgnum">
                     <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text>
                     <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
@@ -126,7 +126,9 @@
             </xsl:if>
 
             <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
-                <dc:subject><xsl:value-of select="."/></dc:subject>
+                <xsl:if test="f:is-valid(.)">
+                    <dc:subject><xsl:value-of select="."/></dc:subject>
+                </xsl:if>
             </xsl:for-each>
 
             <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/date)">
@@ -135,7 +137,7 @@
                 </dc:date>
             </xsl:if>
 
-            <xsl:if test="teiHeader/fileDesc/notesStmt/note[@type='Description']">
+            <xsl:if test="f:is-valid(teiHeader/fileDesc/notesStmt/note[@type='Description'])">
                 <dc:description><xsl:value-of select="teiHeader/fileDesc/notesStmt/note[@type='Description']"/></dc:description>
             </xsl:if>
 
