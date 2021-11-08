@@ -36,7 +36,11 @@ This will link to the catalog page of the given book on [Project Gutenberg](http
 
 **Bible citation:** Use `bib:<`_book chapter:verse_`>` as url.
 
-This will link to a page at the [BibleGateway](http://www.biblegateway.com/passage/?search=job%201:21&version=NIV) in the same language as the text. Alternatively, it could use the [Skeptics Annotated Bible](http://skepticsannotatedbible.com/job/1.html#21). Also see the section on Canonical References in TEI P5, which describes a more complex way of encoding such references, using the `cRef` attribute on the `<ref>` element
+This will link to a page at the [BibleGateway](http://www.biblegateway.com/passage/?search=job%201:21&version=NIV) in the same language as the text. Alternatively, it could use the [Skeptics Annotated Bible](http://skepticsannotatedbible.com/job/1.html#21). 
+
+**Custom Shorthand notations using `prefixDef`
+
+Also supported are [`prefixDef` definitions](https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html) from TEI P5, which allows you to define your own prefix and replacement pattern for external links.
 
 # External Link Locations #
 
