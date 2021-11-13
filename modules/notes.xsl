@@ -283,11 +283,13 @@
     <xsl:function name="f:note-marker" as="xs:string">
         <xsl:param name="note" as="element(note)"/>
 
-        <xsl:sequence select="if (f:is-footnote($note))
-                              then f:footnote-number($note)
-                              else if ($note/@n)
-                                   then $note/@n
-                                   else ''"/>
+        <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker'))
+                              then f:rend-value($note/@rend, 'note-marker')
+                              else if (f:is-footnote($note))
+                                   then f:footnote-number($note)
+                                   else if ($note/@n)
+                                        then $note/@n
+                                        else ''"/>
     </xsl:function>
 
 
@@ -495,7 +497,7 @@
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-apparatus-note(.)]">
         <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(.)"/></xsl:attribute>
-            <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
+            <xsl:value-of select="f:apparatus-note-marker(.)"/>
         </a>
     </xsl:template>
 
@@ -669,13 +671,35 @@
     </xsl:template>
 
 
+    <xsl:template match="note[@place='apparatus' and @sameAs]" mode="apparatus"/>
+
+
     <xsl:template name="apparatus-note-marker">
         <xsl:context-item as="element(note)" use="required"/>
+
         <span class="fnlabel">
             <a class="apparatusnote" href="{f:generate-href(.)}src">
-                <xsl:value-of select="f:get-setting('notes.apparatus.textMarker')"/>
+                <xsl:value-of select="f:apparatus-note-marker(.)"/>
             </a>
         </span>
+    </xsl:template>
+
+
+    <xsl:function name="f:apparatus-note-marker" as="xs:string">
+        <xsl:param name="note" as="element(note)"/>
+
+        <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker')) 
+                              then f:rend-value($note/@rend, 'note-marker')
+                              else f:get-setting('notes.apparatus.textMarker')"/>
+    </xsl:function>
+
+
+    <xsl:template match="note[f:is-apparatus-note(.)]" mode="noterefnumber">
+        <xsl:param name="sourceNote" as="element(note)"/>
+        <a class="apparatusnote" id="{f:generate-id($sourceNote)}src" href="{f:generate-apparatus-note-href(.)}">
+            <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(.)"/></xsl:attribute>
+            <xsl:value-of select="f:apparatus-note-marker($sourceNote)"/>
+        </a>
     </xsl:template>
 
 
@@ -732,6 +756,9 @@
         <xsl:apply-templates select="*[1]" mode="collect-apparatus-first"/>
         <xsl:apply-templates select="*[position() > 1]" mode="collect-apparatus"/>
     </xsl:template>
+
+
+    <xsl:template match="note[@place='apparatus' and @sameAs]" priority="1" mode="collect-apparatus"/>
 
 
     <xsl:template match="p" mode="collect-apparatus-first">
