@@ -355,6 +355,9 @@
     <xsl:template name="footnote-number">
         <xsl:context-item as="element(note)" use="required"/>
         <xsl:choose>
+            <xsl:when test="f:has-rend-value(@rend, 'note-marker')">
+                <xsl:value-of select="f:rend-value(@rend, 'note-marker')"/>
+            </xsl:when>
             <xsl:when test="ancestor::div">
                 <xsl:number
                     level="any"
@@ -686,7 +689,7 @@
 
 
     <xsl:function name="f:apparatus-note-marker" as="xs:string">
-        <xsl:param name="note" as="element(note)"/>
+        <xsl:param name="note" as="element()"/>
 
         <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker')) 
                               then f:rend-value($note/@rend, 'note-marker')
@@ -791,7 +794,7 @@
                 <a class="apparatusnote">
                     <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
-                    <xsl:value-of select="f:get-setting('notes.apparatus.noteMarker')"/>
+                    <xsl:value-of select="f:apparatus-note-marker(.)"/>
                 </a>
             </xsl:if>
             <xsl:apply-templates/>

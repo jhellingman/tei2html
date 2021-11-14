@@ -343,6 +343,36 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering an footnote element with a custom marker in a div1">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="foot" id="n.1" rend="note-marker(*)">Text of footnote.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote at the end of the div1 with the indicated marker">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">*</a> and more text.</p>
+               </div>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                    <div id="n.1">
+                         <p class="footnote">
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">*</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note * in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
     <!-- apparatus notes -->
 
     <x:scenario label="When rendering an apparatus note in a div1">
@@ -436,6 +466,48 @@
                      <span class="apparatus-note" id="n.3">
                         <a class="apparatusnote" href="#n.3src"
                            title="Return to source location">&deg;</a>Text of apparatus note 3.</span>
+                     <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering multi apparatus notes in a div1 with an explicit call for apparatus, and one of the notes uses the sameAs to refer to another">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1">Text of apparatus note 1.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.1b" sameAs="n.1"/> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.2">Text of apparatus note 2.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a single paragraph of apparatus notes when called of the div, with the sameAs note rendered only once">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note 1.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.1bsrc" href="#n.1"
+                    title="Text of apparatus note 1.">&deg;</a> and more text.</p>
+                  <p id="...">Surrounding text<a class="apparatusnote" id="n.2src" href="#n.2"
+                    title="Text of apparatus note 2.">&deg;</a> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Notes</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 1.</span>
+                     <x:text> </x:text>
+                     <span class="apparatus-note" id="n.2">
+                        <a class="apparatusnote" href="#n.2src"
+                           title="Return to source location">&deg;</a>Text of apparatus note 2.</span>
                      <x:text> </x:text>
                    </p>
                </div>
@@ -583,6 +655,38 @@
                                id="n.3.1src"
                                href="#n.3.1">3</a> <i id="...">note</i> 3.</span>
                      <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering an apparatus note in a div1 with an explicit call for apparatus, and indicated note-marker">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="apparatus" id="n.1" rend="note-marker(**)">Text of apparatus note.</note> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in apparatus notes when called of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<a class="apparatusnote" id="n.1src" href="#n.1"
+                    title="Text of apparatus note.">**</a> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Note</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatus-note" id="n.1">
+                        <a class="apparatusnote" href="#n.1src"
+                           title="Return to source location">**</a>Text of apparatus note.</span>
+                   <x:text> </x:text>
                    </p>
                </div>
              </div>
