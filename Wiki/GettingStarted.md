@@ -18,5 +18,5 @@ No easy window-based interface is yet available. I am working on a small HTML ap
 
 # Running with Oxygen #
 
-You can use the stylesheets with Oxygen, provided your sources are in XML format. Make sure you select an XSLT 2.0 processor to perform the transformation.
+You can use the stylesheets with Oxygen, provided your sources are in XML format. Make sure you select an XSLT 3.0 processor to perform the transformation.
 
