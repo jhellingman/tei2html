@@ -21,7 +21,7 @@ If you do not have Java, you can download it from http://java.com/en/
 
 ## Perl ##
 
-If you are using the provided Perl scripts to glue things together, you'll need a Perl interpreter.
+If you are planning to use the provided Perl scripts to glue things together, you will need a Perl interpreter.
 
 For Windows, my advise is to download [Strawberry Perl](http://strawberryperl.com/). Use either the 32 or 64 bits version, to match your system.
 
@@ -43,6 +43,8 @@ For Windows, my advise is to download [Strawberry Perl](http://strawberryperl.co
 * Roman
 
 If you are missing a package, it can easily be installed using CPAN: `cpan install <package>`.
+
+After installation, copy the files `LanguageNames.pm` and `SgmlSupport.pm` to the local site library (e.g., `Strawberry\perl\site\lib`).
 
 ## SX, NSGML ##
 
