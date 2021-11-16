@@ -58,11 +58,14 @@ sub wrapLine {
     my $prefix = shift;
     my $line = shift;
 
+    # Trim trailing spaces.
+    $line =~ s/\s+$//;
+
     # print STDERR "LINE 1: '$line'\n";
     # Insert a zero-width space after tsheg followed by a Tibetan letter.
     # $line =~ s/\x{F0B}([\x{F40}-\x{F6C}])/\x{F0B}\x{200B}$1/g;
 
-    my $prefixLength = logicalCharacterLength($prefix);
+    my $prefixLength = spacingCharacterLength($prefix);
     my $currentPosition = 0;
 
     if ($line !~ /^\s+$/) {
@@ -80,7 +83,7 @@ sub wrapLine {
         }
         # print STDERR "PIECE: '$piece'\n";
 
-        my $pieceLength = logicalCharacterLength($piece);
+        my $pieceLength = spacingCharacterLength($piece);
         if ($currentPosition + $pieceLength < $columns) {
             print $piece;
             $currentPosition += $pieceLength;
@@ -90,12 +93,12 @@ sub wrapLine {
             my $space = $1;
             my $word = $2;
             print "\n$prefix$word";
-            $currentPosition = $prefixLength + logicalCharacterLength($word);
+            $currentPosition = $prefixLength + spacingCharacterLength($word);
         }
     }
 }
 
-sub logicalCharacterLength {
+sub spacingCharacterLength {
     my $string = shift;
 
     for ($string) {

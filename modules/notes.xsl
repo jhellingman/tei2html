@@ -218,7 +218,7 @@
     </xd:doc>
 
     <xsl:template match="note" mode="footnotes">
-        <div>
+        <div class="fndiv">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'footnote'"/>
@@ -498,7 +498,7 @@
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-apparatus-note(.)]">
-        <a class="apparatusnote" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
+        <a class="apparatusnotemarker" id="{f:generate-id(.)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(.)"/></xsl:attribute>
             <xsl:value-of select="f:apparatus-note-marker(.)"/>
         </a>
@@ -681,7 +681,7 @@
         <xsl:context-item as="element(note)" use="required"/>
 
         <span class="fnlabel">
-            <a class="apparatusnote" href="{f:generate-href(.)}src">
+            <a class="apparatusnotemarker" href="{f:generate-href(.)}src">
                 <xsl:value-of select="f:apparatus-note-marker(.)"/>
             </a>
         </span>
@@ -699,7 +699,7 @@
 
     <xsl:template match="note[f:is-apparatus-note(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
-        <a class="apparatusnote" id="{f:generate-id($sourceNote)}src" href="{f:generate-apparatus-note-href(.)}">
+        <a class="apparatusnotemarker" id="{f:generate-id($sourceNote)}src" href="{f:generate-apparatus-note-href(.)}">
             <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(.)"/></xsl:attribute>
             <xsl:value-of select="f:apparatus-note-marker($sourceNote)"/>
         </a>
@@ -788,10 +788,10 @@
 
 
     <xsl:template match="tmp:span">
-        <span class="apparatus-note">
+        <span class="apparatusnote">
             <xsl:if test="@id">
                 <xsl:attribute name="id" select="@id"/>
-                <a class="apparatusnote">
+                <a class="apparatusnotemarker">
                     <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
                     <xsl:value-of select="f:apparatus-note-marker(.)"/>

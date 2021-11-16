@@ -394,6 +394,10 @@ p.footnote .fnlabel, .par.footnote .fnlabel {
     text-decoration: none;
 }
 
+.apparatusnote:target, .fndiv:target {
+    background-color: #eaf3ff;
+}
+
 /***** Table of Contents *****/
 
 table.tocList {
