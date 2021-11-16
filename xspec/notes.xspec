@@ -35,7 +35,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
@@ -68,17 +68,17 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
-                     <div id="n.2">
+                     <div class="fndiv" id="n.2">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.2src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
                      </div>
-                     <div id="n.3">
+                     <div class="fndiv" id="n.3">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.3src">3</a></span> Text of footnote 3.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 3 in text.">&uparrow;</a>
                          </p>
@@ -111,12 +111,12 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
-                     <div id="n.3">
+                     <div class="fndiv" id="n.3">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
@@ -149,7 +149,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<span class="fnarrow">&uparrow;&nbsp;</span>
@@ -158,7 +158,7 @@
                                 <a class="fnreturn" href="#n.1bsrc" title="Return to note 1(b) in text.">b</a>
                          </p>
                      </div>
-                     <div id="n.3">
+                     <div class="fndiv" id="n.3">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.3src">2</a></span> Text of footnote 2.&nbsp;<a class="fnarrow" href="#n.3src" title="Return to note 2 in text.">&uparrow;</a>
                          </p>
@@ -187,7 +187,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a></span> Text of footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
@@ -217,7 +217,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                      <p class="footnote">
                         <span class="fnlabel">
                             <a class="noteRef" href="#n.1src">1</a></span> Text of first paragraph.</p>
@@ -248,7 +248,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel">
                                 <a class="noteRef" href="#n.1src">1</a>
@@ -289,7 +289,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                      <p class="footnote">
                         <span class="fnlabel">
                             <a class="noteRef" href="#n.1src">1</a>
@@ -322,12 +322,12 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote<a class="noteRef" id="n.1.1src" href="#n.1.1">2</a>.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                          </p>
                      </div>
-                     <div id="n.1.1">
+                     <div class="fndiv" id="n.1.1">
                         <p class="footnote">
                            <span class="fnlabel">
                               <a class="noteRef"
@@ -361,7 +361,7 @@
                <div class="footnotes">
                   <hr class="fnsep"/>
                   <div class="footnote-body">
-                    <div id="n.1">
+                    <div class="fndiv" id="n.1">
                          <p class="footnote">
                             <span class="fnlabel"><a class="noteRef" href="#n.1src">*</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note * in text.">&uparrow;</a>
                          </p>
@@ -593,7 +593,7 @@
                <div class="footnotes">
                   <hr class="fnsep" />
                   <div class="footnote-body">
-                     <div id="n.2.1">
+                     <div class="fndiv" id="n.2.1">
                         <p class="footnote">
                            <span class="fnlabel">
                               <a class="noteRef"
@@ -603,7 +603,7 @@
                               title="Return to note 1 in text.">&uparrow;</a>
                         </p>
                      </div>
-                     <div id="n.2.2">
+                     <div class="fndiv" id="n.2.2">
                         <p class="footnote">
                            <span class="fnlabel">
                               <a class="noteRef"
@@ -613,7 +613,7 @@
                               title="Return to note 2 in text.">&uparrow;</a>
                         </p>
                      </div>
-                     <div id="n.3.1">
+                     <div class="fndiv" id="n.3.1">
                         <p class="footnote">
                            <span class="fnlabel">
                               <a class="noteRef"

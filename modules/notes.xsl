@@ -191,7 +191,7 @@
     </xd:doc>
 
     <xsl:template match="note[p]" mode="footnotes">
-        <div>
+        <div class="fndiv">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'footnote'"/>
