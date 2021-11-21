@@ -269,6 +269,20 @@
         </xsl:if>
     </xsl:template>
 
+    <!--====================================================================-->
+    <!-- floatingText -->
+
+    <xsl:template match="floatingText">
+        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
+            <div>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                <xsl:variable name="class" select="'floatingText' || (if (@type) then ' ' || lower-case(@type) else '')"/>
+                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+                <xsl:apply-templates/>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Generic division content handling -->

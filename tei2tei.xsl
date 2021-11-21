@@ -424,6 +424,13 @@ in all copies or substantial portions of the Software.
 </firstLang>
 </xsl:template>
 
+<xsl:template match="floatingtext">
+<floatingText>
+ <xsl:apply-templates select="@*"/>
+ <xsl:apply-templates/>
+</floatingText>
+</xsl:template>
+
 <xsl:template match="forename">
 <foreName>
  <xsl:apply-templates select="@*"/>
