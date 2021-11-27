@@ -673,6 +673,7 @@
     <xsl:template mode="tocList" match="item">
         <xsl:variable name="depth" select="count(ancestor::list[@type='tocList']) - 1"/>
         <tr>
+            <xsl:copy-of select="f:set-class-attribute(.)"/>
             <!-- Use padding cell if needed to indent nested contents -->
             <xsl:if test="$depth > 0">
                 <td>
@@ -681,13 +682,15 @@
                     </xsl:if>
                 </td>
             </xsl:if>
-            <td class="tocDivNum">
+            <td>
+                <xsl:copy-of select="f:set-class-attribute-with(ab[@type='tocDivNum'], 'tocDivNum')"/>
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocDivNum']"/>
             </td>
             <td class="tocDivTitle" colspan="{7 - $depth}">
                 <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum' or @type='tocList')]"/>
             </td>
-            <td class="tocPageNum">
+            <td>
+                <xsl:copy-of select="f:set-class-attribute-with(ab[@type='tocPageNum'], 'tocPageNum')"/>
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocPageNum']"/>
             </td>
         </tr>
