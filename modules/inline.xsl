@@ -584,6 +584,27 @@
         </xsl:choose>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Sic -->
+
+    <xd:doc>
+        <xd:short>Handle sic-elements.</xd:short>
+        <xd:detail><code>sic</code>-elements contain a dubious spelling, which should be retained.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="sic" mode="#default titlePage">
+        <span class="sic">
+            <xsl:if test="@corr">
+                <xsl:attribute name="title">
+                    <xsl:value-of select="f:message('msgCorrection')"/><xsl:text>: </xsl:text><xsl:value-of select="@corr"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+
     <!--====================================================================-->
     <!-- Regularization -->
 
