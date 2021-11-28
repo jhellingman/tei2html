@@ -10,6 +10,8 @@ use File::Path qw(make_path remove_tree);
 use FindBin qw($Bin);
 use Getopt::Long;
 use Cwd qw(abs_path);
+use Math::Round;
+use XML::XPath;
 
 use SgmlSupport qw/utf2numericEntities translateEntity/;
 
@@ -289,6 +291,7 @@ sub processFile($) {
     extractMetadata($filename);
     extractEntities($filename);
 
+    $atSize = determineAtSize();
     $atSize > 0 && prepareImages();
     makeQrCode($pgNumber);
     collectImageInfo();
@@ -1002,6 +1005,34 @@ sub collectImageInfo() {
 
 
 #
+# determineAtSize -- read the scale factor from tei2html.config.
+#
+sub determineAtSize() {
+    if (!-e 'tei2html.config') {
+        return 1;
+    }
+
+    my $scale = 1;
+
+    # Use eval, so we can recover from fatal parse errors in XML:XPath.
+    eval {
+        my $xpath = XML::XPath->new(filename => 'tei2html.config');
+
+        my $scaleNode = $xpath->find('/tei2html.config/images.scale');
+        $scale = $scaleNode->string_value();
+
+        $xpath->cleanup();
+
+        1;
+    } or do {
+        print STDERR "ERROR: Problem parsing tei2html.config.\n";
+    };
+
+    return round(1.0/$scale);
+}
+
+
+#
 # prepareImages -- copy images in the selected resolution ('@-size') to the main images directory
 #
 sub prepareImages() {
@@ -1015,7 +1046,7 @@ sub prepareImages() {
 
     if (-d $destination) {
         # Destination exists, prevent copying into it.
-        print "Warning: Destination exists; will not copy images again\n";
+        print "Warning: Destination '$destination' exists; will not copy images again\n";
         return;
     }
 
