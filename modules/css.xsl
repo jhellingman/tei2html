@@ -632,15 +632,16 @@
         <xd:detail>Generate an optional class attribute for an element. This is the result
         of the call to <code>f:generate-class()</code>, with the second argument appended,
         wrapped in an attribute.</xd:detail>
-        <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
+        <xd:param name="node">The node for which a class attribute is to be generated. 
+            This can be empty in a few cases, in which only the second argument is used</xd:param>
         <xd:param name="class">Classes to add to the generated class.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:set-class-attribute-with" as="attribute()?">
-        <xsl:param name="node" as="element()"/>
+        <xsl:param name="node" as="element()?"/>
         <xsl:param name="class" as="xs:string"/>
 
-        <xsl:variable name="class" select="normalize-space($class || ' ' || f:generate-class($node))"/>
+        <xsl:variable name="class" select="normalize-space($class || (if ($node) then ' ' || f:generate-class($node) else ''))"/>
         <xsl:if test="$class != ''">
             <xsl:attribute name="class" select="$class"/>
         </xsl:if>
