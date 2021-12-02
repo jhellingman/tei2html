@@ -1027,6 +1027,9 @@ sub determineAtSize() {
     } or do {
         print STDERR "ERROR: Problem parsing tei2html.config.\n";
     };
+    if ($scale eq '') {
+        $scale = 1;
+    }
 
     return round(1.0/$scale);
 }

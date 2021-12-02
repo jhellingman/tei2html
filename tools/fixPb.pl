@@ -35,7 +35,7 @@ if ($new != 0) {
     $offset = -($first - $new);
 }
 
-if ($showHelp == 1 or $offset == 0) {
+if ($showHelp == 1 || ($offset == 0 && !$useRoman)) {
     my $help = <<'END_HELP';
 
 fixPb.pl -- fix (renumber) page-breaks in a TEI file.
@@ -118,12 +118,14 @@ sub nextPageBreak {
         return "<cb>";
     }
     else {
+        my $dot = '';
         my $newCurrentPage = $currentPage + $offset;
-        if ($useRoman eq 'R') {
-            $newCurrentPage = uc(roman($newCurrentPage));
+        if ($useRoman) {
+            $newCurrentPage = roman($newCurrentPage);
+            $dot = '.';
         }
         $secondColumn = 1;
-        return "<pb id=pb$newCurrentPage n=$newCurrentPage$facs>";
+        return "<pb id=pb$dot$newCurrentPage n=$newCurrentPage$facs>";
     }
 }
 
