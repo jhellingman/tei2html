@@ -1278,7 +1278,7 @@ BEGIN {
 
     # punctuation marks
 
-    $ent{'ckgr'}        = chr(0x00b7); # Greek Ano Teleia, semicolon. "&middot;" Technically: chr(0x0387), preferred Unicode: U+00B7 
+    $ent{'ckgr'}        = chr(0x00b7); # Greek Ano Teleia, semicolon. "&middot;" Technically: chr(0x0387), preferred Unicode: U+00B7
     $ent{'qmgr'}        = chr(0x037e); # Greek Question mark, looks like semi-colon.
 
     # additional entities not in TEI
@@ -1993,6 +1993,8 @@ BEGIN {
 
     $ent{'chbarb'}      = 'c' . chr(0x035F) . 'h'; # ch with double macron below
     $ent{'Chbarb'}      = 'C' . chr(0x035F) . 'h'; # Ch with double macron below
+    $ent{'dhbarb'}      = 'd' . chr(0x035F) . 'h'; # dh with double macron below
+    $ent{'Dhbarb'}      = 'D' . chr(0x035F) . 'h'; # Dh with double macron below
     $ent{'ghbarb'}      = 'g' . chr(0x035F) . 'h'; # gh with double macron below
     $ent{'Ghbarb'}      = 'G' . chr(0x035F) . 'h'; # Gh with double macron below
     $ent{'GHbarb'}      = 'G' . chr(0x035F) . 'H'; # GH with double macron below
@@ -2002,6 +2004,8 @@ BEGIN {
     $ent{'shbarb'}      = 's' . chr(0x035F) . 'h'; # sh with double macron below
     $ent{'Shbarb'}      = 'S' . chr(0x035F) . 'h'; # Sh with double macron below
     $ent{'SHbarb'}      = 'S' . chr(0x035F) . 'H'; # SH with double macron below
+    $ent{'thbarb'}      = 't' . chr(0x035F) . 'h'; # th with double macron below
+    $ent{'Thbarb'}      = 'T' . chr(0x035F) . 'h'; # Th with double macron below
     $ent{'zhbarb'}      = 'z' . chr(0x035F) . 'h'; # zh with double macron below
     $ent{'Zhbarb'}      = 'Z' . chr(0x035F) . 'h'; # Zh with double macron below
     $ent{'ZHbarb'}      = 'Z' . chr(0x035F) . 'H'; # ZH with double macron below
