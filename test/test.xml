@@ -315,6 +315,7 @@ and HTML.</p>
 
 <p>Footnote test paragraph. First,<note>Note without paragraph.</note> second,<note><p>Note with just one paragraph.</p></note> third,<note><p>Note with two paragraphs.</p><p>Second paragraph.</p></note> fourth.<note><p>Note with three paragraphs.</p><p>Second paragraph.</p><p>Third paragraph.</p></note></p>
 
+<p>Another paragraph with a very high note-number explicitly set<note rend="note-marker(1234)">Note with high number.</note>, and another one, with just the automatic number applied.<note>Note with automatic number.</note></p>
 
 
 

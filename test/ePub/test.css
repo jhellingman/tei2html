@@ -450,14 +450,18 @@ p.footnote, .par.footnote {
 
 p.footnote .fnlabel, .par.footnote .fnlabel {
  float: left; 
- min-width: 1.0em;
  margin-left: -0.1em; 
- padding-top: 0.9em;
+ margin-top: 0.9em;
+ min-width: 1.0em;
  padding-right: 0.4em;
 }
 
 .apparatusnote {
  text-decoration: none;
+}
+
+.apparatusnote:target, .fndiv:target {
+ background-color: #eaf3ff;
 }
 
  
@@ -1269,7 +1273,7 @@ font-size: xx-large; color: red
 
 /* CSS rules generated from @rend attributes in TEI file */
 
-.xd34e639 {
+.xd35e646 {
 text-align:right;
 }
 
@@ -1289,7 +1293,7 @@ text-align:left; width:40%; padding:4px;
 text-align:right; border-left:1px solid black; padding:4px;
 }
 
-.xd34e1186 {
+.xd35e1193 {
 background-color:green;
 }
 
@@ -1305,7 +1309,7 @@ border-top:1px solid black;
 border-bottom:2px solid black;
 }
 
-.xd34e1187 {
+.xd35e1194 {
 background-color:white;
 }
 
@@ -1313,19 +1317,19 @@ background-color:white;
 width:500px;
 }
 
-.xd34e107 {
+.xd35e107 {
 font-style:italic;
 }
 
-.xd34e116 {
+.xd35e116 {
 background-color:yellow;
 }
 
-.xd34e159 {
+.xd35e159 {
 font-family:'Walbaum-Fraktur';
 }
 
-.xd34e171 {
+.xd35e171 {
 font-size:14pt; color:red; background-color:yellow;
 }
 
@@ -1333,28 +1337,28 @@ font-size:14pt; color:red; background-color:yellow;
 width:96px;
 }
 
-.xd34e374 {
+.xd35e374 {
 vertical-align:baseline;
 }
 
-.xd34e451 {
+.xd35e451 {
 text-align:left;
 }
 
-.xd34e455 {
+.xd35e455 {
 text-align:right;
 }
 
-.xd34e458 {
+.xd35e458 {
 text-align:center;
 }
 
-.xd34e461 {
+.xd35e461 {
 background:url(images/initial-A.png) no-repeat top left;
 padding-top:45px;
 }
 
-.xd34e461init {
+.xd35e461init {
 float:left;
 width:90px;
 height:95px;
@@ -1365,11 +1369,11 @@ color:white;
 font-size:1px;
 }
 
-.xd34e469 {
+.xd35e469 {
 text-align:justify;
 }
 
-.xd34e485 {
+.xd35e485 {
 text-align:center;
 }
 
@@ -1377,7 +1381,7 @@ text-align:center;
 width:40%; margin:0px auto; display:table;
 }
 
-.xd34e602 {
+.xd35e609 {
 text-align:right;
 }
 
@@ -1385,11 +1389,11 @@ text-align:right;
 margin:0px auto; display:table;
 }
 
-.xd34e788 {
+.xd35e795 {
 vertical-align:middle; width:2px;
 }
 
-.xd34e789 {
+.xd35e796 {
 vertical-align:middle;
 }
 
@@ -1397,11 +1401,11 @@ vertical-align:middle;
 margin-left:2em;
 }
 
-.xd34e800 {
+.xd35e807 {
 width:25%;
 }
 
-.xd34e802 {
+.xd35e809 {
 width:75%;
 }
 
@@ -1421,11 +1425,11 @@ width:40%; border-collapse:collapse;
 margin:0px auto; display:table;
 }
 
-.xd34e928 {
+.xd35e935 {
 color:red;
 }
 
-.xd34e948 {
+.xd35e955 {
 color:yellow; background-color:black;
 }
 
@@ -1437,19 +1441,19 @@ margin:0px auto; display:table;
 margin:0px auto; display:table;
 }
 
-.xd34e1217 {
+.xd35e1224 {
 background-color:yellow;
 }
 
-.xd34e1235 {
+.xd35e1242 {
 background-color:blue;
 }
 
-.xd34e1244 {
+.xd35e1251 {
 background-color:orange;
 }
 
-.xd34e1254 {
+.xd35e1261 {
 background-color:red;
 }
 
@@ -1481,47 +1485,47 @@ width:480px;
 width:580px;
 }
 
-.xd34e1462 {
+.xd35e1469 {
 font-style:italic;
 }
 
-.xd34e1489 {
+.xd35e1496 {
 list-style-type:disc;
 }
 
-.xd34e1505 {
+.xd35e1512 {
 list-style-type:upper-roman;
 }
 
-.xd34e1514 {
+.xd35e1521 {
 list-style-type:lower-roman;
 }
 
-.xd34e1530 {
+.xd35e1537 {
 list-style-type:disc;
 }
 
-.xd34e1545 {
+.xd35e1552 {
 list-style-type:disc;
 }
 
-.xd34e1620 {
+.xd35e1627 {
 text-align:center;
 }
 
-.xd34e1625 {
+.xd35e1632 {
 text-indent:1em;
 }
 
-.xd34e1631 {
+.xd35e1638 {
 text-indent:2em;
 }
 
-.xd34e1635 {
+.xd35e1642 {
 text-indent:3em;
 }
 
-.xd34e1639 {
+.xd35e1646 {
 text-indent:10em;
 }
 
@@ -1542,12 +1546,12 @@ display:none;
 }
 @media handheld {
 
-.xd34e461 {
+.xd35e461 {
 background-image:none;
 padding-top:0;
 }
 
-.xd34e461init {
+.xd35e461init {
 float:none;
 width:auto;
 height:auto;
@@ -1560,6 +1564,6 @@ font-size:inherit;
 
 /* CSS rules copied from @style attributes in TEI file */
 
-.xd34e1812 {
+.xd35e1819 {
 color:red
 }

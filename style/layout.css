@@ -383,10 +383,10 @@ p.footnote, .par.footnote {
 }
 
 p.footnote .fnlabel, .par.footnote .fnlabel {
-    float: left; /* use float to position next to block elements */
-    min-width: 1.0em;
+    float: left; /* use float to position correctly next to block elements such as tables */
     margin-left: -0.1em; /* compensate margin-left in a.noteRef rule */
-    padding-top: 0.9em;
+    margin-top: 0.9em;
+    min-width: 1.0em;
     padding-right: 0.4em;
 }
 
