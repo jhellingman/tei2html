@@ -60,6 +60,8 @@
     </xd:doc>
 
     <xsl:template name="handleFormula">
+        <xsl:context-item as="element(formula)" use="required"/>
+
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>
 
         <xsl:variable name="basename" select="f:formula-basename($firstInstance)" as="xs:string"/>
@@ -68,10 +70,14 @@
         <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
         <xsl:variable name="pngFile" select="$basename || '.png'" as="xs:string"/>
 
+        <xsl:variable name="htmlBasename" select="f:formula-html-basename($firstInstance)" as="xs:string"/>
+        <xsl:variable name="svgSourceFile" select="$htmlBasename || '.svg'" as="xs:string"/>
+        <xsl:variable name="pngSourceFile" select="$htmlBasename || '.png'" as="xs:string"/>
+
         <xsl:variable name="texString" select="f:strip-math-delimiters(.)" as="xs:string"/>
         <xsl:variable name="svgTitle" select="if (f:is-trivial-math(.)) then $texString else document($svgFile, .)/svg:svg/svg:title" as="xs:string?"/>
         <xsl:variable name="mathClass" select="f:formula-position(.) || 'Math'" as="xs:string"/>
-        <xsl:variable name="description" select="if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
+        <xsl:variable name="description" select="if (@title) then @title else if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
         <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.))">
@@ -120,12 +126,12 @@
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'SVG+IMG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
-                    <img src="{$svgFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
+                    <img src="{$svgSourceFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'PNG'">
                     <!-- CSS will set size and vertical offset retrieved from SVG file based on a class, derived from the
                          ID of the first instance. This class needs to be on the img tag. -->
-                    <img src="{$pngFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
+                    <img src="{$pngSourceFile}" alt="{$description}" title="{$description}" class="{f:generate-id($firstInstance)}frml"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy-of select="f:log-error('Unknown format for math formulas: {1}.', (f:get-setting('math.mathJax.format')))"/>
@@ -210,9 +216,10 @@
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <xsl:variable name="basename" select="f:formula-basename($firstInstance)"/>
                 <xsl:variable name="svgFile" select="$basename || '.svg'" as="xs:string"/>
-                <xsl:variable name="style" select="document($svgFile, .)/svg:svg/@style"/>
-                <xsl:variable name="width" select="document($svgFile, .)/svg:svg/@width"/>
-                <xsl:variable name="height" select="document($svgFile, .)/svg:svg/@height"/>
+                <xsl:variable name="svg" select="document($svgFile, .)"/>
+                <xsl:variable name="style" select="$svg/svg:svg/@style"/>
+                <xsl:variable name="width" select="$svg/svg:svg/@width"/>
+                <xsl:variable name="height" select="$svg/svg:svg/@height"/>
 
                 <xsl:if test="$style">
                     <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
@@ -228,15 +235,24 @@
 
 
     <xd:doc>
-        <xd:short>Determine the basename (for generated filenames) of a formula.</xd:short>
+        <xd:short>Determine the basename (for generated filenames) of a formula. This is the place where tei2html will write to and read from.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:formula-basename" as="xs:string">
         <xsl:param name="formula" as="element(formula)"/>
 
-        <xsl:value-of select="'formulas/' || f:formula-position($formula) || '-' || f:generate-id($formula)"/>
+        <xsl:value-of select="f:get-setting('math.filePath') || '/' || f:formula-position($formula) || '-' || f:generate-id($formula)"/>
     </xsl:function>
 
+    <xd:doc>
+        <xd:short>Determine the basename (for generated filenames) of a formula. This is the place where generated HTML will try to load the formula from.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:formula-html-basename" as="xs:string">
+        <xsl:param name="formula" as="element(formula)"/>
+
+        <xsl:value-of select="f:get-setting('math.htmlPath') || '/' || f:formula-position($formula) || '-' || f:generate-id($formula)"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Determine the formula position (either inline or display).</xd:short>

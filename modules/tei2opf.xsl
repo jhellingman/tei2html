@@ -477,7 +477,7 @@
             <xsl:if test="generate-id(.) = generate-id($firstInstance)">
                 <item>
                     <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
-                    <xsl:attribute name="href"><xsl:value-of select="f:formula-basename(.)"/><xsl:value-of select="if ($format = 'PNG') then '.png' else '.svg'"/></xsl:attribute>
+                    <xsl:attribute name="href"><xsl:value-of select="f:formula-html-basename(.)"/><xsl:value-of select="if ($format = 'PNG') then '.png' else '.svg'"/></xsl:attribute>
                     <xsl:attribute name="media-type"><xsl:value-of select="if ($format = 'PNG') then 'image/png' else 'image/svg+xml'"/></xsl:attribute>
                 </item>
             </xsl:if>
