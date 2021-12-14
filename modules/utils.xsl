@@ -486,7 +486,7 @@
 
     <xsl:function name="f:is-block" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="$node/@rend = 'block' or f:rend-value($node/@rend, 'display') = 'block'"/>
+        <xsl:sequence select="$node/@rend = 'block' or f:rend-value($node/@rend, 'display') = 'block' or f:has-class($node/@rend, 'block', 'q')"/>
     </xsl:function>
 
 

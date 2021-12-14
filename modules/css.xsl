@@ -337,20 +337,34 @@
     </xsl:function>
 
 
+    <xsl:function name="f:has-class" as="xs:boolean">
+        <xsl:param name="rend" as="xs:string?"/>
+        <xsl:param name="class" as="xs:string"/>
+        <xsl:param name="element" as="xs:string"/>
+    
+        <xsl:variable name="classes" select="f:extract-class-from-rend-ladder($rend, $element)" as="xs:string"/>
+        <xsl:value-of select="contains($classes, $class)"/>
+    </xsl:function>
+
+
     <xsl:function name="f:extract-class-from-rend-ladder" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>
-        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="element" as="xs:string"/>
 
         <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
         <xsl:variable name="class">
+            <xsl:if test="f:has-rend-value($rend, 'class')">
+                <xsl:value-of select="f:rend-value($rend, 'class')"/>
+                <xsl:text> </xsl:text>
+            </xsl:if>
             <xsl:analyze-string select="$rend" regex="{$rendition-ladder-pattern}" flags="i">
                 <xsl:matching-substring>
                     <!-- ignore rendition-ladder elements here -->
                 </xsl:matching-substring>
                 <xsl:non-matching-substring>
                     <xsl:if test="matches(normalize-space(.), $class-name-pattern)">
-                        <xsl:value-of select="f:filter-class(., $name)"/>
+                        <xsl:value-of select="f:filter-class(., $element)"/>
                         <xsl:text> </xsl:text>
                     </xsl:if>
                 </xsl:non-matching-substring>
@@ -579,10 +593,6 @@
         <xsl:variable name="rend" select="$node/@rend" as="xs:string?"/>
 
         <xsl:variable name="class">
-            <xsl:if test="f:has-rend-value($rend, 'class')">
-                <xsl:value-of select="f:rend-value($rend, 'class')"/>
-                <xsl:text> </xsl:text>
-            </xsl:if>
             <xsl:value-of select="f:extract-class-from-rend-ladder($rend, name($node))"/>
             <xsl:text> </xsl:text>
             <xsl:if test="normalize-space(f:translate-rend-ladder($rend, name($node))) != ''">
