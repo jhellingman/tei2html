@@ -38,30 +38,30 @@ if ($useItalics == 1) {
 #    No borders, just     +===+===+       =========       /=======\     =========       =========
 #    three spaces         |   |   |       |   |   |       |   |   |                         |
 #    between columns      +---+---+       |---+---|       |---+---|                     ----+----
-#                         |   |   |       |   |   |       |   |   |     =========           |
+#    (6: one space)       |   |   |       |   |   |       |   |   |     =========           |
 #                         +===+===+       =========       \=======/                     =========
 #
 
 my $borderStyle = 0;
 
-my @borderTopLeft       = ('',      '+=',   '==',   '/=',   '',     '');
-my @borderTopLine       = ('',      '=',    '=',    '=',    '=',    '=');
-my @borderTopCross      = ('',      '=+=',  '===',  '===',  '===',  '===');
-my @borderTopRight      = ('',      '=+',   '==',   '=\\',  '',     '');
+my @borderTopLeft       = ('',      '+=',   '==',   '/=',   '',     '',     '');
+my @borderTopLine       = ('',      '=',    '=',    '=',    '=',    '=',    '');
+my @borderTopCross      = ('',      '=+=',  '===',  '===',  '===',  '===',  '');
+my @borderTopRight      = ('',      '=+',   '==',   '=\\',  '',     '',     '');
 
-my @borderLeft          = ('',      '| ',   '| ',   '| ',   '',     '');
-my @borderLeftCross     = ('',      '+-',   '|-',   '|-',   '',     '');
-my @borderRight         = ('',      ' |',   ' |',   ' |',   '',     '');
-my @borderRightCross    = ('',      '-+',   '-|',   '-|',   '',     '');
+my @borderLeft          = ('',      '| ',   '| ',   '| ',   '',     '',     '');
+my @borderLeftCross     = ('',      '+-',   '|-',   '|-',   '',     '',     '');
+my @borderRight         = ('',      ' |',   ' |',   ' |',   '',     '',     '');
+my @borderRightCross    = ('',      '-+',   '-|',   '-|',   '',     '',     '');
 
-my @innerVertical       = ('   ',   ' | ',  ' | ',  ' | ',  '   ',  ' | ');
-my @innerCross          = ('   ',   '-+-',  '-+-',  '-+-',  '   ',  '-+-');
-my @innerHorizontal     = ('',      '-',    '-',    '-',    '',     '-');
+my @innerVertical       = ('   ',   ' | ',  ' | ',  ' | ',  '   ',  ' | ',  ' ');
+my @innerCross          = ('   ',   '-+-',  '-+-',  '-+-',  '   ',  '-+-',  ' ');
+my @innerHorizontal     = ('',      '-',    '-',    '-',    '',     '-',    '');
 
-my @borderBottomLeft    = ('',      '+=',   '==',   '\\=',  '',     '');
-my @borderBottomLine    = ('',      '=',    '=',    '=',    '=',    '=');
-my @borderBottomCross   = ('',      '=+=',  '===',  '===',  '===',  '===');
-my @borderBottomRight   = ('',      '=+',   '==',   '=/',   '',     '');
+my @borderBottomLeft    = ('',      '+=',   '==',   '\\=',  '',     '',     '');
+my @borderBottomLine    = ('',      '=',    '=',    '=',    '=',    '=',    '');
+my @borderBottomCross   = ('',      '=+=',  '===',  '===',  '===',  '===',  '');
+my @borderBottomRight   = ('',      '=+',   '==',   '=/',   '',     '',     '');
 
 my @predefinedColumnWidths = ();
 
@@ -99,6 +99,11 @@ while (<>) {
     # Handle predefined column widths (given in a processing instruction)
     if ($line =~ /<\?tei2txt columnWidths=\"(.*?)\"\?>/) {
         @predefinedColumnWidths = split('\s+', $1);
+        print STDERR "tei2txt: Using predefined column widths: $1\n";
+    }
+    if ($line =~ /<\?tei2txt borderStyle=\"(.*?)\"\?>/) {
+        $borderStyle = $1;
+        print STDERR "tei2txt: Changed border style to: $borderStyle\n";
     }
 
     # drop processing instructions from text (replace with nothing).

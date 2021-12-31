@@ -7,7 +7,7 @@ use warnings;
 while (<>) {
     my $line = $_;
 
-    if ($line =~ /<p>(<hi.*?>)?((?:[a-z -]|\&apos;|&OElig;)+(?:[a-z]))(<\/hi>)?/i) {
+    if ($line =~ /<p>(<hi.*?>)?((?:[a-zæé -]|\&apos;|&OElig;)+(?:[a-zæé]))(<\/hi>)?/i) {
 
         my $prefix = $`;
         my $openTag = defined($1) ? $1 : "";
@@ -18,7 +18,7 @@ while (<>) {
         $line = "$prefix<p id=ix." . makeId($entry) . ">$openTag$entry$closeTag$remainder";
     }
 
-    if ($line =~ /(<hi>See(?: also)?<\/hi>) (<hi.*?>)?((?:[a-z -]|\&apos;|&OElig;)+(?:[a-z]))(<\/hi>)?/i) {
+    if ($line =~ /((?:<hi>)?See(?: also)?(?:<\/hi>)?) (<hi.*?>)?((?:[a-zæé -]|\&apos;|&OElig;)+(?:[a-zæé]))(<\/hi>)?/i) {
 
         my $prefix = $`;
         my $see = $1;
