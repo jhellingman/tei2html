@@ -412,6 +412,28 @@
     </choice>
   </xsl:template>
 
+  <xsl:template match="orig[@reg]">
+    <choice>
+      <orig>
+        <xsl:value-of select="text()"/>
+      </orig>
+      <reg>
+        <xsl:value-of select="@reg"/>
+      </reg>
+    </choice>
+  </xsl:template>
+
+  <xsl:template match="reg[@orig]">
+    <choice>
+      <reg>
+        <xsl:value-of select="text()"/>
+      </reg>
+      <orig>
+        <xsl:value-of select="@orig"/>
+      </orig>
+    </choice>
+  </xsl:template>
+
   <!-- special consideration for <change> element -->
   <xsl:template match="change">
     <change>
@@ -650,5 +672,11 @@
         <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
     </div1>
   </xsl:template>
+
+  <!-- Additions by Jeroen Hellingman, to cleanup specific stuff, introduced in table-normalization -->
+
+  <xsl:template match="cell/@col"/>
+  <xsl:template match="cell/@row"/>
+  <xsl:template match="table/@headrows"/>
 
 </xsl:stylesheet>

@@ -610,13 +610,26 @@
 
     <xd:doc>
         <xd:short>Handle Regularisations.</xd:short>
-        <xd:detail>Regularisation of spelling or not corrections, but editorial interventions, that
-        might help to make a text more readable or searchable.</xd:detail>
+        <xd:detail>Regularisation of spelling which are not corrections, but editorial interventions, that
+        might help to make a text more readable or searchable. With the <code>reg</code> element,we retain
+        the regular spelling and ignore the <code>@orig</code> attribute.</xd:detail>
     </xd:doc>
 
     <xsl:template match="reg" mode="#default titlePage">
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xd:doc>
+        <xd:short>Handle Regularisations.</xd:short>
+        <xd:detail>Regularisation of spelling which are not corrections, but editorial interventions, that
+        might help to make a text more readable or searchable. With the <code>orig</code> element,we retain
+        the original spelling and ignore the <code>@reg</code> attribute.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="orig" mode="#default titlePage">
+        <xsl:apply-templates/>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- Gaps and spaces -->

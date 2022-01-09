@@ -118,3 +118,57 @@ tools/attic/
 .settings/org.eclipse.jdt.apt.core.prefs
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.m2e.core.prefs
+documentation/issues.xml
+documentation/metadata.xml
+documentation/README.md
+documentation/TEI-Guidelines-0.6-checks.html
+documentation/TEI-Guidelines-included.xml
+documentation/TEI-Guidelines-preprocessed.xml
+documentation/TEI-Guidelines-words.html
+documentation/TEI-Guidelines.xml
+samples/Cole - Philippine Folk Tales/issues.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-1.1-checks.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-included.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-preprocessed.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-words.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales.xml
+samples/Cole - Philippine Folk Tales/Processed/images/qr12814.png
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-1.0-checks.html
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-included.xml
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-preprocessed.xml
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-words.html
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales.html
+samples/Fansler - Filipino Popular Tales/issues.xml
+samples/Fansler - Filipino Popular Tales/metadata.xml
+samples/Fansler - Filipino Popular Tales/qr8299.png
+samples/Fansler - Filipino Popular Tales/README.md
+samples/Kayme - Anting-Anting Stories/AntingAnting-1.0-checks.html
+samples/Kayme - Anting-Anting Stories/AntingAnting-included.xml
+samples/Kayme - Anting-Anting Stories/AntingAnting-preprocessed.xml
+samples/Kayme - Anting-Anting Stories/AntingAnting-words.html
+samples/Kayme - Anting-Anting Stories/AntingAnting.html
+samples/Kayme - Anting-Anting Stories/issues.xml
+samples/Kayme - Anting-Anting Stories/metadata.xml
+samples/Kayme - Anting-Anting Stories/qr24690.png
+samples/Kayme - Anting-Anting Stories/README.md
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-1.0-checks.html
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-included.xml
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-preprocessed.xml
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-words.html
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians.html
+samples/Pratt - Armenia and the Armenians/issues.xml
+samples/Pratt - Armenia and the Armenians/metadata.xml
+samples/Pratt - Armenia and the Armenians/qr52371.png
+samples/Pratt - Armenia and the Armenians/README.md
+samples/Shakespeare - Twee Edellieden van Verona/issues.xml
+samples/Shakespeare - Twee Edellieden van Verona/metadata.xml
+samples/Shakespeare - Twee Edellieden van Verona/qr26594.png
+samples/Shakespeare - Twee Edellieden van Verona/README.md
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-1.0-checks.html
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-included.xml
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-preprocessed.xml
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-words.html
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona.html
+tools/test-out.txt
+tools/test-err.txt
+samples/Cole - Philippine Folk Tales/imageinfo.xml

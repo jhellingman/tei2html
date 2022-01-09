@@ -7,6 +7,10 @@ ul {
     margin-left: 0;
 }
 
+.splitListTable td {
+    vertical-align: top;
+}
+
 .numberedItem {
     text-indent: -3em;
     margin-left: 3em;
