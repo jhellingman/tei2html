@@ -397,6 +397,7 @@
                 <xsl:apply-templates select="//figure" mode="manifest"/>
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'image')]" mode="manifest"/>
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'link')]" mode="manifest-links"/>
+                <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'hover-overlay')]" mode="manifest-hover-overlay"/>
 
                 <!-- Formulas -->
                 <xsl:apply-templates select="//formula[@notation = 'TeX']" mode="manifest"/>
@@ -672,6 +673,26 @@
                     <xsl:attribute name="href"><xsl:value-of select="$basename"/>-<xsl:value-of select="f:generate-id(.)"/>.xhtml</xsl:attribute>
                     <xsl:attribute name="media-type">application/xhtml+xml</xsl:attribute>
                 </item>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generate manifest entries for images in hover-overlays.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="*" mode="manifest-hover-overlay">
+        <xsl:if test="f:has-rend-value(@rend, 'hover-overlay')">
+            <xsl:variable name="target">
+                <xsl:value-of select="f:rend-value(@rend, 'hover-overlay')"/>
+            </xsl:variable>
+
+            <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
+                <xsl:call-template name="manifest-image-item">
+                    <xsl:with-param name="filename" select="$target"/>
+                    <xsl:with-param name="how" select="'hover-overlay'"/>
+                </xsl:call-template>
             </xsl:if>
         </xsl:if>
     </xsl:template>
