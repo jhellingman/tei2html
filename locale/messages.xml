@@ -40,6 +40,10 @@
 
         -->
 
+        <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
+        <msg:message name="msgUnidentifiedSpeaker">Unidentified speaker.</msg:message>
+        <msg:message name="msgId">ID</msg:message>
+
         <msg:message name="msgQrCode" help="A QR code is a black and white graphic that contains computer-readable data.">QR-code</msg:message>
         <msg:message name="msgQrCodePgUrl">QR-code of Project Gutenberg URL</msg:message>
         <msg:message name="msgTagUsageOverview">Overview of TEI Elements Used</msg:message>
@@ -1201,6 +1205,10 @@
 
     <msg:messages xml:lang="nl">
 
+        <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
+        <msg:message name="msgUnidentifiedSpeaker">Niet geïndentificeerde spreker.</msg:message>
+        <msg:message name="msgId">ID</msg:message>
+
         <msg:message name="msgQrCode">QR-code</msg:message>
         <msg:message name="msgQrCodePgUrl">QR-code van Project Gutenberg URL</msg:message>
         <msg:message name="msgTagUsageOverview">Overzicht van gebruikte TEI elementen</msg:message>
@@ -1714,11 +1722,11 @@
 
         <!-- PG header and footer stuff -->
 
-        <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u elders woont, controleer dan de wetgeving in uw land voordat u dit boek download.</msg:message>
+        <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u elders woont, raadpleeg dan alstublieft de wetgeving in uw land voordat u dit boek downloadt.</msg:message>
 
         <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op https://www.pgdp.net/.</msg:message>
 
-        <msg:message name="msgPGComment">Dit book is geproduceerd door Project Gutenberg en is vrijelijk beschikbaar op https://www.gutenberg.org/.</msg:message>
+        <msg:message name="msgPGComment">Dit boek is geproduceerd door Project Gutenberg en is gratis beschikbaar op https://www.gutenberg.org/.</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>

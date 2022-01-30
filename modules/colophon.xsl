@@ -1103,4 +1103,53 @@
         </td>
     </xsl:template>
 
+
+    <!--====================================================================-->
+    <!-- Personas, create a list of personas, based on the @who id. -->
+
+    <xsl:template match="divGen[@type='Personas']">
+        <xsl:if test="//sp[@who]">
+          <div class="transcriberNote">
+            <h3 class="main"><xsl:value-of select="f:message('msgDramatisPersonae')"/></h3>
+
+            <table>
+                <tr>
+                    <th><xsl:value-of select="f:message('msgOccurrences')"/></th>
+                    <th><xsl:value-of select="f:message('msgId')"/></th>
+                    <th><xsl:value-of select="f:message('msgName')"/></th>
+                </tr>
+                <xsl:for-each-group select="//sp[speaker]" group-by="@who">
+                    <xsl:sort select="@who"/>
+                    <tr>
+                        <td><xsl:value-of select="count(current-group())"/></td>
+                        <td><xsl:value-of select="current-grouping-key()"/></td>
+                        <td>
+                            <xsl:for-each-group select="current-group()" group-by="f:normalize-persona(speaker)">
+                                <xsl:value-of select="current-grouping-key()"/>
+                                <xsl:if test="position() != last()">
+                                     <xsl:text>; </xsl:text>
+                                </xsl:if>
+                            </xsl:for-each-group>
+                        </td>
+                    </tr>
+                </xsl:for-each-group>
+
+                <xsl:for-each-group select="//sp[not(@who)]" group-by="f:normalize-persona(speaker)">
+                    <tr>
+                        <td><xsl:value-of select="count(current-group())"/></td>
+                        <td><i><xsl:value-of select="f:message('msgUnidentifiedSpeaker')"/></i></td>
+                        <td><xsl:value-of select="current-grouping-key()"/></td>
+                    </tr>
+                </xsl:for-each-group>
+            </table>
+          </div>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:function name="f:normalize-persona">
+        <xsl:param name="name"/>
+        <xsl:value-of select="replace($name, '[.,:;]', '')"/>
+    </xsl:function>
+
+
 </xsl:stylesheet>

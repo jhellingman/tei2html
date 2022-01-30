@@ -41,7 +41,7 @@ my $sx        = "sx";                                                     # in t
 #==============================================================================
 # Arguments
 
-my $atSize              = 0;
+my $atSize              = 1;
 my $clean               = 0;
 my $configurationFile   = "tei2html.config";
 my $customOption        = "";
@@ -488,7 +488,9 @@ sub makeQrCode($) {
         }
 
         # my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
-        makeQrCodeAtSize($pgNumber, $imageDir, 4);
+        if ($atSize > 0) {
+            makeQrCodeAtSize($pgNumber, $imageDir, $atSize * 4);
+        }
 
         if (-d 'Processed/images@1') {
             makeQrCodeAtSize($pgNumber, 'Processed/images@1', 4);
