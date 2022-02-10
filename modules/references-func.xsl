@@ -380,6 +380,7 @@
         'mi'     : 'Micah',
         'na'     : 'Nahum',
         'hb'     : 'Habakkuk',
+        'hab'    : 'Habakkuk',
         'zep'    : 'Zephaniah',
         'hg'     : 'Haggai',
         'zec'    : 'Zechariah',

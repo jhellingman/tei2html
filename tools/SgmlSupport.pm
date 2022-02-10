@@ -2023,6 +2023,10 @@ BEGIN {
 
     $ent{'iabrevb'}     = 'i' . chr(0x035C) . 'a'; # ia with doube breve below
 
+    $ent{'gntilde'}     = 'g' . chr(0x0360) . 'n'; # gn with double tilde
+    $ent{'Gntilde'}     = 'G' . chr(0x0360) . 'n'; # Gn with double tilde
+    $ent{'GNtilde'}     = 'G' . chr(0x0360) . 'N'; # GN with double tilde
+
     $ent{'ngtilde'}     = 'n' . chr(0x0360) . 'g'; # ng with double tilde
     $ent{'Ngtilde'}     = 'N' . chr(0x0360) . 'g'; # Ng with double tilde
     $ent{'NGtilde'}     = 'N' . chr(0x0360) . 'G'; # NG with double tilde
