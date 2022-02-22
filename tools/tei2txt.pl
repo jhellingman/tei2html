@@ -174,7 +174,6 @@ while (<>) {
     print $line;
 }
 
-
 sub handleLine($) {
     my $line = shift;
 
@@ -247,7 +246,6 @@ sub handleLine($) {
     return $line;
 }
 
-
 sub handleEndNotes() {
     my $remainder = shift;
     my $result = '';
@@ -272,7 +270,6 @@ sub handleEndNotes() {
     return $result . $remainder;
 }
 
-
 sub spaces($) {
     my $n = shift;
     my $result = '';
@@ -282,7 +279,6 @@ sub spaces($) {
     return $result;
 }
 
-
 sub noBreakSpaces($) {
     my $n = shift;
     my $result = '';
@@ -291,7 +287,6 @@ sub noBreakSpaces($) {
     }
     return $result;
 }
-
 
 sub handleHighlighted($) {
     my $remainder = shift;
@@ -311,7 +306,6 @@ sub handleHighlighted($) {
     }
     return $result . $remainder;
 }
-
 
 my %mapIdToContent;
 
@@ -371,7 +365,6 @@ sub useDittoMark($) {
     return noBreakSpaces($spacesBefore) . ',,' . noBreakSpaces($spacesAfter);
 }
 
-
 sub centerStringInWidth($$) {
     my $string = shift;
     my $width = shift;
@@ -379,8 +372,6 @@ sub centerStringInWidth($$) {
     my $spacesAfter = ceil(($width - length($string)) / 2.0);
     return spaces($spacesBefore) . $string . spaces($spacesAfter);
 }
-
-
 
 sub parseTable($) {
     my $table = shift;
@@ -483,7 +474,6 @@ sub handleCell($) {
     }
     return @result;
 }
-
 
 sub sizeTableColumns($$@) {
     # See also: https://developer.mozilla.org/en-US/docs/Table_Layout_Strategy
@@ -632,7 +622,6 @@ sub sizeTableColumns($$@) {
     return @rows;
 }
 
-
 sub totalTableWidth(@) {
     my @columnWidths = @_;
 
@@ -643,7 +632,6 @@ sub totalTableWidth(@) {
     }
     return $totalTableWidth;
 }
-
 
 sub printTable(@) {
     my @rows = @_;
@@ -715,7 +703,6 @@ sub printTable(@) {
     }
 }
 
-
 sub printCenterSpacing($) {
     my $lineWidth = shift;
 
@@ -726,7 +713,6 @@ sub printCenterSpacing($) {
         }
     }
 }
-
 
 sub wrapLines($$) {
     my $paragraph = shift;
@@ -783,7 +769,6 @@ sub wrapLine($$) {
     return $result;
 }
 
-
 sub repeat($$) {
     my $char = shift;
     my $count = shift;
@@ -830,7 +815,6 @@ sub printBottomBorder(@) {
     }
 }
 
-
 sub printWithPadding($$) {
     my $string = shift;
     my $width = shift;
@@ -844,7 +828,6 @@ sub printWithPadding($$) {
         print spaces($width  - length($string));
     }
 }
-
 
 sub trim($) {
     my $string = shift;
@@ -928,13 +911,11 @@ sub handleIntra() {
     }
 }
 
-
 sub ltrim($) {
     my $string = shift;
     $string =~ s/^\s+//g;
     return $string;
 }
-
 
 sub hideFootnoteMarkers($) {
     my $string = shift;
@@ -942,20 +923,17 @@ sub hideFootnoteMarkers($) {
     return $string;
 }
 
-
 sub restoreFootnoteMarkers($) {
     my $string = shift;
     $string =~ s/\{([0-9]+)\}/[$1]/g;
     return $string;
 }
 
-
 sub max($$) {
     my $first = shift;
     my $second = shift;
     return $first > $second ? $first : $second;
 }
-
 
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)

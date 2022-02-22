@@ -102,6 +102,7 @@ BEGIN {
     $langNameHash{"jv"}        = "Javanese";
     $langNameHash{"ka"}        = "Georgian";
     $langNameHash{"ka-latn"}   = "Georgian (Latin transcription)";
+    $langNameHash{"ki"}        = "Kikuyu";
     $langNameHash{"kg"}        = "Kikongo";
     $langNameHash{"kk"}        = "Kazakh";
     $langNameHash{"kl"}        = "Greenlandic";
@@ -241,8 +242,8 @@ BEGIN {
     $langNameHash{"brx"}            = "Bodo langauge";
     $langNameHash{"brx-latn"}       = "Bodo langauge (Latin transcription)";
     $langNameHash{"ceb"}            = "Cebuano";
-    $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
     $langNameHash{"com"}            = "Comanche";
+    $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
     $langNameHash{"dak"}            = "Dakota";
     $langNameHash{"esx"}            = "Eskimo-Aleut languages";
     $langNameHash{"gad"}            = "Gaddang";
@@ -252,10 +253,12 @@ BEGIN {
     $langNameHash{"hil"}            = "Hiligaynon";
     $langNameHash{"ifu"}            = "Ifugao";
     $langNameHash{"ilo"}            = "Ilocano, Iloko or Ilokano";
+    $langNameHash{"kam"}            = "Kamba";
     $langNameHash{"kar"}            = "Karen";
     $langNameHash{"kha"}            = "Khasi";
     $langNameHash{"kij"}            = "Kilivila";
     $langNameHash{"lad"}            = "Ladino";
+    $langNameHash{"mas"}            = "Maasai";
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";

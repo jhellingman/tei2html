@@ -64,6 +64,8 @@ sub wrapLine {
     # print STDERR "LINE 1: '$line'\n";
     # Insert a zero-width space after tsheg followed by a Tibetan letter.
     # $line =~ s/\x{F0B}([\x{F40}-\x{F6C}])/\x{F0B}\x{200B}$1/g;
+    # The zero-width space somehow doesn't seem to work in pattern-matching, so use a weird pattern instead.
+    $line =~ s/\x{F0B}([\x{F40}-\x{F6C}])/\x{F0B} ~T~I~B~E~T~A~N~B~R~E~A~K$1/g;
 
     my $prefixLength = spacingCharacterLength($prefix);
     my $currentPosition = 0;
@@ -75,15 +77,21 @@ sub wrapLine {
 
     # print STDERR "LINE 2: '$line'\n";
 
+    # A piece is zero or more space characters followed by one or more non-space characters.
     my @pieces = split(/(\s*\S+)/, $line);
     foreach my $piece (@pieces) {
+
+        # Remove the weird patten introduced above.
+        $piece =~ s/ ~T~I~B~E~T~A~N~B~R~E~A~K//g;
 
         if ($piece eq '') {
             next;
         }
-        # print STDERR "PIECE: '$piece'\n";
 
         my $pieceLength = spacingCharacterLength($piece);
+
+        # print STDERR "PIECE: '$piece' ($pieceLength)\n";
+
         if ($currentPosition + $pieceLength < $columns) {
             print $piece;
             $currentPosition += $pieceLength;
@@ -108,4 +116,3 @@ sub spacingCharacterLength {
     }
     return length($string);
 }
-

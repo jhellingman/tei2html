@@ -1537,6 +1537,7 @@ BEGIN {
 
     $ent{'sml.s'}       = chr(0x02e2);  # Spacing modifier letter small s
 
+    $ent{'mlrcomma'}    = chr(0x02BD);  # MODIFIER LETTER REVERSED COMMA
     $ent{'lowgrave'}    = chr(0x02CE);  # MODIFIER LETTER LOW GRAVE ACCENT
     $ent{'lowacute'}    = chr(0x02CF);  # MODIFIER LETTER LOW ACUTE ACCENT
 
