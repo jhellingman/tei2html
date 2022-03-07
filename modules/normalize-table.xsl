@@ -25,7 +25,7 @@
         register the cell position in additional attributes. In a final stage, we remove
         the spanned cells again.</p>
 
-        <p>The code assumes that the table being transformed is rectangular. It may behave in 
+        <p>The code assumes that the table being transformed is rectangular. It may behave in
         unexpected ways if this is not the case.</p>
 
         <p>The normalizing code is based on sample code found on-line
@@ -368,8 +368,8 @@
         <xd:detail>
             <p>If the first non-empty <code>text()</code> node is numeric (according to the selected number pattern), it is split
             into an integer and a fractional part. Cells with non-numeric content are normally not split, but if any content
-            in the cell is wrapped in an element node, it will be ignored for determining whether the cell is numeric. 
-            Any non-text nodes preceding the text node go to the first cell, any nodes following this text node go to 
+            in the cell is wrapped in an element node, it will be ignored for determining whether the cell is numeric.
+            Any non-text nodes preceding the text node go to the first cell, any nodes following this text node go to
             the second cell.</p>
 
             <p>The use of normalize-space is to avoid issues with pattern-matching in relation to new-lines.</p>
@@ -382,7 +382,7 @@
         <xsl:variable name="number-pattern" select="f:determine-number-pattern(.)"/>
 
         <xsl:variable name="integer" select="replace($text, $number-pattern, '$2')"/>
-        <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7')"/>
+        <xsl:variable name="fraction" select="replace($text, $number-pattern, '$4$7$8')"/>
 
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
         <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)" as="xs:string"/>
@@ -466,19 +466,38 @@
         <xd:short>Pattern to match Unicode numbers.</xd:short>
         <xd:detail>
             <p>Pattern to match numbers in Unicode, based on the Unicode character category \p{Decimal_Digit_Number}. To allow
-            for fractions to appear in a number, we also allow the category \p{Other_Number} to follow a number or stand alone.</p>
+            for fractions to appear in a number, we also allow the category \p{Other_Number} to follow a number or to stand alone.</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:variable name="number-pattern-period" select="'^\s?(((\p{Nd}+[,])*\p{Nd}+)(([.]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
-    <xsl:variable name="number-pattern-comma"  select="'^\s?(((\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No}))\s?$'"/>
+    <!--
+         Structure of pattern:
+
+           optional leading spaces             ^\s?
+             number                                               $1
+               integer part                                       $2
+                 currency sign:                [$]?
+                   groups of digits            (\p{Nd}+[,])*      $3
+                   last group of digits        \p{Nd}+
+               fractional part                                    $4
+                 fraction digits               ([.]\p{Nd}+)?      $5
+                 following numeral             (\p{No})?          $6
+               stand-alone numeral             |(\p{No})          $7
+               stand-alone fraction digits     |([.]\p{Nd}+)      $8
+           optional trailing spaces            \s?$
+    -->
+
+    <xsl:variable name="number-pattern-period" select="'^\s?(([$]?(\p{Nd}+[,])*\p{Nd}+)(([.]\p{Nd}+)?(\p{No})?)|(\p{No})|([.]\p{Nd}+))\s?$'"/>
+    <xsl:variable name="number-pattern-comma"  select="'^\s?(([$]?(\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No})|([,]\p{Nd}+))\s?$'"/>
+
+
 
 
     <xd:doc>
         <xd:short>Determine the decimal separator symbol to be used.</xd:short>
         <xd:detail>
-            <p>Obtain this value from the decimal-separator rendition value. First look at the <code>cell</code>-element itself, 
-            then row, then the table. Since the table is &lsquo;unrooted&rsquo; here, we need to look separately at the 
+            <p>Obtain this value from the decimal-separator rendition value. First look at the <code>cell</code>-element itself,
+            then row, then the table. Since the table is &lsquo;unrooted&rsquo; here, we need to look separately at the
             root-level for a document-wide setting on the text element. Intermediate locations are currently not
             supported.</p>
         </xd:detail>
