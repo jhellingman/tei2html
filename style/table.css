@@ -96,35 +96,55 @@ table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft {
 
 /* Table with borders on all edges, outer edges somewhat fatter. */
 
-table.borderAll {
+table.borderAll,
+table.rtlBorderAll {
     border-collapse: collapse;
 }
 
-table.borderAll td {
+table.borderAll td,
+table.rtlBorderAll td {
     padding-left: 4px;
     padding-right: 4px;
     border: 1px solid black;
 }
 
-table.borderAll .cellHeadTop, table.borderAll .cellTop {
+table.borderAll .cellHeadTop, table.borderAll .cellTop,
+table.rtlBorderAll .cellHeadTop, table.rtlBorderAll .cellTop {
     border-top: 2px solid black;
 }
 
-table.borderAll .cellHeadBottom {
+table.borderAll .cellHeadBottom, 
+table.rtlBorderAll .cellHeadBottom {
     border-bottom: 1px solid black;
 }
 
-table.borderAll .cellBottom {
+table.borderAll .cellBottom, 
+table.rtlBorderAll .cellBottom {
     border-bottom: 2px solid black;
 }
 
-table.borderAll .cellLeft, table.borderAll .cellHeadLeft {
+table.borderAll .cellLeft, 
+table.borderAll .cellHeadLeft {
     border-left: 2px solid black;
 }
 
-table.borderAll .cellRight, table.borderAll .cellHeadRight {
+table.borderAll .cellRight, 
+table.borderAll .cellHeadRight {
     border-right: 2px solid black;
 }
+
+/* Special cases for RTL tables */
+
+table.rtlBorderAll .cellLeft, 
+table.rtlBorderAll .cellHeadLeft {
+    border-right: 2px solid black;
+}
+
+table.rtlBorderAll .cellRight, 
+table.rtlBorderAll .cellHeadRight {
+    border-left: 2px solid black;
+}
+
 
 /* Borders on cell, explicitly specified */
 
