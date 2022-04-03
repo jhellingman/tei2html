@@ -1619,6 +1619,9 @@ BEGIN {
     $ent{'Uacumb'}      = 'U' . chr(0x0301) . chr(0x0324);      # U with acute and umlaut below
 
     $ent{'abreac'}      = chr(0x0103) . chr(0x0301);            # a with breve and acute
+    $ent{'ebreac'}      = chr(0x0115) . chr(0x0301);            # e with breve and acute
+
+    $ent{'abreumbbarb'} = chr(0x0103) . chr(0x0324) . chr(0x0331); # a with breve, umlaut below and bar below
 
     $ent{'amaacumb'}    = 'a' . chr(0x0304) . chr(0x0301) . chr(0x0324); # a with macron, acute and umlaut below
 

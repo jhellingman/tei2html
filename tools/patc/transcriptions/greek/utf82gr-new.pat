@@ -3,6 +3,7 @@
 @patterns 0
 
 "<foreign lang='grc'>"  1 "<GR>"
+"<foreign lang=grc>"  1 "<GR>"
 
 @patterns 1
 
