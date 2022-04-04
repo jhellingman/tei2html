@@ -23,7 +23,7 @@ while (<>) {
     $line =~ s/\&rsqb;/\&#xFF3D;/g;    # right square bracket
 
     $line =~ s/\&lcub;/\&#xFF5B;/g;    # left curly bracket
-    $line =~ s/\&rcub;/\&#xFF5B;/g;    # right curly bracket
+    $line =~ s/\&rcub;/\&#xFF5D;/g;    # right curly bracket
 
     $line =~ s/\&num;/\&#xFF03;/g;     # number sign
 

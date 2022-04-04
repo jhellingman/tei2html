@@ -1212,12 +1212,15 @@
         <!-- prevent false positives for ellipses. -->
         <xsl:variable name="segment" select="replace(., '\.\.\.+', '&hellip;')" as="xs:string"/>
 
+        <xsl:variable name="full-width-openers" select="'&#xFF08;&#xFF3B;&#xFF5B;'" as="xs:string"/>
+        <xsl:variable name="full-width-closers" select="'&#xFF09;&#xFF3D;&#xFF5D;'" as="xs:string"/>
+
         <!-- Name some complex regular expressions. -->
-        <xsl:variable name="space-after-opener-pattern" select="'[\[(' || $open-quotation-marks || ']\s+'" as="xs:string"/>
-        <xsl:variable name="space-before-closer-pattern" select="'\s+[\])' || $close-quotation-marks || ']'" as="xs:string"/>
-        <xsl:variable name="space-after-comma-pattern" select="',[^\s&nbsp;&mdash;&hellip;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
-        <xsl:variable name="space-after-period-pattern" select="'\.[^\s&nbsp;.,:;&mdash;' || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
-        <xsl:variable name="space-after-punctuation-pattern" select="'[:;!?][^\s&mdash;&hellip;!' || $close-quotation-marks || ')\]]'" as="xs:string"/>
+        <xsl:variable name="space-after-opener-pattern" select="'[\[(' || $full-width-openers || $open-quotation-marks || ']\s+'" as="xs:string"/>
+        <xsl:variable name="space-before-closer-pattern" select="'\s+[\])' || $full-width-closers || $close-quotation-marks || ']'" as="xs:string"/>
+        <xsl:variable name="space-after-comma-pattern" select="',[^\s&nbsp;&mdash;&hellip;' || $full-width-closers || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
+        <xsl:variable name="space-after-period-pattern" select="'\.[^\s&nbsp;.,:;&mdash;' || $full-width-closers || $close-quotation-marks || '0-9)\]]'" as="xs:string"/>
+        <xsl:variable name="space-after-punctuation-pattern" select="'[:;!?][^\s&mdash;&hellip;!' || $full-width-closers || $close-quotation-marks || ')\]]'" as="xs:string"/>
 
         <xsl:copy-of select="f:spaced-abbreviations(., $segment)"/>
 
