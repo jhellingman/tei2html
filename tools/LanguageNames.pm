@@ -261,8 +261,11 @@ BEGIN {
     $langNameHash{"mas"}            = "Maasai";
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
-    $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
     $langNameHash{"nah"}            = "Nahuatl (Aztec)";
+    $langNameHash{"njh"}            = "Lhota";
+    $langNameHash{"njm"}            = "Angami";
+    $langNameHash{"njo"}            = "Ao";
+    $langNameHash{"nsm"}            = "Sema";
     $langNameHash{"ota"}            = "Ottoman Turkish";
     $langNameHash{"ota-latn"}       = "Ottoman Turkish (Latin transcription)";
     $langNameHash{"pag"}            = "Pangasin&aacute;n";
@@ -270,17 +273,22 @@ BEGIN {
     $langNameHash{"phi"}            = "Philippine (Other)";
     $langNameHash{"rue"}            = "Rusyn";
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
-    $langNameHash{"sit-angami"}     = "Angami Naga";
-    $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect";
-    $langNameHash{"sit-ao-chongli"} = "Ao Naga, Chongli dialect";
-    $langNameHash{"sit-ao-mongsen"} = "Ao Naga, Mongsen dialect";
-    $langNameHash{"sit-sema"}       = "Sema Naga";
+    $langNameHash{"und"}            = "undetermined language";
     $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
     $langNameHash{"win"}            = "Winnebago";
     $langNameHash{"yua"}            = "Yucatec Maya";
 
     $langNameHash{"zxx"}            = "No linguistic content / Not applicable";
-    $langNameHash{"und"}            = "undetermined language";
+
+
+    # Non standard extensions
+
+    $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
+    $langNameHash{"sit-angami"}     = "Angami Naga"; # -> njm
+    $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect"; # -> njo
+    $langNameHash{"sit-ao-chongli"} = "Ao Naga, Chongli dialect";
+    $langNameHash{"sit-ao-mongsen"} = "Ao Naga, Mongsen dialect";
+    $langNameHash{"sit-sema"}       = "Sema Naga"; # -> nsm
 }
 
 
