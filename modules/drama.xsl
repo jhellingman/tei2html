@@ -309,7 +309,7 @@
     <xsl:template match="lb" mode="css">
         <xsl:if test="f:is-set('lb.preserve') and f:has-rend-value(@rend, 'indent')">
 .indent<xsl:value-of select="f:generate-id(.)"/> {
-    padding-left: <xsl:value-of select="f:indent-value(f:rend-value(@rend, 'indent'))"/>;
+    margin-left: <xsl:value-of select="f:indent-value(f:rend-value(@rend, 'indent'))"/>;
 }
 </xsl:if>
         <xsl:next-match/>
