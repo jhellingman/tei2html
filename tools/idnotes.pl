@@ -1,4 +1,4 @@
-# idnotes.pl -- give footnotes ids based on de page and number they have
+# idNotes.pl -- give footnotes ids based on de page and number they have
 
 use strict;
 use warnings;
@@ -38,14 +38,21 @@ sub idNotes($$) {
         my $noteAttrs = $2;
         $remainder = $';
 
+        my $spacer = "";
+
         my $noteNumber = getAttrVal('n', $noteAttrs);
         my $notePlace = getAttrVal('place', $noteAttrs);
         my $noteId = getAttrVal('id', $noteAttrs);
         my $noteLang = getAttrVal('lang', $noteAttrs);
         my $noteLangAttr = $noteLang ne '' ? " lang=\"$noteLang\"" : '';
         my $newNoteTag = $noteTag;
+        if ($pageNumber =~ m/[clxvi]+/) {
+            $spacer = ".";
+        } else {
+            $spacer = "";
+        }
         if ($noteNumber =~ m/([0-9]+|[A-Z])/ and $noteId eq '' and ($notePlace eq '' or $notePlace eq 'foot')) {
-            $newNoteTag = "<note n=$noteNumber id=n$pageNumber.$noteNumber$noteLangAttr>";
+            $newNoteTag = "<note n=$noteNumber id=n$spacer$pageNumber.$noteNumber$noteLangAttr>";
         }
         if ($noteId eq '' and $notePlace eq 'apparatus') {
             $appNoteNumber++;
