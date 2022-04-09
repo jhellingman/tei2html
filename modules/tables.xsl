@@ -117,7 +117,11 @@
         <xsl:context-item as="element(table)" use="required"/>
 
         <table>
-            <xsl:copy-of select="if (f:is-inline(.)) then f:set-class-attribute-with(., 'inlinetable') else f:set-class-attribute(.)"/>
+            <xsl:copy-of select="if (f:is-inline(.))
+                then f:set-class-attribute-with(., 'inlineTable')
+                else if (f:is-nested-table(.))
+                    then f:set-class-attribute-with(., 'nestedTable')
+                    else f:set-class-attribute(.)"/>
 
             <!-- ePub3 doesn't like summaries on tables -->
             <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">
@@ -553,6 +557,11 @@
     <xsl:function name="f:count-data-rows" as="xs:integer">
         <xsl:param name="table" as="element(table)"/>
         <xsl:sequence select="if ($table/@rows and $table/@headrows) then xs:integer($table/@rows - $table/@headrows) else count(f:get-data-rows($table))"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-nested-table" as="xs:boolean">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="if ($table/ancestor::table) then true() else false()"/>
     </xsl:function>
 
 </xsl:stylesheet>

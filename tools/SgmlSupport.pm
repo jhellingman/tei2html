@@ -2231,6 +2231,8 @@ BEGIN {
     $ent{'u1'}          =  "u<sup>1</sup>"; # u with figure 1 above
     $ent{'u2'}          =  "u<sup>2</sup>"; # u with figure 2 above
 
+    $ent{'a2barb'}      =  "a" . chr(0x0331) . "<sup>2</sup>"; # a with figure 2 above and bar below
+
     $ent{'supG'}        =  "<sup>G</sup>";  # Superior small caps G
 
     # See '[A-Z]sc' for actual Unicode small caps characters.
