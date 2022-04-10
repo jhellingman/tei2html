@@ -1432,6 +1432,8 @@ BEGIN {
 
     $ent{'jcaron'}      = 'j' . chr(0x030C); # j with caron
     $ent{'Jcaron'}      = 'J' . chr(0x030C); # J with caron
+    $ent{'pcaron'}      = 'p' . chr(0x030C); # p with caron
+    $ent{'Pcaron'}      = 'P' . chr(0x030C); # P with caron
     $ent{'ycaron'}      = 'y' . chr(0x030C); # y with caron
     $ent{'Ycaron'}      = 'Y' . chr(0x030C); # Y with caron
 
@@ -1629,7 +1631,7 @@ BEGIN {
     # Tibetan transcription as used in Das' dictionary
 
     $ent{'ncirc'}       = 'n' . chr(0x0302);                    # n with circumflex
-    $ent{'rbarb'}       = 'r' . chr(0x0331);                    # a with macron below
+    $ent{'rbarb'}       = 'r' . chr(0x0331);                    # r with macron below
 
     # Combining letters (placed above the base letter)
 
@@ -1984,6 +1986,10 @@ BEGIN {
     $ent{'Usupe'}       = 'U' . chr(0x0364);    # U with small e above
 
     $ent{'bstrok'}      = chr(0x0180);          # b with stroke through stem
+
+    $ent{'abbbb'}       = 'a' . chr(0x0331) . chr(0x0331); # a with two macrons below
+    $ent{'Abbbb'}       = 'A' . chr(0x0331) . chr(0x0331); # A with two macrons below
+
 
     # Requiring wide combining diacritics
     $ent{'oobreve'}     = 'o' . chr(0x035D) . 'o'; # oo with wide breve

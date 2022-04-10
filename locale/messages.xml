@@ -1933,13 +1933,29 @@
 
     <msg:messages xml:lang="es">
 
+        <msg:message name="msgQrCode">Código QR</msg:message>
+        <msg:message name="msgQrCodePgUrl">Código QR de la URL del Project Gutenberg</msg:message>
+        <msg:message name="msgAttributes">Atributos</msg:message>
+        <msg:message name="msgOccurrences">Ocurrencias</msg:message>
+        <msg:message name="msgReturnToNoteInText">Volver a la nota en el texto</msg:message>
+        <msg:message name="msgReturnToNoteMarkInText">Volver a la nota <msg:param name="mark"/> en el texto</msg:message>
+        <msg:message name="msgValues">Valores</msg:message>
+        <msg:message name="msgPublicationDate">Fecha de publicación</msg:message>
+        <msg:message name="msgGuide">Guía</msg:message>
+        <msg:message name="msgGuides">Guías</msg:message>
+        <msg:message name="msgCover">Cubierta</msg:message>
+        <msg:message name="msgCovers">Cubiertas</msg:message>
+        <msg:message name="msgBodyMatter">Texto principal</msg:message>
+        <msg:message name="msgFrontMatter">Texto preliminar</msg:message>
+        <msg:message name="msgBackMatter">Texto final</msg:message>
+
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> Ocurrencias</msg:message>
         <msg:message name="msgEditDistance">Editar espacio</msg:message>
         <msg:message name="msgAbbreviationOverview">Resúmen de abreviaciones</msg:message>
         <msg:message name="msgExpansion">Expandir</msg:message>
         <msg:message name="msgExpansionNotAvailable">Expansión no disponible</msg:message>
         <msg:message name="msgLinkToInternetArchive">Vínculo a Internet Archive</msg:message>
-        <msg:message name="msgProjectGutenberg">Projecto Gutenberg</msg:message>
+        <msg:message name="msgProjectGutenberg">Project Gutenberg</msg:message>
         <msg:message name="msgLibraryOfCongress">Biblioteca del congreso</msg:message>
         <msg:message name="msgLibraryThing">LibraryThing</msg:message>
         <msg:message name="msgViaf">Virtual International Authority File</msg:message>
