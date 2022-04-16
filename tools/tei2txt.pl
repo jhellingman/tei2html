@@ -856,13 +856,18 @@ sub handleIntra() {
 
         # Lines look like this:  "normal text [top text|bottom text] normal text."
         my $normalTexts = $line;
-        $normalTexts =~ s/\[\|([^|]+?)\]/<BREAK>/g;
-        $normalTexts =~ s/\[([^|]+?)\|\]/<BREAK>/g;
-        $normalTexts =~ s/\[([^|]+?)\|([^|]+?)\]/<BREAK>/g;
+        $normalTexts =~ s/\[\|([^|]+?)\]/<BREAK>/g;         # only bottom text: [|...] 
+        $normalTexts =~ s/\[([^|]+?)\|\]/<BREAK>/g;         # only top text: [...|]
+        $normalTexts =~ s/\[([^|]+?)\|([^|]+?)\]/<BREAK>/g; # top and bottom text: [...|...]
 
         my @normals = split(/<BREAK>/, $normalTexts);
         my @tops = $line =~ /\[([^|]*)\|[^|]*\]/g;
         my @bottoms = $line =~ /\[[^|]*\|([^|]*)\]/g;
+
+        # special case: no normal text at all.
+        if (!@normals) {
+            $normals[1] = '';
+        }
 
         my $normalCount = scalar @normals;
 

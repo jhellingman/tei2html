@@ -2078,7 +2078,14 @@ BEGIN {
     $ent{'Oacuumlb'}    = 'O' . chr(0x0301) . chr(0x0324);  # O with acute and umlaut below (JASCHKE)
     $ent{'Uacuumlb'}    = 'U' . chr(0x0301) . chr(0x0324);  # U with acute and umlaut below (JASCHKE)
 
+    $ent{'abreac'}      = 'a' . chr(0x0306) . chr(0x0301);  # a with breve and acute
+    $ent{'Abreac'}      = 'A' . chr(0x0306) . chr(0x0301);  # A with breve and acute
     $ent{'ebreac'}      = 'e' . chr(0x0306) . chr(0x0301);  # e with breve and acute (JASCHKE)
+    $ent{'Ebreac'}      = 'E' . chr(0x0306) . chr(0x0301);  # E with breve and acute
+    $ent{'ibreac'}      = 'i' . chr(0x0306) . chr(0x0301);  # i with breve and acute
+    $ent{'Ibreac'}      = 'I' . chr(0x0306) . chr(0x0301);  # I with breve and acute
+    $ent{'obreac'}      = 'o' . chr(0x0306) . chr(0x0301);  # o with breve and acute
+    $ent{'Obreac'}      = 'O' . chr(0x0306) . chr(0x0301);  # O with breve and acute
 
     $ent{'lowarrow'}    = chr(0x02F1);  # Modifier Letter Low Left Arrowhead (JASCHKE)
     $ent{'lowring'}     = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
