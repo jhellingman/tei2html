@@ -315,6 +315,25 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
     padding: 1em;
 }
 
+/***** Faux accents *****/
+span.accent {
+    display: inline-block;
+    text-align: center;
+}
+
+span.accent, span.accent span.top, span.accent span.base {
+    line-height: 0.40em;
+}
+
+span.accent span.top {
+    font-weight: bold;
+    font-size: 5pt;
+}
+
+span.accent span.base {
+    display: block;
+}
+
 /***** Footnotes and other notes *****/
 
 .footnotes .body, .footnotes .div1 {

@@ -2230,21 +2230,38 @@ BEGIN {
 
     $ent{'supn'}        =  chr(0x207F);     # superscript n
 
-    # Lippincott
-    $ent{'a1'}          =  "a<sup>1</sup>"; # a with figure 1 above
-    $ent{'a2'}          =  "a<sup>2</sup>"; # a with figure 2 above
-    $ent{'a3'}          =  "a<sup>3</sup>"; # a with figure 3 above
-    $ent{'a4'}          =  "a<sup>4</sup>"; # a with figure 4 above
-    $ent{'e1'}          =  "e<sup>1</sup>"; # e with figure 1 above
-    $ent{'e2'}          =  "e<sup>2</sup>"; # e with figure 2 above
-    $ent{'i1'}          =  "i<sup>1</sup>"; # i with figure 1 above
-    $ent{'i2'}          =  "i<sup>2</sup>"; # i with figure 2 above
-    $ent{'o1'}          =  "o<sup>1</sup>"; # o with figure 1 above
-    $ent{'o2'}          =  "o<sup>2</sup>"; # o with figure 2 above
-    $ent{'u1'}          =  "u<sup>1</sup>"; # u with figure 1 above
-    $ent{'u2'}          =  "u<sup>2</sup>"; # u with figure 2 above
+    # Lippincott (using superscript approximation)
+#    $ent{'a1'}          =  "a<sup>1</sup>"; # a with figure 1 above
+#    $ent{'a2'}          =  "a<sup>2</sup>"; # a with figure 2 above
+#    $ent{'a3'}          =  "a<sup>3</sup>"; # a with figure 3 above
+#    $ent{'a4'}          =  "a<sup>4</sup>"; # a with figure 4 above
+#    $ent{'e1'}          =  "e<sup>1</sup>"; # e with figure 1 above
+#    $ent{'e2'}          =  "e<sup>2</sup>"; # e with figure 2 above
+#    $ent{'i1'}          =  "i<sup>1</sup>"; # i with figure 1 above
+#    $ent{'i2'}          =  "i<sup>2</sup>"; # i with figure 2 above
+#    $ent{'o1'}          =  "o<sup>1</sup>"; # o with figure 1 above
+#    $ent{'o2'}          =  "o<sup>2</sup>"; # o with figure 2 above
+#    $ent{'u1'}          =  "u<sup>1</sup>"; # u with figure 1 above
+#    $ent{'u2'}          =  "u<sup>2</sup>"; # u with figure 2 above
 
-    $ent{'a2barb'}      =  "a" . chr(0x0331) . "<sup>2</sup>"; # a with figure 2 above and bar below
+#    $ent{'a2barb'}      =  "a" . chr(0x0331) . "<sup>2</sup>"; # a with figure 2 above and bar below
+
+    # Lippincott (using figures stacked on top of letters, requires matching CSS for proper placement in final document)
+    $ent{'a1'}          =  "<ab rend='accent'><ab rend='top'>1</ab><ab rend='base'>a</ab></ab>"; # a with figure 1 above
+    $ent{'a2'}          =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>a</ab></ab>"; # a with figure 2 above
+    $ent{'a3'}          =  "<ab rend='accent'><ab rend='top'>3</ab><ab rend='base'>a</ab></ab>"; # a with figure 3 above
+    $ent{'a4'}          =  "<ab rend='accent'><ab rend='top'>4</ab><ab rend='base'>a</ab></ab>"; # a with figure 4 above
+    $ent{'e1'}          =  "<ab rend='accent'><ab rend='top'>1</ab><ab rend='base'>e</ab></ab>"; # e with figure 1 above
+    $ent{'e2'}          =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>e</ab></ab>"; # e with figure 2 above
+    $ent{'i1'}          =  "<ab rend='accent'><ab rend='top'>1</ab><ab rend='base'>i</ab></ab>"; # i with figure 1 above
+    $ent{'i2'}          =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>i</ab></ab>"; # i with figure 2 above
+    $ent{'o1'}          =  "<ab rend='accent'><ab rend='top'>1</ab><ab rend='base'>o</ab></ab>"; # o with figure 1 above
+    $ent{'o2'}          =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>o</ab></ab>"; # o with figure 2 above
+    $ent{'u1'}          =  "<ab rend='accent'><ab rend='top'>1</ab><ab rend='base'>u</ab></ab>"; # u with figure 1 above
+    $ent{'u2'}          =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>u</ab></ab>"; # u with figure 2 above
+
+    $ent{'a2barb'}      =  "<ab rend='accent'><ab rend='top'>2</ab><ab rend='base'>a" . chr(0x0331) . "</ab></ab>"; # a with figure 2 above and bar below
+
 
     $ent{'supG'}        =  "<sup>G</sup>";  # Superior small caps G
 
