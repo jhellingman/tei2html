@@ -2293,6 +2293,10 @@ BEGIN {
     $ent{'scY'}         =  "<sc>y</sc>";    # Small caps Y
     $ent{'scZ'}         =  "<sc>z</sc>";    # Small caps Z
 
+    # Italics with a special meaning
+    $ent{'khit'}        =  "<hi>kh</hi>";   # Italic kh (alternative for kh with bar below).
+
+
     ###############################################################################
     # Project Gutenberg boilerplate texts
 

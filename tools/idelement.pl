@@ -61,7 +61,7 @@ while (<INPUTFILE>) {
 }
 
 
-sub idElement() {
+sub idElement {
     my $remainder = shift;
     my $pageNumber = shift;
 
@@ -89,7 +89,7 @@ sub idElement() {
 }
 
 
-sub stripAttrVal() {
+sub stripAttrVal {
     my $attrName = shift;
     my $attrs = shift;
 
