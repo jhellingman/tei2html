@@ -348,7 +348,7 @@ sub processFile($) {
 
 sub removeFile($) {
     my $fileToRemove = shift;
-    print "DEBUG: Removing file: $fileToRemove.\n";
+    !$debug || print "DEBUG: Removing file: $fileToRemove.\n";
     $debug || unlink($fileToRemove);
 }
 
@@ -1195,7 +1195,7 @@ sub convertIntraNotation() {
     my $filename = shift;
 
     my $containsIntralinear = system ("grep -q \"<INTRA\" $filename");
-    if ($containsIntralinear == 0) {
+    if ($containsIntralinear == 0 && $noTranscription == 0) {
         my $tmpFile = temporaryFile('intra', '.tei');
         print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
         system ("perl $toolsdir/intralinear.pl $filename > $tmpFile");
