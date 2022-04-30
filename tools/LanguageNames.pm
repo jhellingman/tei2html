@@ -249,6 +249,7 @@ BEGIN {
     $langNameHash{"gad"}            = "Gaddang";
     $langNameHash{"grc"}            = "Greek (classical)";
     $langNameHash{"grc-latn"}       = "Greek (classical, Latin transcription)";
+    $langNameHash{"grt"}            = "Garo";
     $langNameHash{"haw"}            = "Hawaiian";
     $langNameHash{"hil"}            = "Hiligaynon";
     $langNameHash{"ifu"}            = "Ifugao";
@@ -262,10 +263,14 @@ BEGIN {
     $langNameHash{"mjw"}            = "Karbi language";
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"nah"}            = "Nahuatl (Aztec)";
+    $langNameHash{"nbc"}            = "Chang";
     $langNameHash{"njh"}            = "Lhota";
     $langNameHash{"njm"}            = "Angami";
+    $langNameHash{"njn"}            = "Liangmai";
     $langNameHash{"njo"}            = "Ao";
+    $langNameHash{"nsa"}            = "Sangtam";
     $langNameHash{"nsm"}            = "Sema";
+    $langNameHash{"nzm"}            = "Zeme";
     $langNameHash{"ota"}            = "Ottoman Turkish";
     $langNameHash{"ota-latn"}       = "Ottoman Turkish (Latin transcription)";
     $langNameHash{"pag"}            = "Pangasin&aacute;n";
@@ -273,9 +278,11 @@ BEGIN {
     $langNameHash{"phi"}            = "Philippine (Other)";
     $langNameHash{"rue"}            = "Rusyn";
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
+    $langNameHash{"tcz"}            = "Thadou";
     $langNameHash{"und"}            = "undetermined language";
     $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
     $langNameHash{"win"}            = "Winnebago";
+    $langNameHash{"xac"}            = "Kachari";
     $langNameHash{"yua"}            = "Yucatec Maya";
 
     $langNameHash{"zxx"}            = "No linguistic content / Not applicable";

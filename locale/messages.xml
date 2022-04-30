@@ -555,13 +555,24 @@
         <msg:message name="crb">Chavacano</msg:message>
         <msg:message name="grc">Greek (Classical)</msg:message>
         <msg:message name="grc-latn">Greek (Classical; Latin transcription)</msg:message>
+        <msg:message name="grt">Garo</msg:message>
         <msg:message name="hil">Hiligaynon</msg:message>
         <msg:message name="ilo">Ilokano</msg:message>
         <msg:message name="kha">Khasi</msg:message>
+        <msg:message name="nbc">Chang</msg:message>
+        <msg:message name="njh">Lhota</msg:message>
+        <msg:message name="njm">Angami</msg:message>
+        <msg:message name="njn">Liangmai</msg:message>
+        <msg:message name="njo">Ao</msg:message>
+        <msg:message name="nsa">Sangtam</msg:message>
+        <msg:message name="nsm">Sema</msg:message>
+        <msg:message name="nzm">Zeme</msg:message>
         <msg:message name="pag">Pangasinan</msg:message>
         <msg:message name="pam">Kapampangan</msg:message>
         <msg:message name="syc">Syriac</msg:message>
+        <msg:message name="tcz">Thadou</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
+        <msg:message name="xac">Kachari</msg:message>
         <msg:message name="zxx">Not applicable</msg:message>
 
         <!-- Creating a list of items -->

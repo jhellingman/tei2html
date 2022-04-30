@@ -869,7 +869,7 @@
         <xsl:param name="uri" as="xs:string"/>
         <xsl:variable name="uri" select="normalize-space($uri)" as="xs:string"/>
 
-        <xsl:copy-of select="f:log-info('Including CSS stylesheet: {1}', ($uri))"/>
+        <xsl:copy-of select="f:log-debug('Including CSS stylesheet: {1}', ($uri))"/>
 
         <xsl:variable name="css">
             <xsl:choose>
