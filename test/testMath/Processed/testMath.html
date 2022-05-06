@@ -1,55 +1,137 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2019-10-31T20:43:28Z using SAXON HE 9.9.0.1 . -->
+<!-- This HTML file has been automatically generated from an XML source on 2022-05-06T19:37:39Z using SAXON HE 9.9.1.8 . -->
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Sample MathJax Equations</title>
 <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html">
 <meta name="author" content="">
 <link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/">
 <meta name="DC.Creator" content="">
 <meta name="DC.Title" content="Sample MathJax Equations">
+<meta name="DC.Date" content="2020">
 <meta name="DC.Language" content="en">
 <meta name="DC.Format" content="text/html">
 <meta name="DC.Publisher" content="Project Gutenberg">
 <meta name="DC:Subject" content="Mathematics">
-<style type="text/css">
+<style type="text/css"> /* <![CDATA[ */
+html {
+line-height: 1.3;
+}
 body {
-font-family: "Times New Roman", Times, serif;
+margin: 0;
+}
+main {
+display: block;
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+hr {
+height: 0;
+overflow: visible;
+}
+pre {
+font-family: monospace;
+font-size: 1em;
+}
+a {
+background-color: transparent;
+}
+abbr[title] {
+border-bottom: none;
+text-decoration: underline;
+text-decoration: underline dotted;
+}
+b, strong {
+font-weight: bolder;
+}
+code, kbd, samp {
+font-family: monospace;
+font-size: 1em;
+}
+small {
+font-size: 80%;
+}
+sub, sup {
+font-size: 67%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+}
+sub {
+bottom: -0.25em;
+}
+sup {
+top: -0.5em;
+}
+img {
+border-style: none;
+}
+body {
+font-family: serif;
 font-size: 100%;
-line-height: 1.2em;
 text-align: left;
+margin-top: 2.4em;
+}
+div.front, div.body {
+margin-bottom: 7.2em;
+}
+div.back {
+margin-bottom: 2.4em;
 }
 .div0 {
-padding-top: 5.6em;
+margin-top: 7.2em;
+margin-bottom: 7.2em;
 }
 .div1 {
-padding-top: 4.8em;
+margin-top: 5.6em;
+margin-bottom: 5.6em;
 }
 .div2 {
-padding-top: 3.6em;
+margin-top: 4.8em;
+margin-bottom: 4.8em;
 }
-.div3, .div4, .div5 {
-padding-top: 2.4em;
+.div3 {
+margin-top: 3.6em;
+margin-bottom: 3.6em;
 }
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+.div4 {
+margin-top: 2.4em;
+margin-bottom: 2.4em;
+}
+.div5, .div6, .div7 {
+margin-top: 1.44em;
+margin-bottom: 1.44em;
+}
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child,
+.div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
+margin-bottom: 0;
+}
+blockquote div.front, blockquote div.body, blockquote div.back {
+margin-top: 0;
+margin-bottom: 0;
+}
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child,
+.divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
+margin-top: 0;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 clear: both;
 font-style: normal;
 text-transform: none;
 }
 h3, .h3 {
 font-size: 1.2em;
-line-height: 1.2em;
 }
 h3.label {
 font-size: 1em;
-line-height: 1.2em;
 margin-bottom: 0;
 }
 h4, .h4 {
 font-size: 1em;
-line-height: 1.2em;
 }
 .alignleft {
 text-align: left;
@@ -66,7 +148,6 @@ text-align: center;
 }
 p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
 font-size: 0.9em;
-line-height: 1.2em;
 text-indent: 0;
 }
 p.argument, p.tocArgument, .par.argument, .par.tocArgument {
@@ -103,7 +184,6 @@ text-indent: -2em;
 }
 .epigraph {
 font-size: 0.9em;
-line-height: 1.2em;
 width: 60%;
 margin-left: auto;
 }
@@ -113,8 +193,7 @@ text-align: right;
 }
 .trailer {
 clear: both;
-padding-top: 2.4em;
-padding-bottom: 1.6em;
+margin-top: 3.6em;
 }
 span.abbr, abbr {
 white-space: nowrap;
@@ -150,9 +229,6 @@ font-family: monospace;
 .underline {
 text-decoration: underline;
 }
-sup {
-line-height: 6pt;
-}
 .overline, .overtilde {
 text-decoration: overline;
 }
@@ -164,29 +240,34 @@ color: red;
 }
 hr {
 clear: both;
-height: 1px;
+border: none;
+border-bottom: 1px solid black;
+width: 45%;
 margin-left: auto;
 margin-right: auto;
 margin-top: 1em;
 text-align: center;
-width: 45%;
+}
+hr.dotted {
+border-bottom: 2px dotted black;
+}
+hr.dashed {
+border-bottom: 2px dashed black;
 }
 .aligncenter {
 text-align: center;
 }
 h1, h2, .h1, .h2 {
 font-size: 1.44em;
-line-height: 1.5em;
+line-height: 1.5;
 }
 h1.label, h2.label {
 font-size: 1.2em;
-line-height: 1.2em;
 margin-bottom: 0;
 }
 h5, h6 {
 font-size: 1em;
 font-style: italic;
-line-height: 1em;
 }
 p, .par {
 text-indent: 0;
@@ -198,26 +279,25 @@ text-transform: uppercase;
 text-indent: -0.32em;
 }
 .hangqq {
-text-indent: -0.40em;
+text-indent: -0.42em;
 }
 .hangqqq {
-text-indent: -0.71em;
+text-indent: -0.84em;
 }
 p.dropcap:first-letter, .par.dropcap:first-letter {
 float: left;
 clear: left;
 margin: 0 0.05em 0 0;
 padding: 0;
-line-height: 0.8em;
+line-height: 0.8;
 font-size: 420%;
 vertical-align: super;
 }
 blockquote, p.quote, div.blockquote, div.argument, .par.quote {
 font-size: 0.9em;
-line-height: 1.2em;
 margin: 1.58em 5%;
 }
-.pagenum a, a.noteref:hover, a.pseudonoteref:hover, a.hidden:hover, a.hidden {
+.pageNum a, a.noteRef:hover, a.pseudoNoteRef:hover, a.hidden:hover, a.hidden {
 text-decoration: none;
 }
 .advertisement, .advertisements {
@@ -227,6 +307,20 @@ color: #000;
 margin: 2em 5%;
 padding: 1em;
 }
+span.accent {
+display: inline-block;
+text-align: center;
+}
+span.accent, span.accent span.top, span.accent span.base {
+line-height: 0.40em;
+}
+span.accent span.top {
+font-weight: bold;
+font-size: 5pt;
+}
+span.accent span.base {
+display: block;
+}
 .footnotes .body, .footnotes .div1 {
 padding: 0;
 }
@@ -235,10 +329,31 @@ color: #AAAAAA;
 font-weight: bold;
 text-decoration: none;
 }
-a.noteref, a.pseudonoteref {
+.fnarrow:hover, .fnreturn:hover {
+color: #660000;
+}
+.fnreturn {
+color: #AAAAAA;
 font-size: 80%;
+font-weight: bold;
 text-decoration: none;
 vertical-align: 0.25em;
+}
+a {
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+background-color: #e9f5ff;
+}
+a.noteRef, a.pseudoNoteRef {
+font-size: 67%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+top: -0.5em;
+text-decoration: none;
+margin-left: 0.1em;
 }
 .displayfootnote {
 display: none;
@@ -258,14 +373,18 @@ p.footnote, .par.footnote {
 margin-bottom: 0.5em;
 margin-top: 0.5em;
 }
-p.footnote .label, .par.footnote .label {
+p.footnote .fnlabel, .par.footnote .fnlabel {
 float: left;
-width: 2em;
-height: 12pt;
-display: block;
+margin-left: -0.1em;
+margin-top: 0.9em;
+min-width: 1.0em;
+padding-right: 0.4em;
 }
 .apparatusnote {
 text-decoration: none;
+}
+.apparatusnote:target, .fndiv:target {
+background-color: #eaf3ff;
 }
 table.tocList {
 width: 100%;
@@ -278,6 +397,7 @@ td.tocPageNum, td.tocDivNum {
 text-align: right;
 min-width: 10%;
 border-width: 0;
+white-space: nowrap;
 }
 td.tocDivNum {
 padding-left: 0;
@@ -322,6 +442,10 @@ margin: 0;
 }
 .index {
 font-size: 80%;
+}
+.index p {
+text-indent: -1em;
+margin-left: 1em;
 }
 .indexToc {
 text-align: center;
@@ -371,6 +495,9 @@ list-style-type: none;
 }
 .splitListTable {
 margin-left: 0;
+}
+.splitListTable td {
+vertical-align: top;
 }
 .numberedItem {
 text-indent: -3em;
@@ -433,30 +560,38 @@ white-space: nowrap;
 body {
 padding: 1.58em 16%;
 }
-.pagenum {
+.pageNum {
 display: inline;
-font-size: 70%;
+font-size: 8.4pt;
 font-style: normal;
 margin: 0;
 padding: 0;
 position: absolute;
 right: 1%;
 text-align: right;
+letter-spacing: normal;
 }
 .marginnote {
 font-size: 0.8em;
 height: 0;
 left: 1%;
-line-height: 1.2em;
 position: absolute;
 text-indent: 0;
 width: 14%;
 text-align: left;
 }
+.right-marginnote {
+font-size: 0.8em;
+height: 0;
+right: 3%;
+position: absolute;
+text-indent: 0;
+text-align: right;
+width: 11%
+}
 .cut-in-left-note {
 font-size: 0.8em;
 left: 1%;
-line-height: 1.2em;
 float: left;
 text-indent: 0;
 width: 14%;
@@ -466,7 +601,6 @@ padding: 0.8em 0.8em 0.8em 0;
 .cut-in-right-note {
 font-size: 0.8em;
 left: 1%;
-line-height: 1.2em;
 float: right;
 text-indent: 0;
 width: 14%;
@@ -479,21 +613,24 @@ right: 16%;
 top: auto;
 text-indent: 0;
 }
-.pglink, .catlink, .exlink, .wplink, .biblink, .qurlink, .seclink {
-background-repeat: no-repeat;
-background-position: right center;
+.pglink::after {
+content: "\0000A0\01F4D8";
+font-size: 80%;
+font-style: normal;
+font-weight: normal;
 }
-.pglink {
-background-image: url(images/book.png);
-padding-right: 18px;
+.catlink::after {
+content: "\0000A0\01F4C7";
+font-size: 80%;
+font-style: normal;
+font-weight: normal;
 }
-.catlink {
-background-image: url(images/card.png);
-padding-right: 17px;
-}
-.exlink, .wplink, .biblink, .qurlink, .seclink {
-background-image: url(images/external.png);
-padding-right: 13px;
+.exlink::after, .wplink::after, .biblink::after, .qurlink::after, .seclink::after {
+content: "\0000A0\002197\00FE0F";
+color: blue;
+font-size: 80%;
+font-style: normal;
+font-weight: normal;
 }
 .pglink:hover {
 background-color: #DCFFDC;
@@ -501,18 +638,15 @@ background-color: #DCFFDC;
 .catlink:hover {
 background-color: #FFFFDC;
 }
-.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover {
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover, .seclin:hover {
 background-color: #FFDCDC;
 }
 body {
 background: #FFFFFF;
-font-family: "Times New Roman", Times, serif;
+font-family: serif;
 }
 body, a.hidden {
 color: black;
-}
-h1, .h1 {
-padding-bottom: 5em;
 }
 h1, h2, .h1, .h2 {
 text-align: center;
@@ -524,13 +658,16 @@ text-align: center;
 font-style: italic;
 margin-bottom: 2em;
 }
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .verseNum {
+.div2 p.byline, .div3 p.byline, .div4 p.byline, .div5 p.byline, .div6 p.byline, .div7 p.byline {
+text-align: left;
+}
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, p.legend, .verseNum {
 color: #660000;
 }
-.rightnote, .pagenum, .linenum, .pagenum a {
+.rightnote, .pageNum, .lineNum, .pageNum a {
 color: #AAAAAA;
 }
-a.hidden:hover, a.noteref:hover, a.pseudonoteref:hover {
+a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
 color: red;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -545,13 +682,9 @@ text-align: center;
 }
 .arab { font-family: Scheherazade, serif; }
 .aran { font-family: 'Awami Nastaliq', serif; }
-.grek { font-family: 'Galatia SIL', serif; }
+.grek { font-family: 'Charis SIL', serif; }
 .hebr { font-family: Shlomo, 'Ezra SIL', serif; }
 .syrc { font-family: 'Serto Jerusalem', serif; }
-.pagenum, .linenum {
-speak: none;
-}</style>
-<style type="text/css">
 /* CSS rules generated from @rend attributes in TEI file */
 /* Extracted style from SVG file "formulas/display-f1.svg" */
 .f1frml {
@@ -603,8 +736,7 @@ height:3.009ex;
 }
 @media handheld {
 }
-/* CSS rules copied from @style attributes in TEI file */
-</style>
+/* ]]> */ </style>
 </head>
 <body>
 <div class="body">
@@ -613,14 +745,14 @@ height:3.009ex;
 <h2 class="main">Sample MathJax Equations</h2>
 </div>
 <div class="divBody">
-<p class="first">The following sample equations have been borrowed from <a class="seclink xd29e72" title="External link" href="https://www.tuhh.de/MathJax/test/examples.html">https://www.tuhh.de/MathJax/test/examples.html</a>.
+<p class="first">The following sample equations have been borrowed from <a class="seclink xd31e43" title="External link" href="https://www.tuhh.de/MathJax/test/examples.html">https://www.tuhh.de/MathJax/test/examples.html</a>.
 </p>
 <div class="div2 section">
 <div class="divHead">
 <h3 class="main">The Lorenz Equations</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(1)</span><span class="displayMath"><img src="formulas/display-f1.svg" alt="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" title="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" class="f1frml"></span><span class="rightMathLabel">(1)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(1)</span><!-- \begin{align} \dot{x} & = \sigma(y-x) \\ \dot{y} & = \rho x - y - xz \\ \dot{z} & = -\beta z + xy \end{align} --><span class="displayMath"><img src="formulas/display-f1.svg" alt="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" title="StartLayout 1st Row 1st Column ModifyingAbove x With dot 2nd Column equals sigma left-parenthesis y minus x right-parenthesis 2nd Row 1st Column ModifyingAbove y With dot 2nd Column equals rho x minus y minus x z 3rd Row 1st Column ModifyingAbove z With dot 2nd Column equals minus beta z plus x y EndLayout" class="f1frml"></span><span class="rightMathLabel">(1)</span></span>
 </p>
 </div>
 </div>
@@ -629,7 +761,7 @@ height:3.009ex;
 <h3 class="main">The Cauchy-Schwarz Inequality</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(2)</span><span class="displayMath"><img src="formulas/display-f2.svg" alt="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" title="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" class="f2frml"></span><span class="rightMathLabel">(2)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(2)</span><!-- $$ \left( \sum_{k=1}^n a_k b_k \right)^{\!\!2} \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) $$ --><span class="displayMath"><img src="formulas/display-f2.svg" alt="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" title="left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Baseline b Subscript k Baseline right-parenthesis squared less-than-or-equal-to left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts a Subscript k Superscript 2 Baseline right-parenthesis left-parenthesis sigma-summation Underscript k equals 1 Overscript n Endscripts b Subscript k Superscript 2 Baseline right-parenthesis" class="f2frml"></span><span class="rightMathLabel">(2)</span></span>
 </p>
 </div>
 </div>
@@ -638,16 +770,16 @@ height:3.009ex;
 <h3 class="main">A Cross Product Formula</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="displayMath"><img src="formulas/display-f3.svg" alt="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" title="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" class="f3frml"></span>
+<p class="first"><!-- $$ \mathbf{V}_1 \times \mathbf{V}_2 = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial X}{\partial u} & \frac{\partial Y}{\partial u} & 0 \\ \frac{\partial X}{\partial v} & \frac{\partial Y}{\partial v} & 0 \\ \end{vmatrix} $$ --><span class="displayMath"><img src="formulas/display-f3.svg" alt="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" title="bold upper V 1 times bold upper V 2 equals Start 3 By 3 Determinant 1st Row 1st Column bold i 2nd Column bold j 3rd Column bold k 2nd Row 1st Column StartFraction partial-differential upper X Over partial-differential u EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential u EndFraction 3rd Column 0 3rd Row 1st Column StartFraction partial-differential upper X Over partial-differential v EndFraction 2nd Column StartFraction partial-differential upper Y Over partial-differential v EndFraction 3rd Column 0 EndDeterminant" class="f3frml"></span>
 </p>
 </div>
 </div>
 <div class="div2 section">
 <div class="divHead">
-<h3 class="main">The probability of getting <span class="inlineMath"><i>k</i></span> heads when flipping <span class="inlineMath"><i>n</i></span> coins is:</h3>
+<h3 class="main">The probability of getting <!-- $k$ --><span class="inlineMath"><i>k</i></span> heads when flipping <!-- $n$ --><span class="inlineMath"><i>n</i></span> coins is:</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="displayMath"><img src="formulas/display-f4.svg" alt="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" title="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" class="f4frml"></span>
+<p class="first"><!-- $$P(E) = {n \choose k} p^k (1-p)^{ n-k}$$ --><span class="displayMath"><img src="formulas/display-f4.svg" alt="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" title="upper P left-parenthesis upper E right-parenthesis equals StartBinomialOrMatrix n Choose k EndBinomialOrMatrix p Superscript k Baseline left-parenthesis 1 minus p right-parenthesis Superscript n minus k" class="f4frml"></span>
 </p>
 </div>
 </div>
@@ -656,7 +788,7 @@ height:3.009ex;
 <h3 class="main">An Identity of Ramanujan</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>a</i>)</span><span class="displayMath"><img src="formulas/display-f5.svg" alt="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" title="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" class="f5frml"></span><span class="rightMathLabel">(5<i>a</i>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>a</i>)</span><!-- $$ \frac{1}{(\sqrt{\phi \sqrt{5}}-\phi) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\ldots} } } } $$ --><span class="displayMath"><img src="formulas/display-f5.svg" alt="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" title="StartFraction 1 Over left-parenthesis NestedStartRoot phi StartRoot 5 EndRoot NestedEndRoot minus phi right-parenthesis e Superscript two-fifths pi Baseline EndFraction equals 1 plus ContinuedFraction e Superscript minus 2 pi Baseline Over 1 plus StartFraction e Superscript minus 4 pi Baseline Over 1 plus StartFraction e Superscript minus 6 pi Baseline Over 1 plus StartFraction e Superscript minus 8 pi Baseline Over 1 plus ellipsis" class="f5frml"></span><span class="rightMathLabel">(5<i>a</i>)</span></span>
 </p>
 </div>
 </div>
@@ -665,16 +797,16 @@ height:3.009ex;
 <h3 class="main">A Rogers-Ramanujan Identity</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>b</i>)</span><span class="displayMath"><img src="formulas/display-f6.svg" alt="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" title="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" class="f6frml"></span><span class="rightMathLabel">(5<i>b</i>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<i>b</i>)</span><!-- $$ 1 + \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for $|q|<1$}. $$ --><span class="displayMath"><img src="formulas/display-f6.svg" alt="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" title="1 plus StartFraction q squared Over left-parenthesis 1 minus q right-parenthesis EndFraction plus StartFraction q Superscript 6 Baseline Over left-parenthesis 1 minus q right-parenthesis left-parenthesis 1 minus q squared right-parenthesis EndFraction plus midline-horizontal-ellipsis equals product Underscript j equals 0 Overscript normal infinity Endscripts StartFraction 1 Over left-parenthesis 1 minus q Superscript 5 j plus 2 Baseline right-parenthesis left-parenthesis 1 minus q Superscript 5 j plus 3 Baseline right-parenthesis EndFraction comma for StartAbsoluteValue q EndAbsoluteValue less-than 1 period" class="f6frml"></span><span class="rightMathLabel">(5<i>b</i>)</span></span>
 </p>
 </div>
 </div>
 <div class="div2 section">
 <div class="divHead">
-<h3 class="main">Maxwell&#x2019;s Equations</h3>
+<h3 class="main">Maxwell’s Equations</h3>
 </div>
 <div class="divBody">
-<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<b>*</b>)</span><span class="displayMath"><img src="formulas/display-f7.svg" alt="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" title="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" class="f7frml"></span><span class="rightMathLabel">(5<b>*</b>)</span></span>
+<p class="first"><span class="labeledMath"><span class="phantom leftMathLabel">(5<b>*</b>)</span><!-- \begin{align} \nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\ \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\ \nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\ \nabla \cdot \vec{\mathbf{B}} & = 0 \end{align} --><span class="displayMath"><img src="formulas/display-f7.svg" alt="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" title="StartLayout 1st Row 1st Column nabla times ModifyingAbove bold upper B With right-arrow minus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper E With right-arrow Over partial-differential t EndFraction 2nd Column equals StartFraction 4 pi Over c EndFraction ModifyingAbove bold j With right-arrow 2nd Row 1st Column nabla dot ModifyingAbove bold upper E With right-arrow 2nd Column equals 4 pi rho 3rd Row 1st Column nabla times ModifyingAbove bold upper E With right-arrow plus StartFraction 1 Over c EndFraction StartFraction partial-differential ModifyingAbove bold upper B With right-arrow Over partial-differential t EndFraction 2nd Column equals ModifyingAbove bold 0 With right-arrow 4th Row 1st Column nabla dot ModifyingAbove bold upper B With right-arrow 2nd Column equals 0 EndLayout" class="f7frml"></span><span class="rightMathLabel">(5<b>*</b>)</span></span>
 </p>
 </div>
 </div>
@@ -684,7 +816,7 @@ height:3.009ex;
 </div>
 <div class="divBody">
 <p class="first">Finally, while display equations look good for a page of samples, the ability to mix
-math and text in a paragraph is also important. This expression <span class="inlineMath"><img src="formulas/inline-f8.svg" alt="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" title="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" class="f8frml"></span> is an example of an inline equation. As you see, MathJax equations can be used this
+math and text in a paragraph is also important. This expression <!-- $\sqrt{3x-1}+(1+x)^2$ --><span class="inlineMath"><img src="formulas/inline-f8.svg" alt="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" title="StartRoot 3 x minus 1 EndRoot plus left-parenthesis 1 plus x right-parenthesis squared" class="f8frml"></span> is an example of an inline equation. As you see, MathJax equations can be used this
 way as well, without unduly disturbing the spacing between lines.</p>
 </div>
 </div>

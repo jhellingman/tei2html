@@ -14,7 +14,7 @@ HTML versions posted to Project Gutenberg.
 
 @page {
     size: demy-octavo;
-    margin: 27mm 16mm 27mm 16mm;
+    margin: 27mm 16mm;
 
     @footnotes {
         padding-top: 8pt;
