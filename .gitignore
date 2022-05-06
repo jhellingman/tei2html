@@ -173,3 +173,6 @@ tools/test-out.txt
 tools/test-err.txt
 samples/Cole - Philippine Folk Tales/imageinfo.xml
 .vscode/settings.json
+documentation/TEI-Guidelines.gutcheck
+documentation/TEI-Guidelines.jeebies
+documentation/TEI-Guidelines.txt

@@ -1,1611 +1,2085 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2010-08-31T23:28:22.912+02:00. -->
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- This HTML file has been automatically generated from an XML source on 2022-05-06T19:34:40Z using SAXON HE 9.9.1.8 . -->
 <html lang="en">
 <head>
-<meta name="generator" content=
-"HTML Tidy for Windows (vers 25 March 2009), see www.w3.org">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Tei2html - Guidelines and Reference Manual</title>
-<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
-<meta name="generator" content=
-"tei2html.xsl, see http://code.google.com/p/tei2html/">
+<meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html">
 <meta name="author" content="Jeroen Hellingman">
-<link rel="schema.DC" href=
-"http://dublincore.org/documents/1998/09/dces/">
+<link rel="coverpage" href="images/reference500.jpg">
+<link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/">
 <meta name="DC.Creator" content="Jeroen Hellingman">
-<meta name="DC.Title" content=
-"Tei2html - Guidelines and Reference Manual">
-<meta name="DC.Date" content="#####">
+<meta name="DC.Title" content="Tei2html - Guidelines and Reference Manual">
 <meta name="DC.Language" content="en">
 <meta name="DC.Format" content="text/html">
 <meta name="DC.Publisher" content="Jeroen Hellingman">
-<meta name="DC:Subject" content="#####">
-<style type="text/css">
-body
-{
-font: 100%/1.2em "Times New Roman", Times, serif;
-margin: 1.58em 16%;
-text-align: left;
+<style type="text/css"> /* <![CDATA[ */
+html {
+line-height: 1.3;
 }
-/***** Titlepage *****************************************************/
-.titlePage
-{
-border: #DDDDDD 2px solid;
-margin: 3em 0% 7em 0%;
-padding: 5em 10% 6em 10%;
-text-align: center;
+body {
+margin: 0;
 }
-.titlePage .docTitle
-{
-line-height: 3.5em;
-margin: 2em 0% 2em 0%;
-font-weight: bold;
+main {
+display: block;
 }
-.titlePage .docTitle .mainTitle
-{
-font-size: 1.8em;
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
 }
-.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle, .titlePage .docTitle .volumeTitle
-{
-font-size: 1.44em;
+hr {
+height: 0;
+overflow: visible;
 }
-.titlePage .byline
-{
-margin: 2em 0% 2em 0%;
-font-size:1.2em;
-line-height:1.72em;
+pre {
+font-family: monospace;
+font-size: 1em;
 }
-.titlePage .byline .docAuthor
-{
-font-size: 1.2em;
-font-weight: bold;
+a {
+background-color: transparent;
 }
-.titlePage .figure
-{
-margin: 2em 0% 2em 0%;
-margin-left: auto;
-margin-right: auto;
+abbr[title] {
+border-bottom: none;
+text-decoration: underline;
+text-decoration: underline dotted;
 }
-.titlePage .docImprint
-{
-margin: 4em 0% 0em 0%;
-font-size: 1.2em;
-line-height: 1.72em;
+b, strong {
+font-weight: bolder;
 }
-.titlePage .docImprint .docDate
-{
-font-size: 1.2em;
-font-weight: bold;
+code, kbd, samp {
+font-family: monospace;
+font-size: 1em;
 }
-/***** End Titlepage *****/
-.transcribernote
-{
-background-color:#DDE;
-border:black 1px dotted;
-color:#000;
-font-family:sans-serif;
-font-size:80%;
-margin:2em 5%;
-padding:1em;
-}
-.advertisment
-{
-background-color:#FFFEE0;
-border:black 1px dotted;
-color:#000;
-margin:2em 5%;
-padding:1em;
-}
-.width20
-{
-width: 20%;
-}
-.width40
-{
-width: 40%;
-}
-.indextoc
-{
-text-align: center;
-}
-.div0
-{
-padding-top: 5.6em;
-}
-.div1
-{
-padding-top: 4.8em;
-}
-.index
-{
+small {
 font-size: 80%;
 }
-.div2
-{
-padding-top: 3.6em;
+sub, sup {
+font-size: 67%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
 }
-.div3, .div4, .div5
-{
-padding-top: 2.4em;
+sub {
+bottom: -0.25em;
 }
-.footnotes .body,
-.footnotes .div1
-{
-padding: 0;
+sup {
+top: -0.5em;
 }
-.apparatusnote
-{
-text-decoration: none;
+img {
+border-style: none;
 }
-h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, pseudoh4
-{
+body {
+font-family: serif;
+font-size: 100%;
+text-align: left;
+margin-top: 2.4em;
+}
+div.front, div.body {
+margin-bottom: 7.2em;
+}
+div.back {
+margin-bottom: 2.4em;
+}
+.div0 {
+margin-top: 7.2em;
+margin-bottom: 7.2em;
+}
+.div1 {
+margin-top: 5.6em;
+margin-bottom: 5.6em;
+}
+.div2 {
+margin-top: 4.8em;
+margin-bottom: 4.8em;
+}
+.div3 {
+margin-top: 3.6em;
+margin-bottom: 3.6em;
+}
+.div4 {
+margin-top: 2.4em;
+margin-bottom: 2.4em;
+}
+.div5, .div6, .div7 {
+margin-top: 1.44em;
+margin-bottom: 1.44em;
+}
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child,
+.div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
+margin-bottom: 0;
+}
+blockquote div.front, blockquote div.body, blockquote div.back {
+margin-top: 0;
+margin-bottom: 0;
+}
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child,
+.divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
+margin-top: 0;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 clear: both;
 font-style: normal;
 text-transform: none;
 }
-h3, .pseudoh3
-{
-font-size:1.2em;
-line-height:1.2em;
+h3, .h3 {
+font-size: 1.2em;
 }
-h3.label
-{
-font-size:1em;
-line-height:1.2em;
-margin-bottom:0;
+h3.label {
+font-size: 1em;
+margin-bottom: 0;
 }
-h4, pseudoh4
-{
-font-size:1em;
-line-height:1.2em;
+h4, .h4 {
+font-size: 1em;
 }
-.alignleft
-{
-text-align:left;
+.alignleft {
+text-align: left;
 }
-.alignright
-{
-text-align:right;
+.alignright {
+text-align: right;
 }
-.alignblock
-{
-text-align:justify;
+.alignblock {
+text-align: justify;
 }
-p.tb, hr.tb
-{
-margin-top: 1.6em;
-margin-bottom: 1.6em;
-margin-left: auto;
-margin-right: auto;
+p.tb, hr.tb, .par.tb {
+margin: 1.6em auto;
 text-align: center;
 }
-p.argument, p.note, p.tocArgument
-{
-font-size:0.9em;
-line-height:1.2em;
-text-indent:0;
+p.argument, p.note, p.tocArgument, .par.argument, .par.note, .par.tocArgument {
+font-size: 0.9em;
+text-indent: 0;
 }
-p.argument, p.tocArgument
-{
-margin:1.58em 10%;
+p.argument, p.tocArgument, .par.argument, .par.tocArgument {
+margin: 1.58em 10%;
 }
-p.tocChapter
-{
-margin:1.58em 0%;
+td.tocDivNum {
+vertical-align: top;
 }
-p.tocSection
-{
-margin:0.7em 5%;
+td.tocPageNum {
+vertical-align: bottom;
 }
-p.dateline
-{
+.opener, .address {
 margin-top: 1.6em;
 margin-bottom: 1.6em;
 }
-p.signed
-{
+.addrline {
+margin-top: 0;
+margin-bottom: 0;
+}
+.dateline {
+margin-top: 1.6em;
+margin-bottom: 1.6em;
+text-align: right;
+}
+.salute {
 margin-top: 1.6em;
 margin-left: 3.58em;
 text-indent: -2em;
 }
-.epigraph
-{
-font-size:0.9em;
-line-height:1.2em;
+.signed {
+margin-top: 1.6em;
+margin-left: 3.58em;
+text-indent: -2em;
+}
+.epigraph {
+font-size: 0.9em;
 width: 60%;
 margin-left: auto;
 }
-.epigraph span.bibl
-{
+.epigraph span.bibl {
 display: block;
 text-align: right;
 }
-.trailer
-{
+.trailer {
 clear: both;
-padding-top: 2.4em;
-padding-bottom: 1.6em;
+margin-top: 3.6em;
 }
-.figure
-{
-margin-left: auto;
-margin-right: auto;
+span.abbr, abbr {
+white-space: nowrap;
 }
-.floatLeft
-{
-float:left;
-margin:10px 10px 10px 0;
-}
-.floatRight
-{
-float:right;
-margin:10px 0 10px 10px;
-}
-p.figureHead
-{
-font-size:100%;
-text-align:center;
-}
-.figAnnotation
-{
-font-size:80%;
-position:relative;
-margin: 0 auto; /* center this */
-}
-.figTopLeft, .figBottomLeft
-{
-float: left;
-}
-.figTop, .figBottom
-{
-}
-.figTopRight, .figBottomRight
-{
-float: right;
-}
-.figure p
-{
-font-size:80%;
-margin-top:0;
-text-align:center;
-}
-img
-{
-border-width:0;
-}
-p.smallprint,li.smallprint
-{
-color:#666666;
-font-size:80%;
-}
-span.parnum
-{
+span.parnum {
 font-weight: bold;
 }
-.marginnote
-{
-font-size:0.8em;
-height:0;
-left:1%;
-line-height:1.2em;
-position:absolute;
-text-indent:0;
-width:14%;
+span.corr, span.gap {
+border-bottom: 1px dotted red;
 }
-.pagenum
-{
-display:inline;
-font-size:70%;
-font-style:normal;
-margin:0;
-padding:0;
-position:absolute;
-right:1%;
-text-align:right;
+span.num, span.trans, span.trans {
+border-bottom: 1px dotted gray;
 }
-a.noteref, a.pseudonoteref
-{
+span.measure {
+border-bottom: 1px dotted green;
+}
+.ex {
+letter-spacing: 0.2em;
+}
+.sc {
+font-variant: small-caps;
+}
+.asc {
+font-variant: small-caps;
+text-transform: lowercase;
+}
+.uc {
+text-transform: uppercase;
+}
+.tt {
+font-family: monospace;
+}
+.underline {
+text-decoration: underline;
+}
+.overline, .overtilde {
+text-decoration: overline;
+}
+.rm {
+font-style: normal;
+}
+.red {
+color: red;
+}
+hr {
+clear: both;
+border: none;
+border-bottom: 1px solid black;
+width: 45%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 1em;
+text-align: center;
+}
+hr.dotted {
+border-bottom: 2px dotted black;
+}
+hr.dashed {
+border-bottom: 2px dashed black;
+}
+.aligncenter {
+text-align: center;
+}
+h1, h2, .h1, .h2 {
+font-size: 1.44em;
+line-height: 1.5;
+}
+h1.label, h2.label {
+font-size: 1.2em;
+margin-bottom: 0;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+p, .par {
+text-indent: 0;
+}
+p.firstlinecaps:first-line, .par.firstlinecaps:first-line {
+text-transform: uppercase;
+}
+.hangq {
+text-indent: -0.32em;
+}
+.hangqq {
+text-indent: -0.42em;
+}
+.hangqqq {
+text-indent: -0.84em;
+}
+p.dropcap:first-letter, .par.dropcap:first-letter {
+float: left;
+clear: left;
+margin: 0 0.05em 0 0;
+padding: 0;
+line-height: 0.8;
+font-size: 420%;
+vertical-align: super;
+}
+blockquote, p.quote, div.blockquote, div.argument, .par.quote {
+font-size: 0.9em;
+margin: 1.58em 5%;
+}
+.pageNum a, a.noteRef:hover, a.pseudoNoteRef:hover, a.hidden:hover, a.hidden {
+text-decoration: none;
+}
+.advertisement, .advertisements {
+background-color: #FFFEE0;
+border: black 1px dotted;
+color: #000;
+margin: 2em 5%;
+padding: 1em;
+}
+span.accent {
+display: inline-block;
+text-align: center;
+}
+span.accent, span.accent span.top, span.accent span.base {
+line-height: 0.40em;
+}
+span.accent span.top {
+font-weight: bold;
+font-size: 5pt;
+}
+span.accent span.base {
+display: block;
+}
+.footnotes .body, .footnotes .div1 {
+padding: 0;
+}
+.fnarrow {
+color: #AAAAAA;
+font-weight: bold;
+text-decoration: none;
+}
+.fnarrow:hover, .fnreturn:hover {
+color: #660000;
+}
+.fnreturn {
+color: #AAAAAA;
 font-size: 80%;
+font-weight: bold;
 text-decoration: none;
 vertical-align: 0.25em;
 }
-.displayfootnote
-{
+a {
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+background-color: #e9f5ff;
+}
+a.noteRef, a.pseudoNoteRef {
+font-size: 67%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+top: -0.5em;
+text-decoration: none;
+margin-left: 0.1em;
+}
+.displayfootnote {
 display: none;
 }
-div.footnotes
-{
+div.footnotes {
 font-size: 80%;
 margin-top: 1em;
 padding: 0;
 }
-hr.fnsep
-{
+hr.fnsep {
 margin-left: 0;
 margin-right: 0;
 text-align: left;
 width: 25%;
 }
-p.footnote
-{
+p.footnote, .par.footnote {
 margin-bottom: 0.5em;
 margin-top: 0.5em;
 }
-p.footnote .label
-{
-float:left;
-width:2em;
-height:12pt;
-display:block;
+p.footnote .fnlabel, .par.footnote .fnlabel {
+float: left;
+margin-left: -0.1em;
+margin-top: 0.9em;
+min-width: 1.0em;
+padding-right: 0.4em;
 }
-/****** Tables ******/
-td.sum
-{
-padding-top: 2px; border-top: solid black 1px;
+.apparatusnote {
+text-decoration: none;
 }
-/****** Poetry ******/
-.lgouter
-{
+.apparatusnote:target, .fndiv:target {
+background-color: #eaf3ff;
+}
+table.tocList {
+width: 100%;
 margin-left: auto;
 margin-right: auto;
-display:table; /* used to make the block shrink to the actual size */
+border-width: 0;
+border-collapse: collapse;
 }
-.lg
-{
-text-align: left;
+td.tocPageNum, td.tocDivNum {
+text-align: right;
+min-width: 10%;
+border-width: 0;
+white-space: nowrap;
 }
-.lg h4, .lgouter h4
-{
-font-weight: normal;
+td.tocDivNum {
+padding-left: 0;
+padding-right: 0.5em;
 }
-.lg .linenum, .sp .linenum
-{
-color:#777;
-font-size:90%;
-left: 16%;
-margin:0;
-position:absolute;
-text-align:center;
-text-indent:0;
-top:auto;
-width:1.75em;
+td.tocPageNum {
+padding-left: 0.5em;
+padding-right: 0;
 }
-p.line
-{
-margin: 0 0% 0 0%;
+td.tocDivTitle {
+width: auto;
 }
-span.hemistich /* invisible text to achieve visual effect of hemistich indentation. */
-{
-color: white;
+p.tocPart, .par.tocPart {
+margin: 1.58em 0;
+font-variant: small-caps;
 }
-.versenum
-{
-font-weight:bold;
+p.tocChapter, .par.tocChapter {
+margin: 1.58em 0;
 }
-/***** Drama *****/
-.speaker
-{
+p.tocSection, .par.tocSection {
+margin: 0.7em 5%;
+}
+table.tocList td {
+vertical-align: top;
+}
+table.tocList td.tocPageNum {
+vertical-align: bottom;
+}
+table.inner {
+display: inline-table;
+border-collapse: collapse;
+width: 100%;
+}
+td.itemNum {
+text-align: right;
+min-width: 5%;
+padding-right: 0.8em;
+}
+td.innerContainer {
+padding: 0;
+margin: 0;
+}
+.index {
+font-size: 80%;
+}
+.index p {
+text-indent: -1em;
+margin-left: 1em;
+}
+.indexToc {
+text-align: center;
+}
+.transcriberNote {
+background-color: #DDE;
+border: black 1px dotted;
+color: #000;
+font-family: sans-serif;
+font-size: 80%;
+margin: 2em 5%;
+padding: 1em;
+}
+.missingTarget {
+text-decoration: line-through;
+color: red;
+}
+.correctionTable {
+width: 75%;
+}
+.width20 {
+width: 20%;
+}
+.width40 {
+width: 40%;
+}
+p.smallprint, li.smallprint, .par.smallprint {
+color: #666666;
+font-size: 80%;
+}
+span.musictime {
+vertical-align: middle;
+display: inline-block;
+text-align: center;
+}
+span.musictime, span.musictime span.top, span.musictime span.bottom {
+padding: 1px 0.5px;
+font-size: xx-small;
 font-weight: bold;
-margin-bottom: 0.4em;
+line-height: 0.7em;
 }
-.sp .line
-{
-margin: 0 10%;
+span.musictime span.bottom {
+display: block;
+}
+ul {
+list-style-type: none;
+}
+.splitListTable {
+margin-left: 0;
+}
+.splitListTable td {
+vertical-align: top;
+}
+.numberedItem {
+text-indent: -3em;
+margin-left: 3em;
+}
+.numberedItem .itemNumber {
+float: left;
+position: relative;
+left: -3.5em;
+width: 3em;
+display: inline-block;
+text-align: right;
+}
+.itemGroupTable {
+border-collapse: collapse;
+margin-left: 0;
+}
+.itemGroupTable td {
+padding: 0;
+margin: 0;
+vertical-align: middle;
+}
+.itemGroupBrace {
+padding: 0 0.5em !important;
+}
+div.figure {
+text-align: center;
+}
+.figure {
+margin-left: auto;
+margin-right: auto;
+}
+.floatLeft {
+float: left;
+margin: 10px 10px 10px 0;
+}
+.floatRight {
+float: right;
+margin: 10px 0 10px 10px;
+}
+p.figureHead, .par.figureHead {
+font-size: 100%;
+text-align: center;
+}
+.figAnnotation {
+font-size: 80%;
+position: relative;
+margin: 0 auto;
+}
+.figTopLeft, .figBottomLeft {
+float: left;
+}
+.figTopRight, .figBottomRight {
+float: right;
+}
+.figure p, .figure .par {
+font-size: 80%;
+margin-top: 0;
+text-align: center;
+}
+img {
+border-width: 0;
+}
+td.galleryFigure {
+text-align: center;
+vertical-align: middle;
+}
+td.galleryCaption {
+text-align: center;
+vertical-align: top;
+}
+tr, td, th {
+vertical-align: top;
+}
+tr.bottom, td.bottom, th.bottom {
+vertical-align: bottom;
+}
+td.label, tr.label td {
+font-weight: bold;
+}
+td.unit, tr.unit td {
+font-style: italic;
+}
+td.leftbrace, td.rightbrace {
+vertical-align: middle;
+}
+span.sum {
+padding-top: 2px;
+border-top: solid black 1px;
+}
+table.inlineTable {
+display: inline-table;
+}
+table.borderOutside {
+border-collapse: collapse;
+}
+table.borderOutside td {
+padding-left: 4px;
+padding-right: 4px;
+}
+table.borderOutside .cellHeadTop, table.borderOutside .cellTop {
+border-top: 2px solid black;
+}
+table.borderOutside .cellHeadBottom {
+border-bottom: 1px solid black;
+}
+table.borderOutside .cellBottom {
+border-bottom: 2px solid black;
+}
+table.borderOutside .cellLeft, table.borderOutside .cellHeadLeft {
+border-left: 2px solid black;
+}
+table.borderOutside .cellRight, table.borderOutside .cellHeadRight {
+border-right: 2px solid black;
+}
+table.verticalBorderInside {
+border-collapse: collapse;
+}
+table.verticalBorderInside td {
+padding-left: 4px;
+padding-right: 4px;
+border-left: 1px solid black;
+}
+table.verticalBorderInside .cellHeadTop, table.verticalBorderInside .cellTop {
+border-top: 2px solid black;
+}
+table.verticalBorderInside .cellHeadBottom {
+border-bottom: 1px solid black;
+}
+table.verticalBorderInside .cellBottom {
+border-bottom: 2px solid black;
+}
+table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft {
+border-left: 0 solid black;
+}
+table.borderAll,
+table.rtlBorderAll {
+border-collapse: collapse;
+}
+table.borderAll td,
+table.rtlBorderAll td {
+padding-left: 4px;
+padding-right: 4px;
+border: 1px solid black;
+}
+table.borderAll .cellHeadTop, table.borderAll .cellTop,
+table.rtlBorderAll .cellHeadTop, table.rtlBorderAll .cellTop {
+border-top: 2px solid black;
+}
+table.borderAll .cellHeadBottom,
+table.rtlBorderAll .cellHeadBottom {
+border-bottom: 1px solid black;
+}
+table.borderAll .cellBottom,
+table.rtlBorderAll .cellBottom {
+border-bottom: 2px solid black;
+}
+table.borderAll .cellLeft,
+table.borderAll .cellHeadLeft {
+border-left: 2px solid black;
+}
+table.borderAll .cellRight,
+table.borderAll .cellHeadRight {
+border-right: 2px solid black;
+}
+table.rtlBorderAll .cellLeft,
+table.rtlBorderAll .cellHeadLeft {
+border-right: 2px solid black;
+}
+table.rtlBorderAll .cellRight,
+table.rtlBorderAll .cellHeadRight {
+border-left: 2px solid black;
+}
+tr.borderTop td, tr.borderTop th, th.borderTop, td.borderTop {
+border-top: 1px solid black !important;
+}
+tr.borderRight td, tr.borderRight th, th.borderRight, td.borderRight {
+border-right: 1px solid black !important;
+}
+tr.borderLeft td, tr.borderLeft th, th.borderLeft, td.borderLeft {
+border-left: 1px solid black !important;
+}
+tr.borderBottom td, tr.borderBottom th, th.borderBottom, td.borderBottom {
+border-bottom: 1px solid black !important;
+}
+tr.borderHorizontal td, tr.borderHorizontal th, th.borderHorizontal, td.borderHorizontal {
+border-top: 1px solid black !important;
+border-bottom: 1px solid black !important;
+}
+tr.borderVertical td, tr.borderVertical th, th.borderVertical, td.borderVertical {
+border-right: 1px solid black !important;
+border-left: 1px solid black !important;
+}
+tr.borderAll td, tr.borderAll th, th.borderAll, td.borderAll {
+border: 1px solid black !important;
+}
+tr.noBorderTop td, tr.noBorderTop th, th.noBorderTop, td.noBorderTop {
+border-top: none !important;
+}
+tr.noBorderRight td, tr.noBorderRight th, th.noBorderRight, td.noBorderRight {
+border-right: none !important;
+}
+tr.noBorderLeft td, tr.noBorderLeft th, th.noBorderLeft, td.noBorderLeft {
+border-left: none !important;
+}
+tr.noBorderBottom td, tr.noBorderBottom th, th.noBorderBottom, td.noBorderBottom {
+border-bottom: none !important;
+}
+tr.noBorderHorizontal td, tr.noBorderHorizontal th, th.noBorderHorizontal, td.noBorderHorizontal {
+border-top: none !important;
+border-bottom: none !important;
+}
+tr.noBorderVertical td, tr.noBorderVertical th, th.noBorderVertical, td.noBorderVertical {
+border-right: none !important;
+border-left: none !important;
+}
+tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
+border: none !important;
+}
+.cellDoubleUp {
+border: 0 solid black !important;
+width: 1em;
+}
+td.alignDecimalIntegerPart {
+text-align: right;
+border-right: none !important;
+padding-right: 0 !important;
+margin-right: 0 !important;
+}
+td.alignDecimalFractionPart {
+text-align: left;
+border-left: none !important;
+padding-left: 0 !important;
+margin-left: 0 !important;
+}
+td.alignDecimalNotNumber {
+text-align: center;
+}
+body {
+padding: 1.58em 16%;
+}
+.pageNum {
+display: inline;
+font-size: 8.4pt;
+font-style: normal;
+margin: 0;
+padding: 0;
+position: absolute;
+right: 1%;
+text-align: right;
+letter-spacing: normal;
+}
+.marginnote {
+font-size: 0.8em;
+height: 0;
+left: 1%;
+position: absolute;
+text-indent: 0;
+width: 14%;
 text-align: left;
 }
-/***** End Drama *****/
-/* right aligned page number in table of contents */
-.tocPagenum, .flushright
-{
+.right-marginnote {
+font-size: 0.8em;
+height: 0;
+right: 3%;
+position: absolute;
+text-indent: 0;
+text-align: right;
+width: 11%
+}
+.cut-in-left-note {
+font-size: 0.8em;
+left: 1%;
+float: left;
+text-indent: 0;
+width: 14%;
+text-align: left;
+padding: 0.8em 0.8em 0.8em 0;
+}
+.cut-in-right-note {
+font-size: 0.8em;
+left: 1%;
+float: right;
+text-indent: 0;
+width: 14%;
+text-align: right;
+padding: 0.8em 0 0.8em 0.8em;
+}
+span.tocPageNum, span.flushright {
 position: absolute;
 right: 16%;
 top: auto;
+text-indent: 0;
 }
-span.corr
-{
-border-bottom:1px dotted red;
-}
-span.abbr
-{
-border-bottom:1px dotted gray;
-}
-span.measure
-{
-border-bottom:1px dotted green;
-}
-/****** Font Styles and Colors *****/
-.ex
-{
-letter-spacing: 0.2em;
-}
-.sc
-{
-font-variant: small-caps;
-}
-.uc
-{
-text-transform: uppercase;
-}
-/* overline is actually a bit too high; overtilde is approximated with overline */
-.overline, .overtilde
-{
-text-decoration: overline;
-}
-.rm
-{
+.pglink::after {
+content: "\0000A0\01F4D8";
+font-size: 80%;
 font-style: normal;
+font-weight: normal;
 }
-.red
-{
-color: red;
+.catlink::after {
+content: "\0000A0\01F4C7";
+font-size: 80%;
+font-style: normal;
+font-weight: normal;
 }
-/***** End Font Styles and Colors *****/
-hr
-{
-clear:both;
-height:1px;
-margin-left:auto;
-margin-right:auto;
-margin-top:1em;
-text-align:center;
-width:45%;
+.exlink::after, .wplink::after, .biblink::after, .qurlink::after, .seclink::after {
+content: "\0000A0\002197\00FE0F";
+color: blue;
+font-size: 80%;
+font-style: normal;
+font-weight: normal;
 }
-.aligncenter, div.figure
-{
-text-align:center;
-}
-h1, h2
-{
-font-size:1.44em;
-line-height:1.5em;
-}
-h1.label, h2.label
-{
-font-size:1.2em;
-line-height:1.2em;
-margin-bottom:0;
-}
-h5, h6
-{
-font-size:1em;
-font-style:italic;
-line-height:1em;
-}
-p
-{
-text-indent:0;
-}
-p.firstlinecaps:first-line
-{
-text-transform: uppercase;
-}
-p.dropcap:first-letter
-{
-float: left;
-clear: left;
-margin: 0em 0.05em 0 0;
-padding: 0px;
-line-height: 0.8em;
-font-size: 420%;
-vertical-align:super;
-}
-.lg
-{
-padding: .5em 0% .5em 0%;
-}
-p.quote,div.blockquote, div.argument
-{
-font-size:0.9em;
-line-height:1.2em;
-margin:1.58em 5%;
-}
-.pagenum a, a.noteref:hover, a.hidden:hover, a.hidden
-{
-text-decoration:none;
-}
-ul { list-style-type: none; }
-.castlist, .castitem { list-style-type: none; }
-/***** External Links *****/
-.pglink
-{
-background: url(images/book.png) center right no-repeat;
-padding-right: 18px;
-}
-.catlink
-{
-background: url(images/card.png) center right no-repeat;
-padding-right: 17px;
-}
-.exlink
-{
-background: url(images/external.png) center right no-repeat;
-padding-right: 13px;
-}
-.pglink:hover
-{
+.pglink:hover {
 background-color: #DCFFDC;
 }
-.catlink:hover
-{
+.catlink:hover {
 background-color: #FFFFDC;
 }
-.exlink:hover
-{
+.exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover, .seclin:hover {
 background-color: #FFDCDC;
 }
-body
-{
+body {
 background: #FFFFFF;
-font-family: "Times New Roman", Times, serif;
+font-family: serif;
 }
-body, a.hidden
-{
+body, a.hidden {
 color: black;
 }
-.titlePage
-{
+.titlePage {
 color: #001FA4;
-font-family: Verdana, Arial, Helvetica, sans-serif;
+font-family: sans-serif;
 }
-h1, h2, h3, h4, h5, h6, .pseudoh1, .pseudoh2, .pseudoh3, .pseudoh4
-{
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 color: #001FA4;
-font-family: Verdana, Arial, Helvetica, sans-serif;
+font-family: sans-serif;
 }
-p.byline
-{
+p.byline {
 font-style: italic;
 margin-bottom: 2em;
 }
-.figureHead, .noteref, .pseudonoteref, .marginnote, p.legend, .versenum, .stage
-{
+.figureHead, .noteRef, .pseudoNoteRef, .marginnote, .right-marginnote, .cut-in-note-left, .cut-in-note-right, p.legend, .verseNum, .stage {
 color: #001FA4;
 }
-.rightnote, .pagenum, .linenum, .pagenum a
-{
+.rightnote, .pageNum, .lineNum, .pageNum a {
 color: #AAAAAA;
 }
-a.hidden:hover, a.noteref:hover
-{
+a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
 color: red;
 }
-p.dropcap:first-letter
-{
+p.dropcap:first-letter {
 color: #001FA4;
 font-weight: bold;
 }
-sub, sup
-{
-line-height: 0;
-}
-.pagenum, .linenum
-{
-speak: none;
-}
-</style>
-
-<style type="text/css">
-.code
-{
+.code {
 margin-left: 2em;
-font-family: courier new;
+font-family: 'courier new', monospace;
 margin-top: 1em;
 margin-bottom: 1em;
 }
-.xd20e316
-{
+/* CSS rules generated from @rend attributes in TEI file */
+.xd31e234 {
 font:bold;
 }
-.xd20e70width
-{
+.cover-imagewidth {
 width:500px;
 }
-</style>
+@media handheld {
+}
+/* ]]> */ </style>
 </head>
 <body>
 <div class="front">
-<div class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
-<p class="firstpar"></p>
-<div class="figure xd20e70width"><img src="images/reference500.jpg"
-alt="" width="500" height="700"></div>
+<div class="div1 cover"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divBody">
+<p class="first"></p>
+<div class="figure cover-imagewidth"><img src="images/reference500.jpg" alt="" width="500" height="700"></div><p>
+</p>
 </div>
-<div id="pre" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div id="pre" class="div1 preface"><span class="pageNum">[<a href="#pre.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Preface</h2>
-<p class="firstpar">The TEI format is the standard format for
-transcribing scholarly texts in humanities. Unlike common
-word-processing formats, TEI focuses on the semantics of text elements
-instead of the look-and-feel. This is great for research purposes, as
-it enables software to answer questions like &ldquo;give me all
-citations in Shakespeare where Hamlet uses the past tense&rdquo;, but
-makes it harder to produce nicely formatted output from the same
-source. This is where the tei2html kicks-in.</p>
-<p>Tei2html is a collection of XSLT stylesheets that transform a duly
-marked up TEI file to an attractive HTML, ePub or PDF document. It is
-intended to work out-of-the-box with unadorned TEI files, but will be
-able to perform better if certain conventions are followed.</p>
-<p>These guidelines describe the conventions for preparing TEI files
-such that they can successfully be converted by tei2html. They assume a
-working knowledge of the <a class="exlink" title="External link" href=
-"http://www.tei-c.org/Lite/teiu5_en.html">TEI Lite documentation</a>.
-They are inspired by, and often follow the <a class="exlink" title=
-"External link" href=
-"http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml">Wisconsin
-University Guidelines for Markup of Electronic Texts</a>, which
-provides excellent examples of numerous issues. For real starters, a
-<a class="exlink" title="External link" href=
-"http://www.tei-c.org/Support/Learn/mueller-index.htm">very gentle
-introduction to the TEI markup language</a> is available.</p>
-<p>Whether TEI is useful for you depends on your needs. If you are
-occasionally producing a text, and need to have it formatted, TEI and
-tei2html is probably not the way to go. If you have a large collection
-of texts, and need to maintain them for a long time, and would like to
-add numerous types of scholarly annotations to them, TEI certainly
-warrants serious consideration.</p>
-<p>Originally, tei2html was developed to produce beautiful new editions
-of public domain texts for Project Gutenberg, but it can also be used
-for other TEI files.</p>
-<p>Sections with a light gray background are planned future features,
-and are not yet available. It is my intention to turn this into a
-complete document, which can be read independent of the above documents
-in due time. For, now, however, please get the other documents and read
-them first.</p>
+</div>
+<div class="divBody">
+<p class="first">The TEI format is the standard format for transcribing scholarly texts in humanities.
+Unlike common word-processing formats, TEI focuses on the semantics of text elements
+instead of the look-and-feel. This is great for research purposes, as it enables software
+to answer questions like “give me all citations in Shakespeare where Hamlet uses the
+past tense”, but makes it harder to produce nicely formatted output from the same
+source. This is where the tei2html kicks-in.
+</p>
+<p>Tei2html is a collection of XSLT stylesheets that transform a duly marked up TEI file
+to an attractive HTML, ePub or PDF document. It is intended to work out-of-the-box
+with unadorned TEI files, but will be able to perform better if certain conventions
+are followed.
+</p>
+<p>These guidelines describe the conventions for preparing TEI files such that they can
+successfully be converted by tei2html. They assume a working knowledge of the <a class="exlink xd31e20" title="External link" href="http://www.tei-c.org/Lite/teiu5_en.html">TEI Lite documentation</a>. They are inspired by, and often follow the <a class="exlink xd31e20" title="External link" href="http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml">Wisconsin University Guidelines for Markup of Electronic Texts</a>, which provides excellent examples of numerous issues. For real starters, a <a class="exlink xd31e20" title="External link" href="http://www.tei-c.org/Support/Learn/mueller-index.htm">very gentle introduction to the TEI markup language</a> is available.
+</p>
+<p>Whether TEI is useful for you depends on your needs. If you are occasionally producing
+a text, and need to have it formatted, TEI and tei2html is probably not the way to
+go. If you have a large collection of texts, and need to maintain them for a long
+time, and would like to add numerous types of scholarly annotations to them, TEI certainly
+warrants serious consideration.
+</p>
+<p>Originally, tei2html was developed to produce beautiful new editions of public domain
+texts for Project Gutenberg, but it can also be used for other TEI files.
+</p>
+<p>Sections with a light gray background are planned future features, and are not yet
+available. It is my intention to turn this into a complete document, which can be
+read independent of the above documents in due time. For, now, however, please get
+the other documents and read them first.
+</p>
+</div>
 </div>
 <div class="div1" id="toc">
 <h2 class="main">Table of Contents</h2>
-<ul>
-<li><a href="#pre">Preface</a></li>
-<li><a href="#xd20e98">Introduction</a>
-<ul>
-<li><a href="#xd20e101">Guiding Principles</a></li>
-<li><a href="#xd20e122">SGML versus XML</a></li>
-<li><a href="#xd20e131">Special Characters</a>
-<ul>
-<li><a href="#xd20e134">SGML</a></li>
-<li><a href="#xd20e153">XML</a></li>
-</ul>
-</li>
-<li><a href="#xd20e158">Considerations for Output Formats</a></li>
-</ul>
-</li>
-<li><a href="#xd20e191">Getting Started</a>
-<ul>
-<li><a href="#xd20e194">Installation</a></li>
-<li><a href="#xd20e198">Running Tei2html</a></li>
-<li><a href="#xd20e202">A Sample document</a></li>
-</ul>
-</li>
-<li><a href="#xd20e207">The TEI Header</a>
-<ul>
-<li><a href="#xd20e233">The File Description</a></li>
-</ul>
-</li>
-<li><a href="#xd20e252">Top Level Text Structure</a>
-<ul>
-<li><a href="#xd20e256">Front Matter</a></li>
-</ul>
-</li>
-<li><a href="#xd20e260">Block Level Elements</a></li>
-<li><a href="#xd20e265">Text Level Elements</a></li>
-<li><a href="#xd20e269">Internationalization</a></li>
-<li><a href="#xd20e273">Tuning the Output</a>
-<ul>
-<li><a href="#xd20e276">Using the Rend attribute</a></li>
-<li><a href="#xd20e280">Custom Stylesheets</a></li>
-</ul>
-</li>
-<li><a href="#xd20e286">Applicable Standards</a></li>
-<li><a href="#xd20e290">Available Stylesheets</a></li>
-<li><a href="#xd20e294">Generated HTML Elements</a></li>
-<li><a href="#xd20e298">SGML Entities</a></li>
-<li><a href="#xd20e302">Foreign Script Transcriptions</a></li>
-<li><a href="#xd20e306">Unicode Character Support Test</a>
-<ul>
-<li><a href="#xd20e311">Latin-1 Supplement</a></li>
-<li><a href="#xd20e574">Latin Extended-A</a></li>
-<li><a href="#xd20e905">Latin Extended-B</a></li>
-</ul>
-</li>
-</ul>
+<table summary="Table of Contents">
+<tr id="pre.toc">
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#pre">Preface</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e82">Introduction</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e84">Guiding Principles</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e99">SGML versus XML</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e104">Special Characters</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="6"><a href="#xd31e106">SGML</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td colspan="2"></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="6"><a href="#xd31e118">XML</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e121">Considerations for Output Formats</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e143">Getting Started</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e145">Installation</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e148">Running Tei2html</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e151">A Sample document</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e154">The TEI Header</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e175">The File Description</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e188">Top Level Text Structure</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e191">Front Matter</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e194">Block Level Elements</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e197">Text Level Elements</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e200">Internationalization</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e203">Tuning the Output</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e205">Using the Rend attribute</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e208">Custom Stylesheets</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e212">Applicable Standards</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e215">Available Stylesheets</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e218">Generated HTML Elements</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e221">SGML Entities</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e224">Foreign Script Transcriptions</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="8"><a href="#xd31e227">Unicode Character Support Test</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e230">Latin-1 Supplement</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e492">Latin Extended-A</a></td>
+<td class="tocPageNum"></td>
+</tr>
+<tr>
+<td></td>
+<td class="tocDivNum"></td>
+<td class="tocDivTitle" colspan="7"><a href="#xd31e822">Latin Extended-B</a></td>
+<td class="tocPageNum"></td>
+</tr>
+</table>
 </div>
 </div>
 <div class="body">
-<div id="xd20e98" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div id="xd31e82" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Introduction</h2>
-<div class="div2" id="xd20e101"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div class="divBody">
+<div id="xd31e84" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Guiding Principles</h3>
-<p class="firstpar">The design of tei2html is based on a small set of
-guiding principles and design decisions. These are some assumptions,
-that I believe are reasonable to expect when digitizing text for
-research and preservation.</p>
-<p>The guiding principles are:</p>
+</div>
+<div class="divBody">
+<p class="first">The design of tei2html is based on a small set of guiding principles and design decisions.
+These are some assumptions, that I believe are reasonable to expect when digitizing
+text for research and preservation.
+</p>
+<p>The guiding principles are:
+</p>
 <ul>
-<li>Tags supplement the plain text content of the transcribed work.
-They do not replace content. When all tags are removed from the file,
-the remaining text should reflect the original source text as much as
-possible. As a corrolary to this principle, tei2html does not supply
-much content itself, unless specifically asked to do so, it will not
+<li>Tags supplement the plain text content of the transcribed work. They do not replace
+content. When all tags are removed from the file, the remaining text should reflect
+the original source text as much as possible. As a corrolary to this principle, tei2html
+does not supply much content itself, unless specifically asked to do so, it will not
 insert tables of content, headers, labels, etc.</li>
-<li>Tags are semantic: they reflect as much as possible the function of
-a certain part of the text, not its appearance. This also means that
-tei2html needs to rely on a number of defaults and formatting hints to
-decide what things should ultimately look like in the output.</li>
-<li>The @rend attribute in tags are intended as formatting hints only.
-Ignoring them fully or partially should not render a text
-incomprehensible.</li>
-</ul>
-<p>The design decisions are:</p>
+<li>Tags are semantic: they reflect as much as possible the function of a certain part
+of the text, not its appearance. This also means that tei2html needs to rely on a
+number of defaults and formatting hints to decide what things should ultimately look
+like in the output.</li>
+<li>The @rend attribute in tags are intended as formatting hints only. Ignoring them fully
+or partially should not render a text incomprehensible.</li>
+</ul><p>
+</p>
+<p>The design decisions are:
+</p>
 <ul>
-<li>The @rend attribute values are designed to map relatively directly
-to CSS format statements in the HTML version, however, they use a
-different syntax, and are thus not copied verbatim.</li>
-</ul>
+<li>The @rend attribute values are designed to map relatively directly to CSS format statements
+in the HTML version, however, they use a different syntax, and are thus not copied
+verbatim.</li>
+</ul><p>
+</p>
 </div>
-<div class="div2" id="xd20e122"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div id="xd31e99" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">SGML versus XML</h3>
-<p class="firstpar">XML is a considerably simplified reincarnation of
-SGML. It does away with much of the complexity of SGML. However, TEI
-(and TEILite) was originally developed for SGML, and I started using
-TEI even before XML was conceived.</p>
-<p>Although XML is simpler, and many more tools can deal with it, SGML
-is somewhat easier to type due to its more relaxed syntax rules. You
-don&rsquo;t need to use quotes on all attribute values, nor need to
-provide close tags for all elements. For this reason, I normally
-produce my files in SGML. The conversion to XML is straightforward, and
-can (almost always) be fully automated. Since I am used to SGML, the
-examples in this document will be valid SGML snippets, but not
-necessarily well-formed XML.</p>
-<p>If so desired, you can work directly in XML, instead of SGML.
-Working in XML directly has a number of benefits as well: 1. Directly
-viewable in most modern browsers (which can apply an XSLT transform on
-the fly; however, in practice, the tei2html stylesheets used here are
-too complex for a browser). 2. No conversion tools required. 3. Can use
-embedded namespaces for other XML schemas.</p>
 </div>
-<div class="div2" id="xd20e131"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first">XML is a considerably simplified reincarnation of SGML. It does away with much of
+the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML,
+and I started using TEI even before XML was conceived.
+</p>
+<p>Although XML is simpler, and many more tools can deal with it, SGML is somewhat easier
+to type due to its more relaxed syntax rules. You don’t need to use quotes on all
+attribute values, nor need to provide close tags for all elements. For this reason,
+I normally produce my files in SGML. The conversion to XML is straightforward, and
+can (almost always) be fully automated. Since I am used to SGML, the examples in this
+document will be valid SGML snippets, but not necessarily well-formed XML.
+</p>
+<p>If so desired, you can work directly in XML, instead of SGML. Working in XML directly
+has a number of benefits as well: 1. Directly viewable in most modern browsers (which
+can apply an XSLT transform on the fly; however, in practice, the tei2html stylesheets
+used here are too complex for a browser). 2. No conversion tools required. 3. Can
+use embedded namespaces for other XML schemas.
+</p>
+</div>
+</div>
+<div id="xd31e104" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Special Characters</h3>
-<div class="div3" id="xd20e134">
+</div>
+<div class="divBody">
+<div class="div3 section" id="xd31e106">
+<div class="divHead">
 <h4 class="main">SGML</h4>
-<p class="firstpar">All my SGML files are either in pure 7-bit ASCII,
-or in the ISO 8859-1 character set. All characters outside those ranges
-are represented by character entities.</p>
-<p>Use entities from the following sets:</p>
+</div>
+<div class="divBody">
+<p class="first">All my SGML files are either in pure 7-bit ASCII, or in the ISO 8859-1 character set.
+All characters outside those ranges are represented by character entities.
+</p>
+<p>Use entities from the following sets:
+</p>
 <ul>
 <li>The standard SGML ISO 8859 entity sets.</li>
 <li>The other declared entity sets that come with the TEI DTD.</li>
-<li>Invent your own descriptive abbreviation. Always provide the
-Unicode code point for a character (if it exists) in the entity
-declaration, and provide the Unicode character name or a description in
-a comment. Please follow the pattern used by ISO where possible.</li>
+<li>Invent your own descriptive abbreviation. Always provide the Unicode code point for
+a character (if it exists) in the entity declaration, and provide the Unicode character
+name or a description in a comment. Please follow the pattern used by ISO where possible.</li>
 <li>Numeric character entities, based on Unicode.</li>
-</ul>
-<p>For longer fragments in a non-Latin script, I normally use an ASCII
-based transliteration scheme, and supply tools to convert these to
-Unicode. For documents completely a non-Latin script, we will probably
-have to work with Unicode. Fractions Fractions of one figure above and
-below. &amp;frac12; Fractions with more than one figure above or below.
-&amp;frac3_16; &amp;frac23_100; Special filling characters for leaders
-&amp;dotfil; &amp;dashfil; &amp;linefil; &amp;spacefil; These are
-roughly equivalent to TEX&rsquo;s special glue values.</p>
+</ul><p>
+</p>
+<p>For longer fragments in a non-Latin script, I normally use an ASCII based transliteration
+scheme, and supply tools to convert these to Unicode. For documents completely a non-Latin
+script, we will probably have to work with Unicode.
+Fractions
+Fractions of one figure above and below.
+&amp;frac12;
+Fractions with more than one figure above or below.
+&amp;frac3_16;
+&amp;frac23_100;
+Special filling characters for leaders
+&amp;dotfil;
+&amp;dashfil;
+&amp;linefil;
+&amp;spacefil;
+These are roughly equivalent to TEX’s special glue values.
+</p>
 </div>
-<div class="div3" id="xd20e153">
+</div>
+<div class="div3 section" id="xd31e118">
+<div class="divHead">
 <h4 class="main">XML</h4>
-<p class="firstpar">XML files are to be in Unicode only, using the
-UTF-8 format or numeric character entities.</p>
+</div>
+<div class="divBody">
+<p class="first">XML files are to be in Unicode only, using the UTF-8 format or numeric character entities.
+</p>
 </div>
 </div>
-<div class="div2" id="xd20e158"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+</div>
+<div id="xd31e121" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Considerations for Output Formats</h3>
-<p class="firstpar">TEI files are typically prepared from pre-existing
-sources, that is printed books, magazines or other textual works. In
-those cases, it may be desirable to not only to include the logical
-content of the work being transcribed, but also to describe the
-physical appearance of some aspects of the text. In that case, the rend
-attribute can be used to record those aspects.</p>
-<p>For many uses, a TEI file is not the most desirable format. For
-reading, the it is far more convenient to have it available in some
-more presentation oriented format. With tei2html, a TEI document can be
-converted to various output formats, to wit:</p>
+</div>
+<div class="divBody">
+<p class="first">TEI files are typically prepared from pre-existing sources, that is printed books,
+magazines or other textual works. In those cases, it may be desirable to not only
+to include the logical content of the work being transcribed, but also to describe
+the physical appearance of some aspects of the text. In that case, the rend attribute
+can be used to record those aspects.
+</p>
+<p>For many uses, a TEI file is not the most desirable format. For reading, the it is
+far more convenient to have it available in some more presentation oriented format.
+With tei2html, a TEI document can be converted to various output formats, to wit:
+</p>
 <ul>
-<li>HTML for viewing in a browser on a PC.</li>
-<li>ePub for reading on dedicated eBook readers.</li>
-<li>Plain text for reading on simple devices.</li>
+<li>HTML for viewing in a browser on a PC.
+</li>
+<li>ePub for reading on dedicated eBook readers.
+</li>
+<li>Plain text for reading on simple devices.
+</li>
 <li>PDF (using Prince-XML) for printing on paper.</li>
-</ul>
-<p>These output formats place some restrictions on the structure of the
-TEI file, and the usage conventions adopted not enforced by the DTD.
-The most important of these are given below.</p>
-<p><i>References to page numbers.</i> In printed media, the page
-numbers will differ from the source. To correctly replace page numbers
-in the source, each page number should be tagged as a reference (ref
-element) with the type pageref. The tag should only enclose the page
-number it self, not any of the surrounding material. The transformation
-will replace the content of this tag with the number of the page the
-material referred to appears on. Almost always, the reference is not to
-the page itself, but to some element appearing on this page. For this
-reason, it is better not to link to the pb element, but to the element
-actually referred to. (In HTML, the original page numbers will be shown
-in the margin and used in the text.)</p>
-<p><i>Nesting of cross-references and anchors.</i> In HTML, it is not
-possible to nest anchors and cross-references. As a results, certain
-elements in the TEI source should not be nested, as these result in
-nested anchors in HTML. For example, the ref element should not contain
-corr elements (as the later generates an anchor for the automatically
-generated errata list). The proper way to resolve this is to place the
-ref element in the corr element.</p>
-<p><i>Nesting of paragraphs.</i> In HTML, it is not possible to nest
-paragraphs. In most cases, the transformation software will take this
-in account, and close open paragraphs in HTML when needed.</p>
-<p>In a few other cases, the transformation may not result in entirely
-correct results. Always validate the end result.</p>
+</ul><p>
+</p>
+<p>These output formats place some restrictions on the structure of the TEI file, and
+the usage conventions adopted not enforced by the DTD. The most important of these
+are given below.
+</p>
+<p><i>References to page numbers.</i> In printed media, the page numbers will differ from the source. To correctly replace
+page numbers in the source, each page number should be tagged as a reference (ref
+element) with the type pageref. The tag should only enclose the page number it self,
+not any of the surrounding material. The transformation will replace the content of
+this tag with the number of the page the material referred to appears on. Almost always,
+the reference is not to the page itself, but to some element appearing on this page.
+For this reason, it is better not to link to the pb element, but to the element actually
+referred to. (In HTML, the original page numbers will be shown in the margin and used
+in the text.)
+</p>
+<p><i>Nesting of cross-references and anchors.</i> In HTML, it is not possible to nest anchors and cross-references. As a results, certain
+elements in the TEI source should not be nested, as these result in nested anchors
+in HTML. For example, the ref element should not contain corr elements (as the later
+generates an anchor for the automatically generated errata list). The proper way to
+resolve this is to place the ref element in the corr element.
+</p>
+<p><i>Nesting of paragraphs.</i> In HTML, it is not possible to nest paragraphs. In most cases, the transformation
+software will take this in account, and close open paragraphs in HTML when needed.
+</p>
+<p>In a few other cases, the transformation may not result in entirely correct results.
+Always validate the end result.
+</p>
 </div>
 </div>
-<div id="xd20e191" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+</div>
+<div id="xd31e143" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Getting Started</h2>
-<div class="div2" id="xd20e194"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div class="divBody">
+<div id="xd31e145" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Installation</h3>
-<p class="firstpar"></p>
 </div>
-<div class="div2" id="xd20e198"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e148" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Running Tei2html</h3>
-<p class="firstpar"></p>
 </div>
-<div class="div2" id="xd20e202"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e151" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">A Sample document</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first">
+</p>
 </div>
 </div>
-<div id="xd20e207" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+</div>
+<div id="xd31e154" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">The TEI Header</h2>
-<p class="firstpar">The TEI header (<code>&lt;teiHeader&gt;</code>)
-contains information about the text and the sources it is derived from.
-This meta-data is grouped in various sections, in which it is often
-possible to distinguish information related to the electronic file from
-that related to the original source.</p>
-<p>Tei2html uses the meta-data in the TEI header to construct the
-meta-data in the target formats, as well as the optional colophon. It
-is important to have the correctly specify the meta-data in the TEI
-header.</p>
-<p>Preparing a TEI header is less work than it might seem, as you can
-normally work from a template, prepared with the most common elements
-already in place.</p>
-<p>The TEI header contains four main sections:</p>
+</div>
+<div class="divBody">
+<p class="first">The TEI header (<code>&lt;teiHeader&gt;</code>) contains information about the text and the sources it is derived from. This meta-data
+is grouped in various sections, in which it is often possible to distinguish information
+related to the electronic file from that related to the original source.
+</p>
+<p>Tei2html uses the meta-data in the TEI header to construct the meta-data in the target
+formats, as well as the optional colophon. It is important to have the correctly specify
+the meta-data in the TEI header.
+</p>
+<p>Preparing a TEI header is less work than it might seem, as you can normally work from
+a template, prepared with the most common elements already in place.
+</p>
+<p>The TEI header contains four main sections:
+</p>
 <p class="code">&lt;teiHeader&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileDesc&gt;...&lt;/fileDesc&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;encodingDesc&gt;...&lt;/encodingDesc&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;profileDesc&gt;...&lt;/profileDesc&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;revisionDesc&gt;...&lt;/revisionDesc&gt;<br>
-&lt;/teiHeader&gt;</p>
-<div class="div2" id="xd20e233"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileDesc&gt; … &lt;/fileDesc&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;encodingDesc&gt; … &lt;/encodingDesc&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;profileDesc&gt; … &lt;/profileDesc&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;revisionDesc&gt; … &lt;/revisionDesc&gt;<br>
+&lt;/teiHeader&gt;
+</p>
+<div id="xd31e175" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">The File Description</h3>
-<p class="firstpar">The first element of the TEI header is the file
-description, <code>&lt;fileDesc&gt;</code>. This contains the most
-important meta-data in three main elements, the
-<code>&lt;titleStmt&gt;</code>, <code>&lt;publicationStmt&gt;</code>,
-and <code>&lt;sourceDesc&gt;</code>. Our template looks like this.</p>
-<p>TODO</p>
+</div>
+<div class="divBody">
+<p class="first">The first element of the TEI header is the file description, <code>&lt;fileDesc&gt;</code>. This contains the most important meta-data in three main elements, the <code>&lt;titleStmt&gt;</code>, <code>&lt;publicationStmt&gt;</code>, and <code>&lt;sourceDesc&gt;</code>. Our template looks like this.
+</p>
+<p>TODO
+</p>
 </div>
 </div>
-<div id="xd20e252" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+</div>
+<div id="xd31e188" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Top Level Text Structure</h2>
-<p class="firstpar"></p>
-<div class="div2" id="xd20e256"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div class="divBody">
+<p class="first"></p>
+<div id="xd31e191" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Front Matter</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first"></p>
 </div>
 </div>
-<div id="xd20e260" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+</div>
+<div id="xd31e194" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Block Level Elements</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e265" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first">
+</p>
+</div>
+</div>
+<div id="xd31e197" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Text Level Elements</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e269" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e200" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Internationalization</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e273" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e203" class="div1 introduction"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Tuning the Output</h2>
-<div class="div2" id="xd20e276"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
-<h3 class="main">Using the Rend attribute</h3>
-<p class="firstpar"></p>
 </div>
-<div class="div2" id="xd20e280"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<div id="xd31e205" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
+<h3 class="main">Using the Rend attribute</h3>
+</div>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e208" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Custom Stylesheets</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first">
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="back">
-<div id="xd20e286" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div id="xd31e212" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Applicable Standards</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e290" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e215" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Available Stylesheets</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e294" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e218" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Generated HTML Elements</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e298" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e221" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">SGML Entities</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e302" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e224" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Foreign Script Transcriptions</h2>
-<p class="firstpar"></p>
 </div>
-<div id="xd20e306" class="div1"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div class="divBody">
+<p class="first"></p>
+</div>
+</div>
+<div id="xd31e227" class="div1 appendix"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h2 class="main">Unicode Character Support Test</h2>
-<p class="firstpar">The following tables can be used to determine which
-characters can be displayed on a device.</p>
-<div class="div2" id="xd20e311"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+</div>
+<div class="divBody">
+<p class="first">The following tables can be used to determine which characters can be displayed on
+a device.
+</p>
+<div id="xd31e230" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Latin-1 Supplement</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first"></p>
 <div class="table">
 <table>
-<tr valign="top">
-<td valign="top" class="xd20e316"></td>
-<td valign="top"><b>00A</b></td>
-<td valign="top"><b>00B</b></td>
-<td valign="top"><b>00C</b></td>
-<td valign="top"><b>00D</b></td>
-<td valign="top"><b>00E</b></td>
-<td valign="top"><b>00F</b></td>
+<thead>
+<tr class="label">
+<td class="xd31e234 cellHeadLeft cellHeadTop cellHeadBottom"> </td>
+<td class="cellHeadTop cellHeadBottom">00A </td>
+<td class="cellHeadTop cellHeadBottom">00B </td>
+<td class="cellHeadTop cellHeadBottom">00C </td>
+<td class="cellHeadTop cellHeadBottom">00D </td>
+<td class="cellHeadTop cellHeadBottom">00E </td>
+<td class="cellHeadRight cellHeadTop cellHeadBottom">00F</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">0</td>
-<td valign="top">&nbsp;</td>
-<td valign="top">&deg;</td>
-<td valign="top">&Agrave;</td>
-<td valign="top">&ETH;</td>
-<td valign="top">&agrave;</td>
-<td valign="top">&eth;</td>
+</thead>
+<tbody>
+<tr>
+<td class="xd31e234 cellLeft">0 </td>
+<td>&nbsp; </td>
+<td>° </td>
+<td>À </td>
+<td>Ð </td>
+<td>à </td>
+<td class="cellRight">ð</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">1</td>
-<td valign="top">&iexcl;</td>
-<td valign="top">&plusmn;</td>
-<td valign="top">&Aacute;</td>
-<td valign="top">&Ntilde;</td>
-<td valign="top">&aacute;</td>
-<td valign="top">&ntilde;</td>
+<tr>
+<td class="xd31e234 cellLeft">1 </td>
+<td>¡ </td>
+<td>± </td>
+<td>Á </td>
+<td>Ñ </td>
+<td>á </td>
+<td class="cellRight">ñ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">2</td>
-<td valign="top">&cent;</td>
-<td valign="top">&sup2;</td>
-<td valign="top">&Acirc;</td>
-<td valign="top">&Ograve;</td>
-<td valign="top">&acirc;</td>
-<td valign="top">&ograve;</td>
+<tr>
+<td class="xd31e234 cellLeft">2 </td>
+<td>¢ </td>
+<td>² </td>
+<td>Â </td>
+<td>Ò </td>
+<td>â </td>
+<td class="cellRight">ò</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">3</td>
-<td valign="top">&pound;</td>
-<td valign="top">&sup3;</td>
-<td valign="top">&Atilde;</td>
-<td valign="top">&Oacute;</td>
-<td valign="top">&atilde;</td>
-<td valign="top">&oacute;</td>
+<tr>
+<td class="xd31e234 cellLeft">3 </td>
+<td>£ </td>
+<td>³ </td>
+<td>Ã </td>
+<td>Ó </td>
+<td>ã </td>
+<td class="cellRight">ó</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">4</td>
-<td valign="top">&curren;</td>
-<td valign="top">&acute;</td>
-<td valign="top">&Auml;</td>
-<td valign="top">&Ocirc;</td>
-<td valign="top">&auml;</td>
-<td valign="top">&ocirc;</td>
+<tr>
+<td class="xd31e234 cellLeft">4 </td>
+<td>¤ </td>
+<td>´ </td>
+<td>Ä </td>
+<td>Ô </td>
+<td>ä </td>
+<td class="cellRight">ô</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">5</td>
-<td valign="top">&yen;</td>
-<td valign="top">&micro;</td>
-<td valign="top">&Aring;</td>
-<td valign="top">&Otilde;</td>
-<td valign="top">&aring;</td>
-<td valign="top">&otilde;</td>
+<tr>
+<td class="xd31e234 cellLeft">5 </td>
+<td>¥ </td>
+<td>µ </td>
+<td>Å </td>
+<td>Õ </td>
+<td>å </td>
+<td class="cellRight">õ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">6</td>
-<td valign="top">&brvbar;</td>
-<td valign="top">&para;</td>
-<td valign="top">&AElig;</td>
-<td valign="top">&Ouml;</td>
-<td valign="top">&aelig;</td>
-<td valign="top">&ouml;</td>
+<tr>
+<td class="xd31e234 cellLeft">6 </td>
+<td>¦ </td>
+<td>¶ </td>
+<td>Æ </td>
+<td>Ö </td>
+<td>æ </td>
+<td class="cellRight">ö</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">7</td>
-<td valign="top">&sect;</td>
-<td valign="top">&middot;</td>
-<td valign="top">&Ccedil;</td>
-<td valign="top">&times;</td>
-<td valign="top">&ccedil;</td>
-<td valign="top">&divide;</td>
+<tr>
+<td class="xd31e234 cellLeft">7 </td>
+<td>§ </td>
+<td>· </td>
+<td>Ç </td>
+<td>× </td>
+<td>ç </td>
+<td class="cellRight">÷</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">8</td>
-<td valign="top">&uml;</td>
-<td valign="top">&cedil;</td>
-<td valign="top">&Egrave;</td>
-<td valign="top">&Oslash;</td>
-<td valign="top">&egrave;</td>
-<td valign="top">&oslash;</td>
+<tr>
+<td class="xd31e234 cellLeft">8 </td>
+<td>¨ </td>
+<td>¸ </td>
+<td>È </td>
+<td>Ø </td>
+<td>è </td>
+<td class="cellRight">ø</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">9</td>
-<td valign="top">&copy;</td>
-<td valign="top">&sup1;</td>
-<td valign="top">&Eacute;</td>
-<td valign="top">&Ugrave;</td>
-<td valign="top">&eacute;</td>
-<td valign="top">&ugrave;</td>
+<tr>
+<td class="xd31e234 cellLeft">9 </td>
+<td>© </td>
+<td>¹ </td>
+<td>É </td>
+<td>Ù </td>
+<td>é </td>
+<td class="cellRight">ù</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">A</td>
-<td valign="top">&ordf;</td>
-<td valign="top">&ordm;</td>
-<td valign="top">&Ecirc;</td>
-<td valign="top">&Uacute;</td>
-<td valign="top">&ecirc;</td>
-<td valign="top">&uacute;</td>
+<tr>
+<td class="xd31e234 cellLeft">A </td>
+<td>ª </td>
+<td>º </td>
+<td>Ê </td>
+<td>Ú </td>
+<td>ê </td>
+<td class="cellRight">ú</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">B</td>
-<td valign="top">&laquo;</td>
-<td valign="top">&raquo;</td>
-<td valign="top">&Euml;</td>
-<td valign="top">&Ucirc;</td>
-<td valign="top">&euml;</td>
-<td valign="top">&ucirc;</td>
+<tr>
+<td class="xd31e234 cellLeft">B </td>
+<td>« </td>
+<td>» </td>
+<td>Ë </td>
+<td>Û </td>
+<td>ë </td>
+<td class="cellRight">û</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">C</td>
-<td valign="top">&not;</td>
-<td valign="top">&frac14;</td>
-<td valign="top">&Igrave;</td>
-<td valign="top">&Uuml;</td>
-<td valign="top">&igrave;</td>
-<td valign="top">&uuml;</td>
+<tr>
+<td class="xd31e234 cellLeft">C </td>
+<td>¬ </td>
+<td>¼ </td>
+<td>Ì </td>
+<td>Ü </td>
+<td>ì </td>
+<td class="cellRight">ü</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">D</td>
-<td valign="top">&shy;</td>
-<td valign="top">&frac12;</td>
-<td valign="top">&Iacute;</td>
-<td valign="top">&Yacute;</td>
-<td valign="top">&iacute;</td>
-<td valign="top">&yacute;</td>
+<tr>
+<td class="xd31e234 cellLeft">D </td>
+<td>­ </td>
+<td>½ </td>
+<td>Í </td>
+<td>Ý </td>
+<td>í </td>
+<td class="cellRight">ý</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">E</td>
-<td valign="top">&reg;</td>
-<td valign="top">&frac34;</td>
-<td valign="top">&Icirc;</td>
-<td valign="top">&THORN;</td>
-<td valign="top">&icirc;</td>
-<td valign="top">&thorn;</td>
+<tr>
+<td class="xd31e234 cellLeft">E </td>
+<td>® </td>
+<td>¾ </td>
+<td>Î </td>
+<td>Þ </td>
+<td>î </td>
+<td class="cellRight">þ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">F</td>
-<td valign="top">&macr;</td>
-<td valign="top">&iquest;</td>
-<td valign="top">&Iuml;</td>
-<td valign="top">&szlig;</td>
-<td valign="top">&iuml;</td>
-<td valign="top">&yuml;</td>
+<tr>
+<td class="xd31e234 cellLeft cellBottom">F </td>
+<td class="cellBottom">¯ </td>
+<td class="cellBottom">¿ </td>
+<td class="cellBottom">Ï </td>
+<td class="cellBottom">ß </td>
+<td class="cellBottom">ï </td>
+<td class="cellRight cellBottom">ÿ</td>
 </tr>
+</tbody>
 </table>
+</div><p>
+</p>
 </div>
 </div>
-<div class="div2" id="xd20e574"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div id="xd31e492" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Latin Extended-A</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first"></p>
 <div class="table">
 <table>
-<tr valign="top">
-<td valign="top" class="xd20e316"></td>
-<td valign="top"><b>010</b></td>
-<td valign="top"><b>011</b></td>
-<td valign="top"><b>012</b></td>
-<td valign="top"><b>013</b></td>
-<td valign="top"><b>014</b></td>
-<td valign="top"><b>015</b></td>
-<td valign="top"><b>016</b></td>
-<td valign="top"><b>017</b></td>
+<thead>
+<tr class="label">
+<td class="xd31e234 cellHeadLeft cellHeadTop cellHeadBottom"> </td>
+<td class="cellHeadTop cellHeadBottom">010 </td>
+<td class="cellHeadTop cellHeadBottom">011 </td>
+<td class="cellHeadTop cellHeadBottom">012 </td>
+<td class="cellHeadTop cellHeadBottom">013 </td>
+<td class="cellHeadTop cellHeadBottom">014 </td>
+<td class="cellHeadTop cellHeadBottom">015 </td>
+<td class="cellHeadTop cellHeadBottom">016 </td>
+<td class="cellHeadRight cellHeadTop cellHeadBottom">017 </td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">0</td>
-<td valign="top">&#256;</td>
-<td valign="top">&#272;</td>
-<td valign="top">&#288;</td>
-<td valign="top">&#304;</td>
-<td valign="top">&#320;</td>
-<td valign="top">&#336;</td>
-<td valign="top">&Scaron;</td>
-<td valign="top">&#368;</td>
+</thead>
+<tbody>
+<tr>
+<td class="xd31e234 cellLeft">0 </td>
+<td>Ā </td>
+<td>Đ </td>
+<td>Ġ </td>
+<td>İ </td>
+<td>ŀ </td>
+<td>Ő </td>
+<td>Š </td>
+<td class="cellRight">Ű</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">1</td>
-<td valign="top">&#257;</td>
-<td valign="top">&#273;</td>
-<td valign="top">&#289;</td>
-<td valign="top">&#305;</td>
-<td valign="top">&#321;</td>
-<td valign="top">&#337;</td>
-<td valign="top">&scaron;</td>
-<td valign="top">&#369;</td>
+<tr>
+<td class="xd31e234 cellLeft">1 </td>
+<td>ā </td>
+<td>đ </td>
+<td>ġ </td>
+<td>ı </td>
+<td>Ł </td>
+<td>ő </td>
+<td>š </td>
+<td class="cellRight">ű</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">2</td>
-<td valign="top">&#258;</td>
-<td valign="top">&#274;</td>
-<td valign="top">&#290;</td>
-<td valign="top">&#306;</td>
-<td valign="top">&#322;</td>
-<td valign="top">&OElig;</td>
-<td valign="top">&#354;</td>
-<td valign="top">&#370;</td>
+<tr>
+<td class="xd31e234 cellLeft">2 </td>
+<td>Ă </td>
+<td>Ē </td>
+<td>Ģ </td>
+<td>Ĳ </td>
+<td>ł </td>
+<td>Œ </td>
+<td>Ţ </td>
+<td class="cellRight">Ų</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">3</td>
-<td valign="top">&#259;</td>
-<td valign="top">&#275;</td>
-<td valign="top">&#291;</td>
-<td valign="top">&#307;</td>
-<td valign="top">&#323;</td>
-<td valign="top">&oelig;</td>
-<td valign="top">&#355;</td>
-<td valign="top">&#371;</td>
+<tr>
+<td class="xd31e234 cellLeft">3 </td>
+<td>ă </td>
+<td>ē </td>
+<td>ģ </td>
+<td>ĳ </td>
+<td>Ń </td>
+<td>œ </td>
+<td>ţ </td>
+<td class="cellRight">ų</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">4</td>
-<td valign="top">&#260;</td>
-<td valign="top">&#276;</td>
-<td valign="top">&#292;</td>
-<td valign="top">&#308;</td>
-<td valign="top">&#324;</td>
-<td valign="top">&#340;</td>
-<td valign="top">&#356;</td>
-<td valign="top">&#372;</td>
+<tr>
+<td class="xd31e234 cellLeft">4 </td>
+<td>Ą </td>
+<td>Ĕ </td>
+<td>Ĥ </td>
+<td>Ĵ </td>
+<td>ń </td>
+<td>Ŕ </td>
+<td>Ť </td>
+<td class="cellRight">Ŵ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">5</td>
-<td valign="top">&#261;</td>
-<td valign="top">&#277;</td>
-<td valign="top">&#293;</td>
-<td valign="top">&#309;</td>
-<td valign="top">&#325;</td>
-<td valign="top">&#341;</td>
-<td valign="top">&#357;</td>
-<td valign="top">&#373;</td>
+<tr>
+<td class="xd31e234 cellLeft">5 </td>
+<td>ą </td>
+<td>ĕ </td>
+<td>ĥ </td>
+<td>ĵ </td>
+<td>Ņ </td>
+<td>ŕ </td>
+<td>ť </td>
+<td class="cellRight">ŵ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">6</td>
-<td valign="top">&#262;</td>
-<td valign="top">&#278;</td>
-<td valign="top">&#294;</td>
-<td valign="top">&#310;</td>
-<td valign="top">&#326;</td>
-<td valign="top">&#342;</td>
-<td valign="top">&#358;</td>
-<td valign="top">&#374;</td>
+<tr>
+<td class="xd31e234 cellLeft">6 </td>
+<td>Ć </td>
+<td>Ė </td>
+<td>Ħ </td>
+<td>Ķ </td>
+<td>ņ </td>
+<td>Ŗ </td>
+<td>Ŧ </td>
+<td class="cellRight">Ŷ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">7</td>
-<td valign="top">&#263;</td>
-<td valign="top">&#279;</td>
-<td valign="top">&#295;</td>
-<td valign="top">&#311;</td>
-<td valign="top">&#327;</td>
-<td valign="top">&#343;</td>
-<td valign="top">&#359;</td>
-<td valign="top">&#375;</td>
+<tr>
+<td class="xd31e234 cellLeft">7 </td>
+<td>ć </td>
+<td>ė </td>
+<td>ħ </td>
+<td>ķ </td>
+<td>Ň </td>
+<td>ŗ </td>
+<td>ŧ </td>
+<td class="cellRight">ŷ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">8</td>
-<td valign="top">&#264;</td>
-<td valign="top">&#280;</td>
-<td valign="top">&#296;</td>
-<td valign="top">&#312;</td>
-<td valign="top">&#328;</td>
-<td valign="top">&#344;</td>
-<td valign="top">&#360;</td>
-<td valign="top">&Yuml;</td>
+<tr>
+<td class="xd31e234 cellLeft">8 </td>
+<td>Ĉ </td>
+<td>Ę </td>
+<td>Ĩ </td>
+<td>ĸ </td>
+<td>ň </td>
+<td>Ř </td>
+<td>Ũ </td>
+<td class="cellRight">Ÿ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">9</td>
-<td valign="top">&#265;</td>
-<td valign="top">&#281;</td>
-<td valign="top">&#297;</td>
-<td valign="top">&#313;</td>
-<td valign="top">&#329;</td>
-<td valign="top">&#345;</td>
-<td valign="top">&#361;</td>
-<td valign="top">&#377;</td>
+<tr>
+<td class="xd31e234 cellLeft">9 </td>
+<td>ĉ </td>
+<td>ę </td>
+<td>ĩ </td>
+<td>Ĺ </td>
+<td>ŉ </td>
+<td>ř </td>
+<td>ũ </td>
+<td class="cellRight">Ź</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">A</td>
-<td valign="top">&#266;</td>
-<td valign="top">&#282;</td>
-<td valign="top">&#298;</td>
-<td valign="top">&#314;</td>
-<td valign="top">&#330;</td>
-<td valign="top">&#346;</td>
-<td valign="top">&#362;</td>
-<td valign="top">&#378;</td>
+<tr>
+<td class="xd31e234 cellLeft">A </td>
+<td>Ċ </td>
+<td>Ě </td>
+<td>Ī </td>
+<td>ĺ </td>
+<td>Ŋ </td>
+<td>Ś </td>
+<td>Ū </td>
+<td class="cellRight">ź</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">B</td>
-<td valign="top">&#267;</td>
-<td valign="top">&#283;</td>
-<td valign="top">&#299;</td>
-<td valign="top">&#315;</td>
-<td valign="top">&#331;</td>
-<td valign="top">&#347;</td>
-<td valign="top">&#363;</td>
-<td valign="top">&#379;</td>
+<tr>
+<td class="xd31e234 cellLeft">B </td>
+<td>ċ </td>
+<td>ě </td>
+<td>ī </td>
+<td>Ļ </td>
+<td>ŋ </td>
+<td>ś </td>
+<td>ū </td>
+<td class="cellRight">Ż</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">C</td>
-<td valign="top">&#268;</td>
-<td valign="top">&#284;</td>
-<td valign="top">&#300;</td>
-<td valign="top">&#316;</td>
-<td valign="top">&#332;</td>
-<td valign="top">&#348;</td>
-<td valign="top">&#364;</td>
-<td valign="top">&#380;</td>
+<tr>
+<td class="xd31e234 cellLeft">C </td>
+<td>Č </td>
+<td>Ĝ </td>
+<td>Ĭ </td>
+<td>ļ </td>
+<td>Ō </td>
+<td>Ŝ </td>
+<td>Ŭ </td>
+<td class="cellRight">ż</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">D</td>
-<td valign="top">&#269;</td>
-<td valign="top">&#285;</td>
-<td valign="top">&#301;</td>
-<td valign="top">&#317;</td>
-<td valign="top">&#333;</td>
-<td valign="top">&#349;</td>
-<td valign="top">&#365;</td>
-<td valign="top">&#381;</td>
+<tr>
+<td class="xd31e234 cellLeft">D </td>
+<td>č </td>
+<td>ĝ </td>
+<td>ĭ </td>
+<td>Ľ </td>
+<td>ō </td>
+<td>ŝ </td>
+<td>ŭ </td>
+<td class="cellRight">Ž</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">E</td>
-<td valign="top">&#270;</td>
-<td valign="top">&#286;</td>
-<td valign="top">&#302;</td>
-<td valign="top">&#318;</td>
-<td valign="top">&#334;</td>
-<td valign="top">&#350;</td>
-<td valign="top">&#366;</td>
-<td valign="top">&#382;</td>
+<tr>
+<td class="xd31e234 cellLeft">E </td>
+<td>Ď </td>
+<td>Ğ </td>
+<td>Į </td>
+<td>ľ </td>
+<td>Ŏ </td>
+<td>Ş </td>
+<td>Ů </td>
+<td class="cellRight">ž</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">F</td>
-<td valign="top">&#271;</td>
-<td valign="top">&#287;</td>
-<td valign="top">&#303;</td>
-<td valign="top">&#319;</td>
-<td valign="top">&#335;</td>
-<td valign="top">&#351;</td>
-<td valign="top">&#367;</td>
-<td valign="top">&#383;</td>
+<tr>
+<td class="xd31e234 cellLeft cellBottom">F </td>
+<td class="cellBottom">ď </td>
+<td class="cellBottom">ğ </td>
+<td class="cellBottom">į </td>
+<td class="cellBottom">Ŀ </td>
+<td class="cellBottom">ŏ </td>
+<td class="cellBottom">ş </td>
+<td class="cellBottom">ů </td>
+<td class="cellRight cellBottom">ſ</td>
 </tr>
+</tbody>
 </table>
+</div><p>
+</p>
 </div>
 </div>
-<div class="div2" id="xd20e905"><span class="pagenum">[<a href=
-"#toc">Contents</a>]</span>
+<div id="xd31e822" class="div2 section"><span class="pageNum">[<a href="#.toc">Contents</a>]</span><div class="divHead">
 <h3 class="main">Latin Extended-B</h3>
-<p class="firstpar"></p>
+</div>
+<div class="divBody">
+<p class="first"></p>
 <div class="table">
 <table>
-<tr valign="top">
-<td valign="top" class="xd20e316"></td>
-<td valign="top"><b>018</b></td>
-<td valign="top"><b>019</b></td>
-<td valign="top"><b>01A</b></td>
-<td valign="top"><b>01B</b></td>
-<td valign="top"><b>01C</b></td>
-<td valign="top"><b>01D</b></td>
-<td valign="top"><b>01E</b></td>
-<td valign="top"><b>01F</b></td>
-<td valign="top"><b>020</b></td>
-<td valign="top"><b>021</b></td>
-<td valign="top"><b>022</b></td>
-<td valign="top"><b>023</b></td>
-<td valign="top"><b>024</b></td>
+<thead>
+<tr class="label">
+<td class="xd31e234 cellHeadLeft cellHeadTop cellHeadBottom"> </td>
+<td class="cellHeadTop cellHeadBottom">018 </td>
+<td class="cellHeadTop cellHeadBottom">019 </td>
+<td class="cellHeadTop cellHeadBottom">01A </td>
+<td class="cellHeadTop cellHeadBottom">01B </td>
+<td class="cellHeadTop cellHeadBottom">01C </td>
+<td class="cellHeadTop cellHeadBottom">01D </td>
+<td class="cellHeadTop cellHeadBottom">01E </td>
+<td class="cellHeadTop cellHeadBottom">01F </td>
+<td class="cellHeadTop cellHeadBottom">020 </td>
+<td class="cellHeadTop cellHeadBottom">021 </td>
+<td class="cellHeadTop cellHeadBottom">022 </td>
+<td class="cellHeadTop cellHeadBottom">023 </td>
+<td class="cellHeadRight cellHeadTop cellHeadBottom">024 </td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">0</td>
-<td valign="top">&#384;</td>
-<td valign="top">&#400;</td>
-<td valign="top">&#416;</td>
-<td valign="top">&#432;</td>
-<td valign="top">&#448;</td>
-<td valign="top">&#464;</td>
-<td valign="top">&#480;</td>
-<td valign="top">&#496;</td>
-<td valign="top">&#512;</td>
-<td valign="top">&#528;</td>
-<td valign="top">&#544;</td>
-<td valign="top">&#560;</td>
-<td valign="top">&#576;</td>
+</thead>
+<tbody>
+<tr>
+<td class="xd31e234 cellLeft">0 </td>
+<td>ƀ </td>
+<td>Ɛ </td>
+<td>Ơ </td>
+<td>ư </td>
+<td>ǀ </td>
+<td>ǐ </td>
+<td>Ǡ </td>
+<td>ǰ </td>
+<td>Ȁ </td>
+<td>Ȑ </td>
+<td>Ƞ </td>
+<td>Ȱ </td>
+<td class="cellRight">ɀ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">1</td>
-<td valign="top">&#385;</td>
-<td valign="top">&#401;</td>
-<td valign="top">&#417;</td>
-<td valign="top">&#433;</td>
-<td valign="top">&#449;</td>
-<td valign="top">&#465;</td>
-<td valign="top">&#481;</td>
-<td valign="top">&#497;</td>
-<td valign="top">&#513;</td>
-<td valign="top">&#529;</td>
-<td valign="top">&#545;</td>
-<td valign="top">&#561;</td>
-<td valign="top">&#577;</td>
+<tr>
+<td class="xd31e234 cellLeft">1 </td>
+<td>Ɓ </td>
+<td>Ƒ </td>
+<td>ơ </td>
+<td>Ʊ </td>
+<td>ǁ </td>
+<td>Ǒ </td>
+<td>ǡ </td>
+<td>Ǳ </td>
+<td>ȁ </td>
+<td>ȑ </td>
+<td>ȡ </td>
+<td>ȱ </td>
+<td class="cellRight">Ɂ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">2</td>
-<td valign="top">&#386;</td>
-<td valign="top">&fnof;</td>
-<td valign="top">&#418;</td>
-<td valign="top">&#434;</td>
-<td valign="top">&#450;</td>
-<td valign="top">&#466;</td>
-<td valign="top">&#482;</td>
-<td valign="top">&#498;</td>
-<td valign="top">&#514;</td>
-<td valign="top">&#530;</td>
-<td valign="top">&#546;</td>
-<td valign="top">&#562;</td>
-<td valign="top">&#578;</td>
+<tr>
+<td class="xd31e234 cellLeft">2 </td>
+<td>Ƃ </td>
+<td>ƒ </td>
+<td>Ƣ </td>
+<td>Ʋ </td>
+<td>ǂ </td>
+<td>ǒ </td>
+<td>Ǣ </td>
+<td>ǲ </td>
+<td>Ȃ </td>
+<td>Ȓ </td>
+<td>Ȣ </td>
+<td>Ȳ </td>
+<td class="cellRight">ɂ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">3</td>
-<td valign="top">&#387;</td>
-<td valign="top">&#403;</td>
-<td valign="top">&#419;</td>
-<td valign="top">&#435;</td>
-<td valign="top">&#451;</td>
-<td valign="top">&#467;</td>
-<td valign="top">&#483;</td>
-<td valign="top">&#499;</td>
-<td valign="top">&#515;</td>
-<td valign="top">&#531;</td>
-<td valign="top">&#547;</td>
-<td valign="top">&#563;</td>
-<td valign="top">&#579;</td>
+<tr>
+<td class="xd31e234 cellLeft">3 </td>
+<td>ƃ </td>
+<td>Ɠ </td>
+<td>ƣ </td>
+<td>Ƴ </td>
+<td>ǃ </td>
+<td>Ǔ </td>
+<td>ǣ </td>
+<td>ǳ </td>
+<td>ȃ </td>
+<td>ȓ </td>
+<td>ȣ </td>
+<td>ȳ </td>
+<td class="cellRight">Ƀ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">4</td>
-<td valign="top">&#388;</td>
-<td valign="top">&#404;</td>
-<td valign="top">&#420;</td>
-<td valign="top">&#436;</td>
-<td valign="top">&#452;</td>
-<td valign="top">&#468;</td>
-<td valign="top">&#484;</td>
-<td valign="top">&#500;</td>
-<td valign="top">&#516;</td>
-<td valign="top">&#532;</td>
-<td valign="top">&#548;</td>
-<td valign="top">&#564;</td>
-<td valign="top">&#580;</td>
+<tr>
+<td class="xd31e234 cellLeft">4 </td>
+<td>Ƅ </td>
+<td>Ɣ </td>
+<td>Ƥ </td>
+<td>ƴ </td>
+<td>Ǆ </td>
+<td>ǔ </td>
+<td>Ǥ </td>
+<td>Ǵ </td>
+<td>Ȅ </td>
+<td>Ȕ </td>
+<td>Ȥ </td>
+<td>ȴ </td>
+<td class="cellRight">Ʉ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">5</td>
-<td valign="top">&#389;</td>
-<td valign="top">&#405;</td>
-<td valign="top">&#421;</td>
-<td valign="top">&#437;</td>
-<td valign="top">&#453;</td>
-<td valign="top">&#469;</td>
-<td valign="top">&#485;</td>
-<td valign="top">&#501;</td>
-<td valign="top">&#517;</td>
-<td valign="top">&#533;</td>
-<td valign="top">&#549;</td>
-<td valign="top">&#565;</td>
-<td valign="top">&#581;</td>
+<tr>
+<td class="xd31e234 cellLeft">5 </td>
+<td>ƅ </td>
+<td>ƕ </td>
+<td>ƥ </td>
+<td>Ƶ </td>
+<td>ǅ </td>
+<td>Ǖ </td>
+<td>ǥ </td>
+<td>ǵ </td>
+<td>ȅ </td>
+<td>ȕ </td>
+<td>ȥ </td>
+<td>ȵ </td>
+<td class="cellRight">Ʌ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">6</td>
-<td valign="top">&#390;</td>
-<td valign="top">&#406;</td>
-<td valign="top">&#422;</td>
-<td valign="top">&#438;</td>
-<td valign="top">&#454;</td>
-<td valign="top">&#470;</td>
-<td valign="top">&#486;</td>
-<td valign="top">&#502;</td>
-<td valign="top">&#518;</td>
-<td valign="top">&#534;</td>
-<td valign="top">&#550;</td>
-<td valign="top">&#566;</td>
-<td valign="top">&#582;</td>
+<tr>
+<td class="xd31e234 cellLeft">6 </td>
+<td>Ɔ </td>
+<td>Ɩ </td>
+<td>Ʀ </td>
+<td>ƶ </td>
+<td>ǆ </td>
+<td>ǖ </td>
+<td>Ǧ </td>
+<td>Ƕ </td>
+<td>Ȇ </td>
+<td>Ȗ </td>
+<td>Ȧ </td>
+<td>ȶ </td>
+<td class="cellRight">Ɇ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">7</td>
-<td valign="top">&#391;</td>
-<td valign="top">&#407;</td>
-<td valign="top">&#423;</td>
-<td valign="top">&#439;</td>
-<td valign="top">&#455;</td>
-<td valign="top">&#471;</td>
-<td valign="top">&#487;</td>
-<td valign="top">&#503;</td>
-<td valign="top">&#519;</td>
-<td valign="top">&#535;</td>
-<td valign="top">&#551;</td>
-<td valign="top">&#567;</td>
-<td valign="top">&#583;</td>
+<tr>
+<td class="xd31e234 cellLeft">7 </td>
+<td>Ƈ </td>
+<td>Ɨ </td>
+<td>Ƨ </td>
+<td>Ʒ </td>
+<td>Ǉ </td>
+<td>Ǘ </td>
+<td>ǧ </td>
+<td>Ƿ </td>
+<td>ȇ </td>
+<td>ȗ </td>
+<td>ȧ </td>
+<td>ȷ </td>
+<td class="cellRight">ɇ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">8</td>
-<td valign="top">&#392;</td>
-<td valign="top">&#408;</td>
-<td valign="top">&#424;</td>
-<td valign="top">&#440;</td>
-<td valign="top">&#456;</td>
-<td valign="top">&#472;</td>
-<td valign="top">&#488;</td>
-<td valign="top">&#504;</td>
-<td valign="top">&#520;</td>
-<td valign="top">&#536;</td>
-<td valign="top">&#552;</td>
-<td valign="top">&#568;</td>
-<td valign="top">&#584;</td>
+<tr>
+<td class="xd31e234 cellLeft">8 </td>
+<td>ƈ </td>
+<td>Ƙ </td>
+<td>ƨ </td>
+<td>Ƹ </td>
+<td>ǈ </td>
+<td>ǘ </td>
+<td>Ǩ </td>
+<td>Ǹ </td>
+<td>Ȉ </td>
+<td>Ș </td>
+<td>Ȩ </td>
+<td>ȸ </td>
+<td class="cellRight">Ɉ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">9</td>
-<td valign="top">&#393;</td>
-<td valign="top">&#409;</td>
-<td valign="top">&#425;</td>
-<td valign="top">&#441;</td>
-<td valign="top">&#457;</td>
-<td valign="top">&#473;</td>
-<td valign="top">&#489;</td>
-<td valign="top">&#505;</td>
-<td valign="top">&#521;</td>
-<td valign="top">&#537;</td>
-<td valign="top">&#553;</td>
-<td valign="top">&#569;</td>
-<td valign="top">&#585;</td>
+<tr>
+<td class="xd31e234 cellLeft">9 </td>
+<td>Ɖ </td>
+<td>ƙ </td>
+<td>Ʃ </td>
+<td>ƹ </td>
+<td>ǉ </td>
+<td>Ǚ </td>
+<td>ǩ </td>
+<td>ǹ </td>
+<td>ȉ </td>
+<td>ș </td>
+<td>ȩ </td>
+<td>ȹ </td>
+<td class="cellRight">ɉ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">A</td>
-<td valign="top">&#394;</td>
-<td valign="top">&#410;</td>
-<td valign="top">&#426;</td>
-<td valign="top">&#442;</td>
-<td valign="top">&#458;</td>
-<td valign="top">&#474;</td>
-<td valign="top">&#490;</td>
-<td valign="top">&#506;</td>
-<td valign="top">&#522;</td>
-<td valign="top">&#538;</td>
-<td valign="top">&#554;</td>
-<td valign="top">&#570;</td>
-<td valign="top">&#586;</td>
+<tr>
+<td class="xd31e234 cellLeft">A </td>
+<td>Ɗ </td>
+<td>ƚ </td>
+<td>ƪ </td>
+<td>ƺ </td>
+<td>Ǌ </td>
+<td>ǚ </td>
+<td>Ǫ </td>
+<td>Ǻ </td>
+<td>Ȋ </td>
+<td>Ț </td>
+<td>Ȫ </td>
+<td>Ⱥ </td>
+<td class="cellRight">Ɋ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">B</td>
-<td valign="top">&#395;</td>
-<td valign="top">&#411;</td>
-<td valign="top">&#427;</td>
-<td valign="top">&#443;</td>
-<td valign="top">&#459;</td>
-<td valign="top">&#475;</td>
-<td valign="top">&#491;</td>
-<td valign="top">&#507;</td>
-<td valign="top">&#523;</td>
-<td valign="top">&#539;</td>
-<td valign="top">&#555;</td>
-<td valign="top">&#571;</td>
-<td valign="top">&#587;</td>
+<tr>
+<td class="xd31e234 cellLeft">B </td>
+<td>Ƌ </td>
+<td>ƛ </td>
+<td>ƫ </td>
+<td>ƻ </td>
+<td>ǋ </td>
+<td>Ǜ </td>
+<td>ǫ </td>
+<td>ǻ </td>
+<td>ȋ </td>
+<td>ț </td>
+<td>ȫ </td>
+<td>Ȼ </td>
+<td class="cellRight">ɋ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">C</td>
-<td valign="top">&#396;</td>
-<td valign="top">&#412;</td>
-<td valign="top">&#428;</td>
-<td valign="top">&#444;</td>
-<td valign="top">&#460;</td>
-<td valign="top">&#476;</td>
-<td valign="top">&#492;</td>
-<td valign="top">&#508;</td>
-<td valign="top">&#524;</td>
-<td valign="top">&#540;</td>
-<td valign="top">&#556;</td>
-<td valign="top">&#572;</td>
-<td valign="top">&#588;</td>
+<tr>
+<td class="xd31e234 cellLeft">C </td>
+<td>ƌ </td>
+<td>Ɯ </td>
+<td>Ƭ </td>
+<td>Ƽ </td>
+<td>ǌ </td>
+<td>ǜ </td>
+<td>Ǭ </td>
+<td>Ǽ </td>
+<td>Ȍ </td>
+<td>Ȝ </td>
+<td>Ȭ </td>
+<td>ȼ </td>
+<td class="cellRight">Ɍ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">D</td>
-<td valign="top">&#397;</td>
-<td valign="top">&#413;</td>
-<td valign="top">&#429;</td>
-<td valign="top">&#445;</td>
-<td valign="top">&#461;</td>
-<td valign="top">&#477;</td>
-<td valign="top">&#493;</td>
-<td valign="top">&#509;</td>
-<td valign="top">&#525;</td>
-<td valign="top">&#541;</td>
-<td valign="top">&#557;</td>
-<td valign="top">&#573;</td>
-<td valign="top">&#589;</td>
+<tr>
+<td class="xd31e234 cellLeft">D </td>
+<td>ƍ </td>
+<td>Ɲ </td>
+<td>ƭ </td>
+<td>ƽ </td>
+<td>Ǎ </td>
+<td>ǝ </td>
+<td>ǭ </td>
+<td>ǽ </td>
+<td>ȍ </td>
+<td>ȝ </td>
+<td>ȭ </td>
+<td>Ƚ </td>
+<td class="cellRight">ɍ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">E</td>
-<td valign="top">&#398;</td>
-<td valign="top">&#414;</td>
-<td valign="top">&#430;</td>
-<td valign="top">&#446;</td>
-<td valign="top">&#462;</td>
-<td valign="top">&#478;</td>
-<td valign="top">&#494;</td>
-<td valign="top">&#510;</td>
-<td valign="top">&#526;</td>
-<td valign="top">&#542;</td>
-<td valign="top">&#558;</td>
-<td valign="top">&#574;</td>
-<td valign="top">&#590;</td>
+<tr>
+<td class="xd31e234 cellLeft">E </td>
+<td>Ǝ </td>
+<td>ƞ </td>
+<td>Ʈ </td>
+<td>ƾ </td>
+<td>ǎ </td>
+<td>Ǟ </td>
+<td>Ǯ </td>
+<td>Ǿ </td>
+<td>Ȏ </td>
+<td>Ȟ </td>
+<td>Ȯ </td>
+<td>Ⱦ </td>
+<td class="cellRight">Ɏ</td>
 </tr>
-<tr valign="top">
-<td valign="top" class="xd20e316">F</td>
-<td valign="top">&#399;</td>
-<td valign="top">&#415;</td>
-<td valign="top">&#431;</td>
-<td valign="top">&#447;</td>
-<td valign="top">&#463;</td>
-<td valign="top">&#479;</td>
-<td valign="top">&#495;</td>
-<td valign="top">&#511;</td>
-<td valign="top">&#527;</td>
-<td valign="top">&#543;</td>
-<td valign="top">&#559;</td>
-<td valign="top">&#575;</td>
-<td valign="top">&#591;</td>
+<tr>
+<td class="xd31e234 cellLeft cellBottom">F </td>
+<td class="cellBottom">Ə </td>
+<td class="cellBottom">Ɵ </td>
+<td class="cellBottom">Ư </td>
+<td class="cellBottom">ƿ </td>
+<td class="cellBottom">Ǐ </td>
+<td class="cellBottom">ǟ </td>
+<td class="cellBottom">ǯ </td>
+<td class="cellBottom">ǿ </td>
+<td class="cellBottom">ȏ </td>
+<td class="cellBottom">ȟ </td>
+<td class="cellBottom">ȯ </td>
+<td class="cellBottom">ȿ </td>
+<td class="cellRight cellBottom">ɏ</td>
 </tr>
+</tbody>
 </table>
+</div><p>
+</p>
+</div>
 </div>
 </div>
 </div>
