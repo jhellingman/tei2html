@@ -1,5 +1,6 @@
 
 [![xspec tests](https://github.com/jhellingman/tei2html/actions/workflows/test.yml/badge.svg)](https://github.com/jhellingman/tei2html/actions/workflows/test.yml)
+[![CodeFactor](https://www.codefactor.io/repository/github/jhellingman/tei2html/badge)](https://www.codefactor.io/repository/github/jhellingman/tei2html)
 
 # tei2html
 
