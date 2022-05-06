@@ -13,6 +13,7 @@ body, a.hidden {
 .titlePage {
     color: #FDF1BA;
     font-family: sans-serif;
+    border: #555555 2px solid;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
@@ -35,10 +36,6 @@ p.byline {
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {
     color: red;
-}
-
-.titlePage {
-    border: #555555 2px solid;
 }
 
 .transcriberNote {
