@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
 p.byline {
     font-style: italic;
     margin-bottom: 2em;
+    text-indent: 0;
 }
 
 p {
@@ -33,10 +34,6 @@ p {
 }
 
 p.first, p.tocChapter {
-    text-indent: 0;
-}
-
-p.byline {
     text-indent: 0;
 }
 
