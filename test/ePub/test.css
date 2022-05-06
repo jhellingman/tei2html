@@ -19,12 +19,12 @@ h1 {
 
 hr {
  height: 0;
- overflow: visible; 
+ overflow: visible;
 }
 
 pre {
- font-family: monospace, monospace;
- font-size: 1em; 
+ font-family: monospace;
+ font-size: 1em;
 }
 
 a {
@@ -33,7 +33,7 @@ a {
 
 abbr[title] {
  border-bottom: none;
- text-decoration: underline; 
+ text-decoration: underline;
  text-decoration: underline dotted;
 }
 
@@ -42,8 +42,8 @@ b, strong {
 }
 
 code, kbd, samp {
- font-family: monospace, monospace; 
- font-size: 1em; 
+ font-family: monospace;
+ font-size: 1em;
 }
 
 small {
@@ -382,6 +382,25 @@ blockquote, p.quote, div.blockquote, div.argument, .par.quote {
 }
 
  
+span.accent {
+ display: inline-block;
+ text-align: center;
+}
+
+span.accent, span.accent span.top, span.accent span.base {
+ line-height: 0.40em;
+}
+
+span.accent span.top {
+ font-weight: bold;
+ font-size: 5pt;
+}
+
+span.accent span.base {
+ display: block;
+}
+
+ 
 
 .footnotes .body, .footnotes .div1 {
  padding: 0;
@@ -615,6 +634,10 @@ ul {
  margin-left: 0;
 }
 
+.splitListTable td {
+ vertical-align: top;
+}
+
 .numberedItem {
  text-indent: -3em;
  margin-left: 3em;
@@ -647,14 +670,14 @@ ul {
 
 .titlePage {
  border: #DDDDDD 2px solid;
- margin: 3em 0 7em 0;
- padding: 5em 10% 6em 10%;
+ margin: 3em 0 7em;
+ padding: 5em 10% 6em;
  text-align: center;
 }
 
 .titlePage .docTitle {
  line-height: 1.7;
- margin: 2em 0 2em 0;
+ margin: 2em 0;
  font-weight: bold;
 }
 
@@ -668,7 +691,7 @@ ul {
 }
 
 .titlePage .byline {
- margin: 2em 0 2em 0;
+ margin: 2em 0;
  font-size: 1.2em;
  line-height: 1.5;
 }
@@ -683,7 +706,7 @@ ul {
 }
 
 .titlePage .docImprint {
- margin: 4em 0 0 0;
+ margin: 4em 0 0;
  font-size: 1.2em;
  line-height: 1.5;
 }
@@ -888,35 +911,55 @@ table.verticalBorderInside .cellLeft, table.verticalBorderInside .cellHeadLeft {
 
  
 
-table.borderAll {
+table.borderAll,
+table.rtlBorderAll {
  border-collapse: collapse;
 }
 
-table.borderAll td {
+table.borderAll td,
+table.rtlBorderAll td {
  padding-left: 4px;
  padding-right: 4px;
  border: 1px solid black;
 }
 
-table.borderAll .cellHeadTop, table.borderAll .cellTop {
+table.borderAll .cellHeadTop, table.borderAll .cellTop,
+table.rtlBorderAll .cellHeadTop, table.rtlBorderAll .cellTop {
  border-top: 2px solid black;
 }
 
-table.borderAll .cellHeadBottom {
+table.borderAll .cellHeadBottom, 
+table.rtlBorderAll .cellHeadBottom {
  border-bottom: 1px solid black;
 }
 
-table.borderAll .cellBottom {
+table.borderAll .cellBottom, 
+table.rtlBorderAll .cellBottom {
  border-bottom: 2px solid black;
 }
 
-table.borderAll .cellLeft, table.borderAll .cellHeadLeft {
+table.borderAll .cellLeft, 
+table.borderAll .cellHeadLeft {
  border-left: 2px solid black;
 }
 
-table.borderAll .cellRight, table.borderAll .cellHeadRight {
+table.borderAll .cellRight, 
+table.borderAll .cellHeadRight {
  border-right: 2px solid black;
 }
+
+ 
+
+table.rtlBorderAll .cellLeft, 
+table.rtlBorderAll .cellHeadLeft {
+ border-right: 2px solid black;
+}
+
+table.rtlBorderAll .cellRight, 
+table.rtlBorderAll .cellHeadRight {
+ border-left: 2px solid black;
+}
+
 
  
 
@@ -1021,7 +1064,7 @@ td.alignDecimalNotNumber {
 
 .lg {
  text-align: left;
- padding: .5em 0 .5em 0;
+ padding: .5em 0;
 }
 
 .lg h4, .lgouter h4 {
@@ -1386,7 +1429,7 @@ text-align:right;
 }
 
 .tableDemoBracket {
-margin:0px auto; display:table;
+margin:0 auto; display:table;
 }
 
 .xd35e795 {
@@ -1422,7 +1465,7 @@ width:40%; border-collapse:collapse;
 }
 
 .tableDemoThreeUp {
-margin:0px auto; display:table;
+margin:0 auto; display:table;
 }
 
 .xd35e935 {
@@ -1434,11 +1477,11 @@ color:yellow; background-color:black;
 }
 
 .tableDemoThreeUp2 {
-margin:0px auto; display:table;
+margin:0 auto; display:table;
 }
 
 .tableDemoBorders4 {
-margin:0px auto; display:table;
+margin:0 auto; display:table;
 }
 
 .xd35e1224 {
