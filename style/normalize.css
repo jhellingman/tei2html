@@ -19,12 +19,12 @@ h1 {
 
 hr {
     height: 0;
-    overflow: visible; 
+    overflow: visible;
 }
 
 pre {
-    font-family: monospace, monospace;
-    font-size: 1em; 
+    font-family: monospace;
+    font-size: 1em;
 }
 
 a {
@@ -33,7 +33,7 @@ a {
 
 abbr[title] {
     border-bottom: none;
-    text-decoration: underline; 
+    text-decoration: underline;
     text-decoration: underline dotted;
 }
 
@@ -42,8 +42,8 @@ b, strong {
 }
 
 code, kbd, samp {
-    font-family: monospace, monospace; 
-    font-size: 1em; 
+    font-family: monospace;
+    font-size: 1em;
 }
 
 small {

@@ -1742,6 +1742,7 @@ BEGIN {
     $ent{'pmacr'}       = 'p' . chr(0x0304); # p with macron
     $ent{'qmacr'}       = 'q' . chr(0x0304); # q with macron
     $ent{'rmacr'}       = 'r' . chr(0x0304); # r with macron
+    $ent{'tmacr'}       = 't' . chr(0x0304); # t with macron
     $ent{'vmacr'}       = 'v' . chr(0x0304); # v with macron
     $ent{'Dmacr'}       = 'D' . chr(0x0304); # D with macron
     $ent{'xmacr'}       = 'x' . chr(0x0304); # x with macron

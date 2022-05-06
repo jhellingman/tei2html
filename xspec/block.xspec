@@ -209,7 +209,7 @@ float:left;
 width:90px;
 height:95px;
 background:url(images/initial-A.png) no-repeat;
-background-position:0px -45px;
+background-position:0 -45px;
 text-align:right;
 color:white;
 font-size:1px;

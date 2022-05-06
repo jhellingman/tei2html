@@ -780,7 +780,7 @@
             <xsl:text>height:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-height')"/><xsl:text>;&lf;</xsl:text>
             <xsl:text>background:url(</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-image')"/><xsl:text>) no-repeat;&lf;</xsl:text>
             <xsl:if test="f:has-rend-value(@rend, 'initial-offset')">
-                <xsl:text>background-position:0px -</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
+                <xsl:text>background-position:0 -</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-offset')"/><xsl:text>;&lf;</xsl:text>
             </xsl:if>
             <xsl:if test="$scale-factor != 1.0">
                 <xsl:text>background-size:</xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>

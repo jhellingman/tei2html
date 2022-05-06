@@ -821,7 +821,7 @@ span.sum {
  border-top: solid black 1px;
 }
 
-table.inlinetable {
+table.inlineTable {
  display: inline-table;
 }
 
@@ -1041,7 +1041,7 @@ td.alignDecimalNotNumber {
 }
 
 p.line, .par.line {
- margin: 0 0 0 0;
+ margin: 0;
 }
 
 span.hemistich {
@@ -1363,7 +1363,7 @@ float:left;
 width:90px;
 height:95px;
 background:url(images/initial-A.png) no-repeat;
-background-position:0px -45px;
+background-position:0 -45px;
 text-align:right;
 color:white;
 font-size:1px;
@@ -1378,7 +1378,7 @@ text-align:center;
 }
 
 .tableDemo2 {
-width:40%; margin:0px auto; display:table;
+width:40%; margin:0 auto; display:table;
 }
 
 .xd35e609 {

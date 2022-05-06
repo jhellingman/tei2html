@@ -14,7 +14,7 @@
 
 .lg {
     text-align: left;
-    padding: .5em 0 .5em 0;
+    padding: .5em 0;
 }
 
 .lg h4, .lgouter h4 {
@@ -34,7 +34,7 @@
 }
 
 p.line, .par.line {
-    margin: 0 0 0 0;
+    margin: 0;
 }
 
 span.hemistich {

@@ -467,7 +467,7 @@
                 <!-- Table related special handling. With the rule
                      margin: 0px auto, the table is centered, while
                      display: table shrinks the bounding box to the content -->
-                <xsl:when test="$element = 'table' and $property = 'align' and $value = 'center'">margin:0px auto; display:table; </xsl:when>
+                <xsl:when test="$element = 'table' and $property = 'align' and $value = 'center'">margin:0 auto; display:table; </xsl:when>
                 <xsl:when test="$element = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
                 <!-- Line-breaks with indents need to be handled specially (drama.xsl), so should be removed here. -->

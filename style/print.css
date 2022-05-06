@@ -186,7 +186,7 @@ p, .par {
 }
 
 p.first, p.tocChapter, p.byline, .par.first, .par.tocChapter, .par.byline {
-    text-indent: 0em;
+    text-indent: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {

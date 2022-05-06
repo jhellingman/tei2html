@@ -6,14 +6,14 @@
 
 .titlePage {
     border: #DDDDDD 2px solid;
-    margin: 3em 0 7em 0;
-    padding: 5em 10% 6em 10%;
+    margin: 3em 0 7em;
+    padding: 5em 10% 6em;
     text-align: center;
 }
 
 .titlePage .docTitle {
     line-height: 1.7;
-    margin: 2em 0 2em 0;
+    margin: 2em 0;
     font-weight: bold;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .titlePage .byline {
-    margin: 2em 0 2em 0;
+    margin: 2em 0;
     font-size: 1.2em;
     line-height: 1.5;
 }
@@ -42,7 +42,7 @@
 }
 
 .titlePage .docImprint {
-    margin: 4em 0 0 0;
+    margin: 4em 0 0;
     font-size: 1.2em;
     line-height: 1.5;
 }
