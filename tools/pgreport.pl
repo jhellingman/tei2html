@@ -27,6 +27,7 @@ my $makeEpub = 0;       # Generate Epub files.
 my $makeChecks = 0;
 my $download = 0;       # Download posted files from Project Gutenberg.
 my $showHelp            = 0;
+my $onlyPosted = 0;     # Only report on posted files (version >= 1.0)
 
 GetOptions(
     'f' => \$force,
@@ -36,6 +37,7 @@ GetOptions(
     'e' => \$makeEpub,
     'd' => \$download,
     'q' => \$showHelp,
+    'p' => \$onlyPosted,
     'help' => \$showHelp);
 
 if ($showHelp == 1) {
@@ -48,6 +50,7 @@ if ($showHelp == 1) {
     print "    h         Produce derived HTML file for each TEI file.\n";
     print "    e         Produce derived ePub file for each TEI file.\n";
     print "    d         Download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
+    print "    p         Only report on posted files (version >= 1.0).\n";
     print "    q         Print this help and exit.\n";
 
     exit(0);
@@ -63,6 +66,28 @@ if ($forceMore != 0) {
 my $totalFiles = 0;
 my $totalWords = 0;
 my $totalBytes = 0;
+
+my %tagCounters = (
+    'p' => 0,           # paragraphs
+    'div' => 0,         # divisions (at any level)
+    'div0' => 0,        # divisions (level 0)
+    'div1' => 0,        # divisions (level 1)
+    'div2' => 0,        # divisions (level 2)
+    'div3' => 0,        # divisions (level 3)
+    'lg' => 0,          # line-groups
+    'l' => 0,           # lines of vers
+    'sp' => 0,          # speakers
+    'note' => 0,        # footnotes
+    'corr' => 0,        # corrections
+    'table' => 0,       # tables
+    'row' => 0,         # rows
+    'cell' => 0,        # cells
+    'list' => 0,        # lists
+    'item' => 0,        # items
+    'formula' => 0,     # formulas
+    'figure' => 0,      # figures
+    'ref' => 0
+    );     
 
 my %excluded = (
         'TEI-template-NL', 1,
@@ -139,6 +164,12 @@ sub logTotals {
     logMessage("Files:      $totalFiles");
     logMessage("Words:      $totalWords");
     logMessage("Bytes:      $totalBytes");
+
+    logMessage("---------------------");
+    foreach my $tag (sort keys %tagCounters) {
+        logMessage("Tag $tag:     " . $tagCounters{$tag});
+    }
+    logMessage("---------------------");
 }
 
 
@@ -186,6 +217,9 @@ sub handleTeiFile {
     $fileName =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?$/;
     my $baseName    = $1;
     my $version     = $3;
+    if ($onlyPosted != 0 && $version < 1.0) {
+        return;
+    }
 
     print STDERR "---------------------\n";
     print STDERR "$fullName\n";
@@ -317,6 +351,84 @@ sub handleTeiFile {
                 logMessage("PG Number:  $pgNum");
                 print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
                 print XMLFILE "    <pgsource>$pgSrc</pgsource>\n";
+
+
+                logMessage("Counts");
+                my $counter = $xpath->find('count(TEI.2/text//p)');
+                $tagCounters{'p'} += $counter->string_value();
+                logMessage("  p:        " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//div)');
+                $tagCounters{'div'} += $counter->string_value();
+                logMessage("  div:      " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//div0)');
+                $tagCounters{'div0'} += $counter->string_value();
+                logMessage("  div0:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//div1)');
+                $tagCounters{'div1'} += $counter->string_value();
+                logMessage("  div1:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//div2)');
+                $tagCounters{'div2'} += $counter->string_value();
+                logMessage("  div2:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//div3)');
+                $tagCounters{'div3'} += $counter->string_value();
+                logMessage("  div3:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//lg)');
+                $tagCounters{'lg'} += $counter->string_value();
+                logMessage("  lg:       " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//sp)');
+                $tagCounters{'sp'} += $counter->string_value();
+                logMessage("  sp:       " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//l)');
+                $tagCounters{'l'} += $counter->string_value();
+                logMessage("  l:        " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//note[not(@place) or @place="foot" or @place="unspecified"])');
+                $tagCounters{'note'} += $counter->string_value();
+                logMessage("  note:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//corr)');
+                $tagCounters{'corr'} += $counter->string_value();
+                logMessage("  corr:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//table)');
+                $tagCounters{'table'} += $counter->string_value();
+                logMessage("  table:    " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//row)');
+                $tagCounters{'row'} += $counter->string_value();
+                logMessage("  row:      " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//cell)');
+                $tagCounters{'cell'} += $counter->string_value();
+                logMessage("  cell:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//list)');
+                $tagCounters{'list'} += $counter->string_value();
+                logMessage("  list:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//item)');
+                $tagCounters{'item'} += $counter->string_value();
+                logMessage("  item:     " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//formula)');
+                $tagCounters{'formula'} += $counter->string_value();
+                logMessage("  formula:  " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//figure)');
+                $tagCounters{'figure'} += $counter->string_value();
+                logMessage("  figure:   " . $counter->string_value());
+
+                $counter = $xpath->find('count(TEI.2/text//ref)');
+                $tagCounters{'ref'} += $counter->string_value();
+                logMessage("  ref:      " . $counter->string_value());
 
                 if ($download == 1 && isValid($pgNum->string_value())) {
                     downloadFromPG($pgNum, $filePath);
