@@ -783,19 +783,28 @@
         'Epigraph',
         'Errata',
         'Foreword',
+        'FrenchTitle',
         'Frontispiece',
         'Glossary',
         'Imprint',
         'Introduction',
         'Motto',
         'Note',
+        'Notes',
         'Preface',
-        'FrenchTitle',
         'TitlePage'
         "/>
-    <xsl:variable name="expectedBodyDiv0Types" as="xs:string*" select="'Book', 'Issue', 'Part'"/>
+    <xsl:variable name="expectedBodyDiv0Types" as="xs:string*" select="'Book', 'Issue', 'Part', 'Volume'"/>
 
-    <xsl:variable name="expectedBodyDiv1Types" as="xs:string*" select="'Act', 'Article', 'Chapter', 'Poem', 'Story'"/>
+    <xsl:variable name="expectedBodyDiv1Types" as="xs:string*" select="
+        'Act',
+        'Article',
+        'Chapter',
+        'Part',
+        'Poem',
+        'Story',
+        'Tale'
+        "/>
 
     <xsl:variable name="expectedBackDiv1Types" as="xs:string*" select="
         'Advertisement',
@@ -810,6 +819,7 @@
         'Glossary',
         'Imprint',
         'Index',
+        'Note',
         'Notes',
         'Spine',
         'Vocabulary'
