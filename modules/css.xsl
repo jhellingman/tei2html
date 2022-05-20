@@ -311,7 +311,7 @@
     </xd:doc>
 
     <xsl:variable name="rendition-ladder-pattern" select="'([a-z][a-z0-9-]*)\((.*?)\)'"/>
-    <xsl:variable name="class-name-pattern" select="'^[a-zA-Z][ a-zA-Z0-9-]+$'"/>
+    <xsl:variable name="class-name-pattern" select="'^[a-zA-Z][ a-zA-Z0-9-]*$'"/>
 
     <xsl:function name="f:translate-rend-ladder" as="xs:string">
         <xsl:param name="rend" as="xs:string?"/>

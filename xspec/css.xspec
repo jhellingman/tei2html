@@ -7,9 +7,16 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <!-- presence of rend-attributes results in class attributes on generated elements -->
 
@@ -55,6 +62,15 @@
         </x:context>
         <x:expect label="will result in an element with an ID and both the generated and specified classes.">
             <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red p0">Just some text</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When converting an element with single letter (bare) class (normal mode)">
+        <x:context>
+            <ab id="p0" rend="r">Just some text</ab>
+        </x:context>
+        <x:expect label="will result in an element with an ID and both the generated and specified classes.">
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="r">Just some text</span>
         </x:expect>
     </x:scenario>
 
