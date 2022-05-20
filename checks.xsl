@@ -24,7 +24,7 @@
     <!ENTITY laquo      "&#171;">
     <!ENTITY bdquo      "&#8222;">
 
-    <!ENTITY blackCircle      "&#x25CF;">
+    <!ENTITY fwperiod   "&#xFF0E;">
 
 ]>
 <xsl:stylesheet version="3.0"
@@ -65,9 +65,9 @@
         <xsl:apply-templates mode="segmentize" select="/"/>
     </xsl:variable>
 
-    <!-- Make sure periods in abbreviations are not reported (replace them by &blackCircle;; replace them back later) -->
+    <!-- Make sure periods in abbreviations are not reported (replace them by &fwperiod; replace them back later) -->
     <xsl:template match="abbr" mode="segments">
-        <xsl:value-of select="replace(., '\.', '&blackCircle;')"/>
+        <xsl:value-of select="replace(., '\.', '&fwperiod;')"/>
     </xsl:template>
 
     <!-- Add some space around end-note references to avoid some false positive "no space after punctuation" issues -->
@@ -1323,9 +1323,19 @@
     </xsl:function>
 
 
+    <xsl:variable name="common-abbreviations-with-periods" select="f:get-abbreviations-with-periods()"/>
+
+    <xsl:function name="f:get-abbreviations-with-periods">
+        <tmp:abbrs>
+            <xsl:for-each select="$common-abbreviations//tmp:abbr[contains(., '.')]">
+                <tmp:abbr><xsl:value-of select="."/></tmp:abbr>
+            </xsl:for-each>
+        </tmp:abbrs>
+    </xsl:function>
+
     <xsl:function name="f:hide-abbreviations" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:value-of select="f:hide-abbreviation($string, count($common-abbreviations/tmp:abbr))"/>
+        <xsl:value-of select="f:hide-abbreviation($string, count($common-abbreviations-with-periods/tmp:abbr))"/>
     </xsl:function>
 
     <xsl:function name="f:hide-abbreviation" as="xs:string">
@@ -1337,8 +1347,8 @@
         <xsl:choose>
             <xsl:when test="$n &gt; 0">
                 <xsl:variable name="result" as="xs:string">
-                    <xsl:variable name="old" select="$common-abbreviations/tmp:abbr[$n]"/>
-                    <xsl:variable name="new" select="replace($old, '\.', '&blackCircle;')"/>
+                    <xsl:variable name="old" select="$common-abbreviations-with-periods/tmp:abbr[$n]"/>
+                    <xsl:variable name="new" select="replace($old, '\.', '&fwperiod;')"/>
                     <xsl:variable name="pattern" select="replace($old, '([.+])', '[$1]')"/>
 
                     <!-- <xsl:copy-of select="f:log-info('OLD: {1}; NEW: {2}; PATTERN: {3}', ($old, $new, $pattern))"/> -->
@@ -1601,7 +1611,7 @@
     <xsl:function name="f:replaced-to-normal-symbols" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
         <xsl:sequence select="translate($string,
-            '&#xFF08;&#xFF09;&#xFF3B;&#xFF3D;&#xFF5B;&#xFF5B;&#xFF03;&blackCircle;',
+            '&#xFF08;&#xFF09;&#xFF3B;&#xFF3D;&#xFF5B;&#xFF5B;&#xFF03;&fwperiod;',
             '()[]{}#.')"/>
     </xsl:function>
 
