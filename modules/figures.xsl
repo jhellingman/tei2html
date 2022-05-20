@@ -77,7 +77,7 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="default" as="xs:string"/>
 
-        <xsl:sequence select="if ($node/figDesc) then $node/figDesc else (if ($node/head) then $node/head else $default)"/>
+        <xsl:sequence select="if ($node/figDesc) then $node/figDesc[1] else (if ($node/head) then $node/head[1] else $default)"/>
     </xsl:function>
 
 
