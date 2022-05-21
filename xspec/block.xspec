@@ -7,9 +7,16 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <!-- pb -->
 
@@ -98,7 +105,7 @@
             </div>
         </x:context>
         <x:expect label="will result extra paragraphs representing the thematic break">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Blah blah.</p>
                   <hr class="tb" id="..."/>

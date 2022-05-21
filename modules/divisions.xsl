@@ -493,12 +493,12 @@
     </xd:doc>
 
     <xsl:template name="generate-div-class">
-        <xsl:param name="div" select="name()"/>
-
+        <xsl:variable name="div" select="name()"/>
         <xsl:variable name="div" select="if ($div = 'div') then 'div' || f:div-level(.) else $div"/>
 
         <xsl:variable name="class">
             <xsl:value-of select="$div"/><xsl:text> </xsl:text>
+            <xsl:if test="position() = last()"><xsl:text>last-child </xsl:text></xsl:if>
             <xsl:if test="@type"><xsl:value-of select="lower-case(@type)"/><xsl:text> </xsl:text></xsl:if>
         </xsl:variable>
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>

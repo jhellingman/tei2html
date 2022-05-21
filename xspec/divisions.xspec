@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY uparrow    "&#8593;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
+
+    <!-- Also see toc.xspec for further tests related to divisions -->
+
+    <x:scenario label="When rendering a text with a body and two div1 elements">
+        <x:context>
+            <text>
+                <body>
+                    <div1 id="d1">
+                        <head>Division 1</head>
+                        <p>Paragraph 1.1</p>
+                        <p>Paragraph 1.2</p>
+                    </div1>
+                    <div1 id="d1">
+                        <head>Division 1</head>
+                        <p>Paragraph 2.1</p>
+                        <p>Paragraph 2.2</p>
+                    </div1>
+                </body>
+            </text>
+        </x:context>
+        <x:expect label="will result in a set of nested HTML divs">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                    <div class="divHead">
+                        <h2 id="..." class="main">Division 1</h2>
+                    </div>
+                    <div class="divBody">
+                        <p id="..." class="first">Paragraph 1.1</p>
+                        <p id="...">Paragraph 1.2</p>
+                    </div>
+                </div>
+                <div id="d1" class="div1 last-child">
+                    <div class="divHead">
+                        <h2 id="..." class="main">Division 1</h2>
+                    </div>
+                    <div class="divBody">
+                        <p id="..." class="first">Paragraph 2.1</p>
+                        <p id="...">Paragraph 2.2</p>
+                    </div>
+                </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1">
+                            <head>Division 1</head>
+                            <p>Paragraph 1.1</p>
+                            <p>Paragraph 1.2</p>
+                        </div1>
+                        <div1 id="d1">
+                            <head>Division 1</head>
+                            <p>Paragraph 2.1<note id="n.1" n="1" place="foot">Footnote 1.</note></p>
+                            <p>Paragraph 2.2</p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a set of nested HTML divs">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                    <div class="divHead">
+                        <h2 id="..." class="main">Division 1</h2>
+                    </div>
+                    <div class="divBody">
+                        <p id="..." class="first">Paragraph 1.1</p>
+                        <p id="...">Paragraph 1.2</p>
+                    </div>
+                </div>
+                <div id="d1" class="div1 last-child">
+                    <div class="divHead">
+                        <h2 id="..." class="main">Division 1</h2>
+                    </div>
+                    <div class="divBody">
+                        <p id="..." class="first">Paragraph 2.1<a class="noteRef" id="n.1src" href="#n.1">1</a></p>
+                        <p id="...">Paragraph 2.2</p>
+                    </div>
+                    <div class="footnotes">
+                        <hr class="fnsep" />
+                        <div class="footnote-body">
+                            <div class="fndiv" id="...">
+                                <p class="footnote">
+                                    <span class="fnlabel">
+                                        <a class="noteRef" href="...">1</a>
+                                    </span> Footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

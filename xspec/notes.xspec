@@ -28,7 +28,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote at the end of the div1">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -59,7 +59,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in multiple footnotes at the end of the div1">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                   <p id="...">Surrounding text<a class="noteRef" id="n.2src" href="#n.2">2</a> and more text.</p>
@@ -102,7 +102,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in only two footnotes, numbered correctly">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                   <p id="...">Surrounding text<span class="marginnote" id="n.2">Text of marginal note.</span> and more text.</p>
@@ -140,7 +140,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in only a single instance of the footnote referenced twice">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                   <p id="...">Surrounding text<a class="pseudoNoteRef" id="n.1bsrc" href="#n.1">1</a> and more text.</p>
@@ -180,7 +180,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote with the paragraph">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -210,7 +210,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote with both paragraphs">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -241,7 +241,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote with a table, but without the return arrow.">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -282,7 +282,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote with a list, but without the return arrow.">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -315,7 +315,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote at the end of the div1">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
                </div>
@@ -354,7 +354,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a footnote at the end of the div1 with the indicated marker">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">*</a> and more text.</p>
                </div>
@@ -386,7 +386,7 @@
             </TEI>
         </x:context>
         <x:expect label="will result in a no notes at the end of the div">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
                <div class="divBody">
                   <p id="..." class="first">Surrounding text<a class="apparatusnotemarker" id="n.1src" href="#n.1"
                     title="Text of apparatus note.">&deg;</a> and more text.</p>

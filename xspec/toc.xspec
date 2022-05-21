@@ -424,8 +424,6 @@
     </x:scenario>
 
 
-
-
     <x:param name="sample6" as="document-node(element(TEI.2))" select="self::document-node()">
         <TEI.2 lang="en">
             <text>
@@ -583,39 +581,39 @@
     <x:scenario label="When rendering a body element with numbered divs">
         <x:context select="$sample6//body/div1[1]"/>
         <x:expect label="will result a HTML document with those divisions, and links back to the toc">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 chapter">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
                <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
                <div class="divHead">
                   <h2 id="..." class="main">Chapter I.</h2>
                </div>
                <div class="divBody">
                   <p id="..." class="first">The first chapter &mldr;</p>
-                  <div id="ch1.1" class="div2 section">
+                  <div id="ch1.1" class="div2 last-child section">
                      <span class="pageNum">[<a href="#ch1.1.toc">Contents</a>]</span>
                      <div class="divHead">
                         <h3 id="..." class="main">Section 1.</h3>
                      </div>
                      <div class="divBody">
                         <p id="..." class="first">The first section &mldr;</p>
-                        <div class="div3 subsection" id="ch1.1.A">
+                        <div class="div3 last-child subsection" id="ch1.1.A">
                            <div class="divHead">
                               <h4 id="..." class="main">Subsection A.</h4>
                            </div>
                            <div class="divBody">
                               <p id="..." class="first">The first subsection &mldr;</p>
-                              <div class="div4 subsubsection" id="ch1.1.A.a">
+                              <div class="div4 last-child subsubsection" id="ch1.1.A.a">
                                  <div class="divHead">
                                     <h5 id="..." class="main">Subsubsection a.</h5>
                                  </div>
                                  <div class="divBody">
                                     <p id="..." class="first">The first subsubsection &mldr;</p>
-                                    <div class="div5 subsubsubsection" id="ch1.1.A.a.i">
+                                    <div class="div5 last-child subsubsubsection" id="ch1.1.A.a.i">
                                        <div class="divHead">
                                           <h6 id="..." class="main">Subsubsubsection i.</h6>
                                        </div>
                                        <div class="divBody">
                                           <p id="..." class="first">The first subsubsubsection &mldr;</p>
-                                          <div class="div6 subsubsubsubsection" id="ch1.1.A.a.i.1">
+                                          <div class="div6 last-child subsubsubsubsection" id="ch1.1.A.a.i.1">
                                              <div class="divHead">
                                                 <h6 id="..." class="main">Subsubsubsubsection 1.</h6>
                                              </div>
@@ -640,39 +638,39 @@
     <x:scenario label="When rendering a body element with unnumbered divs">
         <x:context select="$sample7//body/div[1]"/>
         <x:expect label="will result a HTML document with those divisions, and links back to the toc (exactly the same as above)">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 chapter">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
                <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
                <div class="divHead">
                   <h2 id="..." class="main">Chapter I.</h2>
                </div>
                <div class="divBody">
                   <p id="..." class="first">The first chapter &mldr;</p>
-                  <div id="ch1.1" class="div2 section">
+                  <div id="ch1.1" class="div2 last-child section">
                      <span class="pageNum">[<a href="#ch1.1.toc">Contents</a>]</span>
                      <div class="divHead">
                         <h3 id="..." class="main">Section 1.</h3>
                      </div>
                      <div class="divBody">
                         <p id="..." class="first">The first section &mldr;</p>
-                        <div class="div3 subsection" id="ch1.1.A">
+                        <div class="div3 last-child subsection" id="ch1.1.A">
                            <div class="divHead">
                               <h4 id="..." class="main">Subsection A.</h4>
                            </div>
                            <div class="divBody">
                               <p id="..." class="first">The first subsection &mldr;</p>
-                              <div class="div4 subsubsection" id="ch1.1.A.a">
+                              <div class="div4 last-child subsubsection" id="ch1.1.A.a">
                                  <div class="divHead">
                                     <h5 id="..." class="main">Subsubsection a.</h5>
                                  </div>
                                  <div class="divBody">
                                     <p id="..." class="first">The first subsubsection &mldr;</p>
-                                    <div class="div5 subsubsubsection" id="ch1.1.A.a.i">
+                                    <div class="div5 last-child subsubsubsection" id="ch1.1.A.a.i">
                                        <div class="divHead">
                                           <h6 id="..." class="main">Subsubsubsection i.</h6>
                                        </div>
                                        <div class="divBody">
                                           <p id="..." class="first">The first subsubsubsection &mldr;</p>
-                                          <div class="div6 subsubsubsubsection" id="ch1.1.A.a.i.1">
+                                          <div class="div6 last-child subsubsubsubsection" id="ch1.1.A.a.i.1">
                                              <div class="divHead">
                                                 <h6 id="..." class="main">Subsubsubsubsection 1.</h6>
                                              </div>
