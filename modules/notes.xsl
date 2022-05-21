@@ -155,6 +155,33 @@
 
 
     <xd:doc>
+        <xd:short>Determine whether we should insert footnotes at the current location.</xd:short>
+        <xd:detail>To have a footnote division, we have to meet the following conditions:
+            <ul>
+                <li>1. We have footnotes.</li>
+                <li>2. We do not have an explicit request for a footnote division elsewhere.</li>
+                <li>3. We should not be a division inside a quotation.</li>
+            </ul>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:div-has-footnotes" as="xs:boolean">
+        <xsl:param name="div"/>
+        <xsl:variable name="notes" select="$div//note[f:is-footnote(.)][not(@sameAs)]" as="element(note)*"/>
+        <xsl:sequence select="f:div-has-footnotes($div, $notes)"/>
+    </xsl:function>
+
+    <xsl:function name="f:div-has-footnotes" as="xs:boolean">
+        <xsl:param name="div"/>
+        <xsl:param name="notes"/>
+
+        <xsl:sequence select="$notes
+            and not($root//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')])
+            and $div[not(ancestor::q)]"/>
+    </xsl:function>
+
+
+    <xd:doc>
         <xd:short>Insert footnotes at the current location.</xd:short>
         <xd:detail>Insert footnotes at the current location. This template will place all footnotes occurring in the
         indicated division at this location.</xd:detail>
@@ -164,19 +191,50 @@
         <xsl:param name="div" select="." as="element()"/>
         <xsl:param name="notes" select="$div//note[f:is-footnote(.)][not(@sameAs)]" as="element(note)*"/>
 
-        <!-- No explicit request for a notes division -->
-        <xsl:if test="not(//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')])">
-            <!-- Division is not part of quoted text -->
-            <xsl:if test="$div[not(ancestor::q)]">
-                <!-- We actually do have notes -->
-                <xsl:if test="$notes">
-                    <div class="footnotes">
-                        <hr class="fnsep"/>
-                        <div class="footnote-body">
-                            <xsl:apply-templates mode="footnotes" select="$notes"/>
-                        </div>
+        <xsl:if test="f:div-has-footnotes($div, $notes)">
+            <div class="footnotes">
+                <hr class="fnsep"/>
+                <div class="footnote-body">
+                    <xsl:apply-templates mode="footnotes" select="$notes"/>
+                </div>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Insert footnotes that belong to a div0.</xd:short>
+        <xd:detail>These should only be inserted if not done so earlier (which happens if the div0 contains
+        a div1 element).</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="insert-div0-footnotes">
+        <xsl:if test=".//note[f:is-footnote(.) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
+            <div class="footnotes">
+                <hr class="fnsep"/>
+                <div class="footnote-body">
+                    <xsl:apply-templates mode="footnotes" select=".//note[f:is-footnote(.) and not(ancestor::div1)]"/>
+                </div>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Insert footnotes that belong to a div0 fragment at the current location.</xd:short>
+        <xd:detail>Insert footnotes in the preceding fragment of the div0 section here. This is
+        something of a hack to get those footnotes in a more-or-less decent location.</xd:detail>
+    </xd:doc>
+
+    <xsl:template name="insert-div0-fragment-footnotes">
+        <xsl:context-item as="element(div1)" use="required"/>
+        <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
+            <xsl:if test="..//note[f:is-footnote(.) and not(ancestor::div1)]">
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <div class="footnote-body">
+                        <xsl:apply-templates mode="footnotes" select="..//note[f:is-footnote(.) and not(ancestor::div1)]"/>
                     </div>
-                </xsl:if>
+                </div>
             </xsl:if>
         </xsl:if>
     </xsl:template>
@@ -466,7 +524,7 @@
         <a href="{f:generate-footnote-href(.)}">
             <xsl:call-template name="footnote-number"/>
         </a>
-    </xsl:template> 
+    </xsl:template>
 
 
     <!--==== TABLE NOTES ====-->
@@ -691,7 +749,7 @@
     <xsl:function name="f:apparatus-note-marker" as="xs:string">
         <xsl:param name="note" as="element()"/>
 
-        <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker')) 
+        <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker'))
                               then f:rend-value($note/@rend, 'note-marker')
                               else f:get-setting('notes.apparatus.textMarker')"/>
     </xsl:function>

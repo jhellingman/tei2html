@@ -78,14 +78,7 @@
 
             <xsl:apply-templates/>
 
-            <!-- Include footnotes in the div0, if not done so earlier -->
-
-            <xsl:if test=".//note[f:is-footnote(.) and not(ancestor::div1)] and not(ancestor::q) and not(.//div1)">
-                <div class="footnotes">
-                    <hr class="fnsep"/>
-                    <xsl:apply-templates mode="footnotes" select=".//note[f:is-footnote(.) and not(ancestor::div1)]"/>
-                </div>
-            </xsl:if>
+            <xsl:call-template name="insert-div0-footnotes"/>
         </div>
     </xsl:template>
 
@@ -128,15 +121,7 @@
     <xsl:template match="div1">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:is-html()">
-            <!-- HACK: Include footnotes in a preceding part of the div0 section here -->
-            <xsl:if test="count(preceding-sibling::div1) = 0 and ancestor::div0">
-                <xsl:if test="..//note[f:is-footnote(.) and not(ancestor::div1)]">
-                    <div class="footnotes">
-                        <hr class="fnsep"/>
-                        <xsl:apply-templates mode="footnotes" select="..//note[f:is-footnote(.) and not(ancestor::div1)]"/>
-                    </div>
-                </xsl:if>
-            </xsl:if>
+            <xsl:call-template name="insert-div0-fragment-footnotes"/>
         </xsl:if>
 
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">

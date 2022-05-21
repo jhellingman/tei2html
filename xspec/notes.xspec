@@ -17,6 +17,70 @@
 
     <!-- footnotes -->
 
+    <x:scenario label="When rendering an footnote element in a div0">
+        <x:context select="//div0">
+            <TEI>
+                <text>
+                    <div0>
+                        <p>Surrounding text<note place="foot" id="n.1">Text of footnote.</note> and more text.</p>
+                    </div0>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote at the end of the div0">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div0 last-child">
+               <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
+               <div class="footnotes">
+                  <hr class="fnsep"/>
+                  <div class="footnote-body">
+                    <div class="fndiv" id="n.1">
+                         <p class="footnote">
+                            <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                         </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering an footnote element in a div0 that also contains a div1 (after the footnote)">
+        <x:context select="//div0">
+            <TEI>
+                <text>
+                    <div0>
+                        <p>Surrounding text<note place="foot" id="n.1">Text of footnote.</note> and more text.</p>
+                        <div1>
+                            <p>Some text in a the lower division.</p>
+                        </div1>
+                    </div0>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in a footnote at before the start of the div1">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div0 last-child">
+                <p id="..." class="first">Surrounding text<a class="noteRef" id="n.1src" href="#n.1">1</a> and more text.</p>
+                <div class="footnotes">
+                    <hr class="fnsep"/>
+                    <div class="footnote-body">
+                        <div class="fndiv" id="n.1">
+                            <p class="footnote">
+                                <span class="fnlabel"><a class="noteRef" href="#n.1src">1</a></span> Text of footnote.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="..." class="div1 last-child">
+                    <div class="divBody">
+                    <p id="..." class="first">Some text in a the lower division.</p>
+                    </div>
+                </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
     <x:scenario label="When rendering an footnote element in a div1">
         <x:context select="//div1">
             <TEI>
