@@ -124,6 +124,8 @@
 
             <xsl:apply-templates select="//publicationStmt/date[f:is-valid(.)]" mode="publicationDate"/>
 
+            <xsl:call-template name="generationDate"/>
+
             <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message(lower-case($language)))"/>
 
             <xsl:apply-templates select="//sourceDesc" mode="colophonSourceDesc"/>
@@ -138,6 +140,11 @@
 
     <xsl:template mode="publicationDate" match="publicationStmt/date">
         <xsl:copy-of select="f:metadata-line(f:message('msgPublicationDate'), .)"/>
+    </xsl:template>
+
+
+    <xsl:template name="generationDate">
+        <xsl:copy-of select="f:metadata-line(f:message('msgGenerationDate'), f:utc-datetime())"/>
     </xsl:template>
 
 

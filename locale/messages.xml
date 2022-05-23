@@ -40,6 +40,7 @@
 
         -->
 
+        <msg:message name="msgGenerationDate">File generation date</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg does not use active external links in its ebooks.</msg:message>
         <msg:message name="msgGutenbergExternalReferencesExplanation">The following URLs are shown purely for information. If so desired, you can copy and paste them into the address-bar of your browser.</msg:message>
 
@@ -1219,6 +1220,7 @@
 
     <msg:messages xml:lang="nl">
 
+        <msg:message name="msgGenerationDate">Aanmaakdatum bestand</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg plaatst geen actieve externe links in haar eboeken.</msg:message>
         <msg:message name="msgGutenbergExternalReferencesExplanation">De volgende URL&apos;s worden puur ter informatie getoond. U kunt ze desgewenst kopiëren en in de adresbalk van uw browser plakken.</msg:message>
 

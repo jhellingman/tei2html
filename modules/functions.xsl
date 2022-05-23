@@ -39,6 +39,12 @@
         <xsl:value-of select="format-dateTime($utc-timestamp, '[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]Z')"/>
     </xsl:function>
 
+    <xsl:function name="f:utc-datetime" as="xs:string">
+        <xsl:variable name="utc-datetime" select="adjust-dateTime-to-timezone(current-dateTime(), xs:dayTimeDuration('PT0H'))"/>
+        <xsl:value-of select="format-dateTime($utc-datetime, '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01] UTC')"/>
+    </xsl:function>
+
+
 
     <xd:doc>
         <xd:short>Determine a string has a valid value.</xd:short>
