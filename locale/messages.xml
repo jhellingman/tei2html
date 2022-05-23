@@ -177,7 +177,7 @@
         <msg:message name="msgEpigraph">Epigraph</msg:message>
         <msg:message name="msgExternalLink">External link</msg:message>
         <msg:message name="msgExternalReferences">External References</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">This Project Gutenberg eBook contains external references. These links may not work for you.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">This eBook contains external references. These links may not work for you.</msg:message>
         <msg:message name="msgFigure">Figure</msg:message>
         <msg:message name="msgFigures">Figures</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
@@ -758,7 +758,7 @@
         <msg:message name="msgDeleted">Retiré</msg:message>
         <msg:message name="msgEncoding">Encodage</msg:message>
         <msg:message name="msgExternalReferences">Références externes</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Cet ebook du Project Gutenberg contient des références externes. Il se peut que les liens ne fonctionnent pas pour vous.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Cet ebook contient des références externes. Il se peut que les liens ne fonctionnent pas pour vous.</msg:message>
         <msg:message name="msgFigure">Figure</msg:message>
         <msg:message name="msgFigures">Figures</msg:message>
         <msg:message name="msgHere">Ici</msg:message>
@@ -974,7 +974,7 @@
         <msg:message name="msgEncoding">Kodierung</msg:message>
         <msg:message name="msgExternalLink">Externe Link</msg:message>
         <msg:message name="msgExternalReferences">Externe Referenzen</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Dieses Project Gutenberg Buch enthält externe Referenzen. Diese Links können möglicherweise für Sie nicht funktionieren.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Dieses Buch enthält externe Referenzen. Diese Links können möglicherweise für Sie nicht funktionieren.</msg:message>
         <msg:message name="msgFigure">Figur</msg:message>
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
@@ -1350,7 +1350,7 @@
         <msg:message name="msgEpigraph">Epigraaf</msg:message>
         <msg:message name="msgExternalLink">Externe link</msg:message>
         <msg:message name="msgExternalReferences">Externe Referenties</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Dit Project Gutenberg eBoek bevat externe referenties. Het kan zijn dat deze links voor u niet werken.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Dit eBoek bevat externe referenties. Het kan zijn dat deze links voor u niet werken.</msg:message>
         <msg:message name="msgFigure">Figuur</msg:message>
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
@@ -1814,7 +1814,7 @@
         <msg:message name="msgExpansion">Uitbreiding</msg:message>
         <msg:message name="msgExternalLink">Eksterne skakel</msg:message>
         <msg:message name="msgExternalReferences">Eksterne verwysings</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Hierdie Project Gutenberg-e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Hierdie e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
         <msg:message name="msgLanguage">Taal</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -1849,7 +1849,7 @@
         <msg:message name="msgExternalLink">Koneksyon ngadto sa gawas</msg:message>
         <msg:message name="msgEncoding">Encoding</msg:message>
         <msg:message name="msgExternalReferences">Reperensya ngadto sa gawas</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Kini nga Projekto Gutenberg eBook nagsulod ug mga reperensya ngadto sa gawas. Kini nga mga koneksiyon posible nga dili molihok.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Kini nga eBook nagsulod ug mga reperensya ngadto sa gawas. Kini nga mga koneksiyon posible nga dili molihok.</msg:message>
         <msg:message name="msgCorrectionsOverview">Listahan sa mga koreksyon sa balasahon.</msg:message>
         <msg:message name="msgDeleted">Gitangtang</msg:message>
         <msg:message name="msgNote">Pahibalo</msg:message>
@@ -1908,7 +1908,7 @@
         <msg:message name="msgEncoding">Pagkaka-enkowd</msg:message>
         <msg:message name="msgRevisionHistory">Tala ng mga Ginawang Pagbabago</msg:message>
         <msg:message name="msgExternalReferences">Mga Di-Nakapaloob na Reperensiya</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Ang elektronikong aklat na ito ng Proyektong Gutenberg ay may mga reperensiyang hindi nakapaloob. Ang mga link para sa mga ito ay maaaring hindi gumana.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Ang elektronikong aklat ay may mga reperensiyang hindi nakapaloob. Ang mga link para sa mga ito ay maaaring hindi gumana.</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Ang mga sumusunod ay ang mga pagwawastong ginawa sa teksto:</msg:message>
         <msg:message name="msgCorrectionsOverview">Buod ng mga pagwawastong ginawa sa teksto.</msg:message>
 
@@ -1936,7 +1936,7 @@
         <msg:message name="msgEncoding">Pagkaka-enkowd</msg:message>
         <msg:message name="msgRevisionHistory">Tala ng mga Ginawang Pagbabago</msg:message>
         <msg:message name="msgExternalReferences">M&gtilde;a Di-Nakapaloób na Reperénsiya</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Ang elektrónikong aklát na itó n&gtilde; Proyektong Gutenberg ay may m&gtilde;a reperénsiyang hindî nakapaloób. Ang m&gtilde;a link para sa m&gtilde;a itó ay maaaring hindî gumana.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Ang elektrónikong aklát ay may m&gtilde;a reperénsiyang hindî nakapaloób. Ang m&gtilde;a link para sa m&gtilde;a itó ay maaaring hindî gumana.</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Ang m&gtilde;a sumúsunód ay ang m&gtilde;a pagwawastóng ginawâ sa teksto:</msg:message>
         <msg:message name="msgCorrectionsOverview">Buód ng m&gtilde;a pagwawastóng ginawâ sa teksto.</msg:message>
         <msg:message name="msgDeleted">Tinanggál</msg:message>
@@ -2052,7 +2052,7 @@
         <msg:message name="msgEncoding">Codificación</msg:message>
         <msg:message name="msgExternalLink">Enlace externo</msg:message>
         <msg:message name="msgExternalReferences">Referencias externas</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Este libro digital de Project Gutenberg contiene referencias externas. Es posible que éstas no funcionen para usted.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Este libro digital contiene referencias externas. Es posible que éstas no funcionen para usted.</msg:message>
         <msg:message name="msgFigure">Figura</msg:message>
         <msg:message name="msgFigures">Figuras</msg:message>
         <msg:message name="msgHere">Aquí</msg:message>
