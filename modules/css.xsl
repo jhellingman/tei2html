@@ -680,7 +680,9 @@
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="css"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css"/>
 
-        <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-handheld"/>
+        <xsl:if test="f:is-epub()">
+            <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-handheld"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -826,13 +828,11 @@
 
     <xd:doc>
         <xd:short>Generate CSS for handheld devices.</xd:short>
-        <xd:detail>Generate CSS for handheld devices: specific usage tailored for Project Gutenberg ePub generation.</xd:detail>
+        <xd:detail>Generate CSS for handheld devices.</xd:detail>
     </xd:doc>
 
     <xsl:template match="text[not(ancestor::q)]" mode="css-handheld">
-        <xsl:text>@media handheld {&lf;</xsl:text>
         <xsl:apply-templates select="*" mode="css-handheld"/>
-        <xsl:text>}&lf;</xsl:text>
     </xsl:template>
 
 

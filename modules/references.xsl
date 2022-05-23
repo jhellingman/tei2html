@@ -148,11 +148,11 @@
             <p>Two stylesheet parameters control the generation of external links.</p>
 
             <ul>
-                <li>Active external links will be put in the output by setting the stylesheet parameter 
-                <code>outputExternalLinks</code> to <code>always</code>. External links can be limited to the generated Colophon 
+                <li>Active external links will be put in the output by setting the stylesheet parameter
+                <code>xref.show</code> to <code>always</code>. External links can be limited to the generated Colophon
                 only by setting this value to <code>colophon</code>.</li>
                 <li>External links will be placed in a table in the colophon (provided a colophon is present) by
-                setting <code>outputExternalLinksTable</code> to <code>true</code>. Here they will be rendered as an URL.
+                setting <code>xref.table</code> to <code>true</code>. Here they will be rendered as an URL.
                 The original link will then link to the table.</li>
             </ul>
 
@@ -167,11 +167,27 @@
     </xsl:template>
 
 
+    <xsl:variable name="allowed-urls" select="tokenize(f:get-setting('xref.exceptions'), ';\s*')"/>
+
+
+    <xsl:function name="f:is-allowed-url" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+        <xsl:sequence select="exists($allowed-urls[starts-with($url, .)])"/>
+    </xsl:function>
+
+
     <xsl:template name="handleExternalReference">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>
-            <xsl:when test="f:is-set('outputExternalLinksTable')">
+            <!-- Exceptions to the no-external link configuration -->
+            <xsl:when test="f:is-allowed-url($url)">
+                <xsl:call-template name="handle-xref">
+                    <xsl:with-param name="url" select="$url"/>
+                </xsl:call-template>
+            </xsl:when>
+
+            <xsl:when test="f:is-set('xref.table')">
                 <xsl:choose>
                     <xsl:when test="//divGen[@type='Colophon']">
                         <a id="{f:generate-id(.)}" href="{f:generate-xref-table-href(.)}">
@@ -184,8 +200,8 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:get-setting('outputExternalLinks') = 'always' 
-                            or (f:get-setting('outputExternalLinks') = 'colophon' and ancestor::teiHeader)">
+            <xsl:when test="f:get-setting('xref.show') = 'always'
+                            or (f:get-setting('xref.show') = 'colophon' and ancestor::teiHeader)">
                 <xsl:call-template name="handle-xref">
                     <xsl:with-param name="url" select="$url"/>
                 </xsl:call-template>

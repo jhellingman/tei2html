@@ -172,9 +172,17 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td><xsl:value-of select="$value"/></td>
             <td>
-                <xsl:if test="f:is-valid($url)">
-                    <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
-                </xsl:if>
+                <xsl:choose>
+                    <xsl:when test="f:is-valid($url) and f:get-setting('xref.show') != 'never' ">
+                        <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
+                    </xsl:when>
+                    <xsl:when test="f:is-valid($url)">
+                        <xsl:value-of select="$urlText"/><xsl:text> </xsl:text><span class="externalUrl"><xsl:value-of select="$url"/></span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$urlText"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </td>
         </tr>
     </xsl:function>
@@ -189,8 +197,11 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:is-valid($url)">
+                    <xsl:when test="f:is-valid($url) and f:get-setting('xref.show') != 'never' ">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$value"/></a>
+                    </xsl:when>
+                    <xsl:when test="f:is-valid($url)">
+                        <xsl:value-of select="$value"/><xsl:text> </xsl:text><span class="externalUrl"><xsl:value-of select="$url"/></span>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$value"/>
@@ -772,12 +783,18 @@
     </xd:doc>
 
     <xsl:template name="externalReferences" expand-text="yes">
-        <xsl:if test="//xref[@url] | /TEI//ref[not(starts-with(@target, '#'))]">
+        <xsl:if test="//xref[not(f:is-allowed-url(@url))] | /TEI//ref[not(starts-with(@target, '#'))]">
             <h3 class="main">{f:message('msgExternalReferences')}</h3>
 
-            <p>{f:message('msgExternalReferencesDisclaimer')}</p>
+            <p>{ if (f:get-setting('xref.show') = 'never')
+                    then f:message('msgGutenbergNoExternalReferences')
+                    else f:message('msgExternalReferencesDisclaimer') }
+               { if (f:is-set('xref.table'))
+                    then f:message('msgGutenbergExternalReferencesExplanation')
+                    else '' }
+            </p>
 
-            <xsl:if test="f:is-set('outputExternalLinksTable')">
+            <xsl:if test="f:is-set('xref.table')">
                 <xsl:call-template name="externalReferenceTable"/>
             </xsl:if>
         </xsl:if>
@@ -794,13 +811,13 @@
     <xsl:template name="externalReferenceTable">
 
         <!-- TODO: make this table also work for P5 href elements -->
-        <xsl:if test="//xref[@url]">
+        <xsl:if test="//xref[not(f:is-allowed-url(@url))]">
             <table class="externalReferenceTable">
                 <tr>
                     <th><xsl:value-of select="f:message('msgPage')"/></th>
                     <th><xsl:value-of select="f:message('msgUrl')"/></th>
                 </tr>
-                <xsl:for-each-group select="//xref[@url]" group-by="@url">
+                <xsl:for-each-group select="//xref[not(f:is-allowed-url(@url))]" group-by="@url">
                     <xsl:sort select="@url"/>
                     <tr>
                         <td>
@@ -816,11 +833,11 @@
                         <td>
                             <xsl:variable name="url" select="f:translate-xref-url(@url, substring(f:get-document-lang(), 1, 2))"/>
                             <xsl:choose>
-                                <xsl:when test="f:get-setting('outputExternalLinks') != 'never'">
+                                <xsl:when test="f:get-setting('xref.show') != 'never'">
                                     <a href="{$url}" class="{f:translate-xref-class(@url)}"><xsl:value-of select="$url"/></a>
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <xsl:value-of select="$url"/>
+                                    <span class="externalUrl"><xsl:value-of select="$url"/></span>
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>

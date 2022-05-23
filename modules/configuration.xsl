@@ -74,8 +74,13 @@
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
-            <outputExternalLinks>always</outputExternalLinks>               <!-- Generate external links, possible values: always | never | colophon -->
-            <outputExternalLinksTable>false</outputExternalLinksTable>      <!-- Place external links in a separate table in the colophon. -->
+            <xref.show>always</xref.show>                                   <!-- Generate external links, possible values: 
+                                                                                 - always:   external links are active at the location in the text
+                                                                                 - never:    external links are not shown (only the anchor text is).
+                                                                                 - colophon: external links are active in the colophon (including in the external links table, if generated).
+                                                                              -->
+            <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
+            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semi-colon separated list of external URLs than can be always be used -->
 
             <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
 
@@ -154,8 +159,8 @@
             </output>
             <output format="epub">
                 <useMouseOverPopups>false</useMouseOverPopups>
-                <outputExternalLinks>always</outputExternalLinks>
-                <outputExternalLinksTable>true</outputExternalLinksTable>
+                <xref.show>always</xref.show>
+                <xref.table>true</xref.table>
 
                 <pageNumbers.show>false</pageNumbers.show>
 

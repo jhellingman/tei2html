@@ -371,6 +371,12 @@ a.noteRef, a.pseudoNoteRef {
     margin-left: 0.1em;
 }
 
+.externalUrl {
+    font-size: small;
+    font-family: monospace;
+    color: gray;
+}
+
 .displayfootnote {
     display: none;
 }
