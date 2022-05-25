@@ -13,7 +13,7 @@ use File::stat;
 use Time::localtime;
 use Getopt::Long;
 
-my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm 
+my $pngout = "pngout.exe";              # see http://advsys.net/ken/util/pngout.htm
 my $optipng = "optipng.exe";            # also https://pngquant.org/ and http://optipng.sourceforge.net/
 my $jpegoptim = "jpegoptim.exe";        # see http://freshmeat.net/projects/jpegoptim/; http://pornel.net/jpegoptim
 my $jpegtran = "jpegtran.exe";          # http://www.kokkonen.net/tjko/projects.html https://github.com/mozilla/mozjpeg
@@ -76,17 +76,18 @@ sub list_recursively($) {
 sub handle_file($) {
     my ($file) = @_;
 
-    if ($maxAgeHours != 0) {
-        my $fileTime = stat($file)->mtime;
-        my $prettyFileTime = ctime($fileTime);
-        my $fileAgeSeconds = time() - $fileTime;
-        if ($fileAgeSeconds > ($maxAgeHours * 3600)) {
-            $verbose or print "----- Skipping file: $file, older than $maxAgeHours hours ($prettyFileTime).\n";
-            return;
-        }
-    }
-
     if ($file =~ m/^(.*)\.(png|jpg|jpeg)$/) {
+
+        if ($maxAgeHours != 0) {
+            my $fileTime = stat($file)->mtime;
+            my $prettyFileTime = ctime($fileTime);
+            my $fileAgeSeconds = time() - $fileTime;
+            if ($fileAgeSeconds > ($maxAgeHours * 3600)) {
+                $verbose and print "----- Skipping file: $file, older than $maxAgeHours hours ($prettyFileTime).\n";
+                return;
+            }
+        }
+
         my $path = $1;
         my $extension = $2;
         my $base = basename($file, '.' . $extension);
@@ -128,13 +129,7 @@ sub handle_file($) {
 }
 
 
-sub main() {
-    ## initial call ... $ARGV[0] is the first command line argument
-    list_recursively($ARGV[0]);
-
-    if (!$verbose) {
-        return;
-    }
+sub report() {
 
     print "Number of images:          $imagesConverted\n";
     if ($errorCount > 0) {
@@ -144,6 +139,21 @@ sub main() {
         print "Original size of images:   $totalOriginalSize bytes\n";
         print "New size of images:        $totalResultSize bytes\n";
         print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
+    }
+}
+
+
+sub main() {
+
+    my $directory = $ARGV[0];
+    if (not defined $directory) {
+        $directory = ".";
+    }
+
+    list_recursively($directory);
+
+    if ($verbose) {
+        report();
     }
 }
 
