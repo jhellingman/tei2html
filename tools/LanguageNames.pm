@@ -95,6 +95,7 @@ BEGIN {
     $langNameHash{"is"}        = "Icelandic";
     $langNameHash{"it"}        = "Italian";
     $langNameHash{"iu"}        = "Inuktitut";
+    $langNameHash{"iu-latn"}   = "Inuktitut (Latin script)";
     $langNameHash{"ja"}        = "Japanese";
     $langNameHash{"ja-hira"}   = "Japanese (Hiragana)";
     $langNameHash{"ja-kana"}   = "Japanese (Katakana)";
@@ -113,7 +114,7 @@ BEGIN {
     $langNameHash{"ku"}        = "Kurdish";
     $langNameHash{"ky"}        = "Kirghiz";
     $langNameHash{"la"}        = "Latin";
-    $langNameHash{"la-x-bio"}  = "Latin (Biological nomenclature)";
+    $langNameHash{"la-x-bio"}  = "Latin (Biological names)";
     $langNameHash{"li"}        = "Limburgish (Limburger)";
     $langNameHash{"ln"}        = "Lingala";
     $langNameHash{"lo"}        = "Laothian";
@@ -237,6 +238,7 @@ BEGIN {
     $langNameHash{"akk-latn"}       = "Akkadian (Latin transcription)";
     $langNameHash{"alq"}            = "Algonquian";
     $langNameHash{"ang"}            = "Old English";
+    $langNameHash{"bnc"}            = "Bontoc";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
     $langNameHash{"brx"}            = "Bodo langauge";
@@ -252,6 +254,7 @@ BEGIN {
     $langNameHash{"grt"}            = "Garo";
     $langNameHash{"haw"}            = "Hawaiian";
     $langNameHash{"hil"}            = "Hiligaynon";
+    $langNameHash{"ibl"}            = "Ibaloi";
     $langNameHash{"ifu"}            = "Ifugao";
     $langNameHash{"ilo"}            = "Ilocano, Iloko or Ilokano";
     $langNameHash{"kam"}            = "Kamba";
@@ -279,6 +282,7 @@ BEGIN {
     $langNameHash{"rue"}            = "Rusyn";
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
     $langNameHash{"tcz"}            = "Thadou";
+    $langNameHash{"tsg"}            = "Tausug";
     $langNameHash{"und"}            = "undetermined language";
     $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
     $langNameHash{"win"}            = "Winnebago";
@@ -289,7 +293,6 @@ BEGIN {
 
 
     # Non standard extensions
-
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
     $langNameHash{"sit-angami"}     = "Angami Naga"; # -> njm
     $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect"; # -> njo
