@@ -187,7 +187,7 @@
                         <xsl:value-of select="$urlText"/><xsl:text> </xsl:text><span class="externalUrl"><xsl:value-of select="$url"/></span>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="$urlText"/>
+                        <!-- show neither url nor urlText. -->
                     </xsl:otherwise>
                 </xsl:choose>
             </td>

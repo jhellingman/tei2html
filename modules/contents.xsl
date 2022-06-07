@@ -509,7 +509,9 @@
 
     <xsl:template name="SubToc">
         <ul>
-            <xsl:apply-templates select="../div2[@type != 'SubToc']" mode="gentoc"/>
+            <xsl:apply-templates select="../div2[@type != 'SubToc']" mode="gentoc">
+                <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
+            </xsl:apply-templates>
         </ul>
     </xsl:template>
 
