@@ -39,7 +39,7 @@ sub main {
         if ($mode == 1) {
 
             # remove initial | and final |\n
-            $line =~ s/\|(.*)\|\n/\1/;
+            $line =~ s/\|(.*)\|\n/$1/;
             my $output = "";
             $output = formatLineOne($line);
             $output .= formatLineTwo($line);

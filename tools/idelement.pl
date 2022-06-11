@@ -21,9 +21,9 @@ GetOptions(
 if ($showHelp == 1) {
     my $help = <<'END_HELP';
 
-fixElement.pl -- give elements ids based on de page they are on and a sequence number.
+idElement.pl -- give elements ids based on de page they are on and a sequence number.
 
-Usage: fixElement.pl [-fnp] <inputfile.tei>
+Usage: idElement.pl [-fnp] <inputfile.tei>
 
 Options:
     f           Force: use a new id, even if an id is already present.

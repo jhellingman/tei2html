@@ -516,8 +516,11 @@
     </xsl:function>
 
     <xsl:function name="f:is-html" as="xs:boolean">
-        <xsl:sequence select="$outputformat = 'html'"/>
+        <xsl:sequence select="$outputformat = ('html', 'html5')"/>
     </xsl:function>
 
+    <xsl:function name="f:is-html5" as="xs:boolean">
+        <xsl:sequence select="$outputformat = 'html5'"/>
+    </xsl:function>
 
 </xsl:stylesheet>

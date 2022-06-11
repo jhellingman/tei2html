@@ -59,6 +59,7 @@ my $kwicWords           = "";
 my $makeEpub            = 0;
 my $makeHeatMap         = 0;
 my $makeHtml            = 0;
+my $makeHtml5           = 0;
 my $makeKwic            = 0;
 my $makeP5              = 0;
 my $makePdf             = 0;
@@ -103,6 +104,7 @@ GetOptions(
     'epubversion=s' => \$epubVersion,
     'heatmap' => \$makeHeatMap,
     'help' => \$showHelp,
+    'html5' => \$makeHtml5,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
     'kwicsort=s' => \$kwicSort,
@@ -314,6 +316,7 @@ sub processFile($) {
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
     $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
+    $makeHtml5 && makeHtml5($basename, $preprocessedXmlFilename);
     $makeEpub && makeEpub($basename, $preprocessedXmlFilename);
     $makePdf  && makePdf($basename,  $preprocessedXmlFilename);
     $makeKwic && makeKwic($basename, $preprocessedXmlFilename);
@@ -526,10 +529,29 @@ sub makeQrCodeAtSize($$) {
 }
 
 
-sub makeHtml($$) {
+sub makeHtml {
     my $basename = shift;
     my $xmlFile = shift;
     my $htmlFile = $basename . '.html';
+    my $xsltFile = 'tei2html.xsl';
+    makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile);
+}
+
+
+sub makeHtml5 {
+    my $basename = shift;
+    my $xmlFile = shift;
+    my $htmlFile = $basename . '-h5.html';
+    my $xsltFile = 'tei2html5.xsl';
+    makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile);
+}
+
+
+sub makeHtmlCommon {
+    my $basename = shift;
+    my $xmlFile = shift;
+    my $htmlFile = shift;
+    my $xsltFile = shift;
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         print "Skip conversion to HTML ($htmlFile newer than $xmlFile).\n";
@@ -539,7 +561,7 @@ sub makeHtml($$) {
     my $tmpFile = temporaryFile('html', '.html');
     my $saxonParameters = determineSaxonParameters();
     print "Create HTML version...\n";
-    system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
+    system ("$saxon $xmlFile $xsldir/$xsltFile $saxonParameters basename=\"$basename\" > $tmpFile");
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
     if ($useTidy != 0) {
         system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
