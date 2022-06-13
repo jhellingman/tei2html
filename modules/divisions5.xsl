@@ -28,24 +28,24 @@
     </xsl:template>
 
     <xsl:template match="front">
-        <section class="front">
+        <div class="front">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </section>
+        </div>
     </xsl:template>
 
     <xsl:template match="body">
-        <section class="body">
+        <div class="body">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </section>
+        </div>
     </xsl:template>
 
     <xsl:template match="back">
-        <section class="back">
+        <div class="back">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </section>
+        </div>
     </xsl:template>
 
 

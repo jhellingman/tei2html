@@ -123,8 +123,7 @@
                     then f:set-class-attribute-with(., 'nestedTable')
                     else f:set-class-attribute(.)"/>
 
-            <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">
+            <xsl:if test="f:add-summary-attribute(@rend)">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>
@@ -146,6 +145,14 @@
             </xsl:choose>
         </table>
     </xsl:template>
+
+
+    <xsl:function name="f:add-summary-attribute" as="xs:boolean">
+        <xsl:param name="rend" as="xs:string?"/>
+
+        <!-- ePub3 and html5 don't like summaries on tables -->
+        <xsl:sequence select="f:has-rend-value($rend, 'summary') and not(f:is-epub()) and not(f:is-html5())"/>
+    </xsl:function>
 
 
     <xd:doc>
@@ -469,8 +476,7 @@
         <table>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
 
-            <!-- ePub3 doesn't like summaries on tables -->
-            <xsl:if test="f:has-rend-value(@rend, 'summary') and not(f:is-epub())">
+            <xsl:if test="f:add-summary-attribute(@rend)">
                 <xsl:attribute name="summary">
                     <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>

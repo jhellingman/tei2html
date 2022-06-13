@@ -553,7 +553,7 @@
 
         <xsl:choose>
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
-            <xsl:when test="@resp = 'm' or @resp = 'p' or not(f:is-set('useMouseOverPopups'))">
+            <xsl:when test="@resp = ('m', 'p') or not(f:is-set('useMouseOverPopups'))">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates select="$corr"/>

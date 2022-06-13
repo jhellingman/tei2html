@@ -114,7 +114,7 @@
     <xsl:template name="colophonMetadata">
         <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
         <table class="colophonMetadata">
-            <xsl:if test="not(f:is-epub())">
+            <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgMetadata')"/></xsl:attribute>
             </xsl:if>
             <!-- Title(s) -->
@@ -309,7 +309,7 @@
         <xsl:if test="//idno[f:is-valid(.)]">
             <h3><xsl:value-of select="if (count(//idno[f:is-valid(.)]) > 1) then f:message('msgCatalogEntries') else f:message('msgCatalogEntry')"/></h3>
             <table class="catalogEntries">
-                <xsl:if test="not(f:is-epub())">
+                <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                     <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCatalogEntries')"/></xsl:attribute>
                 </xsl:if>
                 <xsl:apply-templates select="//idno[@type = 'PGnum'][f:is-valid(.)]" mode="catalogEntries"/>
@@ -507,7 +507,7 @@
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
 
         <table class="correctionTable">
-            <xsl:if test="not(f:is-epub())">
+            <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCorrectionsOverview')"/></xsl:attribute>
             </xsl:if>
             <tr>
@@ -684,7 +684,7 @@
         <p><xsl:value-of select="f:message('msgAbbreviationOverview')"/></p>
 
         <table class="abbreviationtable">
-            <xsl:if test="not(f:is-epub())">
+            <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgAbbreviationOverview')"/></xsl:attribute>
             </xsl:if>
             <tr>

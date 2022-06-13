@@ -309,7 +309,7 @@
         <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
 
         <table>
-            <xsl:if test="f:is-html()">
+            <xsl:if test="f:is-html() and not(f:is-html5())">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
             <xsl:apply-templates mode="gentoc-table" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">

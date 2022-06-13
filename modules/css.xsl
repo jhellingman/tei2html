@@ -87,10 +87,18 @@
         </xd:detail>
     </xd:doc>
 
+
     <xsl:template name="output-embedded-css">
         <xsl:param name="css" as="xs:string"/>
 
-        <xsl:text disable-output-escaping="yes">&lf;&lt;style type="text/css"&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
+        <xsl:choose>
+            <xsl:when test="f:is-html5()">
+                <xsl:text disable-output-escaping="yes">&lf;&lt;style&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text disable-output-escaping="yes">&lf;&lt;style type="text/css"&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:value-of select="$css" disable-output-escaping="yes"/>
         <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ &lt;/style&gt;&lf;</xsl:text>
     </xsl:template>
@@ -341,7 +349,7 @@
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="class" as="xs:string"/>
         <xsl:param name="element" as="xs:string"/>
-    
+
         <xsl:variable name="classes" select="f:extract-class-from-rend-ladder($rend, $element)" as="xs:string"/>
         <xsl:value-of select="contains($classes, $class)"/>
     </xsl:function>
@@ -642,7 +650,7 @@
         <xd:detail>Generate an optional class attribute for an element. This is the result
         of the call to <code>f:generate-class()</code>, with the second argument appended,
         wrapped in an attribute.</xd:detail>
-        <xd:param name="node">The node for which a class attribute is to be generated. 
+        <xd:param name="node">The node for which a class attribute is to be generated.
             This can be empty in a few cases, in which only the second argument is used</xd:param>
         <xd:param name="class">Classes to add to the generated class.</xd:param>
     </xd:doc>
