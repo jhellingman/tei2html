@@ -50,6 +50,14 @@
         </TEI.2>
     </x:param>
 
+    <x:scenario label="When finding the max level for a simple toc">
+        <x:call function="f:find-toc-max-depth">
+            <x:param select="$sample1"/>
+        </x:call>
+        <x:expect label="will return 1" select="1"/>
+    </x:scenario>
+
+
     <!-- divGen -->
 
     <x:scenario label="When rendering a divGen element for a toc">
@@ -60,27 +68,27 @@
                 <table summary="Table of Contents">
                     <tr id="preface.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"/>
                     </tr>
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum" />
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum" />
                     </tr>
                     <tr id="ch3.toc">
                         <td class="tocDivNum">III. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum" />
                     </tr>
                     <tr id="index.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum" />
                     </tr>
                  </table>
@@ -133,27 +141,27 @@
                 <table summary="Table of Contents">
                     <tr id="preface.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
                     </tr>
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                     <tr id="ch3.toc">
                         <td class="tocDivNum">III. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
                     </tr>
                     <tr id="index.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
                     </tr>
                  </table>
@@ -207,28 +215,140 @@
                 <table summary="Table of Contents">
                     <tr id="preface.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#preface">Preface</a></td>
+                        <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
                     </tr>
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                     <tr id="ch3.toc">
                         <td class="tocDivNum">III. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
                     </tr>
                     <tr id="index.toc">
                         <td class="tocDivNum"/>
-                        <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                        <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample4a" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <body>
+                    <pb n="2"/>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                        <div2 id="ch1.1" n="1" type="Section">
+                            <head>Section 1.</head>
+                            <p>The first section ...</p>
+                        </div2>
+                    </div1>
+                </body>
+                <back>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+    <x:scenario label="When finding the max level for a toc with two levels of divs">
+        <x:call function="f:find-toc-max-depth">
+            <x:param select="$sample4a"/>
+        </x:call>
+        <x:expect label="will return 2" select="2"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers, with two levels of divs">
+        <x:context select="$sample4a//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table summary="Table of Contents">
+                    <tr id="ch1.toc">
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr id="ch1.1.toc">
+                        <td/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
+                    </tr>
+                 </table>
+             </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:param name="sample4b" as="document-node(element(TEI.2))" select="self::document-node()">
+        <TEI.2 lang="en">
+            <text>
+                <body>
+                    <pb n="2"/>
+                    <div1 id="ch1" n="I" type="Chapter">
+                        <head>Chapter I.</head>
+                        <p>The first chapter ...</p>
+                        <div2 id="ch1.1" n="1" type="Section">
+                            <head>Section 1.</head>
+                            <p>The first section ...</p>
+                            <div3 id="ch1.1.A" n="A" type="Subsection">
+                                <head>Subsection A.</head>
+                                <p>The first subsection ...</p>
+                            </div3>
+                        </div2>
+                    </div1>
+                </body>
+                <back>
+                    <divGen type="toc" id="toc"/>
+                </back>
+            </text>
+        </TEI.2>
+    </x:param>
+
+    <x:scenario label="When finding the max level for a toc with three levels of divs">
+        <x:call function="f:find-toc-max-depth">
+            <x:param select="$sample4b"/>
+        </x:call>
+        <x:expect label="will return 3" select="3"/>
+    </x:scenario>
+
+    <x:scenario label="When rendering a divGen element for a toc with page-numbers, with three levels of divs">
+        <x:context select="$sample4b//divGen[@id='toc']"/>
+        <x:expect label="will result a generated table of contents">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+                <h2 class="main">Table of Contents</h2>
+                <table summary="Table of Contents">
+                    <tr id="ch1.toc">
+                        <td class="tocDivNum">I. </td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
+                    </tr>
+                    <tr id="ch1.1.toc">
+                        <td/>
+                        <td class="tocDivNum">1. </td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
+                    </tr>
+                    <tr id="ch1.1.A.toc">
+                        <td colspan="2"/>
+                        <td class="tocDivNum">A. </td>
+                        <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
                  </table>
              </div>
@@ -277,6 +397,13 @@
         </TEI.2>
     </x:param>
 
+    <x:scenario label="When finding the max level for a toc with deeply nested numbered divs">
+        <x:call function="f:find-toc-max-depth">
+            <x:param select="$sample4"/>
+        </x:call>
+        <x:expect label="will return 6" select="6"/>
+    </x:scenario>
+
 
     <x:scenario label="When rendering a divGen element for a toc with page-numbers, with deeply nested numbered divs">
         <x:context select="$sample4//divGen[@id='toc']"/>
@@ -286,42 +413,42 @@
                 <table summary="Table of Contents">
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch1.1.toc">
                         <td/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="7"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.toc">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
-                        <td class="tocDivTitle" colspan="6"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.toc">
                         <td colspan="3"/>
                         <td class="tocDivNum">a. </td>
-                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.i.toc">
                         <td colspan="4"/>
                         <td class="tocDivNum">i. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.i.1.toc">
                         <td colspan="5"/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                  </table>
@@ -380,42 +507,42 @@
                 <table summary="Table of Contents">
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch1.1.toc">
                         <td/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="7"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.toc">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
-                        <td class="tocDivTitle" colspan="6"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.toc">
                         <td colspan="3"/>
                         <td class="tocDivNum">a. </td>
-                        <td class="tocDivTitle" colspan="5"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.i.toc">
                         <td colspan="4"/>
                         <td class="tocDivNum">i. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.a.i.1.toc">
                         <td colspan="5"/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="8"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle" colspan="6"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                  </table>
@@ -474,24 +601,24 @@
                 <table summary="Table of Contents">
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch1.1.toc">
                         <td/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.toc">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                  </table>
@@ -550,24 +677,24 @@
                 <table summary="Table of Contents">
                     <tr id="ch1.toc">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch1">Chapter I.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
                     <tr id="ch1.1.toc">
                         <td/>
                         <td class="tocDivNum">1. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch1.1">Section 1.</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
                     <tr id="ch1.1.A.toc">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A">Subsection A.</a></td>
+                        <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
                     <tr id="ch2.toc">
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#ch2">Chapter II.</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
                  </table>

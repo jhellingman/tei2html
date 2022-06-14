@@ -307,22 +307,24 @@
 
     <xsl:template name="toc-body-table">
         <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
+        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
+        <xsl:variable name="maxlevel" select="min((f:find-toc-max-depth($text), $maxlevel))"/>
 
         <table>
             <xsl:if test="f:is-html() and not(f:is-html5())">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
-            <xsl:apply-templates mode="gentoc-table" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
+            <xsl:apply-templates mode="gentoc-table" select="$text/front/div1 | $text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else (/*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)">
+            <xsl:apply-templates mode="gentoc-table" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
+            <xsl:apply-templates mode="gentoc-table" select="($text/back/div1 | $text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
@@ -345,7 +347,9 @@
         <xsl:param name="divGenId" as="xs:string"/>
 
         <!-- Do we want to include this division in the toc? -->
-        <xsl:if test="f:rend-value(@rend, 'display') != 'none' and f:rend-value(@rend, 'toc') != 'none'">
+        <xsl:if test="f:div-level(.) &lt;= $maxlevel and 
+                      f:rend-value(@rend, 'display') != 'none' and 
+                      f:rend-value(@rend, 'toc') != 'none'">
             <xsl:choose>
                 <!-- Do we have a head to display in the toc? -->
                 <xsl:when test="f:has-toc-head(.)">
@@ -355,7 +359,7 @@
                             <xsl:with-param name="curlevel" select="$curlevel"/>
                         </xsl:call-template>
                     </tr>
-                    <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
+                    <xsl:if test="f:contains-div(.) and not(@type='Index')">
                         <xsl:apply-templates select="./div | ./div0 | ./div1 | ./div2 | ./div3 | ./div4 | ./div5 | ./div6" mode="gentoc-table">
                             <xsl:with-param name="maxlevel" select="$maxlevel"/>
                             <xsl:with-param name="curlevel" select="$curlevel + 1"/>
@@ -407,8 +411,8 @@
             </xsl:if>
         </td>
         <td class="tocDivTitle">
-            <xsl:if test="($maxlevel + 1) - $curlevel > 1">
-                <xsl:attribute name="colspan" select="($maxlevel + 1) - $curlevel"/>
+            <xsl:if test="($maxlevel) - $curlevel > 1">
+                <xsl:attribute name="colspan" select="($maxlevel) - $curlevel"/>
             </xsl:if>
             <a href="{f:generate-href(.)}">
                 <xsl:call-template name="generate-single-head"/>
@@ -428,6 +432,31 @@
             </a>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:is-div" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="exists($node[self::div or self::div0 or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div6])"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:find-toc-max-depth" as="xs:integer">
+        <xsl:param name="start"/>
+
+        <xsl:variable name="toc-max-depth">
+            <!-- Find all divisions that do not have further divisions in them -->
+            <xsl:for-each select="$start//*[f:is-div(.)][not(*[f:is-div(.)])]">
+                <!-- Sort by number of divisions they have as ancestor -->
+                <xsl:sort select="count(ancestor::*[f:is-div(.)])" data-type="number" order="descending"/>
+                <!-- Get the number of ancestors for the first one -->
+                <xsl:if test="position() = 1">
+                    <xsl:value-of select="count(ancestor::*[f:is-div(.)]) + 1"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:sequence select="$toc-max-depth"/>
+    </xsl:function>
 
 
     <!--====================================================================-->
