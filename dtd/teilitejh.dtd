@@ -1621,6 +1621,7 @@ table | text)*)))>
      rend CDATA #IMPLIED
      ed CDATA #IMPLIED
      n CDATA #IMPLIED
+     facs CDATA #IMPLIED
      TEIform CDATA "pb" >
 
 <!ELEMENT lb - O EMPTY>
@@ -2707,7 +2708,7 @@ title | ptr | ref | xptr | xref | anchor | s | seg | gi | formula))*)
 <!--  22:  Tables, Formulae, Figures                           -->
 <!--  22.1.1:  Tables                                          -->
 
-<!ELEMENT table - - ((head)*, (column)*, (row)+)>
+<!ELEMENT table - - ((head)*, (column | columnGroup)*, (row)+)>
 
 <!ATTLIST table
      ana IDREFS #IMPLIED
@@ -2730,7 +2731,18 @@ title | ptr | ref | xptr | xref | anchor | s | seg | gi | formula))*)
      pos CDATA #IMPLIED
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
+     cols CDATA #IMPLIED
      TEIform CDATA "column" >
+
+<!ELEMENT columnGroup - - ((column)+)>
+
+<!ATTLIST columnGroup
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     repeat CDATA #REQUIRED
+     TEIform CDATA "columnGroup" >
 
 <!ELEMENT row - O ((cell | table)+)>
 

@@ -1241,6 +1241,12 @@ in all copies or substantial portions of the Software.
     </prefixDef>
 </xsl:template>
 
+<xsl:template match="columngroup">
+    <columnGroup>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </columnGroup>
+</xsl:template>
 
 <!-- Additional attributes -->
 

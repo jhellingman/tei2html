@@ -138,6 +138,29 @@
     </xsl:template>
 
 
+    <xsl:template match="column[@cols]" mode="normalize-table-colspans">
+        <xsl:variable name="column" select="." as="element(column)"/>
+        <xsl:for-each select="1 to @cols">
+            <xsl:copy select="$column">
+                <xsl:copy-of select="@rend"/>
+            </xsl:copy>
+        </xsl:for-each>
+    </xsl:template>
+
+
+    <xsl:template match="columnGroup[@repeat]" mode="normalize-table-colspans">
+        <xsl:variable name="columnGroup" select="." as="element(columnGroup)"/>
+        <xsl:for-each select="1 to @repeat">
+            <xsl:apply-templates select="$columnGroup/*" mode="normalize-table-colspans"/>
+        </xsl:for-each>
+    </xsl:template>
+
+
+    <xsl:template match="columnGroup" mode="normalize-table-colspans">
+        <xsl:apply-templates mode="normalize-table-colspans"/>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Normalize the row-spans in a table.</xd:short>
         <xd:detail>
@@ -489,8 +512,6 @@
 
     <xsl:variable name="number-pattern-period" select="'^\s?(([$]?(\p{Nd}+[,])*\p{Nd}+)(([.]\p{Nd}+)?(\p{No})?)|(\p{No})|([.]\p{Nd}+))\s?$'"/>
     <xsl:variable name="number-pattern-comma"  select="'^\s?(([$]?(\p{Nd}+[.])*\p{Nd}+)(([,]\p{Nd}+)?(\p{No})?)|(\p{No})|([,]\p{Nd}+))\s?$'"/>
-
-
 
 
     <xd:doc>
