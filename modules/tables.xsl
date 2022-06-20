@@ -16,7 +16,9 @@
 
         <p>To accommodate attributes common to all cells in a column, this code
         uses additional <code>column</code> elements not present in the TEI table
-        model.</p>
+        model. (Note: the HTML <code>col</code> element is limited to only a few
+        CSS properties, and cannot be used for general styling; hence we place a class
+        on each relevant cell in generated HTML.)</p>
 
         <p>The formatting of a cell is derived from the <code>@rend</code> attribute on the
         column, and can be overridden by the <code>@rend</code> attribute on the cell itself.
@@ -336,6 +338,7 @@
             <xsl:copy-of select="f:generate-class(.)"/>
         </xsl:for-each>
     </xsl:template>
+
 
     <!-- Find relative postion of cell in table -->
     <xsl:template name="cell-pos-class">

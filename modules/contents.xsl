@@ -64,6 +64,9 @@
     </xsl:template>
 
 
+    <xsl:variable name="toc-excluded" as="xs:string*" select="('Advertisement', 'Advertisements')"/>
+
+
     <xd:doc>
         <xd:short>Generate the table of contents body.</xd:short>
         <xd:detail>
@@ -82,22 +85,23 @@
 
     <xsl:template name="toc-body">
         <xsl:param name="list-element" select="'ul'" as="xs:string"/>
+        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
         <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
 
         <xsl:element name="{$list-element}">
-            <xsl:apply-templates mode="gentoc" select="/*[self::TEI.2 or self::TEI]/text/front/div1 | /*[self::TEI.2 or self::TEI]/text/front/div">
+            <xsl:apply-templates mode="gentoc" select="$text/front/div1 | $text/front/div">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else (/*[self::TEI.2 or self::TEI]/text/body/div1 | /*[self::TEI.2 or self::TEI]/text/body/div)">
+            <xsl:apply-templates mode="gentoc" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="(/*[self::TEI.2 or self::TEI]/text/back/div1 | /*[self::TEI.2 or self::TEI]/text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
+            <xsl:apply-templates mode="gentoc" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
@@ -324,7 +328,7 @@
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="($text/back/div1 | $text/back/div)[not(@type = ('Advertisement', 'Advertisements'))]">
+            <xsl:apply-templates mode="gentoc-table" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
                 <xsl:with-param name="maxlevel" select="$maxlevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
@@ -377,20 +381,6 @@
     </xsl:template>
 
 
-    <xsl:function name="f:included-in-toc" as="xs:boolean">
-        <xsl:param name="div"/>
-        <xsl:param name="maxlevel" as="xs:integer"/>
-
-        <xsl:sequence select="
-                f:rend-value($div/@rend, 'display') != 'none'
-            and f:rend-value($div/@rend, 'toc') != 'none'
-            and f:has-toc-head($div)
-            and f:div-level($div) &lt;= $maxlevel
-            and not($div/@type = ('Advertisement', 'Advertisements'))
-            "/>
-    </xsl:function>
-
-
     <xsl:template name="generate-toc-entry-table">
         <xsl:param name="maxlevel" as="xs:integer"/>
         <xsl:param name="curlevel" as="xs:integer"/>
@@ -425,6 +415,7 @@
         </td>
     </xsl:template>
 
+
     <xsl:template name="insert-toc-page-number-table">
         <xsl:if test="preceding::pb[1]/@n and preceding::pb[1]/@n != ''">
             <a class="pageref" href="{f:generate-href(.)}">
@@ -434,23 +425,65 @@
     </xsl:template>
 
 
-    <xsl:function name="f:is-div" as="xs:boolean">
-        <xsl:param name="node" as="element()"/>
-        <xsl:sequence select="exists($node[self::div or self::div0 or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div6])"/>
+    <xd:doc>
+        <xd:short>Determine an element is actually included in the ToC.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:included-in-toc" as="xs:boolean">
+        <xsl:param name="div" as="element()"/>
+        <xsl:param name="maxlevel" as="xs:integer"/>
+
+        <xsl:sequence select="f:is-toc-div($div) and f:div-level($div) &lt;= $maxlevel"/>
     </xsl:function>
 
+
+    <xd:doc>
+        <xd:short>Determine an element can be included in a ToC.</xd:short>
+        <xd:detail>
+            <p>Determine an element can potentially be included in a table of contents. Verify the following:</p>
+            <ul>
+                <li>The element is a <code>div</code> element.</li>
+                <li>The division has a suitable head to display.</li>
+                <li>The division is not of an excluded type.</li>
+                <li>The division is actually displayed.</li>
+                <li>The division is not explicitly excluded.</li>
+                <li>The division is not a child of an index or quotation.</li>
+                <li>The parent is either a front, body, or back, or itself an element that can be included in the ToC.</li>
+            </ul>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:is-toc-div" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="exists(
+              $node
+                [self::div or self::div0 or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div6]
+                [f:has-toc-head(.)]
+                [not(./@type = $toc-excluded)]
+                [f:rend-value(./@rend, 'display') != 'none']
+                [f:rend-value(./@rend, 'toc') != 'none']
+                [not(ancestor::*/@type = 'Index')]
+                [not(ancestor::q)]
+                [parent::front or parent::body or parent::back or f:is-toc-div(parent::*)]
+            )"/>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Determine the maximum depth of the ToC.</xd:short>
+    </xd:doc>
 
     <xsl:function name="f:find-toc-max-depth" as="xs:integer">
         <xsl:param name="start"/>
 
         <xsl:variable name="toc-max-depth">
             <!-- Find all divisions that do not have further divisions in them -->
-            <xsl:for-each select="$start//*[f:is-div(.)][not(*[f:is-div(.)])]">
+            <xsl:for-each select="$start//*[f:is-toc-div(.)][not(*[f:is-toc-div(.)])]">
                 <!-- Sort by number of divisions they have as ancestor -->
-                <xsl:sort select="count(ancestor::*[f:is-div(.)])" data-type="number" order="descending"/>
+                <xsl:sort select="count(ancestor::*[f:is-toc-div(.)])" data-type="number" order="descending"/>
                 <!-- Get the number of ancestors for the first one -->
                 <xsl:if test="position() = 1">
-                    <xsl:value-of select="count(ancestor::*[f:is-div(.)]) + 1"/>
+                    <xsl:value-of select="count(ancestor::*[f:is-toc-div(.)]) + 1"/>
                 </xsl:if>
             </xsl:for-each>
         </xsl:variable>
@@ -470,13 +503,15 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='toca']">
+        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
+
         <div class="div1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
-            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/front/div1"/>
-            <xsl:apply-templates mode="gentoca" select="if (/*[self::TEI.2 or self::TEI]/text/body/div0) then /*[self::TEI.2 or self::TEI]/text/body/div0 else /*[self::TEI.2 or self::TEI]/text/body/div1"/>
-            <xsl:apply-templates mode="gentoca" select="/*[self::TEI.2 or self::TEI]/text/back/div1[not(@type = ('Advertisement', 'Advertisements'))]"/>
+            <xsl:apply-templates mode="gentoca" select="$text/front/div1"/>
+            <xsl:apply-templates mode="gentoca" select="if ($text/body/div0) then $text/body/div0 else $text/body/div1"/>
+            <xsl:apply-templates mode="gentoca" select="$text/back/div1[not(@type = $toc-excluded)]"/>
         </div>
     </xsl:template>
 

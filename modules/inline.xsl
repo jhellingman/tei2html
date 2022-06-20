@@ -372,7 +372,7 @@
 
     <xd:doc>
         <xd:short>Letterspaced text.</xd:short>
-        <xd:detail>Letterspace (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
+        <xd:detail>Letterspaced (gesperrd) text, indicated with the <code>@rend</code> attribute value <code>ex</code>.</xd:detail>
     </xd:doc>
 
     <xsl:template match="hi[@rend='ex'] | g" mode="#default remove-initial titlePage toc-head">
