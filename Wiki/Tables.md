@@ -3,7 +3,7 @@
 Tables are supported in `tei2html` with the following features:
 
 * cells spanning multiple rows and columns, with the `@rows` and `@cols` attributes.
-* table headers, when rows are marked as `label` or `unit` on the `@type` attribute.
+* table headers, when rows are marked as `label` or `unit` on the `@role` attribute.
 * formatting of borders via predefined CSS classes. The following classes are defined, to be applied (in the `@rend` attribute) on the `table` element:
   * `borderOutside`: the table is surround by a single box. 
   * `verticalBorderInside`: the colums are separated by vertical lines.
