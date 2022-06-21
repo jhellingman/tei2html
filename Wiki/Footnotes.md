@@ -21,7 +21,7 @@ If this is undesired, you can also explicity call for the footnotes to be render
 
 Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text.
 
-Sometimes, multiple footnote references on a page refer to the same footnote. This can be encoded using the `@sameAs` attribute, linking it to the `@id` of the other footnote. This way, multiple references can be made to the same footnote (using the same number). The up-arrow after such a duplicated note will be followed lower-case letters, each linking back to an occurance in the text.
+Sometimes, multiple footnote references on a page refer to the same footnote. This can be encoded using the `@sameAs` attribute, linking it to the `@id` of the referenced footnote. This way, multiple references can be made to the same footnote (using the same number). The up-arrow after such a duplicated note will be followed lower-case letters, each linking back to an instance of the note reference in the text.
 
 If you want to override the automatically assigned note number, you can provide an alternative marker with `@rend="note-marker(*)"`. Note that this will _not_ change the generated number of other notes, that is, the note will still be counted [TODO: fix this].
 
@@ -37,7 +37,7 @@ If you want to override the automatically assigned note number, you can provide 
 
 The top three options will place the note outside the text-block. The cut-in variants will place the note as a floating box inside the text-block of the main text.
 
-Some care is need to prefent marginal notes to overlap each other. Simply don't place them too close to each other. It may help to widen the margin if needed.
+Some care is need to prevent marginal notes to overlap each other. Simply don't place them too close to each other (although that may not be an option when digitizing pre-existing books). It may help to widen the margin if needed.
 
 ## Table notes. ##
 
@@ -54,4 +54,6 @@ You can indicate apparatus notes with `@place="apparatus"`. Notes marked thus wi
 All apparatus notes will be given the same reference symbol (by default a degree sign), which will be used to link the notes with their point of reference.
 
 If you use multiple instances of `<divGen type="apparatus">`, multiple blocks of apparatus notes will be generated, each containing the notes before the block, but after the previously generated block.
+
+TODO: support a better model for apparatus notes, as described in the TEI guidelines.
 
