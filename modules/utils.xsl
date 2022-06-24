@@ -250,16 +250,19 @@
     <xd:doc>
         <xd:short>Generate a lang attribute.</xd:short>
         <xd:detail>Generate a lang attribute. Depending on the output method (HTML or XML),
-        either the <code>lang</code> or the <code>xml:lang</code> attribute will be set on
-        the output element if a lang attribute is present in the source.</xd:detail>
+        either the <code>lang</code> or the <code>xml:lang</code> attribute, or both, will 
+        be set on the output element if a lang attribute is present in the source.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:generate-lang-attribute" as="attribute()?">
+    <xsl:function name="f:generate-lang-attribute" as="attribute()*">
         <xsl:param name="lang" as="xs:string?"/>
 
         <xsl:if test="$lang">
             <xsl:choose>
-                <xsl:when test="$outputmethod = 'xml'">
+                <xsl:when test="$outputmethod = 'xhtml'">
+                    <xsl:if test="f:is-html()">
+                        <xsl:attribute name="lang" select="f:fix-lang($lang)"/>
+                    </xsl:if>
                     <xsl:attribute name="xml:lang" select="f:fix-lang($lang)"/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -516,11 +519,11 @@
     </xsl:function>
 
     <xsl:function name="f:is-html" as="xs:boolean">
-        <xsl:sequence select="$outputformat = ('html', 'html5')"/>
+        <xsl:sequence select="$outputformat = ('html', 'html5', 'xhtml', 'xhtml5')"/>
     </xsl:function>
 
     <xsl:function name="f:is-html5" as="xs:boolean">
-        <xsl:sequence select="$outputformat = 'html5'"/>
+        <xsl:sequence select="$outputformat = ('html5', 'xhtml5')"/>
     </xsl:function>
 
 </xsl:stylesheet>

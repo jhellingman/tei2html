@@ -12,8 +12,7 @@ $text =~ s/<!DOCTYPE\s+html\s+SYSTEM\s+\"about:legacy-compat\">//g;
 
 print $text;
 
-sub slurp($) 
-{
+sub slurp($) {
     my $filename = shift;
     open my $file, '<', $filename or die "Cannot open $filename\n";
     local $/ = undef;

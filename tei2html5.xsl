@@ -8,8 +8,8 @@
     exclude-result-prefixes="xd">
 
     <xd:doc type="stylesheet">
-        <xd:short>TEI stylesheet to convert a TEI document to HTML.</xd:short>
-        <xd:detail>This stylesheet is the main entry point for the TEI to HTML conversion. It contains no
+        <xd:short>TEI stylesheet to convert a TEI document to HTML5.</xd:short>
+        <xd:detail>This stylesheet is the main entry point for the TEI to HTML5 conversion. It contains no
         templates itself, but collects all stylesheets, and sets a number of global variables.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011-2022, Jeroen Hellingman</xd:copyright>
@@ -45,9 +45,10 @@
     <xsl:include href="modules/stripns.xsl"/>
 
     <xsl:output
-        method="html"
-        version="5"
-        encoding="utf-8"/>
+         method="html"
+         version="5"
+         html-version="5"
+         encoding="UTF-8"/>
 
     <!--====================================================================-->
 

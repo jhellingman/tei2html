@@ -42,24 +42,10 @@
         <xsl:text> <!-- insert extra new-line for PG -->
         </xsl:text>
 
-        <html>
+        <html xmlns="http://www.w3.org/1999/xhtml">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-html-header"/>
-
-            <body>
-                <xsl:text> <!-- insert extra new-line for PG -->
-                </xsl:text>
-
-                <xsl:if test="f:is-set('pg.includeHeaders')">
-                    <xsl:call-template name="PGHeader"/>
-                </xsl:if>
-
-                <xsl:apply-templates/>
-
-                <xsl:if test="f:is-set('pg.includeHeaders')">
-                    <xsl:call-template name="PGFooter"/>
-                </xsl:if>
-            </body>
+            <xsl:call-template name="generate-html-body"/>
         </html>
 
         <xsl:text> <!-- insert extra new-line for PG -->
@@ -71,7 +57,7 @@
     <xd:doc>
         <xd:short>Generate the HTML header.</xd:short>
         <xd:detail>
-            <p>Generate the HTML header, including the metadata and the included stylesheets.</p>
+            <p>Generate the HTML header, including metadata and stylesheets.</p>
         </xd:detail>
     </xd:doc>
 
@@ -173,6 +159,29 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Generate the HTML body.</xd:short>
+    </xd:doc>
+
+    <xsl:template name="generate-html-body">
+        <body>
+            <xsl:text> <!-- insert extra new-line for PG -->
+            </xsl:text>
+
+            <xsl:if test="f:is-set('pg.includeHeaders')">
+                <xsl:call-template name="PGHeader"/>
+            </xsl:if>
+
+            <xsl:apply-templates/>
+
+            <xsl:if test="f:is-set('pg.includeHeaders')">
+                <xsl:call-template name="PGFooter"/>
+            </xsl:if>
+        </body>
+    </xsl:template>
+
 
     <!--====================================================================-->
     <!-- TEI Header -->
