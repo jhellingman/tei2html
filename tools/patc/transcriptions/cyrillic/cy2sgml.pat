@@ -8,6 +8,7 @@
 
 "<CY>"      1 "<foreign>"
 "<RU>"      1 "<foreign lang='ru'>"
+"<UK>"		1 "<foreign lang='uk'>"
 "<RUX>"     1 "<foreign lang='ru-1900'>"
 "<RUA>"     1 ""
 
@@ -18,6 +19,7 @@
 
 "</CY>"     0 "</foreign>"
 "</RU>"     0 "</foreign>"
+"</UK>"     0 "</foreign>"
 "</RUX>"    0 "</foreign>"
 "</RUA>"    0 ""
 
