@@ -4,10 +4,15 @@ use warnings;
 
 use Lingua::BO::Wylie;  # Download tool from https://www.thlib.org/reference/transliteration/wyconverter.php
 use HTML::Entities;
+use Getopt::Long;
 
 use SgmlSupport qw/getAttrVal/;
 
 # binmode(STDOUT, ":utf8");
+
+my $DEBUG = 1;
+
+GetOptions('d' => \$DEBUG);
 
 my $wl = new Lingua::BO::Wylie();
 
@@ -28,7 +33,7 @@ sub main {
             my $pbTag = $1;
             my $pbAttrs = $2;
             $pageNumber = getAttrVal('n', $pbAttrs);
-            # print STDERR "Page $pageNumber\n";
+            $DEBUG && print STDERR "Page $pageNumber\n";
         }
     }
 
@@ -43,7 +48,7 @@ sub handleLine($) {
 
 sub convertWylie() {
     my $wylie = shift;
-    # print STDERR "Converting Tibetan: $wylie\n";
+    $DEBUG && print STDERR "Converting Tibetan: $wylie\n";
     my $unicode = $wl->from_wylie($wylie);
     return "<foreign lang=\"bo\">" . encode_entities($unicode) . "</foreign>";
 }
