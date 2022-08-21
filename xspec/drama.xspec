@@ -253,7 +253,7 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in a div, with paragraphs for each line, and stage instruction combined with speaker.">
             <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="sp">
-               <p id="...">
+               <p id="..." class="speaker-with-stage">
                     <span class="speaker">Hamlet</span>
                     <x:text> </x:text>
                     <span id="..." class="stage">(to himself)</span>

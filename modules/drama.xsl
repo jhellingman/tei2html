@@ -424,6 +424,7 @@
     <!-- When a speaker immediately followed by an inline stage instruction, join them together. -->
     <xsl:template match="speaker[f:followed-by-inline-stage(.)]">
         <xsl:element name="{$p.element}">
+            <xsl:copy-of select="f:set-class-attribute-with(., 'speaker-with-stage')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <span>
                 <xsl:copy-of select="f:set-class-attribute-with(., 'speaker')"/>

@@ -189,6 +189,9 @@ sub printHtmlHead() {
         .xref { background-color: #FFFF8C; }
         .code { font-weight: bold; color: gray; display: none; }
 
+        B { color: #c55a1b; }
+        I { color: #0000ff; }
+
         .crossword { border-collapse: collapse; font-size: xx-small; }
         .crossword td { width: 20px; height: 21px; border: 1px solid black; vertical-align: top; }
         .crossword td.black { background-color: black; }
