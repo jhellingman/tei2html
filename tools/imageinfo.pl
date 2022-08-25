@@ -16,8 +16,6 @@ BEGIN {
     }
 }
 
-my $whiteLevel = 10;
-my $stepSize = 10;
 my $stripPath = 0;
 my $dropPath = 0;
 

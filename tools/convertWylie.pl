@@ -29,8 +29,6 @@ sub main {
         print handleLine($_);
 
         if ($_ =~ m/(<pb\b(.*?)>)/) {
-            my $before = $`;
-            my $pbTag = $1;
             my $pbAttrs = $2;
             $pageNumber = getAttrVal('n', $pbAttrs);
             $DEBUG && print STDERR "Page $pageNumber\n";

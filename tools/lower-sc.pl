@@ -14,8 +14,8 @@ while (<INPUTFILE>) {
     while ($remainder =~ /<sc>(.*?)<\/sc>/) {
         print $`;
         $remainder = $';
-        my $smallcaps = decode($encoding, $1);
-        print "<sc>" . lc($smallcaps) . "</sc>";
+        my $smallCaps = decode($encoding, $1);
+        print "<sc>" . lc($smallCaps) . "</sc>";
     }
     print $remainder;
 }

@@ -26,7 +26,7 @@ my $UCwordPattern = "\\b($UCletter)+(([-']|&rsquo;|&apos;)($UCletter)+)*\\b";
 
 while (<INPUTFILE>) {
     my $remainder = $_;
-    while($remainder =~ /($UCwordPattern)/) {
+    while ($remainder =~ /($UCwordPattern)/) {
         print $`;
         $remainder = $';
         my $word = $&;

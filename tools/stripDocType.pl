@@ -5,8 +5,7 @@ use warnings;
 
 sub slurp($);
 
-my $filename = $ARGV[0];
-my $text = slurp($filename);
+my $text = slurp($ARGV[0]);
 
 $text =~ s/<!DOCTYPE\s+html\s+SYSTEM\s+\"about:legacy-compat\">//g;
 

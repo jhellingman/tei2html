@@ -48,7 +48,6 @@ sub listRecursively($) {
 sub handleFile($) {
     my ($file) = @_;
     if ($file =~ m/^(.*)\.tex$/) {
-        my $path = $1;
         my $base = basename($file, '.tex');
         my $dirname = dirname($file);
 

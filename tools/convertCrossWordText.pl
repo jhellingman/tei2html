@@ -79,7 +79,6 @@ sub formatLineTwo {
         } elsif ($cell =~ /[%]+/) {
             $result .= '|/////';
         } elsif ($cell =~ /([0-9]+)/) {
-            my $n = $1;
             $result .= sprintf "| %-4s", $1;
         } else {
             $result .= '|     ';
