@@ -394,9 +394,9 @@
         <msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
-        <!-- Language designations: ID's are based on the official ISO codes -->
+        <!-- Language designations: IDs are based on the official ISO codes -->
 
-        <!-- ISO 639 two letter codes -->
+        <!-- ISO 639 two-letter codes -->
         <msg:message name="aa">Afar</msg:message>
         <msg:message name="ab">Abkhazian</msg:message>
         <msg:message name="af">Afrikaans</msg:message>
@@ -498,8 +498,8 @@
         <msg:message name="pl">Polish</msg:message>
         <msg:message name="ps">Pashto</msg:message>
         <msg:message name="pt">Portuguese</msg:message>
-        <msg:message name="pt-br">Portugese (Brazil)</msg:message>
-        <msg:message name="pt-pt">Portugese (Portugal)</msg:message>
+        <msg:message name="pt-br">Portuguese (Brazil)</msg:message>
+        <msg:message name="pt-pt">Portuguese (Portugal)</msg:message>
         <msg:message name="qu">Quechua</msg:message>
         <msg:message name="rm">Rhaeto-Romance</msg:message>
         <msg:message name="rn">Kirundi</msg:message>

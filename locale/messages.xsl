@@ -1,12 +1,12 @@
 <!DOCTYPE xsl:stylesheet>
 
-<xsl:transform version="1.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="msg xd xhtml">
+<xsl:stylesheet version="1.0"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="msg xd xhtml">
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -33,7 +33,7 @@
 
             <style type="text/css">
 
-                .param { color: red; font-weight: bold; font-family: courier new; }
+                .param { color: red; font-weight: bold; font-family: courier new, monospace; }
                 .missing { background-color: yellow; }
                 table { width: 100%; }
                 th, td { text-align: left; vertical-align: top; }
@@ -126,4 +126,4 @@
     </xsl:template>
 
 
-</xsl:transform>
+</xsl:stylesheet>
