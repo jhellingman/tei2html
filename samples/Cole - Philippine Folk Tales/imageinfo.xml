@@ -1,7 +1,4 @@
 <images xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo">
-<image path="images/book.png" filesize="219" filedate="2018-12-01 13:16:48" width="16px" height="16px"/>
-<image path="images/card.png" filesize="230" filedate="2018-12-01 13:16:48" width="16px" height="11px"/>
-<image path="images/external.png" filesize="151" filedate="2018-11-02 19:19:11" width="12px" height="12px"/>
 <image path="images/front.jpg" filesize="64232" filedate="2018-11-02 19:19:11" width="469px" height="720px"/>
 <image path="images/p026-1.jpg" filesize="59693" filedate="2018-11-02 19:19:11" width="537px" height="332px"/>
 <image path="images/p026-2.jpg" filesize="40832" filedate="2018-11-02 19:19:11" width="536px" height="332px"/>

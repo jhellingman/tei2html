@@ -48,7 +48,7 @@
         <xsl:text>## About This Ebook&lf;&lf;</xsl:text>
 
         <xsl:text>| Field | Value |&lf;</xsl:text>
-        <xsl:text>| ----- | ----- |&lf;</xsl:text>
+        <xsl:text>|-------|-------|&lf;</xsl:text>
         <xsl:apply-templates/>
     </xsl:template>
 

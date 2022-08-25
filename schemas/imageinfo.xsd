@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Created with Liquid XML Studio 1.0.6.0 (http://www.liquid-technologies.com) -->
-<xs:schema xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo" elementFormDefault="qualified" targetNamespace="http://www.gutenberg.ph/2006/schemas/imageinfo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="images" type="Images" />
-  <xs:complexType name="Images">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="image" type="Image" />
-    </xs:sequence>
-    <xs:attribute name="version" type="xs:decimal" />
-  </xs:complexType>
-  <xs:complexType name="Image">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="leftBoundary" type="Boundary" />
-      <xs:element minOccurs="0" maxOccurs="1" name="rightBoundary" type="Boundary" />
-    </xs:sequence>
-    <xs:attribute name="path" type="xs:string" use="required" />
-    <xs:attribute name="filesize" type="xs:integer" />
-    <xs:attribute name="filedate" type="DateTime" />
-    <xs:attribute name="width" type="Dimension" use="required" />
-    <xs:attribute name="height" type="Dimension" use="required" />
-  </xs:complexType>
-  <xs:complexType name="Boundary">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="level" type="xs:integer" />
-        <xs:attribute name="step" type="Dimension" use="required" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:simpleType name="DateTime">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:simpleType name="Dimension">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="\d+px" />
-    </xs:restriction>
-  </xs:simpleType>
+<xs:schema xmlns="http://www.gutenberg.ph/2006/schemas/imageinfo"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.gutenberg.ph/2006/schemas/imageinfo">
+    <xs:element name="images" type="Images"/>
+
+    <xs:complexType name="Images">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="image" type="Image"/>
+        </xs:sequence>
+        <xs:attribute name="version" type="xs:decimal"/>
+    </xs:complexType>
+
+    <xs:complexType name="Image">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="leftBoundary" type="Boundary"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="rightBoundary" type="Boundary"/>
+        </xs:sequence>
+        <xs:attribute name="path" type="xs:string" use="required"/>
+        <xs:attribute name="filesize" type="xs:integer"/>
+        <xs:attribute name="filedate" type="DateTime"/>
+        <xs:attribute name="width" type="Dimension" use="required"/>
+        <xs:attribute name="height" type="Dimension" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Boundary">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="level" type="xs:integer"/>
+                <xs:attribute name="step" type="Dimension" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:simpleType name="DateTime">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Dimension">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d+px"/>
+        </xs:restriction>
+    </xs:simpleType>
+
 </xs:schema>

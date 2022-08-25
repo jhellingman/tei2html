@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Created with Liquid XML Studio 1.0.6.0 (http://www.liquid-technologies.com) -->
-<xs:schema xmlns="http://www.gutenberg.ph/2006/schemas/messages" elementFormDefault="qualified" targetNamespace="http://www.gutenberg.ph/2006/schemas/messages" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="repository" type="Repository" />
-  <xs:complexType name="Repository">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="messages" type="Messages" />
-    </xs:sequence>
-    <xs:attribute name="version" type="xs:decimal" />
-  </xs:complexType>
-  <xs:complexType name="Messages">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="message" type="xs:anyType" />
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" />
-  </xs:complexType>
-  <xs:complexType name="Param">
-    <xs:attribute name="name" type="xs:string" />
-  </xs:complexType>
+<xs:schema
+        xmlns="http://www.gutenberg.ph/2006/schemas/messages"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        targetNamespace="http://www.gutenberg.ph/2006/schemas/messages">
+
+    <xs:element name="repository" type="Repository"/>
+
+    <xs:complexType name="Repository">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="messages" type="Messages"/>
+        </xs:sequence>
+        <xs:attribute name="version" type="xs:decimal"/>
+    </xs:complexType>
+
+    <xs:complexType name="Messages">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="message" type="xs:anyType"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="Param">
+        <xs:attribute name="name" type="xs:string"/>
+    </xs:complexType>
+
 </xs:schema>
