@@ -1,7 +1,7 @@
 <!DOCTYPE xsl:stylesheet>
 <!--
 
-    Stylesheet with various utily templates, to be imported in tei2html.xsl.
+    Stylesheet with various utility templates, to be imported in tei2html.xsl.
 
     Requires: 
         localization.xsl    : templates for localizing strings.
@@ -25,7 +25,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute savely.</xd:short>
+        <xd:short>Generate an href attribute safely.</xd:short>
         <xd:detail>
             <p>For HTML version, same as basic generate-href.</p>
         </xd:detail>

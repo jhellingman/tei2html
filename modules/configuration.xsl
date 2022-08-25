@@ -106,7 +106,7 @@
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->
             <images.scale>1.0</images.scale>                                <!-- Image scale factor: 1.0 is normal size; 0.5 is half size; 2.0 is double size. -->
-            <images.maxSize>100</images.maxSize>                            <!-- Warn if image is large than this number of kilobytes. -->
+            <images.maxSize>100</images.maxSize>                            <!-- Warn if image is larger than this number of kilobytes. -->
             <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels (after applying images.scale). -->
             <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels (after applying images.scale). -->
 
@@ -120,7 +120,7 @@
             <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes> -->
             <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->
 
-            <beta.convert>false</beta.convert>                              <!-- Interprete beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
+            <beta.convert>false</beta.convert>                              <!-- Interpret beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
             <beta.caseSensitive>false</beta.caseSensitive>                  <!-- Beta-code is case sensitive (i.e., not using the * notation for capital letters) -->
 
             <css.stylesheet>style/arctic.css</css.stylesheet>               <!-- Default CSS stylesheet(s) to include; these are distributed with tei2html in the style directory. -->
@@ -138,7 +138,7 @@
             <colophon.showCorrections>true</colophon.showCorrections>       <!-- Show a list of corrections in the colophon. -->
             <colophon.showAbbreviations>true</colophon.showAbbreviations>   <!-- Show a list of abbreviations in the colophon. -->
             <colophon.showExternalReferences>true</colophon.showExternalReferences>   <!-- Show a section on external references in the colophon. -->
-            <colophon.maxCorrectionCount>20</colophon.maxCorrectionCount>   <!-- Maximum number of indentical corrections that will be listed individually in the list of corrections. -->
+            <colophon.maxCorrectionCount>20</colophon.maxCorrectionCount>   <!-- Maximum number of identical corrections that will be listed individually in the list of corrections. -->
 
             <math.decimalSeparator>.</math.decimalSeparator>
             <math.thousandsSeparator>,</math.thousandsSeparator>
