@@ -1,7 +1,7 @@
 
 # CSS stylesheet redesign #
 
-The CSS stylesheets with tei2html have grown over time, and as a result are not very consistent or easy to maintain. To rememdy this, I will redesign them using a more structured approach.
+The CSS stylesheets with tei2html have grown over time, and as a result are not very consistent or easy to maintain. To remedy this, I will redesign them using a more structured approach.
 
 This will involve the following
 

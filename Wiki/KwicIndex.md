@@ -52,7 +52,7 @@ A particularly useful way of generating a kwic is with:
 
 # Having fun with KWIC #
 
-The KWIC little tool already has helped me to locate numerous small issues Project Gutenberg texts that would otherwise have escaped the attention of proof readers. In particular variant spellings of names and consistent usage of hyphenated versus non-hyphenated words are often difficult to catch, while in a KWIC, they simply jump into your face.
+The KWIC little tool already has helped me to locate numerous small issues Project Gutenberg texts that would otherwise have escaped the attention of proofreaders. In particular variant spellings of names and consistent usage of hyphenated versus non-hyphenated words are often difficult to catch, while in a KWIC, they simply jump into your face.
 
 Some issues in texts I've found with this script:
 

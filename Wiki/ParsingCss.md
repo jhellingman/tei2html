@@ -9,7 +9,7 @@ The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is 
   1. tokenize with a simple regular expression based 'lexer'
   1. group things between braces using 'sibling recursion' to match open braces with closing braces.
   1. group properties, based on semicolons.
-  1. determine key-value pairs, based on the semi-colon.
+  1. determine key-value pairs, based on the semicolon.
   1. determine selectors.
   1. clean-up parsing artifacts.
 

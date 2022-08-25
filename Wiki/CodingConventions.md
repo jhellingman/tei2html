@@ -9,7 +9,7 @@ In the TEI domain, the main naming convention is *camelCase*, so for names prima
 
 ## Use of the `@type` attribute ##
 
-The `@type` attribute can indicate a sub-class or special use of a certain element.
+The `@type` attribute can indicate a subclass or special use of a certain element.
 
 ### Special values ###
 

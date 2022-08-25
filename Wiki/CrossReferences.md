@@ -10,7 +10,7 @@ Internal cross-references are to be encoded using the `<ref>` element, with the 
 
 They will be rendered as a superscript number with the actual number replacing the content.
 
-**Page numbers:** When a reference is made to a pagenumber, you can encode these as follows:
+**Page numbers:** When a reference is made to a page-number, you can encode these as follows:
 
 `See page <ref target="pb123" type="pageref">123</note> for details.`
 

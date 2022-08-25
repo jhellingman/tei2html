@@ -19,7 +19,7 @@ Furthermore, the script can generate
   * Colophons
   * Metadata as used in ePub
 
-Tei2Html includes localisation support for English, Dutch, and to a lesser extend German, French, Spanish, Tagalog and Cebuano.
+Tei2Html includes localisation support for English, Dutch, and to a lesser extent German, French, Spanish, Tagalog and Cebuano.
 
 Note, that these scripts partly depend on the use of rend attributes and other TEI conventions. It should not be expected that an arbitrary TEI file renders well with those scripts (although it should render reasonable in any case.)
 

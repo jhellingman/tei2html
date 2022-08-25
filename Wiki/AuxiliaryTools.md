@@ -37,4 +37,4 @@ Issues:
 
 ## `pgpp.pl` ##
 
-Script run initially on the output from PG Distributed Proofreaders, when converting that to TEI (The actual convertion is a manual process, as the resulting output is still very far removed from being an actual TEI file).
+Script run initially on the output from PG Distributed Proofreaders, when converting that to TEI (The actual conversion is a manual process, as the resulting output is still very far removed from being an actual TEI file).

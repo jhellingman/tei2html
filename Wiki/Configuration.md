@@ -1,6 +1,6 @@
 # Introduction #
 
-Currently there are several options to change the generated output. These can be configured by
+Currently, there are several options to change the generated output. These can be configured by
 using a file named `tei2html.config` in which various parameters can be set. If you add such a file to
 the directory where you TEI file is located, the tei2html perl script will automatically pick it up.
 

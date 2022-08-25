@@ -28,7 +28,7 @@ Most of the hard work happens in the creation of the galley file. For this a num
 
 _Change Ids_ To prevent id-clashes, the ids in both source TEI files need to be changed. This is done best by prefixing them with a unique string for each volume.
 
-However, not all ids should be treated as such, as that would break inter-volume cross references. To prevent this, such inter-volume cross references should already have the prefix when they are referred to in other volumes, and the software should be smart enough not to add the prefix once more.
+However, not all ids should be treated as such, as that would break inter-volume cross-references. To prevent this, such inter-volume cross-references should already have the prefix when they are referred to in other volumes, and the software should be smart enough not to add the prefix once more.
 
 Further more, a number of ids have special value to the rendering process, and should be kept verbatim as well. The ids should be preserved (at most once) as-is in one of the source volumes.
 

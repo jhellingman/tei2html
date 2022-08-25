@@ -11,7 +11,7 @@ When generating ePubs, `tei2html` expects the cover image to be indicated in a s
 
 To make this work with the various ePub ebook readers, make this image 600 by 800 pixels, preferably as full color JPG.
 
-When a cover image is missing, a title page image can be used instead, as long as it is encoded following this convention (again, it are the `id`s that matter, not the file names):
+When a cover image is missing, a title page image can be used instead, as long as it is encoded following this convention (again, the `id`s matter, not the file names):
 
 ```
 <div1 id="titlepage" type="Titlepage">

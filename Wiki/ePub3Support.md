@@ -2,7 +2,7 @@
 
 The ePub 3 standard is a broad overhaul of ePub, and adds a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
 
-  * The standard is is here: [ePub 3.0](http://idpf.org/epub/30).
+  * The standard is here: [ePub 3.0](http://idpf.org/epub/30).
   * More details on the [epub-revision project page](http://code.google.com/p/epub-revision/).
   * An extensive [blog post here](http://sigildev.blogspot.com/).
 
