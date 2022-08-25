@@ -62,7 +62,7 @@
         <xd:short>Translate a URL to an HTML title attribute.</xd:short>
         <xd:detail>
             <p>Translate a URL to an HTML title attribute. See the documentation for <code>f:translate-xref-url</code>
-            for short-hand url notations supported. Note that these titles will be localized in the main document language.</p>
+            for shorthand url notations supported. Note that these titles will be localized in the main document language.</p>
         </xd:detail>
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
     </xd:doc>

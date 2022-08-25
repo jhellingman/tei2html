@@ -20,7 +20,7 @@
     <xsl:key name="id" match="*[@id]" use="@id"/>
 
     <!--====================================================================-->
-    <!-- Cross References -->
+    <!-- Cross-References -->
 
     <xd:doc>
         <xd:short>Handle a cross-reference (TEI/P5).</xd:short>

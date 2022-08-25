@@ -259,7 +259,7 @@
 
         <xsl:if test="$lang">
             <xsl:choose>
-                <xsl:when test="$outputmethod = 'xhtml'">
+                <xsl:when test="$outputMethod = 'xhtml'">
                     <xsl:if test="f:is-html()">
                         <xsl:attribute name="lang" select="f:fix-lang($lang)"/>
                     </xsl:if>
@@ -515,15 +515,15 @@
     </xsl:function>
 
     <xsl:function name="f:is-epub" as="xs:boolean">
-        <xsl:sequence select="$outputformat = 'epub'"/>
+        <xsl:sequence select="$outputFormat = 'epub'"/>
     </xsl:function>
 
     <xsl:function name="f:is-html" as="xs:boolean">
-        <xsl:sequence select="$outputformat = ('html', 'html5', 'xhtml', 'xhtml5')"/>
+        <xsl:sequence select="$outputFormat = ('html', 'html5', 'xhtml', 'xhtml5')"/>
     </xsl:function>
 
     <xsl:function name="f:is-html5" as="xs:boolean">
-        <xsl:sequence select="$outputformat = ('html5', 'xhtml5')"/>
+        <xsl:sequence select="$outputFormat = ('html5', 'xhtml5')"/>
     </xsl:function>
 
 </xsl:stylesheet>

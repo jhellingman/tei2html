@@ -15,7 +15,7 @@
     exclude-result-prefixes="f xd xs"
     >
 
-    <xsl:variable name="outputformat" select="markdown"/>
+    <xsl:variable name="outputFormat" select="markdown"/>
 
     <xsl:include href="modules/functions.xsl"/>
     <xsl:include href="modules/log.xsl"/>

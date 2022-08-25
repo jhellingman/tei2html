@@ -57,7 +57,7 @@
     <xsl:include href="modules/segmentize.xsl"/>
     <xsl:include href="modules/numbers.xsl"/>
 
-    <xsl:variable name="outputformat" select="'html'"/>
+    <xsl:variable name="outputFormat" select="'html'"/>
 
     <xsl:variable name="root" select="/"/>
 

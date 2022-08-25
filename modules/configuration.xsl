@@ -244,7 +244,7 @@
 
         <xsl:variable name="specific" as="map(xs:string, xs:string)">
             <xsl:map>
-                <xsl:for-each select="$configuration/output[@format=$outputformat]/*">
+                <xsl:for-each select="$configuration/output[@format=$outputFormat]/*">
                     <xsl:map-entry key="local-name(.)" select="string(.)"/>
                 </xsl:for-each>
             </xsl:map>

@@ -565,7 +565,7 @@
     <xsl:template name="setRunningHeader">
         <xsl:param name="head" select="."/>
 
-        <xsl:if test="$outputformat = 'XXX'">
+        <xsl:if test="$outputFormat = 'XXX'">
             <div class="pagehead">
                 <xsl:value-of select="$head"/>
             </div>

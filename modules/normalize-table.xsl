@@ -29,7 +29,7 @@
         unexpected ways if this is not the case.</p>
 
         <p>The normalizing code is based on sample code found on-line
-        <a href="http://andrewjwelch.com/code/xslt/table/table-normalization.html">here</a>. This has been
+        <a href="https://andrewjwelch.com/code/xslt/table/table-normalization.html">here</a>. This has been
         adjusted to the TEI table model and expanded with code to detect non-rectangular
         tables and to deal with nested tables.</p>
 
