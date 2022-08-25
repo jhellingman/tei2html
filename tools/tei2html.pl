@@ -533,17 +533,19 @@ sub makeHtml {
     my $basename = shift;
     my $xmlFile = shift;
     my $htmlFile = $basename . '.html';
-    my $xsltFile = 'tei2html.xsl';
-    makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile, 'HTML');
+    makeHtmlCommon($basename, $xmlFile, $htmlFile);
 }
 
 
 sub makeHtml5 {
     my $basename = shift;
     my $xmlFile = shift;
-    my $htmlFile = $basename . '-h5.html';
-    my $xsltFile = 'tei2html5.xsl';
-    makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile, 'HTML5');
+    my $htmlFile = $basename . '.html';
+    makeHtmlCommon($basename, $xmlFile, $htmlFile);
+
+    # Use tidy to convert the generated HTML to HTML5.
+    my $html5File = $basename . '-h5.html';
+    system("tidy --output-xml yes --doctype html5 --wrap $pageWidth --quote-nbsp no --quiet yes \"$htmlFile\" > \"$html5File\"");
 }
 
 
@@ -552,17 +554,16 @@ sub makeHtmlCommon {
     my $xmlFile = shift;
     my $htmlFile = shift;
     my $xsltFile = shift;
-    my $format = shift;
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
-        print "Skip conversion to $format ($htmlFile newer than $xmlFile).\n";
+        print "Skip conversion to HTML ($htmlFile newer than $xmlFile).\n";
         return;
     }
 
     my $tmpFile = temporaryFile('html', '.html');
     my $saxonParameters = determineSaxonParameters();
-    print "Create $format version...\n";
-    system ("$saxon $xmlFile $xsldir/$xsltFile $saxonParameters basename=\"$basename\" > $tmpFile");
+    print "Create HTML version...\n";
+    system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
     if ($useTidy != 0) {
         system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
