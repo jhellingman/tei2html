@@ -28,7 +28,7 @@
             </row>
         </table>
       </x:context>
-      <x:expect label="will return no error messages"></x:expect>
+       <x:expect label="will return no error messages"/>
    </x:scenario>
 
    <x:scenario label="When verifying the sums in a table which is incorrect">
@@ -129,7 +129,7 @@
                 </row>
             </table>
         </x:context>
-        <x:expect label="will return no error messages"></x:expect>
+        <x:expect label="will return no error messages"/>
     </x:scenario>
 
 
@@ -150,7 +150,7 @@
             </row>
         </table>
       </x:context>
-      <x:expect label="will return no error messages"></x:expect>
+       <x:expect label="will return no error messages"/>
    </x:scenario>
 
    <x:scenario label="When verifying the sums in a table with decimal columns which is incorrect">

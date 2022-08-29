@@ -52,7 +52,7 @@
                     <div0>
                         <p>Surrounding text<note place="foot" id="n.1">Text of footnote.</note> and more text.</p>
                         <div1>
-                            <p>Some text in a the lower division.</p>
+                            <p>Some text in a lower division.</p>
                         </div1>
                     </div0>
                 </text>
@@ -73,7 +73,7 @@
                 </div>
                 <div id="..." class="div1 last-child">
                     <div class="divBody">
-                    <p id="..." class="first">Some text in a the lower division.</p>
+                    <p id="..." class="first">Some text in a lower division.</p>
                     </div>
                 </div>
             </div>

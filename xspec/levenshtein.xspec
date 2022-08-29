@@ -5,7 +5,7 @@
                stylesheet="../modules/levenshtein.xsl"
                version="3.0">
 
-   <x:scenario label="When determining the levenstein distance between empty strings">
+   <x:scenario label="When determining the levenshtein distance between empty strings">
       <x:call function="f:levenshtein">
          <x:param select="''"/>
          <x:param select="''"/>
@@ -13,7 +13,7 @@
       <x:expect label="will return 0" select="0"/>
    </x:scenario>
 
-   <x:scenario label="When determining the levenstein distance between identical strings">
+   <x:scenario label="When determining the levenshtein distance between identical strings">
       <x:call function="f:levenshtein">
          <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
          <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
@@ -21,7 +21,7 @@
       <x:expect label="will return 0" select="0"/>
    </x:scenario>
 
-   <x:scenario label="When determining the levenstein distance between an empty and a non-empty string">
+   <x:scenario label="When determining the levenshtein distance between an empty and a non-empty string">
       <x:call function="f:levenshtein">
          <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
          <x:param select="''"/>
@@ -29,7 +29,7 @@
       <x:expect label="will return the length of the string" select="24"/>
    </x:scenario>
 
-   <x:scenario label="When determining the levenstein distance between two completely different strings">
+   <x:scenario label="When determining the levenshtein distance between two completely different strings">
       <x:call function="f:levenshtein">
          <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
          <x:param select="'bbbbbbbbbbbbbbbbbbbbbbbb'"/>
@@ -37,7 +37,7 @@
       <x:expect label="will return the sum of the lengths of the string" select="24"/>
    </x:scenario>
 
-   <x:scenario label="When determining the levenstein distance between two strings differing in one place">
+   <x:scenario label="When determining the levenshtein distance between two strings differing in one place">
       <x:call function="f:levenshtein">
          <x:param select="'abababababababababababab'"/>
          <x:param select="'abababababababababababa'"/>
@@ -45,7 +45,7 @@
       <x:expect label="will return 1" select="1"/>
    </x:scenario>
 
-   <x:scenario label="When determining the levenstein distance between two strings differing in one place">
+   <x:scenario label="When determining the levenshtein distance between two strings differing in one place">
       <x:call function="f:levenshtein">
          <x:param select="'aaaaaaaaaaaaaaaaaaaaaaaa'"/>
          <x:param select="'aaaaaaabaaaaaaaaaaaaaaaa'"/>

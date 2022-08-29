@@ -146,7 +146,7 @@
         <x:context>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML parapgraph">
+        <x:expect label="will result in a HTML paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="..."
                class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -158,7 +158,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in two HTML parapgraphs">
+        <x:expect label="will result in two HTML paragraphs">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="..."
                class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -171,7 +171,7 @@
         <x:context>
             <p id="test_p_rend" rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML parapgraph with an additional class">
+        <x:expect label="will result in a HTML paragraph with an additional class">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="test_p_rend"
                class="first test_p_rend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
@@ -205,7 +205,7 @@ text-indent:2em;
         <x:context mode="css">
             <p id="test_p_initial_css" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
+        <x:expect label="will result in a HTML paragraph with an additional class and the first letter enclosed in a span">
 .test_p_initial_css {
 background:url(images/initial-A.png) no-repeat top left;
 padding-top:45px;
@@ -230,7 +230,7 @@ font-size:1px;
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <table><row><cell>First.</cell><cell>Second.</cell></row></table></p>
         </x:context>
-        <x:expect label="will result in two HTML parapgraphs">
+        <x:expect label="will result in two HTML paragraphs">
             <p xmlns="http://www.w3.org/1999/xhtml" id="xd114e1" class="first">...</p>
             <div class="table" id="...">
                 <table>

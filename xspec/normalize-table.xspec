@@ -10,10 +10,10 @@
 
    <!-- table -->
 
-   <x:scenario label="When normalizing a straighforward table">
+   <x:scenario label="When normalizing a straightforward table">
       <x:context mode="normalize-table">
         <table id="simple_table"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
             <column/>
             <column/>
             <column/>
@@ -36,7 +36,7 @@
       </x:context>
       <x:expect label="will return in a table with additional row and cell attributes, indicating the position of the cells">
         <table id="simple_table"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
                rows="3"
                headrows="0"
                cols="3">
@@ -111,7 +111,7 @@
    <x:scenario label="When normalizing a table with all right-most cells spanned">
       <x:context mode="normalize-table">
         <table id="simple_table_extra_spanned_column"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
             <column/>
             <column/>
             <column/>
@@ -135,7 +135,7 @@
       </x:context>
       <x:expect label="will return in a table with additional row and cell attributes, indicating the position of the cells">
         <table id="simple_table_extra_spanned_column"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
                rows="3"
                headrows="0"
                cols="4">
@@ -166,7 +166,7 @@
    <x:scenario label="When normalizing a table with all bottom cells spanned">
       <x:context mode="normalize-table">
         <table id="simple_table_extra_spanned_row"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
             <column/>
             <column/>
             <column/>
@@ -189,7 +189,7 @@
       </x:context>
       <x:expect label="will return in a table with additional row and cell attributes, indicating the position of the cells">
         <table id="simple_table_extra_spanned_row"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
                rows="4"
                headrows="0"
                cols="3">

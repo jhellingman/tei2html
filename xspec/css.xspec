@@ -8,7 +8,6 @@
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-               xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 

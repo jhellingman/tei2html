@@ -29,7 +29,7 @@
 
     <x:scenario label="When rendering a figure element">
         <x:context>
-            <figure id="fig_01"></figure>
+            <figure id="fig_01"/>
         </x:context>
         <x:expect label="will result in an HTML div with img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
@@ -93,7 +93,7 @@
 
     <x:scenario label="When rendering a figure element with explicit dimensions">
         <x:context>
-            <figure id="fig_06" rend="width(24px) height(80px)"></figure>
+            <figure id="fig_06" rend="width(24px) height(80px)"/>
         </x:context>
         <x:expect label="will result in an HTML div with img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_06width fig_06" id="fig_06">
@@ -104,7 +104,8 @@
 
     <x:scenario label="When rendering a figure with an hover overlay">
         <x:context>
-            <figure id="fig_01" rend="hover-overlay(images/fig_02.jpg)"></figure>
+            <figure id="fig_01"
+                    rend="hover-overlay(images/fig_02.jpg)"/>
         </x:context>
         <x:expect label="will result in an HTML div with two img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
@@ -118,7 +119,8 @@
 
     <x:scenario label="When rendering a figure with an hover overlay (CSS-mode)">
         <x:context mode="css">
-            <figure id="fig_01" rend="hover-overlay(images/fig_02.jpg)"></figure>
+            <figure id="fig_01"
+                    rend="hover-overlay(images/fig_02.jpg)"/>
         </x:context>
         <x:expect label="will result relevant CSS to make images swap on hover">
 <x:text>

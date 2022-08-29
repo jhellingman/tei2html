@@ -64,10 +64,9 @@
         </table>
       </x:context>
       <x:expect label="will result in an HTML table">
-        <div xmlns="http://www.w3.org/1999/xhtml"
-             xmlns:f="urn:stylesheet-functions"
-             class="table"
-             id="tableDemoBorders">
+         <div xmlns="http://www.w3.org/1999/xhtml"
+              class="table"
+              id="tableDemoBorders">
            <table class="verticalBorderInside"
                   summary="A small table to demonstrate tables in TEI">
               <thead>
@@ -129,7 +128,7 @@
    <x:scenario label="When rendering a simple table element">
       <x:context>
         <table id="simple_table"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
                rows="3"
                headrows="0"
                cols="3">
@@ -158,7 +157,7 @@
              class="table"
              id="simple_table">
            <table class="verticalBorderInside"
-                  summary="A straighforward table to demonstrate tables in TEI">
+                  summary="A straightforward table to demonstrate tables in TEI">
               <tr id="...">
                  <td id="..." class="cellLeft cellTop">2</td>
                  <td id="..." class="cellTop">7</td>
@@ -238,7 +237,7 @@
    <x:scenario label="When rendering a simple table element in two columns (row-major)">
       <x:context>
         <table id="simple_table_2"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
                rows="3"
                headrows="0"
                cols="3">
@@ -267,7 +266,7 @@
              class="table"
              id="simple_table_2">
            <table class="verticalBorderInside"
-                  summary="A straighforward table to demonstrate tables in TEI">
+                  summary="A straightforward table to demonstrate tables in TEI">
               <tbody>
                  <tr>
                     <td id="..." class="cellLeft cellTop">2</td>
@@ -293,7 +292,7 @@
    <x:scenario label="When rendering a simple table element in two columns (row-major) with headers">
       <x:context>
         <table id="simple_table_2_with_headers"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
                rows="3"
                headrows="0"
                cols="3">
@@ -319,7 +318,7 @@
              class="table"
              id="simple_table_2_with_headers">
            <table class="verticalBorderInside"
-                  summary="A straighforward table to demonstrate tables in TEI">
+                  summary="A straightforward table to demonstrate tables in TEI">
               <thead>
                  <tr class="label">
                     <td id="..." class="cellHeadLeft cellHeadTop cellHeadBottom">First</td>
@@ -347,7 +346,7 @@
    <x:scenario label="When rendering a simple table element in two columns (column-major)">
       <x:context>
         <table id="simple_table_2"
-               rend="summary(A straighforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2) item-order(column-major)"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2) item-order(column-major)"
                rows="3"
                headrows="0"
                cols="3">
@@ -376,7 +375,7 @@
              class="table"
              id="simple_table_2">
            <table class="verticalBorderInside"
-                  summary="A straighforward table to demonstrate tables in TEI">
+                  summary="A straightforward table to demonstrate tables in TEI">
               <tbody>
                  <tr>
                     <td id="..." class="cellLeft cellTop">2</td>

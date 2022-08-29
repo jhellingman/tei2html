@@ -7,7 +7,6 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
-               xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
