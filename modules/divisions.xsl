@@ -1,12 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to convert the main divisions of a TEI file to HTML</xd:short>
@@ -217,7 +216,7 @@
     </xsl:template>
 
     <!--====================================================================-->
-    <!-- unnumbered div (for non explicit levels and P4/P5 compatibility) -->
+    <!-- unnumbered div (for non-explicit levels and P4/P5 compatibility) -->
 
     <xsl:template match="div">
         <xsl:copy-of select="f:show-debug-tags(.)"/>

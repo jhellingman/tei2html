@@ -2,13 +2,12 @@
 <!DOCTYPE xsl:stylesheet>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:epub="http://www.idpf.org/2007/ops"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:epub="http://www.idpf.org/2007/ops"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to create an ePub3 navigation document.</xd:short>
@@ -49,7 +48,7 @@
 
     <xd:doc>
         <xd:short>Create the ePub3 navigation document toc-body.</xd:short>
-        <xd:detail>Create the toc for the navigation document. Currently uses the standard toc-building templates.</xd:detail>
+        <xd:detail>Create the toc for the navigation document. Currently, this uses the standard toc-building templates.</xd:detail>
     </xd:doc>
 
     <!-- http://www.idpf.org/epub/301/spec/epub-contentdocs.html#sec-xhtml-nav-def -->
@@ -91,7 +90,7 @@
 
     <xd:doc>
         <xd:short>Create the ePub3 navigation document landmarks list.</xd:short>
-        <xd:detail>Create the ePub3 navigation document landmarks list. Include the first occurance of each
+        <xd:detail>Create the ePub3 navigation document landmarks list. Include the first occurrence of each
         of the possible categories.</xd:detail>
     </xd:doc>
 

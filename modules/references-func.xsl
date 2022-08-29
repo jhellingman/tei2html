@@ -2,16 +2,14 @@
 
     <!ENTITY rsquo      "&#x2019;">
 
-]><xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:tmp="urn:temporary-nodes"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f tmp map xd xhtml xs">
+]>
+<xsl:stylesheet version="3.0"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Functions to handle cross-references.</xd:short>
@@ -25,7 +23,7 @@
         <xd:short>Translate a URL to an HTML class.</xd:short>
         <xd:detail>
             <p>Translate a URL to an HTML class, so URL dependent styling can be applied. See the documentation for <code>f:translate-xref-url</code>
-            for short-hand url notations supported.</p>
+            for shorthand url notations supported.</p>
         </xd:detail>
         <xd:param name="url" type="string">The URL to be translated.</xd:param>
     </xd:doc>
@@ -105,9 +103,9 @@
     <xd:doc>
         <xd:short>Translate a URL to an HTML href attribute.</xd:short>
         <xd:detail>
-            <p>Translate a URL to a URL that can be used in a HTML href attribute.</p>
+            <p>Translate a URL to a URL that can be used in an HTML href attribute.</p>
 
-            <p>The following short-hand notations are supported:</p>
+            <p>The following shorthand notations are supported:</p>
 
             <table>
                 <tr><th>Shorthand notation</th>                 <th>Description</th></tr>
@@ -116,7 +114,7 @@
                 <tr><td>oclc:<i>[id]</i></td>                   <td>Link to an OCLC (WorldCat) catalog entry.</td></tr>
                 <tr><td>oln:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the item level).</td></tr>
                 <tr><td>olw:<i>[id]</i></td>                    <td>Link to an Open Library catalog entry (at the abstract work level).</td></tr>
-                <tr><td>lccn:<i>[id]</i></td>                   <td>Link to an Library of Congress catalog entry.</td></tr>
+                <tr><td>lccn:<i>[id]</i></td>                   <td>Link to a Library of Congress catalog entry.</td></tr>
                 <tr><td>wp:<i>[string]</i></td>                 <td>Link to a Wikipedia article.</td></tr>
                 <tr><td>tia:<i>[string]</i></td>                <td>Link to an Internet Archive item.</td></tr>
                 <tr><td>loc:<i>[coordinates]</i></td>           <td>Link to a geographical location (currently uses Google Maps).</td></tr>

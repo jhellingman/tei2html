@@ -4,13 +4,12 @@
     <!ENTITY cr         "&#x0D;">
 ]>
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a CSS stylesheet to accompany HTML or ePub output.</xd:short>
@@ -279,7 +278,7 @@
         <xd:detail>
             <p>Convert a rendition element to a CSS rule. For rendition elements without
             a <code>@selector</code> attribute, the <code>@id</code> attribute will be converted
-            to a class selecter. If present, the <code>@scope</code> attribute will be translated
+            to a class selector. If present, the <code>@scope</code> attribute will be translated
             to a CSS pseudo-element.</p>
         </xd:detail>
     </xd:doc>
@@ -552,7 +551,7 @@
     <xd:doc>
         <xd:short>Generate a CSS selector for a rendition ladder.</xd:short>
         <xd:detail>Generate a CSS selector name for a rendition ladder. This is the same value as calculated
-        in <code>f:generate-class-name()</code>, but with periods escaped to accomodate CSS.</xd:detail>
+        in <code>f:generate-class-name()</code>, but with periods escaped to accommodate CSS.</xd:detail>
         <xd:param name="node">The node for which a CSS selector is to be generated.</xd:param>
     </xd:doc>
 
@@ -571,7 +570,7 @@
     <xd:doc>
         <xd:short>Generate a CSS selector for a style.</xd:short>
         <xd:detail>Generate a CSS selector name for a style. This is the same value as calculated
-        in <code>f:generate-style-name()</code>, but with periods escaped to accomodate CSS.</xd:detail>
+        in <code>f:generate-style-name()</code>, but with periods escaped to accommodate CSS.</xd:detail>
         <xd:param name="node">The node for which a CSS selector is to be generated.</xd:param>
     </xd:doc>
 
@@ -780,7 +779,7 @@
     <xd:doc>
         <xd:short>Generate a CSS rule.</xd:short>
         <xd:detail>Generate a CSS rule from a <code>@rend</code> attribute. Using a key on <code>name():@rend</code>, we
-        do so only for the first occurance of a <code>@rend</code> attribute on each element type.</xd:detail>
+        do so only for the first occurrence of a <code>@rend</code> attribute on each element type.</xd:detail>
     </xd:doc>
 
     <xsl:template name="generate-css-rule">
@@ -805,7 +804,7 @@
     <xd:doc>
         <xd:short>Copy a CSS rule.</xd:short>
         <xd:detail>Copy a CSS rule from a <code>@style</code> attribute. Using a key on <code>@style</code>, we
-        do so only for the first occurance of a <code>@style</code> attribute.</xd:detail>
+        do so only for the first occurrence of a <code>@style</code> attribute.</xd:detail>
     </xd:doc>
 
     <xsl:template name="generate-style-rule">
@@ -867,7 +866,7 @@
         <xd:short>Load a CSS stylesheet from resolved URI.</xd:short>
         <xd:detail>
             <p>Get the content of a CSS stylesheet (for example, to embed in an HTML document). This will first check
-            for the presence of the indicated file, and then open it. Handles both plain CSS files as well as CSS files
+            for the presence of the indicated file, and then open it. Handles both plain CSS files and CSS files
             wrapped in a top-level XML element.</p>
         </xd:detail>
         <xd:param name="uri">The (relative) URI of the CSS stylesheet.</xd:param>

@@ -13,10 +13,9 @@
 ]>
 <?xml-stylesheet type="text/xsl" href="messages.xsl"?>
 <msg:repository
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    version="1.0">
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+        version="1.0">
 
     <msg:messages xml:lang="en">
 
@@ -553,7 +552,7 @@
         <msg:message name="zh">Chinese</msg:message>
         <msg:message name="zu">Zulu</msg:message>
 
-        <!-- ISO 639 three letter codes -->
+        <!-- ISO 639 three-letter codes -->
         <msg:message name="bik">Bicolano</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="crb">Chavacano</msg:message>
@@ -830,9 +829,9 @@
         <msg:message name="fmtFullDate"><msg:param name="day"/> <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
 
-        <!-- Language designations: ID's are based on the official ISO codes -->
+        <!-- Language designations: IDs are based on the official ISO codes -->
 
-        <!-- ISO 639 two letter codes -->
+        <!-- ISO 639 two-letter codes -->
         <msg:message name="de">Allemand</msg:message>
         <msg:message name="el">Grec</msg:message>
         <msg:message name="en">Anglais</msg:message>
@@ -851,11 +850,11 @@
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinois</msg:message>
 
-        <!-- ISO 639 three letter codes -->
+        <!-- ISO 639 three-letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="grc">Grec (Ancien)</msg:message>
 
-        <!-- Private extentions -->
+        <!-- Private extensions -->
         <msg:message name="nl-1900">Néerlandais (Ancienne orthographe)</msg:message>
 
 
@@ -1559,7 +1558,7 @@
 
         <msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> <msg:param name="month"/> <msg:param name="year"/></msg:message>
 
-        <!-- Language designations: ID's are based on the official ISO codes -->
+        <!-- Language designations: IDs are based on the official ISO codes -->
 
         <msg:message name="aa">Afar</msg:message>
         <msg:message name="ab">Abchazisch</msg:message>
@@ -2139,7 +2138,7 @@
 
         <msg:message name="fmtFullDate"><msg:param name="day"/>, <msg:param name="date"/> de <msg:param name="month"/> de <msg:param name="year"/></msg:message>
 
-        <!-- ISO 639 two letter codes -->
+        <!-- ISO 639 two-letter codes -->
         <!-- IFG Note in Spanish language names are lowercase -->
         <msg:message name="de">Alemán</msg:message>
         <msg:message name="el">Griego</msg:message>
@@ -2162,7 +2161,7 @@
         <msg:message name="tl">Tagalo</msg:message>
         <msg:message name="zh">Chino</msg:message>
 
-        <!-- ISO 639 three letter codes -->
+        <!-- ISO 639 three-letter codes -->
         <msg:message name="ceb">Cebuano</msg:message>
 
 

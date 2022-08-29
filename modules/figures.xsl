@@ -5,14 +5,13 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f img xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f img xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to handle figures.</xd:short>
@@ -200,7 +199,7 @@
     <xd:doc>
         <xd:short>Generate an image tag.</xd:short>
         <xd:detail>
-            <p>Generate the actual <code>img</code>-element for the output HTML. This will look-up the height and
+            <p>Generate the actual <code>img</code>-element for the output HTML. This will look up the height and
             width of the image in the imageinfo, and set the <code>height</code> and <code>width</code> attributes
             if found. If a dimension is explicitly given in the <code>rend</code> parameter, it will override the 
             value in the imageinfo file. The <code>alt</code> attribute is filled if present.</p>
@@ -263,7 +262,7 @@
             an HTML wrapper for (mostly large) images linked to from a smaller image using
             <code>link()</code> in the <code>@rend</code> attribute.</p>
         </xd:detail>
-        <xd:param name="imagefile" type="string">The name of the image file (may be left empty).</xd:param>
+        <xd:param name="imagefile" type="string">The name of the image file (this parameter may be left empty).</xd:param>
     </xd:doc>
 
     <xsl:template name="generate-image-wrapper">

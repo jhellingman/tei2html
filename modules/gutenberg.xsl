@@ -17,13 +17,11 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml msg">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to output Project Gutenberg related information.</xd:short>

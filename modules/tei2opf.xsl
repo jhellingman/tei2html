@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-    <xsl:stylesheet version="2.0"
-        xmlns="http://www.idpf.org/2007/opf"
-        xmlns:dc="http://purl.org/dc/elements/1.1/"
-        xmlns:dcterms="http://purl.org/dc/terms/"
-        xmlns:opf="http://www.idpf.org/2007/opf"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:smil="http://www.w3.org/ns/SMIL"
-        xmlns:f="urn:stylesheet-functions"
-        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
-        exclude-result-prefixes="f xd xs smil img">
+<xsl:stylesheet version="2.0"
+                xmlns="http://www.idpf.org/2007/opf"
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:dcterms="http://purl.org/dc/terms/"
+                xmlns:opf="http://www.idpf.org/2007/opf"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:smil="http://www.w3.org/ns/SMIL"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
+                exclude-result-prefixes="f xd xs smil img">
 
 
     <xd:doc type="stylesheet">

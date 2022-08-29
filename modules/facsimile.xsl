@@ -1,13 +1,12 @@
 <!DOCTYPE xsl:stylesheet>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to create digital facsimile versions of TEI documents.</xd:short>
@@ -375,7 +374,7 @@
 
 <xd:doc>
     <xd:short>Create bread-crumb navigation for a node.</xd:short>
-    <xd:detail>Create bread-crumb navigation for the the given node (and related pb-element, which may or may not be the same
+    <xd:detail>Create bread-crumb navigation for the given node (and related pb-element, which may or may not be the same
     element. The bread-crumbs will contain all ancestor div-elements, and the front, body, or back matter.</xd:detail>
 </xd:doc>
 

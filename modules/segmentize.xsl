@@ -1,15 +1,13 @@
 <xsl:stylesheet version="3.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:fn="http://www.w3.org/2005/xpath-functions"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:s="http://gutenberg.ph/segments"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs s">
+                xmlns:s="http://gutenberg.ph/segments"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                exclude-result-prefixes="s xd xs">
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to segmentize a TEI document</xd:short>
-        <xd:detail>This stylesheet segmentizes a TEI document. This means that paragraphs, lines, and other
+        <xd:short>Stylesheet to split a TEI document into segments</xd:short>
+        <xd:detail>This stylesheet split a TEI document into segments. This means that paragraphs, lines, and other
         elements are placed within a simpler structure of meaningful contexts, that can be used for
         analysis.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
@@ -28,7 +26,7 @@
     </xd:doc>
 
     <xd:doc>
-        <xd:short>Segmentize a text</xd:short>
+        <xd:short>Split a text into segments</xd:short>
         <xd:detail>Split a text into segments, in two steps:
         <ol>
             <li>Collect all segments in the document, to provide meaningful contexts.</li>
@@ -157,7 +155,7 @@
 
     <xd:doc>
         <xd:short>Ignore forms work elements.</xd:short>
-        <xd:detail>Ignore forms work elements. These are typically running headers, and should be handled seperately (TODO).</xd:detail>
+        <xd:detail>Ignore forms work elements. These are typically running headers, and should be handled separately (TODO).</xd:detail>
     </xd:doc>
 
     <xsl:template mode="segments" match="fw"/>

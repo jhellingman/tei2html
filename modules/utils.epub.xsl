@@ -17,10 +17,10 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute savely.</xd:short>
+        <xd:short>Generate an href attribute safely.</xd:short>
         <xd:detail>
-            <p>This function generates a href to the appropriate file, depening on where in the
-            source file the element references to appears.</p>
+            <p>This function generates a href to the appropriate file, depending on where in the
+            source file the element referenced appears.</p>
         </xd:detail>
     </xd:doc>
 

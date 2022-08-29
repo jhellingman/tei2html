@@ -30,10 +30,9 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="urn:stylesheet-functions"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+    exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Templates for inline text elements</xd:short>
@@ -131,7 +130,7 @@
         <ol>
             <li>The hyphen should be removed and any white-space closed up to form a single word (e.g. re-|moved becomes removed).</li>
             <li>The hyphen should stay but white-space closed up to form a word with a hyphen (e.g. well-|known person becomes well-known person).</li>
-            <li>The hyphen should stay as well as the white-space, to form a word of which a part is ellided (e.g. three-|or fourfold becomes three- or fourfold).</li>
+            <li>The hyphen should stay as well as the white-space, to form a word of which a part is elided (e.g. three-|or fourfold becomes three- or fourfold).</li>
         </ol>
 
         <p>This code handles the first three cases. For the last case, you need to take care to keep a space, e.g. three- |or fourfold.</p>
@@ -1175,6 +1174,5 @@
     <xsl:template match="choice[corr]" mode="stripCorrElements">
         <xsl:apply-templates select="corr" mode="stripCorrElements"/>
     </xsl:template>
-
 
 </xsl:stylesheet>

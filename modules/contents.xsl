@@ -5,15 +5,13 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:tmp="urn:temporary-nodes"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xi="http://www.w3.org/2001/XInclude"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f tmp xd xi xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xi="http://www.w3.org/2001/XInclude"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xi xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate tables of contents.</xd:short>
@@ -80,7 +78,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate the table of contents body (as a HTML list, OBSOLETE).</xd:short>
+        <xd:short>Generate the table of contents body (as an HTML list, OBSOLETE).</xd:short>
     </xd:doc>
 
     <xsl:template name="toc-body">
@@ -111,7 +109,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an entry in the table of contents (as a HTML list, OBSOLETE).</xd:short>
+        <xd:short>Generate an entry in the table of contents (as an HTML list, OBSOLETE).</xd:short>
         <xd:detail>
             <p>Generate an entry for a division in the table of contents, and recursively generate lines for the underlying divisions.</p>
         </xd:detail>
@@ -711,8 +709,8 @@
                 &lt;/list&gt;
             </pre>
 
-            <p>This will result in a HTML table, in which the item numbers are placed in cells on the left, the items themselves in
-            spanned cells in the middle (made to span less columns as they are part of deeply nested items) and the page numbers
+            <p>This will result in an HTML table, in which the item numbers are placed in cells on the left, the items themselves in
+            spanned cells in the middle (made to span fewer columns as they are part of deeply nested items) and the page numbers
             in a cell on the right.</p>
         </xd:detail>
     </xd:doc>
@@ -788,8 +786,8 @@
                 &lt;/list&gt;
             </pre>
 
-            <p>This will result in a HTML table, in which the item numbers are placed in cells on the left, the items themselves in
-            spanned cells to the right (made to span less columns as they are part of deeply nested items) together with the
+            <p>This will result in an HTML table, in which the item numbers are placed in cells on the left, the items themselves in
+            spanned cells to the right (made to span fewer columns as they are part of deeply nested items) together with the
             determinations, such that the latter are set flush-right, and won't collide (using an inner table).</p>
         </xd:detail>
     </xd:doc>

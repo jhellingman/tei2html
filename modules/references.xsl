@@ -1,12 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Templates to handle cross-references.</xd:short>
@@ -152,7 +151,7 @@
                 <code>xref.show</code> to <code>always</code>. External links can be limited to the generated Colophon
                 only by setting this value to <code>colophon</code>.</li>
                 <li>External links will be placed in a table in the colophon (provided a colophon is present) by
-                setting <code>xref.table</code> to <code>true</code>. Here they will be rendered as an URL.
+                setting <code>xref.table</code> to <code>true</code>. Here they will be rendered as a URL.
                 The original link will then link to the table.</li>
             </ul>
 

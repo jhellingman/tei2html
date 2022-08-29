@@ -4,7 +4,6 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 exclude-result-prefixes="msg xd xhtml">
 
@@ -46,7 +45,7 @@
                 <tr>
                     <th width="20%">Message ID</th>
                     <th width="30%">Message in <xsl:value-of select="//msg:message[@name=$srclang and lang('en')]"/></th>
-                    <th widht="50%">Disambiguation</th>
+                    <th width="50%">Disambiguation</th>
                 </tr>
                 <xsl:apply-templates select="//msg:message" mode="missing"/>
             </table>

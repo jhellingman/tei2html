@@ -22,16 +22,14 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:tmp="urn:temporary"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f map msg tmp xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+                xmlns:tmp="urn:temporary"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f map tmp xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to format block-level elements, to be imported in tei2html.xsl.</xd:short>
@@ -347,7 +345,7 @@
             assume that all characters are encoded (instead of replaced by mark-up), we do little with those elements.</p>
 
             <p>In my convention, I often use <code>q</code>-element to set off content that wouldn't fit in the TEI content-model
-            otherwise. Typically these are lines of verse in footnotes. In that case it makes sense to use an HTML
+            otherwise. Typically, these are lines of verse in footnotes. In that case it makes sense to use an HTML
             <code>div</code>.</p>
             
             <p>Other conventions use the <code>q</code>-element to replace quotation marks, in which case it makes sense to 
@@ -648,7 +646,7 @@
                 <li>We set the padding-top to a value such that the initial actually appears
                 to stick over the paragraph.</li>
                 <li>We set the initial as background picture to the float, such that if the
-                paragraph is to small to contain the entire initial, the float will. We
+                paragraph is too small to contain the entire initial, the float will. We
                 need to take care to adjust the background position to match the
                 padding-top, such that the two background images will align exactly.</li>
                 <li>We need to remove the initial letter from the paragraph, and render it in
@@ -667,7 +665,7 @@
             </table>
 
             <p>In some rendering engines, these tricks do not yield the desired results,
-            so we fall-back to a more robust method, using an floating image.</p>
+            so we fall back to a more robust method, using a floating image.</p>
         </xd:detail>
     </xd:doc>
 

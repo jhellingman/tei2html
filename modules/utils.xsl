@@ -276,7 +276,7 @@
     <xd:doc>
         <xd:short>Normalize a language attribute.</xd:short>
         <xd:detail>Normalize language attributes used in the output to match
-        valid language codes (see http://tools.ietf.org/html/rfc5646).</xd:detail>
+        valid language codes (see https://tools.ietf.org/html/rfc5646).</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:fix-lang" as="xs:string">
@@ -375,8 +375,8 @@
         <xd:short>List of contributor roles and related OPF-codes and message ids.</xd:short>
         <xd:detail>
             <p>The list used was taken from the OPF Standard, 2.0, section 2.2.6
-            [http://www.openebook.org/2007/opf/OPF_2.0_final_spec.html], which in turn was derived from the
-            MARC Code List for Relators [http://www.loc.gov/marc/relators/relaterm.html] and extended.</p>
+            [https://www.openebook.org/2007/opf/OPF_2.0_final_spec.html], which in turn was derived from the
+            MARC Code List for Relators [https://www.loc.gov/marc/relators/relaterm.html] and extended.</p>
         </xd:detail>
     </xd:doc>
 

@@ -14,13 +14,12 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:map="http://www.w3.org/2005/xpath-functions/map"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to handle configurations.</xd:short>
@@ -80,7 +79,7 @@
                                                                                  - colophon: external links are active in the colophon (including in the external links table, if generated).
                                                                               -->
             <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
-            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semi-colon separated list of external URLs than can be always be used -->
+            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used -->
 
             <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
 

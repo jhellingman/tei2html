@@ -1,13 +1,12 @@
 <!DOCTYPE xsl:stylesheet>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to format lists, to be imported in tei2html.xsl.</xd:short>
@@ -180,7 +179,7 @@
 
     <xd:doc>
         <xd:short>Format a list item as a table cell.</xd:short>
-        <xd:detail>Format a a list item as a table cell (used when formatting lists in multiple columns, using tables).</xd:detail>
+        <xd:detail>Format a list item as a table cell (used when formatting lists in multiple columns, using tables).</xd:detail>
     </xd:doc>
 
     <xsl:template match="item" mode="listitem-as-tablecell">

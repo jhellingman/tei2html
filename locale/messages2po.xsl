@@ -30,7 +30,7 @@ msgstr ""
 </xsl:text>
 
         <xsl:apply-templates select="//msg:message">
-            <xsl:sort select="@name" order="ascending"/>
+            <xsl:sort select="@name"/>
         </xsl:apply-templates>
     </xsl:template>
 

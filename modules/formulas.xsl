@@ -9,14 +9,13 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:svg="http://www.w3.org/2000/svg"
-    exclude-result-prefixes="f xd xhtml xs svg">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:svg="http://www.w3.org/2000/svg"
+                exclude-result-prefixes="f xd xs svg">
 
     <xd:doc type="stylesheet">
         <xd:short>Templates for mathematical formulas</xd:short>
@@ -36,7 +35,7 @@
             <code>tei2html</code>: one to output the TeX formula in a small file. Then, after generating
             the matching MathML or SVG files, another run to include those generated files in the output.
             Care is taken to export identical formulas only once, re-using the same file for subsequent
-            occurances of the same formula.</p>
+            occurrences of the same formula.</p>
         </xd:detail>
     </xd:doc>
 

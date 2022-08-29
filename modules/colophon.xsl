@@ -6,16 +6,14 @@
 
 ]>
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
-    xmlns:tmp="urn:temporary"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f msg img tmp xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:img="http://www.gutenberg.ph/2006/schemas/imageinfo"
+                xmlns:tmp="urn:temporary"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f img tmp xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a colophon.</xd:short>
@@ -300,7 +298,7 @@
     <xd:doc>
         <xd:short>Generate links to catalog entries.</xd:short>
         <xd:detail>
-            <p>Depending on the presence of various types of <code>idno</code> elements, corresponding links to the relevant sites will be created. Currently
+            <p>Depending on the presence of various types of <code>idno</code> elements, corresponding links to the relevant sites will be created. Currently,
             understood are IDs pointing to Project Gutenberg, the Library of Congress, WorldCat, Open Library and LibraryThing.</p>
         </xd:detail>
     </xd:doc>
@@ -346,7 +344,7 @@
 
 
     <xsl:template mode="catalogEntries" match="idno[@type='VIAF']">
-        <xsl:copy-of select="f:catalog-entry-line(f:message('msgVirtualInternationalAuthorityFile'), 'http://viaf.org/viaf/' || ., .)"/>
+        <xsl:copy-of select="f:catalog-entry-line(f:message('msgVirtualInternationalAuthorityFile'), 'https://viaf.org/viaf/' || ., .)"/>
     </xsl:template>
 
 
@@ -414,7 +412,7 @@
 
 
     <xsl:template mode="catalogReferences" match="idno[@type='VIAF']">
-        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., 'http://viaf.org/viaf/' || .)"/>
+        <xsl:copy-of select="f:metadata-line-as-url(f:message('msgViaf'), ., 'https://viaf.org/viaf/' || .)"/>
     </xsl:template>
 
 
@@ -623,7 +621,7 @@
     <xd:doc>
         <xd:short>Convert a correction in a <code>tmp:choice</code> element to a temporary choice element.</xd:short>
 
-        <xd:detail>Ignore corrections nested inside <code>reg[@type='trans']</code> elements, as those will not displayed
+        <xd:detail>Ignore corrections nested inside <code>reg[@type='trans']</code> elements, as those will not be displayed
         in the output, and thus cannot be referenced.</xd:detail>
     </xd:doc>
 
@@ -710,7 +708,7 @@
             </xsl:variable>
 
             <xsl:for-each-group select="$abbreviations/tmp:choice" group-by="tmp:abbr || '@@@' || tmp:expan">
-                <xsl:sort select="lower-case(tmp:abbr)" data-type="text" order="ascending"/>
+                <xsl:sort select="lower-case(tmp:abbr)"/>
                 <tr>
                     <td class="bottom">
                         <xsl:apply-templates select="tmp:abbr"/>

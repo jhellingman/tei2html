@@ -6,15 +6,14 @@
 ]>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:tmp="urn:temporary"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:epub="http://www.idpf.org/2007/ops"
-    exclude-result-prefixes="epub f tmp xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:tmp="urn:temporary"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:epub="http://www.idpf.org/2007/ops"
+                exclude-result-prefixes="epub f tmp xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to handle notes.</xd:short>
@@ -136,7 +135,7 @@
         <xd:short>Handle footnotes inside collected apparatus material.</xd:short>
         <xd:detail>When footnotes appear nested inside apparatus nodes, and we collect the apparatus
         notes into a single block, the <code>note</code> elements are no longer rooted under the <code>TEI</code>
-        element, so the above templates will not match them. This templates resolves that.</xd:detail>
+        element, so the above templates will not match them. These templates resolve that.</xd:detail>
     </xd:doc>
 
     <xsl:template match="tmp:span//note[f:is-footnote(.)]">
@@ -766,14 +765,14 @@
 
     <xd:doc>
         <xd:short>Format apparatus notes as a single block.</xd:short>
-        <xd:detail><p>Format apparatus notes as a single block. A complicating factor here is that some of the notes do contain
+        <xd:detail><p>Format apparatus notes as a single block. A complicating factor here is that some notes do contain
         paragraphs, and we want to preserve those paragraph breaks, having a multi-paragraph note following the preceding note
         on the same line, start a new line for the following paragraphs of that note, and then have the following note follow the
         last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list,
         indicating where the paragraph breaks should remain, and then group them back into paragraphs.</p>
 
         <p>As part of this action, we copy elements into a temporary structure, which we also use to retain the ids of the
-        original notes, so cross references can be resolved.</p></xd:detail>
+        original notes, so cross-references can be resolved.</p></xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-apparatus-notes-block">

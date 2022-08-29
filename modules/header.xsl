@@ -1,13 +1,11 @@
 <!DOCTYPE xsl:stylesheet>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to format the HTML header.</xd:short>
@@ -99,8 +97,7 @@
         </xsl:if>
 
         <!-- Insert Dublin Core metadata -->
-        <link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/"/> <!-- WAS: http://purl.org/DC/elements/1.0/ -->
-
+        <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
         <meta name="DC.Creator" content="{$author}"/>
         <meta name="DC.Title" content="{$title}"/>
         <xsl:if test="f:is-valid($pubdate)">
