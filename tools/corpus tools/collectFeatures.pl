@@ -2,7 +2,7 @@
 #
 # This tool collects features that help discriminate easily confused or mixed up words (words in a confusion set),
 # The confusion may have a number of causes. The direct inspiration for this tool is to detect
-# words mis-recognized by OCR software. Eexamples are {he, be} or {cat, eat}, where very similar letters
+# words mis-recognized by OCR software. Examples are {he, be} or {cat, eat}, where very similar letters
 # are mis-recognized, leading to another valid word. Such confusions are not detected by a standard spell
 # check.
 #

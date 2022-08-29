@@ -47,7 +47,7 @@ Input:
 	- The following patterns are counted as evidence for 'dog'
 	  (probably better discriminator for grammar words)
 
-	  We replace the current word with with an _ in the patterns we store
+	  We replace the current word with an _ in the patterns we store
 
 		CountPattern(word, pattern)
 
@@ -97,7 +97,7 @@ Input:
 		'_ [V] over'
 
 
-	if a word appears both as a verb and a noun, we count for both, weighted by the probability of each occurance. (if unknown, 50/50), so occurance
+	if a word appears both as a verb and a noun, we count for both, weighted by the probability of each occurrence. (if unknown, 50/50), so occurrence
 	counts can be fractional numbers.
 
 
@@ -114,7 +114,7 @@ Input:
 		w: a word in the corpus
 		wc1: first word in the confusion set
 		wc2: second word in the confusion set
-		count(w): the number of occurances of w
+		count(w): the number of occurrences of w
 		count(*): the total number of words in the corpus
 		w|wc: w given wc.
 
@@ -124,8 +124,8 @@ Input:
 	calculate P(w),  P(w|wc1), p(w|wc2)
 
 	eliminate if | P(w|wc1) - p(w|wc2) | < delta    (no discriminating value)
-	eliminate if | P(w) - p(w|wc1) | < delta	(co-occurance not significant)
-	eliminate if | P(w) - p(w|wc2) | < delta	(co-occurance not significant)
+	eliminate if | P(w) - p(w|wc1) | < delta	(co-occurrence not significant)
+	eliminate if | P(w) - p(w|wc2) | < delta	(co-occurrence not significant)
 
 
 	Prune Pattern information
@@ -155,7 +155,7 @@ Input:
 
 
 
-Now we can run the context sensitive checks:
+Now we can run the context-sensitive checks:
 
 
 4. Apply patterns to text to be checked.
@@ -165,7 +165,7 @@ Now we can run the context sensitive checks:
 		if word in confusion set:
 
 			establish features
-			check features agains discriminating features in database.
+			check features against discriminating features in database.
 
 			if a word occurs in the confusion set 
 				calculate probability it is correct, given the features.

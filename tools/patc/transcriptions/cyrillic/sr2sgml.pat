@@ -11,7 +11,7 @@
 
 "</SR>"     0 "</foreign>"
 
-"{}"        f           % use for disambuigation
+"{}"        f           % use for disambiguation
 
 % Capital letters.
 

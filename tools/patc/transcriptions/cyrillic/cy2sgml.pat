@@ -23,7 +23,7 @@
 "</RUX>"    0 "</foreign>"
 "</RUA>"    0 ""
 
-"{}"        f           % use for disambuigation
+"{}"        f           % use for disambiguation
 
 % Capital letters.
 

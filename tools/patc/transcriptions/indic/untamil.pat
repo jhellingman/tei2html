@@ -15,7 +15,7 @@
 ">"     1 ">"
 "\n"    e "new line in tag in Tamil mode"
 
-"<TA2>" 1 ""            % handle Tamil parts (hack for nested occurences in attributes)
+"<TA2>" 1 ""            % handle Tamil parts (hack for nested occurrences in attributes)
 
 @patterns 3             % copy SGML entities in Tamil mode
 
@@ -29,7 +29,7 @@
 "<TA>"      e "tag <TA> found in Tamil mode"
 "<TAA>"     e "tag <TAA> found in Tamil mode"
 
-"</TA2>"    2 ""        % handle Tamil parts (hack for nested occurences in attributes)
+"</TA2>"    2 ""        % handle Tamil parts (hack for nested occurrences in attributes)
 
 "<"     2 "<"           % SGML tag in Tamil mode
 "&"     3 "&"           % SGML entity in Tamil mode

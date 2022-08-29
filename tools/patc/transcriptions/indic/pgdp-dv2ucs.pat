@@ -12,7 +12,7 @@
 %  2 - Extended Velthuis transcription, secondary position
 
 @patterns 0 roman text
-"[DV:"     1 "<foreign lang=sk>"       switch to Devangari script.
+"[DV:"     1 "<foreign lang=sk>"       switch to Devanagari script.
 
 % all others go thru unaltered
 
