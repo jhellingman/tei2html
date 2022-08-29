@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-    <xsl:stylesheet version="2.0"
-        xmlns="http://www.daisy.org/z3986/2005/ncx/"
-        xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
-        xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        xmlns:f="urn:stylesheet-functions"
-        exclude-result-prefixes="f xd xs">
+    <xsl:stylesheet version="3.0"
+                    xmlns="http://www.daisy.org/z3986/2005/ncx/"
+                    xmlns:f="urn:stylesheet-functions"
+                    xmlns:ncx="http://www.daisy.org/z3986/2005/ncx/"
+                    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document to an NCX file, used in ePub 2.0.</xd:short>
@@ -93,7 +93,7 @@
                         <xsl:copy-of select="f:create-nav-point((//divGen[@type='Colophon'])[1], 'colophon', f:message('msgColophon'))"/>
 
                     </xsl:variable>
-                    <xsl:apply-templates select="$navMap" mode="playorder"/>
+                    <xsl:apply-templates select="$navMap" mode="playOrder"/>
                 </navMap>
             </ncx>
         </xsl:result-document>
@@ -250,20 +250,20 @@
     <xsl:template match="ab[@type='lineNum']" mode="navLabel"/>
 
 
-    <!--== playorder =======================================================-->
+    <!--== playOrder =======================================================-->
 
-    <xsl:template match="@*|node()" mode="playorder">
+    <xsl:template match="@*|node()" mode="playOrder">
         <xsl:copy>
-            <xsl:apply-templates select="@*|node()" mode="playorder"/>
+            <xsl:apply-templates select="@*|node()" mode="playOrder"/>
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="ncx:navPoint" mode="playorder">
+    <xsl:template match="ncx:navPoint" mode="playOrder">
         <xsl:copy>
             <xsl:attribute name="playOrder">
                 <xsl:number level="any" count="ncx:navPoint"/>
             </xsl:attribute>
-            <xsl:apply-templates select="@*|node()" mode="playorder"/>
+            <xsl:apply-templates select="@*|node()" mode="playOrder"/>
         </xsl:copy>
     </xsl:template>
 

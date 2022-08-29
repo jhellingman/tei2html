@@ -1166,39 +1166,38 @@ span.ditto span.i {
 }
  
 
-table.alignedtext, table.alignedverse {
+table.alignedText, table.alignedVerse {
  border-collapse: collapse;
 }
 
-table.alignedtext td {
+table.alignedText td {
  vertical-align: top;
  width: 50%;
 }
 
-table.alignedverse {
+table.alignedVerse {
  vertical-align: top;
 }
 
-table.alignedtext td.first, table.alignedverse td.first {
+table.alignedText td.first, table.alignedVerse td.first {
  border-width: 0 0.2px 0 0;
  border-color: gray;
  border-style: solid;
  padding-right: 10px;
 }
 
-table.alignedtext td.second, table.alignedverse td.second {
+table.alignedText td.second, table.alignedVerse td.second {
  padding-left: 10px;
 }
 
-table.alignedverse td.first, table.alignedverse td.second {
+table.alignedVerse td.first, table.alignedVerse td.second {
  width: 45%;
 }
 
-table.alignedverse td.lineNumbers {
+table.alignedVerse td.lineNumbers {
  width: 10%;
 }
 
-  
 
 .epub-media-overlay-active {
  background-color: yellow;

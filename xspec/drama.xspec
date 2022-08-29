@@ -212,7 +212,7 @@ text-indent:2em;
                   <td rowspan="2" class="lineGroupBrace">
                      <img src="images/rbrace2.png" alt="}}" width="12" height="40"/>
                   </td>
-                  <td rowspan="2" class="lineGrouphead">The Title.</td>
+                  <td rowspan="2" class="lineGroupHead">The Title.</td>
                </tr>
                <tr>
                   <td>

@@ -71,7 +71,7 @@
     <xsl:function name="f:generate-footnote-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="targetfile">
+        <xsl:variable name="targetFile">
             <xsl:choose>
                 <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
                 <xsl:when test="root($target)//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')]">
@@ -90,7 +90,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile || '#' || f:generate-id($target)"/>
+        <xsl:value-of select="$targetFile || '#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -105,8 +105,8 @@
     <xsl:function name="f:generate-apparatus-note-href" as="xs:string">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="targetfile" select="f:determine-filename(($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1])"/>
-        <xsl:value-of select="$targetfile || '#' || f:generate-id($target)"/>
+        <xsl:variable name="targetFile" select="f:determine-filename(($target/following::divGen[@type='Apparatus' or @type='apparatus'])[1])"/>
+        <xsl:value-of select="$targetFile || '#' || f:generate-id($target)"/>
     </xsl:function>
 
 
@@ -122,7 +122,7 @@
     <xsl:function name="f:generate-xref-table-href">
         <xsl:param name="target" as="element()"/>
 
-        <xsl:variable name="targetfile">
+        <xsl:variable name="targetFile">
             <xsl:choose>
                 <!-- We should have an explicit call for a colophon section; the xref-table is in there. -->
                 <xsl:when test="root($target)//divGen[@type='Colophon']">
@@ -134,7 +134,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <xsl:value-of select="$targetfile || '#' || f:generate-id($target) || 'ext'"/>
+        <xsl:value-of select="$targetFile || '#' || f:generate-id($target) || 'ext'"/>
     </xsl:function>
 
 

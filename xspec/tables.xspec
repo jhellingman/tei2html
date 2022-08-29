@@ -211,7 +211,7 @@
         <div xmlns="http://www.w3.org/1999/xhtml"
              class="table"
              id="simple_table_with_head">
-           <h4 class="tablecaption" id="...">Table with head.</h4>
+           <h4 class="tableCaption" id="...">Table with head.</h4>
            <table summary="A table with a head">
               <tr id="...">
                  <td id="..." class="cellLeft cellTop">2</td>

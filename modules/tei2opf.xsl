@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<xsl:stylesheet version="2.0"
+<xsl:stylesheet version="3.0"
                 xmlns="http://www.idpf.org/2007/opf"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:dcterms="http://purl.org/dc/terms/"
@@ -594,10 +594,10 @@
 
     <xsl:template match="smil:text[@src]" mode="manifest-smil">
         <xsl:variable name="basename"><xsl:value-of select="replace(@src, '\.xhtml.*$', '')"/></xsl:variable>
-        <xsl:variable name="fragmentid"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
+        <xsl:variable name="fragmentId"><xsl:value-of select="replace(@src, '^.*\.xhtml#', '')"/></xsl:variable>
 
-        <xsl:if test="not($teiFile//*[@id=$fragmentid])">
-            <xsl:copy-of select="f:log-warning('Fragment id: {1} not present in text.', ($fragmentid))"/>
+        <xsl:if test="not($teiFile//*[@id=$fragmentId])">
+            <xsl:copy-of select="f:log-warning('Fragment id: {1} not present in text.', ($fragmentId))"/>
         </xsl:if>
     </xsl:template>
 

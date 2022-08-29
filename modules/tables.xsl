@@ -55,7 +55,7 @@
             <xsl:when test="f:is-inline(.) or f:rend-value(@rend, 'class') = 'intralinear'">
                 <span class="table">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates mode="tablecaption" select="head"/>
+                    <xsl:apply-templates mode="table-caption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </span>
             </xsl:when>
@@ -63,7 +63,7 @@
                 <xsl:call-template name="closepar"/>
                 <div class="table">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates mode="tablecaption" select="head"/>
+                    <xsl:apply-templates mode="table-caption" select="head"/>
                     <xsl:call-template name="inner-table"/>
                 </div>
                 <xsl:call-template name="reopenpar"/>
@@ -163,9 +163,9 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template mode="tablecaption" match="head">
+    <xsl:template mode="table-caption" match="head">
         <h4>
-            <xsl:variable name="class" select="if (f:rend-value(../@rend, 'align') = 'center') then 'aligncenter' else '' || 'tablecaption'"/>
+            <xsl:variable name="class" select="if (f:rend-value(../@rend, 'align') = 'center') then 'aligncenter' else '' || 'tableCaption'"/>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -176,7 +176,7 @@
     <xd:doc>
         <xd:short>Eliminate table headers.</xd:short>
         <xd:detail>
-            <p>The table header is already handled in the mode <code>tablecaption</code>, so can be omitted.</p>
+            <p>The table header is already handled in the mode <code>table-caption</code>, so can be omitted.</p>
         </xd:detail>
     </xd:doc>
 

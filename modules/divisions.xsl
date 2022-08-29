@@ -279,17 +279,17 @@
     <xsl:template name="handleDiv">
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
-                <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
+                <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
                 <xsl:choose>
-                    <xsl:when test="//*[@id = $otherid]">
-                        <xsl:copy-of select="f:log-info('Align division {1} with division {2}.', (@id, $otherid))"/>
+                    <xsl:when test="//*[@id = $otherId]">
+                        <xsl:copy-of select="f:log-info('Align division {1} with division {2}.', (@id, $otherId))"/>
                         <xsl:call-template name="align-paragraphs">
                             <xsl:with-param name="a" select="."/>
-                            <xsl:with-param name="b" select="//*[@id = $otherid]"/>
+                            <xsl:with-param name="b" select="//*[@id = $otherId]"/>
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:copy-of select="f:log-error('Division with id {1} not found.', ($otherid))"/>
+                        <xsl:copy-of select="f:log-error('Division with id {1} not found.', ($otherId))"/>
                         <xsl:call-template name="only-left-paragraph"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -298,13 +298,13 @@
             <xsl:when test="f:is-set('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with-document')">
                 <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
-                <xsl:variable name="otherid" select="substring-after($target, '#')"/>
+                <xsl:variable name="otherId" select="substring-after($target, '#')"/>
                 <xsl:choose>
-                    <xsl:when test="document($document, .)//*[@id = $otherid]">
+                    <xsl:when test="document($document, .)//*[@id = $otherId]">
                         <xsl:copy-of select="f:log-info('Align division {1} with external document {2}.', (@id, $target))"/>
                         <xsl:call-template name="align-paragraphs">
                             <xsl:with-param name="a" select="."/>
-                            <xsl:with-param name="b" select="document($document, .)//*[@id = $otherid]"/>
+                            <xsl:with-param name="b" select="document($document, .)//*[@id = $otherId]"/>
                         </xsl:call-template>
                     </xsl:when>
                     <xsl:otherwise>
@@ -623,7 +623,7 @@
             </xsl:for-each-group>
         </xsl:variable>
 
-        <table class="alignedtext">
+        <table class="alignedText">
 
             <!-- Handle matter before any anchor -->
             <xsl:if test="not($a/*[1]/@n = $anchors) or not($b/*[1]/@n = $anchors)">
@@ -725,7 +725,7 @@
 
 
     <xsl:template name="only-left-paragraph">
-        <table class="alignedtext">
+        <table class="alignedText">
             <tr>
                 <td class="first"><xsl:apply-templates/></td>
                 <td class="second"/>

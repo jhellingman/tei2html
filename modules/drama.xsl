@@ -77,7 +77,7 @@
                 <td rowspan="{$count}" class="lineGroupBrace">
                     <xsl:copy-of select="f:output-image('images/rbrace' || $count || '.png', '}')"/>
                 </td>
-                <td rowspan="{$count}" class="lineGrouphead">
+                <td rowspan="{$count}" class="lineGroupHead">
                     <xsl:apply-templates select="head/node()"/>
                 </td>
             </tr>
@@ -113,7 +113,7 @@
                 padding: 0 0.5em;
             }
 
-            td.lineGrouphead {
+            td.lineGroupHead {
                 vertical-align: middle;
             }
         </xsl:if>
@@ -152,11 +152,11 @@
 
     <xsl:template name="handleAlignedLg">
         <xsl:context-item as="element(lg)" use="required"/>
-        <xsl:variable name="otherid" select="f:rend-value(@rend, 'align-with')"/>
-        <xsl:copy-of select="f:log-info('Align verse {1} with verse {2}.', (@id, $otherid))"/>
+        <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
+        <xsl:copy-of select="f:log-info('Align verse {1} with verse {2}.', (@id, $otherId))"/>
         <xsl:call-template name="align-verses">
             <xsl:with-param name="a" select="."/>
-            <xsl:with-param name="b" select="//*[@id=$otherid]"/>
+            <xsl:with-param name="b" select="//*[@id=$otherId]"/>
         </xsl:call-template>
     </xsl:template>
 
@@ -318,7 +318,7 @@
     <!--====================================================================-->
     <!-- code to align two verses  -->
 
-    <xd:doc mode="alignedverse">
+    <xd:doc mode="align-verse">
         <xd:short>Mode used to format lines in aligned verse.</xd:short>
         <xd:detail>This mode takes care the heads and lines are properly wrapped in <code>span</code> and <code>p</code>-element in the HTML output.</xd:detail>
     </xd:doc>
@@ -342,7 +342,7 @@
             <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
         </xsl:if>
 
-        <table class="alignedverse">
+        <table class="alignedVerse">
             <xsl:for-each select="$a/*">
                 <xsl:variable name="position" select="count(preceding-sibling::*) + 1"/>
                 <tr>
@@ -358,8 +358,8 @@
                             </xsl:choose>
                         </td>
                     </xsl:if>
-                    <td class="first"><xsl:apply-templates mode="alignedverse" select="."/></td>
-                    <td class="second"><xsl:apply-templates mode="alignedverse" select="$b/*[$position]"/></td>
+                    <td class="first"><xsl:apply-templates mode="align-verse" select="."/></td>
+                    <td class="second"><xsl:apply-templates mode="align-verse" select="$b/*[$position]"/></td>
                 </tr>
             </xsl:for-each>
         </table>
@@ -373,7 +373,7 @@
         a span, and give it the CSS-class <code>h2</code>, so we can make it look like a head.</xd:detail>
     </xd:doc>
 
-    <xsl:template mode="alignedverse" match="head">
+    <xsl:template mode="align-verse" match="head">
         <span class="h4"><xsl:apply-templates/></span>
     </xsl:template>
 
@@ -382,7 +382,7 @@
         <xd:short>Format a line-group in aligned verse.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="alignedverse" match="lg">
+    <xsl:template mode="align-verse" match="lg">
         <xsl:apply-templates select="."/>
     </xsl:template>
 
@@ -391,7 +391,7 @@
         <xd:short>Format a line in aligned verse.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="alignedverse" match="l">
+    <xsl:template mode="align-verse" match="l">
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'line')"/>

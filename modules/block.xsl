@@ -857,7 +857,7 @@
 
     <xd:doc>
         <xd:short>Remove the first letter of a paragraph (intermediate element).</xd:short>
-        <xd:detail>While removing the first letter of a paragraph, we may enocounter an
+        <xd:detail>While removing the first letter of a paragraph, we may encounter an
         intermediate element. We currently do handle <code>hi</code> and <code>foreign</code> elements;
         warn for all other types of elements when we encounter them.</xd:detail>
     </xd:doc>

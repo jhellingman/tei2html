@@ -28,7 +28,7 @@
 
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'columns')">
-                <xsl:call-template name="splitlist"/>
+                <xsl:call-template name="split-list"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{$listType}">
@@ -59,7 +59,7 @@
         <xd:detail>Split a list into columns; read relevant parameters.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="splitlist">
+    <xsl:template name="split-list">
         <xsl:variable name="columns" as="xs:integer">
             <xsl:value-of select="number(f:rend-value(@rend, 'columns'))"/>
         </xsl:variable>
@@ -69,12 +69,12 @@
 
         <xsl:choose>
             <xsl:when test="$item-order = 'column-major'">
-                <xsl:call-template name="splitlist-rows">
+                <xsl:call-template name="split-list-rows">
                     <xsl:with-param name="columns" select="$columns"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="splitlist-cols">
+                <xsl:call-template name="split-list-cols">
                     <xsl:with-param name="columns" select="$columns"/>
                 </xsl:call-template>
             </xsl:otherwise>
@@ -87,14 +87,14 @@
         <xd:detail>Split a list into columns, using a table; order will be: [1, 2], [3, 4].</xd:detail>
     </xd:doc>
 
-    <xsl:template name="splitlist-rows-table">
+    <xsl:template name="split-list-rows-table">
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <table>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) idiv $columns">
                 <tr>
-                    <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
+                    <xsl:apply-templates select="current-group()" mode="list-item-as-table-cell"/>
                 </tr>
             </xsl:for-each-group>
         </table>
@@ -106,7 +106,7 @@
         <xd:detail>Split a list into columns, using a table; order will be: [1, 3], [2, 4].</xd:detail>
     </xd:doc>
 
-    <xsl:template name="splitlist-cols-table">
+    <xsl:template name="split-list-cols-table">
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
@@ -115,7 +115,7 @@
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) mod $rows">
                 <tr>
-                    <xsl:apply-templates select="current-group()" mode="listitem-as-tablecell"/>
+                    <xsl:apply-templates select="current-group()" mode="list-item-as-table-cell"/>
                 </tr>
             </xsl:for-each-group>
         </table>
@@ -127,7 +127,7 @@
         <xd:detail>Split a list into columns, using a table; order will be: [1, 2], [3, 4].</xd:detail>
     </xd:doc>
 
-    <xsl:template name="splitlist-cols">
+    <xsl:template name="split-list-cols">
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
@@ -155,7 +155,7 @@
         <xd:detail>Split a list into columns, using a table; order will be: [1, 3], [2, 4].</xd:detail>
     </xd:doc>
 
-    <xsl:template name="splitlist-rows">
+    <xsl:template name="split-list-rows">
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
@@ -182,7 +182,7 @@
         <xd:detail>Format a list item as a table cell (used when formatting lists in multiple columns, using tables).</xd:detail>
     </xd:doc>
 
-    <xsl:template match="item" mode="listitem-as-tablecell">
+    <xsl:template match="item" mode="list-item-as-table-cell">
         <td>
             <xsl:call-template name="handle-item"/>
         </td>
