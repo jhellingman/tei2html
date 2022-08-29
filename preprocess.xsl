@@ -1,13 +1,10 @@
 <!DOCTYPE xsl:stylesheet>
 
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="f xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="xd">
 
     <xsl:output indent="no" method="xml" encoding="utf-8"/>
 
@@ -25,7 +22,7 @@
             <ul>
                 <li>1. Strip the TEI namespace if present (see stripns.xsl).</li>
                 <li>2. Normalize tables (see normalize-table.xsl).</li>
-                <li>3. Remove superflous attributes.</li>
+                <li>3. Remove superfluous attributes.</li>
             </ul>
         </xd:detail>
     </xd:doc>

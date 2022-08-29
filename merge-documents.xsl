@@ -44,9 +44,9 @@
 
 
     <xd:doc>
-        <xd:short>Combine Id.</xd:short>
+        <xd:short>Combine IDs.</xd:short>
         <xd:detail>
-            <p>Combine an id with a prefix, to make it unique. Do not add a prefix if one is already present.</p>
+            <p>Combine IDs with a prefix, to make them unique. Do not add a prefix if one is already present.</p>
         </xd:detail>
         <xd:param name="id">The id to be adjusted.</xd:param>
         <xd:param name="prefix">The prefix to add.</xd:param>

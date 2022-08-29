@@ -28,17 +28,15 @@
 
 ]>
 <xsl:stylesheet version="3.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="urn:stylesheet-functions"
-    xmlns:i="http://gutenberg.ph/issues"
-    xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
-    xmlns:s="http://gutenberg.ph/segments"
-    xmlns:tmp="urn:temporary"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="i f msg s tmp xd xhtml xs">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="urn:stylesheet-functions"
+                xmlns:i="http://gutenberg.ph/issues"
+                xmlns:s="http://gutenberg.ph/segments"
+                xmlns:tmp="urn:temporary"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="i f s tmp xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to perform various checks on a TEI file.</xd:short>
@@ -181,7 +179,7 @@
     </xd:doc>
 
     <xd:doc>
-        <xd:short>Report the found issues as a HTML document.</xd:short>
+        <xd:short>Report the found issues as an HTML document.</xd:short>
     </xd:doc>
 
     <xsl:template mode="report" match="i:issues">
@@ -255,7 +253,7 @@
 
 
     <xd:doc>
-        <xd:short>Report an issue as a row in a HTML table.</xd:short>
+        <xd:short>Report an issue as a row in an HTML table.</xd:short>
     </xd:doc>
 
     <xsl:template mode="report" match="i:issue">
@@ -419,7 +417,7 @@
             select="f:column-aggregate(., 'sum')
                     + (f:column-aggregate(following-sibling::cell[1], 'sum'))"/>
 
-        <!-- <xsl:message expand-text="yes">Indicated: {$indicatedSum}; caluclated: {$calculatedSum}</xsl:message> -->
+        <!-- <xsl:message expand-text="yes">Indicated: {$indicatedSum}; calculated: {$calculatedSum}</xsl:message> -->
 
         <xsl:copy-of select="f:report-difference(., $indicatedSum, $calculatedSum)"/>
     </xsl:template>
@@ -1015,7 +1013,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='sc'] | sc">
         <xsl:if test="string(.) = upper-case(string(.))">
-            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Small caps style used for all-caps text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Small caps style used for all-caps text: &ldquo;<xsl:value-of select="string(.)"/>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -1024,7 +1022,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='asc'] | asc" priority="2">
         <xsl:if test="string(.) = lower-case(string(.))">
-            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">All small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"></xsl:value-of>&rdquo;</i:issue>
+            <i:issue pos="{@pos}" code="X02" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">All small caps style used for all lower-case text: &ldquo;<xsl:value-of select="string(.)"/>&rdquo;</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -1033,7 +1031,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='ex'] | g">
         <xsl:if test="contains(lower-case(string(.)), 'ij')">
-            <i:issue pos="{@pos}" code="Y01" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Letterspaced text contains diagraph ij: <xsl:value-of select="string(.)"/>.</i:issue>
+            <i:issue pos="{@pos}" code="Y01" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Letterspaced text contains digraph ij: <xsl:value-of select="string(.)"/>.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -1044,14 +1042,14 @@
 
     <xsl:template mode="checks" match="corr[@sic]">
         <xsl:if test="string(.) = string(@sic)">
-            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="@sic"></xsl:value-of>&rdquo; same as original text.</i:issue>
+            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="@sic"/>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
 
     <xsl:template mode="checks" match="corr[sic]">
         <xsl:if test="string(corr) = string(sic)">
-            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="string(corr)"></xsl:value-of>&rdquo; same as original text.</i:issue>
+            <i:issue pos="{@pos}" code="C01" category="Corrections" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Correction &ldquo;<xsl:value-of select="string(corr)"/>&rdquo; same as original text.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
     </xsl:template>
@@ -1060,7 +1058,7 @@
     <!-- Figures -->
 
     <xsl:template mode="checks" match="figure[@url]">
-        <i:issue pos="{@pos}" code="F01" category="Compliance" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"></xsl:value-of>&rdquo;.</i:issue>
+        <i:issue pos="{@pos}" code="F01" category="Compliance" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Using non-standard attribute url &ldquo;<xsl:value-of select="@url"/>&rdquo;.</i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
     </xsl:template>
@@ -1317,8 +1315,8 @@
         <tmp:abbrs>
             <xsl:for-each select="$abbrs//tmp:abbr">
                 <xsl:sort select="string-length(.)" data-type="number" order="descending"/>
-                <xsl:sort select="lower-case(.)" data-type="text" order="ascending"/>
-                <xsl:sort select="." data-type="text" order="ascending"/>
+                <xsl:sort select="lower-case(.)"/>
+                <xsl:sort select="."/>
                 <tmp:abbr><xsl:value-of select="."/></tmp:abbr>
             </xsl:for-each>
         </tmp:abbrs>
@@ -1474,7 +1472,7 @@
                         target="{f:generate-id(.)}"
                         level="Warning"
                         element="{./@sourceElement}"
-                        page="{./@sourcePage}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-openend in next paragraph.
+                        page="{./@sourcePage}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-opened in next paragraph.
                         Current: <xsl:value-of select="f:tail-chars($string)"/>
                         Next: <xsl:value-of select="f:head-chars($next)"/>
                     </i:issue>
