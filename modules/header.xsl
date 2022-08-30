@@ -62,7 +62,7 @@
     <xsl:template name="generate-html-header">
         <head>
             <title>
-                <xsl:value-of select="$title"/>
+                <xsl:value-of select="teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main'][1]"/>
             </title>
 
             <xsl:call-template name="generate-metadata"/>
@@ -88,8 +88,12 @@
                 <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
             </xsl:otherwise>
         </xsl:choose>
+
         <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"/>
-        <meta name="author" content="{$author}"/>
+
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/author">
+            <meta name="author" content="{.}"/>
+        </xsl:for-each>
 
         <!-- Link to cover page -->
         <xsl:if test="//figure[@id='cover-image']">
@@ -98,19 +102,33 @@
 
         <!-- Insert Dublin Core metadata -->
         <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
-        <meta name="DC.Creator" content="{$author}"/>
-        <meta name="DC.Title" content="{$title}"/>
-        <xsl:if test="f:is-valid($pubdate)">
-            <meta name="DC.Date" content="{$pubdate}"/>
+
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']">
+            <meta name="DC.Title" content="{.}"/>
+        </xsl:for-each>
+
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/author">
+            <meta name="DC.Creator" content="{.}"/>
+        </xsl:for-each>
+
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/editor">
+            <meta name="DC.Contributor" content="{.}"/>
+        </xsl:for-each>
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/respStmt/name">
+            <meta name="DC.Contributor" content="{.}"/>
+        </xsl:for-each>
+
+        <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/date)">
+            <meta name="DC.Date" content="{teiHeader/fileDesc/publicationStmt/date}"/>
         </xsl:if>
-        <meta name="DC.Language" content="{$language}"/>
+        <meta name="DC.Language" content="{f:get-current-lang(.)}"/>
         <meta name="DC.Format" content="text/html"/>
-        <meta name="DC.Publisher" content="{$publisher}"/>
+        <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/publisher)">
+            <meta name="DC.Publisher" content="{teiHeader/fileDesc/publicationStmt/publisher}"/>
+        </xsl:if>
         <xsl:if test="f:is-valid(//idno[@type='PGnum'])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
-            <meta name="DC.Identifier">
-                <xsl:attribute name="content">https://www.gutenberg.org/ebooks/<xsl:value-of select="//idno[@type='PGnum']"/></xsl:attribute>
-            </meta>
+            <meta name="DC.Identifier" content="https://www.gutenberg.org/ebooks/{//idno[@type='PGnum']}"/>
         </xsl:if>
 
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">

@@ -151,8 +151,8 @@
     <xsl:function name="f:add-summary-attribute" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
 
-        <!-- ePub3 and html5 don't like summaries on tables -->
-        <xsl:sequence select="f:has-rend-value($rend, 'summary') and not(f:is-epub()) and not(f:is-html5())"/>
+        <!-- ePub3 doesn't like summaries on tables -->
+        <xsl:sequence select="f:has-rend-value($rend, 'summary') and not(f:is-epub())"/>
     </xsl:function>
 
 

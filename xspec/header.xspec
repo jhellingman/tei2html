@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description>
+<x:description
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <x:param name="root" select="self::document-node()">
+        <TEI lang="xx"/>
+    </x:param>
+
+    <x:param name="charset" select="'xxx'"/>
+
+    <x:param name="language" select="'xx'"/>
+
+    <x:param name="teiHeader">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <teiHeader lang="xx">
+                <fileDesc>
+                    <titleStmt>
+                        <title>Title - titleStmt</title>
+                        <author>Author - 1 - titleStmt</author>
+                        <author>Author - 2 - titleStmt</author>
+                        <editor>Editor - titleStmt</editor>
+                        <respStmt>
+                            <resp>Translation</resp>
+                            <name>Translator - titleStmt</name>
+                        </respStmt>
+                        <respStmt>
+                            <resp>Transcription</resp>
+                            <name>Transcriber - titleStmt</name>
+                        </respStmt>
+                    </titleStmt>
+                    <publicationStmt>
+                        <publisher>Publisher - publicationStmt</publisher>
+                        <pubPlace>Publication Place - publicationStmt</pubPlace>
+                        <idno type="epub-id">urn:uuid:9898c935-9efe-4d39-8eed-9397a6bb189b</idno>
+                        <date>2000-01-01</date>
+                        <availability>
+                            <p>Availability</p>
+                        </availability>
+                    </publicationStmt>
+                    <sourceDesc>
+                        <bibl>
+                            <author>Author - 1 - sourceDesc</author>
+                            <author>Author - 2 - sourceDesc</author>
+                            <title>Title - sourceDesc</title>
+                            <date>1900</date>
+                        </bibl>
+                    </sourceDesc>
+                </fileDesc>
+                <encodingDesc>
+                    <p>Encoding description</p>
+                </encodingDesc>
+                <profileDesc>
+                    <langUsage>
+                        <language id="en">English</language>
+                    </langUsage>
+                    <textClass>
+                        <keywords>
+                            <list>
+                                <item>Keyword - 1</item>
+                                <item>Keyword - 2</item>
+                            </list>
+                        </keywords>
+                    </textClass>
+                </profileDesc>
+                <revisionDesc>
+                    <list>
+                        <item>2000-01-01 Started.</item>
+                        <item>2000-01-02 Continued.</item>
+                    </list>
+                </revisionDesc>
+            </teiHeader>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When rendering the HTML header">
+        <x:context select="$teiHeader"/>
+        <x:expect label="will result in a correct HTML header" test="/xhtml:html">
+            <html xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">
+                <head>
+                    <title>Title - titleStmt</title>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+                    <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html" />
+                    <meta name="author" content="Author - 1 - titleStmt" />
+                    <meta name="author" content="Author - 2 - titleStmt" />
+                    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+                    <meta name="DC.Title" content="Title - titleStmt" />
+                    <meta name="DC.Creator" content="Author - 1 - titleStmt" />
+                    <meta name="DC.Creator" content="Author - 2 - titleStmt" />
+                    <meta name="DC.Contributor" content="Editor - titleStmt" />
+                    <meta name="DC.Contributor" content="Translator - titleStmt" />
+                    <meta name="DC.Contributor" content="Transcriber - titleStmt" />
+                    <meta name="DC.Date" content="2000-01-01" />
+                    <meta name="DC.Language" content="en" />
+                    <meta name="DC.Format" content="text/html" />
+                    <meta name="DC.Publisher" content="Publisher - publicationStmt" />
+                    <meta name="DC:Subject" content="Keyword - 1" />
+                    <meta name="DC:Subject" content="Keyword - 2" />
+                    <style type="text/css">...</style>
+                </head>
+                <body>...</body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

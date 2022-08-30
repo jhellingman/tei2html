@@ -1,11 +1,9 @@
 <!DOCTYPE xsl:stylesheet>
-
 <xsl:stylesheet version="3.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:tei="http://www.tei-c.org/ns/1.0"
-    xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd tei">
-
+                xmlns:tei="http://www.tei-c.org/ns/1.0"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                exclude-result-prefixes="xd tei">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to remove the TEI namespace from a TEI-document.</xd:short>

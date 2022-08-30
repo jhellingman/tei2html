@@ -86,20 +86,12 @@
         </xd:detail>
     </xd:doc>
 
-
     <xsl:template name="output-embedded-css">
         <xsl:param name="css" as="xs:string"/>
 
-        <xsl:choose>
-            <xsl:when test="f:is-html5()">
-                <xsl:text disable-output-escaping="yes">&lf;&lt;style&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:text disable-output-escaping="yes">&lf;&lt;style type="text/css"&gt; /* &lt;![CDATA[ */&lf;</xsl:text>
-            </xsl:otherwise>
-        </xsl:choose>
+        <style type="text/css"><xsl:text disable-output-escaping="yes"> /* &lt;![CDATA[ */&lf;</xsl:text>
         <xsl:value-of select="$css" disable-output-escaping="yes"/>
-        <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ &lt;/style&gt;&lf;</xsl:text>
+        <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ </xsl:text></style>
     </xsl:template>
 
 

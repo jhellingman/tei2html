@@ -56,7 +56,7 @@
             <debug.facsimile>false</debug.facsimile>
 
             <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly) -->
-            <defaultlanguage>en-US</defaultlanguage>                        <!-- Default language for localization -->
+            <defaultLanguage>en-US</defaultLanguage>                        <!-- Default language for localization -->
 
             <lb.preserve>true</lb.preserve>                                 <!-- Preserve linebreaks indicate with the lb element. -->
             <lb.hyphen.remove>false</lb.hyphen.remove>                      <!-- Remove hyphens before line-breaks. -->

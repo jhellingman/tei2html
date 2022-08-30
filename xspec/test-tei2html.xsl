@@ -34,6 +34,12 @@
     <xsl:include href="../modules/facsimile.xsl"/>
     <xsl:include href="../modules/stripns.xsl"/>
 
+    <xsl:output
+            doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+            doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+            method="xml"
+            encoding="utf-8"/>
+
     <xsl:param name="basename" select="'book'"/>
     <xsl:param name="path" select="'.'"/>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>

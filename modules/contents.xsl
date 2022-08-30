@@ -84,23 +84,23 @@
     <xsl:template name="toc-body">
         <xsl:param name="list-element" select="'ul'" as="xs:string"/>
         <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
-        <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
+        <xsl:variable name="maxLevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
 
         <xsl:element name="{$list-element}">
             <xsl:apply-templates mode="gentoc" select="$text/front/div1 | $text/front/div">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
@@ -116,7 +116,7 @@
     </xd:doc>
 
     <xsl:template match="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc">
-        <xsl:param name="maxlevel" as="xs:integer" select="7"/>
+        <xsl:param name="maxLevel" as="xs:integer" select="7"/>
         <xsl:param name="divGenId" as="xs:string"/>
         <xsl:param name="list-element" as="xs:string" select="'ul'"/>
 
@@ -127,10 +127,10 @@
                 <xsl:when test="f:has-toc-head(.)">
                     <li id="{f:generate-id(.) || '.' || $divGenId}">
                         <xsl:call-template name="generate-toc-entry"/>
-                        <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxlevel) and not(@type='Index')">
+                        <xsl:if test="f:contains-div(.) and (f:div-level(.) &lt; $maxLevel) and not(@type='Index')">
                             <xsl:element name="{$list-element}">
                                 <xsl:apply-templates select="./div | ./div0 | ./div1 | ./div2 | ./div3 | ./div4 | ./div5 | ./div6" mode="gentoc">
-                                    <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                                    <xsl:with-param name="maxLevel" select="$maxLevel"/>
                                     <xsl:with-param name="divGenId" select="$divGenId"/>
                                     <xsl:with-param name="list-element" select="$list-element"/>
                                 </xsl:apply-templates>
@@ -308,26 +308,26 @@
     <!-- Same as above, but now modified to have the toc placed in table -->
 
     <xsl:template name="toc-body-table">
-        <xsl:variable name="maxlevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
+        <xsl:variable name="maxLevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
         <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
-        <xsl:variable name="maxlevel" select="min((f:find-toc-max-depth($text), $maxlevel))"/>
+        <xsl:variable name="maxLevel" select="min((f:find-toc-max-depth($text), $maxLevel))"/>
 
         <table>
-            <xsl:if test="f:is-html() and not(f:is-html5())">
+            <xsl:if test="f:is-html()">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
             <xsl:apply-templates mode="gentoc-table" select="$text/front/div1 | $text/front/div">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc-table" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
             <xsl:apply-templates mode="gentoc-table" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
-                <xsl:with-param name="maxlevel" select="$maxlevel"/>
+                <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
         </table>
@@ -344,12 +344,12 @@
 
 
     <xsl:template match="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc-table">
-        <xsl:param name="maxlevel" as="xs:integer" select="7"/>
-        <xsl:param name="curlevel" as="xs:integer" select="0"/>
+        <xsl:param name="maxLevel" as="xs:integer" select="7"/>
+        <xsl:param name="curLevel" as="xs:integer" select="0"/>
         <xsl:param name="divGenId" as="xs:string"/>
 
         <!-- Do we want to include this division in the toc? -->
-        <xsl:if test="f:div-level(.) &lt;= $maxlevel and 
+        <xsl:if test="f:div-level(.) &lt;= $maxLevel and
                       f:rend-value(@rend, 'display') != 'none' and 
                       f:rend-value(@rend, 'toc') != 'none'">
             <xsl:choose>
@@ -357,14 +357,14 @@
                 <xsl:when test="f:has-toc-head(.)">
                     <tr id="{f:generate-id(.) || '.' || $divGenId}">
                         <xsl:call-template name="generate-toc-entry-table">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                            <xsl:with-param name="curlevel" select="$curlevel"/>
+                            <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                            <xsl:with-param name="curLevel" select="$curLevel"/>
                         </xsl:call-template>
                     </tr>
                     <xsl:if test="f:contains-div(.) and not(@type='Index')">
                         <xsl:apply-templates select="./div | ./div0 | ./div1 | ./div2 | ./div3 | ./div4 | ./div5 | ./div6" mode="gentoc-table">
-                            <xsl:with-param name="maxlevel" select="$maxlevel"/>
-                            <xsl:with-param name="curlevel" select="$curlevel + 1"/>
+                            <xsl:with-param name="maxLevel" select="$maxLevel"/>
+                            <xsl:with-param name="curLevel" select="$curLevel + 1"/>
                             <xsl:with-param name="divGenId" select="$divGenId"/>
                         </xsl:apply-templates>
                     </xsl:if>
@@ -380,16 +380,16 @@
 
 
     <xsl:template name="generate-toc-entry-table">
-        <xsl:param name="maxlevel" as="xs:integer"/>
-        <xsl:param name="curlevel" as="xs:integer"/>
+        <xsl:param name="maxLevel" as="xs:integer"/>
+        <xsl:param name="curLevel" as="xs:integer"/>
         <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
         <!-- Padding cell if needed to indent nested contents -->
-        <xsl:if test="$curlevel > 0">
+        <xsl:if test="$curLevel > 0">
             <td>
-                <xsl:if test="$curlevel > 1">
-                    <xsl:attribute name="colspan" select="$curlevel"/>
+                <xsl:if test="$curLevel > 1">
+                    <xsl:attribute name="colspan" select="$curLevel"/>
                 </xsl:if>
             </td>
         </xsl:if>
@@ -399,8 +399,8 @@
             </xsl:if>
         </td>
         <td class="tocDivTitle">
-            <xsl:if test="($maxlevel) - $curlevel > 1">
-                <xsl:attribute name="colspan" select="($maxlevel) - $curlevel"/>
+            <xsl:if test="($maxLevel) - $curLevel > 1">
+                <xsl:attribute name="colspan" select="($maxLevel) - $curLevel"/>
             </xsl:if>
             <a href="{f:generate-href(.)}">
                 <xsl:call-template name="generate-single-head"/>
@@ -429,9 +429,9 @@
 
     <xsl:function name="f:included-in-toc" as="xs:boolean">
         <xsl:param name="div" as="element()"/>
-        <xsl:param name="maxlevel" as="xs:integer"/>
+        <xsl:param name="maxLevel" as="xs:integer"/>
 
-        <xsl:sequence select="f:is-toc-div($div) and f:div-level($div) &lt;= $maxlevel"/>
+        <xsl:sequence select="f:is-toc-div($div) and f:div-level($div) &lt;= $maxLevel"/>
     </xsl:function>
 
 
