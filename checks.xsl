@@ -674,7 +674,7 @@
         </xsl:if>
 
         <xsl:if test="//divGen[@type = ('toc', 'toca')] and (//div[@id = 'toc'] or //div1[@id = 'toc'])">
-            <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Both genererated and original ToC present.</i:issue>
+            <i:issue pos="{@pos}" code="E08" category="Structure" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Both generated and original ToC present.</i:issue>
         </xsl:if>
 
         <xsl:apply-templates mode="checks"/>
@@ -1004,7 +1004,7 @@
 
     <!-- Elements not valid in TEI, but sometimes abused while producing a text from HTML. -->
 
-    <xsl:template mode="checks" match="i | b | g | sc | uc | tt | asc">
+    <xsl:template mode="checks" match="i | b | g | sc | uc | tt | asc | margin">
         <i:issue pos="{@pos}" code="X01" category="Compliance" target="{f:generate-id(.)}" level="Error" element="{name(.)}" page="{f:get-page(.)}">Non-TEI element <xsl:value-of select="name()"/></i:issue>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>

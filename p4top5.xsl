@@ -344,7 +344,7 @@
     </publicationStmt>
   </xsl:template>
 
-  <!-- space does not have @extent any more -->
+  <!-- space does not have @extent anymore -->
   <xsl:template match="space/@extent">
     <xsl:attribute name="quantity">
       <xsl:value-of select="."/>
@@ -673,7 +673,7 @@
     </div1>
   </xsl:template>
 
-  <!-- Additions by Jeroen Hellingman, to cleanup specific stuff, introduced in table-normalization -->
+  <!-- Additions by Jeroen Hellingman, to clean up specific stuff, introduced in table-normalization -->
 
   <xsl:template match="cell/@col"/>
   <xsl:template match="cell/@row"/>

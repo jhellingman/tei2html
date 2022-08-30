@@ -13,7 +13,7 @@
 <body>
 <div0 id="bk1"><head>Tei2html Test Splitter</head>
 
-<p>Test some cross references: 
+<p>Test some cross-references:
 <ref target="bk1">bk1</ref>, 
 <ref target="ch1">ch1</ref>, 
 <ref target="ch1.1">ch1.1</ref>, 

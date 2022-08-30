@@ -193,7 +193,7 @@
 <p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
 
 
-<p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="https://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows short-hand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gn 1:1">Bible</xref>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <xref url="wiki:Text_Encoding_Initiative">TEI</xref> or <xref url="tei:prefixDef">prefixDef</xref>.)</p>
+<p>Books created with these stylesheet include: <xref url="pg:19585" lang="nl">De Wereld voor de schepping van den mensch</xref> by Camille Flammarion, and <hi><xref url="pg:37578#ch19" lang="nl">The Later Life</xref></hi> by Louis  Couperus (note how this last links points to chapter XIX of the book). Books will be posted at <index level1="Project Gutenberg"/><xref url="https://www.gutenberg.org/">Project Gutenberg</xref>. Text can include references to WorldCat or OpenLibrary catalog entries, for example: <xref url="oln:OL11170298M">OLN</xref> and <xref url="oclc:618671">OCLC</xref>. The code knows shorthand notations for references to such common things as <xref url="wp:wikipedia">Wikipedia</xref> (even in <xref lang="nl" url="wp:Nederlands">Dutch</xref>) and the <xref url="bib:gn 1:1">Bible</xref>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <xref url="wiki:Text_Encoding_Initiative">TEI</xref> or <xref url="tei:prefixDef">prefixDef</xref>.)</p>
 
 
 <div2 id="ch01.0">
@@ -820,7 +820,7 @@ and HTML.</p>
 </table>
 </p>
 
-<p>A table to demonstrate manually applied overrides for the cell-borders (note that removing borders in tables can be tricky, as often the border line is drawn twice for bordered cells neighbouring each other, so you have to override on both sides, as is done below for the cell &lsquo;Bananas&rsquo;):</p>
+<p>A table to demonstrate manually applied overrides for the cell-borders (note that removing borders in tables can be tricky, as often the borderline is drawn twice for bordered cells neighbouring each other, so you have to override on both sides, as is done below for the cell &lsquo;Bananas&rsquo;):</p>
 
 <p>
 <table id="tableDemoBorders4" rend="summary(A table to demonstrate manually applied overrides for the cell-borders) class(borderAll) align(center)">
@@ -926,11 +926,11 @@ and HTML.</p>
 <p>You may note the small <index level1="ornaments"/>ornament above the <index level1="Chapter headings"/>chapter heading, which is included using a <index level1="rend attribute"/>rend attribute on the head element of this chapter.</p>
 
 
-<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p rend="class(dropcap firstlinecaps)">Lorem ipsum dolor sit amet, consectetur <foreign lang="de">Deutsch</foreign> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="margin">This is a small side note to the left of this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <hi rend="font(fraktur)">Gebrochene Buchstaben</hi> Excepteur sint<note n="2"><p>Test</p></note> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="cut-in-left">This is a small note cut-in to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="cut-in-left">This is a small note cut-in to the left of this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="cut-in-right">This is a small note cut-in to the left of this this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco<note place="cut-in-right">This is a small note cut-in to the left of this pseudo Latin text.</note> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
 <figure id="figTest1" rend="image(images/test.jpg)">
     <head>This is the heading</head>
@@ -1095,7 +1095,7 @@ and HTML.</p>
 
 <p>A list without bullets or numbers:</p>
 
-<list type="simple" lang="nl">
+<list lang="nl">
     <item>Een</item>
     <item>Twee</item>
     <item>Drie</item>

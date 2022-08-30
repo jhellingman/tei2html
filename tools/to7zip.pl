@@ -120,7 +120,7 @@ sub handle_file($) {
                 # 3. Run jpeg optimizer on all jpeg image files
                 # 4. Remove unwanted files, such as Thumbs.db, desktop.ini, *.bak, ~* files.
                 # 5. Unpack contained archives into their own directory, taking care
-                #    not to create unneccessary directory levels.
+                #    not to create unnecessary directory levels.
 
                 if (1 == 0) {
                     # Further compress images in the archive if possible

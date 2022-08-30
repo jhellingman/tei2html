@@ -1,16 +1,22 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2022-05-06T19:30:33Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2022-08-30T21:07:03Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd31e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
       <title>Main Title of Work Goes Here</title>
       <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"></meta>
-      <meta name="author" content="Author of Work (Birth-year—Death-year) A. U. Thor W. Riter"></meta>
+      <meta name="author" content="Author of Work (Birth-year—Death-year)"></meta>
+      <meta name="author" content="A. U. Thor"></meta>
+      <meta name="author" content="W. Riter"></meta>
       <link rel="coverpage" href="images/cover500.jpg"></link>
-      <link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/"></link>
-      <meta name="DC.Creator" content="Author of Work (Birth-year—Death-year) A. U. Thor W. Riter"></meta>
+      <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"></link>
       <meta name="DC.Title" content="Main Title of Work Goes Here"></meta>
+      <meta name="DC.Creator" content="Author of Work (Birth-year—Death-year)"></meta>
+      <meta name="DC.Creator" content="A. U. Thor"></meta>
+      <meta name="DC.Creator" content="W. Riter"></meta>
+      <meta name="DC.Contributor" content="E. Ditor"></meta>
+      <meta name="DC.Contributor" content="T. R. Anscriber"></meta>
       <meta name="DC.Date" content="2009-12-13"></meta>
       <meta name="DC.Language" content="en-US"></meta>
       <meta name="DC.Format" content="text/html"></meta>
@@ -20,7 +26,7 @@
       <meta name="DC:Subject" content="TEI (Text Encoding Initiative)"></meta>
       <meta name="DC:Subject" content="XSLT"></meta>
       <meta name="DC:Subject" content="HTML"></meta>
-<style type="text/css"> /* <![CDATA[ */
+      <style type="text/css"> /* <![CDATA[ */
  
 
 html {
@@ -202,14 +208,6 @@ p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  margin: 1.58em 10%;
 }
 
-td.tocDivNum {
- vertical-align: top;
-}
-
-td.tocPageNum {
- vertical-align: bottom;
-}
-
 .opener, .address {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
@@ -268,7 +266,7 @@ span.corr, span.gap {
  border-bottom: 1px dotted red;
 }
 
-span.num, span.trans, span.trans {
+span.num, span.trans {
  border-bottom: 1px dotted gray;
 }
 
@@ -468,6 +466,12 @@ a.noteRef, a.pseudoNoteRef {
  margin-left: 0.1em;
 }
 
+.externalUrl {
+ font-size: small;
+ font-family: monospace;
+ color: gray;
+}
+
 .displayfootnote {
  display: none;
 }
@@ -526,11 +530,13 @@ td.tocPageNum, td.tocDivNum {
 td.tocDivNum {
  padding-left: 0;
  padding-right: 0.5em;
+ vertical-align: top;
 }
 
 td.tocPageNum {
  padding-left: 0.5em;
  padding-right: 0;
+ vertical-align: bottom;
 }
 
 td.tocDivTitle {
@@ -1189,35 +1195,35 @@ span.ditto span.i {
 }
  
 
-table.alignedtext, table.alignedverse {
+table.alignedText, table.alignedVerse {
  border-collapse: collapse;
 }
 
-table.alignedtext td {
+table.alignedText td {
  vertical-align: top;
  width: 50%;
 }
 
-table.alignedverse {
+table.alignedVerse {
  vertical-align: top;
 }
 
-table.alignedtext td.first, table.alignedverse td.first {
+table.alignedText td.first, table.alignedVerse td.first {
  border-width: 0 0.2px 0 0;
  border-color: gray;
  border-style: solid;
  padding-right: 10px;
 }
 
-table.alignedtext td.second, table.alignedverse td.second {
+table.alignedText td.second, table.alignedVerse td.second {
  padding-left: 10px;
 }
 
-table.alignedverse td.first, table.alignedverse td.second {
+table.alignedVerse td.first, table.alignedVerse td.second {
  width: 45%;
 }
 
-table.alignedverse td.lineNumbers {
+table.alignedVerse td.lineNumbers {
  width: 10%;
 }
 
@@ -1706,56 +1712,39 @@ display:none;
 }
 /* Extracted style from SVG file "formulas/inline-f1.svg" */
 .f1frml {
-vertical-align: -0.338ex;
+vertical-align:-.338ex;
 width:8.976ex;
 height:2.509ex;
 }
 /* Extracted style from SVG file "formulas/display-f2.svg" */
 .f2frml {
-vertical-align: -2.005ex;
+vertical-align:-2.005ex;
 width:26.554ex;
 height:5.509ex;
 }
 /* Extracted style from SVG file "formulas/display-f3.svg" */
 .f3frml {
-vertical-align: -2.505ex;
+vertical-align:-2.505ex;
 width:41.652ex;
 height:6.343ex;
 }
 /* Extracted style from SVG file "formulas/inline-f4.svg" */
 .f4frml {
-vertical-align: -0.838ex;
+vertical-align:-.838ex;
 width:5.491ex;
 height:2.676ex;
 }
 /* Extracted style from SVG file "formulas/inline-f5.svg" */
 .f5frml {
-vertical-align: -0.505ex;
+vertical-align:-.505ex;
 width:16.89ex;
 height:2.676ex;
 }
 /* Extracted style from SVG file "formulas/display-f6.svg" */
 .f6frml {
-vertical-align: -1.838ex;
+vertical-align:-1.838ex;
 width:22.172ex;
 height:6.176ex;
-}
-@media handheld {
-
-.xd31e461 {
-background-image:none;
-padding-top:0;
-}
-
-.xd31e461init {
-float:none;
-width:auto;
-height:auto;
-background-image:none;
-text-align:right;
-color:inherit;
-font-size:inherit;
-}
 }
 
 /* CSS rules copied from @style attributes in TEI file */
@@ -1765,7 +1754,7 @@ color:red
 }
 
 /* ]]> */ </style>
-</head>
+   </head>
    <body> 
       
       <div class="front" id="frontmatter">
@@ -1789,168 +1778,168 @@ color:red
             <table summary="Table of Contents">
                <tr id="bk1.toc">
                   <td class="tocDivNum">I. </td>
-                  <td class="tocDivTitle" colspan="8"><a href="#bk1">Tei2html Test Document</a></td>
+                  <td class="tocDivTitle" colspan="7"><a href="#bk1">Tei2html Test Document</a></td>
                   <td class="tocPageNum"></td>
                </tr>
                <tr id="ch01.toc">
                   <td></td>
                   <td class="tocDivNum">I. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch01">Inline Text Elements</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch01">Inline Text Elements</a></td>
                   <td class="tocPageNum"></td>
                </tr>
                <tr id="ch01.0.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch01.0">Synthesized characters</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch01.0">Synthesized characters</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch01.0">2<i>a</i></a></td>
                </tr>
                <tr id="ch01.1.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch01.1">Different ways of including files.</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch01.1">Different ways of including files.</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch01.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.toc">
                   <td></td>
                   <td class="tocDivNum">II. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch02">Block-level Text Elements</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch02">Block-level Text Elements</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.1.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.2.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02.2">2<i>a</i></a></td>
                </tr>
                <tr id="ch03.toc">
                   <td></td>
                   <td class="tocDivNum">III. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch03">Footnotes</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch03">Footnotes</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch03">2<i>a</i></a></td>
                </tr>
                <tr id="ch04.toc">
                   <td></td>
                   <td class="tocDivNum">IV. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch04">Tables</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch04">Tables</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch04">2<i>a</i></a></td>
                </tr>
                <tr id="ch04.1.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch04.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch05.toc">
                   <td></td>
                   <td class="tocDivNum">V. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch05">Figures</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch05">Figures</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch05">2<i>a</i></a></td>
                </tr>
                <tr id="ch06.toc">
                   <td></td>
                   <td class="tocDivNum">VI. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch06">Lists</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch06">Lists</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch06">2<i>a</i></a></td>
                </tr>
                <tr id="ch07.toc">
                   <td></td>
                   <td class="tocDivNum">VII. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch07">Text Divisions</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch07">Text Divisions</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07">3</a></td>
                </tr>
                <tr id="ch07.1.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch07.1">Division at Level 2</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch07.1">Division at Level 2</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1">3</a></td>
                </tr>
                <tr id="ch07.1.1.toc">
                   <td colspan="3"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="5"><a href="#ch07.1.1">Division at Level 3</a></td>
+                  <td class="tocDivTitle" colspan="4"><a href="#ch07.1.1">Division at Level 3</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1.1">3</a></td>
                </tr>
                <tr id="ch07.1.1.1.toc">
                   <td colspan="4"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="4"><a href="#ch07.1.1.1">Division at Level 4</a></td>
+                  <td class="tocDivTitle" colspan="3"><a href="#ch07.1.1.1">Division at Level 4</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1.1.1">3</a></td>
                </tr>
                <tr id="ch07.1.1.1.1.toc">
                   <td colspan="5"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch07.1.1.1.1">Division at Level 5</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch07.1.1.1.1">Division at Level 5</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1.1.1.1">3</a></td>
                </tr>
                <tr id="ch07.1.1.1.1.1.toc">
                   <td colspan="6"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch07.1.1.1.1.1">Division at Level 6</a></td>
+                  <td class="tocDivTitle"><a href="#ch07.1.1.1.1.1">Division at Level 6</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1.1.1.1.1">3</a></td>
                </tr>
                <tr id="ch07.2.toc">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="6"><a href="#ch07.2">Another division at Level 2</a></td>
+                  <td class="tocDivTitle" colspan="5"><a href="#ch07.2">Another division at Level 2</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.2">3</a></td>
                </tr>
                <tr id="ch07.2.1.toc">
                   <td colspan="3"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="5"><a href="#ch07.2.1">Another division at Level 3</a></td>
+                  <td class="tocDivTitle" colspan="4"><a href="#ch07.2.1">Another division at Level 3</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.2.1">3</a></td>
                </tr>
                <tr id="ch08.toc">
                   <td></td>
                   <td class="tocDivNum">VIII. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch08">Poetry</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch08">Poetry</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch08">4</a></td>
                </tr>
                <tr id="alignFirst.toc">
                   <td></td>
                   <td class="tocDivNum">IX. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#alignFirst">Text Alignments</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#alignFirst">Text Alignments</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#alignFirst">5</a></td>
                </tr>
                <tr id="usingStyle.toc">
                   <td></td>
                   <td class="tocDivNum">X. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#usingStyle">5</a></td>
                </tr>
                <tr id="ch11.toc">
                   <td></td>
                   <td class="tocDivNum">XI. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch11">Mathematical Formula</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch11">Mathematical Formula</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch11">5</a></td>
                </tr>
                <tr id="ch11a.toc">
                   <td></td>
                   <td class="tocDivNum">XI<i>a</i>. </td>
-                  <td class="tocDivTitle" colspan="7"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
+                  <td class="tocDivTitle" colspan="6"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch11a">5</a></td>
                </tr>
                <tr id="test-toc.toc">
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="8"><a href="#test-toc">Table of Contents</a></td>
+                  <td class="tocDivTitle" colspan="7"><a href="#test-toc">Table of Contents</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#test-toc">5</a></td>
                </tr>
                <tr id="index.toc">
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="8"><a href="#index">Index</a></td>
+                  <td class="tocDivTitle" colspan="7"><a href="#index">Index</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#index">5</a></td>
                </tr>
             </table>
          </div>
       </div>
       <div class="body" id="body">
-         <div id="bk1" class="div0 book">
+         <div id="bk1" class="div0 last-child book">
             <h2 class="label">Book I</h2>
             <h2 id="xd31e122" class="main">Tei2html Test Document</h2>
             <p id="xd31e123" class="first">This is a test document, mainly intended to test<a class="noteRef" id="xd31e125src" href="#xd31e125">1</a> the features implemented in the tei2html <a id="xd31e128"></a>XSLT stylesheets. This document serves the dual purpose of helping me to develop new
@@ -1958,8 +1947,10 @@ color:red
                my <a id="xd31e130"></a>stylesheet (yes, I sometimes forget myself).</p>
             <div class="footnotes">
                <hr class="fnsep"></hr>
-               <div class="fndiv" id="xd31e125">
-                  <p class="footnote"><span class="fnlabel"><a class="noteRef" href="#xd31e125src">1</a></span> Test of a footnote at the div0 level.&nbsp;<a class="fnarrow" href="#xd31e125src" title="Return to note 1 in text.">↑</a></p>
+               <div class="footnote-body">
+                  <div class="fndiv" id="xd31e125">
+                     <p class="footnote"><span class="fnlabel"><a class="noteRef" href="#xd31e125src">1</a></span> Test of a footnote at the div0 level.&nbsp;<a class="fnarrow" href="#xd31e125src" title="Return to note 1 in text.">↑</a></p>
+                  </div>
                </div>
             </div>
             <div id="ch01" class="div1 chapter"><span class="pageNum">[<a href="#ch01.toc">Contents</a>]</span><div class="divHead">
@@ -2053,7 +2044,7 @@ color:red
                   <p id="xd31e327">Test of the choice element as used for transcription: <span class="trans" id="xd31e329" title="Transcription">Original</span>.</p>
                   <p id="xd31e334">Books created with these stylesheet include: <a id="xd31e336" lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a> by Camille Flammarion, and <i id="xd31e339"><a id="xd31e340" lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></i> by Louis  Couperus (note how this last links points to chapter XIX of the book).
                      Books will be posted at <a id="xd31e343"></a><a id="xd31e344" class="seclink xd31e38" title="External link" href="https://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example:
-                     <a id="xd31e347" class="catlink xd31e38" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/books/OL11170298M">OLN</a> and <a id="xd31e350" class="catlink xd31e38" title="Link to WorldCat catalog page" href="https://www.worldcat.org/oclc/618671">OCLC</a>. The code knows short-hand notations for references to such common things as <a id="xd31e354" class="wplink xd31e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> (even in <a id="xd31e357" lang="nl" class="wplink xd31e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a>) and the <a id="xd31e360" class="biblink xd31e38" title="Reference to the Bible: Genesis 1:1" href="https://classic.biblegateway.com/passage/?search=gn%201:1&amp;version=NRSV">Bible</a>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <a id="xd31e363" class="exlink xd31e38" title="External link" href="https://en.wikipedia.org/wiki/Text_Encoding_Initiative">TEI</a> or <a id="xd31e366" class="exlink xd31e38" title="External link" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html">prefixDef</a>.)</p>
+                     <a id="xd31e347" class="catlink xd31e38" title="Link to OpenLibrary catalog page" href="https://openlibrary.org/books/OL11170298M">OLN</a> and <a id="xd31e350" class="catlink xd31e38" title="Link to WorldCat catalog page" href="https://www.worldcat.org/oclc/618671">OCLC</a>. The code knows shorthand notations for references to such common things as <a id="xd31e354" class="wplink xd31e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/wikipedia">Wikipedia</a> (even in <a id="xd31e357" lang="nl" class="wplink xd31e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a>) and the <a id="xd31e360" class="biblink xd31e38" title="Reference to the Bible: Genesis 1:1" href="https://classic.biblegateway.com/passage/?search=gn%201:1&amp;version=NRSV">Bible</a>. (Alternatively, via a prefix defined in prefixDef elements in the TeiHeader: <a id="xd31e363" class="exlink xd31e38" title="External link" href="https://en.wikipedia.org/wiki/Text_Encoding_Initiative">TEI</a> or <a id="xd31e366" class="exlink xd31e38" title="External link" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html">prefixDef</a>.)</p>
                   <div id="ch01.0" class="div2"><span class="pageNum">[<a href="#ch01.0.toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd31e370" class="main">Synthesized characters</h3>
                      </div>
@@ -2071,14 +2062,14 @@ color:red
                         </div>
                      </div>
                   </div>
-                  <div id="ch01.1" class="div2"><span class="pageNum">[<a href="#ch01.1.toc">Contents</a>]</span><div class="divHead">
+                  <div id="ch01.1" class="div2 last-child"><span class="pageNum">[<a href="#ch01.1.toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd31e385" class="main">Different ways of including files.</h3>
                      </div>
                      <div class="divBody">
                         <p id="xd31e386" class="first">The following paragraph should include some Russian.</p>
                         <p id="russian" class="first">First included paragraph (some Russian: русский язык).</p>
                         <p id="xd31e388">The following paragraph should include some Greek.</p>
-                        <div class="div3" id="xd57e1">
+                        <div class="div3 last-child" id="xd57e1">
                            <div class="divHead">
                               <h4 id="xd57e3" class="main">Languages written in a different script.</h4>
                            </div>
@@ -2091,7 +2082,7 @@ color:red
                         <p id="xd31e390">The following paragraph should include some Sanskrit.</p>
                         <p id="sanskrit">Third included paragraph (some Sanskrit: संस्कृतम्).</p>
                         <p id="xd31e392">The following includes the entire file.</p>
-                        <div class="div3" id="xd57e1">
+                        <div class="div3 last-child" id="xd57e1">
                            <div class="divHead">
                               <h4 id="xd57e3" class="main">Languages written in a different script.</h4>
                            </div>
@@ -2134,7 +2125,7 @@ color:red
                   <p id="xd31e414" class="first">This chapter demonstrates some block-level text elements that can occur in a book.</p>
                   <blockquote id="xd31e415">
                      <div class="body" id="xd31e417">
-                        <div id="quotedDiv" class="div1">
+                        <div id="quotedDiv" class="div1 last-child">
                            <div class="divHead">
                               <h2 id="xd31e419" class="main">Section head in quoted material</h2>
                            </div>
@@ -2151,7 +2142,7 @@ color:red
                         <p id="xd31e433" class="first">A quoted letter is shown below.</p>
                         <blockquote id="xd31e434">
                            <div class="body" id="xd31e436">
-                              <div id="quotedLetter" class="div1 letter">
+                              <div id="quotedLetter" class="div1 last-child letter">
                                  <div class="divHead">
                                     <div class="opener">
                                        
@@ -2177,7 +2168,7 @@ color:red
                         </blockquote>
                      </div>
                   </div>
-                  <div id="ch02.2" class="div2"><span class="pageNum">[<a href="#ch02.2.toc">Contents</a>]</span><div class="divHead">
+                  <div id="ch02.2" class="div2 last-child"><span class="pageNum">[<a href="#ch02.2.toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd31e450" class="main">Some Further Tests of Paragraphs</h3>
                      </div>
                      <div class="divBody">
@@ -2788,9 +2779,9 @@ color:red
                      </div><p>
                      </p>
                   <p id="xd31e1186">A table to demonstrate manually applied overrides for the cell-borders (note that
-                     removing borders in tables can be tricky, as often the border line is drawn twice
-                     for bordered cells neighbouring each other, so you have to override on both sides,
-                     as is done below for the cell ‘Bananas’):</p>
+                     removing borders in tables can be tricky, as often the borderline is drawn twice for
+                     bordered cells neighbouring each other, so you have to override on both sides, as
+                     is done below for the cell ‘Bananas’):</p>
                   <p id="xd31e1187">
                      </p>
                      <div class="table" id="tableDemoBorders4">
@@ -2855,7 +2846,7 @@ color:red
                         </table>
                      </div><p>
                      </p>
-                  <div id="ch04.1" class="div2"><span class="pageNum">[<a href="#ch04.1.toc">Contents</a>]</span><div class="divHead">
+                  <div id="ch04.1" class="div2 last-child"><span class="pageNum">[<a href="#ch04.1.toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd31e1274" class="main">Tables with repeated rows using ditto marks.</h3>
                      </div>
                      <div class="divBody">
@@ -2987,17 +2978,17 @@ color:red
                <div class="divBody">
                   <p id="xd31e1364" class="first">You may note the small <a id="xd31e1366"></a>ornament above the <a id="xd31e1368"></a>chapter heading, which is included using a <a id="xd31e1370"></a>rend attribute on the head element of this chapter.</p>
                   <p id="xd31e1372" class="dropcap firstlinecaps">Lorem ipsum dolor sit amet, consectetur <span id="xd31e1374" lang="de">Deutsch</span> adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                     Ut enim ad minim veniam, quis nostrud exercitation ullamco<span class="marginnote" id="xd31e1377">This is a small side note to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                     Ut enim ad minim veniam, quis nostrud exercitation ullamco<span class="marginnote" id="xd31e1377">This is a small side note to the left of this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <span id="xd31e1380" class="xd31e159">Gebrochene Buchstaben</span> Excepteur sint<a class="noteRef" id="xd31e1383src" href="#xd31e1383">1</a> occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
                      est laborum.</p>
                   <p id="xd31e1386">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                     ullamco<span class="cut-in-left-note" id="xd31e1388">This is a small note cut-in to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                     ullamco<span class="cut-in-left-note" id="xd31e1388">This is a small note cut-in to the left of this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                   <p id="xd31e1391">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                     ullamco<span class="cut-in-right-note" id="xd31e1393">This is a small note cut-in to the left of this this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                     ullamco<span class="cut-in-right-note" id="xd31e1393">This is a small note cut-in to the left of this pseudo Latin text.</span> laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
                      in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
                      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                   <div class="figure figTest1width" id="figTest1"><img src="images/test.jpg" alt="This is the heading" width="80" height="80"></img><p class="figureHead">This is the heading</p>
@@ -3277,7 +3268,7 @@ color:red
                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                            officia deserunt mollit anim id est laborum.</p>
-                        <div class="div3" id="ch07.1.1">
+                        <div class="div3 last-child" id="ch07.1.1">
                            <div class="divHead">
                               <h4 id="xd31e1596" class="main">Division at Level 3</h4>
                            </div>
@@ -3288,7 +3279,7 @@ color:red
                                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                  nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                  officia deserunt mollit anim id est laborum.</p>
-                              <div class="div4" id="ch07.1.1.1">
+                              <div class="div4 last-child" id="ch07.1.1.1">
                                  <div class="divHead">
                                     <h5 id="xd31e1599" class="main">Division at Level 4</h5>
                                  </div>
@@ -3299,7 +3290,7 @@ color:red
                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                        officia deserunt mollit anim id est laborum.</p>
-                                    <div class="div5" id="ch07.1.1.1.1">
+                                    <div class="div5 last-child" id="ch07.1.1.1.1">
                                        <div class="divHead">
                                           <h6 id="xd31e1602" class="main">Division at Level 5</h6>
                                        </div>
@@ -3310,7 +3301,7 @@ color:red
                                              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                              officia deserunt mollit anim id est laborum.</p>
-                                          <div class="div6" id="ch07.1.1.1.1.1">
+                                          <div class="div6 last-child" id="ch07.1.1.1.1.1">
                                              <div class="divHead">
                                                 <h6 id="xd31e1605" class="main">Division at Level 6</h6>
                                              </div>
@@ -3331,7 +3322,7 @@ color:red
                         </div>
                      </div>
                   </div>
-                  <div id="ch07.2" class="div2"><span class="pageNum">[<a href="#ch07.2.toc">Contents</a>]</span><div class="divHead">
+                  <div id="ch07.2" class="div2 last-child"><span class="pageNum">[<a href="#ch07.2.toc">Contents</a>]</span><div class="divHead">
                         <h3 id="xd31e1608" class="main">Another division at Level 2</h3>
                      </div>
                      <div class="divBody">
@@ -3341,7 +3332,7 @@ color:red
                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
                            eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                            culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <div class="div3" id="ch07.2.1">
+                        <div class="div3 last-child" id="ch07.2.1">
                            <div class="divHead">
                               <h4 id="xd31e1611" class="main">Another division at Level 3</h4>
                            </div>
@@ -3413,7 +3404,7 @@ color:red
                      <p id="xd31e1730" class="line xd31e1646"><span class="lineNum">8 </span>This is another rule of verse</p>
                   </div>
                   <p id="xd31e1732" class="first">Two verses, aligned:</p>
-                  <table class="alignedverse">
+                  <table class="alignedVerse">
                      <tr>
                         <td class="lineNumbers"></td>
                         <td class="first"><span class="h4">Frère Jacques</span></td>
@@ -3477,7 +3468,7 @@ color:red
                   </div>
                </div>
             </div>
-            <div id="alignFirst" class="div1"><span class="pageNum">[<a href="#alignFirst.toc">Contents</a>]</span><table class="alignedtext">
+            <div id="alignFirst" class="div1"><span class="pageNum">[<a href="#alignFirst.toc">Contents</a>]</span><table class="alignedText">
                   <tr>
                      <td class="first" lang="en-US">
                         <h2 id="xd31e1754" class="label">Chapter IX</h2>
@@ -3547,7 +3538,7 @@ color:red
                   </tr>
                </table>
             </div>
-            <div id="alignThird" class="div1"><span class="pageNum">[<a href="#toc">Contents</a>]</span><table class="alignedtext">
+            <div id="alignThird" class="div1"><span class="pageNum">[<a href="#toc">Contents</a>]</span><table class="alignedText">
                   <tr>
                      <td class="first" lang="en-US"></td>
                      <td class="second">
@@ -3645,7 +3636,7 @@ color:red
                   </div>
                </div>
             </div>
-            <div id="ch11a" class="div1"><span class="pageNum">[<a href="#ch11a.toc">Contents</a>]</span><div class="divHead">
+            <div id="ch11a" class="div1 last-child"><span class="pageNum">[<a href="#ch11a.toc">Contents</a>]</span><div class="divHead">
                   <h2 id="xd31e1870" class="main">Mathematical Formula (Part II)</h2>
                </div>
                <div class="divBody">
@@ -3699,85 +3690,85 @@ color:red
                   <table summary="Table of Contents">
                      <tr id="bk1.xd31e1922">
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="4"><a href="#bk1">Tei2html Test Document</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#bk1">Tei2html Test Document</a></td>
                         <td class="tocPageNum"></td>
                      </tr>
                      <tr id="ch01.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">I. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch01">Inline Text Elements</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch01">Inline Text Elements</a></td>
                         <td class="tocPageNum"></td>
                      </tr>
                      <tr id="ch01.0.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch01.0">Synthesized characters</a></td>
+                        <td class="tocDivTitle"><a href="#ch01.0">Synthesized characters</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch01.0">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch01.1.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch01.1">Different ways of including files.</a></td>
+                        <td class="tocDivTitle"><a href="#ch01.1">Different ways of including files.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch01.1">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch02.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">II. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch02">Block-level Text Elements</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch02">Block-level Text Elements</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch02">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch02.1.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
+                        <td class="tocDivTitle"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch02.1">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch02.2.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
+                        <td class="tocDivTitle"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch02.2">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch03.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">III. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch03">Footnotes</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch03">Footnotes</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch03">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch04.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">IV. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch04">Tables</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch04">Tables</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch04">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch04.1.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
+                        <td class="tocDivTitle"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch04.1">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch05.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">V. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch05">Figures</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch05">Figures</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch05">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch06.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">VI. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch06">Lists</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch06">Lists</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch06">2<i>a</i></a></td>
                      </tr>
                      <tr id="ch07.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">VII. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch07">Text Divisions</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch07">Text Divisions</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch07">3</a></td>
                      </tr>
                      <tr id="ch07.1.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch07.1">Division at Level 2</a></td>
+                        <td class="tocDivTitle"><a href="#ch07.1">Division at Level 2</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch07.1">3</a></td>
                      </tr>
                      <tr id="ch07.1.1.xd31e1922">
@@ -3789,7 +3780,7 @@ color:red
                      <tr id="ch07.2.xd31e1922">
                         <td colspan="2"></td>
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="2"><a href="#ch07.2">Another division at Level 2</a></td>
+                        <td class="tocDivTitle"><a href="#ch07.2">Another division at Level 2</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch07.2">3</a></td>
                      </tr>
                      <tr id="ch07.2.1.xd31e1922">
@@ -3801,41 +3792,41 @@ color:red
                      <tr id="ch08.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">VIII. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch08">Poetry</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch08">Poetry</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch08">4</a></td>
                      </tr>
                      <tr id="alignFirst.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">IX. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#alignFirst">Text Alignments</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#alignFirst">Text Alignments</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#alignFirst">5</a></td>
                      </tr>
                      <tr id="usingStyle.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">X. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#usingStyle">5</a></td>
                      </tr>
                      <tr id="ch11.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">XI. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch11">Mathematical Formula</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch11">Mathematical Formula</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch11">5</a></td>
                      </tr>
                      <tr id="ch11a.xd31e1922">
                         <td></td>
                         <td class="tocDivNum">XI<i>a</i>. </td>
-                        <td class="tocDivTitle" colspan="3"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
+                        <td class="tocDivTitle" colspan="2"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch11a">5</a></td>
                      </tr>
                      <tr id="test-toc.xd31e1922">
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="4"><a href="#test-toc">Table of Contents</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#test-toc">Table of Contents</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#test-toc">5</a></td>
                      </tr>
                      <tr id="index.xd31e1922">
                         <td class="tocDivNum"></td>
-                        <td class="tocDivTitle" colspan="4"><a href="#index">Index</a></td>
+                        <td class="tocDivTitle" colspan="3"><a href="#index">Index</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#index">5</a></td>
                      </tr>
                   </table>
@@ -3847,28 +3838,28 @@ color:red
             </div>
             <div class="divBody">
                <div class="transcriberNote indexToc" id="ixToc"><a href="#xd31e1927">A</a> | <a href="#xd31e1930">B</a> | <a href="#xd31e1933">C</a> | <a href="#xd31e1936">D</a></div>
-               <div id="ixA" class="div2"><span class="pageNum">[<a href="#ixA.toc">Contents</a>]</span><div class="divHead">
+               <div id="ixA" class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                      <h3 id="xd31e1927" class="main">A.</h3>
                   </div>
                   <div class="divBody">
                      <p id="xd31e1928" class="first">A is een aapje.</p>
                   </div>
                </div>
-               <div id="ixB" class="div2"><span class="pageNum">[<a href="#ixB.toc">Contents</a>]</span><div class="divHead">
+               <div id="ixB" class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                      <h3 id="xd31e1930" class="main">B.</h3>
                   </div>
                   <div class="divBody">
                      <p id="xd31e1931" class="first">B is een Boom.</p>
                   </div>
                </div>
-               <div id="ixC" class="div2"><span class="pageNum">[<a href="#ixC.toc">Contents</a>]</span><div class="divHead">
+               <div id="ixC" class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                      <h3 id="xd31e1933" class="main">C.</h3>
                   </div>
                   <div class="divBody">
                      <p id="xd31e1934" class="first">C is een Cent.</p>
                   </div>
                </div>
-               <div id="ixD" class="div2"><span class="pageNum">[<a href="#ixD.toc">Contents</a>]</span><div class="divHead">
+               <div id="ixD" class="div2 last-child"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                      <h3 id="xd31e1936" class="main">D.</h3>
                   </div>
                   <div class="divBody">
@@ -3936,85 +3927,85 @@ color:red
             <table summary="Table of Contents">
                <tr id="bk1.toc2">
                   <td class="tocDivNum">I. </td>
-                  <td class="tocDivTitle" colspan="4"><a href="#bk1">Tei2html Test Document</a></td>
+                  <td class="tocDivTitle" colspan="3"><a href="#bk1">Tei2html Test Document</a></td>
                   <td class="tocPageNum"></td>
                </tr>
                <tr id="ch01.toc2">
                   <td></td>
                   <td class="tocDivNum">I. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch01">Inline Text Elements</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch01">Inline Text Elements</a></td>
                   <td class="tocPageNum"></td>
                </tr>
                <tr id="ch01.0.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch01.0">Synthesized characters</a></td>
+                  <td class="tocDivTitle"><a href="#ch01.0">Synthesized characters</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch01.0">2<i>a</i></a></td>
                </tr>
                <tr id="ch01.1.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch01.1">Different ways of including files.</a></td>
+                  <td class="tocDivTitle"><a href="#ch01.1">Different ways of including files.</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch01.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.toc2">
                   <td></td>
                   <td class="tocDivNum">II. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch02">Block-level Text Elements</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch02">Block-level Text Elements</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.1.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
+                  <td class="tocDivTitle"><a href="#ch02.1">Letters, Closers, and Openers</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch02.2.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
+                  <td class="tocDivTitle"><a href="#ch02.2">Some Further Tests of Paragraphs</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch02.2">2<i>a</i></a></td>
                </tr>
                <tr id="ch03.toc2">
                   <td></td>
                   <td class="tocDivNum">III. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch03">Footnotes</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch03">Footnotes</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch03">2<i>a</i></a></td>
                </tr>
                <tr id="ch04.toc2">
                   <td></td>
                   <td class="tocDivNum">IV. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch04">Tables</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch04">Tables</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch04">2<i>a</i></a></td>
                </tr>
                <tr id="ch04.1.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
+                  <td class="tocDivTitle"><a href="#ch04.1">Tables with repeated rows using ditto marks.</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch04.1">2<i>a</i></a></td>
                </tr>
                <tr id="ch05.toc2">
                   <td></td>
                   <td class="tocDivNum">V. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch05">Figures</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch05">Figures</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch05">2<i>a</i></a></td>
                </tr>
                <tr id="ch06.toc2">
                   <td></td>
                   <td class="tocDivNum">VI. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch06">Lists</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch06">Lists</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch06">2<i>a</i></a></td>
                </tr>
                <tr id="ch07.toc2">
                   <td></td>
                   <td class="tocDivNum">VII. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch07">Text Divisions</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch07">Text Divisions</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07">3</a></td>
                </tr>
                <tr id="ch07.1.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch07.1">Division at Level 2</a></td>
+                  <td class="tocDivTitle"><a href="#ch07.1">Division at Level 2</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.1">3</a></td>
                </tr>
                <tr id="ch07.1.1.toc2">
@@ -4026,7 +4017,7 @@ color:red
                <tr id="ch07.2.toc2">
                   <td colspan="2"></td>
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="2"><a href="#ch07.2">Another division at Level 2</a></td>
+                  <td class="tocDivTitle"><a href="#ch07.2">Another division at Level 2</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch07.2">3</a></td>
                </tr>
                <tr id="ch07.2.1.toc2">
@@ -4038,41 +4029,41 @@ color:red
                <tr id="ch08.toc2">
                   <td></td>
                   <td class="tocDivNum">VIII. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch08">Poetry</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch08">Poetry</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch08">4</a></td>
                </tr>
                <tr id="alignFirst.toc2">
                   <td></td>
                   <td class="tocDivNum">IX. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#alignFirst">Text Alignments</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#alignFirst">Text Alignments</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#alignFirst">5</a></td>
                </tr>
                <tr id="usingStyle.toc2">
                   <td></td>
                   <td class="tocDivNum">X. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#usingStyle">Using @style and @rendition attributes</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#usingStyle">5</a></td>
                </tr>
                <tr id="ch11.toc2">
                   <td></td>
                   <td class="tocDivNum">XI. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch11">Mathematical Formula</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch11">Mathematical Formula</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch11">5</a></td>
                </tr>
                <tr id="ch11a.toc2">
                   <td></td>
                   <td class="tocDivNum">XI<i>a</i>. </td>
-                  <td class="tocDivTitle" colspan="3"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
+                  <td class="tocDivTitle" colspan="2"><a href="#ch11a">Mathematical Formula (Part II)</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#ch11a">5</a></td>
                </tr>
                <tr id="test-toc.toc2">
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="4"><a href="#test-toc">Table of Contents</a></td>
+                  <td class="tocDivTitle" colspan="3"><a href="#test-toc">Table of Contents</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#test-toc">5</a></td>
                </tr>
                <tr id="index.toc2">
                   <td class="tocDivNum"></td>
-                  <td class="tocDivTitle" colspan="4"><a href="#index">Index</a></td>
+                  <td class="tocDivTitle" colspan="3"><a href="#index">Index</a></td>
                   <td class="tocPageNum"><a class="pageref" href="#index">5</a></td>
                </tr>
             </table>
@@ -4130,6 +4121,11 @@ color:red
                <tr>
                   <td><b>Publication date:</b></td>
                   <td>2009-12-13</td>
+                  <td></td>
+               </tr>
+               <tr>
+                  <td><b>File generation date:</b></td>
+                  <td>2022-08-30 21:07:03 UTC</td>
                   <td></td>
                </tr>
                <tr>
@@ -4198,8 +4194,9 @@ color:red
                <li id="xd31e96">2003-09-13 Added TEI Header.</li>
             </ul>
             <h3 class="main">External References</h3>
-            <p>This Project Gutenberg eBook contains external references. These links may not work
-               for you.</p>
+            <p>This eBook contains external references. These links may not work for you.
+               
+               </p>
             <h3 class="main">Corrections</h3>
             <p>The following corrections have been applied to the text:</p>
             <table class="correctionTable" summary="Overview of corrections applied to the text.">
@@ -4252,7 +4249,7 @@ color:red
             </table>
             <h3 class="main">Abbreviations</h3>
             <p>Overview of abbreviations used.</p>
-            <table class="abbreviationtable" summary="Overview of abbreviations used.">
+            <table class="abbreviationTable" summary="Overview of abbreviations used.">
                <tr>
                   <th>Abbreviation</th>
                   <th>Expansion</th>
@@ -4447,33 +4444,33 @@ color:red
                   <td><a class="pageref" href="#index">5</a></td>
                   <td>div1</td>
                   <td>
-                     <div lang="nl" class="div1 index"><span class="pageNum">[<a href="#index.toc">Contents</a>]</span><div class="divHead">
+                     <div lang="nl" class="div1 last-child index"><span class="pageNum">[<a href="#index.toc">Contents</a>]</span><div class="divHead">
                            <h2 class="main">Index</h2>
                         </div>
                         <div class="divBody">
                            <div class="transcriberNote indexToc"><a href="#xd31e1927">A</a> | <a href="#xd31e1930">B</a> | <a href="#xd31e1933">C</a> | <a href="#xd31e1936">D</a></div>
-                           <div class="div2"><span class="pageNum">[<a href="#ixA.toc">Contents</a>]</span><div class="divHead">
+                           <div class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                                  <h3 class="main">A.</h3>
                               </div>
                               <div class="divBody">
                                  <p class="first">A is een aapje.</p>
                               </div>
                            </div>
-                           <div class="div2"><span class="pageNum">[<a href="#ixB.toc">Contents</a>]</span><div class="divHead">
+                           <div class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                                  <h3 class="main">B.</h3>
                               </div>
                               <div class="divBody">
                                  <p class="first">B is een Boom.</p>
                               </div>
                            </div>
-                           <div class="div2"><span class="pageNum">[<a href="#ixC.toc">Contents</a>]</span><div class="divHead">
+                           <div class="div2"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                                  <h3 class="main">C.</h3>
                               </div>
                               <div class="divBody">
                                  <p class="first">C is een Cent.</p>
                               </div>
                            </div>
-                           <div class="div2"><span class="pageNum">[<a href="#ixD.toc">Contents</a>]</span><div class="divHead">
+                           <div class="div2 last-child"><span class="pageNum">[<a href="#toc">Contents</a>]</span><div class="divHead">
                                  <h3 class="main">D.</h3>
                               </div>
                               <div class="divBody">
@@ -5958,24 +5955,12 @@ color:red
                <td><a href="https://www.gnu.org/copyleft/gpl.html" class="seclink">https://www.gnu.org/copyleft/gpl.html</a></td>
             </tr>
             <tr>
-               <td><a class="pageref" id="xd31e38ext" href="#xd31e38">N.A.</a>, <a class="pageref" id="xd31e344ext" href="#xd31e344">2<i>a</i></a></td>
-               <td><a href="https://www.gutenberg.org/" class="seclink">https://www.gutenberg.org/</a></td>
-            </tr>
-            <tr>
                <td><a class="pageref" id="xd31e350ext" href="#xd31e350">2<i>a</i></a></td>
                <td><a href="https://www.worldcat.org/oclc/618671" class="catlink">https://www.worldcat.org/oclc/618671</a></td>
             </tr>
             <tr>
                <td><a class="pageref" id="xd31e347ext" href="#xd31e347">2<i>a</i></a></td>
                <td><a href="https://openlibrary.org/books/OL11170298M" class="catlink">https://openlibrary.org/books/OL11170298M</a></td>
-            </tr>
-            <tr>
-               <td><a class="pageref" id="xd31e336ext" href="#xd31e336">2<i>a</i></a></td>
-               <td><a href="https://www.gutenberg.org/ebooks/19585" class="pglink">https://www.gutenberg.org/ebooks/19585</a></td>
-            </tr>
-            <tr>
-               <td><a class="pageref" id="xd31e340ext" href="#xd31e340">2<i>a</i></a></td>
-               <td><a href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19" class="pglink">https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19</a></td>
             </tr>
             <tr>
                <td><a class="pageref" id="xd31e366ext" href="#xd31e366">2<i>a</i></a></td>

@@ -23,20 +23,20 @@
             <p>Import a document as node-set, while at the same time adjusting internal ids to make them unique.</p>
         </xd:detail>
         <xd:param name="location">The location of the file to be imported.</xd:param>
-        <xd:param name="basenode">Node to disambiguate relative locations.</xd:param>
+        <xd:param name="baseNode">Node to disambiguate relative locations.</xd:param>
         <xd:param name="prefix">The prefix to add to all ids in this document.</xd:param>
         <xd:param name="keepPrefix">List of space-separated prefixes of ids that should <i>not</i> be prefixed.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:import-document">
         <xsl:param name="location" as="xs:string"/>
-        <xsl:param name="basenode"/>
+        <xsl:param name="baseNode"/>
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefix" as="xs:string"/>
 
         <xsl:variable name="keepPrefixes" select="tokenize($keepPrefix, ' ')"/>
 
-        <xsl:apply-templates select="document($location, $basenode)" mode="import-document">
+        <xsl:apply-templates select="document($location, $baseNode)" mode="import-document">
             <xsl:with-param name="prefix" select="$prefix"/>
             <xsl:with-param name="keepPrefixes" select="$keepPrefixes"/>
         </xsl:apply-templates>

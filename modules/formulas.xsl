@@ -220,6 +220,9 @@
                 <xsl:variable name="width" select="$svg/svg:svg/@width"/>
                 <xsl:variable name="height" select="$svg/svg:svg/@height"/>
 
+                <!-- The final semicolon in the SVG style attribute is optional, but we need it -->
+                <xsl:variable name="style" select="if (ends-with($style, ';')) then $style else ($style || ';')"/>
+
                 <xsl:if test="$style">
                     <xsl:text>/* Extracted style from SVG file "</xsl:text><xsl:value-of select="$svgFile"/><xsl:text>" */&lf;</xsl:text>
                     <xsl:text>.</xsl:text><xsl:value-of select="f:escape-css-selector(f:generate-id(.))"/><xsl:text>frml {&lf;</xsl:text>

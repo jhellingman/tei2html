@@ -179,14 +179,6 @@ p.argument, p.tocArgument, .par.argument, .par.tocArgument {
  margin: 1.58em 10%;
 }
 
-td.tocDivNum {
- vertical-align: top;
-}
-
-td.tocPageNum {
- vertical-align: bottom;
-}
-
 .opener, .address {
  margin-top: 1.6em;
  margin-bottom: 1.6em;
@@ -245,7 +237,7 @@ span.corr, span.gap {
  border-bottom: 1px dotted red;
 }
 
-span.num, span.trans, span.trans {
+span.num, span.trans {
  border-bottom: 1px dotted gray;
 }
 
@@ -445,6 +437,12 @@ a.noteRef, a.pseudoNoteRef {
  margin-left: 0.1em;
 }
 
+.externalUrl {
+ font-size: small;
+ font-family: monospace;
+ color: gray;
+}
+
 .displayfootnote {
  display: none;
 }
@@ -503,11 +501,13 @@ td.tocPageNum, td.tocDivNum {
 td.tocDivNum {
  padding-left: 0;
  padding-right: 0.5em;
+ vertical-align: top;
 }
 
 td.tocPageNum {
  padding-left: 0.5em;
  padding-right: 0;
+ vertical-align: bottom;
 }
 
 td.tocDivTitle {
@@ -1198,6 +1198,7 @@ table.alignedVerse td.lineNumbers {
  width: 10%;
 }
 
+  
 
 .epub-media-overlay-active {
  background-color: yellow;
@@ -1586,7 +1587,6 @@ display:none;
 .alignSecond {
 display:none;
 }
-@media handheld {
 
 .xd35e461 {
 background-image:none;
@@ -1601,7 +1601,6 @@ background-image:none;
 text-align:right;
 color:inherit;
 font-size:inherit;
-}
 }
 
 /* CSS rules copied from @style attributes in TEI file */
