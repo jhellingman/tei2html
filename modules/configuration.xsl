@@ -63,7 +63,7 @@
             <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
-            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with TOC entries. -->
+            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries. -->
             <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present -->
 
             <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->

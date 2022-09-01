@@ -18,7 +18,7 @@ The design of `tei2html` is based on a small set of guiding principles and desig
 
 The guiding principles are:
 
-  * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself. Unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
+  * Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, `tei2html` does not supply much content itself. Unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
   * Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that `tei2html` needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
   * The `@rend`, `@style` and `@rendition` attributes in tags are intended as formatting indications only. Ignoring them fully or partially should not render a text incomprehensible. (Note that the TEI standard itself prescribes that these attributes should be used to indicate the formatting of the source, rather than the desired output.)
 
@@ -28,7 +28,7 @@ The design decisions are:
   * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
   * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `<rendition>` elements. Note that currently no translation of the `@selector` attribute of the `<rendition>` element takes place.
 
-As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'poluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline CSS is generated.
+As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline CSS is generated.
 
 
 ## SGML versus XML ##

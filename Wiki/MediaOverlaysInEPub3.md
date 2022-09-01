@@ -50,7 +50,7 @@ Have a structure like this, and is located in the same directory as the referenc
 
 ## MP3 or OGG Files ##
 
-The actual audio files are in a sub-directory called `audio`.
+The actual audio files are in a subdirectory called `audio`.
 
 ## OPF File ##
 
@@ -79,7 +79,6 @@ This also indicates how to handle fall-back media in an alternative format.
 <item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
 <item id="audio02" href="audio/chapter.ogg" media-type="audio/ogg"/>
 ```
-
 
 Then also refer to the media-overlay in the entry for the original (text) items
 

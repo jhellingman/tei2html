@@ -21,7 +21,7 @@ The process consists of three steps:
 2. Run the perl script `convertFormulas.pl` to convert all these files to SVG files (and MathML).
 3. Run `tei2html` again (if needed with the `-f` option) to include the generated SVG files as images (or inline) in the resulting file, and use metrics from the SVG files to generate proper CSS.
 
-The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`. The name is important, as the convertion script uses that to determine the correct MathJax option to use when converting the file to SVG, etc.
+The resulting output files are placed in a folder `formulas`, and named according to the following naming scheme `(inline|display)-<ID>.tex`. The name is important, as the conversion script uses that to determine the correct MathJax option to use when converting the file to SVG, etc.
 
 The script `convertFormulas.pl` will convert these files to files named `(inline|display)-<ID>.svg`. This script will use node.js with mathjax-node-cli to produce HTML, SVG, and MathML files from the exported formulas.
 

@@ -122,7 +122,7 @@
 
     <xd:doc>
         <xd:short>Format a normal lg element.</xd:short>
-        <xd:detail>Format an lg element. top-level lg elements get class=lgouter, nested lg elements get class=lg.
+        <xd:detail>Format an lg element. Top-level lg elements get class=lgouter, nested lg elements get class=lg.
         This we use (using CSS) to center the entire poem on the screen, and still keep the left side
         of all stanzas aligned.</xd:detail>
     </xd:doc>
@@ -176,7 +176,7 @@
 
     <xd:doc>
         <xd:short>Format a line of verse.</xd:short>
-        <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistich.
+        <xd:detail>Format a line of verse. This takes care of adding line-numbers, and dealing with hemistiches.
         A line number is given a span with the class <code>lineNum</code>, and leaves it to the CSS to place
         it at the proper location. A hemistich is handled by adding a span with the class <code>hemistich</code>,
         which will contain the text of the previous part of the hemistich, and leaves it to the CSS
@@ -258,7 +258,7 @@
                 </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
-                <!-- Hemistich value gives the literal string content to use width of -->
+                <!-- Hemistich value gives the literal string content to use the width of. -->
                 <xsl:value-of select="f:rend-value($node/@rend, 'hemistich')"/>
             </xsl:otherwise>
         </xsl:choose>

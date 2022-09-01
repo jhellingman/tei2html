@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xhtml="http://www.w3.org/1999/xhtml"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
+
+    <x:param name="textWithCorrections">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <pb n="1"/>
+                <p>This is a simple <corr id="c1" sic="mistake">correction</corr></p>
+                <p>This is another <corr id="c2" sic="mistake">correction</corr></p>
+                <pb n="2"/>
+                <p>These are <choice id="c3"><sic>mistakes</sic><corr>corrections</corr></choice> in a choice element.</p>
+                <p>These are <choice id="c4"><corr>corrections</corr><sic>mistakes</sic></choice> in a choice element (different order).</p>
+                <pb n="3"/>
+                <p>This is an <corr id="c5" sic="typo">correction</corr>.</p>
+                <pb n="5"/>
+                <p>This is a <corr id="c6" sic="style change"><hi>style change</hi></corr>.</p>
+                <p>This is another one: <choice id="c7"><sic><hi rend="bold">bold</hi></sic><corr><hi>italic</hi></corr></choice>.</p>
+            </text>
+            <back>
+                <divGen type="corr"/>
+            </back>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When generating a list of corrections">
+        <x:context select="$textWithCorrections"/>
+        <x:expect label="will result in a HTML table with the corrections" test="//xhtml:div[@class='back']">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="back" id="...">
+                <h2 class="main">Corrections</h2>
+                <p>The following corrections have been applied to the text:</p>
+                <table class="correctionTable" summary="Overview of corrections applied to the text.">
+                    <tr>
+                        <th>Page</th>
+                        <th>Source</th>
+                        <th>Correction</th>
+                        <th>Edit distance</th>
+                    </tr>
+                    <tr>
+                        <td class="width20">
+                            <a class="pageref" href="#c1">1</a>, <a class="pageref" href="#c2">1</a>
+                        </td>
+                        <td class="width40 bottom">mistake</td>
+                        <td class="width40 bottom">correction</td>
+                        <td class="bottom">9</td>
+                    </tr>
+                    <tr>
+                        <td class="width20">
+                            <a class="pageref" href="#c3">2</a>, <a class="pageref" href="#c4">2</a>
+                        </td>
+                        <td class="width40 bottom">mistakes</td>
+                        <td class="width40 bottom">corrections</td>
+                        <td class="bottom">9</td>
+                    </tr>
+                    <tr>
+                        <td class="width20">
+                            <a class="pageref" href="#c5">3</a>
+                        </td>
+                        <td class="width40 bottom">typo</td>
+                        <td class="width40 bottom">correction</td>
+                        <td class="bottom">9</td>
+                    </tr>
+                    <tr>
+                        <td class="width20">
+                            <a class="pageref" href="#c6">5</a>
+                        </td>
+                        <td class="width40 bottom">style change</td>
+                        <td class="width40 bottom">
+                            <i id="...">style change</i>
+                        </td>
+                        <td class="bottom">0</td>
+                    </tr>
+                    <tr>
+                        <td class="width20">
+                            <a class="pageref" href="#c7">5</a>
+                        </td>
+                        <td class="width40 bottom">
+                            <b id="...">bold</b>
+                        </td>
+                        <td class="width40 bottom">
+                            <i id="...">italic</i>
+                        </td>
+                        <td class="bottom">5</td>
+                    </tr>
+                </table>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

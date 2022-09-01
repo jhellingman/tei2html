@@ -4,7 +4,7 @@
 
 Currently, `tei2html` supports figures following the TEI P3 model, with some modifications.
 
-A `figure` element describes a single image, and optional some heading, legenda text and a description.
+A `figure` element describes a single image, and optional some heading, legend text and a description.
 
 The way the image itself was left somewhat implementation dependent. Within the structure of SGML, it could be specified as an entity, which was hardly supported anywhere. `tei2html` worked around this by deriving the image file from the `@id`, using an additional attribute `@url`, or placing the image file name in a rendition ladder in the `@rend` attribute.
 

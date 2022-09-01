@@ -1,6 +1,6 @@
 # Introduction #
 
-Larger works where often issued in multi-volume sets, and as a result also encoded as separate TEI files. However, in files do not have the restrictions of physical bound volumes, and it is often beneficial to merge two or more TEI files into a single TEI file. This will help in particular when there are a lot of internal cross-references between the volumes, such as will happen with an index (which often appears in the last volume).
+Larger works were often issued in multi-volume sets, and as a result also encoded as separate TEI files. However, in files do not have the restrictions of physical bound volumes, and it is often beneficial to merge two or more TEI files into a single TEI file. This will help in particular when there are a lot of internal cross-references between the volumes, such as will happen with an index (which often appears in the last volume).
 
 
 # Steps #

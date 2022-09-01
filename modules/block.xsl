@@ -54,7 +54,7 @@
 
     <xsl:template match="pb">
         <xsl:choose>
-            <!-- Don't show page breaks when they appear in a marginal note -->
+            <!-- Don't show page breaks when they appear in a marginal note. -->
             <xsl:when test="ancestor::note[@place = ('margin', 'left', 'right')]">
                 <xsl:call-template name="pb-anchor"/>
             </xsl:when>
@@ -62,7 +62,7 @@
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
-            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separate -->
+            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separate. -->
             <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::l | ancestor::tmp:span | ancestor::stage | ancestor::castList">
                 <xsl:call-template name="pb"/>
             </xsl:when>
@@ -93,7 +93,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate a marginal note with anchor for a page-break.</xd:short>
+        <xd:short>Generate a marginal note with an anchor for a page-break.</xd:short>
         <xd:detail>Generate a marginal note for a page-break if the page-break has a number (<code>@n</code>-attribute), or,
         if available, a link to the facsimile.</xd:detail>
     </xd:doc>
@@ -149,7 +149,7 @@
 
 
     <xsl:function name="f:facsimile-wrapper-link">
-        <!-- Parameter node can be either a pb or a graphic element -->
+        <!-- Parameter node can be either a pb or a graphic element. -->
         <xsl:param name="node" as="node()"/>
         <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
@@ -296,7 +296,7 @@
 
     <xd:doc>
         <xd:short>Handle an argument.</xd:short>
-        <xd:detail>Handle an argument (a short summary of contents at the start of a chapter).</xd:detail>
+        <xd:detail>Handle an argument (a summary of the contents at the start of a chapter).</xd:detail>
     </xd:doc>
 
     <xsl:template match="argument">
@@ -608,7 +608,7 @@
 
     <xsl:template name="hangOpenPunctuation">
         <xsl:context-item as="element(p)" use="required"/>
-        <!-- First child node is a text node that starts with punctuation -->
+        <!-- First child node is a text node that starts with punctuation. -->
         <xsl:variable name="first" select="text()[1]"/>
 
         <xsl:analyze-string select="$first" regex="^[&ldquo;&lsquo;&rsquo;]+">
@@ -674,7 +674,7 @@
     </xsl:template>
 
 
-    <!-- Can also be called for lines of verse, see drama.xsl -->
+    <!-- Can also be called for lines of verse, see drama.xsl. -->
     <xsl:template name="handle-initial-image">
         <xsl:context-item as="element()" use="required"/>
         <xsl:choose>
@@ -841,12 +841,12 @@
     </xd:doc>
 
     <xsl:template match="text()" mode="remove-initial">
-        <!-- Get text of the current paragraph before the current node: we only want to remove the intial if this is empty. -->
-        <xsl:variable name="paragraph-sofar" select="(./preceding::node()[./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
-        <xsl:copy-of select="f:log-debug('paragraph so-far: {1}', ($paragraph-sofar))"/>
+        <!-- Get text of the current paragraph before the current node: we only want to remove the initial if this is empty. -->
+        <xsl:variable name="paragraph-so-far" select="(./preceding::node()[./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
+        <xsl:copy-of select="f:log-debug('paragraph so-far: {1}', ($paragraph-so-far))"/>
 
         <xsl:choose>
-            <xsl:when test="string-length($paragraph-sofar) = 0 and position() = 1">
+            <xsl:when test="string-length($paragraph-so-far) = 0 and position() = 1">
                 <xsl:copy-of select="f:log-debug('removing initial letter from: {1}', (.))"/>
                 <xsl:value-of select="f:process-text(f:remove-initial(.), f:get-current-lang(.))"/>
              </xsl:when>

@@ -42,7 +42,7 @@
     <xsl:template match="formula[@notation='TeX']">
         <xsl:choose>
             <xsl:when test="@n and f:is-display-math(.)">
-                <!-- When we have a label, wrap in an extra span, so we can properly align the number with CSS -->
+                <!-- When we have a label, wrap in an extra span, so we can properly align the number with CSS. -->
                 <span class="labeledMath">
                     <xsl:call-template name="handleFormula"/>
                 </span>
@@ -113,7 +113,7 @@
                 <!-- Static MML inline -->
                 <xsl:when test="f:get-setting('math.mathJax.format') = 'MML'">
                     <xsl:copy-of select="f:log-info('Including file: {1}.', ($mmlFile))"/>
-                    <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments -->
+                    <!-- MathJax generated MathML has Unicode symbols in comments, which cause trouble output in other encodings, so strip all comments. -->
                     <xsl:apply-templates select="document($mmlFile, .)/*" mode="strip-comments"/>
                 </xsl:when>
                 <!-- Static SVG inline -->
@@ -173,7 +173,7 @@
 
 
     <xd:doc>
-        <xd:short>Convert very simple Markdown to HTML.</xd:short>
+        <xd:short>Convert simple Markdown to HTML.</xd:short>
         <xd:detail>
             <p>Simple Markdown is used to indicate italics and bold where limited styling information
             is desirable in attribute values. This is mainly on the <code>@n</code> attribute on
@@ -220,7 +220,7 @@
                 <xsl:variable name="width" select="$svg/svg:svg/@width"/>
                 <xsl:variable name="height" select="$svg/svg:svg/@height"/>
 
-                <!-- The final semicolon in the SVG style attribute is optional, but we need it -->
+                <!-- The final semicolon in the SVG style attribute is optional, but we need it. -->
                 <xsl:variable name="style" select="if (ends-with($style, ';')) then $style else ($style || ';')"/>
 
                 <xsl:if test="$style">
@@ -298,7 +298,7 @@
 
 
     <xd:doc>
-        <xd:short>Determine whether an equation is trivial (i.e. can easily be rendered in HTML).</xd:short>
+        <xd:short>Determine whether an equation is trivial (i.e., can easily be rendered in HTML).</xd:short>
     </xd:doc>
 
     <xsl:function name="f:is-trivial-math" as="xs:boolean">

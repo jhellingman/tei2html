@@ -17,7 +17,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Functions to determine copyright status</xd:short>
-        <xd:detail>This stylesheet contains a number of functions to determine copyright status of a TEI file, based on data in the header.</xd:detail>
+        <xd:detail>This stylesheet contains several functions to determine copyright status of a TEI file, based on data in the header.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>

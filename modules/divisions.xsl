@@ -315,7 +315,7 @@
             </xsl:when>
 
             <xsl:otherwise>
-                <!-- Wrap heading part and content part of division in separate divs -->
+                <!-- Wrap heading part and content part of division in separate divs. -->
                 <xsl:if test="*[not(f:is-body-content(.))]">
                     <div class="divHead">
                         <xsl:apply-templates select="*[not(f:is-body-content(.))]"/>
@@ -501,7 +501,7 @@
                 <span class="pageNum">
                     <xsl:text>[</xsl:text>
                     <a>
-                        <!-- Link to entry for current division if available to make navigation back easier -->
+                        <!-- Link to entry for current division if available to make navigation back easier. -->
                         <xsl:variable name="id" select="@id"/>
                         <xsl:variable name="tocEntry" select="(//*[@id='toc']//ref[@target=$id])[1]"/>
                         <xsl:variable name="divGen" select="(//divGen[@id='toc'][@type='toc'])[1]"/>
@@ -536,7 +536,7 @@
                     </xsl:if>
 
                     <xsl:if test="//*[@id='toc']">
-                        <!-- If we have an element with id 'toc', include a link to it -->
+                        <!-- If we have an element with id 'toc', include a link to it. -->
                         <xsl:if test="preceding-sibling::div1"> | </xsl:if>
                         <a href="{f:generate-href(//*[@id='toc'])}">
                             <xsl:value-of select="f:message('msgToc')"/>
@@ -607,7 +607,7 @@
         <xsl:param name="a"/>
         <xsl:param name="b"/>
 
-        <!-- Determine the language of each side, so we can correctly indicate it on the cells -->
+        <!-- Determine the language of each side, so we can correctly indicate it on the cells. -->
         <xsl:variable name="firstLang" select="($a/ancestor-or-self::*/@lang)[last()]"/>
         <xsl:variable name="secondLang" select="($b/ancestor-or-self::*/@lang)[last()]"/>
 

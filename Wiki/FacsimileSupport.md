@@ -4,7 +4,7 @@ TEI P5 contains a [facsimile element](http://www.tei-c.org/release/doc/tei-p5-do
 
 Often scans are already available at some place on the web, and we may wish to point to them, sometimes, we wish to include them with our ebook, so we have two types of facsimiles: external images and internal images.
 
-TEI actually offers two ways of referring to scanned facsimile images, one is using the `@facs` attribute on the `pb` element, the other is using `graphic` elements in a separate `facsimile` section. When using the latter option, the `@facs` attributes on the `pb` elements can also (and should) refer to those `graphic` elements.
+TEI offers two ways of referring to scanned facsimile images, one is using the `@facs` attribute on the `pb` element, the other is using `graphic` elements in a separate `facsimile` section. When using the latter option, the `@facs` attributes on the `pb` elements can also (and should) refer to those `graphic` elements.
 
 The facsimile files themselves can be either hosted locally (on a file-system under our control) or remotely (with a third party). In the former case, we can generate self-contained ePubs with all the files on-board, in the later case, we have to make do with external references.
 
@@ -30,7 +30,7 @@ The `@facs` attribute on `pb` elements can be used to point to scanned images of
   <pb n=123 facs="p123.png"/>
 ```
 
-Lets call this "direct" facsimile links.
+Let's call this "direct" facsimile links.
 
 Alternatively, it can link to an element in the `facsimile` element, for example:
 
@@ -38,7 +38,7 @@ Alternatively, it can link to an element in the `facsimile` element, for example
   <pb n=123 facs="#facs123"/>
 ```
 
-Lets call this "indirect" facsimile links.
+Let's call this "indirect" facsimile links.
 
 This later case also allows to point to zones within a page, but that is currently out-of-scope for `tei2html`.
 

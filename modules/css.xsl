@@ -80,7 +80,7 @@
         <xd:short>Output embedded CSS stylesheets.</xd:short>
         <xd:detail>
             <p>Output embedded CSS stylesheets. Because CSS can include the &gt; symbol
-            (the direct descendant selector), we need to make sure that this is not escaped,
+            (the direct descendant selector), we need to make sure this is not escaped,
             that is, place the generated CSS in a CDATA block, and then hide this again in
             CSS comments for some older browsers.</p>
         </xd:detail>
@@ -219,12 +219,12 @@
 
     <xsl:template name="custom-css-stylesheets">
         <xsl:if test="$customCssFile">
-            <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later -->
+            <!-- Custom CSS stylesheet, overrides build in stylesheets, so should come later. -->
             <xsl:value-of select="f:css-stylesheet($customCssFile, .)"/>
         </xsl:if>
 
         <xsl:if test="//pgStyleSheet">
-            <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim -->
+            <!-- Custom CSS embedded in PGTEI extension pgStyleSheet, copied verbatim. -->
             <xsl:value-of select="string(//pgStyleSheet)"/>
         </xsl:if>
 
@@ -233,7 +233,7 @@
             <xsl:apply-templates select="//tagsDecl/rendition" mode="rendition"/>
         </xsl:if>
 
-        <!-- Generate CSS for rend attributes, overrides CSS from stylesheets, so should be last -->
+        <!-- Generate CSS for rend attributes, overrides CSS from stylesheets, so should be last. -->
         <xsl:if test="//*[@rend]">
             <xsl:text>&lf;/* CSS rules generated from @rend attributes in TEI file */&lf;</xsl:text>
             <xsl:apply-templates select="/" mode="css"/>
@@ -386,7 +386,7 @@
                 <xsl:when test="$element = 'q' and $class = 'block'"/>
                 <xsl:when test="$element = 'p' and $class = 'noindent'"/>
 
-                <!-- Assume the rest can be copied to the class-attribute in HTML -->
+                <!-- Assume the rest can be copied to the class-attribute in HTML. -->
                 <xsl:otherwise>
                     <xsl:value-of select="$class"/>
                 </xsl:otherwise>
@@ -442,7 +442,7 @@
                 <xsl:when test="$property='tocMaxLevel'"/>          <!-- the maximum level (depth) of a generated table of contents -->
 
                 <!-- Non-CSS properties used to render verse -->
-                <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e. white) to indent with width of previous line -->
+                <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e., white) to indent with width of previous line. -->
 
                 <!-- Non-CSS properties related to decorative initials -->
                 <xsl:when test="$property='dropcap'"/>
@@ -465,7 +465,7 @@
 
                 <!-- Table related special handling. With the rule
                      margin: 0px auto, the table is centered, while
-                     display: table shrinks the bounding box to the content -->
+                     display: table shrinks the bounding box to the content. -->
                 <xsl:when test="$element = 'table' and $property = 'align' and $value = 'center'">margin:0 auto; display:table; </xsl:when>
                 <xsl:when test="$element = 'table' and $property = 'indent'">margin-left:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
@@ -666,11 +666,11 @@
     <xsl:template match="/" mode="css">
 
         <!-- We need to collect the column-related rendering rules first,
-             so they can be overridden by later cell rendering rules -->
+             so they can be overridden by later cell rendering rules. -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css-column"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-column"/>
 
-        <!-- Then follow the row-related rendering rules -->
+        <!-- Then follow the row-related rendering rules. -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="css-row"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="css-row"/>
 
@@ -694,13 +694,13 @@
     <xsl:template match="/" mode="style">
 
         <!-- We need to collect the column-related rendering rules first,
-             so they can be overridden by later cell rendering rules -->
+             so they can be overridden by later cell rendering rules. -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-column"/>
 
         <!-- Then follow the row-related rendering rules -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-row"/>
 
-        <!-- Handle the rest of the document (including table cells) -->
+        <!-- Handle the rest of the document (including table cells). -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/facsimile" mode="style"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/teiHeader" mode="style"/>
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style"/>
@@ -743,9 +743,9 @@
 
 
     <xd:doc>
-        <xd:short>Low priority default template for generating css rules.</xd:short>
-        <xd:detail>Low priority default template for generating css rules from the
-         <code>@rend</code> attribute in css mode. Note that we exclude the column element in another
+        <xd:short>Low priority default template for generating CSS rules.</xd:short>
+        <xd:detail>Low priority default template for generating CSS rules from the
+         <code>@rend</code> attribute in CSS mode. Note that we exclude the column element in another
          rule.</xd:detail>
     </xd:doc>
 
@@ -756,8 +756,8 @@
 
 
     <xd:doc>
-        <xd:short>Low priority default template for copying css styles.</xd:short>
-        <xd:detail>Low priority default template for copying css styles from the
+        <xd:short>Low priority default template for copying CSS styles.</xd:short>
+        <xd:detail>Low priority default template for copying CSS styles from the
          <code>@style</code> attribute in style mode. Note that we exclude the column element in another
          template.</xd:detail>
     </xd:doc>
@@ -803,7 +803,7 @@
         <xsl:if test="generate-id() = generate-id(key('style', @style)[1])">
             <xsl:variable name="style" select="normalize-space(@style)"/>
             <xsl:if test="$style != ''">
-                <!-- Use the id of the first element with this style attribute as a class selector -->
+                <!-- Use the id of the first element with this style attribute as a class selector. -->
                 <xsl:text>
 .</xsl:text>
                 <xsl:value-of select="f:generate-style-class-selector(.)"/>

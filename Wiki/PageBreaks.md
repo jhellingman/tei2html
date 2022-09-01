@@ -41,7 +41,7 @@ See [facsimile support](FacsimileSupport.md)
 
 ## Cross-References ##
 
-As mentioned, cross-references in printed book often reference to page numbers. The easiest way to encode this is to do something like this:
+As mentioned, cross-references in printed books often reference to page numbers. The easiest way to encode this is to do something like this:
 
 ```
 For details <ref target="pb123">see page 123</ref>.
@@ -51,7 +51,7 @@ However, there are several problems with this.
 
 1. This reference refers to some `<pb id="pb123" n="123"/>` somewhere in text. Now, of course, the reference is almost never to the page-break itself, but always to some content that appears on that page (a picture, a paragraph or phrase), but actually identifying and linking to the content referred to can be a time-consuming task, so is often postponed (think, for example, about a pre-existing index). So we often have texts that just link like this.
 2. The reference contains more than just the page number. This makes it harder to replace the page number with the actual page number in paged output, if such is generated.
-3. The reference does not make clear that it is indeed to a page number (which could hint the rendering process to replace it when rendering on paged media.
+3. The reference does not make clear that it is indeed to a page number (which could hint the rendering process to replace it when rendering on paged media).
 
 For these reasons, `tei2html` specifies that references to page-numbers are tagged as:
 
@@ -74,5 +74,5 @@ When creating new paged output, we will have to deal with yet another set of iss
     
     * **common entry** 12, 23-25, 45.
     
-    which is not really supported by most current index generating tools, and is pretty hard to do as well. (`tei2html` does this when referring to pre-existing page-numbers, but this is not very useful for paged output.)
+    which is not supported by most current index generating tools, and is pretty hard to do as well. (`tei2html` does this when referring to pre-existing page-numbers, but this is not very useful for paged output.)
 

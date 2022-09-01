@@ -12,6 +12,10 @@
   <name>tei2html</name>
   <url>https://github.com/jhellingman/tei2html</url>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
   <build>
     <plugins>
       <plugin>
@@ -22,12 +26,12 @@
           <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>Saxon-HE</artifactId>
-            <!-- Saxon from 9.7.0-14 up until 10.1 have been tested and work correctly -->
+            <!-- Saxon from 9.7.0-14 up until 10.1 have been tested and work correctly. -->
             <version>9.9.1-8</version>
           </dependency>
           <!-- Saxon >= 10.0 requires XSpec 1.6. The bundled XSpec 1.5
                works correctly with Saxon 9.x, and you don't need this
-               extra dependency -->
+               extra dependency. -->
           <dependency>
             <groupId>io.xspec</groupId>
             <artifactId>xspec</artifactId>
@@ -37,7 +41,6 @@
         <configuration>
           <coverage>true</coverage>
           <catalogFile>catalog.xml</catalogFile>
-          <generateSurefireReport>true</generateSurefireReport>
           <testDir>xspec</testDir>
 
           <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->

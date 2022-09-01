@@ -70,7 +70,7 @@
             <xsl:variable name="value" select="."/>
             <xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">
                 <tr>
-                    <td class="messageid"><xsl:value-of select="@name"/></td>
+                    <td class="messageId"><xsl:value-of select="@name"/></td>
                         <xsl:choose>
                         <xsl:when test="string-length($value) &lt; 2000">
                             <td><xsl:apply-templates select="$value" mode="cp"/></td>

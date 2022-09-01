@@ -115,7 +115,7 @@ This can also be found `configuration.xsl`.
   * Image path (`<path>`)
   * Footnote location (Page/Chapter/Work)
   * Generate colophon (Y/N)
-  * Generate table of contents (Front/Back/None)
+  * Generate a table of contents (Front/Back/None)
   * Additional CSS stylesheets (`<name>`)
   * Generate marginal page-numbers (Y/N)
   * Generate links to page-images (Y/N)

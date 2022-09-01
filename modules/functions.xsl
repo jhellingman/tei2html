@@ -11,7 +11,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Utility functions, used by tei2html</xd:short>
-        <xd:detail>This stylesheet contains a number of utility functions, used by tei2html and tei2epub.</xd:detail>
+        <xd:detail>This stylesheet contains several utility functions, used by tei2html and tei2epub.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2021, Jeroen Hellingman</xd:copyright>
     </xd:doc>

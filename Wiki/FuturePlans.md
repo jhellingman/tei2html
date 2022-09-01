@@ -99,7 +99,7 @@ Currently, some support for print output via PDF with Prince-XML is build in. Th
 
 This feature has two important aspects.
 
-1. Use of structured elements introduced in HTML5. Currently, Tei2Html already wraps such structured elements with generic `<div>` elements. Replacing those with the corresponding HTML5 elements should do the trick. Note that XSLT 2.0 can only supports XHTML5, not HTML5.
+1. Use of structured elements introduced in HTML5. Currently, Tei2Html already wraps such structured elements with generic `<div>` elements. Replacing those with the corresponding HTML5 elements should do the trick.
 
 2. Use of CSS3: CCS usage can be changed fairly easily with Tei2Html, so using a customized stylesheet with CSS3 features is already possible. For some usages (print support, aural stylesheets) some changes will be required.
 

@@ -23,7 +23,7 @@ Items remaining todo are:
 
 Having CSS in XML, makes it easier to determine from within XSLT what rules within CSS kan be removed or rewritten in a simpler form.
 
-  * Determine which CSS rules are actually used in a HTML document.
+  * Determine which CSS rules are actually used in an HTML document.
   * Determine which CSS rules are overruled within the same CSS stylesheet.
 
 As a result, the CSS stylesheet can be pruned, and only the relevant rules emitted in the output.

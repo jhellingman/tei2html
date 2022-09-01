@@ -1,4 +1,4 @@
-# Internal Cross References #
+# Internal Cross-References #
 
 Internal cross-references are to be encoded using the `<ref>` element, with the `@target` attribute carrying the id of the target element referenced to.
 
@@ -32,7 +32,7 @@ This will link to the catalog page of the given book on [Project Gutenberg](http
 
 **Open Library catalog page:** Use `olw:<`_number_`>` as url (when referring to the abstract 'work').
 
-**WikiPedia article:** Use `wp:<`_title_`>` as url.
+**Wikipedia article:** Use `wp:<`_title_`>` as url.
 
 **Bible citation:** Use `bib:<`_book chapter:verse_`>` as url.
 
@@ -58,13 +58,13 @@ Depending on the output format and configuration, the external links will be han
 
 Currently, a shorthand link pg:40429 will be translated to a link to the Project Gutenberg page for that book.
 
-When an HTML version is available, it should also be possible to directly link into that book, e.g. pg:40429#ch6 should be automatically translated to:
+When an HTML version is available, it should also be possible to directly link into that book, e.g., pg:40429#ch6 should be automatically translated to:
 
 > http://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
 
 So the reader can consult the referred text with a single action (except that Project Gutenberg redirects such deep links on the first attempt).
 
-It would even be better if we could link into all books, even if they are not yet digitized, using their OpenLibrary work id and some generic vocabulary to access locations inside works. Ultimately resolving such links requires some kind of resolving server with access to a database that can find copies of the work. Think urls that looks like these
+It would even be better if we could link into all books, even if they are not yet digitized, using their OpenLibrary work id and some generic vocabulary to access locations inside works. Ultimately resolving such links requires some kind of resolving server with access to a database that can find copies of the work. Think urls that looks like these:
 
 > book:olw:123456/chapter/xvi
 > book:olw:123456/appendix/a

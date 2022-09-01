@@ -446,7 +446,7 @@
                 <li>The division is actually displayed.</li>
                 <li>The division is not explicitly excluded.</li>
                 <li>The division is not a child of an index or quotation.</li>
-                <li>The parent is either a front, body, or back, or itself an element that can be included in the ToC.</li>
+                <li>The parent is either a front, body or back, or itself an element that can be included in the ToC.</li>
             </ul>
         </xd:detail>
     </xd:doc>
@@ -475,7 +475,7 @@
         <xsl:param name="start"/>
 
         <xsl:variable name="toc-max-depth">
-            <!-- Find all divisions that do not have further divisions in them -->
+            <!-- Find all divisions that do not have further divisions in them. -->
             <xsl:for-each select="$start//*[f:is-toc-div(.)][not(*[f:is-toc-div(.)])]">
                 <!-- Sort by number of divisions they have as ancestor -->
                 <xsl:sort select="count(ancestor::*[f:is-toc-div(.)])" data-type="number" order="descending"/>
@@ -491,12 +491,12 @@
 
 
     <!--====================================================================-->
-    <!-- A classic table of contents with chapter labels, titles, and arguments -->
+    <!-- A classic table of contents with chapter labels, titles and arguments. -->
 
     <xd:doc>
-        <xd:short>Generate a classic table of contents with chapter labels, titles, and arguments.</xd:short>
+        <xd:short>Generate a classic table of contents with chapter labels, titles and arguments.</xd:short>
         <xd:detail>
-            <p>Generate a classic table of contents with chapter labels, titles, and arguments. This table of contents only goes one level deep.</p>
+            <p>Generate a classic table of contents with chapter labels, titles and arguments. This table of contents only goes one level deep.</p>
         </xd:detail>
     </xd:doc>
 
@@ -955,7 +955,7 @@
     </xsl:template>
 
     <xsl:template match="xi:include" mode="#default css style css-column css-row style-column style-row">
-        <!-- Material to be included should be rendered here; material is given on an href parameter -->
+        <!-- Material to be included should be rendered here; material is given on an href parameter. -->
         <xsl:if test="@href">
             <xsl:copy-of select="f:log-info('Including {1}.', (@href))"/>
             <xsl:variable name="document" select="substring-before(@href, '#')"/>

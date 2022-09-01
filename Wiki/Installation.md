@@ -14,7 +14,7 @@ You should download a reasonable recent version of Saxon-HE product from [saxoni
 
 Saxon-HE requires Java.
 
-Make sure that the java executables can be found on the path.
+Make sure the java executables can be found on the path.
 
 If you do not have Java, you can download it from http://java.com/en/
 
@@ -23,9 +23,9 @@ If you do not have Java, you can download it from http://java.com/en/
 
 If you are planning to use the provided Perl scripts to glue things together, you will need a Perl interpreter.
 
-For Windows, my advise is to download [Strawberry Perl](http://strawberryperl.com/). Use either the 32 or 64 bits version, to match your system.
+For Windows, my advice is to download [Strawberry Perl](http://strawberryperl.com/). Use either the 32 or 64 bits version, to match your system.
 
-*Note* Upgrading Strawberry Perl does not work properly: please saveguard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
+*Note* Upgrading Strawberry Perl does not work properly: please save-guard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
 
 ### Packages used ###
 
@@ -63,7 +63,7 @@ the names in the main `tei2html.pl` script in that case.
 
 ## ZIP ##
 
-To compress ePub files, you will need a zip utility. `tei2html` uses [info-zip](http://www.info-zip.org/Zip.html) to handle the peculiar requirements of the ePub format. (See e.g. [this blog entry on creating ePub files](http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html).)
+To compress ePub files, you will need a zip utility. `tei2html` uses [info-zip](http://www.info-zip.org/Zip.html) to handle the peculiar requirements of the ePub format. (See e.g., [this blog entry on creating ePub files](http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html).)
 
 
 ## Node.js ##
@@ -103,7 +103,7 @@ Note that Prince is a commercial product; a free version can be used for strictl
 
 ## Environment variables ##
 
-To run `tei2html` from the command line, it will be practical to configure a number of environment variables, that is
+To run `tei2html` from the command line, it will be practical to configure a number of environment variables, that is:
 
   * set `TEI2HTML_HOME` to the location of the checked-out `tei2html` directory.
   * set `SAXON_HOME` to the location where Saxon is installed.

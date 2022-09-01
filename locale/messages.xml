@@ -1757,7 +1757,7 @@
         </msg:message>
 
         <msg:message name="msgPGFooter">
-            <p name="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dit bestand zou <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip moeten heten.</p>
             <p class="smallprint">Dit en alle bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
             <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
@@ -1919,7 +1919,7 @@
         <msg:message name="msgText">Teksto</msg:message>
     </msg:messages>
 
-    <!-- Tagalog (accented, as used in the 1920's) translation -->
+    <!-- Tagalog (accented, as used in the 1920s) translation -->
     <msg:messages xml:lang="tl-1920">
         <msg:message name="msgContents">Nilálamán</msg:message>
         <msg:message name="msgToc">Nilálamán</msg:message>
