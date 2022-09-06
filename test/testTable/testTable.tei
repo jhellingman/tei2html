@@ -240,6 +240,156 @@
 </table>
 
 
+<div2>
+<head>N-Up Tables</head>
+
+
+<p>A table 2-up in row-major (default) order:
+
+<table rend="borderAll columns(2)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+<row><cell>5.1    <cell>5.2     <cell>5.3
+</table>
+
+<p>A table 2-up in colum-major order:
+
+<table rend="borderAll columns(2) item-order(column-major)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+<row><cell>5.1    <cell>5.2     <cell>5.3
+</table>
+
+<p>A table 3-up in row-major order:
+
+<table rend="borderAll columns(3)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+</table>
+
+<p>A table 3-up in colum-major order:
+
+<table rend="borderAll columns(3) item-order(column-major)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+</table>
+
+<p>A table 4-up in row-major order:
+
+<table rend="borderAll columns(4)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+</table>
+
+<p>A table 4-up in row-major order with not enough rows to fill the 4th column:
+
+<table rend="borderAll columns(4)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+
+<row><cell>9.1    <cell>9.2     <cell>9.3
+</table>
+
+
+<p>A table 4-up in row-major order:
+
+<table rend="borderAll columns(4)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+
+<row><cell>9.1    <cell>9.2     <cell>9.3
+<row><cell>10.1   <cell>10.2    <cell>10.3
+<row><cell>11.1   <cell>11.2    <cell>11.3
+<row><cell>12.1   <cell>12.2    <cell>12.3
+
+<row><cell>13.1   <cell>13.2     <cell>13.3
+</table>
+
+<p>A table 4-up in colum-major order:
+
+<table rend="borderAll columns(4) item-order(column-major)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+<row><cell>4.1    <cell>4.2     <cell>4.3
+
+<row><cell>5.1    <cell>5.2     <cell>5.3
+<row><cell>6.1    <cell>6.2     <cell>6.3
+<row><cell>7.1    <cell>7.2     <cell>7.3
+<row><cell>8.1    <cell>8.2     <cell>8.3
+
+<row><cell>9.1    <cell>9.2     <cell>9.3
+<row><cell>10.1   <cell>10.2    <cell>10.3
+<row><cell>11.1   <cell>11.2    <cell>11.3
+<row><cell>12.1   <cell>12.2    <cell>12.3
+
+<row><cell>13.1   <cell>13.2     <cell>13.3
+</table>
+
+
+<p>A table 4-up in colum-major order with not enough cells to fill the fourth column:
+
+<table rend="borderAll columns(4) item-order(column-major)">
+<row role=label><cell>First <cell>Second <cell>Third
+
+<row><cell>1.1    <cell>1.2     <cell>1.3
+<row><cell>2.1    <cell>2.2     <cell>2.3
+<row><cell>3.1    <cell>3.2     <cell>3.3
+</table>
+
 </body>
 </text>
 </TEI.2>

@@ -213,10 +213,13 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 
 /* Cell inserted when tables are doubled-up, to separate the columns */
 .cellDoubleUp {
-    border: 0 solid black !important;
+    border-width: 0 !important;
     width: 1em;
 }
 
+.cellDummy {
+    border-width: 0 !important;
+}
 
 /* When a table column aligns on the decimal separator, the preprocessing adds a column with the following classes. Make sure they look as one column. */
 td.alignDecimalIntegerPart {

@@ -1,5 +1,6 @@
-<!DOCTYPE xsl:stylesheet>
-
+<!DOCTYPE xsl:stylesheet [
+    <!ENTITY nbsp       "&#160;">
+]>
 <xsl:stylesheet version="3.0"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="urn:stylesheet-functions"
@@ -455,10 +456,11 @@
     <xd:doc>
         <xd:short>N-up a table.</xd:short>
         <xd:detail>
-            <p>Render a table in N-up format, that is, using n times the number of
-            columns and 1/N-th the number of rows; repeating the heading-rows on top.
+            <p>Render a table in N-up format, that is, using N times the number of
+            columns and 1/N times the number of rows; repeating the heading-rows on top.
             Note that this may fail if rows are spanned. The case of number
-            of data-rows not divisible by N is handled (the last column will just be partially-filled.)</p>
+            of data-rows not divisible by N is handled (the last columns will just be filled
+            with empty cells).</p>
         </xd:detail>
     </xd:doc>
 
@@ -473,7 +475,10 @@
 
         <!-- Get remainder of data  -->
         <xsl:variable name="rows" select="f:get-data-rows(.)"/>
-        <xsl:variable name="rowCount" select="ceiling(count($rows) div $n)"/>
+        <xsl:variable name="original-row-count" select="count($rows)"/>
+        <xsl:variable name="new-row-count" select="ceiling($original-row-count div $n)"/>
+        <xsl:variable name="original-col-count" select="@cols"/>
+        <xsl:variable name="new-col-count" select="$original-col-count * $n"/>
 
         <table>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
@@ -499,7 +504,7 @@
                                 <xsl:for-each select="$headers[$headerRow]/cell">
                                     <!-- Insert a dummy cell between doubled-up columns -->
                                     <xsl:if test="$i &gt; 1 and position() = 1">
-                                        <td class="cellDoubleUp"/>
+                                        <td class="cellDoubleUp">&nbsp;</td>
                                     </xsl:if>
                                     <!-- Prevent duplication of ids by stripping them for all but the first repeat -->
                                     <xsl:variable name="cellHtml">
@@ -517,28 +522,61 @@
             <tbody>
                 <xsl:choose>
                     <xsl:when test="$item-order = 'column-major'">
+
+                        <!-- Warn for the pointless use of n-up (because an entire column will be empty) -->
+                        <xsl:if test="$new-col-count > ($original-row-count * $original-col-count)">
+                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (column-major) on a {3}-cell table will result in an empty column', (f:generate-id(.), xs:string($n), xs:string($original-row-count * $original-col-count)))"/>
+                        </xsl:if>
+
                         <xsl:for-each-group select="$rows" group-by="(position() - 1) idiv $n">
                             <tr>
                                 <xsl:for-each select="current-group()/cell">
                                     <!-- Insert a dummy cell between doubled-up columns -->
                                     <xsl:if test="position() &gt; 1 and count(./preceding-sibling::*) = 0">
-                                        <td class="cellDoubleUp"/>
+                                        <td class="cellDoubleUp">&nbsp;</td>
                                     </xsl:if>
                                     <xsl:apply-templates select="."/>
                                 </xsl:for-each>
+
+                                <!-- Ensure result table is rectangular -->
+                                <xsl:if test="count(current-group()) &lt; $n">
+                                    <xsl:for-each select="1 to $n - count(current-group())">
+                                        <td class="cellDoubleUp">&nbsp;</td>
+                                        <xsl:for-each select="1 to $original-col-count">
+                                            <td class="cellDummy"/>
+                                        </xsl:for-each>
+                                    </xsl:for-each>
+                                </xsl:if>
                             </tr>
                         </xsl:for-each-group>
                     </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:for-each-group select="$rows" group-by="(position() - 1) mod $rowCount">
+                    <xsl:otherwise> <!-- row-major -->
+
+                        <!-- Warn for the pointless use of n-up (because an entire column will be empty) -->
+                        <xsl:if test="ceiling((($new-row-count * $new-col-count) - ($original-row-count * $original-col-count)) div $original-col-count) >= $new-row-count">
+                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (row-major) on a {3}-row table will result in an empty column', (f:generate-id(.), xs:string($n), xs:string($new-row-count)))"/>
+                        </xsl:if>
+
+                        <xsl:for-each-group select="$rows" group-by="(position() - 1) mod $new-row-count">
                             <tr>
+                                <!-- <td><xsl:value-of select="'pos: ' || position() || ' cnt: ' || $new-row-count || ' mod: ' || (position() - 1) mod $new-row-count"/></td> -->
                                 <xsl:for-each select="current-group()/cell">
                                     <!-- Insert a dummy cell between doubled-up columns -->
                                     <xsl:if test="position() &gt; 1 and count(./preceding-sibling::*) = 0">
-                                        <td class="cellDoubleUp"/>
+                                        <td class="cellDoubleUp">&nbsp;</td>
                                     </xsl:if>
                                     <xsl:apply-templates select="."/>
                                 </xsl:for-each>
+
+                                <!-- Ensure result table is rectangular -->
+                                <xsl:if test="count(current-group()) &lt; $n">
+                                    <xsl:for-each select="1 to $n - count(current-group())">
+                                        <td class="cellDoubleUp">&nbsp;</td>
+                                        <xsl:for-each select="1 to $original-col-count">
+                                            <td class="cellDummy"/>
+                                        </xsl:for-each>
+                                    </xsl:for-each>
+                                </xsl:if>
                             </tr>
                         </xsl:for-each-group>
                     </xsl:otherwise>

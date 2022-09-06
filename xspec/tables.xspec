@@ -272,7 +272,7 @@
                     <td id="..." class="cellLeft cellTop">2</td>
                     <td id="..." class="cellTop">7</td>
                     <td id="..." class="cellRight cellTop">6</td>
-                    <td class="cellDoubleUp" />
+                    <td class="cellDoubleUp">&nbsp;</td>
                     <td id="..." class="cellLeft cellTop cellBottom">4</td>
                     <td id="..." class="cellTop cellBottom">3</td>
                     <td id="..." class="cellRight cellTop cellBottom">8</td>
@@ -281,6 +281,10 @@
                     <td id="..." class="cellLeft cellBottom">9</td>
                     <td id="..." class="cellBottom">5</td>
                     <td id="..." class="cellRight cellBottom">1</td>
+                    <td class="cellDoubleUp">&nbsp;</td>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
                  </tr>
               </tbody>
            </table>
@@ -323,7 +327,7 @@
                  <tr class="label">
                     <td id="..." class="cellHeadLeft cellHeadTop cellHeadBottom">First</td>
                     <td id="..." class="cellHeadTop cellHeadBottom">Second</td>
-                    <td class="cellDoubleUp" />
+                    <td class="cellDoubleUp">&nbsp;</td>
                     <td class="cellHeadLeft cellHeadTop cellHeadBottom">First</td>
                     <td class="cellHeadTop cellHeadBottom">Second</td>
                  </tr>
@@ -332,7 +336,7 @@
                  <tr>
                     <td id="..." class="cellLeft cellBottom">1</td>
                     <td id="..." class="cellBottom">2</td>
-                    <td class="cellDoubleUp" />
+                    <td class="cellDoubleUp">&nbsp;</td>
                     <td id="..." class="cellLeft cellTop cellBottom">3</td>
                     <td id="..." class="cellTop cellBottom">4</td>
                  </tr>
@@ -381,7 +385,7 @@
                     <td id="..." class="cellLeft cellTop">2</td>
                     <td id="..." class="cellTop">7</td>
                     <td id="..." class="cellRight cellTop">6</td>
-                    <td class="cellDoubleUp" />
+                    <td class="cellDoubleUp">&nbsp;</td>
                     <td id="..." class="cellLeft cellTop cellBottom">9</td>
                     <td id="..." class="cellTop cellBottom">5</td>
                     <td id="..." class="cellRight cellTop cellBottom">1</td>
@@ -390,6 +394,10 @@
                     <td id="..." class="cellLeft cellBottom">4</td>
                     <td id="..." class="cellBottom">3</td>
                     <td id="..." class="cellRight cellBottom">8</td>
+                    <td class="cellDoubleUp">&nbsp;</td>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
                  </tr>
               </tbody>
            </table>
