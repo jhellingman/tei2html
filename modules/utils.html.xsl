@@ -4,7 +4,7 @@
     Stylesheet with various utility templates, to be imported in tei2html.xsl.
 
     Requires: 
-        localization.xsl    : templates for localizing strings.
+        localization.xsl: templates for localizing strings.
 
 -->
 
@@ -18,7 +18,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>HTML-specific utility templates and functions, used by tei2html</xd:short>
-        <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2html only.</xd:detail>
+        <xd:detail>This stylesheet contains utility templates and functions, used by tei2html only.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011-2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>

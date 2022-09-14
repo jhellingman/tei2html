@@ -10,7 +10,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Functions for dealing with rendition ladders</xd:short>
-        <xd:detail>This stylesheet contains a number of functions to make dealing with rendition-ladders easier. rendition ladders are a string
+        <xd:detail>This stylesheet contains functions to make dealing with rendition-ladders easier. Rendition-ladders are a string
         of key value pairs represented as follows: <code>key1(value1) key2(value2)</code>, etc.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
@@ -235,6 +235,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-
 
 </xsl:stylesheet>

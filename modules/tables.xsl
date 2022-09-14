@@ -525,7 +525,8 @@
 
                         <!-- Warn for the pointless use of n-up (because an entire column will be empty) -->
                         <xsl:if test="$new-col-count > ($original-row-count * $original-col-count)">
-                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (column-major) on a {3}-cell table will result in an empty column', (f:generate-id(.), xs:string($n), xs:string($original-row-count * $original-col-count)))"/>
+                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (column-major) on a {3}-row table will result in an empty column',
+                                (f:generate-id(.), xs:string($n), xs:string($original-row-count)))"/>
                         </xsl:if>
 
                         <xsl:for-each-group select="$rows" group-by="(position() - 1) idiv $n">
@@ -550,11 +551,12 @@
                             </tr>
                         </xsl:for-each-group>
                     </xsl:when>
-                    <xsl:otherwise> <!-- row-major -->
+                    <xsl:otherwise> <!-- row-maj   or -->
 
-                        <!-- Warn for the pointless use of n-up (because an entire column will be empty) -->
-                        <xsl:if test="ceiling((($new-row-count * $new-col-count) - ($original-row-count * $original-col-count)) div $original-col-count) >= $new-row-count">
-                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (row-major) on a {3}-row table will result in an empty column', (f:generate-id(.), xs:string($n), xs:string($new-row-count)))"/>
+                        <!-- Warn for cases where an entire column will be empty -->
+                        <xsl:if test="$new-row-count * ($n - 1) &gt;= $original-row-count">
+                            <xsl:copy-of select="f:log-warning('Table {1}: Using {2}-up (row-major) on a {3}-row table will result in an empty column',
+                                (f:generate-id(.), xs:string($n), xs:string($original-row-count)))"/>
                         </xsl:if>
 
                         <xsl:for-each-group select="$rows" group-by="(position() - 1) mod $new-row-count">

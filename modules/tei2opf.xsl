@@ -357,7 +357,7 @@
                  href="{$basename}.ncx"
                  media-type="application/x-dtbncx+xml"/>
 
-            <!-- Store these in a list, from which we remove duplicates later-on -->
+            <!-- Store these in a list, from which we remove duplicates later-on. -->
             <xsl:variable name="manifest-items">
 
                 <item id="epub3toc"
@@ -401,7 +401,7 @@
                 <!-- Formulas -->
                 <xsl:apply-templates select="//formula[@notation = 'TeX']" mode="manifest"/>
 
-                <!-- Automatically inserted illustrations in tables, etc. (i.e. braces for cells that span more than one row and contain only a brace) -->
+                <!-- Automatically inserted illustrations in tables, etc. (that is, images of braces for cells that span more than one row and contain only a brace) -->
                 <xsl:apply-templates select="//cell" mode="manifest-braces"/>
                 <xsl:apply-templates select="//castGroup" mode="manifest-braces"/>
 
@@ -415,7 +415,7 @@
                 </xsl:if>
             </xsl:variable>
 
-            <xsl:apply-templates select="$manifest-items" mode="undouble"/>
+            <xsl:apply-templates select="$manifest-items" mode="deduplicate"/>
         </manifest>
     </xsl:template>
 
@@ -758,11 +758,11 @@
 
 
     <xd:doc>
-        <xd:short>Remove duplicated resources from the list (included because the ePub uses
-         them more than once).</xd:short>
+        <xd:short>Remove duplicated resources from the list (included multiple times because the
+            ePub uses them more than once).</xd:short>
     </xd:doc>
 
-    <xsl:template match="opf:item" mode="undouble">
+    <xsl:template match="opf:item" mode="deduplicate">
         <xsl:variable name="href" select="@href"/>
         <xsl:if test="not(preceding-sibling::opf:item[@href = $href])">
             <xsl:copy-of select="."/>
@@ -785,17 +785,17 @@
         <xsl:context-item as="element()" use="required"/>
         <spine toc="ncx">
 
-            <!-- make sure the cover comes first in the spine -->
+            <!-- Make sure the cover comes first in the spine. -->
             <xsl:if test="//div1[@id='cover'] | //div[@id='cover']">
                 <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="cover"/>
             </xsl:if>
 
             <xsl:apply-templates select="text" mode="spine"/>
 
-            <!-- Handle figures that contain links, as we generate a wrapper file for these -->
+            <!-- Handle figures that contain links, as we generate a wrapper file for these. -->
             <xsl:apply-templates select="//figure" mode="spine-links"/>
 
-            <!-- Include custom items in the manifest -->
+            <!-- Include custom items in the manifest. -->
             <xsl:if test="$opfManifestFile">
                 <xsl:apply-templates select="document(normalize-space($opfManifestFile))/opf:manifest" mode="copy-manifest-file-to-spine"/>
             </xsl:if>
@@ -816,7 +816,7 @@
                 <xsl:value-of select="f:rend-value(@rend, 'link')"/>
             </xsl:variable>
 
-            <!-- Only for local images: add the generated HTML wrapper to the spine -->
+            <!-- Only for local images: add the generated HTML wrapper to the spine. -->
             <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
                 <itemref xmlns="http://www.idpf.org/2007/opf" linear="no" idref="{f:generate-id(.) || 'wrapper'}"/>
             </xsl:if>
@@ -856,7 +856,7 @@
             <xsl:if test="key('id', 'cover')">
                 <reference type="cover" title="{f:message('msgCoverImage')}">
                     <xsl:attribute name="href">
-                        <!-- We want a bare file name here to help some ePub readers -->
+                        <!-- We want a bare file name here to help some ePub readers. -->
                         <xsl:value-of select="f:generate-filename(key('id', 'cover')[1])"/>
                    </xsl:attribute>
                 </reference>

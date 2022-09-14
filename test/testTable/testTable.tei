@@ -246,7 +246,7 @@
 
 <p>A table 2-up in row-major (default) order:
 
-<table rend="borderAll columns(2)">
+<table id=t2urm rend="borderAll columns(2)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -258,7 +258,7 @@
 
 <p>A table 2-up in colum-major order:
 
-<table rend="borderAll columns(2) item-order(column-major)">
+<table id=t2ucm rend="borderAll columns(2) item-order(column-major)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -270,7 +270,7 @@
 
 <p>A table 3-up in row-major order:
 
-<table rend="borderAll columns(3)">
+<table id=t3urm rend="borderAll columns(3)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -285,7 +285,7 @@
 
 <p>A table 3-up in colum-major order:
 
-<table rend="borderAll columns(3) item-order(column-major)">
+<table id=t3ucm rend="borderAll columns(3) item-order(column-major)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -300,7 +300,7 @@
 
 <p>A table 4-up in row-major order:
 
-<table rend="borderAll columns(4)">
+<table id=t4urm rend="borderAll columns(4)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -316,7 +316,7 @@
 
 <p>A table 4-up in row-major order with not enough rows to fill the 4th column:
 
-<table rend="borderAll columns(4)">
+<table id=t4urmx rend="borderAll columns(4)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -335,7 +335,7 @@
 
 <p>A table 4-up in row-major order:
 
-<table rend="borderAll columns(4)">
+<table id=t4urm2 rend="borderAll columns(4)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -358,7 +358,7 @@
 
 <p>A table 4-up in colum-major order:
 
-<table rend="borderAll columns(4) item-order(column-major)">
+<table id=t4ucm rend="borderAll columns(4) item-order(column-major)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3
@@ -382,7 +382,7 @@
 
 <p>A table 4-up in colum-major order with not enough cells to fill the fourth column:
 
-<table rend="borderAll columns(4) item-order(column-major)">
+<table id=t4ucmx rend="borderAll columns(4) item-order(column-major)">
 <row role=label><cell>First <cell>Second <cell>Third
 
 <row><cell>1.1    <cell>1.2     <cell>1.3

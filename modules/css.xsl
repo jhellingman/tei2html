@@ -12,7 +12,7 @@
                 exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to generate a CSS stylesheet to accompany HTML or ePub output.</xd:short>
+        <xd:short>Stylesheet to generate a CSS stylesheet to go with HTML or ePub output.</xd:short>
         <xd:detail>This stylesheet formats generates a CSS stylesheet from TEI. According to the requirements
         of ePub, <code>@style</code> attributes are not allowed in the generated XHTML, so all CSS
         rules are collected from the TEI file, and put together in a separate CSS file. Further templates in

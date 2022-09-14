@@ -225,7 +225,7 @@
         <xd:short>Determine the filename of a div-fragment.</xd:short>
         <xd:detail>Determine the filename of the file that contains a certain node. We traverse the document tree, as it will be split, and
         look for the specific node the target node appears in. Only in that case, we generate the filename; in all other cases this template
-        will generate nothing. The end result is a string containing the filename of the file the target node appears in.</xd:detail>
+        will generate nothing. The result is a string containing the filename of the file the target node appears in.</xd:detail>
     </xd:doc>
 
     <xsl:template name="filename.div-fragment">
@@ -291,7 +291,7 @@
                 <xsl:attribute name="properties" select="'mathml'"/>
             </xsl:if>
 
-            <!-- Check-out for possible media overlays in the sequence of nodes; collect them all. -->
+            <!-- Check for possible media overlays in the sequence of nodes; collect them all. -->
             <xsl:variable name="media-overlays">
                 <xsl:for-each select="$splitter-fragment-nodes">
                     <xsl:if test="f:has-rend-value(@rend, 'media-overlay')">

@@ -114,7 +114,7 @@
         <xsl:for-each select="teiHeader/fileDesc/titleStmt/editor">
             <meta name="DC.Contributor" content="{.}"/>
         </xsl:for-each>
-        <xsl:for-each select="teiHeader/fileDesc/titleStmt/respStmt/name">
+        <xsl:for-each select="teiHeader/fileDesc/titleStmt/respStmt[resp != 'Transcription']/name">
             <meta name="DC.Contributor" content="{.}"/>
         </xsl:for-each>
 

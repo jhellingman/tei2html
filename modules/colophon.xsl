@@ -298,8 +298,8 @@
     <xd:doc>
         <xd:short>Generate links to catalog entries.</xd:short>
         <xd:detail>
-            <p>Depending on the presence of various types of <code>idno</code> elements, corresponding links to the relevant sites will be created. Currently,
-            understood are IDs pointing to Project Gutenberg, the Library of Congress, WorldCat, Open Library and LibraryThing.</p>
+            <p>Depending on the presence of various types of <code>idno</code> elements, corresponding links to the relevant sites will be created. This
+            code handles IDs pointing to Project Gutenberg, the Library of Congress, WorldCat, Open Library and LibraryThing.</p>
         </xd:detail>
     </xd:doc>
 
@@ -479,7 +479,7 @@
         <xd:detail>
             <p>Generate a list of corrections made to the text, as indicated by <code>corr</code>-elements. Identical
             corrections are grouped together. The page numbers link back to the <code>corr</code>-element as it
-            appears in the text (except when there are too many).</p>
+            appears in the text (except when more than a set number).</p>
         </xd:detail>
     </xd:doc>
 
@@ -955,7 +955,7 @@
         <xd:short>Generate an overview of foreign language fragments, for one language.</xd:short>
         <xd:detail>
             <p>Generate a table of foreign language fragments in the text for a given language.
-            The fragments are grouped by content (that is, undoubled), and presented in document order.</p>
+            The fragments are grouped by content (that is, deduplicated), and presented in document order.</p>
         </xd:detail>
         <xd:param name="lang" type="string">The code of the language to handle.</xd:param>
     </xd:doc>

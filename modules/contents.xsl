@@ -305,7 +305,7 @@
 
 
     <!--====================================================================-->
-    <!-- Same as above, but now modified to have the toc placed in table -->
+    <!-- Same as above, but now modified to have the toc placed in table. -->
 
     <xsl:template name="toc-body-table">
         <xsl:variable name="maxLevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>

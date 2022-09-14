@@ -10,7 +10,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>ePub-specific utility templates and functions, used by tei2epub</xd:short>
-        <xd:detail>This stylesheet contains a number of utility templates and functions, used by tei2epub only.</xd:detail>
+        <xd:detail>This stylesheet contains utility templates and functions, used by tei2epub only.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2019, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -73,17 +73,17 @@
 
         <xsl:variable name="targetFile">
             <xsl:choose>
-                <!-- If we have an explicit call for a footnote section, all footnotes are in there -->
+                <!-- If we have an explicit call for a footnote section, all footnotes are in there. -->
                 <xsl:when test="root($target)//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')]">
                     <xsl:value-of select="f:determine-filename((root($target)//divGen[@type = ('Footnotes', 'footnotes', 'footnotesBody')])[1])"/>
                 </xsl:when>
 
-                <!-- Footnotes to div0 elements (i.e., those not in a div1) are in the same fragment as the note itself -->
+                <!-- Footnotes to div0 elements (i.e., those not in a div1) are in the same fragment as the note itself. -->
                 <xsl:when test="not($target/ancestor::div1)">
                     <xsl:value-of select="f:determine-filename($target)"/>
                 </xsl:when>
 
-                <!-- Footnotes to div1 elements are found in the last fragment of the div1 -->
+                <!-- Footnotes to div1 elements are found in the last fragment of the div1. -->
                 <xsl:otherwise>
                     <xsl:value-of select="f:determine-filename(($target/ancestor::div1[not(ancestor::q)]/*)[last()])"/>
                 </xsl:otherwise>

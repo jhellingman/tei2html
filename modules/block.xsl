@@ -338,8 +338,8 @@
         <xd:short>Handle quotations.</xd:short>
         <xd:detail><p>Handle quotations (a quotation is normally set off from the text by some extra space and indentation).</p>
 
-            <p>Note that TEI has a number of closely related elements for encoding quotations, i.e., <code>q</code>,
-            <code>quote</code> and <code>said</code>, as well as a number of related elements, <code>cit</code>, 
+            <p>Note that TEI has several closely related elements for encoding quotations, that is, <code>q</code>,
+            <code>quote</code> and <code>said</code>, and a some related elements like <code>cit</code>,
             <code>mentioned</code> and <code>soCalled</code>. Since these elements regard interpretation of the text
             and have little impact on its rendering, in combination with the fact that by default these stylesheets
             assume that all characters are encoded (instead of replaced by mark-up), we do little with those elements.</p>
@@ -537,7 +537,7 @@
     <xd:doc>
         <xd:short>Determine whether a paragraph is first.</xd:short>
         <xd:detail>Determine whether a paragraph is first in a division. This can be used to determine whether
-        extra or no-indentation is required in some cases.</xd:detail>
+        extra or no-indentation is required in these cases.</xd:detail>
         <xd:param name="node">The (<code>p</code>) element of which the position needs to be determined.</xd:param>
     </xd:doc>
 
@@ -637,11 +637,11 @@
             <code>initial-image()</code>.</p>
 
             <p>To properly show an initial in HTML that may stick over the text, we need
-            to use a number of tricks in CSS.</p>
+            to use several tricks in CSS.</p>
 
             <ol>
                 <li>We set the initial as background picture on the paragraph.</li>
-                <li>We create a small div which we let float to the left, to give the initial
+                <li>We create a small div, which we float to the left, to give the initial
                 the space it needs.</li>
                 <li>We set the padding-top to a value such that the initial actually appears
                 to stick over the paragraph.</li>
@@ -937,6 +937,5 @@
         <xsl:text>}&lf;</xsl:text>
 
     </xsl:template>
-
 
 </xsl:stylesheet>

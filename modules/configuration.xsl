@@ -146,13 +146,13 @@
             <math.label.before>(</math.label.before>
             <math.label.after>)</math.label.after>
             <math.keepTexInComment>true</math.keepTexInComment>
-            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read svg files -->
-            <math.htmlPath>formulas</math.htmlPath>                         <!-- Path which generated html (and epub) will use as location for included svg or png files -->
+            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read SVG files -->
+            <math.htmlPath>formulas</math.htmlPath>                         <!-- Path the generated HTML (and ePub) will use as location for included SVG or PNG files -->
 
             <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- Options: MathJax; MML; SVG; SVG+IMG -->
             <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- Options for MathJax format, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->
 
-            <!-- Output format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html", "html5" and "epub". -->
+            <!-- Output-format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html", "html5" and "epub". -->
             <output format="html">
                 <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
             </output>
