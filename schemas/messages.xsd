@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
         xmlns="http://www.gutenberg.ph/2006/schemas/messages"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         elementFormDefault="qualified"
         targetNamespace="http://www.gutenberg.ph/2006/schemas/messages">
@@ -19,6 +20,8 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" name="message" type="xs:anyType"/>
         </xs:sequence>
         <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="fallback" type="xs:string"/>
+        <xs:attribute ref="xml:lang"/>
     </xs:complexType>
 
     <xs:complexType name="Param">

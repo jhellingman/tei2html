@@ -14,8 +14,8 @@
 
     <xs:complexType name="Image">
         <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="1" name="leftBoundary" type="Boundary"/>
-            <xs:element minOccurs="0" maxOccurs="1" name="rightBoundary" type="Boundary"/>
+            <xs:element minOccurs="0" name="leftBoundary" type="Boundary"/>
+            <xs:element minOccurs="0" name="rightBoundary" type="Boundary"/>
         </xs:sequence>
         <xs:attribute name="path" type="xs:string" use="required"/>
         <xs:attribute name="filesize" type="xs:integer"/>

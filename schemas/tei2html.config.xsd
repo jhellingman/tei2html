@@ -19,21 +19,21 @@
   
   <xs:group name="configurationItems">
     <xs:choice>
-      <xs:element ref="defaultStylesheet" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="inlineStylesheet" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="numberTocEntries" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="showParagraphNumbers" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="includePGHeaders" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="includeImages" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="defaultTocEntries" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="useDittoMarks" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="dittoMark" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="generateFacsimile" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="facsimilePath" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="useRegularizedUnits" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="outputExternalLinks" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="outputExternalLinksTable" minOccurs="0" maxOccurs="1"/>
-      <xs:element ref="useMouseOverPopups" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="defaultStylesheet" minOccurs="0"/>
+      <xs:element ref="inlineStylesheet" minOccurs="0"/>
+      <xs:element ref="numberTocEntries" minOccurs="0"/>
+      <xs:element ref="showParagraphNumbers" minOccurs="0"/>
+      <xs:element ref="includePGHeaders" minOccurs="0"/>
+      <xs:element ref="includeImages" minOccurs="0"/>
+      <xs:element ref="defaultTocEntries" minOccurs="0"/>
+      <xs:element ref="useDittoMarks" minOccurs="0"/>
+      <xs:element ref="dittoMark" minOccurs="0"/>
+      <xs:element ref="generateFacsimile" minOccurs="0"/>
+      <xs:element ref="facsimilePath" minOccurs="0"/>
+      <xs:element ref="useRegularizedUnits" minOccurs="0"/>
+      <xs:element ref="outputExternalLinks" minOccurs="0"/>
+      <xs:element ref="outputExternalLinksTable" minOccurs="0"/>
+      <xs:element ref="useMouseOverPopups" minOccurs="0"/>
     </xs:choice>
   </xs:group>
   

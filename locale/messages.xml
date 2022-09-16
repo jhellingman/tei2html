@@ -2185,9 +2185,9 @@
         </msg:message>
 
         <msg:message name="msgPGFooter">
-            <p name="smallprint">Fin de la versión de Project Gutenberg de <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Fin de la versión de Project Gutenberg de <i><msg:param name="title"/></i>, por <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Este archivo debe tener el nombre <msg:param name="pgnum"/>-h.html o <msg:param name="pgnum"/>-h.zip.</p>
-            <p class="smallprint">Este y todos los archivos asociados en distintos formatos formatos se encontrarán en:</p>
+            <p class="smallprint">Este y todos los archivos asociados en distintos formatos se encontrarán en:</p>
             <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Producido por <msg:param name="transcriber"/>.</p>
             <p class="smallprint">Las ediciones actualizadas sustituirán a las ediciones previas. Las ediciones anteriores recibirán nombres nuevos.</p>
