@@ -1,0 +1,39 @@
+
+/* Germanic languages */
+
+:lang(en)  { background-color: #ffffff; }
+
+:lang(de)  { background-color: #ff8e8e; }
+:lang(nl)  { background-color: #fdca62; }
+:lang(fy)  { background-color: #d4ffab; }
+
+:lang(da)  { background-color: #f9c0ff; }
+:lang(no)  { background-color: #f9a6ff; }
+:lang(sv)  { background-color: #df92ff; }
+
+/* Romance languages */
+
+:lang(la)  { background-color: #f5ff77; }
+:lang(fr)  { background-color: #fffcc7; }
+:lang(es)  { background-color: #ffc9b2; }
+:lang(ca)  { background-color: #d4ffc7; }
+:lang(pt)  { background-color: #c7ffcd; }
+:lang(it)  { background-color: #c7ffe0; }
+:lang(ro)  { background-color: #c7fff2; }
+
+/* Slavic languages */
+
+:lang(pl)  { background-color: #c7f7ff; }
+:lang(ru)  { background-color: #c7eaff; }
+:lang(bg)  { background-color: #c7dfff; }
+
+/* Classic languages */
+
+:lang(el)  { background-color: #c7cdff; }
+:lang(grc) { background-color: #c7cdff; }
+
+/* Semitic languages */
+
+:lang(he)  { background-color: #80b6ff; }
+:lang(ar)  { background-color: #7fff91; }
+

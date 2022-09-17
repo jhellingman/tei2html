@@ -64,7 +64,7 @@
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
             <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries. -->
-            <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present -->
+            <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present. -->
 
             <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->
             <pg.includeComments>false</pg.includeComments>                  <!-- Include references to Project Gutenberg in comments. -->
@@ -74,12 +74,12 @@
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <xref.show>always</xref.show>                                   <!-- Generate external links, possible values: 
-                                                                                 - always:   external links are active at the location in the text
+                                                                                 - always:   external links are active at the location in the text.
                                                                                  - never:    external links are not shown (only the anchor text is).
                                                                                  - colophon: external links are active in the colophon (including in the external links table, if generated).
                                                                               -->
             <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
-            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used -->
+            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
 
             <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
 
@@ -87,9 +87,9 @@
             <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
             <ditto.repeat>word</ditto.repeat>                               <!-- How often to use a ditto mark, possible values: word | segment. May also be overridden by rend attribute ditto-repeat() -->
 
-            <pageNumbers.show>true</pageNumbers.show>                       <!-- Show page numbers in the right margin -->
-            <pageNumbers.before>[</pageNumbers.before>                      <!-- String to place before the page number in the right margin -->
-            <pageNumbers.after>]</pageNumbers.after>                        <!-- String to place after the page number in the right margin -->
+            <pageNumbers.show>true</pageNumbers.show>                       <!-- Show page numbers in the right margin. -->
+            <pageNumbers.before>[</pageNumbers.before>                      <!-- String to place before the page number in the right margin. -->
+            <pageNumbers.after>]</pageNumbers.after>                        <!-- String to place after the page number in the right margin. -->
 
             <facsimile.enable>false</facsimile.enable>                      <!-- Output section with and links to facsimile images if required information is present. -->
             <facsimile.wrapper.enable>true</facsimile.wrapper.enable>       <!-- Generate HTML wrapper files for the images, and link to these instead of to the image. -->
@@ -109,8 +109,8 @@
             <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels (after applying images.scale). -->
             <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels (after applying images.scale). -->
 
-            <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing -->
-            <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing -->
+            <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing. -->
+            <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing. -->
             <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
@@ -154,7 +154,7 @@
 
             <!-- Output-format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html", "html5" and "epub". -->
             <output format="html">
-                <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc) -->
+                <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc). -->
             </output>
             <output format="html5">
                 <useMouseOverPopups>true</useMouseOverPopups>
@@ -203,7 +203,7 @@
         <xd:short>Get a value from the configuration.</xd:short>
         <xd:detail>
             <p>Get a value from the configuration-map. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, obtain
-            the value from the default configuration included in this stylesheet. If that too fails, a message is logged to the console.</p>
+            the value from the default configuration included in this stylesheet. If that too fails, log a message to the console.</p>
         </xd:detail>
     </xd:doc>
 
@@ -219,7 +219,7 @@
 
     <xsl:function name="f:is-set" as="xs:boolean" cache="yes">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:sequence select="f:get-setting($key) = 'true'"/>
+        <xsl:sequence select="lower-case(f:get-setting($key)) = ('true', 'yes')"/>
     </xsl:function>
 
 

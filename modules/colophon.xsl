@@ -477,9 +477,9 @@
     <xd:doc>
         <xd:short>Generate a list of corrections.</xd:short>
         <xd:detail>
-            <p>Generate a list of corrections made to the text, as indicated by <code>corr</code>-elements. Identical
-            corrections are grouped together. The page numbers link back to the <code>corr</code>-element as it
-            appears in the text (except when more than a set number).</p>
+            <p>Generate a list of corrections made to the text, as indicated by <code>corr</code>-elements.
+            Group identical corrections together. The page numbers links back to the location of the
+            <code>corr</code>-element in the text (except when more than a set number).</p>
         </xd:detail>
     </xd:doc>
 
@@ -496,8 +496,8 @@
         <xd:detail>
             <p>Generate the contents of the list of corrections as an HTML table. Since corrections can be encoded
             in two ways (as <code>corr</code> elements in older TEI versions and as <code>choice</code> elements
-            in newer TEI versions), the two ways are collected and normalized into <code>tmp:choice</code> elements
-            in the variable <code>$corrections</code>. These are then grouped and rendered.</p>
+            in newer TEI versions), first collect and normalize the two variants into <code>tmp:choice</code> elements
+            in the variable <code>$corrections</code>. Group these by content and render as sorted list.</p>
         </xd:detail>
     </xd:doc>
 
@@ -673,8 +673,8 @@
         <xd:detail>
             <p>Generate the contents of the list of abbreviations as an HTML table. Since abbreviations can be encoded
             in two ways (as <code>abbr</code> elements in older TEI versions and as <code>choice</code> elements
-            in newer TEI versions), the two ways are collected and normalized into <code>tmp:choice</code> elements
-            in the variable <code>$abbreviations</code>. These are then grouped and rendered.</p>
+            in newer TEI versions), first collect and normalize the two variants into <code>tmp:choice</code> elements
+            in the variable <code>$abbreviations</code>. Group these by content and render as sorted list.</p>
         </xd:detail>
     </xd:doc>
 
