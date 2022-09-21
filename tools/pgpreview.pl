@@ -180,7 +180,7 @@ sub printHtmlHead() {
     <title>DP Preview</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style type='text/css'>
-        BODY { font-size: 16pt; line-height: 22pt; font-family: 'Charis SIL'; }
+        BODY { font-size: 16pt; line-height: 22pt; font-family: 'Charis SIL', serif; }
         .figure { background-color: #FFFF5C; }
         .remark { background-color: #FFB442; }
         .sc { font-variant:small-caps; }

@@ -1,36 +1,56 @@
+/*
 
-/* Germanic languages */
+    Colors used:
+
+    50%                                             85%
+
+ 	#ff0000 	rgb(255, 0, 0) 	    red             #ffb3b3
+	#ff8000 	rgb(255, 128, 0) 	orange          #ffd9b3
+	#ffff00 	rgb(255, 255, 0) 	yellow          #ffffb3
+	#80ff00 	rgb(128, 255, 0) 	chartreuse      #d9ffb3
+	#00ff00 	rgb(0, 255, 0) 	    green           #b3ffb3
+	#00ff80 	rgb(0, 255, 128) 	spring green    #ccffe6
+	#00ffff 	rgb(0, 255, 255) 	cyan            #b3ffff
+	#0080ff 	rgb(0, 128, 255) 	dodger blue     #b3d9ff
+	#0000ff 	rgb(0, 0, 255) 	    blue            #b3b3ff
+	#8000ff 	rgb(128, 0, 255) 	purple          #d9b3ff
+	#ff00ff 	rgb(255, 0, 255) 	violet          #ffb3ff
+	#ff0080 	rgb(255, 0, 128) 	magenta         #ffb3d9
+*/
+
+/* Most common western languages */
 
 :lang(en)  { background-color: #ffffff; }
 
-:lang(de)  { background-color: #ff8e8e; }
-:lang(nl)  { background-color: #fdca62; }
-:lang(fy)  { background-color: #d4ffab; }
+:lang(de)  { background-color: #ffb3b3; }
+:lang(nl)  { background-color: #ffd9b3; }
+:lang(fy)  { background-color: #fff2e5; }
 
-:lang(da)  { background-color: #f9c0ff; }
-:lang(no)  { background-color: #f9a6ff; }
-:lang(sv)  { background-color: #df92ff; }
+:lang(da)  { background-color: #ffffb3; }
+:lang(no)  { background-color: #ffffcc; }
+:lang(sv)  { background-color: #ffffe5; }
 
 /* Romance languages */
 
-:lang(la)  { background-color: #f5ff77; }
-:lang(fr)  { background-color: #fffcc7; }
-:lang(es)  { background-color: #ffc9b2; }
+:lang(la)  { background-color: #d9ffb3; }
+:lang(fr)  { background-color: #b3ffb3; }
+:lang(es)  { background-color: #ccffe6; }
+
 :lang(ca)  { background-color: #d4ffc7; }
-:lang(pt)  { background-color: #c7ffcd; }
-:lang(it)  { background-color: #c7ffe0; }
-:lang(ro)  { background-color: #c7fff2; }
+:lang(pt)  { background-color: #b3ffff; }
+:lang(it)  { background-color: #b3d9ff; }
+:lang(ro)  { background-color: #ffb3ff; }
 
 /* Slavic languages */
 
-:lang(pl)  { background-color: #c7f7ff; }
-:lang(ru)  { background-color: #c7eaff; }
-:lang(bg)  { background-color: #c7dfff; }
+:lang(pl)  { background-color: #d9b3ff; }
+:lang(ru)  { background-color: #ffb3ff; }
+:lang(bg)  { background-color: #ffb3d9; }
 
 /* Classic languages */
 
-:lang(el)  { background-color: #c7cdff; }
-:lang(grc) { background-color: #c7cdff; }
+:lang(el)  { background-color: #e5e5ff; }
+:lang(grc) { background-color: #b3b3ff; }
 
 /* Semitic languages */
 

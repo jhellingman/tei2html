@@ -107,11 +107,13 @@ GetOptions(
     'html5' => \$makeHtml5,
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
+    'kwicwords=s' => \$kwicWords,
     'kwicsort=s' => \$kwicSort,
     'kwiccasesensitive=s' => \$kwicCaseSensitive,
     'kwicmixup=s' => \$kwicMixup,
     'kwicvariants=i' => \$kwicVariants,
     'notranscription' => \$noTranscription,
+    'notranscriptions' => \$noTranscription,
     'notranscriptionpopups' => \$noTranscriptionPopups,
     'pagewidth=i' => \$pageWidth,
     'profile' => \$profile,
@@ -157,7 +159,7 @@ if ($showHelp == 1) {
 
     print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
-    print "    i=<int>   Select the image set in kept in a directory named 'images@<int>' (default: 0)\n";
+    print "    i=<int>   Select the image set in kept in a directory named 'images\@<int>' (default: 0)\n";
     print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    w=<int>   Set the page width (default: 72 characters).\n\n";
@@ -553,7 +555,6 @@ sub makeHtmlCommon {
     my $basename = shift;
     my $xmlFile = shift;
     my $htmlFile = shift;
-    my $xsltFile = shift;
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         print "Skip conversion to HTML ($htmlFile newer than $xmlFile).\n";
@@ -969,7 +970,7 @@ sub runChecks($) {
         # Hide a number of entities for the checks, so matching pairs of punctuation can be
         # verified. The trick used is that unmatched parentheses and brackets can be represented
         # by their SGML entities, and those entities will be mapped to alternative characters
-        # for the test only. Similary, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
+        # for the test only. Similarly, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
         system ("perl $toolsdir/precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
         removeFile($positionInfoFilename);
 

@@ -526,10 +526,10 @@
                     <td class="width20">
                         <xsl:call-template name="correctionTablePageReferences"/>
                     </td>
-                    <td class="width40 bottom">
+                    <td class="width40 bottom" lang="{@lang}">
                         <xsl:call-template name="correctionTableSourceText"/>
                     </td>
-                    <td class="width40 bottom">
+                    <td class="width40 bottom" lang="{@lang}">
                         <xsl:call-template name="correctionTableCorrectedText"/>
                     </td>
                     <xsl:if test="f:is-set('colophon.showEditDistance')">
@@ -544,6 +544,7 @@
 
 
     <xsl:template name="correctionTablePageReferences">
+        <xsl:context-item as="element(tmp:choice)" use="required"/>
         <xsl:choose>
             <xsl:when test="count(current-group()) &gt; number(f:get-setting('colophon.maxCorrectionCount'))">
                 <i>
@@ -566,6 +567,7 @@
 
 
     <xsl:template name="correctionTableSourceText">
+        <xsl:context-item as="element(tmp:choice)" use="required"/>
         <xsl:choose>
             <xsl:when test="tmp:sic != ''">
                 <xsl:apply-templates select="tmp:sic"/>
@@ -578,6 +580,7 @@
 
 
     <xsl:template name="correctionTableCorrectedText">
+        <xsl:context-item as="element(tmp:choice)" use="required"/>
         <xsl:choose>
             <xsl:when test="tmp:corr != ''">
                 <xsl:apply-templates select="tmp:corr"/>
@@ -590,6 +593,7 @@
 
 
     <xsl:template name="correctionTableEditDistance">
+        <xsl:context-item as="element(tmp:choice)" use="required"/>
         <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
         <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:strip-diacritics(tmp:sic), f:strip-diacritics(tmp:corr))" as="xs:integer"/>
         <xsl:value-of select="$editDistance"/>
@@ -606,6 +610,7 @@
 
     <xsl:template match="corr[not(f:in-transliteration(.))]" mode="collect-corrections">
         <tmp:choice>
+            <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
@@ -628,6 +633,7 @@
     <xsl:template match="choice[not(f:in-transliteration(.))]" mode="collect-corrections">
         <tmp:choice>
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
+            <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
                 <xsl:copy-of select="corr/* | corr/text()"/>
@@ -759,6 +765,7 @@
 
     <xsl:template match="choice" mode="collect-abbreviations">
         <tmp:choice>
+            <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
             <tmp:abbr>
                 <xsl:copy-of select="abbr/* | abbr/text()"/>
             </tmp:abbr>
@@ -919,7 +926,7 @@
         <xd:short>Generate an overview of foreign language fragments.</xd:short>
         <xd:detail>
             <p>Generate a table of foreign language fragments in the text, as indicated by the <code>@lang</code>-attribute.
-            The fragments are grouped by language, and presented in document order.</p>
+            Group the fragments by language, and order them by the language code.</p>
         </xd:detail>
     </xd:doc>
 
@@ -955,7 +962,7 @@
         <xd:short>Generate an overview of foreign language fragments, for one language.</xd:short>
         <xd:detail>
             <p>Generate a table of foreign language fragments in the text for a given language.
-            The fragments are grouped by content (that is, deduplicated), and presented in document order.</p>
+            Group the fragments by content (that is, deduplicated), and give them in document order.</p>
         </xd:detail>
         <xd:param name="lang" type="string">The code of the language to handle.</xd:param>
     </xd:doc>
@@ -988,6 +995,7 @@
                         <xsl:value-of select="name(.)"/>
                     </td>
                     <td>
+                        <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
                         <xsl:variable name="fragment">
                             <xsl:apply-templates select="." mode="language-fragments"/>
                         </xsl:variable>

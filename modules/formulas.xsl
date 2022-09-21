@@ -34,7 +34,7 @@
             <p>Handle a formula in TeX notation. For proper rendering, this will require <b>two</b> runs of
             <code>tei2html</code>: one to output the TeX formula in a small file. Then, after generating
             the matching MathML or SVG files, another run to include those generated files in the output.
-            Care is taken to export identical formulas only once, re-using the same file for subsequent
+            Take care to export identical formulas only once; re-use the same file for subsequent
             occurrences of the same formula.</p>
         </xd:detail>
     </xd:doc>

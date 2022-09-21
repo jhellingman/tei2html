@@ -1,6 +1,7 @@
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use strict;
+use warnings;
 
 use Getopt::Long;
 use POSIX qw/floor ceil/;
@@ -504,14 +505,14 @@ sub sizeTableColumns($$@) {
                 my $lineLength = length($line);
                 $columnArea[$j] += $lineLength;
                 $totalArea += $lineLength;
-                if ($lineLength > $desiredColumnWidths[$j]) {
+                if (!defined $desiredColumnWidths[$j] || $lineLength > $desiredColumnWidths[$j]) {
                     $desiredColumnWidths[$j] = $lineLength;
                 }
 
                 my @words = split(/\s+/, $line);
                 foreach my $word (@words) {
                     my $wordLength = length($word);
-                    if ($wordLength > $minimalColumnWidths[$j]) {
+                    if (!defined $minimalColumnWidths[$j] || $wordLength > $minimalColumnWidths[$j]) {
                         $widestWord[$j] = $word;
                         $minimalColumnWidths[$j] = $wordLength;
                     }
@@ -526,9 +527,11 @@ sub sizeTableColumns($$@) {
     my $columns = 0;
     for my $j (0 .. $#minimalColumnWidths) {
         $columns++;
+        my $addWidth = $minimalColumnWidths[$j];
+        $addWidth = defined $addWidth ? $addWidth : 0;
         ##print STDERR "\nCOLUMN: $j WIDTH: $minimalColumnWidths[$j] WORD: $widestWord[$j]";
-        $finalColumnWidths[$j] = $minimalColumnWidths[$j];
-        $minimalWidth += $minimalColumnWidths[$j];
+        $finalColumnWidths[$j] = $addWidth;
+        $minimalWidth += $addWidth;
     }
 
     # Adjust final width for borders (left 2; between 3; right 2)
@@ -547,7 +550,9 @@ sub sizeTableColumns($$@) {
     my @entitlement = ();
     my @fillFactor = ();
     for my $j (0 .. $columns - 1) {
-        my $fraction = sqrt($columnArea[$j]) / sqrt($totalArea);
+        my $area = $columnArea[$j];
+        $area = defined $area ? $area : 1;
+        my $fraction = sqrt($area) / sqrt($totalArea);
         $entitlement[$j] = $finalWidth * $fraction;
         if ($finalColumnWidths[$j] >= $desiredColumnWidths[$j]) {
             $fillFactor[$j] = 1.0;
@@ -647,7 +652,7 @@ sub printTable(@) {
             for my $k (0 .. $cellHeight) {
                 my $line = $rows[$i][$j][$k];
                 my $lineLength = length($line);
-                if ($lineLength > $columnWidths[$j]) {
+                if (!defined $columnWidths[$j] || $lineLength > $columnWidths[$j]) {
                     $columnWidths[$j] = $lineLength;
                 }
             }
@@ -818,6 +823,9 @@ sub printBottomBorder(@) {
 sub printWithPadding($$) {
     my $string = shift;
     my $width = shift;
+
+    $string = defined $string ? $string : '';
+    $width = defined $width ? $width : 0;
 
     # Align right if number or amount
     if ($string =~ /^\$? ?[0-9]+([.,][0-9]+)*$/) {
@@ -1206,7 +1214,7 @@ sub entities2iso88591($) {
     $string =~ s/\&male;/[male]/g;   # male
     $string =~ s/\&female;/[female]/g;   # female
     $string =~ s/\&Esmall;/e/g;  # small capital letter E (used as small letter)
-    $string =~ s/\&ast;/*/g; # asterix
+    $string =~ s/\&ast;/*/g; # asterisk
 
     $string =~ s/\&there4;/./g;      # Therefor (three dots in triangular arrangement) used as abbreviation dot.
     $string =~ s/\&maltese;/[+]/g;   # Maltese Cross
@@ -1232,7 +1240,7 @@ sub entities2iso88591($) {
     $string =~ s/\&Theta;/Th/g;      #  GREEK CAPITAL LETTER THETA
     $string =~ s/\&Iota;/I/g;        #  GREEK CAPITAL LETTER IOTA
     $string =~ s/\&Kappa;/K/g;       #  GREEK CAPITAL LETTER KAPPA
-    $string =~ s/\&Lambda;/L/g;      #  GREEK CAPITAL LETTER LAMDA
+    $string =~ s/\&Lambda;/L/g;      #  GREEK CAPITAL LETTER LAMBDA
     $string =~ s/\&Mu;/M/g;          #  GREEK CAPITAL LETTER MU
     $string =~ s/\&Nu;/N/g;          #  GREEK CAPITAL LETTER NU
     $string =~ s/\&Xi;/X/g;          #  GREEK CAPITAL LETTER XI
@@ -1260,7 +1268,7 @@ sub entities2iso88591($) {
     $string =~ s/\&theta;/th/g;      #  GREEK SMALL LETTER THETA
     $string =~ s/\&iota;/i/g;        #  GREEK SMALL LETTER IOTA
     $string =~ s/\&kappa;/k/g;       #  GREEK SMALL LETTER KAPPA
-    $string =~ s/\&lambda;/l/g;      #  GREEK SMALL LETTER LAMDA
+    $string =~ s/\&lambda;/l/g;      #  GREEK SMALL LETTER LAMBDA
     $string =~ s/\&mu;/m/g;          #  GREEK SMALL LETTER MU
     $string =~ s/\&nu;/n/g;          #  GREEK SMALL LETTER NU
     $string =~ s/\&xi;/x/g;          #  GREEK SMALL LETTER XI

@@ -38,7 +38,7 @@ while (<INPUTFILE>) {
     $_ =~ s/\&$/\&amp;/g;
     $_ =~ s/\&c\./\&amp;c./g;
 
-    # Replace PGDP page-separators (preserving proofers):
+    # Replace PGDP page-separators (preserving proofreader names):
     # $_ =~ s/^-*File: (0*)([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
     $_ =~ s/^-*File: (0*)([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]?)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=$2 facs="f:$1$2">/g;
     # For DP-EU:

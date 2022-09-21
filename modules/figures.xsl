@@ -150,7 +150,7 @@
                 <a>
                     <xsl:choose>
                         <xsl:when test="f:is-epub() and matches($url, '^[^:]+\.(jpg|png|gif|svg)$')">
-                            <!-- cannot directly link to image file in ePub, so generate wrapper html and link to that. -->
+                            <!-- cannot directly link to image file in ePub, so generate wrapper HTML and link to that. -->
                             <xsl:call-template name="generate-image-wrapper">
                                 <xsl:with-param name="imagefile" select="$url"/>
                             </xsl:call-template>
