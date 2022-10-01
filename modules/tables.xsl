@@ -95,7 +95,7 @@
             </xsl:otherwise>
         </xsl:choose>
 
-        <xsl:if test=".//note[f:is-table-note(.)][not(@sameAs)]">
+        <xsl:if test="not(f:is-nested-table(.)) and .//note[f:is-table-note(.)][not(@sameAs)]">
             <div class="footnotes">
                 <xsl:apply-templates select=".//note[f:is-table-note(.)][not(@sameAs)]" mode="footnotes">
                     <!-- Retain the order of markers, irrespective of the order of encoding the table -->

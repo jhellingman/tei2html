@@ -40,11 +40,11 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to perform various checks on a TEI file.</xd:short>
-        <xd:detail><p>This stylesheet performs a number of checks on a TEI file, to help find potential issues with both the text and tagging.</p>
+        <xd:detail><p>This stylesheet performs checks on a TEI file, to help find potential issues with both the text and tagging.</p>
         <p>Since the standard XSLT processor does not provide line and column information to report errors on, this stylesheet expects that all
-        elements are provided with a <code>pos</code> element that contains the line and column the element appears on in the source file. This element
-        should have the format <code>line:column</code>. A small Perl script (<code>addPositionInfo.pl</code>) is available to add those attributes to
-        elements as a pre-processing step.</p></xd:detail>
+        elements have a <code>@pos</code> attribute that contains the line and column the element appears on in the source file. This element
+        should have the format <code>line:column</code>. I've made a small Perl script (<code>addPositionInfo.pl</code>) to add those attributes to
+        elements in a pre-processing step.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2015&ndash;2017, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -63,7 +63,7 @@
         <xsl:apply-templates mode="segmentize" select="/"/>
     </xsl:variable>
 
-    <!-- Make sure periods in abbreviations are not reported (replace them by &fwperiod; replace them back later) -->
+    <!-- Do not report periods in abbreviations (replace them by &fwperiod; replace them back later) -->
     <xsl:template match="abbr" mode="segments">
         <xsl:value-of select="replace(., '\.', '&fwperiod;')"/>
     </xsl:template>
@@ -382,7 +382,7 @@
     <xsl:template match="cell[@role='sumCurrency']" mode="checks">
 
         <!-- Sum a currency split over two columns, e.g., dollars and cents, using 1 dollar = 100 cents.
-             The cell we match is the dollar amount; the cents are assumed to be in the next cell -->
+             The cell we match is the dollar amount; assume the cents are in the next cell. -->
 
         <xsl:copy-of select="f:report-non-number(.)"/>
         <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
@@ -427,7 +427,7 @@
 
         <!-- Sum a sterling amount split over three columns, i.e., pounds, shillings, and pence,
              using 1 pound = 20 shillings or 240 pence. The cell we match is the amount in pounds;
-             the shillings and pence are assumed to be in the next two cells. -->
+             assume shillings and pence are in the next two cells. -->
 
         <xsl:copy-of select="f:report-non-number(.)"/>
         <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
@@ -453,7 +453,7 @@
 
         <!-- Sum a Peso/Tomin/Grano amount split over three columns,
              using 1 peso = 8 tomins or 8 * 12 = 96 granos. The cell we match is the amount in pesos;
-             the tomins and granos are assumed to be in the next two cells. -->
+             assume tomins and granos are in the next two cells. -->
 
         <xsl:copy-of select="f:report-non-number(.)"/>
         <xsl:copy-of select="f:report-non-number(following-sibling::cell[1])"/>
@@ -1031,7 +1031,7 @@
 
     <xsl:template mode="checks" match="hi[@rend='ex'] | g">
         <xsl:if test="contains(lower-case(string(.)), 'ij')">
-            <i:issue pos="{@pos}" code="Y01" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Letterspaced text contains digraph ij: <xsl:value-of select="string(.)"/>.</i:issue>
+            <i:issue pos="{@pos}" code="Y01" category="Formatting" target="{f:generate-id(.)}" level="Warning" element="{name(.)}" page="{f:get-page(.)}">Letter-spaced text contains digraph ij: <xsl:value-of select="string(.)"/>.</i:issue>
         </xsl:if>
         <xsl:apply-templates mode="checks"/>
         <xsl:next-match/>
@@ -1311,7 +1311,7 @@
             </tmp:abbrs>
         </xsl:variable>
 
-        <!-- Sort by length, longest first, then alphabetical, case-insensitive, then capitals first -->
+        <!-- Sort by length, longest first, then alphabetical, case-insensitive, then capitals first. -->
         <tmp:abbrs>
             <xsl:for-each select="$abbrs//tmp:abbr">
                 <xsl:sort select="string-length(.)" data-type="number" order="descending"/>
