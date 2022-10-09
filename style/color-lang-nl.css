@@ -20,10 +20,10 @@
 
 /* Most common western languages */
 
-:lang(en)  { background-color: #ffffff; }
+:lang(nl)  { background-color: #ffffff; }
 
 :lang(de)  { background-color: #ffb3b3; }
-:lang(nl)  { background-color: #ffd9b3; }
+:lang(en)  { background-color: #ffd9b3; }
 :lang(fy)  { background-color: #fff2e5; }
 
 :lang(da)  { background-color: #ffffb3; }
@@ -56,4 +56,8 @@
 
 :lang(he)  { background-color: #80b6ff; }
 :lang(ar)  { background-color: #7fff91; }
+
+/* Other */
+
+:lang(ms)  { background-color: #abfcfc; }
 

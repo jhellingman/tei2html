@@ -928,6 +928,9 @@
 
     <xsl:template name="footnote-sectionhead">
         <h3 class="main">
+            <xsl:if test="@n">
+                <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
+            </xsl:if>
             <xsl:call-template name="generate-single-head"/>
         </h3>
     </xsl:template>

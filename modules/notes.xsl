@@ -415,6 +415,12 @@
             <xsl:when test="f:has-rend-value(@rend, 'note-marker')">
                 <xsl:value-of select="f:rend-value(@rend, 'note-marker')"/>
             </xsl:when>
+            <xsl:when test="f:get-setting('notes.foot.counter') = 'text'">
+                <xsl:number
+                    level="any"
+                    count="note[f:is-footnote(.)][not(@sameAs)]"
+                    from="text"/>
+            </xsl:when>
             <xsl:when test="ancestor::div">
                 <xsl:number
                     level="any"
