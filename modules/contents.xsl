@@ -905,10 +905,10 @@
 
     <xsl:template match="div0" mode="divgen-footnotes">
         <!-- Only mention the part if it has footnotes (not in the chapters) -->
-        <xsl:if test=".//note[f:is-footnote(.) and not(ancestor::div1)]">
+        <xsl:if test=".//note[f:is-footnote(.) and not(ancestor::div1) and not(@sameAs)]">
             <div class="div2 notes">
                 <xsl:call-template name="footnote-sectionhead"/>
-                <xsl:apply-templates select=".//note[f:is-footnote(.) and not(ancestor::div1)]" mode="footnotes"/>
+                <xsl:apply-templates select=".//note[f:is-footnote(.) and not(ancestor::div1) and not(@sameAs)]" mode="footnotes"/>
             </div>
         </xsl:if>
         <xsl:apply-templates select="div1[not(ancestor::q)]" mode="divgen-footnotes"/>
@@ -917,10 +917,10 @@
 
     <xsl:template match="div1" mode="divgen-footnotes">
         <!-- Only mention the chapter if it has footnotes -->
-        <xsl:if test=".//note[f:is-footnote(.)]">
+        <xsl:if test=".//note[f:is-footnote(.) and not(@sameAs)]">
             <div class="div2 notes">
                 <xsl:call-template name="footnote-sectionhead"/>
-                <xsl:apply-templates select=".//note[f:is-footnote(.)]" mode="footnotes"/>
+                <xsl:apply-templates select=".//note[f:is-footnote(.) and not(@sameAs)]" mode="footnotes"/>
             </div>
         </xsl:if>
     </xsl:template>
