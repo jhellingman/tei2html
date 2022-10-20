@@ -57,3 +57,12 @@
 :lang(he)  { background-color: #80b6ff; }
 :lang(ar)  { background-color: #7fff91; }
 
+/* Indic languages */
+
+:lang(ur)  { background-color: #ccffe6; }
+:lang(sa)  { background-color: #d9b3ff; }
+:lang(hi)  { background-color: #ffb3ff; }
+:lang(bo)  { background-color: #ffb3d9; }
+
+
+

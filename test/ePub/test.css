@@ -33,7 +33,6 @@ a {
 
 abbr[title] {
  border-bottom: none;
- text-decoration: underline;
  text-decoration: underline dotted;
 }
 
@@ -1028,10 +1027,13 @@ tr.borderAll td, tr.borderAll th, th.borderAll, td.noBorderAll {
 
  
 .cellDoubleUp {
- border: 0 solid black !important;
+ border-width: 0 !important;
  width: 1em;
 }
 
+.cellDummy {
+ border-width: 0 !important;
+}
 
  
 td.alignDecimalIntegerPart {

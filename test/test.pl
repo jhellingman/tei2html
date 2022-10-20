@@ -56,6 +56,8 @@ system ("$saxon test.xml $xsldir/preprocess.xsl > test-preprocessed.xml");
 system ("$saxon -TP:htmlprofile.html test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam > test.html");
 system ("$saxon -TP:epubprofile.html test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
+system("tidy --output-xml yes --doctype html5 --wrap 72 --quote-nbsp no --quiet yes test.html > test-html5.html");
+
 # system ("$saxon -T -traceout:htmltrace.txt test-preprocessed.xml $xsldir/tei2html.xsl $fileImageParam $cssFileParam $configurationFileParam > test.html");
 # system ("$saxon -T -traceout:epubtrace.txt  test-preprocessed.xml $xsldir/tei2epub.xsl $fileImageParam $cssFileParam $configurationFileParam $opfManifestFileParam $opfMetadataFileParam basename=\"test\" > tmp.xhtml");
 
