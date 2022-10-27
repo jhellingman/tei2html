@@ -194,7 +194,7 @@
                         </a>
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:apply-templates/>
+                        <xsl:text/><xsl:apply-templates/><xsl:text/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -207,7 +207,7 @@
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:apply-templates/>
+                <xsl:text/><xsl:apply-templates/><xsl:text/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
