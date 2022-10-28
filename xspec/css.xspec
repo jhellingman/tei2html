@@ -6,7 +6,8 @@
         <!ENTITY asterism   "&#x2042;">
 
 ]>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+<x:description xmlns:f="urn:stylesheet-functions"
+               xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                stylesheet="test-tei2html.xsl"
                version="3.0">
@@ -17,7 +18,113 @@
         <TEI/>
     </x:param>
 
-    <!-- presence of rend-attributes results in class attributes on generated elements -->
+    <!-- f:has-class -->
+
+    <x:scenario label="When determining a class value from an empty string">
+        <x:call function="f:has-class">
+            <x:param select="''"/>
+            <x:param select="'red'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return false" select="false()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a class value from a string not containing the class">
+        <x:call function="f:has-class">
+            <x:param select="'blue'"/>
+            <x:param select="'red'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return false" select="false()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a class value from a string containing the class">
+        <x:call function="f:has-class">
+            <x:param select="'red'"/>
+            <x:param select="'red'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return true" select="true()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a class value from a string containing the class">
+        <x:call function="f:has-class">
+            <x:param select="'red yellow blue'"/>
+            <x:param select="'yellow'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return true" select="true()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a class value from a string containing the class">
+        <x:call function="f:has-class">
+            <x:param select="'class(red)'"/>
+            <x:param select="'red'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return true" select="true()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a class value from a string containing the class">
+        <x:call function="f:has-class">
+            <x:param select="'class(red yellow blue)'"/>
+            <x:param select="'yellow'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return true" select="true()"/>
+    </x:scenario>
+
+    <!-- f:extract-class-from-rend-ladder -->
+
+    <x:scenario label="When extracting a class value from an empty string">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="''"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return an empty string" select="''"/>
+    </x:scenario>
+
+    <x:scenario label="When extracting a class value from a string without a class">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="'vertical-align(center) background-color(red)'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return an empty string" select="''"/>
+    </x:scenario>
+
+    <x:scenario label="When extracting a class value from a string with a class">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="'vertical-align(center) class(red) background-color(red)'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return the class" select="'red'"/>
+    </x:scenario>
+
+    <x:scenario label="When extracting a class value from a string with a class">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="'vertical-align(center) red background-color(red)'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return the class" select="'red'"/>
+    </x:scenario>
+
+    <x:scenario label="When extracting a class value from a string with a class">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="'red vertical-align(center) yellow background-color(red) green'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return the class" select="'red yellow green'"/>
+    </x:scenario>
+
+    <x:scenario label="When extracting a class value from a string with a class">
+        <x:call function="f:extract-class-from-rend-ladder">
+            <x:param select="'red vertical-align(center) class(yellow) background-color(red) green'"/>
+            <x:param select="''"/>
+        </x:call>
+        <x:expect label="will return the class" select="'red yellow green'"/>
+    </x:scenario>
+
+    <!-- the presence of rend-attributes results in class attributes on generated elements -->
 
     <x:scenario label="When converting an element without a rend-attribute (normal mode)">
         <x:context>
@@ -78,7 +185,7 @@
             <ab id="p0" rend="font-size(large) red class(bright)">Just some text</ab>
         </x:context>
         <x:expect label="will result in an element with an ID and both the generated and specified classes.">
-            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="bright red p0">Just some text</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red bright p0">Just some text</span>
         </x:expect>
     </x:scenario>
 
@@ -87,7 +194,7 @@
             <ab id="p0" rend="red font-size(large) class(bright)">Just some text</ab>
         </x:context>
         <x:expect label="will result in an element with an ID and both the generated and specified classes.">
-            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="bright red p0">Just some text</span>
+            <span xmlns="http://www.w3.org/1999/xhtml" id="p0" class="red bright p0">Just some text</span>
         </x:expect>
     </x:scenario>
 
@@ -127,7 +234,7 @@
         </x:expect>
     </x:scenario>
 
-    <!-- convert rendition ladders to css -->
+    <!-- convert rendition ladders to CSS -->
 
     <x:scenario label="When converting a single rendition element to CSS">
         <x:context mode="css">

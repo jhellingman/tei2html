@@ -14,9 +14,9 @@
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to generate a CSS stylesheet to go with HTML or ePub output.</xd:short>
         <xd:detail>This stylesheet formats generates a CSS stylesheet from TEI. According to the requirements
-        of ePub, <code>@style</code> attributes are not allowed in the generated XHTML, so all CSS
-        rules are collected from the TEI file, and put together in a separate CSS file. Further templates in
-        the <code>css</code> mode are integrated in the other stylesheets, to keep them together with
+        of ePub, <code>@style</code> attributes are not allowed in the generated XHTML, so it collects all
+        CSS rules from the TEI file, and puts them together in a separate CSS file. Other templates also
+        use the <code>css</code> mode, to keep those CSS generating rules together with the
         related HTML generating templates.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011-2021, Jeroen Hellingman</xd:copyright>
@@ -353,13 +353,12 @@
         <xsl:variable name="rend" select="if ($rend) then $rend else ''" as="xs:string"/>
 
         <xsl:variable name="class">
-            <xsl:if test="f:has-rend-value($rend, 'class')">
-                <xsl:value-of select="f:rend-value($rend, 'class')"/>
-                <xsl:text> </xsl:text>
-            </xsl:if>
             <xsl:analyze-string select="$rend" regex="{$rendition-ladder-pattern}" flags="i">
                 <xsl:matching-substring>
-                    <!-- ignore rendition-ladder elements here -->
+                    <xsl:if test="regex-group(1) = 'class'">
+                        <xsl:value-of select="f:filter-class(regex-group(2), $element)"/>
+                        <xsl:text> </xsl:text>
+                    </xsl:if>
                 </xsl:matching-substring>
                 <xsl:non-matching-substring>
                     <xsl:if test="matches(normalize-space(.), $class-name-pattern)">
@@ -370,7 +369,7 @@
             </xsl:analyze-string>
         </xsl:variable>
 
-        <xsl:value-of select="$class"/>
+        <xsl:value-of select="normalize-space($class)"/>
     </xsl:function>
 
     <xsl:function name="f:filter-class" as="xs:string">
@@ -504,8 +503,8 @@
 
     <xd:doc>
         <xd:short>Handle indent values without a unit (assume em).</xd:short>
-        <xd:detail>Use without units should be deprecated, but historically we have a lot of texts specifying an indent as
-        just a number, which is here assumed to mean a value in ems.</xd:detail>
+        <xd:detail>Use without units should be deprecated, but historically we have a lot of texts specifying
+        an indent as plain a number, here assumed to mean a value in ems.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:indent-value" as="xs:string">
@@ -693,11 +692,11 @@
 
     <xsl:template match="/" mode="style">
 
-        <!-- We need to collect the column-related rendering rules first,
+        <!-- Collect the column-related rendering rules first,
              so they can be overridden by later cell rendering rules. -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-column"/>
 
-        <!-- Then follow the row-related rendering rules -->
+        <!-- Then collect the row-related rendering rules -->
         <xsl:apply-templates select="*[self::TEI.2 or self::TEI]/text" mode="style-row"/>
 
         <!-- Handle the rest of the document (including table cells). -->
@@ -778,7 +777,7 @@
         <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
             <xsl:variable name="css-properties" select="normalize-space(f:translate-rend-ladder(@rend, name()))"/>
             <xsl:if test="$css-properties != ''">
-                <!-- Use the id of the first element with this rend attribute as a class selector -->
+                <!-- Use the id of the first element with this rend attribute as a class selector. -->
                 <xsl:text>
 .</xsl:text>
                 <xsl:value-of select="f:generate-css-class-selector(.)"/>
