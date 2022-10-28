@@ -504,7 +504,7 @@
     <xd:doc>
         <xd:short>Handle indent values without a unit (assume em).</xd:short>
         <xd:detail>Use without units should be deprecated, but historically we have a lot of texts specifying
-        an indent as plain a number, here assumed to mean a value in ems.</xd:detail>
+        an indent as a plain number, here assumed to mean a value in ems.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:indent-value" as="xs:string">
