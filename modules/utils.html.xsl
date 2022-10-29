@@ -116,5 +116,4 @@
         <xsl:value-of select="f:generate-href($target) || 'ext'"/>
     </xsl:function>
 
-
 </xsl:stylesheet>

@@ -118,7 +118,7 @@
 
     <!-- f:needs-id -->
 
-   <x:scenario label="When determining wether an element needs an id, when indeed it needs one">
+   <x:scenario label="When determining whether an element needs an id, when indeed it needs one">
       <x:call function="f:needs-id">
          <x:param select="(//p)[2]">
             <text id="base">
@@ -132,7 +132,7 @@
       <x:expect label="will return true" select="true()"/>
    </x:scenario>
 
-   <x:scenario label="When determining wether an element needs an id, when it doesn't need one">
+   <x:scenario label="When determining whether an element needs an id, when it doesn't need one">
       <x:call function="f:needs-id">
          <x:param select="(//p)[2]">
             <text id="base">
