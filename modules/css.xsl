@@ -162,7 +162,7 @@
         </xsl:if>
 
         <xsl:if test="//ditto or //seg[@copyOf]">
-            <xsl:value-of select="f:css-stylesheet('../style/special.css')"/>
+            <xsl:value-of select="f:css-stylesheet('../style/ditto.css')"/>
         </xsl:if>
 
         <xsl:if test="//divGen[@type='TagUsage']">
@@ -384,6 +384,7 @@
                 <xsl:when test="$element = 'hi' and $class = ('rm', 'it', 'italic', 'b', 'bold', 'sc', 'asc', 'ex', 'g', 'bi', 'tt', 'bold-italic', 'sup', 'sub', 'underline', 'overline', 'overtilde')"/>
                 <xsl:when test="$element = 'q' and $class = 'block'"/>
                 <xsl:when test="$element = 'p' and $class = 'noindent'"/>
+                <xsl:when test="$element = 'tb' and $class = ('dots', 'dashes', 'mdashes', 'star', 'stars', 'asterism', 'space')"/>
 
                 <!-- Assume the rest can be copied to the class-attribute in HTML. -->
                 <xsl:otherwise>
@@ -470,6 +471,9 @@
 
                 <!-- Line-breaks with indents need to be handled specially (drama.xsl), so should be removed here. -->
                 <xsl:when test="$element='lb' and $property='indent'"/>
+
+                <!-- Thematic breaks with decorative stars -->
+                <xsl:when test="$element='tb' and $property='stars'"/>
 
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:get-setting('css.frakturFont')"/>'; </xsl:when>

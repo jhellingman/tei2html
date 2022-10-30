@@ -726,6 +726,4 @@ width:{$width};
         <xsl:sequence select="count($node//figure) - count($node//note[not(@place) or @place='foot']//figure) > 0"/>
     </xsl:function>
 
-
-
 </xsl:stylesheet>

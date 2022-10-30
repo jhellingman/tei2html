@@ -96,6 +96,7 @@
                 <milestone id="tb01" unit="tb" rend="border-bottom(1px solid black) width(100%)"/>
                 <milestone unit="tb" rend="dots"/>
                 <milestone unit="tb" rend="stars"/>
+                <milestone unit="tb" rend="stars(4)"/>
                 <milestone unit="tb" rend="star"/>
                 <milestone unit="tb" rend="asterism"/>
                 <milestone unit="tb" rend="space"/>
@@ -112,6 +113,7 @@
                   <hr class="tb tb01" id="..."/>
                   <p class="tb" id="...">. . . . . . . . . . . . . . . . . . . . .</p>
                   <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+                   <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
                   <p class="tb" id="...">*</p>
                   <p class="tb" id="...">&asterism;</p>
                   <p class="tb" id="..."/>
@@ -281,6 +283,5 @@ font-size:1px;
       </x:call>
       <x:expect label="will return the nesting level of the given q-element" select="2"/>
    </x:scenario>
-
 
 </x:description>

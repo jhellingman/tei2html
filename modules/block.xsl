@@ -232,6 +232,7 @@
         map {
             'dots'     : '. . . . . . . . . . . . . . . . . . . . .',
             'dashes'   : '- - - - - - - - - - - - - - - - - - - - -',
+            'mdashes'  : '&mdash;&nbsp;&mdash;&nbsp;&mdash;&nbsp;&mdash;&nbsp;&mdash;',
             'star'     : '*',
             'stars'    : '*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*',
             'asterism' : '&asterism;',
@@ -244,6 +245,11 @@
         <xsl:choose>
             <xsl:when test="@rend = ('dotted', 'dashed')">
                 <hr id="{f:generate-id(.)}" class="tb {@rend}"/>
+            </xsl:when>
+            <xsl:when test="f:has-rend-value(@rend, 'stars')">
+                <xsl:call-template name="generate-milestone-paragraph">
+                    <xsl:with-param name="string" select="f:repeat('*', '&nbsp;&nbsp;&nbsp;', xs:integer(f:rend-value(@rend, 'stars')))"/>
+                </xsl:call-template>
             </xsl:when>
             <xsl:when test="@rend = map:keys($milestone-markers)">
                 <xsl:call-template name="generate-milestone-paragraph">
@@ -281,6 +287,14 @@
             <xsl:value-of select="$string"/>
         </xsl:element>
     </xsl:template>
+
+
+    <xsl:function name="f:repeat">
+        <xsl:param name="input" as="xs:string"/>
+        <xsl:param name="separator" as="xs:string"/>
+        <xsl:param name="count" as="xs:integer"/>
+        <xsl:sequence select="string-join(for $i in 1 to $count return $input, $separator)"/>
+    </xsl:function>
 
 
     <xd:doc>

@@ -220,7 +220,7 @@
 
     <xsl:function name="f:is-set" as="xs:boolean" cache="yes">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:sequence select="lower-case(f:get-setting($key)) = ('true', 'yes')"/>
+        <xsl:sequence select="lower-case(f:get-setting($key)) = ('true', 'yes', '1')"/>
     </xsl:function>
 
 
