@@ -335,7 +335,6 @@
         <xsl:value-of select="normalize-space($css)"/>
     </xsl:function>
 
-
     <xsl:function name="f:has-class" as="xs:boolean">
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="class" as="xs:string"/>
@@ -384,6 +383,7 @@
                 <xsl:when test="$element = 'hi' and $class = ('rm', 'it', 'italic', 'b', 'bold', 'sc', 'asc', 'ex', 'g', 'bi', 'tt', 'bold-italic', 'sup', 'sub', 'underline', 'overline', 'overtilde')"/>
                 <xsl:when test="$element = 'q' and $class = 'block'"/>
                 <xsl:when test="$element = 'p' and $class = 'noindent'"/>
+                <xsl:when test="$element = 'lg' and $class = 'braceAfter'"/>
                 <xsl:when test="$element = 'tb' and $class = ('dots', 'dashes', 'mdashes', 'star', 'stars', 'asterism', 'space')"/>
 
                 <!-- Assume the rest can be copied to the class-attribute in HTML. -->
