@@ -954,6 +954,7 @@
             <xsl:text>}&lf;</xsl:text>
         </xsl:if>
 
+        <xsl:apply-templates mode="css"/>
     </xsl:template>
 
 </xsl:stylesheet>
