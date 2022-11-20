@@ -130,7 +130,7 @@
                 <xsl:call-template name="generate-toc-link"/>
                 <xsl:call-template name="generate-label"/>
                 <xsl:call-template name="pgComment"/>
-                <xsl:call-template name="handleDiv"/>
+                <xsl:call-template name="handle-div"/>
 
                 <xsl:if test="not(f:has-rend-value(@rend, 'align-with') or f:has-rend-value(@rend, 'align-with-document'))">
                     <xsl:call-template name="insert-footnotes"/>
@@ -173,7 +173,7 @@
                 <xsl:call-template name="generate-label">
                     <xsl:with-param name="headingLevel" select="'h2'"/>
                 </xsl:call-template>
-                <xsl:call-template name="handleDiv"/>
+                <xsl:call-template name="handle-div"/>
             </div>
         </xsl:if>
     </xsl:template>
@@ -191,7 +191,7 @@
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="pgComment"/>
-                <xsl:call-template name="handleDiv"/>
+                <xsl:call-template name="handle-div"/>
             </div>
         </xsl:if>
     </xsl:template>
@@ -231,7 +231,7 @@
                         <xsl:with-param name="headingLevel" select="'h' || $level"/>
                     </xsl:call-template>
                 </xsl:if>
-                <xsl:call-template name="handleDiv"/>
+                <xsl:call-template name="handle-div"/>
                 <xsl:if test="parent::front | parent::body | parent::back">
                     <xsl:call-template name="insert-footnotes"/>
                 </xsl:if>
@@ -276,7 +276,7 @@
         <xd:detail>Format a division. This generic template is called for divisions at every level, to handle their contents.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handleDiv">
+    <xsl:template name="handle-div">
         <xsl:choose>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
