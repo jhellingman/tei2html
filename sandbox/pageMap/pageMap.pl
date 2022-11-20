@@ -1,4 +1,6 @@
-# delta.pl
+# pageMap.pl -- Prepare a HTML heatmap of changes during rounds on PGDP.
+
+# Usage: perl pageMap.pl projectId
 
 use strict;
 # use Text::Levenshtein qw(distance);
@@ -7,12 +9,12 @@ use Statistics::Descriptive;
 
 my $PAGE_SEPARATOR = /\n-*File: 0*([0-9]+)\.(png|jpg)-*\n/;
 
-my $IMAGE_URL_FORMAT = "https://www.pgdp.net/c/tools/project_manager/displayimage.php?project=%s&imagefile=%03u.png";
-
+my $IMAGE_URL_FORMAT = "https://www.pgdp.net/c/tools/page_browser.php?mode=image&project=%s&imagefile=%03u.png";
 
 my $style = <<'EOF';
 <style>
 
+.hm { border-collapse: collapse; border: 2pt solid black; }
 .hm td { width: 16px; height: 16px; font-size: xx-small; color: gray; text-align: center; vertical-align: middle; }
 
 .hm10 { background-color: #CC0000; }
@@ -190,11 +192,10 @@ sub pageMap(@@) {
 
     print OUTPUTFILE "\n<p><table>\n";
     print OUTPUTFILE "<tr><td>          <td>Absolute                 <td>Percentage\n";
-    print OUTPUTFILE "<tr><td>Median    <td>" . $stat->median() .   "<td>" . $statPercentages->median() . "\n";
-    print OUTPUTFILE "<tr><td>Mean      <td>" . $stat->mean() .     "<td>" . $statPercentages->mean() . "\n";
-    print OUTPUTFILE "<tr><td>Variance  <td>" . $stat->variance() . "<td>" . $statPercentages->variance() . "\n";
+    print OUTPUTFILE "<tr><td>Median    <td>" . sprintf("%.0f", $stat->median()) .   "<td>" . sprintf("%.2f", $statPercentages->median()) . "\n";
+    print OUTPUTFILE "<tr><td>Mean      <td>" . sprintf("%.3f", $stat->mean()) .     "<td>" . sprintf("%.2f", $statPercentages->mean()) . "\n";
+    print OUTPUTFILE "<tr><td>Variance  <td>" . sprintf("%.3f", $stat->variance()) . "<td>" . sprintf("%.2f", $statPercentages->variance()) . "\n";
     print OUTPUTFILE "\n</table>";
-
 }
 
 
@@ -209,8 +210,17 @@ sub loadPages($) {
     } 
 
     # my @pages = split($PAGE_SEPARATOR, $content);
-    my @pages = split(/\n-*File: 0*(?:[0-9]+)\.(?:png|jpg)-*\n/, $content);
+    my @p = split(/\n-*File: (0*(?:[0-9]+)\.(?:png|jpg))-*\n/, $content);
 
+    my @pages;
+    my @fileNames;
+    foreach my $i (0 .. $#p) {
+        if ($i % 2) {
+            push(@fileNames, $p[$i]);
+        } else {
+            push(@pages, $p[$i]);
+        }
+    }
 
     foreach my $i (0 .. $#pages) {
        $pages[$i] = normalize($pages[$i]);

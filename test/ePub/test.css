@@ -428,10 +428,7 @@ a:hover {
 
 a.noteRef, a.pseudoNoteRef {
  font-size: 67%;
- line-height: 0;
- position: relative;
- vertical-align: baseline;
- top: -0.5em;
+ vertical-align: super;
  text-decoration: none;
  margin-left: 0.1em;
 }
@@ -467,7 +464,6 @@ p.footnote, .par.footnote {
 p.footnote .fnlabel, .par.footnote .fnlabel {
  float: left; 
  margin-left: -0.1em; 
- margin-top: 0.9em;
  min-width: 1.0em;
  padding-right: 0.4em;
 }
@@ -1399,19 +1395,19 @@ text-align:center;
 }
 
 .xd35e461 {
-background:url(images/initial-A.png) no-repeat top left;
-padding-top:45px;
+background: url(images/initial-A.png) no-repeat top left;
+padding-top: 45px;
 }
 
 .xd35e461init {
-float:left;
-width:90px;
-height:95px;
-background:url(images/initial-A.png) no-repeat;
-background-position:0 -45px;
-text-align:right;
-color:white;
-font-size:1px;
+float: left;
+width: 90px;
+height: 95px;
+background: url(images/initial-A.png) no-repeat;
+background-position: 0 -45px;
+text-align: right;
+color: white;
+font-size: 1px;
 }
 
 .xd35e469 {
@@ -1586,23 +1582,19 @@ font-style:italic;
 display:none;
 }
 
-.alignSecond {
-display:none;
-}
-
 .xd35e461 {
-background-image:none;
-padding-top:0;
+background-image: none;
+padding-top: 0;
 }
 
 .xd35e461init {
-float:none;
-width:auto;
-height:auto;
-background-image:none;
-text-align:right;
-color:inherit;
-font-size:inherit;
+float: none;
+width: auto;
+height: auto;
+background-image: none;
+text-align: right;
+color: inherit;
+font-size: inherit;
 }
 
 /* CSS rules copied from @style attributes in TEI file */

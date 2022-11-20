@@ -789,7 +789,7 @@
         <xd:short>Generate a table of external references.</xd:short>
         <xd:detail>
             <p>Generate a table of external references in the text, as indicated by <code>xref</code>-elements or
-            <code>ref</code>-elements. Identical external references are grouped together. The page numbers link
+            <code>ref</code>-elements. Group identical external references together. The page numbers link
             back to the location the external reference appears in the text.</p>
         </xd:detail>
     </xd:doc>
@@ -952,8 +952,8 @@
     <xd:doc mode="language-fragments">
         <xd:short>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments.</xd:short>
         <xd:detail>
-            <p>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments. This takes
-            care that elements which are normally processed in a special way are treated as normal in this overview.</p>
+            <p>Mode for special processing of certain elements when displayed in the overview of foreign-language fragments. Take
+            care to treat elements that are normally processed in a special way, as normal in this overview.</p>
         </xd:detail>
     </xd:doc>
 
@@ -1051,7 +1051,7 @@
     <xd:doc>
         <xd:short>Generate an overview of TEI tag usage.</xd:short>
         <xd:detail>
-            <p>Generate a table of TEI tag and attribute usage. The tags and attributes are ordered by name.</p>
+            <p>Generate a table of TEI tag and attribute usage. Order the tags and attributes by name.</p>
         </xd:detail>
     </xd:doc>
 

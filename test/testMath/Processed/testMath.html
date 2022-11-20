@@ -1,14 +1,12 @@
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2022-05-06T19:37:39Z using SAXON HE 9.9.1.8 . -->
+<!-- This HTML file has been automatically generated from an XML source on 2022-11-20T13:34:32Z using SAXON HE 9.9.1.8 . -->
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Sample MathJax Equations</title>
 <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html">
-<meta name="author" content="">
-<link rel="schema.DC" href="http://dublincore.org/documents/1998/09/dces/">
-<meta name="DC.Creator" content="">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.Title" content="Sample MathJax Equations">
 <meta name="DC.Date" content="2020">
 <meta name="DC.Language" content="en">
@@ -42,7 +40,6 @@ background-color: transparent;
 }
 abbr[title] {
 border-bottom: none;
-text-decoration: underline;
 text-decoration: underline dotted;
 }
 b, strong {
@@ -153,12 +150,6 @@ text-indent: 0;
 p.argument, p.tocArgument, .par.argument, .par.tocArgument {
 margin: 1.58em 10%;
 }
-td.tocDivNum {
-vertical-align: top;
-}
-td.tocPageNum {
-vertical-align: bottom;
-}
 .opener, .address {
 margin-top: 1.6em;
 margin-bottom: 1.6em;
@@ -204,7 +195,7 @@ font-weight: bold;
 span.corr, span.gap {
 border-bottom: 1px dotted red;
 }
-span.num, span.trans, span.trans {
+span.num, span.trans {
 border-bottom: 1px dotted gray;
 }
 span.measure {
@@ -348,12 +339,14 @@ background-color: #e9f5ff;
 }
 a.noteRef, a.pseudoNoteRef {
 font-size: 67%;
-line-height: 0;
-position: relative;
-vertical-align: baseline;
-top: -0.5em;
+vertical-align: super;
 text-decoration: none;
 margin-left: 0.1em;
+}
+.externalUrl {
+font-size: small;
+font-family: monospace;
+color: gray;
 }
 .displayfootnote {
 display: none;
@@ -376,7 +369,6 @@ margin-top: 0.5em;
 p.footnote .fnlabel, .par.footnote .fnlabel {
 float: left;
 margin-left: -0.1em;
-margin-top: 0.9em;
 min-width: 1.0em;
 padding-right: 0.4em;
 }
@@ -402,10 +394,12 @@ white-space: nowrap;
 td.tocDivNum {
 padding-left: 0;
 padding-right: 0.5em;
+vertical-align: top;
 }
 td.tocPageNum {
 padding-left: 0.5em;
 padding-right: 0;
+vertical-align: bottom;
 }
 td.tocDivTitle {
 width: auto;
@@ -677,7 +671,7 @@ table {
 margin-left: auto;
 margin-right: auto;
 }
-.tablecaption {
+.tableCaption {
 text-align: center;
 }
 .arab { font-family: Scheherazade, serif; }
@@ -734,13 +728,11 @@ vertical-align: -0.838ex;
 width:19.467ex;
 height:3.009ex;
 }
-@media handheld {
-}
 /* ]]> */ </style>
 </head>
 <body>
 <div class="body">
-<div class="div1 chapter">
+<div class="div1 last-child chapter">
 <div class="divHead">
 <h2 class="main">Sample MathJax Equations</h2>
 </div>
@@ -810,7 +802,7 @@ height:3.009ex;
 </p>
 </div>
 </div>
-<div class="div2 section">
+<div class="div2 last-child section">
 <div class="divHead">
 <h3 class="main">In-line Mathematics</h3>
 </div>

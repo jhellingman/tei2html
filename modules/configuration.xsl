@@ -203,12 +203,13 @@
     <xd:doc>
         <xd:short>Get a value from the configuration.</xd:short>
         <xd:detail>
-            <p>Get a value from the configuration-map. First try to get it from a local file as specified in the variable <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, obtain
-            the value from the default configuration included in this stylesheet. If that too fails, log a message to the console.</p>
+            <p>Get a value from the configuration-map. First try to get it from a local file as specified in the variable
+            <code>$configurationFile</code> (default: <code>tei2html.config</code>), and if that fails, get the value from
+            the default configuration included in this stylesheet. If that too fails, log a message to the console.</p>
         </xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:get-setting" as="xs:string" cache="yes">
+    <xsl:function name="f:get-setting" as="xs:string">
         <xsl:param name="key" as="xs:string"/>
         <xsl:sequence select="if (map:contains($configuration-map, $key)) then $configuration-map($key) else ''"/>
     </xsl:function>
@@ -218,7 +219,7 @@
         <xd:short>Get a boolean value from the configuration.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:is-set" as="xs:boolean" cache="yes">
+    <xsl:function name="f:is-set" as="xs:boolean">
         <xsl:param name="key" as="xs:string"/>
         <xsl:sequence select="lower-case(f:get-setting($key)) = ('true', 'yes', '1')"/>
     </xsl:function>

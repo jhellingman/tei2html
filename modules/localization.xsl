@@ -62,7 +62,7 @@
         in the exact locale, then in the base-language, then the fall-back language, and, if this also fails, in the default locale.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:message" as="xs:string" cache="yes">
+    <xsl:function name="f:message" as="xs:string">
         <xsl:param name="name" as="xs:string"/>
 
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
