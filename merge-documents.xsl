@@ -9,9 +9,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to support merging two or more TEI documents.</xd:short>
-        <xd:detail>This stylesheet contains a number of support functions and templates to make merging of two TEI files easy. 
-            Currently this is designed to work with TEI P4 documents only. To make it also work for P5, the url attribute also
-            needs to be taken in consideration (only when starting with a # symbol).</xd:detail>
+        <xd:detail>This stylesheet contains a number of support functions and templates to make merging of two TEI files easy.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -79,7 +77,7 @@
         <xsl:message>RESULT: <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) > 1"/>.</xsl:message>
         -->
 
-        <xsl:sequence select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt;= 1"/>
+        <xsl:sequence select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt; 0"/>
     </xsl:function>
 
     <xd:doc>

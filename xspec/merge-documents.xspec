@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="../merge-documents.xsl"
+               xmlns:f="urn:stylesheet-functions"
+               version="3.0">
+
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
+
+    <!-- f:combine-id() -->
+
+    <x:scenario label="When determining a stable id for a nested element">
+        <x:call function="f:combine-id">
+            <x:param select="'id'"/>
+            <x:param select="'prefix_'"/>
+            <x:param select="('a', 'b')"/>
+        </x:call>
+        <x:expect label="will return the original id prefixed with the prefix" select="'prefix_id'"/>
+    </x:scenario>
+
+    <x:scenario label="When determining a stable id for a nested element that starts with an excluded prefix">
+        <x:call function="f:combine-id">
+            <x:param select="'anId'"/>
+            <x:param select="'prefix_'"/>
+            <x:param select="('b', 'a')"/>
+        </x:call>
+        <x:expect label="will return the original id without the prefix" select="'anId'"/>
+    </x:scenario>
+
+    <!-- mode: import-document -->
+
+    <x:scenario label="When importing an item with an ID">
+        <x:context mode="import-document">
+            <x:param name="prefix" select="'prefix_'"/>
+            <item id="one">Item.</item>
+        </x:context>
+        <x:expect label="will result in an item with adjusted ids">
+            <item id="prefix_one">Item.</item>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When importing an item with an ID with an excluded prefix">
+        <x:context mode="import-document">
+            <x:param name="prefix" select="'prefix_'"/>
+            <x:param name="keepPrefixes" select="('a', 'b')"/>
+            <item id="another">Item.</item>
+        </x:context>
+        <x:expect label="will result in an item with adjusted ids">
+            <item id="another">Item.</item>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When importing an items with IDs with and without excluded prefixes">
+        <x:context mode="import-document">
+            <x:param name="prefix" select="'prefix_'"/>
+            <x:param name="keepPrefixes" select="('t', 'b')"/>
+            <item id="one">Item.</item>
+            <item id="two">Item.</item>
+            <item id="three">Item.</item>
+            <item id="four">Item.</item>
+        </x:context>
+        <x:expect label="will result in an item with adjusted ids">
+            <item id="prefix_one">Item.</item>
+            <item id="two">Item.</item>
+            <item id="three">Item.</item>
+            <item id="prefix_four">Item.</item>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When importing an various types of references">
+        <x:context mode="import-document">
+            <x:param name="prefix" select="'prefix_'"/>
+            <x:param name="keepPrefixes" select="('t', 'b')"/>
+            <ref target="one">target</ref>
+            <ab copyOf="one">copyOf</ab>
+            <ab sameAs="one">SameAs</ab>
+            <language id="en">Language</language>
+            <ref target="two">target</ref>
+            <ab copyOf="two">copyOf</ab>
+            <ab sameAs="two">SameAs</ab>
+            <language id="tk">Language</language>
+        </x:context>
+        <x:expect label="will result in an items with adjusted references">
+            <ref target="prefix_one">target</ref>
+            <ab copyOf="prefix_one">copyOf</ab>
+            <ab sameAs="prefix_one">SameAs</ab>
+            <language id="en">Language</language>
+            <ref target="two">target</ref>
+            <ab copyOf="two">copyOf</ab>
+            <ab sameAs="two">SameAs</ab>
+            <language id="tk">Language</language>
+        </x:expect>
+    </x:scenario>
+
+</x:description>
