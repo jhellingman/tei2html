@@ -9,10 +9,10 @@
         <TEI/>
     </x:param>
 
-    <!-- f:combine-id() -->
+    <!-- f:prefix-id() -->
 
     <x:scenario label="When determining a stable id for a nested element">
-        <x:call function="f:combine-id">
+        <x:call function="f:prefix-id">
             <x:param select="'id'"/>
             <x:param select="'prefix_'"/>
             <x:param select="('a', 'b')"/>
@@ -21,7 +21,7 @@
     </x:scenario>
 
     <x:scenario label="When determining a stable id for a nested element that starts with an excluded prefix">
-        <x:call function="f:combine-id">
+        <x:call function="f:prefix-id">
             <x:param select="'anId'"/>
             <x:param select="'prefix_'"/>
             <x:param select="('b', 'a')"/>
@@ -29,11 +29,11 @@
         <x:expect label="will return the original id without the prefix" select="'anId'"/>
     </x:scenario>
 
-    <!-- mode: import-document -->
+    <!-- mode: prefix-id -->
 
     <x:scenario label="When importing an item with an ID">
-        <x:context mode="import-document">
-            <x:param name="prefix" select="'prefix_'"/>
+        <x:context mode="prefix-id">
+            <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
             <item id="one">Item.</item>
         </x:context>
         <x:expect label="will result in an item with adjusted ids">
@@ -42,9 +42,9 @@
     </x:scenario>
 
     <x:scenario label="When importing an item with an ID with an excluded prefix">
-        <x:context mode="import-document">
-            <x:param name="prefix" select="'prefix_'"/>
-            <x:param name="keepPrefixes" select="('a', 'b')"/>
+        <x:context mode="prefix-id">
+            <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
+            <x:param name="keepPrefixes" select="('a', 'b')" tunnel="yes"/>
             <item id="another">Item.</item>
         </x:context>
         <x:expect label="will result in an item with adjusted ids">
@@ -53,9 +53,9 @@
     </x:scenario>
 
     <x:scenario label="When importing an items with IDs with and without excluded prefixes">
-        <x:context mode="import-document">
-            <x:param name="prefix" select="'prefix_'"/>
-            <x:param name="keepPrefixes" select="('t', 'b')"/>
+        <x:context mode="prefix-id">
+            <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
+            <x:param name="keepPrefixes" select="('t', 'b')" tunnel="yes"/>
             <item id="one">Item.</item>
             <item id="two">Item.</item>
             <item id="three">Item.</item>
@@ -70,27 +70,31 @@
     </x:scenario>
 
     <x:scenario label="When importing an various types of references">
-        <x:context mode="import-document">
-            <x:param name="prefix" select="'prefix_'"/>
-            <x:param name="keepPrefixes" select="('t', 'b')"/>
-            <ref target="one">target</ref>
-            <ab copyOf="one">copyOf</ab>
-            <ab sameAs="one">SameAs</ab>
-            <language id="en">Language</language>
-            <ref target="two">target</ref>
-            <ab copyOf="two">copyOf</ab>
-            <ab sameAs="two">SameAs</ab>
-            <language id="tk">Language</language>
+        <x:context mode="prefix-id">
+            <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
+            <x:param name="keepPrefixes" select="('t', 'b')" tunnel="yes"/>
+            <list id="list">
+                <item><ref target="one">target</ref></item>
+                <item><ab copyOf="one">copyOf</ab></item>
+                <item><ab sameAs="one">SameAs</ab></item>
+                <item><language id="en">Language</language></item>
+                <item><ref target="two">target</ref></item>
+                <item><ab copyOf="two">copyOf</ab></item>
+                <item><ab sameAs="two">SameAs</ab></item>
+                <item><language id="tk">Language</language></item>
+            </list>
         </x:context>
         <x:expect label="will result in an items with adjusted references">
-            <ref target="prefix_one">target</ref>
-            <ab copyOf="prefix_one">copyOf</ab>
-            <ab sameAs="prefix_one">SameAs</ab>
-            <language id="en">Language</language>
-            <ref target="two">target</ref>
-            <ab copyOf="two">copyOf</ab>
-            <ab sameAs="two">SameAs</ab>
-            <language id="tk">Language</language>
+            <list id="prefix_list">
+                <item><ref target="prefix_one">target</ref></item>
+                <item><ab copyOf="prefix_one">copyOf</ab></item>
+                <item><ab sameAs="prefix_one">SameAs</ab></item>
+                <item><language id="en">Language</language></item>
+                <item><ref target="two">target</ref></item>
+                <item><ab copyOf="two">copyOf</ab></item>
+                <item><ab sameAs="two">SameAs</ab></item>
+                <item><language id="tk">Language</language></item>
+            </list>
         </x:expect>
     </x:scenario>
 

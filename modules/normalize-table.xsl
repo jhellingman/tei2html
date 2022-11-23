@@ -68,7 +68,7 @@
 
         <!-- Step 4: split columns for decimal alignment -->
         <xsl:variable name="split-table">
-            <xsl:apply-templates select="$clean-table" mode="split-columns"/>
+            <xsl:apply-templates select="$clean-table" mode="split-decimal-columns"/>
         </xsl:variable>
 
         <!-- Step 5: recurse for nested tables (but make sure not to start with the top-level table) -->
@@ -86,7 +86,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template match="@*|node()" mode="normalize-table normalize-table-colspans normalize-table-rowspans normalize-table-final split-columns recurse-normalize-table">
+    <xsl:template match="@*|node()" mode="normalize-table normalize-table-colspans normalize-table-rowspans normalize-table-final split-decimal-columns recurse-normalize-table">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()" mode="#current"/>
         </xsl:copy>
@@ -289,17 +289,39 @@
     <xsl:template match="cell[@spanned]" mode="normalize-table-final"/>
 
 
-    <!--==== Split columns ====-->
+    <!--==== Split Lsd (Pound/Shilling/Penny) columns (TODO) -->
+
+    <!-- column rend="align(lsd)" will split the column in three separate columns, such that amounts are neatly aligned -->
+    <!--
+        Data cell cases:
+               <cell>1 19 11</cell>     results in <cell>1 </cell><cell>19 </cell><cell>11</cell>
+               <cell>  19 11</cell>     results in <cell>  </cell><cell>19 </cell><cell>11</cell>
+               <cell>     11</cell>     results in <cell>  </cell><cell>   </cell><cell>11</cell>
+               <cell>     11.5</cell>   results in <cell>  </cell><cell>   </cell><cell>11.5</cell>
+               <cell>     11-1/2</cell> results in <cell>  </cell><cell>   </cell><cell>11-1/2</cell>
+
+        Header cell cases:
+               <cell>L s d</cell>    results in <cell>L </cell><cell>s </cell><cell>d</cell>
+               <cell>L. s. d.</cell>    results in <cell>L. </cell><cell>s. </cell><cell>d.</cell>
+               <cell><hi>L. s. d.</hi></cell>    results in <cell><hi>L.</hi> </cell><cell><hi>s.</hi> </cell><cell><hi>d.</hi></cell>
+               <cell><hi>L.</hi> <hi>s.</hi> <hi>d.</hi></cell>    results in <cell><hi>L.</hi> </cell><cell><hi>s.</hi> </cell><cell><hi>d.</hi></cell>
+
+        Any other cell content will not be split, but the the cell will be given a span:
+               <cell>Just a label</cell> results in <cell cols=3>Just a label</cell>
+    -->
+
+
+    <!--==== Split decimal columns ====-->
 
     <xd:doc>
         <xd:short>Adjust the column count of a table if necessary</xd:short>
     </xd:doc>
 
-    <xsl:template mode="split-columns" match="table">
+    <xsl:template mode="split-decimal-columns" match="table">
         <xsl:element name="table" namespace="">
             <xsl:copy-of select="@*[not(name() = 'cols')]"/>
             <xsl:attribute name="cols" select="f:new-cols-value(., 1, @cols)"/>
-            <xsl:apply-templates mode="split-columns"/>
+            <xsl:apply-templates mode="split-decimal-columns"/>
         </xsl:element>
     </xsl:template>
 
@@ -308,7 +330,7 @@
         <xd:short>Split the column element when it contains the rendition <code>align(decimal)</code>.</xd:short>
     </xd:doc>
 
-    <xsl:template mode="split-columns" match="column[f:rend-value(@rend, 'align') = 'decimal']">
+    <xsl:template mode="split-decimal-columns" match="column[f:rend-value(@rend, 'align') = 'decimal']">
 
         <xsl:variable name="rend" select="f:remove-rend-value(@rend, 'align')" as="xs:string"/>
         <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)"/>
@@ -335,7 +357,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template mode="split-columns" match="cell">
+    <xsl:template mode="split-decimal-columns" match="cell">
         <xsl:variable name="col" select="xs:integer(@col)" as="xs:integer"/>
         <xsl:choose>
             <xsl:when test="../../column[$col][f:rend-value(@rend, 'align') = 'decimal']">
