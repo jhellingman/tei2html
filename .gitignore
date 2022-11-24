@@ -18,6 +18,7 @@ ePub/images/
 issues/
 libraries/json2xml/
 target/
+test/attick/
 xspec/xspec/
 
 .vscode/tasks.json
