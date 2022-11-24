@@ -7,8 +7,6 @@ my $inputFile = $ARGV[0];
 
 open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
 
-print STDERR "Adding pos attributes to $inputFile\n";
-
 my $lineNumber = 0;
 
 while (<INPUTFILE>) {

@@ -148,9 +148,9 @@
                 <meta name="calibre:series_index"><xsl:attribute name="content" select="teiHeader/fileDesc/seriesStmt/biblScope"/></meta>
             </xsl:if>
 
-            <xsl:if test="teiHeader/fileDesc/titleStmt/title/@nfc &gt; 0">
-                <xsl:variable name="title" select="teiHeader/fileDesc/titleStmt/title"/>
-                <xsl:variable name="nfc" select="teiHeader/fileDesc/titleStmt/title/@nfc"/>
+            <xsl:if test="teiHeader/fileDesc/titleStmt/title[not(@type)]/@nfc &gt; 0">
+                <xsl:variable name="title" select="teiHeader/fileDesc/titleStmt/title[not(@type)]"/>
+                <xsl:variable name="nfc" select="teiHeader/fileDesc/titleStmt/title[not(@type)]/@nfc"/>
                 <meta name="calibre:title_sort"><xsl:attribute name="content" select="normalize-space(substring($title, $nfc + 1) || ', ' || substring($title, 1, $nfc))"/></meta>
             </xsl:if>
 
@@ -192,7 +192,7 @@
         </dc:title>
     </xsl:template>
 
-    <xsl:template match="title[@type='pgshort']" mode="metadata"/>
+    <xsl:template match="title[@type=('short', 'pgshort')]" mode="metadata"/>
 
 
     <xd:doc>

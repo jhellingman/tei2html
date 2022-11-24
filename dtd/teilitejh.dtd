@@ -1449,6 +1449,75 @@ note | figure | stage | table | text)*)>
      target IDREFS #IMPLIED
      TEIform CDATA "ref" >
 
+<!-- Added: simplified castList; castItem; castGroup -->
+
+<!ELEMENT castList - - ((castItem | castGroup)+)>
+
+<!ATTLIST castList
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     type CDATA "simple"
+     TEIform CDATA "castList" >
+
+<!ELEMENT castGroup - - ((castItem | castGroup | roleDesc)+)>
+
+<!ATTLIST castGroup
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     type CDATA "role"
+     TEIform CDATA "castItem" >
+
+<!ELEMENT castItem - - (#PCDATA | role | roleDesc)*>
+
+<!ATTLIST castItem
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     type CDATA "role"
+     TEIform CDATA "castItem" >
+
+<!ELEMENT role - - ((((l | lg | p | sp), (((eg | bibl | biblFull | l |
+item | lg | p | sp | cit | q | label | list | listBibl | note | stage))*)) |
+((#PCDATA | ident | code | kw | abbr | measure | address | date | name | num |
+rs | time | add | corr | choice | del | gap | orig | reg | sic | unclear | emph
+| foreign | gloss | hi | ab | mentioned | soCalled | term | title | ptr |
+ref | xptr | xref | anchor | s | seg | gi | formula | eg | bibl |
+biblFull | cit | q | label | list | listBibl | note | figure | stage |
+table | text | ditto)*)))>
+
+<!ATTLIST role
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     TEIform CDATA "role" >
+
+<!ELEMENT roleDesc - - ((((l | lg | p | sp), (((eg | bibl | biblFull | l |
+item | lg | p | sp | cit | q | label | list | listBibl | note | stage))*)) |
+((#PCDATA | ident | code | kw | abbr | measure | address | date | name | num |
+rs | time | add | corr | choice | del | gap | orig | reg | sic | unclear | emph
+| foreign | gloss | hi | ab | mentioned | soCalled | term | title | ptr |
+ref | xptr | xref | anchor | s | seg | gi | formula | eg | bibl |
+biblFull | cit | q | label | list | listBibl | note | figure | stage |
+table | text | ditto)*)))>
+
+<!ATTLIST roleDesc
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     TEIform CDATA "roleDesc" >
+
 <!--  6.7:  Lists and List Items                               -->
 
 <!ELEMENT list - - ((head)?, (((item)+) | ((label, item)+)))>
@@ -1985,7 +2054,7 @@ interp | interpGrp | lb | milestone | pb) >
 <!ELEMENT body - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, (((divGen)*, ((div, (div
 | divGen)*) | (div0, (div0 | divGen)*) | (div1, (div1 | divGen)*))) |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, ((divGen)*, ((div, (div | divGen)*) |
 (div0, (div0 | divGen)*) | (div1, (div1 | divGen)*))?))), (byline |
 closer | epigraph | salute | signed | trailer)*)>
@@ -2024,7 +2093,7 @@ epigraph | head | opener | salute | signed)*, (text | group)+, (byline
 
 <!ELEMENT div - O ((argument | byline | docAuthor | docDate | epigraph
 | head | opener | salute | signed)*, ((div | divGen)+ | (((eg | bibl |
-biblFull | l | lg | p | sp | cit | q | label | list | listBibl | note
+biblFull | l | lg | p | sp | cit | q | label | list | castList | listBibl | note
 | stage))+, (div | divGen)*)), (byline | closer | epigraph | salute |
 signed | trailer)*)>
 
@@ -2049,7 +2118,7 @@ signed | trailer)*)>
 
 <!ELEMENT div0 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div1 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div1 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2072,7 +2141,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div1 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div2 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div2 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2095,7 +2164,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div2 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div3 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div3 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2118,7 +2187,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div3 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div4 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div4 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2141,7 +2210,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div4 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div5 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div5 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2164,7 +2233,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div5 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div6 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div6 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2187,7 +2256,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div6 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((div7 | divGen)+ |
-(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list |
+(((eg | bibl | biblFull | l | lg | p | sp | cit | q | label | list | castList |
 listBibl | note | stage))+, (div7 | divGen)*)), (byline | closer |
 epigraph | salute | signed | trailer)*)>
 
@@ -2210,7 +2279,7 @@ epigraph | salute | signed | trailer)*)>
 
 <!ELEMENT div7 - O ((argument | byline | docAuthor | docDate |
 epigraph | head | opener | salute | signed)*, ((eg | bibl | biblFull |
-l | lg | p | sp | cit | q | label | list | listBibl | note | stage))+,
+l | lg | p | sp | cit | q | label | list | castList | listBibl | note | stage))+,
 (byline | closer | epigraph | salute | signed | trailer)*)>
 
 <!ATTLIST div7

@@ -265,7 +265,7 @@ sub handleTeiFile {
     my $utf8TextFileName = $filePath . "$baseName-utf8.txt";
     my $htmlFileName = $filePath . "$baseName.html";
     my $wordsFileName = $filePath . "$baseName-words.html";
-    my $checksFileName = $filePath . "$baseName-$version-checks.html";
+    my $checksFileName = $filePath . "$baseName-checks.html";
 
     if (!$excluded{$baseName} == 1 && defined($version)) {
         if ($force != 0
@@ -294,7 +294,8 @@ sub handleTeiFile {
             eval {
                 my $xpath = XML::XPath->new(filename => $xmlFileName);
 
-                my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title');
+                my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type)]');
+                my $shortTitle = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title[@type="short"]');
                 my $titleNfc = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title/@nfc');
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
                 my $editors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor');
@@ -438,7 +439,7 @@ sub handleTeiFile {
                 if (isValid($repo)) {
                     print GITFILE "getRepo('$pgSrc');\n";
 
-                    # Check: is git repo up-to-date?
+                    # Check: is git repo up-to-date? (TODO: fails for multi-volume repos)
                     my $localFile = "$fileName$suffix";
                     my $gitRepoFile = $gitRepoLocation . $pgSrc . "/" . $localFile;
                     if (defined ($gitRepoFile) && compare($gitRepoFile, $fullName) != 0) {

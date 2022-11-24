@@ -38,6 +38,11 @@ my $gutcheck  = "gutcheck";
 my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
 my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 
+my $LOG_LEVEL_ERROR = 1;
+my $LOG_LEVEL_WARNING = 2;
+my $LOG_LEVEL_INFO = 3;
+my $LOG_LEVEL_TRACE = 4;
+
 #==============================================================================
 # Arguments
 
@@ -77,6 +82,7 @@ my $showHelp            = 0;
 my $trace               = 0;
 my $useTidy             = 0;
 my $useUnicode          = 0;
+my $logLevel            = 3;  # 1: Error; 2: Warning; 3: Info; 4: Trace.
 
 GetOptions(
     '5' => \$makeP5,
@@ -98,6 +104,7 @@ GetOptions(
     'i=i' => \$atSize,
     's=s' => \$customOption,
     'w=i' => \$pageWidth,
+    'l=i' => \$logLevel,
 
     'clean' => \$clean,
     'debug' => \$debug,
@@ -177,7 +184,7 @@ if ($showHelp == 1) {
     print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
     print "    pagewidth=<int>                 Set the page width (default: 72 characters).\n";
     print "    profile                         Profile mode.\n";
-    print "    trace                           Trace mode.\n";
+    print "    trace                           Use XSLT in trace mode.\n";
 
     exit(0);
 }
@@ -236,6 +243,8 @@ sub processFiles {
 sub processFile($) {
     my $filename = shift;
 
+    print "=== Start! =================================================================\n";
+
     if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
         die "File: '$filename' doesn't look like a TEI file\n";
     }
@@ -262,29 +271,29 @@ sub processFile($) {
 
         # Warn about processed files missing
         if (! -e "Processed/$basename.xml") {
-            print "WARNING: Processed xml version is missing!\n";
+            warning("Processed xml version is missing!");
             $makeXML = 1;
         }
         if (! -e "Processed/$basename.html") {
-            print "WARNING: Processed HTML version is missing!\n";
+            warning("Processed HTML version is missing!");
             $makeHtml = 1;
         }
         if (! -e "Processed/$basename.epub") {
-            print "WARNING: Processed ePub version is missing!\n";
+            warning("Processed ePub version is missing!");
             $makeEpub = 1;
         }
 
         # Warn about processed files being out-of-date.
         if (isNewer($filename, "Processed/$basename.xml")) {
-            print "WARNING: Processed xml version is out-of-date!\n";
+            warning("Processed xml version is out-of-date!");
             $makeXML = 1;
         }
         if (isNewer($filename, "Processed/$basename.html")) {
-            print "WARNING: Processed HTML version is out-of-date!\n";
+            warning("Processed HTML version is out-of-date!");
             $makeHtml = 1;
         }
         if (isNewer($filename, "Processed/$basename.epub")) {
-            print "WARNING: Processed ePub version is out-of-date!\n";
+            warning("Processed ePub version is out-of-date!");
             $makeEpub = 1;
         }
     }
@@ -314,7 +323,7 @@ sub processFile($) {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $runChecks && runChecks($filename);
+    $runChecks && runChecks($basename, $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
 
     $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
@@ -342,7 +351,7 @@ sub processFile($) {
         removeFile("$basename-epubcheck.err");
 
         # removeFile("$basename-words.html");
-        removeFile("$basename-$version-checks.html");
+        removeFile("$basename-checks.html");
         removeFile("$basename-$version.tei.err");
         removeFile("issues.xml");
     }
@@ -350,6 +359,27 @@ sub processFile($) {
     print "=== Done! ==================================================================\n";
 }
 
+
+sub trace($) {
+  my $message = shift;
+  if ($logLevel >= $LOG_LEVEL_TRACE) {
+      print $message . "\n";
+  }
+}
+
+sub warning($) {
+  my $message = shift;
+  if ($logLevel >= $LOG_LEVEL_WARNING) {
+      print "WARNING: $message\n";
+  }
+}
+
+sub error($) {
+  my $message = shift;
+  if ($logLevel >= $LOG_LEVEL_ERROR) {
+      print "ERROR: $message\n";
+  }
+}
 
 sub removeFile($) {
     my $fileToRemove = shift;
@@ -363,11 +393,11 @@ sub includeXml($$) {
     my $includedXmlFilename = shift;
 
     if ($force == 0 && isNewer($includedXmlFilename, $xmlFilename)) {
-        print "Skip conversion to included XML ($includedXmlFilename newer than $xmlFilename).\n";
+        trace("Skip conversion to included XML ($includedXmlFilename newer than $xmlFilename).");
         return;
     }
 
-    print "Include inclusions in TEI file...\n";
+    trace("Include inclusions in TEI file...");
     system ("$saxon $xmlFilename $xsldir/include.xsl > $includedXmlFilename");
 }
 
@@ -377,11 +407,11 @@ sub preprocessXml($$) {
     my $preprocessedXmlFilename = shift;
 
     if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename)) {
-        print "Skip conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).\n";
+        trace("Skip conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).");
         return;
     }
 
-    print "Preprocess TEI file...\n";
+    trace("Preprocess TEI file...");
     system ("$saxon $xmlFilename $xsldir/preprocess.xsl > $preprocessedXmlFilename");
 }
 
@@ -392,11 +422,11 @@ sub makeP5($$) {
     my $p5XmlFilename = $basename . '-p5.xml';
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
-        print "Skip conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).\n";
+        trace("Skip conversion to TEI P5 XML ($p5XmlFilename newer than $xmlFilename).");
         return;
     }
 
-    print "Convert to TEI P5 (experimental)\n";
+    trace("Convert to TEI P5 (experimental)...");
     system ("$saxon $xmlFilename $xsldir/p4top5.xsl > $p5XmlFilename");
 }
 
@@ -405,11 +435,11 @@ sub makeMetadata($) {
     my $xmlFilename = shift;
 
     if ($force == 0 && isNewer('metadata.xml', $xmlFilename)) {
-        print "Skip extract metadata because 'metadata.xml' is newer than '$xmlFilename'.\n";
+        trace("Skip extract metadata because 'metadata.xml' is newer than '$xmlFilename'.");
         return;
     }
 
-    print "Extract metadata to metadata.xml...\n";
+    trace("Extract metadata to metadata.xml...");
     system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
 }
 
@@ -418,11 +448,11 @@ sub makeReadme($) {
     my $xmlFilename = shift;
 
     if ($force == 0 && isNewer('README.md', $xmlFilename)) {
-        print "Skip create readme because 'README.md' is newer than '$xmlFilename'.\n";
+        trace("Skip create readme because 'README.md' is newer than '$xmlFilename'.");
         return;
     }
 
-    print "Extract metadata to README.md...\n";
+    trace("Extract metadata to README.md...");
     system ("$saxon $xmlFilename $xsldir/tei2readme.xsl > README.md");
 }
 
@@ -433,7 +463,7 @@ sub makeKwic($$) {
     my $kwicFilename = determineKwicFilename($basename);
 
     if ($force == 0 && isNewer($kwicFilename, $xmlFilename)) {
-        print "Skip creation of KWIC ($kwicFilename newer than $xmlFilename).\n";
+        trace("Skip creation of KWIC ($kwicFilename newer than $xmlFilename).");
         return;
     }
 
@@ -446,7 +476,7 @@ sub makeKwic($$) {
     my $kwicCaseSensitiveParameter = ($kwicCaseSensitive eq 'yes' or $kwicCaseSensitive eq 'true') ? 'case-sensitive=true' : '';
     my $kwicVariantsParameter = ($kwicVariants > 1) ? "min-variant-count=\"$kwicVariants\"" : '';
 
-    print "Generate a KWIC index (this may take some time)...\n";
+    trace("Generate a KWIC index (this may take some time)...");
     system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicSortParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter $kwicVariantsParameter > $kwicFilename");
 }
 
@@ -557,13 +587,13 @@ sub makeHtmlCommon {
     my $htmlFile = shift;
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
-        print "Skip conversion to HTML ($htmlFile newer than $xmlFile).\n";
+        trace("Skip conversion to HTML ($htmlFile newer than $xmlFile).");
         return;
     }
 
     my $tmpFile = temporaryFile('html', '.html');
     my $saxonParameters = determineSaxonParameters();
-    print "Create HTML version...\n";
+    trace("Create HTML version...");
     system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters basename=\"$basename\" > $tmpFile");
     system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
     if ($useTidy != 0) {
@@ -584,7 +614,7 @@ sub makePdf($$) {
     my $pdfFile =  $basename . '.pdf';
 
     if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
-        print "Skip conversion to PDF ($pdfFile newer than $xmlFile).\n";
+        trace("Skip conversion to PDF ($pdfFile newer than $xmlFile).");
         return;
     }
 
@@ -593,7 +623,7 @@ sub makePdf($$) {
     my $saxonParameters = determineSaxonParameters();
 
     # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
-    print "Create PDF version...\n";
+    trace("Create PDF version...");
     system ("$saxon $xmlFile $xsldir/tei2html.xsl $saxonParameters optionPrinceMarkup=\"Yes\" > $tmpFile1");
     system ("perl $toolsdir/wipeids.pl $tmpFile1 > $tmpFile2");
     system ("sed \"s/^[ \t]*//g\" < $tmpFile2 > $basename-prince.html");
@@ -610,13 +640,13 @@ sub makeEpub($$) {
     my $epubFile = $basename . '.epub';
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
-        print "Skip conversion to ePub ($epubFile newer than $xmlFile).\n";
+        trace("Skip conversion to ePub ($epubFile newer than $xmlFile).");
         return;
     }
 
     my $tmpFile = temporaryFile('epub', '.html');
     my $saxonParameters = determineSaxonParameters();
-    print "Create ePub version from $xmlFile...\n";
+    trace("Create ePub version from $xmlFile...");
     system ('mkdir epub');
     copyImages('epub/images');
     # copyFormulas('epub/formulas'); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
@@ -643,7 +673,7 @@ sub makeText($$) {
     my $textFile = $basename . ($useUnicode == 1 ? '-utf8' : '') . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
-        print "Skip conversion to text file ($textFile newer than $filename).\n";
+        trace("Skip conversion to text file ($textFile newer than $filename).");
         return;
     }
 
@@ -655,7 +685,7 @@ sub makeText($$) {
     my $tmpFile1 = temporaryFile('txt', '.txt');
     my $tmpFile2 = temporaryFile('txt', '.txt');
 
-    print "Create text version from $transcribedFile...\n";
+    trace("Create text version from $transcribedFile...");
     system ("perl $toolsdir/extractNotes.pl $transcribedFile");
     system ("cat $transcribedFile.out $transcribedFile.notes > $tmpFile1");
     system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $tmpFile1 > $tmpFile2");
@@ -707,7 +737,7 @@ sub makeWordlist($$) {
     my $wordlistFile = $basename . '-words.html';
 
     if ($force == 0 && isNewer($wordlistFile, $xmlFile)) {
-        print "Skip creation of word list ($wordlistFile newer than $xmlFile).\n";
+        trace("Skip creation of word list ($wordlistFile newer than $xmlFile).");
         return;
     }
 
@@ -715,14 +745,14 @@ sub makeWordlist($$) {
     my $options = $debug ? ' -v ' : '';
     $options .= $makeHeatMap ? ' -m ' : '';
 
-    print "Report on word usage...\n";
+    trace("Report on word usage...");
     system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
     removeFile($tmpFile);
 
     # Create a text heat map.
     if (-f 'heatmap.xml') {
-        print "Create text heat map...\n";
+        trace("Create text heat map...");
         system ("$saxon heatmap.xml $xsldir/tei2html.xsl customCssFile=\"file:$xsldir/style/heatmap.css\" > heatmap.html");
     }
 }
@@ -742,25 +772,25 @@ sub determineSaxonParameters() {
     # Since the XSLT processor cannot find files easily, we have to provide the custom CSS file with a full path in a parameter.
     my $cssFileParam = '';
     if (-f $customStylesheet || -f $customStylesheet . '.xml') {
-        print "Add custom stylesheet: $customStylesheet ...\n";
+        trace("Add custom stylesheet: $customStylesheet ...");
         $cssFileParam = "customCssFile=\"file:/$pwd/$customStylesheet\"";
     }
 
     my $configurationFileParam = '';
     if (-f $configurationFile) {
-        print "Add custom configuration: $configurationFile ...\n";
+        trace("Add custom configuration: $configurationFile ...");
         $configurationFileParam = "configurationFile=\"file:/$pwd/$configurationFile\"";
     }
 
     my $opfManifestFileParam = '';
     if (-f 'opf-manifest.xml') {
-        print "Add additional elements for the OPF manifest...\n";
+        trace("Add additional elements for the OPF manifest...");
         $opfManifestFileParam = "opfManifestFile=\"file:/$pwd/opf-manifest.xml\"";
     }
 
     my $opfMetadataFileParam = '';
     if (-f 'opf-metadata.xml') {
-        print "Add additional items to the OPF metadata...\n";
+        trace("Add additional items to the OPF metadata...");
         $opfMetadataFileParam = "opfMetadataFile=\"file:/$pwd/opf-metadata.xml\"";
     }
 
@@ -850,7 +880,7 @@ sub extractMetadata($) {
         if ($line =~ /<title(?: nfc=\"?[0-9]+\"?)?>(.*?)<\/title>/) {
             $mainTitle = $1;
         }
-        if ($line =~ /<title type=\"?short\"?>(.*?)<\/title>/) {
+        if ($line =~ /<title type=\"?short\"?(?: nfc=\"?[0-9]+\"?)?>(.*?)<\/title>/) {
             $shortTitle = $1;
         }
         if ($line =~ /<title type=\"?pgshort\"?>(.*?)<\/title>/) {
@@ -864,12 +894,16 @@ sub extractMetadata($) {
     }
     close(PGFILE);
 
-    if (length($mainTitle) <= 26 && $shortTitle ne '') {
+    if (length($mainTitle) > 26 && $shortTitle eq '') {
+        warning("Long title longer than 26 characters, but no short title given");
+    }
+
+    if (length($mainTitle) <= 26 && $shortTitle eq '') {
         $shortTitle = $mainTitle;
     }
 
     if (length($shortTitle) > 26 ) {
-        print "WARNING: short title too long (should be less than 27 characters)\n";
+        warning("Short title too long (should be less than 27 characters)");
     }
 
     print "----------------------------------------------------------------------------\n";
@@ -943,18 +977,18 @@ sub longestString {
 # added to the TEI file first.
 #
 sub runChecks($) {
+    my $basename = shift;
     my $filename = shift;
 
     $filename =~ /^(.*)\.(xml|tei)$/;
-    my $basename = $1;
     my $format = $2;
     my $checkFilename = $basename . '-checks.html';
 
     if ($force == 0 && isNewer($checkFilename, $filename)) {
-        print "Skip run checks because '$checkFilename' is newer than '$filename'.\n";
+        trace("Skip run checks because '$checkFilename' is newer than '$filename'.");
         return;
     }
-    print "Run checks on $filename.\n";
+    trace("Run checks on $filename.");
 
     my $intraFile = convertIntraNotation($filename);
 
@@ -962,6 +996,7 @@ sub runChecks($) {
 
     my $positionInfoFilename = $basename . '-pos.' . $format;
 
+    trace("Adding pos attributes to $inputFile");
     system ("perl $toolsdir/addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
 
     if ($format eq 'tei') {
@@ -1022,10 +1057,10 @@ sub temporaryFile($$) {
 #
 sub collectImageInfo() {
     if (-d 'images') {
-        print "Collect image dimensions from 'images'...\n";
+        trace("Collect image dimensions from 'images'...");
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
     } elsif (-d 'Processed/images') {
-        print "Collect image dimensions from 'Processed/images'...\n";
+        trace("Collect image dimensions from 'Processed/images'...");
         system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
     }
 }
@@ -1070,13 +1105,13 @@ sub prepareImages() {
     my $destination = 'Processed/images';
 
     if (!-d $source) {
-        print "Error: Source directory $source does not exist\n";
+        warning("Source directory $source does not exist");
         return;
     }
 
     if (-d $destination) {
         # Destination exists, prevent copying into it.
-        print "Warning: Destination '$destination' exists; will not copy images again\n";
+        warning("Destination '$destination' exists; will not copy images again");
         return;
     }
 
@@ -1092,7 +1127,7 @@ sub copyImages($) {
 
     if (-d $destination) {
         # Destination exists, prevent copying into it.
-        print "Warning: Destination exists; will not copy images again\n";
+        warning("Destination exists; will not copy images again");
         return;
     }
 
@@ -1164,25 +1199,25 @@ sub tei2xml($$) {
     my $xmlFile = shift;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
-        print "Skip conversion to XML ('$xmlFile' newer than '$sgmlFile').\n";
+        trace("Skip conversion to XML ('$xmlFile' newer than '$sgmlFile').");
         return;
     }
 
-    print "Convert SGML file '$sgmlFile' to XML file '$xmlFile'.\n";
+    trace("Convert SGML file '$sgmlFile' to XML file '$xmlFile'.");
 
     # Convert Latin-1 characters to entities
     my $tmpFile0 = temporaryFile('entities', '.tei');
-    print "Convert Latin-1 characters to entities...\n";
+    trace("Convert Latin-1 characters to entities...");
     system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
 
     my $intraFile = convertIntraNotation($tmpFile0);
 
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
-    print "Check SGML...\n";
+    trace("Check SGML...");
     my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $transcribedFile > $sgmlFile.nsgml");
     if ($nsgmlresult != 0) {
-        print "WARNING: NSGML found validation errors in $sgmlFile.\n";
+        warning("NSGML found validation errors in $sgmlFile.");
     }
     removeFile("$sgmlFile.nsgml");
 
@@ -1191,7 +1226,7 @@ sub tei2xml($$) {
     my $tmpFile3 = temporaryFile('restore-entities', '.xml');
     my $tmpFile4 = temporaryFile('ucs', '.xml');
 
-    print "Convert SGML to XML...\n";
+    trace("Convert SGML to XML...");
 
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $transcribedFile > $tmpFile1");
@@ -1222,7 +1257,7 @@ sub convertIntraNotation() {
     my $containsIntralinear = system ("grep -q \"<INTRA\" $filename");
     if ($containsIntralinear == 0 && $noTranscription == 0) {
         my $tmpFile = temporaryFile('intra', '.tei');
-        print "Convert <INTRA> notation to standard TEI <ab>-elements...\n";
+        trace("Convert <INTRA> notation to standard TEI <ab>-elements...");
         system ("perl $toolsdir/intralinear.pl $filename > $tmpFile");
         $filename = $tmpFile;
     }
@@ -1274,7 +1309,7 @@ sub convertWylie() {
     my $currentFile = shift;
     my $tmpFile = temporaryFile('wylie', '.xml');
 
-    print "Convert Tibetan transcription...\n";
+    trace("Convert Tibetan transcription...");
     system ("perl $toolsdir/convertWylie.pl $currentFile > $tmpFile");
 
     removeFile($currentFile);
@@ -1299,7 +1334,7 @@ sub addTranscriptions($) {
         my $tmpFile6 = temporaryFile('transcribe', '.xml');
         my $tmpFile7 = temporaryFile('transcribe', '.xml');
 
-        print "Add a transcription of Greek or Cyrillic script in choice elements...\n";
+        trace("Add a transcription of Greek or Cyrillic script in choice elements...");
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
         system ("patc -p $patcdir/greek/grt2sgml.pat $tmpFile1 $tmpFile2");
         system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
@@ -1335,7 +1370,7 @@ sub transcribeNotation($$$$) {
     if ($containsNotation == 0) {
         my $tmpFile = temporaryFile('notation', '.xml');
 
-        print "Convert $name transcription...\n";
+        trace("Convert $name transcription...");
         system ("patc -p $patternFile $currentFile $tmpFile");
 
         removeFile($currentFile);

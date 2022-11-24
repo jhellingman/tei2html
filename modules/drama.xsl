@@ -499,11 +499,19 @@
         </li>
     </xsl:template>
 
+    <xsl:template match="castList/roleDesc">
+        <li>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'casthead')"/>
+            <h4><xsl:apply-templates/></h4>
+        </li>
+    </xsl:template>
+
     <xsl:template match="castGroup">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'castlist')"/>
-            <xsl:apply-templates select="head"/>
+            <xsl:apply-templates select="head | roleDesc"/>
             <ul class="castGroup">
                 <xsl:apply-templates select="castItem"/>
             </ul>
@@ -511,6 +519,13 @@
     </xsl:template>
 
     <xsl:template match="castGroup/head">
+        <b>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </b>
+    </xsl:template>
+
+    <xsl:template match="castGroup/roleDesc">
         <b>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
