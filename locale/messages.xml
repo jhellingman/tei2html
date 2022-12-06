@@ -893,6 +893,7 @@
 
         <msg:message name="msgGenerationDate">Erstellungsdatum der Datei</msg:message>
         <msg:message name="msgDesigner">Designer</msg:message>
+		<msg:message name="msgPageImage">Seitenbild</msg:message>
 
         <msg:message name="msgQrCode">QR-Code</msg:message>
         <msg:message name="msgQrCodePgUrl">QR-Code der URL von Project Gutenberg</msg:message>

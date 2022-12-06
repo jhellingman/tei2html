@@ -324,7 +324,7 @@ text-indent:2em;
             <castList>
                 <castItem><role id="hendrik">Koning <hi rend="sc">Hendrik de Vierde</hi></role>.</castItem>
                 <castGroup rend="display(castGroupTable)">
-                    <head>zonen des Konings.</head>
+                    <roleDesc>zonen des Konings.</roleDesc>
                     <castItem><role id="prinshendrik"><hi rend="sc">Hendrik</hi>, prins van <hi rend="sc">Wales</hi></role>,</castItem>
                     <castItem><role id="prinsjohn"><hi rend="sc">John van Lancaster</hi></role>,</castItem>
                 </castGroup>

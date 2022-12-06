@@ -11,7 +11,7 @@
         <xd:short>Stylesheet to support merging two or more TEI documents.</xd:short>
         <xd:detail>This stylesheet contains a number of support functions and templates to make merging of two TEI files easy.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2012, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2012-2022, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
 
@@ -40,6 +40,19 @@
         </xsl:apply-templates>
     </xsl:function>
 
+    <xsl:function name="f:import-document">
+        <xsl:param name="location" as="xs:string"/>
+        <xsl:param name="prefix" as="xs:string"/>
+        <xsl:param name="keepPrefix" as="xs:string"/>
+
+        <xsl:variable name="keepPrefixes" select="tokenize($keepPrefix, ' ')"/>
+
+        <xsl:apply-templates select="document($location)" mode="prefix-id">
+            <xsl:with-param name="prefix" select="$prefix" tunnel="yes"/>
+            <xsl:with-param name="keepPrefixes" select="$keepPrefixes" tunnel="yes"/>
+        </xsl:apply-templates>
+    </xsl:function>
+
 
     <xd:doc>
         <xd:short>Prefix IDs.</xd:short>
@@ -56,14 +69,6 @@
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>
 
-        <!--
-        <xsl:message>ID: <xsl:value-of select="$id"/>.</xsl:message>
-        <xsl:message>PREFIX: <xsl:value-of select="$prefix"/>.</xsl:message>
-        <xsl:message>PREFIXES: <xsl:value-of select="$keepPrefixes"/>.</xsl:message>
-        <xsl:message>TEST: <xsl:value-of select="f:starts-with-any($id, $keepPrefixes)"/>.</xsl:message>
-        <xsl:message>RESULT: <xsl:value-of select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>.</xsl:message>
-        -->
-
         <xsl:sequence select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>
     </xsl:function>
 
@@ -71,11 +76,6 @@
     <xsl:function name="f:starts-with-any" as="xs:boolean">
         <xsl:param name="id" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>
-
-        <!--
-        <xsl:message>TEST: <xsl:value-of select="$id"/> : <xsl:value-of select="$keepPrefixes"/>.</xsl:message>
-        <xsl:message>RESULT: <xsl:value-of select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) > 1"/>.</xsl:message>
-        -->
 
         <xsl:sequence select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt; 0"/>
     </xsl:function>

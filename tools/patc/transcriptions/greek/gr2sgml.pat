@@ -7,6 +7,7 @@
 "<ELA>"     1 ""
 "<GR>"      1 "<foreign lang='grc'>"
 "<GRA>"     1 ""
+"<ALS>"     1 "<foreign lang='als-Grek'>"  % Tosk (Southern Albanian) in Greek script
 
 @patterns 1
 
@@ -16,6 +17,7 @@
 "</ELA>"    0 ""
 "</GR>"     0 "</foreign>"
 "</GRA>"    0 ""
+"</ALS>"    0 "</foreign>"
 
 % some TEI tags:
 "<g>"               p "<g>"
@@ -408,6 +410,7 @@
 "</ELA>"    0 ";"               % closing Greek early. Forgive.
 "</GR>"     0 ";</foreign>"     % closing Greek early. Forgive.
 "</GRA>"    0 ";"               % closing Greek early. Forgive.
+"</ALS>"     0 ";</foreign>"    % closing Tosk early. Forgive.
 " "         1 " "               % something unexpected, also jump back.
 
 

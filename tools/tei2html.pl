@@ -1275,12 +1275,13 @@ sub transcribe($$) {
         if ($noPopups == 0) {
             $currentFile = addTranscriptions($currentFile);
         } else {
-            $currentFile = transcribeNotation($currentFile, '<EL>',  'Greek',                 "$patcdir/greek/gr2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<GR>',  'Greek (classical)',     "$patcdir/greek/gr2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<CY>',  'Cyrillic',              "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<RU>',  'Russian',               "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<UK>',  'Ukrainian',             "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<SR>',  'Serbian',               "$patcdir/cyrillic/sr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<EL>',  'Greek',                       "$patcdir/greek/gr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<GR>',  'Greek (classical)',           "$patcdir/greek/gr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<ALS>', 'Tosk (Southern Albanian)',    "$patcdir/greek/gr2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<CY>',  'Cyrillic',                    "$patcdir/cyrillic/cy2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<RU>',  'Russian',                     "$patcdir/cyrillic/cy2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<UK>',  'Ukrainian',                   "$patcdir/cyrillic/cy2sgml.pat");
+            $currentFile = transcribeNotation($currentFile, '<SR>',  'Serbian',                     "$patcdir/cyrillic/sr2sgml.pat");
         }
 
         $currentFile = transcribeNotation($currentFile, '<AR>',  'Arabic',                "$patcdir/arabic/ar2sgml.pat");
@@ -1324,7 +1325,7 @@ sub addTranscriptions($) {
     my $currentFile = shift;
 
     # Check for presence of Greek or Cyrillic
-    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>\" $currentFile");
+    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<ALS>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>\" $currentFile");
     if ($containsGreek == 0) {
         my $tmpFile1 = temporaryFile('transcribe', '.xml');
         my $tmpFile2 = temporaryFile('transcribe', '.xml');

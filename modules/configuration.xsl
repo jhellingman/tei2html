@@ -79,7 +79,7 @@
                                                                                  - colophon: external links are active in the colophon (including in the external links table, if generated).
                                                                               -->
             <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
-            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
+            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:; music/; images/</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
 
             <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
 

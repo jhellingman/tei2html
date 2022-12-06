@@ -145,6 +145,7 @@ sub handleParagraph($$) {
     # Replace other formatting
     $paragraph =~ s/<sc>(.*?)<\/sc>/<span class=sc>$1<\/span>/g;
     $paragraph =~ s/<g>(.*?)<\/g>/<span class=ex>$1<\/span>/g;
+    $paragraph =~ s/<tt>(.*?)<\/tt>/<span class=code>$1<\/span>/g;
 
     $paragraph =~ s/<tb>/<hr>/g;
 
@@ -187,7 +188,7 @@ sub printHtmlHead() {
         .ex { letter-spacing:0.2em; background-color: #FFFF80; }
         .error { background-color: #FF8566; font-weight: bold; }
         .xref { background-color: #FFFF8C; }
-        .code { font-weight: bold; color: gray; display: none; }
+        .code { font-weight: bold; color: gray; font-family: monospace; font-size: small; }
 
         B { color: #c55a1b; }
         I { color: #0000ff; }
