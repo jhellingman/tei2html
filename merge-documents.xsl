@@ -9,7 +9,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to support merging two or more TEI documents.</xd:short>
-        <xd:detail>This stylesheet contains a number of support functions and templates to make merging of two TEI files easy.</xd:detail>
+        <xd:detail>This stylesheet contains a number of support functions and templates to make merging of multiple TEI files easy.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012-2022, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -155,5 +155,57 @@
             <xsl:apply-templates select="node()|@*" mode="prefix-id"/>
         </xsl:copy>
     </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Combine tagsDecl from all documents.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:combine-tagsDecl">
+        <xsl:param name="documents"/>
+
+        <xsl:variable name="tagsDecl">
+            <xsl:for-each select="$documents">
+                <xsl:copy-of select=".//teiHeader/encodingDesc/tagsDecl/rendition"/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <tagsDecl lang="xx">
+            <xsl:for-each-group select="$tagsDecl/rendition" group-by="@selector">
+                <xsl:copy-of select="current-group()[1]"/>
+                <xsl:variable name="rendition" select="current-group()[1]"/>
+                <xsl:for-each select="current-group()[position() != 1]">
+                    <xsl:if test=". != $rendition">
+                        <xsl:message terminate="no" expand-text="yes">WARNING: Inconsitent rendition: {@selector} {{ {.} }}</xsl:message>
+                    </xsl:if>
+                </xsl:for-each>
+            </xsl:for-each-group>
+        </tagsDecl>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Combine langUsage from all documents.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:combine-languages">
+        <xsl:param name="documents"/>
+
+        <xsl:variable name="langUsage">
+            <xsl:for-each select="$documents">
+                <xsl:copy-of select=".//teiHeader/profileDesc/langUsage/language"/>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <langUsage>
+            <xsl:if test="$documents//teiHeader/profileDesc/langUsage/@lang">
+                <xsl:attribute name="lang" select="($documents//teiHeader/profileDesc/langUsage/@lang)[1]"/>
+            </xsl:if>
+            <xsl:for-each-group select="$langUsage/language" group-by="@id">
+                <xsl:sort select="@id"/>
+                <xsl:copy-of select="current-group()[1]"/>
+            </xsl:for-each-group>
+        </langUsage>
+    </xsl:function>
 
 </xsl:stylesheet>
