@@ -856,7 +856,7 @@ sub makeZip($) {
 #
 sub extractMetadata($) {
     my $file = shift;
-    open(PGFILE, $file) || die("Could not open input file $file");
+    open(PGFILE, $file) || die("Could not open input file $file to extract metadata.");
 
     # Skip upto start of actual text.
     while (<PGFILE>) {

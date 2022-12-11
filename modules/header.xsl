@@ -126,9 +126,9 @@
         <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/publisher)">
             <meta name="DC.Publisher" content="{teiHeader/fileDesc/publicationStmt/publisher}"/>
         </xsl:if>
-        <xsl:if test="f:is-valid(//idno[@type='PGnum'])">
+        <xsl:if test="f:is-valid((//idno[@type='PGnum'])[1])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
-            <meta name="DC.Identifier" content="https://www.gutenberg.org/ebooks/{//idno[@type='PGnum']}"/>
+            <meta name="DC.Identifier" content="https://www.gutenberg.org/ebooks/{(//idno[@type='PGnum'])[1]}"/>
         </xsl:if>
 
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">

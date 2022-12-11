@@ -508,7 +508,7 @@
                         <xsl:variable name="maxLevel" select="f:generated-toc-max-level($divGen)"/>
 
                         <xsl:attribute name="href" select="
-                            if ($tocEntry) 
+                            if ($tocEntry)
                             then f:generate-href($tocEntry)
                             else if ($divGen and f:included-in-toc(., $maxLevel))
                                     then f:determine-filename($divGen) || '#' || $id || '.toc'

@@ -93,7 +93,7 @@
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
+            <xsl:apply-templates mode="gentoc" select="$text/body/div0 | $text/body/div1 | $text/body/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
@@ -321,7 +321,7 @@
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="if ($text/body/div0) then $text/body/div0 else ($text/body/div1 | $text/body/div)">
+            <xsl:apply-templates mode="gentoc-table" select="$text/body/div0 | $text/body/div1 | $text/body/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
@@ -350,7 +350,7 @@
 
         <!-- Do we want to include this division in the toc? -->
         <xsl:if test="f:div-level(.) &lt;= $maxLevel and
-                      f:rend-value(@rend, 'display') != 'none' and 
+                      f:rend-value(@rend, 'display') != 'none' and
                       f:rend-value(@rend, 'toc') != 'none'">
             <xsl:choose>
                 <!-- Do we have a head to display in the toc? -->
