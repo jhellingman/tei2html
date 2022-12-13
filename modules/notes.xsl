@@ -59,7 +59,7 @@
 
     <xd:doc>
         <xd:short>Handle marginal notes.</xd:short>
-        <xd:detail>Marginal notes should go to the margin. The actual placement is handled through CSS.</xd:detail>
+        <xd:detail>Marginal notes should go to the margin. CSS handles the actual placement.</xd:detail>
     </xd:doc>
 
     <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-margin-note(.)]">
@@ -77,7 +77,7 @@
     </xsl:template>
 
 
-    <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage -->
+    <!-- Hack to make tagging easier, should be replaced by <note place="margin"> at some stage. -->
     <xsl:template match="margin">
         <span class="marginnote">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -148,7 +148,7 @@
 
 
     <xsl:template match="note">
-        <xsl:copy-of select="f:log-warning('unclassified note not handled.', ())"/>
+        <xsl:copy-of select="f:log-warning('unclassified note not handled (n={1}).', (@n))"/>
         <xsl:apply-templates/>
     </xsl:template>
 
@@ -286,7 +286,7 @@
                 <xsl:apply-templates/>
 
                 <!-- Don't put a return arrow after a block-element (table, list, lg), since it goes
-                     to a new line and thus takes up too much space -->
+                     to a new line and thus takes up too much space. -->
                 <xsl:if test="not(f:last-child-is-block-element(.))">
                     <xsl:call-template name="footnote-return-arrow"/>
                 </xsl:if>
@@ -357,8 +357,8 @@
 
     <xd:doc>
         <xd:short>Place a footnote return arrow.</xd:short>
-        <xd:detail>Place a footnote return arrow after the footnote. If the footnote is referenced multiple times,
-        next to the footnotes, back-references to each location are generated using lower-case letters.</xd:detail>
+        <xd:detail>Place a footnote return arrow after the footnote. If a footnote is referenced multiple times,
+        next to the footnotes, generate back-references to each location using lower-case letters.</xd:detail>
     </xd:doc>
 
     <xsl:template name="footnote-return-arrow">
@@ -501,7 +501,7 @@
         <xd:short>Style a reference to a footnote as a footnote reference.</xd:short>
         <xd:detail>
             <p>Make explicit references to a footnote (marked with <code>@sameAs</code> or
-            <code>@type="noteRef"</code>) look exactly the same as automatically generated
+            <code>@type="noteRef"</code>) look the same as automatically generated
             footnote references.</p>
         </xd:detail>
     </xd:doc>
@@ -554,8 +554,8 @@
     <xd:doc>
         <xd:short>Handle notes in a text-critical apparatus.</xd:short>
         <xd:detail>Handle notes in a text-critical apparatus (<code>note</code> elements coded with
-        attribute <code>@place="apparatus"</code>) by placing a marker in the text. These notes are only
-        included when a <code>divGen</code> element is present, calling for their rendition; a text can
+        attribute <code>@place="apparatus"</code>) by placing a marker in the text. Only include these
+        notes when a <code>divGen</code> element is present, calling for their rendition; a text can
         include multiple <code>divGen</code> elements, in which case only the text-critical notes after
         the preceding one are included.</xd:detail>
     </xd:doc>
@@ -772,8 +772,8 @@
     <xd:doc>
         <xd:short>Format apparatus notes as a single block.</xd:short>
         <xd:detail><p>Format apparatus notes as a single block. A complicating factor here is that some notes do contain
-        paragraphs, and we want to preserve those paragraph breaks, having a multi-paragraph note following the preceding note
-        on the same line, start a new line for the following paragraphs of that note, and then have the following note follow the
+        paragraphs, and we want to preserve the paragraph break in that case, starting the multi-paragraph note after the preceding note
+        on the same line, start a new line for the following paragraph of the note, and then have the following note follow the
         last paragraph of the multi-paragraph note. To achieve this, first collect the content of all the notes in a single list,
         indicating where the paragraph breaks should remain, and then group them back into paragraphs.</p>
 

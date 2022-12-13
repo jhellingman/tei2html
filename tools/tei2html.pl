@@ -168,6 +168,7 @@ if ($showHelp == 1) {
     print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
     print "    i=<int>   Select the image set in kept in a directory named 'images\@<int>' (default: 0)\n";
     print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
+    print "    l=<int>   Set the log-level (1 = Error; 2 = Warning; 3 = Info (default); 4 = Trace)\n";
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    w=<int>   Set the page width (default: 72 characters).\n\n";
 
@@ -243,12 +244,12 @@ sub processFiles {
 sub processFile($) {
     my $filename = shift;
 
-    print "=== Start! =================================================================\n";
+    info("=== Start! =================================================================");
 
     if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
         die "File: '$filename' doesn't look like a TEI file\n";
     }
-    print "Process TEI file $filename\n";
+    info("Process TEI file $filename");
 
     $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
     my $basename = $1;
@@ -302,7 +303,9 @@ sub processFile($) {
     }
 
     extractMetadata($filename);
-    extractEntities($filename);
+    if ($logLevel >= $LOG_LEVEL_INFO) {
+        extractEntities($filename);
+    }
 
     $atSize = determineAtSize();
     $atSize > 0 && prepareImages();
@@ -337,7 +340,7 @@ sub processFile($) {
     $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
     if ($makeZip == 1 && $pgNumber > 0) {
-        print "Prepare a zip file for (re-)submission to Project Gutenberg\n";
+        trace("Prepare a zip file for (re-)submission to Project Gutenberg");
         makeZip($basename);
     }
 
@@ -356,7 +359,7 @@ sub processFile($) {
         removeFile("issues.xml");
     }
 
-    print "=== Done! ==================================================================\n";
+    info("=== Done! ==================================================================");
 }
 
 
@@ -365,6 +368,13 @@ sub trace($) {
   if ($logLevel >= $LOG_LEVEL_TRACE) {
       print $message . "\n";
   }
+}
+
+sub info($) {
+    my $message = shift;
+    if ($logLevel >= $LOG_LEVEL_INFO) {
+        print $message . "\n";
+    }
 }
 
 sub warning($) {
@@ -377,7 +387,7 @@ sub warning($) {
 sub error($) {
   my $message = shift;
   if ($logLevel >= $LOG_LEVEL_ERROR) {
-      print "ERROR: $message\n";
+      print STDERR "ERROR: $message\n";
   }
 }
 
@@ -718,15 +728,15 @@ sub makeText($$) {
     # check for required manual interventions
     my $containsError = system ("grep -q \"\\[ERROR:\" $textFile");
     if ($containsError == 0) {
-        print "NOTE: Please check $textFile for [ERROR: ...] messages.\n";
+        warning("Please check $textFile for [ERROR: ...] messages.");
     }
     my $containsTable = system ("grep -q \"TABLE\" $textFile");
     if ($containsTable == 0) {
-        print "NOTE: Please check $textFile for TABLEs.\n";
+        warning("Please check $textFile for TABLEs.");
     }
     my $containsFigure = system ("grep -q \"FIGURE\" $textFile");
     if ($containsFigure == 0) {
-        print "NOTE: Please check $textFile for FIGUREs.\n";
+        warning("Please check $textFile for FIGUREs.");
     }
 }
 
@@ -819,7 +829,7 @@ sub makeZip($) {
     }
 
     if (!-d $pgNumber) {
-        print "Failed to create directory $pgNumber, will not make zip file.\n";
+        error("Failed to create directory $pgNumber, will not make zip file.");
         return;
     }
 
@@ -906,14 +916,14 @@ sub extractMetadata($) {
         warning("Short title too long (should be less than 27 characters)");
     }
 
-    print "----------------------------------------------------------------------------\n";
-    print "Author:       $author\n";
-    print "Title:        $mainTitle\n";
-    print "Short title:  $shortTitle\n";
-    print "Language:     $language\n";
-    print "Ebook #:      $pgNumber\n";
-    print "Release Date: $releaseDate\n";
-    print "----------------------------------------------------------------------------\n";
+    info("----------------------------------------------------------------------------");
+    info("Author:       $author");
+    info("Title:        $mainTitle");
+    info("Short title:  $shortTitle");
+    info("Language:     $language");
+    info("Ebook #:      $pgNumber");
+    info("Release Date: $releaseDate");
+    info("----------------------------------------------------------------------------");
 }
 
 
@@ -1087,7 +1097,7 @@ sub determineAtSize() {
 
         1;
     } or do {
-        print STDERR "ERROR: Problem parsing tei2html.config.\n";
+        error("Problem parsing tei2html.config.");
     };
     if ($scale eq '') {
         $scale = 1;

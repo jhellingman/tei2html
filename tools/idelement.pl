@@ -1,4 +1,4 @@
-# idElement.pl -- give elements ids based on de page they are on and a sequence number
+# idelement.pl -- give elements ids based on de page they are on and a sequence number
 
 use strict;
 use warnings;
@@ -18,10 +18,9 @@ GetOptions(
     'help' => \$showHelp,
     );
 
-if ($showHelp == 1) {
+if ($showHelp == 1 || !defined $ARGV[0]) {
     my $help = <<'END_HELP';
-
-idElement.pl -- give elements ids based on de page they are on and a sequence number.
+idelement.pl -- give elements ids based on de page they are on and a sequence number.
 
 Usage: idElement.pl [-fnp] <inputfile.tei>
 
