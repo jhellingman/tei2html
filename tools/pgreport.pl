@@ -282,7 +282,7 @@ sub handleTeiFile {
                 my $forceFlag = $forceMore == 0 ? '' : ' -f ';
                 my $htmlFlag = $makeHtml == 0 ? '' : ' -h ';
                 my $epubFlag = $makeEpub == 0 ? '' : ' -e ';
-                system ("perl -S tei2html.pl -x -r -v $htmlFlag $epubFlag $forceFlag $fileName$suffix");
+                system ("perl -S tei2html.pl -x -r -v -l=1 $htmlFlag $epubFlag $forceFlag $fileName$suffix");
             }
             chdir ($cwd);
         }
@@ -296,7 +296,7 @@ sub handleTeiFile {
 
                 my $title = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type)]');
                 my $shortTitle = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title[@type="short"]');
-                my $titleNfc = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title/@nfc');
+                my $titleNfc = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/title[not(@type)]/@nfc');
                 my $authors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/author');
                 my $editors = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/editor');
                 my $respRoles = $xpath->find('/TEI.2/teiHeader/fileDesc/titleStmt/respStmt/resp');
@@ -443,9 +443,9 @@ sub handleTeiFile {
                     my $localFile = "$fileName$suffix";
                     my $gitRepoFile = $gitRepoLocation . $pgSrc . "/" . $localFile;
                     if (defined ($gitRepoFile) && compare($gitRepoFile, $fullName) != 0) {
-                        print "COMPARE: Git repo differs: $localFile <> $gitRepoFile\n";
-                        print "         Size in Git:  " . (-s $gitRepoFile) . " bytes\n";
-                        print "         Size locally: " . (-s $fullName) . " bytes\n";
+                        print "WARNING: Git repo differs: $localFile <> $gitRepoFile\n";
+                        print "WARNING: Size in Git:  " . (-s $gitRepoFile) . " bytes\n";
+                        print "WARNING: Size locally: " . (-s $fullName) . " bytes\n";
                     }
                 }
                 print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
