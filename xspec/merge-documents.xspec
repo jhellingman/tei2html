@@ -52,7 +52,7 @@
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When importing an items with IDs with and without excluded prefixes">
+    <x:scenario label="When importing items with IDs with and without excluded prefixes">
         <x:context mode="prefix-id">
             <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
             <x:param name="keepPrefixes" select="('t', 'b')" tunnel="yes"/>
@@ -61,7 +61,7 @@
             <item id="three">Item.</item>
             <item id="four">Item.</item>
         </x:context>
-        <x:expect label="will result in an item with adjusted ids">
+        <x:expect label="will result in items with adjusted ids">
             <item id="prefix_one">Item.</item>
             <item id="two">Item.</item>
             <item id="three">Item.</item>
@@ -69,7 +69,7 @@
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When importing an various types of references">
+    <x:scenario label="When importing various types of references">
         <x:context mode="prefix-id">
             <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
             <x:param name="keepPrefixes" select="('t', 'b')" tunnel="yes"/>
@@ -84,7 +84,7 @@
                 <item><language id="tk">Language</language></item>
             </list>
         </x:context>
-        <x:expect label="will result in an items with adjusted references">
+        <x:expect label="will result in those types with adjusted references">
             <list id="prefix_list">
                 <item><ref target="prefix_one">target</ref></item>
                 <item><ab copyOf="prefix_one">copyOf</ab></item>
@@ -97,5 +97,23 @@
             </list>
         </x:expect>
     </x:scenario>
+
+    <x:scenario label="When importing an align-with() rendition ladder">
+        <x:context mode="prefix-id">
+            <x:param name="prefix" select="'prefix_'" tunnel="yes"/>
+            <x:param name="keepPrefixes" select="()" tunnel="yes"/>
+            <div id="one" rend="align-with(two)">Division 1.</div>
+            <div id="two" rend="color(blue)">Division 2.</div>
+            <div id="three" rend="color(red) align-with(four) align(center)">Division 3.</div>
+            <div id="four">Division 4.</div>
+        </x:context>
+        <x:expect label="will result in an align-with() rendition ladder with adjusted ids">
+            <div id="prefix_one" rend="align-with(prefix_two)">Division 1.</div>
+            <div id="prefix_two" rend="color(blue)">Division 2.</div>
+            <div id="prefix_three" rend="color(red) align(center) align-with(prefix_four)">Division 3.</div>
+            <div id="prefix_four">Division 4.</div>
+        </x:expect>
+    </x:scenario>
+
 
 </x:description>

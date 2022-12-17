@@ -14,6 +14,8 @@
         <xd:copyright>2012-2022, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:include href="modules/log.xsl"/>
+    <xsl:include href="modules/rend.xsl"/>
 
     <xd:doc>
         <xd:short>Import Document.</xd:short>
@@ -82,7 +84,7 @@
 
 
     <xd:doc>
-        <xd:short>Do not mess with language ids.</xd:short>
+        <xd:short>Do not mess with language IDs.</xd:short>
     </xd:doc>
 
     <xsl:template match="language/@id" mode="prefix-id">
@@ -91,7 +93,7 @@
 
 
     <xd:doc>
-        <xd:short>Translate ids in <code>@id</code> attribute.</xd:short>
+        <xd:short>Translate IDs in <code>@id</code> attribute.</xd:short>
     </xd:doc>
 
     <xsl:template match="@id" mode="prefix-id">
@@ -105,7 +107,7 @@
 
 
     <xd:doc>
-        <xd:short>Translate ids in <code>@target</code> attributes.</xd:short>
+        <xd:short>Translate IDs in <code>@target</code> attributes.</xd:short>
     </xd:doc>
 
     <xsl:template match="@target" mode="prefix-id">
@@ -119,7 +121,7 @@
 
 
     <xd:doc>
-        <xd:short>Translate ids in <code>@sameAs</code> attributes.</xd:short>
+        <xd:short>Translate IDs in <code>@sameAs</code> attributes.</xd:short>
     </xd:doc>
 
     <xsl:template match="@sameAs" mode="prefix-id">
@@ -133,7 +135,7 @@
 
 
     <xd:doc>
-        <xd:short>Translate ids in <code>@copyOf</code> attributes.</xd:short>
+        <xd:short>Translate IDs in <code>@copyOf</code> attributes.</xd:short>
     </xd:doc>
 
     <xsl:template match="@copyOf" mode="prefix-id">
@@ -143,6 +145,28 @@
         <xsl:attribute name="copyOf">
             <xsl:value-of select="f:prefix-id(., $prefix, $keepPrefixes)"/>
         </xsl:attribute>
+    </xsl:template>
+
+    <xd:doc>
+        <xd:short>Translate IDs in <code>@rend</code> attributes.</xd:short>
+        <xd:detail>IDs occur in <code>align-with()</code> rendition ladder elements.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="@rend" mode="prefix-id">
+        <xsl:param name="prefix" as="xs:string" tunnel="yes"/>
+        <xsl:param name="keepPrefixes" as="xs:string*" tunnel="yes"/>
+    
+        <xsl:variable name="rend" select="
+            if (f:has-rend-value(., 'align-with'))
+            then f:add-rend-value(
+                f:remove-rend-value(., 'align-with'),
+                'align-with',
+                f:prefix-id(f:rend-value(., 'align-with'), $prefix, $keepPrefixes))
+            else ."/>
+
+        <xsl:if test="$rend">
+            <xsl:attribute name="rend" select="$rend"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -207,5 +231,15 @@
             </xsl:for-each-group>
         </langUsage>
     </xsl:function>
+
+
+
+    <!-- Stub methods from included stylesheets -->
+
+    <xsl:function name="f:is-set" as="xs:boolean">
+        <xsl:param name="node" as="xs:string"/>
+        <xsl:sequence select="false()"/>
+    </xsl:function>
+
 
 </xsl:stylesheet>
