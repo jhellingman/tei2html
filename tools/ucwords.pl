@@ -730,9 +730,9 @@ sub reportSQL() {
     open (SQLFILE, ">words.sql") || die("Could not create output file 'words.sql'");
     binmode(SQLFILE, ":utf8");
 
-    print SQLFILE "DELETE FROM WORD WHERE idbook = $idBook\n";
-    print SQLFILE "DELETE FROM BOOK WHERE idbook = $idBook\n";
-    print SQLFILE "INSERT INTO BOOK ($idBook, \'$docTitle\', \'$docAuthor\')\n";
+    print SQLFILE "DELETE FROM Word WHERE idbook = $idBook;\n";
+    print SQLFILE "DELETE FROM Book WHERE idbook = $idBook;\n";
+    print SQLFILE "INSERT INTO Book (idbook, title, author) VALUES ($idBook, \'$docTitle\', \'$docAuthor\');\n";
     print SQLFILE "\n\n\n";
 
     reportWordsSQL();
@@ -756,9 +756,18 @@ sub reportLanguageWordsSQL($) {
     my $language = shift;
 
     my @wordList = keys %{$wordHash{$language}};
+    print SQLFILE "INSERT INTO Word (idbook, language, count, canonical, word) VALUES \n";
+    my $i = 0;
+    my $size = @wordList;
     foreach my $word (@wordList) {
         reportWordSQL($word, $language);
+        $i++;
+        if ($i < $size) {
+            print SQLFILE ",\n";
+        }
+        
     }
+    print SQLFILE ";\n";
 }
 
 #
@@ -770,7 +779,7 @@ sub reportWordSQL($$) {
     my $key = NormalizeForLanguage($word, $language);
 
     my $count = $wordHash{$language}{$word};
-    print SQLFILE "INSERT INTO WORD ($idBook, \'$language\', $count, \'$key\', \'$word\')\n";
+    print SQLFILE "($idBook, \'$language\', $count, \'$key\', \'$word\')";
 }
 
 #

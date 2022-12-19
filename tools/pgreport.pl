@@ -28,12 +28,14 @@ my $makeChecks = 0;
 my $download = 0;       # Download posted files from Project Gutenberg.
 my $showHelp            = 0;
 my $onlyPosted = 0;     # Only report on posted files (version >= 1.0)
+my $makeReports = 0;
 
 GetOptions(
     'f' => \$force,
     'm' => \$forceMore,
     'v' => \$makeChecks,
     'h' => \$makeHtml,
+    'r' => \$makeReports,
     'e' => \$makeEpub,
     'd' => \$download,
     'q' => \$showHelp,
@@ -47,11 +49,12 @@ if ($showHelp == 1) {
     print "    f         force: regenerate XML files used to extract information from.\n";
     print "    m         force more: also force regeneration of HTML files.\n";
     print "    v         run checks on TEI files.\n";
-    print "    h         Produce derived HTML file for each TEI file.\n";
-    print "    e         Produce derived ePub file for each TEI file.\n";
-    print "    d         Download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
-    print "    p         Only report on posted files (version >= 1.0).\n";
-    print "    q         Print this help and exit.\n";
+    print "    r         make word-usage report.\n";
+    print "    h         produce derived HTML file for each TEI file.\n";
+    print "    e         produce derived ePub file for each TEI file.\n";
+    print "    d         download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
+    print "    p         only report on posted files (version >= 1.0).\n";
+    print "    q         print this help and exit.\n";
 
     exit(0);
 }
@@ -282,7 +285,9 @@ sub handleTeiFile {
                 my $forceFlag = $forceMore == 0 ? '' : ' -f ';
                 my $htmlFlag = $makeHtml == 0 ? '' : ' -h ';
                 my $epubFlag = $makeEpub == 0 ? '' : ' -e ';
-                system ("perl -S tei2html.pl -x -r -v -l=1 $htmlFlag $epubFlag $forceFlag $fileName$suffix");
+                my $reportFlag = $makeReports == 0 ? '' : ' -r ';
+                my $checksFlag = $makeChecks == 0 ? '' : ' -v ';
+                system ("perl -S tei2html.pl -x -l=1 $checksFlag $reportFlag $htmlFlag $epubFlag $forceFlag $fileName$suffix");
             }
             chdir ($cwd);
         }

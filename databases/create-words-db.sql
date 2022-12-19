@@ -8,7 +8,7 @@ USE `words`;
 -- -----------------------------------------------------
 -- Table `words`.`book`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `words`.`book` (
+CREATE TABLE IF NOT EXISTS `words`.`Book` (
   `idbook` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(128) NULL ,
   `author` VARCHAR(128) NULL ,
@@ -22,19 +22,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `words`.`word`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `words`.`word` (
+CREATE TABLE IF NOT EXISTS `words`.`Word` (
   `idword` INT NOT NULL AUTO_INCREMENT ,
   `idbook` INT NULL ,
-  `word` VARCHAR(32) NULL ,
+  `word` VARCHAR(128) NULL ,
+  `canonical` VARCHAR(128) NULL,
   `language` VARCHAR(8) NULL ,
   `count` INT NULL ,
   PRIMARY KEY (`idword`) ,
   INDEX `word` (`word` ASC, `language` ASC) ,
   INDEX `idbook` (`idbook` ASC) ,
-  INDEX `idbook` (`idbook` ASC) ,
   CONSTRAINT `idbook`
     FOREIGN KEY (`idbook` )
-    REFERENCES `words`.`book` (`idbook` )
+    REFERENCES `words`.`Book` (`idbook` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

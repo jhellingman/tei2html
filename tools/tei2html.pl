@@ -756,7 +756,7 @@ sub makeWordlist($$) {
     $options .= $makeHeatMap ? ' -m ' : '';
 
     trace("Report on word usage...");
-    system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
+    system ("perl $toolsdir/ucwords.pl -s $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
     removeFile($tmpFile);
 

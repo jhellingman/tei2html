@@ -55,6 +55,13 @@
         </xsl:apply-templates>
     </xsl:function>
 
+    <xsl:function name="f:import-document">
+        <xsl:param name="location" as="xs:string"/>
+        <xsl:param name="baseNode"/>
+
+        <xsl:copy-of select="document($location, $baseNode)"/>
+    </xsl:function>
+
 
     <xd:doc>
         <xd:short>Prefix IDs.</xd:short>
