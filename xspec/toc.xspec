@@ -50,6 +50,9 @@
         </TEI.2>
     </x:param>
 
+
+    <!-- f:find-toc-max-depth -->
+
     <x:scenario label="When finding the max level for a simple toc">
         <x:call function="f:find-toc-max-depth">
             <x:param select="$sample1"/>
@@ -57,6 +60,45 @@
         <x:expect label="will return 1" select="1"/>
     </x:scenario>
 
+    <!-- f:find-toc-list-max-depth -->
+
+    <x:param name="tocList1" select="./div/list">
+        <div>
+            <list type="tocList">
+                <item>Heading</item>
+            </list>
+        </div>
+    </x:param>
+
+    <x:scenario label="When finding the max level for a simple toc-list">
+        <x:call function="f:find-toc-list-max-depth">
+            <x:param select="$tocList1"/>
+        </x:call>
+        <x:expect label="will return 1" select="1"/>
+    </x:scenario>
+
+    <x:param name="tocList2" select="./div/list">
+        <div>
+            <list type="tocList">
+                <item>Heading 1
+                    <list type="tocList">
+                        <item>Heading 1.1
+                            <list type="tocList">
+                                <item>Heading 1.1.1</item>
+                            </list>
+                        </item>
+                    </list>
+                </item>
+            </list>
+        </div>
+    </x:param>
+
+    <x:scenario label="When finding the max level for a nested toc-list">
+        <x:call function="f:find-toc-list-max-depth">
+            <x:param select="$tocList2"/>
+        </x:call>
+        <x:expect label="will return 3" select="3"/>
+    </x:scenario>
 
     <!-- divGen -->
 

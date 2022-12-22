@@ -477,7 +477,7 @@
         <xsl:variable name="toc-max-depth">
             <!-- Find all divisions that do not have further divisions in them. -->
             <xsl:for-each select="$start//*[f:is-toc-div(.)][not(*[f:is-toc-div(.)])]">
-                <!-- Sort by number of divisions they have as ancestor -->
+                <!-- Sort by the number of divisions they have as ancestor -->
                 <xsl:sort select="count(ancestor::*[f:is-toc-div(.)])" data-type="number" order="descending"/>
                 <!-- Get the number of ancestors for the first one -->
                 <xsl:if test="position() = 1">
@@ -488,6 +488,26 @@
 
         <xsl:sequence select="$toc-max-depth"/>
     </xsl:function>
+
+    <xsl:function name="f:find-toc-list-max-depth" as="xs:integer">
+        <xsl:param name="start" as="element(list)"/>
+        <xsl:variable name="parent" select="$start/.."/>
+
+        <xsl:variable name="toc-max-depth">
+            <!-- Find all toc-lists that do not have further sub-toc-lists in them. -->
+            <xsl:for-each select="$parent//list[@type='tocList'][not(descendant::list[@type='tocList'])]">
+                <!-- Sort by the number of toc-lists they have as ancestor -->
+                <xsl:sort select="count(ancestor::list[@type='tocList'])" data-type="number" order="descending"/>
+                <!-- Get the number of ancestors for the first one -->
+                <xsl:if test="position() = 1">
+                    <xsl:value-of select="count(ancestor::list[@type='tocList']) + 1"/>
+                </xsl:if>
+            </xsl:for-each>
+        </xsl:variable>
+
+        <xsl:sequence select="$toc-max-depth"/>
+    </xsl:function>
+
 
 
     <!--====================================================================-->
@@ -723,7 +743,9 @@
                 <table>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:set-class-attribute-with(., 'tocList')"/>
-                    <xsl:apply-templates mode="tocList"/>
+                    <xsl:apply-templates mode="tocList">
+                        <xsl:with-param name="maxDepth" select="f:find-toc-list-max-depth(.)" tunnel="yes"/>
+                    </xsl:apply-templates>
                 </table>
                 <xsl:call-template name="reopenpar"/>
             </xsl:when>
@@ -735,6 +757,8 @@
     </xsl:template>
 
     <xsl:template mode="tocList" match="item">
+        <xsl:param name="maxDepth" tunnel="yes"/>
+
         <xsl:variable name="depth" select="count(ancestor::list[@type='tocList']) - 1"/>
         <tr>
             <xsl:copy-of select="f:set-class-attribute(.)"/>
@@ -750,7 +774,10 @@
                 <xsl:copy-of select="f:set-class-attribute-with(ab[@type='tocDivNum'], 'tocDivNum')"/>
                 <xsl:apply-templates mode="tocList" select="ab[@type='tocDivNum']"/>
             </td>
-            <td class="tocDivTitle" colspan="{7 - $depth}">
+            <td class="tocDivTitle">
+                <xsl:if test="$maxDepth - $depth > 1">
+                    <xsl:attribute name="colspan"><xsl:value-of select="$maxDepth - $depth"/></xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates select="text()|*[not(@type='tocDivNum' or @type='tocPageNum' or @type='tocList')]"/>
             </td>
             <td>

@@ -13,7 +13,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Functions to handle cross-references.</xd:short>
-        <xd:detail>This stylesheet contains a number of functions to handle cross-references.</xd:detail>
+        <xd:detail>This stylesheet contains functions to handle cross-references.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>

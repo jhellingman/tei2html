@@ -30,8 +30,8 @@ my $xmlReport = 0;      # Set to 1 to generate a report in xml.
 my $csvReport = 0;      # Set to 1 to generate a report in plain text (CSV).
 my $sqlReport = 0;      # Set to 1 to generate a report in SQL inserts.
 my $idBook = 0;
-my $docTitle = "Title";
-my $docAuthor = "Author";
+my $docTitle = "";
+my $docAuthor = "";
 
 GetOptions(
     'v' => \$verbose,
@@ -182,10 +182,10 @@ sub collectWords {
     foreach my $line (@lines) {
         my $remainder = $line;
 
-        if ($remainder =~ /<title\b.*?>(.*?)<\/title>/) {
+        if ($docTitle eq "" && $remainder =~ /<title\b.*?>(.*?)<\/title>/) {
             $docTitle = sgml2utf($1);
         }
-        if ($remainder =~ /<author\b.*?>(.*?)<\/author>/) {
+        if ($docAuthor eq "" && $remainder =~ /<author\b.*?>(.*?)<\/author>/) {
             $docAuthor = sgml2utf($1);
         }
         if ($remainder =~ /<idno type=\"PGnum\">([0-9]+)<\/idno>/) {

@@ -178,7 +178,7 @@
             <td><xsl:value-of select="$value"/></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:is-valid($url) and f:get-setting('xref.show') != 'never' ">
+                    <xsl:when test="f:is-valid($url) and (f:get-setting('xref.show') != 'never' or f:is-allowed-url($url)) ">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
                     </xsl:when>
                     <xsl:when test="f:is-valid($url)">
@@ -202,7 +202,7 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:is-valid($url) and f:get-setting('xref.show') != 'never' ">
+                    <xsl:when test="f:is-valid($url) and (f:get-setting('xref.show') != 'never' or f:is-allowed-url($url))">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$value"/></a>
                     </xsl:when>
                     <xsl:when test="f:is-valid($url)">

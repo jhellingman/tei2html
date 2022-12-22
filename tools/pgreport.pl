@@ -275,6 +275,7 @@ sub handleTeiFile {
                 || !-e $xmlFileName
                 || !-e $wordsFileName
                 || !-e $checksFileName
+                || !-e $wordsFileName
                 || ($makeHtml != 0 && !-e $htmlFileName)
                 || isNewer($fullName, $xmlFileName)) {
             my $cwd = getcwd;
