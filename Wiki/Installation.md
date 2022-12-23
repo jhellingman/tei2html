@@ -56,7 +56,7 @@ To enable SX and NSGML to understand your document types, you need to configure 
 
 You will need to add the `teilite.dtd` to the CATALOG. This DTD can be found here: http://www.tei-c.org/Vault/P4/Lite/DTD/
 
-A short explanation of Catalog files can be found in the SP documentation on James Clark's website referenced above.
+A short explanation of Catalog files can be found in the SP documentation on James Clark’s website referenced above.
 
 As an alternative to SX and NSGML, you can use osx and onsgml from the OpenJade Project. These are slightly more up-to-date. You will have to update
 the names in the main `tei2html.pl` script in that case.

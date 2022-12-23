@@ -8,7 +8,7 @@ TEI offers two ways of referring to scanned facsimile images, one is using the `
 
 The facsimile files themselves can be either hosted locally (on a file-system under our control) or remotely (with a third party). In the former case, we can generate self-contained ePubs with all the files on-board, in the later case, we have to make do with external references.
 
-Finally, we can refer directly to the facsimiles, or generate an HTML wrapper that includes the facsimile (which is assumed to be an image in a supported format here). The HTML wrapper will be required if we include the facsimile images in an ePub file.
+Finally, we can refer directly to the facsimiles, or generate an HTML wrapper that includes the facsimile (assumed to be an image in a supported format here). The HTML wrapper will be required if we include the facsimile images in an ePub file.
 
 All combined, this gives a number of options to take into account when dealing with facsimile editions.
 
@@ -16,9 +16,9 @@ All combined, this gives a number of options to take into account when dealing w
 
 The `facsimile` element is a top-level element, that describes a series of page images, and can stand independently of the transcribed text. This allows to specify just the metadata (in the Header) and the scans, to produce a digital facsimile.
 
-```
+```xml
    <facsimile>
-      <graphic id=facs123 url="p123.png"/>
+      <graphic id="facs123" url="p123.png"/>
    </facsimile>
 ```
 
@@ -26,16 +26,16 @@ The `facsimile` element is a top-level element, that describes a series of page 
 
 The `@facs` attribute on `pb` elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images sub-directory, for example).
 
-```
-  <pb n=123 facs="p123.png"/>
+```xml
+  <pb n="123" facs="p123.png"/>
 ```
 
 Let's call this "direct" facsimile links.
 
 Alternatively, it can link to an element in the `facsimile` element, for example:
 
-```
-  <pb n=123 facs="#facs123"/>
+```xml
+  <pb n="123" facs="#facs123"/>
 ```
 
 Let's call this "indirect" facsimile links.
@@ -76,7 +76,7 @@ The output consists of a series of HTML pages, one per page, with some metadata 
 
 By convention, the facsimile images and wrapper pages will go into a directory `page-images`, and will look like this:
 
-```
+```html
   <html>
     <head>
       <title>Document title, page x</title>

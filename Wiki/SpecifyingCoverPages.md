@@ -4,7 +4,7 @@ Older books where often sold in simple paper covers, often just repeating the in
 
 When generating ePubs, `tei2html` expects the cover image to be indicated in a specific way in the front matter, using the exact `id`s as shown below:
 
-```
+```xml
 <div1 id="cover" type="Cover">
 <p><figure id="cover-image" rend="image(images/front.jpg)"/></p>
 ```
@@ -13,7 +13,7 @@ To make this work with the various ePub ebook readers, make this image 600 by 80
 
 When a cover image is missing, a title page image can be used instead, as long as it is encoded following this convention (again, the `id`s matter, not the file names):
 
-```
+```xml
 <div1 id="titlepage" type="Titlepage">
 <p><figure id="titlepage-image" rend="image(images/titlepage.png)"/></p>
 ```

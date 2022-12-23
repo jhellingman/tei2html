@@ -25,6 +25,7 @@ The guiding principles are:
 The design decisions are:
 
   * The `@rend` attribute values are "rendition ladders" designed to map relatively directly to CSS format statements in the HTML version, however, they use a different syntax, and are also used for effects that are not supported by CSS, and are thus not copied verbatim.
+  * The `@rend` attribute can also be used to refer to HTML classes, which can be defined as `<rendition>` elements in a `<tagsDecl>` section.
   * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
   * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `<rendition>` elements. Note that currently no translation of the `@selector` attribute of the `<rendition>` element takes place.
 
@@ -39,7 +40,7 @@ Although XML is simpler, and far more tools can deal with it, SGML is somewhat e
 
 Of course, you can work directly in XML instead of SGML, and the stylesheets are supposed to work with the P4 and P5 incarnations of TEI as well (although not all elements, even those of P3, are supported). Working in XML directly has a number of benefits as well:
 
-  1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 2.0 directly).
+  1. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 3.0 directly. Javascript implementations do exist, but I have no experience with them).
   2. No initial conversion tool required.
   3. Can use embedded namespaces for other XML schemas.
   4. Can use one or more of the various XML authoring tools available.
@@ -55,18 +56,18 @@ For many uses, a TEI file is not the most desirable format. For reading, it is f
   * HTML for viewing in a browser on a PC.
   * ePub for reading on dedicated eBook readers.
   * Plain text for reading on simple devices (supported using Perl).
-  * PDF for printing on paper (supported using Prince-XML, using special HTML output).
+  * PDF for printing on paper (supported using Prince-XML, using specially adjusted HTML output).
 
 
 These output formats place some restrictions on the structure of the TEI file, and the usage conventions adopted not enforced by the DTD. The most important of these are given below.
 
 _References to page numbers._ In printed media, the page numbers produced in the output will differ from the source. To correctly replace page numbers in the source, each page number should be tagged as a reference (`ref` element) with `@type=pageref`. The tag should only enclose the page number itself, not any of the surrounding material. The transformation will replace the content of this tag with the actual number of the page the material referred to appears on. Almost always, the reference is not to the page itself, but to some element appearing on this page. For this reason, it is better not to link to the `pb` element, but to the element actually referred to. (In HTML output, the original page numbers will be shown in the margin and used in the text.)
 
-_Nesting of cross-references and anchors._ In HTML, it is not possible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these result in nested anchors in HTML. For example, the `ref` element should not contain `corr` elements (as the later generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the `ref` element in the `corr` element.
+_Nesting of cross-references and anchors._ In HTML, it is impossible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these result in nested anchors in HTML. For example, the `ref` element should not contain `corr` elements (as the later generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the `ref` element in the `corr` element.
 
-_Nesting of paragraphs._ In HTML, it is not possible to nest paragraphs. In most cases, the transformation software will take this in account, and close (and re-open) open paragraphs in HTML when needed.
+_Nesting of paragraphs._ In HTML, it is impossible to nest paragraphs. Usually, the transformation software will take this in account, and close (and re-open) open paragraphs in HTML when needed.
 
-In a few other cases, the transformation may not result in entirely correct results. Always validate the end result with tools such as `tidy` or `epubcheck`.
+In a few other cases, the transformation may not result in entirely correct results. Always validate the result with tools such as `tidy` or `epubcheck`.
 
 
 ## Special Characters in SGML files ##
@@ -120,5 +121,3 @@ or
 ```
 
 As long the leader CSS this is not directly supported by browsers, we can use the method outlined here to render this in HTML: https://www.w3.org/Style/Examples/007/leaders.en.html
-
-

@@ -12,7 +12,7 @@ Tables are supported in `tei2html` with the following features:
 ## Columns ##
 
 In addition to the TEI model, `tei2html` supports column definitions. These can be used to apply styling to
-all cells in a column. The following elements are defined
+all cells in a column. The following elements are defined:
 
 `column`: a column definition, which can have the following attributes: `@cols` the number of columns this
 column definition applies to, by default only a single column; `@rend` the rendering that should be applied

@@ -18,7 +18,7 @@ Syntax: `perl -S ucwords.pl filename`
 
 ## `fixpb.pl` ##
 
-Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where # is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)
+Perl script to fix page numbers, as recorded in the `@n` attribute in `<pb>` elements. This will also set the `@id` attribute to `pb#`, where `#` is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)
 
 For an overview of options, run `perl.pl -S fixpb.pl --help`
 
@@ -33,7 +33,7 @@ Perl script to replace ASCII single and double-quotes with curly quotes. May nee
 Issues:
 
   * Open quotes before SGML tags and non-letters may go wrong (they become the default: a close quote).
-  * Manually check for ASCII single-quotes, and apply the correct one. Use `tei2html.pl` with the `-v` option to find cases where quotes are still not balanced
+  * Manually check for ASCII single-quotes, and apply the correct one. Use `tei2html.pl` with the `-v` option to find cases where quotes are still not balanced.
 
 ## `pgpp.pl` ##
 

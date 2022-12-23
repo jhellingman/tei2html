@@ -6,7 +6,9 @@ Internal cross-references are to be encoded using the `<ref>` element, with the 
 
 **Footnotes:** Sometimes footnotes markers appear multiple times on a page, each referring to the same note. When these are encoded as follows:
 
-`<ref target="n123.1" type="noteref">1</note>`
+```xml
+    <ref target="n123.1" type="noteref">1</note>
+```
 
 They will be rendered as a superscript number with the actual number replacing the content.
 
@@ -56,9 +58,9 @@ Depending on the output format and configuration, the external links will be han
 
 # Future extensions #
 
-Currently, a shorthand link pg:40429 will be translated to a link to the Project Gutenberg page for that book.
+Currently, a shorthand link `pg:40429` will be translated to a link to the Project Gutenberg page for that book.
 
-When an HTML version is available, it should also be possible to directly link into that book, e.g., pg:40429#ch6 should be automatically translated to:
+When an HTML version is available, it should also be possible to directly link into that book, e.g., `pg:40429#ch6` should be automatically translated to:
 
 > http://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
 

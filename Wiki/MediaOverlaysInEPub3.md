@@ -28,7 +28,7 @@ Based on a little reverse engineering of a working book (with the freely availab
 
 Have a structure like this, and is located in the same directory as the referenced HTML file.
 
-```
+```xml
 <smil 
     xmlns="http://www.w3.org/ns/SMIL" 
     xmlns:epub="http://www.idpf.org/2007/ops" version="3.0">
@@ -58,7 +58,7 @@ The actual audio files are in a subdirectory called `audio`.
 
 Add a number of media overlay metadata items; they reference items in the manifest.
 
-```
+```xml
 <meta property="media:duration" refines="#ch1">5:30:15</meta>
 <meta property="media:duration">5:30:15</meta>
 <meta property="media:narrator">Narrator Name</meta>
@@ -73,7 +73,7 @@ Add the `.smil` and audio files added to the ePub container:
 
 This also indicates how to handle fall-back media in an alternative format.
 
-```
+```xml
 <item id="ch1" href="chapter.smil" media-type="application/smil+xml"/>
 
 <item id="audio01" href="audio/chapter.mp3" fallback="audio02" media-type="audio/mpeg"/>
@@ -82,7 +82,7 @@ This also indicates how to handle fall-back media in an alternative format.
 
 Then also refer to the media-overlay in the entry for the original (text) items
 
-```
+```xml
 <item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml" media-overlay="ch1"/>
 ```
 
@@ -90,7 +90,7 @@ Then also refer to the media-overlay in the entry for the original (text) items
 
 Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the .smil file to use as an overlay.
 
-```
+```xml
 <div1 id="ch1" rend="media-overlay(chapter1.smil)">
 ```
 

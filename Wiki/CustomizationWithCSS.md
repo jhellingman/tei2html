@@ -46,25 +46,25 @@ Care need to be taken that ids used in this fashion meet both the syntax rules f
 
 Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` also generates additional class attributes for some types of elements. A complete overview will be given in the following table.
 
-| **TEI element**                    | **HTML Output**        | **Notes**                  |
-|:-----------------------------------|:-----------------------|:---------------------------|
-| _XPath_                          | _CSS Selector_       |                          |
-| `//front`                        | `.front`             | Front matter             |
-| `//back`                         | `.back`              | Back matter              |
-| `//div1`                         | `.div1`              | Similar for all `div`s   |
-| `//div1/*[not(preceding-sibling::p)]` | `.divHead`       | Typical heading material of a division |
-| `//div1/*[preceding-sibling-or-self::p]` | `.divBody`      | Typical body of a division |
-| `//p`                            | `p`                  | Paragraph                |
-| `//p[position() = 1]`            | `p.first`            | First paragraph (actual XPath more complex) |
-| `//figure`                       | `.figure`            | The actual `img` tag is nested in various `div`s |
-| `//lg[not(ancestor::lg)]`        | `.lgouter`           | Top level `lg` elements  |
-| `//lg[ancestor::lg]`             | `.lg`                | Nested `lg` elements     |
-| `//l`                            | `.line`              | Lines of verse           |
-| `//hi`                           | `i`                  | Default without `@rend`  |
-| `//hi[@rend='sc']`               | `.sc`                | On `span`                |
-| `//hi[@rend='bold']`             | `b`                  |                          |
-| `//hi[@rend='sup']`              | `sup`                | Superior text            |
-| `//pb`                           | `.pagenum`           | Value of `@n` placed in a `span` |
+| **TEI element**                          | **HTML Output** | **Notes**                                        |
+|:-----------------------------------------|:----------------|:-------------------------------------------------|
+| _XPath_                                  | _CSS Selector_  |                                                  |
+| `//front`                                | `.front`        | Front matter                                     |
+| `//back`                                 | `.back`         | Back matter                                      |
+| `//div1`                                 | `.div1`         | Similar for all `div`s                           |
+| `//div1/*[not(preceding-sibling::p)]`    | `.divHead`      | Typical heading material of a division           |
+| `//div1/*[preceding-sibling-or-self::p]` | `.divBody`      | Typical body of a division                       |
+| `//p`                                    | `p`             | Paragraph                                        |
+| `//p[position() = 1]`                    | `p.first`       | First paragraph (actual XPath more complex)      |
+| `//figure`                               | `.figure`       | The actual `img` tag is nested in various `div`s |
+| `//lg[not(ancestor::lg)]`                | `.lgouter`      | Top level `lg` elements                          |
+| `//lg[ancestor::lg]`                     | `.lg`           | Nested `lg` elements                             |
+| `//l`                                    | `.line`         | Lines of verse                                   |
+| `//hi`                                   | `i`             | Default without `@rend`                          |
+| `//hi[@rend='sc']`                       | `.sc`           | On `span`                                        |
+| `//hi[@rend='bold']`                     | `b`             |                                                  |
+| `//hi[@rend='sup']`                      | `sup`           | Superior text                                    |
+| `//pb`                                   | `.pagenum`      | Value of `@n` placed in a `span`                 |
 
 (_to be completed..._)
 
@@ -84,36 +84,36 @@ Since HTML support for several CSS attributes on the row level is limited, those
 
 Finally, rendering set at the cell level will override both column and row rendering.
 
-| **TEI Element**| **HTML Output** | **Notes** |
-|:---------------|:----------------|:----------|
-| `table`      | `<div class="table">` | Wrapper div, which will contain the caption and the table proper. |
-|              | `<table>`             | Actual table, `@rend` applied on this. |
-| `table/head` | `<h4 class="tablecaption">` | Header, inside wrapper div, outside table |
-| `row`        | `<tr>` |  |
-| `cell[@role='label']` | `<td>` | Even though this is a header, still a `<td>`. |
-| `cell`       | `<td>` |  |
+| **TEI Element**       | **HTML Output**             | **Notes**                                                         |
+|:----------------------|:----------------------------|:------------------------------------------------------------------|
+| `table`               | `<div class="table">`       | Wrapper div, which will contain the caption and the table proper. |
+|                       | `<table>`                   | Actual table, `@rend` applied on this.                            |
+| `table/head`          | `<h4 class="tablecaption">` | Header, inside wrapper div, outside table                         |
+| `row`                 | `<tr>`                      |                                                                   |
+| `cell[@role='label']` | `<td>`                      | Even though this is a header, still a `<td>`.                     |
+| `cell`                | `<td>`                      |                                                                   |
 
 Furthermore, cells get attributes to indicate whether they are the topmost, rightmost, bottommost or leftmost cell in a table. These can be used to set borders. (Note that those attributes take into account spans).
 
-| **position**  | **Cell in Head** | **Cell in Body** |
-|:--------------|:-----------------|:-----------------|
-| top | `cellHeadTop` | `cellTop` |
-| right | `cellHeadRight` | `cellRight` |
-| bottom | `cellHeadBottom` | `cellBottom` |
-| left | `cellHeadLeft` | `cellLeft` |
+| **position** | **Cell in Head** | **Cell in Body** |
+|:-------------|:-----------------|:-----------------|
+| top          | `cellHeadTop`    | `cellTop`        |
+| right        | `cellHeadRight`  | `cellRight`      |
+| bottom       | `cellHeadBottom` | `cellBottom`     |
+| left         | `cellHeadLeft`   | `cellLeft`       |
 
 
 ### Footnotes ###
 
 Footnotes can generate a range of elements in the output, depending on the output settings and format.
 
-| **HTML Output** | **Notes** |
-|:----------------|:----------|
-| _CSS Selector_|         |
-| `.noteref`    | The reference marker placed in the text and before the footnote |
+| **HTML Output**    | **Notes**                                                                 |
+|:-------------------|:--------------------------------------------------------------------------|
+| _CSS Selector_     |                                                                           |
+| `.noteref`         | The reference marker placed in the text and before the footnote           |
 | `.displayfootnote` | An inline `span` containing the contents of the footnote (for PDF output) |
-| `.footnotes`  | A `div` containing all footnotes for a piece of text |
-| `.fnsep`      | A `hr` to separate the footnotes from the text |
-| `.footnote`   | A `div` containing a single footnote |
+| `.footnotes`       | A `div` containing all footnotes for a piece of text                      |
+| `.fnsep`           | A `hr` to separate the footnotes from the text                            |
+| `.footnote`        | A `div` containing a single footnote                                      |
 
 Finally, you can always define a custom class attribute, using `rend="class(myClass)"` on your element, and use that in your custom CSS.

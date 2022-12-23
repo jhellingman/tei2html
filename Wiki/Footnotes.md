@@ -17,7 +17,7 @@ Notes, given in the element `<note>` are, by default, considered footnotes. That
 
 Footnotes appear at the bottom (or foot) of the page. Since HTML does not have the concept of a page, `tei2html` collects all footnotes at the end of the `div0` or `div1` element they appear in.
 
-If this is undesired, you can also explicity call for the footnotes to be rendered, by inserting a `<divGen type="footnotes">`, which will generate the footnotes in a generate section. If only the body of that section is desired, use `<divGen type="footnotebody">`.
+If this is undesired, you can also explicitly call for the footnotes to be rendered, by inserting a `<divGen type="footnotes">`, which will generate the footnotes in a generate section. If only the body of that section is desired, use `<divGen type="footnotebody">`.
 
 Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text.
 

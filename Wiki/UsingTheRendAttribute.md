@@ -8,13 +8,13 @@ Note that according to the TEI Guidelines, the rendering attributes are intended
 
 Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient most of the time. The pre-defined rendering keywords are often element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.
 
-| **Element** | **Recognized `@rend` values** |
-|:------------|:------------------------------|
-| `hi`        | `italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex` |
-| `figure`    | `center` (_default_) `left` `right` `inline` |
-| `p`         | `block` `center` `left` (_default_) `right` `indent` `noindent` |
-| `q`         | `block` |
-| `list`      | `number` `bullet` `none` (_default_) |
+| **Element** | **Recognized `@rend` values**                                                      |
+|:------------|:-----------------------------------------------------------------------------------|
+| `hi`        | `italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex`                       |
+| `figure`    | `center` (_default_) `left` `right` `inline`                                       |
+| `p`         | `block` `center` `left` (_default_) `right` `indent` `noindent`                    |
+| `q`         | `block`                                                                            |
+| `list`      | `number` `bullet` `none` (_default_)                                               |
 | _Any_       | _Any_ (_these will be added to the class attribute of the output element in HTML_) |
 
 ## Rendition Ladders ##
@@ -49,19 +49,19 @@ In a number of places, rendition ladders are interpreted by `tei2html` directly.
 
 The following keys and values are supported: (Note that this list is not exhaustive, and the full list of options will be indicated with each element.)
 
-| **Element** | **Key** | **Value** | **Example** |
-|:------------|:--------|:----------|:------------|
-| `text` | `stylesheet` | name of CSS stylesheet | `style/classic.css` |
-| _Any_ | `font` | `italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) | `<hi rend="font(bold)">` |
-| `p`, `q` | `align` | `right`, `left`, `center`, `block` (that is, justified) | `<p rend="align(block)">` |
-| `p`, `l` | `indent` | The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. | `<l rend="indent(2)">` |
-| _Any_ | `link`   | any url, rendered as link to the indicated url. | `<figure rend="link(images/a.jpg)">` |
-| `figure`, `head`, `cell` | `image`  | any url, rendered as in-line image, obtained from the indicated url. When used on a `head` element, the image appears above the head, when used on a `cell` element, the image appears in the table-cell (typically used to pull in large braces spanning cells). | `<figure rend="image(images/a.jpg)">` |
-| `figure` | `float`  | The place to float in image, table, etc. Possible values: left, right. | `<figure rend="float(left)">` |
-| `figure` | `hover-overlay` | In HTML output, when the mouse hovers over the image, the alternative image is shown (using CSS only). | `<figure rend="hover-overlay(images/overlay.jpg)">` |
-| `table`, `list` | `columns` | Set the element in multiple columns. May be applied to tables and lists. |  `<list rend="columns(2)">...</list>` |
-| _Any_ | `class` | Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. | `<p rend="class(myClass)">` |
-| `l` | `hemistich` | Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. | `<l rend="hemistich(^1)">`, `<l rend="hemistich(#vs21)">`, `<l rend="hemistich(Content)">` |
+| **Element**              | **Key**         | **Value**                                                                                                                                                                                                                                                                                               | **Example**                                                                                |
+|:-------------------------|:----------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
+| `text`                   | `stylesheet`    | name of CSS stylesheet                                                                                                                                                                                                                                                                                  | `style/classic.css`                                                                        |
+| _Any_                    | `font`          | `italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS)                                                                                                                                                                      | `<hi rend="font(bold)">`                                                                   |
+| `p`, `q`                 | `align`         | `right`, `left`, `center`, `block` (that is, justified)                                                                                                                                                                                                                                                 | `<p rend="align(block)">`                                                                  |
+| `p`, `l`                 | `indent`        | The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m.                                                                                                                                                                                         | `<l rend="indent(2)">`                                                                     |
+| _Any_                    | `link`          | any url, rendered as link to the indicated url.                                                                                                                                                                                                                                                         | `<figure rend="link(images/a.jpg)">`                                                       |
+| `figure`, `head`, `cell` | `image`         | any url, rendered as in-line image, obtained from the indicated url. When used on a `head` element, the image appears above the head, when used on a `cell` element, the image appears in the table-cell (typically used to pull in large braces spanning cells).                                       | `<figure rend="image(images/a.jpg)">`                                                      |
+| `figure`                 | `float`         | The place to float in image, table, etc. Possible values: left, right.                                                                                                                                                                                                                                  | `<figure rend="float(left)">`                                                              |
+| `figure`                 | `hover-overlay` | In HTML output, when the mouse hovers over the image, the alternative image is shown (using CSS only).                                                                                                                                                                                                  | `<figure rend="hover-overlay(images/overlay.jpg)">`                                        |
+| `table`, `list`          | `columns`       | Set the element in multiple columns. May be applied to tables and lists.                                                                                                                                                                                                                                | `<list rend="columns(2)">...</list>`                                                       |
+| _Any_                    | `class`         | Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects.                                                                                                                                                        | `<p rend="class(myClass)">`                                                                |
+| `l`                      | `hemistich`     | Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. | `<l rend="hemistich(^1)">`, `<l rend="hemistich(#vs21)">`, `<l rend="hemistich(Content)">` |
 
 ### Using `@style` and `@rendition` ###
 

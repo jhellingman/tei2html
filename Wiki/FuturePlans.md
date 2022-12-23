@@ -20,7 +20,7 @@ For some background, read the [P5 migration guidelines](http://www.tei-c.org/Gui
 
 Most of the changes are additions, which can be handled quite transparently.
 
-## Support for Customization ##
+## Support for Customization (Partly DONE) ##
 
 Currently, fairly limited customization options exists, and they are only accessible either via parameters to the XSLT stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
 
@@ -28,7 +28,7 @@ Note that layout customization is best handled by using custom CSS.
 
 The file would be named `tei2html.config` and would look something like:
 
-```
+```xml
 <tei2html.config>
    <language>en</language>     
    <stylesheet>style.css</stylesheet>         

@@ -42,7 +42,7 @@ New metadata uses the `<meta>` tag (samples taken from draft ePub 3.0 specificat
 
 `<meta>` elements with the `@about` attribute give further information on the metadata.
 
-```
+```xml
 <metadata>
     <meta property="dcterms:identifier" id="dcterms-id">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</meta>
     <meta about="#pub-id" property="scheme">uuid</meta>
@@ -70,7 +70,7 @@ New metadata uses the `<meta>` tag (samples taken from draft ePub 3.0 specificat
 
 Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer` attribute. (I think it is unlikely readers will actually use this; library management software might do so.)
 
-```
+```xml
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:identifier id="pub-id" prefer="uuid">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</dc:identifier>
     <meta property="dcterms:identifier" id="uuid">urn:uuid:54dc9f06-3174-4b6b-a29a-0dd1fa0969e4</meta>
@@ -79,7 +79,7 @@ Old-fashioned metadata can be linked to their 3.0 equivalents using the `@prefer
 
 Note that the identifier indicated by the `@unique-identifier` attribute on the `<package>` element combined with the last modification date is used to generate a package id.
 
-```
+```xml
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:identifier id="pub-id">urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809</dc:identifier>
     
@@ -96,10 +96,10 @@ Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-
 
 The manifest now has [manifest item properties](http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values), to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g. mathml, scripted, remove-content, SVG).
 
-```
-<item properties="nav" id="toc" href="contents.xhtml" media-type="application/xhtml+xml" />
+```xml
+<item properties="nav" id="toc" href="contents.xhtml" media-type="application/xhtml+xml"/>
 ...
-<item properties="cover-image" id="cover" href="cover.svg" media-type="image/svg+xml" />
+<item properties="cover-image" id="cover" href="cover.svg" media-type="image/svg+xml"/>
 ```
 
 # Navigation Document #

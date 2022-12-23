@@ -10,7 +10,7 @@ It is only necessary to specify those items that differ from the default in your
 
 The default configuration file is:
 
-```
+```xml
 <tei2html.config>
     <debug>false</debug>                                            <!-- Use debug mode. -->
     <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->

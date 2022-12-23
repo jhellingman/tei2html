@@ -9,7 +9,7 @@ References:
 
 When a page-break occurs between two divisions, it can be encoded in various was, e.g., before the closing tag:
 
-```
+```xml
 <pb n="123"/>
 </div1>
 <div1>
@@ -17,7 +17,7 @@ When a page-break occurs between two divisions, it can be encoded in various was
 
 Between the closing and opening tag:
 
-```
+```xml
 </div1>
 <pb n="123"/>
 <div1>
@@ -25,7 +25,7 @@ Between the closing and opening tag:
 
 After the opening tag:
 
-```
+```xml
 </div1>
 <div1>
 <pb n="123"/>
