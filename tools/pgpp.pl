@@ -40,11 +40,11 @@ while (<INPUTFILE>) {
 
     # Replace PGDP page-separators (preserving proofreader names):
     # $_ =~ s/^-*File: (0*)([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
-    $_ =~ s/^-*File: (0*)([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]?)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=$2 facs="f:$1$2">/g;
+    $_ =~ s/^-*File: ([0fp]*)([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]?)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=$2 facs="f:$1$2">/g;
     # For DP-EU:
-    $_ =~ s/^-*File: (0*)([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]+)\\.*$/<pb n=$2 facs="f:$1$2">/g;
+    $_ =~ s/^-*File: ([0fp]*)([0-9]+)\.(png|jpg)-*\\([^\\]+)\\([^\\]+)\\.*$/<pb n=$2 facs="f:$1$2">/g;
     # For omitted proofreader names.
-    $_ =~ s/^-*File: (0*)([0-9]+)\.(png|jpg)-*$/<pb n=$2 facs="f:$1$2">/g;
+    $_ =~ s/^-*File: ([0fp]*)([0-9]+)\.(png|jpg)-*$/<pb n=$2 facs="f:$1$2">/g;
 
     # Replace footnote indicators:
     $_ =~ s/\[([0-9]+)\]/<note n=$1><\/note>/g;

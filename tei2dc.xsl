@@ -33,6 +33,11 @@
     <xsl:variable name="TEI" select="TEI.2 | TEI"/>
 
     <xsl:template match="TEI.2 | TEI">
+        <xsl:comment>
+            <xsl:text> Generated on </xsl:text>
+            <xsl:value-of select="f:utc-timestamp()"/>
+            <xsl:text>. </xsl:text>
+        </xsl:comment>
         <rdf:RDF>
             <rdf:Description>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>

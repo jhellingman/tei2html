@@ -732,7 +732,7 @@ sub reportSQL() {
 
     print SQLFILE "DELETE FROM Word WHERE idbook = $idBook;\n";
     print SQLFILE "DELETE FROM Book WHERE idbook = $idBook;\n";
-    print SQLFILE "INSERT INTO Book (idbook, title, author) VALUES ($idBook, \'$docTitle\', \'$docAuthor\');\n";
+    print SQLFILE "INSERT INTO Book (idbook, title, author, file) VALUES ($idBook, \'$docTitle\', \'$docAuthor\', \'$inputFile\');\n";
     print SQLFILE "\n\n\n";
 
     reportWordsSQL();

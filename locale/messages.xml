@@ -1657,6 +1657,8 @@
         <msg:message name="na">Nauruaans</msg:message>
         <msg:message name="ne">Nepalees</msg:message>
         <msg:message name="nl">Nederlands</msg:message>
+        <msg:message name="nl-1500">Nederlands (16de-eeuws)</msg:message>
+        <msg:message name="nl-1600">Nederlands (17de-eeuws)</msg:message>
         <msg:message name="nl-1700">Nederlands (18de-eeuws)</msg:message>
         <msg:message name="nl-1800">Nederlands (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Nederlands (Spelling De Vries-Te Winkel)</msg:message>

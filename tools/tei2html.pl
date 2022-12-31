@@ -37,6 +37,7 @@ my $jeebies   = "C:\\Bin\\jeebies";                                       # see 
 my $gutcheck  = "gutcheck";
 my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
 my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $mariadb   = "\"C:\\Program Files\\MariaDB 10.10\\bin\\mariadb.exe\"";
 
 my $LOG_LEVEL_ERROR = 1;
 my $LOG_LEVEL_WARNING = 2;
@@ -758,6 +759,12 @@ sub makeWordlist($$) {
     trace("Report on word usage...");
     system ("perl $toolsdir/ucwords.pl -s $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
+
+    if ($pgNumber > 0 && -e "words.sql") {
+        trace("Store word usage in words database");
+        system ("$mariadb -D words < words.sql");
+    }
+
     removeFile($tmpFile);
 
     # Create a text heat map.
