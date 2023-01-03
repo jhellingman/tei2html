@@ -203,8 +203,8 @@
 
     <xd:doc>
         <xd:short>Insert footnotes that belong to a div0.</xd:short>
-        <xd:detail>These should only be inserted if not done so earlier (which happens if the div0 contains
-        a div1 element).</xd:detail>
+        <xd:detail>These should only be inserted if not done so earlier (which happens if the <code>div0</code> contains
+        a <code>div1</code> element).</xd:detail>
     </xd:doc>
 
     <xsl:template name="insert-div0-footnotes">

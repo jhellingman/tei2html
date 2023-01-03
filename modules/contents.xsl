@@ -889,7 +889,7 @@
         </xd:detail>
     </xd:doc>
 
-    <!-- collect footnotes in a separate section, sorted by div1 -->
+    <!-- collect footnotes in a separate section, optionally divided by division -->
     <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
         <div class="div1 notes">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -912,11 +912,25 @@
         <xd:short>Generate the footnote section (implementation).</xd:short>
         <xd:detail>
             <p>Generate the footnote section. Collect all footnotes in the text,
-            and present them, divided by division.</p>
+            and present them, optionally divided by division, depending on how
+            the footnote counter is configured.</p>
         </xd:detail>
     </xd:doc>
 
+
     <xsl:template name="footnotes-body">
+        <xsl:choose>
+            <xsl:when test="f:get-setting('notes.foot.counter') = 'text'">
+                <xsl:call-template name="footnotes-body-single"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:call-template name="footnotes-body-by-division"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="footnotes-body-by-division">
         <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes"/>
         <xsl:choose>
             <xsl:when test="//body/div0">
@@ -960,6 +974,33 @@
             </xsl:if>
             <xsl:call-template name="generate-single-head"/>
         </h3>
+    </xsl:template>
+
+
+    <xsl:template name="footnotes-body-single">
+        <div class="div2 notes">
+            <xsl:apply-templates select="//front/div1[not(ancestor::q)]" mode="divgen-footnotes-single"/>
+            <xsl:choose>
+                <xsl:when test="//body/div0">
+                    <xsl:apply-templates select="//body/div0[not(ancestor::q)]" mode="divgen-footnotes-single"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="//body/div1[not(ancestor::q)]" mode="divgen-footnotes-single"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="//back/div1[not(ancestor::q)]" mode="divgen-footnotes-single"/>
+        </div>
+    </xsl:template>
+
+
+    <xsl:template match="div0" mode="divgen-footnotes-single">
+        <xsl:apply-templates select=".//note[f:is-footnote(.) and not(ancestor::div1) and not(@sameAs)]" mode="footnotes"/>
+        <xsl:apply-templates select="div1[not(ancestor::q)]" mode="divgen-footnotes-single"/>
+    </xsl:template>
+
+
+    <xsl:template match="div1" mode="divgen-footnotes-single">
+        <xsl:apply-templates select=".//note[f:is-footnote(.) and not(@sameAs)]" mode="footnotes"/>
     </xsl:template>
 
 

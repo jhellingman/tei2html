@@ -452,6 +452,14 @@ sub makeMetadata($) {
 
     trace("Extract metadata to metadata.xml...");
     system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+
+    trace("Extract metadata to metadata.sql...");
+    system ("$saxon $xmlFilename $xsldir/tei2sql.xsl > metadata.sql");
+
+    if ($pgNumber > 0 && -e "metadata.sql") {
+        trace("Store metadata in words database");
+        system ("$mariadb -D words < metadata.sql");
+    }
 }
 
 
