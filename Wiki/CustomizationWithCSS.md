@@ -2,7 +2,7 @@
 
 Since many details of the layout of the output (For both HTML and PDF) are defined in CSS, it is very well possible to define custom CSS to customize the layout of your output.
 
-Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `@rend` attributes in the source document.
+Rules in custom CSS files take precedence over those used by default, but will be overridden by the generated CSS derived from `@rend` or `@style` attributes in the source document.
 
 Order of precedence of renditions:
 
@@ -52,8 +52,8 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 | `//front`                                | `.front`        | Front matter                                     |
 | `//back`                                 | `.back`         | Back matter                                      |
 | `//div1`                                 | `.div1`         | Similar for all `div`s                           |
-| `//div1/*[not(preceding-sibling::p)]`    | `.divHead`      | Typical heading material of a division           |
-| `//div1/*[preceding-sibling-or-self::p]` | `.divBody`      | Typical body of a division                       |
+| `//div1/*[not(preceding-sibling::p)]`    | `div.divHead`   | Typical heading material of a division           |
+| `//div1/*[preceding-sibling-or-self::p]` | `div.divBody`   | Typical body of a division                       |
 | `//p`                                    | `p`             | Paragraph                                        |
 | `//p[position() = 1]`                    | `p.first`       | First paragraph (actual XPath more complex)      |
 | `//figure`                               | `.figure`       | The actual `img` tag is nested in various `div`s |
@@ -116,4 +116,4 @@ Footnotes can generate a range of elements in the output, depending on the outpu
 | `.fnsep`           | A `hr` to separate the footnotes from the text                            |
 | `.footnote`        | A `div` containing a single footnote                                      |
 
-Finally, you can always define a custom class attribute, using `rend="class(myClass)"` on your element, and use that in your custom CSS.
+Finally, you can always define a custom class attribute, using `rend="class(myClass)"` or simply `rend=myClass` on your element, and use that in your custom CSS.
