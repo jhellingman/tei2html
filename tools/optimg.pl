@@ -152,7 +152,7 @@ sub main() {
 
     list_recursively($directory);
 
-    if ($verbose) {
+    if ($verbose != 0) {
         report();
     }
 }

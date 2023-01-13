@@ -26,7 +26,7 @@ my $makeHtml = 0;       # Generate HTML files.
 my $makeEpub = 0;       # Generate Epub files.
 my $makeChecks = 0;
 my $download = 0;       # Download posted files from Project Gutenberg.
-my $showHelp            = 0;
+my $showHelp = 0;
 my $onlyPosted = 0;     # Only report on posted files (version >= 1.0)
 my $makeReports = 0;
 
@@ -47,7 +47,7 @@ if ($showHelp == 1) {
     print "Usage: pgreport.pl [-fmvhdq] <directory>\n\n";
     print "Options:\n";
     print "    f         force: regenerate XML files used to extract information from.\n";
-    print "    m         force more: also force regeneration of HTML files.\n";
+    print "    m         force more: also force regeneration of indicated file types.\n";
     print "    v         run checks on TEI files.\n";
     print "    r         make word-usage report.\n";
     print "    h         produce derived HTML file for each TEI file.\n";
@@ -263,31 +263,38 @@ sub handleTeiFile {
         $specialProcessing = 1;
     }
 
-    my $xmlFileName = $filePath . "$baseName.xml";
-    my $textFileName = $filePath . "$baseName.txt";
+    my $xmlFileName      = $filePath . "$baseName.xml";
+    my $textFileName     = $filePath . "$baseName.txt";
     my $utf8TextFileName = $filePath . "$baseName-utf8.txt";
-    my $htmlFileName = $filePath . "$baseName.html";
-    my $wordsFileName = $filePath . "$baseName-words.html";
-    my $checksFileName = $filePath . "$baseName-checks.html";
+    my $htmlFileName     = $filePath . "$baseName.html";
+    my $epubFileName     = $filePath . "$baseName.epub";
+    my $wordsFileName    = $filePath . "$baseName-words.html";
+    my $checksFileName   = $filePath . "$baseName-checks.html";
+
+    # Determine needs
+    my $needXml     = isNewer($fullName, $xmlFileName);
+    my $needHtml    = $makeHtml != 0 && isNewer($fullName, $htmlFileName);
+    my $needReports = $makeReports != 0 && isNewer($fullName, $wordsFileName);
+    my $needChecks  = $makeChecks != 0 && isNewer($fullName, $checksFileName);
+    my $needEpub    = $makeEpub != 0 && isNewer($fullName, $epubFileName);
 
     if (!$excluded{$baseName} == 1 && defined($version)) {
         if ($force != 0
-                || !-e $xmlFileName
-                || !-e $wordsFileName
-                || !-e $checksFileName
-                || !-e $wordsFileName
-                || ($makeHtml != 0 && !-e $htmlFileName)
-                || isNewer($fullName, $xmlFileName)) {
+                || $needXml != 0
+                || $needHtml != 0
+                || $needReports != 0
+                || $needChecks != 0
+                || $needEpub != 0) {
             my $cwd = getcwd;
             chdir ($filePath);
             if ($specialProcessing == 1) {
                 # system ("perl -S process.pl");
             } else {
-                my $forceFlag = $forceMore == 0 ? '' : ' -f ';
-                my $htmlFlag = $makeHtml == 0 ? '' : ' -h ';
-                my $epubFlag = $makeEpub == 0 ? '' : ' -e ';
-                my $reportFlag = $makeReports == 0 ? '' : ' -r ';
-                my $checksFlag = $makeChecks == 0 ? '' : ' -v ';
+                my $forceFlag  = $forceMore   == 0 ? '' : ' -f ';
+                my $htmlFlag   = $needHtml    == 0 ? '' : ' -h ';
+                my $epubFlag   = $needEpub    == 0 ? '' : ' -e ';
+                my $reportFlag = $needReports == 0 ? '' : ' -r ';
+                my $checksFlag = $needChecks  == 0 ? '' : ' -v ';
                 system ("perl -S tei2html.pl -x -l=1 $checksFlag $reportFlag $htmlFlag $epubFlag $forceFlag $fileName$suffix");
             }
             chdir ($cwd);
@@ -681,5 +688,9 @@ sub isNewer {
     my $file1 = shift;
     my $file2 = shift;
 
-    return (-e $file1 && -e $file2 && stat($file1)->mtime > stat($file2)->mtime)
+    if (!-e $file2) {
+        return 1;
+    }
+
+    return (-e $file1 && stat($file1)->mtime > stat($file2)->mtime)
 }

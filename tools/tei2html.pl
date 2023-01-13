@@ -51,7 +51,7 @@ my $atSize              = 1;
 my $clean               = 0;
 my $configurationFile   = "tei2html.config";
 my $customOption        = "";
-my $customStylesheet    = "custom.css";
+my $customStylesheet    = "custom.css"; # Deprecated: use CSS in a tagsDecl instead.
 my $debug               = 0;
 my $epubVersion         = "3.0.1";
 my $explicitMakeText    = 0;
@@ -62,6 +62,7 @@ my $kwicMixup           = "";
 my $kwicSort            = "";
 my $kwicVariants        = 1;
 my $kwicWords           = "";
+
 my $makeEpub            = 0;
 my $makeHeatMap         = 0;
 my $makeHtml            = 0;
@@ -70,10 +71,12 @@ my $makeKwic            = 0;
 my $makeP5              = 0;
 my $makePdf             = 0;
 my $makePGTEI           = 0;
+my $makeSQL             = 0;
 my $makeText            = 0;
 my $makeWordlist        = 0;
 my $makeXML             = 0;
 my $makeZip             = 0;
+
 my $noTranscription     = 0;
 my $noTranscriptionPopups = 0;
 my $pageWidth           = 72;
@@ -83,7 +86,7 @@ my $showHelp            = 0;
 my $trace               = 0;
 my $useTidy             = 0;
 my $useUnicode          = 0;
-my $logLevel            = 3;  # 1: Error; 2: Warning; 3: Info; 4: Trace.
+my $logLevel            = 3;    # 1: Error; 2: Warning; 3: Info; 4: Trace.
 
 GetOptions(
     '5' => \$makeP5,
@@ -125,23 +128,13 @@ GetOptions(
     'notranscriptionpopups' => \$noTranscriptionPopups,
     'pagewidth=i' => \$pageWidth,
     'profile' => \$profile,
+    'sql' => \$makeSQL,
     'tidy'=> \$useTidy,
     'trace' => \$trace
     );
 
-my $inputFile = '';
-if (defined $ARGV[0]) {
-    $inputFile = $ARGV[0];
-}
 
-# Metadata
-
-my $pgNumber = "00000";
-my $mainTitle = "";
-my $shortTitle = "";
-my $author = "";
-my $language = "";
-my $releaseDate = "";
+my $inputFile = defined $ARGV[0] ? $ARGV[0] : '';
 
 
 if ($showHelp == 1) {
@@ -186,6 +179,7 @@ if ($showHelp == 1) {
     print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
     print "    pagewidth=<int>                 Set the page width (default: 72 characters).\n";
     print "    profile                         Profile mode.\n";
+    print "    sql                             Generate metadata and wordlists in SQL format and attempt to store them.\n";
     print "    trace                           Use XSLT in trace mode.\n";
 
     exit(0);
@@ -216,6 +210,19 @@ if ($debug == 1) {
 my $tmpBase = 'tmp';
 my $tmpCount = 0;
 
+# Files
+
+
+
+# Metadata
+
+my $pgNumber = "00000";
+my $mainTitle = "";
+my $shortTitle = "";
+my $author = "";
+my $language = "";
+my $releaseDate = "";
+
 processFiles();
 
 
@@ -223,7 +230,7 @@ sub processFiles {
     if ($inputFile eq '') {
         my ($directory) = '.';
         my @files = ();
-        opendir(DIRECTORY, $directory) or die "Cannot open directory $directory!\n";
+        opendir(DIRECTORY, $directory) or fatal("Cannot open directory $directory!");
         @files = readdir(DIRECTORY);
         closedir(DIRECTORY);
 
@@ -247,55 +254,24 @@ sub processFile($) {
 
     info("=== Start! =================================================================");
 
-    if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
-        die "File: '$filename' doesn't look like a TEI file\n";
-    }
-    info("Process TEI file $filename");
+    my ($basename, $version, $format) = analyzeFilename($filename);
 
-    $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
-    my $basename = $1;
-    my $version = $2;
-    my $format = $3;
-
-    if ($basename eq '') {
-        $filename =~ /^(.+)\.(tei|xml)$/;
-        $basename = $1;
-        $version = '0.0';
-        $format = $2;
-    }
-
-    if (!defined $version) {
-        $version = '0.0';
-    }
+    info("Process $filename");
 
     if ($version >= 1.0) {
         $makeText = 0;
 
-        # Warn about processed files missing
-        if (! -e "Processed/$basename.xml") {
-            warning("Processed xml version is missing!");
-            $makeXML = 1;
-        }
-        if (! -e "Processed/$basename.html") {
-            warning("Processed HTML version is missing!");
-            $makeHtml = 1;
-        }
-        if (! -e "Processed/$basename.epub") {
-            warning("Processed ePub version is missing!");
-            $makeEpub = 1;
-        }
-
-        # Warn about processed files being out-of-date.
+        # Warn about processed files missing or being out-of-date.
         if (isNewer($filename, "Processed/$basename.xml")) {
-            warning("Processed xml version is out-of-date!");
+            warning("Processed/$basename.xml is missing or out-of-date!");
             $makeXML = 1;
         }
         if (isNewer($filename, "Processed/$basename.html")) {
-            warning("Processed HTML version is out-of-date!");
+            warning("Processed/$basename.html is missing or out-of-date!");
             $makeHtml = 1;
         }
         if (isNewer($filename, "Processed/$basename.epub")) {
-            warning("Processed ePub version is out-of-date!");
+            warning("Processed/$basename.epub is missing or out-of-date!");
             $makeEpub = 1;
         }
     }
@@ -327,40 +303,73 @@ sub processFile($) {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $runChecks && runChecks($basename, $filename);
+    $runChecks    && runChecks($basename,    $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
-
-    $makeHtml && makeHtml($basename, $preprocessedXmlFilename);
-    $makeHtml5 && makeHtml5($basename, $preprocessedXmlFilename);
-    $makeEpub && makeEpub($basename, $preprocessedXmlFilename);
-    $makePdf  && makePdf($basename,  $preprocessedXmlFilename);
-    $makeKwic && makeKwic($basename, $preprocessedXmlFilename);
-    $makeText && makeText($basename, $filename);
-    $makeP5   && makeP5($basename, $preprocessedXmlFilename);
+    $makeHtml     && makeHtml($basename,     $preprocessedXmlFilename);
+    $makeHtml5    && makeHtml5($basename,    $preprocessedXmlFilename);
+    $makeEpub     && makeEpub($basename,     $preprocessedXmlFilename);
+    $makePdf      && makePdf($basename,      $preprocessedXmlFilename);
+    $makeKwic     && makeKwic($basename,     $preprocessedXmlFilename);
+    $makeText     && makeText($basename,     $filename);
+    $makeP5       && makeP5($basename,       $preprocessedXmlFilename);
+    $makeSQL      && makeSql($preprocessedXmlFilename);
 
     $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
-    if ($makeZip == 1 && $pgNumber > 0) {
-        trace("Prepare a zip file for (re-)submission to Project Gutenberg");
-        makeZip($basename);
-    }
+    $makeZip == 1 && $pgNumber > 0 && makeZip($basename);
 
-    if ($clean == 1) {
-        removeFile($includedXmlFilename);
-        removeFile($preprocessedXmlFilename);
-
-        removeFile("$basename.gutcheck");
-        removeFile("$basename-final.gutcheck");
-        removeFile("$basename.jeebies");
-        removeFile("$basename-epubcheck.err");
-
-        # removeFile("$basename-words.html");
-        removeFile("$basename-checks.html");
-        removeFile("$basename-$version.tei.err");
-        removeFile("issues.xml");
-    }
+    $clean && clean($basename, $version); 
 
     info("=== Done! ==================================================================");
+}
+
+
+sub analyzeFilename($) {
+    my $filename = shift;
+
+    if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
+        fatal("File: '$filename' doesn't look like a TEI file.");
+    }
+
+    $filename =~ /^([A-Za-z0-9-]*?)(?:-([0-9]+\.[0-9]+))?\.(tei|xml)$/;
+    my $basename = $1;
+    my $version = $2;
+    my $format = $3;
+
+    if ($basename eq '') {
+        $filename =~ /^(.+)\.(tei|xml)$/;
+        $basename = $1;
+        $version = '0.0';
+        $format = $2;
+    }
+
+    if (!defined $version) {
+        $version = '0.0';
+    }
+
+    return ($basename, $version, $format);
+}
+
+
+sub clean($$) {
+    my $basename = shift;
+    my $version = shift;
+
+    trace("Remove generated files");
+
+    removeFile("$basename-included.xml");
+    removeFile("$basename-preprocessed.xml");
+    removeFile("$basename.gutcheck");
+    removeFile("$basename-final.gutcheck");
+    removeFile("$basename.jeebies");
+    removeFile("$basename-epubcheck.err");
+
+    # removeFile("$basename-words.html");
+    removeFile("$basename-checks.html");
+    removeFile("$basename-$version.tei.err");
+    removeFile("issues.xml");
+    removeFile("metadata.sql");
+    removeFile("words.sql");
 }
 
 
@@ -392,8 +401,15 @@ sub error($) {
   }
 }
 
+sub fatal($) {
+  my $message = shift;
+  die "FATAL: $message\n";
+}
+
+
 sub removeFile($) {
     my $fileToRemove = shift;
+
     !$debug || print "DEBUG: Removing file: $fileToRemove.\n";
     $debug || unlink($fileToRemove);
 }
@@ -452,6 +468,16 @@ sub makeMetadata($) {
 
     trace("Extract metadata to metadata.xml...");
     system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+}
+
+
+sub makeSql($) {
+    my $xmlFilename = shift;
+
+    if ($force == 0 && isNewer('metadata.sql', $xmlFilename)) {
+        trace("Skip create metadata in SQL because 'metadata.sql' is newer than '$xmlFilename'.");
+        return;
+    }
 
     trace("Extract metadata to metadata.sql...");
     system ("$saxon $xmlFilename $xsldir/tei2sql.xsl > metadata.sql");
@@ -531,9 +557,9 @@ sub determineKwicFilename($) {
 
 
 sub makeQrCode($) {
-    my $pgNumber = shift;
+    my $number = shift;
 
-    if ($pgNumber > 0) {
+    if ($number > 0) {
         my $imageDir = '.';
         if (-d 'images') {
             $imageDir = 'images';
@@ -541,32 +567,31 @@ sub makeQrCode($) {
             $imageDir = 'Processed/images';
         }
 
-        # my $qrImage = $pgNumber > 64449 ? 'qr' . $pgNumber . '.png' : 'qrcode.png';
         if ($atSize > 0) {
-            makeQrCodeAtSize($pgNumber, $imageDir, $atSize * 4);
+            makeQrCodeAtSize($number, $imageDir, $atSize * 4);
         }
 
         if (-d 'Processed/images@1') {
-            makeQrCodeAtSize($pgNumber, 'Processed/images@1', 4);
+            makeQrCodeAtSize($number, 'Processed/images@1', 4);
         }
 
         if (-d 'Processed/images@2') {
-            makeQrCodeAtSize($pgNumber, 'Processed/images@2', 8);
+            makeQrCodeAtSize($number, 'Processed/images@2', 8);
         }
     }
 }
 
 
 sub makeQrCodeAtSize($$) {
-    my $pgNumber = shift;
+    my $number = shift;
     my $imageDir = shift;
     my $scale = shift;
 
-    my $file = $imageDir . '/qr' . $pgNumber . '.png';
+    my $file = $imageDir . '/qr' . $number . '.png';
 
     if (not -e $file) {
         # Generate a QR code with a transparent background.
-        system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$pgNumber");
+        system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$number");
 
         # Optimize the generated QR code.
         my $newFile = "$imageDir/qrcode-optimized.png";
@@ -763,17 +788,18 @@ sub makeWordlist($$) {
     my $tmpFile = temporaryFile('report', '.html');
     my $options = $debug ? ' -v ' : '';
     $options .= $makeHeatMap ? ' -m ' : '';
+    $options .= $makeSQL ? ' -s ' : '';
 
     trace("Report on word usage...");
-    system ("perl $toolsdir/ucwords.pl -s $options $xmlFile > $tmpFile");
+    system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
+
+    removeFile($tmpFile);
 
     if ($pgNumber > 0 && -e "words.sql") {
         trace("Store word usage in words database");
         system ("$mariadb -D words < words.sql");
     }
-
-    removeFile($tmpFile);
 
     # Create a text heat map.
     if (-f 'heatmap.xml') {
@@ -839,6 +865,8 @@ sub determineSaxonParameters() {
 sub makeZip($) {
     my $basename = shift;
 
+    trace("Prepare a zip file for (re-)submission to Project Gutenberg");
+
     if (!-f $pgNumber) {
         mkdir $pgNumber;
     }
@@ -881,7 +909,7 @@ sub makeZip($) {
 #
 sub extractMetadata($) {
     my $file = shift;
-    open(PGFILE, $file) || die("Could not open input file $file to extract metadata.");
+    open(PGFILE, $file) || fatal("Could not open input file $file to extract metadata.");
 
     # Skip upto start of actual text.
     while (<PGFILE>) {
@@ -950,7 +978,7 @@ sub extractEntities($) {
     my %entityHash = ();
     my $entityPattern = "\&([a-z0-9._-]+);";
 
-    open(PGFILE, $file) || die("Could not open input file $file");
+    open(PGFILE, $file) || fatal("Could not open input file $file");
 
     while (<PGFILE>) {
         my $remainder = $_;
@@ -1062,6 +1090,10 @@ sub isNewer($$) {
     my $derivedFile = shift;
     my $sourceFile = shift;
 
+    if (!-e $derivedFile || -s $derivedFile == 0) {
+        return 0;
+    }
+
     return (-e $derivedFile && -s $derivedFile != 0 && -e $sourceFile && stat($derivedFile)->mtime > stat($sourceFile)->mtime);
 }
 
@@ -1104,12 +1136,9 @@ sub determineAtSize() {
     # Use eval, so we can recover from fatal parse errors in XML:XPath.
     eval {
         my $xpath = XML::XPath->new(filename => 'tei2html.config');
-
         my $scaleNode = $xpath->find('/tei2html.config/images.scale');
         $scale = $scaleNode->string_value();
-
         $xpath->cleanup();
-
         1;
     } or do {
         error("Problem parsing tei2html.config.");
