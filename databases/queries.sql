@@ -3,7 +3,7 @@
 -- Books
 select *
  from book
-where title like '%Lister%'
+where title like '%Tagalog%'
 order by title;
 
 
@@ -56,7 +56,8 @@ select
     language,
     count(1) as distinct_words,
     sum(count) as total_words
-from word w1 group by language;
+from word w1 group by language
+order by distinct_words desc;
 
 
 -- Consolidate persons based on viaf ID
