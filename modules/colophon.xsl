@@ -3,6 +3,11 @@
 
     <!ENTITY lsquo      "&#x2018;">
     <!ENTITY rsquo      "&#x2019;">
+    <!ENTITY ldquo      "&#x201C;">
+    <!ENTITY rdquo      "&#x201D;">
+    <!ENTITY raquo      "&#187;">
+    <!ENTITY laquo      "&#171;">
+    <!ENTITY bdquo      "&#8222;">
 
 ]>
 <xsl:stylesheet version="3.0"
@@ -522,22 +527,24 @@
             </xsl:variable>
 
             <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
-                <tr>
-                    <td class="width20">
-                        <xsl:call-template name="correctionTablePageReferences"/>
-                    </td>
-                    <td class="width40 bottom" lang="{@lang}">
-                        <xsl:call-template name="correctionTableSourceText"/>
-                    </td>
-                    <td class="width40 bottom" lang="{@lang}">
-                        <xsl:call-template name="correctionTableCorrectedText"/>
-                    </td>
-                    <xsl:if test="f:is-set('colophon.showEditDistance')">
-                        <td class="bottom">
-                            <xsl:call-template name="correctionTableEditDistance"/>
+                <xsl:if test="f:is-set('colophon.showMinorCorrections') or not(f:correctionIsMinor(.))">
+                    <tr>
+                        <td class="width20">
+                            <xsl:call-template name="correctionTablePageReferences"/>
                         </td>
-                    </xsl:if>
-                </tr>
+                        <td class="width40 bottom" lang="{@lang}">
+                            <xsl:call-template name="correctionTableSourceText"/>
+                        </td>
+                        <td class="width40 bottom" lang="{@lang}">
+                            <xsl:call-template name="correctionTableCorrectedText"/>
+                        </td>
+                        <xsl:if test="f:is-set('colophon.showEditDistance')">
+                            <td class="bottom">
+                                <xsl:value-of select="f:correctionTableEditDistance(.)"/>
+                            </td>
+                        </xsl:if>
+                    </tr>
+                </xsl:if>
             </xsl:for-each-group>
         </table>
     </xsl:template>
@@ -591,17 +598,36 @@
         </xsl:choose>
     </xsl:template>
 
+    
+    <xsl:function name="f:correctionIsMinor" as="xs:boolean">
+        <xsl:param name="choice" as="element(tmp:choice)"/>
+        <xsl:variable name="sic" select="$choice/tmp:sic" as="xs:string"/>
+        <xsl:variable name="corr" select="$choice/tmp:corr" as="xs:string"/>
 
-    <xsl:template name="correctionTableEditDistance">
-        <xsl:context-item as="element(tmp:choice)" use="required"/>
-        <xsl:variable name="editDistance" select="f:levenshtein(tmp:sic, tmp:corr)" as="xs:integer"/>
-        <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:strip-diacritics(tmp:sic), f:strip-diacritics(tmp:corr))" as="xs:integer"/>
-        <xsl:value-of select="$editDistance"/>
-        <xsl:if test="$editDistance != $normalizedEditDistance">
-            <xsl:text> / </xsl:text>
-            <xsl:value-of select="$normalizedEditDistance"/>
-        </xsl:if>
-    </xsl:template>
+        <!-- a correction is minor if 
+             1. it only differs in case.
+             2. it only differs in accents.
+             3. it only contains certain punctuation marks and spaces, in total at most 6 characters.
+             4. it is marked as such with @type="minor" -->
+
+        <xsl:sequence select="lower-case(f:strip-diacritics($sic)) = lower-case(f:strip-diacritics($corr))
+            or matches($sic || $corr, '^[&lsquo;&rsquo;&ldquo;&rdquo;&bdquo;&laquo;&raquo;.,:; ]{0,6}$')
+            or $choice/@type='minor'
+            or $choice/corr/@type='minor'"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:correctionTableEditDistance" as="xs:string">
+        <xsl:param name="choice" as="element(tmp:choice)"/>
+        <xsl:variable name="sic" select="$choice/tmp:sic" as="xs:string"/>
+        <xsl:variable name="corr" select="$choice/tmp:corr" as="xs:string"/>
+
+        <xsl:variable name="editDistance" select="f:levenshtein($sic, $corr)" as="xs:integer"/>
+        <xsl:variable name="normalizedEditDistance" select="f:levenshtein(f:strip-diacritics($sic), f:strip-diacritics($corr))" as="xs:integer"/>
+        <xsl:sequence select="if ($editDistance = $normalizedEditDistance)
+            then xs:string($editDistance)
+            else xs:string($editDistance) || ' / ' || xs:string($normalizedEditDistance)"/>
+    </xsl:function>
 
 
     <xd:doc>

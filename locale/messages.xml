@@ -1957,6 +1957,13 @@
 
     <msg:messages xml:lang="es" languageName="Spanish">
 
+        <msg:message name="msgNotCopyrightedUS">Este libro no tiene derechos de autor en los Estados Unidos. Si vive en otro lugar, verifique las leyes de su país antes de descargar este libro.</msg:message>
+        <msg:message name="msgPGComment">Este libro ha sido producido por Project Gutenberg y está disponible gratuitamente en https://www.gutenberg.org/.</msg:message>
+        <msg:message name="msgTagUsageOverview">Resumen de los elementos TEI utilizados</msg:message>
+        <msg:message name="msgEpilogue">Epílogo</msg:message>
+        <msg:message name="msgPreface">Prefacio</msg:message>
+        <msg:message name="msgAcknowledgements">Reconocimientos</msg:message>
+        <msg:message name="msgPassim">Pássim</msg:message>
         <msg:message name="msgGenerationDate">Fecha de generación</msg:message>
         <msg:message name="msgPageImage">Imagen de la página</msg:message>
         <msg:message name="msgQrCode">Código QR</msg:message>
