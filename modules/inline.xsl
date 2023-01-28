@@ -558,6 +558,13 @@
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
+            <!-- Also don't report minor corrections when they are small and we don't ask for them. -->
+            <xsl:when test="not(f:is-set('colophon.showMinorCorrections')) and f:correction-is-minor($sic, $corr, @type)">
+                <span>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:apply-templates select="$corr"/>
+                </span>
+            </xsl:when>
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

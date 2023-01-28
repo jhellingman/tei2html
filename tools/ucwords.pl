@@ -43,7 +43,7 @@ GetOptions(
     'm' => \$makeHeatMap);
 
 if (!defined $ARGV[0]) {
-    die "usage: ucwords.pl -imrvx <filename>";
+    die "usage: ucwords.pl -imrvx <filename>\n";
 }
 
 my $inputFile = $ARGV[0];
@@ -1072,7 +1072,7 @@ sub reportNumbers() {
 
 
 #
-# reportTags: report on the occurances of tags.
+# reportTags: report on the occurrences of tags.
 #
 sub reportTags() {
     my @tagList = keys %tagHash;
@@ -1092,7 +1092,7 @@ sub reportTags() {
 
 
 #
-# reportTagsxml: report on the occurances of tags.
+# reportTagsxml: report on the occurrences of tags.
 #
 sub reportTagsXML() {
     my @tagList = keys %tagHash;
@@ -1108,7 +1108,7 @@ sub reportTagsXML() {
 
 
 #
-# reportRend: report on the occurances of the rend tag.
+# reportRend: report on the occurrences of the rend tag.
 #
 sub reportRend() {
     my @rendList = keys %rendHash;
@@ -1126,7 +1126,7 @@ sub reportRend() {
 
 
 #
-# reportRendXML: report on the occurances of the rend tag.
+# reportRendXML: report on the occurrences of the rend tag.
 #
 sub reportRendXML() {
     my @rendList = keys %rendHash;
@@ -1172,13 +1172,13 @@ sub reportCountCounts() {
     print "\n<h3>Count of Counts</h3>";
 
     print "\n<table>";
-    print "\n<tr><th>Count <th>Number of words with this count <th>Total <th>Cummulative";
+    print "\n<tr><th>Count <th>Number of words with this count <th>Total <th>Cumulative";
 
-    my $cummulativeCount = 0;
+    my $cumulativeCount = 0;
     foreach my $count (sort { $b <=> $a } (keys %countCountHash)) {
         my $total = $count * $countCountHash{$count};
-        $cummulativeCount += $total;
-        print "\n<tr><td>$count <td>$countCountHash{$count} <td>$total <td>$cummulativeCount";
+        $cumulativeCount += $total;
+        print "\n<tr><td>$count <td>$countCountHash{$count} <td>$total <td>$cumulativeCount";
     }
     print "\n</table>";
 }

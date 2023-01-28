@@ -527,7 +527,7 @@
             </xsl:variable>
 
             <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
-                <xsl:if test="f:is-set('colophon.showMinorCorrections') or not(f:correctionIsMinor(.))">
+                <xsl:if test="f:is-set('colophon.showMinorCorrections') or not(f:correction-is-minor(.))">
                     <tr>
                         <td class="width20">
                             <xsl:call-template name="correctionTablePageReferences"/>
@@ -598,22 +598,32 @@
         </xsl:choose>
     </xsl:template>
 
-    
-    <xsl:function name="f:correctionIsMinor" as="xs:boolean">
-        <xsl:param name="choice" as="element(tmp:choice)"/>
-        <xsl:variable name="sic" select="$choice/tmp:sic" as="xs:string"/>
-        <xsl:variable name="corr" select="$choice/tmp:corr" as="xs:string"/>
 
-        <!-- a correction is minor if 
-             1. it only differs in case.
-             2. it only differs in accents.
-             3. it only contains certain punctuation marks and spaces, in total at most 6 characters.
-             4. it is marked as such with @type="minor" -->
+    <xsl:function name="f:correction-is-minor" as="xs:boolean">
+        <xsl:param name="choice" as="element(tmp:choice)"/>
+        <xsl:variable name="type" select="($choice/tmp:corr/@type | $choice/@type)[1]"/>
+        <xsl:sequence select="f:correction-is-minor($choice/tmp:sic, $choice/tmp:corr, $type)"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:correction-is-minor" as="xs:boolean">
+        <xsl:param name="sic"/>
+        <xsl:param name="corr"/>
+        <xsl:param name="type"/>
+
+        <xsl:variable name="sic" select="if ($sic) then $sic else ''" as="xs:string"/>
+        <xsl:variable name="corr" select="if ($corr) then $corr else ''" as="xs:string"/>
+        <xsl:variable name="type" select="if ($type) then $type else ''" as="xs:string"/>
+
+        <!-- A correction is minor if it
+             1. only differs in case,
+             2. only differs in accents,
+             3. only contains certain punctuation marks and spaces, in total at most 6 characters,
+             4. is marked as such with @type="minor" or @type="scanno". -->
 
         <xsl:sequence select="lower-case(f:strip-diacritics($sic)) = lower-case(f:strip-diacritics($corr))
             or matches($sic || $corr, '^[&lsquo;&rsquo;&ldquo;&rdquo;&bdquo;&laquo;&raquo;.,:; ]{0,6}$')
-            or $choice/@type='minor'
-            or $choice/corr/@type='minor'"/>
+            or $type = ('minor', 'scanno')"/>
     </xsl:function>
 
 
@@ -640,7 +650,7 @@
             <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
-                <xsl:copy-of select="* | text()"/>
+                <xsl:copy-of select="* | text() | @*"/>
             </tmp:corr>
             <tmp:sic>
                 <xsl:value-of select="@sic"/>
@@ -662,10 +672,10 @@
             <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
-                <xsl:copy-of select="corr/* | corr/text()"/>
+                <xsl:copy-of select="corr/* | corr/text() | corr/@*"/>
             </tmp:corr>
             <tmp:sic>
-                <xsl:copy-of select="sic/* | sic/text()"/>
+                <xsl:copy-of select="sic/* | sic/text() | sic/@*"/>
             </tmp:sic>
          </tmp:choice>
     </xsl:template>

@@ -11,6 +11,9 @@
 
     <!-- Define variable used in localization.xsl -->
     <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <!-- emph -->
 

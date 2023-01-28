@@ -3,6 +3,8 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:xhtml="http://www.w3.org/1999/xhtml"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:f="urn:stylesheet-functions"
+               xmlns:tmp="urn:temporary"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
@@ -105,5 +107,227 @@
             </div>
         </x:expect>
     </x:scenario>
+
+
+    <x:param name="textWithMinorCorrections">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <pb n="1"/>
+                <p>This is a <corr id="c1" sic="major mistake">major correction</corr>.</p>
+                <p>This is a <corr id="c2" sic="minor mistake" type="minor">minor correction</corr>.</p>
+                <p>This is an issue in punctuation<corr id="c3" sic=",">.</corr></p>
+            </text>
+            <back>
+                <divGen type="corr"/>
+            </back>
+        </TEI>
+    </x:param>
+
+   <x:scenario label="When testing a correction with a large difference is minor">
+      <x:call function="f:correction-is-minor">
+         <x:param select="'large difference'"/>
+         <x:param select="'nothing like it'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction marked as minor is minor">
+      <x:call function="f:correction-is-minor">
+         <x:param select="'large difference'"/>
+         <x:param select="'marked as minor'"/>
+         <x:param select="'minor'"/>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction only changing punctuation">
+      <x:call function="f:correction-is-minor">
+         <x:param select="','"/>
+         <x:param select="'.'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction only changing punctuation">
+      <x:call function="f:correction-is-minor">
+         <x:param select="','"/>
+         <x:param select="'.'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction only changing accentuation">
+      <x:call function="f:correction-is-minor">
+         <x:param select="'App&#xE8;l'"/>
+         <x:param select="'Appel'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction only adding something">
+      <x:call function="f:correction-is-minor">
+         <x:param select="''"/>
+         <x:param select="'Appel'"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction only deleting something">
+      <x:call function="f:correction-is-minor">
+         <x:param select="'Appel'"/>
+         <x:param select="''"/>
+         <x:param select="''"/>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction with a null sic value">
+      <x:call function="f:correction-is-minor">
+         <x:param select="()"/>
+         <x:param select="'Appel'"/>
+         <x:param select="()"/>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction with a null corr value">
+      <x:call function="f:correction-is-minor">
+         <x:param select="'Appel'"/>
+         <x:param select="()"/>
+         <x:param select="()"/>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a correction with only null values">
+      <x:call function="f:correction-is-minor">
+         <x:param select="()"/>
+         <x:param select="()"/>
+         <x:param select="()"/>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr element with a significant change">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice>
+                <tmp:sic>Appel</tmp:sic>
+                <tmp:corr>Banaan</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr element with an accentuation change">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice>
+                <tmp:sic>Appel</tmp:sic>
+                <tmp:corr>App&#xE8;l</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr element with just a deletion">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice>
+                <tmp:sic>Appel</tmp:sic>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr element with just an addition">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice>
+                <tmp:corr>Appel</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return false"
+        select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr marked as such">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice type="minor">
+                <tmp:sic>Appel</tmp:sic>
+                <tmp:corr>Banaan</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr marked as such">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice>
+                <tmp:sic>Appel</tmp:sic>
+                <tmp:corr type="minor">Banaan</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When testing a tmp:corr marked as such (twice)">
+      <x:call function="f:correction-is-minor">
+         <x:param>
+            <tmp:choice type="minor">
+                <tmp:sic>Appel</tmp:sic>
+                <tmp:corr type="minor">Banaan</tmp:corr>
+            </tmp:choice>
+         </x:param>
+      </x:call>
+      <x:expect
+        label="will return true"
+        select="true()"/>
+   </x:scenario>
+
 
 </x:description>

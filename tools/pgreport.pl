@@ -602,10 +602,10 @@ sub downloadFromPG {
     my $text0File = $pgNum . '-0.txt';
     my $htmlFile = $pgNum . '-h.htm';
 
-    my $textUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $textFile;
-    my $text8Url = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $text8File;
-    my $text0Url = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $text0File;
-    my $htmlUrl = 'http://www.gutenberg.org/files/' . $pgNum . '/' . $pgNum . '-h/' . $htmlFile;
+    my $textUrl = 'https://www.gutenberg.org/files/' . $pgNum . '/' . $textFile;
+    my $text8Url = 'https://www.gutenberg.org/files/' . $pgNum . '/' . $text8File;
+    my $text0Url = 'https://www.gutenberg.org/files/' . $pgNum . '/' . $text0File;
+    my $htmlUrl = 'https://www.gutenberg.org/files/' . $pgNum . '/' . $pgNum . '-h/' . $htmlFile;
 
     {
         local $CWD = $destinationPath;
