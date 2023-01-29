@@ -552,6 +552,7 @@
 
         <xsl:choose>
             <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
+            <!-- TODO: remove this abuse of the @resp attribute, use @type="minor" instead -->
             <xsl:when test="@resp = ('m', 'p') or not(f:is-set('useMouseOverPopups'))">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -560,10 +561,7 @@
             </xsl:when>
             <!-- Also don't report minor corrections when they are small and we don't ask for them. -->
             <xsl:when test="not(f:is-set('colophon.showMinorCorrections')) and f:correction-is-minor($sic, $corr, @type)">
-                <span>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates select="$corr"/>
-                </span>
+                <xsl:text/><xsl:apply-templates select="$corr"/><xsl:text/>
             </xsl:when>
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
