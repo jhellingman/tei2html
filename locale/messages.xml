@@ -1983,7 +1983,7 @@
         <msg:message name="msgBackMatter">Texto final</msg:message>
 
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> Ocurrencias</msg:message>
-        <msg:message name="msgEditDistance">Editar espacio</msg:message>
+        <msg:message name="msgEditDistance">Número de cambios</msg:message>
         <msg:message name="msgAbbreviationOverview">Resúmen de abreviaciones</msg:message>
         <msg:message name="msgExpansion">Expandir</msg:message>
         <msg:message name="msgExpansionNotAvailable">Expansión no disponible</msg:message>
