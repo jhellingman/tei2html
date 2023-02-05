@@ -8,20 +8,25 @@ use warnings;
 
 use Roman;              # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 use Getopt::Long;
+use POSIX qw/floor/;
 
 use SgmlSupport qw/getAttrVal/;
 
 my $splitColumns = 0;
+my $columnNumbers = 0;
 my $useRoman = 0;
 my $first = 0;
 my $last = 0;
 my $offset = 0;
 my $new = 0;
 my $showHelp = 0;
+my $divisor = 1;
 
 GetOptions(
     's' => \$splitColumns,
+    'c' => \$columnNumbers,
     'r' => \$useRoman,
+    'd=i' => \$divisor,
     'f=i' => \$first,
     'l=i' => \$last,
     'o=i' => \$offset,
@@ -35,17 +40,18 @@ if ($new != 0) {
     $offset = -($first - $new);
 }
 
-if ($showHelp == 1 || ($offset == 0 && !$useRoman)) {
+if ($showHelp == 1) {
     my $help = <<'END_HELP';
 
 fixPb.pl -- fix (renumber) page-breaks in a TEI file.
 
-Usage: fixPb.pl [-srfloi] <inputfile.tei>
+Usage: fixPb.pl [-csrfloi] <inputfile.tei>
 
 Options:
-    s         Deal with split columns. Every second <pb> is replaced with <cb>. 
+    s         Deal with split columns. Every second <pb> is replaced with <cb>.
                 After each page, the offset will be decreased by one, to restore
                 the original page-numbering.
+    c         Deal with split columns: <pb>'s are retained, but numbered #a and #b.
     r         Use Roman numerals.
     f=<int>   First page to adjust (based on @n attribute).
     l=<int>   Last page (this last page will not be adjusted).
@@ -56,6 +62,9 @@ END_HELP
     print $help;
     exit 0;
 }
+
+my @letters = qw(a b c d e f g h i j k l m n o p q r s t u v w x y z);
+my %idsUsed;
 
 my $previousPage = 0;
 my $currentPage = 0;
@@ -112,21 +121,48 @@ sub nextPageBreak {
     my $currentPage = shift;
     my $facs = shift;
 
+    my $dot = '';
+
     if ($splitColumns and $secondColumn) {
         $secondColumn = 0;
         $offset -= 1;
         return "<cb>";
     }
-    else {
-        my $dot = '';
+
+    if ($columnNumbers and $secondColumn) {
+        $secondColumn = 0;
+        $offset -= 1;
         my $newCurrentPage = $currentPage + $offset;
         if ($useRoman) {
             $newCurrentPage = roman($newCurrentPage);
             $dot = '.';
         }
-        $secondColumn = 1;
-        return "<pb id=pb$dot$newCurrentPage n=$newCurrentPage$facs>";
+        my $newId = makeId("pb$dot$newCurrentPage");
+        return "<pb id=$newId n=$newCurrentPage$facs>";
     }
+
+    my $newCurrentPage = $currentPage + $offset;
+    $newCurrentPage = floor($newCurrentPage / $divisor);
+    if ($useRoman) {
+        $newCurrentPage = roman($newCurrentPage);
+        $dot = '.';
+    }
+    $secondColumn = 1;
+    my $newId = makeId("pb$dot$newCurrentPage");
+    return "<pb id=$newId n=$newCurrentPage$facs>";
+}
+
+
+sub makeId {
+    my $n = shift;
+    my $letter = '';
+    if (defined $idsUsed{$n}) {
+        $letter = $letters[$idsUsed{$n}];
+        $idsUsed{$n}++;
+    } else {
+        $idsUsed{$n} = 0;
+    }
+    return $n . $letter;
 }
 
 
