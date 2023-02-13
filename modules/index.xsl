@@ -231,18 +231,18 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='IndexToc']">
-        <xsl:call-template name="genindextoc"/>
+        <xsl:call-template name="generate-index-toc"/>
     </xsl:template>
 
 
-    <xsl:template name="genindextoc">
+    <xsl:template name="generate-index-toc">
         <div class="transcriberNote indexToc" id="{f:generate-id(.)}">
-            <xsl:apply-templates select="../div2/head | ../div3/head | ../div/head" mode="genindextoc"/>
+            <xsl:apply-templates select="../div2/head | ../div3/head | ../div/head" mode="generate-index-toc"/>
         </div>
     </xsl:template>
 
 
-    <xsl:template match="head" mode="genindextoc">
+    <xsl:template match="head" mode="generate-index-toc">
         <xsl:if test="position() != 1">
             <xsl:text> | </xsl:text>
         </xsl:if>

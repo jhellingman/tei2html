@@ -21,7 +21,7 @@
         <xd:short>Normalize a file name received as a parameter.</xd:short>
     </xd:doc>
 
-    <xsl:function name="f:normalizeFilename" as="xs:string?">
+    <xsl:function name="f:normalize-filename" as="xs:string?">
         <xsl:param name="filename" as="xs:string?"/>
         <xsl:value-of select="replace(normalize-space($filename), '^file:/', '')"/>
     </xsl:function>

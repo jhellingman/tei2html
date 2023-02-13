@@ -382,7 +382,7 @@
 
                 <!-- QR-code -->
                 <xsl:variable name="pgNum" select="//idno[@type = 'PGnum'][1]"/>
-                <xsl:variable name="qrImage" select="f:qrImage($pgNum)"/>
+                <xsl:variable name="qrImage" select="f:qr-image($pgNum)"/>
                 <xsl:if test="//divGen[@type='Colophon'] and $imageInfo/img:images/img:image[@path=$qrImage]">
                     <item id="qrcode"
                         href="{$qrImage}"

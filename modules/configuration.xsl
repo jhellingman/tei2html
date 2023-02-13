@@ -33,7 +33,7 @@
 
     <xd:doc type="string">Custom configuration (if available read from file else empty).</xd:doc>
     <xsl:variable name="custom-configuration" select="if ($configurationFile)
-                                                      then document(f:normalizeFilename($configurationFile), /)
+                                                      then document(f:normalize-filename($configurationFile), /)
                                                       else $empty-configuration"/>
 
     <xsl:variable name="empty-configuration">

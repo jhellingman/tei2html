@@ -136,7 +136,7 @@
             <xsl:call-template name="keywords"/>
             <xsl:call-template name="classification"/>
             <xsl:call-template name="catalogReferences"/>
-            <xsl:call-template name="qrCode"/>
+            <xsl:call-template name="qr-code"/>
         </table>
     </xsl:template>
 
@@ -454,9 +454,9 @@
         <xd:short>Include an image with a QR-code if work is posted to PG.</xd:short>
     </xd:doc>
 
-    <xsl:template name="qrCode">
+    <xsl:template name="qr-code">
         <xsl:variable name="pgNum" select="//idno[@type = 'PGnum'][1]"/>
-        <xsl:variable name="qrImage" select="f:qrImage($pgNum)"/>
+        <xsl:variable name="qrImage" select="f:qr-image($pgNum)"/>
 
         <xsl:if test="f:is-valid($pgNum) and $imageInfo/img:images/img:image[@path=$qrImage]">
             <tr>
@@ -469,7 +469,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:qrImage" as="xs:string">
+    <xsl:function name="f:qr-image" as="xs:string">
         <xsl:param name="pgNum"/>
 
         <xsl:sequence select="if (matches($pgNum, '^[0-9]+$')) then 'images/qr' || $pgNum || '.png' else 'images/qrcode.png'"/>
@@ -540,7 +540,7 @@
                         </td>
                         <xsl:if test="f:is-set('colophon.showEditDistance')">
                             <td class="bottom">
-                                <xsl:value-of select="f:correctionTableEditDistance(.)"/>
+                                <xsl:value-of select="f:correction-table-edit-distance(.)"/>
                             </td>
                         </xsl:if>
                     </tr>
@@ -627,7 +627,7 @@
     </xsl:function>
 
 
-    <xsl:function name="f:correctionTableEditDistance" as="xs:string">
+    <xsl:function name="f:correction-table-edit-distance" as="xs:string">
         <xsl:param name="choice" as="element(tmp:choice)"/>
         <xsl:variable name="sic" select="$choice/tmp:sic" as="xs:string"/>
         <xsl:variable name="corr" select="$choice/tmp:corr" as="xs:string"/>

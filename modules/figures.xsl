@@ -29,7 +29,7 @@
 
     <xsl:param name="imageInfoFile" as="xs:string?"/>
 
-    <xsl:variable name="imageInfo" select="document(f:normalizeFilename($imageInfoFile))" as="node()?"/>
+    <xsl:variable name="imageInfo" select="document(f:normalize-filename($imageInfoFile))" as="node()?"/>
 
     <xd:doc>
         <xd:short>Determine the file name for an image.</xd:short>

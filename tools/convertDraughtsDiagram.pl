@@ -67,10 +67,10 @@ sub main {
 
             $line =~ s/^\s*<cell/<row><cell/g;
 
-            $line =~ s/<cell> *w */<cell>\&#x26C0; /g;
-            $line =~ s/<cell> *W */<cell>\&#x26C1; /g;
-            $line =~ s/<cell> *b */<cell>\&#x26C2; /g;
-            $line =~ s/<cell> *B */<cell>\&#x26C3; /g;
+            $line =~ s/<cell> *w */<cell rend=wp>\&#x26C0; /g;
+            $line =~ s/<cell> *W */<cell rend=wp>\&#x26C1; /g;
+            $line =~ s/<cell> *b */<cell rend=bp>\&#x26C2; /g;
+            $line =~ s/<cell> *B */<cell rend=bp>\&#x26C3; /g;
 
             $line =~ s/<cell> *([0-9a-zA-Z]+)/<cell>$1/g;
 
