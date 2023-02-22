@@ -52,6 +52,7 @@ done, please be in touch with me on how I can help.
     a regression test when refactoring the XSLT transforms.
   * tools: contains perl scripts that can be used to apply the transforms; also includes a number of perl scripts
     that can be used while preparing TEI files.
+  * xspec: xspec tests that cover various (but not yet all) aspects of the XSLT transforms.
 
 ## External Links
 
