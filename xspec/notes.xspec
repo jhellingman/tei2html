@@ -730,7 +730,7 @@
             <TEI>
                 <text>
                     <div1>
-                        <p>Surrounding text<note place="apparatus" id="n.1" rend="note-marker(**)">Text of apparatus note.</note> and more text.</p>
+                        <p>Surrounding text<note place="apparatus" id="n.1" rend="note-marker(**) return-marker(**)">Text of apparatus note.</note> and more text.</p>
                     </div1>
                     <divGen type="apparatus"/>
                 </text>
