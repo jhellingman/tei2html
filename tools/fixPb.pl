@@ -23,9 +23,9 @@ my $showHelp = 0;
 my $divisor = 1;
 
 GetOptions(
-    's' => \$splitColumns,
     'c' => \$columnNumbers,
     'r' => \$useRoman,
+    's' => \$splitColumns,
     'd=i' => \$divisor,
     'f=i' => \$first,
     'l=i' => \$last,
@@ -45,18 +45,19 @@ if ($showHelp == 1) {
 
 fixPb.pl -- fix (renumber) page-breaks in a TEI file.
 
-Usage: fixPb.pl [-csrfloi] <inputfile.tei>
+Usage: fixPb.pl [-cdflnors] <inputfile.tei>
 
 Options:
+    c         Deal with split columns: <pb>'s are retained, but numbered #a and #b.
+    r         Use Roman numerals.
     s         Deal with split columns. Every second <pb> is replaced with <cb>.
                 After each page, the offset will be decreased by one, to restore
                 the original page-numbering.
-    c         Deal with split columns: <pb>'s are retained, but numbered #a and #b.
-    r         Use Roman numerals.
+    d=<int>   Divide the page number by the indicated value (default 1).
     f=<int>   First page to adjust (based on @n attribute).
     l=<int>   Last page (this last page will not be adjusted).
-    o=<int>   Offset, will be added to the original page number.
     n=<int>   New number of first page; will be used to calculate the offset.
+    o=<int>   Offset, will be added to the original page number.
 END_HELP
 
     print $help;
@@ -99,13 +100,13 @@ while (<INPUTFILE>) {
         my $cp = isroman($currentPage) ? arabic($currentPage) : $currentPage;
         my $pp = isroman($previousPage) ? arabic($previousPage) : $previousPage;
 
-        if (isnum($currentPage) && $cp == $first) {
+        if (isNumber($currentPage) && $cp == $first) {
             $seenFirst = 1;
         }
-        if (isnum($currentPage) && $cp == $last) {
+        if (isNumber($currentPage) && $cp == $last) {
             $seenLast = 1;
         }
-        if ($seenFirst && !$seenLast && isnum($currentPage)) {
+        if ($seenFirst && !$seenLast && isNumber($currentPage)) {
             print $before;
             print nextPageBreak($currentPage, $facs);
         } else {
@@ -133,7 +134,7 @@ sub nextPageBreak {
         $secondColumn = 0;
         $offset -= 1;
         my $newCurrentPage = $currentPage + $offset;
-        if ($useRoman) {
+        if ($useRoman != 0) {
             $newCurrentPage = roman($newCurrentPage);
             $dot = '.';
         }
@@ -143,7 +144,7 @@ sub nextPageBreak {
 
     my $newCurrentPage = $currentPage + $offset;
     $newCurrentPage = floor($newCurrentPage / $divisor);
-    if ($useRoman) {
+    if ($useRoman != 0) {
         $newCurrentPage = roman($newCurrentPage);
         $dot = '.';
     }
@@ -166,7 +167,7 @@ sub makeId {
 }
 
 
-sub isnum {
+sub isNumber {
     my $str = shift;
     return $str =~ /^[0-9]+$/;
 }
@@ -176,4 +177,3 @@ print STDERR "NOTE: Total number of pages: $numberOfPages\n";
 print STDERR "NOTE: Total size of pages:   $totalPageSize\n";
 my $averagePageSize = $totalPageSize/$numberOfPages;
 print STDERR "NOTE: Average size of page:  $averagePageSize\n";
-

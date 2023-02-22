@@ -14,7 +14,7 @@ my $DEBUG = 1;
 
 GetOptions('d' => \$DEBUG);
 
-my $wl = new Lingua::BO::Wylie();
+my $wl = Lingua::BO::Wylie->new();
 
 my $pageNumber = 0;
 

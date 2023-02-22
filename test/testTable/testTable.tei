@@ -110,6 +110,12 @@
             font-size: 20pt;
             line-height: 20pt;
         </rendition>
+        <rendition selector=".draughts td.wp">
+            color: #fdca00;
+        </rendition>
+        <rendition selector=".draughts td.bp">
+            color: #8c3500;
+        </rendition>
         <rendition selector=".draughts td.black">
             background-color: #D3D3D3;
         </rendition>
@@ -425,7 +431,8 @@
 
 <p>
 
-<table rend=draughts id=d8empty>
+
+<table rend=draughts>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
 <row><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
@@ -437,7 +444,7 @@
 </table>
 
 
-<table rend=draughts id=d10empty>
+<table rend=draughts>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
 <row><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
@@ -451,7 +458,7 @@
 </table>
 
 
-<table rend=draughts id=d10nums>
+<table rend=draughts>
 <row><cell rend=blank> 9 <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
 <row><cell rend=blank> 8 <cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=blank> 7 <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
@@ -462,31 +469,31 @@
 <row><cell rend=blank> 2 <cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=blank> 1 <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
 <row><cell rend=blank> 0 <cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
-<row><cell rend=blank>   <cell rend=blank> 0 <cell rend=blank> 1 <cell rend=blank> 2 <cell rend=blank> 3 <cell rend=blank> 4 <cell rend=blank> 5 <cell rend=blank> 6 <cell rend=blank> 7 <cell rend=blank> 8 <cell rend=blank> 9
+<row><cell rend=blank>   <cell rend=blank> 0 <cell rend=blank> 1 <cell rend=blank> 2 <cell rend=blank> 3 <cell rend=blank> 4 <cell rend=blank> 5 <cell rend=blank> 6 <cell rend=blank> 7 <cell rend=blank> 8 <cell rend=blank> 9 <cell rend=blank>
 </table>
 
 
-<table rend=draughts id=d8start>
-<row><cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; 
-<row><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black>
-<row><cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; <cell rend=black><cell>&#x26C2; 
+<table rend=draughts>
+<row><cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; 
+<row><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black>
+<row><cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell rend=bp>&#x26C2; 
 <row><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
-<row><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black>
-<row><cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; 
-<row><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; <cell rend=black>
+<row><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black>
+<row><cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; 
+<row><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black>
 </table>
 
 
-<table rend=draughts id=d2x8>
-<row><cell rend=black><cell>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>&#x26C1; <cell rend=black><cell>&#x26C2; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   
-<row><cell>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell>&#x26C3; <cell rend=black><cell>   <cell rend=black><cell>&#x26C1; <cell rend=black>
-<row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C2; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>&#x26C2; 
-<row><cell>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C3; <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
-<row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C0; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>&#x26C0; <cell rend=black><cell>&#x26C0; 
-<row><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
+<table rend=draughts>
+<row><cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C1; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   
+<row><cell rend=bp>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell rend=bp>&#x26C3; <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C1; <cell rend=black>
+<row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=bp>&#x26C2; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell rend=bp>&#x26C2; 
+<row><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=bp>&#x26C3; <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell rend=bp>&#x26C2; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
+<row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C0; <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell rend=wp>&#x26C0; 
+<row><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 <row><cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=blank>   <cell rend=blank>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   
-<row><cell>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
+<row><cell rend=wp>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell rend=wp>&#x26C0; <cell rend=black><cell>   <cell rend=black><cell rend=blank>   <cell rend=blank>   <cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black><cell>   <cell rend=black>
 </table>
 
 

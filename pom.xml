@@ -1,78 +1,77 @@
 <project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ph.gutenberg.tei2html</groupId>
-  <artifactId>tei2html</artifactId>
-  <version>1.0.0</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ph.gutenberg.tei2html</groupId>
+    <artifactId>tei2html</artifactId>
+    <version>1.0.0</version>
 
-  <name>tei2html</name>
-  <url>https://github.com/jhellingman/tei2html</url>
+    <name>tei2html</name>
+    <url>https://github.com/jhellingman/tei2html</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>io.xspec.maven</groupId>
-        <artifactId>xspec-maven-plugin</artifactId>
-        <version>2.0.0</version>
-        <dependencies>
-          <dependency>
-            <groupId>net.sf.saxon</groupId>
-            <artifactId>Saxon-HE</artifactId>
-            <!-- Saxon from 9.7.0-14 up until 10.1 have been tested and work correctly. -->
-            <version>9.9.1-8</version>
-          </dependency>
-          <!-- Saxon >= 10.0 requires XSpec 1.6. The bundled XSpec 1.5
-               works correctly with Saxon 9.x, and you don't need this
-               extra dependency. -->
-          <dependency>
-            <groupId>io.xspec</groupId>
-            <artifactId>xspec</artifactId>
-            <version>1.6.0</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <coverage>true</coverage>
-          <catalogFile>catalog.xml</catalogFile>
-          <testDir>xspec</testDir>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.xspec.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.saxon</groupId>
+                        <artifactId>Saxon-HE</artifactId>
+                        <!-- Saxon from 9.7.0-14 up until 10.1 have been tested and work correctly. -->
+                        <version>9.9.1-8</version>
+                    </dependency>
+                    <!-- Saxon >= 10.0 requires XSpec 1.6. The bundled XSpec 1.5
+                         works correctly with Saxon 9.x, and you don't need this
+                         extra dependency. -->
+                    <dependency>
+                        <groupId>io.xspec</groupId>
+                        <artifactId>xspec</artifactId>
+                        <version>1.6.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <coverage>true</coverage>
+                    <catalogFile>catalog.xml</catalogFile>
+                    <testDir>xspec</testDir>
 
-          <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
-          <!-- which points to https://www.saxonica.com/documentation/index.html#!using-xsl/commandline -->
+                    <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
+                    <!-- which points to https://www.saxonica.com/documentation/index.html#!using-xsl/commandline -->
 
-          <saxonOptions>
-            <!-- <collectionFinderClass>top.marchand.xml.saxon.CollectionFinder</collectionFinderClass> -->
-            <dtd>off</dtd>
-            <ea>off</ea>
-            <expand>off</expand>
-            <ext>on</ext>
-            <l>off</l>
-            <!-- <m>top.marchand.xml.saxon.MessageReceiver</m> -->
-            <opt>9</opt>
-            <!-- <or>top.marchand.xml.saxon.OutputUriResolver</or> -->
-            <outval>recover</outval>
-            <strip>none</strip>
-            <TJ>off</TJ>
-            <warnings>silent</warnings>
-            <xi>on</xi>
-          </saxonOptions>
-          <folding>true</folding>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>test</phase>
-            <goals>
-              <goal>run-xspec</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+                    <saxonOptions>
+                        <!-- <collectionFinderClass>top.marchand.xml.saxon.CollectionFinder</collectionFinderClass> -->
+                        <dtd>off</dtd>
+                        <ea>off</ea>
+                        <expand>off</expand>
+                        <ext>on</ext>
+                        <l>off</l>
+                        <!-- <m>top.marchand.xml.saxon.MessageReceiver</m> -->
+                        <opt>9</opt>
+                        <!-- <or>top.marchand.xml.saxon.OutputUriResolver</or> -->
+                        <outval>recover</outval>
+                        <strip>none</strip>
+                        <TJ>off</TJ>
+                        <warnings>silent</warnings>
+                        <xi>on</xi>
+                    </saxonOptions>
+                    <folding>true</folding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run-xspec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

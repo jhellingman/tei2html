@@ -756,9 +756,16 @@
 
         <xsl:sequence select="if (f:has-rend-value($note/@rend, 'note-marker'))
                               then f:rend-value($note/@rend, 'note-marker')
-                              else f:get-setting('notes.apparatus.textMarker')"/>
+                              else f:get-setting('notes.apparatus.noteMarker')"/>
     </xsl:function>
 
+    <xsl:function name="f:apparatus-return-marker" as="xs:string">
+        <xsl:param name="note" as="element()"/>
+
+        <xsl:sequence select="if (f:has-rend-value($note/@rend, 'return-marker'))
+                              then f:rend-value($note/@rend, 'return-marker')
+                              else f:get-setting('notes.apparatus.returnMarker')"/>
+    </xsl:function>
 
     <xsl:template match="note[f:is-apparatus-note(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
@@ -857,7 +864,7 @@
                 <a class="apparatusnotemarker">
                     <xsl:attribute name="href">#<xsl:value-of select="@id"/>src</xsl:attribute>
                     <xsl:attribute name="title"><xsl:value-of select="f:message('msgReturnToSourceLocation')"/></xsl:attribute>
-                    <xsl:value-of select="f:apparatus-note-marker(.)"/>
+                    <xsl:value-of select="f:apparatus-return-marker(.)"/>
                 </a>
             </xsl:if>
             <xsl:apply-templates/>

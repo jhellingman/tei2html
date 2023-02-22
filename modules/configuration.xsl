@@ -98,8 +98,8 @@
 
             <notes.foot.returnArrow>true</notes.foot.returnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
             <notes.foot.counter>chapter</notes.foot.counter>                <!-- At what level to count footnotes, possible values: chapter or text -->
-            <notes.apparatus.textMarker>&deg;</notes.apparatus.textMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
-            <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
+            <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
+            <notes.apparatus.returnMarker>&deg;</notes.apparatus.returnMarker> <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
             <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block -->
 
             <images.path></images.path>                                     <!-- Prefix of path to images, relative to HTML file -->

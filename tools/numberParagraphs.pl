@@ -54,9 +54,3 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
-
-
-sub isnum($) {
-    my $str = shift;
-    return $str =~ /^[0-9]+$/;
-}
