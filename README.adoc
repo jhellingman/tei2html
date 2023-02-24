@@ -3,11 +3,7 @@ image:https://www.codefactor.io/repository/github/jhellingman/tei2html/badge[Cod
 
 == tei2html
 
-`tei2html` is a collection of XSLT 3.0 style sheets to transform a document encoded in TEI to HTML.
-They have been specifically developed to generate a monolithic (single) HTML document for posting on
-http://www.gutenberg.org/[Project Gutenberg], but they can also generate ePub files from the same
-source with a similar look and feel. In line with the type of material Project Gutenberg deals with, these
-style sheets are designed to deal with encoded pre-existing works, rather than works created digitally from scratch.
+`tei2html` is a collection of XSLT 3.0 style sheets to transform a document encoded in TEI to HTML. They have been specifically developed to generate a monolithic (single) HTML document for posting on http://www.gutenberg.org/[Project Gutenberg], but they can also generate ePub files from the same source with a similar look and feel. In line with the type of material Project Gutenberg deals with, these style sheets are designed to deal with encoded pre-existing works, rather than works created digitally from scratch.
 
 The transformation supports the following elements as present in TEI:
 
@@ -28,29 +24,21 @@ Furthermore, the script can generate
 * Colophons
 * Metadata as used in ePub
 
-`tei2html` includes localisation support for English, Dutch, and to a lesser extent German, French, Spanish,
-Tagalog and Cebuano.
+`tei2html` includes localisation support for English, Dutch, and to a lesser extent German, French, Spanish, Tagalog and Cebuano.
 
-Note, that these scripts partly depend on the use of rend attributes and other TEI conventions. It should
-not be expected that an arbitrary TEI file renders well with those scripts (although it should render
-reasonable in any case.)
+Note, that these scripts partly depend on the use of rend attributes and other TEI conventions. It should not be expected that an arbitrary TEI file renders well with those scripts (although it should render reasonable in any case.)
 
-If you need modifications, extensions of these scripts, or need to have other TEI/XML/XSLT related work
-done, please be in touch with me on how I can help.
+If you need modifications, extensions of these scripts, or need to have other TEI/XML/XSLT related work done, please be in touch with me on how I can help.
 
 == Directories
 
 * `Wiki`: wiki-pages that give some instructions and background documentation.
-* `samples`: contains a number of sample files (of books posted to Project Gutenberg; I am currently adding all
-my TEI master files to GitHub: see https://github.com/GutenbergSource for many more examples).
-* `sandbox`: contains experimental code, better ignored if you don't want to play around.
-* `schemas`: contains schema definition for a number of supplementary XML formats.
-* `style`: contains CSS stylesheets, used by the generated HTML and ePub results.
-* `test`: contains a test TEI file, complete with the generated output in XML, HTML and ePub format. This
-is used to verify the correct transformation; contains a large number of samples of use, and serves as
-a regression test when refactoring the XSLT transforms.
-* `tools`: contains perl scripts that can be used to apply the transforms; also includes a number of perl scripts
-that can be used while preparing TEI files.
+* `samples`: a few sample TEI files (of books posted to Project Gutenberg; I am currently adding my TEI master files to GitHub: see https://github.com/GutenbergSource[GutenbergSource] for many more examples).
+* `sandbox`: experimental code, better ignored if you don't want to play around.
+* `schemas`: schema definitions for some supplementary XML formats.
+* `style`: CSS stylesheets, used by the generated HTML and ePub results.
+* `test`: a test TEI file, complete with the generated output in XML, HTML and ePub format. This is used to verify the correct transformation. It contains various examples, and serves as a regression test when refactoring the XSLT transforms.
+* `tools`: perl scripts used to apply the transforms; also includes perl scripts that can be used while preparing TEI files.
 * `xspec`: xspec tests that cover various (but not yet all) aspects of the XSLT transforms.
 
 == External Links
@@ -58,4 +46,4 @@ that can be used while preparing TEI files.
 * http://www.tei-c.org/Tools/[TEI tools]
 * http://www.tei-c.org/Tools/Stylesheets/[Another take at converting TEI to HTML]
 * http://wiki.tei-c.org/index.php/Tei-xsl[Another link to TEI converters]
-* http://www.oucs.ox.ac.uk/oxgarage/["OxGarage, tools to convert TEI files"]
+* http://www.oucs.ox.ac.uk/oxgarage/[OxGarage, tools to convert TEI files]
