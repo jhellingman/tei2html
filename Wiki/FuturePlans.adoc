@@ -1,4 +1,4 @@
-= Future Features
+== Future Features
 
 I intend, when possible, to add the following to the tei2html tool-set.
 
@@ -7,12 +7,12 @@ I intend, when possible, to add the following to the tei2html tool-set.
 * Support for ePub output. (DONE)
 * Support for XHTML output. (DONE, for ePub).
 
-== Tidbits
+=== Tidbits
 
 * Update extractPDF with latest version of tools and option to extract to png format. (DONE)
 * support for `&lt;prefixDef&gt;` (DONE)
 
-== Support TEI P5
+=== Support TEI P5
 
 The current code was developed on TEI P3, and needs a few updates to work well with the current TEI P5.
 
@@ -20,7 +20,7 @@ For some background, read the http://www.tei-c.org/Guidelines/P5/migrate.xml[P5 
 
 Most of the changes are additions, which can be handled quite transparently.
 
-== Support for Customization (Partly DONE)
+=== Support for Customization (Partly DONE)
 
 Currently, fairly limited customization options exists, and they are only accessible either via parameters to the XSLT stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
 
@@ -92,11 +92,11 @@ Things that can also be handled via CSS:
 
 More ideas: https://github.com/jgsmith/radiant-tei-tools/blob/57180651fe1c10ce4e3f2561c76409cc2ff8a692/README.markdown
 
-== Support for print output
+=== Support for print output
 
 Currently, some support for print output via PDF with Prince-XML is build in. This needs to be extended and generalized, such that neat paged format media can be produced as PDFs. This is mostly a matter of using appropriate CSS stylesheets, although in a few cases, it is necessary to reorganize elements in the (in this case intermediate) HTML to enable such output (such as footnotes).
 
-== Support for HTML5
+=== Support for HTML5
 
 This feature has two important aspects.
 
@@ -104,29 +104,29 @@ This feature has two important aspects.
 
 . Use of CSS3: CCS usage can be changed fairly easily with Tei2Html, so using a customized stylesheet with CSS3 features is already possible. For some usages (print support, aural stylesheets) some changes will be required.
 
-== Support for XHTML
+=== Support for XHTML
 
 Currently, the stylesheet emits normal HTML. It would be nice to be able to generate XHTML as well, but for that, some adjustments are needed to guaranty only valid XHTML is generated. Currently, the tei2html stylesheet relies on the more relaxed validation rules of HTML.
 
-== Support for ePub
+=== Support for ePub
 
 Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the http://code.google.com/p/epub-tools/[epub-tools] project.
 
 Most of the work is done. Some improvements to the CSS stylesheets are still required.
 
-== Support for ePub3
+=== Support for ePub3
 
-=== Priorities
+==== Priorities
 
 . New navigation documents.
 . New metadata using DCTERMS.
 . HTML5 features.
 
-== Running on a web server
+=== Running on a web server
 
 See the http://sourceforge.net/projects/xslt2processor/[XSLT2Processor] project.
 
-== A Note on DRM
+=== A Note on DRM
 
 DRM are a misguided attempt dupe end-user from using works to their fullest extend.
 I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.

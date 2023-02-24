@@ -1,4 +1,4 @@
-= Support for footnotes, etc.
+== Notes
 
 `tei2html` supports various types of notes, that is:
 
@@ -10,7 +10,7 @@
 
 Each of these types is handled in a slightly different way.
 
-== Footnotes
+=== Footnotes
 
 Notes, given in the element `&lt;note&gt;` are, by default, considered footnotes. That can be made explicit by adding `@place=&quot;foot&quot;`
 
@@ -24,7 +24,7 @@ Sometimes, multiple footnote references on a page refer to the same footnote. Th
 
 If you want to override the automatically assigned note number, you can provide an alternative marker with `@rend=&quot;note-marker(*)&quot;`. Note that this will _not_ change the generated number of other notes, that is, the note will still be counted [TODO: fix this].
 
-== Marginal notes.
+=== Marginal notes.
 
 `tei2html` support various types of marginal notes. The way they are placed in the margin in the HTML output is defined by various CSS rules. To indicate a note is a marginal note, use the `@place` attribute. This can have the following values:
 
@@ -38,13 +38,13 @@ The top three options will place the note outside the text-block. The cut-in var
 
 Some care is need to prevent marginal notes to overlap each other. Simply don't place them too close to each other (although that may not be an option when digitizing pre-existing books). It may help to widen the margin if needed.
 
-== Table notes.
+=== Table notes.
 
 Notes that appear inside a table can be marked with `@place=&quot;table&quot;`. In that case, the notes will be rendered directly below the table, and numbered with lower-case letters, starting anew for each table.
 
 Notes in tables not marked as table notes will be treated as footnotes to the division the table appears in.
 
-== Apparatus notes.
+=== Apparatus notes.
 
 Text-critical works often include numerous notes linked to words or lines in the source text, indicating variant readings of the text in one or more editions being compared.
 

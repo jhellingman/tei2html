@@ -1,4 +1,4 @@
-= The TEI Header
+== The TEI Header
 
 The TEI header (`&lt;teiHeader&gt;`) contains information about the text and the sources it is derived from. This meta-data is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.
 
@@ -19,7 +19,7 @@ The TEI header contains four main sections:
 
 ----
 
-== The File Description
+=== The File Description
 
 The first element of the TEI header is the file description, `&lt;fileDesc&gt;`. This contains the most important meta-data in three main elements, the `&lt;titleStmt&gt;`, `&lt;publicationStmt&gt;`, and `&lt;sourceDesc&gt;`. Our template looks like this.
 
@@ -73,7 +73,7 @@ The `&lt;availability&gt;` element should include a short reference to the copyr
 
 In the `&lt;sourceDesc&gt;`, the title and author information appears again. This time, you should use the exact title and author names as given on the title page of the original work used to prepare your Project Gutenberg text. If the title on the spine or cover of the book differs, this may be noted, but the title page is leading.
 
-=== Extensions to TEI
+==== Extensions to TEI
 
 The `@nfc` attribute on `&lt;title&gt;` elements is used to indicate the number of non-filing characters, used when sorting a title. Counted should be all characters up to the character on which the title should be sorted, including spaces.
 

@@ -1,4 +1,4 @@
-= Introduction
+== Introduction
 
 The ePub 3 standard is a broad overhaul of ePub, and adds a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.
 
@@ -20,7 +20,7 @@ For proper development, we also need to be able to test the resulting ePub3 with
 
 Features not within current scope are Javascript support (we like to keep our books passive) and media overlays.
 
-== Things to do
+=== Things to do
 
 For `tei2html` to support ePub 3.0 we need to do add some new information to our ePub files. In most cases, that information can easily be derived from the existing TEI files, so no changes to data-files will be required.
 
@@ -34,9 +34,9 @@ Many of the things to-do can be aligned with over-all support for HTML5/CSS3. Sp
 * Improved meta-data in `.opf` file.
 ** See http://idpf.org/epub/30/spec/epub30-publications.html#sec-package-metadata-dcmi-transition[Metadata transition].
 
-= Changes to the .OPF file
+== Changes to the .OPF file
 
-== Metadata
+=== Metadata
 
 New metadata uses the `&lt;meta&gt;` tag (samples taken from draft ePub 3.0 specification).
 
@@ -98,9 +98,9 @@ Note that the identifier indicated by the `@unique-identifier` attribute on the 
 
 Results in a Package ID: `urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-01T12:00:00Z`.
 
-== Manifest
+=== Manifest
 
-The manifest now has http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values[manifest item properties], to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g. mathml, scripted, remove-content, SVG).
+The manifest now has http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values[manifest item properties], to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g., mathml, scripted, remove-content, SVG).
 
 [source,xml]
 ----
@@ -109,15 +109,15 @@ The manifest now has http://idpf.org/epub/30/spec/epub30-publications.html#sec-i
 <item properties="cover-image" id="cover" href="cover.svg" media-type="image/svg+xml"/>
 ----
 
-= Navigation Document
+== Navigation Document
 
 The navigation document is now a valid `XHTML` page, wrapped in the `&lt;nav&gt;` element.
 
-= Validation
+== Validation
 
-See this http://blog.threepress.org/2011/06/13/validating-epub-3-today/[short article on threepress].
+See this https://web.archive.org/web/20111221091114/blog.threepress.org/2011/06/13/validating-epub-3-today/[short article originally from threepress].
 
-= XHTML
+== XHTML
 
 Will need to generate valid XHTML, which means:
 

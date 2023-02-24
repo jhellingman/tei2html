@@ -1,11 +1,11 @@
-= Those Pesky Page-Breaks
+== Those Pesky Page-Breaks
 
 Printed books have pages, and thus page-breaks every couple of hundred words or so. Electronic files do not have this concept, but since pages and page numbers have traditionally been used to refer to passages in books, they can be captured in `&lt;pb&gt;` elements, which, for good reason, can appear almost anywhere in a TEI document. Here is where the trouble starts.
 
 References:
  * TEI P5 Documentation http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-pb.html[pb]
 
-== Encoding
+=== Encoding
 
 When a page-break occurs between two divisions, it can be encoded in various was, e.g., before the closing tag:
 
@@ -14,7 +14,6 @@ When a page-break occurs between two divisions, it can be encoded in various was
 <pb n="123"/>
 </div1>
 <div1>
-
 ----
 
 Between the closing and opening tag:
@@ -24,7 +23,6 @@ Between the closing and opening tag:
 </div1>
 <pb n="123"/>
 <div1>
-
 ----
 
 After the opening tag:
@@ -34,24 +32,22 @@ After the opening tag:
 </div1>
 <div1>
 <pb n="123"/>
-
 ----
 
 Various guidelines for TEI propose different (conflicting) conventions for each option. The `tei2html` scripts all assume the first option (before the closing tag) This way, the generated tables of content, etc., refer to page-number that is current when the `&lt;div1&gt;` tag occurs.
 
 It should be very well possible to write a small XSLT script to normalize this usage, avoiding complications in the other XSLT scripts.
 
-=== Page Images
+==== Page Images
 
-See link:FacsimileSupport.md[facsimile support]
+See link:FacsimileSupport.adoc[facsimile support]
 
-== Cross-References
+=== Cross-References
 
 As mentioned, cross-references in printed books often reference to page numbers. The easiest way to encode this is to do something like this:
 
 ----
 For details <ref target="pb123">see page 123</ref>.
-
 ----
 
 However, there are several problems with this.

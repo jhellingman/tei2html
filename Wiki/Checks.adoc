@@ -1,34 +1,34 @@
-= Introduction
+== Introduction
 
 XSLT style-sheet to check various TEI conventions and textual issues.
 
-= Metadata
+== Metadata
 
 Verify metadata is present and correct.
 
-= Rendering
+== Rendering
 
 Verify valid rendering attributes are used
 
 * valid CSS-based rendition ladders
 * valid tei2html extensions.
 
-= Types
+== Types
 
 Verify types for elements are valid according to the conventions.
 
-= Numbering
+== Numbering
 
 Verify whether numbered items are in sequence.
 
 * page-breaks `&lt;pb&gt;`
 * divisions `&lt;div#&gt;`
 
-= Spacing and Punctuation
+== Spacing and Punctuation
 
 Verify punctuation marks are properly spaced.
 
-= Quotation Marks
+== Quotation Marks
 
 Verify whether quotation marks are applied correctly.
 

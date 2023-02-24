@@ -73,8 +73,8 @@ handled in a special way when processing the TEI file.
 |`title` |`pgshort` |The title is a short title for Project Gutenberg purposes. 
 |`titlePart` |`main` |The title part is the main title. 
 |`titlePart` |`series` |The title part is a series title. 
-|`titlePart` |`sub` |The title part is a sub-title. 
-|`titlePart` |`volume` |The title part is a volume label (e.g. 'Volume II'). 
+|`titlePart` |`sub` |The title part is a sub-title.
+|`titlePart` |`volume` |The title part is a volume label (e.g., 'Volume II').
 |===
 [cols="<,<,<"]
 |===

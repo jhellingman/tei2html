@@ -1,14 +1,14 @@
-= Required Downloads
+== Required Downloads
 
 The `tei2html` code has a range of dependencies on third-party software. This page lists those.
 
-== Saxon
+=== Saxon
 
 An XSLT 3.0 processor is required for `tei2html`, any XSLT 3.0 processor should work, however, I've developed these stylesheets with Saxon (using the freely available version Saxon HE).
 
 You should download a reasonable recent version of Saxon-HE product from http://www.saxonica.com/products.html[saxonica.com]. I will take care `tei2html` will continue to work with the free versions of Saxon, no matter how tempting the additional features in the paid versions are (such as higher order functions, binary file handling, etc.)
 
-== Java
+=== Java
 
 Saxon-HE requires Java.
 
@@ -16,7 +16,7 @@ Make sure the java executables can be found on the path.
 
 If you do not have Java, you can download it from http://java.com/en/
 
-== Perl
+=== Perl
 
 If you are planning to use the provided Perl scripts to glue things together, you will need a Perl interpreter.
 
@@ -24,7 +24,7 @@ For Windows, my advice is to download http://strawberryperl.com/[Strawberry Perl
 
 _Note_ Upgrading Strawberry Perl does not work properly: please save-guard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
 
-=== Packages used
+==== Packages used
 
 * Image::Size
 * Lingua::BO::Wylie (Only for Tibetan support: download from https://www.thlib.org/reference/transliteration/wyconverter.php[www.thlib.org])
@@ -43,7 +43,7 @@ If you are missing a package, it can easily be installed using CPAN: `cpan insta
 
 After installation, copy the files `LanguageNames.pm` and `SgmlSupport.pm` to the local site library (e.g., `Strawberry\perl\site\lib`).
 
-== SX, NSGML
+=== SX, NSGML
 
 _Optional, only needed you want to use SGML as source format._
 
@@ -58,11 +58,11 @@ A short explanation of Catalog files can be found in the SP documentation on Jam
 As an alternative to SX and NSGML, you can use osx and onsgml from the OpenJade Project. These are slightly more up-to-date. You will have to update
 the names in the main `tei2html.pl` script in that case.
 
-== ZIP
+=== ZIP
 
 To compress ePub files, you will need a zip utility. `tei2html` uses http://www.info-zip.org/Zip.html[info-zip] to handle the peculiar requirements of the ePub format. (See e.g., http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html[this blog entry on creating ePub files].)
 
-== Node.js
+=== Node.js
 
 _Optional, only needed when you use mathematical formulas in TeX notation._
 
@@ -71,13 +71,13 @@ To convert mathematical formulas in TeX format to a format that can be included 
 * Node.js (see the https://nodejs.org/en/[node.js website]).
 * mathjax-node-cli (https://github.com/mathjax/mathjax-node-cli[source at GitHub], most conveniently installed by using `npm` after installing Node.js.
 
-== Patc
+=== Patc
 
 _Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML._
 
 Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary. A make file for use with linux is also included.)
 
-== epubcheck
+=== epubcheck
 
 _Optional, only needed if you want to check generated ePubs._
 
@@ -85,15 +85,15 @@ Epubcheck is a tool to validate epub books, it can be obtained from: https://git
 
 This tool also requires Java; the scripts assume you use `epubcheck-3.0.1.jar`, placed in the tools/lib subdirectory.
 
-== Prince XML
+=== Prince XML
 
 _Optional, only needed if you want generated PDF output._
 
 Note that Prince is a commercial product; a free version can be used for strictly private purposes, and downloaded from: https://www.princexml.com/. The free version does include a small icon on the first page to promote Prince. Shouldn't be a big nuisance.
 
-= Configuration
+== Configuration
 
-== Environment variables
+=== Environment variables
 
 To run `tei2html` from the command line, it will be practical to configure a number of environment variables, that is:
 
