@@ -1,21 +1,24 @@
 == Prerequisites and Installation
 
-See the page on link:Installation.md[installation].
+See the page on link:Installation.adoc[installation].
 
 Note that currently no installer is present, so you will need to get the code from the repository directly.
 
-== Running from the command line
+
+=== Running from the command line
 
 Most of the interaction on the command line is with small Perl scripts that start the actual XSLT processor, and some other scripts.
 
 Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly. Perl should be able to find the place where you've located your scripts (when running perl with the -S option.)
 
-The various `.jar` files (for saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
+The various `.jar` files (for Saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.
 
-== Running interactively
+
+=== Running interactively
 
 No easy window-based interface is yet available. I am working on a small HTML application to run the scripts interactively.
 
-== Running with Oxygen
+
+=== Running with Oxygen
 
 You can use the stylesheets with Oxygen, provided your sources are in XML format. Make sure you select an XSLT 3.0 processor to perform the transformation.

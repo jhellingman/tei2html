@@ -1,8 +1,10 @@
-== Internal Cross-References
+== Cross-References
+
+=== Internal Cross-References
 
 Internal cross-references are to be encoded using the `&lt;ref&gt;` element, with the `@target` attribute carrying the id of the target element referenced to.
 
-=== Special types of references
+==== Special types of references
 
 *Footnotes:* Sometimes footnotes markers appear multiple times on a page, each referring to the same note. When these are encoded as follows:
 
@@ -19,11 +21,11 @@ They will be rendered as a superscript number with the actual number replacing t
 
 When this is rendered on page media, the content will be replaced with the actual page number of the page the reference appears on.
 
-== External Cross References
+=== External Cross References
 
 External cross-references are to be encoded using the `&lt;xref&gt;` element, with the `@url` attribute carrying the url of the resource referenced.
 
-=== Shorthand notations
+==== Shorthand notations
 
 *Project Gutenberg text:* Use `pg:&lt;_ebook number_&gt;` as url.
 
@@ -45,11 +47,11 @@ This will link to a page at the http://www.biblegateway.com/passage/?search=job%
 
 Also supported are https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html[prefixDef definitions] from TEI P5, which allows you to define your own prefix and replacement pattern for external links.
 
-== External Link Locations
+=== External Link Locations
 
 Depending on the output format and configuration, the external links will be handled in different ways. In some output formats (print paper) hyperlinks do not work, in others (ePub) they may or may not work, depending on the reader being used. In that case it is desirable to collect all external references in an appendix, and present the full URL, so they can be accessed manually if so desired. This is the current default behavior when generating ePubs.
 
-=== A generated section with external links
+==== A generated section with external links
 
 * Collect all external links in a table.
 * Show the link URL in this table, and make it active if technically possible.
@@ -57,11 +59,11 @@ Depending on the output format and configuration, the external links will be han
 * From each entry in the table, link back to the location of the original link.
 * The table contains the actual links.
 
-== Future extensions
+=== Future extensions
 
 Currently, a shorthand link `pg:40429` will be translated to a link to the Project Gutenberg page for that book.
 
-When an HTML version is available, it should also be possible to directly link into that book, e.g., `pg:40429#ch6` should be automatically translated to:
+When an HTML version is available, it should also be possible to directly link into that book, _e.g._, `pg:40429#ch6` should be automatically translated to:
 
 ----
 http://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
@@ -78,6 +80,6 @@ book:olw:123456/page/123
 book:olw:123456/page/ix
 ----
 
-== Standard Schemes
+=== Standard Schemes
 
-Currently, there is a standard scheme for the Bible; it would be nice to have these for many widely cited works as well, e.q. the Koran, the Vedas, works by Shakespeare, Milton, etc. Basically, anything that in the past editors found it beneficial to define schemes for in reference works.
+Currently, there is a standard scheme for the Bible; it would be nice to have these for many widely cited works as well, _e.g._, the Koran, the Vedas, works by Shakespeare, Milton, etc. Basically, anything that in the past editors found it beneficial to define schemes for in reference works.

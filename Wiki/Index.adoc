@@ -1,0 +1,62 @@
+= Tei2html
+Jeroen Hellingman
+:toc:
+
+:doctype: book
+
+:front-cover-image: ..\documentation\covers\cover500.jpg
+
+
+include::Introduction.adoc[leveloffset=1]
+
+include::GettingStarted.adoc[leveloffset=1]
+
+include::Installation.adoc[leveloffset=1]
+
+include::ProcessSteps.adoc[leveloffset=1]
+
+include::Configuration.adoc[leveloffset=1]
+
+include::TEIHeader.adoc[leveloffset=1]
+
+include::SpecifyingCoverPages.adoc[leveloffset=1]
+
+include::PageBreaks.adoc[leveloffset=1]
+
+include::Figures.adoc[leveloffset=1]
+
+include::Tables.adoc[leveloffset=1]
+
+include::Footnotes.adoc[leveloffset=1]
+
+include::Formulas.adoc[leveloffset=1]
+
+include::UsingTheRendAttribute.adoc[leveloffset=1]
+
+include::FacsimileSupport.adoc[leveloffset=1]
+
+include::ePub3Support.adoc[leveloffset=1]
+
+include::MediaOverlaysInEPub3.adoc[leveloffset=1]
+
+include::CodingConventions.adoc[leveloffset=1]
+
+= Tools
+
+include::AuxiliaryTools.adoc[leveloffset=1]
+
+include::MergingText.adoc[leveloffset=1]
+
+include::Checks.adoc[leveloffset=1]
+
+include::KwicIndex.adoc[leveloffset=1]
+
+= Future Ideas
+
+include::RedesignCss.adoc[leveloffset=1]
+
+include::ParsingCss.adoc[leveloffset=1]
+
+
+
+

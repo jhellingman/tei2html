@@ -1,6 +1,9 @@
+
+== Media-Overlays in ePub3
+
 Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; also tested output with Tobi, which correctly picks-up the files, and the Readium app for Chrome. Other readers remain to be tested).
 
-== References
+=== References
 
 * https://en.wikipedia.org/wiki/Synchronized_Multimedia_Integration_Language
 * http://data.daisy.org/publications/guidelines/accessible_epub_3_in_epub_3.epub
@@ -23,9 +26,9 @@ Based on a little reverse engineering of a working book (with the freely availab
 * http://www.mycnknow.com/download/TUTORIAL/tutor.htm
 * http://www.ling.upenn.edu/phonetics/p2fa/
 
-== SMIL Files
+=== SMIL Files
 
-Have a structure like this, and is located in the same directory as the referenced HTML file.
+SMIL files have a structure as given below, and must be placed in the same directory as the referenced HTML file.
 
 [source,xml]
 ----
@@ -45,16 +48,15 @@ Have a structure like this, and is located in the same directory as the referenc
     </seq>
   </body>
 </smil>
-
 ----
 
-== MP3 or OGG Files
+=== MP3 or OGG Files
 
 The actual audio files are in a subdirectory called `audio`.
 
-== OPF File
+=== OPF File
 
-=== Metadata section
+==== Metadata section
 
 Add a number of media overlay metadata items; they reference items in the manifest.
 
@@ -68,7 +70,7 @@ Add a number of media overlay metadata items; they reference items in the manife
 
 Except for the narrator, these items are derived from the `.smil` files related to each section.
 
-=== Manifest section
+==== Manifest section
 
 Add the `.smil` and audio files added to the ePub container:
 
@@ -89,25 +91,25 @@ Then also refer to the media-overlay in the entry for the original (text) items
 <item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml" media-overlay="ch1"/>
 ----
 
-== Implementation in `tei2html`
+=== Implementation in `tei2html`
 
-Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the .smil file to use as an overlay.
+Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a `rend` attribute to a division, indicating the `.smil` file to use as an overlay.
 
 [source,xml]
 ----
 <div1 id="ch1" rend="media-overlay(chapter1.smil)">
 ----
 
-And then parse the .smil file for the entries that need to be added to the OPF manifest (that is, the .smil file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
+And then parse the `.smil` file for the entries that need to be added to the OPF manifest (that is, the `.smil` file itself and the associated audio files). This leaves us with a way to obtain the required overlay metadata.
 
 All this is handled in the file `tei2opf.xml`.
 
-== TODO
+=== TODO
 
 * Copy `.smil` files to ePub output directory. DONE
 * Better handling of media metadata. (Generate them from the smil file). DONE; need to look at minor rounding issues in calculation.
 
-== Implementation observations
+=== Implementation observations
 
 * Azardi doesn't seem to like ids with periods in them.
 * Azardi needs fallback media to Ogg.

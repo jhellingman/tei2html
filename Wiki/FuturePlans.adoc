@@ -128,7 +128,6 @@ See the http://sourceforge.net/projects/xslt2processor/[XSLT2Processor] project.
 
 === A Note on DRM
 
-DRM are a misguided attempt dupe end-user from using works to their fullest extend.
-I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
+DRM are a misguided attempt dupe end-user from using works to their fullest extend. I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
 
 Also note that this code inserts parts of itself into the resulting products (similar to Bison), hence I intend to include a similar exception to the GPL for generated ePub books. However this exception will not except section 3 of the GPL.

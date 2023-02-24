@@ -73,7 +73,7 @@ The following keys and values are supported: (Note that this list is not exhaust
 
 As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. `tei2html` assumes that is CSS. See the http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html[TEI guidelines on rendition attributes]. Unlike the values of `@rend`, the specified CSS values are not interpreted at all, but passed to the output CSS directly.
 
-Implementation notes:
+==== Implementation notes:
 
 . Handle the `@style` attribute, and output it as a CSS rule.
 * generate a unique class name for the CSS fragment.

@@ -11,32 +11,21 @@ Tables are supported in `tei2html` with the following features:
 
 === Columns
 
-In addition to the TEI model, `tei2html` supports column definitions. These can be used to apply styling to
-all cells in a column. The following elements are defined:
+In addition to the TEI model, `tei2html` supports column definitions. These can be used to apply styling to all cells in a column. The following elements are defined:
 
-`column`: a column definition, which can have the following attributes: `@cols` the number of columns this
-column definition applies to, by default only a single column; `@rend` the rendering that should be applied
-to each of the cells in the column matching the position of the column definition.
+`column`: a column definition, which can have the following attributes: `@cols` the number of columns this column definition applies to, by default only a single column; `@rend` the rendering that should be applied to each of the cells in the column matching the position of the column definition.
 
-`columnGroup`: a group of column definitions, that can be repeated multiple times. A `columnGroup` should
-always have the attribute `@repeat` which indicates the number of times the column-group should be repeated.
+`columnGroup`: a group of column definitions, that can be repeated multiple times. A `columnGroup` should always have the attribute `@repeat` which indicates the number of times the column-group should be repeated.
 
-Note that the `@rend` value `align(decimal)` triggers some special processing when generating HTML. Since HTML
-does not directly support alignment on the decimal separator, any column with `align(decimal)` will be
-split into two columns, with in the first the integer part of the numbers, and in the second the fractional
+Note that the `@rend` value `align(decimal)` triggers some special processing when generating HTML. Since HTML does not directly support alignment on the decimal separator, any column with `align(decimal)` will be split into two columns, with in the first the integer part of the numbers, and in the second the fractional
 part. CSS is used to make those parts align as expected.
 
 === Braces
 
-Sometimes, rows are preceded by a tall brace. `tei2html` will automatically generate HTML to include
-an image of a tall brace when a cell spans more than one row and only includes a single brace character.
+Sometimes, rows are preceded by a tall brace. `tei2html` will automatically generate HTML to include an image of a tall brace when a cell spans more than one row and only includes a single brace character.
 
 === Table processing
 
-`tei2html` cannot directly process tables correctly. A number of pre-processing steps are required to
-correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`,
-which includes code to determine the correct column of each cell (taking into consideration spanned
-rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally
-applies this transform to the XML before applying the main transform.
+`tei2html` cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally applies this transform to the XML before applying the main transform.
 
 Nested tables are supported.

@@ -1,4 +1,4 @@
-== Introduction
+== Auxiliary Tools
 
 Besides the main XSLT scripts, `tei2html` includes a number of Perl scripts to accomplish various tasks. Many of these are quick hacks to get things done.
 

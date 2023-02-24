@@ -1,4 +1,4 @@
-== Introduction
+== Facsimile Support
 
 TEI P5 contains a http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html[facsimile element] to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.
 
@@ -12,7 +12,7 @@ Finally, we can refer directly to the facsimiles, or generate an HTML wrapper th
 
 All combined, this gives a number of options to take into account when dealing with facsimile editions.
 
-== Facsimile Element
+=== Facsimile Element
 
 The `facsimile` element is a top-level element, that describes a series of page images, and can stand independently of the transcribed text. This allows to specify just the metadata (in the Header) and the scans, to produce a digital facsimile.
 
@@ -24,14 +24,13 @@ The `facsimile` element is a top-level element, that describes a series of page 
 
 ----
 
-== `@facs` Attribute
+=== `@facs` Attribute
 
 The `@facs` attribute on `pb` elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images sub-directory, for example).
 
 [source,xml]
 ----
   <pb n="123" facs="p123.png"/>
-
 ----
 
 Let's call this "direct" facsimile links.
@@ -41,7 +40,6 @@ Alternatively, it can link to an element in the `facsimile` element, for example
 [source,xml]
 ----
   <pb n="123" facs="#facs123"/>
-
 ----
 
 Let's call this "indirect" facsimile links.
@@ -74,9 +72,9 @@ Not all `graphic`-elements might be referred to by a `pb`-element. Need to decid
 
 Need to deal with case that no text is present at all (that is, we have a TEI file with just a teiHeader and a facsimile element) `[TODO]`
 
-== Generated Output
+=== Generated Output
 
-=== HTML
+==== HTML
 
 The output consists of a series of HTML pages, one per page, with some metadata in the heading of the page, and some navigational aids to conveniently jump to another page.
 
@@ -100,7 +98,6 @@ By convention, the facsimile images and wrapper pages will go into a directory `
       </div>
     </body>
   </html>
-
 ----
 
 For each `pb`-element for which a `@facs` attribute is present, a link will be generated to the wrapper file, decorated with a facsimile page-image icon.
@@ -133,7 +130,7 @@ In Navigation
 * (Optional) Links to all pages. `[TODO]`
 * Link back to location in transcribed text. `[DONE]`
 
-=== ePub
+==== ePub
 
 Similar to HTML, taking into account additions to Spine, metadata, etc.
 
