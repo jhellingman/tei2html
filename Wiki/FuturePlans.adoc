@@ -1,0 +1,134 @@
+= Future Features
+
+I intend, when possible, to add the following to the tei2html tool-set.
+
+* Support for Customization
+* Support for PDF output via Prince-XML. (Mostly done)
+* Support for ePub output. (DONE)
+* Support for XHTML output. (DONE, for ePub).
+
+== Tidbits
+
+* Update extractPDF with latest version of tools and option to extract to png format. (DONE)
+* support for `&lt;prefixDef&gt;` (DONE)
+
+== Support TEI P5
+
+The current code was developed on TEI P3, and needs a few updates to work well with the current TEI P5.
+
+For some background, read the http://www.tei-c.org/Guidelines/P5/migrate.xml[P5 migration guidelines]. The http://www.tei-c.org/Guidelines/P5/p4top5.xsl[p4top5.xsl] stylesheet provided there can also be used.
+
+Most of the changes are additions, which can be handled quite transparently.
+
+== Support for Customization (Partly DONE)
+
+Currently, fairly limited customization options exists, and they are only accessible either via parameters to the XSLT stylesheet, or by making changes to the input document or stylesheets themselves. It would be nicer to place the configuration settings for a document into a configuration file, with various adjustable settings.
+
+Note that layout customization is best handled by using custom CSS.
+
+The file would be named `tei2html.config` and would look something like:
+
+[source,xml]
+----
+<tei2html.config>
+   <language>en</language>     
+   <stylesheet>style.css</stylesheet>         
+   <footnoteLocation>Page</footnoteLocation>
+</tei2html.config>
+----
+
+The following elements are foreseen for this configuration file:
+
+* Localization
+
+** language (The language used for generated content, use ISO 639 code, default value of `/TEI.2/text/@lang`)
+** measurements (Original|Regularized, the metric system used in the output, depends on the presence of `&lt;measure reg=&quot;regularized&quot;&gt;original&lt;/measure&gt;` tags.)
+** measurementsPopups (Y|N, show pop-ups for regularized measurements.)
+** corrections (Source|Correction, use corrections in output.)
+** correctionPopups (Y|N, show pop-ups for corrections.)
+* Style
+
+** stylesheet (path to additional stylesheet to be included)
+** stylesheetLocation (Internal|External) location of external stylesheet for output, default for HTML Internal, for ePub external)
+* OPF related
+
+** embeddedFont (path to font to be embedded in an ePub file)
+* Numbering and Labels
+
+** generateHeadingLabels (Y|N, default N, assuming they are encoded in TEI as `&lt;head type=label&gt;...&lt;/head&gt;`)
+** showLineNumbers (Y|N, show the value of `l/@n`, if present, default Y).
+** showParagraphNumbers (Y|N, show the value of `p/@n`, if present, default N).
+* Images
+
+** includeImages (Y|N|All|Important, default All)
+** imagePath (path to location of images, default "images")
+** coverImage (file name of cover image used in ePub, default determined by `figure[@id=&#39;cover&#39;]`)
+* Footnotes
+
+** footnoteLocation (Paragraph|Page|Chapter|Work, default Chapter)
+** footnotePopups (Y|N, make footnote pop-up in-line, default N).
+* Generated Content
+
+** colophon (Y|N, default depends on `&lt;divGen type=&quot;Colophon&quot;/&gt;`)
+** index (Y|N, default depends on presence of `&lt;divGen type=&quot;Index&quot;/&gt;`)
+** contents (Y|N, default depends on presence of `&lt;divGen type=&quot;toc&quot;/&gt;`)
+* Pagination
+
+** pageNumbers (None|Inline|Margin, default Margin)
+** pageImages (Y|N, default N; depends of presence of appropriate `@rend` or `@facs` attribute)
+* External Links
+
+** externalLinks (Y|N, Generate external links, default Y. N may be desired on devices without internet connectivity.)
+* Textual Constants
+
+** organization (name of organization responsible for publication)
+** organizationUrl (url of organization)
+** copyrightStatement (copyright statement to be used in metadata)
+
+Things that can also be handled via CSS:
+
+* Default table alignment (Left/Right/Center)
+* Default verse alignment (Left/Right/Center)
+
+More ideas: https://github.com/jgsmith/radiant-tei-tools/blob/57180651fe1c10ce4e3f2561c76409cc2ff8a692/README.markdown
+
+== Support for print output
+
+Currently, some support for print output via PDF with Prince-XML is build in. This needs to be extended and generalized, such that neat paged format media can be produced as PDFs. This is mostly a matter of using appropriate CSS stylesheets, although in a few cases, it is necessary to reorganize elements in the (in this case intermediate) HTML to enable such output (such as footnotes).
+
+== Support for HTML5
+
+This feature has two important aspects.
+
+. Use of structured elements introduced in HTML5. Currently, Tei2Html already wraps such structured elements with generic `&lt;div&gt;` elements. Replacing those with the corresponding HTML5 elements should do the trick.
+
+. Use of CSS3: CCS usage can be changed fairly easily with Tei2Html, so using a customized stylesheet with CSS3 features is already possible. For some usages (print support, aural stylesheets) some changes will be required.
+
+== Support for XHTML
+
+Currently, the stylesheet emits normal HTML. It would be nice to be able to generate XHTML as well, but for that, some adjustments are needed to guaranty only valid XHTML is generated. Currently, the tei2html stylesheet relies on the more relaxed validation rules of HTML.
+
+== Support for ePub
+
+Basically, the ePub format is a subset of XHTML (with CSS), placed in a ZIP container, and intended to be used on ebook readers. Some of the more advanced features of HTML are lacking, while we also may need to make some adjustments to accommodate the limitations of ebook readers, which often have a small monochrome screen. Also see the http://code.google.com/p/epub-tools/[epub-tools] project.
+
+Most of the work is done. Some improvements to the CSS stylesheets are still required.
+
+== Support for ePub3
+
+=== Priorities
+
+. New navigation documents.
+. New metadata using DCTERMS.
+. HTML5 features.
+
+== Running on a web server
+
+See the http://sourceforge.net/projects/xslt2processor/[XSLT2Processor] project.
+
+== A Note on DRM
+
+DRM are a misguided attempt dupe end-user from using works to their fullest extend.
+I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
+
+Also note that this code inserts parts of itself into the resulting products (similar to Bison), hence I intend to include a similar exception to the GPL for generated ePub books. However this exception will not except section 3 of the GPL.

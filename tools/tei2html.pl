@@ -492,6 +492,8 @@ sub makeSql($) {
 sub makeReadme($) {
     my $xmlFilename = shift;
 
+    makeReadme2($xmlFilename);
+
     if ($force == 0 && isNewer('README.md', $xmlFilename)) {
         trace("Skip create readme because 'README.md' is newer than '$xmlFilename'.");
         return;
@@ -499,6 +501,19 @@ sub makeReadme($) {
 
     trace("Extract metadata to README.md...");
     system ("$saxon $xmlFilename $xsldir/tei2readme.xsl > README.md");
+}
+
+
+sub makeReadme2($) {
+    my $xmlFilename = shift;
+
+    if ($force == 0 && isNewer('README.adoc', $xmlFilename)) {
+        trace("Skip create readme because 'README.adoc' is newer than '$xmlFilename'.");
+        return;
+    }
+
+    trace("Extract metadata to README.adoc...");
+    system ("$saxon $xmlFilename $xsldir/tei2adoc.xsl > README.adoc");
 }
 
 
