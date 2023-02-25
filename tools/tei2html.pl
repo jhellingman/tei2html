@@ -189,7 +189,7 @@ if ($showHelp == 1) {
 # Dependencies between files:
 #
 # (Processed/)?images/*.(jpg|png) -> imageinfo.xml
-# *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-included.xml -> *-preprocessed.xml -> *.html, *.epub, readme.md, metadata.xml
+# *(-[0-9].[0-9]+).tei + imageinfo.xml + tei2html.config + custom.css -> *.xml -> *-included.xml -> *-preprocessed.xml -> *.html, *.epub, readme.adoc, metadata.xml
 # *(-[0-9].[0-9]+).tei -> *(-utf8).txt
 
 
@@ -489,10 +489,8 @@ sub makeSql($) {
 }
 
 
-sub makeReadme($) {
+sub makeReadmeMarkDown($) {
     my $xmlFilename = shift;
-
-    makeReadme2($xmlFilename);
 
     if ($force == 0 && isNewer('README.md', $xmlFilename)) {
         trace("Skip create readme because 'README.md' is newer than '$xmlFilename'.");
@@ -504,7 +502,7 @@ sub makeReadme($) {
 }
 
 
-sub makeReadme2($) {
+sub makeReadme($) {
     my $xmlFilename = shift;
 
     if ($force == 0 && isNewer('README.adoc', $xmlFilename)) {

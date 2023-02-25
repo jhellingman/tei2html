@@ -54,10 +54,10 @@
     <xsl:template match="TEI.2 | TEI" expand-text="yes">
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
+            <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
             <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
-            <xsl:apply-templates select="teiHeader/fileDesc/respStmt/name" mode="contributors"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
             <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
                 <xsl:text>|PG Ebook Number |https://www.gutenberg.org/ebooks/{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}[{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}]&lf;</xsl:text>
@@ -68,9 +68,31 @@
         <xsl:text>|Title |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>
 
+    <xsl:template match="title[@type='short']" expand-text="yes">
+        <xsl:text>|Short title |{normalize-space(.)}&lf;</xsl:text>
+    </xsl:template>
+
     <xsl:template match="author" expand-text="yes">
         <xsl:text>|Author |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>
+
+    <xsl:template match="editor" expand-text="yes">
+        <xsl:text>|Editor |{normalize-space(.)}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="respStmt[resp = 'Translator']" expand-text="yes">
+        <xsl:text>|Translator |{normalize-space(name)}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="respStmt[resp = 'Illustrator']" expand-text="yes">
+        <xsl:text>|Illustrator |{normalize-space(name)}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="respStmt[resp = 'Contributor']" expand-text="yes">
+        <xsl:text>|Contributor |{normalize-space(name)}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="respStmt"/>
 
     <xsl:template match="publicationStmt" expand-text="yes">
         <xsl:text>|Publisher |{publisher}, {pubPlace}, {date}&lf;</xsl:text>
@@ -88,13 +110,6 @@
         <!-- Filter out empty subjects and our template default placeholder -->
         <xsl:if test="f:is-valid(.)">
             <xsl:text>|Keyword |{normalize-space(.)}&lf;</xsl:text>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="name" mode="contributors" expand-text="yes">
-        <!-- Filter out empty contributors and our template default placeholder -->
-        <xsl:if test="f:is-valid(.)">
-            <xsl:text>|Contributor |{normalize-space(.)}&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
