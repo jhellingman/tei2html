@@ -7,10 +7,12 @@ use Getopt::Long;
 use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
 use HTML::Entities;
 
-my $utf8 = 0;       # Input file is utf8.
+my $ascii = 0;          # Input file is ascii.
+my $useExtensions = 0;  # Use extensions for Franck.
 
 GetOptions(
-    'u' => \$utf8
+    'a' => \$ascii,
+    'x' => \$useExtensions
     );
 
 main();
@@ -18,21 +20,13 @@ main();
 sub main {
     my $file = $ARGV[0];
     my $projectName = $ARGV[1];
-    my $useExtensions = 0;
 
     if (!defined $projectName && $file =~ /^(projectID[0-9a-f]+)/) {
         $projectName = $1;
     }
 
-    if ($file eq '-x') {
-        $useExtensions = 1;
-        $file = $ARGV[1];
-        $projectName = $ARGV[2];
-        print STDERR "USING EXTENSIONS FOR FRANCK!\n";
-    }
-
     open(INPUTFILE, $file) || die("Could not open input file $file");
-    if ($utf8 != 0) {
+    if ($ascii == 0) {
         binmode(INPUTFILE, ":utf8");
     }
 
