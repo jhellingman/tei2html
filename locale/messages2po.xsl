@@ -130,5 +130,4 @@ msgstr ""
     <xsl:variable name="uppercase" select="'abcdefghijklmnopqrstuvwxyz'"/>
     <xsl:variable name="lowercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
 
-
 </xsl:transform>

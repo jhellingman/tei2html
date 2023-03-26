@@ -6,10 +6,184 @@
 ]>
 
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:i="http://gutenberg.ph/issues"
                stylesheet="../checks.xsl"
                version="3.0">
 
-   <!-- table -->
+    <!-- header -->
+
+    <x:scenario label="When verifying publication statement contains an ePub id">
+        <x:context mode="checks">
+            <publicationStmt>
+                <idno type="epub-id">urn:uuid:ffb7c0df-b221-4ec6-8a0f-ce586c6571de</idno>
+            </publicationStmt>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+   <x:scenario label="When verifying publication statement contains an ePub id">
+      <x:context mode="checks">
+        <publicationStmt/>
+      </x:context>
+      <x:expect label="will return the missing ePub id error messages">
+      <i:issue
+         pos=""
+         code="H01"
+         category="Header"
+         target="..."
+         level="Error"
+         element="publicationStmt"
+         page="">No ePub-id present.</i:issue>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When verifying publication statement contains a valid ePub id">
+      <x:context mode="checks">
+        <publicationStmt>
+            <idno type="epub-id">[INVALID]</idno>
+        </publicationStmt>
+      </x:context>
+      <x:expect label="will return an error message indicating the issue">
+      <i:issue
+         pos=""
+         code="H02"
+         category="Header"
+         target="..."
+         level="Error"
+         element="idno"
+         page="">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
+      </x:expect>
+   </x:scenario>
+
+    <x:scenario label="When verifying author contains a key">
+      <x:context mode="checks">
+        <titleStmt>
+            <author key="Aimard, Gustave" ref="https://viaf.org/viaf/9841962/">Gustave Aimard (1818–1883)</author>
+        </titleStmt>
+      </x:context>
+      <x:expect label="will return no error messages"/>
+   </x:scenario>
+
+    <x:scenario label="When verifying author contains a key">
+      <x:context mode="checks">
+        <titleStmt>
+            <author ref="https://viaf.org/viaf/9841962/">Gustave Aimard (1818–1883)</author>
+        </titleStmt>
+      </x:context>
+      <x:expect label="will return an error message">
+          <i:issue
+             pos=""
+             code="H03"
+             category="Header"
+             target="..."
+             level="Warning"
+             element="author"
+             page="">No @key attribute present for author Gustave Aimard (1818–1883).</i:issue>
+      </x:expect>
+   </x:scenario>
+
+    <x:scenario label="When verifying author reference is a valid reference to VIAF">
+      <x:context mode="checks">
+        <titleStmt>
+            <author key="Aimard, Gustave" ref="[INVALID]">Gustave Aimard (1818–1883)</author>
+        </titleStmt>
+      </x:context>
+      <x:expect label="will return an error message">
+          <i:issue
+             pos=""
+             code="H09"
+             category="Header"
+             target="..."
+             level="Error"
+             element="author"
+             page="">The @ref attribute “[INVALID]” on author Gustave Aimard (1818–1883) is not a valid viaf.org url.</i:issue>
+      </x:expect>
+   </x:scenario>
+
+
+    <!-- Structure of text -->
+
+    <x:scenario label="When verifying the front contains a cover image and a title-page">
+        <x:context mode="checks">
+            <front id="frontmatter">
+                <div1 id="cover" type="Cover">
+                    <p>
+                        <figure id="cover-image">
+                            <figDesc>Cover image.</figDesc>
+                        </figure>
+                    </p>
+                </div1>
+                <div1 id="titlepage" type="TitlePage">
+                    <p>
+                        <figure id="titlepage-image">
+                            <figDesc>Title-page image.</figDesc>
+                        </figure>
+                    </p>
+                </div1>
+            </front>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+    <x:scenario label="When verifying the front contains a cover image and a title-page">
+        <x:context mode="checks">
+            <front/>
+        </x:context>
+        <x:expect label="will return three error messages">
+            <i:issue
+                     pos=""
+                     code="E01"
+                     category="Structure"
+                     target="..."
+                     level="Warning"
+                     element="front"
+                     page="">No cover defined (div1[@type='Cover' and @id='cover']/p/figure[@id='cover-image']).</i:issue>
+            <i:issue
+                     pos=""
+                     code="E02"
+                     category="Structure"
+                     target="..."
+                     level="Warning"
+                     element="front"
+                     page="">No title page defined (div1[@type='TitlePage' and @id='titlepage']/p/figure[@id='titlepage-image']).</i:issue>
+            <i:issue
+                     pos=""
+                     code="T08"
+                     category="IDs"
+                     target="..."
+                     level="Error"
+                     element="front"
+                     page="">No id specified for front.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When verifying the back contains a colophon">
+        <x:context mode="checks">
+            <back/>
+        </x:context>
+        <x:expect label="will return two error messages">
+            <i:issue
+                     pos=""
+                     code="E03"
+                     category="Structure"
+                     target="xd74e1"
+                     level="Error"
+                     element="back"
+                     page="">No generated colophon in back-matter (divGen type='Colophon').</i:issue>
+            <i:issue
+                     pos=""
+                     code="T08"
+                     category="IDs"
+                     target="xd74e1"
+                     level="Error"
+                     element="back"
+                     page="">No id specified for back.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- table -->
 
    <x:scenario label="When verifying the sums in a table which is correct">
       <x:context mode="checks">
@@ -28,7 +202,7 @@
             </row>
         </table>
       </x:context>
-       <x:expect label="will return no error messages"/>
+      <x:expect label="will return no error messages"/>
    </x:scenario>
 
    <x:scenario label="When verifying the sums in a table which is incorrect">
@@ -49,7 +223,7 @@
         </table>
       </x:context>
       <x:expect label="will return relevant error messages">
-        <i:issue xmlns:i="http://gutenberg.ph/issues"
+        <i:issue
                  pos=""
                  code="T2"
                  category="Table"
@@ -57,7 +231,7 @@
                  level="Warning"
                  element="cell"
                  page="">Verify value &ldquo;5&rdquo;: [sum] 5 not equal to 4 (difference: 1).</i:issue>
-        <i:issue xmlns:i="http://gutenberg.ph/issues"
+        <i:issue
                  pos=""
                  code="T2"
                  category="Table"
@@ -171,7 +345,7 @@
         </table>
       </x:context>
       <x:expect label="will return relevant error messages">
-        <i:issue xmlns:i="http://gutenberg.ph/issues"
+        <i:issue
                  pos=""
                  code="T2"
                  category="Table"
@@ -181,6 +355,5 @@
                  page="">Verify value “4”: [sumDecimal] 4.8 not equal to 5.8 (difference: -1).</i:issue>
       </x:expect>
    </x:scenario>
-
 
 </x:description>

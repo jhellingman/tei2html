@@ -17,7 +17,7 @@
         xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
         version="1.0">
 
-    <msg:messages xml:lang="en" languageName="English">
+    <msg:messages xml:lang="en" name="English">
 
         <!-- Localized Messages for Project Gutenberg Ebooks in XML -->
 
@@ -736,7 +736,7 @@
     <!-- French translations -->
 
 
-    <msg:messages xml:lang="fr" languageName="French">
+    <msg:messages xml:lang="fr" name="French">
 
         <msg:message name="msgAbbreviation">Abbréviation</msg:message>
         <msg:message name="msgAbbreviations">Abbréviations</msg:message>
@@ -889,7 +889,7 @@
     <!--==#############################################################==-->
     <!-- German translations -->
 
-    <msg:messages xml:lang="de" languageName="German">
+    <msg:messages xml:lang="de" name="German">
 
         <msg:message name="msgGenerationDate">Erstellungsdatum der Datei</msg:message>
         <msg:message name="msgDesigner">Designer</msg:message>
@@ -1221,7 +1221,7 @@
     <!--==#############################################################==-->
     <!-- Dutch translation -->
 
-    <msg:messages xml:lang="nl" languageName="Dutch">
+    <msg:messages xml:lang="nl" name="Dutch">
 
         <msg:message name="msgGenerationDate">Aanmaakdatum bestand</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg plaatst geen actieve externe links in haar eboeken.</msg:message>
@@ -1782,7 +1782,7 @@
     <!--==#############################################################==-->
     <!-- Afrikaans translation -->
 
-    <msg:messages xml:lang="af" fallback="en" languageName="Afrikaans">
+    <msg:messages xml:lang="af" fallback="en" name="Afrikaans">
 
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="en">Engels</msg:message>
@@ -1839,7 +1839,7 @@
     <!--==#############################################################==-->
     <!-- Cebuano translation -->
 
-    <msg:messages xml:lang="ceb" fallback="tl" languageName="Cebuano">
+    <msg:messages xml:lang="ceb" fallback="tl" name="Cebuano">
         <msg:message name="msgContents">Sulod</msg:message>
         <msg:message name="msgToc">Sulod</msg:message>
         <msg:message name="msgPage">Panid</msg:message>
@@ -1898,7 +1898,7 @@
     <!--==#############################################################==-->
     <!-- Filipino (Tagalog) translation -->
 
-    <msg:messages xml:lang="tl" languageName="Tagalog">
+    <msg:messages xml:lang="tl" name="Tagalog">
         <msg:message name="msgContents">Nilalaman</msg:message>
         <msg:message name="msgToc">Nilalaman</msg:message>
         <msg:message name="msgTableOfContents">Talaan ng Nilalaman</msg:message>
@@ -1926,7 +1926,7 @@
     </msg:messages>
 
     <!-- Tagalog (accented, as used in the 1920s) translation -->
-    <msg:messages xml:lang="tl-1920" languageName="Tagalog (old orthography)">
+    <msg:messages xml:lang="tl-1920" name="Tagalog (old orthography)">
         <msg:message name="msgContents">Nilálamán</msg:message>
         <msg:message name="msgToc">Nilálamán</msg:message>
         <msg:message name="msgTableOfContents">Talaán n&gtilde; Nilálamán</msg:message>
@@ -1955,7 +1955,7 @@
     <!--==#############################################################==-->
     <!-- Spanish translation -->
 
-    <msg:messages xml:lang="es" languageName="Spanish">
+    <msg:messages xml:lang="es" name="Spanish">
 
         <msg:message name="msgNotCopyrightedUS">Este libro no tiene derechos de autor en los Estados Unidos. Si vive en otro lugar, verifique las leyes de su país antes de descargar este libro.</msg:message>
         <msg:message name="msgPGComment">Este libro ha sido producido por Project Gutenberg y está disponible gratuitamente en https://www.gutenberg.org/.</msg:message>
