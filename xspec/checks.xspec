@@ -167,7 +167,7 @@
                      pos=""
                      code="E03"
                      category="Structure"
-                     target="xd74e1"
+                     target="..."
                      level="Error"
                      element="back"
                      page="">No generated colophon in back-matter (divGen type='Colophon').</i:issue>
@@ -175,7 +175,7 @@
                      pos=""
                      code="T08"
                      category="IDs"
-                     target="xd74e1"
+                     target="..."
                      level="Error"
                      element="back"
                      page="">No id specified for back.</i:issue>
