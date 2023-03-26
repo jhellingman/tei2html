@@ -2,7 +2,7 @@
 
 The TEI header (`&lt;teiHeader&gt;`) contains information about the text and the sources it is derived from. This metadata is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.
 
-`tei2html` uses the metadata in the TEI header to construct the meta-data in the target formats, as well as the optional colophon. It is important to have the correctly specify the metadata in the TEI header.
+`tei2html` uses the metadata in the TEI header to construct the meta-data in the target formats, as well as the optional colophon. It is important to correctly specify the metadata in the TEI header.
 
 Preparing a TEI header is less work than it might seem, as you can normally work from a template, prepared with the most common elements already in place.
 
@@ -48,9 +48,9 @@ The first element of the TEI header is the file description, `&lt;fileDesc&gt;`.
     </fileDesc>
 ----
 
-You might notice that the TEI header contains the title and author information twice. This is intentional, as one refers to the title of the file, and one to the title of the source. For the title given in the `&lt;titleStmt&gt;`, some TEI recommendations suggest to append "an electronic transcription" to the original title. We think that is unnecessary, and only use the original title as it is, or perhaps normalized in some fashion. For personal names, we always give them in the natural order, that is, without a comma, and optionally supply the vital dates in parentheses, for example, `&lt;author&gt;John Doe (1833-1901)&lt;/author&gt;`. You may add other elements allowed by TEI in this statement if needed.
+You might notice that the TEI header contains the title and author information twice. This is intentional, as one refers to the title of the file, and one to the title of the source. For the title given in the `&lt;titleStmt&gt;`, some TEI recommendations suggest to append "an electronic transcription" to the original title. I think that is unnecessary, and will use the original title as given on the title page, or perhaps normalized in some fashion. For personal names, I always give them in the natural order, that is, without a comma, and optionally I will supply the vital dates in parentheses, for example, `&lt;author&gt;John Doe (1833-1901)&lt;/author&gt;`. You may add other elements allowed by TEI in this statement if needed.
 
-In the publication statement, we give some information on the publisher and its availability. For typical Project Gutenberg publications, the information in the template is fine.
+In the publication statement, you can give some information on the publisher and the availability of the book. For typical Project Gutenberg publications, the information in the template is fine.
 
 The following specific values can be used in the `&gt;publicationStmt&lt;` element to register the various ways the text is known at Project Gutenberg and elsewhere.
 
