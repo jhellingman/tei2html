@@ -157,7 +157,6 @@
         </x:expect>
     </x:scenario>
 
-
     <x:scenario label="When verifying the back contains a colophon">
         <x:context mode="checks">
             <back/>
@@ -182,6 +181,67 @@
         </x:expect>
     </x:scenario>
 
+
+    <!-- Types -->
+
+    <x:scenario label="When verifying a titlePart has a valid type">
+        <x:context mode="check-types">
+            <titlePage>
+                <docTitle>
+                    <titlePart type="INVALID">Title part.</titlePart>
+                </docTitle>
+            </titlePage>
+        </x:context>
+        <x:expect label="will return an error message">
+            <i:issue
+                     pos=""
+                     code="T01"
+                     category="Types"
+                     target="..."
+                     level="Error"
+                     element="titlePart"
+                     page="">Unexpected type for titlePart: INVALID.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a head has a valid type">
+        <x:context mode="check-types">
+            <div1>
+                <head type="INVALID">Head.</head>
+            </div1>
+        </x:context>
+        <x:expect label="will return an error message">
+            <i:issue
+                    pos=""
+                    code="T02"
+                    category="Types"
+                    target="..."
+                    level="Error"
+                    element="head"
+                    page="">Unexpected type for head: INVALID.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a sequences of divisions is in order">
+        <x:context mode="checks">
+            <body>
+                <div1 id="ch1" type="Chapter" n="I"/>
+                <div1 id="ch2" type="Chapter" n="II"/>
+                <div1 id="ch4" type="Chapter" n="IV"/>
+                <div1 id="ch5" type="Chapter" n="V"/>
+            </body>
+        </x:context>
+        <x:expect label="will return an error message">
+            <i:issue
+                     pos=""
+                     code="S02"
+                     category="Numbering"
+                     target="ch4"
+                     level="Warning"
+                     element="div1"
+                     page="">Element div1: n-attribute IV out-of-sequence. (preceding: II).</i:issue>
+        </x:expect>
+    </x:scenario>
 
     <!-- table -->
 
