@@ -10,7 +10,7 @@
                stylesheet="../checks.xsl"
                version="3.0">
 
-    <!-- header -->
+    <!-- TEI header -->
 
     <x:scenario label="When verifying publication statement contains an ePub id">
         <x:context mode="checks">
@@ -21,7 +21,7 @@
         <x:expect label="will return no error messages"/>
     </x:scenario>
 
-   <x:scenario label="When verifying publication statement contains an ePub id">
+    <x:scenario label="When verifying publication statement contains an ePub id">
       <x:context mode="checks">
         <publicationStmt/>
       </x:context>
@@ -35,9 +35,9 @@
          element="publicationStmt"
          page="">No ePub-id present.</i:issue>
       </x:expect>
-   </x:scenario>
+    </x:scenario>
 
-   <x:scenario label="When verifying publication statement contains a valid ePub id">
+    <x:scenario label="When verifying publication statement contains a valid ePub id">
       <x:context mode="checks">
         <publicationStmt>
             <idno type="epub-id">[INVALID]</idno>
@@ -53,7 +53,7 @@
          element="idno"
          page="">ePub-id does not use GUID format (urn:uuid:########-####-####-####-############).</i:issue>
       </x:expect>
-   </x:scenario>
+    </x:scenario>
 
     <x:scenario label="When verifying author contains a key">
       <x:context mode="checks">
@@ -243,7 +243,70 @@
         </x:expect>
     </x:scenario>
 
-    <!-- table -->
+
+    <!-- Cross references -->
+
+    <x:scenario label="When verifying a target attribute points to a valid id">
+        <x:context mode="check-ids">
+            <text>
+                <p id="VALID"><ref target="VALID">Valid target</ref></p>
+            </text>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+    <x:scenario label="When verifying a target attribute points to a valid id">
+        <x:context mode="check-ids">
+            <text>
+                <p><ref target="INVALID">Invalid target</ref></p>
+            </text>
+        </x:context>
+        <x:expect label="will return an error message">
+            <i:issue
+                     pos=""
+                     code="I01"
+                     category="References"
+                     target="..."
+                     level="Error"
+                     element="ref"
+                     page="">Element ref: target-attribute value INVALID not present as id.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a rend attribute points to a valid rendition element">
+        <x:context mode="check-ids">
+            <rendition id="valid-rendition">color: red;</rendition>
+            <text>
+                <div>
+                    <p rendition="valid-rendition">Valid rendition reference</p>
+                </div>
+            </text>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+    <x:scenario label="When verifying a rend attribute points to a valid rendition element">
+        <x:context mode="check-ids">
+            <rendition id="valid-rendition">color: red;</rendition>
+            <text>
+                <div>
+                    <p rendition="invalid-rendition">Invalid rendition reference</p>
+                </div>
+            </text>
+        </x:context>
+        <x:expect label="will return an error message">
+            <i:issue pos=""
+                     code="I02"
+                     category="References"
+                     target="..."
+                     level="Error"
+                     element="p"
+                     page="">Element p: rendition element invalid-rendition not present.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- Table -->
 
    <x:scenario label="When verifying the sums in a table which is correct">
       <x:context mode="checks">
@@ -365,7 +428,6 @@
         </x:context>
         <x:expect label="will return no error messages"/>
     </x:scenario>
-
 
    <x:scenario label="When verifying the sums in a table with decimal columns which is correct">
       <x:context mode="checks">
