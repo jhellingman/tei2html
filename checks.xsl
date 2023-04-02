@@ -287,8 +287,8 @@
             category="{$category}"
             target="{f:generate-id($node)}"
             level="{$level}"
-            element="{name($node)}"
-            page="{f:get-page($node)}"><xsl:value-of select="$message"/></i:issue>
+            element="{if ($node/@sourceElement) then $node/@sourceElement else name($node)}"
+            page="{if ($node/@sourcePage) then $node/@sourcePage else f:get-page($node)}"><xsl:value-of select="$message"/></i:issue>
     </xsl:function>
 
 
@@ -1281,7 +1281,6 @@
     </xsl:function>
 
 
-
     <xsl:variable name="common-abbreviations" select="f:get-abbreviations()"/>
 
 
@@ -1313,6 +1312,7 @@
 
 
     <xsl:variable name="common-abbreviations-with-periods" select="f:get-abbreviations-with-periods()"/>
+
 
     <xsl:function name="f:get-abbreviations-with-periods">
         <tmp:abbrs>
@@ -1373,15 +1373,7 @@
             <xsl:variable name="pattern" select="replace($pattern, '\\s[+]$', '')"/>
 
             <xsl:if test="matches($string, $pattern)">
-                <i:issue
-                    pos="{$node/@pos}"
-                    level="Warning"
-                    code="P19"
-                    category="Punctuation"
-                    target="{f:generate-id($node)}"
-                    page="{$node/@sourcePage}"
-                    element="{$node/@sourceElement}">
-                        Spaced abbreviation <xsl:value-of select="$abbr"/> in: <xsl:value-of select="f:match-fragment($string, $pattern)"/></i:issue>
+                <xsl:copy-of select="f:issue($node, 'P19', 'Punctuation', 'Warning', 'Spaced abbreviation ' || $abbr || ' in: ' || f:match-fragment($string, $pattern) || '.')"/>
             </xsl:if>
         </xsl:if>
     </xsl:function>
@@ -1396,15 +1388,7 @@
         <xsl:param name="message" as="xs:string"/>
 
         <xsl:if test="matches($segment, $pattern)">
-            <i:issue
-                pos="{$node/@pos}"
-                level="{$level}"
-                code="{$code}"
-                category="Punctuation"
-                target="{f:generate-id($node)}"
-                page="{$node/@sourcePage}"
-                element="{$node/@sourceElement}">
-                    <xsl:value-of select="$message"/> in: <xsl:value-of select="f:match-fragment($segment, $pattern)"/></i:issue>
+            <xsl:copy-of select="f:issue($node, $code, 'Punctuation', $level, $message || ' in: ' || f:match-fragment($segment, $pattern) || '.')"/>
         </xsl:if>
     </xsl:function>
 
@@ -1444,39 +1428,16 @@
 
         <xsl:choose>
             <xsl:when test="substring($unclosed, 1, 10) = 'Unexpected'">
-                <i:issue
-                    pos="{@pos}"
-                    code="P11"
-                    category="Punctuation"
-                    target="{f:generate-id(.)}"
-                    level="Warning"
-                    element="{./@sourceElement}"
-                    page="{./@sourcePage}"><xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
+                <xsl:copy-of select="f:issue(., 'P11', 'Punctuation', 'Warning', $unclosed || ' in: ' || f:head-chars($string) || '.')"/>
             </xsl:when>
             <xsl:when test="f:contains-only($unclosed, $open-quotation-marks)">
                 <xsl:if test="not(starts-with($unspacedNext, f:reverse($unclosed)))">
-                    <i:issue
-                        pos="{@pos}"
-                        code="P12"
-                        category="Punctuation"
-                        target="{f:generate-id(.)}"
-                        level="Warning"
-                        element="{./@sourceElement}"
-                        page="{./@sourcePage}">Unclosed quotation mark(s): <xsl:value-of select="$unclosed"/> not re-opened in next paragraph.
-                        Current: <xsl:value-of select="f:tail-chars($string)"/>
-                        Next: <xsl:value-of select="f:head-chars($next)"/>
-                    </i:issue>
+                    <xsl:copy-of select="f:issue(., 'P12', 'Punctuation', 'Warning',
+                        'Unclosed quotation mark(s): ' || $unclosed || ' not re-opened in next paragraph. Current: ' || f:tail-chars($string) || ' Next: ' || f:head-chars($next) || '.')"/>
                 </xsl:if>
             </xsl:when>
             <xsl:when test="$unclosed != ''">
-                <i:issue
-                    pos="{@pos}"
-                    code="P13"
-                    category="Punctuation"
-                    target="{f:generate-id(.)}"
-                    level="Warning"
-                    element="{./@sourceElement}"
-                    page="{./@sourcePage}">Unclosed punctuation: <xsl:value-of select="$unclosed"/> in: <xsl:value-of select="f:head-chars($string)"/></i:issue>
+                <xsl:copy-of select="f:issue(., 'P13', 'Punctuation', 'Warning', 'Unclosed punctuation: ' || $unclosed || ' in: ' || f:head-chars($string) || '.')"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>

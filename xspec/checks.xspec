@@ -3,10 +3,14 @@
 
     <!ENTITY ldquo      "&#x201C;">
     <!ENTITY rdquo      "&#x201D;">
+    <!ENTITY lsquo      "&#x2018;">
+    <!ENTITY rsquo      "&#x2019;">
 ]>
 
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:i="http://gutenberg.ph/issues"
+               xmlns:s="http://gutenberg.ph/segments"
+               xmlns:tmp="urn:temporary"
                stylesheet="../checks.xsl"
                version="3.0">
 
@@ -305,65 +309,174 @@
         </x:expect>
     </x:scenario>
 
+    <!-- Textual issues (based on segments) -->
+
+    <x:variable name="common-abbreviations"><tmp:abbrs><tmp:abbr>e.g.</tmp:abbr></tmp:abbrs></x:variable>
+
+    <x:variable name="common-abbreviations-with-periods"><tmp:abbrs><tmp:abbr>e.g.</tmp:abbr></tmp:abbrs></x:variable>
+
+    <x:scenario label="When verifying a string has balanced punctuation marks">
+        <x:context mode="checks">
+            <s:segment>&ldquo;This (string) has [balanced {punctuation} marks], including with &lsquo;quotation marks&rsquo;!&rdquo;</s:segment>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has balanced punctuation marks">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">&ldquo;This (string) has [unbalanced {punctuation marks], including with &lsquo;quotation marks&rsquo;!&rdquo;</s:segment>
+        </x:context>
+        <x:expect label="will return an error messages">
+            <i:issue pos=""
+                     code="P11"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Unexpected closing punctuation: ] open: &ldquo;[{ in: &ldquo;This (string) has [unbalanced {punct....</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has balanced punctuation marks">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">&ldquo;This (string) has [unbalanced {punctuation marks}}], including with &lsquo;quotation marks&rsquo;!&rdquo;</s:segment>
+        </x:context>
+        <x:expect label="will return an error messages">
+            <i:issue pos=""
+                     code="P11"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Unexpected closing punctuation: } open: &ldquo;[ in: &ldquo;This (string) has [unbalanced {punct....</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has balanced punctuation marks">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">&ldquo;This (string) has [unbalanced {punctuation marks}], including with &lsquo;quotation marks&rsquo;!</s:segment>
+        </x:context>
+        <x:expect label="will return an error messages">
+            <i:issue pos=""
+                     code="P12"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Unclosed quotation mark(s): &ldquo; not re-opened in next paragraph. Current: ...s}], including with &lsquo;quotation marks&rsquo; Next: .</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has balanced punctuation marks">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">This (string) has [unbalanced {punctuation marks}!</s:segment>
+        </x:context>
+        <x:expect label="will return an error messages">
+            <i:issue pos=""
+                     code="P13"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Unclosed punctuation: [ in: This (string) has [unbalanced {punctu....</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has spaces following punctuation marks">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">This string ends in a period.Immediately followed by a letter.</s:segment>
+        </x:context>
+        <x:expect label="will return an error messages">
+            <i:issue pos=""
+                     code="P05"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Missing space after period in: ring ends in a period.Immediately follow.</i:issue>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has a known abbreviation">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">This string ends has an abbreviation with periods: e.g. this one.</s:segment>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
+
+    <x:scenario label="When verifying a string has a known abbreviation, but spaced">
+        <x:context mode="checks">
+            <s:segment sourceElement="p" sourcePage="23">This string ends has an abbreviation with periods: e. g. this one.</s:segment>
+        </x:context>
+        <x:expect label="will return no error messages">
+            <i:issue pos=""
+                     code="P19"
+                     category="Punctuation"
+                     target="..."
+                     level="Warning"
+                     element="p"
+                     page="23">Spaced abbreviation e.g. in: iation with periods: e. g. this one..</i:issue>
+        </x:expect>
+    </x:scenario>
 
     <!-- Table -->
 
-   <x:scenario label="When verifying the sums in a table which is correct">
-      <x:context mode="checks">
-        <table id="table_one">
-            <row>
-                <cell col="1" row="1">1</cell>
-                <cell col="2" row="1">2</cell>
-            </row>
-            <row>
-                <cell col="1" row="2">3</cell>
-                <cell col="2" row="2">4</cell>
-            </row>
-            <row>
-                <cell col="1" row="3" role="sum">4</cell>
-                <cell col="2" row="3" role="sum">6</cell>
-            </row>
-        </table>
-      </x:context>
-      <x:expect label="will return no error messages"/>
-   </x:scenario>
+    <x:scenario label="When verifying the sums in a table which is correct">
+        <x:context mode="checks">
+            <table id="table_one">
+                <row>
+                    <cell col="1" row="1">1</cell>
+                    <cell col="2" row="1">2</cell>
+                </row>
+                <row>
+                    <cell col="1" row="2">3</cell>
+                    <cell col="2" row="2">4</cell>
+                </row>
+                <row>
+                    <cell col="1" row="3" role="sum">4</cell>
+                    <cell col="2" row="3" role="sum">6</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
 
-   <x:scenario label="When verifying the sums in a table which is incorrect">
-      <x:context mode="checks">
-        <table id="table_two">
-            <row>
-                <cell col="1" row="1">1</cell>
-                <cell col="2" row="1">2</cell>
-            </row>
-            <row>
-                <cell col="1" row="2">3</cell>
-                <cell col="2" row="2">4</cell>
-            </row>
-            <row>
-                <cell col="1" row="3" role="sum">5</cell>
-                <cell col="2" row="3" role="sum">8</cell>
-            </row>
-        </table>
-      </x:context>
-      <x:expect label="will return relevant error messages">
-        <i:issue
-                 pos=""
-                 code="T2"
-                 category="Table"
-                 target="..."
-                 level="Warning"
-                 element="cell"
-                 page="">Verify value &ldquo;5&rdquo;: [sum] 5 not equal to 4 (difference: 1).</i:issue>
-        <i:issue
-                 pos=""
-                 code="T2"
-                 category="Table"
-                 target="..."
-                 level="Warning"
-                 element="cell"
-                 page="">Verify value &ldquo;8&rdquo;: [sum] 8 not equal to 6 (difference: 2).</i:issue>
-      </x:expect>
-   </x:scenario>
+    <x:scenario label="When verifying the sums in a table which is incorrect">
+        <x:context mode="checks">
+            <table id="table_two">
+                <row>
+                    <cell col="1" row="1">1</cell>
+                    <cell col="2" row="1">2</cell>
+                </row>
+                <row>
+                    <cell col="1" row="2">3</cell>
+                    <cell col="2" row="2">4</cell>
+                </row>
+                <row>
+                    <cell col="1" row="3" role="sum">5</cell>
+                    <cell col="2" row="3" role="sum">8</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return relevant error messages">
+            <i:issue
+                    pos=""
+                    code="T2"
+                    category="Table"
+                    target="..."
+                    level="Warning"
+                    element="cell"
+                    page="">Verify value &ldquo;5&rdquo;: [sum] 5 not equal to 4 (difference: 1).</i:issue>
+            <i:issue
+                    pos=""
+                    code="T2"
+                    category="Table"
+                    target="..."
+                    level="Warning"
+                    element="cell"
+                    page="">Verify value &ldquo;8&rdquo;: [sum] 8 not equal to 6 (difference: 2).</i:issue>
+        </x:expect>
+    </x:scenario>
 
     <x:scenario label="When verifying the sums in a table which is correct">
         <x:context mode="checks">
@@ -429,53 +542,53 @@
         <x:expect label="will return no error messages"/>
     </x:scenario>
 
-   <x:scenario label="When verifying the sums in a table with decimal columns which is correct">
-      <x:context mode="checks">
-        <table id="table_decimal_correct">
-            <row>
-                <cell col="1" row="1">1</cell>
-                <cell col="2" row="1">.9</cell>
-            </row>
-            <row>
-                <cell col="1" row="2">3</cell>
-                <cell col="2" row="2">.9</cell>
-            </row>
-            <row>
-                <cell col="1" row="3" role="sumDecimal">5</cell>
-                <cell col="2" row="3" role="sumFraction">.8</cell>
-            </row>
-        </table>
-      </x:context>
-       <x:expect label="will return no error messages"/>
-   </x:scenario>
+    <x:scenario label="When verifying the sums in a table with decimal columns which is correct">
+        <x:context mode="checks">
+            <table id="table_decimal_correct">
+                <row>
+                    <cell col="1" row="1">1</cell>
+                    <cell col="2" row="1">.9</cell>
+                </row>
+                <row>
+                    <cell col="1" row="2">3</cell>
+                    <cell col="2" row="2">.9</cell>
+                </row>
+                <row>
+                    <cell col="1" row="3" role="sumDecimal">5</cell>
+                    <cell col="2" row="3" role="sumFraction">.8</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return no error messages"/>
+    </x:scenario>
 
-   <x:scenario label="When verifying the sums in a table with decimal columns which is incorrect">
-      <x:context mode="checks">
-        <table id="table_decimal_incorrect">
-            <row>
-                <cell col="1" row="1">1</cell>
-                <cell col="2" row="1">.9</cell>
-            </row>
-            <row>
-                <cell col="1" row="2">3</cell>
-                <cell col="2" row="2">.9</cell>
-            </row>
-            <row>
-                <cell col="1" row="3" role="sumDecimal">4</cell>
-                <cell col="2" row="3" role="sumFraction">.8</cell>
-            </row>
-        </table>
-      </x:context>
-      <x:expect label="will return relevant error messages">
-        <i:issue
-                 pos=""
-                 code="T2"
-                 category="Table"
-                 target="..."
-                 level="Warning"
-                 element="cell"
-                 page="">Verify value “4”: [sumDecimal] 4.8 not equal to 5.8 (difference: -1).</i:issue>
-      </x:expect>
-   </x:scenario>
+    <x:scenario label="When verifying the sums in a table with decimal columns which is incorrect">
+        <x:context mode="checks">
+            <table id="table_decimal_incorrect">
+                <row>
+                    <cell col="1" row="1">1</cell>
+                    <cell col="2" row="1">.9</cell>
+                </row>
+                <row>
+                    <cell col="1" row="2">3</cell>
+                    <cell col="2" row="2">.9</cell>
+                </row>
+                <row>
+                    <cell col="1" row="3" role="sumDecimal">4</cell>
+                    <cell col="2" row="3" role="sumFraction">.8</cell>
+                </row>
+            </table>
+        </x:context>
+        <x:expect label="will return relevant error messages">
+            <i:issue
+                pos=""
+                code="T2"
+                category="Table"
+                target="..."
+                level="Warning"
+                element="cell"
+                page="">Verify value “4”: [sumDecimal] 4.8 not equal to 5.8 (difference: -1).</i:issue>
+        </x:expect>
+    </x:scenario>
 
 </x:description>
