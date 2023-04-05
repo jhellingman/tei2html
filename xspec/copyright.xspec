@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+        <!ENTITY ndash       "&#x2013;">
+
+        ]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../modules/copyright.xsl"
+               version="3.0">
+
+    <x:scenario label="When parsing a name with dates">
+        <x:call function="f:parse-name-with-dates">
+            <x:param select="'William Shakespeare (1564&ndash;1616)'"/>
+        </x:call>
+        <x:expect label="will return a record with the birth and death dates extracted">
+            <contributor>
+                <name>William Shakespeare</name>
+                <birth>1564</birth>
+                <death>1616</death>
+            </contributor>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When parsing a name with dates">
+        <x:call function="f:parse-name-with-dates">
+            <x:param select="'Samuel Falkland [Pseud. van Herman Heijermans (1864&ndash;1924)]'"/>
+        </x:call>
+        <x:expect label="will return a record with the birth and death dates extracted">
+            <contributor>
+                <name>Samuel Falkland [Pseud. van Herman Heijermans</name>
+                <birth>1864</birth>
+                <death>1924</death>
+            </contributor>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When parsing a name with only a death-date">
+        <x:call function="f:parse-name-with-dates">
+            <x:param select="'William Shakespeare (&ndash;1616)'"/>
+        </x:call>
+        <x:expect label="will return a record with the death date extracted">
+            <contributor>
+                <name>William Shakespeare</name>
+                <death>1616</death>
+            </contributor>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When parsing a name with only a birth-date">
+        <x:call function="f:parse-name-with-dates">
+            <x:param select="'William Shakespeare (1564&ndash;)'"/>
+        </x:call>
+        <x:expect label="will return a record with the birth date extracted">
+            <contributor>
+                <name>William Shakespeare</name>
+                <birth>1564</birth>
+            </contributor>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When finding the last relevant death-date">
+        <x:call function="f:last-contributor-death">
+            <x:param>
+                <titleStmt>
+                    <author>William Shakespeare (1564&ndash;1616)</author>
+                </titleStmt>
+            </x:param>
+        </x:call>
+        <x:expect label="will return the most resent death date extracted" select="1616"/>
+    </x:scenario>
+
+    <x:scenario label="When finding the last relevant death-date">
+        <x:call function="f:last-contributor-death">
+            <x:param>
+                <titleStmt>
+                    <author>William Shakespeare (1564&ndash;1616)</author>
+                    <respStmt><name>Samuel Falkland [Pseud. van Herman Heijermans (1864&ndash;1924)]</name></respStmt>
+                </titleStmt>
+            </x:param>
+        </x:call>
+        <x:expect label="will return the most resent death date extracted" select="1924"/>
+    </x:scenario>
+
+
+    <x:scenario label="When determining the copyright status">
+        <x:call function="f:in-copyright">
+            <x:param select="'NL'"/>
+            <x:param>
+                <teiHeader>
+                    <fileDesc>
+                        <titleStmt>
+                            <author>William Shakespeare (1564&ndash;1616)</author>
+                            <respStmt>
+                                <name>Samuel Falkland [Pseud. van Herman Heijermans (1864&ndash;1924)]</name>
+                            </respStmt>
+                        </titleStmt>
+                    </fileDesc>
+                </teiHeader>
+            </x:param>
+        </x:call>
+        <x:expect label="will return false" select="false()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining the copyright status">
+        <x:call function="f:in-copyright">
+            <x:param select="'NL'"/>
+            <x:param>
+                <teiHeader>
+                    <fileDesc>
+                        <titleStmt>
+                            <author>John Ronald Reuel Tolkien (1892&ndash;1973)</author>
+                        </titleStmt>
+                    </fileDesc>
+                </teiHeader>
+            </x:param>
+        </x:call>
+        <x:expect label="will return true" select="true()"/>
+    </x:scenario>
+
+    <x:scenario label="When determining the copyright status">
+        <x:call function="f:in-copyright">
+            <x:param select="'PH'"/>
+            <x:param>
+                <teiHeader>
+                    <fileDesc>
+                        <titleStmt>
+                            <author>Ezra Pound (1885&ndash;1972)</author>
+                        </titleStmt>
+                    </fileDesc>
+                </teiHeader>
+            </x:param>
+        </x:call>
+        <x:expect label="will return false" select="false()"/>
+    </x:scenario>
+
+</x:description>

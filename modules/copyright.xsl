@@ -17,7 +17,18 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Functions to determine copyright status</xd:short>
-        <xd:detail>This stylesheet contains several functions to determine copyright status of a TEI file, based on data in the header.</xd:detail>
+        <xd:detail>This stylesheet contains several functions to
+            determine copyright status of a TEI file, based on data in
+            the header. This is a rough approximation, intended to
+            quickly filter out works that are potentially under
+            copyright in a certain jurisdiction, and should not be
+            relied on to establish public-domain status without further
+            research. This only takes into account the publication date
+            (TODO) and the known death-dates of contributors. In
+            practice, also the nationality of the author, the first
+            publication place, and numerous other details can be
+            relevant for the copyright status of a work.
+        </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2018, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -27,52 +38,44 @@
         <xsl:param name="jurisdiction" as="xs:string"/>
         <xsl:param name="teiHeader" as="element(teiHeader)"/>
 
+        <!-- TODO: implement: 1. terms based on publication date; 2. different terms, based on death date or publication date -->
         <xsl:variable name="termInYears" select="f:copyright-term-in-years($jurisdiction)"/>
 
-        <xsl:value-of select="f:last-contributor-death($teiHeader) > year-from-date(current-date()) - ($termInYears + 1)"/>
+        <xsl:value-of select="f:last-contributor-death($teiHeader/fileDesc/titleStmt) > year-from-date(current-date()) - ($termInYears + 1)"/>
     </xsl:function>
 
 
     <xsl:function name="f:copyright-term-in-years" as="xs:integer">
         <xsl:param name="code" as="xs:string"/>
 
-        <!--
-        <xsl:message>JURISDICTION: <xsl:value-of select="$code"/></xsl:message>
-        <xsl:message>NAME: <xsl:value-of select="$jurisdictions//jurisdiction[@code = $code]/@name"/></xsl:message>
-        -->
-
         <xsl:variable name="rules"
             select="if ($jurisdictions//jurisdiction[@code = $code and @see])
                     then $jurisdictions//jurisdiction[@code = $jurisdictions//jurisdiction[@code = $code]/@see]
                     else $jurisdictions//jurisdiction[@code = $code]"/>
 
-        <!--
-        <xsl:message>RULE: <xsl:value-of select="$rules/rule[1]/@lifePlusYears"/></xsl:message>
-        -->
+        <!-- TODO: filter rules based on conditions, then select most restrictive one that remains -->
 
         <xsl:variable name="lifePlusYears" select="$rules/rule[1]/@lifePlusYears"/>
         <xsl:value-of select="if ($lifePlusYears = 'XXX') then 100 else $lifePlusYears"/>
     </xsl:function>
 
 
-    <xsl:function name="f:last-contributor-death">
-        <xsl:param name="teiHeader" as="element(teiHeader)"/>
+    <xsl:function name="f:last-contributor-death" as="xs:integer">
+        <xsl:param name="titleStmt" as="element(titleStmt)"/>
 
         <xsl:variable name="contributors">
             <contributors>
-                <xsl:for-each select="$teiHeader/fileDesc/titleStmt/author">
+                <xsl:for-each select="$titleStmt/author">
                     <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
-                <xsl:for-each select="$teiHeader/fileDesc/titleStmt/editor">
+                <xsl:for-each select="$titleStmt/editor">
                     <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
-                <xsl:for-each select="$teiHeader/fileDesc/titleStmt/respStmt/name">
+                <xsl:for-each select="$titleStmt/respStmt/name">
                     <xsl:copy-of select="f:parse-name-with-dates(.)"/>
                 </xsl:for-each>
             </contributors>
         </xsl:variable>
-
-        <!-- <xsl:message>LAST DEATH <xsl:value-of select="if ($contributors//death[matches(., '[0-9]+')]) then max($contributors//death[matches(., '[0-9]+')]) else 0"/></xsl:message> -->
 
         <xsl:value-of select="if ($contributors//death[matches(., '[0-9]+')]) then max($contributors//death[matches(., '[0-9]+')]) else 0"/>
     </xsl:function>
@@ -81,17 +84,11 @@
     <xsl:function name="f:parse-name-with-dates">
         <xsl:param name="name" as="xs:string"/>
 
-        <!-- <xsl:message>ANALYZING: <xsl:value-of select="$name"/></xsl:message> -->
         <xsl:choose>
             <xsl:when test="matches($name, '^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?\]?$')">
                 <xsl:analyze-string select="$name" regex="^(.+)[,]? [(]?([0-9]+)[&ndash;-]([0-9]+)[)]?\]?$">
                     <xsl:matching-substring>
                         <contributor>
-                            <!--
-                            <xsl:message>FOUND NAME: <xsl:value-of select="regex-group(1)"/></xsl:message>
-                            <xsl:message>FOUND BIRTH: <xsl:value-of select="regex-group(2)"/></xsl:message>
-                            <xsl:message>FOUND DEATH: <xsl:value-of select="regex-group(3)"/></xsl:message>
-                            -->
                             <name><xsl:value-of select="regex-group(1)"/></name>
                             <birth><xsl:value-of select="regex-group(2)"/></birth>
                             <death><xsl:value-of select="regex-group(3)"/></death>
