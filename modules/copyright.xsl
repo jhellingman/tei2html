@@ -41,7 +41,7 @@
         <!-- TODO: implement: 1. terms based on publication date; 2. different terms, based on death date or publication date -->
         <xsl:variable name="termInYears" select="f:copyright-term-in-years($jurisdiction)"/>
 
-        <xsl:value-of select="f:last-contributor-death($teiHeader/fileDesc/titleStmt) > year-from-date(current-date()) - ($termInYears + 1)"/>
+        <xsl:value-of select="f:last-contributor-death-year($teiHeader/fileDesc/titleStmt) > year-from-date(current-date()) - ($termInYears + 1)"/>
     </xsl:function>
 
 
@@ -61,6 +61,12 @@
 
 
     <xsl:function name="f:last-contributor-death" as="xs:integer">
+        <xsl:param name="teiHeader" as="element(teiHeader)"/>
+        <xsl:sequence select="f:last-contributor-death-year($teiHeader/fileDesc/titleStmt)"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:last-contributor-death-year" as="xs:integer">
         <xsl:param name="titleStmt" as="element(titleStmt)"/>
 
         <xsl:variable name="contributors">
@@ -77,7 +83,9 @@
             </contributors>
         </xsl:variable>
 
-        <xsl:value-of select="if ($contributors//death[matches(., '[0-9]+')]) then max($contributors//death[matches(., '[0-9]+')]) else 0"/>
+        <xsl:sequence select="if ($contributors//death[matches(., '[0-9]+')]) 
+            then xs:integer(max($contributors//death[matches(., '[0-9]+')])) 
+            else 0"/>
     </xsl:function>
 
 

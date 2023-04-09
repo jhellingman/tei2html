@@ -60,7 +60,7 @@
     </x:scenario>
 
     <x:scenario label="When finding the last relevant death-date">
-        <x:call function="f:last-contributor-death">
+        <x:call function="f:last-contributor-death-year">
             <x:param>
                 <titleStmt>
                     <author>William Shakespeare (1564&ndash;1616)</author>
@@ -71,7 +71,7 @@
     </x:scenario>
 
     <x:scenario label="When finding the last relevant death-date">
-        <x:call function="f:last-contributor-death">
+        <x:call function="f:last-contributor-death-year">
             <x:param>
                 <titleStmt>
                     <author>William Shakespeare (1564&ndash;1616)</author>
