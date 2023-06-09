@@ -532,10 +532,10 @@
                         <td class="width20">
                             <xsl:call-template name="correctionTablePageReferences"/>
                         </td>
-                        <td class="width40 bottom" lang="{@lang}">
+                        <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
                             <xsl:call-template name="correctionTableSourceText"/>
                         </td>
-                        <td class="width40 bottom" lang="{@lang}">
+                        <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
                             <xsl:call-template name="correctionTableCorrectedText"/>
                         </td>
                         <xsl:if test="f:is-set('colophon.showEditDistance')">
