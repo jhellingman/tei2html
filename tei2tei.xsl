@@ -1218,12 +1218,13 @@ in all copies or substantial portions of the Software.
 
 <xsl:template match="row/@role[. = 'data']"/>
 <xsl:template match="cell/@role[. = 'data']"/>
-<!-- <xsl:template match="cell/@rows[. = '1']"/> -->
-<!-- <xsl:template match="cell/@cols[. = '1']"/> -->
+<xsl:template match="cell/@rows[. = '1']"/>
+<xsl:template match="cell/@cols[. = '1']"/>
 <xsl:template match="note/@anchored[. = 'yes']"/>
 <xsl:template match="editor/@role[. = 'editor']"/>
 <xsl:template match="list/@type[. = 'simple']"/>
-
+<xsl:template match="teiheader/@status[. = 'new']"/>
+<xsl:template match="teiheader/@type[. = 'text']"/>
 
 <!-- Additional elements -->
 

@@ -251,8 +251,8 @@
             <xsl:attribute name="cols" select="count(row[1]/cell)"/>
             <xsl:attribute name="rows" select="count(row) + $additionalRows"/>
 
-            <!-- TODO: Count heading rows only at top -->
-            <xsl:attribute name="headrows" select="count(row[@role = 'label' or @role = 'unit'])"/>
+            <!-- Count heading rows only at top -->
+            <xsl:attribute name="headrows" select="count(f:get-top-header-rows(.))"/>
 
             <xsl:apply-templates mode="normalize-table-final"/>
 
@@ -261,6 +261,18 @@
             </xsl:if>
         </xsl:copy>
     </xsl:template>
+
+
+    <xsl:function name="f:get-top-header-rows" as="element(row)*">
+        <xsl:param name="table" as="element(table)"/>
+        <xsl:sequence select="$table/row[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-header-row" as="xs:boolean">
+        <xsl:param name="row" as="element(row)"/>
+        <xsl:sequence select="$row/@role = ('label', 'unit')"/>
+    </xsl:function>
 
 
     <xd:doc>

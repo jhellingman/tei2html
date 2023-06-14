@@ -288,6 +288,7 @@
                 <li>one based on the column-level <code>@rend</code> attribute,</li>
                 <li>one based on the row-level <code>@rend</code> attribute, and</li>
                 <li>one based on the cell-level <code>@rend</code> attribute.</li>
+                <li>one based on whether the cell content looks numeric.</li>
                 <li>one based on the presence of a left or right brace as the content of a multi-row cell.</li>
                 <li>one to four, based on the position of the cell in the table; the following classes can appear:
                         for data-cells: <code>cellTop cellRight cellBottom cellLeft</code>;
@@ -305,6 +306,7 @@
             <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '{'">leftbrace </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '}'">rightbrace </xsl:if>
+            <xsl:if test="f:is-unicode-number(normalize-space(text()[normalize-space(.) != ''][1]))">numCell </xsl:if>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>

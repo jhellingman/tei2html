@@ -21,6 +21,15 @@
     </xsl:function>
 
 
+    <xsl:variable name="unicode-number-pattern" select="'^\s?(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s?$'"/>
+
+    <xsl:function name="f:is-unicode-number" as="xs:boolean">
+        <xsl:param name="string"/>
+
+        <xsl:sequence select="matches(string($string), $unicode-number-pattern, 'i')"/>
+    </xsl:function>
+
+
     <xsl:function name="f:is-roman" as="xs:boolean" visibility="public">
         <xsl:param name="string"/>
 
