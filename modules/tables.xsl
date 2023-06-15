@@ -281,16 +281,17 @@
     <xd:doc>
         <xd:short>Determine cell rendering.</xd:short>
         <xd:detail>
-            <p>Determine how to render a cell, using a class attribute with multiple values; we may need to supply multiple class names for rendering:</p>
+            <p>Determine how to render a cell, using a class attribute with multiple values; we may need to supply multiple class names for rendering, based on</p>
 
             <ol>
-                <li>one based on the <code>@role</code> attribute,</li>
-                <li>one based on the column-level <code>@rend</code> attribute,</li>
-                <li>one based on the row-level <code>@rend</code> attribute, and</li>
-                <li>one based on the cell-level <code>@rend</code> attribute.</li>
-                <li>one based on whether the cell content looks numeric.</li>
-                <li>one based on the presence of a left or right brace as the content of a multi-row cell.</li>
-                <li>one to four, based on the position of the cell in the table; the following classes can appear:
+                <li>the <code>@role</code> attribute,</li>
+                <li>the column-level <code>@rend</code> attribute,</li>
+                <li>the row-level <code>@rend</code> attribute,</li>
+                <li>the cell-level <code>@rend</code> attribute,</li>
+                <li>whether the cell content looks numeric,</li>
+                <li>whether the cell contains a dash, ellipsis, or similar character,</li>
+                <li>the presence of a left or right brace as the content of a multi-row cell.</li>
+                <li>the position of the cell in the table; the following classes can appear:
                         for data-cells: <code>cellTop cellRight cellBottom cellLeft</code>;
                         for header-cells: <code>cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft</code>.</li>
             </ol>
@@ -306,7 +307,8 @@
             <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '{'">leftbrace </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '}'">rightbrace </xsl:if>
-            <xsl:if test="f:is-unicode-number(normalize-space(text()[normalize-space(.) != ''][1]))">numCell </xsl:if>
+            <xsl:if test="not(f:is-fraction-part(.)) and f:is-unicode-number(normalize-space(text()[normalize-space(.) != ''][1]))">num </xsl:if>
+            <xsl:if test="f:is-dash-like(normalize-space(text()[normalize-space(.) != ''][1]))">dash </xsl:if>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>
@@ -317,6 +319,15 @@
             <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'image'), '')"/>
         </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:is-fraction-part" as="xs:boolean">
+        <xsl:param name="cell" as="element(cell)"/>
+
+        <xsl:sequence select="f:has-class($cell/@rend, 'alignDecimalIntegerPart', 'cell') 
+            or f:has-class($cell/@rend, 'alignDecimalFractionPart', 'cell')
+            or f:has-class($cell/@rend, 'num', 'cell')"/>
+    </xsl:function>
 
 
     <!-- Find rendering information for the current row (our parent) -->

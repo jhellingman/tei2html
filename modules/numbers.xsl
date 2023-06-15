@@ -1,4 +1,10 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY mdash       "&#x2014;">
+    <!ENTITY ndash       "&#x2013;">
+    <!ENTITY hellip      "&#x2026;">
+
+]>
 <xsl:stylesheet version="3.0"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="urn:stylesheet-functions"
@@ -27,6 +33,13 @@
         <xsl:param name="string"/>
 
         <xsl:sequence select="matches(string($string), $unicode-number-pattern, 'i')"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-dash-like" as="xs:boolean">
+        <xsl:param name="string"/>
+
+        <xsl:sequence select="matches(string($string), '^([&mdash;&ndash;&hellip;-]|(\.\.\.+))$', 'i')"/>
     </xsl:function>
 
 
